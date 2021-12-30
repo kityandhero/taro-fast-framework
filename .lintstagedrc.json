@@ -1,0 +1,5 @@
+{
+  "**/*.less": "stylelint",
+  "**/*.{js,jsx,ts,tsx}": "eslint --ext .js,.jsx,.ts,.tsx",
+  "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+}

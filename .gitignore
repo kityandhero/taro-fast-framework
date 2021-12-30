@@ -1,0 +1,56 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+**/node_modules
+
+# history
+**/.history
+
+# production
+**/dist
+
+# idea
+**/.idea
+
+# temp
+**/.temp
+
+# mock
+functions/mock
+
+# cache
+.cache/
+
+# docz
+.docz/
+
+# gitmodules
+.gitmodules
+
+# coverage
+**/coverage
+
+# lock
+/yarn.lock
+/package-lock.json
+
+# log
+*.log
+
+# umi
+.umi
+.umi-production 
+
+# screenshot
+screenshot
+
+# firebase
+.firebase
+
+# eslintcache
+.eslintcache
+
+# build
+**/build
+/yarn.lock
+/package-lock.json
