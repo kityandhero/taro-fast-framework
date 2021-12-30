@@ -6,6 +6,7 @@ import filterLodash from "lodash/filter";
 import sortByLodash from "lodash/sortBy";
 import findIndexLodash from "lodash/findIndex";
 import findLodash from "lodash/find";
+import trimLodash from "lodash/trim";
 import reverseLodash from "lodash/reverse";
 import replaceLodash from "lodash/replace";
 import isBooleanLodash from "lodash/isBoolean";
@@ -14,10 +15,10 @@ import isNullLodash from "lodash/isNull";
 import isDateLodash from "lodash/isDate";
 import isArrayLodash from "lodash/isArray";
 import isStringLodash from "lodash/isString";
-import removeLodash from "lodash/remove";
 import isObjectLodash from "lodash/isObject";
+import toStringLodash from "lodash/toString";
+import removeLodash from "lodash/remove";
 import differenceLodash from "lodash/difference";
-import splitLodash from "lodash/split";
 import getLodash from "lodash/get";
 import sortedUniqLodash from "lodash/sortedUniq";
 import toLower from "lodash/toLower";
@@ -758,28 +759,6 @@ export function toNumber(v) {
 }
 
 /**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function split(source, separator, limit = 1000) {
-  return splitLodash(source, separator, limit);
-}
-
-/**
- * 转换为文本
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function toString(value) {
-  return String(value);
-}
-
-/**
  * 去除重复数据并排序（升序）
  */
 export function sortedUnique(array) {
@@ -919,6 +898,38 @@ export function convertTarget({ target, convert }) {
   }
 
   return target;
+}
+
+export function formatDatetime({ data: date, fmt }) {
+  if ((date || null) == null) {
+    return "";
+  }
+
+  let o = {
+    "M+": date.getMonth() + 1, //月份
+    "d+": date.getDate(), //日
+    "h+": date.getHours(), //小时
+    "m+": date.getMinutes(), //分
+    "s+": date.getSeconds(), //秒
+    "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+    S: date.getMilliseconds(), //毫秒
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(
+      RegExp.$1,
+      (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+    );
+  }
+
+  for (let k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+      );
+    }
+  }
+  return fmt;
 }
 
 export function formatTarget({ target, format, option = {} }) {
@@ -1710,11 +1721,15 @@ export function reverse(array) {
 }
 
 export function trim(source) {
-  return toString(source).trim();
+  return trimLodash(source);
 }
 
 export function replace(source, pattern, replacement) {
   return replaceLodash(source, pattern, replacement);
+}
+
+export function toString(value) {
+  return toStringLodash(value);
 }
 
 export function isBoolean(value) {

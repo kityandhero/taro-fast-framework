@@ -20,23 +20,22 @@ export default {
     "utils/tools": "src/utils/tools.js",
   },
   plugins: [
-    typescript({
-      tsconfig: "tsconfig.json",
-    }),
     resolve({
       preferBuiltins: false,
     }),
+    commonjs({}),
+    typescript({
+      tsconfig: "tsconfig.json",
+    }),
     postcss({
       inject: { insertAt: "top" },
-    }),
-    commonjs({
-      include: "node_modules/**",
     }),
     babelPlugin({
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", "ts", "tsx"],
       babelHelpers: "runtime",
     }),
   ],
+  external: ["lodash/endsWith"],
   output: {
     entryFileNames: "[name].js",
     dir: "es",
