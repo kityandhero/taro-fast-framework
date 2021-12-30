@@ -1,5 +1,5 @@
 {
-  "name": "taro-fast-framework",
+  "name": "simple-taro-fast-framework",
   "version": "1.0.0",
   "private": true,
   "description": "基于Taro的快速开发框架基于Taro的快速开发框架",
@@ -9,9 +9,7 @@
     "css": "less"
   },
   "scripts": {
-    "build:rollup": "rimraf ./es && rollup -c",
-    "dev:rollup": "rollup -c -w",
-    "build:weapp": "set NODE_ENV=production && taro build --type weapp",
+    "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
     "build:tt": "taro build --type tt",
@@ -41,9 +39,6 @@
     "@tarojs/react": "3.3.19",
     "@tarojs/runtime": "3.3.19",
     "@tarojs/taro": "3.3.19",
-    "lodash": "^4.17.21",
-    "node-cache": "^5.1.2",
-    "qs": "^6.10.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
