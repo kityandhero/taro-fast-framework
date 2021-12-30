@@ -35,7 +35,7 @@ export default {
       babelHelpers: "runtime",
     }),
   ],
-  external: ["lodash/endsWith"],
+  external: ["@tarojs/taro", "lodash", "qs"],
   output: {
     entryFileNames: "[name].js",
     dir: "es",

@@ -306,6 +306,7 @@ export function isNumber(v: any): boolean;
  * @returns
  */
 export function toNumber(v: any): number;
+export function split(source: any, separator: any, limit?: number): string[];
 /**
  * 去除重复数据并排序（升序）
  */
@@ -350,10 +351,10 @@ export function getValueByKey({ data, key, defaultValue, convert, convertBuilder
  * @returns
  */
 export function convertTarget({ target, convert }: any): any;
-export function formatDatetime({ data: date, fmt }: {
+export function formatDatetime({ data: date, fmt, }: {
     data: any;
-    fmt: any;
-}): any;
+    fmt?: string | undefined;
+}): string;
 export function formatTarget({ target, format, option }: {
     target: any;
     format: any;
@@ -412,7 +413,7 @@ export function seededRandom({ seed, min, max }: {
  * @param {*} seed
  * @returns
  */
-export function getRandomColor({ seed, hue, luminosity, count, format, alpha, }: any): string;
+export function getRandomColor({ seed }: any): string;
 /**
  * 获取浏览器信息
  *

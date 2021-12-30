@@ -1,31 +1,34 @@
 import Taro from "@tarojs/taro";
 import { stringify, parse } from "qs";
-import isEqualLodash from "lodash/isEqual";
-import isFunctionLodash from "lodash/isFunction";
-import filterLodash from "lodash/filter";
-import sortByLodash from "lodash/sortBy";
-import findIndexLodash from "lodash/findIndex";
-import findLodash from "lodash/find";
-import trimLodash from "lodash/trim";
-import reverseLodash from "lodash/reverse";
-import replaceLodash from "lodash/replace";
-import isBooleanLodash from "lodash/isBoolean";
-import isUndefinedLodash from "lodash/isUndefined";
-import isNullLodash from "lodash/isNull";
-import isDateLodash from "lodash/isDate";
-import isArrayLodash from "lodash/isArray";
-import isStringLodash from "lodash/isString";
-import isObjectLodash from "lodash/isObject";
-import toStringLodash from "lodash/toString";
-import removeLodash from "lodash/remove";
-import differenceLodash from "lodash/difference";
-import getLodash from "lodash/get";
-import sortedUniqLodash from "lodash/sortedUniq";
-import toLower from "lodash/toLower";
-import endsWithLodash from "lodash/endsWith";
+import {
+  isEqual as isEqualLodash,
+  isFunction as isFunctionLodash,
+  filter as filterLodash,
+  sortBy as sortByLodash,
+  findIndex as findIndexLodash,
+  find as findLodash,
+  reverse as reverseLodash,
+  replace as replaceLodash,
+  trim as trimLodash,
+  isBoolean as isBooleanLodash,
+  isUndefined as isUndefinedLodash,
+  isNull as isNullLodash,
+  isDate as isDateLodash,
+  isArray as isArrayLodash,
+  isString as isStringLodash,
+  remove as removeLodash,
+  isObject as isObjectLodash,
+  difference as differenceLodash,
+  toNumber as toNumberLodash,
+  split as splitLodash,
+  toString as toStringLodash,
+  get as getLodash,
+  sortedUniq as sortedUniqLodash,
+  toLower,
+  endsWith as endsWithLodash,
+} from "lodash";
 
 import {
-  emptyDatetime,
   notificationTypeCollection,
   messageTypeCollection,
   logLevel,
@@ -755,7 +758,13 @@ export function isNumber(v) {
  * @returns
  */
 export function toNumber(v) {
-  return Number.isNaN(v) ? 0 : Number.parseInt(v);
+  const value = toNumberLodash(v);
+
+  return Number.isNaN(value) ? 0 : value;
+}
+
+export function split(source, separator, limit = 1000) {
+  return splitLodash(source, separator, limit);
 }
 
 /**
@@ -900,7 +909,10 @@ export function convertTarget({ target, convert }) {
   return target;
 }
 
-export function formatDatetime({ data: date, fmt }) {
+export function formatDatetime({
+  data: date,
+  fmt = datetimeFormat.yearMonthDayHourMinuteSecond,
+}) {
   if ((date || null) == null) {
     return "";
   }
@@ -929,6 +941,7 @@ export function formatDatetime({ data: date, fmt }) {
       );
     }
   }
+
   return fmt;
 }
 
@@ -1238,14 +1251,7 @@ export function seededRandom({ seed, min, max }) {
  * @param {*} seed
  * @returns
  */
-export function getRandomColor({
-  seed,
-  hue = null,
-  luminosity = null,
-  count = null,
-  format = null,
-  alpha = null,
-}) {
+export function getRandomColor({ seed }) {
   return `#${`00000${((seededRandom(seed) * 0x1000000) << 0).toString(
     16
   )}`.substr(-6)}`;
@@ -1895,11 +1901,9 @@ export function ellipsis(value, length) {
 }
 
 export function notifySuccess(text) {
-  const description = text || "数据已经操作成功，请进行后续操作。";
-
   notify({
     type: notificationTypeCollection.success,
-    message: "操作结果",
+    message: text,
   });
 }
 
@@ -1925,7 +1929,7 @@ export function notify({
       case notificationTypeCollection.success:
         setTimeout(() => {
           Taro.showToast({
-            title: messageValue || "",
+            title: messageText || "",
             icon: "none",
             mask: true,
             duration: 1500,
@@ -1943,7 +1947,7 @@ export function notify({
       case notificationTypeCollection.warning:
         setTimeout(() => {
           Taro.showToast({
-            title: messageValue || "",
+            title: messageText || "",
             icon: "none",
             mask: true,
             duration: 1500,
@@ -1961,7 +1965,7 @@ export function notify({
       case notificationTypeCollection.error:
         setTimeout(() => {
           Taro.showToast({
-            title: messageValue || "",
+            title: messageText || "",
             icon: "none",
             mask: true,
             duration: 1500,
@@ -1979,7 +1983,7 @@ export function notify({
       case notificationTypeCollection.info:
         setTimeout(() => {
           Taro.showToast({
-            title: messageValue || "",
+            title: messageText || "",
             icon: "none",
             mask: true,
             duration: 1500,
@@ -1997,7 +2001,7 @@ export function notify({
       case notificationTypeCollection.warn:
         setTimeout(() => {
           Taro.showToast({
-            title: messageValue || "",
+            title: messageText || "",
             icon: "none",
             mask: true,
             duration: 1500,
@@ -2015,7 +2019,7 @@ export function notify({
       default:
         setTimeout(() => {
           Taro.showToast({
-            title: messageValue || "",
+            title: messageText || "",
             icon: "none",
             mask: true,
             duration: 1500,
