@@ -1,3 +1,6 @@
+export function getTaroGlobalData(): any;
+export function redirectTo(url: any): void;
+export function navigateTo(url: any): void;
 export function getAppInitConfigData(): {
     platformName: string;
     appName: string;
@@ -273,39 +276,6 @@ export function getGuid(): string;
  * 检测目标是否在数组址之中
  */
 export function inCollection(collection: any, value: any): boolean;
-/**
- * 格式化时间
- *
- * @export
- * @param {*} v
- * @returns
- */
-export function isInvalid(v: any): boolean;
-export function toDatetime(v: any): any;
-/**
- * 判断是否是时间字符串
- *
- * @export
- * @param {*} v
- * @returns
- */
-export function isDatetime(v: any): boolean;
-/**
- * 判断是否是数字字符串
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function isNumber(v: any): boolean;
-/**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function toNumber(v: any): number;
 export function split(source: any, separator: any, limit?: number): string[];
 /**
  * 去除重复数据并排序（升序）
@@ -317,22 +287,6 @@ export function sortedUnique(array: any): any[];
  *
  */
 export function roundToTarget(v: any, len: any): number;
-/**
- * 判断是否是数字字符串
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function isMoney(v: any): boolean;
-/**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function toMoney(v: any): number;
 /**
  * 通过 key 获取对应得值
  */
@@ -361,6 +315,17 @@ export function formatTarget({ target, format, option }: {
     option?: {} | undefined;
 }): any;
 /**
+ *计算时间间隔
+ * @param {startTime} 起始时间
+ * @param {endTime} 结束时间
+ */
+export function calculateTimeInterval(startTime: any, endTime: any): {
+    day: number;
+    hour: number;
+    minute: number;
+    second: number;
+};
+/**
  * 通过 path 获取对应得值
  */
 export function getPathValue(o: any, path: any, defaultValue?: null): any;
@@ -380,7 +345,6 @@ export function formatDecimal(numberSource: any, placesSource?: number, thousand
  * @returns
  */
 export function formatMoney({ number: numberSource, places: placesSource, symbol: symbolSource, thousand: thousandSource, decimal: decimalSource, }: any): string;
-export function toPercentage(val: any): string;
 /**
  * 检查字符串string是否以给定的target字符串结尾
  */
@@ -482,26 +446,12 @@ export function searchFromList(itemKey: any, itemValue: any, sourceData: any): n
  */
 export function buildFieldDescription(v: any, op: any, other: any): string;
 /**
- * 获取SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function getStringFromSessionStorage(key: any): any;
-/**
  * 获取LocalStorage数据
  * @export
  * @param {*} key
  * @param {*} value
  */
 export function getStringFromLocalStorage(key: any): any;
-/**
- * 获取SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function getJsonFromSessionStorage(key: any): any;
 /**
  * 获取LocalStorage数据
  * @export
@@ -510,26 +460,12 @@ export function getJsonFromSessionStorage(key: any): any;
  */
 export function getJsonFromLocalStorage(key: any): any;
 /**
- * 存储SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function saveStringToSessionStorage(key: any, value: any): void;
-/**
  * 存储本地数据
  * @export
  * @param {*} key
  * @param {*} value
  */
 export function saveStringToLocalStorage(key: any, value: any): void;
-/**
- * 存储SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function saveJsonToSessionStorage(key: any, json: any): void;
 /**
  * 存储本地数据
  * @export
@@ -538,23 +474,11 @@ export function saveJsonToSessionStorage(key: any, json: any): void;
  */
 export function saveJsonToLocalStorage(key: any, json: any): void;
 /**
- * 移除SessionStorage数据
- * @export
- * @param {*} key
- */
-export function removeSessionStorage(key: any): void;
-/**
  * 移除LocalStorage数据
  * @export
  * @param {*} key
  */
 export function removeLocalStorage(key: any): void;
-/**
- * 清空SessionStorage数据
- * @export
- * @param {*} key
- */
-export function clearSessionStorage(): void;
 /**
  * 清空LocalStorage数据
  * @export
@@ -575,20 +499,7 @@ export function getDerivedStateFromPropsForUrlParamsCore(nextProps: any): {
 export function getDerivedStateFromPropsForUrlParams(nextProps: any, prevState: any, defaultUrlParams?: {
     id: string;
 }, parseUrlParamsForSetState?: null): any;
-/**
- * 获取本地数据
- * @export
- * @param {value} 对比源
- * @param {other} 对比对象
- * 执行深比较来确定两者的值是否相等。
- * 这个方法支持比较 arrays, array buffers, booleans, date objects, error objects, maps, numbers, Object objects, regexes, sets, strings, symbols, 以及 typed arrays. Object 对象值比较自身的属性，不包括继承的和可枚举的属性。 不支持函数和DOM节点比较。
- */
-export function isEqual(value: any, other: any): boolean;
-export function isEqualBySerialize(value: any, other: any): boolean;
 export function cloneWithoutMethod(value: any): any;
-export function isFunction(value: any): boolean;
-export function isArray(value: any): boolean;
-export function isObject(o: any): boolean;
 export function difference(array: any, values: any): any[];
 /**
  * 筛选需要的集合
@@ -597,7 +508,7 @@ export function difference(array: any, values: any): any[];
  */
 export function filter(collection: any, predicateFunction: any): string[];
 /**
- * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数： (value)。
+ * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数:  (value)。
  * @param {collection}  (Array|Object), 用来迭代的集合。
  * @param {predicateFunction} 这个函数决定排序
  */
@@ -620,26 +531,8 @@ export function checkExist(array: any, predicateFunction: any, fromIndex?: numbe
 export function reverse(array: any): any;
 export function trim(source: any): string;
 export function replace(source: any, pattern: any, replacement: any): string;
-export function toString(value: any): string;
-export function isBoolean(value: any): boolean;
 /**
- * check value is undefined
- */
-export function isUndefined(value: any): boolean;
-/**
- * check value is null
- */
-export function isNull(value: any): boolean;
-/**
- * check value is date
- */
-export function isDate(value: any): boolean;
-/**
- * check value is string
- */
-export function isString(value: any): boolean;
-/**
- * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数： (value, index, array)。
+ * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数:  (value, index, array)。
  * @param {*} array
  * @param {*} predicate (Array|Function|Object|string): 每次迭代调用的函数
  */
@@ -674,7 +567,7 @@ export function trySendNearestLocalhostNotify({ text }: {
 /**
  * 文本缩略
  */
-export function ellipsis(value: any, length: any): string;
+export function ellipsis(value: any, length: any, symbol?: string): string;
 export function notifySuccess(text: any): void;
 /**
  * 发送页面通知
@@ -706,10 +599,15 @@ export function sortCollectionByKey({ operate, item, list, sortKey, sortMin, }: 
 export function queryStringify(data: any): any;
 export function queryStringParse(data: any): any;
 /**
+ * 同步线程挂起若干时间(毫秒)
+ * @param  n
+ */
+export function sleep(n: any, callback: any): void;
+export function getSystemInfo(): any;
+/**
  * 占位函数
  *
  * @export
  * @returns
  */
 export function emptyExport(): {};
-export const requestAnimFrame: (((callback: FrameRequestCallback) => number) & typeof requestAnimationFrame) | (() => void);

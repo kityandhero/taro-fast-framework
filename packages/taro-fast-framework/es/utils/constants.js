@@ -1,58 +1,54 @@
-import { emptyLogo as emptyLogoSource } from "./mediaDefault";
+import '../defineProperty.js';
+import { _ as _objectSpread2 } from '../objectSpread2.js';
+import { emptyLogo as emptyLogo$1 } from './mediaDefault.js';
 
-export const locationModeCollection = {
+var locationModeCollection = {
   unknown: 0,
   auto: 1,
-  custom: 2,
+  custom: 2
 };
-
-export const requestMethod = {
+var requestMethod = {
   get: "GET",
   post: "POST",
   put: "PUT",
   delete: "DELETE",
   trace: "TRACE",
-  connect: "CONNECT",
+  connect: "CONNECT"
 };
-
 /**
  * 动画类型
  */
-export const animalType = {
+
+var animalType = {
   none: "none",
   fade: "fade",
-  queue: "queue",
+  queue: "queue"
 };
-
-export const zeroString = "0";
-
-export const zeroInt = 0;
-
+var zeroString = "0";
+var zeroInt = 0;
 /**
  * 鉴权失败码
  */
-export const authenticationFailCode = 2001;
 
+var authenticationFailCode = 2001;
 /**
  * Api请求成功码
  */
-export const apiSuccessCode = 200;
 
+var apiSuccessCode = 200;
 /**
  * 1970-01-01 00:00
  */
-export const emptyDatetime = "1970-01-01 00:00";
 
+var emptyDatetime = "1970-01-01 00:00";
 /**
  * 用户默认图
  */
-export const defaultUserAvatar = "/user.png";
 
-export const defaultEmptyImage = "/noImageSmall.png";
-
-export const emptyLogo = emptyLogoSource;
-
-export const appInitDefault = {
+var defaultUserAvatar = "/user.png";
+var defaultEmptyImage = "/noImageSmall.png";
+var emptyLogo = emptyLogo$1;
+var appInitDefault = {
   platformName: "平台名称",
   appName: "应用名称",
   appDescription: "应用描述",
@@ -63,14 +59,14 @@ export const appInitDefault = {
   companyName: "公司名称",
   copyright: "版权描述",
   apiPrefix: {
-    corsTargetProduction: "",
+    corsTargetProduction: ""
   },
   showSelectLanguage: false,
   showLogoInLoginView: true,
-  emptyLogo,
+  emptyLogo: emptyLogo,
   leftBarLogo: emptyLogo,
-  apiSuccessCode,
-  authenticationFailCode,
+  apiSuccessCode: apiSuccessCode,
+  authenticationFailCode: authenticationFailCode,
   loginPath: "/user/login",
   showLogInConsole: false,
   showRequestInfo: false,
@@ -83,35 +79,34 @@ export const appInitDefault = {
   fileUploadMaxSize: 2,
   useNprogress: true,
   tinymceApiKey: "",
-  tinymceImagesUploadUrl: "",
+  tinymceImagesUploadUrl: ""
 };
-
 /**
  * accessWaySpecialCollection
  */
-export const accessWaySpecialCollection = {
-  super: {
-    permission: "super",
-  },
-};
 
-export const formNameCollection = {
+var accessWaySpecialCollection = {
+  super: {
+    permission: "super"
+  }
+};
+var formNameCollection = {
   createTime: {
     label: "创建时间",
     name: "createTime",
-    helper: "数据的创建时间",
+    helper: "数据的创建时间"
   },
   customOperate: {
     label: "操作",
     name: "operateName",
-    helper: "",
-  },
+    helper: ""
+  }
 };
-
 /**
  * 转换集合
  */
-export const convertCollection = {
+
+var convertCollection = {
   /**
    * 数字
    */
@@ -140,13 +135,13 @@ export const convertCollection = {
   /**
    * 数组
    */
-  array: "array",
+  array: "array"
 };
-
 /**
  * 格式化集合
  */
-export const formatCollection = {
+
+var formatCollection = {
   /**
    * 金额 ￥ 0.00
    */
@@ -165,21 +160,18 @@ export const formatCollection = {
   /**
    * 百分比
    */
-  percentage: "percentage",
+  percentage: "percentage"
 };
-
-export const menuType = {
+var menuType = {
   divider: "divider",
-  menu: "menu",
+  menu: "menu"
 };
-
-export const imageContentPreviewMode = {
+var imageContentPreviewMode = {
   html: 1,
   listItem: 2,
-  imageList: 3,
+  imageList: 3
 };
-
-export const datetimeFormat = {
+var datetimeFormat = {
   yearMonthDayHourMinuteSecond: "YYYY-MM-DD HH:mm:ss",
   yearMonthDayHourMinute: "YYYY-MM-DD HH:mm",
   yearMonthDay: "YYYY-MM-DD",
@@ -189,10 +181,9 @@ export const datetimeFormat = {
   monthDayHourMinute: "MM-DD HH:mm",
   monthDay: "MM-DD",
   hourMinute: "HH:mm",
-  hourMinuteSecond: "HH:mm:ss",
+  hourMinuteSecond: "HH:mm:ss"
 };
-
-export const selectModeCollection = {
+var selectModeCollection = {
   /**
    * 侧拉面板
    * value : 0
@@ -203,10 +194,9 @@ export const selectModeCollection = {
    * 弹出框
    * value : 1
    */
-  modal: 1,
+  modal: 1
 };
-
-export const columnFacadeMode = {
+var columnFacadeMode = {
   /**
    * 省略文本
    * value : ellipsis
@@ -241,32 +231,30 @@ export const columnFacadeMode = {
    * dropdown
    * value : dropdown component
    */
-  dropdown: "dropdown",
+  dropdown: "dropdown"
 };
-
-export const columnPlaceholder = {
+var columnPlaceholder = {
   placeholder: true,
   title: "其他",
   dataIndex: null,
   align: "center",
-  render: () => "--",
+  render: function render() {
+    return "--";
+  }
 };
-
-export const contentConfig = {
+var contentConfig = {
   wrapperType: {
     page: "page",
     model: "model",
-    drawer: "drawer",
-  },
+    drawer: "drawer"
+  }
 };
-
-export const pageHeaderRenderType = {
+var pageHeaderRenderType = {
   descriptionGrid: "descriptionGrid",
   paragraph: "paragraph ",
-  action: "action ",
+  action: "action "
 };
-
-export const listViewConfig = {
+var listViewConfig = {
   dataContainerExtraActionBuildType: {
     generalButton: "generalButton",
     button: "button",
@@ -278,7 +266,7 @@ export const listViewConfig = {
     /**
      * 指定渲染自定义组件，组件由配置传入
      */
-    component: "component",
+    component: "component"
   },
   viewMode: {
     /**
@@ -294,32 +282,32 @@ export const listViewConfig = {
     /**
      * 构建Card集合展示
      */
-    cardCollectionView: 2,
+    cardCollectionView: 2
   },
   tableSize: {
     middle: "middle",
     small: "small",
-    large: "large",
+    large: "large"
   },
   expandAnimalType: {
     none: animalType.none,
     fade: animalType.fade,
-    queue: animalType.queue,
-  },
+    queue: animalType.queue
+  }
 };
-
 /**
  * 排序动作
  */
-export const sortOperate = {
-  moveUp: "moveUp",
-  moveDown: "moveDown",
-};
 
+var sortOperate = {
+  moveUp: "moveUp",
+  moveDown: "moveDown"
+};
 /**
  * 扩展区构建模式
  */
-export const extraBuildType = {
+
+var extraBuildType = {
   /**
    * 内置的刷新按钮，根据请求配置触发重新加载，一般用于详情类展示或表单初始加载
    */
@@ -373,10 +361,9 @@ export const extraBuildType = {
   /**
    * 指定渲染自定义组件，组件由配置传入
    */
-  component: "component",
+  component: "component"
 };
-
-export const drawerConfig = {
+var drawerConfig = {
   /**
    * 扩展区构建模式
    */
@@ -395,18 +382,17 @@ export const drawerConfig = {
     /**
      * 指定渲染自定义组件，组件由配置传入
      */
-    component: "component",
-  },
+    component: "component"
+  }
 };
-
 /**
  * card配置集合
  */
-export const cardConfig = {
-  ...contentConfig,
+
+var cardConfig = _objectSpread2(_objectSpread2({}, contentConfig), {}, {
   renderType: {
     normal: "normal",
-    help: "help",
+    help: "help"
   },
 
   /**
@@ -415,15 +401,13 @@ export const cardConfig = {
   animalType: {
     none: animalType.none,
     fade: animalType.fade,
-    queue: animalType.queue,
+    queue: animalType.queue
   },
 
   /**
    * 扩展区构建模式
    */
-  extraBuildType: {
-    ...extraBuildType,
-  },
+  extraBuildType: _objectSpread2({}, extraBuildType),
   contentItemType: {
     /**
      * Col占位符,自由指定占用大小
@@ -628,11 +612,10 @@ export const cardConfig = {
     /**
      * tinymce
      */
-    tinymce: "tinymce",
-  },
-};
-
-export const searchCardConfig = {
+    tinymce: "tinymce"
+  }
+});
+var searchCardConfig = {
   contentItemType: {
     /**
      * 输入框
@@ -687,48 +670,48 @@ export const searchCardConfig = {
     /**
      * 分隔符
      */
-    divider: "divider",
-  },
+    divider: "divider"
+  }
 };
-
 /**
  * 字符串类型 ‘0’/'1'
  */
-export const whetherString = {
-  no: "0",
-  yes: "1",
-};
 
+var whetherString = {
+  no: "0",
+  yes: "1"
+};
 /**
  * 字符串类型 0/1
  */
-export const whetherNumber = {
-  no: 0,
-  yes: 1,
-};
 
+var whetherNumber = {
+  no: 0,
+  yes: 1
+};
 /**
  * 文本类型不限【-10000】
  */
-export const unlimitedWithStringFlag = {
+
+var unlimitedWithStringFlag = {
   key: "-10000",
   name: "不限",
-  flag: "-10000",
+  flag: "-10000"
 };
-
 /**
  * 数字类型不限【-10000】
  */
-export const unlimitedWithNumberFlag = {
+
+var unlimitedWithNumberFlag = {
   key: -10000,
   name: "不限",
-  flag: -10000,
+  flag: -10000
 };
-
 /**
  * 日志类型
  */
-export const logLevel = {
+
+var logLevel = {
   /**
    * 调试
    */
@@ -742,10 +725,9 @@ export const logLevel = {
   /**
    * 错误
    */
-  error: "error",
+  error: "error"
 };
-
-export const logShowMode = {
+var logShowMode = {
   /**
    * 未知
    */
@@ -759,16 +741,15 @@ export const logShowMode = {
   /**
    * 对象
    */
-  object: "object",
+  object: "object"
 };
-
-export const dataTypeCollection = {
+var dataTypeCollection = {
   /**
    * 未知类型
    */
   unknown: {
     flag: 0,
-    name: "未知类型",
+    name: "未知类型"
   },
 
   /**
@@ -776,7 +757,7 @@ export const dataTypeCollection = {
    */
   jsonObject: {
     flag: 100,
-    name: "Json单体",
+    name: "Json单体"
   },
 
   /**
@@ -784,7 +765,7 @@ export const dataTypeCollection = {
    */
   jsonObjectList: {
     flag: 200,
-    name: "Json列表",
+    name: "Json列表"
   },
 
   /**
@@ -792,7 +773,7 @@ export const dataTypeCollection = {
    */
   commonValue: {
     flag: 300,
-    name: "一般值",
+    name: "一般值"
   },
 
   /**
@@ -800,47 +781,44 @@ export const dataTypeCollection = {
    */
   html: {
     flag: 400,
-    name: "Html",
-  },
+    name: "Html"
+  }
 };
-
-export const notificationTypeCollection = {
+var notificationTypeCollection = {
   success: "success",
   error: "error",
   info: "info",
   warning: "warning",
   warn: "warn",
-  open: "open",
+  open: "open"
 };
-
-export const messageTypeCollection = {
+var messageTypeCollection = {
   success: "success",
   error: "error",
   info: "info",
   warning: "warning",
   warn: "warn",
   loading: "loading",
-  open: "open",
+  open: "open"
 };
-
-export const tabBarCollection = {
+var tabBarCollection = {
   /**
    * 扩展区构建模式
    */
-  extraBuildType: extraBuildType,
+  extraBuildType: extraBuildType
 };
-
 /**
  *设备模拟集合
  */
-export const mobileTypeCollection = {
+
+var mobileTypeCollection = {
   /**
    * 模拟轮廓
    */
   roughSketch: {
     label: "模拟轮廓",
     name: "roughSketch",
-    helper: "",
+    helper: ""
   },
 
   /**
@@ -849,7 +827,7 @@ export const mobileTypeCollection = {
   iphoneX: {
     label: "Iphone X",
     name: "iphoneX",
-    helper: "",
+    helper: ""
   },
 
   /**
@@ -858,7 +836,7 @@ export const mobileTypeCollection = {
   iphone8plus: {
     label: "Iphone 8 Plus",
     name: "iphone8plus",
-    helper: "",
+    helper: ""
   },
 
   /**
@@ -867,7 +845,7 @@ export const mobileTypeCollection = {
   iphone8: {
     label: "Iphone 8",
     name: "iphone8",
-    helper: "",
+    helper: ""
   },
 
   /**
@@ -876,7 +854,7 @@ export const mobileTypeCollection = {
   iPhone5S: {
     label: "IPhone 5S",
     name: "iPhone5S",
-    helper: "",
+    helper: ""
   },
 
   /**
@@ -885,16 +863,18 @@ export const mobileTypeCollection = {
   galaxyNote8: {
     label: "GalaxyNote8",
     name: "galaxyNote8",
-    helper: "",
-  },
+    helper: ""
+  }
 };
-
 /**
  * 占位函数
  *
  * @export
  * @returns
  */
-export function empty() {
+
+function empty() {
   return {};
 }
+
+export { accessWaySpecialCollection, animalType, apiSuccessCode, appInitDefault, authenticationFailCode, cardConfig, columnFacadeMode, columnPlaceholder, contentConfig, convertCollection, dataTypeCollection, datetimeFormat, defaultEmptyImage, defaultUserAvatar, drawerConfig, empty, emptyDatetime, emptyLogo, extraBuildType, formNameCollection, formatCollection, imageContentPreviewMode, listViewConfig, locationModeCollection, logLevel, logShowMode, menuType, messageTypeCollection, mobileTypeCollection, notificationTypeCollection, pageHeaderRenderType, requestMethod, searchCardConfig, selectModeCollection, sortOperate, tabBarCollection, unlimitedWithNumberFlag, unlimitedWithStringFlag, whetherNumber, whetherString, zeroInt, zeroString };

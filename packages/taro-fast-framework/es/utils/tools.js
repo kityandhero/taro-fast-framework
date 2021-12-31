@@ -1,696 +1,125 @@
-import { emptyLogo as emptyLogo$1 } from './mediaDefault.js';
+import '../classCallCheck.js';
+import '../defineProperty.js';
+import { _ as _objectSpread2 } from '../objectSpread2.js';
+import './mediaDefault.js';
+import { messageTypeCollection, logShowMode, logLevel, convertCollection, formatCollection, notificationTypeCollection, sortOperate, appInitDefault, datetimeFormat } from './constants.js';
+import { replace as replace$1, trim as trim$1, split as split$1, sortedUniq, get, endsWith as endsWith$1, difference as difference$1, filter as filter$1, sortBy as sortBy$1, findIndex as findIndex$1, find as find$1, reverse as reverse$1, remove, toLower } from 'lodash';
+import { isUndefined, isFunction, isString, isArray, isMoney, isNull, isEqualBySerialize, isObject } from './typeCheck.js';
+import { toMoney, toDatetime, toNumber } from './typeConvert.js';
 import Taro from '@tarojs/taro';
+import Tips from './tips.js';
 import { stringify, parse } from 'qs';
-import { toString as toString$1, replace as replace$1, trim as trim$1, isFunction as isFunction$1, isString as isString$1, isArray as isArray$1, isDate as isDate$1, toNumber as toNumber$1, split as split$1, sortedUniq, isUndefined as isUndefined$1, get, isNull as isNull$1, endsWith as endsWith$1, isEqual as isEqual$1, isObject as isObject$1, difference as difference$1, filter as filter$1, sortBy as sortBy$1, findIndex as findIndex$1, find as find$1, reverse as reverse$1, isBoolean as isBoolean$1, remove, toLower } from 'lodash';
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
 }
 
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
 
-var arrayLikeToArray = createCommonjsModule(function (module) {
-  function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
 
-    for (var i = 0, arr2 = new Array(len); i < len; i++) {
-      arr2[i] = arr[i];
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
     }
-
-    return arr2;
-  }
-
-  module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(arrayLikeToArray);
-
-var arrayWithoutHoles = createCommonjsModule(function (module) {
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return arrayLikeToArray(arr);
-  }
-
-  module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(arrayWithoutHoles);
-
-var iterableToArray = createCommonjsModule(function (module) {
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-  }
-
-  module.exports = _iterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(iterableToArray);
-
-var unsupportedIterableToArray = createCommonjsModule(function (module) {
-  function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-  }
-
-  module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(unsupportedIterableToArray);
-
-var nonIterableSpread = createCommonjsModule(function (module) {
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  module.exports = _nonIterableSpread, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(nonIterableSpread);
-
-var toConsumableArray = createCommonjsModule(function (module) {
-  function _toConsumableArray(arr) {
-    return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
-  }
-
-  module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-var _toConsumableArray = unwrapExports(toConsumableArray);
-
-var arrayWithHoles = createCommonjsModule(function (module) {
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(arrayWithHoles);
-
-var iterableToArrayLimit = createCommonjsModule(function (module) {
-  function _iterableToArrayLimit(arr, i) {
-    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-    if (_i == null) return;
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-
-    var _s, _e;
-
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
     try {
-      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
+      if (!_n && _i["return"] != null) _i["return"]();
     } finally {
-      try {
-        if (!_n && _i["return"] != null) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
+      if (_d) throw _e;
     }
-
-    return _arr;
   }
 
-  module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(iterableToArrayLimit);
-
-var nonIterableRest = createCommonjsModule(function (module) {
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(nonIterableRest);
-
-var slicedToArray = createCommonjsModule(function (module) {
-  function _slicedToArray(arr, i) {
-    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-  }
-
-  module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-var _slicedToArray = unwrapExports(slicedToArray);
-
-var defineProperty = createCommonjsModule(function (module) {
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-unwrapExports(defineProperty);
-
-var objectSpread2 = createCommonjsModule(function (module) {
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      enumerableOnly && (symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      })), keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = null != arguments[i] ? arguments[i] : {};
-      i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-        defineProperty(target, key, source[key]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-
-    return target;
-  }
-
-  module.exports = _objectSpread2, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-var _objectSpread = unwrapExports(objectSpread2);
-
-/**
- * 动画类型
- */
-
-var animalType = {
-  none: 'none',
-  fade: 'fade',
-  queue: 'queue'
-};
-/**
- * 鉴权失败码
- */
-
-var authenticationFailCode = 2001;
-/**
- * Api请求成功码
- */
-
-var apiSuccessCode = 200;
-var emptyLogo = emptyLogo$1;
-var appInitDefault = {
-  platformName: '平台名称',
-  appName: '应用名称',
-  appDescription: '应用描述',
-  loginLogo: '',
-  shareLogo: '',
-  shareLogoName: 'Logo',
-  leftBarText: '左侧名称',
-  companyName: '公司名称',
-  copyright: '版权描述',
-  apiPrefix: {
-    corsTargetProduction: ''
-  },
-  showSelectLanguage: false,
-  showLogoInLoginView: true,
-  emptyLogo: emptyLogo,
-  leftBarLogo: emptyLogo,
-  apiSuccessCode: apiSuccessCode,
-  authenticationFailCode: authenticationFailCode,
-  loginPath: '/user/login',
-  showLogInConsole: false,
-  showRequestInfo: false,
-  useVirtualRequest: false,
-  showUseVirtualRequestMessage: false,
-  apiVersion: '',
-  imageUploadMaxSize: 2,
-  audioUploadMaxSize: 4,
-  videoUploadMaxSize: 4,
-  fileUploadMaxSize: 2,
-  useNprogress: true,
-  tinymceApiKey: '',
-  tinymceImagesUploadUrl: ''
-};
-/**
- * 转换集合
- */
-
-var convertCollection = {
-  /**
-   * 数字
-   */
-  number: 'number',
-
-  /**
-   * 日期 date
-   */
-  datetime: 'datetime',
-
-  /**
-   * 字符串
-   */
-  string: 'string',
-
-  /**
-   * moment日期
-   */
-  moment: 'moment',
-
-  /**
-   * 金额
-   */
-  money: 'money',
-
-  /**
-   * 数组
-   */
-  array: 'array'
-};
-/**
- * 格式化集合
- */
-
-var formatCollection = {
-  /**
-   * 金额 ￥ 0.00
-   */
-  money: 'money',
-
-  /**
-   * 格式化日期 YYYY-MM-DD hh:mm:ss
-   */
-  datetime: 'datetime',
-
-  /**
-   * 中文金额
-   */
-  chineseMoney: 'chineseMoney',
-
-  /**
-   * 百分比
-   */
-  percentage: 'percentage'
-};
-var datetimeFormat = {
-  yearMonthDayHourMinuteSecond: 'YYYY-MM-DD HH:mm:ss',
-  yearMonthDayHourMinute: 'YYYY-MM-DD HH:mm',
-  yearMonthDay: 'YYYY-MM-DD',
-  yearMonth: 'YYYY-MM',
-  year: 'YYYY',
-  monthDayHourMinuteSecond: 'YYYY-MM-DD HH:mm:ss',
-  monthDayHourMinute: 'MM-DD HH:mm',
-  monthDay: 'MM-DD',
-  hourMinute: 'HH:mm',
-  hourMinuteSecond: 'HH:mm:ss'
-};
-var contentConfig = {
-  wrapperType: {
-    page: 'page',
-    model: 'model',
-    drawer: 'drawer'
-  }
-};
-/**
- * 排序动作
- */
-
-var sortOperate = {
-  moveUp: 'moveUp',
-  moveDown: 'moveDown'
-};
-/**
- * 扩展区构建模式
- */
-
-var extraBuildType = {
-  /**
-   * 内置的刷新按钮，根据请求配置触发重新加载，一般用于详情类展示或表单初始加载
-   */
-  refresh: 'refresh',
-
-  /**
-   * 内置的保存按钮，表单上下文中将根据提交配置触发提交操作，非表单环境不要使用
-   */
-  save: 'save',
-
-  /**
-   * 根据配置项渲染按钮，事件触发需要自定义指定
-   */
-  generalButton: 'generalButton',
-
-  /**
-   * 带图标文字，图标为空或者文字为空情况下渲染方式有差异
-   */
-  iconInfo: 'iconInfo',
-
-  /**
-   * 彩色文字
-   */
-  colorText: 'colorText',
-
-  /**
-   * 自定义选择框
-   */
-  flexSelect: 'flexSelect',
-
-  /**
-   * 根据配置项渲染按钮，事件触发需要自定义指定,配置项与generalButton相仿，配置模式有所不同，最终效果类似
-   */
-  button: 'button',
-
-  /**
-   * 带扩展操作的按钮
-   */
-  dropdownButton: 'dropdownButton',
-
-  /**
-   * 带扩展操作的省略按钮，省略占位符本身不具有操作
-   */
-  dropdownEllipsis: 'dropdownEllipsis',
-
-  /**
-   * dropdown
-   */
-  dropdown: 'dropdown',
-
-  /**
-   * 指定渲染自定义组件，组件由配置传入
-   */
-  component: 'component'
-};
-/**
- * card配置集合
- */
-
-var cardConfig = _objectSpread(_objectSpread({}, contentConfig), {}, {
-  renderType: {
-    normal: 'normal',
-    help: 'help'
-  },
-
-  /**
-   * 动画支持
-   */
-  animalType: {
-    none: animalType.none,
-    fade: animalType.fade,
-    queue: animalType.queue
-  },
-
-  /**
-   * 扩展区构建模式
-   */
-  extraBuildType: _objectSpread({}, extraBuildType),
-  contentItemType: {
-    /**
-     * Col占位符,自由指定占用大小
-     */
-    placeholder: 'placeholder',
-
-    /**
-     * 纯文本渲染项目
-     */
-    text: 'text',
-
-    /**
-     * 输入框，仅用于单页详情或表单上下文环境
-     */
-    input: 'input',
-
-    /**
-     * 密码框，仅用于单页详情或表单上下文环境
-     */
-    password: 'password',
-
-    /**
-     * 数字框，仅用于单页详情或表单上下文环境
-     */
-    inputNumber: 'inputNumber',
-
-    /**
-     * 文本域，仅用于单页详情或表单上下文环境
-     */
-    textarea: 'textarea',
-
-    /**
-     * switch开关
-     */
-    switch: 'switch',
-
-    /**
-     * 一般选择框
-     */
-    select: 'select',
-
-    /**
-     * ”是/否“ 选择框
-     */
-    whetherSelect: 'whetherSelect',
-
-    /**
-     * 自定义选择框
-     */
-    customSelect: 'customSelect',
-
-    /**
-     * 自定义选择框
-     */
-    flexSelect: 'flexSelect',
-
-    /**
-     * 一般单选框
-     */
-    radio: 'radio',
-
-    /**
-     * ”是/否“ 单选框
-     */
-    whetherRadio: 'whetherRadio',
-
-    /**
-     * 自定义单选框
-     */
-    customRadio: 'customRadio',
-
-    /**
-     * 纯展示文本域，仅用于单页详情或表单上下文环境
-     */
-    onlyShowTextarea: 'onlyShowTextarea',
-
-    /**
-     * 只读输入框，仅用于单页详情或表单上下文环境
-     */
-    onlyShowInput: 'onlyShowInput',
-
-    /**
-     * 只读日期框，仅用于单页详情或表单上下文环境
-     */
-    onlyShowInputDatetime: 'onlyShowInputDatetime',
-
-    /**
-     * 文字信息展示，仅用于单页详情或表单上下文环境
-     */
-    onlyShowText: 'onlyShowText',
-
-    /**
-     * 图片上传
-     */
-    imageUpload: 'imageUpload',
-
-    /**
-     * 图片展示
-     */
-    imageShow: 'imageShow',
-
-    /**
-     * 图片集展示
-     */
-    imageListShow: 'imageListShow',
-
-    /**
-     * 文件串行化上传
-     */
-    fileBase64Upload: 'fileBase64Upload',
-
-    /**
-     * 视频上传
-     */
-    videoUpload: 'videoUpload',
-
-    /**
-     * 文件上传
-     */
-    fileUpload: 'fileUpload',
-
-    /**
-     * 音频上传
-     */
-    audioUpload: 'audioUpload',
-
-    /**
-     * 内部自定义组件，仅用于单页详情或表单上下文环境显示单项内容区域
-     */
-    innerComponent: 'innerComponent',
-
-    /**
-     * 保存按钮，表单上下文中将根据提交配置触发提交操作，非表单环境不要使用，与extraBuildType处的save具有相似功能
-     */
-    save: 'save',
-
-    /**
-     * 渲染按钮
-     */
-    button: 'button',
-
-    /**
-     * 操作集合
-     */
-    actionList: 'actionList',
-
-    /**
-     * 组件
-     */
-    component: 'component',
-
-    /**
-     * 渲染当前时间，仅用于单页详情或表单上下文环境显示单项内容区域
-     */
-    nowTime: 'nowTime',
-
-    /**
-     * 日期选择项，仅用于单页详情或表单上下文环境显示单项内容区域
-     */
-    datePicker: 'datePicker',
-
-    /**
-     * 时间选择项，仅用于单页详情或表单上下文环境显示单项内容区域
-     */
-    timePicker: 'timePicker',
-
-    /**
-     * json可视化展示
-     */
-    jsonView: 'jsonView',
-
-    /**
-     * flex类型文字
-     */
-    flexText: 'flexText',
-
-    /**
-     * flex类型文字
-     */
-    onlyShowTextByFlexText: 'onlyShowTextByFlexText',
-
-    /**
-     * 分隔符
-     */
-    divider: 'divider',
-
-    /**
-     * Html
-     */
-    html: 'html',
-
-    /**
-     * CustomGrid
-     */
-    customGrid: 'customGrid',
-
-    /**
-     * tree
-     */
-    tree: 'tree',
-
-    /**
-     * tinymce
-     */
-    tinymce: 'tinymce'
-  }
-});
-/**
- * 日志类型
- */
-
-var logLevel = {
-  /**
-   * 调试
-   */
-  debug: 'debug',
-
-  /**
-   * 警告
-   */
-  warn: 'warn',
-
-  /**
-   * 错误
-   */
-  error: 'error'
-};
-var logShowMode = {
-  /**
-   * 未知
-   */
-  unknown: 'unknown',
-
-  /**
-   * 文本
-   */
-  text: 'text',
-
-  /**
-   * 对象
-   */
-  object: 'object'
-};
-var notificationTypeCollection = {
-  success: 'success',
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-  warn: 'warn',
-  open: 'open'
-};
-var messageTypeCollection = {
-  success: 'success',
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-  warn: 'warn',
-  loading: 'loading',
-  open: 'open'
-};
+  return _arr;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
 
 var storageKeyCollection = {
   nearestLocalhostNotify: "nearestLocalhostNotify"
 };
+function getTaroGlobalData() {
+  var app = Taro.getApp();
 
-function isBrowser() {
-  return typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
+  if (isUndefined(app)) {
+    return null;
+  }
+
+  return app.$app.taroGlobalData;
 }
-
+function redirectTo(url) {
+  Taro.redirectTo({
+    url: url
+  });
+}
+function navigateTo(url) {
+  Taro.navigateTo({
+    url: url
+  });
+}
 function getAppInitConfigData() {
   var appInitConfig = appInitDefault;
+  var taroGlobalData = getTaroGlobalData();
 
-  if (isBrowser()) {
-    if ((window.appInitCustomLocal || null) != null) {
-      appInitConfig = _objectSpread(_objectSpread({}, appInitConfig), window.appInitCustomLocal);
+  if (taroGlobalData) {
+    if ((taroGlobalData.appInitCustomLocal || null) != null) {
+      appInitConfig = _objectSpread2(_objectSpread2({}, appInitConfig), taroGlobalData.appInitCustomLocal);
     }
 
-    if ((window.appInitCustomRemote || null) != null) {
-      appInitConfig = _objectSpread(_objectSpread({}, appInitConfig), window.appInitCustomRemote);
+    if ((taroGlobalData.appInitCustomRemote || null) != null) {
+      appInitConfig = _objectSpread2(_objectSpread2({}, appInitConfig), taroGlobalData.appInitCustomRemote);
     }
   }
 
@@ -711,14 +140,14 @@ function defaultBaseState() {
   };
 }
 function defaultCoreState() {
-  var data = _objectSpread(_objectSpread({}, defaultBaseState()), {
+  var data = _objectSpread2(_objectSpread2({}, defaultBaseState()), {
     dataLoading: true
   });
 
   return data;
 }
 function defaultCommonState() {
-  var data = _objectSpread(_objectSpread({}, defaultCoreState()), {
+  var data = _objectSpread2(_objectSpread2({}, defaultCoreState()), {
     loadApiPath: "",
     pageName: "",
     metaData: null,
@@ -730,7 +159,7 @@ function defaultCommonState() {
   return data;
 }
 function defaultListState() {
-  var data = _objectSpread(_objectSpread({}, defaultCommonState()), {
+  var data = _objectSpread2(_objectSpread2({}, defaultCommonState()), {
     dateRangeFieldName: "发生时间",
     tableScroll: {
       x: 1520
@@ -749,7 +178,7 @@ function defaultListState() {
   return data;
 }
 function defaultPageListState() {
-  var data = _objectSpread(_objectSpread({}, defaultCommonState()), {
+  var data = _objectSpread2(_objectSpread2({}, defaultCommonState()), {
     paramsKey: "",
     loadApiPath: "",
     dateRangeFieldName: "发生时间",
@@ -768,7 +197,7 @@ function defaultPageListState() {
   return data;
 }
 function defaultFormState() {
-  var data = _objectSpread(_objectSpread({}, defaultCommonState()), {
+  var data = _objectSpread2(_objectSpread2({}, defaultCommonState()), {
     errorFieldName: "",
     submitApiPath: ""
   });
@@ -817,18 +246,7 @@ function replaceTargetText(text, replaceText, beforeKeepNumber, afterKeepNumber)
       result = text;
     } else {
       var beforeKeep = text.substr(0, beforeKeepNumber);
-      var afterKeep = text.substr(textLength - afterKeepNumber, afterKeepNumber); // const replaceTargetLength = textLength - (beforeKeepNumber || 0) - (afterKeepNumber || 0);
-      // const replaceTarget = text.substring(
-      //   (beforeKeepNumber || 0) <= 0 ? 0 : beforeKeepNumber - 1,
-      //   textLength - (beforeKeepNumber || 0) - (afterKeepNumber || 0)
-      // );
-      // const replaced = [];
-      // let i = 1;
-      // while (i <= replaceTargetLength) {
-      //   replaced.push(replaceText);
-      //   i += 1;
-      // }
-
+      var afterKeep = text.substr(textLength - afterKeepNumber, afterKeepNumber);
       result = beforeKeep + replaceText + afterKeep;
     }
   }
@@ -1253,89 +671,6 @@ function inCollection(collection, value) {
   });
   return result;
 }
-/**
- * 格式化时间
- *
- * @export
- * @param {*} v
- * @returns
- */
-
-function isInvalid(v) {
-  return typeof v === "undefined";
-}
-function toDatetime(v) {
-  if ((v || null) == null) {
-    return null;
-  }
-
-  if (isDate(v)) {
-    return v;
-  }
-
-  if (isString(v)) {
-    var i = v.indexOf("T");
-
-    if (i < 0) {
-      // eslint-disable-next-line no-useless-escape
-      var value = v.replace(/\-/g, "/");
-      var result = new Date(value);
-      return result;
-    }
-  }
-
-  return new Date(v);
-}
-/**
- * 判断是否是时间字符串
- *
- * @export
- * @param {*} v
- * @returns
- */
-
-function isDatetime(v) {
-  var date = "".concat(typeof v === "undefined" ? null : v);
-  var result = date.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
-
-  if (result == null) {
-    return false;
-  }
-
-  var d = new Date(result[1], result[3] - 1, result[4]);
-  return d.getFullYear() === parseInt(result[1], 10) && d.getMonth() + 1 === parseInt(result[3], 10) && d.getDate() === parseInt(result[4], 10);
-}
-/**
- * 判断是否是数字字符串
- *
- * @export
- * @param {*} str
- * @returns
- */
-
-function isNumber(v) {
-  var str = "".concat(typeof v === "undefined" ? null : v);
-
-  if (str === "") {
-    return false;
-  }
-
-  var regular = /^[0-9]*$/;
-  var re = new RegExp(regular);
-  return re.test(str);
-}
-/**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-
-function toNumber(v) {
-  var value = toNumber$1(v);
-  return Number.isNaN(value) ? 0 : value;
-}
 function split(source, separator) {
   var limit = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
   return split$1(source, separator, limit);
@@ -1360,40 +695,6 @@ function roundToTarget(v, len) {
 
   var temp = Math.pow(10, len);
   return Math.round(toMoney(v) * temp) / temp;
-}
-/**
- * 判断是否是数字字符串
- *
- * @export
- * @param {*} str
- * @returns
- */
-
-function isMoney(v) {
-  var str = "".concat(typeof v === "undefined" ? null : v);
-
-  if (str === "") {
-    return false;
-  }
-
-  var regular = /^([1-9][\d]{0,15}|0)(\.[\d]{1,2})?$/;
-  var re = new RegExp(regular);
-  return re.test(str);
-}
-/**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-
-function toMoney(v) {
-  if (isMoney(v)) {
-    return parseFloat(v, 10);
-  }
-
-  return 0;
 }
 /**
  * 通过 key 获取对应得值
@@ -1558,6 +859,35 @@ function formatTarget(_ref14) {
   return target;
 }
 /**
+ *计算时间间隔
+ * @param {startTime} 起始时间
+ * @param {endTime} 结束时间
+ */
+
+function calculateTimeInterval(startTime, endTime) {
+  var timeBegin = startTime.getTime();
+  var timeEnd = endTime.getTime();
+  var total = (timeEnd - timeBegin) / 1000;
+  var day = parseInt(total / (24 * 60 * 60)); //计算整数天数
+
+  var afterDay = total - day * 24 * 60 * 60; //取得算出天数后剩余的秒数
+
+  var hour = parseInt(afterDay / (60 * 60)); //计算整数小时数
+
+  var afterHour = total - day * 24 * 60 * 60 - hour * 60 * 60; //取得算出小时数后剩余的秒数
+
+  var min = parseInt(afterHour / 60); //计算整数分
+
+  var afterMin = total - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60; //取得算出分后剩余的秒数
+
+  return {
+    day: day,
+    hour: hour,
+    minute: min,
+    second: afterMin
+  };
+}
+/**
  * 通过 path 获取对应得值
  */
 
@@ -1638,9 +968,6 @@ function formatMoney(_ref15) {
   // 第二种方案
   // i.substr(j).replace(/(?=(\B\d{3})+$)/g, thousand) +
   places ? decimal + Math.abs(number - toNumber(i)).toFixed(places).slice(2) : "");
-}
-function toPercentage(val) {
-  return "".concat(toMoney(toNumber(val) * 1000 / 10), "%");
 }
 /**
  * 检查字符串string是否以给定的target字符串结尾
@@ -1996,30 +1323,6 @@ function buildFieldDescription(v, op, other) {
   return "\u8BF7".concat(op || "输入").concat(v).concat(o);
 }
 /**
- * 获取SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-
-function getStringFromSessionStorage(key) {
-  var storage = window.sessionStorage;
-  var value = storage.getItem(key);
-
-  if (process.env.NODE_ENV === "development") {
-    return value;
-  }
-
-  var decode = decodeBase64(value);
-  var v = encodeBase64(decode);
-
-  if (value !== v) {
-    return null;
-  }
-
-  return decode;
-}
-/**
  * 获取LocalStorage数据
  * @export
  * @param {*} key
@@ -2027,37 +1330,8 @@ function getStringFromSessionStorage(key) {
  */
 
 function getStringFromLocalStorage(key) {
-  var storage = window.localStorage;
-  var value = storage.getItem(key);
-
-  if (process.env.NODE_ENV === "development") {
-    return value;
-  }
-
-  var decode = decodeBase64(value);
-  var v = encodeBase64(decode);
-
-  if (value !== v) {
-    return null;
-  }
-
-  return decode;
-}
-/**
- * 获取SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-
-function getJsonFromSessionStorage(key) {
-  var jsonString = getStringFromSessionStorage(key);
-
-  if (jsonString) {
-    return JSON.parse(jsonString || "{}");
-  }
-
-  return null;
+  var result = Taro.getStorageSync(key);
+  return result;
 }
 /**
  * 获取LocalStorage数据
@@ -2069,27 +1343,11 @@ function getJsonFromSessionStorage(key) {
 function getJsonFromLocalStorage(key) {
   var jsonString = getStringFromLocalStorage(key);
 
-  if (jsonString) {
+  if (!stringIsNullOrWhiteSpace(jsonString)) {
     return JSON.parse(jsonString || "{}");
   }
 
   return null;
-}
-/**
- * 存储SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-
-function saveStringToSessionStorage(key, value) {
-  var storage = window.sessionStorage;
-
-  if (process.env.NODE_ENV === "development") {
-    storage.setItem(key, value);
-  } else {
-    storage.setItem(key, encodeBase64(value));
-  }
 }
 /**
  * 存储本地数据
@@ -2099,23 +1357,7 @@ function saveStringToSessionStorage(key, value) {
  */
 
 function saveStringToLocalStorage(key, value) {
-  var storage = window.localStorage;
-
-  if (process.env.NODE_ENV === "development") {
-    storage.setItem(key, value);
-  } else {
-    storage.setItem(key, encodeBase64(value));
-  }
-}
-/**
- * 存储SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-
-function saveJsonToSessionStorage(key, json) {
-  saveStringToSessionStorage(key, JSON.stringify(json || {}));
+  Taro.setStorageSync(key, value);
 }
 /**
  * 存储本地数据
@@ -2125,17 +1367,7 @@ function saveJsonToSessionStorage(key, json) {
  */
 
 function saveJsonToLocalStorage(key, json) {
-  saveStringToLocalStorage(key, JSON.stringify(json || {}));
-}
-/**
- * 移除SessionStorage数据
- * @export
- * @param {*} key
- */
-
-function removeSessionStorage(key) {
-  var storage = window.sessionStorage;
-  storage.removeItem(key);
+  Taro.setStorageSync(key, JSON.stringify(json || {}));
 }
 /**
  * 移除LocalStorage数据
@@ -2144,18 +1376,7 @@ function removeSessionStorage(key) {
  */
 
 function removeLocalStorage(key) {
-  var storage = window.localStorage;
-  storage.removeItem(key);
-}
-/**
- * 清空SessionStorage数据
- * @export
- * @param {*} key
- */
-
-function clearSessionStorage() {
-  var storage = window.sessionStorage;
-  storage.clear();
+  Taro.removeStorageSync(key);
 }
 /**
  * 清空LocalStorage数据
@@ -2164,8 +1385,7 @@ function clearSessionStorage() {
  */
 
 function clearLocalStorage() {
-  var storage = window.localStorage;
-  storage.clear();
+  Taro.clearStorage();
 }
 /**
  * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state，
@@ -2205,33 +1425,16 @@ function getDerivedStateFromPropsForUrlParams(nextProps, prevState) {
   var _stateUrlParams = stateUrlParams,
       urlParams = _stateUrlParams.urlParams;
 
-  if (isEqualBySerialize(_objectSpread(_objectSpread({}, urlParamsPrev || {}), {}), _objectSpread(_objectSpread({}, urlParams || {}), {}))) {
+  if (isEqualBySerialize(_objectSpread2(_objectSpread2({}, urlParamsPrev || {}), {}), _objectSpread2(_objectSpread2({}, urlParams || {}), {}))) {
     return prevState;
   }
 
   if (isFunction(parseUrlParamsForSetState)) {
     var data = parseUrlParamsForSetState(stateUrlParams);
-    return _objectSpread(_objectSpread(_objectSpread({}, prevState), stateUrlParams), data);
+    return _objectSpread2(_objectSpread2(_objectSpread2({}, prevState), stateUrlParams), data);
   }
 
-  return _objectSpread(_objectSpread({}, prevState), stateUrlParams);
-}
-/**
- * 获取本地数据
- * @export
- * @param {value} 对比源
- * @param {other} 对比对象
- * 执行深比较来确定两者的值是否相等。
- * 这个方法支持比较 arrays, array buffers, booleans, date objects, error objects, maps, numbers, Object objects, regexes, sets, strings, symbols, 以及 typed arrays. Object 对象值比较自身的属性，不包括继承的和可枚举的属性。 不支持函数和DOM节点比较。
- */
-
-function isEqual(value, other) {
-  return isEqual$1(value, other);
-}
-function isEqualBySerialize(value, other) {
-  var d1 = JSON.stringify(value || {});
-  var d2 = JSON.stringify(other || {});
-  return d1 === d2;
+  return _objectSpread2(_objectSpread2({}, prevState), stateUrlParams);
 }
 function cloneWithoutMethod(value) {
   if (value == null) {
@@ -2239,15 +1442,6 @@ function cloneWithoutMethod(value) {
   }
 
   return JSON.parse(JSON.stringify(value));
-}
-function isFunction(value) {
-  return isFunction$1(value);
-}
-function isArray(value) {
-  return isArray$1(value);
-}
-function isObject(o) {
-  return isObject$1(o);
 }
 function difference(array, values) {
   return difference$1(array, values);
@@ -2262,7 +1456,7 @@ function filter(collection, predicateFunction) {
   return filter$1(collection, predicateFunction);
 }
 /**
- * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数： (value)。
+ * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数:  (value)。
  * @param {collection}  (Array|Object), 用来迭代的集合。
  * @param {predicateFunction} 这个函数决定排序
  */
@@ -2306,42 +1500,8 @@ function trim(source) {
 function replace(source, pattern, replacement) {
   return replace$1(source, pattern, replacement);
 }
-function toString(value) {
-  return toString$1(value);
-}
-function isBoolean(value) {
-  return isBoolean$1(value);
-}
 /**
- * check value is undefined
- */
-
-function isUndefined(value) {
-  return isUndefined$1(value);
-}
-/**
- * check value is null
- */
-
-function isNull(value) {
-  return isNull$1(value);
-}
-/**
- * check value is date
- */
-
-function isDate(value) {
-  return isDate$1(value);
-}
-/**
- * check value is string
- */
-
-function isString(value) {
-  return isString$1(value);
-}
-/**
- * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数： (value, index, array)。
+ * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数:  (value, index, array)。
  * @param {*} array
  * @param {*} predicate (Array|Function|Object|string): 每次迭代调用的函数
  */
@@ -2380,7 +1540,7 @@ function fixedZero(val) {
  */
 
 function buildFieldHelper(v) {
-  var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "注：";
+  var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "注: ";
   return "".concat(prefix).concat(v, "\u3002");
 }
 function checkLocalhost() {
@@ -2441,7 +1601,7 @@ function trySendNearestLocalhostNotify(_ref19) {
       if (needSend) {
         notify({
           type: notificationTypeCollection.info,
-          message: "\u5F53\u524D\u63A5\u53E3\u57DF\u540D\uFF1A".concat(text, "\u3002")
+          message: "\u5F53\u524D\u63A5\u53E3\u57DF\u540D: ".concat(text, "\u3002")
         });
         setNearestLocalhostNotifyCache();
       }
@@ -2455,8 +1615,10 @@ function trySendNearestLocalhostNotify(_ref19) {
  */
 
 function ellipsis(value, length) {
+  var symbol = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "...";
+
   if (value && value.length > length) {
-    return "".concat(toString(value).substr(0, length), "...");
+    return "".concat(toString(value).substr(0, length)).concat(symbol);
   }
 
   return toString(value);
@@ -2478,7 +1640,7 @@ function notify(_ref20) {
       _ref20$closeCallback = _ref20.closeCallback,
       closeCallback = _ref20$closeCallback === void 0 ? null : _ref20$closeCallback;
 
-  var _message$message = _objectSpread(_objectSpread({}, {
+  var _message$message = _objectSpread2(_objectSpread2({}, {
     message: "操作结果"
   }), {
     message: messageValue
@@ -2488,105 +1650,27 @@ function notify(_ref20) {
   setTimeout(function () {
     switch (type) {
       case notificationTypeCollection.success:
-        setTimeout(function () {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500
-          }).then(function (res) {
-            if (isFunction(closeCallback)) {
-              setTimeout(function () {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
+        Tips.success(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.warning:
-        setTimeout(function () {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500
-          }).then(function (res) {
-            if (isFunction(closeCallback)) {
-              setTimeout(function () {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.error:
-        setTimeout(function () {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500
-          }).then(function (res) {
-            if (isFunction(closeCallback)) {
-              setTimeout(function () {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.info:
-        setTimeout(function () {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500
-          }).then(function (res) {
-            if (isFunction(closeCallback)) {
-              setTimeout(function () {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.warn:
-        setTimeout(function () {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500
-          }).then(function (res) {
-            if (isFunction(closeCallback)) {
-              setTimeout(function () {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       default:
-        setTimeout(function () {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500
-          }).then(function (res) {
-            if (isFunction(closeCallback)) {
-              setTimeout(function () {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
+        Tips.info(messageText, 1500, closeCallback);
         break;
     }
   }, 600);
@@ -2635,18 +1719,6 @@ function checkFromConfig(_ref21) {
     helper: helperText
   };
 }
-
-var requestAnimFrameCustom = function () {
-  if (isBrowser()) {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (a) {
-      window.setTimeout(a, 1e3 / 60);
-    };
-  }
-
-  return function () {};
-}();
-
-var requestAnimFrame = requestAnimFrameCustom;
 /**
  * 依照某个键的值进行排序，请确保键的值为数字型
  */
@@ -2763,6 +1835,126 @@ function queryStringParse(data) {
   return parse(data);
 }
 /**
+ * 同步线程挂起若干时间(毫秒)
+ * @param  n
+ */
+
+function sleep(n, callback) {
+  var start = new Date().getTime();
+
+  while (true) {
+    if (new Date().getTime() - start > n) {
+      break;
+    }
+  }
+
+  if (isFunction(callback)) {
+    callback();
+  }
+}
+function getSystemInfo() {
+  if (Taro.globalSystemInfo && !Taro.globalSystemInfo.ios) {
+    return Taro.globalSystemInfo;
+  } else {
+    // h5环境下忽略navbar
+    if (!isFunction(Taro.getSystemInfoSync)) {
+      return null;
+    }
+
+    var systemInfo = Taro.getSystemInfoSync() || {
+      model: "",
+      system: ""
+    };
+    var ios = !!(systemInfo.system.toLowerCase().search("ios") + 1);
+    var rect;
+
+    try {
+      rect = Taro.getMenuButtonBoundingClientRect ? Taro.getMenuButtonBoundingClientRect() : null;
+
+      if (rect === null) {
+        throw "getMenuButtonBoundingClientRect error";
+      } //取值为0的情况  有可能width不为0 top为0的情况
+
+
+      if (!rect.width || !rect.top || !rect.left || !rect.height) {
+        throw "getMenuButtonBoundingClientRect error";
+      }
+    } catch (error) {
+      var gap = ""; //胶囊按钮上下间距 使导航内容居中
+
+      var width = 96; //胶囊的宽度
+
+      if (systemInfo.platform === "android") {
+        gap = 8;
+        width = 96;
+      } else if (systemInfo.platform === "devtools") {
+        if (ios) {
+          gap = 5.5; //开发工具中ios手机
+        } else {
+          gap = 7.5; //开发工具中android和其他手机
+        }
+      } else {
+        gap = 4;
+        width = 88;
+      }
+
+      if (!systemInfo.statusBarHeight) {
+        //开启wifi的情况下修复statusBarHeight值获取不到
+        systemInfo.statusBarHeight = systemInfo.screenHeight - systemInfo.windowHeight - 20;
+      }
+
+      rect = {
+        //获取不到胶囊信息就自定义重置一个
+        bottom: systemInfo.statusBarHeight + gap + 32,
+        height: 32,
+        left: systemInfo.windowWidth - width - 10,
+        right: systemInfo.windowWidth - 10,
+        top: systemInfo.statusBarHeight + gap,
+        width: width
+      };
+      console.log("error", error);
+      console.log("rect", rect);
+    }
+
+    var navBarHeight = "";
+
+    if (!systemInfo.statusBarHeight) {
+      //开启wifi和打电话下
+      systemInfo.statusBarHeight = systemInfo.screenHeight - systemInfo.windowHeight - 20;
+
+      navBarHeight = function () {
+        var gap = rect.top - systemInfo.statusBarHeight;
+        return 2 * gap + rect.height;
+      }();
+
+      systemInfo.statusBarHeight = 0;
+      systemInfo.navBarExtendHeight = 0; //下方扩展4像素高度 防止下方边距太小
+    } else {
+      navBarHeight = function () {
+        var gap = rect.top - systemInfo.statusBarHeight;
+        return systemInfo.statusBarHeight + 2 * gap + rect.height;
+      }();
+
+      if (ios) {
+        systemInfo.navBarExtendHeight = 4; //下方扩展4像素高度 防止下方边距太小
+      } else {
+        systemInfo.navBarExtendHeight = 0;
+      }
+    }
+
+    systemInfo.navBarHeight = navBarHeight; //导航栏高度不包括statusBarHeight
+
+    systemInfo.capsulePosition = rect; //右上角胶囊按钮信息bottom: 58 height: 32 left: 317 right: 404 top: 26 width: 87 目前发现在大多机型都是固定值 为防止不一样所以会使用动态值来计算nav元素大小
+
+    systemInfo.ios = ios; //是否ios
+
+    Taro.globalSystemInfo = systemInfo; //将信息保存到全局变量中,后边再用就不用重新异步获取了
+    //console.log('systemInfo', systemInfo);
+
+    return systemInfo;
+  }
+}
+/**
  * 占位函数
  *
  * @export
@@ -2773,4 +1965,4 @@ function emptyExport() {
   return {};
 }
 
-export { buildFieldDescription, buildFieldHelper, checkDevelopment, checkExist, checkFromConfig, checkLocalhost, clearLocalStorage, clearSessionStorage, cloneWithoutMethod, convertTarget, copyToClipboard, corsTarget, decodeBase64, defaultBaseState, defaultCommonState, defaultCoreState, defaultFormState, defaultListState, defaultPageListState, difference, ellipsis, emptyExport, encodeBase64, endsWith, evil, filter, find, findIndex, fixedZero, formatDatetime, formatDecimal, formatMoney, formatMoneyToChinese, formatTarget, getAppInitConfigData, getBrowserInfo, getDerivedStateFromPropsForUrlParams, getDerivedStateFromPropsForUrlParamsCore, getGuid, getJsonFromLocalStorage, getJsonFromSessionStorage, getNearestLocalhostNotifyCache, getPathValue, getRandomColor, getStringFromLocalStorage, getStringFromSessionStorage, getValue, getValueByKey, inCollection, isArray, isBoolean, isDate, isDatetime, isEqual, isEqualBySerialize, isFunction, isInvalid, isMoney, isNull, isNumber, isObject, isString, isUndefined, notify, notifySuccess, queryStringParse, queryStringify, recordError, recordLog, recordObject, recordText, refitCommonData, refitFieldDecoratorOption, removeEndMatch, removeFromArray, removeLastMatch, removeLocalStorage, removeNearestLocalhostNotifyCache, removeSessionStorage, replace, replaceTargetText, requestAnimFrame, reverse, roundToTarget, saveJsonToLocalStorage, saveJsonToSessionStorage, saveStringToLocalStorage, saveStringToSessionStorage, searchFromList, seededRandom, setNearestLocalhostNotifyCache, showError, showErrorMessage, showInfoMessage, showLoadingMessage, showMessage, showOpenMessage, showRuntimeError, showSuccessMessage, showWarnMessage, showWarningMessage, sortBy, sortCollectionByKey, sortedUnique, split, stringIsNullOrWhiteSpace, toDatetime, toMoney, toNumber, toPercentage, toString, trim, trySendNearestLocalhostNotify };
+export { buildFieldDescription, buildFieldHelper, calculateTimeInterval, checkDevelopment, checkExist, checkFromConfig, checkLocalhost, clearLocalStorage, cloneWithoutMethod, convertTarget, copyToClipboard, corsTarget, decodeBase64, defaultBaseState, defaultCommonState, defaultCoreState, defaultFormState, defaultListState, defaultPageListState, difference, ellipsis, emptyExport, encodeBase64, endsWith, evil, filter, find, findIndex, fixedZero, formatDatetime, formatDecimal, formatMoney, formatMoneyToChinese, formatTarget, getAppInitConfigData, getBrowserInfo, getDerivedStateFromPropsForUrlParams, getDerivedStateFromPropsForUrlParamsCore, getGuid, getJsonFromLocalStorage, getNearestLocalhostNotifyCache, getPathValue, getRandomColor, getStringFromLocalStorage, getSystemInfo, getTaroGlobalData, getValue, getValueByKey, inCollection, navigateTo, notify, notifySuccess, queryStringParse, queryStringify, recordError, recordLog, recordObject, recordText, redirectTo, refitCommonData, refitFieldDecoratorOption, removeEndMatch, removeFromArray, removeLastMatch, removeLocalStorage, removeNearestLocalhostNotifyCache, replace, replaceTargetText, reverse, roundToTarget, saveJsonToLocalStorage, saveStringToLocalStorage, searchFromList, seededRandom, setNearestLocalhostNotifyCache, showError, showErrorMessage, showInfoMessage, showLoadingMessage, showMessage, showOpenMessage, showRuntimeError, showSuccessMessage, showWarnMessage, showWarningMessage, sleep, sortBy, sortCollectionByKey, sortedUnique, split, stringIsNullOrWhiteSpace, trim, trySendNearestLocalhostNotify };

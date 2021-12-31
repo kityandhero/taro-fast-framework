@@ -5,6 +5,20 @@
  * @returns
  */
 export function empty(): {};
+export namespace locationModeCollection {
+    const unknown: number;
+    const auto: number;
+    const custom: number;
+}
+export namespace requestMethod {
+    export const get: string;
+    export const post: string;
+    export const put: string;
+    const _delete: string;
+    export { _delete as delete };
+    export const trace: string;
+    export const connect: string;
+}
 export namespace animalType {
     const none: string;
     const fade: string;
@@ -357,19 +371,20 @@ export namespace logLevel {
     const error: string;
 }
 export namespace logShowMode {
-    export const unknown: string;
+    const unknown_1: string;
+    export { unknown_1 as unknown };
     const text_1: string;
     export { text_1 as text };
     export const object: string;
 }
 export namespace dataTypeCollection {
-    export namespace unknown_1 {
+    export namespace unknown_2 {
         const flag_2: number;
         export { flag_2 as flag };
         const name_4: string;
         export { name_4 as name };
     }
-    export { unknown_1 as unknown };
+    export { unknown_2 as unknown };
     export namespace jsonObject {
         const flag_3: number;
         export { flag_3 as flag };

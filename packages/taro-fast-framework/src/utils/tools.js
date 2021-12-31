@@ -1,8 +1,6 @@
 import Taro from "@tarojs/taro";
 import { stringify, parse } from "qs";
 import {
-  isEqual as isEqualLodash,
-  isFunction as isFunctionLodash,
   filter as filterLodash,
   sortBy as sortByLodash,
   findIndex as findIndexLodash,
@@ -10,18 +8,9 @@ import {
   reverse as reverseLodash,
   replace as replaceLodash,
   trim as trimLodash,
-  isBoolean as isBooleanLodash,
-  isUndefined as isUndefinedLodash,
-  isNull as isNullLodash,
-  isDate as isDateLodash,
-  isArray as isArrayLodash,
-  isString as isStringLodash,
   remove as removeLodash,
-  isObject as isObjectLodash,
   difference as differenceLodash,
-  toNumber as toNumberLodash,
   split as splitLodash,
-  toString as toStringLodash,
   get as getLodash,
   sortedUniq as sortedUniqLodash,
   toLower,
@@ -39,29 +28,63 @@ import {
   datetimeFormat,
   sortOperate,
 } from "./constants";
+import {
+  isArray,
+  isEqualBySerialize,
+  isFunction,
+  isMoney,
+  isNull,
+  isObject,
+  isString,
+  isUndefined,
+} from "./typeCheck";
+import Tips from "./tips";
+import { toDatetime, toMoney, toNumber } from "./typeConvert";
 
 const storageKeyCollection = {
   nearestLocalhostNotify: "nearestLocalhostNotify",
 };
 
-function isBrowser() {
-  return (
-    typeof window !== "undefined" &&
-    typeof window.document !== "undefined" &&
-    typeof window.document.createElement !== "undefined"
-  );
+export function getTaroGlobalData() {
+  const app = Taro.getApp();
+
+  if (isUndefined(app)) {
+    return null;
+  }
+
+  return app.$app.taroGlobalData;
+}
+
+export function redirectTo(url) {
+  Taro.redirectTo({
+    url,
+  });
+}
+
+export function navigateTo(url) {
+  Taro.navigateTo({
+    url,
+  });
 }
 
 export function getAppInitConfigData() {
   let appInitConfig = appInitDefault;
 
-  if (isBrowser()) {
-    if ((window.appInitCustomLocal || null) != null) {
-      appInitConfig = { ...appInitConfig, ...window.appInitCustomLocal };
+  const taroGlobalData = getTaroGlobalData();
+
+  if (taroGlobalData) {
+    if ((taroGlobalData.appInitCustomLocal || null) != null) {
+      appInitConfig = {
+        ...appInitConfig,
+        ...taroGlobalData.appInitCustomLocal,
+      };
     }
 
-    if ((window.appInitCustomRemote || null) != null) {
-      appInitConfig = { ...appInitConfig, ...window.appInitCustomRemote };
+    if ((taroGlobalData.appInitCustomRemote || null) != null) {
+      appInitConfig = {
+        ...appInitConfig,
+        ...taroGlobalData.appInitCustomRemote,
+      };
     }
   }
 
@@ -209,21 +232,6 @@ export function replaceTargetText(
         textLength - afterKeepNumber,
         afterKeepNumber
       );
-
-      // const replaceTargetLength = textLength - (beforeKeepNumber || 0) - (afterKeepNumber || 0);
-
-      // const replaceTarget = text.substring(
-      //   (beforeKeepNumber || 0) <= 0 ? 0 : beforeKeepNumber - 1,
-      //   textLength - (beforeKeepNumber || 0) - (afterKeepNumber || 0)
-      // );
-
-      // const replaced = [];
-
-      // let i = 1;
-      // while (i <= replaceTargetLength) {
-      //   replaced.push(replaceText);
-      //   i += 1;
-      // }
 
       result = beforeKeep + replaceText + afterKeep;
     }
@@ -673,96 +681,6 @@ export function inCollection(collection, value) {
   return result;
 }
 
-/**
- * 格式化时间
- *
- * @export
- * @param {*} v
- * @returns
- */
-export function isInvalid(v) {
-  return typeof v === "undefined";
-}
-
-export function toDatetime(v) {
-  if ((v || null) == null) {
-    return null;
-  }
-
-  if (isDate(v)) {
-    return v;
-  }
-
-  if (isString(v)) {
-    const i = v.indexOf("T");
-
-    if (i < 0) {
-      // eslint-disable-next-line no-useless-escape
-      const value = v.replace(/\-/g, "/");
-      const result = new Date(value);
-
-      return result;
-    }
-  }
-
-  return new Date(v);
-}
-
-/**
- * 判断是否是时间字符串
- *
- * @export
- * @param {*} v
- * @returns
- */
-export function isDatetime(v) {
-  const date = `${typeof v === "undefined" ? null : v}`;
-  const result = date.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
-
-  if (result == null) {
-    return false;
-  }
-
-  const d = new Date(result[1], result[3] - 1, result[4]);
-  return (
-    d.getFullYear() === parseInt(result[1], 10) &&
-    d.getMonth() + 1 === parseInt(result[3], 10) &&
-    d.getDate() === parseInt(result[4], 10)
-  );
-}
-
-/**
- * 判断是否是数字字符串
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function isNumber(v) {
-  const str = `${typeof v === "undefined" ? null : v}`;
-
-  if (str === "") {
-    return false;
-  }
-
-  const regular = /^[0-9]*$/;
-  const re = new RegExp(regular);
-  return re.test(str);
-}
-
-/**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function toNumber(v) {
-  const value = toNumberLodash(v);
-
-  return Number.isNaN(value) ? 0 : value;
-}
-
 export function split(source, separator, limit = 1000) {
   return splitLodash(source, separator, limit);
 }
@@ -787,40 +705,6 @@ export function roundToTarget(v, len) {
   const temp = 10 ** len;
 
   return Math.round(toMoney(v) * temp) / temp;
-}
-
-/**
- * 判断是否是数字字符串
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function isMoney(v) {
-  const str = `${typeof v === "undefined" ? null : v}`;
-
-  if (str === "") {
-    return false;
-  }
-
-  const regular = /^([1-9][\d]{0,15}|0)(\.[\d]{1,2})?$/;
-  const re = new RegExp(regular);
-  return re.test(str);
-}
-
-/**
- * 转换为数字
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function toMoney(v) {
-  if (isMoney(v)) {
-    return parseFloat(v, 10);
-  }
-
-  return 0;
 }
 
 /**
@@ -975,6 +859,31 @@ export function formatTarget({ target, format, option = {} }) {
 }
 
 /**
+ *计算时间间隔
+ * @param {startTime} 起始时间
+ * @param {endTime} 结束时间
+ */
+export function calculateTimeInterval(startTime, endTime) {
+  const timeBegin = startTime.getTime();
+  const timeEnd = endTime.getTime();
+  const total = (timeEnd - timeBegin) / 1000;
+
+  const day = parseInt(total / (24 * 60 * 60)); //计算整数天数
+  const afterDay = total - day * 24 * 60 * 60; //取得算出天数后剩余的秒数
+  const hour = parseInt(afterDay / (60 * 60)); //计算整数小时数
+  const afterHour = total - day * 24 * 60 * 60 - hour * 60 * 60; //取得算出小时数后剩余的秒数
+  const min = parseInt(afterHour / 60); //计算整数分
+  const afterMin = total - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60; //取得算出分后剩余的秒数
+
+  return {
+    day,
+    hour: hour,
+    minute: min,
+    second: afterMin,
+  };
+}
+
+/**
  * 通过 path 获取对应得值
  */
 export function getPathValue(o, path, defaultValue = null) {
@@ -1078,10 +987,6 @@ export function formatMoney({
           .slice(2)
       : "")
   );
-}
-
-export function toPercentage(val) {
-  return `${toMoney((toNumber(val) * 1000) / 10)}%`;
 }
 
 /**
@@ -1407,67 +1312,15 @@ export function buildFieldDescription(v, op, other) {
 }
 
 /**
- * 获取SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function getStringFromSessionStorage(key) {
-  const storage = window.sessionStorage;
-  const value = storage.getItem(key);
-
-  if (process.env.NODE_ENV === "development") {
-    return value;
-  }
-
-  const decode = decodeBase64(value);
-  const v = encodeBase64(decode);
-
-  if (value !== v) {
-    return null;
-  }
-
-  return decode;
-}
-
-/**
  * 获取LocalStorage数据
  * @export
  * @param {*} key
  * @param {*} value
  */
 export function getStringFromLocalStorage(key) {
-  const storage = window.localStorage;
-  const value = storage.getItem(key);
+  const result = Taro.getStorageSync(key);
 
-  if (process.env.NODE_ENV === "development") {
-    return value;
-  }
-
-  const decode = decodeBase64(value);
-  const v = encodeBase64(decode);
-
-  if (value !== v) {
-    return null;
-  }
-
-  return decode;
-}
-
-/**
- * 获取SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function getJsonFromSessionStorage(key) {
-  const jsonString = getStringFromSessionStorage(key);
-
-  if (jsonString) {
-    return JSON.parse(jsonString || "{}");
-  }
-
-  return null;
+  return result;
 }
 
 /**
@@ -1479,27 +1332,11 @@ export function getJsonFromSessionStorage(key) {
 export function getJsonFromLocalStorage(key) {
   const jsonString = getStringFromLocalStorage(key);
 
-  if (jsonString) {
+  if (!stringIsNullOrWhiteSpace(jsonString)) {
     return JSON.parse(jsonString || "{}");
   }
 
   return null;
-}
-
-/**
- * 存储SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function saveStringToSessionStorage(key, value) {
-  const storage = window.sessionStorage;
-
-  if (process.env.NODE_ENV === "development") {
-    storage.setItem(key, value);
-  } else {
-    storage.setItem(key, encodeBase64(value));
-  }
 }
 
 /**
@@ -1509,23 +1346,7 @@ export function saveStringToSessionStorage(key, value) {
  * @param {*} value
  */
 export function saveStringToLocalStorage(key, value) {
-  const storage = window.localStorage;
-
-  if (process.env.NODE_ENV === "development") {
-    storage.setItem(key, value);
-  } else {
-    storage.setItem(key, encodeBase64(value));
-  }
-}
-
-/**
- * 存储SessionStorage数据
- * @export
- * @param {*} key
- * @param {*} value
- */
-export function saveJsonToSessionStorage(key, json) {
-  saveStringToSessionStorage(key, JSON.stringify(json || {}));
+  Taro.setStorageSync(key, value);
 }
 
 /**
@@ -1535,17 +1356,7 @@ export function saveJsonToSessionStorage(key, json) {
  * @param {*} value
  */
 export function saveJsonToLocalStorage(key, json) {
-  saveStringToLocalStorage(key, JSON.stringify(json || {}));
-}
-
-/**
- * 移除SessionStorage数据
- * @export
- * @param {*} key
- */
-export function removeSessionStorage(key) {
-  const storage = window.sessionStorage;
-  storage.removeItem(key);
+  Taro.setStorageSync(key, JSON.stringify(json || {}));
 }
 
 /**
@@ -1554,18 +1365,7 @@ export function removeSessionStorage(key) {
  * @param {*} key
  */
 export function removeLocalStorage(key) {
-  const storage = window.localStorage;
-  storage.removeItem(key);
-}
-
-/**
- * 清空SessionStorage数据
- * @export
- * @param {*} key
- */
-export function clearSessionStorage() {
-  const storage = window.sessionStorage;
-  storage.clear();
+  Taro.removeStorageSync(key);
 }
 
 /**
@@ -1574,8 +1374,7 @@ export function clearSessionStorage() {
  * @param {*} key
  */
 export function clearLocalStorage() {
-  const storage = window.localStorage;
-  storage.clear();
+  Taro.clearStorage();
 }
 
 /**
@@ -1635,43 +1434,12 @@ export function getDerivedStateFromPropsForUrlParams(
   return { ...prevState, ...stateUrlParams };
 }
 
-/**
- * 获取本地数据
- * @export
- * @param {value} 对比源
- * @param {other} 对比对象
- * 执行深比较来确定两者的值是否相等。
- * 这个方法支持比较 arrays, array buffers, booleans, date objects, error objects, maps, numbers, Object objects, regexes, sets, strings, symbols, 以及 typed arrays. Object 对象值比较自身的属性，不包括继承的和可枚举的属性。 不支持函数和DOM节点比较。
- */
-export function isEqual(value, other) {
-  return isEqualLodash(value, other);
-}
-
-export function isEqualBySerialize(value, other) {
-  const d1 = JSON.stringify(value || {});
-  const d2 = JSON.stringify(other || {});
-
-  return d1 === d2;
-}
-
 export function cloneWithoutMethod(value) {
   if (value == null) {
     return null;
   }
 
   return JSON.parse(JSON.stringify(value));
-}
-
-export function isFunction(value) {
-  return isFunctionLodash(value);
-}
-
-export function isArray(value) {
-  return isArrayLodash(value);
-}
-
-export function isObject(o) {
-  return isObjectLodash(o);
 }
 
 export function difference(array, values) {
@@ -1688,7 +1456,7 @@ export function filter(collection, predicateFunction) {
 }
 
 /**
- * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数： (value)。
+ * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数:  (value)。
  * @param {collection}  (Array|Object), 用来迭代的集合。
  * @param {predicateFunction} 这个函数决定排序
  */
@@ -1734,44 +1502,8 @@ export function replace(source, pattern, replacement) {
   return replaceLodash(source, pattern, replacement);
 }
 
-export function toString(value) {
-  return toStringLodash(value);
-}
-
-export function isBoolean(value) {
-  return isBooleanLodash(value);
-}
-
 /**
- * check value is undefined
- */
-export function isUndefined(value) {
-  return isUndefinedLodash(value);
-}
-
-/**
- * check value is null
- */
-export function isNull(value) {
-  return isNullLodash(value);
-}
-
-/**
- * check value is date
- */
-export function isDate(value) {
-  return isDateLodash(value);
-}
-
-/**
- * check value is string
- */
-export function isString(value) {
-  return isStringLodash(value);
-}
-
-/**
- * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数： (value, index, array)。
+ * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数:  (value, index, array)。
  * @param {*} array
  * @param {*} predicate (Array|Function|Object|string): 每次迭代调用的函数
  */
@@ -1810,7 +1542,7 @@ export function fixedZero(val) {
  * @param {*} op
  * @param {*} other
  */
-export function buildFieldHelper(v, prefix = "注：") {
+export function buildFieldHelper(v, prefix = "注: ") {
   return `${prefix}${v}。`;
 }
 
@@ -1879,7 +1611,7 @@ export function trySendNearestLocalhostNotify({ text }) {
       if (needSend) {
         notify({
           type: notificationTypeCollection.info,
-          message: `当前接口域名：${text}。`,
+          message: `当前接口域名: ${text}。`,
         });
 
         setNearestLocalhostNotifyCache();
@@ -1893,10 +1625,11 @@ export function trySendNearestLocalhostNotify({ text }) {
 /**
  * 文本缩略
  */
-export function ellipsis(value, length) {
+export function ellipsis(value, length, symbol = "...") {
   if (value && value.length > length) {
-    return `${toString(value).substr(0, length)}...`;
+    return `${toString(value).substr(0, length)}${symbol}`;
   }
+
   return toString(value);
 }
 
@@ -1927,111 +1660,27 @@ export function notify({
   setTimeout(() => {
     switch (type) {
       case notificationTypeCollection.success:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500,
-          }).then((res) => {
-            if (isFunction(closeCallback)) {
-              setTimeout(() => {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.success(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.warning:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500,
-          }).then((res) => {
-            if (isFunction(closeCallback)) {
-              setTimeout(() => {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.error:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500,
-          }).then((res) => {
-            if (isFunction(closeCallback)) {
-              setTimeout(() => {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.info:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500,
-          }).then((res) => {
-            if (isFunction(closeCallback)) {
-              setTimeout(() => {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.warn:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500,
-          }).then((res) => {
-            if (isFunction(closeCallback)) {
-              setTimeout(() => {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.info(messageText, 1500, closeCallback);
         break;
 
       default:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || "",
-            icon: "none",
-            mask: true,
-            duration: 1500,
-          }).then((res) => {
-            if (isFunction(closeCallback)) {
-              setTimeout(() => {
-                closeCallback(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.info(messageText, 1500, closeCallback);
         break;
     }
   }, 600);
@@ -2084,25 +1733,6 @@ export function checkFromConfig({ label, name, helper }) {
     helper: helperText,
   };
 }
-
-const requestAnimFrameCustom = (() => {
-  if (isBrowser()) {
-    return (
-      window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.oRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      ((a) => {
-        window.setTimeout(a, 1e3 / 60);
-      })
-    );
-  }
-
-  return () => {};
-})();
-
-export const requestAnimFrame = requestAnimFrameCustom;
 
 /**
  * 依照某个键的值进行排序，请确保键的值为数字型
@@ -2236,6 +1866,116 @@ export function queryStringify(data) {
 
 export function queryStringParse(data) {
   return parse(data);
+}
+
+/**
+ * 同步线程挂起若干时间(毫秒)
+ * @param  n
+ */
+export function sleep(n, callback) {
+  let start = new Date().getTime();
+
+  while (true) {
+    if (new Date().getTime() - start > n) {
+      break;
+    }
+  }
+
+  if (isFunction(callback)) {
+    callback();
+  }
+}
+
+export function getSystemInfo() {
+  if (Taro.globalSystemInfo && !Taro.globalSystemInfo.ios) {
+    return Taro.globalSystemInfo;
+  } else {
+    // h5环境下忽略navbar
+    if (!isFunction(Taro.getSystemInfoSync)) {
+      return null;
+    }
+    let systemInfo = Taro.getSystemInfoSync() || {
+      model: "",
+      system: "",
+    };
+    let ios = !!(systemInfo.system.toLowerCase().search("ios") + 1);
+    let rect;
+    try {
+      rect = Taro.getMenuButtonBoundingClientRect
+        ? Taro.getMenuButtonBoundingClientRect()
+        : null;
+      if (rect === null) {
+        throw "getMenuButtonBoundingClientRect error";
+      }
+      //取值为0的情况  有可能width不为0 top为0的情况
+      if (!rect.width || !rect.top || !rect.left || !rect.height) {
+        throw "getMenuButtonBoundingClientRect error";
+      }
+    } catch (error) {
+      let gap = ""; //胶囊按钮上下间距 使导航内容居中
+      let width = 96; //胶囊的宽度
+      if (systemInfo.platform === "android") {
+        gap = 8;
+        width = 96;
+      } else if (systemInfo.platform === "devtools") {
+        if (ios) {
+          gap = 5.5; //开发工具中ios手机
+        } else {
+          gap = 7.5; //开发工具中android和其他手机
+        }
+      } else {
+        gap = 4;
+        width = 88;
+      }
+      if (!systemInfo.statusBarHeight) {
+        //开启wifi的情况下修复statusBarHeight值获取不到
+        systemInfo.statusBarHeight =
+          systemInfo.screenHeight - systemInfo.windowHeight - 20;
+      }
+      rect = {
+        //获取不到胶囊信息就自定义重置一个
+        bottom: systemInfo.statusBarHeight + gap + 32,
+        height: 32,
+        left: systemInfo.windowWidth - width - 10,
+        right: systemInfo.windowWidth - 10,
+        top: systemInfo.statusBarHeight + gap,
+        width: width,
+      };
+      console.log("error", error);
+      console.log("rect", rect);
+    }
+
+    let navBarHeight = "";
+    if (!systemInfo.statusBarHeight) {
+      //开启wifi和打电话下
+      systemInfo.statusBarHeight =
+        systemInfo.screenHeight - systemInfo.windowHeight - 20;
+      navBarHeight = (function () {
+        let gap = rect.top - systemInfo.statusBarHeight;
+        return 2 * gap + rect.height;
+      })();
+
+      systemInfo.statusBarHeight = 0;
+      systemInfo.navBarExtendHeight = 0; //下方扩展4像素高度 防止下方边距太小
+    } else {
+      navBarHeight = (function () {
+        let gap = rect.top - systemInfo.statusBarHeight;
+        return systemInfo.statusBarHeight + 2 * gap + rect.height;
+      })();
+      if (ios) {
+        systemInfo.navBarExtendHeight = 4; //下方扩展4像素高度 防止下方边距太小
+      } else {
+        systemInfo.navBarExtendHeight = 0;
+      }
+    }
+
+    systemInfo.navBarHeight = navBarHeight; //导航栏高度不包括statusBarHeight
+    systemInfo.capsulePosition = rect; //右上角胶囊按钮信息bottom: 58 height: 32 left: 317 right: 404 top: 26 width: 87 目前发现在大多机型都是固定值 为防止不一样所以会使用动态值来计算nav元素大小
+    systemInfo.ios = ios; //是否ios
+    Taro.globalSystemInfo = systemInfo; //将信息保存到全局变量中,后边再用就不用重新异步获取了
+    //console.log('systemInfo', systemInfo);
+    return systemInfo;
+  }
 }
 
 /**
