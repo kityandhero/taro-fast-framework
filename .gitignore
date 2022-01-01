@@ -54,3 +54,4 @@ screenshot
 **/build
 /yarn.lock
 /package-lock.json
+/packages/taro-fast-framework/es

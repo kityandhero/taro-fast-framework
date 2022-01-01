@@ -2,7 +2,7 @@ import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
-import babelPlugin from "@rollup/plugin-babel";
+import babel from "@rollup/plugin-babel";
 
 // 供 Loader 使用的运行时入口
 export default {
@@ -53,8 +53,7 @@ export default {
     postcss({
       inject: { insertAt: "top" },
     }),
-    babelPlugin({
-      // plugins: ["@babel/plugin-syntax-jsx"],
+    babel({
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", "ts", "tsx"],
       babelHelpers: "runtime",
     }),
