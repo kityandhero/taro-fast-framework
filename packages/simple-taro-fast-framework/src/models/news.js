@@ -2,12 +2,13 @@ import {
   handleCommonDataAssist,
   handleListDataAssist,
   handlePageListDataAssist,
-} from "taro-fast-framework/es/utils/requestAssistor";
+} from 'taro-fast-framework/es/utils/requestAssistor';
 
-import { getOverviewData } from "../services/news";
+import { getOverviewData } from '../services/news';
 
 export default {
-  namespace: "news",
+  namespace: 'news',
+
   state: {},
 
   effects: {
@@ -15,7 +16,7 @@ export default {
       const response = yield call(getOverviewData, payload);
 
       yield put({
-        type: "handleCommonData",
+        type: 'handleCommonData',
         payload: response,
       });
     },

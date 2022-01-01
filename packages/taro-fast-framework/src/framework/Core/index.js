@@ -1,10 +1,10 @@
 import {
   getDerivedStateFromPropsForUrlParamsCore,
   showRuntimeError,
-} from "../../utils/tools";
-import { underlyingExtensionState } from "../../utils/constants";
+} from '../../utils/tools';
+import { underlyingExtensionState } from '../../utils/constants';
 
-import Base from "../Base";
+import Base from '../Base';
 
 class Core extends Base {
   loadRemoteRequestAfterMount = true;
@@ -22,14 +22,14 @@ class Core extends Base {
     return getDerivedStateFromPropsForUrlParamsCore(nextProps, prevState);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   checkNeedUpdate = (preProps, preState, snapshot) => false;
 
   getGlobal = () => {
     const { global } = this.props;
 
     if ((global || null) == null) {
-      const text = "global is null, function getGlobal need override. ";
+      const text = 'global is null, function getGlobal need override. ';
 
       showRuntimeError({
         message: text,

@@ -2,20 +2,22 @@ import {
   stringIsNullOrWhiteSpace,
   recordObject,
   showRuntimeError,
-} from "../../utils/tools";
-import { pretreatmentRequestParams } from "../../utils/requestAssistor";
-import { isUndefined, isFunction } from "../../utils/typeCheck";
-import { toString, toNumber } from "../../utils/typeConvert";
+  recordText,
+  showErrorMessage,
+} from '../../utils/tools';
+import { pretreatmentRequestParams } from '../../utils/requestAssistor';
+import { isUndefined, isFunction, isEqual } from '../../utils/typeCheck';
+import { toString, toNumber } from '../../utils/typeConvert';
 
-import Infrastructure from "../Infrastructure";
+import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
-  lastRequestingData = { type: "", payload: {} };
+  lastRequestingData = { type: '', payload: {} };
 
   // 该方法必须重载覆盖
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   getApiData = (props) => {
-    const text = "getApiData 方法需要重载实现";
+    const text = 'getApiData 方法需要重载实现';
 
     showRuntimeError({
       message: text,
@@ -32,22 +34,22 @@ class Base extends Infrastructure {
     this.initLoad({});
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   beforeFirstLoadRequest = (submitData) => {};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   beforeReLoadRequest = (submitData) => {};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   beforeRequest = (submitData) => {};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   afterGetFirstRequestResult = (submitData, responseData) => {};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   afterGetRequestResult = (submitData, responseData) => {};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   afterGetReLoadRequestResult = (submitData, responseData) => {};
 
   getRequestingData() {
@@ -57,8 +59,8 @@ class Base extends Infrastructure {
   setRequestingData(params, callback) {
     const d =
       params == null
-        ? { type: "", payload: {} }
-        : { ...{ type: "", payload: {} }, ...params };
+        ? { type: '', payload: {} }
+        : { ...{ type: '', payload: {} }, ...params };
 
     this.lastRequestingData = d;
 
@@ -68,20 +70,20 @@ class Base extends Infrastructure {
   }
 
   clearRequestingData() {
-    this.setRequestingData({ type: "", payload: {} });
+    this.setRequestingData({ type: '', payload: {} });
   }
 
   initLoadRequestParams = (o) => o || {};
 
   supplementLoadRequestParams = (o) => o || {};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   checkLoadRequestParams = (o) => {
     return true;
   };
 
   adjustLoadApiPath = () => {
-    return "";
+    return '';
   };
 
   initLoad = ({ otherState = {}, delay = 0, callback = null }) => {
@@ -92,8 +94,8 @@ class Base extends Infrastructure {
     } = this.state;
 
     try {
-      if ((loadApiPath || "") === "") {
-        const text = "loadApiPath需要配置";
+      if ((loadApiPath || '') === '') {
+        const text = 'loadApiPath需要配置';
 
         showRuntimeError({
           message: text,
@@ -163,7 +165,7 @@ class Base extends Infrastructure {
                 dispatchComplete: true,
               });
             }
-          }
+          },
         );
       });
     } catch (error) {
@@ -194,9 +196,10 @@ class Base extends Infrastructure {
   };
 
   loadFromApi = ({ requestData, callback }) => {
-    let loadApiPath = "";
+    let loadApiPath = '';
 
     try {
+      console.log(this);
       const { dispatch } = this.props;
 
       const requestingDataPre = this.getRequestingData();
@@ -214,7 +217,7 @@ class Base extends Infrastructure {
         ...loadApiPathCustom,
       };
 
-      loadApiPath = loadApiPathValue || "";
+      loadApiPath = loadApiPathValue || '';
 
       // 处理频繁的相同请求
       if (
@@ -320,7 +323,7 @@ class Base extends Infrastructure {
 
             this.afterGetRequestResult(requestData, metaOriginalData);
 
-            if (typeof callback === "function") {
+            if (typeof callback === 'function') {
               callback();
             }
 
@@ -360,13 +363,13 @@ class Base extends Infrastructure {
   afterFirstLoadSuccess = () => {};
 
   afterLoadSuccess = ({
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     metaData = null,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     metaListData = [],
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     metaExtra = null,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     metaOriginalData = null,
   }) => {};
 

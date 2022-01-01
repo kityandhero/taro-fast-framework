@@ -1,18 +1,16 @@
-import Taro from "@tarojs/taro";
+import Taro from '@tarojs/taro';
+import Tips from './tips';
 
 import {
   isFunction,
   notifySuccess,
   showErrorMessage,
   showRuntimeError,
-  getGuid,
   recordObject,
   getPathValue,
   isUndefined,
   recordError,
 } from './tools';
-
-
 
 /**
  * getApiDataCore
@@ -149,16 +147,8 @@ export async function actionCore({
     throw new Error('actionCore: target.setState must be function');
   }
 
-  let key = '';
-
   if (showProcessing) {
-    key = getGuid();
-
-    message.loading({
-      key,
-      content: textProcessing || '处理中，请稍后',
-      duration: 0,
-    });
+    Tips.loading(textProcessing || '处理中，请稍后');
   }
 
   target.setState({ processing: true }, () => {
@@ -176,7 +166,7 @@ export async function actionCore({
             .then(() => {
               if (showProcessing) {
                 setTimeout(() => {
-                  message.destroy(key);
+                  Tips.loaded();
                 }, 200);
               }
 
@@ -222,7 +212,7 @@ export async function actionCore({
 
               if (showProcessing) {
                 setTimeout(() => {
-                  message.destroy(key);
+                  Tips.loaded();
                 }, 200);
               }
 
@@ -242,11 +232,6 @@ export async function actionCore({
  * @param {*} param0
  */
 export async function confirmActionCore({
-  title,
-  content,
-  okText = '确定',
-  okType = 'danger',
-  cancelText = '取消',
   target,
   handleData,
   successCallback,
@@ -259,26 +244,9 @@ export async function confirmActionCore({
     throw new Error('actionCore: okAction must be function');
   }
 
-  const { processing } = target.state;
-
-Taro.showActionSheet({
-  itemList: ['确定'],
-  success:  ({tapIndex, errMsg}) =>{
-    console.log(tapIndex)
-  },
-  fail: function ({errMsg}) {
-    console.log(errMsg)
-  }
-})
-
-  confirm({
-    title: title || '',
-    content: content || '',
-    okText: okText || '确定',
-    okType: okType || 'danger',
-    cancelText: cancelText || '取消',
-    confirmLoading: { processing },
-    onOk() {
+  Taro.showActionSheet({
+    itemList: ['确定'],
+    success: () => {
       okAction({
         target,
         handleData,
@@ -288,7 +256,9 @@ Taro.showActionSheet({
         showProcessing,
       });
     },
-    onCancel() {},
+    fail: function ({ errMsg }) {
+      console.log(errMsg);
+    },
   });
 }
 

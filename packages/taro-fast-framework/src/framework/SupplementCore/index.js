@@ -1,6 +1,4 @@
-import { getDerivedStateFromPropsForUrlParamsCore } from "../../utils/tools";
-
-import Common from "../Common";
+import Common from '../Common';
 
 class SupplementCore extends Common {}
 

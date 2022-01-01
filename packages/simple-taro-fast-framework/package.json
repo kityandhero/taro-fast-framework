@@ -37,11 +37,16 @@
   "dependencies": {
     "@tarojs/components": "3.3.19",
     "@tarojs/react": "3.3.19",
-    "@tarojs/redux": "^2.2.10",
     "@tarojs/runtime": "3.3.19",
     "@tarojs/taro": "3.3.19",
+    "dva-core": "^2.0.4",
+    "dva-loading": "^3.0.22",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1",
     "taro-fast-framework": "^1.0.0"
   },
   "devDependencies": {

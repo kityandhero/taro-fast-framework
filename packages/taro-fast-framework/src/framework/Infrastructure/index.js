@@ -1,7 +1,9 @@
-import Taro from "@tarojs/taro";
-import { Component } from "react";
+import Taro from '@tarojs/taro';
+import { Component } from 'react';
 
-import { underlyingState } from "../../utils/constants";
+import { showErrorMessage } from '../../utils/tools';
+import { isObject } from '../../utils/typeCheck';
+import { underlyingState } from '../../utils/constants';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -37,9 +39,9 @@ function shallowEqual(a, b) {
   // object.is比较发现不等，但并不代表真的不等，object对象还需要比较
   // 这里判断是否是object，如果不是，那直接返回false
   if (
-    typeof a !== "object" ||
+    typeof a !== 'object' ||
     a === null ||
-    typeof b !== "object" ||
+    typeof b !== 'object' ||
     b === null
   ) {
     return false;
@@ -67,23 +69,17 @@ function shallowEqual(a, b) {
 }
 
 class Infrastructure extends Component {
-  firstShowHasTriggered = false;
-
-  loadRemoteRequestAfterMount = false;
-
-  /**
-   *显示render次数开关，用于开发时候调试页面渲染性能
-   */
-  showRenderCountInConsole = false;
-
-  renderCount = 0;
-
   constructor(props) {
     super(props);
 
     this.state = {
       ...underlyingState,
     };
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return null;
   }
 
   /**
@@ -117,20 +113,6 @@ class Infrastructure extends Component {
     this.doOtherWorkAfterDidMount();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return null;
-  }
-
-  // eslint-disable-next-line react/sort-comp
-  getSnapshotBeforeUpdate(preProps, preState) {
-    return this.doWorkWhenGetSnapshotBeforeUpdate(preProps, preState);
-  }
-
-  componentDidUpdate(preProps, preState, snapshot) {
-    this.doWorkWhenDidUpdate(preProps, preState, snapshot);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     const { dispatchComplete } = {
       ...{ dispatchComplete: true },
@@ -143,7 +125,7 @@ class Infrastructure extends Component {
 
     const checkComponentUpdate = this.doOtherCheckComponentUpdate(
       nextProps,
-      nextState
+      nextState,
     );
 
     if ((checkComponentUpdate || null) != null) {
@@ -157,6 +139,23 @@ class Infrastructure extends Component {
       !shallowEqual(nextPropsIgnoreModel, currentPropsIgnoreModel) ||
       !shallowEqual(nextState, this.state)
     );
+  }
+
+  // eslint-disable-next-line react/sort-comp
+  getSnapshotBeforeUpdate(preProps, preState) {
+    return this.doWorkWhenGetSnapshotBeforeUpdate(preProps, preState);
+  }
+
+  componentDidUpdate(preProps, preState, snapshot) {
+    this.doWorkWhenDidUpdate(preProps, preState, snapshot);
+  }
+
+  componentWillUnmount() {
+    this.doWorkBeforeUnmount();
+
+    this.setState = () => {};
+
+    this.doWorkAfterUnmount();
   }
 
   componentDidShow() {
@@ -177,13 +176,16 @@ class Infrastructure extends Component {
     this.doWorkWhenComponentHide();
   }
 
-  componentWillUnmount() {
-    this.doWorkBeforeUnmount();
+  firstShowHasTriggered = false;
 
-    this.setState = () => {};
+  loadRemoteRequestAfterMount = false;
 
-    this.doWorkAfterUnmount();
-  }
+  /**
+   *显示render次数开关，用于开发时候调试页面渲染性能
+   */
+  showRenderCountInConsole = false;
+
+  renderCount = 0;
 
   doWorkBeforeAdjustWillMount = () => {};
 
@@ -357,7 +359,7 @@ class Infrastructure extends Component {
       paging ||
       processing
     ) {
-      const text = "数据正在处理中，请稍等一下再点哦";
+      const text = '数据正在处理中，请稍等一下再点哦';
 
       showErrorMessage({
         message: text,

@@ -1,11 +1,11 @@
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
-import postcss from 'rollup-plugin-postcss'
-import { terser } from 'rollup-plugin-terser'
-import babelConfig from '@rollup/plugin-babel'
-import autoprefixer from 'autoprefixer'
-import cssnano from 'cssnano'
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+import typescript from 'rollup-plugin-typescript2';
+import postcss from 'rollup-plugin-postcss';
+import { terser } from 'rollup-plugin-terser';
+import babelConfig from '@rollup/plugin-babel';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 const inputFile = {
   ...{
@@ -26,6 +26,8 @@ const inputFile = {
     'utils/requestAssistor': 'src/utils/requestAssistor.js',
     'utils/globalModel': 'src/utils/globalModel.js',
     'utils/defaultSettingsSpecial': 'src/utils/defaultSettingsSpecial.js',
+    'utils/dva': 'src/utils/dva.js',
+    'utils/dvaAssist': 'src/utils/dvaAssist.js',
   },
   ...{
     'customComponents/AppComponent/index':
@@ -48,7 +50,7 @@ const inputFile = {
     'framework/AuthorizationWrapper/index':
       'src/framework/AuthorizationWrapper/index.js',
   },
-}
+};
 
 // 供 Loader 使用的运行时入口
 export default {
@@ -58,7 +60,7 @@ export default {
       /^@tarojs\/taro$/.test(d) ||
       /^@tarojs\/taro-h5$/.test(d) ||
       d.includes('@babel/runtime')
-    )
+    );
   },
   input: inputFile,
   plugins: [
@@ -85,7 +87,7 @@ export default {
       extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', 'ts', 'tsx'],
       babelHelpers: 'runtime',
     }),
-    terser(),
+    // terser(),
   ],
   external: [
     'react',
@@ -97,6 +99,12 @@ export default {
     'lodash',
     'qs',
     'node-cache',
+    'react-redux',
+    'redux',
+    'redux-logger',
+    'redux-thunk',
+    'dva-loading',
+    'dva-core',
   ],
   output: {
     entryFileNames: '[name].js',
@@ -105,4 +113,4 @@ export default {
     format: 'es',
     sourcemap: false,
   },
-}
+};

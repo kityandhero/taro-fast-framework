@@ -1,8 +1,18 @@
-import AppComponent from "taro-fast-framework/es/customComponents/AppComponent";
+// import { Provider } from 'react-redux';
 
-import { getTaroGlobalData } from "taro-fast-framework/es/utils/tools";
+// import dva from 'taro-fast-framework/es/utils/dva';
+import AppComponent from 'taro-fast-framework/es/customComponents/AppComponent';
 
-import "./app.less";
+import models from './models';
+
+import './app.less';
+
+// const dvaApp = dva.createApp({
+//   initialState: {},
+//   models: models,
+// });
+
+// const store = dvaApp.getStore();
 
 class App extends AppComponent {
   componentDidMount() {}
@@ -13,16 +23,13 @@ class App extends AppComponent {
 
   componentDidCatchError() {}
 
-  // this.props.children 是将要会渲染的页面
-  render() {
-    const a = getTaroGlobalData();
+  modelsCollection = models;
 
-    if (a) {
-      a.pp = 2;
-    }
-
-    return this.props.children;
-  }
+  // // 在 App 类中的 render() 函数没有实际作用
+  // // 请勿修改此函数
+  // render() {
+  //   return <Provider store={store}>{this.props.children}</Provider>;
+  // }
 }
 
 export default App;

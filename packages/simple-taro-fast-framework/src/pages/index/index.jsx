@@ -1,40 +1,42 @@
-import { connect } from '@tarojs/redux'
-import { View, Text } from '@tarojs/components'
+import { connect } from 'react-redux';
+import { View, Text } from '@tarojs/components';
 
 import {
   getTaroGlobalData,
   formatMoney,
-} from 'taro-fast-framework/es/utils/tools'
-import VerticalBox from 'taro-fast-framework/es/customComponents/VerticalBox'
-import Loading from 'taro-fast-framework/es/customComponents/Loading'
-import AuthorizationWrapper from 'taro-fast-framework/es/framework/AuthorizationWrapper'
+} from 'taro-fast-framework/es/utils/tools';
+import VerticalBox from 'taro-fast-framework/es/customComponents/VerticalBox';
+import Loading from 'taro-fast-framework/es/customComponents/Loading';
+import AuthorizationWrapper from 'taro-fast-framework/es/framework/AuthorizationWrapper';
 
-import 'taro-fast-framework/es/index.css'
+import 'taro-fast-framework/es/index.css';
 
 @connect(({ news, global }) => ({
   news,
   global,
 }))
 export default class Index extends AuthorizationWrapper {
-  showRenderCountInConsole = true
+  showRenderCountInConsole = true;
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       ...this.state,
       ...{
         loadApiPath: 'news/getOverview',
       },
-    }
+    };
   }
 
   renderFurther() {
-    const a = getTaroGlobalData()
+    const a = getTaroGlobalData();
 
     if (a) {
-      console.log(a)
+      console.log(a);
     }
+
+    console.log(this.props);
 
     return (
       <View className="index">
@@ -45,6 +47,6 @@ export default class Index extends AuthorizationWrapper {
           <Text>{formatMoney({ number: 1.54 })}</Text>
         </VerticalBox>
       </View>
-    )
+    );
   }
 }
