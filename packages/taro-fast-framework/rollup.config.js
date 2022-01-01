@@ -2,7 +2,10 @@ import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
+import { terser } from "rollup-plugin-terser";
 import babel from "@rollup/plugin-babel";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
 
 // 供 Loader 使用的运行时入口
 export default {
@@ -20,6 +23,7 @@ export default {
       "src/customComponents/AppComponent/index.jsx",
     "customComponents/VerticalBox/index":
       "src/customComponents/VerticalBox/index.jsx",
+    "customComponents/Loading/index": "src/customComponents/Loading/index.jsx",
     "utils/constants": "src/utils/constants.js",
     "utils/mediaDefault": "src/utils/mediaDefault.js",
     "utils/typeCheck": "src/utils/typeCheck.js",
@@ -51,12 +55,15 @@ export default {
       tsconfig: "tsconfig.json",
     }),
     postcss({
+      plugins: [autoprefixer(), cssnano()],
       inject: { insertAt: "top" },
+      extract: false,
     }),
     babel({
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", "ts", "tsx"],
       babelHelpers: "runtime",
     }),
+    // terser(),
   ],
   external: [
     "react",

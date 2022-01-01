@@ -637,25 +637,37 @@ function logShowInConsole() {
  * @param {*} v
  * @returns
  */
-export function getGuid() {
-  function S4() {
-    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+export function getGuid(len = 8, radix = 16) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(
+    ""
+  );
+  const value = [];
+  let i = 0;
+  radix = radix || chars.length;
+
+  if (len) {
+    // Compact form
+    for (i = 0; i < len; i++) value[i] = chars[0 | (Math.random() * radix)];
+  } else {
+    // rfc4122, version 4 form
+    let r;
+
+    // rfc4122 requires these characters
+    /* eslint-disable-next-line */
+    value[8] = value[13] = value[18] = value[23] = "-";
+    value[14] = "4";
+
+    // Fill in random data.  At i==19 set the high bits of clock sequence as
+    // per rfc4122, sec. 4.1.5
+    for (i = 0; i < 36; i++) {
+      if (!value[i]) {
+        r = 0 | (Math.random() * 16);
+        value[i] = chars[i === 19 ? (r & 0x3) | 0x8 : r];
+      }
+    }
   }
 
-  return (
-    S4() +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    S4() +
-    S4()
-  );
+  return value.join("");
 }
 
 /**
@@ -1976,6 +1988,17 @@ export function getSystemInfo() {
     //console.log('systemInfo', systemInfo);
     return systemInfo;
   }
+}
+
+export function pxTransform(size) {
+  if (!size) return "";
+  const designWidth = 750;
+  const deviceRatio = {
+    640: 2.34 / 2,
+    750: 1,
+    828: 1.81 / 2,
+  };
+  return `${size / deviceRatio[designWidth]}rpx`;
 }
 
 /**

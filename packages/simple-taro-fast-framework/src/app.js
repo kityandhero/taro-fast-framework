@@ -1,7 +1,6 @@
-import Taro from "@tarojs/taro";
+import AppComponent from "taro-fast-framework/es/customComponents/AppComponent";
 
 import { getTaroGlobalData } from "taro-fast-framework/es/utils/tools";
-import AppComponent from "taro-fast-framework/es/customComponents/AppComponent";
 
 import "./app.less";
 

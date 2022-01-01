@@ -39,7 +39,7 @@ functions/mock
 
 # umi
 .umi
-.umi-production 
+.umi-production
 
 # screenshot
 screenshot
@@ -55,4 +55,3 @@ screenshot
 /yarn.lock
 /package-lock.json
 /packages/taro-fast-framework/es
-/packages/taro-test/es

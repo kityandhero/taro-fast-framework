@@ -6,6 +6,7 @@ import {
   getTaroGlobalData,
 } from "taro-fast-framework/es/utils/tools";
 import VerticalBox from "taro-fast-framework/es/customComponents/VerticalBox";
+import Loading from "taro-fast-framework/es/customComponents/Loading";
 
 import "./index.less";
 
@@ -32,6 +33,7 @@ export default class Index extends Component {
         <Text>Hello world!</Text>
 
         <VerticalBox style={{ height: "100rpx" }} alignJustify="center">
+          <Loading />
           <Text>{formatMoney({ number: 1.54 })}</Text>
         </VerticalBox>
       </View>

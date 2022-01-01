@@ -1,8 +1,6 @@
 import { PureComponent } from "react";
 import { View } from "@tarojs/components";
 
-import "./index.less";
-
 class VerticalBox extends PureComponent {
   render() {
     const { style, align, alignJustify } = this.props;
@@ -62,14 +60,15 @@ class VerticalBox extends PureComponent {
         height: "100%",
       },
       ...(style || {}),
-      ...{ alignItems: alignStyle, justifyContent: alignJustifyStyle },
+      ...{
+        alignItems: alignStyle,
+        justifyContent: alignJustifyStyle,
+      },
     };
 
     return (
-      <View className="centerBox">
-        <View className="flexBox" style={flexStyle}>
-          {this.props.children}
-        </View>
+      <View>
+        <View style={flexStyle}>{this.props.children}</View>
       </View>
     );
   }
