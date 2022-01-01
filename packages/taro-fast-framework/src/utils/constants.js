@@ -1,8 +1,10 @@
 import { emptyLogo as emptyLogoSource } from './mediaDefault';
 
 export const underlyingState = {
-  dataLoading: false,
+  loadApiPath: '',
+  firstLoadSuccess: false,
   loadSuccess: false,
+  dataLoading: false,
   reloading: false,
   searching: false,
   refreshing: false,
@@ -11,6 +13,12 @@ export const underlyingState = {
   dispatchComplete: true,
   pageNo: 1,
   pageSize: 10,
+  metaData: null,
+  metaExtra: null,
+  metaListData: [],
+  metaOriginalData: null,
+  urlParams: null,
+  externalData: null,
 };
 
 export const underlyingExtensionState = {

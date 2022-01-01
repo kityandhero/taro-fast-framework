@@ -35,6 +35,10 @@ export default class Index extends AuthorizationWrapper {
   };
 
   renderFurther() {
+    const { metaData } = this.state;
+
+    console.log(metaData);
+
     return (
       <View className="index">
         <Text>Hello world!</Text>
