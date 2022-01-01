@@ -1,5 +1,7 @@
-import { request } from "taro-fast-framework/es/utils/requestAssistor";
-import { defaultSettingsLayoutCustom } from "taro-fast-framework/es/utils/defaultSettingsSpecial";
+import { request } from 'taro-fast-framework/es/utils/requestAssistor';
+import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
+
+import { appId } from '../customConfig/config';
 
 /**
  * begin request（remote request / local virtual requests）
@@ -20,22 +22,29 @@ export async function executiveRequest({
   urlParams = null,
   params = {},
   header = {},
-  method = "POST",
+  method = 'POST',
   useVirtualRequest = defaultSettingsLayoutCustom.getUseVirtualRequest(),
   showUseVirtualRequestMessage = defaultSettingsLayoutCustom.getShowUseVirtualRequestMessage(),
   virtualSuccessResponse = {},
   virtualFailResponse = {
     code: 1001,
-    message: "虚拟未知错误",
+    message: '虚拟未知错误',
   },
   virtualRequestResult = true,
   virtualNeedAuthorize = true,
 }) {
+  const headerChange = {
+    ...(header || {}),
+    ...{
+      appId,
+    },
+  };
+
   return request({
     api,
     urlParams,
     params,
-    header,
+    header: headerChange,
     method,
     useVirtualRequest,
     showUseVirtualRequestMessage,

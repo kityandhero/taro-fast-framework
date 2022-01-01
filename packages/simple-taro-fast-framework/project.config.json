@@ -4,9 +4,9 @@
     "description": "基于Taro的快速开发框架基于Taro的快速开发框架",
     "appid": "wxb2635919ce69046f",
     "setting": {
-        "urlCheck": true,
-        "es6": false,
-        "enhance": false,
+        "urlCheck": false,
+        "es6": true,
+        "enhance": true,
         "postcss": false,
         "preloadBackgroundData": false,
         "minified": false,

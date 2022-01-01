@@ -4,6 +4,7 @@ import { View, Text } from '@tarojs/components';
 import {
   getTaroGlobalData,
   formatMoney,
+  corsTarget,
 } from 'taro-fast-framework/es/utils/tools';
 import VerticalBox from 'taro-fast-framework/es/customComponents/VerticalBox';
 import Loading from 'taro-fast-framework/es/customComponents/Loading';
@@ -29,15 +30,15 @@ export default class Index extends AuthorizationWrapper {
     };
   }
 
+  getApiData = (props) => {
+    const {
+      news: { data },
+    } = props;
+
+    return data;
+  };
+
   renderFurther() {
-    const a = getTaroGlobalData();
-
-    if (a) {
-      console.log(a);
-    }
-
-    console.log(this.props);
-
     return (
       <View className="index">
         <Text>Hello world!</Text>

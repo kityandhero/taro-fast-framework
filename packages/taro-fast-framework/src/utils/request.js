@@ -1,4 +1,4 @@
-import Taro from "@tarojs/taro";
+import Taro from '@tarojs/taro';
 
 import {
   corsTarget,
@@ -6,18 +6,18 @@ import {
   stringIsNullOrWhiteSpace,
   recordObject,
   recordError,
-} from "./tools";
-import { isString } from "./typeCheck";
+} from './tools';
+import { isString } from './typeCheck';
 import {
   getTokenKeyName,
   getToken,
   getOpenId,
   getSessionId,
   getLocationMode,
-} from "./globalStorageAssist";
-import { requestMethod } from "./constants";
-import { defaultSettingsLayoutCustom } from "./defaultSettingsSpecial";
-import Tips from "./tips";
+} from './globalStorageAssist';
+import { requestMethod } from './constants';
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
+import Tips from './tips';
 
 export class Request {
   /**
@@ -41,10 +41,10 @@ export class Request {
         const loginPath = defaultSettingsLayoutCustom.getLoginPath();
 
         if (stringIsNullOrWhiteSpace(loginPath)) {
-          throw new Error("缺少登录页面路径配置");
+          throw new Error('缺少登录页面路径配置');
         }
 
-        Tips.toast("跳转登录页面");
+        Tips.toast('跳转登录页面');
       }
 
       return response.data;
@@ -59,7 +59,7 @@ export class Request {
    */
   static Post(url, data, header = {}) {
     try {
-      const token = getToken() || "anonymous";
+      const token = getToken() || 'anonymous';
       const openId = getOpenId();
       const sessionId = getSessionId();
       const locationMode = getLocationMode();
@@ -80,13 +80,13 @@ export class Request {
       if (!isString(corsUrl)) {
         recordObject(corsUrl);
 
-        throw new Error("corsUrl is not string");
+        throw new Error('corsUrl is not string');
       }
 
       if (!isString(url)) {
         recordObject({ url });
 
-        throw new Error("url is not string");
+        throw new Error('url is not string');
       }
 
       let urlChange = url;
@@ -104,7 +104,7 @@ export class Request {
       if (!isString(urlChange)) {
         recordObject({ urlChange });
 
-        throw new Error("urlChange is not string");
+        throw new Error('urlChange is not string');
       }
 
       const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
@@ -120,7 +120,7 @@ export class Request {
       }
 
       return Request.request({
-        url: url,
+        url: urlChange,
         data: data || {},
         header: headerChange,
         method: requestMethod.post,

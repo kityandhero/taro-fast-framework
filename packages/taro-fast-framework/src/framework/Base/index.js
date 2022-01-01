@@ -199,7 +199,6 @@ class Base extends Infrastructure {
     let loadApiPath = '';
 
     try {
-      console.log(this);
       const { dispatch } = this.props;
 
       const requestingDataPre = this.getRequestingData();

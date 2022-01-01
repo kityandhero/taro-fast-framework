@@ -5,10 +5,21 @@ import { getStore } from '../../utils/dvaAssist';
 
 class AppComponent extends Component {
   componentWillMount() {
-    this.store = getStore(this.modelsCollection);
+    this.initDva();
+
+    this.taroGlobalData.appInitCustomLocal = this.establishConfig();
   }
 
+  initDva = () => {
+    this.store = getStore(this.modelsCollection);
+  };
+
+  establishConfig = () => {
+    return null;
+  };
+
   modelsCollection = null;
+
   store = null;
 
   taroGlobalData = {

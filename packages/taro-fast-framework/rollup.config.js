@@ -87,7 +87,7 @@ export default {
       extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', 'ts', 'tsx'],
       babelHelpers: 'runtime',
     }),
-    // terser(),
+    terser(),
   ],
   external: [
     'react',

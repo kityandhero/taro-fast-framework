@@ -1,5 +1,5 @@
-import Base from '../Base';
+import Core from '../Core';
 
-class Common extends Base {}
+class Common extends Core {}
 
 export default Common;

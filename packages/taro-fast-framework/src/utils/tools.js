@@ -1,5 +1,5 @@
-import Taro from "@tarojs/taro";
-import { stringify, parse } from "qs";
+import Taro from '@tarojs/taro';
+import { stringify, parse } from 'qs';
 import {
   filter as filterLodash,
   sortBy as sortByLodash,
@@ -15,7 +15,7 @@ import {
   sortedUniq as sortedUniqLodash,
   toLower,
   endsWith as endsWithLodash,
-} from "lodash";
+} from 'lodash';
 
 import {
   notificationTypeCollection,
@@ -27,7 +27,7 @@ import {
   formatCollection,
   datetimeFormat,
   sortOperate,
-} from "./constants";
+} from './constants';
 import {
   isArray,
   isEqualBySerialize,
@@ -37,12 +37,12 @@ import {
   isObject,
   isString,
   isUndefined,
-} from "./typeCheck";
-import Tips from "./tips";
-import { toDatetime, toMoney, toNumber } from "./typeConvert";
+} from './typeCheck';
+import Tips from './tips';
+import { toDatetime, toMoney, toNumber } from './typeConvert';
 
 const storageKeyCollection = {
-  nearestLocalhostNotify: "nearestLocalhostNotify",
+  nearestLocalhostNotify: 'nearestLocalhostNotify',
 };
 
 export function getTaroGlobalData() {
@@ -116,8 +116,8 @@ export function defaultCommonState() {
   const data = {
     ...defaultCoreState(),
     ...{
-      loadApiPath: "",
-      pageName: "",
+      loadApiPath: '',
+      pageName: '',
       metaData: null,
       metaExtra: null,
       metaListData: [],
@@ -132,15 +132,15 @@ export function defaultListState() {
   const data = {
     ...defaultCommonState(),
     ...{
-      dateRangeFieldName: "发生时间",
+      dateRangeFieldName: '发生时间',
       tableScroll: { x: 1520 },
       formValues: {},
       pageNo: 1,
       pageSize: 10,
-      startTimeAlias: "",
-      endTimeAlias: "",
-      startTime: "",
-      endTime: "",
+      startTimeAlias: '',
+      endTimeAlias: '',
+      startTime: '',
+      endTime: '',
       showSelect: false,
       selectedDataTableDataRows: [],
     },
@@ -153,15 +153,15 @@ export function defaultPageListState() {
   const data = {
     ...defaultCommonState(),
     ...{
-      paramsKey: "",
-      loadApiPath: "",
-      dateRangeFieldName: "发生时间",
+      paramsKey: '',
+      loadApiPath: '',
+      dateRangeFieldName: '发生时间',
       tableScroll: { x: 1520 },
       formValues: {},
       pageNo: 1,
       pageSize: 10,
-      startTime: "",
-      endTime: "",
+      startTime: '',
+      endTime: '',
       showSelect: false,
       selectedDataTableDataRows: [],
     },
@@ -173,7 +173,7 @@ export function defaultPageListState() {
 export function defaultFormState() {
   const data = {
     ...defaultCommonState(),
-    ...{ errorFieldName: "", submitApiPath: "" },
+    ...{ errorFieldName: '', submitApiPath: '' },
   };
 
   return data;
@@ -182,7 +182,7 @@ export function defaultFormState() {
 export function getValue(obj) {
   return Object.keys(obj)
     .map((key) => obj[key])
-    .join(",");
+    .join(',');
 }
 
 /**
@@ -213,11 +213,11 @@ export function replaceTargetText(
   text,
   replaceText,
   beforeKeepNumber,
-  afterKeepNumber
+  afterKeepNumber,
 ) {
   let result = toString(text);
 
-  const textLength = (text || "").length;
+  const textLength = (text || '').length;
   if (textLength > 0 && (beforeKeepNumber >= 0 || afterKeepNumber >= 0)) {
     if (
       beforeKeepNumber >= textLength ||
@@ -230,18 +230,18 @@ export function replaceTargetText(
 
       const afterKeep = text.substr(
         textLength - afterKeepNumber,
-        afterKeepNumber
+        afterKeepNumber,
       );
 
       result = beforeKeep + replaceText + afterKeep;
     }
   }
 
-  return result || "";
+  return result || '';
 }
 
 export function checkDevelopment() {
-  return process.env.NODE_ENV === "development";
+  return process.env.NODE_ENV === 'development';
 }
 
 /**
@@ -253,7 +253,7 @@ export function checkDevelopment() {
  */
 export function corsTarget() {
   const appInit = getAppInitConfigData();
-  let corsTargetDomain = "";
+  let corsTargetDomain = '';
 
   if (appInit.apiPrefix != null) {
     if (appInit.apiPrefix.corsTargetDomain != null) {
@@ -276,8 +276,12 @@ export function showError(text) {
 
 export function showRuntimeError({ message: messageText, showStack = true }) {
   try {
-    if (!stringIsNullOrWhiteSpace(messageText || "")) {
+    if (!stringIsNullOrWhiteSpace(messageText || '')) {
       showErrorMessage({
+        message: messageText,
+      });
+
+      recordError({
         message: messageText,
       });
     }
@@ -285,10 +289,10 @@ export function showRuntimeError({ message: messageText, showStack = true }) {
     if (showStack) {
       throw new Error(
         `${
-          stringIsNullOrWhiteSpace(messageText || "")
-            ? ""
+          stringIsNullOrWhiteSpace(messageText || '')
+            ? ''
             : `${toString(messageText)},`
-        }调用堆栈:`
+        }调用堆栈:`,
       );
     }
   } catch (e) {
@@ -405,8 +409,8 @@ export function showMessage({
       case messageTypeCollection.success:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -423,8 +427,8 @@ export function showMessage({
       case messageTypeCollection.error:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -441,8 +445,8 @@ export function showMessage({
       case messageTypeCollection.info:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -459,8 +463,8 @@ export function showMessage({
       case messageTypeCollection.warning:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -477,8 +481,8 @@ export function showMessage({
       case messageTypeCollection.warn:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -495,8 +499,8 @@ export function showMessage({
       case messageTypeCollection.loading:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -513,8 +517,8 @@ export function showMessage({
       default:
         setTimeout(() => {
           Taro.showToast({
-            title: messageText || "",
-            icon: "none",
+            title: messageText || '',
+            icon: 'none',
             mask: true,
             duration,
           }).then((res) => {
@@ -547,7 +551,7 @@ export function recordLog(record, showMode, level = logLevel.debug) {
   if (
     !inCollection(
       [logShowMode.unknown, logShowMode.text, logShowMode.object],
-      showModeModified
+      showModeModified,
     )
   ) {
     throw new Error(`无效的日志显示模式:${showModeModified}`);
@@ -638,8 +642,8 @@ function logShowInConsole() {
  * @returns
  */
 export function getGuid(len = 8, radix = 16) {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(
-    ""
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
+    '',
   );
   const value = [];
   let i = 0;
@@ -654,8 +658,8 @@ export function getGuid(len = 8, radix = 16) {
 
     // rfc4122 requires these characters
     /* eslint-disable-next-line */
-    value[8] = value[13] = value[18] = value[23] = "-";
-    value[14] = "4";
+    value[8] = value[13] = value[18] = value[23] = '-';
+    value[14] = '4';
 
     // Fill in random data.  At i==19 set the high bits of clock sequence as
     // per rfc4122, sec. 4.1.5
@@ -667,7 +671,7 @@ export function getGuid(len = 8, radix = 16) {
     }
   }
 
-  return value.join("");
+  return value.join('');
 }
 
 /**
@@ -810,30 +814,30 @@ export function formatDatetime({
   fmt = datetimeFormat.yearMonthDayHourMinuteSecond,
 }) {
   if ((date || null) == null) {
-    return "";
+    return '';
   }
 
   let o = {
-    "M+": date.getMonth() + 1, //月份
-    "d+": date.getDate(), //日
-    "h+": date.getHours(), //小时
-    "m+": date.getMinutes(), //分
-    "s+": date.getSeconds(), //秒
-    "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+    'M+': date.getMonth() + 1, //月份
+    'd+': date.getDate(), //日
+    'h+': date.getHours(), //小时
+    'm+': date.getMinutes(), //分
+    's+': date.getSeconds(), //秒
+    'q+': Math.floor((date.getMonth() + 3) / 3), //季度
     S: date.getMilliseconds(), //毫秒
   };
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(
       RegExp.$1,
-      (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+      (date.getFullYear() + '').substr(4 - RegExp.$1.length),
     );
   }
 
   for (let k in o) {
-    if (new RegExp("(" + k + ")").test(fmt)) {
+    if (new RegExp('(' + k + ')').test(fmt)) {
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length),
       );
     }
   }
@@ -908,7 +912,7 @@ export function getPathValue(o, path, defaultValue = null) {
   }
 
   if (!isString(path)) {
-    const text = "getPathValue Function param path must be string";
+    const text = 'getPathValue Function param path must be string';
 
     showRuntimeError({
       message: text,
@@ -936,15 +940,15 @@ export function getPathValue(o, path, defaultValue = null) {
 export function formatDecimal(
   numberSource,
   placesSource = 2,
-  thousandSource = ",",
-  decimalSource = "."
+  thousandSource = ',',
+  decimalSource = '.',
 ) {
   return formatMoney(
     numberSource,
     placesSource,
-    "",
+    '',
     thousandSource,
-    decimalSource
+    decimalSource,
   );
 }
 
@@ -958,9 +962,9 @@ export function formatDecimal(
 export function formatMoney({
   number: numberSource,
   places: placesSource = 2,
-  symbol: symbolSource = "¥",
-  thousand: thousandSource = ",",
-  decimal: decimalSource = ".",
+  symbol: symbolSource = '¥',
+  thousand: thousandSource = ',',
+  decimal: decimalSource = '.',
 }) {
   let number = numberSource || 0;
   //保留的小位数 可以写成 formatMoney(542986,3) 后面的是保留的小位数，否则默 认保留两位
@@ -969,15 +973,15 @@ export function formatMoney({
     ? placesSource
     : 2;
   //symbol表示前面表示的标志是￥ 可以写成 formatMoney(542986,2,"$")
-  let symbol = symbolSource !== undefined ? symbolSource : "￥";
+  let symbol = symbolSource !== undefined ? symbolSource : '￥';
   //thousand表示每几位用,隔开,是货币标识
-  let thousand = thousandSource || ",";
+  let thousand = thousandSource || ',';
   //decimal表示小数点
-  let decimal = decimalSource || ".";
+  let decimal = decimalSource || '.';
   //negative表示如果钱是负数有就显示“-”如果不是负数 就不显示负号
   //i表示处理过的纯数字
-  let negative = number < 0 ? "-" : "";
-  let i = parseInt((number = Math.abs(+number || 0).toFixed(places)), 10) + "";
+  let negative = number < 0 ? '-' : '';
+  let i = parseInt((number = Math.abs(+number || 0).toFixed(places)), 10) + '';
 
   let j = i.length;
 
@@ -986,8 +990,8 @@ export function formatMoney({
   return (
     symbol +
     negative +
-    (j ? i.substr(0, j) + thousand : "") +
-    i.substr(j).replace(/(\d{3})(?=\d)/g, symbolSource + "1" + thousand) +
+    (j ? i.substr(0, j) + thousand : '') +
+    i.substr(j).replace(/(\d{3})(?=\d)/g, symbolSource + '1' + thousand) +
     // 第一种方案
     // i.substr(j).replace(/(\d{3})(?=\d)/g, "$" + "1" + thousand) +
     // 第二种方案
@@ -997,7 +1001,7 @@ export function formatMoney({
         Math.abs(number - toNumber(i))
           .toFixed(places)
           .slice(2)
-      : "")
+      : '')
   );
 }
 
@@ -1013,11 +1017,11 @@ export function endsWith(source, target, position) {
  */
 export function removeEndMatch(source, target) {
   if (!isString(source)) {
-    throw new Error("removeEndMatch only use for string source");
+    throw new Error('removeEndMatch only use for string source');
   }
 
   if (!isString(target)) {
-    throw new Error("removeEndMatch only use for string target");
+    throw new Error('removeEndMatch only use for string target');
   }
 
   if (stringIsNullOrWhiteSpace(source)) {
@@ -1042,11 +1046,11 @@ export function removeEndMatch(source, target) {
  */
 export function removeLastMatch(source, target) {
   if (!isString(source)) {
-    throw new Error("removeEndMatch only use for string source");
+    throw new Error('removeEndMatch only use for string source');
   }
 
   if (!isString(target)) {
-    throw new Error("removeEndMatch only use for string target");
+    throw new Error('removeEndMatch only use for string target');
   }
 
   if (stringIsNullOrWhiteSpace(source)) {
@@ -1076,24 +1080,24 @@ export function removeLastMatch(source, target) {
 export function formatMoneyToChinese({ target }) {
   let money = target;
 
-  const cnNumber = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"]; // 汉字的数字
-  const cnIntBasic = ["", "拾", "佰", "仟"]; // 基本单位
-  const cnIntUnits = ["", "万", "亿", "兆"]; // 对应整数部分扩展单位
-  const cnDecUnits = ["角", "分", "毫", "厘"]; // 对应小数部分单位
+  const cnNumber = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']; // 汉字的数字
+  const cnIntBasic = ['', '拾', '佰', '仟']; // 基本单位
+  const cnIntUnits = ['', '万', '亿', '兆']; // 对应整数部分扩展单位
+  const cnDecUnits = ['角', '分', '毫', '厘']; // 对应小数部分单位
   // var cnInteger = "整"; // 整数金额时后面跟的字符
-  const cnIntLast = "元"; // 整型完以后的单位
+  const cnIntLast = '元'; // 整型完以后的单位
   const maxNum = 999999999999999.9999; // 最大处理的数字
 
   let IntegerNum; // 金额整数部分
   let DecimalNum; // 金额小数部分
-  let ChineseString = ""; // 输出的中文金额字符串
+  let ChineseString = ''; // 输出的中文金额字符串
   let parts; // 分离金额后用的数组，预定义
-  if (money === "") {
-    return "";
+  if (money === '') {
+    return '';
   }
   money = parseFloat(money);
   if (money >= maxNum) {
-    return "超出最大处理数字";
+    return '超出最大处理数字';
   }
   if (money === 0) {
     ChineseString = cnNumber[0] + cnIntLast;
@@ -1101,11 +1105,11 @@ export function formatMoneyToChinese({ target }) {
     return ChineseString;
   }
   money = money.toString(); // 转换为字符串
-  if (money.indexOf(".") === -1) {
+  if (money.indexOf('.') === -1) {
     IntegerNum = money;
-    DecimalNum = "";
+    DecimalNum = '';
   } else {
-    parts = money.split(".");
+    parts = money.split('.');
 
     [IntegerNum, DecimalNum] = parts;
     DecimalNum = parts[1].substr(0, 4);
@@ -1119,7 +1123,7 @@ export function formatMoneyToChinese({ target }) {
       const p = IntLen - i - 1;
       const q = p / 4;
       const m = p % 4;
-      if (n === "0") {
+      if (n === '0') {
         zeroCount += 1;
       } else {
         if (zeroCount > 0) {
@@ -1135,17 +1139,17 @@ export function formatMoneyToChinese({ target }) {
     ChineseString += cnIntLast;
     // 整型部分处理完毕
   }
-  if (DecimalNum !== "") {
+  if (DecimalNum !== '') {
     // 小数部分
     const decLen = DecimalNum.length;
     for (let i = 0; i < decLen; i += 1) {
       const n = DecimalNum.substr(i, 1);
-      if (n !== "0") {
+      if (n !== '0') {
         ChineseString += cnNumber[Number(n)] + cnDecUnits[i];
       }
     }
   }
-  if (ChineseString === "") {
+  if (ChineseString === '') {
     ChineseString += cnNumber[0] + cnIntLast;
   }
 
@@ -1170,7 +1174,7 @@ export function seededRandom({ seed, min, max }) {
  */
 export function getRandomColor({ seed }) {
   return `#${`00000${((seededRandom(seed) * 0x1000000) << 0).toString(
-    16
+    16,
   )}`.substr(-6)}`;
 }
 
@@ -1179,16 +1183,16 @@ function getBrowserInfoCore() {
     const u = navigator.userAgent;
     return {
       // 移动终端浏览器版本信息
-      trident: u.indexOf("Trident") > -1, // IE内核
-      presto: u.indexOf("Presto") > -1, // opera内核
-      webKit: u.indexOf("AppleWebKit") > -1, // 苹果、谷歌内核
-      gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") === -1, // 火狐内核
+      trident: u.indexOf('Trident') > -1, // IE内核
+      presto: u.indexOf('Presto') > -1, // opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, // 苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, // 火狐内核
       mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 是否为移动终端
       ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), // ios终端
-      android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, // android 终端或uc浏览器
-      iPhone: u.indexOf("iPhone") > -1, // 是否为 iPhone 或者 QQHD 浏览器
-      iPad: u.indexOf("iPad") > -1, // 是否iPad
-      webApp: u.indexOf("Safari") === -1, // 是否web应该程序，没有头部与底部
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, // android 终端或uc浏览器
+      iPhone: u.indexOf('iPhone') > -1, // 是否为 iPhone 或者 QQHD 浏览器
+      iPad: u.indexOf('iPad') > -1, // 是否iPad
+      webApp: u.indexOf('Safari') === -1, // 是否web应该程序，没有头部与底部
     };
   };
 
@@ -1223,14 +1227,14 @@ export function refitFieldDecoratorOption(
   justice,
   defaultValue,
   originalOption,
-  convertCallback
+  convertCallback,
 ) {
   const result = originalOption;
-  const justiceV = typeof justice !== "undefined" && justice !== null;
-  const defaultV = typeof defaultValue === "undefined" ? null : defaultValue;
+  const justiceV = typeof justice !== 'undefined' && justice !== null;
+  const defaultV = typeof defaultValue === 'undefined' ? null : defaultValue;
 
   if (justiceV) {
-    if (typeof convertValue === "function") {
+    if (typeof convertValue === 'function') {
       result.initialValue = convertCallback(v) || defaultV;
     } else {
       result.initialValue = v || defaultV;
@@ -1252,19 +1256,19 @@ export function refitFieldDecoratorOption(
 export function refitCommonData(listData, empty, otherListData) {
   let result = [];
 
-  if (typeof listData !== "undefined") {
+  if (typeof listData !== 'undefined') {
     if (listData !== null) {
       result = [...listData];
     }
   }
 
-  if (typeof otherListData !== "undefined") {
+  if (typeof otherListData !== 'undefined') {
     if (otherListData !== null) {
       result = [...result, ...otherListData];
     }
   }
 
-  if (typeof empty !== "undefined") {
+  if (typeof empty !== 'undefined') {
     if (empty !== null) {
       result = [empty, ...result];
     }
@@ -1319,8 +1323,8 @@ export function searchFromList(itemKey, itemValue, sourceData) {
  * @param {*} other
  */
 export function buildFieldDescription(v, op, other) {
-  const o = (other || "") === "" ? "" : `,${other}`;
-  return `请${op || "输入"}${v}${o}`;
+  const o = (other || '') === '' ? '' : `,${other}`;
+  return `请${op || '输入'}${v}${o}`;
 }
 
 /**
@@ -1345,7 +1349,7 @@ export function getJsonFromLocalStorage(key) {
   const jsonString = getStringFromLocalStorage(key);
 
   if (!stringIsNullOrWhiteSpace(jsonString)) {
-    return JSON.parse(jsonString || "{}");
+    return JSON.parse(jsonString || '{}');
   }
 
   return null;
@@ -1414,12 +1418,12 @@ export function getDerivedStateFromPropsForUrlParamsCore(nextProps) {
 export function getDerivedStateFromPropsForUrlParams(
   nextProps,
   prevState,
-  defaultUrlParams = { id: "" },
-  parseUrlParamsForSetState = null
+  defaultUrlParams = { id: '' },
+  parseUrlParamsForSetState = null,
 ) {
   let stateUrlParams = getDerivedStateFromPropsForUrlParamsCore(
     nextProps,
-    prevState
+    prevState,
   );
 
   stateUrlParams = stateUrlParams || { urlParams: defaultUrlParams };
@@ -1431,7 +1435,7 @@ export function getDerivedStateFromPropsForUrlParams(
   if (
     isEqualBySerialize(
       { ...(urlParamsPrev || {}), ...{} },
-      { ...(urlParams || {}), ...{} }
+      { ...(urlParams || {}), ...{} },
     )
   ) {
     return prevState;
@@ -1524,15 +1528,15 @@ export function removeFromArray(array, predicate) {
 }
 
 export function stringIsNullOrWhiteSpace(value) {
-  return trim(replace(value || "", " ", "")) === "";
+  return trim(replace(value || '', ' ', '')) === '';
 }
 
 /**
  * base64解码
  */
 export function decodeBase64(target) {
-  let commonContent = (target || "").replace(/\s/g, "+");
-  commonContent = Buffer.from(commonContent, "base64").toString();
+  let commonContent = (target || '').replace(/\s/g, '+');
+  commonContent = Buffer.from(commonContent, 'base64').toString();
   return commonContent;
 }
 
@@ -1540,7 +1544,7 @@ export function decodeBase64(target) {
  * base64编码
  */
 export function encodeBase64(target) {
-  const base64Content = Buffer.from(target).toString("base64");
+  const base64Content = Buffer.from(target).toString('base64');
   return base64Content;
 }
 
@@ -1554,14 +1558,14 @@ export function fixedZero(val) {
  * @param {*} op
  * @param {*} other
  */
-export function buildFieldHelper(v, prefix = "注: ") {
+export function buildFieldHelper(v, prefix = '注: ') {
   return `${prefix}${v}。`;
 }
 
 export function checkLocalhost() {
   const hostname = toLower(window.location.hostname);
 
-  return hostname === "127.0.0.1" || hostname === "localhost";
+  return hostname === '127.0.0.1' || hostname === 'localhost';
 }
 
 export function getNearestLocalhostNotifyCache() {
@@ -1621,9 +1625,15 @@ export function trySendNearestLocalhostNotify({ text }) {
       }
 
       if (needSend) {
+        const message = `当前接口域名: ${text}。`;
+
         notify({
           type: notificationTypeCollection.info,
-          message: `当前接口域名: ${text}。`,
+          message,
+        });
+
+        recordObject({
+          message,
         });
 
         setNearestLocalhostNotifyCache();
@@ -1637,7 +1647,7 @@ export function trySendNearestLocalhostNotify({ text }) {
 /**
  * 文本缩略
  */
-export function ellipsis(value, length, symbol = "...") {
+export function ellipsis(value, length, symbol = '...') {
   if (value && value.length > length) {
     return `${toString(value).substr(0, length)}${symbol}`;
   }
@@ -1662,7 +1672,7 @@ export function notify({
 }) {
   const { message: messageText } = {
     ...{
-      message: "操作结果",
+      message: '操作结果',
     },
     ...{
       message: messageValue,
@@ -1699,12 +1709,12 @@ export function notify({
 }
 
 export function checkFromConfig({ label, name, helper }) {
-  let labelText = "object";
-  let nameText = "object";
-  let helperText = "object";
+  let labelText = 'object';
+  let nameText = 'object';
+  let helperText = 'object';
 
   if (isObject(label)) {
-    const text = "label必须为文本";
+    const text = 'label必须为文本';
 
     showRuntimeError({
       message: text,
@@ -1716,7 +1726,7 @@ export function checkFromConfig({ label, name, helper }) {
   }
 
   if (isObject(name)) {
-    const text = "name必须为文本";
+    const text = 'name必须为文本';
 
     showRuntimeError({
       message: text,
@@ -1728,7 +1738,7 @@ export function checkFromConfig({ label, name, helper }) {
   }
 
   if (isObject(helper)) {
-    const text = "helper必须为文本";
+    const text = 'helper必须为文本';
 
     showRuntimeError({
       message: text,
@@ -1765,7 +1775,7 @@ export function sortCollectionByKey({
   let result = [];
 
   if ((list || []).length <= 1) {
-    const text = "无需排序!";
+    const text = '无需排序!';
 
     showWarnMessage({
       message: text,
@@ -1799,7 +1809,7 @@ export function sortCollectionByKey({
   switch (operate) {
     case sortOperate.moveUp:
       if (itemSort === sortMin) {
-        const text = "已经排在首位!";
+        const text = '已经排在首位!';
 
         showWarnMessage({
           message: text,
@@ -1830,7 +1840,7 @@ export function sortCollectionByKey({
 
     case sortOperate.moveDown:
       if (itemSort === (list || []).length + sortMin - 1) {
-        const text = "已经排在末位!";
+        const text = '已经排在末位!';
 
         showWarnMessage({
           message: text,
@@ -1907,29 +1917,29 @@ export function getSystemInfo() {
       return null;
     }
     let systemInfo = Taro.getSystemInfoSync() || {
-      model: "",
-      system: "",
+      model: '',
+      system: '',
     };
-    let ios = !!(systemInfo.system.toLowerCase().search("ios") + 1);
+    let ios = !!(systemInfo.system.toLowerCase().search('ios') + 1);
     let rect;
     try {
       rect = Taro.getMenuButtonBoundingClientRect
         ? Taro.getMenuButtonBoundingClientRect()
         : null;
       if (rect === null) {
-        throw "getMenuButtonBoundingClientRect error";
+        throw 'getMenuButtonBoundingClientRect error';
       }
       //取值为0的情况  有可能width不为0 top为0的情况
       if (!rect.width || !rect.top || !rect.left || !rect.height) {
-        throw "getMenuButtonBoundingClientRect error";
+        throw 'getMenuButtonBoundingClientRect error';
       }
     } catch (error) {
-      let gap = ""; //胶囊按钮上下间距 使导航内容居中
+      let gap = ''; //胶囊按钮上下间距 使导航内容居中
       let width = 96; //胶囊的宽度
-      if (systemInfo.platform === "android") {
+      if (systemInfo.platform === 'android') {
         gap = 8;
         width = 96;
-      } else if (systemInfo.platform === "devtools") {
+      } else if (systemInfo.platform === 'devtools') {
         if (ios) {
           gap = 5.5; //开发工具中ios手机
         } else {
@@ -1953,11 +1963,11 @@ export function getSystemInfo() {
         top: systemInfo.statusBarHeight + gap,
         width: width,
       };
-      console.log("error", error);
-      console.log("rect", rect);
+      console.log('error', error);
+      console.log('rect', rect);
     }
 
-    let navBarHeight = "";
+    let navBarHeight = '';
     if (!systemInfo.statusBarHeight) {
       //开启wifi和打电话下
       systemInfo.statusBarHeight =
@@ -1991,7 +2001,7 @@ export function getSystemInfo() {
 }
 
 export function pxTransform(size) {
-  if (!size) return "";
+  if (!size) return '';
   const designWidth = 750;
   const deviceRatio = {
     640: 2.34 / 2,

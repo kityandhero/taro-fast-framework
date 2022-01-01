@@ -8,17 +8,17 @@ import {
   getTaroGlobalData,
   redirectTo,
   trim,
-} from "./tools";
-import { getToken } from "./globalStorageAssist";
-import remoteRequest from "./request";
-import { defaultSettingsLayoutCustom } from "./defaultSettingsSpecial";
+} from './tools';
+import { getToken } from './globalStorageAssist';
+import remoteRequest from './request';
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import {
   apiVirtualAccess,
   apiVirtualSuccessData,
   apiVirtualFailData,
-} from "./virtualRequest";
-import { isFunction, isObject, isString, isUndefined } from "./typeCheck";
-import { toUpper } from "./typeConvert";
+} from './virtualRequest';
+import { isFunction, isObject, isString, isUndefined } from './typeCheck';
+import { toUpper } from './typeConvert';
 
 /**
  * 错误数据模型
@@ -26,7 +26,7 @@ import { toUpper } from "./typeConvert";
 function errorCustomData() {
   return {
     code: -1,
-    message: "",
+    message: '',
     data: null,
     list: [],
     extra: null,
@@ -45,12 +45,12 @@ function dataExceptionNotice(d) {
 
   const lastCustomMessage = taroGlobalData.lastCustomMessage || {
     code: -1,
-    message: "",
+    message: '',
     time: new Date().getTime(),
   };
 
   if (code !== c.code) {
-    if ((messageText || "") !== "") {
+    if ((messageText || '') !== '') {
       const currentTime = new Date().getTime();
       if (code === lastCustomMessage.code) {
         if (currentTime - lastCustomMessage.time > 800) {
@@ -83,7 +83,7 @@ function dataExceptionNotice(d) {
 
     if (code === authenticationFailCode) {
       if (stringIsNullOrWhiteSpace(loginPath)) {
-        throw new Error("缺少登录页面路径配置");
+        throw new Error('缺少登录页面路径配置');
       }
 
       redirectTo(loginPath);
@@ -116,7 +116,7 @@ export function pretreatmentRemoteSingleData(d) {
   } else {
     v = {
       code,
-      message: messageText || "网络异常",
+      message: messageText || '网络异常',
       data: null,
       extra: null,
       dataSuccess: false,
@@ -148,7 +148,7 @@ export function pretreatmentRemoteListData(d, itemHandler) {
         o.key = `list-${index}`;
       }
 
-      if (typeof itemHandler === "function") {
+      if (typeof itemHandler === 'function') {
         o = itemHandler(o);
       }
       return o;
@@ -165,7 +165,7 @@ export function pretreatmentRemoteListData(d, itemHandler) {
   } else {
     v = {
       code,
-      message: messageText || "网络异常",
+      message: messageText || '网络异常',
       count: 0,
       list: [],
       extra: null,
@@ -199,7 +199,7 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
         o.key = `${pageNo}-${index}`;
       }
 
-      if (typeof listItemHandler === "function") {
+      if (typeof listItemHandler === 'function') {
         o = listItemHandler(o);
       }
       return o;
@@ -221,7 +221,7 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
   } else {
     v = {
       code,
-      message: messageText || "网络异常",
+      message: messageText || '网络异常',
       count: 0,
       list: [],
       extra: null,
@@ -248,7 +248,7 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
 export function pretreatmentRequestParams(params, customHandle) {
   let submitData = params || {};
 
-  if (typeof customHandle === "function") {
+  if (typeof customHandle === 'function') {
     submitData = customHandle(submitData);
   }
 
@@ -301,7 +301,7 @@ export function handleListDataAssist(
   state,
   action,
   pretreatment = null,
-  callback = null
+  callback = null,
 ) {
   const { payload: d, alias } = action;
 
@@ -333,7 +333,7 @@ export function handlePageListDataAssist(
   state,
   action,
   pretreatment = null,
-  callback = null
+  callback = null,
 ) {
   const { payload: d, alias } = action;
 
@@ -380,13 +380,13 @@ export async function request({
   urlParams = null,
   params = {},
   header = {},
-  method = "POST",
+  method = 'POST',
   useVirtualRequest = defaultSettingsLayoutCustom.getUseVirtualRequest(),
   showUseVirtualRequestMessage = defaultSettingsLayoutCustom.getShowUseVirtualRequestMessage(),
   virtualSuccessResponse = {},
   virtualFailResponse = {
     code: 1001,
-    message: "虚拟未知错误",
+    message: '虚拟未知错误',
   },
   virtualRequestResult = true,
   virtualNeedAuthorize = true,
@@ -396,28 +396,28 @@ export async function request({
   if (!isString(apiVersion)) {
     recordObject(apiVersion);
 
-    throw new Error("apiVersion is not string");
+    throw new Error('apiVersion is not string');
   }
 
   if (!isString(api)) {
     recordObject(api);
 
-    throw new Error("api is not string");
+    throw new Error('api is not string');
   }
 
   if (!stringIsNullOrWhiteSpace(apiVersion)) {
     apiVersion = `/${apiVersion}/`;
   }
 
-  let url = `${apiVersion}${api}`.replace("//", "/");
+  let url = `${apiVersion}${api}`.replace('//', '/');
 
   if ((urlParams || null) != null) {
     if (isString(urlParams)) {
-      url = `url?${urlParams}`;
+      url = `${url}?${urlParams}`;
     }
 
     if (isObject(urlParams)) {
-      url = `url?${queryStringify(urlParams)}`;
+      url = `${url}?${queryStringify(urlParams)}`;
     }
   }
 
@@ -426,7 +426,7 @@ export async function request({
   if (useVirtualRequest) {
     if (showUseVirtualRequestMessage) {
       setTimeout(() => {
-        const text = "由虚拟访问返回";
+        const text = '由虚拟访问返回';
 
         showInfoMessage({
           message: text,
@@ -449,7 +449,7 @@ export async function request({
       const loginPath = defaultSettingsLayoutCustom.getLoginPath();
 
       if (stringIsNullOrWhiteSpace(loginPath)) {
-        throw new Error("缺少登录页面路径配置");
+        throw new Error('缺少登录页面路径配置');
       }
 
       redirectTo(loginPath);
@@ -461,14 +461,14 @@ export async function request({
               apiVirtualSuccessData({
                 remoteResponse: virtualSuccessResponse,
                 needAuthorize: virtualNeedAuthorize,
-              })
+              }),
             );
           } else {
             resolve(
               apiVirtualFailData({
                 ...(virtualFailResponse || {}),
                 ...{ needAuthorize: virtualNeedAuthorize },
-              })
+              }),
             );
           }
         },
@@ -496,7 +496,7 @@ export async function request({
     });
   }
 
-  if (trim(toUpper(method)) === "POST") {
+  if (trim(toUpper(method)) === 'POST') {
     return remoteRequest.Post(url, params, header || {});
   }
 
