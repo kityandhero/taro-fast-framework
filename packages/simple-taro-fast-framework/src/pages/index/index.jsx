@@ -1,11 +1,7 @@
 import { connect } from 'react-redux';
 import { View, Text } from '@tarojs/components';
 
-import {
-  getTaroGlobalData,
-  formatMoney,
-  corsTarget,
-} from 'taro-fast-framework/es/utils/tools';
+import { formatMoney } from 'taro-fast-framework/es/utils/tools';
 import VerticalBox from 'taro-fast-framework/es/customComponents/VerticalBox';
 import Loading from 'taro-fast-framework/es/customComponents/Loading';
 import AuthorizationWrapper from 'taro-fast-framework/es/framework/AuthorizationWrapper';

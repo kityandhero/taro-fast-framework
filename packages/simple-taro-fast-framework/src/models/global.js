@@ -1,23 +1,23 @@
-import { showInfoMessage } from "taro-fast-framework/es/utils/tools";
+import { showInfoMessage } from 'taro-fast-framework/es/utils/tools';
 import {
   pretreatmentRemoteSingleData,
   handleCommonDataAssist,
   handleListDataAssist,
   handlePageListDataAssist,
-} from "taro-fast-framework/es/utils/requestAssistor";
-import { modelCollection } from "taro-fast-framework/es/utils/globalModel";
+} from 'taro-fast-framework/es/utils/requestAssistor';
+import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
 
-import { getMetaDataCache, setMetaDataCache } from "@/utils/storageAssist";
-import { getData } from "@/services/global";
+import { getMetaDataCache, setMetaDataCache } from '@/utils/storageAssist';
+import { getData } from '@/services/global';
 
 export default {
-  namespace: "global",
+  namespace: 'global',
 
   state: {
     ...(modelCollection || {}),
     ...{
       needSyncUserInfo: false,
-      globalQuery: { path: "", query: {}, scene: 0 },
+      globalQuery: { path: '', query: {}, scene: 0 },
       rankList: [],
     },
   },
@@ -42,7 +42,7 @@ export default {
 
       if (fromRemote) {
         if (showMessage) {
-          const text = "初始数据正在努力加载中，需要一点点时间哦";
+          const text = '初始数据正在努力加载中, 需要一点点时间哦';
 
           showInfoMessage({
             message: text,
@@ -67,7 +67,7 @@ export default {
       }
 
       yield put({
-        type: "changeMetaData",
+        type: 'changeMetaData',
         payload: result,
       });
     },
@@ -82,6 +82,12 @@ export default {
     },
     handlePageListData(state, action) {
       return handlePageListDataAssist(state, action);
+    },
+    changeMetaData(state, { payload }) {
+      return {
+        ...state,
+        ...payload,
+      };
     },
   },
 };

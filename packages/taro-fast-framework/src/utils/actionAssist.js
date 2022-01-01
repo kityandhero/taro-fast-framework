@@ -116,10 +116,10 @@ export async function actionCore({
   target,
   handleData,
   successCallback,
-  successMessage = '数据已经操作成功，请进行后续操作。',
+  successMessage = '数据已经操作成功, 请进行后续操作. ',
   successMessageBuilder = null,
   showProcessing = true,
-  textProcessing = '处理中，请稍后',
+  textProcessing = '处理中, 请稍后',
 }) {
   if ((handleData || null) == null) {
     const text = 'actionCore : handleData not allow null';
@@ -148,7 +148,7 @@ export async function actionCore({
   }
 
   if (showProcessing) {
-    Tips.loading(textProcessing || '处理中，请稍后');
+    Tips.loading(textProcessing || '处理中, 请稍后');
   }
 
   target.setState({ processing: true }, () => {
@@ -157,7 +157,7 @@ export async function actionCore({
         dispatchComplete: false,
       },
       () => {
-        // 延迟一定时间，优化界面呈现
+        // 延迟一定时间, 优化界面呈现
         setTimeout(() => {
           dispatch({
             type: api,
@@ -236,7 +236,7 @@ export async function confirmActionCore({
   handleData,
   successCallback,
   okAction = null,
-  successMessage = '数据已经操作成功，请进行后续操作。',
+  successMessage = '数据已经操作成功, 请进行后续操作. ',
   successMessageBuilder = null,
   showProcessing = true,
 }) {

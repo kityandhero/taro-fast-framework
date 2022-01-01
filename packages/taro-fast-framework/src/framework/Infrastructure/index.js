@@ -31,13 +31,13 @@ function filterModel(props) {
  * Returns true when the values of all keys are strictly equal.
  */
 function shallowEqual(a, b) {
-  // 调用Object.is判断是否相等，相同返回true，不同返回false
+  // 调用Object.is判断是否相等, 相同返回true, 不同返回false
   if (Object.is(a, b)) {
     return true;
   }
 
-  // object.is比较发现不等，但并不代表真的不等，object对象还需要比较
-  // 这里判断是否是object，如果不是，那直接返回false
+  // object.is比较发现不等, 但并不代表真的不等, object对象还需要比较
+  // 这里判断是否是object, 如果不是, 那直接返回false
   if (
     typeof a !== 'object' ||
     a === null ||
@@ -50,7 +50,7 @@ function shallowEqual(a, b) {
   const keysA = Object.keys(a);
   const keysB = Object.keys(b);
 
-  // 比较对象中的keys长度，不等返回false
+  // 比较对象中的keys长度, 不等返回false
   if (keysA.length !== keysB.length) {
     return false;
   }
@@ -181,7 +181,7 @@ class Infrastructure extends Component {
   loadRemoteRequestAfterMount = false;
 
   /**
-   *显示render次数开关，用于开发时候调试页面渲染性能
+   *显示render次数开关, 用于开发时候调试页面渲染性能
    */
   showRenderCountInConsole = false;
 
@@ -314,7 +314,7 @@ class Infrastructure extends Component {
   }
 
   /**
-   * 判断小程序的API，回调，参数，组件等是否在当前版本可用
+   * 判断小程序的API, 回调, 参数, 组件等是否在当前版本可用
    * @param {*} schema
    */
   canIUse(schema) {
@@ -359,7 +359,7 @@ class Infrastructure extends Component {
       paging ||
       processing
     ) {
-      const text = '数据正在处理中，请稍等一下再点哦';
+      const text = '数据正在处理中, 请稍等一下再点哦';
 
       showErrorMessage({
         message: text,

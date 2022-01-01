@@ -10,6 +10,13 @@ class AppComponent extends Component {
     this.taroGlobalData.appInitCustomLocal = this.establishConfig();
   }
 
+  componentDidMount() {
+    //延迟执行, 避免配置未合并完成前调用
+    setTimeout(() => {
+      this.loadRemoteMetaData();
+    }, 200);
+  }
+
   initDva = () => {
     this.store = getStore(this.modelsCollection);
   };
@@ -17,6 +24,8 @@ class AppComponent extends Component {
   establishConfig = () => {
     return null;
   };
+
+  loadRemoteMetaData = () => {};
 
   modelsCollection = null;
 

@@ -3,10 +3,10 @@ import {
   stringIsNullOrWhiteSpace,
   showWarnMessage,
   redirectTo,
-} from "./tools";
-import { isFunction } from "./typeCheck";
-import { getToken } from "./globalStorageAssist";
-import { defaultSettingsLayoutCustom } from "./defaultSettingsSpecial";
+} from './tools';
+import { isFunction } from './typeCheck';
+import { getToken } from './globalStorageAssist';
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
 /**
  * 是否使用模拟访问
@@ -25,7 +25,7 @@ export function transferToVirtualAccess() {
  */
 function apiVirtualAuthorize() {
   const tokenValue = getToken;
-  return (tokenValue || "") !== "";
+  return (tokenValue || '') !== '';
 }
 
 /**
@@ -53,7 +53,7 @@ export function apiVirtualFailData({
 
     return {
       code: defaultSettingsLayoutCustom.getAuthenticationFailCode(),
-      message: "登录失效，请重新登录",
+      message: '登录失效, 请重新登录',
       success: false,
     };
   }
@@ -81,7 +81,7 @@ export function apiVirtualSuccessData({
     if (apiVirtualAuthorize()) {
       return {
         code: defaultSettingsLayoutCustom.getApiSuccessCode(),
-        message: "success",
+        message: 'success',
         success: true,
         ...remoteResponse,
       };
@@ -89,14 +89,14 @@ export function apiVirtualSuccessData({
 
     return {
       code: defaultSettingsLayoutCustom.getAuthenticationFailCode(),
-      message: "登录失效，请重新登录",
+      message: '登录失效, 请重新登录',
       success: false,
     };
   }
 
   return {
     code: defaultSettingsLayoutCustom.getApiSuccessCode(),
-    message: "success",
+    message: 'success',
     success: true,
     ...remoteResponse,
   };
@@ -117,7 +117,7 @@ export async function apiVirtualSuccessAccess({
         apiVirtualSuccessData({
           remoteResponse,
           needAuthorize,
-        })
+        }),
       );
     }, 300);
   }).then((data) => {
@@ -130,7 +130,7 @@ export async function apiVirtualSuccessAccess({
     const loginPath = defaultSettingsLayoutCustom.getLoginPath();
 
     if (stringIsNullOrWhiteSpace(loginPath)) {
-      throw new Error("缺少登录页面路径配置");
+      throw new Error('缺少登录页面路径配置');
     }
 
     redirectTo(loginPath);
@@ -162,7 +162,7 @@ export async function apiVirtualFailAccess({
     const loginPath = defaultSettingsLayoutCustom.getLoginPath();
 
     if (stringIsNullOrWhiteSpace(loginPath)) {
-      throw new Error("缺少登录页面路径配置");
+      throw new Error('缺少登录页面路径配置');
     }
 
     redirectTo(loginPath);

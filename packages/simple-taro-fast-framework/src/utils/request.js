@@ -14,7 +14,7 @@ import { appId } from '../customConfig/config';
  * @param {*} virtualSuccessResponse [object]: virtual request success response data
  * @param {*} virtualFailResponse [object]: virtual request fail response data
  * @param {*} virtualRequestResult [object]:mandatory set virtual request result, generally used to debug
- * @param {*} virtualNeedAuthorize [object]:set virtual request whether check token， only check mull or empty, generally used to debug
+ * @param {*} virtualNeedAuthorize [object]:set virtual request whether check token,  only check mull or empty, generally used to debug
  * @returns
  */
 export async function executiveRequest({

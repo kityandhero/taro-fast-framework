@@ -1,4 +1,4 @@
-import { executiveRequest } from "../utils/request";
+import { executiveRequest } from '../utils/request';
 
 export async function getData(params) {
   return executiveRequest({

@@ -8,7 +8,7 @@ import {
   isArray as isArrayLodash,
   isString as isStringLodash,
   isObject as isObjectLodash,
-} from "lodash";
+} from 'lodash';
 
 /**
  * 格式化时间
@@ -18,7 +18,7 @@ import {
  * @returns
  */
 export function isInvalid(v) {
-  return typeof v === "undefined";
+  return typeof v === 'undefined';
 }
 
 /**
@@ -29,7 +29,7 @@ export function isInvalid(v) {
  * @returns
  */
 export function isDatetime(v) {
-  const date = `${typeof v === "undefined" ? null : v}`;
+  const date = `${typeof v === 'undefined' ? null : v}`;
   const result = date.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
 
   if (result == null) {
@@ -52,9 +52,9 @@ export function isDatetime(v) {
  * @returns
  */
 export function isNumber(v) {
-  const str = `${typeof v === "undefined" ? null : v}`;
+  const str = `${typeof v === 'undefined' ? null : v}`;
 
-  if (str === "") {
+  if (str === '') {
     return false;
   }
 
@@ -71,9 +71,9 @@ export function isNumber(v) {
  * @returns
  */
 export function isMoney(v) {
-  const str = `${typeof v === "undefined" ? null : v}`;
+  const str = `${typeof v === 'undefined' ? null : v}`;
 
-  if (str === "") {
+  if (str === '') {
     return false;
   }
 
@@ -87,8 +87,8 @@ export function isMoney(v) {
  * @export
  * @param {value} 对比源
  * @param {other} 对比对象
- * 执行深比较来确定两者的值是否相等。
- * 这个方法支持比较 arrays, array buffers, booleans, date objects, error objects, maps, numbers, Object objects, regexes, sets, strings, symbols, 以及 typed arrays. Object 对象值比较自身的属性，不包括继承的和可枚举的属性。 不支持函数和DOM节点比较。
+ * 执行深比较来确定两者的值是否相等.
+ * 这个方法支持比较 arrays, array buffers, booleans, date objects, error objects, maps, numbers, Object objects, regexes, sets, strings, symbols, 以及 typed arrays. Object 对象值比较自身的属性, 不包括继承的和可枚举的属性.  不支持函数和DOM节点比较.
  */
 export function isEqual(value, other) {
   return isEqualLodash(value, other);

@@ -5,8 +5,6 @@ import models from './models';
 import './app.less';
 
 class App extends AppComponent {
-  componentDidMount() {}
-
   componentDidShow() {}
 
   componentDidHide() {}
@@ -29,6 +27,15 @@ class App extends AppComponent {
       loginPath: '/user/login',
       apiVersion: 'v1',
     };
+  };
+
+  loadRemoteMetaData = () => {
+    const { dispatch } = this.store;
+
+    dispatch({
+      type: 'global/getMetaData',
+      payload: { force: true },
+    });
   };
 }
 

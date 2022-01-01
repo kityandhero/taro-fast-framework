@@ -967,7 +967,7 @@ export function formatMoney({
   decimal: decimalSource = '.',
 }) {
   let number = numberSource || 0;
-  //保留的小位数 可以写成 formatMoney(542986,3) 后面的是保留的小位数，否则默 认保留两位
+  //保留的小位数 可以写成 formatMoney(542986,3) 后面的是保留的小位数, 否则默 认保留两位
   // eslint-disable-next-line no-restricted-globals
   let places = !isNaN((placesSource = Math.abs(placesSource)))
     ? placesSource
@@ -1013,7 +1013,7 @@ export function endsWith(source, target, position) {
 }
 
 /**
- * 如果字符串末尾匹配目标字符串，则从源字符串末尾移除匹配项
+ * 如果字符串末尾匹配目标字符串, 则从源字符串末尾移除匹配项
  */
 export function removeEndMatch(source, target) {
   if (!isString(source)) {
@@ -1091,7 +1091,7 @@ export function formatMoneyToChinese({ target }) {
   let IntegerNum; // 金额整数部分
   let DecimalNum; // 金额小数部分
   let ChineseString = ''; // 输出的中文金额字符串
-  let parts; // 分离金额后用的数组，预定义
+  let parts; // 分离金额后用的数组, 预定义
   if (money === '') {
     return '';
   }
@@ -1192,7 +1192,7 @@ function getBrowserInfoCore() {
       android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, // android 终端或uc浏览器
       iPhone: u.indexOf('iPhone') > -1, // 是否为 iPhone 或者 QQHD 浏览器
       iPad: u.indexOf('iPad') > -1, // 是否iPad
-      webApp: u.indexOf('Safari') === -1, // 是否web应该程序，没有头部与底部
+      webApp: u.indexOf('Safari') === -1, // 是否web应该程序, 没有头部与底部
     };
   };
 
@@ -1285,7 +1285,7 @@ export function refitCommonData(listData, empty, otherListData) {
  * @returns
  */
 export function evil(fn) {
-  // 一个变量指向Function，防止有些前端编译工具报错
+  // 一个变量指向Function, 防止有些前端编译工具报错
   const Fn = Function;
   return new Fn(`return ${fn}`)();
 }
@@ -1394,7 +1394,7 @@ export function clearLocalStorage() {
 }
 
 /**
- * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state，
+ * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state,
  * @export
  */
 export function getDerivedStateFromPropsForUrlParamsCore(nextProps) {
@@ -1412,7 +1412,7 @@ export function getDerivedStateFromPropsForUrlParamsCore(nextProps) {
 }
 
 /**
- * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state,如果值重复，则返回null，
+ * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state,如果值重复, 则返回null,
  * @export
  */
 export function getDerivedStateFromPropsForUrlParams(
@@ -1464,7 +1464,7 @@ export function difference(array, values) {
 
 /**
  * 筛选需要的集合
- * @param {collection} 可筛选的对象，例如数组
+ * @param {collection} 可筛选的对象, 例如数组
  * @param {predicateFunction} 每次迭代调用的筛选函数
  */
 export function filter(collection, predicateFunction) {
@@ -1472,8 +1472,8 @@ export function filter(collection, predicateFunction) {
 }
 
 /**
- * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数:  (value)。
- * @param {collection}  (Array|Object), 用来迭代的集合。
+ * 创建一个元素数组.  以 iteratee 处理的结果升序排序.  这个方法执行稳定排序, 也就是说相同元素会保持原始排序.  iteratees 调用1个参数:  (value).
+ * @param {collection}  (Array|Object), 用来迭代的集合.
  * @param {predicateFunction} 这个函数决定排序
  */
 export function sortBy(collection, predicateFunction) {
@@ -1481,8 +1481,8 @@ export function sortBy(collection, predicateFunction) {
 }
 
 /**
- * 该方法返回第一个通过 predicateFunction 判断为真值的元素的索引值（index），而不是元素本身。
- * @param {array} (Array): 要搜索的数组。
+ * 该方法返回第一个通过 predicateFunction 判断为真值的元素的索引值（index）, 而不是元素本身.
+ * @param {array} (Array): 要搜索的数组.
  * @param {predicateFunction} 这个函数会在每一次迭代调用
  * @param {fromIndex} (number): The index to search from.
  */
@@ -1491,8 +1491,8 @@ export function findIndex(array, predicateFunction, fromIndex = 0) {
 }
 
 /**
- * 该方法返回第一个通过 predicateFunction 判断为真值的元素的索引值（index），而不是元素本身,返回匹配元素，否则返回 undefined。。
- * @param {array} (Array): 要搜索的数组。
+ * 该方法返回第一个通过 predicateFunction 判断为真值的元素的索引值（index）, 而不是元素本身,返回匹配元素, 否则返回 undefined. .
+ * @param {array} (Array): 要搜索的数组.
  * @param {predicateFunction} 这个函数会在每一次迭代调用
  * @param {fromIndex} (number): The index to search from.
  */
@@ -1519,7 +1519,7 @@ export function replace(source, pattern, replacement) {
 }
 
 /**
- * 移除数组中predicate（断言）返回为真值的所有元素，并返回移除元素组成的数组。predicate（断言） 会传入3个参数:  (value, index, array)。
+ * 移除数组中predicate（断言）返回为真值的所有元素, 并返回移除元素组成的数组. predicate（断言） 会传入3个参数:  (value, index, array).
  * @param {*} array
  * @param {*} predicate (Array|Function|Object|string): 每次迭代调用的函数
  */
@@ -1559,7 +1559,7 @@ export function fixedZero(val) {
  * @param {*} other
  */
 export function buildFieldHelper(v, prefix = '注: ') {
-  return `${prefix}${v}。`;
+  return `${prefix}${v}. `;
 }
 
 export function checkLocalhost() {
@@ -1602,7 +1602,7 @@ export function removeNearestLocalhostNotifyCache() {
 }
 
 /**
- * 尝试发送最近一次本地调用通知（一般用于开发阶段，提示调用的接口域）
+ * 尝试发送最近一次本地调用通知（一般用于开发阶段, 提示调用的接口域）
  */
 export function trySendNearestLocalhostNotify({ text }) {
   let needSend = false;
@@ -1625,7 +1625,7 @@ export function trySendNearestLocalhostNotify({ text }) {
       }
 
       if (needSend) {
-        const message = `当前接口域名: ${text}。`;
+        const message = `当前接口域名: ${text}. `;
 
         notify({
           type: notificationTypeCollection.info,
@@ -1757,7 +1757,7 @@ export function checkFromConfig({ label, name, helper }) {
 }
 
 /**
- * 依照某个键的值进行排序，请确保键的值为数字型
+ * 依照某个键的值进行排序, 请确保键的值为数字型
  */
 export function sortCollectionByKey({
   operate,
@@ -1870,7 +1870,7 @@ export function sortCollectionByKey({
       break;
 
     default:
-      const text = `不符合的操作，允许的操作为['${sortOperate.moveUp}','${sortOperate.moveDown}']!`;
+      const text = `不符合的操作, 允许的操作为['${sortOperate.moveUp}','${sortOperate.moveDown}']!`;
 
       showWarnMessage({
         message: text,
