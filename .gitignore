@@ -55,3 +55,4 @@ screenshot
 /yarn.lock
 /package-lock.json
 /packages/taro-fast-framework/es
+/packages/taro-test/es
