@@ -37,6 +37,7 @@
   "dependencies": {
     "@tarojs/components": "3.3.19",
     "@tarojs/react": "3.3.19",
+    "@tarojs/redux": "^2.2.10",
     "@tarojs/runtime": "3.3.19",
     "@tarojs/taro": "3.3.19",
     "react": "^17.0.2",

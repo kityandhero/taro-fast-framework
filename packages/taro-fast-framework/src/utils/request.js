@@ -33,10 +33,8 @@ export class Request {
         recordError(res);
       },
     });
-    // console.log(options);
-    return Taro.request(options).then((response) => {
-      // response.data.statusCode = response.statusCode
 
+    return Taro.request(options).then((response) => {
       const { code } = response.data;
 
       if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
@@ -59,7 +57,7 @@ export class Request {
    * @returns
    * @memberof PostJson
    */
-  static PostJson(url, data, header = {}) {
+  static Post(url, data, header = {}) {
     try {
       const token = getToken() || "anonymous";
       const openId = getOpenId();

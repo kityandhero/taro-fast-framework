@@ -7,23 +7,11 @@ import babel from "@rollup/plugin-babel";
 import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
 
-// 供 Loader 使用的运行时入口
-export default {
-  external: (d) => {
-    return (
-      /^react$/.test(d) ||
-      /^@tarojs\/taro$/.test(d) ||
-      /^@tarojs\/taro-h5$/.test(d) ||
-      d.includes("@babel/runtime")
-    );
-  },
-  input: {
+const inputFile = {
+  ...{
     index: "src/index.ts",
-    "customComponents/AppComponent/index":
-      "src/customComponents/AppComponent/index.jsx",
-    "customComponents/VerticalBox/index":
-      "src/customComponents/VerticalBox/index.jsx",
-    "customComponents/Loading/index": "src/customComponents/Loading/index.jsx",
+  },
+  ...{
     "utils/constants": "src/utils/constants.js",
     "utils/mediaDefault": "src/utils/mediaDefault.js",
     "utils/typeCheck": "src/utils/typeCheck.js",
@@ -39,6 +27,40 @@ export default {
     "utils/globalModel": "src/utils/globalModel.js",
     "utils/defaultSettingsSpecial": "src/utils/defaultSettingsSpecial.js",
   },
+  ...{
+    "customComponents/AppComponent/index":
+      "src/customComponents/AppComponent/index.jsx",
+    "customComponents/VerticalBox/index":
+      "src/customComponents/VerticalBox/index.jsx",
+    "customComponents/Loading/index": "src/customComponents/Loading/index.jsx",
+  },
+  ...{
+    "framework/Infrastructure/index": "src/framework/Infrastructure/index.js",
+    "framework/Base/index": "src/framework/Base/index.js",
+    "framework/ComponentWrapper/index":
+      "src/framework/ComponentWrapper/index.js",
+    "framework/Common/index": "src/framework/Core/index.js",
+    "framework/Common/index": "src/framework/Common/index.js",
+    "framework/SupplementCore/index": "src/framework/SupplementCore/index.js",
+    "framework/Supplement/index": "src/framework/Supplement/index.js",
+    "framework/SupplementWrapper/index":
+      "src/framework/SupplementWrapper/index.js",
+    "framework/AuthorizationWrapper/index":
+      "src/framework/AuthorizationWrapper/index.js",
+  },
+};
+
+// 供 Loader 使用的运行时入口
+export default {
+  external: (d) => {
+    return (
+      /^react$/.test(d) ||
+      /^@tarojs\/taro$/.test(d) ||
+      /^@tarojs\/taro-h5$/.test(d) ||
+      d.includes("@babel/runtime")
+    );
+  },
+  input: inputFile,
   plugins: [
     resolve({
       preferBuiltins: false,
@@ -63,7 +85,7 @@ export default {
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", "ts", "tsx"],
       babelHelpers: "runtime",
     }),
-    // terser(),
+    terser(),
   ],
   external: [
     "react",

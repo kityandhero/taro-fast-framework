@@ -1,5 +1,22 @@
 import { emptyLogo as emptyLogoSource } from "./mediaDefault";
 
+export const underlyingState = {
+  dataLoading: false,
+  loadSuccess: false,
+  reloading: false,
+  searching: false,
+  refreshing: false,
+  paging: false,
+  processing: false,
+  dispatchComplete: true,
+  pageNo: 1,
+  pageSize: 10,
+};
+
+export const underlyingExtensionState = {
+  dataLoading: true,
+};
+
 export const locationModeCollection = {
   unknown: 0,
   auto: 1,
@@ -81,9 +98,7 @@ export const appInitDefault = {
   audioUploadMaxSize: 4,
   videoUploadMaxSize: 4,
   fileUploadMaxSize: 2,
-  useNprogress: true,
-  tinymceApiKey: "",
-  tinymceImagesUploadUrl: "",
+  withoutPermissionRedirectPath: "",
 };
 
 /**
@@ -624,11 +639,6 @@ export const cardConfig = {
      * tree
      */
     tree: "tree",
-
-    /**
-     * tinymce
-     */
-    tinymce: "tinymce",
   },
 };
 

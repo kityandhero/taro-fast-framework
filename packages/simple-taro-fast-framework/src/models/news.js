@@ -1,0 +1,35 @@
+import {
+  handleCommonDataAssist,
+  handleListDataAssist,
+  handlePageListDataAssist,
+} from "taro-fast-framework/es/utils/requestAssistor";
+
+import { getOverviewData } from "../services/news";
+
+export default {
+  namespace: "news",
+  state: {},
+
+  effects: {
+    *getOverview({ payload }, { call, put }) {
+      const response = yield call(getOverviewData, payload);
+
+      yield put({
+        type: "handleCommonData",
+        payload: response,
+      });
+    },
+  },
+
+  reducers: {
+    handleCommonData(state, action) {
+      return handleCommonDataAssist(state, action);
+    },
+    handleListData(state, action) {
+      return handleListDataAssist(state, action);
+    },
+    handlePageListData(state, action) {
+      return handlePageListDataAssist(state, action);
+    },
+  },
+};

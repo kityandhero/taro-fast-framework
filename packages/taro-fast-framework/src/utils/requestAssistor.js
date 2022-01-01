@@ -7,6 +7,7 @@ import {
   showErrorMessage,
   getTaroGlobalData,
   redirectTo,
+  trim,
 } from "./tools";
 import { getToken } from "./globalStorageAssist";
 import remoteRequest from "./request";
@@ -17,6 +18,7 @@ import {
   apiVirtualFailData,
 } from "./virtualRequest";
 import { isFunction, isObject, isString, isUndefined } from "./typeCheck";
+import { toUpper } from "./typeConvert";
 
 /**
  * 错误数据模型
@@ -363,6 +365,7 @@ export function handlePageListDataAssist(
  * begin request（remote request / local virtual requests）
  * @param {*} api [string]: request address
  * @param {*} params [object]: request params
+ * @param {*} header [object]: request header
  * @param {*} method [string]: ’GET‘ or ’POST‘, default is ’POST‘
  * @param {*} useVirtualRequest [bool]: whether to apply virtual requests
  * @param {*} showUseVirtualRequestMessage [bool]: whether display virtual request message prompt
@@ -376,6 +379,7 @@ export async function request({
   api,
   urlParams = null,
   params = {},
+  header = {},
   method = "POST",
   useVirtualRequest = defaultSettingsLayoutCustom.getUseVirtualRequest(),
   showUseVirtualRequestMessage = defaultSettingsLayoutCustom.getShowUseVirtualRequestMessage(),
@@ -492,10 +496,11 @@ export async function request({
     });
   }
 
-  return remoteRequest(url, {
-    method,
-    data: params,
-  });
+  if (trim(toUpper(method)) === "POST") {
+    return remoteRequest.Post(url, params, header || {});
+  }
+
+  throw new Error(`unsupported method:${method}`);
 }
 
 /**

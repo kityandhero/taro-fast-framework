@@ -1,4 +1,8 @@
-import { toNumber as toNumberLodash, toString as toStringLodash } from "lodash";
+import {
+  toNumber as toNumberLodash,
+  toString as toStringLodash,
+  toUpper as toUpperLodash,
+} from "lodash";
 
 import { isDate, isMoney, isString } from "./typeCheck";
 
@@ -36,6 +40,10 @@ export function toPercentage(val) {
 
 export function toString(value) {
   return toStringLodash(value);
+}
+
+export function toUpper(value) {
+  return toUpperLodash(value);
 }
 
 export function toDatetime(v) {

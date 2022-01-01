@@ -1,9 +1,9 @@
-import { Component } from "react";
+import { Component } from 'react'
 
 class AppComponent extends Component {
   taroGlobalData = {
-    test: "success",
-  };
+    test: 'success',
+  }
 }
 
-export default AppComponent;
+export default AppComponent

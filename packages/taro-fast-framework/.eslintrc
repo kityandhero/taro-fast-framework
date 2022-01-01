@@ -4,7 +4,6 @@
   "parserOptions": {
     "requireConfigFile": false
   },
-  "plugins": ["jsx"],
   "rules": {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
@@ -28,6 +27,7 @@
     "compat/compat": 0,
     "@typescript-eslint/no-this-alias": ["off"],
     "@typescript-eslint/no-unused-vars": 1,
-    "@typescript-eslint/no-invalid-this": 0
+    "@typescript-eslint/no-invalid-this": 0,
+    "jsx-quotes": ["error", "prefer-double"]
   }
 }
