@@ -54,12 +54,12 @@ class VerticalBox extends PureComponent {
     }
 
     const flexStyle = {
+      ...(style || {}),
       ...{
         display: "flex",
         width: "100%",
         height: "100%",
       },
-      ...(style || {}),
       ...{
         alignItems: alignStyle,
         justifyContent: alignJustifyStyle,
