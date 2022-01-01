@@ -57,7 +57,7 @@ export default {
     postcss({
       plugins: [autoprefixer(), cssnano()],
       inject: { insertAt: "top" },
-      extract: false,
+      extract: true,
     }),
     babel({
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", "ts", "tsx"],

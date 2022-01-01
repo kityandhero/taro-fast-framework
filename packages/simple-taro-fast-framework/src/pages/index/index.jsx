@@ -8,7 +8,7 @@ import {
 import VerticalBox from "taro-fast-framework/es/customComponents/VerticalBox";
 import Loading from "taro-fast-framework/es/customComponents/Loading";
 
-import "./index.less";
+import "taro-fast-framework/es/index.css";
 
 export default class Index extends Component {
   componentWillMount() {}

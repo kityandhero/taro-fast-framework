@@ -21,10 +21,10 @@ class Loading extends Component {
     const ringStyle = Object.assign({}, colorStyle, sizeStyle);
 
     return (
-      <View className={styles.loading} style={sizeStyle}>
-        <View className={styles.ring} style={ringStyle}></View>
-        <View className={styles.ring} style={ringStyle}></View>
-        <View className={styles.ring} style={ringStyle}></View>
+      <View className="tff_loading" style={sizeStyle}>
+        <View className="tff_loading__ring" style={ringStyle}></View>
+        <View className="tff_loading__ring" style={ringStyle}></View>
+        <View className="tff_loading__ring" style={ringStyle}></View>
       </View>
     );
   }
