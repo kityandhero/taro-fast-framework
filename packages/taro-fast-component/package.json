@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-component",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "private": false,
   "description": "taro-fast-component",
   "keywords": [
@@ -10,20 +10,8 @@
   "homepage": "https://github.com/kityandhero/taro-fast-framework.git",
   "license": "MIT",
   "main": "/src/index.ts",
-  "directories": {
-    "es": "es"
-  },
-  "files": [
-    "es"
-  ],
-  "publishConfig": {
-    "registry": "http://localhost:4873/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
-  },
   "scripts": {
+    "publish:compression": "npm run build:rollup-compression && npm publish",
     "v:p": "npm version patch && npm publish",
     "clean-file": "rimraf ./node_modules",
     "build:rollup-noCompression": "rimraf ./es && rollup --config rollup.config.noCompression.js",
@@ -104,6 +92,16 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^24.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.5.0"
+  },
+  "directories": {
+    "es": "es"
+  },
+  "files": [
+    "es"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
   },
   "bugs": {
     "url": "https://github.com/kityandhero/taro-fast-framework/issues"
