@@ -100,15 +100,17 @@ export class Request {
         }
       }
 
-      trySendNearestLocalhostNotify({ text: corsUrl });
+      const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
+
+      if (showRequestInfo) {
+        trySendNearestLocalhostNotify({ text: corsUrl });
+      }
 
       if (!isString(urlChange)) {
         recordObject({ urlChange });
 
         throw new Error('urlChange is not string');
       }
-
-      const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
 
       if (showRequestInfo) {
         recordObject({
