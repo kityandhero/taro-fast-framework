@@ -5,12 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### 1.0.1 (2022-01-02)
 
-**Note:** Version bump only for package taro-fast-common
-
-
-
-
-
-### 1.0.1 (2022-01-02)
-
-**Note:** Version bump only for package taro-fast-framework
+**Note:** Version bump only for package taro-fast-component
