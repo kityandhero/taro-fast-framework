@@ -1,5 +1,7 @@
 import Taro from '@tarojs/taro';
+
 import { isFunction } from './typeCheck';
+
 /**
  * 提示与加载工具类
  */

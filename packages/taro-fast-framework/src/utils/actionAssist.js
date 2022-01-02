@@ -8,10 +8,14 @@ import {
   getPathValue,
   recordError,
   stringIsNullOrWhiteSpace,
-} from './tools';
-import { isFunction, isString, isUndefined } from './typeCheck';
-import Tips from './tips';
-import { toString } from './typeConvert';
+} from 'taro-fast-common/es/utils/tools';
+import {
+  isFunction,
+  isString,
+  isUndefined,
+} from 'taro-fast-common/es/utils/typeCheck';
+import Tips from 'taro-fast-common/es/utils/tips';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 /**
  * getApiDataCore

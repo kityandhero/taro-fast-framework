@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { View } from '@tarojs/components';
 
-import { pxTransform } from 'taro-fast-component/es/utils/tools';
-import { toNumber, toString } from 'taro-fast-component/es/utils/typeConvert';
+import { pxTransform } from 'taro-fast-common/es/utils/tools';
+import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import './index.less';
 

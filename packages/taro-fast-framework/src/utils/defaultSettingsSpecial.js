@@ -1,9 +1,12 @@
-import { getAppInitConfigData, stringIsNullOrWhiteSpace } from "./tools";
+import {
+  getAppInitConfigData,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import {
   apiSuccessCode as apiSuccessCodeDefault,
   authenticationFailCode as authenticationFailCodeDefault,
   emptyLogo as emptyLogoImage,
-} from "./constants";
+} from 'taro-fast-common/es/utils/constants';
 
 export const defaultSettingsLayoutCustom = {
   /**
@@ -14,11 +17,11 @@ export const defaultSettingsLayoutCustom = {
     const appInit = getAppInitConfigData();
 
     const { withoutPermissionRedirectPath } = {
-      ...{ withoutPermissionRedirectPath: "" },
+      ...{ withoutPermissionRedirectPath: '' },
       ...(appInit || {}),
     };
 
-    return withoutPermissionRedirectPath || "";
+    return withoutPermissionRedirectPath || '';
   },
   getFileUploadMaxSize: () => {
     const appInit = getAppInitConfigData();
@@ -116,21 +119,21 @@ export const defaultSettingsLayoutCustom = {
     const appInit = getAppInitConfigData();
 
     const { loginPath } = {
-      ...{ loginPath: "" },
+      ...{ loginPath: '' },
       ...(appInit || {}),
     };
 
-    return loginPath || "";
+    return loginPath || '';
   },
   getApiVersion: () => {
     const appInit = getAppInitConfigData();
 
     const { apiVersion } = {
-      ...{ apiVersion: "" },
+      ...{ apiVersion: '' },
       ...(appInit || {}),
     };
 
-    return apiVersion || "";
+    return apiVersion || '';
   },
   getUseVirtualRequest: () => {
     const appInit = getAppInitConfigData();
@@ -176,41 +179,41 @@ export const defaultSettingsLayoutCustom = {
     const appInit = getAppInitConfigData();
 
     const { platformName } = {
-      ...{ platformName: "" },
+      ...{ platformName: '' },
       ...(appInit || {}),
     };
 
-    return platformName || "";
+    return platformName || '';
   },
   getAppName: () => {
     const appInit = getAppInitConfigData();
 
     const { appName } = {
-      ...{ appName: "" },
+      ...{ appName: '' },
       ...(appInit || {}),
     };
 
-    return appName || "";
+    return appName || '';
   },
   getAppDescription: () => {
     const appInit = getAppInitConfigData();
 
     const { appDescription } = {
-      ...{ appDescription: "" },
+      ...{ appDescription: '' },
       ...(appInit || {}),
     };
 
-    return appDescription || "";
+    return appDescription || '';
   },
   getTitle: () => {
     const appInit = getAppInitConfigData();
 
     const { appName } = {
-      ...{ appName: "" },
+      ...{ appName: '' },
       ...(appInit || {}),
     };
 
-    return appName || "";
+    return appName || '';
   },
   getLoginLogo: () => {
     const appInit = getAppInitConfigData();
@@ -236,21 +239,21 @@ export const defaultSettingsLayoutCustom = {
     const appInit = getAppInitConfigData();
 
     const { shareLogoName } = {
-      ...{ shareLogoName: "" },
+      ...{ shareLogoName: '' },
       ...(appInit || {}),
     };
 
-    return shareLogoName || "";
+    return shareLogoName || '';
   },
   getCompanyName: () => {
     const appInit = getAppInitConfigData();
 
     const { companyName } = {
-      ...{ companyName: "" },
+      ...{ companyName: '' },
       ...(appInit || {}),
     };
 
-    return companyName || "";
+    return companyName || '';
   },
   getLeftBarLogo: (remoteLogo) => {
     if (!stringIsNullOrWhiteSpace(remoteLogo || null)) {
@@ -270,21 +273,21 @@ export const defaultSettingsLayoutCustom = {
     const appInit = getAppInitConfigData();
 
     const { leftBarText } = {
-      ...{ leftBarText: "" },
+      ...{ leftBarText: '' },
       ...(appInit || {}),
     };
 
-    return leftBarText || "";
+    return leftBarText || '';
   },
   getCopyright: () => {
     const appInit = getAppInitConfigData();
 
     const { copyright } = {
-      ...{ copyright: "" },
+      ...{ copyright: '' },
       ...(appInit || {}),
     };
 
-    return copyright || "";
+    return copyright || '';
   },
 };
 

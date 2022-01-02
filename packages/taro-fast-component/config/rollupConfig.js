@@ -34,7 +34,7 @@ const externalCollection = [
   'redux-thunk',
   'dva-loading',
   'dva-core',
-  'taro-fast-framework',
+  'taro-fast-common',
 ];
 
 export function buildConfig({ terser: whetherTerser = false }) {

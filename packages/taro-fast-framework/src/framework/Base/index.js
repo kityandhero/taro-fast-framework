@@ -4,10 +4,15 @@ import {
   showRuntimeError,
   recordText,
   showErrorMessage,
-} from '../../utils/tools';
+} from 'taro-fast-common/es/utils/tools';
+import {
+  isUndefined,
+  isFunction,
+  isEqual,
+} from 'taro-fast-common/es/utils/typeCheck';
+import { toString, toNumber } from 'taro-fast-common/es/utils/typeConvert';
+
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
-import { isUndefined, isFunction, isEqual } from '../../utils/typeCheck';
-import { toString, toNumber } from '../../utils/typeConvert';
 
 import Infrastructure from '../Infrastructure';
 

@@ -3,8 +3,9 @@ import {
   stringIsNullOrWhiteSpace,
   showWarnMessage,
   redirectTo,
-} from './tools';
-import { isFunction } from './typeCheck';
+} from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+
 import { getToken } from './globalStorageAssist';
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 

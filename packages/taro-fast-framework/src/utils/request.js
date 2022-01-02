@@ -6,8 +6,11 @@ import {
   stringIsNullOrWhiteSpace,
   recordObject,
   recordError,
-} from './tools';
-import { isString } from './typeCheck';
+} from 'taro-fast-common/es/utils/tools';
+import { isString } from 'taro-fast-common/es/utils/typeCheck';
+import { requestMethod } from 'taro-fast-common/es/utils/constants';
+import Tips from 'taro-fast-common/es/utils/tips';
+
 import {
   getTokenKeyName,
   getToken,
@@ -15,9 +18,7 @@ import {
   getSessionId,
   getLocationMode,
 } from './globalStorageAssist';
-import { requestMethod } from './constants';
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
-import Tips from './tips';
 
 export class Request {
   /**

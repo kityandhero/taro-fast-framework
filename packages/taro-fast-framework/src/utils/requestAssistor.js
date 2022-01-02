@@ -8,7 +8,15 @@ import {
   getTaroGlobalData,
   redirectTo,
   trim,
-} from './tools';
+} from 'taro-fast-common/es/utils/tools';
+import {
+  isFunction,
+  isObject,
+  isString,
+  isUndefined,
+} from 'taro-fast-common/es/utils/typeCheck';
+import { toUpper } from 'taro-fast-common/es/utils/typeConvert';
+
 import { getToken } from './globalStorageAssist';
 import remoteRequest from './request';
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
@@ -17,8 +25,6 @@ import {
   apiVirtualSuccessData,
   apiVirtualFailData,
 } from './virtualRequest';
-import { isFunction, isObject, isString, isUndefined } from './typeCheck';
-import { toUpper } from './typeConvert';
 
 /**
  * 错误数据模型

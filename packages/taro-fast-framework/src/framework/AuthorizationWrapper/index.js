@@ -2,11 +2,12 @@ import {
   redirectTo,
   stringIsNullOrWhiteSpace,
   showRuntimeError,
-} from "../../utils/tools";
-import { checkHasAuthority } from "../../utils/authority";
-import { defaultSettingsLayoutCustom } from "../../utils/defaultSettingsSpecial";
+} from 'taro-fast-common/es/utils/tools';
 
-import SupplementWrapper from "../SupplementWrapper";
+import { checkHasAuthority } from '../../utils/authority';
+import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
+
+import SupplementWrapper from '../SupplementWrapper';
 
 class AuthorizationWrapper extends SupplementWrapper {
   componentAuthority = null;
@@ -27,7 +28,7 @@ class AuthorizationWrapper extends SupplementWrapper {
         defaultSettingsLayoutCustom.getWithoutPermissionRedirectPath();
 
       if (stringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
-        throw new Error("未配置无交互权限时的跳转目标");
+        throw new Error('未配置无交互权限时的跳转目标');
       }
 
       redirectTo(withoutPermissionRedirectPath);

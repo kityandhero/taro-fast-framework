@@ -1,8 +1,8 @@
 import {
   getDerivedStateFromPropsForUrlParamsCore,
   showRuntimeError,
-} from '../../utils/tools';
-import { underlyingExtensionState } from '../../utils/constants';
+} from 'taro-fast-common/es/utils/tools';
+import { underlyingExtensionState } from 'taro-fast-common/es/utils/constants';
 
 import Base from '../Base';
 

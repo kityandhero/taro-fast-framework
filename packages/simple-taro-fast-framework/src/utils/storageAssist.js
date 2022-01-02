@@ -2,12 +2,12 @@ import {
   removeLocalStorage,
   getJsonFromLocalStorage,
   saveJsonToLocalStorage,
-} from "taro-fast-framework/es/utils/tools";
-import { getToken } from "taro-fast-framework/es/utils/globalStorageAssist";
+} from 'taro-fast-common/es/utils/tools';
+import { getToken } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 const storageKeyCollection = {
-  metaData: "metaData",
-  currentOperator: "currentOperator",
+  metaData: 'metaData',
+  currentOperator: 'currentOperator',
 };
 
 /**
@@ -26,7 +26,7 @@ export function getMetaDataCache() {
     return null;
   }
 
-  if ((d.dataVersion || "") === "") {
+  if ((d.dataVersion || '') === '') {
     return null;
   }
 
@@ -88,7 +88,7 @@ export function getCurrentOperatorCache() {
     return null;
   }
 
-  if (d.flag === "" || d.flag !== getToken()) {
+  if (d.flag === '' || d.flag !== getToken()) {
     return null;
   }
 
@@ -107,7 +107,7 @@ export function setCurrentOperatorCache(o) {
 
   const d = {
     data: o || null,
-    flag: getToken() || "",
+    flag: getToken() || '',
   };
 
   return saveJsonToLocalStorage(key, d);

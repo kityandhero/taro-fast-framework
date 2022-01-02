@@ -6,16 +6,26 @@ import {
   recordError,
   getValueByKey,
   stringIsNullOrWhiteSpace,
-} from "./tools";
-import { isArray, isObject, isString } from "./typeCheck";
-import { hasCache, setCache, getCache, flushAllCache } from "./cacheAssist";
+} from 'taro-fast-common/es/utils/tools';
+import {
+  isArray,
+  isObject,
+  isString,
+} from 'taro-fast-common/es/utils/typeCheck';
+import {
+  hasCache,
+  setCache,
+  getCache,
+  flushAllCache,
+} from 'taro-fast-common/es/utils/cacheAssist';
+
 import {
   storageKeyCollection,
   getAccessWayCollectionCache,
-} from "./globalStorageAssist";
+} from './globalStorageAssist';
 
-const authorityCollectionCache = "authorityCollectionCache";
-const superPermissionCacheKey = "hasSuperPermission";
+const authorityCollectionCache = 'authorityCollectionCache';
+const superPermissionCacheKey = 'hasSuperPermission';
 
 function getAllAuthorityCore() {
   let result = [];
@@ -31,7 +41,7 @@ function getAllAuthorityCore() {
   }
 
   const authorityString = getStringFromLocalStorage(
-    storageKeyCollection.authorityCollection
+    storageKeyCollection.authorityCollection,
   );
 
   let authority;
@@ -42,7 +52,7 @@ function getAllAuthorityCore() {
     authority = authorityString;
   }
 
-  if (typeof authority === "string") {
+  if (typeof authority === 'string') {
     result.push(authority);
   } else {
     result = isArray(authority) ? authority : [];
@@ -57,7 +67,7 @@ function getAllAuthorityCore() {
 }
 
 function getSuperPermission() {
-  let result = "";
+  let result = '';
 
   const accessWayCollection = getAccessWayCollectionCache();
 
@@ -67,13 +77,13 @@ function getSuperPermission() {
 
   const superPermission = getValueByKey({
     data: accessWayCollection,
-    key: "super",
+    key: 'super',
   });
 
   if (isObject(superPermission)) {
     const superAuth = getValueByKey({
       data: superPermission,
-      key: "permission",
+      key: 'permission',
     });
 
     if (isString(superAuth)) {
@@ -103,7 +113,7 @@ export function checkIsSuper() {
 
   if (!stringIsNullOrWhiteSpace(superPermission)) {
     const list = getAllAuthority();
-    const isSuper = (list || []).find((o) => o === superPermission) || "";
+    const isSuper = (list || []).find((o) => o === superPermission) || '';
 
     if (isSuper === superPermission) {
       setCache({
@@ -152,7 +162,7 @@ function checkHasAuthorities(authCollection) {
     return result;
   }
 
-  const text = "无效的待验证权限";
+  const text = '无效的待验证权限';
 
   showErrorMessage({
     message: text,
@@ -175,12 +185,12 @@ function checkHasAuthorityCore(auth) {
         (this || null) != null
           ? (this.constructor || null) != null
             ? this.constructor.name
-            : ""
-          : "",
+            : ''
+          : '',
     });
   }
 
-  let result = "0";
+  let result = '0';
 
   const existCache = hasCache({ key: auth });
 
@@ -188,7 +198,7 @@ function checkHasAuthorityCore(auth) {
     result = getCache({ key: auth });
 
     if (result !== undefined) {
-      return result !== "0";
+      return result !== '0';
     }
   }
 
@@ -206,14 +216,14 @@ function checkHasAuthorityCore(auth) {
     });
   }
 
-  result = !!(v !== undefined) ? "1" : "0";
+  result = !!(v !== undefined) ? '1' : '0';
 
   setCache({
     key: auth,
     value: result,
   });
 
-  return result !== "0";
+  return result !== '0';
 }
 
 export function checkHasAuthority(auth) {
@@ -224,8 +234,8 @@ export function checkHasAuthority(auth) {
         (this || null) != null
           ? (this.constructor || null) != null
             ? this.constructor.name
-            : ""
-          : "",
+            : ''
+          : '',
     });
   }
 
@@ -241,7 +251,7 @@ export function checkHasAuthority(auth) {
     auth,
   });
 
-  throw new Error("auth need string or string array, please check in console.");
+  throw new Error('auth need string or string array, please check in console.');
 }
 
 /**
@@ -250,11 +260,11 @@ export function checkHasAuthority(auth) {
  */
 export function setAuthority(authority) {
   const authorityCollection =
-    typeof authority === "string" ? [authority] : authority;
+    typeof authority === 'string' ? [authority] : authority;
 
   saveJsonToLocalStorage(
     storageKeyCollection.authorityCollection,
-    authorityCollection
+    authorityCollection,
   );
 
   flushAllCache();

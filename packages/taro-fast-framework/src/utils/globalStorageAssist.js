@@ -6,31 +6,35 @@ import {
   saveStringToLocalStorage,
   clearLocalStorage,
   showInfoMessage,
-} from "./tools";
-import { isArray } from "./typeCheck";
-import { toNumber } from "./typeConvert";
-import { hasCache, setCache, getCache } from "./cacheAssist";
+} from 'taro-fast-common/es/utils/tools';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+import {
+  hasCache,
+  setCache,
+  getCache,
+} from 'taro-fast-common/es/utils/cacheAssist';
 import {
   locationModeCollection,
   accessWaySpecialCollection,
-} from "./constants";
+} from 'taro-fast-common/es/utils/constants';
 
 export const storageKeyCollection = {
-  token: "token",
-  accessWayCollection: "accessWayCollection",
-  nearestLocalhostNotify: "nearestLocalhostNotify",
-  authorityCollection: "authorityCollection",
-  currentUrl: "currentUrl",
-  openId: "openId",
-  location: "location",
-  map: "map",
-  effectiveCode: "effectiveCode",
-  sessionId: "sessionId",
-  sessionIdRefreshing: "sessionIdRefreshing",
-  nextCheckLoginUnixTime: "nextCheckLoginUnixTime",
-  needSyncInfo: "needSyncInfo",
-  lastLocation: "lastLocation",
-  remoteCheck: "remoteCheck",
+  token: 'token',
+  accessWayCollection: 'accessWayCollection',
+  nearestLocalhostNotify: 'nearestLocalhostNotify',
+  authorityCollection: 'authorityCollection',
+  currentUrl: 'currentUrl',
+  openId: 'openId',
+  location: 'location',
+  map: 'map',
+  effectiveCode: 'effectiveCode',
+  sessionId: 'sessionId',
+  sessionIdRefreshing: 'sessionIdRefreshing',
+  nextCheckLoginUnixTime: 'nextCheckLoginUnixTime',
+  needSyncInfo: 'needSyncInfo',
+  lastLocation: 'lastLocation',
+  remoteCheck: 'remoteCheck',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -118,7 +122,7 @@ export function getParamsDataCache(key) {
     return null;
   }
 
-  if ((d.dataVersion || "") === "") {
+  if ((d.dataVersion || '') === '') {
     removeParamsDataCache(key);
     return null;
   }
@@ -175,7 +179,7 @@ export function getTokenKeyName() {
 
 export function getTokenObject() {
   const tokenSetObject = {};
-  tokenSetObject[`${getTokenKeyName()}`] = getToken() || "";
+  tokenSetObject[`${getTokenKeyName()}`] = getToken() || '';
 
   return tokenSetObject;
 }
@@ -242,10 +246,10 @@ export function getCurrentUrl() {
 export function setCurrentUrl(url) {
   const key = storageKeyCollection.currentUrl;
 
-  const isTab = (url || "").startsWith("/pages/");
+  const isTab = (url || '').startsWith('/pages/');
 
   const data = {
-    url: url || "",
+    url: url || '',
     isTab,
   };
 
@@ -288,7 +292,7 @@ export function getOpenId() {
 export function setOpenId(openId) {
   const key = storageKeyCollection.openId;
 
-  return saveStringToLocalStorage(key, openId || "");
+  return saveStringToLocalStorage(key, openId || '');
 }
 
 /**
@@ -327,7 +331,7 @@ export function getEffectiveCode() {
 export function setEffectiveCode(effectiveCode) {
   const key = storageKeyCollection.effectiveCode;
 
-  saveStringToLocalStorage(key, effectiveCode || "");
+  saveStringToLocalStorage(key, effectiveCode || '');
 }
 
 /**
@@ -366,7 +370,7 @@ export function getSessionId() {
 export function setSessionId(sessionId) {
   const key = storageKeyCollection.sessionId;
 
-  saveStringToLocalStorage(key, sessionId || "");
+  saveStringToLocalStorage(key, sessionId || '');
 }
 
 /**
@@ -394,7 +398,7 @@ export function getSessionIdRefreshing() {
 
   const v = getStringFromLocalStorage(key);
 
-  return v === "true";
+  return v === 'true';
 }
 
 /**
@@ -409,7 +413,7 @@ export function setSessionIdRefreshing(sessionIdRefreshing) {
 
   saveStringToLocalStorage(
     key,
-    sessionIdRefreshing || false ? "true" : "false"
+    sessionIdRefreshing || false ? 'true' : 'false',
   );
 }
 
@@ -449,7 +453,7 @@ export function getNextCheckLoginUnixTime() {
 export function setNextCheckLoginUnixTime(nextCheckLoginUnixTime) {
   const key = storageKeyCollection.nextCheckLoginUnixTime;
 
-  saveStringToLocalStorage(key, nextCheckLoginUnixTime || "");
+  saveStringToLocalStorage(key, nextCheckLoginUnixTime || '');
 }
 
 /**
@@ -501,14 +505,14 @@ export function setLocationMode(locationMode) {
 
   const v = parseInt(
     locationMode || 0 ? locationMode : locationModeCollection.unknown,
-    10
+    10,
   );
 
   saveStringToLocalStorage(
     key,
     v === locationModeCollection.auto || v === locationModeCollection.custom
       ? v
-      : locationModeCollection.unknown
+      : locationModeCollection.unknown,
   );
 }
 
@@ -565,7 +569,7 @@ export function setMap(map) {
 
   map.dataVersion = nowVersion;
 
-  return saveJsonToLocalStorage(key, map || "");
+  return saveJsonToLocalStorage(key, map || '');
 }
 
 /**
@@ -634,7 +638,7 @@ export function setLocation(location) {
 
   location.dataVersion = nowVersion;
 
-  return saveJsonToLocalStorage(key, location || "");
+  return saveJsonToLocalStorage(key, location || '');
 }
 
 /**
@@ -660,7 +664,7 @@ export function removeLocation() {
 export function getNeedSyncInfo() {
   const key = storageKeyCollection.needSyncInfo;
 
-  const need = (getStringFromLocalStorage(key) || "") === "0";
+  const need = (getStringFromLocalStorage(key) || '') === '0';
 
   return need;
 }
@@ -710,7 +714,7 @@ export function getLastLocation() {
  */
 export function setLastLocation(data) {
   if ((data || null) == null) {
-    const text = "无法存数无效位置数据";
+    const text = '无法存数无效位置数据';
 
     showInfoMessage({
       message: text,

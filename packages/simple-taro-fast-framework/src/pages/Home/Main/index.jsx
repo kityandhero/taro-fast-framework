@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { View, Text, Button } from '@tarojs/components';
 
-import { formatMoney } from 'taro-fast-framework/es/utils/tools';
+import { formatMoney } from 'taro-fast-common/es/utils/tools';
 import AuthorizationWrapper from 'taro-fast-framework/es/framework/AuthorizationWrapper';
 import VerticalBox from 'taro-fast-component/es/customComponents/VerticalBox';
 import Loading from 'taro-fast-component/es/customComponents/Loading';

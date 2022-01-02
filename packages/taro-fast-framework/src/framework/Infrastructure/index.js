@@ -1,9 +1,9 @@
 import Taro from '@tarojs/taro';
 import { Component } from 'react';
 
-import { showErrorMessage } from '../../utils/tools';
-import { isObject } from '../../utils/typeCheck';
-import { underlyingState } from '../../utils/constants';
+import { showErrorMessage } from 'taro-fast-common/es/utils/tools';
+import { isObject } from 'taro-fast-common/es/utils/typeCheck';
+import { underlyingState } from 'taro-fast-common/es/utils/constants';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 

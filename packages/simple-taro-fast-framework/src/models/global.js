@@ -1,4 +1,4 @@
-import { showInfoMessage } from 'taro-fast-framework/es/utils/tools';
+import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
 import {
   pretreatmentRemoteSingleData,
   handleCommonDataAssist,
