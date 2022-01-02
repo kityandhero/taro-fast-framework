@@ -14,4 +14,12 @@ export default class PageWrapper extends AuthorizationWrapper {
     const { global } = this.props;
     return global;
   };
+
+  /**
+   * 登录校验失败时候的回调, 例如访问需要登录才能调用的接口
+   * @returns
+   */
+  authorizeFailCallback = (remoteData) => {
+    console.log(remoteData);
+  };
 }
