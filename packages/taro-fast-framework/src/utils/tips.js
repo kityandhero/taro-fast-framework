@@ -23,7 +23,7 @@ export default class Tips {
           }, 500);
         }
       });
-    }, 0);
+    }, 500);
   }
 
   /**
@@ -33,7 +33,9 @@ export default class Tips {
     if (this.isLoading && !force) {
       return;
     }
+
     this.isLoading = true;
+
     if (Taro.showLoading) {
       Taro.showLoading({
         title: title || '',
@@ -78,7 +80,61 @@ export default class Tips {
           closeCallback(res);
         }
       });
-    }, 0);
+    }, 500);
+  }
+
+  /**
+   * 弹出错误提示框
+   */
+  static error(title, duration = 1500, closeCallback = null) {
+    setTimeout(() => {
+      Taro.showToast({
+        title: title || '',
+        icon: 'none',
+        mask: true,
+        duration: duration,
+      }).then((res) => {
+        if (isFunction(closeCallback)) {
+          closeCallback(res);
+        }
+      });
+    }, 500);
+  }
+
+  /**
+   * 弹出警告提示框
+   */
+  static warning(title, duration = 1500, closeCallback = null) {
+    setTimeout(() => {
+      Taro.showToast({
+        title: title || '',
+        icon: 'none',
+        mask: true,
+        duration: duration,
+      }).then((res) => {
+        if (isFunction(closeCallback)) {
+          closeCallback(res);
+        }
+      });
+    }, 500);
+  }
+
+  /**
+   * 弹出警告提示框
+   */
+  static warn(title, duration = 1500, closeCallback = null) {
+    setTimeout(() => {
+      Taro.showToast({
+        title: title || '',
+        icon: 'none',
+        mask: true,
+        duration: duration,
+      }).then((res) => {
+        if (isFunction(closeCallback)) {
+          closeCallback(res);
+        }
+      });
+    }, 500);
   }
 
   /**
@@ -96,6 +152,6 @@ export default class Tips {
           closeCallback(res);
         }
       });
-    }, 0);
+    }, 500);
   }
 }

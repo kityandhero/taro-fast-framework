@@ -214,7 +214,7 @@ export function showRuntimeError({ message: messageText, showStack = true }) {
 }
 
 export function showSuccessMessage({
-  duration = 3,
+  duration = 1500,
   message: messageText,
   onClose = () => {},
 }) {
@@ -227,7 +227,7 @@ export function showSuccessMessage({
 }
 
 export function showErrorMessage({
-  duration = 3,
+  duration = 1500,
   message: messageText,
   onClose = () => {},
 }) {
@@ -240,7 +240,7 @@ export function showErrorMessage({
 }
 
 export function showWarnMessage({
-  duration = 3,
+  duration = 1500,
   message: messageText,
   onClose = () => {},
 }) {
@@ -256,7 +256,7 @@ export function showWarnMessage({
  * 显示警告信息框
  */
 export function showWarningMessage({
-  duration = 3,
+  duration = 1500,
   message: messageText,
   onClose = () => {},
 }) {
@@ -272,7 +272,7 @@ export function showWarningMessage({
  * 显示消息信息
  */
 export function showInfoMessage({
-  duration = 3,
+  duration = 1500,
   message: messageText,
   onClose = () => {},
 }) {
@@ -284,21 +284,8 @@ export function showInfoMessage({
   });
 }
 
-export function showLoadingMessage({
-  duration = 3,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.loading,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
 export function showOpenMessage({
-  duration = 3,
+  duration = 1500,
   message: messageText,
   onClose = () => {},
 }) {
@@ -319,129 +306,27 @@ export function showMessage({
   requestAnimationFrame(() => {
     switch (type) {
       case messageTypeCollection.success:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.success(messageText, duration, onClose);
         break;
 
       case messageTypeCollection.error:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.error(messageText, duration, onClose);
         break;
 
       case messageTypeCollection.info:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.info(messageText, duration, onClose);
         break;
 
       case messageTypeCollection.warning:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.warning(messageText, duration, onClose);
         break;
 
       case messageTypeCollection.warn:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
-        break;
-
-      case messageTypeCollection.loading:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.warn(messageText, duration, onClose);
         break;
 
       default:
-        setTimeout(() => {
-          Taro.showToast({
-            title: messageText || '',
-            icon: 'none',
-            mask: true,
-            duration,
-          }).then((res) => {
-            if (isFunction(onClose)) {
-              setTimeout(() => {
-                onClose(res);
-              }, 500);
-            }
-          });
-        }, 0);
-
+        Tips.toast(messageText, duration, onClose);
         break;
     }
   });

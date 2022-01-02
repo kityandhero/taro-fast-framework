@@ -22,7 +22,7 @@
     "lint-staged": "lint-staged",
     "lint:f": "cd packages/taro-fast-framework && npm run lint",
     "build:fvp": "npm run build:f && npm run build:vp",
-    "build:f": "cd packages/taro-fast-framework && npm run build && npm run delete:dts",
+    "build:f": "cd packages/taro-fast-framework && npm run build:rollup",
     "build:p": "cd packages/taro-fast-framework && npm publish",
     "build:vp": "cd packages/taro-fast-framework && npm version patch && npm publish",
     "build:fp": "cd packages/taro-fast-framework && npm publish",

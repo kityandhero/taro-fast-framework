@@ -837,7 +837,6 @@ export const messageTypeCollection = {
   info: 'info',
   warning: 'warning',
   warn: 'warn',
-  loading: 'loading',
   open: 'open',
 };
 

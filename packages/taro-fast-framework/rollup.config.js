@@ -28,6 +28,7 @@ const inputFile = {
     'utils/defaultSettingsSpecial': 'src/utils/defaultSettingsSpecial.js',
     'utils/dva': 'src/utils/dva.js',
     'utils/dvaAssist': 'src/utils/dvaAssist.js',
+    'utils/actionAssist': 'src/utils/actionAssist.js',
   },
   ...{
     'customComponents/AppComponent/index':
@@ -87,7 +88,7 @@ export default {
       extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', 'ts', 'tsx'],
       babelHelpers: 'runtime',
     }),
-    terser(),
+    // terser(),
   ],
   external: [
     'react',

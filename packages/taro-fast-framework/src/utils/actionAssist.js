@@ -1,16 +1,17 @@
 import Taro from '@tarojs/taro';
-import Tips from './tips';
 
 import {
-  isFunction,
   notifySuccess,
   showErrorMessage,
   showRuntimeError,
   recordObject,
   getPathValue,
-  isUndefined,
   recordError,
+  stringIsNullOrWhiteSpace,
 } from './tools';
+import { isFunction, isString, isUndefined } from './typeCheck';
+import Tips from './tips';
+import { toString } from './typeConvert';
 
 /**
  * getApiDataCore
@@ -116,7 +117,7 @@ export async function actionCore({
   target,
   handleData,
   successCallback,
-  successMessage = '数据已经操作成功, 请进行后续操作. ',
+  successMessage = '',
   successMessageBuilder = null,
   showProcessing = true,
   textProcessing = '处理中, 请稍后',
@@ -159,68 +160,104 @@ export async function actionCore({
       () => {
         // 延迟一定时间, 优化界面呈现
         setTimeout(() => {
-          dispatch({
-            type: api,
-            payload: params,
-          })
-            .then(() => {
-              if (showProcessing) {
-                setTimeout(() => {
-                  Tips.loaded();
-                }, 200);
-              }
-
-              if (!isFunction(getApiData)) {
-                throw new Error('actionCore: getApiData must be function');
-              }
-
-              const data = getApiData(target.props);
-
-              if ((data || null) == null) {
-                throw new Error('actionCore: getApiData result not allow null');
-              }
-
-              const { dataSuccess } = data;
-
-              if (dataSuccess) {
-                const { data: remoteData } = data;
-
-                let messageText = successMessage;
-
-                if (isFunction(successMessageBuilder)) {
-                  messageText = successMessageBuilder(remoteData);
-                }
-
-                notifySuccess(messageText);
-
-                if (isFunction(successCallback)) {
-                  successCallback({
-                    target,
-                    handleData,
-                    remoteData: remoteData || null,
-                  });
-                }
-              }
-
-              target.setState({
-                processing: false,
-                dispatchComplete: true,
-              });
+          try {
+            dispatch({
+              type: api,
+              payload: params,
             })
-            .catch((res) => {
-              recordObject(res);
+              .then(() => {
+                if (showProcessing) {
+                  setTimeout(() => {
+                    Tips.loaded();
+                  }, 200);
+                }
 
-              if (showProcessing) {
-                setTimeout(() => {
-                  Tips.loaded();
-                }, 200);
-              }
+                if (!isFunction(getApiData)) {
+                  throw new Error('actionCore: getApiData must be function');
+                }
 
-              target.setState({
-                processing: false,
-                dispatchComplete: true,
+                const data = getApiData(target.props);
+
+                if ((data || null) == null) {
+                  throw new Error(
+                    'actionCore: getApiData result not allow null',
+                  );
+                }
+
+                const { dataSuccess } = data;
+
+                if (dataSuccess) {
+                  const {
+                    list: listData,
+                    data: singleData,
+                    extra: extraData,
+                  } = data;
+
+                  let messageText = successMessage;
+
+                  if (isFunction(successMessageBuilder)) {
+                    messageText = successMessageBuilder({
+                      list: listData || [],
+                      data: singleData || {},
+                      extra: extraData || {},
+                    });
+                  }
+
+                  if (!stringIsNullOrWhiteSpace(messageText)) {
+                    notifySuccess(messageText);
+                  }
+
+                  if (isFunction(successCallback)) {
+                    successCallback({
+                      target,
+                      handleData,
+                      remoteData: {
+                        list: listData || [],
+                        data: singleData || {},
+                        extra: extraData || {},
+                      },
+                    });
+                  }
+                }
+
+                target.setState({
+                  processing: false,
+                  dispatchComplete: true,
+                });
+              })
+              .catch((res) => {
+                recordObject(res);
+
+                if (showProcessing) {
+                  setTimeout(() => {
+                    Tips.loaded();
+                  }, 200);
+                }
+
+                target.setState({
+                  processing: false,
+                  dispatchComplete: true,
+                });
               });
+          } catch (e) {
+            Tips.loaded();
+
+            const text = `${toString(
+              e,
+            )}, please confirm dispatch type exists first.`;
+
+            console.log({
+              message: text,
+              dispatchInfo: {
+                type: api,
+                payload: params,
+              },
             });
+
+            showErrorMessage({
+              message: text,
+            });
+          }
         }, 400);
       },
     );
@@ -228,37 +265,145 @@ export async function actionCore({
 }
 
 /**
- * confirmActionCore
+ * actionSheetCore
  * @param {*} param0
  */
-export async function confirmActionCore({
+export async function actionSheetCore({
+  title,
   target,
   handleData,
   successCallback,
-  okAction = null,
-  successMessage = '数据已经操作成功, 请进行后续操作. ',
+  successMessage = '',
   successMessageBuilder = null,
   showProcessing = true,
+  textProcessing = '处理中, 请稍后',
+  confirmText = '确定',
+  confirmColor = '',
+  confirmAction = null,
+  errorCallback = null,
+  completeCallback = null,
 }) {
-  if (!isFunction(okAction)) {
-    throw new Error('actionCore: okAction must be function');
+  if (!isFunction(confirmAction)) {
+    throw new Error('actionSheetCore: confirmAction must be function');
   }
 
   Taro.showActionSheet({
-    itemList: ['确定'],
+    alertText: title || '',
+    itemList: [confirmText || '确定'],
+    itemColor: !isString(confirmColor)
+      ? ''
+      : stringIsNullOrWhiteSpace(confirmColor)
+      ? ''
+      : confirmColor,
     success: () => {
-      okAction({
+      confirmAction({
         target,
         handleData,
         successCallback,
         successMessage,
         successMessageBuilder,
         showProcessing,
+        textProcessing,
       });
     },
-    fail: function ({ errMsg }) {
-      console.log(errMsg);
+    fail: ({ errMsg }) => {
+      if (isFunction(errorCallback)) {
+        errorCallback({ message: errMsg });
+      }
     },
+    complete: ({ errMsg, tapIndex }) => {
+      if (isFunction(completeCallback)) {
+        completeCallback({ tapIndex, message: errMsg });
+      }
+    },
+  }).catch((res) => {
+    console.log({
+      message: 'actionSheetCore: catch.',
+      info: res,
+    });
+  });
+}
+
+/**
+ * actionSheetCore
+ * @param {*} param0
+ */
+export async function actionModalCore({
+  title,
+  content,
+  target,
+  handleData,
+  successCallback = null,
+  successMessage = '',
+  successMessageBuilder = null,
+  showProcessing = true,
+  textProcessing = '处理中, 请稍后',
+  confirmText = '确定',
+  confirmColor = '',
+  cancelText = '取消',
+  cancelColor = '',
+  showCancel = true,
+  confirmAction = null,
+  cancelCallback = null,
+  errorCallback = null,
+  completeCallback = null,
+}) {
+  if (!isFunction(confirmAction)) {
+    throw new Error('actionModalCore: confirmAction must be function');
+  }
+
+  Taro.showModal({
+    title,
+    content,
+    confirmText: confirmText || '确定',
+    confirmColor: !isString(confirmColor)
+      ? ''
+      : stringIsNullOrWhiteSpace(confirmColor)
+      ? ''
+      : confirmColor,
+    cancelText: cancelText || '取消',
+    cancelColor: !isString(cancelColor)
+      ? ''
+      : stringIsNullOrWhiteSpace(cancelColor)
+      ? ''
+      : cancelColor,
+    showCancel,
+    success: ({ confirm, cancel, errMsg }) => {
+      if (confirm) {
+        confirmAction({
+          target,
+          handleData,
+          successCallback,
+          successMessage,
+          successMessageBuilder,
+          showProcessing,
+          textProcessing,
+        });
+      }
+
+      if (cancel) {
+        if (isFunction(cancelCallback)) {
+          cancelCallback({
+            message: errMsg,
+          });
+        }
+      }
+    },
+    fail: ({ errMsg }) => {
+      if (isFunction(errorCallback)) {
+        errorCallback({ message: errMsg });
+      }
+    },
+    complete: ({ errMsg, cancel, confirm, content: c }) => {
+      if (isFunction(completeCallback)) {
+        completeCallback({ message: errMsg, confirm, cancel, content: c });
+      }
+    },
+  }).catch((res) => {
+    console.log({
+      message: 'actionSheetCore: catch.',
+      info: res,
+    });
   });
 }
 
