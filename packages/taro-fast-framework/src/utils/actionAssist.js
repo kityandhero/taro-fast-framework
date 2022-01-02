@@ -17,6 +17,8 @@ import {
 import Tips from 'taro-fast-common/es/utils/tips';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
+import { checkWhetherAuthorizeFail } from './tools';
+
 /**
  * getApiDataCore
  * @param {*} param0
@@ -112,7 +114,18 @@ export function handleItem({ target, dataId, compareDataIdHandler, handler }) {
 }
 
 /**
- * remote assess core
+ * remote assess wrapper core
+ * @param {*} api [string] remote api path.
+ * @param {*} params [object] remote api params.
+ * @param {*} getApiData [function] get api data handler.
+ * @param {*} target [object] target.
+ * @param {*} handleData [object] origin processing data.
+ * @param {*} failureCallback [function] remote access logic fail handler, eg. failureCallback(remoteData,whetherCauseByAuthorizeFail).
+ * @param {*} successCallback [function] remote access logic success handler.
+ * @param {*} successMessage [string] the message when remote access logic success. if successMessage not null or empty, will trigger toast notification.
+ * @param {*} successMessageBuilder [function] remote access logic success message builder, priority over successMessage.
+ * @param {*} showProcessing [bool] whether show processing toast.
+ * @param {*} textProcessing [string] processing toast text.
  */
 export async function actionCore({
   api,
@@ -120,6 +133,7 @@ export async function actionCore({
   getApiData = null,
   target,
   handleData,
+  failureCallback,
   successCallback,
   successMessage = '',
   successMessageBuilder = null,
@@ -188,7 +202,7 @@ export async function actionCore({
                   );
                 }
 
-                const { dataSuccess } = data;
+                const { dataSuccess, code: remoteCode } = data;
 
                 if (dataSuccess) {
                   const {
@@ -221,6 +235,13 @@ export async function actionCore({
                         extra: extraData || {},
                       },
                     });
+                  }
+                } else {
+                  if (isFunction(failureCallback)) {
+                    failureCallback(
+                      data,
+                      checkWhetherAuthorizeFail(remoteCode || 0),
+                    );
                   }
                 }
 
@@ -269,13 +290,27 @@ export async function actionCore({
 }
 
 /**
- * actionSheetCore
- * @param {*} param0
+ * action sheet core
+ * @param {*} title [string] action sheet alert text.
+ * @param {*} target [object] target.
+ * @param {*} handleData [object] origin processing data.
+ * @param {*} failureCallback [function] remote access logic fail handler, eg. failureCallback(remoteData,whetherCauseByAuthorizeFail).
+ * @param {*} successCallback [function] remote access logic success handler.
+ * @param {*} successMessage [string] the message when remote access logic success. if successMessage not null or empty, will trigger toast notification.
+ * @param {*} successMessageBuilder [function] remote access logic success message builder, priority over successMessage.
+ * @param {*} showProcessing [bool] whether show processing toast.
+ * @param {*} textProcessing [string] processing toast text.
+ * @param {*} confirmText [string] confirm text.
+ * @param {*} confirmColor [string] confirm color.
+ * @param {*} confirmAction [function] confirm action handler.
+ * @param {*} errorCallback [function] error callback handler.
+ * @param {*} completeCallback [function] complete callback handler.
  */
 export async function actionSheetCore({
   title,
   target,
   handleData,
+  failureCallback,
   successCallback,
   successMessage = '',
   successMessageBuilder = null,
@@ -303,6 +338,7 @@ export async function actionSheetCore({
       confirmAction({
         target,
         handleData,
+        failureCallback,
         successCallback,
         successMessage,
         successMessageBuilder,
@@ -329,15 +365,34 @@ export async function actionSheetCore({
 }
 
 /**
- * actionSheetCore
- * @param {*} param0
+ * action modal core
+ * @param {*} title [string] modal title.
+ * @param {*} content [string] modal content.
+ * @param {*} target [object] target.
+ * @param {*} handleData [object] origin processing data.
+ * @param {*} failureCallback [function] remote access logic fail handler, eg. failureCallback(remoteData,whetherCauseByAuthorizeFail).
+ * @param {*} successCallback [function] remote access logic success handler.
+ * @param {*} successMessage [string] the message when remote access logic success. if successMessage not null or empty, will trigger toast notification.
+ * @param {*} successMessageBuilder [function] remote access logic success message builder, priority over successMessage.
+ * @param {*} showProcessing [bool] whether show processing toast.
+ * @param {*} textProcessing [string] processing toast text.
+ * @param {*} confirmText [string] confirm text.
+ * @param {*} confirmColor [string] confirm color.
+ * @param {*} cancelText [string] cancel text.
+ * @param {*} cancelColor [string] cancel color.
+ * @param {*} showCancel [bool] whether show cancel.
+ * @param {*} confirmAction [function] confirm action handler.
+ * @param {*} cancelCallback [function] cancel callback handler.
+ * @param {*} errorCallback [function] error callback handler.
+ * @param {*} completeCallback [function] complete callback handler.
  */
 export async function actionModalCore({
   title,
   content,
   target,
   handleData,
-  successCallback = null,
+  failureCallback,
+  successCallback,
   successMessage = '',
   successMessageBuilder = null,
   showProcessing = true,
@@ -377,6 +432,7 @@ export async function actionModalCore({
         confirmAction({
           target,
           handleData,
+          failureCallback,
           successCallback,
           successMessage,
           successMessageBuilder,

@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import { View, Text, Button } from '@tarojs/components';
 
 import { formatMoney } from 'taro-fast-common/es/utils/tools';
-import AuthorizationWrapper from 'taro-fast-framework/es/framework/AuthorizationWrapper';
 import VerticalBox from 'taro-fast-component/es/customComponents/VerticalBox';
 import Loading from 'taro-fast-component/es/customComponents/Loading';
 import 'taro-fast-component/es/index.css';
+
+import PageWrapper from '@/customComponents/PageWrapper';
 
 import {
   getOverviewAction,
@@ -17,7 +18,7 @@ import {
   news,
   global,
 }))
-export default class Index extends AuthorizationWrapper {
+export default class Index extends PageWrapper {
   showRenderCountInConsole = true;
 
   constructor(props) {
@@ -75,6 +76,10 @@ export default class Index extends AuthorizationWrapper {
     });
   };
 
+  showRemoteMetaDataInConsole = () => {
+    console.log(this.getRemoteMetaData());
+  };
+
   renderFurther() {
     return (
       <View className="index">
@@ -95,6 +100,22 @@ export default class Index extends AuthorizationWrapper {
 
         <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
           <Button onClick={this.onActionModalClick}>ActionModal</Button>
+        </VerticalBox>
+
+        <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+          <Button onClick={this.reloadData}>reload</Button>
+        </VerticalBox>
+
+        <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+          <Button onClick={this.reloadRemoteMetaData}>
+            reloadRemoteMetaData
+          </Button>
+        </VerticalBox>
+
+        <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+          <Button onClick={this.showRemoteMetaDataInConsole}>
+            showRemoteMetaDataInConsole
+          </Button>
         </VerticalBox>
       </View>
     );

@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro';
 import { Component } from 'react';
 
 import { showErrorMessage } from 'taro-fast-common/es/utils/tools';
-import { isObject } from 'taro-fast-common/es/utils/typeCheck';
+import { isObject, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -228,6 +228,25 @@ class Infrastructure extends Component {
   doWorkBeforeUnmount = () => {};
 
   doWorkAfterUnmount = () => {};
+
+  /**
+   * 当登录失败时调用
+   * @param {*} remoteData [object] 远程返回数据
+   * @param {*} callback [function] 登录失败回调函数
+   */
+  // eslint-disable-next-line no-unused-vars
+  doWhenAuthorizeFail = (remoteData, callback) => {
+    if (isFunction(callback)) {
+      callback(remoteData);
+    }
+  };
+
+  /**
+   * 登录失败时的回调定义
+   * @param {*} remoteData [object] 远程返回数据
+   */
+  // eslint-disable-next-line no-unused-vars
+  authorizeFailCallback = (remoteData) => {};
 
   getUrlParams() {
     return this.$router.params;

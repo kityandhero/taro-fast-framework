@@ -1809,6 +1809,21 @@ export function pxTransform(size) {
 }
 
 /**
+ * 检测是否尚有更多数据，用于分页场景
+ * @param {*} pageNo [number] page number
+ * @param {*} pageSize [number] page size
+ * @param {*} pageSize [number] data total count
+ * @returns
+ */
+export function checkHasMore({ pageNo, pageSize, total }) {
+  if ((total || 0) <= 0) {
+    return false;
+  }
+
+  return (pageNo || 0) * (pageSize || 0) < (total || 0);
+}
+
+/**
  * 占位函数
  *
  * @export

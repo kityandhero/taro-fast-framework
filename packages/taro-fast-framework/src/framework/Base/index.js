@@ -12,6 +12,7 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toString, toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
+import { checkWhetherAuthorizeFail } from '../../utils/tools';
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 
 import Infrastructure from '../Infrastructure';
@@ -257,7 +258,7 @@ class Base extends Infrastructure {
 
             this.lastLoadParams = requestData;
 
-            const { dataSuccess } = metaOriginalData;
+            const { dataSuccess, code: remoteCode } = metaOriginalData;
 
             willSaveToState = {
               ...willSaveToState,
@@ -298,6 +299,13 @@ class Base extends Infrastructure {
                 showErrorMessage({
                   message: text,
                 });
+              }
+            } else {
+              if (checkWhetherAuthorizeFail(remoteCode)) {
+                this.doWhenAuthorizeFail(
+                  metaOriginalData,
+                  this.authorizeFailCallback,
+                );
               }
             }
 
@@ -378,6 +386,16 @@ class Base extends Infrastructure {
   }) => {};
 
   afterReloadSuccess = () => {};
+
+  reloadData = (otherState, callback = null, delay = 0) => {
+    const s = { ...(otherState || {}), ...{ reloading: true } };
+
+    this.initLoad({
+      otherState: s,
+      delay: delay || 0,
+      callback: callback || null,
+    });
+  };
 }
 
 export default Base;
