@@ -12,8 +12,8 @@
     "css": "less"
   },
   "scripts": {
-    "publish:compression": "npm run build:rollup-compression && yarn publish --new-version <version>",
-    "v:p": "npm version patch && yarn publish --new-version <version>",
+    "publish:compression": "npm run build:rollup-compression && yarn publish",
+    "v:p": "npm version patch && yarn publish",
     "clean-file": "rimraf ./node_modules",
     "build:rollup-noCompression": "rimraf ./es && rollup --config rollup.config.noCompression.js",
     "build:rollup-compression": "rimraf ./es && rollup --config rollup.config.compression.js",
