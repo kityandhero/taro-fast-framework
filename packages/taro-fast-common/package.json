@@ -1,6 +1,7 @@
 {
   "name": "taro-fast-common",
   "version": "1.0.0",
+  "private": false,
   "description": "taro-fast-common",
   "keywords": [
     "taro-fast-common"
