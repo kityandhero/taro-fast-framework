@@ -40,7 +40,7 @@ export default class Index extends AuthorizationWrapper {
   };
 
   onButtonClick = () => {
-    getOverviewActionSheet({
+    getOverviewActionModal({
       target: this,
       handleData: {},
       successCallback: ({ target, handleData, remoteData }) => {

@@ -396,7 +396,12 @@ export async function actionModalCore({
     },
     complete: ({ errMsg, cancel, confirm, content: c }) => {
       if (isFunction(completeCallback)) {
-        completeCallback({ message: errMsg, confirm, cancel, content: c });
+        completeCallback({
+          message: errMsg,
+          confirm,
+          cancel,
+          content: c || '',
+        });
       }
     },
   }).catch((res) => {
