@@ -1,16 +1,34 @@
 {
-  "name": "simple-taro-fast-framework",
-  "version": "1.0.1",
-  "private": true,
-  "description": "基于Taro的快速开发框架基于Taro的快速开发框架",
-  "templateInfo": {
-    "name": "default",
-    "typescript": false,
-    "css": "less"
+  "name": "taro-fast-component",
+  "version": "1.0.0",
+  "description": "taro-fast-component",
+  "keywords": [
+    "taro-fast-component"
+  ],
+  "author": "卢志涛 <kityandhero@126.com>",
+  "homepage": "https://github.com/kityandhero/taro-fast-framework.git",
+  "license": "MIT",
+  "main": "/src/index.ts",
+  "directories": {
+    "es": "es"
+  },
+  "files": [
+    "es"
+  ],
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
   },
   "scripts": {
-    "start": "npm run dev:weapp",
-    "build:weapp": "taro build --type weapp",
+    "v:p": "npm version patch && npm publish",
+    "clean-file": "rimraf ./node_modules",
+    "build:rollup-noCompression": "rimraf ./es && rollup --config rollup.config.noCompression.js",
+    "build:rollup-compression": "rimraf ./es && rollup --config rollup.config.compression.js",
+    "dev:rollup": "rollup -c -w",
+    "build:weapp": "set NODE_ENV=production && taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
     "build:tt": "taro build --type tt",
@@ -29,26 +47,13 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch"
   },
-  "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
-    "ios >= 8"
-  ],
-  "author": "",
   "dependencies": {
     "@tarojs/components": "3.3.19",
     "@tarojs/react": "3.3.19",
     "@tarojs/runtime": "3.3.19",
     "@tarojs/taro": "3.3.19",
-    "dva-core": "^2.0.4",
-    "dva-loading": "^3.0.22",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6",
-    "redux": "^4.1.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.1",
-    "taro-fast-framework": "^1.0.1"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
@@ -60,16 +65,21 @@
     "@commitlint/config-conventional": "^16.0.0",
     "@commitlint/config-lerna-scopes": "^16.0.0",
     "@commitlint/cz-commitlint": "^16.0.0",
+    "@rollup/plugin-babel": "5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-replace": "^3.0.1",
     "@tarojs/mini-runner": "3.3.19",
     "@tarojs/webpack-runner": "3.3.19",
     "@types/react": "^17.0.38",
     "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "autoprefixer": "^10.4.1",
     "babel-cli": "^6.26.0",
     "babel-plugin-import": "^1.13.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-taro": "3.3.19",
     "commitizen": "^4.2.4",
+    "cssnano": "^5.0.14",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-taro": "3.3.19",
@@ -77,10 +87,24 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "postcss": "^8.4.5",
+    "postcss-less": "^5.0.0",
+    "rollup": "^2.62.0",
+    "rollup-plugin-alias": "^2.0.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.1",
     "stylelint": "^14.2.0",
     "stylelint-config-css-modules": "^2.3.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^24.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.5.0"
+  },
+  "bugs": {
+    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
   }
 }

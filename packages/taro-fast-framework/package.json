@@ -36,11 +36,6 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch"
   },
-  "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
-    "ios >= 8"
-  ],
   "dependencies": {
     "@tarojs/components": "3.3.19",
     "@tarojs/react": "3.3.19",
@@ -111,7 +106,7 @@
     "es"
   ],
   "directories": {
-    "es": "lib"
+    "es": "es"
   },
   "repository": {
     "type": "git",

@@ -39,11 +39,35 @@ export default class Index extends AuthorizationWrapper {
     return data;
   };
 
-  onButtonClick = () => {
+  onActionClick = () => {
+    getOverviewAction({
+      target: this,
+      handleData: {},
+      successCallback: ({ remoteData }) => {
+        {
+          console.log(remoteData);
+        }
+      },
+    });
+  };
+
+  onActionSheetClick = () => {
+    getOverviewActionSheet({
+      target: this,
+      handleData: {},
+      successCallback: ({ remoteData }) => {
+        {
+          console.log(remoteData);
+        }
+      },
+    });
+  };
+
+  onActionModalClick = () => {
     getOverviewActionModal({
       target: this,
       handleData: {},
-      successCallback: ({ target, handleData, remoteData }) => {
+      successCallback: ({ remoteData }) => {
         {
           console.log(remoteData);
         }
@@ -62,7 +86,15 @@ export default class Index extends AuthorizationWrapper {
         </VerticalBox>
 
         <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
-          <Button onClick={this.onButtonClick}>按钮</Button>
+          <Button onClick={this.onActionClick}>Action</Button>
+        </VerticalBox>
+
+        <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+          <Button onClick={this.onActionSheetClick}>ActionSheet</Button>
+        </VerticalBox>
+
+        <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+          <Button onClick={this.onActionModalClick}>ActionModal</Button>
         </VerticalBox>
       </View>
     );
