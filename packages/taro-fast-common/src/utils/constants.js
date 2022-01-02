@@ -1,5 +1,8 @@
 import { emptyLogo as emptyLogoSource } from './mediaDefault';
 
+/**
+ * 基础state
+ */
 export const underlyingState = {
   loadApiPath: '',
   firstLoadSuccess: false,
