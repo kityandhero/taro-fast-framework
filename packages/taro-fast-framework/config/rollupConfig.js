@@ -33,9 +33,6 @@ const inputFile = {
   ...{
     'customComponents/AppComponent/index':
       'src/customComponents/AppComponent/index.jsx',
-    'customComponents/VerticalBox/index':
-      'src/customComponents/VerticalBox/index.jsx',
-    'customComponents/Loading/index': 'src/customComponents/Loading/index.jsx',
   },
   ...{
     'framework/Infrastructure/index': 'src/framework/Infrastructure/index.js',

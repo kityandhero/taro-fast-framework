@@ -2,7 +2,10 @@
   "extends": ["taro/react"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "requireConfigFile": false
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
   },
   "rules": {
     "react/jsx-uses-react": "off",
