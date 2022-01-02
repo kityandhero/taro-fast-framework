@@ -49,7 +49,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "taro-fast-common": "^1.0.2",
-    "taro-fast-component": "^1.0.2",
+    "taro-fast-component": "^2.0.0",
     "taro-fast-framework": "^1.0.3"
   },
   "devDependencies": {
@@ -62,6 +62,12 @@
     "@commitlint/config-conventional": "^16.0.0",
     "@commitlint/config-lerna-scopes": "^16.0.0",
     "@commitlint/cz-commitlint": "^16.0.0",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.2",
     "@tarojs/mini-runner": "3.3.19",
     "@tarojs/webpack-runner": "3.3.19",
     "@types/react": "^17.0.38",
