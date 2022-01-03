@@ -1,0 +1,43 @@
+@import '~taro-ui/dist/style/components/activity-indicator.scss';
+@import '~taro-ui/dist/style/components/loading.scss';
+@import '~taro-ui/dist/style/components/flex.scss';
+
+.tfc_spin_containor {
+  width: 100%;
+  position: relative;
+
+  .tfc_spin_overlay_box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    .tfc_spin_overlay {
+      height: 100%;
+      width: 100%;
+      background-color: #f5f5f5;
+
+      .tfc_content_box {
+        align-self: center;
+        margin-left: 24rpx;
+        color: #999;
+        font-size: 28rpx;
+      }
+    }
+  }
+  .tfc_spin_overlay_box_show {
+    z-index: 999;
+  }
+
+  .tfc_spin_overlay_box_hide {
+    z-index: -1;
+  }
+
+  .tfc_spin_overlay_show {
+    opacity: 0.65;
+  }
+
+  .tfc_spin_overlay_hide {
+    opacity: 0;
+  }
+}

@@ -1,11 +1,7 @@
 import Taro from '@tarojs/taro';
 import { Component } from 'react';
 
-import {
-  showErrorMessage,
-  recordObject,
-  recordText,
-} from 'taro-fast-common/es/utils/tools';
+import { showErrorMessage, recordText } from 'taro-fast-common/es/utils/tools';
 import { isObject, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 

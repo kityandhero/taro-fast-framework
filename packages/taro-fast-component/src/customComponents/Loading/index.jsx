@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { View } from '@tarojs/components';
 
 import { pxTransform } from 'taro-fast-common/es/utils/tools';
@@ -6,7 +6,7 @@ import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import './index.less';
 
-class Loading extends Component {
+class Loading extends PureComponent {
   render() {
     const { color, size } = this.props;
     const loadingSize = typeof size === 'string' ? size : toString(size);
@@ -21,10 +21,10 @@ class Loading extends Component {
     const ringStyle = Object.assign({}, colorStyle, sizeStyle);
 
     return (
-      <View className="tff_loading" style={sizeStyle}>
-        <View className="tff_loading__ring" style={ringStyle}></View>
-        <View className="tff_loading__ring" style={ringStyle}></View>
-        <View className="tff_loading__ring" style={ringStyle}></View>
+      <View className="tfc_loading" style={sizeStyle}>
+        <View className="tfc_loading__ring" style={ringStyle}></View>
+        <View className="tfc_loading__ring" style={ringStyle}></View>
+        <View className="tfc_loading__ring" style={ringStyle}></View>
       </View>
     );
   }

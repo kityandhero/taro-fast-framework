@@ -45,6 +45,7 @@
     "insertdatetime",
     "insertfile",
     "isequal",
+    "isopened",
     "jsxs",
     "kityandhero",
     "linebreak",

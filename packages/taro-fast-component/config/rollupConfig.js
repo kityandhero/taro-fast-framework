@@ -1,18 +1,20 @@
-import { buildConfig as buildConfigCore } from '../../taro-fast-common/rollupAssist/configBuilder';
+import { buildConfig as buildConfigCore } from '../../taro-fast-rollup/rollupAssist/configBuilder';
 
 const inputFile = {
   ...{
     index: 'src/index.ts',
   },
   ...{
-    'customComponents/VerticalBox/index':
-      'src/customComponents/VerticalBox/index.jsx',
-    'customComponents/Loading/index': 'src/customComponents/Loading/index.jsx',
+    'customComponents/index': 'src/customComponents/index.jsx',
   },
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {
-  return buildConfigCore({ inputFile, terser: whetherTerser });
+  return buildConfigCore({
+    inputFile,
+    terser: whetherTerser,
+    externalCollection: ['taro-fast-common'],
+  });
 }
 
 /**

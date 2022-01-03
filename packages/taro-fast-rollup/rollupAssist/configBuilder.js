@@ -1,12 +1,12 @@
-import resolve from '@rollup/plugin-node-resolve';
-import json from '@rollup/plugin-json';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
-import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
-import babelConfig from '@rollup/plugin-babel';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
+import resolve from '@rollup/plugin-node-resolve'
+import json from '@rollup/plugin-json'
+import commonjs from '@rollup/plugin-commonjs'
+import typescript from 'rollup-plugin-typescript2'
+import postcss from 'rollup-plugin-postcss'
+import { terser } from 'rollup-plugin-terser'
+import babelConfig from '@rollup/plugin-babel'
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
 
 const externalCollection = [
   '@rollup/plugin-node-resolve',
@@ -33,9 +33,20 @@ const externalCollection = [
   'redux-thunk',
   'dva-loading',
   'dva-core',
-];
+  'classnames',
+]
 
-export function buildConfig({ inputFile, terser: whetherTerser = false }) {
+export function buildConfig({
+  inputFile,
+  terser: whetherTerser = false,
+  externalCollection: otherExternalCollection = [],
+}) {
+  const externals = [...externalCollection, ...(otherExternalCollection || [])]
+
+  console.log({
+    externals,
+  })
+
   const config = {
     external: (d) => {
       return (
@@ -43,7 +54,7 @@ export function buildConfig({ inputFile, terser: whetherTerser = false }) {
         /^@tarojs\/taro$/.test(d) ||
         /^@tarojs\/taro-h5$/.test(d) ||
         d.includes('@babel/runtime')
-      );
+      )
     },
     input: inputFile,
     plugins: [
@@ -67,7 +78,7 @@ export function buildConfig({ inputFile, terser: whetherTerser = false }) {
         babelHelpers: 'runtime',
       }),
     ],
-    external: externalCollection,
+    external: externals,
     output: {
       entryFileNames: '[name].js',
       dir: 'es',
@@ -75,13 +86,13 @@ export function buildConfig({ inputFile, terser: whetherTerser = false }) {
       format: 'es',
       sourcemap: false,
     },
-  };
-
-  if (whetherTerser) {
-    config.plugins.push(terser());
   }
 
-  return config;
+  if (whetherTerser) {
+    config.plugins.push(terser())
+  }
+
+  return config
 }
 /**
  * 占位函数
@@ -90,5 +101,5 @@ export function buildConfig({ inputFile, terser: whetherTerser = false }) {
  * @returns
  */
 export function emptyExport() {
-  return {};
+  return {}
 }

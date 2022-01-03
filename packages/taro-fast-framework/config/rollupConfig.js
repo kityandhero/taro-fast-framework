@@ -1,4 +1,4 @@
-import { buildConfig as buildConfigCore } from '../../taro-fast-common/rollupAssist/configBuilder';
+import { buildConfig as buildConfigCore } from '../../taro-fast-rollup/rollupAssist/configBuilder';
 
 const inputFile = {
   ...{
@@ -37,7 +37,11 @@ const inputFile = {
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {
-  return buildConfigCore({ inputFile, terser: whetherTerser });
+  return buildConfigCore({
+    inputFile,
+    terser: whetherTerser,
+    externalCollection: ['taro-fast-common', 'taro-fast-component'],
+  });
 }
 
 /**

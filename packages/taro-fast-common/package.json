@@ -71,6 +71,7 @@
     "babel-plugin-import": "^1.13.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-taro": "3.3.19",
+    "classnames": "^2.3.1",
     "commitizen": "^4.2.4",
     "cssnano": "^5.0.14",
     "eslint": "^8.6.0",
