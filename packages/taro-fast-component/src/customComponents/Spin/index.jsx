@@ -1,5 +1,7 @@
 import { View } from '@tarojs/components';
 
+import Row from '../Flex/Row';
+import Col from '../Flex/Col';
 import VerticalBox from '../VerticalBox';
 import ActivityIndicator from '../ActivityIndicator';
 
@@ -55,12 +57,9 @@ function Spin(props) {
           onTouchMove={handleTouchMove}
         >
           <View style={{ height: '100%' }}>
-            <View
-              className="at-row at-row__align--center"
-              style={{ height: '100%' }}
-            >
-              <View style="height:100%" className="at-col at-col-1" />
-              <View className="at-col  at-col-10" style={{ height: '120rpx' }}>
+            <Row align="center" style={{ height: '100%' }}>
+              <Col size={1} style={{ height: '100%' }} />
+              <Col size={10} style={{ height: '120rpx' }}>
                 <View>
                   <VerticalBox
                     style={{ height: '100rpx' }}
@@ -78,9 +77,9 @@ function Spin(props) {
                     )}
                   </VerticalBox>
                 </View>
-              </View>
-              <View style="height:100%" className="at-col at-col-1" />
-            </View>
+              </Col>
+              <Col size={1} style={{ height: '100%' }} />
+            </Row>
           </View>
         </View>
       </View>

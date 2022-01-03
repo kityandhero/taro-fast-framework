@@ -1,5 +1,6 @@
 // import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
 import AppComponent from 'taro-fast-framework/es/customComponents/AppComponent';
+import 'taro-fast-component/es/index.css';
 
 import models from './models';
 

@@ -1,3 +1,10 @@
+export { default as Row } from './Flex/Row';
+export { default as Col } from './Flex/Col';
 export { default as ActivityIndicator } from './ActivityIndicator';
 export { default as Loading } from './Loading';
 export { default as VerticalBox } from './VerticalBox';
+export { default as Spin } from './Spin';
+export { Space } from './Space';
+export { Empty } from './Empty';
+export { AutoCenter } from './AutoCenter';
+export { BlockArea } from './BlockArea';

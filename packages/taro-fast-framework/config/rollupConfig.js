@@ -19,6 +19,8 @@ const inputFile = {
   ...{
     'customComponents/AppComponent/index':
       'src/customComponents/AppComponent/index.jsx',
+    'customComponents/FunctionComponent/index':
+      'src/customComponents/FunctionComponent/index.jsx',
   },
   ...{
     'framework/Infrastructure/index': 'src/framework/Infrastructure/index.js',
@@ -40,7 +42,21 @@ export function buildConfig({ terser: whetherTerser = false }) {
   return buildConfigCore({
     inputFile,
     terser: whetherTerser,
-    externalCollection: ['taro-fast-common', 'taro-fast-component'],
+    externalCollection: [
+      ...[
+        'taro-fast-common/es/utils/cacheAssist',
+        'taro-fast-common/es/utils/constants',
+        'taro-fast-common/es/utils/mediaDefault',
+        'taro-fast-common/es/utils/tips',
+        'taro-fast-common/es/utils/tools',
+        'taro-fast-common/es/utils/typeCheck',
+        'taro-fast-common/es/utils/typeConvert',
+      ],
+      ...[
+        'taro-fast-component/es/customComponents',
+        'taro-fast-component/es/index.css',
+      ],
+    ],
   });
 }
 

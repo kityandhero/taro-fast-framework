@@ -14,6 +14,9 @@ import {
   get as getLodash,
   sortedUniq as sortedUniqLodash,
   endsWith as endsWithLodash,
+  assign as assignLodash,
+  assignWith as assignWithLodash,
+  forEach as forEachLodash,
 } from 'lodash';
 
 import {
@@ -1310,6 +1313,18 @@ export function replace(source, pattern, replacement) {
   return replaceLodash(source, pattern, replacement);
 }
 
+export function assign(target, source) {
+  return assignLodash(target, source);
+}
+
+export function assignWith(target, sources, customizer) {
+  return assignWithLodash(target, sources, customizer);
+}
+
+export function forEach(collection, iteratee) {
+  return forEachLodash(collection, iteratee);
+}
+
 /**
  * 移除数组中predicate（断言）返回为真值的所有元素, 并返回移除元素组成的数组. predicate（断言） 会传入3个参数:  (value, index, array).
  * @param {*} array
@@ -1812,6 +1827,18 @@ export function checkHasMore({ pageNo, pageSize, total }) {
 
 export function checkEnvIsDevelopment() {
   return process.env.NODE_ENV === 'development';
+}
+
+export function mergeProps(...items) {
+  function customizer(objValue, srcValue) {
+    return isUndefined(srcValue) ? objValue : srcValue;
+  }
+
+  let ret = assign({}, items[0]);
+  for (let i = 1; i < items.length; i++) {
+    ret = assignWith(ret, items[i], customizer);
+  }
+  return ret;
 }
 
 /**

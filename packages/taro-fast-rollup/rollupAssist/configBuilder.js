@@ -1,25 +1,31 @@
-import resolve from '@rollup/plugin-node-resolve'
-import json from '@rollup/plugin-json'
-import commonjs from '@rollup/plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
-import postcss from 'rollup-plugin-postcss'
-import { terser } from 'rollup-plugin-terser'
-import babelConfig from '@rollup/plugin-babel'
-import autoprefixer from 'autoprefixer'
-import cssnano from 'cssnano'
+import resolve from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from 'rollup-plugin-typescript2';
+import postcss from 'rollup-plugin-postcss';
+import svgr from '@svgr/rollup';
+import url from 'rollup-plugin-url';
+import { terser } from 'rollup-plugin-terser';
+import babelConfig from '@rollup/plugin-babel';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 const externalCollection = [
+  '@babel/runtime',
   '@rollup/plugin-node-resolve',
   '@rollup/plugin-json',
   '@rollup/plugin-commonjs',
   'rollup-plugin-typescript2',
   'rollup-plugin-postcss',
+  '@svgr/rollup',
+  'rollup-plugin-url',
   'rollup-plugin-terser',
   '@rollup/plugin-babel',
   'autoprefixer',
   'cssnano',
   'react',
   'react-dom',
+  'react/jsx-runtime',
   '@tarojs/components',
   '@tarojs/runtime',
   '@tarojs/taro',
@@ -34,18 +40,20 @@ const externalCollection = [
   'dva-loading',
   'dva-core',
   'classnames',
-]
+];
 
 export function buildConfig({
   inputFile,
   terser: whetherTerser = false,
   externalCollection: otherExternalCollection = [],
 }) {
-  const externals = [...externalCollection, ...(otherExternalCollection || [])]
+  const externals = [...externalCollection, ...(otherExternalCollection || [])];
 
   console.log({
+    inputFile,
+    terser: whetherTerser,
     externals,
-  })
+  });
 
   const config = {
     external: (d) => {
@@ -54,10 +62,12 @@ export function buildConfig({
         /^@tarojs\/taro$/.test(d) ||
         /^@tarojs\/taro-h5$/.test(d) ||
         d.includes('@babel/runtime')
-      )
+      );
     },
     input: inputFile,
     plugins: [
+      url(),
+      svgr(),
       json(),
       resolve({
         preferBuiltins: false,
@@ -86,13 +96,13 @@ export function buildConfig({
       format: 'es',
       sourcemap: false,
     },
-  }
+  };
 
   if (whetherTerser) {
-    config.plugins.push(terser())
+    config.plugins.push(terser());
   }
 
-  return config
+  return config;
 }
 /**
  * 占位函数
@@ -101,5 +111,5 @@ export function buildConfig({
  * @returns
  */
 export function emptyExport() {
-  return {}
+  return {};
 }
