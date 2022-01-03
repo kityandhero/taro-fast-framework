@@ -8,6 +8,7 @@ import {
   getTaroGlobalData,
   redirectTo,
   trim,
+  recordText,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -400,13 +401,13 @@ export async function request({
   let apiVersion = defaultSettingsLayoutCustom.getApiVersion();
 
   if (!isString(apiVersion)) {
-    recordObject(apiVersion);
+    recordText(apiVersion);
 
     throw new Error('apiVersion is not string');
   }
 
   if (!isString(api)) {
-    recordObject(api);
+    recordText(api);
 
     throw new Error('api is not string');
   }

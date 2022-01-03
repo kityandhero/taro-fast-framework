@@ -1,3 +1,4 @@
+import { recordObject, recordText } from 'taro-fast-common/es/utils/tools';
 import {
   getApiDataCore,
   actionCore,
@@ -95,10 +96,10 @@ export async function getOverviewActionSheet({
       });
     },
     errorCallback: ({ message }) => {
-      console.log({ message });
+      recordText({ message });
     },
     completeCallback: ({ tapIndex, message }) => {
-      console.log({ tapIndex, message });
+      recordText({ tapIndex, message });
     },
   });
 }
@@ -147,13 +148,13 @@ export async function getOverviewActionModal({
       });
     },
     cancelCallback: ({ message }) => {
-      console.log({ message });
+      recordText({ message });
     },
     errorCallback: ({ message }) => {
-      console.log({ message });
+      recordText({ message });
     },
     completeCallback: ({ message, confirm, cancel, content }) => {
-      console.log({
+      recordObject({
         message,
         confirm,
         cancel,

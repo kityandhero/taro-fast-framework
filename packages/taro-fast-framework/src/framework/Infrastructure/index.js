@@ -1,7 +1,11 @@
 import Taro from '@tarojs/taro';
 import { Component } from 'react';
 
-import { showErrorMessage } from 'taro-fast-common/es/utils/tools';
+import {
+  showErrorMessage,
+  recordObject,
+  recordText,
+} from 'taro-fast-common/es/utils/tools';
 import { isObject, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 
@@ -356,7 +360,7 @@ class Infrastructure extends Component {
     if (this.showRenderCountInConsole) {
       this.renderCount += 1;
 
-      console.log(`render frequency: ${this.renderCount}`);
+      recordText({ renderFrequency: this.renderCount });
     }
   }
 

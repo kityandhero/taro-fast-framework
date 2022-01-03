@@ -271,7 +271,7 @@ export async function actionCore({
               e,
             )}, please confirm dispatch type exists first.`;
 
-            console.log({
+            recordError({
               message: text,
               dispatchInfo: {
                 type: api,
@@ -357,7 +357,7 @@ export async function actionSheetCore({
       }
     },
   }).catch((res) => {
-    console.log({
+    recordError({
       message: 'actionSheetCore: catch.',
       info: res,
     });
@@ -465,7 +465,7 @@ export async function actionModalCore({
       }
     },
   }).catch((res) => {
-    console.log({
+    recordError({
       message: 'actionSheetCore: catch.',
       info: res,
     });

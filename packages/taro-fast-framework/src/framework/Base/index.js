@@ -4,6 +4,7 @@ import {
   showRuntimeError,
   recordText,
   showErrorMessage,
+  recordError,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isUndefined,
@@ -292,7 +293,7 @@ class Base extends Infrastructure {
                   metaOriginalData: metaOriginalData || null,
                 });
               } catch (e) {
-                console.log(e);
+                recordError(e);
 
                 const text = `${toString(e)},place view in the console`;
 

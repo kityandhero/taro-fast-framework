@@ -179,7 +179,7 @@ function checkHasAuthorityCore(auth) {
   }
 
   if (isObject(auth)) {
-    console.log({
+    recordObject({
       auth,
       attachedTargetName:
         (this || null) != null
@@ -228,7 +228,7 @@ function checkHasAuthorityCore(auth) {
 
 export function checkHasAuthority(auth) {
   if (isObject(auth)) {
-    console.log({
+    recordObject({
       auth,
       attachedTargetName:
         (this || null) != null

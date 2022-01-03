@@ -1,6 +1,8 @@
 import { create } from 'dva-core';
 import createLoading from 'dva-loading';
 
+import { recordError } from 'taro-fast-common/es/utils/tools';
+
 let app;
 let store;
 let dispatch;
@@ -18,7 +20,7 @@ function createApp(opt) {
   app.getStore = () => store;
   app.use({
     onError(err) {
-      console.log(err);
+      recordError(err);
     },
   });
 

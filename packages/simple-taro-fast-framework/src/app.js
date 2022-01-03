@@ -1,3 +1,4 @@
+// import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
 import AppComponent from 'taro-fast-framework/es/customComponents/AppComponent';
 
 import models from './models';
@@ -15,9 +16,10 @@ class App extends AppComponent {
 
   establishConfig = () => {
     return {
+      // showLogInConsole: checkEnvIsDevelopment(),
       showLogInConsole: true,
+      // showRequestInfo: checkEnvIsDevelopment(),
       showRequestInfo: true,
-      useVirtualRequest: false,
       showUseVirtualRequestMessage: false,
       apiPrefix: {
         corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',

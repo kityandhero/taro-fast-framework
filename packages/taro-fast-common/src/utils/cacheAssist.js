@@ -1,17 +1,21 @@
-import nodeCache from "node-cache";
-import { recordError, stringIsNullOrWhiteSpace } from "./tools";
-import { isArray, isNumber, isString } from "./typeCheck";
+import nodeCache from 'node-cache';
+import {
+  recordError,
+  stringIsNullOrWhiteSpace,
+  getTaroGlobalData,
+} from './tools';
+import { isArray, isNumber, isString } from './typeCheck';
 
 function checkKey(key) {
   if (stringIsNullOrWhiteSpace(key)) {
-    throw new Error("cache key is null or empty");
+    throw new Error('cache key is null or empty');
   }
 
   if (!(isString(key) || isNumber(key))) {
     recordError(key);
 
     throw new Error(
-      "cache key must be string or number,you can check it in console"
+      'cache key must be string or number,you can check it in console',
     );
   }
 }
@@ -21,11 +25,13 @@ function checkKey(key) {
  * @export
  */
 export function getCachePool() {
-  if ((window.localRunningCache || null) == null) {
-    window.localRunningCache = new nodeCache();
+  const taroGlobalData = getTaroGlobalData();
+
+  if ((taroGlobalData.localRunningCache || null) == null) {
+    taroGlobalData.localRunningCache = new nodeCache();
   }
 
-  return window.localRunningCache;
+  return taroGlobalData.localRunningCache;
 }
 
 /**
@@ -37,7 +43,7 @@ export function hasCache({ key }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.has(key);
@@ -55,7 +61,7 @@ export function setCache({ key, value, expiration = 0 }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.set(key, value, expiration);
@@ -68,7 +74,7 @@ export function setCache({ key, value, expiration = 0 }) {
  */
 export function setMultiCache(list) {
   if (!isArray(list)) {
-    throw new Error("setMultiCache: list must be array");
+    throw new Error('setMultiCache: list must be array');
   }
 
   if (list.length <= 0) {
@@ -79,7 +85,7 @@ export function setMultiCache(list) {
 
   list.forEach((o) => {
     const { key, value, expiration } = {
-      ...{ key: "", value: "", expiration: 0 },
+      ...{ key: '', value: '', expiration: 0 },
       ...o,
     };
 
@@ -101,7 +107,7 @@ export function setMultiCache(list) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.mset(listData);
@@ -116,7 +122,7 @@ export function getExpiration({ key }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.getTtl(key);
@@ -133,7 +139,7 @@ export function setExpiration({ key, expiration }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.ttl(key, expiration);
@@ -148,7 +154,7 @@ export function getCache({ key }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.get(key);
@@ -161,13 +167,13 @@ export function getCache({ key }) {
  */
 export function getMultiCache(list) {
   if (!isArray(list)) {
-    throw new Error("getMultiCache: list must be array");
+    throw new Error('getMultiCache: list must be array');
   }
 
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.mget(list);
@@ -182,7 +188,7 @@ export function takeCache({ key }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.take(key);
@@ -199,7 +205,7 @@ export function deleteCache({ key }) {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.del(key);
@@ -212,13 +218,13 @@ export function deleteCache({ key }) {
  */
 export function deleteMultiCache(list) {
   if (!isArray(list)) {
-    throw new Error("deleteMultiCache: list must be array");
+    throw new Error('deleteMultiCache: list must be array');
   }
 
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.del(list);
@@ -232,7 +238,7 @@ export function flushAllCache() {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.flushAll();
@@ -246,7 +252,7 @@ export function statisticsCache() {
   const cachePool = getCachePool();
 
   if (cachePool == null) {
-    throw new Error("cache pool not exist");
+    throw new Error('cache pool not exist');
   }
 
   return cachePool.getStats();

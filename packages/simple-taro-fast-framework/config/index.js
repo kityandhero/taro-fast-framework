@@ -2,7 +2,7 @@
 const path = require('path');
 
 const config = {
-  projectName: 'taro-fast-framework',
+  projectName: 'simple-taro-fast-framework',
   date: '2021-12-30',
   designWidth: 750,
   deviceRatio: {
@@ -15,7 +15,12 @@ const config = {
   plugins: [],
   defineConstants: {},
   copy: {
-    patterns: [],
+    patterns: [
+      {
+        from: 'src/sitemap.json',
+        to: 'dist/sitemap.json',
+      },
+    ],
     options: {},
   },
   framework: 'react',

@@ -13,7 +13,6 @@ import {
   split as splitLodash,
   get as getLodash,
   sortedUniq as sortedUniqLodash,
-  toLower,
   endsWith as endsWithLodash,
 } from 'lodash';
 
@@ -364,29 +363,25 @@ export function recordLog(record, showMode, level = logLevel.debug) {
 
   if (logShowInConsole() && level === logLevel.debug) {
     if (showModeModified === logShowMode.text) {
-      const data = { level, record };
+      const data = { record, level };
 
-      // eslint-disable-next-line no-console
       console.log(JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      // eslint-disable-next-line no-console
-      console.log({ level, record });
+      console.log({ record, level });
     }
   }
 
   if (level === logLevel.error) {
     if (showModeModified === logShowMode.text) {
-      const data = { level, record };
+      const data = { record, level };
 
-      // eslint-disable-next-line no-console
       console.log(JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      // eslint-disable-next-line no-console
-      console.log({ level, record });
+      console.log({ record, level });
     }
   }
 }
@@ -1359,12 +1354,6 @@ export function buildFieldHelper(v, prefix = '注: ') {
   return `${prefix}${v}. `;
 }
 
-export function checkLocalhost() {
-  const hostname = toLower(window.location.hostname);
-
-  return hostname === '127.0.0.1' || hostname === 'localhost';
-}
-
 export function getNearestLocalhostNotifyCache() {
   const key = storageKeyCollection.nearestLocalhostNotify;
 
@@ -1405,39 +1394,37 @@ export function trySendNearestLocalhostNotify({ text }) {
   let needSend = false;
   let nearestTime = 0;
 
-  if (checkLocalhost()) {
-    const nearestLocalhostNotify = getNearestLocalhostNotifyCache() || null;
+  const nearestLocalhostNotify = getNearestLocalhostNotifyCache() || null;
 
-    if (nearestLocalhostNotify == null) {
+  if (nearestLocalhostNotify == null) {
+    needSend = true;
+  } else {
+    nearestTime = nearestLocalhostNotify.nearestTime || 0;
+  }
+
+  const now = parseInt(new Date().getTime() / 1000, 10);
+
+  try {
+    if (nearestTime + 30 < now) {
       needSend = true;
-    } else {
-      nearestTime = nearestLocalhostNotify.nearestTime || 0;
     }
 
-    const now = parseInt(new Date().getTime() / 1000, 10);
+    if (needSend) {
+      const message = `当前接口域名: ${text}. `;
 
-    try {
-      if (nearestTime + 30 < now) {
-        needSend = true;
-      }
+      notify({
+        type: notificationTypeCollection.info,
+        message,
+      });
 
-      if (needSend) {
-        const message = `当前接口域名: ${text}. `;
+      recordText({
+        message,
+      });
 
-        notify({
-          type: notificationTypeCollection.info,
-          message,
-        });
-
-        recordObject({
-          message,
-        });
-
-        setNearestLocalhostNotifyCache();
-      }
-    } catch (error) {
-      recordLog(error);
+      setNearestLocalhostNotifyCache();
     }
+  } catch (error) {
+    recordLog(error);
   }
 }
 
@@ -1821,6 +1808,10 @@ export function checkHasMore({ pageNo, pageSize, total }) {
   }
 
   return (pageNo || 0) * (pageSize || 0) < (total || 0);
+}
+
+export function checkEnvIsDevelopment() {
+  return process.env.NODE_ENV === 'development';
 }
 
 /**

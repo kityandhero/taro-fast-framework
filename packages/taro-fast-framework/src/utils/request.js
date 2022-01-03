@@ -6,6 +6,7 @@ import {
   stringIsNullOrWhiteSpace,
   recordObject,
   recordError,
+  recordText,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { requestMethod } from 'taro-fast-common/es/utils/constants';
@@ -79,13 +80,13 @@ export class Request {
       const corsUrl = corsTarget();
 
       if (!isString(corsUrl)) {
-        recordObject(corsUrl);
+        recordText(corsUrl);
 
         throw new Error('corsUrl is not string');
       }
 
       if (!isString(url)) {
-        recordObject({ url });
+        recordText({ url });
 
         throw new Error('url is not string');
       }
@@ -107,7 +108,7 @@ export class Request {
       }
 
       if (!isString(urlChange)) {
-        recordObject({ urlChange });
+        recordText({ urlChange });
 
         throw new Error('urlChange is not string');
       }

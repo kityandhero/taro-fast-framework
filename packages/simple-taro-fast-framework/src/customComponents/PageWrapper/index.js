@@ -1,3 +1,4 @@
+import { recordObject } from 'taro-fast-common/es/utils/tools';
 import AuthorizationWrapper from 'taro-fast-framework/es/framework/AuthorizationWrapper';
 
 export default class PageWrapper extends AuthorizationWrapper {
@@ -20,6 +21,6 @@ export default class PageWrapper extends AuthorizationWrapper {
    * @returns
    */
   authorizeFailCallback = (remoteData) => {
-    console.log(remoteData);
+    recordObject(remoteData);
   };
 }

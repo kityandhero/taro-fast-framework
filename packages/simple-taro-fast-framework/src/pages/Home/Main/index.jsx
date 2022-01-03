@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { View, Text, Button } from '@tarojs/components';
 
-import { formatMoney } from 'taro-fast-common/es/utils/tools';
+import { formatMoney, recordObject } from 'taro-fast-common/es/utils/tools';
 import VerticalBox from 'taro-fast-component/es/customComponents/VerticalBox';
 import Loading from 'taro-fast-component/es/customComponents/Loading';
 import 'taro-fast-component/es/index.css';
@@ -46,7 +46,7 @@ export default class Index extends PageWrapper {
       handleData: {},
       successCallback: ({ remoteData }) => {
         {
-          console.log(remoteData);
+          recordObject(remoteData);
         }
       },
     });
@@ -58,7 +58,7 @@ export default class Index extends PageWrapper {
       handleData: {},
       successCallback: ({ remoteData }) => {
         {
-          console.log(remoteData);
+          recordObject(remoteData);
         }
       },
     });
@@ -70,14 +70,14 @@ export default class Index extends PageWrapper {
       handleData: {},
       successCallback: ({ remoteData }) => {
         {
-          console.log(remoteData);
+          recordObject(remoteData);
         }
       },
     });
   };
 
   showRemoteMetaDataInConsole = () => {
-    console.log(this.getRemoteMetaData());
+    recordObject(this.getRemoteMetaData());
   };
 
   renderFurther() {

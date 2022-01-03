@@ -1,16 +1,28 @@
 import { Component } from 'react';
 import { Provider } from 'react-redux';
 
+import {
+  getAppInitConfigData,
+  recordObject,
+} from 'taro-fast-common/es/utils/tools';
+
 import { getStore } from '../../utils/dvaAssist';
 
 class AppComponent extends Component {
+  /**
+   * 此内部的方法不会产生控制台输出
+   */
   componentWillMount() {
     this.initDva();
 
-    this.taroGlobalData.appInitCustomLocal = this.establishConfig();
+    this.initAppInitCustomLocal();
   }
 
   componentDidMount() {
+    recordObject({
+      appInitConfig: getAppInitConfigData(),
+    });
+
     //延迟执行, 避免配置未合并完成前调用
     setTimeout(() => {
       this.loadRemoteMetaData();
@@ -19,6 +31,10 @@ class AppComponent extends Component {
 
   initDva = () => {
     this.store = getStore(this.modelsCollection);
+  };
+
+  initAppInitCustomLocal = () => {
+    this.taroGlobalData.appInitCustomLocal = this.establishConfig();
   };
 
   establishConfig = () => {
