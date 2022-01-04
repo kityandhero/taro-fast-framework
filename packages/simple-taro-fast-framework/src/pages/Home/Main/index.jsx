@@ -114,51 +114,93 @@ export default class Index extends PageWrapper {
             </VerticalBox>
           </BlockArea>
 
-          <BlockArea title="Buttons">
+          <BlockArea title="Buttons Color">
             <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
               <Space wrap>
                 {buildButton({
-                  inner: 'Action',
+                  inner: 'default',
+                })}
+
+                {buildButton({
+                  inner: 'primary',
                   color: 'primary',
-                  onClick: this.onActionClick,
                 })}
 
                 {buildButton({
-                  inner: 'ActionSheet',
+                  inner: 'success',
                   color: 'success',
-                  onClick: this.onActionSheetClick,
                 })}
 
                 {buildButton({
-                  inner: 'ActionModal',
-                  onClick: this.onActionModalClick,
+                  inner: 'danger',
+                  color: 'danger',
                 })}
 
                 {buildButton({
-                  inner: 'reload',
-                  loading: !!dataLoading,
-                  // loadingText: '执行中',
-                  onClick: this.reloadData,
+                  inner: 'warning',
+                  color: 'warning',
                 })}
 
                 {buildButton({
-                  inner: 'reload',
+                  inner: 'loading',
                   loading: true,
-                  // loadingText: '执行中',
-                  onClick: this.reloadData,
                 })}
 
                 {buildButton({
-                  inner: 'reloadRemoteMetaData',
-                  onClick: this.reloadRemoteMetaData,
-                })}
-
-                {buildButton({
-                  inner: 'showRemoteMetaDataInConsole',
-                  onClick: this.showRemoteMetaDataInConsole,
+                  inner: 'disabled',
+                  disabled: true,
                 })}
               </Space>
             </VerticalBox>
+          </BlockArea>
+
+          <BlockArea title="Buttons Block Large">
+            <Space direction="vertical">
+              {buildButton({
+                inner: 'Block Button',
+                block: true,
+                color: 'primary',
+                size: 'large',
+              })}
+            </Space>
+          </BlockArea>
+
+          <BlockArea title="Button Action">
+            <Space wrap>
+              {buildButton({
+                inner: 'Action',
+                color: 'primary',
+                onClick: this.onActionClick,
+              })}
+
+              {buildButton({
+                inner: 'ActionSheet',
+                color: 'success',
+                onClick: this.onActionSheetClick,
+              })}
+
+              {buildButton({
+                inner: 'ActionModal',
+                color: 'danger',
+                onClick: this.onActionModalClick,
+              })}
+
+              {buildButton({
+                inner: 'reload',
+                loading: !!dataLoading,
+                onClick: this.reloadData,
+              })}
+
+              {buildButton({
+                inner: 'reloadRemoteMetaData',
+                onClick: this.reloadRemoteMetaData,
+              })}
+
+              {buildButton({
+                inner: 'showRemoteMetaDataInConsole',
+                onClick: this.showRemoteMetaDataInConsole,
+              })}
+            </Space>
           </BlockArea>
 
           <BlockArea title="AutoCenter">
