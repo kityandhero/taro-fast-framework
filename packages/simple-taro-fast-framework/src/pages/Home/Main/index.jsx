@@ -10,7 +10,7 @@ import {
   AutoCenter,
   BlockArea,
 } from 'taro-fast-component/es/customComponents';
-import { buildButton } from 'taro-fast-framework/es/functionComponent';
+import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 

@@ -17,12 +17,6 @@ const inputFile = {
     'utils/actionAssist': 'src/utils/actionAssist.js',
   },
   ...{
-    'customComponents/index': 'src/customComponents/index.jsx',
-  },
-  ...{
-    'functionComponent/index': 'src/functionComponent/index.jsx',
-  },
-  ...{
     'framework/AppBase/index': 'src/framework/AppBase/index.jsx',
     'framework/Infrastructure/index': 'src/framework/Infrastructure/index.js',
     'framework/Base/index': 'src/framework/Base/index.js',

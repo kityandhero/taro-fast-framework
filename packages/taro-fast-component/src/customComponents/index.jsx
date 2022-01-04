@@ -8,3 +8,4 @@ export { Space } from './Space';
 export { Empty } from './Empty';
 export { AutoCenter } from './AutoCenter';
 export { BlockArea } from './BlockArea';
+export { AdvanceButton } from './AdvanceButton';

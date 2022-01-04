@@ -7,7 +7,8 @@ import {
   withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
-import { Spin } from 'taro-fast-component/es/customComponents';
+
+import Spin from '../Spin';
 
 import './index.less';
 
