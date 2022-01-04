@@ -1,5 +1,7 @@
 import { View } from '@tarojs/components';
 
+import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+
 import Row from '../Flex/Row';
 import Col from '../Flex/Col';
 import VerticalBox from '../VerticalBox';
@@ -18,6 +20,7 @@ function Spin(props) {
     fullscreen: fullscreenValue,
     spinColor: spinColorValue,
     spinSize: spinSizeValue,
+    overlayBackgroundColor,
   } = props;
 
   const spin = spinValue || false;
@@ -50,33 +53,33 @@ function Spin(props) {
             spin ? 'tfc_spin_overlay_show' : 'tfc_spin_overlay_hide'
           }`}
           style={{
-            width: fullscreen ? '100vw' : '100%',
-            height: fullscreen ? '100vh' : '100%',
-            transition: 'opacity 0.2s',
+            ...{
+              width: fullscreen ? '100vw' : '100%',
+              height: fullscreen ? '100vh' : '100%',
+              transition: 'opacity 0.2s',
+            },
+            ...(stringIsNullOrWhiteSpace(overlayBackgroundColor)
+              ? {}
+              : { backgroundColor: overlayBackgroundColor }),
           }}
           onTouchMove={handleTouchMove}
         >
           <View style={{ height: '100%' }}>
             <Row align="center" style={{ height: '100%' }}>
               <Col size={1} style={{ height: '100%' }} />
-              <Col size={10} style={{ height: '120rpx' }}>
-                <View>
-                  <VerticalBox
-                    style={{ height: '100rpx' }}
-                    alignJustify="center"
-                  >
-                    {showLoading ? (
-                      <ActivityIndicator
-                        isOpened={spin}
-                        content={text}
-                        color={spinColor}
-                        size={spinSize}
-                      ></ActivityIndicator>
-                    ) : (
-                      <View className="tfc_content_box">{text}</View>
-                    )}
-                  </VerticalBox>
-                </View>
+              <Col size={10} style={{ height: '100%' }}>
+                <VerticalBox alignJustify="center">
+                  {showLoading ? (
+                    <ActivityIndicator
+                      isOpened={spin}
+                      content={text}
+                      color={spinColor}
+                      size={spinSize}
+                    ></ActivityIndicator>
+                  ) : (
+                    <View className="tfc_content_box">{text}</View>
+                  )}
+                </VerticalBox>
               </Col>
               <Col size={1} style={{ height: '100%' }} />
             </Row>
@@ -96,6 +99,7 @@ Spin.defaultProps = {
   showLoading: true,
   spinColor: defaultSpinColor,
   spinSize: defaultSpinSize,
+  overlayBackgroundColor: '#f5f5f5',
 };
 
 export default Spin;

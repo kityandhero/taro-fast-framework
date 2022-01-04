@@ -1,64 +1,64 @@
-import { PureComponent } from "react";
-import { View } from "@tarojs/components";
+import { PureComponent } from 'react';
+import { View } from '@tarojs/components';
 
 class VerticalBox extends PureComponent {
   render() {
     const { style, align, alignJustify } = this.props;
 
-    let alignStyle = "center";
+    let alignStyle = 'center';
 
     switch (align) {
-      case "top":
-        alignStyle = "flex-start";
+      case 'top':
+        alignStyle = 'flex-start';
         break;
 
-      case "center":
-        alignStyle = "center";
+      case 'center':
+        alignStyle = 'center';
         break;
 
-      case "bottom":
-        alignStyle = "flex-end";
+      case 'bottom':
+        alignStyle = 'flex-end';
         break;
 
       default:
-        alignStyle = "center";
+        alignStyle = 'center';
         break;
     }
 
-    let alignJustifyStyle = "flex-start";
+    let alignJustifyStyle = 'flex-start';
 
     switch (alignJustify) {
-      case "start":
-        alignJustifyStyle = "flex-start";
+      case 'start':
+        alignJustifyStyle = 'flex-start';
         break;
 
-      case "center":
-        alignJustifyStyle = "center";
+      case 'center':
+        alignJustifyStyle = 'center';
         break;
 
-      case "end":
-        alignJustifyStyle = "flex-end";
+      case 'end':
+        alignJustifyStyle = 'flex-end';
         break;
 
-      case "between":
-        alignJustifyStyle = "space-between";
+      case 'between':
+        alignJustifyStyle = 'space-between';
         break;
 
-      case "around":
-        alignJustifyStyle = "space-around";
+      case 'around':
+        alignJustifyStyle = 'space-around';
         break;
 
       default:
-        alignJustifyStyle = "flex-start";
+        alignJustifyStyle = 'flex-start';
         break;
     }
 
     const flexStyle = {
       ...(style || {}),
       ...{
-        display: "flex",
-        width: "100%",
-        height: "100%",
+        display: 'flex',
+        width: '100%',
+        height: '100%',
       },
       ...{
         alignItems: alignStyle,
@@ -67,7 +67,11 @@ class VerticalBox extends PureComponent {
     };
 
     return (
-      <View>
+      <View
+        style={{
+          height: '100%',
+        }}
+      >
         <View style={flexStyle}>{this.props.children}</View>
       </View>
     );
@@ -77,8 +81,8 @@ class VerticalBox extends PureComponent {
 VerticalBox.defaultProps = {
   fitWidth: true,
   style: {},
-  align: "center",
-  alignJustify: "flex-start",
+  align: 'center',
+  alignJustify: 'flex-start',
 };
 
 export default VerticalBox;

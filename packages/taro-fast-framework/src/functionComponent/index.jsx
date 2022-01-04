@@ -13,6 +13,8 @@ export function buildButton({
   plain = false,
   disabled = false,
   loading = false,
+  loadingColor = '',
+  loadingText = '',
   formType = '',
   openType = '',
   hoverClass = 'button-hover',
@@ -52,6 +54,8 @@ export function buildButton({
       plain={plain}
       disabled={disabled}
       loading={loading}
+      loadingColor={loadingColor}
+      loadingText={loadingText}
       formType={formType}
       openType={openType}
       hoverClass={hoverClass}

@@ -116,11 +116,16 @@ export default class Index extends PageWrapper {
 
           <BlockArea title="Buttons">
             <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
-              <Space direction="vertical">
-                {buildButton({ inner: 'Action', onClick: this.onActionClick })}
+              <Space wrap>
+                {buildButton({
+                  inner: 'Action',
+                  color: 'primary',
+                  onClick: this.onActionClick,
+                })}
 
                 {buildButton({
                   inner: 'ActionSheet',
+                  color: 'success',
                   onClick: this.onActionSheetClick,
                 })}
 
@@ -132,6 +137,14 @@ export default class Index extends PageWrapper {
                 {buildButton({
                   inner: 'reload',
                   loading: !!dataLoading,
+                  // loadingText: '执行中',
+                  onClick: this.reloadData,
+                })}
+
+                {buildButton({
+                  inner: 'reload',
+                  loading: true,
+                  // loadingText: '执行中',
                   onClick: this.reloadData,
                 })}
 

@@ -11,6 +11,7 @@
     "alignright",
     "antv",
     "backcolor",
+    "blinkmacsystemfont",
     "bmap",
     "browserslist",
     "buble",
@@ -57,6 +58,7 @@
     "mediaembed",
     "mfsu",
     "miniprogram",
+    "miui",
     "mixins",
     "mockjs",
     "Moxiecode",
@@ -103,6 +105,7 @@
     "wordcount",
     "WXML",
     "WXSS",
+    "Yahei",
     "ycheck",
     "ychecker"
   ],

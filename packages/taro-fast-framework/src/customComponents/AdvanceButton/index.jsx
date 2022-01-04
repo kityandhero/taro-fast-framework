@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { View, Button } from '@tarojs/components';
+import { Button } from '@tarojs/components';
 
 import {
   inCollection,
@@ -7,7 +7,9 @@ import {
   withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
-import { Loading } from 'taro-fast-component/es/customComponents';
+import { Spin } from 'taro-fast-component/es/customComponents';
+
+import './index.less';
 
 const classPrefix = `tfc-button`;
 
@@ -47,7 +49,7 @@ const defaultProps = {
   disabled: false,
   loading: false,
   loadingColor: '',
-  loadingText: 'loading',
+  loadingText: '',
   formType: '',
   openType: '',
   hoverClass: 'button-hover',
@@ -155,6 +157,15 @@ export const AdvanceButton = (p) => {
 
   const disabledAdjust = disabled || loading;
 
+  const styleAdjust = {
+    ...{
+      backgroundColor: 'var(--background-color)',
+      color: 'var(--text-color)',
+      borderWidth: 0,
+    },
+    ...style,
+  };
+
   const cn = [
     classPrefix,
     colorAdjust ? `${classPrefix}-${colorAdjust}` : null,
@@ -177,13 +188,11 @@ export const AdvanceButton = (p) => {
     props,
     <Button
       className={classNames(...cn)}
-      style={style}
+      style={styleAdjust}
       onClick={onClick}
-      // size={size}
       type={typeAdjust}
       plain={!!plain}
       disabled={disabledAdjust}
-      loading={loading}
       formType={formTypeAdjust}
       openType={openTypeAdjust}
       hoverClass={hoverClass}
@@ -208,14 +217,14 @@ export const AdvanceButton = (p) => {
       onOpenSetting={onOpenSetting}
       onLaunchapp={onLaunchApp}
     >
-      {loading ? (
-        <View className={`${classPrefix}-loading-wrapper`}>
-          <Loading color={loadingColor} />
-          {loadingText}
-        </View>
-      ) : (
-        props.children
-      )}
+      <Spin
+        spin={!!loading}
+        spinColor={loadingColor}
+        text={loadingText}
+        overlayBackgroundColor=""
+      >
+        {props.children}
+      </Spin>
     </Button>,
   );
 };
