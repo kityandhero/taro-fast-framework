@@ -1,8 +1,13 @@
-import { Button } from '@tarojs/components';
+import { AdvanceButton } from '../customComponents';
 
 export function buildButton({
-  text,
-  className = '',
+  style,
+  color,
+  fill,
+  block,
+  shape,
+  additionalClassName,
+  inner,
   size = 'default',
   type = 'default',
   plain = false,
@@ -34,8 +39,13 @@ export function buildButton({
   onClick = null,
 }) {
   return (
-    <Button
-      className={className}
+    <AdvanceButton
+      style={style}
+      color={color}
+      fill={fill}
+      block={block}
+      shape={shape}
+      additionalClassName={additionalClassName}
       onClick={onClick}
       size={size}
       type={type}
@@ -66,8 +76,8 @@ export function buildButton({
       onOpenSetting={onOpenSetting}
       onLaunchapp={onLaunchApp}
     >
-      {text}
-    </Button>
+      {inner}
+    </AdvanceButton>
   );
 }
 

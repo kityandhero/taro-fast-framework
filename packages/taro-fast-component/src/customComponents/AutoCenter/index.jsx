@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { withNativeProps } from '../../utils/tools';
+import { withNativeProps } from 'taro-fast-common/es/utils/tools';
 
 import './index.less';
 

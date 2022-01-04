@@ -2,9 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { mergeProps } from 'taro-fast-common/es/utils/tools';
-
-import { withNativeProps } from '../../utils/tools';
+import { mergeProps, withNativeProps } from 'taro-fast-common/es/utils/tools';
 
 import './index.less';
 

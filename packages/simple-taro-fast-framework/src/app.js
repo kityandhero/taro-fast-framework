@@ -1,12 +1,12 @@
 // import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
-import AppComponent from 'taro-fast-framework/es/customComponents/AppComponent';
+import AppBase from 'taro-fast-framework/es/framework/AppBase';
 import 'taro-fast-component/es/index.css';
 
 import models from './models';
 
 import './app.less';
 
-class App extends AppComponent {
+class App extends AppBase {
   componentDidShow() {}
 
   componentDidHide() {}

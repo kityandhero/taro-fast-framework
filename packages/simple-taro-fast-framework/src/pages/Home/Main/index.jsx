@@ -10,7 +10,7 @@ import {
   AutoCenter,
   BlockArea,
 } from 'taro-fast-component/es/customComponents';
-import { buildButton } from 'taro-fast-framework/es/customComponents/FunctionComponent';
+import { buildButton } from 'taro-fast-framework/es/functionComponent';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 
@@ -117,31 +117,31 @@ export default class Index extends PageWrapper {
           <BlockArea title="Buttons">
             <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
               <Space direction="vertical">
-                {buildButton({ text: 'Action', onClick: this.onActionClick })}
+                {buildButton({ inner: 'Action', onClick: this.onActionClick })}
 
                 {buildButton({
-                  text: 'ActionSheet',
+                  inner: 'ActionSheet',
                   onClick: this.onActionSheetClick,
                 })}
 
                 {buildButton({
-                  text: 'ActionModal',
+                  inner: 'ActionModal',
                   onClick: this.onActionModalClick,
                 })}
 
                 {buildButton({
-                  text: 'reload',
+                  inner: 'reload',
                   loading: !!dataLoading,
                   onClick: this.reloadData,
                 })}
 
                 {buildButton({
-                  text: 'reloadRemoteMetaData',
+                  inner: 'reloadRemoteMetaData',
                   onClick: this.reloadRemoteMetaData,
                 })}
 
                 {buildButton({
-                  text: 'showRemoteMetaDataInConsole',
+                  inner: 'showRemoteMetaDataInConsole',
                   onClick: this.showRemoteMetaDataInConsole,
                 })}
               </Space>

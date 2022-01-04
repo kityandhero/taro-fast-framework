@@ -3,11 +3,10 @@ import { View, Image } from '@tarojs/components';
 
 import {
   mergeProps,
-  stringIsNullOrWhiteSpace,
+  stringIsNullOrWhiteSpace,withNativeProps
 } from 'taro-fast-common/es/utils/tools';
 import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
-import { withNativeProps } from '../../utils/tools';
 import EmptyIcon from '../../assets/empty-icon.svg';
 
 import './index.less';
