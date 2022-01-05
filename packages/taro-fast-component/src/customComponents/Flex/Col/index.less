@@ -1,7 +1,9 @@
-.tfc-col {
-  flex: 1;
+@class-prefix-space: ~'tfc-col';
 
-  width: 100%;
+.@{class-prefix-space} {
+  flex: 0 0 auto;
+
+  max-width: 100%;
   display: block;
   white-space: nowrap;
   box-sizing: border-box;
@@ -15,13 +17,15 @@
       flex: 0 0 @width;
       -webkit-box-flex: 0;
 
-      max-width: $width;
+      max-width: @width;
     }
 
     &__offset-@{i} {
-      margin-left: $width;
+      margin-left: @width;
     }
   }
+
+  .loop(1);
 
   &__align {
     &--top {
@@ -38,8 +42,8 @@
   }
 
   &--auto {
-    max-width: initial;
-    word-break: keep-all;
+    min-width: 0;
+    flex: 1 1 auto;
   }
 
   &--wrap {

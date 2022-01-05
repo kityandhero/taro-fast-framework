@@ -1,16 +1,28 @@
 import { View } from '@tarojs/components';
 
-import { withNativeProps } from 'taro-fast-common/es/utils/tools';
+import { mergeProps, withNativeProps } from 'taro-fast-common/es/utils/tools';
 
 import './index.less';
 
 const classPrefix = 'tfc-auto-center';
 
-export const AutoCenter = (props) => {
+const defaultProps = {
+  style: {},
+};
+
+export const AutoCenter = (p) => {
+  const props = mergeProps(defaultProps, p);
+
+  const { style } = props;
+
   return withNativeProps(
     props,
-    <View className={classPrefix}>
+    <View className={classPrefix} style={style}>
       <View className={`${classPrefix}-content`}>{props.children}</View>
     </View>,
   );
+};
+
+AutoCenter.defaultProps = {
+  ...defaultProps,
 };

@@ -13,6 +13,11 @@ import {
   Badge,
   FadeView,
   NoticeBar,
+  FlexBox,
+  Row,
+  Col,
+  CenterBox,
+  ImageBox,
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
@@ -95,9 +100,47 @@ export default class Index extends PageWrapper {
 
     console.log(this.state);
 
+    const rowStyle = {
+      backgroundColor: '#cdd1d5bf',
+    };
+
+    const colStyle = {
+      textAlign: 'center',
+      backgroundColor: '#0092ffbf',
+    };
+
     return (
       <View className="index">
         <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
+
+        <BlockArea title="ImageBox">
+          <FlexBox
+            flexAuto="right"
+            left={
+              <View style={{ width: '100rpx' }}>
+                <ImageBox src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45" />
+              </View>
+            }
+            leftStyle={{ paddingRight: '10rpx' }}
+            right="右侧"
+            rightStyle={colStyle}
+          />
+
+          <FlexBox
+            flexAuto="left"
+            left="左侧"
+            leftStyle={colStyle}
+            right={
+              <View style={{ width: '100rpx' }}>
+                <ImageBox
+                  circle
+                  src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45"
+                />
+              </View>
+            }
+            rightStyle={{ paddingLeft: '10rpx' }}
+          />
+        </BlockArea>
 
         <BlockArea title="Avatar">
           <Space wrap>
@@ -163,6 +206,73 @@ export default class Index extends PageWrapper {
 
             <Badge content="新消息!" />
           </Space>
+        </BlockArea>
+
+        <BlockArea title="Flex">
+          <View>
+            <Row justify="center" style={rowStyle}>
+              <Col size={1} style={colStyle}>
+                1
+              </Col>
+              <Col size={1} style={colStyle}>
+                1
+              </Col>
+            </Row>
+          </View>
+          <View>
+            <Row style={rowStyle}>
+              <Col size={4} style={colStyle}>
+                4
+              </Col>
+              <Col size={4}>4</Col>
+              <Col size={4} style={colStyle}>
+                4
+              </Col>
+            </Row>
+          </View>
+          <View>
+            <Row style={rowStyle}>
+              <Col size={6} style={colStyle}>
+                6
+              </Col>
+              <Col size={6}>6</Col>
+            </Row>
+          </View>
+        </BlockArea>
+
+        <BlockArea title="FlexBox">
+          <FlexBox left="仅左侧" />
+
+          <FlexBox
+            left="左侧"
+            leftStyle={rowStyle}
+            right="右侧"
+            rightStyle={colStyle}
+          />
+
+          <FlexBox
+            flexAuto="right"
+            left="左侧"
+            leftStyle={rowStyle}
+            right="右侧"
+            rightStyle={colStyle}
+          />
+
+          <FlexBox
+            style={{ height: '200rpx' }}
+            direction="vertical"
+            vertical={{
+              bottomHeight: '80rpx',
+            }}
+            top="上侧"
+            topStyle={rowStyle}
+            bottom="下侧"
+            bottomStyle={colStyle}
+          />
+        </BlockArea>
+
+        <BlockArea title="CenterBox">
+          <CenterBox>1</CenterBox>
         </BlockArea>
 
         <BlockArea title="Empty">

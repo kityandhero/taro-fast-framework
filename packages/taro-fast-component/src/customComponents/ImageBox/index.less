@@ -1,8 +1,3 @@
-@import '~taro-ui/dist/style/components/activity-indicator.scss';
-@import '~taro-ui/dist/style/components/loading.scss';
-@import '~taro-ui/dist/style/components/flex.scss';
-@import '../../common.scss';
-
 @class-prefix-space: ~'tfc-image-box';
 
 .@{class-prefix-space} {
@@ -11,14 +6,14 @@
   overflow: hidden;
   position: relative;
 
-  .placeholderBox {
+  &-placeholder-box {
     content: '';
     display: block;
     margin-top: 100%;
     margin-left: 100%;
   }
 
-  .imageItem {
+  &-image-item {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,18 +21,18 @@
     height: 100%;
   }
 
-  .imageLoadAnimationInit {
+  &-image-load-animation-init {
     opacity: 0.01;
   }
 
-  .imageLoadAnimation {
-    animation: opacityChange 300ms;
-    -moz-animation: opacityChange 300ms; /* Firefox */
-    -webkit-animation: opacityChange 300ms; /* Safari 和 Chrome */
-    -o-animation: opacityChange 100ms; /* Opera */
+  &-image-load-animation {
+    animation: opacity-change 300ms;
+    -moz-animation: opacity-change 300ms;
+    -webkit-animation: opacity-change 300ms;
+    -o-animation: opacity-change 100ms;
   }
 
-  .decorationBox {
+  &-decoration-box {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,7 +40,7 @@
     height: 100%;
     z-index: 230;
 
-    .decorationBoxInner {
+    &-inner {
       position: relative;
       width: 100%;
       height: 100%;
@@ -62,7 +57,7 @@
     opacity: 0.65;
     z-index: 240;
 
-    .overlayText {
+    &-text {
       font-size: 30rpx;
       color: #fff;
     }
@@ -72,8 +67,8 @@
     background: #000;
   }
 
-  .overlayLoading {
-    .overlayLoadingInner {
+  &-overlay-loading {
+    &-inner {
       width: 100%;
       height: 100%;
       position: relative;
@@ -82,12 +77,12 @@
   }
 }
 
-.contentImage {
+.content-image {
   width: 100%;
   display: block;
 }
 
-@keyframes opacityChange {
+@keyframes opacity-change {
   from {
     opacity: 0.01;
   }

@@ -10,14 +10,15 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
-const propNames = ['auto', 'wrap', 'align', 'size', 'offset'];
-
 const alignCollection = ['top', 'center', 'bottom'];
 
 const defaultProps = {
   style: {},
   auto: false,
   wrap: false,
+  align: '',
+  size: '',
+  offset: '',
 };
 
 class Col extends ComponentBase {
@@ -27,27 +28,23 @@ class Col extends ComponentBase {
     const rootClass = ['tfc-col'];
 
     _forEach(this.props, (value, key) => {
-      if (inCollection(propNames, key)) {
-        if (key === 'auto' && value) {
-          return rootClass.push('tfc-col--auto');
-        }
+      if (key === 'auto' && value) {
+        return rootClass.push('tfc-col--auto');
+      }
 
-        if (key === 'wrap' && value) {
-          return rootClass.push('tfc-col--wrap');
-        }
+      if (key === 'wrap' && value) {
+        return rootClass.push('tfc-col--wrap');
+      }
 
-        if (key === 'size' && isNumber(value)) {
-          rootClass.push(`tfc-col-${value}`);
-        }
+      if (key === 'size' && isNumber(value)) {
+        rootClass.push(`tfc-col-${value}`);
+      }
 
-        if (key === 'align' && inCollection(alignCollection, value)) {
-          rootClass.push(`tfc-col__${key}--${value}`);
-        }
+      if (key === 'align' && inCollection(alignCollection, value)) {
+        rootClass.push(`tfc-col__${key}--${value}`);
+      }
 
-        if (key === 'offset' && isNumber(value)) {
-          rootClass.push(`tfc-col__${key}--${value}`);
-        }
-
+      if (key === 'offset' && isNumber(value)) {
         rootClass.push(`tfc-col__${key}--${value}`);
       }
     });

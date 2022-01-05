@@ -4,15 +4,27 @@ import { View, Image } from '@tarojs/components';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import { defaultImg } from '../../utils/customConfig';
 import ActivityIndicator from '../ActivityIndicator';
+import CenterBox from '../CenterBox';
 
 import './index.less';
 
-const classPrefix = `tfc-space`;
+const classPrefix = `tfc-image-box`;
 
 const defaultProps = {
-  defaultImg: '',
+  src: '',
+  lazyLoad: false,
+  aspectRatio: 1,
+  imageBoxStyle: {},
+  borderRadius: true,
+  imageMode: '',
+  showMode: 'box',
+  circle: false,
+  backgroundColor: '',
+  showOverlay: false,
+  overlayText: '',
+  loadingEffect: true,
+  decoration: null,
 };
 
 class ImageBox extends ComponentBase {
@@ -76,7 +88,9 @@ class ImageBox extends ComponentBase {
       overlayText: overlayTextValue,
       loadingEffect: loadingEffectValue,
       decoration: decorationValue,
-    } = this.props;
+    } = {
+      ...this.props,
+    };
 
     const { hide, loadSuccess } = this.state;
 
@@ -92,8 +106,9 @@ class ImageBox extends ComponentBase {
 
     aspectRatioVal = aspectRatioVal <= 0 ? 1 : aspectRatioVal;
 
-    const borderRadiusDefaultStyle =
-      borderRadiusValue && true ? { borderRadius: '8rpx' } : {};
+    const borderRadiusDefaultStyle = borderRadiusValue
+      ? { borderRadius: '8rpx' }
+      : {};
 
     const circle = circleValue || false;
 
@@ -101,16 +116,9 @@ class ImageBox extends ComponentBase {
       borderRadiusDefaultStyle.borderRadius = '50%';
     }
 
-    let defaultImage = defaultImg;
-
-    if (src) {
-      defaultImage = src;
-    }
-
     const imageBoxStyleValue = {
       ...imageBoxStyle,
       ...borderRadiusDefaultStyle,
-      // ...(hide ? { display: "none" } : {})
     };
 
     const backgroundColor =
@@ -130,11 +138,13 @@ class ImageBox extends ComponentBase {
           className={classNames(classPrefix)}
           style={{ ...imageBoxStyleValue }}
         >
-          {aspectRatioVal === 1 ? <View className="placeholderBox" /> : null}
+          {aspectRatioVal === 1 ? (
+            <View className={classNames(`${classPrefix}-placeholder-box`)} />
+          ) : null}
 
           {aspectRatioVal !== 1 ? (
             <View
-              className="placeholderBox"
+              className={classNames(`${classPrefix}-placeholder-box`)}
               style={{ marginTop: `${aspectRatioVal * 100}%` }}
             />
           ) : null}
@@ -147,13 +157,11 @@ class ImageBox extends ComponentBase {
               )}
               onClick={this.onImageClick}
             >
-              <View className="at-row at-row__align--center fullHeight">
-                <View className="at-col" />
-                <View className="at-col at-col-1 at-col--auto">
-                  <View className="overlayText">{overlayText}</View>
+              <CenterBox fillHeight>
+                <View className={classNames(`${classPrefix}-overlay-box-text`)}>
+                  {overlayText}
                 </View>
-                <View className="at-col" />
-              </View>
+              </CenterBox>
             </View>
           ) : null}
 
@@ -161,18 +169,28 @@ class ImageBox extends ComponentBase {
 
           {loadingEffect && !loadSuccess && !showOverlay && !lazyLoad ? (
             <View
-              className="overlayBox overlayLoading"
+              className={classNames(
+                `${classPrefix}-overlay-box`,
+                `${classPrefix}-overlay-loading`,
+              )}
               onClick={this.onImageClick}
             >
-              <View className="loadingBoxInner">
+              <View
+                className={classNames(`${classPrefix}-overlay-loading-inner`)}
+              >
                 <ActivityIndicator mode="center" />
               </View>
             </View>
           ) : null}
 
           {(decoration || null) != null ? (
-            <View className="decorationBox" onClick={this.onImageClick}>
-              <View className="decorationBoxInner">
+            <View
+              className={classNames(`${classPrefix}-decoration-box`)}
+              onClick={this.onImageClick}
+            >
+              <View
+                className={classNames(`${classPrefix}-decoration-box-inner`)}
+              >
                 <View style={decoration.style}>{decoration.text}</View>
               </View>
             </View>
@@ -180,18 +198,19 @@ class ImageBox extends ComponentBase {
 
           {showMode == 'box' ? (
             <Image
-              className={`imageItem image${
+              className={classNames(
+                `${classPrefix}-image-item`,
                 loadingEffect && !showOverlay
                   ? !loadSuccess
-                    ? ' imageLoadAnimationInit'
-                    : ' imageLoadAnimation'
-                  : ''
-              }`}
+                    ? `${classPrefix}-image-load-animation-init`
+                    : `${classPrefix}-image-load-animation`
+                  : null,
+              )}
               style={{
                 ...borderRadiusDefaultStyle,
                 ...backgroundColor,
               }}
-              src={defaultImage}
+              src={src}
               lazyLoad={lazyLoad || false}
               mode={imageMode}
               onLoad={() => {
@@ -208,12 +227,12 @@ class ImageBox extends ComponentBase {
         </View>
       );
     }
-    if (showMode === 'contentImage') {
+    if (showMode === 'content-image') {
       return (
         <View style={{ ...imageBoxStyleValue }}>
           <Image
-            className="contentImage"
-            src={defaultImage}
+            className={classNames(`${classPrefix}-content-image`)}
+            src={src}
             lazyLoad={lazyLoad || false}
             mode="widthFix"
             onError={this.onImageError}

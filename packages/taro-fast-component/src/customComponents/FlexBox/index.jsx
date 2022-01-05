@@ -13,9 +13,13 @@ const defaultProps = {
     bottomHeight: '180rpx',
   },
   left: null,
+  leftStyle: {},
   right: null,
+  leftStyle: {},
   top: null,
+  topStyle: {},
   bottom: null,
+  bottomStyle: {},
   style: null,
 };
 
@@ -30,7 +34,9 @@ class FlexBox extends ComponentBase {
       right,
       rightStyle,
       top,
+      topStyle,
       bottom,
+      bottomStyle,
       direction: directionSource,
       vertical,
     } = this.props;
@@ -52,13 +58,11 @@ class FlexBox extends ComponentBase {
       if (flexAuto === 'left') {
         return (
           <Row style={style}>
-            <Col flex="auto" style={leftStyle || null}>
+            <Col auto style={leftStyle || null}>
               {left}
             </Col>
             {(right || null) == null ? null : (
-              <Col flex style={rightStyle || null}>
-                {right}
-              </Col>
+              <Col style={rightStyle || null}>{right}</Col>
             )}
           </Row>
         );
@@ -66,11 +70,9 @@ class FlexBox extends ComponentBase {
 
       return (
         <Row style={style}>
-          <Col flex style={leftStyle || null}>
-            {left}
-          </Col>
+          <Col style={leftStyle || null}>{left}</Col>
           {(right || null) == null ? null : (
-            <Col flex="auto" style={rightStyle || null}>
+            <Col auto style={rightStyle || null}>
               {right}
             </Col>
           )}
@@ -85,19 +87,27 @@ class FlexBox extends ComponentBase {
       ...(vertical || {}),
     };
 
-    const style = {
-      height: '100%',
-      display: 'flex',
-      flexFlow: 'column',
-      alignItems: 'stretch',
-      minHeight: minHeight,
-    };
-
     return (
-      <View style={style}>
+      <View
+        style={{
+          ...{
+            height: '100%',
+            minHeight: minHeight,
+          },
+          ...styleSource,
+          ...{
+            display: 'flex',
+            flexFlow: 'column',
+            alignItems: 'stretch',
+          },
+        }}
+      >
         <View
           style={{
-            flex: '1 1 auto',
+            ...topStyle,
+            ...{
+              flex: '1 1 auto',
+            },
           }}
         >
           <View>{top}</View>
@@ -105,7 +115,10 @@ class FlexBox extends ComponentBase {
 
         <View
           style={{
-            flex: `0 1 ${bottomHeight}`,
+            ...bottomStyle,
+            ...{
+              flex: `0 1 ${bottomHeight}`,
+            },
           }}
         >
           {bottom}

@@ -1,34 +1,73 @@
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
-
 import {
   forEach as _forEach,
   inCollection,
 } from 'taro-fast-common/es/utils/tools';
+import { isBoolean } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
-const propNames = ['wrap', 'align', 'justify', 'direction', 'alignContent'];
+const directionCollection = ['row', 'column', 'row-reverse', 'column-reverse'];
+const alignCollection = ['start', 'end', 'center', 'stretch', 'baseline'];
+const justifyCollection = ['start', 'end', 'center', 'between', 'around'];
+const alignContentCollection = [
+  'start',
+  'end',
+  'center',
+  'between',
+  'around',
+  'stretch',
+];
 
-export default class Row extends ComponentBase {
+const defaultProps = {
+  style: {},
+  wrap: false,
+  align: '',
+  justify: '',
+  direction: '',
+  alignContent: '',
+};
+
+class Row extends ComponentBase {
   render() {
     const { style } = this.props;
 
     const rootClass = ['tfc-row'];
 
     _forEach(this.props, (value, key) => {
-      if (inCollection(propNames, key)) {
-        if (key === 'alignContent') {
-          return rootClass.push(`tfc-row--${value}`);
-        }
-
-        if (key === 'alignContent') {
-          return rootClass.push(`tfc-row__align-content--${value}`);
-        }
-
+      if (key === 'direction' && inCollection(directionCollection, value)) {
         rootClass.push(`tfc-row__${key}--${value}`);
+      }
+
+      if (key === 'align' && inCollection(alignCollection, value)) {
+        rootClass.push(`tfc-row__${key}--${value}`);
+      }
+
+      if (key === 'justify' && inCollection(justifyCollection, value)) {
+        rootClass.push(`tfc-row__${key}--${value}`);
+      }
+
+      if (
+        key === 'alignContent' &&
+        inCollection(alignContentCollection, value)
+      ) {
+        return rootClass.push(`tfc-row__align-content--${value}`);
+      }
+
+      if (key === 'wrap') {
+        if (isBoolean(value)) {
+          if (value) {
+            rootClass.push(`tfc-row--wrap`);
+          } else {
+            rootClass.push(`tfc-row--no-wrap`);
+          }
+        } else {
+          rootClass.push(`tfc-row--${toString(value)}`);
+        }
       }
     });
 
@@ -39,3 +78,9 @@ export default class Row extends ComponentBase {
     );
   }
 }
+
+Row.defaultProps = {
+  ...defaultProps,
+};
+
+export default Row;
