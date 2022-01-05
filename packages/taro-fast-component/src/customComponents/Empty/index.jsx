@@ -3,7 +3,8 @@ import { View, Image } from '@tarojs/components';
 
 import {
   mergeProps,
-  stringIsNullOrWhiteSpace,withNativeProps
+  stringIsNullOrWhiteSpace,
+  withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
 import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -63,4 +64,8 @@ export const Empty = (p) => {
       {descriptionNode}
     </View>,
   );
+};
+
+Empty.defaultProps = {
+  ...defaultProps,
 };

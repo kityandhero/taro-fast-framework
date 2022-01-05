@@ -1,7 +1,8 @@
-import { Component } from 'react';
 import { Image, OpenData, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
+
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
@@ -11,7 +12,7 @@ const SIZE_CLASS = {
   small: 'small',
 };
 
-export default class Avatar extends Component {
+export default class Avatar extends ComponentBase {
   constructor(props) {
     super(props);
 

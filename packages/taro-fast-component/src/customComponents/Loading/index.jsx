@@ -1,12 +1,12 @@
-import { PureComponent } from 'react';
 import { View } from '@tarojs/components';
 
 import { pxTransform } from 'taro-fast-common/es/utils/tools';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
-class Loading extends PureComponent {
+class Loading extends ComponentBase {
   render() {
     const { color, size } = this.props;
     const loadingSize = typeof size === 'string' ? size : toString(size);

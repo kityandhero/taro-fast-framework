@@ -11,6 +11,8 @@ import {
   BlockArea,
   Avatar,
   Badge,
+  FadeView,
+  NoticeBar,
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
@@ -107,6 +109,12 @@ export default class Index extends PageWrapper {
           </Space>
         </BlockArea>
 
+        <BlockArea title="NoticeBar">
+          <NoticeBar icon="volume-plus">
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </BlockArea>
+
         <BlockArea title="Badge Wrapper">
           <Space wrap style={{ '--gap': '24px' }}>
             <Badge content="5">
@@ -159,21 +167,26 @@ export default class Index extends PageWrapper {
 
         <BlockArea title="Empty">
           <Spin spin={!firstLoadSuccess}>
-            <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
-              <Space direction="vertical">
-                <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
-                  <Empty
-                    description="暂无数据"
-                    onImageClick={() => {
-                      console.log('onImageClick');
-                    }}
-                    onDescriptionClick={() => {
-                      console.log('onDescriptionClick');
-                    }}
-                  />
-                </VerticalBox>
-              </Space>
-            </VerticalBox>
+            <FadeView show={!dataLoading}>
+              <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+                <Space direction="vertical">
+                  <VerticalBox
+                    style={{ height: '100rpx' }}
+                    alignJustify="center"
+                  >
+                    <Empty
+                      description="暂无数据"
+                      onImageClick={() => {
+                        console.log('onImageClick');
+                      }}
+                      onDescriptionClick={() => {
+                        console.log('onDescriptionClick');
+                      }}
+                    />
+                  </VerticalBox>
+                </Space>
+              </VerticalBox>
+            </FadeView>
           </Spin>
         </BlockArea>
 

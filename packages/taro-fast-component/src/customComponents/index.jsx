@@ -1,5 +1,6 @@
 export { default as Row } from './Flex/Row';
 export { default as Col } from './Flex/Col';
+export { default as FlexBox } from './FlexBox';
 export { default as ActivityIndicator } from './ActivityIndicator';
 export { default as Loading } from './Loading';
 export { default as VerticalBox } from './VerticalBox';
@@ -11,3 +12,5 @@ export { Empty } from './Empty';
 export { AutoCenter } from './AutoCenter';
 export { BlockArea } from './BlockArea';
 export { AdvanceButton } from './AdvanceButton';
+export { FadeView } from './FadeView';
+export { default as NoticeBar } from './NoticeBar';

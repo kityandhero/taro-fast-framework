@@ -17,19 +17,7 @@ const inputFile = {
     'utils/actionAssist': 'src/utils/actionAssist.js',
   },
   ...{
-    'framework/AppBase/index': 'src/framework/AppBase/index.jsx',
-    'framework/Infrastructure/index': 'src/framework/Infrastructure/index.js',
-    'framework/Base/index': 'src/framework/Base/index.js',
-    'framework/ComponentWrapper/index':
-      'src/framework/ComponentWrapper/index.js',
-    'framework/Common/index': 'src/framework/Core/index.js',
-    'framework/Common/index': 'src/framework/Common/index.js',
-    'framework/SupplementCore/index': 'src/framework/SupplementCore/index.js',
-    'framework/Supplement/index': 'src/framework/Supplement/index.js',
-    'framework/SupplementWrapper/index':
-      'src/framework/SupplementWrapper/index.js',
-    'framework/AuthorizationWrapper/index':
-      'src/framework/AuthorizationWrapper/index.js',
+    'framework/index': 'src/framework/index.jsx',
   },
 };
 
@@ -46,6 +34,7 @@ export function buildConfig({ terser: whetherTerser = false }) {
         'taro-fast-common/es/utils/tools',
         'taro-fast-common/es/utils/typeCheck',
         'taro-fast-common/es/utils/typeConvert',
+        'taro-fast-common/es/customComponents',
       ],
       ...[
         'taro-fast-component/es/customComponents',

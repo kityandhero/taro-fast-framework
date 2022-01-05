@@ -1,7 +1,8 @@
-import { PureComponent } from 'react';
 import { View } from '@tarojs/components';
 
-class VerticalBox extends PureComponent {
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+class VerticalBox extends ComponentBase {
   render() {
     const { style, align, alignJustify } = this.props;
 

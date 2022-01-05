@@ -10,6 +10,7 @@ const classPrefix = `tfc-space`;
 
 const defaultProps = {
   direction: 'horizontal',
+  onClick: null,
 };
 
 export const Space = (p) => {
@@ -37,4 +38,8 @@ export const Space = (p) => {
       })}
     </View>,
   );
+};
+
+Space.defaultProps = {
+  ...defaultProps,
 };

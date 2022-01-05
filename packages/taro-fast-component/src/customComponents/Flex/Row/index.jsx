@@ -1,6 +1,7 @@
-import { Component } from 'react';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
+
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import {
   forEach as _forEach,
@@ -11,7 +12,7 @@ import './index.less';
 
 const propNames = ['wrap', 'align', 'justify', 'direction', 'alignContent'];
 
-export default class Row extends Component {
+export default class Row extends ComponentBase {
   render() {
     const { style } = this.props;
 

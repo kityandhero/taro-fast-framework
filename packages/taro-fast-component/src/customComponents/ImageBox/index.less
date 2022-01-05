@@ -1,0 +1,97 @@
+@import '~taro-ui/dist/style/components/activity-indicator.scss';
+@import '~taro-ui/dist/style/components/loading.scss';
+@import '~taro-ui/dist/style/components/flex.scss';
+@import '../../common.scss';
+
+@class-prefix-space: ~'tfc-image-box';
+
+.@{class-prefix-space} {
+  height: 100%;
+  // border-radius: 8rpx;
+  overflow: hidden;
+  position: relative;
+
+  .placeholderBox {
+    content: '';
+    display: block;
+    margin-top: 100%;
+    margin-left: 100%;
+  }
+
+  .imageItem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .imageLoadAnimationInit {
+    opacity: 0.01;
+  }
+
+  .imageLoadAnimation {
+    animation: opacityChange 300ms;
+    -moz-animation: opacityChange 300ms; /* Firefox */
+    -webkit-animation: opacityChange 300ms; /* Safari 和 Chrome */
+    -o-animation: opacityChange 100ms; /* Opera */
+  }
+
+  .decorationBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 230;
+
+    .decorationBoxInner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-overlay-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.65;
+    z-index: 240;
+
+    .overlayText {
+      font-size: 30rpx;
+      color: #fff;
+    }
+  }
+
+  &-overlay-text {
+    background: #000;
+  }
+
+  .overlayLoading {
+    .overlayLoadingInner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}
+
+.contentImage {
+  width: 100%;
+  display: block;
+}
+
+@keyframes opacityChange {
+  from {
+    opacity: 0.01;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 
@@ -6,12 +5,22 @@ import {
   forEach as _forEach,
   inCollection,
 } from 'taro-fast-common/es/utils/tools';
+import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
-const propNames = ['isAuto', 'isWrap', 'align', 'size', 'offset'];
+const propNames = ['auto', 'wrap', 'align', 'size', 'offset'];
 
-export default class Col extends Component {
+const alignCollection = ['top', 'center', 'bottom'];
+
+const defaultProps = {
+  style: {},
+  auto: false,
+  wrap: false,
+};
+
+class Col extends ComponentBase {
   render() {
     const { style } = this.props;
 
@@ -19,16 +28,24 @@ export default class Col extends Component {
 
     _forEach(this.props, (value, key) => {
       if (inCollection(propNames, key)) {
-        if (key === 'isAuto' && value) {
+        if (key === 'auto' && value) {
           return rootClass.push('tfc-col--auto');
         }
 
-        if (key === 'isWrap' && value) {
+        if (key === 'wrap' && value) {
           return rootClass.push('tfc-col--wrap');
         }
 
-        if (key === 'size' && value) {
+        if (key === 'size' && isNumber(value)) {
           rootClass.push(`tfc-col-${value}`);
+        }
+
+        if (key === 'align' && inCollection(alignCollection, value)) {
+          rootClass.push(`tfc-col__${key}--${value}`);
+        }
+
+        if (key === 'offset' && isNumber(value)) {
+          rootClass.push(`tfc-col__${key}--${value}`);
         }
 
         rootClass.push(`tfc-col__${key}--${value}`);
@@ -42,3 +59,9 @@ export default class Col extends Component {
     );
   }
 }
+
+Col.defaultProps = {
+  ...defaultProps,
+};
+
+export default Col;

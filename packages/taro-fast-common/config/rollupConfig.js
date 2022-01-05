@@ -13,6 +13,9 @@ const inputFile = {
     'utils/tools': 'src/utils/tools.js',
     'utils/cacheAssist': 'src/utils/cacheAssist.js',
   },
+  ...{
+    'customComponents/index': 'src/customComponents/index.jsx',
+  },
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {

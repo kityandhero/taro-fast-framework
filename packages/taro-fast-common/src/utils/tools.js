@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import { stringify, parse } from 'qs';
@@ -1841,15 +1841,6 @@ export function mergeProps(...items) {
     ret = assignWith(ret, items[i], customizer);
   }
   return ret;
-}
-
-export function useResizeEffect(effect, targetRef) {
-  useLayoutEffect(() => {
-    const target = targetRef.current;
-    if (!target) return;
-
-    effect(target);
-  }, [effect, targetRef]);
 }
 
 export function withNativeProps(props, element) {
