@@ -12,7 +12,7 @@ import './index.less';
 const defaultSpinColor = '#13CE66';
 const defaultSpinSize = 32;
 
-function Spin(props) {
+export const Spin = (props) => {
   const {
     spin: spinValue,
     text: textValue,
@@ -90,7 +90,7 @@ function Spin(props) {
       {props.children}
     </View>
   );
-}
+};
 
 Spin.defaultProps = {
   spin: false,
@@ -101,5 +101,3 @@ Spin.defaultProps = {
   spinSize: defaultSpinSize,
   overlayBackgroundColor: '#f5f5f5',
 };
-
-export default Spin;

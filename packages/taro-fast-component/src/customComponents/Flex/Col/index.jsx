@@ -15,23 +15,23 @@ export default class Col extends Component {
   render() {
     const { style } = this.props;
 
-    const rootClass = ['at-col'];
+    const rootClass = ['tfc-col'];
 
     _forEach(this.props, (value, key) => {
       if (inCollection(propNames, key)) {
         if (key === 'isAuto' && value) {
-          return rootClass.push('at-col--auto');
+          return rootClass.push('tfc-col--auto');
         }
 
         if (key === 'isWrap' && value) {
-          return rootClass.push('at-col--wrap');
+          return rootClass.push('tfc-col--wrap');
         }
 
         if (key === 'size' && value) {
-          rootClass.push(`at-col-${value}`);
+          rootClass.push(`tfc-col-${value}`);
         }
 
-        rootClass.push(`at-col__${key}--${value}`);
+        rootClass.push(`tfc-col__${key}--${value}`);
       }
     });
 

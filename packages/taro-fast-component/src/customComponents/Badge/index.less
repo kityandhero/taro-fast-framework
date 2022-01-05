@@ -1,0 +1,37 @@
+@class-prefix-badge: ~'tfc-badge';
+
+.@{class-prefix-badge}-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+.@{class-prefix-badge} {
+  display: inline-block;
+  color: #fff;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  min-width: 16rpx;
+  border-radius: 100rpx;
+  padding: 0 8rpx;
+  font-size: 18rpx;
+  line-height: 1.2;
+  white-space: nowrap;
+  --right: 0;
+  --top: 0;
+
+  &-fixed {
+    position: absolute;
+    right: var(--right);
+    top: var(--top);
+    transform: translate(50%, -50%);
+  }
+
+  &-dot {
+    min-width: 20rpx;
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 10rpx;
+  }
+}

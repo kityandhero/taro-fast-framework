@@ -8,7 +8,7 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
 
-import Spin from '../Spin';
+import { Spin } from '../Spin';
 
 import './index.less';
 
