@@ -1904,6 +1904,18 @@ export function withNativeProps(props, element) {
   return React.cloneElement(element, p);
 }
 
+export function attachPropertiesToComponent(component, properties) {
+  const ret = component;
+
+  for (const key in properties) {
+    if (properties.hasOwnProperty(key)) {
+      ret[key] = properties[key];
+    }
+  }
+
+  return ret;
+}
+
 /**
  * 占位函数
  *

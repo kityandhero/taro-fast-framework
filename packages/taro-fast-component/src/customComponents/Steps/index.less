@@ -1,0 +1,164 @@
+@class-prefix-step: ~'tfc-step';
+@class-prefix-steps: ~'tfc-steps';
+
+.@{class-prefix-step} {
+  --line-to-next-color: #e5e5e5;
+  --icon-color: #e5e5e5;
+
+  .@{class-prefix-step}-indicator {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      background-color: var(--line-to-next-color);
+    }
+    .@{class-prefix-step}-icon-container {
+      position: absolute;
+      z-index: 1;
+      background: var(--tfc-color-white);
+      color: var(--icon-color);
+    }
+  }
+
+  &:last-child {
+    .@{class-prefix-step}-indicator::after {
+      display: none;
+    }
+  }
+
+  &-status-finish {
+    --line-to-next-color: var(--tfc-color-primary);
+  }
+
+  &-status-wait {
+    --icon-color: #e5e5e5;
+  }
+
+  &-status-process {
+    --icon-color: var(--tfc-color-primary);
+    .@{class-prefix-step}-title {
+      color: var(--tfc-color-primary);
+    }
+  }
+
+  &-status-finish {
+    --icon-color: var(--tfc-color-primary);
+  }
+
+  &-status-error {
+    --icon-color: var(--tfc-color-danger);
+    .@{class-prefix-step}-title {
+      color: var(--tfc-color-danger);
+    }
+  }
+}
+
+.@{class-prefix-steps} {
+  --title-font-size: 26rpx;
+  --description-font-size: 24rpx;
+  --indicator-margin-right: 0;
+  --icon-size: 18px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  &-horizontal {
+    display: flex;
+    justify-content: space-around;
+    padding: 16rpx 0;
+
+    .@{class-prefix-step} {
+      flex: 1;
+
+      .@{class-prefix-step}-indicator {
+        width: 100%;
+        height: 24px;
+        &::after {
+          left: 50%;
+          top: 50%;
+          height: 2rpx;
+          transform: translateY(-50%);
+          width: 100%;
+        }
+        .@{class-prefix-step}-icon-container {
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    .@{class-prefix-step}-content {
+      text-align: center;
+      font-size: var(--description-font-size);
+      padding-top: 4rpx;
+      .@{class-prefix-step}-title {
+        font-size: var(--title-font-size);
+      }
+      .@{class-prefix-step}-description {
+        margin-top: 4rpx;
+        color: var(--tfc-color-weak);
+      }
+    }
+  }
+
+  &-vertical {
+    padding: 16rpx 32rpx;
+
+    .@{class-prefix-step} {
+      display: flex;
+      align-items: stretch;
+
+      .@{class-prefix-step}-indicator {
+        flex: none;
+        width: 48rpx;
+        margin-right: var(--indicator-margin-right);
+
+        &::after {
+          left: 50%;
+          top: calc(var(--title-font-size) * 1.5 / 2);
+          width: 2rpx;
+          transform: translateX(-50%);
+          height: 100%;
+        }
+        .@{class-prefix-step}-icon-container {
+          top: calc(var(--title-font-size) * 1.5 / 2);
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      &:last-child {
+        .@{class-prefix-step}-content {
+          padding-bottom: 0;
+        }
+      }
+      .@{class-prefix-step}-content {
+        flex: auto;
+        padding-bottom: 28rpx;
+        .@{class-prefix-step}-title {
+          font-size: var(--title-font-size);
+          line-height: 1.5;
+        }
+        .@{class-prefix-step}-description {
+          padding-top: 4rpx;
+          font-size: var(--description-font-size);
+          color: var(--tfc-color-weak);
+        }
+      }
+    }
+  }
+}
+
+.@{class-prefix-step}-icon-container {
+  font-size: var(--icon-size);
+}
+
+.@{class-prefix-step}-icon-dot {
+  display: block;
+  width: 16rpx;
+  height: 16rpx;
+  background: currentColor;
+  border-radius: 8rpx;
+}
