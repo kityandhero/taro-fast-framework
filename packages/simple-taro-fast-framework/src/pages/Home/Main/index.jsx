@@ -145,11 +145,10 @@ export default class Index extends PageWrapper {
 
         <BlockArea title="Avatar">
           <Space wrap>
-            <Avatar circle openData={{ type: 'userAvatarUrl' }} />
-            <Avatar openData={{ type: 'userAvatarUrl' }} />
             <Avatar circle text="头像" />
-            <Avatar image="https://jdc.jd.com/img/200" />
             <Avatar text="头像" />
+            <Avatar circle image="https://jdc.jd.com/img/200" />
+            <Avatar image="https://jdc.jd.com/img/200" />
           </Space>
         </BlockArea>
 
@@ -175,13 +174,13 @@ export default class Index extends PageWrapper {
         <BlockArea title="Badge Wrapper">
           <Space wrap style={{ '--gap': '24px' }}>
             <Badge content="5">
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
             <Badge content="新">
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
             <Badge content="更新啦">
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
 
             <Badge
@@ -189,7 +188,7 @@ export default class Index extends PageWrapper {
               content={Badge.dot}
               style={{ '--right': '100%', '--top': '100%' }}
             >
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
 
             <Badge
@@ -197,11 +196,11 @@ export default class Index extends PageWrapper {
               content={Badge.dot}
               style={{ '--right': '100%' }}
             >
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
 
             <Badge content={Badge.dot}>
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
 
             <Badge
@@ -209,7 +208,7 @@ export default class Index extends PageWrapper {
               content={Badge.dot}
               style={{ '--top': '100%' }}
             >
-              <Avatar openData={{ type: 'userAvatarUrl' }} />
+              <Avatar text="图" />
             </Badge>
           </Space>
         </BlockArea>

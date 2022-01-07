@@ -22,7 +22,7 @@ export default class Avatar extends ComponentBase {
   }
 
   render() {
-    const { size, circle, image, text, openData, customStyle } = this.props;
+    const { size, circle, image, text, customStyle } = this.props;
     const rootClassName = ['tfc-avatar'];
     const iconSize = SIZE_CLASS[size || 'normal'];
     const classObject = {
@@ -36,9 +36,7 @@ export default class Avatar extends ComponentBase {
 
     let elem;
 
-    if (openData && openData.type === 'userAvatarUrl' && this.state.isWEAPP) {
-      elem = <OpenData type={openData.type}></OpenData>;
-    } else if (image) {
+    if (image) {
       elem = <Image className="tfc-avatar__img" src={image} />;
     } else {
       elem = <Text className="tfc-avatar__text">{letter}</Text>;
