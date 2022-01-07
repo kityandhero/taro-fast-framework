@@ -1801,17 +1801,6 @@ export function getSystemInfo() {
   }
 }
 
-export function pxTransform(size) {
-  if (!size) return '';
-  const designWidth = 750;
-  const deviceRatio = {
-    640: 2.34 / 2,
-    750: 1,
-    828: 1.81 / 2,
-  };
-  return `${size / deviceRatio[designWidth]}rpx`;
-}
-
 /**
  * 检测是否尚有更多数据，用于分页场景
  * @param {*} pageNo [number] page number
@@ -1829,6 +1818,53 @@ export function checkHasMore({ pageNo, pageSize, total }) {
 
 export function checkEnvIsDevelopment() {
   return process.env.NODE_ENV === 'development';
+}
+
+export function pxTransform(size) {
+  if (!size) return '';
+  const designWidth = 750;
+  const deviceRatio = {
+    640: 2.34 / 2,
+    750: 1,
+    828: 1.81 / 2,
+  };
+  return `${size / deviceRatio[designWidth]}rpx`;
+}
+
+/**
+ * 合并 style
+ * @param {Object|String} target
+ * @param {Object|String} source
+ * @returns {String}
+ */
+export function mergeStyle(target, source) {
+  if (
+    target &&
+    typeof target === 'object' &&
+    source &&
+    typeof source === 'object'
+  ) {
+    return Object.assign({}, target, source);
+  }
+
+  return objectToString(target) + objectToString(source);
+}
+
+function objectToString(style) {
+  if (style && typeof style === 'object') {
+    let styleStr = '';
+
+    Object.keys(style).forEach((key) => {
+      const lowerCaseKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+      styleStr += `${lowerCaseKey}:${style[key]};`;
+    });
+
+    return styleStr;
+  } else if (style && typeof style === 'string') {
+    return style;
+  }
+
+  return '';
 }
 
 export function mergeProps(...items) {

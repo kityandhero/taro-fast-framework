@@ -18,6 +18,7 @@ import {
   Col,
   CenterBox,
   ImageBox,
+  IconVolumePlus,
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
@@ -153,7 +154,20 @@ export default class Index extends PageWrapper {
         </BlockArea>
 
         <BlockArea title="NoticeBar">
-          <NoticeBar icon="volume-plus">
+          <NoticeBar
+            icon={<IconVolumePlus size={19} />}
+            close
+            marquee
+            single
+            showMore
+            moreText="详情"
+            afterClose={() => {
+              console.log('afterClose');
+            }}
+            afterClickMore={() => {
+              console.log('afterClickMore');
+            }}
+          >
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
         </BlockArea>

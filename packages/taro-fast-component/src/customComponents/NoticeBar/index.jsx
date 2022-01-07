@@ -1,9 +1,12 @@
 import { Text, View } from '@tarojs/components';
 import classNames from 'classnames';
 
-import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import FlexBox from '../FlexBox';
+import { IconChevronRight, IconClose } from '../Icon';
 
 import './index.less';
 
@@ -16,6 +19,8 @@ const defaultProps = {
   icon: '',
   duration: 10,
   customStyle: {},
+  afterClose: null,
+  afterClickMore: null,
 };
 
 export default class NoticeBar extends ComponentBase {
@@ -27,7 +32,7 @@ export default class NoticeBar extends ComponentBase {
     this.state = {
       show: true,
       animElemId,
-      durationValue: 10,
+      durationValue: 8,
     };
   }
 
@@ -49,15 +54,24 @@ export default class NoticeBar extends ComponentBase {
     if (!this.props.marquee) return;
   }
 
-  onClose(event) {
+  onClose() {
     this.setState({
       show: false,
     });
-    this.props.onClose && this.props.onClose(event);
+
+    const { afterClose } = this.props;
+
+    if (isFunction(afterClose)) {
+      afterClose();
+    }
   }
 
-  onGotoMore(event) {
-    this.props.onGotoMore && this.props.onGotoMore(event);
+  onMoreClick() {
+    const { afterClickMore } = this.props;
+
+    if (isFunction(afterClickMore)) {
+      afterClickMore();
+    }
   }
 
   render() {
@@ -70,10 +84,12 @@ export default class NoticeBar extends ComponentBase {
       moreText = '查看详情',
     } = this.props;
     let { showMore, close } = this.props;
-    const { durationValue, show, animElemId, isWEAPP, isALIPAY } = this.state;
+    const { durationValue, show, animElemId } = this.state;
     const rootClassName = ['tfc-notice-bar'];
 
-    if (!single) showMore = false;
+    if (!single) {
+      showMore = false;
+    }
 
     const style = {};
     const innerClassName = ['tfc-notice-bar__content-inner'];
@@ -86,7 +102,6 @@ export default class NoticeBar extends ComponentBase {
 
     const classObject = {
       'tfc-notice-bar--marquee': marquee,
-      'tfc-notice-bar--weapp': marquee && (isWEAPP || isALIPAY),
       'tfc-notice-bar--single': !marquee && single,
     };
 
@@ -96,39 +111,74 @@ export default class NoticeBar extends ComponentBase {
           className={classNames(rootClassName, classObject, className)}
           style={customStyle}
         >
-          {close && (
-            <View
-              className="tfc-notice-bar__close"
-              onClick={this.onClose.bind(this)}
-            >
-              <Text className="tfc-icon tfc-icon-close"></Text>
-            </View>
-          )}
+          {single ? (
+            <FlexBox
+              flexAuto="right"
+              left={
+                close ? (
+                  <View
+                    className="tfc-notice-bar__close"
+                    onClick={() => {
+                      this.onClose();
+                    }}
+                  >
+                    <IconClose size={19} />
+                  </View>
+                ) : null
+              }
+              right={
+                <FlexBox
+                  left={
+                    <View className="tfc-notice-bar__content">
+                      {!!icon ? (
+                        <View className="tfc-notice-bar__content-icon">
+                          {icon}
+                        </View>
+                      ) : null}
 
-          <View className="tfc-notice-bar__content">
-            {!!icon ? (
-              <View className="tfc-notice-bar__content-icon">{icon}</View>
-            ) : null}
+                      <View className="tfc-notice-bar__content-text">
+                        <View
+                          id={animElemId}
+                          className={classNames(innerClassName)}
+                          style={style}
+                        >
+                          {this.props.children}
+                        </View>
+                      </View>
+                    </View>
+                  }
+                  right={
+                    showMore ? (
+                      <View
+                        className="tfc-notice-bar__more"
+                        onClick={() => {
+                          this.onMoreClick();
+                        }}
+                      >
+                        <Text className="text">{moreText}</Text>
+                        <View className="tfc-notice-bar__more-icon">
+                          <IconChevronRight size={19} />
+                        </View>
+                      </View>
+                    ) : null
+                  }
+                />
+              }
+            />
+          ) : (
+            <View className="tfc-notice-bar__content">
+              {!!icon ? (
+                <View className="tfc-notice-bar__content-icon">{icon}</View>
+              ) : null}
 
-            <View className="tfc-notice-bar__content-text">
-              <View
-                id={animElemId}
-                className={classNames(innerClassName)}
-                style={style}
-              >
-                {this.props.children}
-              </View>
-            </View>
-          </View>
-
-          {showMore && (
-            <View
-              className="tfc-notice-bar__more"
-              onClick={this.onGotoMore.bind(this)}
-            >
-              <Text className="text">{moreText}</Text>
-              <View className="tfc-notice-bar__more-icon">
-                <Text className="tfc-icon tfc-icon-chevron-right"></Text>
+              <View className="tfc-notice-bar__content-text">
+                <View
+                  id={animElemId}
+                  className={classNames(innerClassName)}
+                  style={style}
+                >
+                  {this.props.children}
+                </View>
               </View>
             </View>
           )}
