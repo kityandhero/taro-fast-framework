@@ -19,6 +19,7 @@ import {
   assign as assignLodash,
   assignWith as assignWithLodash,
   forEach as forEachLodash,
+  memoize as memoizeLodash,
 } from 'lodash';
 
 import {
@@ -503,6 +504,10 @@ export function split(source, separator, limit = 1000) {
  */
 export function sortedUnique(array) {
   return sortedUniqLodash(array);
+}
+
+export function memoize(fn) {
+  return memoizeLodash(fn);
 }
 
 /**
@@ -1847,10 +1852,10 @@ export function mergeStyle(target, source) {
     return Object.assign({}, target, source);
   }
 
-  return objectToString(target) + objectToString(source);
+  return styleToString(target) + styleToString(source);
 }
 
-function objectToString(style) {
+export function styleToString(style) {
   if (style && typeof style === 'object') {
     let styleStr = '';
 

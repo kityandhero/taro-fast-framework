@@ -31,4 +31,13 @@ export const pathCollection = {
   autoCenter: {
     path: '/example/pages/autoCenter/index',
   },
+  divider: {
+    path: '/example/pages/divider/index',
+  },
+  tag: {
+    path: '/example/pages/tag/index',
+  },
+  advanceInput: {
+    path: '/example/pages/advanceInput/index',
+  },
 };

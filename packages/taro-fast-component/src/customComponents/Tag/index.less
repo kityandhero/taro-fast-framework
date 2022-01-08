@@ -1,0 +1,19 @@
+@class-prefix-tag: ~'tfc-tag';
+
+.@{class-prefix-tag} {
+  --border-radius: var(--tfc-tag-border-radius, 4rpx);
+  padding: 6rpx 10rpx;
+  font-size: 24rpx;
+  line-height: 1;
+  font-weight: normal;
+  background: var(--background-color);
+  color: var(--text-color);
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: var(--border-radius);
+  border: 1rpx solid var(--border-color);
+  box-sizing: border-box;
+  &-round {
+    border-radius: 200rpx;
+  }
+}

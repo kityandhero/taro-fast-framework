@@ -71,6 +71,21 @@ export default class Index extends PageWrapper {
               name: 'AutoCenter',
               path: pathCollection.autoCenter.path,
             })}
+
+            {this.buildItem({
+              name: 'Divider',
+              path: pathCollection.divider.path,
+            })}
+
+            {this.buildItem({
+              name: 'Tag',
+              path: pathCollection.tag.path,
+            })}
+
+            {this.buildItem({
+              name: 'AdvanceInput',
+              path: pathCollection.advanceInput.path,
+            })}
           </Space>
         </BlockArea>
       </View>

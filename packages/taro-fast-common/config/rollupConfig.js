@@ -12,6 +12,8 @@ const inputFile = {
     'utils/tips': 'src/utils/tips.js',
     'utils/tools': 'src/utils/tools.js',
     'utils/cacheAssist': 'src/utils/cacheAssist.js',
+    'utils/hooks': 'src/utils/hooks.js',
+    'utils/provider': 'src/utils/provider.js',
   },
   ...{
     'customComponents/index': 'src/customComponents/index.jsx',
