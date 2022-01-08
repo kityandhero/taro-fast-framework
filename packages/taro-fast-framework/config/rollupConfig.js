@@ -36,10 +36,7 @@ export function buildConfig({ terser: whetherTerser = false }) {
         'taro-fast-common/es/utils/typeConvert',
         'taro-fast-common/es/customComponents',
       ],
-      ...[
-        'taro-fast-component/es/customComponents',
-        'taro-fast-component/es/index.css',
-      ],
+      ...[],
     ],
   });
 }

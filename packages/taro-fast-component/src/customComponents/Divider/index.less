@@ -1,0 +1,31 @@
+@class-prefix-divider: ~'tfc-divider';
+
+.@{class-prefix-divider} {
+  display: flex;
+  align-items: center;
+  margin: 32rpx 0;
+  color: var(--tfc-color-weak);
+  font-size: 28rpx;
+  border-width: 0;
+  border-color: var(--tfc-border-color);
+  border-style: solid;
+  &-left&::before {
+    max-width: 10%;
+  }
+  &-right&::after {
+    max-width: 10%;
+  }
+  &::after,
+  &::before {
+    flex: auto;
+    display: block;
+    content: '';
+    border-style: inherit;
+    border-color: inherit;
+    border-width: 2rpx 0 0;
+  }
+  &-content {
+    flex: none;
+    padding: 0 32rpx;
+  }
+}

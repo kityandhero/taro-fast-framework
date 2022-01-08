@@ -6,6 +6,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import ActivityIndicator from '../ActivityIndicator';
 import CenterBox from '../CenterBox';
+import VerticalBox from '../VerticalBox';
 
 import './index.less';
 
@@ -158,9 +159,13 @@ class ImageBox extends ComponentBase {
               onClick={this.onImageClick}
             >
               <CenterBox fillHeight>
-                <View className={classNames(`${classPrefix}-overlay-box-text`)}>
-                  {overlayText}
-                </View>
+                <VerticalBox>
+                  <View
+                    className={classNames(`${classPrefix}-overlay-box-text`)}
+                  >
+                    {overlayText}
+                  </View>
+                </VerticalBox>
               </CenterBox>
             </View>
           ) : null}

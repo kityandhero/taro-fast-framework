@@ -6,9 +6,11 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
-import { IconChevronRight, IconClose } from '../Icon';
+import Icon from '../Icon';
 
 import './index.less';
+
+const { IconChevronRight, IconClose } = Icon;
 
 const defaultProps = {
   close: false,
