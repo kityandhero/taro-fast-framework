@@ -21,3 +21,5 @@ export { AdvanceButton } from './AdvanceButton';
 export { FadeView } from './FadeView';
 export { Divider } from './Divider';
 export { Tag } from './Tag';
+export { default as Stepper } from './Stepper';
+export { default as Button } from './Button';

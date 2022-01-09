@@ -25,8 +25,8 @@ export const pathCollection = {
   steps: {
     path: '/example/pages/steps/index',
   },
-  button: {
-    path: '/example/pages/button/index',
+  advanceButton: {
+    path: '/example/pages/advanceButton/index',
   },
   autoCenter: {
     path: '/example/pages/autoCenter/index',
@@ -39,5 +39,11 @@ export const pathCollection = {
   },
   advanceInput: {
     path: '/example/pages/advanceInput/index',
+  },
+  stepper: {
+    path: '/example/pages/stepper/index',
+  },
+  button: {
+    path: '/example/pages/button/index',
   },
 };

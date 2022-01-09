@@ -1,208 +1,112 @@
-import { connect } from 'react-redux';
-import { View } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 
-import { recordObject } from 'taro-fast-common/es/utils/tools';
 import {
-  VerticalBox,
   Space,
-  Spin,
-  Empty,
   BlockArea,
-  FadeView,
+  Button,
+  Icon,
 } from 'taro-fast-component/es/customComponents';
-import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 
-import {
-  getOverviewAction,
-  getOverviewActionSheet,
-  getOverviewActionModal,
-} from './Assist/action';
+const { IconSearch } = Icon;
 
-@connect(({ news, global }) => ({
-  news,
-  global,
-}))
 export default class Index extends PageWrapper {
-  loadRemoteRequestAfterMount = true;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        loadApiPath: 'news/getOverview',
-      },
-    };
-  }
-
-  getApiData = (props) => {
-    const {
-      news: { data },
-    } = props;
-
-    return data;
-  };
-
-  onActionClick = () => {
-    getOverviewAction({
-      target: this,
-      handleData: {},
-      successCallback: ({ remoteData }) => {
-        {
-          recordObject(remoteData);
-        }
-      },
-    });
-  };
-
-  onActionSheetClick = () => {
-    getOverviewActionSheet({
-      target: this,
-      handleData: {},
-      successCallback: ({ remoteData }) => {
-        {
-          recordObject(remoteData);
-        }
-      },
-    });
-  };
-
-  onActionModalClick = () => {
-    getOverviewActionModal({
-      target: this,
-      handleData: {},
-      successCallback: ({ remoteData }) => {
-        {
-          recordObject(remoteData);
-        }
-      },
-    });
-  };
-
-  showRemoteMetaDataInConsole = () => {
-    recordObject(this.getRemoteMetaData());
-  };
-
   renderFurther() {
-    const { dataLoading, firstLoadSuccess } = this.state;
-
     return (
       <View className="index">
-        <BlockArea title="Buttons Color">
-          <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
-            <Space wrap>
-              {buildButton({
-                inner: 'default',
-              })}
-
-              {buildButton({
-                inner: 'primary',
-                color: 'primary',
-              })}
-
-              {buildButton({
-                inner: 'success',
-                color: 'success',
-              })}
-
-              {buildButton({
-                inner: 'danger',
-                color: 'danger',
-              })}
-
-              {buildButton({
-                inner: 'warning',
-                color: 'warning',
-              })}
-
-              {buildButton({
-                inner: 'loading',
-                loading: true,
-              })}
-
-              {buildButton({
-                inner: 'disabled',
-                disabled: true,
-              })}
-            </Space>
-          </VerticalBox>
-        </BlockArea>
-
-        <BlockArea title="Buttons Block Large">
-          <Space direction="vertical">
-            {buildButton({
-              inner: 'Block Button',
-              block: true,
-              color: 'primary',
-              size: 'large',
-            })}
-          </Space>
-        </BlockArea>
-
-        <BlockArea title="Button Action">
+        <BlockArea title="不同颜色的按钮">
           <Space wrap>
-            {buildButton({
-              inner: 'Action',
-              color: 'primary',
-              onClick: this.onActionClick,
-            })}
-
-            {buildButton({
-              inner: 'ActionSheet',
-              color: 'success',
-              onClick: this.onActionSheetClick,
-            })}
-
-            {buildButton({
-              inner: 'ActionModal',
-              color: 'danger',
-              onClick: this.onActionModalClick,
-            })}
-
-            {buildButton({
-              inner: 'reload',
-              loading: !!dataLoading,
-              onClick: this.reloadData,
-            })}
-
-            {buildButton({
-              inner: 'reloadRemoteMetaData',
-              onClick: this.reloadRemoteMetaData,
-            })}
-
-            {buildButton({
-              inner: 'showRemoteMetaDataInConsole',
-              onClick: this.showRemoteMetaDataInConsole,
-            })}
+            <Button
+              onClick={() => {
+                alert('hello.');
+              }}
+            >
+              Default
+            </Button>
+            <Button color="primary">Primary</Button>
+            <Button color="success">Success</Button>
+            <Button color="danger">Danger</Button>
+            <Button color="warning">Warning</Button>
           </Space>
         </BlockArea>
 
-        <BlockArea title="联动 reloading">
-          <Spin spin={!firstLoadSuccess}>
-            <FadeView show={!dataLoading}>
-              <VerticalBox style={{ height: '50rpx' }} alignJustify="center">
-                <Space direction="vertical">
-                  <VerticalBox
-                    style={{ height: '100rpx' }}
-                    alignJustify="center"
-                  >
-                    <Empty
-                      description="暂无数据"
-                      onImageClick={() => {
-                        console.log('onImageClick');
-                      }}
-                      onDescriptionClick={() => {
-                        console.log('onDescriptionClick');
-                      }}
-                    />
-                  </VerticalBox>
-                </Space>
-              </VerticalBox>
-            </FadeView>
-          </Spin>
+        <BlockArea title="块级按钮">
+          <Button block color="primary" size="large">
+            Block Button
+          </Button>
+        </BlockArea>
+
+        <BlockArea title="填充模式">
+          <Space wrap>
+            <Button color="primary" fill="solid">
+              Solid
+            </Button>
+            <Button color="primary" fill="outline">
+              Outline
+            </Button>
+            <Button color="primary" fill="none">
+              None
+            </Button>
+          </Space>
+        </BlockArea>
+
+        <BlockArea title="不同大小的按钮">
+          <Space wrap align="center">
+            <Button size="mini" color="primary">
+              Mini
+            </Button>
+            <Button size="small" color="primary">
+              Small
+            </Button>
+            <Button size="middle" color="primary">
+              Middle
+            </Button>
+            <Button size="large" color="primary">
+              Large
+            </Button>
+          </Space>
+        </BlockArea>
+
+        <BlockArea title="禁用状态">
+          <Space wrap>
+            <Button disabled>Disabled</Button>
+            <Button disabled color="primary">
+              Disabled
+            </Button>
+          </Space>
+        </BlockArea>
+
+        <BlockArea title="加载状态">
+          <Space wrap>
+            <Button loading color="primary" loadingText="加载中">
+              Loading
+            </Button>
+            <Button loading>Loading</Button>
+          </Space>
+        </BlockArea>
+
+        <BlockArea title="带图标的按钮">
+          <Button>
+            <Space>
+              <IconSearch size={19} />
+              <Text >搜索</Text>
+            </Space>
+          </Button>
+        </BlockArea>
+
+        <BlockArea title="不同类型圆角">
+          <Space wrap>
+            <Button shape="default" color="primary">
+              Default Button
+            </Button>
+            <Button block shape="rounded" color="primary">
+              Rounded Button
+            </Button>
+            <Button block shape="rectangular" color="primary">
+              Rectangular Button
+            </Button>
+          </Space>
         </BlockArea>
       </View>
     );

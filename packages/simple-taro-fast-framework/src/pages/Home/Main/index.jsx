@@ -68,6 +68,11 @@ export default class Index extends PageWrapper {
             })}
 
             {this.buildItem({
+              name: 'AdvanceButton',
+              path: pathCollection.advanceButton.path,
+            })}
+
+            {this.buildItem({
               name: 'AutoCenter',
               path: pathCollection.autoCenter.path,
             })}
@@ -85,6 +90,11 @@ export default class Index extends PageWrapper {
             {this.buildItem({
               name: 'AdvanceInput',
               path: pathCollection.advanceInput.path,
+            })}
+
+            {this.buildItem({
+              name: 'Stepper',
+              path: pathCollection.stepper.path,
             })}
           </Space>
         </BlockArea>

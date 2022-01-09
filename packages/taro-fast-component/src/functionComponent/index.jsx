@@ -1,6 +1,6 @@
 import { AdvanceButton } from '../customComponents';
 
-export function buildButton({
+export function buildAdvanceButton({
   style,
   color,
   fill,
