@@ -2,14 +2,10 @@ import { View } from '@tarojs/components';
 
 import {
   BlockArea,
-  Space,
   AdvanceSwitch,
-  Icon,
 } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
-
-const { IconCheck, IconClose } = Icon;
 
 export default class Index extends PageWrapper {
   constructor(props) {
@@ -18,7 +14,7 @@ export default class Index extends PageWrapper {
     this.state = {
       ...this.state,
       ...{
-        checked: 0,
+        checked: false,
       },
     };
   }

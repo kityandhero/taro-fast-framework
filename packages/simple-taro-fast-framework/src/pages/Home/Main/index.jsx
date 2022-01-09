@@ -98,7 +98,7 @@ export default class Index extends PageWrapper {
             })}
 
             {this.buildItem({
-              name: 'Switch',
+              name: 'AdvanceSwitch',
               path: pathCollection.advanceSwitch.path,
             })}
           </Space>
