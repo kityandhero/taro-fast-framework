@@ -24,6 +24,7 @@ const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
 
 const defaultProps = {
+  align: 'left',
   required: false,
   hidden: false,
   clearable: false,
@@ -186,6 +187,7 @@ class AdvanceInput extends ComponentBase {
 
   render() {
     const {
+      align,
       required,
       hidden,
       clearable,
@@ -262,6 +264,7 @@ class AdvanceInput extends ComponentBase {
                   <Input
                     value={valueTemp}
                     type={type}
+                    style={align == 'right' ? { textAlign: 'right' } : {}}
                     password={password}
                     placeholder={placeholder}
                     placeholderStyle={
