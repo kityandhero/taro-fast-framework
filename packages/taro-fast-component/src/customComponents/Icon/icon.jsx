@@ -9,16 +9,16 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import { defaultProps } from './config';
 
 class Icon extends ComponentBase {
-  handleClick() {
+  handleClick = () => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
       onClick();
     }
-  }
+  };
 
   render() {
-    const { customStyle, className, prefixClass, value, size, color } =
+    const { customStyle, className, prefixClass, value, size, color, hidden } =
       this.props;
 
     const rootStyle = {
@@ -27,6 +27,10 @@ class Icon extends ComponentBase {
     };
 
     const iconName = value ? `${prefixClass}-${value}` : '';
+
+    if (!!hidden) {
+      return null;
+    }
 
     return (
       <View

@@ -34,8 +34,7 @@ const defaultProps = {
   disabled: false,
   maxlength: 140,
   cursorSpacing: 0,
-  autoFocus: false,
-  focus: false,
+  focus: true,
   confirmType: 'done',
   confirmHold: false,
   cursor: 0,
@@ -57,6 +56,7 @@ class AdvanceInput extends ComponentBase {
     this.state = {
       ...this.state,
       ...{
+        valueFlag: '',
         valueTemp: '',
       },
     };
@@ -64,11 +64,17 @@ class AdvanceInput extends ComponentBase {
 
   // eslint-disable-next-line no-unused-vars
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { value } = nextProps;
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
 
-    return {
-      valueTemp: value ?? '',
-    };
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueTemp: valueNext ?? '',
+      };
+    }
+
+    return {};
   }
 
   triggerChange = (v) => {
@@ -100,6 +106,10 @@ class AdvanceInput extends ComponentBase {
     const {
       detail: { value: v },
     } = e;
+
+    this.setState({
+      valueTemp: v,
+    });
 
     this.triggerChange(v);
   };
@@ -164,7 +174,7 @@ class AdvanceInput extends ComponentBase {
     this.setState({
       valueTemp: '',
     });
-    console.log('clearValue');
+
     this.triggerChange('');
   };
 
@@ -184,7 +194,6 @@ class AdvanceInput extends ComponentBase {
       disabled,
       maxlength,
       cursorSpacing,
-      autoFocus,
       focus,
       confirmType: confirmTypeSource,
       confirmHold,
@@ -194,7 +203,6 @@ class AdvanceInput extends ComponentBase {
       adjustPosition,
       holdKeyboard,
     } = this.props;
-    const { valueTemp } = this.state;
 
     const type = inCollection(typeCollection, typeSource) ? typeSource : 'text';
     const confirmType = inCollection(confirmTypeCollection, confirmTypeSource)
@@ -209,6 +217,8 @@ class AdvanceInput extends ComponentBase {
           ...labelContainerStyleSource,
         }
       : labelContainerStyleSource;
+
+    const { valueTemp } = this.state;
 
     return (
       <FlexBox
@@ -236,7 +246,6 @@ class AdvanceInput extends ComponentBase {
                     disabled={disabled}
                     maxlength={maxlength}
                     cursorSpacing={cursorSpacing}
-                    autoFocus={autoFocus}
                     focus={focus}
                     confirmType={confirmType}
                     confirmHold={confirmHold}

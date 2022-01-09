@@ -5,5 +5,6 @@ export const defaultProps = {
   value: '',
   color: '',
   size: 24,
+  hidden: false,
   onClick: null,
 };
