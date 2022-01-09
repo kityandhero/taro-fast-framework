@@ -23,6 +23,14 @@ export default class Index extends PageWrapper {
           <AdvanceInput label="用户名" required onChange={this.afterChange} />
         </BlockArea>
 
+        <BlockArea title="labelStyle">
+          <AdvanceInput
+            label="用户名"
+            labelStyle={{ color: 'red' }}
+            onChange={this.afterChange}
+          />
+        </BlockArea>
+
         <BlockArea title="Label">
           <AdvanceInput label="用户名" onChange={this.afterChange} />
         </BlockArea>

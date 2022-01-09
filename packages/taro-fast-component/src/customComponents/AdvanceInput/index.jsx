@@ -105,13 +105,17 @@ class AdvanceInput extends ComponentBase {
   };
 
   onInput = (e) => {
+    const { clearable } = this.props;
+
     const {
       detail: { value: v },
     } = e;
 
-    this.setState({
-      valueTemp: v,
-    });
+    if (clearable) {
+      this.setState({
+        valueTemp: v,
+      });
+    }
 
     this.triggerChange(v);
   };
@@ -224,7 +228,19 @@ class AdvanceInput extends ComponentBase {
       labelComponent = (
         <View style={{ ...{ paddingRight: '40rpx' }, ...labelStyle }}>
           {!!required ? (
-            <Text style={{ color: 'red', marginRight: '12rpx' }}>*</Text>
+            <Text
+              style={{
+                display: 'inline-block',
+                verticalAlign: 'middle',
+                textAlign: 'center',
+                width: '24rpx',
+                height: '45rpx',
+                lineHeight: '45rpx',
+                color: 'red',
+              }}
+            >
+              *
+            </Text>
           ) : null}
           {label}
         </View>
