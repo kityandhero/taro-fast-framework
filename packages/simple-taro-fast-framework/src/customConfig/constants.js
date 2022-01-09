@@ -46,4 +46,7 @@ export const pathCollection = {
   button: {
     path: '/example/pages/button/index',
   },
+  advanceSwitch: {
+    path: '/example/pages/advanceSwitch/index',
+  },
 };

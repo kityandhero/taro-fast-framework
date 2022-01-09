@@ -5,6 +5,7 @@ import {
   showErrorMessage,
   styleToString,
   recordError,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -28,6 +29,12 @@ const defaultProps = {
   required: false,
   hidden: false,
   clearable: false,
+  label: '',
+  extra: null,
+  labelStyle: {},
+  labelContainerStyle: {},
+  inputContainerStyle: {},
+  extraContainerStyle: {},
   value: '',
   type: 'text',
   password: false,
@@ -65,7 +72,6 @@ class AdvanceInput extends ComponentBase {
     };
   }
 
-  // eslint-disable-next-line no-unused-vars
   static getDerivedStateFromProps(nextProps, prevState) {
     const { value: valueNext } = nextProps;
     const { valueFlag: valuePrev } = prevState;
@@ -227,26 +233,32 @@ class AdvanceInput extends ComponentBase {
     let labelComponent = label;
 
     if (isString(label)) {
-      labelComponent = (
-        <View style={{ ...{ paddingRight: '40rpx' }, ...labelStyle }}>
-          {!!required ? (
-            <Text
-              style={{
-                display: 'inline-block',
-                verticalAlign: 'middle',
-                textAlign: 'center',
-                width: '24rpx',
-                height: '45rpx',
-                lineHeight: '45rpx',
-                color: 'red',
-              }}
-            >
-              *
-            </Text>
-          ) : null}
-          {label}
-        </View>
-      );
+      if (!stringIsNullOrWhiteSpace(label)) {
+        labelComponent = (
+          <VerticalBox>
+            <View style={{ ...{ paddingRight: '40rpx' }, ...labelStyle }}>
+              {!!required ? (
+                <Text
+                  style={{
+                    display: 'inline-block',
+                    verticalAlign: 'middle',
+                    textAlign: 'center',
+                    width: '24rpx',
+                    height: '45rpx',
+                    lineHeight: '45rpx',
+                    color: 'red',
+                  }}
+                >
+                  *
+                </Text>
+              ) : null}
+              {label}
+            </View>
+          </VerticalBox>
+        );
+      } else {
+        labelComponent = null;
+      }
     }
 
     const { valueTemp } = this.state;

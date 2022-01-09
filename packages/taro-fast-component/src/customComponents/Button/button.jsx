@@ -6,6 +6,7 @@ import {
   withNativeProps,
   mergeProps,
 } from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import ActivityIndicator from '../ActivityIndicator';
 
@@ -61,7 +62,11 @@ export const Button = (p) => {
     props,
     <View
       type={type}
-      onClick={onClick}
+      onClick={(e) => {
+        if (isFunction(onClick)) {
+          onClick(e);
+        }
+      }}
       className={classNames(
         classPrefix,
         color ? `${classPrefix}-${color}` : null,

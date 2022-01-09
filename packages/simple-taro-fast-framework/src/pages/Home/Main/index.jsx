@@ -96,6 +96,11 @@ export default class Index extends PageWrapper {
               name: 'Stepper',
               path: pathCollection.stepper.path,
             })}
+
+            {this.buildItem({
+              name: 'Switch',
+              path: pathCollection.advanceSwitch.path,
+            })}
           </Space>
         </BlockArea>
       </View>

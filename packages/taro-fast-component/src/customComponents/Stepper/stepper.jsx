@@ -152,3 +152,7 @@ export const Stepper = (p) => {
     </View>,
   );
 };
+
+Stepper.defaultProps = {
+  ...defaultProps,
+};
