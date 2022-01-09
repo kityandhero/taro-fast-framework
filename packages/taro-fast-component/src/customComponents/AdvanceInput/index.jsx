@@ -1,4 +1,4 @@
-import { View, Input } from '@tarojs/components';
+import { View, Text, Input } from '@tarojs/components';
 
 import {
   inCollection,
@@ -24,6 +24,8 @@ const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
 
 const defaultProps = {
+  required: false,
+  hidden: false,
   clearable: false,
   value: '',
   type: 'text',
@@ -180,10 +182,13 @@ class AdvanceInput extends ComponentBase {
 
   render() {
     const {
+      required,
+      hidden,
       clearable,
       label,
       extra,
-      labelContainerStyle: labelContainerStyleSource,
+      labelStyle,
+      labelContainerStyle,
       inputContainerStyle,
       extraContainerStyle,
       type: typeSource,
@@ -204,26 +209,34 @@ class AdvanceInput extends ComponentBase {
       holdKeyboard,
     } = this.props;
 
+    if (!!hidden) {
+      return null;
+    }
+
     const type = inCollection(typeCollection, typeSource) ? typeSource : 'text';
     const confirmType = inCollection(confirmTypeCollection, confirmTypeSource)
       ? confirmTypeSource
       : 'done';
 
-    const labelContainerStyle = isString(label)
-      ? {
-          ...{
-            paddingRight: '40rpx',
-          },
-          ...labelContainerStyleSource,
-        }
-      : labelContainerStyleSource;
+    let labelComponent = label;
+
+    if (isString(label)) {
+      labelComponent = (
+        <View style={{ ...{ paddingRight: '40rpx' }, ...labelStyle }}>
+          {!!required ? (
+            <Text style={{ color: 'red', marginRight: '12rpx' }}>*</Text>
+          ) : null}
+          {label}
+        </View>
+      );
+    }
 
     const { valueTemp } = this.state;
 
     return (
       <FlexBox
         flexAuto="right"
-        left={label ? label : null}
+        left={labelComponent ? labelComponent : null}
         leftStyle={labelContainerStyle}
         right={
           <FlexBox
