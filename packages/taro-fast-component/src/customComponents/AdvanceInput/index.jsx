@@ -274,6 +274,7 @@ class AdvanceInput extends ComponentBase {
                         <IconCloseCircle
                           size={18}
                           color="#ccc"
+                          hidden={!valueTemp}
                           onClick={this.clearValue}
                         />
                       </VerticalBox>

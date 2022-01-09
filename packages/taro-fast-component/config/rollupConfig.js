@@ -1,9 +1,9 @@
 import { buildConfig as buildConfigCore } from '../../taro-fast-rollup/rollupAssist/configBuilder';
 
 const inputFile = {
-  ...{
-    index: 'src/index.ts',
-  },
+  // ...{
+  //   index: 'src/index.ts',
+  // },
   ...{
     'customComponents/index': 'src/customComponents/index.jsx',
   },
