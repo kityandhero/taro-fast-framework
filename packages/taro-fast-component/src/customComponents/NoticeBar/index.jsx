@@ -32,9 +32,12 @@ export default class NoticeBar extends ComponentBase {
     const animElemId = `J_${Math.ceil(Math.random() * 10e5).toString(36)}`;
 
     this.state = {
-      show: true,
-      animElemId,
-      durationValue: 8,
+      ...this.state,
+      ...{
+        show: true,
+        animElemId,
+        durationValue: 8,
+      },
     };
   }
 

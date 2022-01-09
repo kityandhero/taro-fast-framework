@@ -10,6 +10,7 @@ class Infrastructure extends ComponentBase {
     super(props);
 
     this.state = {
+      ...this.state,
       ...underlyingState,
     };
   }

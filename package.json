@@ -27,6 +27,8 @@
     "commitlint": "npx commitlint --edit",
     "lint-staged": "lint-staged",
     "lint:f": "cd packages/taro-fast-framework && npm run lint",
+    "start:common-noCompression": "npm run build:common-noCompression && npm run start",
+    "start:component-noCompression": "npm run build:component-noCompression && npm run start",
     "build:fvp": "npm run build:f && npm run build:vp",
     "build:f-noCompression": "cd packages/taro-fast-framework && npm run build:rollup-noCompression",
     "build:f-compression": "cd packages/taro-fast-framework && npm run build:rollup-compression",

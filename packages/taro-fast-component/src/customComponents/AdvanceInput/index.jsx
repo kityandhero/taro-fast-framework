@@ -53,23 +53,20 @@ class AdvanceInput extends ComponentBase {
     super(props);
 
     this.state = {
-      valueTemp: '',
+      ...this.state,
+      ...{
+        valueTemp: '',
+      },
     };
   }
 
   // eslint-disable-next-line no-unused-vars
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
+    const { value } = nextProps;
 
-    const { value: valuePrev } = this.props;
-
-    if (valueNext !== valuePrev) {
-      return {
-        valueTemp: valueNext,
-      };
-    }
-
-    return null;
+    return {
+      valueTemp: value ?? '',
+    };
   }
 
   triggerChange = (v) => {

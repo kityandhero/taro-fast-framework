@@ -1,5 +1,4 @@
 import { Image, Text, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -13,14 +12,6 @@ const SIZE_CLASS = {
 };
 
 export default class Avatar extends ComponentBase {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isWEAPP: Taro.getEnv() === Taro.ENV_TYPE.WEAPP,
-    };
-  }
-
   render() {
     const { size, circle, image, text, customStyle } = this.props;
     const rootClassName = ['tfc-avatar'];

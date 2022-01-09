@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import { recordError, showErrorMessage } from '../../utils/tools';
 import { isObject } from '../../utils/typeCheck';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -66,6 +67,15 @@ function shallowEqual(a, b) {
 }
 
 class ComponentBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: null,
+      errorInfo: null,
+    };
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     const { dispatchComplete } = {
       ...{ dispatchComplete: true },
@@ -94,7 +104,22 @@ class ComponentBase extends Component {
     );
   }
 
+  componentDidCatchError(error, info) {
+    this.doWhenCatchError(error, info);
+  }
+
   doOtherCheckComponentUpdate = () => {};
+
+  doWhenCatchError = (error, info) => {
+    showErrorMessage({
+      message: 'error occurred, please view in console.',
+    });
+
+    recordError({
+      error,
+      info,
+    });
+  };
 }
 
 export default ComponentBase;

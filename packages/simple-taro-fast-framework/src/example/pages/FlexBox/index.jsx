@@ -1,123 +1,17 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { recordObject } from 'taro-fast-common/es/utils/tools';
 import {
-  VerticalBox,
   Space,
-  Spin,
-  Empty,
   AutoCenter,
   BlockArea,
-  Avatar,
-  Badge,
-  FadeView,
-  NoticeBar,
   FlexBox,
-  Row,
-  Col,
-  CenterBox,
-  Icon,
-  Steps,
-  Divider,
 } from 'taro-fast-component/es/customComponents';
-import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import { pathCollection } from '@/customConfig/constants';
 import PageWrapper from '@/customComponents/PageWrapper';
 
-import {
-  getOverviewAction,
-  getOverviewActionSheet,
-  getOverviewActionModal,
-} from '../Assist/action';
-
-const { Step } = Steps;
-const { IconVolumePlus } = Icon;
-
-@connect(({ news, global }) => ({
-  news,
-  global,
-}))
 export default class Index extends PageWrapper {
-  showRenderCountInConsole = true;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        loadApiPath: 'news/getOverview',
-      },
-    };
-  }
-
-  getApiData = (props) => {
-    const {
-      news: { data },
-    } = props;
-
-    return data;
-  };
-
-  onActionClick = () => {
-    getOverviewAction({
-      target: this,
-      handleData: {},
-      successCallback: ({ remoteData }) => {
-        {
-          recordObject(remoteData);
-        }
-      },
-    });
-  };
-
-  onActionSheetClick = () => {
-    getOverviewActionSheet({
-      target: this,
-      handleData: {},
-      successCallback: ({ remoteData }) => {
-        {
-          recordObject(remoteData);
-        }
-      },
-    });
-  };
-
-  onActionModalClick = () => {
-    getOverviewActionModal({
-      target: this,
-      handleData: {},
-      successCallback: ({ remoteData }) => {
-        {
-          recordObject(remoteData);
-        }
-      },
-    });
-  };
-
-  showRemoteMetaDataInConsole = () => {
-    recordObject(this.getRemoteMetaData());
-  };
-
-  buildItem = ({ name, path }) => {
-    return (
-      <View
-        onClick={() => {
-          this.navigateTo({
-            url: path,
-          });
-        }}
-      >
-        {name}
-      </View>
-    );
-  };
-
   renderFurther() {
-    const { dataLoading, firstLoadSuccess } = this.state;
-
     console.log(this.state);
 
     const rowStyle = {
@@ -128,8 +22,6 @@ export default class Index extends PageWrapper {
       textAlign: 'center',
       backgroundColor: '#0092ffbf',
     };
-
-    console.log({ pathCollection });
 
     return (
       <View className="index">

@@ -34,8 +34,10 @@ class ImageBox extends ComponentBase {
 
     this.state = {
       ...this.state,
-      hide: false,
-      loadSuccess: false,
+      ...{
+        hide: false,
+        loadSuccess: false,
+      },
     };
   }
 
