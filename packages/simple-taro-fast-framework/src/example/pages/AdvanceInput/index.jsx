@@ -19,6 +19,10 @@ export default class Index extends PageWrapper {
           <AdvanceInput label="用户名" />
         </BlockArea>
 
+        <BlockArea title="Label">
+          <AdvanceInput label="用户名" clearable />
+        </BlockArea>
+
         <BlockArea title="Extra">
           <AdvanceInput label="用户名" extra="扩展部分" />
         </BlockArea>
@@ -63,11 +67,11 @@ export default class Index extends PageWrapper {
           <AdvanceInput label="用户名" holdKeyboard />
         </BlockArea>
 
-        <BlockArea title="onInput">
+        <BlockArea title="onChange">
           <AdvanceInput
             label="用户名"
-            onInput={(e) => {
-              console.log(e);
+            onChange={(v) => {
+              console.log(v);
             }}
           />
         </BlockArea>

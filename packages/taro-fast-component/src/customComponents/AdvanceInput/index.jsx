@@ -13,7 +13,10 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import Icon from '../Icon';
 import FlexBox from '../FlexBox';
+
+const { IconCloseCircle } = Icon;
 
 const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
@@ -38,7 +41,7 @@ const defaultProps = {
   selectionEnd: -1,
   adjustPosition: true,
   holdKeyboard: false,
-  onInput: null,
+  onChange: null,
   onFocus: null,
   onBlur: null,
   onConfirm: null,
@@ -46,21 +49,57 @@ const defaultProps = {
 };
 
 class AdvanceInput extends ComponentBase {
-  afterInput = (e) => {
-    const { onInput } = this.props;
+  constructor(props) {
+    super(props);
 
-    if (!isNull(onInput)) {
-      if (!isFunction(onInput)) {
+    this.state = {
+      valueTemp: '',
+    };
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+
+    const { value: valuePrev } = this.props;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueTemp: valueNext,
+      };
+    }
+
+    return null;
+  }
+
+  triggerChange = (v) => {
+    const { onChange } = this.props;
+
+    if (!isNull(onChange)) {
+      if (!isFunction(onChange)) {
         showErrorMessage({
-          message: 'onInput must be function',
+          message: 'onChange must be function',
         });
       } else {
-        onInput(e);
+        onChange(v);
       }
+    } else {
+      showErrorMessage({
+        message:
+          'onChange in props is null,please defined it,onChange must be function',
+      });
     }
   };
 
-  afterFocus = (e) => {
+  onInput = (e) => {
+    const {
+      detail: { value: v },
+    } = e;
+
+    this.triggerChange(v);
+  };
+
+  triggerFocus = (e) => {
     const { onFocus } = this.props;
 
     if (!isNull(onFocus)) {
@@ -74,7 +113,7 @@ class AdvanceInput extends ComponentBase {
     }
   };
 
-  afterBlur = (e) => {
+  triggerBlur = (e) => {
     const { onBlur } = this.props;
 
     if (!isNull(onBlur)) {
@@ -88,7 +127,7 @@ class AdvanceInput extends ComponentBase {
     }
   };
 
-  afterChange = (e) => {
+  triggerConfirm = (e) => {
     const { onConfirm } = this.props;
 
     if (!isNull(onConfirm)) {
@@ -102,7 +141,7 @@ class AdvanceInput extends ComponentBase {
     }
   };
 
-  afterKeyboardHeightChange = (e) => {
+  triggerKeyboardHeightChange = (e) => {
     const { onKeyboardHeightChange } = this.props;
 
     if (!isNull(onKeyboardHeightChange)) {
@@ -116,14 +155,22 @@ class AdvanceInput extends ComponentBase {
     }
   };
 
+  clearValue = () => {
+    this.setState({
+      valueTemp: '',
+    });
+
+    this.triggerChange('');
+  };
+
   render() {
     const {
+      clearable,
       label,
       extra,
       labelContainerStyle: labelContainerStyleSource,
       inputContainerStyle,
       extraContainerStyle,
-      value,
       type: typeSource,
       password,
       placeholder,
@@ -142,6 +189,7 @@ class AdvanceInput extends ComponentBase {
       adjustPosition,
       holdKeyboard,
     } = this.props;
+    const { valueTemp } = this.state;
 
     const type = inCollection(typeCollection, typeSource) ? typeSource : 'text';
     const confirmType = inCollection(confirmTypeCollection, confirmTypeSource)
@@ -165,41 +213,51 @@ class AdvanceInput extends ComponentBase {
         right={
           <FlexBox
             left={
-              <Input
-                value={value}
-                type={type}
-                password={password}
-                placeholder={placeholder}
-                placeholderStyle={
-                  isString(placeholderStyle)
-                    ? placeholderStyle
-                    : isObject(placeholderStyle)
-                    ? styleToString(placeholderStyle)
-                    : ''
+              <FlexBox
+                left={
+                  <Input
+                    value={valueTemp}
+                    type={type}
+                    password={password}
+                    placeholder={placeholder}
+                    placeholderStyle={
+                      isString(placeholderStyle)
+                        ? placeholderStyle
+                        : isObject(placeholderStyle)
+                        ? styleToString(placeholderStyle)
+                        : ''
+                    }
+                    placeholderClass={placeholderClass}
+                    disabled={disabled}
+                    maxlength={maxlength}
+                    cursorSpacing={cursorSpacing}
+                    autoFocus={autoFocus}
+                    focus={focus}
+                    confirmType={confirmType}
+                    confirmHold={confirmHold}
+                    cursor={cursor}
+                    selectionStart={selectionStart}
+                    selectionEnd={selectionEnd}
+                    adjustPosition={adjustPosition}
+                    holdKeyboard={holdKeyboard}
+                    onInput={this.onInput}
+                    onFocus={this.triggerFocus}
+                    onBlur={this.triggerBlur}
+                    onConfirm={this.triggerConfirm}
+                    onKeyboardHeightChange={this.triggerKeyboardHeightChange}
+                  />
                 }
-                placeholderClass={placeholderClass}
-                disabled={disabled}
-                maxlength={maxlength}
-                cursorSpacing={cursorSpacing}
-                autoFocus={autoFocus}
-                focus={focus}
-                confirmType={confirmType}
-                confirmHold={confirmHold}
-                cursor={cursor}
-                selectionStart={selectionStart}
-                selectionEnd={selectionEnd}
-                adjustPosition={adjustPosition}
-                holdKeyboard={holdKeyboard}
-                onInput={this.afterInput}
-                onFocus={this.afterFocus}
-                onBlur={this.afterBlur}
-                onConfirm={this.afterChange}
-                onKeyboardHeightChange={this.afterKeyboardHeightChange}
+                leftStyle={inputContainerStyle}
+                right={
+                  clearable ? (
+                    <IconCloseCircle onClick={this.clearValue} />
+                  ) : null
+                }
+                rightStyle={clearable ? extraContainerStyle : null}
               />
             }
-            leftStyle={inputContainerStyle}
             right={extra ? extra : null}
-            rightStyle={extraContainerStyle}
+            rightStyle={extra ? extraContainerStyle : null}
           />
         }
       />

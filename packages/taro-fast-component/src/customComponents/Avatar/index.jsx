@@ -1,4 +1,4 @@
-import { Image, OpenData, Text, View } from '@tarojs/components';
+import { Image, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 

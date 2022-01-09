@@ -2,7 +2,8 @@ import { View } from '@tarojs/components';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import { Row, Col } from '../../customComponents';
+import Col from '../Flex/Col';
+import Row from '../Flex/Row';
 
 const defaultProps = {
   direction: 'horizontal',

@@ -24,7 +24,8 @@ export function buildConfig({ terser: whetherTerser = false }) {
       'taro-fast-common/es/utils/tools',
       'taro-fast-common/es/utils/typeCheck',
       'taro-fast-common/es/utils/typeConvert',
-      'taro-fast-common/es/customComponents',
+      'taro-fast-common/es/provider',
+      'taro-fast-common/es/hooks',
     ],
   });
 }
