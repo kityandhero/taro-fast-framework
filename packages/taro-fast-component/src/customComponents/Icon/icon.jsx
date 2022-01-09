@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import { pxTransform, mergeStyle } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
@@ -10,10 +10,7 @@ import { defaultProps } from './config';
 
 class Icon extends ComponentBase {
   handleClick() {
-    const { onClick } = {
-      ...defaultProps,
-      ...this.props,
-    };
+    const { onClick } = this.props;
 
     if (isFunction(onClick)) {
       onClick();
@@ -32,7 +29,7 @@ class Icon extends ComponentBase {
     const iconName = value ? `${prefixClass}-${value}` : '';
 
     return (
-      <Text
+      <View
         className={classNames(prefixClass, iconName, className)}
         style={mergeStyle(rootStyle, customStyle)}
         onClick={this.handleClick}

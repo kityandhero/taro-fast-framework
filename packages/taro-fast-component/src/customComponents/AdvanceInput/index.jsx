@@ -1,9 +1,10 @@
-import { Input } from '@tarojs/components';
+import { View, Input } from '@tarojs/components';
 
 import {
   inCollection,
   showErrorMessage,
   styleToString,
+  recordError,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -15,6 +16,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Icon from '../Icon';
 import FlexBox from '../FlexBox';
+import VerticalBox from '../VerticalBox';
 
 const { IconCloseCircle } = Icon;
 
@@ -77,6 +79,8 @@ class AdvanceInput extends ComponentBase {
         showErrorMessage({
           message: 'onChange must be function',
         });
+
+        recordError('AdvanceInput: onChange must be function');
       } else {
         onChange(v);
       }
@@ -85,6 +89,10 @@ class AdvanceInput extends ComponentBase {
         message:
           'onChange in props is null,please defined it,onChange must be function',
       });
+
+      recordError(
+        'AdvanceInput: onChange in props is null,please defined it,onChange must be function',
+      );
     }
   };
 
@@ -156,7 +164,7 @@ class AdvanceInput extends ComponentBase {
     this.setState({
       valueTemp: '',
     });
-
+    console.log('clearValue');
     this.triggerChange('');
   };
 
@@ -247,7 +255,20 @@ class AdvanceInput extends ComponentBase {
                 leftStyle={inputContainerStyle}
                 right={
                   clearable ? (
-                    <IconCloseCircle onClick={this.clearValue} />
+                    <View
+                      style={{
+                        paddingLeft: '10rpx',
+                        height: '100%',
+                      }}
+                    >
+                      <VerticalBox>
+                        <IconCloseCircle
+                          size={18}
+                          color="#ccc"
+                          onClick={this.clearValue}
+                        />
+                      </VerticalBox>
+                    </View>
                   ) : null
                 }
                 rightStyle={clearable ? extraContainerStyle : null}

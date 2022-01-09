@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import {
   inCollection,
@@ -60,7 +60,7 @@ export const Tag = (p) => {
 
   return withNativeProps(
     props,
-    <Text
+    <View
       style={style}
       onClick={() => {
         if (isFunction(onClick)) {
@@ -72,7 +72,7 @@ export const Tag = (p) => {
       })}
     >
       {props.children}
-    </Text>,
+    </View>,
   );
 };
 
