@@ -107,7 +107,7 @@ export const Stepper = (p) => {
       >
         <CenterBox>
           <VerticalBox>
-            <Text style={{ fontSize: '40rpx' }}>━</Text>
+            <Text style={{ fontSize: '32rpx' }}>━</Text>
           </VerticalBox>
         </CenterBox>
       </Button>
