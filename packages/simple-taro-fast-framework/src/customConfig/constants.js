@@ -49,4 +49,10 @@ export const pathCollection = {
   advanceSwitch: {
     path: '/example/pages/advanceSwitch/index',
   },
+  advanceProgress: {
+    path: '/example/pages/advanceProgress/index',
+  },
+  advanceProgressBox: {
+    path: '/example/pages/advanceProgressBox/index',
+  },
 };

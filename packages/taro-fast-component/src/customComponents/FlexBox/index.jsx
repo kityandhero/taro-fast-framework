@@ -1,9 +1,13 @@
 import { View } from '@tarojs/components';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { inCollection } from 'taro-fast-common/es/utils/tools';
 
 import Col from '../Flex/Col';
 import Row from '../Flex/Row';
+
+const directionCollection = ['horizontal', 'vertical'];
+const flexAutoCollection = ['left', 'right'];
 
 const defaultProps = {
   direction: 'horizontal',
@@ -42,14 +46,14 @@ class FlexBox extends ComponentBase {
       vertical,
     } = this.props;
 
-    let direction = directionSource;
-
-    if (directionSource !== 'horizontal' && directionSource !== 'vertical') {
-      direction = 'horizontal';
-    }
+    const direction = inCollection(directionCollection, directionSource)
+      ? directionSource
+      : 'horizontal';
 
     if (direction === 'horizontal') {
-      const flexAuto = flexAutoSource === 'left' ? 'left' : 'right';
+      const flexAuto = inCollection(flexAutoCollection, flexAutoSource)
+        ? flexAutoSource
+        : 'left';
 
       const style = {
         ...(styleSource || {}),

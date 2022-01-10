@@ -101,6 +101,16 @@ export default class Index extends PageWrapper {
               name: 'AdvanceSwitch',
               path: pathCollection.advanceSwitch.path,
             })}
+
+            {this.buildItem({
+              name: 'AdvanceProgress',
+              path: pathCollection.advanceProgress.path,
+            })}
+
+            {this.buildItem({
+              name: 'AdvanceProgressBox',
+              path: pathCollection.advanceProgressBox.path,
+            })}
           </Space>
         </BlockArea>
       </View>

@@ -25,6 +25,8 @@ export default {
         'pages/stepper/index',
         'pages/button/index',
         'pages/advanceSwitch/index',
+        'pages/advanceProgress/index',
+        'pages/advanceProgressBox/index',
       ],
     },
   ],
