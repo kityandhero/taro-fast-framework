@@ -3,13 +3,9 @@ import { Text, View } from '@tarojs/components';
 import { mergeProps, withNativeProps } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import Icon from '../Icon';
-
-const { IconChevronRight } = Icon;
-
 const defaultProps = {
   text: '更多',
-  icon: <IconChevronRight size={19} />,
+  icon: null,
   onClick: null,
 };
 

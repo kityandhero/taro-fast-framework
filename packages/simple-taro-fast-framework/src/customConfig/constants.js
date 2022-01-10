@@ -55,4 +55,7 @@ export const pathCollection = {
   advanceProgressBox: {
     path: '/example/pages/advanceProgressBox/index',
   },
+  notification: {
+    path: '/example/pages/notification/index',
+  },
 };

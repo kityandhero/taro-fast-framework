@@ -1,9 +1,13 @@
 import Taro from '@tarojs/taro';
+import { View } from '@tarojs/components';
 
 import { showErrorMessage, recordText } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import {
+  ComponentBase,
+  Notification,
+} from 'taro-fast-common/es/customComponents';
 
 class Infrastructure extends ComponentBase {
   constructor(props) {
@@ -300,6 +304,14 @@ class Infrastructure extends ComponentBase {
     return false;
   }
 
+  bannerNotify = ({ message, type = 'info', duration = 3000 }) => {
+    Taro.bannerNotify({
+      message,
+      type,
+      duration,
+    });
+  };
+
   renderFurther() {
     return null;
   }
@@ -307,7 +319,13 @@ class Infrastructure extends ComponentBase {
   render() {
     this.showRenderCount();
 
-    return this.renderFurther();
+    return (
+      <View>
+        <Notification />
+
+        {this.renderFurther()}
+      </View>
+    );
   }
 }
 

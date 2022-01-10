@@ -111,6 +111,11 @@ export default class Index extends PageWrapper {
               name: 'AdvanceProgressBox',
               path: pathCollection.advanceProgressBox.path,
             })}
+
+            {this.buildItem({
+              name: 'Notification',
+              path: pathCollection.notification.path,
+            })}
           </Space>
         </BlockArea>
       </View>

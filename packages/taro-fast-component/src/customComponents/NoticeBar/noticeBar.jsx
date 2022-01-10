@@ -1,4 +1,4 @@
-import { View } from '@tarojs/components';
+import { View, Icon } from '@tarojs/components';
 import classNames from 'classnames';
 
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
@@ -6,9 +6,7 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
-import Icon from '../Icon';
-
-const { IconClose } = Icon;
+import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
   hidden: false,
@@ -127,7 +125,9 @@ class NoticeBar extends ComponentBase {
                       this.onClose();
                     }}
                   >
-                    <IconClose size={19} />
+                    <VerticalBox>
+                      <Icon size="16" type="clear" color="#ccc" />
+                    </VerticalBox>
                   </View>
                 ) : null
               }

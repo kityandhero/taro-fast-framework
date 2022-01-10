@@ -1,4 +1,4 @@
-import { View, Text, Input } from '@tarojs/components';
+import { View, Text, Input, Icon } from '@tarojs/components';
 
 import {
   inCollection,
@@ -15,11 +15,8 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import Icon from '../Icon';
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
-
-const { IconCloseCircle } = Icon;
 
 const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
@@ -313,14 +310,12 @@ class AdvanceInput extends ComponentBase {
                         paddingLeft: '10rpx',
                         height: '100%',
                       }}
+                      onClick={this.clearValue}
                     >
                       <VerticalBox>
-                        <IconCloseCircle
-                          size={18}
-                          color="#ccc"
-                          hidden={!valueTemp}
-                          onClick={this.clearValue}
-                        />
+                        {valueTemp ? (
+                          <Icon size="18" type="clear" color="#ccc" />
+                        ) : null}
                       </VerticalBox>
                     </View>
                   ) : null

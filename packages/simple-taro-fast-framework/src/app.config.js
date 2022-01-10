@@ -27,6 +27,7 @@ export default {
         'pages/advanceSwitch/index',
         'pages/advanceProgress/index',
         'pages/advanceProgressBox/index',
+        'pages/notification/index',
       ],
     },
   ],

@@ -10,12 +10,15 @@ const classPrefix = `tfc-space`;
 
 const defaultProps = {
   direction: 'horizontal',
+  fillWidth: false,
   onClick: null,
 };
 
 export const Space = (p) => {
   const props = mergeProps(defaultProps, p);
-  const { direction, onClick } = props;
+
+  const { direction, fillWidth, onClick } = props;
+
   return withNativeProps(
     props,
     <View
@@ -26,6 +29,7 @@ export const Space = (p) => {
         [`${classPrefix}-align-${props.align}`]: !!props.align,
         [`${classPrefix}-justify-${props.justify}`]: !!props.justify,
       })}
+      style={!!fillWidth ? { width: '100%' } : {}}
       onClick={onClick}
     >
       {React.Children.map(props.children, (child) => {
