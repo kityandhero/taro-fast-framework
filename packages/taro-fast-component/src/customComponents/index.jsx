@@ -12,6 +12,7 @@ export { default as AdvanceInput } from './AdvanceInput';
 export { default as AdvanceSwitch } from './AdvanceSwitch';
 export { default as AdvanceProgress } from './AdvanceProgress';
 export { default as AdvanceProgressBox } from './AdvanceProgressBox';
+export { default as Tabs } from './Tabs';
 export { default as Grid } from './Grid';
 export { default as Steps } from './Steps';
 export { default as Icon } from './Icon';

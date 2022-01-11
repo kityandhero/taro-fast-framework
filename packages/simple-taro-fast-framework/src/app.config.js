@@ -30,6 +30,7 @@ export default {
         'pages/notification/index',
         'pages/grid/index',
         'pages/selector/index',
+        'pages/tabs/index',
       ],
     },
   ],

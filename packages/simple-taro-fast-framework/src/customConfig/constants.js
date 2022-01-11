@@ -64,4 +64,7 @@ export const pathCollection = {
   selector: {
     path: '/example/pages/selector/index',
   },
+  tabs: {
+    path: '/example/pages/tabs/index',
+  },
 };

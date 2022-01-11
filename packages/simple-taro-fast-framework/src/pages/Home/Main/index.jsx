@@ -128,6 +128,11 @@ export default class Index extends PageWrapper {
               name: 'Selector',
               path: pathCollection.selector.path,
             })}
+
+            {this.buildItem({
+              name: 'Tabs',
+              path: pathCollection.tabs.path,
+            })}
           </Space>
         </BlockArea>
       </View>
