@@ -134,7 +134,8 @@ class Tabs extends ComponentBase {
   // eslint-disable-next-line no-unused-vars
   getSnapshotBeforeUpdate = (preProps, preState) => {
     this.getTabHeaderRef();
-    this.updateScroll();
+
+    this.updateScroll(this.props.current);
   };
 
   getDirection = () => {
@@ -286,7 +287,9 @@ class Tabs extends ComponentBase {
           className={itemCls}
           id={`tab${this.tabId}${idx}`}
           key={`tfc-tabs-item-${idx}`}
-          onClick={this.handleClick.bind(this, idx)}
+          onClick={(e) => {
+            this.handleClick(idx, e);
+          }}
         >
           {item.title}
           <View className="tfc-tabs__item-underline"></View>

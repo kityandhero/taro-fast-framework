@@ -30,6 +30,10 @@ export default class Index extends PageWrapper {
   }
 
   handleClick1 = (value) => {
+    console.log({
+      value,
+    });
+
     this.setState({
       current1: value,
     });
