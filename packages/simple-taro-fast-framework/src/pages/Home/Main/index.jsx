@@ -24,16 +24,6 @@ export default class Index extends PageWrapper {
       >
         {name}
       </Button>
-      // <View
-      //   style={{ padding: '4rpx 20rpx', border: '1rpx solid #ccc' }}
-      //   onClick={() => {
-      //     this.navigateTo({
-      //       url: path,
-      //     });
-      //   }}
-      // >
-      //   {name}
-      // </View>
     );
   };
 
