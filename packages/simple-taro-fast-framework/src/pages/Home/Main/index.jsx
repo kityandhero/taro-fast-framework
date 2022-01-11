@@ -4,6 +4,7 @@ import {
   Space,
   AutoCenter,
   BlockArea,
+  Button,
 } from 'taro-fast-component/es/customComponents';
 
 import { pathCollection } from '@/customConfig/constants';
@@ -12,8 +13,9 @@ import PageWrapper from '@/customComponents/PageWrapper';
 export default class Index extends PageWrapper {
   buildItem = ({ name, path }) => {
     return (
-      <View
-        style={{ padding: '4rpx 20rpx', border: '1rpx solid #ccc' }}
+      <Button
+        block
+        // size="large"
         onClick={() => {
           this.navigateTo({
             url: path,
@@ -21,7 +23,17 @@ export default class Index extends PageWrapper {
         }}
       >
         {name}
-      </View>
+      </Button>
+      // <View
+      //   style={{ padding: '4rpx 20rpx', border: '1rpx solid #ccc' }}
+      //   onClick={() => {
+      //     this.navigateTo({
+      //       url: path,
+      //     });
+      //   }}
+      // >
+      //   {name}
+      // </View>
     );
   };
 
