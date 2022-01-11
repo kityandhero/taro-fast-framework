@@ -58,4 +58,10 @@ export const pathCollection = {
   notification: {
     path: '/example/pages/notification/index',
   },
+  grid: {
+    path: '/example/pages/grid/index',
+  },
+  selector: {
+    path: '/example/pages/selector/index',
+  },
 };

@@ -28,6 +28,8 @@ export default {
         'pages/advanceProgress/index',
         'pages/advanceProgressBox/index',
         'pages/notification/index',
+        'pages/grid/index',
+        'pages/selector/index',
       ],
     },
   ],

@@ -4,9 +4,6 @@ const inputFile = {
   ...{
     'customComponents/index': 'src/customComponents/index.jsx',
   },
-  ...{
-    'functionComponent/index': 'src/functionComponent/index.jsx',
-  },
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {

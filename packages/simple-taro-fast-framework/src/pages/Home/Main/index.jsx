@@ -116,6 +116,16 @@ export default class Index extends PageWrapper {
               name: 'Notification',
               path: pathCollection.notification.path,
             })}
+
+            {this.buildItem({
+              name: 'Grid',
+              path: pathCollection.grid.path,
+            })}
+
+            {this.buildItem({
+              name: 'Selector',
+              path: pathCollection.selector.path,
+            })}
           </Space>
         </BlockArea>
       </View>
