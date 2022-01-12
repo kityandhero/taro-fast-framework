@@ -1932,6 +1932,10 @@ export function bound(position, min, max) {
   return ret;
 }
 
+export function toRPX(val) {
+  return typeof val === 'number' ? `${val}rpx` : val;
+}
+
 /**
  * 占位函数
  *

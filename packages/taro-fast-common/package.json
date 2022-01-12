@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-common",
-  "version": "1.0.5",
+  "version": "1.0.12",
   "private": false,
   "description": "taro-fast-common",
   "keywords": [
@@ -107,5 +107,6 @@
   },
   "bugs": {
     "url": "https://github.com/kityandhero/taro-fast-framework/issues"
-  }
+  },
+  "gitHead": "422d78a7cd7b482e816faa834bc8bc8922909ede"
 }

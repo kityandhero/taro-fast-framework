@@ -2,15 +2,15 @@
 @font-size-sm: 26rpx;
 @color-grey-2: #999;
 @color-grey-3: #ccc;
-@spacing-v-sm: 6px * @hd;
-@spacing-h-lg: 12px * @hd;
+@spacing-v-sm: 12rpx * @hd;
+@spacing-h-lg: 24rpx * @hd;
 @tfc-notice-bar-text-color: #de8c17;
 @tfc-notice-bar-bg-color: #fcf6ed;
 @line-height-zh: 1.5;
-@tfc-notice-bar-icon-size: 30px;
+@tfc-notice-bar-icon-size: 60rpx;
 @tfc-notice-bar-font-size: @font-size-sm;
 @tfc-notice-bar-btn-close-color: @color-grey-3;
-@tfc-notice-bar-btn-close-size: 32px;
+@tfc-notice-bar-btn-close-size: 64rpx;
 
 .tfc-notice-bar {
   position: relative;
@@ -27,7 +27,7 @@
 
     &-icon {
       display: inline-block;
-      margin-right: 12px;
+      margin-right: 24rpx;
       vertical-align: top;
       height: 38rpx;
     }
@@ -43,7 +43,7 @@
   }
 
   &__close {
-    margin-right: 12px;
+    margin-right: 24rpx;
     height: 38rpx;
     color: @tfc-notice-bar-btn-close-color;
     line-height: @line-height-zh;
@@ -121,7 +121,7 @@
 
   &--more {
     .tfc-notice-bar__content {
-      max-width: 525px;
+      max-width: 1050rpx;
     }
   }
 }
