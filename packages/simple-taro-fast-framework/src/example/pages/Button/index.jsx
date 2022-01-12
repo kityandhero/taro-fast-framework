@@ -4,8 +4,8 @@ import {
   Space,
   BlockArea,
   Button,
-  Icon,
 } from 'taro-fast-component/es/customComponents';
+import { Icon } from 'taro-fast-component-extra/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 
@@ -90,7 +90,7 @@ export default class Index extends PageWrapper {
           <Button>
             <Space>
               <IconSearch size={19} />
-              <Text >搜索</Text>
+              <Text>搜索</Text>
             </Space>
           </Button>
         </BlockArea>

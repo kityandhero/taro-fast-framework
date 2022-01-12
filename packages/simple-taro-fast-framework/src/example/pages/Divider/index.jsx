@@ -3,9 +3,9 @@ import { View, Text } from '@tarojs/components';
 import {
   BlockArea,
   Divider,
-  Icon,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { Icon } from 'taro-fast-component-extra/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 

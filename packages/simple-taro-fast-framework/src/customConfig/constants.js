@@ -70,4 +70,7 @@ export const pathCollection = {
   transition: {
     path: '/example/pages/transition/index',
   },
+  list: {
+    path: '/example/pages/list/index',
+  },
 };

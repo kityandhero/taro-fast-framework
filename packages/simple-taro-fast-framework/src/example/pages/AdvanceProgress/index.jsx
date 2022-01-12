@@ -5,8 +5,8 @@ import {
   Space,
   AdvanceProgress,
   Button,
-  Icon,
 } from 'taro-fast-component/es/customComponents';
+import { Icon } from 'taro-fast-component-extra/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 
