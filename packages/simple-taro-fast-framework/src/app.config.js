@@ -31,6 +31,7 @@ export default {
         'pages/grid/index',
         'pages/selector/index',
         'pages/tabs/index',
+        'pages/transition/index',
       ],
     },
   ],

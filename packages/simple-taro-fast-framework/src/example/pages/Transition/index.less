@@ -1,0 +1,20 @@
+.block {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  background-color: #1989fa !important;
+}
+
+.tfc-enter-active-class,
+.tfc-leave-active-class {
+  transition-property: background-color, transform;
+}
+
+.tfc-enter-class,
+.tfc-leave-to-class {
+  background-color: red;
+  transform: rotate(-360deg) translate3d(-100%, -100%, 0);
+}

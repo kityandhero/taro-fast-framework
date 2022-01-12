@@ -7,7 +7,7 @@ import ComponentBase from '../../customComponents/ComponentBase';
 const typeCollection = ['info', 'success', 'error', 'warning'];
 
 const defaultProps = {
-  customStyle: '',
+  customStyle: {},
   className: '',
   message: '',
   type: '',
@@ -68,6 +68,8 @@ class Notification extends ComponentBase {
 
     this.state = {
       show: false,
+      customStyleTemp: {},
+      classNameTemp: '',
       messageText: '',
       typeValue: 'info',
       durationTime: 3000,
@@ -78,7 +80,13 @@ class Notification extends ComponentBase {
 
   bindMessageListener = () => {
     Taro.eventCenter.on('tfc-message', (options = {}) => {
-      const { message, type: typeSource, duration } = options;
+      const {
+        customStyle,
+        className,
+        message,
+        type: typeSource,
+        duration,
+      } = options;
 
       const type = inCollection(typeCollection, typeSource)
         ? typeSource
@@ -86,6 +94,8 @@ class Notification extends ComponentBase {
 
       const newState = {
         show: true,
+        customStyleTemp: customStyle,
+        classNameTemp: className,
         messageText: message,
         typeValue: type,
         durationTime: duration || this.state.durationTime,
@@ -125,8 +135,8 @@ class Notification extends ComponentBase {
   }
 
   render() {
-    const { customStyle } = this.props;
-    const { messageText, show, typeValue } = this.state;
+    const { customStyleTemp, classNameTemp, messageText, show, typeValue } =
+      this.state;
 
     let styleBackground = styleInfo;
 
@@ -152,10 +162,14 @@ class Notification extends ComponentBase {
       ...styleSource,
       ...(show ? styleShow : styleHidden),
       ...styleBackground,
-      ...customStyle,
+      ...customStyleTemp,
     };
 
-    return <View style={style}>{messageText}</View>;
+    return (
+      <View className={classNameTemp} style={style}>
+        {messageText}
+      </View>
+    );
   }
 }
 

@@ -18,6 +18,7 @@ export { default as Tabs } from './Tabs';
 export { default as Grid } from './Grid';
 export { default as Steps } from './Steps';
 export { default as Icon } from './Icon';
+export { default as Transition } from './Transition';
 export { Badge } from './Badge';
 export { Spin } from './Spin';
 export { Space } from './Space';

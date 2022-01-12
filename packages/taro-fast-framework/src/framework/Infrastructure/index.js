@@ -304,11 +304,19 @@ class Infrastructure extends ComponentBase {
     return false;
   }
 
-  bannerNotify = ({ message, type = 'info', duration = 3000 }) => {
+  bannerNotify = ({
+    message,
+    type = 'info',
+    duration = 3000,
+    customStyle = {},
+    className = '',
+  }) => {
     Taro.bannerNotify({
       message,
       type,
       duration,
+      customStyle: customStyle,
+      className: className,
     });
   };
 

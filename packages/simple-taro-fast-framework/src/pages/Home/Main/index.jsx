@@ -133,6 +133,11 @@ export default class Index extends PageWrapper {
               name: 'Tabs',
               path: pathCollection.tabs.path,
             })}
+
+            {this.buildItem({
+              name: 'Transition',
+              path: pathCollection.transition.path,
+            })}
           </Space>
         </BlockArea>
       </View>

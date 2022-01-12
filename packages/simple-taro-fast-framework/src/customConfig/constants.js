@@ -67,4 +67,7 @@ export const pathCollection = {
   tabs: {
     path: '/example/pages/tabs/index',
   },
+  transition: {
+    path: '/example/pages/transition/index',
+  },
 };
