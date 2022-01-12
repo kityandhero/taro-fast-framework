@@ -3,14 +3,22 @@ import { View } from '@tarojs/components';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+const defaultProps = {
+  fitWidth: true,
+  style: {},
+  align: 'center',
+  alignJustify: 'flex-start',
+  onClick: null,
+};
+
 class VerticalBox extends ComponentBase {
-  triggerClick(e) {
+  triggerClick = (e) => {
     const { onClick } = this.props;
-    console.log('VerticalBox triggerClick');
+
     if (isFunction(onClick)) {
       onClick(e);
     }
-  }
+  };
 
   render() {
     const { style, align, alignJustify } = this.props;
@@ -90,10 +98,7 @@ class VerticalBox extends ComponentBase {
 }
 
 VerticalBox.defaultProps = {
-  fitWidth: true,
-  style: {},
-  align: 'center',
-  alignJustify: 'flex-start',
+  ...defaultProps,
 };
 
 export default VerticalBox;

@@ -48,15 +48,15 @@ class Tag extends ComponentBase {
     };
   }
 
-  triggerClick(e) {
+  triggerClick = (e) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
       onClick(e);
     }
-  }
+  };
 
-  triggerClose() {
+  triggerClose = () => {
     this.setState({
       show: false,
     });
@@ -66,7 +66,7 @@ class Tag extends ComponentBase {
     if (isFunction(onClose)) {
       onClose();
     }
-  }
+  };
 
   render() {
     const {
@@ -123,7 +123,7 @@ class Tag extends ComponentBase {
           right={
             closeable ? (
               <VerticalBox onClick={this.triggerClose}>
-                <Icon size="14" type="clear" color={closeColor || '#ccc'} />
+                <Icon size="12" type="clear" color={closeColor || '#ccc'} />
               </VerticalBox>
             ) : null
           }

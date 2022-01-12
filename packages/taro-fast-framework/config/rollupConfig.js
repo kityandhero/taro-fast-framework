@@ -31,11 +31,17 @@ export function buildConfig({ terser: whetherTerser = false }) {
         'taro-fast-common/es/utils/tools',
         'taro-fast-common/es/utils/typeCheck',
         'taro-fast-common/es/utils/typeConvert',
+        'taro-fast-common/es/utils/provider',
+        'taro-fast-common/es/utils/hooks',
         'taro-fast-common/es/customComponents',
       ],
       ...[
         'taro-fast-component/es/customComponents',
+        'taro-fast-component/es/functionComponent',
+      ],
+      ...[
         'taro-fast-component-extra/es/customComponents',
+        'taro-fast-component-extra/es/functionComponent',
       ],
     ],
   });

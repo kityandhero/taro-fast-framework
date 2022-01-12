@@ -30,6 +30,9 @@ const externalCollection = [
   '@tarojs/runtime',
   '@tarojs/taro',
   '@tarojs/react',
+  '@tarojs/plugin-framework-react',
+  '@tarojs/plugin-framework-vue2',
+  '@tarojs/plugin-framework-vue3',
   'lodash',
   'qs',
   'node-cache',
@@ -66,9 +69,9 @@ export function buildConfig({
     },
     input: inputFile,
     plugins: [
+      json(),
       url(),
       svgr(),
-      json(),
       resolve({
         preferBuiltins: false,
       }),
