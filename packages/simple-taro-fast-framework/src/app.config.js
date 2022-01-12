@@ -33,6 +33,8 @@ export default {
         'pages/tabs/index',
         'pages/transition/index',
         'pages/list/index',
+        'pages/overlay/index',
+        'pages/popup/index',
       ],
     },
   ],

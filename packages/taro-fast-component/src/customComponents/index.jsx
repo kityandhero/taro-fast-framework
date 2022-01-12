@@ -23,6 +23,8 @@ export { Badge } from './Badge';
 export { Spin } from './Spin';
 export { Space } from './Space';
 export { Empty } from './Empty';
+export { Overlay } from './Overlay';
+export { Popup } from './Popup';
 export { AutoCenter } from './AutoCenter';
 export { BlockArea } from './BlockArea';
 export { AdvanceButton } from './AdvanceButton';

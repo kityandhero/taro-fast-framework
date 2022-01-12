@@ -73,4 +73,10 @@ export const pathCollection = {
   list: {
     path: '/example/pages/list/index',
   },
+  overlay: {
+    path: '/example/pages/overlay/index',
+  },
+  popup: {
+    path: '/example/pages/popup/index',
+  },
 };

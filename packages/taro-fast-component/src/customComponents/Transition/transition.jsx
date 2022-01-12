@@ -5,8 +5,7 @@ import { defaultProps, useTransition } from './tools';
 function buildRootStyle(data) {
   return {
     ...{
-      '-webkit-transition-duration': data.currentDuration + 'ms',
-      'transition-duration': data.currentDuration + 'ms',
+      transitionDuration: data.currentDuration + 'ms',
     },
     ...(data.display ? {} : { display: 'none' }),
     ...(data.style || {}),

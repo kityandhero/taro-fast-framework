@@ -143,6 +143,16 @@ export default class Index extends PageWrapper {
               name: 'List',
               path: pathCollection.list.path,
             })}
+
+            {this.buildItem({
+              name: 'Overlay',
+              path: pathCollection.overlay.path,
+            })}
+
+            {this.buildItem({
+              name: 'Popup',
+              path: pathCollection.popup.path,
+            })}
           </Space>
         </BlockArea>
       </View>

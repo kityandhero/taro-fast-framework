@@ -1,14 +1,12 @@
 import { View } from '@tarojs/components';
 
-import {
-  BlockArea,
-  Button,
-  Transition,
-} from 'taro-fast-component/es/customComponents';
+import { List, Transition } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 
 import './index.less';
+
+const style = { backgroundColor: '#f5f7fa' };
 
 export default class Index extends PageWrapper {
   constructor(props) {
@@ -104,38 +102,59 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="基础用法" padding>
-          <Button onClick={this.onClickFade}>Fade</Button>
-          <Button onClick={this.onClickFadeUp}>Fade Up</Button>
-          <Button onClick={this.onClickFadeDown}>Fade Down</Button>
-          <Button onClick={this.onClickFadeLeft}>Fade Left</Button>
-          <Button onClick={this.onClickFadeRight}>Fade Right</Button>
-          <Button onClick={this.onClickSlideUp}>Slide Up</Button>
-          <Button onClick={this.onClickSlideDown}>Slide Down</Button>
-          <Button onClick={this.onClickSlideLeft}>Slide Left</Button>
-          <Button onClick={this.onClickSlideRight}>Slide Right</Button>
-          <Button onClick={this.onClickCustom}>Custom</Button>
-          <Transition show={show} name={name} className="block"></Transition>
-          <Transition
-            show={showCustom}
-            name=""
-            duration={{
-              enter: 300,
-              leave: 1000,
-            }}
-            className="block"
-            enterClass="tfc-enter-class"
-            enterActiveClass="tfc-enter-active-class"
-            leaveActiveClass="tfc-leave-active-class"
-            leaveToClass="tfc-leave-to-class"
-            onBeforeEnter={this.onBeforeEnter}
-            onEnter={this.onEnter}
-            onAfterEnter={this.onAfterEnter}
-            onBeforeLeave={this.onBeforeLeave}
-            onLeave={this.onLeave}
-            onAfterLeave={this.onAfterLeave}
-          ></Transition>
-        </BlockArea>
+        <List header="Transition 动画" style={style}>
+          <List.Item arrow onClick={this.onClickFade}>
+            Fade
+          </List.Item>
+          <List.Item arrow onClick={this.onClickFadeUp}>
+            Fade Up
+          </List.Item>
+          <List.Item arrow onClick={this.onClickFadeDown}>
+            Fade Down
+          </List.Item>
+          <List.Item arrow onClick={this.onClickFadeLeft}>
+            Fade Left
+          </List.Item>
+          <List.Item arrow onClick={this.onClickFadeRight}>
+            Fade Right
+          </List.Item>
+          <List.Item arrow onClick={this.onClickSlideUp}>
+            Slide Up
+          </List.Item>
+          <List.Item arrow onClick={this.onClickSlideDown}>
+            Slide Down
+          </List.Item>
+          <List.Item arrow onClick={this.onClickSlideLeft}>
+            Slide Left
+          </List.Item>
+          <List.Item arrow onClick={this.onClickSlideRight}>
+            Slide Right
+          </List.Item>
+          <List.Item arrow onClick={this.onClickCustom}>
+            Custom
+          </List.Item>
+        </List>
+
+        <Transition show={show} name={name} className="block"></Transition>
+        <Transition
+          show={showCustom}
+          name=""
+          duration={{
+            enter: 300,
+            leave: 1000,
+          }}
+          className="block"
+          enterClass="tfc-enter-class"
+          enterActiveClass="tfc-enter-active-class"
+          leaveActiveClass="tfc-leave-active-class"
+          leaveToClass="tfc-leave-to-class"
+          onBeforeEnter={this.onBeforeEnter}
+          onEnter={this.onEnter}
+          onAfterEnter={this.onAfterEnter}
+          onBeforeLeave={this.onBeforeLeave}
+          onLeave={this.onLeave}
+          onAfterLeave={this.onAfterLeave}
+        ></Transition>
       </View>
     );
   }

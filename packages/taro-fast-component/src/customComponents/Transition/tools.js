@@ -47,7 +47,7 @@ export function useTransition({
   const transitionEnded = useRef(false);
   const status = useRef('');
   const [display, setDisplay] = useState(false);
-  const [InitializationCompleted, setInitializationCompleted] = useState(false);
+  const [initializationCompleted, setInitializationCompleted] = useState(false);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [classes, setClasses] = useState('');
 
@@ -147,7 +147,7 @@ export function useTransition({
 
   return {
     display,
-    InitializationCompleted,
+    initializationCompleted,
     currentDuration,
     classes,
     onTransitionEnd,
