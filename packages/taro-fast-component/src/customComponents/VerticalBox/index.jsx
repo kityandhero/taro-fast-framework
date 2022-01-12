@@ -1,8 +1,17 @@
 import { View } from '@tarojs/components';
 
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 class VerticalBox extends ComponentBase {
+  triggerClick(e) {
+    const { onClick } = this.props;
+    console.log('VerticalBox triggerClick');
+    if (isFunction(onClick)) {
+      onClick(e);
+    }
+  }
+
   render() {
     const { style, align, alignJustify } = this.props;
 
@@ -72,6 +81,7 @@ class VerticalBox extends ComponentBase {
         style={{
           height: '100%',
         }}
+        onClick={this.triggerClick}
       >
         <View style={flexStyle}>{this.props.children}</View>
       </View>

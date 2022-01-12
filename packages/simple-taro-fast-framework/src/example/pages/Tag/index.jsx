@@ -44,9 +44,79 @@ export default class Index extends PageWrapper {
         </BlockArea>
 
         <BlockArea title="圆角">
-          <Tag round color="#2db7f5">
-            kong xin
+          <Tag shape="circle" color="#2db7f5">
+            circle
           </Tag>
+        </BlockArea>
+
+        <BlockArea title="半圆角">
+          <Space>
+            <Tag shape="circleLeft" color="#2db7f5">
+              circle left
+            </Tag>
+
+            <Tag shape="circleRight" color="#2db7f5">
+              circle right
+            </Tag>
+          </Space>
+        </BlockArea>
+
+        <BlockArea title="hidden">
+          <Tag hidden>hidden</Tag>
+        </BlockArea>
+
+        <BlockArea title="onClick">
+          <Space>
+            <Tag
+              color="default"
+              onClick={() => {
+                this.bannerNotify({
+                  message: 'tag click',
+                });
+              }}
+            >
+              click
+            </Tag>
+          </Space>
+        </BlockArea>
+
+        <BlockArea title="可以关闭">
+          <Space>
+            <Tag
+              color="default"
+              closeable
+              onClick={() => {
+                this.bannerNotify({
+                  message: 'tag click',
+                });
+              }}
+              onClose={() => {
+                this.bannerNotify({
+                  message: 'tag close',
+                });
+              }}
+            >
+              click
+            </Tag>
+
+            <Tag
+              color="default"
+              closeable
+              closeColor="#28e745"
+              onClick={() => {
+                this.bannerNotify({
+                  message: 'tag click',
+                });
+              }}
+              onClose={() => {
+                this.bannerNotify({
+                  message: 'tag close',
+                });
+              }}
+            >
+              click
+            </Tag>
+          </Space>
         </BlockArea>
 
         <BlockArea title="通过 CSS 变量进行个性化">

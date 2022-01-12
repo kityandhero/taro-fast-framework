@@ -13,7 +13,16 @@
   border-radius: var(--border-radius);
   border: 1rpx solid var(--border-color);
   box-sizing: border-box;
-  &-round {
+
+  &-circle {
     border-radius: 200rpx;
+  }
+
+  &-circle-left {
+    border-radius: 200rpx 0 0 200rpx;
+  }
+
+  &-circle-right {
+    border-radius: 0 200rpx 200rpx 0;
   }
 }

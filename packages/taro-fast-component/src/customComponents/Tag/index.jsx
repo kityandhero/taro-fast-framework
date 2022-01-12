@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
+import { View, Icon } from '@tarojs/components';
 
-import {
-  inCollection,
-  mergeProps,
-  withNativeProps,
-} from 'taro-fast-common/es/utils/tools';
+import { inCollection } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import FlexBox from '../FlexBox';
+import VerticalBox from '../VerticalBox';
 
 import './index.less';
 
@@ -21,61 +21,127 @@ const colorRecord = {
 };
 
 const colorCollection = ['default', 'primary', 'success', 'warning', 'danger'];
+const shapeCollection = ['rectangle', 'circle', 'circleLeft', 'circleRight'];
 
 const fillCollection = ['solid', 'outline'];
 
 const defaultProps = {
   color: 'default',
   fill: 'solid',
-  round: false,
+  shape: 'rectangle',
   style: {},
+  hidden: false,
+  closeable: false,
+  closeColor: '#ccc',
   onClick: null,
 };
 
-export const Tag = (p) => {
-  const props = mergeProps(defaultProps, p);
+class Tag extends ComponentBase {
+  constructor(props) {
+    super(props);
 
-  const {
-    color: colorSource,
-    fill: fillSource,
-    round,
-    style: styleOther,
-    onClick,
-  } = props;
+    this.state = {
+      ...this.state,
+      ...{
+        show: true,
+      },
+    };
+  }
 
-  const color = inCollection(colorCollection, colorSource)
-    ? colorRecord[colorSource]
-    : colorSource;
+  triggerClick(e) {
+    const { onClick } = this.props;
 
-  const fill = inCollection(fillCollection, fillSource) ? fillSource : 'solid';
+    if (isFunction(onClick)) {
+      onClick(e);
+    }
+  }
 
-  const style = {
-    ...{
-      '--border-color': color,
-      '--text-color': fill === 'outline' ? color : '#ffffff',
-      '--background-color': fill === 'outline' ? 'transparent' : color,
-    },
-    ...styleOther,
-  };
+  triggerClose() {
+    this.setState({
+      show: false,
+    });
 
-  return withNativeProps(
-    props,
-    <View
-      style={style}
-      onClick={() => {
-        if (isFunction(onClick)) {
-          onClick();
-        }
-      }}
-      className={classNames(classPrefix, {
-        [`${classPrefix}-round`]: round,
-      })}
-    >
-      {props.children}
-    </View>,
-  );
-};
+    const { onClose } = this.props;
+
+    if (isFunction(onClose)) {
+      onClose();
+    }
+  }
+
+  render() {
+    const {
+      color: colorSource,
+      fill: fillSource,
+      shape: shapeSource,
+      style: styleOther,
+      hidden,
+      closeable,
+      closeColor,
+      children,
+    } = this.props;
+    const { show } = this.state;
+
+    if (hidden || !show) {
+      return null;
+    }
+
+    const color = inCollection(colorCollection, colorSource)
+      ? colorRecord[colorSource]
+      : colorSource;
+
+    const shape = inCollection(shapeCollection, shapeSource)
+      ? shapeSource
+      : 'rectangle';
+
+    const fill = inCollection(fillCollection, fillSource)
+      ? fillSource
+      : 'solid';
+
+    const style = {
+      ...{
+        '--border-color': color,
+        '--text-color': fill === 'outline' ? color : '#ffffff',
+        '--background-color': fill === 'outline' ? 'transparent' : color,
+      },
+      ...styleOther,
+    };
+
+    return (
+      <View
+        style={style}
+        className={classNames(classPrefix, {
+          [`${classPrefix}-circle`]: shape === 'circle',
+          [`${classPrefix}-circle-left`]: shape === 'circleLeft',
+          [`${classPrefix}-circle-right`]: shape === 'circleRight',
+        })}
+      >
+        <FlexBox
+          flexAuto="left"
+          left={
+            <VerticalBox onClick={this.triggerClick}> {children}</VerticalBox>
+          }
+          right={
+            closeable ? (
+              <VerticalBox onClick={this.triggerClose}>
+                <Icon size="14" type="clear" color={closeColor || '#ccc'} />
+              </VerticalBox>
+            ) : null
+          }
+          rightStyle={
+            closeable
+              ? {
+                  paddingLeft: '12rpx',
+                }
+              : {}
+          }
+        />
+      </View>
+    );
+  }
+}
 
 Tag.defaultProps = {
   ...defaultProps,
 };
+
+export default Tag;

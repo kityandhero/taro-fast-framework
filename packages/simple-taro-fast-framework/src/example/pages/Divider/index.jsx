@@ -1,8 +1,16 @@
-import { View } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 
-import { BlockArea, Divider } from 'taro-fast-component/es/customComponents';
+import {
+  BlockArea,
+  Divider,
+  Icon,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
+
+const { IconSearch } = Icon;
+const { buildDivider } = Divider;
 
 export default class Index extends PageWrapper {
   renderFurther() {
@@ -28,6 +36,34 @@ export default class Index extends PageWrapper {
           >
             自定义样式
           </Divider>
+        </BlockArea>
+
+        <BlockArea title="图标">
+          <Divider
+            style={{
+              color: '#1677ff',
+              borderColor: '#1677ff',
+              borderStyle: 'dashed',
+            }}
+          >
+            <Space>
+              <IconSearch size={16} />
+              <Text>搜索</Text>
+            </Space>
+          </Divider>
+        </BlockArea>
+
+        <BlockArea title="buildDivider">
+          {buildDivider({
+            contentPosition: 'left',
+            style: {
+              color: '#1677ff',
+              borderColor: '#1677ff',
+              borderStyle: 'dashed',
+            },
+            icon: <IconSearch size={16} />,
+            text: '搜索',
+          })}
         </BlockArea>
       </View>
     );
