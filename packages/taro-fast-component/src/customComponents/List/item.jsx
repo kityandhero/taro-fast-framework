@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { View, Image } from '@tarojs/components';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
-
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';
 import RightArrowIcon from '../../assets/rightArrow.svg';
@@ -12,9 +11,9 @@ const classPrefix = `tfc-list-item`;
 
 const defaultProps = {
   style: {},
-  title: '',
-  description: '',
-  prefix: '',
+  title: null,
+  description: null,
+  prefix: null,
   extra: null,
   clickable: false,
   arrow: false,
@@ -62,8 +61,11 @@ class Item extends ComponentBase {
       >
         <View className={`${classPrefix}-content`}>
           {prefix && (
-            <View className={`${classPrefix}-content-prefix`}>{prefix}</View>
+            <View className={`${classPrefix}-content-prefix`}>
+              <VerticalBox>{prefix}</VerticalBox>
+            </View>
           )}
+
           <View className={`${classPrefix}-content-main`}>
             {title && <View className={`${classPrefix}-title`}>{title}</View>}
             {children}
@@ -73,20 +75,23 @@ class Item extends ComponentBase {
               </View>
             )}
           </View>
-          {extra && (
-            <View className={`${classPrefix}-content-extra`}>{extra}</View>
-          )}
-          {arrow && (
-            <View className={`${classPrefix}-content-arrow`}>
-              {arrow === true ? (
-                <VerticalBox>
-                  <Image src={<RightArrowIcon />} />
-                </VerticalBox>
-              ) : (
-                arrow
-              )}
+
+          {extra ? (
+            <View className={`${classPrefix}-content-extra`}>
+              <VerticalBox>{extra}</VerticalBox>
             </View>
-          )}
+          ) : null}
+
+          {arrow ? (
+            <View className={`${classPrefix}-content-arrow`}>
+              <VerticalBox>
+                <Image
+                  style={{ width: '30rpx', height: '30rpx' }}
+                  src={RightArrowIcon}
+                />
+              </VerticalBox>
+            </View>
+          ) : null}
         </View>
       </View>
     );
