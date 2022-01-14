@@ -1,3 +1,4 @@
+import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -87,7 +88,7 @@ class Radio extends ComponentBase {
               disabled={disabled}
               border={border}
               extra={
-                value === valueItem ? (
+                !stringIsNullOrWhiteSpace(value) && value === valueItem ? (
                   <IconCheck size={18} color="#1677ff" />
                 ) : null
               }

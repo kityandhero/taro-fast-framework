@@ -1,11 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  Radio,
-  Icon,
-  AdvanceSwitch,
-  Button,
-} from 'taro-fast-component/es/customComponents';
+import { Radio, Icon, Button } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
