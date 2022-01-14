@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { View, Image } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import { isFunction, isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
-import { Space, Grid } from 'taro-fast-component/es/customComponents';
+import { Space, Grid, Icon } from 'taro-fast-component/es/customComponents';
 
-import CheckMarkSvg from '../../assets/check-mark.svg';
+const { IconCheck } = Icon;
 
 const classPrefix = `tfc-selector`;
 
@@ -113,9 +113,9 @@ class Selector extends ComponentBase {
           )}
           {active && (
             <View className={`${classPrefix}-check-mark-wrapper`}>
-              <Image
+              <IconCheck
                 className={`${classPrefix}-check-mark-wrapper-mark`}
-                src={CheckMarkSvg}
+                size={19}
               />
             </View>
           )}

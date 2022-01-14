@@ -1,15 +1,15 @@
-import { View, Text, Image } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 
 import { mergeProps, withNativeProps } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import RightArrowIcon from '../../assets/rightArrow.svg';
+import Icon from '../Icon';
+
+const { IconChevronRight } = Icon;
 
 const defaultProps = {
   text: '更多',
-  icon: (
-    <Image style={{ width: '26rpx', height: '26rpx' }} src={RightArrowIcon} />
-  ),
+  icon: <IconChevronRight size={19} />,
   onClick: null,
 };
 

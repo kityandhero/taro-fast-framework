@@ -190,6 +190,7 @@ export default class Index extends PageWrapper {
                     alignJustify="center"
                   >
                     <Empty
+                      image="https://img.yzcdn.cn/vant/custom-empty-image.png"
                       description="暂无数据"
                       onImageClick={() => {
                         console.log('onImageClick');

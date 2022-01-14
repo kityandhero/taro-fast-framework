@@ -1,11 +1,13 @@
 import classNames from 'classnames';
-import { View, Image } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';
-import RightArrowIcon from '../../assets/rightArrow.svg';
+import Icon from '../Icon';
+
+const { IconChevronRight } = Icon;
 
 const classPrefix = `tfc-list-item`;
 
@@ -85,10 +87,7 @@ class Item extends ComponentBase {
           {arrow ? (
             <View className={`${classPrefix}-content-arrow`}>
               <VerticalBox>
-                <Image
-                  style={{ width: '30rpx', height: '30rpx' }}
-                  src={RightArrowIcon}
-                />
+                <IconChevronRight size={24} />
               </VerticalBox>
             </View>
           ) : null}

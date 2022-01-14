@@ -1,7 +1,10 @@
 import { View, Image } from '@tarojs/components';
 
-import { List, AdvanceSwitch } from 'taro-fast-component/es/customComponents';
-import { Icon } from 'taro-fast-component-extra/es/customComponents';
+import {
+  List,
+  AdvanceSwitch,
+  Icon,
+} from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 

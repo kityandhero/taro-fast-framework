@@ -1,7 +1,10 @@
 import { View } from '@tarojs/components';
 
-import { BlockArea, Steps } from 'taro-fast-component/es/customComponents';
-import { Icon } from 'taro-fast-component-extra/es/customComponents';
+import {
+  BlockArea,
+  Steps,
+  Icon,
+} from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '@/customComponents/PageWrapper';
 
