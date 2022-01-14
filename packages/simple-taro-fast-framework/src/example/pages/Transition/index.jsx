@@ -138,14 +138,14 @@ export default class Index extends PageWrapper {
           <List.Item arrow onClick={this.onClickSlideRight}>
             Slide Right
           </List.Item>
-          <List.Item arrow onClick={this.onClickCustom}>
-            Custom
-          </List.Item>
           <List.Item arrow onClick={this.onClickZoom}>
             Zoom
           </List.Item>
           <List.Item arrow onClick={this.onClickPunch}>
             Punch
+          </List.Item>
+          <List.Item arrow onClick={this.onClickCustom}>
+            Custom
           </List.Item>
         </List>
 
