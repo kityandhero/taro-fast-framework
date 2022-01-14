@@ -35,6 +35,11 @@ export default class Index extends PageWrapper {
         <BlockArea title="组件示例">
           <Space wrap>
             {this.buildItem({
+              name: 'Ellipsis',
+              path: pathCollection.ellipsis.path,
+            })}
+
+            {this.buildItem({
               name: 'ImageBox',
               path: pathCollection.imageBox.path,
             })}
@@ -157,6 +162,11 @@ export default class Index extends PageWrapper {
             {this.buildItem({
               name: 'Circle',
               path: pathCollection.circle.path,
+            })}
+
+            {this.buildItem({
+              name: 'Swiper',
+              path: pathCollection.swiper.path,
             })}
           </Space>
         </BlockArea>

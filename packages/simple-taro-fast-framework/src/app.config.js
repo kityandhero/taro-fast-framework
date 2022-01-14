@@ -11,6 +11,7 @@ export default {
       root: 'example',
       name: '组件示例',
       pages: [
+        'pages/ellipsis/index',
         'pages/imageBox/index',
         'pages/avatar/index',
         'pages/badge/index',
@@ -36,6 +37,7 @@ export default {
         'pages/overlay/index',
         'pages/popup/index',
         'pages/circle/index',
+        'pages/swiper/index',
       ],
     },
   ],

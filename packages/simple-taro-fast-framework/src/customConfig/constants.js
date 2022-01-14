@@ -7,6 +7,9 @@ export const pathCollection = {
   main: {
     path: '/pages/home/main/index',
   },
+  ellipsis: {
+    path: '/example/pages/ellipsis/index',
+  },
   imageBox: {
     path: '/example/pages/imageBox/index',
   },
@@ -81,5 +84,8 @@ export const pathCollection = {
   },
   circle: {
     path: '/example/pages/circle/index',
+  },
+  swiper: {
+    path: '/example/pages/swiper/index',
   },
 };
