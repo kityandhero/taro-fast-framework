@@ -7,8 +7,8 @@ import {
   Button,
 } from 'taro-fast-component/es/customComponents';
 
-import { pathCollection } from '@/customConfig/constants';
-import PageWrapper from '@/customComponents/PageWrapper';
+import { pathCollection } from '../../../customConfig/constants';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   buildItem = ({ name, path }) => {
@@ -152,6 +152,11 @@ export default class Index extends PageWrapper {
             {this.buildItem({
               name: 'Popup',
               path: pathCollection.popup.path,
+            })}
+
+            {this.buildItem({
+              name: 'Circle',
+              path: pathCollection.circle.path,
             })}
           </Space>
         </BlockArea>

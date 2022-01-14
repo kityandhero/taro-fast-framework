@@ -35,6 +35,7 @@ export default {
         'pages/list/index',
         'pages/overlay/index',
         'pages/popup/index',
+        'pages/circle/index',
       ],
     },
   ],

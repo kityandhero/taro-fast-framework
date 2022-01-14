@@ -53,7 +53,7 @@ class Item extends ComponentBase {
       <View
         className={classNames(
           `${classPrefix}`,
-          clickable ? ['tfc-plain-anchor'] : [],
+          clickable ? [`${classPrefix}-clickable`] : [],
           disabled && `${classPrefix}-disabled`,
         )}
         style={style}

@@ -79,4 +79,7 @@ export const pathCollection = {
   popup: {
     path: '/example/pages/popup/index',
   },
+  circle: {
+    path: '/example/pages/circle/index',
+  },
 };

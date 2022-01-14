@@ -26,7 +26,7 @@ const defaultProps = {
   index: 0,
 };
 
-class AtTabsPane extends ComponentBase {
+class TabPanel extends ComponentBase {
   render() {
     const {
       customStyle,
@@ -59,8 +59,8 @@ class AtTabsPane extends ComponentBase {
   }
 }
 
-AtTabsPane.defaultProps = {
+TabPanel.defaultProps = {
   ...defaultProps,
 };
 
-export default AtTabsPane;
+export default TabPanel;
