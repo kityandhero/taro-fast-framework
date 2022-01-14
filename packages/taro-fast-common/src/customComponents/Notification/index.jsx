@@ -7,14 +7,14 @@ import ComponentBase from '../../customComponents/ComponentBase';
 const typeCollection = ['info', 'success', 'error', 'warning'];
 
 const defaultProps = {
-  customStyle: {},
+  style: {},
   className: '',
   message: '',
   type: '',
   duration: 3000,
 };
 
-const styleSource = {
+const styleInit = {
   animation: 'ease both',
   background: '#78a4fa',
   boxSizing: 'border-box',
@@ -68,11 +68,11 @@ class Notification extends ComponentBase {
 
     this.state = {
       show: false,
-      customStyleTemp: {},
-      classNameTemp: '',
-      messageText: '',
-      typeValue: 'info',
-      durationTime: 3000,
+      styleStage: {},
+      classNameStage: defaultProps.className,
+      messageStage: '',
+      typeStage: defaultProps.type,
+      durationTime: defaultProps.duration,
     };
 
     this.timer = null;
@@ -80,24 +80,18 @@ class Notification extends ComponentBase {
 
   bindMessageListener = () => {
     Taro.eventCenter.on('tfc-message', (options = {}) => {
-      const {
-        customStyle,
-        className,
-        message,
-        type: typeSource,
-        duration,
-      } = options;
+      const { style, className, message, type: typeSource, duration } = options;
 
       const type = inCollection(typeCollection, typeSource)
         ? typeSource
-        : 'info';
+        : defaultProps.type;
 
       const newState = {
         show: true,
-        customStyleTemp: customStyle,
-        classNameTemp: className,
-        messageText: message,
-        typeValue: type,
+        styleStage: style,
+        classNameStage: className,
+        messageStage: message,
+        typeStage: type,
         durationTime: duration || this.state.durationTime,
       };
 
@@ -135,12 +129,12 @@ class Notification extends ComponentBase {
   }
 
   render() {
-    const { customStyleTemp, classNameTemp, messageText, show, typeValue } =
+    const { styleStage, classNameStage, messageStage, show, typeStage } =
       this.state;
 
     let styleBackground = styleInfo;
 
-    switch (typeValue) {
+    switch (typeStage) {
       case 'success':
         styleBackground = styleSuccess;
         break;
@@ -159,15 +153,15 @@ class Notification extends ComponentBase {
     }
 
     const style = {
-      ...styleSource,
+      ...styleInit,
       ...(show ? styleShow : styleHidden),
       ...styleBackground,
-      ...customStyleTemp,
+      ...styleStage,
     };
 
     return (
-      <View className={classNameTemp} style={style}>
-        {messageText}
+      <View className={classNameStage} style={style}>
+        {messageStage}
       </View>
     );
   }
