@@ -8,7 +8,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { pathCollection } from '@/customConfig/constants';
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {

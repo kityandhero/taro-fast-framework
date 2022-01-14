@@ -12,7 +12,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildAdvanceButton } from 'taro-fast-component/es/functionComponent';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 import {
   getOverviewAction,

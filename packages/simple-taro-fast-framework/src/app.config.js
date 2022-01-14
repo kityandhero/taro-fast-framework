@@ -38,6 +38,7 @@ export default {
         'pages/popup/index',
         'pages/circle/index',
         'pages/swiper/index',
+        'pages/radio/index',
       ],
     },
   ],

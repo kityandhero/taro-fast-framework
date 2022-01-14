@@ -18,6 +18,7 @@ const defaultProps = {
   prefix: null,
   extra: null,
   clickable: false,
+  border: true,
   arrow: false,
   disabled: false,
   onClick: null,
@@ -44,24 +45,26 @@ class Item extends ComponentBase {
       description,
       clickable,
       disabled,
-      arrow: arrowSource,
+      arrow,
       extra,
       children,
+      border,
     } = this.props;
-
-    const arrow = !arrowSource ? clickable : !!arrowSource;
 
     return (
       <View
         className={classNames(
           `${classPrefix}`,
-          clickable ? [`${classPrefix}-clickable`] : [],
+          !disabled && clickable ? [`${classPrefix}-clickable`] : [],
           disabled && `${classPrefix}-disabled`,
         )}
         style={style}
         onClick={this.triggerClick}
       >
-        <View className={`${classPrefix}-content`}>
+        <View
+          className={`${classPrefix}-content`}
+          style={!border ? { borderBottom: '0' } : {}}
+        >
           {prefix && (
             <View className={`${classPrefix}-content-prefix`}>
               <VerticalBox>{prefix}</VerticalBox>

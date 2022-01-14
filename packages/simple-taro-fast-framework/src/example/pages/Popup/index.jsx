@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { List, Popup } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
 

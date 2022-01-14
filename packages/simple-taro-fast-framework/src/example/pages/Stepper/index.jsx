@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
 import { BlockArea, Stepper } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   constructor(props) {

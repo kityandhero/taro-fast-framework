@@ -7,7 +7,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSearch } = Icon;
 

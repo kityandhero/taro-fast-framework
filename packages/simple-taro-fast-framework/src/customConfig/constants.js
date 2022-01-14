@@ -88,4 +88,7 @@ export const pathCollection = {
   swiper: {
     path: '/example/pages/swiper/index',
   },
+  radio: {
+    path: '/example/pages/radio/index',
+  },
 };

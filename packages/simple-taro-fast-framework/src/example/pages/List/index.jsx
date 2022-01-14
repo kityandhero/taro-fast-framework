@@ -6,7 +6,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -62,14 +62,20 @@ export default class Index extends PageWrapper {
           <List.Item arrow>设置</List.Item>
         </List>
 
+        <List header="扩展" style={style} extra="扩展">
+          <List.Item arrow>条目1</List.Item>
+          <List.Item arrow>条目2</List.Item>
+          <List.Item arrow>条目3</List.Item>
+        </List>
+
         <List header="可点击" style={style}>
-          <List.Item clickable onClick={this.handleClick}>
+          <List.Item clickable arrow onClick={this.handleClick}>
             账单
           </List.Item>
-          <List.Item clickable onClick={this.handleClick}>
+          <List.Item clickable arrow onClick={this.handleClick}>
             总资产
           </List.Item>
-          <List.Item clickable onClick={this.handleClick}>
+          <List.Item clickable arrow onClick={this.handleClick}>
             设置
           </List.Item>
         </List>
@@ -78,17 +84,17 @@ export default class Index extends PageWrapper {
           <List.Item extra={<AdvanceSwitch defaultChecked />}>
             新消息通知
           </List.Item>
-          <List.Item extra="未开启" clickable>
+          <List.Item extra="未开启" clickable arrow>
             大字号模式
           </List.Item>
-          <List.Item description="管理已授权的产品和设备" clickable>
+          <List.Item description="管理已授权的产品和设备" clickable arrow>
             授权管理
           </List.Item>
           <List.Item title="这里是标题">这里是主信息</List.Item>
         </List>
 
         <List header="列表项禁用" style={style}>
-          <List.Item disabled clickable prefix={<IconSketch />}>
+          <List.Item disabled clickable arrow prefix={<IconSketch />}>
             账单
           </List.Item>
           <List.Item disabled prefix={<IconShoppingCart />}>

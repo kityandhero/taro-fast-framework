@@ -9,7 +9,7 @@ import {
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {

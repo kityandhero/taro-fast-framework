@@ -168,6 +168,11 @@ export default class Index extends PageWrapper {
               name: 'Swiper',
               path: pathCollection.swiper.path,
             })}
+
+            {this.buildItem({
+              name: 'Radio',
+              path: pathCollection.radio.path,
+            })}
           </Space>
         </BlockArea>
       </View>

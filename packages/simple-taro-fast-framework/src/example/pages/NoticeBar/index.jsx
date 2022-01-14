@@ -7,7 +7,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconVolumePlus } = Icon;
 const { More } = NoticeBar;

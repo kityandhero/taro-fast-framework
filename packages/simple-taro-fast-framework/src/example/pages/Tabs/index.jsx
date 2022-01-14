@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { BlockArea, Tabs } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { TabPanel } = Tabs;
 

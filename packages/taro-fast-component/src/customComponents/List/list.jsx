@@ -4,6 +4,9 @@ import { View } from '@tarojs/components';
 import { inCollection } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import FlexBox from '../FlexBox';
+import VerticalBox from '../VerticalBox';
+
 const classPrefix = `tfc-list`;
 
 const modeCollection = ['default', 'card'];
@@ -14,6 +17,7 @@ const defaultProps = {
   header: null,
   headerStyle: {},
   bodyStyle: {},
+  extra: null,
 };
 
 class List extends ComponentBase {
@@ -23,6 +27,7 @@ class List extends ComponentBase {
       header,
       headerStyle,
       bodyStyle,
+      extra,
       mode: modeSource,
       children,
     } = this.props;
@@ -37,9 +42,14 @@ class List extends ComponentBase {
         style={style}
       >
         {header ? (
-          <View className={`${classPrefix}-header`} style={headerStyle}>
-            {header}
-          </View>
+          <FlexBox
+            left={
+              <View className={`${classPrefix}-header`} style={headerStyle}>
+                {header}
+              </View>
+            }
+            right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
+          />
         ) : null}
 
         <View className={`${classPrefix}-body`} style={bodyStyle}>

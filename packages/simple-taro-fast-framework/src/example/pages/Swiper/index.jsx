@@ -7,7 +7,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {

@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import { BlockArea } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import PageWrapper from '@/customComponents/PageWrapper';
+import PageWrapper from '../../../customComponents/PageWrapper';
 
 const ItemList = [
   {
