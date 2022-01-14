@@ -23,7 +23,7 @@ const styleInit = {
   left: '0',
   lineHeight: '1.5',
   opacity: '0',
-  padding: '24rpx 20rpx',
+  padding: '12rpx 20rpx',
   position: 'fixed',
   right: '0',
   textAlign: 'center',
