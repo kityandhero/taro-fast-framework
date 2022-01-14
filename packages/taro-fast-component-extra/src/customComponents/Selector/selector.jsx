@@ -115,7 +115,8 @@ class Selector extends ComponentBase {
             <View className={`${classPrefix}-check-mark-wrapper`}>
               <IconCheck
                 className={`${classPrefix}-check-mark-wrapper-mark`}
-                size={19}
+                size={12}
+                color="#fff"
               />
             </View>
           )}

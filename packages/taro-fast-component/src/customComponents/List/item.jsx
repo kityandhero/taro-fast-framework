@@ -87,7 +87,7 @@ class Item extends ComponentBase {
           {arrow ? (
             <View className={`${classPrefix}-content-arrow`}>
               <VerticalBox>
-                <IconChevronRight size={24} />
+                <IconChevronRight size={20} />
               </VerticalBox>
             </View>
           ) : null}
