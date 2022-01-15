@@ -8,7 +8,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import './index.less';
 
 const defaultProps = {
-  customStyle: '',
+  style: '',
   className: '',
   isCard: false,
   isShowDay: false,
@@ -109,7 +109,7 @@ class Countdown extends ComponentBase {
   };
 
   render() {
-    const { className, customStyle, format, isShowDay, isCard, isShowHour } =
+    const { className, style, format, isShowDay, isCard, isShowHour } =
       this.props;
 
     const { day, hour, minute, second } = this.state;
@@ -123,7 +123,7 @@ class Countdown extends ComponentBase {
           },
           className,
         )}
-        style={customStyle}
+        style={style}
       >
         {isShowDay ? (
           <View className="tfc-countdown__item tfc-countdown__value">
