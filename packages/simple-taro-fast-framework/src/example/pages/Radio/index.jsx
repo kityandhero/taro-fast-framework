@@ -130,10 +130,9 @@ export default class Index extends PageWrapper {
         <Radio
           header="自定义选中图标"
           style={style}
-          border={border}
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
-          icon={<IconCheckCircle size={20} color="#1677ff" />}
+          iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
           // onClick={this.handleRadioChange}
         />
 

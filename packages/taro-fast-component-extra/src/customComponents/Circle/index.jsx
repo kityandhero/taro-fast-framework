@@ -11,7 +11,7 @@ import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import {
-  CenterBox,
+  HorizontalCenterBox,
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
 
@@ -280,7 +280,7 @@ class Circle extends ComponentBase {
     const backRingColor = this.getBackRingColor();
 
     return (
-      <CenterBox>
+      <HorizontalCenterBox>
         <VerticalBox>
           <View
             className={classPrefix}
@@ -316,9 +316,9 @@ class Circle extends ComponentBase {
                   },
                 }}
               >
-                <CenterBox>
+                <HorizontalCenterBox>
                   <VerticalBox>{children}</VerticalBox>
-                </CenterBox>
+                </HorizontalCenterBox>
               </View>
               <View
                 className={`${classPrefix}_body_back_ring`}
@@ -355,7 +355,7 @@ class Circle extends ComponentBase {
             </View>
           </View>
         </VerticalBox>
-      </CenterBox>
+      </HorizontalCenterBox>
     );
   }
 }

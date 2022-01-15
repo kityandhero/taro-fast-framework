@@ -10,7 +10,7 @@ import {
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 
 import Button from '../Button';
-import CenterBox from '../CenterBox';
+import HorizontalCenterBox from '../HorizontalCenterBox';
 import VerticalBox from '../VerticalBox';
 
 const classPrefix = `tfc-stepper`;
@@ -105,11 +105,11 @@ export const Stepper = (p) => {
         fill="none"
         color="primary"
       >
-        <CenterBox>
+        <HorizontalCenterBox>
           <VerticalBox>
             <Text style={{ fontSize: '32rpx' }}>━</Text>
           </VerticalBox>
-        </CenterBox>
+        </HorizontalCenterBox>
       </Button>
 
       <View className={`${classPrefix}-middle`}>
@@ -140,11 +140,11 @@ export const Stepper = (p) => {
         fill="none"
         color="primary"
       >
-        <CenterBox>
+        <HorizontalCenterBox>
           <VerticalBox>
             <Text style={{ fontSize: '32rpx' }}>✚</Text>
           </VerticalBox>
-        </CenterBox>
+        </HorizontalCenterBox>
       </Button>
     </View>,
   );

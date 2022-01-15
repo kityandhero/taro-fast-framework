@@ -1,27 +1,22 @@
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import Row from '../Flex/Row';
-import Col from '../Flex/Col';
+import HorizontalCenterBox from '../HorizontalCenterBox';
+import VerticalBox from '../VerticalBox';
 
-const defaultProps = {
-  fillHeight: true,
-};
+const defaultProps = {};
 
 class CenterBox extends ComponentBase {
   render() {
-    const { fillHeight } = {
-      ...defaultProps,
-      ...this.props,
-    };
+    const { children } = this.props;
 
-    const style = !!fillHeight ? { height: '100%' } : {};
+    console.log(this.props);
 
     return (
-      <Row justify="center" style={style}>
-        <Col auto style={style} />
-        <Col style={style}>{this.props.children}</Col>
-        <Col auto style={style} />
-      </Row>
+      <HorizontalCenterBox fillHeight>
+        <VerticalBox align="center" alignJustify="flex-start">
+          {children}
+        </VerticalBox>
+      </HorizontalCenterBox>
     );
   }
 }

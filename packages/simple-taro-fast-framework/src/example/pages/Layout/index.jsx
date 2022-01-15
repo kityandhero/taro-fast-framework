@@ -4,7 +4,7 @@ import {
   BlockArea,
   Row,
   Col,
-  CenterBox,
+  HorizontalCenterBox,
   FlexBox,
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
@@ -87,8 +87,8 @@ export default class Index extends PageWrapper {
           />
         </BlockArea>
 
-        <BlockArea title="CenterBox">
-          <CenterBox>1</CenterBox>
+        <BlockArea title="HorizontalCenterBox">
+          <HorizontalCenterBox>1</HorizontalCenterBox>
         </BlockArea>
 
         <BlockArea title="VerticalBox">

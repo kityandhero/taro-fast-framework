@@ -9,7 +9,7 @@ import { formatCollection } from 'taro-fast-common/es/utils/constants';
 import {
   BlockArea,
   Button,
-  CenterBox,
+  HorizontalCenterBox,
   Space,
   Divider,
   FlexBox,
@@ -94,16 +94,16 @@ export default class Index extends PageWrapper {
                     height: '80rpx',
                   }}
                   top={
-                    <CenterBox>
+                    <HorizontalCenterBox>
                       <Text>
                         {formatTarget({
                           target: percent,
                           format: formatCollection.percentage,
                         })}
                       </Text>
-                    </CenterBox>
+                    </HorizontalCenterBox>
                   }
-                  bottom={<CenterBox>当前进度</CenterBox>}
+                  bottom={<HorizontalCenterBox>当前进度</HorizontalCenterBox>}
                 ></FlexBox>
               </View>
             </Circle>
@@ -174,7 +174,7 @@ export default class Index extends PageWrapper {
 
             <Divider />
 
-            <CenterBox>
+            <HorizontalCenterBox>
               <Space>
                 <Button
                   type="primary"
@@ -196,7 +196,7 @@ export default class Index extends PageWrapper {
                   减小
                 </Button>
               </Space>
-            </CenterBox>
+            </HorizontalCenterBox>
           </Space>
         </BlockArea>
       </View>

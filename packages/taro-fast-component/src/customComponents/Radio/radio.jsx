@@ -10,6 +10,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import List from '../List';
 import Icon from '../Icon';
+import CenterBox from '../CenterBox';
 
 const { IconCheck } = Icon;
 
@@ -17,14 +18,14 @@ const layoutCollection = ['list', 'radio'];
 
 const iconContainerStyle = {
   border: '2rpx solid #ccc',
-  width: '36rpx',
-  height: '36rpx',
+  width: '32rpx',
+  height: '32rpx',
   padding: '4rpx',
-  lineHeight: '36rpx',
+  lineHeight: '32rpx',
   borderRadius: '50%',
 };
 
-const uncheckIcon = (
+const uncheckIconRadio = (
   <View
     style={{
       ...iconContainerStyle,
@@ -35,7 +36,7 @@ const uncheckIcon = (
   ></View>
 );
 
-const checkIcon = (
+const checkIconRadio = (
   <View
     style={{
       ...iconContainerStyle,
@@ -45,8 +46,16 @@ const checkIcon = (
       },
     }}
   >
-    <IconCheck size={18} color="#fff" />,
+    <CenterBox>
+      <IconCheck size={14} color="#fff" />
+    </CenterBox>
   </View>
+);
+
+const checkIconList = (
+  <CenterBox>
+    <IconCheck size={19} color="#1677ff" />
+  </CenterBox>
 );
 
 const defaultProps = {
@@ -59,8 +68,8 @@ const defaultProps = {
   value: '',
   options: [],
   border: true,
-  iconUncheck: checkIcon,
-  iconCheck: uncheckIcon,
+  iconUncheck: null,
+  iconCheck: null,
   onClick: null,
 };
 
@@ -168,8 +177,8 @@ class Radio extends ComponentBase {
                 extra={
                   !stringIsNullOrWhiteSpace(valueStage) &&
                   valueStage === valueItem
-                    ? iconCheck
-                    : iconUncheck
+                    ? iconCheck || checkIconList
+                    : iconUncheck || null
                 }
                 onClick={() => {
                   this.handleClick(o);
@@ -194,8 +203,8 @@ class Radio extends ComponentBase {
               extra={
                 !stringIsNullOrWhiteSpace(valueStage) &&
                 valueStage === valueItem
-                  ? iconCheck
-                  : iconUncheck
+                  ? iconCheck || checkIconRadio
+                  : iconUncheck || uncheckIconRadio
               }
               onClick={() => {
                 this.handleClick(o);
