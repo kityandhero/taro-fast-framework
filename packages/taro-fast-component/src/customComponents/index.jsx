@@ -16,6 +16,8 @@ export { default as AdvanceSwitch } from './AdvanceSwitch';
 export { default as AdvanceProgress } from './AdvanceProgress';
 export { default as AdvanceProgressBox } from './AdvanceProgressBox';
 export { default as Countdown } from './Countdown';
+export { default as DataGrid } from './DataGrid';
+export { default as HelpBox } from './HelpBox';
 export { default as Icon } from './Icon';
 export { default as List } from './List';
 export { default as Divider } from './Divider';

@@ -41,6 +41,7 @@ export default {
         'pages/swiper/index',
         'pages/radio/index',
         'pages/countdown/index',
+        'pages/helpBox/index',
       ],
     },
   ],

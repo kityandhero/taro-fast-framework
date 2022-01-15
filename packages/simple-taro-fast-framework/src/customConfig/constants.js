@@ -97,4 +97,7 @@ export const pathCollection = {
   radio: {
     path: '/example/pages/radio/index',
   },
+  helpBox: {
+    path: '/example/pages/helpBox/index',
+  },
 };

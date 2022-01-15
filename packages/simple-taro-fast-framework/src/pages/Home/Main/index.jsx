@@ -183,6 +183,11 @@ export default class Index extends PageWrapper {
               name: 'Radio',
               path: pathCollection.radio.path,
             })}
+
+            {this.buildItem({
+              name: 'HelpBox',
+              path: pathCollection.helpBox.path,
+            })}
           </Space>
         </BlockArea>
       </View>
