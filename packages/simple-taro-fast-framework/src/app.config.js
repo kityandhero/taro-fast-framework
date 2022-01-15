@@ -40,6 +40,7 @@ export default {
         'pages/circle/index',
         'pages/swiper/index',
         'pages/radio/index',
+        'pages/countdown/index',
       ],
     },
   ],

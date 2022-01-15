@@ -704,6 +704,28 @@ export function calculateTimeInterval(startTime, endTime) {
   };
 }
 
+export function addHour(datetime, value) {
+  const t = toDatetime(datetime);
+
+  return t.setHours(t.getHours() + value);
+}
+
+export function addMinute(datetime, value) {
+  const t = toDatetime(datetime);
+
+  return t.setMinutes(t.getMinutes() + value);
+}
+
+export function addSecond(datetime, value) {
+  const t = toDatetime(datetime);
+
+  return t.setSeconds(t.getSeconds() + value);
+}
+
+export function getNow() {
+  return new Date();
+}
+
 /**
  * 通过 path 获取对应得值
  */

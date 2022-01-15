@@ -45,6 +45,11 @@ export default class Index extends PageWrapper {
             })}
 
             {this.buildItem({
+              name: 'Countdown',
+              path: pathCollection.countdown.path,
+            })}
+
+            {this.buildItem({
               name: 'ImageBox',
               path: pathCollection.imageBox.path,
             })}

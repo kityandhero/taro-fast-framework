@@ -13,6 +13,9 @@ export const pathCollection = {
   colorText: {
     path: '/example/pages/colorText/index',
   },
+  countdown: {
+    path: '/example/pages/countdown/index',
+  },
   imageBox: {
     path: '/example/pages/imageBox/index',
   },

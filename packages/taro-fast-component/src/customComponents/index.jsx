@@ -15,6 +15,7 @@ export { default as AdvanceInput } from './AdvanceInput';
 export { default as AdvanceSwitch } from './AdvanceSwitch';
 export { default as AdvanceProgress } from './AdvanceProgress';
 export { default as AdvanceProgressBox } from './AdvanceProgressBox';
+export { default as Countdown } from './Countdown';
 export { default as Icon } from './Icon';
 export { default as List } from './List';
 export { default as Divider } from './Divider';
