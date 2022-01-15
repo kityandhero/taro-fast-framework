@@ -30,11 +30,11 @@ export default class Index extends PageWrapper {
         <BlockArea title="一般用法">
           <Space direction="vertical" block>
             <View>
-              <Countdown endTime={addHour(getNow(), 1)} />
+              <Countdown endTime={addMinute(getNow(), 15)} />
             </View>
 
             <View>
-              <Countdown endTime={addHour(getNow(), 25)} />
+              <Countdown endTime={addHour(getNow(), 40)} />
             </View>
 
             <View>
@@ -64,7 +64,7 @@ export default class Index extends PageWrapper {
               <Countdown
                 isCard
                 isShowDay
-                endTime={addMinute(getNow(), 2)}
+                endTime={addHour(getNow(), 28)}
                 format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
               />
             </View>

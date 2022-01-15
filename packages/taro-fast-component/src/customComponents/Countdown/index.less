@@ -1,60 +1,44 @@
 @hd: 1;
-@font-size-base: 26rpx;
-@font-size-lg: 28rpx;
-@font-size: @font-size-lg;
-@spacing-v-xs: 4rpx * @hd;
 @color-border-grey: #ccc;
 @color-grey-3: #ccc;
 @border-radius-md: 8rpx * @hd;
 @zindex-divider: 100;
 
 .tfc-countdown {
-  display: inline-block;
-  height: 28rpx;
+  height: 42rpx;
+  white-space: nowrap;
+  font-size: 0;
+  overflow: hidden;
 
   &__item {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  &__time-box {
+    height: 42rpx;
     display: inline-block;
-    text-align: center;
-    width: 28rpx;
-
-    text-transform: none;
-    text-rendering: auto;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    vertical-align: middle;
-  }
-
-  &__time {
+    vertical-align: top;
     font-size: 26rpx;
+    line-height: 42rpx;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 10rpx;
   }
 
   &__separator {
-    font-size: 26rpx;
-    display: inline-flex;
-    align-items: center;
-    text-align: justify;
-    padding: 0 4rpx 0 8rpx;
+    padding: 0 4rpx 0 4rpx;
   }
 
   &--card {
-    .tfc-countdown__time-box {
-      padding: @spacing-v-xs @spacing-v-xs;
-      border: 1px solid @color-border-grey;
+    .tfc-countdown__separator {
+      padding: 0 8rpx 0 8rpx;
+    }
+
+    .tfc-countdown__value {
+      height: 38rpx;
+      line-height: 38rpx;
+      border: 2rpx solid @color-border-grey;
       border-radius: @border-radius-md;
       color: #ff4949;
-      display: inline-block;
       background-color: #fff;
       position: relative;
-
-      .tfc-countdown__time {
-        position: relative;
-        z-index: @zindex-divider + 1;
-      }
+      padding: 0 2rpx 0 2rpx;
 
       &::after {
         position: absolute;

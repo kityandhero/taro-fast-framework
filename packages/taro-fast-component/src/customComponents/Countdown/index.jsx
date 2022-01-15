@@ -5,8 +5,6 @@ import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toDatetime } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import Item from './item';
-
 import './index.less';
 
 const defaultProps = {
@@ -24,6 +22,10 @@ const defaultProps = {
   endTime: null,
   afterEnd: null,
 };
+
+function formatNum(num) {
+  return num <= 9 ? `0${num}` : `${num}`;
+}
 
 class Countdown extends ComponentBase {
   timer = null;
@@ -123,11 +125,41 @@ class Countdown extends ComponentBase {
         )}
         style={customStyle}
       >
-        {isShowDay && <Item num={day} separator={format.day} />}
-        {isShowHour && <Item num={hour} separator={format.hours} />}
+        {isShowDay ? (
+          <View className="tfc-countdown__item tfc-countdown__value">
+            {formatNum(day)}
+          </View>
+        ) : null}
+        {isShowDay ? (
+          <View className="tfc-countdown__item tfc-countdown__separator">
+            {format.day}
+          </View>
+        ) : null}
 
-        <Item num={minute} separator={format.minutes} />
-        <Item num={second} separator={format.seconds} />
+        {isShowHour ? (
+          <View className="tfc-countdown__item tfc-countdown__value">
+            {formatNum(hour)}
+          </View>
+        ) : null}
+        {isShowHour ? (
+          <View className="tfc-countdown__item tfc-countdown__separator">
+            {format.hours}
+          </View>
+        ) : null}
+
+        <View className="tfc-countdown__item tfc-countdown__value">
+          {formatNum(minute)}
+        </View>
+        <View className="tfc-countdown__item tfc-countdown__separator">
+          {format.minutes}
+        </View>
+
+        <View className="tfc-countdown__item tfc-countdown__value">
+          {formatNum(second)}
+        </View>
+        <View className="tfc-countdown__item tfc-countdown__separator">
+          {format.seconds}
+        </View>
       </View>
     );
   }
