@@ -4,7 +4,11 @@ import {
   inCollection,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  isArray,
+  isFunction,
+  isString,
+} from 'taro-fast-common/es/utils/typeCheck';
 import { toLower } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -158,6 +162,7 @@ class Radio extends ComponentBase {
             style: styleItem,
             disabled,
             value: valueItem,
+            extra: extraItem,
           } = o;
 
           const key = `item_${index}`;
@@ -192,7 +197,13 @@ class Radio extends ComponentBase {
           return (
             <List.Item
               key={key}
-              prefix={prefix}
+              // prefix={prefix}
+              prefix={
+                !stringIsNullOrWhiteSpace(valueStage) &&
+                valueStage === valueItem
+                  ? iconCheck || checkIconRadio
+                  : iconUncheck || uncheckIconRadio
+              }
               title={title}
               style={styleItem}
               description={description}
@@ -201,10 +212,22 @@ class Radio extends ComponentBase {
               disabled={disabled}
               border={border}
               extra={
-                !stringIsNullOrWhiteSpace(valueStage) &&
-                valueStage === valueItem
-                  ? iconCheck || checkIconRadio
-                  : iconUncheck || uncheckIconRadio
+                extraItem ? (
+                  <CenterBox>
+                    {isString(extraItem) ? (
+                      <View
+                        style={{
+                          fontSize: '30rpx',
+                          color: 'var(--tfc-color-weak)',
+                        }}
+                      >
+                        {extraItem}
+                      </View>
+                    ) : (
+                      extraItem
+                    )}
+                  </CenterBox>
+                ) : null
               }
               onClick={() => {
                 this.handleClick(o);

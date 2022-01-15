@@ -5,5 +5,6 @@ export const radioOptionProperties = {
   description: '',
   disabled: false,
   style: {},
+  extra: null,
   prefix: null,
 };

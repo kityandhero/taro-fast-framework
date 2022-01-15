@@ -8,6 +8,12 @@ const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
 const style = { backgroundColor: '#f5f7fa' };
 
+const extraStyle = {
+  padding: '0 12rpx',
+  fontSize: '24rpx',
+  color: '#aaa',
+};
+
 export default class Index extends PageWrapper {
   constructor(props) {
     super(props);
@@ -23,14 +29,17 @@ export default class Index extends PageWrapper {
           {
             label: '单选项一',
             value: 'option1',
+            extra: '扩展说明',
           },
           {
             label: '单选项二',
             value: 'option2',
+            extra: '扩展说明',
           },
           {
             label: '单选项三',
             value: 'option3',
+            extra: '扩展说明',
           },
         ],
         radioOptions2: [
@@ -38,16 +47,19 @@ export default class Index extends PageWrapper {
             label: '单选项一',
             value: 'option1',
             description: '单选项描述一',
+            extra: '扩展说明',
           },
           {
             label: '单选项二',
             value: 'option2',
             description: '单选项描述二',
+            extra: '扩展说明',
           },
           {
             label: '单选项三',
             value: 'option3',
             description: '单选项描述三',
+            extra: '扩展说明',
           },
         ],
         radioOptions3: [
@@ -57,6 +69,7 @@ export default class Index extends PageWrapper {
             title: '选项的标题',
             description: '单选项的简介描述',
             prefix: <IconShoppingCart />,
+            extra: '扩展说明',
           },
           {
             label: '单选项二',
@@ -64,6 +77,7 @@ export default class Index extends PageWrapper {
             title: '选项的标题',
             description: '单选项的简介描述',
             prefix: <IconSketch />,
+            extra: '扩展说明',
           },
           {
             label: '单选项三禁用',
@@ -72,6 +86,7 @@ export default class Index extends PageWrapper {
             description: '单选项的简介描述',
             disabled: true,
             prefix: <IconSketch />,
+            extra: '扩展说明',
           },
         ],
       },
@@ -110,7 +125,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
         <Radio
-          header="基础用法"
+          header="基础用法 [Layout: Radio]"
           style={style}
           border={border}
           options={this.state.radioOptions1}
@@ -128,27 +143,72 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="自定义选中图标"
+          header="自定义选中图标 []"
           style={style}
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
           iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
+          extra={<View style={extraStyle}>layout: list</View>}
           // onClick={this.handleRadioChange}
         />
 
         <Radio
-          header="含有单项描述"
+          header="含有单项描述 [Layout: Radio]"
           style={style}
           options={this.state.radioOptions2}
           value={this.state.radioValue2}
+          extra={<View style={extraStyle}>layout: list</View>}
           // onClick={this.handleRadioChangeSecond}
         />
 
         <Radio
-          header="单项禁用"
+          header="单项禁用 [Layout: Radio]"
           style={style}
           options={this.state.radioOptions3}
           value={this.state.radioValue3}
+          extra={<View style={extraStyle}>layout: list</View>}
+          // onClick={this.handleRadioChangeThird}
+        />
+
+        <Radio
+          header="基础用法"
+          layout="radio"
+          style={style}
+          border={border}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          extra={<View style={extraStyle}>layout: radio</View>}
+          // onClick={this.handleRadioChange}
+        />
+
+        <Radio
+          header="自定义选中图标 []"
+          layout="radio"
+          style={style}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
+          extra={<View style={extraStyle}>layout: radio</View>}
+          // onClick={this.handleRadioChange}
+        />
+
+        <Radio
+          header="含有单项描述 [Layout: Radio]"
+          layout="radio"
+          style={style}
+          options={this.state.radioOptions2}
+          value={this.state.radioValue2}
+          extra={<View style={extraStyle}>layout: radio</View>}
+          // onClick={this.handleRadioChangeSecond}
+        />
+
+        <Radio
+          header="单项禁用 [Layout: Radio]"
+          layout="radio"
+          style={style}
+          options={this.state.radioOptions3}
+          value={this.state.radioValue3}
+          extra={<View style={extraStyle}>layout: radio</View>}
           // onClick={this.handleRadioChangeThird}
         />
       </View>
