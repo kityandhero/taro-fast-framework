@@ -86,7 +86,7 @@ class DataGrid extends ComponentBase {
       }
 
       let margin = '32rpx 48rpx';
-      let paddingBottomNoBorder = '32rpx';
+      let paddingBottomNoBorder = '12rpx';
       let backgroundColor = '';
 
       if (sizeSource === 'middle') {
@@ -152,7 +152,7 @@ class DataGrid extends ComponentBase {
         <View>
           {titleComponent}
 
-          <Row style={containorStyle}>
+          <Row style={containorStyle} wrap>
             {dataList.map((item) => {
               const { hidden: hiddenItem } = {
                 ...{ hidden: false },
@@ -189,7 +189,7 @@ class DataGrid extends ComponentBase {
                   value: '',
                   emptyValue: null,
                   emptyStyle: null,
-                  size: 6,
+                  size: 1,
                   canCopy: false,
                   copyData: null,
                   props: null,
@@ -208,7 +208,11 @@ class DataGrid extends ComponentBase {
                   key={itemKey}
                   style={itemStyle}
                   label={itemLabel}
-                  size={columnSize * (toNumber(itemSize) || 1)}
+                  size={
+                    columnSize * (toNumber(itemSize) || 1) > 12
+                      ? 12
+                      : columnSize * (toNumber(itemSize) || 1)
+                  }
                   {...(itemProps || {})}
                 >
                   <FlexBox
