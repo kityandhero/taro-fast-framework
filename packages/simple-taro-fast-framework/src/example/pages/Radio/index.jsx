@@ -125,7 +125,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
         <Radio
-          header="基础用法 [Layout: Radio]"
+          header="基础用法"
           style={style}
           border={border}
           options={this.state.radioOptions1}
@@ -143,7 +143,7 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="自定义选中图标 []"
+          header="自定义选中图标"
           style={style}
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
@@ -153,7 +153,7 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="含有单项描述 [Layout: Radio]"
+          header="含有单项描述"
           style={style}
           options={this.state.radioOptions2}
           value={this.state.radioValue2}
@@ -162,7 +162,7 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="单项禁用 [Layout: Radio]"
+          header="单项禁用"
           style={style}
           options={this.state.radioOptions3}
           value={this.state.radioValue3}
@@ -182,7 +182,7 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="自定义选中图标 []"
+          header="自定义选中图标"
           layout="radio"
           style={style}
           options={this.state.radioOptions1}
@@ -193,7 +193,7 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="含有单项描述 [Layout: Radio]"
+          header="含有单项描述"
           layout="radio"
           style={style}
           options={this.state.radioOptions2}
@@ -203,7 +203,7 @@ export default class Index extends PageWrapper {
         />
 
         <Radio
-          header="单项禁用 [Layout: Radio]"
+          header="单项禁用"
           layout="radio"
           style={style}
           options={this.state.radioOptions3}
