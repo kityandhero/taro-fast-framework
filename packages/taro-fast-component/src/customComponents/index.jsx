@@ -1,4 +1,5 @@
 export { default as Ellipsis } from './Ellipsis';
+export { default as ColorText } from './ColorText';
 export { default as Row } from './Flex/Row';
 export { default as Col } from './Flex/Col';
 export { default as FlexBox } from './FlexBox';

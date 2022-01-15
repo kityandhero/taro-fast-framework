@@ -1,7 +1,7 @@
 import { Swiper, SwiperItem } from '@tarojs/components';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import { AdvanceButton } from '../customComponents';
+import { ColorText, AdvanceButton } from '../customComponents';
 
 export function buildAdvanceButton({
   style,
@@ -163,6 +163,44 @@ export function buildSwiper({
       })}
     </Swiper>
   );
+}
+
+/**
+ * 构建彩色文本
+ */
+export function buildColorText({
+  canCopy = false,
+  randomSeed = 0,
+  seedOffset = 0,
+  randomColor = false,
+  color = '',
+  textPrefix = null,
+  textPrefixStyle = null,
+  text = '',
+  separator = '：',
+  separatorStyle = null,
+  wrapperBuilder = null,
+}) {
+  const colorText = (
+    <ColorText
+      canCopy={canCopy || false}
+      randomSeed={randomSeed || 0}
+      seedOffset={seedOffset || 0}
+      randomColor={randomColor || false}
+      color={color || ''}
+      textPrefix={textPrefix || null}
+      textPrefixStyle={textPrefixStyle || null}
+      text={text || ''}
+      separator={separator || '：'}
+      separatorStyle={separatorStyle || null}
+    />
+  );
+
+  if (!isFunction(wrapperBuilder)) {
+    return colorText;
+  }
+
+  return wrapperBuilder(colorText);
 }
 
 /**

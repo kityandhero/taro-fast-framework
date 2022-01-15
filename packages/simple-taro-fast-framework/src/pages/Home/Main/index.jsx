@@ -40,6 +40,11 @@ export default class Index extends PageWrapper {
             })}
 
             {this.buildItem({
+              name: 'ColorText',
+              path: pathCollection.colorText.path,
+            })}
+
+            {this.buildItem({
               name: 'ImageBox',
               path: pathCollection.imageBox.path,
             })}

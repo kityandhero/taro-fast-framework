@@ -39,7 +39,6 @@ import {
   isArray,
   isEqualBySerialize,
   isFunction,
-  isMoney,
   isNull,
   isObject,
   isString,
@@ -115,7 +114,9 @@ export function copyToClipboard({ text, successCallback = null }) {
   Taro.setClipboardData({
     data: text,
     success: (res) => {
-      successCallback(res);
+      if (isFunction(successCallback)) {
+        successCallback(text, res);
+      }
     },
   });
 }
@@ -977,7 +978,7 @@ export function seededRandom({ seed, min, max }) {
  * @returns
  */
 export function getRandomColor({ seed }) {
-  return `#${`00000${((seededRandom(seed) * 0x1000000) << 0).toString(
+  return `#${`00000${((seededRandom({ seed }) * 0x1000000) << 0).toString(
     16,
   )}`.substr(-6)}`;
 }
