@@ -16,6 +16,7 @@ const defaultProps = {
   value: '',
   options: [],
   border: true,
+  icon: <IconCheck size={18} color="#1677ff" />,
   onClick: null,
 };
 
@@ -27,14 +28,34 @@ class Radio extends ComponentBase {
       ...this.state,
       ...{
         show: true,
+        valueFlag: '',
+        valueStage: '',
       },
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueStage: valueNext ?? '',
+      };
+    }
+
+    return {};
   }
 
   handleClick = (option) => {
     if (option.disabled) {
       return;
     }
+
+    this.setState({
+      valueStage: option.value,
+    });
 
     const { onClick } = this.props;
 
@@ -49,11 +70,12 @@ class Radio extends ComponentBase {
       style,
       headerStyle,
       bodyStyle,
+      icon,
       options,
       border,
-      value,
       extra,
     } = this.props;
+    const { valueStage } = this.state;
 
     return (
       <List
@@ -88,9 +110,10 @@ class Radio extends ComponentBase {
               disabled={disabled}
               border={border}
               extra={
-                !stringIsNullOrWhiteSpace(value) && value === valueItem ? (
-                  <IconCheck size={18} color="#1677ff" />
-                ) : null
+                !stringIsNullOrWhiteSpace(valueStage) &&
+                valueStage === valueItem
+                  ? icon
+                  : null
               }
               onClick={() => {
                 this.handleClick(o);

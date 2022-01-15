@@ -4,7 +4,7 @@ import { Radio, Icon, Button } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
-const { IconSketch, IconShoppingCart } = Icon;
+const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
 const style = { backgroundColor: '#f5f7fa' };
 
@@ -18,7 +18,7 @@ export default class Index extends PageWrapper {
         border: false,
         radioValue1: 'option1',
         radioValue2: 'option1',
-        radioValue3: 'option3',
+        radioValue3: 'option2',
         radioOptions1: [
           {
             label: '单选项一',
@@ -124,7 +124,17 @@ export default class Index extends PageWrapper {
               切换边框
             </Button>
           }
-          onClick={this.handleRadioChange}
+          // onClick={this.handleRadioChange}
+        />
+
+        <Radio
+          header="自定义选中图标"
+          style={style}
+          border={border}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          icon={<IconCheckCircle size={20} color="#1677ff" />}
+          // onClick={this.handleRadioChange}
         />
 
         <Radio
@@ -132,7 +142,7 @@ export default class Index extends PageWrapper {
           style={style}
           options={this.state.radioOptions2}
           value={this.state.radioValue2}
-          onClick={this.handleRadioChangeSecond}
+          // onClick={this.handleRadioChangeSecond}
         />
 
         <Radio
@@ -140,7 +150,7 @@ export default class Index extends PageWrapper {
           style={style}
           options={this.state.radioOptions3}
           value={this.state.radioValue3}
-          onClick={this.handleRadioChangeThird}
+          // onClick={this.handleRadioChangeThird}
         />
       </View>
     );
