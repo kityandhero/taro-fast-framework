@@ -2,9 +2,10 @@ import {
   toNumber as toNumberLodash,
   toString as toStringLodash,
   toUpper as toUpperLodash,
-} from "lodash";
+  toLower as toLowerLodash,
+} from 'lodash';
 
-import { isDate, isMoney, isString } from "./typeCheck";
+import { isDate, isMoney, isString } from './typeCheck';
 
 /**
  * 转换为数字
@@ -46,6 +47,10 @@ export function toUpper(value) {
   return toUpperLodash(value);
 }
 
+export function toLower(value) {
+  return toLowerLodash(value);
+}
+
 export function toDatetime(v) {
   if ((v || null) == null) {
     return null;
@@ -56,11 +61,11 @@ export function toDatetime(v) {
   }
 
   if (isString(v)) {
-    const i = v.indexOf("T");
+    const i = v.indexOf('T');
 
     if (i < 0) {
       // eslint-disable-next-line no-useless-escape
-      const value = v.replace(/\-/g, "/");
+      const value = v.replace(/\-/g, '/');
       const result = new Date(value);
 
       return result;

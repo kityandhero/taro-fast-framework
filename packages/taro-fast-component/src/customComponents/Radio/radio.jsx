@@ -1,5 +1,11 @@
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import { View } from '@tarojs/components';
+
+import {
+  inCollection,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { toLower } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import List from '../List';
@@ -7,8 +13,45 @@ import Icon from '../Icon';
 
 const { IconCheck } = Icon;
 
+const layoutCollection = ['list', 'radio'];
+
+const iconContainerStyle = {
+  border: '2rpx solid #ccc',
+  width: '36rpx',
+  height: '36rpx',
+  padding: '4rpx',
+  lineHeight: '36rpx',
+  borderRadius: '50%',
+};
+
+const uncheckIcon = (
+  <View
+    style={{
+      ...iconContainerStyle,
+      ...{
+        borderColor: '#ccc',
+      },
+    }}
+  ></View>
+);
+
+const checkIcon = (
+  <View
+    style={{
+      ...iconContainerStyle,
+      ...{
+        borderColor: '#1677ff',
+        backgroundColor: '#1677ff',
+      },
+    }}
+  >
+    <IconCheck size={18} color="#fff" />,
+  </View>
+);
+
 const defaultProps = {
   style: {},
+  layout: 'list',
   header: null,
   headerStyle: {},
   bodyStyle: {},
@@ -16,7 +59,8 @@ const defaultProps = {
   value: '',
   options: [],
   border: true,
-  icon: <IconCheck size={18} color="#1677ff" />,
+  iconUncheck: checkIcon,
+  iconCheck: uncheckIcon,
   onClick: null,
 };
 
@@ -48,6 +92,14 @@ class Radio extends ComponentBase {
     return {};
   }
 
+  getLayout = () => {
+    const { layout } = this.props;
+
+    return toLower(
+      inCollection(layoutCollection, layout) ? layout : defaultProps.layout,
+    );
+  };
+
   handleClick = (option) => {
     if (option.disabled) {
       return;
@@ -70,12 +122,15 @@ class Radio extends ComponentBase {
       style,
       headerStyle,
       bodyStyle,
-      icon,
+      iconUncheck,
+      iconCheck,
       options,
       border,
       extra,
     } = this.props;
     const { valueStage } = this.state;
+
+    const layout = this.getLayout();
 
     return (
       <List
@@ -98,6 +153,33 @@ class Radio extends ComponentBase {
 
           const key = `item_${index}`;
 
+          if (layout === 'list') {
+            return (
+              <List.Item
+                key={key}
+                prefix={prefix}
+                title={title}
+                style={styleItem}
+                description={description}
+                clickable
+                arrow={false}
+                disabled={disabled}
+                border={border}
+                extra={
+                  !stringIsNullOrWhiteSpace(valueStage) &&
+                  valueStage === valueItem
+                    ? iconCheck
+                    : iconUncheck
+                }
+                onClick={() => {
+                  this.handleClick(o);
+                }}
+              >
+                {label}
+              </List.Item>
+            );
+          }
+
           return (
             <List.Item
               key={key}
@@ -112,8 +194,8 @@ class Radio extends ComponentBase {
               extra={
                 !stringIsNullOrWhiteSpace(valueStage) &&
                 valueStage === valueItem
-                  ? icon
-                  : null
+                  ? iconCheck
+                  : iconUncheck
               }
               onClick={() => {
                 this.handleClick(o);
