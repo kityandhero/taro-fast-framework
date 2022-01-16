@@ -10,6 +10,7 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import Overlay from '../Overlay';
 import Avatar from '../Avatar';
 import ImageBox from '../ImageBox';
 import CenterBox from '../CenterBox';
@@ -78,7 +79,6 @@ function buildClasses(
 
   const icon = `${prefixCls}__icon`;
   const label = `${prefixCls}__label`;
-  const backdrop = `${prefixCls}__backdrop`;
   const hover =
     hoverClass && hoverClass !== 'default' ? hoverClass : `${prefixCls}--hover`;
 
@@ -89,7 +89,6 @@ function buildClasses(
     button,
     icon,
     label,
-    backdrop,
     hover,
   };
 }
@@ -101,7 +100,6 @@ const defaultPosition = {
   action: '',
   actionRotate: true,
   hideShadow: false,
-  backdrop: false,
   buttons: [],
   direction: 'horizontal',
   /**
@@ -115,6 +113,10 @@ const defaultPosition = {
   eAngle: 360,
   closeAfterItemClick: true,
   hidden: false,
+  overlay: false,
+  overlayStyle: {},
+  overlayDuration: 300,
+  closeWithOverlayClick: false,
 };
 
 class FloatAction extends ComponentBase {
@@ -248,9 +250,17 @@ class FloatAction extends ComponentBase {
     return `opacity: 1; transition-duration: ${duration}ms; ${transform}`;
   };
 
+  onOverlayClick = () => {
+    const { closeWithOverlayClick } = this.props;
+
+    if (closeWithOverlayClick) {
+      this.onChange(false);
+    }
+  };
+
   render() {
     const {
-      backdrop,
+      overlay,
       action,
       position,
       theme,
@@ -261,6 +271,8 @@ class FloatAction extends ComponentBase {
       buttons,
       hoverClass,
       hidden,
+      overlayStyle,
+      overlayDuration,
     } = this.props;
     const { buttonStyle, buttonVisible } = this.state;
 
@@ -283,8 +295,15 @@ class FloatAction extends ComponentBase {
 
     return (
       <>
-        {backdrop && buttonVisible ? (
-          <View class={classes.backdrop}></View>
+        {overlay ? (
+          <Overlay
+            show={buttonVisible}
+            zIndex={1000}
+            style={overlayStyle}
+            duration={overlayDuration}
+            onClick={this.onOverlayClick}
+            lockScroll
+          />
         ) : null}
 
         <View className={classNames('wux-class', classes.wrap)}>
