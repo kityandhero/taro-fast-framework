@@ -44,6 +44,7 @@ export default {
         'pages/countdown/index',
         'pages/helpBox/index',
         'pages/copyright/index',
+        'pages/floatAction/index',
       ],
     },
   ],

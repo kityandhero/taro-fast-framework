@@ -103,8 +103,10 @@ export const pathCollection = {
   helpBox: {
     path: '/example/pages/helpBox/index',
   },
-
   copyright: {
     path: '/example/pages/copyright/index',
+  },
+  floatAction: {
+    path: '/example/pages/floatAction/index',
   },
 };

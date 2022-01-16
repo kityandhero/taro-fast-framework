@@ -198,6 +198,11 @@ export default class Index extends PageWrapper {
               name: 'Copyright',
               path: pathCollection.copyright.path,
             })}
+
+            {this.buildItem({
+              name: 'FloatAction',
+              path: pathCollection.floatAction.path,
+            })}
           </Space>
         </BlockArea>
       </View>

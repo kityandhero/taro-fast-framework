@@ -1,466 +1,383 @@
-import { useState, useEffect, pxTransform } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
-import { AtIcon } from 'taro-ui';
+import classNames from 'classnames';
+import { View, Button, Image, Slot } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 
-import { generateId, isFunction, isArray } from '@/utils/tools';
-import ImageBox from '@/customComponents/ImageBox';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import FloatLayout from '../FloatLayout';
+const defaultAction =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBAQLCR5MtjrbAAAAjUlEQVRo3u3ZMRKAIAxEUbDirp4nXnctFFDHBtDQ/O1Nnk6aHUMgZCBKMkmmNAtgOmL9M+IQQGVM95zljy8DAAAAAAAAAAAAAACALsDZcppSx7Q+WdtUvA5xffUtrjeA8/qQ21S9gc15/3Nfzw0M5O0G2kM5BQAAAAAAAAAAAAAAQGk33q0qZ/p/Q/JFdmei9usomnwIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTA0VDExOjA5OjMwKzA4OjAw1U4c3wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0wNFQxMTowOTozMCswODowMKQTpGMAAAAASUVORK5CYII=';
 
-import './index.less';
+// 设置元素旋转属性
+const setTransform = (translate = 0, scale = 1, delay = 300, isH = true) => {
+  const duration = `transition-duration: ${delay}ms`;
+  const transform = `transform: scale(${scale}) translate3d(${
+    isH ? translate : 0
+  }px, ${isH ? 0 : translate}px, 0)`;
 
-export const switchTypeCollection = {
-  icon: 'icon',
-  image: 'image',
-  text: 'text',
+  return `opacity: 1; ${duration}; ${transform}`;
 };
 
-const defaultSwitchOpenText = {
-  value: '',
-  color: '#fff',
-  backgroundColor: '#b2b2b2',
-};
-
-const defaultSwitchCloseText = {
-  value: '',
-  color: '#fff',
-  backgroundColor: '#b2b2b2',
-};
-
-const defaultSwitchOpenTaroUIIcon = {
-  value: 'add',
-  color: '#fff',
-  backgroundColor: '#b2b2b2',
-};
-
-const defaultSwitchCloseTaroUIIcon = {
-  value: 'close',
-  color: '#fff',
-  backgroundColor: '#b2b2b2',
-};
-
-const defaultSwitchOpenImage = {
-  value: '',
-};
-
-const defaultSwitchCloseImage = {
-  value: '',
-};
-
-const defaultPosition = {
-  top: 'auto',
-  right: 40,
-  bottom: 120,
-  left: 'auto',
-};
-
-function FloatButton(props) {
-  const [show, setShow] = useState(false);
-  const [hasTransition, setHasTransition] = useState(false);
-  const [rotate, setRotate] = useState(0);
-  const [] = useState({});
-  const [actionListState, setActionListState] = useState(props.actionList);
-  const {
-    mask,
-    open,
-    backgroundColor,
-    direction,
-    shadow,
-    shape,
-    actionList,
-    onItemClick,
-    closeAfterItemClick,
-    closeWithShadow,
-    stretchDirection,
-    switchOpenOpacity: switchOpenOpacityValue,
-    switchCloseOpacity: switchCloseOpacityValue,
-    switchOpenType: switchOpenTypeValue,
-    switchCloseType: switchCloseTypeValue,
-    switchOpenText: switchOpenTextObject,
-    switchCloseText: switchCloseTextObject,
-    switchOpenTaroUIIcon: switchOpenTaroUIIconObject,
-    switchCloseTaroUIIcon: switchCloseTaroUIIconObject,
-    switchOpenImage: switchOpenImageObject,
-    switchCloseImage: switchCloseImageObject,
-  } = props;
-
-  useEffect(() => {
-    const list = (isArray(actionList) ? actionList : []).reverse();
-    setActionListState(
-      list.map((item) => {
-        item.cu_floatAction_id = generateId();
-        return item;
-      }),
-    );
-  }, [actionList, props.actionList]);
-
-  const dealBgColor = backgroundColor || '#b2b2b2';
-  const dealShadow = shadow ? 'tfc-float-action__icon_box_shadow' : '';
-  let dealActionList = actionListState || [];
-
-  const switchOpenOpacity =
-    switchOpenOpacityValue < 0 || switchOpenOpacityValue > 1
-      ? 1
-      : switchOpenOpacityValue;
-
-  const switchCloseOpacity =
-    switchCloseOpacityValue < 0 || switchCloseOpacityValue > 1
-      ? 1
-      : switchCloseOpacityValue;
-
-  const switchOpenType =
-    switchOpenTypeValue !== switchTypeCollection.icon &&
-    switchOpenTypeValue !== switchTypeCollection.image
-      ? switchTypeCollection.icon
-      : switchOpenTypeValue;
-
-  const switchCloseType =
-    switchCloseTypeValue !== switchTypeCollection.icon &&
-    switchCloseTypeValue !== switchTypeCollection.image
-      ? switchTypeCollection.icon
-      : switchCloseTypeValue;
-
-  const switchOpenTaroUIIcon = {
-    ...defaultSwitchOpenTaroUIIcon,
-    ...(switchOpenTaroUIIconObject || {}),
-  };
-
-  const switchCloseTaroUIIcon = {
-    ...defaultSwitchCloseTaroUIIcon,
-    ...(switchCloseTaroUIIconObject || {}),
-  };
-
-  const switchOpenText = {
-    ...defaultSwitchOpenText,
-    ...(switchOpenTextObject || {}),
-  };
-
-  const switchCloseText = {
-    ...defaultSwitchCloseText,
-    ...(switchCloseTextObject || {}),
-  };
-
-  const switchOpenImage = {
-    ...defaultSwitchOpenImage,
-    ...(switchOpenImageObject || {}),
-  };
-
-  const switchCloseImage = {
-    ...defaultSwitchCloseImage,
-    ...(switchCloseImageObject || {}),
-  };
-
-  let sharpValue = '';
-
-  switch (shape) {
-    case 'round':
-      sharpValue = 'tfc-float-action__icon_box_round';
-      break;
-
-    default:
-      break;
-  }
-
-  let stretch = 'translateY';
-
-  switch (stretchDirection) {
-    case 'top':
-      stretch = 'translateY';
-      break;
-
-    case 'bottom':
-      stretch = 'translateY';
-      break;
-
-    case 'left':
-      stretch = 'translateX';
-      break;
-
-    case 'right':
-      stretch = 'translateX';
-      break;
-
-    default:
-      stretch = 'translateY';
-
-      break;
-  }
-
-  const actionListComponent = dealActionList.map((item, index, source) => {
-    const { closeAfterClick } = item;
-
-    const length = source.length;
-
-    return (
-      <View
-        key={item.cu_floatAction_id}
-        // style={{ position: show ? "relative" : "absolute" }}
-        style={{
-          position: show ? 'absolute' : 'absolute',
-          transform: show
-            ? `${stretch}(${-100 * (index + 1)}%)`
-            : hasTransition
-            ? `${stretch}(0%)`
-            : 'null',
-          transition: show
-            ? `all ${
-                (0.15 * (index + 1)) / (length <= 3 ? 1 : length / 3)
-              }s ease-out`
-            : hasTransition
-            ? `all ${
-                (0.15 * (index + 1)) / (length <= 3 ? 1 : length / 3)
-              }s ease-out`
-            : 'null',
-        }}
-      >
-        <View>
-          <FloatLayout
-            padding="small"
-            paddingDirection={direction === 'vertical' ? 'bottom' : 'right'}
-          >
-            <View
-              className={`tfc-float-action__icon_box ${sharpValue} ${dealShadow}`}
-              style={{
-                backgroundColor: item.backgroundColor
-                  ? item.backgroundColor
-                  : dealBgColor,
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                isFunction(onItemClick) && onItemClick(item.key);
-                (closeAfterItemClick || closeAfterClick) && clickButton();
-              }}
-            >
-              <View
-                className={`${
-                  item.type === switchTypeCollection.image
-                    ? 'tfc-float-action__image_box'
-                    : ''
-                }`}
-              >
-                {item.type === switchTypeCollection.icon ? (
-                  <AtIcon
-                    value={item.value || ''}
-                    size={24}
-                    color={item.color || '#000'}
-                  />
-                ) : null}
-
-                {item.type === switchTypeCollection.image ? (
-                  <View className="tfc-float-action__imageContainor">
-                    <View className="tfc-float-action__imageContainorInner">
-                      <ImageBox src={item.value} />
-                    </View>
-                  </View>
-                ) : null}
-
-                {item.type === switchTypeCollection.text ? (
-                  <View className="tfc-float-action__textContainor">
-                    <View className="tfc-float-action__textContainorInner">
-                      <Text>{item.value}</Text>
-                    </View>
-                  </View>
-                ) : null}
-              </View>
-            </View>
-          </FloatLayout>
-        </View>
-      </View>
-    );
+function buildClasses(
+  prefixCls,
+  position,
+  theme,
+  direction,
+  reverse,
+  buttonVisible,
+  hideShadow,
+  actionRotate,
+  buttons,
+  hoverClass,
+) {
+  const wrap = classNames(prefixCls, {
+    [`${prefixCls}--${position}`]: position,
+    [`${prefixCls}--${theme}`]: theme,
+    [`${prefixCls}--${direction}`]: direction,
+    [`${prefixCls}--reverse`]: reverse,
+    [`${prefixCls}--opened`]: buttonVisible,
   });
 
-  const clickButton = () => {
-    open && setShow(!show);
-    !hasTransition && setHasTransition(true);
-    open && setRotate(rotate ? 0 : 45);
+  const action = classNames(`${prefixCls}__action`, {
+    [`${prefixCls}__action--hide-shadow`]: hideShadow,
+  });
+
+  const text = classNames(`${prefixCls}__text`, {
+    [`${prefixCls}__text--rotate`]: buttonVisible && actionRotate,
+  });
+
+  const button = buttons.map((o) => {
+    const w = classNames(`${prefixCls}__button`, {
+      [`${prefixCls}__button--hide-shadow`]: o.hideShadow,
+      [`${prefixCls}__button--disabled`]: o.disabled,
+      [`${o.className}`]: o.className,
+    });
+    const hover =
+      o.hoverClass && o.hoverClass !== 'default'
+        ? o.hoverClass
+        : `${prefixCls}__button--hover`;
+
+    return {
+      wrap: w,
+      hover,
+    };
+  });
+
+  const icon = `${prefixCls}__icon`;
+  const label = `${prefixCls}__label`;
+  const backdrop = `${prefixCls}__backdrop`;
+  const hover =
+    hoverClass && hoverClass !== 'default' ? hoverClass : `${prefixCls}--hover`;
+
+  return {
+    wrap,
+    action,
+    text,
+    button,
+    icon,
+    label,
+    backdrop,
+    hover,
   };
-
-  const position = props.position || {
-    top: 'auto',
-    right: 50,
-    bottom: 200,
-    left: 'auto',
-  };
-
-  return (
-    <View style={Object.assign({}, props.style)}>
-      {mask ? (
-        <View
-          className={`tfc-float-action__mask ${
-            show
-              ? 'tfc-float-action__mask_active'
-              : 'tfc-float-action__mask_no_active'
-          }`}
-          style={{
-            transition: show ? null : 'z-index 0.01s ease 0.15s',
-          }}
-        >
-          <View
-            className={`tfc-float-action__mask_content ${
-              show
-                ? 'tfc-float-action__mask_content_active'
-                : 'tfc-float-action__mask_content_no_active'
-            }`}
-            style={{
-              transition: 'opacity 0.15s ease 0.01s',
-            }}
-            onTouchMove={(e) => {
-              e.stopPropagation();
-            }}
-            onClick={() => {
-              closeWithShadow && clickButton();
-            }}
-          ></View>
-        </View>
-      ) : null}
-
-      <View
-        className="tfc-float-action__fixed"
-        style={{
-          opacity: show ? switchCloseOpacity : switchOpenOpacity,
-          top:
-            position.top && position.top !== 'auto'
-              ? pxTransform(position.top)
-              : 'auto',
-          right:
-            position.right && position.right !== 'auto'
-              ? pxTransform(position.right)
-              : 'auto',
-          bottom:
-            position.bottom && position.bottom !== 'auto'
-              ? pxTransform(position.bottom)
-              : 'auto',
-          left:
-            position.left && position.left !== 'auto'
-              ? pxTransform(position.left)
-              : 'auto',
-        }}
-      >
-        <View className="tfc-float-action__content">
-          {actionListComponent}
-          <View
-            className={`tfc-float-action__icon_box ${
-              show ? 'tfc-float-action__icon_box_active' : ''
-            } ${sharpValue} ${dealShadow}`}
-            style={{
-              backgroundColor: dealBgColor,
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              clickButton();
-            }}
-          >
-            <View
-              className={`tfc-float-action__switch_box ${
-                show
-                  ? 'tfc-float-action__switch_open_box_dead'
-                  : 'tfc-float-action__switch_open_box_active'
-              } ${
-                switchOpenType === switchTypeCollection.image
-                  ? 'tfc-float-action__image_box'
-                  : ''
-              }`}
-              style={{
-                transition: 'opacity 0.3s',
-              }}
-            >
-              {switchOpenType === switchTypeCollection.icon ? (
-                <AtIcon
-                  value={switchOpenTaroUIIcon.value || 'add'}
-                  size={24}
-                  color={switchOpenTaroUIIcon.color || '#fff'}
-                />
-              ) : null}
-
-              {switchOpenType === switchTypeCollection.image ? (
-                <View className="tfc-float-action__imageContainor">
-                  <View className="tfc-float-action__imageContainorInner">
-                    <ImageBox src={switchOpenImage.value} />
-                  </View>
-                </View>
-              ) : null}
-
-              {switchOpenType === switchTypeCollection.text ? (
-                <View className="tfc-float-action__textContainor">
-                  <View className="tfc-float-action__textContainorInner">
-                    <Text>{switchOpenText.value}</Text>
-                  </View>
-                </View>
-              ) : null}
-            </View>
-
-            <View
-              className={`tfc-float-action__switch_box ${
-                show
-                  ? 'tfc-float-action__switch_close_box_active'
-                  : 'tfc-float-action__switch_close_box_dead'
-              } ${
-                switchCloseType === switchTypeCollection.image
-                  ? 'tfc-float-action__image_box'
-                  : ''
-              }`}
-              style={{
-                transition: 'opacity 0.15s',
-              }}
-            >
-              {switchCloseType === switchTypeCollection.icon ? (
-                <AtIcon
-                  value={switchCloseTaroUIIcon.value || 'add'}
-                  size={24}
-                  color={switchCloseTaroUIIcon.color || '#fff'}
-                />
-              ) : null}
-
-              {switchCloseType === switchTypeCollection.image ? (
-                <View className="tfc-float-action__imageContainor">
-                  <View className="tfc-float-action__imageContainorInner">
-                    <ImageBox src={switchCloseImage.value} />
-                  </View>
-                </View>
-              ) : null}
-
-              {switchCloseType === switchTypeCollection.text ? (
-                <View className="tfc-float-action__textContainor">
-                  <View className="tfc-float-action__textContainorInner">
-                    <Text>{switchCloseText.value}</Text>
-                  </View>
-                </View>
-              ) : null}
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
 }
 
-FloatButton.options = {
-  addGlobalClass: true,
+const defaultPosition = {
+  prefixCls: 'wux-fab-button',
+  hoverClass: 'default',
+  theme: 'balanced',
+  position: 'bottomRight',
+  action: defaultAction,
+  actionRotate: true,
+  hideShadow: false,
+  backdrop: false,
+  buttons: [],
+  direction: 'horizontal',
+  spaceBetween: 10,
+  duration: 300,
+  scale: 0.9,
+  reverse: false,
+  sAngle: 0,
+  eAngle: 360,
+  defaultVisible: false,
+  visible: false,
+  controlled: false,
 };
 
-FloatButton.defaultProps = {
-  mask: false,
-  open: true,
-  closeAfterItemClick: false,
-  closeWithShadow: true,
-  shadow: true,
-  backgroundColor: '#b2b2b2',
-  direction: 'vertical',
-  stretchDirection: 'top',
-  shape: 'round',
-  switchOpenOpacity: 0.7,
-  switchCloseOpacity: 1,
-  switchOpenType: switchTypeCollection.icon,
-  switchCloseType: switchTypeCollection.icon,
-  switchOpenText: defaultSwitchOpenText,
-  switchCloseText: defaultSwitchCloseText,
-  switchOpenTaroUIIcon: defaultSwitchOpenTaroUIIcon,
-  switchCloseTaroUIIcon: defaultSwitchCloseTaroUIIcon,
-  switchOpenImage: defaultSwitchOpenImage,
-  switchCloseImage: defaultSwitchCloseImage,
-  position: defaultPosition,
-  actionList: [],
-  onItemClick: () => {},
+class FloatAction extends ComponentBase {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        buttonStyle: [],
+        buttonVisible: false,
+      },
+    };
+  }
+
+  updated(buttonVisible) {
+    if (this.data.buttonVisible !== buttonVisible) {
+      this.setData({
+        buttonVisible,
+      });
+
+      this.updateButtonStyle(!buttonVisible);
+    }
+  }
+
+  onChange(buttonVisible) {
+    if (!this.data.controlled) {
+      this.updated(buttonVisible);
+    }
+
+    this.triggerEvent('change', { value: buttonVisible });
+  }
+
+  onToggle() {
+    this.onChange(!this.data.buttonVisible);
+  }
+
+  onTap(e) {
+    const { index, value } = e.currentTarget.dataset;
+    const params = {
+      index,
+      value,
+      buttons: this.data.buttons,
+    };
+
+    if (!value.disabled) {
+      this.triggerEvent('click', params);
+      this.onChange(false);
+    }
+  }
+
+  /**
+   * 获取界面上的节点信息
+   */
+  getRect(selector, all) {
+    return new Promise((resolve) => {
+      Taro.createSelectorQuery()
+        .in(this)
+        [all ? 'selectAll' : 'select'](selector)
+        .boundingClientRect((rect) => {
+          if (all && Array.isArray(rect) && rect.length) {
+            resolve(rect);
+          }
+
+          if (!all && rect) {
+            resolve(rect);
+          }
+        })
+        .exec();
+    });
+  }
+
+  forceUpdateButtonStyle() {
+    this.updateButtonStyle(!this.data.buttonVisible);
+  }
+
+  /**
+   * 更新按钮组样式
+   */
+  updateButtonStyle(isReset) {
+    const { prefixCls, buttons, duration, direction, spaceBetween, scale } =
+      this.data;
+    const buttonStyle = [];
+    const sign = this.data.reverse ? 1 : -1;
+    const isH = direction === 'horizontal';
+
+    // 重置样式
+    if (isReset) {
+      buttons.forEach(() => {
+        buttonStyle.push('opacity: 0; transform: translate3d(0, 0, 0)');
+      });
+
+      if (this.data.buttonStyle !== buttonStyle) {
+        this.setData({ buttonStyle });
+      }
+
+      return;
+    }
+
+    // 更新样式
+    this.getRect(`.${prefixCls}__action`).then((rect) => {
+      switch (direction) {
+        case 'horizontal':
+        case 'vertical':
+          buttons.forEach((_, index) => {
+            const offset = `${
+              sign * (rect.width + spaceBetween) * (index + 1)
+            }`;
+            const style = setTransform(offset, scale, duration, isH);
+
+            buttonStyle.push(style);
+          });
+          break;
+        case 'circle':
+          const radius = rect.width + spaceBetween;
+          buttons.forEach((_, index) => {
+            buttonStyle.push(this.getCircleStyle(index, radius));
+          });
+          break;
+      }
+
+      if (this.data.buttonStyle !== buttonStyle) {
+        this.setData({ buttonStyle });
+      }
+    });
+  }
+
+  /**
+   * 获取圆形按钮的样式
+   * @param {Number} index 当前按钮索引
+   * @param {Number} radius 圆的半径
+   */
+  getCircleStyle(index, radius) {
+    const { sAngle, eAngle, duration, scale } = this.data;
+    const { length } = this.data.buttons;
+    const { max, sin, cos, PI } = Math;
+    const startAngle = (sAngle * PI) / 180;
+    const endAngle = (eAngle * PI) / 180;
+    const points = endAngle % (2 * PI) === 0 ? length : max(1, length - 1);
+    const currentAngle =
+      startAngle + ((endAngle - startAngle) / points) * index;
+
+    let x = sin(currentAngle) * radius;
+    let y = cos(currentAngle) * radius;
+
+    x = parseFloat(x.toFixed(6));
+    y = parseFloat(y.toFixed(6));
+
+    const transform = `transform: scale(${scale}) translate3d(${x}px, ${y}px, 0)`;
+
+    return `opacity: 1; transition-duration: ${duration}ms; ${transform}`;
+  }
+
+  bindgetuserinfo(e) {
+    this.triggerEvent('getuserinfo', {
+      ...e.detail,
+      ...e.currentTarget.dataset,
+    });
+  }
+
+  bindcontact(e) {
+    this.triggerEvent('contact', { ...e.detail, ...e.currentTarget.dataset });
+  }
+
+  bindgetphonenumber(e) {
+    this.triggerEvent('getphonenumber', {
+      ...e.detail,
+      ...e.currentTarget.dataset,
+    });
+  }
+
+  bindopensetting(e) {
+    this.triggerEvent('opensetting', {
+      ...e.detail,
+      ...e.currentTarget.dataset,
+    });
+  }
+
+  onError(e) {
+    this.triggerEvent('error', { ...e.detail, ...e.currentTarget.dataset });
+  }
+
+  render() {
+    const {
+      backdrop,
+      action,
+      prefixCls,
+      position,
+      theme,
+      direction,
+      reverse,
+      buttonVisible,
+      hideShadow,
+      actionRotate,
+      buttons,
+      hoverClass,
+    } = this.props;
+    const { buttonStyle } = this.state;
+
+    const classes = buildClasses(
+      prefixCls,
+      position,
+      theme,
+      direction,
+      reverse,
+      buttonVisible,
+      hideShadow,
+      actionRotate,
+      buttons,
+      hoverClass,
+    );
+
+    return (
+      <>
+        {backdrop && buttonVisible ? (
+          <View class={classes.backdrop}></View>
+        ) : null}
+
+        <View
+          className={classNames('wux-class', classes.wrap)}
+          onClick={this.onToggle}
+        >
+          <View class={classes.action} hoverClass={classes.hover}>
+            {action ? (
+              <Image class={classes.text} src={action} />
+            ) : (
+              <Slot name="action"></Slot>
+            )}
+          </View>
+          {buttons.map((button, index) => {
+            const key = `float_action_item_${index}`;
+
+            return (
+              <Button
+                key={key}
+                className={classes.button[index].wrap}
+                disabled={button.disabled}
+                open-type={button.openType}
+                hoverClass={
+                  !button.disabled ? classes.button[index].hover : 'none'
+                }
+                hoverStopPropagation={button.hoverStopPropagation}
+                hoverStartTime={button.hoverStartTime}
+                hoverStayTime={button.hoverStayTime}
+                lang={button.lang}
+                sessionFrom={button.sessionFrom}
+                sendMessageTitle={button.sendMessageTitle}
+                sendMessageImg={button.sendMessageImg}
+                sendMessagePath={button.sendMessagePath}
+                showMessageCard={button.showMessageCard}
+                appParameter={button.appParameter}
+                onClick={this.onTap}
+                style={buttonStyle[index]}
+                onError={this.onError}
+
+                // data-value="{{ button }}"
+                // data-label="{{ button.label }}"
+                //   bindgetuserinfo="bindgetuserinfo"
+                //   bindcontact="bindcontact"
+                //   bindgetphonenumber="bindgetphonenumber"
+                //   bindopensetting="bindopensetting"
+              >
+                <Image className={classes.icon} src={button.icon} />
+
+                {button.label ? (
+                  <View className={classes.label}>{button.label}</View>
+                ) : null}
+              </Button>
+            );
+          })}
+        </View>
+      </>
+    );
+  }
+}
+
+FloatAction.defaultProps = {
+  ...defaultPosition,
 };
 
-export default FloatButton;
+export default FloatAction;
