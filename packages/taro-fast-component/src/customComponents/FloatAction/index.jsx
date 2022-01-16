@@ -108,7 +108,7 @@ class FloatAction extends ComponentBase {
   constructor(props) {
     super(props);
 
-    const { defaultVisible, visible, controlled } = this.props;
+    const { defaultVisible, visible, controlled } = props;
     const buttonVisible = controlled ? visible : defaultVisible;
 
     this.state = {
@@ -128,48 +128,56 @@ class FloatAction extends ComponentBase {
     return { buttonVisible };
   }
 
-  updated(buttonVisible) {
-    if (this.data.buttonVisible !== buttonVisible) {
-      this.setData({
+  updated = (buttonVisible) => {
+    const { buttonVisible: buttonVisiblePrev } = this.state;
+
+    if (buttonVisiblePrev !== buttonVisible) {
+      this.setState({
         buttonVisible,
       });
 
       this.updateButtonStyle(!buttonVisible);
     }
-  }
+  };
 
-  onChange(buttonVisible) {
-    if (!this.data.controlled) {
+  onChange = (buttonVisible) => {
+    const { controlled } = this.props;
+
+    if (!controlled) {
       this.updated(buttonVisible);
     }
 
-    this.triggerEvent('change', { value: buttonVisible });
-  }
+    // this.triggerEvent('change', { value: buttonVisible });
+  };
 
-  onToggle() {
+  onToggle = () => {
+    console.log(this.state);
+
     const { buttonVisible } = this.state;
 
     this.onChange(!buttonVisible);
-  }
+  };
 
-  onTap(e) {
-    const { index, value } = e.currentTarget.dataset;
-    const params = {
-      index,
-      value,
-      buttons: this.data.buttons,
-    };
+  onTap = (index, button) => {
+    // const { buttons } = this.props;
 
-    if (!value.disabled) {
-      this.triggerEvent('click', params);
+    // const { index, value } = e.currentTarget.dataset;
+    // const params = {
+    //   index,
+    //   value,
+    //   buttons,
+    // };
+
+    if (!button.disabled) {
+      // this.triggerEvent('click', params);
       this.onChange(false);
     }
-  }
+  };
 
   /**
    * 获取界面上的节点信息
    */
-  getRect(selector, all) {
+  getRect = (selector, all) => {
     return new Promise((resolve) => {
       Taro.createSelectorQuery()
         .in(this)
@@ -185,20 +193,29 @@ class FloatAction extends ComponentBase {
         })
         .exec();
     });
-  }
+  };
 
-  forceUpdateButtonStyle() {
-    this.updateButtonStyle(!this.data.buttonVisible);
-  }
+  forceUpdateButtonStyle = () => {
+    const { buttonVisible } = this.state;
+
+    this.updateButtonStyle(!buttonVisible);
+  };
 
   /**
    * 更新按钮组样式
    */
-  updateButtonStyle(isReset) {
-    const { prefixCls, buttons, duration, direction, spaceBetween, scale } =
-      this.data;
+  updateButtonStyle = (isReset) => {
+    const {
+      prefixCls,
+      buttons,
+      duration,
+      direction,
+      spaceBetween,
+      scale,
+      reverse,
+    } = this.props;
     const buttonStyle = [];
-    const sign = this.data.reverse ? 1 : -1;
+    const sign = reverse ? 1 : -1;
     const isH = direction === 'horizontal';
 
     // 重置样式
@@ -207,8 +224,10 @@ class FloatAction extends ComponentBase {
         buttonStyle.push('opacity: 0; transform: translate3d(0, 0, 0)');
       });
 
-      if (this.data.buttonStyle !== buttonStyle) {
-        this.setData({ buttonStyle });
+      const { buttonStyle: buttonStylePrev } = this.state;
+
+      if (buttonStylePrev !== buttonStyle) {
+        this.setState({ buttonStyle });
       }
 
       return;
@@ -236,20 +255,22 @@ class FloatAction extends ComponentBase {
           break;
       }
 
-      if (this.data.buttonStyle !== buttonStyle) {
-        this.setData({ buttonStyle });
+      const { buttonStyle: buttonStylePrev } = this.state;
+
+      if (buttonStylePrev !== buttonStyle) {
+        this.setState({ buttonStyle });
       }
     });
-  }
+  };
 
   /**
    * 获取圆形按钮的样式
    * @param {Number} index 当前按钮索引
    * @param {Number} radius 圆的半径
    */
-  getCircleStyle(index, radius) {
-    const { sAngle, eAngle, duration, scale } = this.data;
-    const { length } = this.data.buttons;
+  getCircleStyle = (index, radius) => {
+    const { sAngle, eAngle, duration, scale, buttons } = this.props;
+    const { length } = buttons;
     const { max, sin, cos, PI } = Math;
     const startAngle = (sAngle * PI) / 180;
     const endAngle = (eAngle * PI) / 180;
@@ -266,36 +287,36 @@ class FloatAction extends ComponentBase {
     const transform = `transform: scale(${scale}) translate3d(${x}px, ${y}px, 0)`;
 
     return `opacity: 1; transition-duration: ${duration}ms; ${transform}`;
-  }
+  };
 
-  bindgetuserinfo(e) {
-    this.triggerEvent('getuserinfo', {
-      ...e.detail,
-      ...e.currentTarget.dataset,
-    });
-  }
+  bindgetuserinfo = (e) => {
+    // this.triggerEvent('getuserinfo', {
+    //   ...e.detail,
+    //   ...e.currentTarget.dataset,
+    // });
+  };
 
-  bindcontact(e) {
-    this.triggerEvent('contact', { ...e.detail, ...e.currentTarget.dataset });
-  }
+  bindcontact = (e) => {
+    // this.triggerEvent('contact', { ...e.detail, ...e.currentTarget.dataset });
+  };
 
-  bindgetphonenumber(e) {
-    this.triggerEvent('getphonenumber', {
-      ...e.detail,
-      ...e.currentTarget.dataset,
-    });
-  }
+  bindgetphonenumber = (e) => {
+    // this.triggerEvent('getphonenumber', {
+    //   ...e.detail,
+    //   ...e.currentTarget.dataset,
+    // });
+  };
 
-  bindopensetting(e) {
-    this.triggerEvent('opensetting', {
-      ...e.detail,
-      ...e.currentTarget.dataset,
-    });
-  }
+  bindopensetting = (e) => {
+    // this.triggerEvent('opensetting', {
+    //   ...e.detail,
+    //   ...e.currentTarget.dataset,
+    // });
+  };
 
-  onError(e) {
-    this.triggerEvent('error', { ...e.detail, ...e.currentTarget.dataset });
-  }
+  onError = (e) => {
+    // this.triggerEvent('error', { ...e.detail, ...e.currentTarget.dataset });
+  };
 
   render() {
     const {
@@ -365,7 +386,9 @@ class FloatAction extends ComponentBase {
                 sendMessagePath={button.sendMessagePath}
                 showMessageCard={button.showMessageCard}
                 appParameter={button.appParameter}
-                onClick={this.onTap}
+                onClick={() => {
+                  this.onTap(index, button);
+                }}
                 style={buttonStyle[index]}
                 onError={this.onError}
 

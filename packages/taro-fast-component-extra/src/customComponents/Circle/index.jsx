@@ -163,6 +163,7 @@ class Circle extends ComponentBase {
     const that = this;
 
     const query = Taro.createSelectorQuery();
+
     query
       .select(`#${id}`)
       .fields({ node: true, size: true })
