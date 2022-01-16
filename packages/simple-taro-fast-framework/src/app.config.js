@@ -12,6 +12,7 @@ export default {
       name: '组件示例',
       pages: [
         'pages/ellipsis/index',
+        'pages/price/index',
         'pages/colorText/index',
         'pages/imageBox/index',
         'pages/avatar/index',

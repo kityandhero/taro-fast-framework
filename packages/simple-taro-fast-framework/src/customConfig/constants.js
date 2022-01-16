@@ -10,6 +10,9 @@ export const pathCollection = {
   ellipsis: {
     path: '/example/pages/ellipsis/index',
   },
+  price: {
+    path: '/example/pages/price/index',
+  },
   colorText: {
     path: '/example/pages/colorText/index',
   },
