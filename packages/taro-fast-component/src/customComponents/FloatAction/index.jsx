@@ -108,13 +108,24 @@ class FloatAction extends ComponentBase {
   constructor(props) {
     super(props);
 
+    const { defaultVisible, visible, controlled } = this.props;
+    const buttonVisible = controlled ? visible : defaultVisible;
+
     this.state = {
       ...this.state,
       ...{
         buttonStyle: [],
-        buttonVisible: false,
+        buttonVisible,
       },
     };
+  }
+  // eslint-disable-next-line no-unused-vars
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { defaultVisible, visible, controlled } = nextProps;
+
+    const buttonVisible = controlled ? visible : defaultVisible;
+
+    return { buttonVisible };
   }
 
   updated(buttonVisible) {
@@ -136,7 +147,9 @@ class FloatAction extends ComponentBase {
   }
 
   onToggle() {
-    this.onChange(!this.data.buttonVisible);
+    const { buttonVisible } = this.state;
+
+    this.onChange(!buttonVisible);
   }
 
   onTap(e) {
