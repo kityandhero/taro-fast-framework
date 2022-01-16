@@ -1,4 +1,4 @@
-@wux-prefix: wux;
+@tfc-prefix: tfc;
 @white: #fff;
 @positive: #387ef5;
 @calm: #11c1f3;
@@ -7,19 +7,19 @@
 @assertive: #ef473a;
 @royal: #886aea;
 @dark: #444;
-@spacing-base: 10px;
+@spacing-base: 20rpx;
 @light-inverse: #ddd;
 @stable-inverse: #b2b2b2;
 @disabled-opacity: 0.3;
-@fab-button-icon-size: 20px;
-@fab-button-action-size: 50px;
+@fab-button-icon-size: 40rpx;
+@fab-button-action-size: 100rpx;
 @text-color-dark: fade(@white, 85%);
 @text-color-inverse: @white;
-@fab-button-box-shadow: 0 0 4px rgba(0, 0, 0, 0.14),
-  0 4px 8px rgba(0, 0, 0, 0.28);
+@fab-button-box-shadow: 0 0 8rpx rgba(0, 0, 0, 0.14),
+  0 8rpx 16rpx rgba(0, 0, 0, 0.28);
 @fab-button-label-color: @text-color-dark;
 @fab-button-label-bg: rgba(0, 0, 0, 0.4);
-@fab-button-label-padding: 4px @spacing-base;
+@fab-button-label-padding: 8rpx @spacing-base;
 @fab-button-light-bg: @light-inverse;
 @fab-button-stable-bg: @stable-inverse;
 @fab-button-positive-bg: @positive;
@@ -30,10 +30,10 @@
 @fab-button-royal-bg: @royal;
 @fab-button-dark-bg: @dark;
 @z-index-backdrop: 1000;
-@z-index-fab-button: 1020;
+@z-index-float-action: 1020;
 @backdrop-background-inverse: transparent;
-@border-radius-base: 4px;
-@font-size-sm: 12px;
+@border-radius-base: 8rpx;
+@font-size-sm: 24rpx;
 
 .fab-button-style(@theme, @color) {
   &--@{theme} &__action,
@@ -84,9 +84,9 @@
   }
 }
 
-.@{wux-prefix}-fab-button {
+.@{tfc-prefix}-float-action {
   position: fixed;
-  z-index: @z-index-fab-button;
+  z-index: @z-index-float-action;
 
   &--center {
     left: 50%;
@@ -95,34 +95,34 @@
   }
 
   &--topLeft {
-    left: 15px;
-    top: 15px;
+    left: 30rpx;
+    top: 30rpx;
   }
 
   &--topRight {
-    right: 15px;
-    top: 15px;
+    right: 30rpx;
+    top: 30rpx;
   }
 
   &--bottomLeft {
-    left: 15px;
-    bottom: 15px;
+    left: 30rpx;
+    bottom: 30rpx;
   }
 
   &--bottomRight {
-    right: 15px;
-    bottom: 15px;
+    right: 30rpx;
+    bottom: 30rpx;
   }
 
   &--vertical&--topLeft &__label,
   &--vertical&--bottomLeft &__label {
-    left: 60px;
+    left: 120rpx;
   }
 
   &--vertical&--center &__label,
   &--vertical&--topRight &__label,
   &--vertical&--bottomRight &__label {
-    right: 60px;
+    right: 120rpx;
   }
 
   &__action {
@@ -130,7 +130,7 @@
 
     position: relative;
     border-radius: 50%;
-    z-index: @z-index-fab-button;
+    z-index: @z-index-float-action;
     background-color: @fab-button-balanced-bg;
     color: @text-color-inverse;
     overflow: visible;

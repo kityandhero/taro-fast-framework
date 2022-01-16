@@ -1,13 +1,24 @@
 import classNames from 'classnames';
-import { View, Button, Image, Slot } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import { View } from '@tarojs/components';
 
+import { getRect } from 'taro-fast-common/es/utils/tools';
+import {
+  isUrl,
+  isImageBase4,
+  isString,
+} from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import Avatar from '../Avatar';
+import ImageBox from '../ImageBox';
+import CenterBox from '../CenterBox';
+import Icon from '../Icon';
 
 import './index.less';
 
-const defaultAction =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBAQLCR5MtjrbAAAAjUlEQVRo3u3ZMRKAIAxEUbDirp4nXnctFFDHBtDQ/O1Nnk6aHUMgZCBKMkmmNAtgOmL9M+IQQGVM95zljy8DAAAAAAAAAAAAAACALsDZcppSx7Q+WdtUvA5xffUtrjeA8/qQ21S9gc15/3Nfzw0M5O0G2kM5BQAAAAAAAAAAAAAAQGk33q0qZ/p/Q/JFdmei9usomnwIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTA0VDExOjA5OjMwKzA4OjAw1U4c3wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0wNFQxMTowOTozMCswODowMKQTpGMAAAAASUVORK5CYII=';
+const { IconAdd, IconEdit } = Icon;
+
+const classPrefix = `tfc-float-action`;
 
 // 设置元素旋转属性
 const setTransform = (translate = 0, scale = 1, delay = 300, isH = true) => {
@@ -83,49 +94,39 @@ function buildClasses(
 }
 
 const defaultPosition = {
-  prefixCls: 'wux-fab-button',
   hoverClass: 'default',
   theme: 'balanced',
   position: 'bottomRight',
-  action: defaultAction,
+  action: '',
   actionRotate: true,
   hideShadow: false,
   backdrop: false,
   buttons: [],
   direction: 'horizontal',
+  /**
+   * 居中布局下展开按钮距离中间的距离
+   */
   spaceBetween: 10,
   duration: 300,
   scale: 0.9,
   reverse: false,
   sAngle: 0,
   eAngle: 360,
-  defaultVisible: false,
-  visible: false,
-  controlled: false,
+  closeAfterItemClick: true,
+  hidden: false,
 };
 
 class FloatAction extends ComponentBase {
   constructor(props) {
     super(props);
 
-    const { defaultVisible, visible, controlled } = props;
-    const buttonVisible = controlled ? visible : defaultVisible;
-
     this.state = {
       ...this.state,
       ...{
         buttonStyle: [],
-        buttonVisible,
+        buttonVisible: false,
       },
     };
-  }
-  // eslint-disable-next-line no-unused-vars
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { defaultVisible, visible, controlled } = nextProps;
-
-    const buttonVisible = controlled ? visible : defaultVisible;
-
-    return { buttonVisible };
   }
 
   updated = (buttonVisible) => {
@@ -141,79 +142,30 @@ class FloatAction extends ComponentBase {
   };
 
   onChange = (buttonVisible) => {
-    const { controlled } = this.props;
-
-    if (!controlled) {
-      this.updated(buttonVisible);
-    }
-
-    // this.triggerEvent('change', { value: buttonVisible });
+    this.updated(buttonVisible);
   };
 
   onToggle = () => {
-    console.log(this.state);
-
     const { buttonVisible } = this.state;
 
     this.onChange(!buttonVisible);
   };
 
-  onTap = (index, button) => {
-    // const { buttons } = this.props;
+  // eslint-disable-next-line no-unused-vars
+  onItemClick = (button, index) => {
+    const { closeAfterItemClick } = this.props;
 
-    // const { index, value } = e.currentTarget.dataset;
-    // const params = {
-    //   index,
-    //   value,
-    //   buttons,
-    // };
-
-    if (!button.disabled) {
-      // this.triggerEvent('click', params);
+    if (!button.disabled && closeAfterItemClick) {
       this.onChange(false);
     }
-  };
-
-  /**
-   * 获取界面上的节点信息
-   */
-  getRect = (selector, all) => {
-    return new Promise((resolve) => {
-      Taro.createSelectorQuery()
-        .in(this)
-        [all ? 'selectAll' : 'select'](selector)
-        .boundingClientRect((rect) => {
-          if (all && Array.isArray(rect) && rect.length) {
-            resolve(rect);
-          }
-
-          if (!all && rect) {
-            resolve(rect);
-          }
-        })
-        .exec();
-    });
-  };
-
-  forceUpdateButtonStyle = () => {
-    const { buttonVisible } = this.state;
-
-    this.updateButtonStyle(!buttonVisible);
   };
 
   /**
    * 更新按钮组样式
    */
   updateButtonStyle = (isReset) => {
-    const {
-      prefixCls,
-      buttons,
-      duration,
-      direction,
-      spaceBetween,
-      scale,
-      reverse,
-    } = this.props;
+    const { buttons, duration, direction, spaceBetween, scale, reverse } =
+      this.props;
     const buttonStyle = [];
     const sign = reverse ? 1 : -1;
     const isH = direction === 'horizontal';
@@ -234,7 +186,7 @@ class FloatAction extends ComponentBase {
     }
 
     // 更新样式
-    this.getRect(`.${prefixCls}__action`).then((rect) => {
+    getRect(`.${classPrefix}__action`).then((rect) => {
       switch (direction) {
         case 'horizontal':
         case 'vertical':
@@ -289,40 +241,10 @@ class FloatAction extends ComponentBase {
     return `opacity: 1; transition-duration: ${duration}ms; ${transform}`;
   };
 
-  bindgetuserinfo = (e) => {
-    // this.triggerEvent('getuserinfo', {
-    //   ...e.detail,
-    //   ...e.currentTarget.dataset,
-    // });
-  };
-
-  bindcontact = (e) => {
-    // this.triggerEvent('contact', { ...e.detail, ...e.currentTarget.dataset });
-  };
-
-  bindgetphonenumber = (e) => {
-    // this.triggerEvent('getphonenumber', {
-    //   ...e.detail,
-    //   ...e.currentTarget.dataset,
-    // });
-  };
-
-  bindopensetting = (e) => {
-    // this.triggerEvent('opensetting', {
-    //   ...e.detail,
-    //   ...e.currentTarget.dataset,
-    // });
-  };
-
-  onError = (e) => {
-    // this.triggerEvent('error', { ...e.detail, ...e.currentTarget.dataset });
-  };
-
   render() {
     const {
       backdrop,
       action,
-      prefixCls,
       position,
       theme,
       direction,
@@ -331,11 +253,16 @@ class FloatAction extends ComponentBase {
       actionRotate,
       buttons,
       hoverClass,
+      hidden,
     } = this.props;
     const { buttonStyle, buttonVisible } = this.state;
 
+    if (hidden) {
+      return null;
+    }
+
     const classes = buildClasses(
-      prefixCls,
+      classPrefix,
       position,
       theme,
       direction,
@@ -353,58 +280,96 @@ class FloatAction extends ComponentBase {
           <View class={classes.backdrop}></View>
         ) : null}
 
-        <View
-          className={classNames('wux-class', classes.wrap)}
-          onClick={this.onToggle}
-        >
-          <View class={classes.action} hoverClass={classes.hover}>
+        <View className={classNames('wux-class', classes.wrap)}>
+          <View
+            class={classes.action}
+            hoverClass={classes.hover}
+            onClick={this.onToggle}
+          >
             {action ? (
-              <Image class={classes.text} src={action} />
+              isString(action) ? (
+                isUrl(action) || isImageBase4(action) ? (
+                  <View class={classes.text}>
+                    <ImageBox src={action} lazyLoad />
+                  </View>
+                ) : (
+                  <View class={classes.text}>
+                    <CenterBox>
+                      <Avatar
+                        circle
+                        style={{ background: 'transparent' }}
+                        text={action}
+                      />
+                    </CenterBox>
+                  </View>
+                )
+              ) : (
+                <View class={classes.text}>
+                  <CenterBox>{action}</CenterBox>
+                </View>
+              )
             ) : (
-              <Slot name="action"></Slot>
+              <View class={classes.text}>
+                <CenterBox>
+                  <IconAdd size={20} color="#fff" />
+                </CenterBox>
+              </View>
             )}
           </View>
+
           {buttons.map((button, index) => {
             const key = `float_action_item_${index}`;
 
             return (
-              <Button
+              <View
                 key={key}
                 className={classes.button[index].wrap}
                 disabled={button.disabled}
-                open-type={button.openType}
                 hoverClass={
                   !button.disabled ? classes.button[index].hover : 'none'
                 }
                 hoverStopPropagation={button.hoverStopPropagation}
                 hoverStartTime={button.hoverStartTime}
                 hoverStayTime={button.hoverStayTime}
-                lang={button.lang}
-                sessionFrom={button.sessionFrom}
-                sendMessageTitle={button.sendMessageTitle}
-                sendMessageImg={button.sendMessageImg}
-                sendMessagePath={button.sendMessagePath}
-                showMessageCard={button.showMessageCard}
-                appParameter={button.appParameter}
                 onClick={() => {
-                  this.onTap(index, button);
+                  this.onItemClick(button, index);
                 }}
                 style={buttonStyle[index]}
-                onError={this.onError}
-
-                // data-value="{{ button }}"
-                // data-label="{{ button.label }}"
-                //   bindgetuserinfo="bindgetuserinfo"
-                //   bindcontact="bindcontact"
-                //   bindgetphonenumber="bindgetphonenumber"
-                //   bindopensetting="bindopensetting"
               >
-                <Image className={classes.icon} src={button.icon} />
+                {button.icon ? (
+                  isString(button.icon) ? (
+                    isUrl(button.icon) || isImageBase4(button.icon) ? (
+                      <View class={classes.icon}>
+                        <ImageBox src={button.icon} lazyLoad />
+                      </View>
+                    ) : (
+                      <View class={classes.icon}>
+                        <CenterBox>
+                          <Avatar
+                            circle
+                            style={{ background: 'transparent' }}
+                            text={button.icon}
+                          />
+                        </CenterBox>
+                      </View>
+                    )
+                  ) : (
+                    <View class={classes.icon}>
+                      <CenterBox>{button.icon}</CenterBox>
+                    </View>
+                  )
+                ) : (
+                  <View class={classes.icon}>
+                    <CenterBox>
+                      <IconEdit size={20} color="#fff" />
+                    </CenterBox>
+                  </View>
+                )}
 
                 {button.label ? (
                   <View className={classes.label}>{button.label}</View>
                 ) : null}
-              </Button>
+              </View>
             );
           })}
         </View>

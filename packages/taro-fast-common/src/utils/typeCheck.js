@@ -145,6 +145,26 @@ export function isObject(o) {
   return isObjectLodash(o);
 }
 
+export function isPlainObject(val) {
+  return val !== null && typeof val === 'object' && !isArray(val);
+}
+
+export function isPromise(val) {
+  return isPlainObject(val) && isFunction(val.then) && isFunction(val.catch);
+}
+
+export function isUrl(val) {
+  const regular = /(http|https):\/\/([\w.]+\/?)\S*/;
+  const re = new RegExp(regular);
+  return re.test(val);
+}
+
+export function isImageBase4(val) {
+  const regular = /(data):image\/([\w.]+\/?)\S*/;
+  const re = new RegExp(regular);
+  return re.test(val);
+}
+
 /**
  * 占位函数
  *

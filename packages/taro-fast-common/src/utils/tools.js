@@ -43,6 +43,7 @@ import {
   isObject,
   isString,
   isUndefined,
+  isPromise,
 } from './typeCheck';
 import Tips from './tips';
 import { toDatetime, toMoney, toNumber } from './typeConvert';
@@ -1745,6 +1746,63 @@ export function getSystemInfo() {
   }
 
   return globalSystemInfo;
+}
+
+export function getSystemInfoSync() {
+  if (globalSystemInfo == null) {
+    globalSystemInfo = Taro.getSystemInfoSync();
+  }
+  return globalSystemInfo;
+}
+
+export function requestAnimationFrame(callback) {
+  const systemInfo = getSystemInfoSync();
+  if (systemInfo.platform === 'devtools') {
+    return setTimeout(() => {
+      callback();
+    }, 33.333333333333336);
+  }
+  return Taro.createSelectorQuery()
+    .selectViewport()
+    .boundingClientRect()
+    .exec(() => {
+      callback();
+    });
+}
+
+export function getRect(selector, context) {
+  return new Promise((resolve) => {
+    let query = Taro.createSelectorQuery();
+    if (context) {
+      query = query.in(context);
+    }
+    query
+      .select(selector)
+      .boundingClientRect()
+      .exec((rect = []) => {
+        return resolve(rect[0]);
+      });
+  });
+}
+
+export function getAllRect(selector, context) {
+  return new Promise((resolve) => {
+    let query = Taro.createSelectorQuery();
+    if (context) {
+      query = query.in(context);
+    }
+    query
+      .selectAll(selector)
+      .boundingClientRect()
+      .exec((rect = []) => resolve(rect[0]));
+  });
+}
+
+export function toPromise(promiseLike) {
+  if (isPromise(promiseLike)) {
+    return promiseLike;
+  }
+  return Promise.resolve(promiseLike);
 }
 
 /**

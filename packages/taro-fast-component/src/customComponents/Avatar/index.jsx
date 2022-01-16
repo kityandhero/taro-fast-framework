@@ -13,7 +13,7 @@ const SIZE_CLASS = {
 
 export default class Avatar extends ComponentBase {
   render() {
-    const { size, circle, image, text, customStyle } = this.props;
+    const { size, circle, image, text, style } = this.props;
     const rootClassName = ['tfc-avatar'];
     const iconSize = SIZE_CLASS[size || 'normal'];
     const classObject = {
@@ -36,7 +36,7 @@ export default class Avatar extends ComponentBase {
     return (
       <View
         className={classNames(rootClassName, classObject, this.props.className)}
-        style={customStyle}
+        style={style}
       >
         {elem}
       </View>
@@ -49,6 +49,6 @@ Avatar.defaultProps = {
   circle: false,
   text: '',
   image: '',
-  customStyle: {},
+  style: {},
   className: '',
 };

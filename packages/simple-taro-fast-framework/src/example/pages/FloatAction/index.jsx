@@ -34,10 +34,60 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <FloatAction
+          action="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBAQLCR5MtjrbAAAAjUlEQVRo3u3ZMRKAIAxEUbDirp4nXnctFFDHBtDQ/O1Nnk6aHUMgZCBKMkmmNAtgOmL9M+IQQGVM95zljy8DAAAAAAAAAAAAAACALsDZcppSx7Q+WdtUvA5xffUtrjeA8/qQ21S9gc15/3Nfzw0M5O0G2kM5BQAAAAAAAAAAAAAAQGk33q0qZ/p/Q/JFdmei9usomnwIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTA0VDExOjA5OjMwKzA4OjAw1U4c3wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0wNFQxMTowOTozMCswODowMKQTpGMAAAAASUVORK5CYII="
           position="topLeft"
           theme="balanced"
           direction="horizontal"
           reverse
+          buttons={buttons}
+          // bind:change="onChange"
+          // bind:click="onClick"
+          // bind:contact="onContact"
+          // bind:getuserinfo="onGotUserInfo"
+        />
+
+        <FloatAction
+          position="topRight"
+          theme="balanced"
+          direction="vertical"
+          reverse
+          buttons={buttons}
+          closeAfterItemClick={false}
+          // bind:change="onChange"
+          // bind:click="onClick"
+          // bind:contact="onContact"
+          // bind:getuserinfo="onGotUserInfo"
+        />
+
+        <FloatAction
+          position="bottomLeft"
+          theme="balanced"
+          direction="vertical"
+          buttons={buttons}
+          // bind:change="onChange"
+          // bind:click="onClick"
+          // bind:contact="onContact"
+          // bind:getuserinfo="onGotUserInfo"
+        />
+
+        <FloatAction
+          action="按钮"
+          actionRotate={false}
+          position="center"
+          theme="balanced"
+          direction="circle"
+          buttons={buttons}
+          spaceBetween={80}
+          // bind:change="onChange"
+          // bind:click="onClick"
+          // bind:contact="onContact"
+          // bind:getuserinfo="onGotUserInfo"
+        />
+
+        <FloatAction
+          position="bottomRight"
+          theme="balanced"
+          direction="horizontal"
           buttons={buttons}
           // bind:change="onChange"
           // bind:click="onClick"
