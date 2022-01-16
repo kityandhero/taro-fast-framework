@@ -13,7 +13,6 @@ const defaultProps = {
   price: 0,
   bodyStyle: {},
   itemStyle: {},
-
   prefix: '',
   prefixStyle: {},
   integerPartStyle: {},

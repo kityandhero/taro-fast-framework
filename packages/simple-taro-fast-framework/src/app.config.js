@@ -43,6 +43,7 @@ export default {
         'pages/radio/index',
         'pages/countdown/index',
         'pages/helpBox/index',
+        'pages/copyright/index',
       ],
     },
   ],

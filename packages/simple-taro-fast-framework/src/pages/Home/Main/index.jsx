@@ -193,6 +193,11 @@ export default class Index extends PageWrapper {
               name: 'HelpBox',
               path: pathCollection.helpBox.path,
             })}
+
+            {this.buildItem({
+              name: 'Copyright',
+              path: pathCollection.copyright.path,
+            })}
           </Space>
         </BlockArea>
       </View>

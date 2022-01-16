@@ -1,0 +1,141 @@
+@class-prefix-button: ~'tfc-float-action';
+
+.@{class-prefix-button} {
+  &__mask {
+    position: fixed;
+    width: 100vw;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  &__mask_no_active {
+    z-index: -1;
+  }
+
+  &__mask_active {
+    z-index: 145;
+  }
+
+  &__mask_content {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &__mask_content_no_active {
+    opacity: 0;
+  }
+
+  &__mask_content_active {
+    opacity: 1;
+  }
+
+  &__fixed {
+    position: fixed;
+    right: 50px;
+    bottom: 200px;
+    z-index: 146;
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &__switch_box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__switch_open_box_dead {
+    opacity: 0;
+  }
+
+  &__switch_open_box_active {
+    opacity: 1;
+  }
+
+  &__switch_close_box_dead {
+    opacity: 0;
+  }
+
+  &__switch_close_box_active {
+    opacity: 1;
+  }
+
+  &__image_box {
+    padding: 10%;
+    width: 80%;
+    height: 80%;
+  }
+
+  &__imageContainorInner {
+    margin: 10rpx;
+  }
+
+  &__textContainorInner {
+    margin: 10rpx;
+    line-height: 1;
+  }
+
+  &__icon_box {
+    font-variant: small-caps;
+    margin: 8rpx;
+    padding: 0;
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    // background-color: #c2c2c2;
+    color: #fff;
+    white-space: nowrap;
+    position: relative;
+    width: 84px;
+    height: 84px;
+    background-size: cover;
+    background-position: center;
+    vertical-align: middle;
+    font-size: 1.5em;
+    &.sm {
+      width: 48px;
+      height: 48px;
+      font-size: 1em;
+    }
+    &.lg {
+      width: 96px;
+      height: 96px;
+      font-size: 2em;
+    }
+    &.xl {
+      width: 128px;
+      height: 128px;
+      font-size: 2.5em;
+    }
+    .avatar-text {
+      font-size: 0.4em;
+    }
+  }
+
+  &__icon_box_active {
+    background-color: #c2c2c2;
+  }
+
+  &__active {
+    margin: 10rpx;
+  }
+
+  &__icon_box_round {
+    border-radius: 50%;
+  }
+
+  &__icon_box_shadow {
+    box-shadow: 0.128rem 0.128rem 0.17067rem rgba(173, 171, 171, 0.2);
+  }
+}
