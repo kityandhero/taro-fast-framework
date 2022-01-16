@@ -6,6 +6,7 @@ import {
   isUrl,
   isImageBase4,
   isString,
+  isFunction,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -154,6 +155,12 @@ class FloatAction extends ComponentBase {
   // eslint-disable-next-line no-unused-vars
   onItemClick = (button, index) => {
     const { closeAfterItemClick } = this.props;
+
+    const { onClick } = button;
+
+    if (isFunction(onClick)) {
+      onClick(button);
+    }
 
     if (!button.disabled && closeAfterItemClick) {
       this.onChange(false);
