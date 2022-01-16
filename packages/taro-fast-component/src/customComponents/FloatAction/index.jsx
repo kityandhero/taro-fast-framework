@@ -260,7 +260,6 @@ class FloatAction extends ComponentBase {
 
   render() {
     const {
-      overlay,
       action,
       position,
       theme,
@@ -271,6 +270,7 @@ class FloatAction extends ComponentBase {
       buttons,
       hoverClass,
       hidden,
+      overlay,
       overlayStyle,
       overlayDuration,
     } = this.props;
