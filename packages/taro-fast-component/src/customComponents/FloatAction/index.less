@@ -1,7 +1,20 @@
 @wux-prefix: wux;
+@white: #fff;
+@positive: #387ef5;
+@calm: #11c1f3;
+@balanced: #33cd5f;
+@energized: #ffc900;
+@assertive: #ef473a;
+@royal: #886aea;
+@dark: #444;
+@spacing-base: 10px;
+@light-inverse: #ddd;
+@stable-inverse: #b2b2b2;
 @disabled-opacity: 0.3;
 @fab-button-icon-size: 20px;
 @fab-button-action-size: 50px;
+@text-color-dark: fade(@white, 85%);
+@text-color-inverse: @white;
 @fab-button-box-shadow: 0 0 4px rgba(0, 0, 0, 0.14),
   0 4px 8px rgba(0, 0, 0, 0.28);
 @fab-button-label-color: @text-color-dark;
@@ -27,6 +40,47 @@
   &--@{theme} &__button,
   &--@{theme} &__button--disabled {
     background-color: @color !important;
+  }
+}
+
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+
+.square(@size) {
+  .size(@size; @size);
+}
+
+// reset button style for weapp
+.button-reset(@color: inherit, @bg-color: transparent) {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  color: @color !important;
+  background: @bg-color !important;
+  font-size: inherit;
+  font-weight: normal;
+  line-height: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  overflow: visible;
+  min-height: 0 !important;
+  width: auto !important;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+
+  &::after {
+    display: block;
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    transform: none;
+    transform-origin: 0 0;
   }
 }
 
