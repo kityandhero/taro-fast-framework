@@ -108,6 +108,7 @@ export default class Index extends PageWrapper {
           theme="balanced"
           direction="horizontal"
           buttons={this.buttons}
+          backdrop
           // bind:change="onChange"
           // bind:click="onClick"
           // bind:contact="onContact"
