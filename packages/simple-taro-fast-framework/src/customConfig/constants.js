@@ -109,6 +109,9 @@ export const pathCollection = {
   floatAction: {
     path: '/example/pages/floatAction/index',
   },
+  verticalBox: {
+    path: '/example/pages/verticalBox/index',
+  },
 };
 
 export const cardHeaderStyle = {

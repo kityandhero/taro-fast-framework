@@ -22,11 +22,13 @@ class Selector extends ComponentBase {
   constructor(props) {
     super(props);
 
+    const { value } = props;
+
     this.state = {
       ...this.state,
       ...{
-        valueFlag: '',
-        valueTemp: '',
+        valueFlag: value || [],
+        valueTemp: value || [],
       },
     };
   }
@@ -45,16 +47,35 @@ class Selector extends ComponentBase {
     return {};
   }
 
-  triggerChange = (val) => {
-    const { options, onChange } = this.props;
+  triggerChange = (option, active) => {
+    const { options, multiple, onChange } = this.props;
+    const { valueTemp } = this.state;
 
     if (!isArray(options)) {
       throw new Error('Selector Options must be array');
     }
 
+    let val = [];
+
+    if (multiple) {
+      val = active
+        ? valueTemp.filter((v) => v !== option.value)
+        : [...valueTemp, option.value];
+
+      this.setState({
+        valueTemp: val,
+      });
+    } else {
+      val = active ? [] : [option.value];
+
+      this.setState({
+        valueTemp: val,
+      });
+    }
+
     const extend = {
       get items() {
-        return options.filter((option) => val.includes(option.value));
+        return options.filter((o) => val.includes(o.value));
       },
     };
 
@@ -88,29 +109,18 @@ class Selector extends ComponentBase {
             if (disabled) {
               return;
             }
-            if (multiple) {
-              const val = active
-                ? valueTemp.filter((v) => v !== option.value)
-                : [...valueTemp, option.value];
 
-              this.setState({
-                valueTemp: val,
-              });
-            } else {
-              const val = active ? [] : [option.value];
-
-              this.setState({
-                valueTemp: val,
-              });
-            }
+            this.triggerChange(option, active);
           }}
         >
           {option.label}
+
           {option.description && (
             <View className={`${classPrefix}-item-description`}>
               {option.description}
             </View>
           )}
+
           {active && (
             <View className={`${classPrefix}-check-mark-wrapper`}>
               <IconCheck

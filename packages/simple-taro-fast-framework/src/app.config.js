@@ -45,6 +45,7 @@ export default {
         'pages/helpBox/index',
         'pages/copyright/index',
         'pages/floatAction/index',
+        'pages/verticalBox/index',
       ],
     },
   ],

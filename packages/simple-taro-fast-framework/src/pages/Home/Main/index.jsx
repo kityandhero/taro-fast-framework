@@ -25,6 +25,16 @@ export default class Index extends PageWrapper {
     );
   };
 
+  onShareAppMessage() {
+    const o = {
+      ...{
+        path: pathCollection.main.path,
+      },
+    };
+
+    return o;
+  }
+
   renderFurther() {
     return (
       <View className="index">
@@ -83,6 +93,11 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'Layout',
             path: pathCollection.layout.path,
+          })}
+
+          {this.buildItem({
+            name: 'VerticalBox',
+            path: pathCollection.verticalBox.path,
           })}
 
           {this.buildItem({
