@@ -121,6 +121,9 @@ export const pathCollection = {
   centerBox: {
     path: '/example/pages/centerBox/index',
   },
+  dataGrid: {
+    path: '/example/pages/dataGrid/index',
+  },
 };
 
 export const cardHeaderStyle = {

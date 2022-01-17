@@ -49,6 +49,7 @@ export default {
         'pages/horizontalCenterBox/index',
         'pages/flexBox/index',
         'pages/centerBox/index',
+        'pages/dataGrid/index',
       ],
     },
   ],

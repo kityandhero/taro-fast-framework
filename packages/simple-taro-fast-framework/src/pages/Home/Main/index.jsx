@@ -231,6 +231,11 @@ export default class Index extends PageWrapper {
             name: 'Steps',
             path: pathCollection.steps.path,
           })}
+
+          {this.buildItem({
+            name: 'DataGrid',
+            path: pathCollection.dataGrid.path,
+          })}
         </Card>
 
         <Card header="扩展组件" headerStyle={cardHeaderStyle} space={false}>

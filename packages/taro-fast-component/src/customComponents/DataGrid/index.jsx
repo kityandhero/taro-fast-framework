@@ -114,6 +114,7 @@ class DataGrid extends ComponentBase {
 
       const labelStyle = {
         ...{
+          fontSize: '30rpx',
           width: '180rpx',
         },
         ...(labelStyleSource || {}),
@@ -121,6 +122,9 @@ class DataGrid extends ComponentBase {
       };
 
       const contentStyle = {
+        ...{
+          fontSize: '30rpx',
+        },
         ...(contentStyleSource || {}),
         ...(bordered
           ? {
@@ -178,7 +182,7 @@ class DataGrid extends ComponentBase {
                 value: itemValue,
                 emptyValue: itemEmptyValue,
                 emptyStyle: itemEmptyStyle,
-                size: itemSize,
+                span: itemSpan,
                 canCopy: itemCanCopy,
                 copyData: itemCopyData,
                 props: itemProps,
@@ -189,7 +193,7 @@ class DataGrid extends ComponentBase {
                   value: '',
                   emptyValue: null,
                   emptyStyle: null,
-                  size: 1,
+                  span: 1,
                   canCopy: false,
                   copyData: null,
                   props: null,
@@ -209,9 +213,9 @@ class DataGrid extends ComponentBase {
                   style={itemStyle}
                   label={itemLabel}
                   size={
-                    columnSize * (toNumber(itemSize) || 1) > 12
+                    columnSize * (toNumber(itemSpan) || 1) > 12
                       ? 12
-                      : columnSize * (toNumber(itemSize) || 1)
+                      : columnSize * (toNumber(itemSpan) || 1)
                   }
                   {...(itemProps || {})}
                 >
