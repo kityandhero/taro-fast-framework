@@ -4,17 +4,18 @@ import Row from '../Flex/Row';
 import Col from '../Flex/Col';
 
 const defaultProps = {
+  style: {},
   fillHeight: true,
 };
 
 class HorizontalCenterBox extends ComponentBase {
   renderFurther() {
-    const { fillHeight } = {
-      ...defaultProps,
-      ...this.props,
-    };
+    const { style: styleSource, fillHeight } = this.props;
 
-    const style = !!fillHeight ? { height: '100%' } : {};
+    const style = {
+      ...styleSource,
+      ...(!!fillHeight ? { height: '100%' } : {}),
+    };
 
     return (
       <Row justify="center" style={style}>

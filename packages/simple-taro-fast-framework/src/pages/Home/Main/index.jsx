@@ -96,8 +96,18 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
+            name: 'HorizontalCenterBox',
+            path: pathCollection.horizontalCenterBox.path,
+          })}
+
+          {this.buildItem({
             name: 'VerticalBox',
             path: pathCollection.verticalBox.path,
+          })}
+
+          {this.buildItem({
+            name: 'FlexBox',
+            path: pathCollection.flexBox.path,
           })}
 
           {this.buildItem({

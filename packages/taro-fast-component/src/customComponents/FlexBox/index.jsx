@@ -117,7 +117,7 @@ class FlexBox extends ComponentBase {
             },
           }}
         >
-          <View>{top}</View>
+          {top}
         </View>
 
         <View

@@ -50,7 +50,7 @@ export default class Index extends PageWrapper {
         <Card header="单选" headerStyle={cardHeaderStyle}>
           <Selector
             options={ItemList}
-            defaultValue={['1']}
+            value={['1']}
             onChange={(arr, extend) => console.log(arr, extend.items)}
           />
         </Card>
@@ -58,7 +58,7 @@ export default class Index extends PageWrapper {
         <Card header="多选" headerStyle={cardHeaderStyle}>
           <Selector
             options={ItemList}
-            defaultValue={['2', '3']}
+            value={['2', '3']}
             multiple
             onChange={(arr, extend) => console.log(arr, extend.items)}
           />
@@ -67,7 +67,7 @@ export default class Index extends PageWrapper {
         <Card header="全局禁止" headerStyle={cardHeaderStyle}>
           <Selector
             options={ItemList}
-            defaultValue={['1']}
+            value={['1']}
             disabled
             onChange={(arr) => console.log(arr)}
           />
@@ -77,7 +77,7 @@ export default class Index extends PageWrapper {
           <Selector
             columns={2}
             options={ItemList}
-            defaultValue={['2', '3']}
+            value={['2', '3']}
             multiple
             onChange={(arr) => console.log(arr)}
           />
@@ -87,7 +87,7 @@ export default class Index extends PageWrapper {
           <Selector
             columns={3}
             options={ItemList}
-            defaultValue={['2', '3']}
+            value={['2', '3']}
             multiple
             onChange={(arr) => console.log(arr)}
           />
@@ -112,7 +112,7 @@ export default class Index extends PageWrapper {
                 value: '2',
               },
             ]}
-            defaultValue={['1']}
+            value={['1']}
           />
         </Card>
 
@@ -120,7 +120,7 @@ export default class Index extends PageWrapper {
           <Selector
             style={{ '--checked-color': '#ffe2e5' }}
             options={ItemList}
-            defaultValue={['1', '2']}
+            value={['1', '2']}
             multiple
           />
         </Card>
@@ -132,7 +132,7 @@ export default class Index extends PageWrapper {
           <Selector
             className="my-selector"
             options={ItemList}
-            defaultValue={['1', '2']}
+            value={['1', '2']}
             multiple
           />
         </Card>

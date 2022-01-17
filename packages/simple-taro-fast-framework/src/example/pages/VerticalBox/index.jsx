@@ -1,6 +1,10 @@
 import { View } from '@tarojs/components';
 
-import { Card, VerticalBox } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  VerticalBox,
+  HelpBox,
+} from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -70,7 +74,6 @@ export default class Index extends PageWrapper {
   }
 
   setAlignChecked = (value) => {
-    console.log(value);
     this.setState({
       align: value,
     });
@@ -105,19 +108,39 @@ export default class Index extends PageWrapper {
           </View>
         </Card>
 
-        <Card header="align" headerStyle={cardHeaderStyle}>
+        <Card header="变更align" headerStyle={cardHeaderStyle}>
           <Selector
             options={alignList}
-            defaultValue={align}
+            value={align}
             onChange={this.setAlignChecked}
           />
         </Card>
 
-        <Card header="alignJustify" headerStyle={cardHeaderStyle}>
+        <Card header="变更alignJustify" headerStyle={cardHeaderStyle}>
           <Selector
             options={alignJustifyList}
-            defaultValue={alignJustify}
+            value={alignJustify}
             onChange={this.setAlignJustifyChecked}
+          />
+        </Card>
+
+        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            list={[
+              {
+                text: 'style: 默认值为 null.',
+              },
+              {
+                text: 'align: 默认值为 center.',
+              },
+              {
+                text: 'alignJustify: 默认值为 start.',
+              },
+              {
+                text: 'onClick: 默认值为 null.',
+              },
+            ]}
           />
         </Card>
       </View>

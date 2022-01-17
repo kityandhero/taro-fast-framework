@@ -112,6 +112,12 @@ export const pathCollection = {
   verticalBox: {
     path: '/example/pages/verticalBox/index',
   },
+  horizontalCenterBox: {
+    path: '/example/pages/horizontalCenterBox/index',
+  },
+  flexBox: {
+    path: '/example/pages/flexBox/index',
+  },
 };
 
 export const cardHeaderStyle = {

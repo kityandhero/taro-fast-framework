@@ -39,8 +39,8 @@ class Selector extends ComponentBase {
 
     if (valueNext !== valuePrev) {
       return {
-        valueFlag: valueNext,
-        valueTemp: valueNext ?? '',
+        valueFlag: valueNext || [],
+        valueTemp: valueNext || [],
       };
     }
 
