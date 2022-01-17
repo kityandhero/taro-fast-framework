@@ -53,6 +53,7 @@ export default class Index extends PageWrapper {
           header="Overlay 遮罩层"
           style={style}
           headerStyle={cardHeaderStyle}
+          space={false}
         >
           <Item arrow onClick={this.onClickShow1}>
             显示遮罩层

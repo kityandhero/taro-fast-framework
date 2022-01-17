@@ -9,7 +9,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="Avatar">
+        <Card header="Avatar" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Avatar circle text="头像" />
             <Avatar text="头像" />

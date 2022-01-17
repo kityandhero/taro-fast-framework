@@ -8,8 +8,8 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
-      <View className="index" headerStyle={cardHeaderStyle}>
-        <Card header="用法展示">
+      <View className="index">
+        <Card header="用法展示" headerStyle={cardHeaderStyle}>
           <Copyright logo="https://jdc.jd.com/img/200" />
         </Card>
 

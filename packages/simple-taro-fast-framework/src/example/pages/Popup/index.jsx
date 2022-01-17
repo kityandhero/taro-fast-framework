@@ -117,26 +117,56 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="展示弹出层" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="展示弹出层"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item arrow onClick={this.showBasic}>
             展示弹出层
           </Item>
         </Card>
-        <Card header="弹出位置" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="弹出位置"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item arrow onClick={this.showTop}>
             顶部弹出
           </Item>
-          <Item arrow onClick={this.showBottom} headerStyle={cardHeaderStyle}>
+          <Item
+            arrow
+            onClick={this.showBottom}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             底部弹出
           </Item>
-          <Item arrow onClick={this.showLeft} headerStyle={cardHeaderStyle}>
+          <Item
+            arrow
+            onClick={this.showLeft}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             左侧弹出
           </Item>
-          <Item arrow onClick={this.showRight} headerStyle={cardHeaderStyle}>
+          <Item
+            arrow
+            onClick={this.showRight}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             右侧弹出
           </Item>
         </Card>
-        <Card header="关闭图标" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="关闭图标"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item arrow onClick={this.showCloseIcon}>
             关闭图标
           </Item>
@@ -147,7 +177,12 @@ export default class Index extends PageWrapper {
             图标位置
           </Item>
         </Card>
-        <Card header="圆角弹窗" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="圆角弹窗"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item arrow onClick={this.showRound}>
             圆角弹窗
           </Item>

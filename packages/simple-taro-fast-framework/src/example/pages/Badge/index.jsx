@@ -14,7 +14,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="Badge Wrapper">
+        <Card header="Badge Wrapper" headerStyle={cardHeaderStyle}>
           <Space wrap style={{ '--gap': '24px' }}>
             <Badge content="5">
               <Avatar text="图" />
@@ -56,7 +56,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="Badge Only">
+        <Card header="Badge Only" headerStyle={cardHeaderStyle}>
           <Space style={{ '--gap': '24px' }}>
             <Badge content="99+" />
 
