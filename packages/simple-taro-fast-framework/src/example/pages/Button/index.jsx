@@ -2,7 +2,7 @@ import { View, Text } from '@tarojs/components';
 
 import {
   Space,
-  BlockArea,
+  Card,
   Button,
   Icon,
 } from 'taro-fast-component/es/customComponents';
@@ -15,7 +15,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="不同颜色的按钮">
+        <Card header="不同颜色的按钮">
           <Space wrap>
             <Button
               onClick={() => {
@@ -29,15 +29,15 @@ export default class Index extends PageWrapper {
             <Button color="danger">Danger</Button>
             <Button color="warning">Warning</Button>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="块级按钮">
+        <Card header="块级按钮">
           <Button block color="primary" size="large">
             Block Button
           </Button>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="填充模式">
+        <Card header="填充模式">
           <Space wrap>
             <Button color="primary" fill="solid">
               Solid
@@ -49,9 +49,9 @@ export default class Index extends PageWrapper {
               None
             </Button>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="不同大小的按钮">
+        <Card header="不同大小的按钮">
           <Space wrap align="center">
             <Button size="mini" color="primary">
               Mini
@@ -66,36 +66,36 @@ export default class Index extends PageWrapper {
               Large
             </Button>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="禁用状态">
+        <Card header="禁用状态">
           <Space wrap>
             <Button disabled>Disabled</Button>
             <Button disabled color="primary">
               Disabled
             </Button>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="加载状态">
+        <Card header="加载状态">
           <Space wrap>
             <Button loading color="primary" loadingText="加载中">
               Loading
             </Button>
             <Button loading>Loading</Button>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="带图标的按钮">
+        <Card header="带图标的按钮">
           <Button>
             <Space>
               <IconSearch size={19} />
               <Text>搜索</Text>
             </Space>
           </Button>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="不同类型圆角">
+        <Card header="不同类型圆角">
           <Space wrap>
             <Button shape="default" color="primary">
               Default Button
@@ -107,7 +107,7 @@ export default class Index extends PageWrapper {
               Rectangular Button
             </Button>
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

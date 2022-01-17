@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import {
   AutoCenter,
-  BlockArea,
+  Card,
   FlexBox,
   ImageBox,
   Space,
@@ -23,39 +23,39 @@ export default class Index extends PageWrapper {
       <View className="index">
         <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
 
-        <BlockArea title="普通使用">
+        <Card header="普通使用">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="指定容器样式">
+        <Card header="指定容器样式">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox imageBoxStyle={imageContainerStyle} src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="showMode:loading">
+        <Card header="showMode:loading">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox showMode="loading" src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="showOverlay:true">
+        <Card header="showOverlay:true">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox showOverlay overlayText="售罄" src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="decoration">
+        <Card header="decoration">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox
@@ -66,9 +66,9 @@ export default class Index extends PageWrapper {
               />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="imageMode [取值等同于微信Image]">
+        <Card header="imageMode [取值等同于微信Image]">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox imageMode="scaleToFill" src={src} />
@@ -126,25 +126,25 @@ export default class Index extends PageWrapper {
               <ImageBox imageMode="bottom right" src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="圆形轮廓">
+        <Card header="圆形轮廓">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox circle src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="LazyLoad">
+        <Card header="LazyLoad">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox lazyLoad src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="指定长宽比">
+        <Card header="指定长宽比">
           <Space wrap>
             <View style={imageBoxContainerStyle}>
               <ImageBox aspectRatio={0.5} src={src} />
@@ -154,9 +154,9 @@ export default class Index extends PageWrapper {
               <ImageBox circle aspectRatio={0.5} src={src} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="简单布局">
+        <Card header="简单布局">
           <FlexBox
             flexAuto="right"
             left={
@@ -183,7 +183,7 @@ export default class Index extends PageWrapper {
             }
             rightStyle={{ paddingLeft: '10rpx' }}
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

@@ -7,7 +7,7 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { formatCollection } from 'taro-fast-common/es/utils/constants';
 import {
-  BlockArea,
+  Card,
   Button,
   HorizontalCenterBox,
   Space,
@@ -67,7 +67,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="demo">
+        <Card header="demo">
           <Space direction="vertical" fillWidth>
             <Circle
               style={{
@@ -198,7 +198,7 @@ export default class Index extends PageWrapper {
               </Space>
             </HorizontalCenterBox>
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

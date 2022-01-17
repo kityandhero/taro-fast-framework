@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { BlockArea, Grid } from 'taro-fast-component/es/customComponents';
+import { Card, Grid } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -16,7 +16,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="基础用法">
+        <Card header="基础用法">
           <Grid columns={3} gap={8}>
             <Grid.Item>
               <View style={styles}>A</View>
@@ -34,9 +34,9 @@ export default class Index extends PageWrapper {
               <View style={styles}>E</View>
             </Grid.Item>
           </Grid>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="控制格子的跨度">
+        <Card header="控制格子的跨度">
           <Grid columns={3} gap={8}>
             <Grid.Item>
               <View style={styles}>A</View>
@@ -54,7 +54,7 @@ export default class Index extends PageWrapper {
               <View style={styles}>E</View>
             </Grid.Item>
           </Grid>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

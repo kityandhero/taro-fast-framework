@@ -12,7 +12,8 @@ import {
 import { toLower } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import List from '../List';
+import Card from '../Card';
+import Item from '../Item';
 import Icon from '../Icon';
 import CenterBox from '../CenterBox';
 
@@ -146,7 +147,7 @@ class Radio extends ComponentBase {
     const layout = this.getLayout();
 
     return (
-      <List
+      <Card
         header={header}
         headerStyle={headerStyle}
         bodyStyle={bodyStyle}
@@ -169,7 +170,7 @@ class Radio extends ComponentBase {
 
           if (layout === 'list') {
             return (
-              <List.Item
+              <Item
                 key={key}
                 prefix={prefix}
                 title={title}
@@ -190,12 +191,12 @@ class Radio extends ComponentBase {
                 }}
               >
                 {label}
-              </List.Item>
+              </Item>
             );
           }
 
           return (
-            <List.Item
+            <Item
               key={key}
               // prefix={prefix}
               prefix={
@@ -234,10 +235,10 @@ class Radio extends ComponentBase {
               }}
             >
               {label}
-            </List.Item>
+            </Item>
           );
         })}
-      </List>
+      </Card>
     );
   }
 }

@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import {
-  BlockArea,
+  Card,
   Row,
   Col,
   HorizontalCenterBox,
@@ -24,7 +24,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="Flex">
+        <Card header="Flex">
           <View>
             <Row justify="center" style={rowStyle}>
               <Col size={1} style={colStyle}>
@@ -54,9 +54,9 @@ export default class Index extends PageWrapper {
               <Col size={6}>6</Col>
             </Row>
           </View>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="FlexBox">
+        <Card header="FlexBox">
           <FlexBox left="仅左侧" />
 
           <FlexBox
@@ -85,17 +85,17 @@ export default class Index extends PageWrapper {
             bottom="下侧"
             bottomStyle={colStyle}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="HorizontalCenterBox">
+        <Card header="HorizontalCenterBox">
           <HorizontalCenterBox>1</HorizontalCenterBox>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="VerticalBox">
+        <Card header="VerticalBox">
           <View style={{ height: '100rpx' }}>
             <VerticalBox>1</VerticalBox>
           </View>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

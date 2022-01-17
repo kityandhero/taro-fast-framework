@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import {
-  BlockArea,
+  Card,
   Space,
   AdvanceProgress,
   Button,
@@ -43,7 +43,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="动画">
+        <Card header="动画">
           <Space direction="vertical" block>
             <View>
               <Button
@@ -69,50 +69,50 @@ export default class Index extends PageWrapper {
             <AdvanceProgress percent={percent} active />
             <AdvanceProgress percent={percent} active activeMode="forwards" />
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Hidden">
+        <Card header="Hidden">
           <Space direction="vertical" block>
             <AdvanceProgress hidden percent={percent} />
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="指定线条宽度">
+        <Card header="指定线条宽度">
           <Space direction="vertical" block>
             <AdvanceProgress percent={50} strokeWidth={2} />
             <AdvanceProgress percent={75} strokeWidth={6} />
             <AdvanceProgress percent={100} strokeWidth={8} />
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="指定颜色">
+        <Card header="指定颜色">
           <AdvanceProgress
             percent={50}
             activeColor="#FF3141"
             backgroundColor="#000000"
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="圆角">
+        <Card header="圆角">
           <AdvanceProgress percent={50} borderRadius={4} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="显示百分比">
+        <Card header="显示百分比">
           <AdvanceProgress percent={50} showInfo />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="百分比字体大小">
+        <Card header="百分比字体大小">
           <AdvanceProgress percent={50} showInfo fontSize={12} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Icon">
+        <Card header="Icon">
           <AdvanceProgress
             percent={50}
             icon={<IconCheckCircle size={19} color="green" />}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Simple">
+        <Card header="Simple">
           <AdvanceProgress
             percent={70}
             borderRadius={4}
@@ -122,7 +122,7 @@ export default class Index extends PageWrapper {
             backgroundColor="#000000"
             icon={<IconCheckCircle size={19} showInfo color="green" />}
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

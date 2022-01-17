@@ -7,7 +7,7 @@ import {
   Space,
   Spin,
   Empty,
-  BlockArea,
+  Card,
   FadeView,
 } from 'taro-fast-component/es/customComponents';
 import { buildAdvanceButton } from 'taro-fast-component/es/functionComponent';
@@ -91,7 +91,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="Buttons Color">
+        <Card header="Buttons Color">
           <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
             <Space wrap>
               {buildAdvanceButton({
@@ -129,9 +129,9 @@ export default class Index extends PageWrapper {
               })}
             </Space>
           </VerticalBox>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Buttons Block Large">
+        <Card header="Buttons Block Large">
           <Space direction="vertical">
             {buildAdvanceButton({
               inner: 'Block Button',
@@ -140,9 +140,9 @@ export default class Index extends PageWrapper {
               size: 'large',
             })}
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Button Action">
+        <Card header="Button Action">
           <Space wrap>
             {buildAdvanceButton({
               inner: 'Action',
@@ -178,9 +178,9 @@ export default class Index extends PageWrapper {
               onClick: this.showRemoteMetaDataInConsole,
             })}
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="联动 reloading">
+        <Card header="联动 reloading">
           <Spin spin={!firstLoadSuccess}>
             <FadeView show={!dataLoading}>
               <VerticalBox style={{ height: '50rpx' }} alignJustify="center">
@@ -204,7 +204,7 @@ export default class Index extends PageWrapper {
               </VerticalBox>
             </FadeView>
           </Spin>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

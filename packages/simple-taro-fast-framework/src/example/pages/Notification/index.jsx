@@ -1,10 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  BlockArea,
-  Space,
-  Button,
-} from 'taro-fast-component/es/customComponents';
+import { Card, Space, Button } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -19,7 +15,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="块级按钮">
+        <Card header="块级按钮">
           <Space direction="vertical" fillWidth>
             <Button
               block
@@ -61,7 +57,7 @@ export default class Index extends PageWrapper {
               警告消息
             </Button>
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

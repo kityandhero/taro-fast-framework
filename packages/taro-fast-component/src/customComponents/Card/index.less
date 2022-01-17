@@ -1,0 +1,43 @@
+.tfc-card {
+  --prefix-width: 'auto';
+  --align-items: center;
+  --active-background-color: var(--tfc-border-color);
+  --border-inner: solid 2rpx var(--tfc-border-color);
+  --border-top: solid 2rpx var(--tfc-border-color);
+  --border-bottom: solid 2rpx var(--tfc-border-color);
+  --padding-left: 24rpx;
+
+  background-color: #ffffff;
+  overflow: hidden;
+  font-size: 34rpx;
+
+  &-header {
+    color: var(--tfc-color-weak);
+    font-size: 30rpx;
+    padding-left: 24rpx;
+    padding-top: 16rpx;
+    padding-bottom: 16rpx;
+  }
+
+  &-body {
+    background-color: #fff;
+    overflow: hidden;
+    font-size: 34rpx;
+    border-top: var(--border-top);
+    // border-bottom: var(--border-bottom);
+
+    &-inner {
+      margin-bottom: -2rpx;
+    }
+  }
+
+  &-through {
+    border-top: var(--border-top);
+    border-bottom: var(--border-bottom);
+  }
+
+  &-card {
+    margin: 24rpx;
+    border-radius: 16rpx;
+  }
+}

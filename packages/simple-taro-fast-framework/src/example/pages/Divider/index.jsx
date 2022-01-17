@@ -1,7 +1,7 @@
 import { View, Text } from '@tarojs/components';
 
 import {
-  BlockArea,
+  Card,
   Divider,
   Space,
   Icon,
@@ -16,17 +16,17 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="基础分割线">
+        <Card header="基础分割线">
           <Divider />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="带内容的分割线">
+        <Card header="带内容的分割线">
           <Divider>默认内容在中间</Divider>
           <Divider contentPosition="left">左侧内容</Divider>
           <Divider contentPosition="right">右侧内容</Divider>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义样式">
+        <Card header="自定义样式">
           <Divider
             style={{
               color: '#1677ff',
@@ -36,9 +36,9 @@ export default class Index extends PageWrapper {
           >
             自定义样式
           </Divider>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="图标">
+        <Card header="图标">
           <Divider
             style={{
               color: '#1677ff',
@@ -51,9 +51,9 @@ export default class Index extends PageWrapper {
               <Text>搜索</Text>
             </Space>
           </Divider>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="buildDivider">
+        <Card header="buildDivider">
           {buildDivider({
             contentPosition: 'left',
             style: {
@@ -64,7 +64,7 @@ export default class Index extends PageWrapper {
             icon: <IconSearch size={16} />,
             text: '搜索',
           })}
-        </BlockArea>
+        </Card>
       </View>
     );
   }

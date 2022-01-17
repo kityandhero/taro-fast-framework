@@ -8,7 +8,7 @@ import {
   addSecond,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  BlockArea,
+  Card,
   Space,
   Countdown,
 } from 'taro-fast-component/es/customComponents';
@@ -27,7 +27,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="一般用法">
+        <Card header="一般用法">
           <Space direction="vertical" block>
             <View>
               <Countdown endTime={addMinute(getNow(), 15)} />
@@ -45,9 +45,9 @@ export default class Index extends PageWrapper {
               <Countdown isShowHour={false} endTime={addHour(getNow(), 4)} />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义格式化">
+        <Card header="自定义格式化">
           <Space direction="vertical" block>
             <View>
               <Countdown
@@ -56,9 +56,9 @@ export default class Index extends PageWrapper {
               />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="卡片式">
+        <Card header="卡片式">
           <Space direction="vertical" block>
             <View>
               <Countdown
@@ -69,9 +69,9 @@ export default class Index extends PageWrapper {
               />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义倒计时回调事件">
+        <Card header="自定义倒计时回调事件">
           <Space direction="vertical" block>
             <View>
               <Countdown
@@ -81,7 +81,7 @@ export default class Index extends PageWrapper {
               />
             </View>
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import {
   Space,
-  BlockArea,
+  Card,
   Avatar,
   Badge,
 } from 'taro-fast-component/es/customComponents';
@@ -13,7 +13,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="Badge Wrapper">
+        <Card header="Badge Wrapper">
           <Space wrap style={{ '--gap': '24px' }}>
             <Badge content="5">
               <Avatar text="图" />
@@ -53,15 +53,15 @@ export default class Index extends PageWrapper {
               <Avatar text="图" />
             </Badge>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Badge Only">
+        <Card header="Badge Only">
           <Space style={{ '--gap': '24px' }}>
             <Badge content="99+" />
 
             <Badge content="新消息!" />
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View } from '@tarojs/components';
 
-import { BlockArea } from 'taro-fast-component/es/customComponents';
+import { Card } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -46,33 +46,33 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="单选">
+        <Card header="单选">
           <Selector
             options={ItemList}
             defaultValue={['1']}
             onChange={(arr, extend) => console.log(arr, extend.items)}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="多选">
+        <Card header="多选">
           <Selector
             options={ItemList}
             defaultValue={['2', '3']}
             multiple
             onChange={(arr, extend) => console.log(arr, extend.items)}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="全局禁止">
+        <Card header="全局禁止">
           <Selector
             options={ItemList}
             defaultValue={['1']}
             disabled
             onChange={(arr) => console.log(arr)}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="固定两列">
+        <Card header="固定两列">
           <Selector
             columns={2}
             options={ItemList}
@@ -80,9 +80,9 @@ export default class Index extends PageWrapper {
             multiple
             onChange={(arr) => console.log(arr)}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="固定三列">
+        <Card header="固定三列">
           <Selector
             columns={3}
             options={ItemList}
@@ -90,13 +90,13 @@ export default class Index extends PageWrapper {
             multiple
             onChange={(arr) => console.log(arr)}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="避免取消选择">
+        <Card header="避免取消选择">
           <RadioMode />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="选项带描述">
+        <Card header="选项带描述">
           <Selector
             columns={2}
             options={[
@@ -113,25 +113,25 @@ export default class Index extends PageWrapper {
             ]}
             defaultValue={['1']}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义样式（通过 style）">
+        <Card header="自定义样式（通过 style）">
           <Selector
             style={{ '--checked-color': '#ffe2e5' }}
             options={ItemList}
             defaultValue={['1', '2']}
             multiple
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义样式（通过 className）">
+        <Card header="自定义样式（通过 className）">
           <Selector
             className="my-selector"
             options={ItemList}
             defaultValue={['1', '2']}
             multiple
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

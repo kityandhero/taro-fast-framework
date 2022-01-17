@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { BlockArea, HelpBox } from 'taro-fast-component/es/customComponents';
+import { Card, HelpBox } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -23,34 +23,34 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="一般用法">
+        <Card header="一般用法">
           <HelpBox list={list} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="隐藏标题">
+        <Card header="隐藏标题">
           <HelpBox list={list} showTitle={false} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="不显示行号">
+        <Card header="不显示行号">
           <HelpBox title="操作说明" showTitle showNumber={false} list={list} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="标题宽度">
+        <Card header="标题宽度">
           <HelpBox title="操作说明" showTitle labelWidth={80} list={list} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="无背景">
+        <Card header="无背景">
           <HelpBox
             title="操作说明"
             showTitle
             useBackground={false}
             list={list}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="隐藏">
+        <Card header="隐藏">
           <HelpBox title="操作说明" showTitle hidden list={list} />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

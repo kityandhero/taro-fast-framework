@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { BlockArea, Tabs } from 'taro-fast-component/es/customComponents';
+import { Card, Tabs } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -60,7 +60,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="基本用法" contentStyle={contentStyle}>
+        <Card header="基本用法" contentStyle={contentStyle}>
           <Tabs
             current={this.state.current1}
             tabList={tabList}
@@ -84,9 +84,9 @@ export default class Index extends PageWrapper {
               </View>
             </TabPanel>
           </Tabs>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="滚动标签栏" contentStyle={contentStyle}>
+        <Card header="滚动标签栏" contentStyle={contentStyle}>
           <Tabs
             current={this.state.current2}
             scroll
@@ -133,9 +133,9 @@ export default class Index extends PageWrapper {
               </View>
             </TabPanel>
           </Tabs>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="垂直模式" contentStyle={contentStyle}>
+        <Card header="垂直模式" contentStyle={contentStyle}>
           <Tabs
             current={this.state.current3}
             scroll
@@ -208,9 +208,9 @@ export default class Index extends PageWrapper {
               </View>
             </TabPanel>
           </Tabs>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="禁止内容切换动画" contentStyle={contentStyle}>
+        <Card header="禁止内容切换动画" contentStyle={contentStyle}>
           <Tabs
             animated={false}
             current={this.state.current4}
@@ -239,7 +239,7 @@ export default class Index extends PageWrapper {
               </View>
             </TabPanel>
           </Tabs>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { BlockArea, Space, Tag } from 'taro-fast-component/es/customComponents';
+import { Card, Space, Tag } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -8,11 +8,11 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="基本用法">
+        <Card header="基本用法">
           <Tag>123</Tag>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="默认提供 5 种通用标签颜色">
+        <Card header="默认提供 5 种通用标签颜色">
           <Space>
             <Tag color="default">Default</Tag>
             <Tag color="primary">测试</Tag>
@@ -20,16 +20,16 @@ export default class Index extends PageWrapper {
             <Tag color="warning">Warning</Tag>
             <Tag color="danger">Danger</Tag>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义颜色">
+        <Card header="自定义颜色">
           <Space>
             <Tag color="#2db7f5">#2db7f5</Tag>
             <Tag color="#87d068">#87d068</Tag>
             <Tag color="#108ee9">#108ee9</Tag>
           </Space>
-        </BlockArea>
-        <BlockArea title="线框填充">
+        </Card>
+        <Card header="线框填充">
           <Space>
             <Tag color="primary" fill="outline">
               Primary
@@ -41,15 +41,15 @@ export default class Index extends PageWrapper {
               #ff6430
             </Tag>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="圆角">
+        <Card header="圆角">
           <Tag shape="circle" color="#2db7f5">
             circle
           </Tag>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="半圆角">
+        <Card header="半圆角">
           <Space>
             <Tag shape="circleLeft" color="#2db7f5">
               circle left
@@ -59,13 +59,13 @@ export default class Index extends PageWrapper {
               circle right
             </Tag>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="hidden">
+        <Card header="hidden">
           <Tag hidden>hidden</Tag>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="onClick">
+        <Card header="onClick">
           <Space>
             <Tag
               color="default"
@@ -78,9 +78,9 @@ export default class Index extends PageWrapper {
               click
             </Tag>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="可以关闭">
+        <Card header="可以关闭">
           <Space>
             <Tag
               color="default"
@@ -117,9 +117,9 @@ export default class Index extends PageWrapper {
               click
             </Tag>
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="通过 CSS 变量进行个性化">
+        <Card header="通过 CSS 变量进行个性化">
           <Space>
             <Tag
               color="primary"
@@ -149,7 +149,7 @@ export default class Index extends PageWrapper {
               Danger
             </Tag>
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

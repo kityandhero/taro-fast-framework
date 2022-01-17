@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import {
   Space,
   AutoCenter,
-  BlockArea,
+  Card,
   Button,
 } from 'taro-fast-component/es/customComponents';
 
@@ -32,7 +32,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
 
-        <BlockArea title="组件示例">
+        <Card title="组件示例">
           <Space wrap>
             {this.buildItem({
               name: 'Ellipsis',
@@ -160,8 +160,13 @@ export default class Index extends PageWrapper {
             })}
 
             {this.buildItem({
-              name: 'List',
-              path: pathCollection.list.path,
+              name: 'Card',
+              path: pathCollection.card.path,
+            })}
+
+            {this.buildItem({
+              name: 'Item',
+              path: pathCollection.item.path,
             })}
 
             {this.buildItem({
@@ -204,7 +209,7 @@ export default class Index extends PageWrapper {
               path: pathCollection.floatAction.path,
             })}
           </Space>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

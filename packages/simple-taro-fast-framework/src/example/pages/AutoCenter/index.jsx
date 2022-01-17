@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { AutoCenter, BlockArea } from 'taro-fast-component/es/customComponents';
+import { AutoCenter, Card } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -8,7 +8,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="AutoCenter">
+        <Card header="AutoCenter">
           <AutoCenter>
             Esse ad minim incididunt elit veniam elit deserunt. Enim nisi duis
             aliquip mollit adipisicing. Dolor excepteur ipsum in quis magna
@@ -20,7 +20,7 @@ export default class Index extends PageWrapper {
             culpa Lorem. Dolore ullamco aliqua do reprehenderit consectetur
             proident occaecat laborum tempor proident ipsum labore quis culpa.
           </AutoCenter>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

@@ -1,10 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  BlockArea,
-  NoticeBar,
-  Icon,
-} from 'taro-fast-component/es/customComponents';
+import { Card, NoticeBar, Icon } from 'taro-fast-component/es/customComponents';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -16,25 +12,25 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="Icon">
+        <Card header="Icon">
           <NoticeBar icon={<IconVolumePlus size={19} />}>
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Closeable [single 模式非 marquee 下生效]">
+        <Card header="Closeable [single 模式非 marquee 下生效]">
           <NoticeBar single closeable>
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Marquee [marquee 将自动启用 single 模式]">
+        <Card header="Marquee [marquee 将自动启用 single 模式]">
           <NoticeBar marquee>
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Extra [single 模式下生效]">
+        <Card header="Extra [single 模式下生效]">
           <NoticeBar
             single
             extra={
@@ -54,15 +50,15 @@ export default class Index extends PageWrapper {
           >
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="More [single 模式下生效]">
+        <Card header="More [single 模式下生效]">
           <NoticeBar single extra={<More />}>
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="MoreText [single 模式下生效]">
+        <Card header="MoreText [single 模式下生效]">
           <NoticeBar
             single
             extra={
@@ -76,9 +72,9 @@ export default class Index extends PageWrapper {
           >
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Simple">
+        <Card header="Simple">
           <NoticeBar
             icon={<IconVolumePlus size={19} />}
             marquee
@@ -87,7 +83,7 @@ export default class Index extends PageWrapper {
           >
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

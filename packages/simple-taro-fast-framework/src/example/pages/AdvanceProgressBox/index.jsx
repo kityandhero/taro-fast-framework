@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
 import {
-  BlockArea,
+  Card,
   Space,
   AdvanceProgressBox,
   Button,
@@ -63,7 +63,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="Layout: Horizontal">
+        <Card header="Layout: Horizontal">
           <Space direction="vertical" block>
             <View>
               <Button
@@ -95,9 +95,9 @@ export default class Index extends PageWrapper {
               }
             />
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Layout: Vertical">
+        <Card header="Layout: Vertical">
           <Space direction="vertical" block>
             <View>
               <Button
@@ -130,9 +130,9 @@ export default class Index extends PageWrapper {
               }
             />
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Simple: Horizontal">
+        <Card header="Simple: Horizontal">
           <AdvanceProgressBox
             label="进度"
             percent={70}
@@ -162,9 +162,9 @@ export default class Index extends PageWrapper {
               }
             }
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Simple: Vertical">
+        <Card header="Simple: Vertical">
           <AdvanceProgressBox
             layout="vertical"
             label="进度"
@@ -195,7 +195,7 @@ export default class Index extends PageWrapper {
               }
             }
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

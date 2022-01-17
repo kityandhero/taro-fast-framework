@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import {
   Space,
   AutoCenter,
-  BlockArea,
+  Card,
   FlexBox,
 } from 'taro-fast-component/es/customComponents';
 
@@ -27,7 +27,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
 
-        <BlockArea title="组件示例">
+        <Card header="组件示例">
           <Space wrap>
             {this.buildItem({
               name: 'ImageBox',
@@ -54,9 +54,9 @@ export default class Index extends PageWrapper {
               path: pathCollection.flex.path,
             })}
           </Space>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="FlexBox">
+        <Card header="FlexBox">
           <FlexBox left="仅左侧" />
 
           <FlexBox
@@ -85,7 +85,7 @@ export default class Index extends PageWrapper {
             bottom="下侧"
             bottomStyle={colStyle}
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

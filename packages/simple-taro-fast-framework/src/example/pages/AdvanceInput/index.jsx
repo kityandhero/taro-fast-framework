@@ -1,9 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  AdvanceInput,
-  BlockArea,
-} from 'taro-fast-component/es/customComponents';
+import { AdvanceInput, Card } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -15,125 +12,125 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="基础">
+        <Card header="基础">
           <AdvanceInput onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Label">
+        <Card header="Label">
           <AdvanceInput label="用户名" onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Required">
+        <Card header="Required">
           <AdvanceInput label="用户名" required onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="labelStyle">
+        <Card header="labelStyle">
           <AdvanceInput
             label="用户名"
             labelStyle={{ color: 'red' }}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Align Right">
+        <Card header="Align Right">
           <AdvanceInput
             label="用户名"
             align="right"
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Clearable">
+        <Card header="Clearable">
           <AdvanceInput label="用户名" clearable onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Hidden">
+        <Card header="Hidden">
           <AdvanceInput label="用户名" hidden onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Extra">
+        <Card header="Extra">
           <AdvanceInput
             label="用户名"
             extra="扩展部分"
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Password">
+        <Card header="Password">
           <AdvanceInput password label="密码" onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="placeholder">
+        <Card header="placeholder">
           <AdvanceInput
             label="用户名"
             placeholder="请输入用户名"
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="placeholderStyle">
+        <Card header="placeholderStyle">
           <AdvanceInput
             placeholder="请输入用户名"
             placeholderStyle={{ color: '#45e325' }}
             label="用户名"
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="disabled">
+        <Card header="disabled">
           <AdvanceInput
             label="用户名"
             placeholder="请输入用户名"
             disabled
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="maxlength">
+        <Card header="maxlength">
           <AdvanceInput
             label="用户名"
             maxlength={5}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="confirmType">
+        <Card header="confirmType">
           <AdvanceInput
             label="用户名"
             confirmType="go"
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="confirmHold">
+        <Card header="confirmHold">
           <AdvanceInput
             label="用户名"
             confirmHold
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="adjustPosition">
+        <Card header="adjustPosition">
           <AdvanceInput
             label="用户名"
             adjustPosition={false}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="holdKeyboard">
+        <Card header="holdKeyboard">
           <AdvanceInput
             label="用户名"
             holdKeyboard
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="onChange">
+        <Card header="onChange">
           <AdvanceInput label="用户名" onChange={this.afterChange} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="onFocus">
+        <Card header="onFocus">
           <AdvanceInput
             label="用户名"
             onFocus={(e) => {
@@ -141,9 +138,9 @@ export default class Index extends PageWrapper {
             }}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="onBlur">
+        <Card header="onBlur">
           <AdvanceInput
             label="用户名"
             onBlur={(e) => {
@@ -151,9 +148,9 @@ export default class Index extends PageWrapper {
             }}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="onConfirm">
+        <Card header="onConfirm">
           <AdvanceInput
             label="用户名"
             onConfirm={(e) => {
@@ -161,9 +158,9 @@ export default class Index extends PageWrapper {
             }}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="onKeyboardHeightChange">
+        <Card header="onKeyboardHeightChange">
           <AdvanceInput
             label="用户名"
             onKeyboardHeightChange={(e) => {
@@ -171,7 +168,7 @@ export default class Index extends PageWrapper {
             }}
             onChange={this.afterChange}
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

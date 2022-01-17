@@ -1,7 +1,8 @@
 import { View, Image } from '@tarojs/components';
 
 import {
-  List,
+  Card,
+  Item,
   AdvanceSwitch,
   Icon,
 } from 'taro-fast-component/es/customComponents';
@@ -50,66 +51,53 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <List header="基础用法" style={style}>
-          <List.Item>1</List.Item>
-          <List.Item>2</List.Item>
-          <List.Item>3</List.Item>
-        </List>
+        <Card header="基础用法" style={style}>
+          <Item>1</Item>
+          <Item>2</Item>
+          <Item>3</Item>
+        </Card>
 
-        <List header="箭头" style={style}>
-          <List.Item arrow>账单</List.Item>
-          <List.Item arrow>总资产</List.Item>
-          <List.Item arrow>设置</List.Item>
-        </List>
+        <Card header="箭头" style={style}>
+          <Item arrow>账单</Item>
+          <Item arrow>总资产</Item>
+          <Item arrow>设置</Item>
+        </Card>
 
-        <List header="扩展" style={style} extra="扩展">
-          <List.Item arrow>条目1</List.Item>
-          <List.Item arrow>条目2</List.Item>
-          <List.Item arrow>条目3</List.Item>
-        </List>
-
-        <List header="可点击" style={style}>
-          <List.Item clickable arrow onClick={this.handleClick}>
+        <Card header="可点击" style={style}>
+          <Item clickable arrow onClick={this.handleClick}>
             账单
-          </List.Item>
-          <List.Item clickable arrow onClick={this.handleClick}>
+          </Item>
+          <Item clickable arrow onClick={this.handleClick}>
             总资产
-          </List.Item>
-          <List.Item clickable arrow onClick={this.handleClick}>
+          </Item>
+          <Item clickable arrow onClick={this.handleClick}>
             设置
-          </List.Item>
-        </List>
+          </Item>
+        </Card>
 
-        <List header="复杂布局" style={style}>
-          <List.Item extra={<AdvanceSwitch defaultChecked />}>
-            新消息通知
-          </List.Item>
-          <List.Item extra="未开启" clickable arrow>
+        <Card header="复杂布局" style={style}>
+          <Item extra={<AdvanceSwitch defaultChecked />}>新消息通知</Item>
+          <Item extra="未开启" clickable arrow>
             大字号模式
-          </List.Item>
-          <List.Item description="管理已授权的产品和设备" clickable arrow>
+          </Item>
+          <Item description="管理已授权的产品和设备" clickable arrow>
             授权管理
-          </List.Item>
-          <List.Item title="这里是标题">这里是主信息</List.Item>
-        </List>
+          </Item>
+          <Item title="这里是标题">这里是主信息</Item>
+        </Card>
 
-        <List header="列表项禁用" style={style}>
-          <List.Item disabled clickable arrow prefix={<IconSketch />}>
+        <Card header="禁用状态" style={style}>
+          <Item disabled clickable arrow prefix={<IconSketch />}>
             账单
-          </List.Item>
-          <List.Item disabled prefix={<IconShoppingCart />}>
+          </Item>
+          <Item disabled prefix={<IconShoppingCart />}>
             总资产
-          </List.Item>
-        </List>
+          </Item>
+        </Card>
 
-        <List mode="card" header="卡片模式" style={style}>
-          <List.Item title="这里是标题">这里是主信息</List.Item>
-          <List.Item title="这里是标题">这里是主信息</List.Item>
-        </List>
-
-        <List header="用户列表">
+        <Card header="用户列表布局">
           {users.map((user) => (
-            <List.Item
+            <Item
               key={user.name}
               prefix={
                 <Image
@@ -121,9 +109,9 @@ export default class Index extends PageWrapper {
               description={user.description}
             >
               {user.name}
-            </List.Item>
+            </Item>
           ))}
-        </List>
+        </Card>
       </View>
     );
   }

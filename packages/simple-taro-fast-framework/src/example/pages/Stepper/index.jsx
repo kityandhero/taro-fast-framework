@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
-import { BlockArea, Stepper } from 'taro-fast-component/es/customComponents';
+import { Card, Stepper } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -28,16 +28,16 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="基础用法(非受控)">
+        <Card header="基础用法(非受控)">
           <Stepper
             defaultValue={1}
             onChange={(value) => {
               console.log(value);
             }}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="受控组件">
+        <Card header="受控组件">
           <Stepper
             value={num}
             onChange={(value) => {
@@ -45,41 +45,41 @@ export default class Index extends PageWrapper {
               console.log(value);
             }}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="步长设置">
+        <Card header="步长设置">
           <Stepper step={10} defaultValue={10} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="设置输入范围">
+        <Card header="设置输入范围">
           <Stepper min={-5} max={5} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="格式化到整数">
+        <Card header="格式化到整数">
           <Stepper digits={0} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="格式化到一位小数">
+        <Card header="格式化到一位小数">
           <Stepper digits={1} />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="禁用状态">
+        <Card header="禁用状态">
           <Stepper disabled />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="输入框只读状态">
+        <Card header="输入框只读状态">
           <Stepper inputReadOnly />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义宽度">
+        <Card header="自定义宽度">
           <Stepper
             style={{ width: '120px' }}
             defaultValue={10000}
             step={10000}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="获得/失去焦点">
+        <Card header="获得/失去焦点">
           <Stepper
             onFocus={() => {
               showInfoMessage({
@@ -92,9 +92,9 @@ export default class Index extends PageWrapper {
               });
             }}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义css变量">
+        <Card header="自定义css变量">
           <Stepper
             style={{
               '--border': '1px solid #f5f5f5',
@@ -107,7 +107,7 @@ export default class Index extends PageWrapper {
             defaultValue={10000}
             step={10000}
           />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

@@ -7,9 +7,11 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import VerticalBox from '../VerticalBox';
 import Icon from '../Icon';
 
+import './index.less';
+
 const { IconChevronRight } = Icon;
 
-const classPrefix = `tfc-list-item`;
+const classPrefix = `tfc-item`;
 
 const defaultProps = {
   style: {},

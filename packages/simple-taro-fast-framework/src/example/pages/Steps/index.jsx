@@ -1,10 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  BlockArea,
-  Steps,
-  Icon,
-} from 'taro-fast-component/es/customComponents';
+import { Card, Steps, Icon } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -15,31 +11,31 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <BlockArea title="横向">
+        <Card header="横向">
           <Steps current={1}>
             <Step title="标题1" description="描述" />
             <Step title="标题2" description="描述" />
             <Step title="标题3" description="描述" />
           </Steps>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="横向（失败状态）">
+        <Card header="横向（失败状态）">
           <Steps current={2}>
             <Step title="第一步" />
             <Step title="第二步" />
             <Step title="第三步" status="error" />
           </Steps>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="纵向">
+        <Card header="纵向">
           <Steps direction="vertical">
             <Step title="填写机构信息" status="process" />
             <Step title="签约机构" status="wait" />
             <Step title="关联服务区" status="wait" />
           </Steps>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="纵向（失败状态）">
+        <Card header="纵向（失败状态）">
           <Steps direction="vertical">
             <Step
               title="填写机构信息"
@@ -58,9 +54,9 @@ export default class Index extends PageWrapper {
             />
             <Step title="审批失败" status="error" />
           </Steps>
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="自定义图标和大小">
+        <Card header="自定义图标和大小">
           <Steps
             direction="vertical"
             current={1}
@@ -87,7 +83,7 @@ export default class Index extends PageWrapper {
               icon={<IconVolumePlus />}
             />
           </Steps>
-        </BlockArea>
+        </Card>
       </View>
     );
   }

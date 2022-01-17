@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { List, Overlay } from 'taro-fast-component/es/customComponents';
+import { Card, Item, Overlay } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -48,14 +48,14 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <List header="Overlay 遮罩层" style={style}>
-          <List.Item arrow onClick={this.onClickShow1}>
+        <Card header="Overlay 遮罩层" style={style}>
+          <Item arrow onClick={this.onClickShow1}>
             显示遮罩层
-          </List.Item>
-          <List.Item arrow onClick={this.onClickShow2}>
+          </Item>
+          <Item arrow onClick={this.onClickShow2}>
             嵌入内容
-          </List.Item>
-        </List>
+          </Item>
+        </Card>
 
         <Overlay show={this.state.show1} onClick={this.onClickHide1} />
 

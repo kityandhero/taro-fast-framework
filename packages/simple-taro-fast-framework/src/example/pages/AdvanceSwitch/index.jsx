@@ -1,9 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  BlockArea,
-  AdvanceSwitch,
-} from 'taro-fast-component/es/customComponents';
+import { Card, AdvanceSwitch } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -30,42 +27,42 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <BlockArea title="基础用法">
+        <Card header="基础用法">
           <AdvanceSwitch />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="颜色">
+        <Card header="颜色">
           <AdvanceSwitch color="blue" />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="不可用">
+        <Card header="不可用">
           <AdvanceSwitch disabled />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="受控组件">
+        <Card header="受控组件">
           <AdvanceSwitch
             checked={checked}
             onChange={(value) => {
               this.setChecked(value);
             }}
           />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="有默认值">
+        <Card header="有默认值">
           <AdvanceSwitch checked />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Label">
+        <Card header="Label">
           <AdvanceSwitch label="二次校验开关" />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="Required">
+        <Card header="Required">
           <AdvanceSwitch label="二次校验开关" required />
-        </BlockArea>
+        </Card>
 
-        <BlockArea title="labelStyle">
+        <Card header="labelStyle">
           <AdvanceSwitch label="二次校验开关" labelStyle={{ color: 'red' }} />
-        </BlockArea>
+        </Card>
       </View>
     );
   }

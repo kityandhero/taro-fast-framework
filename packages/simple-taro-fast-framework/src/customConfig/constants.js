@@ -82,8 +82,11 @@ export const pathCollection = {
   transition: {
     path: '/example/pages/transition/index',
   },
-  list: {
-    path: '/example/pages/list/index',
+  card: {
+    path: '/example/pages/card/index',
+  },
+  item: {
+    path: '/example/pages/item/index',
   },
   overlay: {
     path: '/example/pages/overlay/index',

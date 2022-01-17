@@ -1,6 +1,10 @@
 import { View } from '@tarojs/components';
 
-import { List, Transition } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Item,
+  Transition,
+} from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -110,44 +114,44 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <List header="Transition 动画" style={style}>
-          <List.Item arrow onClick={this.onClickFade}>
+        <Card header="Transition 动画" style={style}>
+          <Item arrow onClick={this.onClickFade}>
             Fade
-          </List.Item>
-          <List.Item arrow onClick={this.onClickFadeUp}>
+          </Item>
+          <Item arrow onClick={this.onClickFadeUp}>
             Fade Up
-          </List.Item>
-          <List.Item arrow onClick={this.onClickFadeDown}>
+          </Item>
+          <Item arrow onClick={this.onClickFadeDown}>
             Fade Down
-          </List.Item>
-          <List.Item arrow onClick={this.onClickFadeLeft}>
+          </Item>
+          <Item arrow onClick={this.onClickFadeLeft}>
             Fade Left
-          </List.Item>
-          <List.Item arrow onClick={this.onClickFadeRight}>
+          </Item>
+          <Item arrow onClick={this.onClickFadeRight}>
             Fade Right
-          </List.Item>
-          <List.Item arrow onClick={this.onClickSlideUp}>
+          </Item>
+          <Item arrow onClick={this.onClickSlideUp}>
             Slide Up
-          </List.Item>
-          <List.Item arrow onClick={this.onClickSlideDown}>
+          </Item>
+          <Item arrow onClick={this.onClickSlideDown}>
             Slide Down
-          </List.Item>
-          <List.Item arrow onClick={this.onClickSlideLeft}>
+          </Item>
+          <Item arrow onClick={this.onClickSlideLeft}>
             Slide Left
-          </List.Item>
-          <List.Item arrow onClick={this.onClickSlideRight}>
+          </Item>
+          <Item arrow onClick={this.onClickSlideRight}>
             Slide Right
-          </List.Item>
-          <List.Item arrow onClick={this.onClickZoom}>
+          </Item>
+          <Item arrow onClick={this.onClickZoom}>
             Zoom
-          </List.Item>
-          <List.Item arrow onClick={this.onClickPunch}>
+          </Item>
+          <Item arrow onClick={this.onClickPunch}>
             Punch
-          </List.Item>
-          <List.Item arrow onClick={this.onClickCustom}>
+          </Item>
+          <Item arrow onClick={this.onClickCustom}>
             Custom
-          </List.Item>
-        </List>
+          </Item>
+        </Card>
 
         <Transition show={show} name={name} className="block"></Transition>
         <Transition

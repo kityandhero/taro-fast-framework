@@ -7,12 +7,14 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
 
-const classPrefix = `tfc-list`;
+import './index.less';
 
-const modeCollection = ['default', 'card'];
+const classPrefix = `tfc-card`;
+
+const modeCollection = ['through', 'card'];
 
 const defaultProps = {
-  mode: 'default',
+  mode: 'through',
   style: {},
   header: null,
   headerStyle: {},
@@ -20,7 +22,7 @@ const defaultProps = {
   extra: null,
 };
 
-class List extends ComponentBase {
+class Card extends ComponentBase {
   render() {
     const {
       style,
@@ -60,8 +62,8 @@ class List extends ComponentBase {
   }
 }
 
-List.defaultProps = {
+Card.defaultProps = {
   ...defaultProps,
 };
 
-export default List;
+export default Card;

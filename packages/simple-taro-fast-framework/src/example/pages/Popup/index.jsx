@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { List, Popup } from 'taro-fast-component/es/customComponents';
+import { Card, Item, Popup } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -116,41 +116,41 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <List header="展示弹出层" style={style}>
-          <List.Item arrow onClick={this.showBasic}>
+        <Card header="展示弹出层" style={style}>
+          <Item arrow onClick={this.showBasic}>
             展示弹出层
-          </List.Item>
-        </List>
-        <List header="弹出位置" style={style}>
-          <List.Item arrow onClick={this.showTop}>
+          </Item>
+        </Card>
+        <Card header="弹出位置" style={style}>
+          <Item arrow onClick={this.showTop}>
             顶部弹出
-          </List.Item>
-          <List.Item arrow onClick={this.showBottom}>
+          </Item>
+          <Item arrow onClick={this.showBottom}>
             底部弹出
-          </List.Item>
-          <List.Item arrow onClick={this.showLeft}>
+          </Item>
+          <Item arrow onClick={this.showLeft}>
             左侧弹出
-          </List.Item>
-          <List.Item arrow onClick={this.showRight}>
+          </Item>
+          <Item arrow onClick={this.showRight}>
             右侧弹出
-          </List.Item>
-        </List>
-        <List header="关闭图标" style={style}>
-          <List.Item arrow onClick={this.showCloseIcon}>
+          </Item>
+        </Card>
+        <Card header="关闭图标" style={style}>
+          <Item arrow onClick={this.showCloseIcon}>
             关闭图标
-          </List.Item>
-          <List.Item arrow onClick={this.showCustomCloseIcon}>
+          </Item>
+          <Item arrow onClick={this.showCustomCloseIcon}>
             自定义图标
-          </List.Item>
-          <List.Item arrow onClick={this.showCustomIconPosition}>
+          </Item>
+          <Item arrow onClick={this.showCustomIconPosition}>
             图标位置
-          </List.Item>
-        </List>
-        <List header="圆角弹窗" style={style}>
-          <List.Item arrow onClick={this.showRound}>
+          </Item>
+        </Card>
+        <Card header="圆角弹窗" style={style}>
+          <Item arrow onClick={this.showRound}>
             圆角弹窗
-          </List.Item>
-        </List>
+          </Item>
+        </Card>
 
         <Popup
           show={show.basic}
