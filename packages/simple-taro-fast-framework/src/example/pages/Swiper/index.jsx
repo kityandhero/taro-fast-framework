@@ -7,13 +7,14 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="例子: 新闻标题上下滚动">
+        <Card header="例子: 新闻标题上下滚动" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: '40rpx' },
             // indicatorColor: '#999',
@@ -53,7 +54,7 @@ export default class Index extends PageWrapper {
           })}
         </Card>
 
-        <Card header="例子: 轮播图1">
+        <Card header="例子: 轮播图1" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: '300rpx' },
             // indicatorColor: '#999',
@@ -90,7 +91,7 @@ export default class Index extends PageWrapper {
           })}
         </Card>
 
-        <Card header="例子: 轮播图2">
+        <Card header="例子: 轮播图2" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: '260rpx' },
             previousMargin: '80rpx',
@@ -130,7 +131,7 @@ export default class Index extends PageWrapper {
           })}
         </Card>
 
-        <Card header="例子: 轮播图3">
+        <Card header="例子: 轮播图3" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: '140rpx' },
             previousMargin: '80rpx',

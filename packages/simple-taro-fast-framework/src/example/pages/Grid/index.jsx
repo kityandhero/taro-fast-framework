@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Grid } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const styles = {
@@ -16,7 +17,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="基础用法">
+        <Card header="基础用法" headerStyle={cardHeaderStyle}>
           <Grid columns={3} gap={8}>
             <Grid.Item>
               <View style={styles}>A</View>
@@ -36,7 +37,7 @@ export default class Index extends PageWrapper {
           </Grid>
         </Card>
 
-        <Card header="控制格子的跨度">
+        <Card header="控制格子的跨度" headerStyle={cardHeaderStyle}>
           <Grid columns={3} gap={8}>
             <Grid.Item>
               <View style={styles}>A</View>

@@ -7,6 +7,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch, IconShoppingCart } = Icon;
@@ -51,19 +52,19 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <Card header="基础用法" style={style}>
+        <Card header="基础用法" style={style} headerStyle={cardHeaderStyle}>
           <Item>1</Item>
           <Item>2</Item>
           <Item>3</Item>
         </Card>
 
-        <Card header="箭头" style={style}>
+        <Card header="箭头" style={style} headerStyle={cardHeaderStyle}>
           <Item arrow>账单</Item>
           <Item arrow>总资产</Item>
           <Item arrow>设置</Item>
         </Card>
 
-        <Card header="可点击" style={style}>
+        <Card header="可点击" style={style} headerStyle={cardHeaderStyle}>
           <Item clickable arrow onClick={this.handleClick}>
             账单
           </Item>
@@ -75,7 +76,7 @@ export default class Index extends PageWrapper {
           </Item>
         </Card>
 
-        <Card header="复杂布局" style={style}>
+        <Card header="复杂布局" style={style} headerStyle={cardHeaderStyle}>
           <Item extra={<AdvanceSwitch defaultChecked />}>新消息通知</Item>
           <Item extra="未开启" clickable arrow>
             大字号模式
@@ -86,7 +87,7 @@ export default class Index extends PageWrapper {
           <Item title="这里是标题">这里是主信息</Item>
         </Card>
 
-        <Card header="禁用状态" style={style}>
+        <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
           <Item disabled clickable arrow prefix={<IconSketch />}>
             账单
           </Item>
@@ -95,7 +96,7 @@ export default class Index extends PageWrapper {
           </Item>
         </Card>
 
-        <Card header="用户列表布局">
+        <Card header="用户列表布局" headerStyle={cardHeaderStyle}>
           {users.map((user) => (
             <Item
               key={user.name}

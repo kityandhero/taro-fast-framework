@@ -2,25 +2,26 @@ import { View } from '@tarojs/components';
 
 import { Card, Copyright } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
-      <View className="index">
+      <View className="index" headerStyle={cardHeaderStyle}>
         <Card header="用法展示">
           <Copyright logo="https://jdc.jd.com/img/200" />
         </Card>
 
-        <Card header="用法展示">
+        <Card header="用法展示" headerStyle={cardHeaderStyle}>
           <Copyright name="*******有限公司" />
         </Card>
 
-        <Card header="用法展示">
+        <Card header="用法展示" headerStyle={cardHeaderStyle}>
           <Copyright copyright="Copyright © 2018-2022 all rights reserved" />
         </Card>
 
-        <Card header="用法展示">
+        <Card header="用法展示" headerStyle={cardHeaderStyle}>
           <Copyright
             circle
             logo="https://jdc.jd.com/img/200"

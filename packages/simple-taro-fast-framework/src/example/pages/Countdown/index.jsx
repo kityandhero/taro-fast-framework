@@ -13,6 +13,7 @@ import {
   Countdown,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -27,7 +28,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="一般用法">
+        <Card header="一般用法" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Countdown endTime={addMinute(getNow(), 15)} />
@@ -47,7 +48,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="自定义格式化">
+        <Card header="自定义格式化" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Countdown
@@ -58,7 +59,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="卡片式">
+        <Card header="卡片式" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Countdown
@@ -71,7 +72,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="自定义倒计时回调事件">
+        <Card header="自定义倒计时回调事件" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Countdown

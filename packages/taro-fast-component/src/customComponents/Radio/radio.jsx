@@ -153,6 +153,7 @@ class Radio extends ComponentBase {
         bodyStyle={bodyStyle}
         style={style}
         extra={extra}
+        space={false}
       >
         {(isArray(options) ? options : []).map((o, index) => {
           const {

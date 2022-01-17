@@ -19,6 +19,7 @@ const defaultProps = {
   header: null,
   headerStyle: {},
   bodyStyle: {},
+  space: true,
   extra: null,
 };
 
@@ -31,6 +32,7 @@ class Card extends ComponentBase {
       bodyStyle,
       extra,
       mode: modeSource,
+      space,
       children,
     } = this.props;
 
@@ -54,7 +56,12 @@ class Card extends ComponentBase {
           />
         ) : null}
 
-        <View className={`${classPrefix}-body`} style={bodyStyle}>
+        <View
+          className={classNames(`${classPrefix}-body`, {
+            [`${classPrefix}-body-space`]: !!space,
+          })}
+          style={bodyStyle}
+        >
           <View className={`${classPrefix}-body-inner`}>{children}</View>
         </View>
       </View>

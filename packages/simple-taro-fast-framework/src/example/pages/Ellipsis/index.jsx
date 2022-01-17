@@ -2,13 +2,14 @@ import { View } from '@tarojs/components';
 
 import { Card, Ellipsis } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="显示一行文字">
+        <Card header="显示一行文字" headerStyle={cardHeaderStyle}>
           <Ellipsis
             line={1}
             style={{
@@ -25,7 +26,7 @@ export default class Index extends PageWrapper {
           </Ellipsis>
         </Card>
 
-        <Card header="显示两行文字">
+        <Card header="显示两行文字" headerStyle={cardHeaderStyle}>
           <Ellipsis
             line={2}
             style={{ height: '88rpx', fontSize: '28rpx', lineHeight: '44rpx' }}
@@ -37,7 +38,7 @@ export default class Index extends PageWrapper {
           </Ellipsis>
         </Card>
 
-        <Card header="显示三行文字">
+        <Card header="显示三行文字" headerStyle={cardHeaderStyle}>
           <Ellipsis
             line={3}
             style={{ height: '132rpx', fontSize: '28rpx', lineHeight: '44rpx' }}

@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Steps, Icon } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { Step } = Steps;
@@ -11,7 +12,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="横向">
+        <Card header="横向" headerStyle={cardHeaderStyle}>
           <Steps current={1}>
             <Step title="标题1" description="描述" />
             <Step title="标题2" description="描述" />
@@ -19,7 +20,7 @@ export default class Index extends PageWrapper {
           </Steps>
         </Card>
 
-        <Card header="横向（失败状态）">
+        <Card header="横向（失败状态）" headerStyle={cardHeaderStyle}>
           <Steps current={2}>
             <Step title="第一步" />
             <Step title="第二步" />
@@ -27,7 +28,7 @@ export default class Index extends PageWrapper {
           </Steps>
         </Card>
 
-        <Card header="纵向">
+        <Card header="纵向" headerStyle={cardHeaderStyle}>
           <Steps direction="vertical">
             <Step title="填写机构信息" status="process" />
             <Step title="签约机构" status="wait" />
@@ -35,7 +36,7 @@ export default class Index extends PageWrapper {
           </Steps>
         </Card>
 
-        <Card header="纵向（失败状态）">
+        <Card header="纵向（失败状态）" headerStyle={cardHeaderStyle}>
           <Steps direction="vertical">
             <Step
               title="填写机构信息"
@@ -56,7 +57,7 @@ export default class Index extends PageWrapper {
           </Steps>
         </Card>
 
-        <Card header="自定义图标和大小">
+        <Card header="自定义图标和大小" headerStyle={cardHeaderStyle}>
           <Steps
             direction="vertical"
             current={1}

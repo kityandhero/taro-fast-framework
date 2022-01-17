@@ -9,6 +9,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconCheckCircle } = Icon;
@@ -63,7 +64,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="Layout: Horizontal">
+        <Card header="Layout: Horizontal" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Button
@@ -97,7 +98,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="Layout: Vertical">
+        <Card header="Layout: Vertical" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Button
@@ -132,7 +133,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="Simple: Horizontal">
+        <Card header="Simple: Horizontal" headerStyle={cardHeaderStyle}>
           <AdvanceProgressBox
             label="进度"
             percent={70}
@@ -164,7 +165,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="Simple: Vertical">
+        <Card header="Simple: Vertical" headerStyle={cardHeaderStyle}>
           <AdvanceProgressBox
             layout="vertical"
             label="进度"

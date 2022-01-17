@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Space, Avatar } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {

@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
 import { Card, Stepper } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -28,7 +29,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="基础用法(非受控)">
+        <Card header="基础用法(非受控)" headerStyle={cardHeaderStyle}>
           <Stepper
             defaultValue={1}
             onChange={(value) => {
@@ -37,7 +38,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="受控组件">
+        <Card header="受控组件" headerStyle={cardHeaderStyle}>
           <Stepper
             value={num}
             onChange={(value) => {
@@ -47,31 +48,31 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="步长设置">
+        <Card header="步长设置" headerStyle={cardHeaderStyle}>
           <Stepper step={10} defaultValue={10} />
         </Card>
 
-        <Card header="设置输入范围">
+        <Card header="设置输入范围" headerStyle={cardHeaderStyle}>
           <Stepper min={-5} max={5} />
         </Card>
 
-        <Card header="格式化到整数">
+        <Card header="格式化到整数" headerStyle={cardHeaderStyle}>
           <Stepper digits={0} />
         </Card>
 
-        <Card header="格式化到一位小数">
+        <Card header="格式化到一位小数" headerStyle={cardHeaderStyle}>
           <Stepper digits={1} />
         </Card>
 
-        <Card header="禁用状态">
+        <Card header="禁用状态" headerStyle={cardHeaderStyle}>
           <Stepper disabled />
         </Card>
 
-        <Card header="输入框只读状态">
+        <Card header="输入框只读状态" headerStyle={cardHeaderStyle}>
           <Stepper inputReadOnly />
         </Card>
 
-        <Card header="自定义宽度">
+        <Card header="自定义宽度" headerStyle={cardHeaderStyle}>
           <Stepper
             style={{ width: '120px' }}
             defaultValue={10000}
@@ -79,7 +80,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="获得/失去焦点">
+        <Card header="获得/失去焦点" headerStyle={cardHeaderStyle}>
           <Stepper
             onFocus={() => {
               showInfoMessage({
@@ -94,7 +95,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="自定义css变量">
+        <Card header="自定义css变量" headerStyle={cardHeaderStyle}>
           <Stepper
             style={{
               '--border': '1px solid #f5f5f5',

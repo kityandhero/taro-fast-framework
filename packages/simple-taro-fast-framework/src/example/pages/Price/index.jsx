@@ -2,42 +2,43 @@ import { View } from '@tarojs/components';
 
 import { Card, Space, Price } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="普通显示">
+        <Card header="普通显示" headerStyle={cardHeaderStyle}>
           <Price price={4.78} />
         </Card>
 
-        <Card header="显示修饰符">
+        <Card header="显示修饰符" headerStyle={cardHeaderStyle}>
           <Space>
             <Price price={4.78} prefix="¥" />
             <Price price={4.78} prefix="$" />
           </Space>
         </Card>
 
-        <Card header="删除线">
+        <Card header="删除线" headerStyle={cardHeaderStyle}>
           <Price price={4.78} itemStyle={{ color: '#ccc' }} strikethrough />
         </Card>
 
-        <Card header="外层样式">
+        <Card header="外层样式" headerStyle={cardHeaderStyle}>
           <Price
             price={4.78}
             bodyStyle={{ border: '2rpx solid #ccc', padding: '6rpx' }}
           />
         </Card>
 
-        <Card header="元素通用样式">
+        <Card header="元素通用样式" headerStyle={cardHeaderStyle}>
           <Price
             price={4.78}
             itemStyle={{ color: '#ccc', fontSize: '36rpx' }}
           />
         </Card>
 
-        <Card header="复杂显示">
+        <Card header="复杂显示" headerStyle={cardHeaderStyle}>
           <Price
             price={4.78}
             prefix="¥"

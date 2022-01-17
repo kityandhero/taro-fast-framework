@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Item, Overlay } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
@@ -48,7 +49,11 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="Overlay 遮罩层" style={style}>
+        <Card
+          header="Overlay 遮罩层"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
           <Item arrow onClick={this.onClickShow1}>
             显示遮罩层
           </Item>

@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, AdvanceSwitch } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -27,19 +28,19 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="基础用法">
+        <Card header="基础用法" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch />
         </Card>
 
-        <Card header="颜色">
+        <Card header="颜色" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch color="blue" />
         </Card>
 
-        <Card header="不可用">
+        <Card header="不可用" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch disabled />
         </Card>
 
-        <Card header="受控组件">
+        <Card header="受控组件" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch
             checked={checked}
             onChange={(value) => {
@@ -48,19 +49,19 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="有默认值">
+        <Card header="有默认值" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch checked />
         </Card>
 
-        <Card header="Label">
+        <Card header="Label" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch label="二次校验开关" />
         </Card>
 
-        <Card header="Required">
+        <Card header="Required" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch label="二次校验开关" required />
         </Card>
 
-        <Card header="labelStyle">
+        <Card header="labelStyle" headerStyle={cardHeaderStyle}>
           <AdvanceSwitch label="二次校验开关" labelStyle={{ color: 'red' }} />
         </Card>
       </View>

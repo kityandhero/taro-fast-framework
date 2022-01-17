@@ -8,6 +8,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { pathCollection } from '@/customConfig/constants';
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -27,7 +28,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
 
-        <Card header="组件示例">
+        <Card header="组件示例" headerStyle={cardHeaderStyle}>
           <Space wrap>
             {this.buildItem({
               name: 'ImageBox',
@@ -56,7 +57,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="FlexBox">
+        <Card header="FlexBox" headerStyle={cardHeaderStyle}>
           <FlexBox left="仅左侧" />
 
           <FlexBox

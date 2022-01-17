@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Tabs } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { TabPanel } = Tabs;
@@ -60,7 +61,11 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="基本用法" contentStyle={contentStyle}>
+        <Card
+          header="基本用法"
+          contentStyle={contentStyle}
+          headerStyle={cardHeaderStyle}
+        >
           <Tabs
             current={this.state.current1}
             tabList={tabList}
@@ -86,7 +91,11 @@ export default class Index extends PageWrapper {
           </Tabs>
         </Card>
 
-        <Card header="滚动标签栏" contentStyle={contentStyle}>
+        <Card
+          header="滚动标签栏"
+          contentStyle={contentStyle}
+          headerStyle={cardHeaderStyle}
+        >
           <Tabs
             current={this.state.current2}
             scroll
@@ -135,7 +144,11 @@ export default class Index extends PageWrapper {
           </Tabs>
         </Card>
 
-        <Card header="垂直模式" contentStyle={contentStyle}>
+        <Card
+          header="垂直模式"
+          contentStyle={contentStyle}
+          headerStyle={cardHeaderStyle}
+        >
           <Tabs
             current={this.state.current3}
             scroll
@@ -210,7 +223,11 @@ export default class Index extends PageWrapper {
           </Tabs>
         </Card>
 
-        <Card header="禁止内容切换动画" contentStyle={contentStyle}>
+        <Card
+          header="禁止内容切换动画"
+          contentStyle={contentStyle}
+          headerStyle={cardHeaderStyle}
+        >
           <Tabs
             animated={false}
             current={this.state.current4}

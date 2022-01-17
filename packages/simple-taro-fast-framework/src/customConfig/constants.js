@@ -113,3 +113,7 @@ export const pathCollection = {
     path: '/example/pages/floatAction/index',
   },
 };
+
+export const cardHeaderStyle = {
+  backgroundColor: '#eae9e5',
+};

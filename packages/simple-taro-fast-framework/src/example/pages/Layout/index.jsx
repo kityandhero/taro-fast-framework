@@ -9,6 +9,7 @@ import {
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -24,7 +25,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="Flex">
+        <Card header="Flex" headerStyle={cardHeaderStyle}>
           <View>
             <Row justify="center" style={rowStyle}>
               <Col size={1} style={colStyle}>
@@ -56,7 +57,7 @@ export default class Index extends PageWrapper {
           </View>
         </Card>
 
-        <Card header="FlexBox">
+        <Card header="FlexBox" headerStyle={cardHeaderStyle}>
           <FlexBox left="仅左侧" />
 
           <FlexBox
@@ -87,11 +88,11 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="HorizontalCenterBox">
+        <Card header="HorizontalCenterBox" headerStyle={cardHeaderStyle}>
           <HorizontalCenterBox>1</HorizontalCenterBox>
         </Card>
 
-        <Card header="VerticalBox">
+        <Card header="VerticalBox" headerStyle={cardHeaderStyle}>
           <View style={{ height: '100rpx' }}>
             <VerticalBox>1</VerticalBox>
           </View>

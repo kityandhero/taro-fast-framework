@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Space, Button } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -15,7 +16,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="块级按钮">
+        <Card header="块级按钮" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" fillWidth>
             <Button
               block

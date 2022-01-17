@@ -2,25 +2,26 @@ import { View } from '@tarojs/components';
 
 import { Card, ColorText } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="一般用法">
+        <Card header="一般用法" headerStyle={cardHeaderStyle}>
           <ColorText textPrefix="前缀" text="文本文字" />
         </Card>
 
-        <Card header="自定义分隔符">
+        <Card header="自定义分隔符" headerStyle={cardHeaderStyle}>
           <ColorText textPrefix="前缀" separator="@" text="文本文字" />
         </Card>
 
-        <Card header="点击复制">
+        <Card header="点击复制" headerStyle={cardHeaderStyle}>
           <ColorText textPrefix="前缀" separator="@" text="文本文字" canCopy />
         </Card>
 
-        <Card header="点击复制并进行回调">
+        <Card header="点击复制并进行回调" headerStyle={cardHeaderStyle}>
           <ColorText
             textPrefix="前缀"
             separator="@"
@@ -32,11 +33,11 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="颜色">
+        <Card header="颜色" headerStyle={cardHeaderStyle}>
           <ColorText textPrefix="前缀" text="文本文字" color="#e54321" />
         </Card>
 
-        <Card header="随机颜色">
+        <Card header="随机颜色" headerStyle={cardHeaderStyle}>
           <ColorText
             textPrefix="前缀"
             text="文本文字"
@@ -46,7 +47,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="前缀样式">
+        <Card header="前缀样式" headerStyle={cardHeaderStyle}>
           <ColorText
             textPrefix="前缀"
             text="文本文字"
@@ -54,7 +55,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="分隔符样式">
+        <Card header="分隔符样式" headerStyle={cardHeaderStyle}>
           <ColorText
             textPrefix="前缀"
             text="文本文字"

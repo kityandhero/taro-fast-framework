@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Item } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = { backgroundColor: '#f5f7fa' };

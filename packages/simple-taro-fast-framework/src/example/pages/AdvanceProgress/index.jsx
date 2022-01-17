@@ -8,6 +8,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconCheckCircle } = Icon;
@@ -43,7 +44,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="动画">
+        <Card header="动画" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Button
@@ -71,13 +72,13 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="Hidden">
+        <Card header="Hidden" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <AdvanceProgress hidden percent={percent} />
           </Space>
         </Card>
 
-        <Card header="指定线条宽度">
+        <Card header="指定线条宽度" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <AdvanceProgress percent={50} strokeWidth={2} />
             <AdvanceProgress percent={75} strokeWidth={6} />
@@ -85,7 +86,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="指定颜色">
+        <Card header="指定颜色" headerStyle={cardHeaderStyle}>
           <AdvanceProgress
             percent={50}
             activeColor="#FF3141"
@@ -93,26 +94,26 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="圆角">
+        <Card header="圆角" headerStyle={cardHeaderStyle}>
           <AdvanceProgress percent={50} borderRadius={4} />
         </Card>
 
-        <Card header="显示百分比">
+        <Card header="显示百分比" headerStyle={cardHeaderStyle}>
           <AdvanceProgress percent={50} showInfo />
         </Card>
 
-        <Card header="百分比字体大小">
+        <Card header="百分比字体大小" headerStyle={cardHeaderStyle}>
           <AdvanceProgress percent={50} showInfo fontSize={12} />
         </Card>
 
-        <Card header="Icon">
+        <Card header="Icon" headerStyle={cardHeaderStyle}>
           <AdvanceProgress
             percent={50}
             icon={<IconCheckCircle size={19} color="green" />}
           />
         </Card>
 
-        <Card header="Simple">
+        <Card header="Simple" headerStyle={cardHeaderStyle}>
           <AdvanceProgress
             percent={70}
             borderRadius={4}

@@ -6,6 +6,7 @@ import {
   Transition,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
@@ -114,7 +115,11 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="Transition 动画" style={style}>
+        <Card
+          header="Transition 动画"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
           <Item arrow onClick={this.onClickFade}>
             Fade
           </Item>

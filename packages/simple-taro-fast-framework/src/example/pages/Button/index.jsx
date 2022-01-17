@@ -7,6 +7,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSearch } = Icon;
@@ -15,7 +16,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="不同颜色的按钮">
+        <Card header="不同颜色的按钮" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button
               onClick={() => {
@@ -31,13 +32,13 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="块级按钮">
+        <Card header="块级按钮" headerStyle={cardHeaderStyle}>
           <Button block color="primary" size="large">
             Block Button
           </Button>
         </Card>
 
-        <Card header="填充模式">
+        <Card header="填充模式" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button color="primary" fill="solid">
               Solid
@@ -51,7 +52,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="不同大小的按钮">
+        <Card header="不同大小的按钮" headerStyle={cardHeaderStyle}>
           <Space wrap align="center">
             <Button size="mini" color="primary">
               Mini
@@ -68,7 +69,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="禁用状态">
+        <Card header="禁用状态" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button disabled>Disabled</Button>
             <Button disabled color="primary">
@@ -77,7 +78,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="加载状态">
+        <Card header="加载状态" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button loading color="primary" loadingText="加载中">
               Loading
@@ -86,7 +87,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="带图标的按钮">
+        <Card header="带图标的按钮" headerStyle={cardHeaderStyle}>
           <Button>
             <Space>
               <IconSearch size={19} />
@@ -95,7 +96,7 @@ export default class Index extends PageWrapper {
           </Button>
         </Card>
 
-        <Card header="不同类型圆角">
+        <Card header="不同类型圆角" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button shape="default" color="primary">
               Default Button

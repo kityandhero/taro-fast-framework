@@ -12,6 +12,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildAdvanceButton } from 'taro-fast-component/es/functionComponent';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import {
@@ -91,7 +92,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="Buttons Color">
+        <Card header="Buttons Color" headerStyle={cardHeaderStyle}>
           <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
             <Space wrap>
               {buildAdvanceButton({
@@ -131,7 +132,7 @@ export default class Index extends PageWrapper {
           </VerticalBox>
         </Card>
 
-        <Card header="Buttons Block Large">
+        <Card header="Buttons Block Large" headerStyle={cardHeaderStyle}>
           <Space direction="vertical">
             {buildAdvanceButton({
               inner: 'Block Button',
@@ -142,7 +143,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="Button Action">
+        <Card header="Button Action" headerStyle={cardHeaderStyle}>
           <Space wrap>
             {buildAdvanceButton({
               inner: 'Action',
@@ -180,7 +181,7 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
-        <Card header="联动 reloading">
+        <Card header="联动 reloading" headerStyle={cardHeaderStyle}>
           <Spin spin={!firstLoadSuccess}>
             <FadeView show={!dataLoading}>
               <VerticalBox style={{ height: '50rpx' }} alignJustify="center">

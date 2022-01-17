@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Item, Popup } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
@@ -116,26 +117,26 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="展示弹出层" style={style}>
+        <Card header="展示弹出层" style={style} headerStyle={cardHeaderStyle}>
           <Item arrow onClick={this.showBasic}>
             展示弹出层
           </Item>
         </Card>
-        <Card header="弹出位置" style={style}>
+        <Card header="弹出位置" style={style} headerStyle={cardHeaderStyle}>
           <Item arrow onClick={this.showTop}>
             顶部弹出
           </Item>
-          <Item arrow onClick={this.showBottom}>
+          <Item arrow onClick={this.showBottom} headerStyle={cardHeaderStyle}>
             底部弹出
           </Item>
-          <Item arrow onClick={this.showLeft}>
+          <Item arrow onClick={this.showLeft} headerStyle={cardHeaderStyle}>
             左侧弹出
           </Item>
-          <Item arrow onClick={this.showRight}>
+          <Item arrow onClick={this.showRight} headerStyle={cardHeaderStyle}>
             右侧弹出
           </Item>
         </Card>
-        <Card header="关闭图标" style={style}>
+        <Card header="关闭图标" style={style} headerStyle={cardHeaderStyle}>
           <Item arrow onClick={this.showCloseIcon}>
             关闭图标
           </Item>
@@ -146,7 +147,7 @@ export default class Index extends PageWrapper {
             图标位置
           </Item>
         </Card>
-        <Card header="圆角弹窗" style={style}>
+        <Card header="圆角弹窗" style={style} headerStyle={cardHeaderStyle}>
           <Item arrow onClick={this.showRound}>
             圆角弹窗
           </Item>
