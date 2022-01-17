@@ -1,11 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  Space,
-  AutoCenter,
-  Card,
-  FlexBox,
-} from 'taro-fast-component/es/customComponents';
+import { Space, Card, FlexBox } from 'taro-fast-component/es/customComponents';
 
 import { pathCollection } from '@/customConfig/constants';
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -26,8 +21,6 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
-
         <Card header="组件示例" headerStyle={cardHeaderStyle}>
           <Space wrap>
             {this.buildItem({

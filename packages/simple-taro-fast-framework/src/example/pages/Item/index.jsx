@@ -52,19 +52,34 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <Card header="基础用法" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="基础用法"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item>1</Item>
           <Item>2</Item>
           <Item>3</Item>
         </Card>
 
-        <Card header="箭头" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="箭头"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item arrow>账单</Item>
           <Item arrow>总资产</Item>
           <Item arrow>设置</Item>
         </Card>
 
-        <Card header="可点击" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="可点击"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item clickable arrow onClick={this.handleClick}>
             账单
           </Item>
@@ -76,7 +91,12 @@ export default class Index extends PageWrapper {
           </Item>
         </Card>
 
-        <Card header="复杂布局" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="复杂布局"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item extra={<AdvanceSwitch defaultChecked />}>新消息通知</Item>
           <Item extra="未开启" clickable arrow>
             大字号模式
@@ -87,7 +107,12 @@ export default class Index extends PageWrapper {
           <Item title="这里是标题">这里是主信息</Item>
         </Card>
 
-        <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="禁用状态"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <Item disabled clickable arrow prefix={<IconSketch />}>
             账单
           </Item>
@@ -96,7 +121,7 @@ export default class Index extends PageWrapper {
           </Item>
         </Card>
 
-        <Card header="用户列表布局" headerStyle={cardHeaderStyle}>
+        <Card header="用户列表布局" headerStyle={cardHeaderStyle} space={false}>
           {users.map((user) => (
             <Item
               key={user.name}

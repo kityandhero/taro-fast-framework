@@ -21,7 +21,6 @@ export default {
         'pages/layout/index',
         'pages/steps/index',
         'pages/advanceButton/index',
-        'pages/autoCenter/index',
         'pages/divider/index',
         'pages/tag/index',
         'pages/advanceInput/index',

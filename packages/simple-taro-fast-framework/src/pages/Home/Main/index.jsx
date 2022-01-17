@@ -1,10 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  AutoCenter,
-  Card,
-  Item,
-} from 'taro-fast-component/es/customComponents';
+import { CenterBox, Card, Item } from 'taro-fast-component/es/customComponents';
 
 import {
   pathCollection,
@@ -32,7 +28,9 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <AutoCenter> Welcome To Taro-Fast-Framework! </AutoCenter>
+        <View style={{ margin: '20rpx 0' }}>
+          <CenterBox> Welcome To Taro-Fast-Framework! </CenterBox>
+        </View>
 
         <Card header="基础组件" headerStyle={cardHeaderStyle} space={false}>
           {this.buildItem({
@@ -85,11 +83,6 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'Layout',
             path: pathCollection.layout.path,
-          })}
-
-          {this.buildItem({
-            name: 'AutoCenter',
-            path: pathCollection.autoCenter.path,
           })}
 
           {this.buildItem({

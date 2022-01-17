@@ -37,7 +37,6 @@ export { Space } from './Space';
 export { Empty } from './Empty';
 export { Overlay } from './Overlay';
 export { Popup } from './Popup';
-export { AutoCenter } from './AutoCenter';
 export { AdvanceButton } from './AdvanceButton';
 export { FadeView } from './FadeView';
 export { default as Stepper } from './Stepper';

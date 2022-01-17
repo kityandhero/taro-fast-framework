@@ -40,9 +40,6 @@ export const pathCollection = {
   advanceButton: {
     path: '/example/pages/advanceButton/index',
   },
-  autoCenter: {
-    path: '/example/pages/autoCenter/index',
-  },
   divider: {
     path: '/example/pages/divider/index',
   },
@@ -115,5 +112,6 @@ export const pathCollection = {
 };
 
 export const cardHeaderStyle = {
-  backgroundColor: '#eae9e5',
+  backgroundColor: '#f5f7fa',
+  color: '#969696',
 };
