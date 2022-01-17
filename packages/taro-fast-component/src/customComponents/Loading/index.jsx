@@ -7,7 +7,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import './index.less';
 
 class Loading extends ComponentBase {
-  render() {
+  renderFurther() {
     const { color, size } = this.props;
     const loadingSize = typeof size === 'string' ? size : toString(size);
     const sizeStyle = {

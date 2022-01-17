@@ -24,7 +24,7 @@ const defaultProps = {
 };
 
 class Card extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       style,
       header,

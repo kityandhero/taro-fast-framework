@@ -27,7 +27,7 @@ const defaultProps = {
 };
 
 class TabPanel extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       customStyle,
       className,

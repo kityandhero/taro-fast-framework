@@ -22,7 +22,7 @@ const defaultProps = {
 };
 
 class Col extends ComponentBase {
-  render() {
+  renderFurther() {
     const { style } = this.props;
 
     const rootClass = ['tfc-col'];

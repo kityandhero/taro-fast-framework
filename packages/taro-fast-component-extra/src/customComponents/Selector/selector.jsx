@@ -63,7 +63,7 @@ class Selector extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const { columns, disabled: disabledSource, multiple, options } = this.props;
     const { valueTemp } = this.state;
 

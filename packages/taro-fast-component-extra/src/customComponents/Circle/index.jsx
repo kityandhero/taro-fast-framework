@@ -273,7 +273,7 @@ class Circle extends ComponentBase {
     ctx.closePath();
   };
 
-  render() {
+  renderFurther() {
     const { style, backRingStyle, children } = this.props;
 
     const size = this.getSize();

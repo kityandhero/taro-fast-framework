@@ -18,7 +18,7 @@ const defaultProps = {
 };
 
 class Copyright extends ComponentBase {
-  render() {
+  renderFurther() {
     const { style, color, circle, logo, name, copyright } = this.props;
 
     const nameHeight = 50;

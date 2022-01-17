@@ -17,7 +17,7 @@ class Icon extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const { customStyle, className, prefixClass, value, size, color, hidden } =
       this.props;
 

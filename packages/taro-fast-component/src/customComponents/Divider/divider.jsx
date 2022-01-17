@@ -14,7 +14,7 @@ const defaultProps = {
 };
 
 class Divider extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       style,
       contentPosition: contentPositionSource,

@@ -12,7 +12,7 @@ const SIZE_CLASS = {
 };
 
 export default class Avatar extends ComponentBase {
-  render() {
+  renderFurther() {
     const { size, circle, image, text, style } = this.props;
     const rootClassName = ['tfc-avatar'];
     const iconSize = SIZE_CLASS[size || 'normal'];

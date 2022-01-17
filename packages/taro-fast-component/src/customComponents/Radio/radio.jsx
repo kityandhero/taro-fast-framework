@@ -130,7 +130,7 @@ class Radio extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       header,
       style,

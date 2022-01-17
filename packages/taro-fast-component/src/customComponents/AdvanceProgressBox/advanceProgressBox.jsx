@@ -42,7 +42,7 @@ const defaultProps = {
 };
 
 class AdvanceProgressBox extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       layout: layoutSource,
       hidden,

@@ -19,7 +19,7 @@ class VerticalBox extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const { style, align, alignJustify } = this.props;
 
     let alignStyle = 'center';

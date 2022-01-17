@@ -108,7 +108,7 @@ class Countdown extends ComponentBase {
     }, 1000);
   };
 
-  render() {
+  renderFurther() {
     const { className, style, format, isShowDay, isCard, isShowHour } =
       this.props;
 

@@ -29,7 +29,7 @@ const defaultProps = {
 };
 
 class FlexBox extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       style: styleSource,
       allowWrap,

@@ -22,7 +22,7 @@ const defaultProps = {
 };
 
 class Price extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       price,
       prefix,

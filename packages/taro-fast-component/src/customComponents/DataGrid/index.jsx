@@ -30,7 +30,7 @@ const defaultProps = {
 };
 
 class DataGrid extends ComponentBase {
-  render() {
+  renderFurther() {
     const { list, hidden } = this.props;
 
     if (hidden) {

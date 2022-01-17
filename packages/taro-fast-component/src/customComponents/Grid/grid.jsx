@@ -17,7 +17,7 @@ const defaultProps = {
 };
 
 class Grid extends ComponentBase {
-  render() {
+  renderFurther() {
     const { gap, columns } = this.props;
 
     const style = {

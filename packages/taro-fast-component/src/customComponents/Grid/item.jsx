@@ -25,7 +25,7 @@ class Item extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const { span } = this.props;
 
     const itemStyle = {

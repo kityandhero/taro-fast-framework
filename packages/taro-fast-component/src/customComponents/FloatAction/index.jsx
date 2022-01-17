@@ -258,7 +258,7 @@ class FloatAction extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       action,
       position,

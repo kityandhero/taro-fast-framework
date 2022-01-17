@@ -39,7 +39,7 @@ class ColorText extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       icon,
       iconContainerStyle,

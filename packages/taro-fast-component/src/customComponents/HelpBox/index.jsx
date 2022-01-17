@@ -22,7 +22,7 @@ const defaultProps = {
 };
 
 class HelpBox extends ComponentBase {
-  render() {
+  renderFurther() {
     const {
       title: titleValue,
       showTitle,

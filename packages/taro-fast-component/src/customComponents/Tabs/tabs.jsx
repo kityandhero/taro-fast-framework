@@ -245,7 +245,7 @@ class Tabs extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       customStyle = '',
       className,

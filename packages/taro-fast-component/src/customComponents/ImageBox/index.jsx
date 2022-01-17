@@ -76,7 +76,7 @@ class ImageBox extends ComponentBase {
     }
   }
 
-  render() {
+  renderFurther() {
     const {
       lazyLoad,
       src,

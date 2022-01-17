@@ -67,7 +67,7 @@ class NoticeBar extends ComponentBase {
     }
   }
 
-  render() {
+  renderFurther() {
     const {
       hidden,
       closeable: closeableSource,

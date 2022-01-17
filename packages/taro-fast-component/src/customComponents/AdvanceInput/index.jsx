@@ -188,7 +188,7 @@ class AdvanceInput extends ComponentBase {
     this.triggerChange('');
   };
 
-  render() {
+  renderFurther() {
     const {
       align,
       required,

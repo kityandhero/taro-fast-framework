@@ -19,7 +19,7 @@ class Ellipsis extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const { className, line, style: sourceSource, children } = this.props;
 
     let styleMust = {};

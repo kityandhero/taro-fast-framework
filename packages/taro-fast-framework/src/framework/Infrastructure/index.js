@@ -94,13 +94,6 @@ class Infrastructure extends ComponentBase {
 
   loadRemoteRequestAfterMount = false;
 
-  /**
-   *显示render次数开关, 用于开发时候调试页面渲染性能
-   */
-  showRenderCountInConsole = false;
-
-  renderCount = 0;
-
   doWorkBeforeAdjustWillMount = () => {};
 
   doWorkAdjustWillMount = () => {};
@@ -264,14 +257,6 @@ class Infrastructure extends ComponentBase {
 
   getCurrentPages() {
     return Taro.getCurrentPages();
-  }
-
-  showRenderCount() {
-    if (this.showRenderCountInConsole) {
-      this.renderCount += 1;
-
-      recordText({ renderFrequency: this.renderCount });
-    }
   }
 
   checkWorkDoing() {

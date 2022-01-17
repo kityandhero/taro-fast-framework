@@ -68,7 +68,7 @@ class Tag extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       color: colorSource,
       fill: fillSource,

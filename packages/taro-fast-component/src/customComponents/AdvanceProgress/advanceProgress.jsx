@@ -37,7 +37,7 @@ class AdvanceProgress extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       hidden,
       style,

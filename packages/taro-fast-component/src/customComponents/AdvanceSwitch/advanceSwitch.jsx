@@ -76,7 +76,7 @@ class AdvanceSwitch extends ComponentBase {
     this.setChecked(!checkedTemp);
   };
 
-  render() {
+  renderFurther() {
     const {
       required,
       hidden,

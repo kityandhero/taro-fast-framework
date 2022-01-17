@@ -39,7 +39,7 @@ class Item extends ComponentBase {
     }
   };
 
-  render() {
+  renderFurther() {
     const {
       style,
       prefix,

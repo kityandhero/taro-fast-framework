@@ -8,7 +8,7 @@ const defaultProps = {
 };
 
 class HorizontalCenterBox extends ComponentBase {
-  render() {
+  renderFurther() {
     const { fillHeight } = {
       ...defaultProps,
       ...this.props,

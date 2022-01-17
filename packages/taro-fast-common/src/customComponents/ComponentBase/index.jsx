@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { recordError, showErrorMessage } from '../../utils/tools';
+import { recordError, showErrorMessage, recordText } from '../../utils/tools';
 import { isObject } from '../../utils/typeCheck';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -70,6 +70,11 @@ class ComponentBase extends Component {
   constructor(props) {
     super(props);
 
+    const { showRenderCount } = props;
+
+    this.showRenderCountInConsole =
+      this.showRenderCountInConsole || !!showRenderCount;
+
     this.state = {
       error: null,
       errorInfo: null,
@@ -104,6 +109,13 @@ class ComponentBase extends Component {
     );
   }
 
+  /**
+   *显示render次数开关, 用于开发时候调试页面渲染性能
+   */
+  showRenderCountInConsole = false;
+
+  renderCount = 0;
+
   componentDidCatchError(error, info) {
     this.doWhenCatchError(error, info);
   }
@@ -120,6 +132,20 @@ class ComponentBase extends Component {
       info,
     });
   };
+
+  showRenderCount() {
+    if (this.showRenderCountInConsole) {
+      this.renderCount += 1;
+
+      recordText({ renderFrequency: this.renderCount });
+    }
+  }
+
+  render() {
+    this.showRenderCount();
+
+    return this.renderFurther();
+  }
 }
 
 export default ComponentBase;

@@ -6,7 +6,7 @@ import VerticalBox from '../VerticalBox';
 const defaultProps = {};
 
 class CenterBox extends ComponentBase {
-  render() {
+  renderFurther() {
     const { children } = this.props;
 
     console.log(this.props);
