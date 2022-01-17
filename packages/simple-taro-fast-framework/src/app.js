@@ -1,4 +1,4 @@
-// import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
+import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
 import { AppBase } from 'taro-fast-framework/es/framework';
 import 'taro-fast-component/es/index.css';
 import 'taro-fast-component-extra/es/index.css';
@@ -18,10 +18,10 @@ class App extends AppBase {
 
   establishConfig = () => {
     return {
-      // showLogInConsole: checkEnvIsDevelopment(),
-      showLogInConsole: true,
-      // showRequestInfo: checkEnvIsDevelopment(),
-      showRequestInfo: true,
+      showLogInConsole: checkEnvIsDevelopment(),
+      // showLogInConsole: true,
+      showRequestInfo: checkEnvIsDevelopment(),
+      // showRequestInfo: true,
       showUseVirtualRequestMessage: false,
       apiPrefix: {
         corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',
