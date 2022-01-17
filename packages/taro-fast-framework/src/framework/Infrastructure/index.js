@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
-import { showErrorMessage, recordText } from 'taro-fast-common/es/utils/tools';
+import { showErrorMessage } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {

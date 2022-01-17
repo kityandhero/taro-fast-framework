@@ -64,11 +64,6 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'Steps',
-            path: pathCollection.steps.path,
-          })}
-
-          {this.buildItem({
             name: 'AdvanceProgress',
             path: pathCollection.advanceProgress.path,
           })}
@@ -76,6 +71,11 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'Divider',
             path: pathCollection.divider.path,
+          })}
+
+          {this.buildItem({
+            name: 'Stepper',
+            path: pathCollection.stepper.path,
           })}
         </Card>
 
@@ -143,11 +143,6 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'Stepper',
-            path: pathCollection.stepper.path,
-          })}
-
-          {this.buildItem({
             name: 'Notification',
             path: pathCollection.notification.path,
           })}
@@ -200,6 +195,11 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'Circle',
             path: pathCollection.circle.path,
+          })}
+
+          {this.buildItem({
+            name: 'Steps',
+            path: pathCollection.steps.path,
           })}
         </Card>
 

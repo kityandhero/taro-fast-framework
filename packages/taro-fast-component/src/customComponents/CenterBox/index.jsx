@@ -9,8 +9,6 @@ class CenterBox extends ComponentBase {
   renderFurther() {
     const { children } = this.props;
 
-    console.log(this.props);
-
     return (
       <HorizontalCenterBox fillHeight>
         <VerticalBox align="center" alignJustify="flex-start">

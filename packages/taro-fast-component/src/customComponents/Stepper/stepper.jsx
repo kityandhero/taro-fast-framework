@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { View, Input, Text } from '@tarojs/components';
+import { View, Input } from '@tarojs/components';
 
 import {
   withNativeProps,
@@ -10,8 +10,10 @@ import {
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 
 import Button from '../Button';
-import HorizontalCenterBox from '../HorizontalCenterBox';
-import VerticalBox from '../VerticalBox';
+import CenterBox from '../CenterBox';
+import Icon from '../Icon';
+
+const { IconAdd, IconSubtract } = Icon;
 
 const classPrefix = `tfc-stepper`;
 
@@ -105,11 +107,9 @@ export const Stepper = (p) => {
         fill="none"
         color="primary"
       >
-        <HorizontalCenterBox>
-          <VerticalBox>
-            <Text style={{ fontSize: '32rpx' }}>━</Text>
-          </VerticalBox>
-        </HorizontalCenterBox>
+        <CenterBox>
+          <IconSubtract size={22} />
+        </CenterBox>
       </Button>
 
       <View className={`${classPrefix}-middle`}>
@@ -140,11 +140,9 @@ export const Stepper = (p) => {
         fill="none"
         color="primary"
       >
-        <HorizontalCenterBox>
-          <VerticalBox>
-            <Text style={{ fontSize: '32rpx' }}>✚</Text>
-          </VerticalBox>
-        </HorizontalCenterBox>
+        <CenterBox>
+          <IconAdd size={22} />
+        </CenterBox>
       </Button>
     </View>,
   );
