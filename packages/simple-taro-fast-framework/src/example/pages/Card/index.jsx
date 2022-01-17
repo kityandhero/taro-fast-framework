@@ -1,9 +1,17 @@
 import { View } from '@tarojs/components';
 
-import { Card, Item, Button } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Item,
+  ColorText,
+  Icon,
+  Button,
+} from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
+
+const { IconEdit } = Icon;
 
 const style = { backgroundColor: '#f5f7fa' };
 
@@ -43,6 +51,23 @@ export default class Index extends PageWrapper {
         >
           <Item title="这里是标题">这里是主信息</Item>
           <Item title="这里是标题">这里是主信息</Item>
+        </Card>
+
+        <Card
+          header={
+            <ColorText
+              icon={<IconEdit size={16} color="#ff3ce7" />}
+              text="附带图标"
+            />
+          }
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+          extra={<Button size="mini">扩展</Button>}
+        >
+          <Item arrow>条目1</Item>
+          <Item arrow>条目2</Item>
+          <Item arrow>条目3</Item>
         </Card>
       </View>
     );
