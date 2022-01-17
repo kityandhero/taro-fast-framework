@@ -8,11 +8,16 @@ import {
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import FlexBox from '../FlexBox';
+import VerticalBox from '../VerticalBox';
+
 const defaultProps = {
   randomSeed: 0,
   seedOffset: 0,
   randomColor: false,
   color: '',
+  icon: null,
+  iconContainerStyle: {},
   textPrefix: null,
   textPrefixStyle: null,
   text: '',
@@ -36,6 +41,8 @@ class ColorText extends ComponentBase {
 
   render() {
     const {
+      icon,
+      iconContainerStyle,
       textPrefix,
       textPrefixStyle,
       randomSeed,
@@ -79,17 +86,26 @@ class ColorText extends ComponentBase {
           this.copyText();
         }}
       >
-        {stringIsNullOrWhiteSpace(textPrefix) ? (
-          ''
-        ) : (
-          <>
-            <Text style={textPrefixStyle || null}>{textPrefix}</Text>
-            {stringIsNullOrWhiteSpace(separator) ? null : (
-              <Text style={separatorStyle || null}>{separator}</Text>
-            )}
-          </>
-        )}
-        <Text style={textStyle}>{text}</Text>
+        <FlexBox
+          flexAuto="right"
+          left={icon ? <VerticalBox>{icon}</VerticalBox> : null}
+          leftStyle={
+            icon ? { ...{ paddingRight: '12rpx' }, ...iconContainerStyle } : {}
+          }
+          right={
+            <VerticalBox>
+              {stringIsNullOrWhiteSpace(textPrefix) ? null : (
+                <>
+                  <Text style={textPrefixStyle || null}>{textPrefix}</Text>
+                  {stringIsNullOrWhiteSpace(separator) ? null : (
+                    <Text style={separatorStyle || null}>{separator}</Text>
+                  )}
+                </>
+              )}
+              <Text style={textStyle}>{text}</Text>
+            </VerticalBox>
+          }
+        />
       </View>
     );
   }

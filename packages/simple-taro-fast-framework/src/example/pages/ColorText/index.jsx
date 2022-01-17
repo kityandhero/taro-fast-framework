@@ -1,9 +1,16 @@
 import { View } from '@tarojs/components';
 
-import { Card, ColorText } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Icon,
+  ImageBox,
+  ColorText,
+} from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
+
+const { IconEdit } = Icon;
 
 export default class Index extends PageWrapper {
   renderFurther() {
@@ -55,8 +62,35 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
+        <Card header="附带图标" headerStyle={cardHeaderStyle}>
+          <ColorText
+            icon={<IconEdit size={18} color="#ff3ce7" />}
+            text="文本文字"
+          />
+        </Card>
+
+        <Card header="附带图片" headerStyle={cardHeaderStyle}>
+          <ColorText
+            icon={
+              <View style={{ width: '40rpx' }}>
+                <ImageBox circle src="https://jdc.jd.com/img/200" />
+              </View>
+            }
+            text="文本文字"
+          />
+        </Card>
+
         <Card header="分隔符样式" headerStyle={cardHeaderStyle}>
           <ColorText
+            textPrefix="前缀"
+            text="文本文字"
+            separatorStyle={{ color: '#67ca31', margin: '0 24rpx' }}
+          />
+        </Card>
+
+        <Card header="复杂样例" headerStyle={cardHeaderStyle}>
+          <ColorText
+            icon={<IconEdit size={16} color="#ff3ce7" />}
             textPrefix="前缀"
             text="文本文字"
             separatorStyle={{ color: '#67ca31', margin: '0 24rpx' }}

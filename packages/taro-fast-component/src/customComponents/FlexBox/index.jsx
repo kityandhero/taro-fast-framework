@@ -66,6 +66,7 @@ class FlexBox extends ComponentBase {
             <Col auto style={leftStyle || null}>
               {left}
             </Col>
+
             {(right || null) == null ? null : (
               <Col style={rightStyle || null}>{right}</Col>
             )}
@@ -76,6 +77,7 @@ class FlexBox extends ComponentBase {
       return (
         <Row style={style}>
           <Col style={leftStyle || null}>{left}</Col>
+
           {(right || null) == null ? null : (
             <Col auto style={rightStyle || null}>
               {right}
