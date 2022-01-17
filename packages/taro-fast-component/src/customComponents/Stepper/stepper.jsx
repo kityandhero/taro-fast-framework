@@ -108,7 +108,7 @@ export const Stepper = (p) => {
         color="primary"
       >
         <CenterBox>
-          <IconSubtract size={22} />
+          <IconSubtract size={18} />
         </CenterBox>
       </Button>
 
@@ -141,7 +141,7 @@ export const Stepper = (p) => {
         color="primary"
       >
         <CenterBox>
-          <IconAdd size={22} />
+          <IconAdd size={18} />
         </CenterBox>
       </Button>
     </View>,
