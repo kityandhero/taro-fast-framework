@@ -10,8 +10,6 @@ import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
 
 import { Spin } from '../Spin';
 
-import './index.less';
-
 const classPrefix = `tfc-button`;
 
 const colorCollection = ['default', 'primary', 'success', 'warning', 'danger'];
