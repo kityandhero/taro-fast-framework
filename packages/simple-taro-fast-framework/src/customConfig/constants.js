@@ -118,6 +118,9 @@ export const pathCollection = {
   flexBox: {
     path: '/example/pages/flexBox/index',
   },
+  centerBox: {
+    path: '/example/pages/centerBox/index',
+  },
 };
 
 export const cardHeaderStyle = {

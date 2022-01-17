@@ -106,6 +106,11 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
+            name: 'CenterBox',
+            path: pathCollection.centerBox.path,
+          })}
+
+          {this.buildItem({
             name: 'FlexBox',
             path: pathCollection.flexBox.path,
           })}

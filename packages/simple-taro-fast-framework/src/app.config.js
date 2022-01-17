@@ -48,6 +48,7 @@ export default {
         'pages/verticalBox/index',
         'pages/horizontalCenterBox/index',
         'pages/flexBox/index',
+        'pages/centerBox/index',
       ],
     },
   ],

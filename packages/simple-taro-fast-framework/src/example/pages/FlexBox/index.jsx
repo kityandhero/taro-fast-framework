@@ -33,6 +33,7 @@ export default class Index extends PageWrapper {
 
         <Card header="右侧自适应布局" headerStyle={cardHeaderStyle}>
           <FlexBox
+            flexAuto="right"
             left={<View style={boxStyle}></View>}
             right={<View style={autoStyle}></View>}
           />
@@ -42,13 +43,6 @@ export default class Index extends PageWrapper {
           header="上下自适应布局 , 下部固定高度"
           headerStyle={cardHeaderStyle}
         >
-          <FlexBox
-            left={<View style={boxStyle}></View>}
-            right={<View style={autoStyle}></View>}
-          />
-        </Card>
-
-        <Card header="FlexBox" headerStyle={cardHeaderStyle}>
           <FlexBox
             style={{ height: '300rpx' }}
             direction="vertical"
