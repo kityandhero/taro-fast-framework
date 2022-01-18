@@ -117,7 +117,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card
+        {/* <Card
           header="展示弹出层"
           style={style}
           headerStyle={cardHeaderStyle}
@@ -126,7 +126,7 @@ export default class Index extends PageWrapper {
           <Item arrow onClick={this.showBasic}>
             展示弹出层
           </Item>
-        </Card>
+        </Card> */}
         <Card
           header="弹出位置"
           style={style}
@@ -161,7 +161,7 @@ export default class Index extends PageWrapper {
             右侧弹出
           </Item>
         </Card>
-        <Card
+        {/* <Card
           header="关闭图标"
           style={style}
           headerStyle={cardHeaderStyle}
@@ -176,8 +176,9 @@ export default class Index extends PageWrapper {
           <Item arrow onClick={this.showCustomIconPosition}>
             图标位置
           </Item>
-        </Card>
-        <Card
+        </Card> */}
+
+        {/* <Card
           header="圆角弹窗"
           style={style}
           headerStyle={cardHeaderStyle}
@@ -186,16 +187,44 @@ export default class Index extends PageWrapper {
           <Item arrow onClick={this.showRound}>
             圆角弹窗
           </Item>
-        </Card>
+        </Card> */}
 
         <Popup
-          show={show.basic}
-          style={{ padding: '30px 50px' }}
-          onClose={this.hideBasic}
+          visible={show.left}
+          header="面板"
+          position="left"
+          onClose={this.hideLeft}
         >
           内容
         </Popup>
+
         <Popup
+          visible={show.right}
+          header="面板"
+          position="right"
+          onClose={this.hideRight}
+        >
+          内容
+        </Popup>
+
+        <Popup
+          visible={show.top}
+          header="面板"
+          position="top"
+          onClose={this.hideTop}
+        >
+          内容
+        </Popup>
+
+        <Popup
+          visible={show.bottom}
+          header="面板"
+          position="bottom"
+          onClose={this.hideBottom}
+        >
+          内容
+        </Popup>
+        {/* <Popup
           show={show.top}
           position="top"
           style={{ height: '20%' }}
@@ -248,7 +277,7 @@ export default class Index extends PageWrapper {
           position="bottom"
           style={{ height: '20%' }}
           onClose={this.hideRound}
-        ></Popup>
+        ></Popup> */}
       </View>
     );
   }

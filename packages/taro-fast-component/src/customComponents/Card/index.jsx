@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
+import { View, ScrollView } from '@tarojs/components';
 
 import { inCollection } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -23,6 +23,54 @@ const defaultProps = {
   footerStyle: {},
   space: true,
   extra: null,
+  /**
+   * 是否使用滚动视图
+   * @default true
+   */
+  scroll: false,
+  /**
+   * 是否垂直滚动
+   * @default true
+   */
+  scrollY: true,
+  /**
+   * 是否水平滚动
+   * @default false
+   */
+  scrollX: false,
+  /**
+   * 设置竖向滚动条位置
+   */
+  scrollTop: null,
+  /**
+   * 设置横向滚动条位置
+   */
+  scrollLeft: null,
+  /**
+   * 距顶部/左边多远时，触发 scrolltolower 事件
+   */
+  upperThreshold: null,
+  /**
+   * 距底部/右边多远时，触发 scrolltolower 事件
+   */
+  lowerThreshold: null,
+  /**
+   * 在设置滚动条位置时使用动画过渡
+   * @default false
+   */
+  scrollWithAnimation: false,
+  /**
+   * 滚动时触发的事件
+   */
+  onScroll: null,
+  /**
+   * 滚动到顶部/左边，会触发 onScrollToUpper 事件
+   */
+  onScrollToUpper: null,
+  /**
+   * 滚动到底部/右边，会触发 onScrollToLower 事件
+   */
+  onScrollToLower: null,
 };
 
 class Card extends ComponentBase {
@@ -38,11 +86,22 @@ class Card extends ComponentBase {
       mode: modeSource,
       space,
       children,
+      scroll,
+      scrollY,
+      scrollX,
+      scrollTop,
+      scrollLeft,
+      upperThreshold,
+      lowerThreshold,
+      scrollWithAnimation,
+      onScroll,
+      onScrollToUpper,
+      onScrollToLower,
     } = this.props;
 
     const mode = inCollection(modeCollection, modeSource)
       ? modeSource
-      : 'default';
+      : 'through';
 
     return (
       <View
@@ -67,7 +126,25 @@ class Card extends ComponentBase {
           })}
           style={bodyStyle}
         >
-          <View className={`${classPrefix}-body-inner`}>{children}</View>
+          {scroll ? (
+            <ScrollView
+              scrollY={scrollY}
+              scrollX={scrollX}
+              scrollTop={scrollTop}
+              scrollLeft={scrollLeft}
+              upperThreshold={upperThreshold}
+              lowerThreshold={lowerThreshold}
+              scrollWithAnimation={scrollWithAnimation}
+              onScroll={onScroll}
+              onScrollToLower={onScrollToLower}
+              onScrollToUpper={onScrollToUpper}
+              className={`${classPrefix}-body-inner`}
+            >
+              {children}
+            </ScrollView>
+          ) : (
+            <View className={`${classPrefix}-body-inner`}>{children}</View>
+          )}
         </View>
 
         {footer ? (

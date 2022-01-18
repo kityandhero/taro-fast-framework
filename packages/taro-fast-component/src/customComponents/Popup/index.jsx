@@ -1,11 +1,24 @@
 import classNames from 'classnames';
-import { ScrollView, Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
-import { handleTouchScroll } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  handleTouchScroll,
+  inCollection,
+} from 'taro-fast-common/es/utils/tools';
+import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Overlay from '../Overlay';
+import Card from '../Card';
+import Icon from '../Icon';
+import CenterBox from '../CenterBox';
+
+import './index.less';
+
+const { IconCloseCircle } = Icon;
+
+const positionCollection = ['bottom', 'top', 'left', 'right'];
 
 const defaultProps = {
   /**
@@ -16,7 +29,29 @@ const defaultProps = {
   /**
    * 元素的标题
    */
-  title: '',
+  header: '',
+  footer: null,
+  footerStyle: {},
+  showClose: false,
+  arcTop: false,
+  arcBottom: false,
+  arcSize: 20,
+  maxHeight: 828,
+  minHeight: 514,
+  maxWidth: '85%',
+  minWidth: '20%',
+  bodyStyle: {},
+  closeWhenOverlayClick: true,
+  position: 'bottom',
+  /**
+   * 元素被关闭时候触发的事件
+   */
+  onClose: null,
+  /**
+   * 是否使用滚动视图
+   * @default true
+   */
+  scroll: false,
   /**
    * 是否垂直滚动
    * @default true
@@ -49,10 +84,6 @@ const defaultProps = {
    */
   scrollWithAnimation: false,
   /**
-   * 元素被关闭时候触发的事件
-   */
-  onClose: null,
-  /**
    * 滚动时触发的事件
    */
   onScroll: null,
@@ -66,11 +97,12 @@ const defaultProps = {
   onScrollToLower: null,
 };
 
-export default class AtFloatLayout extends ComponentBase {
+class Popup extends ComponentBase {
   constructor(props) {
     super(props);
 
     const { visible } = props;
+
     this.state = {
       visibleStage: visible,
     };
@@ -83,13 +115,59 @@ export default class AtFloatLayout extends ComponentBase {
     if (visibleNext !== visiblePrev) {
       handleTouchScroll(visibleNext);
 
-      this.setState({
+      return {
         visibleStage: visibleNext,
-      });
+      };
     }
 
     return {};
   }
+
+  getMinHeight = () => {
+    const { minHeight } = this.props;
+
+    if (isNumber(minHeight)) {
+      const n = toNumber(minHeight);
+
+      return n <= 0 ? defaultProps.minHeight : n;
+    }
+
+    return {};
+  };
+
+  getMaxHeight = () => {
+    const { maxHeight } = this.props;
+
+    if (isNumber(maxHeight)) {
+      const n = toNumber(maxHeight);
+
+      const minHeight = this.getMinHeight();
+
+      return n <= 0 ? defaultProps.maxHeight : n <= minHeight ? minHeight : n;
+    }
+
+    return {};
+  };
+
+  getArcSize = () => {
+    const { arcSize } = this.props;
+
+    if (isNumber(arcSize)) {
+      const n = toNumber(arcSize);
+
+      return n <= 0 ? defaultProps.arcSize : n;
+    }
+
+    return {};
+  };
+
+  getPosition = () => {
+    const { position } = this.props;
+
+    return inCollection(positionCollection, position)
+      ? position
+      : defaultProps.position;
+  };
 
   handleClose = () => {
     const { onClose } = this.props;
@@ -112,10 +190,62 @@ export default class AtFloatLayout extends ComponentBase {
     e.stopPropagation();
   };
 
+  getHeight = () => {
+    const minHeight = this.getMinHeight();
+    const maxHeight = this.getMaxHeight();
+
+    return {
+      minHeight: `${minHeight}rpx`,
+      maxHeight: `${maxHeight}rpx`,
+    };
+  };
+
+  getWidth = () => {
+    const { minWidth, maxWidth } = this.props;
+
+    return {
+      minWidth,
+      maxWidth,
+    };
+  };
+
+  getBodyStyle = () => {
+    const { arcTop, arcBottom, bodyStyle } = this.props;
+
+    const as = this.getArcSize();
+    const height = this.getHeight();
+    const width = this.getWidth();
+    const position = this.getPosition();
+
+    return {
+      ...(arcTop
+        ? {
+            borderTopLeftRadius: `${as}rpx`,
+            borderTopRightRadius: `${as}rpx`,
+          }
+        : {}),
+      ...(arcBottom
+        ? {
+            borderBottomLeftRadius: `${as}rpx`,
+            borderBottomRightRadius: `${as}rpx`,
+          }
+        : {}),
+      ...(bodyStyle || {}),
+      ...(position === 'top' || position === 'bottom' ? height : {}),
+      ...(position === 'left' || position === 'right' ? width : {}),
+    };
+  };
+
   render() {
     const { visibleStage } = this.state;
     const {
-      title,
+      showClose,
+      header,
+      headerStyle,
+      footer,
+      footerStyle,
+      closeWhenOverlayClick,
+      scroll,
       scrollY,
       scrollX,
       scrollTop,
@@ -137,19 +267,45 @@ export default class AtFloatLayout extends ComponentBase {
       this.props.className,
     );
 
+    const bodyStyle = this.getBodyStyle();
+    const height = this.getHeight();
+    const width = this.getWidth();
+    const position = this.getPosition();
+
     return (
       <View className={rootClass} onTouchMove={this.handleTouchMove}>
-        <Overlay visible={visibleStage} onClick={this.close} />
+        <Overlay
+          visible={visibleStage}
+          zIndex={0}
+          onClick={() => {
+            if (closeWhenOverlayClick) {
+              this.close();
+            }
+          }}
+        />
 
-        <View className="tfc-popup__container layout">
-          {title ? (
-            <View className="layout-header">
-              <Text className="layout-header__title">{title}</Text>
-              <View className="layout-header__btn-close" onClick={this.close} />
-            </View>
-          ) : null}
-          <View className="layout-body">
-            <ScrollView
+        <View
+          className={classNames('tfc-popup__container', {
+            ['tfc-popup__container__top']: position === 'top',
+            ['tfc-popup__container__bottom']: position === 'bottom',
+            ['tfc-popup__container__left']: position === 'left',
+            ['tfc-popup__container__right']: position === 'right',
+          })}
+          style={bodyStyle}
+        >
+          <View
+            className="tfc-popup__container__body"
+            style={{
+              ...(position === 'top' || position === 'bottom' ? height : {}),
+              // ...(position === 'left' || position === 'right' ? width : {}),
+            }}
+          >
+            <Card
+              header={header}
+              headerStyle={headerStyle}
+              footer={footer}
+              footerStyle={footerStyle}
+              scroll={scroll}
               scrollY={scrollY}
               scrollX={scrollX}
               scrollTop={scrollTop}
@@ -158,12 +314,36 @@ export default class AtFloatLayout extends ComponentBase {
               lowerThreshold={lowerThreshold}
               scrollWithAnimation={scrollWithAnimation}
               onScroll={onScroll}
-              onScrollToLower={onScrollToLower}
               onScrollToUpper={onScrollToUpper}
-              className="layout-body__content"
+              onScrollToLower={onScrollToLower}
+              style={{
+                ...(position === 'top' || position === 'bottom' ? height : {}),
+                // ...(position === 'left' || position === 'right' ? width : {}),
+                ...{
+                  position: 'relative',
+                },
+              }}
             >
+              {showClose ? (
+                <View
+                  className="tfc-popup__container__body__close"
+                  style={{
+                    top: '40rpx',
+                    right: '40%',
+                    height: '40rpx',
+                    width: '40rpx',
+                    position: 'absolute',
+                  }}
+                  onClick={this.close}
+                >
+                  <CenterBox>
+                    <IconCloseCircle />
+                  </CenterBox>
+                </View>
+              ) : null}
+
               {children}
-            </ScrollView>
+            </Card>
           </View>
         </View>
       </View>
@@ -171,6 +351,8 @@ export default class AtFloatLayout extends ComponentBase {
   }
 }
 
-AtFloatLayout.defaultProps = {
+Popup.defaultProps = {
   ...defaultProps,
 };
+
+export default Popup;
