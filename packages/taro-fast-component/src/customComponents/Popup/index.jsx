@@ -29,13 +29,14 @@ const defaultProps = {
   /**
    * 元素的标题
    */
+  mode: 'through',
   header: '',
   footer: null,
   footerStyle: {},
   showClose: false,
   arcTop: false,
   arcBottom: false,
-  arcSize: 20,
+  arcSize: 24,
   maxHeight: 828,
   minHeight: 514,
   maxWidth: '85%',
@@ -188,6 +189,7 @@ class Popup extends ComponentBase {
 
   handleTouchMove = (e) => {
     e.stopPropagation();
+    e.preventDefault();
   };
 
   getHeight = () => {
@@ -210,12 +212,23 @@ class Popup extends ComponentBase {
   };
 
   getBodyStyle = () => {
-    const { arcTop, arcBottom, bodyStyle } = this.props;
+    const { bodyStyle } = this.props;
 
-    const as = this.getArcSize();
     const height = this.getHeight();
     const width = this.getWidth();
     const position = this.getPosition();
+
+    return {
+      ...(bodyStyle || {}),
+      ...(position === 'top' || position === 'bottom' ? height : {}),
+      ...(position === 'left' || position === 'right' ? width : {}),
+    };
+  };
+
+  getArcStyle = () => {
+    const { arcTop, arcBottom } = this.props;
+
+    const as = this.getArcSize();
 
     return {
       ...(arcTop
@@ -230,9 +243,6 @@ class Popup extends ComponentBase {
             borderBottomRightRadius: `${as}rpx`,
           }
         : {}),
-      ...(bodyStyle || {}),
-      ...(position === 'top' || position === 'bottom' ? height : {}),
-      ...(position === 'left' || position === 'right' ? width : {}),
     };
   };
 
@@ -240,6 +250,7 @@ class Popup extends ComponentBase {
     const { visibleStage } = this.state;
     const {
       showClose,
+      mode,
       header,
       headerStyle,
       footer,
@@ -268,8 +279,8 @@ class Popup extends ComponentBase {
     );
 
     const bodyStyle = this.getBodyStyle();
+    const arcStyle = this.getArcStyle();
     const height = this.getHeight();
-    const width = this.getWidth();
     const position = this.getPosition();
 
     return (
@@ -277,6 +288,7 @@ class Popup extends ComponentBase {
         <Overlay
           visible={visibleStage}
           zIndex={0}
+          lockScroll
           onClick={() => {
             if (closeWhenOverlayClick) {
               this.close();
@@ -292,17 +304,42 @@ class Popup extends ComponentBase {
             ['tfc-popup__container__right']: position === 'right',
           })}
           style={bodyStyle}
+          onTouchMove={this.handleTouchMove}
         >
           <View
             className="tfc-popup__container__body"
             style={{
               ...(position === 'top' || position === 'bottom' ? height : {}),
-              // ...(position === 'left' || position === 'right' ? width : {}),
             }}
+            onTouchMove={this.handleTouchMove}
           >
+            {showClose ? (
+              <View
+                className="tfc-popup__container__body__close"
+                style={{
+                  top: '12rpx',
+                  right: '12rpx',
+                  height: '40rpx',
+                  width: '40rpx',
+                  position: 'absolute',
+                }}
+                onClick={this.close}
+              >
+                <CenterBox>
+                  <IconCloseCircle size={18} color="#ccc" />
+                </CenterBox>
+              </View>
+            ) : null}
             <Card
+              mode={mode}
               header={header}
-              headerStyle={headerStyle}
+              headerStyle={{
+                ...headerStyle,
+                ...{
+                  paddingTop: '10rpx',
+                  paddingBottom: '10rpx',
+                },
+              }}
               footer={footer}
               footerStyle={footerStyle}
               scroll={scroll}
@@ -318,30 +355,12 @@ class Popup extends ComponentBase {
               onScrollToLower={onScrollToLower}
               style={{
                 ...(position === 'top' || position === 'bottom' ? height : {}),
-                // ...(position === 'left' || position === 'right' ? width : {}),
-                ...{
-                  position: 'relative',
-                },
+                ...(position === 'left' || position === 'right'
+                  ? { height: mode !== 'card' ? '100%' : 'calc(100% - 48rpx)' }
+                  : {}),
+                ...arcStyle,
               }}
             >
-              {showClose ? (
-                <View
-                  className="tfc-popup__container__body__close"
-                  style={{
-                    top: '40rpx',
-                    right: '40%',
-                    height: '40rpx',
-                    width: '40rpx',
-                    position: 'absolute',
-                  }}
-                  onClick={this.close}
-                >
-                  <CenterBox>
-                    <IconCloseCircle />
-                  </CenterBox>
-                </View>
-              ) : null}
-
               {children}
             </Card>
           </View>

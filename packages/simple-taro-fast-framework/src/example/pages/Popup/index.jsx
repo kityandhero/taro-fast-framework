@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { Card, Item, Popup } from 'taro-fast-component/es/customComponents';
+import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -9,6 +10,72 @@ import './index.less';
 
 const style = { backgroundColor: '#f5f7fa' };
 
+const arcTopList = [
+  {
+    label: '上直角',
+    value: '上直角',
+  },
+  {
+    label: '上圆角',
+    value: '上圆角',
+  },
+];
+
+const arcBottomList = [
+  {
+    label: '下直角',
+    value: '下直角',
+  },
+  {
+    label: '下圆角',
+    value: '下圆角',
+  },
+];
+
+const modeList = [
+  {
+    label: '通栏',
+    value: 'through',
+  },
+  {
+    label: '卡片',
+    value: 'card',
+  },
+];
+
+const showCloseList = [
+  {
+    label: '显示',
+    value: 'yes',
+  },
+  {
+    label: '隐藏',
+    value: 'no',
+  },
+];
+
+const closeWhenOverlayClickList = [
+  {
+    label: '是',
+    value: 'yes',
+  },
+  {
+    label: '否',
+    value: 'no',
+  },
+];
+
+const scrollList = [
+  {
+    label: '滚动',
+    value: 'yes',
+  },
+  {
+    label: '普通',
+    value: 'no',
+  },
+];
+
 export default class Index extends PageWrapper {
   constructor(props) {
     super(props);
@@ -16,6 +83,12 @@ export default class Index extends PageWrapper {
     this.state = {
       ...this.state,
       ...{
+        arcTop: ['上直角'],
+        arcBottom: ['下直角'],
+        mode: ['through'],
+        showClose: ['no'],
+        closeWhenOverlayClick: ['yes'],
+        scroll: ['no'],
         show: {
           basic: false,
           top: false,
@@ -30,6 +103,42 @@ export default class Index extends PageWrapper {
       },
     };
   }
+
+  setArcTop = (value) => {
+    this.setState({
+      arcTop: value,
+    });
+  };
+
+  setArcBottom = (value) => {
+    this.setState({
+      arcBottom: value,
+    });
+  };
+
+  setMode = (value) => {
+    this.setState({
+      mode: value,
+    });
+  };
+
+  setShowClose = (value) => {
+    this.setState({
+      showClose: value,
+    });
+  };
+
+  setCloseWhenOverlayClick = (value) => {
+    this.setState({
+      closeWhenOverlayClick: value,
+    });
+  };
+
+  setScroll = (value) => {
+    this.setState({
+      scroll: value,
+    });
+  };
 
   toggle = (type, show) => {
     this.setState({
@@ -113,7 +222,15 @@ export default class Index extends PageWrapper {
   };
 
   renderFurther() {
-    const { show } = this.state;
+    const {
+      show,
+      arcTop,
+      arcBottom,
+      mode,
+      showClose,
+      closeWhenOverlayClick,
+      scroll: scrollData,
+    } = this.state;
 
     return (
       <View className="index">
@@ -161,6 +278,51 @@ export default class Index extends PageWrapper {
             右侧弹出
           </Item>
         </Card>
+
+        <Card header="变更上圆角" headerStyle={cardHeaderStyle}>
+          <Selector
+            options={arcTopList}
+            value={arcTop}
+            onChange={this.setArcTop}
+          />
+        </Card>
+
+        <Card header="变更下圆角" headerStyle={cardHeaderStyle}>
+          <Selector
+            options={arcBottomList}
+            value={arcBottom}
+            onChange={this.setArcBottom}
+          />
+        </Card>
+
+        <Card header="变更模式" headerStyle={cardHeaderStyle}>
+          <Selector options={modeList} value={mode} onChange={this.setMode} />
+        </Card>
+
+        <Card header="关闭按钮" headerStyle={cardHeaderStyle}>
+          <Selector
+            options={showCloseList}
+            value={showClose}
+            onChange={this.setShowClose}
+          />
+        </Card>
+
+        <Card header="点击遮罩关闭面板" headerStyle={cardHeaderStyle}>
+          <Selector
+            options={closeWhenOverlayClickList}
+            value={closeWhenOverlayClick}
+            onChange={this.setCloseWhenOverlayClick}
+          />
+        </Card>
+
+        <Card header="显示区域容器" headerStyle={cardHeaderStyle}>
+          <Selector
+            options={scrollList}
+            value={scrollData}
+            onChange={this.setScroll}
+          />
+        </Card>
+
         {/* <Card
           header="关闭图标"
           style={style}
@@ -193,6 +355,12 @@ export default class Index extends PageWrapper {
           visible={show.left}
           header="面板"
           position="left"
+          mode={mode[0]}
+          showClose={showClose[0] === 'yes'}
+          scroll={scrollData[0] === 'yes'}
+          closeWhenOverlayClick={closeWhenOverlayClick[0] === 'yes'}
+          arcTop={arcTop[0] === '上圆角'}
+          arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideLeft}
         >
           内容
@@ -202,6 +370,12 @@ export default class Index extends PageWrapper {
           visible={show.right}
           header="面板"
           position="right"
+          mode={mode[0]}
+          showClose={showClose[0] === 'yes'}
+          scroll={scrollData[0] === 'yes'}
+          closeWhenOverlayClick={closeWhenOverlayClick[0] === 'yes'}
+          arcTop={arcTop[0] === '上圆角'}
+          arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideRight}
         >
           内容
@@ -211,6 +385,12 @@ export default class Index extends PageWrapper {
           visible={show.top}
           header="面板"
           position="top"
+          mode={mode[0]}
+          showClose={showClose[0] === 'yes'}
+          scroll={scrollData[0] === 'yes'}
+          closeWhenOverlayClick={closeWhenOverlayClick[0] === 'yes'}
+          arcTop={arcTop[0] === '上圆角'}
+          arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideTop}
         >
           内容
@@ -220,6 +400,12 @@ export default class Index extends PageWrapper {
           visible={show.bottom}
           header="面板"
           position="bottom"
+          mode={mode[0]}
+          showClose={showClose[0] === 'yes'}
+          scroll={scrollData[0] === 'yes'}
+          closeWhenOverlayClick={closeWhenOverlayClick[0] === 'yes'}
+          arcTop={arcTop[0] === '上圆角'}
+          arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBottom}
         >
           内容
