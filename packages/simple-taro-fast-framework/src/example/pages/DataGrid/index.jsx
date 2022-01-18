@@ -19,7 +19,7 @@ const list = [
     value: '普通',
   },
   {
-    label: '保质期',
+    label: '质保',
     value: '21天',
   },
   {
@@ -29,13 +29,13 @@ const list = [
   },
   {
     span: 2,
-    label: '生产厂家',
+    label: '厂家',
     value: 'XXXX食品有限公司',
   },
   {
     span: 2,
-    label: '供应地区',
-    value: '浙江省杭州市',
+    label: '供应',
+    value: '浙江省XX市',
   },
 ];
 
