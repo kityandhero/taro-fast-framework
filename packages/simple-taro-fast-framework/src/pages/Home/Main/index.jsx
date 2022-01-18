@@ -74,6 +74,11 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
+            name: 'RadioSelector',
+            path: pathCollection.radioSelector.path,
+          })}
+
+          {this.buildItem({
             name: 'AdvanceProgress',
             path: pathCollection.advanceProgress.path,
           })}

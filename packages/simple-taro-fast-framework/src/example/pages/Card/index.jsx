@@ -20,7 +20,16 @@ export default class Index extends PageWrapper {
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
         <Card
-          header="基础用法"
+          header="默认布局"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          footer="这里是底部内容"
+        >
+          这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域
+        </Card>
+
+        <Card
+          header="通栏视图"
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}

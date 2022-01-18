@@ -79,33 +79,6 @@ const defaultProps = {
 };
 
 class Radio extends ComponentBase {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        show: true,
-        valueFlag: '',
-        valueStage: '',
-      },
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
-
-    if (valueNext !== valuePrev) {
-      return {
-        valueFlag: valueNext,
-        valueStage: valueNext ?? '',
-      };
-    }
-
-    return {};
-  }
-
   getLayout = () => {
     const { layout } = this.props;
 
@@ -118,10 +91,6 @@ class Radio extends ComponentBase {
     if (option.disabled) {
       return;
     }
-
-    this.setState({
-      valueStage: option.value,
-    });
 
     const { onClick } = this.props;
 
@@ -141,8 +110,8 @@ class Radio extends ComponentBase {
       options,
       border,
       extra,
+      value,
     } = this.props;
-    const { valueStage } = this.state;
 
     const layout = this.getLayout();
 
@@ -182,8 +151,7 @@ class Radio extends ComponentBase {
                 disabled={disabled}
                 border={border}
                 extra={
-                  !stringIsNullOrWhiteSpace(valueStage) &&
-                  valueStage === valueItem
+                  !stringIsNullOrWhiteSpace(value) && value === valueItem
                     ? iconCheck || checkIconList
                     : iconUncheck || null
                 }
@@ -201,8 +169,7 @@ class Radio extends ComponentBase {
               key={key}
               // prefix={prefix}
               prefix={
-                !stringIsNullOrWhiteSpace(valueStage) &&
-                valueStage === valueItem
+                !stringIsNullOrWhiteSpace(value) && value === valueItem
                   ? iconCheck || checkIconRadio
                   : iconUncheck || uncheckIconRadio
               }

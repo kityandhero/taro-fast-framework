@@ -124,6 +124,9 @@ export const pathCollection = {
   dataGrid: {
     path: '/example/pages/dataGrid/index',
   },
+  radioSelector: {
+    path: '/example/pages/radioSelector/index',
+  },
 };
 
 export const cardHeaderStyle = {

@@ -31,6 +31,7 @@ export { default as Grid } from './Grid';
 export { default as Steps } from './Steps';
 export { default as Transition } from './Transition';
 export { default as Radio } from './Radio';
+export { default as RadioSelector } from './RadioSelector';
 export { Badge } from './Badge';
 export { Spin } from './Spin';
 export { Space } from './Space';

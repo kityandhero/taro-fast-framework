@@ -19,6 +19,8 @@ const defaultProps = {
   header: null,
   headerStyle: {},
   bodyStyle: {},
+  footer: null,
+  footerStyle: {},
   space: true,
   extra: null,
 };
@@ -30,6 +32,8 @@ class Card extends ComponentBase {
       header,
       headerStyle,
       bodyStyle,
+      footer,
+      footerStyle,
       extra,
       mode: modeSource,
       space,
@@ -65,6 +69,15 @@ class Card extends ComponentBase {
         >
           <View className={`${classPrefix}-body-inner`}>{children}</View>
         </View>
+
+        {footer ? (
+          <View
+            className={classNames(`${classPrefix}-footer`)}
+            style={footerStyle}
+          >
+            {footer}
+          </View>
+        ) : null}
       </View>
     );
   }
