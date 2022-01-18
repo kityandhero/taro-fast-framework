@@ -130,7 +130,7 @@ export default class Index extends PageWrapper {
           border={border}
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
-          showRenderCount
+          // showRenderCount
           extra={
             <Button
               style={{ marginRight: '10rpx' }}
@@ -140,7 +140,7 @@ export default class Index extends PageWrapper {
               切换边框
             </Button>
           }
-          // onClick={this.handleRadioChange}
+          onClick={this.handleRadioChange}
         />
 
         <Radio
@@ -150,7 +150,7 @@ export default class Index extends PageWrapper {
           value={this.state.radioValue1}
           iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
           extra={<View style={extraStyle}>layout: list</View>}
-          // onClick={this.handleRadioChange}
+          onClick={this.handleRadioChange}
         />
 
         <Radio
@@ -159,7 +159,7 @@ export default class Index extends PageWrapper {
           options={this.state.radioOptions2}
           value={this.state.radioValue2}
           extra={<View style={extraStyle}>layout: list</View>}
-          // onClick={this.handleRadioChangeSecond}
+          onClick={this.handleRadioChangeSecond}
         />
 
         <Radio
@@ -168,7 +168,7 @@ export default class Index extends PageWrapper {
           options={this.state.radioOptions3}
           value={this.state.radioValue3}
           extra={<View style={extraStyle}>layout: list</View>}
-          // onClick={this.handleRadioChangeThird}
+          onClick={this.handleRadioChangeThird}
         />
 
         <Radio
@@ -179,7 +179,7 @@ export default class Index extends PageWrapper {
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
           extra={<View style={extraStyle}>layout: radio</View>}
-          // onClick={this.handleRadioChange}
+          onClick={this.handleRadioChange}
         />
 
         <Radio
@@ -190,7 +190,7 @@ export default class Index extends PageWrapper {
           value={this.state.radioValue1}
           iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
           extra={<View style={extraStyle}>layout: radio</View>}
-          // onClick={this.handleRadioChange}
+          onClick={this.handleRadioChange}
         />
 
         <Radio
@@ -200,7 +200,7 @@ export default class Index extends PageWrapper {
           options={this.state.radioOptions2}
           value={this.state.radioValue2}
           extra={<View style={extraStyle}>layout: radio</View>}
-          // onClick={this.handleRadioChangeSecond}
+          onClick={this.handleRadioChangeSecond}
         />
 
         <Radio
@@ -210,7 +210,7 @@ export default class Index extends PageWrapper {
           options={this.state.radioOptions3}
           value={this.state.radioValue3}
           extra={<View style={extraStyle}>layout: radio</View>}
-          // onClick={this.handleRadioChangeThird}
+          onClick={this.handleRadioChangeThird}
         />
       </View>
     );
