@@ -85,28 +85,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card
-          header="遮罩层操控"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Item arrow onClick={this.onClickShow1}>
-            显示全局遮罩层
-          </Item>
-          <Item arrow onClick={this.onClickShow2}>
-            显示嵌入内容的全局遮罩层
-          </Item>
-
-          <Item arrow onClick={this.onClickShow3}>
-            显示容器遮罩层
-          </Item>
-          <Item arrow onClick={this.onClickShow4}>
-            显示嵌入内容的容器遮罩层
-          </Item>
-        </Card>
-
-        <Card
-          header="容器遮罩层"
+          header="展示容器"
           style={style}
           headerStyle={cardHeaderStyle}
           // space={false}
@@ -128,6 +107,27 @@ export default class Index extends PageWrapper {
               <View style={boxStyle} />
             </Overlay>
           </View>
+        </Card>
+
+        <Card
+          header="遮罩层操控"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item arrow onClick={this.onClickShow1}>
+            显示全局遮罩层
+          </Item>
+          <Item arrow onClick={this.onClickShow2}>
+            显示嵌入内容的全局遮罩层
+          </Item>
+
+          <Item arrow onClick={this.onClickShow3}>
+            显示容器遮罩层
+          </Item>
+          <Item arrow onClick={this.onClickShow4}>
+            显示嵌入内容的容器遮罩层
+          </Item>
         </Card>
 
         <Overlay
