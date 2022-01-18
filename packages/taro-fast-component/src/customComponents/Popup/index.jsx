@@ -8,9 +8,10 @@ import { bem } from '../../utils/tools';
 import Overlay from '../Overlay';
 import Transition from '../Transition';
 import { defaultProps as defaultPropsTransition } from '../Transition/tools';
-import { defaultProps as defaultPropsOverlay } from '../Overlay/tools';
 
 import './index.less';
+
+const defaultPropsOverlay = {};
 
 const { useTransition } = Transition;
 
