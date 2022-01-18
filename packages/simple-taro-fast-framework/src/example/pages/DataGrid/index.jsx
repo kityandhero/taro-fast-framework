@@ -1,7 +1,5 @@
 import { View } from '@tarojs/components';
 
-import { formatTarget } from 'taro-fast-common/es/utils/tools';
-import { formatCollection } from 'taro-fast-common/es/utils/constants';
 import { Card, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -9,35 +7,35 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 
 const list = [
   {
-    label: '姓名',
-    value: '张恒豫',
+    label: '品名',
+    value: '酸奶',
   },
   {
-    label: '性别',
-    value: '男',
+    label: '产地',
+    value: '杭州',
   },
   {
-    label: '性别',
-    value: '男',
+    label: '酸度',
+    value: '普通',
   },
   {
-    label: '生日',
-    value: formatTarget('1988-09-14', formatCollection.datetime),
-  },
-  {
-    span: 2,
-    label: '籍贯',
-    value: '北京',
+    label: '保质期',
+    value: '21天',
   },
   {
     span: 2,
-    label: '邮箱',
-    value: '452346363@abc.com',
+    label: '奶源',
+    value: '新疆',
   },
   {
     span: 2,
-    label: '地址',
-    value: '北京市西城区西四胡同',
+    label: '生产厂家',
+    value: 'XXXX食品有限公司',
+  },
+  {
+    span: 2,
+    label: '供应地区',
+    value: '浙江省杭州市',
   },
 ];
 

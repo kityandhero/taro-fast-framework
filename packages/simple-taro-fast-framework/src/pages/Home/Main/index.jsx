@@ -144,6 +144,11 @@ export default class Index extends PageWrapper {
             name: 'Tabs',
             path: pathCollection.tabs.path,
           })}
+
+          {this.buildItem({
+            name: 'Overlay',
+            path: pathCollection.overlay.path,
+          })}
         </Card>
 
         <Card header="功能组件" headerStyle={cardHeaderStyle} space={false}>
@@ -185,11 +190,6 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'AdvanceProgressBox',
             path: pathCollection.advanceProgressBox.path,
-          })}
-
-          {this.buildItem({
-            name: 'Overlay',
-            path: pathCollection.overlay.path,
           })}
 
           {this.buildItem({

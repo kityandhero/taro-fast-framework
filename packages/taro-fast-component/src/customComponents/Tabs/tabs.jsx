@@ -331,9 +331,10 @@ class Tabs extends ComponentBase {
         )}
         <View
           className="tfc-tabs__body"
-          onTouchStart={this.handleTouchStart.bind(this)}
-          onTouchEnd={this.handleTouchEnd.bind(this)}
-          onTouchMove={this.handleTouchMove.bind(this)}
+          onTouchStart={this.handleTouchStart}
+          onTouchEnd={this.handleTouchEnd}
+          catchMove
+          onTouchMove={this.handleTouchMove}
           style={mergeStyle(bodyStyle, heightStyle)}
         >
           <View className="tfc-tabs__underline" style={underlineStyle}></View>

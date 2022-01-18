@@ -150,6 +150,7 @@ class Overlay extends ComponentBase {
     return (
       <View
         style={style}
+        catchMove
         onTouchMove={this.handleTouchMove}
         onClick={this.triggerClick}
       >

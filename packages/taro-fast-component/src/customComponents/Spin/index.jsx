@@ -62,6 +62,7 @@ export const Spin = (props) => {
               ? {}
               : { backgroundColor: overlayBackgroundColor }),
           }}
+          catchMove
           onTouchMove={handleTouchMove}
         >
           <View style={{ height: '100%' }}>

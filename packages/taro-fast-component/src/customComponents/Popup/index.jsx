@@ -284,7 +284,7 @@ class Popup extends ComponentBase {
     const position = this.getPosition();
 
     return (
-      <View className={rootClass} onTouchMove={this.handleTouchMove}>
+      <View className={rootClass} catchMove onTouchMove={this.handleTouchMove}>
         <Overlay
           visible={visibleStage}
           zIndex={0}
@@ -304,14 +304,12 @@ class Popup extends ComponentBase {
             ['tfc-popup__container__right']: position === 'right',
           })}
           style={bodyStyle}
-          onTouchMove={this.handleTouchMove}
         >
           <View
             className="tfc-popup__container__body"
             style={{
               ...(position === 'top' || position === 'bottom' ? height : {}),
             }}
-            onTouchMove={this.handleTouchMove}
           >
             {showClose ? (
               <View
