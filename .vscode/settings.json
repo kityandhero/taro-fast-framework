@@ -92,6 +92,7 @@
     "removeformat",
     "rgba",
     "scroller",
+    "scrolltolower",
     "searchreplace",
     "showcomments",
     "stylelintrc",

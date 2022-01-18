@@ -1,203 +1,176 @@
 import classNames from 'classnames';
-import { View, Icon } from '@tarojs/components';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { ScrollView, Text, View } from '@tarojs/components';
 
-import { inCollection, mergeProps } from 'taro-fast-common/es/utils/tools';
+import { handleTouchScroll } from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import { bem } from '../../utils/tools';
 import Overlay from '../Overlay';
-import Transition from '../Transition';
-import { defaultProps as defaultPropsTransition } from '../Transition/tools';
 
-import './index.less';
-
-const defaultPropsOverlay = {};
-
-const { useTransition } = Transition;
-
-function popupStyle(data) {
-  return {
-    ...{
-      zIndex: data.zIndex,
-      transitionDuration: data.currentDuration + 'ms',
-    },
-    ...(data.display ? {} : { display: 'none' }),
-  };
-}
-
-const positionCollection = ['center', 'top', 'bottom', 'right', 'left'];
-
-export const defaultProps = {
-  ...defaultPropsTransition,
-  ...defaultPropsOverlay,
-  ...{
-    style: {},
-    className: '',
-    lockScroll: true,
-    duration: 300,
-    round: false,
-    closeable: false,
-    overlayStyle: {},
-    transition: null,
-    zIndex: 1010,
-    overlay: true,
-    closeIcon: <Icon size="18" type="clear" color="#ccc" />,
-    closeIconPosition: 'top-right',
-    closeOnClickOverlay: true,
-    position: 'center',
-    safeAreaInsetBottom: true,
-    safeAreaInsetTop: false,
-    onClickOverlay: null,
-    onBeforeEnter: null,
-    onBeforeLeave: null,
-    onAfterEnter: null,
-    onAfterLeave: null,
-    onEnter: null,
-    onLeave: null,
-    onClose: null,
-  },
+const defaultProps = {
+  /**
+   * 控制是否出现在页面上
+   * @default false
+   */
+  visible: false,
+  /**
+   * 元素的标题
+   */
+  title: '',
+  /**
+   * 是否垂直滚动
+   * @default true
+   */
+  scrollY: true,
+  /**
+   * 是否水平滚动
+   * @default false
+   */
+  scrollX: false,
+  /**
+   * 设置竖向滚动条位置
+   */
+  scrollTop: null,
+  /**
+   * 设置横向滚动条位置
+   */
+  scrollLeft: null,
+  /**
+   * 距顶部/左边多远时，触发 scrolltolower 事件
+   */
+  upperThreshold: null,
+  /**
+   * 距底部/右边多远时，触发 scrolltolower 事件
+   */
+  lowerThreshold: null,
+  /**
+   * 在设置滚动条位置时使用动画过渡
+   * @default false
+   */
+  scrollWithAnimation: false,
+  /**
+   * 元素被关闭时候触发的事件
+   */
+  onClose: null,
+  /**
+   * 滚动时触发的事件
+   */
+  onScroll: null,
+  /**
+   * 滚动到顶部/左边，会触发 onScrollToUpper 事件
+   */
+  onScrollToUpper: null,
+  /**
+   * 滚动到底部/右边，会触发 onScrollToLower 事件
+   */
+  onScrollToLower: null,
 };
 
-export function Popup(props) {
-  const {
-    show,
-    duration,
-    round,
-    closeable,
-    overlayStyle,
-    transition,
-    zIndex,
-    overlay,
-    closeIcon,
-    closeIconPosition,
-    closeOnClickOverlay,
-    position: positionSource,
-    safeAreaInsetBottom,
-    safeAreaInsetTop,
-    lockScroll,
-    children,
-    onClickOverlay,
-    onBeforeEnter,
-    onBeforeLeave,
-    onAfterEnter,
-    onAfterLeave,
-    onEnter,
-    onLeave,
-    onClose,
-    style,
-    className,
-    ...others
-  } = mergeProps(defaultProps, props);
+export default class AtFloatLayout extends ComponentBase {
+  constructor(props) {
+    super(props);
 
-  const position = inCollection(positionCollection, positionSource)
-    ? positionSource
-    : 'center';
+    const { visible } = props;
+    this.state = {
+      visibleStage: visible,
+    };
+  }
 
-  const _onClickCloseIcon = useCallback(() => {
-    onClose?.();
-  }, [onClose]);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { visible: visibleNext } = nextProps;
+    const { visibleStage: visiblePrev } = prevState;
 
-  const _onClickOverlay = useCallback(() => {
-    onClickOverlay?.();
-    if (closeOnClickOverlay) {
-      onClose?.();
+    if (visibleNext !== visiblePrev) {
+      handleTouchScroll(visibleNext);
+
+      this.setState({
+        visibleStage: visibleNext,
+      });
     }
-  }, [closeOnClickOverlay, onClickOverlay, onClose]);
 
-  const [_name, setName] = useState('');
-  const [_duration, setDuration] = useState(duration);
-  const originDuration = useRef(null);
+    return {};
+  }
 
-  useEffect(() => {
-    setName(transition || position);
-    if (transition === 'none') {
-      setDuration(0);
-      originDuration.current = duration;
-    } else if (originDuration.current != null) {
-      setDuration(originDuration.current);
+  handleClose = () => {
+    const { onClose } = this.props;
+
+    if (isFunction(onClose)) {
+      onClose();
     }
-  }, [duration, position, transition]);
-  const {
-    initializationCompleted,
-    currentDuration,
-    classes,
-    display,
-    onTransitionEnd,
-  } = useTransition({
-    show,
-    duration: _duration,
-    name: _name,
-    onBeforeEnter,
-    onBeforeLeave,
-    onAfterEnter,
-    onAfterLeave,
-    onEnter,
-    onLeave,
-  });
+  };
 
-  const getClassName = useCallback((name) => {
-    return name.replace(/([A-Z])/g, (_, $1) => {
-      return '-' + $1?.toLowerCase();
-    });
-  }, []);
+  close = () => {
+    this.setState(
+      {
+        visibleStage: false,
+      },
+      this.handleClose,
+    );
+  };
 
-  return (
-    <>
-      {overlay && (
-        <Overlay
-          show={show}
-          zIndex={zIndex}
-          style={overlayStyle}
-          duration={duration}
-          onClick={_onClickOverlay}
-          lockScroll={lockScroll}
-        />
-      )}
-      {initializationCompleted && (
-        <View
-          className={classNames(
-            classes,
-            bem('popup', [
-              position,
-              {
-                round,
-                safe: safeAreaInsetBottom,
-                safeTop: safeAreaInsetTop,
-              },
-            ]),
-            className,
-          )}
-          style={{
-            ...popupStyle({
-              zIndex,
-              currentDuration,
-              display,
-            }),
-            ...style,
-          }}
-          onTransitionEnd={onTransitionEnd}
-          {...others}
-        >
-          {children}
-          {closeable && (
-            <View
-              className={
-                'close-icon-class tfc-popup__close-icon tfc-popup__close-icon--' +
-                getClassName(closeIconPosition)
-              }
-              onClick={_onClickCloseIcon}
-            >
-              {closeIcon}
+  handleTouchMove = (e) => {
+    e.stopPropagation();
+  };
+
+  render() {
+    const { visibleStage } = this.state;
+    const {
+      title,
+      scrollY,
+      scrollX,
+      scrollTop,
+      scrollLeft,
+      upperThreshold,
+      lowerThreshold,
+      scrollWithAnimation,
+      onScroll,
+      onScrollToLower,
+      onScrollToUpper,
+      children,
+    } = this.props;
+
+    const rootClass = classNames(
+      'tfc-popup',
+      {
+        'tfc-popup--active': visibleStage,
+      },
+      this.props.className,
+    );
+
+    return (
+      <View className={rootClass} onTouchMove={this.handleTouchMove}>
+        <Overlay visible={visibleStage} onClick={this.close} />
+
+        <View className="tfc-popup__container layout">
+          {title ? (
+            <View className="layout-header">
+              <Text className="layout-header__title">{title}</Text>
+              <View className="layout-header__btn-close" onClick={this.close} />
             </View>
-          )}
+          ) : null}
+          <View className="layout-body">
+            <ScrollView
+              scrollY={scrollY}
+              scrollX={scrollX}
+              scrollTop={scrollTop}
+              scrollLeft={scrollLeft}
+              upperThreshold={upperThreshold}
+              lowerThreshold={lowerThreshold}
+              scrollWithAnimation={scrollWithAnimation}
+              onScroll={onScroll}
+              onScrollToLower={onScrollToLower}
+              onScrollToUpper={onScrollToUpper}
+              className="layout-body__content"
+            >
+              {children}
+            </ScrollView>
+          </View>
         </View>
-      )}
-    </>
-  );
+      </View>
+    );
+  }
 }
 
-Popup.defaultProps = {
+AtFloatLayout.defaultProps = {
   ...defaultProps,
 };
-
-export default Popup;

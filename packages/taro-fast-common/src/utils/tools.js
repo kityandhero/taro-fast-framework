@@ -1972,6 +1972,29 @@ export function colorHexToRGB(color, symbol = 'RGB') {
   }
 }
 
+export function handleTouchScroll(flag) {
+  if (Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
+    return;
+  }
+
+  let scrollTop = 0;
+
+  if (flag) {
+    scrollTop = document.documentElement.scrollTop;
+
+    // 使body脱离文档流
+    document.body.classList.add('tfc-frozen');
+
+    // 把脱离文档流的body拉上去！否则页面会回到顶部！
+    document.body.style.top = `${-scrollTop}px`;
+  } else {
+    document.body.style.top = '';
+    document.body.classList.remove('tfc-frozen');
+
+    document.documentElement.scrollTop = scrollTop;
+  }
+}
+
 /**
  * 占位函数
  *

@@ -43,22 +43,6 @@ class Overlay extends ComponentBase {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { visible: visibleNext } = nextProps;
-    const { visibleFlag: visiblePrev } = prevState;
-
-    if (visibleNext != visiblePrev && !!visibleNext) {
-      return {
-        // visibleFlag: !!visibleNext,
-        visibleStage: !!visibleNext,
-        visibility: 'visible',
-        opacity: '1',
-      };
-    }
-
-    return {};
-  }
-
   getMode = () => {
     const { mode } = this.props;
 
