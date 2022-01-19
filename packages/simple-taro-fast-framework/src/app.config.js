@@ -54,6 +54,7 @@ export default {
         'pages/flexBox/index',
         'pages/centerBox/index',
         'pages/dataGrid/index',
+        'pages/searchBar/index',
       ],
     },
   ],

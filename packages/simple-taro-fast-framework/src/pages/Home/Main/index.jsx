@@ -256,6 +256,11 @@ export default class Index extends PageWrapper {
             name: 'DataGrid',
             path: pathCollection.dataGrid.path,
           })}
+
+          {this.buildItem({
+            name: 'SearchBar',
+            path: pathCollection.searchBar.path,
+          })}
         </Card>
 
         <Card header="扩展组件" headerStyle={cardHeaderStyle} space={false}>

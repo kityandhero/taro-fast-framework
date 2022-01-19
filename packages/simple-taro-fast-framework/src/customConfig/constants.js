@@ -136,6 +136,9 @@ export const pathCollection = {
   dataGrid: {
     path: '/example/pages/dataGrid/index',
   },
+  searchBar: {
+    path: '/example/pages/searchBar/index',
+  },
 };
 
 export const cardHeaderStyle = {

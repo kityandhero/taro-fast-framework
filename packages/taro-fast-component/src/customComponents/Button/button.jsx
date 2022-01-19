@@ -19,6 +19,7 @@ const typeCollection = ['submit', 'reset', 'button'];
 const shapeCollection = ['default', 'rounded', 'rectangular'];
 
 const defaultProps = {
+  style: {},
   color: 'default',
   fill: 'solid',
   block: false,
@@ -35,6 +36,7 @@ export const Button = (p) => {
   const props = mergeProps(defaultProps, p);
 
   const {
+    style,
     color: colorSource,
     fill: fillSource,
     block,
@@ -82,6 +84,7 @@ export const Button = (p) => {
         },
         `${classPrefix}-shape-${shape}`,
       )}
+      style={style}
       disabled={disabled}
     >
       {loading ? (

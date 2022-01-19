@@ -1,4 +1,4 @@
-import { View, Text, Input, Icon } from '@tarojs/components';
+import { View, Text, Input } from '@tarojs/components';
 
 import {
   inCollection,
@@ -13,10 +13,14 @@ import {
   isString,
   isObject,
 } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
+import Icon from '../Icon';
+
+const { IconCloseCircle } = Icon;
 
 const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
@@ -26,9 +30,11 @@ const defaultProps = {
   required: false,
   hidden: false,
   clearable: false,
+  clearSize: '18',
   label: '',
   extra: null,
   labelStyle: {},
+  valueStyle: {},
   labelContainerStyle: {},
   inputContainerStyle: {},
   extraContainerStyle: {},
@@ -194,9 +200,11 @@ class AdvanceInput extends ComponentBase {
       required,
       hidden,
       clearable,
+      clearSize,
       label,
       extra,
       labelStyle,
+      valueStyle,
       labelContainerStyle,
       inputContainerStyle,
       extraContainerStyle,
@@ -227,14 +235,17 @@ class AdvanceInput extends ComponentBase {
       ? confirmTypeSource
       : 'done';
 
-    let labelComponent = label;
-
-    if (isString(label)) {
-      if (!stringIsNullOrWhiteSpace(label)) {
-        labelComponent = (
-          <VerticalBox>
-            <View style={{ ...{ paddingRight: '40rpx' }, ...labelStyle }}>
-              {!!required ? (
+    let labelComponent =
+      isObject(label) ||
+      (isString(label) && !stringIsNullOrWhiteSpace(label)) ? (
+        <FlexBox
+          style={{
+            height: '100%',
+          }}
+          flexAuto="right"
+          left={
+            !!required ? (
+              <VerticalBox>
                 <Text
                   style={{
                     display: 'inline-block',
@@ -248,22 +259,28 @@ class AdvanceInput extends ComponentBase {
                 >
                   *
                 </Text>
-              ) : null}
-              {label}
-            </View>
-          </VerticalBox>
-        );
-      } else {
-        labelComponent = null;
-      }
-    }
+              </VerticalBox>
+            ) : null
+          }
+          right={<VerticalBox>{label}</VerticalBox>}
+          rightStyle={{
+            ...{
+              paddingRight: '20rpx',
+            },
+            ...labelStyle,
+            ...{
+              height: '100%',
+            },
+          }}
+        />
+      ) : null;
 
     const { valueTemp } = this.state;
 
     return (
       <FlexBox
         flexAuto="right"
-        left={labelComponent ? labelComponent : null}
+        left={labelComponent}
         leftStyle={labelContainerStyle}
         right={
           <FlexBox
@@ -273,7 +290,11 @@ class AdvanceInput extends ComponentBase {
                   <Input
                     value={valueTemp}
                     type={type}
-                    style={align == 'right' ? { textAlign: 'right' } : {}}
+                    style={{
+                      ...valueStyle,
+                      ...(align == 'right' ? { textAlign: 'right' } : {}),
+                      ...(align == 'center' ? { textAlign: 'center' } : {}),
+                    }}
                     password={password}
                     placeholder={placeholder}
                     placeholderStyle={
@@ -314,7 +335,10 @@ class AdvanceInput extends ComponentBase {
                     >
                       <VerticalBox>
                         {valueTemp ? (
-                          <Icon size="18" type="clear" color="#ccc" />
+                          <IconCloseCircle
+                            size={toNumber(clearSize)}
+                            color="#ccc"
+                          />
                         ) : null}
                       </VerticalBox>
                     </View>
