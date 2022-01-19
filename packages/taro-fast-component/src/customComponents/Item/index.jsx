@@ -74,13 +74,17 @@ class Item extends ComponentBase {
           )}
 
           <View className={`${classPrefix}-content-main`}>
-            {title && <View className={`${classPrefix}-title`}>{title}</View>}
+            {title ? (
+              <View className={`${classPrefix}-title`}>{title}</View>
+            ) : null}
+
             {children}
-            {description && (
+
+            {description ? (
               <View className={`${classPrefix}-description`}>
                 {description}
               </View>
-            )}
+            ) : null}
           </View>
 
           {extra ? (

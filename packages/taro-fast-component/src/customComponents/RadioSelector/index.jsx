@@ -129,7 +129,7 @@ class RadioSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: '28rpx',
+                    fontSize: '30rpx',
                     color: '#999 ',
                   },
                   ...placeholderStyle,
@@ -141,7 +141,7 @@ class RadioSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: '28rpx',
+                    fontSize: '30rpx',
                   },
                   ...valueStyle,
                 }}
