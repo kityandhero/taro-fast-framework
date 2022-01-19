@@ -1,6 +1,10 @@
 import { View } from '@tarojs/components';
 
-import { Radio, Icon, Button } from 'taro-fast-component/es/customComponents';
+import {
+  CheckBox,
+  Icon,
+  Button,
+} from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
@@ -22,10 +26,10 @@ export default class Index extends PageWrapper {
       ...this.state,
       ...{
         border: false,
-        radioValue1: 'option1',
-        radioValue2: 'option1',
-        radioValue3: 'option2',
-        radioOptions1: [
+        checkBoxValue1: ['option1'],
+        checkBoxValue2: ['option1'],
+        checkBoxValue3: ['option2'],
+        checkBoxOptions1: [
           {
             label: '单选项一',
             value: 'option1',
@@ -42,7 +46,7 @@ export default class Index extends PageWrapper {
             extra: '扩展说明',
           },
         ],
-        radioOptions2: [
+        checkBoxOptions2: [
           {
             label: '单选项一',
             value: 'option1',
@@ -62,7 +66,7 @@ export default class Index extends PageWrapper {
             extra: '扩展说明',
           },
         ],
-        radioOptions3: [
+        checkBoxOptions3: [
           {
             label: '单选项一',
             value: 'option1',
@@ -93,21 +97,21 @@ export default class Index extends PageWrapper {
     };
   }
 
-  handleRadioChange = (value) => {
+  handleCheckBoxChange = (value) => {
     this.setState({
-      radioValue1: value,
+      checkBoxValue1: value,
     });
   };
 
-  handleRadioChangeSecond = (value) => {
+  handleCheckBoxChangeSecond = (value) => {
     this.setState({
-      radioValue2: value,
+      checkBoxValue2: value,
     });
   };
 
-  handleRadioChangeThird = (value) => {
+  handleCheckBoxChangeThird = (value) => {
     this.setState({
-      radioValue3: value,
+      checkBoxValue3: value,
     });
   };
 
@@ -124,12 +128,12 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <Radio
+        <CheckBox
           header="基础用法"
           style={style}
           border={border}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
           // showRenderCount
           extra={
             <Button
@@ -140,77 +144,79 @@ export default class Index extends PageWrapper {
               切换边框
             </Button>
           }
-          onChange={this.handleRadioChange}
+          onChange={this.handleCheckBoxChange}
         />
 
-        <Radio
+        <CheckBox
           header="自定义选中图标"
           style={style}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
           iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
+          iconUncheck={<IconCheckCircle size={22} color="#ccc" />}
           extra={<View style={extraStyle}>layout: list</View>}
-          onChange={this.handleRadioChange}
+          onChange={this.handleCheckBoxChange}
         />
 
-        <Radio
+        <CheckBox
           header="含有单项描述"
           style={style}
-          options={this.state.radioOptions2}
-          value={this.state.radioValue2}
+          options={this.state.checkBoxOptions2}
+          value={this.state.checkBoxValue2}
           extra={<View style={extraStyle}>layout: list</View>}
-          onChange={this.handleRadioChangeSecond}
+          onChange={this.handleCheckBoxChangeSecond}
         />
 
-        <Radio
+        <CheckBox
           header="单项禁用"
           style={style}
-          options={this.state.radioOptions3}
-          value={this.state.radioValue3}
+          options={this.state.checkBoxOptions3}
+          value={this.state.checkBoxValue3}
           extra={<View style={extraStyle}>layout: list</View>}
-          onChange={this.handleRadioChangeThird}
+          onChange={this.handleCheckBoxChangeThird}
         />
 
-        <Radio
+        <CheckBox
           header="基础用法"
-          layout="radio"
+          layout="checkBox"
           style={style}
           border={border}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          extra={<View style={extraStyle}>layout: radio</View>}
-          onChange={this.handleRadioChange}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+          onChange={this.handleCheckBoxChange}
         />
 
-        <Radio
+        <CheckBox
           header="自定义选中图标"
-          layout="radio"
+          layout="checkBox"
           style={style}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
           iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
-          extra={<View style={extraStyle}>layout: radio</View>}
-          onChange={this.handleRadioChange}
+          iconUncheck={<IconCheckCircle size={22} color="#ccc" />}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+          onChange={this.handleCheckBoxChange}
         />
 
-        <Radio
+        <CheckBox
           header="含有单项描述"
-          layout="radio"
+          layout="checkBox"
           style={style}
-          options={this.state.radioOptions2}
-          value={this.state.radioValue2}
-          extra={<View style={extraStyle}>layout: radio</View>}
-          onChange={this.handleRadioChangeSecond}
+          options={this.state.checkBoxOptions2}
+          value={this.state.checkBoxValue2}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+          onChange={this.handleCheckBoxChangeSecond}
         />
 
-        <Radio
+        <CheckBox
           header="单项禁用"
-          layout="radio"
+          layout="checkBox"
           style={style}
-          options={this.state.radioOptions3}
-          value={this.state.radioValue3}
-          extra={<View style={extraStyle}>layout: radio</View>}
-          onChange={this.handleRadioChangeThird}
+          options={this.state.checkBoxOptions3}
+          value={this.state.checkBoxValue3}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+          onChange={this.handleCheckBoxChangeThird}
         />
       </View>
     );

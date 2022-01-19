@@ -1,11 +1,11 @@
 import { View } from '@tarojs/components';
 
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Popup from '../Popup';
-import Radio from '../Radio';
+import CheckBox from '../CheckBox';
 import Item from '../Item';
 
 const defaultProps = {
@@ -13,7 +13,7 @@ const defaultProps = {
   prefix: null,
   style: {},
   description: '',
-  value: '',
+  value: [],
   valueFormat: null,
   placeholder: '请选择',
   valueStyle: {},
@@ -25,15 +25,15 @@ const defaultProps = {
   position: 'bottom',
   arc: false,
   showClose: true,
-  radioStyle: {},
-  radioLayout: 'list',
-  radioBodyStyle: {},
-  radioBorder: true,
-  radioIconUncheck: null,
-  radioIconCheck: null,
+  checkBoxStyle: {},
+  checkBoxLayout: 'list',
+  checkBoxBodyStyle: {},
+  checkBoxBorder: true,
+  checkBoxIconUncheck: null,
+  checkBoxIconCheck: null,
 };
 
-class RadioSelector extends ComponentBase {
+class CheckBoxSelector extends ComponentBase {
   constructor(props) {
     super(props);
 
@@ -75,12 +75,12 @@ class RadioSelector extends ComponentBase {
       position,
       arc,
       showClose,
-      radioStyle,
-      radioLayout,
-      radioBodyStyle,
-      radioBorder,
-      radioIconUncheck,
-      radioIconCheck,
+      checkBoxStyle,
+      checkBoxLayout,
+      checkBoxBodyStyle,
+      checkBoxBorder,
+      checkBoxIconUncheck,
+      checkBoxIconCheck,
       onChange,
       children,
     } = this.props;
@@ -123,7 +123,11 @@ class RadioSelector extends ComponentBase {
                   ...valueStyle,
                 }}
               >
-                {isFunction(valueFormat) ? valueFormat(value) : value}
+                {isFunction(valueFormat)
+                  ? valueFormat(value)
+                  : isArray(value)
+                  ? value.join()
+                  : value}
               </View>
             )
           }
@@ -145,19 +149,19 @@ class RadioSelector extends ComponentBase {
           showClose={showClose}
           onClose={this.hidePopup}
         >
-          <Radio
+          <CheckBox
             value={value}
             style={{
-              ...radioStyle,
+              ...checkBoxStyle,
               ...{
                 borderTop: '0',
               },
             }}
-            layout={radioLayout}
-            bodyStyle={radioBodyStyle}
-            border={radioBorder}
-            iconUncheck={radioIconUncheck}
-            iconCheck={radioIconCheck}
+            layout={checkBoxLayout}
+            bodyStyle={checkBoxBodyStyle}
+            border={checkBoxBorder}
+            iconUncheck={checkBoxIconUncheck}
+            iconCheck={checkBoxIconCheck}
             options={options}
             onChange={onChange}
           />
@@ -167,8 +171,8 @@ class RadioSelector extends ComponentBase {
   }
 }
 
-RadioSelector.defaultProps = {
+CheckBoxSelector.defaultProps = {
   ...defaultProps,
 };
 
-export default RadioSelector;
+export default CheckBoxSelector;

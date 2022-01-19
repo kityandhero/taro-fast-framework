@@ -19,15 +19,15 @@ import CenterBox from '../CenterBox';
 
 const { IconCheck } = Icon;
 
-const layoutCollection = ['list', 'radio'];
+const layoutCollection = ['list', 'checkBox'];
 
 const iconContainerStyle = {
   border: '2rpx solid #ccc',
-  width: '32rpx',
-  height: '32rpx',
+  width: '26rpx',
+  height: '26rpx',
   padding: '4rpx',
-  lineHeight: '32rpx',
-  borderRadius: '50%',
+  lineHeight: '26rpx',
+  borderRadius: '6rpx',
 };
 
 const uncheckStatusIcon = (
@@ -63,6 +63,12 @@ const checkStatusIconForListView = (
   </CenterBox>
 );
 
+const uncheckStatusIconForListView = (
+  <CenterBox>
+    <IconCheck size={19} color="#ddd" />
+  </CenterBox>
+);
+
 const defaultProps = {
   style: {},
   layout: 'list',
@@ -70,7 +76,7 @@ const defaultProps = {
   headerStyle: {},
   bodyStyle: {},
   extra: null,
-  value: '',
+  value: [],
   options: [],
   border: true,
   iconUncheck: null,
@@ -95,7 +101,31 @@ class Radio extends ComponentBase {
     const { onChange } = this.props;
 
     if (isFunction(onChange)) {
-      onChange(option.value);
+      const { value } = this.props;
+
+      let valueChanged = [];
+
+      if (inCollection(value || [], option.value)) {
+        (value || []).forEach((o) => {
+          if (o !== option.value) {
+            valueChanged.push(o);
+          }
+        });
+      } else {
+        valueChanged = [...(value || [])];
+
+        valueChanged.push(option.value);
+      }
+
+      const result = [];
+
+      valueChanged.forEach((o) => {
+        if (!stringIsNullOrWhiteSpace(o)) {
+          result.push(o);
+        }
+      });
+
+      onChange(result);
     }
   };
 
@@ -151,9 +181,9 @@ class Radio extends ComponentBase {
                 disabled={disabled}
                 border={border}
                 extra={
-                  !stringIsNullOrWhiteSpace(value) && value === valueItem
+                  inCollection(value || [], valueItem)
                     ? iconCheck || checkStatusIconForListView
-                    : iconUncheck || null
+                    : iconUncheck || uncheckStatusIconForListView
                 }
                 onClick={() => {
                   this.handleClick(o);
@@ -167,9 +197,8 @@ class Radio extends ComponentBase {
           return (
             <Item
               key={key}
-              // prefix={prefix}
               prefix={
-                !stringIsNullOrWhiteSpace(value) && value === valueItem
+                inCollection(value || [], valueItem)
                   ? iconCheck || checkStatusIcon
                   : iconUncheck || uncheckStatusIcon
               }

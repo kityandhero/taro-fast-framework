@@ -79,6 +79,16 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
+            name: 'CheckBox',
+            path: pathCollection.checkBox.path,
+          })}
+
+          {this.buildItem({
+            name: 'CheckBoxSelector',
+            path: pathCollection.checkBoxSelector.path,
+          })}
+
+          {this.buildItem({
             name: 'AdvanceProgress',
             path: pathCollection.advanceProgress.path,
           })}

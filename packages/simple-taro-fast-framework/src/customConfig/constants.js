@@ -100,6 +100,15 @@ export const pathCollection = {
   radio: {
     path: '/example/pages/radio/index',
   },
+  radioSelector: {
+    path: '/example/pages/radioSelector/index',
+  },
+  checkBox: {
+    path: '/example/pages/checkBox/index',
+  },
+  checkBoxSelector: {
+    path: '/example/pages/checkBoxSelector/index',
+  },
   helpBox: {
     path: '/example/pages/helpBox/index',
   },
@@ -123,9 +132,6 @@ export const pathCollection = {
   },
   dataGrid: {
     path: '/example/pages/dataGrid/index',
-  },
-  radioSelector: {
-    path: '/example/pages/radioSelector/index',
   },
 };
 

@@ -3,7 +3,8 @@ import { View } from '@tarojs/components';
 import {
   Card,
   Icon,
-  RadioSelector,
+  CheckBoxSelector,
+  Space,
   Tag,
 } from 'taro-fast-component/es/customComponents';
 
@@ -22,10 +23,10 @@ export default class Index extends PageWrapper {
       ...this.state,
       ...{
         border: false,
-        radioValue1: 'option1',
-        radioValue2: 'option1',
-        radioValue3: '',
-        radioOptions1: [
+        checkBoxValue1: ['option1'],
+        checkBoxValue2: ['option1'],
+        checkBoxValue3: [],
+        checkBoxOptions1: [
           {
             label: '单选项一',
             value: 'option1',
@@ -42,7 +43,7 @@ export default class Index extends PageWrapper {
             extra: '扩展说明',
           },
         ],
-        radioOptions2: [
+        checkBoxOptions2: [
           {
             label: '单选项一',
             value: 'option1',
@@ -62,7 +63,7 @@ export default class Index extends PageWrapper {
             extra: '扩展说明',
           },
         ],
-        radioOptions3: [
+        checkBoxOptions3: [
           {
             label: '单选项一',
             value: 'option1',
@@ -93,21 +94,21 @@ export default class Index extends PageWrapper {
     };
   }
 
-  handleRadioChange = (value) => {
+  handleCheckBoxChange = (value) => {
     this.setState({
-      radioValue1: value,
+      checkBoxValue1: value,
     });
   };
 
-  handleRadioChangeSecond = (value) => {
+  handleCheckBoxChangeSecond = (value) => {
     this.setState({
-      radioValue2: value,
+      checkBoxValue2: value,
     });
   };
 
-  handleRadioChangeThird = (value) => {
+  handleCheckBoxChangeThird = (value) => {
     this.setState({
-      radioValue3: value,
+      checkBoxValue3: value,
     });
   };
 
@@ -120,46 +121,56 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择类别"
-            value={this.state.radioValue1}
-            options={this.state.radioOptions1}
-            onChange={this.handleRadioChange}
+            value={this.state.checkBoxValue1}
+            options={this.state.checkBoxOptions1}
+            onChange={this.handleCheckBoxChange}
           >
             类别
-          </RadioSelector>
+          </CheckBoxSelector>
 
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择类别"
-            value={this.state.radioValue1}
+            value={this.state.checkBoxValue1}
             valueFormat={(v) => {
-              return <Tag color="default">{v}</Tag>;
+              return (
+                <Space>
+                  {v.map((o, i) => {
+                    return (
+                      <Tag key={`list_${i}`} color="success">
+                        {o}
+                      </Tag>
+                    );
+                  })}
+                </Space>
+              );
             }}
-            options={this.state.radioOptions1}
-            onChange={this.handleRadioChange}
+            options={this.state.checkBoxOptions1}
+            onChange={this.handleCheckBoxChange}
           >
             类别 [格式化值]
-          </RadioSelector>
+          </CheckBoxSelector>
 
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择目标"
-            value={this.state.radioValue2}
+            value={this.state.checkBoxValue2}
             arc
-            options={this.state.radioOptions2}
-            onChange={this.handleRadioChangeSecond}
+            options={this.state.checkBoxOptions2}
+            onChange={this.handleCheckBoxChangeSecond}
           >
             目标
-          </RadioSelector>
+          </CheckBoxSelector>
 
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择产地"
             showClose={false}
-            value={this.state.radioValue3}
-            options={this.state.radioOptions3}
-            onChange={this.handleRadioChangeThird}
+            value={this.state.checkBoxValue3}
+            options={this.state.checkBoxOptions3}
+            onChange={this.handleCheckBoxChangeThird}
           >
             产地
-          </RadioSelector>
+          </CheckBoxSelector>
         </Card>
 
         <Card
@@ -168,37 +179,37 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择类别"
             position="center"
-            value={this.state.radioValue1}
-            options={this.state.radioOptions1}
-            onChange={this.handleRadioChange}
+            value={this.state.checkBoxValue1}
+            options={this.state.checkBoxOptions1}
+            onChange={this.handleCheckBoxChange}
           >
             类别
-          </RadioSelector>
+          </CheckBoxSelector>
 
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择目标"
             position="center"
-            value={this.state.radioValue2}
+            value={this.state.checkBoxValue2}
             arc
-            options={this.state.radioOptions2}
-            onChange={this.handleRadioChangeSecond}
+            options={this.state.checkBoxOptions2}
+            onChange={this.handleCheckBoxChangeSecond}
           >
             目标
-          </RadioSelector>
+          </CheckBoxSelector>
 
-          <RadioSelector
+          <CheckBoxSelector
             placeholder="请选择产地"
             position="center"
             showClose={false}
-            value={this.state.radioValue3}
-            options={this.state.radioOptions3}
-            onChange={this.handleRadioChangeThird}
+            value={this.state.checkBoxValue3}
+            options={this.state.checkBoxOptions3}
+            onChange={this.handleCheckBoxChangeThird}
           >
             产地
-          </RadioSelector>
+          </CheckBoxSelector>
         </Card>
       </View>
     );
