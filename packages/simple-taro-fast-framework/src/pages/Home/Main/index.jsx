@@ -102,6 +102,11 @@ export default class Index extends PageWrapper {
             name: 'Stepper',
             path: pathCollection.stepper.path,
           })}
+
+          {this.buildItem({
+            name: 'StepperItem',
+            path: pathCollection.stepperItem.path,
+          })}
         </Card>
 
         <Card header="布局组件" headerStyle={cardHeaderStyle} space={false}>

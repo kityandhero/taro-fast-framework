@@ -43,4 +43,5 @@ export { Empty } from './Empty';
 export { AdvanceButton } from './AdvanceButton';
 export { FadeView } from './FadeView';
 export { default as Stepper } from './Stepper';
+export { default as StepperItem } from './StepperItem';
 export { default as Button } from './Button';

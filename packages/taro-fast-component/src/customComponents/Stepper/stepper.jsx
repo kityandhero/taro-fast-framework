@@ -69,10 +69,18 @@ export const Stepper = (p) => {
   };
 
   const handleMinus = () => {
+    if (minusDisabled()) {
+      return;
+    }
+
     setValueWithCheck(value - step);
   };
 
   const handlePlus = () => {
+    if (plusDisabled()) {
+      return;
+    }
+
     setValueWithCheck(value + step);
   };
 

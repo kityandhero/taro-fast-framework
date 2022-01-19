@@ -52,6 +52,9 @@ export const pathCollection = {
   stepper: {
     path: '/example/pages/stepper/index',
   },
+  stepperItem: {
+    path: '/example/pages/stepperItem/index',
+  },
   button: {
     path: '/example/pages/button/index',
   },
