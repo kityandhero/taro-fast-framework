@@ -30,13 +30,8 @@
   transition: visibility @popup-timer cubic-bezier(0.36, 0.66, 0.04, 1);
 
   &__container {
-    position: absolute;
     width: 100%;
     background-color: transparent;
-    transition-property: opacity, transform;
-    transition-duration: @popup-timer;
-    transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
-    // transition: opacity transform @popup-timer cubic-bezier(0.36, 0.66, 0.04, 1);
 
     &__body {
       height: 100%;
@@ -45,6 +40,21 @@
       position: relative;
       overflow: hidden;
     }
+  }
+
+  &__container__absolute {
+    position: absolute;
+    transition-property: opacity, transform;
+    transition-duration: @popup-timer;
+    transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
+  }
+
+  &__container__center {
+    opacity: 0.01;
+    transition-property: opacity, transform;
+    transition-duration: @popup-timer;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: scale(1.35);
   }
 
   &__container__top {
@@ -80,6 +90,11 @@
   /* modifiers */
   &--active {
     visibility: visible;
+
+    .tfc-popup__container__center {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     .tfc-popup__container__top {
       opacity: 1;

@@ -232,24 +232,19 @@ export default class Index extends PageWrapper {
       scroll: scrollData,
     } = this.state;
 
+    console.log(show);
+
     return (
       <View className="index">
-        {/* <Card
-          header="展示弹出层"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Item arrow onClick={this.showBasic}>
-            展示弹出层
-          </Item>
-        </Card> */}
         <Card
           header="弹出位置"
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
         >
+          <Item arrow onClick={this.showBasic}>
+            中部弹出
+          </Item>
           <Item arrow onClick={this.showTop}>
             顶部弹出
           </Item>
@@ -323,33 +318,20 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        {/* <Card
-          header="关闭图标"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
+        <Popup
+          visible={show.basic}
+          header="面板"
+          position="center"
+          mode={mode[0]}
+          showClose={showClose[0] === 'yes'}
+          scroll={scrollData[0] === 'yes'}
+          closeWhenOverlayClick={closeWhenOverlayClick[0] === 'yes'}
+          arcTop={arcTop[0] === '上圆角'}
+          arcBottom={arcBottom[0] === '下圆角'}
+          onClose={this.hideBasic}
         >
-          <Item arrow onClick={this.showCloseIcon}>
-            关闭图标
-          </Item>
-          <Item arrow onClick={this.showCustomCloseIcon}>
-            自定义图标
-          </Item>
-          <Item arrow onClick={this.showCustomIconPosition}>
-            图标位置
-          </Item>
-        </Card> */}
-
-        {/* <Card
-          header="圆角弹窗"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Item arrow onClick={this.showRound}>
-            圆角弹窗
-          </Item>
-        </Card> */}
+          内容
+        </Popup>
 
         <Popup
           visible={show.left}
@@ -410,60 +392,6 @@ export default class Index extends PageWrapper {
         >
           内容
         </Popup>
-        {/* <Popup
-          show={show.top}
-          position="top"
-          style={{ height: '20%' }}
-          onClose={this.hideTop}
-        ></Popup>
-        <Popup
-          show={show.bottom}
-          position="bottom"
-          style={{ height: '20%' }}
-          onClose={this.hideBottom}
-        ></Popup>
-        <Popup
-          show={show.left}
-          position="left"
-          style={{ width: '20%', height: '100%' }}
-          onClose={this.hideLeft}
-        ></Popup>
-        <Popup
-          show={show.right}
-          position="right"
-          style={{ width: '20%', height: '100%' }}
-          onClose={this.hideRight}
-        ></Popup>
-        <Popup
-          show={show.closeIcon}
-          closeable
-          position="bottom"
-          style={{ height: '20%' }}
-          onClose={this.hideCloseIcon}
-        ></Popup>
-        <Popup
-          show={show.customCloseIcon}
-          closeable
-          closeIcon="close"
-          position="bottom"
-          style={{ height: '20%' }}
-          onClose={this.hideCustomCloseIcon}
-        ></Popup>
-        <Popup
-          show={show.customIconPosition}
-          closeable
-          closeIconPosition="top-left"
-          position="bottom"
-          style={{ height: '20%' }}
-          onClose={this.hideCustomIconPosition}
-        ></Popup>
-        <Popup
-          show={show.round}
-          round
-          position="bottom"
-          style={{ height: '20%' }}
-          onClose={this.hideRound}
-        ></Popup> */}
       </View>
     );
   }
