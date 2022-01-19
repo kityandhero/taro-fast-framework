@@ -36,7 +36,7 @@ class RadioSelector extends ComponentBase {
     this.state = {
       ...this.state,
       ...{
-        popupVisible: true,
+        popupVisible: false,
         valueFlag: '',
         valueStage: '',
       },
@@ -126,9 +126,28 @@ class RadioSelector extends ComponentBase {
           border={border}
           extra={
             !stringIsNullOrWhiteSpace(value) ? (
-              <View style={placeholderStyle}>{placeholder}</View>
+              <View
+                style={{
+                  ...{
+                    fontSize: '28rpx',
+                    color: '#999 ',
+                  },
+                  ...placeholderStyle,
+                }}
+              >
+                {placeholder}
+              </View>
             ) : (
-              <View style={valueStyle}>{value}</View>
+              <View
+                style={{
+                  ...{
+                    fontSize: '28rpx',
+                  },
+                  ...valueStyle,
+                }}
+              >
+                {value}
+              </View>
             )
           }
           onClick={this.showPopup}
@@ -145,6 +164,7 @@ class RadioSelector extends ComponentBase {
           bodyBorder={false}
           footerBorder={false}
           closeWhenOverlayClick
+          showClose
           onClose={this.hidePopup}
         >
           <Radio

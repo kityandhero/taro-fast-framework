@@ -47,6 +47,7 @@ const defaultProps = {
   minWidth: '20%',
   bodyStyle: {},
   closeWhenOverlayClick: true,
+  closeIcon: <IconCloseCircle size={18} color="#ccc" />,
   position: 'bottom',
   /**
    * 元素被关闭时候触发的事件
@@ -271,6 +272,7 @@ class Popup extends ComponentBase {
       footerBorder,
       footerStyle,
       closeWhenOverlayClick,
+      closeIcon,
       scroll,
       scrollY,
       scrollX,
@@ -323,7 +325,7 @@ class Popup extends ComponentBase {
             ...(inCollection(['center'], position) ? { width: '100vw' } : {}),
           }}
         >
-          {showClose ? (
+          {showClose && closeIcon ? (
             <View
               className="tfc-popup__container__body__close"
               style={{
@@ -335,9 +337,7 @@ class Popup extends ComponentBase {
               }}
               onClick={this.close}
             >
-              <CenterBox>
-                <IconCloseCircle size={18} color="#ccc" />
-              </CenterBox>
+              <CenterBox>{closeIcon}</CenterBox>
             </View>
           ) : null}
           <Card
