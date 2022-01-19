@@ -114,7 +114,8 @@ const defaultPosition = {
   closeAfterItemClick: true,
   hidden: false,
   overlay: false,
-  overlayStyle: {},
+  overlayColor: '#000',
+  overlayAlpha: 0.3,
   overlayDuration: 300,
   closeWithOverlayClick: false,
 };
@@ -271,7 +272,8 @@ class FloatAction extends ComponentBase {
       hoverClass,
       hidden,
       overlay,
-      overlayStyle,
+      overlayColor,
+      overlayAlpha,
       overlayDuration,
     } = this.props;
     const { buttonStyle, buttonVisible } = this.state;
@@ -297,9 +299,10 @@ class FloatAction extends ComponentBase {
       <>
         {overlay ? (
           <Overlay
-            show={buttonVisible}
+            visible={buttonVisible}
             zIndex={1000}
-            style={overlayStyle}
+            overlayColor={overlayColor}
+            overlayAlpha={overlayAlpha}
             duration={overlayDuration}
             onClick={this.onOverlayClick}
             lockScroll

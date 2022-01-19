@@ -1,7 +1,8 @@
 import { View } from '@tarojs/components';
 
 import { inCollection, colorHexToRGB } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import CenterBox from '../CenterBox';
@@ -32,6 +33,8 @@ class Overlay extends ComponentBase {
 
   visibilityChanged = false;
 
+  startCountMonitor = false;
+
   constructor(props) {
     super(props);
 
@@ -57,12 +60,29 @@ class Overlay extends ComponentBase {
       : defaultProps.animal;
   };
 
+  getDuration = () => {
+    const { duration } = this.props;
+
+    if (isNumber(duration)) {
+      const d = toNumber(duration);
+
+      if (d <= 0) {
+        return defaultProps.duration;
+      }
+
+      return d;
+    }
+
+    return defaultProps.duration;
+  };
+
   getStyle = () => {
-    const { visible, color, alpha, duration, zIndex } = this.props;
+    const { visible, color, alpha, zIndex } = this.props;
     const { counter } = this.state;
 
     const mode = this.getMode();
     const animal = this.getAnimal();
+    const duration = this.getDuration();
 
     const position = mode === 'fullScreen' ? 'fixed' : 'absolute';
     const width = mode === 'fullScreen' ? '100vw' : '100%';
@@ -78,32 +98,42 @@ class Overlay extends ComponentBase {
 
       this.visibilityChanged = false;
     } else {
-      v = {
-        ...(this.visibilityChanged
-          ? {
-              visibility: 'hidden',
-            }
-          : {}),
-        ...{
+      if (counter <= 0 && !this.startCountMonitor) {
+        v = {
+          visibility: 'hidden',
           opacity: '0',
-        },
-      };
+        };
 
-      if (!this.visibilityChanged) {
-        this.processing = true;
+        this.startCountMonitor = true;
+      } else {
+        v = {
+          ...(this.visibilityChanged
+            ? {
+                visibility: 'hidden',
+              }
+            : {
+                visibility: 'visible',
+              }),
+          ...{
+            opacity: '0',
+          },
+        };
 
-        const that = this;
+        if (!this.visibilityChanged) {
+          this.visibilityChanged = !this.visibilityChanged;
+          this.processing = true;
 
-        setTimeout(() => {
-          that.setState({
-            counter: counter + 1,
-          });
+          const that = this;
 
-          that.processing = false;
-        }, duration + 5);
+          setTimeout(() => {
+            that.setState({
+              counter: counter + 1,
+            });
+
+            that.processing = false;
+          }, duration + 10);
+        }
       }
-
-      this.visibilityChanged = !this.visibilityChanged;
     }
 
     return {
