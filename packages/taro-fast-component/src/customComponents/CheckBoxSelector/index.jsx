@@ -7,6 +7,9 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import Popup from '../Popup';
 import CheckBox from '../CheckBox';
 import Item from '../Item';
+import Icon from '../Icon';
+
+const { IconCloseCircle } = Icon;
 
 const defaultProps = {
   title: '',
@@ -23,6 +26,7 @@ const defaultProps = {
   hidden: false,
   options: [],
   position: 'bottom',
+  closeIcon: <IconCloseCircle size={18} color="#ccc" />,
   arc: false,
   showClose: true,
   checkBoxStyle: {},
@@ -73,6 +77,7 @@ class CheckBoxSelector extends ComponentBase {
       hidden,
       options,
       position,
+      closeIcon,
       arc,
       showClose,
       checkBoxStyle,
@@ -145,6 +150,7 @@ class CheckBoxSelector extends ComponentBase {
           bodyBorder={false}
           footerBorder={false}
           closeWhenOverlayClick
+          closeIcon={closeIcon}
           arcTop={arc}
           showClose={showClose}
           onClose={this.hidePopup}

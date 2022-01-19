@@ -4,6 +4,7 @@ import { View } from '@tarojs/components';
 import {
   handleTouchScroll,
   inCollection,
+  showRuntimeError,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -259,11 +260,32 @@ class Popup extends ComponentBase {
     return position === 'center' ? 'card' : mode;
   };
 
+  getCloseWhenOverlayClick = () => {
+    const { closeWhenOverlayClick } = this.props;
+
+    const position = this.getPosition();
+
+    return position === 'center' ? false : closeWhenOverlayClick;
+  };
+
+  getShowClose = () => {
+    const { showClose, closeIcon } = this.props;
+
+    const position = this.getPosition();
+
+    if (position === 'center' && (closeIcon || null) == null) {
+      showRuntimeError({
+        message: 'closeIcon not all when position is center ',
+      });
+    }
+
+    return position === 'center' ? true : showClose;
+  };
+
   render() {
     const { visibleStage } = this.state;
     const {
       space,
-      showClose,
       border,
       header,
       headerStyle,
@@ -271,7 +293,6 @@ class Popup extends ComponentBase {
       footer,
       footerBorder,
       footerStyle,
-      closeWhenOverlayClick,
       closeIcon,
       scroll,
       scrollY,
@@ -295,6 +316,8 @@ class Popup extends ComponentBase {
       this.props.className,
     );
 
+    const showClose = this.getShowClose();
+    const closeWhenOverlayClick = this.getCloseWhenOverlayClick();
     const mode = this.getMode();
     const bodyStyle = this.getBodyStyle();
     const arcStyle = this.getArcStyle();

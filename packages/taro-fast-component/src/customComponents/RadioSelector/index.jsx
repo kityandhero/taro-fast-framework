@@ -7,6 +7,9 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import Popup from '../Popup';
 import Radio from '../Radio';
 import Item from '../Item';
+import Icon from '../Icon';
+
+const { IconCloseCircle } = Icon;
 
 const defaultProps = {
   title: '',
@@ -23,6 +26,7 @@ const defaultProps = {
   hidden: false,
   options: [],
   position: 'bottom',
+  closeIcon: <IconCloseCircle size={18} color="#ccc" />,
   arc: false,
   showClose: true,
   radioStyle: {},
@@ -73,6 +77,7 @@ class RadioSelector extends ComponentBase {
       hidden,
       options,
       position,
+      closeIcon,
       arc,
       showClose,
       radioStyle,
@@ -141,6 +146,7 @@ class RadioSelector extends ComponentBase {
           bodyBorder={false}
           footerBorder={false}
           closeWhenOverlayClick
+          closeIcon={closeIcon}
           arcTop={arc}
           showClose={showClose}
           onClose={this.hidePopup}
