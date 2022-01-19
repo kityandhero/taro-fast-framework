@@ -4,6 +4,7 @@ import {
   Card,
   Icon,
   StepperItem,
+  HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -54,6 +55,18 @@ export default class Index extends PageWrapper {
           <StepperItem disabled prefix={<IconSketch />}>
             购买数量
           </StepperItem>
+        </Card>
+
+        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: '可配置值请参考 Item 与 Stepper.',
+              },
+            ]}
+          />
         </Card>
       </View>
     );
