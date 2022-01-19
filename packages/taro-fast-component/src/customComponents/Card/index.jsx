@@ -15,11 +15,14 @@ const modeCollection = ['through', 'card'];
 
 const defaultProps = {
   mode: 'through',
+  border: true,
   style: {},
   header: null,
   headerStyle: {},
+  bodyBorder: true,
   bodyStyle: {},
   footer: null,
+  footerBorder: true,
   footerStyle: {},
   space: true,
   extra: null,
@@ -77,10 +80,13 @@ class Card extends ComponentBase {
   renderFurther() {
     const {
       style,
+      border,
       header,
       headerStyle,
+      bodyBorder,
       bodyStyle,
       footer,
+      footerBorder,
       footerStyle,
       extra,
       mode: modeSource,
@@ -106,7 +112,10 @@ class Card extends ComponentBase {
     return (
       <View
         className={classNames(classPrefix, `${classPrefix}-${mode}`)}
-        style={style}
+        style={{
+          ...style,
+          ...(!border ? { border: '0' } : {}),
+        }}
       >
         {header ? (
           <FlexBox
@@ -124,7 +133,10 @@ class Card extends ComponentBase {
           className={classNames(`${classPrefix}-body`, {
             [`${classPrefix}-body-space`]: !!space,
           })}
-          style={bodyStyle}
+          style={{
+            ...bodyStyle,
+            ...(!bodyBorder ? { border: '0' } : {}),
+          }}
         >
           {scroll ? (
             <ScrollView
@@ -150,7 +162,10 @@ class Card extends ComponentBase {
         {footer ? (
           <View
             className={classNames(`${classPrefix}-footer`)}
-            style={footerStyle}
+            style={{
+              ...footerStyle,
+              ...(!footerBorder ? { border: '0' } : {}),
+            }}
           >
             {footer}
           </View>

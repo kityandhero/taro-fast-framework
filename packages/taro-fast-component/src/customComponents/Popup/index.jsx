@@ -30,15 +30,19 @@ const defaultProps = {
    * 元素的标题
    */
   mode: 'through',
+  space: true,
+  border: true,
   header: '',
+  bodyBorder: true,
   footer: null,
+  footerBorder: true,
   footerStyle: {},
   showClose: false,
   arcTop: false,
   arcBottom: false,
   arcSize: 24,
   maxHeight: 828,
-  minHeight: 514,
+  minHeight: 40,
   maxWidth: '85%',
   minWidth: '20%',
   bodyStyle: {},
@@ -257,10 +261,14 @@ class Popup extends ComponentBase {
   render() {
     const { visibleStage } = this.state;
     const {
+      space,
       showClose,
+      border,
       header,
       headerStyle,
+      bodyBorder,
       footer,
+      footerBorder,
       footerStyle,
       closeWhenOverlayClick,
       scroll,
@@ -334,6 +342,10 @@ class Popup extends ComponentBase {
           ) : null}
           <Card
             mode={mode}
+            border={!!border}
+            bodyBorder={!!bodyBorder}
+            footerBorder={!!footerBorder}
+            space={!!space}
             header={header}
             headerStyle={{
               ...headerStyle,

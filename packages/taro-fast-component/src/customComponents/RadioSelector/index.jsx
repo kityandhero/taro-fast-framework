@@ -137,13 +137,23 @@ class RadioSelector extends ComponentBase {
         </Item>
 
         <Popup
-          show={popupVisible}
+          visible={popupVisible}
+          header={placeholder}
           position="bottom"
-          style={{ height: '20%' }}
+          space={false}
+          border={false}
+          bodyBorder={false}
+          footerBorder={false}
+          closeWhenOverlayClick
           onClose={this.hidePopup}
         >
           <Radio
-            style={radioStyle}
+            style={{
+              ...radioStyle,
+              ...{
+                borderTop: '0',
+              },
+            }}
             layout={radioLayout}
             bodyStyle={radioBodyStyle}
             border={radioBorder}
