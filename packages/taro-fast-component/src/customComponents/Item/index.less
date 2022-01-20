@@ -1,52 +1,63 @@
-.tfc-item {
-  display: block;
-  padding-left: var(--padding-left);
-  &-title,
-  &-description {
-    color: var(--tfc-color-weak);
-    font-size: 28rpx;
-  }
-  &-content {
-    display: flex;
-    align-items: var(--align-items);
-    justify-content: flex-start;
-    padding: 24rpx 24rpx 24rpx 0;
-    border-bottom: var(--border-inner);
-    &-prefix {
-      width: var(--prefix-width);
-      flex: none;
-      padding-right: 24rpx;
-    }
-    &-main {
-      flex: auto;
-      font-size: 30rpx;
-    }
-    &-extra {
-      flex: none;
-      padding-left: 24rpx;
-    }
-    &-arrow {
-      flex: none;
-      display: flex;
-      align-items: center;
-      padding-left: 24rpx;
+@class-prefix-item: ~'tfc-item';
+
+.@{class-prefix-item} {
+  &-header {
+    display: block;
+    padding-left: var(--padding-left);
+
+    &-title,
+    &-description {
       color: var(--tfc-color-weak);
-      font-size: 32rpx;
+      font-size: 28rpx;
+    }
+    &-content {
+      display: flex;
+      align-items: var(--align-items);
+      justify-content: flex-start;
+      padding: 0 0 0 0;
+      border-bottom: var(--border-inner);
+      &-prefix {
+        width: var(--prefix-width);
+        flex: none;
+        padding: 24rpx 24rpx 24rpx 0;
+      }
+      &-main {
+        flex: auto;
+        font-size: 30rpx;
+        padding: 24rpx 0 24rpx 0;
+      }
+      &-extra {
+        flex: none;
+        padding-left: 24rpx;
+        padding: 0 0 0 24rpx;
+      }
+      &-arrow {
+        flex: none;
+        display: flex;
+        align-items: center;
+        padding: 0 24rpx 0 24rpx;
+        color: var(--tfc-color-weak);
+        font-size: 32rpx;
+      }
+    }
+
+    &-clickable:active {
+      background-color: var(--active-background-color);
+    }
+
+    &-disabled {
+      && > .tfc-item-header-content > .tfc-item-header-content-prefix,
+      .tfc-item-header-content-main,
+      .tfc-item-header-content-extra,
+      .tfc-item-header-content-arrow {
+        cursor: not-allowed;
+        opacity: 0.6;
+        pointer-events: none;
+      }
     }
   }
 
-  &-clickable:active {
-    background-color: var(--active-background-color);
-  }
-
-  &-disabled {
-    && > .tfc-item-content > .tfc-item-content-prefix,
-    .tfc-item-content-main,
-    .tfc-item-content-extra,
-    .tfc-item-content-arrow {
-      cursor: not-allowed;
-      opacity: 0.6;
-      pointer-events: none;
-    }
+  &-body {
+    padding: 24rpx;
   }
 }

@@ -139,6 +139,9 @@ export const pathCollection = {
   searchBar: {
     path: '/example/pages/searchBar/index',
   },
+  textAreaItem: {
+    path: '/example/pages/textAreaItem/index',
+  },
 };
 
 export const cardHeaderStyle = {

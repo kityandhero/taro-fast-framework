@@ -34,6 +34,7 @@ const defaultProps = {
   space: true,
   border: true,
   header: '',
+  extra: null,
   bodyBorder: true,
   footer: null,
   footerBorder: true,
@@ -287,6 +288,7 @@ class Popup extends ComponentBase {
     const {
       space,
       border,
+      extra,
       header,
       headerStyle,
       bodyBorder,
@@ -377,6 +379,7 @@ class Popup extends ComponentBase {
                 paddingBottom: '10rpx',
               },
             }}
+            extra={extra}
             footer={footer}
             footerStyle={footerStyle}
             scroll={scroll}

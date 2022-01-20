@@ -44,5 +44,6 @@ export { AdvanceButton } from './AdvanceButton';
 export { FadeView } from './FadeView';
 export { default as Stepper } from './Stepper';
 export { default as StepperItem } from './StepperItem';
+export { default as TextAreaItem } from './TextAreaItem';
 export { default as SearchBar } from './SearchBar';
 export { default as Button } from './Button';

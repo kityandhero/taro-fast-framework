@@ -24,6 +24,8 @@ const defaultProps = {
   arrow: false,
   disabled: false,
   onClick: null,
+  showBody: false,
+  body: null,
 };
 
 class Item extends ComponentBase {
@@ -51,56 +53,69 @@ class Item extends ComponentBase {
       extra,
       children,
       border,
+      showBody,
+      body,
     } = this.props;
 
-    return (
-      <View
-        className={classNames(
-          `${classPrefix}`,
-          !disabled && clickable ? [`${classPrefix}-clickable`] : [],
-          disabled && `${classPrefix}-disabled`,
-        )}
-        style={style}
-        onClick={this.triggerClick}
-      >
-        <View
-          className={`${classPrefix}-content`}
-          style={!border ? { borderBottom: '0' } : {}}
-        >
-          {prefix && (
-            <View className={`${classPrefix}-content-prefix`}>
-              <VerticalBox>{prefix}</VerticalBox>
-            </View>
-          )}
+    const b =
+      showBody && (body || null) != null ? (
+        <View className={classNames(`${classPrefix}-body`)}>{body}</View>
+      ) : null;
 
-          <View className={`${classPrefix}-content-main`}>
-            {title ? (
-              <View className={`${classPrefix}-title`}>{title}</View>
+    return (
+      <View className={classNames(`${classPrefix}`)}>
+        <View
+          className={classNames(
+            `${classPrefix}-header`,
+            !disabled && clickable ? [`${classPrefix}-header-clickable`] : [],
+            disabled && `${classPrefix}-header-disabled`,
+          )}
+          style={style}
+          onClick={this.triggerClick}
+        >
+          <View
+            className={`${classPrefix}-header-content`}
+            style={!border ? { borderBottom: '0' } : {}}
+          >
+            {prefix && (
+              <View className={`${classPrefix}-header-content-prefix`}>
+                <VerticalBox>{prefix}</VerticalBox>
+              </View>
+            )}
+
+            <View className={`${classPrefix}-header-content-main`}>
+              {title ? (
+                <View className={`${classPrefix}-header-title`}>{title}</View>
+              ) : null}
+
+              {children}
+
+              {description ? (
+                <View className={`${classPrefix}-header-description`}>
+                  {description}
+                </View>
+              ) : null}
+            </View>
+
+            {extra ? (
+              <View className={`${classPrefix}-header-content-extra`}>
+                <VerticalBox>
+                  <VerticalBox>{extra}</VerticalBox>
+                </VerticalBox>
+              </View>
             ) : null}
 
-            {children}
-
-            {description ? (
-              <View className={`${classPrefix}-description`}>
-                {description}
+            {arrow ? (
+              <View className={`${classPrefix}-header-content-arrow`}>
+                <VerticalBox>
+                  <IconChevronRight size={20} />
+                </VerticalBox>
               </View>
             ) : null}
           </View>
-
-          {extra ? (
-            <View className={`${classPrefix}-content-extra`}>
-              <VerticalBox>{extra}</VerticalBox>
-            </View>
-          ) : null}
-
-          {arrow ? (
-            <View className={`${classPrefix}-content-arrow`}>
-              <VerticalBox>
-                <IconChevronRight size={20} />
-              </VerticalBox>
-            </View>
-          ) : null}
         </View>
+
+        {b}
       </View>
     );
   }

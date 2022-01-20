@@ -55,6 +55,7 @@ export default {
         'pages/centerBox/index',
         'pages/dataGrid/index',
         'pages/searchBar/index',
+        'pages/textAreaItem/index',
       ],
     },
   ],
