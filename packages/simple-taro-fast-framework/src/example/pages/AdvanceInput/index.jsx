@@ -1,16 +1,9 @@
 import { View } from '@tarojs/components';
 
-import {
-  AdvanceInput,
-  Card,
-  Icon,
-  ColorText,
-} from 'taro-fast-component/es/customComponents';
+import { AdvanceInput, Card } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
-
-const { IconEdit } = Icon;
 
 export default class Index extends PageWrapper {
   afterChange = (v) => {
@@ -160,20 +153,6 @@ export default class Index extends PageWrapper {
             onKeyboardHeightChange={(e) => {
               console.log(e);
             }}
-            onChange={this.afterChange}
-          />
-        </Card>
-
-        <Card header="复杂Label" headerStyle={cardHeaderStyle} space={false}>
-          <AdvanceInput
-            label={
-              <ColorText
-                icon={<IconEdit size={16} color="#ff3ce7" />}
-                textPrefix="前缀"
-                text="文本文字"
-                separatorStyle={{ color: '#67ca31', margin: '0 24rpx' }}
-              />
-            }
             onChange={this.afterChange}
           />
         </Card>

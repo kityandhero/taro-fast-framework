@@ -41,8 +41,12 @@
       }
     }
 
-    &-clickable:active {
-      background-color: var(--active-background-color);
+    &-clickable {
+      transition: background-color 0.3s;
+
+      &:active {
+        background-color: var(--active-background-color);
+      }
     }
 
     &-disabled {
