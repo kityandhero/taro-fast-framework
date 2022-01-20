@@ -55,15 +55,6 @@ class Infrastructure extends ComponentBase {
     this.doOtherWorkAfterDidMount();
   }
 
-  // eslint-disable-next-line react/sort-comp
-  getSnapshotBeforeUpdate(preProps, preState) {
-    return this.doWorkWhenGetSnapshotBeforeUpdate(preProps, preState);
-  }
-
-  componentDidUpdate(preProps, preState, snapshot) {
-    this.doWorkWhenDidUpdate(preProps, preState, snapshot);
-  }
-
   componentWillUnmount() {
     this.doWorkBeforeUnmount();
 
@@ -115,10 +106,6 @@ class Infrastructure extends ComponentBase {
   doOtherRemoteRequest = () => {};
 
   doOtherWorkAfterDidMount = () => {};
-
-  doWorkWhenGetSnapshotBeforeUpdate = () => {};
-
-  doWorkWhenDidUpdate = () => {};
 
   doOtherCheckComponentUpdate = () => {};
 

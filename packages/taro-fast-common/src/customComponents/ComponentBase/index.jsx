@@ -67,6 +67,13 @@ function shallowEqual(a, b) {
 }
 
 class ComponentBase extends Component {
+  /**
+   *显示render次数开关, 用于开发时候调试页面渲染性能
+   */
+  showRenderCountInConsole = false;
+
+  renderCount = 0;
+
   constructor(props) {
     super(props);
 
@@ -109,18 +116,25 @@ class ComponentBase extends Component {
     );
   }
 
-  /**
-   *显示render次数开关, 用于开发时候调试页面渲染性能
-   */
-  showRenderCountInConsole = false;
-
-  renderCount = 0;
-
   componentDidCatchError(error, info) {
     this.doWhenCatchError(error, info);
   }
 
+  // eslint-disable-next-line react/sort-comp
+  getSnapshotBeforeUpdate(preProps, preState) {
+    return this.doWorkWhenGetSnapshotBeforeUpdate(preProps, preState);
+  }
+
+  componentDidUpdate(preProps, preState, snapshot) {
+    this.doWorkWhenDidUpdate(preProps, preState, snapshot);
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {};
+
   doOtherCheckComponentUpdate = () => {};
+
+  doWorkWhenGetSnapshotBeforeUpdate = () => {};
 
   doWhenCatchError = (error, info) => {
     showErrorMessage({

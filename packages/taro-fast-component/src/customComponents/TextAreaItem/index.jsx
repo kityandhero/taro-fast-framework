@@ -9,6 +9,7 @@ import {
   isObject,
   isFunction,
 } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Button from '../Button';
@@ -39,6 +40,7 @@ const defaultProps = {
   onChange: null,
   value: '',
   emptyValue: '当前无内容',
+  emptyValueStyle: {},
 };
 
 class TextAreaItem extends ComponentBase {
@@ -60,6 +62,11 @@ class TextAreaItem extends ComponentBase {
     const { popupVisible: popupVisiblePre } = preState;
     const { popupVisible } = this.state;
     const { value } = this.props;
+
+    console.log({
+      text: this.text,
+      value,
+    });
 
     if (popupVisiblePre !== popupVisible && popupVisible) {
       this.text = value;
@@ -116,6 +123,8 @@ class TextAreaItem extends ComponentBase {
       border,
       disabled,
       value,
+      emptyValue,
+      emptyValueStyle,
       hidden,
       editable,
       position,
@@ -174,10 +183,10 @@ class TextAreaItem extends ComponentBase {
                   fontSize: '28rpx',
                   color: '#666',
                 },
-                ...placeholderStyle,
+                ...emptyValueStyle,
               }}
             >
-              {placeholder}
+              {isString(emptyValue) ? emptyValue : toString(emptyValue)}
             </View>
           ) : (
             <Ellipsis
@@ -241,7 +250,7 @@ class TextAreaItem extends ComponentBase {
                 ? styleToString(placeholderStyle)
                 : ''
             }
-            value={value}
+            value={isString(value) ? value : toString(value)}
             maxlength={contentMaxlength}
             placeholder={placeholder}
             disabled={disabled}

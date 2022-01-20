@@ -50,6 +50,26 @@ export default class Index extends PageWrapper {
             内容
           </TextAreaItem>
         </Card>
+
+        <Card
+          header="自定义"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <TextAreaItem
+            style={{ backgroundColor: '#5668e3' }}
+            contentLine={6}
+            value={value}
+            title="标题"
+            description="简介描述简介描述简介描述"
+            emptyValue="当前没有内容"
+            emptyValueStyle={{ color: '#4589e3' }}
+            onChange={this.triggerChange}
+          >
+            商品详情
+          </TextAreaItem>
+        </Card>
       </View>
     );
   }

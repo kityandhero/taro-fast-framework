@@ -132,7 +132,7 @@ class Tabs extends ComponentBase {
   }
 
   // eslint-disable-next-line no-unused-vars
-  getSnapshotBeforeUpdate = (preProps, preState) => {
+  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
     this.getTabHeaderRef();
 
     this.updateScroll(this.props.current);
