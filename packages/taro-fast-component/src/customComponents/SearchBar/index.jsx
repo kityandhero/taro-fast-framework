@@ -100,7 +100,7 @@ class SearchBar extends ComponentBase {
       <View
         style={{
           ...{
-            padding: '12rpx 28rpx',
+            // padding: '12rpx 28rpx',
             backgroundColor: '#f7f8fa',
             overflow: 'hidden',
           },
@@ -136,14 +136,18 @@ class SearchBar extends ComponentBase {
             },
             ...placeholderStyle,
           }}
+          inputStyle={{
+            width: '95%',
+          }}
           valueStyle={{
             ...{
-              fontSize: '28rpx',
+              padding: '10rpx 0 10rpx 0',
             },
             valueStyle,
           }}
           clearSize={clearSize}
           disabled={disabled}
+          border={false}
           extra={
             showSearch ? (
               <VerticalBox>
@@ -161,6 +165,15 @@ class SearchBar extends ComponentBase {
                 </View>
               </VerticalBox>
             ) : null
+          }
+          extraContainerStyle={
+            showSearch
+              ? {
+                  ...{
+                    padding: '0 72rpx 0 0',
+                  },
+                }
+              : {}
           }
           onChange={this.afterChange}
         />

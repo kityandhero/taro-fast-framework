@@ -10,6 +10,7 @@ const defaultProps = {
   description: null,
   prefix: null,
   border: true,
+  extraContainerStyle: {},
   defaultValue: 0,
   step: 1,
   min: 0,
@@ -30,6 +31,7 @@ class StepperItem extends ComponentBase {
       description,
       style,
       border,
+      extraContainerStyle,
       defaultValue,
       step,
       min,
@@ -69,6 +71,12 @@ class StepperItem extends ComponentBase {
             onChange={onChange}
           />
         }
+        extraContainerStyle={{
+          ...{
+            paddingRight: '24rpx',
+          },
+          ...extraContainerStyle,
+        }}
       >
         {children}
       </Item>
