@@ -16,6 +16,7 @@ const defaultProps = {
   prefix: null,
   style: {},
   description: '',
+  extraContainerStyle: {},
   value: '',
   valueFormat: null,
   placeholder: '请选择',
@@ -67,6 +68,7 @@ class RadioSelector extends ComponentBase {
       prefix,
       style,
       description,
+      extraContainerStyle,
       value,
       valueFormat,
       placeholder,
@@ -132,6 +134,12 @@ class RadioSelector extends ComponentBase {
               </View>
             )
           }
+          extraContainerStyle={{
+            ...{
+              paddingRight: '24rpx',
+            },
+            ...extraContainerStyle,
+          }}
           onClick={this.showPopup}
         >
           {children}

@@ -17,6 +17,7 @@ const defaultProps = {
   style: {},
   title: null,
   description: null,
+  contentStyle: {},
   prefix: null,
   extra: null,
   extraContainerStyle: {},
@@ -48,6 +49,7 @@ class Item extends ComponentBase {
       prefix,
       title,
       description,
+      contentStyle,
       clickable,
       disabled,
       arrow,
@@ -86,7 +88,10 @@ class Item extends ComponentBase {
             ) : null}
 
             {!!title || !!children || !!description ? (
-              <View className={`${classPrefix}-header-content-main`}>
+              <View
+                className={`${classPrefix}-header-content-main`}
+                style={contentStyle}
+              >
                 {title ? (
                   <View className={`${classPrefix}-header-title`}>{title}</View>
                 ) : null}
@@ -104,7 +109,12 @@ class Item extends ComponentBase {
             {extra ? (
               <View
                 className={`${classPrefix}-header-content-extra`}
-                style={extraContainerStyle}
+                style={{
+                  ...{
+                    fontSize: '28rpx',
+                  },
+                  ...extraContainerStyle,
+                }}
               >
                 <VerticalBox>{extra}</VerticalBox>
               </View>

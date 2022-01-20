@@ -30,6 +30,7 @@ const defaultProps = {
   style: {},
   title: null,
   description: null,
+  contentStyle: {},
   prefix: null,
   border: true,
   align: 'left',
@@ -170,6 +171,7 @@ class AdvanceInput extends ComponentBase {
       prefix,
       title,
       description,
+      contentStyle,
       border,
       align,
       required,
@@ -270,6 +272,13 @@ class AdvanceInput extends ComponentBase {
         prefix={prefix}
         title={title}
         description={description}
+        contentStyle={{
+          ...{ width: '180rpx' },
+          ...contentStyle,
+          ...{
+            flex: 'none',
+          },
+        }}
         border={border}
         extra={
           <FlexBox
@@ -358,10 +367,12 @@ class AdvanceInput extends ComponentBase {
         }
         extraContainerStyle={{
           ...{
-            width: '75%',
             padding: '0 24rpx 0 0',
           },
           ...inputStyle,
+          ...{
+            flex: 'auto',
+          },
         }}
       >
         {labelComponent}

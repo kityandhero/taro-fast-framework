@@ -9,6 +9,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import AdvanceInput from '../AdvanceInput';
 import VerticalBox from '../VerticalBox';
+import CenterBox from '../CenterBox';
 import Icon from '../Icon';
 
 const { IconSearch } = Icon;
@@ -125,8 +126,22 @@ class SearchBar extends ComponentBase {
           />
         )}
 
+        <View
+          style={{
+            position: 'absolute',
+            zIndex: '6',
+            top: '0',
+            left: '0',
+            width: '70rpx',
+            height: '100%',
+          }}
+          onClick={this.triggerNavigate}
+        >
+          <CenterBox>{icon}</CenterBox>
+        </View>
+
         <AdvanceInput
-          label={icon}
+          label={null}
           align={align}
           clearable
           placeholder={placeholder}
@@ -136,8 +151,8 @@ class SearchBar extends ComponentBase {
             },
             ...placeholderStyle,
           }}
-          inputStyle={{
-            width: '95%',
+          style={{
+            paddingLeft: '70rpx',
           }}
           valueStyle={{
             ...{
@@ -170,7 +185,7 @@ class SearchBar extends ComponentBase {
             showSearch
               ? {
                   ...{
-                    padding: '0 72rpx 0 0',
+                    padding: '0 2rpx 0 0',
                   },
                 }
               : {}

@@ -16,6 +16,7 @@ const defaultProps = {
   prefix: null,
   style: {},
   description: '',
+  extraContainerStyle: {},
   value: [],
   valueFormat: null,
   placeholder: '请选择',
@@ -67,6 +68,7 @@ class CheckBoxSelector extends ComponentBase {
       prefix,
       style,
       description,
+      extraContainerStyle,
       value,
       valueFormat,
       placeholder,
@@ -136,6 +138,12 @@ class CheckBoxSelector extends ComponentBase {
               </View>
             )
           }
+          extraContainerStyle={{
+            ...{
+              paddingRight: '24rpx',
+            },
+            ...extraContainerStyle,
+          }}
           onClick={this.showPopup}
         >
           {children}
