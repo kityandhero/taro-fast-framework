@@ -157,6 +157,12 @@ class Radio extends ComponentBase {
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || null
                 }
+                extraContainerStyle={{
+                  ...{
+                    paddingRight: '24rpx',
+                  },
+                  ...extraContainerStyle,
+                }}
                 onClick={() => {
                   this.handleClick(o);
                 }}

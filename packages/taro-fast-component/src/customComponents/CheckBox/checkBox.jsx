@@ -76,6 +76,7 @@ const defaultProps = {
   headerStyle: {},
   bodyStyle: {},
   extra: null,
+  extraContainerStyle: {},
   value: [],
   options: [],
   border: true,
@@ -140,6 +141,7 @@ class Radio extends ComponentBase {
       options,
       border,
       extra,
+      extraContainerStyle,
       value,
     } = this.props;
 
@@ -185,6 +187,12 @@ class Radio extends ComponentBase {
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || uncheckStatusIconForListView
                 }
+                extraContainerStyle={{
+                  ...{
+                    paddingRight: '24rpx',
+                  },
+                  ...extraContainerStyle,
+                }}
                 onClick={() => {
                   this.handleClick(o);
                 }}
@@ -227,6 +235,12 @@ class Radio extends ComponentBase {
                   </CenterBox>
                 ) : null
               }
+              extraContainerStyle={{
+                ...{
+                  paddingRight: '24rpx',
+                },
+                ...extraContainerStyle,
+              }}
               onClick={() => {
                 this.handleClick(o);
               }}
