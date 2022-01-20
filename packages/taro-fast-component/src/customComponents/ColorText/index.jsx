@@ -73,12 +73,6 @@ class ColorText extends ComponentBase {
       ...(!stringIsNullOrWhiteSpace(colorValue) ? { color: colorValue } : {}),
     };
 
-    console.log({
-      randomColor,
-      colorValue,
-      seed: randomSeed + (isNumber(seedOffset) ? Math.abs(seedOffset) : 0),
-    });
-
     return (
       <View
         style={style}
