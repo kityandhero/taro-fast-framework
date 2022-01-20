@@ -2,7 +2,6 @@ import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
 import { showErrorMessage } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {
   ComponentBase,
@@ -23,124 +22,6 @@ class Infrastructure extends ComponentBase {
   static getDerivedStateFromProps(nextProps, prevState) {
     return null;
   }
-
-  /**
-   * 该生命周期不产生控制台输出
-   */
-  componentWillMount() {
-    this.doWorkBeforeAdjustWillMount();
-
-    this.doWorkAdjustWillMount();
-
-    this.doWorkAfterAdjustWillMount();
-  }
-
-  componentDidMount() {
-    this.checkPermission();
-
-    this.doWorkBeforeAdjustDidMount();
-
-    this.doWorkAdjustDidMount();
-
-    this.doWorkAfterAdjustDidMount();
-
-    this.doWorkAfterDidMount();
-
-    if (this.loadRemoteRequestAfterMount) {
-      this.doLoadRemoteRequest();
-    }
-
-    this.doOtherRemoteRequest();
-
-    this.doOtherWorkAfterDidMount();
-  }
-
-  componentWillUnmount() {
-    this.doWorkBeforeUnmount();
-
-    this.setState = () => {};
-
-    this.doWorkAfterUnmount();
-  }
-
-  componentDidShow() {
-    if (!this.firstShowHasTriggered) {
-      this.doWorkWhenFirstShow();
-
-      this.firstShowHasTriggered = true;
-    }
-
-    this.doWorkWhenRepeatedShow();
-
-    this.doWorkWhenShow();
-
-    this.doWorkAfterShow();
-  }
-
-  componentDidHide() {
-    this.doWorkWhenComponentHide();
-  }
-
-  firstShowHasTriggered = false;
-
-  loadRemoteRequestAfterMount = false;
-
-  doWorkBeforeAdjustWillMount = () => {};
-
-  doWorkAdjustWillMount = () => {};
-
-  doWorkAfterAdjustWillMount = () => {};
-
-  checkPermission = () => {};
-
-  doWorkBeforeAdjustDidMount = () => {};
-
-  doWorkAdjustDidMount = () => {};
-
-  doWorkAfterAdjustDidMount = () => {};
-
-  doWorkAfterDidMount = () => {};
-
-  doLoadRemoteRequest = () => {};
-
-  doOtherRemoteRequest = () => {};
-
-  doOtherWorkAfterDidMount = () => {};
-
-  doOtherCheckComponentUpdate = () => {};
-
-  doWorkWhenFirstShow = () => {};
-
-  doWorkWhenRepeatedShow = () => {};
-
-  doWorkWhenShow = () => {};
-
-  doWorkAfterShow = () => {};
-
-  doWorkWhenComponentHide = () => {};
-
-  doWorkBeforeUnmount = () => {};
-
-  doWorkAfterUnmount = () => {};
-
-  /**
-   * 当登录失败时调用
-   * @param {*} remoteData [object] 远程返回数据
-   * @param {*} callback [function] 登录失败回调函数
-   */
-  // eslint-disable-next-line no-unused-vars
-  doWhenAuthorizeFail = (remoteData, callback) => {
-    if (isFunction(callback)) {
-      callback(remoteData);
-    }
-  };
-
-  /**
-   * 登录失败时的回调定义
-   * @param {*} remoteData [object] 远程返回数据
-   */
-  // eslint-disable-next-line no-unused-vars
-  authorizeFailCallback = (remoteData) => {};
 
   getUrlParams() {
     return this.$router.params;
@@ -292,13 +173,7 @@ class Infrastructure extends ComponentBase {
     });
   };
 
-  renderFurther() {
-    return null;
-  }
-
-  render() {
-    this.showRenderCount();
-
+  renderView() {
     return (
       <View>
         <Notification />

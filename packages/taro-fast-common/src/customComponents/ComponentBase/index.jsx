@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import { recordError, showErrorMessage, recordText } from '../../utils/tools';
-import { isObject } from '../../utils/typeCheck';
+import { isFunction, isObject } from '../../utils/typeCheck';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -67,6 +67,10 @@ function shallowEqual(a, b) {
 }
 
 class ComponentBase extends Component {
+  loadRemoteRequestAfterMount = false;
+
+  firstShowHasTriggered = false;
+
   /**
    *显示render次数开关, 用于开发时候调试页面渲染性能
    */
@@ -86,6 +90,37 @@ class ComponentBase extends Component {
       error: null,
       errorInfo: null,
     };
+  }
+
+  /**
+   * 该生命周期不产生控制台输出
+   */
+  componentWillMount() {
+    this.doWorkBeforeAdjustWillMount();
+
+    this.doWorkAdjustWillMount();
+
+    this.doWorkAfterAdjustWillMount();
+  }
+
+  componentDidMount() {
+    this.checkPermission();
+
+    this.doWorkBeforeAdjustDidMount();
+
+    this.doWorkAdjustDidMount();
+
+    this.doWorkAfterAdjustDidMount();
+
+    this.doWorkAfterDidMount();
+
+    if (this.loadRemoteRequestAfterMount) {
+      this.doLoadRemoteRequest();
+    }
+
+    this.doOtherRemoteRequest();
+
+    this.doOtherWorkAfterDidMount();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -126,8 +161,58 @@ class ComponentBase extends Component {
   }
 
   componentDidUpdate(preProps, preState, snapshot) {
+    console.log('componentDidUpdate');
+
     this.doWorkWhenDidUpdate(preProps, preState, snapshot);
   }
+
+  componentWillUnmount() {
+    this.doWorkBeforeUnmount();
+
+    this.setState = () => {};
+
+    this.doWorkAfterUnmount();
+  }
+
+  componentDidShow() {
+    if (!this.firstShowHasTriggered) {
+      this.doWorkWhenFirstShow();
+
+      this.firstShowHasTriggered = true;
+    }
+
+    this.doWorkWhenRepeatedShow();
+
+    this.doWorkWhenShow();
+
+    this.doWorkAfterShow();
+  }
+
+  componentDidHide() {
+    this.doWorkWhenComponentHide();
+  }
+
+  doWorkBeforeAdjustWillMount = () => {};
+
+  doWorkAdjustWillMount = () => {};
+
+  doWorkAfterAdjustWillMount = () => {};
+
+  checkPermission = () => {};
+
+  doWorkBeforeAdjustDidMount = () => {};
+
+  doWorkAdjustDidMount = () => {};
+
+  doWorkAfterAdjustDidMount = () => {};
+
+  doWorkAfterDidMount = () => {};
+
+  doLoadRemoteRequest = () => {};
+
+  doOtherRemoteRequest = () => {};
+
+  doOtherWorkAfterDidMount = () => {};
 
   // eslint-disable-next-line no-unused-vars
   doWorkWhenDidUpdate = (preProps, preState, snapshot) => {};
@@ -147,6 +232,39 @@ class ComponentBase extends Component {
     });
   };
 
+  doWorkBeforeUnmount = () => {};
+
+  doWorkAfterUnmount = () => {};
+
+  doWorkWhenFirstShow = () => {};
+
+  doWorkWhenRepeatedShow = () => {};
+
+  doWorkWhenShow = () => {};
+
+  doWorkAfterShow = () => {};
+
+  doWorkWhenComponentHide = () => {};
+
+  /**
+   * 当登录失败时调用
+   * @param {*} remoteData [object] 远程返回数据
+   * @param {*} callback [function] 登录失败回调函数
+   */
+  // eslint-disable-next-line no-unused-vars
+  doWhenAuthorizeFail = (remoteData, callback) => {
+    if (isFunction(callback)) {
+      callback(remoteData);
+    }
+  };
+
+  /**
+   * 登录失败时的回调定义
+   * @param {*} remoteData [object] 远程返回数据
+   */
+  // eslint-disable-next-line no-unused-vars
+  authorizeFailCallback = (remoteData) => {};
+
   showRenderCount() {
     if (this.showRenderCountInConsole) {
       this.renderCount += 1;
@@ -155,10 +273,18 @@ class ComponentBase extends Component {
     }
   }
 
+  renderFurther() {
+    return null;
+  }
+
+  renderView() {
+    return this.renderFurther();
+  }
+
   render() {
     this.showRenderCount();
 
-    return this.renderFurther();
+    return this.renderView();
   }
 }
 
