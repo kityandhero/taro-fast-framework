@@ -19,6 +19,7 @@ const defaultProps = {
   description: null,
   prefix: null,
   extra: null,
+  extraContainerStyle: {},
   clickable: false,
   border: true,
   arrow: false,
@@ -51,6 +52,7 @@ class Item extends ComponentBase {
       disabled,
       arrow,
       extra,
+      extraContainerStyle,
       children,
       border,
       showBody,
@@ -77,31 +79,34 @@ class Item extends ComponentBase {
             className={`${classPrefix}-header-content`}
             style={!border ? { borderBottom: '0' } : {}}
           >
-            {prefix && (
+            {!!prefix ? (
               <View className={`${classPrefix}-header-content-prefix`}>
                 <VerticalBox>{prefix}</VerticalBox>
               </View>
-            )}
+            ) : null}
 
-            <View className={`${classPrefix}-header-content-main`}>
-              {title ? (
-                <View className={`${classPrefix}-header-title`}>{title}</View>
-              ) : null}
+            {!!title || !!children || !!description ? (
+              <View className={`${classPrefix}-header-content-main`}>
+                {title ? (
+                  <View className={`${classPrefix}-header-title`}>{title}</View>
+                ) : null}
 
-              {children}
+                {children}
 
-              {description ? (
-                <View className={`${classPrefix}-header-description`}>
-                  {description}
-                </View>
-              ) : null}
-            </View>
+                {description ? (
+                  <View className={`${classPrefix}-header-description`}>
+                    {description}
+                  </View>
+                ) : null}
+              </View>
+            ) : null}
 
             {extra ? (
-              <View className={`${classPrefix}-header-content-extra`}>
-                <VerticalBox>
-                  <VerticalBox>{extra}</VerticalBox>
-                </VerticalBox>
+              <View
+                className={`${classPrefix}-header-content-extra`}
+                style={extraContainerStyle}
+              >
+                <VerticalBox>{extra}</VerticalBox>
               </View>
             ) : null}
 

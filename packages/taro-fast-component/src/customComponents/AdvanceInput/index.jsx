@@ -18,6 +18,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
+import Item from '../Item';
 import Icon from '../Icon';
 
 const { IconCloseCircle } = Icon;
@@ -26,14 +27,21 @@ const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
 
 const defaultProps = {
+  style: {},
+  title: null,
+  description: null,
+  prefix: null,
+  border: true,
   align: 'left',
   required: false,
   hidden: false,
   clearable: false,
   clearSize: '18',
+  clearColor: '#ccc',
   label: '',
   extra: null,
   labelStyle: {},
+  inputStyle: {},
   valueStyle: {},
   labelContainerStyle: {},
   inputContainerStyle: {},
@@ -42,7 +50,7 @@ const defaultProps = {
   type: 'text',
   password: false,
   placeholder: '请输入',
-  placeholderStyle: '',
+  placeholderStyle: { color: '#ccc' },
   placeholderClass: 'input-placeholder',
   disabled: false,
   maxlength: 140,
@@ -196,16 +204,22 @@ class AdvanceInput extends ComponentBase {
 
   renderFurther() {
     const {
+      style,
+      prefix,
+      title,
+      description,
+      border,
       align,
       required,
       hidden,
       clearable,
       clearSize,
+      clearColor,
       label,
       extra,
       labelStyle,
+      inputStyle,
       valueStyle,
-      labelContainerStyle,
       inputContainerStyle,
       extraContainerStyle,
       type: typeSource,
@@ -235,7 +249,7 @@ class AdvanceInput extends ComponentBase {
       ? confirmTypeSource
       : 'done';
 
-    let labelComponent =
+    const labelComponent =
       isObject(label) ||
       (isString(label) && !stringIsNullOrWhiteSpace(label)) ? (
         <FlexBox
@@ -262,12 +276,24 @@ class AdvanceInput extends ComponentBase {
               </VerticalBox>
             ) : null
           }
-          right={<VerticalBox>{label}</VerticalBox>}
+          right={
+            <VerticalBox>
+              <View
+                style={{
+                  ...{
+                    fontSize: '28rpx',
+                  },
+                  ...labelStyle,
+                }}
+              >
+                {label}
+              </View>
+            </VerticalBox>
+          }
           rightStyle={{
             ...{
-              paddingRight: '20rpx',
+              paddingRight: '40rpx',
             },
-            ...labelStyle,
             ...{
               height: '100%',
             },
@@ -278,19 +304,28 @@ class AdvanceInput extends ComponentBase {
     const { valueTemp } = this.state;
 
     return (
-      <FlexBox
-        flexAuto="right"
-        left={labelComponent}
-        leftStyle={labelContainerStyle}
-        right={
+      <Item
+        style={style}
+        prefix={prefix}
+        title={title}
+        description={description}
+        border={border}
+        extra={
           <FlexBox
+            flexAuto="left"
+            style={{ width: '100%' }}
             left={
               <FlexBox
+                flexAuto="left"
+                style={{ width: '100%' }}
                 left={
                   <Input
                     value={valueTemp}
                     type={type}
                     style={{
+                      ...{
+                        fontSize: '28rpx',
+                      },
                       ...valueStyle,
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
                       ...(align == 'center' ? { textAlign: 'center' } : {}),
@@ -337,21 +372,38 @@ class AdvanceInput extends ComponentBase {
                         {valueTemp ? (
                           <IconCloseCircle
                             size={toNumber(clearSize)}
-                            color="#ccc"
+                            color={clearColor}
                           />
                         ) : null}
                       </VerticalBox>
                     </View>
                   ) : null
                 }
-                rightStyle={clearable ? extraContainerStyle : null}
               />
             }
             right={extra ? extra : null}
-            rightStyle={extra ? extraContainerStyle : null}
+            rightStyle={
+              extra
+                ? {
+                    ...{
+                      fontSize: '28rpx',
+                    },
+                    ...extraContainerStyle,
+                  }
+                : null
+            }
           />
         }
-      />
+        extraContainerStyle={{
+          ...{
+            width: '75%',
+            paddingRight: '24rpx',
+          },
+          ...inputStyle,
+        }}
+      >
+        {labelComponent}
+      </Item>
     );
   }
 }

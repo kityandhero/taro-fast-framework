@@ -20,19 +20,19 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index" headerStyle={cardHeaderStyle}>
-        <Card header="基础" headerStyle={cardHeaderStyle}>
+        <Card header="基础" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput onChange={this.afterChange} />
         </Card>
 
-        <Card header="Label" headerStyle={cardHeaderStyle}>
+        <Card header="Label" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" onChange={this.afterChange} />
         </Card>
 
-        <Card header="Required" headerStyle={cardHeaderStyle}>
+        <Card header="Required" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" required onChange={this.afterChange} />
         </Card>
 
-        <Card header="labelStyle" headerStyle={cardHeaderStyle}>
+        <Card header="labelStyle" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             labelStyle={{ color: 'red' }}
@@ -40,7 +40,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="Align Right" headerStyle={cardHeaderStyle}>
+        <Card header="Align Right" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             align="right"
@@ -48,15 +48,17 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="Clearable" headerStyle={cardHeaderStyle}>
+        <Card header="Clearable" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" clearable onChange={this.afterChange} />
+          <AdvanceInput label="密码" clearable onChange={this.afterChange} />
+          <AdvanceInput label="手机号" clearable onChange={this.afterChange} />
         </Card>
 
-        <Card header="Hidden" headerStyle={cardHeaderStyle}>
+        <Card header="Hidden" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" hidden onChange={this.afterChange} />
         </Card>
 
-        <Card header="Extra" headerStyle={cardHeaderStyle}>
+        <Card header="Extra" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             extra="扩展部分"
@@ -64,11 +66,11 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="Password" headerStyle={cardHeaderStyle}>
+        <Card header="Password" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput password label="密码" onChange={this.afterChange} />
         </Card>
 
-        <Card header="placeholder" headerStyle={cardHeaderStyle}>
+        <Card header="placeholder" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             placeholder="请输入用户名"
@@ -76,7 +78,11 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="placeholderStyle" headerStyle={cardHeaderStyle}>
+        <Card
+          header="placeholderStyle"
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <AdvanceInput
             placeholder="请输入用户名"
             placeholderStyle={{ color: '#45e325' }}
@@ -85,7 +91,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="disabled" headerStyle={cardHeaderStyle}>
+        <Card header="disabled" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             placeholder="请输入用户名"
@@ -94,7 +100,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="maxlength" headerStyle={cardHeaderStyle}>
+        <Card header="maxlength" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             maxlength={5}
@@ -102,7 +108,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="confirmType" headerStyle={cardHeaderStyle}>
+        <Card header="confirmType" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             confirmType="go"
@@ -110,35 +116,11 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="confirmHold" headerStyle={cardHeaderStyle}>
-          <AdvanceInput
-            label="用户名"
-            confirmHold
-            onChange={this.afterChange}
-          />
-        </Card>
-
-        <Card header="adjustPosition" headerStyle={cardHeaderStyle}>
-          <AdvanceInput
-            label="用户名"
-            adjustPosition={false}
-            onChange={this.afterChange}
-          />
-        </Card>
-
-        <Card header="holdKeyboard" headerStyle={cardHeaderStyle}>
-          <AdvanceInput
-            label="用户名"
-            holdKeyboard
-            onChange={this.afterChange}
-          />
-        </Card>
-
-        <Card header="onChange" headerStyle={cardHeaderStyle}>
+        <Card header="onChange" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" onChange={this.afterChange} />
         </Card>
 
-        <Card header="onFocus" headerStyle={cardHeaderStyle}>
+        <Card header="onFocus" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             onFocus={(e) => {
@@ -148,7 +130,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="onBlur" headerStyle={cardHeaderStyle}>
+        <Card header="onBlur" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             onBlur={(e) => {
@@ -158,7 +140,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="onConfirm" headerStyle={cardHeaderStyle}>
+        <Card header="onConfirm" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label="用户名"
             onConfirm={(e) => {
@@ -168,7 +150,11 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="onKeyboardHeightChange" headerStyle={cardHeaderStyle}>
+        <Card
+          header="onKeyboardHeightChange"
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
           <AdvanceInput
             label="用户名"
             onKeyboardHeightChange={(e) => {
@@ -178,7 +164,7 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
-        <Card header="复杂Label" headerStyle={cardHeaderStyle}>
+        <Card header="复杂Label" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput
             label={
               <ColorText
@@ -188,9 +174,6 @@ export default class Index extends PageWrapper {
                 separatorStyle={{ color: '#67ca31', margin: '0 24rpx' }}
               />
             }
-            onKeyboardHeightChange={(e) => {
-              console.log(e);
-            }}
             onChange={this.afterChange}
           />
         </Card>
