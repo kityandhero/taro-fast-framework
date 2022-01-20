@@ -35,6 +35,7 @@ const defaultProps = {
   contentLine: 3,
   contentMaxlength: 500,
   contentStyle: {},
+  editButtonStyle: {},
   textareaStyle: {},
   confirmStyle: {},
   onChange: null,
@@ -130,6 +131,7 @@ class TextAreaItem extends ComponentBase {
       contentLine,
       contentMaxlength,
       contentStyle,
+      editButtonStyle,
       onContentClick,
       textareaStyle,
       confirmStyle,
@@ -159,7 +161,7 @@ class TextAreaItem extends ComponentBase {
                 ...{
                   fontSize: '28rpx',
                 },
-                ...contentStyle,
+                ...editButtonStyle,
               }}
               fill="none"
               size="mini"
@@ -228,6 +230,9 @@ class TextAreaItem extends ComponentBase {
           closeWhenOverlayClick
           arcTop={arc}
           showClose={false}
+          closeIconStyle={{
+            visibility: 'hidden',
+          }}
         >
           <Textarea
             style={{

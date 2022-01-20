@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import {
   Card,
   TextAreaItem,
+  ImageBox,
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
@@ -59,16 +60,47 @@ export default class Index extends PageWrapper {
         >
           <TextAreaItem
             style={{ backgroundColor: '#5668e3' }}
+            prefix={
+              <View
+                style={{ borderRadius: 20, width: '80rpx', height: '80rpx' }}
+              >
+                <ImageBox
+                  src="https://images.unsplash.com/photo-1548532928-b34e3be62fc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                  fit="cover"
+                />
+              </View>
+            }
             contentLine={6}
             value={value}
             title="标题"
             description="简介描述简介描述简介描述"
             emptyValue="当前没有内容"
             emptyValueStyle={{ color: '#4589e3' }}
+            position="center"
+            header="编辑商品详情"
+            placeholder="请输入内容"
+            placeholderStyle={{ color: '#4589e3' }}
+            contentMaxlength={200}
+            contentStyle={{ color: '#783278' }}
+            editButtonStyle={{ color: '#f1f1f1' }}
+            textareaStyle={{ color: '#8923e1' }}
+            confirmStyle={{ color: '#cc234c' }}
             onChange={this.triggerChange}
           >
             商品详情
           </TextAreaItem>
+        </Card>
+
+        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: '可配置值请参考 源代码以及样例.',
+              },
+            ]}
+          />
         </Card>
       </View>
     );
