@@ -63,11 +63,6 @@ class TextAreaItem extends ComponentBase {
     const { popupVisible } = this.state;
     const { value } = this.props;
 
-    console.log({
-      text: this.text,
-      value,
-    });
-
     if (popupVisiblePre !== popupVisible && popupVisible) {
       this.text = value;
     }

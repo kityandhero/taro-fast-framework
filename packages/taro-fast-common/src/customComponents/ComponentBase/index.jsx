@@ -161,8 +161,6 @@ class ComponentBase extends Component {
   }
 
   componentDidUpdate(preProps, preState, snapshot) {
-    console.log('componentDidUpdate');
-
     this.doWorkWhenDidUpdate(preProps, preState, snapshot);
   }
 
