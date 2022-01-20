@@ -71,32 +71,6 @@ const defaultProps = {
 };
 
 class AdvanceInput extends ComponentBase {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        valueFlag: '',
-        valueTemp: '',
-      },
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
-
-    if (valueNext !== valuePrev) {
-      return {
-        valueFlag: valueNext,
-        valueTemp: valueNext ?? '',
-      };
-    }
-
-    return {};
-  }
-
   triggerChange = (v) => {
     const { onChange } = this.props;
 
@@ -123,17 +97,9 @@ class AdvanceInput extends ComponentBase {
   };
 
   onInput = (e) => {
-    const { clearable } = this.props;
-
     const {
       detail: { value: v },
     } = e;
-
-    if (clearable) {
-      this.setState({
-        valueTemp: v,
-      });
-    }
 
     this.triggerChange(v);
   };
@@ -195,10 +161,6 @@ class AdvanceInput extends ComponentBase {
   };
 
   clearValue = () => {
-    this.setState({
-      valueTemp: '',
-    });
-
     this.triggerChange('');
   };
 
@@ -238,6 +200,7 @@ class AdvanceInput extends ComponentBase {
       selectionEnd,
       adjustPosition,
       holdKeyboard,
+      value,
     } = this.props;
 
     if (!!hidden) {
@@ -301,8 +264,6 @@ class AdvanceInput extends ComponentBase {
         />
       ) : null;
 
-    const { valueTemp } = this.state;
-
     return (
       <Item
         style={style}
@@ -320,11 +281,12 @@ class AdvanceInput extends ComponentBase {
                 style={{ width: '100%' }}
                 left={
                   <Input
-                    value={valueTemp}
+                    value={value}
                     type={type}
                     style={{
                       ...{
                         fontSize: '28rpx',
+                        padding: '22rpx 0 22rpx 0',
                       },
                       ...valueStyle,
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
@@ -369,7 +331,7 @@ class AdvanceInput extends ComponentBase {
                       onClick={this.clearValue}
                     >
                       <VerticalBox>
-                        {valueTemp ? (
+                        {value ? (
                           <IconCloseCircle
                             size={toNumber(clearSize)}
                             color={clearColor}
@@ -381,7 +343,7 @@ class AdvanceInput extends ComponentBase {
                 }
               />
             }
-            right={extra ? extra : null}
+            right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
             rightStyle={
               extra
                 ? {
@@ -397,7 +359,7 @@ class AdvanceInput extends ComponentBase {
         extraContainerStyle={{
           ...{
             width: '75%',
-            paddingRight: '24rpx',
+            padding: '0 24rpx 0 0',
           },
           ...inputStyle,
         }}

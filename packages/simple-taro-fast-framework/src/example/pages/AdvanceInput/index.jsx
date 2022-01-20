@@ -26,6 +26,8 @@ export default class Index extends PageWrapper {
 
         <Card header="Label" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" onChange={this.afterChange} />
+          <AdvanceInput label="密码" onChange={this.afterChange} />
+          <AdvanceInput label="手机号" onChange={this.afterChange} />
         </Card>
 
         <Card header="Required" headerStyle={cardHeaderStyle} space={false}>
@@ -50,8 +52,6 @@ export default class Index extends PageWrapper {
 
         <Card header="Clearable" headerStyle={cardHeaderStyle} space={false}>
           <AdvanceInput label="用户名" clearable onChange={this.afterChange} />
-          <AdvanceInput label="密码" clearable onChange={this.afterChange} />
-          <AdvanceInput label="手机号" clearable onChange={this.afterChange} />
         </Card>
 
         <Card header="Hidden" headerStyle={cardHeaderStyle} space={false}>
