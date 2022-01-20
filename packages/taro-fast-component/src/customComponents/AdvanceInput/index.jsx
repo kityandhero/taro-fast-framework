@@ -56,7 +56,7 @@ const defaultProps = {
   disabled: false,
   maxlength: 140,
   cursorSpacing: 0,
-  focus: true,
+  focus: false,
   confirmType: 'done',
   confirmHold: false,
   cursor: 0,
