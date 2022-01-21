@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "npm run dev:weapp",
+    "start:h5": "npm run dev:h5",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",

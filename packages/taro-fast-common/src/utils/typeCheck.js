@@ -5,7 +5,6 @@ import {
   isUndefined as isUndefinedLodash,
   isNull as isNullLodash,
   isDate as isDateLodash,
-  isArray as isArrayLodash,
   isString as isStringLodash,
   isObject as isObjectLodash,
 } from 'lodash';
@@ -138,7 +137,7 @@ export function isString(value) {
 }
 
 export function isArray(value) {
-  return isArrayLodash(value);
+  return Array.isArray(value);
 }
 
 export function isObject(o) {
