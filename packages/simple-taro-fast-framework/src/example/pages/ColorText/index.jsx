@@ -72,7 +72,7 @@ export default class Index extends PageWrapper {
         <Card header="附带图片" headerStyle={cardHeaderStyle}>
           <ColorText
             icon={
-              <View style={{ width: '40rpx' }}>
+              <View style={{ width: 'var(--tfc-px-40)' }}>
                 <ImageBox circle src="https://jdc.jd.com/img/200" />
               </View>
             }

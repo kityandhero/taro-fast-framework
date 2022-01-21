@@ -257,7 +257,7 @@ class AdvanceInput extends ComponentBase {
           }
           rightStyle={{
             ...{
-              paddingRight: '40rpx',
+              paddingRight: 'var(--tfc-px-40)',
             },
             ...{
               height: '100%',

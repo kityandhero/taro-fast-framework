@@ -12,7 +12,7 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = {
   border: 'var(--tfc-px-2) solid #ccc',
-  height: '200rpx',
+  height: 'var(--tfc-px-200)',
 };
 
 const boxStyle = {

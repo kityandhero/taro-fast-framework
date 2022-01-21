@@ -255,7 +255,7 @@ class DataGrid extends ComponentBase {
                         {v}
                         {itemCanCopy && (itemCanCopy || null) != null ? (
                           <Text
-                            style={{ marginLeft: '40rpx' }}
+                            style={{ marginLeft: 'var(--tfc-px-40)' }}
                             onClick={() => {
                               copyToClipboard({
                                 text: itemCopyData || itemValue,

@@ -105,7 +105,9 @@ class AdvanceSwitch extends ComponentBase {
       if (!stringIsNullOrWhiteSpace(label)) {
         labelComponent = (
           <VerticalBox>
-            <View style={{ ...{ paddingRight: '40rpx' }, ...labelStyle }}>
+            <View
+              style={{ ...{ paddingRight: 'var(--tfc-px-40)' }, ...labelStyle }}
+            >
               {!!required ? (
                 <Text
                   style={{

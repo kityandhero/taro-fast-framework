@@ -49,7 +49,7 @@ class Copyright extends ComponentBase {
                       <View
                         style={{
                           padding: 'var(--tfc-px-10) var(--tfc-px-10)',
-                          width: '40rpx',
+                          width: 'var(--tfc-px-40)',
                         }}
                       >
                         <ImageBox src={logo} circle={circle} lazyLoad />

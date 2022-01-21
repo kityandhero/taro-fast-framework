@@ -16,7 +16,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <Card header="例子: 新闻标题上下滚动" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: '40rpx' },
+            style: { height: 'var(--tfc-px-40)' },
             // indicatorColor: '#999',
             // indicatorActiveColor: '#333',
             vertical: true,
@@ -133,7 +133,7 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图3" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: '140rpx' },
+            style: { height: 'var(--tfc-px-140)' },
             previousMargin: 'var(--tfc-px-80)',
             nextMargin: 'var(--tfc-px-80)',
             easingFunction: 'easeInOutCubic',

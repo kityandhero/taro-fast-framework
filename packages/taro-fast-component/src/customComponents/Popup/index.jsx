@@ -362,8 +362,8 @@ class Popup extends ComponentBase {
                     mode !== 'card' ? 'var(--tfc-px-12)' : 'var(--tfc-px-32)',
                   right:
                     mode !== 'card' ? 'var(--tfc-px-12)' : 'var(--tfc-px-32)',
-                  height: '40rpx',
-                  width: '40rpx',
+                  height: 'var(--tfc-px-40)',
+                  width: 'var(--tfc-px-40)',
                   position: 'absolute',
                 },
               }}

@@ -12,7 +12,7 @@ const boxStyle = {
 };
 
 const style = {
-  height: '400rpx',
+  height: 'var(--tfc-px-400)',
   backgroundColor: '#ccc',
 };
 
