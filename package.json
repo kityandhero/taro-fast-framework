@@ -25,7 +25,6 @@
     "cz": "cz",
     "scz": "git stage -A && npm run cz && git push",
     "commitlint": "npx commitlint --edit",
-    "lint-staged": "lint-staged",
     "lint:f": "cd packages/taro-fast-framework && npm run lint",
     "clean:framework": "cd packages/taro-fast-framework && npm run clean-file",
     "clean:simple": "cd packages/simple-taro-fast-framework && npm run clean-file",
@@ -67,7 +66,16 @@
     "ncu:component": "cd packages/taro-fast-component && ncu",
     "ncu:common": "cd packages/taro-fast-common && ncu",
     "ncu:rollup": "cd packages/taro-fast-rollup && ncu",
-    "ncu:simple": "cd packages/simple-taro-fast-framework && ncu"
+    "ncu:simple": "cd packages/simple-taro-fast-framework && ncu",
+    "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
+    "lint-staged": "lint-staged",
+    "precommit": "lint-staged",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:style": "stylelint --fix \"src/**/*.less\"",
+    "prettier": "prettier -c --write \"**/*\""
   },
   "dependencies": {
     "rollup-plugin-copy": "^3.4.0"

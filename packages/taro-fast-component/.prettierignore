@@ -38,6 +38,7 @@ babel.config.js
 .prettierignore
 .prettierrc
 .stylelintignore
+.eslintcache
 
 # local special
 config

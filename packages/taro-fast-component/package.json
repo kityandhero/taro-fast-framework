@@ -35,18 +35,17 @@
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
-    "lint:style": "stylelint --fix \"./src/**/*.less\"",
-    "prettier": "prettier -c --write \"**/*\""
-  },
-  "other": {
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
     "precommit": "lint-staged",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
-    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src"
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:style": "stylelint --fix \"./src/**/*.less\"",
+    "prettier": "prettier -c --write \"**/*\""
   },
+  "other": {},
   "dependencies": {
     "@tarojs/components": "3.3.19",
     "@tarojs/react": "3.3.19",
@@ -90,8 +89,10 @@
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-taro": "3.3.19",
+    "eslint-formatter-pretty": "^4.1.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "postcss": "^8.4.5",
