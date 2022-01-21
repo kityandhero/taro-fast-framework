@@ -6,19 +6,13 @@
 @assertive: #ef473a;
 @royal: #886aea;
 @dark: #444;
-@spacing-base: 20rpx;
 @light-inverse: #ddd;
 @stable-inverse: #b2b2b2;
 @disabled-opacity: 0.3;
-@fab-button-icon-size: var(--tfc-px-40);
-@fab-button-action-size: var(--tfc-px-100);
 @text-color-dark: fade(@white, 85%);
 @text-color-inverse: @white;
-@fab-button-box-shadow: 0 0 var(--tfc-px-8) rgba(0, 0, 0, 0.14),
-  0 var(--tfc-px-8) var(--tfc-px-16) rgba(0, 0, 0, 0.28);
 @fab-button-label-color: @text-color-dark;
 @fab-button-label-bg: rgba(0, 0, 0, 0.4);
-@fab-button-label-padding: var(--tfc-px-8) @spacing-base;
 @fab-button-light-bg: @light-inverse;
 @fab-button-stable-bg: @stable-inverse;
 @fab-button-positive-bg: @positive;
@@ -31,8 +25,6 @@
 @z-index-backdrop: 1000;
 @z-index-float-action: 1020;
 @backdrop-background-inverse: transparent;
-@border-radius-base: var(--tfc-px-8);
-@font-size-sm: var(--tfc-px-24);
 
 .fab-button-style(@theme, @color) {
   &--@{theme} &__action,
@@ -113,17 +105,17 @@
 
   &--vertical&--topLeft &__label,
   &--vertical&--bottomLeft &__label {
-    left: 120rpx;
+    left: var(--tfc-px-120);
   }
 
   &--vertical&--center &__label,
   &--vertical&--topRight &__label,
   &--vertical&--bottomRight &__label {
-    right: 120rpx;
+    right: var(--tfc-px-120);
   }
 
   &__action {
-    .square(@fab-button-action-size);
+    .square(var(--tfc-px-100));
 
     position: relative;
     border-radius: 50%;
@@ -135,7 +127,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: @fab-button-box-shadow;
+    box-shadow: 0 0 var(--tfc-px-8) rgba(0, 0, 0, 14%),
+      0 var(--tfc-px-8) var(--tfc-px-16) rgba(0, 0, 0, 28%);
     right: 0;
     bottom: 0;
 
@@ -151,17 +144,17 @@
 
   &__icon {
     display: inline-block;
-    width: @fab-button-icon-size;
-    height: @fab-button-icon-size;
-    font-size: @fab-button-icon-size;
+    width: var(--tfc-px-40);
+    height: var(--tfc-px-40);
+    font-size: var(--tfc-px-40);
     line-height: 1;
   }
 
   &__text {
     display: inline-block;
-    width: @fab-button-icon-size;
-    height: @fab-button-icon-size;
-    font-size: @fab-button-icon-size;
+    width: var(--tfc-px-40);
+    height: var(--tfc-px-40);
+    font-size: var(--tfc-px-40);
     line-height: 1;
     transition: transform 150ms cubic-bezier(0.4, 0, 1, 1);
 
@@ -181,7 +174,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: @fab-button-box-shadow;
+    box-shadow: 0 0 var(--tfc-px-8) rgba(0, 0, 0, 14%),
+      0 var(--tfc-px-8) var(--tfc-px-16) rgba(0, 0, 0, 28%);
     position: absolute;
     top: 0;
     left: 0;
@@ -207,10 +201,10 @@
   &__label {
     position: absolute;
     top: 50%;
-    padding: @fab-button-label-padding;
-    font-size: @font-size-sm;
+    padding: var(--tfc-px-8) var(--tfc-px-20);
+    font-size: var(--tfc-px-24);
     background: @fab-button-label-bg;
-    border-radius: @border-radius-base;
+    border-radius: var(--tfc-px-8);
     color: @fab-button-label-color;
     pointer-events: none;
     white-space: nowrap;

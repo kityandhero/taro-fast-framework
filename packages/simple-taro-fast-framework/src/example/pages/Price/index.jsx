@@ -51,7 +51,7 @@ export default class Index extends PageWrapper {
             }}
             prefixStyle={{
               fontSize: 'var(--tfc-px-6)',
-              marginRight: '5rpx',
+              marginRight: 'var(--tfc-px-5)',
             }}
             integerPartStyle={{ fontSize: 'var(--tfc-px-48)' }}
             pointStyle={{ fontSize: 'var(--tfc-px-48)' }}

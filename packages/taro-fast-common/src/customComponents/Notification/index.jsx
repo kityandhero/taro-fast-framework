@@ -23,7 +23,7 @@ const styleInit = {
   left: '0',
   lineHeight: '1.5',
   opacity: '0',
-  padding: 'var(--tfc-px-12) 20rpx',
+  padding: 'var(--tfc-px-12) var(--tfc-px-20)',
   position: 'fixed',
   right: '0',
   textAlign: 'center',

@@ -19,7 +19,7 @@ const boxStyle = {
   width: 'var(--tfc-px-80)',
   height: 'var(--tfc-px-80)',
   backgroundColor: 'blue',
-  margin: '20rpx',
+  margin: 'var(--tfc-px-20)',
 };
 
 const alignList = [

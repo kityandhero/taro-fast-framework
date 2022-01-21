@@ -288,16 +288,16 @@ class Circle extends ComponentBase {
             style={{
               ...style,
               ...{
-                width: `${size}rpx`,
-                height: `${size}rpx`,
+                width: `${size}px`,
+                height: `${size}px`,
               },
             }}
           >
             <View
               className={`${classPrefix}_body`}
               style={{
-                width: `${size}rpx`,
-                height: `${size}rpx`,
+                width: `${size}px`,
+                height: `${size}px`,
                 padding: '0',
                 border: '0',
               }}
@@ -329,12 +329,12 @@ class Circle extends ComponentBase {
                   style={{
                     ...backRingStyle,
                     ...{
-                      width: `${size - 1 - 2 * lineWidth}rpx`,
-                      height: `${size - 1 - 2 * lineWidth}rpx`,
+                      width: `${size - 1 - 2 * lineWidth}px`,
+                      height: `${size - 1 - 2 * lineWidth}px`,
                       borderRadius: '50%',
                       border: `${
                         lineAdjust + lineWidth
-                      }rpx solid ${backRingColor}`,
+                      }px solid ${backRingColor}`,
                     },
                   }}
                 ></View>
@@ -342,8 +342,8 @@ class Circle extends ComponentBase {
               <Canvas
                 type="2d"
                 style={{
-                  width: `${size}rpx`,
-                  height: `${size}rpx`,
+                  width: `${size}px`,
+                  height: `${size}px`,
                   zIndex: '5',
                   position: 'absolute',
                   top: 0,

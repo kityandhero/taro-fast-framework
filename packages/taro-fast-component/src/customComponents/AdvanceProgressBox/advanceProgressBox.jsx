@@ -85,7 +85,9 @@ class AdvanceProgressBox extends ComponentBase {
       if (!stringIsNullOrWhiteSpace(label)) {
         labelComponent = (
           <VerticalBox>
-            <View style={{ ...{ paddingRight: '20rpx' }, ...labelStyle }}>
+            <View
+              style={{ ...{ paddingRight: 'var(--tfc-px-20)' }, ...labelStyle }}
+            >
               {label}
             </View>
           </VerticalBox>

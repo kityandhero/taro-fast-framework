@@ -36,11 +36,11 @@ class Copyright extends ComponentBase {
       <View
         style={{
           ...style,
-          ...{ height: `${totalHeight}rpx` },
+          ...{ height: `${totalHeight}px` },
         }}
       >
         {showName ? (
-          <View style={{ height: `${nameHeight}rpx` }}>
+          <View style={{ height: `${nameHeight}px` }}>
             <CenterBox>
               <FlexBox
                 left={
@@ -84,13 +84,13 @@ class Copyright extends ComponentBase {
         ) : null}
 
         {showCopyright ? (
-          <View style={{ height: `${copyrightHeight}rpx` }}>
+          <View style={{ height: `${copyrightHeight}px` }}>
             <CenterBox>
               <View
                 style={{
                   ...{
                     color: '#00000073',
-                    fontSize: '20rpx',
+                    fontSize: 'var(--tfc-px-20)',
                   },
                   ...(!stringIsNullOrWhiteSpace(color)
                     ? {

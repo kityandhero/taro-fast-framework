@@ -190,7 +190,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
-          <View style={{ height: '300rpx', position: 'relative' }}>
+          <View style={{ height: 'var(--tfc-px-300)', position: 'relative' }}>
             <CenterBox>父容器</CenterBox>
 
             <Overlay

@@ -44,7 +44,7 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
         >
           <FlexBox
-            style={{ height: '300rpx' }}
+            style={{ height: 'var(--tfc-px-300)' }}
             direction="vertical"
             vertical={{
               bottomHeight: 'var(--tfc-px-80)',

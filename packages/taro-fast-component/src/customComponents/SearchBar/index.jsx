@@ -132,7 +132,7 @@ class SearchBar extends ComponentBase {
             zIndex: '6',
             top: '0',
             left: '0',
-            width: '70rpx',
+            width: 'var(--tfc-px-70)',
             height: '100%',
           }}
           onClick={this.triggerNavigate}
@@ -152,7 +152,7 @@ class SearchBar extends ComponentBase {
             ...placeholderStyle,
           }}
           style={{
-            paddingLeft: '70rpx',
+            paddingLeft: 'var(--tfc-px-70)',
           }}
           valueStyle={{
             ...{
@@ -170,7 +170,7 @@ class SearchBar extends ComponentBase {
                   style={{
                     ...{
                       fontSize: 'var(--tfc-px-28)',
-                      paddingLeft: '20rpx',
+                      paddingLeft: 'var(--tfc-px-20)',
                     },
                     ...searchStyle,
                   }}

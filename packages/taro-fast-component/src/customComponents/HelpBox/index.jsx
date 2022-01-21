@@ -79,7 +79,7 @@ class HelpBox extends ComponentBase {
 
     const labelWidth = toNumber(labelWidthValue ?? null);
 
-    const labelWidthStyle = labelWidth > 0 ? `${labelWidth}rpx` : 0;
+    const labelWidthStyle = labelWidth > 0 ? `${labelWidth}px` : 0;
 
     const customLabelWidth = labelWidth > 0;
 

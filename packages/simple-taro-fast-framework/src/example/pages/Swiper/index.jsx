@@ -56,7 +56,7 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图1" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: '300rpx' },
+            style: { height: 'var(--tfc-px-300)' },
             // indicatorColor: '#999',
             // indicatorActiveColor: '#333',
             circular: true,
@@ -83,7 +83,7 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 20rpx' }}>
+                <View style={{ height: '100%', padding: '0 var(--tfc-px-20)' }}>
                   <ImageBox src={image} />
                 </View>
               );
@@ -123,7 +123,7 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 20rpx' }}>
+                <View style={{ height: '100%', padding: '0 var(--tfc-px-20)' }}>
                   <ImageBox src={image} />
                 </View>
               );
@@ -173,7 +173,7 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 20rpx' }}>
+                <View style={{ height: '100%', padding: '0 var(--tfc-px-20)' }}>
                   <ImageBox src={image} />
                 </View>
               );

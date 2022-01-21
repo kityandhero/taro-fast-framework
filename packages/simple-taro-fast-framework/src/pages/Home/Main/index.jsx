@@ -38,7 +38,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <View style={{ margin: '20rpx 0' }}>
+        <View style={{ margin: 'var(--tfc-px-20) 0' }}>
           <CenterBox> Welcome To Taro-Fast-Framework! </CenterBox>
         </View>
 

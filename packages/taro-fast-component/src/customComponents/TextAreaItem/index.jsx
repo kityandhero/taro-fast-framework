@@ -240,7 +240,7 @@ class TextAreaItem extends ComponentBase {
               ...textareaStyle,
               ...{
                 width: '100%',
-                height: '300rpx',
+                height: 'var(--tfc-px-300)',
               },
             }}
             placeholderStyle={

@@ -2001,10 +2001,6 @@ export function bound(position, min, max) {
   return ret;
 }
 
-export function toRPX(val) {
-  return typeof val === 'number' ? `${val}rpx` : val;
-}
-
 export function colorHexToRGB(color, symbol = 'RGB') {
   // 16进制颜色值的正则
   const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
