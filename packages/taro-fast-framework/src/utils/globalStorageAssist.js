@@ -33,6 +33,7 @@ export const storageKeyCollection = {
   sessionIdRefreshing: 'sessionIdRefreshing',
   nextCheckLoginUnixTime: 'nextCheckLoginUnixTime',
   needSyncInfo: 'needSyncInfo',
+  locationMode: 'locationMode',
   lastLocation: 'lastLocation',
   remoteCheck: 'remoteCheck',
 };

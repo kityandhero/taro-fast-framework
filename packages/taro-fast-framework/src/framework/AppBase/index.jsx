@@ -5,13 +5,14 @@ import {
   getAppInitConfigData,
   recordObject,
   getDefaultTaroGlobalData,
+  setTaroGlobalData,
 } from 'taro-fast-common/es/utils/tools';
 
 import { getStore } from '../../utils/dvaAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
-class AppComponent extends Component {
+class AppBase extends Component {
   store = null;
 
   taroGlobalData = defaultTaroGlobalData;
@@ -19,7 +20,7 @@ class AppComponent extends Component {
   constructor(props, config, models) {
     super(props);
 
-    this.taroGlobalData.appInitCustomLocal = config;
+    this.setAppInitCustomLocal(config);
 
     this.initDva(models);
 
@@ -37,8 +38,10 @@ class AppComponent extends Component {
     }, 200);
   }
 
-  getModelsCollection() {
-    return this.modelsCollection;
+  setAppInitCustomLocal(config) {
+    this.taroGlobalData.appInitCustomLocal = config;
+
+    setTaroGlobalData(config);
   }
 
   initDva = (models) => {
@@ -54,4 +57,4 @@ class AppComponent extends Component {
   }
 }
 
-export default AppComponent;
+export default AppBase;

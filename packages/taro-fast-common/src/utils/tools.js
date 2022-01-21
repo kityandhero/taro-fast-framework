@@ -97,6 +97,34 @@ export function getTaroGlobalData() {
   return null;
 }
 
+export function setTaroGlobalData(config) {
+  const ENV = Taro.getEnv();
+
+  // 标签栏滚动
+  switch (ENV) {
+    case Taro.ENV_TYPE.WEAPP: {
+    }
+    case Taro.ENV_TYPE.ALIPAY: {
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+    }
+    case Taro.ENV_TYPE.SWAN: {
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+      break;
+    }
+    case Taro.ENV_TYPE.WEB: {
+      if (!isObject(window.taroGlobalData)) {
+        window.taroGlobalData = {};
+      }
+
+      window.taroGlobalData.appInitCustomLocal = config;
+    }
+    default: {
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+      break;
+    }
+  }
+}
+
 export function redirectTo(url) {
   Taro.redirectTo({
     url,

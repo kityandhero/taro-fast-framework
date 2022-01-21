@@ -136,6 +136,8 @@ class Tabs extends ComponentBase {
     this.getTabHeaderRef();
 
     this.updateScroll(this.props.current);
+
+    return null;
   };
 
   getDirection = () => {

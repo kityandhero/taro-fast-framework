@@ -200,7 +200,9 @@ class ComponentBase extends Component {
 
   doOtherCheckComponentUpdate = () => {};
 
-  doWorkWhenGetSnapshotBeforeUpdate = () => {};
+  doWorkWhenGetSnapshotBeforeUpdate = () => {
+    return null;
+  };
 
   doWhenCatchError = (error, info) => {
     showErrorMessage({
