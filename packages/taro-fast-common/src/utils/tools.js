@@ -57,6 +57,8 @@ let globalSystemInfo = null;
 export function getTaroGlobalData() {
   const app = Taro.getApp();
 
+  console.log({ app, store: app.store });
+
   if (isUndefined(app)) {
     return null;
   }

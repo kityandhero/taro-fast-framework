@@ -6,8 +6,10 @@ import {
   recordObject,
 } from 'taro-fast-common/es/utils/tools';
 
+import { getDefaultTaroGlobalData } from '../../utils/tools';
 import { getStore } from '../../utils/dvaAssist';
 
+const defaultTaroGlobalData = getDefaultTaroGlobalData();
 class AppComponent extends Component {
   /**
    * 此内部的方法不会产生控制台输出
@@ -34,6 +36,8 @@ class AppComponent extends Component {
   };
 
   initAppInitCustomLocal = () => {
+    console.log(this);
+
     this.taroGlobalData.appInitCustomLocal = this.establishConfig();
   };
 
@@ -47,9 +51,7 @@ class AppComponent extends Component {
 
   store = null;
 
-  taroGlobalData = {
-    test: 'success',
-  };
+  taroGlobalData = defaultTaroGlobalData;
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数

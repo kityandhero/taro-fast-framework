@@ -27,11 +27,15 @@ function checkKey(key) {
 export function getCachePool() {
   const taroGlobalData = getTaroGlobalData();
 
-  if ((taroGlobalData.localRunningCache || null) == null) {
-    taroGlobalData.localRunningCache = new nodeCache();
+  if (taroGlobalData) {
+    if ((taroGlobalData.localRunningCache || null) == null) {
+      taroGlobalData.localRunningCache = new nodeCache();
+    }
+
+    return taroGlobalData.localRunningCache;
   }
 
-  return taroGlobalData.localRunningCache;
+  return null;
 }
 
 /**

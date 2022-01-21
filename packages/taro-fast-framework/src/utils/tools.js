@@ -12,6 +12,12 @@ export function checkWhetherAuthorizeFail(code) {
   return authenticationFailCode === code;
 }
 
+export function getDefaultTaroGlobalData() {
+  return {
+    test: 'success',
+  };
+}
+
 /**
  * 占位函数
  *
