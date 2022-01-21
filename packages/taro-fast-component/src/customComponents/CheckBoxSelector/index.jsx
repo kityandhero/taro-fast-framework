@@ -5,7 +5,7 @@ import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Popup from '../Popup';
-import CheckBox from '../CheckBox';
+import CheckBox from '../Checkbox';
 import Item from '../Item';
 import Icon from '../Icon';
 

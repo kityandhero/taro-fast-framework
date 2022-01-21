@@ -1,46 +1,43 @@
+**/node_modules/**
+
+# fixtures
+**/fixtures/**
+
+# templates
+**/templates/**
+
+**/*.svg
+**/dist
+**/lib
+**/es
+**/public
+
+# file
 *.log
-*.md
 *.lock
 *.swp
+*.jpg
+*.jpeg
+*.rar
+*.zip
+*.7z
+*.ico
+*.png
+*.gif
+*.toml
+*.md
+LICENSE
 
-.cache
-.temp
-.idea
-.rn_temp
-.DS_Store
+# config file
+babel.config.js
+.browserslistrc
+.eslintrc
 .editorconfig
 .eslintignore
 .gitignore
 .prettierignore
 .prettierrc
 .stylelintignore
-LICENSE
 
-node_modules
-packages/**/coverage
-packages/**/dist
-packages/vantui/lib
-packages/vantui/es
-packages/vantui-doc/lib
-packages/vantui-doc/es
-packages/vantui-doc/dist
-packages/vantui/src/style/components/iconfont.less
-packages/vantui-demo/weapp
-packages/vantui-demo/alipay
-packages/vantui-demo/swan
-packages/vantui-demo/h5
-packages/vantui-demo/tt
-packages/vantui-demo/qq
-packages/vantui-demo/dd
-packages/vantui-demo/qywx
-packages/vantui-demo/jd
-packages/vantui-demo/iot
-packages/vantui-demo/build
-packages/vantui-demo/dist
-packages/react-demo/src/pages
-packages/react-demo/build
-packages/react-demo/dist
-packages/react-demo/config
-packages/react-demo/scripts
-packages/react-demo/public
-packages/vantui-doc
+# local special
+config
