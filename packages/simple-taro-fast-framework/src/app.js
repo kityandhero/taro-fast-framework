@@ -7,31 +7,31 @@ import models from './models';
 
 import './app.less';
 
+const config = {
+  showLogInConsole: checkEnvIsDevelopment(),
+  // showLogInConsole: true,
+  showRequestInfo: checkEnvIsDevelopment(),
+  // showRequestInfo: true,
+  showUseVirtualRequestMessage: false,
+  apiPrefix: {
+    corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',
+  },
+  apiSuccessCode: 200,
+  authenticationFailCode: 2001,
+  loginPath: '/user/login',
+  apiVersion: 'v1',
+};
+
 class App extends AppBase {
+  constructor(props) {
+    super(props, config, models);
+  }
+
   componentDidShow() {}
 
   componentDidHide() {}
 
   componentDidCatchError() {}
-
-  modelsCollection = models;
-
-  establishConfig = () => {
-    return {
-      showLogInConsole: checkEnvIsDevelopment(),
-      // showLogInConsole: true,
-      showRequestInfo: checkEnvIsDevelopment(),
-      // showRequestInfo: true,
-      showUseVirtualRequestMessage: false,
-      apiPrefix: {
-        corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',
-      },
-      apiSuccessCode: 200,
-      authenticationFailCode: 2001,
-      loginPath: '/user/login',
-      apiVersion: 'v1',
-    };
-  };
 
   loadRemoteMetaData = () => {
     const { dispatch } = this.store;

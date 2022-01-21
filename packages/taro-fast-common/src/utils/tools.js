@@ -54,16 +54,47 @@ const storageKeyCollection = {
 
 let globalSystemInfo = null;
 
+export function getDefaultTaroGlobalData() {
+  return {
+    test: 'success',
+  };
+}
+
 export function getTaroGlobalData() {
-  const app = Taro.getApp();
+  const ENV = Taro.getEnv();
 
-  console.log({ app, store: app.store });
+  // 标签栏滚动
+  switch (ENV) {
+    case Taro.ENV_TYPE.WEAPP: {
+      const app = Taro.getApp();
 
-  if (isUndefined(app)) {
-    return null;
+      if (isUndefined(app)) {
+        return null;
+      }
+
+      return app.$app.taroGlobalData;
+    }
+    case Taro.ENV_TYPE.ALIPAY: {
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+    }
+    case Taro.ENV_TYPE.SWAN: {
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+      break;
+    }
+    case Taro.ENV_TYPE.WEB: {
+      if (!window.taroGlobalData) {
+        window.taroGlobalData = getDefaultTaroGlobalData();
+      }
+
+      return window.taroGlobalData;
+    }
+    default: {
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+      break;
+    }
   }
 
-  return app.$app.taroGlobalData;
+  return null;
 }
 
 export function redirectTo(url) {
@@ -1164,9 +1195,18 @@ export function buildFieldDescription(v, op, other) {
  * @param {*} value
  */
 export function getStringFromLocalStorage(key) {
-  const result = Taro.getStorageSync(key);
+  try {
+    const result = Taro.getStorageSync(key);
 
-  return result;
+    return result;
+  } catch (e) {
+    recordError({
+      key,
+      e,
+    });
+
+    throw e;
+  }
 }
 
 /**

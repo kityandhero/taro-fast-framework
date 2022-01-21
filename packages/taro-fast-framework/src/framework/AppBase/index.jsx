@@ -4,20 +4,26 @@ import { Provider } from 'react-redux';
 import {
   getAppInitConfigData,
   recordObject,
+  getDefaultTaroGlobalData,
 } from 'taro-fast-common/es/utils/tools';
 
-import { getDefaultTaroGlobalData } from '../../utils/tools';
 import { getStore } from '../../utils/dvaAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
-class AppComponent extends Component {
-  /**
-   * 此内部的方法不会产生控制台输出
-   */
-  componentWillMount() {
-    this.initDva();
 
-    this.initAppInitCustomLocal();
+class AppComponent extends Component {
+  store = null;
+
+  taroGlobalData = defaultTaroGlobalData;
+
+  constructor(props, config, models) {
+    super(props);
+
+    this.taroGlobalData.appInitCustomLocal = config;
+
+    this.initDva(models);
+
+    console.log(this.store);
   }
 
   componentDidMount() {
@@ -31,27 +37,15 @@ class AppComponent extends Component {
     }, 200);
   }
 
-  initDva = () => {
-    this.store = getStore(this.modelsCollection);
-  };
+  getModelsCollection() {
+    return this.modelsCollection;
+  }
 
-  initAppInitCustomLocal = () => {
-    console.log(this);
-
-    this.taroGlobalData.appInitCustomLocal = this.establishConfig();
-  };
-
-  establishConfig = () => {
-    return null;
+  initDva = (models) => {
+    this.store = getStore(models);
   };
 
   loadRemoteMetaData = () => {};
-
-  modelsCollection = null;
-
-  store = null;
-
-  taroGlobalData = defaultTaroGlobalData;
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数

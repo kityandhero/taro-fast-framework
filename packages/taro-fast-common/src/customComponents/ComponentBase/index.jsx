@@ -92,17 +92,6 @@ class ComponentBase extends Component {
     };
   }
 
-  /**
-   * 该生命周期不产生控制台输出
-   */
-  componentWillMount() {
-    this.doWorkBeforeAdjustWillMount();
-
-    this.doWorkAdjustWillMount();
-
-    this.doWorkAfterAdjustWillMount();
-  }
-
   componentDidMount() {
     this.checkPermission();
 
@@ -189,12 +178,6 @@ class ComponentBase extends Component {
   componentDidHide() {
     this.doWorkWhenComponentHide();
   }
-
-  doWorkBeforeAdjustWillMount = () => {};
-
-  doWorkAdjustWillMount = () => {};
-
-  doWorkAfterAdjustWillMount = () => {};
 
   checkPermission = () => {};
 
