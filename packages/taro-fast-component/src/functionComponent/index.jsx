@@ -203,6 +203,28 @@ export function buildColorText({
   return wrapperBuilder(colorText);
 }
 
+export function buildOption({
+  label,
+  value,
+  title = '',
+  description = '',
+  disabled = false,
+  style = {},
+  extra = null,
+  prefix = null,
+}) {
+  return {
+    label,
+    value,
+    title,
+    description,
+    disabled,
+    style,
+    extra,
+    prefix,
+  };
+}
+
 /**
  * 占位函数
  *
