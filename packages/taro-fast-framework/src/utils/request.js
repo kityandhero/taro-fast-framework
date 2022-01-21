@@ -67,6 +67,10 @@ export class Request {
       const locationMode = getLocationMode();
 
       const headerChange = {
+        ...{
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         ...(header || {}),
         ...{
           openId,

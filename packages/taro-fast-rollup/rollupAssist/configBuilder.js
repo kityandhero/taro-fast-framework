@@ -7,6 +7,7 @@ import svgr from '@svgr/rollup';
 import url from 'rollup-plugin-url';
 import { terser } from 'rollup-plugin-terser';
 import babelConfig from '@rollup/plugin-babel';
+import pxtorem from 'postcss-pxtorem';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
@@ -21,6 +22,7 @@ const externalCollection = [
   'rollup-plugin-url',
   'rollup-plugin-terser',
   '@rollup/plugin-babel',
+  'postcss-pxtorem',
   'autoprefixer',
   'cssnano',
   'react',
@@ -82,7 +84,7 @@ export function buildConfig({
         tsconfig: 'tsconfig.json',
       }),
       postcss({
-        plugins: [autoprefixer(), cssnano()],
+        plugins: [pxtorem(), autoprefixer(), cssnano()],
         inject: { insertAt: 'top' },
         extract: true,
       }),

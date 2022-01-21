@@ -66,7 +66,7 @@ const config = {
     },
     devServer: {
       host: 'localhost',
-      port: 10086,
+      port: 8903,
     },
   },
 };
