@@ -1,20 +1,16 @@
 @hd: 2;
-@font-size-sm: 26rpx;
 @color-grey-2: #999;
 @color-grey-3: #ccc;
-@spacing-v-sm: 6rpx * @hd;
-@spacing-h-lg: 6rpx * @hd;
 @tfc-notice-bar-text-color: #de8c17;
 @tfc-notice-bar-bg-color: #fcf6ed;
 @line-height-zh: 1.5;
 @tfc-notice-bar-icon-size: 60rpx;
-@tfc-notice-bar-font-size: @font-size-sm;
 @tfc-notice-bar-btn-close-color: @color-grey-3;
 @tfc-notice-bar-btn-close-size: 64rpx;
 
 .tfc-notice-bar {
   position: relative;
-  padding: @spacing-v-sm @spacing-h-lg;
+  padding: var(--tfc-px-6) var(--tfc-px-6);
   color: @tfc-notice-bar-text-color;
   font-size: 0;
   background: @tfc-notice-bar-bg-color;
@@ -27,14 +23,14 @@
 
     &-icon {
       display: inline-block;
-      margin-right: 24rpx;
+      margin-right: var(--tfc-px-24);
       vertical-align: top;
       height: 38rpx;
     }
 
     &-text {
       display: inline;
-      font-size: @tfc-notice-bar-font-size;
+      font-size: var(--tfc-px-6);
     }
 
     &-inner {
@@ -43,7 +39,7 @@
   }
 
   &__close {
-    margin-right: 24rpx;
+    margin-right: var(--tfc-px-24);
     height: 38rpx;
     color: @tfc-notice-bar-btn-close-color;
     line-height: @line-height-zh;
@@ -54,19 +50,19 @@
     font-size: 0;
 
     .text {
-      font-size: @tfc-notice-bar-font-size;
+      font-size: var(--tfc-px-6);
       line-height: @line-height-zh;
       vertical-align: middle;
     }
 
     &-icon {
       display: inline-block;
-      width: @tfc-notice-bar-font-size;
+      width: var(--tfc-px-6);
       vertical-align: middle;
       overflow: hidden;
 
       .tfc-icon {
-        font-size: @tfc-notice-bar-font-size;
+        font-size: var(--tfc-px-6);
       }
     }
   }
@@ -112,7 +108,7 @@
         display: inline-block;
         white-space: nowrap;
         padding-left: 100%;
-        height: @tfc-notice-bar-font-size * 1.5;
+        height: var(--tfc-px-9);
         animation: marquee 8s linear infinite both;
         transform: translateZ(0);
       }

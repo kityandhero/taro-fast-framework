@@ -158,7 +158,7 @@ class HelpBox extends ComponentBase {
               ? labelWidthStyle
               : showNumber
               ? '44rpx'
-              : '24rpx',
+              : 'var(--tfc-px-24)',
             color: '#999',
             fontSize: '28rpx',
           }}

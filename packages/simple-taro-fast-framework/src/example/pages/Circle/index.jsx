@@ -73,7 +73,7 @@ export default class Index extends PageWrapper {
             <Circle
               style={{
                 border: '2rpx solid #ccc',
-                padding: '6rpx',
+                padding: 'var(--tfc-px-6)',
                 backgroundColor: '#fff',
               }}
               backRingColor="#ccc"

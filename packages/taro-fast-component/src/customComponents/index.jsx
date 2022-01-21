@@ -1,3 +1,5 @@
+import './global.less';
+
 export { default as Ellipsis } from './Ellipsis';
 export { default as Price } from './Price';
 export { default as ColorText } from './ColorText';
@@ -35,7 +37,7 @@ export { default as Steps } from './Steps';
 export { default as Transition } from './Transition';
 export { default as Radio } from './Radio';
 export { default as RadioSelector } from './RadioSelector';
-export { default as CheckBox } from './Checkbox';
+export { default as CheckBox } from './CheckBox';
 export { default as CheckBoxSelector } from './CheckBoxSelector';
 export { Badge } from './Badge';
 export { Spin } from './Spin';

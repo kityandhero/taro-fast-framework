@@ -5,7 +5,7 @@ import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Popup from '../Popup';
-import CheckBox from '../Checkbox';
+import CheckBox from '../CheckBox';
 import Item from '../Item';
 import Icon from '../Icon';
 
@@ -140,7 +140,7 @@ class CheckBoxSelector extends ComponentBase {
           }
           extraContainerStyle={{
             ...{
-              paddingRight: '24rpx',
+              paddingRight: 'var(--tfc-px-24)',
             },
             ...extraContainerStyle,
           }}

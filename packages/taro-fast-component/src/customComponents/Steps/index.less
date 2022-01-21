@@ -1,4 +1,5 @@
 @class-prefix-step: ~'tfc-step';
+@class-prefix-steps: ~'tfc-steps';
 
 .@{class-prefix-step} {
   --line-to-next-color: #e5e5e5;
@@ -52,8 +53,8 @@
 }
 
 .@{class-prefix-steps} {
-  --title-font-size: 26rpx;
-  --description-font-size: 24rpx;
+  --title-font-size: var(--tfc-px-6);
+  --description-font-size: var(--tfc-px-24);
   --indicator-margin-right: 0;
   --icon-size: 18px;
 
@@ -63,7 +64,7 @@
   &-horizontal {
     display: flex;
     justify-content: space-around;
-    padding: 16rpx 0;
+    padding: var(--tfc-px-16) 0;
 
     .@{class-prefix-step} {
       flex: 1;
@@ -102,7 +103,7 @@
   }
 
   &-vertical {
-    padding: 16rpx 32rpx;
+    padding: var(--tfc-px-16) var(--tfc-px-32);
 
     .@{class-prefix-step} {
       display: flex;
@@ -110,7 +111,7 @@
 
       .@{class-prefix-step}-indicator {
         flex: none;
-        width: 48rpx;
+        width: var(--tfc-px-48);
         margin-right: var(--indicator-margin-right);
 
         &::after {
@@ -155,8 +156,8 @@
 
 .@{class-prefix-step}-icon-dot {
   display: block;
-  width: 16rpx;
-  height: 16rpx;
+  width: var(--tfc-px-16);
+  height: var(--tfc-px-16);
   background: currentColor;
   border-radius: 8rpx;
 }

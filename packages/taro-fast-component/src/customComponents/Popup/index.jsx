@@ -358,8 +358,8 @@ class Popup extends ComponentBase {
               style={{
                 ...closeIconStyle,
                 ...{
-                  top: mode !== 'card' ? '12rpx' : '32rpx',
-                  right: mode !== 'card' ? '12rpx' : '32rpx',
+                  top: mode !== 'card' ? '12rpx' : 'var(--tfc-px-32)',
+                  right: mode !== 'card' ? '12rpx' : 'var(--tfc-px-32)',
                   height: '40rpx',
                   width: '40rpx',
                   position: 'absolute',
@@ -403,7 +403,12 @@ class Popup extends ComponentBase {
                 ? height
                 : {}),
               ...(inCollection(['left', 'right'], position)
-                ? { height: mode !== 'card' ? '100%' : 'calc(100% - 48rpx)' }
+                ? {
+                    height:
+                      mode !== 'card'
+                        ? '100%'
+                        : 'calc(100% - var(--tfc-px-48))',
+                  }
                 : {}),
               ...arcStyle,
             }}

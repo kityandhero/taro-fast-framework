@@ -64,7 +64,7 @@ class Copyright extends ComponentBase {
                         style={{
                           ...{
                             color: '#00000073',
-                            fontSize: '24rpx',
+                            fontSize: 'var(--tfc-px-24)',
                           },
                           ...(!stringIsNullOrWhiteSpace(color)
                             ? {

@@ -41,7 +41,11 @@ export default class Index extends PageWrapper {
         <Card header="显示三行文字" headerStyle={cardHeaderStyle}>
           <Ellipsis
             line={3}
-            style={{ height: '132rpx', fontSize: '28rpx', lineHeight: '44rpx' }}
+            style={{
+              height: '1var(--tfc-px-32)',
+              fontSize: '28rpx',
+              lineHeight: '44rpx',
+            }}
             onClick={() => {
               console.log('ellipsis click');
             }}

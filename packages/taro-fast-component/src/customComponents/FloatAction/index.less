@@ -15,7 +15,7 @@
 @text-color-dark: fade(@white, 85%);
 @text-color-inverse: @white;
 @fab-button-box-shadow: 0 0 8rpx rgba(0, 0, 0, 0.14),
-  0 8rpx 16rpx rgba(0, 0, 0, 0.28);
+  0 8rpx var(--tfc-px-16) rgba(0, 0, 0, 0.28);
 @fab-button-label-color: @text-color-dark;
 @fab-button-label-bg: rgba(0, 0, 0, 0.4);
 @fab-button-label-padding: 8rpx @spacing-base;
@@ -32,7 +32,7 @@
 @z-index-float-action: 1020;
 @backdrop-background-inverse: transparent;
 @border-radius-base: 8rpx;
-@font-size-sm: 24rpx;
+@font-size-sm: var(--tfc-px-24);
 
 .fab-button-style(@theme, @color) {
   &--@{theme} &__action,

@@ -112,9 +112,9 @@ class AdvanceSwitch extends ComponentBase {
                     display: 'inline-block',
                     verticalAlign: 'middle',
                     textAlign: 'center',
-                    width: '24rpx',
-                    height: '45rpx',
-                    lineHeight: '45rpx',
+                    width: 'var(--tfc-px-24)',
+                    height: 'var(--tfc-px-45)',
+                    lineHeight: 'var(--tfc-px-45)',
                     color: 'red',
                   }}
                 >

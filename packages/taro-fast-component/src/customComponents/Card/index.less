@@ -5,7 +5,7 @@
   --border-inner: solid 2rpx var(--tfc-border-color);
   --border-top: solid 2rpx var(--tfc-border-color);
   --border-bottom: solid 2rpx var(--tfc-border-color);
-  --padding-left: 24rpx;
+  --padding-left: var(--tfc-px-24);
 
   background-color: #fff;
   overflow: hidden;
@@ -14,7 +14,7 @@
   &-header {
     color: var(--tfc-color-weak);
     font-size: 30rpx;
-    padding: 16rpx 18rpx;
+    padding: var(--tfc-px-16) 18rpx;
   }
 
   &-body {
@@ -37,9 +37,9 @@
     border-top: var(--border-bottom);
     color: var(--tfc-color-weak);
     font-size: 28rpx;
-    padding-left: 24rpx;
-    padding-top: 16rpx;
-    padding-bottom: 16rpx;
+    padding-left: var(--tfc-px-24);
+    padding-top: var(--tfc-px-16);
+    padding-bottom: var(--tfc-px-16);
   }
 
   &-through {
@@ -48,7 +48,7 @@
   }
 
   &-card {
-    margin: 24rpx;
-    border-radius: 16rpx;
+    margin: var(--tfc-px-24);
+    border-radius: var(--tfc-px-16);
   }
 }

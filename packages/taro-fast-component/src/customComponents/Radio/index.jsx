@@ -23,10 +23,10 @@ const layoutCollection = ['list', 'radio'];
 
 const iconContainerStyle = {
   border: '2rpx solid #ccc',
-  width: '32rpx',
-  height: '32rpx',
+  width: 'var(--tfc-px-32)',
+  height: 'var(--tfc-px-32)',
   padding: '4rpx',
-  lineHeight: '32rpx',
+  lineHeight: 'var(--tfc-px-32)',
   borderRadius: '50%',
 };
 
@@ -159,7 +159,7 @@ class Radio extends ComponentBase {
                 }
                 extraContainerStyle={{
                   ...{
-                    paddingRight: '24rpx',
+                    paddingRight: 'var(--tfc-px-24)',
                   },
                   ...extraContainerStyle,
                 }}
@@ -208,7 +208,7 @@ class Radio extends ComponentBase {
               }
               extraContainerStyle={{
                 ...{
-                  paddingRight: '24rpx',
+                  paddingRight: 'var(--tfc-px-24)',
                 },
                 ...extraContainerStyle,
               }}

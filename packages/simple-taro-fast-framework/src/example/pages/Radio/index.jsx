@@ -10,7 +10,7 @@ const style = { backgroundColor: '#f5f7fa' };
 
 const extraStyle = {
   padding: '0 12rpx',
-  fontSize: '24rpx',
+  fontSize: 'var(--tfc-px-24)',
   color: '#aaa',
 };
 

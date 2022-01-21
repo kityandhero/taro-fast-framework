@@ -73,7 +73,7 @@ class StepperItem extends ComponentBase {
         }
         extraContainerStyle={{
           ...{
-            paddingRight: '24rpx',
+            paddingRight: 'var(--tfc-px-24)',
           },
           ...extraContainerStyle,
         }}

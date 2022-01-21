@@ -85,18 +85,18 @@ class DataGrid extends ComponentBase {
         column = 3;
       }
 
-      let margin = '32rpx 48rpx';
+      let margin = 'var(--tfc-px-32) var(--tfc-px-48)';
       let paddingBottomNoBorder = '12rpx';
       let backgroundColor = '';
 
       if (sizeSource === 'middle') {
-        margin = '24rpx 48rpx';
-        paddingBottomNoBorder = '24rpx';
+        margin = 'var(--tfc-px-24) var(--tfc-px-48)';
+        paddingBottomNoBorder = 'var(--tfc-px-24)';
       }
 
       if (sizeSource === 'small') {
-        margin = '16rpx 32rpx';
-        paddingBottomNoBorder = '16rpx';
+        margin = 'var(--tfc-px-16) var(--tfc-px-32)';
+        paddingBottomNoBorder = 'var(--tfc-px-16)';
       }
 
       const columnSize = 12 / column;
@@ -129,7 +129,7 @@ class DataGrid extends ComponentBase {
         ...(bordered
           ? {
               ...{
-                margin: '32rpx 48rpx',
+                margin: 'var(--tfc-px-32) var(--tfc-px-48)',
               },
 
               ...{ margin },
@@ -140,10 +140,10 @@ class DataGrid extends ComponentBase {
       const titleComponent = stringIsNullOrWhiteSpace(title) ? null : (
         <View
           style={{
-            marginBottom: '16rpx',
+            marginBottom: 'var(--tfc-px-16)',
             color: '#000000d9',
             fontWeight: 500,
-            fontSize: '32rpx',
+            fontSize: 'var(--tfc-px-32)',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
           }}

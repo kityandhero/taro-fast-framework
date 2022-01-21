@@ -23,11 +23,11 @@ const layoutCollection = ['list', 'checkBox'];
 
 const iconContainerStyle = {
   border: '2rpx solid #ccc',
-  width: '26rpx',
-  height: '26rpx',
+  width: 'var(--tfc-px-6)',
+  height: 'var(--tfc-px-6)',
   padding: '4rpx',
-  lineHeight: '26rpx',
-  borderRadius: '6rpx',
+  lineHeight: 'var(--tfc-px-6)',
+  borderRadius: 'var(--tfc-px-6)',
 };
 
 const uncheckStatusIcon = (
@@ -189,7 +189,7 @@ class CheckBox extends ComponentBase {
                 }
                 extraContainerStyle={{
                   ...{
-                    paddingRight: '24rpx',
+                    paddingRight: 'var(--tfc-px-24)',
                   },
                   ...extraContainerStyle,
                 }}
@@ -237,7 +237,7 @@ class CheckBox extends ComponentBase {
               }
               extraContainerStyle={{
                 ...{
-                  paddingRight: '24rpx',
+                  paddingRight: 'var(--tfc-px-24)',
                 },
                 ...extraContainerStyle,
               }}
