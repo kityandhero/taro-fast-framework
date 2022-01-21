@@ -48,7 +48,7 @@ class Copyright extends ComponentBase {
                     <VerticalBox>
                       <View
                         style={{
-                          padding: '10rpx 10rpx',
+                          padding: 'var(--tfc-px-10) var(--tfc-px-10)',
                           width: '40rpx',
                         }}
                       >

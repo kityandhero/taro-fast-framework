@@ -55,7 +55,7 @@ export default class Index extends PageWrapper {
           <SearchBar
             style={{
               margin: '40rpx',
-              borderRadius: '100rpx',
+              borderRadius: 'var(--tfc-px-100)',
             }}
             mode="search"
             onSearch={this.handleSearch}
@@ -71,7 +71,7 @@ export default class Index extends PageWrapper {
           <SearchBar
             style={{
               margin: '40rpx',
-              borderRadius: '100rpx',
+              borderRadius: 'var(--tfc-px-100)',
             }}
             mode="navigate"
             searchStyle={{}}
@@ -81,7 +81,7 @@ export default class Index extends PageWrapper {
           <SearchBar
             style={{
               margin: '40rpx',
-              borderRadius: '100rpx',
+              borderRadius: 'var(--tfc-px-100)',
             }}
             mode="navigate"
             showSearch={false}
@@ -98,7 +98,7 @@ export default class Index extends PageWrapper {
           <SearchBar
             style={{
               margin: '40rpx',
-              borderRadius: '100rpx',
+              borderRadius: 'var(--tfc-px-100)',
             }}
             align="center"
             icon={<IconSketch size={14} color="#6b6ead" />}

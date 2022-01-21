@@ -13,23 +13,27 @@ export default class Index extends PageWrapper {
           <Ellipsis
             line={1}
             style={{
-              width: '250rpx',
-              fontSize: '28rpx',
-              lineHeight: '44rpx',
-              height: '44rpx',
+              width: '2var(--tfc-px-50)',
+              fontSize: 'var(--tfc-px-28)',
+              lineHeight: 'var(--tfc-px-44)',
+              height: 'var(--tfc-px-44)',
             }}
             onClick={() => {
               console.log('ellipsis click');
             }}
           >
-            这是一段宽度限制 250rpx 的文字，后面的内容会省略。
+            这是一段宽度限制 2var(--tfc-px-50) 的文字，后面的内容会省略。
           </Ellipsis>
         </Card>
 
         <Card header="显示两行文字" headerStyle={cardHeaderStyle}>
           <Ellipsis
             line={2}
-            style={{ height: '88rpx', fontSize: '28rpx', lineHeight: '44rpx' }}
+            style={{
+              height: 'var(--tfc-px-88)',
+              fontSize: 'var(--tfc-px-28)',
+              lineHeight: 'var(--tfc-px-44)',
+            }}
             onClick={() => {
               console.log('ellipsis click');
             }}
@@ -43,8 +47,8 @@ export default class Index extends PageWrapper {
             line={3}
             style={{
               height: '1var(--tfc-px-32)',
-              fontSize: '28rpx',
-              lineHeight: '44rpx',
+              fontSize: 'var(--tfc-px-28)',
+              lineHeight: 'var(--tfc-px-44)',
             }}
             onClick={() => {
               console.log('ellipsis click');

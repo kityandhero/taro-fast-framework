@@ -7,8 +7,8 @@
     --tfc-button-background-color,
     var(--tfc-color-white)
   );
-  --border-radius: var(--tfc-button-border-radius, 8rpx);
-  --border-width: var(--tfc-button-border-width, 2rpx);
+  --border-radius: var(--tfc-button-border-radius, var(--tfc-px-8));
+  --border-width: var(--tfc-button-border-width, var(--tfc-px-2));
   --border-style: var(--tfc-button-border-style, solid);
   --border-color: var(--tfc-button-border-color, var(--tfc-border-color));
 
@@ -20,7 +20,7 @@
   height: auto;
   padding: 15rpx var(--tfc-px-24);
   margin: 0;
-  font-size: 30rpx;
+  font-size: var(--tfc-px-30);
   line-height: 1.4;
   text-align: center;
   border: var(--border-width) var(--border-style) var(--border-color);
@@ -113,20 +113,20 @@
     padding-bottom: var(--tfc-px-6);
     font-size: var(--tfc-px-6);
     &.@{class-prefix-button}-shape-rounded {
-      padding-left: 18rpx;
-      padding-right: 18rpx;
+      padding-left: var(--tfc-px-18);
+      padding-right: var(--tfc-px-18);
     }
   }
 
   &&-small {
     padding-top: var(--tfc-px-6);
     padding-bottom: var(--tfc-px-6);
-    font-size: 30rpx;
+    font-size: var(--tfc-px-30);
   }
 
   &&-large {
-    padding-top: 22rpx;
-    padding-bottom: 22rpx;
+    padding-top: var(--tfc-px-22);
+    padding-bottom: var(--tfc-px-22);
     font-size: var(--tfc-px-36);
   }
 

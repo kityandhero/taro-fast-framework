@@ -66,7 +66,7 @@ class AdvanceProgress extends ComponentBase {
 
     const iconContainerStyle = {
       ...{
-        paddingLeft: '10rpx',
+        paddingLeft: 'var(--tfc-px-10)',
       },
       ...iconContainerStyleSource,
       ...{},

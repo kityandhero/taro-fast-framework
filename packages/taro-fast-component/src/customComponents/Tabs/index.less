@@ -1,12 +1,8 @@
 @hd: 2;
-@spacing-v-lg: 12rpx * @hd;
-@spacing-h-lg: 12rpx * @hd;
 @color-text-base: #333;
 @tfc-tabs-color: @color-text-base;
-@font-size-base: 14rpx * @hd;
-@tfc-tabs-font-size: @font-size-base;
 @tfc-tabs-pane-min-height: 200rpx;
-@tfc-tabs-line-height: 2rpx;
+@tfc-tabs-line-height: var(--tfc-px-2);
 @color-bg: #fff;
 @tfc-tabs-bg-color: @color-bg;
 @color-grey-5: #f0f0f0;
@@ -25,9 +21,9 @@
   &__item {
     position: relative;
     flex: 1;
-    padding: @spacing-v-lg @spacing-h-lg;
+    padding: var(--tfc-px-12) var(--tfc-px-12);
     color: @tfc-tabs-color;
-    font-size: @tfc-tabs-font-size;
+    font-size: var(--tfc-px-14);
     text-overflow: ellipsis;
     overflow: hidden;
 

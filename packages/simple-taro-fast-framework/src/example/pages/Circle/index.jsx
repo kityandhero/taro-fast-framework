@@ -72,7 +72,7 @@ export default class Index extends PageWrapper {
           <Space direction="vertical" fillWidth>
             <Circle
               style={{
-                border: '2rpx solid #ccc',
+                border: 'var(--tfc-px-2) solid #ccc',
                 padding: 'var(--tfc-px-6)',
                 backgroundColor: '#fff',
               }}
@@ -86,13 +86,13 @@ export default class Index extends PageWrapper {
             >
               <View
                 style={{
-                  height: '100rpx',
+                  height: 'var(--tfc-px-100)',
                 }}
               >
                 <FlexBox
                   direction="vertical"
                   bottomStyle={{
-                    height: '80rpx',
+                    height: 'var(--tfc-px-80)',
                   }}
                   top={
                     <HorizontalCenterBox>
@@ -145,7 +145,7 @@ export default class Index extends PageWrapper {
                   style={
                     {
                       // backgroundColor: '#ccc',
-                      // border: '10rpx solid #ccc',
+                      // border: 'var(--tfc-px-10) solid #ccc',
                     }
                   }
                   backRingColor="#ccc"

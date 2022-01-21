@@ -15,7 +15,7 @@ const defaultProps = {
   allowWrap: false,
   vertical: {
     minHeight: 'auto',
-    bottomHeight: '180rpx',
+    bottomHeight: '1var(--tfc-px-80)',
   },
   left: null,
   leftStyle: {},
@@ -89,7 +89,7 @@ class FlexBox extends ComponentBase {
 
     const { minHeight, bottomHeight } = {
       ...{
-        bottomHeight: '180rpx',
+        bottomHeight: '1var(--tfc-px-80)',
       },
       ...(vertical || {}),
     };

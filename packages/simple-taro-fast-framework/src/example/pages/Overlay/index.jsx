@@ -14,8 +14,8 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 const style = { backgroundColor: '#f5f7fa' };
 
 const boxStyle = {
-  width: '80rpx',
-  height: '80rpx',
+  width: 'var(--tfc-px-80)',
+  height: 'var(--tfc-px-80)',
   backgroundColor: 'blue',
 };
 

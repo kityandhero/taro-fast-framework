@@ -101,7 +101,7 @@ class SearchBar extends ComponentBase {
       <View
         style={{
           ...{
-            // padding: '12rpx 28rpx',
+            // padding: 'var(--tfc-px-12) var(--tfc-px-28)',
             backgroundColor: '#f7f8fa',
             overflow: 'hidden',
           },
@@ -147,7 +147,7 @@ class SearchBar extends ComponentBase {
           placeholder={placeholder}
           placeholderStyle={{
             ...{
-              fontSize: '28rpx',
+              fontSize: 'var(--tfc-px-28)',
             },
             ...placeholderStyle,
           }}
@@ -156,7 +156,7 @@ class SearchBar extends ComponentBase {
           }}
           valueStyle={{
             ...{
-              padding: '10rpx 0 10rpx 0',
+              padding: 'var(--tfc-px-10) 0 var(--tfc-px-10) 0',
             },
             valueStyle,
           }}
@@ -169,7 +169,7 @@ class SearchBar extends ComponentBase {
                 <View
                   style={{
                     ...{
-                      fontSize: '28rpx',
+                      fontSize: 'var(--tfc-px-28)',
                       paddingLeft: '20rpx',
                     },
                     ...searchStyle,
@@ -185,7 +185,7 @@ class SearchBar extends ComponentBase {
             showSearch
               ? {
                   ...{
-                    padding: '0 2rpx 0 0',
+                    padding: '0 var(--tfc-px-2) 0 0',
                   },
                 }
               : {}

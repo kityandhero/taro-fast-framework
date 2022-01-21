@@ -6,13 +6,13 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const boxStyle = {
-  width: '80rpx',
-  height: '80rpx',
+  width: 'var(--tfc-px-80)',
+  height: 'var(--tfc-px-80)',
   backgroundColor: 'blue',
 };
 
 const autoStyle = {
-  height: '80rpx',
+  height: 'var(--tfc-px-80)',
   backgroundColor: '#ccc',
 };
 
@@ -47,7 +47,7 @@ export default class Index extends PageWrapper {
             style={{ height: '300rpx' }}
             direction="vertical"
             vertical={{
-              bottomHeight: '80rpx',
+              bottomHeight: 'var(--tfc-px-80)',
             }}
             top={
               <View
@@ -56,7 +56,10 @@ export default class Index extends PageWrapper {
             }
             bottom={
               <View
-                style={{ ...boxStyle, ...{ width: '100%', height: '80rpx' } }}
+                style={{
+                  ...boxStyle,
+                  ...{ width: '100%', height: 'var(--tfc-px-80)' },
+                }}
               ></View>
             }
           />

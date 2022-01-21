@@ -93,7 +93,10 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="Buttons Color" headerStyle={cardHeaderStyle}>
-          <VerticalBox style={{ height: '100rpx' }} alignJustify="center">
+          <VerticalBox
+            style={{ height: 'var(--tfc-px-100)' }}
+            alignJustify="center"
+          >
             <Space wrap>
               {buildAdvanceButton({
                 inner: 'default',
@@ -184,10 +187,13 @@ export default class Index extends PageWrapper {
         <Card header="联动 reloading" headerStyle={cardHeaderStyle}>
           <Spin spin={!firstLoadSuccess}>
             <FadeView show={!dataLoading}>
-              <VerticalBox style={{ height: '50rpx' }} alignJustify="center">
+              <VerticalBox
+                style={{ height: 'var(--tfc-px-50)' }}
+                alignJustify="center"
+              >
                 <Space direction="vertical">
                   <VerticalBox
-                    style={{ height: '100rpx' }}
+                    style={{ height: 'var(--tfc-px-100)' }}
                     alignJustify="center"
                   >
                     <Empty

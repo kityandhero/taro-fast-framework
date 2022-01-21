@@ -246,7 +246,7 @@ class AdvanceInput extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: '28rpx',
+                    fontSize: 'var(--tfc-px-28)',
                   },
                   ...labelStyle,
                 }}
@@ -273,7 +273,7 @@ class AdvanceInput extends ComponentBase {
         title={title}
         description={description}
         contentStyle={{
-          ...{ width: '180rpx' },
+          ...{ width: '1var(--tfc-px-80)' },
           ...contentStyle,
           ...{
             flex: 'none',
@@ -294,8 +294,8 @@ class AdvanceInput extends ComponentBase {
                     type={type}
                     style={{
                       ...{
-                        fontSize: '28rpx',
-                        padding: '22rpx 0 22rpx 0',
+                        fontSize: 'var(--tfc-px-28)',
+                        padding: 'var(--tfc-px-22) 0 var(--tfc-px-22) 0',
                       },
                       ...valueStyle,
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
@@ -334,7 +334,7 @@ class AdvanceInput extends ComponentBase {
                   clearable ? (
                     <View
                       style={{
-                        paddingLeft: '10rpx',
+                        paddingLeft: 'var(--tfc-px-10)',
                         height: '100%',
                       }}
                       onClick={this.clearValue}
@@ -357,7 +357,7 @@ class AdvanceInput extends ComponentBase {
               extra
                 ? {
                     ...{
-                      fontSize: '28rpx',
+                      fontSize: 'var(--tfc-px-28)',
                     },
                     ...extraContainerStyle,
                   }

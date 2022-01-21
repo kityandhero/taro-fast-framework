@@ -11,14 +11,14 @@
 @stable-inverse: #b2b2b2;
 @disabled-opacity: 0.3;
 @fab-button-icon-size: 40rpx;
-@fab-button-action-size: 100rpx;
+@fab-button-action-size: var(--tfc-px-100);
 @text-color-dark: fade(@white, 85%);
 @text-color-inverse: @white;
-@fab-button-box-shadow: 0 0 8rpx rgba(0, 0, 0, 0.14),
-  0 8rpx var(--tfc-px-16) rgba(0, 0, 0, 0.28);
+@fab-button-box-shadow: 0 0 var(--tfc-px-8) rgba(0, 0, 0, 0.14),
+  0 var(--tfc-px-8) var(--tfc-px-16) rgba(0, 0, 0, 0.28);
 @fab-button-label-color: @text-color-dark;
 @fab-button-label-bg: rgba(0, 0, 0, 0.4);
-@fab-button-label-padding: 8rpx @spacing-base;
+@fab-button-label-padding: var(--tfc-px-8) @spacing-base;
 @fab-button-light-bg: @light-inverse;
 @fab-button-stable-bg: @stable-inverse;
 @fab-button-positive-bg: @positive;
@@ -31,7 +31,7 @@
 @z-index-backdrop: 1000;
 @z-index-float-action: 1020;
 @backdrop-background-inverse: transparent;
-@border-radius-base: 8rpx;
+@border-radius-base: var(--tfc-px-8);
 @font-size-sm: var(--tfc-px-24);
 
 .fab-button-style(@theme, @color) {
@@ -92,23 +92,23 @@
   }
 
   &--topLeft {
-    left: 30rpx;
-    top: 30rpx;
+    left: var(--tfc-px-30);
+    top: var(--tfc-px-30);
   }
 
   &--topRight {
-    right: 30rpx;
-    top: 30rpx;
+    right: var(--tfc-px-30);
+    top: var(--tfc-px-30);
   }
 
   &--bottomLeft {
-    left: 30rpx;
-    bottom: 30rpx;
+    left: var(--tfc-px-30);
+    bottom: var(--tfc-px-30);
   }
 
   &--bottomRight {
-    right: 30rpx;
-    bottom: 30rpx;
+    right: var(--tfc-px-30);
+    bottom: var(--tfc-px-30);
   }
 
   &--vertical&--topLeft &__label,

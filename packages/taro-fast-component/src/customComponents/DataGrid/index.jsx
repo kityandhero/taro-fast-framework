@@ -86,7 +86,7 @@ class DataGrid extends ComponentBase {
       }
 
       let margin = 'var(--tfc-px-32) var(--tfc-px-48)';
-      let paddingBottomNoBorder = '12rpx';
+      let paddingBottomNoBorder = 'var(--tfc-px-12)';
       let backgroundColor = '';
 
       if (sizeSource === 'middle') {
@@ -109,13 +109,16 @@ class DataGrid extends ComponentBase {
       }
 
       const containorStyle = bordered
-        ? { borderTop: '2rpx solid #f0f0f0', borderLeft: '2rpx solid #f0f0f0' }
+        ? {
+            borderTop: 'var(--tfc-px-2) solid #f0f0f0',
+            borderLeft: 'var(--tfc-px-2) solid #f0f0f0',
+          }
         : null;
 
       const labelStyle = {
         ...{
-          fontSize: '30rpx',
-          width: '180rpx',
+          fontSize: 'var(--tfc-px-30)',
+          width: '1var(--tfc-px-80)',
         },
         ...(labelStyleSource || {}),
         ...(bordered ? { margin } : {}),
@@ -123,7 +126,7 @@ class DataGrid extends ComponentBase {
 
       const contentStyle = {
         ...{
-          fontSize: '30rpx',
+          fontSize: 'var(--tfc-px-30)',
         },
         ...(contentStyleSource || {}),
         ...(bordered
@@ -169,8 +172,8 @@ class DataGrid extends ComponentBase {
 
               const itemStyle = bordered
                 ? {
-                    borderRight: '2rpx solid #f0f0f0',
-                    borderBottom: '2rpx solid #f0f0f0',
+                    borderRight: 'var(--tfc-px-2) solid #f0f0f0',
+                    borderBottom: 'var(--tfc-px-2) solid #f0f0f0',
                   }
                 : {
                     paddingBottom: paddingBottomNoBorder,
@@ -229,7 +232,7 @@ class DataGrid extends ComponentBase {
                     leftStyle={{
                       ...{ backgroundColor },
                       ...(bordered
-                        ? { borderRight: '2rpx solid #f0f0f0' }
+                        ? { borderRight: 'var(--tfc-px-2) solid #f0f0f0' }
                         : {}),
                     }}
                     right={

@@ -61,7 +61,7 @@ class Price extends ComponentBase {
 
     const itemStyle = {
       ...{
-        fontSize: '28rpx',
+        fontSize: 'var(--tfc-px-28)',
       },
       ...itemStyleSource,
       ...{

@@ -2,29 +2,29 @@
   --prefix-width: 'auto';
   --align-items: center;
   --active-background-color: var(--tfc-border-color);
-  --border-inner: solid 2rpx var(--tfc-border-color);
-  --border-top: solid 2rpx var(--tfc-border-color);
-  --border-bottom: solid 2rpx var(--tfc-border-color);
+  --border-inner: solid var(--tfc-px-2) var(--tfc-border-color);
+  --border-top: solid var(--tfc-px-2) var(--tfc-border-color);
+  --border-bottom: solid var(--tfc-px-2) var(--tfc-border-color);
   --padding-left: var(--tfc-px-24);
 
   background-color: #fff;
   overflow: hidden;
-  font-size: 34rpx;
+  font-size: var(--tfc-px-34);
 
   &-header {
     color: var(--tfc-color-weak);
-    font-size: 30rpx;
-    padding: var(--tfc-px-16) 18rpx;
+    font-size: var(--tfc-px-30);
+    padding: var(--tfc-px-16) var(--tfc-px-18);
   }
 
   &-body {
     background-color: #fff;
     overflow: hidden;
-    font-size: 34rpx;
+    font-size: var(--tfc-px-34);
     border-top: var(--border-top);
 
     &-inner {
-      margin-bottom: -2rpx;
+      margin-bottom: -var(--tfc-px-2);
     }
   }
 
@@ -36,7 +36,7 @@
     background-color: #fff;
     border-top: var(--border-bottom);
     color: var(--tfc-color-weak);
-    font-size: 28rpx;
+    font-size: var(--tfc-px-28);
     padding-left: var(--tfc-px-24);
     padding-top: var(--tfc-px-16);
     padding-bottom: var(--tfc-px-16);

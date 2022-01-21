@@ -22,10 +22,10 @@ const { IconCheck } = Icon;
 const layoutCollection = ['list', 'checkBox'];
 
 const iconContainerStyle = {
-  border: '2rpx solid #ccc',
+  border: 'var(--tfc-px-2) solid #ccc',
   width: 'var(--tfc-px-6)',
   height: 'var(--tfc-px-6)',
-  padding: '4rpx',
+  padding: 'var(--tfc-px-4)',
   lineHeight: 'var(--tfc-px-6)',
   borderRadius: 'var(--tfc-px-6)',
 };
@@ -223,7 +223,7 @@ class CheckBox extends ComponentBase {
                     {isString(extraItem) ? (
                       <View
                         style={{
-                          fontSize: '30rpx',
+                          fontSize: 'var(--tfc-px-30)',
                           color: 'var(--tfc-color-weak)',
                         }}
                       >

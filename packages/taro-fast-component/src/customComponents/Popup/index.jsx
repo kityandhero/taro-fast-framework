@@ -358,8 +358,10 @@ class Popup extends ComponentBase {
               style={{
                 ...closeIconStyle,
                 ...{
-                  top: mode !== 'card' ? '12rpx' : 'var(--tfc-px-32)',
-                  right: mode !== 'card' ? '12rpx' : 'var(--tfc-px-32)',
+                  top:
+                    mode !== 'card' ? 'var(--tfc-px-12)' : 'var(--tfc-px-32)',
+                  right:
+                    mode !== 'card' ? 'var(--tfc-px-12)' : 'var(--tfc-px-32)',
                   height: '40rpx',
                   width: '40rpx',
                   position: 'absolute',
@@ -380,8 +382,8 @@ class Popup extends ComponentBase {
             headerStyle={{
               ...headerStyle,
               ...{
-                paddingTop: '10rpx',
-                paddingBottom: '10rpx',
+                paddingTop: 'var(--tfc-px-10)',
+                paddingBottom: 'var(--tfc-px-10)',
               },
             }}
             extra={extra}

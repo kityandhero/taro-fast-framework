@@ -84,7 +84,12 @@ class ColorText extends ComponentBase {
           flexAuto="right"
           left={icon ? <VerticalBox>{icon}</VerticalBox> : null}
           leftStyle={
-            icon ? { ...{ paddingRight: '12rpx' }, ...iconContainerStyle } : {}
+            icon
+              ? {
+                  ...{ paddingRight: 'var(--tfc-px-12)' },
+                  ...iconContainerStyle,
+                }
+              : {}
           }
           right={
             <VerticalBox>

@@ -113,7 +113,7 @@ class CheckBoxSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: '30rpx',
+                    fontSize: 'var(--tfc-px-30)',
                     color: '#999 ',
                   },
                   ...placeholderStyle,
@@ -125,7 +125,7 @@ class CheckBoxSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: '30rpx',
+                    fontSize: 'var(--tfc-px-30)',
                   },
                   ...valueStyle,
                 }}

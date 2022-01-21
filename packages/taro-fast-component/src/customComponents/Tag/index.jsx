@@ -130,7 +130,7 @@ class Tag extends ComponentBase {
           rightStyle={
             closeable
               ? {
-                  paddingLeft: '12rpx',
+                  paddingLeft: 'var(--tfc-px-12)',
                 }
               : {}
           }

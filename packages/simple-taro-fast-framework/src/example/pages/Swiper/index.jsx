@@ -93,9 +93,9 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图2" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: '260rpx' },
-            previousMargin: '80rpx',
-            nextMargin: '80rpx',
+            style: { height: '2var(--tfc-px-60)' },
+            previousMargin: 'var(--tfc-px-80)',
+            nextMargin: 'var(--tfc-px-80)',
             easingFunction: 'easeInOutCubic',
             indicatorColor: '#e21222',
             indicatorActiveColor: '#459429',
@@ -134,8 +134,8 @@ export default class Index extends PageWrapper {
         <Card header="例子: 轮播图3" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: '140rpx' },
-            previousMargin: '80rpx',
-            nextMargin: '80rpx',
+            previousMargin: 'var(--tfc-px-80)',
+            nextMargin: 'var(--tfc-px-80)',
             easingFunction: 'easeInOutCubic',
             indicatorColor: '#e21222',
             indicatorActiveColor: '#459429',

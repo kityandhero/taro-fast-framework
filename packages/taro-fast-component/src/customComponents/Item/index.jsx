@@ -111,7 +111,7 @@ class Item extends ComponentBase {
                 className={`${classPrefix}-header-content-extra`}
                 style={{
                   ...{
-                    fontSize: '28rpx',
+                    fontSize: 'var(--tfc-px-28)',
                   },
                   ...extraContainerStyle,
                 }}

@@ -62,7 +62,11 @@ export default class Index extends PageWrapper {
             style={{ backgroundColor: '#5668e3' }}
             prefix={
               <View
-                style={{ borderRadius: 20, width: '80rpx', height: '80rpx' }}
+                style={{
+                  borderRadius: 20,
+                  width: 'var(--tfc-px-80)',
+                  height: 'var(--tfc-px-80)',
+                }}
               >
                 <ImageBox
                   src="https://images.unsplash.com/photo-1548532928-b34e3be62fc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"

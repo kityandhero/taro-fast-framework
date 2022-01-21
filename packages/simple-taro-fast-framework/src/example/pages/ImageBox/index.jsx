@@ -13,7 +13,10 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
-    const imageBoxContainerStyle = { display: 'block', width: '100rpx' };
+    const imageBoxContainerStyle = {
+      display: 'block',
+      width: 'var(--tfc-px-100)',
+    };
     const imageContainerStyle = { padding: '2px', backgroundColor: 'red' };
 
     const src =
@@ -161,11 +164,11 @@ export default class Index extends PageWrapper {
           <FlexBox
             flexAuto="right"
             left={
-              <View style={{ width: '100rpx' }}>
+              <View style={{ width: 'var(--tfc-px-100)' }}>
                 <ImageBox src={src} />
               </View>
             }
-            leftStyle={{ paddingRight: '10rpx' }}
+            leftStyle={{ paddingRight: 'var(--tfc-px-10)' }}
             right="右侧"
             rightStyle={colStyle}
           />
@@ -175,14 +178,14 @@ export default class Index extends PageWrapper {
             left="左侧"
             leftStyle={colStyle}
             right={
-              <View style={{ width: '100rpx' }}>
+              <View style={{ width: 'var(--tfc-px-100)' }}>
                 <ImageBox
                   circle
                   src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45"
                 />
               </View>
             }
-            rightStyle={{ paddingLeft: '10rpx' }}
+            rightStyle={{ paddingLeft: 'var(--tfc-px-10)' }}
           />
         </Card>
       </View>

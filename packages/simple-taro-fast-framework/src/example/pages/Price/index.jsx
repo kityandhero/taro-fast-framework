@@ -28,7 +28,7 @@ export default class Index extends PageWrapper {
           <Price
             price={4.78}
             bodyStyle={{
-              border: '2rpx solid #ccc',
+              border: 'var(--tfc-px-2) solid #ccc',
               padding: 'var(--tfc-px-6)',
             }}
           />

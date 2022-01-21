@@ -13,7 +13,7 @@ const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 const style = { backgroundColor: '#f5f7fa' };
 
 const extraStyle = {
-  padding: '0 12rpx',
+  padding: '0 var(--tfc-px-12)',
   fontSize: 'var(--tfc-px-24)',
   color: '#aaa',
 };
@@ -137,7 +137,7 @@ export default class Index extends PageWrapper {
           // showRenderCount
           extra={
             <Button
-              style={{ marginRight: '10rpx' }}
+              style={{ marginRight: 'var(--tfc-px-10)' }}
               size="mini"
               onClick={this.toggleBorder}
             >

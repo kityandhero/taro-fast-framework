@@ -128,7 +128,11 @@ export default class Index extends PageWrapper {
               prefix={
                 <Image
                   src={user.avatar}
-                  style={{ borderRadius: 20, width: '80rpx', height: '80rpx' }}
+                  style={{
+                    borderRadius: 20,
+                    width: 'var(--tfc-px-80)',
+                    height: 'var(--tfc-px-80)',
+                  }}
                   fit="cover"
                 />
               }

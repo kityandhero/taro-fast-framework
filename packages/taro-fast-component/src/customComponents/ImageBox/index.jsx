@@ -110,7 +110,7 @@ class ImageBox extends ComponentBase {
     aspectRatioVal = aspectRatioVal <= 0 ? 1 : aspectRatioVal;
 
     const borderRadiusDefaultStyle = borderRadiusValue
-      ? { borderRadius: '8rpx' }
+      ? { borderRadius: 'var(--tfc-px-8)' }
       : {};
 
     const circle = circleValue || false;
