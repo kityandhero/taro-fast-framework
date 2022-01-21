@@ -2,7 +2,6 @@
 
 .@{class-prefix-button} {
   --color: var(--tfc-color-white);
-
   --text-color: var(--tfc-button-text-color, var(--tfc-color-text));
   --background-color: var(
     --tfc-button-background-color,
@@ -29,9 +28,11 @@
   cursor: pointer;
   transition: opacity ease 0.15s;
   user-select: none;
+
   &:focus {
     outline: none;
   }
+
   &::before {
     position: absolute;
     top: 50%;
@@ -46,6 +47,7 @@
     content: ' ';
     box-sizing: content-box;
   }
+
   &:active::before {
     opacity: 0.08;
   }
@@ -60,6 +62,7 @@
       --border-color: transparent;
     }
   }
+
   &:not(&-default) {
     --text-color: var(--tfc-color-white);
     --background-color: var(--color);
@@ -78,12 +81,15 @@
   &-primary {
     --color: var(--tfc-color-primary);
   }
+
   &-success {
     --color: var(--tfc-color-success);
   }
+
   &-danger {
     --color: var(--tfc-color-danger);
   }
+
   &-warning {
     --color: var(--tfc-color-warning);
   }
@@ -96,6 +102,7 @@
   &-disabled {
     cursor: not-allowed;
     opacity: 0.4;
+
     &:active::before {
       display: none;
     }
@@ -110,30 +117,37 @@
       padding-right: 18rpx;
     }
   }
+
   &&-small {
     padding-top: 6rpx;
     padding-bottom: 6rpx;
     font-size: 30rpx;
   }
+
   &&-large {
     padding-top: 22rpx;
     padding-bottom: 22rpx;
     font-size: 36rpx;
   }
+
   &&-shape-rounded {
     --border-radius: 2000rpx;
   }
+
   &&-shape-rectangular {
     --border-radius: 0;
   }
+
   &-loading {
     vertical-align: bottom;
   }
+
   &-loading-wrapper {
     display: flex;
     height: 1.4em;
     align-items: center;
     justify-content: center;
+
     > .tfc-loading {
       opacity: 0.6;
     }

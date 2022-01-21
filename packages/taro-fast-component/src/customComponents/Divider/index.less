@@ -9,12 +9,15 @@
   border-width: 0;
   border-color: var(--tfc-border-color);
   border-style: solid;
+
   &-left&::before {
     max-width: 10%;
   }
+
   &-right&::after {
     max-width: 10%;
   }
+
   &::after,
   &::before {
     flex: auto;
@@ -24,6 +27,7 @@
     border-color: inherit;
     border-width: 2rpx 0 0;
   }
+
   &-content {
     flex: none;
     padding: 0 32rpx;
