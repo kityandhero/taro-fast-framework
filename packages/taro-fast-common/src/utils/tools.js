@@ -34,6 +34,7 @@ import {
   formatCollection,
   datetimeFormat,
   sortOperate,
+  pxToRemRoot,
 } from './constants';
 import {
   isArray,
@@ -2053,7 +2054,7 @@ export function handleTouchScroll(flag) {
 
 export function pxToRem(
   pxSize,
-  rootValue = 32,
+  rootValue = pxToRemRoot,
   unitPrecision = 5,
   minPixelValue = 0,
 ) {

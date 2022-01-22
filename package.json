@@ -52,6 +52,8 @@
     "build:fp": "cd packages/taro-fast-framework && yarn publish",
     "build:start": "npm run build:f && npm start",
     "build:simple": "cd packages/simple-taro-fast-framework && npm run build:weapp",
+    "build:h5:simple": "cd packages/simple-taro-fast-framework && npm run build:h5",
+    "build:h5": "npm run build:common-compression && npm run build:component-compression && npm run build:component-extra-compression && npm run build:f-compression && npm run build:h5:simple",
     "build": "npm run build:common-compression && npm run build:component-compression && npm run build:component-extra-compression && npm run build:f-compression && npm run build:simple",
     "ncu:u:all": "ncu -u && npm run ncu:u:rollup && npm run ncu:u:common && npm run ncu:u:component && npm run ncu:u:component-extra && npm run ncu:u:framework && npm run ncu:u:simple",
     "ncu:u:framework": "cd packages/taro-fast-framework && ncu -u",

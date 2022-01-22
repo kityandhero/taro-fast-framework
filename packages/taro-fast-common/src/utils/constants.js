@@ -1,5 +1,7 @@
 import { emptyLogo as emptyLogoSource } from './mediaDefault';
 
+export const pxToRemRoot = 28;
+
 /**
  * 基础state
  */

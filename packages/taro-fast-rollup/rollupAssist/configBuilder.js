@@ -11,6 +11,8 @@ import pxtorem from 'postcss-pxtorem';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
+import { pxToRemRoot } from '../../taro-fast-common/src/utils/constants';
+
 const externalCollection = [
   '@babel/runtime',
   '@rollup/plugin-node-resolve',
@@ -87,7 +89,7 @@ export function buildConfig({
         plugins: [
           autoprefixer(),
           pxtorem({
-            rootValue: 32,
+            rootValue: pxToRemRoot,
             propList: ['*'],
           }),
           cssnano(),
