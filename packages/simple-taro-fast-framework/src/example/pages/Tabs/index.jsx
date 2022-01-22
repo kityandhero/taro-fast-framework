@@ -1,16 +1,28 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, Tabs } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Tabs,
+  Badge,
+  Icon,
+} from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
+const { IconAdd } = Icon;
 const { TabPanel } = Tabs;
 
 const tabList = [
-  { title: '标签页1', useBadge: true, color: 'red' },
-  { title: '标签页2', useBadge: true, content: '更多' },
+  {
+    title: '标签页1',
+    useBadge: true,
+    badgeColor: 'red',
+    badgeContent: Badge.dot,
+    icon: <IconAdd size={24} />,
+  },
+  { title: '标签页2', useBadge: true, badgeContent: '更多' },
   { title: '标签页3' },
 ];
 
