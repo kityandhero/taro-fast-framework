@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View, ScrollView } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
@@ -125,7 +125,9 @@ class Card extends ComponentBase {
               </View>
             }
             right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
-            rightStyle={extra ? { padding: '0 var(--tfc-18) 0 0' } : null}
+            rightStyle={
+              extra ? { padding: `0 ${transformSize(18)} 0 0` } : null
+            }
           />
         ) : null}
 

@@ -162,7 +162,7 @@ export default class Index extends PageWrapper {
             }
             extraStyle={
               {
-                // padding: '0 var(--tfc-10)',
+                // padding: `0 ${transformSize(10)}`,
               }
             }
           />
@@ -195,7 +195,7 @@ export default class Index extends PageWrapper {
             }
             extraStyle={
               {
-                // padding: '0 var(--tfc-10)',
+                // padding: `0 ${transformSize(10)}`,
               }
             }
           />

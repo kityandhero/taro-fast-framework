@@ -1,12 +1,13 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Grid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const styles = {
-  border: 'solid var(--tfc-1) #999999',
+  border: `solid ${transformSize(1)} #999999`,
   background: '#f5f5f5',
   textAlign: 'center',
   color: '#999999',

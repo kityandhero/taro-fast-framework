@@ -370,7 +370,7 @@ class AdvanceInput extends ComponentBase {
         }
         extraContainerStyle={{
           ...{
-            padding: '0 var(--tfc-24) 0 0',
+            padding: `0 ${transformSize(24)} 0 0`,
           },
           ...inputStyle,
           ...{

@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Tabs } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -74,17 +75,35 @@ export default class Index extends PageWrapper {
             }}
           >
             <TabPanel current={this.state.current1} index={0}>
-              <View style="padding: var(--tfc-100) var(--tfc-50);background-color: #FAFBFC;text-align: center;">
+              <View
+                style={{
+                  padding: `${transformSize(100)} ${transformSize(50)}`,
+                  backgroundColor: '#FAFBFC',
+                  textAlign: 'center',
+                }}
+              >
                 标签页一的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current1} index={1}>
-              <View style="padding: var(--tfc-100) var(--tfc-50);background-color: #FAFBFC;text-align: center;">
+              <View
+                style={{
+                  padding: `${transformSize(100)} ${transformSize(50)}`,
+                  backgroundColor: '#FAFBFC',
+                  textAlign: 'center',
+                }}
+              >
                 标签页二的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current1} index={2}>
-              <View style="padding: var(--tfc-100) var(--tfc-50);background-color: #FAFBFC;text-align: center;">
+              <View
+                style={{
+                  padding: `${transformSize(100)} ${transformSize(50)}`,
+                  backgroundColor: '#FAFBFC',
+                  textAlign: 'center',
+                }}
+              >
                 标签页三的内容
               </View>
             </TabPanel>
@@ -112,32 +131,68 @@ export default class Index extends PageWrapper {
             }}
           >
             <TabPanel current={this.state.current2} index={0}>
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-100);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(100),
+                }}
+              >
                 标签页一的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current2} index={1}>
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-100);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(100),
+                }}
+              >
                 标签页二的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current2} index={2}>
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-100);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(100),
+                }}
+              >
                 标签页三的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current2} index={3}>
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-100);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(100),
+                }}
+              >
                 标签页四的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current2} index={4}>
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-100);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(100),
+                }}
+              >
                 标签页五的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current2} index={5}>
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-100);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(100),
+                }}
+              >
                 标签页六的内容
               </View>
             </TabPanel>
@@ -152,7 +207,7 @@ export default class Index extends PageWrapper {
           <Tabs
             current={this.state.current3}
             scroll
-            height="var(--tfc-200)"
+            height={transformSize(200)}
             direction="vertical"
             tabList={[
               { title: '标签页1' },
@@ -171,7 +226,13 @@ export default class Index extends PageWrapper {
               current={this.state.current3}
               index={0}
             >
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-200);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(200),
+                }}
+              >
                 标签页一的内容
               </View>
             </TabPanel>
@@ -180,7 +241,13 @@ export default class Index extends PageWrapper {
               current={this.state.current3}
               index={1}
             >
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-200);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(200),
+                }}
+              >
                 标签页二的内容
               </View>
             </TabPanel>
@@ -189,7 +256,13 @@ export default class Index extends PageWrapper {
               current={this.state.current3}
               index={2}
             >
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-200);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(200),
+                }}
+              >
                 标签页三的内容
               </View>
             </TabPanel>
@@ -198,7 +271,13 @@ export default class Index extends PageWrapper {
               current={this.state.current3}
               index={3}
             >
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-200);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(200),
+                }}
+              >
                 标签页四的内容
               </View>
             </TabPanel>
@@ -207,7 +286,13 @@ export default class Index extends PageWrapper {
               current={this.state.current3}
               index={4}
             >
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-200);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(200),
+                }}
+              >
                 标签页五的内容
               </View>
             </TabPanel>
@@ -216,7 +301,13 @@ export default class Index extends PageWrapper {
               current={this.state.current3}
               index={5}
             >
-              <View style="font-size:var(--tfc-18);text-align:center;height:var(--tfc-200);">
+              <View
+                style={{
+                  fontSize: transformSize(18),
+                  textAlign: 'center',
+                  height: transformSize(200),
+                }}
+              >
                 标签页六的内容
               </View>
             </TabPanel>
@@ -241,17 +332,38 @@ export default class Index extends PageWrapper {
             }}
           >
             <TabPanel current={this.state.current4} index={0}>
-              <View style="padding: var(--tfc-100) var(--tfc-50);background-color: #FAFBFC;text-align: center;">
+              <View
+                style={{
+                  padding: `${transformSize(100)} ${transformSize(50)}`,
+                  backgroundColor: '#FAFBFC',
+
+                  textAlign: 'center',
+                }}
+              >
                 标签页一的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current4} index={1}>
-              <View style="padding: var(--tfc-100) var(--tfc-50);background-color: #FAFBFC;text-align: center;">
+              <View
+                style={{
+                  padding: `${transformSize(100)} ${transformSize(50)}`,
+                  backgroundColor: '#FAFBFC',
+
+                  textAlign: 'center',
+                }}
+              >
                 标签页二的内容
               </View>
             </TabPanel>
             <TabPanel current={this.state.current4} index={2}>
-              <View style="padding: var(--tfc-100) var(--tfc-50);background-color: #FAFBFC;text-align: center;">
+              <View
+                style={{
+                  padding: `${transformSize(100)} ${transformSize(50)}`,
+                  backgroundColor: '#FAFBFC',
+
+                  textAlign: 'center',
+                }}
+              >
                 标签页三的内容
               </View>
             </TabPanel>

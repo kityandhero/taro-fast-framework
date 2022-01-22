@@ -186,7 +186,7 @@ class SearchBar extends ComponentBase {
             showSearch
               ? {
                   ...{
-                    padding: '0 var(--tfc-2) 0 0',
+                    padding: `0 ${transformSize(2)} 0 0`,
                   },
                 }
               : {}

@@ -10,7 +10,7 @@ const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 const style = { backgroundColor: '#f5f7fa' };
 
 const extraStyle = {
-  padding: '0 var(--tfc-12)',
+  padding: `0 ${transformSize(12)}`,
   fontSize: transformSize(24),
   color: '#aaa',
 };

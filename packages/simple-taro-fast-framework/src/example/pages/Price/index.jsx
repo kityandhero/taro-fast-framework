@@ -38,7 +38,7 @@ export default class Index extends PageWrapper {
         <Card header="元素通用样式" headerStyle={cardHeaderStyle}>
           <Price
             price={4.78}
-            itemStyle={{ color: '#ccc', fontSize: '3var(--tfc-6)' }}
+            itemStyle={{ color: '#ccc', fontSize: transformSize(36) }}
           />
         </Card>
 

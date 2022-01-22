@@ -84,7 +84,9 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 var(--tfc-20)' }}>
+                <View
+                  style={{ height: '100%', padding: `0 ${transformSize(20)}` }}
+                >
                   <ImageBox src={image} />
                 </View>
               );
@@ -94,7 +96,7 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图2" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: '2var(--tfc-60)' },
+            style: { height: transformSize(260) },
             previousMargin: transformSize(80),
             nextMargin: transformSize(80),
             easingFunction: 'easeInOutCubic',
@@ -124,7 +126,9 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 var(--tfc-20)' }}>
+                <View
+                  style={{ height: '100%', padding: `0 ${transformSize(20)}` }}
+                >
                   <ImageBox src={image} />
                 </View>
               );
@@ -174,7 +178,9 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 var(--tfc-20)' }}>
+                <View
+                  style={{ height: '100%', padding: `0 ${transformSize(20)}` }}
+                >
                   <ImageBox src={image} />
                 </View>
               );

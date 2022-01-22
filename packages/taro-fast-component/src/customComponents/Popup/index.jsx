@@ -408,7 +408,9 @@ class Popup extends ComponentBase {
               ...(inCollection(['left', 'right'], position)
                 ? {
                     height:
-                      mode !== 'card' ? '100%' : 'calc(100% - var(--tfc-48))',
+                      mode !== 'card'
+                        ? '100%'
+                        : `calc(100% - ${transformSize(48)})`,
                   }
                 : {}),
               ...arcStyle,

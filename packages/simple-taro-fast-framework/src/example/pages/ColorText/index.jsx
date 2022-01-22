@@ -85,7 +85,10 @@ export default class Index extends PageWrapper {
           <ColorText
             textPrefix="前缀"
             text="文本文字"
-            separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-24)' }}
+            separatorStyle={{
+              color: '#67ca31',
+              margin: `0 ${transformSize(24)}`,
+            }}
           />
         </Card>
 
@@ -94,7 +97,10 @@ export default class Index extends PageWrapper {
             icon={<IconEdit size={32} color="#ff3ce7" />}
             textPrefix="前缀"
             text="文本文字"
-            separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-24)' }}
+            separatorStyle={{
+              color: '#67ca31',
+              margin: `0 ${transformSize(24)}`,
+            }}
           />
         </Card>
       </View>

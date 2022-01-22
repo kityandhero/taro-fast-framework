@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { getRect } from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   isUrl,
   isImageBase4,
@@ -25,9 +25,9 @@ const classPrefix = `tfc-float-action`;
 // 设置元素旋转属性
 const setTransform = (translate = 0, scale = 1, delay = 300, isH = true) => {
   const duration = `transition-duration: ${delay}ms`;
-  const transform = `transform: scale(${scale}) translate3d(var(--tfc-${
-    isH ? translate : 0
-  }), var(--tfc-${isH ? 0 : translate}), 0)`;
+  const transform = `transform: scale(${scale}) translate3d(${transformSize(
+    isH ? translate : 0,
+  )}, ${transformSize(isH ? 0 : translate)}, 0)`;
 
   return `opacity: 1; ${duration}; ${transform}`;
 };
@@ -246,7 +246,9 @@ class FloatAction extends ComponentBase {
     x = parseFloat(x.toFixed(6));
     y = parseFloat(y.toFixed(6));
 
-    const transform = `transform: scale(${scale}) translate3d(var(--tfc-${x}), var(tfc-${y}), 0)`;
+    const transform = `transform: scale(${scale}) translate3d(${transformSize(
+      x,
+    )}, ${transformSize(y)}, 0)`;
 
     return `opacity: 1; transition-duration: ${duration}ms; ${transform}`;
   };

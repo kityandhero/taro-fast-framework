@@ -23,7 +23,7 @@ export default class Index extends PageWrapper {
               console.log('ellipsis click');
             }}
           >
-            这是一段宽度限制 2var(--tfc-50) 的文字，后面的内容会省略。
+            这是一段宽度限制长度的文字，后面的内容会省略。
           </Ellipsis>
         </Card>
 
