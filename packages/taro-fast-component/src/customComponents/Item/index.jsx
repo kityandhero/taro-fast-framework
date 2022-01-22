@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize, isFunction } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';

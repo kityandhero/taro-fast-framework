@@ -1,5 +1,6 @@
 import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
 import { AppBase } from 'taro-fast-framework/es/framework';
+import 'taro-fast-common/es/constants.css';
 import 'taro-fast-component/es/index.css';
 import 'taro-fast-component-extra/es/index.css';
 
