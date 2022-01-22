@@ -1,5 +1,3 @@
-import './global.less';
-
 export { default as Ellipsis } from './Ellipsis';
 export { default as Price } from './Price';
 export { default as ColorText } from './ColorText';
