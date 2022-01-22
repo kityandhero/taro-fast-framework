@@ -89,7 +89,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent(10);
                   }}
-                  style={{ marginLeft: 'val(--tfc-8)' }}
+                  style={{ marginLeft: 'var(--tfc-8)' }}
                 >
                   进度+10
                 </Button>
@@ -124,7 +124,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent2(10);
                   }}
-                  style={{ marginLeft: 'val(--tfc-8)' }}
+                  style={{ marginLeft: 'var(--tfc-8)' }}
                 >
                   进度+10
                 </Button>
@@ -142,7 +142,7 @@ export default class Index extends PageWrapper {
             fontSize={14}
             activeColor="#FF3141"
             backgroundColor="#000000"
-            icon={<IconCheckCircle size={19} showInfo color="green" />}
+            icon={<IconCheckCircle size={38} showInfo color="green" />}
             extra={
               <Button
                 color="primary"
@@ -152,7 +152,7 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: 'val(--tfc-8)' }}
+                style={{ marginLeft: 'var(--tfc-8)' }}
               >
                 处理
               </Button>
@@ -175,7 +175,7 @@ export default class Index extends PageWrapper {
             fontSize={14}
             activeColor="#FF3141"
             backgroundColor="#000000"
-            icon={<IconCheckCircle size={19} showInfo color="green" />}
+            icon={<IconCheckCircle size={38} showInfo color="green" />}
             extra={
               <Button
                 color="primary"
@@ -185,7 +185,7 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: 'val(--tfc-8)' }}
+                style={{ marginLeft: 'var(--tfc-8)' }}
               >
                 处理
               </Button>

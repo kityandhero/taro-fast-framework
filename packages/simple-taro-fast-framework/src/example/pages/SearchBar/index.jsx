@@ -101,7 +101,7 @@ export default class Index extends PageWrapper {
               borderRadius: 'var(--tfc-100)',
             }}
             align="center"
-            icon={<IconSketch size={14} color="#6b6ead" />}
+            icon={<IconSketch size={28} color="#6b6ead" />}
             placeholder="搜索商品"
             mode="navigate"
             searchStyle={{

@@ -18,7 +18,7 @@ export default class Index extends PageWrapper {
       width: 'var(--tfc-100)',
     };
     const imageContainerStyle = {
-      padding: 'val(--tfc-2)',
+      padding: 'var(--tfc-2)',
       backgroundColor: 'red',
     };
 

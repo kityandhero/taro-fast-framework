@@ -123,7 +123,7 @@ class Tag extends ComponentBase {
           right={
             closeable ? (
               <VerticalBox onClick={this.triggerClose}>
-                <Icon size="12" type="clear" color={closeColor || '#ccc'} />
+                <Icon size={24} type="clear" color={closeColor || '#ccc'} />
               </VerticalBox>
             ) : null
           }

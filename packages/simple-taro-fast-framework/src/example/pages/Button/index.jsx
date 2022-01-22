@@ -90,7 +90,7 @@ export default class Index extends PageWrapper {
         <Card header="带图标的按钮" headerStyle={cardHeaderStyle}>
           <Button>
             <Space>
-              <IconSearch size={19} />
+              <IconSearch size={38} />
               <Text>搜索</Text>
             </Space>
           </Button>

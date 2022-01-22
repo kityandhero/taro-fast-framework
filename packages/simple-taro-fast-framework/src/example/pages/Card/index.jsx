@@ -65,7 +65,7 @@ export default class Index extends PageWrapper {
         <Card
           header={
             <ColorText
-              icon={<IconEdit size={16} color="#ff3ce7" />}
+              icon={<IconEdit size={32} color="#ff3ce7" />}
               text="附带图标"
             />
           }

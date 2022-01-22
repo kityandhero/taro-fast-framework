@@ -9,7 +9,7 @@ const { IconChevronRight } = Icon;
 
 const defaultProps = {
   text: '更多',
-  icon: <IconChevronRight size={19} />,
+  icon: <IconChevronRight size={38} />,
   onClick: null,
 };
 

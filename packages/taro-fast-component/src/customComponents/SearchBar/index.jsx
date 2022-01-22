@@ -19,7 +19,7 @@ const modeCollection = ['search', 'navigate'];
 const defaultProps = {
   style: {},
   align: 'left',
-  icon: <IconSearch size={14} color="#6b6ead" />,
+  icon: <IconSearch size={28} color="#6b6ead" />,
   placeholder: '请输入搜索关键词',
   disabled: false,
   hidden: false,

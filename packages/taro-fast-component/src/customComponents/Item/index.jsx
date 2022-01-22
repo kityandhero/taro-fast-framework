@@ -123,7 +123,7 @@ class Item extends ComponentBase {
             {arrow ? (
               <View className={`${classPrefix}-header-content-arrow`}>
                 <VerticalBox>
-                  <IconChevronRight size={20} />
+                  <IconChevronRight size={40} />
                 </VerticalBox>
               </View>
             ) : null}

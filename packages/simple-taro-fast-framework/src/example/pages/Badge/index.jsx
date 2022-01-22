@@ -15,7 +15,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="Badge Wrapper" headerStyle={cardHeaderStyle}>
-          <Space wrap style={{ '--gap': 'val(--tfc-24)' }}>
+          <Space wrap style={{ '--gap': 'var(--tfc-24)' }}>
             <Badge content="5">
               <Avatar text="图" />
             </Badge>
@@ -57,7 +57,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="Badge Only" headerStyle={cardHeaderStyle}>
-          <Space style={{ '--gap': 'val(--tfc-24)' }}>
+          <Space style={{ '--gap': 'var(--tfc-24)' }}>
             <Badge content="99+" />
 
             <Badge content="新消息!" />

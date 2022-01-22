@@ -14,7 +14,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="Icon" headerStyle={cardHeaderStyle}>
-          <NoticeBar icon={<IconVolumePlus size={19} />}>
+          <NoticeBar icon={<IconVolumePlus size={38} />}>
             这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
           </NoticeBar>
         </Card>
@@ -86,7 +86,7 @@ export default class Index extends PageWrapper {
 
         <Card header="Simple" headerStyle={cardHeaderStyle}>
           <NoticeBar
-            icon={<IconVolumePlus size={19} />}
+            icon={<IconVolumePlus size={38} />}
             marquee
             single
             extra={<More />}

@@ -48,7 +48,7 @@ export default class Index extends PageWrapper {
             }}
           >
             <Space>
-              <IconSearch size={16} />
+              <IconSearch size={32} />
               <Text>搜索</Text>
             </Space>
           </Divider>
@@ -62,7 +62,7 @@ export default class Index extends PageWrapper {
               borderColor: '#1677ff',
               borderStyle: 'dashed',
             },
-            icon: <IconSearch size={16} />,
+            icon: <IconSearch size={32} />,
             text: '搜索',
           })}
         </Card>

@@ -20,7 +20,7 @@ export default class Index extends PageWrapper {
     },
     {
       label: '图标按钮',
-      icon: <IconPhone size={20} color="#fff" />,
+      icon: <IconPhone size={40} color="#fff" />,
       onClick: () => {
         this.bannerNotify({
           message: '点击了图标按钮',

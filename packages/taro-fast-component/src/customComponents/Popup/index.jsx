@@ -49,7 +49,7 @@ const defaultProps = {
   minWidth: '20%',
   bodyStyle: {},
   closeWhenOverlayClick: true,
-  closeIcon: <IconCloseCircle size={18} color="#ccc" />,
+  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
   closeIconStyle: {},
   position: 'bottom',
   /**

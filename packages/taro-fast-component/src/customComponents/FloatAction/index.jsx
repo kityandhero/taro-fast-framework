@@ -340,7 +340,7 @@ class FloatAction extends ComponentBase {
             ) : (
               <View class={classes.text}>
                 <CenterBox>
-                  <IconAdd size={20} color="#fff" />
+                  <IconAdd size={40} color="#fff" />
                 </CenterBox>
               </View>
             )}
@@ -390,7 +390,7 @@ class FloatAction extends ComponentBase {
                 ) : (
                   <View class={classes.icon}>
                     <CenterBox>
-                      <IconEdit size={20} color="#fff" />
+                      <IconEdit size={40} color="#fff" />
                     </CenterBox>
                   </View>
                 )}

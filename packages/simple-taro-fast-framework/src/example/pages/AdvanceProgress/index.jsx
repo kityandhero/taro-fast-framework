@@ -53,7 +53,7 @@ export default class Index extends PageWrapper {
                 onClick={() => {
                   this.setPercent(10);
                 }}
-                style={{ marginRight: 'val(--tfc-8)' }}
+                style={{ marginRight: 'var(--tfc-8)' }}
               >
                 进度+10
               </Button>
@@ -109,7 +109,7 @@ export default class Index extends PageWrapper {
         <Card header="Icon" headerStyle={cardHeaderStyle}>
           <AdvanceProgress
             percent={50}
-            icon={<IconCheckCircle size={19} color="green" />}
+            icon={<IconCheckCircle size={38} color="green" />}
           />
         </Card>
 
@@ -121,7 +121,7 @@ export default class Index extends PageWrapper {
             fontSize={14}
             activeColor="#FF3141"
             backgroundColor="#000000"
-            icon={<IconCheckCircle size={19} showInfo color="green" />}
+            icon={<IconCheckCircle size={38} showInfo color="green" />}
           />
         </Card>
       </View>

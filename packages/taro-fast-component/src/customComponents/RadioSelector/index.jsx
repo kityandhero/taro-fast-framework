@@ -27,7 +27,7 @@ const defaultProps = {
   hidden: false,
   options: [],
   position: 'bottom',
-  closeIcon: <IconCloseCircle size={18} color="#ccc" />,
+  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
   arc: false,
   showClose: true,
   radioStyle: {},

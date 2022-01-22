@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
+import { mergeStyle } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -19,14 +20,10 @@ class Icon extends ComponentBase {
   };
 
   renderFurther() {
-    const { style, className, value, size, color, hidden } = this.props;
-
-    const fz = toNumber(toString(size));
-
-    let f = `val(--tfc-${fz})`;
+    const { customStyle, className, value, size, color, hidden } = this.props;
 
     const rootStyle = {
-      fontSize: f,
+      fontSize: `var(--tfc-${toNumber(toString(size))})`,
       color,
     };
 
@@ -38,18 +35,10 @@ class Icon extends ComponentBase {
 
     return (
       <View
-        className={classNames(className)}
-        style={{
-          ...rootStyle,
-          ...(style || {}),
-          ...{ display: 'inline' },
-        }}
-      >
-        <View
-          className={classNames(prefixClass, iconName)}
-          onClick={this.handleClick}
-        />
-      </View>
+        className={classNames(prefixClass, iconName, className)}
+        style={mergeStyle(rootStyle, customStyle)}
+        onClick={this.handleClick}
+      />
     );
   }
 }

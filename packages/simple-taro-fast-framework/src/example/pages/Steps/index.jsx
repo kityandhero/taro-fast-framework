@@ -62,10 +62,10 @@ export default class Index extends PageWrapper {
             direction="vertical"
             current={1}
             style={{
-              '--title-font-size': 'val(--tfc-17)',
-              '--description-font-size': 'val(--tfc-15)',
-              '--indicator-margin-right': 'val(--tfc-12)',
-              '--icon-size': 'val(--tfc-22)',
+              '--title-font-size': 'var(--tfc-17)',
+              '--description-font-size': 'var(--tfc-15)',
+              '--indicator-margin-right': 'var(--tfc-12)',
+              '--icon-size': 'var(--tfc-22)',
             }}
           >
             <Step

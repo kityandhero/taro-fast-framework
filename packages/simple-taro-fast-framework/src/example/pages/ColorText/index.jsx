@@ -64,7 +64,7 @@ export default class Index extends PageWrapper {
 
         <Card header="附带图标" headerStyle={cardHeaderStyle}>
           <ColorText
-            icon={<IconEdit size={18} color="#ff3ce7" />}
+            icon={<IconEdit size={36} color="#ff3ce7" />}
             text="文本文字"
           />
         </Card>
@@ -90,7 +90,7 @@ export default class Index extends PageWrapper {
 
         <Card header="复杂样例" headerStyle={cardHeaderStyle}>
           <ColorText
-            icon={<IconEdit size={16} color="#ff3ce7" />}
+            icon={<IconEdit size={32} color="#ff3ce7" />}
             textPrefix="前缀"
             text="文本文字"
             separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-24)' }}

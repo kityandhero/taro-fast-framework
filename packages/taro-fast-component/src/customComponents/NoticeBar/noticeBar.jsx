@@ -126,7 +126,7 @@ class NoticeBar extends ComponentBase {
                     }}
                   >
                     <VerticalBox>
-                      <Icon size="16" type="clear" color="#ccc" />
+                      <Icon size={32} type="clear" color="#ccc" />
                     </VerticalBox>
                   </View>
                 ) : null
