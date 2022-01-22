@@ -12,6 +12,7 @@ export { default as CenterBox } from './CenterBox';
 export { default as Avatar } from './Avatar';
 export { default as NoticeBar } from './NoticeBar';
 export { default as ImageBox } from './ImageBox';
+export { default as Progress } from './Progress';
 export { default as AdvanceInput } from './AdvanceInput';
 export { default as AdvanceSwitch } from './AdvanceSwitch';
 export { default as AdvanceProgress } from './AdvanceProgress';

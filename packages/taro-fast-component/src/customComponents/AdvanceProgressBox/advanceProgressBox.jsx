@@ -33,7 +33,7 @@ const defaultProps = {
   showInfo: false,
   borderRadius: 0,
   fontSize: 16,
-  strokeWidth: 6,
+  strokeWidth: 10,
   activeColor: '#09BB07',
   backgroundColor: '#EBEBEB',
   active: false,
