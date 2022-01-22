@@ -1,9 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  transformSize,
-} from 'taro-fast-component/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Col from '../Flex/Col';
