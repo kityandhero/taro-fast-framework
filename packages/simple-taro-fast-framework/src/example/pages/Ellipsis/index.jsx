@@ -46,7 +46,7 @@ export default class Index extends PageWrapper {
           <Ellipsis
             line={3}
             style={{
-              height: '1var(--tfc-px-32)',
+              height: 'var(--tfc-px-132)',
               fontSize: 'var(--tfc-px-28)',
               lineHeight: 'var(--tfc-px-44)',
             }}

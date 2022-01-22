@@ -36,6 +36,14 @@ export default class Index extends PageWrapper {
   }
 
   renderFurther() {
+    let r = '';
+
+    for (let i = 1; i <= 200; i = i + 1) {
+      r += `--tfc-px-${i}: ${i}px;`;
+    }
+
+    console.log(r);
+
     return (
       <View className="index">
         <View style={{ margin: 'var(--tfc-px-20) 0' }}>

@@ -118,7 +118,7 @@ class DataGrid extends ComponentBase {
       const labelStyle = {
         ...{
           fontSize: 'var(--tfc-px-30)',
-          width: '1var(--tfc-px-80)',
+          width: 'var(--tfc-px-180)',
         },
         ...(labelStyleSource || {}),
         ...(bordered ? { margin } : {}),

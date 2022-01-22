@@ -273,7 +273,7 @@ class AdvanceInput extends ComponentBase {
         title={title}
         description={description}
         contentStyle={{
-          ...{ width: '1var(--tfc-px-80)' },
+          ...{ width: 'var(--tfc-px-180)' },
           ...contentStyle,
           ...{
             flex: 'none',
@@ -301,7 +301,7 @@ class AdvanceInput extends ComponentBase {
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
                       ...(align == 'center' ? { textAlign: 'center' } : {}),
                     }}
-                    password={password}
+                    password={!!password}
                     placeholder={placeholder}
                     placeholderStyle={
                       isString(placeholderStyle)
