@@ -52,7 +52,7 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <StepperItem disabled prefix={<IconSketch />}>
+          <StepperItem disabled prefix={<IconSketch size={36} />}>
             购买数量
           </StepperItem>
         </Card>

@@ -19,7 +19,7 @@ class Icon extends ComponentBase {
   };
 
   renderFurther() {
-    const { customStyle, className, value, size, color, hidden } = this.props;
+    const { style, className, value, size, color, hidden } = this.props;
 
     const rootStyle = {
       fontSize: transformSize(size),
@@ -35,7 +35,7 @@ class Icon extends ComponentBase {
     return (
       <View
         className={classNames(prefixClass, iconName, className)}
-        style={mergeStyle(rootStyle, customStyle)}
+        style={mergeStyle(rootStyle, style)}
         onClick={this.handleClick}
       />
     );

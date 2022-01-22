@@ -2083,7 +2083,7 @@ export function transformSize(size) {
   if (isNumber(size)) {
     const s = toNumber(size);
 
-    if (s < -2000 || s > 2000) {
+    if (s >= -2000 && s <= 2000) {
       if (s === 0) {
         return '0';
       }

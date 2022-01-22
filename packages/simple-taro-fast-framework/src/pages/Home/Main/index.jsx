@@ -37,13 +37,13 @@ export default class Index extends PageWrapper {
   }
 
   renderFurther() {
-    let r = '';
+    // let r = '';
 
-    for (let i = 1; i <= 200; i = i + 1) {
-      r += `--tfc-${i}: ${i}px;`;
-    }
+    // for (let i = 1000; i <= 2000; i = i + 10) {
+    //   r += `--tfc-${i}: ${i}px;`;
+    // }
 
-    console.log(r);
+    // console.log(r);
 
     return (
       <View className="index">

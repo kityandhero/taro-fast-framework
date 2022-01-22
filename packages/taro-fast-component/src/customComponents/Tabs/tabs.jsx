@@ -12,6 +12,9 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
+import { Badge } from '../Badge';
+import ColorText from '../ColorText';
+
 const ENV = Taro.getEnv();
 const MIN_DISTANCE = 100;
 const MAX_INTERVAL = 10;
@@ -19,7 +22,7 @@ const MAX_INTERVAL = 10;
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
-  customStyle: '',
+  style: '',
   className: '',
   /**
    * Tab 方向，请跟 AtTabPane 保持一致
@@ -248,15 +251,8 @@ class Tabs extends ComponentBase {
   };
 
   renderFurther() {
-    const {
-      customStyle = '',
-      className,
-      height,
-      animated,
-      tabList,
-      scroll,
-      current,
-    } = this.props;
+    const { style, className, height, animated, tabList, scroll, current } =
+      this.props;
     const { scrollLeft, scrollTop, scrollIntoView } = this.state;
     const direction = this.getDirection();
 
@@ -284,20 +280,41 @@ class Tabs extends ComponentBase {
         'tfc-tabs__item--active': current === idx,
       });
 
+      const {
+        title,
+        style: styleItem,
+        useBadge,
+        badgeColor,
+        badgeContent,
+        icon: iconItem,
+      } = item;
+
+      console.log(item);
+
+      const titleComponent = useBadge ? (
+        <Badge content={badgeContent} color={badgeColor}>
+          <ColorText icon={iconItem} text={title} />
+        </Badge>
+      ) : (
+        <ColorText icon={iconItem} text={title} />
+      );
+
       return (
         <View
           className={itemCls}
           id={`tab${this.tabId}${idx}`}
           key={`tfc-tabs-item-${idx}`}
+          style={styleItem || {}}
           onClick={(e) => {
             this.handleClick(idx, e);
           }}
         >
-          {item.title}
+          {titleComponent}
           <View className="tfc-tabs__item-underline"></View>
         </View>
       );
     });
+
     const rootCls = classNames(
       {
         'tfc-tabs': true,
@@ -311,7 +328,7 @@ class Tabs extends ComponentBase {
     const scrollY = direction === 'vertical';
 
     return (
-      <View className={rootCls} style={mergeStyle(heightStyle, customStyle)}>
+      <View className={rootCls} style={mergeStyle(heightStyle, style)}>
         {scroll ? (
           <ScrollView
             id={this.tabId}
@@ -320,6 +337,8 @@ class Tabs extends ComponentBase {
             scrollX={scrollX}
             scrollY={scrollY}
             scrollWithAnimation
+            enhanced
+            showScrollbar={false}
             scrollLeft={scrollLeft}
             scrollTop={scrollTop}
             scrollIntoView={scrollIntoView}

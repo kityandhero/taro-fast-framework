@@ -9,8 +9,8 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 const { TabPanel } = Tabs;
 
 const tabList = [
-  { title: '标签页1' },
-  { title: '标签页2' },
+  { title: '标签页1', useBadge: true, color: 'red' },
+  { title: '标签页2', useBadge: true, content: '更多' },
   { title: '标签页3' },
 ];
 

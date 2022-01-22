@@ -9,6 +9,7 @@ const classPrefix = `tfc-badge`;
 
 const defaultProps = {
   color: '#FF411C',
+  content: null,
 };
 
 export const dot = Symbol();
