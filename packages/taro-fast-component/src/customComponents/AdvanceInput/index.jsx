@@ -37,7 +37,7 @@ const defaultProps = {
   required: false,
   hidden: false,
   clearable: false,
-  clearSize: '18',
+  clearSize: 36,
   clearColor: '#ccc',
   label: '',
   extra: null,

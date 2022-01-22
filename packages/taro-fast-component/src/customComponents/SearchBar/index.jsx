@@ -28,7 +28,7 @@ const defaultProps = {
   showSearch: true,
   searchText: '搜索',
   searchStyle: {},
-  clearSize: '16',
+  clearSize: 32,
   mode: 'search',
   onSearch: null,
   onNavigate: null,
