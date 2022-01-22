@@ -52,14 +52,14 @@ const checkStatusIcon = (
     }}
   >
     <CenterBox>
-      <IconCheck size={28} color="#fff" />
+      <IconCheck size={14} color="#fff" />
     </CenterBox>
   </View>
 );
 
 const checkStatusIconForListView = (
   <CenterBox>
-    <IconCheck size={38} color="#1677ff" />
+    <IconCheck size={19} color="#1677ff" />
   </CenterBox>
 );
 

@@ -1,7 +1,6 @@
 export const defaultProps = {
-  customStyle: '',
+  style: '',
   className: '',
-  prefixClass: 'tfc-icon',
   value: '',
   color: '',
   size: 24,

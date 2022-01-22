@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { pxToRem, mergeStyle } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import { defaultProps } from './config';
+
+const prefixClass = 'tfc-icon';
 
 class Icon extends ComponentBase {
   handleClick = () => {
@@ -18,11 +19,14 @@ class Icon extends ComponentBase {
   };
 
   renderFurther() {
-    const { customStyle, className, prefixClass, value, size, color, hidden } =
-      this.props;
+    const { style, className, value, size, color, hidden } = this.props;
+
+    const fz = toNumber(toString(size));
+
+    let f = `val(--tfc-${fz})`;
 
     const rootStyle = {
-      fontSize: pxToRem(toNumber(toString(size))),
+      fontSize: f,
       color,
     };
 
@@ -34,10 +38,18 @@ class Icon extends ComponentBase {
 
     return (
       <View
-        className={classNames(prefixClass, iconName, className)}
-        style={mergeStyle(rootStyle, customStyle)}
-        onClick={this.handleClick}
-      />
+        className={classNames(className)}
+        style={{
+          ...rootStyle,
+          ...(style || {}),
+          ...{ display: 'inline' },
+        }}
+      >
+        <View
+          className={classNames(prefixClass, iconName)}
+          onClick={this.handleClick}
+        />
+      </View>
     );
   }
 }

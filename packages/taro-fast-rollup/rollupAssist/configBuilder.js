@@ -7,11 +7,11 @@ import svgr from '@svgr/rollup';
 import url from 'rollup-plugin-url';
 import { terser } from 'rollup-plugin-terser';
 import babelConfig from '@rollup/plugin-babel';
-import pxtorem from 'postcss-pxtorem';
+// import pxtorem from 'postcss-pxtorem';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
-import { pxToRemRoot } from '../../taro-fast-common/src/utils/constants';
+// import { pxToRemRoot } from '../../taro-fast-common/src/utils/constants';
 
 const externalCollection = [
   '@babel/runtime',
@@ -56,10 +56,16 @@ export function buildConfig({
 }) {
   const externals = [...externalCollection, ...(otherExternalCollection || [])];
 
+  // const pxtoremConfig = {
+  //   rootValue: pxToRemRoot,
+  //   propList: ['*'],
+  // };
+
   console.log({
     inputFile,
     terser: whetherTerser,
     externals,
+    // pxtorem: pxtoremConfig,
   });
 
   const config = {
@@ -88,10 +94,7 @@ export function buildConfig({
       postcss({
         plugins: [
           autoprefixer(),
-          pxtorem({
-            rootValue: pxToRemRoot,
-            propList: ['*'],
-          }),
+          // pxtorem(pxtoremConfig),
           cssnano(),
         ],
         inject: { insertAt: 'top' },
