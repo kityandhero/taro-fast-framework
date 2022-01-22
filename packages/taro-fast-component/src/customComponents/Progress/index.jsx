@@ -17,12 +17,12 @@ const defaultProps = {
   /**
    * 元素的颜色
    */
-  activeColor: 'var(--tfc-color-brand-light)',
-  backgroundColor: 'var(--tfc-color-grey-6)',
+  activeColor: '',
+  backgroundColor: '',
   /**
    * 元素的状态
    */
-  status: 'progress',
+  status: '',
   /**
    * 元素的进度
    */
@@ -42,9 +42,7 @@ class Progress extends ComponentBase {
   getStatus = () => {
     const { status } = this.props;
 
-    return inCollection(statusCollection, status)
-      ? status
-      : defaultProps.status;
+    return inCollection(statusCollection, status) ? status : '';
   };
 
   getPercent = () => {
@@ -79,9 +77,11 @@ class Progress extends ComponentBase {
     const percent = this.getPercent();
 
     const progressStyle = {
-      width: percent && `${+percent}%`,
-      height: transformSize(strokeWidth),
-      backgroundColor: activeColor,
+      ...{
+        width: percent && `${+percent}%`,
+        height: transformSize(strokeWidth),
+      },
+      ...(activeColor ? { backgroundColor: activeColor } : {}),
     };
 
     return (
@@ -100,7 +100,9 @@ class Progress extends ComponentBase {
         <View className={`${classPrefix}__outer`}>
           <View
             className={`${classPrefix}__outer-inner`}
-            style={{ backgroundColor: backgroundColor }}
+            style={{
+              ...(backgroundColor ? { backgroundColor: backgroundColor } : {}),
+            }}
           >
             <View
               className={`${classPrefix}__outer-inner-background`}
@@ -116,5 +118,9 @@ class Progress extends ComponentBase {
     );
   }
 }
+
+Progress.defaultProps = {
+  ...defaultProps,
+};
 
 export default Progress;

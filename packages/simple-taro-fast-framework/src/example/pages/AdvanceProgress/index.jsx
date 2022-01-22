@@ -96,7 +96,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="圆角" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress percent={50} borderRadius={4} />
+          <AdvanceProgress percent={30} borderRadius={4} status="progress" />
         </Card>
 
         <Card header="显示百分比" headerStyle={cardHeaderStyle}>

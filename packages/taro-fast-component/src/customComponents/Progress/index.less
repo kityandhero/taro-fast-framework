@@ -1,17 +1,5 @@
 @class-prefix-progress: ~'tfc-progress';
 
-@keyframes progress-active {
-  from {
-    opacity: 0.5;
-    transform: translate(-100%);
-  }
-
-  to {
-    opacity: 0.1;
-    transform: translate(0);
-  }
-}
-
 .@{class-prefix-progress} {
   display: flex;
   align-items: center;
@@ -48,17 +36,19 @@
   }
 
   &__progress {
-    .tfc-progress__outer-inner-background::before {
-      content: '';
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--tfc-color-white);
-      border-radius: var(--tfc-8);
-      animation: progress-active 2s var(--tfc-ease-out-quad) infinite;
+    .tfc-progress__outer-inner-background {
+      &::before:local {
+        content: '';
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--tfc-color-white);
+        border-radius: var(--tfc-8);
+        animation: progress-active 2s var(--tfc-ease-out-quad) infinite;
+      }
     }
   }
 
@@ -72,5 +62,17 @@
     .tfc-progress__outer-inner-background {
       background: var(--tfc-color-success);
     }
+  }
+}
+
+@keyframes progress-active {
+  from {
+    opacity: 0.5;
+    transform: translate(-100%);
+  }
+
+  to {
+    opacity: 0.1;
+    transform: translate(0);
   }
 }
