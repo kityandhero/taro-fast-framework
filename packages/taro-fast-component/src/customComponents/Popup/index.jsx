@@ -320,8 +320,8 @@ class Popup extends ComponentBase {
       this.props.className,
     );
 
-    const showClose = this.getShowClose();
     const closeWhenOverlayClick = this.getCloseWhenOverlayClick();
+    const showClose = !closeWhenOverlayClick ? true : this.getShowClose();
     const mode = this.getMode();
     const bodyStyle = this.getBodyStyle();
     const arcStyle = this.getArcStyle();
@@ -370,6 +370,7 @@ class Popup extends ComponentBase {
               <CenterBox>{closeIcon}</CenterBox>
             </View>
           ) : null}
+
           <Card
             mode={mode}
             border={!!border}

@@ -125,7 +125,7 @@ class Card extends ComponentBase {
               </View>
             }
             right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
-            rightStyle={extra ? { padding: '0 0 0 0' } : null}
+            rightStyle={extra ? { padding: '0 var(--tfc-18) 0 0' } : null}
           />
         ) : null}
 

@@ -1,5 +1,5 @@
 {
-  "miniprogramRoot": "dist/weapp",
+  "miniprogramRoot": "dist/weapp/",
   "projectname": "taro-fast-framework",
   "description": "基于Taro的快速开发框架基于Taro的快速开发框架",
   "appid": "wx62fdfd617c79d8c4",
