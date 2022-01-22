@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-component/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
