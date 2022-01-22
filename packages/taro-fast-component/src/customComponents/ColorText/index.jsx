@@ -4,6 +4,7 @@ import {
   stringIsNullOrWhiteSpace,
   copyToClipboard,
   getRandomColor,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -86,7 +87,7 @@ class ColorText extends ComponentBase {
           leftStyle={
             icon
               ? {
-                  ...{ paddingRight: 'var(--tfc-12)' },
+                  ...{ paddingRight: transformSize(12) },
                   ...iconContainerStyle,
                 }
               : {}

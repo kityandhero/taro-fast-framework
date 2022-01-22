@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View, Icon } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -130,7 +130,7 @@ class Tag extends ComponentBase {
           rightStyle={
             closeable
               ? {
-                  paddingLeft: 'var(--tfc-12)',
+                  paddingLeft: transformSize(12),
                 }
               : {}
           }

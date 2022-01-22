@@ -1,6 +1,9 @@
 import { View } from '@tarojs/components';
 
-import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
+import {
+  showInfoMessage,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
@@ -89,7 +92,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent(10);
                   }}
-                  style={{ marginLeft: 'var(--tfc-8)' }}
+                  style={{ marginLeft: transformSize(8) }}
                 >
                   进度+10
                 </Button>
@@ -124,7 +127,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent2(10);
                   }}
-                  style={{ marginLeft: 'var(--tfc-8)' }}
+                  style={{ marginLeft: transformSize(8) }}
                 >
                   进度+10
                 </Button>
@@ -152,7 +155,7 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: 'var(--tfc-8)' }}
+                style={{ marginLeft: transformSize(8) }}
               >
                 处理
               </Button>
@@ -185,7 +188,7 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: 'var(--tfc-8)' }}
+                style={{ marginLeft: transformSize(8) }}
               >
                 处理
               </Button>

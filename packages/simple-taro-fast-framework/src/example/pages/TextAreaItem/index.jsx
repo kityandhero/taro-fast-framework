@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Card,
   TextAreaItem,
@@ -64,8 +65,8 @@ export default class Index extends PageWrapper {
               <View
                 style={{
                   borderRadius: 20,
-                  width: 'var(--tfc-80)',
-                  height: 'var(--tfc-80)',
+                  width: transformSize(80),
+                  height: transformSize(80),
                 }}
               >
                 <ImageBox

@@ -1,7 +1,10 @@
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -79,7 +82,7 @@ class HelpBox extends ComponentBase {
 
     const labelWidth = toNumber(labelWidthValue ?? null);
 
-    const labelWidthStyle = labelWidth > 0 ? `var(--tfc-${labelWidth})` : 0;
+    const labelWidthStyle = labelWidth > 0 ? transformSize(labelWidth) : 0;
 
     const customLabelWidth = labelWidth > 0;
 
@@ -107,13 +110,13 @@ class HelpBox extends ComponentBase {
           ) : (
             <View
               style={{
-                marginTop: 'var(--tfc-8)',
-                marginBottom: 'var(--tfc-8)',
+                marginTop: transformSize(8),
+                marginBottom: transformSize(8),
                 color: '#999',
                 fontWeight: 'normal',
-                fontSize: 'var(--tfc-28)',
-                lineHeight: 'var(--tfc-44)',
-                height: 'var(--tfc-44)',
+                fontSize: transformSize(28),
+                lineHeight: transformSize(44),
+                height: transformSize(44),
               }}
             >
               {title}:
@@ -157,17 +160,17 @@ class HelpBox extends ComponentBase {
             width: customLabelWidth
               ? labelWidthStyle
               : showNumber
-              ? 'var(--tfc-44)'
-              : 'var(--tfc-24)',
+              ? transformSize(44)
+              : transformSize(24),
             color: '#999',
-            fontSize: 'var(--tfc-28)',
+            fontSize: transformSize(28),
           }}
           contentStyle={{
             color: '#999',
-            fontSize: 'var(--tfc-28)',
+            fontSize: transformSize(28),
           }}
           itemStyle={{
-            paddingBottom: 'var(--tfc-8)',
+            paddingBottom: transformSize(8),
           }}
         />
       </View>

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { recordObject } from 'taro-fast-common/es/utils/tools';
+import { recordObject, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   VerticalBox,
   Space,
@@ -94,7 +94,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <Card header="Buttons Color" headerStyle={cardHeaderStyle}>
           <VerticalBox
-            style={{ height: 'var(--tfc-100)' }}
+            style={{ height: transformSize(100) }}
             alignJustify="center"
           >
             <Space wrap>
@@ -188,12 +188,12 @@ export default class Index extends PageWrapper {
           <Spin spin={!firstLoadSuccess}>
             <FadeView show={!dataLoading}>
               <VerticalBox
-                style={{ height: 'var(--tfc-50)' }}
+                style={{ height: transformSize(50) }}
                 alignJustify="center"
               >
                 <Space direction="vertical">
                   <VerticalBox
-                    style={{ height: 'var(--tfc-100)' }}
+                    style={{ height: transformSize(100) }}
                     alignJustify="center"
                   >
                     <Empty

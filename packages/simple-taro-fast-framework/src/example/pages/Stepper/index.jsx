@@ -1,6 +1,9 @@
 import { View } from '@tarojs/components';
 
-import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
+import {
+  showInfoMessage,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { Card, Stepper } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -74,7 +77,7 @@ export default class Index extends PageWrapper {
 
         <Card header="自定义宽度" headerStyle={cardHeaderStyle}>
           <Stepper
-            style={{ width: 'var(--tfc-120)' }}
+            style={{ width: transformSize(120) }}
             defaultValue={10000}
             step={10000}
           />
@@ -98,12 +101,12 @@ export default class Index extends PageWrapper {
         <Card header="自定义css变量" headerStyle={cardHeaderStyle}>
           <Stepper
             style={{
-              '--border': 'var(--tfc-1) solid #f5f5f5',
+              '--border': `${transformSize(1)} solid #f5f5f5`,
               '--border-inner': 'none',
-              '--height': 'var(--tfc-36)',
-              '--input-width': 'var(--tfc-70)',
+              '--height': transformSize(36),
+              '--input-width': transformSize(70),
               '--input-background-color': '#ffffff',
-              '--active-border': 'var(--tfc-1) solid #1677ff',
+              '--active-border': `${transformSize(1)} solid #1677ff`,
             }}
             defaultValue={10000}
             step={10000}

@@ -6,6 +6,7 @@ import {
   styleToString,
   recordError,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -230,9 +231,9 @@ class AdvanceInput extends ComponentBase {
                     display: 'inline-block',
                     verticalAlign: 'middle',
                     textAlign: 'center',
-                    width: 'var(--tfc-24)',
-                    height: 'var(--tfc-45)',
-                    lineHeight: 'var(--tfc-45)',
+                    width: transformSize(24),
+                    height: transformSize(45),
+                    lineHeight: transformSize(45),
                     color: 'red',
                   }}
                 >
@@ -246,7 +247,7 @@ class AdvanceInput extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-28)',
+                    fontSize: transformSize(28),
                   },
                   ...labelStyle,
                 }}
@@ -257,7 +258,7 @@ class AdvanceInput extends ComponentBase {
           }
           rightStyle={{
             ...{
-              paddingRight: 'var(--tfc-40)',
+              paddingRight: transformSize(40),
             },
             ...{
               height: '100%',
@@ -273,7 +274,7 @@ class AdvanceInput extends ComponentBase {
         title={title}
         description={description}
         contentStyle={{
-          ...{ width: 'var(--tfc-180)' },
+          ...{ width: transformSize(180) },
           ...contentStyle,
           ...{
             flex: 'none',
@@ -294,8 +295,10 @@ class AdvanceInput extends ComponentBase {
                     type={type}
                     style={{
                       ...{
-                        fontSize: 'var(--tfc-28)',
-                        padding: 'var(--tfc-22) 0 var(--tfc-22) 0',
+                        fontSize: transformSize(28),
+                        padding: `${transformSize(22)} 0 ${transformSize(
+                          22,
+                        )} 0`,
                       },
                       ...valueStyle,
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
@@ -334,7 +337,7 @@ class AdvanceInput extends ComponentBase {
                   clearable ? (
                     <View
                       style={{
-                        paddingLeft: 'var(--tfc-10)',
+                        paddingLeft: transformSize(10),
                         height: '100%',
                       }}
                       onClick={this.clearValue}
@@ -357,7 +360,7 @@ class AdvanceInput extends ComponentBase {
               extra
                 ? {
                     ...{
-                      fontSize: 'var(--tfc-28)',
+                      fontSize: transformSize(28),
                     },
                     ...extraContainerStyle,
                   }

@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import {
   inCollection,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -101,7 +102,7 @@ class SearchBar extends ComponentBase {
       <View
         style={{
           ...{
-            // padding: 'var(--tfc-12) var(--tfc-28)',
+            // padding: `${transformSize(12)} ${transformSize(28)}`,
             backgroundColor: '#f7f8fa',
             overflow: 'hidden',
           },
@@ -132,7 +133,7 @@ class SearchBar extends ComponentBase {
             zIndex: '6',
             top: '0',
             left: '0',
-            width: 'var(--tfc-70)',
+            width: transformSize(70),
             height: '100%',
           }}
           onClick={this.triggerNavigate}
@@ -147,16 +148,16 @@ class SearchBar extends ComponentBase {
           placeholder={placeholder}
           placeholderStyle={{
             ...{
-              fontSize: 'var(--tfc-28)',
+              fontSize: transformSize(28),
             },
             ...placeholderStyle,
           }}
           style={{
-            paddingLeft: 'var(--tfc-70)',
+            paddingLeft: transformSize(70),
           }}
           valueStyle={{
             ...{
-              padding: 'var(--tfc-10) 0 var(--tfc-10) 0',
+              padding: `${transformSize(10)} 0 ${transformSize(10)} 0`,
             },
             valueStyle,
           }}
@@ -169,8 +170,8 @@ class SearchBar extends ComponentBase {
                 <View
                   style={{
                     ...{
-                      fontSize: 'var(--tfc-28)',
-                      paddingLeft: 'var(--tfc-20)',
+                      fontSize: transformSize(28),
+                      paddingLeft: transformSize(20),
                     },
                     ...searchStyle,
                   }}

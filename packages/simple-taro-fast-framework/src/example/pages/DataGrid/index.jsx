@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import { Card, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -49,7 +50,7 @@ export default class Index extends PageWrapper {
             bordered
             column={2}
             size="small"
-            labelStyle={{ width: 'var(--tfc-80)' }}
+            labelStyle={{ width: transformSize(80) }}
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
           />
@@ -61,7 +62,7 @@ export default class Index extends PageWrapper {
             bordered={false}
             column={3}
             size="small"
-            labelStyle={{ width: 'var(--tfc-80)' }}
+            labelStyle={{ width: transformSize(80) }}
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
           />

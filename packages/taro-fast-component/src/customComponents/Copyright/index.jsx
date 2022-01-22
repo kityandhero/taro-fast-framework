@@ -1,6 +1,9 @@
 import { View } from '@tarojs/components';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import CenterBox from '../CenterBox';
@@ -36,11 +39,11 @@ class Copyright extends ComponentBase {
       <View
         style={{
           ...style,
-          ...{ height: `var(--tfc-${totalHeight})` },
+          ...{ height: transformSize(totalHeight) },
         }}
       >
         {showName ? (
-          <View style={{ height: `var(--tfc-${nameHeight})` }}>
+          <View style={{ height: transformSize(nameHeight) }}>
             <CenterBox>
               <FlexBox
                 left={
@@ -48,8 +51,8 @@ class Copyright extends ComponentBase {
                     <VerticalBox>
                       <View
                         style={{
-                          padding: 'var(--tfc-10) var(--tfc-10)',
-                          width: 'var(--tfc-40)',
+                          padding: `${transformSize(10)} ${transformSize(10)}`,
+                          width: transformSize(40),
                         }}
                       >
                         <ImageBox src={logo} circle={circle} lazyLoad />
@@ -64,7 +67,7 @@ class Copyright extends ComponentBase {
                         style={{
                           ...{
                             color: '#00000073',
-                            fontSize: 'var(--tfc-24)',
+                            fontSize: transformSize(24),
                           },
                           ...(!stringIsNullOrWhiteSpace(color)
                             ? {
@@ -84,13 +87,13 @@ class Copyright extends ComponentBase {
         ) : null}
 
         {showCopyright ? (
-          <View style={{ height: `var(--tfc-${copyrightHeight})` }}>
+          <View style={{ height: transformSize(copyrightHeight) }}>
             <CenterBox>
               <View
                 style={{
                   ...{
                     color: '#00000073',
-                    fontSize: 'var(--tfc-20)',
+                    fontSize: transformSize(20),
                   },
                   ...(!stringIsNullOrWhiteSpace(color)
                     ? {

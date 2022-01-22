@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import { CenterBox, Card, Item } from 'taro-fast-component/es/customComponents';
 
 import {
@@ -46,7 +47,7 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <View style={{ margin: 'var(--tfc-20) 0' }}>
+        <View style={{ margin: `${transformSize(20)} 0` }}>
           <CenterBox> Welcome To Taro-Fast-Framework! </CenterBox>
         </View>
 

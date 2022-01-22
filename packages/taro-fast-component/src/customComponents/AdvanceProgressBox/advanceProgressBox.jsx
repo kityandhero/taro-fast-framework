@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import {
   inCollection,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -86,7 +87,7 @@ class AdvanceProgressBox extends ComponentBase {
         labelComponent = (
           <VerticalBox>
             <View
-              style={{ ...{ paddingRight: 'var(--tfc-20)' }, ...labelStyle }}
+              style={{ ...{ paddingRight: transformSize(20) }, ...labelStyle }}
             >
               {label}
             </View>

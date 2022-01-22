@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Space,
   Card,
@@ -15,7 +16,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="Badge Wrapper" headerStyle={cardHeaderStyle}>
-          <Space wrap style={{ '--gap': 'var(--tfc-24)' }}>
+          <Space wrap style={{ '--gap': transformSize(24) }}>
             <Badge content="5">
               <Avatar text="图" />
             </Badge>
@@ -57,7 +58,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="Badge Only" headerStyle={cardHeaderStyle}>
-          <Space style={{ '--gap': 'var(--tfc-24)' }}>
+          <Space style={{ '--gap': transformSize(24) }}>
             <Badge content="99+" />
 
             <Badge content="新消息!" />

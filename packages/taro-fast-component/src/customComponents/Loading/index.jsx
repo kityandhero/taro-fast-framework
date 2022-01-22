@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
-import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
@@ -10,11 +11,11 @@ class Loading extends ComponentBase {
     const { color, size } = this.props;
     const loadingSize = typeof size === 'string' ? size : toString(size);
     const sizeStyle = {
-      width: size ? `var(--tfc-${toNumber(loadingSize)})` : '',
-      width: size ? `var(--tfc-${toNumber(loadingSize)})` : '',
+      width: size ? transformSize(loadingSize) : '',
+      width: size ? transformSize(loadingSize) : '',
     };
     const colorStyle = {
-      border: color ? `var(--tfc-1) solid ${color}` : '',
+      border: color ? `${transformSize(1)} solid ${color}` : '',
       borderColor: color ? `${color} transparent transparent transparent` : '',
     };
     const ringStyle = Object.assign({}, colorStyle, sizeStyle);

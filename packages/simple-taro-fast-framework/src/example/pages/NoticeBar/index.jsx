@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, NoticeBar, Icon } from 'taro-fast-component/es/customComponents';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
@@ -43,11 +44,11 @@ export default class Index extends PageWrapper {
             extra={
               <View
                 style={{
-                  width: 'var(--tfc-100)',
+                  width: transformSize(100),
                   height: '100%',
                   color: '#000',
-                  padding: ' 0 var(--tfc-10)',
-                  fontSize: 'var(--tfc-28)',
+                  padding: `0 ${transformSize(10)}`,
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                 }}
               >

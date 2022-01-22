@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Space, Price } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -28,8 +29,8 @@ export default class Index extends PageWrapper {
           <Price
             price={4.78}
             bodyStyle={{
-              border: 'var(--tfc-2) solid #ccc',
-              padding: 'var(--tfc-6)',
+              border: `${transformSize(2)} solid #ccc`,
+              padding: transformSize(6),
             }}
           />
         </Card>
@@ -50,12 +51,12 @@ export default class Index extends PageWrapper {
               fontWeight: 'bold',
             }}
             prefixStyle={{
-              fontSize: 'var(--tfc-24)',
-              marginRight: 'var(--tfc-5)',
+              fontSize: transformSize(24),
+              marginRight: transformSize(5),
             }}
-            integerPartStyle={{ fontSize: 'var(--tfc-48)' }}
-            pointStyle={{ fontSize: 'var(--tfc-48)' }}
-            decimalPartStyle={{ fontSize: 'var(--tfc-48)' }}
+            integerPartStyle={{ fontSize: transformSize(48) }}
+            pointStyle={{ fontSize: transformSize(48) }}
+            decimalPartStyle={{ fontSize: transformSize(48) }}
           />
         </Card>
       </View>

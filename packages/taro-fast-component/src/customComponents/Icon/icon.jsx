@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { mergeStyle } from 'taro-fast-common/es/utils/tools';
+import { mergeStyle, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import { defaultProps } from './config';
@@ -23,7 +22,7 @@ class Icon extends ComponentBase {
     const { customStyle, className, value, size, color, hidden } = this.props;
 
     const rootStyle = {
-      fontSize: `var(--tfc-${toNumber(toString(size))})`,
+      fontSize: transformSize(size),
       color,
     };
 

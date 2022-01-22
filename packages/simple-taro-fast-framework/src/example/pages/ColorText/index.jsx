@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Card,
   Icon,
@@ -72,7 +73,7 @@ export default class Index extends PageWrapper {
         <Card header="附带图片" headerStyle={cardHeaderStyle}>
           <ColorText
             icon={
-              <View style={{ width: 'var(--tfc-40)' }}>
+              <View style={{ width: transformSize(40) }}>
                 <ImageBox circle src="https://jdc.jd.com/img/200" />
               </View>
             }

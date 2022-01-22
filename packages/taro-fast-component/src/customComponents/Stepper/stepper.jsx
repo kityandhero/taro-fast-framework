@@ -6,6 +6,7 @@ import {
   withNativeProps,
   mergeProps,
   bound,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 
@@ -123,7 +124,7 @@ export const Stepper = (p) => {
       <View className={`${classPrefix}-middle`}>
         <Input
           className={`${classPrefix}-input`}
-          style={{ textAlign: 'center', fontSize: 'var(--tfc-26)' }}
+          style={{ textAlign: 'center', fontSize: transformSize(26) }}
           onFocus={(e) => {
             setHasFocus(true);
             props.onFocus?.(e);

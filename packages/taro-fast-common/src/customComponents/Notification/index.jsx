@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { inCollection } from '../../utils/tools';
+import { inCollection, transformSize } from '../../utils/tools';
 import ComponentBase from '../../customComponents/ComponentBase';
 
 const typeCollection = ['info', 'success', 'error', 'warning'];
@@ -19,11 +19,11 @@ const styleInit = {
   background: '#78a4fa',
   boxSizing: 'border-box',
   color: '#fff',
-  fontSize: ' var(--tfc-28)',
+  fontSize: transformSize(28),
   left: '0',
   lineHeight: '1.5',
   opacity: '0',
-  padding: 'var(--tfc-12) var(--tfc-20)',
+  padding: `${transformSize(12)} ${transformSize(20)}`,
   position: 'fixed',
   right: '0',
   textAlign: 'center',

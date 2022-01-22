@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Card,
   Item,
@@ -14,8 +15,8 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 const style = { backgroundColor: '#f5f7fa' };
 
 const boxStyle = {
-  width: 'var(--tfc-80)',
-  height: 'var(--tfc-80)',
+  width: transformSize(80),
+  height: transformSize(80),
   backgroundColor: 'blue',
 };
 
@@ -190,7 +191,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
-          <View style={{ height: 'var(--tfc-300)', position: 'relative' }}>
+          <View style={{ height: transformSize(300), position: 'relative' }}>
             <CenterBox>父容器</CenterBox>
 
             <Overlay

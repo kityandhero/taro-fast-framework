@@ -1,18 +1,19 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import { Card, CenterBox } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const boxStyle = {
-  width: 'var(--tfc-80)',
-  height: 'var(--tfc-80)',
+  width: transformSize(80),
+  height: transformSize(80),
   backgroundColor: 'blue',
 };
 
 const style = {
-  height: 'var(--tfc-400)',
+  height: transformSize(400),
   backgroundColor: '#ccc',
 };
 

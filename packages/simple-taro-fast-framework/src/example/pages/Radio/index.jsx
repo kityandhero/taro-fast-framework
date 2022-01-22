@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Radio, Icon, Button } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -10,7 +11,7 @@ const style = { backgroundColor: '#f5f7fa' };
 
 const extraStyle = {
   padding: '0 var(--tfc-12)',
-  fontSize: 'var(--tfc-24)',
+  fontSize: transformSize(24),
   color: '#aaa',
 };
 
@@ -133,7 +134,7 @@ export default class Index extends PageWrapper {
           // showRenderCount
           extra={
             <Button
-              style={{ marginRight: 'var(--tfc-10)' }}
+              style={{ marginRight: transformSize(10) }}
               size="mini"
               onClick={this.toggleBorder}
             >

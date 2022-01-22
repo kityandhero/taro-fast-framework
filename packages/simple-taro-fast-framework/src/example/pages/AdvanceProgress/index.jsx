@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Card,
   Space,
@@ -53,7 +54,7 @@ export default class Index extends PageWrapper {
                 onClick={() => {
                   this.setPercent(10);
                 }}
-                style={{ marginRight: 'var(--tfc-8)' }}
+                style={{ marginRight: transformSize(8) }}
               >
                 进度+10
               </Button>

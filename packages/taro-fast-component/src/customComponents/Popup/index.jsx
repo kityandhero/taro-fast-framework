@@ -5,6 +5,7 @@ import {
   handleTouchScroll,
   inCollection,
   showRuntimeError,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -205,8 +206,8 @@ class Popup extends ComponentBase {
     const maxHeight = this.getMaxHeight();
 
     return {
-      minHeight: `var(--tfc-${minHeight})`,
-      maxHeight: `var(--tfc-${maxHeight})`,
+      minHeight: transformSize(minHeight),
+      maxHeight: transformSize(maxHeight),
     };
   };
 
@@ -241,14 +242,14 @@ class Popup extends ComponentBase {
     return {
       ...(arcTop
         ? {
-            borderTopLeftRadius: `var(--tfc-${as})`,
-            borderTopRightRadius: `var(--tfc-${as})`,
+            borderTopLeftRadius: transformSize(as),
+            borderTopRightRadius: transformSize(as),
           }
         : {}),
       ...(arcBottom
         ? {
-            borderBottomLeftRadius: `var(--tfc-${as})`,
-            borderBottomRightRadius: `var(--tfc-${as})`,
+            borderBottomLeftRadius: transformSize(as),
+            borderBottomRightRadius: transformSize(as),
           }
         : {}),
     };
@@ -358,10 +359,11 @@ class Popup extends ComponentBase {
               style={{
                 ...closeIconStyle,
                 ...{
-                  top: mode !== 'card' ? 'var(--tfc-12)' : 'var(--tfc-32)',
-                  right: mode !== 'card' ? 'var(--tfc-12)' : 'var(--tfc-32)',
-                  height: 'var(--tfc-40)',
-                  width: 'var(--tfc-40)',
+                  top: mode !== 'card' ? transformSize(12) : transformSize(32),
+                  right:
+                    mode !== 'card' ? transformSize(12) : transformSize(32),
+                  height: transformSize(40),
+                  width: transformSize(40),
                   position: 'absolute',
                 },
               }}
@@ -381,8 +383,8 @@ class Popup extends ComponentBase {
             headerStyle={{
               ...headerStyle,
               ...{
-                paddingTop: 'var(--tfc-10)',
-                paddingBottom: 'var(--tfc-10)',
+                paddingTop: transformSize(10),
+                paddingBottom: transformSize(10),
               },
             }}
             extra={extra}

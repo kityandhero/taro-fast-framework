@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Steps, Icon } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -62,10 +63,10 @@ export default class Index extends PageWrapper {
             direction="vertical"
             current={1}
             style={{
-              '--title-font-size': 'var(--tfc-17)',
-              '--description-font-size': 'var(--tfc-15)',
-              '--indicator-margin-right': 'var(--tfc-12)',
-              '--icon-size': 'var(--tfc-22)',
+              '--title-font-size': transformSize(17),
+              '--description-font-size': transformSize(15),
+              '--indicator-margin-right': transformSize(12),
+              '--icon-size': transformSize(22),
             }}
           >
             <Step

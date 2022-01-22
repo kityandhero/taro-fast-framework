@@ -4,6 +4,7 @@ import {
   stringIsNullOrWhiteSpace,
   copyToClipboard,
   getGuid,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -85,18 +86,18 @@ class DataGrid extends ComponentBase {
         column = 3;
       }
 
-      let margin = 'var(--tfc-32) var(--tfc-48)';
-      let paddingBottomNoBorder = 'var(--tfc-12)';
+      let margin = `${transformSize(32)} ${transformSize(48)}`;
+      let paddingBottomNoBorder = transformSize(12);
       let backgroundColor = '';
 
       if (sizeSource === 'middle') {
-        margin = 'var(--tfc-24) var(--tfc-48)';
-        paddingBottomNoBorder = 'var(--tfc-24)';
+        margin = `${transformSize(24)} ${transformSize(48)}`;
+        paddingBottomNoBorder = transformSize(24);
       }
 
       if (sizeSource === 'small') {
-        margin = 'var(--tfc-16) var(--tfc-32)';
-        paddingBottomNoBorder = 'var(--tfc-16)';
+        margin = `${transformSize(16)} ${transformSize(32)}`;
+        paddingBottomNoBorder = transformSize(16);
       }
 
       const columnSize = 12 / column;
@@ -110,15 +111,15 @@ class DataGrid extends ComponentBase {
 
       const containorStyle = bordered
         ? {
-            borderTop: 'var(--tfc-2) solid #f0f0f0',
-            borderLeft: 'var(--tfc-2) solid #f0f0f0',
+            borderTop: `${transformSize(2)} solid #f0f0f0`,
+            borderLeft: `${transformSize(2)} solid #f0f0f0`,
           }
         : null;
 
       const labelStyle = {
         ...{
-          fontSize: 'var(--tfc-30)',
-          width: 'var(--tfc-180)',
+          fontSize: transformSize(30),
+          width: transformSize(180),
         },
         ...(labelStyleSource || {}),
         ...(bordered ? { margin } : {}),
@@ -126,13 +127,13 @@ class DataGrid extends ComponentBase {
 
       const contentStyle = {
         ...{
-          fontSize: 'var(--tfc-30)',
+          fontSize: transformSize(30),
         },
         ...(contentStyleSource || {}),
         ...(bordered
           ? {
               ...{
-                margin: 'var(--tfc-32) var(--tfc-48)',
+                margin: `${transformSize(32)} ${transformSize(48)}`,
               },
 
               ...{ margin },
@@ -143,10 +144,10 @@ class DataGrid extends ComponentBase {
       const titleComponent = stringIsNullOrWhiteSpace(title) ? null : (
         <View
           style={{
-            marginBottom: 'var(--tfc-16)',
+            marginBottom: transformSize(16),
             color: '#000000d9',
             fontWeight: 500,
-            fontSize: 'var(--tfc-32)',
+            fontSize: transformSize(32),
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
           }}
@@ -172,8 +173,8 @@ class DataGrid extends ComponentBase {
 
               const itemStyle = bordered
                 ? {
-                    borderRight: 'var(--tfc-2) solid #f0f0f0',
-                    borderBottom: 'var(--tfc-2) solid #f0f0f0',
+                    borderRight: `${transformSize(2)} solid #f0f0f0`,
+                    borderBottom: `${transformSize(2)} solid #f0f0f0`,
                   }
                 : {
                     paddingBottom: paddingBottomNoBorder,
@@ -232,7 +233,7 @@ class DataGrid extends ComponentBase {
                     leftStyle={{
                       ...{ backgroundColor },
                       ...(bordered
-                        ? { borderRight: 'var(--tfc-2) solid #f0f0f0' }
+                        ? { borderRight: `${transformSize(2)} solid #f0f0f0` }
                         : {}),
                     }}
                     right={
@@ -255,7 +256,7 @@ class DataGrid extends ComponentBase {
                         {v}
                         {itemCanCopy && (itemCanCopy || null) != null ? (
                           <Text
-                            style={{ marginLeft: 'var(--tfc-40)' }}
+                            style={{ marginLeft: transformSize(40) }}
                             onClick={() => {
                               copyToClipboard({
                                 text: itemCopyData || itemValue,

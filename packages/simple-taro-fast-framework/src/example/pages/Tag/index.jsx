@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Space, Tag } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -125,7 +126,7 @@ export default class Index extends PageWrapper {
             <Tag
               color="primary"
               fill="outline"
-              style={{ '--border-radius': 'var(--tfc-6)' }}
+              style={{ '--border-radius': transformSize(6) }}
             >
               Primary
             </Tag>

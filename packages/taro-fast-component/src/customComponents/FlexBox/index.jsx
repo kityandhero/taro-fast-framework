@@ -1,7 +1,10 @@
 import { View } from '@tarojs/components';
 
+import {
+  inCollection,
+  transformSize,
+} from 'taro-fast-component/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
-import { inCollection } from 'taro-fast-common/es/utils/tools';
 
 import Col from '../Flex/Col';
 import Row from '../Flex/Row';
@@ -15,7 +18,7 @@ const defaultProps = {
   allowWrap: false,
   vertical: {
     minHeight: 'auto',
-    bottomHeight: 'var(--tfc-180)',
+    bottomHeight: transformSize(180),
   },
   left: null,
   leftStyle: {},
@@ -89,7 +92,7 @@ class FlexBox extends ComponentBase {
 
     const { minHeight, bottomHeight } = {
       ...{
-        bottomHeight: 'var(--tfc-80)',
+        bottomHeight: transformSize(80),
       },
       ...(vertical || {}),
     };

@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import {
   inCollection,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
@@ -22,12 +23,12 @@ const { IconCheck } = Icon;
 const layoutCollection = ['list', 'checkBox'];
 
 const iconContainerStyle = {
-  border: 'var(--tfc-2) solid #ccc',
-  width: 'var(--tfc-30)',
-  height: 'var(--tfc-30)',
-  padding: 'var(--tfc-4)',
-  lineHeight: 'var(--tfc-30)',
-  borderRadius: 'var(--tfc-6)',
+  border: `${transformSize(2)} solid #ccc`,
+  width: transformSize(30),
+  height: transformSize(30),
+  padding: transformSize(4),
+  lineHeight: transformSize(30),
+  borderRadius: transformSize(6),
 };
 
 const uncheckStatusIcon = (
@@ -189,7 +190,7 @@ class CheckBox extends ComponentBase {
                 }
                 extraContainerStyle={{
                   ...{
-                    paddingRight: 'var(--tfc-24)',
+                    paddingRight: transformSize(24),
                   },
                   ...extraContainerStyle,
                 }}
@@ -223,7 +224,7 @@ class CheckBox extends ComponentBase {
                     {isString(extraItem) ? (
                       <View
                         style={{
-                          fontSize: 'var(--tfc-30)',
+                          fontSize: transformSize(30),
                           color: 'var(--tfc-color-weak)',
                         }}
                       >
@@ -237,7 +238,7 @@ class CheckBox extends ComponentBase {
               }
               extraContainerStyle={{
                 ...{
-                  paddingRight: 'var(--tfc-24)',
+                  paddingRight: transformSize(24),
                 },
                 ...extraContainerStyle,
               }}

@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Ellipsis } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -13,10 +14,10 @@ export default class Index extends PageWrapper {
           <Ellipsis
             line={1}
             style={{
-              width: '2var(--tfc-50)',
-              fontSize: 'var(--tfc-28)',
-              lineHeight: 'var(--tfc-44)',
-              height: 'var(--tfc-44)',
+              width: transformSize(250),
+              fontSize: transformSize(28),
+              lineHeight: transformSize(44),
+              height: transformSize(44),
             }}
             onClick={() => {
               console.log('ellipsis click');
@@ -30,9 +31,9 @@ export default class Index extends PageWrapper {
           <Ellipsis
             line={2}
             style={{
-              height: 'var(--tfc-88)',
-              fontSize: 'var(--tfc-28)',
-              lineHeight: 'var(--tfc-44)',
+              height: transformSize(88),
+              fontSize: transformSize(28),
+              lineHeight: transformSize(44),
             }}
             onClick={() => {
               console.log('ellipsis click');
@@ -46,9 +47,9 @@ export default class Index extends PageWrapper {
           <Ellipsis
             line={3}
             style={{
-              height: 'var(--tfc-132)',
-              fontSize: 'var(--tfc-28)',
-              lineHeight: 'var(--tfc-44)',
+              height: transformSize(132),
+              fontSize: transformSize(28),
+              lineHeight: transformSize(44),
             }}
             onClick={() => {
               console.log('ellipsis click');

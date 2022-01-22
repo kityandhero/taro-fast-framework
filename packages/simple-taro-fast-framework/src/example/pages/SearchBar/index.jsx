@@ -1,6 +1,9 @@
 import { View } from '@tarojs/components';
 
-import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
+import {
+  transformSize,
+  showInfoMessage,
+} from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Icon,
@@ -46,7 +49,7 @@ export default class Index extends PageWrapper {
         >
           <SearchBar
             style={{
-              margin: 'var(--tfc-40)',
+              margin: transformSize(40),
             }}
             mode="search"
             onSearch={this.handleSearch}
@@ -54,8 +57,8 @@ export default class Index extends PageWrapper {
 
           <SearchBar
             style={{
-              margin: 'var(--tfc-40)',
-              borderRadius: 'var(--tfc-100)',
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
             }}
             mode="search"
             onSearch={this.handleSearch}
@@ -70,8 +73,8 @@ export default class Index extends PageWrapper {
         >
           <SearchBar
             style={{
-              margin: 'var(--tfc-40)',
-              borderRadius: 'var(--tfc-100)',
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
             }}
             mode="navigate"
             searchStyle={{}}
@@ -80,8 +83,8 @@ export default class Index extends PageWrapper {
 
           <SearchBar
             style={{
-              margin: 'var(--tfc-40)',
-              borderRadius: 'var(--tfc-100)',
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
             }}
             mode="navigate"
             showSearch={false}
@@ -97,8 +100,8 @@ export default class Index extends PageWrapper {
         >
           <SearchBar
             style={{
-              margin: 'var(--tfc-40)',
-              borderRadius: 'var(--tfc-100)',
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
             }}
             align="center"
             icon={<IconSketch size={28} color="#6b6ead" />}

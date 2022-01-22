@@ -1,18 +1,19 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import { Card, FlexBox } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const boxStyle = {
-  width: 'var(--tfc-80)',
-  height: 'var(--tfc-80)',
+  width: transformSize(80),
+  height: transformSize(80),
   backgroundColor: 'blue',
 };
 
 const autoStyle = {
-  height: 'var(--tfc-80)',
+  height: transformSize(80),
   backgroundColor: '#ccc',
 };
 
@@ -44,10 +45,10 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
         >
           <FlexBox
-            style={{ height: 'var(--tfc-300)' }}
+            style={{ height: transformSize(300) }}
             direction="vertical"
             vertical={{
-              bottomHeight: 'var(--tfc-80)',
+              bottomHeight: transformSize(80),
             }}
             top={
               <View
@@ -58,7 +59,7 @@ export default class Index extends PageWrapper {
               <View
                 style={{
                   ...boxStyle,
-                  ...{ width: '100%', height: 'var(--tfc-80)' },
+                  ...{ width: '100%', height: transformSize(80) },
                 }}
               ></View>
             }

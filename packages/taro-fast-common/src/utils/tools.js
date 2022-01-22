@@ -2043,7 +2043,7 @@ export function handleTouchScroll(flag) {
     document.body.classList.add('tfc-frozen');
 
     // 把脱离文档流的body拉上去！否则页面会回到顶部！
-    document.body.style.top = `var(--tfc-${-scrollTop})`;
+    document.body.style.top = transformSize(scrollTop);
   } else {
     document.body.style.top = '';
     document.body.classList.remove('tfc-frozen');
@@ -2077,6 +2077,28 @@ function toFixed(number, precision) {
   const multiplier = Math.pow(10, precision + 1),
     wholeNumber = Math.floor(number * multiplier);
   return (Math.round(wholeNumber / 10) * 10) / multiplier;
+}
+
+export function transformSize(size) {
+  if (isNumber(size)) {
+    const s = toNumber(size);
+
+    if (s < -2000 || s > 2000) {
+      if (s === 0) {
+        return '0';
+      }
+
+      if (s > 0) {
+        return `var(--tfc-${s})`;
+      }
+
+      return `calc(var(--tfc-${s}) * -1)`;
+    }
+
+    return `${s}px`;
+  }
+
+  return size;
 }
 
 /**

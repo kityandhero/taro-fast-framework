@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize, isFunction } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';
@@ -111,7 +111,7 @@ class Item extends ComponentBase {
                 className={`${classPrefix}-header-content-extra`}
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-28)',
+                    fontSize: transformSize(28),
                   },
                   ...extraContainerStyle,
                 }}

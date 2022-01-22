@@ -1,6 +1,9 @@
 import { View } from '@tarojs/components';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -113,7 +116,7 @@ class RadioSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-30)',
+                    fontSize: transformSize(30),
                     color: '#999 ',
                   },
                   ...placeholderStyle,
@@ -125,7 +128,7 @@ class RadioSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-30)',
+                    fontSize: transformSize(30),
                   },
                   ...valueStyle,
                 }}
@@ -136,7 +139,7 @@ class RadioSelector extends ComponentBase {
           }
           extraContainerStyle={{
             ...{
-              paddingRight: 'var(--tfc-24)',
+              paddingRight: transformSize(24),
             },
             ...extraContainerStyle,
           }}

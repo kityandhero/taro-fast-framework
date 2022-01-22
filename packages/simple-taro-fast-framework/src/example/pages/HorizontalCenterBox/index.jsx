@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Card,
   HorizontalCenterBox,
@@ -10,15 +11,15 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = {
-  border: 'var(--tfc-2) solid #ccc',
-  height: 'var(--tfc-200)',
+  border: `${transformSize(2)} solid #ccc`,
+  height: transformSize(200),
 };
 
 const boxStyle = {
-  width: 'var(--tfc-80)',
-  height: 'var(--tfc-80)',
+  width: transformSize(80),
+  height: transformSize(80),
   backgroundColor: 'blue',
-  margin: 'var(--tfc-20)',
+  margin: transformSize(20),
 };
 
 const horizontalCenterBoxStyle = {

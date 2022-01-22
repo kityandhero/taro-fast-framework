@@ -1,5 +1,7 @@
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+
 import Item from '../Item';
 import Stepper from '../Stepper';
 
@@ -73,7 +75,7 @@ class StepperItem extends ComponentBase {
         }
         extraContainerStyle={{
           ...{
-            paddingRight: 'var(--tfc-24)',
+            paddingRight: transformSize(24),
           },
           ...extraContainerStyle,
         }}

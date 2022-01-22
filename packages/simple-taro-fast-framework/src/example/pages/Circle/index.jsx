@@ -4,6 +4,7 @@ import {
   roundToTarget,
   getGuid,
   formatTarget,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { formatCollection } from 'taro-fast-common/es/utils/constants';
 import {
@@ -72,8 +73,8 @@ export default class Index extends PageWrapper {
           <Space direction="vertical" fillWidth>
             <Circle
               style={{
-                border: 'var(--tfc-2) solid #ccc',
-                padding: 'var(--tfc-6)',
+                border: `${transformSize(2)} solid #ccc`,
+                padding: transformSize(6),
                 backgroundColor: '#fff',
               }}
               backRingColor="#ccc"
@@ -86,13 +87,13 @@ export default class Index extends PageWrapper {
             >
               <View
                 style={{
-                  height: 'var(--tfc-100)',
+                  height: transformSize(100),
                 }}
               >
                 <FlexBox
                   direction="vertical"
                   bottomStyle={{
-                    height: 'var(--tfc-80)',
+                    height: transformSize(80),
                   }}
                   top={
                     <HorizontalCenterBox>
@@ -145,7 +146,7 @@ export default class Index extends PageWrapper {
                   style={
                     {
                       // backgroundColor: '#ccc',
-                      // border: 'var(--tfc-10) solid #ccc',
+                      // border: `${transformSize(10)} solid #ccc`,
                     }
                   }
                   backRingColor="#ccc"

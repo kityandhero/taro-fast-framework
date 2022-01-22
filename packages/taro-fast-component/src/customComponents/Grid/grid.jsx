@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 const classPrefix = `tfc-grid`;
@@ -25,10 +26,10 @@ class Grid extends ComponentBase {
 
     if (gap !== undefined) {
       if (Array.isArray(gap)) {
-        style['--gap-horizontal'] = `var(--tfc-${gap[0]})`;
-        style['--gap-vertical'] = `var(--tfc-${gap[1]})`;
+        style['--gap-horizontal'] = transformSize(gap[0]);
+        style['--gap-vertical'] = transformSize(gap[1]);
       } else {
-        style['--gap'] = `var(--tfc-${gap})`;
+        style['--gap'] = transformSize(gap);
       }
     }
 

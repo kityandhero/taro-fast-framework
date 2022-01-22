@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { View, Image } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -110,7 +111,7 @@ class ImageBox extends ComponentBase {
     aspectRatioVal = aspectRatioVal <= 0 ? 1 : aspectRatioVal;
 
     const borderRadiusDefaultStyle = borderRadiusValue
-      ? { borderRadius: 'var(--tfc-8)' }
+      ? { borderRadius: transformSize(8) }
       : {};
 
     const circle = circleValue || false;

@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import {
   Card,
   Ellipsis,
@@ -16,7 +17,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <Card header="例子: 新闻标题上下滚动" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: 'var(--tfc-40)' },
+            style: { height: transformSize(40) },
             // indicatorColor: '#999',
             // indicatorActiveColor: '#333',
             vertical: true,
@@ -56,7 +57,7 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图1" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: 'var(--tfc-300)' },
+            style: { height: transformSize(300) },
             // indicatorColor: '#999',
             // indicatorActiveColor: '#333',
             circular: true,
@@ -94,8 +95,8 @@ export default class Index extends PageWrapper {
         <Card header="例子: 轮播图2" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: '2var(--tfc-60)' },
-            previousMargin: 'var(--tfc-80)',
-            nextMargin: 'var(--tfc-80)',
+            previousMargin: transformSize(80),
+            nextMargin: transformSize(80),
             easingFunction: 'easeInOutCubic',
             indicatorColor: '#e21222',
             indicatorActiveColor: '#459429',
@@ -133,9 +134,9 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图3" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: 'var(--tfc-140)' },
-            previousMargin: 'var(--tfc-80)',
-            nextMargin: 'var(--tfc-80)',
+            style: { height: transformSize(140) },
+            previousMargin: transformSize(80),
+            nextMargin: transformSize(80),
             easingFunction: 'easeInOutCubic',
             indicatorColor: '#e21222',
             indicatorActiveColor: '#459429',

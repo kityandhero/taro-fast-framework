@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-component/es/utils/tools';
 import { Card, Row, Col } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -18,7 +19,7 @@ const redStyle = {
 };
 
 const style = {
-  height: 'var(--tfc-80)',
+  height: transformSize(80),
   backgroundColor: '#ccc',
 };
 

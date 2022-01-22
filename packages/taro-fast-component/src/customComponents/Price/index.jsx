@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { formatMoney } from 'taro-fast-common/es/utils/tools';
+import { transformSize, formatMoney } from 'taro-fast-common/es/utils/tools';
 import { isMoney } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -61,7 +61,7 @@ class Price extends ComponentBase {
 
     const itemStyle = {
       ...{
-        fontSize: 'var(--tfc-28)',
+        fontSize: transformSize(28),
       },
       ...itemStyleSource,
       ...{

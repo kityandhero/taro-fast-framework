@@ -3,6 +3,7 @@ import { View, Text, Switch } from '@tarojs/components';
 import {
   inCollection,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isString } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -106,7 +107,7 @@ class AdvanceSwitch extends ComponentBase {
         labelComponent = (
           <VerticalBox>
             <View
-              style={{ ...{ paddingRight: 'var(--tfc-40)' }, ...labelStyle }}
+              style={{ ...{ paddingRight: transformSize(40) }, ...labelStyle }}
             >
               {!!required ? (
                 <Text
@@ -114,9 +115,9 @@ class AdvanceSwitch extends ComponentBase {
                     display: 'inline-block',
                     verticalAlign: 'middle',
                     textAlign: 'center',
-                    width: 'var(--tfc-24)',
-                    height: 'var(--tfc-45)',
-                    lineHeight: 'var(--tfc-45)',
+                    width: transformSize(24),
+                    height: transformSize(45),
+                    lineHeight: transformSize(45),
                     color: 'red',
                   }}
                 >

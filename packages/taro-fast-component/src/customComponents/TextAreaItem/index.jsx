@@ -3,6 +3,7 @@ import { View, Textarea } from '@tarojs/components';
 import {
   stringIsNullOrWhiteSpace,
   styleToString,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isString,
@@ -159,7 +160,7 @@ class TextAreaItem extends ComponentBase {
             <Button
               style={{
                 ...{
-                  fontSize: 'var(--tfc-28)',
+                  fontSize: transformSize(28),
                 },
                 ...editButtonStyle,
               }}
@@ -177,7 +178,7 @@ class TextAreaItem extends ComponentBase {
             <View
               style={{
                 ...{
-                  fontSize: 'var(--tfc-28)',
+                  fontSize: transformSize(28),
                   color: '#666',
                 },
                 ...emptyValueStyle,
@@ -190,7 +191,7 @@ class TextAreaItem extends ComponentBase {
               line={contentLine}
               style={{
                 ...{
-                  fontSize: 'var(--tfc-28)',
+                  fontSize: transformSize(28),
                   color: '#666',
                 },
                 ...contentStyle,
@@ -211,7 +212,7 @@ class TextAreaItem extends ComponentBase {
             <Button
               style={{
                 ...{
-                  fontSize: 'var(--tfc-28)',
+                  fontSize: transformSize(28),
                 },
                 ...confirmStyle,
               }}
@@ -236,11 +237,11 @@ class TextAreaItem extends ComponentBase {
         >
           <Textarea
             style={{
-              ...{ fontSize: 'var(--tfc-28)' },
+              ...{ fontSize: transformSize(28) },
               ...textareaStyle,
               ...{
                 width: '100%',
-                height: 'var(--tfc-300)',
+                height: transformSize(300),
               },
             }}
             placeholderStyle={

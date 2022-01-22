@@ -1,6 +1,6 @@
 import { Progress } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -66,7 +66,7 @@ class AdvanceProgress extends ComponentBase {
 
     const iconContainerStyle = {
       ...{
-        paddingLeft: 'var(--tfc-10)',
+        paddingLeft: transformSize(10),
       },
       ...iconContainerStyleSource,
       ...{},
