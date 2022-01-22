@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { pxTransform, mergeStyle } from 'taro-fast-common/es/utils/tools';
+import { mergeStyle } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
@@ -22,7 +22,7 @@ class Icon extends ComponentBase {
       this.props;
 
     const rootStyle = {
-      fontSize: `${pxTransform(toNumber(toString(size)) * 2)}`,
+      fontSize: `val(--tfc-px-${toNumber(toString(size))})`,
       color,
     };
 

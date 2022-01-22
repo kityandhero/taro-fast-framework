@@ -53,7 +53,7 @@ export default class Index extends PageWrapper {
                 onClick={() => {
                   this.setPercent(10);
                 }}
-                style={{ marginRight: '8px' }}
+                style={{ marginRight: 'val(--tfc-px-8)' }}
               >
                 进度+10
               </Button>

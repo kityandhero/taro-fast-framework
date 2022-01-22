@@ -1,6 +1,5 @@
 import { View } from '@tarojs/components';
 
-import { pxTransform } from 'taro-fast-common/es/utils/tools';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -11,8 +10,8 @@ class Loading extends ComponentBase {
     const { color, size } = this.props;
     const loadingSize = typeof size === 'string' ? size : toString(size);
     const sizeStyle = {
-      width: size ? `${pxTransform(toNumber(loadingSize))}` : '',
-      height: size ? `${pxTransform(toNumber(loadingSize))}` : '',
+      width: size ? `val(--tfc-px-${toNumber(loadingSize)})` : '',
+      width: size ? `val(--tfc-px-${toNumber(loadingSize)})` : '',
     };
     const colorStyle = {
       border: color ? `1px solid ${color}` : '',

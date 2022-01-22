@@ -89,7 +89,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent(10);
                   }}
-                  style={{ marginLeft: '8px' }}
+                  style={{ marginLeft: 'val(--tfc-px-8)' }}
                 >
                   进度+10
                 </Button>
@@ -124,7 +124,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent2(10);
                   }}
-                  style={{ marginLeft: '8px' }}
+                  style={{ marginLeft: 'val(--tfc-px-8)' }}
                 >
                   进度+10
                 </Button>
@@ -152,7 +152,7 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: '8px' }}
+                style={{ marginLeft: 'val(--tfc-px-8)' }}
               >
                 处理
               </Button>
@@ -185,7 +185,7 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: '8px' }}
+                style={{ marginLeft: 'val(--tfc-px-8)' }}
               >
                 处理
               </Button>

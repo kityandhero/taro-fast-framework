@@ -84,7 +84,14 @@ export function buildConfig({
         tsconfig: 'tsconfig.json',
       }),
       postcss({
-        plugins: [pxtorem(), autoprefixer(), cssnano()],
+        plugins: [
+          autoprefixer(),
+          pxtorem({
+            rootValue: 32,
+            propList: ['*'],
+          }),
+          cssnano(),
+        ],
         inject: { insertAt: 'top' },
         extract: true,
       }),
