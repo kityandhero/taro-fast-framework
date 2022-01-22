@@ -44,6 +44,7 @@ import {
   isString,
   isUndefined,
   isPromise,
+  isNumber,
 } from './typeCheck';
 import Tips from './tips';
 import { toDatetime, toMoney, toNumber } from './typeConvert';
@@ -2048,6 +2049,33 @@ export function handleTouchScroll(flag) {
 
     document.documentElement.scrollTop = scrollTop;
   }
+}
+
+export function pxToRem(
+  pxSize,
+  rootValue = 32,
+  unitPrecision = 5,
+  minPixelValue = 0,
+) {
+  if (!isNumber(pxSize)) {
+    return pxSize;
+  }
+
+  const pixels = parseFloat(pxSize);
+
+  if (pixels < minPixelValue) {
+    return pxSize;
+  }
+
+  const fixedVal = toFixed(pixels / rootValue, unitPrecision);
+
+  return fixedVal === 0 ? '0' : fixedVal + 'rem';
+}
+
+function toFixed(number, precision) {
+  const multiplier = Math.pow(10, precision + 1),
+    wholeNumber = Math.floor(number * multiplier);
+  return (Math.round(wholeNumber / 10) * 10) / multiplier;
 }
 
 /**

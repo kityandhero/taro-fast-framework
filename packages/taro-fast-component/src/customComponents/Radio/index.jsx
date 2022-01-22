@@ -23,10 +23,10 @@ const layoutCollection = ['list', 'radio'];
 
 const iconContainerStyle = {
   border: 'var(--tfc-2) solid #ccc',
-  width: 'var(--tfc-32)',
-  height: 'var(--tfc-32)',
+  width: 'var(--tfc-30)',
+  height: 'var(--tfc-30)',
   padding: 'var(--tfc-4)',
-  lineHeight: 'var(--tfc-32)',
+  lineHeight: 'var(--tfc-30)',
   borderRadius: '50%',
 };
 
@@ -52,14 +52,14 @@ const checkStatusIcon = (
     }}
   >
     <CenterBox>
-      <IconCheck size={14} color="#fff" />
+      <IconCheck size={28} color="#fff" />
     </CenterBox>
   </View>
 );
 
 const checkStatusIconForListView = (
   <CenterBox>
-    <IconCheck size={19} color="#1677ff" />
+    <IconCheck size={38} color="#1677ff" />
   </CenterBox>
 );
 

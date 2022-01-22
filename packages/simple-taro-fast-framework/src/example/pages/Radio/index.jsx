@@ -148,7 +148,7 @@ export default class Index extends PageWrapper {
           style={style}
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
-          iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
+          iconCheck={<IconCheckCircle size={38} color="#1677ff" />}
           extra={<View style={extraStyle}>layout: list</View>}
           onChange={this.handleRadioChange}
         />
@@ -188,7 +188,7 @@ export default class Index extends PageWrapper {
           style={style}
           options={this.state.radioOptions1}
           value={this.state.radioValue1}
-          iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
+          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
           extra={<View style={extraStyle}>layout: radio</View>}
           onChange={this.handleRadioChange}
         />

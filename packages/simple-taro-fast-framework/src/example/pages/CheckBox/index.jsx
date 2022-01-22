@@ -152,8 +152,8 @@ export default class Index extends PageWrapper {
           style={style}
           options={this.state.checkBoxOptions1}
           value={this.state.checkBoxValue1}
-          iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
-          iconUncheck={<IconCheckCircle size={22} color="#ccc" />}
+          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
           extra={<View style={extraStyle}>layout: list</View>}
           onChange={this.handleCheckBoxChange}
         />
@@ -193,8 +193,8 @@ export default class Index extends PageWrapper {
           style={style}
           options={this.state.checkBoxOptions1}
           value={this.state.checkBoxValue1}
-          iconCheck={<IconCheckCircle size={22} color="#1677ff" />}
-          iconUncheck={<IconCheckCircle size={22} color="#ccc" />}
+          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
           extra={<View style={extraStyle}>layout: checkBox</View>}
           onChange={this.handleCheckBoxChange}
         />
