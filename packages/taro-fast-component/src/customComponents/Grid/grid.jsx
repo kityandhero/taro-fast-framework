@@ -25,10 +25,10 @@ class Grid extends ComponentBase {
 
     if (gap !== undefined) {
       if (Array.isArray(gap)) {
-        style['--gap-horizontal'] = `${gap[0]}px`;
-        style['--gap-vertical'] = `${gap[1]}px`;
+        style['--gap-horizontal'] = `var(--tfc-${gap[0]})`;
+        style['--gap-vertical'] = `var(--tfc-${gap[1]})`;
       } else {
-        style['--gap'] = `${gap}px`;
+        style['--gap'] = `var(--tfc-${gap})`;
       }
     }
 

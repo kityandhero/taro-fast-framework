@@ -205,8 +205,8 @@ class Popup extends ComponentBase {
     const maxHeight = this.getMaxHeight();
 
     return {
-      minHeight: `${minHeight}px`,
-      maxHeight: `${maxHeight}px`,
+      minHeight: `var(--tfc-${minHeight})`,
+      maxHeight: `var(--tfc-${maxHeight})`,
     };
   };
 
@@ -241,14 +241,14 @@ class Popup extends ComponentBase {
     return {
       ...(arcTop
         ? {
-            borderTopLeftRadius: `${as}px`,
-            borderTopRightRadius: `${as}px`,
+            borderTopLeftRadius: `var(--tfc-${as})`,
+            borderTopRightRadius: `var(--tfc-${as})`,
           }
         : {}),
       ...(arcBottom
         ? {
-            borderBottomLeftRadius: `${as}px`,
-            borderBottomRightRadius: `${as}px`,
+            borderBottomLeftRadius: `var(--tfc-${as})`,
+            borderBottomRightRadius: `var(--tfc-${as})`,
           }
         : {}),
     };

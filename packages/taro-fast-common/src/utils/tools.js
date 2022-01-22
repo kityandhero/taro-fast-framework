@@ -2043,7 +2043,7 @@ export function handleTouchScroll(flag) {
     document.body.classList.add('tfc-frozen');
 
     // 把脱离文档流的body拉上去！否则页面会回到顶部！
-    document.body.style.top = `${-scrollTop}px`;
+    document.body.style.top = `var(--tfc-${-scrollTop})`;
   } else {
     document.body.style.top = '';
     document.body.classList.remove('tfc-frozen');

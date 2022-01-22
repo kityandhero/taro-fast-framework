@@ -14,7 +14,7 @@ class Loading extends ComponentBase {
       width: size ? `var(--tfc-${toNumber(loadingSize)})` : '',
     };
     const colorStyle = {
-      border: color ? `1px solid ${color}` : '',
+      border: color ? `var(--tfc-1) solid ${color}` : '',
       borderColor: color ? `${color} transparent transparent transparent` : '',
     };
     const ringStyle = Object.assign({}, colorStyle, sizeStyle);

@@ -36,11 +36,11 @@ class Copyright extends ComponentBase {
       <View
         style={{
           ...style,
-          ...{ height: `${totalHeight}px` },
+          ...{ height: `var(--tfc-${totalHeight})` },
         }}
       >
         {showName ? (
-          <View style={{ height: `${nameHeight}px` }}>
+          <View style={{ height: `var(--tfc-${nameHeight})` }}>
             <CenterBox>
               <FlexBox
                 left={
@@ -84,7 +84,7 @@ class Copyright extends ComponentBase {
         ) : null}
 
         {showCopyright ? (
-          <View style={{ height: `${copyrightHeight}px` }}>
+          <View style={{ height: `var(--tfc-${copyrightHeight})` }}>
             <CenterBox>
               <View
                 style={{

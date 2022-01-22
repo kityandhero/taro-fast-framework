@@ -6,7 +6,7 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const styles = {
-  border: 'solid 1px #999999',
+  border: 'solid var(--tfc-1) #999999',
   background: '#f5f5f5',
   textAlign: 'center',
   color: '#999999',
