@@ -53,8 +53,8 @@
 }
 
 .@{class-prefix-steps} {
-  --title-font-size: var(--tfc-px-6);
-  --description-font-size: var(--tfc-px-24);
+  --title-font-size: var(--tfc-6);
+  --description-font-size: var(--tfc-24);
   --indicator-margin-right: 0;
   --icon-size: 18px;
 
@@ -64,19 +64,19 @@
   &-horizontal {
     display: flex;
     justify-content: space-around;
-    padding: var(--tfc-px-16) 0;
+    padding: var(--tfc-16) 0;
 
     .@{class-prefix-step} {
       flex: 1;
 
       .@{class-prefix-step}-indicator {
         width: 100%;
-        height: --tfc-px-24;
+        height: --tfc-24;
 
         &::after {
           left: 50%;
           top: 50%;
-          height: var(--tfc-px-2);
+          height: var(--tfc-2);
           transform: translateY(-50%);
           width: 100%;
         }
@@ -91,19 +91,19 @@
     .@{class-prefix-step}-content {
       text-align: center;
       font-size: var(--description-font-size);
-      padding-top: var(--tfc-px-4);
+      padding-top: var(--tfc-4);
       .@{class-prefix-step}-title {
         font-size: var(--title-font-size);
       }
       .@{class-prefix-step}-description {
-        margin-top: var(--tfc-px-4);
+        margin-top: var(--tfc-4);
         color: var(--tfc-color-weak);
       }
     }
   }
 
   &-vertical {
-    padding: var(--tfc-px-16) var(--tfc-px-32);
+    padding: var(--tfc-16) var(--tfc-32);
 
     .@{class-prefix-step} {
       display: flex;
@@ -111,13 +111,13 @@
 
       .@{class-prefix-step}-indicator {
         flex: none;
-        width: var(--tfc-px-48);
+        width: var(--tfc-48);
         margin-right: var(--indicator-margin-right);
 
         &::after {
           left: 50%;
           top: calc(var(--title-font-size) * 1.5 / 2);
-          width: var(--tfc-px-2);
+          width: var(--tfc-2);
           transform: translateX(-50%);
           height: 100%;
         }
@@ -135,13 +135,13 @@
       }
       .@{class-prefix-step}-content {
         flex: auto;
-        padding-bottom: var(--tfc-px-28);
+        padding-bottom: var(--tfc-28);
         .@{class-prefix-step}-title {
           font-size: var(--title-font-size);
           line-height: 1.5;
         }
         .@{class-prefix-step}-description {
-          padding-top: var(--tfc-px-4);
+          padding-top: var(--tfc-4);
           font-size: var(--description-font-size);
           color: var(--tfc-color-weak);
         }
@@ -156,8 +156,8 @@
 
 .@{class-prefix-step}-icon-dot {
   display: block;
-  width: var(--tfc-px-16);
-  height: var(--tfc-px-16);
+  width: var(--tfc-16);
+  height: var(--tfc-16);
   background: currentColor;
-  border-radius: var(--tfc-px-8);
+  border-radius: var(--tfc-8);
 }

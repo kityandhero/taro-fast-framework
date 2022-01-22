@@ -123,7 +123,7 @@ export const Stepper = (p) => {
       <View className={`${classPrefix}-middle`}>
         <Input
           className={`${classPrefix}-input`}
-          style={{ textAlign: 'center', fontSize: 'var(--tfc-px-6)' }}
+          style={{ textAlign: 'center', fontSize: 'var(--tfc-6)' }}
           onFocus={(e) => {
             setHasFocus(true);
             props.onFocus?.(e);

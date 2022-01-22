@@ -1,10 +1,10 @@
 @class-prefix-tag: ~'tfc-tag';
 
 .@{class-prefix-tag} {
-  --border-radius: var(--tfc-tag-border-radius, var(--tfc-px-4));
+  --border-radius: var(--tfc-tag-border-radius, var(--tfc-4));
 
-  padding: var(--tfc-px-6) var(--tfc-px-10);
-  font-size: var(--tfc-px-24);
+  padding: var(--tfc-6) var(--tfc-10);
+  font-size: var(--tfc-24);
   line-height: 1;
   font-weight: normal;
   background: var(--background-color);
@@ -12,18 +12,18 @@
   display: inline-block;
   white-space: nowrap;
   border-radius: var(--border-radius);
-  border: var(--tfc-px-1) solid var(--border-color);
+  border: var(--tfc-1) solid var(--border-color);
   box-sizing: border-box;
 
   &-circle {
-    border-radius: var(--tfc-px-200);
+    border-radius: var(--tfc-200);
   }
 
   &-circle-left {
-    border-radius: var(--tfc-px-200) 0 0 var(--tfc-px-200);
+    border-radius: var(--tfc-200) 0 0 var(--tfc-200);
   }
 
   &-circle-right {
-    border-radius: 0 var(--tfc-px-200) var(--tfc-px-200) 0;
+    border-radius: 0 var(--tfc-200) var(--tfc-200) 0;
   }
 }

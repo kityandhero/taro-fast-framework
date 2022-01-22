@@ -39,14 +39,14 @@ export default class Index extends PageWrapper {
     let r = '';
 
     for (let i = 1; i <= 200; i = i + 1) {
-      r += `--tfc-px-${i}: ${i}px;`;
+      r += `--tfc-${i}: ${i}px;`;
     }
 
     console.log(r);
 
     return (
       <View className="index">
-        <View style={{ margin: 'var(--tfc-px-20) 0' }}>
+        <View style={{ margin: 'var(--tfc-20) 0' }}>
           <CenterBox> Welcome To Taro-Fast-Framework! </CenterBox>
         </View>
 

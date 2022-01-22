@@ -358,12 +358,10 @@ class Popup extends ComponentBase {
               style={{
                 ...closeIconStyle,
                 ...{
-                  top:
-                    mode !== 'card' ? 'var(--tfc-px-12)' : 'var(--tfc-px-32)',
-                  right:
-                    mode !== 'card' ? 'var(--tfc-px-12)' : 'var(--tfc-px-32)',
-                  height: 'var(--tfc-px-40)',
-                  width: 'var(--tfc-px-40)',
+                  top: mode !== 'card' ? 'var(--tfc-12)' : 'var(--tfc-32)',
+                  right: mode !== 'card' ? 'var(--tfc-12)' : 'var(--tfc-32)',
+                  height: 'var(--tfc-40)',
+                  width: 'var(--tfc-40)',
                   position: 'absolute',
                 },
               }}
@@ -382,8 +380,8 @@ class Popup extends ComponentBase {
             headerStyle={{
               ...headerStyle,
               ...{
-                paddingTop: 'var(--tfc-px-10)',
-                paddingBottom: 'var(--tfc-px-10)',
+                paddingTop: 'var(--tfc-10)',
+                paddingBottom: 'var(--tfc-10)',
               },
             }}
             extra={extra}
@@ -407,9 +405,7 @@ class Popup extends ComponentBase {
               ...(inCollection(['left', 'right'], position)
                 ? {
                     height:
-                      mode !== 'card'
-                        ? '100%'
-                        : 'calc(100% - var(--tfc-px-48))',
+                      mode !== 'card' ? '100%' : 'calc(100% - var(--tfc-48))',
                   }
                 : {}),
               ...arcStyle,

@@ -94,7 +94,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <Card header="Buttons Color" headerStyle={cardHeaderStyle}>
           <VerticalBox
-            style={{ height: 'var(--tfc-px-100)' }}
+            style={{ height: 'var(--tfc-100)' }}
             alignJustify="center"
           >
             <Space wrap>
@@ -188,12 +188,12 @@ export default class Index extends PageWrapper {
           <Spin spin={!firstLoadSuccess}>
             <FadeView show={!dataLoading}>
               <VerticalBox
-                style={{ height: 'var(--tfc-px-50)' }}
+                style={{ height: 'var(--tfc-50)' }}
                 alignJustify="center"
               >
                 <Space direction="vertical">
                   <VerticalBox
-                    style={{ height: 'var(--tfc-px-100)' }}
+                    style={{ height: 'var(--tfc-100)' }}
                     alignJustify="center"
                   >
                     <Empty

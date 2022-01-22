@@ -72,7 +72,7 @@ export default class Index extends PageWrapper {
         <Card header="附带图片" headerStyle={cardHeaderStyle}>
           <ColorText
             icon={
-              <View style={{ width: 'var(--tfc-px-40)' }}>
+              <View style={{ width: 'var(--tfc-40)' }}>
                 <ImageBox circle src="https://jdc.jd.com/img/200" />
               </View>
             }
@@ -84,7 +84,7 @@ export default class Index extends PageWrapper {
           <ColorText
             textPrefix="前缀"
             text="文本文字"
-            separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-px-24)' }}
+            separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-24)' }}
           />
         </Card>
 
@@ -93,7 +93,7 @@ export default class Index extends PageWrapper {
             icon={<IconEdit size={16} color="#ff3ce7" />}
             textPrefix="前缀"
             text="文本文字"
-            separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-px-24)' }}
+            separatorStyle={{ color: '#67ca31', margin: '0 var(--tfc-24)' }}
           />
         </Card>
       </View>

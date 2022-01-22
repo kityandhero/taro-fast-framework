@@ -86,7 +86,7 @@ class ColorText extends ComponentBase {
           leftStyle={
             icon
               ? {
-                  ...{ paddingRight: 'var(--tfc-px-12)' },
+                  ...{ paddingRight: 'var(--tfc-12)' },
                   ...iconContainerStyle,
                 }
               : {}

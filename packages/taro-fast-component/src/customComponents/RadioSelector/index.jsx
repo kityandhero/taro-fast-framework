@@ -113,7 +113,7 @@ class RadioSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-px-30)',
+                    fontSize: 'var(--tfc-30)',
                     color: '#999 ',
                   },
                   ...placeholderStyle,
@@ -125,7 +125,7 @@ class RadioSelector extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-px-30)',
+                    fontSize: 'var(--tfc-30)',
                   },
                   ...valueStyle,
                 }}
@@ -136,7 +136,7 @@ class RadioSelector extends ComponentBase {
           }
           extraContainerStyle={{
             ...{
-              paddingRight: 'var(--tfc-px-24)',
+              paddingRight: 'var(--tfc-24)',
             },
             ...extraContainerStyle,
           }}

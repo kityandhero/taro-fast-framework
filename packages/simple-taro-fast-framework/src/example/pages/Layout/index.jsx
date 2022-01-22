@@ -18,7 +18,7 @@ const redStyle = {
 };
 
 const style = {
-  height: 'var(--tfc-px-80)',
+  height: 'var(--tfc-80)',
   backgroundColor: '#ccc',
 };
 

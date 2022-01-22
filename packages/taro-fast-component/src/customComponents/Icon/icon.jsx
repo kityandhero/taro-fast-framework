@@ -22,7 +22,7 @@ class Icon extends ComponentBase {
       this.props;
 
     const rootStyle = {
-      fontSize: `val(--tfc-px-${toNumber(toString(size))})`,
+      fontSize: `val(--tfc-${toNumber(toString(size))})`,
       color,
     };
 

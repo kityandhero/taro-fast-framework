@@ -16,7 +16,7 @@ export default class Index extends PageWrapper {
       <View className="index">
         <Card header="例子: 新闻标题上下滚动" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: 'var(--tfc-px-40)' },
+            style: { height: 'var(--tfc-40)' },
             // indicatorColor: '#999',
             // indicatorActiveColor: '#333',
             vertical: true,
@@ -56,7 +56,7 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图1" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: 'var(--tfc-px-300)' },
+            style: { height: 'var(--tfc-300)' },
             // indicatorColor: '#999',
             // indicatorActiveColor: '#333',
             circular: true,
@@ -83,7 +83,7 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 var(--tfc-px-20)' }}>
+                <View style={{ height: '100%', padding: '0 var(--tfc-20)' }}>
                   <ImageBox src={image} />
                 </View>
               );
@@ -93,9 +93,9 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图2" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: '2var(--tfc-px-60)' },
-            previousMargin: 'var(--tfc-px-80)',
-            nextMargin: 'var(--tfc-px-80)',
+            style: { height: '2var(--tfc-60)' },
+            previousMargin: 'var(--tfc-80)',
+            nextMargin: 'var(--tfc-80)',
             easingFunction: 'easeInOutCubic',
             indicatorColor: '#e21222',
             indicatorActiveColor: '#459429',
@@ -123,7 +123,7 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 var(--tfc-px-20)' }}>
+                <View style={{ height: '100%', padding: '0 var(--tfc-20)' }}>
                   <ImageBox src={image} />
                 </View>
               );
@@ -133,9 +133,9 @@ export default class Index extends PageWrapper {
 
         <Card header="例子: 轮播图3" headerStyle={cardHeaderStyle}>
           {buildSwiper({
-            style: { height: 'var(--tfc-px-140)' },
-            previousMargin: 'var(--tfc-px-80)',
-            nextMargin: 'var(--tfc-px-80)',
+            style: { height: 'var(--tfc-140)' },
+            previousMargin: 'var(--tfc-80)',
+            nextMargin: 'var(--tfc-80)',
             easingFunction: 'easeInOutCubic',
             indicatorColor: '#e21222',
             indicatorActiveColor: '#459429',
@@ -173,7 +173,7 @@ export default class Index extends PageWrapper {
               const { image } = o;
 
               return (
-                <View style={{ height: '100%', padding: '0 var(--tfc-px-20)' }}>
+                <View style={{ height: '100%', padding: '0 var(--tfc-20)' }}>
                   <ImageBox src={image} />
                 </View>
               );

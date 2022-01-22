@@ -4,45 +4,45 @@
 @zindex-divider: 100;
 
 .tfc-countdown {
-  height: var(--tfc-px-42);
+  height: var(--tfc-42);
   white-space: nowrap;
   font-size: 0;
   overflow: hidden;
 
   &__item {
-    height: var(--tfc-px-42);
+    height: var(--tfc-42);
     display: inline-block;
-    font-size: var(--tfc-px-6);
-    line-height: var(--tfc-px-42);
+    font-size: var(--tfc-6);
+    line-height: var(--tfc-42);
     text-align: center;
     vertical-align: middle;
-    min-width: var(--tfc-px-10);
+    min-width: var(--tfc-10);
   }
 
   &__separator {
-    padding: 0 var(--tfc-px-4);
+    padding: 0 var(--tfc-4);
   }
 
   &--card {
     .tfc-countdown__separator {
-      padding: 0 var(--tfc-px-8);
+      padding: 0 var(--tfc-8);
     }
 
     .tfc-countdown__value {
-      height: var(--tfc-px-38);
-      line-height: var(--tfc-px-38);
-      border: var(--tfc-px-2) solid @color-border-grey;
-      border-radius: var(--tfc-px-8);
+      height: var(--tfc-38);
+      line-height: var(--tfc-38);
+      border: var(--tfc-2) solid @color-border-grey;
+      border-radius: var(--tfc-8);
       color: #ff4949;
       background-color: #fff;
       position: relative;
-      padding: 0 var(--tfc-px-2);
+      padding: 0 var(--tfc-2);
 
       &::after {
         position: absolute;
         content: '';
         width: 100%;
-        height: var(--tfc-px-2);
+        height: var(--tfc-2);
         top: 50%;
         left: 0;
         z-index: @zindex-divider;

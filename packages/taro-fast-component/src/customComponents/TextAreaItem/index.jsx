@@ -159,7 +159,7 @@ class TextAreaItem extends ComponentBase {
             <Button
               style={{
                 ...{
-                  fontSize: 'var(--tfc-px-28)',
+                  fontSize: 'var(--tfc-28)',
                 },
                 ...editButtonStyle,
               }}
@@ -177,7 +177,7 @@ class TextAreaItem extends ComponentBase {
             <View
               style={{
                 ...{
-                  fontSize: 'var(--tfc-px-28)',
+                  fontSize: 'var(--tfc-28)',
                   color: '#666',
                 },
                 ...emptyValueStyle,
@@ -190,7 +190,7 @@ class TextAreaItem extends ComponentBase {
               line={contentLine}
               style={{
                 ...{
-                  fontSize: 'var(--tfc-px-28)',
+                  fontSize: 'var(--tfc-28)',
                   color: '#666',
                 },
                 ...contentStyle,
@@ -211,7 +211,7 @@ class TextAreaItem extends ComponentBase {
             <Button
               style={{
                 ...{
-                  fontSize: 'var(--tfc-px-28)',
+                  fontSize: 'var(--tfc-28)',
                 },
                 ...confirmStyle,
               }}
@@ -236,11 +236,11 @@ class TextAreaItem extends ComponentBase {
         >
           <Textarea
             style={{
-              ...{ fontSize: 'var(--tfc-px-28)' },
+              ...{ fontSize: 'var(--tfc-28)' },
               ...textareaStyle,
               ...{
                 width: '100%',
-                height: 'var(--tfc-px-300)',
+                height: 'var(--tfc-300)',
               },
             }}
             placeholderStyle={

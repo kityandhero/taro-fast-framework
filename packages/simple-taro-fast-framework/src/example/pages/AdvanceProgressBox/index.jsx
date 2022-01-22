@@ -89,7 +89,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent(10);
                   }}
-                  style={{ marginLeft: 'val(--tfc-px-8)' }}
+                  style={{ marginLeft: 'val(--tfc-8)' }}
                 >
                   进度+10
                 </Button>
@@ -124,7 +124,7 @@ export default class Index extends PageWrapper {
                   onClick={() => {
                     this.setPercent2(10);
                   }}
-                  style={{ marginLeft: 'val(--tfc-px-8)' }}
+                  style={{ marginLeft: 'val(--tfc-8)' }}
                 >
                   进度+10
                 </Button>
@@ -152,14 +152,14 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: 'val(--tfc-px-8)' }}
+                style={{ marginLeft: 'val(--tfc-8)' }}
               >
                 处理
               </Button>
             }
             extraStyle={
               {
-                // padding: '0 var(--tfc-px-10)',
+                // padding: '0 var(--tfc-10)',
               }
             }
           />
@@ -185,14 +185,14 @@ export default class Index extends PageWrapper {
                     message: 'click',
                   });
                 }}
-                style={{ marginLeft: 'val(--tfc-px-8)' }}
+                style={{ marginLeft: 'val(--tfc-8)' }}
               >
                 处理
               </Button>
             }
             extraStyle={
               {
-                // padding: '0 var(--tfc-px-10)',
+                // padding: '0 var(--tfc-10)',
               }
             }
           />

@@ -11,15 +11,15 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = {
-  border: 'var(--tfc-px-2) solid #ccc',
-  height: 'var(--tfc-px-200)',
+  border: 'var(--tfc-2) solid #ccc',
+  height: 'var(--tfc-200)',
 };
 
 const boxStyle = {
-  width: 'var(--tfc-px-80)',
-  height: 'var(--tfc-px-80)',
+  width: 'var(--tfc-80)',
+  height: 'var(--tfc-80)',
   backgroundColor: 'blue',
-  margin: 'var(--tfc-px-20)',
+  margin: 'var(--tfc-20)',
 };
 
 const alignList = [

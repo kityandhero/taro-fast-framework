@@ -46,7 +46,7 @@ export default class Index extends PageWrapper {
         >
           <SearchBar
             style={{
-              margin: 'var(--tfc-px-40)',
+              margin: 'var(--tfc-40)',
             }}
             mode="search"
             onSearch={this.handleSearch}
@@ -54,8 +54,8 @@ export default class Index extends PageWrapper {
 
           <SearchBar
             style={{
-              margin: 'var(--tfc-px-40)',
-              borderRadius: 'var(--tfc-px-100)',
+              margin: 'var(--tfc-40)',
+              borderRadius: 'var(--tfc-100)',
             }}
             mode="search"
             onSearch={this.handleSearch}
@@ -70,8 +70,8 @@ export default class Index extends PageWrapper {
         >
           <SearchBar
             style={{
-              margin: 'var(--tfc-px-40)',
-              borderRadius: 'var(--tfc-px-100)',
+              margin: 'var(--tfc-40)',
+              borderRadius: 'var(--tfc-100)',
             }}
             mode="navigate"
             searchStyle={{}}
@@ -80,8 +80,8 @@ export default class Index extends PageWrapper {
 
           <SearchBar
             style={{
-              margin: 'var(--tfc-px-40)',
-              borderRadius: 'var(--tfc-px-100)',
+              margin: 'var(--tfc-40)',
+              borderRadius: 'var(--tfc-100)',
             }}
             mode="navigate"
             showSearch={false}
@@ -97,8 +97,8 @@ export default class Index extends PageWrapper {
         >
           <SearchBar
             style={{
-              margin: 'var(--tfc-px-40)',
-              borderRadius: 'var(--tfc-px-100)',
+              margin: 'var(--tfc-40)',
+              borderRadius: 'var(--tfc-100)',
             }}
             align="center"
             icon={<IconSketch size={14} color="#6b6ead" />}

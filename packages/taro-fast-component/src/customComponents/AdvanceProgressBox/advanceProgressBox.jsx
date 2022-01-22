@@ -86,7 +86,7 @@ class AdvanceProgressBox extends ComponentBase {
         labelComponent = (
           <VerticalBox>
             <View
-              style={{ ...{ paddingRight: 'var(--tfc-px-20)' }, ...labelStyle }}
+              style={{ ...{ paddingRight: 'var(--tfc-20)' }, ...labelStyle }}
             >
               {label}
             </View>

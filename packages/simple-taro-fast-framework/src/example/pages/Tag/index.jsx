@@ -125,7 +125,7 @@ export default class Index extends PageWrapper {
             <Tag
               color="primary"
               fill="outline"
-              style={{ '--border-radius': 'val(--tfc-px-6)' }}
+              style={{ '--border-radius': 'val(--tfc-6)' }}
             >
               Primary
             </Tag>

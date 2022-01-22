@@ -28,8 +28,8 @@ export default class Index extends PageWrapper {
           <Price
             price={4.78}
             bodyStyle={{
-              border: 'var(--tfc-px-2) solid #ccc',
-              padding: 'var(--tfc-px-6)',
+              border: 'var(--tfc-2) solid #ccc',
+              padding: 'var(--tfc-6)',
             }}
           />
         </Card>
@@ -37,7 +37,7 @@ export default class Index extends PageWrapper {
         <Card header="元素通用样式" headerStyle={cardHeaderStyle}>
           <Price
             price={4.78}
-            itemStyle={{ color: '#ccc', fontSize: '3var(--tfc-px-6)' }}
+            itemStyle={{ color: '#ccc', fontSize: '3var(--tfc-6)' }}
           />
         </Card>
 
@@ -50,12 +50,12 @@ export default class Index extends PageWrapper {
               fontWeight: 'bold',
             }}
             prefixStyle={{
-              fontSize: 'var(--tfc-px-6)',
-              marginRight: 'var(--tfc-px-5)',
+              fontSize: 'var(--tfc-6)',
+              marginRight: 'var(--tfc-5)',
             }}
-            integerPartStyle={{ fontSize: 'var(--tfc-px-48)' }}
-            pointStyle={{ fontSize: 'var(--tfc-px-48)' }}
-            decimalPartStyle={{ fontSize: 'var(--tfc-px-48)' }}
+            integerPartStyle={{ fontSize: 'var(--tfc-48)' }}
+            pointStyle={{ fontSize: 'var(--tfc-48)' }}
+            decimalPartStyle={{ fontSize: 'var(--tfc-48)' }}
           />
         </Card>
       </View>

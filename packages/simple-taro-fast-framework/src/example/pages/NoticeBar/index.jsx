@@ -43,11 +43,11 @@ export default class Index extends PageWrapper {
             extra={
               <View
                 style={{
-                  width: 'var(--tfc-px-100)',
+                  width: 'var(--tfc-100)',
                   height: '100%',
                   color: '#000',
-                  padding: ' 0 var(--tfc-px-10)',
-                  fontSize: 'var(--tfc-px-28)',
+                  padding: ' 0 var(--tfc-10)',
+                  fontSize: 'var(--tfc-28)',
                   textAlign: 'center',
                 }}
               >

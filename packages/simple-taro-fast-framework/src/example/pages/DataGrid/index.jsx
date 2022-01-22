@@ -49,7 +49,7 @@ export default class Index extends PageWrapper {
             bordered
             column={2}
             size="small"
-            labelStyle={{ width: 'var(--tfc-px-80)' }}
+            labelStyle={{ width: 'var(--tfc-80)' }}
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
           />
@@ -61,7 +61,7 @@ export default class Index extends PageWrapper {
             bordered={false}
             column={3}
             size="small"
-            labelStyle={{ width: 'var(--tfc-px-80)' }}
+            labelStyle={{ width: 'var(--tfc-80)' }}
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
           />

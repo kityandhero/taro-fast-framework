@@ -130,8 +130,8 @@ export default class Index extends PageWrapper {
                   src={user.avatar}
                   style={{
                     borderRadius: 20,
-                    width: 'var(--tfc-px-80)',
-                    height: 'var(--tfc-px-80)',
+                    width: 'var(--tfc-80)',
+                    height: 'var(--tfc-80)',
                   }}
                   fit="cover"
                 />

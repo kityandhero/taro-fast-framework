@@ -107,13 +107,13 @@ class HelpBox extends ComponentBase {
           ) : (
             <View
               style={{
-                marginTop: 'var(--tfc-px-8)',
-                marginBottom: 'var(--tfc-px-8)',
+                marginTop: 'var(--tfc-8)',
+                marginBottom: 'var(--tfc-8)',
                 color: '#999',
                 fontWeight: 'normal',
-                fontSize: 'var(--tfc-px-28)',
-                lineHeight: 'var(--tfc-px-44)',
-                height: 'var(--tfc-px-44)',
+                fontSize: 'var(--tfc-28)',
+                lineHeight: 'var(--tfc-44)',
+                height: 'var(--tfc-44)',
               }}
             >
               {title}:
@@ -157,17 +157,17 @@ class HelpBox extends ComponentBase {
             width: customLabelWidth
               ? labelWidthStyle
               : showNumber
-              ? 'var(--tfc-px-44)'
-              : 'var(--tfc-px-24)',
+              ? 'var(--tfc-44)'
+              : 'var(--tfc-24)',
             color: '#999',
-            fontSize: 'var(--tfc-px-28)',
+            fontSize: 'var(--tfc-28)',
           }}
           contentStyle={{
             color: '#999',
-            fontSize: 'var(--tfc-px-28)',
+            fontSize: 'var(--tfc-28)',
           }}
           itemStyle={{
-            paddingBottom: 'var(--tfc-px-8)',
+            paddingBottom: 'var(--tfc-8)',
           }}
         />
       </View>

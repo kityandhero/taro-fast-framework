@@ -106,7 +106,7 @@ class AdvanceSwitch extends ComponentBase {
         labelComponent = (
           <VerticalBox>
             <View
-              style={{ ...{ paddingRight: 'var(--tfc-px-40)' }, ...labelStyle }}
+              style={{ ...{ paddingRight: 'var(--tfc-40)' }, ...labelStyle }}
             >
               {!!required ? (
                 <Text
@@ -114,9 +114,9 @@ class AdvanceSwitch extends ComponentBase {
                     display: 'inline-block',
                     verticalAlign: 'middle',
                     textAlign: 'center',
-                    width: 'var(--tfc-px-24)',
-                    height: 'var(--tfc-px-45)',
-                    lineHeight: 'var(--tfc-px-45)',
+                    width: 'var(--tfc-24)',
+                    height: 'var(--tfc-45)',
+                    lineHeight: 'var(--tfc-45)',
                     color: 'red',
                   }}
                 >

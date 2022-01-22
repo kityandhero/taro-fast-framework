@@ -48,8 +48,8 @@ class Copyright extends ComponentBase {
                     <VerticalBox>
                       <View
                         style={{
-                          padding: 'var(--tfc-px-10) var(--tfc-px-10)',
-                          width: 'var(--tfc-px-40)',
+                          padding: 'var(--tfc-10) var(--tfc-10)',
+                          width: 'var(--tfc-40)',
                         }}
                       >
                         <ImageBox src={logo} circle={circle} lazyLoad />
@@ -64,7 +64,7 @@ class Copyright extends ComponentBase {
                         style={{
                           ...{
                             color: '#00000073',
-                            fontSize: 'var(--tfc-px-24)',
+                            fontSize: 'var(--tfc-24)',
                           },
                           ...(!stringIsNullOrWhiteSpace(color)
                             ? {
@@ -90,7 +90,7 @@ class Copyright extends ComponentBase {
                 style={{
                   ...{
                     color: '#00000073',
-                    fontSize: 'var(--tfc-px-20)',
+                    fontSize: 'var(--tfc-20)',
                   },
                   ...(!stringIsNullOrWhiteSpace(color)
                     ? {

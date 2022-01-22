@@ -230,9 +230,9 @@ class AdvanceInput extends ComponentBase {
                     display: 'inline-block',
                     verticalAlign: 'middle',
                     textAlign: 'center',
-                    width: 'var(--tfc-px-24)',
-                    height: 'var(--tfc-px-45)',
-                    lineHeight: 'var(--tfc-px-45)',
+                    width: 'var(--tfc-24)',
+                    height: 'var(--tfc-45)',
+                    lineHeight: 'var(--tfc-45)',
                     color: 'red',
                   }}
                 >
@@ -246,7 +246,7 @@ class AdvanceInput extends ComponentBase {
               <View
                 style={{
                   ...{
-                    fontSize: 'var(--tfc-px-28)',
+                    fontSize: 'var(--tfc-28)',
                   },
                   ...labelStyle,
                 }}
@@ -257,7 +257,7 @@ class AdvanceInput extends ComponentBase {
           }
           rightStyle={{
             ...{
-              paddingRight: 'var(--tfc-px-40)',
+              paddingRight: 'var(--tfc-40)',
             },
             ...{
               height: '100%',
@@ -273,7 +273,7 @@ class AdvanceInput extends ComponentBase {
         title={title}
         description={description}
         contentStyle={{
-          ...{ width: 'var(--tfc-px-180)' },
+          ...{ width: 'var(--tfc-180)' },
           ...contentStyle,
           ...{
             flex: 'none',
@@ -294,8 +294,8 @@ class AdvanceInput extends ComponentBase {
                     type={type}
                     style={{
                       ...{
-                        fontSize: 'var(--tfc-px-28)',
-                        padding: 'var(--tfc-px-22) 0 var(--tfc-px-22) 0',
+                        fontSize: 'var(--tfc-28)',
+                        padding: 'var(--tfc-22) 0 var(--tfc-22) 0',
                       },
                       ...valueStyle,
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
@@ -334,7 +334,7 @@ class AdvanceInput extends ComponentBase {
                   clearable ? (
                     <View
                       style={{
-                        paddingLeft: 'var(--tfc-px-10)',
+                        paddingLeft: 'var(--tfc-10)',
                         height: '100%',
                       }}
                       onClick={this.clearValue}
@@ -357,7 +357,7 @@ class AdvanceInput extends ComponentBase {
               extra
                 ? {
                     ...{
-                      fontSize: 'var(--tfc-px-28)',
+                      fontSize: 'var(--tfc-28)',
                     },
                     ...extraContainerStyle,
                   }
@@ -367,7 +367,7 @@ class AdvanceInput extends ComponentBase {
         }
         extraContainerStyle={{
           ...{
-            padding: '0 var(--tfc-px-24) 0 0',
+            padding: '0 var(--tfc-24) 0 0',
           },
           ...inputStyle,
           ...{

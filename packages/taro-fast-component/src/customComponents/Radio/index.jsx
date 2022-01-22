@@ -22,11 +22,11 @@ const { IconCheck } = Icon;
 const layoutCollection = ['list', 'radio'];
 
 const iconContainerStyle = {
-  border: 'var(--tfc-px-2) solid #ccc',
-  width: 'var(--tfc-px-32)',
-  height: 'var(--tfc-px-32)',
-  padding: 'var(--tfc-px-4)',
-  lineHeight: 'var(--tfc-px-32)',
+  border: 'var(--tfc-2) solid #ccc',
+  width: 'var(--tfc-32)',
+  height: 'var(--tfc-32)',
+  padding: 'var(--tfc-4)',
+  lineHeight: 'var(--tfc-32)',
   borderRadius: '50%',
 };
 
@@ -159,7 +159,7 @@ class Radio extends ComponentBase {
                 }
                 extraContainerStyle={{
                   ...{
-                    paddingRight: 'var(--tfc-px-24)',
+                    paddingRight: 'var(--tfc-24)',
                   },
                   ...extraContainerStyle,
                 }}
@@ -194,7 +194,7 @@ class Radio extends ComponentBase {
                     {isString(extraItem) ? (
                       <View
                         style={{
-                          fontSize: 'var(--tfc-px-30)',
+                          fontSize: 'var(--tfc-30)',
                           color: 'var(--tfc-color-weak)',
                         }}
                       >
@@ -208,7 +208,7 @@ class Radio extends ComponentBase {
               }
               extraContainerStyle={{
                 ...{
-                  paddingRight: 'var(--tfc-px-24)',
+                  paddingRight: 'var(--tfc-24)',
                 },
                 ...extraContainerStyle,
               }}

@@ -101,7 +101,7 @@ class SearchBar extends ComponentBase {
       <View
         style={{
           ...{
-            // padding: 'var(--tfc-px-12) var(--tfc-px-28)',
+            // padding: 'var(--tfc-12) var(--tfc-28)',
             backgroundColor: '#f7f8fa',
             overflow: 'hidden',
           },
@@ -132,7 +132,7 @@ class SearchBar extends ComponentBase {
             zIndex: '6',
             top: '0',
             left: '0',
-            width: 'var(--tfc-px-70)',
+            width: 'var(--tfc-70)',
             height: '100%',
           }}
           onClick={this.triggerNavigate}
@@ -147,16 +147,16 @@ class SearchBar extends ComponentBase {
           placeholder={placeholder}
           placeholderStyle={{
             ...{
-              fontSize: 'var(--tfc-px-28)',
+              fontSize: 'var(--tfc-28)',
             },
             ...placeholderStyle,
           }}
           style={{
-            paddingLeft: 'var(--tfc-px-70)',
+            paddingLeft: 'var(--tfc-70)',
           }}
           valueStyle={{
             ...{
-              padding: 'var(--tfc-px-10) 0 var(--tfc-px-10) 0',
+              padding: 'var(--tfc-10) 0 var(--tfc-10) 0',
             },
             valueStyle,
           }}
@@ -169,8 +169,8 @@ class SearchBar extends ComponentBase {
                 <View
                   style={{
                     ...{
-                      fontSize: 'var(--tfc-px-28)',
-                      paddingLeft: 'var(--tfc-px-20)',
+                      fontSize: 'var(--tfc-28)',
+                      paddingLeft: 'var(--tfc-20)',
                     },
                     ...searchStyle,
                   }}
@@ -185,7 +185,7 @@ class SearchBar extends ComponentBase {
             showSearch
               ? {
                   ...{
-                    padding: '0 var(--tfc-px-2) 0 0',
+                    padding: '0 var(--tfc-2) 0 0',
                   },
                 }
               : {}

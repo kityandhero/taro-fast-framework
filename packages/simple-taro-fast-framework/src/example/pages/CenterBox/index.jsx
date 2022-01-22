@@ -6,13 +6,13 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const boxStyle = {
-  width: 'var(--tfc-px-80)',
-  height: 'var(--tfc-px-80)',
+  width: 'var(--tfc-80)',
+  height: 'var(--tfc-80)',
   backgroundColor: 'blue',
 };
 
 const style = {
-  height: 'var(--tfc-px-400)',
+  height: 'var(--tfc-400)',
   backgroundColor: '#ccc',
 };
 

@@ -74,7 +74,7 @@ export default class Index extends PageWrapper {
 
         <Card header="自定义宽度" headerStyle={cardHeaderStyle}>
           <Stepper
-            style={{ width: 'val(--tfc-px-120)' }}
+            style={{ width: 'val(--tfc-120)' }}
             defaultValue={10000}
             step={10000}
           />
@@ -100,8 +100,8 @@ export default class Index extends PageWrapper {
             style={{
               '--border': '1px solid #f5f5f5',
               '--border-inner': 'none',
-              '--height': 'val(--tfc-px-36)',
-              '--input-width': 'val(--tfc-px-70)',
+              '--height': 'val(--tfc-36)',
+              '--input-width': 'val(--tfc-70)',
               '--input-background-color': '#ffffff',
               '--active-border': '1px solid #1677ff',
             }}

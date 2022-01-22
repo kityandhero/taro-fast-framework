@@ -85,18 +85,18 @@ class DataGrid extends ComponentBase {
         column = 3;
       }
 
-      let margin = 'var(--tfc-px-32) var(--tfc-px-48)';
-      let paddingBottomNoBorder = 'var(--tfc-px-12)';
+      let margin = 'var(--tfc-32) var(--tfc-48)';
+      let paddingBottomNoBorder = 'var(--tfc-12)';
       let backgroundColor = '';
 
       if (sizeSource === 'middle') {
-        margin = 'var(--tfc-px-24) var(--tfc-px-48)';
-        paddingBottomNoBorder = 'var(--tfc-px-24)';
+        margin = 'var(--tfc-24) var(--tfc-48)';
+        paddingBottomNoBorder = 'var(--tfc-24)';
       }
 
       if (sizeSource === 'small') {
-        margin = 'var(--tfc-px-16) var(--tfc-px-32)';
-        paddingBottomNoBorder = 'var(--tfc-px-16)';
+        margin = 'var(--tfc-16) var(--tfc-32)';
+        paddingBottomNoBorder = 'var(--tfc-16)';
       }
 
       const columnSize = 12 / column;
@@ -110,15 +110,15 @@ class DataGrid extends ComponentBase {
 
       const containorStyle = bordered
         ? {
-            borderTop: 'var(--tfc-px-2) solid #f0f0f0',
-            borderLeft: 'var(--tfc-px-2) solid #f0f0f0',
+            borderTop: 'var(--tfc-2) solid #f0f0f0',
+            borderLeft: 'var(--tfc-2) solid #f0f0f0',
           }
         : null;
 
       const labelStyle = {
         ...{
-          fontSize: 'var(--tfc-px-30)',
-          width: 'var(--tfc-px-180)',
+          fontSize: 'var(--tfc-30)',
+          width: 'var(--tfc-180)',
         },
         ...(labelStyleSource || {}),
         ...(bordered ? { margin } : {}),
@@ -126,13 +126,13 @@ class DataGrid extends ComponentBase {
 
       const contentStyle = {
         ...{
-          fontSize: 'var(--tfc-px-30)',
+          fontSize: 'var(--tfc-30)',
         },
         ...(contentStyleSource || {}),
         ...(bordered
           ? {
               ...{
-                margin: 'var(--tfc-px-32) var(--tfc-px-48)',
+                margin: 'var(--tfc-32) var(--tfc-48)',
               },
 
               ...{ margin },
@@ -143,10 +143,10 @@ class DataGrid extends ComponentBase {
       const titleComponent = stringIsNullOrWhiteSpace(title) ? null : (
         <View
           style={{
-            marginBottom: 'var(--tfc-px-16)',
+            marginBottom: 'var(--tfc-16)',
             color: '#000000d9',
             fontWeight: 500,
-            fontSize: 'var(--tfc-px-32)',
+            fontSize: 'var(--tfc-32)',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
           }}
@@ -172,8 +172,8 @@ class DataGrid extends ComponentBase {
 
               const itemStyle = bordered
                 ? {
-                    borderRight: 'var(--tfc-px-2) solid #f0f0f0',
-                    borderBottom: 'var(--tfc-px-2) solid #f0f0f0',
+                    borderRight: 'var(--tfc-2) solid #f0f0f0',
+                    borderBottom: 'var(--tfc-2) solid #f0f0f0',
                   }
                 : {
                     paddingBottom: paddingBottomNoBorder,
@@ -232,7 +232,7 @@ class DataGrid extends ComponentBase {
                     leftStyle={{
                       ...{ backgroundColor },
                       ...(bordered
-                        ? { borderRight: 'var(--tfc-px-2) solid #f0f0f0' }
+                        ? { borderRight: 'var(--tfc-2) solid #f0f0f0' }
                         : {}),
                     }}
                     right={
@@ -255,7 +255,7 @@ class DataGrid extends ComponentBase {
                         {v}
                         {itemCanCopy && (itemCanCopy || null) != null ? (
                           <Text
-                            style={{ marginLeft: 'var(--tfc-px-40)' }}
+                            style={{ marginLeft: 'var(--tfc-40)' }}
                             onClick={() => {
                               copyToClipboard({
                                 text: itemCopyData || itemValue,

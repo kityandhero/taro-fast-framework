@@ -10,8 +10,8 @@ class Loading extends ComponentBase {
     const { color, size } = this.props;
     const loadingSize = typeof size === 'string' ? size : toString(size);
     const sizeStyle = {
-      width: size ? `val(--tfc-px-${toNumber(loadingSize)})` : '',
-      width: size ? `val(--tfc-px-${toNumber(loadingSize)})` : '',
+      width: size ? `val(--tfc-${toNumber(loadingSize)})` : '',
+      width: size ? `val(--tfc-${toNumber(loadingSize)})` : '',
     };
     const colorStyle = {
       border: color ? `1px solid ${color}` : '',
