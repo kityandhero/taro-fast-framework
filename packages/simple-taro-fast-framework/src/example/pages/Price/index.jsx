@@ -50,7 +50,7 @@ export default class Index extends PageWrapper {
               fontWeight: 'bold',
             }}
             prefixStyle={{
-              fontSize: 'var(--tfc-16)',
+              fontSize: 'var(--tfc-24)',
               marginRight: 'var(--tfc-5)',
             }}
             integerPartStyle={{ fontSize: 'var(--tfc-48)' }}
