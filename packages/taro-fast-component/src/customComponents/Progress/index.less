@@ -1,9 +1,6 @@
 @class-prefix-progress: ~'tfc-progress';
 
 .@{class-prefix-progress} {
-  display: flex;
-  align-items: center;
-
   /* elements */
   &__outer {
     flex: 1 1 100%;
@@ -13,14 +10,12 @@
     &-inner {
       width: 100%;
       background-color: var(--tfc-color-grey-6);
-      border-radius: var(--tfc-8);
       vertical-align: middle;
       overflow: hidden;
 
       &-background {
         position: relative;
         height: var(--tfc-10);
-        border-radius: var(--tfc-8);
         background-color: var(--tfc-color-brand-light);
         transition: all 0.3s var(--tfc-ease-in-out-quad);
         overflow: hidden;
@@ -31,7 +26,6 @@
   &__content {
     flex: 1 1 var(--tfc-70);
     margin-left: var(--tfc-10);
-    font-size: var(--tfc-12);
     text-align: center;
   }
 
@@ -49,18 +43,6 @@
         border-radius: var(--tfc-8);
         animation: progress-active 2s var(--tfc-ease-out-quad) infinite;
       }
-    }
-  }
-
-  &__error {
-    .tfc-progress__outer-inner-background {
-      background: var(--tfc-color-danger);
-    }
-  }
-
-  &__success {
-    .tfc-progress__outer-inner-background {
-      background: var(--tfc-color-success);
     }
   }
 }

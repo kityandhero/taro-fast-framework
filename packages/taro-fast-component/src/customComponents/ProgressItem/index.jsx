@@ -10,13 +10,11 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';
 import FlexBox from '../FlexBox';
-import AdvanceProgress from '../AdvanceProgress';
+import ProgressBox from '../ProgressBox';
 import Row from '../Flex/Row';
 import Col from '../Flex/Col';
 
 const layoutCollection = ['horizontal', 'vertical'];
-
-const activeModeCollection = ['backwards', 'forwards'];
 
 const defaultProps = {
   layout: '',
@@ -31,18 +29,16 @@ const defaultProps = {
   iconContainerStyle: {},
   percent: 0,
   showInfo: false,
-  borderRadius: 0,
-  fontSize: 16,
   strokeWidth: 10,
   activeColor: '#09BB07',
   backgroundColor: '#EBEBEB',
-  active: false,
-  activeMode: 'backwards',
-  duration: 30,
-  onActiveEnd: null,
+  animation: false,
+  useBorderRadius: true,
+  borderRadius: 8,
+  fontSize: 28,
 };
 
-class AdvanceProgressBox extends ComponentBase {
+class ProgressItem extends ComponentBase {
   renderFurther() {
     const {
       layout: layoutSource,
@@ -57,15 +53,13 @@ class AdvanceProgressBox extends ComponentBase {
       iconContainerStyle: iconContainerStyleSource,
       percent,
       showInfo,
-      borderRadius,
-      fontSize,
+      animation,
       strokeWidth,
       activeColor,
       backgroundColor,
-      active,
-      activeMode: activeModeSource,
-      duration,
-      onActiveEnd,
+      useBorderRadius,
+      borderRadius,
+      fontSize,
     } = this.props;
 
     if (!!hidden) {
@@ -76,10 +70,6 @@ class AdvanceProgressBox extends ComponentBase {
       ? layoutSource
       : 'horizontal';
 
-    const activeMode = inCollection(activeModeCollection, activeModeSource)
-      ? activeModeSource
-      : 'backwards';
-
     let labelComponent = label;
 
     if (isString(label)) {
@@ -87,7 +77,13 @@ class AdvanceProgressBox extends ComponentBase {
         labelComponent = (
           <VerticalBox>
             <View
-              style={{ ...{ paddingRight: transformSize(20) }, ...labelStyle }}
+              style={{
+                ...{
+                  fontSize: transformSize(30),
+                  paddingRight: transformSize(20),
+                },
+                ...labelStyle,
+              }}
             >
               {label}
             </View>
@@ -108,26 +104,37 @@ class AdvanceProgressBox extends ComponentBase {
             <FlexBox
               style={{ height: '100%' }}
               left={
-                <AdvanceProgress
+                <ProgressBox
                   style={{ height: '100%' }}
                   progressContainerStyle={progressContainerStyle}
                   icon={icon}
                   iconContainerStyle={iconContainerStyleSource}
                   percent={percent}
                   showInfo={showInfo}
-                  borderRadius={borderRadius}
-                  fontSize={fontSize}
+                  animation={animation}
                   strokeWidth={strokeWidth}
                   activeColor={activeColor}
                   backgroundColor={backgroundColor}
-                  active={active}
-                  activeMode={activeMode}
-                  duration={duration}
-                  onActiveEnd={onActiveEnd}
+                  useBorderRadius={useBorderRadius}
+                  borderRadius={borderRadius}
+                  fontSize={fontSize}
                 />
               }
               right={extra ? extra : null}
-              rightStyle={extra ? extraContainerStyle : null}
+              rightStyle={
+                extra
+                  ? {
+                      ...(isString(extra)
+                        ? {
+                            fontSize: transformSize(28),
+                            paddingLeft: transformSize(20),
+                          }
+                        : {}),
+
+                      ...extraContainerStyle,
+                    }
+                  : null
+              }
             />
           }
         />
@@ -149,26 +156,37 @@ class AdvanceProgressBox extends ComponentBase {
             <FlexBox
               style={{ height: '100%' }}
               left={
-                <AdvanceProgress
+                <ProgressBox
                   style={{ height: '100%' }}
                   progressContainerStyle={progressContainerStyle}
                   icon={icon}
                   iconContainerStyle={iconContainerStyleSource}
                   percent={percent}
                   showInfo={showInfo}
-                  borderRadius={borderRadius}
-                  fontSize={fontSize}
+                  animation={animation}
                   strokeWidth={strokeWidth}
                   activeColor={activeColor}
                   backgroundColor={backgroundColor}
-                  active={active}
-                  activeMode={activeMode}
-                  duration={duration}
-                  onActiveEnd={onActiveEnd}
+                  useBorderRadius={useBorderRadius}
+                  borderRadius={borderRadius}
+                  fontSize={fontSize}
                 />
               }
               right={extra ? extra : null}
-              rightStyle={extra ? extraContainerStyle : null}
+              rightStyle={
+                extra
+                  ? {
+                      ...(isString(extra)
+                        ? {
+                            fontSize: transformSize(28),
+                            paddingLeft: transformSize(20),
+                          }
+                        : {}),
+
+                      ...extraContainerStyle,
+                    }
+                  : null
+              }
             />
           </Col>
         </Row>
@@ -177,8 +195,8 @@ class AdvanceProgressBox extends ComponentBase {
   }
 }
 
-AdvanceProgressBox.defaultProps = {
+ProgressItem.defaultProps = {
   ...defaultProps,
 };
 
-export default AdvanceProgressBox;
+export default ProgressItem;

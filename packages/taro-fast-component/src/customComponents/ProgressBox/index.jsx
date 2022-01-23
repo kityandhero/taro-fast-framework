@@ -13,14 +13,17 @@ const defaultProps = {
   icon: null,
   iconContainerStyle: {},
   percent: 0,
-  status: 'progress',
   showInfo: false,
   strokeWidth: 10,
   activeColor: '#09BB07',
   backgroundColor: '#EBEBEB',
+  animation: false,
+  useBorderRadius: true,
+  borderRadius: 8,
+  fontSize: 28,
 };
 
-class AdvanceProgress extends ComponentBase {
+class ProgressBox extends ComponentBase {
   triggerActiveEnd = (e) => {
     const { onActiveEnd } = this.props;
 
@@ -37,11 +40,14 @@ class AdvanceProgress extends ComponentBase {
       icon,
       iconContainerStyle: iconContainerStyleSource,
       percent,
-      status,
       showInfo,
+      animation,
       strokeWidth,
       activeColor,
       backgroundColor,
+      useBorderRadius,
+      borderRadius,
+      fontSize,
     } = this.props;
 
     if (!!hidden) {
@@ -64,11 +70,14 @@ class AdvanceProgress extends ComponentBase {
             <Progress
               style={{ width: '100%' }}
               percent={percent}
-              status={status}
               showInfo={showInfo}
+              animation={animation}
               strokeWidth={strokeWidth}
               activeColor={activeColor}
               backgroundColor={backgroundColor}
+              useBorderRadius={useBorderRadius}
+              borderRadius={borderRadius}
+              fontSize={fontSize}
             />
           </VerticalBox>
         }
@@ -80,8 +89,8 @@ class AdvanceProgress extends ComponentBase {
   }
 }
 
-AdvanceProgress.defaultProps = {
+ProgressBox.defaultProps = {
   ...defaultProps,
 };
 
-export default AdvanceProgress;
+export default ProgressBox;

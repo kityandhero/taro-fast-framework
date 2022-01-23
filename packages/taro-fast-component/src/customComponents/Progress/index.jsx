@@ -1,28 +1,31 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+
+import CenterBox from '../CenterBox';
 
 import './index.less';
 
 const classPrefix = `tfc-progress`;
 
-const statusCollection = ['progress', 'error', 'success'];
-
 const defaultProps = {
+  hidden: false,
+  /**
+   * 自定义样式
+   */
   style: {},
   /**
-   * 元素的颜色
+   * 进度条的颜色
    */
   activeColor: '',
-  backgroundColor: '',
   /**
-   * 元素的状态
+   * 进度条背景色
    */
-  status: '',
+  backgroundColor: '',
   /**
    * 元素的进度
    */
@@ -34,17 +37,26 @@ const defaultProps = {
   /**
    * 是否隐藏文字
    */
-  showInfo: true,
-  icon: null,
+  showInfo: false,
+  /**
+   * 进行中动画
+   */
+  animation: false,
+  /**
+   * 使用圆角
+   */
+  useBorderRadius: true,
+  /**
+   * 圆角尺度
+   */
+  borderRadius: 12,
+  /**
+   * 百分比文字
+   */
+  fontSize: 28,
 };
 
 class Progress extends ComponentBase {
-  getStatus = () => {
-    const { status } = this.props;
-
-    return inCollection(statusCollection, status) ? status : '';
-  };
-
   getPercent = () => {
     const { percent } = this.props;
 
@@ -65,16 +77,41 @@ class Progress extends ComponentBase {
 
   renderFurther() {
     const {
+      hidden,
       style,
       className,
       activeColor,
       backgroundColor,
       strokeWidth,
       showInfo,
+      animation,
+      useBorderRadius,
+      borderRadius,
+      fontSize,
     } = this.props;
 
-    const status = this.getStatus();
+    if (!!hidden) {
+      return null;
+    }
+
     const percent = this.getPercent();
+
+    const styleContainer = {
+      ...style,
+      ...{
+        display: 'flex',
+        alignItems: 'center',
+      },
+    };
+
+    const containerStyle = {
+      ...(backgroundColor ? { backgroundColor: backgroundColor } : {}),
+      ...(useBorderRadius
+        ? {
+            borderRadius: transformSize(borderRadius),
+          }
+        : {}),
+    };
 
     const progressStyle = {
       ...{
@@ -82,6 +119,11 @@ class Progress extends ComponentBase {
         height: transformSize(strokeWidth),
       },
       ...(activeColor ? { backgroundColor: activeColor } : {}),
+      ...(useBorderRadius
+        ? {
+            borderRadius: transformSize(borderRadius),
+          }
+        : {}),
     };
 
     return (
@@ -89,20 +131,16 @@ class Progress extends ComponentBase {
         className={classNames(
           classPrefix,
           {
-            [`${classPrefix}__progress`]: status === 'progress',
-            [`${classPrefix}__error`]: status === 'error',
-            [`${classPrefix}__success`]: status === 'success',
+            [`${classPrefix}__progress`]: !!animation,
           },
           className,
         )}
-        style={style}
+        style={styleContainer}
       >
         <View className={`${classPrefix}__outer`}>
           <View
             className={`${classPrefix}__outer-inner`}
-            style={{
-              ...(backgroundColor ? { backgroundColor: backgroundColor } : {}),
-            }}
+            style={containerStyle}
           >
             <View
               className={`${classPrefix}__outer-inner-background`}
@@ -112,7 +150,15 @@ class Progress extends ComponentBase {
         </View>
 
         {showInfo ? (
-          <View className={`${classPrefix}__content`}>{`${percent}%`}</View>
+          <View className={`${classPrefix}__content`}>
+            <CenterBox>
+              <Text
+                style={{
+                  fontSize: transformSize(fontSize),
+                }}
+              >{`${percent}%`}</Text>
+            </CenterBox>
+          </View>
         ) : null}
       </View>
     );

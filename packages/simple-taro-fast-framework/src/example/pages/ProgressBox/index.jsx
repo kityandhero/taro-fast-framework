@@ -4,9 +4,10 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
-  AdvanceProgress,
+  ProgressBox,
   Button,
   Icon,
+  HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -21,7 +22,7 @@ export default class Index extends PageWrapper {
     this.state = {
       ...this.state,
       ...{
-        percent: 0,
+        percent: 10,
       },
     };
   }
@@ -29,14 +30,16 @@ export default class Index extends PageWrapper {
   setPercent = (value) => {
     const { percent } = this.state;
 
+    const v = percent + value;
+
     this.setState({
-      percent: percent + value,
+      percent: v >= 100 ? 100 : v,
     });
   };
 
   reSetPercent = () => {
     this.setState({
-      percent: 0,
+      percent: 10,
     });
   };
 
@@ -45,11 +48,12 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="动画" headerStyle={cardHeaderStyle}>
+        <Card header="附带图标" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
             <View>
               <Button
                 color="primary"
+                size="mini"
                 disabled={percent === 100}
                 onClick={() => {
                   this.setPercent(10);
@@ -60,6 +64,7 @@ export default class Index extends PageWrapper {
               </Button>
               <Button
                 color="primary"
+                size="mini"
                 fill="outline"
                 onClick={() => {
                   this.reSetPercent();
@@ -68,61 +73,41 @@ export default class Index extends PageWrapper {
                 重置
               </Button>
             </View>
-            <AdvanceProgress percent={percent} active />
-            <AdvanceProgress percent={percent} active activeMode="forwards" />
+            <ProgressBox
+              percent={percent}
+              icon={<IconCheckCircle size={38} color="green" />}
+            />
           </Space>
         </Card>
 
-        <Card header="Hidden" headerStyle={cardHeaderStyle}>
+        <Card header="隐藏模式" headerStyle={cardHeaderStyle}>
           <Space direction="vertical" block>
-            <AdvanceProgress hidden percent={percent} />
+            <ProgressBox hidden percent={percent} />
           </Space>
         </Card>
 
-        <Card header="指定线条宽度" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
-            <AdvanceProgress percent={50} strokeWidth={2} />
-            <AdvanceProgress percent={75} strokeWidth={6} />
-            <AdvanceProgress percent={100} strokeWidth={8} />
-          </Space>
-        </Card>
-
-        <Card header="指定颜色" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress
-            percent={50}
-            activeColor="#FF3141"
-            backgroundColor="#000000"
-          />
-        </Card>
-
-        <Card header="圆角" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress percent={30} borderRadius={4} status="progress" />
-        </Card>
-
-        <Card header="显示百分比" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress percent={50} showInfo />
-        </Card>
-
-        <Card header="百分比字体大小" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress percent={50} showInfo fontSize={12} />
-        </Card>
-
-        <Card header="Icon" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress
-            percent={50}
-            icon={<IconCheckCircle size={38} color="green" />}
-          />
-        </Card>
-
-        <Card header="Simple" headerStyle={cardHeaderStyle}>
-          <AdvanceProgress
+        <Card header="复杂配置" headerStyle={cardHeaderStyle}>
+          <ProgressBox
             percent={70}
             borderRadius={4}
             showInfo
-            fontSize={14}
+            animation
+            fontSize={28}
             activeColor="#FF3141"
             backgroundColor="#000000"
             icon={<IconCheckCircle size={38} showInfo color="green" />}
+          />
+        </Card>
+
+        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: '进度条配置请参照 Progress组件',
+              },
+            ]}
           />
         </Card>
       </View>

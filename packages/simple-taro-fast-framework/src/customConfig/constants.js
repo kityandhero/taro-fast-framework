@@ -61,8 +61,14 @@ export const pathCollection = {
   advanceSwitch: {
     path: '/example/pages/advanceSwitch/index',
   },
-  advanceProgress: {
-    path: '/example/pages/advanceProgress/index',
+  progress: {
+    path: '/example/pages/progress/index',
+  },
+  progressBox: {
+    path: '/example/pages/progressBox/index',
+  },
+  progressItem: {
+    path: '/example/pages/progressItem/index',
   },
   advanceProgressBox: {
     path: '/example/pages/advanceProgressBox/index',

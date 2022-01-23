@@ -98,8 +98,18 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'AdvanceProgress',
-            path: pathCollection.advanceProgress.path,
+            name: 'progress',
+            path: pathCollection.progress.path,
+          })}
+
+          {this.buildItem({
+            name: 'ProgressBox',
+            path: pathCollection.progressBox.path,
+          })}
+
+          {this.buildItem({
+            name: 'ProgressItem',
+            path: pathCollection.progressItem.path,
           })}
 
           {this.buildItem({
@@ -214,11 +224,6 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'Notification',
             path: pathCollection.notification.path,
-          })}
-
-          {this.buildItem({
-            name: 'AdvanceProgressBox',
-            path: pathCollection.advanceProgressBox.path,
           })}
 
           {this.buildItem({
