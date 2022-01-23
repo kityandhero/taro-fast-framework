@@ -8,6 +8,7 @@ import Stepper from '../Stepper';
 const defaultProps = {
   key: null,
   style: {},
+  stepperStyle: {},
   title: null,
   description: null,
   prefix: null,
@@ -21,6 +22,11 @@ const defaultProps = {
   disabled: false,
   hidden: false,
   editable: true,
+  useBackground: true,
+  backgroundColor: '',
+  circle: false,
+  operateColor: '',
+  iconSize: 36,
   onChange: null,
 };
 
@@ -32,6 +38,7 @@ class StepperItem extends ComponentBase {
       title,
       description,
       style,
+      stepperStyle,
       border,
       extraContainerStyle,
       defaultValue,
@@ -42,6 +49,11 @@ class StepperItem extends ComponentBase {
       disabled,
       hidden,
       editable,
+      useBackground,
+      backgroundColor,
+      operateColor,
+      circle,
+      iconSize,
       onChange,
       children,
     } = this.props;
@@ -63,6 +75,7 @@ class StepperItem extends ComponentBase {
         disabled={disabled}
         extra={
           <Stepper
+            style={stepperStyle}
             defaultValue={defaultValue}
             step={step}
             min={min}
@@ -70,6 +83,11 @@ class StepperItem extends ComponentBase {
             max={max}
             disabled={disabled}
             editable={editable}
+            useBackground={useBackground}
+            backgroundColor={backgroundColor}
+            circle={circle}
+            operateColor={operateColor}
+            iconSize={iconSize}
             onChange={onChange}
           />
         }

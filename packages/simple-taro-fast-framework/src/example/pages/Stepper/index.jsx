@@ -77,9 +77,27 @@ export default class Index extends PageWrapper {
 
         <Card header="自定义宽度" headerStyle={cardHeaderStyle}>
           <Stepper
-            style={{ width: transformSize(120) }}
+            style={{ width: transformSize(260) }}
             defaultValue={10000}
             step={10000}
+          />
+        </Card>
+
+        <Card header="自定义颜色" headerStyle={cardHeaderStyle}>
+          <Stepper operateColor="#a923e1" defaultValue={30} step={1} />
+        </Card>
+
+        <Card header="无背景模式" headerStyle={cardHeaderStyle}>
+          <Stepper useBackground={false} defaultValue={30} step={1} />
+        </Card>
+
+        <Card header="圆形轮廓" headerStyle={cardHeaderStyle}>
+          <Stepper
+            operateColor="#fff"
+            backgroundColor="#a123e4"
+            circle
+            defaultValue={30}
+            step={1}
           />
         </Card>
 
@@ -107,9 +125,29 @@ export default class Index extends PageWrapper {
               '--input-width': transformSize(70),
               '--input-background-color': '#ffffff',
               '--active-border': `${transformSize(1)} solid #1677ff`,
+              width: transformSize(180),
             }}
             defaultValue={10000}
             step={10000}
+          />
+        </Card>
+
+        <Card header="复杂配置" headerStyle={cardHeaderStyle}>
+          <Stepper
+            style={{
+              // '--border': `${transformSize(1)} solid #f5f5f5`,
+              '--border-inner': 'none',
+              '--height': transformSize(36),
+              '--input-width': transformSize(70),
+              '--input-background-color': '#ffffff',
+              '--active-border': `${transformSize(1)} solid #1677ff`,
+            }}
+            iconSize={22}
+            operateColor="#fff"
+            backgroundColor="#a123e4"
+            circle
+            defaultValue={45}
+            step={1}
           />
         </Card>
       </View>

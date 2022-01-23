@@ -27,12 +27,54 @@ const defaultProps = {
   disabled: false,
   hidden: false,
   editable: true,
+  useBackground: true,
+  backgroundColor: '',
+  circle: false,
+  operateColor: '',
+  iconSize: 36,
   onChange: null,
 };
 
 export const Stepper = (p) => {
   const props = mergeProps(defaultProps, p);
-  const { disabled, step, max, min, inputReadOnly } = props;
+  const {
+    disabled,
+    step,
+    max,
+    min,
+    inputReadOnly,
+    useBackground,
+    backgroundColor,
+    operateColor,
+    circle,
+    iconSize,
+  } = props;
+
+  const operateStyle = {
+    ...(!!operateColor
+      ? {
+          color: operateColor,
+        }
+      : {}),
+  };
+
+  const colorStyle = {
+    ...(useBackground
+      ? !!backgroundColor
+        ? {
+            backgroundColor: backgroundColor,
+          }
+        : {}
+      : { backgroundColor: 'transparent' }),
+  };
+
+  const circleStyle = {
+    ...(circle
+      ? {
+          borderRadius: '50%',
+        }
+      : {}),
+  };
 
   const [value, setValue] = usePropsValue(props);
   const [inputValue, setInputValue] = useState(() => value.toString());
@@ -115,16 +157,28 @@ export const Stepper = (p) => {
         disabled={minusDisabled()}
         fill="none"
         color="primary"
+        style={{
+          ...colorStyle,
+          ...circleStyle,
+          ...operateStyle,
+        }}
       >
         <CenterBox>
-          <IconSubtract size={36} />
+          <IconSubtract size={iconSize} />
         </CenterBox>
       </Button>
 
       <View className={`${classPrefix}-middle`}>
         <Input
           className={`${classPrefix}-input`}
-          style={{ textAlign: 'center', fontSize: transformSize(26) }}
+          style={{
+            ...{
+              textAlign: 'center',
+              fontSize: transformSize(26),
+            },
+            ...colorStyle,
+            ...(circle ? { backgroundColor: 'transparent' } : {}),
+          }}
           onFocus={(e) => {
             setHasFocus(true);
             props.onFocus?.(e);
@@ -148,9 +202,14 @@ export const Stepper = (p) => {
         disabled={plusDisabled()}
         fill="none"
         color="primary"
+        style={{
+          ...colorStyle,
+          ...circleStyle,
+          ...operateStyle,
+        }}
       >
         <CenterBox>
-          <IconAdd size={36} />
+          <IconAdd size={iconSize} />
         </CenterBox>
       </Button>
     </View>,
