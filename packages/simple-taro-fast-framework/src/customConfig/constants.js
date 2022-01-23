@@ -58,8 +58,11 @@ export const pathCollection = {
   button: {
     path: '/example/pages/button/index',
   },
-  advanceSwitch: {
-    path: '/example/pages/advanceSwitch/index',
+  switch: {
+    path: '/example/pages/switch/index',
+  },
+  switchItem: {
+    path: '/example/pages/switchItem/index',
   },
   progress: {
     path: '/example/pages/progress/index',

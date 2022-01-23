@@ -1,37 +1,32 @@
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
-
+import Switch from '../Switch';
 import Item from '../Item';
-import Stepper from '../Stepper';
 
 const defaultProps = {
   key: null,
   style: {},
-  stepperStyle: {},
   title: null,
   label: '',
   description: null,
   prefix: null,
   border: true,
   extraContainerStyle: {},
-  defaultValue: 0,
-  step: 1,
-  min: 0,
-  digits: 0,
-  max: 100000,
-  disabled: false,
   hidden: false,
-  editable: true,
-  useBackground: true,
-  backgroundColor: '',
-  circle: false,
-  operateColor: '',
-  iconSize: 36,
+  loading: false,
+  disabled: false,
+  checked: false,
+  beforeChange: null,
+  onChange: null,
+  checkedText: '',
+  uncheckedText: '',
+  size: 2,
+  color: '',
   onChange: null,
 };
 
-class StepperItem extends ComponentBase {
+class SwitchItem extends ComponentBase {
   renderFurther() {
     const {
       key,
@@ -40,26 +35,24 @@ class StepperItem extends ComponentBase {
       label,
       description,
       style,
-      stepperStyle,
       border,
       extraContainerStyle,
-      defaultValue,
-      step,
-      min,
-      digits,
-      max,
-      disabled,
       hidden,
-      editable,
-      useBackground,
-      backgroundColor,
-      operateColor,
-      circle,
-      iconSize,
+      checked,
+      disabled,
+      loading,
+      checkedText,
+      uncheckedText,
+      size,
+      color,
       onChange,
     } = this.props;
 
     if (hidden) {
+      return null;
+    }
+
+    if (!!hidden) {
       return null;
     }
 
@@ -75,20 +68,14 @@ class StepperItem extends ComponentBase {
         border={border}
         disabled={disabled}
         extra={
-          <Stepper
-            style={stepperStyle}
-            defaultValue={defaultValue}
-            step={step}
-            min={min}
-            digits={digits}
-            max={max}
+          <Switch
+            checked={checked}
+            loading={loading}
+            checkedText={checkedText}
+            uncheckedText={uncheckedText}
+            size={size}
+            color={color}
             disabled={disabled}
-            editable={editable}
-            useBackground={useBackground}
-            backgroundColor={backgroundColor}
-            circle={circle}
-            operateColor={operateColor}
-            iconSize={iconSize}
             onChange={onChange}
           />
         }
@@ -105,8 +92,8 @@ class StepperItem extends ComponentBase {
   }
 }
 
-StepperItem.defaultProps = {
+SwitchItem.defaultProps = {
   ...defaultProps,
 };
 
-export default StepperItem;
+export default SwitchItem;

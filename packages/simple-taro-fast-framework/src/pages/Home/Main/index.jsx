@@ -73,8 +73,13 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'AdvanceSwitch',
-            path: pathCollection.advanceSwitch.path,
+            name: 'Switch',
+            path: pathCollection.switch.path,
+          })}
+
+          {this.buildItem({
+            name: 'SwitchItem',
+            path: pathCollection.switchItem.path,
           })}
 
           {this.buildItem({

@@ -4,7 +4,7 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Item,
-  AdvanceSwitch,
+  SwitchItem,
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
@@ -98,7 +98,7 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item extra={<AdvanceSwitch defaultChecked />}>新消息通知</Item>
+          <Item extra={<SwitchItem defaultChecked />}>新消息通知</Item>
           <Item extra="未开启" clickable arrow>
             大字号模式
           </Item>

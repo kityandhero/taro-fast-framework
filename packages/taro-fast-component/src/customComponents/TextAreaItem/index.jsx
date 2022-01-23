@@ -22,6 +22,7 @@ const defaultProps = {
   key: null,
   style: {},
   title: null,
+  label: '',
   description: null,
   prefix: null,
   border: true,
@@ -115,6 +116,7 @@ class TextAreaItem extends ComponentBase {
       key,
       prefix,
       title,
+      label,
       description,
       style,
       border,
@@ -136,7 +138,6 @@ class TextAreaItem extends ComponentBase {
       onContentClick,
       textareaStyle,
       confirmStyle,
-      children,
     } = this.props;
     const { popupVisible } = this.state;
 
@@ -203,7 +204,7 @@ class TextAreaItem extends ComponentBase {
           )
         }
       >
-        {children}
+        {label}
 
         <Popup
           visible={popupVisible}
