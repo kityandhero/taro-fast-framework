@@ -82,7 +82,9 @@ function buildClasses(
   const icon = `${prefixCls}__icon`;
   const label = `${prefixCls}__label`;
   const hover =
-    hoverClass && hoverClass !== 'default' ? hoverClass : `${prefixCls}--hover`;
+    hoverClass && hoverClass !== 'default'
+      ? hoverClass
+      : `${prefixCls}__action--hover`;
 
   return {
     wrap,
@@ -311,7 +313,7 @@ class FloatAction extends ComponentBase {
           />
         ) : null}
 
-        <View className={classNames('wux-class', classes.wrap)}>
+        <View className={classNames(classPrefix, classes.wrap)}>
           <View
             class={classes.action}
             hoverClass={classes.hover}

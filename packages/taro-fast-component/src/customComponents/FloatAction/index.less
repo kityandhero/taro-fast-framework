@@ -1,3 +1,5 @@
+@class-prefix-float-action: ~'tfc-float-action';
+
 @white: #fff;
 @positive: #387ef5;
 @calm: #11c1f3;
@@ -11,22 +13,22 @@
 @disabled-opacity: 0.3;
 @text-color-dark: fade(@white, 85%);
 @text-color-inverse: @white;
-@fab-button-label-color: @text-color-dark;
-@fab-button-label-bg: rgba(0, 0, 0, 0.4);
-@fab-button-light-bg: @light-inverse;
-@fab-button-stable-bg: @stable-inverse;
-@fab-button-positive-bg: @positive;
-@fab-button-calm-bg: @calm;
-@fab-button-assertive-bg: @assertive;
-@fab-button-balanced-bg: @balanced;
-@fab-button-energized-bg: @energized;
-@fab-button-royal-bg: @royal;
-@fab-button-dark-bg: @dark;
+@float-action-label-color: @text-color-dark;
+@float-action-label-bg: rgba(0, 0, 0, 0.4);
+@float-action-light-bg: @light-inverse;
+@float-action-stable-bg: @stable-inverse;
+@float-action-positive-bg: @positive;
+@float-action-calm-bg: @calm;
+@float-action-assertive-bg: @assertive;
+@float-action-balanced-bg: @balanced;
+@float-action-energized-bg: @energized;
+@float-action-royal-bg: @royal;
+@float-action-dark-bg: @dark;
 @z-index-backdrop: 1000;
 @z-index-float-action: 1020;
 @backdrop-background-inverse: transparent;
 
-.fab-button-style(@theme, @color) {
+.float-action-style(@theme, @color) {
   &--@{theme} &__action,
   &--@{theme} &__button,
   &--@{theme} &__button--disabled {
@@ -73,7 +75,7 @@
   }
 }
 
-.tfc-float-action {
+.@{class-prefix-float-action} {
   position: fixed;
   z-index: @z-index-float-action;
 
@@ -120,7 +122,7 @@
     position: relative;
     border-radius: 50%;
     z-index: @z-index-float-action;
-    background-color: @fab-button-balanced-bg;
+    background-color: @float-action-balanced-bg;
     color: @text-color-inverse;
     overflow: visible;
     transition-duration: 0.3s;
@@ -131,6 +133,7 @@
       0 var(--tfc-8) var(--tfc-16) rgba(0, 0, 0, 28%);
     right: 0;
     bottom: 0;
+    visibility: visible;
 
     &--hover {
       transition-duration: 0s;
@@ -148,6 +151,7 @@
     height: var(--tfc-40);
     font-size: var(--tfc-40);
     line-height: 1;
+    visibility: inherit;
   }
 
   &__text {
@@ -157,6 +161,7 @@
     font-size: var(--tfc-40);
     line-height: 1;
     transition: transform 150ms cubic-bezier(0.4, 0, 1, 1);
+    visibility: inherit;
 
     &--rotate {
       transform: scale(1) rotate(135deg);
@@ -169,7 +174,7 @@
     color: @text-color-inverse !important;
     border-radius: 50%;
     overflow: visible;
-    background-color: @fab-button-balanced-bg !important;
+    background-color: @float-action-balanced-bg !important;
     transition-duration: 0.3s;
     display: flex;
     align-items: center;
@@ -183,6 +188,7 @@
     z-index: 2;
     width: 100% !important;
     height: 100%;
+    visibility: visible;
 
     &--hover {
       transition-duration: 0s;
@@ -203,9 +209,9 @@
     top: 50%;
     padding: var(--tfc-8) var(--tfc-20);
     font-size: var(--tfc-24);
-    background: @fab-button-label-bg;
+    background: @float-action-label-bg;
     border-radius: var(--tfc-8);
-    color: @fab-button-label-color;
+    color: @float-action-label-color;
     pointer-events: none;
     white-space: nowrap;
     opacity: 0;
@@ -228,13 +234,13 @@
     background: @backdrop-background-inverse;
   }
 
-  .fab-button-style(light, @fab-button-light-bg);
-  .fab-button-style(stable, @fab-button-stable-bg);
-  .fab-button-style(positive, @fab-button-positive-bg);
-  .fab-button-style(calm, @fab-button-calm-bg);
-  .fab-button-style(assertive, @fab-button-assertive-bg);
-  .fab-button-style(balanced, @fab-button-balanced-bg);
-  .fab-button-style(energized, @fab-button-energized-bg);
-  .fab-button-style(royal, @fab-button-royal-bg);
-  .fab-button-style(dark, @fab-button-dark-bg);
+  .float-action-style(light, @float-action-light-bg);
+  .float-action-style(stable, @float-action-stable-bg);
+  .float-action-style(positive, @float-action-positive-bg);
+  .float-action-style(calm, @float-action-calm-bg);
+  .float-action-style(assertive, @float-action-assertive-bg);
+  .float-action-style(balanced, @float-action-balanced-bg);
+  .float-action-style(energized, @float-action-energized-bg);
+  .float-action-style(royal, @float-action-royal-bg);
+  .float-action-style(dark, @float-action-dark-bg);
 }
