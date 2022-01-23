@@ -7,6 +7,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
+import { CenterBox } from '..';
 
 const defaultProps = {
   hidden: false,
@@ -126,7 +127,7 @@ class NoticeBar extends ComponentBase {
                     }}
                   >
                     <VerticalBox>
-                      <Icon size={32} type="clear" color="#ccc" />
+                      <Icon size={14} type="clear" color="#ccc" />
                     </VerticalBox>
                   </View>
                 ) : null
@@ -137,7 +138,7 @@ class NoticeBar extends ComponentBase {
                     <View className="tfc-notice-bar__content">
                       {!!icon ? (
                         <View className="tfc-notice-bar__content-icon">
-                          {icon}
+                          <CenterBox>{icon}</CenterBox>
                         </View>
                       ) : null}
 
@@ -152,7 +153,7 @@ class NoticeBar extends ComponentBase {
                       </View>
                     </View>
                   }
-                  right={extra ? extra : null}
+                  right={extra ? <CenterBox>{extra}</CenterBox> : null}
                 />
               }
             />
