@@ -1,5 +1,6 @@
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import HorizontalCenterBox from '../HorizontalCenterBox';
 import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
@@ -11,9 +12,9 @@ class CenterBox extends ComponentBase {
     const { children } = this.props;
 
     return (
-      <VerticalBox align="center" alignJustify="center">
-        {children}
-      </VerticalBox>
+      <HorizontalCenterBox>
+        <VerticalBox>{children}</VerticalBox>
+      </HorizontalCenterBox>
     );
   }
 }

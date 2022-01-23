@@ -39,11 +39,11 @@ export default class Index extends PageWrapper {
             </View>
 
             <View>
-              <Countdown isShowDay endTime={addHour(getNow(), 2)} />
+              <Countdown showDay endTime={addHour(getNow(), 2)} />
             </View>
 
             <View>
-              <Countdown isShowHour={false} endTime={addHour(getNow(), 4)} />
+              <Countdown showHour={false} endTime={addHour(getNow(), 4)} />
             </View>
           </Space>
         </Card>
@@ -63,8 +63,55 @@ export default class Index extends PageWrapper {
           <Space direction="vertical" block>
             <View>
               <Countdown
-                isCard
-                isShowDay
+                cardMode
+                showDay
+                endTime={addHour(getNow(), 28)}
+                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
+              />
+            </View>
+          </Space>
+        </Card>
+
+        <Card header="卡片式自定义" headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" block>
+            <View>
+              <Countdown
+                cardMode
+                showDay
+                valueColor="#456e23"
+                separatorColor="#9411a9"
+                borderColor="#ae4567"
+                endTime={addHour(getNow(), 28)}
+                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
+              />
+            </View>
+          </Space>
+        </Card>
+
+        <Card header="卡片填充式" headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" block>
+            <View>
+              <Countdown
+                cardMode
+                fillCard
+                showDay
+                endTime={addHour(getNow(), 28)}
+                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
+              />
+            </View>
+          </Space>
+        </Card>
+
+        <Card header="卡片填充式自定义" headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" block>
+            <View>
+              <Countdown
+                cardMode
+                fillCard
+                showDay
+                valueColor="#fff"
+                separatorColor="#9411a9"
+                backgroundColor="#ae4567"
                 endTime={addHour(getNow(), 28)}
                 format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
               />

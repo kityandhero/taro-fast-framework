@@ -7,18 +7,25 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
+const classPrefix = `tfc-countdown`;
+
 const defaultProps = {
   style: '',
   className: '',
-  isCard: false,
-  isShowDay: false,
-  isShowHour: true,
+  cardMode: false,
+  fillCard: false,
+  showDay: false,
+  showHour: true,
   format: {
     day: '天',
     hours: '时',
     minutes: '分',
     seconds: '秒',
   },
+  valueColor: '',
+  separatorColor: '',
+  borderColor: '',
+  backgroundColor: '',
   endTime: null,
   afterEnd: null,
 };
@@ -109,55 +116,153 @@ class Countdown extends ComponentBase {
   };
 
   renderFurther() {
-    const { className, style, format, isShowDay, isCard, isShowHour } =
-      this.props;
+    const {
+      className,
+      style,
+      format,
+      showDay,
+      cardMode,
+      fillCard,
+      showHour,
+      valueColor,
+      separatorColor,
+      borderColor,
+      backgroundColor,
+    } = this.props;
 
     const { day, hour, minute, second } = this.state;
+
+    const valueStyleChanged = {
+      ...(!!valueColor
+        ? {
+            color: valueColor,
+          }
+        : {}),
+      ...(!!cardMode && !fillCard && !!borderColor
+        ? {
+            borderColor: borderColor,
+          }
+        : {}),
+      ...(!!cardMode && !!fillCard && !!backgroundColor
+        ? {
+            borderColor: backgroundColor,
+          }
+        : {}),
+      ...(!!cardMode && !!fillCard && !!backgroundColor
+        ? {
+            backgroundColor: backgroundColor,
+          }
+        : {}),
+    };
+
+    const separatorColorChanged = {
+      ...(!!separatorColor
+        ? {
+            color: separatorColor,
+          }
+        : {}),
+    };
 
     return (
       <View
         className={classNames(
           {
-            'tfc-countdown': true,
-            'tfc-countdown--card': isCard,
+            [`${classPrefix}`]: true,
+            [`${classPrefix}--card`]: cardMode,
           },
           className,
         )}
         style={style}
       >
-        {isShowDay ? (
-          <View className="tfc-countdown__item tfc-countdown__value">
+        {showDay ? (
+          <View
+            className={classNames({
+              [`${classPrefix}__item`]: true,
+              [`${classPrefix}__value`]: true,
+              [`${classPrefix}__value_no_fill`]: !!cardMode && !fillCard,
+              [`${classPrefix}__value_fill`]: !!cardMode && !!fillCard,
+            })}
+            style={valueStyleChanged}
+          >
             {formatNum(day)}
           </View>
         ) : null}
-        {isShowDay ? (
-          <View className="tfc-countdown__item tfc-countdown__separator">
+        {showDay ? (
+          <View
+            className={classNames({
+              [`${classPrefix}__item`]: true,
+              [`${classPrefix}__separator`]: true,
+            })}
+            style={separatorColorChanged}
+          >
             {format.day}
           </View>
         ) : null}
 
-        {isShowHour ? (
-          <View className="tfc-countdown__item tfc-countdown__value">
+        {showHour ? (
+          <View
+            className={classNames({
+              [`${classPrefix}__item`]: true,
+              [`${classPrefix}__value`]: true,
+              [`${classPrefix}__value_no_fill`]: !!cardMode && !fillCard,
+              [`${classPrefix}__value_fill`]: !!cardMode && !!fillCard,
+            })}
+            style={valueStyleChanged}
+          >
             {formatNum(hour)}
           </View>
         ) : null}
-        {isShowHour ? (
-          <View className="tfc-countdown__item tfc-countdown__separator">
+        {showHour ? (
+          <View
+            className={classNames({
+              [`${classPrefix}__item`]: true,
+              [`${classPrefix}__separator`]: true,
+            })}
+            style={separatorColorChanged}
+          >
             {format.hours}
           </View>
         ) : null}
 
-        <View className="tfc-countdown__item tfc-countdown__value">
+        <View
+          className={classNames({
+            [`${classPrefix}__item`]: true,
+            [`${classPrefix}__value`]: true,
+            [`${classPrefix}__value_no_fill`]: !!cardMode && !fillCard,
+            [`${classPrefix}__value_fill`]: !!cardMode && !!fillCard,
+          })}
+          style={valueStyleChanged}
+        >
           {formatNum(minute)}
         </View>
-        <View className="tfc-countdown__item tfc-countdown__separator">
+        <View
+          className={classNames({
+            [`${classPrefix}__item`]: true,
+            [`${classPrefix}__separator`]: true,
+          })}
+          style={separatorColorChanged}
+        >
           {format.minutes}
         </View>
 
-        <View className="tfc-countdown__item tfc-countdown__value">
+        <View
+          className={classNames({
+            [`${classPrefix}__item`]: true,
+            [`${classPrefix}__value`]: true,
+            [`${classPrefix}__value_no_fill`]: !!cardMode && !fillCard,
+            [`${classPrefix}__value_fill`]: !!cardMode && !!fillCard,
+          })}
+          style={valueStyleChanged}
+        >
           {formatNum(second)}
         </View>
-        <View className="tfc-countdown__item tfc-countdown__separator">
+        <View
+          className={classNames({
+            [`${classPrefix}__item`]: true,
+            [`${classPrefix}__separator`]: true,
+          })}
+          style={separatorColorChanged}
+        >
           {format.seconds}
         </View>
       </View>

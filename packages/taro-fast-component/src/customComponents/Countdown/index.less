@@ -1,9 +1,11 @@
+@class-prefix-countdown: ~'tfc-countdown';
+
 @hd: 1;
 @color-border-grey: #ccc;
 @color-grey-3: #ccc;
 @zindex-divider: 100;
 
-.tfc-countdown {
+.@{class-prefix-countdown} {
   height: var(--tfc-42);
   white-space: nowrap;
   font-size: 0;
@@ -31,12 +33,15 @@
     .tfc-countdown__value {
       height: var(--tfc-38);
       line-height: var(--tfc-38);
-      border: var(--tfc-2) solid @color-border-grey;
       border-radius: var(--tfc-8);
-      color: #ff4949;
-      background-color: #fff;
       position: relative;
       padding: 0 var(--tfc-2);
+    }
+
+    .tfc-countdown__value_no_fill {
+      border: var(--tfc-2) solid @color-border-grey;
+      color: #ff4949;
+      background-color: #fff;
 
       &::after {
         position: absolute;
@@ -48,6 +53,12 @@
         z-index: @zindex-divider;
         background-color: @color-grey-3;
       }
+    }
+
+    .tfc-countdown__value_fill {
+      border: var(--tfc-2) solid #ff4949;
+      color: #fff;
+      background-color: #ff4949;
     }
   }
 }
