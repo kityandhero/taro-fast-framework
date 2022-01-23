@@ -7,7 +7,7 @@ import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
-import { CenterBox } from '..';
+import CenterBox from '../CenterBox';
 
 const defaultProps = {
   hidden: false,
