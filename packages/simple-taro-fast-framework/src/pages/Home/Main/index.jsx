@@ -279,11 +279,6 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'Circle',
-            path: pathCollection.circle.path,
-          })}
-
-          {this.buildItem({
             name: 'Steps',
             path: pathCollection.steps.path,
           })}
@@ -300,6 +295,11 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="扩展组件" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'Circle',
+            path: pathCollection.circle.path,
+          })}
+
           {this.buildItem({
             name: 'Selector',
             path: pathCollection.selector.path,

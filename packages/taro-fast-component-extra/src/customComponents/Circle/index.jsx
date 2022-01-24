@@ -6,6 +6,7 @@ import {
   getGuid,
   getSystemInfo,
   inCollection,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -30,7 +31,7 @@ const defaultProps = {
   style: {},
   backRingStyle: {},
   percent: 0,
-  size: 400,
+  size: 200,
   color: defaultColor,
   backRingColor: '#fff',
   lineCap: 'round',
@@ -58,18 +59,18 @@ class Circle extends ComponentBase {
     this.id = getGuid();
   }
 
-  componentDidMount() {
+  doWorkAdjustDidMount = () => {
     const that = this;
 
     setTimeout(() => {
       that.drawPercent(this.getPercent());
-    }, 200);
-  }
+    }, 400);
+  };
 
   // eslint-disable-next-line no-unused-vars
-  componentDidUpdate(preProps, preState, snapshot) {
+  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
     this.drawPercent(this.getPercent());
-  }
+  };
 
   getColor = () => {
     const { color } = this.props;
@@ -188,7 +189,7 @@ class Circle extends ComponentBase {
         ctx.translate(canvas.width / 2, canvas.height / 2);
 
         if (useLineColorGradient) {
-          var g = ctx.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
+          const g = ctx.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
 
           g.addColorStop(0, lineColorStart); //添加颜色点
           g.addColorStop(1, lineColorEnd); //添加颜色点
@@ -288,16 +289,16 @@ class Circle extends ComponentBase {
             style={{
               ...style,
               ...{
-                width: `${size}px`,
-                height: `${size}px`,
+                width: transformSize(size),
+                height: transformSize(size),
               },
             }}
           >
             <View
               className={`${classPrefix}_body`}
               style={{
-                width: `${size}px`,
-                height: `${size}px`,
+                width: transformSize(size),
+                height: transformSize(size),
                 padding: '0',
                 border: '0',
               }}
@@ -329,12 +330,12 @@ class Circle extends ComponentBase {
                   style={{
                     ...backRingStyle,
                     ...{
-                      width: `${size - 1 - 2 * lineWidth}px`,
-                      height: `${size - 1 - 2 * lineWidth}px`,
+                      width: transformSize(size - 1 - 2 * lineWidth),
+                      height: transformSize(size - 1 - 2 * lineWidth),
                       borderRadius: '50%',
-                      border: `${
-                        lineAdjust + lineWidth
-                      }px solid ${backRingColor}`,
+                      border: `${transformSize(
+                        lineAdjust + lineWidth,
+                      )} solid ${backRingColor}`,
                     },
                   }}
                 ></View>
@@ -342,8 +343,8 @@ class Circle extends ComponentBase {
               <Canvas
                 type="2d"
                 style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
+                  width: transformSize(size),
+                  height: transformSize(size),
                   zIndex: '5',
                   position: 'absolute',
                   top: 0,

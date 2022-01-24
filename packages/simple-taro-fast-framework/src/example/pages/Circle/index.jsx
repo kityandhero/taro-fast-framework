@@ -111,6 +111,22 @@ export default class Index extends PageWrapper {
             </Circle>
 
             <Divider />
+            <View>
+              <Circle
+                percent={percent}
+                size={140}
+                color="#45e236"
+                useLineColorGradient
+                lineWidth={10}
+              >
+                <Text>
+                  {formatTarget({
+                    target: percent,
+                    format: formatCollection.percentage,
+                  })}
+                </Text>
+              </Circle>
+            </View>
 
             <Row>
               <Col size={3}>
@@ -118,7 +134,8 @@ export default class Index extends PageWrapper {
                   percent={percent}
                   size={140}
                   color="#45e236"
-                  lineWidth={10}
+                  useLineColorGradient
+                  lineWidth={30}
                 >
                   <Text>
                     {formatTarget({
