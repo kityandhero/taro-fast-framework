@@ -68,6 +68,7 @@ export default class Index extends PageWrapper {
             value: 'option3',
             description: '单选项描述三',
             extra: '扩展说明',
+            span: 2,
           },
         ],
         checkBoxOptions3: [
@@ -190,8 +191,8 @@ export default class Index extends PageWrapper {
             layout="mini"
             style={style}
             border={border}
-            options={this.state.radioOptions1}
-            value={this.state.radioValue1}
+            options={this.state.checkBoxOptions1}
+            value={this.state.checkBoxValue1}
             onChange={this.handleCheckBoxChange}
           />
         </Card>
@@ -206,8 +207,8 @@ export default class Index extends PageWrapper {
             layout="mini"
             style={style}
             border={border}
-            options={this.state.radioOptions2}
-            value={this.state.radioValue2}
+            options={this.state.checkBoxOptions2}
+            value={this.state.checkBoxValue2}
             miniColumns={2}
             miniGap={12}
             onChange={this.handleCheckBoxChangeSecond}
