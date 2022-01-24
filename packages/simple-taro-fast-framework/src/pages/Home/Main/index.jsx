@@ -205,6 +205,11 @@ export default class Index extends PageWrapper {
             name: 'FloatAction',
             path: pathCollection.floatAction.path,
           })}
+
+          {this.buildItem({
+            name: 'Modal',
+            path: pathCollection.modal.path,
+          })}
         </Card>
 
         <Card header="功能组件" headerStyle={cardHeaderStyle} space={false}>

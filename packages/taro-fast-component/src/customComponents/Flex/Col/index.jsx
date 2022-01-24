@@ -19,11 +19,16 @@ const defaultProps = {
   align: '',
   size: '',
   offset: '',
+  hidden: false,
 };
 
 class Col extends ComponentBase {
   renderFurther() {
-    const { style } = this.props;
+    const { style, hidden } = this.props;
+
+    if (hidden) {
+      return null;
+    }
 
     const rootClass = ['tfc-col'];
 

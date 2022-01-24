@@ -25,6 +25,7 @@ export { default as HelpBox } from './HelpBox';
 export { default as Copyright } from './Copyright';
 export { default as FloatAction } from './FloatAction';
 export { default as ActionSheet } from './ActionSheet';
+export { default as Modal } from './Modal';
 export { default as Card } from './Card';
 export { default as Item } from './Item';
 export { default as Overlay } from './Overlay';

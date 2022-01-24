@@ -59,6 +59,7 @@ export default {
         'pages/searchBar/index',
         'pages/textAreaItem/index',
         'pages/actionSheet/index',
+        'pages/modal/index',
       ],
     },
   ],

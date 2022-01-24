@@ -154,6 +154,9 @@ export const pathCollection = {
   actionSheet: {
     path: '/example/pages/actionSheet/index',
   },
+  modal: {
+    path: '/example/pages/modal/index',
+  },
 };
 
 export const cardHeaderStyle = {

@@ -1,0 +1,42 @@
+@class-prefix-modal: ~'tfc-modal';
+
+.@{class-prefix-modal} {
+  &__container {
+    opacity: 0.01;
+    transition-property: opacity, transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: scale(1.35);
+
+    &__content {
+      font-size: var(--tfc-30);
+    }
+
+    &__action {
+      height: var(--tfc-44);
+      font-size: var(--tfc-30);
+      color: var(--tfc-color-grey-0);
+      line-height: var(--tfc-44);
+      text-align: center;
+      transition: background-color 0.3s;
+      padding: var(--tfc-16) var(--tfc-14);
+    }
+
+    &__action--hover {
+      background-color: var(--active-background-color);
+    }
+
+    &__action__left {
+      border-right: var(--tfc-1) solid var(--tfc-border-color);
+    }
+
+    &__action__right {
+      border-left: var(--tfc-1) solid var(--tfc-border-color);
+    }
+  }
+
+  &__container--active {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
