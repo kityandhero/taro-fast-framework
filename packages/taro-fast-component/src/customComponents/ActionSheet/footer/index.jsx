@@ -23,7 +23,12 @@ class ActionSheetFooter extends ComponentBase {
     const rootClass = classNames('tfc-action-sheet__footer', className);
 
     return (
-      <View className={rootClass} style={style} onClick={this.triggerClick}>
+      <View
+        className={rootClass}
+        hoverClass="tfc-action-sheet__footer--hover"
+        style={style}
+        onClick={this.triggerClick}
+      >
         {children}
       </View>
     );

@@ -172,7 +172,7 @@ class ActionSheet extends ComponentBase {
                   key={key}
                   className={classNameItem}
                   style={styleItem}
-                  value={value}
+                  value={value || ''}
                   onClick={(v, e) => {
                     onItemClick(v, e);
 

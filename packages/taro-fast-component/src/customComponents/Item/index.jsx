@@ -75,6 +75,11 @@ class Item extends ComponentBase {
             !disabled && clickable ? [`${classPrefix}-header-clickable`] : [],
             disabled && `${classPrefix}-header-disabled`,
           )}
+          hoverClass={
+            !disabled && clickable
+              ? `${classPrefix}-header-clickable--hover`
+              : 'none'
+          }
           style={style}
           onClick={this.triggerClick}
         >

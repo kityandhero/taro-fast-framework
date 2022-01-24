@@ -173,8 +173,11 @@ export default class Index extends PageWrapper {
             },
             {
               content: <Text className="danger">清除位置信息并退出</Text>,
-              onClick: (v) => {
-                console.log(v);
+              onClick: (v, e) => {
+                console.log({
+                  value: v,
+                  e,
+                });
                 this.showToast('成功清除位置');
               },
             },

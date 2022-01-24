@@ -27,6 +27,7 @@ class ActionSheetItem extends ComponentBase {
     return (
       <View
         className={rootClass}
+        hoverClass="tfc-action-sheet__item--hover"
         onClick={(e) => {
           this.triggerClick(value, e);
         }}
