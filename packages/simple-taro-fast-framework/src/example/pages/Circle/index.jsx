@@ -14,8 +14,9 @@ import {
   Space,
   Divider,
   FlexBox,
-  Row,
-  Col,
+  // Row,
+  // Col,
+  // Grid,
 } from 'taro-fast-component/es/customComponents';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
 
@@ -128,8 +129,8 @@ export default class Index extends PageWrapper {
               </Circle>
             </View>
 
-            <Row>
-              <Col size={3}>
+            {/* <Grid columns={4} gap={8}>
+              <Grid.Item>
                 <Circle
                   percent={percent}
                   size={140}
@@ -144,8 +145,8 @@ export default class Index extends PageWrapper {
                     })}
                   </Text>
                 </Circle>
-              </Col>
-              <Col size={3}>
+              </Grid.Item>
+              <Grid.Item>
                 <Circle
                   style={{
                     backgroundColor: '#ccc',
@@ -157,8 +158,8 @@ export default class Index extends PageWrapper {
                   lineColorStart="#0432a7"
                   lineColorEnd="#f02901"
                 />
-              </Col>
-              <Col size={3}>
+              </Grid.Item>
+              <Grid.Item>
                 <Circle
                   style={
                     {
@@ -173,8 +174,8 @@ export default class Index extends PageWrapper {
                   color={color}
                   lineCap="butt"
                 />
-              </Col>
-              <Col size={3}>
+              </Grid.Item>
+              <Grid.Item>
                 <Circle
                   percent={percent}
                   size={140}
@@ -188,8 +189,8 @@ export default class Index extends PageWrapper {
                     })}
                   </Text>
                 </Circle>
-              </Col>
-            </Row>
+              </Grid.Item>
+            </Grid> */}
 
             <Divider />
 
