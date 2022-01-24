@@ -162,6 +162,7 @@ class ActionSheet extends ComponentBase {
                 style: styleItem,
                 value,
                 content,
+                onClick: onItemClick,
               } = o;
 
               const key = `item_${index}`;
@@ -172,6 +173,11 @@ class ActionSheet extends ComponentBase {
                   className={classNameItem}
                   style={styleItem}
                   value={value}
+                  onClick={(v, e) => {
+                    onItemClick(v, e);
+
+                    this.close();
+                  }}
                 >
                   {content}
                 </ActionSheetItem>
