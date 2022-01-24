@@ -2,11 +2,13 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
+  Card,
   CheckBox,
   Icon,
   Button,
 } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
@@ -17,6 +19,7 @@ const extraStyle = {
   padding: `0 ${transformSize(12)}`,
   fontSize: transformSize(24),
   color: '#aaa',
+  backgroundColor: '#f5f7fa',
 };
 
 export default class Index extends PageWrapper {
@@ -176,6 +179,40 @@ export default class Index extends PageWrapper {
           extra={<View style={extraStyle}>layout: list</View>}
           onChange={this.handleCheckBoxChangeThird}
         />
+
+        <Card
+          header="基础布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: mini</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
+          <CheckBox
+            layout="mini"
+            style={style}
+            border={border}
+            options={this.state.radioOptions1}
+            value={this.state.radioValue1}
+            onChange={this.handleCheckBoxChange}
+          />
+        </Card>
+
+        <Card
+          header="自定义布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: mini</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
+          <CheckBox
+            layout="mini"
+            style={style}
+            border={border}
+            options={this.state.radioOptions2}
+            value={this.state.radioValue2}
+            miniColumns={2}
+            miniGap={12}
+            onChange={this.handleCheckBoxChangeSecond}
+          />
+        </Card>
 
         <CheckBox
           header="基础用法"

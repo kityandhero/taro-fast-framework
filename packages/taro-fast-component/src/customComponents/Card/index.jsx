@@ -26,6 +26,7 @@ const defaultProps = {
   footerStyle: {},
   space: true,
   extra: null,
+  extraStyle: {},
   /**
    * 是否使用滚动视图
    * @default true
@@ -89,6 +90,7 @@ class Card extends ComponentBase {
       footerBorder,
       footerStyle,
       extra,
+      extraStyle,
       mode: modeSource,
       space,
       children,
@@ -126,7 +128,12 @@ class Card extends ComponentBase {
             }
             right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
             rightStyle={
-              extra ? { padding: `0 ${transformSize(18)} 0 0` } : null
+              extra
+                ? {
+                    ...{ padding: `0 ${transformSize(18)} 0 0` },
+                    ...extraStyle,
+                  }
+                : null
             }
           />
         ) : null}

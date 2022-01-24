@@ -17,10 +17,13 @@ import Card from '../Card';
 import Item from '../Item';
 import Icon from '../Icon';
 import CenterBox from '../CenterBox';
+import VerticalBox from '../VerticalBox';
+import FlexBox from '../FlexBox';
+import Grid from '../Grid';
 
 const { IconCheck } = Icon;
 
-const layoutCollection = ['list', 'checkBox'];
+const layoutCollection = ['list', 'checkBox', 'mini'];
 
 const iconContainerStyle = {
   border: `${transformSize(2)} solid #ccc`,
@@ -83,6 +86,8 @@ const defaultProps = {
   border: true,
   iconUncheck: null,
   iconCheck: null,
+  miniColumns: 3,
+  miniGap: 8,
   onChange: null,
 };
 
@@ -144,9 +149,85 @@ class CheckBox extends ComponentBase {
       extra,
       extraContainerStyle,
       value,
+      miniColumns,
+      miniGap,
     } = this.props;
 
     const layout = this.getLayout();
+
+    if (layout === 'mini') {
+      return (
+        <Grid columns={miniColumns} gap={miniGap}>
+          {(isArray(options) ? options : []).map((o, index) => {
+            const {
+              label,
+              span,
+              style: styleItem,
+              disabled,
+              value: valueItem,
+            } = o;
+
+            const key = `item_${index}`;
+
+            return (
+              <Grid.Item
+                key={key}
+                span={span || 1}
+                onClick={() => {
+                  this.handleClick(o);
+                }}
+              >
+                <FlexBox
+                  flexAuto="right"
+                  style={{
+                    ...{
+                      padding: 'var(--tfc-10) var(--tfc-12)',
+                    },
+                    ...styleItem,
+                    ...(disabled
+                      ? {
+                          opacity: '0.6',
+                          pointerEvents: 'none',
+                        }
+                      : {}),
+                    ...{
+                      height: '100%',
+                    },
+                  }}
+                  left={
+                    <CenterBox>
+                      {inCollection(value || [], valueItem)
+                        ? iconCheck || checkStatusIcon
+                        : iconUncheck || uncheckStatusIcon}
+                    </CenterBox>
+                  }
+                  right={
+                    <VerticalBox>
+                      {isString(label) ? (
+                        <View
+                          style={{
+                            ...{
+                              fontSize: transformSize(28),
+                            },
+                          }}
+                        >
+                          {label}
+                        </View>
+                      ) : (
+                        label || ''
+                      )}
+                    </VerticalBox>
+                  }
+                  rightStyle={{
+                    paddingLeft: transformSize(10),
+                  }}
+                />
+              </Grid.Item>
+            );
+          })}
+        </Grid>
+      );
+    }
 
     return (
       <Card

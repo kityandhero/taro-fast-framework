@@ -1,8 +1,14 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Radio, Icon, Button } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Radio,
+  Icon,
+  Button,
+} from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
@@ -13,6 +19,7 @@ const extraStyle = {
   padding: `0 ${transformSize(12)}`,
   fontSize: transformSize(24),
   color: '#aaa',
+  backgroundColor: '#f5f7fa',
 };
 
 export default class Index extends PageWrapper {
@@ -61,6 +68,7 @@ export default class Index extends PageWrapper {
             value: 'option3',
             description: '单选项描述三',
             extra: '扩展说明',
+            span: 2,
           },
         ],
         radioOptions3: [
@@ -124,9 +132,9 @@ export default class Index extends PageWrapper {
     const { border } = this.state;
 
     return (
-      <View className="index" style={{ backgroundColor: '#453e21' }}>
+      <View className="index">
         <Radio
-          header="基础用法"
+          header="默认用法"
           style={style}
           border={border}
           options={this.state.radioOptions1}
@@ -171,6 +179,40 @@ export default class Index extends PageWrapper {
           extra={<View style={extraStyle}>layout: list</View>}
           onChange={this.handleRadioChangeThird}
         />
+
+        <Card
+          header="基础布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: mini</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
+          <Radio
+            layout="mini"
+            style={style}
+            border={border}
+            options={this.state.radioOptions1}
+            value={this.state.radioValue1}
+            onChange={this.handleRadioChange}
+          />
+        </Card>
+
+        <Card
+          header="自定义布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: mini</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
+          <Radio
+            layout="mini"
+            style={style}
+            border={border}
+            options={this.state.radioOptions2}
+            value={this.state.radioValue2}
+            miniColumns={2}
+            miniGap={12}
+            onChange={this.handleRadioChangeSecond}
+          />
+        </Card>
 
         <Radio
           header="基础用法"
