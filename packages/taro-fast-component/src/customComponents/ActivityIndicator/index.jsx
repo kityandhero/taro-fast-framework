@@ -8,13 +8,13 @@ import './index.less';
 
 class ActivityIndicator extends PureComponent {
   render() {
-    const { color, size, mode, content, isOpened } = this.props;
+    const { color, size, mode, content, visible } = this.props;
 
     const rootClass = classNames(
       'tfc-activity-indicator',
       {
         'tfc-activity-indicator--center': mode === 'center',
-        'tfc-activity-indicator--isopened': isOpened,
+        'tfc-activity-indicator--isopened': visible,
       },
       this.props.className,
     );
@@ -38,7 +38,7 @@ ActivityIndicator.defaultProps = {
   color: '',
   content: '',
   className: '',
-  isOpened: true,
+  visible: true,
 };
 
 export default ActivityIndicator;

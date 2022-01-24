@@ -72,7 +72,7 @@ export const Spin = (props) => {
                 <VerticalBox alignJustify="center">
                   {showLoading ? (
                     <ActivityIndicator
-                      isOpened={spin}
+                      visible={spin}
                       content={text}
                       color={spinColor}
                       size={spinSize}

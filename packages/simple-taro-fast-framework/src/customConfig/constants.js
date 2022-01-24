@@ -151,6 +151,9 @@ export const pathCollection = {
   textAreaItem: {
     path: '/example/pages/textAreaItem/index',
   },
+  actionSheet: {
+    path: '/example/pages/actionSheet/index',
+  },
 };
 
 export const cardHeaderStyle = {

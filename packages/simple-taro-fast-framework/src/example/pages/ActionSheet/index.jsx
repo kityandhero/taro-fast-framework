@@ -1,0 +1,186 @@
+import Taro from '@tarojs/taro';
+import { View, Text } from '@tarojs/components';
+
+import {
+  Card,
+  Space,
+  Button,
+  ActionSheet,
+} from 'taro-fast-component/es/customComponents';
+
+import { cardHeaderStyle } from '../../../customConfig/constants';
+import PageWrapper from '../../../customComponents/PageWrapper';
+
+export default class Index extends PageWrapper {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        visible1: false,
+        visible2: false,
+        visible3: false,
+      },
+    };
+  }
+
+  handleClick = (type) => {
+    this.setState({
+      [`visible${type}`]: true,
+    });
+  };
+
+  handleClose = (name) => {
+    this.setState({
+      [`visible${name}`]: false,
+    });
+
+    Taro.showToast({
+      title: `第 ${name} 个Action Sheet已经关闭`,
+      icon: 'none',
+    });
+  };
+
+  handleCancel = () => {
+    this.showToast('点击了取消按钮');
+  };
+
+  showToast = (name) => {
+    Taro.showToast({
+      icon: 'none',
+      title: name,
+    });
+  };
+
+  renderFurther() {
+    const { visible1, visible2, visible3 } = this.state;
+
+    return (
+      <View className="index">
+        <Card header="ActionSheet" headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" fillWidth>
+            <Button
+              block
+              size="large"
+              onClick={() => {
+                this.handleClick(1);
+              }}
+            >
+              打开 ActionSheet
+            </Button>
+
+            <Button
+              block
+              size="large"
+              onClick={() => {
+                this.handleClick(2);
+              }}
+            >
+              打开 ActionSheet 含标题
+            </Button>
+
+            <Button
+              block
+              size="large"
+              onClick={() => {
+                this.handleClick(3);
+              }}
+            >
+              打开 ActionSheet 自定义选项
+            </Button>
+          </Space>
+        </Card>
+
+        <ActionSheet
+          cancelText="取消"
+          visible={visible1}
+          options={[
+            {
+              content: '按钮一',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮一');
+              },
+            },
+            {
+              content: '按钮二',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮二');
+              },
+            },
+          ]}
+          onClose={() => {
+            this.handleClose(1);
+          }}
+        />
+
+        <ActionSheet
+          cancelText="取消"
+          visible={visible2}
+          onClose={() => {
+            this.handleClose(2);
+          }}
+          title="清除位置信息后， 别人将不能查看到你"
+          options={[
+            {
+              content: '按钮一',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮一');
+              },
+            },
+            {
+              content: '按钮二',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮二');
+              },
+            },
+            {
+              content: '按钮三',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮三');
+              },
+            },
+          ]}
+        />
+
+        <ActionSheet
+          cancelText="取消"
+          visible={visible3}
+          onCancel={this.handleCancel}
+          onClose={() => {
+            this.handleClose(3);
+          }}
+          title="清除位置信息后， 别人将不能查看到你"
+          options={[
+            {
+              content: '按钮一',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮一');
+              },
+            },
+            {
+              content: '按钮二',
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('点击了按钮二');
+              },
+            },
+            {
+              content: <Text className="danger">清除位置信息并退出</Text>,
+              onClick: (v) => {
+                console.log(v);
+                this.showToast('成功清除位置');
+              },
+            },
+          ]}
+        />
+      </View>
+    );
+  }
+}

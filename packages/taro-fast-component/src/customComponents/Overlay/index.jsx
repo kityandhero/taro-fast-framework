@@ -155,8 +155,7 @@ class Overlay extends ComponentBase {
     const { lockScroll } = this.props;
 
     if (lockScroll) {
-      e.stopPropagation();
-      e.preventDefault();
+      this.ignoreTouchMove(e);
     }
   };
 

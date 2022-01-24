@@ -196,11 +196,6 @@ class Popup extends ComponentBase {
     );
   };
 
-  handleTouchMove = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
   getHeight = () => {
     const minHeight = this.getMinHeight();
     const maxHeight = this.getMaxHeight();
@@ -283,6 +278,10 @@ class Popup extends ComponentBase {
     }
 
     return position === 'center' ? true : showClose;
+  };
+
+  handleTouchMove = (e) => {
+    this.ignoreTouchMove(e);
   };
 
   render() {

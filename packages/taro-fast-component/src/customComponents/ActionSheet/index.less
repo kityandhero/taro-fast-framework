@@ -1,0 +1,113 @@
+@tfc-action-sheet-duration: 300ms;
+@zindex-action-sheet: 1010;
+@timing-func: cubic-bezier(0.36, 0.66, 0.04, 1);
+
+.tfc-action-sheet {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: @zindex-action-sheet;
+  visibility: hidden;
+  transition: visibility @tfc-action-sheet-duration @timing-func;
+
+  &__container {
+    position: absolute;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: var(--tfc-color-white);
+    transform: translate3d(0, 100%, 0);
+    opacity: 0.01;
+    transition-property: opacity, transform;
+    transition-duration: @tfc-action-sheet-duration;
+    transition-timing-function: @timing-func;
+  }
+
+  &__container__active {
+    opacity: 1;
+  }
+
+  &__header {
+    padding: var(--tfc-24) var(--tfc-24);
+    color: var(--tfc-color-black-3);
+    font-size: var(--tfc-28);
+    text-align: center;
+    line-height: 1.5;
+    position: relative;
+
+    &::after {
+      content: '';
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      border: 0 solid #d6e4ef;
+      transform: scale(0.5);
+      position: absolute;
+      transform-origin: center;
+      box-sizing: border-box;
+      pointer-events: none;
+      border-bottom-width: var(--tfc-2);
+    }
+  }
+
+  &__footer {
+    padding: var(--tfc-24) var(--tfc-24);
+    font-size: var(--tfc-36);
+    border-top: var(--tfc-12) solid rgba(218, 218, 218, 30%);
+    transition: background-color 0.3s;
+
+    &:active {
+      background-color: var(--tfc-color-grey-5);
+    }
+  }
+
+  &__body {
+    text-align: center;
+  }
+
+  &__item {
+    padding: var(--tfc-24) var(--tfc-24);
+    font-size: var(--tfc-32);
+    transition: background-color 0.3s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+
+    &:active {
+      background-color: var(--tfc-color-grey-5);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      transform-origin: center;
+      box-sizing: border-box;
+      pointer-events: none;
+      top: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: scaleY(0.5);
+      border-bottom: var(--tfc-2) solid #d6e4ef;
+    }
+  }
+
+  /* modifiers */
+  &--active {
+    visibility: visible;
+
+    .tfc-action-sheet__overlay {
+      opacity: 1;
+    }
+
+    .tfc-action-sheet__container {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

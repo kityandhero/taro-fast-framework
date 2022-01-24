@@ -51,7 +51,6 @@ class ColorText extends ComponentBase {
       randomColor,
       color,
       text,
-      canCopy,
       separator,
       separatorStyle,
     } = this.props;
@@ -66,7 +65,6 @@ class ColorText extends ComponentBase {
 
     const style = {
       ...{ color: 'rgba(0, 0, 0, 0.85)' },
-      ...(canCopy ? { cursor: 'pointer' } : {}),
       ...{ display: 'inline-block' },
     };
 

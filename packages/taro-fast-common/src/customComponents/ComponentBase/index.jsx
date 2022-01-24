@@ -241,6 +241,11 @@ class ComponentBase extends Component {
     }
   };
 
+  ignoreTouchMove = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   /**
    * 登录失败时的回调定义
    * @param {*} remoteData [object] 远程返回数据

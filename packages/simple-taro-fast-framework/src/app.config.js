@@ -58,6 +58,7 @@ export default {
         'pages/dataGrid/index',
         'pages/searchBar/index',
         'pages/textAreaItem/index',
+        'pages/actionSheet/index',
       ],
     },
   ],

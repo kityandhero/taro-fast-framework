@@ -195,6 +195,18 @@ export default class Index extends PageWrapper {
           })}
         </Card>
 
+        <Card header="操作反馈" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'ActionSheet',
+            path: pathCollection.actionSheet.path,
+          })}
+
+          {this.buildItem({
+            name: 'FloatAction',
+            path: pathCollection.floatAction.path,
+          })}
+        </Card>
+
         <Card header="功能组件" headerStyle={cardHeaderStyle} space={false}>
           {this.buildItem({
             name: 'Ellipsis',
@@ -244,11 +256,6 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'NoticeBar',
             path: pathCollection.noticeBar.path,
-          })}
-
-          {this.buildItem({
-            name: 'FloatAction',
-            path: pathCollection.floatAction.path,
           })}
 
           {this.buildItem({

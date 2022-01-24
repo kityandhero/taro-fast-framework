@@ -18,7 +18,8 @@ import Item from '../Item';
 import Icon from '../Icon';
 import CenterBox from '../CenterBox';
 import Grid from '../Grid';
-import { FlexBox, VerticalBox } from '..';
+import VerticalBox from '../VerticalBox';
+import FlexBox from '../FlexBox';
 
 const { IconCheck } = Icon;
 
