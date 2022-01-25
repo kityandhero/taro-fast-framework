@@ -1,17 +1,54 @@
 @class-prefix-cascader: ~'tfc-cascader';
 
 .@{class-prefix-cascader} {
-  &__bar {
-    &__item {
-      display: inline-block;
-      background-color: #fff;
-      font-size: var(--tfc-28);
-      height: var(--tfc-44);
-      line-height: var(--tfc-44);
-      white-space: nowrap;
-      padding: 0 var(--tfc-8);
-      text-align: center;
-      vertical-align: middle;
+  &__header {
+    border-bottom: var(--tfc-2) solid #eee;
+
+    &__bar {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      overflow-x: scroll;
+
+      &__item {
+        position: relative;
+        background-color: #fff;
+        height: var(--tfc-74);
+        line-height: var(--tfc-74);
+        white-space: nowrap;
+        padding: 0 var(--tfc-24);
+        text-align: center;
+        vertical-align: middle;
+        color: #333;
+
+        &__label {
+          font-size: var(--tfc-28);
+          height: var(--tfc-74);
+          line-height: var(--tfc-74);
+        }
+
+        &__line {
+          position: absolute;
+          bottom: calc(var(--tfc-2) * -1);
+          height: var(--tfc-2);
+          color: #1677ff;
+          background: #1677ff;
+          border-radius: var(--tfc-2);
+          transform: scaleX(0);
+          transition: all 0.15s;
+          width: 100%;
+        }
+
+        &__select {
+          color: #1677ff;
+
+          @{class-prefix-cascader}__header__bar__item__line {
+            transform: scaleX(1);
+          }
+        }
+      }
     }
   }
 }

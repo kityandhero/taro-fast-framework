@@ -102,7 +102,7 @@ class Radio extends ComponentBase {
     const { onChange } = this.props;
 
     if (isFunction(onChange)) {
-      onChange(option.value);
+      onChange(option.value, option);
     }
   };
 

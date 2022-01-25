@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { roundToTarget, getGuid } from 'taro-fast-common/es/utils/tools';
-import { Cascader, Card, Space } from 'taro-fast-component/es/customComponents';
+import { Cascader, Card } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -246,17 +246,15 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="demo" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <Cascader
-              value={[
-                options[2].value,
-                options[2].children[1].value,
-                options[2].children[1].children[1].value,
-              ]}
-              options={options}
-            />
-          </Space>
+        <Card header="demo" headerStyle={cardHeaderStyle} space={false}>
+          <Cascader
+            value={[
+              options[2].value,
+              options[2].children[1].value,
+              options[2].children[1].children[1].value,
+            ]}
+            options={options}
+          />
         </Card>
       </View>
     );

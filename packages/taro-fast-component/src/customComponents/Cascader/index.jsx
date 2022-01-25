@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
+import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -18,6 +19,8 @@ const defaultProps = {
 };
 
 class Cascader extends ComponentBase {
+  flag = '';
+
   constructor(props) {
     super(props);
 
@@ -105,7 +108,7 @@ class Cascader extends ComponentBase {
     let children = this.filterOptions();
 
     for (let i = 0; i <= index; i++) {
-      const v = this.getIndexValue(i);
+      const v = this.getIndexValue(i) || this.flag;
 
       const exist = children.some((o) => {
         if (o.value === v) {
@@ -142,10 +145,19 @@ class Cascader extends ComponentBase {
         const options = this.getIndexOptions(i);
 
         options.some((o) => {
-          if (o.value === valueStage[i]) {
-            result.push(o);
+          if (stringIsNullOrWhiteSpace(valueStage[i])) {
+            result.push({
+              label: '请选择',
+              value: '',
+            });
 
             return true;
+          } else {
+            if (o.value === valueStage[i]) {
+              result.push(o);
+
+              return true;
+            }
           }
         });
       }
@@ -154,25 +166,43 @@ class Cascader extends ComponentBase {
     return result;
   };
 
-  triggerChange = (v) => {
+  triggerChange = (v, option) => {
     const { onChange } = this.props;
     const { valueStage, currentLevel } = this.state;
 
-    valueStage[currentLevel] = v;
+    const value = [...valueStage];
 
-    this.setState({
-      valueStage: [...valueStage],
-    });
+    value[currentLevel] = v;
 
-    if (isFunction(onChange)) {
-      onChange(valueStage);
+    if (value.join() !== valueStage.join()) {
+      if (isArray(option.children) && option.children.length > 0) {
+        value[currentLevel + 1] = '';
+        this.flag = option.children[0].value;
+
+        this.setState({
+          valueStage: [...value],
+          currentLevel: currentLevel + 1,
+        });
+      } else {
+        this.setState({
+          valueStage: [...value],
+        });
+      }
+
+      if (isFunction(onChange)) {
+        onChange(value);
+      }
     }
   };
 
   changeLevel = (index) => {
-    this.setState({
-      currentLevel: index,
-    });
+    const { currentLevel } = this.state;
+
+    if (index !== currentLevel) {
+      this.setState({
+        currentLevel: index,
+      });
+    }
   };
 
   renderFurther() {
@@ -185,26 +215,51 @@ class Cascader extends ComponentBase {
 
     return (
       <View className={classNames(classPrefix)}>
-        <View className={classNames(`${classPrefix}__bar`)}>
-          {barData.map((o, i) => {
-            const key = `bar_${i}`;
+        <View className={classNames(`${classPrefix}__header`)}>
+          <View className={classNames(`${classPrefix}__header__bar`)}>
+            {barData.map((o, i) => {
+              const key = `bar_${i}`;
 
-            return (
-              <View
-                className={classNames(`${classPrefix}__bar__item`)}
-                key={key}
-                onClick={() => {
-                  this.changeLevel(i);
-                }}
-              >
-                {o.label}
-              </View>
-            );
-          })}
+              return (
+                <View
+                  className={classNames(`${classPrefix}__header__bar__item`, {
+                    [`${classPrefix}__header__bar__item__select`]:
+                      o.value === currentValue,
+                  })}
+                  key={key}
+                  onClick={() => {
+                    this.changeLevel(i);
+                  }}
+                >
+                  <View
+                    className={classNames(
+                      `${classPrefix}__header__bar__item__label`,
+                    )}
+                  >
+                    {o.label}
+                  </View>
+
+                  <View
+                    className={classNames(
+                      `${classPrefix}__header__bar__item__line`,
+                    )}
+                  />
+                </View>
+              );
+            })}
+          </View>
         </View>
         <View>
           <Radio
-            style={style}
+            style={{
+              ...style,
+              ...{
+                border: '0',
+              },
+            }}
+            bodyStyle={{
+              border: '0',
+            }}
             border={border}
             options={currentOptions}
             value={currentValue}
