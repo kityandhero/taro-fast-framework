@@ -292,6 +292,11 @@ export default class Index extends PageWrapper {
             name: 'SearchBar',
             path: pathCollection.searchBar.path,
           })}
+
+          {this.buildItem({
+            name: 'Cascader',
+            path: pathCollection.cascader.path,
+          })}
         </Card>
 
         <Card header="扩展组件" headerStyle={cardHeaderStyle} space={false}>

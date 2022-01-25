@@ -157,6 +157,9 @@ export const pathCollection = {
   modal: {
     path: '/example/pages/modal/index',
   },
+  cascader: {
+    path: '/example/pages/cascader/index',
+  },
 };
 
 export const cardHeaderStyle = {
