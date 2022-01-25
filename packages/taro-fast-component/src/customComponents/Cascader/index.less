@@ -15,6 +15,7 @@
       &__item {
         position: relative;
         background-color: #fff;
+        min-width: var(--tfc-148);
         height: var(--tfc-74);
         line-height: var(--tfc-74);
         white-space: nowrap;
@@ -31,20 +32,23 @@
 
         &__line {
           position: absolute;
+          left: 0;
           bottom: calc(var(--tfc-2) * -1);
-          height: var(--tfc-2);
+          height: var(--tfc-4);
           color: #1677ff;
           background: #1677ff;
           border-radius: var(--tfc-2);
           transform: scaleX(0);
           transition: all 0.15s;
-          width: 100%;
+          width: calc(100% - var(--tfc-24) * 2);
+          margin: 0 var(--tfc-24);
+          z-index: 10;
         }
 
         &__select {
           color: #1677ff;
 
-          @{class-prefix-cascader}__header__bar__item__line {
+          .@{class-prefix-cascader}__header__bar__item__line {
             transform: scaleX(1);
           }
         }
