@@ -8,47 +8,47 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 
 const options = [
   {
-    label: '0-0',
+    label: '河南',
     value: '0-0',
     children: [
       {
-        label: '0-0-0',
+        label: '郑州',
         value: '0-0-0',
         children: [
           {
-            label: '0-0-0-0',
+            label: '中原区',
             value: '0-0-0-0',
           },
           {
-            label: '0-0-0-1',
+            label: '二七区',
             value: '0-0-0-1',
           },
         ],
       },
       {
-        label: '0-0-1',
+        label: '洛阳',
         value: '0-0-1',
         children: [
           {
-            label: '0-0-1-0',
+            label: '涧西区',
             value: '0-0-1-0',
           },
           {
-            label: '0-0-1-1',
+            label: '西工区',
             value: '0-0-1-1',
           },
         ],
       },
       {
-        label: '0-0-2',
+        label: '南阳',
         value: '0-0-2',
         children: [
           {
-            label: '0-0-2-0',
+            label: '栾川',
             value: '0-0-2-0',
           },
           {
-            label: '0-0-2-1',
+            label: '西峡',
             value: '0-0-2-1',
           },
         ],
@@ -56,47 +56,47 @@ const options = [
     ],
   },
   {
-    label: '0-1',
+    label: '河北',
     value: '0-1',
     children: [
       {
-        label: '0-1-0',
+        label: '石家庄',
         value: '0-1-0',
         children: [
           {
-            label: '0-1-0-0',
+            label: '新华区',
             value: '0-1-0-0',
           },
           {
-            label: '0-1-0-1',
+            label: '长安区',
             value: '0-1-0-1',
           },
         ],
       },
       {
-        label: '0-1-1',
+        label: '保定',
         value: '0-1-1',
         children: [
           {
-            label: '0-1-1-0',
+            label: '新市区',
             value: '0-1-1-0',
           },
           {
-            label: '0-1-1-1',
+            label: '北市区',
             value: '0-1-1-1',
           },
         ],
       },
       {
-        label: '0-1-2',
+        label: '唐山',
         value: '0-1-2',
         children: [
           {
-            label: '0-1-2-0',
+            label: '路北区',
             value: '0-1-2-0',
           },
           {
-            label: '0-1-2-1',
+            label: '路南区',
             value: '0-1-2-1',
           },
         ],
@@ -104,96 +104,48 @@ const options = [
     ],
   },
   {
-    label: '0-2',
+    label: '山东',
     value: '0-2',
     children: [
       {
-        label: '0-2-0',
+        label: '济南',
         value: '0-2-0',
         children: [
           {
-            label: '0-2-0-0',
+            label: '历下区',
             value: '0-2-0-0',
           },
           {
-            label: '0-2-0-1',
+            label: '市中区',
             value: '0-2-0-1',
           },
         ],
       },
       {
-        label: '0-2-1',
+        label: '青岛',
         value: '0-2-1',
         children: [
           {
-            label: '0-2-1-0',
+            label: '市南区',
             value: '0-2-1-0',
           },
           {
-            label: '0-2-1-1',
+            label: '市北区',
             value: '0-2-1-1',
           },
         ],
       },
       {
-        label: '0-2-2',
+        label: '淄博',
         value: '0-2-2',
         children: [
           {
-            label: '0-2-2-0',
+            label: '张店区',
             value: '0-2-2-0',
           },
           {
-            label: '0-2-2-1',
+            label: '博山区',
             value: '0-2-2-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: '0-3',
-    value: '0-3',
-    children: [
-      {
-        label: '0-3-0',
-        value: '0-3-0',
-        children: [
-          {
-            label: '0-3-0-0',
-            value: '0-3-0-0',
-          },
-          {
-            label: '0-3-0-1',
-            value: '0-3-0-1',
-          },
-        ],
-      },
-      {
-        label: '0-3-1',
-        value: '0-3-1',
-        children: [
-          {
-            label: '0-3-1-0',
-            value: '0-3-1-0',
-          },
-          {
-            label: '0-3-1-1',
-            value: '0-3-1-1',
-          },
-        ],
-      },
-      {
-        label: '0-3-2',
-        value: '0-3-2',
-        children: [
-          {
-            label: '0-3-2-0',
-            value: '0-3-2-0',
-          },
-          {
-            label: '0-3-2-1',
-            value: '0-3-2-1',
           },
         ],
       },
