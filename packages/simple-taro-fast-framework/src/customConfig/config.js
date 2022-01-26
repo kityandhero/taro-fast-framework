@@ -1,4 +1,4 @@
-export const appId = 'pdb5hbgusn5beo';
+export const appId = 'pdainpxvam7wu8';
 
 /**
  * 占位函数

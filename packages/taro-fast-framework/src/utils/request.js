@@ -27,7 +27,7 @@ export class Request {
    * @static request请求 基于 Taro.request
    * @param {Options} opts
    */
-  static request(opts) {
+  static async request(opts) {
     let options = Object.assign(opts, {
       fail: (res) => {
         Tips.loaded();
@@ -36,21 +36,21 @@ export class Request {
       },
     });
 
-    return Taro.request(options).then((response) => {
-      const { code } = response.data;
+    const response = await Taro.request(options);
 
-      if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
-        const loginPath = defaultSettingsLayoutCustom.getLoginPath();
+    const { code } = response.data;
 
-        if (stringIsNullOrWhiteSpace(loginPath)) {
-          throw new Error('缺少登录页面路径配置');
-        }
+    if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
+      const loginPath = defaultSettingsLayoutCustom.getLoginPath();
 
-        Tips.toast('跳转登录页面');
+      if (stringIsNullOrWhiteSpace(loginPath)) {
+        throw new Error('缺少登录页面路径配置');
       }
 
-      return response.data;
-    });
+      Tips.toast('跳转登录页面');
+    }
+
+    return response.data;
   }
 
   /**
@@ -59,7 +59,7 @@ export class Request {
    * @returns
    * @memberof PostJson
    */
-  static Post(url, data, header = {}) {
+  static Post(url, data, header = {}, option) {
     try {
       const token = getToken() || 'anonymous';
       const openId = getOpenId();
@@ -67,10 +67,6 @@ export class Request {
       const locationMode = getLocationMode();
 
       const headerChange = {
-        ...{
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
         ...(header || {}),
         ...{
           openId,
@@ -128,10 +124,21 @@ export class Request {
       }
 
       return Request.request({
-        url: urlChange,
-        data: data || {},
-        header: headerChange,
-        method: requestMethod.post,
+        ...{
+          mode: 'cors',
+          dataType: 'json',
+          cache: 'no-cache',
+          fail: (res) => {
+            console.lod(res);
+          },
+        },
+        ...(option || {}),
+        ...{
+          url: urlChange,
+          data: data || {},
+          header: headerChange,
+          method: requestMethod.post,
+        },
       });
     } catch (e) {
       recordError(e.stack);
