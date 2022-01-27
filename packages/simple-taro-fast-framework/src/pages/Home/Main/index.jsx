@@ -51,6 +51,13 @@ export default class Index extends PageWrapper {
           <CenterBox> Welcome To Taro-Fast-Framework! </CenterBox>
         </View>
 
+        <Card header="基础方法" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'Utils',
+            path: pathCollection.utils.path,
+          })}
+        </Card>
+
         <Card header="基础组件" headerStyle={cardHeaderStyle} space={false}>
           {this.buildItem({
             name: 'ImageBox',

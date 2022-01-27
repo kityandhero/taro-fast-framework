@@ -1,6 +1,7 @@
 import React from 'react';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 import { stringify, parse } from 'qs';
 import {
   filter as filterLodash,
@@ -686,32 +687,7 @@ export function formatDatetime({
     return '';
   }
 
-  let o = {
-    'M+': date.getMonth() + 1, //月份
-    'd+': date.getDate(), //日
-    'h+': date.getHours(), //小时
-    'm+': date.getMinutes(), //分
-    's+': date.getSeconds(), //秒
-    'q+': Math.floor((date.getMonth() + 3) / 3), //季度
-    S: date.getMilliseconds(), //毫秒
-  };
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(
-      RegExp.$1,
-      (date.getFullYear() + '').substr(4 - RegExp.$1.length),
-    );
-  }
-
-  for (let k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(
-        RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length),
-      );
-    }
-  }
-
-  return fmt;
+  return dayjs(date).format(fmt);
 }
 
 export function formatTarget({ target, format, option = {} }) {
@@ -722,7 +698,9 @@ export function formatTarget({ target, format, option = {} }) {
   if (isString(format)) {
     switch (format) {
       case formatCollection.money:
-        return formatMoney(target);
+        return formatMoney({
+          data: target,
+        });
 
       case formatCollection.datetime:
         return formatDatetime({
@@ -791,6 +769,104 @@ export function getNow() {
 }
 
 /**
+ * 计算月份差
+ */
+export const calculateMonthInterval = (startMonth, endMonth) => {
+  const start = toDatetime(startMonth);
+  const end = toDatetime(endMonth);
+  return (
+    (start.getFullYear() - end.getFullYear()) * 12 +
+    start.getMonth() -
+    end.getMonth()
+  );
+};
+
+/**
+ * 计算时间差
+ */
+export const calculateDateInterval = (date, nowDate, unit) => {
+  const start = toDatetime(date);
+  const end = nowDate ? toDatetime(nowDate) : new Date();
+  const output = end.getTime() - start.getTime();
+
+  return (
+    (unit === 'second' && output / 1000) ||
+    (unit === 'minute' && output / 1000 / 60) ||
+    (unit === 'hour' && output / 1000 / 60 / 60) ||
+    (unit === 'day' && output / 1000 / 60 / 60 / 24) ||
+    (unit === 'week' && output / 1000 / 60 / 60 / 24 / 7) ||
+    (unit === 'month' && calculateMonthInterval(start, end)) ||
+    (unit === 'quarter' && calculateMonthInterval(start, end) / 3) ||
+    (unit === 'year' && calculateMonthInterval(start, end) / 12) ||
+    output
+  );
+};
+
+/**
+ * 格式化指定两时间时间的时间间隔
+ * @param    {date} start 起始时间
+ * @param    {date} end 结束时间
+ * @param    {Object} opts 配置参数
+ * @return   {String}      文本内容
+ */
+export function formatDateInterval(start, end, opts = {}) {
+  const options = {
+    ...{
+      second: ['刚刚', '片刻后'],
+      seconds: ['%d 秒前', '%d 秒后'],
+      minute: ['大约 1 分钟前', '大约 1 分钟后'],
+      minutes: ['%d 分钟前', '%d 分钟后'],
+      hour: ['大约 1 小时前', '大约 1 小时后'],
+      hours: ['%d 小时前', '%d 小时后'],
+      day: ['1 天前', '1 天后'],
+      days: ['%d 天前', '%d 天后'],
+      month: ['大约 1 个月前', '大约 1 个月后'],
+      months: ['%d 月前', '%d 月后'],
+      year: ['大约 1 年前', '大约 1 年后'],
+      years: ['%d 年前', '%d 年后'],
+    },
+    ...(opts || {}),
+  };
+
+  const diff = calculateDateInterval(start, end);
+
+  const interval = diff < 0 ? 1 : 0;
+  const seconds = Math.abs(diff) / 1000;
+  const minutes = seconds / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+  const years = days / 365;
+  const substitute = (string, number) => string.replace(/%d/i, number);
+
+  return (
+    (seconds < 10 && substitute(options.second[interval], parseInt(seconds))) ||
+    (seconds < 45 &&
+      substitute(options.seconds[interval], parseInt(seconds))) ||
+    (seconds < 90 && substitute(options.minute[interval], 1)) ||
+    (minutes < 45 &&
+      substitute(options.minutes[interval], parseInt(minutes))) ||
+    (minutes < 90 && substitute(options.hour[interval], 1)) ||
+    (hours < 24 && substitute(options.hours[interval], parseInt(hours))) ||
+    (hours < 42 && substitute(options.day[interval], 1)) ||
+    (days < 30 && substitute(options.days[interval], parseInt(days))) ||
+    (days < 45 && substitute(options.month[interval], 1)) ||
+    (days < 365 && substitute(options.months[interval], parseInt(days / 30))) ||
+    (years < 1.5 && substitute(options.year[interval], 1)) ||
+    substitute(options.years[interval], parseInt(years))
+  );
+}
+
+/**
+ * 格式化指定时间与当前时间的时间间隔
+ * @param    {time} start 时间
+ * @param    {Object} opts 配置参数
+ * @return   {String}      文本内容
+ */
+export function formatDateIntervalWithNow(time, opts = {}) {
+  return formatDateInterval(time, getNow(), opts);
+}
+
+/**
  * 通过 path 获取对应得值
  */
 export function getPathValue(o, path, defaultValue = null) {
@@ -828,19 +904,19 @@ export function getPathValue(o, path, defaultValue = null) {
  * @param {*} str
  * @returns
  */
-export function formatDecimal(
-  numberSource,
-  placesSource = 2,
-  thousandSource = ',',
-  decimalSource = '.',
-) {
-  return formatMoney(
-    numberSource,
-    placesSource,
-    '',
-    thousandSource,
-    decimalSource,
-  );
+export function formatDecimal({
+  data,
+  places = 2,
+  thousand = ',',
+  decimal = '.',
+}) {
+  return formatMoney({
+    data,
+    places,
+    symbol: '',
+    thousand,
+    decimal,
+  });
 }
 
 /**
@@ -851,7 +927,7 @@ export function formatDecimal(
  * @returns
  */
 export function formatMoney({
-  number: numberSource,
+  data: numberSource,
   places: placesSource = 2,
   symbol: symbolSource = '¥',
   thousand: thousandSource = ',',

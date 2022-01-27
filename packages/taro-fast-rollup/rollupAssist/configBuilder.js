@@ -39,6 +39,7 @@ const externalCollection = [
   '@tarojs/plugin-framework-vue3',
   'lodash',
   'qs',
+  'dayjs',
   'node-cache',
   'react-redux',
   'redux',

@@ -160,6 +160,9 @@ export const pathCollection = {
   cascader: {
     path: '/example/pages/cascader/index',
   },
+  utils: {
+    path: '/example/pages/utils/index',
+  },
 };
 
 export const cardHeaderStyle = {

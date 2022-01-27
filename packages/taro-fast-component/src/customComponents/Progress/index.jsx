@@ -1,8 +1,15 @@
 import classNames from 'classnames';
 import { View, Text } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
+import {
+  isArray,
+  isNumber,
+  isString,
+} from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
@@ -75,12 +82,37 @@ class Progress extends ComponentBase {
     return p;
   };
 
+  getActiveColor = () => {
+    const { activeColor } = this.props;
+
+    if (isString(activeColor)) {
+      if (stringIsNullOrWhiteSpace(activeColor)) {
+        return {};
+      }
+
+      return { backgroundColor: activeColor };
+    }
+
+    if (isArray(activeColor)) {
+      const a = activeColor.filter(
+        (o) => isString(o) && !stringIsNullOrWhiteSpace(o),
+      );
+
+      if (a.length > 0) {
+        return {
+          backgroundImage: `linear-gradient(to right, ${a.join()});`,
+        };
+      }
+    }
+
+    return {};
+  };
+
   renderFurther() {
     const {
       hidden,
       style,
       className,
-      activeColor,
       backgroundColor,
       strokeWidth,
       showInfo,
@@ -95,6 +127,7 @@ class Progress extends ComponentBase {
     }
 
     const percent = this.getPercent();
+    const activeColor = this.getActiveColor();
 
     const styleContainer = {
       ...style,
@@ -118,7 +151,7 @@ class Progress extends ComponentBase {
         width: percent && `${+percent}%`,
         height: transformSize(strokeWidth),
       },
-      ...(activeColor ? { backgroundColor: activeColor } : {}),
+      ...activeColor,
       ...(useBorderRadius
         ? {
             borderRadius: transformSize(borderRadius),

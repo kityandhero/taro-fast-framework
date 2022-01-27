@@ -61,6 +61,7 @@ export default {
         'pages/actionSheet/index',
         'pages/modal/index',
         'pages/cascader/index',
+        'pages/utils/index',
       ],
     },
   ],

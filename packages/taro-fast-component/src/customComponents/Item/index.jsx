@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction, isString } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';
@@ -119,6 +119,9 @@ class Item extends ComponentBase {
                   ...{
                     fontSize: transformSize(28),
                   },
+                  ...(!arrow && isString(extra)
+                    ? { paddingRight: 'var(--tfc-24)' }
+                    : {}),
                   ...extraContainerStyle,
                 }}
               >

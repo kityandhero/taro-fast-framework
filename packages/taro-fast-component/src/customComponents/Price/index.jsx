@@ -40,7 +40,7 @@ class Price extends ComponentBase {
     }
 
     const money = formatMoney({
-      number: price || 0,
+      data: price || 0,
       places: 2,
       symbol: '',
       thousand: '',

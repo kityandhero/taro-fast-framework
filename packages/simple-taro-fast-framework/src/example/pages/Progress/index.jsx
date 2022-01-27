@@ -6,13 +6,11 @@ import {
   Space,
   Progress,
   Button,
-  Icon,
+  HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
-
-const { IconCheckCircle } = Icon;
 
 export default class Index extends PageWrapper {
   constructor(props) {
@@ -104,6 +102,14 @@ export default class Index extends PageWrapper {
           />
         </Card>
 
+        <Card header="渐变色" headerStyle={cardHeaderStyle}>
+          <Progress
+            percent={70}
+            animation
+            activeColor={['#FF0000', '#FFF200', '#1E9600']}
+          />
+        </Card>
+
         <Card header="直角模式" headerStyle={cardHeaderStyle}>
           <Progress percent={30} useBorderRadius={false} />
         </Card>
@@ -126,7 +132,39 @@ export default class Index extends PageWrapper {
             fontSize={36}
             activeColor="#FF3141"
             backgroundColor="#000000"
-            icon={<IconCheckCircle size={38} showInfo color="green" />}
+          />
+        </Card>
+
+        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: 'percent: 进度百分比, 取值范围[0 ~ 100].',
+              },
+              {
+                text: 'showInfo: 是否显示百分比.',
+              },
+              {
+                text: 'animation: 是被显示动画.',
+              },
+              {
+                text: 'borderRadius: 圆角设置值.',
+              },
+              {
+                text: 'strokeWidth: 进度条宽度.',
+              },
+              {
+                text: 'fontSize: 字体大小.',
+              },
+              {
+                text: 'activeColor: 进度条颜色,string 或者[string,string,...], 数组模式将使用渐变色.',
+              },
+              {
+                text: 'backgroundColor: 进度条背景色.',
+              },
+            ]}
           />
         </Card>
       </View>

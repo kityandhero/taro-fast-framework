@@ -69,5 +69,8 @@
   },
   "bugs": {
     "url": "https://github.com/kityandhero/taro-fast-framework/issues"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.7"
   }
 }
