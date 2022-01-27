@@ -37,6 +37,7 @@ const defaultProps = {
   cancelText: '取消',
   confirmStyle: {},
   confirmText: '确定',
+  buttonFill: true,
   onCancel: null,
   onConfirm: null,
   onClose: null,
@@ -72,7 +73,6 @@ class Modal extends ComponentBase {
       bodyBorder,
       bodyStyle,
       footer,
-      footerBorder,
       footerStyle,
       space,
       extra,
@@ -84,6 +84,7 @@ class Modal extends ComponentBase {
       showConfirm,
       confirmStyle,
       confirmText,
+      buttonFill,
       onClose,
       children,
     } = this.props;
@@ -100,12 +101,27 @@ class Modal extends ComponentBase {
               {showCancel ? (
                 <Col size={!!showCancel && !!showConfirm ? 6 : 12}>
                   <View
-                    className={classNames(
-                      `${classPrefix}__container__action`,
-                      `${classPrefix}__container__action__left`,
-                    )}
-                    hoverClass={`${classPrefix}__container__action--hover`}
-                    style={cancelStyle}
+                    className={classNames(`${classPrefix}__container__action`, {
+                      [`${classPrefix}__container__action__fill`]: buttonFill,
+                      [`${classPrefix}__container__action__left`]: buttonFill,
+                      [`${classPrefix}__container__action__no__fill`]:
+                        !buttonFill,
+                    })}
+                    hoverClass={
+                      buttonFill
+                        ? `${classPrefix}__container__action--hover`
+                        : 'none'
+                    }
+                    style={{
+                      ...(!buttonFill
+                        ? {
+                            border:
+                              'var(--tfc-2) solid var(--tfc-color-primary)',
+                            color: 'var(--tfc-color-primary)',
+                          }
+                        : {}),
+                      ...cancelStyle,
+                    }}
                     onClick={this.triggerCancel}
                   >
                     {cancelText}
@@ -116,12 +132,26 @@ class Modal extends ComponentBase {
               {showConfirm ? (
                 <Col size={!!showCancel && !!showConfirm ? 6 : 12}>
                   <View
-                    className={classNames(
-                      `${classPrefix}__container__action`,
-                      `${classPrefix}__container__action__right`,
-                    )}
-                    hoverClass={`${classPrefix}__container__action--hover`}
-                    style={confirmStyle}
+                    className={classNames(`${classPrefix}__container__action`, {
+                      [`${classPrefix}__container__action__fill`]: buttonFill,
+                      [`${classPrefix}__container__action__right`]: buttonFill,
+                      [`${classPrefix}__container__action__no__fill`]:
+                        !buttonFill,
+                    })}
+                    hoverClass={
+                      buttonFill
+                        ? `${classPrefix}__container__action--hover`
+                        : 'none'
+                    }
+                    style={{
+                      ...(!buttonFill
+                        ? {
+                            backgroundColor: 'var(--tfc-color-primary)',
+                            color: '#fff',
+                          }
+                        : {}),
+                      ...confirmStyle,
+                    }}
                     onClick={this.triggerConfirm}
                   >
                     {confirmText}
@@ -160,7 +190,7 @@ class Modal extends ComponentBase {
             bodyBorder={bodyBorder}
             bodyStyle={bodyStyle}
             footer={f}
-            footerBorder={footerBorder}
+            footerBorder={!hideFooter && buttonFill}
             footerStyle={{ ...{ padding: '0' }, ...footerStyle }}
             space={space}
             extra={extra}

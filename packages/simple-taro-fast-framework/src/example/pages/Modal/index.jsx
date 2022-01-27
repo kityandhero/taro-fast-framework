@@ -7,11 +7,23 @@ import {
   CenterBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = { backgroundColor: '#f5f7fa' };
+
+const buttonFillList = [
+  {
+    label: '默认',
+    value: 'default',
+  },
+  {
+    label: '按钮',
+    value: 'button',
+  },
+];
 
 export default class Index extends PageWrapper {
   constructor(props) {
@@ -25,9 +37,17 @@ export default class Index extends PageWrapper {
         show3: false,
         show4: false,
         show5: false,
+        show6: false,
+        buttonFill: ['default'],
       },
     };
   }
+
+  setButtonFill = (value) => {
+    this.setState({
+      buttonFill: value,
+    });
+  };
 
   onClickShow1 = () => {
     this.setState({
@@ -89,10 +109,29 @@ export default class Index extends PageWrapper {
     });
   };
 
+  onClickShow6 = () => {
+    this.setState({
+      show6: true,
+    });
+  };
+
+  onClickHide6 = () => {
+    this.setState({
+      show6: false,
+    });
+  };
+
   renderFurther() {
+    const { buttonFill } = this.state;
+
     return (
       <View className="index">
-        <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="展示容器"
+          style={style}
+          border={false}
+          headerStyle={cardHeaderStyle}
+        >
           <Space direction="vertical" fillWidth>
             <Button
               block
@@ -101,7 +140,7 @@ export default class Index extends PageWrapper {
                 this.onClickShow1(1);
               }}
             >
-              打开Modal
+              打开Modal (默认按钮样式)
             </Button>
 
             <Button
@@ -143,11 +182,32 @@ export default class Index extends PageWrapper {
             >
               打开Modal (自定义)
             </Button>
+
+            <Button
+              block
+              size="large"
+              onClick={() => {
+                this.onClickShow6(6);
+              }}
+            >
+              多个按钮
+            </Button>
           </Space>
+        </Card>
+
+        <Card header="选择按钮模式" headerStyle={cardHeaderStyle}>
+          <Selector
+            options={buttonFillList}
+            value={buttonFill}
+            onChange={this.setButtonFill}
+          />
         </Card>
 
         <Modal
           visible={this.state.show1}
+          buttonFill={
+            buttonFill.length > 0 ? buttonFill[0] === 'default' : true
+          }
           header={<CenterBox>这里是标题</CenterBox>}
           onCancel={this.onClickHide1}
           onConfirm={this.onClickHide1}
@@ -157,6 +217,9 @@ export default class Index extends PageWrapper {
 
         <Modal
           visible={this.state.show2}
+          buttonFill={
+            buttonFill.length > 0 ? buttonFill[0] === 'default' : true
+          }
           onCancel={this.onClickHide2}
           onConfirm={this.onClickHide2}
         >
@@ -165,6 +228,9 @@ export default class Index extends PageWrapper {
 
         <Modal
           visible={this.state.show3}
+          buttonFill={
+            buttonFill.length > 0 ? buttonFill[0] === 'default' : true
+          }
           header={<CenterBox>这里是标题</CenterBox>}
           showCancel={false}
           onConfirm={this.onClickHide3}
@@ -174,6 +240,9 @@ export default class Index extends PageWrapper {
 
         <Modal
           visible={this.state.show4}
+          buttonFill={
+            buttonFill.length > 0 ? buttonFill[0] === 'default' : true
+          }
           header={<CenterBox>这里是标题</CenterBox>}
           hideFooter
           onClose={this.onClickHide4}
@@ -203,6 +272,65 @@ export default class Index extends PageWrapper {
           }
         >
           这里是内容区域
+        </Modal>
+
+        <Modal
+          visible={this.state.show6}
+          header={<CenterBox>这里是标题</CenterBox>}
+          hideFooter
+        >
+          这里是内容区域
+          <CenterBox>
+            <View
+              style={{
+                width: 'var(--tfc-380)',
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: '#567432',
+                  borderRadius: 'var(--tfc-14)',
+                  height: 'var(--tfc-60)',
+                  lineHeight: 'var(--tfc-60)',
+                  color: '#fff',
+                  textAlign: 'center',
+                  fontSize: 'var(--tfc-28)',
+                  margin: 'var(--tfc-14) var(--tfc-12)',
+                }}
+              >
+                按钮1
+              </View>
+              <View
+                style={{
+                  backgroundColor: '#128904',
+                  borderRadius: 'var(--tfc-14)',
+                  height: 'var(--tfc-60)',
+                  lineHeight: 'var(--tfc-60)',
+                  color: '#fff',
+                  textAlign: 'center',
+                  fontSize: 'var(--tfc-28)',
+                  margin: 'var(--tfc-14) var(--tfc-12)',
+                }}
+              >
+                按钮2
+              </View>
+              <View
+                style={{
+                  backgroundColor: 'red',
+                  borderRadius: 'var(--tfc-14)',
+                  height: 'var(--tfc-60)',
+                  lineHeight: 'var(--tfc-60)',
+                  color: '#fff',
+                  textAlign: 'center',
+                  fontSize: 'var(--tfc-28)',
+                  margin: 'var(--tfc-14) var(--tfc-12)',
+                }}
+                onClick={this.onClickHide6}
+              >
+                关闭
+              </View>
+            </View>
+          </CenterBox>
         </Modal>
       </View>
     );

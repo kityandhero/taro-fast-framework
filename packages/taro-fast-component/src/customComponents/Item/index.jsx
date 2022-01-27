@@ -80,6 +80,7 @@ class Item extends ComponentBase {
               ? `${classPrefix}-header-clickable--hover`
               : 'none'
           }
+          hoverStartTime={5}
           style={style}
           onClick={this.triggerClick}
         >
