@@ -5,6 +5,7 @@ import {
   formatDatetime,
   formatDateInterval,
   formatDateIntervalWithNow,
+  copyToClipboard,
 } from 'taro-fast-common/es/utils/tools';
 import {
   datetimeFormat,
@@ -155,6 +156,23 @@ export default class Index extends PageWrapper {
             })}
           >
             451.31
+          </Item>
+        </Card>
+
+        <Card
+          header="复制到剪贴板"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item
+            border={false}
+            extra="需要复制的内容"
+            onClick={() => {
+              copyToClipboard('需要复制的内容');
+            }}
+          >
+            复制
           </Item>
         </Card>
       </View>

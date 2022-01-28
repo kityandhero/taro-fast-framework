@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
 import svgr from '@svgr/rollup';
-import url from 'rollup-plugin-url';
+import url from '@rollup/plugin-url';
 import { terser } from 'rollup-plugin-terser';
 import babelConfig from '@rollup/plugin-babel';
 // import pxtorem from 'postcss-pxtorem';
@@ -18,10 +18,10 @@ const externalCollection = [
   '@rollup/plugin-node-resolve',
   '@rollup/plugin-json',
   '@rollup/plugin-commonjs',
+  '@rollup/plugin-url',
   'rollup-plugin-typescript2',
   'rollup-plugin-postcss',
   '@svgr/rollup',
-  'rollup-plugin-url',
   'rollup-plugin-terser',
   '@rollup/plugin-babel',
   'postcss-pxtorem',
