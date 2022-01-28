@@ -99,11 +99,13 @@ export function useTransition({
       if (status.current !== 'enter') {
         return;
       }
+
       onEnter?.();
       setInitializationCompleted(true);
       setDisplay(true);
       setClasses(classNames.enter);
       setCurrentDuration(currentDurationTemp);
+
       requestAnimationFrame(() => {
         if (status.current !== 'enter') {
           return;
