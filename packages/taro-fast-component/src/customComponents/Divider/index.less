@@ -1,20 +1,24 @@
 @class-prefix-divider: ~'tfc-divider';
 
 .@{class-prefix-divider} {
+  --line-color: var(--tfc-border-color);
+  --line-width: var(--tfc-2);
+  --line-style: solid;
+
   display: flex;
   align-items: center;
   margin: var(--tfc-32) 0;
   color: var(--tfc-color-weak);
   font-size: var(--tfc-28);
   border-width: 0;
-  border-color: var(--tfc-border-color);
-  border-style: solid;
+  border-color: var(--line-color);
+  border-style: var(--line-style);
 
-  &-left&::before {
+  &__left&::before {
     max-width: 10%;
   }
 
-  &-right&::after {
+  &__right&::after {
     max-width: 10%;
   }
 
@@ -25,10 +29,10 @@
     content: '';
     border-style: inherit;
     border-color: inherit;
-    border-width: var(--tfc-2) 0 0;
+    border-width: var(--line-width) 0 0;
   }
 
-  &-content {
+  &__content {
     flex: none;
     padding: 0 var(--tfc-32);
   }

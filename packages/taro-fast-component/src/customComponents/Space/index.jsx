@@ -2,45 +2,122 @@ import React from 'react';
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { mergeProps, withNativeProps } from 'taro-fast-common/es/utils/tools';
+import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+
+import { SpaceContext, getDirection } from './tools';
+import Item from './item';
 
 import './index.less';
 
 const classPrefix = `tfc-space`;
 
+const alignCollection = ['start', 'end', 'center', 'baseline'];
+
 const defaultProps = {
+  className: '',
+  style: {},
+  size: 8,
   direction: 'horizontal',
-  fillWidth: false,
-  onClick: null,
+  align: 'center',
+  split: null,
+  wrap: false,
 };
 
-export const Space = (p) => {
-  const props = mergeProps(defaultProps, p);
+const getAlign = (align) => {
+  return inCollection(alignCollection, align) ? align : 'center';
+};
 
-  const { direction, fillWidth, onClick } = props;
+export const Space = (props) => {
+  const {
+    size,
+    align: alignSource,
+    className,
+    children,
+    direction: directionSource,
+    classPrefix: customizePrefixCls,
+    split,
+    style,
+    wrap = false,
+    ...otherProps
+  } = props;
 
-  return withNativeProps(
-    props,
+  const direction = getDirection(directionSource);
+  const align = getAlign(alignSource);
+
+  const [horizontalSize, verticalSize] = React.useMemo(
+    () => (isArray(size) ? size : [size, size]).map((item) => item),
+    [size],
+  );
+
+  const mergedAlign =
+    align === undefined && direction === 'horizontal' ? 'center' : align;
+  const cn = classNames(
+    classPrefix,
+    `${classPrefix}-${direction}`,
+    {
+      [`${classPrefix}-align-${mergedAlign}`]: mergedAlign,
+    },
+    className,
+  );
+
+  const itemClassName = `${classPrefix}-item`;
+
+  const marginDirection = 'marginRight';
+
+  let latestIndex = 0;
+
+  const nodes = React.Children.map(props.children, (child, i) => {
+    if (child !== null && child !== undefined) {
+      latestIndex = i;
+    }
+
+    return (
+      <Item
+        className={itemClassName}
+        key={`${itemClassName}-${i}`}
+        direction={direction}
+        index={i}
+        marginDirection={marginDirection}
+        split={split}
+        wrap={wrap}
+      >
+        {child}
+      </Item>
+    );
+  });
+
+  const spaceContext = React.useMemo(
+    () => ({ horizontalSize, verticalSize, latestIndex }),
+    [horizontalSize, verticalSize, latestIndex],
+  );
+
+  if (nodes.length === 0) {
+    return null;
+  }
+
+  const gapStyle = {};
+
+  if (wrap) {
+    gapStyle.flexWrap = 'wrap';
+  }
+
+  gapStyle.columnGap = horizontalSize;
+  gapStyle.rowGap = verticalSize;
+
+  return (
     <View
-      className={classNames(classPrefix, {
-        [`${classPrefix}-wrap`]: props.wrap,
-        [`${classPrefix}-block`]: props.block,
-        [`${classPrefix}-${direction}`]: true,
-        [`${classPrefix}-align-${props.align}`]: !!props.align,
-        [`${classPrefix}-justify-${props.justify}`]: !!props.justify,
-      })}
-      style={!!fillWidth ? { width: '100%' } : {}}
-      onClick={onClick}
+      className={cn}
+      style={{
+        ...gapStyle,
+        ...style,
+      }}
+      {...otherProps}
     >
-      {React.Children.map(props.children, (child) => {
-        return (
-          child !== null &&
-          child !== undefined && (
-            <View className={`${classPrefix}-item`}>{child}</View>
-          )
-        );
-      })}
-    </View>,
+      <SpaceContext.Provider value={spaceContext}>
+        {nodes}
+      </SpaceContext.Provider>
+    </View>
   );
 };
 

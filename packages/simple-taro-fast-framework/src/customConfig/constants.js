@@ -160,6 +160,9 @@ export const pathCollection = {
   cascader: {
     path: '/example/pages/cascader/index',
   },
+  space: {
+    path: '/example/pages/space/index',
+  },
   utils: {
     path: '/example/pages/utils/index',
   },

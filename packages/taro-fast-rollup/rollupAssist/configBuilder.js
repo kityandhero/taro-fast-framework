@@ -38,6 +38,7 @@ const externalCollection = [
   '@tarojs/plugin-framework-vue2',
   '@tarojs/plugin-framework-vue3',
   'lodash',
+  'rc-animate',
   'qs',
   'dayjs',
   'node-cache',

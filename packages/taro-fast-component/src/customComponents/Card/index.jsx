@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { View, ScrollView } from '@tarojs/components';
 
 import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
+import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import FlexBox from '../FlexBox';
@@ -131,6 +132,7 @@ class Card extends ComponentBase {
               extra
                 ? {
                     ...{ padding: `0 ${transformSize(18)} 0 0` },
+                    ...(isString(extra) ? { fontSize: transformSize(28) } : {}),
                     ...extraStyle,
                   }
                 : null

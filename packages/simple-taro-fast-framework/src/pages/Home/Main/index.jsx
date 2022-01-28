@@ -125,11 +125,6 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'Divider',
-            path: pathCollection.divider.path,
-          })}
-
-          {this.buildItem({
             name: 'Stepper',
             path: pathCollection.stepper.path,
           })}
@@ -146,6 +141,16 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="布局组件" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'Space',
+            path: pathCollection.space.path,
+          })}
+
+          {this.buildItem({
+            name: 'Divider',
+            path: pathCollection.divider.path,
+          })}
+
           {this.buildItem({
             name: 'Layout',
             path: pathCollection.layout.path,

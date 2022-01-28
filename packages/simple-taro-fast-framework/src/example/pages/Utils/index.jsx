@@ -6,12 +6,13 @@ import {
   formatDateInterval,
   formatDateIntervalWithNow,
   copyToClipboard,
+  replaceTargetText,
 } from 'taro-fast-common/es/utils/tools';
 import {
   datetimeFormat,
   formatCollection,
 } from 'taro-fast-common/es/utils/constants';
-import { Card, Item } from 'taro-fast-component/es/customComponents';
+import { Card, Item, HelpBox } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -51,6 +52,24 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
+          extra="formatDatetime"
+          footer={
+            <HelpBox
+              showTitle={false}
+              showNumber={false}
+              list={[
+                {
+                  text: 'formatDatetime({data,fmt})',
+                },
+                {
+                  text: 'data:即将格式化的数据',
+                },
+                {
+                  text: 'fmt:格式化字符串',
+                },
+              ]}
+            />
+          }
         >
           <Item
             extra={formatDatetime({
@@ -58,7 +77,7 @@ export default class Index extends PageWrapper {
               fmt: datetimeFormat.year,
             })}
           >
-            日期格式化
+            {datetimeFormat.year}
           </Item>
           <Item
             extra={formatDatetime({
@@ -66,7 +85,7 @@ export default class Index extends PageWrapper {
               fmt: datetimeFormat.yearMonth,
             })}
           >
-            日期格式化
+            {datetimeFormat.yearMonth}
           </Item>
           <Item
             extra={formatDatetime({
@@ -74,7 +93,7 @@ export default class Index extends PageWrapper {
               fmt: datetimeFormat.yearMonthDay,
             })}
           >
-            日期格式化
+            {datetimeFormat.yearMonthDay}
           </Item>
           <Item
             extra={formatDatetime({
@@ -82,7 +101,7 @@ export default class Index extends PageWrapper {
               fmt: datetimeFormat.yearMonthDayHourMinute,
             })}
           >
-            日期格式化
+            {datetimeFormat.yearMonthDayHourMinute}
           </Item>
           <Item
             border={false}
@@ -91,7 +110,7 @@ export default class Index extends PageWrapper {
               fmt: datetimeFormat.yearMonthDayHourMinuteSecond,
             })}
           >
-            日期格式化
+            {datetimeFormat.yearMonthDayHourMinuteSecond}
           </Item>
         </Card>
 
@@ -100,12 +119,62 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
+          extra="指定起止时间"
+          footer={
+            <HelpBox
+              showTitle={false}
+              showNumber={false}
+              list={[
+                {
+                  text: 'formatDateInterval(start, end, opts = {})',
+                },
+                {
+                  text: 'start:起始时间',
+                },
+                {
+                  text: 'end:终止时间',
+                },
+                {
+                  text: 'opts:格式化配置',
+                },
+              ]}
+            />
+          }
         >
-          <Item extra={formatDateInterval('2022-01-01', '2022-03-02')}>
-            格式化时间差[指定起止时间]
+          <Item
+            border={false}
+            extra={formatDateInterval('2022-01-01', '2022-03-02')}
+          >
+            2022-01-01 ~ 2022-03-02
           </Item>
-          <Item extra={formatDateIntervalWithNow('2022-01-01')} border={false}>
-            格式化时间差[距当前时间]
+        </Card>
+
+        <Card
+          header="格式化时间差"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+          extra="距当前时间"
+          footer={
+            <HelpBox
+              showTitle={false}
+              showNumber={false}
+              list={[
+                {
+                  text: 'formatDateIntervalWithNow(time, opts = {})',
+                },
+                {
+                  text: 'time:指定的时间, 需要早于当前时间',
+                },
+                {
+                  text: 'opts:格式化配置',
+                },
+              ]}
+            />
+          }
+        >
+          <Item border={false} extra={formatDateIntervalWithNow('2022-01-22')}>
+            2022-01-22
           </Item>
         </Card>
 
@@ -114,6 +183,7 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
+          extra="formatTarget"
         >
           <Item
             border={false}
@@ -130,6 +200,7 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
+          extra="formatTarget"
         >
           <Item
             border={false}
@@ -147,6 +218,7 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
+          extra="formatTarget"
         >
           <Item
             border={false}
@@ -164,15 +236,72 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
           space={false}
+          footer={
+            <HelpBox
+              showTitle={false}
+              showNumber={false}
+              list={[
+                {
+                  text: 'copyToClipboard({ text, successCallback = null })',
+                },
+                {
+                  text: 'text:需要复制的数据',
+                },
+                {
+                  text: 'successCallback:复制后的回调函数',
+                },
+              ]}
+            />
+          }
         >
           <Item
             border={false}
-            extra="需要复制的内容"
+            extra="点击复制"
             onClick={() => {
-              copyToClipboard('需要复制的内容');
+              copyToClipboard({
+                text: '12345678',
+              });
             }}
           >
-            复制
+            12345678
+          </Item>
+        </Card>
+
+        <Card
+          header="替换指定字符串"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+          extra="replaceTargetText"
+          footer={
+            <HelpBox
+              showTitle={false}
+              showNumber={false}
+              list={[
+                {
+                  text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
+                },
+                {
+                  text: 'text:需要操作的字符串',
+                },
+                {
+                  text: 'replaceText:替换为的字符串',
+                },
+                {
+                  text: 'beforeKeepNumber:首部保留的字符串长度',
+                },
+                {
+                  text: 'afterKeepNumber:尾部保留的字符串长度',
+                },
+              ]}
+            />
+          }
+        >
+          <Item
+            border={false}
+            extra={replaceTargetText('12345678', '*****', 2, 2)}
+          >
+            12345678
           </Item>
         </Card>
       </View>

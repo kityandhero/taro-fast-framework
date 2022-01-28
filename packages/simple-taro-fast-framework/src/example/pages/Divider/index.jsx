@@ -17,7 +17,7 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="基础分割线" headerStyle={cardHeaderStyle}>
+        <Card header="默认水平模式" headerStyle={cardHeaderStyle}>
           <Divider />
         </Card>
 
@@ -27,19 +27,27 @@ export default class Index extends PageWrapper {
           <Divider contentPosition="right">右侧内容</Divider>
         </Card>
 
-        <Card header="自定义样式" headerStyle={cardHeaderStyle}>
-          <Divider
-            style={{
-              color: '#1677ff',
-              borderColor: '#1677ff',
-              borderStyle: 'dashed',
-            }}
-          >
-            自定义样式
-          </Divider>
+        <Card header="定义线颜色" headerStyle={cardHeaderStyle}>
+          <Divider lineColor="#1677ff">内容</Divider>
         </Card>
 
-        <Card header="图标" headerStyle={cardHeaderStyle}>
+        <Card header="定义线类型" headerStyle={cardHeaderStyle}>
+          <Divider lineStyle="dashed">内容</Divider>
+        </Card>
+
+        <Card header="定义线宽度" headerStyle={cardHeaderStyle}>
+          <Divider lineWidth={20}>内容</Divider>
+        </Card>
+
+        <Card header="定义上下间距" headerStyle={cardHeaderStyle}>
+          <Divider margin={10}>内容</Divider>
+        </Card>
+
+        <Card header="定义内容高度" headerStyle={cardHeaderStyle}>
+          <Divider height={60}>内容</Divider>
+        </Card>
+
+        <Card header="附带图标" headerStyle={cardHeaderStyle}>
           <Divider
             style={{
               color: '#1677ff',
