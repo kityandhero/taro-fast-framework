@@ -96,32 +96,38 @@ export default class Index extends PageWrapper {
           <Space wrap>
             {buildButton({
               inner: 'Action',
+              loadingMode: 'overlay',
               onClick: this.onActionClick,
             })}
 
             {buildButton({
               inner: 'ActionSheet',
+              loadingMode: 'overlay',
               onClick: this.onActionSheetClick,
             })}
 
             {buildButton({
               inner: 'ActionModal',
+              loadingMode: 'overlay',
               onClick: this.onActionModalClick,
             })}
 
             {buildButton({
               inner: 'reload',
+              loadingMode: 'overlay',
               loading: !!dataLoading,
               onClick: this.reloadData,
             })}
 
             {buildButton({
               inner: 'reloadRemoteMetaData',
+              loadingMode: 'overlay',
               onClick: this.reloadRemoteMetaData,
             })}
 
             {buildButton({
               inner: 'showRemoteMetaDataInConsole',
+              loadingMode: 'overlay',
               onClick: this.showRemoteMetaDataInConsole,
             })}
           </Space>
