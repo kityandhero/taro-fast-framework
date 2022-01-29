@@ -72,7 +72,7 @@ const defaultProps = {
   onKeyboardHeightChange: null,
 };
 
-class AdvanceInput extends ComponentBase {
+class InputItem extends ComponentBase {
   triggerChange = (v) => {
     const { onChange } = this.props;
 
@@ -82,7 +82,7 @@ class AdvanceInput extends ComponentBase {
           message: 'onChange must be function',
         });
 
-        recordError('AdvanceInput: onChange must be function');
+        recordError('InputItem: onChange must be function');
       } else {
         onChange(v);
       }
@@ -93,7 +93,7 @@ class AdvanceInput extends ComponentBase {
       });
 
       recordError(
-        'AdvanceInput: onChange in props is null,please defined it,onChange must be function',
+        'InputItem: onChange in props is null,please defined it,onChange must be function',
       );
     }
   };
@@ -384,8 +384,8 @@ class AdvanceInput extends ComponentBase {
   }
 }
 
-AdvanceInput.defaultProps = {
+InputItem.defaultProps = {
   ...defaultProps,
 };
 
-export default AdvanceInput;
+export default InputItem;

@@ -1,0 +1,27 @@
+@class-prefix-line: ~'tfc-line';
+
+.@{class-prefix-line} {
+  --width: 100%;
+  --height: 100%;
+  --background-color: var(--tfc-border-color);
+  --background-image: null;
+  --margin: 0;
+
+  &__horizontal {
+    display: block;
+    width: var(--width);
+    height: var(--height);
+    margin: var(--margin);
+    background-color: var(--background-color);
+    background-image: var(--background-image);
+  }
+
+  &__vertical {
+    display: inline-block;
+    width: var(--width);
+    height: var(--height);
+    margin: var(--margin);
+    background-color: var(--background-color);
+    background-image: var(--background-image);
+  }
+}

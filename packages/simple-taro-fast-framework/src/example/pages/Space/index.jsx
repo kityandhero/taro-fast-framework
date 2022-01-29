@@ -5,6 +5,7 @@ import {
   Space,
   Button,
   VerticalBox,
+  Line,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -94,7 +95,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="自定义间隔" headerStyle={cardHeaderStyle}>
-          <Space split={<View>1</View>}>
+          <Space split={<Line direction="vertical" width={2} height={40} />}>
             {new Array(3).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>
             ))}

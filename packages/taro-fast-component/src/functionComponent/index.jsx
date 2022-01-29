@@ -1,38 +1,37 @@
 import { Swiper, SwiperItem } from '@tarojs/components';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import { ColorText, AdvanceButton } from '../customComponents';
+import { ColorText, Button } from '../customComponents';
 
-export function buildAdvanceButton({
-  style,
-  color,
-  fill,
-  block,
-  shape,
-  additionalClassName,
-  inner,
-  size = 'default',
-  type = 'default',
-  plain = false,
-  disabled = false,
+export function buildButton({
+  style = {},
+  backgroundColor = '',
+  fontColor = '',
+  borderColor = '',
+  fontSize = 0,
+  paddingTop = 0,
+  paddingBottom = 0,
+  paddingLeft = 0,
+  paddingRight = 0,
+  borderRadius = 0,
+  shadow = true,
+  shadowColor = '',
+  fill = 'solid',
+  block = false,
   loading = false,
-  loadingColor = '',
+  loadingMode = '',
+  loadingSize = 0,
   loadingText = '',
-  formType = '',
+  loadingColor = '',
+  loadingType = 'ring',
+  disabled = false,
+  type = 'button',
+  shape = 'default',
+  size = 'middle',
+  weappButton = false,
   openType = '',
-  hoverClass = 'button-hover',
-  hoverStyle = 'none',
-  hoverStopPropagation = false,
-  hoverStartTime = 20,
-  hoverStayTime = 70,
-  lang = '',
-  sessionFrom = '',
-  sendMessageTitle = null,
-  sendMessagePath = null,
-  sendMessageImg = null,
-  appParameter = null,
   scope = '',
-  showMessageCard = false,
+  onClick = null,
   onGetUserInfo = null,
   onGetAuthorize = null,
   onContact = null,
@@ -40,40 +39,38 @@ export function buildAdvanceButton({
   onGetRealnameAuthInfo = null,
   onError = null,
   onOpenSetting = null,
-  onLaunchApp = null,
-  onClick = null,
+  inner,
 }) {
   return (
-    <AdvanceButton
+    <Button
       style={style}
-      color={color}
+      backgroundColor={backgroundColor}
+      fontColor={fontColor}
+      borderColor={borderColor}
+      fontSize={fontSize}
+      paddingTop={paddingTop}
+      paddingBottom={paddingBottom}
+      paddingLeft={paddingLeft}
+      paddingRight={paddingRight}
+      borderRadius={borderRadius}
+      shadow={shadow}
+      shadowColor={shadowColor}
       fill={fill}
       block={block}
-      shape={shape}
-      additionalClassName={additionalClassName}
-      onClick={onClick}
-      size={size}
-      type={type}
-      plain={plain}
-      disabled={disabled}
       loading={loading}
-      loadingColor={loadingColor}
+      loadingMode={loadingMode}
+      loadingSize={loadingSize}
       loadingText={loadingText}
-      formType={formType}
+      loadingColor={loadingColor}
+      loadingType={loadingType}
+      disabled={disabled}
+      type={type}
+      shape={shape}
+      size={size}
+      weappButton={weappButton}
       openType={openType}
-      hoverClass={hoverClass}
-      hoverStyle={hoverStyle}
-      hoverStopPropagation={hoverStopPropagation}
-      hoverStartTime={hoverStartTime}
-      hoverStayTime={hoverStayTime}
-      lang={lang}
-      sessionFrom={sessionFrom}
-      sendMessageTitle={sendMessageTitle}
-      sendMessagePath={sendMessagePath}
-      sendMessageImg={sendMessageImg}
-      appParameter={appParameter}
       scope={scope}
-      showMessageCard={showMessageCard}
+      onClick={onClick}
       onGetUserInfo={onGetUserInfo}
       onGetAuthorize={onGetAuthorize}
       onContact={onContact}
@@ -81,10 +78,9 @@ export function buildAdvanceButton({
       onGetRealnameAuthInfo={onGetRealnameAuthInfo}
       onError={onError}
       onOpenSetting={onOpenSetting}
-      onLaunchapp={onLaunchApp}
     >
       {inner}
-    </AdvanceButton>
+    </Button>
   );
 }
 

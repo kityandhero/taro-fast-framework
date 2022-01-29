@@ -8,7 +8,7 @@ import {
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-import AdvanceInput from '../AdvanceInput';
+import InputItem from '../InputItem';
 import VerticalBox from '../VerticalBox';
 import CenterBox from '../CenterBox';
 import Icon from '../Icon';
@@ -141,7 +141,7 @@ class SearchBar extends ComponentBase {
           <CenterBox>{icon}</CenterBox>
         </View>
 
-        <AdvanceInput
+        <InputItem
           label={null}
           align={align}
           clearable

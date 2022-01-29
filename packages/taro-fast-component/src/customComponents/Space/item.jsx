@@ -32,7 +32,13 @@ export default function Item({
         {children}
       </View>
       {index < latestIndex && split && (
-        <View className={`${className}-split`} style={style}>
+        <View
+          className={`${className}-split`}
+          style={{
+            style,
+            ...(direction === 'vertical' ? { width: '100%' } : {}),
+          }}
+        >
           {split}
         </View>
       )}

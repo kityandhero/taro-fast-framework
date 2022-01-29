@@ -1,14 +1,27 @@
-import { PureComponent } from 'react';
-import { View, Text } from '@tarojs/components';
 import classNames from 'classnames';
+import { View, Text } from '@tarojs/components';
+
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Loading from '../Loading';
 
 import './index.less';
 
-class ActivityIndicator extends PureComponent {
+const defaultProps = {
+  visible: true,
+  size: 0,
+  borderWidth: 0,
+  color: '',
+  type: 'ring',
+  mode: 'normal',
+  content: '',
+  className: '',
+};
+
+class ActivityIndicator extends ComponentBase {
   render() {
-    const { color, size, mode, content, visible } = this.props;
+    const { color, size, type, borderWidth, mode, content, visible } =
+      this.props;
 
     const rootClass = classNames(
       'tfc-activity-indicator',
@@ -22,7 +35,12 @@ class ActivityIndicator extends PureComponent {
     return (
       <View className={rootClass}>
         <View className="tfc-activity-indicator__body">
-          <Loading size={size} color={color} />
+          <Loading
+            size={size}
+            color={color}
+            type={type}
+            borderWidth={borderWidth}
+          />
         </View>
         {content && (
           <Text className="tfc-activity-indicator__content">{content}</Text>
@@ -33,12 +51,7 @@ class ActivityIndicator extends PureComponent {
 }
 
 ActivityIndicator.defaultProps = {
-  size: 0,
-  mode: 'normal',
-  color: '',
-  content: '',
-  className: '',
-  visible: true,
+  ...defaultProps,
 };
 
 export default ActivityIndicator;

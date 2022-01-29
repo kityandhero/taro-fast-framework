@@ -1,99 +1,281 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
+import { View, Button as ButtonWxApp } from '@tarojs/components';
 
-import {
-  inCollection,
-  withNativeProps,
-  mergeProps,
-} from 'taro-fast-common/es/utils/tools';
+import { inCollection } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import { Spin } from '../Spin';
 import ActivityIndicator from '../ActivityIndicator';
+
+import { getStyle } from './tools';
 
 const classPrefix = `tfc-button`;
 
-const colorCollection = ['default', 'primary', 'success', 'warning', 'danger'];
 const fillCollection = ['solid', 'outline', 'none'];
 const sizeCollection = ['mini', 'small', 'middle', 'large'];
 const typeCollection = ['submit', 'reset', 'button'];
 const shapeCollection = ['default', 'rounded', 'rectangular'];
+const scopeCollection = ['userInfo', 'phoneNumber'];
+const openTypeCollection = [
+  '',
+  'contact',
+  'contactShare',
+  'share',
+  'getRealnameAuthInfo',
+  'getAuthorize',
+  'getPhoneNumber',
+  'getUserInfo',
+  'lifestyle',
+  'launchApp',
+  'openSetting',
+  'feedback',
+];
 
 const defaultProps = {
   style: {},
-  color: 'default',
+  backgroundColor: '',
+  fontColor: '',
+  borderColor: '',
+  fontSize: 0,
+  paddingTop: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+  paddingRight: 0,
+  borderRadius: 0,
+  shadow: true,
+  shadowColor: '',
   fill: 'solid',
   block: false,
   loading: false,
+  loadingMode: '',
+  loadingSize: 0,
   loadingText: '',
+  loadingColor: '',
+  loadingType: 'ring',
   disabled: false,
   type: 'button',
   shape: 'default',
   size: 'middle',
+  weappButton: false,
+  openType: '',
+  scope: '',
   onClick: null,
+  onGetUserInfo: null,
+  onGetAuthorize: null,
+  onContact: null,
+  onGetPhoneNumber: null,
+  onGetRealnameAuthInfo: null,
+  onError: null,
+  onOpenSetting: null,
 };
 
-export const Button = (p) => {
-  const props = mergeProps(defaultProps, p);
+class Button extends ComponentBase {
+  getFill = () => {
+    const { fill } = this.props;
 
-  const {
-    style,
-    color: colorSource,
-    fill: fillSource,
-    block,
-    loading,
-    loadingText,
-    disabled: disabledSource,
-    type: typeSource,
-    shape: shapeSource,
-    size: sizeSource,
-    onClick,
-  } = props;
+    return inCollection(fillCollection, fill) ? fill : 'solid';
+  };
 
-  const color = inCollection(colorCollection, colorSource)
-    ? colorSource
-    : 'default';
-  const fill = inCollection(fillCollection, fillSource) ? fillSource : 'solid';
-  const type = inCollection(typeCollection, typeSource) ? typeSource : 'button';
-  const shape = inCollection(shapeCollection, shapeSource)
-    ? shapeSource
-    : 'default';
-  const size = inCollection(sizeCollection, sizeSource) ? sizeSource : 'middle';
+  getType = () => {
+    const { type } = this.props;
 
-  const disabled = disabledSource || loading;
-  return withNativeProps(
-    props,
-    <View
-      type={type}
-      onClick={(e) => {
-        if (isFunction(onClick)) {
-          onClick(e);
-        }
-      }}
-      className={classNames(
-        classPrefix,
-        color ? `${classPrefix}-${color}` : null,
-        {
-          [`${classPrefix}-block`]: block,
-          [`${classPrefix}-disabled`]: disabled,
-          [`${classPrefix}-fill-outline`]: fill === 'outline',
-          [`${classPrefix}-fill-none`]: fill === 'none',
-          [`${classPrefix}-mini`]: size === 'mini',
-          [`${classPrefix}-small`]: size === 'small',
-          [`${classPrefix}-large`]: size === 'large',
-          [`${classPrefix}-loading`]: loading,
-        },
-        `${classPrefix}-shape-${shape}`,
-      )}
-      style={style}
-      disabled={disabled}
-    >
-      {loading ? (
-        <View className={`${classPrefix}-loading-wrapper`}>
-          <ActivityIndicator content={loadingText} />
-        </View>
-      ) : (
-        props.children
-      )}
-    </View>,
-  );
+    return inCollection(typeCollection, type) ? type : 'button';
+  };
+
+  getShape = () => {
+    const { shape } = this.props;
+
+    return inCollection(shapeCollection, shape) ? shape : 'default';
+  };
+
+  getSize = () => {
+    const { size } = this.props;
+
+    return inCollection(sizeCollection, size) ? size : 'middle';
+  };
+
+  renderFurther() {
+    const {
+      style,
+      backgroundColor,
+      fontColor,
+      borderColor,
+      fontSize,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+      borderRadius,
+      shadow,
+      shadowColor,
+      block,
+      loading,
+      loadingMode,
+      loadingSize,
+      loadingText,
+      loadingColor,
+      loadingType,
+      disabled: disabledSource,
+      weappButton,
+      openType,
+      scope,
+      onClick,
+      onGetUserInfo,
+      onGetAuthorize,
+      onContact,
+      onGetPhoneNumber,
+      onGetRealnameAuthInfo,
+      onError,
+      onOpenSetting,
+      children,
+    } = this.props;
+
+    const fill = this.getFill();
+
+    const type = this.getType();
+    const shape = this.getShape();
+    const size = this.getSize();
+
+    const isCustom =
+      paddingTop > 0 ||
+      paddingBottom > 0 ||
+      paddingLeft > 0 ||
+      paddingRight > 0 ||
+      borderRadius > 0;
+
+    const scopeAdjust = inCollection(scopeCollection, scope)
+      ? scope
+      : defaultProps.scope;
+
+    const openTypeAdjust = inCollection(openTypeCollection, openType)
+      ? openType
+      : defaultProps.openType;
+
+    const disabled = disabledSource || loading;
+
+    const cn = classNames(
+      classPrefix,
+      backgroundColor ? null : `${classPrefix}-default`,
+      {
+        [`${classPrefix}-block`]: block,
+        [`${classPrefix}-disabled`]: disabled,
+        [`${classPrefix}-fill-outline`]: fill === 'outline',
+        [`${classPrefix}-fill-none`]: fill === 'none',
+        [`${classPrefix}-mini`]: !isCustom && size === 'mini',
+        [`${classPrefix}-small`]: !isCustom && size === 'small',
+        [`${classPrefix}-large`]: !isCustom && size === 'large',
+        [`${classPrefix}-custom`]: isCustom,
+        [`${classPrefix}-loading`]: loading,
+      },
+      `${classPrefix}-shape-${shape}`,
+    );
+
+    const styleAdjust = {
+      ...style,
+      ...getStyle({
+        backgroundColor,
+        fill,
+        fontColor,
+        borderColor,
+        fontSize,
+        shadow,
+        shadowColor,
+        paddingTop,
+        paddingBottom,
+        paddingLeft,
+        paddingRight,
+        borderRadius,
+      }),
+    };
+
+    if (weappButton) {
+      return (
+        <ButtonWxApp
+          plain
+          type={type}
+          onClick={onClick}
+          className={cn}
+          style={{
+            ...styleAdjust,
+          }}
+          disabled={disabled}
+          openType={openTypeAdjust}
+          scope={scopeAdjust}
+          onGetUserInfo={onGetUserInfo}
+          onGetAuthorize={onGetAuthorize}
+          onContact={onContact}
+          onGetPhoneNumber={onGetPhoneNumber}
+          onGetRealnameAuthInfo={onGetRealnameAuthInfo}
+          onError={onError}
+          onOpenSetting={onOpenSetting}
+        >
+          {loadingMode === 'overlay' ? (
+            <Spin
+              spin={!!loading}
+              spinColor={loadingColor}
+              spinType={loadingType}
+              text={loadingText}
+              overlayBackgroundColor=""
+            >
+              {children}
+            </Spin>
+          ) : loading ? (
+            <View className={`${classPrefix}-loading-wrapper`}>
+              <ActivityIndicator
+                size={loadingSize}
+                type={loadingType}
+                color={loadingColor}
+                content={loadingText}
+              />
+            </View>
+          ) : (
+            children
+          )}
+        </ButtonWxApp>
+      );
+    }
+
+    return (
+      <View
+        onClick={(e) => {
+          if (isFunction(onClick)) {
+            onClick(e);
+          }
+        }}
+        className={cn}
+        style={styleAdjust}
+        disabled={disabled}
+      >
+        {loadingMode === 'overlay' ? (
+          <Spin
+            spin={!!loading}
+            spinColor={loadingColor}
+            spinType={loadingType}
+            text={loadingText}
+            overlayBackgroundColor=""
+          >
+            {children}
+          </Spin>
+        ) : loading ? (
+          <View className={`${classPrefix}-loading-wrapper`}>
+            <ActivityIndicator
+              size={loadingSize}
+              type={loadingType}
+              color={loadingColor}
+              content={loadingText}
+            />
+          </View>
+        ) : (
+          children
+        )}
+      </View>
+    );
+  }
+}
+
+Button.defaultProps = {
+  ...defaultProps,
 };
+
+export default Button;

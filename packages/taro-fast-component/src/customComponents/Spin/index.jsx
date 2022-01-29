@@ -20,6 +20,7 @@ export const Spin = (props) => {
     fullscreen: fullscreenValue,
     spinColor: spinColorValue,
     spinSize: spinSizeValue,
+    spinType = '',
     overlayBackgroundColor,
   } = props;
 
@@ -75,6 +76,7 @@ export const Spin = (props) => {
                       visible={spin}
                       content={text}
                       color={spinColor}
+                      type={spinType}
                       size={spinSize}
                     ></ActivityIndicator>
                   ) : (

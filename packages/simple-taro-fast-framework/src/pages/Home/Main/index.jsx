@@ -58,7 +58,19 @@ export default class Index extends PageWrapper {
           })}
         </Card>
 
+        <Card header="内置色彩" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'Color',
+            path: pathCollection.color.path,
+          })}
+        </Card>
+
         <Card header="基础组件" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'Line',
+            path: pathCollection.line.path,
+          })}
+
           {this.buildItem({
             name: 'ImageBox',
             path: pathCollection.imageBox.path,
@@ -70,13 +82,8 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
-            name: 'AdvanceButton',
-            path: pathCollection.advanceButton.path,
-          })}
-
-          {this.buildItem({
-            name: 'AdvanceInput',
-            path: pathCollection.advanceInput.path,
+            name: 'InputItem',
+            path: pathCollection.inputItem.path,
           })}
 
           {this.buildItem({
@@ -231,6 +238,11 @@ export default class Index extends PageWrapper {
           })}
 
           {this.buildItem({
+            name: 'Loading',
+            path: pathCollection.loading.path,
+          })}
+
+          {this.buildItem({
             name: 'ColorText',
             path: pathCollection.colorText.path,
           })}
@@ -320,6 +332,13 @@ export default class Index extends PageWrapper {
           {this.buildItem({
             name: 'Selector',
             path: pathCollection.selector.path,
+          })}
+        </Card>
+
+        <Card header="交互展示" headerStyle={cardHeaderStyle} space={false}>
+          {this.buildItem({
+            name: 'Button Action',
+            path: pathCollection.buttonAction.path,
           })}
         </Card>
       </View>

@@ -18,11 +18,8 @@ export default class Index extends PageWrapper {
         <Card header="例子: 新闻标题上下滚动" headerStyle={cardHeaderStyle}>
           {buildSwiper({
             style: { height: transformSize(40) },
-            // indicatorColor: '#999',
-            // indicatorActiveColor: '#333',
             vertical: true,
             circular: true,
-            // indicatorDots: true,
             autoplay: true,
             items: [
               {

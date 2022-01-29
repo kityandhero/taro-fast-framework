@@ -2,28 +2,33 @@
 
 .@{class-prefix-button} {
   --color: var(--tfc-color-white);
-  --text-color: var(--tfc-button-text-color, var(--tfc-color-text));
-  --background-color: var(
-    --tfc-button-background-color,
-    var(--tfc-color-white)
-  );
-  --border-radius: var(--tfc-button-border-radius, var(--tfc-8));
-  --border-width: var(--tfc-button-border-width, var(--tfc-2));
-  --border-style: var(--tfc-button-border-style, solid);
-  --border-color: var(--tfc-button-border-color, var(--tfc-border-color));
+  --text-color: var(--tfc-color-black);
+  --background-color: transparent;
+  --background-image: null;
+  --border-radius: var(--tfc-8);
+  --border-width: var(--tfc-2);
+  --border-style: solid;
+  --border-color: var(--tfc-border-color);
+  --font-size: var(--tfc-30);
+  --padding-top: var(--tfc-15);
+  --padding-bottom: var(--tfc-15);
+  --padding-left: var(--tfc-24);
+  --padding-right: var(--tfc-24);
 
-  color: var(--text-color);
-  background-color: var(--background-color);
+  color: var(--text-color) !important;
+  background-color: var(--background-color) !important;
+  background-image: var(--background-image) !important;
   position: relative;
   display: inline-block;
   box-sizing: border-box;
   height: auto;
-  padding: var(--tfc-15) var(--tfc-24);
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom)
+    var(--padding-left) !important;
   margin: 0;
-  font-size: var(--tfc-30);
+  font-size: var(--font-size);
   line-height: 1.4;
   text-align: center;
-  border: var(--border-width) var(--border-style) var(--border-color);
+  border: var(--border-width) var(--border-style) var(--border-color) !important;
   border-radius: var(--border-radius);
   transition: opacity ease 0.15s;
   user-select: none;
@@ -54,43 +59,31 @@
   &-default {
     &.@{class-prefix-button}-fill-outline {
       --background-color: transparent;
-      --border-color: var(--tfc-color-text);
+      --background-image: null;
+      --border-color: var(--tfc-color-black);
     }
+
     &.@{class-prefix-button}-fill-none {
       --background-color: transparent;
+      --background-image: null;
       --border-color: transparent;
     }
   }
 
   &:not(&-default) {
     --text-color: var(--tfc-color-white);
-    --background-color: var(--color);
-    --border-color: var(--color);
+    --border-color: var(--background-color);
+
     &.@{class-prefix-button}-fill-outline {
-      --text-color: var(--color);
+      --text-color: var(--background-color);
       --background-color: transparent;
     }
+
     &.@{class-prefix-button}-fill-none {
-      --text-color: var(--color);
+      --text-color: var(--background-color);
       --background-color: transparent;
       --border-color: transparent;
     }
-  }
-
-  &-primary {
-    --color: var(--tfc-color-primary);
-  }
-
-  &-success {
-    --color: var(--tfc-color-success);
-  }
-
-  &-danger {
-    --color: var(--tfc-color-danger);
-  }
-
-  &-warning {
-    --color: var(--tfc-color-warning);
   }
 
   &-block {
@@ -107,10 +100,22 @@
     }
   }
 
+  &&-custom {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+
+    &.@{class-prefix-button}-shape-rounded {
+      padding-left: var(--padding-left);
+      padding-right: var(--padding-right);
+    }
+  }
+
   &&-mini {
+    --font-size: var(--tfc-26);
+
     padding-top: var(--tfc-6);
     padding-bottom: var(--tfc-6);
-    font-size: var(--tfc-26);
+
     &.@{class-prefix-button}-shape-rounded {
       padding-left: var(--tfc-18);
       padding-right: var(--tfc-18);
@@ -118,15 +123,17 @@
   }
 
   &&-small {
+    --font-size: var(--tfc-30);
+
     padding-top: var(--tfc-6);
     padding-bottom: var(--tfc-6);
-    font-size: var(--tfc-30);
   }
 
   &&-large {
+    --font-size: var(--tfc-34);
+
     padding-top: var(--tfc-18);
     padding-bottom: var(--tfc-18);
-    font-size: var(--tfc-34);
   }
 
   &&-shape-rounded {
@@ -150,5 +157,9 @@
     > .tfc-loading {
       opacity: 0.6;
     }
+  }
+
+  &::after {
+    border: 0;
   }
 }

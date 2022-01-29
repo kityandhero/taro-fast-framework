@@ -1,14 +1,12 @@
-@keyframes loading {
-  0% {
-    transform: rotate(0deg);
-  }
+@class-prefix-loading: ~'tfc-loading';
 
-  100% {
-    transform: rotate(360deg);
-  }
-}
+.@{class-prefix-loading} {
+  --width: var(--tfc-36);
+  --height: var(--tfc-36);
+  --color: var(--tfc-color-green);
+  --ring-border-width: var(--tfc-1);
+  --comet-border-width: var(--tfc-4);
 
-.tfc_loading {
   display: inline-block;
   position: relative;
   width: var(--tfc-36);
@@ -18,14 +16,14 @@
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: var(--tfc-36);
-    height: var(--tfc-36);
+    width: var(--width);
+    height: var(--height);
     margin: var(--tfc-1);
-    border-width: var(--tfc-1);
+    border-width: var(--ring-border-width);
     border-style: solid;
-    border-color: #6190e8 transparent transparent;
+    border-color: var(--color) transparent transparent;
     border-radius: 50%;
-    animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 
     &:nth-child(1) {
       animation-delay: -0.45s;
@@ -38,5 +36,26 @@
     &:nth-child(3) {
       animation-delay: -0.15s;
     }
+  }
+
+  &__comet {
+    width: var(--width);
+    height: var(--height);
+    margin: 0;
+    background: transparent;
+    border-top: var(--comet-border-width) solid var(--color);
+    border-right: var(--comet-border-width) solid transparent;
+    border-radius: 50%;
+    animation: 1s spin linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

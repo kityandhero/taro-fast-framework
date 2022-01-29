@@ -10,7 +10,7 @@ import {
   Card,
   FadeView,
 } from 'taro-fast-component/es/customComponents';
-import { buildAdvanceButton } from 'taro-fast-component/es/functionComponent';
+import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -92,99 +92,42 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="Buttons Color" headerStyle={cardHeaderStyle}>
-          <VerticalBox
-            style={{ height: transformSize(100) }}
-            alignJustify="center"
-          >
-            <Space wrap>
-              {buildAdvanceButton({
-                inner: 'default',
-              })}
-
-              {buildAdvanceButton({
-                inner: 'primary',
-                color: 'primary',
-              })}
-
-              {buildAdvanceButton({
-                inner: 'success',
-                color: 'success',
-              })}
-
-              {buildAdvanceButton({
-                inner: 'danger',
-                color: 'danger',
-              })}
-
-              {buildAdvanceButton({
-                inner: 'warning',
-                color: 'warning',
-              })}
-
-              {buildAdvanceButton({
-                inner: 'loading',
-                loading: true,
-              })}
-
-              {buildAdvanceButton({
-                inner: 'disabled',
-                disabled: true,
-              })}
-            </Space>
-          </VerticalBox>
-        </Card>
-
-        <Card header="Buttons Block Large" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical">
-            {buildAdvanceButton({
-              inner: 'Block Button',
-              block: true,
-              color: 'primary',
-              size: 'large',
-            })}
-          </Space>
-        </Card>
-
-        <Card header="Button Action" headerStyle={cardHeaderStyle}>
+        <Card header="Action" headerStyle={cardHeaderStyle}>
           <Space wrap>
-            {buildAdvanceButton({
+            {buildButton({
               inner: 'Action',
-              color: 'primary',
               onClick: this.onActionClick,
             })}
 
-            {buildAdvanceButton({
+            {buildButton({
               inner: 'ActionSheet',
-              color: 'success',
               onClick: this.onActionSheetClick,
             })}
 
-            {buildAdvanceButton({
+            {buildButton({
               inner: 'ActionModal',
-              color: 'danger',
               onClick: this.onActionModalClick,
             })}
 
-            {buildAdvanceButton({
+            {buildButton({
               inner: 'reload',
               loading: !!dataLoading,
               onClick: this.reloadData,
             })}
 
-            {buildAdvanceButton({
+            {buildButton({
               inner: 'reloadRemoteMetaData',
               onClick: this.reloadRemoteMetaData,
             })}
 
-            {buildAdvanceButton({
+            {buildButton({
               inner: 'showRemoteMetaDataInConsole',
               onClick: this.showRemoteMetaDataInConsole,
             })}
           </Space>
         </Card>
 
-        <Card header="联动 reloading" headerStyle={cardHeaderStyle}>
+        <Card header="联动展示" headerStyle={cardHeaderStyle}>
           <Spin spin={!firstLoadSuccess}>
             <FadeView show={!dataLoading}>
               <VerticalBox

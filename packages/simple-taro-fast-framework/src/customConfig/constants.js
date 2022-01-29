@@ -37,8 +37,8 @@ export const pathCollection = {
   steps: {
     path: '/example/pages/steps/index',
   },
-  advanceButton: {
-    path: '/example/pages/advanceButton/index',
+  buttonAction: {
+    path: '/example/pages/buttonAction/index',
   },
   divider: {
     path: '/example/pages/divider/index',
@@ -46,8 +46,8 @@ export const pathCollection = {
   tag: {
     path: '/example/pages/tag/index',
   },
-  advanceInput: {
-    path: '/example/pages/advanceInput/index',
+  inputItem: {
+    path: '/example/pages/inputItem/index',
   },
   stepper: {
     path: '/example/pages/stepper/index',
@@ -162,6 +162,15 @@ export const pathCollection = {
   },
   space: {
     path: '/example/pages/space/index',
+  },
+  loading: {
+    path: '/example/pages/loading/index',
+  },
+  line: {
+    path: '/example/pages/line/index',
+  },
+  color: {
+    path: '/example/pages/color/index',
   },
   utils: {
     path: '/example/pages/utils/index',
