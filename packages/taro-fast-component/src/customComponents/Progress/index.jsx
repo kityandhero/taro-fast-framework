@@ -100,7 +100,7 @@ class Progress extends ComponentBase {
 
       if (a.length > 0) {
         return {
-          backgroundImage: `linear-gradient(to right, ${a.join()});`,
+          backgroundImage: `linear-gradient(to right, ${a.join()})`,
         };
       }
     }

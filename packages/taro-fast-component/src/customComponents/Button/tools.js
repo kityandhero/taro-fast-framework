@@ -153,7 +153,7 @@ export function getStyle({
         ...{
           '--background-image': `linear-gradient(45deg, ${handleInlayColor(
             a,
-          ).join()});`,
+          ).join()})`,
         },
         ...sharpStyle,
       };

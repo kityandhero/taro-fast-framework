@@ -2,7 +2,12 @@
 @class-prefix-space-item: ~'tfc-space-item';
 
 .@{class-prefix-space} {
+  --column-gap: 0;
+  --row-gap: 0;
+
   display: inline-flex;
+  column-gap: var(--column-gap);
+  row-gap: var(--row-gap);
 
   &-vertical {
     flex-direction: column;

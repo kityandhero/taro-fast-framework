@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import { SpaceContext, getDirection } from './tools';
@@ -102,8 +102,8 @@ export const Space = (props) => {
     gapStyle.flexWrap = 'wrap';
   }
 
-  gapStyle.columnGap = horizontalSize;
-  gapStyle.rowGap = verticalSize;
+  gapStyle['--column-gap'] = transformSize(horizontalSize);
+  gapStyle['--row-gap'] = transformSize(verticalSize);
 
   return (
     <View

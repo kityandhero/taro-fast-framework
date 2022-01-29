@@ -61,7 +61,7 @@ class Line extends ComponentBase {
       if (a.length > 0) {
         return {
           '--background-color': 'null',
-          '--background-image': `linear-gradient(45deg, ${a.join()});`,
+          '--background-image': `linear-gradient(45deg, ${a.join()})`,
         };
       }
     }
