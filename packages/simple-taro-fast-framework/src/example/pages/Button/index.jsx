@@ -75,6 +75,52 @@ export default class Index extends PageWrapper {
           </Space>
         </Card>
 
+        <Card header="渐变色" headerStyle={cardHeaderStyle}>
+          <Space wrap size={16}>
+            <Button backgroundColor={['#f43f3b', ' #ec008c']}>
+              gradual-red
+            </Button>
+            <Button backgroundColor={['#ff9700', ' #ed1c24']}>
+              gradual-orange
+            </Button>
+            <Button backgroundColor={['#39b54a', ' #8dc63f']}>
+              yellow-green
+            </Button>
+            <Button backgroundColor={['#9000ff', ' #5e00ff']}>
+              olive-purple
+            </Button>
+            <Button backgroundColor={['#ec008c', ' #6739b6']}>
+              gradual-pink
+            </Button>
+            <Button backgroundColor={['#0081ff', ' #1cbbb4']}>
+              gradual-blue
+            </Button>
+          </Space>
+
+          <Divider>微信按钮</Divider>
+
+          <Space wrap size={16}>
+            <Button weappButton backgroundColor={['#f43f3b', ' #ec008c']}>
+              gradual-red
+            </Button>
+            <Button weappButton backgroundColor={['#ff9700', ' #ed1c24']}>
+              gradual-orange
+            </Button>
+            <Button weappButton backgroundColor={['#39b54a', ' #8dc63f']}>
+              yellow-green
+            </Button>
+            <Button weappButton backgroundColor={['#9000ff', ' #5e00ff']}>
+              olive-purple
+            </Button>
+            <Button weappButton backgroundColor={['#ec008c', ' #6739b6']}>
+              gradual-pink
+            </Button>
+            <Button weappButton backgroundColor={['#0081ff', ' #1cbbb4']}>
+              gradual-blue
+            </Button>
+          </Space>
+        </Card>
+
         <Card header="自定义颜色" headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button backgroundColor="#45e209">Solid</Button>
