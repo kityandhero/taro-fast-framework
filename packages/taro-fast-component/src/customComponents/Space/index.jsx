@@ -22,6 +22,7 @@ const defaultProps = {
   align: 'center',
   split: null,
   wrap: false,
+  fillWidth: false,
 };
 
 const getAlign = (align) => {
@@ -39,6 +40,7 @@ export const Space = (props) => {
     split,
     style,
     wrap = false,
+    fillWidth = false,
     ...otherProps
   } = props;
 
@@ -111,6 +113,7 @@ export const Space = (props) => {
       style={{
         ...gapStyle,
         ...style,
+        ...(fillWidth ? { width: '100%' } : {}),
       }}
       {...otherProps}
     >
