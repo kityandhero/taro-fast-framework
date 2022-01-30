@@ -23,13 +23,13 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="横向布局" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <ProgressItem label="当前进度" percent={20} extra="扩展" />
           </Space>
         </Card>
 
         <Card header="纵向布局" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <ProgressItem
               layout="vertical"
               label="当前进度"

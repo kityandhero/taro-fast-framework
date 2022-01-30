@@ -32,7 +32,7 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <StepperItem>购买数量</StepperItem>
+          <StepperItem label="购买数量" />
         </Card>
 
         <Card
@@ -41,10 +41,13 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <StepperItem description="请增减购买数量" clickable arrow>
-            购买数量
-          </StepperItem>
-          <StepperItem title="调整数量">购买数量</StepperItem>
+          <StepperItem
+            label="购买数量"
+            description="请增减购买数量"
+            clickable
+            arrow
+          />
+          <StepperItem title="调整数量" label="购买数量" />
         </Card>
 
         <Card
@@ -53,9 +56,11 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <StepperItem disabled prefix={<IconSketch size={36} />}>
-            购买数量
-          </StepperItem>
+          <StepperItem
+            label="购买数量"
+            disabled
+            prefix={<IconSketch size={36} />}
+          />
         </Card>
 
         <Card
@@ -65,6 +70,7 @@ export default class Index extends PageWrapper {
           space={false}
         >
           <StepperItem
+            label="购买数量"
             description="请增减购买数量"
             clickable
             arrow
@@ -74,7 +80,6 @@ export default class Index extends PageWrapper {
               '--height': transformSize(36),
               '--input-width': transformSize(70),
               '--input-background-color': '#ffffff',
-              '--active-border': `${transformSize(1)} solid #1677ff`,
             }}
             iconSize={20}
             operateColor="#fff"
@@ -82,18 +87,16 @@ export default class Index extends PageWrapper {
             circle
             defaultValue={45}
             step={1}
-          >
-            购买数量
-          </StepperItem>
+          />
           <StepperItem
             title="调整数量"
+            label="购买数量"
             stepperStyle={{
               // '--border': `${transformSize(1)} solid #f5f5f5`,
               '--border-inner': 'none',
               '--height': transformSize(36),
               '--input-width': transformSize(70),
               '--input-background-color': '#ffffff',
-              '--active-border': `${transformSize(1)} solid #1677ff`,
             }}
             iconSize={20}
             operateColor="#fff"
@@ -101,9 +104,36 @@ export default class Index extends PageWrapper {
             circle
             defaultValue={45}
             step={1}
-          >
-            购买数量
-          </StepperItem>
+          />
+        </Card>
+
+        <Card
+          header="复杂配置"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <StepperItem
+            prefix={<IconSketch size={36} />}
+            title="调整数量"
+            label="购买数量"
+            description="请增减购买数量"
+            clickable
+            arrow
+            stepperStyle={{
+              // '--border': `${transformSize(1)} solid #f5f5f5`,
+              '--border-inner': 'none',
+              '--height': transformSize(36),
+              '--input-width': transformSize(70),
+              '--input-background-color': '#ffffff',
+            }}
+            iconSize={20}
+            operateColor="#fff"
+            backgroundColor="#a123e4"
+            circle
+            defaultValue={45}
+            step={1}
+          />
         </Card>
 
         <Card header="属性说明 :" headerStyle={cardHeaderStyle}>

@@ -10,7 +10,6 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 
-import Button from '../Button';
 import CenterBox from '../CenterBox';
 import Icon from '../Icon';
 
@@ -53,7 +52,7 @@ export const Stepper = (p) => {
   const operateStyle = {
     ...(!!operateColor
       ? {
-          color: operateColor,
+          '--button-text-color': operateColor,
         }
       : {}),
   };
@@ -62,16 +61,16 @@ export const Stepper = (p) => {
     ...(useBackground
       ? !!backgroundColor
         ? {
-            backgroundColor: backgroundColor,
+            '--button-background-color': backgroundColor,
           }
         : {}
-      : { backgroundColor: 'transparent' }),
+      : { '--button-background-color': 'transparent' }),
   };
 
   const circleStyle = {
     ...(circle
       ? {
-          borderRadius: '50%',
+          '--button-border-radius': '50%',
         }
       : {}),
   };
@@ -151,12 +150,10 @@ export const Stepper = (p) => {
         [`${classPrefix}-active`]: hasFocus,
       })}
     >
-      <Button
+      <View
         className={`${classPrefix}-minus`}
         onClick={handleMinus}
         disabled={minusDisabled()}
-        fill="none"
-        color="primary"
         style={{
           ...colorStyle,
           ...circleStyle,
@@ -166,7 +163,7 @@ export const Stepper = (p) => {
         <CenterBox>
           <IconSubtract size={iconSize} />
         </CenterBox>
-      </Button>
+      </View>
 
       <View className={`${classPrefix}-middle`}>
         <Input
@@ -177,7 +174,7 @@ export const Stepper = (p) => {
               fontSize: transformSize(26),
             },
             ...colorStyle,
-            ...(circle ? { backgroundColor: 'transparent' } : {}),
+            ...(circle ? { '--input-background-color': 'transparent' } : {}),
           }}
           onFocus={(e) => {
             setHasFocus(true);
@@ -196,12 +193,10 @@ export const Stepper = (p) => {
         />
       </View>
 
-      <Button
+      <View
         className={`${classPrefix}-plus`}
         onClick={handlePlus}
         disabled={plusDisabled()}
-        fill="none"
-        color="primary"
         style={{
           ...colorStyle,
           ...circleStyle,
@@ -211,7 +206,7 @@ export const Stepper = (p) => {
         <CenterBox>
           <IconAdd size={iconSize} />
         </CenterBox>
-      </Button>
+      </View>
     </View>,
   );
 };

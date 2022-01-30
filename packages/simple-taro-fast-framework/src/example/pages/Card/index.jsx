@@ -34,9 +34,9 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item>1</Item>
-          <Item>2</Item>
-          <Item>3</Item>
+          <Item label="1" />
+          <Item label="2" />
+          <Item label="3" />
         </Card>
 
         <Card
@@ -46,9 +46,9 @@ export default class Index extends PageWrapper {
           space={false}
           extra={<Button size="mini">扩展</Button>}
         >
-          <Item arrow>条目1</Item>
-          <Item arrow>条目2</Item>
-          <Item arrow>条目3</Item>
+          <Item label="条目1" arrow />
+          <Item label="条目2" arrow />
+          <Item label="条目3" arrow />
         </Card>
 
         <Card
@@ -58,8 +58,8 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item title="这里是标题">这里是主信息</Item>
-          <Item title="这里是标题">这里是主信息</Item>
+          <Item title="这里是标题" label="这里是主信息" />
+          <Item title="这里是标题" label="这里是主信息" />
         </Card>
 
         <Card
@@ -74,9 +74,9 @@ export default class Index extends PageWrapper {
           space={false}
           extra={<Button size="mini">扩展</Button>}
         >
-          <Item arrow>条目1</Item>
-          <Item arrow>条目2</Item>
-          <Item arrow>条目3</Item>
+          <Item label="条目1" arrow />
+          <Item label="条目2" arrow />
+          <Item label="条目3" arrow />
         </Card>
       </View>
     );

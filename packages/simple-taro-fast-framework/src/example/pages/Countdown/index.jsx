@@ -29,7 +29,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="一般用法" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown endTime={addMinute(getNow(), 15)} />
             </View>
@@ -49,7 +49,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="自定义格式化" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown
                 format={{ hours: ':', minutes: ':', seconds: '' }}
@@ -60,7 +60,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="卡片式" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown
                 cardMode
@@ -73,7 +73,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="卡片式自定义" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown
                 cardMode
@@ -89,7 +89,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="卡片填充式" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown
                 cardMode
@@ -103,7 +103,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="卡片填充式自定义" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown
                 cardMode
@@ -120,7 +120,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="自定义倒计时回调事件" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Countdown
                 format={{ hours: ':', minutes: ':', seconds: '' }}

@@ -242,36 +242,29 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item arrow onClick={this.showBasic}>
-            中部弹出
-          </Item>
-          <Item arrow onClick={this.showTop}>
-            顶部弹出
-          </Item>
+          <Item label="中部弹出" arrow onClick={this.showBasic} />
+          <Item label="顶部弹出" arrow onClick={this.showTop} />
           <Item
+            label="底部弹出"
             arrow
             onClick={this.showBottom}
             headerStyle={cardHeaderStyle}
             space={false}
-          >
-            底部弹出
-          </Item>
+          />
           <Item
+            label="左侧弹出"
             arrow
             onClick={this.showLeft}
             headerStyle={cardHeaderStyle}
             space={false}
-          >
-            左侧弹出
-          </Item>
+          />
           <Item
+            label="右侧弹出"
             arrow
             onClick={this.showRight}
             headerStyle={cardHeaderStyle}
             space={false}
-          >
-            右侧弹出
-          </Item>
+          />
         </Card>
 
         <Card header="变更上圆角" headerStyle={cardHeaderStyle}>

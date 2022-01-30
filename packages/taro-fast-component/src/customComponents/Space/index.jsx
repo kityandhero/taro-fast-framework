@@ -76,6 +76,7 @@ export const Space = (props) => {
 
     return (
       <Item
+        label={child}
         className={itemClassName}
         key={`${itemClassName}-${i}`}
         direction={direction}
@@ -83,9 +84,7 @@ export const Space = (props) => {
         marginDirection={marginDirection}
         split={split}
         wrap={wrap}
-      >
-        {child}
-      </Item>
+      />
     );
   });
 

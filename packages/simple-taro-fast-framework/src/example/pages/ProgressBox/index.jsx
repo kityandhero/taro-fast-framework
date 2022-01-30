@@ -49,7 +49,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Card header="附带图标" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <View>
               <Button
                 color="primary"
@@ -81,7 +81,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="隐藏模式" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" block>
+          <Space direction="vertical" fillWidth>
             <ProgressBox hidden percent={percent} />
           </Space>
         </Card>

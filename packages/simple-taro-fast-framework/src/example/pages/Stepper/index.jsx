@@ -124,7 +124,6 @@ export default class Index extends PageWrapper {
               '--height': transformSize(36),
               '--input-width': transformSize(70),
               '--input-background-color': '#ffffff',
-              '--active-border': `${transformSize(1)} solid #1677ff`,
               width: transformSize(180),
             }}
             defaultValue={10000}
@@ -135,12 +134,10 @@ export default class Index extends PageWrapper {
         <Card header="复杂配置" headerStyle={cardHeaderStyle}>
           <Stepper
             style={{
-              // '--border': `${transformSize(1)} solid #f5f5f5`,
               '--border-inner': 'none',
               '--height': transformSize(36),
               '--input-width': transformSize(70),
               '--input-background-color': '#ffffff',
-              '--active-border': `${transformSize(1)} solid #1677ff`,
             }}
             iconSize={22}
             operateColor="#fff"

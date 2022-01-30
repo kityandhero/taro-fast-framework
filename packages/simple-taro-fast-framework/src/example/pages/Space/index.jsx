@@ -43,7 +43,7 @@ export default class Index extends PageWrapper {
 
         <Card header="设置方向" headerStyle={cardHeaderStyle}>
           <VerticalBox>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space direction="vertical" fillWidth>
               <View className="space-align-block">
                 <Space align="center">
                   center
@@ -85,7 +85,7 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="垂直模式" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" style={{ width: '100%' }}>
+          <Space direction="vertical" fillWidth>
             {new Array(3).fill(null).map((_, index) => (
               <Button key={index} block color="primary" size="large">
                 Button

@@ -45,12 +45,11 @@ export default class Index extends PageWrapper {
           space={false}
         >
           <TextAreaItem
+            label="内容"
             contentLine={4}
             value={value}
             onChange={this.triggerChange}
-          >
-            内容
-          </TextAreaItem>
+          />
         </Card>
 
         <Card
@@ -75,6 +74,7 @@ export default class Index extends PageWrapper {
                 />
               </View>
             }
+            label="商品详情"
             contentLine={6}
             value={value}
             title="标题"
@@ -91,9 +91,7 @@ export default class Index extends PageWrapper {
             textareaStyle={{ color: '#8923e1' }}
             confirmStyle={{ color: '#cc234c' }}
             onChange={this.triggerChange}
-          >
-            商品详情
-          </TextAreaItem>
+          />
         </Card>
 
         <Card header="属性说明 :" headerStyle={cardHeaderStyle}>

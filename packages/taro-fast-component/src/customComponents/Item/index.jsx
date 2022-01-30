@@ -17,6 +17,7 @@ const classPrefix = `tfc-item`;
 const defaultProps = {
   style: {},
   title: null,
+  label: '请设置标题',
   description: null,
   contentStyle: {},
   prefix: null,
@@ -49,6 +50,7 @@ class Item extends ComponentBase {
       style,
       prefix,
       title,
+      label,
       description,
       contentStyle,
       clickable,
@@ -56,10 +58,10 @@ class Item extends ComponentBase {
       arrow,
       extra,
       extraContainerStyle,
-      children,
       border,
       showBody,
       body,
+      children,
     } = this.props;
 
     const b =
@@ -94,7 +96,7 @@ class Item extends ComponentBase {
               </View>
             ) : null}
 
-            {!!title || !!children || !!description ? (
+            {!!title || !!label || !!description ? (
               <View
                 className={`${classPrefix}-header-content-main`}
                 style={contentStyle}
@@ -103,7 +105,7 @@ class Item extends ComponentBase {
                   <View className={`${classPrefix}-header-title`}>{title}</View>
                 ) : null}
 
-                {children}
+                {label}
 
                 {description ? (
                   <View className={`${classPrefix}-header-description`}>
@@ -139,7 +141,7 @@ class Item extends ComponentBase {
             ) : null}
           </View>
         </View>
-
+        {children}
         {b}
       </View>
     );

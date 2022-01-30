@@ -140,7 +140,7 @@ export default class Index extends PageWrapper {
                 style={{ height: transformSize(50) }}
                 alignJustify="center"
               >
-                <Space direction="vertical">
+                <Space direction="vertical" fillWidth>
                   <VerticalBox
                     style={{ height: transformSize(100) }}
                     alignJustify="center"

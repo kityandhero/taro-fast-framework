@@ -72,46 +72,49 @@ export default class Index extends PageWrapper {
           }
         >
           <Item
+            label={datetimeFormat.year}
             extra={formatDatetime({
               data: new Date(),
               fmt: datetimeFormat.year,
             })}
-          >
-            {datetimeFormat.year}
-          </Item>
+          />
           <Item
+            label={datetimeFormat.yearMonth}
             extra={formatDatetime({
               data: new Date(),
               fmt: datetimeFormat.yearMonth,
             })}
-          >
-            {datetimeFormat.yearMonth}
-          </Item>
+          />
           <Item
+            label={datetimeFormat.yearMonthDay}
             extra={formatDatetime({
               data: new Date(),
               fmt: datetimeFormat.yearMonthDay,
             })}
-          >
-            {datetimeFormat.yearMonthDay}
-          </Item>
+          />
           <Item
+            label={datetimeFormat.yearMonthDayHourMinute}
             extra={formatDatetime({
               data: new Date(),
               fmt: datetimeFormat.yearMonthDayHourMinute,
             })}
-          >
-            {datetimeFormat.yearMonthDayHourMinute}
-          </Item>
+          />
           <Item
+            label={datetimeFormat.yearMonthDayHourMinuteSecond}
             border={false}
             extra={formatDatetime({
               data: new Date(),
               fmt: datetimeFormat.yearMonthDayHourMinuteSecond,
             })}
-          >
-            {datetimeFormat.yearMonthDayHourMinuteSecond}
-          </Item>
+          />
+          <Item
+            label="YYYY年MM月DD日"
+            border={false}
+            extra={formatDatetime({
+              data: new Date(),
+              fmt: 'YYYY年MM月DD日',
+            })}
+          />
         </Card>
 
         <Card
@@ -142,11 +145,10 @@ export default class Index extends PageWrapper {
           }
         >
           <Item
+            label="2022-01-01 ~ 2022-03-02"
             border={false}
             extra={formatDateInterval('2022-01-01', '2022-03-02')}
-          >
-            2022-01-01 ~ 2022-03-02
-          </Item>
+          />
         </Card>
 
         <Card
@@ -173,9 +175,11 @@ export default class Index extends PageWrapper {
             />
           }
         >
-          <Item border={false} extra={formatDateIntervalWithNow('2022-01-22')}>
-            2022-01-22
-          </Item>
+          <Item
+            label="2022-01-22"
+            border={false}
+            extra={formatDateIntervalWithNow('2022-01-22')}
+          />
         </Card>
 
         <Card
@@ -186,14 +190,13 @@ export default class Index extends PageWrapper {
           extra="formatTarget"
         >
           <Item
+            label="0.24"
             border={false}
             extra={formatTarget({
               target: 0.24,
               format: formatCollection.percentage,
             })}
-          >
-            0.24
-          </Item>
+          />
         </Card>
         <Card
           header="货币格式化"
@@ -203,14 +206,13 @@ export default class Index extends PageWrapper {
           extra="formatTarget"
         >
           <Item
+            label="451.31"
             border={false}
             extra={formatTarget({
               target: 451.31,
               format: formatCollection.money,
             })}
-          >
-            451.31
-          </Item>
+          />
         </Card>
 
         <Card
@@ -221,14 +223,13 @@ export default class Index extends PageWrapper {
           extra="formatTarget"
         >
           <Item
+            label="451.31"
             border={false}
             extra={formatTarget({
               target: 451.31,
               format: formatCollection.chineseMoney,
             })}
-          >
-            451.31
-          </Item>
+          />
         </Card>
 
         <Card
@@ -255,6 +256,7 @@ export default class Index extends PageWrapper {
           }
         >
           <Item
+            label="12345678"
             border={false}
             extra="点击复制"
             onClick={() => {
@@ -262,9 +264,7 @@ export default class Index extends PageWrapper {
                 text: '12345678',
               });
             }}
-          >
-            12345678
-          </Item>
+          />
         </Card>
 
         <Card
@@ -298,11 +298,10 @@ export default class Index extends PageWrapper {
           }
         >
           <Item
+            label="12345678"
             border={false}
             extra={replaceTargetText('12345678', '*****', 2, 2)}
-          >
-            12345678
-          </Item>
+          />
         </Card>
       </View>
     );

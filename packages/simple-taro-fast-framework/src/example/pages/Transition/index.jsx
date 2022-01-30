@@ -120,42 +120,18 @@ export default class Index extends PageWrapper {
           style={style}
           headerStyle={cardHeaderStyle}
         >
-          <Item arrow onClick={this.onClickFade}>
-            Fade
-          </Item>
-          <Item arrow onClick={this.onClickFadeUp}>
-            Fade Up
-          </Item>
-          <Item arrow onClick={this.onClickFadeDown}>
-            Fade Down
-          </Item>
-          <Item arrow onClick={this.onClickFadeLeft}>
-            Fade Left
-          </Item>
-          <Item arrow onClick={this.onClickFadeRight}>
-            Fade Right
-          </Item>
-          <Item arrow onClick={this.onClickSlideUp}>
-            Slide Up
-          </Item>
-          <Item arrow onClick={this.onClickSlideDown}>
-            Slide Down
-          </Item>
-          <Item arrow onClick={this.onClickSlideLeft}>
-            Slide Left
-          </Item>
-          <Item arrow onClick={this.onClickSlideRight}>
-            Slide Right
-          </Item>
-          <Item arrow onClick={this.onClickZoom}>
-            Zoom
-          </Item>
-          <Item arrow onClick={this.onClickPunch}>
-            Punch
-          </Item>
-          <Item arrow onClick={this.onClickCustom}>
-            Custom
-          </Item>
+          <Item label="Fade" arrow onClick={this.onClickFade} />
+          <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
+          <Item label="Fade Down" arrow onClick={this.onClickFadeDown} />
+          <Item label="Fade Left" arrow onClick={this.onClickFadeLeft} />
+          <Item label="Fade Right" arrow onClick={this.onClickFadeRight} />
+          <Item label="Slide Up" arrow onClick={this.onClickSlideUp} />
+          <Item label="Slide Down" arrow onClick={this.onClickSlideDown} />
+          <Item label="Slide Left" arrow onClick={this.onClickSlideLeft} />
+          <Item label="Slide Right" arrow onClick={this.onClickSlideRight} />
+          <Item label="Zoom" arrow onClick={this.onClickZoom} />
+          <Item label="Punch" arrow onClick={this.onClickPunch} />
+          <Item label="Custom" arrow onClick={this.onClickCustom} />
         </Card>
 
         <Transition show={show} name={name} className="block"></Transition>

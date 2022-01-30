@@ -226,19 +226,19 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item arrow onClick={this.onClickShow1}>
-            显示全局遮罩层
-          </Item>
-          <Item arrow onClick={this.onClickShow2}>
-            显示嵌入内容的全局遮罩层
-          </Item>
+          <Item label="显示全局遮罩层" arrow onClick={this.onClickShow1} />
+          <Item
+            label="显示嵌入内容的全局遮罩层"
+            arrow
+            onClick={this.onClickShow2}
+          />
 
-          <Item arrow onClick={this.onClickShow3}>
-            显示容器遮罩层
-          </Item>
-          <Item arrow onClick={this.onClickShow4}>
-            显示嵌入内容的容器遮罩层
-          </Item>
+          <Item label="显示容器遮罩层" arrow onClick={this.onClickShow3} />
+          <Item
+            label="显示嵌入内容的容器遮罩层"
+            arrow
+            onClick={this.onClickShow4}
+          />
         </Card>
 
         <Card header="设置颜色" headerStyle={cardHeaderStyle}>

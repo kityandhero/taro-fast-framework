@@ -105,6 +105,7 @@ class RadioSelector extends ComponentBase {
         <Item
           prefix={prefix}
           title={title}
+          label={children}
           style={style}
           description={description}
           clickable
@@ -144,9 +145,7 @@ class RadioSelector extends ComponentBase {
             ...extraContainerStyle,
           }}
           onClick={this.showPopup}
-        >
-          {children}
-        </Item>
+        />
 
         <Popup
           visible={popupVisible}

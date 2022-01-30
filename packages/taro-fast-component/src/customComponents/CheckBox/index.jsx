@@ -258,6 +258,7 @@ class CheckBox extends ComponentBase {
                 key={key}
                 prefix={prefix}
                 title={title}
+                label={label}
                 style={styleItem}
                 description={description}
                 clickable
@@ -278,9 +279,7 @@ class CheckBox extends ComponentBase {
                 onClick={() => {
                   this.handleClick(o);
                 }}
-              >
-                {label}
-              </Item>
+              />
             );
           }
 
@@ -293,6 +292,7 @@ class CheckBox extends ComponentBase {
                   : iconUncheck || uncheckStatusIcon
               }
               title={title}
+              label={label}
               style={styleItem}
               description={description}
               clickable
@@ -326,9 +326,7 @@ class CheckBox extends ComponentBase {
               onClick={() => {
                 this.handleClick(o);
               }}
-            >
-              {label}
-            </Item>
+            />
           );
         })}
       </Card>

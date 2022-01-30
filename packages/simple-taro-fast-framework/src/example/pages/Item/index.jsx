@@ -59,9 +59,9 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item>1</Item>
-          <Item>2</Item>
-          <Item>3</Item>
+          <Item label="1" />
+          <Item label="2" />
+          <Item label="3" />
         </Card>
 
         <Card
@@ -70,9 +70,9 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item arrow>账单</Item>
-          <Item arrow>总资产</Item>
-          <Item arrow>设置</Item>
+          <Item label="账单" arrow />
+          <Item label="总资产" arrow />
+          <Item label="设置" arrow />
         </Card>
 
         <Card
@@ -81,15 +81,9 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item clickable arrow onClick={this.handleClick}>
-            账单
-          </Item>
-          <Item clickable arrow onClick={this.handleClick}>
-            总资产
-          </Item>
-          <Item clickable arrow onClick={this.handleClick}>
-            设置
-          </Item>
+          <Item label="账单" clickable arrow onClick={this.handleClick} />
+          <Item label="总资产" clickable arrow onClick={this.handleClick} />
+          <Item label="设置" clickable arrow onClick={this.handleClick} />
         </Card>
 
         <Card
@@ -98,14 +92,15 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item extra={<SwitchItem defaultChecked />}>新消息通知</Item>
-          <Item extra="未开启" clickable arrow>
-            大字号模式
-          </Item>
-          <Item description="管理已授权的产品和设备" clickable arrow>
-            授权管理
-          </Item>
-          <Item title="这里是标题">这里是主信息</Item>
+          <Item label="新消息通知" extra={<SwitchItem defaultChecked />} />
+          <Item label="大字号模式" extra="未开启" clickable arrow />
+          <Item
+            label="授权管理"
+            description="管理已授权的产品和设备"
+            clickable
+            arrow
+          />
+          <Item title="这里是标题" label="这里是主信息" />
         </Card>
 
         <Card
@@ -114,18 +109,15 @@ export default class Index extends PageWrapper {
           headerStyle={cardHeaderStyle}
           space={false}
         >
-          <Item disabled clickable arrow prefix={<IconSketch />}>
-            账单
-          </Item>
-          <Item disabled prefix={<IconShoppingCart />}>
-            总资产
-          </Item>
+          <Item label="账单" disabled clickable arrow prefix={<IconSketch />} />
+          <Item label="总资产" disabled prefix={<IconShoppingCart />} />
         </Card>
 
         <Card header="用户列表布局" headerStyle={cardHeaderStyle} space={false}>
           {users.map((user) => (
             <Item
               key={user.name}
+              label={user.name}
               prefix={
                 <Image
                   src={user.avatar}
@@ -138,9 +130,7 @@ export default class Index extends PageWrapper {
                 />
               }
               description={user.description}
-            >
-              {user.name}
-            </Item>
+            />
           ))}
         </Card>
       </View>

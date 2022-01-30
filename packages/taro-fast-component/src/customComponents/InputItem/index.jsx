@@ -272,6 +272,7 @@ class InputItem extends ComponentBase {
         style={style}
         prefix={prefix}
         title={title}
+        label={labelComponent}
         description={description}
         contentStyle={{
           ...{ width: transformSize(180) },
@@ -377,9 +378,7 @@ class InputItem extends ComponentBase {
             flex: 'auto',
           },
         }}
-      >
-        {labelComponent}
-      </Item>
+      />
     );
   }
 }

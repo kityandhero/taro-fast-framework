@@ -61,6 +61,7 @@ class SwitchItem extends ComponentBase {
         key={key}
         prefix={prefix}
         title={title}
+        label={label}
         style={style}
         description={description}
         clickable={false}
@@ -85,9 +86,7 @@ class SwitchItem extends ComponentBase {
           },
           ...extraContainerStyle,
         }}
-      >
-        {label}
-      </Item>
+      />
     );
   }
 }

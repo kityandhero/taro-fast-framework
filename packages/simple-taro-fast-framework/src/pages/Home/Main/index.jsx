@@ -13,6 +13,7 @@ export default class Index extends PageWrapper {
   buildItem = ({ name, path }) => {
     return (
       <Item
+        label={name}
         arrow
         clickable
         onClick={() => {
@@ -20,9 +21,7 @@ export default class Index extends PageWrapper {
             url: path,
           });
         }}
-      >
-        {name}
-      </Item>
+      />
     );
   };
 

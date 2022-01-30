@@ -88,7 +88,7 @@ export default class Index extends PageWrapper {
           border={false}
           headerStyle={cardHeaderStyle}
         >
-          <Space direction="vertical" style={{ width: '100%' }}>
+          <Space direction="vertical" fillWidth>
             <View
               style={{
                 border: 'var(--tfc-1) solid #ccc',

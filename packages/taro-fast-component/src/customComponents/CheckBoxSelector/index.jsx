@@ -105,6 +105,7 @@ class CheckBoxSelector extends ComponentBase {
         <Item
           prefix={prefix}
           title={title}
+          label={children}
           style={style}
           description={description}
           clickable
@@ -148,9 +149,7 @@ class CheckBoxSelector extends ComponentBase {
             ...extraContainerStyle,
           }}
           onClick={this.showPopup}
-        >
-          {children}
-        </Item>
+        />
 
         <Popup
           visible={popupVisible}
