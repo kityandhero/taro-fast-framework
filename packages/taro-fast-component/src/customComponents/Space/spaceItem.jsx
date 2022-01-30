@@ -3,7 +3,7 @@ import React from 'react';
 
 import { SpaceContext, getDirection } from './tools';
 
-export default function Item({
+export default function SpaceItem({
   className = '',
   direction: directionSource = 'horizontal',
   index = 0,
@@ -31,6 +31,7 @@ export default function Item({
       >
         {children}
       </View>
+
       {index < latestIndex && split && (
         <View
           className={`${className}-split`}

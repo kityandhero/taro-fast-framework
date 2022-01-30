@@ -33,6 +33,7 @@ const openTypeCollection = [
 ];
 
 const defaultProps = {
+  hidden: false,
   style: {},
   backgroundColor: '',
   fontColor: '',
@@ -97,6 +98,7 @@ class Button extends ComponentBase {
 
   renderFurther() {
     const {
+      hidden,
       style,
       backgroundColor,
       fontColor,
@@ -130,6 +132,10 @@ class Button extends ComponentBase {
       onOpenSetting,
       children,
     } = this.props;
+
+    if (hidden) {
+      return null;
+    }
 
     const fill = this.getFill();
 

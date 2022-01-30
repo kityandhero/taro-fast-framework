@@ -6,7 +6,7 @@ import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import { SpaceContext, getDirection } from './tools';
-import Item from './item';
+import SpaceItem from './spaceItem';
 
 import './index.less';
 
@@ -75,8 +75,7 @@ export const Space = (props) => {
     }
 
     return (
-      <Item
-        label={child}
+      <SpaceItem
         className={itemClassName}
         key={`${itemClassName}-${i}`}
         direction={direction}
@@ -84,7 +83,9 @@ export const Space = (props) => {
         marginDirection={marginDirection}
         split={split}
         wrap={wrap}
-      />
+      >
+        {child}
+      </SpaceItem>
     );
   });
 

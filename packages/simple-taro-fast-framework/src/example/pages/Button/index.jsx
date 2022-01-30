@@ -206,15 +206,35 @@ export default class Index extends PageWrapper {
         </Card>
 
         <Card header="块级按钮" headerStyle={cardHeaderStyle}>
-          <Button block size="large">
-            Block Button
-          </Button>
+          <Space direction="vertical" fillWidth>
+            <Button block size="mini">
+              Block Button
+            </Button>
+
+            <Button block size="middle">
+              Block Button
+            </Button>
+
+            <Button block size="large">
+              Block Button
+            </Button>
+          </Space>
 
           <Divider>微信按钮</Divider>
 
-          <Button weappButton block size="large">
-            Block Button
-          </Button>
+          <Space direction="vertical" fillWidth>
+            <Button weappButton block size="mini">
+              Block Button
+            </Button>
+
+            <Button weappButton block size="middle">
+              Block Button
+            </Button>
+
+            <Button weappButton block size="large">
+              Block Button
+            </Button>
+          </Space>
         </Card>
 
         <Card header="禁用状态" headerStyle={cardHeaderStyle}>
