@@ -1,6 +1,8 @@
 import { View } from '@tarojs/components';
 import React from 'react';
 
+import VerticalBox from '../VerticalBox';
+
 import { SpaceContext, getDirection } from './tools';
 
 export default function SpaceItem({
@@ -40,7 +42,11 @@ export default function SpaceItem({
             ...(direction === 'vertical' ? { width: '100%' } : {}),
           }}
         >
-          {split}
+          {direction === 'horizontal' ? (
+            <VerticalBox>{split}</VerticalBox>
+          ) : (
+            split
+          )}
         </View>
       )}
     </>

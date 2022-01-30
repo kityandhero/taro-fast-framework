@@ -17,7 +17,7 @@ const alignCollection = ['start', 'end', 'center', 'baseline'];
 const defaultProps = {
   className: '',
   style: {},
-  size: 8,
+  size: 16,
   direction: 'horizontal',
   align: 'center',
   split: null,
