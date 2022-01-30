@@ -158,28 +158,29 @@ class Tabs extends ComponentBase {
       // 标签栏滚动
       switch (ENV) {
         case Taro.ENV_TYPE.WEAPP:
+          break;
         case Taro.ENV_TYPE.ALIPAY:
-        case Taro.ENV_TYPE.SWAN: {
-          const index = Math.max(idx - 1, 0);
+          break;
+        case Taro.ENV_TYPE.SWAN:
+          const indexSWAN = Math.max(idx - 1, 0);
           this.setState({
-            scrollIntoView: `tab${this.tabId}${index}`,
+            scrollIntoView: `tab${this.tabId}${indexSWAN}`,
           });
           break;
-        }
-        case Taro.ENV_TYPE.WEB: {
-          const index = Math.max(idx - 1, 0);
-          const prevTabItem = this.tabHeaderRef.childNodes[index];
+
+        case Taro.ENV_TYPE.WEB:
+          const indexWEB = Math.max(idx - 1, 0);
+          const prevTabItem = this.tabHeaderRef.childNodes[indexWEB];
           prevTabItem &&
             this.setState({
               scrollTop: prevTabItem.offsetTop,
               scrollLeft: prevTabItem.offsetLeft,
             });
           break;
-        }
-        default: {
+
+        default:
           console.warn('Tab 组件在该环境还未适配');
           break;
-        }
       }
     }
   };

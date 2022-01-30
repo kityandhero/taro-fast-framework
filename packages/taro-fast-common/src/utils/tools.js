@@ -68,7 +68,7 @@ export function getTaroGlobalData() {
 
   // 标签栏滚动
   switch (ENV) {
-    case Taro.ENV_TYPE.WEAPP: {
+    case Taro.ENV_TYPE.WEAPP:
       const app = Taro.getApp();
 
       if (isUndefined(app)) {
@@ -76,25 +76,25 @@ export function getTaroGlobalData() {
       }
 
       return app.$app.taroGlobalData;
-    }
-    case Taro.ENV_TYPE.ALIPAY: {
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-    }
-    case Taro.ENV_TYPE.SWAN: {
+
+    case Taro.ENV_TYPE.ALIPAY:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
-    }
-    case Taro.ENV_TYPE.WEB: {
+
+    case Taro.ENV_TYPE.SWAN:
+      console.warn(`框架在该环境[${ENV}]还未适配`);
+      break;
+
+    case Taro.ENV_TYPE.WEB:
       if (!window.taroGlobalData) {
         window.taroGlobalData = getDefaultTaroGlobalData();
       }
 
       return window.taroGlobalData;
-    }
-    default: {
+
+    default:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
-    }
   }
 
   return null;
@@ -105,26 +105,27 @@ export function setTaroGlobalData(config) {
 
   // 标签栏滚动
   switch (ENV) {
-    case Taro.ENV_TYPE.WEAPP: {
-    }
-    case Taro.ENV_TYPE.ALIPAY: {
+    case Taro.ENV_TYPE.WEAPP:
+      break;
+
+    case Taro.ENV_TYPE.ALIPAY:
       console.warn(`框架在该环境[${ENV}]还未适配`);
-    }
-    case Taro.ENV_TYPE.SWAN: {
+
+    case Taro.ENV_TYPE.SWAN:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
-    }
-    case Taro.ENV_TYPE.WEB: {
+
+    case Taro.ENV_TYPE.WEB:
       if (!isObject(window.taroGlobalData)) {
         window.taroGlobalData = {};
       }
 
       window.taroGlobalData.appInitCustomLocal = config;
-    }
-    default: {
+      break;
+
+    default:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
-    }
   }
 }
 

@@ -7,6 +7,7 @@ import {
   getSystemInfo,
   inCollection,
   transformSize,
+  recordError,
 } from 'taro-fast-common/es/utils/tools';
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -44,6 +45,8 @@ const defaultProps = {
 class Circle extends ComponentBase {
   id = null;
 
+  canvasId = null;
+
   currentProcess = 0;
 
   constructor(props) {
@@ -57,6 +60,7 @@ class Circle extends ComponentBase {
     };
 
     this.id = getGuid();
+    this.canvasId = getGuid();
   }
 
   doWorkAdjustDidMount = () => {
@@ -171,24 +175,73 @@ class Circle extends ComponentBase {
       .exec((res) => {
         const n = res[0];
 
+        console.log({
+          n,
+          res,
+          t: that,
+        });
+
         if (!n) {
           return;
         }
 
-        const canvas = n.node;
+        const width = n.width * dpr;
+        const height = n.height * dpr;
 
-        canvas.width = n.width * dpr;
-        canvas.height = n.height * dpr;
+        let ctx = null;
+        let supportLineColorGradient = false;
 
-        const ctx = canvas.getContext('2d');
+        const ENV = Taro.getEnv();
+
+        // 标签栏滚动
+        switch (ENV) {
+          case Taro.ENV_TYPE.WEAPP:
+            const canvas = n.node;
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx = canvas.getContext('2d');
+            supportLineColorGradient = true;
+            break;
+
+          case Taro.ENV_TYPE.ALIPAY:
+            recordError(`框架在该环境[${ENV}]还未适配`);
+            break;
+
+          case Taro.ENV_TYPE.SWAN:
+            recordError(`框架在该环境[${ENV}]还未适配`);
+            break;
+
+          case Taro.ENV_TYPE.WEB:
+            ctx = Taro.createCanvasContext(that.canvasId, that);
+            ctx.canvas.width = width;
+            ctx.canvas.height = height;
+
+            break;
+
+          default:
+            recordError(`框架在该环境[${ENV}]还未适配`);
+            break;
+        }
+
+        if (ctx == null) {
+          recordError(`框架在该环境[${ENV}]还未适配`);
+
+          return;
+        }
+
+        console.log({
+          ctx,
+        });
 
         ctx.lineWidth = lineWidth;
         ctx.lineCap = lineCap;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.clearRect(0, 0, width, height);
+        ctx.translate(width / 2, height / 2);
 
-        if (useLineColorGradient) {
+        if (useLineColorGradient && supportLineColorGradient) {
           const g = ctx.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
 
           g.addColorStop(0, lineColorStart); //添加颜色点
@@ -199,13 +252,13 @@ class Circle extends ComponentBase {
           ctx.strokeStyle = color;
         }
 
-        const radius = canvas.width / 2 - lineAdjust - lineWidth;
-        if (this.currentProcess < percent) {
-          that.increase(ctx, canvas.width, canvas.height, radius, percent);
+        const radius = width / 2 - lineAdjust - lineWidth;
+        if (that.currentProcess < percent) {
+          that.increase(ctx, width, height, radius, percent);
         }
 
-        if (this.currentProcess > percent) {
-          that.reduce(ctx, canvas.width, canvas.height, radius, percent);
+        if (that.currentProcess > percent) {
+          that.reduce(ctx, width, height, radius, percent);
         }
       });
   };
@@ -353,6 +406,7 @@ class Circle extends ComponentBase {
                   height: '100%',
                 }}
                 id={this.id}
+                canvasId={this.canvasId}
               ></Canvas>
             </View>
           </View>
