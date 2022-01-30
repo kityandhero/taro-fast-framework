@@ -166,6 +166,9 @@ export const pathCollection = {
   loading: {
     path: '/example/pages/loading/index',
   },
+  collapse: {
+    path: '/example/pages/collapse/index',
+  },
   line: {
     path: '/example/pages/line/index',
   },

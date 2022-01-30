@@ -63,6 +63,7 @@ export default {
         'pages/cascader/index',
         'pages/space/index',
         'pages/loading/index',
+        'pages/collapse/index',
         'pages/line/index',
         'pages/color/index',
         'pages/utils/index',

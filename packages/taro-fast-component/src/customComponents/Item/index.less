@@ -4,6 +4,7 @@
   &-header {
     display: block;
     padding-left: var(--padding-left);
+    padding-right: var(--tfc-24);
 
     &-title,
     &-description {
@@ -39,7 +40,7 @@
         flex: none;
         display: flex;
         align-items: center;
-        padding: 0 var(--tfc-24);
+        padding: 0 0 0 var(--tfc-24);
         color: var(--tfc-color-weak);
         font-size: var(--tfc-32);
       }
@@ -66,6 +67,27 @@
   }
 
   &-body {
-    padding: var(--tfc-24);
+    padding: 0 var(--tfc-24) 0 var(--tfc-24);
+    overflow: hidden;
+
+    &__animate {
+      transition-property: transform;
+      transition-duration: 300ms;
+      transition-timing-function: ease-in-out;
+    }
+
+    &__open {
+      transform: scaleY(1);
+    }
+
+    &__close {
+      transform: scaleY(0);
+    }
+
+    &__inner {
+      padding: var(--tfc-24) 0 var(--tfc-24) 0;
+      font-size: var(--tfc-28);
+      border-bottom: var(--border-inner);
+    }
   }
 }

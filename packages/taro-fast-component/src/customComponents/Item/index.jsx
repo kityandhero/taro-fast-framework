@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction, isString } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import VerticalBox from '../VerticalBox';
@@ -30,6 +30,8 @@ const defaultProps = {
   onClick: null,
   showBody: false,
   body: null,
+  bodyStyle: {},
+  bodyAnimate: false,
 };
 
 class Item extends ComponentBase {
@@ -61,12 +63,25 @@ class Item extends ComponentBase {
       border,
       showBody,
       body,
+      bodyStyle,
+      bodyAnimate,
       children,
     } = this.props;
 
     const b =
-      showBody && (body || null) != null ? (
-        <View className={classNames(`${classPrefix}-body`)}>{body}</View>
+      (body || null) != null ? (
+        <View
+          className={classNames(`${classPrefix}-body`, {
+            [`${classPrefix}-body__animate`]: bodyAnimate,
+            [`${classPrefix}-body__open`]: showBody,
+            [`${classPrefix}-body__close`]: !showBody,
+          })}
+          style={bodyStyle}
+        >
+          <View className={classNames(`${classPrefix}-body__inner`)}>
+            {body}
+          </View>
+        </View>
       ) : null;
 
     return (
@@ -122,9 +137,6 @@ class Item extends ComponentBase {
                   ...{
                     fontSize: transformSize(28),
                   },
-                  ...(!arrow && isString(extra)
-                    ? { paddingRight: 'var(--tfc-24)' }
-                    : {}),
                   ...extraContainerStyle,
                 }}
               >

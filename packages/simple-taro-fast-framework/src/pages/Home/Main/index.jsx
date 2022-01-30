@@ -211,6 +211,11 @@ export default class Index extends PageWrapper {
             name: 'Overlay',
             path: pathCollection.overlay.path,
           })}
+
+          {this.buildItem({
+            name: 'Collapse',
+            path: pathCollection.collapse.path,
+          })}
         </Card>
 
         <Card header="操作反馈" headerStyle={cardHeaderStyle} space={false}>

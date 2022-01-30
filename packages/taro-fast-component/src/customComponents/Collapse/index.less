@@ -1,0 +1,16 @@
+@class-prefix-collapse: ~'tfc-collapse';
+
+.@{class-prefix-collapse} {
+  &__arrow {
+    transition-property: transform;
+    transition-duration: 300ms;
+
+    &__close {
+      transform: rotate(0deg);
+    }
+
+    &__open {
+      transform: rotate(-180deg);
+    }
+  }
+}
