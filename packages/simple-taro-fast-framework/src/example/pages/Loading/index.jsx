@@ -16,100 +16,106 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card
-          header="Loading"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space size={24}>
-            <Loading />
+        <Space direction="vertical" fillWidth>
+          <Card
+            header="Loading"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space size={24}>
+              <Loading />
 
-            <Loading type="comet" />
-          </Space>
-        </Card>
+              <Loading type="comet" />
+            </Space>
+          </Card>
 
-        <Card
-          header="Loading Color"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space size={24}>
-            <Loading color="#4589e1" />
+          <Card
+            header="Loading Color"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space size={24}>
+              <Loading color="#4589e1" />
 
-            <Loading color="#4589e1" type="comet" />
-          </Space>
-        </Card>
+              <Loading color="#4589e1" type="comet" />
+            </Space>
+          </Card>
 
-        <Card
-          header="Loading Size"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space size={24}>
-            <Loading size={48} />
+          <Card
+            header="Loading Size"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space size={24}>
+              <Loading size={48} />
 
-            <Loading size={48} type="comet" />
-          </Space>
-        </Card>
+              <Loading size={48} type="comet" />
+            </Space>
+          </Card>
 
-        <Card
-          header="Loading BorderWidth"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space size={24}>
-            <Loading borderWidth={4} />
+          <Card
+            header="Loading BorderWidth"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space size={24}>
+              <Loading borderWidth={4} />
 
-            <Loading borderWidth={8} type="comet" />
-          </Space>
-        </Card>
+              <Loading borderWidth={8} type="comet" />
+            </Space>
+          </Card>
 
-        <Card
-          header="ActivityIndicator"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space size={24}>
-            <ActivityIndicator />
-            <ActivityIndicator type="comet" />
-            <ActivityIndicator content="loading" />
-            <ActivityIndicator type="comet" content="loading" />
-          </Space>
-        </Card>
+          <Card
+            header="ActivityIndicator"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space size={24}>
+              <ActivityIndicator />
+              <ActivityIndicator type="comet" />
+              <ActivityIndicator content="loading" />
+              <ActivityIndicator type="comet" content="loading" />
+            </Space>
+          </Card>
 
-        <Card
-          header="ActivityIndicator"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space direction="vertical" fillWidth>
-            <View
-              style={{
-                border: 'var(--tfc-1) solid #ccc',
-                height: '200rpx',
-                position: 'relative',
-              }}
-            >
-              <ActivityIndicator mode="center" content="loading" />
-            </View>
+          <Card
+            header="ActivityIndicator"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space direction="vertical" fillWidth>
+              <View
+                style={{
+                  border: 'var(--tfc-1) solid #ccc',
+                  height: '200rpx',
+                  position: 'relative',
+                }}
+              >
+                <ActivityIndicator mode="center" content="loading" />
+              </View>
 
-            <View
-              style={{
-                border: 'var(--tfc-1) solid #ccc',
-                height: '200rpx',
-                position: 'relative',
-              }}
-            >
-              <ActivityIndicator mode="center" type="comet" content="loading" />
-            </View>
-          </Space>
-        </Card>
+              <View
+                style={{
+                  border: 'var(--tfc-1) solid #ccc',
+                  height: '200rpx',
+                  position: 'relative',
+                }}
+              >
+                <ActivityIndicator
+                  mode="center"
+                  type="comet"
+                  content="loading"
+                />
+              </View>
+            </Space>
+          </Card>
+        </Space>
       </View>
     );
   }

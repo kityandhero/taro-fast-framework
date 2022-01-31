@@ -63,7 +63,7 @@ class Collapse extends ComponentBase {
 
   triggerClick = (o, i) => {
     const { single } = this.props;
-    const { openList } = this.state;
+    let { openList } = this.state;
 
     if (single) {
       openList = openList.map((item, index) => {
@@ -85,6 +85,8 @@ class Collapse extends ComponentBase {
   renderFurther() {
     const { style, border, list } = this.props;
     const { openList } = this.state;
+
+    const listCount = list.length;
 
     return (
       <View style={style}>
@@ -115,10 +117,10 @@ class Collapse extends ComponentBase {
               clickable
               arrow={false}
               disabled={disabled}
-              border={border}
               showBody={bodyVisible}
               body={body}
               bodyAnimate
+              border={border && index !== listCount - 1}
               extra={
                 <CenterBox>
                   <View

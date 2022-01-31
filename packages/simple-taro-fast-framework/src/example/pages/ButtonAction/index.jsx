@@ -92,75 +92,77 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="Action" headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            {buildButton({
-              inner: 'Action',
-              loadingMode: 'overlay',
-              onClick: this.onActionClick,
-            })}
+        <Space direction="vertical" fillWidth>
+          <Card header="Action" headerStyle={cardHeaderStyle}>
+            <Space wrap>
+              {buildButton({
+                inner: 'Action',
+                loadingMode: 'overlay',
+                onClick: this.onActionClick,
+              })}
 
-            {buildButton({
-              inner: 'ActionSheet',
-              loadingMode: 'overlay',
-              onClick: this.onActionSheetClick,
-            })}
+              {buildButton({
+                inner: 'ActionSheet',
+                loadingMode: 'overlay',
+                onClick: this.onActionSheetClick,
+              })}
 
-            {buildButton({
-              inner: 'ActionModal',
-              loadingMode: 'overlay',
-              onClick: this.onActionModalClick,
-            })}
+              {buildButton({
+                inner: 'ActionModal',
+                loadingMode: 'overlay',
+                onClick: this.onActionModalClick,
+              })}
 
-            {buildButton({
-              inner: 'reload',
-              loadingMode: 'overlay',
-              loading: !!dataLoading,
-              onClick: this.reloadData,
-            })}
+              {buildButton({
+                inner: 'reload',
+                loadingMode: 'overlay',
+                loading: !!dataLoading,
+                onClick: this.reloadData,
+              })}
 
-            {buildButton({
-              inner: 'reloadRemoteMetaData',
-              loadingMode: 'overlay',
-              onClick: this.reloadRemoteMetaData,
-            })}
+              {buildButton({
+                inner: 'reloadRemoteMetaData',
+                loadingMode: 'overlay',
+                onClick: this.reloadRemoteMetaData,
+              })}
 
-            {buildButton({
-              inner: 'showRemoteMetaDataInConsole',
-              loadingMode: 'overlay',
-              onClick: this.showRemoteMetaDataInConsole,
-            })}
-          </Space>
-        </Card>
+              {buildButton({
+                inner: 'showRemoteMetaDataInConsole',
+                loadingMode: 'overlay',
+                onClick: this.showRemoteMetaDataInConsole,
+              })}
+            </Space>
+          </Card>
 
-        <Card header="联动展示" headerStyle={cardHeaderStyle}>
-          <Spin spin={!firstLoadSuccess}>
-            <FadeView show={!dataLoading}>
-              <VerticalBox
-                style={{ height: transformSize(50) }}
-                alignJustify="center"
-              >
-                <Space direction="vertical" fillWidth>
-                  <VerticalBox
-                    style={{ height: transformSize(100) }}
-                    alignJustify="center"
-                  >
-                    <Empty
-                      image="https://img.yzcdn.cn/vant/custom-empty-image.png"
-                      description="暂无数据"
-                      onImageClick={() => {
-                        console.log('onImageClick');
-                      }}
-                      onDescriptionClick={() => {
-                        console.log('onDescriptionClick');
-                      }}
-                    />
-                  </VerticalBox>
-                </Space>
-              </VerticalBox>
-            </FadeView>
-          </Spin>
-        </Card>
+          <Card header="联动展示" headerStyle={cardHeaderStyle}>
+            <Spin spin={!firstLoadSuccess}>
+              <FadeView show={!dataLoading}>
+                <VerticalBox
+                  style={{ height: transformSize(50) }}
+                  alignJustify="center"
+                >
+                  <Space direction="vertical" fillWidth>
+                    <VerticalBox
+                      style={{ height: transformSize(100) }}
+                      alignJustify="center"
+                    >
+                      <Empty
+                        image="https://img.yzcdn.cn/vant/custom-empty-image.png"
+                        description="暂无数据"
+                        onImageClick={() => {
+                          console.log('onImageClick');
+                        }}
+                        onDescriptionClick={() => {
+                          console.log('onDescriptionClick');
+                        }}
+                      />
+                    </VerticalBox>
+                  </Space>
+                </VerticalBox>
+              </FadeView>
+            </Spin>
+          </Card>
+        </Space>
       </View>
     );
   }

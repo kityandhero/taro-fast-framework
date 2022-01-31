@@ -16,49 +16,51 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="块级按钮" headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.handleClick();
-              }}
-            >
-              普通消息
-            </Button>
+        <Space direction="vertical" fillWidth>
+          <Card header="块级按钮" headerStyle={cardHeaderStyle}>
+            <Space direction="vertical" fillWidth>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.handleClick();
+                }}
+              >
+                普通消息
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.handleClick('success');
-              }}
-            >
-              成功消息
-            </Button>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.handleClick('success');
+                }}
+              >
+                成功消息
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.handleClick('error');
-              }}
-            >
-              错误消息
-            </Button>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.handleClick('error');
+                }}
+              >
+                错误消息
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.handleClick('warning');
-              }}
-            >
-              警告消息
-            </Button>
-          </Space>
-        </Card>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.handleClick('warning');
+                }}
+              >
+                警告消息
+              </Button>
+            </Space>
+          </Card>
+        </Space>
       </View>
     );
   }

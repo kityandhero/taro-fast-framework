@@ -5,6 +5,7 @@ import {
   Icon,
   RadioSelector,
   Tag,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -113,93 +114,95 @@ export default class Index extends PageWrapper {
 
   renderFurther() {
     return (
-      <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <Card
-          header="下侧面板视图"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <RadioSelector
-            placeholder="请选择类别"
-            value={this.state.radioValue1}
-            options={this.state.radioOptions1}
-            onChange={this.handleRadioChange}
+      <View className="index">
+        <Space direction="vertical" fillWidth>
+          <Card
+            header="下侧面板视图"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
           >
-            类别
-          </RadioSelector>
+            <RadioSelector
+              placeholder="请选择类别"
+              value={this.state.radioValue1}
+              options={this.state.radioOptions1}
+              onChange={this.handleRadioChange}
+            >
+              类别
+            </RadioSelector>
 
-          <RadioSelector
-            placeholder="请选择类别"
-            value={this.state.radioValue1}
-            valueFormat={(v) => {
-              return <Tag color="default">{v}</Tag>;
-            }}
-            options={this.state.radioOptions1}
-            onChange={this.handleRadioChange}
-          >
-            类别 [格式化值]
-          </RadioSelector>
+            <RadioSelector
+              placeholder="请选择类别"
+              value={this.state.radioValue1}
+              valueFormat={(v) => {
+                return <Tag color="default">{v}</Tag>;
+              }}
+              options={this.state.radioOptions1}
+              onChange={this.handleRadioChange}
+            >
+              类别 [格式化值]
+            </RadioSelector>
 
-          <RadioSelector
-            placeholder="请选择目标"
-            value={this.state.radioValue2}
-            arc
-            options={this.state.radioOptions2}
-            onChange={this.handleRadioChangeSecond}
-          >
-            目标
-          </RadioSelector>
+            <RadioSelector
+              placeholder="请选择目标"
+              value={this.state.radioValue2}
+              arc
+              options={this.state.radioOptions2}
+              onChange={this.handleRadioChangeSecond}
+            >
+              目标
+            </RadioSelector>
 
-          <RadioSelector
-            placeholder="请选择产地"
-            showClose={false}
-            value={this.state.radioValue3}
-            options={this.state.radioOptions3}
-            onChange={this.handleRadioChangeThird}
-          >
-            产地
-          </RadioSelector>
-        </Card>
+            <RadioSelector
+              placeholder="请选择产地"
+              showClose={false}
+              value={this.state.radioValue3}
+              options={this.state.radioOptions3}
+              onChange={this.handleRadioChangeThird}
+            >
+              产地
+            </RadioSelector>
+          </Card>
 
-        <Card
-          header="弹出面板视图"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <RadioSelector
-            placeholder="请选择类别"
-            position="center"
-            value={this.state.radioValue1}
-            options={this.state.radioOptions1}
-            onChange={this.handleRadioChange}
+          <Card
+            header="弹出面板视图"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
           >
-            类别
-          </RadioSelector>
+            <RadioSelector
+              placeholder="请选择类别"
+              position="center"
+              value={this.state.radioValue1}
+              options={this.state.radioOptions1}
+              onChange={this.handleRadioChange}
+            >
+              类别
+            </RadioSelector>
 
-          <RadioSelector
-            placeholder="请选择目标"
-            position="center"
-            value={this.state.radioValue2}
-            arc
-            options={this.state.radioOptions2}
-            onChange={this.handleRadioChangeSecond}
-          >
-            目标
-          </RadioSelector>
+            <RadioSelector
+              placeholder="请选择目标"
+              position="center"
+              value={this.state.radioValue2}
+              arc
+              options={this.state.radioOptions2}
+              onChange={this.handleRadioChangeSecond}
+            >
+              目标
+            </RadioSelector>
 
-          <RadioSelector
-            placeholder="请选择产地"
-            position="center"
-            showClose={false}
-            value={this.state.radioValue3}
-            options={this.state.radioOptions3}
-            onChange={this.handleRadioChangeThird}
-          >
-            产地
-          </RadioSelector>
-        </Card>
+            <RadioSelector
+              placeholder="请选择产地"
+              position="center"
+              showClose={false}
+              value={this.state.radioValue3}
+              options={this.state.radioOptions3}
+              onChange={this.handleRadioChangeThird}
+            >
+              产地
+            </RadioSelector>
+          </Card>
+        </Space>
       </View>
     );
   }

@@ -21,7 +21,6 @@ export default class Index extends PageWrapper {
           space={false}
         >
           <Collapse
-            // style={style}
             list={[
               {
                 label: '标题1',
@@ -30,6 +29,62 @@ export default class Index extends PageWrapper {
               {
                 label: '标题2',
                 body: '面板2',
+              },
+              {
+                label: '标题3',
+                body: '面板3',
+              },
+            ]}
+          />
+        </Card>
+
+        <Card
+          header="唯一展开"
+          headerStyle={cardHeaderStyle}
+          style={{ backgroundColor: '#fff' }}
+          space={false}
+        >
+          <Collapse
+            single
+            list={[
+              {
+                label: '标题1',
+                body: '面板1',
+              },
+              {
+                label: '标题2',
+                body: '面板2',
+              },
+              {
+                label: '标题3',
+                body: '面板3',
+              },
+            ]}
+          />
+        </Card>
+
+        <Card
+          header="禁用"
+          headerStyle={cardHeaderStyle}
+          style={{ backgroundColor: '#fff' }}
+          space={false}
+        >
+          <Collapse
+            // style={style}
+            single
+            list={[
+              {
+                label: '标题1',
+                body: '面板1',
+              },
+              {
+                label: '标题2',
+                body: '面板2',
+              },
+              {
+                label: '标题3',
+                body: '面板3',
+                disabled: true,
               },
             ]}
           />

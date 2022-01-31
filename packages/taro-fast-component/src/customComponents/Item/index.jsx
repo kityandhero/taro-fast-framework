@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize, getRect } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -35,6 +35,39 @@ const defaultProps = {
 };
 
 class Item extends ComponentBase {
+  bodyHeight = 0;
+
+  doWorkAdjustDidMount = () => {
+    const { body } = this.props;
+
+    if (body != null) {
+      const that = this;
+
+      setTimeout(() => {
+        that.updateBodyHeight();
+      }, 200);
+    }
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+    this.updateBodyHeight();
+  };
+
+  updateBodyHeight = () => {
+    const { body } = this.props;
+
+    if (body != null) {
+      getRect(`.${classPrefix}-body`).then((rect) => {
+        const { height } = { ...{ height: 0 }, ...rect };
+
+        if (height > 0) {
+          this.bodyHeight = height;
+        }
+      });
+    }
+  };
+
   triggerClick = () => {
     const { disabled, onClick } = this.props;
 
@@ -73,10 +106,17 @@ class Item extends ComponentBase {
         <View
           className={classNames(`${classPrefix}-body`, {
             [`${classPrefix}-body__animate`]: bodyAnimate,
-            [`${classPrefix}-body__open`]: showBody,
-            [`${classPrefix}-body__close`]: !showBody,
+            // [`${classPrefix}-body__open`]: showBody,
+            // [`${classPrefix}-body__close`]: !showBody,
           })}
-          style={bodyStyle}
+          style={{
+            ...bodyStyle,
+            ...(showBody
+              ? this.bodyHeight > 0
+                ? { maxHeight: this.bodyHeight }
+                : { maxHeight: 150 }
+              : { maxHeight: 0 }),
+          }}
         >
           <View className={classNames(`${classPrefix}-body__inner`)}>
             {body}
@@ -101,10 +141,7 @@ class Item extends ComponentBase {
           style={style}
           onClick={this.triggerClick}
         >
-          <View
-            className={`${classPrefix}-header-content`}
-            style={!border ? { borderBottom: '0' } : {}}
-          >
+          <View className={`${classPrefix}-header-content`}>
             {!!prefix ? (
               <View className={`${classPrefix}-header-content-prefix`}>
                 <VerticalBox>{prefix}</VerticalBox>
@@ -155,6 +192,14 @@ class Item extends ComponentBase {
         </View>
         {children}
         {b}
+
+        {!border ? null : (
+          <View className={classNames(`${classPrefix}__bottom`)}>
+            <View
+              className={classNames(`${classPrefix}__bottom__border`)}
+            ></View>
+          </View>
+        )}
       </View>
     );
   }

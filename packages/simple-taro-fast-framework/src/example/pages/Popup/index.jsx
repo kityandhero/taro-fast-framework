@@ -1,6 +1,11 @@
 import { View } from '@tarojs/components';
 
-import { Card, Item, Popup } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Item,
+  Popup,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -236,80 +241,82 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card
-          header="弹出位置"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Item label="中部弹出" arrow onClick={this.showBasic} />
-          <Item label="顶部弹出" arrow onClick={this.showTop} />
-          <Item
-            label="底部弹出"
-            arrow
-            onClick={this.showBottom}
+        <Space direction="vertical" fillWidth>
+          <Card
+            header="弹出位置"
+            style={style}
             headerStyle={cardHeaderStyle}
             space={false}
-          />
-          <Item
-            label="左侧弹出"
-            arrow
-            onClick={this.showLeft}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          />
-          <Item
-            label="右侧弹出"
-            arrow
-            onClick={this.showRight}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          />
-        </Card>
+          >
+            <Item label="中部弹出" arrow onClick={this.showBasic} />
+            <Item label="顶部弹出" arrow onClick={this.showTop} />
+            <Item
+              label="底部弹出"
+              arrow
+              onClick={this.showBottom}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            />
+            <Item
+              label="左侧弹出"
+              arrow
+              onClick={this.showLeft}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            />
+            <Item
+              label="右侧弹出"
+              arrow
+              onClick={this.showRight}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            />
+          </Card>
 
-        <Card header="变更上圆角" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={arcTopList}
-            value={arcTop}
-            onChange={this.setArcTop}
-          />
-        </Card>
+          <Card header="变更上圆角" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={arcTopList}
+              value={arcTop}
+              onChange={this.setArcTop}
+            />
+          </Card>
 
-        <Card header="变更下圆角" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={arcBottomList}
-            value={arcBottom}
-            onChange={this.setArcBottom}
-          />
-        </Card>
+          <Card header="变更下圆角" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={arcBottomList}
+              value={arcBottom}
+              onChange={this.setArcBottom}
+            />
+          </Card>
 
-        <Card header="变更模式" headerStyle={cardHeaderStyle}>
-          <Selector options={modeList} value={mode} onChange={this.setMode} />
-        </Card>
+          <Card header="变更模式" headerStyle={cardHeaderStyle}>
+            <Selector options={modeList} value={mode} onChange={this.setMode} />
+          </Card>
 
-        <Card header="关闭按钮" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={showCloseList}
-            value={showClose}
-            onChange={this.setShowClose}
-          />
-        </Card>
+          <Card header="关闭按钮" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={showCloseList}
+              value={showClose}
+              onChange={this.setShowClose}
+            />
+          </Card>
 
-        <Card header="点击遮罩关闭面板" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={closeWhenOverlayClickList}
-            value={closeWhenOverlayClick}
-            onChange={this.setCloseWhenOverlayClick}
-          />
-        </Card>
+          <Card header="点击遮罩关闭面板" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={closeWhenOverlayClickList}
+              value={closeWhenOverlayClick}
+              onChange={this.setCloseWhenOverlayClick}
+            />
+          </Card>
 
-        <Card header="显示区域容器" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={scrollList}
-            value={scrollData}
-            onChange={this.setScroll}
-          />
-        </Card>
+          <Card header="显示区域容器" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={scrollList}
+              value={scrollData}
+              onChange={this.setScroll}
+            />
+          </Card>
+        </Space>
 
         <Popup
           visible={show.basic}

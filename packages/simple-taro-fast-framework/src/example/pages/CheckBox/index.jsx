@@ -6,6 +6,7 @@ import {
   CheckBox,
   Icon,
   Button,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -132,131 +133,133 @@ export default class Index extends PageWrapper {
     const { border } = this.state;
 
     return (
-      <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <CheckBox
-          header="基础用法"
-          style={style}
-          border={border}
-          options={this.state.checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          // showRenderCount
-          extra={
-            <Button
-              style={{ marginRight: transformSize(10) }}
-              size="mini"
-              onClick={this.toggleBorder}
-            >
-              切换边框
-            </Button>
-          }
-          onChange={this.handleCheckBoxChange}
-        />
-
-        <CheckBox
-          header="自定义选中图标"
-          style={style}
-          options={this.state.checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
-          extra={<View style={extraStyle}>layout: list</View>}
-          onChange={this.handleCheckBoxChange}
-        />
-
-        <CheckBox
-          header="含有单项描述"
-          style={style}
-          options={this.state.checkBoxOptions2}
-          value={this.state.checkBoxValue2}
-          extra={<View style={extraStyle}>layout: list</View>}
-          onChange={this.handleCheckBoxChangeSecond}
-        />
-
-        <CheckBox
-          header="单项禁用"
-          style={style}
-          options={this.state.checkBoxOptions3}
-          value={this.state.checkBoxValue3}
-          extra={<View style={extraStyle}>layout: list</View>}
-          onChange={this.handleCheckBoxChangeThird}
-        />
-
-        <Card
-          header="基础布局"
-          headerStyle={cardHeaderStyle}
-          extra={<View style={extraStyle}>layout: mini</View>}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
+      <View className="index">
+        <Space direction="vertical" fillWidth>
           <CheckBox
-            layout="mini"
+            header="基础用法"
             style={style}
             border={border}
             options={this.state.checkBoxOptions1}
             value={this.state.checkBoxValue1}
+            // showRenderCount
+            extra={
+              <Button
+                style={{ marginRight: transformSize(10) }}
+                size="mini"
+                onClick={this.toggleBorder}
+              >
+                切换边框
+              </Button>
+            }
             onChange={this.handleCheckBoxChange}
           />
-        </Card>
 
-        <Card
-          header="自定义布局"
-          headerStyle={cardHeaderStyle}
-          extra={<View style={extraStyle}>layout: mini</View>}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
           <CheckBox
-            layout="mini"
+            header="自定义选中图标"
             style={style}
-            border={border}
+            options={this.state.checkBoxOptions1}
+            value={this.state.checkBoxValue1}
+            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+            iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
+            extra={<View style={extraStyle}>layout: list</View>}
+            onChange={this.handleCheckBoxChange}
+          />
+
+          <CheckBox
+            header="含有单项描述"
+            style={style}
             options={this.state.checkBoxOptions2}
             value={this.state.checkBoxValue2}
-            miniColumns={2}
-            miniGap={12}
+            extra={<View style={extraStyle}>layout: list</View>}
             onChange={this.handleCheckBoxChangeSecond}
           />
-        </Card>
 
-        <CheckBox
-          header="基础用法"
-          layout="checkBox"
-          style={style}
-          border={border}
-          options={this.state.checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-          onChange={this.handleCheckBoxChange}
-        />
+          <CheckBox
+            header="单项禁用"
+            style={style}
+            options={this.state.checkBoxOptions3}
+            value={this.state.checkBoxValue3}
+            extra={<View style={extraStyle}>layout: list</View>}
+            onChange={this.handleCheckBoxChangeThird}
+          />
 
-        <CheckBox
-          header="自定义选中图标"
-          layout="checkBox"
-          style={style}
-          options={this.state.checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-          onChange={this.handleCheckBoxChange}
-        />
+          <Card
+            header="基础布局"
+            headerStyle={cardHeaderStyle}
+            extra={<View style={extraStyle}>layout: mini</View>}
+            extraStyle={{ backgroundColor: '#f5f7fa' }}
+          >
+            <CheckBox
+              layout="mini"
+              style={style}
+              border={border}
+              options={this.state.checkBoxOptions1}
+              value={this.state.checkBoxValue1}
+              onChange={this.handleCheckBoxChange}
+            />
+          </Card>
 
-        <CheckBox
-          header="含有单项描述"
-          layout="checkBox"
-          style={style}
-          options={this.state.checkBoxOptions2}
-          value={this.state.checkBoxValue2}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-          onChange={this.handleCheckBoxChangeSecond}
-        />
+          <Card
+            header="自定义布局"
+            headerStyle={cardHeaderStyle}
+            extra={<View style={extraStyle}>layout: mini</View>}
+            extraStyle={{ backgroundColor: '#f5f7fa' }}
+          >
+            <CheckBox
+              layout="mini"
+              style={style}
+              border={border}
+              options={this.state.checkBoxOptions2}
+              value={this.state.checkBoxValue2}
+              miniColumns={2}
+              miniGap={12}
+              onChange={this.handleCheckBoxChangeSecond}
+            />
+          </Card>
 
-        <CheckBox
-          header="单项禁用"
-          layout="checkBox"
-          style={style}
-          options={this.state.checkBoxOptions3}
-          value={this.state.checkBoxValue3}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-          onChange={this.handleCheckBoxChangeThird}
-        />
+          <CheckBox
+            header="基础用法"
+            layout="checkBox"
+            style={style}
+            border={border}
+            options={this.state.checkBoxOptions1}
+            value={this.state.checkBoxValue1}
+            extra={<View style={extraStyle}>layout: checkBox</View>}
+            onChange={this.handleCheckBoxChange}
+          />
+
+          <CheckBox
+            header="自定义选中图标"
+            layout="checkBox"
+            style={style}
+            options={this.state.checkBoxOptions1}
+            value={this.state.checkBoxValue1}
+            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+            iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
+            extra={<View style={extraStyle}>layout: checkBox</View>}
+            onChange={this.handleCheckBoxChange}
+          />
+
+          <CheckBox
+            header="含有单项描述"
+            layout="checkBox"
+            style={style}
+            options={this.state.checkBoxOptions2}
+            value={this.state.checkBoxValue2}
+            extra={<View style={extraStyle}>layout: checkBox</View>}
+            onChange={this.handleCheckBoxChangeSecond}
+          />
+
+          <CheckBox
+            header="单项禁用"
+            layout="checkBox"
+            style={style}
+            options={this.state.checkBoxOptions3}
+            value={this.state.checkBoxValue3}
+            extra={<View style={extraStyle}>layout: checkBox</View>}
+            onChange={this.handleCheckBoxChangeThird}
+          />
+        </Space>
       </View>
     );
   }

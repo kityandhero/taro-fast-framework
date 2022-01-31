@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, DataGrid } from 'taro-fast-component/es/customComponents';
+import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -44,29 +44,31 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="布局展示 column : 2" headerStyle={cardHeaderStyle}>
-          <DataGrid
-            list={list}
-            bordered
-            column={2}
-            size="small"
-            labelStyle={{ width: transformSize(80) }}
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        <Space direction="vertical" fillWidth>
+          <Card header="布局展示 column : 2" headerStyle={cardHeaderStyle}>
+            <DataGrid
+              list={list}
+              bordered
+              column={2}
+              size="small"
+              labelStyle={{ width: transformSize(80) }}
+              emptyValue="暂无"
+              emptyStyle={{ color: '#ccc' }}
+            />
+          </Card>
 
-        <Card header="布局展示 column : 3" headerStyle={cardHeaderStyle}>
-          <DataGrid
-            list={list}
-            bordered={false}
-            column={3}
-            size="small"
-            labelStyle={{ width: transformSize(80) }}
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+          <Card header="布局展示 column : 3" headerStyle={cardHeaderStyle}>
+            <DataGrid
+              list={list}
+              bordered={false}
+              column={3}
+              size="small"
+              labelStyle={{ width: transformSize(80) }}
+              emptyValue="暂无"
+              emptyStyle={{ color: '#ccc' }}
+            />
+          </Card>
+        </Space>
       </View>
     );
   }

@@ -1,33 +1,9 @@
 import {
-  inCollection,
   stringIsNullOrWhiteSpace,
   transformSize,
+  handleInlayColor,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
-
-function handleInlayColor(color) {
-  return inCollection(
-    [
-      'red',
-      'orange',
-      'yellow',
-      'olive',
-      'green',
-      'cyan',
-      'blue',
-      'purple',
-      'mauve',
-      'pink',
-      'brown',
-      'grey',
-      'gray',
-      'black',
-    ],
-    color,
-  )
-    ? `var(--tfc-color-${color})`
-    : color;
-}
 
 export function getStyle({
   backgroundColor = '',

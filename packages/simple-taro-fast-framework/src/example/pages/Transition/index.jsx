@@ -4,6 +4,7 @@ import {
   Card,
   Item,
   Transition,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -115,45 +116,47 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card
-          header="Transition 动画"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Item label="Fade" arrow onClick={this.onClickFade} />
-          <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
-          <Item label="Fade Down" arrow onClick={this.onClickFadeDown} />
-          <Item label="Fade Left" arrow onClick={this.onClickFadeLeft} />
-          <Item label="Fade Right" arrow onClick={this.onClickFadeRight} />
-          <Item label="Slide Up" arrow onClick={this.onClickSlideUp} />
-          <Item label="Slide Down" arrow onClick={this.onClickSlideDown} />
-          <Item label="Slide Left" arrow onClick={this.onClickSlideLeft} />
-          <Item label="Slide Right" arrow onClick={this.onClickSlideRight} />
-          <Item label="Zoom" arrow onClick={this.onClickZoom} />
-          <Item label="Punch" arrow onClick={this.onClickPunch} />
-          <Item label="Custom" arrow onClick={this.onClickCustom} />
-        </Card>
+        <Space direction="vertical" fillWidth>
+          <Card
+            header="Transition 动画"
+            style={style}
+            headerStyle={cardHeaderStyle}
+          >
+            <Item label="Fade" arrow onClick={this.onClickFade} />
+            <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
+            <Item label="Fade Down" arrow onClick={this.onClickFadeDown} />
+            <Item label="Fade Left" arrow onClick={this.onClickFadeLeft} />
+            <Item label="Fade Right" arrow onClick={this.onClickFadeRight} />
+            <Item label="Slide Up" arrow onClick={this.onClickSlideUp} />
+            <Item label="Slide Down" arrow onClick={this.onClickSlideDown} />
+            <Item label="Slide Left" arrow onClick={this.onClickSlideLeft} />
+            <Item label="Slide Right" arrow onClick={this.onClickSlideRight} />
+            <Item label="Zoom" arrow onClick={this.onClickZoom} />
+            <Item label="Punch" arrow onClick={this.onClickPunch} />
+            <Item label="Custom" arrow onClick={this.onClickCustom} />
+          </Card>
 
-        <Transition show={show} name={name} className="block"></Transition>
-        <Transition
-          show={showCustom}
-          name=""
-          duration={{
-            enter: 300,
-            leave: 1000,
-          }}
-          className="block"
-          enterClass="tfc-enter-class"
-          enterActiveClass="tfc-enter-active-class"
-          leaveActiveClass="tfc-leave-active-class"
-          leaveToClass="tfc-leave-to-class"
-          onBeforeEnter={this.onBeforeEnter}
-          onEnter={this.onEnter}
-          onAfterEnter={this.onAfterEnter}
-          onBeforeLeave={this.onBeforeLeave}
-          onLeave={this.onLeave}
-          onAfterLeave={this.onAfterLeave}
-        ></Transition>
+          <Transition show={show} name={name} className="block"></Transition>
+          <Transition
+            show={showCustom}
+            name=""
+            duration={{
+              enter: 300,
+              leave: 1000,
+            }}
+            className="block"
+            enterClass="tfc-enter-class"
+            enterActiveClass="tfc-enter-active-class"
+            leaveActiveClass="tfc-leave-active-class"
+            leaveToClass="tfc-leave-to-class"
+            onBeforeEnter={this.onBeforeEnter}
+            onEnter={this.onEnter}
+            onAfterEnter={this.onAfterEnter}
+            onBeforeLeave={this.onBeforeLeave}
+            onLeave={this.onLeave}
+            onAfterLeave={this.onAfterLeave}
+          ></Transition>
+        </Space>
       </View>
     );
   }

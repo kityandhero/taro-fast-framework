@@ -114,103 +114,105 @@ export default class Index extends PageWrapper {
 
   renderFurther() {
     return (
-      <View className="index" style={{ backgroundColor: '#453e21' }}>
-        <Card
-          header="下侧面板视图"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            value={this.state.checkBoxValue1}
-            options={this.state.checkBoxOptions1}
-            onChange={this.handleCheckBoxChange}
+      <View className="index">
+        <Space direction="vertical" fillWidth>
+          <Card
+            header="下侧面板视图"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
           >
-            类别
-          </CheckBoxSelector>
+            <CheckBoxSelector
+              placeholder="请选择类别"
+              value={this.state.checkBoxValue1}
+              options={this.state.checkBoxOptions1}
+              onChange={this.handleCheckBoxChange}
+            >
+              类别
+            </CheckBoxSelector>
 
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            value={this.state.checkBoxValue1}
-            valueFormat={(v) => {
-              return (
-                <Space>
-                  {v.map((o, i) => {
-                    return (
-                      <Tag key={`list_${i}`} color="success">
-                        {o}
-                      </Tag>
-                    );
-                  })}
-                </Space>
-              );
-            }}
-            options={this.state.checkBoxOptions1}
-            onChange={this.handleCheckBoxChange}
-          >
-            类别 [格式化值]
-          </CheckBoxSelector>
+            <CheckBoxSelector
+              placeholder="请选择类别"
+              value={this.state.checkBoxValue1}
+              valueFormat={(v) => {
+                return (
+                  <Space>
+                    {v.map((o, i) => {
+                      return (
+                        <Tag key={`list_${i}`} color="success">
+                          {o}
+                        </Tag>
+                      );
+                    })}
+                  </Space>
+                );
+              }}
+              options={this.state.checkBoxOptions1}
+              onChange={this.handleCheckBoxChange}
+            >
+              类别 [格式化值]
+            </CheckBoxSelector>
 
-          <CheckBoxSelector
-            placeholder="请选择目标"
-            value={this.state.checkBoxValue2}
-            arc
-            options={this.state.checkBoxOptions2}
-            onChange={this.handleCheckBoxChangeSecond}
-          >
-            目标
-          </CheckBoxSelector>
+            <CheckBoxSelector
+              placeholder="请选择目标"
+              value={this.state.checkBoxValue2}
+              arc
+              options={this.state.checkBoxOptions2}
+              onChange={this.handleCheckBoxChangeSecond}
+            >
+              目标
+            </CheckBoxSelector>
 
-          <CheckBoxSelector
-            placeholder="请选择产地"
-            showClose={false}
-            value={this.state.checkBoxValue3}
-            options={this.state.checkBoxOptions3}
-            onChange={this.handleCheckBoxChangeThird}
-          >
-            产地
-          </CheckBoxSelector>
-        </Card>
+            <CheckBoxSelector
+              placeholder="请选择产地"
+              showClose={false}
+              value={this.state.checkBoxValue3}
+              options={this.state.checkBoxOptions3}
+              onChange={this.handleCheckBoxChangeThird}
+            >
+              产地
+            </CheckBoxSelector>
+          </Card>
 
-        <Card
-          header="弹出面板视图"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            position="center"
-            value={this.state.checkBoxValue1}
-            options={this.state.checkBoxOptions1}
-            onChange={this.handleCheckBoxChange}
+          <Card
+            header="弹出面板视图"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
           >
-            类别
-          </CheckBoxSelector>
+            <CheckBoxSelector
+              placeholder="请选择类别"
+              position="center"
+              value={this.state.checkBoxValue1}
+              options={this.state.checkBoxOptions1}
+              onChange={this.handleCheckBoxChange}
+            >
+              类别
+            </CheckBoxSelector>
 
-          <CheckBoxSelector
-            placeholder="请选择目标"
-            position="center"
-            value={this.state.checkBoxValue2}
-            arc
-            options={this.state.checkBoxOptions2}
-            onChange={this.handleCheckBoxChangeSecond}
-          >
-            目标
-          </CheckBoxSelector>
+            <CheckBoxSelector
+              placeholder="请选择目标"
+              position="center"
+              value={this.state.checkBoxValue2}
+              arc
+              options={this.state.checkBoxOptions2}
+              onChange={this.handleCheckBoxChangeSecond}
+            >
+              目标
+            </CheckBoxSelector>
 
-          <CheckBoxSelector
-            placeholder="请选择产地"
-            position="center"
-            showClose={false}
-            value={this.state.checkBoxValue3}
-            options={this.state.checkBoxOptions3}
-            onChange={this.handleCheckBoxChangeThird}
-          >
-            产地
-          </CheckBoxSelector>
-        </Card>
+            <CheckBoxSelector
+              placeholder="请选择产地"
+              position="center"
+              showClose={false}
+              value={this.state.checkBoxValue3}
+              options={this.state.checkBoxOptions3}
+              onChange={this.handleCheckBoxChangeThird}
+            >
+              产地
+            </CheckBoxSelector>
+          </Card>
+        </Space>
       </View>
     );
   }

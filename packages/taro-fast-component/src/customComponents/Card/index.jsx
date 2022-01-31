@@ -1,7 +1,12 @@
 import classNames from 'classnames';
 import { View, ScrollView } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  handleInlayColor,
+  inCollection,
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -16,6 +21,8 @@ const modeCollection = ['through', 'card'];
 
 const defaultProps = {
   mode: 'through',
+  shadow: true,
+  shadowColor: 'grey',
   border: true,
   style: {},
   header: null,
@@ -81,6 +88,8 @@ const defaultProps = {
 class Card extends ComponentBase {
   renderFurther() {
     const {
+      shadow,
+      shadowColor,
       style,
       border,
       header,
@@ -118,6 +127,13 @@ class Card extends ComponentBase {
         style={{
           ...style,
           ...(!border ? { border: '0' } : {}),
+          ...(shadow && !stringIsNullOrWhiteSpace(shadowColor)
+            ? {
+                boxShadow: `var(--tfc-color-shadow-size) var(--tfc-color-${handleInlayColor(
+                  shadowColor,
+                )}-shadow)`,
+              }
+            : {}),
         }}
       >
         {header ? (

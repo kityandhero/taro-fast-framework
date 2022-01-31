@@ -126,82 +126,84 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card
-          header="展示容器"
-          style={style}
-          border={false}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space direction="vertical" fillWidth>
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.onClickShow1(1);
-              }}
-            >
-              打开Modal (默认按钮样式)
-            </Button>
+        <Space direction="vertical" fillWidth>
+          <Card
+            header="展示容器"
+            style={style}
+            border={false}
+            headerStyle={cardHeaderStyle}
+          >
+            <Space direction="vertical" fillWidth>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.onClickShow1(1);
+                }}
+              >
+                打开Modal (默认按钮样式)
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.onClickShow2(2);
-              }}
-            >
-              打开Modal (无标题)
-            </Button>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.onClickShow2(2);
+                }}
+              >
+                打开Modal (无标题)
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.onClickShow3(3);
-              }}
-            >
-              打开Modal (仅显示确认按钮)
-            </Button>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.onClickShow3(3);
+                }}
+              >
+                打开Modal (仅显示确认按钮)
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.onClickShow4(4);
-              }}
-            >
-              打开Modal (点击任意区域关闭)
-            </Button>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.onClickShow4(4);
+                }}
+              >
+                打开Modal (点击任意区域关闭)
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.onClickShow5(5);
-              }}
-            >
-              打开Modal (自定义)
-            </Button>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.onClickShow5(5);
+                }}
+              >
+                打开Modal (自定义)
+              </Button>
 
-            <Button
-              block
-              size="large"
-              onClick={() => {
-                this.onClickShow6(6);
-              }}
-            >
-              多个按钮
-            </Button>
-          </Space>
-        </Card>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  this.onClickShow6(6);
+                }}
+              >
+                多个按钮
+              </Button>
+            </Space>
+          </Card>
 
-        <Card header="选择按钮模式" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={buttonFillList}
-            value={buttonFill}
-            onChange={this.setButtonFill}
-          />
-        </Card>
+          <Card header="选择按钮模式" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={buttonFillList}
+              value={buttonFill}
+              onChange={this.setButtonFill}
+            />
+          </Card>
+        </Space>
 
         <Modal
           visible={this.state.show1}

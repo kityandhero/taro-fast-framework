@@ -5,6 +5,7 @@ import {
   Card,
   VerticalBox,
   HelpBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
@@ -91,59 +92,61 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="单元素布局展示" headerStyle={cardHeaderStyle}>
-          <View style={style}>
-            <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
-              <View style={boxStyle}></View>
-            </VerticalBox>
-          </View>
-        </Card>
+        <Space direction="vertical" fillWidth>
+          <Card header="单元素布局展示" headerStyle={cardHeaderStyle}>
+            <View style={style}>
+              <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
+                <View style={boxStyle}></View>
+              </VerticalBox>
+            </View>
+          </Card>
 
-        <Card header="多元素布局展示" headerStyle={cardHeaderStyle}>
-          <View style={style}>
-            <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
-              <View style={boxStyle}></View>
-              <View style={boxStyle}></View>
-              <View style={boxStyle}></View>
-            </VerticalBox>
-          </View>
-        </Card>
+          <Card header="多元素布局展示" headerStyle={cardHeaderStyle}>
+            <View style={style}>
+              <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
+                <View style={boxStyle}></View>
+                <View style={boxStyle}></View>
+                <View style={boxStyle}></View>
+              </VerticalBox>
+            </View>
+          </Card>
 
-        <Card header="变更align" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={alignList}
-            value={align}
-            onChange={this.setAlignChecked}
-          />
-        </Card>
+          <Card header="变更align" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={alignList}
+              value={align}
+              onChange={this.setAlignChecked}
+            />
+          </Card>
 
-        <Card header="变更alignJustify" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={alignJustifyList}
-            value={alignJustify}
-            onChange={this.setAlignJustifyChecked}
-          />
-        </Card>
+          <Card header="变更alignJustify" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={alignJustifyList}
+              value={alignJustify}
+              onChange={this.setAlignJustifyChecked}
+            />
+          </Card>
 
-        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
-          <HelpBox
-            showTitle={false}
-            list={[
-              {
-                text: 'style: 默认值为 null.',
-              },
-              {
-                text: 'align: 默认值为 center.',
-              },
-              {
-                text: 'alignJustify: 默认值为 start.',
-              },
-              {
-                text: 'onClick: 默认值为 null.',
-              },
-            ]}
-          />
-        </Card>
+          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+            <HelpBox
+              showTitle={false}
+              list={[
+                {
+                  text: 'style: 默认值为 null.',
+                },
+                {
+                  text: 'align: 默认值为 center.',
+                },
+                {
+                  text: 'alignJustify: 默认值为 start.',
+                },
+                {
+                  text: 'onClick: 默认值为 null.',
+                },
+              ]}
+            />
+          </Card>
+        </Space>
       </View>
     );
   }

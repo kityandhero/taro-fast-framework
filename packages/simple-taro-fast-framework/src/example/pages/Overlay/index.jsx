@@ -6,6 +6,7 @@ import {
   Item,
   Overlay,
   CenterBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
@@ -190,97 +191,98 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
-          <View style={{ height: transformSize(300), position: 'relative' }}>
-            <CenterBox>父容器</CenterBox>
+        <Space direction="vertical" fillWidth>
+          <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
+            <View style={{ height: transformSize(300), position: 'relative' }}>
+              <CenterBox>父容器</CenterBox>
 
-            <Overlay
-              visible={this.state.show3}
-              mode="fullParent"
-              color={color[0]}
-              alpha={alpha[0]}
-              duration={duration[0]}
-              zIndex={zIndex[0]}
-              animal={animal[0]}
-              onClick={this.onClickHide3}
+              <Overlay
+                visible={this.state.show3}
+                mode="fullParent"
+                color={color[0]}
+                alpha={alpha[0]}
+                duration={duration[0]}
+                zIndex={zIndex[0]}
+                animal={animal[0]}
+                onClick={this.onClickHide3}
+              />
+
+              <Overlay
+                visible={this.state.show4}
+                mode="fullParent"
+                color={color[0]}
+                alpha={alpha[0]}
+                duration={duration[0]}
+                zIndex={zIndex[0]}
+                animal={animal[0]}
+                onClick={this.onClickHide4}
+              >
+                <View style={boxStyle} />
+              </Overlay>
+            </View>
+          </Card>
+
+          <Card
+            header="遮罩层操控"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
+            <Item label="显示全局遮罩层" arrow onClick={this.onClickShow1} />
+            <Item
+              label="显示嵌入内容的全局遮罩层"
+              arrow
+              onClick={this.onClickShow2}
             />
 
-            <Overlay
-              visible={this.state.show4}
-              mode="fullParent"
-              color={color[0]}
-              alpha={alpha[0]}
-              duration={duration[0]}
-              zIndex={zIndex[0]}
-              animal={animal[0]}
-              onClick={this.onClickHide4}
-            >
-              <View style={boxStyle} />
-            </Overlay>
-          </View>
-        </Card>
+            <Item label="显示容器遮罩层" arrow onClick={this.onClickShow3} />
+            <Item
+              label="显示嵌入内容的容器遮罩层"
+              arrow
+              onClick={this.onClickShow4}
+            />
+          </Card>
 
-        <Card
-          header="遮罩层操控"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Item label="显示全局遮罩层" arrow onClick={this.onClickShow1} />
-          <Item
-            label="显示嵌入内容的全局遮罩层"
-            arrow
-            onClick={this.onClickShow2}
-          />
+          <Card header="设置颜色" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={colorList}
+              value={color}
+              onChange={this.setColor}
+            />
+          </Card>
 
-          <Item label="显示容器遮罩层" arrow onClick={this.onClickShow3} />
-          <Item
-            label="显示嵌入内容的容器遮罩层"
-            arrow
-            onClick={this.onClickShow4}
-          />
-        </Card>
+          <Card header="设置颜色" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={animalList}
+              value={animal}
+              onChange={this.setAnimal}
+            />
+          </Card>
 
-        <Card header="设置颜色" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={colorList}
-            value={color}
-            onChange={this.setColor}
-          />
-        </Card>
+          <Card header="设置透明度" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={alphaList}
+              value={alpha}
+              onChange={this.setAlpha}
+            />
+          </Card>
 
-        <Card header="设置颜色" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={animalList}
-            value={animal}
-            onChange={this.setAnimal}
-          />
-        </Card>
+          <Card header="设置过渡时间" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={durationList}
+              value={duration}
+              onChange={this.setDuration}
+            />
+          </Card>
 
-        <Card header="设置透明度" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={alphaList}
-            value={alpha}
-            onChange={this.setAlpha}
-          />
-        </Card>
-
-        <Card header="设置过渡时间" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={durationList}
-            value={duration}
-            onChange={this.setDuration}
-          />
-        </Card>
-
-        <Card header="设置Z轴" headerStyle={cardHeaderStyle}>
-          <Selector
-            options={zIndexList}
-            value={zIndex}
-            onChange={this.setZIndex}
-          />
-        </Card>
-
+          <Card header="设置Z轴" headerStyle={cardHeaderStyle}>
+            <Selector
+              options={zIndexList}
+              value={zIndex}
+              onChange={this.setZIndex}
+            />
+          </Card>
+        </Space>
         <Overlay
           visible={this.state.show1}
           mode="fullScreen"

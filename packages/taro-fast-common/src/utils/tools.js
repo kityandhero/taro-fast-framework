@@ -2178,6 +2178,30 @@ export function transformSize(size) {
   return size;
 }
 
+export function handleInlayColor(color) {
+  return inCollection(
+    [
+      'red',
+      'orange',
+      'yellow',
+      'olive',
+      'green',
+      'cyan',
+      'blue',
+      'purple',
+      'mauve',
+      'pink',
+      'brown',
+      'grey',
+      'gray',
+      'black',
+    ],
+    color,
+  )
+    ? `var(--tfc-color-${color})`
+    : color;
+}
+
 /**
  * 占位函数
  *

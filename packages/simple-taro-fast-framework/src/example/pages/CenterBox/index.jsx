@@ -1,7 +1,11 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, CenterBox } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  CenterBox,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -21,13 +25,15 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="布局展示" headerStyle={cardHeaderStyle}>
-          <View style={style}>
-            <CenterBox style={style}>
-              <View style={boxStyle}></View>
-            </CenterBox>
-          </View>
-        </Card>
+        <Space direction="vertical" fillWidth>
+          <Card header="布局展示" headerStyle={cardHeaderStyle}>
+            <View style={style}>
+              <CenterBox style={style}>
+                <View style={boxStyle}></View>
+              </CenterBox>
+            </View>
+          </Card>
+        </Space>
       </View>
     );
   }
