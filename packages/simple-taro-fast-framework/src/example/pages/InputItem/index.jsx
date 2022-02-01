@@ -108,10 +108,6 @@ export default class Index extends PageWrapper {
             <InputItem label="用户名" value={value} confirmType="go" />
           </Card>
 
-          <Card header="onChange" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem value={value} label="用户名" />
-          </Card>
-
           <Card
             header="afterChange"
             headerStyle={cardHeaderStyle}
