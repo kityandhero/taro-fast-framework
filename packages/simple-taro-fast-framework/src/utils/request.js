@@ -25,13 +25,15 @@ export async function executiveRequest({
   method = 'POST',
   useVirtualRequest = defaultSettingsLayoutCustom.getUseVirtualRequest(),
   showUseVirtualRequestMessage = defaultSettingsLayoutCustom.getShowUseVirtualRequestMessage(),
+  showUseVirtualRequestMessageDelay = 500,
+  virtualRequestDelay = 0,
   virtualSuccessResponse = {},
   virtualFailResponse = {
     code: 1001,
     message: '虚拟未知错误',
   },
   virtualRequestResult = true,
-  virtualNeedAuthorize = true,
+  virtualNeedAuthorize = false,
 }) {
   const headerChange = {
     ...(header || {}),
@@ -48,6 +50,8 @@ export async function executiveRequest({
     method,
     useVirtualRequest,
     showUseVirtualRequestMessage,
+    showUseVirtualRequestMessageDelay,
+    virtualRequestDelay,
     virtualSuccessResponse,
     virtualFailResponse,
     virtualRequestResult,

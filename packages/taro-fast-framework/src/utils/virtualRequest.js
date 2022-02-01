@@ -179,14 +179,20 @@ export async function apiVirtualFailAccess({
 /**
  * 封装模拟访问
  */
-export async function apiVirtualAccess({ dataBuild }) {
+export async function apiVirtualAccess({
+  virtualRequestDelay = 200,
+  dataBuild,
+}) {
   let result = {};
 
   await new Promise((resolve) => {
     if (isFunction(dataBuild)) {
-      setTimeout(() => {
-        dataBuild(resolve);
-      }, 200);
+      setTimeout(
+        () => {
+          dataBuild(resolve);
+        },
+        virtualRequestDelay > 0 ? virtualRequestDelay : 0,
+      );
     }
   }).then((data) => {
     result = data;

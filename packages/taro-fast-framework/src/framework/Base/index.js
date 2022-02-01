@@ -397,6 +397,31 @@ class Base extends Infrastructure {
       callback: callback || null,
     });
   };
+
+  remoteRequest = ({ type, payload }) => {
+    const { dispatch } = this.props;
+
+    return dispatch({
+      type,
+      payload,
+    }).then(() => {
+      const metaOriginalData = this.getApiData(this.props);
+
+      const { dataSuccess, code: remoteCode } = metaOriginalData;
+
+      if (dataSuccess) {
+        const { list, data, extra } = metaOriginalData;
+
+        return {
+          list: list || [],
+          data: data || {},
+          extra: extra || {},
+        };
+      } else {
+        throw new Error(remoteCode);
+      }
+    });
+  };
 }
 
 export default Base;

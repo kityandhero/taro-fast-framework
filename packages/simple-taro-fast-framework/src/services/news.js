@@ -14,6 +14,23 @@ export async function getOverviewData(params) {
   });
 }
 
+export async function switchStatusData(params) {
+  const { status } = params;
+
+  return executiveRequest({
+    api: `/news/article/switchStatus`,
+    params,
+    useVirtualRequest: true,
+    virtualRequestDelay: 800,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        status: status,
+      },
+    },
+  });
+}
+
 /**
  * 占位函数
  *

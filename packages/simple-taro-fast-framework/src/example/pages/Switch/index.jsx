@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Card, Switch, Space } from 'taro-fast-component/es/customComponents';
@@ -5,131 +6,126 @@ import { Card, Switch, Space } from 'taro-fast-component/es/customComponents';
 import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
+@connect(({ news, global }) => ({
+  news,
+  global,
+}))
 export default class Index extends PageWrapper {
-  constructor(props) {
-    super(props);
+  getApiData = (props) => {
+    console.log(props);
 
-    this.state = {
-      ...this.state,
-      ...{
-        checked: false,
+    const {
+      news: { data },
+    } = props;
+
+    return data;
+  };
+
+  changeStatus = (value) => {
+    return this.remoteRequest({
+      type: 'news/switchStatus',
+      payload: { status: value },
+    }).then(
+      (
+        {
+          // data
+        },
+      ) => {
+        // console.log(data);
+
+        return true;
       },
-    };
-  }
+    );
+  };
 
-  setChecked = (value) => {
-    console.log(value);
-
-    this.setState({
-      checked: value,
+  simulationChangeStatus = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        try {
+          resolve(true);
+        } catch (e) {
+          reject(true);
+        }
+      }, 2000);
     });
   };
 
   renderFurther() {
-    const { checked } = this.state;
-
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card header="基础用法" headerStyle={cardHeaderStyle}>
+            <Switch />
+          </Card>
+
+          <Card header="异步调用" headerStyle={cardHeaderStyle}>
+            <Switch onChange={this.changeStatus} />
+          </Card>
+
+          <Card header="异步调用前确认" headerStyle={cardHeaderStyle}>
             <Switch
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
+              confirm={{
+                title: '状态变更',
+                content: '状态即将发生改变,确定吗?',
+                confirmText: '确定',
+                confirmColor: '',
+                cancelText: '取消',
+                cancelColor: '',
               }}
+              onChange={this.simulationChangeStatus}
             />
           </Card>
 
-          <Card header="颜色" headerStyle={cardHeaderStyle}>
-            <Switch
-              color="green"
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
+          <Card header="自定义颜色" headerStyle={cardHeaderStyle}>
+            <Switch color="green" />
           </Card>
 
-          <Card header="隐藏" headerStyle={cardHeaderStyle}>
-            <Switch
-              hidden
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
+          <Card header="隐藏模式" headerStyle={cardHeaderStyle}>
+            <Switch hidden />
           </Card>
 
-          <Card header="不可用" headerStyle={cardHeaderStyle}>
+          <Card header="禁用模式" headerStyle={cardHeaderStyle}>
             <Space>
-              <Switch
-                disabled
-                onChange={(value) => {
-                  this.setChecked(value);
-                }}
-              />
-              <Switch
-                disabled
-                checked
-                onChange={(value) => {
-                  this.setChecked(value);
-                }}
-              />
+              <Switch disabled />
+
+              <Switch disabled checked />
             </Space>
           </Card>
 
           <Card header="加载中/处理中" headerStyle={cardHeaderStyle}>
             <Space>
+              <Switch loading />
+              <Switch loading checked />
+            </Space>
+          </Card>
+
+          <Card header="大小" headerStyle={cardHeaderStyle}>
+            <Switch size={1.5} />
+          </Card>
+
+          <Card header="内嵌文字" headerStyle={cardHeaderStyle}>
+            <Space>
+              <Switch checkedText="开" uncheckedText="关" />
+              <Switch checkedText="1" uncheckedText="0" />
               <Switch
-                loading
+                checkedText="✔"
+                uncheckedText="✘"
                 onChange={(value) => {
-                  this.setChecked(value);
-                }}
-              />
-              <Switch
-                loading
-                checked
-                onChange={(value) => {
-                  this.setChecked(value);
+                  console.log(value);
                 }}
               />
             </Space>
           </Card>
 
-          <Card header="大小" headerStyle={cardHeaderStyle}>
-            <Switch
-              size={1.5}
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
-          </Card>
-
-          <Card header="内嵌文字" headerStyle={cardHeaderStyle}>
+          <Card header="操作后回调" headerStyle={cardHeaderStyle}>
             <Space>
+              <Switch checkedText="开" uncheckedText="关" />
+              <Switch checkedText="1" uncheckedText="0" />
               <Switch
-                checked={checked}
-                checkedText="开"
-                uncheckedText="关"
-                onChange={(value) => {
-                  this.setChecked(value);
-                }}
-              />
-              <Switch
-                checked={checked}
-                checkedText="1"
-                uncheckedText="0"
-                onChange={(value) => {
-                  this.setChecked(value);
-                }}
-              />
-              <Switch
-                checked={checked}
-                checkedText="✔"
-                uncheckedText="✘"
-                onChange={(value) => {
-                  this.setChecked(value);
+                afterChange={(value) => {
+                  this.bannerNotify({
+                    message: `状态已更改为:${value}`,
+                  });
                 }}
               />
             </Space>
