@@ -131,6 +131,7 @@ export default class Index extends PageWrapper {
               title="这里是标题"
               label="开关"
               description="管理已授权的产品和设备"
+              confirm
               checked={checked}
               onChange={this.changeStatus}
               afterChange={(value) => {
