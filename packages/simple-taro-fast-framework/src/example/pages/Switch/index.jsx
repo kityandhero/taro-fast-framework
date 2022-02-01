@@ -12,8 +12,6 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 }))
 export default class Index extends PageWrapper {
   getApiData = (props) => {
-    console.log(props);
-
     const {
       news: { data },
     } = props;
@@ -92,13 +90,6 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="加载中/处理中" headerStyle={cardHeaderStyle}>
-            <Space>
-              <Switch loading />
-              <Switch loading checked />
-            </Space>
-          </Card>
-
           <Card header="大小" headerStyle={cardHeaderStyle}>
             <Switch size={1.5} />
           </Card>
@@ -107,20 +98,12 @@ export default class Index extends PageWrapper {
             <Space>
               <Switch checkedText="开" uncheckedText="关" />
               <Switch checkedText="1" uncheckedText="0" />
-              <Switch
-                checkedText="✔"
-                uncheckedText="✘"
-                onChange={(value) => {
-                  console.log(value);
-                }}
-              />
+              <Switch checkedText="✔" uncheckedText="✘" />
             </Space>
           </Card>
 
           <Card header="操作后回调" headerStyle={cardHeaderStyle}>
             <Space>
-              <Switch checkedText="开" uncheckedText="关" />
-              <Switch checkedText="1" uncheckedText="0" />
               <Switch
                 afterChange={(value) => {
                   this.bannerNotify({

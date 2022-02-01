@@ -1,5 +1,7 @@
 import { View } from '@tarojs/components';
 
+import { connect } from 'react-redux';
+
 import {
   Card,
   SwitchItem,
@@ -12,21 +14,45 @@ import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch } = Icon;
 
+@connect(({ news, global }) => ({
+  news,
+  global,
+}))
 export default class Index extends PageWrapper {
-  constructor(props) {
-    super(props);
+  getApiData = (props) => {
+    const {
+      news: { data },
+    } = props;
 
-    this.state = {
-      ...this.state,
-      ...{
-        checked: false,
+    return data;
+  };
+
+  changeStatus = (value) => {
+    return this.remoteRequest({
+      type: 'news/switchStatus',
+      payload: { status: value },
+    }).then(
+      (
+        {
+          // data
+        },
+      ) => {
+        // console.log(data);
+
+        return true;
       },
-    };
-  }
+    );
+  };
 
-  setChecked = (value) => {
-    this.setState({
-      checked: value,
+  simulationChangeStatus = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        try {
+          resolve(true);
+        } catch (e) {
+          reject(true);
+        }
+      }, 2000);
     });
   };
 
@@ -37,116 +63,65 @@ export default class Index extends PageWrapper {
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card header="基础用法" headerStyle={cardHeaderStyle} space={false}>
-            <SwitchItem
-              label="开关"
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
+            <SwitchItem label="开关" />
           </Card>
 
-          <Card header="颜色" headerStyle={cardHeaderStyle} space={false}>
-            <SwitchItem
-              label="开关"
-              color="green"
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
-          </Card>
-
-          <Card header="隐藏" headerStyle={cardHeaderStyle} space={false}>
-            <SwitchItem
-              label="开关"
-              hidden
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
-          </Card>
-
-          <Card header="不可用" headerStyle={cardHeaderStyle} space={false}>
-            <SwitchItem
-              label="开关"
-              disabled
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
-            <SwitchItem
-              label="开关"
-              checked
-              disabled
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
+          <Card header="异步调用" headerStyle={cardHeaderStyle} space={false}>
+            <SwitchItem label="开关" onChange={this.changeStatus} />
           </Card>
 
           <Card
-            header="加载中/处理中"
+            header="异步调用前确认"
             headerStyle={cardHeaderStyle}
             space={false}
           >
             <SwitchItem
               label="开关"
-              loading
-              onChange={(value) => {
-                this.setChecked(value);
+              confirm={{
+                title: '状态变更',
+                content: '状态即将发生改变,确定吗?',
+                confirmText: '确定',
+                confirmColor: '',
+                cancelText: '取消',
+                cancelColor: '',
               }}
-            />
-            <SwitchItem
-              label="开关"
-              loading
-              checked
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
+              onChange={this.simulationChangeStatus}
             />
           </Card>
 
+          <Card header="颜色" headerStyle={cardHeaderStyle} space={false}>
+            <SwitchItem label="开关" color="green" />
+          </Card>
+
+          <Card header="隐藏状态" headerStyle={cardHeaderStyle} space={false}>
+            <SwitchItem label="开关" hidden />
+          </Card>
+
+          <Card header="不可用" headerStyle={cardHeaderStyle} space={false}>
+            <SwitchItem label="开关" disabled />
+            <SwitchItem label="开关" checked disabled />
+          </Card>
+
           <Card header="大小" headerStyle={cardHeaderStyle} space={false}>
-            <SwitchItem
-              label="开关"
-              size={1.5}
-              checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
-            />
+            <SwitchItem label="开关" size={1.5} />
           </Card>
 
           <Card header="内嵌文字" headerStyle={cardHeaderStyle} space={false}>
             <SwitchItem
               label="二次校验开关"
-              checked={checked}
               checkedText="开"
               uncheckedText="关"
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
             />
             <SwitchItem
               label="二次校验开关"
-              checked={checked}
               checkedText="1"
               uncheckedText="0"
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
             />
             <SwitchItem
               label="二次校验开关"
               labelStyle={{ color: 'red' }}
-              checked={checked}
               checkedText="✔"
               uncheckedText="✘"
-              onChange={(value) => {
-                this.setChecked(value);
-              }}
             />
           </Card>
 
@@ -157,8 +132,11 @@ export default class Index extends PageWrapper {
               label="开关"
               description="管理已授权的产品和设备"
               checked={checked}
-              onChange={(value) => {
-                this.setChecked(value);
+              onChange={this.changeStatus}
+              afterChange={(value) => {
+                this.bannerNotify({
+                  message: `状态已更改为:${value}`,
+                });
               }}
             />
           </Card>

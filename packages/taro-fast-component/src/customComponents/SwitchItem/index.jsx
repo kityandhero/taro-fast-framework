@@ -6,6 +6,7 @@ import Item from '../Item';
 
 const defaultProps = {
   key: null,
+  confirm: false,
   style: {},
   title: null,
   label: '',
@@ -14,22 +15,22 @@ const defaultProps = {
   border: true,
   extraContainerStyle: {},
   hidden: false,
-  loading: false,
   disabled: false,
   checked: false,
   beforeChange: null,
-  onChange: null,
   checkedText: '',
   uncheckedText: '',
   size: 2,
   color: '',
   onChange: null,
+  afterChange: null,
 };
 
 class SwitchItem extends ComponentBase {
   renderFurther() {
     const {
       key,
+      confirm,
       prefix,
       title,
       label,
@@ -40,12 +41,12 @@ class SwitchItem extends ComponentBase {
       hidden,
       checked,
       disabled,
-      loading,
       checkedText,
       uncheckedText,
       size,
       color,
       onChange,
+      afterChange,
     } = this.props;
 
     if (hidden) {
@@ -70,14 +71,15 @@ class SwitchItem extends ComponentBase {
         disabled={disabled}
         extra={
           <Switch
+            confirm={confirm}
             checked={checked}
-            loading={loading}
             checkedText={checkedText}
             uncheckedText={uncheckedText}
             size={size}
             color={color}
             disabled={disabled}
             onChange={onChange}
+            afterChange={afterChange}
           />
         }
         extraContainerStyle={{
