@@ -10,23 +10,6 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        value: '',
-      },
-    };
-  }
-
-  afterChange = (v) => {
-    this.setState({
-      value: v,
-    });
-  };
-
   renderFurther() {
     const { value } = this.state;
 

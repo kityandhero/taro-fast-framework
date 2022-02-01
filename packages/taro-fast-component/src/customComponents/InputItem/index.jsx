@@ -56,7 +56,6 @@ const defaultProps = {
   disabled: false,
   maxlength: 140,
   cursorSpacing: 0,
-  focus: false,
   confirmType: 'done',
   confirmHold: false,
   cursor: 0,
@@ -98,19 +97,21 @@ class InputItem extends ComponentBase {
   }
 
   triggerChange = (v) => {
-    const { afterChange } = this.props;
+    const { clearable, afterChange } = this.props;
     const { existValue } = this.state;
 
-    if (existValue && stringIsNullOrWhiteSpace(v)) {
-      this.setState({
-        existValue: false,
-      });
-    }
+    if (clearable) {
+      if (existValue && stringIsNullOrWhiteSpace(v)) {
+        this.setState({
+          existValue: false,
+        });
+      }
 
-    if (!existValue && !stringIsNullOrWhiteSpace(v)) {
-      this.setState({
-        existValue: true,
-      });
+      if (!existValue && !stringIsNullOrWhiteSpace(v)) {
+        this.setState({
+          existValue: true,
+        });
+      }
     }
 
     if (isFunction(afterChange)) {
@@ -216,7 +217,6 @@ class InputItem extends ComponentBase {
       disabled,
       maxlength,
       cursorSpacing,
-      focus,
       confirmType: confirmTypeSource,
       confirmHold,
       cursor,
@@ -339,7 +339,6 @@ class InputItem extends ComponentBase {
                     disabled={disabled}
                     maxlength={maxlength}
                     cursorSpacing={cursorSpacing}
-                    focus={focus}
                     confirmType={confirmType}
                     confirmHold={confirmHold}
                     cursor={cursor}
