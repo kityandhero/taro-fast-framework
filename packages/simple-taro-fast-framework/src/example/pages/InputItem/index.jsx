@@ -34,30 +34,17 @@ export default class Index extends PageWrapper {
       <View className="index" headerStyle={cardHeaderStyle}>
         <Space direction="vertical" fillWidth>
           <Card header="基础" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem value={value} onChange={this.afterChange} />
+            <InputItem value={value} />
           </Card>
 
           <Card header="Label" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              value={value}
-              label="用户名"
-              onChange={this.afterChange}
-            />
-            <InputItem value={value} label="密码" onChange={this.afterChange} />
-            <InputItem
-              value={value}
-              label="手机号"
-              onChange={this.afterChange}
-            />
+            <InputItem value={value} label="用户名" />
+            <InputItem value={value} label="密码" />
+            <InputItem value={value} label="手机号" />
           </Card>
 
           <Card header="Required" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              value={value}
-              label="用户名"
-              required
-              onChange={this.afterChange}
-            />
+            <InputItem value={value} label="用户名" required />
           </Card>
 
           <Card header="labelStyle" headerStyle={cardHeaderStyle} space={false}>
@@ -65,7 +52,6 @@ export default class Index extends PageWrapper {
               label="用户名"
               value={value}
               labelStyle={{ color: 'red' }}
-              onChange={this.afterChange}
             />
           </Card>
 
@@ -74,48 +60,23 @@ export default class Index extends PageWrapper {
             headerStyle={cardHeaderStyle}
             space={false}
           >
-            <InputItem
-              label="用户名"
-              value={value}
-              align="right"
-              onChange={this.afterChange}
-            />
+            <InputItem label="用户名" value={value} align="right" />
           </Card>
 
           <Card header="Clearable" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              value={value}
-              label="用户名"
-              clearable
-              onChange={this.afterChange}
-            />
+            <InputItem value={value} label="用户名" clearable />
           </Card>
 
           <Card header="Hidden" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              value={value}
-              label="用户名"
-              hidden
-              onChange={this.afterChange}
-            />
+            <InputItem value={value} label="用户名" hidden />
           </Card>
 
           <Card header="Extra" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              label="用户名"
-              value={value}
-              extra="扩展部分"
-              onChange={this.afterChange}
-            />
+            <InputItem label="用户名" value={value} extra="扩展部分" />
           </Card>
 
           <Card header="Password" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              value={value}
-              password
-              label="密码"
-              onChange={this.afterChange}
-            />
+            <InputItem value={value} password label="密码" />
           </Card>
 
           <Card
@@ -127,7 +88,6 @@ export default class Index extends PageWrapper {
               label="用户名"
               value={value}
               placeholder="请输入用户名"
-              onChange={this.afterChange}
             />
           </Card>
 
@@ -141,7 +101,6 @@ export default class Index extends PageWrapper {
               value={value}
               placeholderStyle={{ color: '#45e325' }}
               label="用户名"
-              onChange={this.afterChange}
             />
           </Card>
 
@@ -151,17 +110,11 @@ export default class Index extends PageWrapper {
               value={value}
               placeholder="请输入用户名"
               disabled
-              onChange={this.afterChange}
             />
           </Card>
 
           <Card header="maxlength" headerStyle={cardHeaderStyle} space={false}>
-            <InputItem
-              label="用户名"
-              value={value}
-              maxlength={5}
-              onChange={this.afterChange}
-            />
+            <InputItem label="用户名" value={value} maxlength={5} />
           </Card>
 
           <Card
@@ -169,19 +122,26 @@ export default class Index extends PageWrapper {
             headerStyle={cardHeaderStyle}
             space={false}
           >
-            <InputItem
-              label="用户名"
-              value={value}
-              confirmType="go"
-              onChange={this.afterChange}
-            />
+            <InputItem label="用户名" value={value} confirmType="go" />
           </Card>
 
           <Card header="onChange" headerStyle={cardHeaderStyle} space={false}>
+            <InputItem value={value} label="用户名" />
+          </Card>
+
+          <Card
+            header="afterChange"
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem
-              value={value}
               label="用户名"
-              onChange={this.afterChange}
+              value={value}
+              afterChange={(v) => {
+                this.bannerNotify({
+                  message: `值已更改为:${v}`,
+                });
+              }}
             />
           </Card>
 
@@ -192,7 +152,6 @@ export default class Index extends PageWrapper {
               onFocus={(e) => {
                 console.log(e);
               }}
-              onChange={this.afterChange}
             />
           </Card>
 
@@ -203,7 +162,6 @@ export default class Index extends PageWrapper {
               onBlur={(e) => {
                 console.log(e);
               }}
-              onChange={this.afterChange}
             />
           </Card>
 
@@ -214,7 +172,6 @@ export default class Index extends PageWrapper {
               onConfirm={(e) => {
                 console.log(e);
               }}
-              onChange={this.afterChange}
             />
           </Card>
 
@@ -229,7 +186,6 @@ export default class Index extends PageWrapper {
               onKeyboardHeightChange={(e) => {
                 console.log(e);
               }}
-              onChange={this.afterChange}
             />
           </Card>
         </Space>

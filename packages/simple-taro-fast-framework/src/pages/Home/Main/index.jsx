@@ -94,10 +94,6 @@ export default class Index extends PageWrapper {
           <Card header="基础组件" headerStyle={cardHeaderStyle} space={false}>
             {this.buildList([
               {
-                name: 'Line',
-                path: pathCollection.line.path,
-              },
-              {
                 name: 'ImageBox',
                 path: pathCollection.imageBox.path,
               },
@@ -162,6 +158,10 @@ export default class Index extends PageWrapper {
 
           <Card header="布局组件" headerStyle={cardHeaderStyle} space={false}>
             {this.buildList([
+              {
+                name: 'Line',
+                path: pathCollection.line.path,
+              },
               {
                 name: 'Space',
                 path: pathCollection.space.path,

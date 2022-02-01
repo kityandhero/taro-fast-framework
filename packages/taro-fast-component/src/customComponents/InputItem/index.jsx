@@ -4,7 +4,6 @@ import {
   inCollection,
   showErrorMessage,
   styleToString,
-  recordError,
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
@@ -65,7 +64,7 @@ const defaultProps = {
   selectionEnd: -1,
   adjustPosition: true,
   holdKeyboard: false,
-  onChange: null,
+  afterChange: null,
   onFocus: null,
   onBlur: null,
   onConfirm: null,
@@ -73,28 +72,49 @@ const defaultProps = {
 };
 
 class InputItem extends ComponentBase {
+  constructor(props) {
+    super(props);
+
+    const { value } = props;
+
+    this.state = {
+      valueFlag: value,
+      existValue: !stringIsNullOrWhiteSpace(value),
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        existValue: !stringIsNullOrWhiteSpace(valueNext),
+      };
+    }
+
+    return {};
+  }
+
   triggerChange = (v) => {
-    const { onChange } = this.props;
+    const { afterChange } = this.props;
+    const { existValue } = this.state;
 
-    if (!isNull(onChange)) {
-      if (!isFunction(onChange)) {
-        showErrorMessage({
-          message: 'onChange must be function',
-        });
-
-        recordError('InputItem: onChange must be function');
-      } else {
-        onChange(v);
-      }
-    } else {
-      showErrorMessage({
-        message:
-          'onChange in props is null,please defined it,onChange must be function',
+    if (existValue && stringIsNullOrWhiteSpace(v)) {
+      this.setState({
+        existValue: false,
       });
+    }
 
-      recordError(
-        'InputItem: onChange in props is null,please defined it,onChange must be function',
-      );
+    if (!existValue && !stringIsNullOrWhiteSpace(v)) {
+      this.setState({
+        existValue: true,
+      });
+    }
+
+    if (isFunction(afterChange)) {
+      afterChange(v);
     }
   };
 
@@ -181,6 +201,7 @@ class InputItem extends ComponentBase {
       clearSize,
       clearColor,
       label,
+      value,
       extra,
       labelStyle,
       inputStyle,
@@ -203,8 +224,8 @@ class InputItem extends ComponentBase {
       selectionEnd,
       adjustPosition,
       holdKeyboard,
-      value,
     } = this.props;
+    const { existValue } = this.state;
 
     if (!!hidden) {
       return null;
@@ -344,7 +365,7 @@ class InputItem extends ComponentBase {
                       onClick={this.clearValue}
                     >
                       <VerticalBox>
-                        {value ? (
+                        {existValue ? (
                           <IconCloseCircle
                             size={toNumber(clearSize)}
                             color={clearColor}
