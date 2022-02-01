@@ -39,18 +39,34 @@ const defaultProps = {
   radioBorder: true,
   radioIconUncheck: null,
   radioIconCheck: null,
+  afterChange: null,
 };
 
 class RadioSelector extends ComponentBase {
   constructor(props) {
     super(props);
 
+    const { value } = props;
+
     this.state = {
-      ...this.state,
-      ...{
-        popupVisible: false,
-      },
+      valueFlag: value,
+      valueStage: value,
+      popupVisible: false,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueStage: valueNext,
+      };
+    }
+
+    return {};
   }
 
   showPopup = () => {
@@ -65,6 +81,18 @@ class RadioSelector extends ComponentBase {
     });
   };
 
+  triggerChange = (value, option) => {
+    const { afterChange } = this.props;
+
+    this.setState({
+      valueStage: value,
+    });
+
+    if (isFunction(afterChange)) {
+      afterChange(value, option);
+    }
+  };
+
   renderFurther() {
     const {
       title,
@@ -72,7 +100,6 @@ class RadioSelector extends ComponentBase {
       style,
       description,
       extraContainerStyle,
-      value,
       valueFormat,
       placeholder,
       valueStyle,
@@ -91,10 +118,9 @@ class RadioSelector extends ComponentBase {
       radioBorder,
       radioIconUncheck,
       radioIconCheck,
-      onChange,
       children,
     } = this.props;
-    const { popupVisible } = this.state;
+    const { popupVisible, valueStage } = this.state;
 
     if (hidden) {
       return null;
@@ -113,7 +139,7 @@ class RadioSelector extends ComponentBase {
           disabled={disabled}
           border={border}
           extra={
-            stringIsNullOrWhiteSpace(value) ? (
+            stringIsNullOrWhiteSpace(valueStage) ? (
               <View
                 style={{
                   ...{
@@ -134,7 +160,7 @@ class RadioSelector extends ComponentBase {
                   ...valueStyle,
                 }}
               >
-                {isFunction(valueFormat) ? valueFormat(value) : value}
+                {isFunction(valueFormat) ? valueFormat(valueStage) : valueStage}
               </View>
             )
           }
@@ -162,7 +188,7 @@ class RadioSelector extends ComponentBase {
           onClose={this.hidePopup}
         >
           <Radio
-            value={value}
+            value={valueStage}
             style={{
               ...radioStyle,
               ...{
@@ -175,7 +201,7 @@ class RadioSelector extends ComponentBase {
             iconUncheck={radioIconUncheck}
             iconCheck={radioIconCheck}
             options={options}
-            onChange={onChange}
+            afterChange={this.triggerChange}
           />
         </Popup>
       </>

@@ -103,24 +103,6 @@ export default class Index extends PageWrapper {
     };
   }
 
-  handleRadioChange = (value) => {
-    this.setState({
-      radioValue1: value,
-    });
-  };
-
-  handleRadioChangeSecond = (value) => {
-    this.setState({
-      radioValue2: value,
-    });
-  };
-
-  handleRadioChangeThird = (value) => {
-    this.setState({
-      radioValue3: value,
-    });
-  };
-
   toggleBorder = () => {
     const { border } = this.state;
 
@@ -151,7 +133,6 @@ export default class Index extends PageWrapper {
                 切换边框
               </Button>
             }
-            onChange={this.handleRadioChange}
           />
 
           <Radio
@@ -161,7 +142,6 @@ export default class Index extends PageWrapper {
             value={this.state.radioValue1}
             iconCheck={<IconCheckCircle size={38} color="#1677ff" />}
             extra={<View style={extraStyle}>layout: list</View>}
-            onChange={this.handleRadioChange}
           />
 
           <Radio
@@ -170,7 +150,6 @@ export default class Index extends PageWrapper {
             options={this.state.radioOptions2}
             value={this.state.radioValue2}
             extra={<View style={extraStyle}>layout: list</View>}
-            onChange={this.handleRadioChangeSecond}
           />
 
           <Radio
@@ -179,7 +158,6 @@ export default class Index extends PageWrapper {
             options={this.state.radioOptions3}
             value={this.state.radioValue3}
             extra={<View style={extraStyle}>layout: list</View>}
-            onChange={this.handleRadioChangeThird}
           />
 
           <Card
@@ -194,7 +172,6 @@ export default class Index extends PageWrapper {
               border={border}
               options={this.state.radioOptions1}
               value={this.state.radioValue1}
-              onChange={this.handleRadioChange}
             />
           </Card>
 
@@ -212,7 +189,6 @@ export default class Index extends PageWrapper {
               value={this.state.radioValue2}
               miniColumns={2}
               miniGap={12}
-              onChange={this.handleRadioChangeSecond}
             />
           </Card>
 
@@ -224,7 +200,6 @@ export default class Index extends PageWrapper {
             options={this.state.radioOptions1}
             value={this.state.radioValue1}
             extra={<View style={extraStyle}>layout: radio</View>}
-            onChange={this.handleRadioChange}
           />
 
           <Radio
@@ -235,7 +210,6 @@ export default class Index extends PageWrapper {
             value={this.state.radioValue1}
             iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
             extra={<View style={extraStyle}>layout: radio</View>}
-            onChange={this.handleRadioChange}
           />
 
           <Radio
@@ -245,7 +219,6 @@ export default class Index extends PageWrapper {
             options={this.state.radioOptions2}
             value={this.state.radioValue2}
             extra={<View style={extraStyle}>layout: radio</View>}
-            onChange={this.handleRadioChangeSecond}
           />
 
           <Radio
@@ -255,7 +228,21 @@ export default class Index extends PageWrapper {
             options={this.state.radioOptions3}
             value={this.state.radioValue3}
             extra={<View style={extraStyle}>layout: radio</View>}
-            onChange={this.handleRadioChangeThird}
+          />
+
+          <Radio
+            header="更改回调"
+            layout="radio"
+            style={style}
+            border={border}
+            options={this.state.radioOptions1}
+            value={this.state.radioValue1}
+            extra={<View style={extraStyle}>layout: radio</View>}
+            afterChange={(value) => {
+              this.bannerNotify({
+                message: `值已更改为:${value}`,
+              });
+            }}
           />
         </Space>
       </View>

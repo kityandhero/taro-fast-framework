@@ -94,24 +94,6 @@ export default class Index extends PageWrapper {
     };
   }
 
-  handleRadioChange = (value) => {
-    this.setState({
-      radioValue1: value,
-    });
-  };
-
-  handleRadioChangeSecond = (value) => {
-    this.setState({
-      radioValue2: value,
-    });
-  };
-
-  handleRadioChangeThird = (value) => {
-    this.setState({
-      radioValue3: value,
-    });
-  };
-
   renderFurther() {
     return (
       <View className="index">
@@ -126,7 +108,6 @@ export default class Index extends PageWrapper {
               placeholder="请选择类别"
               value={this.state.radioValue1}
               options={this.state.radioOptions1}
-              onChange={this.handleRadioChange}
             >
               类别
             </RadioSelector>
@@ -138,7 +119,6 @@ export default class Index extends PageWrapper {
                 return <Tag color="default">{v}</Tag>;
               }}
               options={this.state.radioOptions1}
-              onChange={this.handleRadioChange}
             >
               类别 [格式化值]
             </RadioSelector>
@@ -148,7 +128,6 @@ export default class Index extends PageWrapper {
               value={this.state.radioValue2}
               arc
               options={this.state.radioOptions2}
-              onChange={this.handleRadioChangeSecond}
             >
               目标
             </RadioSelector>
@@ -158,7 +137,6 @@ export default class Index extends PageWrapper {
               showClose={false}
               value={this.state.radioValue3}
               options={this.state.radioOptions3}
-              onChange={this.handleRadioChangeThird}
             >
               产地
             </RadioSelector>
@@ -175,7 +153,6 @@ export default class Index extends PageWrapper {
               position="center"
               value={this.state.radioValue1}
               options={this.state.radioOptions1}
-              onChange={this.handleRadioChange}
             >
               类别
             </RadioSelector>
@@ -186,7 +163,6 @@ export default class Index extends PageWrapper {
               value={this.state.radioValue2}
               arc
               options={this.state.radioOptions2}
-              onChange={this.handleRadioChangeSecond}
             >
               目标
             </RadioSelector>
@@ -197,9 +173,28 @@ export default class Index extends PageWrapper {
               showClose={false}
               value={this.state.radioValue3}
               options={this.state.radioOptions3}
-              onChange={this.handleRadioChangeThird}
             >
               产地
+            </RadioSelector>
+          </Card>
+
+          <Card
+            header="更改回调"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
+            <RadioSelector
+              placeholder="请选择类别"
+              value={this.state.radioValue1}
+              options={this.state.radioOptions1}
+              afterChange={(value) => {
+                this.bannerNotify({
+                  message: `值已更改为:${value}`,
+                });
+              }}
+            >
+              类别
             </RadioSelector>
           </Card>
         </Space>

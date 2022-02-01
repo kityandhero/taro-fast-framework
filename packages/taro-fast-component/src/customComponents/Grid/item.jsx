@@ -31,10 +31,6 @@ class Item extends ComponentBase {
     const itemStyle = {
       '--item-span': `${span}`,
     };
-    console.log({
-      span,
-      itemStyle,
-    });
 
     return (
       <View

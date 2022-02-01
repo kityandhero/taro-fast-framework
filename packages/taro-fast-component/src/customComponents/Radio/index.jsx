@@ -82,10 +82,35 @@ const defaultProps = {
   iconCheck: null,
   miniColumns: 3,
   miniGap: 8,
-  onChange: null,
+  afterChange: null,
 };
 
 class Radio extends ComponentBase {
+  constructor(props) {
+    super(props);
+
+    const { value } = props;
+
+    this.state = {
+      valueFlag: value,
+      valueStage: value,
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueStage: valueNext,
+      };
+    }
+
+    return {};
+  }
+
   getLayout = () => {
     const { layout } = this.props;
 
@@ -99,10 +124,14 @@ class Radio extends ComponentBase {
       return;
     }
 
-    const { onChange } = this.props;
+    const { afterChange } = this.props;
 
-    if (isFunction(onChange)) {
-      onChange(option.value, option);
+    this.setState({
+      valueStage: option.value,
+    });
+
+    if (isFunction(afterChange)) {
+      afterChange(option.value, option);
     }
   };
 
@@ -118,10 +147,10 @@ class Radio extends ComponentBase {
       border,
       extra,
       extraContainerStyle,
-      value,
       miniColumns,
       miniGap,
     } = this.props;
+    const { valueStage } = this.state;
 
     const layout = this.getLayout();
 
@@ -166,7 +195,8 @@ class Radio extends ComponentBase {
                   }}
                   left={
                     <CenterBox>
-                      {!stringIsNullOrWhiteSpace(value) && value === valueItem
+                      {!stringIsNullOrWhiteSpace(valueStage) &&
+                      valueStage === valueItem
                         ? iconCheck || checkStatusIcon
                         : iconUncheck || uncheckStatusIcon}
                     </CenterBox>
@@ -236,7 +266,8 @@ class Radio extends ComponentBase {
                 disabled={disabled}
                 border={border}
                 extra={
-                  !stringIsNullOrWhiteSpace(value) && value === valueItem
+                  !stringIsNullOrWhiteSpace(valueStage) &&
+                  valueStage === valueItem
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || null
                 }
@@ -258,7 +289,8 @@ class Radio extends ComponentBase {
               key={key}
               // prefix={prefix}
               prefix={
-                !stringIsNullOrWhiteSpace(value) && value === valueItem
+                !stringIsNullOrWhiteSpace(valueStage) &&
+                valueStage === valueItem
                   ? iconCheck || checkStatusIcon
                   : iconUncheck || uncheckStatusIcon
               }
