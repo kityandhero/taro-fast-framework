@@ -20,10 +20,11 @@ import CenterBox from '../CenterBox';
 import Grid from '../Grid';
 import VerticalBox from '../VerticalBox';
 import FlexBox from '../FlexBox';
+import { Space } from '../Space';
 
 const { IconCheck } = Icon;
 
-const layoutCollection = ['list', 'radio', 'mini'];
+const layoutCollection = ['list', 'radio', 'column', 'space'];
 
 const iconContainerStyle = {
   border: `${transformSize(2)} solid #ccc`,
@@ -80,8 +81,9 @@ const defaultProps = {
   border: true,
   iconUncheck: null,
   iconCheck: null,
-  miniColumns: 3,
-  miniGap: 8,
+  columns: 3,
+  columnGap: 8,
+  spaceSize: 16,
   afterChange: null,
 };
 
@@ -153,16 +155,17 @@ class Radio extends ComponentBase {
       border,
       extra,
       extraContainerStyle,
-      miniColumns,
-      miniGap,
+      columns,
+      columnGap,
+      spaceSize,
     } = this.props;
     const { valueStage } = this.state;
 
     const layout = this.getLayout();
 
-    if (layout === 'mini') {
+    if (layout === 'column') {
       return (
-        <Grid columns={miniColumns} gap={miniGap}>
+        <Grid columns={columns} gap={columnGap}>
           {(isArray(options) ? options : []).map((o, index) => {
             const {
               label,
@@ -232,6 +235,74 @@ class Radio extends ComponentBase {
             );
           })}
         </Grid>
+      );
+    }
+
+    if (layout === 'space') {
+      return (
+        <Space wrap size={spaceSize}>
+          {(isArray(options) ? options : []).map((o, index) => {
+            const { label, style: styleItem, disabled, value: valueItem } = o;
+
+            const key = `item_${index}`;
+
+            return (
+              <View
+                key={key}
+                onClick={() => {
+                  this.handleClick(o);
+                }}
+              >
+                <FlexBox
+                  flexAuto="right"
+                  style={{
+                    ...{
+                      padding: 'var(--tfc-10) var(--tfc-12)',
+                    },
+                    ...styleItem,
+                    ...(disabled
+                      ? {
+                          opacity: '0.6',
+                          pointerEvents: 'none',
+                        }
+                      : {}),
+                    ...{
+                      height: '100%',
+                    },
+                  }}
+                  left={
+                    <CenterBox>
+                      {!stringIsNullOrWhiteSpace(valueStage) &&
+                      valueStage === valueItem
+                        ? iconCheck || checkStatusIcon
+                        : iconUncheck || uncheckStatusIcon}
+                    </CenterBox>
+                  }
+                  right={
+                    <VerticalBox>
+                      {isString(label) ? (
+                        <View
+                          style={{
+                            ...{
+                              fontSize: transformSize(28),
+                            },
+                          }}
+                        >
+                          {label}
+                        </View>
+                      ) : (
+                        label || ''
+                      )}
+                    </VerticalBox>
+                  }
+                  rightStyle={{
+                    paddingLeft: transformSize(10),
+                  }}
+                />
+              </View>
+            );
+          })}
+        </Space>
       );
     }
 

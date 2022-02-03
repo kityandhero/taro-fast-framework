@@ -144,7 +144,7 @@ export default class Index extends PageWrapper {
             extra={
               <Button
                 style={{ marginRight: transformSize(10) }}
-                size="mini"
+                size="column"
                 onClick={this.toggleBorder}
               >
                 切换边框
@@ -179,13 +179,13 @@ export default class Index extends PageWrapper {
           />
 
           <Card
-            header="基础布局"
+            header="column布局"
             headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: mini</View>}
+            extra={<View style={extraStyle}>layout: column</View>}
             extraStyle={{ backgroundColor: '#f5f7fa' }}
           >
             <CheckBox
-              layout="mini"
+              layout="column"
               style={style}
               border={border}
               options={this.state.checkBoxOptions1}
@@ -194,19 +194,35 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="自定义布局"
+            header="column布局 定义列"
             headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: mini</View>}
+            extra={<View style={extraStyle}>layout: column</View>}
             extraStyle={{ backgroundColor: '#f5f7fa' }}
           >
             <CheckBox
-              layout="mini"
+              layout="column"
               style={style}
               border={border}
               options={this.state.checkBoxOptions2}
               value={this.state.checkBoxValue2}
-              miniColumns={2}
-              miniGap={12}
+              columns={2}
+              columnGap={12}
+            />
+          </Card>
+
+          <Card
+            header="space布局"
+            headerStyle={cardHeaderStyle}
+            extra={<View style={extraStyle}>layout: space</View>}
+            extraStyle={{ backgroundColor: '#f5f7fa' }}
+          >
+            <CheckBox
+              layout="space"
+              style={style}
+              border={border}
+              options={this.state.checkBoxOptions1}
+              value={this.state.checkBoxValue1}
+              spaceSize={24}
             />
           </Card>
 

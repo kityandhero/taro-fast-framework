@@ -160,34 +160,35 @@ export default class Index extends PageWrapper {
           />
 
           <Card
-            header="基础布局"
+            header="column布局"
             headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: mini</View>}
+            extra={<View style={extraStyle}>layout: column</View>}
             extraStyle={{ backgroundColor: '#f5f7fa' }}
           >
             <Radio
-              layout="mini"
-              style={style}
-              border={border}
-              options={this.state.radioOptions1}
-              value={this.state.radioValue1}
-            />
-          </Card>
-
-          <Card
-            header="自定义布局"
-            headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: mini</View>}
-            extraStyle={{ backgroundColor: '#f5f7fa' }}
-          >
-            <Radio
-              layout="mini"
+              layout="column"
               style={style}
               border={border}
               options={this.state.radioOptions2}
               value={this.state.radioValue2}
-              miniColumns={2}
-              miniGap={12}
+              columns={2}
+              columnGap={12}
+            />
+          </Card>
+
+          <Card
+            header="space布局"
+            headerStyle={cardHeaderStyle}
+            extra={<View style={extraStyle}>layout: space</View>}
+            extraStyle={{ backgroundColor: '#f5f7fa' }}
+          >
+            <Radio
+              layout="space"
+              style={style}
+              border={border}
+              options={this.state.radioOptions2}
+              value={this.state.radioValue2}
+              spaceSize={24}
             />
           </Card>
 
