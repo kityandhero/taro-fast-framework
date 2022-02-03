@@ -126,7 +126,6 @@ export default class Index extends PageWrapper {
               placeholder="请选择类别"
               value={this.state.checkBoxValue1}
               options={this.state.checkBoxOptions1}
-              onChange={this.handleCheckBoxChange}
             >
               类别
             </CheckBoxSelector>
@@ -148,7 +147,6 @@ export default class Index extends PageWrapper {
                 );
               }}
               options={this.state.checkBoxOptions1}
-              onChange={this.handleCheckBoxChange}
             >
               类别 [格式化值]
             </CheckBoxSelector>
@@ -185,7 +183,6 @@ export default class Index extends PageWrapper {
               position="center"
               value={this.state.checkBoxValue1}
               options={this.state.checkBoxOptions1}
-              onChange={this.handleCheckBoxChange}
             >
               类别
             </CheckBoxSelector>
@@ -210,6 +207,27 @@ export default class Index extends PageWrapper {
               onChange={this.handleCheckBoxChangeThird}
             >
               产地
+            </CheckBoxSelector>
+          </Card>
+
+          <Card
+            header="更改回调"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
+            <CheckBoxSelector
+              placeholder="请选择类别"
+              position="center"
+              value={this.state.checkBoxValue1}
+              options={this.state.checkBoxOptions1}
+              afterChange={(value) => {
+                this.bannerNotify({
+                  message: `值已更改为:${value}`,
+                });
+              }}
+            >
+              类别
             </CheckBoxSelector>
           </Card>
         </Space>

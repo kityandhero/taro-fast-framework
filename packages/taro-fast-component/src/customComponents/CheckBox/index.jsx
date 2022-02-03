@@ -88,10 +88,35 @@ const defaultProps = {
   iconCheck: null,
   miniColumns: 3,
   miniGap: 8,
-  onChange: null,
+  afterChange: null,
 };
 
 class CheckBox extends ComponentBase {
+  constructor(props) {
+    super(props);
+
+    const { value } = props;
+
+    this.state = {
+      valueFlag: value,
+      valueStage: value,
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueStage: valueNext,
+      };
+    }
+
+    return {};
+  }
+
   getLayout = () => {
     const { layout } = this.props;
 
@@ -105,34 +130,38 @@ class CheckBox extends ComponentBase {
       return;
     }
 
-    const { onChange } = this.props;
+    const { afterChange } = this.props;
+    const { valueStage } = this.state;
+    const { value } = option;
 
-    if (isFunction(onChange)) {
-      const { value } = this.props;
+    let valueChanged = [];
 
-      let valueChanged = [];
-
-      if (inCollection(value || [], option.value)) {
-        (value || []).forEach((o) => {
-          if (o !== option.value) {
-            valueChanged.push(o);
-          }
-        });
-      } else {
-        valueChanged = [...(value || [])];
-
-        valueChanged.push(option.value);
-      }
-
-      const result = [];
-
-      valueChanged.forEach((o) => {
-        if (!stringIsNullOrWhiteSpace(o)) {
-          result.push(o);
+    if (inCollection(valueStage || [], value)) {
+      (valueStage || []).forEach((o) => {
+        if (o !== value) {
+          valueChanged.push(o);
         }
       });
+    } else {
+      valueChanged = [...(valueStage || [])];
 
-      onChange(result);
+      valueChanged.push(value);
+    }
+
+    const result = [];
+
+    valueChanged.forEach((o) => {
+      if (!stringIsNullOrWhiteSpace(o)) {
+        result.push(o);
+      }
+    });
+
+    this.setState({
+      valueStage: [...result],
+    });
+
+    if (isFunction(afterChange)) {
+      afterChange(result, option);
     }
   };
 
@@ -148,10 +177,10 @@ class CheckBox extends ComponentBase {
       border,
       extra,
       extraContainerStyle,
-      value,
       miniColumns,
       miniGap,
     } = this.props;
+    const { valueStage } = this.state;
 
     const layout = this.getLayout();
 
@@ -196,7 +225,7 @@ class CheckBox extends ComponentBase {
                   }}
                   left={
                     <CenterBox>
-                      {inCollection(value || [], valueItem)
+                      {inCollection(valueStage || [], valueItem)
                         ? iconCheck || checkStatusIcon
                         : iconUncheck || uncheckStatusIcon}
                     </CenterBox>
@@ -266,7 +295,7 @@ class CheckBox extends ComponentBase {
                 disabled={disabled}
                 border={border}
                 extra={
-                  inCollection(value || [], valueItem)
+                  inCollection(valueStage || [], valueItem)
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || uncheckStatusIconForListView
                 }
@@ -287,7 +316,7 @@ class CheckBox extends ComponentBase {
             <Item
               key={key}
               prefix={
-                inCollection(value || [], valueItem)
+                inCollection(valueStage || [], valueItem)
                   ? iconCheck || checkStatusIcon
                   : iconUncheck || uncheckStatusIcon
               }

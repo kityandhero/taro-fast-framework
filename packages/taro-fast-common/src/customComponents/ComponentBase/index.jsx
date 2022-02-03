@@ -257,7 +257,11 @@ class ComponentBase extends Component {
     if (this.showRenderCountInConsole) {
       this.renderCount += 1;
 
-      recordText({ renderFrequency: this.renderCount });
+      this.constructor.name;
+
+      const text = `${this.constructor.name},renderFrequency:${this.renderCount}`;
+
+      recordText(text);
     }
   }
 

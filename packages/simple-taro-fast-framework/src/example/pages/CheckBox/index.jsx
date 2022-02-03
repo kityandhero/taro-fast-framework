@@ -141,7 +141,6 @@ export default class Index extends PageWrapper {
             border={border}
             options={this.state.checkBoxOptions1}
             value={this.state.checkBoxValue1}
-            // showRenderCount
             extra={
               <Button
                 style={{ marginRight: transformSize(10) }}
@@ -151,7 +150,6 @@ export default class Index extends PageWrapper {
                 切换边框
               </Button>
             }
-            onChange={this.handleCheckBoxChange}
           />
 
           <CheckBox
@@ -162,7 +160,6 @@ export default class Index extends PageWrapper {
             iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
             iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
             extra={<View style={extraStyle}>layout: list</View>}
-            onChange={this.handleCheckBoxChange}
           />
 
           <CheckBox
@@ -171,7 +168,6 @@ export default class Index extends PageWrapper {
             options={this.state.checkBoxOptions2}
             value={this.state.checkBoxValue2}
             extra={<View style={extraStyle}>layout: list</View>}
-            onChange={this.handleCheckBoxChangeSecond}
           />
 
           <CheckBox
@@ -180,7 +176,6 @@ export default class Index extends PageWrapper {
             options={this.state.checkBoxOptions3}
             value={this.state.checkBoxValue3}
             extra={<View style={extraStyle}>layout: list</View>}
-            onChange={this.handleCheckBoxChangeThird}
           />
 
           <Card
@@ -195,7 +190,6 @@ export default class Index extends PageWrapper {
               border={border}
               options={this.state.checkBoxOptions1}
               value={this.state.checkBoxValue1}
-              onChange={this.handleCheckBoxChange}
             />
           </Card>
 
@@ -213,7 +207,6 @@ export default class Index extends PageWrapper {
               value={this.state.checkBoxValue2}
               miniColumns={2}
               miniGap={12}
-              onChange={this.handleCheckBoxChangeSecond}
             />
           </Card>
 
@@ -225,7 +218,6 @@ export default class Index extends PageWrapper {
             options={this.state.checkBoxOptions1}
             value={this.state.checkBoxValue1}
             extra={<View style={extraStyle}>layout: checkBox</View>}
-            onChange={this.handleCheckBoxChange}
           />
 
           <CheckBox
@@ -237,7 +229,6 @@ export default class Index extends PageWrapper {
             iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
             iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
             extra={<View style={extraStyle}>layout: checkBox</View>}
-            onChange={this.handleCheckBoxChange}
           />
 
           <CheckBox
@@ -247,7 +238,6 @@ export default class Index extends PageWrapper {
             options={this.state.checkBoxOptions2}
             value={this.state.checkBoxValue2}
             extra={<View style={extraStyle}>layout: checkBox</View>}
-            onChange={this.handleCheckBoxChangeSecond}
           />
 
           <CheckBox
@@ -257,7 +247,20 @@ export default class Index extends PageWrapper {
             options={this.state.checkBoxOptions3}
             value={this.state.checkBoxValue3}
             extra={<View style={extraStyle}>layout: checkBox</View>}
-            onChange={this.handleCheckBoxChangeThird}
+          />
+
+          <CheckBox
+            header="更改回调"
+            layout="checkBox"
+            style={style}
+            options={this.state.checkBoxOptions3}
+            value={this.state.checkBoxValue3}
+            extra={<View style={extraStyle}>layout: checkBox</View>}
+            afterChange={(value) => {
+              this.bannerNotify({
+                message: `值已更改为:${value.join()}`,
+              });
+            }}
           />
         </Space>
       </View>

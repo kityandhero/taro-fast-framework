@@ -123,7 +123,6 @@ export default class Index extends PageWrapper {
             border={border}
             options={this.state.radioOptions1}
             value={this.state.radioValue1}
-            // showRenderCount
             extra={
               <Button
                 style={{ marginRight: transformSize(10) }}

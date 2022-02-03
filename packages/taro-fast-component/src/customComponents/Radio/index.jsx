@@ -124,14 +124,20 @@ class Radio extends ComponentBase {
       return;
     }
 
-    const { afterChange } = this.props;
+    const { valueStage } = this.state;
 
-    this.setState({
-      valueStage: option.value,
-    });
+    const { value } = option;
 
-    if (isFunction(afterChange)) {
-      afterChange(option.value, option);
+    if (value !== valueStage) {
+      const { afterChange } = this.props;
+
+      this.setState({
+        valueStage: value,
+      });
+
+      if (isFunction(afterChange)) {
+        afterChange(value, option);
+      }
     }
   };
 

@@ -45,12 +45,30 @@ class CheckBoxSelector extends ComponentBase {
   constructor(props) {
     super(props);
 
+    const { value } = props;
+
     this.state = {
       ...this.state,
       ...{
+        valueFlag: value,
+        valueStage: value,
         popupVisible: false,
       },
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueStage: valueNext,
+      };
+    }
+
+    return {};
   }
 
   showPopup = () => {
@@ -65,6 +83,18 @@ class CheckBoxSelector extends ComponentBase {
     });
   };
 
+  triggerChange = (value, option) => {
+    const { afterChange } = this.props;
+
+    this.setState({
+      valueStage: value,
+    });
+
+    if (isFunction(afterChange)) {
+      afterChange(value, option);
+    }
+  };
+
   renderFurther() {
     const {
       title,
@@ -72,7 +102,6 @@ class CheckBoxSelector extends ComponentBase {
       style,
       description,
       extraContainerStyle,
-      value,
       valueFormat,
       placeholder,
       valueStyle,
@@ -91,10 +120,9 @@ class CheckBoxSelector extends ComponentBase {
       checkBoxBorder,
       checkBoxIconUncheck,
       checkBoxIconCheck,
-      onChange,
       children,
     } = this.props;
-    const { popupVisible } = this.state;
+    const { popupVisible, valueStage } = this.state;
 
     if (hidden) {
       return null;
@@ -113,7 +141,7 @@ class CheckBoxSelector extends ComponentBase {
           disabled={disabled}
           border={border}
           extra={
-            stringIsNullOrWhiteSpace(value) ? (
+            stringIsNullOrWhiteSpace(valueStage) ? (
               <View
                 style={{
                   ...{
@@ -135,10 +163,10 @@ class CheckBoxSelector extends ComponentBase {
                 }}
               >
                 {isFunction(valueFormat)
-                  ? valueFormat(value)
-                  : isArray(value)
-                  ? value.join()
-                  : value}
+                  ? valueFormat(valueStage)
+                  : isArray(valueStage)
+                  ? valueStage.join()
+                  : valueStage}
               </View>
             )
           }
@@ -166,7 +194,7 @@ class CheckBoxSelector extends ComponentBase {
           onClose={this.hidePopup}
         >
           <CheckBox
-            value={value}
+            value={valueStage}
             style={{
               ...checkBoxStyle,
               ...{
@@ -179,7 +207,7 @@ class CheckBoxSelector extends ComponentBase {
             iconUncheck={checkBoxIconUncheck}
             iconCheck={checkBoxIconCheck}
             options={options}
-            onChange={onChange}
+            afterChange={this.triggerChange}
           />
         </Popup>
       </>
