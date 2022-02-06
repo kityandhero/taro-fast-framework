@@ -1919,12 +1919,16 @@ export function requestAnimationFrame(callback) {
     });
 }
 
-export function getRect(selector, context) {
+export function getRect(selector, context, target = null) {
   return new Promise((resolve) => {
-    let query = Taro.createSelectorQuery();
+    const t = target == null ? Taro : target;
+
+    let query = t.createSelectorQuery();
+
     if (context) {
       query = query.in(context);
     }
+
     query
       .select(selector)
       .boundingClientRect()

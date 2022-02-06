@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize, getRect } from 'taro-fast-common/es/utils/tools';
+import {
+  transformSize,
+  getRect,
+  getGuid,
+} from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
@@ -35,7 +39,36 @@ const defaultProps = {
 };
 
 class Item extends ComponentBase {
-  bodyHeight = 0;
+  bodyId = '';
+
+  bodyHeight = -1;
+
+  constructor(props) {
+    super(props);
+
+    const { showBody } = props;
+
+    this.state = {
+      showBodyFlag: showBody,
+      counter: 0,
+    };
+
+    this.bodyId = getGuid();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { showBody: showBodyNext } = nextProps;
+    const { showBodyFlag: showBodyPrev, counter } = prevState;
+
+    if (showBodyNext !== showBodyPrev) {
+      return {
+        showBodyFlag: showBodyNext,
+        counter: counter + 1,
+      };
+    }
+
+    return {};
+  }
 
   doWorkAdjustDidMount = () => {
     const { body } = this.props;
@@ -58,7 +91,7 @@ class Item extends ComponentBase {
     const { body } = this.props;
 
     if (body != null) {
-      getRect(`.${classPrefix}-body`).then((rect) => {
+      getRect(`#${this.bodyId}`).then((rect) => {
         const { height } = { ...{ height: 0 }, ...rect };
 
         if (height > 0) {
@@ -118,8 +151,13 @@ class Item extends ComponentBase {
               : { maxHeight: 0 }),
           }}
         >
-          <View className={classNames(`${classPrefix}-body__inner`)}>
-            {body}
+          <View
+            id={this.bodyId}
+            className={classNames(`${classPrefix}-body__inner`)}
+          >
+            <View className={classNames(`${classPrefix}-body__inner__content`)}>
+              {body}
+            </View>
           </View>
         </View>
       ) : null;
