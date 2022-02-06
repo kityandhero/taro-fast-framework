@@ -23,6 +23,11 @@ import {
   memoize as memoizeLodash,
   round as roundLodash,
   floor as floorLodash,
+  gte as gteLodash,
+  first as firstLodash,
+  map as mapLodash,
+  set as setLodash,
+  size as sizeLodash,
 } from 'lodash';
 
 import {
@@ -50,6 +55,13 @@ import {
 } from './typeCheck';
 import Tips from './tips';
 import { toDatetime, toMoney, toNumber } from './typeConvert';
+
+export const isBrowser = typeof document !== 'undefined' && !!document.scripts;
+export const isWechat = process.env.TARO_ENV === 'weapp';
+export const isSwan = process.env.TARO_ENV === 'swan';
+export const isAlipay = process.env.TARO_ENV === 'alipay';
+export const isQQ = process.env.TARO_ENV === 'qq';
+export const isToutiao = process.env.TARO_ENV === 'tt';
 
 const storageKeyCollection = {
   nearestLocalhostNotify: 'nearestLocalhostNotify',
@@ -592,6 +604,10 @@ export function roundToTarget(v, len) {
 
 export function floor(v, len) {
   return floorLodash(v, len);
+}
+
+export function first(array) {
+  return firstLodash(array);
 }
 
 /**
@@ -1439,6 +1455,18 @@ export function difference(array, values) {
   return differenceLodash(array, values);
 }
 
+export function map(collection, iteratee) {
+  return mapLodash(collection, iteratee);
+}
+
+export function set(object, path, value) {
+  return setLodash(object, path, value);
+}
+
+export function size(collection) {
+  return sizeLodash(collection);
+}
+
 /**
  * 筛选需要的集合
  * @param {collection} 可筛选的对象, 例如数组
@@ -1505,6 +1533,10 @@ export function assignWith(target, sources, customizer) {
 
 export function forEach(collection, iteratee) {
   return forEachLodash(collection, iteratee);
+}
+
+export function gte(value, other) {
+  return gteLodash(value, other);
 }
 
 /**
@@ -2160,9 +2192,9 @@ function toFixed(number, precision) {
   return (Math.round(wholeNumber / 10) * 10) / multiplier;
 }
 
-export function transformSize(size) {
-  if (isNumber(size)) {
-    const s = toNumber(size);
+export function transformSize(si) {
+  if (isNumber(si)) {
+    const s = toNumber(si);
 
     if (s >= -2000 && s <= 2000) {
       if (s === 0) {
@@ -2179,7 +2211,7 @@ export function transformSize(size) {
     return `${s}px`;
   }
 
-  return size;
+  return si;
 }
 
 export function handleInlayColor(color) {
