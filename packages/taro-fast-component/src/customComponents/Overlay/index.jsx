@@ -19,7 +19,7 @@ const animalCollection = [
 const defaultProps = {
   visible: false,
   color: '#000',
-  alpha: 0.3,
+  alpha: 0.5,
   zIndex: 810,
   mode: 'fullParent',
   lockScroll: true,

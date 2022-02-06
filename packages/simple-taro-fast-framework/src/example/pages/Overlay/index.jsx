@@ -100,7 +100,7 @@ export default class Index extends PageWrapper {
         show3: false,
         show4: false,
         color: ['#000'],
-        alpha: ['0.3'],
+        alpha: ['0.5'],
         duration: ['300'],
         zIndex: ['810'],
         animal: ['ease-in'],

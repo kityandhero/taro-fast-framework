@@ -23,8 +23,6 @@ class AppBase extends Component {
     this.setAppInitCustomLocal(config);
 
     this.initDva(models);
-
-    console.log(this.store);
   }
 
   componentDidMount() {
