@@ -46,28 +46,7 @@ class Item extends ComponentBase {
   constructor(props) {
     super(props);
 
-    const { showBody } = props;
-
-    this.state = {
-      showBodyFlag: showBody,
-      counter: 0,
-    };
-
     this.bodyId = getGuid();
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { showBody: showBodyNext } = nextProps;
-    const { showBodyFlag: showBodyPrev, counter } = prevState;
-
-    if (showBodyNext !== showBodyPrev) {
-      return {
-        showBodyFlag: showBodyNext,
-        counter: counter + 1,
-      };
-    }
-
-    return {};
   }
 
   doWorkAdjustDidMount = () => {
