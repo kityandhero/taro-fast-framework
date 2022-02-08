@@ -56,17 +56,17 @@ export default class Index extends PageWrapper {
               <Step
                 title="填写机构信息"
                 status="finish"
-                description="完成时间：2020-12-01 12:30"
+                description="完成时间: 2020-12-01 12:30"
               />
               <Step
                 title="签约机构"
                 status="finish"
-                description="完成时间：2020-12-01 12:30"
+                description="完成时间: 2020-12-01 12:30"
               />
               <Step
                 title="关联服务区"
                 status="finish"
-                description="完成时间：2020-12-01 12:30"
+                description="完成时间: 2020-12-01 12:30"
               />
               <Step title="审批失败" status="error" />
             </Steps>

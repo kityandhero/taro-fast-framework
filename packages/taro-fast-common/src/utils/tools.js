@@ -2117,7 +2117,7 @@ export function colorHexToRGB(color, symbol = 'RGB') {
   let c = color.toLowerCase();
 
   if (reg.test(c)) {
-    // 如果只有三位的值，需变成六位，如：#fff => #ffffff
+    // 如果只有三位的值，需变成六位，如: #fff => #ffffff
     if (c.length === 4) {
       let colorNew = '#';
 

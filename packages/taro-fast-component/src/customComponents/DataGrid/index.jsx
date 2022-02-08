@@ -227,7 +227,7 @@ class DataGrid extends ComponentBase {
                     flexAuto="right"
                     left={
                       <View style={labelStyle}>{`${itemLabel}${
-                        colon ? '：' : ''
+                        colon ? ': ' : ''
                       }`}</View>
                     }
                     leftStyle={{

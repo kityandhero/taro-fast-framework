@@ -173,7 +173,7 @@ export function buildColorText({
   textPrefix = null,
   textPrefixStyle = null,
   text = '',
-  separator = '：',
+  separator = ': ',
   separatorStyle = null,
   wrapperBuilder = null,
 }) {
@@ -187,7 +187,7 @@ export function buildColorText({
       textPrefix={textPrefix || null}
       textPrefixStyle={textPrefixStyle || null}
       text={text || ''}
-      separator={separator || '：'}
+      separator={separator || ': '}
       separatorStyle={separatorStyle || null}
     />
   );
