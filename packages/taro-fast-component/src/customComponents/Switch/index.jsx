@@ -84,7 +84,14 @@ class Switch extends ComponentBase {
   };
 
   triggerChange = () => {
-    const { confirm } = this.props;
+    const { disabled: disabledSource, confirm } = this.props;
+    const { loading } = this.state;
+
+    const disabled = disabledSource || loading || false;
+
+    if (disabled) {
+      return;
+    }
 
     if (confirm) {
       this.confirmChange(confirm);

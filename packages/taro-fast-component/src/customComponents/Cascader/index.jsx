@@ -16,6 +16,7 @@ const defaultProps = {
   border: false,
   options: [],
   value: [],
+  afterChange: null,
 };
 
 class Cascader extends ComponentBase {
@@ -167,7 +168,7 @@ class Cascader extends ComponentBase {
   };
 
   triggerChange = (v, option) => {
-    const { onChange } = this.props;
+    const { afterChange } = this.props;
     const { valueStage, currentLevel } = this.state;
 
     const value = [...valueStage];
@@ -189,8 +190,8 @@ class Cascader extends ComponentBase {
         });
       }
 
-      if (isFunction(onChange)) {
-        onChange(value);
+      if (isFunction(afterChange)) {
+        afterChange(value);
       }
     }
   };
@@ -263,7 +264,7 @@ class Cascader extends ComponentBase {
             border={border}
             options={currentOptions}
             value={currentValue}
-            onChange={this.triggerChange}
+            afterChange={this.triggerChange}
           />
         </View>
       </View>
