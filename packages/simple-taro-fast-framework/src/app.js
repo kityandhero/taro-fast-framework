@@ -10,9 +10,7 @@ import './app.less';
 
 const config = {
   showLogInConsole: checkEnvIsDevelopment(),
-  // showLogInConsole: true,
-  showRequestInfo: checkEnvIsDevelopment(),
-  // showRequestInfo: true,
+  // showRequestInfo: checkEnvIsDevelopment(),
   showUseVirtualRequestMessage: false,
   apiPrefix: {
     corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',

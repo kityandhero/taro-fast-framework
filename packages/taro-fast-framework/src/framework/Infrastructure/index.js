@@ -51,10 +51,6 @@ class Infrastructure extends ComponentBase {
     Taro.navigateBack(params);
   }
 
-  getSystemInfoSync() {
-    return Taro.getSystemInfoSync();
-  }
-
   createSelectorQuery() {
     return Taro.createSelectorQuery();
   }

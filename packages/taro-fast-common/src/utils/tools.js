@@ -1,5 +1,18 @@
 import React from 'react';
-import Taro from '@tarojs/taro';
+import {
+  ENV_TYPE,
+  getApp,
+  getEnv,
+  getStorageSync,
+  setStorageSync,
+  removeStorageSync,
+  clearStorage,
+  setClipboardData,
+  createSelectorQuery,
+  getSystemInfoSync,
+  redirectTo as redirectToCore,
+  navigateTo as navigateToCore,
+} from '@tarojs/taro';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { stringify, parse } from 'qs';
@@ -76,12 +89,12 @@ export function getDefaultTaroGlobalData() {
 }
 
 export function getTaroGlobalData() {
-  const ENV = Taro.getEnv();
+  const ENV = getEnv();
 
   // 标签栏滚动
   switch (ENV) {
-    case Taro.ENV_TYPE.WEAPP:
-      const app = Taro.getApp();
+    case ENV_TYPE.WEAPP:
+      const app = getApp();
 
       if (isUndefined(app)) {
         return null;
@@ -89,15 +102,15 @@ export function getTaroGlobalData() {
 
       return app.$app.taroGlobalData;
 
-    case Taro.ENV_TYPE.ALIPAY:
+    case ENV_TYPE.ALIPAY:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
 
-    case Taro.ENV_TYPE.SWAN:
+    case ENV_TYPE.SWAN:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
 
-    case Taro.ENV_TYPE.WEB:
+    case ENV_TYPE.WEB:
       if (!window.taroGlobalData) {
         window.taroGlobalData = getDefaultTaroGlobalData();
       }
@@ -113,21 +126,21 @@ export function getTaroGlobalData() {
 }
 
 export function setTaroGlobalData(config) {
-  const ENV = Taro.getEnv();
+  const ENV = getEnv();
 
   // 标签栏滚动
   switch (ENV) {
-    case Taro.ENV_TYPE.WEAPP:
+    case ENV_TYPE.WEAPP:
       break;
 
-    case Taro.ENV_TYPE.ALIPAY:
+    case ENV_TYPE.ALIPAY:
       console.warn(`框架在该环境[${ENV}]还未适配`);
 
-    case Taro.ENV_TYPE.SWAN:
+    case ENV_TYPE.SWAN:
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
 
-    case Taro.ENV_TYPE.WEB:
+    case ENV_TYPE.WEB:
       if (!isObject(window.taroGlobalData)) {
         window.taroGlobalData = {};
       }
@@ -142,13 +155,13 @@ export function setTaroGlobalData(config) {
 }
 
 export function redirectTo(url) {
-  Taro.redirectTo({
+  redirectToCore({
     url,
   });
 }
 
 export function navigateTo(url) {
-  Taro.navigateTo({
+  navigateToCore({
     url,
   });
 }
@@ -189,7 +202,7 @@ export function getValue(obj) {
  * @param {*} showText
  */
 export function copyToClipboard({ text, successCallback = null }) {
-  Taro.setClipboardData({
+  setClipboardData({
     data: text,
     success: (res) => {
       if (isFunction(successCallback)) {
@@ -1319,7 +1332,7 @@ export function buildFieldDescription(v, op, other) {
  */
 export function getStringFromLocalStorage(key) {
   try {
-    const result = Taro.getStorageSync(key);
+    const result = getStorageSync(key);
 
     return result;
   } catch (e) {
@@ -1355,7 +1368,7 @@ export function getJsonFromLocalStorage(key) {
  * @param {*} value
  */
 export function saveStringToLocalStorage(key, value) {
-  Taro.setStorageSync(key, value);
+  setStorageSync(key, value);
 }
 
 /**
@@ -1365,7 +1378,7 @@ export function saveStringToLocalStorage(key, value) {
  * @param {*} value
  */
 export function saveJsonToLocalStorage(key, json) {
-  Taro.setStorageSync(key, JSON.stringify(json || {}));
+  setStorageSync(key, JSON.stringify(json || {}));
 }
 
 /**
@@ -1374,7 +1387,7 @@ export function saveJsonToLocalStorage(key, json) {
  * @param {*} key
  */
 export function removeLocalStorage(key) {
-  Taro.removeStorageSync(key);
+  removeStorageSync(key);
 }
 
 /**
@@ -1383,7 +1396,7 @@ export function removeLocalStorage(key) {
  * @param {*} key
  */
 export function clearLocalStorage() {
-  Taro.clearStorage();
+  clearStorage();
 }
 
 /**
@@ -1923,16 +1936,9 @@ export function sleep(n, callback) {
 
 export function getSystemInfo() {
   if (globalSystemInfo == null) {
-    globalSystemInfo = Taro.getSystemInfoSync();
+    globalSystemInfo = getSystemInfoSync();
   }
 
-  return globalSystemInfo;
-}
-
-export function getSystemInfoSync() {
-  if (globalSystemInfo == null) {
-    globalSystemInfo = Taro.getSystemInfoSync();
-  }
   return globalSystemInfo;
 }
 
@@ -1943,7 +1949,7 @@ export function requestAnimationFrame(callback) {
       callback();
     }, 33.333333333333336);
   }
-  return Taro.createSelectorQuery()
+  return createSelectorQuery()
     .selectViewport()
     .boundingClientRect()
     .exec(() => {
@@ -1951,11 +1957,9 @@ export function requestAnimationFrame(callback) {
     });
 }
 
-export function getRect(selector, context, target = null) {
+export function getRect(selector, context) {
   return new Promise((resolve) => {
-    const t = target == null ? Taro : target;
-
-    let query = t.createSelectorQuery();
+    let query = createSelectorQuery();
 
     if (context) {
       query = query.in(context);
@@ -1972,7 +1976,7 @@ export function getRect(selector, context, target = null) {
 
 export function getAllRect(selector, context) {
   return new Promise((resolve) => {
-    let query = Taro.createSelectorQuery();
+    let query = createSelectorQuery();
     if (context) {
       query = query.in(context);
     }
@@ -2143,7 +2147,7 @@ export function colorHexToRGB(color, symbol = 'RGB') {
 }
 
 export function handleTouchScroll(flag) {
-  if (Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
+  if (getEnv() !== ENV_TYPE.WEB) {
     return;
   }
 

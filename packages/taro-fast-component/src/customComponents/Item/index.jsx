@@ -70,11 +70,13 @@ class Item extends ComponentBase {
     const { body } = this.props;
 
     if (body != null) {
-      getRect(`#${this.bodyId}`).then((rect) => {
+      const that = this;
+
+      getRect(`#${that.bodyId}`).then((rect) => {
         const { height } = { ...{ height: 0 }, ...rect };
 
         if (height > 0) {
-          this.bodyHeight = height;
+          that.bodyHeight = height;
         }
       });
     }
@@ -118,15 +120,13 @@ class Item extends ComponentBase {
         <View
           className={classNames(`${classPrefix}-body`, {
             [`${classPrefix}-body__animate`]: bodyAnimate,
-            // [`${classPrefix}-body__open`]: showBody,
-            // [`${classPrefix}-body__close`]: !showBody,
           })}
           style={{
             ...bodyStyle,
             ...(showBody
               ? this.bodyHeight > 0
-                ? { maxHeight: this.bodyHeight }
-                : { maxHeight: 150 }
+                ? { maxHeight: `${this.bodyHeight}px` }
+                : { maxHeight: '150px' }
               : { maxHeight: 0 }),
           }}
         >
