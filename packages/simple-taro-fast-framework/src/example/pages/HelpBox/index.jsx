@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, HelpBox, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const list = [
@@ -25,15 +25,27 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="一般用法" headerStyle={cardHeaderStyle}>
+          <Card
+            header="一般用法"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox list={list} />
           </Card>
 
-          <Card header="隐藏标题" headerStyle={cardHeaderStyle}>
+          <Card
+            header="隐藏标题"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox list={list} showTitle={false} />
           </Card>
 
-          <Card header="不显示行号" headerStyle={cardHeaderStyle}>
+          <Card
+            header="不显示行号"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox
               title="操作说明"
               showTitle
@@ -42,11 +54,15 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="标题宽度" headerStyle={cardHeaderStyle}>
+          <Card
+            header="标题宽度"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox title="操作说明" showTitle labelWidth={80} list={list} />
           </Card>
 
-          <Card header="无背景" headerStyle={cardHeaderStyle}>
+          <Card header="无背景" style={cardStyle} headerStyle={cardHeaderStyle}>
             <HelpBox
               title="操作说明"
               showTitle
@@ -55,7 +71,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="隐藏" headerStyle={cardHeaderStyle}>
+          <Card header="隐藏" style={cardStyle} headerStyle={cardHeaderStyle}>
             <HelpBox title="操作说明" showTitle hidden list={list} />
           </Card>
         </Space>

@@ -8,7 +8,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = {
@@ -32,7 +32,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="默认布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="默认布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <View style={style}>
               <HorizontalCenterBox style={horizontalCenterBoxStyle}>
                 <View style={boxStyle}></View>
@@ -40,7 +44,11 @@ export default class Index extends PageWrapper {
             </View>
           </Card>
 
-          <Card header="不自动使用父级高度" headerStyle={cardHeaderStyle}>
+          <Card
+            header="不自动使用父级高度"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <View style={style}>
               <HorizontalCenterBox
                 style={horizontalCenterBoxStyle}
@@ -51,7 +59,11 @@ export default class Index extends PageWrapper {
             </View>
           </Card>
 
-          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <Card
+            header="属性说明 :"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox
               showTitle={false}
               list={[

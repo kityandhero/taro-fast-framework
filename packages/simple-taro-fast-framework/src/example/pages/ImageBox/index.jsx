@@ -9,7 +9,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { colStyle } from '@/customConfig/constants';
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -29,7 +29,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="普通使用" headerStyle={cardHeaderStyle}>
+          <Card
+            header="普通使用"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox src={src} />
@@ -37,7 +41,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="指定容器样式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="指定容器样式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox imageBoxStyle={imageContainerStyle} src={src} />
@@ -45,7 +53,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="showMode:loading" headerStyle={cardHeaderStyle}>
+          <Card
+            header="showMode:loading"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox showMode="loading" src={src} />
@@ -53,7 +65,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="showOverlay:true" headerStyle={cardHeaderStyle}>
+          <Card
+            header="showOverlay:true"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox showOverlay overlayText="售罄" src={src} />
@@ -61,7 +77,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="decoration" headerStyle={cardHeaderStyle}>
+          <Card
+            header="decoration"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox
@@ -76,6 +96,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="imageMode [取值等同于微信Image]"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap>
@@ -137,7 +158,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="圆形轮廓" headerStyle={cardHeaderStyle}>
+          <Card
+            header="圆形轮廓"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox circle src={src} />
@@ -145,7 +170,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="LazyLoad" headerStyle={cardHeaderStyle}>
+          <Card
+            header="LazyLoad"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox lazyLoad src={src} />
@@ -153,7 +182,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="指定长宽比" headerStyle={cardHeaderStyle}>
+          <Card
+            header="指定长宽比"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap>
               <View style={imageBoxContainerStyle}>
                 <ImageBox aspectRatio={0.5} src={src} />
@@ -165,7 +198,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="简单布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="简单布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <FlexBox
               flexAuto="right"
               left={

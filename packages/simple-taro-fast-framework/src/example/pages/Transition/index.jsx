@@ -7,12 +7,17 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
 
-const style = { backgroundColor: '#f5f7fa' };
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 export default class Index extends PageWrapper {
   constructor(props) {

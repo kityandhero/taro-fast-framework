@@ -7,7 +7,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const boxStyle = {
@@ -26,7 +26,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="布局展示" headerStyle={cardHeaderStyle}>
+          <Card
+            header="布局展示"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <View style={style}>
               <CenterBox style={style}>
                 <View style={boxStyle}></View>

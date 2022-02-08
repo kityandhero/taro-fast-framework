@@ -13,7 +13,7 @@ import {
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconCheckCircle } = Icon;
@@ -23,13 +23,21 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="横向布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="横向布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <ProgressItem label="当前进度" percent={20} extra="扩展" />
             </Space>
           </Card>
 
-          <Card header="纵向布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="纵向布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <ProgressItem
                 layout="vertical"
@@ -40,7 +48,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="横向布局示例" headerStyle={cardHeaderStyle}>
+          <Card
+            header="横向布局示例"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ProgressItem
               label="剩余数量"
               percent={70}
@@ -72,7 +84,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="纵向布局示例" headerStyle={cardHeaderStyle}>
+          <Card
+            header="纵向布局示例"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ProgressItem
               layout="vertical"
               label="剩余数量"
@@ -105,7 +121,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <Card
+            header="属性说明 :"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox
               showTitle={false}
               showNumber={false}

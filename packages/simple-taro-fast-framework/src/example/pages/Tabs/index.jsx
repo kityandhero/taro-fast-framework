@@ -9,7 +9,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconAdd } = Icon;
@@ -79,6 +79,7 @@ export default class Index extends PageWrapper {
           <Card
             header="基本用法"
             contentStyle={contentStyle}
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -127,6 +128,7 @@ export default class Index extends PageWrapper {
           <Card
             header="滚动标签栏"
             contentStyle={contentStyle}
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -216,6 +218,7 @@ export default class Index extends PageWrapper {
           <Card
             header="垂直模式"
             contentStyle={contentStyle}
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -331,6 +334,7 @@ export default class Index extends PageWrapper {
           <Card
             header="禁止内容切换动画"
             contentStyle={contentStyle}
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <Tabs

@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import { Card, Space } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const ItemList = [
@@ -48,7 +48,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="单选" headerStyle={cardHeaderStyle}>
+          <Card header="单选" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Selector
               options={ItemList}
               value={['1']}
@@ -56,7 +56,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="多选" headerStyle={cardHeaderStyle}>
+          <Card header="多选" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Selector
               options={ItemList}
               value={['2', '3']}
@@ -65,7 +65,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="全局禁止" headerStyle={cardHeaderStyle}>
+          <Card
+            header="全局禁止"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={ItemList}
               value={['1']}
@@ -74,7 +78,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="固定两列" headerStyle={cardHeaderStyle}>
+          <Card
+            header="固定两列"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               columns={2}
               options={ItemList}
@@ -84,7 +92,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="固定三列" headerStyle={cardHeaderStyle}>
+          <Card
+            header="固定三列"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               columns={3}
               options={ItemList}
@@ -94,11 +106,19 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="避免取消选择" headerStyle={cardHeaderStyle}>
+          <Card
+            header="避免取消选择"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <RadioMode />
           </Card>
 
-          <Card header="选项带描述" headerStyle={cardHeaderStyle}>
+          <Card
+            header="选项带描述"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               columns={2}
               options={[
@@ -117,7 +137,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="自定义样式（通过 style）" headerStyle={cardHeaderStyle}>
+          <Card
+            header="自定义样式（通过 style）"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               style={{ '--checked-color': '#ffe2e5' }}
               options={ItemList}
@@ -128,6 +152,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="自定义样式（通过 className）"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <Selector

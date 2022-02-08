@@ -9,7 +9,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconEdit } = Icon;
@@ -19,15 +19,27 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="一般用法" headerStyle={cardHeaderStyle}>
+          <Card
+            header="一般用法"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText textPrefix="前缀" text="文本文字" />
           </Card>
 
-          <Card header="自定义分隔符" headerStyle={cardHeaderStyle}>
+          <Card
+            header="自定义分隔符"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText textPrefix="前缀" separator="@" text="文本文字" />
           </Card>
 
-          <Card header="点击复制" headerStyle={cardHeaderStyle}>
+          <Card
+            header="点击复制"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               textPrefix="前缀"
               separator="@"
@@ -36,7 +48,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="点击复制并进行回调" headerStyle={cardHeaderStyle}>
+          <Card
+            header="点击复制并进行回调"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               textPrefix="前缀"
               separator="@"
@@ -48,11 +64,15 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="颜色" headerStyle={cardHeaderStyle}>
+          <Card header="颜色" style={cardStyle} headerStyle={cardHeaderStyle}>
             <ColorText textPrefix="前缀" text="文本文字" color="#e54321" />
           </Card>
 
-          <Card header="随机颜色" headerStyle={cardHeaderStyle}>
+          <Card
+            header="随机颜色"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               textPrefix="前缀"
               text="文本文字"
@@ -62,7 +82,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="前缀样式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="前缀样式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               textPrefix="前缀"
               text="文本文字"
@@ -70,14 +94,22 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="附带图标" headerStyle={cardHeaderStyle}>
+          <Card
+            header="附带图标"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               icon={<IconEdit size={36} color="#ff3ce7" />}
               text="文本文字"
             />
           </Card>
 
-          <Card header="附带图片" headerStyle={cardHeaderStyle}>
+          <Card
+            header="附带图片"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               icon={
                 <View style={{ width: transformSize(40) }}>
@@ -88,7 +120,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="分隔符样式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="分隔符样式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               textPrefix="前缀"
               text="文本文字"
@@ -99,7 +135,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="复杂样例" headerStyle={cardHeaderStyle}>
+          <Card
+            header="复杂样例"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ColorText
               icon={<IconEdit size={32} color="#ff3ce7" />}
               textPrefix="前缀"

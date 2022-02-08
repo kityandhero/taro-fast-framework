@@ -20,7 +20,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
@@ -71,7 +71,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="demo" headerStyle={cardHeaderStyle}>
+          <Card header="demo" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <Circle
                 style={{

@@ -12,7 +12,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import {
@@ -93,7 +93,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="Action" headerStyle={cardHeaderStyle}>
+          <Card header="Action" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Space wrap>
               {buildButton({
                 inner: 'Action',
@@ -134,7 +134,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="联动展示" headerStyle={cardHeaderStyle}>
+          <Card
+            header="联动展示"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Spin spin={!firstLoadSuccess}>
               <FadeView show={!dataLoading}>
                 <VerticalBox

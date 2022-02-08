@@ -2,14 +2,14 @@ import { View } from '@tarojs/components';
 
 import { Card, Space, Avatar } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <View className="index">
-        <Card header="Avatar" headerStyle={cardHeaderStyle}>
+        <Card header="Avatar" style={cardStyle} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Avatar circle text="头像" />
             <Avatar text="头像" />

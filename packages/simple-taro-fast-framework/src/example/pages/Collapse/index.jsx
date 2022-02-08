@@ -2,13 +2,15 @@ import { View } from '@tarojs/components';
 
 import { Card, Collapse } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
-// const style = {
-//   height: transformSize(400),
-//   backgroundColor: '#ccc',
-// };
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 export default class Index extends PageWrapper {
   renderFurther() {
@@ -17,7 +19,7 @@ export default class Index extends PageWrapper {
         <Card
           header="基本展示"
           headerStyle={cardHeaderStyle}
-          style={{ backgroundColor: '#fff' }}
+          style={style}
           space={false}
         >
           <Collapse

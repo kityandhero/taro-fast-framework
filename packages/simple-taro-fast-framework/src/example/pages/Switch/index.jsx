@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Switch, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 @connect(({ news, global }) => ({
@@ -52,15 +52,27 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="基础用法" headerStyle={cardHeaderStyle}>
+          <Card
+            header="基础用法"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Switch />
           </Card>
 
-          <Card header="异步调用" headerStyle={cardHeaderStyle}>
+          <Card
+            header="异步调用"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Switch onChange={this.changeStatus} />
           </Card>
 
-          <Card header="异步调用前确认" headerStyle={cardHeaderStyle}>
+          <Card
+            header="异步调用前确认"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Switch
               confirm={{
                 title: '状态变更',
@@ -74,15 +86,27 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="自定义颜色" headerStyle={cardHeaderStyle}>
+          <Card
+            header="自定义颜色"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Switch color="green" />
           </Card>
 
-          <Card header="隐藏模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="隐藏模式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Switch hidden />
           </Card>
 
-          <Card header="禁用模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="禁用模式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space>
               <Switch disabled />
 
@@ -90,11 +114,15 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="大小" headerStyle={cardHeaderStyle}>
+          <Card header="大小" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Switch size={1.5} />
           </Card>
 
-          <Card header="内嵌文字" headerStyle={cardHeaderStyle}>
+          <Card
+            header="内嵌文字"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space>
               <Switch checkedText="开" uncheckedText="关" />
               <Switch checkedText="1" uncheckedText="0" />
@@ -102,7 +130,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="操作后回调" headerStyle={cardHeaderStyle}>
+          <Card
+            header="操作后回调"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space>
               <Switch
                 afterChange={(value) => {

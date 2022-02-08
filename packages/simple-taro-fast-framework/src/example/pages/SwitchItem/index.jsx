@@ -9,7 +9,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch } = Icon;
@@ -62,16 +62,27 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="基础用法" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="基础用法"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem label="开关" />
           </Card>
 
-          <Card header="异步调用" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="异步调用"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem label="开关" onChange={this.changeStatus} />
           </Card>
 
           <Card
             header="异步调用前确认"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >
@@ -89,24 +100,49 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="颜色" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="颜色"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem label="开关" color="green" />
           </Card>
 
-          <Card header="隐藏状态" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="隐藏状态"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem label="开关" hidden />
           </Card>
 
-          <Card header="不可用" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="不可用"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem label="开关" disabled />
             <SwitchItem label="开关" checked disabled />
           </Card>
 
-          <Card header="大小" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="大小"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem label="开关" size={1.5} />
           </Card>
 
-          <Card header="内嵌文字" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="内嵌文字"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem
               label="二次校验开关"
               checkedText="开"
@@ -125,7 +161,12 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="复杂配置" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="复杂配置"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <SwitchItem
               prefix={<IconSketch size={36} />}
               title="这里是标题"

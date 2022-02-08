@@ -6,7 +6,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -14,23 +14,43 @@ export default class Index extends PageWrapper {
     const { value } = this.state;
 
     return (
-      <View className="index" headerStyle={cardHeaderStyle}>
+      <View className="index" style={cardStyle} headerStyle={cardHeaderStyle}>
         <Space direction="vertical" fillWidth>
-          <Card header="基础" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="基础"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem value={value} />
           </Card>
 
-          <Card header="Label" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="Label"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem value={value} label="用户名" />
             <InputItem value={value} label="密码" />
             <InputItem value={value} label="手机号" />
           </Card>
 
-          <Card header="Required" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="Required"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem value={value} label="用户名" required />
           </Card>
 
-          <Card header="labelStyle" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="labelStyle"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem
               label="用户名"
               value={value}
@@ -40,30 +60,52 @@ export default class Index extends PageWrapper {
 
           <Card
             header="Align Right"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >
             <InputItem label="用户名" value={value} align="right" />
           </Card>
 
-          <Card header="Clearable" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="Clearable"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem value={value} label="用户名" clearable />
           </Card>
 
-          <Card header="Hidden" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="Hidden"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem value={value} label="用户名" hidden />
           </Card>
 
-          <Card header="Extra" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="Extra"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem label="用户名" value={value} extra="扩展部分" />
           </Card>
 
-          <Card header="Password" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="Password"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem value={value} password label="密码" />
           </Card>
 
           <Card
             header="placeholder"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >
@@ -76,6 +118,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="placeholderStyle"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >
@@ -87,7 +130,12 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="disabled" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="disabled"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem
               label="用户名"
               value={value}
@@ -96,12 +144,18 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="maxlength" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="maxlength"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem label="用户名" value={value} maxlength={5} />
           </Card>
 
           <Card
             header="confirmType"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >
@@ -110,6 +164,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="afterChange"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >
@@ -124,7 +179,12 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="onFocus" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="onFocus"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem
               label="用户名"
               value={value}
@@ -134,7 +194,12 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="onBlur" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="onBlur"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem
               label="用户名"
               value={value}
@@ -144,7 +209,12 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="onConfirm" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="onConfirm"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <InputItem
               label="用户名"
               value={value}
@@ -156,6 +226,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="onKeyboardHeightChange"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
             space={false}
           >

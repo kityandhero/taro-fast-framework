@@ -8,7 +8,7 @@ import {
   Badge,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -16,7 +16,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="Badge Wrapper" headerStyle={cardHeaderStyle}>
+          <Card
+            header="Badge Wrapper"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space wrap style={{ '--gap': transformSize(24) }}>
               <Badge content="5">
                 <Avatar text="图" />
@@ -58,7 +62,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="Badge Only" headerStyle={cardHeaderStyle}>
+          <Card
+            header="Badge Only"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space style={{ '--gap': transformSize(24) }}>
               <Badge content="99+" />
 

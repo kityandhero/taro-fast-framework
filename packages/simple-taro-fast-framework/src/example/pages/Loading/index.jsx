@@ -7,10 +7,15 @@ import {
   ActivityIndicator,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
-const style = { backgroundColor: '#f5f7fa' };
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 export default class Index extends PageWrapper {
   renderFurther() {

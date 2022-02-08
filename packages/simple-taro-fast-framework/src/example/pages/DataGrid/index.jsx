@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const list = [
@@ -45,7 +45,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="布局展示 column : 2" headerStyle={cardHeaderStyle}>
+          <Card
+            header="布局展示 column : 2"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <DataGrid
               list={list}
               bordered
@@ -57,7 +61,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="布局展示 column : 3" headerStyle={cardHeaderStyle}>
+          <Card
+            header="布局展示 column : 3"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <DataGrid
               list={list}
               bordered={false}

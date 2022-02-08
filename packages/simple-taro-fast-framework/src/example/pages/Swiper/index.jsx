@@ -9,7 +9,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -17,7 +17,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="例子: 新闻标题上下滚动" headerStyle={cardHeaderStyle}>
+          <Card
+            header="例子: 新闻标题上下滚动"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             {buildSwiper({
               style: { height: transformSize(40) },
               vertical: true,
@@ -54,7 +58,11 @@ export default class Index extends PageWrapper {
             })}
           </Card>
 
-          <Card header="例子: 轮播图1" headerStyle={cardHeaderStyle}>
+          <Card
+            header="例子: 轮播图1"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             {buildSwiper({
               style: { height: transformSize(300) },
               // indicatorColor: '#999',
@@ -96,7 +104,11 @@ export default class Index extends PageWrapper {
             })}
           </Card>
 
-          <Card header="例子: 轮播图2" headerStyle={cardHeaderStyle}>
+          <Card
+            header="例子: 轮播图2"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             {buildSwiper({
               style: { height: transformSize(260) },
               previousMargin: transformSize(80),
@@ -141,7 +153,11 @@ export default class Index extends PageWrapper {
             })}
           </Card>
 
-          <Card header="例子: 轮播图3" headerStyle={cardHeaderStyle}>
+          <Card
+            header="例子: 轮播图3"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             {buildSwiper({
               style: { height: transformSize(140) },
               previousMargin: transformSize(80),

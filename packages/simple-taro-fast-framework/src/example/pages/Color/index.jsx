@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { Card, Space, Button } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -10,7 +10,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="颜色" headerStyle={cardHeaderStyle}>
+          <Card header="颜色" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button backgroundColor="var(--tfc-color-red)">red</Button>
               <Button backgroundColor="var(--tfc-color-orange)">orange</Button>
@@ -27,7 +27,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="浅色" headerStyle={cardHeaderStyle}>
+          <Card header="浅色" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button backgroundColor="var(--tfc-color-red-light)">
                 red-light
@@ -68,7 +68,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="渐变色" headerStyle={cardHeaderStyle}>
+          <Card header="渐变色" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button backgroundColor={['#f43f3b', ' #ec008c']}>
                 gradual-red

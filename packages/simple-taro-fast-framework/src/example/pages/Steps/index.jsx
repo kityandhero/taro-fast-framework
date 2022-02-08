@@ -8,7 +8,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { Step } = Steps;
@@ -19,7 +19,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="横向" headerStyle={cardHeaderStyle}>
+          <Card header="横向" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Steps current={1}>
               <Step title="标题1" description="描述" />
               <Step title="标题2" description="描述" />
@@ -27,7 +27,11 @@ export default class Index extends PageWrapper {
             </Steps>
           </Card>
 
-          <Card header="横向（失败状态）" headerStyle={cardHeaderStyle}>
+          <Card
+            header="横向（失败状态）"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Steps current={2}>
               <Step title="第一步" />
               <Step title="第二步" />
@@ -35,7 +39,7 @@ export default class Index extends PageWrapper {
             </Steps>
           </Card>
 
-          <Card header="纵向" headerStyle={cardHeaderStyle}>
+          <Card header="纵向" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Steps direction="vertical">
               <Step title="填写机构信息" status="process" />
               <Step title="签约机构" status="wait" />
@@ -43,7 +47,11 @@ export default class Index extends PageWrapper {
             </Steps>
           </Card>
 
-          <Card header="纵向（失败状态）" headerStyle={cardHeaderStyle}>
+          <Card
+            header="纵向（失败状态）"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Steps direction="vertical">
               <Step
                 title="填写机构信息"
@@ -64,7 +72,11 @@ export default class Index extends PageWrapper {
             </Steps>
           </Card>
 
-          <Card header="自定义图标和大小" headerStyle={cardHeaderStyle}>
+          <Card
+            header="自定义图标和大小"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Steps
               direction="vertical"
               current={1}

@@ -8,7 +8,7 @@ import {
   ActionSheet,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -58,7 +58,11 @@ export default class Index extends PageWrapper {
 
     return (
       <View className="index">
-        <Card header="ActionSheet" headerStyle={cardHeaderStyle}>
+        <Card
+          header="ActionSheet"
+          style={cardStyle}
+          headerStyle={cardHeaderStyle}
+        >
           <Space direction="vertical" fillWidth>
             <Button
               block

@@ -9,12 +9,17 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
-const style = { backgroundColor: '#f5f7fa' };
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const extraStyle = {
   padding: `0 ${transformSize(12)}`,

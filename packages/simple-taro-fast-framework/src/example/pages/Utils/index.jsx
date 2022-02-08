@@ -19,10 +19,15 @@ import {
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-const style = { backgroundColor: '#f5f7fa' };
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 export default class Index extends ContentPageBase {
   headerData = {

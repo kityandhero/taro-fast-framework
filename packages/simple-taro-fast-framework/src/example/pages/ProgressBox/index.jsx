@@ -10,7 +10,7 @@ import {
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconCheckCircle } = Icon;
@@ -49,7 +49,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="附带图标" headerStyle={cardHeaderStyle}>
+          <Card
+            header="附带图标"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <View>
                 <Button
@@ -81,13 +85,21 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="隐藏模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="隐藏模式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <ProgressBox hidden percent={percent} />
             </Space>
           </Card>
 
-          <Card header="复杂配置" headerStyle={cardHeaderStyle}>
+          <Card
+            header="复杂配置"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <ProgressBox
               percent={70}
               borderRadius={4}
@@ -100,7 +112,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <Card
+            header="属性说明 :"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox
               showTitle={false}
               showNumber={false}

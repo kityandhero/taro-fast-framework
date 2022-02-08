@@ -9,7 +9,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const { IconVolumePlus } = Icon;
@@ -20,7 +20,7 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="Icon" headerStyle={cardHeaderStyle}>
+          <Card header="Icon" style={cardStyle} headerStyle={cardHeaderStyle}>
             <NoticeBar icon={<IconVolumePlus size={38} />}>
               这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
               通告栏
@@ -29,6 +29,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="Closeable [single 模式非 marquee 下生效]"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar single closeable>
@@ -39,6 +40,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="Marquee [marquee 将自动启用 single 模式]"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar marquee>
@@ -49,6 +51,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="Extra [single 模式下生效]"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar
@@ -73,7 +76,11 @@ export default class Index extends PageWrapper {
             </NoticeBar>
           </Card>
 
-          <Card header="More [single 模式下生效]" headerStyle={cardHeaderStyle}>
+          <Card
+            header="More [single 模式下生效]"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <NoticeBar single extra={<More />}>
               这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
               通告栏
@@ -82,6 +89,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="MoreText [single 模式下生效]"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar
@@ -100,7 +108,7 @@ export default class Index extends PageWrapper {
             </NoticeBar>
           </Card>
 
-          <Card header="Simple" headerStyle={cardHeaderStyle}>
+          <Card header="Simple" style={cardStyle} headerStyle={cardHeaderStyle}>
             <NoticeBar
               icon={<IconVolumePlus size={38} />}
               marquee

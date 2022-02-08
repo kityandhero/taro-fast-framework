@@ -8,7 +8,7 @@ import {
   Line,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import './index.less';
@@ -18,7 +18,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="基本用法" headerStyle={cardHeaderStyle}>
+          <Card
+            header="基本用法"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space>
               {new Array(4).fill(null).map((_, index) => (
                 <Button key={index}>Button</Button>
@@ -26,7 +30,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="设定间隔" headerStyle={cardHeaderStyle}>
+          <Card
+            header="设定间隔"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space size={24}>
               {new Array(3).fill(null).map((_, index) => (
                 <Button key={index}>Button</Button>
@@ -34,7 +42,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="设定双向间隔" headerStyle={cardHeaderStyle}>
+          <Card
+            header="设定双向间隔"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space size={[8, 26]}>
               {new Array(4).fill(null).map((_, index) => (
                 <Button key={index}>Button</Button>
@@ -42,7 +54,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="设置方向" headerStyle={cardHeaderStyle}>
+          <Card
+            header="设置方向"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <VerticalBox>
               <Space direction="vertical" fillWidth>
                 <View className="space-align-block">
@@ -77,7 +93,11 @@ export default class Index extends PageWrapper {
             </VerticalBox>
           </Card>
 
-          <Card header="自动换行" headerStyle={cardHeaderStyle}>
+          <Card
+            header="自动换行"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space size={[8, 16]} wrap>
               {new Array(20).fill(null).map((_, index) => (
                 <Button key={index}>Button</Button>
@@ -85,7 +105,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="垂直模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="垂直模式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               {new Array(3).fill(null).map((_, index) => (
                 <Button key={index} block color="primary" size="large">
@@ -95,7 +119,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="自定义间隔" headerStyle={cardHeaderStyle}>
+          <Card
+            header="自定义间隔"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space split={<Line direction="vertical" width={2} height={40} />}>
               {new Array(3).fill(null).map((_, index) => (
                 <Button key={index}>Button</Button>

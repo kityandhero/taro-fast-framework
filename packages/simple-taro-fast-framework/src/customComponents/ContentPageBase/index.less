@@ -1,58 +1,43 @@
-.color-list {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
+.doc-body {
+  min-height: calc(100vh - var(--tfc-180));
+  background: #fff;
+  box-shadow: 0 var(--tfc-26) var(--tfc-163) 0 rgba(0, 0, 0, 11%);
+  padding: var(--tfc-20) var(--tfc-20)
+    calc(env(safe-area-inset-bottom) + var(--tfc-60)) var(--tfc-20);
 
-.color-item {
-  margin-bottom: 40px;
-  width: 33%;
-  text-align: center;
+  .panel {
+    margin: var(--tfc-32) 0 var(--tfc-56);
 
-  &__circle {
-    position: relative;
-    margin: 0 auto;
-    width: 150px;
-    height: 150px;
-    background: #78a4fa;
-    border-radius: 50%;
+    &__title {
+      position: relative;
+      margin-bottom: var(--tfc-50);
+      padding-left: var(--tfc-50);
+      color: #6a6a77;
+      font-size: var(--tfc-32);
+      font-weight: bold;
+      line-height: 1.5;
 
-    .inner-circle-1 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -50px;
-      margin-top: -50px;
-      width: 100px;
-      height: 100px;
-      background: #fff;
-      border-radius: 50%;
+      &::before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        left: var(--tfc-24);
+        top: 50%;
+        margin-top: calc(var(--tfc-20) * -1);
+        width: var(--tfc-2);
+        height: var(--tfc-40);
+        background-color: #6190e8;
+        box-shadow: 0 var(--tfc-7) var(--tfc-12) 0 rgba(97, 144, 232, 20%);
+        border-radius: var(--tfc-1);
+      }
     }
 
-    .inner-circle-2 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -32px;
-      margin-top: -32px;
-      width: 64px;
-      height: 64px;
-      border: 1px solid #78a4fa;
-      border-radius: 50%;
-      opacity: 0.3;
-    }
-  }
+    &__content {
+      padding: 0 var(--tfc-20);
 
-  &__info {
-    margin-top: 20px;
-    color: #88889c;
-    font-size: 20px;
-    text-align: center;
-
-    .name,
-    .hex {
-      display: block;
+      &.no-padding {
+        padding: 0;
+      }
     }
   }
 }

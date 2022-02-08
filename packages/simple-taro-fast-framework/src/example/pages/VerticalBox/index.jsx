@@ -9,7 +9,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const style = {
@@ -93,7 +93,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="单元素布局展示" headerStyle={cardHeaderStyle}>
+          <Card
+            header="单元素布局展示"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <View style={style}>
               <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
                 <View style={boxStyle}></View>
@@ -101,7 +105,11 @@ export default class Index extends PageWrapper {
             </View>
           </Card>
 
-          <Card header="多元素布局展示" headerStyle={cardHeaderStyle}>
+          <Card
+            header="多元素布局展示"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <View style={style}>
               <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
                 <View style={boxStyle}></View>
@@ -111,7 +119,11 @@ export default class Index extends PageWrapper {
             </View>
           </Card>
 
-          <Card header="变更align" headerStyle={cardHeaderStyle}>
+          <Card
+            header="变更align"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={alignList}
               value={align}
@@ -119,7 +131,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="变更alignJustify" headerStyle={cardHeaderStyle}>
+          <Card
+            header="变更alignJustify"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={alignJustifyList}
               value={alignJustify}
@@ -127,7 +143,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <Card
+            header="属性说明 :"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox
               showTitle={false}
               list={[

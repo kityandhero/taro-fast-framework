@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { roundToTarget, getGuid } from 'taro-fast-common/es/utils/tools';
 import { Cascader, Card, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const options = [
@@ -199,7 +199,12 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="demo" headerStyle={cardHeaderStyle} space={false}>
+          <Card
+            header="demo"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
             <Cascader
               value={[
                 options[2].value,

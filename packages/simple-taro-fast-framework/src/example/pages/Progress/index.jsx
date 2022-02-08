@@ -9,7 +9,7 @@ import {
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class Index extends PageWrapper {
@@ -46,7 +46,11 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="进度动画" headerStyle={cardHeaderStyle}>
+          <Card
+            header="进度动画"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <View>
                 <Button
@@ -76,13 +80,21 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="隐藏模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="隐藏模式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <Progress hidden percent={percent} />
             </Space>
           </Card>
 
-          <Card header="指定线条宽度" headerStyle={cardHeaderStyle}>
+          <Card
+            header="指定线条宽度"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Space direction="vertical" fillWidth>
               <Progress percent={50} strokeWidth={4} fontSize={20} />
               <Progress percent={75} strokeWidth={8} />
@@ -90,11 +102,19 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="展示动画" headerStyle={cardHeaderStyle}>
+          <Card
+            header="展示动画"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Progress percent={70} animation />
           </Card>
 
-          <Card header="指定颜色" headerStyle={cardHeaderStyle}>
+          <Card
+            header="指定颜色"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Progress
               percent={70}
               borderRadius={12}
@@ -103,7 +123,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="渐变色" headerStyle={cardHeaderStyle}>
+          <Card header="渐变色" style={cardStyle} headerStyle={cardHeaderStyle}>
             <Progress
               percent={70}
               animation
@@ -111,19 +131,35 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="直角模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="直角模式"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Progress percent={30} useBorderRadius={false} />
           </Card>
 
-          <Card header="显示百分比" headerStyle={cardHeaderStyle}>
+          <Card
+            header="显示百分比"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Progress percent={50} showInfo />
           </Card>
 
-          <Card header="百分比字体大小" headerStyle={cardHeaderStyle}>
+          <Card
+            header="百分比字体大小"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Progress percent={50} showInfo fontSize={20} />
           </Card>
 
-          <Card header="复杂配置" headerStyle={cardHeaderStyle}>
+          <Card
+            header="复杂配置"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <Progress
               percent={70}
               borderRadius={12}
@@ -136,7 +172,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <Card
+            header="属性说明 :"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <HelpBox
               showTitle={false}
               showNumber={false}

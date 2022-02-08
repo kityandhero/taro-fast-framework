@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, FlexBox, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 const boxStyle = {
@@ -22,18 +22,30 @@ export default class Index extends PageWrapper {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="仅左侧布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="仅左侧布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <FlexBox left={<View style={boxStyle}></View>} />
           </Card>
 
-          <Card header="左侧自适应布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="左侧自适应布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <FlexBox
               left={<View style={autoStyle}></View>}
               right={<View style={boxStyle}></View>}
             />
           </Card>
 
-          <Card header="右侧自适应布局" headerStyle={cardHeaderStyle}>
+          <Card
+            header="右侧自适应布局"
+            style={cardStyle}
+            headerStyle={cardHeaderStyle}
+          >
             <FlexBox
               flexAuto="right"
               left={<View style={boxStyle}></View>}
@@ -43,6 +55,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="上下自适应布局 , 下部固定高度"
+            style={cardStyle}
             headerStyle={cardHeaderStyle}
           >
             <FlexBox
