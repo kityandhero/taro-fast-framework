@@ -3,6 +3,34 @@ export const pathCollection = {
     page: 'pages/home/main/index',
     path: '/pages/home/main/index',
   },
+  basic: {
+    page: 'pages/basic/index',
+    path: '/example/pages/basic/index',
+  },
+  view: {
+    page: 'pages/view/index',
+    path: '/example/pages/view/index',
+  },
+  action: {
+    page: 'pages/action/index',
+    path: '/example/pages/action/index',
+  },
+  form: {
+    page: 'pages/form/index',
+    path: '/example/pages/form/index',
+  },
+  layout: {
+    page: 'pages/layout/index',
+    path: '/example/pages/layout/index',
+  },
+  navigation: {
+    page: 'pages/navigation/index',
+    path: '/example/pages/navigation/index',
+  },
+  advanced: {
+    page: 'pages/advanced/index',
+    path: '/example/pages/advanced/index',
+  },
   ellipsis: {
     page: 'pages/ellipsis/index',
     path: '/example/pages/ellipsis/index',
@@ -246,6 +274,7 @@ export default {
       root: 'example',
       name: '组件示例',
       pages: [
+        pathCollection.basic.page,
         pathCollection.ellipsis.page,
         pathCollection.price.page,
         pathCollection.colorText.page,

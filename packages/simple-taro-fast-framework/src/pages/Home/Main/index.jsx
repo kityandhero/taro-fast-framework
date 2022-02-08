@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components';
 import { Fragment } from 'react';
+import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
@@ -7,6 +7,8 @@ import {
   Card,
   Item,
   Space,
+  ImageBox,
+  Icon,
 } from 'taro-fast-component/es/customComponents';
 
 import {
@@ -14,6 +16,71 @@ import {
   cardHeaderStyle,
 } from '../../../customConfig/constants';
 import PageWrapper from '../../../customComponents/PageWrapper';
+
+import iconAction from '../../../assets/images/icon-list-action.png';
+import iconBasic from '../../../assets/images/icon-list-basic.png';
+import iconForm from '../../../assets/images/icon-list-form.png';
+import iconHOC from '../../../assets/images/icon-list-hoc.png';
+import iconLayout from '../../../assets/images/icon-list-layout.png';
+import iconNavigation from '../../../assets/images/icon-list-navigation.png';
+import iconView from '../../../assets/images/icon-list-view.png';
+import logoImg from '../../../assets/images/logo.png';
+
+import './index.less';
+
+const { IconChevronRight } = Icon;
+
+const listData = [
+  {
+    id: 'Basic',
+    title: '基础',
+    content: '包含颜色、文本、图标等',
+    icon: iconBasic,
+    path: pathCollection.basic.path,
+  },
+  {
+    id: 'View',
+    title: '视图',
+    content: '包含通告栏、标签、徽标等',
+    icon: iconView,
+    path: pathCollection.view.path,
+  },
+  {
+    id: 'Action',
+    title: '操作反馈',
+    content: '包含对话框、进度条、动作面板等',
+    icon: iconAction,
+    path: pathCollection.action.path,
+  },
+  {
+    id: 'Form',
+    title: '表单',
+    content: '包含输入框、单选框、复选框等',
+    icon: iconForm,
+    path: pathCollection.form.path,
+  },
+  {
+    id: 'Layout',
+    title: '布局',
+    content: '包含列表、浮层、卡片等',
+    icon: iconLayout,
+    path: pathCollection.layout.path,
+  },
+  {
+    id: 'Navigation',
+    title: '导航',
+    content: '包含标签栏、导航栏、分段器等',
+    icon: iconNavigation,
+    path: pathCollection.navigation.path,
+  },
+  {
+    id: 'Advanced',
+    title: '高阶组件',
+    content: '包含日历等',
+    icon: iconHOC,
+    path: pathCollection.advanced.path,
+  },
+];
 
 export default class Index extends PageWrapper {
   buildList = (list) => {
@@ -65,6 +132,43 @@ export default class Index extends PageWrapper {
     // }
 
     // console.log(r);
+
+    return (
+      <View className="page page-index">
+        <CenterBox>
+          <View className="logo">
+            <ImageBox src={logoImg} />
+          </View>
+        </CenterBox>
+        <View className="page-title">Taro-Fast-Framework</View>
+        <View className="module-list">
+          {listData.map((item, index) => (
+            <View
+              className="module-list__item"
+              key={index}
+              onClick={() => {
+                this.navigateTo({
+                  url: item.path,
+                });
+              }}
+            >
+              <View className="module-list__icon">
+                <View className="img">
+                  <ImageBox src={item.icon} />
+                </View>
+              </View>
+              <View className="module-list__info">
+                <View className="title">{item.title}</View>
+                <View className="content">{item.content}</View>
+              </View>
+              <View className="module-list__arrow">
+                <IconChevronRight size={36} />
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+    );
 
     return (
       <View className="index">

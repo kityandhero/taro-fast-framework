@@ -1,0 +1,26 @@
+.doc-header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--tfc-60);
+  height: var(--tfc-180);
+
+  &__title {
+    position: relative;
+    height: var(--tfc-90);
+    color: #333;
+    font-size: var(--tfc-40);
+    font-weight: bold;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: inline-block;
+      width: var(--tfc-120);
+      height: var(--tfc-2);
+      border-radius: var(--tfc-1);
+      background-color: #6190e8;
+    }
+  }
+}

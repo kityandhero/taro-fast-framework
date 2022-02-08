@@ -20,11 +20,16 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const style = { backgroundColor: '#f5f7fa' };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Util',
+    name: '功能函数',
+  };
+
   constructor(props) {
     super(props);
 
@@ -49,7 +54,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
@@ -313,5 +318,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }
