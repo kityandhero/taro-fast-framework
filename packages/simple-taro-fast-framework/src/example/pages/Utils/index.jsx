@@ -35,30 +35,6 @@ export default class Index extends ContentPageBase {
     name: '功能函数',
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        align: ['top'],
-        alignJustify: ['start'],
-      },
-    };
-  }
-
-  setAlignChecked = (value) => {
-    this.setState({
-      align: value,
-    });
-  };
-
-  setAlignJustifyChecked = (value) => {
-    this.setState({
-      alignJustify: value,
-    });
-  };
-
   renderContent = () => {
     return (
       <View className="index">
@@ -296,6 +272,9 @@ export default class Index extends ContentPageBase {
                 showNumber={false}
                 list={[
                   {
+                    text: 'text:使用此函数用以保证双端渲染一致',
+                  },
+                  {
                     text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
                   },
                   {
@@ -318,6 +297,40 @@ export default class Index extends ContentPageBase {
               label="12345678"
               border={false}
               extra={replaceTargetText('12345678', '*****', 2, 2)}
+            />
+          </Card>
+
+          <Card
+            header="使用内置像素变量"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
+            extra="transformSize"
+            footer={
+              <HelpBox
+                showTitle={false}
+                showNumber={false}
+                list={[
+                  {
+                    text: '--tfc-1 ~ --tfc-2000 为内置css变量,小程序环境编译后单位为rpx,H5为rem',
+                  },
+                  {
+                    text: '1000 ~ 2000 之间,步长为10',
+                  },
+                  {
+                    text: '未在此数值范围之内的将输出px为单位的结,例如 2300px',
+                  },
+                  {
+                    text: '参数为非数字情况, 将按照参数值原样输出',
+                  },
+                ]}
+              />
+            }
+          >
+            <Item
+              label="transformSize(1)"
+              border={false}
+              extra="执行结果: --tfc-1"
             />
           </Card>
         </Space>

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Color',
+  navigationBarTitleText: '颜色',
 };

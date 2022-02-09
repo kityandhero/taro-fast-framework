@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Utils',
+  navigationBarTitleText: '功能函数',
 };

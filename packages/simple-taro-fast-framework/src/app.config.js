@@ -251,9 +251,17 @@ export const pathCollection = {
     page: 'pages/line/index',
     path: '/example/pages/line/index',
   },
+  icon: {
+    page: 'pages/icon/index',
+    path: '/example/pages/icon/index',
+  },
   color: {
     page: 'pages/color/index',
     path: '/example/pages/color/index',
+  },
+  cssVariable: {
+    page: 'pages/cssVariable/index',
+    path: '/example/pages/cssVariable/index',
   },
   utils: {
     page: 'pages/utils/index',
@@ -329,7 +337,9 @@ export default {
         pathCollection.loading.page,
         pathCollection.collapse.page,
         pathCollection.line.page,
+        pathCollection.icon.page,
         pathCollection.color.page,
+        pathCollection.cssVariable.page,
         pathCollection.utils.page,
       ],
     },

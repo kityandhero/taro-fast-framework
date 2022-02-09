@@ -28,7 +28,7 @@ export default class Index extends ContentPageBase {
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
-            header="颜色"
+            header="像素变量"
             style={style}
             headerStyle={cardHeaderStyle}
             footer={
@@ -37,28 +37,14 @@ export default class Index extends ContentPageBase {
                 showNumber={false}
                 list={[
                   {
-                    text: '内置CSS变量举例: --tfc-color-red',
-                  },
-                  {
-                    text: '使用举例: {color:var(--tfc-color-red)}',
+                    text: '1000 ~ 2000 之间,步长变更为10',
                   },
                 ]}
               />
             }
           >
             <Space wrap>
-              <Button backgroundColor="var(--tfc-color-red)">red</Button>
-              <Button backgroundColor="var(--tfc-color-orange)">orange</Button>
-              <Button backgroundColor="var(--tfc-color-yellow)">yellow</Button>
-              <Button backgroundColor="var(--tfc-color-olive)">olive</Button>
-              <Button backgroundColor="var(--tfc-color-green)">green</Button>
-              <Button backgroundColor="var(--tfc-color-cyan)">cyan</Button>
-              <Button backgroundColor="var(--tfc-color-blue)">blue</Button>
-              <Button backgroundColor="var(--tfc-color-purple)">purple</Button>
-              <Button backgroundColor="var(--tfc-color-pink)">pink</Button>
-              <Button backgroundColor="var(--tfc-color-brown)">brown</Button>
-              <Button backgroundColor="var(--tfc-color-grey)">grey</Button>
-              <Button backgroundColor="var(--tfc-color-black)">black</Button>
+              <View>--tfc-1 ~ --tfc-2000</View>
             </Space>
           </Card>
 

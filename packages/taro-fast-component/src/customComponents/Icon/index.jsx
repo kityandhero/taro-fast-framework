@@ -2,6 +2,7 @@ import { attachPropertiesToComponent } from 'taro-fast-common/es/utils/tools';
 
 import Icon from './icon';
 import {
+  buildIcon,
   IconAdd,
   IconAddCircle,
   IconAlertCircle,
@@ -105,6 +106,7 @@ import {
 import './index.less';
 
 export default attachPropertiesToComponent(Icon, {
+  buildIcon,
   IconAdd,
   IconAddCircle,
   IconAlertCircle,
