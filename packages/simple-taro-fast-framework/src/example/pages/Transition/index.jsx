@@ -153,12 +153,13 @@ export default class Index extends ContentPageBase {
           </Card>
 
           <Transition
-            showTransition={showTransition}
+            show={showTransition}
             name={name}
             className="block"
           ></Transition>
+
           <Transition
-            showTransition={showTransitionCustom}
+            show={showTransitionCustom}
             name=""
             duration={{
               enter: 300,
