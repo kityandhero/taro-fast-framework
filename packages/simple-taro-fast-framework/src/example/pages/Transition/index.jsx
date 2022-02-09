@@ -31,9 +31,9 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        show: false,
+        showTransition: false,
         name: 'fade',
-        showCustom: false,
+        showTransitionCustom: false,
       },
     };
   }
@@ -83,17 +83,17 @@ export default class Index extends ContentPageBase {
   };
 
   trigger = (name) => {
-    this.setState({ name, show: true });
+    this.setState({ name, showTransition: true });
     setTimeout(() => {
-      this.setState({ show: false });
+      this.setState({ showTransition: false });
     }, 500);
   };
 
   onClickCustom = () => {
-    this.setState({ showCustom: true });
+    this.setState({ showTransitionCustom: true });
 
     setTimeout(() => {
-      this.setState({ showCustom: false });
+      this.setState({ showTransitionCustom: false });
     }, 1000);
   };
 
@@ -122,7 +122,7 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { show, name, showCustom } = this.state;
+    const { showTransition, name, showTransitionCustom } = this.state;
 
     return (
       <View className="index">
@@ -152,9 +152,13 @@ export default class Index extends ContentPageBase {
             />
           </Card>
 
-          <Transition show={show} name={name} className="block"></Transition>
           <Transition
-            show={showCustom}
+            showTransition={showTransition}
+            name={name}
+            className="block"
+          ></Transition>
+          <Transition
+            showTransition={showTransitionCustom}
             name=""
             duration={{
               enter: 300,
