@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'ColorText',
+  navigationBarTitleText: '文字渲染',
 };

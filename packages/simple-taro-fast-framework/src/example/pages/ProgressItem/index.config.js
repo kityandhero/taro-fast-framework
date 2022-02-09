@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'ProgressItem',
+  navigationBarTitleText: '进度项',
 };

@@ -4,24 +4,32 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Space, Tag } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Tag',
+    name: '标签',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="基本用法"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="基本用法" style={style} headerStyle={cardHeaderStyle}>
             <Tag>123</Tag>
           </Card>
 
           <Card
             header="默认提供 5 种通用标签颜色"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space>
@@ -33,22 +41,14 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="自定义颜色"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="自定义颜色" style={style} headerStyle={cardHeaderStyle}>
             <Space>
               <Tag color="#2db7f5">#2db7f5</Tag>
               <Tag color="#87d068">#87d068</Tag>
               <Tag color="#108ee9">#108ee9</Tag>
             </Space>
           </Card>
-          <Card
-            header="线框填充"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="线框填充" style={style} headerStyle={cardHeaderStyle}>
             <Space>
               <Tag color="primary" fill="outline">
                 Primary
@@ -62,13 +62,13 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="圆角" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="圆角" style={style} headerStyle={cardHeaderStyle}>
             <Tag shape="circle" color="#2db7f5">
               circle
             </Tag>
           </Card>
 
-          <Card header="半圆角" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="半圆角" style={style} headerStyle={cardHeaderStyle}>
             <Space>
               <Tag shape="circleLeft" color="#2db7f5">
                 circle left
@@ -80,15 +80,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="hidden" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="hidden" style={style} headerStyle={cardHeaderStyle}>
             <Tag hidden>hidden</Tag>
           </Card>
 
-          <Card
-            header="onClick"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="onClick" style={style} headerStyle={cardHeaderStyle}>
             <Space>
               <Tag
                 color="default"
@@ -103,11 +99,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="可以关闭"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="可以关闭" style={style} headerStyle={cardHeaderStyle}>
             <Space>
               <Tag
                 color="default"
@@ -148,7 +140,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="通过 CSS 变量进行个性化"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space>
@@ -184,5 +176,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

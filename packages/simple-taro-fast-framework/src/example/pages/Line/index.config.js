@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Line',
+  navigationBarTitleText: '线条',
 };

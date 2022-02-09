@@ -3,9 +3,21 @@ import { View } from '@tarojs/components';
 import { Card, Space, Button } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Notification',
+    name: '通知',
+  };
+
   handleClick = (type) => {
     this.bannerNotify({
       message: '消息通知',
@@ -13,15 +25,11 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="块级按钮"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="触发通知" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <Button
                 block
@@ -67,5 +75,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

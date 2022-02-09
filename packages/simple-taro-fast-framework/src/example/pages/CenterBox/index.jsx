@@ -8,7 +8,14 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const boxStyle = {
   width: transformSize(80),
@@ -16,23 +23,24 @@ const boxStyle = {
   backgroundColor: 'blue',
 };
 
-const style = {
+const containorStyle = {
   height: transformSize(400),
   backgroundColor: '#ccc',
 };
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'CenterBox',
+    name: '容器居中',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="布局展示"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
-            <View style={style}>
-              <CenterBox style={style}>
+          <Card header="布局展示" style={style} headerStyle={cardHeaderStyle}>
+            <View style={containorStyle}>
+              <CenterBox style={containorStyle}>
                 <View style={boxStyle}></View>
               </CenterBox>
             </View>
@@ -40,5 +48,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

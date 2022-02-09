@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Transition',
+  navigationBarTitleText: '变换动画',
 };

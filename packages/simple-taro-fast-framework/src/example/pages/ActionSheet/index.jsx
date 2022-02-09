@@ -9,9 +9,21 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'ActionSheet',
+    name: '动作面板',
+  };
+
   constructor(props) {
     super(props);
 
@@ -53,16 +65,12 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { visible1, visible2, visible3 } = this.state;
 
     return (
       <View className="index">
-        <Card
-          header="ActionSheet"
-          style={cardStyle}
-          headerStyle={cardHeaderStyle}
-        >
+        <Card header="打开面板" style={style} headerStyle={cardHeaderStyle}>
           <Space direction="vertical" fillWidth>
             <Button
               block
@@ -189,5 +197,5 @@ export default class Index extends PageWrapper {
         />
       </View>
     );
-  }
+  };
 }

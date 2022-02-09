@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'RadioSelector',
+  navigationBarTitleText: '弹出式单选',
 };

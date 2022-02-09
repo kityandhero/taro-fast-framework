@@ -14,9 +14,21 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Countdown',
+    name: '倒计时',
+  };
+
   onTimeUp = () => {
     Taro.showToast({
       title: '时间到',
@@ -25,15 +37,11 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="一般用法"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="一般用法" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <View>
                 <Countdown endTime={addMinute(getNow(), 15)} />
@@ -55,7 +63,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="自定义格式化"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space direction="vertical" fillWidth>
@@ -68,7 +76,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="卡片式" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="卡片式" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <View>
                 <Countdown
@@ -83,7 +91,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="卡片式自定义"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space direction="vertical" fillWidth>
@@ -101,11 +109,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="卡片填充式"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="卡片填充式" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <View>
                 <Countdown
@@ -121,7 +125,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="卡片填充式自定义"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space direction="vertical" fillWidth>
@@ -142,7 +146,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="自定义倒计时回调事件"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space direction="vertical" fillWidth>
@@ -158,5 +162,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

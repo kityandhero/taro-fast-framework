@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Item',
+  navigationBarTitleText: '条目项',
 };

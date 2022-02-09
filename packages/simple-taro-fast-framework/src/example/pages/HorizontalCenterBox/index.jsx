@@ -9,9 +9,16 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+const containorStyle = {
   border: `${transformSize(2)} solid #ccc`,
   height: transformSize(200),
 };
@@ -27,17 +34,18 @@ const horizontalCenterBoxStyle = {
   backgroundColor: '#ccc',
 };
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'HorizontalCenterBox',
+    name: '水平居中',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="默认布局"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
-            <View style={style}>
+          <Card header="默认布局" style={style} headerStyle={cardHeaderStyle}>
+            <View style={containorStyle}>
               <HorizontalCenterBox style={horizontalCenterBoxStyle}>
                 <View style={boxStyle}></View>
               </HorizontalCenterBox>
@@ -46,10 +54,10 @@ export default class Index extends PageWrapper {
 
           <Card
             header="不自动使用父级高度"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
-            <View style={style}>
+            <View style={containorStyle}>
               <HorizontalCenterBox
                 style={horizontalCenterBoxStyle}
                 fillHeight={false}
@@ -59,11 +67,7 @@ export default class Index extends PageWrapper {
             </View>
           </Card>
 
-          <Card
-            header="属性说明 :"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
             <HelpBox
               showTitle={false}
               list={[
@@ -79,5 +83,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

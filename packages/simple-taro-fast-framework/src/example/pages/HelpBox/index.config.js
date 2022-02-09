@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'HelpBox',
+  navigationBarTitleText: '帮助提示',
 };

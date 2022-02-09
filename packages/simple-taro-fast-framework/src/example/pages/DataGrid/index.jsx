@@ -4,7 +4,14 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const list = [
   {
@@ -40,15 +47,21 @@ const list = [
   },
 ];
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'DataGrid',
+    name: '数据表格',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
-            header="布局展示 column : 2"
-            style={cardStyle}
+            header="布局展示"
+            style={style}
             headerStyle={cardHeaderStyle}
+            extra="2列"
           >
             <DataGrid
               list={list}
@@ -62,9 +75,10 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="布局展示 column : 3"
-            style={cardStyle}
+            header="布局展示"
+            style={style}
             headerStyle={cardHeaderStyle}
+            extra="3列"
           >
             <DataGrid
               list={list}
@@ -79,5 +93,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

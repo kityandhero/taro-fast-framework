@@ -9,7 +9,7 @@ import {
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 import './index.less';
 
@@ -86,7 +86,12 @@ const scrollList = [
   },
 ];
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Popup',
+    name: '弹出面板',
+  };
+
   constructor(props) {
     super(props);
 
@@ -231,7 +236,7 @@ export default class Index extends PageWrapper {
     this.toggle('customIconPosition', false);
   };
 
-  renderFurther() {
+  renderContent = () => {
     const {
       show,
       arcTop,
@@ -275,10 +280,11 @@ export default class Index extends PageWrapper {
               onClick={this.showRight}
               headerStyle={cardHeaderStyle}
               space={false}
+              border={false}
             />
           </Card>
 
-          <Card header="变更上圆角" headerStyle={cardHeaderStyle}>
+          <Card header="变更上圆角" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={arcTopList}
               value={arcTop}
@@ -286,7 +292,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="变更下圆角" headerStyle={cardHeaderStyle}>
+          <Card header="变更下圆角" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={arcBottomList}
               value={arcBottom}
@@ -294,11 +300,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="变更模式" headerStyle={cardHeaderStyle}>
+          <Card header="变更模式" style={style} headerStyle={cardHeaderStyle}>
             <Selector options={modeList} value={mode} onChange={this.setMode} />
           </Card>
 
-          <Card header="关闭按钮" headerStyle={cardHeaderStyle}>
+          <Card header="关闭按钮" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={showCloseList}
               value={showClose}
@@ -306,7 +312,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="点击遮罩关闭面板" headerStyle={cardHeaderStyle}>
+          <Card
+            header="点击遮罩关闭面板"
+            style={style}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={closeWhenOverlayClickList}
               value={closeWhenOverlayClick}
@@ -314,7 +324,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="显示区域容器" headerStyle={cardHeaderStyle}>
+          <Card
+            header="显示区域容器"
+            style={style}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={scrollList}
               value={scrollData}
@@ -399,5 +413,5 @@ export default class Index extends PageWrapper {
         </Popup>
       </View>
     );
-  }
+  };
 }

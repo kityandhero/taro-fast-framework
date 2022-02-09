@@ -10,7 +10,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
@@ -28,7 +28,12 @@ const extraStyle = {
   backgroundColor: '#f5f7fa',
 };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'CheckBox',
+    name: '复选',
+  };
+
   constructor(props) {
     super(props);
 
@@ -83,7 +88,7 @@ export default class Index extends PageWrapper {
             value: 'option1',
             title: '选项的标题',
             description: '复选项的简介描述',
-            prefix: <IconShoppingCart />,
+            prefix: <IconShoppingCart size={34} />,
             extra: '扩展说明',
           },
           {
@@ -91,7 +96,7 @@ export default class Index extends PageWrapper {
             value: 'option2',
             title: '选项的标题',
             description: '复选项的简介描述',
-            prefix: <IconSketch />,
+            prefix: <IconSketch size={34} />,
             extra: '扩展说明',
           },
           {
@@ -100,7 +105,7 @@ export default class Index extends PageWrapper {
             title: '选项的标题',
             description: '复选项的简介描述',
             disabled: true,
-            prefix: <IconSketch />,
+            prefix: <IconSketch size={34} />,
             extra: '扩展说明',
           },
         ],
@@ -134,157 +139,155 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { border } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
+      <Space direction="vertical" fillWidth>
+        <CheckBox
+          header="基础用法"
+          style={style}
+          border={border}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
+          extra={
+            <Button
+              style={{ marginRight: transformSize(10) }}
+              size="column"
+              onClick={this.toggleBorder}
+            >
+              切换边框
+            </Button>
+          }
+        />
+
+        <CheckBox
+          header="自定义选中图标"
+          style={style}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
+          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
+          extra={<View style={extraStyle}>layout: list</View>}
+        />
+
+        <CheckBox
+          header="含有单项描述"
+          style={style}
+          options={this.state.checkBoxOptions2}
+          value={this.state.checkBoxValue2}
+          extra={<View style={extraStyle}>layout: list</View>}
+        />
+
+        <CheckBox
+          header="单项禁用"
+          style={style}
+          options={this.state.checkBoxOptions3}
+          value={this.state.checkBoxValue3}
+          extra={<View style={extraStyle}>layout: list</View>}
+        />
+
+        <Card
+          header="column布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: column</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
           <CheckBox
-            header="基础用法"
+            layout="column"
             style={style}
             border={border}
             options={this.state.checkBoxOptions1}
             value={this.state.checkBoxValue1}
-            extra={
-              <Button
-                style={{ marginRight: transformSize(10) }}
-                size="column"
-                onClick={this.toggleBorder}
-              >
-                切换边框
-              </Button>
-            }
           />
+        </Card>
 
+        <Card
+          header="column布局 定义列"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: column</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
           <CheckBox
-            header="自定义选中图标"
+            layout="column"
             style={style}
-            options={this.state.checkBoxOptions1}
-            value={this.state.checkBoxValue1}
-            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-            iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
-            extra={<View style={extraStyle}>layout: list</View>}
-          />
-
-          <CheckBox
-            header="含有单项描述"
-            style={style}
+            border={border}
             options={this.state.checkBoxOptions2}
             value={this.state.checkBoxValue2}
-            extra={<View style={extraStyle}>layout: list</View>}
+            columns={2}
+            columnGap={12}
           />
+        </Card>
 
+        <Card
+          header="space布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: space</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
           <CheckBox
-            header="单项禁用"
-            style={style}
-            options={this.state.checkBoxOptions3}
-            value={this.state.checkBoxValue3}
-            extra={<View style={extraStyle}>layout: list</View>}
-          />
-
-          <Card
-            header="column布局"
-            headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: column</View>}
-            extraStyle={{ backgroundColor: '#f5f7fa' }}
-          >
-            <CheckBox
-              layout="column"
-              style={style}
-              border={border}
-              options={this.state.checkBoxOptions1}
-              value={this.state.checkBoxValue1}
-            />
-          </Card>
-
-          <Card
-            header="column布局 定义列"
-            headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: column</View>}
-            extraStyle={{ backgroundColor: '#f5f7fa' }}
-          >
-            <CheckBox
-              layout="column"
-              style={style}
-              border={border}
-              options={this.state.checkBoxOptions2}
-              value={this.state.checkBoxValue2}
-              columns={2}
-              columnGap={12}
-            />
-          </Card>
-
-          <Card
-            header="space布局"
-            headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: space</View>}
-            extraStyle={{ backgroundColor: '#f5f7fa' }}
-          >
-            <CheckBox
-              layout="space"
-              style={style}
-              border={border}
-              options={this.state.checkBoxOptions1}
-              value={this.state.checkBoxValue1}
-              spaceSize={24}
-            />
-          </Card>
-
-          <CheckBox
-            header="基础用法"
-            layout="checkBox"
+            layout="space"
             style={style}
             border={border}
             options={this.state.checkBoxOptions1}
             value={this.state.checkBoxValue1}
-            extra={<View style={extraStyle}>layout: checkBox</View>}
+            spaceSize={24}
           />
+        </Card>
 
-          <CheckBox
-            header="自定义选中图标"
-            layout="checkBox"
-            style={style}
-            options={this.state.checkBoxOptions1}
-            value={this.state.checkBoxValue1}
-            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-            iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
-            extra={<View style={extraStyle}>layout: checkBox</View>}
-          />
+        <CheckBox
+          header="基础用法"
+          layout="checkBox"
+          style={style}
+          border={border}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+        />
 
-          <CheckBox
-            header="含有单项描述"
-            layout="checkBox"
-            style={style}
-            options={this.state.checkBoxOptions2}
-            value={this.state.checkBoxValue2}
-            extra={<View style={extraStyle}>layout: checkBox</View>}
-          />
+        <CheckBox
+          header="自定义选中图标"
+          layout="checkBox"
+          style={style}
+          options={this.state.checkBoxOptions1}
+          value={this.state.checkBoxValue1}
+          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+        />
 
-          <CheckBox
-            header="单项禁用"
-            layout="checkBox"
-            style={style}
-            options={this.state.checkBoxOptions3}
-            value={this.state.checkBoxValue3}
-            extra={<View style={extraStyle}>layout: checkBox</View>}
-          />
+        <CheckBox
+          header="含有单项描述"
+          layout="checkBox"
+          style={style}
+          options={this.state.checkBoxOptions2}
+          value={this.state.checkBoxValue2}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+        />
 
-          <CheckBox
-            header="更改回调"
-            layout="checkBox"
-            style={style}
-            options={this.state.checkBoxOptions3}
-            value={this.state.checkBoxValue3}
-            extra={<View style={extraStyle}>layout: checkBox</View>}
-            afterChange={(value) => {
-              this.bannerNotify({
-                message: `值已更改为:${value.join()}`,
-              });
-            }}
-          />
-        </Space>
-      </View>
+        <CheckBox
+          header="单项禁用"
+          layout="checkBox"
+          style={style}
+          options={this.state.checkBoxOptions3}
+          value={this.state.checkBoxValue3}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+        />
+
+        <CheckBox
+          header="更改回调"
+          layout="checkBox"
+          style={style}
+          options={this.state.checkBoxOptions3}
+          value={this.state.checkBoxValue3}
+          extra={<View style={extraStyle}>layout: checkBox</View>}
+          afterChange={(value) => {
+            this.bannerNotify({
+              message: `值已更改为:${value.join()}`,
+            });
+          }}
+        />
+      </Space>
     );
-  }
+  };
 }

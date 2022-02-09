@@ -76,6 +76,11 @@
 }
 
 .@{class-prefix-float-action} {
+  --left: var(--tfc-30);
+  --right: var(--tfc-30);
+  --top: var(--tfc-30);
+  --bottom: var(--tfc-30);
+
   position: fixed;
   z-index: @z-index-float-action;
 
@@ -86,23 +91,23 @@
   }
 
   &--topLeft {
-    left: var(--tfc-30);
-    top: var(--tfc-30);
+    left: var(--left);
+    top: var(--top);
   }
 
   &--topRight {
-    right: var(--tfc-30);
-    top: var(--tfc-30);
+    right: var(--right);
+    top: var(--top);
   }
 
   &--bottomLeft {
-    left: var(--tfc-30);
-    bottom: var(--tfc-30);
+    left: var(--left);
+    bottom: var(--bottom);
   }
 
   &--bottomRight {
-    right: var(--tfc-30);
-    bottom: var(--tfc-30);
+    right: var(--right);
+    bottom: var(--bottom);
   }
 
   &--vertical&--topLeft &__label,

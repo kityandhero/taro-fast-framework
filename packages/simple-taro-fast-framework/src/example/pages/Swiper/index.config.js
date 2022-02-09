@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Swiper',
+  navigationBarTitleText: '滑动视图',
 };

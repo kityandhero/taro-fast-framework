@@ -11,11 +11,23 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconCheckCircle } = Icon;
 
-export default class Index extends PageWrapper {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'ProgressBox',
+    name: '扩展进度条',
+  };
+
   constructor(props) {
     super(props);
 
@@ -43,17 +55,13 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { percent } = this.state;
 
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="附带图标"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <View>
                 <Button
@@ -85,21 +93,13 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="隐藏模式"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="隐藏模式" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <ProgressBox hidden percent={percent} />
             </Space>
           </Card>
 
-          <Card
-            header="复杂配置"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
             <ProgressBox
               percent={70}
               borderRadius={4}
@@ -112,11 +112,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card
-            header="属性说明 :"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
             <HelpBox
               showTitle={false}
               showNumber={false}
@@ -130,5 +126,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

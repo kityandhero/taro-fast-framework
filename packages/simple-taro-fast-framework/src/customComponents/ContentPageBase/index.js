@@ -1,5 +1,7 @@
 import { View } from '@tarojs/components';
 
+import { FadeView, Spin } from 'taro-fast-component/es/customComponents';
+
 import Header from '../Header';
 import PageWrapper from '../PageWrapper';
 
@@ -7,6 +9,25 @@ import './index.less';
 
 export default class ContentPageBase extends PageWrapper {
   headerData = {};
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        show: false,
+      },
+    };
+  }
+
+  doWorkAdjustDidMount = () => {
+    const that = this;
+
+    setTimeout(() => {
+      that.setState({ show: true });
+    }, 800);
+  };
 
   renderContent = () => {
     return null;
@@ -22,15 +43,23 @@ export default class ContentPageBase extends PageWrapper {
     };
 
     return (
-      <View className="page">
+      <>
         <Header title={`${id} ${name}`}></Header>
 
         <View className="doc-body">{this.renderContent()}</View>
-      </View>
+      </>
     );
   };
 
   renderFurther() {
-    return this.renderContentView();
+    const { show } = this.state;
+
+    return (
+      <Spin fullscreen spin={!show}>
+        <FadeView show={show} className="page">
+          {this.renderContentView()}
+        </FadeView>
+      </Spin>
+    );
   }
 }

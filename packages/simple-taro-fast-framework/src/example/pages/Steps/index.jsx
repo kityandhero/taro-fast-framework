@@ -9,17 +9,29 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { Step } = Steps;
 const { IconVolumePlus } = Icon;
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Steps',
+    name: '步骤条',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="横向" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="横向" style={style} headerStyle={cardHeaderStyle}>
             <Steps current={1}>
               <Step title="标题1" description="描述" />
               <Step title="标题2" description="描述" />
@@ -29,7 +41,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="横向（失败状态）"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Steps current={2}>
@@ -39,7 +51,7 @@ export default class Index extends PageWrapper {
             </Steps>
           </Card>
 
-          <Card header="纵向" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="纵向" style={style} headerStyle={cardHeaderStyle}>
             <Steps direction="vertical">
               <Step title="填写机构信息" status="process" />
               <Step title="签约机构" status="wait" />
@@ -49,7 +61,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="纵向（失败状态）"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Steps direction="vertical">
@@ -74,7 +86,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="自定义图标和大小"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Steps
@@ -107,5 +119,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

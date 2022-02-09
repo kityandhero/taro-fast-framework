@@ -10,7 +10,7 @@ import {
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const style = {
   ...{
@@ -30,7 +30,12 @@ const buttonFillList = [
   },
 ];
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Modal',
+    name: '弹窗',
+  };
+
   constructor(props) {
     super(props);
 
@@ -126,18 +131,13 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { buttonFill } = this.state;
 
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="展示容器"
-            style={style}
-            border={false}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <Button
                 block
@@ -201,7 +201,11 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="选择按钮模式" headerStyle={cardHeaderStyle}>
+          <Card
+            header="选择按钮模式"
+            style={style}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={buttonFillList}
               value={buttonFill}
@@ -341,5 +345,5 @@ export default class Index extends PageWrapper {
         </Modal>
       </View>
     );
-  }
+  };
 }

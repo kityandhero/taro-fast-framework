@@ -9,7 +9,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -20,7 +20,12 @@ const style = {
   ...cardStyle,
 };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'CheckBox',
+    name: '弹出式复选',
+  };
+
   constructor(props) {
     super(props);
 
@@ -74,7 +79,7 @@ export default class Index extends PageWrapper {
             value: 'option1',
             title: '选项的标题',
             description: '复选项的简介描述',
-            prefix: <IconShoppingCart />,
+            prefix: <IconShoppingCart size={34} />,
             extra: '扩展说明',
           },
           {
@@ -82,7 +87,7 @@ export default class Index extends PageWrapper {
             value: 'option2',
             title: '选项的标题',
             description: '复选项的简介描述',
-            prefix: <IconSketch />,
+            prefix: <IconSketch size={34} />,
             extra: '扩展说明',
           },
           {
@@ -91,7 +96,7 @@ export default class Index extends PageWrapper {
             title: '选项的标题',
             description: '复选项的简介描述',
             disabled: true,
-            prefix: <IconSketch />,
+            prefix: <IconSketch size={34} />,
             extra: '扩展说明',
           },
         ],
@@ -117,7 +122,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
@@ -169,6 +174,7 @@ export default class Index extends PageWrapper {
             <CheckBoxSelector
               placeholder="请选择产地"
               showClose={false}
+              border={false}
               value={this.state.checkBoxValue3}
               options={this.state.checkBoxOptions3}
               onChange={this.handleCheckBoxChangeThird}
@@ -207,6 +213,7 @@ export default class Index extends PageWrapper {
               placeholder="请选择产地"
               position="center"
               showClose={false}
+              border={false}
               value={this.state.checkBoxValue3}
               options={this.state.checkBoxOptions3}
               onChange={this.handleCheckBoxChangeThird}
@@ -224,6 +231,7 @@ export default class Index extends PageWrapper {
             <CheckBoxSelector
               placeholder="请选择类别"
               position="center"
+              border={false}
               value={this.state.checkBoxValue1}
               options={this.state.checkBoxOptions1}
               afterChange={(value) => {
@@ -238,5 +246,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

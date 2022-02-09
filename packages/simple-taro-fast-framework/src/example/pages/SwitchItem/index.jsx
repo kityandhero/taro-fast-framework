@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import { connect } from 'react-redux';
 
 import {
@@ -10,15 +8,27 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconSketch } = Icon;
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 @connect(({ news, global }) => ({
   news,
   global,
 }))
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'SwitchItem',
+    name: '开关项',
+  };
+
   getApiData = (props) => {
     const {
       news: { data },
@@ -56,134 +66,128 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { checked } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="基础用法"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem label="开关" />
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="基础用法"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem label="开关" />
+        </Card>
 
-          <Card
-            header="异步调用"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem label="开关" onChange={this.changeStatus} />
-          </Card>
+        <Card
+          header="异步调用"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem label="开关" onChange={this.changeStatus} />
+        </Card>
 
-          <Card
-            header="异步调用前确认"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem
-              label="开关"
-              confirm={{
-                title: '状态变更',
-                content: '状态即将发生改变,确定吗?',
-                confirmText: '确定',
-                confirmColor: '',
-                cancelText: '取消',
-                cancelColor: '',
-              }}
-              onChange={this.simulationChangeStatus}
-            />
-          </Card>
+        <Card
+          header="异步调用前确认"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem
+            label="开关"
+            confirm={{
+              title: '状态变更',
+              content: '状态即将发生改变,确定吗?',
+              confirmText: '确定',
+              confirmColor: '',
+              cancelText: '取消',
+              cancelColor: '',
+            }}
+            onChange={this.simulationChangeStatus}
+          />
+        </Card>
 
-          <Card
-            header="颜色"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem label="开关" color="green" />
-          </Card>
+        <Card
+          header="颜色"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem label="开关" color="green" />
+        </Card>
 
-          <Card
-            header="隐藏状态"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem label="开关" hidden />
-          </Card>
+        <Card
+          header="隐藏状态"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem label="开关" hidden />
+        </Card>
 
-          <Card
-            header="不可用"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem label="开关" disabled />
-            <SwitchItem label="开关" checked disabled />
-          </Card>
+        <Card
+          header="不可用"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem label="开关" disabled />
+          <SwitchItem label="开关" checked disabled />
+        </Card>
 
-          <Card
-            header="大小"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem label="开关" size={1.5} />
-          </Card>
+        <Card
+          header="大小"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem label="开关" size={1.5} />
+        </Card>
 
-          <Card
-            header="内嵌文字"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem
-              label="二次校验开关"
-              checkedText="开"
-              uncheckedText="关"
-            />
-            <SwitchItem
-              label="二次校验开关"
-              checkedText="1"
-              uncheckedText="0"
-            />
-            <SwitchItem
-              label="二次校验开关"
-              labelStyle={{ color: 'red' }}
-              checkedText="✔"
-              uncheckedText="✘"
-            />
-          </Card>
+        <Card
+          header="内嵌文字"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem
+            label="二次校验开关"
+            checkedText="开"
+            uncheckedText="关"
+          />
+          <SwitchItem label="二次校验开关" checkedText="1" uncheckedText="0" />
+          <SwitchItem
+            label="二次校验开关"
+            labelStyle={{ color: 'red' }}
+            checkedText="✔"
+            uncheckedText="✘"
+          />
+        </Card>
 
-          <Card
-            header="复杂配置"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SwitchItem
-              prefix={<IconSketch size={36} />}
-              title="这里是标题"
-              label="开关"
-              description="管理已授权的产品和设备"
-              confirm
-              checked={checked}
-              onChange={this.changeStatus}
-              afterChange={(value) => {
-                this.bannerNotify({
-                  message: `状态已更改为:${value}`,
-                });
-              }}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card
+          header="复杂配置"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SwitchItem
+            prefix={<IconSketch size={36} />}
+            title="这里是标题"
+            label="开关"
+            description="管理已授权的产品和设备"
+            confirm
+            checked={checked}
+            onChange={this.changeStatus}
+            afterChange={(value) => {
+              this.bannerNotify({
+                message: `状态已更改为:${value}`,
+              });
+            }}
+          />
+        </Card>
+      </Space>
     );
-  }
+  };
 }

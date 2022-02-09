@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'HorizontalCenterBox',
+  navigationBarTitleText: '水平居中',
 };

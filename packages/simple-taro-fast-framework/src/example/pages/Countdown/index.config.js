@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Countdown',
+  navigationBarTitleText: '倒计时',
 };

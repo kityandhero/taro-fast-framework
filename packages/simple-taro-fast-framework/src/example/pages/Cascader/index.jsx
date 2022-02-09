@@ -1,10 +1,16 @@
 import { View } from '@tarojs/components';
 
-import { roundToTarget, getGuid } from 'taro-fast-common/es/utils/tools';
 import { Cascader, Card, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const options = [
   {
@@ -153,55 +159,19 @@ const options = [
   },
 ];
 
-export default class Index extends PageWrapper {
-  id = null;
-
-  sTemp = 0;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        color: '#ee0a24',
-        percent: 0.3,
-        size: 400,
-      },
-    };
-
-    this.id = getGuid();
-  }
-
-  setPercent = (v) => {
-    const { percent } = this.state;
-
-    const tmp = roundToTarget(percent + v, 2);
-
-    if (tmp <= 0) {
-      this.setState({ percent: 0 });
-
-      return;
-    }
-
-    if (tmp >= 1) {
-      this.setState({ percent: 1 });
-
-      return;
-    }
-
-    this.setState({ percent: tmp });
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Cascader',
+    name: '级联选择',
   };
 
-  renderFurther() {
-    // const { size, color, percent } = this.state;
-
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
-            header="demo"
-            style={cardStyle}
+            header="组件展示"
+            style={style}
             headerStyle={cardHeaderStyle}
             space={false}
           >
@@ -217,5 +187,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

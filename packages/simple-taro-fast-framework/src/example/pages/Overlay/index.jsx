@@ -11,7 +11,7 @@ import {
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const style = {
   ...{
@@ -93,7 +93,12 @@ const animalList = [
   },
 ];
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Overlay',
+    name: '遮罩',
+  };
+
   constructor(props) {
     super(props);
 
@@ -191,7 +196,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { color, alpha, duration, zIndex, animal } = this.state;
 
     return (
@@ -244,11 +249,12 @@ export default class Index extends PageWrapper {
             <Item
               label="显示嵌入内容的容器遮罩层"
               arrow
+              border={false}
               onClick={this.onClickShow4}
             />
           </Card>
 
-          <Card header="设置颜色" headerStyle={cardHeaderStyle}>
+          <Card header="设置颜色" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={colorList}
               value={color}
@@ -256,15 +262,16 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="设置颜色" headerStyle={cardHeaderStyle}>
+          <Card header="设置动画" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={animalList}
               value={animal}
+              columns={2}
               onChange={this.setAnimal}
             />
           </Card>
 
-          <Card header="设置透明度" headerStyle={cardHeaderStyle}>
+          <Card header="设置透明度" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={alphaList}
               value={alpha}
@@ -272,7 +279,11 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="设置过渡时间" headerStyle={cardHeaderStyle}>
+          <Card
+            header="设置过渡时间"
+            style={style}
+            headerStyle={cardHeaderStyle}
+          >
             <Selector
               options={durationList}
               value={duration}
@@ -280,7 +291,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card header="设置Z轴" headerStyle={cardHeaderStyle}>
+          <Card header="设置Z轴" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={zIndexList}
               value={zIndex}
@@ -288,6 +299,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
         </Space>
+
         <Overlay
           visible={this.state.show1}
           mode="fullScreen"
@@ -313,5 +325,5 @@ export default class Index extends PageWrapper {
         </Overlay>
       </View>
     );
-  }
+  };
 }

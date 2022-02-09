@@ -27,19 +27,21 @@ const o = {
       name: '图标',
       path: pathCollection.icon.path,
     },
-    // {
-    //   id: 'Typo',
-    //   name: '字体',
-    // },
-    // {
-    //   id: 'Button',
-    //   name: '按钮',
-    // },
+    {
+      id: 'Line',
+      name: '线条',
+      path: pathCollection.line.path,
+    },
+    {
+      id: 'Button',
+      name: '按钮',
+      path: pathCollection.button.path,
+    },
   ],
 };
 
 export default class Index extends ChannelPageBase {
-  renderFurther() {
-    return this.renderChannelView(o);
-  }
+  buildData = () => {
+    return o;
+  };
 }

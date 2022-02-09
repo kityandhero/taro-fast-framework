@@ -10,17 +10,29 @@ import {
 import {} from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconVolumePlus } = Icon;
 const { More } = NoticeBar;
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'NoticeBar',
+    name: '通知条',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="Icon" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
             <NoticeBar icon={<IconVolumePlus size={38} />}>
               这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
               通告栏
@@ -28,8 +40,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="Closeable [single 模式非 marquee 下生效]"
-            style={cardStyle}
+            header="可关闭 [single 模式非 marquee 下生效]"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar single closeable>
@@ -39,8 +51,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="Marquee [marquee 将自动启用 single 模式]"
-            style={cardStyle}
+            header="marquee模式 [marquee 将自动启用 single 模式]"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar marquee>
@@ -50,8 +62,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="Extra [single 模式下生效]"
-            style={cardStyle}
+            header="自定义扩展 [single 模式下生效]"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar
@@ -77,8 +89,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="More [single 模式下生效]"
-            style={cardStyle}
+            header="显示更多 [single 模式下生效]"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar single extra={<More />}>
@@ -88,8 +100,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="MoreText [single 模式下生效]"
-            style={cardStyle}
+            header="自定义”更多“文字 [single 模式下生效]"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <NoticeBar
@@ -108,7 +120,7 @@ export default class Index extends PageWrapper {
             </NoticeBar>
           </Card>
 
-          <Card header="Simple" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="例子展示" style={style} headerStyle={cardHeaderStyle}>
             <NoticeBar
               icon={<IconVolumePlus size={38} />}
               marquee
@@ -122,5 +134,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

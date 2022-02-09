@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'FlexBox',
+  navigationBarTitleText: 'Flex布局',
 };

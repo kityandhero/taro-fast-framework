@@ -10,9 +10,16 @@ import {
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+const containorStyle = {
   border: `${transformSize(2)} solid #ccc`,
   height: transformSize(200),
 };
@@ -62,7 +69,12 @@ const alignJustifyList = [
   },
 ];
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'VerticalBox',
+    name: '垂直居中',
+  };
+
   constructor(props) {
     super(props);
 
@@ -87,7 +99,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { align, alignJustify } = this.state;
 
     return (
@@ -95,10 +107,10 @@ export default class Index extends PageWrapper {
         <Space direction="vertical" fillWidth>
           <Card
             header="单元素布局展示"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
-            <View style={style}>
+            <View style={containorStyle}>
               <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
                 <View style={boxStyle}></View>
               </VerticalBox>
@@ -107,10 +119,10 @@ export default class Index extends PageWrapper {
 
           <Card
             header="多元素布局展示"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
-            <View style={style}>
+            <View style={containorStyle}>
               <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
                 <View style={boxStyle}></View>
                 <View style={boxStyle}></View>
@@ -119,11 +131,7 @@ export default class Index extends PageWrapper {
             </View>
           </Card>
 
-          <Card
-            header="变更align"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="变更align" style={style} headerStyle={cardHeaderStyle}>
             <Selector
               options={alignList}
               value={align}
@@ -133,7 +141,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="变更alignJustify"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Selector
@@ -143,13 +151,10 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card
-            header="属性说明 :"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
             <HelpBox
               showTitle={false}
+              showNumber={false}
               list={[
                 {
                   text: 'style: 默认值为 null.',
@@ -169,5 +174,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

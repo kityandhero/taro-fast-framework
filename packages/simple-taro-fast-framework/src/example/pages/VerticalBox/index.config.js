@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'VerticalBox',
+  navigationBarTitleText: '垂直居中',
 };

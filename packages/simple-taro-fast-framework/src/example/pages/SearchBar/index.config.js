@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'SearchBar',
+  navigationBarTitleText: '搜索条',
 };

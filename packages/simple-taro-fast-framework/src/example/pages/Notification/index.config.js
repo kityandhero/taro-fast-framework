@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Notification',
+  navigationBarTitleText: '弹出通知',
 };

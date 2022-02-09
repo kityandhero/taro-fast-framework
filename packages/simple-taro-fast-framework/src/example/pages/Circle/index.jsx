@@ -2,7 +2,6 @@ import { View, Text } from '@tarojs/components';
 
 import {
   roundToTarget,
-  getGuid,
   formatTarget,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
@@ -14,21 +13,24 @@ import {
   Space,
   Divider,
   FlexBox,
-  // Row,
-  // Col,
-  // Grid,
 } from 'taro-fast-component/es/customComponents';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-import './index.less';
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
-export default class Index extends PageWrapper {
-  id = null;
-
-  sTemp = 0;
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Circle',
+    name: '进度环',
+  };
 
   constructor(props) {
     super(props);
@@ -41,8 +43,6 @@ export default class Index extends PageWrapper {
         size: 400,
       },
     };
-
-    this.id = getGuid();
   }
 
   setPercent = (v) => {
@@ -65,13 +65,13 @@ export default class Index extends PageWrapper {
     this.setState({ percent: tmp });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { size, color, percent } = this.state;
 
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="demo" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="demo" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <Circle
                 style={{
@@ -223,5 +223,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

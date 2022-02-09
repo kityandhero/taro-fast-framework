@@ -10,7 +10,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
@@ -28,7 +28,12 @@ const extraStyle = {
   backgroundColor: '#f5f7fa',
 };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Radio',
+    name: '单选',
+  };
+
   constructor(props) {
     super(props);
 
@@ -83,7 +88,7 @@ export default class Index extends PageWrapper {
             value: 'option1',
             title: '选项的标题',
             description: '单选项的简介描述',
-            prefix: <IconShoppingCart />,
+            prefix: <IconShoppingCart size={34} />,
             extra: '扩展说明',
           },
           {
@@ -91,7 +96,7 @@ export default class Index extends PageWrapper {
             value: 'option2',
             title: '选项的标题',
             description: '单选项的简介描述',
-            prefix: <IconSketch />,
+            prefix: <IconSketch size={34} />,
             extra: '扩展说明',
           },
           {
@@ -100,7 +105,7 @@ export default class Index extends PageWrapper {
             title: '选项的标题',
             description: '单选项的简介描述',
             disabled: true,
-            prefix: <IconSketch />,
+            prefix: <IconSketch size={34} />,
             extra: '扩展说明',
           },
         ],
@@ -116,141 +121,135 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { border } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
+      <Space direction="vertical" fillWidth>
+        <Radio
+          header="默认用法"
+          style={style}
+          border={border}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          extra={
+            <Button size="mini" fill="none" onClick={this.toggleBorder}>
+              切换边框
+            </Button>
+          }
+        />
+
+        <Radio
+          header="自定义选中图标"
+          style={style}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          iconCheck={<IconCheckCircle size={38} color="#1677ff" />}
+          extra={<View style={extraStyle}>layout: list</View>}
+        />
+
+        <Radio
+          header="含有单项描述"
+          style={style}
+          options={this.state.radioOptions2}
+          value={this.state.radioValue2}
+          extra={<View style={extraStyle}>layout: list</View>}
+        />
+
+        <Radio
+          header="单项禁用"
+          style={style}
+          options={this.state.radioOptions3}
+          value={this.state.radioValue3}
+          extra={<View style={extraStyle}>layout: list</View>}
+        />
+
+        <Card
+          header="column布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: column</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
           <Radio
-            header="默认用法"
+            layout="column"
             style={style}
             border={border}
-            options={this.state.radioOptions1}
-            value={this.state.radioValue1}
-            extra={
-              <Button
-                style={{ marginRight: transformSize(10) }}
-                size="mini"
-                onClick={this.toggleBorder}
-              >
-                切换边框
-              </Button>
-            }
-          />
-
-          <Radio
-            header="自定义选中图标"
-            style={style}
-            options={this.state.radioOptions1}
-            value={this.state.radioValue1}
-            iconCheck={<IconCheckCircle size={38} color="#1677ff" />}
-            extra={<View style={extraStyle}>layout: list</View>}
-          />
-
-          <Radio
-            header="含有单项描述"
-            style={style}
             options={this.state.radioOptions2}
             value={this.state.radioValue2}
-            extra={<View style={extraStyle}>layout: list</View>}
+            columns={2}
+            columnGap={12}
           />
+        </Card>
 
+        <Card
+          header="space布局"
+          headerStyle={cardHeaderStyle}
+          extra={<View style={extraStyle}>layout: space</View>}
+          extraStyle={{ backgroundColor: '#f5f7fa' }}
+        >
           <Radio
-            header="单项禁用"
-            style={style}
-            options={this.state.radioOptions3}
-            value={this.state.radioValue3}
-            extra={<View style={extraStyle}>layout: list</View>}
-          />
-
-          <Card
-            header="column布局"
-            headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: column</View>}
-            extraStyle={{ backgroundColor: '#f5f7fa' }}
-          >
-            <Radio
-              layout="column"
-              style={style}
-              border={border}
-              options={this.state.radioOptions2}
-              value={this.state.radioValue2}
-              columns={2}
-              columnGap={12}
-            />
-          </Card>
-
-          <Card
-            header="space布局"
-            headerStyle={cardHeaderStyle}
-            extra={<View style={extraStyle}>layout: space</View>}
-            extraStyle={{ backgroundColor: '#f5f7fa' }}
-          >
-            <Radio
-              layout="space"
-              style={style}
-              border={border}
-              options={this.state.radioOptions2}
-              value={this.state.radioValue2}
-              spaceSize={24}
-            />
-          </Card>
-
-          <Radio
-            header="基础用法"
-            layout="radio"
+            layout="space"
             style={style}
             border={border}
-            options={this.state.radioOptions1}
-            value={this.state.radioValue1}
-            extra={<View style={extraStyle}>layout: radio</View>}
-          />
-
-          <Radio
-            header="自定义选中图标"
-            layout="radio"
-            style={style}
-            options={this.state.radioOptions1}
-            value={this.state.radioValue1}
-            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-            extra={<View style={extraStyle}>layout: radio</View>}
-          />
-
-          <Radio
-            header="含有单项描述"
-            layout="radio"
-            style={style}
             options={this.state.radioOptions2}
             value={this.state.radioValue2}
-            extra={<View style={extraStyle}>layout: radio</View>}
+            spaceSize={24}
           />
+        </Card>
 
-          <Radio
-            header="单项禁用"
-            layout="radio"
-            style={style}
-            options={this.state.radioOptions3}
-            value={this.state.radioValue3}
-            extra={<View style={extraStyle}>layout: radio</View>}
-          />
+        <Radio
+          header="基础用法"
+          layout="radio"
+          style={style}
+          border={border}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          extra={<View style={extraStyle}>layout: radio</View>}
+        />
 
-          <Radio
-            header="更改回调"
-            layout="radio"
-            style={style}
-            border={border}
-            options={this.state.radioOptions1}
-            value={this.state.radioValue1}
-            extra={<View style={extraStyle}>layout: radio</View>}
-            afterChange={(value) => {
-              this.bannerNotify({
-                message: `值已更改为:${value}`,
-              });
-            }}
-          />
-        </Space>
-      </View>
+        <Radio
+          header="自定义选中图标"
+          layout="radio"
+          style={style}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+          extra={<View style={extraStyle}>layout: radio</View>}
+        />
+
+        <Radio
+          header="含有单项描述"
+          layout="radio"
+          style={style}
+          options={this.state.radioOptions2}
+          value={this.state.radioValue2}
+          extra={<View style={extraStyle}>layout: radio</View>}
+        />
+
+        <Radio
+          header="单项禁用"
+          layout="radio"
+          style={style}
+          options={this.state.radioOptions3}
+          value={this.state.radioValue3}
+          extra={<View style={extraStyle}>layout: radio</View>}
+        />
+
+        <Radio
+          header="更改回调"
+          layout="radio"
+          style={style}
+          border={border}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          extra={<View style={extraStyle}>layout: radio</View>}
+          afterChange={(value) => {
+            this.bannerNotify({
+              message: `值已更改为:${value}`,
+            });
+          }}
+        />
+      </Space>
     );
-  }
+  };
 }

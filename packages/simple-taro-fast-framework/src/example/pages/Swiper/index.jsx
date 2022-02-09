@@ -10,16 +10,28 @@ import {
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Swiper',
+    name: '滑动展示',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
             header="例子: 新闻标题上下滚动"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             {buildSwiper({
@@ -60,7 +72,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="例子: 轮播图1"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             {buildSwiper({
@@ -106,7 +118,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="例子: 轮播图2"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             {buildSwiper({
@@ -155,7 +167,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="例子: 轮播图3"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             {buildSwiper({
@@ -214,5 +226,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

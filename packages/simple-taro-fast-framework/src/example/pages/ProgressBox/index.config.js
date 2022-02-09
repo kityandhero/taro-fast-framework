@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'ProgressBox',
+  navigationBarTitleText: '扩展进度条',
 };

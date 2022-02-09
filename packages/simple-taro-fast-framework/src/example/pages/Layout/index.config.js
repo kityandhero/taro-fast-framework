@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Layout',
+  navigationBarTitleText: '布局',
 };

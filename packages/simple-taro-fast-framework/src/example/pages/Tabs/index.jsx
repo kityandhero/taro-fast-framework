@@ -10,7 +10,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconAdd } = Icon;
 const { TabPanel } = Tabs;
@@ -29,7 +29,19 @@ const tabList = [
 
 const contentStyle = { padding: '0' };
 
-export default class Index extends PageWrapper {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Tabs',
+    name: '标签面板',
+  };
+
   constructor(props) {
     super(props);
 
@@ -72,14 +84,14 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
             header="基本用法"
             contentStyle={contentStyle}
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -128,7 +140,7 @@ export default class Index extends PageWrapper {
           <Card
             header="滚动标签栏"
             contentStyle={contentStyle}
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -218,7 +230,7 @@ export default class Index extends PageWrapper {
           <Card
             header="垂直模式"
             contentStyle={contentStyle}
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -334,7 +346,7 @@ export default class Index extends PageWrapper {
           <Card
             header="禁止内容切换动画"
             contentStyle={contentStyle}
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Tabs
@@ -390,5 +402,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

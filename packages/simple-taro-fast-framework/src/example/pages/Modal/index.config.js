@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Modal',
+  navigationBarTitleText: '弹窗',
 };

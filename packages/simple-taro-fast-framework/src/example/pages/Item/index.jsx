@@ -10,7 +10,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -48,7 +48,12 @@ const users = [
   },
 ];
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Item',
+    name: '条目项',
+  };
+
   handleClick = (type) => {
     this.bannerNotify({
       message: '消息通知',
@@ -56,7 +61,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
@@ -68,7 +73,7 @@ export default class Index extends PageWrapper {
           >
             <Item label="1" />
             <Item label="2" />
-            <Item label="3" />
+            <Item label="3" border={false} />
           </Card>
 
           <Card
@@ -79,7 +84,7 @@ export default class Index extends PageWrapper {
           >
             <Item label="账单" arrow />
             <Item label="总资产" arrow />
-            <Item label="设置" arrow />
+            <Item label="设置" arrow border={false} />
           </Card>
 
           <Card
@@ -90,7 +95,13 @@ export default class Index extends PageWrapper {
           >
             <Item label="账单" clickable arrow onClick={this.handleClick} />
             <Item label="总资产" clickable arrow onClick={this.handleClick} />
-            <Item label="设置" clickable arrow onClick={this.handleClick} />
+            <Item
+              label="设置"
+              clickable
+              arrow
+              border={false}
+              onClick={this.handleClick}
+            />
           </Card>
 
           <Card
@@ -106,6 +117,7 @@ export default class Index extends PageWrapper {
               description="管理已授权的产品和设备"
               clickable
               arrow
+              border={false}
             />
             <Item title="这里是标题" label="这里是主信息" />
           </Card>
@@ -123,18 +135,25 @@ export default class Index extends PageWrapper {
               arrow
               prefix={<IconSketch />}
             />
-            <Item label="总资产" disabled prefix={<IconShoppingCart />} />
+            <Item
+              label="总资产"
+              disabled
+              prefix={<IconShoppingCart />}
+              border={false}
+            />
           </Card>
 
           <Card
             header="用户列表布局"
+            style={style}
             headerStyle={cardHeaderStyle}
             space={false}
           >
-            {users.map((user) => (
+            {users.map((user, index) => (
               <Item
                 key={user.name}
                 label={user.name}
+                border={index !== users.length - 1}
                 prefix={
                   <Image
                     src={user.avatar}
@@ -153,5 +172,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

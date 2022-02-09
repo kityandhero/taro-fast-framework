@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'CheckBoxSelector',
+  navigationBarTitleText: '弹出式复选',
 };

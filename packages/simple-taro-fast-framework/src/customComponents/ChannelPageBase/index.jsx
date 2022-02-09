@@ -1,6 +1,11 @@
 import { View, Text } from '@tarojs/components';
 
-import { ImageBox, Icon } from 'taro-fast-component/es/customComponents';
+import {
+  FadeView,
+  ImageBox,
+  Icon,
+  Spin,
+} from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../PageWrapper';
 
@@ -9,11 +14,34 @@ import './index.less';
 const { IconList, IconChevronRight } = Icon;
 
 export default class ChannelPageBase extends PageWrapper {
-  renderChannelView = (item) => {
-    const { title, icon, list } = item;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        show: false,
+      },
+    };
+  }
+
+  doWorkAdjustDidMount = () => {
+    const that = this;
+
+    setTimeout(() => {
+      that.setState({ show: true });
+    }, 800);
+  };
+
+  buildData = () => {
+    return { title: '', icon: '', list: [] };
+  };
+
+  renderChannelView = () => {
+    const { title, icon, list } = this.buildData();
 
     return (
-      <View className="page">
+      <>
         <View className="panel-header">
           <View className="panel-header__icon">
             {icon ? (
@@ -44,7 +72,19 @@ export default class ChannelPageBase extends PageWrapper {
             ))}
           </View>
         </View>
-      </View>
+      </>
     );
   };
+
+  renderFurther() {
+    const { show } = this.state;
+
+    return (
+      <Spin fullscreen spin={!show}>
+        <FadeView show={show} className="page">
+          {this.renderChannelView()}
+        </FadeView>
+      </Spin>
+    );
+  }
 }

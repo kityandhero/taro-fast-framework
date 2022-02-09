@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Stepper',
+  navigationBarTitleText: '进步器',
 };

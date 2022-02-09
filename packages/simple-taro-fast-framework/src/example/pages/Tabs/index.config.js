@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Tabs',
+  navigationBarTitleText: '标签面板',
 };

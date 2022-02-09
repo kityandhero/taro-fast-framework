@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Grid',
+  navigationBarTitleText: '宫格布局',
 };

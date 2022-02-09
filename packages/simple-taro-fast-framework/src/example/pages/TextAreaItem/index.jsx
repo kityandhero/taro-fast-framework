@@ -10,7 +10,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const style = {
   ...{
@@ -19,7 +19,12 @@ const style = {
   ...cardStyle,
 };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'TextAreaItem',
+    name: '文本域编辑',
+  };
+
   constructor(props) {
     super(props);
 
@@ -39,7 +44,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { value } = this.state;
 
     return (
@@ -115,5 +120,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

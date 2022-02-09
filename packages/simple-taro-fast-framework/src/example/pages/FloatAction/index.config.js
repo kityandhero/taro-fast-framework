@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'FloatAction',
+  navigationBarTitleText: '浮动按钮',
 };

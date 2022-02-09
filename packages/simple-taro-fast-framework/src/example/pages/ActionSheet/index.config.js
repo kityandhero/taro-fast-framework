@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'ActionSheet',
+  navigationBarTitleText: '动作面板',
 };

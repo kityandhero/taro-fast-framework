@@ -7,13 +7,9 @@ export const pathCollection = {
     page: 'pages/basic/index',
     path: '/example/pages/basic/index',
   },
-  view: {
-    page: 'pages/view/index',
-    path: '/example/pages/view/index',
-  },
-  action: {
-    page: 'pages/action/index',
-    path: '/example/pages/action/index',
+  element: {
+    page: 'pages/element/index',
+    path: '/example/pages/element/index',
   },
   form: {
     page: 'pages/form/index',
@@ -22,6 +18,18 @@ export const pathCollection = {
   layout: {
     page: 'pages/layout/index',
     path: '/example/pages/layout/index',
+  },
+  action: {
+    page: 'pages/action/index',
+    path: '/example/pages/action/index',
+  },
+  extraComponent: {
+    page: 'pages/extraComponent/index',
+    path: '/example/pages/extraComponent/index',
+  },
+  flex: {
+    page: 'pages/flex/index',
+    path: '/example/pages/flex/index',
   },
   navigation: {
     page: 'pages/navigation/index',
@@ -71,9 +79,9 @@ export const pathCollection = {
     page: 'pages/steps/index',
     path: '/example/pages/steps/index',
   },
-  buttonAction: {
-    page: 'pages/buttonAction/index',
-    path: '/example/pages/buttonAction/index',
+  interact: {
+    page: 'pages/interact/index',
+    path: '/example/pages/interact/index',
   },
   divider: {
     page: 'pages/divider/index',
@@ -187,9 +195,9 @@ export const pathCollection = {
     page: 'pages/helpBox/index',
     path: '/example/pages/helpBox/index',
   },
-  copyright: {
-    page: 'pages/copyright/index',
-    path: '/example/pages/copyright/index',
+  footer: {
+    page: 'pages/footer/index',
+    path: '/example/pages/footer/index',
   },
   floatAction: {
     page: 'pages/floatAction/index',
@@ -283,6 +291,11 @@ export default {
       name: '组件示例',
       pages: [
         pathCollection.basic.page,
+        pathCollection.element.page,
+        pathCollection.form.page,
+        pathCollection.layout.page,
+        pathCollection.action.page,
+        pathCollection.extraComponent.page,
         pathCollection.ellipsis.page,
         pathCollection.price.page,
         pathCollection.colorText.page,
@@ -290,9 +303,9 @@ export default {
         pathCollection.avatar.page,
         pathCollection.badge.page,
         pathCollection.noticeBar.page,
-        pathCollection.layout.page,
+        pathCollection.flex.page,
         pathCollection.steps.page,
-        pathCollection.buttonAction.page,
+        pathCollection.interact.page,
         pathCollection.divider.page,
         pathCollection.tag.page,
         pathCollection.inputItem.page,
@@ -321,7 +334,7 @@ export default {
         pathCollection.checkBoxSelector.page,
         pathCollection.countdown.page,
         pathCollection.helpBox.page,
-        pathCollection.copyright.page,
+        pathCollection.footer.page,
         pathCollection.floatAction.page,
         pathCollection.verticalBox.page,
         pathCollection.horizontalCenterBox.page,

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Avatar',
+  navigationBarTitleText: '头像',
 };

@@ -22,7 +22,7 @@ import iconBasic from '../../../assets/images/icon-list-basic.png';
 import iconForm from '../../../assets/images/icon-list-form.png';
 import iconHOC from '../../../assets/images/icon-list-hoc.png';
 import iconLayout from '../../../assets/images/icon-list-layout.png';
-import iconNavigation from '../../../assets/images/icon-list-navigation.png';
+// import iconNavigation from '../../../assets/images/icon-list-navigation.png';
 import iconView from '../../../assets/images/icon-list-view.png';
 import logoImg from '../../../assets/images/logo.png';
 
@@ -39,18 +39,11 @@ const listData = [
     path: pathCollection.basic.path,
   },
   {
-    id: 'View',
-    title: '视图',
+    id: 'Element',
+    title: '元件',
     content: '包含通告栏、标签、徽标等',
     icon: iconView,
-    path: pathCollection.view.path,
-  },
-  {
-    id: 'Action',
-    title: '操作反馈',
-    content: '包含对话框、进度条、动作面板等',
-    icon: iconAction,
-    path: pathCollection.action.path,
+    path: pathCollection.element.path,
   },
   {
     id: 'Form',
@@ -67,18 +60,32 @@ const listData = [
     path: pathCollection.layout.path,
   },
   {
-    id: 'Navigation',
-    title: '导航',
-    content: '包含标签栏、导航栏、分段器等',
-    icon: iconNavigation,
-    path: pathCollection.navigation.path,
+    id: 'Action',
+    title: '操作反馈',
+    content: '包含对话框、进度条、动作面板等',
+    icon: iconAction,
+    path: pathCollection.action.path,
   },
+  // {
+  //   id: 'Navigation',
+  //   title: '导航',
+  //   content: '包含标签栏、导航栏、分段器等',
+  //   icon: iconNavigation,
+  //   path: pathCollection.navigation.path,
+  // },
   {
-    id: 'Advanced',
-    title: '高阶组件',
+    id: 'Extra',
+    title: '扩展组件',
     content: '包含日历等',
     icon: iconHOC,
-    path: pathCollection.advanced.path,
+    path: pathCollection.extraComponent.path,
+  },
+  {
+    id: 'Interact',
+    title: '交互操作',
+    content: '包含按钮操作等',
+    icon: iconHOC,
+    path: pathCollection.interact.path,
   },
 ];
 
@@ -389,8 +396,8 @@ export default class Index extends PageWrapper {
                 path: pathCollection.noticeBar.path,
               },
               {
-                name: 'Copyright',
-                path: pathCollection.copyright.path,
+                name: 'Footer',
+                path: pathCollection.footer.path,
               },
               {
                 name: 'HelpBox',

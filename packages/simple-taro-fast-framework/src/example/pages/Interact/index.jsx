@@ -13,7 +13,7 @@ import {
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 import {
   getOverviewAction,
@@ -21,11 +21,23 @@ import {
   getOverviewActionModal,
 } from './Assist/action';
 
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
 @connect(({ news, global }) => ({
   news,
   global,
 }))
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Interact',
+    name: '交互操作',
+  };
+
   loadRemoteRequestAfterMount = true;
 
   constructor(props) {
@@ -87,13 +99,13 @@ export default class Index extends PageWrapper {
     recordObject(this.getRemoteMetaData());
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { dataLoading, firstLoadSuccess } = this.state;
 
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card header="Action" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="Action" style={style} headerStyle={cardHeaderStyle}>
             <Space wrap>
               {buildButton({
                 inner: 'Action',
@@ -134,11 +146,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="联动展示"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="联动展示" style={style} headerStyle={cardHeaderStyle}>
             <Spin spin={!firstLoadSuccess}>
               <FadeView show={!dataLoading}>
                 <VerticalBox
@@ -169,5 +177,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

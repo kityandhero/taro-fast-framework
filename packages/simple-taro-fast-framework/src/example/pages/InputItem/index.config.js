@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'InputItem',
+  navigationBarTitleText: '输入项',
 };

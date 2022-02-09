@@ -1,4 +1,3 @@
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import Switch from '../Switch';
@@ -53,10 +52,6 @@ class SwitchItem extends ComponentBase {
       return null;
     }
 
-    if (!!hidden) {
-      return null;
-    }
-
     return (
       <Item
         key={key}
@@ -83,9 +78,7 @@ class SwitchItem extends ComponentBase {
           />
         }
         extraContainerStyle={{
-          ...{
-            paddingRight: transformSize(24),
-          },
+          ...{},
           ...extraContainerStyle,
         }}
       />

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Price',
+  navigationBarTitleText: '价格',
 };

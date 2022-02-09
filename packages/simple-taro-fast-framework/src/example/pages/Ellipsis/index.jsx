@@ -4,16 +4,28 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, Ellipsis, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Ellipsis',
+    name: '文字省略',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
             header="显示一行文字"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Ellipsis
@@ -34,7 +46,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="显示两行文字"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Ellipsis
@@ -54,7 +66,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="显示三行文字"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Ellipsis
@@ -74,5 +86,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

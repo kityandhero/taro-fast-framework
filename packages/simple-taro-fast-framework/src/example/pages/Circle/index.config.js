@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Circle',
+  navigationBarTitleText: '进度环',
 };

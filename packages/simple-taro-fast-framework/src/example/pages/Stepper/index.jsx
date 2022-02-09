@@ -7,9 +7,21 @@ import {
 import { Card, Stepper, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
-export default class Index extends PageWrapper {
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
+
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Stepper',
+    name: '进步器',
+  };
+
   constructor(props) {
     super(props);
 
@@ -27,7 +39,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { num } = this.state;
 
     return (
@@ -35,7 +47,7 @@ export default class Index extends PageWrapper {
         <Space direction="vertical" fillWidth>
           <Card
             header="基础用法(非受控)"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper
@@ -46,11 +58,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card
-            header="受控组件"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="受控组件" style={style} headerStyle={cardHeaderStyle}>
             <Stepper
               value={num}
               onChange={(value) => {
@@ -60,17 +68,13 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card
-            header="步长设置"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="步长设置" style={style} headerStyle={cardHeaderStyle}>
             <Stepper step={10} defaultValue={10} />
           </Card>
 
           <Card
             header="设置输入范围"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper min={-5} max={5} />
@@ -78,7 +82,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="格式化到整数"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper digits={0} />
@@ -86,33 +90,25 @@ export default class Index extends PageWrapper {
 
           <Card
             header="格式化到一位小数"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper digits={1} />
           </Card>
 
-          <Card
-            header="禁用状态"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
             <Stepper disabled />
           </Card>
 
           <Card
             header="输入框只读状态"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper inputReadOnly />
           </Card>
 
-          <Card
-            header="自定义宽度"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="自定义宽度" style={style} headerStyle={cardHeaderStyle}>
             <Stepper
               style={{ width: transformSize(260) }}
               defaultValue={10000}
@@ -120,27 +116,15 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card
-            header="自定义颜色"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="自定义颜色" style={style} headerStyle={cardHeaderStyle}>
             <Stepper operateColor="#a923e1" defaultValue={30} step={1} />
           </Card>
 
-          <Card
-            header="无背景模式"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="无背景模式" style={style} headerStyle={cardHeaderStyle}>
             <Stepper useBackground={false} defaultValue={30} step={1} />
           </Card>
 
-          <Card
-            header="圆形轮廓"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="圆形轮廓" style={style} headerStyle={cardHeaderStyle}>
             <Stepper
               operateColor="#fff"
               backgroundColor="#a123e4"
@@ -152,7 +136,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="获得/失去焦点"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper
@@ -171,7 +155,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="自定义css变量"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Stepper
@@ -188,11 +172,7 @@ export default class Index extends PageWrapper {
             />
           </Card>
 
-          <Card
-            header="复杂配置"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
             <Stepper
               style={{
                 '--border-inner': 'none',
@@ -211,5 +191,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

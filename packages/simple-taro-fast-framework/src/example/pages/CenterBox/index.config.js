@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'CenterBox',
+  navigationBarTitleText: '容器居中',
 };

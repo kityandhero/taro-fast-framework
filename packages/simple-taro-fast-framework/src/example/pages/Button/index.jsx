@@ -9,7 +9,14 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const { IconSearch } = Icon;
 
@@ -30,14 +37,19 @@ const colorList = [
   'black',
 ];
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Button',
+    name: '按钮',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
             header="普通按钮模式"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap>
@@ -47,7 +59,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="微信按钮模式"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap>
@@ -57,7 +69,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="内置颜色 附带阴影"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap size={16}>
@@ -88,7 +100,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card header="渐变色" style={cardStyle} headerStyle={cardHeaderStyle}>
+          <Card header="渐变色" style={style} headerStyle={cardHeaderStyle}>
             <Space wrap size={16}>
               <Button backgroundColor={['#f43f3b', ' #ec008c']}>
                 gradual-red
@@ -134,11 +146,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="自定义颜色"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="自定义颜色" style={style} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button backgroundColor="#45e209">Solid</Button>
               <Button backgroundColor="#99a2a9">Outline</Button>
@@ -162,7 +170,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="不同的填充模式"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap>
@@ -194,7 +202,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="不同大小的按钮"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap align="center">
@@ -230,11 +238,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="块级按钮"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="块级按钮" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
               <Button block size="mini">
                 Block Button
@@ -266,11 +270,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="禁用状态"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button disabled>Disabled</Button>
               <Button disabled backgroundColor="blue">
@@ -290,11 +290,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="加载状态"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="加载状态" style={style} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button backgroundColor="blue" loading loadingText="加载中">
                 Loading
@@ -361,7 +357,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="带图标的按钮"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Button>
@@ -383,7 +379,7 @@ export default class Index extends PageWrapper {
 
           <Card
             header="不同类型圆角"
-            style={cardStyle}
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <Space wrap>
@@ -418,11 +414,7 @@ export default class Index extends PageWrapper {
             </Space>
           </Card>
 
-          <Card
-            header="自定义大小"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="自定义大小" style={style} headerStyle={cardHeaderStyle}>
             <Space wrap>
               <Button
                 shape="default"
@@ -503,5 +495,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

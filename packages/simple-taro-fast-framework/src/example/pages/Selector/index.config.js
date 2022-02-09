@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Selector',
+  navigationBarTitleText: '高级选择',
 };

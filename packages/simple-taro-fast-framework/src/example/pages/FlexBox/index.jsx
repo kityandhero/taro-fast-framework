@@ -4,7 +4,14 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, FlexBox, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const boxStyle = {
   width: transformSize(80),
@@ -17,22 +24,23 @@ const autoStyle = {
   backgroundColor: '#ccc',
 };
 
-export default class Index extends PageWrapper {
-  renderFurther() {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'FlexBox',
+    name: '自动布局',
+  };
+
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
-          <Card
-            header="仅左侧布局"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
+          <Card header="仅左侧布局" style={style} headerStyle={cardHeaderStyle}>
             <FlexBox left={<View style={boxStyle}></View>} />
           </Card>
 
           <Card
-            header="左侧自适应布局"
-            style={cardStyle}
+            header="左侧自动布局"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <FlexBox
@@ -42,8 +50,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="右侧自适应布局"
-            style={cardStyle}
+            header="右侧自自动布局"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <FlexBox
@@ -54,8 +62,8 @@ export default class Index extends PageWrapper {
           </Card>
 
           <Card
-            header="上下自适应布局 , 下部固定高度"
-            style={cardStyle}
+            header="上下自动布局 , 下部固定高度"
+            style={style}
             headerStyle={cardHeaderStyle}
           >
             <FlexBox
@@ -82,5 +90,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Space',
+  navigationBarTitleText: '间隔布局',
 };

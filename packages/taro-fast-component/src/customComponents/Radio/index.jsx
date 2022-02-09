@@ -163,6 +163,8 @@ class Radio extends ComponentBase {
 
     const layout = this.getLayout();
 
+    const listCount = (isArray(options) ? options : []).length;
+
     if (layout === 'column') {
       return (
         <Grid columns={columns} gap={columnGap}>
@@ -341,7 +343,7 @@ class Radio extends ComponentBase {
                 clickable
                 arrow={false}
                 disabled={disabled}
-                border={border}
+                border={index === listCount - 1 ? false : border}
                 extra={
                   !stringIsNullOrWhiteSpace(valueStage) &&
                   valueStage === valueItem
@@ -349,9 +351,7 @@ class Radio extends ComponentBase {
                     : iconUncheck || null
                 }
                 extraContainerStyle={{
-                  ...{
-                    paddingRight: transformSize(24),
-                  },
+                  ...{},
                   ...extraContainerStyle,
                 }}
                 onClick={() => {
@@ -364,7 +364,6 @@ class Radio extends ComponentBase {
           return (
             <Item
               key={key}
-              // prefix={prefix}
               prefix={
                 !stringIsNullOrWhiteSpace(valueStage) &&
                 valueStage === valueItem
@@ -378,7 +377,7 @@ class Radio extends ComponentBase {
               clickable
               arrow={false}
               disabled={disabled}
-              border={border}
+              border={index === listCount - 1 ? false : border}
               extra={
                 extraItem ? (
                   <CenterBox>
@@ -398,9 +397,7 @@ class Radio extends ComponentBase {
                 ) : null
               }
               extraContainerStyle={{
-                ...{
-                  paddingRight: transformSize(24),
-                },
+                ...{},
                 ...extraContainerStyle,
               }}
               onClick={() => {

@@ -21,7 +21,7 @@ export { default as SwitchItem } from './SwitchItem';
 export { default as Countdown } from './Countdown';
 export { default as DataGrid } from './DataGrid';
 export { default as HelpBox } from './HelpBox';
-export { default as Copyright } from './Copyright';
+export { default as Footer } from './Footer';
 export { default as FloatAction } from './FloatAction';
 export { default as ActionSheet } from './ActionSheet';
 export { default as Modal } from './Modal';

@@ -10,7 +10,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconSketch } = Icon;
 
@@ -21,7 +21,12 @@ const style = {
   ...cardStyle,
 };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'StepperItem',
+    name: '进步项',
+  };
+
   handleClick = (type) => {
     this.bannerNotify({
       message: '消息通知',
@@ -29,7 +34,7 @@ export default class Index extends PageWrapper {
     });
   };
 
-  renderFurther() {
+  renderContent = () => {
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
@@ -39,7 +44,7 @@ export default class Index extends PageWrapper {
             headerStyle={cardHeaderStyle}
             space={false}
           >
-            <StepperItem label="购买数量" />
+            <StepperItem label="购买数量" border={false} />
           </Card>
 
           <Card
@@ -54,7 +59,7 @@ export default class Index extends PageWrapper {
               clickable
               arrow
             />
-            <StepperItem title="调整数量" label="购买数量" />
+            <StepperItem title="调整数量" label="购买数量" border={false} />
           </Card>
 
           <Card
@@ -67,6 +72,7 @@ export default class Index extends PageWrapper {
               label="购买数量"
               disabled
               prefix={<IconSketch size={36} />}
+              border={false}
             />
           </Card>
 
@@ -95,6 +101,7 @@ export default class Index extends PageWrapper {
               defaultValue={45}
               step={1}
             />
+
             <StepperItem
               title="调整数量"
               label="购买数量"
@@ -111,6 +118,7 @@ export default class Index extends PageWrapper {
               circle
               defaultValue={45}
               step={1}
+              border={false}
             />
           </Card>
 
@@ -140,6 +148,7 @@ export default class Index extends PageWrapper {
               circle
               defaultValue={45}
               step={1}
+              border={false}
             />
           </Card>
 
@@ -157,5 +166,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }

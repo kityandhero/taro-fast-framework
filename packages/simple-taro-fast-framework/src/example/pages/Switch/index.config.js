@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Switch',
+  navigationBarTitleText: '开关',
 };

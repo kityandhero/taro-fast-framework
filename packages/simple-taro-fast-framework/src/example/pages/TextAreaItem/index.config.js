@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'TextAreaItem',
+  navigationBarTitleText: '文本域编辑',
 };

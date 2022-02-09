@@ -70,15 +70,6 @@ class ActionSheet extends ComponentBase {
     return {};
   }
 
-  // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
-    const { visibleStage } = this.state;
-
-    if (!visibleStage) {
-      this.handleClose();
-    }
-  };
-
   handleClose = () => {
     const { onClose } = this.props;
 

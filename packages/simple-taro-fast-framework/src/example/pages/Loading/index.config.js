@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Loading',
+  navigationBarTitleText: '加载提示',
 };

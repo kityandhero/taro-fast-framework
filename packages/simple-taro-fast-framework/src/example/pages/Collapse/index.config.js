@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Collapse',
+  navigationBarTitleText: '折叠面板',
 };

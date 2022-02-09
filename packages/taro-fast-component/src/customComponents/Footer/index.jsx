@@ -13,27 +13,27 @@ import ImageBox from '../ImageBox';
 
 const defaultProps = {
   style: {},
-  logo: null,
+  image: null,
   circle: false,
-  name: '',
-  copyright: '',
+  text: '',
+  description: '',
   color: '',
 };
 
-class Copyright extends ComponentBase {
+class Footer extends ComponentBase {
   renderFurther() {
-    const { style, color, circle, logo, name, copyright } = this.props;
+    const { style, color, circle, image, text, description } = this.props;
 
-    const nameHeight = 50;
-    const copyrightHeight = 40;
+    const textHeight = 50;
+    const descriptionHeight = 40;
 
-    const showName =
-      !stringIsNullOrWhiteSpace(logo) || !stringIsNullOrWhiteSpace(name);
+    const showTop =
+      !stringIsNullOrWhiteSpace(image) || !stringIsNullOrWhiteSpace(text);
 
-    const showCopyright = !stringIsNullOrWhiteSpace(copyright);
+    const showBottom = !stringIsNullOrWhiteSpace(description);
 
     const totalHeight =
-      (showName ? nameHeight : 0) + (showCopyright ? copyrightHeight : 0);
+      (showTop ? textHeight : 0) + (showBottom ? descriptionHeight : 0);
 
     return (
       <View
@@ -42,12 +42,12 @@ class Copyright extends ComponentBase {
           ...{ height: transformSize(totalHeight) },
         }}
       >
-        {showName ? (
-          <View style={{ height: transformSize(nameHeight) }}>
+        {showTop ? (
+          <View style={{ height: transformSize(textHeight) }}>
             <CenterBox>
               <FlexBox
                 left={
-                  stringIsNullOrWhiteSpace(logo) ? null : (
+                  stringIsNullOrWhiteSpace(image) ? null : (
                     <VerticalBox>
                       <View
                         style={{
@@ -55,13 +55,13 @@ class Copyright extends ComponentBase {
                           width: transformSize(40),
                         }}
                       >
-                        <ImageBox src={logo} circle={circle} lazyLoad />
+                        <ImageBox src={image} circle={circle} lazyLoad />
                       </View>
                     </VerticalBox>
                   )
                 }
                 right={
-                  stringIsNullOrWhiteSpace(name) ? null : (
+                  stringIsNullOrWhiteSpace(text) ? null : (
                     <VerticalBox>
                       <View
                         style={{
@@ -76,7 +76,7 @@ class Copyright extends ComponentBase {
                             : {}),
                         }}
                       >
-                        {name}
+                        {text}
                       </View>
                     </VerticalBox>
                   )
@@ -86,8 +86,8 @@ class Copyright extends ComponentBase {
           </View>
         ) : null}
 
-        {showCopyright ? (
-          <View style={{ height: transformSize(copyrightHeight) }}>
+        {showBottom ? (
+          <View style={{ height: transformSize(descriptionHeight) }}>
             <CenterBox>
               <View
                 style={{
@@ -102,7 +102,7 @@ class Copyright extends ComponentBase {
                     : {}),
                 }}
               >
-                {copyright}
+                {description}
               </View>
             </CenterBox>
           </View>
@@ -112,8 +112,8 @@ class Copyright extends ComponentBase {
   }
 }
 
-Copyright.defaultProps = {
+Footer.defaultProps = {
   ...defaultProps,
 };
 
-export default Copyright;
+export default Footer;

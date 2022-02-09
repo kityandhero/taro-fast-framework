@@ -187,6 +187,8 @@ class CheckBox extends ComponentBase {
 
     const layout = this.getLayout();
 
+    const listCount = (isArray(options) ? options : []).length;
+
     if (layout === 'column') {
       return (
         <Grid columns={columns} gap={columnGap}>
@@ -363,16 +365,14 @@ class CheckBox extends ComponentBase {
                 clickable
                 arrow={false}
                 disabled={disabled}
-                border={border}
+                border={index === listCount - 1 ? false : border}
                 extra={
                   inCollection(valueStage || [], valueItem)
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || uncheckStatusIconForListView
                 }
                 extraContainerStyle={{
-                  ...{
-                    paddingRight: transformSize(24),
-                  },
+                  ...{},
                   ...extraContainerStyle,
                 }}
                 onClick={() => {
@@ -397,7 +397,7 @@ class CheckBox extends ComponentBase {
               clickable
               arrow={false}
               disabled={disabled}
-              border={border}
+              border={index === listCount - 1 ? false : border}
               extra={
                 extraItem ? (
                   <CenterBox>
@@ -417,9 +417,7 @@ class CheckBox extends ComponentBase {
                 ) : null
               }
               extraContainerStyle={{
-                ...{
-                  paddingRight: transformSize(24),
-                },
+                ...{},
                 ...extraContainerStyle,
               }}
               onClick={() => {

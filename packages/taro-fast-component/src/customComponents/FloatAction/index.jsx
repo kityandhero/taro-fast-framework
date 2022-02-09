@@ -97,7 +97,11 @@ function buildClasses(
   };
 }
 
-const defaultPosition = {
+const defaultProps = {
+  left: 'var(--tfc-30)',
+  right: 'var(--tfc-30)',
+  top: 'var(--tfc-30)',
+  bottom: 'var(--tfc-30)',
   hoverClass: 'default',
   theme: 'balanced',
   position: 'bottomRight',
@@ -265,6 +269,10 @@ class FloatAction extends ComponentBase {
 
   renderFurther() {
     const {
+      left,
+      right,
+      top,
+      bottom,
       action,
       position,
       theme,
@@ -285,6 +293,13 @@ class FloatAction extends ComponentBase {
     if (hidden) {
       return null;
     }
+
+    const style = {
+      '--left': left,
+      '--right': right,
+      '--top': top,
+      '--bottom': bottom,
+    };
 
     const classes = buildClasses(
       classPrefix,
@@ -313,7 +328,7 @@ class FloatAction extends ComponentBase {
           />
         ) : null}
 
-        <View className={classNames(classPrefix, classes.wrap)}>
+        <View className={classNames(classPrefix, classes.wrap)} style={style}>
           <View
             class={classes.action}
             hoverClass={classes.hover}
@@ -412,7 +427,7 @@ class FloatAction extends ComponentBase {
 }
 
 FloatAction.defaultProps = {
-  ...defaultPosition,
+  ...defaultProps,
 };
 
 export default FloatAction;

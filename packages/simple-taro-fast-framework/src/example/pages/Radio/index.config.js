@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Radio',
+  navigationBarTitleText: '单选',
 };

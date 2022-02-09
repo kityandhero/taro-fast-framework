@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'DataGrid',
+  navigationBarTitleText: '数据表格',
 };

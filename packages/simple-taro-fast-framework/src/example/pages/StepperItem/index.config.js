@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'StepperItem',
+  navigationBarTitleText: '进步项',
 };

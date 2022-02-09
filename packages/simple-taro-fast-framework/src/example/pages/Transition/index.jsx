@@ -8,7 +8,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 import './index.less';
 
@@ -19,7 +19,12 @@ const style = {
   ...cardStyle,
 };
 
-export default class Index extends PageWrapper {
+export default class Index extends ContentPageBase {
+  headerData = {
+    id: 'Transition',
+    name: '变换动画',
+  };
+
   constructor(props) {
     super(props);
 
@@ -116,16 +121,17 @@ export default class Index extends PageWrapper {
     console.log('after leave');
   };
 
-  renderFurther() {
+  renderContent = () => {
     const { show, name, showCustom } = this.state;
 
     return (
       <View className="index">
         <Space direction="vertical" fillWidth>
           <Card
-            header="Transition 动画"
+            header="变换动画类型"
             style={style}
             headerStyle={cardHeaderStyle}
+            space={false}
           >
             <Item label="Fade" arrow onClick={this.onClickFade} />
             <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
@@ -138,7 +144,12 @@ export default class Index extends PageWrapper {
             <Item label="Slide Right" arrow onClick={this.onClickSlideRight} />
             <Item label="Zoom" arrow onClick={this.onClickZoom} />
             <Item label="Punch" arrow onClick={this.onClickPunch} />
-            <Item label="Custom" arrow onClick={this.onClickCustom} />
+            <Item
+              label="Custom"
+              arrow
+              border={false}
+              onClick={this.onClickCustom}
+            />
           </Card>
 
           <Transition show={show} name={name} className="block"></Transition>
@@ -164,5 +175,5 @@ export default class Index extends PageWrapper {
         </Space>
       </View>
     );
-  }
+  };
 }
