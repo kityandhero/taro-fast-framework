@@ -9,7 +9,6 @@ import BaseComponent from '../BaseComponent';
 
 import CenterBox from '../CenterBox';
 import VerticalBox from '../VerticalBox';
-import FlexBox from '../FlexBox';
 import ImageBox from '../ImageBox';
 
 const defaultProps = {
@@ -46,43 +45,38 @@ class Footer extends BaseComponent {
         {showTop ? (
           <View style={{ height: transformSize(textHeight) }}>
             <CenterBox>
-              <FlexBox
-                left={
-                  stringIsNullOrWhiteSpace(image) ? null : (
-                    <VerticalBox>
-                      <View
-                        style={{
-                          padding: `${transformSize(10)} ${transformSize(10)}`,
-                          width: transformSize(40),
-                        }}
-                      >
-                        <ImageBox src={image} circle={circle} lazyLoad />
-                      </View>
-                    </VerticalBox>
-                  )
-                }
-                right={
-                  stringIsNullOrWhiteSpace(text) ? null : (
-                    <VerticalBox>
-                      <View
-                        style={{
-                          ...{
-                            color: '#00000073',
-                            fontSize: transformSize(24),
-                          },
-                          ...(!stringIsNullOrWhiteSpace(color)
-                            ? {
-                                color,
-                              }
-                            : {}),
-                        }}
-                      >
-                        {text}
-                      </View>
-                    </VerticalBox>
-                  )
-                }
-              />
+              {stringIsNullOrWhiteSpace(image) ? null : (
+                <VerticalBox>
+                  <View
+                    style={{
+                      padding: `${transformSize(10)} ${transformSize(10)}`,
+                      width: transformSize(40),
+                    }}
+                  >
+                    <ImageBox src={image} circle={circle} lazyLoad />
+                  </View>
+                </VerticalBox>
+              )}
+
+              {stringIsNullOrWhiteSpace(text) ? null : (
+                <VerticalBox>
+                  <View
+                    style={{
+                      ...{
+                        color: '#00000073',
+                        fontSize: transformSize(24),
+                      },
+                      ...(!stringIsNullOrWhiteSpace(color)
+                        ? {
+                            color,
+                          }
+                        : {}),
+                    }}
+                  >
+                    {text}
+                  </View>
+                </VerticalBox>
+              )}
             </CenterBox>
           </View>
         ) : null}

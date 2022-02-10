@@ -5,7 +5,7 @@ import {
   Space,
   HelpBox,
   Grid,
-  HorizontalCenterBox,
+  FlexBox,
   Icon,
   CenterBox,
 } from 'taro-fast-component/es/customComponents';
@@ -138,6 +138,7 @@ const boxStyle = {
 };
 
 const nameStyle = {
+  width: '100%',
   fontSize: 'var(--tfc-28)',
   height: 'var(--tfc-36)',
   lineHeight: 'var(--tfc-36)',
@@ -157,18 +158,16 @@ export default class Index extends ContentPageBase {
         {list.map((item, index) => {
           return (
             <Grid.Item key={`${keyPrefix}_${index}`}>
-              <View style={boxStyle}>
-                <CenterBox>
-                  <View>
-                    <HorizontalCenterBox>
-                      <Icon value={item} size={40} />
-                    </HorizontalCenterBox>
-                    <HorizontalCenterBox>
-                      <View style={nameStyle}>{item}</View>
-                    </HorizontalCenterBox>
-                  </View>
-                </CenterBox>
-              </View>
+              <FlexBox
+                style={boxStyle}
+                direction="vertical"
+                top={
+                  <CenterBox>
+                    <Icon value={item} size={40} />
+                  </CenterBox>
+                }
+                bottom={<View style={nameStyle}>{item}</View>}
+              />
             </Grid.Item>
           );
         })}

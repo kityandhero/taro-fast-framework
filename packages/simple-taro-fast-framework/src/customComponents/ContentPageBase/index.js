@@ -54,6 +54,8 @@ export default class ContentPageBase extends PageWrapper {
   renderFurther() {
     const { show } = this.state;
 
+    return this.renderContentView();
+
     return (
       <Spin fullscreen spin={!show}>
         <FadeView show={show} className="page">

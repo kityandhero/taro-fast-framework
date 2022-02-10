@@ -1,6 +1,5 @@
 import BaseComponent from '../BaseComponent';
 
-import HorizontalCenterBox from '../HorizontalCenterBox';
 import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
@@ -12,9 +11,9 @@ class CenterBox extends BaseComponent {
     const { children } = this.props;
 
     return (
-      <HorizontalCenterBox>
-        <VerticalBox>{children}</VerticalBox>
-      </HorizontalCenterBox>
+      <VerticalBox align="center" alignJustify="center">
+        {children}
+      </VerticalBox>
     );
   }
 }
