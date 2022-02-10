@@ -29,53 +29,51 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="基础用法" style={style} headerStyle={cardHeaderStyle}>
-            <Grid columns={3} gap={8}>
-              <Grid.Item>
-                <View style={itemStyle}>A</View>
-              </Grid.Item>
-              <Grid.Item>
-                <View style={itemStyle}>B</View>
-              </Grid.Item>
-              <Grid.Item>
-                <View style={itemStyle}>C</View>
-              </Grid.Item>
-              <Grid.Item>
-                <View style={itemStyle}>D</View>
-              </Grid.Item>
-              <Grid.Item>
-                <View style={itemStyle}>E</View>
-              </Grid.Item>
-            </Grid>
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card header="基础用法" style={style} headerStyle={cardHeaderStyle}>
+          <Grid columns={3} gap={8}>
+            <Grid.Item>
+              <View style={itemStyle}>A</View>
+            </Grid.Item>
+            <Grid.Item>
+              <View style={itemStyle}>B</View>
+            </Grid.Item>
+            <Grid.Item>
+              <View style={itemStyle}>C</View>
+            </Grid.Item>
+            <Grid.Item>
+              <View style={itemStyle}>D</View>
+            </Grid.Item>
+            <Grid.Item>
+              <View style={itemStyle}>E</View>
+            </Grid.Item>
+          </Grid>
+        </Card>
 
-          <Card
-            header="控制格子的跨度"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <Grid columns={3} gap={8}>
-              <Grid.Item>
-                <View style={itemStyle}>A</View>
-              </Grid.Item>
-              <Grid.Item span={2}>
-                <View style={itemStyle}>B</View>
-              </Grid.Item>
-              <Grid.Item span={2}>
-                <View style={itemStyle}>C</View>
-              </Grid.Item>
-              <Grid.Item>
-                <View style={itemStyle}>D</View>
-              </Grid.Item>
-              <Grid.Item span={3}>
-                <View style={itemStyle}>E</View>
-              </Grid.Item>
-            </Grid>
-          </Card>
-        </Space>
-      </View>
+        <Card
+          header="控制格子的跨度"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Grid columns={3} gap={8}>
+            <Grid.Item>
+              <View style={itemStyle}>A</View>
+            </Grid.Item>
+            <Grid.Item span={2}>
+              <View style={itemStyle}>B</View>
+            </Grid.Item>
+            <Grid.Item span={2}>
+              <View style={itemStyle}>C</View>
+            </Grid.Item>
+            <Grid.Item>
+              <View style={itemStyle}>D</View>
+            </Grid.Item>
+            <Grid.Item span={3}>
+              <View style={itemStyle}>E</View>
+            </Grid.Item>
+          </Grid>
+        </Card>
+      </Space>
     );
   };
 }

@@ -135,7 +135,7 @@ export default class Index extends ContentPageBase {
     const { buttonFill } = this.state;
 
     return (
-      <View className="index">
+      <>
         <Space direction="vertical" fillWidth>
           <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
             <Space direction="vertical" fillWidth>
@@ -343,7 +343,7 @@ export default class Index extends ContentPageBase {
             </View>
           </CenterBox>
         </Modal>
-      </View>
+      </>
     );
   };
 }

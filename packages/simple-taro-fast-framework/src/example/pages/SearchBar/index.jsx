@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import {
   transformSize,
   showInfoMessage,
@@ -51,101 +49,99 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="搜索模式"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SearchBar
-              style={{
-                margin: transformSize(40),
-              }}
-              mode="search"
-              onSearch={this.handleSearch}
-            />
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="搜索模式"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SearchBar
+            style={{
+              margin: transformSize(40),
+            }}
+            mode="search"
+            onSearch={this.handleSearch}
+          />
 
-            <SearchBar
-              style={{
-                margin: transformSize(40),
-                borderRadius: transformSize(100),
-              }}
-              mode="search"
-              onSearch={this.handleSearch}
-            />
-          </Card>
+          <SearchBar
+            style={{
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
+            }}
+            mode="search"
+            onSearch={this.handleSearch}
+          />
+        </Card>
 
-          <Card
-            header="跳转模式"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SearchBar
-              style={{
-                margin: transformSize(40),
-                borderRadius: transformSize(100),
-              }}
-              mode="navigate"
-              searchStyle={{}}
-              onNavigate={this.handleNavigate}
-            />
+        <Card
+          header="跳转模式"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SearchBar
+            style={{
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
+            }}
+            mode="navigate"
+            searchStyle={{}}
+            onNavigate={this.handleNavigate}
+          />
 
-            <SearchBar
-              style={{
-                margin: transformSize(40),
-                borderRadius: transformSize(100),
-              }}
-              mode="navigate"
-              showSearch={false}
-              onNavigate={this.handleNavigate}
-            />
-          </Card>
+          <SearchBar
+            style={{
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
+            }}
+            mode="navigate"
+            showSearch={false}
+            onNavigate={this.handleNavigate}
+          />
+        </Card>
 
-          <Card
-            header="自定义样式"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <SearchBar
-              style={{
-                margin: transformSize(40),
-                borderRadius: transformSize(100),
-              }}
-              align="center"
-              icon={<IconSketch size={28} color="#6b6ead" />}
-              placeholder="搜索商品"
-              mode="navigate"
-              searchStyle={{
-                color: '#4532e5',
-              }}
-              valueStyle={{
-                color: '#4532e5',
-                align: 'center',
-              }}
-              placeholderStyle={{
-                color: '#4532e5',
-              }}
-              onNavigate={this.handleNavigate}
-            />
-          </Card>
+        <Card
+          header="自定义样式"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <SearchBar
+            style={{
+              margin: transformSize(40),
+              borderRadius: transformSize(100),
+            }}
+            align="center"
+            icon={<IconSketch size={28} color="#6b6ead" />}
+            placeholder="搜索商品"
+            mode="navigate"
+            searchStyle={{
+              color: '#4532e5',
+            }}
+            valueStyle={{
+              color: '#4532e5',
+              align: 'center',
+            }}
+            placeholderStyle={{
+              color: '#4532e5',
+            }}
+            onNavigate={this.handleNavigate}
+          />
+        </Card>
 
-          <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '支持搜索与跳转模式，具体属性参考源代码与样例.',
-                },
-              ]}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: '支持搜索与跳转模式，具体属性参考源代码与样例.',
+              },
+            ]}
+          />
+        </Card>
+      </Space>
     );
   };
 }

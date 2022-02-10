@@ -200,7 +200,7 @@ export default class Index extends ContentPageBase {
     const { color, alpha, duration, zIndex, animal } = this.state;
 
     return (
-      <View className="index">
+      <>
         <Space direction="vertical" fillWidth>
           <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
             <View style={{ height: transformSize(300), position: 'relative' }}>
@@ -323,7 +323,7 @@ export default class Index extends ContentPageBase {
         >
           <View style={boxStyle} />
         </Overlay>
-      </View>
+      </>
     );
   };
 }

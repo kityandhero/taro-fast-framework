@@ -30,109 +30,100 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
-            <NoticeBar icon={<IconVolumePlus size={38} />}>
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
+          <NoticeBar icon={<IconVolumePlus size={38} />}>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
 
-          <Card
-            header="可关闭 [single 模式非 marquee 下生效]"
-            style={style}
-            headerStyle={cardHeaderStyle}
+        <Card
+          header="可关闭 [single 模式非 marquee 下生效]"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <NoticeBar single closeable>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
+
+        <Card
+          header="marquee模式 [marquee 将自动启用 single 模式]"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <NoticeBar marquee>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
+
+        <Card
+          header="自定义扩展 [single 模式下生效]"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <NoticeBar
+            single
+            extra={
+              <View
+                style={{
+                  width: transformSize(100),
+                  height: '100%',
+                  color: '#000',
+                  padding: `0 ${transformSize(10)}`,
+                  fontSize: transformSize(28),
+                  textAlign: 'center',
+                }}
+              >
+                extra
+              </View>
+            }
           >
-            <NoticeBar single closeable>
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
 
-          <Card
-            header="marquee模式 [marquee 将自动启用 single 模式]"
-            style={style}
-            headerStyle={cardHeaderStyle}
+        <Card
+          header="显示更多 [single 模式下生效]"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <NoticeBar single extra={<More />}>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
+
+        <Card
+          header="自定义”更多“文字 [single 模式下生效]"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <NoticeBar
+            single
+            extra={
+              <More
+                text="查看更多"
+                onClick={() => {
+                  console.log('click more');
+                }}
+              />
+            }
           >
-            <NoticeBar marquee>
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
 
-          <Card
-            header="自定义扩展 [single 模式下生效]"
-            style={style}
-            headerStyle={cardHeaderStyle}
+        <Card header="例子展示" style={style} headerStyle={cardHeaderStyle}>
+          <NoticeBar
+            icon={<IconVolumePlus size={38} />}
+            marquee
+            single
+            extra={<More />}
           >
-            <NoticeBar
-              single
-              extra={
-                <View
-                  style={{
-                    width: transformSize(100),
-                    height: '100%',
-                    color: '#000',
-                    padding: `0 ${transformSize(10)}`,
-                    fontSize: transformSize(28),
-                    textAlign: 'center',
-                  }}
-                >
-                  extra
-                </View>
-              }
-            >
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
-
-          <Card
-            header="显示更多 [single 模式下生效]"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <NoticeBar single extra={<More />}>
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
-
-          <Card
-            header="自定义”更多“文字 [single 模式下生效]"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <NoticeBar
-              single
-              extra={
-                <More
-                  text="查看更多"
-                  onClick={() => {
-                    console.log('click more');
-                  }}
-                />
-              }
-            >
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
-
-          <Card header="例子展示" style={style} headerStyle={cardHeaderStyle}>
-            <NoticeBar
-              icon={<IconVolumePlus size={38} />}
-              marquee
-              single
-              extra={<More />}
-            >
-              这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar
-              通告栏
-            </NoticeBar>
-          </Card>
-        </Space>
-      </View>
+            这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏
+          </NoticeBar>
+        </Card>
+      </Space>
     );
   };
 }

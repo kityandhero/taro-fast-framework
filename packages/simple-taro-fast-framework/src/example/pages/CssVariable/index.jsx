@@ -20,34 +20,32 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="像素变量"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            footer={
-              <HelpBox
-                showTitle={false}
-                showNumber={false}
-                list={[
-                  {
-                    text: '1000 ~ 2000 之间,步长变更为10',
-                  },
-                ]}
-              />
-            }
-          >
-            <Space wrap>
-              <View>--tfc-1 ~ --tfc-2000</View>
-            </Space>
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="像素变量"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          footer={
+            <HelpBox
+              showTitle={false}
+              showNumber={false}
+              list={[
+                {
+                  text: '1000 ~ 2000 之间,步长变更为10',
+                },
+              ]}
+            />
+          }
+        >
+          <Space wrap>
+            <View>--tfc-1 ~ --tfc-2000</View>
+          </Space>
+        </Card>
 
-          <Card header="其他" style={style} headerStyle={cardHeaderStyle}>
-            <View>请参阅 taro-fast-common/es/constants.css</View>
-          </Card>
-        </Space>
-      </View>
+        <Card header="其他" style={style} headerStyle={cardHeaderStyle}>
+          <View>请参阅 taro-fast-common/es/constants.css</View>
+        </Card>
+      </Space>
     );
   };
 }

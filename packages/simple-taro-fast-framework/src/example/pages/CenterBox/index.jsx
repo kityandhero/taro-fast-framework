@@ -36,17 +36,15 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="布局展示" style={style} headerStyle={cardHeaderStyle}>
-            <View style={containorStyle}>
-              <CenterBox style={containorStyle}>
-                <View style={boxStyle}></View>
-              </CenterBox>
-            </View>
-          </Card>
-        </Space>
-      </View>
+      <Space direction="vertical" fillWidth>
+        <Card header="布局展示" style={style} headerStyle={cardHeaderStyle}>
+          <View style={containorStyle}>
+            <CenterBox style={containorStyle}>
+              <View style={boxStyle}></View>
+            </CenterBox>
+          </View>
+        </Card>
+      </Space>
     );
   };
 }

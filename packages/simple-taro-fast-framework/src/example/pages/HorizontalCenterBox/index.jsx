@@ -42,46 +42,44 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="默认布局" style={style} headerStyle={cardHeaderStyle}>
-            <View style={containorStyle}>
-              <HorizontalCenterBox style={horizontalCenterBoxStyle}>
-                <View style={boxStyle}></View>
-              </HorizontalCenterBox>
-            </View>
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card header="默认布局" style={style} headerStyle={cardHeaderStyle}>
+          <View style={containorStyle}>
+            <HorizontalCenterBox style={horizontalCenterBoxStyle}>
+              <View style={boxStyle}></View>
+            </HorizontalCenterBox>
+          </View>
+        </Card>
 
-          <Card
-            header="不自动使用父级高度"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <View style={containorStyle}>
-              <HorizontalCenterBox
-                style={horizontalCenterBoxStyle}
-                fillHeight={false}
-              >
-                <View style={boxStyle}></View>
-              </HorizontalCenterBox>
-            </View>
-          </Card>
+        <Card
+          header="不自动使用父级高度"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <View style={containorStyle}>
+            <HorizontalCenterBox
+              style={horizontalCenterBoxStyle}
+              fillHeight={false}
+            >
+              <View style={boxStyle}></View>
+            </HorizontalCenterBox>
+          </View>
+        </Card>
 
-          <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
-            <HelpBox
-              showTitle={false}
-              list={[
-                {
-                  text: 'style: 默认值为 null.',
-                },
-                {
-                  text: 'fillHeight: 默认值为 true.',
-                },
-              ]}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            list={[
+              {
+                text: 'style: 默认值为 null.',
+              },
+              {
+                text: 'fillHeight: 默认值为 true.',
+              },
+            ]}
+          />
+        </Card>
+      </Space>
     );
   };
 }

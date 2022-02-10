@@ -69,68 +69,67 @@ export default class Index extends ContentPageBase {
     const { size, color, percent } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="demo" style={style} headerStyle={cardHeaderStyle}>
-            <Space direction="vertical" fillWidth>
-              <Circle
+      <Space direction="vertical" fillWidth>
+        <Card header="demo" style={style} headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" fillWidth>
+            <Circle
+              style={{
+                border: `${transformSize(2)} solid #ccc`,
+                padding: transformSize(6),
+                backgroundColor: '#fff',
+              }}
+              backRingColor="#ccc"
+              percent={percent}
+              size={size}
+              color={color}
+              useLineColorGradient
+              lineColorStart="#A9D25B"
+              lineColorEnd="#FA5A2D"
+            >
+              <View
                 style={{
-                  border: `${transformSize(2)} solid #ccc`,
-                  padding: transformSize(6),
-                  backgroundColor: '#fff',
+                  height: transformSize(100),
                 }}
-                backRingColor="#ccc"
-                percent={percent}
-                size={size}
-                color={color}
-                useLineColorGradient
-                lineColorStart="#A9D25B"
-                lineColorEnd="#FA5A2D"
               >
-                <View
-                  style={{
-                    height: transformSize(100),
+                <FlexBox
+                  direction="vertical"
+                  bottomStyle={{
+                    height: transformSize(80),
                   }}
-                >
-                  <FlexBox
-                    direction="vertical"
-                    bottomStyle={{
-                      height: transformSize(80),
-                    }}
-                    top={
-                      <HorizontalCenterBox>
-                        <Text>
-                          {formatTarget({
-                            target: percent,
-                            format: formatCollection.percentage,
-                          })}
-                        </Text>
-                      </HorizontalCenterBox>
-                    }
-                    bottom={<HorizontalCenterBox>当前进度</HorizontalCenterBox>}
-                  ></FlexBox>
-                </View>
-              </Circle>
-
-              <Divider />
-              <View>
-                <Circle
-                  percent={percent}
-                  size={140}
-                  color="#45e236"
-                  useLineColorGradient
-                  lineWidth={10}
-                >
-                  <Text>
-                    {formatTarget({
-                      target: percent,
-                      format: formatCollection.percentage,
-                    })}
-                  </Text>
-                </Circle>
+                  top={
+                    <HorizontalCenterBox>
+                      <Text>
+                        {formatTarget({
+                          target: percent,
+                          format: formatCollection.percentage,
+                        })}
+                      </Text>
+                    </HorizontalCenterBox>
+                  }
+                  bottom={<HorizontalCenterBox>当前进度</HorizontalCenterBox>}
+                ></FlexBox>
               </View>
+            </Circle>
 
-              {/* <Grid columns={4} gap={8}>
+            <Divider />
+            <View>
+              <Circle
+                percent={percent}
+                size={140}
+                color="#45e236"
+                useLineColorGradient
+                lineWidth={10}
+              >
+                <Text>
+                  {formatTarget({
+                    target: percent,
+                    format: formatCollection.percentage,
+                  })}
+                </Text>
+              </Circle>
+            </View>
+
+            {/* <Grid columns={4} gap={8}>
               <Grid.Item>
                 <Circle
                   percent={percent}
@@ -193,35 +192,34 @@ export default class Index extends ContentPageBase {
               </Grid.Item>
             </Grid> */}
 
-              <Divider />
+            <Divider />
 
-              <HorizontalCenterBox>
-                <Space>
-                  <Button
-                    type="primary"
-                    // size="mini"
-                    onClick={() => {
-                      this.setPercent(0.1);
-                    }}
-                  >
-                    增加
-                  </Button>
+            <HorizontalCenterBox>
+              <Space>
+                <Button
+                  type="primary"
+                  // size="mini"
+                  onClick={() => {
+                    this.setPercent(0.1);
+                  }}
+                >
+                  增加
+                </Button>
 
-                  <Button
-                    type="danger"
-                    // size="mini"
-                    onClick={() => {
-                      this.setPercent(-0.1);
-                    }}
-                  >
-                    减小
-                  </Button>
-                </Space>
-              </HorizontalCenterBox>
-            </Space>
-          </Card>
-        </Space>
-      </View>
+                <Button
+                  type="danger"
+                  // size="mini"
+                  onClick={() => {
+                    this.setPercent(-0.1);
+                  }}
+                >
+                  减小
+                </Button>
+              </Space>
+            </HorizontalCenterBox>
+          </Space>
+        </Card>
+      </Space>
     );
   };
 }

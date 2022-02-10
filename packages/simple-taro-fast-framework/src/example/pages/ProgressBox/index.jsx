@@ -59,72 +59,70 @@ export default class Index extends ContentPageBase {
     const { percent } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
-            <Space direction="vertical" fillWidth>
-              <View>
-                <Button
-                  color="primary"
-                  size="mini"
-                  disabled={percent === 100}
-                  onClick={() => {
-                    this.setPercent(10);
-                  }}
-                  style={{ marginRight: transformSize(8) }}
-                >
-                  进度+10
-                </Button>
-                <Button
-                  color="primary"
-                  size="mini"
-                  fill="outline"
-                  onClick={() => {
-                    this.reSetPercent();
-                  }}
-                >
-                  重置
-                </Button>
-              </View>
-              <ProgressBox
-                percent={percent}
-                icon={<IconCheckCircle size={38} color="green" />}
-              />
-            </Space>
-          </Card>
-
-          <Card header="隐藏模式" style={style} headerStyle={cardHeaderStyle}>
-            <Space direction="vertical" fillWidth>
-              <ProgressBox hidden percent={percent} />
-            </Space>
-          </Card>
-
-          <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
+      <Space direction="vertical" fillWidth>
+        <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" fillWidth>
+            <View>
+              <Button
+                color="primary"
+                size="mini"
+                disabled={percent === 100}
+                onClick={() => {
+                  this.setPercent(10);
+                }}
+                style={{ marginRight: transformSize(8) }}
+              >
+                进度+10
+              </Button>
+              <Button
+                color="primary"
+                size="mini"
+                fill="outline"
+                onClick={() => {
+                  this.reSetPercent();
+                }}
+              >
+                重置
+              </Button>
+            </View>
             <ProgressBox
-              percent={70}
-              borderRadius={4}
-              showInfo
-              animation
-              fontSize={28}
-              activeColor="#FF3141"
-              backgroundColor="#000000"
-              icon={<IconCheckCircle size={38} showInfo color="green" />}
+              percent={percent}
+              icon={<IconCheckCircle size={38} color="green" />}
             />
-          </Card>
+          </Space>
+        </Card>
 
-          <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '进度条配置请参照 Progress组件',
-                },
-              ]}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card header="隐藏模式" style={style} headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" fillWidth>
+            <ProgressBox hidden percent={percent} />
+          </Space>
+        </Card>
+
+        <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
+          <ProgressBox
+            percent={70}
+            borderRadius={4}
+            showInfo
+            animation
+            fontSize={28}
+            activeColor="#FF3141"
+            backgroundColor="#000000"
+            icon={<IconCheckCircle size={38} showInfo color="green" />}
+          />
+        </Card>
+
+        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: '进度条配置请参照 Progress组件',
+              },
+            ]}
+          />
+        </Card>
+      </Space>
     );
   };
 }

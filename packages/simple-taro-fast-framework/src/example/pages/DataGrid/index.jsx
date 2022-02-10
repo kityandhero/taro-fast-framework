@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
@@ -55,43 +53,41 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            extra="2列"
-          >
-            <DataGrid
-              list={list}
-              bordered
-              column={2}
-              size="small"
-              labelStyle={{ width: transformSize(80) }}
-              emptyValue="暂无"
-              emptyStyle={{ color: '#ccc' }}
-            />
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="2列"
+        >
+          <DataGrid
+            list={list}
+            bordered
+            column={2}
+            size="small"
+            labelStyle={{ width: transformSize(80) }}
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
 
-          <Card
-            header="布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            extra="3列"
-          >
-            <DataGrid
-              list={list}
-              bordered={false}
-              column={3}
-              size="small"
-              labelStyle={{ width: transformSize(80) }}
-              emptyValue="暂无"
-              emptyStyle={{ color: '#ccc' }}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card
+          header="布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="3列"
+        >
+          <DataGrid
+            list={list}
+            bordered={false}
+            column={3}
+            size="small"
+            labelStyle={{ width: transformSize(80) }}
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+      </Space>
     );
   };
 }

@@ -103,76 +103,74 @@ export default class Index extends ContentPageBase {
     const { align, alignJustify } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="单元素布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <View style={containorStyle}>
-              <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
-                <View style={boxStyle}></View>
-              </VerticalBox>
-            </View>
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="单元素布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <View style={containorStyle}>
+            <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
+              <View style={boxStyle}></View>
+            </VerticalBox>
+          </View>
+        </Card>
 
-          <Card
-            header="多元素布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <View style={containorStyle}>
-              <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
-                <View style={boxStyle}></View>
-                <View style={boxStyle}></View>
-                <View style={boxStyle}></View>
-              </VerticalBox>
-            </View>
-          </Card>
+        <Card
+          header="多元素布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <View style={containorStyle}>
+            <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
+              <View style={boxStyle}></View>
+              <View style={boxStyle}></View>
+              <View style={boxStyle}></View>
+            </VerticalBox>
+          </View>
+        </Card>
 
-          <Card header="变更align" style={style} headerStyle={cardHeaderStyle}>
-            <Selector
-              options={alignList}
-              value={align}
-              onChange={this.setAlignChecked}
-            />
-          </Card>
+        <Card header="变更align" style={style} headerStyle={cardHeaderStyle}>
+          <Selector
+            options={alignList}
+            value={align}
+            onChange={this.setAlignChecked}
+          />
+        </Card>
 
-          <Card
-            header="变更alignJustify"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <Selector
-              options={alignJustifyList}
-              value={alignJustify}
-              onChange={this.setAlignJustifyChecked}
-            />
-          </Card>
+        <Card
+          header="变更alignJustify"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Selector
+            options={alignJustifyList}
+            value={alignJustify}
+            onChange={this.setAlignJustifyChecked}
+          />
+        </Card>
 
-          <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: 'style: 默认值为 null.',
-                },
-                {
-                  text: 'align: 默认值为 center.',
-                },
-                {
-                  text: 'alignJustify: 默认值为 start.',
-                },
-                {
-                  text: 'onClick: 默认值为 null.',
-                },
-              ]}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: 'style: 默认值为 null.',
+              },
+              {
+                text: 'align: 默认值为 center.',
+              },
+              {
+                text: 'alignJustify: 默认值为 start.',
+              },
+              {
+                text: 'onClick: 默认值为 null.',
+              },
+            ]}
+          />
+        </Card>
+      </Space>
     );
   };
 }

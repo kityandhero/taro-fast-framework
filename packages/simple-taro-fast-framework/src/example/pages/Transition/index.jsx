@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import {
   Card,
   Item,
@@ -125,60 +123,58 @@ export default class Index extends ContentPageBase {
     const { showTransition, name, showTransitionCustom } = this.state;
 
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="变换动画类型"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Item label="Fade" arrow onClick={this.onClickFade} />
-            <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
-            <Item label="Fade Down" arrow onClick={this.onClickFadeDown} />
-            <Item label="Fade Left" arrow onClick={this.onClickFadeLeft} />
-            <Item label="Fade Right" arrow onClick={this.onClickFadeRight} />
-            <Item label="Slide Up" arrow onClick={this.onClickSlideUp} />
-            <Item label="Slide Down" arrow onClick={this.onClickSlideDown} />
-            <Item label="Slide Left" arrow onClick={this.onClickSlideLeft} />
-            <Item label="Slide Right" arrow onClick={this.onClickSlideRight} />
-            <Item label="Zoom" arrow onClick={this.onClickZoom} />
-            <Item label="Punch" arrow onClick={this.onClickPunch} />
-            <Item
-              label="Custom"
-              arrow
-              border={false}
-              onClick={this.onClickCustom}
-            />
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="变换动画类型"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item label="Fade" arrow onClick={this.onClickFade} />
+          <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
+          <Item label="Fade Down" arrow onClick={this.onClickFadeDown} />
+          <Item label="Fade Left" arrow onClick={this.onClickFadeLeft} />
+          <Item label="Fade Right" arrow onClick={this.onClickFadeRight} />
+          <Item label="Slide Up" arrow onClick={this.onClickSlideUp} />
+          <Item label="Slide Down" arrow onClick={this.onClickSlideDown} />
+          <Item label="Slide Left" arrow onClick={this.onClickSlideLeft} />
+          <Item label="Slide Right" arrow onClick={this.onClickSlideRight} />
+          <Item label="Zoom" arrow onClick={this.onClickZoom} />
+          <Item label="Punch" arrow onClick={this.onClickPunch} />
+          <Item
+            label="Custom"
+            arrow
+            border={false}
+            onClick={this.onClickCustom}
+          />
+        </Card>
 
-          <Transition
-            show={showTransition}
-            name={name}
-            className="block"
-          ></Transition>
+        <Transition
+          show={showTransition}
+          name={name}
+          className="block"
+        ></Transition>
 
-          <Transition
-            show={showTransitionCustom}
-            name=""
-            duration={{
-              enter: 300,
-              leave: 1000,
-            }}
-            className="block"
-            enterClass="tfc-enter-class"
-            enterActiveClass="tfc-enter-active-class"
-            leaveActiveClass="tfc-leave-active-class"
-            leaveToClass="tfc-leave-to-class"
-            onBeforeEnter={this.onBeforeEnter}
-            onEnter={this.onEnter}
-            onAfterEnter={this.onAfterEnter}
-            onBeforeLeave={this.onBeforeLeave}
-            onLeave={this.onLeave}
-            onAfterLeave={this.onAfterLeave}
-          ></Transition>
-        </Space>
-      </View>
+        <Transition
+          show={showTransitionCustom}
+          name=""
+          duration={{
+            enter: 300,
+            leave: 1000,
+          }}
+          className="block"
+          enterClass="tfc-enter-class"
+          enterActiveClass="tfc-enter-active-class"
+          leaveActiveClass="tfc-leave-active-class"
+          leaveToClass="tfc-leave-to-class"
+          onBeforeEnter={this.onBeforeEnter}
+          onEnter={this.onEnter}
+          onAfterEnter={this.onAfterEnter}
+          onBeforeLeave={this.onBeforeLeave}
+          onLeave={this.onLeave}
+          onAfterLeave={this.onAfterLeave}
+        ></Transition>
+      </Space>
     );
   };
 }

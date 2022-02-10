@@ -1,4 +1,4 @@
-import { View, Image } from '@tarojs/components';
+import { Image } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
@@ -63,114 +63,106 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="基础用法"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Item label="1" />
-            <Item label="2" />
-            <Item label="3" border={false} />
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="基础用法"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item label="1" />
+          <Item label="2" />
+          <Item label="3" border={false} />
+        </Card>
 
-          <Card
-            header="箭头"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Item label="账单" arrow />
-            <Item label="总资产" arrow />
-            <Item label="设置" arrow border={false} />
-          </Card>
+        <Card
+          header="箭头"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item label="账单" arrow />
+          <Item label="总资产" arrow />
+          <Item label="设置" arrow border={false} />
+        </Card>
 
-          <Card
-            header="可点击"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Item label="账单" clickable arrow onClick={this.handleClick} />
-            <Item label="总资产" clickable arrow onClick={this.handleClick} />
+        <Card
+          header="可点击"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item label="账单" clickable arrow onClick={this.handleClick} />
+          <Item label="总资产" clickable arrow onClick={this.handleClick} />
+          <Item
+            label="设置"
+            clickable
+            arrow
+            border={false}
+            onClick={this.handleClick}
+          />
+        </Card>
+
+        <Card
+          header="复杂布局"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item label="新消息通知" extra={<SwitchItem defaultChecked />} />
+          <Item label="大字号模式" extra="未开启" clickable arrow />
+          <Item
+            label="授权管理"
+            description="管理已授权的产品和设备"
+            clickable
+            arrow
+            border={false}
+          />
+          <Item title="这里是标题" label="这里是主信息" />
+        </Card>
+
+        <Card
+          header="禁用状态"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Item label="账单" disabled clickable arrow prefix={<IconSketch />} />
+          <Item
+            label="总资产"
+            disabled
+            prefix={<IconShoppingCart />}
+            border={false}
+          />
+        </Card>
+
+        <Card
+          header="用户列表布局"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          {users.map((user, index) => (
             <Item
-              label="设置"
-              clickable
-              arrow
-              border={false}
-              onClick={this.handleClick}
+              key={user.name}
+              label={user.name}
+              border={index !== users.length - 1}
+              prefix={
+                <Image
+                  src={user.avatar}
+                  style={{
+                    borderRadius: 20,
+                    width: transformSize(80),
+                    height: transformSize(80),
+                  }}
+                  fit="cover"
+                />
+              }
+              description={user.description}
             />
-          </Card>
-
-          <Card
-            header="复杂布局"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Item label="新消息通知" extra={<SwitchItem defaultChecked />} />
-            <Item label="大字号模式" extra="未开启" clickable arrow />
-            <Item
-              label="授权管理"
-              description="管理已授权的产品和设备"
-              clickable
-              arrow
-              border={false}
-            />
-            <Item title="这里是标题" label="这里是主信息" />
-          </Card>
-
-          <Card
-            header="禁用状态"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Item
-              label="账单"
-              disabled
-              clickable
-              arrow
-              prefix={<IconSketch />}
-            />
-            <Item
-              label="总资产"
-              disabled
-              prefix={<IconShoppingCart />}
-              border={false}
-            />
-          </Card>
-
-          <Card
-            header="用户列表布局"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            {users.map((user, index) => (
-              <Item
-                key={user.name}
-                label={user.name}
-                border={index !== users.length - 1}
-                prefix={
-                  <Image
-                    src={user.avatar}
-                    style={{
-                      borderRadius: 20,
-                      width: transformSize(80),
-                      height: transformSize(80),
-                    }}
-                    fit="cover"
-                  />
-                }
-                description={user.description}
-              />
-            ))}
-          </Card>
-        </Space>
-      </View>
+          ))}
+        </Card>
+      </Space>
     );
   };
 }

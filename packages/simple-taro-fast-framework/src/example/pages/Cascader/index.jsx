@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import { Cascader, Card, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -167,25 +165,23 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="组件展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
-            <Cascader
-              value={[
-                options[2].value,
-                options[2].children[1].value,
-                options[2].children[1].children[1].value,
-              ]}
-              options={options}
-            />
-          </Card>
-        </Space>
-      </View>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="组件展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+        >
+          <Cascader
+            value={[
+              options[2].value,
+              options[2].children[1].value,
+              options[2].children[1].children[1].value,
+            ]}
+            options={options}
+          />
+        </Card>
+      </Space>
     );
   };
 }

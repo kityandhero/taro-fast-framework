@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Row, Col, Card, Space } from 'taro-fast-component/es/customComponents';
 
@@ -38,46 +36,44 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card
-            header="布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            extra="center size: 1"
-          >
-            <Row justify="center" style={rowStyle}>
-              <Col size={1} style={blueStyle}></Col>
-              <Col size={1} style={greenStyle}></Col>
-            </Row>
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card
+          header="布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="center size: 1"
+        >
+          <Row justify="center" style={rowStyle}>
+            <Col size={1} style={blueStyle}></Col>
+            <Col size={1} style={greenStyle}></Col>
+          </Row>
+        </Card>
 
-          <Card
-            header="布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            extra="size: 4"
-          >
-            <Row style={rowStyle}>
-              <Col size={4} style={blueStyle}></Col>
-              <Col size={4} style={redStyle}></Col>
-              <Col size={4} style={greenStyle}></Col>
-            </Row>
-          </Card>
+        <Card
+          header="布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="size: 4"
+        >
+          <Row style={rowStyle}>
+            <Col size={4} style={blueStyle}></Col>
+            <Col size={4} style={redStyle}></Col>
+            <Col size={4} style={greenStyle}></Col>
+          </Row>
+        </Card>
 
-          <Card
-            header="布局展示"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            extra="size: 6"
-          >
-            <Row style={rowStyle}>
-              <Col size={6} style={blueStyle}></Col>
-              <Col size={6} style={greenStyle}></Col>
-            </Row>
-          </Card>
-        </Space>
-      </View>
+        <Card
+          header="布局展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="size: 6"
+        >
+          <Row style={rowStyle}>
+            <Col size={6} style={blueStyle}></Col>
+            <Col size={6} style={greenStyle}></Col>
+          </Row>
+        </Card>
+      </Space>
     );
   };
 }

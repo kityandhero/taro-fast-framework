@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Space,
@@ -26,59 +24,57 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="包裹模式" style={style} headerStyle={cardHeaderStyle}>
-            <Space wrap style={{ '--gap': transformSize(24) }}>
-              <Badge content="5">
-                <Avatar text="图" />
-              </Badge>
-              <Badge content="新">
-                <Avatar text="图" />
-              </Badge>
-              <Badge content="更新啦">
-                <Avatar text="图" />
-              </Badge>
+      <Space direction="vertical" fillWidth>
+        <Card header="包裹模式" style={style} headerStyle={cardHeaderStyle}>
+          <Space wrap style={{ '--gap': transformSize(24) }}>
+            <Badge content="5">
+              <Avatar text="图" />
+            </Badge>
+            <Badge content="新">
+              <Avatar text="图" />
+            </Badge>
+            <Badge content="更新啦">
+              <Avatar text="图" />
+            </Badge>
 
-              <Badge
-                color="#108ee9"
-                content={Badge.dot}
-                style={{ '--right': '100%', '--top': '100%' }}
-              >
-                <Avatar text="图" />
-              </Badge>
+            <Badge
+              color="#108ee9"
+              content={Badge.dot}
+              style={{ '--right': '100%', '--top': '100%' }}
+            >
+              <Avatar text="图" />
+            </Badge>
 
-              <Badge
-                color="#87d068"
-                content={Badge.dot}
-                style={{ '--right': '100%' }}
-              >
-                <Avatar text="图" />
-              </Badge>
+            <Badge
+              color="#87d068"
+              content={Badge.dot}
+              style={{ '--right': '100%' }}
+            >
+              <Avatar text="图" />
+            </Badge>
 
-              <Badge content={Badge.dot}>
-                <Avatar text="图" />
-              </Badge>
+            <Badge content={Badge.dot}>
+              <Avatar text="图" />
+            </Badge>
 
-              <Badge
-                color="orange"
-                content={Badge.dot}
-                style={{ '--top': '100%' }}
-              >
-                <Avatar text="图" />
-              </Badge>
-            </Space>
-          </Card>
+            <Badge
+              color="orange"
+              content={Badge.dot}
+              style={{ '--top': '100%' }}
+            >
+              <Avatar text="图" />
+            </Badge>
+          </Space>
+        </Card>
 
-          <Card header="单独使用" style={style} headerStyle={cardHeaderStyle}>
-            <Space style={{ '--gap': transformSize(24) }}>
-              <Badge content="99+" />
+        <Card header="单独使用" style={style} headerStyle={cardHeaderStyle}>
+          <Space style={{ '--gap': transformSize(24) }}>
+            <Badge content="99+" />
 
-              <Badge content="新消息!" />
-            </Space>
-          </Card>
-        </Space>
-      </View>
+            <Badge content="新消息!" />
+          </Space>
+        </Card>
+      </Space>
     );
   };
 }

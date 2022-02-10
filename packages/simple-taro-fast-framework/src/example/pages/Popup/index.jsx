@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import {
   Card,
   Item,
@@ -250,7 +248,7 @@ export default class Index extends ContentPageBase {
     console.log(show);
 
     return (
-      <View className="index">
+      <>
         <Space direction="vertical" fillWidth>
           <Card
             header="弹出位置"
@@ -411,7 +409,7 @@ export default class Index extends ContentPageBase {
         >
           内容
         </Popup>
-      </View>
+      </>
     );
   };
 }

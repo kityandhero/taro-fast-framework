@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import { Card, Footer, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -21,30 +19,28 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
-            <Footer image={logoImg} />
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
+          <Footer image={logoImg} />
+        </Card>
 
-          <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
-            <Footer text="中国*******有限公司" />
-          </Card>
+        <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
+          <Footer text="中国*******有限公司" />
+        </Card>
 
-          <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
-            <Footer description="Copyright © 2018-2022 all rights reserved" />
-          </Card>
+        <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
+          <Footer description="Copyright © 2018-2022 all rights reserved" />
+        </Card>
 
-          <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
-            <Footer
-              circle
-              image={logoImg}
-              text="中国*******有限公司"
-              description="Copyright © 2018-2022 all rights reserved"
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card header="用法展示" style={style} headerStyle={cardHeaderStyle}>
+          <Footer
+            circle
+            image={logoImg}
+            text="中国*******有限公司"
+            description="Copyright © 2018-2022 all rights reserved"
+          />
+        </Card>
+      </Space>
     );
   };
 }

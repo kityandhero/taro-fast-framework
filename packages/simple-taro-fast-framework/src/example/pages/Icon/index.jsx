@@ -177,68 +177,66 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     return (
-      <View className="index">
-        <Space direction="vertical" fillWidth>
-          <Card header="主要" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('main', icons.main)}
-          </Card>
+      <Space direction="vertical" fillWidth>
+        <Card header="主要" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('main', icons.main)}
+        </Card>
 
-          <Card header="文件" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('file', icons.file)}
-          </Card>
+        <Card header="文件" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('file', icons.file)}
+        </Card>
 
-          <Card header="文本" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('text', icons.text)}
-          </Card>
+        <Card header="文本" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('text', icons.text)}
+        </Card>
 
-          <Card header="箭头" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('arrow', icons.arrow)}
-          </Card>
+        <Card header="箭头" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('arrow', icons.arrow)}
+        </Card>
 
-          <Card header="媒体控制" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('mediaControl', icons.mediaControl)}
-          </Card>
+        <Card header="媒体控制" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('mediaControl', icons.mediaControl)}
+        </Card>
 
-          <Card header="多媒体" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('media', icons.media)}
-          </Card>
+        <Card header="多媒体" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('media', icons.media)}
+        </Card>
 
-          <Card header="Logo" style={style} headerStyle={cardHeaderStyle}>
-            {this.buildGrid('logo', icons.logo)}
-          </Card>
+        <Card header="Logo" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildGrid('logo', icons.logo)}
+        </Card>
 
-          <Card
-            header="使用说明 :"
-            style={cardStyle}
-            headerStyle={cardHeaderStyle}
-          >
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '导入组件: import { Icon } from "taro-fast-component/es/customComponents".',
-                },
-                {
-                  text: '导入图标: 例如 const { IconAdd } = Icon.',
-                },
-                {
-                  text: '导入方法: 例如 const { buildIcon } = Icon.',
-                },
-                {
-                  text: '按名称使用: 例如 <Icon value={add} size={40} />.',
-                },
-                {
-                  text: '导出使用: 例如 <IconAdd size={40} />.',
-                },
-                {
-                  text: '函数使用: 例如 buildIcon({size:40},"add").',
-                },
-              ]}
-            />
-          </Card>
-        </Space>
-      </View>
+        <Card
+          header="使用说明 :"
+          style={cardStyle}
+          headerStyle={cardHeaderStyle}
+        >
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            list={[
+              {
+                text: '导入组件: import { Icon } from "taro-fast-component/es/customComponents".',
+              },
+              {
+                text: '导入图标: 例如 const { IconAdd } = Icon.',
+              },
+              {
+                text: '导入方法: 例如 const { buildIcon } = Icon.',
+              },
+              {
+                text: '按名称使用: 例如 <Icon value={add} size={40} />.',
+              },
+              {
+                text: '导出使用: 例如 <IconAdd size={40} />.',
+              },
+              {
+                text: '函数使用: 例如 buildIcon({size:40},"add").',
+              },
+            ]}
+          />
+        </Card>
+      </Space>
     );
   };
 }
