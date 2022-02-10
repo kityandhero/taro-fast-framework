@@ -11,6 +11,7 @@ import {
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import logoImg from '../../../assets/images/logo.png';
 
 const { IconEdit } = Icon;
 
@@ -101,7 +102,7 @@ export default class Index extends ContentPageBase {
             <ColorText
               icon={
                 <View style={{ width: transformSize(40) }}>
-                  <ImageBox circle src="https://jdc.jd.com/img/200" />
+                  <ImageBox circle src={logoImg} />
                 </View>
               }
               text="文本文字"
