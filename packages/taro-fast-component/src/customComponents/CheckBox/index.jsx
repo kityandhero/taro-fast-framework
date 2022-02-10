@@ -17,8 +17,6 @@ import BaseComponent from '../BaseComponent';
 import Card from '../Card';
 import Item from '../Item';
 import Icon from '../Icon';
-import CenterBox from '../CenterBox';
-import VerticalBox from '../VerticalBox';
 import FlexBox from '../FlexBox';
 import Grid from '../Grid';
 import { Space } from '../Space';
@@ -54,26 +52,18 @@ const checkStatusIcon = (
       ...{
         borderColor: '#1677ff',
         backgroundColor: '#1677ff',
+        display: 'flex',
+        alignSelf: 'center',
       },
     }}
   >
-    <CenterBox>
-      <IconCheck size={28} color="#fff" />
-    </CenterBox>
+    <IconCheck size={28} color="#fff" />
   </View>
 );
 
-const checkStatusIconForListView = (
-  <CenterBox>
-    <IconCheck size={38} color="#1677ff" />
-  </CenterBox>
-);
+const checkStatusIconForListView = <IconCheck size={38} color="#1677ff" />;
 
-const uncheckStatusIconForListView = (
-  <CenterBox>
-    <IconCheck size={38} color="#ddd" />
-  </CenterBox>
-);
+const uncheckStatusIconForListView = <IconCheck size={38} color="#ddd" />;
 
 const defaultProps = {
   style: {},
@@ -230,28 +220,24 @@ class CheckBox extends BaseComponent {
                     },
                   }}
                   left={
-                    <CenterBox>
-                      {inCollection(valueStage || [], valueItem)
-                        ? iconCheck || checkStatusIcon
-                        : iconUncheck || uncheckStatusIcon}
-                    </CenterBox>
+                    inCollection(valueStage || [], valueItem)
+                      ? iconCheck || checkStatusIcon
+                      : iconUncheck || uncheckStatusIcon
                   }
                   right={
-                    <VerticalBox>
-                      {isString(label) ? (
-                        <View
-                          style={{
-                            ...{
-                              fontSize: transformSize(28),
-                            },
-                          }}
-                        >
-                          {label}
-                        </View>
-                      ) : (
-                        label || ''
-                      )}
-                    </VerticalBox>
+                    isString(label) ? (
+                      <View
+                        style={{
+                          ...{
+                            fontSize: transformSize(28),
+                          },
+                        }}
+                      >
+                        {label}
+                      </View>
+                    ) : (
+                      label || ''
+                    )
                   }
                   rightStyle={{
                     paddingLeft: transformSize(10),
@@ -297,28 +283,24 @@ class CheckBox extends BaseComponent {
                     },
                   }}
                   left={
-                    <CenterBox>
-                      {inCollection(valueStage || [], valueItem)
-                        ? iconCheck || checkStatusIcon
-                        : iconUncheck || uncheckStatusIcon}
-                    </CenterBox>
+                    inCollection(valueStage || [], valueItem)
+                      ? iconCheck || checkStatusIcon
+                      : iconUncheck || uncheckStatusIcon
                   }
                   right={
-                    <VerticalBox>
-                      {isString(label) ? (
-                        <View
-                          style={{
-                            ...{
-                              fontSize: transformSize(28),
-                            },
-                          }}
-                        >
-                          {label}
-                        </View>
-                      ) : (
-                        label || ''
-                      )}
-                    </VerticalBox>
+                    isString(label) ? (
+                      <View
+                        style={{
+                          ...{
+                            fontSize: transformSize(28),
+                          },
+                        }}
+                      >
+                        {label}
+                      </View>
+                    ) : (
+                      label || ''
+                    )
                   }
                   rightStyle={{
                     paddingLeft: transformSize(10),
@@ -401,20 +383,18 @@ class CheckBox extends BaseComponent {
               border={index === listCount - 1 ? false : border}
               extra={
                 extraItem ? (
-                  <CenterBox>
-                    {isString(extraItem) ? (
-                      <View
-                        style={{
-                          fontSize: transformSize(30),
-                          color: 'var(--tfc-color-weak)',
-                        }}
-                      >
-                        {extraItem}
-                      </View>
-                    ) : (
-                      extraItem
-                    )}
-                  </CenterBox>
+                  isString(extraItem) ? (
+                    <View
+                      style={{
+                        fontSize: transformSize(30),
+                        color: 'var(--tfc-color-weak)',
+                      }}
+                    >
+                      {extraItem}
+                    </View>
+                  ) : (
+                    extraItem
+                  )
                 ) : null
               }
               extraContainerStyle={{

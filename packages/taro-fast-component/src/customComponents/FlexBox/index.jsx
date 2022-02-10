@@ -78,12 +78,14 @@ class FlexBox extends BaseComponent {
       if (flexAuto === 'left') {
         return (
           <Row style={style}>
-            <Col auto style={leftStyle || null}>
+            <Col auto align="center" style={leftStyle || null}>
               {left}
             </Col>
 
             {(right || null) == null ? null : (
-              <Col style={rightStyle || null}>{right}</Col>
+              <Col align="center" style={rightStyle || null}>
+                {right}
+              </Col>
             )}
           </Row>
         );
@@ -91,8 +93,10 @@ class FlexBox extends BaseComponent {
 
       return (
         <Row style={style}>
-          <Col style={leftStyle}>{left}</Col>
-          <Col auto style={rightStyle}>
+          <Col align="center" style={leftStyle}>
+            {left}
+          </Col>
+          <Col auto align="center" style={rightStyle}>
             {right}
           </Col>
         </Row>

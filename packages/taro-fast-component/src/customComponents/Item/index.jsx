@@ -10,7 +10,6 @@ import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
-import VerticalBox from '../VerticalBox';
 import Icon from '../Icon';
 
 import './index.less';
@@ -162,7 +161,7 @@ class Item extends BaseComponent {
           <View className={`${classPrefix}-header-content`}>
             {!!prefix ? (
               <View className={`${classPrefix}-header-content-prefix`}>
-                <VerticalBox>{prefix}</VerticalBox>
+                {prefix}
               </View>
             ) : null}
 
@@ -195,15 +194,13 @@ class Item extends BaseComponent {
                   ...extraContainerStyle,
                 }}
               >
-                <VerticalBox>{extra}</VerticalBox>
+                {extra}
               </View>
             ) : null}
 
             {arrow ? (
               <View className={`${classPrefix}-header-content-arrow`}>
-                <VerticalBox>
-                  <IconChevronRight size={40} />
-                </VerticalBox>
+                <IconChevronRight size={40} />
               </View>
             ) : null}
           </View>

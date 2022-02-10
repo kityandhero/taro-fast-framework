@@ -5,7 +5,6 @@ import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
-import CenterBox from '../CenterBox';
 import Item from '../Item';
 import Icon from '../Icon';
 
@@ -123,17 +122,15 @@ class Collapse extends BaseComponent {
               bodyAnimate
               border={border && index !== listCount - 1}
               extra={
-                <CenterBox>
-                  <View
-                    className={classNames(classPrefix, {
-                      [`${classPrefix}__arrow`]: true,
-                      [`${classPrefix}__arrow__close`]: !bodyVisible,
-                      [`${classPrefix}__arrow__open`]: bodyVisible,
-                    })}
-                  >
-                    <IconChevronDown size={38} color="#969799" />
-                  </View>
-                </CenterBox>
+                <View
+                  className={classNames(classPrefix, {
+                    [`${classPrefix}__arrow`]: true,
+                    [`${classPrefix}__arrow__close`]: !bodyVisible,
+                    [`${classPrefix}__arrow__open`]: bodyVisible,
+                  })}
+                >
+                  <IconChevronDown size={38} color="#969799" />
+                </View>
               }
               extraContainerStyle={extraContainerStyle}
               onClick={() => {
