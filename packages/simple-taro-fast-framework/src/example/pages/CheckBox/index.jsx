@@ -188,9 +188,9 @@ export default class Index extends ContentPageBase {
         />
 
         <Card
-          header="column布局"
+          header="column默认布局"
           headerStyle={cardHeaderStyle}
-          extra={<View style={extraStyle}>layout: column</View>}
+          style={style}
           extraStyle={{ backgroundColor: '#f5f7fa' }}
         >
           <CheckBox
@@ -203,9 +203,10 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <Card
-          header="column布局 定义列"
+          header="column布局"
           headerStyle={cardHeaderStyle}
-          extra={<View style={extraStyle}>layout: column</View>}
+          style={style}
+          extra={<View style={extraStyle}>column: 2</View>}
           extraStyle={{ backgroundColor: '#f5f7fa' }}
         >
           <CheckBox
@@ -222,6 +223,7 @@ export default class Index extends ContentPageBase {
         <Card
           header="space布局"
           headerStyle={cardHeaderStyle}
+          style={style}
           extra={<View style={extraStyle}>layout: space</View>}
           extraStyle={{ backgroundColor: '#f5f7fa' }}
         >

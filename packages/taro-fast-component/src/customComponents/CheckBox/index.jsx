@@ -57,7 +57,7 @@ const checkStatusIcon = (
       },
     }}
   >
-    <IconCheck size={28} color="#fff" />
+    <IconCheck size={30} color="#fff" />
   </View>
 );
 
