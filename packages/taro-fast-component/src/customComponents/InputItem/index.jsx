@@ -2,14 +2,12 @@ import { View, Text, Input } from '@tarojs/components';
 
 import {
   inCollection,
-  showErrorMessage,
   styleToString,
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
-  isNull,
   isString,
   isObject,
 } from 'taro-fast-common/es/utils/typeCheck';
@@ -72,6 +70,45 @@ const defaultProps = {
 };
 
 class InputItem extends BaseComponent {
+  currentValue = '';
+
+  constructor(props) {
+    super(props);
+
+    const { value } = props;
+
+    this.state = {
+      valueFlag: value,
+      counter: 0,
+    };
+
+    this.currentValue = value;
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev, counter } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        counter: counter + 1,
+      };
+    }
+
+    return {};
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+    const { valueFlag: valueFlagPre } = preState;
+    const { valueFlag } = this.state;
+
+    if (valueFlagPre !== valueFlag) {
+      this.currentValue = valueFlag;
+    }
+  };
+
   triggerChange = (v) => {
     const { afterChange } = this.props;
 
@@ -85,66 +122,50 @@ class InputItem extends BaseComponent {
       detail: { value: v },
     } = e;
 
+    this.currentValue = v;
+
     this.triggerChange(v);
   };
 
   triggerFocus = (e) => {
     const { onFocus } = this.props;
 
-    if (!isNull(onFocus)) {
-      if (!isFunction(onFocus)) {
-        showErrorMessage({
-          message: 'onFocus must be function',
-        });
-      } else {
-        onFocus(e);
-      }
+    if (isFunction(onFocus)) {
+      onFocus(e);
     }
   };
 
   triggerBlur = (e) => {
     const { onBlur } = this.props;
 
-    if (!isNull(onBlur)) {
-      if (!isFunction(onBlur)) {
-        showErrorMessage({
-          message: 'onBlur must be function',
-        });
-      } else {
-        onBlur(e);
-      }
+    if (isFunction(onBlur)) {
+      onBlur(e);
     }
   };
 
   triggerConfirm = (e) => {
     const { onConfirm } = this.props;
 
-    if (!isNull(onConfirm)) {
-      if (!isFunction(onConfirm)) {
-        showErrorMessage({
-          message: 'onConfirm must be function',
-        });
-      } else {
-        onConfirm(e);
-      }
+    if (isFunction(onConfirm)) {
+      onConfirm(e);
     }
   };
 
   triggerKeyboardHeightChange = (e) => {
     const { onKeyboardHeightChange } = this.props;
 
-    if (!isNull(onKeyboardHeightChange)) {
-      if (!isFunction(onKeyboardHeightChange)) {
-        showErrorMessage({
-          message: 'onKeyboardHeightChange must be function',
-        });
-      } else {
-        onKeyboardHeightChange(e);
-      }
+    if (isFunction(onKeyboardHeightChange)) {
+      onKeyboardHeightChange(e);
     }
   };
 
   clearValue = () => {
+    const { counter } = this.state;
+
+    this.currentValue = '';
+
+    this.setState({ counter: counter + 1 });
+
     this.triggerChange('');
   };
 
@@ -163,7 +184,6 @@ class InputItem extends BaseComponent {
       clearSize,
       clearColor,
       label,
-      value,
       extra,
       labelStyle,
       inputStyle,
@@ -273,7 +293,7 @@ class InputItem extends BaseComponent {
                 style={{ width: '100%' }}
                 left={
                   <Input
-                    value={value}
+                    value={this.currentValue}
                     type={type}
                     style={{
                       ...{
