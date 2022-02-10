@@ -6,7 +6,8 @@ import {
   isFunction,
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Overlay from '../Overlay';
 import CenterBox from '../CenterBox';
@@ -47,7 +48,7 @@ const defaultProps = {
   footerStyle: {},
 };
 
-class ActionSheet extends ComponentBase {
+class ActionSheet extends BaseComponent {
   constructor(props) {
     super(props);
     const { visible } = props;

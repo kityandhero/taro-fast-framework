@@ -8,7 +8,8 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import ColorText from '../ColorText';
@@ -30,7 +31,7 @@ const defaultProps = {
   ellipsis: true,
 };
 
-class DataGrid extends ComponentBase {
+class DataGrid extends BaseComponent {
   renderFurther() {
     const { list, hidden } = this.props;
 

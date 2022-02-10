@@ -1,4 +1,4 @@
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../BaseComponent';
 
 import Switch from '../Switch';
 import Item from '../Item';
@@ -25,7 +25,7 @@ const defaultProps = {
   afterChange: null,
 };
 
-class SwitchItem extends ComponentBase {
+class SwitchItem extends BaseComponent {
   renderFurther() {
     const {
       key,

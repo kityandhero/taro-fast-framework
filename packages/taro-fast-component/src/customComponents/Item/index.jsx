@@ -7,7 +7,8 @@ import {
   getGuid,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import VerticalBox from '../VerticalBox';
 import Icon from '../Icon';
@@ -38,7 +39,7 @@ const defaultProps = {
   bodyAnimate: false,
 };
 
-class Item extends ComponentBase {
+class Item extends BaseComponent {
   bodyId = '';
 
   bodyHeight = -1;

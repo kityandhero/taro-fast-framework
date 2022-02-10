@@ -13,7 +13,8 @@ import {
   isPromise,
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import { Spin } from '../Spin';
 
@@ -34,7 +35,7 @@ const defaultProps = {
   afterChange: null,
 };
 
-class Switch extends ComponentBase {
+class Switch extends BaseComponent {
   constructor(props) {
     super(props);
 

@@ -10,9 +10,9 @@ import {
   isNumber,
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
+import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
 
 import './index.less';
@@ -63,7 +63,7 @@ const defaultProps = {
   fontSize: 28,
 };
 
-class Progress extends ComponentBase {
+class Progress extends BaseComponent {
   getPercent = () => {
     const { percent } = this.props;
 

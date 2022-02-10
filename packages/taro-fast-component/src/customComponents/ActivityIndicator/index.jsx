@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View, Text } from '@tarojs/components';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../BaseComponent';
 
 import Loading from '../Loading';
 
@@ -18,7 +18,7 @@ const defaultProps = {
   className: '',
 };
 
-class ActivityIndicator extends ComponentBase {
+class ActivityIndicator extends BaseComponent {
   render() {
     const { color, size, type, borderWidth, mode, content, visible } =
       this.props;

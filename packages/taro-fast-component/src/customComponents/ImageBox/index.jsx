@@ -3,7 +3,8 @@ import { View, Image } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import ActivityIndicator from '../ActivityIndicator';
 import HorizontalCenterBox from '../HorizontalCenterBox';
@@ -29,7 +30,7 @@ const defaultProps = {
   decoration: null,
 };
 
-class ImageBox extends ComponentBase {
+class ImageBox extends BaseComponent {
   constructor(props) {
     super(props);
 

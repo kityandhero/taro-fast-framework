@@ -1,7 +1,7 @@
 import { Image, Text, View } from '@tarojs/components';
 import classNames from 'classnames';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../BaseComponent';
 
 import './index.less';
 
@@ -11,7 +11,7 @@ const SIZE_CLASS = {
   small: 'small',
 };
 
-export default class Avatar extends ComponentBase {
+export default class Avatar extends BaseComponent {
   renderFurther() {
     const { size, circle, image, text, style } = this.props;
     const rootClassName = ['tfc-avatar'];

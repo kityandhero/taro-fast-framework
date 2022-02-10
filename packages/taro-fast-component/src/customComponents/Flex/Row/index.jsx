@@ -7,7 +7,8 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isBoolean } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../../BaseComponent';
 
 import './index.less';
 
@@ -33,7 +34,7 @@ const defaultProps = {
   hidden: false,
 };
 
-class Row extends ComponentBase {
+class Row extends BaseComponent {
   renderFurther() {
     const { style, hidden } = this.props;
 

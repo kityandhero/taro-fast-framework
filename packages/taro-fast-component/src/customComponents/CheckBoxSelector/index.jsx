@@ -5,7 +5,8 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Popup from '../Popup';
 import CheckBox from '../CheckBox';
@@ -41,7 +42,7 @@ const defaultProps = {
   checkBoxIconCheck: null,
 };
 
-class CheckBoxSelector extends ComponentBase {
+class CheckBoxSelector extends BaseComponent {
   constructor(props) {
     super(props);
 

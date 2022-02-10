@@ -7,7 +7,8 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Divider from '../Divider';
 import DataGrid from '../DataGrid';
@@ -24,7 +25,7 @@ const defaultProps = {
   hidden: false,
 };
 
-class HelpBox extends ComponentBase {
+class HelpBox extends BaseComponent {
   renderFurther() {
     const {
       title: titleValue,

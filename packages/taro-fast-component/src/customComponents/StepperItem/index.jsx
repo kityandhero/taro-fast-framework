@@ -1,4 +1,4 @@
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../BaseComponent';
 
 import Item from '../Item';
 import Stepper from '../Stepper';
@@ -29,7 +29,7 @@ const defaultProps = {
   onChange: null,
 };
 
-class StepperItem extends ComponentBase {
+class StepperItem extends BaseComponent {
   renderFurther() {
     const {
       key,

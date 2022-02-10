@@ -6,7 +6,8 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import InputItem from '../InputItem';
 import VerticalBox from '../VerticalBox';
@@ -35,7 +36,7 @@ const defaultProps = {
   onNavigate: null,
 };
 
-class SearchBar extends ComponentBase {
+class SearchBar extends BaseComponent {
   searchText = '';
 
   getMode = () => {

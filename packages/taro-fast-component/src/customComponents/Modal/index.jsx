@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Overlay from '../Overlay';
 import Card from '../Card';
@@ -43,7 +44,7 @@ const defaultProps = {
   onClose: null,
 };
 
-class Modal extends ComponentBase {
+class Modal extends BaseComponent {
   triggerCancel = () => {
     const { onCancel } = this.props;
 

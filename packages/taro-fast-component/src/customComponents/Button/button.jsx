@@ -3,7 +3,8 @@ import { View, Button as ButtonWxApp } from '@tarojs/components';
 
 import { inCollection } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import { Spin } from '../Spin';
 import ActivityIndicator from '../ActivityIndicator';
@@ -71,7 +72,7 @@ const defaultProps = {
   onOpenSetting: null,
 };
 
-class Button extends ComponentBase {
+class Button extends BaseComponent {
   getFill = () => {
     const { fill } = this.props;
 

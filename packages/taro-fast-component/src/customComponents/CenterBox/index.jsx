@@ -1,4 +1,4 @@
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../BaseComponent';
 
 import HorizontalCenterBox from '../HorizontalCenterBox';
 import VerticalBox from '../VerticalBox';
@@ -7,7 +7,7 @@ const defaultProps = {
   style: {},
 };
 
-class CenterBox extends ComponentBase {
+class CenterBox extends BaseComponent {
   renderFurther() {
     const { children } = this.props;
 

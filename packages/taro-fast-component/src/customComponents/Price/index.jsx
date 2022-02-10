@@ -3,7 +3,8 @@ import { View } from '@tarojs/components';
 
 import { transformSize, formatMoney } from 'taro-fast-common/es/utils/tools';
 import { isMoney } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import './index.less';
 
@@ -21,7 +22,7 @@ const defaultProps = {
   strikethrough: false,
 };
 
-class Price extends ComponentBase {
+class Price extends BaseComponent {
   renderFurther() {
     const {
       price,

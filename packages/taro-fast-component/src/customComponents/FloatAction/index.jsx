@@ -8,7 +8,8 @@ import {
   isString,
   isFunction,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Overlay from '../Overlay';
 import Avatar from '../Avatar';
@@ -128,7 +129,7 @@ const defaultProps = {
   closeWithOverlayClick: false,
 };
 
-class FloatAction extends ComponentBase {
+class FloatAction extends BaseComponent {
   constructor(props) {
     super(props);
 

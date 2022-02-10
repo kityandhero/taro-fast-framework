@@ -1,6 +1,7 @@
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
@@ -23,7 +24,7 @@ const defaultProps = {
   fontSize: 28,
 };
 
-class ProgressBox extends ComponentBase {
+class ProgressBox extends BaseComponent {
   triggerActiveEnd = (e) => {
     const { onActiveEnd } = this.props;
 

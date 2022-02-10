@@ -4,7 +4,8 @@ import {
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import CenterBox from '../CenterBox';
 import VerticalBox from '../VerticalBox';
@@ -20,7 +21,7 @@ const defaultProps = {
   color: '',
 };
 
-class Footer extends ComponentBase {
+class Footer extends BaseComponent {
   renderFurther() {
     const { style, color, circle, image, text, description } = this.props;
 

@@ -3,7 +3,8 @@ import { View, Icon } from '@tarojs/components';
 
 import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
@@ -36,7 +37,7 @@ const defaultProps = {
   onClick: null,
 };
 
-class Tag extends ComponentBase {
+class Tag extends BaseComponent {
   constructor(props) {
     super(props);
 

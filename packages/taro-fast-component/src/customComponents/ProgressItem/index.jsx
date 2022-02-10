@@ -6,7 +6,8 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import VerticalBox from '../VerticalBox';
 import FlexBox from '../FlexBox';
@@ -38,7 +39,7 @@ const defaultProps = {
   fontSize: 28,
 };
 
-class ProgressItem extends ComponentBase {
+class ProgressItem extends BaseComponent {
   renderFurther() {
     const {
       layout: layoutSource,

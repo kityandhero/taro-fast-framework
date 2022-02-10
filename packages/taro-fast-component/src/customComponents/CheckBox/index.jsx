@@ -11,7 +11,8 @@ import {
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toLower } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Card from '../Card';
 import Item from '../Item';
@@ -93,7 +94,7 @@ const defaultProps = {
   afterChange: null,
 };
 
-class CheckBox extends ComponentBase {
+class CheckBox extends BaseComponent {
   constructor(props) {
     super(props);
 

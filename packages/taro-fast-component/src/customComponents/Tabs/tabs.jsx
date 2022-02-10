@@ -8,7 +8,8 @@ import {
   mergeStyle,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import './index.less';
 
@@ -64,7 +65,7 @@ const defaultProps = {
   onClick: null,
 };
 
-class Tabs extends ComponentBase {
+class Tabs extends BaseComponent {
   tabId = '';
 
   /**

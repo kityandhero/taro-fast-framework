@@ -1,7 +1,8 @@
 import { View } from '@tarojs/components';
 
 import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Col from '../Flex/Col';
 import Row from '../Flex/Row';
@@ -28,7 +29,7 @@ const defaultProps = {
   style: null,
 };
 
-class FlexBox extends ComponentBase {
+class FlexBox extends BaseComponent {
   renderFurther() {
     const {
       style: styleSource,

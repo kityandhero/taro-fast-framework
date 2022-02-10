@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../../BaseComponent';
 
 const defaultProps = {};
 
-class ActionSheetBody extends ComponentBase {
+class ActionSheetBody extends BaseComponent {
   renderFurther() {
     const { className, style, children } = this.props;
 

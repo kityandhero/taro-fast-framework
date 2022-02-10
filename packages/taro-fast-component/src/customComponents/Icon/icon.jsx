@@ -3,13 +3,14 @@ import { View } from '@tarojs/components';
 
 import { mergeStyle, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import { defaultProps } from './config';
 
 const prefixClass = 'tfc-icon';
 
-class Icon extends ComponentBase {
+class Icon extends BaseComponent {
   handleClick = () => {
     const { onClick } = this.props;
 

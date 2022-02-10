@@ -1,7 +1,8 @@
 import { View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 const defaultProps = {
   style: {},
@@ -10,7 +11,7 @@ const defaultProps = {
   onClick: null,
 };
 
-class VerticalBox extends ComponentBase {
+class VerticalBox extends BaseComponent {
   triggerClick = (e) => {
     const { onClick } = this.props;
 

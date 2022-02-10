@@ -6,7 +6,8 @@ import {
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import './index.less';
 
@@ -21,7 +22,7 @@ const defaultProps = {
   type: 'ring',
 };
 
-class Loading extends ComponentBase {
+class Loading extends BaseComponent {
   getType = () => {
     const { type } = this.props;
 

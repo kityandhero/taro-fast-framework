@@ -6,7 +6,8 @@ import {
   inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../../BaseComponent';
 
 import './index.less';
 
@@ -22,7 +23,7 @@ const defaultProps = {
   hidden: false,
 };
 
-class Col extends ComponentBase {
+class Col extends BaseComponent {
   renderFurther() {
     const { style, hidden } = this.props;
 

@@ -3,7 +3,8 @@ import classNames from 'classnames';
 
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
@@ -22,7 +23,7 @@ const defaultProps = {
   afterClickMore: null,
 };
 
-class NoticeBar extends ComponentBase {
+class NoticeBar extends BaseComponent {
   constructor(props) {
     super(props);
 

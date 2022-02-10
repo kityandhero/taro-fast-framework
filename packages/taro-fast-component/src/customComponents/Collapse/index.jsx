@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import CenterBox from '../CenterBox';
 import Item from '../Item';
@@ -24,7 +25,7 @@ const defaultProps = {
   single: false,
 };
 
-class Collapse extends ComponentBase {
+class Collapse extends BaseComponent {
   constructor(props) {
     super(props);
 

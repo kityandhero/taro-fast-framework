@@ -11,7 +11,8 @@ import {
   isFunction,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Button from '../Button';
 import Item from '../Item';
@@ -46,7 +47,7 @@ const defaultProps = {
   emptyValueStyle: {},
 };
 
-class TextAreaItem extends ComponentBase {
+class TextAreaItem extends BaseComponent {
   text = '';
 
   constructor(props) {

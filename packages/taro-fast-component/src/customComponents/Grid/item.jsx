@@ -1,7 +1,8 @@
 import { View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 const classPrefix = `tfc-grid`;
 
@@ -16,7 +17,7 @@ const defaultProps = {
   onClick: 0,
 };
 
-class Item extends ComponentBase {
+class Item extends BaseComponent {
   triggerClick = (e) => {
     const { onClick } = this.props;
 

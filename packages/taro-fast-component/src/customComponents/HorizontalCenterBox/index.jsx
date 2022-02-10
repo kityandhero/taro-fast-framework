@@ -1,4 +1,4 @@
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import BaseComponent from '../BaseComponent';
 
 import Row from '../Flex/Row';
 import Col from '../Flex/Col';
@@ -8,7 +8,7 @@ const defaultProps = {
   fillHeight: true,
 };
 
-class HorizontalCenterBox extends ComponentBase {
+class HorizontalCenterBox extends BaseComponent {
   renderFurther() {
     const { style: styleSource, fillHeight } = this.props;
 

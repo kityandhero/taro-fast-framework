@@ -3,7 +3,8 @@ import { View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toDatetime } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import './index.less';
 
@@ -34,7 +35,7 @@ function formatNum(num) {
   return num <= 9 ? `0${num}` : `${num}`;
 }
 
-class Countdown extends ComponentBase {
+class Countdown extends BaseComponent {
   timer = null;
 
   constructor(props) {

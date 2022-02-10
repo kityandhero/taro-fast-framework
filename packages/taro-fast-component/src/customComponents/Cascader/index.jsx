@@ -3,8 +3,8 @@ import { View } from '@tarojs/components';
 
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
+import BaseComponent from '../BaseComponent';
 import Radio from '../Radio';
 
 import './index.less';
@@ -19,7 +19,7 @@ const defaultProps = {
   afterChange: null,
 };
 
-class Cascader extends ComponentBase {
+class Cascader extends BaseComponent {
   flag = '';
 
   constructor(props) {

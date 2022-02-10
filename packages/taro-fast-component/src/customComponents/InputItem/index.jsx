@@ -14,7 +14,8 @@ import {
   isObject,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
@@ -70,7 +71,7 @@ const defaultProps = {
   onKeyboardHeightChange: null,
 };
 
-class InputItem extends ComponentBase {
+class InputItem extends BaseComponent {
   constructor(props) {
     super(props);
 

@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { inCollection } from 'taro-fast-common/es/utils/tools';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 const directionCollection = ['horizontal', 'vertical'];
 
@@ -26,7 +27,7 @@ const defaultProps = {
   index: 0,
 };
 
-class TabPanel extends ComponentBase {
+class TabPanel extends BaseComponent {
   renderFurther() {
     const {
       customStyle,

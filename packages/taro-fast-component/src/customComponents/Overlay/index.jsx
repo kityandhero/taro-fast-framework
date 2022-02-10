@@ -3,7 +3,8 @@ import { View } from '@tarojs/components';
 import { inCollection, colorHexToRGB } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import CenterBox from '../CenterBox';
 
@@ -28,7 +29,7 @@ const defaultProps = {
   onClick: null,
 };
 
-class Overlay extends ComponentBase {
+class Overlay extends BaseComponent {
   processing = false;
 
   visibilityChanged = false;

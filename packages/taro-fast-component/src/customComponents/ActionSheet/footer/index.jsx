@@ -2,13 +2,14 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../../BaseComponent';
 
 const defaultProps = {
   onClick: null,
 };
 
-class ActionSheetFooter extends ComponentBase {
+class ActionSheetFooter extends BaseComponent {
   triggerClick = (...args) => {
     const { onClick } = this.props;
 

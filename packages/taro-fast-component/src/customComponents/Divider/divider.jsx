@@ -6,9 +6,9 @@ import {
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
-
 import { isNumber, isString } from 'taro-fast-common/es/utils/typeCheck';
+
+import BaseComponent from '../BaseComponent';
 
 const classPrefix = `tfc-divider`;
 
@@ -24,7 +24,7 @@ const defaultProps = {
   height: 38,
 };
 
-class Divider extends ComponentBase {
+class Divider extends BaseComponent {
   getContentPosition = () => {
     const { contentPosition: contentPositionSource } = this.props;
 

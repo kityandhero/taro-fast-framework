@@ -8,7 +8,8 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
@@ -85,7 +86,7 @@ const defaultProps = {
   onScrollToLower: null,
 };
 
-class Card extends ComponentBase {
+class Card extends BaseComponent {
   renderFurther() {
     const {
       shadow,

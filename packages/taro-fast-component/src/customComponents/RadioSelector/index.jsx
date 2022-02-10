@@ -5,7 +5,8 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+
+import BaseComponent from '../BaseComponent';
 
 import Popup from '../Popup';
 import Radio from '../Radio';
@@ -42,7 +43,7 @@ const defaultProps = {
   afterChange: null,
 };
 
-class RadioSelector extends ComponentBase {
+class RadioSelector extends BaseComponent {
   constructor(props) {
     super(props);
 
