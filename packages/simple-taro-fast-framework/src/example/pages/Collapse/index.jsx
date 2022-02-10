@@ -48,8 +48,8 @@ export default class Index extends ContentPageBase {
 
           <Card
             header="唯一展开"
+            style={style}
             headerStyle={cardHeaderStyle}
-            style={{ backgroundColor: '#fff' }}
             space={false}
           >
             <Collapse
@@ -74,7 +74,7 @@ export default class Index extends ContentPageBase {
           <Card
             header="禁用"
             headerStyle={cardHeaderStyle}
-            style={{ backgroundColor: '#fff' }}
+            style={style}
             space={false}
           >
             <Collapse
