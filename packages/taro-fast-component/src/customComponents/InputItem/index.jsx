@@ -72,48 +72,8 @@ const defaultProps = {
 };
 
 class InputItem extends BaseComponent {
-  constructor(props) {
-    super(props);
-
-    const { value } = props;
-
-    this.state = {
-      valueFlag: value,
-      existValue: !stringIsNullOrWhiteSpace(value),
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
-
-    if (valueNext !== valuePrev) {
-      return {
-        valueFlag: valueNext,
-        existValue: !stringIsNullOrWhiteSpace(valueNext),
-      };
-    }
-
-    return {};
-  }
-
   triggerChange = (v) => {
-    const { clearable, afterChange } = this.props;
-    const { existValue } = this.state;
-
-    if (clearable) {
-      if (existValue && stringIsNullOrWhiteSpace(v)) {
-        this.setState({
-          existValue: false,
-        });
-      }
-
-      if (!existValue && !stringIsNullOrWhiteSpace(v)) {
-        this.setState({
-          existValue: true,
-        });
-      }
-    }
+    const { afterChange } = this.props;
 
     if (isFunction(afterChange)) {
       afterChange(v);
@@ -226,7 +186,6 @@ class InputItem extends BaseComponent {
       adjustPosition,
       holdKeyboard,
     } = this.props;
-    const { existValue } = this.state;
 
     if (!!hidden) {
       return null;
@@ -326,6 +285,7 @@ class InputItem extends BaseComponent {
                       ...valueStyle,
                       ...(align == 'right' ? { textAlign: 'right' } : {}),
                       ...(align == 'center' ? { textAlign: 'center' } : {}),
+                      ...{ width: '100%' },
                     }}
                     password={!!password}
                     placeholder={placeholder}
@@ -365,12 +325,10 @@ class InputItem extends BaseComponent {
                       onClick={this.clearValue}
                     >
                       <VerticalBox>
-                        {existValue ? (
-                          <IconCloseCircle
-                            size={toNumber(clearSize)}
-                            color={clearColor}
-                          />
-                        ) : null}
+                        <IconCloseCircle
+                          size={toNumber(clearSize)}
+                          color={clearColor}
+                        />
                       </VerticalBox>
                     </View>
                   ) : null
@@ -397,6 +355,7 @@ class InputItem extends BaseComponent {
           ...inputStyle,
           ...{
             flex: 'auto',
+            paddingRight: '0',
           },
         }}
       />

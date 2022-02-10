@@ -67,11 +67,11 @@ class FlexBox extends BaseComponent {
         }
 
         if (left == null) {
-          <View style={{ ...style, ...rightStyle }}>{right}</View>;
+          return right;
         }
 
         if (right == null) {
-          <View style={{ ...style, ...leftStyle }}>{left}</View>;
+          return left;
         }
       }
 
@@ -105,6 +105,20 @@ class FlexBox extends BaseComponent {
       },
       ...(vertical || {}),
     };
+
+    if (top == null || bottom == null) {
+      if (top == null && bottom == null) {
+        return null;
+      }
+
+      if (top == null) {
+        return bottom;
+      }
+
+      if (bottom == null) {
+        return top;
+      }
+    }
 
     return (
       <View
