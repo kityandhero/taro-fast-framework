@@ -79,7 +79,6 @@ export default class Index extends ContentPageBase {
             value: 'option3',
             description: '单选项描述三',
             extra: '扩展说明',
-            span: 2,
           },
         ],
         radioOptions3: [
@@ -176,7 +175,6 @@ export default class Index extends ContentPageBase {
             border={border}
             options={this.state.radioOptions2}
             value={this.state.radioValue2}
-            columns={3}
             columnGap={12}
           />
         </Card>
