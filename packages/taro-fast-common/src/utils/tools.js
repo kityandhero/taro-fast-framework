@@ -1957,7 +1957,24 @@ export function requestAnimationFrame(callback) {
     });
 }
 
-export function getRect(selector, context) {
+export function getFields(selector, context = null) {
+  return new Promise((resolve) => {
+    let query = createSelectorQuery();
+
+    if (context) {
+      query = query.in(context);
+    }
+
+    query
+      .select(selector)
+      .fields({ node: true, size: true })
+      .exec((rect = []) => {
+        return resolve(rect[0]);
+      });
+  });
+}
+
+export function getRect(selector, context = null) {
   return new Promise((resolve) => {
     let query = createSelectorQuery();
 
@@ -1974,7 +1991,7 @@ export function getRect(selector, context) {
   });
 }
 
-export function getAllRect(selector, context) {
+export function getAllRect(selector, context = null) {
   return new Promise((resolve) => {
     let query = createSelectorQuery();
     if (context) {

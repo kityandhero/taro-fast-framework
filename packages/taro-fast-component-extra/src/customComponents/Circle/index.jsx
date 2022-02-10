@@ -8,6 +8,7 @@ import {
   inCollection,
   transformSize,
   recordError,
+  getFields,
 } from 'taro-fast-common/es/utils/tools';
 import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -167,100 +168,93 @@ class Circle extends ComponentBase {
 
     const that = this;
 
-    const query = Taro.createSelectorQuery();
-
-    query
-      .select(`#${id}`)
-      .fields({ node: true, size: true })
-      .exec((res) => {
-        const n = res[0];
-
-        console.log({
-          n,
-          res,
-          t: that,
-        });
-
-        if (!n) {
-          return;
-        }
-
-        const width = n.width * dpr;
-        const height = n.height * dpr;
-
-        let ctx = null;
-        let supportLineColorGradient = false;
-
-        const ENV = Taro.getEnv();
-
-        // 标签栏滚动
-        switch (ENV) {
-          case Taro.ENV_TYPE.WEAPP:
-            const canvas = n.node;
-
-            canvas.width = width;
-            canvas.height = height;
-
-            ctx = canvas.getContext('2d');
-            supportLineColorGradient = true;
-            break;
-
-          case Taro.ENV_TYPE.ALIPAY:
-            recordError(`框架在该环境[${ENV}]还未适配`);
-            break;
-
-          case Taro.ENV_TYPE.SWAN:
-            recordError(`框架在该环境[${ENV}]还未适配`);
-            break;
-
-          case Taro.ENV_TYPE.WEB:
-            ctx = Taro.createCanvasContext(that.canvasId, that);
-            ctx.canvas.width = width;
-            ctx.canvas.height = height;
-
-            break;
-
-          default:
-            recordError(`框架在该环境[${ENV}]还未适配`);
-            break;
-        }
-
-        if (ctx == null) {
-          recordError(`框架在该环境[${ENV}]还未适配`);
-
-          return;
-        }
-
-        console.log({
-          ctx,
-        });
-
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = lineCap;
-
-        ctx.clearRect(0, 0, width, height);
-        ctx.translate(width / 2, height / 2);
-
-        if (useLineColorGradient && supportLineColorGradient) {
-          const g = ctx.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
-
-          g.addColorStop(0, lineColorStart); //添加颜色点
-          g.addColorStop(1, lineColorEnd); //添加颜色点
-
-          ctx.strokeStyle = g; //使用渐变对象作为圆环的颜色
-        } else {
-          ctx.strokeStyle = color;
-        }
-
-        const radius = width / 2 - lineAdjust - lineWidth;
-        if (that.currentProcess < percent) {
-          that.increase(ctx, width, height, radius, percent);
-        }
-
-        if (that.currentProcess > percent) {
-          that.reduce(ctx, width, height, radius, percent);
-        }
+    getFields(`#${id}`).then((n) => {
+      console.log({
+        id,
+        n,
+        t: that,
       });
+
+      if (!n) {
+        return;
+      }
+
+      const width = n.width * dpr;
+      const height = n.height * dpr;
+
+      let ctx = null;
+      let supportLineColorGradient = false;
+
+      const ENV = Taro.getEnv();
+
+      // 标签栏滚动
+      switch (ENV) {
+        case Taro.ENV_TYPE.WEAPP:
+          const canvas = n.node;
+
+          canvas.width = width;
+          canvas.height = height;
+
+          ctx = canvas.getContext('2d');
+          supportLineColorGradient = true;
+          break;
+
+        case Taro.ENV_TYPE.ALIPAY:
+          recordError(`框架在该环境[${ENV}]还未适配`);
+          break;
+
+        case Taro.ENV_TYPE.SWAN:
+          recordError(`框架在该环境[${ENV}]还未适配`);
+          break;
+
+        case Taro.ENV_TYPE.WEB:
+          ctx = Taro.createCanvasContext(that.canvasId, that);
+          ctx.canvas.width = width;
+          ctx.canvas.height = height;
+
+          break;
+
+        default:
+          recordError(`框架在该环境[${ENV}]还未适配`);
+          break;
+      }
+
+      if (ctx == null) {
+        recordError(`框架在该环境[${ENV}]还未适配`);
+
+        return;
+      }
+
+      console.log({
+        ctx,
+      });
+
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = lineCap;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.translate(width / 2, height / 2);
+
+      if (useLineColorGradient && supportLineColorGradient) {
+        const g = ctx.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
+
+        g.addColorStop(0, lineColorStart); //添加颜色点
+        g.addColorStop(1, lineColorEnd); //添加颜色点
+
+        ctx.strokeStyle = g; //使用渐变对象作为圆环的颜色
+      } else {
+        ctx.strokeStyle = color;
+      }
+
+      const radius = width / 2 - lineAdjust - lineWidth;
+      if (that.currentProcess < percent) {
+        that.increase(ctx, width, height, radius, percent);
+      }
+
+      if (that.currentProcess > percent) {
+        that.reduce(ctx, width, height, radius, percent);
+      }
+    });
   };
 
   increase = (ctx, width, height, radius, percent, drawBegin = false) => {
