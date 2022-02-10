@@ -61,6 +61,20 @@ class FlexBox extends BaseComponent {
         ...(!(allowWrap || false) ? { flexWrap: 'nowrap' } : {}),
       };
 
+      if (left == null || right == null) {
+        if (left == null && right == null) {
+          return null;
+        }
+
+        if (left == null) {
+          <View style={{ ...style, ...rightStyle }}>{right}</View>;
+        }
+
+        if (right == null) {
+          <View style={{ ...style, ...leftStyle }}>{left}</View>;
+        }
+      }
+
       if (flexAuto === 'left') {
         return (
           <Row style={style}>
@@ -77,13 +91,10 @@ class FlexBox extends BaseComponent {
 
       return (
         <Row style={style}>
-          <Col style={leftStyle || null}>{left}</Col>
-
-          {(right || null) == null ? null : (
-            <Col auto style={rightStyle || null}>
-              {right}
-            </Col>
-          )}
+          <Col style={leftStyle}>{left}</Col>
+          <Col auto style={rightStyle}>
+            {right}
+          </Col>
         </Row>
       );
     }
