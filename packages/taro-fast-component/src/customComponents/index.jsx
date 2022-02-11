@@ -53,3 +53,4 @@ export { default as Cascader } from './Cascader';
 export { default as Button } from './Button';
 export { default as Line } from './Line';
 export { default as Collapse } from './Collapse';
+export { default as Tabbar } from './Tabbar';

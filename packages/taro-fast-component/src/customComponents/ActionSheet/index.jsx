@@ -127,6 +127,7 @@ class ActionSheet extends BaseComponent {
       <View
         className={rootClass}
         style={style}
+        catchMove
         onTouchMove={this.handleTouchMove}
       >
         <Overlay

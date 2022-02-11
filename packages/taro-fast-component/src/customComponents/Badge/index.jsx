@@ -10,19 +10,21 @@ const classPrefix = `tfc-badge`;
 const defaultProps = {
   color: '#FF411C',
   content: null,
+  dot: false,
 };
 
 export const dot = Symbol();
 
 export const Badge = (p) => {
   const props = mergeProps(defaultProps, p);
-  const { content, color, children } = props;
+  const { content, color, dot: dotSource, children } = props;
 
-  const isDot = content === Badge.dot;
+  const isDot = dotSource || content === Badge.dot;
 
   const badgeCls = classNames(classPrefix, {
     [`${classPrefix}-fixed`]: !!children,
     [`${classPrefix}-dot`]: isDot,
+    [`${classPrefix}-content`]: !isDot,
   });
 
   const element = content

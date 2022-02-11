@@ -107,6 +107,11 @@ const o = {
       name: '级联选择',
       path: pathCollection.example.cascader.path,
     },
+    {
+      id: 'Tabbar',
+      name: '底部导航栏',
+      path: pathCollection.example.tabbar.path,
+    },
   ],
 };
 

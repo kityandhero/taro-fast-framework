@@ -193,6 +193,9 @@ const examplePathCollection = {
   collapse: {
     path: '/example/pages/collapse/index',
   },
+  tabbar: {
+    path: '/example/pages/tabbar/index',
+  },
   line: {
     path: '/example/pages/line/index',
   },
