@@ -1,5 +1,6 @@
 import { View, Text } from '@tarojs/components';
 
+import { navigateTo } from 'taro-fast-common/es/utils/tools';
 import {
   FadeView,
   ImageBox,
@@ -61,9 +62,7 @@ export default class ChannelPageBase extends PageWrapper {
                 className="component-list__item"
                 key={`${index}`}
                 onClick={() => {
-                  this.navigateTo({
-                    url: one.path,
-                  });
+                  navigateTo(one.path);
                 }}
               >
                 <Text className="name">{`${one.id} ${one.name}`}</Text>

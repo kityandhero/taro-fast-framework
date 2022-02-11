@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize, navigateTo } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   Card,
@@ -36,6 +36,7 @@ const listData = [
     title: '基础',
     content: '包含颜色、文本、图标等',
     icon: iconBasic,
+    webPage: false,
     path: pathCollection.basic.path,
   },
   {
@@ -43,6 +44,7 @@ const listData = [
     title: '元件',
     content: '包含通告栏、标签、徽标等',
     icon: iconView,
+    webPage: false,
     path: pathCollection.element.path,
   },
   {
@@ -50,6 +52,7 @@ const listData = [
     title: '表单',
     content: '包含输入框、单选框、复选框等',
     icon: iconForm,
+    webPage: false,
     path: pathCollection.form.path,
   },
   {
@@ -57,6 +60,7 @@ const listData = [
     title: '布局',
     content: '包含列表、浮层、卡片等',
     icon: iconLayout,
+    webPage: false,
     path: pathCollection.layout.path,
   },
   {
@@ -64,6 +68,7 @@ const listData = [
     title: '操作反馈',
     content: '包含对话框、进度条、动作面板等',
     icon: iconAction,
+    webPage: false,
     path: pathCollection.action.path,
   },
   // {
@@ -78,6 +83,7 @@ const listData = [
     title: '扩展组件',
     content: '包含日历等',
     icon: iconHOC,
+    webPage: false,
     path: pathCollection.extraComponent.path,
   },
   {
@@ -85,7 +91,28 @@ const listData = [
     title: '交互操作',
     content: '包含按钮操作等',
     icon: iconHOC,
+    webPage: false,
     path: pathCollection.interact.path,
+  },
+  {
+    id: 'WebPage',
+    title: 'H5版本',
+    content: '查看H5版本组件展示',
+    icon: iconHOC,
+    webPage: true,
+    path: pathCollection.webPage.path,
+    webPageTitle: 'H5版本',
+    webPageUrl: 'http://mtest.panduolakeji.com',
+  },
+  {
+    id: 'CoreTools',
+    title: '调用微信内核工具',
+    content: '调用微信内核工具, 用于清除缓存等',
+    icon: iconHOC,
+    webPage: true,
+    path: pathCollection.webPage.path,
+    webPageTitle: '',
+    webPageUrl: 'http://debugtbs.qq.com',
   },
 ];
 
@@ -113,9 +140,7 @@ export default class Index extends PageWrapper {
         clickable
         border={border}
         onClick={() => {
-          this.navigateTo({
-            url: path,
-          });
+          navigateTo(path);
         }}
       />
     );
@@ -154,9 +179,19 @@ export default class Index extends PageWrapper {
               className="module-list__item"
               key={index}
               onClick={() => {
-                this.navigateTo({
-                  url: item.path,
-                });
+                const { webPage } = item;
+
+                if (webPage) {
+                  const { webPageTitle, webPageUrl } = item;
+
+                  this.goToWebPage(
+                    item.path,
+                    webPageTitle || '',
+                    webPageUrl || '',
+                  );
+                } else {
+                  navigateTo(item.path);
+                }
               }}
             >
               <View className="module-list__icon">

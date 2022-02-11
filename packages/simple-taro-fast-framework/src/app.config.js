@@ -18,6 +18,7 @@ export default {
         'pages/action/index',
         'pages/extraComponent/index',
         'pages/interact/index',
+        'pages/webPage/index',
         'pages/ellipsis/index',
         'pages/price/index',
         'pages/colorText/index',

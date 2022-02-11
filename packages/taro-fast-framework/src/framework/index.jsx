@@ -1,5 +1,6 @@
 export { default as AppBase } from './AppBase';
 export { default as Infrastructure } from './Infrastructure';
+export { default as WebPageBase } from './WebPageBase';
 export { default as Base } from './Base';
 export { default as Core } from './Core';
 export { default as Common } from './Common';

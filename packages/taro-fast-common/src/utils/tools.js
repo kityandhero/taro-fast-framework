@@ -7,11 +7,22 @@ import {
   setStorageSync,
   removeStorageSync,
   clearStorage,
-  setClipboardData,
+  getClipboardData as getClipboardDataCore,
+  setClipboardData as setClipboardDataCore,
   createSelectorQuery,
   getSystemInfoSync,
   redirectTo as redirectToCore,
   navigateTo as navigateToCore,
+  createAnimation as createAnimationCore,
+  getSetting as getSettingCore,
+  switchTab as switchTabCore,
+  reLaunch as reLaunchCore,
+  navigateBack as navigateBackCore,
+  getPhoneLocation as getPhoneLocationCore,
+  requestPayment as requestPaymentCore,
+  uploadFile as uploadFileCore,
+  downloadFile as downloadFileCore,
+  makePhoneCall as makePhoneCallCore,
 } from '@tarojs/taro';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -154,15 +165,35 @@ export function setTaroGlobalData(config) {
   }
 }
 
-export function redirectTo(url) {
-  redirectToCore({
-    url,
+export function redirectTo(params) {
+  if (isString(params)) {
+    redirectToCore({
+      url: params,
+    });
+  }
+
+  if (isObject(params)) redirectToCore(params);
+
+  const text = '无效的跳转参数';
+
+  showErrorMessage({
+    message: text,
   });
 }
 
-export function navigateTo(url) {
-  navigateToCore({
-    url,
+export function navigateTo(params) {
+  if (isString(params)) {
+    navigateToCore({
+      url: params,
+    });
+  }
+
+  if (isObject(params)) navigateToCore(params);
+
+  const text = '无效的跳转参数';
+
+  showErrorMessage({
+    message: text,
   });
 }
 
@@ -1955,6 +1986,58 @@ export function requestAnimationFrame(callback) {
     .exec(() => {
       callback();
     });
+}
+
+export function getSetting(params) {
+  return getSettingCore(params);
+}
+
+export function switchTab(params) {
+  return switchTabCore(params);
+}
+
+export function reLaunch(params) {
+  return reLaunchCore(params);
+}
+
+export function navigateBack(params) {
+  return navigateBackCore(params);
+}
+
+export function getPhoneLocation(params) {
+  return getPhoneLocationCore(params);
+}
+
+export function createAnimation(params) {
+  return createAnimationCore(params);
+}
+
+export function getSelectorQuery() {
+  return createSelectorQuery();
+}
+
+export function requestPayment(params) {
+  return requestPaymentCore(params);
+}
+
+export function uploadFile(params) {
+  return uploadFileCore(params);
+}
+
+export function downloadFile(params) {
+  return downloadFileCore(params);
+}
+
+export function getClipboardData(params) {
+  return getClipboardDataCore(params);
+}
+
+export function setClipboardData(params) {
+  return setClipboardDataCore(params);
+}
+
+export function makePhoneCall(params) {
+  return makePhoneCallCore(params);
 }
 
 export function getFields(selector, context = null) {

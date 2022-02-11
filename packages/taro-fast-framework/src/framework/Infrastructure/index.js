@@ -1,7 +1,11 @@
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
-import { showErrorMessage } from 'taro-fast-common/es/utils/tools';
+import {
+  showErrorMessage,
+  stringIsNullOrWhiteSpace,
+  navigateTo,
+} from 'taro-fast-common/es/utils/tools';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {
   ComponentBase,
@@ -9,6 +13,8 @@ import {
 } from 'taro-fast-common/es/customComponents';
 
 class Infrastructure extends ComponentBase {
+  urlParamsCore = null;
+
   constructor(props) {
     super(props);
 
@@ -24,67 +30,11 @@ class Infrastructure extends ComponentBase {
   }
 
   getUrlParams() {
-    return this.$router.params;
-  }
+    if (stringIsNullOrWhiteSpace(this.urlParamsCore)) {
+      this.urlParamsCore = Taro.getCurrentInstance().router.params;
+    }
 
-  getSetting(params) {
-    Taro.getSetting(params);
-  }
-
-  switchTab(params) {
-    Taro.switchTab(params);
-  }
-
-  reLaunch(params) {
-    Taro.reLaunch(params);
-  }
-
-  navigateTo(params) {
-    Taro.navigateTo(params);
-  }
-
-  redirectTo(params) {
-    Taro.redirectTo(params);
-  }
-
-  navigateBack(params) {
-    Taro.navigateBack(params);
-  }
-
-  createSelectorQuery() {
-    return Taro.createSelectorQuery();
-  }
-
-  createAnimation(params) {
-    return Taro.createAnimation(params);
-  }
-
-  getPhoneLocation(params) {
-    return Taro.getLocation(params);
-  }
-
-  requestPayment(params) {
-    return Taro.requestPayment(params);
-  }
-
-  uploadFile(params) {
-    return Taro.uploadFile(params);
-  }
-
-  downloadFile(params) {
-    return Taro.downloadFile(params);
-  }
-
-  getClipboardData(params) {
-    return Taro.getClipboardData(params);
-  }
-
-  setClipboardData(params) {
-    return Taro.setClipboardData(params);
-  }
-
-  makePhoneCall(params) {
-    return Taro.makePhoneCall(params);
+    return this.urlParamsCore || {};
   }
 
   setNavigationBarTitle(params) {
@@ -168,6 +118,23 @@ class Infrastructure extends ComponentBase {
       className: className,
     });
   };
+
+  goToWebPage(pagePath, title, url) {
+    if (stringIsNullOrWhiteSpace(url)) {
+      const text = '缺少目标页面地址, 无法跳转';
+
+      showErrorMessage({
+        message: text,
+      });
+
+      return;
+    }
+
+    const titleEncode = encodeURIComponent(title || '');
+    const urlEncode = encodeURIComponent(url);
+
+    navigateTo(`${pagePath}?title=${titleEncode}&url=${urlEncode}`);
+  }
 
   renderView() {
     return (

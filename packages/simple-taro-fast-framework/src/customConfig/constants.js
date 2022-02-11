@@ -25,6 +25,9 @@ export const pathCollection = {
   extraComponent: {
     path: '/example/pages/extraComponent/index',
   },
+  webPage: {
+    path: '/example/pages/webPage/index',
+  },
   flex: {
     path: '/example/pages/flex/index',
   },
