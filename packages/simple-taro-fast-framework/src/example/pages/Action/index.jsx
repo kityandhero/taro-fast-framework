@@ -10,17 +10,17 @@ const o = {
     {
       id: 'ActionSheet',
       name: '动作面板',
-      path: pathCollection.actionSheet.path,
+      path: pathCollection.example.actionSheet.path,
     },
     {
       id: 'FloatAction',
       name: '浮动按钮',
-      path: pathCollection.floatAction.path,
+      path: pathCollection.example.floatAction.path,
     },
     {
       id: 'Modal',
       name: '弹窗',
-      path: pathCollection.modal.path,
+      path: pathCollection.example.modal.path,
     },
   ],
 };

@@ -37,7 +37,7 @@ const listData = [
     content: '包含颜色、文本、图标等',
     icon: iconBasic,
     webPage: false,
-    path: pathCollection.basic.path,
+    path: pathCollection.example.basic.path,
   },
   {
     id: 'Element',
@@ -45,7 +45,7 @@ const listData = [
     content: '包含通告栏、标签、徽标等',
     icon: iconView,
     webPage: false,
-    path: pathCollection.element.path,
+    path: pathCollection.example.element.path,
   },
   {
     id: 'Form',
@@ -53,7 +53,7 @@ const listData = [
     content: '包含输入框、单选框、复选框等',
     icon: iconForm,
     webPage: false,
-    path: pathCollection.form.path,
+    path: pathCollection.example.form.path,
   },
   {
     id: 'Layout',
@@ -61,7 +61,7 @@ const listData = [
     content: '包含列表、浮层、卡片等',
     icon: iconLayout,
     webPage: false,
-    path: pathCollection.layout.path,
+    path: pathCollection.example.layout.path,
   },
   {
     id: 'Action',
@@ -69,14 +69,14 @@ const listData = [
     content: '包含对话框、进度条、动作面板等',
     icon: iconAction,
     webPage: false,
-    path: pathCollection.action.path,
+    path: pathCollection.example.action.path,
   },
   // {
   //   id: 'Navigation',
   //   title: '导航',
   //   content: '包含标签栏、导航栏、分段器等',
   //   icon: iconNavigation,
-  //   path: pathCollection.navigation.path,
+  //   path: pathCollection.example.navigation.path,
   // },
   {
     id: 'Extra',
@@ -84,7 +84,7 @@ const listData = [
     content: '包含日历等',
     icon: iconHOC,
     webPage: false,
-    path: pathCollection.extraComponent.path,
+    path: pathCollection.example.extraComponent.path,
   },
   {
     id: 'Interact',
@@ -92,15 +92,23 @@ const listData = [
     content: '包含按钮操作等',
     icon: iconHOC,
     webPage: false,
-    path: pathCollection.interact.path,
+    path: pathCollection.example.interact.path,
+  },
+  {
+    id: 'News',
+    title: '资讯小程序示例',
+    content: '查看资讯小程序示例',
+    icon: iconHOC,
+    webPage: false,
+    path: pathCollection.news.home.path,
   },
   {
     id: 'WebPage',
-    title: 'H5版本',
+    title: 'H5版本组件',
     content: '查看H5版本组件展示',
     icon: iconHOC,
     webPage: true,
-    path: pathCollection.webPage.path,
+    path: pathCollection.example.webPage.path,
     webPageTitle: 'H5版本',
     webPageUrl: 'http://mtest.panduolakeji.com',
   },
@@ -110,7 +118,7 @@ const listData = [
     content: '调用微信内核工具, 用于清除缓存等',
     icon: iconHOC,
     webPage: true,
-    path: pathCollection.webPage.path,
+    path: pathCollection.example.webPage.path,
     webPageTitle: '',
     webPageUrl: 'http://debugtbs.qq.com',
   },
@@ -149,7 +157,7 @@ export default class Index extends PageWrapper {
   onShareAppMessage() {
     const o = {
       ...{
-        path: pathCollection.main.path,
+        path: pathCollection.example.main.path,
       },
     };
 
@@ -222,7 +230,7 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'Utils',
-              path: pathCollection.utils.path,
+              path: pathCollection.example.utils.path,
             },
           ])}
         </Card>
@@ -231,7 +239,7 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'Color',
-              path: pathCollection.color.path,
+              path: pathCollection.example.color.path,
             },
           ])}
         </Card>
@@ -240,63 +248,63 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'ImageBox',
-              path: pathCollection.imageBox.path,
+              path: pathCollection.example.imageBox.path,
             },
             {
               name: 'Button',
-              path: pathCollection.button.path,
+              path: pathCollection.example.button.path,
             },
             {
               name: 'InputItem',
-              path: pathCollection.inputItem.path,
+              path: pathCollection.example.inputItem.path,
             },
             {
               name: 'Switch',
-              path: pathCollection.switch.path,
+              path: pathCollection.example.switch.path,
             },
             {
               name: 'SwitchItem',
-              path: pathCollection.switchItem.path,
+              path: pathCollection.example.switchItem.path,
             },
             {
               name: 'Radio',
-              path: pathCollection.radio.path,
+              path: pathCollection.example.radio.path,
             },
             {
               name: 'RadioSelector',
-              path: pathCollection.radioSelector.path,
+              path: pathCollection.example.radioSelector.path,
             },
             {
               name: 'CheckBox',
-              path: pathCollection.checkBox.path,
+              path: pathCollection.example.checkBox.path,
             },
             {
               name: 'CheckBoxSelector',
-              path: pathCollection.checkBoxSelector.path,
+              path: pathCollection.example.checkBoxSelector.path,
             },
             {
               name: 'progress',
-              path: pathCollection.progress.path,
+              path: pathCollection.example.progress.path,
             },
             {
               name: 'ProgressBox',
-              path: pathCollection.progressBox.path,
+              path: pathCollection.example.progressBox.path,
             },
             {
               name: 'ProgressItem',
-              path: pathCollection.progressItem.path,
+              path: pathCollection.example.progressItem.path,
             },
             {
               name: 'Stepper',
-              path: pathCollection.stepper.path,
+              path: pathCollection.example.stepper.path,
             },
             {
               name: 'StepperItem',
-              path: pathCollection.stepperItem.path,
+              path: pathCollection.example.stepperItem.path,
             },
             {
               name: 'TextAreaItem',
-              path: pathCollection.textAreaItem.path,
+              path: pathCollection.example.textAreaItem.path,
             },
           ])}
         </Card>
@@ -305,63 +313,63 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'Line',
-              path: pathCollection.line.path,
+              path: pathCollection.example.line.path,
             },
             {
               name: 'Space',
-              path: pathCollection.space.path,
+              path: pathCollection.example.space.path,
             },
             {
               name: 'Divider',
-              path: pathCollection.divider.path,
+              path: pathCollection.example.divider.path,
             },
             {
               name: 'Layout',
-              path: pathCollection.layout.path,
+              path: pathCollection.example.layout.path,
             },
             {
               name: 'HorizontalCenterBox',
-              path: pathCollection.horizontalCenterBox.path,
+              path: pathCollection.example.horizontalCenterBox.path,
             },
             {
               name: 'VerticalBox',
-              path: pathCollection.verticalBox.path,
+              path: pathCollection.example.verticalBox.path,
             },
             {
               name: 'CenterBox',
-              path: pathCollection.centerBox.path,
+              path: pathCollection.example.centerBox.path,
             },
             {
               name: 'FlexBox',
-              path: pathCollection.flexBox.path,
+              path: pathCollection.example.flexBox.path,
             },
             {
               name: 'Grid',
-              path: pathCollection.grid.path,
+              path: pathCollection.example.grid.path,
             },
             {
               name: 'Card',
-              path: pathCollection.card.path,
+              path: pathCollection.example.card.path,
             },
             {
               name: 'Item',
-              path: pathCollection.item.path,
+              path: pathCollection.example.item.path,
             },
             {
               name: 'Popup',
-              path: pathCollection.popup.path,
+              path: pathCollection.example.popup.path,
             },
             {
               name: 'Tabs',
-              path: pathCollection.tabs.path,
+              path: pathCollection.example.tabs.path,
             },
             {
               name: 'Overlay',
-              path: pathCollection.overlay.path,
+              path: pathCollection.example.overlay.path,
             },
             {
               name: 'Collapse',
-              path: pathCollection.collapse.path,
+              path: pathCollection.example.collapse.path,
             },
           ])}
         </Card>
@@ -370,15 +378,15 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'ActionSheet',
-              path: pathCollection.actionSheet.path,
+              path: pathCollection.example.actionSheet.path,
             },
             {
               name: 'FloatAction',
-              path: pathCollection.floatAction.path,
+              path: pathCollection.example.floatAction.path,
             },
             {
               name: 'Modal',
-              path: pathCollection.modal.path,
+              path: pathCollection.example.modal.path,
             },
           ])}
         </Card>
@@ -387,75 +395,75 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'Ellipsis',
-              path: pathCollection.ellipsis.path,
+              path: pathCollection.example.ellipsis.path,
             },
             {
               name: 'Loading',
-              path: pathCollection.loading.path,
+              path: pathCollection.example.loading.path,
             },
             {
               name: 'ColorText',
-              path: pathCollection.colorText.path,
+              path: pathCollection.example.colorText.path,
             },
             {
               name: 'Price',
-              path: pathCollection.price.path,
+              path: pathCollection.example.price.path,
             },
             {
               name: 'Tag',
-              path: pathCollection.tag.path,
+              path: pathCollection.example.tag.path,
             },
             {
               name: 'Countdown',
-              path: pathCollection.countdown.path,
+              path: pathCollection.example.countdown.path,
             },
             {
               name: 'Transition',
-              path: pathCollection.transition.path,
+              path: pathCollection.example.transition.path,
             },
             {
               name: 'Notification',
-              path: pathCollection.notification.path,
+              path: pathCollection.example.notification.path,
             },
             {
               name: 'Avatar',
-              path: pathCollection.avatar.path,
+              path: pathCollection.example.avatar.path,
             },
             {
               name: 'Badge',
-              path: pathCollection.badge.path,
+              path: pathCollection.example.badge.path,
             },
             {
               name: 'NoticeBar',
-              path: pathCollection.noticeBar.path,
+              path: pathCollection.example.noticeBar.path,
             },
             {
               name: 'Footer',
-              path: pathCollection.footer.path,
+              path: pathCollection.example.footer.path,
             },
             {
               name: 'HelpBox',
-              path: pathCollection.helpBox.path,
+              path: pathCollection.example.helpBox.path,
             },
             {
               name: 'Swiper',
-              path: pathCollection.swiper.path,
+              path: pathCollection.example.swiper.path,
             },
             {
               name: 'Steps',
-              path: pathCollection.steps.path,
+              path: pathCollection.example.steps.path,
             },
             {
               name: 'DataGrid',
-              path: pathCollection.dataGrid.path,
+              path: pathCollection.example.dataGrid.path,
             },
             {
               name: 'SearchBar',
-              path: pathCollection.searchBar.path,
+              path: pathCollection.example.searchBar.path,
             },
             {
               name: 'Cascader',
-              path: pathCollection.cascader.path,
+              path: pathCollection.example.cascader.path,
             },
           ])}
         </Card>
@@ -464,11 +472,11 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'Circle',
-              path: pathCollection.circle.path,
+              path: pathCollection.example.circle.path,
             },
             {
               name: 'Selector',
-              path: pathCollection.selector.path,
+              path: pathCollection.example.selector.path,
             },
           ])}
         </Card>
@@ -477,7 +485,7 @@ export default class Index extends PageWrapper {
           {this.buildList([
             {
               name: 'Button Action',
-              path: pathCollection.buttonAction.path,
+              path: pathCollection.example.buttonAction.path,
             },
           ])}
         </Card>

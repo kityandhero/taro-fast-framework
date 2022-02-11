@@ -10,12 +10,12 @@ const o = {
     {
       id: 'Circle',
       name: '进度环',
-      path: pathCollection.circle.path,
+      path: pathCollection.example.circle.path,
     },
     {
       id: 'Selector',
       name: '高级选择',
-      path: pathCollection.selector.path,
+      path: pathCollection.example.selector.path,
     },
   ],
 };

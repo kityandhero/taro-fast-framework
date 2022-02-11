@@ -10,32 +10,32 @@ const o = {
     {
       id: 'Util',
       name: '功能函数',
-      path: pathCollection.utils.path,
+      path: pathCollection.example.utils.path,
     },
     {
       id: 'CSS',
       name: '内置变量',
-      path: pathCollection.cssVariable.path,
+      path: pathCollection.example.cssVariable.path,
     },
     {
       id: 'Color',
       name: '颜色',
-      path: pathCollection.color.path,
+      path: pathCollection.example.color.path,
     },
     {
       id: 'Icon',
       name: '图标',
-      path: pathCollection.icon.path,
+      path: pathCollection.example.icon.path,
     },
     {
       id: 'Line',
       name: '线条',
-      path: pathCollection.line.path,
+      path: pathCollection.example.line.path,
     },
     {
       id: 'Button',
       name: '按钮',
-      path: pathCollection.button.path,
+      path: pathCollection.example.button.path,
     },
   ],
 };

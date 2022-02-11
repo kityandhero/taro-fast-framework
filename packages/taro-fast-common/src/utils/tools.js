@@ -170,9 +170,15 @@ export function redirectTo(params) {
     redirectToCore({
       url: params,
     });
+
+    return;
   }
 
-  if (isObject(params)) redirectToCore(params);
+  if (isObject(params)) {
+    redirectToCore(params);
+
+    return;
+  }
 
   const text = '无效的跳转参数';
 
@@ -186,9 +192,15 @@ export function navigateTo(params) {
     navigateToCore({
       url: params,
     });
+
+    return;
   }
 
-  if (isObject(params)) navigateToCore(params);
+  if (isObject(params)) {
+    navigateToCore(params);
+
+    return;
+  }
 
   const text = '无效的跳转参数';
 

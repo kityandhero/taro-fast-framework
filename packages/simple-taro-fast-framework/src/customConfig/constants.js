@@ -3,10 +3,13 @@ export const colStyle = {
   backgroundColor: '#0092ffbf',
 };
 
-export const pathCollection = {
+const rootPathCollection = {
   main: {
     path: '/pages/home/main/index',
   },
+};
+
+const examplePathCollection = {
   basic: {
     path: '/example/pages/basic/index',
   },
@@ -205,6 +208,18 @@ export const pathCollection = {
   utils: {
     path: '/example/pages/utils/index',
   },
+};
+
+const newsPathCollection = {
+  home: {
+    path: '/news/pages/home/index',
+  },
+};
+
+export const pathCollection = {
+  root: rootPathCollection,
+  example: examplePathCollection,
+  news: newsPathCollection,
 };
 
 export const cardHeaderStyle = {
