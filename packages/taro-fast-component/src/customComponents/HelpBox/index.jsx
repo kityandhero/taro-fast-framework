@@ -35,7 +35,6 @@ class HelpBox extends BaseComponent {
       labelWidth: labelWidthValue,
       list: listData,
       useBackground,
-      hidden,
     } = {
       ...{
         title: '',
@@ -49,10 +48,6 @@ class HelpBox extends BaseComponent {
       },
       ...(this.props || {}),
     };
-
-    if (hidden) {
-      return null;
-    }
 
     const title = titleValue || '帮助信息';
     let list = [];

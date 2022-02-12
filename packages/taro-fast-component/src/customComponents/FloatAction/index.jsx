@@ -283,17 +283,12 @@ class FloatAction extends BaseComponent {
       actionRotate,
       buttons,
       hoverClass,
-      hidden,
       overlay,
       overlayColor,
       overlayAlpha,
       overlayDuration,
     } = this.props;
     const { buttonStyle, buttonVisible } = this.state;
-
-    if (hidden) {
-      return null;
-    }
 
     const style = {
       '--left': left,

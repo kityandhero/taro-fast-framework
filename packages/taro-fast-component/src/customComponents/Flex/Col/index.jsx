@@ -25,11 +25,7 @@ const defaultProps = {
 
 class Col extends BaseComponent {
   renderFurther() {
-    const { style, hidden } = this.props;
-
-    if (hidden) {
-      return null;
-    }
+    const { style } = this.props;
 
     const rootClass = ['tfc-col'];
 

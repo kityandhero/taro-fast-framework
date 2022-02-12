@@ -47,7 +47,6 @@ class StepperItem extends BaseComponent {
       digits,
       max,
       disabled,
-      hidden,
       editable,
       useBackground,
       backgroundColor,
@@ -56,10 +55,6 @@ class StepperItem extends BaseComponent {
       iconSize,
       onChange,
     } = this.props;
-
-    if (hidden) {
-      return null;
-    }
 
     return (
       <Item

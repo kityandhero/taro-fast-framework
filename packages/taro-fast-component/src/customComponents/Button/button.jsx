@@ -99,7 +99,6 @@ class Button extends BaseComponent {
 
   renderFurther() {
     const {
-      hidden,
       style,
       backgroundColor,
       fontColor,
@@ -133,10 +132,6 @@ class Button extends BaseComponent {
       onOpenSetting,
       children,
     } = this.props;
-
-    if (hidden) {
-      return null;
-    }
 
     const fill = this.getFill();
 

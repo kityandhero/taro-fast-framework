@@ -37,7 +37,6 @@ class SwitchItem extends BaseComponent {
       style,
       border,
       extraContainerStyle,
-      hidden,
       checked,
       disabled,
       checkedText,
@@ -47,10 +46,6 @@ class SwitchItem extends BaseComponent {
       onChange,
       afterChange,
     } = this.props;
-
-    if (hidden) {
-      return null;
-    }
 
     return (
       <Item

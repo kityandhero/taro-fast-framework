@@ -84,7 +84,6 @@ class SearchBar extends BaseComponent {
       icon,
       placeholder,
       disabled,
-      hidden,
       valueStyle,
       placeholderStyle,
       showSearch,
@@ -92,10 +91,6 @@ class SearchBar extends BaseComponent {
       searchStyle,
       clearSize,
     } = this.props;
-
-    if (hidden) {
-      return null;
-    }
 
     const mode = this.getMode();
 

@@ -107,7 +107,6 @@ class RadioSelector extends BaseComponent {
       placeholderStyle,
       disabled,
       border,
-      hidden,
       options,
       position,
       closeIcon,
@@ -122,10 +121,6 @@ class RadioSelector extends BaseComponent {
       children,
     } = this.props;
     const { popupVisible, valueStage } = this.state;
-
-    if (hidden) {
-      return null;
-    }
 
     return (
       <>

@@ -190,13 +190,8 @@ class Switch extends BaseComponent {
       uncheckedText,
       size,
       color,
-      hidden,
     } = this.props;
     const { loading, checkedStage } = this.state;
-
-    if (hidden) {
-      return null;
-    }
 
     const disabled = disabledSource || loading || false;
 

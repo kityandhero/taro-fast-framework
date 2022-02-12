@@ -10,6 +10,7 @@
   flex: 1;
   justify-content: center;
   z-index: var(--z-index);
+  overflow-x: hidden;
 
   &__content {
     display: flex;
@@ -54,13 +55,13 @@
       position: relative;
       display: flex;
       flex-direction: row;
-      width: var(--tfc-150);
+      width: 100%;
       justify-content: center;
     }
 
     &__text {
       margin-top: var(--tfc-2);
-      font-size: var(--tfc-12);
+      font-size: var(--tfc-24);
       color: var(--item-color);
     }
   }

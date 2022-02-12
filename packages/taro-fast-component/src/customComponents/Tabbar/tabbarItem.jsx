@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-import { isFunction, isUrl } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -15,21 +15,23 @@ import './index.less';
 const classPrefix = `tfc-tabbar`;
 
 const defaultProps = {
+  icon: null,
   activeIcon: null,
-  inactiveIcon: null,
+  image: null,
+  activeImage: null,
   badgeContent: null,
   badgeColor: '',
   dot: false,
   text: '',
   badgeStyle: {},
-  color: '#606266',
   active: false,
+  color: '#606266',
   activeColor: '',
-  inactiveColor: '',
+  hidden: false,
   onClick: null,
 };
 
-class Tag extends BaseComponent {
+class TabbarItem extends BaseComponent {
   constructor(props) {
     super(props);
 
@@ -41,33 +43,29 @@ class Tag extends BaseComponent {
     };
   }
 
-  triggerClick = (o) => {
+  triggerClick = () => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(o);
+      onClick();
     }
   };
 
   renderFurther() {
     const {
       style: styleSource,
+      icon,
       activeIcon,
-      inactiveIcon,
+      image,
+      activeImage,
       dot,
       badgeContent,
       badgeColor,
       text,
-      color,
       active,
+      color,
       activeColor,
-      inactiveColor,
-      hidden,
     } = this.props;
-
-    if (hidden) {
-      return null;
-    }
 
     const style = {
       ...{
@@ -75,6 +73,34 @@ class Tag extends BaseComponent {
       },
       ...styleSource,
     };
+
+    const iconSize = 44;
+
+    const imageBoxStyle = { width: 'var(--tfc-44)' };
+
+    const iconInactive = stringIsNullOrWhiteSpace(icon) ? (
+      stringIsNullOrWhiteSpace(image) ? null : (
+        <ImageBox src={image} imageBoxStyle={imageBoxStyle} />
+      )
+    ) : (
+      <Icon value={icon} size={iconSize} />
+    );
+
+    const iconActive = stringIsNullOrWhiteSpace(activeIcon) ? (
+      stringIsNullOrWhiteSpace(activeImage) ? (
+        stringIsNullOrWhiteSpace(icon) ? (
+          stringIsNullOrWhiteSpace(image) ? null : (
+            <ImageBox src={image} imageBoxStyle={imageBoxStyle} />
+          )
+        ) : (
+          <Icon value={icon} size={iconSize} />
+        )
+      ) : (
+        <ImageBox src={activeImage} imageBoxStyle={imageBoxStyle} />
+      )
+    ) : (
+      <Icon value={activeIcon} size={iconSize} />
+    );
 
     const itemCore = (
       <View
@@ -85,26 +111,16 @@ class Tag extends BaseComponent {
         <View
           className={classNames(`${classPrefix}__item__icon`)}
           style={{
-            color: active ? activeColor : inactiveColor,
+            color: active ? activeColor : color,
           }}
         >
-          {active ? (
-            isUrl(activeIcon) ? (
-              <ImageBox src={activeIcon} />
-            ) : (
-              <Icon value={activeIcon} />
-            )
-          ) : isUrl(inactiveIcon) ? (
-            <ImageBox src={inactiveIcon} />
-          ) : (
-            <Icon value={inactiveIcon} />
-          )}
+          {active ? iconActive : iconInactive}
         </View>
 
         <View
           className={classNames(`${classPrefix}__item__text`)}
           style={{
-            color: active ? activeColor : inactiveColor,
+            color: active ? activeColor : color,
           }}
         >
           {text}
@@ -124,8 +140,8 @@ class Tag extends BaseComponent {
   }
 }
 
-Tag.defaultProps = {
+TabbarItem.defaultProps = {
   ...defaultProps,
 };
 
-export default Tag;
+export default TabbarItem;

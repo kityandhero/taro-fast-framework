@@ -33,11 +33,7 @@ const defaultProps = {
 
 class DataGrid extends BaseComponent {
   renderFurther() {
-    const { list, hidden } = this.props;
-
-    if (hidden) {
-      return null;
-    }
+    const { list } = this.props;
 
     if (isArray(list)) {
       const dataList = list.map((o, index) => {

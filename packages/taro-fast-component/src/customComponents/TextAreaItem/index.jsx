@@ -125,7 +125,6 @@ class TextAreaItem extends BaseComponent {
       value,
       emptyValue,
       emptyValueStyle,
-      hidden,
       editable,
       position,
       arc,
@@ -141,10 +140,6 @@ class TextAreaItem extends BaseComponent {
       confirmStyle,
     } = this.props;
     const { popupVisible } = this.state;
-
-    if (hidden) {
-      return null;
-    }
 
     return (
       <Item

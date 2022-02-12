@@ -5,11 +5,11 @@ import {
   findIndex,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
-import Item from './item';
+import TabbarItem from './tabbarItem';
 
 import './index.less';
 
@@ -29,7 +29,7 @@ const defaultProps = {
   // 选中标签的颜色
   activeColor: 'red',
   // 未选中标签的颜色
-  inactiveColor: '',
+  color: '',
   // 是否固定在底部
   fixed: false,
   // fixed定位固定在底部时，是否生成一个等高元素防止塌陷
@@ -39,6 +39,7 @@ const defaultProps = {
   badgeColor: '',
   items: [],
   badges: [],
+  onClick: null,
 };
 
 function mergeItems(items, badges, props) {
@@ -59,11 +60,11 @@ function mergeItems(items, badges, props) {
   });
 }
 
-class Tag extends BaseComponent {
+class Tabbar extends BaseComponent {
   constructor(props) {
     super(props);
 
-    const { activeColor, inactiveColor, badgeColor, items, badges } = props;
+    const { activeColor, color, badgeColor, items, badges } = props;
 
     this.state = {
       ...this.state,
@@ -71,7 +72,7 @@ class Tag extends BaseComponent {
         placeholderHeight: 50,
         itemsAdjust: mergeItems(items, badges, {
           activeColor,
-          inactiveColor,
+          color,
           badgeColor,
         }),
       },
@@ -80,12 +81,12 @@ class Tag extends BaseComponent {
 
   // eslint-disable-next-line no-unused-vars
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { activeColor, inactiveColor, badgeColor, items, badges } = nextProps;
+    const { activeColor, color, badgeColor, items, badges } = nextProps;
 
     return {
       itemsAdjust: mergeItems(items, badges, {
         activeColor,
-        inactiveColor,
+        color,
         badgeColor,
       }),
     };
@@ -95,12 +96,19 @@ class Tag extends BaseComponent {
     this.ignoreTouchMove(e);
   };
 
+  triggerClick = (o) => {
+    const { onClick } = this.props;
+
+    if (isFunction(onClick)) {
+      onClick(o);
+    }
+  };
+
   renderFurther() {
     const {
       style: styleSource,
       value,
       safeAreaInsetBottom,
-      hidden,
       border,
       zIndex,
       fixed,
@@ -109,10 +117,6 @@ class Tag extends BaseComponent {
       borderColor,
     } = this.props;
     const { placeholderHeight, itemsAdjust } = this.state;
-
-    if (hidden) {
-      return null;
-    }
 
     const style = {
       ...{
@@ -130,39 +134,52 @@ class Tag extends BaseComponent {
           className={classNames(`${classPrefix}__content`, {
             [`${classPrefix}--fixed`]: fixed,
             [`${classPrefix}--border`]: border,
-            [`${classPrefix}--safe-area`]: safeAreaInsetBottom,
+            [`${classPrefix}--safe-area`]: fixed && safeAreaInsetBottom,
           })}
           catchMove
           onTouchMove={this.handleTouchMove}
         >
           <View className={classNames(`${classPrefix}__content__item-wrapper`)}>
             {(isArray(itemsAdjust) ? itemsAdjust : []).map((item, index) => {
+              const itemAdjust = { ...TabbarItem.defaultProps, ...item };
+
               const {
                 name,
+                icon,
                 activeIcon,
-                inactiveIcon,
+                image,
+                activeImage,
                 badgeContent,
                 badgeColor,
                 dot,
                 text,
                 color,
                 activeColor,
-                inactiveColor,
-              } = { ...Tag.defaultProps, ...item };
+              } = itemAdjust;
+
+              console.log({
+                value,
+                name,
+                active: value === name,
+              });
 
               return (
-                <Item
+                <TabbarItem
                   key={`tabbar_${index}`}
                   active={value === name}
+                  icon={icon}
                   activeIcon={activeIcon}
-                  inactiveIcon={inactiveIcon}
+                  image={image}
+                  activeImage={activeImage}
                   badgeContent={badgeContent}
                   badgeColor={badgeColor}
                   dot={dot}
                   text={text}
                   color={color}
                   activeColor={activeColor}
-                  inactiveColor={inactiveColor}
+                  onClick={() => {
+                    this.triggerClick(itemAdjust);
+                  }}
                 />
               );
             })}
@@ -182,8 +199,8 @@ class Tag extends BaseComponent {
   }
 }
 
-Tag.defaultProps = {
+Tabbar.defaultProps = {
   ...defaultProps,
 };
 
-export default Tag;
+export default Tabbar;

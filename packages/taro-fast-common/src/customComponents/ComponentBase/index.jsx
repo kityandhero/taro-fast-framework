@@ -274,6 +274,12 @@ class ComponentBase extends Component {
   }
 
   render() {
+    const { hidden } = this.props;
+
+    if (hidden) {
+      return null;
+    }
+
     this.showRenderCount();
 
     return this.renderView();

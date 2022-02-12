@@ -36,11 +36,7 @@ const defaultProps = {
 
 class Row extends BaseComponent {
   renderFurther() {
-    const { style, hidden } = this.props;
-
-    if (hidden) {
-      return null;
-    }
+    const { style } = this.props;
 
     const rootClass = ['tfc-row'];
 
