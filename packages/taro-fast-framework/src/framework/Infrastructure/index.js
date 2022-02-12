@@ -1,5 +1,4 @@
 import Taro from '@tarojs/taro';
-import { View } from '@tarojs/components';
 
 import {
   showErrorMessage,
@@ -11,6 +10,7 @@ import {
   ComponentBase,
   Notification,
 } from 'taro-fast-common/es/customComponents';
+import { VariableView } from 'taro-fast-component/es/customComponents';
 
 class Infrastructure extends ComponentBase {
   urlParamsCore = null;
@@ -21,6 +21,9 @@ class Infrastructure extends ComponentBase {
     this.state = {
       ...this.state,
       ...underlyingState,
+      ...{
+        scrollView: false,
+      },
     };
   }
 
@@ -137,12 +140,14 @@ class Infrastructure extends ComponentBase {
   }
 
   renderView() {
+    const { scrollView } = this.state;
+
     return (
-      <View>
+      <VariableView scroll={scrollView}>
         <Notification />
 
         {this.renderFurther()}
-      </View>
+      </VariableView>
     );
   }
 }

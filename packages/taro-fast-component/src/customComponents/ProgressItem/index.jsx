@@ -43,7 +43,6 @@ class ProgressItem extends BaseComponent {
   renderFurther() {
     const {
       layout: layoutSource,
-      hidden,
       label,
       labelStyle,
       labelContainerStyle,
@@ -62,10 +61,6 @@ class ProgressItem extends BaseComponent {
       borderRadius,
       fontSize,
     } = this.props;
-
-    if (!!hidden) {
-      return null;
-    }
 
     const layout = inCollection(layoutCollection, layoutSource)
       ? layoutSource

@@ -1,0 +1,30 @@
+@class-prefix-variable-view: ~'tfc-variable-view';
+
+.@{class-prefix-variable-view} {
+  position: relative;
+  overflow: hidden;
+
+  &__refreshBox {
+    position: absolute;
+    top: -72rpx;
+    height: 72rpx;
+    width: 100%;
+    z-index: 10000;
+
+    .pullRefresh {
+      height: 100%;
+
+      .iconBox {
+        padding: 6rpx;
+        width: 60rpx;
+        border-radius: 50%;
+        background-color: #dbd9d9;
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  &__scrollView {
+    height: 100%;
+  }
+}

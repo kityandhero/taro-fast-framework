@@ -179,7 +179,6 @@ class InputItem extends BaseComponent {
       border,
       align,
       required,
-      hidden,
       clearable,
       clearSize,
       clearColor,
@@ -206,10 +205,6 @@ class InputItem extends BaseComponent {
       adjustPosition,
       holdKeyboard,
     } = this.props;
-
-    if (!!hidden) {
-      return null;
-    }
 
     const type = inCollection(typeCollection, typeSource) ? typeSource : 'text';
     const confirmType = inCollection(confirmTypeCollection, confirmTypeSource)

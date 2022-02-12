@@ -155,13 +155,8 @@ class Tabbar extends BaseComponent {
                 text,
                 color,
                 activeColor,
+                hidden,
               } = itemAdjust;
-
-              console.log({
-                value,
-                name,
-                active: value === name,
-              });
 
               return (
                 <TabbarItem
@@ -177,6 +172,7 @@ class Tabbar extends BaseComponent {
                   text={text}
                   color={color}
                   activeColor={activeColor}
+                  hidden={hidden}
                   onClick={() => {
                     this.triggerClick(itemAdjust);
                   }}

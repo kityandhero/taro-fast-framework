@@ -110,7 +110,6 @@ class Progress extends BaseComponent {
 
   renderFurther() {
     const {
-      hidden,
       style,
       className,
       backgroundColor,
@@ -121,10 +120,6 @@ class Progress extends BaseComponent {
       borderRadius,
       fontSize,
     } = this.props;
-
-    if (!!hidden) {
-      return null;
-    }
 
     const percent = this.getPercent();
     const activeColor = this.getActiveColor();

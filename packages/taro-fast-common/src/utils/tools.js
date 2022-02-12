@@ -9,7 +9,7 @@ import {
   clearStorage,
   getClipboardData as getClipboardDataCore,
   setClipboardData as setClipboardDataCore,
-  createSelectorQuery,
+  createSelectorQuery as createSelectorQueryCore,
   getSystemInfoSync,
   redirectTo as redirectToCore,
   navigateTo as navigateToCore,
@@ -1983,6 +1983,10 @@ export function getSystemInfo() {
   }
 
   return globalSystemInfo;
+}
+
+export function createSelectorQuery() {
+  return createSelectorQueryCore();
 }
 
 export function requestAnimationFrame(callback) {

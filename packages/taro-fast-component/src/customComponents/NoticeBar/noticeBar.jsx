@@ -71,7 +71,6 @@ class NoticeBar extends BaseComponent {
 
   renderFurther() {
     const {
-      hidden,
       closeable: closeableSource,
       single,
       icon,
@@ -80,10 +79,6 @@ class NoticeBar extends BaseComponent {
       className,
       extra: extraSource,
     } = this.props;
-
-    if (!!hidden) {
-      return null;
-    }
 
     const { durationValue, show, animElemId } = this.state;
     const rootClassName = ['tfc-notice-bar'];

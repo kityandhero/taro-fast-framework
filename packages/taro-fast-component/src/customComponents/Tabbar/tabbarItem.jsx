@@ -102,12 +102,8 @@ class TabbarItem extends BaseComponent {
       <Icon value={activeIcon} size={iconSize} />
     );
 
-    const itemCore = (
-      <View
-        className={classNames(`${classPrefix}__item`)}
-        style={style}
-        onClick={this.triggerClick}
-      >
+    let itemCore = (
+      <>
         <View
           className={classNames(`${classPrefix}__item__icon`)}
           style={{
@@ -125,18 +121,26 @@ class TabbarItem extends BaseComponent {
         >
           {text}
         </View>
-      </View>
+      </>
     );
 
     if (dot || !stringIsNullOrWhiteSpace(badgeContent)) {
-      return (
+      itemCore = (
         <Badge color={badgeColor} content={badgeContent} dot={dot}>
           {itemCore}
         </Badge>
       );
     }
 
-    return itemCore;
+    return (
+      <View
+        className={classNames(`${classPrefix}__item`)}
+        style={style}
+        onClick={this.triggerClick}
+      >
+        {itemCore}
+      </View>
+    );
   }
 }
 

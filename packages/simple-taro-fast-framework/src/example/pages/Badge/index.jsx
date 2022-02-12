@@ -39,29 +39,21 @@ export default class Index extends ContentPageBase {
 
             <Badge
               color="#108ee9"
-              content={Badge.dot}
+              dot
               style={{ '--right': '100%', '--top': '100%' }}
             >
               <Avatar text="图" />
             </Badge>
 
-            <Badge
-              color="#87d068"
-              content={Badge.dot}
-              style={{ '--right': '100%' }}
-            >
+            <Badge color="#87d068" dot style={{ '--right': '100%' }}>
               <Avatar text="图" />
             </Badge>
 
-            <Badge content={Badge.dot}>
+            <Badge dot>
               <Avatar text="图" />
             </Badge>
 
-            <Badge
-              color="orange"
-              content={Badge.dot}
-              style={{ '--top': '100%' }}
-            >
+            <Badge color="orange" dot style={{ '--top': '100%' }}>
               <Avatar text="图" />
             </Badge>
           </Space>

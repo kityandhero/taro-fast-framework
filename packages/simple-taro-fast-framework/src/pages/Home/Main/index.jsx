@@ -95,6 +95,14 @@ const listData = [
     path: pathCollection.example.interact.path,
   },
   {
+    id: 'VariableView',
+    title: '视图示例',
+    content: '查看框架视图示例',
+    icon: iconHOC,
+    webPage: false,
+    path: pathCollection.variableView.home.path,
+  },
+  {
     id: 'News',
     title: '资讯小程序示例',
     content: '查看资讯小程序示例',

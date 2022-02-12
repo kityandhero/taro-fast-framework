@@ -35,7 +35,6 @@ class ProgressBox extends BaseComponent {
 
   renderFurther() {
     const {
-      hidden,
       style,
       progressContainerStyle,
       icon,
@@ -50,10 +49,6 @@ class ProgressBox extends BaseComponent {
       borderRadius,
       fontSize,
     } = this.props;
-
-    if (!!hidden) {
-      return null;
-    }
 
     const iconContainerStyle = {
       ...{

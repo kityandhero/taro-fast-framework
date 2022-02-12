@@ -28,6 +28,9 @@ const examplePathCollection = {
   extraComponent: {
     path: '/example/pages/extraComponent/index',
   },
+  interact: {
+    path: '/example/pages/interact/index',
+  },
   webPage: {
     path: '/example/pages/webPage/index',
   },
@@ -63,9 +66,6 @@ const examplePathCollection = {
   },
   steps: {
     path: '/example/pages/steps/index',
-  },
-  interact: {
-    path: '/example/pages/interact/index',
   },
   divider: {
     path: '/example/pages/divider/index',
@@ -213,6 +213,18 @@ const examplePathCollection = {
   },
 };
 
+const variableViewPathCollection = {
+  home: {
+    path: '/variableView/pages/home/index',
+  },
+  normal: {
+    path: '/variableView/pages/normal/index',
+  },
+  scroll: {
+    path: '/variableView/pages/scroll/index',
+  },
+};
+
 const newsPathCollection = {
   home: {
     path: '/news/pages/home/index',
@@ -222,6 +234,7 @@ const newsPathCollection = {
 export const pathCollection = {
   root: rootPathCollection,
   example: examplePathCollection,
+  variableView: variableViewPathCollection,
   news: newsPathCollection,
 };
 

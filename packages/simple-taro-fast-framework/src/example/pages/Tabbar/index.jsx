@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { Divider, Tabbar } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -105,15 +106,19 @@ const items2 = [
     name: 'shopping-cart',
     icon: 'shopping-cart',
     text: '购物车',
+    badgeContent: '12',
   },
   {
     name: 'camera',
     icon: 'camera',
     text: '相机',
+    activeImage: iconLayout,
+    dot: true,
   },
   {
     name: 'user',
     icon: 'user',
+    activeIcon: 'sketch',
     text: '用户',
   },
 ];
@@ -124,47 +129,47 @@ export default class Index extends ContentPageBase {
     name: '底部导航栏',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        value: 'user',
+      },
+    };
+  }
+
+  changeTab = (o) => {
+    const { name } = o;
+
+    console.log(o);
+
+    if (!stringIsNullOrWhiteSpace(name)) {
+      this.setState({ value: name });
+    }
+  };
+
   renderContent = () => {
+    const { value } = this.state;
+
     return (
       <View className="index">
         <Divider>图标模式</Divider>
 
-        <Tabbar
-          items={itemsIcon}
-          onClick={(o) => {
-            console.log(o);
-          }}
-        />
+        <Tabbar items={itemsIcon} />
 
         <Divider>图片模式</Divider>
 
-        <Tabbar
-          items={itemsImage}
-          onClick={(o) => {
-            console.log(o);
-          }}
-        />
+        <Tabbar items={itemsImage} />
 
         <Divider>图标图片混合模式</Divider>
 
-        <Tabbar
-          items={itemsMix}
-          itemWidth={130}
-          onClick={(o) => {
-            console.log(o);
-          }}
-        />
+        <Tabbar items={itemsMix} itemWidth={130} />
 
         <Divider>固定底部</Divider>
 
-        <Tabbar
-          value="user"
-          fixed
-          items={items2}
-          onClick={(o) => {
-            console.log(o);
-          }}
-        />
+        <Tabbar value={value} fixed items={items2} onClick={this.changeTab} />
       </View>
     );
   };

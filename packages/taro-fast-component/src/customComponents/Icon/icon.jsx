@@ -20,7 +20,7 @@ class Icon extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, className, value, size, color, hidden } = this.props;
+    const { style, className, value, size, color } = this.props;
 
     const rootStyle = {
       fontSize: transformSize(size),
@@ -28,10 +28,6 @@ class Icon extends BaseComponent {
     };
 
     const iconName = value ? `${prefixClass}-${value}` : '';
-
-    if (!!hidden) {
-      return null;
-    }
 
     return (
       <View
