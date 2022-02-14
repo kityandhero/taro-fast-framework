@@ -299,7 +299,7 @@ class VariableView extends BaseComponent {
                     )}
                     animation={refreshBoxPreloadAnimationData}
                   >
-                    <IconLoading size={46} />
+                    <IconLoading3 size={46} />
                   </View>
                 ) : null}
 
@@ -309,7 +309,7 @@ class VariableView extends BaseComponent {
                       `${classPrefix}__refreshBox__pullRefresh__iconBox`,
                     )}
                   >
-                    <IconLoading3
+                    <IconLoading
                       className={classNames(
                         `${classPrefix}__refreshBox__pullRefresh__iconBox__icon`,
                       )}

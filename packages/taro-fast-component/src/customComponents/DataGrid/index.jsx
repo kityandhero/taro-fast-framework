@@ -1,4 +1,4 @@
-import { View, Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import {
   stringIsNullOrWhiteSpace,
@@ -11,6 +11,7 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 
+import Ellipsis from '../Ellipsis';
 import FlexBox from '../FlexBox';
 import ColorText from '../ColorText';
 import Row from '../Flex/Row';
@@ -28,7 +29,11 @@ const defaultProps = {
   bordered: false,
   colon: true,
   size: null,
+  fontSize: 28,
   ellipsis: true,
+  ellipsisLine: 1,
+  ellipsisLineHeight: '',
+  ellipsisHeight: '',
 };
 
 class DataGrid extends BaseComponent {
@@ -56,20 +61,9 @@ class DataGrid extends BaseComponent {
         bordered: borderedSource,
         colon: colonSource,
         size: sizeSource,
-        ellipsis,
+        fontSize: fontSizeSource,
       } = {
-        ...{
-          title: '',
-          column: 2,
-          labelStyle: {},
-          contentStyle: {},
-          emptyValue: null,
-          emptyStyle: null,
-          bordered: false,
-          colon: true,
-          size: null,
-          ellipsis: true,
-        },
+        ...defaultProps,
         ...(this.props || {}),
       };
 
@@ -159,8 +153,20 @@ class DataGrid extends BaseComponent {
 
           <Row style={containorStyle} wrap>
             {dataList.map((item) => {
-              const { hidden: hiddenItem } = {
-                ...{ hidden: false },
+              const {
+                ellipsis,
+                ellipsisLine,
+                ellipsisLineHeight,
+                ellipsisHeight,
+                hidden: hiddenItem,
+              } = {
+                ...{
+                  ellipsis: true,
+                  ellipsisLine: 1,
+                  ellipsisLineHeight: '',
+                  ellipsisHeight: '',
+                  hidden: false,
+                },
                 ...(item || {}),
               };
 
@@ -247,22 +253,42 @@ class DataGrid extends BaseComponent {
                             wordBreak: 'break-all',
                             whiteSpace: 'normal',
                           },
-                          ...(ellipsis ? { WebkitLineClamp: '1' } : {}),
+                        }}
+                        onClick={() => {
+                          if (itemCanCopy && (itemCanCopy || null) != null) {
+                            copyToClipboard({
+                              text: itemCopyData || itemValue,
+                            });
+                          }
                         }}
                       >
-                        {v}
-                        {itemCanCopy && (itemCanCopy || null) != null ? (
-                          <Text
-                            style={{ marginLeft: transformSize(40) }}
-                            onClick={() => {
-                              copyToClipboard({
-                                text: itemCopyData || itemValue,
-                              });
+                        {ellipsis ? (
+                          <Ellipsis
+                            line={ellipsisLine}
+                            style={{
+                              ...{
+                                width: '100%',
+                                fontSize: transformSize(fontSizeSource),
+                              },
+                              ...(ellipsisLine > 1 &&
+                              !stringIsNullOrWhiteSpace(ellipsisHeight)
+                                ? {
+                                    height: ellipsisHeight,
+                                  }
+                                : {}),
+                              ...(ellipsisLine > 1 &&
+                              !stringIsNullOrWhiteSpace(ellipsisLineHeight)
+                                ? {
+                                    lineHeight: ellipsisLineHeight,
+                                  }
+                                : {}),
                             }}
                           >
-                            [复制]
-                          </Text>
-                        ) : null}
+                            {v}
+                          </Ellipsis>
+                        ) : (
+                          v
+                        )}
                       </View>
                     }
                   />
