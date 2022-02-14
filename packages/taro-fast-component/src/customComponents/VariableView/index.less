@@ -6,20 +6,21 @@
 
   &__refreshBox {
     position: absolute;
-    top: -72rpx;
-    height: 72rpx;
+    top: calc(var(--tfc-72) * -1);
     width: 100%;
+    height: var(--tfc-72);
     z-index: 10000;
 
-    .pullRefresh {
-      height: 100%;
-
-      .iconBox {
-        padding: 6rpx;
-        width: 60rpx;
+    &__pullRefresh {
+      &__iconBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--tfc-6);
+        width: var(--tfc-60);
+        height: var(--tfc-60);
         border-radius: 50%;
         background-color: #dbd9d9;
-        transform: scaleX(-1);
       }
     }
   }

@@ -82,7 +82,12 @@ export default {
     {
       root: 'variableView',
       name: '视图示例',
-      pages: ['pages/home/index', 'pages/normal/index', 'pages/scroll/index'],
+      pages: [
+        'pages/home/index',
+        'pages/normal/index',
+        'pages/scroll/index',
+        'pages/scrollPullRefresh/index',
+      ],
     },
   ],
 };

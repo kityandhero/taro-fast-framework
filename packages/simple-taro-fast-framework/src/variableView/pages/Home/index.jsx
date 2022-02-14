@@ -17,6 +17,11 @@ const o = {
       name: '滚动视图',
       path: pathCollection.variableView.scroll.path,
     },
+    {
+      id: 'ScrollViewPullRefresh',
+      name: '滚动视图下拉刷新',
+      path: pathCollection.variableView.scrollPullRefresh.path,
+    },
   ],
 };
 

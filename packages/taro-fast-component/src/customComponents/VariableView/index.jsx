@@ -19,7 +19,7 @@ import './index.less';
 
 const classPrefix = `tfc-variable-view`;
 
-const { IconReload } = Icon;
+const { IconLoading } = Icon;
 
 const defaultProps = {
   scroll: false,
@@ -69,10 +69,11 @@ class VariableView extends BaseComponent {
       return;
     }
 
-    const node = createSelectorQuery().select(`#${this.scrollViewId}`);
-
-    node
+    createSelectorQuery()
+      .select(`#${this.scrollViewId}`)
       .scrollOffset((rect) => {
+        console.log(rect);
+
         const { scrollTop } = rect;
 
         if (scrollTop === 0) {
@@ -231,11 +232,6 @@ class VariableView extends BaseComponent {
           const that = this;
 
           getRect(`#${this.refreshBoxId}`).then((rect) => {
-            console.log({
-              refreshBoxId: this.refreshBoxId,
-              rect,
-            });
-
             if (rect != null) {
               const { height: refreshBoxHeight } = rect;
               that.refreshBoxHeight = refreshBoxHeight;
@@ -285,7 +281,7 @@ class VariableView extends BaseComponent {
                     )}
                     animation={refreshBoxPreloadAnimationData}
                   >
-                    <IconReload size={46} />
+                    <IconLoading size={46} />
                   </View>
                 ) : null}
 
@@ -295,7 +291,7 @@ class VariableView extends BaseComponent {
                       `${classPrefix}__refreshBox__pullRefresh__iconBox`,
                     )}
                   >
-                    <Loading size={48} />
+                    <Loading size={42} borderWidth={2} />
                   </View>
                 ) : null}
               </CenterBox>

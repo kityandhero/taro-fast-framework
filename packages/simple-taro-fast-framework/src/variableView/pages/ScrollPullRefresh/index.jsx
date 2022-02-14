@@ -13,7 +13,7 @@ const style = {
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Normal',
-    name: '滚动视图',
+    name: '滚动视图下拉刷新',
   };
 
   constructor(props) {
@@ -23,9 +23,18 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         scrollView: true,
+        pullDownRefresh: true,
       },
     };
   }
+
+  onReload = () => {
+    console.log('onReload');
+  };
+
+  onLoadMore = () => {
+    console.log('onLoadMore');
+  };
 
   renderContent = () => {
     return (

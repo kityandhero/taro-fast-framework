@@ -23,6 +23,7 @@ class Infrastructure extends ComponentBase {
       ...underlyingState,
       ...{
         scrollView: false,
+        pullDownRefresh: false,
       },
     };
   }
@@ -139,11 +140,20 @@ class Infrastructure extends ComponentBase {
     navigateTo(`${pagePath}?title=${titleEncode}&url=${urlEncode}`);
   }
 
+  onReload = () => {};
+
+  onLoadMore = () => {};
+
   renderView() {
-    const { scrollView } = this.state;
+    const { scrollView, pullDownRefresh } = this.state;
 
     return (
-      <VariableView scroll={scrollView}>
+      <VariableView
+        scroll={scrollView}
+        enablePullDownRefresh={pullDownRefresh}
+        onReload={this.onReload}
+        onLoadMore={this.onLoadMore}
+      >
         <Notification />
 
         {this.renderFurther()}

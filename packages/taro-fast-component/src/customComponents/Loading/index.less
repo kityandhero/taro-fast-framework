@@ -16,8 +16,8 @@
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: var(--width);
-    height: var(--height);
+    width: calc(var(--width) - var(--tfc-2) - var(--ring-border-width) * 2);
+    height: calc(var(--height) - var(--tfc-2) - var(--ring-border-width) * 2);
     margin: var(--tfc-1);
     border-width: var(--ring-border-width);
     border-style: solid;
