@@ -55,6 +55,7 @@ export default class ChannelPageBase extends PageWrapper {
           </View>
           <View className="panel-header__title">{title}</View>
         </View>
+
         <View className="panel-body">
           <View className="component-list">
             {list.map((one, index) => (
