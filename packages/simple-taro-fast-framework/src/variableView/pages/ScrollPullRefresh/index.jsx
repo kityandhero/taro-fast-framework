@@ -24,6 +24,8 @@ export default class Index extends ContentPageBase {
       ...{
         scrollView: true,
         pullDownRefresh: true,
+        refreshColor: 'red',
+        refreshBackgroundColor: 'green',
       },
     };
   }

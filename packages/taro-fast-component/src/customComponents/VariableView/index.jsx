@@ -6,23 +6,26 @@ import {
   createSelectorQuery,
   getGuid,
   getRect,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
 import Icon from '../Icon';
-import Loading from '../Loading';
 import CenterBox from '../CenterBox';
 
 import './index.less';
 
 const classPrefix = `tfc-variable-view`;
 
-const { IconLoading } = Icon;
+const { IconLoading, IconLoading3 } = Icon;
 
 const defaultProps = {
   scroll: false,
+  height: '',
+  refreshColor: '',
+  refreshBackgroundColor: '',
 };
 
 class VariableView extends BaseComponent {
@@ -242,7 +245,8 @@ class VariableView extends BaseComponent {
   };
 
   renderFurther() {
-    const { scroll, scrollHeight, children } = this.props;
+    const { scroll, height, refreshColor, refreshBackgroundColor, children } =
+      this.props;
 
     const {
       scrollTopTarget,
@@ -251,13 +255,29 @@ class VariableView extends BaseComponent {
       needRefresh,
     } = this.state;
 
+    const style = {
+      ...(stringIsNullOrWhiteSpace(height)
+        ? {}
+        : !scroll
+        ? {
+            height: height,
+          }
+        : {
+            minHeight: height,
+          }),
+      ...(stringIsNullOrWhiteSpace(refreshColor)
+        ? {}
+        : { '--refresh-color': refreshColor }),
+      ...(stringIsNullOrWhiteSpace(refreshBackgroundColor)
+        ? {}
+        : { '--refresh-background-color': refreshBackgroundColor }),
+    };
+
     if (scroll) {
       return (
         <View
           className={classNames(classPrefix)}
-          style={{
-            height: `${scrollHeight || 900}px`,
-          }}
+          style={style}
           onTouchStart={this.onViewTouchStart}
           onTouchMove={this.onViewTouchMove}
           onTouchCancel={this.onViewTouchCancel}
@@ -289,7 +309,13 @@ class VariableView extends BaseComponent {
                       `${classPrefix}__refreshBox__pullRefresh__iconBox`,
                     )}
                   >
-                    <Loading size={42} borderWidth={2} />
+                    <IconLoading3
+                      className={classNames(
+                        `${classPrefix}__refreshBox__pullRefresh__iconBox__icon`,
+                      )}
+                      size={42}
+                      borderWidth={2}
+                    />
                   </View>
                 ) : null}
               </CenterBox>
@@ -310,7 +336,15 @@ class VariableView extends BaseComponent {
       );
     }
 
-    return <View>{children}</View>;
+    return (
+      <View
+        style={{
+          minHeight: height,
+        }}
+      >
+        {children}
+      </View>
+    );
   }
 }
 

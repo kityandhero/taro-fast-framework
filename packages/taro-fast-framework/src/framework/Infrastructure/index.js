@@ -24,6 +24,9 @@ class Infrastructure extends ComponentBase {
       ...{
         scrollView: false,
         pullDownRefresh: false,
+        height: '100vh',
+        refreshColor: '',
+        refreshBackgroundColor: '',
       },
     };
   }
@@ -145,11 +148,20 @@ class Infrastructure extends ComponentBase {
   onLoadMore = () => {};
 
   renderView() {
-    const { scrollView, pullDownRefresh } = this.state;
+    const {
+      scrollView,
+      pullDownRefresh,
+      height,
+      refreshColor,
+      refreshBackgroundColor,
+    } = this.state;
 
     return (
       <VariableView
         scroll={scrollView}
+        height={height}
+        refreshColor={refreshColor}
+        refreshBackgroundColor={refreshBackgroundColor}
         enablePullDownRefresh={pullDownRefresh}
         onReload={this.onReload}
         onLoadMore={this.onLoadMore}

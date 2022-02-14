@@ -1,6 +1,9 @@
 @class-prefix-variable-view: ~'tfc-variable-view';
 
 .@{class-prefix-variable-view} {
+  --refresh-color: '';
+  --refresh-background-color: #dbd9d9;
+
   position: relative;
   overflow: hidden;
 
@@ -20,7 +23,12 @@
         width: var(--tfc-60);
         height: var(--tfc-60);
         border-radius: 50%;
-        background-color: #dbd9d9;
+        background-color: var(--refresh-background-color);
+        color: var(--refresh-color);
+
+        &__icon {
+          animation: tfc-spin 1.4s linear infinite;
+        }
       }
     }
   }
