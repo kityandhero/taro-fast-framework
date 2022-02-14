@@ -72,8 +72,6 @@ class VariableView extends BaseComponent {
     createSelectorQuery()
       .select(`#${this.scrollViewId}`)
       .scrollOffset((rect) => {
-        console.log(rect);
-
         const { scrollTop } = rect;
 
         if (scrollTop === 0) {

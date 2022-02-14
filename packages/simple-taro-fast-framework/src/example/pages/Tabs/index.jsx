@@ -57,10 +57,6 @@ export default class Index extends ContentPageBase {
   }
 
   handleClick1 = (value) => {
-    console.log({
-      value,
-    });
-
     this.setState({
       current1: value,
     });

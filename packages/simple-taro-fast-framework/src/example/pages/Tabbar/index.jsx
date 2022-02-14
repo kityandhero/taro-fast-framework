@@ -143,8 +143,6 @@ export default class Index extends ContentPageBase {
   changeTab = (o) => {
     const { name } = o;
 
-    console.log(o);
-
     if (!stringIsNullOrWhiteSpace(name)) {
       this.setState({ value: name });
     }

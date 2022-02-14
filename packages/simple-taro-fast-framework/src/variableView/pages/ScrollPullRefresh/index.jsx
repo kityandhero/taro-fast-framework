@@ -46,7 +46,7 @@ export default class Index extends ContentPageBase {
             useBackground={false}
             list={[
               {
-                text: '普通视图模式下, 将退化使用View.',
+                text: '开启下拉刷新式: this.setState({scrollView: true,pullDownRefresh: true})',
               },
             ]}
           />

@@ -291,8 +291,6 @@ class Tabs extends BaseComponent {
         icon: iconItem,
       } = item;
 
-      console.log(item);
-
       const titleComponent = useBadge ? (
         <Badge content={badgeContent} color={badgeColor}>
           <ColorText icon={iconItem} text={title} />

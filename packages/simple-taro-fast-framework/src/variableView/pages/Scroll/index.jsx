@@ -37,7 +37,7 @@ export default class Index extends ContentPageBase {
             useBackground={false}
             list={[
               {
-                text: '普通视图模式下, 将退化使用View.',
+                text: '开启滚动视图模式下: this.setState({scrollView: true})',
               },
             ]}
           />
