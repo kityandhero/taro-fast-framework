@@ -27,6 +27,7 @@
         border-radius: 50%;
         background-color: var(--refresh-background-color);
         color: var(--refresh-color);
+        opacity: 0.92;
 
         &__icon {
           animation: tfc-spin 1.4s linear infinite;
@@ -49,11 +50,15 @@
       height: 100%;
 
       &__loading {
+        width: var(--tfc-200);
         height: var(--tfc-50);
-        padding: var(--tfc-20) var(--tfc-40);
+        margin: var(--tfc-20) var(--tfc-40);
+        padding: var(--tfc-14) var(--tfc-16);
         position: relative;
         background-color: var(--loading-background-color);
         border: var(--loading-border);
+        border-radius: var(--tfc-10);
+        opacity: 0.92;
       }
     }
   }

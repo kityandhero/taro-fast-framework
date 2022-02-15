@@ -160,7 +160,7 @@ class Infrastructure extends ComponentBase {
 
   onScrollLoad = () => {};
 
-  getShowScrollLoading = () => {
+  showScrollLoading = () => {
     const { dataLoading } = this.state;
 
     return dataLoading;
@@ -217,7 +217,7 @@ class Infrastructure extends ComponentBase {
             enablePullDownRefresh={pullDownRefresh}
             onReload={this.onReload}
             onScrollLoad={this.onScrollLoad}
-            loading={this.getShowScrollLoading()}
+            loading={this.showScrollLoading()}
             showScrollEmptyPlaceholder={this.showScrollEmptyPlaceholder()}
             scrollEmptyPlaceholder={this.buildScrollEmptyPlaceholder()}
           >

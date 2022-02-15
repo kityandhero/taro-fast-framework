@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
+import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
   DataGrid,
   HelpBox,
+  Ellipsis,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -71,10 +74,6 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onReload = () => {
-    console.log('onReload');
-  };
-
   onScrollLoad = () => {
     console.log('onScrollLoad');
   };
@@ -86,6 +85,35 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
+        <View>
+          <Space direction="vertical" fillWidth>
+            {metaListData.map((o, index) => {
+              const { title, description } = o;
+
+              return (
+                <Card
+                  key={`item_${index}`}
+                  header={title}
+                  border
+                  cardBorderRadiusMode={false}
+                  style={style}
+                >
+                  <Ellipsis
+                    line={2}
+                    style={{
+                      height: transformSize(88),
+                      fontSize: transformSize(28),
+                      lineHeight: transformSize(44),
+                    }}
+                  >
+                    {description}
+                  </Ellipsis>
+                </Card>
+              );
+            })}
+          </Space>
+        </View>
+
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
             list={descriptionList}

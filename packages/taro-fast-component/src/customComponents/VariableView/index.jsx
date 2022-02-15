@@ -43,6 +43,8 @@ const defaultProps = {
   useScrollEmptyPlaceholder: true,
   showScrollEmptyPlaceholder: true,
   scrollEmptyPlaceholder: null,
+  onReload: null,
+  onScrollLoad: null,
 };
 
 class VariableView extends BaseComponent {
@@ -298,11 +300,13 @@ class VariableView extends BaseComponent {
 
     return (
       scrollLoadingBox || (
-        <View
-          className={classNames(`${classPrefix}__loadingBox__inner__loading`)}
-        >
-          <ActivityIndicator mode="center" content="loading" />
-        </View>
+        <CenterBox>
+          <View
+            className={classNames(`${classPrefix}__loadingBox__inner__loading`)}
+          >
+            <ActivityIndicator mode="center" content="loading" />
+          </View>
+        </CenterBox>
       )
     );
   };
