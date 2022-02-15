@@ -222,7 +222,7 @@ class VariableView extends BaseComponent {
 
   onScrollToLower = () => {
     const { onScrollLoad } = this.props;
-
+    console.log('onScrollLoad');
     if (isFunction(onScrollLoad)) {
       onScrollLoad();
     }
@@ -254,6 +254,7 @@ class VariableView extends BaseComponent {
           getRect(`#${this.refreshBoxId}`).then((rect) => {
             if (rect != null) {
               const { height: refreshBoxHeight } = rect;
+
               that.refreshBoxHeight = refreshBoxHeight;
               that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
             }
@@ -342,10 +343,10 @@ class VariableView extends BaseComponent {
         ? {}
         : !scroll
         ? {
-            height: height,
+            minHeight: height,
           }
         : {
-            minHeight: height,
+            height: height,
           }),
       ...(stringIsNullOrWhiteSpace(refreshColor)
         ? {}
