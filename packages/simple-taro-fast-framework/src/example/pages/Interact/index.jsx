@@ -157,7 +157,7 @@ export default class Index extends ContentPageBase {
                     alignJustify="center"
                   >
                     <Empty
-                      image="https://img.yzcdn.cn/vant/custom-empty-image.png"
+                      // image="https://img.yzcdn.cn/vant/custom-empty-image.png"
                       description="暂无数据"
                       onImageClick={() => {
                         console.log('onImageClick');

@@ -14,10 +14,14 @@ class MultiPageCore extends ListCore {
 
   afterLoadSuccess = () => {
     this.pageNo = this.pageNo + 1;
+    this.clearListDataBeforeAttach = false;
   };
 
   refreshData = () => {
-    this.reloadData({ pageNo: 1 });
+    this.pageNo = 1;
+    this.clearListDataBeforeAttach = true;
+
+    this.reloadData({});
   };
 }
 

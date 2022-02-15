@@ -10,7 +10,12 @@ import {
   ComponentBase,
   Notification,
 } from 'taro-fast-common/es/customComponents';
-import { VariableView } from 'taro-fast-component/es/customComponents';
+import {
+  VariableView,
+  Spin,
+  FadeView,
+} from 'taro-fast-component/es/customComponents';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 class Infrastructure extends ComponentBase {
   urlParamsCore = null;
@@ -22,11 +27,19 @@ class Infrastructure extends ComponentBase {
       ...this.state,
       ...underlyingState,
       ...{
+        spin: false,
         scrollView: false,
         pullDownRefresh: false,
         height: '100vh',
         refreshColor: '',
         refreshBackgroundColor: '',
+        scrollWithAnimation: true,
+        scrollAnchoring: true,
+        scrollEnhanced: true,
+        scrollBounces: true,
+        scrollShowScrollbar: true,
+        scrollFastDeceleration: true,
+        useScrollEmptyPlaceholder: true,
       },
     };
   }
@@ -147,29 +160,71 @@ class Infrastructure extends ComponentBase {
 
   onScrollLoad = () => {};
 
+  getShowScrollLoading = () => {
+    const { dataLoading } = this.state;
+
+    return dataLoading;
+  };
+
+  showScrollEmptyPlaceholder = () => {
+    const { useScrollEmptyPlaceholder, firstLoadSuccess, metaListData } =
+      this.state;
+
+    return (
+      useScrollEmptyPlaceholder &&
+      firstLoadSuccess &&
+      isArray(metaListData) &&
+      metaListData.length === 0
+    );
+  };
+
+  buildScrollEmptyPlaceholder = () => {
+    return null;
+  };
+
   renderView() {
     const {
+      spin,
       scrollView,
       pullDownRefresh,
       height,
       refreshColor,
       refreshBackgroundColor,
+      scrollWithAnimation,
+      scrollAnchoring,
+      scrollEnhanced,
+      scrollBounces,
+      scrollShowScrollbar,
+      scrollFastDeceleration,
     } = this.state;
 
     return (
-      <VariableView
-        scroll={scrollView}
-        height={height}
-        refreshColor={refreshColor}
-        refreshBackgroundColor={refreshBackgroundColor}
-        enablePullDownRefresh={pullDownRefresh}
-        onReload={this.onReload}
-        onScrollLoad={this.onScrollLoad}
-      >
+      <Spin fullscreen spin={spin}>
         <Notification />
 
-        {this.renderFurther()}
-      </VariableView>
+        <FadeView show={!spin}>
+          <VariableView
+            scroll={scrollView}
+            height={height}
+            refreshColor={refreshColor}
+            refreshBackgroundColor={refreshBackgroundColor}
+            scrollWithAnimation={scrollWithAnimation}
+            scrollAnchoring={scrollAnchoring}
+            scrollEnhanced={scrollEnhanced}
+            scrollBounces={scrollBounces}
+            scrollShowScrollbar={scrollShowScrollbar}
+            scrollFastDeceleration={scrollFastDeceleration}
+            enablePullDownRefresh={pullDownRefresh}
+            onReload={this.onReload}
+            onScrollLoad={this.onScrollLoad}
+            loading={this.getShowScrollLoading()}
+            showScrollEmptyPlaceholder={this.showScrollEmptyPlaceholder()}
+            scrollEmptyPlaceholder={this.buildScrollEmptyPlaceholder()}
+          >
+            {this.renderFurther()}
+          </VariableView>
+        </FadeView>
+      </Spin>
     );
   }
 }

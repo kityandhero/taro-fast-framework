@@ -8,11 +8,16 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
+import Icon from '../Icon';
+
 import './index.less';
 
 const classPrefix = `tfc-empty`;
 
 const defaultProps = {
+  icon: 'alert-circle',
+  iconSize: 180,
+  iconStyle: {},
   image: '',
   imageStyle: {},
   description: '',
@@ -23,8 +28,20 @@ const defaultProps = {
 export const Empty = (p) => {
   const props = mergeProps(defaultProps, p);
 
-  const { image, imageStyle, description, onImageClick, onDescriptionClick } =
-    props;
+  const {
+    icon,
+    iconSize,
+    iconStyle,
+    image,
+    imageStyle,
+    description,
+    onImageClick,
+    onDescriptionClick,
+  } = props;
+
+  const iconNode = stringIsNullOrWhiteSpace(icon) ? null : (
+    <Icon value={icon} size={iconSize} style={iconStyle} />
+  );
 
   const imageNode =
     typeof image === 'string' ? (
@@ -57,12 +74,12 @@ export const Empty = (p) => {
   return withNativeProps(
     props,
     <View className={classPrefix}>
-      {imageNode ? (
+      {iconNode || imageNode ? (
         <View
           className={`${classPrefix}-image-container`}
           onClick={onImageClick}
         >
-          {imageNode}
+          {iconNode || imageNode}
         </View>
       ) : null}
 

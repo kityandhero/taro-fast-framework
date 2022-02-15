@@ -14,6 +14,9 @@ import BaseComponent from '../BaseComponent';
 
 import Icon from '../Icon';
 import CenterBox from '../CenterBox';
+import ActivityIndicator from '../ActivityIndicator';
+import Transition from '../Transition';
+import { Empty } from '../Empty';
 
 import './index.less';
 
@@ -26,6 +29,20 @@ const defaultProps = {
   height: '',
   refreshColor: '',
   refreshBackgroundColor: '',
+  loadingBackgroundColor: '#dbd9d9',
+  loadingBorder: '0',
+  scrollWithAnimation: true,
+  scrollAnchoring: true,
+  scrollEnhanced: true,
+  scrollBounces: true,
+  scrollShowScrollbar: true,
+  scrollFastDeceleration: true,
+  loading: false,
+  useLoadingBox: true,
+  scrollLoadingBox: null,
+  useScrollEmptyPlaceholder: true,
+  showScrollEmptyPlaceholder: true,
+  scrollEmptyPlaceholder: null,
 };
 
 class VariableView extends BaseComponent {
@@ -244,9 +261,70 @@ class VariableView extends BaseComponent {
     }
   };
 
+  buildScrollEmptyPlaceholder = () => {
+    const {
+      useScrollEmptyPlaceholder,
+      showScrollEmptyPlaceholder,
+      scrollEmptyPlaceholder,
+    } = this.props;
+
+    if (!useScrollEmptyPlaceholder) {
+      return null;
+    }
+
+    if (!showScrollEmptyPlaceholder) {
+      return null;
+    }
+
+    return (
+      <CenterBox>
+        {scrollEmptyPlaceholder || (
+          <Empty
+            description="暂无数据"
+            onImageClick={() => {
+              console.log('onImageClick');
+            }}
+            onDescriptionClick={() => {
+              console.log('onDescriptionClick');
+            }}
+          />
+        )}
+      </CenterBox>
+    );
+  };
+
+  buildLoadingBox = () => {
+    const { scrollLoadingBox } = this.props;
+
+    return (
+      scrollLoadingBox || (
+        <View
+          className={classNames(`${classPrefix}__loadingBox__inner__loading`)}
+        >
+          <ActivityIndicator mode="center" content="loading" />
+        </View>
+      )
+    );
+  };
+
   renderFurther() {
-    const { scroll, height, refreshColor, refreshBackgroundColor, children } =
-      this.props;
+    const {
+      scroll,
+      height,
+      refreshColor,
+      refreshBackgroundColor,
+      loadingBackgroundColor,
+      loadingBorder,
+      scrollWithAnimation,
+      scrollAnchoring,
+      scrollEnhanced,
+      scrollBounces,
+      scrollShowScrollbar,
+      scrollFastDeceleration,
+      loading,
+      useLoadingBox,
+      children,
+    } = this.props;
 
     const {
       scrollTopTarget,
@@ -271,6 +349,12 @@ class VariableView extends BaseComponent {
       ...(stringIsNullOrWhiteSpace(refreshBackgroundColor)
         ? {}
         : { '--refresh-background-color': refreshBackgroundColor }),
+      ...(stringIsNullOrWhiteSpace(loadingBackgroundColor)
+        ? {}
+        : { '--loading-background-color': loadingBackgroundColor }),
+      ...(stringIsNullOrWhiteSpace(loadingBorder)
+        ? {}
+        : { '--loading-border': `${loadingBorder}` }),
     };
 
     if (scroll) {
@@ -322,6 +406,15 @@ class VariableView extends BaseComponent {
             </View>
           </View>
 
+          <Transition
+            show={loading && useLoadingBox}
+            className={classNames(`${classPrefix}__loadingBox`)}
+          >
+            <View className={classNames(`${classPrefix}__loadingBox__inner`)}>
+              {this.buildLoadingBox()}
+            </View>
+          </Transition>
+
           <ScrollView
             id={this.scrollViewId || ''}
             className={classNames(`${classPrefix}__scrollView`)}
@@ -329,8 +422,18 @@ class VariableView extends BaseComponent {
             scrollTop={scrollTopTarget}
             lowerThreshold={80}
             onScrollToLower={this.onScrollToLower}
+            scrollWithAnimation={scrollWithAnimation}
+            scrollAnchoring={scrollAnchoring}
+            enhanced={scrollEnhanced}
+            bounces={scrollBounces}
+            showScrollbar={scrollShowScrollbar}
+            fastDeceleration={scrollFastDeceleration}
           >
-            <View>{children}</View>
+            <View>
+              {this.buildScrollEmptyPlaceholder()}
+
+              {children}
+            </View>
           </ScrollView>
         </View>
       );

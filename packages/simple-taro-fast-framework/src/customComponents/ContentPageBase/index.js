@@ -1,7 +1,5 @@
 import { View } from '@tarojs/components';
 
-import { FadeView, Spin } from 'taro-fast-component/es/customComponents';
-
 import Header from '../Header';
 import PageWrapper from '../PageWrapper';
 
@@ -16,7 +14,7 @@ export default class ContentPageBase extends PageWrapper {
     this.state = {
       ...this.state,
       ...{
-        show: false,
+        spin: true,
       },
     };
   }
@@ -25,7 +23,7 @@ export default class ContentPageBase extends PageWrapper {
     const that = this;
 
     setTimeout(() => {
-      that.setState({ show: true });
+      that.setState({ spin: false });
     }, 800);
   };
 
@@ -52,14 +50,6 @@ export default class ContentPageBase extends PageWrapper {
   };
 
   renderFurther() {
-    const { show } = this.state;
-
-    return (
-      <Spin fullscreen spin={!show}>
-        <FadeView show={show} className="page">
-          {this.renderContentView()}
-        </FadeView>
-      </Spin>
-    );
+    return this.renderContentView();
   }
 }

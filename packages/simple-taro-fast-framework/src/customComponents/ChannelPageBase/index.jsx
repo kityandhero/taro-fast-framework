@@ -1,12 +1,7 @@
 import { View, Text } from '@tarojs/components';
 
 import { navigateTo } from 'taro-fast-common/es/utils/tools';
-import {
-  FadeView,
-  ImageBox,
-  Icon,
-  Spin,
-} from 'taro-fast-component/es/customComponents';
+import { ImageBox, Icon } from 'taro-fast-component/es/customComponents';
 
 import PageWrapper from '../PageWrapper';
 
@@ -21,7 +16,7 @@ export default class ChannelPageBase extends PageWrapper {
     this.state = {
       ...this.state,
       ...{
-        show: false,
+        spin: true,
       },
     };
   }
@@ -30,7 +25,7 @@ export default class ChannelPageBase extends PageWrapper {
     const that = this;
 
     setTimeout(() => {
-      that.setState({ show: true });
+      that.setState({ spin: false });
     }, 800);
   };
 
@@ -77,14 +72,6 @@ export default class ChannelPageBase extends PageWrapper {
   };
 
   renderFurther() {
-    const { show } = this.state;
-
-    return (
-      <Spin fullscreen spin={!show}>
-        <FadeView show={show} className="page">
-          {this.renderChannelView()}
-        </FadeView>
-      </Spin>
-    );
+    return this.renderChannelView();
   }
 }

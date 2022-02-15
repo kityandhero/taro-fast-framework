@@ -3,6 +3,8 @@
 .@{class-prefix-variable-view} {
   --refresh-color: '';
   --refresh-background-color: #dbd9d9;
+  --loading-background-color: #dbd9d9;
+  --loading-border: 0;
 
   position: relative;
   overflow: hidden;
@@ -31,6 +33,35 @@
         }
       }
     }
+  }
+
+  &__loadingBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 120;
+    background-color: transparent;
+
+    &__inner {
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+
+      &__loading {
+        height: var(--tfc-50);
+        padding: var(--tfc-20) var(--tfc-40);
+        position: relative;
+        background-color: var(--loading-background-color);
+        border: var(--loading-border);
+      }
+    }
+  }
+
+  &__placeholder {
+    position: relative;
+    padding: var(--tfc-20) var(--tfc-40);
+    height: var(--tfc-40);
   }
 
   &__scrollView {

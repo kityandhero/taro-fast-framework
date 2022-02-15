@@ -60,6 +60,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
+        spin: false,
         scrollView: true,
         pullDownRefresh: true,
         refreshColor: 'red',
@@ -77,14 +78,14 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
+  doWorkAdjustDidMount = () => {};
+
   onReload = () => {
     this.refreshData();
   };
 
   renderContent = () => {
     const { metaListData } = this.state;
-
-    console.log({ metaListData });
 
     return (
       <Space direction="vertical" fillWidth>

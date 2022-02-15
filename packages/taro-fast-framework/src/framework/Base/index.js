@@ -23,6 +23,8 @@ class Base extends Infrastructure {
 
   useListDataAttachMode = true;
 
+  clearListDataBeforeAttach = false;
+
   // 该方法必须重载覆盖
   // eslint-disable-next-line no-unused-vars
   getApiData = (props) => {
@@ -281,6 +283,8 @@ class Base extends Infrastructure {
 
               const metaListData = !this.useListDataAttachMode
                 ? metaListData
+                : this.clearListDataBeforeAttach
+                ? [...metaListDataRemote]
                 : [...metaListDataPrev, ...metaListDataRemote];
 
               willSaveToState = {
