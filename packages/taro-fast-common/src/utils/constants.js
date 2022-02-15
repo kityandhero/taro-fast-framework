@@ -19,8 +19,6 @@ export const underlyingState = {
   paging: false,
   processing: false,
   dispatchComplete: true,
-  pageNo: 1,
-  pageSize: 10,
   metaData: null,
   metaExtra: null,
   metaListData: [],

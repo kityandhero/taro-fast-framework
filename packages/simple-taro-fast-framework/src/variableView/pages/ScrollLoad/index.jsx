@@ -1,13 +1,10 @@
 import { connect } from 'react-redux';
-import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
   DataGrid,
   HelpBox,
-  Ellipsis,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -28,7 +25,7 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '开启下拉刷新式',
+    label: '配置处理加载',
     value: 'this.setState({pullDownRefresh: true})',
     ellipsis: false,
     canCopy: true,
@@ -61,9 +58,6 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         scrollView: true,
-        pullDownRefresh: true,
-        refreshColor: 'red',
-        refreshBackgroundColor: 'green',
         loadApiPath: 'news/pageList',
       },
     };
@@ -78,7 +72,11 @@ export default class Index extends ContentPageBase {
   };
 
   onReload = () => {
-    this.refreshData();
+    console.log('onReload');
+  };
+
+  onScrollLoad = () => {
+    console.log('onScrollLoad');
   };
 
   renderContent = () => {
@@ -88,35 +86,6 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <View>
-          <Space direction="vertical" fillWidth>
-            {metaListData.map((o, index) => {
-              const { title, description } = o;
-
-              return (
-                <Card
-                  key={`item_${index}`}
-                  header={title}
-                  border
-                  cardBorderRadiusMode={false}
-                  style={style}
-                >
-                  <Ellipsis
-                    line={2}
-                    style={{
-                      height: transformSize(88),
-                      fontSize: transformSize(28),
-                      lineHeight: transformSize(44),
-                    }}
-                  >
-                    {description}
-                  </Ellipsis>
-                </Card>
-              );
-            })}
-          </Space>
-        </View>
-
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
             list={descriptionList}

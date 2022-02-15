@@ -21,6 +21,8 @@ import Infrastructure from '../Infrastructure';
 class Base extends Infrastructure {
   lastRequestingData = { type: '', payload: {} };
 
+  useListDataAttachMode = true;
+
   // 该方法必须重载覆盖
   // eslint-disable-next-line no-unused-vars
   getApiData = (props) => {
@@ -270,10 +272,16 @@ class Base extends Infrastructure {
 
             if (dataSuccess) {
               const {
-                list: metaListData,
+                list: metaListDataRemote,
                 data: metaData,
                 extra: metaExtra,
               } = metaOriginalData;
+
+              const { metaListData: metaListDataPrev } = this.state;
+
+              const metaListData = !this.useListDataAttachMode
+                ? metaListData
+                : [...metaListDataPrev, ...metaListDataRemote];
 
               willSaveToState = {
                 ...{

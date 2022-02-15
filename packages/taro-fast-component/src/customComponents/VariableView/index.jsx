@@ -202,10 +202,10 @@ class VariableView extends BaseComponent {
   };
 
   onScrollToLower = () => {
-    const { onLoadMore } = this.props;
+    const { onScrollLoad } = this.props;
 
-    if (isFunction(onLoadMore)) {
-      onLoadMore();
+    if (isFunction(onScrollLoad)) {
+      onScrollLoad();
     }
   };
 

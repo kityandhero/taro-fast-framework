@@ -13,6 +13,7 @@ import BaseComponent from '../BaseComponent';
 
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
+import Ellipsis from '../Ellipsis';
 
 import './index.less';
 
@@ -25,9 +26,12 @@ const defaultProps = {
   shadow: true,
   shadowColor: 'grey',
   border: true,
+  cardBorderRadiusMode: true,
+  cardBorderRadiusSize: 16,
   style: {},
   header: null,
   headerStyle: {},
+  headerEllipsis: true,
   bodyBorder: true,
   bodyStyle: {},
   footer: null,
@@ -93,8 +97,11 @@ class Card extends BaseComponent {
       shadowColor,
       style,
       border,
+      cardBorderRadiusMode,
+      cardBorderRadiusSize,
       header,
       headerStyle,
+      headerEllipsis,
       bodyBorder,
       bodyStyle,
       footer,
@@ -135,13 +142,20 @@ class Card extends BaseComponent {
                 )}-shadow)`,
               }
             : {}),
+          ...(mode === 'card'
+            ? cardBorderRadiusMode
+              ? {
+                  '--border-radius': transformSize(cardBorderRadiusSize),
+                }
+              : { '--border-radius': transformSize(0) }
+            : {}),
         }}
       >
         {header ? (
           <FlexBox
             left={
               <View className={`${classPrefix}-header`} style={headerStyle}>
-                {header}
+                {headerEllipsis ? <Ellipsis> {header}</Ellipsis> : header}
               </View>
             }
             right={extra ? <VerticalBox>{extra}</VerticalBox> : null}

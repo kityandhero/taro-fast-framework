@@ -145,7 +145,7 @@ class Infrastructure extends ComponentBase {
 
   onReload = () => {};
 
-  onLoadMore = () => {};
+  onScrollLoad = () => {};
 
   renderView() {
     const {
@@ -164,7 +164,7 @@ class Infrastructure extends ComponentBase {
         refreshBackgroundColor={refreshBackgroundColor}
         enablePullDownRefresh={pullDownRefresh}
         onReload={this.onReload}
-        onLoadMore={this.onLoadMore}
+        onScrollLoad={this.onScrollLoad}
       >
         <Notification />
 

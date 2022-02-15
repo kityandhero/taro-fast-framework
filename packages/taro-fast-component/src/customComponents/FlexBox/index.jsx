@@ -27,6 +27,7 @@ const defaultProps = {
   bottom: null,
   bottomStyle: {},
   style: null,
+  center: true,
 };
 
 class FlexBox extends BaseComponent {
@@ -45,6 +46,7 @@ class FlexBox extends BaseComponent {
       bottomStyle,
       direction: directionSource,
       vertical,
+      center,
     } = this.props;
 
     const direction = inCollection(directionCollection, directionSource)
@@ -75,15 +77,27 @@ class FlexBox extends BaseComponent {
         }
       }
 
+      const styleCore = {
+        display: 'flex',
+        alignItems: 'center',
+      };
+
       if (flexAuto === 'left') {
         return (
           <Row style={style}>
-            <Col auto align="center" style={leftStyle || null}>
+            <Col
+              auto
+              align={center ? 'center' : 'stretch'}
+              style={{ ...(leftStyle || {}), ...(center ? {} : styleCore) }}
+            >
               {left}
             </Col>
 
             {(right || null) == null ? null : (
-              <Col align="center" style={rightStyle || null}>
+              <Col
+                align={center ? 'center' : 'stretch'}
+                style={{ ...(rightStyle || {}), ...(center ? {} : styleCore) }}
+              >
                 {right}
               </Col>
             )}
@@ -93,10 +107,17 @@ class FlexBox extends BaseComponent {
 
       return (
         <Row style={style}>
-          <Col align="center" style={leftStyle}>
+          <Col
+            align={center ? 'center' : 'stretch'}
+            style={{ ...(leftStyle || {}), ...(center ? {} : styleCore) }}
+          >
             {left}
           </Col>
-          <Col auto align="center" style={rightStyle}>
+          <Col
+            auto
+            align={center ? 'center' : 'stretch'}
+            style={{ ...(rightStyle || {}), ...(center ? {} : styleCore) }}
+          >
             {right}
           </Col>
         </Row>

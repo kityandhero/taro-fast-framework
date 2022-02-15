@@ -226,6 +226,9 @@ const variableViewPathCollection = {
   scrollPullRefresh: {
     path: '/variableView/pages/scrollPullRefresh/index',
   },
+  scrollLoad: {
+    path: '/variableView/pages/scrollLoad/index',
+  },
 };
 
 const newsPathCollection = {

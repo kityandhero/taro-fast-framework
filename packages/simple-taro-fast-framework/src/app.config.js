@@ -87,6 +87,7 @@ export default {
         'pages/normal/index',
         'pages/scroll/index',
         'pages/scrollPullRefresh/index',
+        'pages/scrollLoad/index',
       ],
     },
   ],

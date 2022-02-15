@@ -9,3 +9,5 @@ export { default as Supplement } from './Supplement';
 export { default as SupplementWrapper } from './SupplementWrapper';
 export { default as ComponentWrapper } from './ComponentWrapper';
 export { default as AuthorizationWrapper } from './AuthorizationWrapper';
+export { default as ListCore } from './ListCore';
+export { default as MultiPageCore } from './MultiPageCore';

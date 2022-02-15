@@ -2,7 +2,8 @@
   --prefix-width: 'auto';
   --align-items: center;
   --active-background-color: var(--tfc-border-color);
-  --border-inner: solid var(--tfc-2) var(--tfc-border-color);
+  --border-radius: var(--tfc-16);
+  --border-card: solid var(--tfc-2) var(--tfc-border-color);
   --border-top: solid var(--tfc-2) var(--tfc-border-color);
   --border-bottom: solid var(--tfc-2) var(--tfc-border-color);
   --padding-left: var(--tfc-24);
@@ -48,6 +49,7 @@
 
   &-card {
     margin: var(--tfc-24);
-    border-radius: var(--tfc-16);
+    border-radius: var(--border-radius);
+    border: var(--border-card);
   }
 }

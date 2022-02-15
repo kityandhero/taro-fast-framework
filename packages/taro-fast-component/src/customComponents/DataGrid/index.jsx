@@ -1,10 +1,12 @@
 import { View } from '@tarojs/components';
+import { Fragment } from 'react';
 
 import {
   stringIsNullOrWhiteSpace,
   copyToClipboard,
   getGuid,
   transformSize,
+  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -17,8 +19,11 @@ import ColorText from '../ColorText';
 import Row from '../Flex/Row';
 import Col from '../Flex/Col';
 
+const layoutCollection = ['row', 'column'];
+
 const defaultProps = {
   title: '',
+  layout: 'column',
   column: 2,
   list: [],
   hidden: false,
@@ -37,8 +42,16 @@ const defaultProps = {
 };
 
 class DataGrid extends BaseComponent {
+  getLayout = () => {
+    const { layout } = this.props;
+
+    return inCollection(layoutCollection, layout) ? layout : 'column';
+  };
+
   renderFurther() {
     const { list } = this.props;
+
+    const layout = this.getLayout();
 
     if (isArray(list)) {
       const dataList = list.map((o, index) => {
@@ -114,6 +127,7 @@ class DataGrid extends BaseComponent {
         },
         ...(labelStyleSource || {}),
         ...(bordered ? { margin } : {}),
+        ...(layout === 'row' ? { width: 'auto' } : {}),
       };
 
       const contentStyle = {
@@ -214,85 +228,112 @@ class DataGrid extends BaseComponent {
                 (itemValue || itemEmptyValue || globalEmptyValue) ==
                 (itemEmptyValue || globalEmptyValue);
 
-              return (
-                <Col
-                  key={itemKey}
-                  style={itemStyle}
-                  label={itemLabel}
-                  size={
-                    columnSize * (toNumber(itemSpan) || 1) > 12
-                      ? 12
-                      : columnSize * (toNumber(itemSpan) || 1)
-                  }
-                  {...(itemProps || {})}
+              const labelComponent = (
+                <View style={labelStyle}>{`${itemLabel}${
+                  colon ? ': ' : ''
+                }`}</View>
+              );
+
+              const valueComponent = (
+                <View
+                  style={{
+                    ...contentStyle,
+                    ...(isEmpty ? globalEmptyStyle || {} : {}),
+                    ...(isEmpty ? itemEmptyStyle || {} : {}),
+                    ...{
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                      display: '-webkit-box',
+                      textOverflow: 'ellipsis',
+                      wordBreak: 'break-all',
+                      whiteSpace: 'normal',
+                    },
+                  }}
+                  onClick={() => {
+                    if (itemCanCopy && (itemCanCopy || null) != null) {
+                      copyToClipboard({
+                        text: itemCopyData || itemValue,
+                      });
+                    }
+                  }}
                 >
-                  <FlexBox
-                    flexAuto="right"
-                    left={
-                      <View style={labelStyle}>{`${itemLabel}${
-                        colon ? ': ' : ''
-                      }`}</View>
+                  {ellipsis ? (
+                    <Ellipsis
+                      line={ellipsisLine}
+                      style={{
+                        ...{
+                          width: '100%',
+                          fontSize: transformSize(fontSizeSource),
+                        },
+                        ...(ellipsisLine > 1 &&
+                        !stringIsNullOrWhiteSpace(ellipsisHeight)
+                          ? {
+                              height: ellipsisHeight,
+                            }
+                          : {}),
+                        ...(ellipsisLine > 1 &&
+                        !stringIsNullOrWhiteSpace(ellipsisLineHeight)
+                          ? {
+                              lineHeight: ellipsisLineHeight,
+                            }
+                          : {}),
+                      }}
+                    >
+                      {v}
+                    </Ellipsis>
+                  ) : (
+                    v
+                  )}
+                </View>
+              );
+
+              if (layout === 'column') {
+                return (
+                  <Col
+                    key={itemKey}
+                    style={itemStyle}
+                    size={
+                      columnSize * (toNumber(itemSpan) || 1) > 12
+                        ? 12
+                        : columnSize * (toNumber(itemSpan) || 1)
                     }
-                    leftStyle={{
-                      ...{ backgroundColor },
-                      ...(bordered
-                        ? { borderRight: `${transformSize(2)} solid #f0f0f0` }
-                        : {}),
+                    {...(itemProps || {})}
+                  >
+                    <FlexBox
+                      center={false}
+                      flexAuto="right"
+                      left={labelComponent}
+                      leftStyle={{
+                        ...{ backgroundColor },
+                        ...(bordered
+                          ? { borderRight: `${transformSize(2)} solid #f0f0f0` }
+                          : {}),
+                      }}
+                      right={valueComponent}
+                    />
+                  </Col>
+                );
+              }
+
+              return (
+                <Fragment key={itemKey}>
+                  <Col
+                    style={{
+                      ...itemStyle,
+                      ...{
+                        backgroundColor,
+                      },
                     }}
-                    right={
-                      <View
-                        style={{
-                          ...contentStyle,
-                          ...(isEmpty ? globalEmptyStyle || {} : {}),
-                          ...(isEmpty ? itemEmptyStyle || {} : {}),
-                          ...{
-                            WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden',
-                            display: '-webkit-box',
-                            textOverflow: 'ellipsis',
-                            wordBreak: 'break-all',
-                            whiteSpace: 'normal',
-                          },
-                        }}
-                        onClick={() => {
-                          if (itemCanCopy && (itemCanCopy || null) != null) {
-                            copyToClipboard({
-                              text: itemCopyData || itemValue,
-                            });
-                          }
-                        }}
-                      >
-                        {ellipsis ? (
-                          <Ellipsis
-                            line={ellipsisLine}
-                            style={{
-                              ...{
-                                width: '100%',
-                                fontSize: transformSize(fontSizeSource),
-                              },
-                              ...(ellipsisLine > 1 &&
-                              !stringIsNullOrWhiteSpace(ellipsisHeight)
-                                ? {
-                                    height: ellipsisHeight,
-                                  }
-                                : {}),
-                              ...(ellipsisLine > 1 &&
-                              !stringIsNullOrWhiteSpace(ellipsisLineHeight)
-                                ? {
-                                    lineHeight: ellipsisLineHeight,
-                                  }
-                                : {}),
-                            }}
-                          >
-                            {v}
-                          </Ellipsis>
-                        ) : (
-                          v
-                        )}
-                      </View>
-                    }
-                  />
-                </Col>
+                    size={12}
+                    {...(itemProps || {})}
+                  >
+                    {labelComponent}
+                  </Col>
+
+                  <Col style={itemStyle} size={12} {...(itemProps || {})}>
+                    {valueComponent}
+                  </Col>
+                </Fragment>
               );
             })}
           </Row>
