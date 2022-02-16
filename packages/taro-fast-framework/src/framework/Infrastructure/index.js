@@ -30,6 +30,10 @@ class Infrastructure extends ComponentBase {
         spin: false,
         scrollView: false,
         pullDownRefresh: false,
+        useCustomPullDown: false,
+        scrollRefresherThreshold: 100,
+        scrollRefresherDefaultStyle: 'white',
+        scrollRefresherBackground: '',
         height: '100vh',
         refreshColor: '',
         refreshBackgroundColor: '',
@@ -158,7 +162,7 @@ class Infrastructure extends ComponentBase {
 
   onReload = () => {};
 
-  onScrollLoad = () => {};
+  onScrollLowerLoad = () => {};
 
   showScrollLoading = () => {
     const { dataLoading } = this.state;
@@ -187,6 +191,10 @@ class Infrastructure extends ComponentBase {
       spin,
       scrollView,
       pullDownRefresh,
+      useCustomPullDown,
+      scrollRefresherThreshold,
+      scrollRefresherDefaultStyle,
+      scrollRefresherBackground,
       height,
       refreshColor,
       refreshBackgroundColor,
@@ -215,8 +223,12 @@ class Infrastructure extends ComponentBase {
             scrollShowScrollbar={scrollShowScrollbar}
             scrollFastDeceleration={scrollFastDeceleration}
             enablePullDownRefresh={pullDownRefresh}
+            useCustomPullDown={useCustomPullDown}
+            scrollRefresherThreshold={scrollRefresherThreshold}
+            scrollRefresherDefaultStyle={scrollRefresherDefaultStyle}
+            scrollRefresherBackground={scrollRefresherBackground}
             onReload={this.onReload}
-            onScrollLoad={this.onScrollLoad}
+            onScrollLowerLoad={this.onScrollLowerLoad}
             loading={this.showScrollLoading()}
             showScrollEmptyPlaceholder={this.showScrollEmptyPlaceholder()}
             scrollEmptyPlaceholder={this.buildScrollEmptyPlaceholder()}

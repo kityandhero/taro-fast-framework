@@ -74,8 +74,8 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onScrollLoad = () => {
-    console.log('onScrollLoad');
+  onScrollLowerLoad = () => {
+    console.log('onScrollLowerLoad');
   };
 
   renderContent = () => {
