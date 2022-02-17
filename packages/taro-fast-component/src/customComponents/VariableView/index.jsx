@@ -272,7 +272,7 @@ class VariableView extends BaseComponent {
       });
 
       that.scrollRefresherFreshing = false;
-    }, 300);
+    }, 1000);
   };
 
   onScrollToLower = () => {

@@ -64,8 +64,8 @@ export default class Index extends ContentPageBase {
         scrollView: true,
         pullDownRefresh: true,
         useCustomPullDown: true,
-        refreshColor: 'red',
-        refreshBackgroundColor: 'green',
+        // refreshColor: 'red',
+        // refreshBackgroundColor: 'green',
         loadApiPath: 'news/pageList',
       },
     };
