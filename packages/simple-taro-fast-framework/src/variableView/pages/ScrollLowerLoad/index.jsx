@@ -80,7 +80,7 @@ export default class Index extends ContentPageBase {
   };
 
   onScrollLowerLoad = () => {
-    console.log('onScrollLowerLoad');
+    this.loadNextPage({});
   };
 
   renderContent = () => {

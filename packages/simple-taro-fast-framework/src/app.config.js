@@ -27,6 +27,7 @@ export default {
         'pages/badge/index',
         'pages/noticeBar/index',
         'pages/flex/index',
+        'pages/fixedBox/index',
         'pages/steps/index',
         'pages/divider/index',
         'pages/tag/index',

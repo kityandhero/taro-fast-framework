@@ -55,3 +55,4 @@ export { default as Line } from './Line';
 export { default as Collapse } from './Collapse';
 export { default as Tabbar } from './Tabbar';
 export { default as VariableView } from './VariableView';
+export { default as FixedBox } from './FixedBox';

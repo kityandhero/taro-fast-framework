@@ -414,7 +414,11 @@ class Base extends Infrastructure {
 
   afterReloadSuccess = () => {};
 
-  reloadData = (otherState, callback = null, delay = 0) => {
+  loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {
+    this.initLoad({ otherState, delay, callback });
+  };
+
+  reloadData = ({ otherState, callback = null, delay = 0 }) => {
     const s = { ...(otherState || {}), ...{ reloading: true } };
 
     if (this.pagingLoadMode) {

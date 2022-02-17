@@ -163,6 +163,9 @@ const examplePathCollection = {
   flexBox: {
     path: '/example/pages/flexBox/index',
   },
+  fixedBox: {
+    path: '/example/pages/fixedBox/index',
+  },
   centerBox: {
     path: '/example/pages/centerBox/index',
   },

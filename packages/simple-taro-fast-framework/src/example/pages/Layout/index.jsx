@@ -18,6 +18,11 @@ const o = {
       path: pathCollection.example.flexBox.path,
     },
     {
+      id: 'FixedBox',
+      name: '定位布局',
+      path: pathCollection.example.fixedBox.path,
+    },
+    {
       id: 'Space',
       name: '间隔布局',
       path: pathCollection.example.space.path,
