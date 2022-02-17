@@ -217,14 +217,23 @@ const variableViewPathCollection = {
   home: {
     path: '/variableView/pages/home/index',
   },
-  normal: {
-    path: '/variableView/pages/normal/index',
+  normalMode: {
+    path: '/variableView/pages/normalMode/index',
   },
-  scroll: {
-    path: '/variableView/pages/scroll/index',
+  scrollMode: {
+    path: '/variableView/pages/scrollMode/index',
+  },
+  normalView: {
+    path: '/variableView/pages/normalView/index',
+  },
+  scrollView: {
+    path: '/variableView/pages/scrollView/index',
   },
   scrollPullRefresh: {
     path: '/variableView/pages/scrollPullRefresh/index',
+  },
+  scrollCustomPullRefresh: {
+    path: '/variableView/pages/scrollCustomPullRefresh/index',
   },
   scrollLoad: {
     path: '/variableView/pages/scrollLoad/index',

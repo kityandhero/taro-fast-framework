@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '滚动视图 下拉刷新',
+  navigationBarTitleText: '滚动视图 - 默认下拉刷新',
 };

@@ -96,8 +96,8 @@ const listData = [
   },
   {
     id: 'VariableView',
-    title: '视图示例',
-    content: '查看框架视图示例',
+    title: '内置视图',
+    content: '查看框架内置示例',
     icon: iconHOC,
     webPage: false,
     path: pathCollection.variableView.home.path,

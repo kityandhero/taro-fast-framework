@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '视图示例',
+  navigationBarTitleText: '内置视图',
 };

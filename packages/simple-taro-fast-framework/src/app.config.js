@@ -81,12 +81,15 @@ export default {
     },
     {
       root: 'variableView',
-      name: '视图示例',
+      name: '内置视图',
       pages: [
         'pages/home/index',
-        'pages/normal/index',
-        'pages/scroll/index',
+        'pages/normalMode/index',
+        'pages/scrollMode/index',
+        'pages/normalView/index',
+        'pages/scrollView/index',
         'pages/scrollPullRefresh/index',
+        'pages/scrollCustomPullRefresh/index',
         'pages/scrollLoad/index',
       ],
     },

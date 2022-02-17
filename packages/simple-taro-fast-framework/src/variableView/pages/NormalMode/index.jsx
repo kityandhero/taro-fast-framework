@@ -5,17 +5,12 @@ import iconBasic from '../../../assets/images/icon-list-basic.png';
 
 const o = {
   icon: iconBasic,
-  title: '内置视图',
+  title: '普通视图',
   list: [
     {
-      id: 'NormalMode',
-      name: '普通视图模式',
-      path: pathCollection.variableView.normalMode.path,
-    },
-    {
-      id: 'ScrollMode',
-      name: '滚动视图模式',
-      path: pathCollection.variableView.scrollMode.path,
+      id: 'Normal',
+      name: '普通模式',
+      path: pathCollection.variableView.normalView.path,
     },
   ],
 };

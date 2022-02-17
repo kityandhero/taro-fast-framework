@@ -28,7 +28,7 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '配置处理加载',
+    label: '开启下拉刷新式',
     value: 'this.setState({pullDownRefresh: true})',
     ellipsis: false,
     canCopy: true,
@@ -60,7 +60,12 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
+        spin: false,
         scrollView: true,
+        pullDownRefresh: true,
+        useCustomPullDown: true,
+        refreshColor: 'red',
+        refreshBackgroundColor: 'green',
         loadApiPath: 'news/pageList',
       },
     };
@@ -74,8 +79,10 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onScrollLowerLoad = () => {
-    console.log('onScrollLowerLoad');
+  doWorkAdjustDidMount = () => {};
+
+  onReload = () => {
+    this.refreshData();
   };
 
   renderContent = () => {
