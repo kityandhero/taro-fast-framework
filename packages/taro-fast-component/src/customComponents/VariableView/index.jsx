@@ -35,15 +35,18 @@ const defaultProps = {
   scrollRefresherBackground: '',
   refreshColor: '',
   refreshBackgroundColor: '',
-  loadingBackgroundColor: '#dbd9d9',
-  loadingBorder: '0',
+  refreshingBackgroundColor: '#dbd9d9',
+  refreshingBorder: '0',
   scrollWithAnimation: true,
   scrollAnchoring: true,
   scrollEnhanced: true,
   scrollBounces: true,
   scrollShowScrollbar: false,
   scrollFastDeceleration: false,
-  loading: false,
+  refreshing: false,
+  lowerLoading: false,
+  lowerLoadingBackgroundColor: '#dbd9d9',
+  lowerLoadingBorder: '0',
   useLoadingBox: true,
   scrollLoadingBox: null,
   useScrollEmptyPlaceholder: true,
@@ -348,9 +351,29 @@ class VariableView extends BaseComponent {
       scrollLoadingBox || (
         <CenterBox>
           <View
-            className={classNames(`${classPrefix}__loadingBox__inner__loading`)}
+            className={classNames(
+              `${classPrefix}__refreshingBox__inner__refreshing`,
+            )}
           >
-            <ActivityIndicator mode="center" content="loading" />
+            <ActivityIndicator mode="center" content="Loading" />
+          </View>
+        </CenterBox>
+      )
+    );
+  };
+
+  buildLowerLoadingBox = () => {
+    const { scrollLoadingBox } = this.props;
+
+    return (
+      scrollLoadingBox || (
+        <CenterBox>
+          <View
+            className={classNames(
+              `${classPrefix}__lowerLoadingBox__inner__lowerLoading`,
+            )}
+          >
+            <ActivityIndicator mode="center" content="Loading" />
           </View>
         </CenterBox>
       )
@@ -374,15 +397,18 @@ class VariableView extends BaseComponent {
       useCustomPullDown,
       refreshColor,
       refreshBackgroundColor,
-      loadingBackgroundColor,
-      loadingBorder,
+      refreshingBackgroundColor,
+      refreshingBorder,
       scrollWithAnimation,
       scrollAnchoring,
       scrollEnhanced,
       scrollBounces,
       scrollShowScrollbar,
       scrollFastDeceleration,
-      loading,
+      refreshing,
+      lowerLoading,
+      lowerLoadingBackgroundColor,
+      lowerLoadingBorder,
       useLoadingBox,
       children,
     } = this.props;
@@ -411,12 +437,19 @@ class VariableView extends BaseComponent {
       ...(stringIsNullOrWhiteSpace(refreshBackgroundColor)
         ? {}
         : { '--refresh-background-color': refreshBackgroundColor }),
-      ...(stringIsNullOrWhiteSpace(loadingBackgroundColor)
+      ...(stringIsNullOrWhiteSpace(refreshingBackgroundColor)
         ? {}
-        : { '--loading-background-color': loadingBackgroundColor }),
-      ...(stringIsNullOrWhiteSpace(loadingBorder)
+        : { '--refreshing-background-color': refreshingBackgroundColor }),
+      ...(stringIsNullOrWhiteSpace(refreshingBorder)
         ? {}
-        : { '--loading-border': `${loadingBorder}` }),
+        : { '--refreshing-border': `${refreshingBorder}` }),
+
+      ...(stringIsNullOrWhiteSpace(lowerLoadingBackgroundColor)
+        ? {}
+        : { '--lower-loading-background-color': lowerLoadingBackgroundColor }),
+      ...(stringIsNullOrWhiteSpace(lowerLoadingBorder)
+        ? {}
+        : { '--lower-loading-border': `${lowerLoadingBorder}` }),
     };
 
     if (scroll) {
@@ -469,11 +502,24 @@ class VariableView extends BaseComponent {
           </View>
 
           <Transition
-            show={loading && useLoadingBox}
-            className={classNames(`${classPrefix}__loadingBox`)}
+            show={refreshing && useLoadingBox}
+            className={classNames(`${classPrefix}__refreshingBox`)}
           >
-            <View className={classNames(`${classPrefix}__loadingBox__inner`)}>
+            <View
+              className={classNames(`${classPrefix}__refreshingBox__inner`)}
+            >
               {this.buildLoadingBox()}
+            </View>
+          </Transition>
+
+          <Transition
+            show={lowerLoading}
+            className={classNames(`${classPrefix}__lowerLoadingBox`)}
+          >
+            <View
+              className={classNames(`${classPrefix}__lowerLoadingBox__inner`)}
+            >
+              {this.buildLowerLoadingBox()}
             </View>
           </Transition>
 

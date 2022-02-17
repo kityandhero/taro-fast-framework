@@ -164,10 +164,16 @@ class Infrastructure extends ComponentBase {
 
   onScrollLowerLoad = () => {};
 
-  showScrollLoading = () => {
-    const { dataLoading } = this.state;
+  showScrollRefreshing = () => {
+    const { firstLoadSuccess, dataLoading, reloading } = this.state;
 
-    return dataLoading;
+    return (!firstLoadSuccess && dataLoading) || reloading;
+  };
+
+  showScrollLowerLoading = () => {
+    const { firstLoadSuccess, dataLoading } = this.state;
+
+    return firstLoadSuccess && dataLoading;
   };
 
   showScrollEmptyPlaceholder = () => {
@@ -229,7 +235,8 @@ class Infrastructure extends ComponentBase {
             scrollRefresherBackground={scrollRefresherBackground}
             onReload={this.onReload}
             onScrollLowerLoad={this.onScrollLowerLoad}
-            loading={this.showScrollLoading()}
+            refreshing={this.showScrollRefreshing()}
+            lowerLoading={this.showScrollLowerLoading()}
             showScrollEmptyPlaceholder={this.showScrollEmptyPlaceholder()}
             scrollEmptyPlaceholder={this.buildScrollEmptyPlaceholder()}
           >

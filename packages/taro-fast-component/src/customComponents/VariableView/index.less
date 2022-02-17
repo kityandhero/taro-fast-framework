@@ -3,8 +3,10 @@
 .@{class-prefix-variable-view} {
   --refresh-color: '';
   --refresh-background-color: #dbd9d9;
-  --loading-background-color: #dbd9d9;
-  --loading-border: 0;
+  --refreshing-background-color: #dbd9d9;
+  --refreshing-border: 0;
+  --lower-loading-background-color: #dbd9d9;
+  --lower-loading-border: 0;
 
   position: relative;
   overflow: hidden;
@@ -36,7 +38,7 @@
     }
   }
 
-  &__loadingBox {
+  &__refreshingBox {
     position: absolute;
     top: 0;
     left: 0;
@@ -49,14 +51,41 @@
       width: 100%;
       height: 100%;
 
-      &__loading {
+      &__refreshing {
         width: var(--tfc-200);
         height: var(--tfc-50);
         margin: var(--tfc-20) var(--tfc-40);
         padding: var(--tfc-14) var(--tfc-16);
         position: relative;
-        background-color: var(--loading-background-color);
-        border: var(--loading-border);
+        background-color: var(--refreshing-background-color);
+        border: var(--refreshing-border);
+        border-radius: var(--tfc-10);
+        opacity: 0.92;
+      }
+    }
+  }
+
+  &__lowerLoadingBox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 120;
+    background-color: transparent;
+
+    &__inner {
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+
+      &__lowerLoading {
+        width: var(--tfc-400);
+        height: var(--tfc-50);
+        margin: var(--tfc-20) var(--tfc-40);
+        padding: var(--tfc-14) var(--tfc-16);
+        position: relative;
+        background-color: var(--lower-loading-background-color);
+        border: var(--lower-loading-border);
         border-radius: var(--tfc-10);
         opacity: 0.92;
       }

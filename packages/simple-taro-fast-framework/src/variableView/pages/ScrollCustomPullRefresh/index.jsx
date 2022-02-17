@@ -80,7 +80,7 @@ export default class Index extends ContentPageBase {
   };
 
   onReload = () => {
-    this.reloadData();
+    this.reloadData({});
   };
 
   renderContent = () => {
