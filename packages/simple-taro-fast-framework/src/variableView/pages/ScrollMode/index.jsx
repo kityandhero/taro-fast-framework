@@ -23,9 +23,9 @@ const o = {
       path: pathCollection.variableView.scrollCustomPullRefresh.path,
     },
     {
-      id: 'ScrollLoad',
+      id: 'ScrollLowerLoad',
       name: '触底加载',
-      path: pathCollection.variableView.scrollLoad.path,
+      path: pathCollection.variableView.scrollLowerLoad.path,
     },
   ],
 };

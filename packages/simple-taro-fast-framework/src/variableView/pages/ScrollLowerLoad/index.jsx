@@ -54,6 +54,11 @@ export default class Index extends ContentPageBase {
 
   loadRemoteRequestAfterMount = true;
 
+  /**
+   * 使用分页加载模式，该模式下自动附加页码等参数以及使用相关交互效果
+   */
+  pagingLoadMode = true;
+
   constructor(props) {
     super(props);
 

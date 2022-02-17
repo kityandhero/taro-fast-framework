@@ -81,7 +81,7 @@ export default class Index extends ContentPageBase {
   doWorkAdjustDidMount = () => {};
 
   onReload = () => {
-    this.refreshData();
+    this.reloadData();
   };
 
   renderContent = () => {

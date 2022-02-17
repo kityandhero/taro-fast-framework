@@ -235,8 +235,8 @@ const variableViewPathCollection = {
   scrollCustomPullRefresh: {
     path: '/variableView/pages/scrollCustomPullRefresh/index',
   },
-  scrollLoad: {
-    path: '/variableView/pages/scrollLoad/index',
+  scrollLowerLoad: {
+    path: '/variableView/pages/scrollLowerLoad/index',
   },
 };
 

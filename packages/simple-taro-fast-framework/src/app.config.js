@@ -90,7 +90,7 @@ export default {
         'pages/scrollView/index',
         'pages/scrollPullRefresh/index',
         'pages/scrollCustomPullRefresh/index',
-        'pages/scrollLoad/index',
+        'pages/scrollLowerLoad/index',
       ],
     },
   ],

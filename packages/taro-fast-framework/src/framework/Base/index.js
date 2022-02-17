@@ -19,6 +19,12 @@ import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
+  pagingLoadMode = false;
+
+  pageNo = 1;
+
+  pageSize = 10;
+
   lastRequestingData = { type: '', payload: {} };
 
   useListDataAttachMode = true;
@@ -141,7 +147,15 @@ class Base extends Infrastructure {
             dispatchComplete: false,
           },
           () => {
-            let submitData = this.initLoadRequestParams() || {};
+            let submitData = {
+              ...(this.initLoadRequestParams() || {}),
+              ...(this.pagingLoadMode
+                ? {
+                    pageNo: this.pageNo || 1,
+                    pageSize: this.pageSize || 10,
+                  }
+                : {}),
+            };
 
             submitData = pretreatmentRequestParams(submitData || {});
 
@@ -298,7 +312,7 @@ class Base extends Infrastructure {
               };
 
               try {
-                this.afterLoadSuccess({
+                this.triggerAfterLoadSuccess({
                   metaData: metaData || null,
                   metaListData: metaListData || [],
                   metaExtra: metaExtra || null,
@@ -403,6 +417,11 @@ class Base extends Infrastructure {
   reloadData = (otherState, callback = null, delay = 0) => {
     const s = { ...(otherState || {}), ...{ reloading: true } };
 
+    if (this.pagingLoadMode) {
+      this.pageNo = 1;
+      this.clearListDataBeforeAttach = true;
+    }
+
     this.initLoad({
       otherState: s,
       delay: delay || 0,
@@ -434,6 +453,29 @@ class Base extends Infrastructure {
       }
     });
   };
+
+  /**
+   * 该方法如无必要，不要进行覆盖
+   * @param {*} param0
+   */
+  triggerAfterLoadSuccess({
+    metaData = null,
+    metaListData = [],
+    metaExtra = null,
+    metaOriginalData = null,
+  }) {
+    if (this.pagingLoadMode) {
+      this.pageNo = this.pageNo + 1;
+      this.clearListDataBeforeAttach = false;
+    }
+
+    this.afterLoadSuccess({
+      metaData,
+      metaListData,
+      metaExtra,
+      metaOriginalData,
+    });
+  }
 }
 
 export default Base;
