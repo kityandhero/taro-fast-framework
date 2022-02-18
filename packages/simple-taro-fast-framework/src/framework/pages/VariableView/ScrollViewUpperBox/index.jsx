@@ -86,9 +86,9 @@ export default class Index extends ContentPageBase {
           />
         </Card>
 
-        {/* <View style={{ height: transformSize(800), backgroundColor: '#ccc' }}>
+        <View style={{ height: transformSize(800), backgroundColor: '#ccc' }}>
           <CenterBox>占位区域</CenterBox>
-        </View> */}
+        </View>
       </Space>
     );
   };
