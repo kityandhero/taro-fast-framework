@@ -1,6 +1,11 @@
 import { Component } from 'react';
 
-import { recordError, showErrorMessage, recordText } from '../../utils/tools';
+import {
+  recordError,
+  showErrorMessage,
+  recordText,
+  getGuid,
+} from '../../utils/tools';
 import { isFunction, isObject } from '../../utils/typeCheck';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -78,6 +83,11 @@ class ComponentBase extends Component {
 
   renderCount = 0;
 
+  /**
+   * 用于组件内数据循环构建 key 时附加唯一前缀，有助于提升页面执行效率
+   */
+  keyPrefix = '';
+
   constructor(props) {
     super(props);
 
@@ -90,6 +100,8 @@ class ComponentBase extends Component {
       error: null,
       errorInfo: null,
     };
+
+    this.keyPrefix = getGuid();
   }
 
   componentDidMount() {

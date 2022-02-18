@@ -25,6 +25,8 @@ class Base extends Infrastructure {
 
   pageSize = 10;
 
+  total = 10;
+
   lastRequestingData = { type: '', payload: {} };
 
   useListDataAttachMode = true;
@@ -458,6 +460,18 @@ class Base extends Infrastructure {
     });
   };
 
+  judgeNeedNextLoad = () => {
+    if (!this.pagingLoadMode) {
+      return false;
+    }
+
+    if ((this.total || 0) <= 0) {
+      return false;
+    }
+
+    return (this.pageNo || 0) * (this.pageSize || 0) < (this.total || 0);
+  };
+
   /**
    * 该方法如无必要，不要进行覆盖
    * @param {*} param0
@@ -471,6 +485,15 @@ class Base extends Infrastructure {
     if (this.pagingLoadMode) {
       this.pageNo = this.pageNo + 1;
       this.clearListDataBeforeAttach = false;
+
+      const { total } = {
+        ...{
+          total: 0,
+        },
+        ...metaExtra,
+      };
+
+      this.total = total || 0;
     }
 
     this.afterLoadSuccess({

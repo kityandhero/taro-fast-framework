@@ -18,6 +18,7 @@ import CenterBox from '../CenterBox';
 import ActivityIndicator from '../ActivityIndicator';
 import Transition from '../Transition';
 import { Empty } from '../Empty';
+import Divider from '../Divider';
 
 import './index.less';
 
@@ -29,7 +30,11 @@ const defaultProps = {
   scroll: false,
   height: '',
   enablePullDownRefresh: false,
-  useCustomPullDown: false,
+  refreshing: false,
+  enableCustomPullDown: false,
+  enableScrollLowerLoad: false,
+  enableEmptyPlaceholder: false,
+  useRefreshingBox: true,
   scrollRefresherThreshold: 100,
   scrollRefresherDefaultStyle: '',
   scrollRefresherBackground: '',
@@ -43,16 +48,15 @@ const defaultProps = {
   scrollBounces: true,
   scrollShowScrollbar: false,
   scrollFastDeceleration: false,
-  refreshing: false,
   lowerLoading: false,
   lowerLoadingBackgroundColor: '#dbd9d9',
   lowerLoadingBorder: '0',
-  useLoadingBox: true,
-  scrollLoadingBox: null,
-  useScrollEmptyPlaceholder: true,
-  showScrollEmptyPlaceholder: true,
-  scrollEmptyPlaceholder: null,
-  onReload: null,
+  lowerLoadingBox: null,
+  lowerLoadingBoxPosition: 'footer',
+  needNextLoad: false,
+  emptyPlaceholderVisible: false,
+  emptyPlaceholder: null,
+  onRefresh: null,
   onScrollLowerLoad: null,
 };
 
@@ -74,12 +78,12 @@ class VariableView extends BaseComponent {
   /**
    *手指下拉操作记录
    */
-  touchMoveMaxY = 400;
+  touchMoveMaxY = 240;
 
   /**
    *下拉时的距离折算比例
    */
-  calculatePercentage = 5;
+  calculatePercentage = 3;
 
   scrollRefresherFreshing = false;
 
@@ -102,7 +106,7 @@ class VariableView extends BaseComponent {
 
     this.refreshBoxId = getGuid();
     this.scrollViewId = getGuid();
-    this.touchMoveMaxY = (screenHeight * 3) / 5;
+    this.touchMoveMaxY = (screenHeight * 1) / 2;
     this.calculatePercentage = this.touchMoveMaxY / 80;
   }
 
@@ -225,10 +229,10 @@ class VariableView extends BaseComponent {
       const { needRefresh } = this.state;
 
       if (needRefresh) {
-        const { onReload } = this.props;
+        const { onRefresh } = this.props;
 
-        if (isFunction(onReload)) {
-          onReload();
+        if (isFunction(onRefresh)) {
+          onRefresh();
 
           this.setState({ needRefresh: false });
         }
@@ -261,10 +265,10 @@ class VariableView extends BaseComponent {
       scrollRefreshTriggered: true,
     });
 
-    const { onReload } = this.props;
+    const { onRefresh } = this.props;
 
-    if (isFunction(onReload)) {
-      onReload();
+    if (isFunction(onRefresh)) {
+      onRefresh();
     }
 
     const that = this;
@@ -279,7 +283,16 @@ class VariableView extends BaseComponent {
   };
 
   onScrollToLower = () => {
-    const { onScrollLowerLoad } = this.props;
+    const { enableScrollLowerLoad, needNextLoad, onScrollLowerLoad } =
+      this.props;
+
+    if (!enableScrollLowerLoad) {
+      return;
+    }
+
+    if (!needNextLoad) {
+      return;
+    }
 
     if (isFunction(onScrollLowerLoad)) {
       onScrollLowerLoad();
@@ -287,7 +300,11 @@ class VariableView extends BaseComponent {
   };
 
   adjustView = () => {
-    const { scroll } = this.props;
+    const { enablePullDownRefresh, scroll } = this.props;
+
+    if (!enablePullDownRefresh) {
+      return;
+    }
 
     if (scroll) {
       this.refreshBoxAnimation = createAnimation({
@@ -324,38 +341,43 @@ class VariableView extends BaseComponent {
 
   buildScrollEmptyPlaceholder = () => {
     const {
-      useScrollEmptyPlaceholder,
-      showScrollEmptyPlaceholder,
-      scrollEmptyPlaceholder,
+      enableEmptyPlaceholder,
+      emptyPlaceholderVisible,
+      emptyPlaceholder,
     } = this.props;
 
-    if (!useScrollEmptyPlaceholder) {
+    if (!enableEmptyPlaceholder) {
       return null;
     }
 
-    if (!showScrollEmptyPlaceholder) {
+    if (!emptyPlaceholderVisible) {
       return null;
     }
 
     return (
       <CenterBox>
-        {scrollEmptyPlaceholder || <Empty description="暂无数据" />}
+        {emptyPlaceholder || <Empty description="暂无数据" />}
       </CenterBox>
     );
   };
 
-  buildLoadingBox = () => {
-    const { scrollLoadingBox } = this.props;
+  buildRefreshingBox = () => {
+    const { refreshingBox } = this.props;
 
     return (
-      scrollLoadingBox || (
+      refreshingBox || (
         <CenterBox>
           <View
             className={classNames(
               `${classPrefix}__refreshingBox__inner__refreshing`,
             )}
           >
-            <ActivityIndicator mode="center" content="Loading" />
+            <ActivityIndicator
+              className={classNames(
+                `${classPrefix}__refreshingBox__inner__refreshing__inner`,
+              )}
+              content="加载中"
+            />
           </View>
         </CenterBox>
       )
@@ -363,17 +385,17 @@ class VariableView extends BaseComponent {
   };
 
   buildLowerLoadingBox = () => {
-    const { scrollLoadingBox } = this.props;
+    const { lowerLoadingBox } = this.props;
 
     return (
-      scrollLoadingBox || (
+      lowerLoadingBox || (
         <CenterBox>
           <View
             className={classNames(
               `${classPrefix}__lowerLoadingBox__inner__lowerLoading`,
             )}
           >
-            <ActivityIndicator mode="center" content="Loading" />
+            <ActivityIndicator content="加载中" />
           </View>
         </CenterBox>
       )
@@ -381,9 +403,9 @@ class VariableView extends BaseComponent {
   };
 
   checkUseCustomPullDown = () => {
-    const { enablePullDownRefresh, useCustomPullDown } = this.props;
+    const { enablePullDownRefresh, enableCustomPullDown } = this.props;
 
-    return !!enablePullDownRefresh && !!useCustomPullDown;
+    return !!enablePullDownRefresh && !!enableCustomPullDown;
   };
 
   renderFurther() {
@@ -391,10 +413,10 @@ class VariableView extends BaseComponent {
       scroll,
       height,
       enablePullDownRefresh,
+      enableCustomPullDown,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
-      useCustomPullDown,
       refreshColor,
       refreshBackgroundColor,
       refreshingBackgroundColor,
@@ -407,9 +429,11 @@ class VariableView extends BaseComponent {
       scrollFastDeceleration,
       refreshing,
       lowerLoading,
+      needNextLoad,
       lowerLoadingBackgroundColor,
       lowerLoadingBorder,
-      useLoadingBox,
+      lowerLoadingBoxPosition,
+      useRefreshingBox,
       children,
     } = this.props;
     const { scrollRefreshTriggered } = this.state;
@@ -420,6 +444,8 @@ class VariableView extends BaseComponent {
       refreshBoxPreloadAnimationData,
       needRefresh,
     } = this.state;
+
+    const useCustomPullDown = this.checkUseCustomPullDown();
 
     const style = {
       ...(stringIsNullOrWhiteSpace(height)
@@ -462,71 +488,85 @@ class VariableView extends BaseComponent {
           onTouchCancel={this.onViewTouchCancel}
           onTouchEnd={this.onViewTouchEnd}
         >
-          <View
-            id={this.refreshBoxId || ''}
-            className={classNames(`${classPrefix}__refreshBox`)}
-            animation={refreshBoxAnimationData}
-          >
+          {useCustomPullDown ? (
             <View
-              className={classNames(`${classPrefix}__refreshBox__pullRefresh`)}
+              id={this.refreshBoxId || ''}
+              className={classNames(`${classPrefix}__refreshBox`)}
+              animation={refreshBoxAnimationData}
             >
-              <CenterBox>
-                {!needRefresh ? (
-                  <View
-                    className={classNames(
-                      `${classPrefix}__refreshBox__pullRefresh__iconBox`,
-                    )}
-                    animation={refreshBoxPreloadAnimationData}
-                  >
-                    <IconLoading3 size={46} />
-                  </View>
-                ) : null}
-
-                {needRefresh ? (
-                  <View
-                    className={classNames(
-                      `${classPrefix}__refreshBox__pullRefresh__iconBox`,
-                    )}
-                  >
-                    <IconLoading
+              <View
+                className={classNames(
+                  `${classPrefix}__refreshBox__pullRefresh`,
+                )}
+              >
+                <CenterBox>
+                  {!needRefresh ? (
+                    <View
                       className={classNames(
-                        `${classPrefix}__refreshBox__pullRefresh__iconBox__icon`,
+                        `${classPrefix}__refreshBox__pullRefresh__iconBox`,
                       )}
-                      size={42}
-                      borderWidth={2}
-                    />
-                  </View>
-                ) : null}
-              </CenterBox>
-            </View>
-          </View>
+                      animation={refreshBoxPreloadAnimationData}
+                    >
+                      <IconLoading3 size={46} />
+                    </View>
+                  ) : null}
 
-          <Transition
-            show={refreshing && useLoadingBox}
-            className={classNames(`${classPrefix}__refreshingBox`)}
-          >
-            <View
-              className={classNames(`${classPrefix}__refreshingBox__inner`)}
-            >
-              {this.buildLoadingBox()}
+                  {needRefresh ? (
+                    <View
+                      className={classNames(
+                        `${classPrefix}__refreshBox__pullRefresh__iconBox`,
+                      )}
+                    >
+                      <IconLoading
+                        className={classNames(
+                          `${classPrefix}__refreshBox__pullRefresh__iconBox__icon`,
+                        )}
+                        size={42}
+                        borderWidth={2}
+                      />
+                    </View>
+                  ) : null}
+                </CenterBox>
+              </View>
             </View>
-          </Transition>
+          ) : null}
 
-          <Transition
-            show={lowerLoading}
-            className={classNames(`${classPrefix}__lowerLoadingBox`)}
-          >
-            <View
-              className={classNames(`${classPrefix}__lowerLoadingBox__inner`)}
+          {enablePullDownRefresh ? (
+            <Transition
+              show={refreshing && useRefreshingBox}
+              className={classNames(`${classPrefix}__refreshingBox`)}
             >
-              {this.buildLowerLoadingBox()}
-            </View>
-          </Transition>
+              <View
+                className={classNames(`${classPrefix}__refreshingBox__inner`)}
+              >
+                {this.buildRefreshingBox()}
+              </View>
+            </Transition>
+          ) : null}
+
+          {lowerLoadingBoxPosition === 'absolute' ||
+          lowerLoadingBoxPosition === 'fixed' ? (
+            <Transition
+              show={lowerLoading}
+              className={classNames(`${classPrefix}__lowerLoadingBox`, {
+                [`${classPrefix}__lowerLoadingBox--absolute`]:
+                  lowerLoadingBoxPosition === 'absolute',
+                [`${classPrefix}__lowerLoadingBox--fixed`]:
+                  lowerLoadingBoxPosition === 'fixed',
+              })}
+            >
+              <View
+                className={classNames(`${classPrefix}__lowerLoadingBox__inner`)}
+              >
+                {this.buildLowerLoadingBox()}
+              </View>
+            </Transition>
+          ) : null}
 
           <ScrollView
             id={this.scrollViewId || ''}
             className={classNames(`${classPrefix}__scrollView`)}
-            refresherEnabled={!!enablePullDownRefresh && !useCustomPullDown}
+            refresherEnabled={!!enablePullDownRefresh && !enableCustomPullDown}
             refresherThreshold={scrollRefresherThreshold}
             refresherDefaultStyle={scrollRefresherDefaultStyle || ''}
             refresherBackground={scrollRefresherBackground || ''}
@@ -547,6 +587,21 @@ class VariableView extends BaseComponent {
               {this.buildScrollEmptyPlaceholder()}
 
               {children}
+
+              {lowerLoadingBoxPosition !== 'absolute' &&
+              lowerLoadingBoxPosition !== 'fixed' ? (
+                <View onClick={this.onScrollToLower}>
+                  <Divider>
+                    {lowerLoading ? (
+                      <ActivityIndicator content="加载中" />
+                    ) : needNextLoad ? (
+                      '点击或上滑加载更多'
+                    ) : (
+                      '没有更多了'
+                    )}
+                  </Divider>
+                </View>
+              ) : null}
             </View>
           </ScrollView>
         </View>

@@ -29,7 +29,7 @@ const descriptionList = [
   },
   {
     label: '配置处理加载',
-    value: 'this.setState({pullDownRefresh: true})',
+    value: 'this.setState({enablePullDownRefresh: true})',
     ellipsis: false,
     canCopy: true,
   },
@@ -66,6 +66,7 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         scrollView: true,
+        enableScrollLowerLoad: true,
         loadApiPath: 'news/pageList',
       },
     };
@@ -81,6 +82,20 @@ export default class Index extends ContentPageBase {
 
   onScrollLowerLoad = () => {
     this.loadNextPage({});
+  };
+
+  judgeNeedNextLoad = () => {
+    return true;
+  };
+
+  showScrollLowerLoading = () => {
+    const { firstLoadSuccess, dataLoading } = this.state;
+
+    console.log({
+      v: firstLoadSuccess && dataLoading,
+    });
+
+    return firstLoadSuccess && dataLoading;
   };
 
   renderContent = () => {

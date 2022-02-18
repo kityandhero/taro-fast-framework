@@ -29,8 +29,10 @@ class Infrastructure extends ComponentBase {
       ...{
         spin: false,
         scrollView: false,
-        pullDownRefresh: false,
-        useCustomPullDown: false,
+        enablePullDownRefresh: false,
+        enableCustomPullDown: false,
+        enableScrollLowerLoad: false,
+        enableEmptyPlaceholder: false,
         scrollRefresherThreshold: 100,
         scrollRefresherDefaultStyle: 'white',
         scrollRefresherBackground: '',
@@ -43,7 +45,7 @@ class Infrastructure extends ComponentBase {
         scrollBounces: true,
         scrollShowScrollbar: true,
         scrollFastDeceleration: true,
-        useScrollEmptyPlaceholder: true,
+        lowerLoadingBoxPosition: 'footer',
       },
     };
   }
@@ -160,7 +162,7 @@ class Infrastructure extends ComponentBase {
     navigateTo(`${pagePath}?title=${titleEncode}&url=${urlEncode}`);
   }
 
-  onReload = () => {};
+  onRefresh = () => {};
 
   onScrollLowerLoad = () => {};
 
@@ -176,28 +178,42 @@ class Infrastructure extends ComponentBase {
     return firstLoadSuccess && dataLoading;
   };
 
-  showScrollEmptyPlaceholder = () => {
-    const { useScrollEmptyPlaceholder, firstLoadSuccess, metaListData } =
+  showEmptyPlaceholder = () => {
+    const { enableEmptyPlaceholder, firstLoadSuccess, metaListData } =
       this.state;
 
     return (
-      useScrollEmptyPlaceholder &&
+      enableEmptyPlaceholder &&
       firstLoadSuccess &&
       isArray(metaListData) &&
       metaListData.length === 0
     );
   };
 
-  buildScrollEmptyPlaceholder = () => {
+  buildEmptyPlaceholder = () => {
     return null;
   };
+
+  /**
+   * 判断时候还有更多数据, 用于分页加载场景, 默认范围 true, 可根据需要进行重载覆写
+   * @returns bool
+   */
+  judgeNeedNextLoad = () => {
+    return true;
+  };
+
+  buildRefreshingBox = () => null;
+
+  buildLowerLoadingBox = () => null;
 
   renderView() {
     const {
       spin,
       scrollView,
-      pullDownRefresh,
-      useCustomPullDown,
+      enablePullDownRefresh,
+      enableCustomPullDown,
+      enableScrollLowerLoad,
+      enableEmptyPlaceholder,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
@@ -210,6 +226,7 @@ class Infrastructure extends ComponentBase {
       scrollBounces,
       scrollShowScrollbar,
       scrollFastDeceleration,
+      lowerLoadingBoxPosition,
     } = this.state;
 
     return (
@@ -220,6 +237,10 @@ class Infrastructure extends ComponentBase {
           <VariableView
             scroll={scrollView}
             height={height}
+            enablePullDownRefresh={enablePullDownRefresh}
+            enableScrollLowerLoad={enableScrollLowerLoad}
+            enableCustomPullDown={enableCustomPullDown}
+            enableEmptyPlaceholder={enableEmptyPlaceholder}
             refreshColor={refreshColor}
             refreshBackgroundColor={refreshBackgroundColor}
             scrollWithAnimation={scrollWithAnimation}
@@ -228,17 +249,19 @@ class Infrastructure extends ComponentBase {
             scrollBounces={scrollBounces}
             scrollShowScrollbar={scrollShowScrollbar}
             scrollFastDeceleration={scrollFastDeceleration}
-            enablePullDownRefresh={pullDownRefresh}
-            useCustomPullDown={useCustomPullDown}
             scrollRefresherThreshold={scrollRefresherThreshold}
             scrollRefresherDefaultStyle={scrollRefresherDefaultStyle}
             scrollRefresherBackground={scrollRefresherBackground}
-            onReload={this.onReload}
+            onRefresh={this.onRefresh}
             onScrollLowerLoad={this.onScrollLowerLoad}
             refreshing={this.showScrollRefreshing()}
             lowerLoading={this.showScrollLowerLoading()}
-            showScrollEmptyPlaceholder={this.showScrollEmptyPlaceholder()}
-            scrollEmptyPlaceholder={this.buildScrollEmptyPlaceholder()}
+            needNextLoad={this.judgeNeedNextLoad()}
+            emptyPlaceholderVisible={this.showEmptyPlaceholder()}
+            lowerLoadingBoxPosition={lowerLoadingBoxPosition}
+            refreshingBox={this.buildRefreshingBox()}
+            lowerLoadingBox={this.buildLowerLoadingBox()}
+            emptyPlaceholder={this.buildEmptyPlaceholder()}
           >
             {this.renderFurther()}
           </VariableView>

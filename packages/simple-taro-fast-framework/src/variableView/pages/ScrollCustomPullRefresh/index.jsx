@@ -29,7 +29,7 @@ const descriptionList = [
   },
   {
     label: '开启下拉刷新式',
-    value: 'this.setState({pullDownRefresh: true})',
+    value: 'this.setState({enablePullDownRefresh: true})',
     ellipsis: false,
     canCopy: true,
   },
@@ -62,8 +62,9 @@ export default class Index extends ContentPageBase {
       ...{
         spin: false,
         scrollView: true,
-        pullDownRefresh: true,
-        useCustomPullDown: true,
+        enablePullDownRefresh: true,
+        enableCustomPullDown: true,
+        lowerLoadingBoxPosition: 'fixed',
         // refreshColor: 'red',
         // refreshBackgroundColor: 'green',
         loadApiPath: 'news/pageList',
@@ -79,7 +80,7 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onReload = () => {
+  onRefresh = () => {
     this.reloadData({});
   };
 

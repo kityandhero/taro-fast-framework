@@ -48,48 +48,71 @@
 
     &__inner {
       background-color: transparent;
-      width: 100%;
-      height: 100%;
+      margin: var(--tfc-20) var(--tfc-40);
+      display: flex;
+      align-content: center;
+      justify-content: center;
 
       &__refreshing {
-        width: var(--tfc-200);
-        height: var(--tfc-50);
-        margin: var(--tfc-20) var(--tfc-40);
-        padding: var(--tfc-14) var(--tfc-16);
-        position: relative;
-        background-color: var(--refreshing-background-color);
-        border: var(--refreshing-border);
-        border-radius: var(--tfc-10);
-        opacity: 0.92;
+        width: var(--tfc-280);
+        background-color: transparent;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+
+        &__inner {
+          opacity: 0.92;
+          background-color: var(--lower-loading-background-color);
+          border-radius: var(--tfc-10);
+          border: var(--lower-loading-border);
+          padding: var(--tfc-14) var(--tfc-24);
+        }
       }
     }
   }
 
   &__lowerLoadingBox {
+    &__inner {
+      background-color: transparent;
+      margin: var(--tfc-20) var(--tfc-40);
+      display: flex;
+      align-content: center;
+      justify-content: center;
+
+      &__lowerLoading {
+        width: var(--tfc-400);
+        background-color: transparent;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+
+        &__inner {
+          opacity: 0.92;
+          background-color: var(--lower-loading-background-color);
+          border-radius: var(--tfc-10);
+          border: var(--lower-loading-border);
+          padding: var(--tfc-14) var(--tfc-24);
+        }
+      }
+    }
+  }
+
+  &__lowerLoadingBox--absolute {
     position: absolute;
-    bottom: 0;
+    bottom: var(--tfc-20);
     left: 0;
     width: 100%;
     z-index: 120;
     background-color: transparent;
+  }
 
-    &__inner {
-      background-color: transparent;
-      width: 100%;
-      height: 100%;
-
-      &__lowerLoading {
-        width: var(--tfc-400);
-        height: var(--tfc-50);
-        margin: var(--tfc-20) var(--tfc-40);
-        padding: var(--tfc-14) var(--tfc-16);
-        position: relative;
-        background-color: var(--lower-loading-background-color);
-        border: var(--lower-loading-border);
-        border-radius: var(--tfc-10);
-        opacity: 0.92;
-      }
-    }
+  &__lowerLoadingBox--fixed {
+    position: fixed;
+    bottom: var(--tfc-20);
+    left: 0;
+    width: 100%;
+    z-index: 120;
+    background-color: transparent;
   }
 
   &__placeholder {

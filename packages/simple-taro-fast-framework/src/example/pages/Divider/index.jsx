@@ -5,6 +5,7 @@ import {
   Divider,
   Space,
   Icon,
+  ActivityIndicator,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -75,6 +76,18 @@ export default class Index extends ContentPageBase {
               <IconSearch size={32} />
               <Text>搜索</Text>
             </Space>
+          </Divider>
+        </Card>
+
+        <Card header="包裹组件" style={style} headerStyle={cardHeaderStyle}>
+          <Divider
+            style={{
+              color: '#1677ff',
+              borderColor: '#1677ff',
+              borderStyle: 'dashed',
+            }}
+          >
+            <ActivityIndicator content="加载中" />
           </Divider>
         </Card>
 
