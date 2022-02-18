@@ -96,11 +96,11 @@ const listData = [
   },
   {
     id: 'VariableView',
-    title: '内置视图',
-    content: '查看框架内置示例',
+    title: '快速开发框架',
+    content: '查看快速开发框架内置功能',
     icon: iconHOC,
     webPage: false,
-    path: pathCollection.variableView.home.path,
+    path: pathCollection.framework.home.path,
   },
   {
     id: 'News',

@@ -10,8 +10,8 @@ import {
   Ellipsis,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
+import ContentPageBase from '../../../../customComponents/ContentPageBase';
 
 const style = {
   ...{
@@ -28,7 +28,7 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '开启下拉刷新式',
+    label: '配置处理加载',
     value: 'this.setState({enablePullDownRefresh: true})',
     ellipsis: false,
     canCopy: true,
@@ -54,19 +54,20 @@ export default class Index extends ContentPageBase {
 
   loadRemoteRequestAfterMount = true;
 
+  /**
+   * 使用分页加载模式，该模式下自动附加页码等参数以及使用相关交互效果
+   */
+  pagingLoadMode = true;
+
   constructor(props) {
     super(props);
 
     this.state = {
       ...this.state,
       ...{
-        spin: false,
         scrollView: true,
-        enablePullDownRefresh: true,
-        enableCustomPullDown: true,
-        lowerLoadingBoxPosition: 'fixed',
-        // refreshColor: 'red',
-        // refreshBackgroundColor: 'green',
+        enableScrollLowerLoad: true,
+        lowerLoadingBoxPosition: 'absolute',
         loadApiPath: 'news/pageList',
       },
     };
@@ -80,8 +81,14 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onRefresh = () => {
-    this.reloadData({});
+  onScrollLowerLoad = () => {
+    this.loadNextPage({});
+  };
+
+  showScrollLowerLoading = () => {
+    const { firstLoadSuccess, dataLoading } = this.state;
+
+    return firstLoadSuccess && dataLoading;
   };
 
   renderContent = () => {

@@ -5,12 +5,12 @@ import iconBasic from '../../../assets/images/icon-list-basic.png';
 
 const o = {
   icon: iconBasic,
-  title: '普通视图',
+  title: '快速开发框架',
   list: [
     {
-      id: 'Normal',
-      name: '普通模式',
-      path: pathCollection.variableView.normalView.path,
+      id: 'VariableView',
+      name: '视图容器',
+      path: pathCollection.framework.variableView.path,
     },
   ],
 };

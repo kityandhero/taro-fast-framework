@@ -395,7 +395,12 @@ class VariableView extends BaseComponent {
               `${classPrefix}__lowerLoadingBox__inner__lowerLoading`,
             )}
           >
-            <ActivityIndicator content="加载中" />
+            <ActivityIndicator
+              className={classNames(
+                `${classPrefix}__lowerLoadingBox__inner__lowerLoading__inner`,
+              )}
+              content="加载中, 请稍后"
+            />
           </View>
         </CenterBox>
       )

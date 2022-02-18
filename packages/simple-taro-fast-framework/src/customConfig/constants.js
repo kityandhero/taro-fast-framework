@@ -216,30 +216,33 @@ const examplePathCollection = {
   },
 };
 
-const variableViewPathCollection = {
+const frameworkPathCollection = {
   home: {
-    path: '/variableView/pages/home/index',
+    path: '/framework/pages/home/index',
   },
-  normalMode: {
-    path: '/variableView/pages/normalMode/index',
-  },
-  scrollMode: {
-    path: '/variableView/pages/scrollMode/index',
-  },
-  normalView: {
-    path: '/variableView/pages/normalView/index',
-  },
-  scrollView: {
-    path: '/variableView/pages/scrollView/index',
-  },
-  scrollPullRefresh: {
-    path: '/variableView/pages/scrollPullRefresh/index',
-  },
-  scrollCustomPullRefresh: {
-    path: '/variableView/pages/scrollCustomPullRefresh/index',
-  },
-  scrollLowerLoad: {
-    path: '/variableView/pages/scrollLowerLoad/index',
+  variableView: {
+    path: '/framework/pages/variableView/index',
+    normalMode: {
+      path: '/framework/pages/variableView/normalMode/index',
+    },
+    scrollMode: {
+      path: '/framework/pages/variableView/scrollMode/index',
+    },
+    normalView: {
+      path: '/framework/pages/variableView/normalView/index',
+    },
+    scrollView: {
+      path: '/framework/pages/variableView/scrollView/index',
+    },
+    scrollPullRefresh: {
+      path: '/framework/pages/variableView/scrollPullRefresh/index',
+    },
+    scrollCustomPullRefresh: {
+      path: '/framework/pages/variableView/scrollCustomPullRefresh/index',
+    },
+    scrollLowerLoad: {
+      path: '/framework/pages/variableView/scrollLowerLoad/index',
+    },
   },
 };
 
@@ -252,7 +255,7 @@ const newsPathCollection = {
 export const pathCollection = {
   root: rootPathCollection,
   example: examplePathCollection,
-  variableView: variableViewPathCollection,
+  framework: frameworkPathCollection,
   news: newsPathCollection,
 };
 

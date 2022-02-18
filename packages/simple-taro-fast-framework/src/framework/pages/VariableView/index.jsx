@@ -10,12 +10,12 @@ const o = {
     {
       id: 'NormalMode',
       name: '普通视图模式',
-      path: pathCollection.variableView.normalMode.path,
+      path: pathCollection.framework.variableView.normalMode.path,
     },
     {
       id: 'ScrollMode',
       name: '滚动视图模式',
-      path: pathCollection.variableView.scrollMode.path,
+      path: pathCollection.framework.variableView.scrollMode.path,
     },
   ],
 };

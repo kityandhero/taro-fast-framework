@@ -1,7 +1,7 @@
 import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
+import ContentPageBase from '../../../../customComponents/ContentPageBase';
 
 const style = {
   ...{
@@ -12,8 +12,8 @@ const style = {
 
 const descriptionList = [
   {
-    label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    label: '使用普通视图 [普通视图为默认视图]',
+    value: 'this.setState({scrollView: false})',
     ellipsis: false,
     canCopy: true,
   },
@@ -22,19 +22,8 @@ const descriptionList = [
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Normal',
-    name: '滚动视图',
+    name: '普通视图',
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        scrollView: true,
-      },
-    };
-  }
 
   renderContent = () => {
     return (

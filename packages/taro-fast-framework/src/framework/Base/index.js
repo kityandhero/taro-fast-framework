@@ -21,7 +21,7 @@ import Infrastructure from '../Infrastructure';
 class Base extends Infrastructure {
   pagingLoadMode = false;
 
-  pageNo = 1;
+  pageNo = 0;
 
   pageSize = 10;
 
@@ -50,7 +50,11 @@ class Base extends Infrastructure {
   };
 
   doLoadRemoteRequest = () => {
-    this.initLoad({});
+    if (this.pagingLoadMode) {
+      this.loadNextPage({});
+    } else {
+      this.initLoad({});
+    }
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -105,7 +109,7 @@ class Base extends Infrastructure {
     return '';
   };
 
-  initLoad = ({ otherState = {}, delay = 0, callback = null }) => {
+  initLoad = ({ otherState = {}, params = {}, delay = 0, callback = null }) => {
     const {
       loadApiPath,
       firstLoadSuccess,
@@ -151,12 +155,6 @@ class Base extends Infrastructure {
           () => {
             let submitData = {
               ...(this.initLoadRequestParams() || {}),
-              ...(this.pagingLoadMode
-                ? {
-                    pageNo: this.pageNo || 1,
-                    pageSize: this.pageSize || 10,
-                  }
-                : {}),
             };
 
             submitData = pretreatmentRequestParams(submitData || {});
@@ -177,7 +175,7 @@ class Base extends Infrastructure {
               this.beforeRequest(submitData || {});
 
               this.initLoadCore({
-                requestData: submitData || {},
+                requestData: { ...(submitData || {}), ...params },
                 delay,
                 callback,
               });
@@ -417,22 +415,35 @@ class Base extends Infrastructure {
   afterReloadSuccess = () => {};
 
   loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {
-    this.initLoad({ otherState, delay, callback });
+    const params = this.pagingLoadMode
+      ? {
+          pageNo: (this.pageNo || 0) + 1,
+          pageSize: this.pageSize || 10,
+        }
+      : {};
+
+    this.initLoad({ otherState, params, delay, callback });
   };
 
   reloadData = ({ otherState, callback = null, delay = 0 }) => {
     const s = { ...(otherState || {}), ...{ reloading: true } };
 
     if (this.pagingLoadMode) {
-      this.pageNo = 1;
+      this.pageNo = 0;
       this.clearListDataBeforeAttach = true;
-    }
 
-    this.initLoad({
-      otherState: s,
-      delay: delay || 0,
-      callback: callback || null,
-    });
+      this.loadNextPage({
+        otherState: s,
+        delay: delay || 0,
+        callback: callback || null,
+      });
+    } else {
+      this.initLoad({
+        otherState: s,
+        delay: delay || 0,
+        callback: callback || null,
+      });
+    }
   };
 
   remoteRequest = ({ type, payload }) => {
@@ -483,16 +494,15 @@ class Base extends Infrastructure {
     metaOriginalData = null,
   }) {
     if (this.pagingLoadMode) {
-      this.pageNo = this.pageNo + 1;
       this.clearListDataBeforeAttach = false;
 
-      const { total } = {
-        ...{
-          total: 0,
-        },
+      const { pageNo, pageSize, total } = {
+        ...{ pageNo, pageSize, total: 0 },
         ...metaExtra,
       };
 
+      this.pageNo = pageNo || 1;
+      this.pageSize = pageSize || 10;
       this.total = total || 0;
     }
 

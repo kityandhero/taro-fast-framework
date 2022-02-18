@@ -239,7 +239,10 @@ export async function pageListData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       extra: {
-        pageNo: pageNo,
+        pageNo:
+          pageNo * pageSize >= articleList.length
+            ? Math.ceil(articleList.length / pageSize)
+            : pageNo,
         pageSize: pageSize,
         total: articleList.length,
       },

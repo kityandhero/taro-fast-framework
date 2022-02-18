@@ -81,16 +81,15 @@
 
       &__lowerLoading {
         width: var(--tfc-400);
-        background-color: transparent;
+        opacity: 0.92;
+        background-color: var(--lower-loading-background-color);
+        border-radius: var(--tfc-10);
+        border: var(--lower-loading-border);
         display: flex;
         align-content: center;
         justify-content: center;
 
         &__inner {
-          opacity: 0.92;
-          background-color: var(--lower-loading-background-color);
-          border-radius: var(--tfc-10);
-          border: var(--lower-loading-border);
           padding: var(--tfc-14) var(--tfc-24);
         }
       }
