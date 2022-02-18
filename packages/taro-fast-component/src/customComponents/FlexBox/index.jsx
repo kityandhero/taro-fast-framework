@@ -8,16 +8,12 @@ import Col from '../Flex/Col';
 import Row from '../Flex/Row';
 
 const directionCollection = ['horizontal', 'vertical'];
-const flexAutoCollection = ['left', 'right'];
 
 const defaultProps = {
   direction: 'horizontal',
   flexAuto: 'left',
   allowWrap: false,
-  vertical: {
-    minHeight: 'auto',
-    bottomHeight: transformSize(180),
-  },
+  verticalHeightAdjust: '100%',
   left: null,
   leftStyle: {},
   right: null,
@@ -45,19 +41,29 @@ class FlexBox extends BaseComponent {
       bottom,
       bottomStyle,
       direction: directionSource,
-      vertical,
       center,
+      verticalHeight,
     } = this.props;
 
     const direction = inCollection(directionCollection, directionSource)
       ? directionSource
       : 'horizontal';
 
+    let flexAuto = flexAutoSource;
+
     if (direction === 'horizontal') {
-      const flexAuto = inCollection(flexAutoCollection, flexAutoSource)
+      flexAuto = inCollection(['left', 'right'], flexAutoSource)
         ? flexAutoSource
         : 'left';
+    }
 
+    if (direction === 'vertical') {
+      flexAuto = inCollection(['top', 'bottom'], flexAutoSource)
+        ? flexAutoSource
+        : 'top';
+    }
+
+    if (direction === 'horizontal') {
       const style = {
         ...(styleSource || {}),
         ...(!(allowWrap || false) ? { flexWrap: 'nowrap' } : {}),
@@ -124,12 +130,7 @@ class FlexBox extends BaseComponent {
       );
     }
 
-    const { minHeight, bottomHeight } = {
-      ...{
-        bottomHeight: transformSize(80),
-      },
-      ...(vertical || {}),
-    };
+    const verticalHeightAdjust = transformSize(verticalHeight);
 
     if (top == null || bottom == null) {
       if (top == null && bottom == null) {
@@ -149,8 +150,7 @@ class FlexBox extends BaseComponent {
       <View
         style={{
           ...{
-            height: '100%',
-            minHeight: minHeight,
+            height: verticalHeightAdjust,
           },
           ...styleSource,
           ...{
@@ -163,9 +163,7 @@ class FlexBox extends BaseComponent {
         <View
           style={{
             ...topStyle,
-            ...{
-              flex: '1 1 auto',
-            },
+            ...(flexAuto === 'top' ? { flex: '1 1 auto' } : {}),
           }}
         >
           {top}
@@ -174,9 +172,7 @@ class FlexBox extends BaseComponent {
         <View
           style={{
             ...bottomStyle,
-            ...{
-              flex: `0 1 ${bottomHeight}`,
-            },
+            ...(flexAuto === 'bottom' ? { flex: '1 1 auto' } : {}),
           }}
         >
           {bottom}

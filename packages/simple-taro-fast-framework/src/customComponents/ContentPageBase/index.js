@@ -8,6 +8,8 @@ import './index.less';
 export default class ContentPageBase extends PageWrapper {
   headerData = {};
 
+  viewStyle = { backgroundColor: '#fff' };
+
   constructor(props) {
     super(props);
 

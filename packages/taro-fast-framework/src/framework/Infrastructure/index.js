@@ -20,6 +20,8 @@ import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 class Infrastructure extends ComponentBase {
   urlParamsCore = null;
 
+  viewStyle = {};
+
   constructor(props) {
     super(props);
 
@@ -194,6 +196,10 @@ class Infrastructure extends ComponentBase {
     return null;
   };
 
+  buildUpperBox = () => {
+    return null;
+  };
+
   /**
    * 判断时候还有更多数据, 用于分页加载场景, 默认范围 true, 可根据需要进行重载覆写
    * @returns bool
@@ -235,6 +241,7 @@ class Infrastructure extends ComponentBase {
 
         <FadeView show={!spin}>
           <VariableView
+            style={this.viewStyle}
             scroll={scrollView}
             height={height}
             enablePullDownRefresh={enablePullDownRefresh}
@@ -262,6 +269,7 @@ class Infrastructure extends ComponentBase {
             refreshingBox={this.buildRefreshingBox()}
             lowerLoadingBox={this.buildLowerLoadingBox()}
             emptyPlaceholder={this.buildEmptyPlaceholder()}
+            upperBox={this.buildUpperBox()}
           >
             {this.renderFurther()}
           </VariableView>

@@ -231,6 +231,8 @@ articleList.unshift(article);
 export async function pageListData(params) {
   const { pageNo, pageSize } = params;
 
+  const list = articleList;
+
   return executiveRequest({
     api: `/news/article/pageList`,
     params,
@@ -240,13 +242,64 @@ export async function pageListData(params) {
     virtualSuccessResponse: {
       extra: {
         pageNo:
-          pageNo * pageSize >= articleList.length
-            ? Math.ceil(articleList.length / pageSize)
+          pageNo * pageSize >= list.length
+            ? Math.ceil(list.length / pageSize)
             : pageNo,
         pageSize: pageSize,
-        total: articleList.length,
+        total: list.length,
       },
-      list: articleList.slice((pageNo - 1) * pageSize, pageNo * pageSize),
+      list: list.slice((pageNo - 1) * pageSize, pageNo * pageSize),
+    },
+  });
+}
+
+export async function pageListEmptyData(params) {
+  const { pageNo, pageSize } = params;
+
+  const list = [];
+
+  return executiveRequest({
+    api: `/news/article/pageListEmpty`,
+    params,
+    useVirtualRequest: true,
+    virtualRequestDelay: 800,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      extra: {
+        pageNo:
+          pageNo * pageSize >= list.length
+            ? Math.ceil(list.length / pageSize)
+            : pageNo,
+        pageSize: pageSize,
+        total: list.length,
+      },
+      list: list.slice((pageNo - 1) * pageSize, pageNo * pageSize),
+    },
+  });
+}
+
+export async function singleListData(params) {
+  return executiveRequest({
+    api: `/news/article/singleList`,
+    params,
+    useVirtualRequest: true,
+    virtualRequestDelay: 800,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      list: articleList,
+    },
+  });
+}
+
+export async function singleListEmptyData(params) {
+  return executiveRequest({
+    api: `/news/article/singleListEmpty`,
+    params,
+    useVirtualRequest: true,
+    virtualRequestDelay: 800,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      list: [],
     },
   });
 }

@@ -21,7 +21,7 @@ const descriptionList = [
 
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'Normal',
+    id: 'Scroll',
     name: '滚动视图',
   };
 
@@ -35,6 +35,10 @@ export default class Index extends ContentPageBase {
       },
     };
   }
+
+  buildUpperBox = () => {
+    return 1111;
+  };
 
   renderContent = () => {
     return (

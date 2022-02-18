@@ -19,6 +19,7 @@ import ActivityIndicator from '../ActivityIndicator';
 import Transition from '../Transition';
 import { Empty } from '../Empty';
 import Divider from '../Divider';
+import FlexBox from '../FlexBox';
 
 import './index.less';
 
@@ -56,6 +57,8 @@ const defaultProps = {
   needNextLoad: false,
   emptyPlaceholderVisible: false,
   emptyPlaceholder: null,
+  upperBox: null,
+  style: {},
   onRefresh: null,
   onScrollLowerLoad: null,
 };
@@ -407,6 +410,12 @@ class VariableView extends BaseComponent {
     );
   };
 
+  buildUpperBox = () => {
+    const { upperBox } = this.props;
+
+    return upperBox || null;
+  };
+
   checkUseCustomPullDown = () => {
     const { enablePullDownRefresh, enableCustomPullDown } = this.props;
 
@@ -418,6 +427,7 @@ class VariableView extends BaseComponent {
       scroll,
       height,
       enablePullDownRefresh,
+      enableScrollLowerLoad,
       enableCustomPullDown,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
@@ -439,6 +449,7 @@ class VariableView extends BaseComponent {
       lowerLoadingBorder,
       lowerLoadingBoxPosition,
       useRefreshingBox,
+      style,
       children,
     } = this.props;
     const { scrollRefreshTriggered } = this.state;
@@ -452,7 +463,8 @@ class VariableView extends BaseComponent {
 
     const useCustomPullDown = this.checkUseCustomPullDown();
 
-    const style = {
+    const styleAdjust = {
+      ...style,
       ...(stringIsNullOrWhiteSpace(height)
         ? {}
         : !scroll
@@ -483,11 +495,59 @@ class VariableView extends BaseComponent {
         : { '--lower-loading-border': `${lowerLoadingBorder}` }),
     };
 
+    const upperBox = this.buildUpperBox();
+
     if (scroll) {
+      const scrollViewMain = (
+        <ScrollView
+          id={this.scrollViewId || ''}
+          className={classNames(`${classPrefix}__scrollView`)}
+          style={upperBox ? { flex: 'flex: 1 1 auto' } : { height: '100%' }}
+          refresherEnabled={!!enablePullDownRefresh && !enableCustomPullDown}
+          refresherThreshold={scrollRefresherThreshold}
+          refresherDefaultStyle={scrollRefresherDefaultStyle || ''}
+          refresherBackground={scrollRefresherBackground || ''}
+          refresherTriggered={scrollRefreshTriggered}
+          scrollY
+          scrollTop={scrollTopTarget}
+          lowerThreshold={80}
+          onScrollToLower={this.onScrollToLower}
+          scrollWithAnimation={scrollWithAnimation}
+          scrollAnchoring={scrollAnchoring}
+          enhanced={scrollEnhanced}
+          bounces={scrollBounces}
+          showScrollbar={scrollShowScrollbar}
+          fastDeceleration={scrollFastDeceleration}
+          onRefresherRefresh={this.onScrollRefresherRefresh}
+        >
+          <View>
+            {this.buildScrollEmptyPlaceholder()}
+
+            {children}
+
+            {enableScrollLowerLoad &&
+            lowerLoadingBoxPosition !== 'absolute' &&
+            lowerLoadingBoxPosition !== 'fixed' ? (
+              <View onClick={this.onScrollToLower}>
+                <Divider>
+                  {lowerLoading ? (
+                    <ActivityIndicator content="加载中" />
+                  ) : needNextLoad ? (
+                    '点击或上滑加载更多'
+                  ) : (
+                    '没有更多了'
+                  )}
+                </Divider>
+              </View>
+            ) : null}
+          </View>
+        </ScrollView>
+      );
+
       return (
         <View
           className={classNames(classPrefix)}
-          style={style}
+          style={styleAdjust}
           onTouchStart={this.onViewTouchStart}
           onTouchMove={this.onViewTouchMove}
           onTouchCancel={this.onViewTouchCancel}
@@ -549,8 +609,9 @@ class VariableView extends BaseComponent {
             </Transition>
           ) : null}
 
-          {lowerLoadingBoxPosition === 'absolute' ||
-          lowerLoadingBoxPosition === 'fixed' ? (
+          {enableScrollLowerLoad &&
+          (lowerLoadingBoxPosition === 'absolute' ||
+            lowerLoadingBoxPosition === 'fixed') ? (
             <Transition
               show={lowerLoading}
               className={classNames(`${classPrefix}__lowerLoadingBox`, {
@@ -568,47 +629,30 @@ class VariableView extends BaseComponent {
             </Transition>
           ) : null}
 
-          <ScrollView
-            id={this.scrollViewId || ''}
-            className={classNames(`${classPrefix}__scrollView`)}
-            refresherEnabled={!!enablePullDownRefresh && !enableCustomPullDown}
-            refresherThreshold={scrollRefresherThreshold}
-            refresherDefaultStyle={scrollRefresherDefaultStyle || ''}
-            refresherBackground={scrollRefresherBackground || ''}
-            refresherTriggered={scrollRefreshTriggered}
-            scrollY
-            scrollTop={scrollTopTarget}
-            lowerThreshold={80}
-            onScrollToLower={this.onScrollToLower}
-            scrollWithAnimation={scrollWithAnimation}
-            scrollAnchoring={scrollAnchoring}
-            enhanced={scrollEnhanced}
-            bounces={scrollBounces}
-            showScrollbar={scrollShowScrollbar}
-            fastDeceleration={scrollFastDeceleration}
-            onRefresherRefresh={this.onScrollRefresherRefresh}
-          >
-            <View>
-              {this.buildScrollEmptyPlaceholder()}
+          {upperBox ? (
+            <View
+              style={{
+                height: '100%',
+                display: 'flex',
+                flexFlow: 'column',
+                alignItems: 'stretch',
+              }}
+            >
+              {upperBox}
 
-              {children}
-
-              {lowerLoadingBoxPosition !== 'absolute' &&
-              lowerLoadingBoxPosition !== 'fixed' ? (
-                <View onClick={this.onScrollToLower}>
-                  <Divider>
-                    {lowerLoading ? (
-                      <ActivityIndicator content="加载中" />
-                    ) : needNextLoad ? (
-                      '点击或上滑加载更多'
-                    ) : (
-                      '没有更多了'
-                    )}
-                  </Divider>
-                </View>
-              ) : null}
+              {scrollViewMain}
             </View>
-          </ScrollView>
+          ) : (
+            scrollViewMain
+          )}
+
+          <FlexBox
+            direction="vertical"
+            flexAuto="bottom"
+            verticalHeight="100%"
+            top={upperBox}
+            bottom={scrollViewMain}
+          />
         </View>
       );
     }

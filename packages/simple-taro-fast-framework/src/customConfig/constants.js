@@ -231,8 +231,14 @@ const frameworkPathCollection = {
     normalView: {
       path: '/framework/pages/variableView/normalView/index',
     },
-    scrollView: {
-      path: '/framework/pages/variableView/scrollView/index',
+    scrollViewBasic: {
+      path: '/framework/pages/variableView/scrollViewBasic/index',
+    },
+    scrollViewUpperBox: {
+      path: '/framework/pages/variableView/scrollViewUpperBox/index',
+    },
+    scrollViewEmpty: {
+      path: '/framework/pages/variableView/scrollViewEmpty/index',
     },
     scrollPullRefresh: {
       path: '/framework/pages/variableView/scrollPullRefresh/index',

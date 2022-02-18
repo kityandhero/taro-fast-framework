@@ -8,18 +8,28 @@ const o = {
   title: '滚动视图模式',
   list: [
     {
-      id: 'ScrollView',
-      name: '普通模式',
-      path: pathCollection.framework.variableView.scrollView.path,
+      id: 'Basic',
+      name: '基础使用',
+      path: pathCollection.framework.variableView.scrollViewBasic.path,
+    },
+    {
+      id: 'UpperBox',
+      name: '使用上部固定区域',
+      path: pathCollection.framework.variableView.scrollViewUpperBox.path,
+    },
+    {
+      id: 'EmptyPlaceholder',
+      name: '空数据占位',
+      path: pathCollection.framework.variableView.scrollViewEmpty.path,
     },
     {
       id: 'ScrollViewPullRefresh',
-      name: '默认下拉刷新',
+      name: '下拉刷新 [默认模式]',
       path: pathCollection.framework.variableView.scrollPullRefresh.path,
     },
     {
       id: 'ScrollViewPullRefresh',
-      name: '自定义下拉刷新',
+      name: '下拉刷新 [自定义模式]',
       path: pathCollection.framework.variableView.scrollCustomPullRefresh.path,
     },
     {

@@ -62,11 +62,9 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <FlexBox
-            style={{ height: transformSize(300) }}
             direction="vertical"
-            vertical={{
-              bottomHeight: transformSize(80),
-            }}
+            flexAuto="top"
+            verticalHeight={300}
             top={
               <View
                 style={{ ...autoStyle, ...{ width: '100%', height: '100%' } }}
@@ -77,6 +75,34 @@ export default class Index extends ContentPageBase {
                 style={{
                   ...boxStyle,
                   ...{ width: '100%', height: transformSize(80) },
+                }}
+              ></View>
+            }
+          />
+        </Card>
+
+        <Card
+          header="上下自动布局 , 上部固定高度"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <FlexBox
+            direction="vertical"
+            flexAuto="bottom"
+            verticalHeight={300}
+            top={
+              <View
+                style={{
+                  ...autoStyle,
+                  ...{ width: '100%', height: transformSize(80) },
+                }}
+              ></View>
+            }
+            bottom={
+              <View
+                style={{
+                  ...boxStyle,
+                  ...{ width: '100%', height: '100%' },
                 }}
               ></View>
             }

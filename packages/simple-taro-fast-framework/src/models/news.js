@@ -6,6 +6,9 @@ import {
 
 import {
   pageListData,
+  pageListEmptyData,
+  singleListData,
+  singleListEmptyData,
   getOverviewData,
   switchStatusData,
 } from '../services/news';
@@ -21,6 +24,30 @@ export default {
 
       yield put({
         type: 'handlePageListData',
+        payload: response,
+      });
+    },
+    *pageListEmpty({ payload }, { call, put }) {
+      const response = yield call(pageListEmptyData, payload);
+
+      yield put({
+        type: 'handlePageListData',
+        payload: response,
+      });
+    },
+    *singleList({ payload }, { call, put }) {
+      const response = yield call(singleListData, payload);
+
+      yield put({
+        type: 'handleListData',
+        payload: response,
+      });
+    },
+    *singleListEmpty({ payload }, { call, put }) {
+      const response = yield call(singleListEmptyData, payload);
+
+      yield put({
+        type: 'handleListData',
         payload: response,
       });
     },
