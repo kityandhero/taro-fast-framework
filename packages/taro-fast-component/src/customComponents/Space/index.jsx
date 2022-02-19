@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import { SpaceContext, getDirection } from './tools';
 import SpaceItem from './spaceItem';
@@ -69,25 +69,27 @@ export const Space = (props) => {
 
   let latestIndex = 0;
 
-  const nodes = React.Children.map(props.children, (child, i) => {
-    if (child !== null && child !== undefined) {
-      latestIndex = i;
-    }
+  const nodes = isUndefined(props.children)
+    ? []
+    : React.Children.map(props.children, (child, i) => {
+        if (child !== null && child !== undefined) {
+          latestIndex = i;
+        }
 
-    return (
-      <SpaceItem
-        className={itemClassName}
-        key={`${itemClassName}-${i}`}
-        direction={direction}
-        index={i}
-        marginDirection={marginDirection}
-        split={split}
-        wrap={wrap}
-      >
-        {child}
-      </SpaceItem>
-    );
-  });
+        return (
+          <SpaceItem
+            className={itemClassName}
+            key={`${itemClassName}-${i}`}
+            direction={direction}
+            index={i}
+            marginDirection={marginDirection}
+            split={split}
+            wrap={wrap}
+          >
+            {child}
+          </SpaceItem>
+        );
+      });
 
   const spaceContext = React.useMemo(
     () => ({ horizontalSize, verticalSize, latestIndex }),

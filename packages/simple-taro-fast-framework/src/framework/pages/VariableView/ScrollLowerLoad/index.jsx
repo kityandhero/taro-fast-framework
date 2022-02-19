@@ -8,6 +8,7 @@ import {
   DataGrid,
   HelpBox,
   Ellipsis,
+  FadeInBox,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
@@ -59,8 +60,8 @@ const descriptionList = [
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'Scroll',
-    name: '滚动视图 - 下拉刷新',
+    id: 'ScrollLowerLoad',
+    name: '触底加载',
   };
 
   /**
@@ -107,24 +108,25 @@ export default class Index extends ContentPageBase {
               const { title, description } = o;
 
               return (
-                <Card
-                  key={`item_${index}`}
-                  header={title}
-                  border
-                  cardBorderRadiusMode={false}
-                  style={style}
-                >
-                  <Ellipsis
-                    line={2}
-                    style={{
-                      height: transformSize(88),
-                      fontSize: transformSize(28),
-                      lineHeight: transformSize(44),
-                    }}
+                <FadeInBox key={`item_${index}`}>
+                  <Card
+                    header={title}
+                    border
+                    cardBorderRadiusMode={false}
+                    style={style}
                   >
-                    {description}
-                  </Ellipsis>
-                </Card>
+                    <Ellipsis
+                      line={2}
+                      style={{
+                        height: transformSize(88),
+                        fontSize: transformSize(28),
+                        lineHeight: transformSize(44),
+                      }}
+                    >
+                      {description}
+                    </Ellipsis>
+                  </Card>
+                </FadeInBox>
               );
             })}
           </Space>

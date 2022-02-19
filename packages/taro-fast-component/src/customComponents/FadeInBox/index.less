@@ -1,5 +1,17 @@
 @class-prefix-fade-in-box: ~'tfc-fade-in-box';
 
 .@{class-prefix-fade-in-box} {
-  opacity: 0;
+  --animation-duration: 300ms;
+
+  animation: tfc-fade-in-box-animation var(--animation-duration);
+}
+
+@keyframes tfc-fade-in-box-animation {
+  from {
+    opacity: 0.01;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

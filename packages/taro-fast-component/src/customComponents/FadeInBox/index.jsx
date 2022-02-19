@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -10,32 +10,27 @@ import './index.less';
 const classPrefix = `tfc-fade-in-box`;
 
 const defaultProps = {
-  duration: 200,
+  duration: 300,
   style: {},
 };
 
 class FadeInBox extends BaseComponent {
+  fadeInAnimation = null;
+
   constructor(props) {
     super(props);
 
-    const { duration } = props;
+    const { duration } = this.props;
 
     this.state = {
       ...this.state,
       ...{
-        transitionStyle: {
-          transition: `opacity ${duration}ms`,
-        },
-        completeStyle: {},
+        animalStyle: isNumber(duration)
+          ? { '--animation-duration': `${duration}ms` }
+          : {},
       },
     };
   }
-
-  doWorkAdjustDidMount = () => {
-    this.setState({
-      completeStyle: { opacity: '1' },
-    });
-  };
 
   triggerClick = (value, e) => {
     const { onClick } = this.props;
@@ -46,15 +41,13 @@ class FadeInBox extends BaseComponent {
   };
 
   renderFurther() {
-    const { transitionStyle, completeStyle } = this.state;
+    const { animalStyle } = this.state;
     const { style, children } = this.props;
-
-    const styleAdjust = { ...style, ...transitionStyle, ...completeStyle };
 
     return (
       <View
         className={classNames(classPrefix)}
-        style={styleAdjust}
+        style={{ ...style, ...animalStyle }}
         onClick={this.triggerClick}
       >
         {children}

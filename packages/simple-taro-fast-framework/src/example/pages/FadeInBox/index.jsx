@@ -11,8 +11,11 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 const style = {
   lineHeight: '1',
   padding: transformSize(10),
+  height: transformSize(60),
   backgroundColor: '#ccc',
 };
+
+const duration = 1200;
 
 export default class Index extends ContentPageBase {
   headerData = {
@@ -20,40 +23,49 @@ export default class Index extends ContentPageBase {
     name: '渐显容器',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        show: false,
+      },
+    };
+  }
+
   doOtherWorkAfterDidMount = () => {
     const that = this;
 
     setTimeout(() => {
-      that.setState({ showTransition: false });
-    }, 3000);
+      that.setState({ show: true });
+    }, 800);
+  };
+
+  buildItem = () => {
+    return (
+      <FadeInBox style={style} duration={duration}>
+        <CenterBox>FadeInBox</CenterBox>
+      </FadeInBox>
+    );
   };
 
   renderContent = () => {
+    const { show } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
-        <FadeInBox style={style}>
-          <CenterBox>FadeInBox</CenterBox>
-        </FadeInBox>
+        {show ? this.buildItem() : null}
 
-        <FadeInBox style={style}>
-          <CenterBox>FadeInBox</CenterBox>
-        </FadeInBox>
+        {show ? this.buildItem() : null}
 
-        <FadeInBox style={style}>
-          <CenterBox>FadeInBox</CenterBox>
-        </FadeInBox>
+        {show ? this.buildItem() : null}
 
-        <FadeInBox style={style}>
-          <CenterBox>FadeInBox</CenterBox>
-        </FadeInBox>
+        {show ? this.buildItem() : null}
 
-        <FadeInBox style={style}>
-          <CenterBox>FadeInBox</CenterBox>
-        </FadeInBox>
+        {show ? this.buildItem() : null}
 
-        <FadeInBox style={style}>
-          <CenterBox>FadeInBox</CenterBox>
-        </FadeInBox>
+        {show ? this.buildItem() : null}
       </Space>
     );
   };
