@@ -53,6 +53,7 @@ const defaultProps = {
   lowerLoadingBackgroundColor: '#dbd9d9',
   lowerLoadingBorder: '0',
   lowerLoadingBox: null,
+  lowerLoadingBoxBottom: null,
   lowerLoadingBoxPosition: 'footer',
   needNextLoad: false,
   emptyPlaceholderVisible: false,
@@ -387,6 +388,10 @@ class VariableView extends BaseComponent {
     );
   };
 
+  /**
+   * 构建外部加载提示组件
+   * @returns
+   */
   buildLowerLoadingBox = () => {
     const { lowerLoadingBox } = this.props;
 
@@ -406,6 +411,35 @@ class VariableView extends BaseComponent {
             />
           </View>
         </CenterBox>
+      )
+    );
+  };
+
+  /**
+   * 构建底部加载提示组件
+   * @param {*} lowerLoading
+   * @param {*} needNextLoad
+   * @returns
+   */
+  buildLowerLoadingBoxBottom = (lowerLoading, needNextLoad) => {
+    const { lowerLoadingBoxBottom } = this.props;
+
+    return (
+      lowerLoadingBoxBottom || (
+        <Divider
+          style={{
+            marginLeft: 'var(--tfc-20))',
+            marginRight: 'var(--tfc-20))',
+          }}
+        >
+          {lowerLoading ? (
+            <ActivityIndicator content="加载中" />
+          ) : needNextLoad ? (
+            '点击或上滑加载更多'
+          ) : (
+            '没有更多了'
+          )}
+        </Divider>
       )
     );
   };
@@ -529,15 +563,7 @@ class VariableView extends BaseComponent {
             lowerLoadingBoxPosition !== 'absolute' &&
             lowerLoadingBoxPosition !== 'fixed' ? (
               <View onClick={this.onScrollToLower}>
-                <Divider>
-                  {lowerLoading ? (
-                    <ActivityIndicator content="加载中" />
-                  ) : needNextLoad ? (
-                    '点击或上滑加载更多'
-                  ) : (
-                    '没有更多了'
-                  )}
-                </Divider>
+                {this.buildLowerLoadingBoxBottom(lowerLoading, needNextLoad)}
               </View>
             ) : null}
           </View>

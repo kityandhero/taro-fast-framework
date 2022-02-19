@@ -210,7 +210,20 @@ class Infrastructure extends ComponentBase {
 
   buildRefreshingBox = () => null;
 
+  /**
+   * 构建外部加载提示组件
+   * @returns
+   */
   buildLowerLoadingBox = () => null;
+
+  /**
+   * 构建底部加载提示组件
+   * @param {*} lowerLoading
+   * @param {*} needNextLoad
+   * @returns
+   */
+  // eslint-disable-next-line no-unused-vars
+  lowerLoadingBoxBottom = (lowerLoading, needNextLoad) => null;
 
   renderView() {
     const {
@@ -268,6 +281,7 @@ class Infrastructure extends ComponentBase {
             lowerLoadingBoxPosition={lowerLoadingBoxPosition}
             refreshingBox={this.buildRefreshingBox()}
             lowerLoadingBox={this.buildLowerLoadingBox()}
+            lowerLoadingBoxBottom={this.lowerLoadingBoxBottom()}
             emptyPlaceholder={this.buildEmptyPlaceholder()}
             upperBox={this.buildUpperBox()}
           >

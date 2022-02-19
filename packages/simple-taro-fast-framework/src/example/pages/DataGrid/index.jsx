@@ -138,7 +138,7 @@ export default class Index extends ContentPageBase {
             list={longTextListData}
             column={3}
             size="small"
-            labelStyle={{ width: transformSize(160) }}
+            labelStyle={{ width: transformSize(140) }}
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
           />
@@ -154,7 +154,7 @@ export default class Index extends ContentPageBase {
             list={alignTopListData}
             column={3}
             size="small"
-            labelStyle={{ width: transformSize(160) }}
+            labelStyle={{ width: transformSize(140) }}
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
             columnVerticalAlign="flex-start"
