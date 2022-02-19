@@ -223,7 +223,7 @@ class Infrastructure extends ComponentBase {
    * @returns
    */
   // eslint-disable-next-line no-unused-vars
-  lowerLoadingBoxBottom = (lowerLoading, needNextLoad) => null;
+  buildLowerLoadingBoxBottom = (lowerLoading, needNextLoad) => null;
 
   renderView() {
     const {
@@ -281,7 +281,7 @@ class Infrastructure extends ComponentBase {
             lowerLoadingBoxPosition={lowerLoadingBoxPosition}
             refreshingBox={this.buildRefreshingBox()}
             lowerLoadingBox={this.buildLowerLoadingBox()}
-            lowerLoadingBoxBottom={this.lowerLoadingBoxBottom()}
+            lowerLoadingBoxBottom={this.buildLowerLoadingBoxBottom()}
             emptyPlaceholder={this.buildEmptyPlaceholder()}
             upperBox={this.buildUpperBox()}
           >

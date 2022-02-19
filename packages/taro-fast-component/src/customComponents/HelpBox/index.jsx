@@ -64,6 +64,7 @@ class HelpBox extends BaseComponent {
             contentStyle: null,
             canCopy: false,
             copyData: null,
+            ellipsis: false,
           },
           ...o,
         };
@@ -132,6 +133,7 @@ class HelpBox extends BaseComponent {
               span,
               canCopy,
               copyData,
+              ellipsis,
             } = o;
 
             return {
@@ -147,6 +149,7 @@ class HelpBox extends BaseComponent {
               span,
               canCopy,
               copyData,
+              ellipsis,
             };
           })}
           border={false}

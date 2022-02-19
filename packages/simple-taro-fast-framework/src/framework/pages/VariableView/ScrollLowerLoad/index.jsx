@@ -34,9 +34,21 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '可进行配置颜色',
+    label: '可配置加载提示组件显示模式',
     value:
-      'this.setState({refreshColor: "red",refreshBackgroundColor: "green"})',
+      'this.setState({ lowerLoadingBoxPosition: "footer/absolute/fixed" })',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '自定义外部提示加载组件',
+    value: '重载覆写函数 buildLowerLoadingBox = () => { return null; }',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '自定义底部提示加载组件',
+    value: '重载覆写函数 buildLowerLoadingBoxBottom = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
@@ -67,7 +79,7 @@ export default class Index extends ContentPageBase {
       ...{
         scrollView: true,
         enableScrollLowerLoad: true,
-        // lowerLoadingBoxPosition: 'absolute',
+        lowerLoadingBoxPosition: 'fixed',
         loadApiPath: 'news/pageList',
       },
     };
