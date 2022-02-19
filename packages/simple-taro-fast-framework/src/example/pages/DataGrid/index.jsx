@@ -45,6 +45,9 @@ const list = [
   },
 ];
 
+// const longText =
+//   '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本';
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'DataGrid',
@@ -83,6 +86,17 @@ export default class Index extends ContentPageBase {
             column={3}
             size="small"
             labelStyle={{ width: transformSize(80) }}
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+
+        <Card header="行布局" style={style} headerStyle={cardHeaderStyle}>
+          <DataGrid
+            list={list}
+            bordered
+            layout="row"
+            size="small"
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
           />

@@ -11,7 +11,7 @@ import BaseComponent from '../../BaseComponent';
 
 import './index.less';
 
-const alignCollection = ['top', 'center', 'bottom'];
+const alignCollection = ['top', 'center', 'bottom', 'stretch'];
 
 const defaultProps = {
   style: {},

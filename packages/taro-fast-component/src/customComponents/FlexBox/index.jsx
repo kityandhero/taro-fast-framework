@@ -23,7 +23,7 @@ const defaultProps = {
   bottom: null,
   bottomStyle: {},
   style: null,
-  center: true,
+  alignItems: 'center',
 };
 
 class FlexBox extends BaseComponent {
@@ -41,7 +41,7 @@ class FlexBox extends BaseComponent {
       bottom,
       bottomStyle,
       direction: directionSource,
-      center,
+      alignItems,
       verticalHeight,
     } = this.props;
 
@@ -85,7 +85,7 @@ class FlexBox extends BaseComponent {
 
       const styleCore = {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: alignItems || defaultProps.alignItems,
       };
 
       if (flexAuto === 'left') {
@@ -93,16 +93,16 @@ class FlexBox extends BaseComponent {
           <Row style={style}>
             <Col
               auto
-              align={center ? 'center' : 'stretch'}
-              style={{ ...(leftStyle || {}), ...(center ? {} : styleCore) }}
+              align="stretch"
+              style={{ ...(leftStyle || {}), ...styleCore }}
             >
               {left}
             </Col>
 
             {(right || null) == null ? null : (
               <Col
-                align={center ? 'center' : 'stretch'}
-                style={{ ...(rightStyle || {}), ...(center ? {} : styleCore) }}
+                align="stretch"
+                style={{ ...(rightStyle || {}), ...styleCore }}
               >
                 {right}
               </Col>
@@ -113,16 +113,13 @@ class FlexBox extends BaseComponent {
 
       return (
         <Row style={style}>
-          <Col
-            align={center ? 'center' : 'stretch'}
-            style={{ ...(leftStyle || {}), ...(center ? {} : styleCore) }}
-          >
+          <Col align="stretch" style={{ ...(leftStyle || {}), ...styleCore }}>
             {left}
           </Col>
           <Col
             auto
-            align={center ? 'center' : 'stretch'}
-            style={{ ...(rightStyle || {}), ...(center ? {} : styleCore) }}
+            align="stretch"
+            style={{ ...(rightStyle || {}), ...styleCore }}
           >
             {right}
           </Col>
