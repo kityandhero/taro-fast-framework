@@ -45,7 +45,7 @@ class Infrastructure extends ComponentBase {
         scrollAnchoring: true,
         scrollEnhanced: true,
         scrollBounces: true,
-        scrollShowScrollbar: false,
+        scrollShowScrollbar: true,
         scrollFastDeceleration: false,
         lowerLoadingBoxPosition: 'footer',
       },
