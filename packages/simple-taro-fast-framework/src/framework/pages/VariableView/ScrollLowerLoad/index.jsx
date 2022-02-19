@@ -77,7 +77,6 @@ export default class Index extends ContentPageBase {
       ...{
         scrollView: true,
         enableScrollLowerLoad: true,
-        enableInitialActivityIndicator: true,
         lowerLoadingPosition: 'fixed',
         loadApiPath: 'news/pageList',
       },

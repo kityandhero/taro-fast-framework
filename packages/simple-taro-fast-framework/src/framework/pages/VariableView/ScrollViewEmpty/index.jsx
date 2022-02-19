@@ -45,6 +45,7 @@ export default class Index extends ContentPageBase {
       ...{
         scrollView: true,
         enableEmptyPlaceholder: true,
+        enableInitialActivityIndicator: true,
         loadApiPath: 'news/singleListEmpty',
       },
     };
