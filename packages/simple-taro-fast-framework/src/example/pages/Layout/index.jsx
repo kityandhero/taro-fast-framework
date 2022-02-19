@@ -33,6 +33,11 @@ const o = {
       path: pathCollection.example.divider.path,
     },
     {
+      id: 'FadeInBox',
+      name: '渐显容器',
+      path: pathCollection.example.fadeInBox.path,
+    },
+    {
       id: 'HorizontalCenterBox',
       name: '水平居中',
       path: pathCollection.example.horizontalCenterBox.path,
