@@ -8,6 +8,7 @@ import {
   getRect,
   stringIsNullOrWhiteSpace,
   getSystemInfo,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -20,6 +21,7 @@ import Transition from '../Transition';
 import { Empty } from '../Empty';
 import Divider from '../Divider';
 import FlexBox from '../FlexBox';
+import FadeInBox from '../FadeInBox';
 
 import './index.less';
 
@@ -35,6 +37,7 @@ const defaultProps = {
   enableCustomPullDown: false,
   enableScrollLowerLoad: false,
   enableEmptyPlaceholder: false,
+  enableInitialActivityIndicator: false,
   useRefreshingBox: true,
   scrollRefresherThreshold: 100,
   scrollRefresherDefaultStyle: '',
@@ -58,6 +61,7 @@ const defaultProps = {
   needNextLoad: false,
   emptyPlaceholderVisible: false,
   emptyPlaceholder: null,
+  initialActivityIndicatorVisible: false,
   upperBox: null,
   style: {},
   onRefresh: null,
@@ -458,6 +462,14 @@ class VariableView extends BaseComponent {
     return !!enablePullDownRefresh && !!enableCustomPullDown;
   };
 
+  buildInitialActivityIndicator = () => {
+    <FadeInBox duration={200} style={{ height: transformSize(340) }}>
+      <CenterBox>
+        <ActivityIndicator type="comet" content="加载中" />
+      </CenterBox>
+    </FadeInBox>;
+  };
+
   renderFurther() {
     const {
       scroll,
@@ -465,6 +477,7 @@ class VariableView extends BaseComponent {
       enablePullDownRefresh,
       enableScrollLowerLoad,
       enableCustomPullDown,
+      enableInitialActivityIndicator,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
@@ -485,6 +498,7 @@ class VariableView extends BaseComponent {
       lowerLoadingBorder,
       lowerLoadingPosition,
       useRefreshingBox,
+      initialActivityIndicatorVisible,
       style,
       children,
     } = this.props;
@@ -557,6 +571,10 @@ class VariableView extends BaseComponent {
           onRefresherRefresh={this.onScrollRefresherRefresh}
         >
           <View>
+            {enableInitialActivityIndicator && initialActivityIndicatorVisible
+              ? this.buildInitialActivityIndicator()
+              : null}
+
             {this.buildScrollEmptyPlaceholder()}
 
             {children}
@@ -693,6 +711,10 @@ class VariableView extends BaseComponent {
           minHeight: height,
         }}
       >
+        {enableInitialActivityIndicator && initialActivityIndicatorVisible
+          ? this.buildInitialActivityIndicator()
+          : null}
+
         {children}
       </View>
     );

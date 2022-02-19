@@ -43,6 +43,7 @@ class Infrastructure extends ComponentBase {
         enableCustomPullDown: false,
         enableScrollLowerLoad: false,
         enableEmptyPlaceholder: false,
+        enableInitialActivityIndicator: false,
         scrollRefresherThreshold: 100,
         scrollRefresherDefaultStyle: 'white',
         scrollRefresherBackground: '',
@@ -222,18 +223,41 @@ class Infrastructure extends ComponentBase {
   onScrollLowerLoad = () => {};
 
   showScrollRefreshing = () => {
-    const { firstLoadSuccess, dataLoading, reloading } = this.state;
+    const {
+      enableInitialActivityIndicator,
+      firstLoadSuccess,
+      dataLoading,
+      reloading,
+    } = this.state;
 
-    return (!firstLoadSuccess && dataLoading) || reloading;
+    return (
+      (!enableInitialActivityIndicator && !firstLoadSuccess && dataLoading) ||
+      reloading
+    );
   };
 
   showScrollLowerLoading = () => {
-    const { enablePullDownRefresh, firstLoadSuccess, dataLoading } = this.state;
+    const {
+      enableInitialActivityIndicator,
+      enablePullDownRefresh,
+      firstLoadSuccess,
+      dataLoading,
+    } = this.state;
 
     return (
-      (!firstLoadSuccess && !enablePullDownRefresh && dataLoading) ||
+      (!enableInitialActivityIndicator &&
+        !firstLoadSuccess &&
+        !enablePullDownRefresh &&
+        dataLoading) ||
       (firstLoadSuccess && dataLoading)
     );
+  };
+
+  showInitialActivityIndicator = () => {
+    const { enableInitialActivityIndicator, firstLoadSuccess, dataLoading } =
+      this.state;
+
+    return enableInitialActivityIndicator && !firstLoadSuccess && dataLoading;
   };
 
   showEmptyPlaceholder = () => {
@@ -289,6 +313,7 @@ class Infrastructure extends ComponentBase {
       enableCustomPullDown,
       enableScrollLowerLoad,
       enableEmptyPlaceholder,
+      enableInitialActivityIndicator,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
@@ -313,6 +338,7 @@ class Infrastructure extends ComponentBase {
         enableScrollLowerLoad={enableScrollLowerLoad}
         enableCustomPullDown={enableCustomPullDown}
         enableEmptyPlaceholder={enableEmptyPlaceholder}
+        enableInitialActivityIndicator={enableInitialActivityIndicator}
         refreshColor={refreshColor}
         refreshBackgroundColor={refreshBackgroundColor}
         scrollWithAnimation={scrollWithAnimation}
@@ -335,6 +361,7 @@ class Infrastructure extends ComponentBase {
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
         emptyPlaceholder={this.buildEmptyPlaceholder()}
+        initialActivityIndicatorVisible={this.showInitialActivityIndicator()}
         upperBox={this.buildUpperBox()}
       >
         {this.renderFurther()}
