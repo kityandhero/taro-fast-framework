@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
@@ -19,11 +20,17 @@ const descriptionList = [
   },
 ];
 
+@connect(({ news, global }) => ({
+  news,
+  global,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ScrollViewEmpty',
     name: '滚动视图',
   };
+
+  loadRemoteRequestAfterMount = true;
 
   constructor(props) {
     super(props);
@@ -37,6 +44,14 @@ export default class Index extends ContentPageBase {
       },
     };
   }
+
+  getApiData = (props) => {
+    const {
+      news: { data },
+    } = props;
+
+    return data;
+  };
 
   renderContent = () => {
     return (

@@ -6,7 +6,7 @@ import PageWrapper from '../PageWrapper';
 import './index.less';
 
 export default class ContentPageBase extends PageWrapper {
-  headerData = {};
+  headerData = null;
 
   viewStyle = { backgroundColor: '#fff' };
 
@@ -44,7 +44,9 @@ export default class ContentPageBase extends PageWrapper {
 
     return (
       <>
-        <Header title={`${id} ${name}`}></Header>
+        {(this.headerData || null) == null ? null : (
+          <Header title={`${id} ${name}`}></Header>
+        )}
 
         <View className="doc-body">{this.renderContent()}</View>
       </>
