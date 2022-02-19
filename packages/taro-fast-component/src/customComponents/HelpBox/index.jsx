@@ -149,9 +149,10 @@ class HelpBox extends BaseComponent {
               copyData,
             };
           })}
-          bordered={false}
+          border={false}
           colon={showNumber}
           column={1}
+          columnVerticalAlign="flex-start"
           labelStyle={{
             width: customLabelWidth
               ? labelWidthStyle

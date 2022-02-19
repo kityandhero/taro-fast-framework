@@ -45,8 +45,45 @@ const list = [
   },
 ];
 
-// const longText =
-//   '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本';
+const longText =
+  '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本';
+
+const longTextListData = [
+  {
+    span: 'fill',
+    label: '仅一行',
+    value: longText,
+  },
+  {
+    span: 'fill',
+    label: '仅两行',
+    value: longText,
+    ellipsisLine: 2,
+  },
+  {
+    span: 'fill',
+    label: '设置行高',
+    value: longText,
+    ellipsisLine: 2,
+    ellipsisLineHeight: transformSize(60),
+    ellipsisHeight: transformSize(120),
+  },
+  {
+    span: 'fill',
+    label: '全展示',
+    value: longText,
+    ellipsis: false,
+  },
+];
+
+const alignTopListData = [
+  {
+    span: 'fill',
+    label: '长文本',
+    value: longText,
+    ellipsis: false,
+  },
+];
 
 export default class Index extends ContentPageBase {
   headerData = {
@@ -58,14 +95,14 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <Card
-          header="布局展示"
+          header="列布局"
           style={style}
           headerStyle={cardHeaderStyle}
           extra="2列"
         >
           <DataGrid
             list={list}
-            bordered
+            border
             column={2}
             size="small"
             labelStyle={{ width: transformSize(80) }}
@@ -75,14 +112,14 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <Card
-          header="布局展示"
+          header="无边框列"
           style={style}
           headerStyle={cardHeaderStyle}
           extra="3列"
         >
           <DataGrid
             list={list}
-            bordered={false}
+            border={false}
             column={3}
             size="small"
             labelStyle={{ width: transformSize(80) }}
@@ -91,10 +128,43 @@ export default class Index extends ContentPageBase {
           />
         </Card>
 
+        <Card
+          header="长文本展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="3列"
+        >
+          <DataGrid
+            list={longTextListData}
+            column={3}
+            size="small"
+            labelStyle={{ width: transformSize(160) }}
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+
+        <Card
+          header="顶部对齐"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          extra="3列"
+        >
+          <DataGrid
+            list={alignTopListData}
+            column={3}
+            size="small"
+            labelStyle={{ width: transformSize(160) }}
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+            columnVerticalAlign="flex-start"
+          />
+        </Card>
+
         <Card header="行布局" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
             list={list}
-            bordered
+            border
             layout="row"
             size="small"
             emptyValue="暂无"

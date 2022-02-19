@@ -8,7 +8,11 @@ import {
   transformSize,
   inCollection,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  isArray,
+  isNumber,
+  isString,
+} from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
@@ -31,7 +35,7 @@ const defaultProps = {
   contentStyle: {},
   emptyValue: null,
   emptyStyle: null,
-  bordered: false,
+  border: true,
   colon: true,
   size: null,
   fontSize: 28,
@@ -39,6 +43,7 @@ const defaultProps = {
   ellipsisLine: 1,
   ellipsisLineHeight: '',
   ellipsisHeight: '',
+  columnVerticalAlign: 'center',
 };
 
 class DataGrid extends BaseComponent {
@@ -71,10 +76,11 @@ class DataGrid extends BaseComponent {
         contentStyle: contentStyleSource,
         emptyValue: globalEmptyValue,
         emptyStyle: globalEmptyStyle,
-        bordered: borderedSource,
+        border: borderSource,
         colon: colonSource,
         size: sizeSource,
         fontSize: fontSizeSource,
+        columnVerticalAlign,
       } = {
         ...defaultProps,
         ...(this.props || {}),
@@ -106,14 +112,14 @@ class DataGrid extends BaseComponent {
 
       const columnSize = 12 / column;
 
-      const bordered = borderedSource;
-      const colon = bordered ? false : colonSource;
+      const border = borderSource;
+      const colon = border ? false : colonSource;
 
-      if (bordered) {
+      if (border) {
         backgroundColor = '#fafafa';
       }
 
-      const containorStyle = bordered
+      const containorStyle = border
         ? {
             borderTop: `${transformSize(2)} solid #f0f0f0`,
             borderLeft: `${transformSize(2)} solid #f0f0f0`,
@@ -122,11 +128,11 @@ class DataGrid extends BaseComponent {
 
       const labelStyle = {
         ...{
-          fontSize: transformSize(30),
+          fontSize: transformSize(28),
           width: transformSize(180),
         },
         ...(labelStyleSource || {}),
-        ...(bordered ? { margin } : {}),
+        ...(border ? { margin } : {}),
         ...(layout === 'row' ? { width: 'auto' } : {}),
       };
 
@@ -135,7 +141,7 @@ class DataGrid extends BaseComponent {
           fontSize: transformSize(30),
         },
         ...(contentStyleSource || {}),
-        ...(bordered
+        ...(border
           ? {
               ...{
                 margin: `${transformSize(32)} ${transformSize(48)}`,
@@ -188,7 +194,7 @@ class DataGrid extends BaseComponent {
                 return null;
               }
 
-              const itemStyle = bordered
+              const itemStyle = border
                 ? {
                     borderRight: `${transformSize(2)} solid #f0f0f0`,
                     borderBottom: `${transformSize(2)} solid #f0f0f0`,
@@ -203,7 +209,7 @@ class DataGrid extends BaseComponent {
                 value: itemValue,
                 emptyValue: itemEmptyValue,
                 emptyStyle: itemEmptyStyle,
-                span: itemSpan,
+                span: itemSpanSource,
                 canCopy: itemCanCopy,
                 copyData: itemCopyData,
                 props: itemProps,
@@ -221,6 +227,14 @@ class DataGrid extends BaseComponent {
                 },
                 ...(item || {}),
               };
+
+              const itemSpan = isNumber(itemSpanSource)
+                ? itemSpanSource
+                : !isString(itemSpanSource)
+                ? 1
+                : itemSpanSource === 'fill'
+                ? column
+                : 1;
 
               const v = itemValue || itemEmptyValue || globalEmptyValue;
 
@@ -300,12 +314,14 @@ class DataGrid extends BaseComponent {
                     {...(itemProps || {})}
                   >
                     <FlexBox
-                      center={false}
+                      alignItems={
+                        columnVerticalAlign || defaultProps.columnVerticalAlign
+                      }
                       flexAuto="right"
                       left={labelComponent}
                       leftStyle={{
                         ...{ backgroundColor },
-                        ...(bordered
+                        ...(border
                           ? { borderRight: `${transformSize(2)} solid #f0f0f0` }
                           : {}),
                       }}

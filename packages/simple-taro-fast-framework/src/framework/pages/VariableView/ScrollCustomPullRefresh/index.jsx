@@ -121,7 +121,7 @@ export default class Index extends ContentPageBase {
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
             list={descriptionList}
-            bordered
+            border
             layout="row"
             size="small"
             emptyValue="暂无"
