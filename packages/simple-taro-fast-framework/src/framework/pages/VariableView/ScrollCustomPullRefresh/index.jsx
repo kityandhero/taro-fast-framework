@@ -65,7 +65,7 @@ export default class Index extends ContentPageBase {
         lowerLoadingPosition: 'fixed',
         // refreshColor: 'red',
         // refreshBackgroundColor: 'green',
-        loadApiPath: 'news/pageList',
+        loadApiPath: 'news/singleList',
       },
     };
   }

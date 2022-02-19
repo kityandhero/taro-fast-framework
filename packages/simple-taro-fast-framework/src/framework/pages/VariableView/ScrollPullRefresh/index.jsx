@@ -63,7 +63,7 @@ export default class Index extends ContentPageBase {
         enablePullDownRefresh: true,
         refreshColor: 'red',
         refreshBackgroundColor: 'green',
-        loadApiPath: 'news/pageList',
+        loadApiPath: 'news/singleList',
       },
     };
   }
@@ -82,8 +82,6 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     const { metaListData } = this.state;
-
-    console.log({ metaListData });
 
     return (
       <Space direction="vertical" fillWidth>

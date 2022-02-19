@@ -96,9 +96,7 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { firstLoadSuccess, dataLoading, metaListData } = this.state;
-
-    console.log({ firstLoadSuccess, dataLoading });
+    const { metaListData } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
