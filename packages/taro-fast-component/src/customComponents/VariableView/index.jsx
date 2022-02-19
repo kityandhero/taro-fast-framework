@@ -463,11 +463,13 @@ class VariableView extends BaseComponent {
   };
 
   buildInitialActivityIndicator = () => {
-    <FadeInBox duration={200} style={{ height: transformSize(340) }}>
-      <CenterBox>
-        <ActivityIndicator type="comet" content="加载中" />
-      </CenterBox>
-    </FadeInBox>;
+    return (
+      <FadeInBox duration={200} style={{ height: transformSize(340) }}>
+        <CenterBox>
+          <ActivityIndicator type="comet" content="加载中" />
+        </CenterBox>
+      </FadeInBox>
+    );
   };
 
   renderFurther() {
