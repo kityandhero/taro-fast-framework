@@ -52,9 +52,9 @@ const defaultProps = {
   lowerLoading: false,
   lowerLoadingBackgroundColor: '#dbd9d9',
   lowerLoadingBorder: '0',
-  lowerLoadingBox: null,
-  lowerLoadingBoxBottom: null,
-  lowerLoadingBoxPosition: 'footer',
+  lowerLoadingSuspendBox: null,
+  lowerLoadingFooterBox: null,
+  lowerLoadingPosition: 'footer',
   needNextLoad: false,
   emptyPlaceholderVisible: false,
   emptyPlaceholder: null,
@@ -375,12 +375,12 @@ class VariableView extends BaseComponent {
         <CenterBox>
           <View
             className={classNames(
-              `${classPrefix}__refreshingBox__inner__refreshing`,
+              `${classPrefix}__refreshing-box__inner__refreshing`,
             )}
           >
             <ActivityIndicator
               className={classNames(
-                `${classPrefix}__refreshingBox__inner__refreshing__inner`,
+                `${classPrefix}__refreshing-box__inner__refreshing__inner`,
               )}
               content="加载中"
             />
@@ -394,20 +394,20 @@ class VariableView extends BaseComponent {
    * 构建外部加载提示组件
    * @returns
    */
-  buildLowerLoadingBox = () => {
-    const { lowerLoadingBox } = this.props;
+  buildLowerLoadingSuspendBox = () => {
+    const { lowerLoadingSuspendBox } = this.props;
 
     return (
-      lowerLoadingBox || (
+      lowerLoadingSuspendBox || (
         <CenterBox>
           <View
             className={classNames(
-              `${classPrefix}__lowerLoadingBox__inner__lowerLoading`,
+              `${classPrefix}__lower-loading-box__inner__lower-loading`,
             )}
           >
             <ActivityIndicator
               className={classNames(
-                `${classPrefix}__lowerLoadingBox__inner__lowerLoading__inner`,
+                `${classPrefix}__lower-loading-box__inner__lower-loading__inner`,
               )}
               content="加载中, 请稍后"
             />
@@ -423,11 +423,11 @@ class VariableView extends BaseComponent {
    * @param {*} needNextLoad
    * @returns
    */
-  buildLowerLoadingBoxBottom = (lowerLoading, needNextLoad) => {
-    const { lowerLoadingBoxBottom } = this.props;
+  buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => {
+    const { lowerLoadingFooterBox } = this.props;
 
     return (
-      lowerLoadingBoxBottom || (
+      lowerLoadingFooterBox || (
         <Divider
           style={{
             marginLeft: 'var(--tfc-20))',
@@ -483,7 +483,7 @@ class VariableView extends BaseComponent {
       needNextLoad,
       lowerLoadingBackgroundColor,
       lowerLoadingBorder,
-      lowerLoadingBoxPosition,
+      lowerLoadingPosition,
       useRefreshingBox,
       style,
       children,
@@ -562,10 +562,10 @@ class VariableView extends BaseComponent {
             {children}
 
             {enableScrollLowerLoad &&
-            lowerLoadingBoxPosition !== 'absolute' &&
-            lowerLoadingBoxPosition !== 'fixed' ? (
+            lowerLoadingPosition !== 'absolute' &&
+            lowerLoadingPosition !== 'fixed' ? (
               <View onClick={this.onScrollToLower}>
-                {this.buildLowerLoadingBoxBottom(lowerLoading, needNextLoad)}
+                {this.buildLowerLoadingFooterBox(lowerLoading, needNextLoad)}
               </View>
             ) : null}
           </View>
@@ -584,19 +584,19 @@ class VariableView extends BaseComponent {
           {useCustomPullDown ? (
             <View
               id={this.refreshBoxId || ''}
-              className={classNames(`${classPrefix}__refreshBox`)}
+              className={classNames(`${classPrefix}__refresh-box`)}
               animation={refreshBoxAnimationData}
             >
               <View
                 className={classNames(
-                  `${classPrefix}__refreshBox__pullRefresh`,
+                  `${classPrefix}__refresh-box__pull-refresh`,
                 )}
               >
                 <CenterBox>
                   {!needRefresh ? (
                     <View
                       className={classNames(
-                        `${classPrefix}__refreshBox__pullRefresh__iconBox`,
+                        `${classPrefix}__refresh-box__pull-refresh__iconBox`,
                       )}
                       animation={refreshBoxPreloadAnimationData}
                     >
@@ -607,12 +607,12 @@ class VariableView extends BaseComponent {
                   {needRefresh ? (
                     <View
                       className={classNames(
-                        `${classPrefix}__refreshBox__pullRefresh__iconBox`,
+                        `${classPrefix}__refresh-box__pull-refresh__iconBox`,
                       )}
                     >
                       <IconLoading
                         className={classNames(
-                          `${classPrefix}__refreshBox__pullRefresh__iconBox__icon`,
+                          `${classPrefix}__refresh-box__pull-refresh__iconBox__icon`,
                         )}
                         size={42}
                         borderWidth={2}
@@ -627,10 +627,10 @@ class VariableView extends BaseComponent {
           {enablePullDownRefresh ? (
             <Transition
               show={refreshing && useRefreshingBox}
-              className={classNames(`${classPrefix}__refreshingBox`)}
+              className={classNames(`${classPrefix}__refreshing-box`)}
             >
               <View
-                className={classNames(`${classPrefix}__refreshingBox__inner`)}
+                className={classNames(`${classPrefix}__refreshing-box__inner`)}
               >
                 {this.buildRefreshingBox()}
               </View>
@@ -638,21 +638,23 @@ class VariableView extends BaseComponent {
           ) : null}
 
           {enableScrollLowerLoad &&
-          (lowerLoadingBoxPosition === 'absolute' ||
-            lowerLoadingBoxPosition === 'fixed') ? (
+          (lowerLoadingPosition === 'absolute' ||
+            lowerLoadingPosition === 'fixed') ? (
             <Transition
               show={lowerLoading}
-              className={classNames(`${classPrefix}__lowerLoadingBox`, {
-                [`${classPrefix}__lowerLoadingBox--absolute`]:
-                  lowerLoadingBoxPosition === 'absolute',
-                [`${classPrefix}__lowerLoadingBox--fixed`]:
-                  lowerLoadingBoxPosition === 'fixed',
+              className={classNames(`${classPrefix}__lower-loading-box`, {
+                [`${classPrefix}__lower-loading-box--absolute`]:
+                  lowerLoadingPosition === 'absolute',
+                [`${classPrefix}__lower-loading-box--fixed`]:
+                  lowerLoadingPosition === 'fixed',
               })}
             >
               <View
-                className={classNames(`${classPrefix}__lowerLoadingBox__inner`)}
+                className={classNames(
+                  `${classPrefix}__lower-loading-box__inner`,
+                )}
               >
-                {this.buildLowerLoadingBox()}
+                {this.buildLowerLoadingSuspendBox()}
               </View>
             </Transition>
           ) : null}

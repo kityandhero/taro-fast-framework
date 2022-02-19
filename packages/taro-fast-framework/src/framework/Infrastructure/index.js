@@ -47,7 +47,7 @@ class Infrastructure extends ComponentBase {
         scrollBounces: true,
         scrollShowScrollbar: true,
         scrollFastDeceleration: false,
-        lowerLoadingBoxPosition: 'footer',
+        lowerLoadingPosition: 'footer',
       },
     };
   }
@@ -214,7 +214,7 @@ class Infrastructure extends ComponentBase {
    * 构建外部加载提示组件
    * @returns
    */
-  buildLowerLoadingBox = () => null;
+  buildLowerLoadingSuspendBox = () => null;
 
   /**
    * 构建底部加载提示组件
@@ -223,7 +223,7 @@ class Infrastructure extends ComponentBase {
    * @returns
    */
   // eslint-disable-next-line no-unused-vars
-  buildLowerLoadingBoxBottom = (lowerLoading, needNextLoad) => null;
+  buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
 
   renderView() {
     const {
@@ -245,7 +245,7 @@ class Infrastructure extends ComponentBase {
       scrollBounces,
       scrollShowScrollbar,
       scrollFastDeceleration,
-      lowerLoadingBoxPosition,
+      lowerLoadingPosition,
     } = this.state;
 
     return (
@@ -278,10 +278,10 @@ class Infrastructure extends ComponentBase {
             lowerLoading={this.showScrollLowerLoading()}
             needNextLoad={this.judgeNeedNextLoad()}
             emptyPlaceholderVisible={this.showEmptyPlaceholder()}
-            lowerLoadingBoxPosition={lowerLoadingBoxPosition}
+            lowerLoadingPosition={lowerLoadingPosition}
             refreshingBox={this.buildRefreshingBox()}
-            lowerLoadingBox={this.buildLowerLoadingBox()}
-            lowerLoadingBoxBottom={this.buildLowerLoadingBoxBottom()}
+            lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
+            lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
             emptyPlaceholder={this.buildEmptyPlaceholder()}
             upperBox={this.buildUpperBox()}
           >

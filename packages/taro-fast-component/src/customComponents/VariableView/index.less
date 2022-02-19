@@ -11,14 +11,14 @@
   position: relative;
   overflow: hidden;
 
-  &__refreshBox {
+  &__refresh-box {
     position: absolute;
     top: calc(var(--tfc-72) * -1);
     width: 100%;
     height: var(--tfc-72);
     z-index: 10000;
 
-    &__pullRefresh {
+    &__pull-refresh {
       &__iconBox {
         display: flex;
         align-items: center;
@@ -38,7 +38,7 @@
     }
   }
 
-  &__refreshingBox {
+  &__refreshing-box {
     position: absolute;
     top: 0;
     left: 0;
@@ -71,7 +71,7 @@
     }
   }
 
-  &__lowerLoadingBox {
+  &__lower-loading-box {
     &__inner {
       background-color: transparent;
       margin: var(--tfc-20) var(--tfc-40);
@@ -79,7 +79,7 @@
       align-content: center;
       justify-content: center;
 
-      &__lowerLoading {
+      &__lower-loading {
         width: var(--tfc-400);
         opacity: 0.92;
         background-color: var(--lower-loading-background-color);
@@ -96,7 +96,7 @@
     }
   }
 
-  &__lowerLoadingBox--absolute {
+  &__lower-loading-box--absolute {
     position: absolute;
     bottom: var(--tfc-20);
     left: 0;
@@ -105,7 +105,7 @@
     background-color: transparent;
   }
 
-  &__lowerLoadingBox--fixed {
+  &__lower-loading-box--fixed {
     position: fixed;
     bottom: var(--tfc-20);
     left: 0;

@@ -35,20 +35,19 @@ const descriptionList = [
   },
   {
     label: '可配置加载提示组件显示模式',
-    value:
-      'this.setState({ lowerLoadingBoxPosition: "footer/absolute/fixed" })',
+    value: 'this.setState({ lowerLoadingPosition: "footer/absolute/fixed" })',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: '自定义外部提示加载组件',
-    value: '重载覆写函数 buildLowerLoadingBox = () => { return null; }',
+    value: '重载覆写函数 buildLowerLoadingSuspendBox = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: '自定义底部提示加载组件',
-    value: '重载覆写函数 buildLowerLoadingBoxBottom = () => { return null; }',
+    value: '重载覆写函数 buildLowerLoadingFooterBox = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
@@ -79,7 +78,7 @@ export default class Index extends ContentPageBase {
       ...{
         scrollView: true,
         enableScrollLowerLoad: true,
-        lowerLoadingBoxPosition: 'fixed',
+        lowerLoadingPosition: 'fixed',
         loadApiPath: 'news/pageList',
       },
     };
