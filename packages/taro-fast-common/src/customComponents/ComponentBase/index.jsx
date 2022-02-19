@@ -105,23 +105,7 @@ class ComponentBase extends Component {
   }
 
   componentDidMount() {
-    this.checkPermission();
-
-    this.doWorkBeforeAdjustDidMount();
-
-    this.doWorkAdjustDidMount();
-
-    this.doWorkAfterAdjustDidMount();
-
-    this.doWorkAfterDidMount();
-
-    if (this.loadRemoteRequestAfterMount) {
-      this.doLoadRemoteRequest();
-    }
-
-    this.doOtherRemoteRequest();
-
-    this.doOtherWorkAfterDidMount();
+    this.doDidMountTask();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -190,6 +174,26 @@ class ComponentBase extends Component {
   componentDidHide() {
     this.doWorkWhenComponentHide();
   }
+
+  doDidMountTask = () => {
+    this.checkPermission();
+
+    this.doWorkBeforeAdjustDidMount();
+
+    this.doWorkAdjustDidMount();
+
+    this.doWorkAfterAdjustDidMount();
+
+    this.doWorkAfterDidMount();
+
+    if (this.loadRemoteRequestAfterMount) {
+      this.doLoadRemoteRequest();
+    }
+
+    this.doOtherRemoteRequest();
+
+    this.doOtherWorkAfterDidMount();
+  };
 
   checkPermission = () => {};
 

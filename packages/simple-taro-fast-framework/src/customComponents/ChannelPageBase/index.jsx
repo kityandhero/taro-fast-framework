@@ -21,14 +21,6 @@ export default class ChannelPageBase extends PageWrapper {
     };
   }
 
-  doWorkAdjustDidMount = () => {
-    const that = this;
-
-    setTimeout(() => {
-      that.setState({ spin: false });
-    }, 800);
-  };
-
   buildData = () => {
     return { title: '', icon: '', list: [] };
   };

@@ -2,6 +2,16 @@ import { recordObject } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 
 export default class PageWrapper extends AuthorizationWrapper {
+  loadRemoteRequestDelay = 10000;
+
+  useFadeSpinWrapper = true;
+
+  useSimulationFadeSpin = true;
+
+  simulationFadeSpinDuration = 800;
+
+  hideFadeSpinWrapperAfterLoadRemoteRequest = false;
+
   showRenderCountInConsole = false;
 
   loadRemoteRequestAfterMount = false;

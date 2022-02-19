@@ -21,14 +21,6 @@ export default class ContentPageBase extends PageWrapper {
     };
   }
 
-  doWorkAdjustDidMount = () => {
-    const that = this;
-
-    setTimeout(() => {
-      that.setState({ spin: false });
-    }, 800);
-  };
-
   renderContent = () => {
     return null;
   };

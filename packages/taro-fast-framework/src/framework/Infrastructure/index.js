@@ -18,6 +18,14 @@ import {
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 class Infrastructure extends ComponentBase {
+  useFadeSpinWrapper = false;
+
+  useSimulationFadeSpin = false;
+
+  hideFadeSpinWrapperAfterLoadRemoteRequest = false;
+
+  simulationFadeSpinDuration = 300;
+
   urlParamsCore = null;
 
   viewStyle = {};
@@ -29,7 +37,7 @@ class Infrastructure extends ComponentBase {
       ...this.state,
       ...underlyingState,
       ...{
-        spin: false,
+        spin: true,
         scrollView: false,
         enablePullDownRefresh: false,
         enableCustomPullDown: false,
@@ -56,6 +64,43 @@ class Infrastructure extends ComponentBase {
   static getDerivedStateFromProps(nextProps, prevState) {
     return null;
   }
+
+  doDidMountTask = () => {
+    this.doSimulationFadeSpin();
+
+    this.checkPermission();
+
+    this.doWorkBeforeAdjustDidMount();
+
+    this.doWorkAdjustDidMount();
+
+    this.doWorkAfterAdjustDidMount();
+
+    this.doWorkAfterDidMount();
+
+    if (this.loadRemoteRequestAfterMount) {
+      this.doLoadRemoteRequest();
+    }
+
+    this.doOtherRemoteRequest();
+
+    this.doOtherWorkAfterDidMount();
+  };
+
+  /**
+   * 执行模拟渐显加载效果, 该方法不要覆写
+   */
+  doSimulationFadeSpin = () => {
+    const { spin } = this.state;
+
+    const that = this;
+
+    if (this.useSimulationFadeSpin && spin) {
+      setTimeout(() => {
+        that.setState({ spin: false });
+      }, this.simulationFadeSpinDuration);
+    }
+  };
 
   getUrlParams() {
     if (stringIsNullOrWhiteSpace(this.urlParamsCore)) {
@@ -175,9 +220,12 @@ class Infrastructure extends ComponentBase {
   };
 
   showScrollLowerLoading = () => {
-    const { firstLoadSuccess, dataLoading } = this.state;
+    const { enablePullDownRefresh, firstLoadSuccess, dataLoading } = this.state;
 
-    return firstLoadSuccess && dataLoading;
+    return (
+      (!firstLoadSuccess && !enablePullDownRefresh && dataLoading) ||
+      (firstLoadSuccess && dataLoading)
+    );
   };
 
   showEmptyPlaceholder = () => {
@@ -248,47 +296,59 @@ class Infrastructure extends ComponentBase {
       lowerLoadingPosition,
     } = this.state;
 
+    const vw = (
+      <VariableView
+        style={this.viewStyle}
+        scroll={scrollView}
+        height={height}
+        enablePullDownRefresh={enablePullDownRefresh}
+        enableScrollLowerLoad={enableScrollLowerLoad}
+        enableCustomPullDown={enableCustomPullDown}
+        enableEmptyPlaceholder={enableEmptyPlaceholder}
+        refreshColor={refreshColor}
+        refreshBackgroundColor={refreshBackgroundColor}
+        scrollWithAnimation={scrollWithAnimation}
+        scrollAnchoring={scrollAnchoring}
+        scrollEnhanced={scrollEnhanced}
+        scrollBounces={scrollBounces}
+        scrollShowScrollbar={scrollShowScrollbar}
+        scrollFastDeceleration={scrollFastDeceleration}
+        scrollRefresherThreshold={scrollRefresherThreshold}
+        scrollRefresherDefaultStyle={scrollRefresherDefaultStyle}
+        scrollRefresherBackground={scrollRefresherBackground}
+        onRefresh={this.onRefresh}
+        onScrollLowerLoad={this.onScrollLowerLoad}
+        refreshing={this.showScrollRefreshing()}
+        lowerLoading={this.showScrollLowerLoading()}
+        needNextLoad={this.judgeNeedNextLoad()}
+        emptyPlaceholderVisible={this.showEmptyPlaceholder()}
+        lowerLoadingPosition={lowerLoadingPosition}
+        refreshingBox={this.buildRefreshingBox()}
+        lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
+        lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
+        emptyPlaceholder={this.buildEmptyPlaceholder()}
+        upperBox={this.buildUpperBox()}
+      >
+        {this.renderFurther()}
+      </VariableView>
+    );
+
+    if (this.useFadeSpinWrapper) {
+      return (
+        <Spin fullscreen spin={spin}>
+          <Notification />
+
+          <FadeView show={!spin}>{vw}</FadeView>
+        </Spin>
+      );
+    }
+
     return (
-      <Spin fullscreen spin={spin}>
+      <>
         <Notification />
 
-        <FadeView show={!spin}>
-          <VariableView
-            style={this.viewStyle}
-            scroll={scrollView}
-            height={height}
-            enablePullDownRefresh={enablePullDownRefresh}
-            enableScrollLowerLoad={enableScrollLowerLoad}
-            enableCustomPullDown={enableCustomPullDown}
-            enableEmptyPlaceholder={enableEmptyPlaceholder}
-            refreshColor={refreshColor}
-            refreshBackgroundColor={refreshBackgroundColor}
-            scrollWithAnimation={scrollWithAnimation}
-            scrollAnchoring={scrollAnchoring}
-            scrollEnhanced={scrollEnhanced}
-            scrollBounces={scrollBounces}
-            scrollShowScrollbar={scrollShowScrollbar}
-            scrollFastDeceleration={scrollFastDeceleration}
-            scrollRefresherThreshold={scrollRefresherThreshold}
-            scrollRefresherDefaultStyle={scrollRefresherDefaultStyle}
-            scrollRefresherBackground={scrollRefresherBackground}
-            onRefresh={this.onRefresh}
-            onScrollLowerLoad={this.onScrollLowerLoad}
-            refreshing={this.showScrollRefreshing()}
-            lowerLoading={this.showScrollLowerLoading()}
-            needNextLoad={this.judgeNeedNextLoad()}
-            emptyPlaceholderVisible={this.showEmptyPlaceholder()}
-            lowerLoadingPosition={lowerLoadingPosition}
-            refreshingBox={this.buildRefreshingBox()}
-            lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
-            lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
-            emptyPlaceholder={this.buildEmptyPlaceholder()}
-            upperBox={this.buildUpperBox()}
-          >
-            {this.renderFurther()}
-          </VariableView>
-        </FadeView>
-      </Spin>
+        {vw}
+      </>
     );
   }
 }

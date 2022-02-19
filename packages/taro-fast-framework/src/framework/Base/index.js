@@ -19,18 +19,44 @@ import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
+  /**
+   * 初始化时加载数据请求的延迟时间
+   */
+  loadRemoteRequestDelay = 0;
+
+  /**
+   * 分页请求模式
+   */
   pagingLoadMode = false;
 
+  /**
+   * 页码
+   */
   pageNo = 0;
 
+  /**
+   * 页条目数
+   */
   pageSize = 10;
 
+  /**
+   * 总条目数, 来自数据接口
+   */
   total = 10;
 
+  /**
+   * 最后一次接口请求的参数缓存
+   */
   lastRequestingData = { type: '', payload: {} };
 
+  /**
+   * 数据追加模式, 用于分页请求模式下是否将请求的数据附加到前次数据之后, 下拉刷新时设为 true, 分页展示时设为 false
+   */
   useListDataAttachMode = true;
 
+  /**
+   * 追加数据时是否清除前次数据, 用于内部控制, 不要覆盖此值
+   */
   clearListDataBeforeAttach = false;
 
   // 该方法必须重载覆盖
@@ -49,11 +75,40 @@ class Base extends Infrastructure {
     };
   };
 
+  /**
+   * 执行初始化远程请求
+   */
   doLoadRemoteRequest = () => {
-    if (this.pagingLoadMode) {
-      this.loadNextPage({});
+    const { spin } = this;
+
+    const that = this;
+
+    if (that.pagingLoadMode) {
+      that.loadNextPage({
+        delay: that.loadRemoteRequestDelay,
+        callback: () => {
+          if (
+            that.useFadeSpinWrapper &&
+            that.hideFadeSpinWrapperAfterLoadRemoteRequest &&
+            spin
+          ) {
+            this.setState({ spin: false });
+          }
+        },
+      });
     } else {
-      this.initLoad({});
+      that.initLoad({
+        delay: that.loadRemoteRequestDelay,
+        callback: () => {
+          if (
+            that.useFadeSpinWrapper &&
+            that.hideFadeSpinWrapperAfterLoadRemoteRequest &&
+            spin
+          ) {
+            this.setState({ spin: false });
+          }
+        },
+      });
     }
   };
 

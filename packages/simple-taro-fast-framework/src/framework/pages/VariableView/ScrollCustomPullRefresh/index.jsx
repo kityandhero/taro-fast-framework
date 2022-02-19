@@ -60,7 +60,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        spin: false,
         scrollView: true,
         enablePullDownRefresh: true,
         enableCustomPullDown: true,
