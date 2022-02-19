@@ -63,8 +63,6 @@ export default class Index extends ContentPageBase {
     name: '滚动视图 - 下拉刷新',
   };
 
-  loadRemoteRequestAfterMount = true;
-
   /**
    * 使用分页加载模式，该模式下自动附加页码等参数以及使用相关交互效果
    */
@@ -94,12 +92,6 @@ export default class Index extends ContentPageBase {
 
   onScrollLowerLoad = () => {
     this.loadNextPage({});
-  };
-
-  showScrollLowerLoading = () => {
-    const { firstLoadSuccess, dataLoading } = this.state;
-
-    return firstLoadSuccess && dataLoading;
   };
 
   renderContent = () => {

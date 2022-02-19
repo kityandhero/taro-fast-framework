@@ -173,13 +173,13 @@ class Base extends Infrastructure {
 
     try {
       if ((loadApiPath || '') === '') {
-        const text = 'loadApiPath需要配置';
+        // const text = 'loadApiPath需要配置';
 
-        showRuntimeError({
-          message: text,
-        });
+        // showRuntimeError({
+        //   message: text,
+        // });
 
-        recordObject(this);
+        // recordObject(this);
 
         this.setState({
           dataLoading: false,

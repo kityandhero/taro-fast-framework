@@ -37,8 +37,6 @@ export default class Index extends ContentPageBase {
     name: '交互操作',
   };
 
-  loadRemoteRequestAfterMount = true;
-
   constructor(props) {
     super(props);
 

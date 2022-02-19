@@ -2,7 +2,7 @@ import { recordObject } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 
 export default class PageWrapper extends AuthorizationWrapper {
-  loadRemoteRequestDelay = 10000;
+  loadRemoteRequestDelay = 100;
 
   useFadeSpinWrapper = true;
 
@@ -14,7 +14,7 @@ export default class PageWrapper extends AuthorizationWrapper {
 
   showRenderCountInConsole = false;
 
-  loadRemoteRequestAfterMount = false;
+  // loadRemoteRequestAfterMount = false;
 
   reloadRemoteMetaData = () => {
     const { dispatch } = this.props;

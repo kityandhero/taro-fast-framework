@@ -37,8 +37,6 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
-  loadRemoteRequestAfterMount = true;
-
   constructor(props) {
     super(props);
 

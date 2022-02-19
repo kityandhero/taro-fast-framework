@@ -15,7 +15,7 @@ import {
   Spin,
   FadeView,
 } from 'taro-fast-component/es/customComponents';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 class Infrastructure extends ComponentBase {
   useFadeSpinWrapper = false;
@@ -66,8 +66,6 @@ class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
-    this.doSimulationFadeSpin();
-
     this.checkPermission();
 
     this.doWorkBeforeAdjustDidMount();
@@ -79,7 +77,9 @@ class Infrastructure extends ComponentBase {
     this.doWorkAfterDidMount();
 
     if (this.loadRemoteRequestAfterMount) {
-      this.doLoadRemoteRequest();
+      this.doSimulationFadeSpin(this.doLoadRemoteRequest);
+    } else {
+      this.doSimulationFadeSpin();
     }
 
     this.doOtherRemoteRequest();
@@ -90,15 +90,23 @@ class Infrastructure extends ComponentBase {
   /**
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
-  doSimulationFadeSpin = () => {
+  doSimulationFadeSpin = (callback = null) => {
     const { spin } = this.state;
 
     const that = this;
 
-    if (this.useSimulationFadeSpin && spin) {
+    if (that.useSimulationFadeSpin && spin) {
       setTimeout(() => {
-        that.setState({ spin: false });
-      }, this.simulationFadeSpinDuration);
+        that.setState({ spin: false }, () => {
+          if (isFunction(callback)) {
+            callback();
+          }
+        });
+      }, that.simulationFadeSpinDuration);
+    } else {
+      if (isFunction(callback)) {
+        callback();
+      }
     }
   };
 

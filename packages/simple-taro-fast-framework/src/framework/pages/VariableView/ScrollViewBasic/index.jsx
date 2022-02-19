@@ -36,10 +36,6 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  buildUpperBox = () => {
-    return 1111;
-  };
-
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>

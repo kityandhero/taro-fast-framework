@@ -52,8 +52,6 @@ export default class Index extends ContentPageBase {
     name: '滚动视图 - 下拉刷新',
   };
 
-  loadRemoteRequestAfterMount = true;
-
   constructor(props) {
     super(props);
 
