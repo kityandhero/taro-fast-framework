@@ -359,9 +359,11 @@ class VariableView extends BaseComponent {
     }
 
     return (
-      <CenterBox>
-        {emptyPlaceholder || <Empty description="暂无数据" />}
-      </CenterBox>
+      <View style={{ margin: 'var(--tfc-20) 0' }}>
+        <CenterBox>
+          {emptyPlaceholder || <Empty description="暂无数据" />}
+        </CenterBox>
+      </View>
     );
   };
 

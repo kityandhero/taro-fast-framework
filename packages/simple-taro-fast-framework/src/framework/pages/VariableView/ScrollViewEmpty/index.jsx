@@ -1,8 +1,14 @@
 import { connect } from 'react-redux';
-import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Space,
+  DataGrid,
+  HelpBox,
+} from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import Header from '../../../../customComponents/Header';
 
 const style = {
   ...{
@@ -13,8 +19,14 @@ const style = {
 
 const descriptionList = [
   {
-    label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    label: '启用空数据占位',
+    value: 'this.setState({enableEmptyPlaceholder: true})',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '自定义占位内容',
+    value: '重载覆写函数 buildEmptyPlaceholder = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
@@ -25,11 +37,6 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
-  headerData = {
-    id: 'ScrollViewEmpty',
-    name: '滚动视图',
-  };
-
   loadRemoteRequestAfterMount = true;
 
   constructor(props) {
@@ -53,6 +60,18 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
+  buildUpperBox = () => {
+    const { id, name } = {
+      ...{
+        id: 'EmptyPlaceholder',
+        name: '空数据占位',
+      },
+      ...this.headerData,
+    };
+
+    return <Header title={`${id} ${name}`}></Header>;
+  };
+
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
@@ -64,6 +83,19 @@ export default class Index extends ContentPageBase {
             size="small"
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+
+        <Card header="备注" style={style} headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            useBackground={false}
+            list={[
+              {
+                text: '空数据占位会趁现在容器渲染子组件 children 的上方位置',
+              },
+            ]}
           />
         </Card>
       </Space>
