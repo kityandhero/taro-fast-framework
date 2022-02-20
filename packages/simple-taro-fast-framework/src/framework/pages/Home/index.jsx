@@ -8,9 +8,9 @@ const o = {
   title: '快速开发框架',
   list: [
     {
-      id: 'VariableView',
-      name: '视图容器',
-      path: pathCollection.framework.variableView.path,
+      id: 'PageExtend',
+      name: '扩展页面基架',
+      path: pathCollection.framework.pageExtend.path,
     },
   ],
 };

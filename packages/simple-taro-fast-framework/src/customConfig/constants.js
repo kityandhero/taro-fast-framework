@@ -223,34 +223,40 @@ const frameworkPathCollection = {
   home: {
     path: '/framework/pages/home/index',
   },
-  variableView: {
-    path: '/framework/pages/variableView/index',
-    normalMode: {
-      path: '/framework/pages/variableView/normalMode/index',
+  pageExtend: {
+    path: '/framework/pages/pageExtend/index',
+    builtInEffect: {
+      path: '/framework/pages/pageExtend/builtInEffect/index',
+      buildEmptyPlaceholder: {
+        path: '/framework/pages/pageExtend/builtInEffect/buildEmptyPlaceholder/index',
+      },
     },
-    scrollMode: {
-      path: '/framework/pages/variableView/scrollMode/index',
+    normal: {
+      path: '/framework/pages/pageExtend/normal/index',
+      basic: {
+        path: '/framework/pages/pageExtend/normal/basic/index',
+      },
     },
-    normalView: {
-      path: '/framework/pages/variableView/normalView/index',
-    },
-    scrollViewBasic: {
-      path: '/framework/pages/variableView/scrollViewBasic/index',
-    },
-    scrollViewUpperBox: {
-      path: '/framework/pages/variableView/scrollViewUpperBox/index',
-    },
-    scrollViewEmpty: {
-      path: '/framework/pages/variableView/scrollViewEmpty/index',
-    },
-    scrollPullRefresh: {
-      path: '/framework/pages/variableView/scrollPullRefresh/index',
-    },
-    scrollCustomPullRefresh: {
-      path: '/framework/pages/variableView/scrollCustomPullRefresh/index',
-    },
-    scrollLowerLoad: {
-      path: '/framework/pages/variableView/scrollLowerLoad/index',
+    scroll: {
+      path: '/framework/pages/pageExtend/scroll/index',
+      basic: {
+        path: '/framework/pages/pageExtend/scroll/basic/index',
+      },
+      upperBox: {
+        path: '/framework/pages/pageExtend/scroll/upperBox/index',
+      },
+      emptyPlaceholder: {
+        path: '/framework/pages/pageExtend/scroll/emptyPlaceholder/index',
+      },
+      pullRefresh: {
+        path: '/framework/pages/pageExtend/scroll/pullRefresh/index',
+      },
+      customPullRefresh: {
+        path: '/framework/pages/pageExtend/scroll/customPullRefresh/index',
+      },
+      lowerLoad: {
+        path: '/framework/pages/pageExtend/scroll/lowerLoad/index',
+      },
     },
   },
 };

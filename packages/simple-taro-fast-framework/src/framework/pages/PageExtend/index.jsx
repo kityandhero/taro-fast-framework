@@ -8,14 +8,19 @@ const o = {
   title: '内置视图',
   list: [
     {
-      id: 'NormalMode',
-      name: '普通视图模式',
-      path: pathCollection.framework.variableView.normalMode.path,
+      id: 'BuiltInEffect',
+      name: '内置功能',
+      path: pathCollection.framework.pageExtend.builtInEffect.path,
     },
     {
-      id: 'ScrollMode',
-      name: '滚动视图模式',
-      path: pathCollection.framework.variableView.scrollMode.path,
+      id: 'Normal',
+      name: '普通视图',
+      path: pathCollection.framework.pageExtend.normal.path,
+    },
+    {
+      id: 'Scroll',
+      name: '滚动视图',
+      path: pathCollection.framework.pageExtend.scroll.path,
     },
   ],
 };

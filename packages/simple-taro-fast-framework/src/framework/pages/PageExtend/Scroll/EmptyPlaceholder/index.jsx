@@ -1,16 +1,17 @@
-import { View } from '@tarojs/components';
-
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { connect } from 'react-redux';
 import {
   Card,
   Space,
   DataGrid,
-  CenterBox,
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import {
+  cardHeaderStyle,
+  cardStyle,
+} from '../../../../../customConfig/constants';
+import ContentPageBase from '../../../../../customComponents/ContentPageBase';
+import Header from '../../../../../customComponents/Header';
 
 const style = {
   ...{
@@ -21,25 +22,24 @@ const style = {
 
 const descriptionList = [
   {
-    label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    label: '启用空数据占位',
+    value: 'this.setState({enableEmptyPlaceholder: true})',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: '配置UpperBox区域渲染',
-    value: '重载渲染函数 buildUpperBox = () => { return <View></View> }',
+    label: '自定义占位内容',
+    value: '重载覆写函数 buildEmptyPlaceholder = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
 ];
 
+@connect(({ news, global }) => ({
+  news,
+  global,
+}))
 export default class Index extends ContentPageBase {
-  headerData = {
-    id: 'UpperBox',
-    name: '使用上部固定区域',
-  };
-
   constructor(props) {
     super(props);
 
@@ -47,16 +47,31 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         scrollView: true,
+        enableEmptyPlaceholder: true,
+        enableInitialActivityIndicator: true,
+        loadApiPath: 'news/singleListEmpty',
       },
     };
   }
 
+  getApiData = (props) => {
+    const {
+      news: { data },
+    } = props;
+
+    return data;
+  };
+
   buildUpperBox = () => {
-    return (
-      <View style={{ height: transformSize(120), backgroundColor: 'green' }}>
-        <CenterBox>UpperBox</CenterBox>
-      </View>
-    );
+    const { id, name } = {
+      ...{
+        id: 'EmptyPlaceholder',
+        name: '空数据占位',
+      },
+      ...this.headerData,
+    };
+
+    return <Header title={`${id} ${name}`}></Header>;
   };
 
   renderContent = () => {
@@ -80,15 +95,11 @@ export default class Index extends ContentPageBase {
             useBackground={false}
             list={[
               {
-                text: 'UpperBox区域不参与页面滚动',
+                text: '空数据占位会趁现在容器渲染子组件 children 的上方位置',
               },
             ]}
           />
         </Card>
-
-        <View style={{ height: transformSize(800), backgroundColor: '#ccc' }}>
-          <CenterBox>占位区域</CenterBox>
-        </View>
       </Space>
     );
   };

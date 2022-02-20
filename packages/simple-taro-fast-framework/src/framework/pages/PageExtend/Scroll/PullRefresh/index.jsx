@@ -11,8 +11,11 @@ import {
   FadeInBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import {
+  cardHeaderStyle,
+  cardStyle,
+} from '../../../../../customConfig/constants';
+import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 
 const style = {
   ...{

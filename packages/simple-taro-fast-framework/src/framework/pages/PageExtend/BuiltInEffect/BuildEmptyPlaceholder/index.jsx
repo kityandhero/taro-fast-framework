@@ -1,7 +1,15 @@
-import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  Space,
+  DataGrid,
+  Divider,
+} from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import {
+  cardHeaderStyle,
+  cardStyle,
+} from '../../../../../customConfig/constants';
+import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 
 const style = {
   ...{
@@ -12,8 +20,8 @@ const style = {
 
 const descriptionList = [
   {
-    label: '使用普通视图 [普通视图为默认视图]',
-    value: 'this.setState({scrollView: false})',
+    label: '支持自定义重载',
+    value: '重载覆写函数 buildEmptyPlaceholder = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
@@ -21,13 +29,21 @@ const descriptionList = [
 
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'Normal',
-    name: '普通视图',
+    id: 'buildEmptyPlaceholder',
+    name: '',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
+        {this.buildEmptyPlaceholder({})}
+
+        <Divider />
+
+        {this.buildEmptyPlaceholder({
+          description: '还没有数据哦',
+        })}
+
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
             list={descriptionList}

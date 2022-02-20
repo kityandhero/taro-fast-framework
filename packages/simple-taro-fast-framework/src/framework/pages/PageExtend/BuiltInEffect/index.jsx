@@ -8,9 +8,10 @@ const o = {
   title: '普通视图',
   list: [
     {
-      id: 'Normal',
-      name: '普通模式',
-      path: pathCollection.framework.variableView.normalView.path,
+      id: 'buildEmptyPlaceholder',
+      name: '',
+      path: pathCollection.framework.pageExtend.builtInEffect
+        .buildEmptyPlaceholder.path,
     },
   ],
 };
