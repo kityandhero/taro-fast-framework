@@ -49,6 +49,7 @@ export default class Index extends ContentPageBase {
           <Divider />
 
           {this.buildInitialActivityIndicator({
+            type: 'ring',
             description: '正在努力加载哦',
           })}
         </Card>
