@@ -228,6 +228,8 @@ class VariableView extends BaseComponent {
           onRefresh();
 
           needRefreshData = { needRefresh: false };
+
+          this.needRefresh = false;
         }
       }
 
