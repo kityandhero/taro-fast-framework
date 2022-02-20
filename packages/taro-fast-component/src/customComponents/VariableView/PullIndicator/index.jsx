@@ -27,6 +27,8 @@ class PullIndicator extends BaseComponent {
 
   currentPullAnimalStep = 1;
 
+  currentMove = 0;
+
   constructor(props) {
     super(props);
 
@@ -51,8 +53,11 @@ class PullIndicator extends BaseComponent {
       const { maxMoveY, moveY, rotate, needRefresh } = options;
       const { needRefresh: needRefreshPrev } = this.state;
 
+      this.maxMoveY = maxMoveY;
+
       if (moveY === 0) {
         this.currentPullAnimalStep = 1;
+        this.currentMove = 0;
 
         this.setState({
           ...{
@@ -75,6 +80,7 @@ class PullIndicator extends BaseComponent {
           (!isUndefined(needRefresh) && needRefreshPrev != needRefresh)
         ) {
           this.currentPullAnimalStep = nextStep;
+          this.currentMove = moveY;
 
           this.setState({
             ...{
@@ -138,13 +144,14 @@ class PullIndicator extends BaseComponent {
     );
   };
 
-  render() {
+  renderFurther() {
     const {
       className,
       enablePullDownRefresh,
       useCustomPullDown,
       useRefreshingBox,
       refreshing,
+      maxMove,
     } = this.props;
     const {
       refreshBoxAnimationData,
@@ -165,18 +172,7 @@ class PullIndicator extends BaseComponent {
               )}
             >
               <CenterBox>
-                {!needRefresh ? (
-                  <View
-                    className={classNames(
-                      `${classPrefix}__refresh-box__pull-refresh__iconBox`,
-                    )}
-                    animation={refreshBoxPreloadAnimationData}
-                  >
-                    <IconLoading3 size={46} />
-                  </View>
-                ) : null}
-
-                {needRefresh ? (
+                {needRefresh && this.currentMove === maxMove ? (
                   <View
                     className={classNames(
                       `${classPrefix}__refresh-box__pull-refresh__iconBox`,
@@ -190,7 +186,16 @@ class PullIndicator extends BaseComponent {
                       borderWidth={2}
                     />
                   </View>
-                ) : null}
+                ) : (
+                  <View
+                    className={classNames(
+                      `${classPrefix}__refresh-box__pull-refresh__iconBox`,
+                    )}
+                    animation={refreshBoxPreloadAnimationData}
+                  >
+                    <IconLoading3 size={46} />
+                  </View>
+                )}
               </CenterBox>
             </View>
           </View>

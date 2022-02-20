@@ -543,6 +543,7 @@ class VariableView extends BaseComponent {
               useRefreshingBox={useRefreshingBox}
               refreshing={refreshing}
               refreshingBox={refreshingBox}
+              maxMove={this.touchMoveMaxY / this.calculatePercentage}
             />
           </View>
 
