@@ -139,8 +139,13 @@ class PullIndicator extends BaseComponent {
   };
 
   render() {
-    const { className, enablePullDownRefresh, useRefreshingBox, refreshing } =
-      this.props;
+    const {
+      className,
+      enablePullDownRefresh,
+      useCustomPullDown,
+      useRefreshingBox,
+      refreshing,
+    } = this.props;
     const {
       refreshBoxAnimationData,
       needRefresh,
@@ -149,43 +154,47 @@ class PullIndicator extends BaseComponent {
 
     return (
       <View className={className}>
-        <View
-          className={classNames(`${classPrefix}__refresh-box`)}
-          animation={refreshBoxAnimationData}
-        >
+        {useCustomPullDown ? (
           <View
-            className={classNames(`${classPrefix}__refresh-box__pull-refresh`)}
+            className={classNames(`${classPrefix}__refresh-box`)}
+            animation={refreshBoxAnimationData}
           >
-            <CenterBox>
-              {!needRefresh ? (
-                <View
-                  className={classNames(
-                    `${classPrefix}__refresh-box__pull-refresh__iconBox`,
-                  )}
-                  animation={refreshBoxPreloadAnimationData}
-                >
-                  <IconLoading3 size={46} />
-                </View>
-              ) : null}
-
-              {needRefresh ? (
-                <View
-                  className={classNames(
-                    `${classPrefix}__refresh-box__pull-refresh__iconBox`,
-                  )}
-                >
-                  <IconLoading
+            <View
+              className={classNames(
+                `${classPrefix}__refresh-box__pull-refresh`,
+              )}
+            >
+              <CenterBox>
+                {!needRefresh ? (
+                  <View
                     className={classNames(
-                      `${classPrefix}__refresh-box__pull-refresh__iconBox__icon`,
+                      `${classPrefix}__refresh-box__pull-refresh__iconBox`,
                     )}
-                    size={42}
-                    borderWidth={2}
-                  />
-                </View>
-              ) : null}
-            </CenterBox>
+                    animation={refreshBoxPreloadAnimationData}
+                  >
+                    <IconLoading3 size={46} />
+                  </View>
+                ) : null}
+
+                {needRefresh ? (
+                  <View
+                    className={classNames(
+                      `${classPrefix}__refresh-box__pull-refresh__iconBox`,
+                    )}
+                  >
+                    <IconLoading
+                      className={classNames(
+                        `${classPrefix}__refresh-box__pull-refresh__iconBox__icon`,
+                      )}
+                      size={42}
+                      borderWidth={2}
+                    />
+                  </View>
+                ) : null}
+              </CenterBox>
+            </View>
           </View>
-        </View>
+        ) : null}
 
         {enablePullDownRefresh ? (
           <Transition

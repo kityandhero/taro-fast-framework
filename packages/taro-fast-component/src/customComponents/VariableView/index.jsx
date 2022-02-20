@@ -539,17 +539,16 @@ class VariableView extends BaseComponent {
           onTouchCancel={this.onViewTouchCancel}
           onTouchEnd={this.onViewTouchEnd}
         >
-          {useCustomPullDown ? (
-            <View className={classNames(`${classPrefix}__pull-indicator`)}>
-              <PullIndicator
-                id={this.refreshBoxId || ''}
-                enablePullDownRefresh={enablePullDownRefresh}
-                useRefreshingBox={useRefreshingBox}
-                refreshing={refreshing}
-                refreshingBox={refreshingBox}
-              />
-            </View>
-          ) : null}
+          <View className={classNames(`${classPrefix}__pull-indicator`)}>
+            <PullIndicator
+              id={this.refreshBoxId || ''}
+              enablePullDownRefresh={enablePullDownRefresh}
+              useCustomPullDown={useCustomPullDown}
+              useRefreshingBox={useRefreshingBox}
+              refreshing={refreshing}
+              refreshingBox={refreshingBox}
+            />
+          </View>
 
           {enableScrollLowerLoad &&
           (lowerLoadingPosition === 'absolute' ||
