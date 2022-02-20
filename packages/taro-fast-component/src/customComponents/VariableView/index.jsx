@@ -62,6 +62,7 @@ const defaultProps = {
   emptyPlaceholderVisible: false,
   emptyPlaceholder: null,
   initialActivityIndicatorVisible: false,
+  initialActivityIndicator: null,
   upperBox: null,
   style: {},
   onRefresh: null,
@@ -310,7 +311,7 @@ class VariableView extends BaseComponent {
     }
   };
 
-  buildScrollEmptyPlaceholder = () => {
+  buildEmptyPlaceholder = () => {
     const {
       enableEmptyPlaceholder,
       emptyPlaceholderVisible,
@@ -326,11 +327,13 @@ class VariableView extends BaseComponent {
     }
 
     return (
-      <View style={{ margin: 'var(--tfc-20) 0' }}>
-        <CenterBox>
-          {emptyPlaceholder || <Empty description="暂无数据" />}
-        </CenterBox>
-      </View>
+      emptyPlaceholder || (
+        <View style={{ margin: 'var(--tfc-20) 0' }}>
+          <CenterBox>
+            <Empty description="暂无数据" />
+          </CenterBox>
+        </View>
+      )
     );
   };
 
@@ -403,12 +406,28 @@ class VariableView extends BaseComponent {
   };
 
   buildInitialActivityIndicator = () => {
+    const {
+      enableInitialActivityIndicator,
+      initialActivityIndicatorVisible,
+      initialActivityIndicator,
+    } = this.props;
+
+    if (!enableInitialActivityIndicator) {
+      return null;
+    }
+
+    if (!initialActivityIndicatorVisible) {
+      return null;
+    }
+
     return (
-      <FadeInBox duration={200} style={{ height: transformSize(340) }}>
-        <CenterBox>
-          <ActivityIndicator type="comet" content="加载中" />
-        </CenterBox>
-      </FadeInBox>
+      initialActivityIndicator || (
+        <FadeInBox duration={200} style={{ height: transformSize(340) }}>
+          <CenterBox>
+            <ActivityIndicator type="comet" content="加载中" />
+          </CenterBox>
+        </FadeInBox>
+      )
     );
   };
 
@@ -419,7 +438,6 @@ class VariableView extends BaseComponent {
       enablePullDownRefresh,
       enableScrollLowerLoad,
       enableCustomPullDown,
-      enableInitialActivityIndicator,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
@@ -441,7 +459,6 @@ class VariableView extends BaseComponent {
       lowerLoadingBorder,
       lowerLoadingPosition,
       useRefreshingBox,
-      initialActivityIndicatorVisible,
       style,
       children,
     } = this.props;
@@ -509,11 +526,9 @@ class VariableView extends BaseComponent {
           onRefresherRefresh={this.onScrollRefresherRefresh}
         >
           <View>
-            {enableInitialActivityIndicator && initialActivityIndicatorVisible
-              ? this.buildInitialActivityIndicator()
-              : null}
+            {this.buildInitialActivityIndicator()}
 
-            {this.buildScrollEmptyPlaceholder()}
+            {this.buildEmptyPlaceholder()}
 
             {children}
 
@@ -605,9 +620,9 @@ class VariableView extends BaseComponent {
           minHeight: height,
         }}
       >
-        {enableInitialActivityIndicator && initialActivityIndicatorVisible
-          ? this.buildInitialActivityIndicator()
-          : null}
+        {this.buildInitialActivityIndicator()}
+
+        {this.buildEmptyPlaceholder()}
 
         {children}
       </View>

@@ -1,9 +1,11 @@
 import Taro from '@tarojs/taro';
+import { View } from '@tarojs/components';
 
 import {
   showErrorMessage,
   stringIsNullOrWhiteSpace,
   navigateTo,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {
@@ -14,6 +16,10 @@ import {
   VariableView,
   Spin,
   FadeView,
+  CenterBox,
+  ActivityIndicator,
+  FadeInBox,
+  Empty,
 } from 'taro-fast-component/es/customComponents';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -272,8 +278,25 @@ class Infrastructure extends ComponentBase {
     );
   };
 
-  buildEmptyPlaceholder = () => {
-    return null;
+  buildEmptyPlaceholder = ({ description = '暂无数据' }) => {
+    return (
+      <View style={{ margin: 'var(--tfc-20) 0' }}>
+        <CenterBox>
+          <Empty description={description} />
+        </CenterBox>
+      </View>
+    );
+  };
+
+  buildInitialActivityIndicator = ({
+    type = 'comet',
+    description = '加载中',
+  }) => {
+    <FadeInBox duration={200} style={{ height: transformSize(340) }}>
+      <CenterBox>
+        <ActivityIndicator type={type} content={description} />
+      </CenterBox>
+    </FadeInBox>;
   };
 
   buildUpperBox = () => {
@@ -360,8 +383,9 @@ class Infrastructure extends ComponentBase {
         refreshingBox={this.buildRefreshingBox()}
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
-        emptyPlaceholder={this.buildEmptyPlaceholder()}
+        emptyPlaceholder={this.buildEmptyPlaceholder({})}
         initialActivityIndicatorVisible={this.showInitialActivityIndicator()}
+        initialActivityIndicator={this.buildInitialActivityIndicator({})}
         upperBox={this.buildUpperBox()}
       >
         {this.renderFurther()}
