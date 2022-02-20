@@ -69,10 +69,6 @@ const defaultProps = {
 };
 
 class VariableView extends BaseComponent {
-  showRenderCountInConsole = true;
-
-  refreshBoxInitTop = -100;
-
   touchStartY = 0;
 
   touchEndY = 0;
