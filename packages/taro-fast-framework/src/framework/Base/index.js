@@ -351,9 +351,9 @@ class Base extends Infrastructure {
               const { metaListData: metaListDataPrev } = this.state;
 
               const metaListData = !this.pagingLoadMode
-                ? metaListData
+                ? [...metaListDataRemote]
                 : !this.useListDataAttachMode
-                ? metaListData
+                ? [...metaListDataRemote]
                 : this.clearListDataBeforeAttach
                 ? [...metaListDataRemote]
                 : [...metaListDataPrev, ...metaListDataRemote];
