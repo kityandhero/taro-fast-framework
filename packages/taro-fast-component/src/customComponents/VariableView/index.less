@@ -11,64 +11,12 @@
   position: relative;
   overflow: hidden;
 
-  &__refresh-box {
+  &__pull-indicator {
     position: absolute;
     top: calc(var(--tfc-72) * -1);
     width: 100%;
     height: var(--tfc-72);
     z-index: 10000;
-
-    &__pull-refresh {
-      &__iconBox {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: var(--tfc-6);
-        width: var(--tfc-60);
-        height: var(--tfc-60);
-        border-radius: 50%;
-        background-color: var(--refresh-background-color);
-        color: var(--refresh-color);
-        opacity: 0.92;
-
-        &__icon {
-          animation: tfc-spin 1.4s linear infinite;
-        }
-      }
-    }
-  }
-
-  &__refreshing-box {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 120;
-    background-color: transparent;
-
-    &__inner {
-      background-color: transparent;
-      margin: var(--tfc-20) var(--tfc-40);
-      display: flex;
-      align-content: center;
-      justify-content: center;
-
-      &__refreshing {
-        width: var(--tfc-280);
-        background-color: transparent;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-
-        &__inner {
-          opacity: 0.92;
-          background-color: var(--lower-loading-background-color);
-          border-radius: var(--tfc-10);
-          border: var(--lower-loading-border);
-          padding: var(--tfc-14) var(--tfc-24);
-        }
-      }
-    }
   }
 
   &__lower-loading-box {

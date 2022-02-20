@@ -1,3 +1,4 @@
+import { getGuid } from 'taro-fast-common/es/utils/tools';
 import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
@@ -32,8 +33,11 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         scrollView: true,
+        counter: 0,
       },
     };
+
+    this.targetId = getGuid();
   }
 
   renderContent = () => {

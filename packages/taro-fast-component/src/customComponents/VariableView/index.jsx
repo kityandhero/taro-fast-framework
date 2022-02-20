@@ -1,8 +1,8 @@
 import classNames from 'classnames';
+import Taro from '@tarojs/taro';
 import { ScrollView, View } from '@tarojs/components';
 
 import {
-  createAnimation,
   createSelectorQuery,
   getGuid,
   getRect,
@@ -14,7 +14,6 @@ import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
-import Icon from '../Icon';
 import CenterBox from '../CenterBox';
 import ActivityIndicator from '../ActivityIndicator';
 import Transition from '../Transition';
@@ -23,11 +22,11 @@ import Divider from '../Divider';
 import FlexBox from '../FlexBox';
 import FadeInBox from '../FadeInBox';
 
+import PullIndicator from './PullIndicator';
+
 import './index.less';
 
 const classPrefix = `tfc-variable-view`;
-
-const { IconLoading, IconLoading3 } = Icon;
 
 const defaultProps = {
   scroll: false,
@@ -42,6 +41,7 @@ const defaultProps = {
   scrollRefresherThreshold: 100,
   scrollRefresherDefaultStyle: '',
   scrollRefresherBackground: '',
+  refreshingBox: null,
   refreshColor: '',
   refreshBackgroundColor: '',
   refreshingBackgroundColor: '#dbd9d9',
@@ -69,9 +69,7 @@ const defaultProps = {
 };
 
 class VariableView extends BaseComponent {
-  refreshBoxAnimation = null;
-
-  refreshBoxPreloadAnimation = null;
+  showRenderCountInConsole = true;
 
   refreshBoxInitTop = -100;
 
@@ -86,18 +84,20 @@ class VariableView extends BaseComponent {
   /**
    *手指下拉操作记录
    */
-  touchMoveMaxY = 240;
+  touchMoveMaxY = 320;
 
   /**
    *下拉时的距离折算比例
    */
-  calculatePercentage = 3;
+  calculatePercentage = 4;
 
   scrollRefresherFreshing = false;
 
   refreshBoxId = '';
 
   scrollViewId = '';
+
+  needRefresh = false;
 
   constructor(props) {
     super(props);
@@ -106,10 +106,9 @@ class VariableView extends BaseComponent {
 
     this.state = {
       ...this.state,
-      refreshBoxAnimationData: null,
-      refreshBoxPreloadAnimationData: null,
-      showRefreshBackgroundBox: false,
-      scrollRefreshTriggered: false,
+      ...{
+        scrollRefreshTriggered: false,
+      },
     };
 
     this.refreshBoxId = getGuid();
@@ -165,38 +164,34 @@ class VariableView extends BaseComponent {
 
       let moveY = this.touchEndY - this.touchStartY;
 
-      if (moveY > 0) {
-        const { showRefreshBackgroundBox } = this.state;
+      moveY = moveY > this.touchMoveMaxY ? this.touchMoveMaxY : moveY;
 
-        if (!showRefreshBackgroundBox) {
-          this.setState({ showRefreshBackgroundBox: true });
+      let needRefreshData = {};
+
+      if (moveY === this.touchMoveMaxY) {
+        if (!this.needRefresh) {
+          needRefreshData = { needRefresh: true };
+
+          this.needRefresh = true;
         }
       }
 
-      moveY = moveY > this.touchMoveMaxY ? this.touchMoveMaxY : moveY;
-
-      if (moveY === this.touchMoveMaxY) {
-        this.setState({ needRefresh: true });
-      }
-
       if (moveY < this.touchMoveMaxY) {
-        this.setState({ needRefresh: false });
+        if (this.needRefresh) {
+          needRefreshData = { needRefresh: false };
+
+          this.needRefresh = false;
+        }
       }
 
-      if (this.refreshBoxAnimation != null) {
-        this.refreshBoxAnimation
-          .translateY(moveY / this.calculatePercentage)
-          .step();
-        this.refreshBoxPreloadAnimation
-          .rotate((moveY / this.touchMoveMaxY) * 360)
-          .step();
-
-        this.setState({
-          refreshBoxAnimationData: this.refreshBoxAnimation.export(),
-          refreshBoxPreloadAnimationData:
-            this.refreshBoxPreloadAnimation.export(),
-        });
-      }
+      Taro.changePullIndicator({
+        ...{
+          maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
+          moveY: moveY / this.calculatePercentage,
+          rotate: (moveY / this.touchMoveMaxY) * 360,
+        },
+        ...needRefreshData,
+      });
     }
   };
 
@@ -208,19 +203,13 @@ class VariableView extends BaseComponent {
     }
 
     if (this.prepareRefresh) {
-      if (this.refreshBoxAnimation != null) {
-        this.refreshBoxAnimation.translateY(0).step();
-        this.refreshBoxPreloadAnimation.rotate(0).step();
-
-        this.setState({
-          showRefreshBackgroundBox: false,
-          refreshBoxAnimationData: this.refreshBoxAnimation.export(),
-          refreshBoxPreloadAnimationData:
-            this.refreshBoxPreloadAnimation.export(),
-        });
-      } else {
-        this.setState({ showRefreshBackgroundBox: false });
-      }
+      Taro.changePullIndicator({
+        ...{
+          maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
+          moveY: 0,
+          rotate: 0,
+        },
+      });
 
       this.prepareRefresh = false;
     }
@@ -234,31 +223,26 @@ class VariableView extends BaseComponent {
     }
 
     if (this.prepareRefresh) {
-      const { needRefresh } = this.state;
+      let needRefreshData = {};
 
-      if (needRefresh) {
+      if (this.needRefresh) {
         const { onRefresh } = this.props;
 
         if (isFunction(onRefresh)) {
           onRefresh();
 
-          this.setState({ needRefresh: false });
+          needRefreshData = { needRefresh: false };
         }
       }
 
-      if (this.refreshBoxAnimation != null) {
-        this.refreshBoxAnimation.translateY(0).step();
-        this.refreshBoxPreloadAnimation.rotate(0).step();
-
-        this.setState({
-          showRefreshBackgroundBox: false,
-          refreshBoxAnimationData: this.refreshBoxAnimation.export(),
-          refreshBoxPreloadAnimationData:
-            this.refreshBoxPreloadAnimation.export(),
-        });
-      } else {
-        this.setState({ showRefreshBackgroundBox: false });
-      }
+      Taro.changePullIndicator({
+        ...{
+          maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
+          moveY: 0,
+          rotate: 0,
+        },
+        ...needRefreshData,
+      });
 
       this.prepareRefresh = false;
     }
@@ -315,35 +299,16 @@ class VariableView extends BaseComponent {
     }
 
     if (scroll) {
-      this.refreshBoxAnimation = createAnimation({
-        duration: 300,
-        timingFunction: 'linear',
+      const that = this;
+
+      getRect(`#${this.refreshBoxId}`).then((rect) => {
+        if (rect != null) {
+          const { height: refreshBoxHeight } = rect;
+
+          that.refreshBoxHeight = refreshBoxHeight;
+          that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
+        }
       });
-
-      this.refreshBoxPreloadAnimation = createAnimation({
-        duration: 300,
-        timingFunction: 'linear',
-      });
-
-      this.setState(
-        {
-          refreshBoxAnimationData: this.refreshBoxAnimation.export(),
-          refreshBoxPreloadAnimationData:
-            this.refreshBoxPreloadAnimation.export(),
-        },
-        () => {
-          const that = this;
-
-          getRect(`#${this.refreshBoxId}`).then((rect) => {
-            if (rect != null) {
-              const { height: refreshBoxHeight } = rect;
-
-              that.refreshBoxHeight = refreshBoxHeight;
-              that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
-            }
-          });
-        },
-      );
     }
   };
 
@@ -368,29 +333,6 @@ class VariableView extends BaseComponent {
           {emptyPlaceholder || <Empty description="暂无数据" />}
         </CenterBox>
       </View>
-    );
-  };
-
-  buildRefreshingBox = () => {
-    const { refreshingBox } = this.props;
-
-    return (
-      refreshingBox || (
-        <CenterBox>
-          <View
-            className={classNames(
-              `${classPrefix}__refreshing-box__inner__refreshing`,
-            )}
-          >
-            <ActivityIndicator
-              className={classNames(
-                `${classPrefix}__refreshing-box__inner__refreshing__inner`,
-              )}
-              content="加载中"
-            />
-          </View>
-        </CenterBox>
-      )
     );
   };
 
@@ -483,6 +425,7 @@ class VariableView extends BaseComponent {
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
+      refreshingBox,
       refreshColor,
       refreshBackgroundColor,
       refreshingBackgroundColor,
@@ -506,12 +449,7 @@ class VariableView extends BaseComponent {
     } = this.props;
     const { scrollRefreshTriggered } = this.state;
 
-    const {
-      scrollTopTarget,
-      refreshBoxAnimationData,
-      refreshBoxPreloadAnimationData,
-      needRefresh,
-    } = this.state;
+    const { scrollTopTarget } = this.state;
 
     const useCustomPullDown = this.checkUseCustomPullDown();
 
@@ -602,59 +540,15 @@ class VariableView extends BaseComponent {
           onTouchEnd={this.onViewTouchEnd}
         >
           {useCustomPullDown ? (
-            <View
-              id={this.refreshBoxId || ''}
-              className={classNames(`${classPrefix}__refresh-box`)}
-              animation={refreshBoxAnimationData}
-            >
-              <View
-                className={classNames(
-                  `${classPrefix}__refresh-box__pull-refresh`,
-                )}
-              >
-                <CenterBox>
-                  {!needRefresh ? (
-                    <View
-                      className={classNames(
-                        `${classPrefix}__refresh-box__pull-refresh__iconBox`,
-                      )}
-                      animation={refreshBoxPreloadAnimationData}
-                    >
-                      <IconLoading3 size={46} />
-                    </View>
-                  ) : null}
-
-                  {needRefresh ? (
-                    <View
-                      className={classNames(
-                        `${classPrefix}__refresh-box__pull-refresh__iconBox`,
-                      )}
-                    >
-                      <IconLoading
-                        className={classNames(
-                          `${classPrefix}__refresh-box__pull-refresh__iconBox__icon`,
-                        )}
-                        size={42}
-                        borderWidth={2}
-                      />
-                    </View>
-                  ) : null}
-                </CenterBox>
-              </View>
+            <View className={classNames(`${classPrefix}__pull-indicator`)}>
+              <PullIndicator
+                id={this.refreshBoxId || ''}
+                enablePullDownRefresh={enablePullDownRefresh}
+                useRefreshingBox={useRefreshingBox}
+                refreshing={refreshing}
+                refreshingBox={refreshingBox}
+              />
             </View>
-          ) : null}
-
-          {enablePullDownRefresh ? (
-            <Transition
-              show={refreshing && useRefreshingBox}
-              className={classNames(`${classPrefix}__refreshing-box`)}
-            >
-              <View
-                className={classNames(`${classPrefix}__refreshing-box__inner`)}
-              >
-                {this.buildRefreshingBox()}
-              </View>
-            </Transition>
           ) : null}
 
           {enableScrollLowerLoad &&
