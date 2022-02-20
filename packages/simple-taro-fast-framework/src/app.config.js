@@ -89,6 +89,7 @@ export default {
         'pages/pageExtend/index',
         'pages/pageExtend/builtInEffect/index',
         'pages/pageExtend/builtInEffect/buildEmptyPlaceholder/index',
+        'pages/pageExtend/builtInEffect/buildInitialActivityIndicator/index',
         'pages/pageExtend/normal/index',
         'pages/pageExtend/normal/basic/index',
         'pages/pageExtend/scroll/index',

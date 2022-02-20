@@ -292,11 +292,13 @@ class Infrastructure extends ComponentBase {
     type = 'comet',
     description = '加载中',
   }) => {
-    <FadeInBox duration={200} style={{ height: transformSize(340) }}>
-      <CenterBox>
-        <ActivityIndicator type={type} content={description} />
-      </CenterBox>
-    </FadeInBox>;
+    return (
+      <FadeInBox duration={200} style={{ height: transformSize(340) }}>
+        <CenterBox>
+          <ActivityIndicator type={type} content={description} />
+        </CenterBox>
+      </FadeInBox>
+    );
   };
 
   buildUpperBox = () => {

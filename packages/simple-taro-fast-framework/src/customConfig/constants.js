@@ -230,6 +230,9 @@ const frameworkPathCollection = {
       buildEmptyPlaceholder: {
         path: '/framework/pages/pageExtend/builtInEffect/buildEmptyPlaceholder/index',
       },
+      buildInitialActivityIndicator: {
+        path: '/framework/pages/pageExtend/builtInEffect/buildInitialActivityIndicator/index',
+      },
     },
     normal: {
       path: '/framework/pages/pageExtend/normal/index',
