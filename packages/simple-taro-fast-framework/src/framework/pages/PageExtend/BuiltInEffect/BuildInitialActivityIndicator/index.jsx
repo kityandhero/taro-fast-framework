@@ -20,6 +20,12 @@ const style = {
 
 const descriptionList = [
   {
+    label: '调用方法',
+    value: 'this.buildInitialActivityIndicator({ description: "提示文字" })',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
     label: '支持自定义重载',
     value:
       '重载覆写函数 buildInitialActivityIndicator = () => { return null; }',
@@ -37,11 +43,16 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        {this.buildInitialActivityIndicator({})}
-        <Divider />
-        {this.buildInitialActivityIndicator({
-          description: '正在努力加载哦',
-        })}
+        <Card header="构建加载提示" style={style} headerStyle={cardHeaderStyle}>
+          {this.buildInitialActivityIndicator({})}
+
+          <Divider />
+
+          {this.buildInitialActivityIndicator({
+            description: '正在努力加载哦',
+          })}
+        </Card>
+
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
             list={descriptionList}
