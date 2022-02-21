@@ -63,6 +63,7 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         enablePullDownRefresh: true,
+        enableAutoInitialLoadingIndicator: false,
         loadApiPath: 'news/singleList',
       },
     };

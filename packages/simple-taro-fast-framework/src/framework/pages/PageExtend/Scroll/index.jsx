@@ -18,11 +18,6 @@ const o = {
       path: pathCollection.framework.pageExtend.scroll.upperBox.path,
     },
     {
-      id: 'EmptyPlaceholder',
-      name: '空数据占位',
-      path: pathCollection.framework.pageExtend.scroll.emptyPlaceholder.path,
-    },
-    {
       id: 'PullRefresh',
       name: '下拉刷新',
       path: pathCollection.framework.pageExtend.scroll.pullRefresh.path,

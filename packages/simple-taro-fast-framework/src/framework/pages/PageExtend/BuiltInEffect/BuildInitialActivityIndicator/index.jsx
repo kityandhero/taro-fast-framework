@@ -90,6 +90,27 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
+  showScrollRefreshing = () => {
+    const {
+      enableAutoInitialLoadingIndicator,
+      firstLoadSuccess,
+      dataLoading,
+      reloading,
+    } = this.state;
+
+    console.log({
+      enableAutoInitialLoadingIndicator,
+      firstLoadSuccess,
+      dataLoading,
+      reloading,
+    });
+
+    return (
+      (enableAutoInitialLoadingIndicator && !firstLoadSuccess && dataLoading) ||
+      reloading
+    );
+  };
+
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>

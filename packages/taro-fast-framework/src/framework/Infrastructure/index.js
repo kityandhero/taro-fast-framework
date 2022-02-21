@@ -60,6 +60,7 @@ class Infrastructure extends ComponentBase {
         scrollFastDeceleration: false,
         lowerLoadingPosition: 'footer',
         enableNavigationBarLoading: false,
+        enableAutoInitialLoadingIndicator: true,
       },
     };
   }
@@ -214,16 +215,32 @@ class Infrastructure extends ComponentBase {
   onLowerLoad = () => {};
 
   showScrollRefreshing = () => {
-    const { firstLoadSuccess, dataLoading, reloading } = this.state;
+    const {
+      enableAutoInitialLoadingIndicator,
+      firstLoadSuccess,
+      dataLoading,
+      reloading,
+    } = this.state;
 
-    return (!firstLoadSuccess && dataLoading) || reloading;
+    return (
+      (enableAutoInitialLoadingIndicator && !firstLoadSuccess && dataLoading) ||
+      reloading
+    );
   };
 
   showLowerLoading = () => {
-    const { enablePullDownRefresh, firstLoadSuccess, dataLoading } = this.state;
+    const {
+      enableAutoInitialLoadingIndicator,
+      enablePullDownRefresh,
+      firstLoadSuccess,
+      dataLoading,
+    } = this.state;
 
     return (
-      (!firstLoadSuccess && !enablePullDownRefresh && dataLoading) ||
+      (enableAutoInitialLoadingIndicator &&
+        !firstLoadSuccess &&
+        !enablePullDownRefresh &&
+        dataLoading) ||
       (firstLoadSuccess && dataLoading)
     );
   };

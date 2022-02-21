@@ -161,7 +161,7 @@ class PullIndicator extends BaseComponent {
 
     return (
       <View className={className}>
-        {useCustomPullDown ? (
+        {enablePullDownRefresh && useCustomPullDown ? (
           <View
             className={classNames(`${classPrefix}__refresh-box`)}
             animation={refreshBoxAnimationData}
@@ -201,18 +201,14 @@ class PullIndicator extends BaseComponent {
           </View>
         ) : null}
 
-        {enablePullDownRefresh ? (
-          <Transition
-            show={refreshing && useRefreshingBox}
-            className={classNames(`${classPrefix}__refreshing-box`)}
-          >
-            <View
-              className={classNames(`${classPrefix}__refreshing-box__inner`)}
-            >
-              {this.buildRefreshingBox()}
-            </View>
-          </Transition>
-        ) : null}
+        <Transition
+          show={refreshing && useRefreshingBox}
+          className={classNames(`${classPrefix}__refreshing-box`)}
+        >
+          <View className={classNames(`${classPrefix}__refreshing-box__inner`)}>
+            {this.buildRefreshingBox()}
+          </View>
+        </Transition>
       </View>
     );
   }
