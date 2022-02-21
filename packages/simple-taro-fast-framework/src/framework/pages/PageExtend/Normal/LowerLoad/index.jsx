@@ -32,15 +32,26 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '开启下拉刷新式',
+    label: '配置处理加载',
     value: 'this.setState({enablePullDownRefresh: true})',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: '可进行配置颜色',
-    value:
-      'this.setState({refreshColor: "red",refreshBackgroundColor: "green"})',
+    label: '可配置加载提示组件显示模式',
+    value: 'this.setState({ lowerLoadingPosition: "footer/absolute/fixed" })',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '自定义外部提示加载组件',
+    value: '重载覆写函数 buildLowerLoadingSuspendBox = () => { return null; }',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '自定义底部提示加载组件',
+    value: '重载覆写函数 buildLowerLoadingFooterBox = () => { return null; }',
     ellipsis: false,
     canCopy: true,
   },
@@ -52,9 +63,14 @@ const descriptionList = [
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'PullRefresh',
-    name: '下拉刷新',
+    id: 'LowerLoad',
+    name: '触底加载',
   };
+
+  /**
+   * 使用分页加载模式，该模式下自动附加页码等参数以及使用相关交互效果
+   */
+  pagingLoadMode = true;
 
   constructor(props) {
     super(props);
@@ -62,11 +78,9 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        scrollView: true,
-        enablePullDownRefresh: true,
-        refreshColor: 'red',
-        refreshBackgroundColor: 'green',
-        loadApiPath: 'news/singleList',
+        enableLowerLoad: true,
+        lowerLoadingPosition: 'fixed',
+        loadApiPath: 'news/pageList',
       },
     };
   }
@@ -79,8 +93,8 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onRefresh = () => {
-    this.reloadData({});
+  onLowerLoad = () => {
+    this.loadNextPage({});
   };
 
   renderContent = () => {
@@ -88,40 +102,6 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        {this.judgeInitialActivityIndicatorVisible() ? (
-          this.buildInitialActivityIndicator({})
-        ) : (
-          <View>
-            <Space direction="vertical" fillWidth>
-              {metaListData.map((o, index) => {
-                const { title, description } = o;
-
-                return (
-                  <FadeInBox key={`item_${index}`}>
-                    <Card
-                      header={title}
-                      border
-                      cardBorderRadiusMode={false}
-                      style={style}
-                    >
-                      <Ellipsis
-                        line={2}
-                        style={{
-                          height: transformSize(88),
-                          fontSize: transformSize(28),
-                          lineHeight: transformSize(44),
-                        }}
-                      >
-                        {description}
-                      </Ellipsis>
-                    </Card>
-                  </FadeInBox>
-                );
-              })}
-            </Space>
-          </View>
-        )}
-
         <View>
           <Space direction="vertical" fillWidth>
             {metaListData.map((o, index) => {

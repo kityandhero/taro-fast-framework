@@ -286,7 +286,7 @@ export async function singleListData(params) {
     virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
-      list: articleList,
+      list: articleList.slice(0, 10),
     },
   });
 }

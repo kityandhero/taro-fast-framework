@@ -89,35 +89,39 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <View>
-          <Space direction="vertical" fillWidth>
-            {metaListData.map((o, index) => {
-              const { title, description } = o;
+        {this.judgeInitialActivityIndicatorVisible() ? (
+          this.buildInitialActivityIndicator({})
+        ) : (
+          <View>
+            <Space direction="vertical" fillWidth>
+              {metaListData.map((o, index) => {
+                const { title, description } = o;
 
-              return (
-                <FadeInBox key={`item_${index}`}>
-                  <Card
-                    header={title}
-                    border
-                    cardBorderRadiusMode={false}
-                    style={style}
-                  >
-                    <Ellipsis
-                      line={2}
-                      style={{
-                        height: transformSize(88),
-                        fontSize: transformSize(28),
-                        lineHeight: transformSize(44),
-                      }}
+                return (
+                  <FadeInBox key={`item_${index}`}>
+                    <Card
+                      header={title}
+                      border
+                      cardBorderRadiusMode={false}
+                      style={style}
                     >
-                      {description}
-                    </Ellipsis>
-                  </Card>
-                </FadeInBox>
-              );
-            })}
-          </Space>
-        </View>
+                      <Ellipsis
+                        line={2}
+                        style={{
+                          height: transformSize(88),
+                          fontSize: transformSize(28),
+                          lineHeight: transformSize(44),
+                        }}
+                      >
+                        {description}
+                      </Ellipsis>
+                    </Card>
+                  </FadeInBox>
+                );
+              })}
+            </Space>
+          </View>
+        )}
 
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid

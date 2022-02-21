@@ -8,7 +8,6 @@ import {
   getRect,
   stringIsNullOrWhiteSpace,
   getSystemInfo,
-  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -17,10 +16,8 @@ import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
 import ActivityIndicator from '../ActivityIndicator';
 import Transition from '../Transition';
-import { Empty } from '../Empty';
 import Divider from '../Divider';
 import FlexBox from '../FlexBox';
-import FadeInBox from '../FadeInBox';
 
 import PullIndicator from './PullIndicator';
 
@@ -34,9 +31,7 @@ const defaultProps = {
   enablePullDownRefresh: false,
   refreshing: false,
   enableCustomPullDown: false,
-  enableScrollLowerLoad: false,
-  enableEmptyPlaceholder: false,
-  enableInitialActivityIndicator: false,
+  enableLowerLoad: false,
   useRefreshingBox: true,
   scrollRefresherThreshold: 100,
   scrollRefresherDefaultStyle: '',
@@ -61,12 +56,10 @@ const defaultProps = {
   needNextLoad: false,
   emptyPlaceholderVisible: false,
   emptyPlaceholder: null,
-  initialActivityIndicatorVisible: false,
-  initialActivityIndicator: null,
   upperBox: null,
   style: {},
   onRefresh: null,
-  onScrollLowerLoad: null,
+  onLowerLoad: null,
 };
 
 class VariableView extends BaseComponent {
@@ -274,10 +267,9 @@ class VariableView extends BaseComponent {
   };
 
   onScrollToLower = () => {
-    const { enableScrollLowerLoad, needNextLoad, onScrollLowerLoad } =
-      this.props;
+    const { enableLowerLoad, needNextLoad, onLowerLoad } = this.props;
 
-    if (!enableScrollLowerLoad) {
+    if (!enableLowerLoad) {
       return;
     }
 
@@ -285,8 +277,8 @@ class VariableView extends BaseComponent {
       return;
     }
 
-    if (isFunction(onScrollLowerLoad)) {
-      onScrollLowerLoad();
+    if (isFunction(onLowerLoad)) {
+      onLowerLoad();
     }
   };
 
@@ -309,32 +301,6 @@ class VariableView extends BaseComponent {
         }
       });
     }
-  };
-
-  buildEmptyPlaceholder = () => {
-    const {
-      enableEmptyPlaceholder,
-      emptyPlaceholderVisible,
-      emptyPlaceholder,
-    } = this.props;
-
-    if (!enableEmptyPlaceholder) {
-      return null;
-    }
-
-    if (!emptyPlaceholderVisible) {
-      return null;
-    }
-
-    return (
-      emptyPlaceholder || (
-        <View style={{ margin: 'var(--tfc-20) 0' }}>
-          <CenterBox>
-            <Empty description="暂无数据" />
-          </CenterBox>
-        </View>
-      )
-    );
   };
 
   /**
@@ -405,38 +371,12 @@ class VariableView extends BaseComponent {
     return !!enablePullDownRefresh && !!enableCustomPullDown;
   };
 
-  buildInitialActivityIndicator = () => {
-    const {
-      enableInitialActivityIndicator,
-      initialActivityIndicatorVisible,
-      initialActivityIndicator,
-    } = this.props;
-
-    if (!enableInitialActivityIndicator) {
-      return null;
-    }
-
-    if (!initialActivityIndicatorVisible) {
-      return null;
-    }
-
-    return (
-      initialActivityIndicator || (
-        <FadeInBox duration={200} style={{ height: transformSize(340) }}>
-          <CenterBox>
-            <ActivityIndicator type="comet" content="加载中" />
-          </CenterBox>
-        </FadeInBox>
-      )
-    );
-  };
-
   renderFurther() {
     const {
       scroll,
       height,
       enablePullDownRefresh,
-      enableScrollLowerLoad,
+      enableLowerLoad,
       enableCustomPullDown,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
@@ -505,6 +445,50 @@ class VariableView extends BaseComponent {
 
     const upperBox = this.buildUpperBox();
 
+    const lowerLoadingOuterBoxAdjust =
+      enableLowerLoad &&
+      (lowerLoadingPosition === 'absolute' ||
+        lowerLoadingPosition === 'fixed') ? (
+        <Transition
+          show={lowerLoading}
+          className={classNames(`${classPrefix}__lower-loading-box`, {
+            [`${classPrefix}__lower-loading-box--absolute`]:
+              lowerLoadingPosition === 'absolute',
+            [`${classPrefix}__lower-loading-box--fixed`]:
+              lowerLoadingPosition === 'fixed',
+          })}
+        >
+          <View
+            className={classNames(`${classPrefix}__lower-loading-box__inner`)}
+          >
+            {this.buildLowerLoadingSuspendBox()}
+          </View>
+        </Transition>
+      ) : null;
+
+    const lowerLoadingFooterBoxAdjust =
+      enableLowerLoad &&
+      lowerLoadingPosition !== 'absolute' &&
+      lowerLoadingPosition !== 'fixed' ? (
+        <View onClick={this.onScrollToLower}>
+          {this.buildLowerLoadingFooterBox(lowerLoading, needNextLoad)}
+        </View>
+      ) : null;
+
+    const pullIndicator = (
+      <View className={classNames(`${classPrefix}__pull-indicator`)}>
+        <PullIndicator
+          id={this.refreshBoxId || ''}
+          enablePullDownRefresh={enablePullDownRefresh}
+          useCustomPullDown={useCustomPullDown}
+          useRefreshingBox={useRefreshingBox}
+          refreshing={refreshing}
+          refreshingBox={refreshingBox}
+          maxMove={this.touchMoveMaxY / this.calculatePercentage}
+        />
+      </View>
+    );
+
     if (scroll) {
       const scrollViewMain = (
         <ScrollView
@@ -529,19 +513,9 @@ class VariableView extends BaseComponent {
           onRefresherRefresh={this.onScrollRefresherRefresh}
         >
           <View>
-            {this.buildInitialActivityIndicator()}
-
-            {this.buildEmptyPlaceholder()}
-
             {children}
 
-            {enableScrollLowerLoad &&
-            lowerLoadingPosition !== 'absolute' &&
-            lowerLoadingPosition !== 'fixed' ? (
-              <View onClick={this.onScrollToLower}>
-                {this.buildLowerLoadingFooterBox(lowerLoading, needNextLoad)}
-              </View>
-            ) : null}
+            {lowerLoadingFooterBoxAdjust}
           </View>
         </ScrollView>
       );
@@ -560,39 +534,9 @@ class VariableView extends BaseComponent {
           onTouchCancel={this.onViewTouchCancel}
           onTouchEnd={this.onViewTouchEnd}
         >
-          <View className={classNames(`${classPrefix}__pull-indicator`)}>
-            <PullIndicator
-              id={this.refreshBoxId || ''}
-              enablePullDownRefresh={enablePullDownRefresh}
-              useCustomPullDown={useCustomPullDown}
-              useRefreshingBox={useRefreshingBox}
-              refreshing={refreshing}
-              refreshingBox={refreshingBox}
-              maxMove={this.touchMoveMaxY / this.calculatePercentage}
-            />
-          </View>
+          {pullIndicator}
 
-          {enableScrollLowerLoad &&
-          (lowerLoadingPosition === 'absolute' ||
-            lowerLoadingPosition === 'fixed') ? (
-            <Transition
-              show={lowerLoading}
-              className={classNames(`${classPrefix}__lower-loading-box`, {
-                [`${classPrefix}__lower-loading-box--absolute`]:
-                  lowerLoadingPosition === 'absolute',
-                [`${classPrefix}__lower-loading-box--fixed`]:
-                  lowerLoadingPosition === 'fixed',
-              })}
-            >
-              <View
-                className={classNames(
-                  `${classPrefix}__lower-loading-box__inner`,
-                )}
-              >
-                {this.buildLowerLoadingSuspendBox()}
-              </View>
-            </Transition>
-          ) : null}
+          {lowerLoadingOuterBoxAdjust}
 
           {upperBox ? (
             <View
@@ -624,23 +568,15 @@ class VariableView extends BaseComponent {
 
     return (
       <View className={classNames(classPrefix)}>
-        <View className={classNames(`${classPrefix}__pull-indicator`)}>
-          <PullIndicator
-            id={this.refreshBoxId || ''}
-            enablePullDownRefresh={enablePullDownRefresh}
-            useCustomPullDown={useCustomPullDown}
-            useRefreshingBox={useRefreshingBox}
-            refreshing={refreshing}
-            refreshingBox={refreshingBox}
-            maxMove={0}
-          />
-        </View>
+        {pullIndicator}
 
-        {this.buildInitialActivityIndicator()}
+        {lowerLoadingOuterBoxAdjust}
 
-        {this.buildEmptyPlaceholder()}
+        {upperBox}
 
         {children}
+
+        {lowerLoadingFooterBoxAdjust}
       </View>
     );
   }

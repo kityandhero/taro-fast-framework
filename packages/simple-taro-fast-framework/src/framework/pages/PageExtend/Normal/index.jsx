@@ -13,9 +13,19 @@ const o = {
       path: pathCollection.framework.pageExtend.normal.basic.path,
     },
     {
+      id: 'UpperBox',
+      name: '上部区域',
+      path: pathCollection.framework.pageExtend.normal.upperBox.path,
+    },
+    {
       id: 'PullRefresh',
       name: '下拉刷新',
       path: pathCollection.framework.pageExtend.normal.pullRefresh.path,
+    },
+    {
+      id: 'LowerLoad',
+      name: '触底加载',
+      path: pathCollection.framework.pageExtend.normal.lowerLoad.path,
     },
   ],
 };

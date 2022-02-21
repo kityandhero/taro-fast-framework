@@ -242,8 +242,14 @@ const frameworkPathCollection = {
       basic: {
         path: '/framework/pages/pageExtend/normal/basic/index',
       },
+      upperBox: {
+        path: '/framework/pages/pageExtend/normal/upperBox/index',
+      },
       pullRefresh: {
         path: '/framework/pages/pageExtend/normal/pullRefresh/index',
+      },
+      lowerLoad: {
+        path: '/framework/pages/pageExtend/normal/lowerLoad/index',
       },
     },
     scroll: {
@@ -253,9 +259,6 @@ const frameworkPathCollection = {
       },
       upperBox: {
         path: '/framework/pages/pageExtend/scroll/upperBox/index',
-      },
-      emptyPlaceholder: {
-        path: '/framework/pages/pageExtend/scroll/emptyPlaceholder/index',
       },
       pullRefresh: {
         path: '/framework/pages/pageExtend/scroll/pullRefresh/index',

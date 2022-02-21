@@ -1,11 +1,9 @@
 import Taro from '@tarojs/taro';
-import { View } from '@tarojs/components';
 
 import {
   showErrorMessage,
   stringIsNullOrWhiteSpace,
   navigateTo,
-  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {
@@ -16,11 +14,11 @@ import {
   VariableView,
   Spin,
   FadeView,
-  CenterBox,
-  ActivityIndicator,
-  FadeInBox,
-  Empty,
 } from 'taro-fast-component/es/customComponents';
+import {
+  buildEmptyPlaceholder as buildEmptyPlaceholderCore,
+  buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
+} from 'taro-fast-component/es/functionComponent';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 class Infrastructure extends ComponentBase {
@@ -47,9 +45,7 @@ class Infrastructure extends ComponentBase {
         scrollView: false,
         enablePullDownRefresh: false,
         enableCustomPullDown: false,
-        enableScrollLowerLoad: false,
-        enableEmptyPlaceholder: false,
-        enableInitialActivityIndicator: false,
+        enableLowerLoad: false,
         scrollRefresherThreshold: 100,
         scrollRefresherDefaultStyle: 'white',
         scrollRefresherBackground: '',
@@ -215,35 +211,19 @@ class Infrastructure extends ComponentBase {
 
   onRefresh = () => {};
 
-  onScrollLowerLoad = () => {};
+  onLowerLoad = () => {};
 
   showScrollRefreshing = () => {
-    const {
-      enableInitialActivityIndicator,
-      firstLoadSuccess,
-      dataLoading,
-      reloading,
-    } = this.state;
+    const { firstLoadSuccess, dataLoading, reloading } = this.state;
 
-    return (
-      (!enableInitialActivityIndicator && !firstLoadSuccess && dataLoading) ||
-      reloading
-    );
+    return (!firstLoadSuccess && dataLoading) || reloading;
   };
 
-  showScrollLowerLoading = () => {
-    const {
-      enableInitialActivityIndicator,
-      enablePullDownRefresh,
-      firstLoadSuccess,
-      dataLoading,
-    } = this.state;
+  showLowerLoading = () => {
+    const { enablePullDownRefresh, firstLoadSuccess, dataLoading } = this.state;
 
     return (
-      (!enableInitialActivityIndicator &&
-        !firstLoadSuccess &&
-        !enablePullDownRefresh &&
-        dataLoading) ||
+      (!firstLoadSuccess && !enablePullDownRefresh && dataLoading) ||
       (firstLoadSuccess && dataLoading)
     );
   };
@@ -283,22 +263,16 @@ class Infrastructure extends ComponentBase {
     onImageClick = null,
     onDescriptionClick = null,
   }) => {
-    return (
-      <View style={{ margin: 'var(--tfc-20) 0' }}>
-        <CenterBox>
-          <Empty
-            icon={icon}
-            iconSize={iconSize}
-            iconStyle={iconStyle}
-            image={image}
-            imageStyle={imageStyle}
-            description={description}
-            onImageClick={onImageClick}
-            onDescriptionClick={onDescriptionClick}
-          />
-        </CenterBox>
-      </View>
-    );
+    return buildEmptyPlaceholderCore({
+      icon,
+      iconSize,
+      iconStyle,
+      image,
+      imageStyle,
+      description,
+      onImageClick,
+      onDescriptionClick,
+    });
   };
 
   /**
@@ -308,13 +282,10 @@ class Infrastructure extends ComponentBase {
     type = 'comet',
     description = '加载中',
   }) => {
-    return (
-      <FadeInBox duration={200} style={{ height: transformSize(340) }}>
-        <CenterBox>
-          <ActivityIndicator type={type} content={description} />
-        </CenterBox>
-      </FadeInBox>
-    );
+    return buildInitialActivityIndicatorCore({
+      type,
+      description,
+    });
   };
 
   buildUpperBox = () => {
@@ -352,7 +323,7 @@ class Infrastructure extends ComponentBase {
 
   onReachBottom() {
     if (this.judgeNeedNextLoad()) {
-      this.onScrollLowerLoad();
+      this.onLowerLoad();
     }
   }
 
@@ -362,9 +333,7 @@ class Infrastructure extends ComponentBase {
       scrollView,
       enablePullDownRefresh,
       enableCustomPullDown,
-      enableScrollLowerLoad,
-      enableEmptyPlaceholder,
-      enableInitialActivityIndicator,
+      enableLowerLoad,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
@@ -386,10 +355,8 @@ class Infrastructure extends ComponentBase {
         scroll={scrollView}
         height={height}
         enablePullDownRefresh={enablePullDownRefresh}
-        enableScrollLowerLoad={enableScrollLowerLoad}
+        enableLowerLoad={enableLowerLoad}
         enableCustomPullDown={enableCustomPullDown}
-        enableEmptyPlaceholder={enableEmptyPlaceholder}
-        enableInitialActivityIndicator={enableInitialActivityIndicator}
         refreshColor={refreshColor}
         refreshBackgroundColor={refreshBackgroundColor}
         scrollWithAnimation={scrollWithAnimation}
@@ -402,23 +369,14 @@ class Infrastructure extends ComponentBase {
         scrollRefresherDefaultStyle={scrollRefresherDefaultStyle}
         scrollRefresherBackground={scrollRefresherBackground}
         onRefresh={this.onRefresh}
-        onScrollLowerLoad={this.onScrollLowerLoad}
+        onLowerLoad={this.onLowerLoad}
         refreshing={this.showScrollRefreshing()}
-        lowerLoading={this.showScrollLowerLoading()}
+        lowerLoading={this.showLowerLoading()}
         needNextLoad={this.judgeNeedNextLoad()}
-        emptyPlaceholderVisible={
-          enableEmptyPlaceholder && this.judgeEmptyPlaceholderVisible()
-        }
         lowerLoadingPosition={lowerLoadingPosition}
         refreshingBox={this.buildRefreshingBox()}
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
-        emptyPlaceholder={this.buildEmptyPlaceholder({})}
-        initialActivityIndicatorVisible={
-          enableInitialActivityIndicator &&
-          this.judgeInitialActivityIndicatorVisible()
-        }
-        initialActivityIndicator={this.buildInitialActivityIndicator({})}
         upperBox={this.buildUpperBox()}
       >
         {this.renderFurther()}

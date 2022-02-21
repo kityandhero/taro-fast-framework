@@ -33,7 +33,7 @@ const o = {
       path: pathCollection.framework.pageExtend.scroll.customPullRefresh.path,
     },
     {
-      id: 'ScrollLowerLoad',
+      id: 'LowerLoad',
       name: '触底加载',
       path: pathCollection.framework.pageExtend.scroll.lowerLoad.path,
     },

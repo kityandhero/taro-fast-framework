@@ -1,7 +1,16 @@
-import { Swiper, SwiperItem } from '@tarojs/components';
+import { View, Swiper, SwiperItem } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import { ColorText, Button } from '../customComponents';
+import {
+  ColorText,
+  Button,
+  CenterBox,
+  Empty,
+  FadeInBox,
+  ActivityIndicator,
+} from '../customComponents';
 
 export function buildButton({
   style = {},
@@ -219,6 +228,53 @@ export function buildOption({
     extra,
     prefix,
   };
+}
+
+/**
+ * 构建空数据占位
+ */
+export function buildEmptyPlaceholder({
+  icon = 'alert-circle',
+  iconSize = 180,
+  iconStyle = {},
+  image = '',
+  imageStyle = {},
+  description = '暂无数据',
+  onImageClick = null,
+  onDescriptionClick = null,
+}) {
+  return (
+    <View style={{ margin: 'var(--tfc-20) 0' }}>
+      <CenterBox>
+        <Empty
+          icon={icon}
+          iconSize={iconSize}
+          iconStyle={iconStyle}
+          image={image}
+          imageStyle={imageStyle}
+          description={description}
+          onImageClick={onImageClick}
+          onDescriptionClick={onDescriptionClick}
+        />
+      </CenterBox>
+    </View>
+  );
+}
+
+/**
+ * 构建初始加载提示器
+ */
+export function buildInitialActivityIndicator({
+  type = 'comet',
+  description = '加载中',
+}) {
+  return (
+    <FadeInBox duration={200} style={{ height: transformSize(340) }}>
+      <CenterBox>
+        <ActivityIndicator type={type} content={description} />
+      </CenterBox>
+    </FadeInBox>
+  );
 }
 
 /**

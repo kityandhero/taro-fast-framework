@@ -63,7 +63,7 @@ const descriptionList = [
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'ScrollLowerLoad',
+    id: 'LowerLoad',
     name: '触底加载',
   };
 
@@ -79,7 +79,7 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         scrollView: true,
-        enableScrollLowerLoad: true,
+        enableLowerLoad: true,
         lowerLoadingPosition: 'fixed',
         loadApiPath: 'news/pageList',
       },
@@ -94,7 +94,7 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onScrollLowerLoad = () => {
+  onLowerLoad = () => {
     this.loadNextPage({});
   };
 
