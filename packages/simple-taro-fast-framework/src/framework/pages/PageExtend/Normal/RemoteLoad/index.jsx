@@ -5,16 +5,11 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
-  DataGrid,
-  HelpBox,
   Ellipsis,
   FadeInBox,
 } from 'taro-fast-component/es/customComponents';
 
-import {
-  cardHeaderStyle,
-  cardStyle,
-} from '../../../../../customConfig/constants';
+import { cardStyle } from '../../../../../customConfig/constants';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 
 const style = {
@@ -24,47 +19,14 @@ const style = {
   ...cardStyle,
 };
 
-const descriptionList = [
-  {
-    label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: '配置处理加载',
-    value: 'this.setState({enablePullDownRefresh: true})',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: '可配置加载提示组件显示模式',
-    value: 'this.setState({ lowerLoadingPosition: "footer/absolute/fixed" })',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: '自定义外部提示加载组件',
-    value: '重载覆写函数 buildLowerLoadingSuspendBox = () => { return null; }',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: '自定义底部提示加载组件',
-    value: '重载覆写函数 buildLowerLoadingFooterBox = () => { return null; }',
-    ellipsis: false,
-    canCopy: true,
-  },
-];
-
 @connect(({ news, global }) => ({
   news,
   global,
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'LowerLoad',
-    name: '触底加载',
+    id: 'PullRefresh',
+    name: '下拉刷新',
   };
 
   pagingLoadMode = true;
@@ -75,8 +37,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        enableLowerLoad: true,
-        lowerLoadingPosition: 'fixed',
         loadApiPath: 'news/pageList',
       },
     };
@@ -88,6 +48,10 @@ export default class Index extends ContentPageBase {
     } = props;
 
     return data;
+  };
+
+  onRefresh = () => {
+    this.reloadData({});
   };
 
   onLowerLoad = () => {
@@ -128,30 +92,6 @@ export default class Index extends ContentPageBase {
             })}
           </Space>
         </View>
-
-        <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
-          <DataGrid
-            list={descriptionList}
-            border
-            layout="row"
-            size="small"
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
-
-        <Card header="备注" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox
-            showTitle={false}
-            showNumber={false}
-            useBackground={false}
-            list={[
-              {
-                text: '使用下拉刷新需要前置开启滚动视图',
-              },
-            ]}
-          />
-        </Card>
       </Space>
     );
   };

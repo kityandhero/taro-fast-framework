@@ -251,6 +251,12 @@ const frameworkPathCollection = {
       upperBox: {
         path: '/framework/pages/pageExtend/normal/upperBox/index',
       },
+      remoteLoad: {
+        path: '/framework/pages/pageExtend/normal/remoteLoad/index',
+      },
+      remoteLoadSpecial: {
+        path: '/framework/pages/pageExtend/normal/remoteLoadSpecial/index',
+      },
       pullRefresh: {
         path: '/framework/pages/pageExtend/normal/pullRefresh/index',
       },

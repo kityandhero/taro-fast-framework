@@ -376,7 +376,6 @@ class VariableView extends BaseComponent {
       scroll,
       height,
       enablePullDownRefresh,
-      enableLowerLoad,
       enableCustomPullDown,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
@@ -446,9 +445,8 @@ class VariableView extends BaseComponent {
     const upperBox = this.buildUpperBox();
 
     const lowerLoadingOuterBoxAdjust =
-      enableLowerLoad &&
-      (lowerLoadingPosition === 'absolute' ||
-        lowerLoadingPosition === 'fixed') ? (
+      lowerLoadingPosition === 'absolute' ||
+      lowerLoadingPosition === 'fixed' ? (
         <Transition
           show={lowerLoading}
           className={classNames(`${classPrefix}__lower-loading-box`, {
@@ -467,7 +465,6 @@ class VariableView extends BaseComponent {
       ) : null;
 
     const lowerLoadingFooterBoxAdjust =
-      enableLowerLoad &&
       lowerLoadingPosition !== 'absolute' &&
       lowerLoadingPosition !== 'fixed' ? (
         <View onClick={this.onScrollToLower}>

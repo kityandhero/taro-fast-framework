@@ -40,7 +40,7 @@ class Infrastructure extends ComponentBase {
   loadRemoteRequestDelay = 0;
 
   /**
-   * 分页请求模式
+   * 使用分页加载模式，该模式下自动附加页码等参数以及使用相关交互效果
    */
   pagingLoadMode = false;
 

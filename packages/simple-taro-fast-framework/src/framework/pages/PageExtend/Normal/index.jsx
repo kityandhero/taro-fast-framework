@@ -18,6 +18,16 @@ const o = {
       path: pathCollection.framework.pageExtend.normal.upperBox.path,
     },
     {
+      id: 'RemoteLoad',
+      name: '远程加载',
+      path: pathCollection.framework.pageExtend.normal.remoteLoad.path,
+    },
+    {
+      id: 'RemoteLoadSpecial',
+      name: '自定义初始加载提示器',
+      path: pathCollection.framework.pageExtend.normal.remoteLoadSpecial.path,
+    },
+    {
       id: 'PullRefresh',
       name: '下拉刷新',
       path: pathCollection.framework.pageExtend.normal.pullRefresh.path,
