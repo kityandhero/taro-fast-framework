@@ -91,10 +91,6 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { metaData } = this.state;
-
-    console.log(metaData);
-
     return (
       <Space direction="vertical" fillWidth>
         <Card

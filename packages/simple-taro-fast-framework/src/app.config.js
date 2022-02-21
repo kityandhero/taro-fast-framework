@@ -93,6 +93,7 @@ export default {
         'pages/pageExtend/builtInEffect/buildInitialActivityIndicator/index',
         'pages/pageExtend/normal/index',
         'pages/pageExtend/normal/basic/index',
+        'pages/pageExtend/normal/pullRefresh/index',
         'pages/pageExtend/scroll/index',
         'pages/pageExtend/scroll/basic/index',
         'pages/pageExtend/scroll/upperBox/index',

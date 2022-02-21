@@ -498,6 +498,9 @@ class VariableView extends BaseComponent {
       ...(stringIsNullOrWhiteSpace(lowerLoadingBorder)
         ? {}
         : { '--lower-loading-border': `${lowerLoadingBorder}` }),
+      ...{
+        position: 'relative',
+      },
     };
 
     const upperBox = this.buildUpperBox();
@@ -546,7 +549,12 @@ class VariableView extends BaseComponent {
       return (
         <View
           className={classNames(classPrefix)}
-          style={styleAdjust}
+          style={{
+            ...styleAdjust,
+            ...{
+              overflow: 'hidden',
+            },
+          }}
           onTouchStart={this.onViewTouchStart}
           onTouchMove={this.onViewTouchMove}
           onTouchCancel={this.onViewTouchCancel}
@@ -615,11 +623,19 @@ class VariableView extends BaseComponent {
     }
 
     return (
-      <View
-        style={{
-          minHeight: height,
-        }}
-      >
+      <View className={classNames(classPrefix)}>
+        <View className={classNames(`${classPrefix}__pull-indicator`)}>
+          <PullIndicator
+            id={this.refreshBoxId || ''}
+            enablePullDownRefresh={enablePullDownRefresh}
+            useCustomPullDown={useCustomPullDown}
+            useRefreshingBox={useRefreshingBox}
+            refreshing={refreshing}
+            refreshingBox={refreshingBox}
+            maxMove={0}
+          />
+        </View>
+
         {this.buildInitialActivityIndicator()}
 
         {this.buildEmptyPlaceholder()}

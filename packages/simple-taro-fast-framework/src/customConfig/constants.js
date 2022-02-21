@@ -242,6 +242,9 @@ const frameworkPathCollection = {
       basic: {
         path: '/framework/pages/pageExtend/normal/basic/index',
       },
+      pullRefresh: {
+        path: '/framework/pages/pageExtend/normal/pullRefresh/index',
+      },
     },
     scroll: {
       path: '/framework/pages/pageExtend/scroll/index',

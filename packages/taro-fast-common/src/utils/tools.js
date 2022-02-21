@@ -23,6 +23,9 @@ import {
   uploadFile as uploadFileCore,
   downloadFile as downloadFileCore,
   makePhoneCall as makePhoneCallCore,
+  showNavigationBarLoading as showNavigationBarLoadingCore,
+  hideNavigationBarLoading as hideNavigationBarLoadingCore,
+  stopPullDownRefresh as stopPullDownRefreshCore,
 } from '@tarojs/taro';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -163,6 +166,18 @@ export function setTaroGlobalData(config) {
       console.warn(`框架在该环境[${ENV}]还未适配`);
       break;
   }
+}
+
+export function showNavigationBarLoading() {
+  showNavigationBarLoadingCore();
+}
+
+export function hideNavigationBarLoading() {
+  hideNavigationBarLoadingCore();
+}
+
+export function stopPullDownRefresh() {
+  stopPullDownRefreshCore();
 }
 
 export function redirectTo(params) {

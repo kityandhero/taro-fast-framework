@@ -63,6 +63,7 @@ class Infrastructure extends ComponentBase {
         scrollShowScrollbar: true,
         scrollFastDeceleration: false,
         lowerLoadingPosition: 'footer',
+        enableNavigationBarLoading: false,
       },
     };
   }
@@ -127,18 +128,6 @@ class Infrastructure extends ComponentBase {
 
   setNavigationBarTitle(params) {
     return Taro.setNavigationBarTitle(params);
-  }
-
-  showNavigationBarLoading() {
-    Taro.showNavigationBarLoading();
-  }
-
-  hideNavigationBarLoading() {
-    Taro.hideNavigationBarLoading();
-  }
-
-  stopPullDownRefresh() {
-    Taro.stopPullDownRefresh();
   }
 
   /**
@@ -356,6 +345,16 @@ class Infrastructure extends ComponentBase {
    */
   // eslint-disable-next-line no-unused-vars
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
+
+  onPullDownRefresh() {
+    this.onRefresh();
+  }
+
+  onReachBottom() {
+    if (this.judgeNeedNextLoad()) {
+      this.onScrollLowerLoad();
+    }
+  }
 
   renderView() {
     const {

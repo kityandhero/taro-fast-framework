@@ -5,6 +5,9 @@ import {
   recordText,
   showErrorMessage,
   recordError,
+  showNavigationBarLoading,
+  hideNavigationBarLoading,
+  stopPullDownRefresh,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isUndefined,
@@ -291,7 +294,11 @@ class Base extends Infrastructure {
             loadApiPath: loadApiCustomPath,
           };
 
-      const { loadApiPath: loadApiPathValue, firstLoadSuccess } = {
+      const {
+        loadApiPath: loadApiPathValue,
+        firstLoadSuccess,
+        enableNavigationBarLoading,
+      } = {
         ...this.state,
         ...loadApiPathCustom,
       };
@@ -307,11 +314,18 @@ class Base extends Infrastructure {
       ) {
         this.setRequestingData({ type: loadApiPath, payload: requestData });
 
+        if (enableNavigationBarLoading) {
+          showNavigationBarLoading();
+        }
+
         dispatch({
           type: loadApiPath,
           payload: requestData,
         })
           .then(() => {
+            hideNavigationBarLoading();
+            stopPullDownRefresh();
+
             let willSaveToState = {
               dataLoading: false,
               loadSuccess: false,
@@ -433,6 +447,9 @@ class Base extends Infrastructure {
             this.clearRequestingData();
           })
           .catch((res) => {
+            stopPullDownRefresh();
+            hideNavigationBarLoading();
+
             recordObject(res);
 
             this.setState({
@@ -447,6 +464,9 @@ class Base extends Infrastructure {
           });
       }
     } catch (error) {
+      stopPullDownRefresh();
+      hideNavigationBarLoading();
+
       recordObject({ loadApiPath, requestData });
 
       this.setState({

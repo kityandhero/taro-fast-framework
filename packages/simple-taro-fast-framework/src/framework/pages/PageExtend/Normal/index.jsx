@@ -12,6 +12,11 @@ const o = {
       name: '基础使用',
       path: pathCollection.framework.pageExtend.normal.basic.path,
     },
+    {
+      id: 'PullRefresh',
+      name: '下拉刷新',
+      path: pathCollection.framework.pageExtend.normal.pullRefresh.path,
+    },
   ],
 };
 
