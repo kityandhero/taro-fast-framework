@@ -34,6 +34,46 @@ class Infrastructure extends ComponentBase {
 
   viewStyle = {};
 
+  /**
+   * 初始化时加载数据请求的延迟时间
+   */
+  loadRemoteRequestDelay = 0;
+
+  /**
+   * 分页请求模式
+   */
+  pagingLoadMode = false;
+
+  /**
+   * 页码
+   */
+  pageNo = 0;
+
+  /**
+   * 页条目数
+   */
+  pageSize = 10;
+
+  /**
+   * 总条目数, 来自数据接口
+   */
+  total = 10;
+
+  /**
+   * 最后一次接口请求的参数缓存
+   */
+  lastRequestingData = { type: '', payload: {} };
+
+  /**
+   * 数据追加模式, 用于分页请求模式下是否将请求的数据附加到前次数据之后, 下拉刷新时设为 true, 分页展示时设为 false
+   */
+  useListDataAttachMode = true;
+
+  /**
+   * 追加数据时是否清除前次数据, 用于内部控制, 不要覆盖此值
+   */
+  clearListDataBeforeAttach = false;
+
   constructor(props) {
     super(props);
 
@@ -214,6 +254,12 @@ class Infrastructure extends ComponentBase {
 
   onLowerLoad = () => {};
 
+  existLoadApi = () => {
+    const { loadApiPath } = this.state;
+
+    return !stringIsNullOrWhiteSpace(loadApiPath);
+  };
+
   showScrollRefreshing = () => {
     const {
       enableAutoInitialLoadingIndicator,
@@ -223,23 +269,26 @@ class Infrastructure extends ComponentBase {
     } = this.state;
 
     return (
-      (enableAutoInitialLoadingIndicator && !firstLoadSuccess && dataLoading) ||
+      (this.loadRemoteRequestAfterMount &&
+        this.existLoadApi() &&
+        !this.pagingLoadMode &&
+        enableAutoInitialLoadingIndicator &&
+        !firstLoadSuccess &&
+        dataLoading) ||
       reloading
     );
   };
 
   showLowerLoading = () => {
-    const {
-      enableAutoInitialLoadingIndicator,
-      enablePullDownRefresh,
-      firstLoadSuccess,
-      dataLoading,
-    } = this.state;
+    const { enableAutoInitialLoadingIndicator, firstLoadSuccess, dataLoading } =
+      this.state;
 
     return (
-      (enableAutoInitialLoadingIndicator &&
+      (this.loadRemoteRequestAfterMount &&
+        this.existLoadApi() &&
+        this.pagingLoadMode &&
+        enableAutoInitialLoadingIndicator &&
         !firstLoadSuccess &&
-        !enablePullDownRefresh &&
         dataLoading) ||
       (firstLoadSuccess && dataLoading)
     );
