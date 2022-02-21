@@ -280,8 +280,12 @@ class Infrastructure extends ComponentBase {
   };
 
   showLowerLoading = () => {
-    const { enableAutoInitialLoadingIndicator, firstLoadSuccess, dataLoading } =
-      this.state;
+    const {
+      enableAutoInitialLoadingIndicator,
+      firstLoadSuccess,
+      dataLoading,
+      reloading,
+    } = this.state;
 
     return (
       (this.loadRemoteRequestAfterMount &&
@@ -290,7 +294,7 @@ class Infrastructure extends ComponentBase {
         enableAutoInitialLoadingIndicator &&
         !firstLoadSuccess &&
         dataLoading) ||
-      (firstLoadSuccess && dataLoading)
+      (firstLoadSuccess && dataLoading && !reloading)
     );
   };
 

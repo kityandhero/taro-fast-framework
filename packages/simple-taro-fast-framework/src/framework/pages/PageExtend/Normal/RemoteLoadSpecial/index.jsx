@@ -37,6 +37,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
+        lowerLoadingPosition: 'fixed',
         enableAutoInitialLoadingIndicator: false,
         loadApiPath: 'news/pageList',
       },
