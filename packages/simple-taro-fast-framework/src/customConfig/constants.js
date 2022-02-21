@@ -228,6 +228,12 @@ const frameworkPathCollection = {
   },
   pageExtend: {
     path: '/framework/pages/pageExtend/index',
+    buildInConfig: {
+      path: '/framework/pages/pageExtend/buildInConfig/index',
+    },
+    buildInState: {
+      path: '/framework/pages/pageExtend/buildInState/index',
+    },
     builtInEffect: {
       path: '/framework/pages/pageExtend/builtInEffect/index',
       buildEmptyPlaceholder: {

@@ -8,6 +8,16 @@ const o = {
   title: '内置视图',
   list: [
     {
+      id: 'BuildInConfig',
+      name: '内置配置',
+      path: pathCollection.framework.pageExtend.buildInConfig.path,
+    },
+    {
+      id: 'BuildInState',
+      name: '内置状态',
+      path: pathCollection.framework.pageExtend.buildInState.path,
+    },
+    {
       id: 'BuiltInEffect',
       name: '内置功能',
       path: pathCollection.framework.pageExtend.builtInEffect.path,

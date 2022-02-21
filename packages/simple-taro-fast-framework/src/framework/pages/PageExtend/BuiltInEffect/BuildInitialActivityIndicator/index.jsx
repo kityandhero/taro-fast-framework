@@ -77,6 +77,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
+        enableAutoInitialLoadingIndicator: false,
         loadApiPath: 'news/get',
       },
     };
@@ -88,27 +89,6 @@ export default class Index extends ContentPageBase {
     } = props;
 
     return data;
-  };
-
-  showScrollRefreshing = () => {
-    const {
-      enableAutoInitialLoadingIndicator,
-      firstLoadSuccess,
-      dataLoading,
-      reloading,
-    } = this.state;
-
-    console.log({
-      enableAutoInitialLoadingIndicator,
-      firstLoadSuccess,
-      dataLoading,
-      reloading,
-    });
-
-    return (
-      (enableAutoInitialLoadingIndicator && !firstLoadSuccess && dataLoading) ||
-      reloading
-    );
   };
 
   renderContent = () => {

@@ -88,6 +88,8 @@ export default {
       pages: [
         'pages/home/index',
         'pages/pageExtend/index',
+        'pages/pageExtend/buildInConfig/index',
+        'pages/pageExtend/buildInState/index',
         'pages/pageExtend/builtInEffect/index',
         'pages/pageExtend/builtInEffect/buildEmptyPlaceholder/index',
         'pages/pageExtend/builtInEffect/buildInitialActivityIndicator/index',
