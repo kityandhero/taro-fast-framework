@@ -65,24 +65,31 @@ export default class Index extends ContentPageBase {
     };
   }
 
+  getApiData = (props) => {
+    const {
+      news: { data },
+    } = props;
+
+    return data;
+  };
+
   renderContent = () => {
     const { metaData } = this.state;
 
+    console.log(metaData);
+
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="接口请求示例" style={style} headerStyle={cardHeaderStyle}>
+        <Card
+          header="示例: 接口请求联用"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
           {this.judgeInitialActivityIndicatorVisible() ? (
             this.buildInitialActivityIndicator({})
           ) : (
-            <FadeInBox>{metaData.title || ''}</FadeInBox>
+            <FadeInBox>请求成功</FadeInBox>
           )}
-
-          <Divider />
-
-          {this.buildInitialActivityIndicator({
-            type: 'ring',
-            description: '正在努力加载哦',
-          })}
         </Card>
 
         <Card header="构建加载提示" style={style} headerStyle={cardHeaderStyle}>

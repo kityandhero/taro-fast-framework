@@ -346,7 +346,14 @@ class Base extends Infrastructure {
                 list: metaListDataRemote,
                 data: metaData,
                 extra: metaExtra,
-              } = metaOriginalData;
+              } = {
+                ...{
+                  list: [],
+                  data: null,
+                  extra: null,
+                },
+                ...metaOriginalData,
+              };
 
               const { metaListData: metaListDataPrev } = this.state;
 
