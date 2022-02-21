@@ -425,7 +425,7 @@ class Infrastructure extends ComponentBase {
         scroll={scrollView}
         height={height}
         enablePullDownRefresh={enablePullDownRefresh}
-        enableLowerLoad={this.pagingLoadMode && enableLowerLoad}
+        enableLowerLoad={scrollView ? enableLowerLoad : this.pagingLoadMode}
         enableCustomPullDown={enableCustomPullDown}
         refreshColor={refreshColor}
         refreshBackgroundColor={refreshBackgroundColor}
