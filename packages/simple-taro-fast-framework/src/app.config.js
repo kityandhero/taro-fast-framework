@@ -75,6 +75,7 @@ export default {
         'pages/collapse/index',
         'pages/tabbar/index',
         'pages/line/index',
+        'pages/link/index',
         'pages/icon/index',
         'pages/color/index',
         'pages/cssVariable/index',

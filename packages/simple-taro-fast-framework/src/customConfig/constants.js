@@ -205,6 +205,9 @@ const examplePathCollection = {
   line: {
     path: '/example/pages/line/index',
   },
+  link: {
+    path: '/example/pages/link/index',
+  },
   icon: {
     path: '/example/pages/icon/index',
   },

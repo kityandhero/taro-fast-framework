@@ -33,6 +33,11 @@ const o = {
       path: pathCollection.example.line.path,
     },
     {
+      id: 'Link',
+      name: '链接',
+      path: pathCollection.example.link.path,
+    },
+    {
       id: 'Button',
       name: '按钮',
       path: pathCollection.example.button.path,
