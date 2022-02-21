@@ -8,7 +8,7 @@ import {
   isBrowser,
   isWechat,
   copyToClipboard,
-  showSuccessMessage,
+  showInfoMessage,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
@@ -100,7 +100,7 @@ class Line extends BaseComponent {
         successCallback: stringIsNullOrWhiteSpace(copyTips)
           ? null
           : () => {
-              showSuccessMessage({
+              showInfoMessage({
                 message: copyTips,
               });
             },
