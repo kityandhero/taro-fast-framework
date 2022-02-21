@@ -52,6 +52,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'buildInitialActivityIndicator',
     name: '',
+    description: '构建初始加载提示',
   };
 
   constructor(props) {
@@ -92,7 +93,7 @@ export default class Index extends ContentPageBase {
           )}
         </Card>
 
-        <Card header="构建加载提示" style={style} headerStyle={cardHeaderStyle}>
+        <Card header="样式展示" style={style} headerStyle={cardHeaderStyle}>
           {this.buildInitialActivityIndicator({})}
 
           <Divider />

@@ -5,11 +5,16 @@ import './index.less';
 
 export default class DocsHeader extends Component {
   render() {
-    const { title } = this.props;
+    const { title, description } = this.props;
 
     return (
       <View className="doc-header">
-        <View className="doc-header__title">{title}</View>
+        <View className="doc-header__title">
+          <View>{title}</View>
+          <View className="doc-header__title__description">
+            {description || ''}
+          </View>
+        </View>
       </View>
     );
   }

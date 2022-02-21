@@ -26,10 +26,11 @@ export default class ContentPageBase extends PageWrapper {
   };
 
   renderContentView = () => {
-    const { id, name } = {
+    const { id, name, description } = {
       ...{
         id: '',
         name: '',
+        description: '',
       },
       ...this.headerData,
     };
@@ -37,7 +38,7 @@ export default class ContentPageBase extends PageWrapper {
     return (
       <>
         {(this.headerData || null) == null ? null : (
-          <Header title={`${id} ${name}`}></Header>
+          <Header title={`${id} ${name}`} description={description}></Header>
         )}
 
         <View className="doc-body">{this.renderContent()}</View>

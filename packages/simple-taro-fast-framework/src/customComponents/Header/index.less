@@ -1,17 +1,23 @@
 .doc-header {
   display: flex;
   align-items: center;
-  padding: 0 var(--tfc-60);
-  height: var(--tfc-180);
+  padding: var(--tfc-45) var(--tfc-60);
+  min-height: var(--tfc-90);
   box-shadow: inset 0 calc(var(--tfc-26) * -1) var(--tfc-160)
     calc(var(--tfc-15) * -1) rgba(0, 0, 0, 11%);
 
   &__title {
     position: relative;
-    height: var(--tfc-90);
+    min-height: var(--tfc-90);
     color: #333;
     font-size: var(--tfc-40);
     font-weight: bold;
+
+    &__description {
+      font-size: var(--tfc-30);
+      color: #333;
+      padding: var(--tfc-10) 0;
+    }
 
     &::after {
       content: '';

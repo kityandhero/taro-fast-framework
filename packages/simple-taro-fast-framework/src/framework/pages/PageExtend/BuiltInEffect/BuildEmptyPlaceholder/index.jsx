@@ -37,6 +37,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'buildEmptyPlaceholder',
     name: '',
+    description: '构建空数据占位',
   };
 
   renderContent = () => {
