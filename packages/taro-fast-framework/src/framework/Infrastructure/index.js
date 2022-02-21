@@ -284,11 +284,29 @@ class Infrastructure extends ComponentBase {
   /**
    * 构建空数据占位
    */
-  buildEmptyPlaceholder = ({ description = '暂无数据' }) => {
+  buildEmptyPlaceholder = ({
+    icon = 'alert-circle',
+    iconSize = 180,
+    iconStyle = {},
+    image = '',
+    imageStyle = {},
+    description = '暂无数据',
+    onImageClick = null,
+    onDescriptionClick = null,
+  }) => {
     return (
       <View style={{ margin: 'var(--tfc-20) 0' }}>
         <CenterBox>
-          <Empty description={description} />
+          <Empty
+            icon={icon}
+            iconSize={iconSize}
+            iconStyle={iconStyle}
+            image={image}
+            imageStyle={imageStyle}
+            description={description}
+            onImageClick={onImageClick}
+            onDescriptionClick={onDescriptionClick}
+          />
         </CenterBox>
       </View>
     );

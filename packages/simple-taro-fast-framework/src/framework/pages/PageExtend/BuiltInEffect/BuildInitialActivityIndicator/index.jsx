@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Space,
@@ -39,6 +40,21 @@ const descriptionList = [
     label: '支持自定义重载',
     value:
       '重载覆写函数 buildInitialActivityIndicator = () => { return null; }',
+    ellipsis: false,
+    canCopy: true,
+  },
+];
+
+const paramList = [
+  {
+    label: 'type',
+    value: '图标模式, ring/comet, 默认值 "comet"',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'description',
+    value: '文字描述, string, 默认值 "加载中"',
     ellipsis: false,
     canCopy: true,
   },
@@ -111,6 +127,18 @@ export default class Index extends ContentPageBase {
             layout="row"
             size="small"
             emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+
+        <Card header="可用参数" style={style} headerStyle={cardHeaderStyle}>
+          <DataGrid
+            list={paramList}
+            border
+            size="small"
+            column={1}
+            emptyValue="暂无"
+            labelStyle={{ width: transformSize(140) }}
             emptyStyle={{ color: '#ccc' }}
           />
         </Card>
