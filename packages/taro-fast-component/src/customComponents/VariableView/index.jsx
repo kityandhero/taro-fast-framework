@@ -465,8 +465,9 @@ class VariableView extends BaseComponent {
       ) : null;
 
     const lowerLoadingFooterBoxAdjust =
-      lowerLoadingPosition !== 'absolute' &&
-      lowerLoadingPosition !== 'fixed' ? (
+      (lowerLoadingPosition !== 'absolute' &&
+        lowerLoadingPosition !== 'fixed') ||
+      (!lowerLoading && !needNextLoad) ? (
         <View onClick={this.onScrollToLower}>
           {this.buildLowerLoadingFooterBox(lowerLoading, needNextLoad)}
         </View>
