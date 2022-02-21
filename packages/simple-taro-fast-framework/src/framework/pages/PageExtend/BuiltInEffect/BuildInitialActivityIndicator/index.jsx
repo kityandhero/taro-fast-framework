@@ -1,8 +1,11 @@
+import { connect } from 'react-redux';
+
 import {
   Card,
   Space,
   DataGrid,
   Divider,
+  FadeInBox,
 } from 'taro-fast-component/es/customComponents';
 
 import {
@@ -20,8 +23,15 @@ const style = {
 
 const descriptionList = [
   {
+    label: '辅助判断是否显示初次加载提示',
+    value: 'this.judgeInitialActivityIndicatorVisible()',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
     label: '调用方法',
-    value: 'this.buildInitialActivityIndicator({ description: "提示文字" })',
+    value:
+      'this.buildInitialActivityIndicator({ type: "ring/comet", ,description: "提示文字" })',
     ellipsis: false,
     canCopy: true,
   },
@@ -34,15 +44,47 @@ const descriptionList = [
   },
 ];
 
+@connect(({ news, global }) => ({
+  news,
+  global,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'buildInitialActivityIndicator',
     name: '',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        loadApiPath: 'news/get',
+      },
+    };
+  }
+
   renderContent = () => {
+    const { metaData } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
+        <Card header="接口请求示例" style={style} headerStyle={cardHeaderStyle}>
+          {this.judgeInitialActivityIndicatorVisible() ? (
+            this.buildInitialActivityIndicator({})
+          ) : (
+            <FadeInBox>{metaData.title || ''}</FadeInBox>
+          )}
+
+          <Divider />
+
+          {this.buildInitialActivityIndicator({
+            type: 'ring',
+            description: '正在努力加载哦',
+          })}
+        </Card>
+
         <Card header="构建加载提示" style={style} headerStyle={cardHeaderStyle}>
           {this.buildInitialActivityIndicator({})}
 

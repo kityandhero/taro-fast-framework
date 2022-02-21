@@ -10,6 +10,7 @@ import {
   singleListData,
   singleListEmptyData,
   getOverviewData,
+  getData,
   switchStatusData,
 } from '../services/news';
 
@@ -53,6 +54,14 @@ export default {
     },
     *getOverview({ payload }, { call, put }) {
       const response = yield call(getOverviewData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *get({ payload }, { call, put }) {
+      const response = yield call(getData, payload);
 
       yield put({
         type: 'handleCommonData',

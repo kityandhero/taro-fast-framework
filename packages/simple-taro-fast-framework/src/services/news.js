@@ -311,6 +311,19 @@ export async function getOverviewData(params) {
   });
 }
 
+export async function getData(params) {
+  return executiveRequest({
+    api: `/news/article/get`,
+    params,
+    useVirtualRequest: true,
+    virtualRequestDelay: 800,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: article,
+    },
+  });
+}
+
 export async function switchStatusData(params) {
   const { status } = params;
 

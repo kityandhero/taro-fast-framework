@@ -259,25 +259,31 @@ class Infrastructure extends ComponentBase {
     );
   };
 
-  showInitialActivityIndicator = () => {
-    const { enableInitialActivityIndicator, firstLoadSuccess, dataLoading } =
-      this.state;
+  /**
+   * 判断是否显示初始加载提示器
+   * @returns bool
+   */
+  judgeInitialActivityIndicatorVisible = () => {
+    const { firstLoadSuccess, dataLoading } = this.state;
 
-    return enableInitialActivityIndicator && !firstLoadSuccess && dataLoading;
+    return !firstLoadSuccess && dataLoading;
   };
 
-  showEmptyPlaceholder = () => {
-    const { enableEmptyPlaceholder, firstLoadSuccess, metaListData } =
-      this.state;
+  /**
+   * 判断是否显示空数据占位
+   * @returns bool
+   */
+  judgeEmptyPlaceholderVisible = () => {
+    const { firstLoadSuccess, metaListData } = this.state;
 
     return (
-      enableEmptyPlaceholder &&
-      firstLoadSuccess &&
-      isArray(metaListData) &&
-      metaListData.length === 0
+      firstLoadSuccess && isArray(metaListData) && metaListData.length === 0
     );
   };
 
+  /**
+   * 构建空数据占位
+   */
   buildEmptyPlaceholder = ({ description = '暂无数据' }) => {
     return (
       <View style={{ margin: 'var(--tfc-20) 0' }}>
@@ -288,6 +294,9 @@ class Infrastructure extends ComponentBase {
     );
   };
 
+  /**
+   * 构建初始加载提示器
+   */
   buildInitialActivityIndicator = ({
     type = 'comet',
     description = '加载中',
@@ -380,13 +389,18 @@ class Infrastructure extends ComponentBase {
         refreshing={this.showScrollRefreshing()}
         lowerLoading={this.showScrollLowerLoading()}
         needNextLoad={this.judgeNeedNextLoad()}
-        emptyPlaceholderVisible={this.showEmptyPlaceholder()}
+        emptyPlaceholderVisible={
+          enableEmptyPlaceholder && this.judgeEmptyPlaceholderVisible()
+        }
         lowerLoadingPosition={lowerLoadingPosition}
         refreshingBox={this.buildRefreshingBox()}
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
         emptyPlaceholder={this.buildEmptyPlaceholder({})}
-        initialActivityIndicatorVisible={this.showInitialActivityIndicator()}
+        initialActivityIndicatorVisible={
+          enableInitialActivityIndicator &&
+          this.judgeInitialActivityIndicatorVisible()
+        }
         initialActivityIndicator={this.buildInitialActivityIndicator({})}
         upperBox={this.buildUpperBox()}
       >
