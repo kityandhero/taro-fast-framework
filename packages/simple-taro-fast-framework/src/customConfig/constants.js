@@ -172,6 +172,9 @@ const examplePathCollection = {
   centerBox: {
     path: '/example/pages/centerBox/index',
   },
+  thumbnailBox: {
+    path: '/example/pages/thumbnailBox/index',
+  },
   dataGrid: {
     path: '/example/pages/dataGrid/index',
   },

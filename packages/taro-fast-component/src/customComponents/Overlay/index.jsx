@@ -1,6 +1,10 @@
 import { View } from '@tarojs/components';
 
-import { inCollection, colorHexToRGB } from 'taro-fast-common/es/utils/tools';
+import {
+  inCollection,
+  colorHexToRGB,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
@@ -21,6 +25,7 @@ const defaultProps = {
   visible: false,
   color: '#000',
   alpha: 0.5,
+  image: '',
   zIndex: 810,
   mode: 'fullParent',
   lockScroll: true,
@@ -78,7 +83,7 @@ class Overlay extends BaseComponent {
   };
 
   getStyle = () => {
-    const { visible, color, alpha, zIndex } = this.props;
+    const { visible, color, alpha, image, zIndex } = this.props;
     const { counter } = this.state;
 
     const mode = this.getMode();
@@ -146,9 +151,19 @@ class Overlay extends BaseComponent {
         width,
         height,
         zIndex,
-        backgroundColor: `rgba(${colorHexToRGB(color, '')}, ${alpha})`,
+
         transition: `opacity ${duration}ms ${animal}`,
       },
+      ...(stringIsNullOrWhiteSpace(image)
+        ? {
+            backgroundColor:
+              color === 'transparent'
+                ? 'transparent'
+                : `rgba(${colorHexToRGB(color, '')}, ${alpha})`,
+          }
+        : {
+            backgroundImage: image,
+          }),
     };
   };
 

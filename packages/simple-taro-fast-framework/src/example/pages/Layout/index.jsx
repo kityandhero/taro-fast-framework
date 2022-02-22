@@ -53,6 +53,11 @@ const o = {
       path: pathCollection.example.centerBox.path,
     },
     {
+      id: 'ThumbnailBox',
+      name: '缩略容器',
+      path: pathCollection.example.thumbnailBox.path,
+    },
+    {
       id: 'Grid',
       name: '宫格',
       path: pathCollection.example.grid.path,

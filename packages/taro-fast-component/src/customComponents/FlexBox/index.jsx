@@ -1,16 +1,17 @@
 import { View } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  inCollection,
+  showErrorMessage,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
 import Col from '../Flex/Col';
 import Row from '../Flex/Row';
 
-const directionCollection = ['horizontal', 'vertical'];
-
 const defaultProps = {
-  direction: 'horizontal',
   flexAuto: 'left',
   allowWrap: false,
   verticalHeightAdjust: '100%',
@@ -26,7 +27,29 @@ const defaultProps = {
   alignItems: 'center',
 };
 
+const flexAutoCollection = ['left', 'right', 'top', 'bottom'];
+
 class FlexBox extends BaseComponent {
+  getDirection = () => {
+    const { flexAuto } = this.props;
+
+    if (!inCollection(flexAutoCollection, flexAuto)) {
+      const text = 'flexAuto 只能配置为 left/right/top/bottom';
+
+      showErrorMessage({
+        message: text,
+      });
+
+      return 'horizontal';
+    }
+
+    return inCollection(['left', 'right'], flexAuto)
+      ? 'horizontal'
+      : inCollection(['top', 'bottom'], flexAuto)
+      ? 'vertical'
+      : 'horizontal';
+  };
+
   renderFurther() {
     const {
       style: styleSource,
@@ -40,14 +63,11 @@ class FlexBox extends BaseComponent {
       topStyle,
       bottom,
       bottomStyle,
-      direction: directionSource,
       alignItems,
       verticalHeight,
     } = this.props;
 
-    const direction = inCollection(directionCollection, directionSource)
-      ? directionSource
-      : 'horizontal';
+    const direction = this.getDirection();
 
     let flexAuto = flexAutoSource;
 

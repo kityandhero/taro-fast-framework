@@ -64,6 +64,7 @@ export default {
         'pages/horizontalCenterBox/index',
         'pages/flexBox/index',
         'pages/centerBox/index',
+        'pages/thumbnailBox/index',
         'pages/dataGrid/index',
         'pages/searchBar/index',
         'pages/textAreaItem/index',
