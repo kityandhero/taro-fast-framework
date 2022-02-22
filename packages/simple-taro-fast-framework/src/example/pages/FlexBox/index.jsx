@@ -62,7 +62,6 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <FlexBox
-            direction="vertical"
             flexAuto="top"
             verticalHeight={300}
             top={
@@ -87,7 +86,6 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <FlexBox
-            direction="vertical"
             flexAuto="bottom"
             verticalHeight={300}
             top={

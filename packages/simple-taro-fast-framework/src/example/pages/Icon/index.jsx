@@ -160,7 +160,7 @@ export default class Index extends ContentPageBase {
             <Grid.Item key={`${keyPrefix}_${index}`}>
               <FlexBox
                 style={boxStyle}
-                direction="vertical"
+                flexAuto="top"
                 top={
                   <CenterBox>
                     <Icon value={item} size={40} />

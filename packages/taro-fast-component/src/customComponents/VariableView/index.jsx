@@ -557,7 +557,6 @@ class VariableView extends BaseComponent {
           )}
 
           <FlexBox
-            direction="vertical"
             flexAuto="bottom"
             verticalHeight="100%"
             top={upperBox}
