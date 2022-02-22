@@ -188,14 +188,14 @@ class Overlay extends BaseComponent {
   };
 
   render() {
-    const { children } = this.props;
+    const { lockScroll, children } = this.props;
 
     const style = this.getStyle();
 
     return (
       <View
         style={style}
-        catchMove
+        catchMove={lockScroll}
         onTouchMove={this.handleTouchMove}
         onClick={this.triggerClick}
       >

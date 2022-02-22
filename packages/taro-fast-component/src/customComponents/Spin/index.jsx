@@ -63,7 +63,7 @@ export const Spin = (props) => {
               ? {}
               : { backgroundColor: overlayBackgroundColor }),
           }}
-          catchMove
+          catchMove={fullscreen}
           onTouchMove={handleTouchMove}
         >
           <View style={{ height: '100%' }}>

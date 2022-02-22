@@ -136,6 +136,7 @@ class ThumbnailBox extends BaseComponent {
           zIndex={99}
           color="transparent"
           duration={100}
+          lockScroll={false}
         >
           <View className={classNames(`${classPrefix}__mask`)}>
             <FlexBox
