@@ -19,6 +19,7 @@
   background-color: var(--background-color) !important;
   background-image: var(--background-image) !important;
   position: relative;
+  overflow: hidden;
   display: inline-block;
   box-sizing: border-box;
   height: auto;
@@ -32,6 +33,10 @@
   border-radius: var(--border-radius);
   transition: opacity ease 0.15s;
   user-select: none;
+
+  &--hover {
+    background-color: transparent !important;
+  }
 
   &:focus {
     outline: none;
@@ -84,6 +89,15 @@
       --background-color: transparent;
       --border-color: transparent;
     }
+  }
+
+  &__ripple {
+    background-color: rgba(181, 236, 240, 80%);
+    border-radius: 100%;
+    height: var(--tfc-40);
+    width: var(--tfc-40);
+    position: absolute;
+    transform: scale(0);
   }
 
   &-block {
@@ -161,5 +175,17 @@
 
   &::after {
     border: 0;
+  }
+}
+
+@keyframes tfc-button-ripple {
+  0% {
+    background-color: rgba(181, 236, 240, 80%);
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(12);
+    background-color: transparent;
   }
 }

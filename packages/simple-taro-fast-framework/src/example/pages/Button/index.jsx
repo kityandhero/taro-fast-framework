@@ -261,6 +261,29 @@ export default class Index extends ContentPageBase {
           </Space>
         </Card>
 
+        <Card header="涟漪效果" style={style} headerStyle={cardHeaderStyle}>
+          <Space direction="vertical" fillWidth>
+            <Button
+              block
+              size="large"
+              ripple
+              onClick={(e) => {
+                console.log(e);
+              }}
+            >
+              Block Button
+            </Button>
+          </Space>
+
+          <Divider>微信按钮</Divider>
+
+          <Space direction="vertical" fillWidth>
+            <Button weappButton block size="large" ripple>
+              Block Button
+            </Button>
+          </Space>
+        </Card>
+
         <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <Button disabled>Disabled</Button>

@@ -35,6 +35,7 @@ const openTypeCollection = [
 
 const defaultProps = {
   hidden: false,
+  ripple: false,
   style: {},
   backgroundColor: '',
   fontColor: '',
@@ -73,6 +74,17 @@ const defaultProps = {
 };
 
 class Button extends BaseComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        rippleStyle: {},
+      },
+    };
+  }
+
   getFill = () => {
     const { fill } = this.props;
 
@@ -97,9 +109,46 @@ class Button extends BaseComponent {
     return inCollection(sizeCollection, size) ? size : 'middle';
   };
 
+  triggerClick = (e) => {
+    const { ripple, onClick } = this.props;
+
+    if (ripple) {
+      const that = this;
+
+      const {
+        touches,
+        mpEvent: {
+          currentTarget: { offsetLeft, offsetTop },
+        },
+      } = e;
+
+      const x = touches[0].pageX;
+      const y = touches[0].pageY;
+
+      this.setState({
+        rippleStyle: {
+          top: `${y - offsetTop}px`,
+          left: `${x - offsetLeft}px`,
+          animation: 'tfc-button-ripple 0.4s linear',
+        },
+      });
+
+      setTimeout(function () {
+        that.setState({
+          rippleStyle: {},
+        });
+      }, 500);
+    }
+
+    if (isFunction(onClick)) {
+      onClick(e);
+    }
+  };
+
   renderFurther() {
     const {
       style,
+      ripple,
       backgroundColor,
       fontColor,
       borderColor,
@@ -122,7 +171,6 @@ class Button extends BaseComponent {
       weappButton,
       openType,
       scope,
-      onClick,
       onGetUserInfo,
       onGetAuthorize,
       onContact,
@@ -132,6 +180,7 @@ class Button extends BaseComponent {
       onOpenSetting,
       children,
     } = this.props;
+    const { rippleStyle } = this.state;
 
     const fill = this.getFill();
 
@@ -196,8 +245,9 @@ class Button extends BaseComponent {
         <ButtonWxApp
           plain
           type={type}
-          onClick={onClick}
+          onClick={this.triggerClick}
           className={cn}
+          hoverClass={ripple ? `${classPrefix}-hover` : 'button-hover'}
           style={{
             ...styleAdjust,
           }}
@@ -212,6 +262,13 @@ class Button extends BaseComponent {
           onError={onError}
           onOpenSetting={onOpenSetting}
         >
+          {ripple ? (
+            <View
+              className={classNames(`${classPrefix}__ripple`)}
+              style={rippleStyle}
+            />
+          ) : null}
+
           {loadingMode === 'overlay' ? (
             <Spin
               spin={!!loading}
@@ -240,15 +297,19 @@ class Button extends BaseComponent {
 
     return (
       <View
-        onClick={(e) => {
-          if (isFunction(onClick)) {
-            onClick(e);
-          }
-        }}
+        onClick={this.triggerClick}
         className={cn}
+        hoverClass={ripple ? `${classPrefix}-hover` : 'button-hover'}
         style={styleAdjust}
         disabled={disabled}
       >
+        {ripple ? (
+          <View
+            className={classNames(`${classPrefix}__ripple`)}
+            style={rippleStyle}
+          />
+        ) : null}
+
         {loadingMode === 'overlay' ? (
           <Spin
             spin={!!loading}
