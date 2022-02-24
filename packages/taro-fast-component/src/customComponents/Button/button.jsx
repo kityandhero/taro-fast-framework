@@ -209,6 +209,7 @@ class Button extends BaseComponent {
       classPrefix,
       backgroundColor ? null : `${classPrefix}-default`,
       {
+        [`${classPrefix}--active`]: !ripple,
         [`${classPrefix}-block`]: block,
         [`${classPrefix}-disabled`]: disabled,
         [`${classPrefix}-fill-outline`]: fill === 'outline',
@@ -247,7 +248,7 @@ class Button extends BaseComponent {
           type={type}
           onClick={this.triggerClick}
           className={cn}
-          hoverClass={ripple ? `${classPrefix}-hover` : 'button-hover'}
+          hoverClass={ripple ? `${classPrefix}--hover` : 'button-hover'}
           style={{
             ...styleAdjust,
           }}
@@ -299,7 +300,7 @@ class Button extends BaseComponent {
       <View
         onClick={this.triggerClick}
         className={cn}
-        hoverClass={ripple ? `${classPrefix}-hover` : 'button-hover'}
+        hoverClass={ripple ? `${classPrefix}--hover` : 'button-hover'}
         style={styleAdjust}
         disabled={disabled}
       >

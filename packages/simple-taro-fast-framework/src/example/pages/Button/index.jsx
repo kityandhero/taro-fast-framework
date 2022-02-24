@@ -263,14 +263,7 @@ export default class Index extends ContentPageBase {
 
         <Card header="涟漪效果" style={style} headerStyle={cardHeaderStyle}>
           <Space direction="vertical" fillWidth>
-            <Button
-              block
-              size="large"
-              ripple
-              onClick={(e) => {
-                console.log(e);
-              }}
-            >
+            <Button block size="large" ripple>
               Block Button
             </Button>
           </Space>
