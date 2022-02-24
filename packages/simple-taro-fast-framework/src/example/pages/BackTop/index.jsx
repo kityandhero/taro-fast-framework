@@ -193,7 +193,7 @@ export default class Index extends ContentPageBase {
             visible={visible1}
             right={120}
             opacity={0.4}
-            circle
+            circle={false}
             onClick={this.scrollToTop}
           />
 
