@@ -26,6 +26,7 @@ import {
   showNavigationBarLoading as showNavigationBarLoadingCore,
   hideNavigationBarLoading as hideNavigationBarLoadingCore,
   stopPullDownRefresh as stopPullDownRefreshCore,
+  pageScrollTo as pageScrollToCore,
 } from '@tarojs/taro';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -178,6 +179,10 @@ export function hideNavigationBarLoading() {
 
 export function stopPullDownRefresh() {
   stopPullDownRefreshCore();
+}
+
+export function pageScrollTo(params) {
+  pageScrollToCore(params);
 }
 
 export function redirectTo(params) {

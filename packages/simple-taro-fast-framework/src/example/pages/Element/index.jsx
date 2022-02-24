@@ -112,6 +112,11 @@ const o = {
       name: '底部导航栏',
       path: pathCollection.example.tabbar.path,
     },
+    {
+      id: 'BackTop',
+      name: '返回头部',
+      path: pathCollection.example.backTop.path,
+    },
   ],
 };
 

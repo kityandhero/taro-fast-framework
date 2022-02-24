@@ -1,0 +1,28 @@
+@class-prefix-back-top: ~'tfc-back-top';
+
+.@{class-prefix-back-top} {
+  --background-color: var(--tfc-color-light);
+  --right: var(--tfc-40);
+  --bottom: var(--tfc-160);
+  --size: var(--tfc-80);
+  --border-radius: var(--tfc-16);
+  --z-index: 100;
+  --opacity: 0.8;
+
+  position: fixed;
+  z-index: var(--z-index);
+  right: var(--right);
+  bottom: var(--bottom);
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  overflow: hidden;
+
+  &__body {
+    width: 100%;
+    height: 100%;
+    opacity: var(--opacity);
+    background-color: transparent;
+  }
+}

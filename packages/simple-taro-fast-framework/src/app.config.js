@@ -25,6 +25,7 @@ export default {
         'pages/imageBox/index',
         'pages/avatar/index',
         'pages/badge/index',
+        'pages/backTop/index',
         'pages/noticeBar/index',
         'pages/flex/index',
         'pages/fadeInBox/index',

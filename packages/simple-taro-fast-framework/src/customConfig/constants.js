@@ -58,6 +58,9 @@ const examplePathCollection = {
   avatar: {
     path: '/example/pages/avatar/index',
   },
+  backTop: {
+    path: '/example/pages/backTop/index',
+  },
   badge: {
     path: '/example/pages/badge/index',
   },
