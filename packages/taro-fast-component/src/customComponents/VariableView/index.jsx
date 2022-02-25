@@ -31,6 +31,7 @@ const defaultProps = {
   refreshing: false,
   enableCustomPullDown: false,
   enableLowerLoad: false,
+  enableSafeAreaInsetBottom: false,
   useRefreshingBox: true,
   scrollRefresherThreshold: 100,
   scrollRefresherDefaultStyle: '',
@@ -434,6 +435,12 @@ class VariableView extends BaseComponent {
     return upperBox || null;
   };
 
+  buildSafeAreaInsetBottom = () => {
+    return (
+      <View style={{ padding: '0 0 calc(env(safe-area-inset-bottom)) 0' }} />
+    );
+  };
+
   checkUseCustomPullDown = () => {
     const { enablePullDownRefresh, enableCustomPullDown } = this.props;
 
@@ -447,6 +454,7 @@ class VariableView extends BaseComponent {
       enablePullDownRefresh,
       enableCustomPullDown,
       enableLowerLoad,
+      enableSafeAreaInsetBottom,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
@@ -597,6 +605,8 @@ class VariableView extends BaseComponent {
             {children}
 
             {lowerLoadingFooterBoxAdjust}
+
+            {enableSafeAreaInsetBottom ? this.buildSafeAreaInsetBottom() : null}
           </View>
         </ScrollView>
       );
@@ -637,6 +647,9 @@ class VariableView extends BaseComponent {
         {!scroll ? upperBox : null}
         {!scroll ? children : null}
         {!scroll ? lowerLoadingFooterBoxAdjust : null}
+        {!scroll && enableSafeAreaInsetBottom
+          ? this.buildSafeAreaInsetBottom()
+          : null}
       </View>
     );
   }

@@ -106,6 +106,11 @@ class Infrastructure extends ComponentBase {
    */
   enableAutoInitialLoadingIndicator = true;
 
+  /**
+   * 启用容器底部触摸安全区
+   */
+  enableSafeAreaInsetBottom = true;
+
   urlParamsCore = null;
 
   /**
@@ -312,7 +317,7 @@ class Infrastructure extends ComponentBase {
   bannerNotify = ({
     message,
     type = 'info',
-    duration = 3000,
+    duration = 1500,
     customStyle = {},
     className = '',
   }) => {
@@ -491,6 +496,7 @@ class Infrastructure extends ComponentBase {
         enableLowerLoad={
           this.viewScrollMode ? this.enableLowerLoad : this.pagingLoadMode
         }
+        enableSafeAreaInsetBottom={this.enableSafeAreaInsetBottom}
         enableCustomPullDown
         refreshingBoxEffect={this.refreshingBoxEffect}
         refreshColor={this.refreshColor}
