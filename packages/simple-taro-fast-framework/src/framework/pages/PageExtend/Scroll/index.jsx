@@ -55,6 +55,11 @@ const o = {
   ],
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '滚动视图',
+});
+
 export default class Index extends ChannelPageBase {
   buildData = () => {
     return o;

@@ -22,6 +22,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '默认视图基本示例',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Normal',

@@ -37,6 +37,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '上部固定区域',
+});
+
 export default class Index extends ContentPageBase {
   viewScrollMode = true;
 

@@ -31,6 +31,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '上部区域',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'UpperBox',

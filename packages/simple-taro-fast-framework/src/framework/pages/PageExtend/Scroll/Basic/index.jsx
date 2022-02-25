@@ -23,6 +23,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '滚动视图基本示例',
+});
+
 export default class Index extends ContentPageBase {
   viewScrollMode = true;
 
