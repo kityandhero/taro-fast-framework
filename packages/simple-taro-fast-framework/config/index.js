@@ -47,6 +47,9 @@ const config = {
         },
       },
     },
+    // prerender: {
+    //   match: ['pages/**', 'example/**', 'framework/**'],
+    // },
   },
   h5: {
     publicPath: '/',

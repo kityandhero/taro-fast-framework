@@ -27,13 +27,19 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    value: 'viewScrollMode = true',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: '开启下拉刷新式',
-    value: 'this.setState({enablePullDownRefresh: true})',
+    value: 'enablePullDownRefresh = true',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '开启自定义下拉效果',
+    value: 'enableCustomPullDown = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -51,6 +57,12 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
+  viewScrollMode = true;
+
+  enablePullDownRefresh = true;
+
+  enableCustomPullDown = true;
+
   headerData = {
     id: 'CustomPullRefresh',
     name: '自定义下拉刷新',
@@ -62,9 +74,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        scrollView: true,
-        enablePullDownRefresh: true,
-        enableCustomPullDown: true,
         // refreshColor: 'red',
         // refreshBackgroundColor: 'green',
         loadApiPath: 'news/singleList',

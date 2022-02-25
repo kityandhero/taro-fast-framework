@@ -17,13 +17,15 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    value: 'viewScrollMode = true',
     ellipsis: false,
     canCopy: true,
   },
 ];
 
 export default class Index extends ContentPageBase {
+  viewScrollMode = true;
+
   headerData = {
     id: 'Scroll',
     name: '滚动视图',
@@ -35,7 +37,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        scrollView: true,
         counter: 0,
       },
     };

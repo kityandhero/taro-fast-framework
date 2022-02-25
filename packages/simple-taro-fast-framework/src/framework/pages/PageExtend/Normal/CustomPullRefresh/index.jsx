@@ -26,14 +26,14 @@ const style = {
 
 const descriptionList = [
   {
-    label: '开启滚动视图',
-    value: 'viewScrollMode = true',
+    label: '开启下拉刷新式',
+    value: 'enablePullDownRefresh = true',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: '开启下拉刷新式',
-    value: 'enablePullDownRefresh = true',
+    label: '开启自定义下拉效果',
+    value: 'enableCustomPullDown = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -51,13 +51,14 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
-  viewScrollMode = true;
-
   enablePullDownRefresh = true;
 
+  enableCustomPullDown = true;
+
   headerData = {
-    id: 'PullRefresh',
-    name: '下拉刷新',
+    id: 'CustomPullRefresh',
+    name: '',
+    description: '自定义下拉刷新',
   };
 
   constructor(props) {
@@ -66,8 +67,8 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        refreshColor: 'red',
-        refreshBackgroundColor: 'green',
+        // refreshColor: 'red',
+        // refreshBackgroundColor: 'green',
         loadApiPath: 'news/singleList',
       },
     };
@@ -123,36 +124,6 @@ export default class Index extends ContentPageBase {
             </Space>
           </View>
         )}
-
-        <View>
-          <Space direction="vertical" fillWidth>
-            {metaListData.map((o, index) => {
-              const { title, description } = o;
-
-              return (
-                <FadeInBox key={`item_${index}`}>
-                  <Card
-                    header={title}
-                    border
-                    cardBorderRadiusMode={false}
-                    style={style}
-                  >
-                    <Ellipsis
-                      line={2}
-                      style={{
-                        height: transformSize(88),
-                        fontSize: transformSize(28),
-                        lineHeight: transformSize(44),
-                      }}
-                    >
-                      {description}
-                    </Ellipsis>
-                  </Card>
-                </FadeInBox>
-              );
-            })}
-          </Space>
-        </View>
 
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid

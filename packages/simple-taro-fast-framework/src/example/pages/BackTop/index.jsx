@@ -194,6 +194,8 @@ export default class Index extends ContentPageBase {
             right={120}
             opacity={0.4}
             circle={false}
+            iconColor="red"
+            backgroundColor="#000"
             onClick={this.scrollToTop}
           />
 

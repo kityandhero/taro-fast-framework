@@ -22,6 +22,8 @@ import {
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 class Infrastructure extends ComponentBase {
+  //#region fade spin config
+
   useFadeSpinWrapper = false;
 
   useSimulationFadeSpin = false;
@@ -30,9 +32,19 @@ class Infrastructure extends ComponentBase {
 
   simulationFadeSpinDuration = 300;
 
-  urlParamsCore = null;
+  //#endregion
+
+  //#region view config
 
   viewStyle = {};
+
+  viewScrollMode = false;
+
+  enablePullDownRefresh = false;
+
+  //#endregion
+
+  urlParamsCore = null;
 
   /**
    * 初始化时加载数据请求的延迟时间
@@ -74,6 +86,8 @@ class Infrastructure extends ComponentBase {
    */
   clearListDataBeforeAttach = false;
 
+  pageScrollTop = 0;
+
   constructor(props) {
     super(props);
 
@@ -82,14 +96,12 @@ class Infrastructure extends ComponentBase {
       ...underlyingState,
       ...{
         spin: true,
-        scrollView: false,
-        enablePullDownRefresh: false,
         enableCustomPullDown: false,
         enableLowerLoad: false,
         scrollRefresherThreshold: 100,
         scrollRefresherDefaultStyle: 'white',
         scrollRefresherBackground: '',
-        height: '100vh',
+        refreshingBoxEffect: 'pull',
         refreshColor: '',
         refreshBackgroundColor: '',
         scrollWithAnimation: true,
@@ -109,51 +121,6 @@ class Infrastructure extends ComponentBase {
   static getDerivedStateFromProps(nextProps, prevState) {
     return null;
   }
-
-  doDidMountTask = () => {
-    this.checkPermission();
-
-    this.doWorkBeforeAdjustDidMount();
-
-    this.doWorkAdjustDidMount();
-
-    this.doWorkAfterAdjustDidMount();
-
-    this.doWorkAfterDidMount();
-
-    if (this.loadRemoteRequestAfterMount) {
-      this.doSimulationFadeSpin(this.doLoadRemoteRequest);
-    } else {
-      this.doSimulationFadeSpin();
-    }
-
-    this.doOtherRemoteRequest();
-
-    this.doOtherWorkAfterDidMount();
-  };
-
-  /**
-   * 执行模拟渐显加载效果, 该方法不要覆写
-   */
-  doSimulationFadeSpin = (callback = null) => {
-    const { spin } = this.state;
-
-    const that = this;
-
-    if (that.useSimulationFadeSpin && spin) {
-      setTimeout(() => {
-        that.setState({ spin: false }, () => {
-          if (isFunction(callback)) {
-            callback();
-          }
-        });
-      }, that.simulationFadeSpinDuration);
-    } else {
-      if (isFunction(callback)) {
-        callback();
-      }
-    }
-  };
 
   getUrlParams() {
     if (stringIsNullOrWhiteSpace(this.urlParamsCore)) {
@@ -217,21 +184,23 @@ class Infrastructure extends ComponentBase {
     return false;
   }
 
-  bannerNotify = ({
-    message,
-    type = 'info',
-    duration = 3000,
-    customStyle = {},
-    className = '',
-  }) => {
-    Taro.bannerNotify({
-      message,
-      type,
-      duration,
-      customStyle: customStyle,
-      className: className,
-    });
-  };
+  onPageScroll(e) {
+    const { scrollTop } = e;
+
+    this.pageScrollTop = scrollTop;
+
+    this.onScroll({ scrollTop });
+  }
+
+  onPullDownRefresh() {
+    this.onRefresh();
+  }
+
+  onReachBottom() {
+    if (this.judgeNeedNextLoad()) {
+      this.onLowerLoad();
+    }
+  }
 
   goToWebPage(pagePath, title, url) {
     if (stringIsNullOrWhiteSpace(url)) {
@@ -249,6 +218,73 @@ class Infrastructure extends ComponentBase {
 
     navigateTo(`${pagePath}?title=${titleEncode}&url=${urlEncode}`);
   }
+
+  doDidMountTask = () => {
+    this.checkPermission();
+
+    this.doWorkBeforeAdjustDidMount();
+
+    this.doWorkAdjustDidMount();
+
+    this.doWorkAfterAdjustDidMount();
+
+    this.doWorkAfterDidMount();
+
+    if (this.loadRemoteRequestAfterMount) {
+      this.doSimulationFadeSpin(this.doLoadRemoteRequest);
+    } else {
+      this.doSimulationFadeSpin();
+    }
+
+    this.doOtherRemoteRequest();
+
+    this.doOtherWorkAfterDidMount();
+  };
+
+  /**
+   * 执行模拟渐显加载效果, 该方法不要覆写
+   */
+  doSimulationFadeSpin = (callback = null) => {
+    const { spin } = this.state;
+
+    const that = this;
+
+    if (that.useSimulationFadeSpin && spin) {
+      setTimeout(() => {
+        that.setState({ spin: false }, () => {
+          if (isFunction(callback)) {
+            callback();
+          }
+        });
+      }, that.simulationFadeSpinDuration);
+    } else {
+      if (isFunction(callback)) {
+        callback();
+      }
+    }
+  };
+
+  bannerNotify = ({
+    message,
+    type = 'info',
+    duration = 3000,
+    customStyle = {},
+    className = '',
+  }) => {
+    Taro.bannerNotify({
+      message,
+      type,
+      duration,
+      customStyle: customStyle,
+      className: className,
+    });
+  };
+
+  onScroll = (callback) => {
+    if (isFunction(callback)) {
+      callback({ scrollTop: this.pageScrollTop });
+    }
+  };
 
   onRefresh = () => {};
 
@@ -387,28 +423,16 @@ class Infrastructure extends ComponentBase {
   // eslint-disable-next-line no-unused-vars
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
 
-  onPullDownRefresh() {
-    this.onRefresh();
-  }
-
-  onReachBottom() {
-    if (this.judgeNeedNextLoad()) {
-      this.onLowerLoad();
-    }
-  }
-
   renderView() {
     const {
       spin,
-      scrollView,
-      enablePullDownRefresh,
       enableCustomPullDown,
       enableLowerLoad,
       scrollRefresherThreshold,
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
-      height,
       refreshColor,
+      refreshingBoxEffect,
       refreshBackgroundColor,
       scrollWithAnimation,
       scrollAnchoring,
@@ -422,11 +446,14 @@ class Infrastructure extends ComponentBase {
     const vw = (
       <VariableView
         style={this.viewStyle}
-        scroll={scrollView}
-        height={height}
-        enablePullDownRefresh={enablePullDownRefresh}
-        enableLowerLoad={scrollView ? enableLowerLoad : this.pagingLoadMode}
+        scroll={this.viewScrollMode}
+        height="100vh"
+        enablePullDownRefresh={this.enablePullDownRefresh}
+        enableLowerLoad={
+          this.viewScrollMode ? enableLowerLoad : this.pagingLoadMode
+        }
         enableCustomPullDown={enableCustomPullDown}
+        refreshingBoxEffect={refreshingBoxEffect}
         refreshColor={refreshColor}
         refreshBackgroundColor={refreshBackgroundColor}
         scrollWithAnimation={scrollWithAnimation}
@@ -448,6 +475,9 @@ class Infrastructure extends ComponentBase {
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
         upperBox={this.buildUpperBox()}
+        onExternalScroll={(callback) => {
+          this.onScroll(callback);
+        }}
       >
         {this.renderFurther()}
       </VariableView>

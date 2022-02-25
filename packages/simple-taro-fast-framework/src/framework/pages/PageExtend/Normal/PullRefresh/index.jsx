@@ -27,13 +27,13 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    value: 'viewScrollMode = true',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: '开启下拉刷新式',
-    value: 'this.setState({enablePullDownRefresh: true})',
+    value: 'enablePullDownRefresh = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -51,6 +51,10 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
+  enablePullDownRefresh = true;
+
+  enableAutoInitialLoadingIndicator = false;
+
   headerData = {
     id: 'PullRefresh',
     name: '下拉刷新',
@@ -62,8 +66,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        enablePullDownRefresh: true,
-        enableAutoInitialLoadingIndicator: false,
         loadApiPath: 'news/singleList',
       },
     };

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '内置视图',
+  navigationBarTitleText: '扩展页面基架',
 };

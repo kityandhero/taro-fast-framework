@@ -33,12 +33,22 @@ const o = {
       path: pathCollection.framework.pageExtend.normal.pullRefresh.path,
     },
     {
+      id: 'CustomPullRefresh',
+      name: '自定义下拉刷新',
+      path: pathCollection.framework.pageExtend.normal.customPullRefresh.path,
+    },
+    {
       id: 'LowerLoad',
       name: '触底加载',
       path: pathCollection.framework.pageExtend.normal.lowerLoad.path,
     },
   ],
 };
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '首页',
+});
 
 export default class Index extends ChannelPageBase {
   buildData = () => {

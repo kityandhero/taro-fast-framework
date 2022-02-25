@@ -104,6 +104,40 @@ const configList = [
     ellipsis: false,
     canCopy: true,
   },
+  {
+    label: 'viewScrollMode',
+    value: '是否使用ScrollView模式, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'enablePullDownRefresh',
+    value:
+      '启用下拉刷新,针对 viewScrollMode 模式, 使用前需开启 viewScrollMode 模式, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'enableCustomPullDown',
+    value:
+      '启用自定义下拉刷新动效,针对 viewScrollMode 模式, 使用前需开启viewScrollMode 模式, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'enableLowerLoad',
+    value:
+      '启用触底部加载, 针对 viewScrollMode 模式, 使用前需开启viewScrollMode 模式, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'enableAutoInitialLoadingIndicator',
+    value:
+      '启用初始化加载提示器自动显示, 默认开启, 需要自定义初始加载效果时候请关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
 ];
 
 export default class Index extends ContentPageBase {

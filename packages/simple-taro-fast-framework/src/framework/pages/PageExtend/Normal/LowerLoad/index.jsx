@@ -27,13 +27,13 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    value: 'viewScrollMode = true',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: '配置处理加载',
-    value: 'this.setState({enablePullDownRefresh: true})',
+    value: 'enablePullDownRefresh = true',
     ellipsis: false,
     canCopy: true,
   },

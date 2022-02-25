@@ -17,7 +17,6 @@ import CenterBox from '../CenterBox';
 import ActivityIndicator from '../ActivityIndicator';
 import Transition from '../Transition';
 import Divider from '../Divider';
-import FlexBox from '../FlexBox';
 
 import PullIndicator from './PullIndicator';
 
@@ -37,6 +36,7 @@ const defaultProps = {
   scrollRefresherDefaultStyle: '',
   scrollRefresherBackground: '',
   refreshingBox: null,
+  refreshingBoxEffect: 'pull',
   refreshColor: '',
   refreshBackgroundColor: '',
   refreshingBackgroundColor: '#dbd9d9',
@@ -60,6 +60,7 @@ const defaultProps = {
   style: {},
   onRefresh: null,
   onLowerLoad: null,
+  onExternalScroll: null,
 };
 
 class VariableView extends BaseComponent {
@@ -88,6 +89,21 @@ class VariableView extends BaseComponent {
   scrollViewId = '';
 
   needRefresh = false;
+
+  /**
+   * 外部触摸滑动初始纵轴坐标
+   */
+  externalTouchStartY = 0;
+
+  /**
+   * 外部触摸滑动方向评判是否完成
+   */
+  externalTouchDirectionJudgeComplete = false;
+
+  /**
+   * 外部触摸滑动经过评判后是否继续进行
+   */
+  externalTouchContinue = false;
 
   constructor(props) {
     super(props);
@@ -122,24 +138,46 @@ class VariableView extends BaseComponent {
   };
 
   onViewTouchStart = (e) => {
+    const { scroll } = this.props;
+
     const useCustomPullDown = this.checkUseCustomPullDown();
 
     if (!useCustomPullDown) {
       return;
     }
 
-    createSelectorQuery()
-      .select(`#${this.scrollViewId}`)
-      .scrollOffset((rect) => {
-        const { scrollTop } = rect;
+    if (scroll) {
+      createSelectorQuery()
+        .select(`#${this.scrollViewId}`)
+        .scrollOffset((rect) => {
+          const { scrollTop } = rect;
 
-        if (scrollTop === 0) {
-          this.prepareRefresh = true;
+          if (scrollTop === 0) {
+            this.prepareRefresh = true;
 
-          this.touchStartY = e.touches[0].pageY;
-        }
-      })
-      .exec();
+            this.touchStartY = e.touches[0].pageY;
+          }
+        })
+        .exec();
+    } else {
+      //外部触摸处理
+
+      const { onExternalScroll } = this.props;
+
+      if (isFunction(onExternalScroll)) {
+        const that = this;
+
+        onExternalScroll(({ scrollTop }) => {
+          if (scrollTop === 0) {
+            that.prepareRefresh = true;
+
+            that.touchStartY = e.touches[0].pageY;
+
+            this.externalTouchStartY = e.touches[0].pageY;
+          }
+        });
+      }
+    }
   };
 
   onViewTouchMove = (e) => {
@@ -150,7 +188,27 @@ class VariableView extends BaseComponent {
     }
 
     if (this.prepareRefresh) {
-      this.touchEndY = e.touches[0].pageY;
+      const { pageY } = e.touches[0];
+
+      //进行滑档评判
+      if (!this.externalTouchDirectionJudgeComplete) {
+        if (pageY < this.externalTouchStartY) {
+          this.prepareRefresh = false;
+          this.externalTouchDirectionJudgeComplete = true;
+          this.externalTouchContinue = false;
+        } else {
+          this.externalTouchDirectionJudgeComplete = true;
+          this.externalTouchContinue = true;
+        }
+
+        return;
+      }
+
+      if (!this.externalTouchContinue) {
+        return;
+      }
+
+      this.touchEndY = pageY;
 
       let moveY = this.touchEndY - this.touchStartY;
 
@@ -189,6 +247,9 @@ class VariableView extends BaseComponent {
     const useCustomPullDown = this.checkUseCustomPullDown();
 
     if (!useCustomPullDown) {
+      this.externalTouchDirectionJudgeComplete = false;
+      this.externalTouchContinue = false;
+
       return;
     }
 
@@ -203,12 +264,18 @@ class VariableView extends BaseComponent {
 
       this.prepareRefresh = false;
     }
+
+    this.externalTouchDirectionJudgeComplete = false;
+    this.externalTouchContinue = false;
   };
 
   onViewTouchEnd = () => {
     const useCustomPullDown = this.checkUseCustomPullDown();
 
     if (!useCustomPullDown) {
+      this.externalTouchDirectionJudgeComplete = false;
+      this.externalTouchContinue = false;
+
       return;
     }
 
@@ -238,9 +305,18 @@ class VariableView extends BaseComponent {
 
       this.prepareRefresh = false;
     }
+
+    this.externalTouchDirectionJudgeComplete = false;
+    this.externalTouchContinue = false;
   };
 
   onScrollRefresherRefresh = () => {
+    const useCustomPullDown = this.checkUseCustomPullDown();
+
+    if (useCustomPullDown) {
+      return;
+    }
+
     if (this.scrollRefresherFreshing) return;
 
     this.scrollRefresherFreshing = true;
@@ -283,24 +359,22 @@ class VariableView extends BaseComponent {
   };
 
   adjustView = () => {
-    const { enablePullDownRefresh, scroll } = this.props;
+    const { enablePullDownRefresh } = this.props;
 
     if (!enablePullDownRefresh) {
       return;
     }
 
-    if (scroll) {
-      const that = this;
+    const that = this;
 
-      getRect(`#${this.refreshBoxId}`).then((rect) => {
-        if (rect != null) {
-          const { height: refreshBoxHeight } = rect;
+    getRect(`#${this.refreshBoxId}`).then((rect) => {
+      if (rect != null) {
+        const { height: refreshBoxHeight } = rect;
 
-          that.refreshBoxHeight = refreshBoxHeight;
-          that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
-        }
-      });
-    }
+        that.refreshBoxHeight = refreshBoxHeight;
+        that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
+      }
+    });
   };
 
   /**
@@ -382,6 +456,7 @@ class VariableView extends BaseComponent {
       scrollRefresherDefaultStyle,
       scrollRefresherBackground,
       refreshingBox,
+      refreshingBoxEffect,
       refreshColor,
       refreshBackgroundColor,
       refreshingBackgroundColor,
@@ -443,6 +518,13 @@ class VariableView extends BaseComponent {
       },
     };
 
+    const styleScroll = {
+      ...styleAdjust,
+      ...{
+        overflow: 'hidden',
+      },
+    };
+
     const upperBox = this.buildUpperBox();
 
     const lowerLoadingOuterBoxAdjust =
@@ -486,12 +568,15 @@ class VariableView extends BaseComponent {
           refreshing={refreshing}
           refreshingBox={refreshingBox}
           maxMove={this.touchMoveMaxY / this.calculatePercentage}
+          refreshingBoxEffect={refreshingBoxEffect}
         />
       </View>
     );
 
+    let scrollViewMain = null;
+
     if (scroll) {
-      const scrollViewMain = (
+      scrollViewMain = (
         <ScrollView
           id={this.scrollViewId || ''}
           className={classNames(`${classPrefix}__scrollView`)}
@@ -520,26 +605,23 @@ class VariableView extends BaseComponent {
           </View>
         </ScrollView>
       );
+    }
 
-      return (
-        <View
-          className={classNames(classPrefix)}
-          style={{
-            ...styleAdjust,
-            ...{
-              overflow: 'hidden',
-            },
-          }}
-          onTouchStart={this.onViewTouchStart}
-          onTouchMove={this.onViewTouchMove}
-          onTouchCancel={this.onViewTouchCancel}
-          onTouchEnd={this.onViewTouchEnd}
-        >
-          {pullIndicator}
+    return (
+      <View
+        className={classNames(classPrefix)}
+        style={scroll ? styleScroll : styleAdjust}
+        onTouchStart={this.onViewTouchStart}
+        onTouchMove={this.onViewTouchMove}
+        onTouchCancel={this.onViewTouchCancel}
+        onTouchEnd={this.onViewTouchEnd}
+      >
+        {pullIndicator}
 
-          {lowerLoadingOuterBoxAdjust}
+        {lowerLoadingOuterBoxAdjust}
 
-          {upperBox ? (
+        {scroll ? (
+          upperBox ? (
             <View
               style={{
                 height: '100%',
@@ -554,29 +636,12 @@ class VariableView extends BaseComponent {
             </View>
           ) : (
             scrollViewMain
-          )}
+          )
+        ) : null}
 
-          <FlexBox
-            flexAuto="bottom"
-            verticalHeight="100%"
-            top={upperBox}
-            bottom={scrollViewMain}
-          />
-        </View>
-      );
-    }
-
-    return (
-      <View className={classNames(classPrefix)}>
-        {pullIndicator}
-
-        {lowerLoadingOuterBoxAdjust}
-
-        {upperBox}
-
-        {children}
-
-        {lowerLoadingFooterBoxAdjust}
+        {!scroll ? upperBox : null}
+        {!scroll ? children : null}
+        {!scroll ? lowerLoadingFooterBoxAdjust : null}
       </View>
     );
   }

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '内置视图',
+  navigationBarTitleText: '快速开发框架',
 };

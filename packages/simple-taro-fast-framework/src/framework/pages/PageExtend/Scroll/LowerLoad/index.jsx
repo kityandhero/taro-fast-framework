@@ -27,13 +27,13 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    value: 'viewScrollMode = true',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: '配置处理加载',
-    value: 'this.setState({enablePullDownRefresh: true})',
+    value: 'enablePullDownRefresh = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -62,6 +62,8 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
+  viewScrollMode = true;
+
   headerData = {
     id: 'LowerLoad',
     name: '触底加载',
@@ -75,7 +77,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        scrollView: true,
         enableLowerLoad: true,
         lowerLoadingPosition: 'fixed',
         loadApiPath: 'news/pageList',

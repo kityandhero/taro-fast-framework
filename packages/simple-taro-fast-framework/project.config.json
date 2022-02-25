@@ -22,15 +22,15 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useIsolateContext": true,
+    "useIsolateContext": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
@@ -50,6 +50,13 @@
           "id": 0,
           "name": "imageBox",
           "pathName": "example/pages/imageBox/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "framework",
+          "pathName": "framework/pages/home/index",
           "query": "",
           "scene": null
         }

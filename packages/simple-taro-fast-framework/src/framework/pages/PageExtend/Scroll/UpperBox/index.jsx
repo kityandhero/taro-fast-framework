@@ -25,7 +25,7 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'this.setState({scrollView: true})',
+    value: 'viewScrollMode = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -38,21 +38,12 @@ const descriptionList = [
 ];
 
 export default class Index extends ContentPageBase {
+  viewScrollMode = true;
+
   headerData = {
     id: 'UpperBox',
     name: '使用上部固定区域',
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        scrollView: true,
-      },
-    };
-  }
 
   buildUpperBox = () => {
     return (

@@ -101,6 +101,7 @@ export default {
         'pages/pageExtend/normal/remoteLoad/index',
         'pages/pageExtend/normal/remoteLoadSpecial/index',
         'pages/pageExtend/normal/pullRefresh/index',
+        'pages/pageExtend/normal/customPullRefresh/index',
         'pages/pageExtend/normal/lowerLoad/index',
         'pages/pageExtend/scroll/index',
         'pages/pageExtend/scroll/basic/index',

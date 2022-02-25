@@ -266,6 +266,9 @@ const frameworkPathCollection = {
       pullRefresh: {
         path: '/framework/pages/pageExtend/normal/pullRefresh/index',
       },
+      customPullRefresh: {
+        path: '/framework/pages/pageExtend/normal/customPullRefresh/index',
+      },
       lowerLoad: {
         path: '/framework/pages/pageExtend/normal/lowerLoad/index',
       },

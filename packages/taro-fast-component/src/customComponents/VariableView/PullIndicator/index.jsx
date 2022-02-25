@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
-import { createAnimation } from 'taro-fast-common/es/utils/tools';
+import { createAnimation, inCollection } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../../BaseComponent';
@@ -17,6 +17,19 @@ import './index.less';
 const classPrefix = `tfc-pull-indicator`;
 
 const { IconLoading, IconLoading3 } = Icon;
+
+const refreshingBoxEffectCollection = ['pull', 'scale'];
+
+const defaultProps = {
+  className: '',
+  enablePullDownRefresh: false,
+  useCustomPullDown: false,
+  useRefreshingBox: false,
+  refreshing: false,
+  maxMove: 0,
+  refreshingBoxEffect: 'pull',
+  refreshingBox: null,
+};
 
 class PullIndicator extends BaseComponent {
   refreshBoxAnimation = null;
@@ -48,6 +61,14 @@ class PullIndicator extends BaseComponent {
     };
   }
 
+  getRefreshingBoxEffect = () => {
+    const { refreshingBoxEffect } = this.props;
+
+    return inCollection(refreshingBoxEffectCollection, refreshingBoxEffect)
+      ? refreshingBoxEffect
+      : 'pull';
+  };
+
   bindMessageListener = () => {
     Taro.eventCenter.on('tfc-pull-indicator', (options = {}) => {
       const { maxMoveY, moveY, rotate, needRefresh } = options;
@@ -55,16 +76,21 @@ class PullIndicator extends BaseComponent {
 
       this.maxMoveY = maxMoveY;
 
+      const refreshingBoxEffect = this.getRefreshingBoxEffect();
+
       if (moveY === 0) {
         this.currentPullAnimalStep = 1;
         this.currentMove = 0;
 
         this.setState({
           ...{
-            refreshBoxAnimationData: this.refreshBoxAnimation
-              .translateY(moveY)
-              .step()
-              .export(),
+            refreshBoxAnimationData:
+              refreshingBoxEffect !== 'scale'
+                ? this.refreshBoxAnimation.translateY(moveY).step().export()
+                : this.refreshBoxAnimation
+                    .scale(moveY / maxMoveY)
+                    .step()
+                    .export(),
             refreshBoxPreloadAnimationData: this.refreshBoxPreloadAnimation
               .rotate(rotate)
               .step()
@@ -84,10 +110,13 @@ class PullIndicator extends BaseComponent {
 
           this.setState({
             ...{
-              refreshBoxAnimationData: this.refreshBoxAnimation
-                .translateY(moveY)
-                .step()
-                .export(),
+              refreshBoxAnimationData:
+                refreshingBoxEffect !== 'scale'
+                  ? this.refreshBoxAnimation.translateY(moveY).step().export()
+                  : this.refreshBoxAnimation
+                      .scale(moveY / maxMoveY)
+                      .step()
+                      .export(),
               refreshBoxPreloadAnimationData: this.refreshBoxPreloadAnimation
                 .rotate(rotate)
                 .step()
@@ -159,12 +188,24 @@ class PullIndicator extends BaseComponent {
       refreshBoxPreloadAnimationData,
     } = this.state;
 
+    const refreshingBoxEffect = this.getRefreshingBoxEffect();
+
     return (
       <View className={className}>
         {enablePullDownRefresh && useCustomPullDown ? (
           <View
-            className={classNames(`${classPrefix}__refresh-box`)}
+            className={classNames(`${classPrefix}__refresh-box`, {
+              [`${classPrefix}__refresh-box--scale`]:
+                refreshingBoxEffect === 'scale',
+            })}
             animation={refreshBoxAnimationData}
+            style={
+              refreshingBoxEffect !== 'scale'
+                ? {}
+                : {
+                    top: `${maxMove}px`,
+                  }
+            }
           >
             <View
               className={classNames(
@@ -213,5 +254,9 @@ class PullIndicator extends BaseComponent {
     );
   }
 }
+
+PullIndicator.defaultProps = {
+  ...defaultProps,
+};
 
 export default PullIndicator;
