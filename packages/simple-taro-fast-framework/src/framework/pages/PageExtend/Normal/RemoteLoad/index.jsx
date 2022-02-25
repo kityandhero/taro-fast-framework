@@ -24,10 +24,6 @@ const style = {
   global,
 }))
 export default class Index extends ContentPageBase {
-  lowerLoadingPosition = 'fixed';
-
-  pagingLoadMode = true;
-
   headerData = {
     id: 'PullRefresh',
     name: '下拉刷新',
@@ -39,7 +35,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        loadApiPath: 'news/pageList',
+        loadApiPath: 'news/singleList',
       },
     };
   }

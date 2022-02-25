@@ -337,18 +337,13 @@ class Infrastructure extends ComponentBase {
   };
 
   showScrollRefreshing = () => {
-    const {
-      enableAutoInitialLoadingIndicator,
-      firstLoadSuccess,
-      dataLoading,
-      reloading,
-    } = this.state;
+    const { firstLoadSuccess, dataLoading, reloading } = this.state;
 
     return (
       (this.loadRemoteRequestAfterMount &&
         this.existLoadApi() &&
         !this.pagingLoadMode &&
-        enableAutoInitialLoadingIndicator &&
+        this.enableAutoInitialLoadingIndicator &&
         !firstLoadSuccess &&
         dataLoading) ||
       reloading
@@ -356,18 +351,13 @@ class Infrastructure extends ComponentBase {
   };
 
   showLowerLoading = () => {
-    const {
-      enableAutoInitialLoadingIndicator,
-      firstLoadSuccess,
-      dataLoading,
-      reloading,
-    } = this.state;
+    const { firstLoadSuccess, dataLoading, reloading } = this.state;
 
     return (
       (this.loadRemoteRequestAfterMount &&
         this.existLoadApi() &&
         this.pagingLoadMode &&
-        enableAutoInitialLoadingIndicator &&
+        this.enableAutoInitialLoadingIndicator &&
         !firstLoadSuccess &&
         dataLoading) ||
       (firstLoadSuccess && dataLoading && !reloading)

@@ -112,15 +112,13 @@ const configList = [
   },
   {
     label: 'enablePullDownRefresh',
-    value:
-      '启用下拉刷新,针对 viewScrollMode 模式, 使用前需开启 viewScrollMode 模式, 默认关闭',
+    value: '启用下拉刷新, 默认关闭',
     ellipsis: false,
     canCopy: true,
   },
   {
     label: 'enableLowerLoad',
-    value:
-      '启用触底部加载, 针对 viewScrollMode 模式, 使用前需开启viewScrollMode 模式, 默认关闭',
+    value: '启用触底部加载, 默认关闭',
     ellipsis: false,
     canCopy: true,
   },
