@@ -19,21 +19,23 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '远程加载 - 自定义初始加载提示器',
+});
+
 @connect(({ news, global }) => ({
   news,
   global,
 }))
 export default class Index extends ContentPageBase {
-  lowerLoadingPosition = 'fixed';
-
   enableAutoInitialLoadingIndicator = false;
 
   headerData = {
-    id: 'PullRefresh',
-    name: '下拉刷新',
+    id: 'RemoteLoad',
+    name: '远程加载',
+    description: '自定义初始加载提示器',
   };
-
-  pagingLoadMode = true;
 
   constructor(props) {
     super(props);
@@ -41,7 +43,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        loadApiPath: 'news/pageList',
+        loadApiPath: 'news/singleList',
       },
     };
   }

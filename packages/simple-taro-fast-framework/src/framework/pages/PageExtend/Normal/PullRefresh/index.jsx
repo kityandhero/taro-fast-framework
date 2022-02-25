@@ -51,6 +51,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '下拉刷新 - 默认提示器效果',
+});
+
 @connect(({ news, global }) => ({
   news,
   global,
@@ -63,6 +68,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'PullRefresh',
     name: '下拉刷新',
+    description: '默认提示器效果',
   };
 
   constructor(props) {

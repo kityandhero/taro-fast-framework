@@ -5,7 +5,7 @@ import iconBasic from '../../../../assets/images/icon-list-basic.png';
 
 const o = {
   icon: iconBasic,
-  title: '普通视图',
+  title: '默认视图',
   list: [
     {
       id: 'Basic',
@@ -23,24 +23,29 @@ const o = {
       path: pathCollection.framework.pageExtend.normal.remoteLoad.path,
     },
     {
-      id: 'RemoteLoadSpecial',
+      id: 'RemoteLoad',
       name: '自定义初始加载提示器',
       path: pathCollection.framework.pageExtend.normal.remoteLoadSpecial.path,
     },
     {
       id: 'PullRefresh',
-      name: '下拉刷新',
+      name: '下拉刷新-下拉提示器效果',
       path: pathCollection.framework.pageExtend.normal.pullRefresh.path,
     },
     {
-      id: 'CustomPullRefresh',
-      name: '自定义下拉刷新',
-      path: pathCollection.framework.pageExtend.normal.customPullRefresh.path,
+      id: 'PullRefresh',
+      name: '下拉刷新-缩放提示器效果',
+      path: pathCollection.framework.pageExtend.normal.pullRefreshSpecial.path,
     },
     {
       id: 'LowerLoad',
-      name: '触底加载',
+      name: '触底加载-底部提示效果',
       path: pathCollection.framework.pageExtend.normal.lowerLoad.path,
+    },
+    {
+      id: 'LowerLoad',
+      name: '触底加载-外部提示效果',
+      path: pathCollection.framework.pageExtend.normal.lowerLoadSpecial.path,
     },
   ],
 };

@@ -59,7 +59,7 @@ const descriptionList = [
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '下拉刷新 - 底部提示器效果',
+  navigationBarTitleText: '下拉刷新 - 外部提示器效果',
 });
 
 @connect(({ news, global }) => ({
@@ -69,12 +69,14 @@ definePageConfig({
 export default class Index extends ContentPageBase {
   enableLowerLoad = true;
 
+  lowerLoadingPosition = 'fixed';
+
   pagingLoadMode = true;
 
   headerData = {
     id: 'LowerLoad',
     name: '触底加载',
-    description: '底部提示器效果',
+    description: '外部提示器效果',
   };
 
   constructor(props) {

@@ -26,6 +26,12 @@ const style = {
 
 const descriptionList = [
   {
+    label: '开启滚动视图',
+    value: 'viewScrollMode = true',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
     label: '开启下拉刷新式',
     value: 'enablePullDownRefresh = true',
     ellipsis: false,
@@ -45,6 +51,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '下拉刷新 - 提示器缩放效果',
+});
+
 @connect(({ news, global }) => ({
   news,
   global,
@@ -52,10 +63,14 @@ const descriptionList = [
 export default class Index extends ContentPageBase {
   enablePullDownRefresh = true;
 
+  enableAutoInitialLoadingIndicator = false;
+
+  refreshingBoxEffect = 'scale';
+
   headerData = {
-    id: 'CustomPullRefresh',
-    name: '',
-    description: '自定义下拉刷新',
+    id: 'PullRefresh',
+    name: '下拉刷新',
+    description: '提示器缩放效果',
   };
 
   constructor(props) {
