@@ -67,14 +67,6 @@ export default class Index extends ContentPageBase {
     return data;
   };
 
-  onRefresh = () => {
-    this.reloadData({});
-  };
-
-  onLowerLoad = () => {
-    this.loadNextPage({});
-  };
-
   renderContent = () => {
     const { metaListData } = this.state;
 

@@ -242,7 +242,7 @@ class Infrastructure extends ComponentBase {
   }
 
   onReachBottom() {
-    if (this.judgeNeedNextLoad()) {
+    if (this.enableLowerLoad && this.judgeNeedNextLoad()) {
       this.onLowerLoad();
     }
   }
@@ -331,8 +331,6 @@ class Infrastructure extends ComponentBase {
     }
   };
 
-  onRefresh = () => {};
-
   onRefresh = () => {
     const that = this;
 
@@ -348,13 +346,18 @@ class Infrastructure extends ComponentBase {
     });
   };
 
-  onLowerLoad = () => {};
-
   existLoadApi = () => {
     const { loadApiPath } = this.state;
 
     return !stringIsNullOrWhiteSpace(loadApiPath);
   };
+
+  onLowerLoad = () => {
+    this.loadNextPage({});
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {};
 
   // eslint-disable-next-line no-unused-vars
   reloadData = ({ otherState, callback = null, delay = 0 }) => {};
