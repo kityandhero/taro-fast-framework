@@ -58,6 +58,11 @@ class Infrastructure extends ComponentBase {
   enablePullDownRefresh = false;
 
   /**
+   * 启用下拉刷新成功提示
+   */
+  enablePullDownRefreshSuccessNotification = false;
+
+  /**
    * 启用触底加载
    */
   enableLowerLoad = false;
@@ -328,6 +333,21 @@ class Infrastructure extends ComponentBase {
 
   onRefresh = () => {};
 
+  onRefresh = () => {
+    const that = this;
+
+    that.reloadData({
+      callback: () => {
+        if (that.enablePullDownRefreshSuccessNotification) {
+          that.bannerNotify({
+            message: '刷新成功',
+            type: 'success',
+          });
+        }
+      },
+    });
+  };
+
   onLowerLoad = () => {};
 
   existLoadApi = () => {
@@ -335,6 +355,9 @@ class Infrastructure extends ComponentBase {
 
     return !stringIsNullOrWhiteSpace(loadApiPath);
   };
+
+  // eslint-disable-next-line no-unused-vars
+  reloadData = ({ otherState, callback = null, delay = 0 }) => {};
 
   showScrollRefreshing = () => {
     const { firstLoadSuccess, dataLoading, reloading } = this.state;

@@ -117,8 +117,8 @@ const configList = [
     canCopy: true,
   },
   {
-    label: 'enableLowerLoad',
-    value: '启用触底部加载, 默认关闭',
+    label: 'refreshingBoxEffect',
+    value: '配置下拉刷新提示器效果, 默认 "pull"',
     ellipsis: false,
     canCopy: true,
   },
@@ -126,6 +126,24 @@ const configList = [
     label: 'enableAutoInitialLoadingIndicator',
     value:
       '启用初始化加载提示器自动显示, 默认开启, 需要自定义初始加载效果时候请关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'enablePullDownRefreshSuccessNotification',
+    value: '启用下拉刷新成功提示, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'enableLowerLoad',
+    value: '启用触底部加载, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'lowerLoadingPosition',
+    value: '触底加载提示器位置, 默认 "footer"',
     ellipsis: false,
     canCopy: true,
   },

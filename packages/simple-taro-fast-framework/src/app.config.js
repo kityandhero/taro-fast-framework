@@ -104,6 +104,7 @@ export default {
         'pages/pageExtend/normal/pullRefreshSpecial/index',
         'pages/pageExtend/normal/lowerLoad/index',
         'pages/pageExtend/normal/lowerLoadSpecial/index',
+        'pages/pageExtend/normal/complexSample/index',
         'pages/pageExtend/scroll/index',
         'pages/pageExtend/scroll/basic/index',
         'pages/pageExtend/scroll/upperBox/index',

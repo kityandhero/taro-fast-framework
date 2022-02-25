@@ -275,6 +275,9 @@ const frameworkPathCollection = {
       lowerLoadSpecial: {
         path: '/framework/pages/pageExtend/normal/lowerLoadSpecial/index',
       },
+      complexSample: {
+        path: '/framework/pages/pageExtend/normal/complexSample/index',
+      },
     },
     scroll: {
       path: '/framework/pages/pageExtend/scroll/index',

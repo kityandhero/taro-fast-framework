@@ -47,6 +47,11 @@ const o = {
       name: '触底加载-外部提示效果',
       path: pathCollection.framework.pageExtend.normal.lowerLoadSpecial.path,
     },
+    {
+      id: 'ComplexSample',
+      name: '复杂示例',
+      path: pathCollection.framework.pageExtend.normal.complexSample.path,
+    },
   ],
 };
 

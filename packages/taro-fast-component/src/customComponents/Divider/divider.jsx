@@ -81,7 +81,7 @@ class Divider extends BaseComponent {
               }
             : {}),
           ...{
-            margin: `${transformSize(margin)} 0`,
+            margin: isNumber(margin) ? `${transformSize(margin)} 0` : margin,
           },
           ...{
             height: transformSize(height > 0 ? height : 38),
