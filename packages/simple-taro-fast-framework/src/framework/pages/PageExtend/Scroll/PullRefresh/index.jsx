@@ -51,6 +51,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '下拉刷新 - 默认提示器效果',
+});
+
 @connect(({ news, global }) => ({
   news,
   global,
@@ -65,6 +70,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'PullRefresh',
     name: '下拉刷新',
+    description: '默认提示器效果',
   };
 
   constructor(props) {
@@ -92,39 +98,33 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        {this.judgeInitialActivityIndicatorVisible() ? (
-          this.buildInitialActivityIndicator({})
-        ) : (
-          <View>
-            <Space direction="vertical" fillWidth>
-              {metaListData.map((o, index) => {
-                const { title, description } = o;
+        <Space direction="vertical" fillWidth>
+          {metaListData.map((o, index) => {
+            const { title, description } = o;
 
-                return (
-                  <FadeInBox key={`item_${index}`}>
-                    <Card
-                      header={title}
-                      border
-                      cardBorderRadiusMode={false}
-                      style={style}
-                    >
-                      <Ellipsis
-                        line={2}
-                        style={{
-                          height: transformSize(88),
-                          fontSize: transformSize(28),
-                          lineHeight: transformSize(44),
-                        }}
-                      >
-                        {description}
-                      </Ellipsis>
-                    </Card>
-                  </FadeInBox>
-                );
-              })}
-            </Space>
-          </View>
-        )}
+            return (
+              <FadeInBox key={`item_${index}`}>
+                <Card
+                  header={title}
+                  border
+                  cardBorderRadiusMode={false}
+                  style={style}
+                >
+                  <Ellipsis
+                    line={2}
+                    style={{
+                      height: transformSize(88),
+                      fontSize: transformSize(28),
+                      lineHeight: transformSize(44),
+                    }}
+                  >
+                    {description}
+                  </Ellipsis>
+                </Card>
+              </FadeInBox>
+            );
+          })}
+        </Space>
 
         <View>
           <Space direction="vertical" fillWidth>

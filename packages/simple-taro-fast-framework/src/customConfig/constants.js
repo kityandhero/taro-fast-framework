@@ -287,14 +287,26 @@ const frameworkPathCollection = {
       upperBox: {
         path: '/framework/pages/pageExtend/scroll/upperBox/index',
       },
+      remoteLoad: {
+        path: '/framework/pages/pageExtend/scroll/remoteLoad/index',
+      },
+      remoteLoadSpecial: {
+        path: '/framework/pages/pageExtend/scroll/remoteLoadSpecial/index',
+      },
       pullRefresh: {
         path: '/framework/pages/pageExtend/scroll/pullRefresh/index',
       },
-      customPullRefresh: {
-        path: '/framework/pages/pageExtend/scroll/customPullRefresh/index',
+      pullRefreshSpecial: {
+        path: '/framework/pages/pageExtend/scroll/pullRefreshSpecial/index',
       },
       lowerLoad: {
         path: '/framework/pages/pageExtend/scroll/lowerLoad/index',
+      },
+      lowerLoadSpecial: {
+        path: '/framework/pages/pageExtend/scroll/lowerLoadSpecial/index',
+      },
+      complexSample: {
+        path: '/framework/pages/pageExtend/scroll/complexSample/index',
       },
     },
   },

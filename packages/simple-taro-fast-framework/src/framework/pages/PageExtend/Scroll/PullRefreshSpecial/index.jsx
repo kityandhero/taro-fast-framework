@@ -32,26 +32,20 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '配置处理加载',
+    label: '开启下拉刷新式',
     value: 'enablePullDownRefresh = true',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: '可配置加载提示组件显示模式',
-    value: 'lowerLoadingPosition = footer/absolute/fixed',
+    label: '可配置下拉刷新提示器颜色',
+    value: 'refreshColor = "red"',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: '自定义外部提示加载组件',
-    value: '重载覆写函数 buildLowerLoadingSuspendBox = () => { return null; }',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: '自定义底部提示加载组件',
-    value: '重载覆写函数 buildLowerLoadingFooterBox = () => { return null; }',
+    label: '可配置下拉刷新提示器背景颜色',
+    value: 'refreshBackgroundColor = "green"',
     ellipsis: false,
     canCopy: true,
   },
@@ -59,7 +53,7 @@ const descriptionList = [
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '下拉刷新 - 底部提示器效果',
+  navigationBarTitleText: '下拉刷新 - 提示器缩放效果',
 });
 
 @connect(({ news, global }) => ({
@@ -69,14 +63,16 @@ definePageConfig({
 export default class Index extends ContentPageBase {
   viewScrollMode = true;
 
-  enableLowerLoad = true;
+  enablePullDownRefresh = true;
 
-  pagingLoadMode = true;
+  enableAutoInitialLoadingIndicator = false;
+
+  refreshingBoxEffect = 'scale';
 
   headerData = {
-    id: 'LowerLoad',
-    name: '触底加载',
-    description: '底部提示器效果',
+    id: 'PullRefresh',
+    name: '下拉刷新',
+    description: '提示器缩放效果',
   };
 
   constructor(props) {
@@ -85,7 +81,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        loadApiPath: 'news/pageList',
+        loadApiPath: 'news/singleList',
       },
     };
   }
@@ -103,35 +99,39 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <View>
-          <Space direction="vertical" fillWidth>
-            {metaListData.map((o, index) => {
-              const { title, description } = o;
+        {this.judgeInitialActivityIndicatorVisible() ? (
+          this.buildInitialActivityIndicator({})
+        ) : (
+          <View>
+            <Space direction="vertical" fillWidth>
+              {metaListData.map((o, index) => {
+                const { title, description } = o;
 
-              return (
-                <FadeInBox key={`item_${index}`}>
-                  <Card
-                    header={title}
-                    border
-                    cardBorderRadiusMode={false}
-                    style={style}
-                  >
-                    <Ellipsis
-                      line={2}
-                      style={{
-                        height: transformSize(88),
-                        fontSize: transformSize(28),
-                        lineHeight: transformSize(44),
-                      }}
+                return (
+                  <FadeInBox key={`item_${index}`}>
+                    <Card
+                      header={title}
+                      border
+                      cardBorderRadiusMode={false}
+                      style={style}
                     >
-                      {description}
-                    </Ellipsis>
-                  </Card>
-                </FadeInBox>
-              );
-            })}
-          </Space>
-        </View>
+                      <Ellipsis
+                        line={2}
+                        style={{
+                          height: transformSize(88),
+                          fontSize: transformSize(28),
+                          lineHeight: transformSize(44),
+                        }}
+                      >
+                        {description}
+                      </Ellipsis>
+                    </Card>
+                  </FadeInBox>
+                );
+              })}
+            </Space>
+          </View>
+        )}
 
         <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
           <DataGrid
