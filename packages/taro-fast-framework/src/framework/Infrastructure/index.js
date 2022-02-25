@@ -38,9 +38,56 @@ class Infrastructure extends ComponentBase {
 
   viewStyle = {};
 
+  /**
+   * 滚动视图模式
+   */
   viewScrollMode = false;
 
+  /**
+   * 启用下拉刷新
+   */
   enablePullDownRefresh = false;
+
+  /**
+   * 启用触底加载
+   */
+  enableLowerLoad = false;
+
+  /**
+   * 下拉刷新提示器效果
+   */
+  refreshingBoxEffect = 'pull';
+
+  /**
+   * 下拉刷新提示器颜色
+   */
+  refreshColor = '';
+
+  /**
+   * 下拉刷新提示器背景颜色
+   */
+  refreshBackgroundColor = '';
+
+  scrollWithAnimation = true;
+
+  scrollAnchoring = true;
+
+  scrollEnhanced = true;
+
+  scrollBounces = true;
+
+  scrollShowScrollbar = true;
+
+  scrollFastDeceleration = false;
+
+  /**
+   * 触底加载提示器位置
+   */
+  lowerLoadingPosition = 'footer';
+
+  enableNavigationBarLoading = false;
+
+  enableAutoInitialLoadingIndicator = true;
 
   //#endregion
 
@@ -96,23 +143,6 @@ class Infrastructure extends ComponentBase {
       ...underlyingState,
       ...{
         spin: true,
-        enableCustomPullDown: false,
-        enableLowerLoad: false,
-        scrollRefresherThreshold: 100,
-        scrollRefresherDefaultStyle: 'white',
-        scrollRefresherBackground: '',
-        refreshingBoxEffect: 'pull',
-        refreshColor: '',
-        refreshBackgroundColor: '',
-        scrollWithAnimation: true,
-        scrollAnchoring: true,
-        scrollEnhanced: true,
-        scrollBounces: true,
-        scrollShowScrollbar: true,
-        scrollFastDeceleration: false,
-        lowerLoadingPosition: 'footer',
-        enableNavigationBarLoading: false,
-        enableAutoInitialLoadingIndicator: true,
       },
     };
   }
@@ -424,24 +454,7 @@ class Infrastructure extends ComponentBase {
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
 
   renderView() {
-    const {
-      spin,
-      enableCustomPullDown,
-      enableLowerLoad,
-      scrollRefresherThreshold,
-      scrollRefresherDefaultStyle,
-      scrollRefresherBackground,
-      refreshColor,
-      refreshingBoxEffect,
-      refreshBackgroundColor,
-      scrollWithAnimation,
-      scrollAnchoring,
-      scrollEnhanced,
-      scrollBounces,
-      scrollShowScrollbar,
-      scrollFastDeceleration,
-      lowerLoadingPosition,
-    } = this.state;
+    const { spin } = this.state;
 
     const vw = (
       <VariableView
@@ -450,27 +463,27 @@ class Infrastructure extends ComponentBase {
         height="100vh"
         enablePullDownRefresh={this.enablePullDownRefresh}
         enableLowerLoad={
-          this.viewScrollMode ? enableLowerLoad : this.pagingLoadMode
+          this.viewScrollMode ? this.enableLowerLoad : this.pagingLoadMode
         }
-        enableCustomPullDown={enableCustomPullDown}
-        refreshingBoxEffect={refreshingBoxEffect}
-        refreshColor={refreshColor}
-        refreshBackgroundColor={refreshBackgroundColor}
-        scrollWithAnimation={scrollWithAnimation}
-        scrollAnchoring={scrollAnchoring}
-        scrollEnhanced={scrollEnhanced}
-        scrollBounces={scrollBounces}
-        scrollShowScrollbar={scrollShowScrollbar}
-        scrollFastDeceleration={scrollFastDeceleration}
-        scrollRefresherThreshold={scrollRefresherThreshold}
-        scrollRefresherDefaultStyle={scrollRefresherDefaultStyle}
-        scrollRefresherBackground={scrollRefresherBackground}
+        enableCustomPullDown
+        refreshingBoxEffect={this.refreshingBoxEffect}
+        refreshColor={this.refreshColor}
+        refreshBackgroundColor={this.refreshBackgroundColor}
+        scrollWithAnimation={this.scrollWithAnimation}
+        scrollAnchoring={this.scrollAnchoring}
+        scrollEnhanced={this.scrollEnhanced}
+        scrollBounces={this.scrollBounces}
+        scrollShowScrollbar={this.scrollShowScrollbar}
+        scrollFastDeceleration={this.scrollFastDeceleration}
+        scrollRefresherThreshold={100}
+        scrollRefresherDefaultStyle="white"
+        scrollRefresherBackground=""
         onRefresh={this.onRefresh}
         onLowerLoad={this.onLowerLoad}
         refreshing={this.showScrollRefreshing()}
         lowerLoading={this.showLowerLoading()}
         needNextLoad={this.judgeNeedNextLoad()}
-        lowerLoadingPosition={lowerLoadingPosition}
+        lowerLoadingPosition={this.lowerLoadingPosition}
         refreshingBox={this.buildRefreshingBox()}
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}

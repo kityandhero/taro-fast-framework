@@ -24,6 +24,10 @@ const style = {
   global,
 }))
 export default class Index extends ContentPageBase {
+  lowerLoadingPosition = 'fixed';
+
+  enableAutoInitialLoadingIndicator = false;
+
   headerData = {
     id: 'PullRefresh',
     name: '下拉刷新',
@@ -37,8 +41,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        lowerLoadingPosition: 'fixed',
-        enableAutoInitialLoadingIndicator: false,
         loadApiPath: 'news/pageList',
       },
     };

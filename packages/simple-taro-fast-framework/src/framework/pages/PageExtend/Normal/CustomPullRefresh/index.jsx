@@ -32,15 +32,14 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '开启自定义下拉效果',
-    value: 'enableCustomPullDown = true',
+    label: '可配置下拉刷新提示器颜色',
+    value: 'refreshColor = "red"',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: '可进行配置颜色',
-    value:
-      'this.setState({refreshColor: "red",refreshBackgroundColor: "green"})',
+    label: '可配置下拉刷新提示器背景颜色',
+    value: 'refreshBackgroundColor = "green"',
     ellipsis: false,
     canCopy: true,
   },
@@ -52,8 +51,6 @@ const descriptionList = [
 }))
 export default class Index extends ContentPageBase {
   enablePullDownRefresh = true;
-
-  enableCustomPullDown = true;
 
   headerData = {
     id: 'CustomPullRefresh',
@@ -67,8 +64,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        // refreshColor: 'red',
-        // refreshBackgroundColor: 'green',
         loadApiPath: 'news/singleList',
       },
     };

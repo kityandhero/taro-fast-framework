@@ -118,13 +118,6 @@ const configList = [
     canCopy: true,
   },
   {
-    label: 'enableCustomPullDown',
-    value:
-      '启用自定义下拉刷新动效,针对 viewScrollMode 模式, 使用前需开启viewScrollMode 模式, 默认关闭',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
     label: 'enableLowerLoad',
     value:
       '启用触底部加载, 针对 viewScrollMode 模式, 使用前需开启viewScrollMode 模式, 默认关闭',

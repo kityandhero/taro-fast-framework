@@ -39,7 +39,7 @@ const descriptionList = [
   },
   {
     label: '可配置加载提示组件显示模式',
-    value: 'this.setState({ lowerLoadingPosition: "footer/absolute/fixed" })',
+    value: 'lowerLoadingPosition = footer/absolute/fixed',
     ellipsis: false,
     canCopy: true,
   },
@@ -62,12 +62,16 @@ const descriptionList = [
   global,
 }))
 export default class Index extends ContentPageBase {
+  enableLowerLoad = true;
+
+  lowerLoadingPosition = 'fixed';
+
+  pagingLoadMode = true;
+
   headerData = {
     id: 'LowerLoad',
     name: '触底加载',
   };
-
-  pagingLoadMode = true;
 
   constructor(props) {
     super(props);
@@ -75,8 +79,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        enableLowerLoad: true,
-        lowerLoadingPosition: 'fixed',
         loadApiPath: 'news/pageList',
       },
     };

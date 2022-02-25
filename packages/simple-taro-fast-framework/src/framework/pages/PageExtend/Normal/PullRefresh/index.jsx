@@ -38,9 +38,14 @@ const descriptionList = [
     canCopy: true,
   },
   {
-    label: '可进行配置颜色',
-    value:
-      'this.setState({refreshColor: "red",refreshBackgroundColor: "green"})',
+    label: '可配置下拉刷新提示器颜色',
+    value: 'refreshColor = "red"',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '可配置下拉刷新提示器背景颜色',
+    value: 'refreshBackgroundColor = "green"',
     ellipsis: false,
     canCopy: true,
   },
