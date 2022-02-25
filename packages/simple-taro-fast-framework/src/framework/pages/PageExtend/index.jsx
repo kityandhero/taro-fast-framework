@@ -5,7 +5,7 @@ import iconBasic from '../../../assets/images/icon-list-basic.png';
 
 const o = {
   icon: iconBasic,
-  title: '内置视图',
+  title: '扩展页面基架',
   list: [
     {
       id: 'BuildInConfig',
