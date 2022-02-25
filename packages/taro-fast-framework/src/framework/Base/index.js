@@ -254,11 +254,7 @@ class Base extends Infrastructure {
             loadApiPath: loadApiCustomPath,
           };
 
-      const {
-        loadApiPath: loadApiPathValue,
-        firstLoadSuccess,
-        enableNavigationBarLoading,
-      } = {
+      const { loadApiPath: loadApiPathValue, firstLoadSuccess } = {
         ...this.state,
         ...loadApiPathCustom,
       };
@@ -274,7 +270,7 @@ class Base extends Infrastructure {
       ) {
         this.setRequestingData({ type: loadApiPath, payload: requestData });
 
-        if (enableNavigationBarLoading) {
+        if (this.enableNavigationBarLoading) {
           showNavigationBarLoading();
         }
 

@@ -22,8 +22,6 @@ import {
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 class Infrastructure extends ComponentBase {
-  //#region fade spin config
-
   /**
    * 页面是否使用渐显效果组件包裹
    */
@@ -44,10 +42,9 @@ class Infrastructure extends ComponentBase {
    */
   simulationFadeSpinDuration = 300;
 
-  //#endregion
-
-  //#region view config
-
+  /**
+   * 主视图容器自定义样式
+   */
   viewStyle = {};
 
   /**
@@ -103,8 +100,6 @@ class Infrastructure extends ComponentBase {
    * 启用初始化加载提示器自动显示, 默认开启, 需要自定义初始加载效果时候请关闭
    */
   enableAutoInitialLoadingIndicator = true;
-
-  //#endregion
 
   urlParamsCore = null;
 
