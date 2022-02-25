@@ -65,6 +65,8 @@ const paramList = [
   global,
 }))
 export default class Index extends ContentPageBase {
+  enableAutoInitialLoadingIndicator = false;
+
   headerData = {
     id: 'buildInitialActivityIndicator',
     name: '',
@@ -77,7 +79,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        enableAutoInitialLoadingIndicator: false,
         loadApiPath: 'news/get',
       },
     };

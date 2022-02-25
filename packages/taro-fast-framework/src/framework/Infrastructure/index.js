@@ -24,12 +24,24 @@ import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 class Infrastructure extends ComponentBase {
   //#region fade spin config
 
+  /**
+   * 页面是否使用渐显效果组件包裹
+   */
   useFadeSpinWrapper = false;
 
+  /**
+   * 是否模拟渐显效果, 需前置开启 useFadeSpinWrapper
+   */
   useSimulationFadeSpin = false;
 
+  /**
+   * 初始加载接口后自动渐显页面, 用于非静态页面, 需前置开启 useFadeSpinWrapper; 一般不要与 useSimulationFadeSpin 同时使用
+   */
   hideFadeSpinWrapperAfterLoadRemoteRequest = false;
 
+  /**
+   * 模拟渐显效果的持续时间
+   */
   simulationFadeSpinDuration = 300;
 
   //#endregion
@@ -87,6 +99,9 @@ class Infrastructure extends ComponentBase {
 
   enableNavigationBarLoading = false;
 
+  /**
+   * 启用初始化加载提示器自动显示, 默认开启, 需要自定义初始加载效果时候请关闭
+   */
   enableAutoInitialLoadingIndicator = true;
 
   //#endregion
