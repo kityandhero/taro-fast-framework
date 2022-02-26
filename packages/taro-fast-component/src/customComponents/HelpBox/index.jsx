@@ -97,8 +97,8 @@ class HelpBox extends BaseComponent {
             <Divider
               contentPosition="left"
               style={{
-                marginTop: 4,
-                marginBottom: 4,
+                paddingTop: 4,
+                paddingBottom: 4,
                 color: '#999',
               }}
             >

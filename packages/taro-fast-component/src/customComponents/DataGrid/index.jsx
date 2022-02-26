@@ -22,6 +22,7 @@ import FlexBox from '../FlexBox';
 import ColorText from '../ColorText';
 import Row from '../Flex/Row';
 import Col from '../Flex/Col';
+import { buildDivider } from '../Divider';
 
 const layoutCollection = ['row', 'column'];
 
@@ -179,6 +180,11 @@ class DataGrid extends BaseComponent {
                 ellipsisLineHeight,
                 ellipsisHeight,
                 hidden: hiddenItem,
+                divider,
+                dividerIcon,
+                dividerText,
+                dividerPosition,
+                dividerStyle,
               } = {
                 ...{
                   ellipsis: true,
@@ -186,6 +192,11 @@ class DataGrid extends BaseComponent {
                   ellipsisLineHeight: '',
                   ellipsisHeight: '',
                   hidden: false,
+                  divider: false,
+                  dividerIcon: null,
+                  dividerText: '',
+                  dividerPosition: '',
+                  dividerStyle: {},
                 },
                 ...(item || {}),
               };
@@ -300,6 +311,31 @@ class DataGrid extends BaseComponent {
                   )}
                 </View>
               );
+
+              if (!!divider) {
+                const dividerElement = buildDivider({
+                  contentPosition: dividerPosition || null,
+                  icon: dividerIcon || '',
+                  text: dividerText || '',
+                  style: dividerStyle || null,
+                });
+
+                return (
+                  <Col size={12}>
+                    {border ? (
+                      <View
+                        style={{
+                          borderRight: `${transformSize(2)} solid #f0f0f0`,
+                        }}
+                      >
+                        {dividerElement}
+                      </View>
+                    ) : (
+                      dividerElement
+                    )}
+                  </Col>
+                );
+              }
 
               if (layout === 'column') {
                 return (

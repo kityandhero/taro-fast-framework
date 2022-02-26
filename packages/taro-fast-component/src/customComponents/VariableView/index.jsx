@@ -416,7 +416,7 @@ class VariableView extends BaseComponent {
 
     return (
       lowerLoadingFooterBox || (
-        <Divider margin="var(--tfc-32) var(--tfc-20) var(--tfc-32) var(--tfc-20)">
+        <Divider padding="var(--tfc-32) var(--tfc-20) var(--tfc-32) var(--tfc-20)">
           {lowerLoading ? (
             <ActivityIndicator content="加载中" />
           ) : needNextLoad ? (

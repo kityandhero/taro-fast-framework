@@ -57,7 +57,7 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <Card header="定义上下间距" style={style} headerStyle={cardHeaderStyle}>
-          <Divider margin={10}>内容</Divider>
+          <Divider padding={10}>内容</Divider>
         </Card>
 
         <Card header="定义内容高度" style={style} headerStyle={cardHeaderStyle}>

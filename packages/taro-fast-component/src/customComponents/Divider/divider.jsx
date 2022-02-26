@@ -20,7 +20,7 @@ const defaultProps = {
   lineStyle: 'solid',
   lineWidth: 2,
   color: '',
-  margin: 32,
+  padding: 32,
   height: 38,
 };
 
@@ -48,7 +48,7 @@ class Divider extends BaseComponent {
   };
 
   renderFurther() {
-    const { height, color, lineStyle, lineWidth, margin, children } =
+    const { height, color, lineStyle, lineWidth, padding, children } =
       this.props;
 
     const contentPosition = this.getContentPosition();
@@ -81,7 +81,9 @@ class Divider extends BaseComponent {
               }
             : {}),
           ...{
-            margin: isNumber(margin) ? `${transformSize(margin)} 0` : margin,
+            padding: isNumber(padding)
+              ? `${transformSize(padding)} 0`
+              : padding,
           },
           ...{
             height: transformSize(height > 0 ? height : 38),

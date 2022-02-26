@@ -6,6 +6,8 @@ import {
   navigateTo,
   inCollection,
   isWechat,
+  getSystemInfo,
+  pageScrollTo,
 } from 'taro-fast-common/es/utils/tools';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {
@@ -16,6 +18,7 @@ import {
   VariableView,
   Spin,
   FadeView,
+  BackTop,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
@@ -171,6 +174,46 @@ class Infrastructure extends ComponentBase {
 
   pageScrollTop = 0;
 
+  /**
+   * 启用返回头部
+   */
+  enableBackTop = false;
+
+  /**
+   * 距右侧距离
+   */
+  backTopRight = null;
+
+  /**
+   * 距底部距离
+   */
+  backTopBottom = null;
+
+  /**
+   * 圆形轮廓
+   */
+  backTopCircle = false;
+
+  /**
+   * 不透明度
+   */
+  backTopOpacity = 0.6;
+
+  /**
+   * 图标颜色
+   */
+  backTopIconColor = '';
+
+  /**
+   * 背景颜色
+   */
+  backTopBackgroundColor = '';
+
+  /**
+   * 显示触发距离，滚动超多半屏后显示
+   */
+  backTopThresholdDistance = 0;
+
   constructor(props) {
     super(props);
 
@@ -179,8 +222,13 @@ class Infrastructure extends ComponentBase {
       ...underlyingState,
       ...{
         spin: true,
+        backTopVisible: false,
       },
     };
+
+    const { screenHeight } = getSystemInfo();
+
+    this.backTopThresholdDistance = screenHeight / 2;
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -251,11 +299,24 @@ class Infrastructure extends ComponentBase {
   }
 
   onPageScroll(e) {
+    const { backTopVisible } = this.state;
     const { scrollTop } = e;
 
     this.pageScrollTop = scrollTop;
 
     this.onScroll({ scrollTop });
+
+    if (!backTopVisible && e.scrollTop >= this.backTopThresholdDistance) {
+      this.setState({
+        backTopVisible: true,
+      });
+    }
+
+    if (backTopVisible && e.scrollTop < this.backTopThresholdDistance) {
+      this.setState({
+        backTopVisible: false,
+      });
+    }
   }
 
   onPullDownRefresh() {
@@ -501,7 +562,7 @@ class Infrastructure extends ComponentBase {
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
 
   renderView() {
-    const { spin } = this.state;
+    const { spin, backTopVisible } = this.state;
 
     const vw = (
       <VariableView
@@ -559,6 +620,33 @@ class Infrastructure extends ComponentBase {
         <Notification />
 
         {vw}
+
+        {this.enableBackTop ? (
+          <BackTop
+            visible={backTopVisible}
+            {...{
+              ...(this.backTopRight == null
+                ? {}
+                : { right: this.backTopRight }),
+              ...(this.backTopBottom == null
+                ? {}
+                : { bottom: this.backTopBottom }),
+              ...{ circle: !!this.backTopCircle },
+              ...(stringIsNullOrWhiteSpace(this.backTopIconColor)
+                ? {}
+                : { iconColor: this.backTopIconColor }),
+              ...(stringIsNullOrWhiteSpace(this.backTopBackgroundColor)
+                ? {}
+                : { backgroundColor: this.backTopBackgroundColor }),
+            }}
+            onClick={() => {
+              pageScrollTo({
+                scrollTop: 0,
+                duration: 300,
+              });
+            }}
+          />
+        ) : null}
       </>
     );
   }

@@ -12,6 +12,10 @@ const style = {
 
 const configList = [
   {
+    divider: true,
+    dividerText: 'Auxiliary Config',
+  },
+  {
     label: 'showRenderCountInConsole',
     value: '在控制台中显示render的次数,用于调试优化, 生产环境不应开启',
     ellipsis: false,
@@ -23,6 +27,10 @@ const configList = [
       '当前页面/继承紫框架的组件内置的key前缀, 用于优化在循环中构建唯一key',
     ellipsis: false,
     canCopy: true,
+  },
+  {
+    divider: true,
+    dividerText: 'Fade Spin Config',
   },
   {
     label: 'useFadeSpinWrapper',
@@ -56,16 +64,24 @@ const configList = [
     canCopy: true,
   },
   {
-    label: 'viewStyle',
-    value: '主容器的自定义 style',
-    ellipsis: false,
-    canCopy: true,
+    divider: true,
+    dividerText: 'Remote Request Config',
   },
   {
     label: 'loadRemoteRequestDelay',
     value: '请求接口时延迟的时间, 合理配置有助于优化用户体验, 默认为0',
     ellipsis: false,
     canCopy: true,
+  },
+  {
+    label: 'lastRequestingData',
+    value: '最后一次默认接口请求的参数缓存',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    divider: true,
+    dividerText: 'Paging Config',
   },
   {
     label: 'pagingLoadMode',
@@ -93,14 +109,18 @@ const configList = [
     canCopy: true,
   },
   {
-    label: 'lastRequestingData',
-    value: '最后一次默认接口请求的参数缓存',
+    label: 'useListDataAttachMode',
+    value: '是否列表数据附加模式, 上滑分页加载场景下开启',
     ellipsis: false,
     canCopy: true,
   },
   {
-    label: 'useListDataAttachMode',
-    value: '是否列表数据附加模式, 上滑分页加载场景下开启',
+    divider: true,
+    dividerText: 'Containor Config',
+  },
+  {
+    label: 'viewStyle',
+    value: '主容器的自定义 style',
     ellipsis: false,
     canCopy: true,
   },
@@ -144,6 +164,52 @@ const configList = [
   {
     label: 'lowerLoadingPosition',
     value: '触底加载提示器位置, 默认 "footer"',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    divider: true,
+    dividerText: 'Back Top Config',
+  },
+  {
+    label: 'enableBackTop',
+    value: '启用返回头部, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'backTopRight',
+    value: '距右侧距离',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'backTopBottom',
+    value: '距底部距离',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'backTopCircle',
+    value: '启用圆形轮廓, 默认关闭',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'backTopOpacity',
+    value: '不透明度, 默认0.6',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'backTopIconColor',
+    value: '图标颜色',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: 'backTopBackgroundColor',
+    value: '背景颜色',
     ellipsis: false,
     canCopy: true,
   },
