@@ -6,6 +6,7 @@ import {
   Space,
   DataGrid,
   CenterBox,
+  HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
 import {
@@ -25,6 +26,30 @@ const descriptionList = [
   {
     label: '开启返回头部',
     value: 'enableBackTop = true',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '可配置图标颜色',
+    value: 'backTopIconColor = "red"',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '可配置背景颜色',
+    value: 'backTopBackgroundColor = "#000"',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '可配置不透明度',
+    value: 'backTopOpacity = 0.4',
+    ellipsis: false,
+    canCopy: true,
+  },
+  {
+    label: '其他配置',
+    value: '请参见页面配置项',
     ellipsis: false,
     canCopy: true,
   },
@@ -64,6 +89,19 @@ export default class Index extends ContentPageBase {
             size="small"
             emptyValue="暂无"
             emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+
+        <Card header="备注" style={style} headerStyle={cardHeaderStyle}>
+          <HelpBox
+            showTitle={false}
+            showNumber={false}
+            useBackground={false}
+            list={[
+              {
+                text: '仅在默认容器模式下可以使用',
+              },
+            ]}
           />
         </Card>
       </Space>

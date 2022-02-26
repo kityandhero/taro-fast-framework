@@ -622,6 +622,9 @@ class Infrastructure extends ComponentBase {
           ...(stringIsNullOrWhiteSpace(this.backTopBackgroundColor)
             ? {}
             : { backgroundColor: this.backTopBackgroundColor }),
+          ...(this.backTopOpacity == null
+            ? {}
+            : { opacity: this.backTopOpacity }),
         }}
         onClick={() => {
           pageScrollTo({
