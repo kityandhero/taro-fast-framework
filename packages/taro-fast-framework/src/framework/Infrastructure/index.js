@@ -4,6 +4,8 @@ import {
   showErrorMessage,
   stringIsNullOrWhiteSpace,
   navigateTo,
+  inCollection,
+  isWechat,
 } from 'taro-fast-common/es/utils/tools';
 import { underlyingState } from 'taro-fast-common/es/utils/constants';
 import {
@@ -20,6 +22,20 @@ import {
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+
+const refreshingBoxEffectCollection = ['pull', 'scale'];
+
+function getRefreshingBoxEffect(effect) {
+  if (inCollection(refreshingBoxEffectCollection, effect)) {
+    if (!isWechat) {
+      return 'pull';
+    }
+
+    return effect;
+  }
+
+  return 'pull';
+}
 
 class Infrastructure extends ComponentBase {
   /**
@@ -68,7 +84,7 @@ class Infrastructure extends ComponentBase {
   enableLowerLoad = false;
 
   /**
-   * 下拉刷新提示器效果
+   * 下拉刷新提示器效果, scale效果仅支持微信小程序
    */
   refreshingBoxEffect = 'pull';
 
@@ -498,7 +514,7 @@ class Infrastructure extends ComponentBase {
         }
         enableSafeAreaInsetBottom={this.enableSafeAreaInsetBottom}
         enableCustomPullDown
-        refreshingBoxEffect={this.refreshingBoxEffect}
+        refreshingBoxEffect={getRefreshingBoxEffect(this.refreshingBoxEffect)}
         refreshColor={this.refreshColor}
         refreshBackgroundColor={this.refreshBackgroundColor}
         scrollWithAnimation={this.scrollWithAnimation}

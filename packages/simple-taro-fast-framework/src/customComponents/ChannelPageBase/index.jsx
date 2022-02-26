@@ -45,18 +45,26 @@ export default class ChannelPageBase extends PageWrapper {
 
         <View className="panel-body">
           <View className="component-list">
-            {list.map((one, index) => (
-              <View
-                className="component-list__item"
-                key={`${index}`}
-                onClick={() => {
-                  navigateTo(one.path);
-                }}
-              >
-                <Text className="name">{`${one.id} ${one.name}`}</Text>
-                <IconChevronRight size={36} />
-              </View>
-            ))}
+            {list.map((one, index) => {
+              const { hidden } = one;
+
+              if (hidden) {
+                return null;
+              }
+
+              return (
+                <View
+                  className="component-list__item"
+                  key={`${index}`}
+                  onClick={() => {
+                    navigateTo(one.path);
+                  }}
+                >
+                  <Text className="name">{`${one.id} ${one.name}`}</Text>
+                  <IconChevronRight size={36} />
+                </View>
+              );
+            })}
           </View>
         </View>
       </>

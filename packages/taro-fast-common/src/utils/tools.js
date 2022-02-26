@@ -174,7 +174,9 @@ export function showNavigationBarLoading() {
 }
 
 export function hideNavigationBarLoading() {
-  hideNavigationBarLoadingCore();
+  if (isWechat) {
+    hideNavigationBarLoadingCore();
+  }
 }
 
 export function stopPullDownRefresh() {

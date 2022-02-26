@@ -59,8 +59,11 @@ export default class Tips {
       if (Taro.hideLoading) {
         Taro.hideLoading();
       } else {
-        Taro.hideNavigationBarLoading();
+        if (process.env.TARO_ENV === 'weapp') {
+          Taro.hideNavigationBarLoading();
+        }
       }
+
       duration = 500;
     }
     // 隐藏动画大约500ms, 避免后面直接toast时的显示bug

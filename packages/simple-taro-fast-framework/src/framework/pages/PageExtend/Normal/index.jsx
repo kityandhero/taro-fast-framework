@@ -1,3 +1,5 @@
+import { isWechat } from 'taro-fast-common/es/utils/tools';
+
 import { pathCollection } from '../../../../customConfig/constants';
 import ChannelPageBase from '../../../../customComponents/ChannelPageBase';
 
@@ -36,6 +38,7 @@ const o = {
       id: 'PullRefresh',
       name: '下拉刷新-缩放提示器效果',
       path: pathCollection.framework.pageExtend.normal.pullRefreshSpecial.path,
+      hidden: !isWechat,
     },
     {
       id: 'LowerLoad',
