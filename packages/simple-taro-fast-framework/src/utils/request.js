@@ -26,7 +26,7 @@ export async function executiveRequest({
   useVirtualRequest = defaultSettingsLayoutCustom.getUseVirtualRequest(),
   showUseVirtualRequestMessage = defaultSettingsLayoutCustom.getShowUseVirtualRequestMessage(),
   showUseVirtualRequestMessageDelay = 500,
-  virtualRequestDelay = 0,
+  virtualRequestDelay = 400,
   virtualSuccessResponse = {},
   virtualFailResponse = {
     code: 1001,

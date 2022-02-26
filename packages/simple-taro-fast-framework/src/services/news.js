@@ -237,7 +237,6 @@ export async function pageListData(params) {
     api: `/news/article/pageList`,
     params,
     useVirtualRequest: true,
-    virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       extra: {
@@ -262,7 +261,6 @@ export async function pageListEmptyData(params) {
     api: `/news/article/pageListEmpty`,
     params,
     useVirtualRequest: true,
-    virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       extra: {
@@ -283,7 +281,6 @@ export async function singleListData(params) {
     api: `/news/article/singleList`,
     params,
     useVirtualRequest: true,
-    virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       list: articleList.slice(0, 10),
@@ -296,7 +293,6 @@ export async function singleListEmptyData(params) {
     api: `/news/article/singleListEmpty`,
     params,
     useVirtualRequest: true,
-    virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       list: [],
@@ -316,7 +312,6 @@ export async function getData(params) {
     api: `/news/article/get`,
     params,
     useVirtualRequest: true,
-    virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: article,
@@ -331,7 +326,6 @@ export async function switchStatusData(params) {
     api: `/news/article/switchStatus`,
     params,
     useVirtualRequest: true,
-    virtualRequestDelay: 800,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: {
