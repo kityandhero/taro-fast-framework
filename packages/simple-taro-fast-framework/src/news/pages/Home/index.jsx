@@ -72,7 +72,10 @@ export default class Index extends PageWrapper {
     return (
       <Space direction="vertical" fillWidth>
         {buildSwiper({
-          style: { height: transformSize(300) },
+          style: {
+            height: transformSize(300),
+            padding: `${transformSize(20)} 0`,
+          },
           circular: true,
           indicatorDots: true,
           autoplay: true,
@@ -84,10 +87,14 @@ export default class Index extends PageWrapper {
               <View
                 style={{
                   height: '100%',
-                  padding: `${transformSize(20)} ${transformSize(20)}`,
                 }}
               >
-                <ImageBox src={image} />
+                <ImageBox
+                  src={image}
+                  imageBoxStyle={{
+                    margin: `0 ${transformSize(20)}`,
+                  }}
+                />
               </View>
             );
           },
