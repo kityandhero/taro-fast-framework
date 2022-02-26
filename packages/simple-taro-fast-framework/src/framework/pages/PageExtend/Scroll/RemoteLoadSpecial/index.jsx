@@ -24,8 +24,8 @@ definePageConfig({
   navigationBarTitleText: '远程加载 - 自定义初始加载提示器',
 });
 
-@connect(({ news, global }) => ({
-  news,
+@connect(({ simulation, global }) => ({
+  simulation,
   global,
 }))
 export default class Index extends ContentPageBase {
@@ -45,14 +45,14 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        loadApiPath: 'news/singleList',
+        loadApiPath: 'simulation/singleList',
       },
     };
   }
 
   getApiData = (props) => {
     const {
-      news: { data },
+      simulation: { data },
     } = props;
 
     return data;

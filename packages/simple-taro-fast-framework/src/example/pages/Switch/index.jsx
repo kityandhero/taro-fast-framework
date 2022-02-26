@@ -12,8 +12,8 @@ const style = {
   ...cardStyle,
 };
 
-@connect(({ news, global }) => ({
-  news,
+@connect(({ simulation, global }) => ({
+  simulation,
   global,
 }))
 export default class Index extends ContentPageBase {
@@ -24,7 +24,7 @@ export default class Index extends ContentPageBase {
 
   getApiData = (props) => {
     const {
-      news: { data },
+      simulation: { data },
     } = props;
 
     return data;
@@ -32,7 +32,7 @@ export default class Index extends ContentPageBase {
 
   changeStatus = (value) => {
     return this.remoteRequest({
-      type: 'news/switchStatus',
+      type: 'simulation/switchStatus',
       payload: { status: value },
     }).then(
       (

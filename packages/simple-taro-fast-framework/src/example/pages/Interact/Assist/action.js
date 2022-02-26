@@ -7,7 +7,7 @@ import {
 } from 'taro-fast-framework/es/utils/actionAssist';
 
 function getApiData(props) {
-  return getApiDataCore({ props, modelName: 'news' });
+  return getApiDataCore({ props, modelName: 'simulation' });
 }
 
 export function getOverviewAction({
@@ -20,7 +20,7 @@ export function getOverviewAction({
   textProcessing = '处理中, 请稍后',
 }) {
   actionCore({
-    api: 'news/getOverview',
+    api: 'simulation/getOverview',
     params: handleData,
     getApiData,
     target,
@@ -43,7 +43,7 @@ export function pageListAction({
   textProcessing = '处理中, 请稍后',
 }) {
   actionCore({
-    api: 'news/pageList',
+    api: 'simulation/pageList',
     params: handleData,
     getApiData,
     target,

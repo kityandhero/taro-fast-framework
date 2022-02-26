@@ -56,8 +56,8 @@ definePageConfig({
   navigationBarTitleText: '下拉刷新 - 提示器缩放效果',
 });
 
-@connect(({ news, global }) => ({
-  news,
+@connect(({ simulation, global }) => ({
+  simulation,
   global,
 }))
 export default class Index extends ContentPageBase {
@@ -81,14 +81,14 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        loadApiPath: 'news/singleList',
+        loadApiPath: 'simulation/singleList',
       },
     };
   }
 
   getApiData = (props) => {
     const {
-      news: { data },
+      simulation: { data },
     } = props;
 
     return data;

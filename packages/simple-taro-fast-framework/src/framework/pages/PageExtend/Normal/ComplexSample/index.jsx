@@ -24,8 +24,8 @@ definePageConfig({
   navigationBarTitleText: '复杂示例',
 });
 
-@connect(({ news, global }) => ({
-  news,
+@connect(({ simulation, global }) => ({
+  simulation,
   global,
 }))
 export default class Index extends ContentPageBase {
@@ -54,14 +54,14 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        loadApiPath: 'news/pageList',
+        loadApiPath: 'simulation/pageList',
       },
     };
   }
 
   getApiData = (props) => {
     const {
-      news: { data },
+      simulation: { data },
     } = props;
 
     return data;
