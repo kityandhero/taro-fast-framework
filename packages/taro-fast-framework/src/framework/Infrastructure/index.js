@@ -84,7 +84,7 @@ class Infrastructure extends ComponentBase {
   enableLowerLoad = false;
 
   /**
-   * 下拉刷新提示器效果, scale效果仅支持微信小程序
+   * 下拉刷新提示器效果 "pull/scale", scale效果仅支持微信小程序
    */
   refreshingBoxEffect = 'pull';
 
