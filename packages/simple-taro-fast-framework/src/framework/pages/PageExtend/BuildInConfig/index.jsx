@@ -173,7 +173,7 @@ const configList = [
   },
   {
     label: 'enableBackTop',
-    value: '启用返回头部, 默认关闭',
+    value: '启用返回头部, 仅默认容器模式有效, 默认关闭',
     ellipsis: false,
     canCopy: true,
   },

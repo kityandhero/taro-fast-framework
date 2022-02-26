@@ -98,6 +98,7 @@ export default {
         'pages/pageExtend/normal/index',
         'pages/pageExtend/normal/basic/index',
         'pages/pageExtend/normal/upperBox/index',
+        'pages/pageExtend/normal/backTop/index',
         'pages/pageExtend/normal/remoteLoad/index',
         'pages/pageExtend/normal/remoteLoadSpecial/index',
         'pages/pageExtend/normal/pullRefresh/index',

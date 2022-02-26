@@ -23,8 +23,8 @@ const style = {
 
 const descriptionList = [
   {
-    label: '使用普通视图 [普通视图为默认视图]',
-    value: 'viewScrollMode = false',
+    label: '开启返回头部',
+    value: 'enableBackTop = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -36,6 +36,14 @@ definePageConfig({
 });
 
 export default class Index extends ContentPageBase {
+  enableBackTop = true;
+
+  backTopIconColor = 'red';
+
+  backTopBackgroundColor = '#000';
+
+  backTopOpacity = 0.4;
+
   headerData = {
     id: 'Normal',
     name: '普通视图',
@@ -44,7 +52,7 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <View style={{ height: transformSize(800), backgroundColor: '#ccc' }}>
+        <View style={{ height: transformSize(1800), backgroundColor: '#ccc' }}>
           <CenterBox>占位区域</CenterBox>
         </View>
 

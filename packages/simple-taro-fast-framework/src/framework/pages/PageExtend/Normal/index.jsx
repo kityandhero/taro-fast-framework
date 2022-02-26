@@ -20,6 +20,11 @@ const o = {
       path: pathCollection.framework.pageExtend.normal.upperBox.path,
     },
     {
+      id: 'BackTop',
+      name: '返回头部',
+      path: pathCollection.framework.pageExtend.normal.backTop.path,
+    },
+    {
       id: 'RemoteLoad',
       name: '远程加载',
       path: pathCollection.framework.pageExtend.normal.remoteLoad.path,

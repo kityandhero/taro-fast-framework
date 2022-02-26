@@ -175,7 +175,7 @@ class Infrastructure extends ComponentBase {
   pageScrollTop = 0;
 
   /**
-   * 启用返回头部
+   * 启用返回头部, 仅默认容器模式有效
    */
   enableBackTop = false;
 
@@ -561,6 +561,10 @@ class Infrastructure extends ComponentBase {
   // eslint-disable-next-line no-unused-vars
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
 
+  getEnableBackTop = () => {
+    return !this.viewScrollMode && this.enableBackTop;
+  };
+
   renderView() {
     const { spin, backTopVisible } = this.state;
 
@@ -605,12 +609,37 @@ class Infrastructure extends ComponentBase {
       </VariableView>
     );
 
+    const backTopElement = this.getEnableBackTop() ? (
+      <BackTop
+        visible={backTopVisible}
+        {...{
+          ...(this.backTopRight == null ? {} : { right: this.backTopRight }),
+          ...(this.backTopBottom == null ? {} : { bottom: this.backTopBottom }),
+          ...{ circle: !!this.backTopCircle },
+          ...(stringIsNullOrWhiteSpace(this.backTopIconColor)
+            ? {}
+            : { iconColor: this.backTopIconColor }),
+          ...(stringIsNullOrWhiteSpace(this.backTopBackgroundColor)
+            ? {}
+            : { backgroundColor: this.backTopBackgroundColor }),
+        }}
+        onClick={() => {
+          pageScrollTo({
+            scrollTop: 0,
+            duration: 300,
+          });
+        }}
+      />
+    ) : null;
+
     if (this.useFadeSpinWrapper) {
       return (
         <Spin fullscreen spin={spin}>
           <Notification />
 
           <FadeView show={!spin}>{vw}</FadeView>
+
+          {backTopElement}
         </Spin>
       );
     }
@@ -621,32 +650,7 @@ class Infrastructure extends ComponentBase {
 
         {vw}
 
-        {this.enableBackTop ? (
-          <BackTop
-            visible={backTopVisible}
-            {...{
-              ...(this.backTopRight == null
-                ? {}
-                : { right: this.backTopRight }),
-              ...(this.backTopBottom == null
-                ? {}
-                : { bottom: this.backTopBottom }),
-              ...{ circle: !!this.backTopCircle },
-              ...(stringIsNullOrWhiteSpace(this.backTopIconColor)
-                ? {}
-                : { iconColor: this.backTopIconColor }),
-              ...(stringIsNullOrWhiteSpace(this.backTopBackgroundColor)
-                ? {}
-                : { backgroundColor: this.backTopBackgroundColor }),
-            }}
-            onClick={() => {
-              pageScrollTo({
-                scrollTop: 0,
-                duration: 300,
-              });
-            }}
-          />
-        ) : null}
+        {backTopElement}
       </>
     );
   }

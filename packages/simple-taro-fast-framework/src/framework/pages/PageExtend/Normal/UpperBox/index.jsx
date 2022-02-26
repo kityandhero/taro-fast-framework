@@ -86,6 +86,9 @@ export default class Index extends ContentPageBase {
               {
                 text: 'UpperBox区域参与页面滚动, 与scroll模式下有区别',
               },
+              {
+                text: '在默认容器模式下用途不大',
+              },
             ]}
           />
         </Card>
