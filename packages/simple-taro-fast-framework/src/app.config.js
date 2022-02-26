@@ -118,5 +118,10 @@ export default {
         'pages/pageExtend/scroll/complexSample/index',
       ],
     },
+    {
+      root: 'news',
+      name: '新闻应用',
+      pages: ['pages/home/index'],
+    },
   ],
 };

@@ -7,7 +7,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
-import { pathCollection } from '../../../customConfig/constants';
+import { pathCollection } from '../../../customConfig/config';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 import iconAction from '../../../assets/images/icon-list-action.png';

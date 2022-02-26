@@ -1,4 +1,4 @@
-import { pathCollection } from '../../../../customConfig/constants';
+import { pathCollection } from '../../../../customConfig/config';
 import ChannelPageBase from '../../../../customComponents/ChannelPageBase';
 
 import iconBasic from '../../../../assets/images/icon-list-basic.png';
