@@ -35,6 +35,7 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <Swiper
+            autoplay
             list={[
               {
                 text: '这是一条标题很长很长很长很长很长很长很长很长很长很长的新闻1',

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { getGuid } from 'taro-fast-common/es/utils/tools';
-import { isArray, getRect } from 'taro-fast-common/es/utils/typeCheck';
+import { getGuid, getRect } from 'taro-fast-common/es/utils/tools';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
