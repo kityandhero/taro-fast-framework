@@ -59,13 +59,17 @@ export default class Index extends PageWrapper {
   buildSwiperListData = () => {
     const { advertisingList } = this.state;
 
-    return (isArray(advertisingList) ? advertisingList : []).map((item) => {
-      const { imageUrl } = item;
+    const list = (isArray(advertisingList) ? advertisingList : []).map(
+      (item) => {
+        const { imageUrl } = item;
 
-      return {
-        image: imageUrl,
-      };
-    });
+        return {
+          image: imageUrl,
+        };
+      },
+    );
+
+    return [...list, ...list, ...list, ...list, ...list];
   };
 
   renderFurther() {
@@ -76,7 +80,7 @@ export default class Index extends PageWrapper {
             height: transformSize(300),
             padding: `${transformSize(20)} 0`,
           },
-          circular: true,
+          // circular: true,
           indicatorDots: true,
           autoplay: true,
           items: this.buildSwiperListData(),
