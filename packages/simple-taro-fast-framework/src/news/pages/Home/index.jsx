@@ -83,6 +83,8 @@ export default class Index extends PageWrapper {
           itemBuilder: (o) => {
             const { image } = o;
 
+            console.log(o);
+
             return (
               <View
                 style={{

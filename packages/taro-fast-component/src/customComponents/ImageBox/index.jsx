@@ -43,10 +43,6 @@ class ImageBox extends BaseComponent {
     };
   }
 
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
   onImageLoadSuccess() {
     const { showOverlay: showOverlayValue, loadingEffect: loadingEffectValue } =
       this.props;
