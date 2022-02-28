@@ -48,7 +48,7 @@ export default class Index extends ContentPageBase {
                   'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
               },
               {
-                text: 'text1',
+                text: 'text2',
                 image:
                   'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
               },
@@ -57,7 +57,7 @@ export default class Index extends ContentPageBase {
               height: 'var(--tfc-200)',
             }}
             itemBuilder={(o) => {
-              const { image } = o;
+              const { text, image } = o;
 
               return (
                 <View
@@ -67,44 +67,11 @@ export default class Index extends ContentPageBase {
                   }}
                 >
                   <ImageBox src={image} />
+                  <View>{text}</View>
                 </View>
               );
             }}
           />
-          {buildSwiper({
-            style: { height: transformSize(40) },
-            vertical: true,
-            circular: true,
-            autoplay: true,
-            items: [
-              {
-                text: '这是一条标题很长很长很长很长很长很长很长很长很长很长的新闻1',
-                image: '',
-              },
-              {
-                text: 'text1',
-                image: '',
-              },
-              {
-                text: 'text1',
-                image: '',
-              },
-            ],
-            itemBuilder: (o) => {
-              const { text } = o;
-
-              return (
-                <Ellipsis
-                  line={1}
-                  onClick={() => {
-                    console.log(o);
-                  }}
-                >
-                  新闻: {text || 'text'}
-                </Ellipsis>
-              );
-            },
-          })}
         </Card>
 
         <Card

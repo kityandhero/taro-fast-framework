@@ -37,6 +37,8 @@ class Swiper extends BaseComponent {
 
   timer = null;
 
+  adjustTimer = null;
+
   constructor(props) {
     super(props);
 
@@ -50,6 +52,16 @@ class Swiper extends BaseComponent {
 
     this.swiperId = getGuid();
   }
+
+  doWorkAdjustDidMount = () => {
+    const that = this;
+
+    this.adjustTimer = setTimeout(() => {
+      that.adjustView();
+
+      clearTimeout(that.adjustTimer);
+    }, 200);
+  };
 
   adjustView = () => {
     const { autoplay } = this.props;
@@ -76,7 +88,9 @@ class Swiper extends BaseComponent {
     const { pauseTime } = this.props;
 
     const that = this;
-
+    console.log({
+      pauseTime,
+    });
     that.timer = setTimeout(() => {
       that.slide();
       that.play();
@@ -163,6 +177,7 @@ class Swiper extends BaseComponent {
         </View>
 
         <SwiperIndicator
+          indicator={current}
           list={list}
           style={indicatorStyle}
           direction={direction}
