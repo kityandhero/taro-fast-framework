@@ -8,6 +8,21 @@
   --indicator-inactive-opacity: 0.3;
   --indicator-active-opacity: 1;
 
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  transform: translateZ(0);
+
+  &__track {
+    display: flex;
+    height: 100%;
+
+    &--vertical {
+      flex-direction: column;
+    }
+  }
+
   &__indicator {
     position: absolute;
     bottom: var(--indicator-margin);

@@ -60,3 +60,4 @@ export { default as FadeInBox } from './FadeInBox';
 export { default as Link } from './Link';
 export { default as ThumbnailBox } from './ThumbnailBox';
 export { default as BackTop } from './BackTop';
+export { default as Swiper } from './Swiper';

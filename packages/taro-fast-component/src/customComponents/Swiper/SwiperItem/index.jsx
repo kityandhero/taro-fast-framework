@@ -8,10 +8,10 @@ import BaseComponent from '../../BaseComponent';
 const classPrefix = `tfc-swiper`;
 
 const defaultProps = {
-  className: '',
   style: {},
   data: null,
   direction: '',
+  itemBuilder: null,
 };
 
 class SwiperItem extends BaseComponent {
@@ -26,13 +26,19 @@ class SwiperItem extends BaseComponent {
   };
 
   renderFurther() {
-    const { key, className, style, data } = this.props;
+    const { key, style: itemStyle, data } = this.props;
 
     if (data == null) {
       return null;
     }
 
-    const { hidden } = { ...{ hidden: false }, ...data };
+    const { hidden, style: styleCustom } = {
+      ...{
+        hidden: false,
+        style: {},
+      },
+      ...data,
+    };
 
     if (hidden) {
       return null;
@@ -47,8 +53,8 @@ class SwiperItem extends BaseComponent {
     return (
       <View
         key={key}
-        className={classNames(`${classPrefix}__item`, className)}
-        style={style}
+        className={classNames(`${classPrefix}__item`)}
+        style={{ ...itemStyle, ...styleCustom }}
       >
         {item}
       </View>
