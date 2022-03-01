@@ -58,6 +58,11 @@ const o = {
       path: pathCollection.example.thumbnailBox.path,
     },
     {
+      id: 'Swiper',
+      name: '滑动布局',
+      path: pathCollection.example.swiper.path,
+    },
+    {
       id: 'Grid',
       name: '宫格',
       path: pathCollection.example.grid.path,

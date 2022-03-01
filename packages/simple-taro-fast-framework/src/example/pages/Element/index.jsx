@@ -83,11 +83,6 @@ const o = {
       path: pathCollection.example.helpBox.path,
     },
     {
-      id: 'Swiper',
-      name: '滑动展示',
-      path: pathCollection.example.swiper.path,
-    },
-    {
       id: 'Steps',
       name: '步骤条',
       path: pathCollection.example.steps.path,
