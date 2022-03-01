@@ -1,7 +1,12 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { getGuid, getRect } from 'taro-fast-common/es/utils/tools';
+import {
+  getGuid,
+  getRect,
+  inCollection,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -12,6 +17,8 @@ import SwiperIndicator from './SwiperIndicator';
 import './index.less';
 
 const classPrefix = `tfc-swiper`;
+
+const transformCollection = ['slide'];
 
 const defaultProps = {
   autoplay: false,
@@ -26,6 +33,8 @@ const defaultProps = {
   list: [],
   itemBuilder: null,
   pauseTime: 1500,
+  transform: 'slide',
+  duration: '300ms',
 };
 
 class Swiper extends BaseComponent {
@@ -118,6 +127,14 @@ class Swiper extends BaseComponent {
     return this.setState({ current: current + 1 });
   };
 
+  getTransform = () => {
+    const { transform } = this.props;
+
+    return inCollection(transformCollection, transform)
+      ? transform
+      : defaultProps.transform;
+  };
+
   renderFurther() {
     const {
       hidden,
@@ -128,6 +145,7 @@ class Swiper extends BaseComponent {
       list,
       itemBuilder,
       indicatorStyle,
+      duration,
     } = this.props;
     const { current } = this.state;
 
@@ -135,32 +153,112 @@ class Swiper extends BaseComponent {
       return null;
     }
 
+    const listData = isArray(list) ? list : [];
+
     const verticalMode = direction === 'vertical';
 
-    const trackStyle = {
+    const transform = this.getTransform();
+
+    const trackStyleOne = {
       ...{
-        transform: `translateX(${-1 * current * this.swiperWidth}px)`,
+        transform: `translateX(${
+          -1 * (current + listData.length) * this.swiperWidth
+        }px)`,
       },
     };
 
-    const listData = isArray(list) ? list : [];
+    const trackStyleTwo = {
+      ...{
+        transform: `translateX(${
+          -1 * (current + listData.length) * this.swiperWidth
+        }px)`,
+      },
+    };
+
+    const trackStyleThree = {
+      ...{
+        transform: `translateX(${
+          -1 * (current + listData.length) * this.swiperWidth
+        }px)`,
+      },
+    };
 
     return (
       <View
         id={this.swiperId}
         className={classNames(classPrefix, className)}
-        style={style}
+        style={{
+          ...style,
+          ...(stringIsNullOrWhiteSpace(duration)
+            ? {}
+            : {
+                '--track-translate-duration': duration,
+              }),
+        }}
       >
         <View
           className={classNames(`${classPrefix}__track`, {
-            [`classPrefix}__track--vertical`]: verticalMode,
+            [`${classPrefix}__track--vertical`]: verticalMode,
+            [`${classPrefix}__track--translate`]: transform === 'slide',
           })}
           // catchMove
           // onTouchStart={onTouchStart}
           // onTouchMove={onTouchMove}
           // onTouchEnd={onTouchEnd}
           // onTouchCancel={onTouchEnd}
-          style={trackStyle}
+          style={trackStyleOne}
+        >
+          {listData.map((item, index) => {
+            const key = `swiper_item_${this.keyPrefix}_${index}`;
+
+            return (
+              <SwiperItem
+                key={key}
+                style={itemStyle}
+                data={item}
+                itemBuilder={itemBuilder}
+              />
+            );
+          })}
+        </View>
+
+        <View
+          className={classNames(`${classPrefix}__track--`, {
+            [`${classPrefix}__track--vertical`]: verticalMode,
+            [`${classPrefix}__track--translate`]: transform === 'slide',
+          })}
+          // catchMove
+          // onTouchStart={onTouchStart}
+          // onTouchMove={onTouchMove}
+          // onTouchEnd={onTouchEnd}
+          // onTouchCancel={onTouchEnd}
+          style={trackStyleTwo}
+        >
+          {listData.map((item, index) => {
+            const key = `swiper_item_${this.keyPrefix}_${index}`;
+
+            return (
+              <SwiperItem
+                key={key}
+                style={itemStyle}
+                data={item}
+                itemBuilder={itemBuilder}
+              />
+            );
+          })}
+        </View>
+
+        <View
+          className={classNames(`${classPrefix}__track--`, {
+            [`${classPrefix}__track--vertical`]: verticalMode,
+            [`${classPrefix}__track--translate`]: transform === 'slide',
+          })}
+          // catchMove
+          // onTouchStart={onTouchStart}
+          // onTouchMove={onTouchMove}
+          // onTouchEnd={onTouchEnd}
+          // onTouchCancel={onTouchEnd}
+          style={trackStyleThree}
         >
           {listData.map((item, index) => {
             const key = `swiper_item_${this.keyPrefix}_${index}`;

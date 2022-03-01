@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
+  CenterBox,
   Ellipsis,
   ImageBox,
   Space,
@@ -38,36 +39,33 @@ export default class Index extends ContentPageBase {
             autoplay
             list={[
               {
-                text: '这是一条标题很长很长很长很长很长很长很长很长很长很长的新闻1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                text: '1',
               },
               {
-                text: 'text1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                text: '2',
               },
               {
-                text: 'text2',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                text: '3',
+              },
+              {
+                text: '4',
               },
             ]}
             itemStyle={{
-              height: 'var(--tfc-200)',
+              height: 'var(--tfc-280)',
             }}
             itemBuilder={(o) => {
-              const { text, image } = o;
+              const { text } = o;
 
               return (
                 <View
                   style={{
                     height: '100%',
                     padding: `0 ${transformSize(20)}`,
+                    backgroundColor: '#81c1e6',
                   }}
                 >
-                  <ImageBox src={image} />
-                  <View>{text}</View>
+                  <CenterBox>{text}</CenterBox>
                 </View>
               );
             }}
@@ -146,7 +144,7 @@ export default class Index extends ContentPageBase {
             ],
             itemBuilder: (o) => {
               const { image } = o;
-
+              console.log(o);
               return (
                 <View
                   style={{

@@ -7,12 +7,15 @@
   --animation-duration-fast: 0.2s;
   --indicator-inactive-opacity: 0.3;
   --indicator-active-opacity: 1;
+  --track-translate-duration: 300ms;
 
   position: relative;
   overflow: hidden;
   cursor: grab;
   user-select: none;
   transform: translateZ(0);
+  display: flex;
+  flex-wrap: nowrap;
 
   &__track {
     display: flex;
@@ -21,6 +24,11 @@
     &--vertical {
       flex-direction: column;
     }
+  }
+
+  &__track--translate {
+    transition-property: transform;
+    transition-duration: var(--track-translate-duration);
   }
 
   &__indicator {
