@@ -5,7 +5,7 @@ import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../../BaseComponent';
 
-const classPrefix = `tfc-swiper`;
+import { classPrefix } from '../tools';
 
 const defaultProps = {
   style: {},

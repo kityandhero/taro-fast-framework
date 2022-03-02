@@ -14,8 +14,6 @@
   cursor: grab;
   user-select: none;
   transform: translateZ(0);
-  display: flex;
-  flex-wrap: nowrap;
 
   &__track {
     display: flex;
@@ -66,10 +64,15 @@
     }
   }
 
-  &__item {
+  &__item-container {
     position: relative;
     flex-shrink: 0;
     width: 100%;
     height: 100%;
+  }
+
+  &__item-container--translate {
+    transition-property: transform;
+    transition-duration: var(--track-translate-duration);
   }
 }

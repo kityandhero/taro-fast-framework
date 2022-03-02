@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   CenterBox,
@@ -36,7 +36,8 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <Swiper
-            autoplay
+            // autoplay
+            circular
             list={[
               {
                 text: '1',
@@ -54,7 +55,7 @@ export default class Index extends ContentPageBase {
             itemStyle={{
               height: 'var(--tfc-280)',
             }}
-            itemBuilder={(o) => {
+            itemBuilder={(o, i) => {
               const { text } = o;
 
               return (
@@ -62,7 +63,7 @@ export default class Index extends ContentPageBase {
                   style={{
                     height: '100%',
                     padding: `0 ${transformSize(20)}`,
-                    backgroundColor: '#81c1e6',
+                    backgroundColor: getRandomColor({ seed: i }),
                   }}
                 >
                   <CenterBox>{text}</CenterBox>

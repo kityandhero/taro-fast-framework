@@ -4,25 +4,22 @@ import { View } from '@tarojs/components';
 import {
   getGuid,
   getRect,
-  inCollection,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
-import SwiperItem from './SwiperItem';
+import { classPrefix, checkTransform } from './tools';
+import SwiperItemContainer from './SwiperItemContainer';
 import SwiperIndicator from './SwiperIndicator';
 
 import './index.less';
 
-const classPrefix = `tfc-swiper`;
-
-const transformCollection = ['slide'];
-
 const defaultProps = {
   autoplay: false,
   hidden: false,
+  circular: false,
   className: '',
   itemStyle: {},
   style: {},
@@ -38,11 +35,11 @@ const defaultProps = {
 };
 
 class Swiper extends BaseComponent {
-  swiperId = '';
+  swiperItemContainerId = '';
 
-  swiperWidth = 0;
+  swiperItemContainerWidth = 0;
 
-  swiperHeight = 0;
+  swiperItemContainerHeight = 0;
 
   timer = null;
 
@@ -59,7 +56,7 @@ class Swiper extends BaseComponent {
       },
     };
 
-    this.swiperId = getGuid();
+    this.swiperItemContainerId = getGuid();
   }
 
   doWorkAdjustDidMount = () => {
@@ -77,12 +74,17 @@ class Swiper extends BaseComponent {
 
     const that = this;
 
-    getRect(`#${this.swiperId}`).then((rect) => {
+    getRect(`#${this.swiperItemContainerId}`).then((rect) => {
       if (rect != null) {
-        const { width: swiperWidth, height: swiperHeight } = rect;
+        const {
+          width: swiperItemContainerWidth,
+          height: swiperItemContainerHeight,
+        } = rect;
 
-        that.swiperWidth = swiperWidth;
-        that.swiperHeight = swiperHeight;
+        that.swiperItemContainerWidth = swiperItemContainerWidth;
+        that.swiperItemContainerHeight = swiperItemContainerHeight;
+
+        that.increaseCounter();
 
         if (autoplay) {
           that.timer = setTimeout(() => {
@@ -127,17 +129,11 @@ class Swiper extends BaseComponent {
     return this.setState({ current: current + 1 });
   };
 
-  getTransform = () => {
-    const { transform } = this.props;
-
-    return inCollection(transformCollection, transform)
-      ? transform
-      : defaultProps.transform;
-  };
-
   renderFurther() {
     const {
       hidden,
+      circular,
+      transform: transformSource,
       className,
       style,
       itemStyle,
@@ -157,35 +153,20 @@ class Swiper extends BaseComponent {
 
     const verticalMode = direction === 'vertical';
 
-    const transform = this.getTransform();
+    const transform = checkTransform(transformSource);
 
-    const trackStyleOne = {
-      ...{
-        transform: `translateX(${
-          -1 * (current + listData.length) * this.swiperWidth
-        }px)`,
-      },
-    };
-
-    const trackStyleTwo = {
-      ...{
-        transform: `translateX(${
-          -1 * (current + listData.length) * this.swiperWidth
-        }px)`,
-      },
-    };
-
-    const trackStyleThree = {
-      ...{
-        transform: `translateX(${
-          -1 * (current + listData.length) * this.swiperWidth
-        }px)`,
-      },
+    const trackStyle = {
+      ...(circular
+        ? {}
+        : {
+            transform: `translateX(${
+              -1 * current * this.swiperItemContainerWidth
+            }px)`,
+          }),
     };
 
     return (
       <View
-        id={this.swiperId}
         className={classNames(classPrefix, className)}
         style={{
           ...style,
@@ -206,66 +187,22 @@ class Swiper extends BaseComponent {
           // onTouchMove={onTouchMove}
           // onTouchEnd={onTouchEnd}
           // onTouchCancel={onTouchEnd}
-          style={trackStyleOne}
+          style={trackStyle}
         >
           {listData.map((item, index) => {
-            const key = `swiper_item_${this.keyPrefix}_${index}`;
+            const key = `swiper__item-container_${this.keyPrefix}_${index}`;
 
             return (
-              <SwiperItem
+              <SwiperItemContainer
                 key={key}
-                style={itemStyle}
-                data={item}
-                itemBuilder={itemBuilder}
-              />
-            );
-          })}
-        </View>
-
-        <View
-          className={classNames(`${classPrefix}__track--`, {
-            [`${classPrefix}__track--vertical`]: verticalMode,
-            [`${classPrefix}__track--translate`]: transform === 'slide',
-          })}
-          // catchMove
-          // onTouchStart={onTouchStart}
-          // onTouchMove={onTouchMove}
-          // onTouchEnd={onTouchEnd}
-          // onTouchCancel={onTouchEnd}
-          style={trackStyleTwo}
-        >
-          {listData.map((item, index) => {
-            const key = `swiper_item_${this.keyPrefix}_${index}`;
-
-            return (
-              <SwiperItem
-                key={key}
-                style={itemStyle}
-                data={item}
-                itemBuilder={itemBuilder}
-              />
-            );
-          })}
-        </View>
-
-        <View
-          className={classNames(`${classPrefix}__track--`, {
-            [`${classPrefix}__track--vertical`]: verticalMode,
-            [`${classPrefix}__track--translate`]: transform === 'slide',
-          })}
-          // catchMove
-          // onTouchStart={onTouchStart}
-          // onTouchMove={onTouchMove}
-          // onTouchEnd={onTouchEnd}
-          // onTouchCancel={onTouchEnd}
-          style={trackStyleThree}
-        >
-          {listData.map((item, index) => {
-            const key = `swiper_item_${this.keyPrefix}_${index}`;
-
-            return (
-              <SwiperItem
-                key={key}
+                id={index === 0 ? this.swiperItemContainerId : null}
+                sliderIndex={index}
+                sliderCount={listData.length}
+                duration={duration}
+                transform={transform}
+                transformDistance={this.swiperItemContainerWidth}
+                circular={circular}
+                indicator={circular ? current : 0}
                 style={itemStyle}
                 data={item}
                 itemBuilder={itemBuilder}

@@ -99,6 +99,7 @@ class ComponentBase extends Component {
     this.state = {
       error: null,
       errorInfo: null,
+      counter: 0,
     };
 
     this.keyPrefix = getGuid();
@@ -173,6 +174,12 @@ class ComponentBase extends Component {
 
   componentDidHide() {
     this.doWorkWhenComponentHide();
+  }
+
+  increaseCounter() {
+    const { counter } = this.state;
+
+    this.setState({ counter: counter + 1 });
   }
 
   doDidMountTask = () => {
