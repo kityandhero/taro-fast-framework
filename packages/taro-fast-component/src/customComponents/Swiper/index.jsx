@@ -17,6 +17,7 @@ import SwiperIndicator from './SwiperIndicator';
 import './index.less';
 
 const defaultProps = {
+  current: 0,
   autoplay: false,
   hidden: false,
   circular: false,
@@ -48,15 +49,32 @@ class Swiper extends BaseComponent {
   constructor(props) {
     super(props);
 
+    const { current } = props;
+
     this.state = {
       ...this.state,
       ...{
-        current: 0,
+        currentFlag: current || 0,
+        currentStage: current || 0,
         play: false,
       },
     };
 
     this.swiperItemContainerId = getGuid();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { current: currentNext } = nextProps;
+    const { currentFlag: currentPrev } = prevState;
+
+    if (currentNext !== currentPrev) {
+      return {
+        currentFlag: currentNext,
+        currentStage: currentNext,
+      };
+    }
+
+    return {};
   }
 
   doWorkAdjustDidMount = () => {
@@ -110,38 +128,71 @@ class Swiper extends BaseComponent {
 
   slide = () => {
     const { list } = this.props;
-    const { current } = this.state;
-
-    if (current < 0) {
-      this.setState({ current: 0 });
+    const { currentStage } = this.state;
+    console.log({
+      currentStage,
+    });
+    if (currentStage < 0) {
+      this.setState({ currentStage: 0 });
 
       return;
     }
 
     const listData = isArray(list) ? list : [];
 
-    if (current >= listData.length - 1) {
-      this.setState({ current: 0 });
+    if (currentStage >= listData.length - 1) {
+      this.setState({ currentStage: 0 });
 
       return;
     }
 
-    return this.setState({ current: current + 1 });
+    return this.setState({ currentStage: currentStage + 1 });
+  };
+
+  getItemCount = () => {
+    const { list } = this.props;
+
+    const listData = isArray(list) ? list : [];
+
+    return listData.length;
   };
 
   getStyleTranslate = (index, count) => {
     const { circular } = this.props;
+    const { currentStage } = this.state;
 
     if (!circular) {
       return {};
     }
 
+    const itemCount = this.getItemCount();
+
     const halfCount = Math.floor(count / 2);
 
-    const multiple = index < halfCount ? index : -1 * (count - index);
+    let multiple =
+      0 -
+      currentStage +
+      (currentStage === itemCount - 1 ? itemCount : 0) +
+      index;
+
+    if (multiple >= halfCount) {
+      multiple = multiple - itemCount;
+    }
 
     return {
-      transform: `translateX(${multiple * this.swiperItemContainerWidth}px)`,
+      ...{
+        // '--track-translate-duration':
+        //   index !== currentStage + 1 ? '0' : duration,
+        transform:
+          index === currentStage
+            ? 'none'
+            : `translateX(${multiple * this.swiperItemContainerWidth}px)`,
+      },
+      ...(multiple > 0 ? { visibility: 'hidden' } : {}),
+      ...(multiple > 0 ? { zIndex: '-100' } : {}),
+      ...(index === 0
+        ? {}
+        : { left: `${-1 * index * this.swiperItemContainerWidth}px` }),
     };
   };
 
@@ -159,7 +210,7 @@ class Swiper extends BaseComponent {
       indicatorStyle,
       duration,
     } = this.props;
-    const { current } = this.state;
+    const { currentStage } = this.state;
 
     if (hidden) {
       return null;
@@ -176,7 +227,7 @@ class Swiper extends BaseComponent {
         ? {}
         : {
             transform: `translateX(${
-              -1 * current * this.swiperItemContainerWidth
+              -1 * currentStage * this.swiperItemContainerWidth
             }px)`,
           }),
     };
@@ -220,7 +271,7 @@ class Swiper extends BaseComponent {
                 transform={transform}
                 transformDistance={this.swiperItemContainerWidth}
                 circular={circular}
-                indicator={circular ? current : 0}
+                indicator={circular ? currentStage : 0}
                 style={{
                   ...itemStyle,
                   ...this.getStyleTranslate(index, itemCount),
@@ -233,7 +284,7 @@ class Swiper extends BaseComponent {
         </View>
 
         <SwiperIndicator
-          indicator={current}
+          indicator={currentStage}
           list={list}
           style={indicatorStyle}
           direction={direction}

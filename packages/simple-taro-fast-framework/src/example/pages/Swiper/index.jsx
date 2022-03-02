@@ -21,6 +21,21 @@ const style = {
   ...cardStyle,
 };
 
+const listText = [
+  {
+    text: '1',
+  },
+  {
+    text: '2',
+  },
+  {
+    text: '3',
+  },
+  {
+    text: '4',
+  },
+];
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Swiper',
@@ -36,22 +51,40 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <Swiper
-            // autoplay
+            autoplay
+            // circular
+            list={listText}
+            itemStyle={{
+              height: 'var(--tfc-280)',
+            }}
+            itemBuilder={(o, i) => {
+              const { text } = o;
+
+              return (
+                <View
+                  style={{
+                    height: '100%',
+                    padding: `0 ${transformSize(20)}`,
+                    backgroundColor: getRandomColor({ seed: i }),
+                  }}
+                >
+                  <CenterBox>{text}</CenterBox>
+                </View>
+              );
+            }}
+          />
+        </Card>
+
+        <Card
+          header="例子: 新闻标题上下滚动"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            autoplay
+            current={0}
             circular
-            list={[
-              {
-                text: '1',
-              },
-              {
-                text: '2',
-              },
-              {
-                text: '3',
-              },
-              {
-                text: '4',
-              },
-            ]}
+            list={listText}
             itemStyle={{
               height: 'var(--tfc-280)',
             }}
