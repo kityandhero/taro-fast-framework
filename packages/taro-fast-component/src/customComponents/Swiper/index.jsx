@@ -129,6 +129,22 @@ class Swiper extends BaseComponent {
     return this.setState({ current: current + 1 });
   };
 
+  getStyleTranslate = (index, count) => {
+    const { circular } = this.props;
+
+    if (!circular) {
+      return {};
+    }
+
+    const halfCount = Math.floor(count / 2);
+
+    const multiple = index < halfCount ? index : -1 * (count - index);
+
+    return {
+      transform: `translateX(${multiple * this.swiperItemContainerWidth}px)`,
+    };
+  };
+
   renderFurther() {
     const {
       hidden,
@@ -165,6 +181,8 @@ class Swiper extends BaseComponent {
           }),
     };
 
+    const itemCount = listData.length;
+
     return (
       <View
         className={classNames(classPrefix, className)}
@@ -196,14 +214,17 @@ class Swiper extends BaseComponent {
               <SwiperItemContainer
                 key={key}
                 id={index === 0 ? this.swiperItemContainerId : null}
-                sliderIndex={index}
-                sliderCount={listData.length}
+                itemIndex={index}
+                itemCount={itemCount}
                 duration={duration}
                 transform={transform}
                 transformDistance={this.swiperItemContainerWidth}
                 circular={circular}
                 indicator={circular ? current : 0}
-                style={itemStyle}
+                style={{
+                  ...itemStyle,
+                  ...this.getStyleTranslate(index, itemCount),
+                }}
                 data={item}
                 itemBuilder={itemBuilder}
               />

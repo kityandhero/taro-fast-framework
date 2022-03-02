@@ -5,10 +5,11 @@ import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../../BaseComponent';
 
-import { classPrefix, checkTransform } from '../tools';
+import { classPrefix } from '../tools';
 
 const defaultProps = {
   style: {},
+  styleAnimation: {},
   indicator: 0,
   circular: false,
   data: null,
@@ -28,43 +29,14 @@ class SwiperItemContainer extends BaseComponent {
     return null;
   };
 
-  getStyleTranslate = () => {
-    const {
-      sliderIndex,
-      sliderCount,
-      circular,
-      transformDistance,
-      //  indicator
-    } = this.props;
-
-    if (!circular) {
-      return {};
-    }
-
-    const sliderHalfCount = Math.floor(sliderCount / 2);
-
-    const multiple =
-      sliderIndex < sliderHalfCount
-        ? sliderIndex
-        : -1 * (sliderCount - sliderIndex);
-
-    console.log({
-      multiple,
-      transformDistance,
-    });
-
-    return {
-      transform: `translateX(${multiple * transformDistance}px)`,
-    };
-  };
-
   renderFurther() {
     const {
       key,
       id,
-      sliderIndex,
-      transform: transformSource,
+      itemIndex,
+      transform,
       style: itemStyle,
+      styleAnimation,
       data,
     } = this.props;
 
@@ -84,15 +56,11 @@ class SwiperItemContainer extends BaseComponent {
       return null;
     }
 
-    const item = this.buildItem(data, sliderIndex);
+    const item = this.buildItem(data, itemIndex);
 
     if (item == null) {
       return null;
     }
-
-    const transform = checkTransform(transformSource);
-
-    const styleTranslate = this.getStyleTranslate();
 
     return (
       <View
@@ -104,7 +72,7 @@ class SwiperItemContainer extends BaseComponent {
         style={{
           ...itemStyle,
           ...styleCustom,
-          ...styleTranslate,
+          ...styleAnimation,
         }}
       >
         {item}
