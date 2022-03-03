@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
+  Button,
   Card,
   CenterBox,
   Ellipsis,
@@ -42,6 +43,30 @@ export default class Index extends ContentPageBase {
     name: '滑动展示',
   };
 
+  currentSequence = 0;
+
+  minSequence = 0;
+
+  maxSequence = 0;
+
+  onChange = (current) => {
+    console.log({
+      current: current,
+    });
+  };
+
+  changeToPrev = () => {
+    this.currentSequence = this.currentSequence - 1;
+
+    this.increaseCounter();
+  };
+
+  changeToNext = () => {
+    this.currentSequence = this.currentSequence + 1;
+
+    this.increaseCounter();
+  };
+
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
@@ -76,34 +101,46 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <Card
-          header="例子: 新闻标题上下滚动"
+          header="例子: 自当循环滚动"
           style={style}
           headerStyle={cardHeaderStyle}
         >
-          <Swiper
-            autoplay
-            current={0}
-            circular
-            list={listText}
-            itemStyle={{
-              height: 'var(--tfc-280)',
-            }}
-            itemBuilder={(o, i) => {
-              const { text } = o;
+          <Space direction="vertical" fillWidth>
+            <Swiper
+              autoplay
+              // current={this.currentSequence}
+              circular
+              pauseTime={3000}
+              direction="right"
+              list={listText}
+              itemStyle={{
+                height: 'var(--tfc-280)',
+              }}
+              itemBuilder={(o, i) => {
+                const { text } = o;
 
-              return (
-                <View
-                  style={{
-                    height: '100%',
-                    padding: `0 ${transformSize(20)}`,
-                    backgroundColor: getRandomColor({ seed: i }),
-                  }}
-                >
-                  <CenterBox>{text}</CenterBox>
-                </View>
-              );
-            }}
-          />
+                return (
+                  <View
+                    style={{
+                      height: '100%',
+                      padding: `0 ${transformSize(20)}`,
+                      backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
+                    }}
+                  >
+                    <CenterBox>{text}</CenterBox>
+                  </View>
+                );
+              }}
+              onChange={this.onChange}
+            />
+
+            <CenterBox>
+              <Space>
+                <Button onClick={this.changeToPrev}>上一个</Button>
+                <Button onClick={this.changeToNext}>下一个</Button>
+              </Space>
+            </CenterBox>
+          </Space>
         </Card>
 
         <Card

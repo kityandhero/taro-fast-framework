@@ -4,9 +4,15 @@ import { View } from '@tarojs/components';
 import {
   getGuid,
   getRect,
+  inCollection,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  isArray,
+  isFunction,
+  isNumber,
+} from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 
@@ -30,10 +36,89 @@ const defaultProps = {
   direction: '',
   list: [],
   itemBuilder: null,
-  pauseTime: 1500,
+  pauseTime: 3000,
   transform: 'slide',
   duration: '300ms',
+  direction: 'left',
+  onChange: null,
 };
+
+function getArrayCount(list) {
+  const listData = isArray(list) ? list : [];
+
+  return listData.length;
+}
+
+function checkSequence(sequence, list, automaticCorrection = true) {
+  if (!isNumber(sequence)) {
+    if (!automaticCorrection) {
+      return null;
+    }
+
+    return 0;
+  }
+
+  const itemCount = getArrayCount(list);
+
+  if (!automaticCorrection) {
+    if (sequence < 0) {
+      return null;
+    }
+
+    if (sequence >= itemCount) {
+      return null;
+    }
+  }
+
+  let sequenceAdjust = toNumber(sequence);
+
+  sequenceAdjust =
+    sequenceAdjust < 0
+      ? itemCount - 1
+      : sequenceAdjust > itemCount - 1
+      ? 0
+      : sequenceAdjust;
+
+  return sequenceAdjust;
+}
+
+function getRealDirection({ priorityDirection, direction }) {
+  let directionAdjust = '';
+
+  const directionCollection = ['left', 'right'];
+
+  if (inCollection(directionCollection, priorityDirection)) {
+    directionAdjust = priorityDirection;
+  } else if (inCollection(directionCollection, direction)) {
+    directionAdjust = direction;
+  } else {
+    directionAdjust = defaultProps.direction;
+  }
+
+  return directionAdjust;
+}
+
+function getNextSequence({
+  priorityDirection,
+  direction = defaultProps.direction,
+  sequence,
+  step = 1,
+}) {
+  let directionAdjust = getRealDirection({
+    priorityDirection,
+    direction,
+  });
+
+  let sequenceAdjust = sequence;
+
+  if (directionAdjust === 'left') {
+    sequenceAdjust = sequence + step;
+  } else {
+    sequenceAdjust = sequence - step;
+  }
+
+  return sequenceAdjust;
+}
 
 class Swiper extends BaseComponent {
   swiperItemContainerId = '';
@@ -46,16 +131,20 @@ class Swiper extends BaseComponent {
 
   adjustTimer = null;
 
+  priorityDirection = '';
+
   constructor(props) {
     super(props);
 
-    const { current } = props;
+    const { current, list } = props;
+
+    const sequence = checkSequence(current, list, false) || 0;
 
     this.state = {
       ...this.state,
       ...{
-        currentFlag: current || 0,
-        currentStage: current || 0,
+        currentFlag: sequence,
+        currentStage: sequence,
         play: false,
       },
     };
@@ -64,14 +153,18 @@ class Swiper extends BaseComponent {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { current: currentNext } = nextProps;
+    const { current: currentNext, list } = nextProps;
     const { currentFlag: currentPrev } = prevState;
 
     if (currentNext !== currentPrev) {
-      return {
-        currentFlag: currentNext,
-        currentStage: currentNext,
-      };
+      const sequence = checkSequence(currentNext, list, false);
+
+      if (sequence != null) {
+        return {
+          currentFlag: sequence || 0,
+          currentStage: sequence || 0,
+        };
+      }
     }
 
     return {};
@@ -88,7 +181,8 @@ class Swiper extends BaseComponent {
   };
 
   adjustView = () => {
-    const { autoplay } = this.props;
+    const { autoplay, onChange } = this.props;
+    const { currentStage } = this.state;
 
     const that = this;
 
@@ -111,61 +205,61 @@ class Swiper extends BaseComponent {
         }
       }
     });
+
+    if (isFunction(onChange)) {
+      onChange(currentStage);
+    }
   };
 
   play = () => {
-    const { pauseTime } = this.props;
+    const { direction, pauseTime } = this.props;
 
     const that = this;
-    console.log({
-      pauseTime,
-    });
+
     that.timer = setTimeout(() => {
-      that.slide();
+      const { currentStage } = that.state;
+
+      const nextSequence = getNextSequence({
+        priorityDirection: this.priorityDirection,
+        direction: direction,
+        sequence: currentStage,
+        step: 1,
+      });
+
+      that.slide(nextSequence);
+
       that.play();
     }, pauseTime || defaultProps.pauseTime);
   };
 
-  slide = () => {
-    const { list } = this.props;
-    const { currentStage } = this.state;
-    console.log({
-      currentStage,
-    });
-    if (currentStage < 0) {
-      this.setState({ currentStage: 0 });
+  slide = (nextSequence) => {
+    const { list, onChange } = this.props;
 
-      return;
+    const sequence = checkSequence(nextSequence, list, true);
+
+    if (isFunction(onChange)) {
+      onChange(sequence);
     }
 
-    const listData = isArray(list) ? list : [];
-
-    if (currentStage >= listData.length - 1) {
-      this.setState({ currentStage: 0 });
-
-      return;
-    }
-
-    return this.setState({ currentStage: currentStage + 1 });
-  };
-
-  getItemCount = () => {
-    const { list } = this.props;
-
-    const listData = isArray(list) ? list : [];
-
-    return listData.length;
+    this.setState(
+      {
+        currentStage: sequence,
+      },
+      () => {
+        this.priorityDirection = '';
+      },
+    );
   };
 
   getStyleTranslate = (index, count) => {
-    const { circular } = this.props;
+    const { circular, direction, list } = this.props;
     const { currentStage } = this.state;
 
     if (!circular) {
       return {};
     }
 
-    const itemCount = this.getItemCount();
+    const itemCount = getArrayCount(list);
 
     const halfCount = Math.floor(count / 2);
 
@@ -179,17 +273,22 @@ class Swiper extends BaseComponent {
       multiple = multiple - itemCount;
     }
 
+    let directionAdjust = getRealDirection({
+      priorityDirection: this.priorityDirection,
+      direction: direction,
+    });
+
+    const directionCoefficient = directionAdjust === 'left' ? 1 : -1;
+
     return {
       ...{
-        // '--track-translate-duration':
-        //   index !== currentStage + 1 ? '0' : duration,
         transform:
           index === currentStage
             ? 'none'
             : `translateX(${multiple * this.swiperItemContainerWidth}px)`,
       },
-      ...(multiple > 0 ? { visibility: 'hidden' } : {}),
-      ...(multiple > 0 ? { zIndex: '-100' } : {}),
+      ...(directionCoefficient * multiple > 0 ? { visibility: 'hidden' } : {}),
+      ...(directionCoefficient * multiple > 0 ? { zIndex: '-100' } : {}),
       ...(index === 0
         ? {}
         : { left: `${-1 * index * this.swiperItemContainerWidth}px` }),

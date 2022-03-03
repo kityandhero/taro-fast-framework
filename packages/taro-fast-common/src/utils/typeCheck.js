@@ -7,6 +7,7 @@ import {
   isDate as isDateLodash,
   isString as isStringLodash,
   isObject as isObjectLodash,
+  isNumber as isNumberLodash,
 } from 'lodash';
 
 /**
@@ -44,22 +45,14 @@ export function isDatetime(v) {
 }
 
 /**
- * 判断是否是数字字符串
+ * 判断是否是数字
  *
  * @export
  * @param {*} str
  * @returns
  */
 export function isNumber(v) {
-  const str = `${typeof v === 'undefined' ? null : v}`;
-
-  if (str === '') {
-    return false;
-  }
-
-  const regular = /^[0-9]*$/;
-  const re = new RegExp(regular);
-  return re.test(str);
+  return isNumberLodash(v);
 }
 
 /**
