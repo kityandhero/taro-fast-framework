@@ -133,6 +133,14 @@ class Swiper extends BaseComponent {
 
   priorityDirection = '';
 
+  playing = false;
+
+  touching = false;
+
+  touchStartX = 0;
+
+  touchEndX = 0;
+
   constructor(props) {
     super(props);
 
@@ -199,9 +207,9 @@ class Swiper extends BaseComponent {
         that.increaseCounter();
 
         if (autoplay) {
-          that.timer = setTimeout(() => {
-            that.play();
-          });
+          that.playing = true;
+
+          that.autoPlay();
         }
       }
     });
@@ -211,7 +219,11 @@ class Swiper extends BaseComponent {
     }
   };
 
-  play = () => {
+  autoPlay = () => {
+    if (!this.playing) {
+      return;
+    }
+
     const { direction, pauseTime } = this.props;
 
     const that = this;
@@ -228,7 +240,7 @@ class Swiper extends BaseComponent {
 
       that.slide(nextSequence);
 
-      that.play();
+      that.autoPlay();
     }, pauseTime || defaultProps.pauseTime);
   };
 
@@ -295,6 +307,88 @@ class Swiper extends BaseComponent {
     };
   };
 
+  onTouchStart = (e) => {
+    const { autoplay } = this.props;
+
+    this.touchStartX = e.touches[0].pageX;
+
+    this.touching = true;
+
+    if (autoplay) {
+      this.playing = false;
+
+      clearTimeout(this.timer);
+    }
+
+    console.log({
+      info: 'onTouchStart',
+      touchStartX: this.touchStartX,
+      playing: this.playing,
+      touching: this.touching,
+    });
+  };
+
+  onTouchMove = (e) => {
+    if (this.touching) {
+      const { pageX } = e.touches[0];
+
+      this.touchEndX = pageX;
+
+      console.log({
+        info: 'onTouchMove',
+        touchStartX: this.touchStartX,
+        touchEndX: this.touchEndX,
+        playing: this.playing,
+      });
+    }
+  };
+
+  onTouchEnd = () => {
+    const { autoplay, direction } = this.props;
+
+    if (this.touching) {
+      if (
+        Math.abs(this.touchStartX - this.touchEndX) >=
+        Math.floor(this.swiperItemContainerWidth / 2)
+      ) {
+        const { currentStage } = this.state;
+
+        if (this.touchStartX > this.touchEndX) {
+          this.priorityDirection = 'left';
+        } else {
+          this.priorityDirection = 'right';
+        }
+
+        const nextSequence = getNextSequence({
+          priorityDirection: this.priorityDirection,
+          direction: direction,
+          sequence: currentStage,
+          step: 1,
+        });
+
+        this.slide(nextSequence);
+      }
+    }
+
+    this.touching = false;
+
+    if (autoplay) {
+      this.playing = true;
+
+      this.autoPlay();
+    } else {
+      this.playing = false;
+    }
+
+    console.log({
+      info: 'onTouchEnd',
+      touchStartX: this.touchStartX,
+      touchEndX: this.touchEndX,
+      touching: this.touching,
+      playing: this.playing,
+    });
+  };
+
   renderFurther() {
     const {
       hidden,
@@ -350,11 +444,11 @@ class Swiper extends BaseComponent {
             [`${classPrefix}__track--vertical`]: verticalMode,
             [`${classPrefix}__track--translate`]: transform === 'slide',
           })}
-          // catchMove
-          // onTouchStart={onTouchStart}
-          // onTouchMove={onTouchMove}
-          // onTouchEnd={onTouchEnd}
-          // onTouchCancel={onTouchEnd}
+          catchMove
+          onTouchStart={this.onTouchStart}
+          onTouchMove={this.onTouchMove}
+          onTouchEnd={this.onTouchEnd}
+          onTouchCancel={this.onTouchEnd}
           style={trackStyle}
         >
           {listData.map((item, index) => {

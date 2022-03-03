@@ -35,6 +35,12 @@ const listText = [
   {
     text: '4',
   },
+  {
+    text: '5',
+  },
+  {
+    text: '6',
+  },
 ];
 
 export default class Index extends ContentPageBase {
