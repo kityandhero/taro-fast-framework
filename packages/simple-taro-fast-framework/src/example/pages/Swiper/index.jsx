@@ -55,10 +55,11 @@ export default class Index extends ContentPageBase {
 
   maxSequence = 0;
 
+  // eslint-disable-next-line no-unused-vars
   onChange = (current) => {
-    console.log({
-      current: current,
-    });
+    // console.log({
+    //   current: current,
+    // });
   };
 
   changeToPrev = () => {
@@ -77,13 +78,13 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <Card
-          header="例子: 新闻标题上下滚动"
+          header="例子: 自动滚动"
           style={style}
           headerStyle={cardHeaderStyle}
         >
           <Swiper
             autoplay
-            // circular
+            direction="right"
             list={listText}
             itemStyle={{
               height: 'var(--tfc-280)',
