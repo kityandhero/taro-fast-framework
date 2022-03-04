@@ -2,7 +2,10 @@
 
 .@{class-prefix-swiper} {
   --indicator-margin: var(--tfc-16);
-  --indicator-size: var(--tfc-12);
+  --indicator-size: var(--tfc-6);
+  --indicator-active-width: var(--tfc-18);
+  --indicator-active-radius: var(--tfc-1);
+  --indicator-active-background-color: var(--tfc-color-blue);
   --indicator-inactive-background-color: var(--tfc-color-grey-3);
   --animation-duration-fast: 0.2s;
   --indicator-inactive-opacity: 0.3;
@@ -50,8 +53,8 @@
       background-color: var(--indicator-inactive-background-color);
       border-radius: 100%;
       opacity: var(--indicator-inactive-opacity);
-      transition: opacity var(--animation-duration-fast),
-        background-color var(--animation-duration-fast);
+      transition-property: opacity background-color;
+      transition-duration: var(--animation-duration-fast);
 
       &:not(:last-child) {
         margin-right: var(--indicator-size);
@@ -60,6 +63,7 @@
       &--active {
         background-color: var(--indicator-active-background-color);
         opacity: var(--indicator-active-opacity);
+        width: var(--indicator-active-width);
       }
     }
   }
@@ -74,5 +78,22 @@
   &__item-container--translate {
     transition-property: transform;
     transition-duration: var(--track-translate-duration);
+  }
+
+  &__controller {
+    position: absolute;
+    height: 100%;
+    width: var(--tfc-80);
+    z-index: 120;
+  }
+
+  &__controller--prev {
+    left: 0;
+    top: 0;
+  }
+
+  &__controller--next {
+    right: 0;
+    top: 0;
   }
 }

@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 
 import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Button,
   Card,
   CenterBox,
   Ellipsis,
@@ -25,23 +24,75 @@ const style = {
 const listText = [
   {
     text: '1',
+    image:
+      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
   },
   {
     text: '2',
+    image:
+      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
   },
   {
     text: '3',
+    image:
+      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
   },
   {
     text: '4',
+    image:
+      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
   },
   {
     text: '5',
+    image:
+      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
   },
   {
     text: '6',
+    image:
+      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
   },
 ];
+
+const itemStyle = {
+  height: 'var(--tfc-280)',
+};
+
+function buildTextItem(o, i) {
+  const { text } = o;
+
+  return (
+    <View
+      style={{
+        height: '100%',
+        padding: `0 ${transformSize(20)}`,
+        backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
+      }}
+    >
+      <CenterBox>{text}</CenterBox>
+    </View>
+  );
+}
+
+function buildImageItem(o, i) {
+  const {
+    //  text,
+    image,
+  } = o;
+
+  return (
+    <View
+      style={{
+        height: '100%',
+        padding: `0 ${transformSize(20)}`,
+        backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
+      }}
+    >
+      {/* <CenterBox>{text}</CenterBox> */}
+      <ImageBox src={image} />
+    </View>
+  );
+}
 
 export default class Index extends ContentPageBase {
   headerData = {
@@ -78,76 +129,105 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <Card
-          header="例子: 自动滚动"
+          header="例子: 往复滚动"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            list={listText}
+            itemStyle={itemStyle}
+            itemBuilder={buildTextItem}
+          />
+        </Card>
+
+        <Card
+          header="例子: 自动往复滚动"
           style={style}
           headerStyle={cardHeaderStyle}
         >
           <Swiper
             autoplay
-            direction="right"
             list={listText}
-            itemStyle={{
-              height: 'var(--tfc-280)',
-            }}
-            itemBuilder={(o, i) => {
-              const { text } = o;
-
-              return (
-                <View
-                  style={{
-                    height: '100%',
-                    padding: `0 ${transformSize(20)}`,
-                    backgroundColor: getRandomColor({ seed: i }),
-                  }}
-                >
-                  <CenterBox>{text}</CenterBox>
-                </View>
-              );
-            }}
+            itemStyle={itemStyle}
+            itemBuilder={buildTextItem}
           />
         </Card>
 
         <Card
-          header="例子: 自当循环滚动"
+          header="例子: 自动循环滚动"
           style={style}
           headerStyle={cardHeaderStyle}
         >
-          <Space direction="vertical" fillWidth>
-            <Swiper
-              autoplay
-              // current={this.currentSequence}
-              circular
-              pauseTime={3000}
-              direction="right"
-              list={listText}
-              itemStyle={{
-                height: 'var(--tfc-280)',
-              }}
-              itemBuilder={(o, i) => {
-                const { text } = o;
+          <Swiper
+            autoplay
+            circular
+            list={listText}
+            itemStyle={itemStyle}
+            itemBuilder={buildImageItem}
+            onChange={this.onChange}
+          />
+        </Card>
 
-                return (
-                  <View
-                    style={{
-                      height: '100%',
-                      padding: `0 ${transformSize(20)}`,
-                      backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
-                    }}
-                  >
-                    <CenterBox>{text}</CenterBox>
-                  </View>
-                );
-              }}
-              onChange={this.onChange}
-            />
+        <Card
+          header="例子: 禁止触摸变换"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            autoplay
+            circular
+            enableTouch={false}
+            list={listText}
+            itemStyle={itemStyle}
+            itemBuilder={buildImageItem}
+          />
+        </Card>
 
-            <CenterBox>
-              <Space>
-                <Button onClick={this.changeToPrev}>上一个</Button>
-                <Button onClick={this.changeToNext}>下一个</Button>
-              </Space>
-            </CenterBox>
-          </Space>
+        <Card
+          header="例子: 设置变换方向"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            autoplay
+            circular
+            direction="right"
+            list={listText}
+            itemStyle={itemStyle}
+            itemBuilder={buildImageItem}
+          />
+        </Card>
+
+        <Card
+          header="例子: 设置停顿时间"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            autoplay
+            circular
+            pauseTime={5000}
+            list={listText}
+            itemStyle={itemStyle}
+            itemBuilder={buildImageItem}
+            onChange={this.onChange}
+          />
+        </Card>
+
+        <Card
+          header="例子: 使用前后控制"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            circular
+            showController
+            pauseTime={3000}
+            list={listText}
+            itemStyle={itemStyle}
+            itemBuilder={buildImageItem}
+            onChange={this.onChange}
+          />
         </Card>
 
         <Card

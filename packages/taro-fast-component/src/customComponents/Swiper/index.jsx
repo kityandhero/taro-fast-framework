@@ -15,12 +15,16 @@ import {
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
+import Icon from '../Icon';
 
 import { classPrefix, checkTransform } from './tools';
 import SwiperItemContainer from './SwiperItemContainer';
 import SwiperIndicator from './SwiperIndicator';
 
 import './index.less';
+import CenterBox from '../CenterBox';
+
+const { IconChevronLeft, IconChevronRight } = Icon;
 
 const defaultProps = {
   current: 0,
@@ -34,13 +38,15 @@ const defaultProps = {
   itemStyle: {},
   indicatorStyle: {},
   data: null,
-  direction: '',
   list: [],
   itemBuilder: null,
   pauseTime: 3000,
   transform: 'slide',
   duration: '300ms',
   direction: 'left',
+  showController: false,
+  prevStyle: {},
+  nextStyle: {},
   onChange: null,
 };
 
@@ -569,6 +575,114 @@ class Swiper extends BaseComponent {
     }
   };
 
+  goToPrev = () => {
+    const { circular } = this.props;
+    const { currentStage } = this.state;
+
+    if (circular) {
+      this.slide(currentStage - 1, 0);
+    } else {
+      if (currentStage > 0) {
+        this.slide(currentStage - 1, 0);
+      }
+    }
+  };
+
+  goToNext = () => {
+    const { circular, list } = this.props;
+    const { currentStage } = this.state;
+
+    if (circular) {
+      this.slide(currentStage + 1, 0);
+    } else {
+      const itemCount = getArrayCount(list);
+
+      if (currentStage < itemCount - 1) {
+        this.slide(currentStage + 1, 0);
+      }
+    }
+  };
+
+  buildPrev = () => {
+    const { prevStyle, prevBuilder } = this.props;
+
+    let prevElement = null;
+
+    if (isFunction(prevBuilder)) {
+      prevElement = prevBuilder() || null;
+    }
+
+    if (prevElement == null) {
+      prevElement = (
+        <CenterBox>
+          <IconChevronLeft
+            color="var(--tfc-color-primary)"
+            size={40}
+            style={{
+              opacity: '0.6',
+              backgroundColor: '#ccc',
+              borderRadius: '50%',
+              padding: 'var(--tfc-6)',
+            }}
+          />
+        </CenterBox>
+      );
+    }
+
+    return (
+      <View
+        className={classNames(
+          `${classPrefix}__controller`,
+          `${classPrefix}__controller--prev`,
+        )}
+        style={prevStyle}
+        onClick={this.goToPrev}
+      >
+        {prevElement}
+      </View>
+    );
+  };
+
+  buildNext = () => {
+    const { nextStyle, nextBuilder } = this.props;
+
+    let nextElement = null;
+
+    if (isFunction(nextBuilder)) {
+      nextElement = nextBuilder() || null;
+    }
+
+    if (nextElement == null) {
+      nextElement = (
+        <CenterBox>
+          <IconChevronRight
+            color="var(--tfc-color-primary)"
+            size={40}
+            style={{
+              opacity: '0.6',
+              backgroundColor: '#ccc',
+              borderRadius: '50%',
+              padding: 'var(--tfc-6)',
+            }}
+          />
+        </CenterBox>
+      );
+    }
+
+    return (
+      <View
+        className={classNames(
+          `${classPrefix}__controller`,
+          `${classPrefix}__controller--next`,
+        )}
+        style={nextStyle}
+        onClick={this.goToNext}
+      >
+        {nextElement}
+      </View>
+    );
+  };
+
   renderFurther() {
     const {
       hidden,
@@ -582,6 +696,7 @@ class Swiper extends BaseComponent {
       itemBuilder,
       indicatorStyle,
       duration,
+      showController,
     } = this.props;
     const { currentStage } = this.state;
 
@@ -609,6 +724,9 @@ class Swiper extends BaseComponent {
               }),
         }}
       >
+        {showController ? this.buildPrev() : null}
+        {showController ? this.buildNext() : null}
+
         <View
           className={classNames(`${classPrefix}__track`, {
             [`${classPrefix}__track--vertical`]: verticalMode,
