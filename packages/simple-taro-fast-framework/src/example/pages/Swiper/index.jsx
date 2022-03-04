@@ -260,7 +260,7 @@ export default class Index extends ContentPageBase {
         >
           <Swiper
             circular
-            showController
+            controller
             height={height}
             pauseTime={3000}
             list={listText}
