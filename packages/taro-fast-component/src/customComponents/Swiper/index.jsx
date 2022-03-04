@@ -6,6 +6,7 @@ import {
   getRect,
   inCollection,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
@@ -32,10 +33,12 @@ const defaultProps = {
   autoplay: false,
   hidden: false,
   circular: false,
+  vertical: false,
   className: '',
   itemStyle: {},
   style: {},
   itemStyle: {},
+  indicator: false,
   indicatorStyle: {},
   data: null,
   list: [],
@@ -44,9 +47,10 @@ const defaultProps = {
   transform: 'slide',
   duration: '300ms',
   direction: 'left',
-  showController: false,
+  controller: false,
   prevStyle: {},
   nextStyle: {},
+  height: 240,
   onChange: null,
 };
 
@@ -157,9 +161,9 @@ class Swiper extends BaseComponent {
 
   touching = false;
 
-  touchStartX = 0;
+  touchStart = 0;
 
-  touchEndX = 0;
+  touchEnd = 0;
 
   constructor(props) {
     super(props);
@@ -448,7 +452,7 @@ class Swiper extends BaseComponent {
       return;
     }
 
-    this.touchStartX = e.touches[0].pageX;
+    this.touchStart = e.touches[0].pageX;
 
     this.touching = true;
 
@@ -474,9 +478,9 @@ class Swiper extends BaseComponent {
 
       const itemCount = getArrayCount(list);
 
-      this.touchEndX = pageX;
+      this.touchEnd = pageX;
 
-      if (this.touchStartX > this.touchEndX) {
+      if (this.touchStart > this.touchEnd) {
         this.priorityDirection = 'left';
       } else {
         this.priorityDirection = 'right';
@@ -485,16 +489,15 @@ class Swiper extends BaseComponent {
       if (circular) {
         this.slide(
           currentStage,
-          Math.round(Math.abs(this.touchStartX - this.touchEndX)),
+          Math.round(Math.abs(this.touchStart - this.touchEnd)),
         );
       } else {
         this.slide(
           currentStage,
-          (currentStage === 0 && this.touchStartX <= this.touchEndX) ||
-            (currentStage === itemCount - 1 &&
-              this.touchStartX >= this.touchEndX)
+          (currentStage === 0 && this.touchStart <= this.touchEnd) ||
+            (currentStage === itemCount - 1 && this.touchStart >= this.touchEnd)
             ? 0
-            : Math.round(Math.abs(this.touchStartX - this.touchEndX)),
+            : Math.round(Math.abs(this.touchStart - this.touchEnd)),
         );
       }
     }
@@ -513,22 +516,22 @@ class Swiper extends BaseComponent {
 
       if (!circular) {
         if (
-          (currentStage === 0 && this.touchStartX <= this.touchEndX) ||
-          (currentStage === itemCount - 1 && this.touchStartX >= this.touchEndX)
+          (currentStage === 0 && this.touchStart <= this.touchEnd) ||
+          (currentStage === itemCount - 1 && this.touchStart >= this.touchEnd)
         ) {
           this.slide(currentStage, 0);
         } else {
           if (
-            Math.abs(this.touchStartX - this.touchEndX) >=
+            Math.abs(this.touchStart - this.touchEnd) >=
             Math.floor(this.swiperItemContainerWidth / 2)
           ) {
             let nextSequence = currentStage;
 
-            if (this.touchStartX > this.touchEndX) {
+            if (this.touchStart > this.touchEnd) {
               nextSequence = currentStage + 1;
             }
 
-            if (this.touchStartX < this.touchEndX) {
+            if (this.touchStart < this.touchEnd) {
               nextSequence = currentStage - 1;
             }
 
@@ -539,10 +542,10 @@ class Swiper extends BaseComponent {
         }
       } else {
         if (
-          Math.abs(this.touchStartX - this.touchEndX) >=
+          Math.abs(this.touchStart - this.touchEnd) >=
           Math.floor(this.swiperItemContainerWidth / 2)
         ) {
-          if (this.touchStartX > this.touchEndX) {
+          if (this.touchStart > this.touchEnd) {
             this.priorityDirection = 'left';
           } else {
             this.priorityDirection = 'right';
@@ -686,17 +689,20 @@ class Swiper extends BaseComponent {
   renderFurther() {
     const {
       hidden,
+      height,
       circular,
       transform: transformSource,
+      vertical,
       className,
       style,
       itemStyle,
       direction,
       list,
       itemBuilder,
+      indicator,
       indicatorStyle,
       duration,
-      showController,
+      controller,
     } = this.props;
     const { currentStage } = this.state;
 
@@ -705,8 +711,6 @@ class Swiper extends BaseComponent {
     }
 
     const listData = isArray(list) ? list : [];
-
-    const verticalMode = direction === 'vertical';
 
     const transform = checkTransform(transformSource);
 
@@ -717,6 +721,11 @@ class Swiper extends BaseComponent {
         className={classNames(classPrefix, className)}
         style={{
           ...style,
+          ...(stringIsNullOrWhiteSpace(height)
+            ? {}
+            : {
+                '--height': transformSize(height),
+              }),
           ...(stringIsNullOrWhiteSpace(duration)
             ? {}
             : {
@@ -724,12 +733,12 @@ class Swiper extends BaseComponent {
               }),
         }}
       >
-        {showController ? this.buildPrev() : null}
-        {showController ? this.buildNext() : null}
+        {controller ? this.buildPrev() : null}
+        {controller ? this.buildNext() : null}
 
         <View
           className={classNames(`${classPrefix}__track`, {
-            [`${classPrefix}__track--vertical`]: verticalMode,
+            [`${classPrefix}__track--vertical`]: vertical,
             [`${classPrefix}__track--translate`]: transform === 'slide',
           })}
           catchMove
@@ -766,12 +775,14 @@ class Swiper extends BaseComponent {
           })}
         </View>
 
-        <SwiperIndicator
-          indicator={currentStage}
-          list={list}
-          style={indicatorStyle}
-          direction={direction}
-        />
+        {!!indicator ? (
+          <SwiperIndicator
+            indicator={currentStage}
+            list={list}
+            style={indicatorStyle}
+            direction={direction}
+          />
+        ) : null}
       </View>
     );
   }

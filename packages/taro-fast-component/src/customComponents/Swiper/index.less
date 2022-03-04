@@ -1,6 +1,8 @@
 @class-prefix-swiper: ~'tfc-swiper';
 
 .@{class-prefix-swiper} {
+  --width: '100%';
+  --height: var(--tfc-240);
   --indicator-margin: var(--tfc-16);
   --indicator-size: var(--tfc-6);
   --indicator-active-width: var(--tfc-18);
@@ -13,6 +15,8 @@
   --track-translate-duration: 300ms;
 
   position: relative;
+  width: var(--width);
+  height: var(--height);
   overflow: hidden;
   cursor: grab;
   user-select: none;

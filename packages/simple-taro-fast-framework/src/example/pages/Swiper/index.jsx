@@ -54,11 +54,11 @@ const listText = [
   },
 ];
 
-const itemStyle = {
+const itemHorizontalStyle = {
   height: 'var(--tfc-280)',
 };
 
-function buildTextItem(o, i) {
+function buildHorizontalTextItem(o, i) {
   const { text } = o;
 
   return (
@@ -74,7 +74,7 @@ function buildTextItem(o, i) {
   );
 }
 
-function buildImageItem(o, i) {
+function buildHorizontalImageItem(o, i) {
   const {
     //  text,
     image,
@@ -93,6 +93,8 @@ function buildImageItem(o, i) {
     </View>
   );
 }
+
+const height = 260;
 
 export default class Index extends ContentPageBase {
   headerData = {
@@ -129,14 +131,29 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <Card
+          header="例子: 垂直往复滚动"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            vertical
+            height={height}
+            list={listText}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalTextItem}
+          />
+        </Card>
+
+        <Card
           header="例子: 往复滚动"
           style={style}
           headerStyle={cardHeaderStyle}
         >
           <Swiper
+            height={height}
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildTextItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalTextItem}
           />
         </Card>
 
@@ -146,10 +163,11 @@ export default class Index extends ContentPageBase {
           headerStyle={cardHeaderStyle}
         >
           <Swiper
+            height={height}
             autoplay
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildTextItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalTextItem}
           />
         </Card>
 
@@ -161,9 +179,27 @@ export default class Index extends ContentPageBase {
           <Swiper
             autoplay
             circular
+            height={height}
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildImageItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalImageItem}
+            onChange={this.onChange}
+          />
+        </Card>
+
+        <Card
+          header="例子: 显示指示器"
+          style={style}
+          headerStyle={cardHeaderStyle}
+        >
+          <Swiper
+            autoplay
+            circular
+            indicator
+            height={height}
+            list={listText}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalImageItem}
             onChange={this.onChange}
           />
         </Card>
@@ -176,10 +212,11 @@ export default class Index extends ContentPageBase {
           <Swiper
             autoplay
             circular
+            height={height}
             enableTouch={false}
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildImageItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalImageItem}
           />
         </Card>
 
@@ -191,10 +228,11 @@ export default class Index extends ContentPageBase {
           <Swiper
             autoplay
             circular
+            height={height}
             direction="right"
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildImageItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalImageItem}
           />
         </Card>
 
@@ -206,10 +244,11 @@ export default class Index extends ContentPageBase {
           <Swiper
             autoplay
             circular
+            height={height}
             pauseTime={5000}
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildImageItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalImageItem}
             onChange={this.onChange}
           />
         </Card>
@@ -222,10 +261,11 @@ export default class Index extends ContentPageBase {
           <Swiper
             circular
             showController
+            height={height}
             pauseTime={3000}
             list={listText}
-            itemStyle={itemStyle}
-            itemBuilder={buildImageItem}
+            itemStyle={itemHorizontalStyle}
+            itemBuilder={buildHorizontalImageItem}
             onChange={this.onChange}
           />
         </Card>
