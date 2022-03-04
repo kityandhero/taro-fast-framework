@@ -16,13 +16,13 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
+import CenterBox from '../CenterBox';
 
 import { classPrefix, checkTransform } from './tools';
 import SwiperItemContainer from './SwiperItemContainer';
 import SwiperIndicator from './SwiperIndicator';
 
 import './index.less';
-import CenterBox from '../CenterBox';
 
 const { IconChevronLeft, IconChevronRight } = Icon;
 
