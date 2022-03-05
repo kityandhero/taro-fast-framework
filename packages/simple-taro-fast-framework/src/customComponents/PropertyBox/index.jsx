@@ -5,7 +5,11 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
-import { isArray, isObject } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  isArray,
+  isObject,
+  isFunction,
+} from 'taro-fast-common/es/utils/typeCheck';
 import { Card, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
@@ -33,10 +37,11 @@ class PropertyBox extends Component {
 
       return {
         label: key,
-        value:
-          isObject(value) || isArray(value)
-            ? JSON.stringify(value)
-            : toString(value),
+        value: isFunction(value)
+          ? 'function'
+          : isObject(value) || isArray(value)
+          ? JSON.stringify(value)
+          : toString(value),
         ellipsis: false,
         canCopy: true,
       };

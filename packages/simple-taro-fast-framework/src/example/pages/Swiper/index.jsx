@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 
 import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   CenterBox,
   Ellipsis,
   ImageBox,
@@ -11,46 +10,37 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+const imageUrl =
+  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180';
 
 const listText = [
   {
     text: '1',
-    image:
-      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+    image: imageUrl,
   },
   {
     text: '2',
-    image:
-      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+    image: imageUrl,
   },
   {
     text: '3',
-    image:
-      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+    image: imageUrl,
   },
   {
     text: '4',
-    image:
-      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+    image: imageUrl,
   },
   {
     text: '5',
-    image:
-      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+    image: imageUrl,
   },
   {
     text: '6',
-    image:
-      'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+    image: imageUrl,
   },
 ];
 
@@ -88,6 +78,108 @@ function buildHorizontalImageItem(o, i) {
 
 const height = 260;
 
+const configCore = {
+  height,
+  list: listText,
+  itemStyle: itemHorizontalStyle,
+};
+
+const config1 = {
+  ...{
+    vertical: true,
+    enableTouch: true,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config2 = {
+  ...{ enableTouch: true, itemBuilder: buildHorizontalTextItem },
+  ...configCore,
+};
+
+const config3 = {
+  ...{ enableTouch: true, itemBuilder: buildHorizontalImageItem },
+  ...configCore,
+};
+
+const config4 = {
+  ...{
+    autoplay: true,
+    enableTouch: true,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config5 = {
+  ...{
+    autoplay: true,
+    circular: true,
+    enableTouch: true,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config6 = {
+  ...{
+    autoplay: true,
+    circular: true,
+    enableTouch: true,
+    indicator: true,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config7 = {
+  ...{
+    autoplay: true,
+    circular: true,
+    enableTouch: false,
+    indicator: true,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config8 = {
+  ...{
+    autoplay: true,
+    circular: true,
+    enableTouch: false,
+    indicator: true,
+    direction: 'right',
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config9 = {
+  ...{
+    autoplay: true,
+    circular: true,
+    enableTouch: false,
+    indicator: true,
+    pauseTime: 5000,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
+const config10 = {
+  ...{
+    autoplay: true,
+    circular: true,
+    enableTouch: false,
+    indicator: true,
+    controller: true,
+    itemBuilder: buildHorizontalTextItem,
+  },
+  ...configCore,
+};
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Swiper',
@@ -122,151 +214,47 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="例子: 垂直往复滚动"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            vertical
-            height={height}
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalTextItem}
-          />
-        </Card>
+        <SimpleBox header="垂直往复滚动" config={config1}>
+          <Swiper {...config1} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 往复滚动"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            height={height}
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-          />
-        </Card>
+        <SimpleBox header="水平往复滚动" config={config2}>
+          <Swiper {...config2} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 自动往复滚动"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            height={height}
-            autoplay
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalTextItem}
-          />
-        </Card>
+        <SimpleBox header="图片水平往复滚动" config={config3}>
+          <Swiper {...config3} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 自动循环滚动"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            autoplay
-            circular
-            height={height}
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-            onChange={this.onChange}
-          />
-        </Card>
+        <SimpleBox header="自动往复滚动" config={config4}>
+          <Swiper {...config4} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 显示指示器"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            autoplay
-            circular
-            indicator
-            height={height}
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-            onChange={this.onChange}
-          />
-        </Card>
+        <SimpleBox header="自动循环滚动" config={config5}>
+          <Swiper {...config5} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 开启触摸变换"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            autoplay
-            circular
-            height={height}
-            enableTouch
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-          />
-        </Card>
+        <SimpleBox header="显示指示器" config={config6}>
+          <Swiper {...config6} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 设置变换方向"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            autoplay
-            circular
-            height={height}
-            direction="right"
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-          />
-        </Card>
+        <SimpleBox header="关闭触摸变换" config={config7}>
+          <Swiper {...config7} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 设置停顿时间"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            autoplay
-            circular
-            height={height}
-            pauseTime={5000}
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-            onChange={this.onChange}
-          />
-        </Card>
+        <SimpleBox header="设置轮播方向" config={config8}>
+          <Swiper {...config8} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 使用前后控制"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Swiper
-            circular
-            controller
-            height={height}
-            pauseTime={3000}
-            list={listText}
-            itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalImageItem}
-            onChange={this.onChange}
-          />
-        </Card>
+        <SimpleBox header="设置停顿时间" config={config9}>
+          <Swiper {...config9} />
+        </SimpleBox>
 
-        <Card
-          header="例子: 新闻标题上下滚动"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="使用前后控制" config={config10}>
+          <Swiper {...config10} />
+        </SimpleBox>
+
+        <SimpleBox header="小程序Swiper上下滚动">
           {buildSwiper({
             style: { height: transformSize(40) },
             vertical: true,
@@ -301,35 +289,26 @@ export default class Index extends ContentPageBase {
               );
             },
           })}
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="例子: 轮播图1"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="小程序Swiper左右滚动">
           {buildSwiper({
             style: { height: transformSize(300) },
-            // indicatorColor: '#999',
-            // indicatorActiveColor: '#333',
             circular: true,
             indicatorDots: true,
             autoplay: true,
             items: [
               {
                 text: '这是一条标题很长很长很长很长很长很长很长很长很长很长的新闻1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
                 text: 'text1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
                 text: 'text1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
             ],
             itemBuilder: (o) => {
@@ -347,13 +326,9 @@ export default class Index extends ContentPageBase {
               );
             },
           })}
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="例子: 轮播图2"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="小程序Swiper左右滚动">
           {buildSwiper({
             style: { height: transformSize(260) },
             previousMargin: transformSize(80),
@@ -367,18 +342,15 @@ export default class Index extends ContentPageBase {
             items: [
               {
                 text: '这是一条标题很长很长很长很长很长很长很长很长很长很长的新闻1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
                 text: 'text1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
                 text: 'text1',
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
             ],
             itemBuilder: (o) => {
@@ -396,13 +368,9 @@ export default class Index extends ContentPageBase {
               );
             },
           })}
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="例子: 轮播图3"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="小程序Swiper左右滚动">
           {buildSwiper({
             style: { height: transformSize(140) },
             previousMargin: transformSize(80),
@@ -415,28 +383,22 @@ export default class Index extends ContentPageBase {
             autoplay: true,
             items: [
               {
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
               {
-                image:
-                  'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+                image: imageUrl,
               },
             ],
             displayMultipleItems: 2,
@@ -455,7 +417,9 @@ export default class Index extends ContentPageBase {
               );
             },
           })}
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={Swiper.defaultProps} labelWidth={170} />
       </Space>
     );
   };
