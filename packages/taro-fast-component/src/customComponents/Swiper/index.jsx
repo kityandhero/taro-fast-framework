@@ -51,7 +51,7 @@ const defaultProps = {
   prevStyle: {},
   nextStyle: {},
   height: 240,
-  enableTouchDistance: false,
+  enableTouchDistance: true,
   onChange: null,
 };
 
@@ -166,7 +166,7 @@ class Swiper extends BaseComponent {
 
   touchEnd = 0;
 
-  touchTotalStep = 20;
+  touchTotalStep = 5;
 
   touchCheckStartPosition = 0;
 
