@@ -374,17 +374,21 @@ class Swiper extends BaseComponent {
     const directionCoefficient = directionAdjust === 'left' ? 1 : -1;
 
     return {
-      transform: `translateX(${
-        -1 * currentStage * this.swiperItemContainerWidth +
-        directionCoefficient *
-          (offset > this.swiperItemContainerWidth
-            ? this.swiperItemContainerWidth
-            : offset) *
-          ((currentStage === 0 && this.priorityDirection === 'right') ||
-          (currentStage === itemCount - 1 && this.priorityDirection === 'left')
-            ? 0
-            : -1)
-      }px)`,
+      ...{
+        transform: `translateX(${
+          -1 * currentStage * this.swiperItemContainerWidth +
+          directionCoefficient *
+            (offset > this.swiperItemContainerWidth
+              ? this.swiperItemContainerWidth
+              : offset) *
+            ((currentStage === 0 && this.priorityDirection === 'right') ||
+            (currentStage === itemCount - 1 &&
+              this.priorityDirection === 'left')
+              ? 0
+              : -1)
+        }px)`,
+      },
+      ...(this.touching ? { transitionDuration: '0' } : {}),
     };
   };
 
