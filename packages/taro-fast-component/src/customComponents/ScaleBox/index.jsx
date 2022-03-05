@@ -11,6 +11,7 @@ import './index.less';
 const classPrefix = `tfc-scale-box`;
 
 const defaultProps = {
+  className: '',
   style: {},
   hide: false,
   padding: 0,
@@ -29,6 +30,7 @@ class ScaleBox extends BaseComponent {
 
   renderFurther() {
     const {
+      className,
       style,
       hide,
       padding,
@@ -49,7 +51,7 @@ class ScaleBox extends BaseComponent {
       : aspectRatioSource;
 
     const containerProps = {
-      className: classNames(classPrefix),
+      className: classNames(classPrefix, className),
       style: {
         ...style,
         ...{

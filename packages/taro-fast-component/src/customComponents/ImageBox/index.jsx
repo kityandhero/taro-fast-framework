@@ -9,6 +9,7 @@ import BaseComponent from '../BaseComponent';
 import ActivityIndicator from '../ActivityIndicator';
 import HorizontalCenterBox from '../HorizontalCenterBox';
 import VerticalBox from '../VerticalBox';
+import ScaleBox from '../ScaleBox';
 
 import './index.less';
 
@@ -97,8 +98,6 @@ class ImageBox extends BaseComponent {
 
     const { hide, loadSuccess } = this.state;
 
-    let aspectRatioVal = aspectRatio || 1;
-
     const showOverlay = showOverlayValue || false;
 
     const loadingEffect = loadingEffectValue || false;
@@ -106,8 +105,6 @@ class ImageBox extends BaseComponent {
     const overlayText = overlayTextValue || '';
 
     const decoration = decorationValue || null;
-
-    aspectRatioVal = aspectRatioVal <= 0 ? 1 : aspectRatioVal;
 
     const borderRadiusDefaultStyle = borderRadiusValue
       ? { borderRadius: transformSize(8) }
@@ -131,45 +128,14 @@ class ImageBox extends BaseComponent {
 
     const showMode = showModeValue || 'box';
 
-    if (hide) {
-      return null;
-    }
-
     if (showMode === 'loading' || showMode === 'box') {
-      const containerProps = {
-        className: classNames(classPrefix),
-        style: {
-          ...imageBoxStyleValue,
-          ...{
-            padding: 0,
-            margin: 0,
-          },
-        },
-      };
-
-      const innerView = (
-        <View
-          {...(padding <= 0
-            ? containerProps
-            : {
-                style: {
-                  margin: transformSize(padding),
-                  overflow: 'hidden',
-                  position: 'relative',
-                },
-              })}
+      return (
+        <ScaleBox
+          style={imageBoxStyleValue}
+          padding={padding}
+          aspectRatio={aspectRatio}
+          hide={hide}
         >
-          {aspectRatioVal === 1 ? (
-            <View className={classNames(`${classPrefix}-placeholder-box`)} />
-          ) : null}
-
-          {aspectRatioVal !== 1 ? (
-            <View
-              className={classNames(`${classPrefix}-placeholder-box`)}
-              style={{ marginTop: `${aspectRatioVal * 100}%` }}
-            />
-          ) : null}
-
           {showOverlay ? (
             <View
               className={classNames(
@@ -249,14 +215,8 @@ class ImageBox extends BaseComponent {
               }}
             />
           ) : null}
-        </View>
+        </ScaleBox>
       );
-
-      if (padding <= 0) {
-        return innerView;
-      }
-
-      return <View {...containerProps}>{innerView}</View>;
     }
     if (showMode === 'content-image') {
       return (

@@ -165,7 +165,7 @@ class Swiper extends BaseComponent {
 
   touchEnd = 0;
 
-  touchTotalStep = 5;
+  touchTotalStep = 10;
 
   touchCheckStartPosition = 0;
 
