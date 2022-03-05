@@ -165,6 +165,12 @@ class Swiper extends BaseComponent {
 
   touchEnd = 0;
 
+  touchTotalStep = 8;
+
+  touchCheckStartPosition = 0;
+
+  touchStepDistance = 0;
+
   constructor(props) {
     super(props);
 
@@ -235,7 +241,7 @@ class Swiper extends BaseComponent {
   };
 
   adjustView = () => {
-    const { autoplay, onChange } = this.props;
+    const { autoplay, vertical, onChange } = this.props;
     const { currentStage } = this.state;
 
     const that = this;
@@ -249,6 +255,12 @@ class Swiper extends BaseComponent {
 
         that.swiperItemContainerWidth = swiperItemContainerWidth;
         that.swiperItemContainerHeight = swiperItemContainerHeight;
+
+        that.touchStepDistance = Math.round(
+          vertical
+            ? swiperItemContainerHeight / that.touchTotalStep
+            : swiperItemContainerWidth / that.touchTotalStep,
+        );
 
         that.increaseCounter();
 
@@ -283,11 +295,6 @@ class Swiper extends BaseComponent {
       let d = that.tempDirection;
 
       if (!circular) {
-        console.log({
-          d,
-          currentStage,
-        });
-
         if (d === 'right' && currentStage === 0) {
           d = 'left';
 
@@ -307,13 +314,6 @@ class Swiper extends BaseComponent {
         if (d === 'right') {
           nextSequence = currentStage - 1;
         }
-
-        console.log({
-          d,
-          currentStage,
-          nextSequence,
-          tempDirection: that.tempDirection,
-        });
       } else {
         nextSequence = getNextSequence({
           circular,
@@ -377,7 +377,10 @@ class Swiper extends BaseComponent {
           (offset > this.swiperItemContainerWidth
             ? this.swiperItemContainerWidth
             : offset) *
-          (currentStage === 0 || currentStage === itemCount - 1 ? 0 : -1)
+          ((currentStage === 0 && this.priorityDirection === 'right') ||
+          (currentStage === itemCount - 1 && this.priorityDirection === 'left')
+            ? 0
+            : -1)
       }px)`,
     };
   };
@@ -456,6 +459,8 @@ class Swiper extends BaseComponent {
 
     this.touching = true;
 
+    this.touchCheckStartPosition = this.touchStart;
+
     if (autoplay) {
       this.playing = false;
 
@@ -471,14 +476,31 @@ class Swiper extends BaseComponent {
     }
 
     if (this.touching) {
+      const { pageX } = e.touches[0];
+
+      this.touchEnd = pageX;
+
+      const touchDistance = Math.abs(
+        this.touchCheckStartPosition - this.touchEnd,
+      );
+
+      console.log({
+        touchCheckStartPosition: this.touchCheckStartPosition,
+        touchEnd: this.touchEnd,
+        touchDistance,
+        touchStepDistance: this.touchStepDistance,
+      });
+
+      if (touchDistance < this.touchStepDistance) {
+        return;
+      }
+
+      this.touchCheckStartPosition = this.touchEnd;
+
       const { circular, list } = this.props;
       const { currentStage } = this.state;
 
-      const { pageX } = e.touches[0];
-
       const itemCount = getArrayCount(list);
-
-      this.touchEnd = pageX;
 
       if (this.touchStart > this.touchEnd) {
         this.priorityDirection = 'left';
