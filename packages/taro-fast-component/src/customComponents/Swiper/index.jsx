@@ -51,6 +51,7 @@ const defaultProps = {
   prevStyle: {},
   nextStyle: {},
   height: 240,
+  enableTouchDistance: false,
   onChange: null,
 };
 
@@ -165,7 +166,7 @@ class Swiper extends BaseComponent {
 
   touchEnd = 0;
 
-  touchTotalStep = 10;
+  touchTotalStep = 20;
 
   touchCheckStartPosition = 0;
 
@@ -241,7 +242,7 @@ class Swiper extends BaseComponent {
   };
 
   adjustView = () => {
-    const { autoplay, vertical, onChange } = this.props;
+    const { autoplay, vertical, enableTouchDistance, onChange } = this.props;
     const { currentStage } = this.state;
 
     const that = this;
@@ -256,11 +257,13 @@ class Swiper extends BaseComponent {
         that.swiperItemContainerWidth = swiperItemContainerWidth;
         that.swiperItemContainerHeight = swiperItemContainerHeight;
 
-        that.touchStepDistance = Math.round(
-          vertical
-            ? swiperItemContainerHeight / that.touchTotalStep
-            : swiperItemContainerWidth / that.touchTotalStep,
-        );
+        if (enableTouchDistance) {
+          that.touchStepDistance = Math.round(
+            vertical
+              ? swiperItemContainerHeight / (2 * that.touchTotalStep)
+              : swiperItemContainerWidth / (2 * that.touchTotalStep),
+          );
+        }
 
         that.increaseCounter();
 
@@ -449,7 +452,7 @@ class Swiper extends BaseComponent {
   };
 
   onTouchStart = (e) => {
-    const { autoplay, enableTouch } = this.props;
+    const { autoplay, enableTouch, enableTouchDistance } = this.props;
 
     if (!enableTouch) {
       return;
@@ -459,7 +462,9 @@ class Swiper extends BaseComponent {
 
     this.touching = true;
 
-    this.touchCheckStartPosition = this.touchStart;
+    if (enableTouchDistance) {
+      this.touchCheckStartPosition = this.touchStart;
+    }
 
     if (autoplay) {
       this.playing = false;
@@ -469,7 +474,7 @@ class Swiper extends BaseComponent {
   };
 
   onTouchMove = (e) => {
-    const { enableTouch } = this.props;
+    const { enableTouch, enableTouchDistance } = this.props;
 
     if (!enableTouch) {
       return;
@@ -480,15 +485,17 @@ class Swiper extends BaseComponent {
 
       this.touchEnd = pageX;
 
-      const touchDistance = Math.abs(
-        this.touchCheckStartPosition - this.touchEnd,
-      );
+      if (enableTouchDistance) {
+        const touchDistance = Math.abs(
+          this.touchCheckStartPosition - this.touchEnd,
+        );
 
-      if (touchDistance < this.touchStepDistance) {
-        return;
+        if (touchDistance < this.touchStepDistance) {
+          return;
+        }
+
+        this.touchCheckStartPosition = this.touchEnd;
       }
-
-      this.touchCheckStartPosition = this.touchEnd;
 
       const { circular, list } = this.props;
       const { currentStage } = this.state;
