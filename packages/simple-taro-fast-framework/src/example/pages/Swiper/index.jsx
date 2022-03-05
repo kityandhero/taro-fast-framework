@@ -54,23 +54,17 @@ const listText = [
   },
 ];
 
-const itemHorizontalStyle = {
-  height: 'var(--tfc-280)',
-};
+const itemHorizontalStyle = {};
 
 function buildHorizontalTextItem(o, i) {
   const { text } = o;
 
   return (
-    <View
-      style={{
-        height: '100%',
-        padding: `0 ${transformSize(20)}`,
-        backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
-      }}
+    <CenterBox
+      style={{ backgroundColor: getRandomColor({ seed: (i + 1) * 45 }) }}
     >
-      <CenterBox>{text}</CenterBox>
-    </View>
+      {text}
+    </CenterBox>
   );
 }
 
@@ -81,16 +75,14 @@ function buildHorizontalImageItem(o, i) {
   } = o;
 
   return (
-    <View
-      style={{
-        height: '100%',
-        padding: `0 ${transformSize(20)}`,
+    <ImageBox
+      src={image}
+      aspectRatio={0.371}
+      padding={10}
+      imageBoxStyle={{
         backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
       }}
-    >
-      {/* <CenterBox>{text}</CenterBox> */}
-      <ImageBox src={image} />
-    </View>
+    />
   );
 }
 
@@ -153,7 +145,7 @@ export default class Index extends ContentPageBase {
             height={height}
             list={listText}
             itemStyle={itemHorizontalStyle}
-            itemBuilder={buildHorizontalTextItem}
+            itemBuilder={buildHorizontalImageItem}
           />
         </Card>
 
@@ -205,7 +197,7 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <Card
-          header="例子: 禁止触摸变换"
+          header="例子: 开启触摸变换"
           style={style}
           headerStyle={cardHeaderStyle}
         >
@@ -213,7 +205,7 @@ export default class Index extends ContentPageBase {
             autoplay
             circular
             height={height}
-            enableTouch={false}
+            enableTouch
             list={listText}
             itemStyle={itemHorizontalStyle}
             itemBuilder={buildHorizontalImageItem}
@@ -342,7 +334,7 @@ export default class Index extends ContentPageBase {
             ],
             itemBuilder: (o) => {
               const { image } = o;
-              console.log(o);
+
               return (
                 <View
                   style={{

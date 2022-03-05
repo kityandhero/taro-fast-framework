@@ -58,6 +58,11 @@ const o = {
       path: pathCollection.example.thumbnailBox.path,
     },
     {
+      id: 'ScaleBox',
+      name: '比例容器',
+      path: pathCollection.example.scaleBox.path,
+    },
+    {
       id: 'Swiper',
       name: '滑动布局',
       path: pathCollection.example.swiper.path,

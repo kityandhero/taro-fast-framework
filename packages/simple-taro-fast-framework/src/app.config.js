@@ -66,6 +66,7 @@ export default {
         'pages/flexBox/index',
         'pages/centerBox/index',
         'pages/thumbnailBox/index',
+        'pages/scaleBox/index',
         'pages/dataGrid/index',
         'pages/searchBar/index',
         'pages/textAreaItem/index',

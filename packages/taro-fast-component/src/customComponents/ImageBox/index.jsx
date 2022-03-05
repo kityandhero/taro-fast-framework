@@ -16,6 +16,7 @@ const classPrefix = `tfc-image-box`;
 
 const defaultProps = {
   src: '',
+  padding: 0,
   lazyLoad: false,
   aspectRatio: 1,
   imageBoxStyle: {},
@@ -78,6 +79,7 @@ class ImageBox extends BaseComponent {
     const {
       lazyLoad,
       src,
+      padding,
       aspectRatio,
       imageBoxStyle,
       borderRadius: borderRadiusValue,
@@ -134,10 +136,28 @@ class ImageBox extends BaseComponent {
     }
 
     if (showMode === 'loading' || showMode === 'box') {
-      return (
+      const containerProps = {
+        className: classNames(classPrefix),
+        style: {
+          ...imageBoxStyleValue,
+          ...{
+            padding: 0,
+            margin: 0,
+          },
+        },
+      };
+
+      const innerView = (
         <View
-          className={classNames(classPrefix)}
-          style={{ ...imageBoxStyleValue }}
+          {...(padding <= 0
+            ? containerProps
+            : {
+                style: {
+                  margin: transformSize(padding),
+                  overflow: 'hidden',
+                  position: 'relative',
+                },
+              })}
         >
           {aspectRatioVal === 1 ? (
             <View className={classNames(`${classPrefix}-placeholder-box`)} />
@@ -231,6 +251,12 @@ class ImageBox extends BaseComponent {
           ) : null}
         </View>
       );
+
+      if (padding <= 0) {
+        return innerView;
+      }
+
+      return <View {...containerProps}>{innerView}</View>;
     }
     if (showMode === 'content-image') {
       return (

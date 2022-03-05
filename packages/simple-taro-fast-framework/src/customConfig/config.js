@@ -175,6 +175,9 @@ const examplePathCollection = {
   thumbnailBox: {
     path: '/example/pages/thumbnailBox/index',
   },
+  scaleBox: {
+    path: '/example/pages/scaleBox/index',
+  },
   dataGrid: {
     path: '/example/pages/dataGrid/index',
   },

@@ -29,7 +29,7 @@ const { IconChevronLeft, IconChevronRight } = Icon;
 
 const defaultProps = {
   current: 0,
-  enableTouch: true,
+  enableTouch: false,
   autoplay: false,
   hidden: false,
   circular: false,
@@ -483,13 +483,6 @@ class Swiper extends BaseComponent {
       const touchDistance = Math.abs(
         this.touchCheckStartPosition - this.touchEnd,
       );
-
-      console.log({
-        touchCheckStartPosition: this.touchCheckStartPosition,
-        touchEnd: this.touchEnd,
-        touchDistance,
-        touchStepDistance: this.touchStepDistance,
-      });
 
       if (touchDistance < this.touchStepDistance) {
         return;

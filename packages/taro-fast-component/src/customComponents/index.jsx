@@ -57,6 +57,7 @@ export { default as Tabbar } from './Tabbar';
 export { default as VariableView } from './VariableView';
 export { default as FixedBox } from './FixedBox';
 export { default as FadeInBox } from './FadeInBox';
+export { default as ScaleBox } from './ScaleBox';
 export { default as Link } from './Link';
 export { default as ThumbnailBox } from './ThumbnailBox';
 export { default as BackTop } from './BackTop';
