@@ -163,7 +163,7 @@ const config9 = {
     circular: true,
     enableTouch: false,
     indicator: true,
-    pauseTime: 5000,
+    interval: 5000,
     itemBuilder: buildHorizontalTextItem,
   },
   ...configCore,

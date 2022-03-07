@@ -3,7 +3,11 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { Space, ImageBox } from 'taro-fast-component/es/customComponents';
+import {
+  Space,
+  ImageBox,
+  Swiper,
+} from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
 import PageWrapper from '../../../customComponents/PageWrapper';
@@ -75,6 +79,19 @@ export default class Index extends PageWrapper {
   renderFurther() {
     return (
       <Space direction="vertical" fillWidth>
+        <Swiper
+          autoplay
+          // circular
+          enableTouch
+          list={this.buildSwiperListData()}
+          height={260}
+          itemBuilder={(o) => {
+            const { image } = o;
+
+            return <ImageBox src={image} aspectRatio={0.371} padding={10} />;
+          }}
+        />
+
         {buildSwiper({
           style: {
             height: transformSize(300),

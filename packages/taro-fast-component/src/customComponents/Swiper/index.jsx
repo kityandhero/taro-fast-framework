@@ -43,9 +43,9 @@ const defaultProps = {
   data: null,
   list: [],
   itemBuilder: null,
-  pauseTime: 3000,
+  interval: 5000,
+  duration: 500,
   transform: 'slide',
-  duration: '300ms',
   direction: 'left',
   controller: false,
   prevStyle: {},
@@ -222,6 +222,24 @@ class Swiper extends BaseComponent {
   }
 
   doWorkAdjustDidMount = () => {
+    this.delayAdjustView();
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+    const { direction: directionPrev, list: listPrev } = preProps;
+    const { direction: directionNext, list: listNext } = this.props;
+
+    if (directionPrev !== directionNext) {
+      this.tempDirection = directionNext;
+    }
+
+    if (listPrev.length !== listNext.length) {
+      this.delayAdjustView();
+    }
+  };
+
+  delayAdjustView = () => {
     const that = this;
 
     this.adjustTimer = setTimeout(() => {
@@ -229,16 +247,6 @@ class Swiper extends BaseComponent {
 
       clearTimeout(that.adjustTimer);
     }, 200);
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
-    const { direction: directionPrev } = preProps;
-    const { direction: directionNext } = this.props;
-
-    if (directionPrev !== directionNext) {
-      this.tempDirection = directionNext;
-    }
   };
 
   adjustView = () => {
@@ -267,7 +275,7 @@ class Swiper extends BaseComponent {
 
         that.increaseCounter();
 
-        if (autoplay) {
+        if (autoplay && !that.playing) {
           that.playing = true;
 
           that.autoPlay();
@@ -285,7 +293,7 @@ class Swiper extends BaseComponent {
       return;
     }
 
-    const { circular, direction, list, pauseTime } = this.props;
+    const { circular, direction, list, interval } = this.props;
 
     const that = this;
 
@@ -331,7 +339,7 @@ class Swiper extends BaseComponent {
       that.slide(nextSequence, 0);
 
       that.autoPlay();
-    }, pauseTime || defaultProps.pauseTime);
+    }, interval || defaultProps.interval);
   };
 
   slide = (nextSequence, offset = 0) => {
@@ -755,7 +763,7 @@ class Swiper extends BaseComponent {
           ...(stringIsNullOrWhiteSpace(duration)
             ? {}
             : {
-                '--track-translate-duration': duration,
+                '--track-translate-duration': `${duration}ms`,
               }),
         }}
       >
@@ -783,7 +791,6 @@ class Swiper extends BaseComponent {
                 id={index === 0 ? this.swiperItemContainerId : null}
                 itemIndex={index}
                 itemCount={itemCount}
-                duration={duration}
                 transform={transform}
                 transformDistance={this.swiperItemContainerWidth}
                 circular={circular}
