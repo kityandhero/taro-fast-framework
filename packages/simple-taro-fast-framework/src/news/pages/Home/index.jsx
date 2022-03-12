@@ -80,11 +80,11 @@ export default class Index extends PageWrapper {
     return (
       <Space direction="vertical" fillWidth>
         <Swiper
-          autoplay
+          // autoplay
           // circular
           enableTouch
           list={this.buildSwiperListData()}
-          height={260}
+          aspectRatio={0.371}
           itemBuilder={(o) => {
             const { image } = o;
 

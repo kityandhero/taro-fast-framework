@@ -5,6 +5,7 @@ import {
   getGuid,
   getRect,
   inCollection,
+  showErrorMessage,
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
@@ -18,6 +19,7 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
 import CenterBox from '../CenterBox';
+import ScaleBox from '../ScaleBox';
 
 import { classPrefix, checkTransform } from './tools';
 import SwiperItemContainer from './SwiperItemContainer';
@@ -50,7 +52,9 @@ const defaultProps = {
   controller: false,
   prevStyle: {},
   nextStyle: {},
-  height: 240,
+  height: 0,
+  scaleMode: true,
+  aspectRatio: 0.5,
   enableTouchDistance: true,
   onChange: null,
 };
@@ -723,7 +727,7 @@ class Swiper extends BaseComponent {
   renderFurther() {
     const {
       hidden,
-      height,
+      height: heightSource,
       circular,
       transform: transformSource,
       vertical,
@@ -737,11 +741,29 @@ class Swiper extends BaseComponent {
       indicatorStyle,
       duration,
       controller,
+      scaleMode,
+      aspectRatio,
     } = this.props;
     const { currentStage } = this.state;
 
     if (hidden) {
       return null;
+    }
+
+    let height = toNumber(heightSource || 0);
+
+    if (!scaleMode) {
+      if (height <= 0) {
+        const text = 'swiper: 不使用比例容器模式下, 需要指定 height';
+
+        showErrorMessage({
+          message: text,
+        });
+
+        return null;
+      }
+    } else {
+      height = '100%';
     }
 
     const listData = isArray(list) ? list : [];
@@ -750,7 +772,7 @@ class Swiper extends BaseComponent {
 
     const itemCount = listData.length;
 
-    return (
+    const swiperCore = (
       <View
         className={classNames(classPrefix, className)}
         style={{
@@ -818,6 +840,13 @@ class Swiper extends BaseComponent {
         ) : null}
       </View>
     );
+
+    if (!scaleMode) {
+      return swiperCore;
+    }
+    {
+      return <ScaleBox aspectRatio={aspectRatio}>{swiperCore}</ScaleBox>;
+    }
   }
 }
 

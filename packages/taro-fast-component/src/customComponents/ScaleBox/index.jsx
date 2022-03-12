@@ -66,7 +66,9 @@ class ScaleBox extends BaseComponent {
           ? containerProps
           : {
               style: {
-                margin: transformSize(padding),
+                margin: `${transformSize(
+                  Math.floor(padding * aspectRatio),
+                )} ${transformSize(padding)}`,
                 overflow: 'hidden',
                 position: 'relative',
               },
