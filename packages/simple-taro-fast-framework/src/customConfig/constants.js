@@ -11,6 +11,6 @@ export const cardHeaderStyle = {
 };
 
 export const cardStyle = {
-  borderLeft: '1rpx solid var(--tfc-border-color)',
-  borderRight: '1rpx solid var(--tfc-border-color)',
+  borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+  borderRight: 'var(--tfc-1) solid var(--tfc-border-color)',
 };

@@ -61,12 +61,25 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <Card
+          header="strip"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          space={false}
+          strip
+          stripColor="blue"
+        >
+          <Item label="条目1" arrow />
+          <Item label="条目2" arrow />
+          <Item label="条目3" arrow border={false} />
+        </Card>
+
+        <Card
           mode="card"
           header="卡片模式"
           style={{
             ...style,
             ...{
-              borderBottom: '1rpx solid var(--tfc-border-color)',
+              borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
             },
           }}
           headerStyle={cardHeaderStyle}

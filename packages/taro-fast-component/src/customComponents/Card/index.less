@@ -7,6 +7,10 @@
   --border-top: solid var(--tfc-2) var(--tfc-border-color);
   --border-bottom: solid var(--tfc-2) var(--tfc-border-color);
   --padding-left: var(--tfc-24);
+  --strip-width: var(--tfc-8);
+  --strip-height: var(--tfc-36);
+  --strip-color: #ccc;
+  --strip-border-radius: var(--tfc-6);
 
   background-color: #fff;
   overflow: hidden;
@@ -16,6 +20,19 @@
     color: var(--tfc-color-weak);
     font-size: var(--tfc-30);
     padding: var(--tfc-16) var(--tfc-18);
+    position: relative;
+
+    &__strip {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: var(--strip-width);
+      height: var(--strip-height);
+      background-color: var(--strip-color);
+      border-radius: var(--strip-border-radius);
+    }
   }
 
   &-body {

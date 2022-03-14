@@ -12,7 +12,6 @@
     "selector-attribute-quotes": "always",
     "font-family-no-missing-generic-family-keyword": null,
     "plugin/declaration-block-no-ignored-properties": true,
-    "unit-no-unknown": [true, { "ignoreUnits": ["rpx"] }],
     "selector-type-no-unknown": null,
     "value-keyword-case": ["lower", { "ignoreProperties": ["composes"] }],
     "unicode-bom": "never",

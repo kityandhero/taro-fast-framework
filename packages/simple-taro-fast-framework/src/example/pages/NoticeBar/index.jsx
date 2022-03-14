@@ -6,6 +6,7 @@ import {
   NoticeBar,
   Icon,
   Space,
+  More,
 } from 'taro-fast-component/es/customComponents';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
@@ -13,7 +14,6 @@ import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 
 const { IconVolumePlus } = Icon;
-const { More } = NoticeBar;
 
 const style = {
   ...{

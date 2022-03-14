@@ -38,6 +38,11 @@ const defaultProps = {
   footerBorder: true,
   footerStyle: {},
   space: true,
+  strip: false,
+  stripWidth: 8,
+  stripHeight: 36,
+  stripBorderRadius: 6,
+  stripColor: '#ccc',
   extra: null,
   extraStyle: {},
   /**
@@ -91,11 +96,33 @@ const defaultProps = {
 };
 
 class Card extends BaseComponent {
+  buildStyle = () => {
+    const {
+      style,
+      strip,
+      stripWidth,
+      stripHeight,
+      stripBorderRadius,
+      stripColor,
+    } = this.props;
+
+    return {
+      ...style,
+      ...(strip
+        ? {
+            '--strip-width': transformSize(stripWidth),
+            '--strip-height': transformSize(stripHeight),
+            '--strip-border-radius': transformSize(stripBorderRadius),
+            '--strip-color': stripColor,
+          }
+        : {}),
+    };
+  };
+
   renderFurther() {
     const {
       shadow,
       shadowColor,
-      style,
       border,
       cardBorderRadiusMode,
       cardBorderRadiusSize,
@@ -107,6 +134,7 @@ class Card extends BaseComponent {
       footer,
       footerBorder,
       footerStyle,
+      strip,
       extra,
       extraStyle,
       mode: modeSource,
@@ -128,6 +156,8 @@ class Card extends BaseComponent {
     const mode = inCollection(modeCollection, modeSource)
       ? modeSource
       : 'through';
+
+    const style = this.buildStyle();
 
     return (
       <View
@@ -156,6 +186,10 @@ class Card extends BaseComponent {
             left={
               <View className={`${classPrefix}-header`} style={headerStyle}>
                 {headerEllipsis ? <Ellipsis> {header}</Ellipsis> : header}
+
+                {strip ? (
+                  <View className={`${classPrefix}-header__strip`} />
+                ) : null}
               </View>
             }
             right={extra ? <VerticalBox>{extra}</VerticalBox> : null}

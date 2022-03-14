@@ -169,7 +169,7 @@ export default class Index extends ContentPageBase {
             <View
               style={{
                 border: 'var(--tfc-1) solid #ccc',
-                height: '200rpx',
+                height: 'var(--tfc-200)',
                 position: 'relative',
               }}
             >
@@ -179,7 +179,7 @@ export default class Index extends ContentPageBase {
             <View
               style={{
                 border: 'var(--tfc-1) solid #ccc',
-                height: '200rpx',
+                height: 'var(--tfc-200)',
                 position: 'relative',
               }}
             >

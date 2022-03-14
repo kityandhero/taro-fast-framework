@@ -59,6 +59,13 @@
           "pathName": "framework/pages/home/index",
           "query": "",
           "scene": null
+        },
+        {
+          "id": 2,
+          "name": "news",
+          "pathName": "news/pages/home/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

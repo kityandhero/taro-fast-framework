@@ -43,24 +43,6 @@
     height: 100%;
   }
 
-  &__more {
-    color: @color-grey-2;
-    font-size: 0;
-
-    .text {
-      font-size: var(--tfc-26);
-      line-height: var(--line-height-zh);
-      vertical-align: middle;
-    }
-
-    &-icon {
-      display: inline-block;
-      width: var(--tfc-26);
-      vertical-align: middle;
-      overflow: hidden;
-    }
-  }
-
   /* modifiers */
   &--single {
     display: flex;
@@ -106,12 +88,6 @@
         animation: marquee 8s linear infinite both;
         transform: translateZ(0);
       }
-    }
-  }
-
-  &--more {
-    .tfc-notice-bar__content {
-      max-width: var(--tfc-1050);
     }
   }
 }
