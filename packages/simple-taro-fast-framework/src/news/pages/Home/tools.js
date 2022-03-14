@@ -26,7 +26,7 @@ export function buildItem({
   const renderMode = toNumber(renderModeSource);
 
   return (
-    <Space direction="vertical" fillWidth>
+    <Space direction="vertical" fillWidth size={renderMode === 2 ? 28 : 34}>
       {(articles || []).map((o, i) => {
         const { title, description, image, createTime } = o;
 
