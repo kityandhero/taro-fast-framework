@@ -8,10 +8,15 @@ const defaultProps = {
 
 class CenterBox extends BaseComponent {
   renderFurther() {
-    const { style, children } = this.props;
+    const { style, innerStyle, children } = this.props;
 
     return (
-      <VerticalBox align="center" alignJustify="center" style={style}>
+      <VerticalBox
+        align="center"
+        alignJustify="center"
+        style={style}
+        innerStyle={innerStyle}
+      >
         {children}
       </VerticalBox>
     );

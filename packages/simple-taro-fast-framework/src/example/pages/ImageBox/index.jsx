@@ -48,7 +48,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card header="指定容器样式" style={style} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <View style={imageBoxContainerStyle}>
@@ -56,7 +55,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card
           header="showMode:loading"
           style={style}
@@ -68,7 +66,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card
           header="showOverlay:true"
           style={style}
@@ -80,7 +77,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card header="decoration" style={style} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <View style={imageBoxContainerStyle}>
@@ -93,7 +89,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card
           header="imageMode [取值等同于微信Image]"
           style={style}
@@ -157,7 +152,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card header="圆形轮廓" style={style} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <View style={imageBoxContainerStyle}>
@@ -165,7 +159,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card header="LazyLoad" style={style} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <View style={imageBoxContainerStyle}>
@@ -173,7 +166,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card header="指定长宽比" style={style} headerStyle={cardHeaderStyle}>
           <Space wrap>
             <View style={imageBoxContainerStyle}>
@@ -185,7 +177,6 @@ export default class Index extends ContentPageBase {
             </View>
           </Space>
         </Card>
-
         <Card header="简单布局" style={style} headerStyle={cardHeaderStyle}>
           <FlexBox
             flexAuto="right"
@@ -214,6 +205,7 @@ export default class Index extends ContentPageBase {
             rightStyle={{ paddingLeft: transformSize(10) }}
           />
         </Card>
+        *
       </Space>
     );
   };

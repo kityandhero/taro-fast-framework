@@ -6,6 +6,7 @@ import BaseComponent from '../BaseComponent';
 
 const defaultProps = {
   style: {},
+  innerStyle: {},
   align: 'center',
   alignJustify: 'flex-start',
   onClick: null,
@@ -21,7 +22,7 @@ class VerticalBox extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, align, alignJustify } = this.props;
+    const { style, innerStyle, align, alignJustify } = this.props;
 
     let alignStyle = 'center';
 
@@ -72,7 +73,7 @@ class VerticalBox extends BaseComponent {
     }
 
     const flexStyle = {
-      ...(style || {}),
+      ...(innerStyle || {}),
       ...{
         display: 'flex',
         width: '100%',
@@ -87,7 +88,10 @@ class VerticalBox extends BaseComponent {
     return (
       <View
         style={{
-          height: '100%',
+          ...style,
+          ...{
+            height: '100%',
+          },
         }}
         onClick={this.triggerClick}
       >

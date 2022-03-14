@@ -18,6 +18,8 @@ import {
 
 import PageWrapper from '../../../customComponents/PageWrapper';
 
+import { classPrefix, buildItem } from './tools';
+
 import './index.less';
 
 const boxStyle = {
@@ -108,7 +110,7 @@ export default class Index extends PageWrapper {
 
     return (
       <>
-        <View className={classNames('searchBox')}>
+        <View className={classNames(`${classPrefix}__searchBox`)}>
           <SearchBar
             style={{
               margin: `${transformSize(10)} ${transformSize(20)}`,
@@ -118,7 +120,7 @@ export default class Index extends PageWrapper {
           />
         </View>
 
-        <View className={classNames('main')}>
+        <View className={classNames(`${classPrefix}__containor`)}>
           <Space direction="vertical" fillWidth>
             <Swiper
               autoplay
@@ -134,11 +136,12 @@ export default class Index extends PageWrapper {
               }}
             />
 
-            <View className={classNames('navContainor')}>
-              <View className={classNames('navBox')}>
+            <View className={classNames(`${classPrefix}__navContainor`)}>
+              <View
+                className={classNames(`${classPrefix}__navContainor__navBox`)}
+              >
                 <Grid columns={5}>
                   {(navList || []).map((item, index) => {
-                    console.log(item);
                     const { image, value } = item;
 
                     return (
@@ -148,7 +151,11 @@ export default class Index extends PageWrapper {
                           flexAuto="top"
                           top={
                             <CenterBox>
-                              <View className={classNames('imageBox')}>
+                              <View
+                                className={classNames(
+                                  `${classPrefix}__navContainor__navBox__imageBox`,
+                                )}
+                              >
                                 <ImageBox src={image} />
                               </View>
                             </CenterBox>
@@ -163,17 +170,27 @@ export default class Index extends PageWrapper {
             </View>
 
             {(sectionList || []).map((item, index) => {
+              const { config = {}, name, articles } = item;
+
+              const { renderMode } = {
+                ...{
+                  renderMode: '0',
+                },
+                ...config,
+              };
+
               return (
                 <View
                   key={`section_${index}`}
-                  className={classNames('sectionContainor')}
+                  className={classNames(`${classPrefix}__sectionContainor`)}
                 >
                   <Card
                     strip
                     stripColor="#3378f4"
-                    header="标题"
+                    header={name}
                     border={false}
                     bodyBorder={false}
+                    space={false}
                     style={{
                       backgroundColor: '#f3f9ff',
                     }}
@@ -182,7 +199,13 @@ export default class Index extends PageWrapper {
                     }}
                     extra={<More />}
                     extraStyle={{ padding: 0 }}
-                  />
+                  >
+                    {buildItem({
+                      renderMode,
+                      keyPrefix: index,
+                      articles,
+                    })}
+                  </Card>
                 </View>
               );
             })}

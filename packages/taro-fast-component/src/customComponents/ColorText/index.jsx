@@ -14,6 +14,8 @@ import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
+  style: {},
+  fontSize: 28,
   randomSeed: 0,
   seedOffset: 0,
   randomColor: false,
@@ -21,10 +23,11 @@ const defaultProps = {
   icon: null,
   iconContainerStyle: {},
   textPrefix: null,
-  textPrefixStyle: null,
+  textPrefixStyle: {},
   text: '',
+  textStyle: {},
   separator: ': ',
-  separatorStyle: null,
+  separatorStyle: {},
   canCopy: false,
   copySuccessCallback: null,
 };
@@ -41,22 +44,10 @@ class ColorText extends BaseComponent {
     }
   };
 
-  renderFurther() {
-    const {
-      icon,
-      iconContainerStyle,
-      textPrefix,
-      textPrefixStyle,
-      randomSeed,
-      seedOffset,
-      randomColor,
-      color,
-      text,
-      separator,
-      separatorStyle,
-    } = this.props;
+  getColor = () => {
+    const { color, randomSeed, seedOffset, randomColor } = this.props;
 
-    let colorValue = color || '';
+    let colorValue = color || 'rgba(0, 0, 0, 0.85)';
 
     if (randomColor) {
       colorValue = getRandomColor({
@@ -64,14 +55,80 @@ class ColorText extends BaseComponent {
       });
     }
 
+    return colorValue;
+  };
+
+  buildTextPrefixStyle = () => {
+    const { textPrefixStyle, fontSize } = this.props;
+
+    const color = this.getColor();
+
+    return {
+      ...(!stringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(fontSize > 0
+        ? {
+            fontSize: transformSize(fontSize),
+          }
+        : {}),
+      ...textPrefixStyle,
+    };
+  };
+
+  buildSeparatorStyle = () => {
+    const { separatorStyle, fontSize } = this.props;
+
+    const color = this.getColor();
+
+    return {
+      ...(!stringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(fontSize > 0
+        ? {
+            fontSize: transformSize(fontSize),
+          }
+        : {}),
+      ...separatorStyle,
+    };
+  };
+
+  buildTextStyle = () => {
+    const { textStyle, fontSize } = this.props;
+
+    const color = this.getColor();
+
+    return {
+      ...(!stringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(fontSize > 0
+        ? {
+            fontSize: transformSize(fontSize),
+          }
+        : {}),
+      ...textStyle,
+    };
+  };
+
+  renderFurther() {
+    const {
+      style: styleSource,
+      icon,
+      iconContainerStyle,
+      textPrefix,
+      text,
+      separator,
+    } = this.props;
+
+    const color = this.getColor();
+
     const style = {
-      ...{ color: 'rgba(0, 0, 0, 0.85)' },
+      ...{ color },
+      ...styleSource,
       ...{ display: 'inline-block' },
     };
 
-    const textStyle = {
-      ...(!stringIsNullOrWhiteSpace(colorValue) ? { color: colorValue } : {}),
-    };
+    const textPrefixStyle = this.buildTextPrefixStyle();
+
+    const separatorStyle = this.buildSeparatorStyle();
+
+    const textStyle = this.buildTextStyle();
 
     return (
       <View

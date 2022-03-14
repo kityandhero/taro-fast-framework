@@ -25,6 +25,7 @@ const defaultProps = {
   bottomStyle: {},
   style: null,
   alignItems: 'center',
+  stretch: true,
 };
 
 const flexAutoCollection = ['left', 'right', 'top', 'bottom'];
@@ -65,6 +66,7 @@ class FlexBox extends BaseComponent {
       bottomStyle,
       alignItems,
       verticalHeight,
+      stretch,
     } = this.props;
 
     const direction = this.getDirection();
@@ -113,7 +115,7 @@ class FlexBox extends BaseComponent {
           <Row style={style}>
             <Col
               auto
-              align="stretch"
+              align={stretch ? 'stretch' : ''}
               style={{ ...(leftStyle || {}), ...styleCore }}
             >
               {left}
@@ -121,7 +123,7 @@ class FlexBox extends BaseComponent {
 
             {(right || null) == null ? null : (
               <Col
-                align="stretch"
+                align={stretch ? 'stretch' : ''}
                 style={{ ...(rightStyle || {}), ...styleCore }}
               >
                 {right}
@@ -133,12 +135,15 @@ class FlexBox extends BaseComponent {
 
       return (
         <Row style={style}>
-          <Col align="stretch" style={{ ...(leftStyle || {}), ...styleCore }}>
+          <Col
+            align={stretch ? 'stretch' : ''}
+            style={{ ...(leftStyle || {}), ...styleCore }}
+          >
             {left}
           </Col>
           <Col
             auto
-            align="stretch"
+            align={stretch ? 'stretch' : ''}
             style={{ ...(rightStyle || {}), ...styleCore }}
           >
             {right}
@@ -173,8 +178,12 @@ class FlexBox extends BaseComponent {
           ...{
             display: 'flex',
             flexFlow: 'column',
-            alignItems: 'stretch',
           },
+          ...(stretch
+            ? {
+                alignItems: 'stretch',
+              }
+            : {}),
         }}
       >
         <View

@@ -8,6 +8,7 @@ import BaseComponent from '../../BaseComponent';
 import { classPrefix } from '../tools';
 
 const defaultProps = {
+  key: '',
   style: {},
   styleAnimation: {},
   indicator: 0,

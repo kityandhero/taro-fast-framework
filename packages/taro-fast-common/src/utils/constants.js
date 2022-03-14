@@ -219,6 +219,11 @@ export const datetimeFormat = {
   monthDay: 'MM-DD',
   hourMinute: 'HH:mm',
   hourMinuteSecond: 'HH:mm:ss',
+  month: 'MM',
+  day: 'DD',
+  hour: 'HH',
+  minute: 'mm',
+  second: 'ss',
 };
 
 export const selectModeCollection = {

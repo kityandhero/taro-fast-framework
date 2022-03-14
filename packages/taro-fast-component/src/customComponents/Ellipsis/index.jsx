@@ -38,6 +38,7 @@ class Ellipsis extends BaseComponent {
         display: '-webkit-box',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        whiteSpace: 'break-spaces',
         '-webkit-line-clamp': `${line}`,
         '-webkit-box-orient': 'vertical',
       };
