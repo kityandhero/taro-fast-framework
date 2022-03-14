@@ -48,6 +48,8 @@ definePageConfig({
   global,
 }))
 export default class Index extends PageWrapper {
+  enableBackTop = true;
+
   constructor(props) {
     super(props);
 
@@ -188,6 +190,9 @@ export default class Index extends PageWrapper {
                     strip
                     stripColor="#3378f4"
                     header={name}
+                    headerStyle={{
+                      color: '#333',
+                    }}
                     border={false}
                     bodyBorder={false}
                     space={false}

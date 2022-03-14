@@ -26,7 +26,11 @@ export function buildItem({
   const renderMode = toNumber(renderModeSource);
 
   return (
-    <Space direction="vertical" fillWidth size={renderMode === 2 ? 28 : 34}>
+    <Space
+      direction={renderMode !== 4 ? 'vertical' : ''}
+      fillWidth
+      size={renderMode === 2 ? 28 : 34}
+    >
       {(articles || []).map((o, i) => {
         const { title, description, image, createTime } = o;
 
@@ -175,6 +179,14 @@ export function buildItem({
                 />
               }
             />
+          );
+        }
+
+        if (renderMode === 4) {
+          return (
+            <View style={{ width: transformSize(260) }}>
+              <ImageBox src={image} aspectRatio={0.87} />
+            </View>
           );
         }
       })}
