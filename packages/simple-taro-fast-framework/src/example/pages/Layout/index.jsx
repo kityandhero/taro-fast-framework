@@ -68,6 +68,11 @@ const o = {
       path: pathCollection.example.swiper.path,
     },
     {
+      id: 'HorizontalScrollBox',
+      name: '水平滚动容器',
+      path: pathCollection.example.horizontalScrollBox.path,
+    },
+    {
       id: 'Grid',
       name: '宫格',
       path: pathCollection.example.grid.path,

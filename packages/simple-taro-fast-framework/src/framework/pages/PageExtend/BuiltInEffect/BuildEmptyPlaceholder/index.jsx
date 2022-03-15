@@ -85,6 +85,11 @@ const descriptionList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: 'buildEmptyPlaceholder',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'buildEmptyPlaceholder',

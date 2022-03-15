@@ -196,12 +196,6 @@ export default class Index extends PageWrapper {
                     border={false}
                     bodyBorder={false}
                     space={false}
-                    style={{
-                      backgroundColor: '#f3f9ff',
-                    }}
-                    bodyStyle={{
-                      backgroundColor: '#f3f9ff',
-                    }}
                     extra={<More />}
                     extraStyle={{ padding: 0 }}
                   >

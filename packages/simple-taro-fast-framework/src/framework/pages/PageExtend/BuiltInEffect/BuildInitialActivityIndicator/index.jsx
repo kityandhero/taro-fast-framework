@@ -60,6 +60,11 @@ const paramList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: 'buildInitialActivityIndicator',
+});
+
 @connect(({ simulation, global }) => ({
   simulation,
   global,

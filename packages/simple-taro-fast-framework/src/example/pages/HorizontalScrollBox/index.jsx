@@ -36,7 +36,7 @@ const horizontalCenterBoxStyle = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '水平居中',
+  navigationBarTitleText: '水平滚动容器',
 });
 
 export default class Index extends ContentPageBase {

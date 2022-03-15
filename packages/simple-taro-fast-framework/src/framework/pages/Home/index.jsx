@@ -15,6 +15,11 @@ const o = {
   ],
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '快速开发框架',
+});
+
 export default class Index extends ChannelPageBase {
   buildData = () => {
     return o;

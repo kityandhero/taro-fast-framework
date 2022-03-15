@@ -22,6 +22,11 @@ const o = {
   ],
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '内置功能',
+});
+
 export default class Index extends ChannelPageBase {
   buildData = () => {
     return o;

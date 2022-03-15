@@ -134,6 +134,9 @@ const examplePathCollection = {
   swiper: {
     path: '/example/pages/swiper/index',
   },
+  horizontalScrollBox: {
+    path: '/example/pages/horizontalScrollBox/index',
+  },
   radio: {
     path: '/example/pages/radio/index',
   },

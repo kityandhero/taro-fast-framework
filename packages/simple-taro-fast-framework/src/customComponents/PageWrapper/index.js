@@ -14,6 +14,10 @@ export default class PageWrapper extends AuthorizationWrapper {
 
   showRenderCountInConsole = false;
 
+  viewStyle = {
+    backgroundColor: '#fff',
+  };
+
   // loadRemoteRequestAfterMount = false;
 
   reloadRemoteMetaData = () => {

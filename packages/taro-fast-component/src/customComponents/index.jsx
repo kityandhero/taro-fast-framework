@@ -63,3 +63,4 @@ export { default as Link } from './Link';
 export { default as ThumbnailBox } from './ThumbnailBox';
 export { default as BackTop } from './BackTop';
 export { default as Swiper } from './Swiper';
+export { default as HorizontalScrollBox } from './HorizontalScrollBox';

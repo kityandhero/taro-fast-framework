@@ -21,6 +21,11 @@ const itemStyle = {
   height: '100%',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '宫格布局',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Grid',
