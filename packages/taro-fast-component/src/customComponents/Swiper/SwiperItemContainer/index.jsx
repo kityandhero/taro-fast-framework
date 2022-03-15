@@ -8,7 +8,6 @@ import BaseComponent from '../../BaseComponent';
 import { classPrefix } from '../tools';
 
 const defaultProps = {
-  key: '',
   style: {},
   styleAnimation: {},
   indicator: 0,
@@ -32,7 +31,6 @@ class SwiperItemContainer extends BaseComponent {
 
   renderFurther() {
     const {
-      key,
       id,
       itemIndex,
       transform,
@@ -65,7 +63,6 @@ class SwiperItemContainer extends BaseComponent {
 
     return (
       <View
-        key={key}
         id={id || null}
         className={classNames(`${classPrefix}__item-container`, {
           [`${classPrefix}__item-container--translate`]: transform === 'slide',

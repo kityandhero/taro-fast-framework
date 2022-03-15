@@ -12,6 +12,7 @@ import {
   Space,
   ColorText,
   Icon,
+  HorizontalScrollBox,
 } from 'taro-fast-component/es/customComponents';
 
 export const classPrefix = `simple-news-home`;
@@ -24,6 +25,24 @@ export function buildItem({
   articles = [],
 }) {
   const renderMode = toNumber(renderModeSource);
+
+  if (renderMode === 4) {
+    return (
+      <HorizontalScrollBox
+        gap={20}
+        list={articles}
+        itemBuilder={(item) => {
+          const { image } = item;
+
+          return (
+            <View style={{ width: transformSize(280) }}>
+              <ImageBox src={image} aspectRatio={0.87} />
+            </View>
+          );
+        }}
+      />
+    );
+  }
 
   return (
     <Space

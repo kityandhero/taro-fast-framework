@@ -34,13 +34,13 @@ class HorizontalScrollBox extends BaseComponent {
 
     if (isFunction(itemBuilder)) {
       itemComponent = itemBuilder(item, index);
+    } else {
+      const text = 'itemBuilder must be a render function';
+
+      showErrorMessage({
+        message: text,
+      });
     }
-
-    const text = 'itemBuilder must be a render function';
-
-    showErrorMessage({
-      message: text,
-    });
 
     const { style: itemStyle } = {
       ...{

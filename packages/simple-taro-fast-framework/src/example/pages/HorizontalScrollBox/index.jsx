@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   HorizontalScrollBox,
   Space,
@@ -14,7 +14,7 @@ const itemStyle = {
   backgroundColor: '#ccc',
 };
 
-const item = {
+const one = {
   width: 400,
   style: {
     ...itemStyle,
@@ -25,9 +25,17 @@ const config1 = {
   style: {
     height: transformSize(280),
   },
-  list: [item, item, item, item, item, item, item, item, item, item],
-  itemBuilder: () => {
-    return <View style={{ width: transformSize(280) }}></View>;
+  gap: 20,
+  list: [one, one, one, one, one, one, one, one, one, one],
+  itemBuilder: (item, index) => {
+    return (
+      <View
+        style={{
+          width: transformSize(80 + (index + 1) * 45),
+          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+        }}
+      ></View>
+    );
   },
 };
 
