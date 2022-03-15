@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize, formatDatetime } from 'taro-fast-common/es/utils/tools';
+import {
+  transformSize,
+  formatDatetime,
+  inCollection,
+} from 'taro-fast-common/es/utils/tools';
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
@@ -82,20 +86,27 @@ export function buildItem({
   }
 
   if (renderMode === 5) {
-    return (
-      <HorizontalScrollBox
-        gap={20}
-        list={articles}
-        itemBuilder={(item) => {
-          const { image } = item;
+    if (articles.length === 0) {
+      return null;
+    }
 
-          return (
-            <View style={{ width: transformSize(280) }}>
-              <ImageBox src={image} aspectRatio={0.87} />
-            </View>
-          );
-        }}
-      />
+    const { title, image } = articles[0];
+
+    return (
+      <View>
+        <ImageBox src={image} aspectRatio={0.582} />
+
+        <Ellipsis
+          line={1}
+          style={{
+            color: '#333',
+            padding: `${transformSize(13)} 0`,
+            fontSize: transformSize(32),
+          }}
+        >
+          {title}
+        </Ellipsis>
+      </View>
     );
   }
 
@@ -192,7 +203,7 @@ export function buildItem({
           );
         }
 
-        if (renderMode === 3) {
+        if (inCollection([3, 1], renderMode)) {
           return (
             <FlexBox
               key={`article_${keyPrefix}_${i}`}

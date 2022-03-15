@@ -39,7 +39,7 @@ const nameStyle = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '新闻应用',
+  navigationBarTitleText: '新闻应用--首页',
   backgroundColor: '#3778F4',
 });
 
@@ -48,6 +48,8 @@ definePageConfig({
   global,
 }))
 export default class Index extends PageWrapper {
+  enablePullDownRefresh = true;
+
   enableBackTop = true;
 
   constructor(props) {
@@ -181,6 +183,10 @@ export default class Index extends PageWrapper {
                 ...config,
               };
 
+              if (articles.length === 0) {
+                return null;
+              }
+
               return (
                 <View
                   key={`section_${index}`}
@@ -208,223 +214,6 @@ export default class Index extends PageWrapper {
                 </View>
               );
             })}
-
-            {/* {sectionList.length > 0
-          ? sectionList.map((item, index) =>
-              item.config ? (
-                item.config.renderMode == 2 ? (
-                  <View key={`sectionList_${index}`} className="announcement">
-                    <CommoditySaleBox
-                      data={item}
-                      showDetail={(o) => {
-                        this.goToNews(o);
-                      }}
-                    />
-                    {item.articles.length > 0
-                      ? item.articles.map((conItem, conIndex) => (
-                          <View
-                            key={`content_${conIndex}`}
-                            className="content"
-                            onClick={() => {
-                              this.goToNewsDetail(conItem);
-                            }}
-                          >
-                            <View className="conBlock at-row ">
-                              <View className="at-col at-col-3">
-                                <View className="conLeft">
-                                  <View>
-                                    <View className="dateTop">
-                                      {formatDatetime(
-                                        toDatetime(conItem.createTime),
-                                        'yyyy-MM',
-                                      )}
-                                    </View>
-                                    <View className="dateBot">
-                                      {formatDatetime(
-                                        toDatetime(conItem.createTime),
-                                        'dd',
-                                      )}
-                                    </View>
-                                  </View>
-                                </View>
-                              </View>
-                              <View className="conRight at-col at-col-9">
-                                <View className="conRight">
-                                  <View className="titleTop">
-                                    {conItem.title}
-                                  </View>
-                                  <View className="titleBot">
-                                    {conItem.description}
-                                  </View>
-                                </View>
-                              </View>
-                            </View>
-                          </View>
-                        ))
-                      : ''}
-                  </View>
-                ) : item.config.renderMode == 3 ? (
-                  <View key={`sectionList_${index}`} className="announcement">
-                    <CommoditySaleBox
-                      data={item}
-                      showDetail={(o) => {
-                        this.goToNews(o);
-                      }}
-                    />
-                    {item.articles.length > 0
-                      ? item.articles.map((meetingItem, meetingIndex) => (
-                          <View
-                            key={`meetingContent_${meetingIndex}`}
-                            className="meetingContent"
-                            onClick={() => {
-                              this.goToNewsDetail(meetingItem);
-                            }}
-                          >
-                            <View className="conBlock at-row ">
-                              <View className="at-col at-col-5">
-                                <View className="conLeft">
-                                  <Image
-                                    src={meetingItem.image || defaultImg}
-                                  />
-                                </View>
-                              </View>
-                              <View className="at-col at-col-7">
-                                <View className="conRight">
-                                  <View className="titleTop">
-                                    {meetingItem.title}
-                                  </View>
-                                  <View className="titleBot">
-                                    {meetingItem.description}
-                                  </View>
-                                  <View className="at-row at-row__align--center">
-                                    <View className="at-col at-col-1 at-col--auto salePrice">
-                                      <View className="salePriceIcon">
-                                        <Image src="http://file.panduolakeji.com/103087903.png" />
-                                      </View>
-                                    </View>
-                                    <View className="at-col at-col-1 at-col--auto marketPrice">
-                                      {formatDatetime(
-                                        toDatetime(meetingItem.createTime),
-                                        'yyyy-MM-dd',
-                                      )}
-                                    </View>
-                                  </View>
-                                </View>
-                              </View>
-                            </View>
-                          </View>
-                        ))
-                      : ''}
-                  </View>
-                ) : item.config.renderMode == 4 ? (
-                  <View key={`sectionList_${index}`} className="announcement">
-                    <CommoditySaleBox
-                      data={item}
-                      showDetail={(o) => {
-                        this.goToNews(o);
-                      }}
-                    />
-                    {item.articles.length > 0 ? (
-                      <View className="exhibitionContent">
-                        <View className="conBlock at-row newFrame">
-                          {item.articles.map(
-                            (exhibitionItem, exhibitionIndex) => (
-                              <View
-                                className="at-col at-col-1 at-col--auto"
-                                key={`exhibitionItem${exhibitionIndex}`}
-                                onClick={() => {
-                                  this.goToNewsDetail(exhibitionItem);
-                                }}
-                              >
-                                <View className="exhibition">
-                                  <Image
-                                    src={exhibitionItem.image || defaultImg}
-                                  />
-                                  <View className="shadowTest">
-                                    {exhibitionItem.title}
-                                  </View>
-                                </View>
-                              </View>
-                            ),
-                          )}
-                        </View>
-                      </View>
-                    ) : (
-                      ''
-                    )}
-                  </View>
-                ) : item.config.renderMode == 5 ? (
-                  <View key={`sectionList_${index}`} className="announcement">
-                    <CommoditySaleBox
-                      data={item}
-                      showDetail={(o) => {
-                        this.goToNews(o);
-                      }}
-                    />
-                    {item.articles.length > 0
-                      ? item.articles.map((videoItem, videoIndex) =>
-                          videoIndex == 0 ? (
-                            <View key={`video_${videoIndex}`}>
-                              <Video
-                                className="video"
-                                poster={videoItem.rectangleImage}
-                                src={videoItem.video}
-                                controls
-                                showFullscreenBtn
-                                autoplay={false}
-                                initialTime="0"
-                                id="video"
-                                loop={false}
-                                muted={false}
-                                custom-cache="true"
-                              />
-                              <View
-                                className="videoDesc"
-                                onClick={() => {
-                                  this.goToNewsDetail(videoItem);
-                                }}
-                              >
-                                {videoItem.description}
-                              </View>
-                            </View>
-                          ) : (
-                            ''
-                          ),
-                        )
-                      : ''}
-                  </View>
-                ) : item.config.renderMode == 1 ? (
-                  <View key={`sectionList_${index}`} className="announcement">
-                    <CommoditySaleBox
-                      data={item}
-                      showDetail={(o) => {
-                        this.goToNews(o);
-                      }}
-                    />
-                    {item.articles.length > 0
-                      ? item.articles.map((generalItem, generalIndex) => (
-                          <View
-                            key={`general_${generalIndex}`}
-                            className="general"
-                          >
-                            <View className="generalTitle">
-                              {generalItem.title}
-                            </View>
-                            <View className="generalImg">
-                              <Image src={generalItem.image || defaultImg} />
-                            </View>
-                          </View>
-                        ))
-                      : ''}
-                  </View>
-                ) : (
-                  ''
-                )
-              ) : (
-                ''
-              ),
-            )
-          : ''} */}
           </Space>
         </View>
       </>
