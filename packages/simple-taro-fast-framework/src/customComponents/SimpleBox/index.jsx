@@ -87,6 +87,7 @@ class SimpleBox extends Component {
           <HelpBox
             title={helpTitle}
             showTitle
+            showDivider
             showNumber={false}
             list={this.buildList()}
           />

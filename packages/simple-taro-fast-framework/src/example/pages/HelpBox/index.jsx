@@ -63,6 +63,20 @@ const config7 = {
   backgroundColor: '#34e245',
 };
 
+const config8 = {
+  title: '操作说明',
+  list,
+  showTitle: true,
+  color: '#34e245',
+};
+
+const config9 = {
+  title: '操作说明',
+  list,
+  showTitle: true,
+  fontSize: 24,
+};
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'HelpBox',
@@ -96,11 +110,19 @@ export default class Index extends ContentPageBase {
           <HelpBox {...config7} />
         </SimpleBox>
 
+        <SimpleBox header="设置字体颜色" config={config8}>
+          <HelpBox {...config8} />
+        </SimpleBox>
+
+        <SimpleBox header="设置字体大小" config={config9}>
+          <HelpBox {...config9} />
+        </SimpleBox>
+
         <SimpleBox header="隐藏" config={config6}>
           <HelpBox {...config6} />
         </SimpleBox>
 
-        <PropertyBox config={HelpBox.defaultProps} labelWidth={170} />
+        <PropertyBox config={HelpBox.defaultProps} labelWidth={230} />
       </Space>
     );
   };

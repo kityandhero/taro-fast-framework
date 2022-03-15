@@ -19,12 +19,15 @@ const classPrefix = `tfc-help-box`;
 
 const defaultProps = {
   title: '帮助信息',
+  showDivider: false,
   showTitle: true,
   showNumber: true,
   labelWidth: null,
   list: [],
   useBackground: false,
   backgroundColor: '#e1e1e1',
+  color: '#999',
+  fontSize: 28,
   hidden: false,
 };
 
@@ -48,6 +51,8 @@ class HelpBox extends BaseComponent {
       labelWidth: labelWidthValue,
       list: listData,
       useBackground,
+      color,
+      fontSize,
     } = this.props;
 
     const title = titleValue || '帮助信息';
@@ -103,7 +108,7 @@ class HelpBox extends BaseComponent {
               style={{
                 paddingTop: 4,
                 paddingBottom: 4,
-                color: '#999',
+                color,
               }}
             >
               {title}
@@ -113,9 +118,9 @@ class HelpBox extends BaseComponent {
               style={{
                 marginTop: transformSize(8),
                 marginBottom: transformSize(8),
-                color: '#999',
+                color,
                 fontWeight: 'normal',
-                fontSize: transformSize(28),
+                fontSize: transformSize(fontSize),
                 lineHeight: transformSize(44),
                 height: transformSize(44),
               }}
@@ -166,12 +171,12 @@ class HelpBox extends BaseComponent {
               : showNumber
               ? transformSize(44)
               : transformSize(24),
-            color: '#999',
-            fontSize: transformSize(28),
+            color,
+            fontSize: transformSize(fontSize),
           }}
           contentStyle={{
-            color: '#999',
-            fontSize: transformSize(28),
+            color,
+            fontSize: transformSize(fontSize),
           }}
           itemStyle={{
             paddingBottom: transformSize(8),
