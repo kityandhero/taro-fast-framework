@@ -38,6 +38,11 @@ const o = {
       path: pathCollection.example.fadeInBox.path,
     },
     {
+      id: 'HorizontalScrollBox',
+      name: '水平滚动容器',
+      path: pathCollection.example.horizontalScrollBox.path,
+    },
+    {
       id: 'HorizontalCenterBox',
       name: '水平居中',
       path: pathCollection.example.horizontalCenterBox.path,
@@ -66,11 +71,6 @@ const o = {
       id: 'Swiper',
       name: '滑动布局',
       path: pathCollection.example.swiper.path,
-    },
-    {
-      id: 'HorizontalScrollBox',
-      name: '水平滚动容器',
-      path: pathCollection.example.horizontalScrollBox.path,
     },
     {
       id: 'Grid',
@@ -104,6 +104,11 @@ const o = {
     },
   ],
 };
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '布局',
+});
 
 export default class Index extends ChannelPageBase {
   buildData = () => {

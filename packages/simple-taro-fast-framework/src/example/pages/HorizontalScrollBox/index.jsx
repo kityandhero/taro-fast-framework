@@ -2,36 +2,33 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
-  HorizontalCenterBox,
-  HelpBox,
+  HorizontalScrollBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
-
-const containorStyle = {
-  border: `${transformSize(2)} solid #ccc`,
-  height: transformSize(200),
-};
-
-const boxStyle = {
-  width: transformSize(80),
-  height: transformSize(80),
-  backgroundColor: 'blue',
-  margin: transformSize(20),
-};
-
-const horizontalCenterBoxStyle = {
+const itemStyle = {
   backgroundColor: '#ccc',
+};
+
+const item = {
+  width: 400,
+  style: {
+    ...itemStyle,
+  },
+};
+
+const config1 = {
+  style: {
+    height: transformSize(280),
+  },
+  list: [item, item, item, item, item, item, item, item, item, item],
+  itemBuilder: () => {
+    return <View style={{ width: transformSize(280) }}></View>;
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -41,49 +38,21 @@ definePageConfig({
 
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'HorizontalCenterBox',
-    name: '水平居中',
+    id: 'HorizontalScrollBox',
+    name: '水平滚动容器',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="默认布局" style={style} headerStyle={cardHeaderStyle}>
-          <View style={containorStyle}>
-            <HorizontalCenterBox style={horizontalCenterBoxStyle}>
-              <View style={boxStyle}></View>
-            </HorizontalCenterBox>
-          </View>
-        </Card>
+        <SimpleBox header="默认布局" config={config1}>
+          <HorizontalScrollBox {...config1} />
+        </SimpleBox>
 
-        <Card
-          header="不自动使用父级高度"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <View style={containorStyle}>
-            <HorizontalCenterBox
-              style={horizontalCenterBoxStyle}
-              fillHeight={false}
-            >
-              <View style={boxStyle}></View>
-            </HorizontalCenterBox>
-          </View>
-        </Card>
-
-        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox
-            showTitle={false}
-            list={[
-              {
-                text: 'style: 默认值为 null.',
-              },
-              {
-                text: 'fillHeight: 默认值为 true.',
-              },
-            ]}
-          />
-        </Card>
+        <PropertyBox
+          config={HorizontalScrollBox.defaultProps}
+          labelWidth={170}
+        />
       </Space>
     );
   };

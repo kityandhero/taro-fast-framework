@@ -181,6 +181,11 @@ const config10 = {
   ...configCore,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '滑动视图',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Swiper',

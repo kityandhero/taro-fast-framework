@@ -126,6 +126,11 @@ const listData = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '首页',
+});
+
 export default class Index extends PageWrapper {
   onShareAppMessage() {
     const o = {
