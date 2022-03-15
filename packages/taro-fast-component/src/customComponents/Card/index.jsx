@@ -39,6 +39,7 @@ const defaultProps = {
   footerStyle: {},
   space: true,
   strip: false,
+  stripLeft: 0,
   stripWidth: 8,
   stripHeight: 36,
   stripBorderRadius: 6,
@@ -100,6 +101,7 @@ class Card extends BaseComponent {
     const {
       style,
       strip,
+      stripLeft,
       stripWidth,
       stripHeight,
       stripBorderRadius,
@@ -110,6 +112,7 @@ class Card extends BaseComponent {
       ...style,
       ...(strip
         ? {
+            '--strip-left': transformSize(stripLeft),
             '--strip-width': transformSize(stripWidth),
             '--strip-height': transformSize(stripHeight),
             '--strip-border-radius': transformSize(stripBorderRadius),

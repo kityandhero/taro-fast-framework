@@ -55,6 +55,10 @@ class PropertyBox extends Component {
 
     return (
       <Card
+        strip
+        stripLeft={2}
+        stripWidth={6}
+        stripColor="#ccc"
         header={header || '示例'}
         style={style}
         headerStyle={cardHeaderStyle}

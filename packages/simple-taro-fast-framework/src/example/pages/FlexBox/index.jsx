@@ -1,17 +1,11 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, FlexBox, Space } from 'taro-fast-component/es/customComponents';
+import { FlexBox, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const boxStyle = {
   width: transformSize(80),
@@ -24,6 +18,11 @@ const autoStyle = {
   backgroundColor: '#ccc',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: 'Flex布局',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'FlexBox',
@@ -33,34 +32,26 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="仅左侧布局" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="仅左侧布局">
           <FlexBox left={<View style={boxStyle}></View>} />
-        </Card>
+        </SimpleBox>
 
-        <Card header="左侧自动布局" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="左侧自动布局">
           <FlexBox
             left={<View style={autoStyle}></View>}
             right={<View style={boxStyle}></View>}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="右侧自自动布局"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="右侧自自动布局">
           <FlexBox
             flexAuto="right"
             left={<View style={boxStyle}></View>}
             right={<View style={autoStyle}></View>}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="上下自动布局 , 下部固定高度"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="上下自动布局 , 下部固定高度">
           <FlexBox
             flexAuto="top"
             verticalHeight={300}
@@ -78,13 +69,9 @@ export default class Index extends ContentPageBase {
               ></View>
             }
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="上下自动布局 , 上部固定高度"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="上下自动布局 , 上部固定高度">
           <FlexBox
             flexAuto="bottom"
             verticalHeight={300}
@@ -105,7 +92,9 @@ export default class Index extends ContentPageBase {
               ></View>
             }
           />
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={FlexBox.defaultProps} labelWidth={170} />
       </Space>
     );
   };

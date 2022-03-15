@@ -7,6 +7,7 @@
   --border-top: solid var(--tfc-2) var(--tfc-border-color);
   --border-bottom: solid var(--tfc-2) var(--tfc-border-color);
   --padding-left: var(--tfc-24);
+  --strip-left: var(--tfc-0);
   --strip-width: var(--tfc-8);
   --strip-height: var(--tfc-36);
   --strip-color: #ccc;
@@ -26,7 +27,7 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 0;
+      left: var(--strip-left);
       margin: auto;
       width: var(--strip-width);
       height: var(--strip-height);

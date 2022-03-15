@@ -62,6 +62,10 @@ class SimpleBox extends Component {
 
     return (
       <Card
+        strip
+        stripLeft={2}
+        stripWidth={6}
+        stripColor="#3378f4"
         header={
           <ColorText
             textPrefix={prefix}

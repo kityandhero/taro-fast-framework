@@ -1,15 +1,9 @@
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Row, Col, Card, Space } from 'taro-fast-component/es/customComponents';
+import { Row, Col, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const rowStyle = {
   height: transformSize(80),
@@ -28,6 +22,12 @@ const redStyle = {
   backgroundColor: '#a51278',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: 'Flex布局',
+  backgroundColor: '#3778F4',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Flex',
@@ -37,42 +37,39 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="布局展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="center size: 1"
-        >
+        <SimpleBox header="布局展示">
           <Row justify="center" style={rowStyle}>
             <Col size={1} style={blueStyle}></Col>
             <Col size={1} style={greenStyle}></Col>
           </Row>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="布局展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="size: 4"
-        >
+        <SimpleBox header="布局展示">
           <Row style={rowStyle}>
             <Col size={4} style={blueStyle}></Col>
             <Col size={4} style={redStyle}></Col>
             <Col size={4} style={greenStyle}></Col>
           </Row>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="布局展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="size: 6"
-        >
+        <SimpleBox header="布局展示">
           <Row style={rowStyle}>
             <Col size={6} style={blueStyle}></Col>
             <Col size={6} style={greenStyle}></Col>
           </Row>
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox
+          header="Row 可配置项以及默认值"
+          config={Row.defaultProps}
+          labelWidth={170}
+        />
+
+        <PropertyBox
+          header="Col 可配置项以及默认值"
+          config={Col.defaultProps}
+          labelWidth={170}
+        />
       </Space>
     );
   };
