@@ -20,6 +20,11 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '图片',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ImageBox',

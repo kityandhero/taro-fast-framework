@@ -16,7 +16,7 @@ const classPrefix = `tfc-more`;
 const defaultProps = {
   style: {},
   text: '更多',
-  icon: <IconChevronRight size={38} />,
+  icon: <IconChevronRight size={34} />,
   onClick: null,
 };
 

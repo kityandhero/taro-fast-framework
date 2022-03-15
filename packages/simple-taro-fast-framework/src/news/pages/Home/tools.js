@@ -44,12 +44,26 @@ export function buildItem({
     );
   }
 
+  if (renderMode === 5) {
+    return (
+      <HorizontalScrollBox
+        gap={20}
+        list={articles}
+        itemBuilder={(item) => {
+          const { image } = item;
+
+          return (
+            <View style={{ width: transformSize(280) }}>
+              <ImageBox src={image} aspectRatio={0.87} />
+            </View>
+          );
+        }}
+      />
+    );
+  }
+
   return (
-    <Space
-      direction={renderMode !== 4 ? 'vertical' : ''}
-      fillWidth
-      size={renderMode === 2 ? 28 : 34}
-    >
+    <Space direction="vertical" fillWidth size={renderMode === 2 ? 28 : 34}>
       {(articles || []).map((o, i) => {
         const { title, description, image, createTime } = o;
 
