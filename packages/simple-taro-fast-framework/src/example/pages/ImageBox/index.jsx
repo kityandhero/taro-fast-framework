@@ -2,22 +2,80 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   FlexBox,
   ImageBox,
   Space,
+  CenterBox,
+  Ellipsis,
 } from 'taro-fast-component/es/customComponents';
 
 import { colStyle } from '@/customConfig/constants';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
+const imageBoxContainerStyle = {
+  display: 'block',
+  width: transformSize(220),
+};
+
+const imageBoxContainerMiniStyle = {
+  display: 'block',
+  width: transformSize(100),
+};
+
+const imageContainerStyle = {
+  padding: transformSize(2),
+  backgroundColor: 'red',
+};
+
+const src =
+  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45';
+
+const config1 = {
+  src,
+};
+
+const config2 = {
+  src,
+  imageBoxStyle: imageContainerStyle,
+};
+
+const config3 = {
+  src,
+  showMode: 'loading',
+};
+
+const config4 = {
+  src,
+  showOverlay: true,
+  overlayText: '售罄',
+};
+
+const config5 = {
+  src,
+  decoration: {
+    style: {
+      color: 'blue',
+    },
+    text: '装饰文字',
   },
-  ...cardStyle,
+};
+
+const config6 = {
+  src,
+  circle: true,
+};
+
+const config7 = {
+  src,
+  lazyLoad: true,
+};
+
+const config8 = {
+  src,
+  aspectRatio: 0.5,
 };
 
 // eslint-disable-next-line no-undef
@@ -32,157 +90,157 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const imageBoxContainerStyle = {
-      display: 'block',
-      width: transformSize(100),
-    };
-    const imageContainerStyle = {
-      padding: transformSize(2),
-      backgroundColor: 'red',
-    };
-
-    const src =
-      'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45';
-
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="普通使用" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="普通使用" config={config1}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config1} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="指定容器样式" config={config2}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config2} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="加载模式" config={config3}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config3} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="使用遮罩" config={config4}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config4} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="使用上层装饰" config={config5}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config5} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="使用上层装饰构建">
+          <View style={imageBoxContainerStyle}>
+            <ImageBox
+              src={src}
+              decorationBuilder={() => {
+                return (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      opacity: 0.5,
+                      backgroundColor: '#000',
+                      bottom: 0,
+                      left: 0,
+                      width: '100%',
+                      height: transformSize(68),
+                    }}
+                  >
+                    <CenterBox>
+                      <Ellipsis
+                        line={1}
+                        style={{
+                          color: '#fff',
+                          opacity: 1,
+                          padding: `${transformSize(13)} ${transformSize(16)}`,
+                        }}
+                      >
+                        装饰文字
+                      </Ellipsis>
+                    </CenterBox>
+                  </View>
+                );
+              }}
+            />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="imageMode [取值等同于微信Image]">
           <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card header="指定容器样式" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox imageBoxStyle={imageContainerStyle} src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card
-          header="showMode:loading"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox showMode="loading" src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card
-          header="showOverlay:true"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox showOverlay overlayText="售罄" src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card header="decoration" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox
-                decoration={{
-                  text: '1',
-                }}
-                src={src}
-              />
-            </View>
-          </Space>
-        </Card>
-        <Card
-          header="imageMode [取值等同于微信Image]"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="scaleToFill" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="aspectFit" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="aspectFill" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="widthFix" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="heightFix" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="top" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="bottom" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="center" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="left" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="right" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="top left" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="top right" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="bottom left" src={src} />
             </View>
 
-            <View style={imageBoxContainerStyle}>
+            <View style={imageBoxContainerMiniStyle}>
               <ImageBox imageMode="bottom right" src={src} />
             </View>
           </Space>
-        </Card>
-        <Card header="圆形轮廓" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox circle src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card header="LazyLoad" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox lazyLoad src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card header="指定长宽比" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox aspectRatio={0.5} src={src} />
-            </View>
+        </SimpleBox>
 
-            <View style={imageBoxContainerStyle}>
-              <ImageBox circle aspectRatio={0.5} src={src} />
-            </View>
-          </Space>
-        </Card>
-        <Card header="简单布局" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="圆形轮廓" config={config6}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config6} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="LazyLoad" config={config7}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox {...config7} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="指定长宽比" config={config8}>
+          <View style={imageBoxContainerStyle}>
+            <ImageBox aspectRatio={0.5} src={src} />
+          </View>
+
+          <View style={imageBoxContainerStyle}>
+            <ImageBox circle aspectRatio={0.5} src={src} />
+          </View>
+        </SimpleBox>
+
+        <SimpleBox header="简单布局">
           <FlexBox
             flexAuto="right"
             left={
@@ -201,16 +259,14 @@ export default class Index extends ContentPageBase {
             leftStyle={colStyle}
             right={
               <View style={{ width: transformSize(100) }}>
-                <ImageBox
-                  circle
-                  src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45"
-                />
+                <ImageBox circle src={src} />
               </View>
             }
             rightStyle={{ paddingLeft: transformSize(10) }}
           />
-        </Card>
-        *
+        </SimpleBox>
+
+        <PropertyBox config={ImageBox.defaultProps} labelWidth={220} />
       </Space>
     );
   };

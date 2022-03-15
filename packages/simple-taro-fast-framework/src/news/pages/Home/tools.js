@@ -44,10 +44,6 @@ export function buildItem({
                 src={image}
                 aspectRatio={0.87}
                 decorationBuilder={() => {
-                  console.log({
-                    a: 1,
-                  });
-
                   return (
                     <View
                       style={{

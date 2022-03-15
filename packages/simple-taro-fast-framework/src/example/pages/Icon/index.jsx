@@ -12,13 +12,8 @@ import {
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const icons = {
   main: [
@@ -146,10 +141,16 @@ const nameStyle = {
   margin: 'var(--tfc-20) 0',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '图标',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Color',
-    name: '颜色',
+    name: '内置图标',
+    description: '内置图标',
   };
 
   buildGrid = (keyPrefix = '', list = []) => {
@@ -178,33 +179,35 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="主要" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="主要">
           {this.buildGrid('main', icons.main)}
-        </Card>
+        </SimpleBox>
 
-        <Card header="文件" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="文件">
           {this.buildGrid('file', icons.file)}
-        </Card>
+        </SimpleBox>
 
-        <Card header="文本" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="文本">
           {this.buildGrid('text', icons.text)}
-        </Card>
+        </SimpleBox>
 
-        <Card header="箭头" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="箭头">
           {this.buildGrid('arrow', icons.arrow)}
-        </Card>
+        </SimpleBox>
 
-        <Card header="媒体控制" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="媒体控制">
           {this.buildGrid('mediaControl', icons.mediaControl)}
-        </Card>
+        </SimpleBox>
 
-        <Card header="多媒体" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="多媒体">
           {this.buildGrid('media', icons.media)}
-        </Card>
+        </SimpleBox>
 
-        <Card header="Logo" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="Logo">
           {this.buildGrid('logo', icons.logo)}
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={Icon.defaultProps} labelWidth={170} />
 
         <Card
           header="使用说明 :"

@@ -77,6 +77,11 @@ const config9 = {
   fontSize: 24,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '帮助提示',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'HelpBox',
