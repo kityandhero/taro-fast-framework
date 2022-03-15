@@ -32,11 +32,48 @@ export function buildItem({
         gap={20}
         list={articles}
         itemBuilder={(item) => {
-          const { image } = item;
+          const { title, image } = item;
 
           return (
             <View style={{ width: transformSize(280) }}>
-              <ImageBox src={image} aspectRatio={0.87} />
+              <ImageBox
+                src={image}
+                aspectRatio={0.87}
+                decorationBuilder={() => {
+                  console.log({
+                    a: 1,
+                  });
+
+                  return (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        opacity: 0.5,
+                        backgroundColor: '#000',
+                        bottom: 0,
+                        left: 0,
+                        width: '100%',
+                        height: transformSize(68),
+                      }}
+                    >
+                      <CenterBox>
+                        <Ellipsis
+                          line={1}
+                          style={{
+                            color: '#fff',
+                            opacity: 1,
+                            padding: `${transformSize(13)} ${transformSize(
+                              16,
+                            )}`,
+                          }}
+                        >
+                          {title}
+                        </Ellipsis>
+                      </CenterBox>
+                    </View>
+                  );
+                }}
+              />
             </View>
           );
         }}

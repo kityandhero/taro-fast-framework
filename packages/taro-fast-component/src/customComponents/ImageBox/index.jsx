@@ -76,6 +76,40 @@ class ImageBox extends BaseComponent {
     }
   }
 
+  /**
+   * 构建上层装饰器
+   */
+  buildDecoration = () => {
+    const { decoration, decorationBuilder } = this.props;
+
+    let decorationComponent = null;
+
+    if (isFunction(decorationBuilder)) {
+      decorationComponent = decorationBuilder();
+    } else {
+      if ((decoration || null) != null) {
+        const { style, text } = decoration;
+
+        decorationComponent = <View style={style || {}}>{text || ''}</View>;
+      }
+    }
+
+    if ((decorationComponent || null) == null) {
+      return null;
+    }
+
+    return (
+      <View
+        className={classNames(`${classPrefix}-decoration-box`)}
+        onClick={this.onImageClick}
+      >
+        <View className={classNames(`${classPrefix}-decoration-box-inner`)}>
+          {decorationComponent}
+        </View>
+      </View>
+    );
+  };
+
   renderFurther() {
     const {
       lazyLoad,
@@ -91,7 +125,6 @@ class ImageBox extends BaseComponent {
       showOverlay: showOverlayValue,
       overlayText: overlayTextValue,
       loadingEffect: loadingEffectValue,
-      decoration: decorationValue,
     } = {
       ...this.props,
     };
@@ -103,8 +136,6 @@ class ImageBox extends BaseComponent {
     const loadingEffect = loadingEffectValue || false;
 
     const overlayText = overlayTextValue || '';
-
-    const decoration = decorationValue || null;
 
     const borderRadiusDefaultStyle = borderRadiusValue
       ? { borderRadius: transformSize(8) }
@@ -174,18 +205,7 @@ class ImageBox extends BaseComponent {
             </View>
           ) : null}
 
-          {(decoration || null) != null ? (
-            <View
-              className={classNames(`${classPrefix}-decoration-box`)}
-              onClick={this.onImageClick}
-            >
-              <View
-                className={classNames(`${classPrefix}-decoration-box-inner`)}
-              >
-                <View style={decoration.style}>{decoration.text}</View>
-              </View>
-            </View>
-          ) : null}
+          {this.buildDecoration()}
 
           {showMode == 'box' ? (
             <Image
