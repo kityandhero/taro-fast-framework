@@ -1,10 +1,16 @@
-.tfc-help-box-no-background {
-  padding: 0;
-}
+@class-prefix-help-box: ~'tfc-help-box';
 
-.tfc-help-box-background {
-  margin-bottom: var(--tfc-20);
-  padding: var(--tfc-16);
-  background: #e1e1e1;
-  border-radius: var(--tfc-12);
+.@{class-prefix-help-box} {
+  --background: #e1e1e1;
+
+  &__no-background {
+    padding: 0;
+  }
+
+  &__background {
+    margin-bottom: var(--tfc-20);
+    padding: var(--tfc-16);
+    background: var(--background);
+    border-radius: var(--tfc-12);
+  }
 }

@@ -1,17 +1,11 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, Grid, Space } from 'taro-fast-component/es/customComponents';
+import { Grid, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const itemStyle = {
   border: `solid ${transformSize(1)} #999999`,
@@ -19,6 +13,16 @@ const itemStyle = {
   textAlign: 'center',
   color: '#999999',
   height: '100%',
+};
+
+const config1 = {
+  columns: 3,
+  gap: 8,
+};
+
+const config2 = {
+  columns: 3,
+  gap: 20,
 };
 
 // eslint-disable-next-line no-undef
@@ -30,13 +34,14 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'Grid',
     name: '宫格布局',
+    description: '宫格布局',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="基础用法" style={style} headerStyle={cardHeaderStyle}>
-          <Grid columns={3} gap={8}>
+        <SimpleBox header="用法展示" config={config1}>
+          <Grid {...config1}>
             <Grid.Item>
               <View style={itemStyle}>A</View>
             </Grid.Item>
@@ -53,14 +58,10 @@ export default class Index extends ContentPageBase {
               <View style={itemStyle}>E</View>
             </Grid.Item>
           </Grid>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="控制格子的跨度"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Grid columns={3} gap={8}>
+        <SimpleBox header="控制格子的跨度" config={config2}>
+          <Grid {...config2}>
             <Grid.Item>
               <View style={itemStyle}>A</View>
             </Grid.Item>
@@ -77,7 +78,19 @@ export default class Index extends ContentPageBase {
               <View style={itemStyle}>E</View>
             </Grid.Item>
           </Grid>
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox
+          header="Grid 可配置项以及默认值"
+          config={Grid.defaultProps}
+          labelWidth={170}
+        />
+
+        <PropertyBox
+          header="Grid.Item 可配置项以及默认值"
+          config={Grid.Item.defaultProps}
+          labelWidth={170}
+        />
       </Space>
     );
   };

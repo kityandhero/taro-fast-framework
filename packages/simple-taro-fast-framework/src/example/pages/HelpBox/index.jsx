@@ -1,14 +1,8 @@
-import { Card, HelpBox, Space } from 'taro-fast-component/es/customComponents';
+import { HelpBox, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const list = [
   {
@@ -25,6 +19,50 @@ const list = [
   },
 ];
 
+const config1 = {
+  list,
+};
+
+const config2 = {
+  list,
+  showTitle: false,
+};
+
+const config3 = {
+  title: '操作说明',
+  list,
+  showTitle: true,
+  showNumber: false,
+};
+
+const config4 = {
+  title: '操作说明',
+  list,
+  showTitle: true,
+  labelWidth: 80,
+};
+
+const config5 = {
+  title: '操作说明',
+  list,
+  showTitle: true,
+  useBackground: true,
+};
+
+const config6 = {
+  title: '操作说明',
+  list,
+  hidden: true,
+};
+
+const config7 = {
+  title: '操作说明',
+  list,
+  showTitle: true,
+  useBackground: true,
+  backgroundColor: '#34e245',
+};
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'HelpBox',
@@ -34,34 +72,35 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="一般用法" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox list={list} />
-        </Card>
+        <SimpleBox header="一般用法" config={config1}>
+          <HelpBox {...config1} />
+        </SimpleBox>
 
-        <Card header="隐藏标题" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox list={list} showTitle={false} />
-        </Card>
+        <SimpleBox header="隐藏标题" config={config2}>
+          <HelpBox {...config2} />
+        </SimpleBox>
 
-        <Card header="不显示行号" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox title="操作说明" showTitle showNumber={false} list={list} />
-        </Card>
+        <SimpleBox header="不显示行号" config={config3}>
+          <HelpBox {...config3} />
+        </SimpleBox>
 
-        <Card header="标题宽度" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox title="操作说明" showTitle labelWidth={80} list={list} />
-        </Card>
+        <SimpleBox header="标题宽度" config={config4}>
+          <HelpBox {...config4} />
+        </SimpleBox>
 
-        <Card header="无背景" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox
-            title="操作说明"
-            showTitle
-            useBackground={false}
-            list={list}
-          />
-        </Card>
+        <SimpleBox header="使用背景" config={config5}>
+          <HelpBox {...config5} />
+        </SimpleBox>
 
-        <Card header="隐藏" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox title="操作说明" showTitle hidden list={list} />
-        </Card>
+        <SimpleBox header="设置背景颜色" config={config7}>
+          <HelpBox {...config7} />
+        </SimpleBox>
+
+        <SimpleBox header="隐藏" config={config6}>
+          <HelpBox {...config6} />
+        </SimpleBox>
+
+        <PropertyBox config={HelpBox.defaultProps} labelWidth={170} />
       </Space>
     );
   };

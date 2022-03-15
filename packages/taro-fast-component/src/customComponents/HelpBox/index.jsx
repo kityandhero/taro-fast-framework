@@ -15,6 +15,8 @@ import DataGrid from '../DataGrid';
 
 import './index.less';
 
+const classPrefix = `tfc-help-box`;
+
 const defaultProps = {
   title: '帮助信息',
   showTitle: true,
@@ -22,10 +24,21 @@ const defaultProps = {
   labelWidth: null,
   list: [],
   useBackground: false,
+  backgroundColor: '#e1e1e1',
   hidden: false,
 };
 
 class HelpBox extends BaseComponent {
+  buildStyle = () => {
+    const { useBackground, backgroundColor } = this.props;
+
+    return {
+      ...(useBackground && stringIsNullOrWhiteSpace(backgroundColor)
+        ? {}
+        : { '--background': backgroundColor }),
+    };
+  };
+
   renderFurther() {
     const {
       title: titleValue,
@@ -35,19 +48,7 @@ class HelpBox extends BaseComponent {
       labelWidth: labelWidthValue,
       list: listData,
       useBackground,
-    } = {
-      ...{
-        title: '',
-        showTitle: true,
-        showNumber: true,
-        showDivider: true,
-        labelWidth: null,
-        list: [],
-        useBackground: false,
-        hidden: false,
-      },
-      ...(this.props || {}),
-    };
+    } = this.props;
 
     const title = titleValue || '帮助信息';
     let list = [];
@@ -83,14 +84,17 @@ class HelpBox extends BaseComponent {
 
     const customLabelWidth = labelWidth > 0;
 
+    const style = this.buildStyle();
+
     return (
       <View
         className={classNames(
-          'tfc-help-box',
+          classPrefix,
           useBackground
-            ? 'tfc-help-box-background'
-            : 'tfc-help-box-no-background',
+            ? `${classPrefix}__background`
+            : `${classPrefix}__no-background`,
         )}
+        style={style}
       >
         {showTitle ? (
           showDivider ? (
