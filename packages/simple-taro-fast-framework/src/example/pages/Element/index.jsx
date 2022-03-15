@@ -19,7 +19,7 @@ const o = {
     },
     {
       id: 'ColorText',
-      name: '装饰文字',
+      name: '文字渲染',
       path: pathCollection.example.colorText.path,
     },
     {

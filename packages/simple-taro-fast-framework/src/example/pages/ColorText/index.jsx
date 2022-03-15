@@ -2,24 +2,98 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Icon,
   ImageBox,
   ColorText,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 import logoImg from '../../../assets/images/logo.png';
 
 const { IconEdit } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
+const config1 = {
+  textPrefix: '前缀',
+  text: '文本文字',
+};
+
+const config2 = {
+  textPrefix: '前缀',
+  separator: '@',
+  text: '文本文字',
+};
+
+const config3 = {
+  textPrefix: '前缀',
+  separator: '@',
+  text: '文本文字',
+  canCopy: true,
+};
+
+const config4 = {
+  textPrefix: '前缀',
+  separator: '@',
+  text: '文本文字',
+  canCopy: true,
+  copySuccessCallback: (v) => {
+    console.log(`copySuccessCallback: ${v}`);
   },
-  ...cardStyle,
+};
+
+const config5 = {
+  textPrefix: '前缀',
+  text: '文本文字',
+  color: '#e54321',
+};
+
+const config6 = {
+  textPrefix: '前缀',
+  text: '文本文字',
+  randomColor: true,
+  randomSeed: 43,
+  seedOffset: 23,
+};
+
+const config7 = {
+  textPrefix: '前缀',
+  text: '文本文字',
+  textPrefixStyle: { color: '#67ca31' },
+};
+
+const config8 = {
+  icon: <IconEdit size={36} color="#ff3ce7" />,
+  text: '文本文字',
+};
+
+const config9 = {
+  icon: (
+    <View style={{ width: transformSize(40) }}>
+      <ImageBox circle src={logoImg} />
+    </View>
+  ),
+  text: '文本文字',
+};
+
+const config10 = {
+  textPrefix: '前缀',
+  text: '文本文字',
+  separatorStyle: {
+    color: '#67ca31',
+    margin: `0 ${transformSize(24)}`,
+  },
+};
+
+const config11 = {
+  icon: <IconEdit size={36} color="#ff3ce7" />,
+  textPrefix: '前缀',
+  text: '文本文字',
+  separatorStyle: {
+    color: '#67ca31',
+    margin: `0 ${transformSize(24)}`,
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -30,102 +104,58 @@ definePageConfig({
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ColorText',
-    name: '装饰文字',
+    name: '文字渲染',
+    description: '文字渲染',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="一般用法" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText textPrefix="前缀" text="文本文字" />
-        </Card>
+        <SimpleBox header="一般用法" config={config1}>
+          <ColorText {...config1} />
+        </SimpleBox>
 
-        <Card header="自定义分隔符" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText textPrefix="前缀" separator="@" text="文本文字" />
-        </Card>
+        <SimpleBox header="自定义分隔符" config={config2}>
+          <ColorText {...config2} />
+        </SimpleBox>
 
-        <Card header="点击复制" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText textPrefix="前缀" separator="@" text="文本文字" canCopy />
-        </Card>
+        <SimpleBox header="点击复制" config={config3}>
+          <ColorText {...config3} />
+        </SimpleBox>
 
-        <Card
-          header="点击复制并进行回调"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <ColorText
-            textPrefix="前缀"
-            separator="@"
-            text="文本文字"
-            canCopy
-            copySuccessCallback={(v) => {
-              console.log(`copySuccessCallback: ${v}`);
-            }}
-          />
-        </Card>
+        <SimpleBox header="点击复制并进行回调 [查看控制台]" config={config4}>
+          <ColorText {...config4} />
+        </SimpleBox>
 
-        <Card header="颜色" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText textPrefix="前缀" text="文本文字" color="#e54321" />
-        </Card>
+        <SimpleBox header="颜色" config={config5}>
+          <ColorText {...config5} />
+        </SimpleBox>
 
-        <Card header="随机颜色" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText
-            textPrefix="前缀"
-            text="文本文字"
-            randomColor
-            randomSeed={43}
-            seedOffset={23}
-          />
-        </Card>
+        <SimpleBox header="随机颜色" config={config6}>
+          <ColorText {...config6} />
+        </SimpleBox>
 
-        <Card header="前缀样式" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText
-            textPrefix="前缀"
-            text="文本文字"
-            textPrefixStyle={{ color: '#67ca31' }}
-          />
-        </Card>
+        <SimpleBox header="前缀样式" config={config7}>
+          <ColorText {...config7} />
+        </SimpleBox>
 
-        <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText
-            icon={<IconEdit size={36} color="#ff3ce7" />}
-            text="文本文字"
-          />
-        </Card>
+        <SimpleBox header="附带图标" config={config8}>
+          <ColorText {...config8} />
+        </SimpleBox>
 
-        <Card header="附带图片" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText
-            icon={
-              <View style={{ width: transformSize(40) }}>
-                <ImageBox circle src={logoImg} />
-              </View>
-            }
-            text="文本文字"
-          />
-        </Card>
+        <SimpleBox header="附带图片" config={config9}>
+          <ColorText {...config9} />
+        </SimpleBox>
 
-        <Card header="分隔符样式" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText
-            textPrefix="前缀"
-            text="文本文字"
-            separatorStyle={{
-              color: '#67ca31',
-              margin: `0 ${transformSize(24)}`,
-            }}
-          />
-        </Card>
+        <SimpleBox header="分隔符样式" config={config10}>
+          <ColorText {...config10} />
+        </SimpleBox>
 
-        <Card header="复杂样例" style={style} headerStyle={cardHeaderStyle}>
-          <ColorText
-            icon={<IconEdit size={32} color="#ff3ce7" />}
-            textPrefix="前缀"
-            text="文本文字"
-            separatorStyle={{
-              color: '#67ca31',
-              margin: `0 ${transformSize(24)}`,
-            }}
-          />
-        </Card>
+        <SimpleBox header="复杂样例" config={config11}>
+          <ColorText {...config11} />
+        </SimpleBox>
+
+        <PropertyBox config={ColorText.defaultProps} labelWidth={270} />
       </Space>
     );
   };
