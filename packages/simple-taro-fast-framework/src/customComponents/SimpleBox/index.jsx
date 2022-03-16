@@ -32,6 +32,7 @@ const defaultProps = {
   helpTitle: '示例配置',
   config: {},
   description: null,
+  extra: null,
 };
 
 class SimpleBox extends Component {
@@ -57,7 +58,7 @@ class SimpleBox extends Component {
   };
 
   render() {
-    const { space, prefix, header, description, helpTitle, children } =
+    const { space, prefix, header, description, helpTitle, extra, children } =
       this.props;
 
     const list = this.buildList();
@@ -83,6 +84,7 @@ class SimpleBox extends Component {
             : `备注: ${description}.`
         }
         space={space}
+        extra={extra}
       >
         {children}
 

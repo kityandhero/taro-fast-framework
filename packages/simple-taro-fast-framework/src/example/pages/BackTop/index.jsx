@@ -7,108 +7,24 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import {
   Space,
-  Card,
   BackTop,
   HorizontalCenterBox,
-  DataGrid,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+// import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
-
-const configList = [
-  {
-    label: 'visible',
-    value: '是否显示, 默认 false',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'bodyStyle',
-    value: '包裹容的样式 默认 {}',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'opacity',
-    value: '不透明不 默认 0.8',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'icon',
-    value: '使用的图标, 默认 ""',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'iconSize',
-    value: '图标大小, 默认 40',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'size',
-    value: '整体尺寸, 默认 80',
-    ellipsis: false,
-    canCopy: true,
-  },
-
-  {
-    label: 'zIndex',
-    value: '垂直层次, 默认 100',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'bottom',
-    value: '距离窗口底部距离, 默认 160',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'right',
-    value: '距离窗口右侧距离, 默认 40',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'transparent',
-    value: '容器是否透明, 默认 false',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'backgroundColor',
-    value: '容器背景色, 默认 var(--tfc-color-light)',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'circle',
-    value: '原型轮廓, 默认 true',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'onClick',
-    value: '点击事件, 默认 null',
-    ellipsis: false,
-    canCopy: true,
-  },
-];
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '返回头部',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Badge',
-    name: '徽记',
+    name: '返回头部',
+    description: '返回头部组件',
   };
 
   constructor(props) {
@@ -143,11 +59,6 @@ export default class Index extends ContentPageBase {
   }
 
   scrollToTop = () => {
-    // console.log({
-    //   info: 'scrollToTop',
-    //   v: typeof pageScrollTo,
-    // });
-
     pageScrollTo({
       scrollTop: 0,
       duration: 300,
@@ -162,7 +73,7 @@ export default class Index extends ContentPageBase {
         <Space direction="vertical" fillWidth>
           <View
             style={{
-              height: transformSize(600),
+              height: transformSize(800),
               border: 'var(--tfc-2) solid #ccc',
               backgroundColor: '#ccc',
             }}
@@ -172,7 +83,7 @@ export default class Index extends ContentPageBase {
             </HorizontalCenterBox>
           </View>
 
-          <Card
+          {/* <Card
             header="可配置属性说明"
             style={style}
             headerStyle={cardHeaderStyle}
@@ -185,7 +96,7 @@ export default class Index extends ContentPageBase {
               emptyValue="暂无"
               emptyStyle={{ color: '#ccc' }}
             />
-          </Card>
+          </Card> */}
 
           <BackTop visible={visible1} onClick={this.scrollToTop} />
 
@@ -200,6 +111,8 @@ export default class Index extends ContentPageBase {
           />
 
           <BackTop visible={visible1} bottom={400} onClick={this.scrollToTop} />
+
+          <PropertyBox config={BackTop.defaultProps} labelWidth={220} />
         </Space>
       </View>
     );

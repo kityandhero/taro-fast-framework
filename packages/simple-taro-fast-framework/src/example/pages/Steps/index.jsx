@@ -109,25 +109,6 @@ const config5 = {
   listStatus: ['finish', 'finish', 'process'],
 };
 
-const config6 = {
-  dotColor: '#3ee63e',
-  list: [
-    {
-      title: '标题1',
-      description: '描述',
-    },
-    {
-      title: '标题2',
-      description: '描述',
-    },
-    {
-      title: '标题3',
-      description: '描述',
-    },
-  ],
-  listStatus: ['finish', 'process', 'wait'],
-};
-
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '步骤条',
@@ -145,10 +126,6 @@ export default class Index extends ContentPageBase {
       <Space direction="vertical" fillWidth>
         <SimpleBox header="横向" config={config1}>
           <Steps {...config1} />
-        </SimpleBox>
-
-        <SimpleBox header="设置颜色" config={config6}>
-          <Steps {...config6} />
         </SimpleBox>
 
         <SimpleBox header="横向（失败状态）" config={config2}>

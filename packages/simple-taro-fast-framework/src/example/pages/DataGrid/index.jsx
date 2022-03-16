@@ -1,15 +1,9 @@
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
+import { DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const list = [
   {
@@ -85,92 +79,90 @@ const alignTopListData = [
   },
 ];
 
+const config1 = {
+  list,
+  border: true,
+  column: 2,
+  size: 'small',
+  labelStyle: { width: transformSize(80) },
+  emptyValue: '暂无',
+  emptyStyle: { color: '#ccc' },
+};
+
+const config2 = {
+  list,
+  border: false,
+  column: 3,
+  size: 'small',
+  labelStyle: { width: transformSize(80) },
+  emptyValue: '暂无',
+  emptyStyle: { color: '#ccc' },
+};
+
+const config3 = {
+  list: longTextListData,
+  column: 3,
+  size: 'small',
+  labelStyle: { width: transformSize(140) },
+  emptyValue: '暂无',
+  emptyStyle: { color: '#ccc' },
+};
+
+const config4 = {
+  list: alignTopListData,
+  column: 3,
+  size: 'small',
+  labelStyle: { width: transformSize(140) },
+  emptyValue: '暂无',
+  emptyStyle: { color: '#ccc' },
+  columnVerticalAlign: 'flex-start',
+};
+
+const config5 = {
+  list,
+  border: true,
+  layout: 'row',
+  size: 'small',
+  emptyValue: '暂无',
+  emptyStyle: { color: '#ccc' },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '数据表格',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'DataGrid',
     name: '数据表格',
+    description: '数据表格组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="列布局"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="2列"
-        >
-          <DataGrid
-            list={list}
-            border
-            column={2}
-            size="small"
-            labelStyle={{ width: transformSize(80) }}
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        <SimpleBox header="列布局" extra="2列" config={config1}>
+          <DataGrid {...config1} />
+        </SimpleBox>
 
-        <Card
-          header="无边框列"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="3列"
-        >
-          <DataGrid
-            list={list}
-            border={false}
-            column={3}
-            size="small"
-            labelStyle={{ width: transformSize(80) }}
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        <SimpleBox header="无边框列" extra="3列" config={config2}>
+          <DataGrid {...config2} />
+        </SimpleBox>
 
-        <Card
-          header="长文本展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="3列"
-        >
-          <DataGrid
-            list={longTextListData}
-            column={3}
-            size="small"
-            labelStyle={{ width: transformSize(140) }}
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        <SimpleBox header="长文本展示" extra="3列" config={config3}>
+          <DataGrid {...config3} />
+        </SimpleBox>
 
-        <Card
-          header="顶部对齐"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          extra="3列"
-        >
-          <DataGrid
-            list={alignTopListData}
-            column={3}
-            size="small"
-            labelStyle={{ width: transformSize(140) }}
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-            columnVerticalAlign="flex-start"
-          />
-        </Card>
+        <SimpleBox header="顶部对齐" extra="3列" config={config4}>
+          <DataGrid {...config4} />
+        </SimpleBox>
 
-        <Card header="行布局" style={style} headerStyle={cardHeaderStyle}>
-          <DataGrid
-            list={list}
-            border
-            layout="row"
-            size="small"
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        <SimpleBox header="行布局" extra="3列" config={config5}>
+          <DataGrid {...config5} />
+        </SimpleBox>
+
+        <PropertyBox config={DataGrid.defaultProps} labelWidth={280} />
       </Space>
     );
   };

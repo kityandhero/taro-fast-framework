@@ -3,29 +3,105 @@ import {
   showInfoMessage,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Icon,
   SearchBar,
-  HelpBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSketch } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
+const config1 = {
+  style: {
+    margin: transformSize(40),
   },
-  ...cardStyle,
+  mode: 'search',
+  onSearch: (v) => {
+    console.log({
+      message: `触发搜索 ${v}`,
+    });
+  },
 };
+
+const config2 = {
+  style: {
+    margin: transformSize(40),
+    borderRadius: transformSize(100),
+  },
+  mode: 'search',
+  onSearch: (v) => {
+    console.log({
+      message: `触发搜索 ${v}`,
+    });
+  },
+};
+
+const config3 = {
+  style: {
+    margin: transformSize(40),
+  },
+  mode: 'navigate',
+  searchStyle: {},
+  onNavigate: () => {
+    console.log({
+      message: `触发跳转`,
+    });
+  },
+};
+
+const config4 = {
+  style: {
+    margin: transformSize(40),
+    borderRadius: transformSize(100),
+  },
+  mode: 'navigate',
+  showSearch: false,
+  onNavigate: () => {
+    console.log({
+      message: `触发跳转`,
+    });
+  },
+};
+
+const config5 = {
+  style: {
+    margin: transformSize(40),
+    borderRadius: transformSize(100),
+  },
+  align: 'center',
+  icon: <IconSketch size={28} color="#6b6ead" />,
+  placeholder: '搜索商品',
+  mode: 'navigate',
+  searchStyle: {
+    color: '#4532e5',
+  },
+  valueStyle: {
+    color: '#4532e5',
+    align: 'center',
+  },
+  placeholderStyle: {
+    color: '#4532e5',
+  },
+  onNavigate: () => {
+    console.log({
+      message: `触发跳转`,
+    });
+  },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '搜索条',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'SearchBar',
     name: '搜索条',
+    description: '搜索条组件',
   };
 
   handleClick = (type) => {
@@ -50,97 +126,27 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="搜索模式"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <SearchBar
-            style={{
-              margin: transformSize(40),
-            }}
-            mode="search"
-            onSearch={this.handleSearch}
-          />
+        <SimpleBox header="搜索模式" config={config1} extra="查看控制台">
+          <SearchBar {...config1} />
+        </SimpleBox>
 
-          <SearchBar
-            style={{
-              margin: transformSize(40),
-              borderRadius: transformSize(100),
-            }}
-            mode="search"
-            onSearch={this.handleSearch}
-          />
-        </Card>
+        <SimpleBox header="搜索模式 半圆形" config={config2} extra="查看控制台">
+          <SearchBar {...config2} />
+        </SimpleBox>
 
-        <Card
-          header="跳转模式"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <SearchBar
-            style={{
-              margin: transformSize(40),
-              borderRadius: transformSize(100),
-            }}
-            mode="navigate"
-            searchStyle={{}}
-            onNavigate={this.handleNavigate}
-          />
+        <SimpleBox header="跳转模式" config={config3} extra="查看控制台">
+          <SearchBar {...config3} />
+        </SimpleBox>
 
-          <SearchBar
-            style={{
-              margin: transformSize(40),
-              borderRadius: transformSize(100),
-            }}
-            mode="navigate"
-            showSearch={false}
-            onNavigate={this.handleNavigate}
-          />
-        </Card>
+        <SimpleBox header="跳转模式 半圆形" config={config4} extra="查看控制台">
+          <SearchBar {...config4} />
+        </SimpleBox>
 
-        <Card
-          header="自定义样式"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <SearchBar
-            style={{
-              margin: transformSize(40),
-              borderRadius: transformSize(100),
-            }}
-            align="center"
-            icon={<IconSketch size={28} color="#6b6ead" />}
-            placeholder="搜索商品"
-            mode="navigate"
-            searchStyle={{
-              color: '#4532e5',
-            }}
-            valueStyle={{
-              color: '#4532e5',
-              align: 'center',
-            }}
-            placeholderStyle={{
-              color: '#4532e5',
-            }}
-            onNavigate={this.handleNavigate}
-          />
-        </Card>
+        <SimpleBox header="自定义样式" config={config5} extra="查看控制台">
+          <SearchBar {...config5} />
+        </SimpleBox>
 
-        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
-          <HelpBox
-            showTitle={false}
-            showNumber={false}
-            list={[
-              {
-                text: '支持搜索与跳转模式，具体属性参考源代码与样例.',
-              },
-            ]}
-          />
-        </Card>
+        <PropertyBox config={SearchBar.defaultProps} labelWidth={220} />
       </Space>
     );
   };

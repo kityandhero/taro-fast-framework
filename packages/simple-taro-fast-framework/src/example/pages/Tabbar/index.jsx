@@ -4,6 +4,7 @@ import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { Divider, Tabbar } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -123,10 +124,16 @@ const items2 = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '底部导航栏',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Tabbar',
     name: '底部导航栏',
+    description: '底部导航栏组件',
   };
 
   constructor(props) {
@@ -168,6 +175,8 @@ export default class Index extends ContentPageBase {
         <Divider>固定底部</Divider>
 
         <Tabbar value={value} fixed items={items2} onClick={this.changeTab} />
+
+        <PropertyBox config={Tabbar.defaultProps} labelWidth={220} />
       </View>
     );
   };

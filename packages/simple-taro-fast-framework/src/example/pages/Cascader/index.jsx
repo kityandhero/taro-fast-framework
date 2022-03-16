@@ -1,14 +1,8 @@
-import { Cascader, Card, Space } from 'taro-fast-component/es/customComponents';
+import { Cascader, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const options = [
   {
@@ -157,30 +151,35 @@ const options = [
   },
 ];
 
+const config1 = {
+  value: [
+    options[2].value,
+    options[2].children[1].value,
+    options[2].children[1].children[1].value,
+  ],
+  options,
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '级联选择',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Cascader',
     name: '级联选择',
+    description: '级联选择组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="组件展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Cascader
-            value={[
-              options[2].value,
-              options[2].children[1].value,
-              options[2].children[1].children[1].value,
-            ]}
-            options={options}
-          />
-        </Card>
+        <SimpleBox header="组件展示" config={config1}>
+          <Cascader {...config1} />
+        </SimpleBox>
+
+        <PropertyBox config={Cascader.defaultProps} labelWidth={220} />
       </Space>
     );
   };
