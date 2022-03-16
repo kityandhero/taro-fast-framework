@@ -4,6 +4,7 @@
 .@{class-prefix-step} {
   --line-to-next-color: #e5e5e5;
   --icon-color: #e5e5e5;
+  --dot-color: var(--tfc-color-primary);
 
   .@{class-prefix-step}-indicator {
     position: relative;
@@ -39,6 +40,7 @@
 
   &-status-process {
     --icon-color: var(--tfc-color-primary);
+
     .@{class-prefix-step}-title {
       color: var(--tfc-color-primary);
     }
@@ -53,7 +55,7 @@
 }
 
 .@{class-prefix-steps} {
-  --title-font-size: var(--tfc-6);
+  --title-font-size: var(--tfc-26);
   --description-font-size: var(--tfc-24);
   --indicator-margin-right: 0;
   --icon-size: var(--tfc-18);
@@ -91,12 +93,14 @@
     .@{class-prefix-step}-content {
       text-align: center;
       font-size: var(--description-font-size);
-      padding-top: var(--tfc-4);
+      padding-top: var(--tfc-22);
+
       .@{class-prefix-step}-title {
         font-size: var(--title-font-size);
       }
+
       .@{class-prefix-step}-description {
-        margin-top: var(--tfc-4);
+        margin-top: var(--tfc-8);
         color: var(--tfc-color-weak);
       }
     }
@@ -121,6 +125,7 @@
           transform: translateX(-50%);
           height: 100%;
         }
+
         .@{class-prefix-step}-icon-container {
           top: calc(var(--title-font-size) * 1.5 / 2);
           left: 50%;
@@ -155,9 +160,36 @@
 }
 
 .@{class-prefix-step}-icon-dot {
+  position: relative;
   display: block;
   width: var(--tfc-16);
   height: var(--tfc-16);
-  background: currentColor;
+  background: var(--dot-color);
   border-radius: var(--tfc-8);
+}
+
+.@{class-prefix-step}-icon-dot-processing {
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - var(--tfc-1) * 2);
+    height: calc(100% - var(--tfc-1) * 2);
+    border: var(--tfc-1) solid var(--dot-color);
+    border-radius: 50%;
+    animation: tfc-step-icon-dot-processing 1.2s infinite ease-in-out;
+    content: '';
+  }
+}
+
+@keyframes tfc-step-icon-dot-processing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
 }

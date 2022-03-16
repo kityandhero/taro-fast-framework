@@ -1,118 +1,160 @@
-import { transformSize } from 'taro-fast-common/es/utils/tools';
-import {
-  Card,
-  Steps,
-  Icon,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Steps, Icon, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { Step } = Steps;
 const { IconVolumePlus } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  list: [
+    {
+      title: '标题1',
+      description: '描述',
+    },
+    {
+      title: '标题2',
+      description: '描述',
+    },
+    {
+      title: '标题3',
+      description: '描述',
+    },
+  ],
+  listStatus: ['finish', 'process', 'wait'],
 };
+
+const config2 = {
+  list: [
+    {
+      title: '第一步',
+    },
+    {
+      title: '第二步',
+    },
+    {
+      title: '第三步',
+    },
+  ],
+  listStatus: ['finish', 'error'],
+};
+
+const config3 = {
+  direction: 'vertical',
+  list: [
+    {
+      title: '填写机构信息',
+    },
+    {
+      title: '签约机构',
+    },
+    {
+      title: '关联服务区',
+    },
+  ],
+  listStatus: ['finish', 'process', 'wait'],
+};
+
+const config4 = {
+  direction: 'vertical',
+  list: [
+    {
+      title: '填写机构信息',
+      status: 'process',
+      description: '完成时间: 2020-12-01 12:30',
+    },
+    {
+      title: '签约机构',
+      status: 'finish',
+      description: '完成时间: 2020-12-01 12:30',
+    },
+    {
+      title: '关联服务区',
+      status: 'finish',
+      description: '完成时间: 2020-12-01 12:30',
+    },
+    {
+      title: '审批失败',
+      status: 'error',
+    },
+  ],
+  listStatus: ['finish', 'process'],
+};
+
+const config5 = {
+  direction: 'vertical',
+  current: 1,
+  titleFontSize: 28,
+  descriptionFontSize: 26,
+  indicatorMarginRight: 12,
+  iconSize: 20,
+  list: [
+    {
+      title: '填写机构信息',
+      description: '这里是一些描述',
+      icon: <IconVolumePlus size={34} />,
+    },
+    {
+      title: '签约机构',
+      description: '这里是一些描述',
+      icon: <IconVolumePlus size={34} />,
+    },
+    {
+      title: '关联服务区',
+      description: '这里是一些描述',
+      icon: <IconVolumePlus size={34} />,
+    },
+  ],
+  listStatus: ['finish', 'finish', 'process'],
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '步骤条',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Steps',
     name: '步骤条',
+    description: '步骤条组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="横向" style={style} headerStyle={cardHeaderStyle}>
-          <Steps current={1}>
-            <Step title="标题1" description="描述" />
-            <Step title="标题2" description="描述" />
-            <Step title="标题3" description="描述" />
-          </Steps>
-        </Card>
+        <SimpleBox header="横向" config={config1}>
+          <Steps {...config1} />
+        </SimpleBox>
 
-        <Card
-          header="横向（失败状态）"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Steps current={2}>
-            <Step title="第一步" />
-            <Step title="第二步" />
-            <Step title="第三步" status="error" />
-          </Steps>
-        </Card>
+        <SimpleBox header="横向（失败状态）" config={config2}>
+          <Steps {...config2} />
+        </SimpleBox>
 
-        <Card header="纵向" style={style} headerStyle={cardHeaderStyle}>
-          <Steps direction="vertical">
-            <Step title="填写机构信息" status="process" />
-            <Step title="签约机构" status="wait" />
-            <Step title="关联服务区" status="wait" />
-          </Steps>
-        </Card>
+        <SimpleBox header="纵向" config={config3}>
+          <Steps {...config3} />
+        </SimpleBox>
 
-        <Card
-          header="纵向（失败状态）"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Steps direction="vertical">
-            <Step
-              title="填写机构信息"
-              status="finish"
-              description="完成时间: 2020-12-01 12:30"
-            />
-            <Step
-              title="签约机构"
-              status="finish"
-              description="完成时间: 2020-12-01 12:30"
-            />
-            <Step
-              title="关联服务区"
-              status="finish"
-              description="完成时间: 2020-12-01 12:30"
-            />
-            <Step title="审批失败" status="error" />
-          </Steps>
-        </Card>
+        <SimpleBox header="纵向（失败状态）" config={config4}>
+          <Steps {...config4} />
+        </SimpleBox>
 
-        <Card
-          header="自定义图标和大小"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Steps
-            direction="vertical"
-            current={1}
-            style={{
-              '--title-font-size': transformSize(17),
-              '--description-font-size': transformSize(15),
-              '--indicator-margin-right': transformSize(12),
-              '--icon-size': transformSize(22),
-            }}
-          >
-            <Step
-              title="填写机构信息"
-              description="这里是一些描述"
-              icon={<IconVolumePlus />}
-            />
-            <Step
-              title="签约机构"
-              description="这里是一些描述"
-              icon={<IconVolumePlus />}
-            />
-            <Step
-              title="关联服务区"
-              description="这里是一些描述"
-              icon={<IconVolumePlus />}
-            />
-          </Steps>
-        </Card>
+        <SimpleBox header="自定义图标和大小" config={config5}>
+          <Steps {...config5} />
+        </SimpleBox>
+
+        <PropertyBox
+          header="Steps 可配置项以及默认值"
+          config={Steps.defaultProps}
+          labelWidth={280}
+        />
+
+        <PropertyBox
+          header="Step 可配置项以及默认值"
+          config={Step.defaultProps}
+          labelWidth={150}
+        />
       </Space>
     );
   };

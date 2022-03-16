@@ -1,62 +1,185 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 
 import {
-  withNativeProps,
-  mergeProps,
   inCollection,
+  stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+
+import BaseComponent from '../BaseComponent';
+
+import Step from './step';
 
 const classPrefix = `tfc-steps`;
 const stepClassPrefix = `tfc-step`;
 
-const defaultIcon = <View className={`${stepClassPrefix}-icon-dot`} />;
-
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
-  current: 0,
   direction: 'horizontal',
+  list: [],
+  listStatus: [],
+  titleFontSize: 26,
+  descriptionFontSize: 24,
+  indicatorMarginRight: 0,
+  iconSize: 18,
 };
 
-export const Steps = (p) => {
-  const props = mergeProps(defaultProps, p);
-  const { direction: directionSource, current } = props;
+class Steps extends BaseComponent {
+  getDirection = () => {
+    const { direction } = this.props;
 
-  const direction = inCollection(directionCollection, directionSource)
-    ? directionSource
-    : 'horizontal';
+    return inCollection(directionCollection, direction)
+      ? direction
+      : 'horizontal';
+  };
 
-  const classString = classNames(classPrefix, `${classPrefix}-${direction}`);
+  getStyle = () => {
+    const {
+      titleFontSize,
+      descriptionFontSize,
+      indicatorMarginRight,
+      iconSize,
+    } = this.props;
 
-  return withNativeProps(
-    props,
-    <View className={classString}>
-      {React.Children.map(props.children, (child, index) => {
-        if (!React.isValidElement(child)) {
-          return child;
+    return {
+      '--title-font-size': transformSize(titleFontSize),
+      '--description-font-size': transformSize(descriptionFontSize),
+      '--indicator-margin-right': transformSize(indicatorMarginRight),
+      '--icon-size': transformSize(iconSize),
+    };
+  };
+
+  getIcon = (status) => {
+    return (
+      <View
+        className={classNames(`${stepClassPrefix}-icon-dot`, {
+          [`${stepClassPrefix}-icon-dot-processing`]: status === 'process',
+        })}
+      />
+    );
+  };
+
+  buildListStatus = () => {
+    const { listStatus } = this.props;
+
+    const listStatusData = isArray(listStatus) ? listStatus : [];
+
+    return listStatusData;
+  };
+
+  buildList = () => {
+    const { list } = this.props;
+
+    const listData = isArray(list) ? list : [];
+
+    const listStatus = this.buildListStatus();
+    const count = listData.length;
+    const statusCount = listStatus.length;
+
+    const result = [];
+
+    let statusPrev = '';
+
+    listData.forEach((item, index) => {
+      let status =
+        count <= statusCount
+          ? listStatus[index]
+          : index <= statusCount
+          ? listStatus[index]
+          : '';
+
+      if (stringIsNullOrWhiteSpace(status)) {
+        if (statusPrev === 'finish') {
+          status = 'process';
+        } else {
+          status = 'wait';
         }
-        const childProps = child.props;
-        let status = childProps.status || 'wait';
+      }
 
-        if (index < current) {
-          status = childProps.status || 'finish';
-        } else if (index === current) {
-          status = childProps.status || 'process';
-        }
+      statusPrev = status;
 
-        const icon = childProps.icon ?? defaultIcon;
+      delete item.status;
 
-        return React.cloneElement(child, {
-          status,
-          icon,
-        });
-      })}
-    </View>,
-  );
-};
+      result.push({ ...item, ...{ status } });
+    });
+
+    return result;
+  };
+
+  buildItem = ({
+    title = '',
+    description = '',
+    icon,
+    status = 'wait',
+    index,
+  }) => {
+    return (
+      <Step
+        key={`${this.keyPrefix}_${index}`}
+        title={title || ''}
+        description={description || ''}
+        icon={icon || this.getIcon(status)}
+        status={status || 'wait'}
+      />
+    );
+  };
+
+  renderFurther() {
+    const { className, children } = this.props;
+
+    const direction = this.getDirection();
+
+    const classString = classNames(
+      classPrefix,
+      `${classPrefix}-${direction}`,
+      className,
+    );
+
+    const style = this.getStyle();
+
+    const list = this.buildList();
+
+    return (
+      <View className={classString} style={style}>
+        {list.map((item, index) => {
+          const {
+            hidden,
+            title,
+            description,
+            icon,
+            status: statusSource,
+          } = {
+            ...Step.defaultProps,
+            ...item,
+          };
+
+          if (hidden) {
+            return null;
+          }
+
+          return this.buildItem({
+            hidden,
+            title,
+            description,
+            icon,
+            status: !stringIsNullOrWhiteSpace(statusSource)
+              ? statusSource
+              : 'wait',
+            index,
+          });
+        })}
+
+        {children || null}
+      </View>
+    );
+  }
+}
 
 Steps.defaultProps = {
   ...defaultProps,
 };
+
+export default Steps;

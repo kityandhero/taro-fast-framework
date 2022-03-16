@@ -1,11 +1,9 @@
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 
-import {
-  withNativeProps,
-  mergeProps,
-  inCollection,
-} from 'taro-fast-common/es/utils/tools';
+import { inCollection } from 'taro-fast-common/es/utils/tools';
+
+import BaseComponent from '../BaseComponent';
 
 const classPrefix = `tfc-step`;
 
@@ -15,35 +13,43 @@ const defaultProps = {
   title: '',
   description: '',
   icon: null,
-  status: 'wait',
 };
 
-export const Step = (p) => {
-  const props = mergeProps(defaultProps, p);
+class Step extends BaseComponent {
+  getStatus = () => {
+    const { status } = this.props;
 
-  const { title, description, icon, status: statusSource } = props;
+    return inCollection(statusCollection, status) ? status : 'wait';
+  };
 
-  const status = inCollection(statusCollection, statusSource)
-    ? statusSource
-    : 'wait';
+  renderFurther() {
+    const { title, description, icon } = this.props;
 
-  return withNativeProps(
-    props,
-    <View
-      className={classNames(
-        `${classPrefix}`,
-        `${classPrefix}-status-${status}`,
-      )}
-    >
-      <View className={`${classPrefix}-indicator`}>
-        <View className={`${classPrefix}-icon-container`}>{icon}</View>
-      </View>
-      <View className={`${classPrefix}-content`}>
-        <View className={`${classPrefix}-title`}>{title}</View>
-        {!!description && (
-          <View className={`${classPrefix}-description`}>{description}</View>
+    const status = this.getStatus();
+
+    return (
+      <View
+        className={classNames(
+          `${classPrefix}`,
+          `${classPrefix}-status-${status}`,
         )}
+      >
+        <View className={`${classPrefix}-indicator`}>
+          <View className={`${classPrefix}-icon-container`}>{icon}</View>
+        </View>
+        <View className={`${classPrefix}-content`}>
+          <View className={`${classPrefix}-title`}>{title}</View>
+          {!!description && (
+            <View className={`${classPrefix}-description`}>{description}</View>
+          )}
+        </View>
       </View>
-    </View>,
-  );
+    );
+  }
+}
+
+Step.defaultProps = {
+  ...defaultProps,
 };
+
+export default Step;
