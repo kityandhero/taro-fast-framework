@@ -78,6 +78,38 @@ const config8 = {
   aspectRatio: 0.5,
 };
 
+const config9 = {
+  src,
+  decorationBuilder: () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          opacity: 0.5,
+          backgroundColor: '#000',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: transformSize(68),
+        }}
+      >
+        <CenterBox>
+          <Ellipsis
+            line={1}
+            style={{
+              color: '#fff',
+              opacity: 1,
+              padding: `${transformSize(13)} ${transformSize(16)}`,
+            }}
+          >
+            装饰文字
+          </Ellipsis>
+        </CenterBox>
+      </View>
+    );
+  },
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '图片',
@@ -87,6 +119,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'ImageBox',
     name: '图片',
+    description: '图片组件',
   };
 
   renderContent = () => {
@@ -122,39 +155,9 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <SimpleBox header="使用上层装饰构建">
+        <SimpleBox header="使用上层装饰构建" config={config9}>
           <View style={imageBoxContainerStyle}>
-            <ImageBox
-              src={src}
-              decorationBuilder={() => {
-                return (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      opacity: 0.5,
-                      backgroundColor: '#000',
-                      bottom: 0,
-                      left: 0,
-                      width: '100%',
-                      height: transformSize(68),
-                    }}
-                  >
-                    <CenterBox>
-                      <Ellipsis
-                        line={1}
-                        style={{
-                          color: '#fff',
-                          opacity: 1,
-                          padding: `${transformSize(13)} ${transformSize(16)}`,
-                        }}
-                      >
-                        装饰文字
-                      </Ellipsis>
-                    </CenterBox>
-                  </View>
-                );
-              }}
-            />
+            <ImageBox {...config9} />
           </View>
         </SimpleBox>
 
@@ -231,39 +234,42 @@ export default class Index extends ContentPageBase {
         </SimpleBox>
 
         <SimpleBox header="指定长宽比" config={config8}>
-          <View style={imageBoxContainerStyle}>
-            <ImageBox aspectRatio={0.5} src={src} />
-          </View>
-
-          <View style={imageBoxContainerStyle}>
-            <ImageBox circle aspectRatio={0.5} src={src} />
-          </View>
+          <Space wrap size={16}>
+            <View style={imageBoxContainerStyle}>
+              <ImageBox aspectRatio={0.5} src={src} />
+            </View>
+            <View style={imageBoxContainerStyle}>
+              <ImageBox circle aspectRatio={0.5} src={src} />
+            </View>
+          </Space>
         </SimpleBox>
 
         <SimpleBox header="简单布局">
-          <FlexBox
-            flexAuto="right"
-            left={
-              <View style={{ width: transformSize(100) }}>
-                <ImageBox src={src} />
-              </View>
-            }
-            leftStyle={{ paddingRight: transformSize(10) }}
-            right="右侧"
-            rightStyle={colStyle}
-          />
+          <Space direction="vertical" fillWidth>
+            <FlexBox
+              flexAuto="right"
+              left={
+                <View style={{ width: transformSize(100) }}>
+                  <ImageBox src={src} />
+                </View>
+              }
+              leftStyle={{ paddingRight: transformSize(10) }}
+              right="右侧"
+              rightStyle={colStyle}
+            />
 
-          <FlexBox
-            flexAuto="left"
-            left="左侧"
-            leftStyle={colStyle}
-            right={
-              <View style={{ width: transformSize(100) }}>
-                <ImageBox circle src={src} />
-              </View>
-            }
-            rightStyle={{ paddingLeft: transformSize(10) }}
-          />
+            <FlexBox
+              flexAuto="left"
+              left="左侧"
+              leftStyle={colStyle}
+              right={
+                <View style={{ width: transformSize(100) }}>
+                  <ImageBox circle src={src} />
+                </View>
+              }
+              rightStyle={{ paddingLeft: transformSize(10) }}
+            />
+          </Space>
         </SimpleBox>
 
         <PropertyBox config={ImageBox.defaultProps} labelWidth={220} />

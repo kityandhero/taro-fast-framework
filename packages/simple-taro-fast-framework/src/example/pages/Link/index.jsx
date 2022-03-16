@@ -36,7 +36,7 @@ const config5 = {
 };
 
 const config6 = {
-  href: url,
+  text: '跳转链接',
 };
 
 // eslint-disable-next-line no-undef
@@ -48,6 +48,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'Link',
     name: '链接',
+    description: '链接组件',
   };
 
   renderContent = () => {

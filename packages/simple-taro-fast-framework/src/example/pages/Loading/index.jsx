@@ -48,6 +48,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'Loading',
     name: '加载提示',
+    description: '加载提示组件',
   };
 
   renderContent = () => {

@@ -51,6 +51,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'Ellipsis',
     name: '文字省略',
+    description: '文字省略组件',
   };
 
   renderContent = () => {
