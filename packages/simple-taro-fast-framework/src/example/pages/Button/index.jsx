@@ -1,22 +1,14 @@
-import { Text } from '@tarojs/components';
-
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Space,
-  Card,
   Button,
   Icon,
-  Divider,
+  ColorText,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSearch } = Icon;
 
@@ -37,460 +29,314 @@ const colorList = [
   'black',
 ];
 
+const config1 = {
+  weappButton: true,
+};
+
+const config2 = {
+  fill: 'solid',
+};
+
+const config3 = {
+  backgroundColor: ['#f43f3b', ' #ec008c'],
+};
+
+const config4 = {
+  backgroundColor: '#45e209',
+};
+
+const config5 = {
+  backgroundColor: 'blue',
+  fill: 'solid',
+};
+
+const config6 = {
+  backgroundColor: 'blue',
+  fill: 'outline',
+};
+
+const config7 = {
+  backgroundColor: 'blue',
+  fill: 'none',
+};
+
+const config8 = {
+  size: 'mini',
+  backgroundColor: 'purple',
+};
+
+const config9 = {
+  size: 'small',
+  backgroundColor: 'purple',
+};
+
+const config10 = {
+  size: 'middle',
+  backgroundColor: 'purple',
+};
+
+const config11 = {
+  size: 'large',
+  backgroundColor: 'purple',
+};
+
+const config12 = {
+  block: true,
+  size: 'mini',
+};
+
+const config13 = {
+  block: true,
+  size: 'small',
+};
+
+const config14 = {
+  block: true,
+  size: 'middle',
+};
+
+const config15 = {
+  block: true,
+  size: 'large',
+};
+
+const config16 = {
+  block: true,
+  size: 'large',
+  ripple: true,
+};
+
+const config17 = {
+  disabled: true,
+  backgroundColor: 'blue',
+};
+
+const config18 = {
+  backgroundColor: 'blue',
+  loading: true,
+  loadingType: 'comet',
+  loadingText: '加载中',
+};
+
+const config19 = {
+  loading: true,
+  loadingMode: 'overlay',
+};
+
+const config20 = {
+  shape: 'default',
+  backgroundColor: 'blue',
+};
+
+const config21 = {
+  shape: 'rounded',
+  backgroundColor: 'olive',
+};
+
+const config22 = {
+  shape: 'rectangular',
+  backgroundColor: 'pink',
+};
+
+const config23 = {
+  shape: 'default',
+  backgroundColor: 'blue',
+  paddingTop: 2,
+  paddingBottom: 20,
+  paddingLeft: 20,
+  paddingRight: 20,
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '按钮',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Button',
     name: '按钮',
+    description: '按钮组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="普通按钮模式" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <Button>普通按钮</Button>
-          </Space>
-        </Card>
+        <SimpleBox header="普通按钮">
+          <Button>按钮</Button>
+        </SimpleBox>
 
-        <Card header="微信按钮模式" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <Button weappButton>微信按钮</Button>
-          </Space>
-        </Card>
+        <SimpleBox header="微信按钮" config={config1}>
+          <Button {...config1}>按钮</Button>
+        </SimpleBox>
 
-        <Card
-          header="内置颜色 附带阴影"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space wrap size={16}>
-            {colorList.map((o, i) => {
-              return (
-                <Button key={`${i}`} backgroundColor={o} fill="solid">
-                  {o}
-                </Button>
-              );
-            })}
-          </Space>
-
-          <Divider>微信按钮</Divider>
-
+        <SimpleBox header="内置颜色 附带阴影" config={config2}>
           <Space wrap size={16}>
             {colorList.map((o, i) => {
               return (
                 <Button
                   key={`${i}`}
-                  weappButton
+                  style={{
+                    width: transformSize(180),
+                  }}
                   backgroundColor={o}
-                  fill="solid"
+                  {...config2}
                 >
                   {o}
                 </Button>
               );
             })}
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="渐变色" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="渐变色" config={config3}>
           <Space wrap size={16}>
-            <Button backgroundColor={['#f43f3b', ' #ec008c']}>
+            <Button
+              style={{
+                width: transformSize(280),
+              }}
+              backgroundColor={['#f43f3b', ' #ec008c']}
+            >
               gradual-red
             </Button>
-            <Button backgroundColor={['#ff9700', ' #ed1c24']}>
+            <Button
+              style={{
+                width: transformSize(280),
+              }}
+              backgroundColor={['#ff9700', ' #ed1c24']}
+            >
               gradual-orange
             </Button>
-            <Button backgroundColor={['#39b54a', ' #8dc63f']}>
+            <Button
+              style={{
+                width: transformSize(280),
+              }}
+              backgroundColor={['#39b54a', ' #8dc63f']}
+            >
               yellow-green
             </Button>
-            <Button backgroundColor={['#9000ff', ' #5e00ff']}>
+            <Button
+              style={{
+                width: transformSize(280),
+              }}
+              backgroundColor={['#9000ff', ' #5e00ff']}
+            >
               olive-purple
             </Button>
-            <Button backgroundColor={['#ec008c', ' #6739b6']}>
+            <Button
+              style={{
+                width: transformSize(280),
+              }}
+              backgroundColor={['#ec008c', ' #6739b6']}
+            >
               gradual-pink
             </Button>
-            <Button backgroundColor={['#0081ff', ' #1cbbb4']}>
+            <Button
+              style={{
+                width: transformSize(280),
+              }}
+              backgroundColor={['#0081ff', ' #1cbbb4']}
+            >
               gradual-blue
             </Button>
           </Space>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
-
+        <SimpleBox header="设置颜色" config={config4}>
           <Space wrap size={16}>
-            <Button weappButton backgroundColor={['#f43f3b', ' #ec008c']}>
-              gradual-red
-            </Button>
-            <Button weappButton backgroundColor={['#ff9700', ' #ed1c24']}>
-              gradual-orange
-            </Button>
-            <Button weappButton backgroundColor={['#39b54a', ' #8dc63f']}>
-              yellow-green
-            </Button>
-            <Button weappButton backgroundColor={['#9000ff', ' #5e00ff']}>
-              olive-purple
-            </Button>
-            <Button weappButton backgroundColor={['#ec008c', ' #6739b6']}>
-              gradual-pink
-            </Button>
-            <Button weappButton backgroundColor={['#0081ff', ' #1cbbb4']}>
-              gradual-blue
-            </Button>
-          </Space>
-        </Card>
-
-        <Card header="自定义颜色" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
             <Button backgroundColor="#45e209">Solid</Button>
             <Button backgroundColor="#99a2a9">Outline</Button>
-            <Button backgroundColor="#a5ee0f">None</Button>
+            <Button backgroundColor="#a5ee0f">None</Button>{' '}
           </Space>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
+        <SimpleBox header="填充模式 solid" config={config5}>
+          <Button {...config5}>按钮</Button>
+        </SimpleBox>
 
-          <Space wrap>
-            <Button weappButton backgroundColor="#45e209">
-              Solid
-            </Button>
-            <Button weappButton backgroundColor="#99a2a9">
-              Outline
-            </Button>
-            <Button weappButton backgroundColor="#a5ee0f">
-              None
-            </Button>
-          </Space>
-        </Card>
+        <SimpleBox header="填充模式 outline" config={config6}>
+          <Button {...config6}>按钮</Button>
+        </SimpleBox>
 
-        <Card
-          header="不同的填充模式"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space wrap>
-            <Button backgroundColor="blue" fill="solid">
-              Solid
-            </Button>
-            <Button backgroundColor="blue" fill="outline">
-              Outline
-            </Button>
-            <Button backgroundColor="blue" fill="none">
-              None
-            </Button>
-          </Space>
+        <SimpleBox header="填充模式 none" config={config7}>
+          <Button {...config7}>按钮</Button>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
+        <SimpleBox header="大小 mini" config={config8}>
+          <Button {...config8}>按钮</Button>
+        </SimpleBox>
 
-          <Space wrap>
-            <Button weappButton backgroundColor="blue" fill="solid">
-              Solid
-            </Button>
-            <Button weappButton backgroundColor="blue" fill="outline">
-              Outline
-            </Button>
-            <Button weappButton backgroundColor="blue" fill="none">
-              None
-            </Button>
-          </Space>
-        </Card>
+        <SimpleBox header="大小 small" config={config9}>
+          <Button {...config9}>按钮</Button>
+        </SimpleBox>
 
-        <Card
-          header="不同大小的按钮"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space wrap align="center">
-            <Button size="mini" backgroundColor="purple">
-              Mini
-            </Button>
-            <Button size="small" backgroundColor="purple">
-              Small
-            </Button>
-            <Button size="middle" backgroundColor="purple">
-              Middle
-            </Button>
-            <Button size="large" backgroundColor="purple">
-              Large
-            </Button>
-          </Space>
+        <SimpleBox header="大小 middle" config={config10}>
+          <Button {...config10}>按钮</Button>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
+        <SimpleBox header="大小 large" config={config11}>
+          <Button {...config11}>按钮</Button>
+        </SimpleBox>
 
-          <Space wrap align="center">
-            <Button weappButton size="mini" backgroundColor="purple">
-              Mini
-            </Button>
-            <Button weappButton size="small" backgroundColor="purple">
-              Small
-            </Button>
-            <Button weappButton size="middle" backgroundColor="purple">
-              Middle
-            </Button>
-            <Button weappButton size="large" backgroundColor="purple">
-              Large
-            </Button>
-          </Space>
-        </Card>
+        <SimpleBox header="块级按钮 mini" config={config12}>
+          <Button {...config12}>按钮</Button>
+        </SimpleBox>
 
-        <Card header="块级按钮" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <Button block size="mini">
-              Block Button
-            </Button>
+        <SimpleBox header="块级按钮 mini" config={config13}>
+          <Button {...config13}>按钮</Button>
+        </SimpleBox>
 
-            <Button block size="middle">
-              Block Button
-            </Button>
+        <SimpleBox header="块级按钮 mini" config={config14}>
+          <Button {...config14}>按钮</Button>
+        </SimpleBox>
 
-            <Button block size="large">
-              Block Button
-            </Button>
-          </Space>
+        <SimpleBox header="块级按钮 mini" config={config15}>
+          <Button {...config15}>按钮</Button>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
+        <SimpleBox header="涟漪效果" config={config16}>
+          <Button {...config16}>按钮</Button>
+        </SimpleBox>
 
-          <Space direction="vertical" fillWidth>
-            <Button weappButton block size="mini">
-              Block Button
-            </Button>
+        <SimpleBox header="禁用状态" config={config17}>
+          <Button {...config17}>按钮</Button>
+        </SimpleBox>
 
-            <Button weappButton block size="middle">
-              Block Button
-            </Button>
+        <SimpleBox header="加载中" config={config18}>
+          <Button {...config18}>按钮</Button>
+        </SimpleBox>
 
-            <Button weappButton block size="large">
-              Block Button
-            </Button>
-          </Space>
-        </Card>
+        <SimpleBox header="加载中" config={config18}>
+          <Button {...config18}>按钮</Button>
+        </SimpleBox>
 
-        <Card header="涟漪效果" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <Button block size="large" ripple>
-              Block Button
-            </Button>
-          </Space>
+        <SimpleBox header="加载中 overlay" config={config19}>
+          <Button {...config19}>按钮</Button>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
-
-          <Space direction="vertical" fillWidth>
-            <Button weappButton block size="large" ripple>
-              Block Button
-            </Button>
-          </Space>
-        </Card>
-
-        <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <Button disabled>Disabled</Button>
-            <Button disabled backgroundColor="blue">
-              Disabled
-            </Button>
-          </Space>
-
-          <Divider>微信按钮</Divider>
-
-          <Space wrap>
-            <Button weappButton disabled>
-              Disabled
-            </Button>
-            <Button weappButton disabled backgroundColor="blue">
-              Disabled
-            </Button>
-          </Space>
-        </Card>
-
-        <Card header="加载状态" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <Button backgroundColor="blue" loading loadingText="加载中">
-              Loading
-            </Button>
-            <Button
-              backgroundColor="blue"
-              loading
-              loadingType="comet"
-              loadingText="加载中"
-            >
-              Loading
-            </Button>
-            <Button loading loadingMode="overlay">
-              Loading
-            </Button>
-            <Button loading loadingType="comet" loadingMode="overlay">
-              Loading
-            </Button>
-            <Button loading>Loading</Button>
-            <Button loading loadingType="comet">
-              Loading
-            </Button>
-          </Space>
-
-          <Divider>微信按钮</Divider>
-
-          <Space wrap>
-            <Button
-              weappButton
-              backgroundColor="blue"
-              loading
-              loadingText="加载中"
-            >
-              Loading
-            </Button>
-            <Button
-              weappButton
-              backgroundColor="blue"
-              loading
-              loadingType="comet"
-              loadingText="加载中"
-            >
-              Loading
-            </Button>
-            <Button weappButton loading loadingMode="overlay">
-              Loading
-            </Button>
-            <Button
-              weappButton
-              loading
-              loadingType="comet"
-              loadingMode="overlay"
-            >
-              Loading
-            </Button>
-            <Button weappButton loading>
-              Loading
-            </Button>
-            <Button weappButton loading loadingType="comet">
-              Loading
-            </Button>
-          </Space>
-        </Card>
-
-        <Card header="带图标的按钮" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="图标">
           <Button>
-            <Space>
-              <IconSearch size={38} />
-              <Text>搜索</Text>
-            </Space>
+            <ColorText icon={<IconSearch size={38} />} text="搜索" />
           </Button>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
+        <SimpleBox header="形状 default" config={config20}>
+          <Button {...config20}>按钮</Button>
+        </SimpleBox>
 
-          <Button weappButton>
-            <Space>
-              <IconSearch size={38} />
-              <Text>搜索</Text>
-            </Space>
-          </Button>
-        </Card>
+        <SimpleBox header="形状 rounded" config={config21}>
+          <Button {...config21}>按钮</Button>
+        </SimpleBox>
 
-        <Card header="不同类型圆角" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <Button shape="default" backgroundColor="blue">
-              Default Button
-            </Button>
-            <Button block shape="rounded" backgroundColor="olive">
-              Rounded Button
-            </Button>
-            <Button block shape="rectangular" backgroundColor="pink">
-              Rectangular Button
-            </Button>
-          </Space>
+        <SimpleBox header="形状 rectangular" config={config22}>
+          <Button {...config22}>按钮</Button>
+        </SimpleBox>
 
-          <Divider>微信按钮</Divider>
+        <SimpleBox header="自定义间距边框" config={config23}>
+          <Button {...config23}>按钮</Button>
+        </SimpleBox>
 
-          <Space wrap>
-            <Button weappButton shape="default" backgroundColor="blue">
-              Default Button
-            </Button>
-            <Button weappButton block shape="rounded" backgroundColor="olive">
-              Rounded Button
-            </Button>
-            <Button
-              weappButton
-              block
-              shape="rectangular"
-              backgroundColor="pink"
-            >
-              Rectangular Button
-            </Button>
-          </Space>
-        </Card>
-
-        <Card header="自定义大小" style={style} headerStyle={cardHeaderStyle}>
-          <Space wrap>
-            <Button
-              shape="default"
-              backgroundColor="blue"
-              paddingTop={20}
-              paddingBottom={20}
-              paddingLeft={20}
-              paddingRight={20}
-            >
-              Default Button
-            </Button>
-            <Button
-              block
-              shape="rounded"
-              backgroundColor="olive"
-              paddingTop={20}
-              paddingBottom={20}
-              paddingLeft={20}
-              paddingRight={20}
-              borderRadius={3000}
-            >
-              Rounded Button
-            </Button>
-            <Button
-              block
-              shape="rectangular"
-              backgroundColor="pink"
-              paddingTop={20}
-              paddingBottom={20}
-              paddingLeft={20}
-              paddingRight={20}
-            >
-              Rectangular Button
-            </Button>
-          </Space>
-
-          <Divider>微信按钮</Divider>
-
-          <Space wrap>
-            <Button
-              weappButton
-              shape="default"
-              backgroundColor="blue"
-              paddingTop={20}
-              paddingBottom={20}
-              paddingLeft={20}
-              paddingRight={20}
-            >
-              Default Button
-            </Button>
-            <Button
-              weappButton
-              block
-              shape="rounded"
-              backgroundColor="olive"
-              paddingTop={20}
-              paddingBottom={20}
-              paddingLeft={20}
-              paddingRight={20}
-              borderRadius={3000}
-            >
-              Rounded Button
-            </Button>
-            <Button
-              weappButton
-              block
-              shape="rectangular"
-              backgroundColor="pink"
-              paddingTop={20}
-              paddingBottom={20}
-              paddingLeft={20}
-              paddingRight={20}
-            >
-              Rectangular Button
-            </Button>
-          </Space>
-        </Card>
+        <PropertyBox config={Button.defaultProps} labelWidth={270} />
       </Space>
     );
   };
