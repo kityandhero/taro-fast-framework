@@ -11,7 +11,16 @@ const SIZE_CLASS = {
   small: 'small',
 };
 
-export default class Avatar extends BaseComponent {
+const defaultProps = {
+  size: 'normal',
+  circle: false,
+  text: '',
+  image: '',
+  style: {},
+  className: '',
+};
+
+class Avatar extends BaseComponent {
   renderFurther() {
     const { size, circle, image, text, style } = this.props;
     const rootClassName = ['tfc-avatar'];
@@ -45,10 +54,7 @@ export default class Avatar extends BaseComponent {
 }
 
 Avatar.defaultProps = {
-  size: 'normal',
-  circle: false,
-  text: '',
-  image: '',
-  style: {},
-  className: '',
+  ...defaultProps,
 };
+
+export default Avatar;

@@ -40,7 +40,7 @@ export { default as Radio } from './Radio';
 export { default as RadioSelector } from './RadioSelector';
 export { default as CheckBox } from './CheckBox';
 export { default as CheckBoxSelector } from './CheckBoxSelector';
-export { Badge } from './Badge';
+export { default as Badge } from './Badge';
 export { Spin } from './Spin';
 export { Space } from './Space';
 export { Empty } from './Empty';

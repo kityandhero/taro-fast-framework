@@ -6,7 +6,7 @@ import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
-import { Badge } from '../Badge';
+import Badge from '../Badge';
 import ImageBox from '../ImageBox';
 import Icon from '../Icon/icon';
 

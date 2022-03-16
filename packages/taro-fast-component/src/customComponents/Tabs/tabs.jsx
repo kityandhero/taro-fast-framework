@@ -13,7 +13,7 @@ import BaseComponent from '../BaseComponent';
 
 import './index.less';
 
-import { Badge } from '../Badge';
+import Badge from '../Badge';
 import ColorText from '../ColorText';
 
 const ENV = Taro.getEnv();
