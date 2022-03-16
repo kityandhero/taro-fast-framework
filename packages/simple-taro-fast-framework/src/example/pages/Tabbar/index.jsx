@@ -172,6 +172,8 @@ export default class Index extends ContentPageBase {
 
         <Tabbar items={itemsMix} itemWidth={130} />
 
+        <Divider>固定底部</Divider>
+
         <Tabbar value={value} fixed items={items2} onClick={this.changeTab} />
 
         <PropertyBox config={Tabbar.defaultProps} labelWidth={260} />
