@@ -33,7 +33,7 @@ const defaultProps = {
   // 是否固定在底部
   fixed: false,
   // fixed定位固定在底部时，是否生成一个等高元素防止塌陷
-  placeholder: true,
+  placeholder: false,
   backgroundColor: '#fff',
   borderColor: '#dadbde',
   badgeColor: '',
@@ -185,7 +185,7 @@ class Tabbar extends BaseComponent {
           </View>
         </View>
 
-        {placeholder ? (
+        {!fixed && placeholder ? (
           <View
             className={classNames(`${classPrefix}__placeholder`)}
             style={{
