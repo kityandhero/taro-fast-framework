@@ -1,22 +1,48 @@
 import { View } from '@tarojs/components';
 
 import {
-  Card,
   Space,
   Loading,
   ActivityIndicator,
-  HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  type: 'comet',
 };
+
+const config2 = {
+  color: '#4589e1',
+};
+
+const config3 = {
+  size: 48,
+};
+
+const config4 = {
+  borderWidth: 8,
+};
+
+const config5 = {
+  type: 'comet',
+};
+
+const config6 = {
+  content: 'loading',
+};
+
+const config7 = {
+  mode: 'center',
+  content: 'loading',
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '加载提示',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
@@ -27,166 +53,61 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="普通模式"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '用法: <Loading />',
-                },
-                {
-                  text: '用法: <Loading type="comet" />',
-                },
-              ]}
-            />
-          }
-        >
-          <Space size={24}>
-            <Loading />
+        <SimpleBox header="例子">
+          <Loading />
+        </SimpleBox>
 
-            <Loading type="comet" />
-          </Space>
-        </Card>
+        <SimpleBox header="图标" config={config1}>
+          <Loading {...config1} />
+        </SimpleBox>
 
-        <Card
-          header="设置颜色"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '用法: <Loading color="#4589e1" />',
-                },
-              ]}
-            />
-          }
-        >
-          <Space size={24}>
-            <Loading color="#4589e1" />
+        <SimpleBox header="设置颜色" config={config2}>
+          <Loading {...config2} />
+        </SimpleBox>
 
-            <Loading color="#4589e1" type="comet" />
-          </Space>
-        </Card>
+        <SimpleBox header="设置大小" config={config3}>
+          <Loading {...config3} />
+        </SimpleBox>
 
-        <Card
-          header="设置大小"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '用法: <Loading size={48} />',
-                },
-              ]}
-            />
-          }
-        >
-          <Space size={24}>
-            <Loading size={48} />
+        <SimpleBox header="设置线条宽度" config={config4}>
+          <Loading {...config4} />
+        </SimpleBox>
 
-            <Loading size={48} type="comet" />
-          </Space>
-        </Card>
+        <SimpleBox header="加载提示">
+          <ActivityIndicator />
+        </SimpleBox>
 
-        <Card
-          header="设置线条宽度"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '用法: <Loading borderWidth={4} />',
-                },
-              ]}
-            />
-          }
-        >
-          <Space size={24}>
-            <Loading borderWidth={4} />
+        <SimpleBox header="加载提示图标" config={config5}>
+          <ActivityIndicator {...config5} />
+        </SimpleBox>
 
-            <Loading borderWidth={8} type="comet" />
-          </Space>
-        </Card>
+        <SimpleBox header="加载提示文字" config={config6}>
+          <ActivityIndicator {...config6} />
+        </SimpleBox>
 
-        <Card
-          header="附带文字的加载提示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '用法: <ActivityIndicator type="comet" content="loading" />',
-                },
-              ]}
-            />
-          }
-        >
-          <Space size={24}>
-            <ActivityIndicator />
-            <ActivityIndicator type="comet" />
-            <ActivityIndicator content="loading" />
-            <ActivityIndicator type="comet" content="loading" />
-          </Space>
-        </Card>
+        <SimpleBox header="居中显示" config={config7}>
+          <View
+            style={{
+              border: 'var(--tfc-1) solid #ccc',
+              height: 'var(--tfc-200)',
+              position: 'relative',
+            }}
+          >
+            <ActivityIndicator {...config7} />
+          </View>
+        </SimpleBox>
 
-        <Card
-          header="居中显示的加载提示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '用法: <ActivityIndicator mode="center" type="comet" content="loading" />',
-                },
-                {
-                  text: '说明: 需要父容器设置相对定位',
-                },
-              ]}
-            />
-          }
-        >
-          <Space direction="vertical" fillWidth>
-            <View
-              style={{
-                border: 'var(--tfc-1) solid #ccc',
-                height: 'var(--tfc-200)',
-                position: 'relative',
-              }}
-            >
-              <ActivityIndicator mode="center" content="loading" />
-            </View>
+        <PropertyBox
+          header="Loading 可配置项以及默认值"
+          config={Loading.defaultProps}
+          labelWidth={270}
+        />
 
-            <View
-              style={{
-                border: 'var(--tfc-1) solid #ccc',
-                height: 'var(--tfc-200)',
-                position: 'relative',
-              }}
-            >
-              <ActivityIndicator mode="center" type="comet" content="loading" />
-            </View>
-          </Space>
-        </Card>
+        <PropertyBox
+          header="ActivityIndicator 可配置项以及默认值"
+          config={ActivityIndicator.defaultProps}
+          labelWidth={270}
+        />
       </Space>
     );
   };
