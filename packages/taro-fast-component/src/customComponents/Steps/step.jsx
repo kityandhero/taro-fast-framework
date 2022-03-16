@@ -5,7 +5,7 @@ import { inCollection } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
-const classPrefix = `tfc-step`;
+const classPrefix = `tfc-steps`;
 
 const statusCollection = ['wait', 'process', 'finish', 'error'];
 
@@ -31,16 +31,20 @@ class Step extends BaseComponent {
       <View
         className={classNames(
           `${classPrefix}`,
-          `${classPrefix}-status-${status}`,
+          `${classPrefix}__item__status-${status}`,
         )}
       >
-        <View className={`${classPrefix}-indicator`}>
-          <View className={`${classPrefix}-icon-container`}>{icon}</View>
+        <View className={`${classPrefix}__item__indicator`}>
+          <View className={`${classPrefix}__item__icon__container`}>
+            {icon}
+          </View>
         </View>
-        <View className={`${classPrefix}-content`}>
-          <View className={`${classPrefix}-title`}>{title}</View>
+        <View className={`${classPrefix}__item__content`}>
+          <View className={`${classPrefix}__item__title`}>{title}</View>
           {!!description && (
-            <View className={`${classPrefix}-description`}>{description}</View>
+            <View className={`${classPrefix}__item__description`}>
+              {description}
+            </View>
           )}
         </View>
       </View>

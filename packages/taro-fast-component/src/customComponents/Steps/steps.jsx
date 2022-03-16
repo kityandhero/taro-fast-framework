@@ -13,7 +13,6 @@ import BaseComponent from '../BaseComponent';
 import Step from './step';
 
 const classPrefix = `tfc-steps`;
-const stepClassPrefix = `tfc-step`;
 
 const directionCollection = ['horizontal', 'vertical'];
 
@@ -45,18 +44,20 @@ class Steps extends BaseComponent {
     } = this.props;
 
     return {
-      '--title-font-size': transformSize(titleFontSize),
-      '--description-font-size': transformSize(descriptionFontSize),
-      '--indicator-margin-right': transformSize(indicatorMarginRight),
-      '--icon-size': transformSize(iconSize),
+      ...{
+        '--title-font-size': transformSize(titleFontSize),
+        '--description-font-size': transformSize(descriptionFontSize),
+        '--indicator-margin-right': transformSize(indicatorMarginRight),
+        '--icon-size': transformSize(iconSize),
+      },
     };
   };
 
   getIcon = (status) => {
     return (
       <View
-        className={classNames(`${stepClassPrefix}-icon-dot`, {
-          [`${stepClassPrefix}-icon-dot-processing`]: status === 'process',
+        className={classNames(`${classPrefix}__item__icon__dot`, {
+          [`${classPrefix}__item__icon__dot-processing`]: status === 'process',
         })}
       />
     );
