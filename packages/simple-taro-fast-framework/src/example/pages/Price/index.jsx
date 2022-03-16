@@ -1,74 +1,97 @@
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, Space, Price } from 'taro-fast-component/es/customComponents';
+import { Space, Price } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  price: 4.78,
 };
+
+const config2 = {
+  price: 4.78,
+  prefix: '¥',
+};
+
+const config3 = {
+  price: 4.78,
+  itemStyle: { color: '#ccc' },
+  strikethrough: true,
+};
+
+const config4 = {
+  price: 4.78,
+  bodyStyle: {
+    border: `${transformSize(2)} solid #ccc`,
+    padding: transformSize(6),
+  },
+};
+
+const config5 = {
+  price: 4.78,
+  bodyStyle: {
+    border: `${transformSize(2)} solid #ccc`,
+    padding: transformSize(6),
+  },
+};
+
+const config6 = {
+  price: 4.78,
+  prefix: '¥',
+  itemStyle: {
+    color: '#E04247',
+    fontWeight: 'bold',
+  },
+  prefixStyle: {
+    fontSize: transformSize(24),
+    marginRight: transformSize(5),
+  },
+  integerPartStyle: { fontSize: transformSize(48) },
+  pointStyle: { fontSize: transformSize(48) },
+  decimalPartStyle: { fontSize: transformSize(48) },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '价格',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Price',
     name: '价格',
+    description: '价格组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="普通显示" style={style} headerStyle={cardHeaderStyle}>
-          <Price price={4.78} />
-        </Card>
+        <SimpleBox header="普通" config={config1}>
+          <Price {...config1} />
+        </SimpleBox>
 
-        <Card header="显示修饰符" style={style} headerStyle={cardHeaderStyle}>
-          <Space>
-            <Price price={4.78} prefix="¥" />
-            <Price price={4.78} prefix="$" />
-          </Space>
-        </Card>
+        <SimpleBox header="修饰符" config={config2}>
+          <Price {...config2} />
+        </SimpleBox>
 
-        <Card header="删除线" style={style} headerStyle={cardHeaderStyle}>
-          <Price price={4.78} itemStyle={{ color: '#ccc' }} strikethrough />
-        </Card>
+        <SimpleBox header="删除线" config={config3}>
+          <Price {...config3} />
+        </SimpleBox>
 
-        <Card header="外层样式" style={style} headerStyle={cardHeaderStyle}>
-          <Price
-            price={4.78}
-            bodyStyle={{
-              border: `${transformSize(2)} solid #ccc`,
-              padding: transformSize(6),
-            }}
-          />
-        </Card>
+        <SimpleBox header="外层样式" config={config4}>
+          <Price {...config4} />
+        </SimpleBox>
 
-        <Card header="元素通用样式" style={style} headerStyle={cardHeaderStyle}>
-          <Price
-            price={4.78}
-            itemStyle={{ color: '#ccc', fontSize: transformSize(36) }}
-          />
-        </Card>
+        <SimpleBox header="元素通用样式" config={config5}>
+          <Price {...config5} />
+        </SimpleBox>
 
-        <Card header="复杂显示" style={style} headerStyle={cardHeaderStyle}>
-          <Price
-            price={4.78}
-            prefix="¥"
-            itemStyle={{
-              color: '#E04247',
-              fontWeight: 'bold',
-            }}
-            prefixStyle={{
-              fontSize: transformSize(24),
-              marginRight: transformSize(5),
-            }}
-            integerPartStyle={{ fontSize: transformSize(48) }}
-            pointStyle={{ fontSize: transformSize(48) }}
-            decimalPartStyle={{ fontSize: transformSize(48) }}
-          />
-        </Card>
+        <SimpleBox header="复杂配置" config={config6}>
+          <Price {...config6} />
+        </SimpleBox>
+
+        <PropertyBox config={Price.defaultProps} labelWidth={270} />
       </Space>
     );
   };

@@ -1,5 +1,4 @@
 import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 
 import {
   getNow,
@@ -7,149 +6,147 @@ import {
   addMinute,
   addSecond,
 } from 'taro-fast-common/es/utils/tools';
-import {
-  Card,
-  Space,
-  Countdown,
-} from 'taro-fast-component/es/customComponents';
+import { Space, Countdown } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  endTime: addMinute(getNow(), 15),
 };
+
+const config2 = {
+  showDay: true,
+  endTime: addMinute(getNow(), 40),
+};
+
+const config3 = {
+  showHour: false,
+  endTime: addMinute(getNow(), 4),
+};
+
+const config4 = {
+  format: { hours: ':', minutes: ':', seconds: '' },
+  endTime: addHour(getNow(), 1),
+};
+
+const config5 = {
+  cardMode: true,
+  showDay: true,
+  endTime: addMinute(getNow(), 28),
+  format: { day: '天', hours: ':', minutes: ':', seconds: '' },
+};
+
+const config6 = {
+  cardMode: true,
+  showDay: true,
+  valueColor: '#456e23',
+  separatorColor: '#9411a9',
+  borderColor: '#ae4567',
+  endTime: addMinute(getNow(), 28),
+  format: { day: '天', hours: ':', minutes: ':', seconds: '' },
+};
+
+const config7 = {
+  cardMode: true,
+  fillCard: true,
+  showDay: true,
+  endTime: addMinute(getNow(), 28),
+  format: { day: '天', hours: ':', minutes: ':', seconds: '' },
+};
+
+const config8 = {
+  cardMode: true,
+  fillCard: true,
+  showDay: true,
+  valueColor: '#456e23',
+  separatorColor: '#9411a9',
+  borderColor: '#ae4567',
+  endTime: addMinute(getNow(), 28),
+  format: { day: '天', hours: ':', minutes: ':', seconds: '' },
+};
+
+const config9 = {
+  format: { hours: ':', minutes: ':', seconds: '' },
+  endTime: addSecond(getNow(), 10),
+  afterEnd: () => {
+    console.log({
+      message: '时间到',
+    });
+  },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '倒计时',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Countdown',
     name: '倒计时',
-  };
-
-  onTimeUp = () => {
-    Taro.showToast({
-      title: '时间到',
-      icon: 'success',
-      duration: 2000,
-    });
+    description: '倒计时组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="一般用法" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown endTime={addMinute(getNow(), 15)} />
-            </View>
+        <SimpleBox header="默认" config={config1}>
+          <View>
+            <Countdown {...config1} />
+          </View>
+        </SimpleBox>
 
-            <View>
-              <Countdown endTime={addHour(getNow(), 40)} />
-            </View>
+        <SimpleBox header="显示天" config={config2}>
+          <View>
+            <Countdown {...config2} />
+          </View>
+        </SimpleBox>
 
-            <View>
-              <Countdown showDay endTime={addHour(getNow(), 2)} />
-            </View>
+        <SimpleBox header="不显示小时" config={config3}>
+          <View>
+            <Countdown {...config3} />
+          </View>
+        </SimpleBox>
 
-            <View>
-              <Countdown showHour={false} endTime={addHour(getNow(), 4)} />
-            </View>
-          </Space>
-        </Card>
+        <SimpleBox header="自定义格式化" config={config4}>
+          <View>
+            <Countdown {...config4} />
+          </View>
+        </SimpleBox>
 
-        <Card header="自定义格式化" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown
-                format={{ hours: ':', minutes: ':', seconds: '' }}
-                endTime={addHour(getNow(), 1)}
-              />
-            </View>
-          </Space>
-        </Card>
+        <SimpleBox header="卡片式" config={config5}>
+          <View>
+            <Countdown {...config5} />
+          </View>
+        </SimpleBox>
 
-        <Card header="卡片式" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown
-                cardMode
-                showDay
-                endTime={addHour(getNow(), 28)}
-                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
-              />
-            </View>
-          </Space>
-        </Card>
+        <SimpleBox header="卡片式自定义" config={config6}>
+          <View>
+            <Countdown {...config6} />
+          </View>
+        </SimpleBox>
 
-        <Card header="卡片式自定义" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown
-                cardMode
-                showDay
-                valueColor="#456e23"
-                separatorColor="#9411a9"
-                borderColor="#ae4567"
-                endTime={addHour(getNow(), 28)}
-                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
-              />
-            </View>
-          </Space>
-        </Card>
+        <SimpleBox header="卡片填充式" config={config7}>
+          <View>
+            <Countdown {...config7} />
+          </View>
+        </SimpleBox>
 
-        <Card header="卡片填充式" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown
-                cardMode
-                fillCard
-                showDay
-                endTime={addHour(getNow(), 28)}
-                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
-              />
-            </View>
-          </Space>
-        </Card>
+        <SimpleBox header="卡片填充式自定义" config={config8}>
+          <View>
+            <Countdown {...config8} />
+          </View>
+        </SimpleBox>
 
-        <Card
-          header="卡片填充式自定义"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown
-                cardMode
-                fillCard
-                showDay
-                valueColor="#fff"
-                separatorColor="#9411a9"
-                backgroundColor="#ae4567"
-                endTime={addHour(getNow(), 28)}
-                format={{ day: '天', hours: ':', minutes: ':', seconds: '' }}
-              />
-            </View>
-          </Space>
-        </Card>
+        <SimpleBox header="倒计时回调 [查看控制台]" config={config9}>
+          <View>
+            <Countdown {...config9} />
+          </View>
+        </SimpleBox>
 
-        <Card
-          header="自定义倒计时回调事件"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Countdown
-                format={{ hours: ':', minutes: ':', seconds: '' }}
-                endTime={addSecond(getNow(), 10)}
-                afterEnd={this.onTimeUp.bind(this)}
-              />
-            </View>
-          </Space>
-        </Card>
+        <PropertyBox config={Countdown.defaultProps} labelWidth={230} />
       </Space>
     );
   };

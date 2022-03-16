@@ -1,175 +1,187 @@
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Card, Space, Tag } from 'taro-fast-component/es/customComponents';
+import { Space, Tag } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const colorList = ['default', 'primary', 'success', 'warning', 'danger'];
+
+const config1 = {
+  color: 'primary',
+  fill: 'outline',
 };
+
+const config2 = {
+  shape: 'circle',
+  color: '#2db7f5',
+};
+
+const config3 = {
+  shape: 'circleLeft',
+  color: '#2db7f5',
+};
+
+const config4 = {
+  shape: 'circleRight',
+  color: '#2db7f5',
+};
+
+const config5 = {
+  hidden: true,
+};
+
+const config6 = {
+  color: 'default',
+  onClick: () => {
+    console.log({
+      message: 'tag click',
+    });
+  },
+};
+
+const config7 = {
+  color: 'default',
+  closeable: true,
+  onClick: () => {
+    console.log({
+      message: 'tag click',
+    });
+  },
+  onClose: () => {
+    console.log({
+      message: 'tag close',
+    });
+  },
+};
+
+const config8 = {
+  color: 'default',
+  closeable: true,
+  closeColor: '#28e745',
+  onClick: () => {
+    console.log({
+      message: 'tag click',
+    });
+  },
+  onClose: () => {
+    console.log({
+      message: 'tag close',
+    });
+  },
+};
+
+const config9 = {
+  color: 'primary',
+  fill: 'outline',
+  style: {
+    '--background-color': '#c8f7c5',
+    '--border-radius': transformSize(6),
+    '--text-color': 'var(--tfc-color-black)',
+    '--border-color': 'var(--tfc-color-weak)',
+  },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '标签',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Tag',
     name: '标签',
+    description: '标签组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="基本用法" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="基本用法">
           <Tag>123</Tag>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="默认提供 5 种通用标签颜色"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="内置颜色">
           <Space>
-            <Tag color="default">Default</Tag>
-            <Tag color="primary">测试</Tag>
-            <Tag color="success">Success</Tag>
-            <Tag color="warning">Warning</Tag>
-            <Tag color="danger">Danger</Tag>
+            {colorList.map((o, i) => {
+              return (
+                <Tag key={`${i}`} color={o}>
+                  {o}
+                </Tag>
+              );
+            })}
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="自定义颜色" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="自定义颜色">
           <Space>
             <Tag color="#2db7f5">#2db7f5</Tag>
             <Tag color="#87d068">#87d068</Tag>
             <Tag color="#108ee9">#108ee9</Tag>
           </Space>
-        </Card>
-        <Card header="线框填充" style={style} headerStyle={cardHeaderStyle}>
+        </SimpleBox>
+
+        <SimpleBox header="线框填充" config={config1}>
           <Space>
-            <Tag color="primary" fill="outline">
-              Primary
-            </Tag>
-            <Tag color="#87d068" fill="outline">
-              #87d068
-            </Tag>
-            <Tag color="#ff6430" fill="outline">
-              #ff6430
-            </Tag>
+            {colorList.map((o, i) => {
+              return (
+                <Tag key={`${i}`} color={o} {...config1}>
+                  {o}
+                </Tag>
+              );
+            })}
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="圆角" style={style} headerStyle={cardHeaderStyle}>
-          <Tag shape="circle" color="#2db7f5">
-            circle
-          </Tag>
-        </Card>
-
-        <Card header="半圆角" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="圆角" config={config2}>
           <Space>
-            <Tag shape="circleLeft" color="#2db7f5">
-              circle left
-            </Tag>
-
-            <Tag shape="circleRight" color="#2db7f5">
-              circle right
-            </Tag>
+            <Tag {...config2}>标签</Tag>
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="hidden" style={style} headerStyle={cardHeaderStyle}>
-          <Tag hidden>hidden</Tag>
-        </Card>
-
-        <Card header="onClick" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="半圆角左" config={config3}>
           <Space>
-            <Tag
-              color="default"
-              onClick={() => {
-                this.bannerNotify({
-                  message: 'tag click',
-                });
-              }}
-            >
-              click
-            </Tag>
+            <Tag {...config3}>标签</Tag>
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="可以关闭" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="半圆角右" config={config4}>
           <Space>
-            <Tag
-              color="default"
-              closeable
-              onClick={() => {
-                this.bannerNotify({
-                  message: 'tag click',
-                });
-              }}
-              onClose={() => {
-                this.bannerNotify({
-                  message: 'tag close',
-                });
-              }}
-            >
-              click
-            </Tag>
-
-            <Tag
-              color="default"
-              closeable
-              closeColor="#28e745"
-              onClick={() => {
-                this.bannerNotify({
-                  message: 'tag click',
-                });
-              }}
-              onClose={() => {
-                this.bannerNotify({
-                  message: 'tag close',
-                });
-              }}
-            >
-              click
-            </Tag>
+            <Tag {...config4}>标签</Tag>
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="通过 CSS 变量进行个性化"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="隐藏" config={config5}>
           <Space>
-            <Tag
-              color="primary"
-              fill="outline"
-              style={{ '--border-radius': transformSize(6) }}
-            >
-              Primary
-            </Tag>
-            <Tag
-              color="success"
-              fill="outline"
-              style={{ '--background-color': '#c8f7c5' }}
-            >
-              Success
-            </Tag>
-            <Tag
-              color="warning"
-              style={{ '--text-color': 'var(--adm-color-text)' }}
-            >
-              Warning
-            </Tag>
-            <Tag
-              color="danger"
-              fill="outline"
-              style={{ '--border-color': 'var(--adm-color-weak)' }}
-            >
-              Danger
-            </Tag>
+            <Tag {...config5}>标签</Tag>
           </Space>
-        </Card>
+        </SimpleBox>
+
+        <SimpleBox header="onClick [查看控制台]" config={config6}>
+          <Space>
+            <Tag {...config6}>标签</Tag>
+          </Space>
+        </SimpleBox>
+
+        <SimpleBox header="可关闭" config={config7}>
+          <Space>
+            <Tag {...config7}>标签</Tag>
+          </Space>
+        </SimpleBox>
+
+        <SimpleBox header="设置可关闭颜色" config={config8}>
+          <Space>
+            <Tag {...config8}>标签</Tag>
+          </Space>
+        </SimpleBox>
+
+        <SimpleBox header="通过 CSS 变量进行个性化" config={config9}>
+          <Space>
+            <Tag {...config9}>标签</Tag>
+          </Space>
+        </SimpleBox>
+
+        <PropertyBox config={Tag.defaultProps} labelWidth={270} />
       </Space>
     );
   };

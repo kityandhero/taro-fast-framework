@@ -1,26 +1,25 @@
 import {
-  Card,
   Item,
   Transition,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 import './index.less';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '变换动画',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Transition',
     name: '变换动画',
+    description: '变换动画容器',
   };
 
   constructor(props) {
@@ -82,6 +81,7 @@ export default class Index extends ContentPageBase {
 
   trigger = (name) => {
     this.setState({ name, showTransition: true });
+
     setTimeout(() => {
       this.setState({ showTransition: false });
     }, 500);
@@ -124,12 +124,7 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="变换动画类型"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
+        <SimpleBox header="变换动画类型">
           <Item label="Fade" arrow onClick={this.onClickFade} />
           <Item label="Fade Up" arrow onClick={this.onClickFadeUp} />
           <Item label="Fade Down" arrow onClick={this.onClickFadeDown} />
@@ -147,7 +142,9 @@ export default class Index extends ContentPageBase {
             border={false}
             onClick={this.onClickCustom}
           />
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={Transition.defaultProps} labelWidth={230} />
 
         <Transition
           show={showTransition}

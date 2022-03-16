@@ -10,6 +10,7 @@ const getClassNames = (name) => ({
 });
 
 export const defaultProps = {
+  classes: '',
   show: false,
   duration: 300,
   name: 'fade',
