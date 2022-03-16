@@ -73,7 +73,7 @@ export default class Index extends ContentPageBase {
         <Space direction="vertical" fillWidth>
           <View
             style={{
-              height: transformSize(800),
+              height: transformSize(1200),
               border: 'var(--tfc-2) solid #ccc',
               backgroundColor: '#ccc',
             }}
@@ -83,20 +83,7 @@ export default class Index extends ContentPageBase {
             </HorizontalCenterBox>
           </View>
 
-          {/* <Card
-            header="可配置属性说明"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
-            <DataGrid
-              list={configList}
-              border
-              layout="row"
-              size="small"
-              emptyValue="暂无"
-              emptyStyle={{ color: '#ccc' }}
-            />
-          </Card> */}
+          <PropertyBox config={BackTop.defaultProps} labelWidth={220} />
 
           <BackTop visible={visible1} onClick={this.scrollToTop} />
 
@@ -111,8 +98,6 @@ export default class Index extends ContentPageBase {
           />
 
           <BackTop visible={visible1} bottom={400} onClick={this.scrollToTop} />
-
-          <PropertyBox config={BackTop.defaultProps} labelWidth={220} />
         </Space>
       </View>
     );

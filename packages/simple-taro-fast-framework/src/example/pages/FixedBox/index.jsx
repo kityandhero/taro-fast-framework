@@ -4,6 +4,7 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { FixedBox } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const style = {
   lineHeight: '1',
@@ -11,10 +12,16 @@ const style = {
   backgroundColor: '#ccc',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: 'Flex布局',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Flex',
-    name: '弹性布局',
+    name: '固定容器',
+    description: '固定容器组件',
   };
 
   constructor(props) {
@@ -41,28 +48,33 @@ export default class Index extends ContentPageBase {
 
     return (
       <View style={{ height: '1400px' }}>
-        <FixedBox style={style}>FixedBox</FixedBox>
-
-        <FixedBox top={0} right={0} style={style}>
+        <FixedBox zIndex={1000} style={style}>
           FixedBox
         </FixedBox>
 
-        <FixedBox left={0} bottom={0} style={style}>
+        <FixedBox zIndex={1000} top={0} right={0} style={style}>
           FixedBox
         </FixedBox>
 
-        <FixedBox right={0} bottom={0} style={style}>
+        <FixedBox zIndex={1000} left={0} bottom={0} style={style}>
           FixedBox
         </FixedBox>
 
-        <FixedBox top="50%" left={100} style={style}>
+        <FixedBox zIndex={1000} right={0} bottom={0} style={style}>
           FixedBox
         </FixedBox>
+
+        {/* <FixedBox top="50%" left={100} style={style}>
+          FixedBox
+        </FixedBox> */}
 
         <FixedBox
+          show={showTransition}
           width={200}
           height={40}
+          zIndex={1000}
           center
+          useTransition
           style={{
             ...style,
             ...{
@@ -73,7 +85,7 @@ export default class Index extends ContentPageBase {
           FixedBox
         </FixedBox>
 
-        <FixedBox
+        {/* <FixedBox
           show={showTransition}
           top={200}
           right={40}
@@ -82,7 +94,9 @@ export default class Index extends ContentPageBase {
           style={style}
         >
           FixedTransitionBox
-        </FixedBox>
+        </FixedBox> */}
+
+        <PropertyBox config={FixedBox.defaultProps} labelWidth={270} />
       </View>
     );
   };

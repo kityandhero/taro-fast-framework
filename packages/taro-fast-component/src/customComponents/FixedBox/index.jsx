@@ -17,6 +17,7 @@ const defaultProps = {
   style: {},
   center: false,
   useTransition: false,
+  zIndex: 0,
 };
 
 class FixedBox extends BaseComponent {
@@ -32,6 +33,7 @@ class FixedBox extends BaseComponent {
       style,
       center,
       useTransition,
+      zIndex,
       children,
     } = this.props;
 
@@ -52,6 +54,7 @@ class FixedBox extends BaseComponent {
       ...{
         display: 'block',
         position: 'fixed',
+        zIndex: zIndex,
       },
       ...(center
         ? { margin: 'auto', left: '0', right: '0', top: '0', bottom: '0' }

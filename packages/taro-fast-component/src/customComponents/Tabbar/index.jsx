@@ -123,16 +123,19 @@ class Tabbar extends BaseComponent {
         '--border-color': borderColor,
         '--bar-background-color': backgroundColor,
       },
-
-      ...(zIndex > 0 ? { '--z-index': `${zIndex}` } : {}),
+      ...(zIndex > 0 ? { zIndex: `${zIndex}` } : {}),
       ...styleSource,
     };
 
     return (
-      <View className={classNames(classPrefix)} style={style}>
+      <View
+        className={classNames(classPrefix, {
+          [`${classPrefix}--fixed`]: fixed,
+        })}
+        style={style}
+      >
         <View
           className={classNames(`${classPrefix}__content`, {
-            [`${classPrefix}--fixed`]: fixed,
             [`${classPrefix}--border`]: border,
             [`${classPrefix}--safe-area`]: fixed && safeAreaInsetBottom,
           })}

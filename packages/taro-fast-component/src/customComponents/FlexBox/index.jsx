@@ -18,7 +18,7 @@ const defaultProps = {
   left: null,
   leftStyle: {},
   right: null,
-  leftStyle: {},
+  rightStyle: {},
   top: null,
   topStyle: {},
   bottom: null,

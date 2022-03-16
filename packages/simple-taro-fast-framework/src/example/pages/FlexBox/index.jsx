@@ -94,7 +94,7 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <PropertyBox config={FlexBox.defaultProps} labelWidth={170} />
+        <PropertyBox config={FlexBox.defaultProps} labelWidth={270} />
       </Space>
     );
   };
