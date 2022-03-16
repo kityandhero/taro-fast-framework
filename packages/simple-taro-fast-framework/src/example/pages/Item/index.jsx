@@ -2,24 +2,17 @@ import { Image } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Item,
-  SwitchItem,
+  Switch,
   Icon,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSketch, IconShoppingCart } = Icon;
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
 
 const users = [
   {
@@ -48,10 +41,16 @@ const users = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '条目项',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Item',
     name: '条目项',
+    description: '条目项组件',
   };
 
   handleClick = (type) => {
@@ -64,34 +63,19 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="基础用法"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
+        <SimpleBox header="基础用法" space={false}>
           <Item label="1" />
           <Item label="2" />
           <Item label="3" border={false} />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="箭头"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
+        <SimpleBox header="箭头" space={false}>
           <Item label="账单" arrow />
           <Item label="总资产" arrow />
           <Item label="设置" arrow border={false} />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="可点击"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
+        <SimpleBox header="可点击" space={false}>
           <Item label="账单" clickable arrow onClick={this.handleClick} />
           <Item label="总资产" clickable arrow onClick={this.handleClick} />
           <Item
@@ -101,32 +85,21 @@ export default class Index extends ContentPageBase {
             border={false}
             onClick={this.handleClick}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="复杂布局"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <Item label="新消息通知" extra={<SwitchItem defaultChecked />} />
+        <SimpleBox header="复杂布局" space={false}>
+          <Item label="新消息通知" extra={<Switch defaultChecked />} />
           <Item label="大字号模式" extra="未开启" clickable arrow />
           <Item
             label="授权管理"
             description="管理已授权的产品和设备"
             clickable
             arrow
-            border={false}
           />
-          <Item title="这里是标题" label="这里是主信息" />
-        </Card>
+          <Item title="这里是标题" label="这里是主信息" border={false} />
+        </SimpleBox>
 
-        <Card
-          header="禁用状态"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
+        <SimpleBox header="禁用状态" space={false}>
           <Item label="账单" disabled clickable arrow prefix={<IconSketch />} />
           <Item
             label="总资产"
@@ -134,14 +107,9 @@ export default class Index extends ContentPageBase {
             prefix={<IconShoppingCart />}
             border={false}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="用户列表布局"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
+        <SimpleBox header="用户列表布局" space={false}>
           {users.map((user, index) => (
             <Item
               key={user.name}
@@ -161,7 +129,9 @@ export default class Index extends ContentPageBase {
               description={user.description}
             />
           ))}
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={Item.defaultProps} labelWidth={260} />
       </Space>
     );
   };
