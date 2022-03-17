@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { View } from '@tarojs/components';
 
 import {
   stringIsNullOrWhiteSpace,
@@ -7,13 +8,16 @@ import {
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   isArray,
+  isBoolean,
   isFunction,
   isObject,
+  isString,
 } from 'taro-fast-common/es/utils/typeCheck';
 import {
   Card,
   ColorText,
   HelpBox,
+  Divider,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
@@ -33,6 +37,8 @@ const defaultProps = {
   config: {},
   description: null,
   extra: null,
+  componentName: '',
+  mockChildren: true,
 };
 
 class SimpleBox extends Component {
@@ -57,9 +63,75 @@ class SimpleBox extends Component {
     return list;
   };
 
+  buildConfig = () => {
+    const { config } = this.props;
+
+    let result = '';
+
+    Object.entries(config).forEach((d) => {
+      const [key, value] = d;
+
+      if (isBoolean(value) && value) {
+        result = result + `${key} `;
+      } else if (isString(value)) {
+        result = result + `${key}="${value}" `;
+      } else if (isObject(value) || isArray) {
+        result = result + `${key}={${JSON.stringify(value)}} `;
+      } else if (isFunction(value)) {
+        result = result + `${key}={${JSON.stringify(value)}} `;
+      } else {
+        result = result + `${key}={${toString(value)}} `;
+      }
+    });
+
+    return result;
+  };
+
+  buildCode = () => {
+    const { componentName, mockChildren } = this.props;
+
+    if (stringIsNullOrWhiteSpace(componentName)) {
+      return null;
+    }
+
+    let code = '';
+
+    if (mockChildren) {
+      code = `<${componentName} ${this.buildConfig()}>...</${componentName}>`;
+    } else {
+      code = `<${componentName} ${this.buildConfig()} />`;
+    }
+
+    return (
+      <>
+        <Divider contentPosition="left">代码示例 点击复制</Divider>
+
+        <View>
+          <ColorText
+            color="#999"
+            text={code}
+            textStyle={{
+              fontSize: transformSize(26),
+              lineHeight: transformSize(32),
+            }}
+            canCopy
+          />
+        </View>
+      </>
+    );
+  };
+
   render() {
-    const { space, prefix, header, description, helpTitle, extra, children } =
-      this.props;
+    const {
+      space,
+      prefix,
+      header,
+      description,
+      helpTitle,
+      extra,
+      useInnerBox,
+      children,
+    } = this.props;
 
     const list = this.buildList();
 
@@ -85,8 +157,26 @@ class SimpleBox extends Component {
         }
         space={space}
         extra={extra}
+        useInnerBox={false}
       >
-        {children}
+        {useInnerBox ? (
+          <View
+            style={{
+              width: 'calc(100% - var(--tfc-11) * 2)',
+              minHeight: transformSize(120),
+              border: 'var(--tfc-1) solid #ccc',
+              padding: 'var(--tfc-10) var(--tfc-10)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            fillHeight={false}
+          >
+            {children}
+          </View>
+        ) : (
+          children
+        )}
 
         {list.length > 0 ? (
           <HelpBox
@@ -97,6 +187,8 @@ class SimpleBox extends Component {
             list={this.buildList()}
           />
         ) : null}
+
+        {this.buildCode()}
       </Card>
     );
   }

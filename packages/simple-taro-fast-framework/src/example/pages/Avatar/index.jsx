@@ -50,27 +50,63 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="头像" config={config1}>
+        <SimpleBox
+          header="头像"
+          config={config1}
+          componentName="Avatar"
+          mockChildren={false}
+          useInnerBox
+        >
           <Avatar {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="圆形头像" config={config2}>
+        <SimpleBox
+          header="圆形头像"
+          config={config2}
+          componentName="Avatar"
+          mockChildren={false}
+          useInnerBox
+        >
           <Avatar {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="文字" config={config3}>
+        <SimpleBox
+          header="文字"
+          config={config3}
+          componentName="Avatar"
+          mockChildren={false}
+          useInnerBox
+        >
           <Avatar {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="圆形文字" config={config4}>
+        <SimpleBox
+          header="圆形文字"
+          config={config4}
+          componentName="Avatar"
+          mockChildren={false}
+          useInnerBox
+        >
           <Avatar {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="小尺寸" config={config5}>
+        <SimpleBox
+          header="小尺寸"
+          config={config5}
+          componentName="Avatar"
+          mockChildren={false}
+          useInnerBox
+        >
           <Avatar {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="大尺寸" config={config6}>
+        <SimpleBox
+          header="大尺寸"
+          config={config6}
+          componentName="Avatar"
+          mockChildren={false}
+          useInnerBox
+        >
           <Avatar {...config6} />
         </SimpleBox>
 

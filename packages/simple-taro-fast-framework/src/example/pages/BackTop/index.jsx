@@ -14,6 +14,19 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 // import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
+
+const config1 = {
+  visible: true,
+  right: 120,
+  opacity: 0.4,
+  circle: false,
+  iconColor: 'red',
+  backgroundColor: '#000',
+  onClick: () => {
+    console.log('click');
+  },
+};
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -82,6 +95,12 @@ export default class Index extends ContentPageBase {
               <View>向下滚动</View>
             </HorizontalCenterBox>
           </View>
+
+          <CodeBox
+            config={config1}
+            componentName="BackTop"
+            mockChildren={false}
+          />
 
           <PropertyBox config={BackTop.defaultProps} labelWidth={220} />
 

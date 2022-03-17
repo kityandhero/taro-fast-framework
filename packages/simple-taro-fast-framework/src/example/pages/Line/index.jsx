@@ -42,27 +42,62 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="水平线">
+        <SimpleBox
+          header="水平线"
+          componentName="Line"
+          mockChildren={false}
+          useInnerBox
+        >
           <Line />
         </SimpleBox>
 
-        <SimpleBox header="设置宽度" config={config1}>
+        <SimpleBox
+          header="设置宽度"
+          config={config1}
+          componentName="Line"
+          mockChildren={false}
+          useInnerBox
+        >
           <Line {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="设置高度" config={config2}>
+        <SimpleBox
+          header="设置高度"
+          config={config2}
+          componentName="Line"
+          mockChildren={false}
+          useInnerBox
+        >
           <Line {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="设置颜色" config={config3}>
+        <SimpleBox
+          header="设置颜色"
+          config={config3}
+          componentName="Line"
+          mockChildren={false}
+          useInnerBox
+        >
           <Line {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="颜色渐变" config={config4}>
+        <SimpleBox
+          header="颜色渐变"
+          config={config4}
+          componentName="Line"
+          mockChildren={false}
+          useInnerBox
+        >
           <Line {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="垂直线" config={config5}>
+        <SimpleBox
+          header="垂直线"
+          config={config5}
+          componentName="Line"
+          mockChildren={false}
+          useInnerBox
+        >
           <Line {...config5} />
         </SimpleBox>
 

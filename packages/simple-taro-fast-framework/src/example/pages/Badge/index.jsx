@@ -65,55 +65,109 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="包裹模式 文字" config={config1}>
+        <SimpleBox
+          header="包裹模式 文字"
+          config={config1}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config1}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 圆点" config={config2}>
+        <SimpleBox
+          header="包裹模式 圆点"
+          config={config2}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config2}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 设置颜色" config={config3}>
+        <SimpleBox
+          header="包裹模式 设置颜色"
+          config={config3}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config3}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 设置样式" config={config4}>
+        <SimpleBox
+          header="包裹模式 设置样式"
+          config={config4}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config4}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 位于左上角" config={config5}>
+        <SimpleBox
+          header="包裹模式 位于左上角"
+          config={config5}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config5}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 位于右上角" config={config6}>
+        <SimpleBox
+          header="包裹模式 位于右上角"
+          config={config6}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config6}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 位于左下角" config={config7}>
+        <SimpleBox
+          header="包裹模式 位于左下角"
+          config={config7}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config7}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="包裹模式 位于右下角" config={config8}>
+        <SimpleBox
+          header="包裹模式 位于右下角"
+          config={config8}
+          componentName="Badge"
+          mockChildren
+          useInnerBox
+        >
           <Badge {...config8}>
             <Avatar text="图" />
           </Badge>
         </SimpleBox>
 
-        <SimpleBox header="单独使用" config={config9}>
+        <SimpleBox
+          header="单独使用"
+          config={config9}
+          componentName="Badge"
+          mockChildren={false}
+          useInnerBox
+        >
           <Badge {...config9} />
         </SimpleBox>
 

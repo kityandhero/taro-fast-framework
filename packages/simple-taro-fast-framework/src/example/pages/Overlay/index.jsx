@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Item,
   Overlay,
   CenterBox,
@@ -10,15 +9,9 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const boxStyle = {
   width: transformSize(80),
@@ -93,10 +86,16 @@ const animalList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '遮罩',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Overlay',
-    name: '遮罩',
+    name: '遮罩容器',
+    description: '遮罩容器组件',
   };
 
   constructor(props) {
@@ -202,7 +201,7 @@ export default class Index extends ContentPageBase {
     return (
       <>
         <Space direction="vertical" fillWidth>
-          <Card header="展示容器" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="展示容器">
             <View style={{ height: transformSize(300), position: 'relative' }}>
               <CenterBox>父容器</CenterBox>
 
@@ -230,14 +229,9 @@ export default class Index extends ContentPageBase {
                 <View style={boxStyle} />
               </Overlay>
             </View>
-          </Card>
+          </SimpleBox>
 
-          <Card
-            header="遮罩层操控"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
+          <SimpleBox header="遮罩层操控" space={false}>
             <Item label="显示全局遮罩层" arrow onClick={this.onClickShow1} />
             <Item
               label="显示嵌入内容的全局遮罩层"
@@ -252,52 +246,50 @@ export default class Index extends ContentPageBase {
               border={false}
               onClick={this.onClickShow4}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="设置颜色" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="设置颜色">
             <Selector
               options={colorList}
               value={color}
               onChange={this.setColor}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="设置动画" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="设置动画">
             <Selector
               options={animalList}
               value={animal}
               columns={2}
               onChange={this.setAnimal}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="设置透明度" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="设置透明度">
             <Selector
               options={alphaList}
               value={alpha}
               onChange={this.setAlpha}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card
-            header="设置过渡时间"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
+          <SimpleBox header="设置过渡时间">
             <Selector
               options={durationList}
               value={duration}
               onChange={this.setDuration}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="设置Z轴" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="设置Z轴">
             <Selector
               options={zIndexList}
               value={zIndex}
               onChange={this.setZIndex}
             />
-          </Card>
+          </SimpleBox>
+
+          <PropertyBox config={Overlay.defaultProps} labelWidth={130} />
         </Space>
 
         <Overlay
