@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { mergeStyle, transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
+import ImageBox from '../ImageBox';
 
 import { defaultProps } from './config';
 
@@ -20,22 +21,39 @@ class Icon extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, className, value, size, color } = this.props;
+    const { style, className, value, size, color, imageMode } = this.props;
 
-    const rootStyle = {
-      fontSize: transformSize(size),
-      color,
-    };
+    if (imageMode) {
+      return (
+        <View
+          className={classNames(className)}
+          style={{
+            ...style,
+            ...{
+              width: transformSize(size),
+            },
+          }}
+          onClick={this.handleClick}
+        >
+          <ImageBox src={value} />
+        </View>
+      );
+    } else {
+      const rootStyle = {
+        fontSize: transformSize(size),
+        color,
+      };
 
-    const iconName = value ? `${prefixClass}-${value}` : '';
+      const iconName = value ? `${prefixClass}-${value}` : '';
 
-    return (
-      <View
-        className={classNames(prefixClass, iconName, className)}
-        style={mergeStyle(rootStyle, style)}
-        onClick={this.handleClick}
-      />
-    );
+      return (
+        <View
+          className={classNames(prefixClass, iconName, className)}
+          style={{ ...rootStyle, ...style }}
+          onClick={this.handleClick}
+        />
+      );
+    }
   }
 }
 

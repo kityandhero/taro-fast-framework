@@ -4,6 +4,7 @@ export const defaultProps = {
   value: '',
   color: '',
   size: 24,
+  imageMode: false,
   hidden: false,
   onClick: null,
 };

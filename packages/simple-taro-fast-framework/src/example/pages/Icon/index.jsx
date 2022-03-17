@@ -14,6 +14,7 @@ import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import logoImg from '../../../assets/images/logo.png';
 
 const icons = {
   main: [
@@ -141,6 +142,12 @@ const nameStyle = {
   margin: 'var(--tfc-20) 0',
 };
 
+const config1 = {
+  size: 42,
+  imageMode: true,
+  value: logoImg,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '图标',
@@ -205,6 +212,23 @@ export default class Index extends ContentPageBase {
 
         <SimpleBox header="Logo">
           {this.buildGrid('logo', icons.logo)}
+        </SimpleBox>
+
+        <SimpleBox header="图片模式" config={config1}>
+          <Grid columns={3}>
+            <Grid.Item>
+              <FlexBox
+                style={boxStyle}
+                flexAuto="top"
+                top={
+                  <CenterBox>
+                    <Icon {...config1} />
+                  </CenterBox>
+                }
+                bottom={<View style={nameStyle}>外部图片</View>}
+              />
+            </Grid.Item>
+          </Grid>
         </SimpleBox>
 
         <PropertyBox config={Icon.defaultProps} labelWidth={170} />

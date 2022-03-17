@@ -149,7 +149,7 @@ class ColorText extends BaseComponent {
               : {}
           }
           right={
-            <VerticalBox>
+            <VerticalBox style={{ lineHeight: '1' }}>
               {stringIsNullOrWhiteSpace(textPrefix) ? null : (
                 <>
                   <Text style={textPrefixStyle || null}>{textPrefix}</Text>

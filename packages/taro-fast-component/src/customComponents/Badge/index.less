@@ -1,11 +1,19 @@
 @class-prefix-badge: ~'tfc-badge';
 
 .@{class-prefix-badge}-wrap {
+  --wrap-height: auto;
+
   display: inline-block;
   position: relative;
+  height: var(--wrap-height);
 }
 
 .@{class-prefix-badge} {
+  --right: 0;
+  --top: 0;
+  --dot-size: var(--tfc-20);
+  --font-size: var(--tfc-22);
+
   display: inline-block;
   color: #fff;
   font-weight: normal;
@@ -14,12 +22,9 @@
   box-sizing: border-box;
   min-width: var(--tfc-16);
   border-radius: var(--tfc-100);
-  font-size: var(--tfc-22);
+  font-size: var(--font-size);
   line-height: 1.2;
   white-space: nowrap;
-
-  --right: 0;
-  --top: 0;
 
   &-fixed {
     position: absolute;
@@ -35,10 +40,10 @@
   }
 
   &-dot {
-    min-width: var(--tfc-20);
-    width: var(--tfc-20);
-    height: var(--tfc-20);
+    min-width: var(--dot-size);
+    width: var(--dot-size);
+    height: var(--dot-size);
     border-radius: 50%;
-    padding: 0 var(--tfc-10);
+    padding: 0 calc(var(--dot-size) / 2);
   }
 }

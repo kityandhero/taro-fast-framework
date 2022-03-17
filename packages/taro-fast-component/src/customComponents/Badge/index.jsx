@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import {
+  inCollection,
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -17,7 +21,12 @@ const defaultProps = {
   color: '#FF411C',
   content: null,
   dot: false,
+  dotSize: 20,
   position: 'topRight',
+  fontSize: 22,
+  wrapHeight: 'auto',
+  wrapStyle: {},
+  wrapCenter: false,
 };
 
 export const dot = Symbol();
@@ -29,13 +38,45 @@ class Badge extends BaseComponent {
     return inCollection(positionCollection, position) ? position : 'topRight';
   };
 
+  buildWrapStyle = () => {
+    const { wrapStyle, wrapHeight, wrapCenter } = this.props;
+
+    return {
+      ...wrapStyle,
+      ...(!stringIsNullOrWhiteSpace(wrapHeight)
+        ? {
+            '--wrap-height': transformSize(wrapHeight),
+          }
+        : {}),
+      ...(wrapCenter
+        ? {
+            display: 'flex',
+            alignItems: 'center',
+            alignContent: 'center',
+            justifyContent: 'center',
+            justifyItems: 'center',
+          }
+        : {}),
+    };
+  };
+
   buildStyle = () => {
-    const { style } = this.props;
+    const { style, dotSize, fontSize } = this.props;
 
     const position = this.getPosition();
 
     return {
       ...style,
+      ...(fontSize > 0
+        ? {
+            '--font-size': transformSize(fontSize),
+          }
+        : {}),
+      ...(dotSize > 0
+        ? {
+            '--dot-size': transformSize(dotSize),
+          }
+        : {}),
       ...(position === 'topLeft'
         ? {
             '--right': '100%',
@@ -71,6 +112,7 @@ class Badge extends BaseComponent {
       className,
     );
 
+    const wrapStyle = this.buildWrapStyle();
     const style = this.buildStyle();
 
     console.log({ style });
@@ -91,7 +133,7 @@ class Badge extends BaseComponent {
       ) : null;
 
     return children ? (
-      <View className={`${classPrefix}-wrap`}>
+      <View className={`${classPrefix}-wrap`} style={wrapStyle}>
         {children}
         {element}
       </View>

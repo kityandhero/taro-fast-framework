@@ -2,17 +2,18 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Tabs,
   Badge,
   Icon,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import logoImg from '../../../assets/images/logo.png';
 
-const { IconAdd } = Icon;
+const { IconSketch } = Icon;
 const { TabPanel } = Tabs;
 
 const tabList = [
@@ -21,25 +22,27 @@ const tabList = [
     useBadge: true,
     badgeColor: 'red',
     badgeContent: Badge.dot,
-    icon: <IconAdd size={24} />,
+    icon: <IconSketch size={24} />,
   },
-  { title: '标签页2', useBadge: true, badgeContent: '更多' },
+  {
+    title: '标签页2',
+    useBadge: true,
+    badgeContent: '更多',
+    icon: <Icon size={36} imageMode value={logoImg} />,
+  },
   { title: '标签页3' },
 ];
 
-const contentStyle = { padding: '0' };
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '标签面板',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Tabs',
     name: '标签面板',
+    description: '标签面板组件',
   };
 
   constructor(props) {
@@ -83,12 +86,7 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="基本用法"
-          contentStyle={contentStyle}
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="基本用法" space={false}>
           <Tabs
             current={this.state.current1}
             tabList={tabList}
@@ -130,14 +128,9 @@ export default class Index extends ContentPageBase {
               </View>
             </TabPanel>
           </Tabs>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="滚动标签栏"
-          contentStyle={contentStyle}
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="滚动标签栏">
           <Tabs
             current={this.state.current2}
             scroll
@@ -220,14 +213,9 @@ export default class Index extends ContentPageBase {
               </View>
             </TabPanel>
           </Tabs>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="垂直模式"
-          contentStyle={contentStyle}
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="垂直模式">
           <Tabs
             current={this.state.current3}
             scroll
@@ -336,14 +324,9 @@ export default class Index extends ContentPageBase {
               </View>
             </TabPanel>
           </Tabs>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="禁止内容切换动画"
-          contentStyle={contentStyle}
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="禁止内容切换动画">
           <Tabs
             animated={false}
             current={this.state.current4}
@@ -393,7 +376,19 @@ export default class Index extends ContentPageBase {
               </View>
             </TabPanel>
           </Tabs>
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox
+          header="Tabs 可配置项以及默认值"
+          config={Tabs.defaultProps}
+          labelWidth={150}
+        />
+
+        <PropertyBox
+          header="TabPanel 可配置项以及默认值"
+          config={TabPanel.defaultProps}
+          labelWidth={150}
+        />
       </Space>
     );
   };

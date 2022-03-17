@@ -2347,7 +2347,7 @@ export function transformSize(si) {
         return `var(--tfc-${s})`;
       }
 
-      return `calc(var(--tfc-${s}) * -1)`;
+      return `calc(var(--tfc-${Math.abs(s)}) * -1)`;
     }
 
     return `${s}px`;

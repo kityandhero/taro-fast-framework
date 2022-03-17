@@ -6,6 +6,7 @@ import {
   inCollection,
   getGuid,
   mergeStyle,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -252,10 +253,111 @@ class Tabs extends BaseComponent {
     }
   };
 
+  buildTabItemList = () => {
+    const { height, tabList, scroll, current } = this.props;
+    const { scrollLeft, scrollTop, scrollIntoView } = this.state;
+
+    const direction = this.getDirection();
+    const heightStyle = { height };
+    const scrollX = direction === 'horizontal';
+    const scrollY = direction === 'vertical';
+
+    const tabItems = (tabList || []).map((item, idx) => {
+      const itemCls = classNames({
+        'tfc-tabs__item': true,
+        'tfc-tabs__item--active': current === idx,
+      });
+
+      const {
+        title,
+        style: styleItem,
+        useBadge,
+        badgeColor,
+        badgeDotSize,
+        badgeContent,
+        badgeStyle,
+        icon: iconItem,
+        badgeFontSize,
+      } = {
+        ...{
+          badgeDotSize: 16,
+          badgeStyle: {
+            marginTop: transformSize(-4),
+          },
+          badgeFontSize: 18,
+        },
+        ...item,
+      };
+
+      const titleCoreComponent = (
+        <ColorText
+          icon={iconItem}
+          iconContainerStyle={{
+            paddingRight: transformSize(10),
+          }}
+          text={title}
+        />
+      );
+
+      const titleComponent = useBadge ? (
+        <Badge
+          content={badgeContent}
+          color={badgeColor}
+          dotSize={badgeDotSize}
+          style={badgeStyle}
+          fontSize={badgeFontSize}
+          wrapHeight="100%"
+          wrapCenter
+        >
+          {titleCoreComponent}
+        </Badge>
+      ) : (
+        titleCoreComponent
+      );
+
+      return (
+        <View
+          className={itemCls}
+          id={`tab${this.tabId}${idx}`}
+          key={`tfc-tabs-item-${idx}`}
+          style={styleItem || {}}
+          onClick={(e) => {
+            this.handleClick(idx, e);
+          }}
+        >
+          {titleComponent}
+
+          <View className="tfc-tabs__item-underline"></View>
+        </View>
+      );
+    });
+
+    return scroll ? (
+      <ScrollView
+        id={this.tabId}
+        className="tfc-tabs__header"
+        style={heightStyle}
+        scrollX={scrollX}
+        scrollY={scrollY}
+        scrollWithAnimation
+        enhanced
+        showScrollbar={false}
+        scrollLeft={scrollLeft}
+        scrollTop={scrollTop}
+        scrollIntoView={scrollIntoView}
+      >
+        {tabItems}
+      </ScrollView>
+    ) : (
+      <View id={this.tabId} className="tfc-tabs__header">
+        {tabItems}
+      </View>
+    );
+  };
+
   renderFurther() {
     const { style, className, height, animated, tabList, scroll, current } =
       this.props;
-    const { scrollLeft, scrollTop, scrollIntoView } = this.state;
     const direction = this.getDirection();
 
     const heightStyle = { height };
@@ -276,45 +378,6 @@ class Tabs extends BaseComponent {
       bodyStyle.transition = 'unset';
     }
 
-    const tabItems = tabList.map((item, idx) => {
-      const itemCls = classNames({
-        'tfc-tabs__item': true,
-        'tfc-tabs__item--active': current === idx,
-      });
-
-      const {
-        title,
-        style: styleItem,
-        useBadge,
-        badgeColor,
-        badgeContent,
-        icon: iconItem,
-      } = item;
-
-      const titleComponent = useBadge ? (
-        <Badge content={badgeContent} color={badgeColor}>
-          <ColorText icon={iconItem} text={title} />
-        </Badge>
-      ) : (
-        <ColorText icon={iconItem} text={title} />
-      );
-
-      return (
-        <View
-          className={itemCls}
-          id={`tab${this.tabId}${idx}`}
-          key={`tfc-tabs-item-${idx}`}
-          style={styleItem || {}}
-          onClick={(e) => {
-            this.handleClick(idx, e);
-          }}
-        >
-          {titleComponent}
-          <View className="tfc-tabs__item-underline"></View>
-        </View>
-      );
-    });
-
     const rootCls = classNames(
       {
         'tfc-tabs': true,
@@ -324,32 +387,13 @@ class Tabs extends BaseComponent {
       },
       className,
     );
-    const scrollX = direction === 'horizontal';
-    const scrollY = direction === 'vertical';
+
+    const tabItemList = this.buildTabItemList();
 
     return (
       <View className={rootCls} style={mergeStyle(heightStyle, style)}>
-        {scroll ? (
-          <ScrollView
-            id={this.tabId}
-            className="tfc-tabs__header"
-            style={heightStyle}
-            scrollX={scrollX}
-            scrollY={scrollY}
-            scrollWithAnimation
-            enhanced
-            showScrollbar={false}
-            scrollLeft={scrollLeft}
-            scrollTop={scrollTop}
-            scrollIntoView={scrollIntoView}
-          >
-            {tabItems}
-          </ScrollView>
-        ) : (
-          <View id={this.tabId} className="tfc-tabs__header">
-            {tabItems}
-          </View>
-        )}
+        {tabItemList}
+
         <View
           className="tfc-tabs__body"
           onTouchStart={this.handleTouchStart}
