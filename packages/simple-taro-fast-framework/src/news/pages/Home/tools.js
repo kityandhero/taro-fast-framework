@@ -17,6 +17,7 @@ import {
   ColorText,
   Icon,
   HorizontalScrollBox,
+  TranslucentBox,
 } from 'taro-fast-component/es/customComponents';
 
 export const classPrefix = `simple-news-home`;
@@ -45,16 +46,16 @@ export function buildItem({
                 aspectRatio={0.87}
                 decorationBuilder={() => {
                   return (
-                    <View
+                    <TranslucentBox
                       style={{
                         position: 'absolute',
-                        opacity: 0.5,
-                        backgroundColor: '#000',
                         bottom: 0,
                         left: 0,
                         width: '100%',
                         height: transformSize(68),
                       }}
+                      backgroundColor="#000"
+                      alpha={0.5}
                     >
                       <CenterBox>
                         <Ellipsis
@@ -70,7 +71,7 @@ export function buildItem({
                           {title}
                         </Ellipsis>
                       </CenterBox>
-                    </View>
+                    </TranslucentBox>
                   );
                 }}
               />

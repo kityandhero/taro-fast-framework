@@ -7,6 +7,7 @@ import {
   Space,
   CenterBox,
   Ellipsis,
+  TranslucentBox,
 } from 'taro-fast-component/es/customComponents';
 
 import { colStyle } from '@/customConfig/constants';
@@ -82,16 +83,16 @@ const config9 = {
   src,
   decorationBuilder: () => {
     return (
-      <View
+      <TranslucentBox
         style={{
           position: 'absolute',
-          opacity: 0.5,
-          backgroundColor: '#000',
           bottom: 0,
           left: 0,
           width: '100%',
           height: transformSize(68),
         }}
+        backgroundColor="#000"
+        alpha={0.5}
       >
         <CenterBox>
           <Ellipsis
@@ -105,7 +106,7 @@ const config9 = {
             装饰文字
           </Ellipsis>
         </CenterBox>
-      </View>
+      </TranslucentBox>
     );
   },
 };
