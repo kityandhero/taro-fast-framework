@@ -1,23 +1,12 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import {
-  Card,
-  VerticalBox,
-  HelpBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { VerticalBox, Space } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const containorStyle = {
   border: `${transformSize(2)} solid #ccc`,
@@ -69,10 +58,16 @@ const alignJustifyList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '垂直容器',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'VerticalBox',
-    name: '垂直居中',
+    name: '垂直容器',
+    description: '垂直容器组件',
   };
 
   constructor(props) {
@@ -104,23 +99,15 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="单元素布局展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="单元素布局展示">
           <View style={containorStyle}>
             <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
               <View style={boxStyle}></View>
             </VerticalBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="多元素布局展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="多元素布局展示">
           <View style={containorStyle}>
             <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
               <View style={boxStyle}></View>
@@ -128,48 +115,27 @@ export default class Index extends ContentPageBase {
               <View style={boxStyle}></View>
             </VerticalBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="变更align" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="变更align">
           <Selector
+            columns={3}
             options={alignList}
             value={align}
             onChange={this.setAlignChecked}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="变更alignJustify"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="变更alignJustify">
           <Selector
+            columns={3}
             options={alignJustifyList}
             value={alignJustify}
             onChange={this.setAlignJustifyChecked}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
-          <HelpBox
-            showTitle={false}
-            showNumber={false}
-            list={[
-              {
-                text: 'style: 默认值为 null.',
-              },
-              {
-                text: 'align: 默认值为 center.',
-              },
-              {
-                text: 'alignJustify: 默认值为 start.',
-              },
-              {
-                text: 'onClick: 默认值为 null.',
-              },
-            ]}
-          />
-        </Card>
+        <PropertyBox config={VerticalBox.defaultProps} labelWidth={220} />
       </Space>
     );
   };

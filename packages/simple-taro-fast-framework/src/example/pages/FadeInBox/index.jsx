@@ -7,6 +7,8 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const style = {
   lineHeight: '1',
@@ -17,10 +19,16 @@ const style = {
 
 const duration = 1200;
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '渐显容器',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'FadeInBox',
     name: '渐显容器',
+    description: '渐显容器组件',
   };
 
   constructor(props) {
@@ -55,17 +63,23 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        {show ? this.buildItem() : null}
+        <SimpleBox header="默认">
+          <Space direction="vertical" fillWidth>
+            {show ? this.buildItem() : null}
 
-        {show ? this.buildItem() : null}
+            {show ? this.buildItem() : null}
 
-        {show ? this.buildItem() : null}
+            {show ? this.buildItem() : null}
 
-        {show ? this.buildItem() : null}
+            {show ? this.buildItem() : null}
 
-        {show ? this.buildItem() : null}
+            {show ? this.buildItem() : null}
 
-        {show ? this.buildItem() : null}
+            {show ? this.buildItem() : null}
+          </Space>
+        </SimpleBox>
+
+        <PropertyBox config={FadeInBox.defaultProps} labelWidth={220} />
       </Space>
     );
   };

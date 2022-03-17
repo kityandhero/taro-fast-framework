@@ -1,97 +1,138 @@
 import { Text } from '@tarojs/components';
 
 import {
-  Card,
   Divider,
   Space,
   Icon,
   ActivityIndicator,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSearch } = Icon;
 const { buildDivider } = Divider;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  contentPosition: 'left',
 };
+
+const config2 = {
+  contentPosition: 'right',
+};
+
+const config3 = {
+  lineColor: '#1677ff',
+};
+
+const config4 = {
+  lineWidth: 20,
+};
+
+const config5 = {
+  lineStyle: 'dashed',
+};
+
+const config6 = {
+  lineStyle: 'dotted',
+};
+
+const config7 = {
+  padding: 10,
+};
+
+const config8 = {
+  height: 60,
+};
+
+const config9 = {
+  style: {
+    color: '#1677ff',
+    borderColor: '#1677ff',
+    borderStyle: 'dashed',
+  },
+};
+
+const config10 = {
+  style: {
+    color: '#1677ff',
+    borderColor: '#1677ff',
+    borderStyle: 'dashed',
+  },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '间隔线',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Divider',
     name: '间隔线',
+    description: '间隔线组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="默认水平模式" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="默认">
           <Divider />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="带内容的分割线"
-          style={style}
-          headerStyle={cardHeaderStyle}
-        >
+        <SimpleBox header="含有内容">
           <Divider>默认内容在中间</Divider>
-          <Divider contentPosition="left">左侧内容</Divider>
-          <Divider contentPosition="right">右侧内容</Divider>
-        </Card>
+        </SimpleBox>
 
-        <Card header="定义线颜色" style={style} headerStyle={cardHeaderStyle}>
-          <Divider lineColor="#1677ff">内容</Divider>
-        </Card>
+        <SimpleBox header="方向 left" config={config1}>
+          <Divider {...config1}>内容</Divider>
+        </SimpleBox>
 
-        <Card header="定义线类型" style={style} headerStyle={cardHeaderStyle}>
-          <Divider lineStyle="dashed">内容</Divider>
-        </Card>
+        <SimpleBox header="方向 right" config={config2}>
+          <Divider {...config2}>内容</Divider>
+        </SimpleBox>
 
-        <Card header="定义线宽度" style={style} headerStyle={cardHeaderStyle}>
-          <Divider lineWidth={20}>内容</Divider>
-        </Card>
+        <SimpleBox header="设定颜色" config={config3}>
+          <Divider {...config3}>内容</Divider>
+        </SimpleBox>
 
-        <Card header="定义上下间距" style={style} headerStyle={cardHeaderStyle}>
-          <Divider padding={10}>内容</Divider>
-        </Card>
+        <SimpleBox header="设定线宽度" config={config4}>
+          <Divider {...config4}>内容</Divider>
+        </SimpleBox>
 
-        <Card header="定义内容高度" style={style} headerStyle={cardHeaderStyle}>
-          <Divider height={60}>内容</Divider>
-        </Card>
+        <SimpleBox header="线条类型 dashed" config={config5}>
+          <Divider {...config5}>内容</Divider>
+        </SimpleBox>
 
-        <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
-          <Divider
-            style={{
-              color: '#1677ff',
-              borderColor: '#1677ff',
-              borderStyle: 'dashed',
-            }}
-          >
+        <SimpleBox header="线条类型 dotted" config={config6}>
+          <Divider {...config6}>内容</Divider>
+        </SimpleBox>
+
+        <SimpleBox header="设定上下间距" config={config7}>
+          <Divider {...config7}>内容</Divider>
+        </SimpleBox>
+
+        <SimpleBox header="设定内容高度" config={config8}>
+          <Divider {...config8}>内容</Divider>
+        </SimpleBox>
+
+        <SimpleBox header="附带图标" config={config9}>
+          <Divider {...config9}>
             <Space>
               <IconSearch size={32} />
               <Text>搜索</Text>
             </Space>
           </Divider>
-        </Card>
+        </SimpleBox>
 
-        <Card header="包裹组件" style={style} headerStyle={cardHeaderStyle}>
-          <Divider
-            style={{
-              color: '#1677ff',
-              borderColor: '#1677ff',
-              borderStyle: 'dashed',
-            }}
-          >
+        <SimpleBox header="附带图标" config={config10}>
+          <Divider {...config10}>
             <ActivityIndicator content="加载中" />
           </Divider>
-        </Card>
+        </SimpleBox>
 
-        <Card header="buildDivider" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="buildDivider">
           {buildDivider({
             contentPosition: 'left',
             style: {
@@ -102,7 +143,9 @@ export default class Index extends ContentPageBase {
             icon: <IconSearch size={32} />,
             text: '搜索',
           })}
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={Divider.defaultProps} labelWidth={220} />
       </Space>
     );
   };
