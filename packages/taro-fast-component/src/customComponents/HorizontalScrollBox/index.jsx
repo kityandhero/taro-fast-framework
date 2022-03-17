@@ -101,9 +101,9 @@ class HorizontalScrollBox extends BaseComponent {
           scrollY={false}
           scrollWithAnimation
           scrollAnchoring
-          scrollEnhanced
-          scrollBounces
-          scrollShowScrollbar={false}
+          enhanced
+          bounces
+          showScrollbar={false}
           enableFlex
         >
           <View style={flexStyle}>
