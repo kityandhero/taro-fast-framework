@@ -4,6 +4,7 @@ import { Row, Col, Space } from 'taro-fast-component/es/customComponents';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const rowStyle = {
   height: transformSize(80),
@@ -58,6 +59,24 @@ export default class Index extends ContentPageBase {
             <Col size={6} style={greenStyle}></Col>
           </Row>
         </SimpleBox>
+
+        <CodeBox
+          componentName="Row"
+          mockChildren
+          config={{
+            justify: 'center',
+            style: rowStyle,
+          }}
+        />
+
+        <CodeBox
+          componentName="Col"
+          mockChildren
+          config={{
+            size: 'center',
+            style: blueStyle,
+          }}
+        />
 
         <PropertyBox
           header="Row 可配置项以及默认值"

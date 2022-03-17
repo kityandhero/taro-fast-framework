@@ -3,6 +3,7 @@ import { Space, Collapse } from 'taro-fast-component/es/customComponents';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const list = [
   {
@@ -72,6 +73,13 @@ export default class Index extends ContentPageBase {
         <SimpleBox header="禁用" space={false}>
           <Collapse {...config3} />
         </SimpleBox>
+
+        <CodeBox
+          config={config3}
+          componentName="Collapse"
+          mockChildren={false}
+          useInnerBox={false}
+        />
 
         <PropertyBox config={Collapse.defaultProps} labelWidth={270} />
       </Space>

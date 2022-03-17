@@ -5,6 +5,7 @@ import { FixedBox } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const style = {
   lineHeight: '1',
@@ -95,6 +96,20 @@ export default class Index extends ContentPageBase {
         >
           FixedTransitionBox
         </FixedBox> */}
+
+        <CodeBox
+          componentName="FadeInBox"
+          mockChildren
+          useInnerBox={false}
+          config={{
+            show: showTransition,
+            top: 200,
+            right: 40,
+            height: 6,
+            useTransition: true,
+            style,
+          }}
+        />
 
         <PropertyBox config={FixedBox.defaultProps} labelWidth={270} />
       </View>

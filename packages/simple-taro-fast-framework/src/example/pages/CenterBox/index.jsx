@@ -37,7 +37,13 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="布局展示" config={config1}>
+        <SimpleBox
+          header="布局展示"
+          config={config1}
+          componentName="CenterBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={containorStyle}>
             <CenterBox {...config1}>
               <View style={boxStyle}></View>
@@ -45,7 +51,7 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <PropertyBox config={CenterBox.defaultProps} labelWidth={220} />
+        <PropertyBox config={CenterBox.defaultProps} labelWidth={70} />
       </Space>
     );
   };

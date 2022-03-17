@@ -34,10 +34,16 @@ const config1 = {
 };
 
 const config2 = {
+  style: {
+    width: transformSize(180),
+  },
   fill: 'solid',
 };
 
 const config3 = {
+  style: {
+    width: transformSize(280),
+  },
   backgroundColor: ['#f43f3b', ' #ec008c'],
 };
 
@@ -162,26 +168,36 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="普通按钮">
+        <SimpleBox
+          header="普通按钮"
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="微信按钮" config={config1}>
+        <SimpleBox
+          header="微信按钮"
+          config={config1}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config1}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="内置颜色 附带阴影" config={config2}>
+        <SimpleBox
+          header="内置颜色 附带阴影"
+          config={config2}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space wrap size={16}>
             {colorList.map((o, i) => {
               return (
-                <Button
-                  key={`${i}`}
-                  style={{
-                    width: transformSize(180),
-                  }}
-                  backgroundColor={o}
-                  {...config2}
-                >
+                <Button key={`${i}`} backgroundColor={o} {...config2}>
                   {o}
                 </Button>
               );
@@ -189,7 +205,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="渐变色" config={config3}>
+        <SimpleBox
+          header="渐变色"
+          config={config3}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space wrap size={16}>
             <Button
               style={{
@@ -242,7 +264,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="设置颜色" config={config4}>
+        <SimpleBox
+          header="设置颜色"
+          config={config4}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space wrap size={16}>
             <Button backgroundColor="#45e209">Solid</Button>
             <Button backgroundColor="#99a2a9">Outline</Button>
@@ -250,67 +278,163 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="填充模式 solid" config={config5}>
+        <SimpleBox
+          header="填充模式 solid"
+          config={config5}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config5}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="填充模式 outline" config={config6}>
+        <SimpleBox
+          header="填充模式 outline"
+          config={config6}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config6}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="填充模式 none" config={config7}>
+        <SimpleBox
+          header="填充模式 none"
+          config={config7}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config7}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="大小 mini" config={config8}>
+        <SimpleBox
+          header="大小 mini"
+          config={config8}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config8}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="大小 small" config={config9}>
+        <SimpleBox
+          header="大小 small"
+          config={config9}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config9}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="大小 middle" config={config10}>
+        <SimpleBox
+          header="大小 middle"
+          config={config10}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config10}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="大小 large" config={config11}>
+        <SimpleBox
+          header="大小 large"
+          config={config11}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config11}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="块级按钮 mini" config={config12}>
+        <SimpleBox
+          header="块级按钮 mini"
+          config={config12}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config12}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="块级按钮 mini" config={config13}>
+        <SimpleBox
+          header="块级按钮 mini"
+          config={config13}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config13}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="块级按钮 mini" config={config14}>
+        <SimpleBox
+          header="块级按钮 mini"
+          config={config14}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config14}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="块级按钮 mini" config={config15}>
+        <SimpleBox
+          header="块级按钮 mini"
+          config={config15}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config15}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="涟漪效果" config={config16}>
+        <SimpleBox
+          header="涟漪效果"
+          config={config16}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config16}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="禁用状态" config={config17}>
+        <SimpleBox
+          header="禁用状态"
+          config={config17}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config17}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="加载中" config={config18}>
+        <SimpleBox
+          header="加载中"
+          config={config18}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config18}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="加载中" config={config18}>
+        <SimpleBox
+          header="加载中"
+          config={config18}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config18}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="加载中 overlay" config={config19}>
+        <SimpleBox
+          header="加载中 overlay"
+          config={config19}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config19}>按钮</Button>
         </SimpleBox>
 
@@ -320,23 +444,47 @@ export default class Index extends ContentPageBase {
           </Button>
         </SimpleBox>
 
-        <SimpleBox header="形状 default" config={config20}>
+        <SimpleBox
+          header="形状 default"
+          config={config20}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config20}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="形状 rounded" config={config21}>
+        <SimpleBox
+          header="形状 rounded"
+          config={config21}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config21}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="形状 rectangular" config={config22}>
+        <SimpleBox
+          header="形状 rectangular"
+          config={config22}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config22}>按钮</Button>
         </SimpleBox>
 
-        <SimpleBox header="自定义间距边框" config={config23}>
+        <SimpleBox
+          header="自定义间距边框"
+          config={config23}
+          componentName="Button"
+          mockChildren
+          useInnerBox={false}
+        >
           <Button {...config23}>按钮</Button>
         </SimpleBox>
 
-        <PropertyBox config={Button.defaultProps} labelWidth={270} />
+        <PropertyBox config={Button.defaultProps} labelWidth={330} />
       </Space>
     );
   };

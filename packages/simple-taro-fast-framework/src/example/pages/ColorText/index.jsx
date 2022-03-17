@@ -116,51 +116,123 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="一般用法" config={config1}>
+        <SimpleBox
+          header="一般用法"
+          config={config1}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="自定义分隔符" config={config2}>
+        <SimpleBox
+          header="自定义分隔符"
+          config={config2}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="点击复制" config={config3}>
+        <SimpleBox
+          header="点击复制"
+          config={config3}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="点击复制并进行回调 [查看控制台]" config={config4}>
+        <SimpleBox
+          header="点击复制并进行回调 [查看控制台]"
+          config={config4}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="颜色" config={config5}>
+        <SimpleBox
+          header="颜色"
+          config={config5}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="随机颜色" config={config6}>
+        <SimpleBox
+          header="随机颜色"
+          config={config6}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config6} />
         </SimpleBox>
 
-        <SimpleBox header="前缀样式" config={config7}>
+        <SimpleBox
+          header="前缀样式"
+          config={config7}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config7} />
         </SimpleBox>
 
-        <SimpleBox header="附带内置图标" config={config8}>
+        <SimpleBox
+          header="附带内置图标"
+          config={config8}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config8} />
         </SimpleBox>
 
-        <SimpleBox header="附带图片图标" config={config8}>
+        <SimpleBox
+          header="附带图片图标"
+          config={config8}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config12} />
         </SimpleBox>
 
-        <SimpleBox header="附带图片" config={config9}>
+        <SimpleBox
+          header="附带图片"
+          config={config9}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config9} />
         </SimpleBox>
 
-        <SimpleBox header="分隔符样式" config={config10}>
+        <SimpleBox
+          header="分隔符样式"
+          config={config10}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config10} />
         </SimpleBox>
 
-        <SimpleBox header="复杂样例" config={config11}>
+        <SimpleBox
+          header="复杂样例"
+          config={config11}
+          componentName="ColorText"
+          mockChildren={false}
+          useInnerBox
+        >
           <ColorText {...config11} />
         </SimpleBox>
 

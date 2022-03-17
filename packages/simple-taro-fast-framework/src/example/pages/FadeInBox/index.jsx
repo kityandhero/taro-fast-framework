@@ -9,6 +9,7 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const style = {
   lineHeight: '1',
@@ -78,6 +79,16 @@ export default class Index extends ContentPageBase {
             {show ? this.buildItem() : null}
           </Space>
         </SimpleBox>
+
+        <CodeBox
+          componentName="FadeInBox"
+          mockChildren
+          useInnerBox={false}
+          config={{
+            style,
+            duration,
+          }}
+        />
 
         <PropertyBox config={FadeInBox.defaultProps} labelWidth={220} />
       </Space>

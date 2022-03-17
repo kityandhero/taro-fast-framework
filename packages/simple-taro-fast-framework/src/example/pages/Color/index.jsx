@@ -15,6 +15,11 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '颜色',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Color',

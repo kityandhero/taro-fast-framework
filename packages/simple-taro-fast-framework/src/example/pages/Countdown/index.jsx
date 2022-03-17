@@ -92,55 +92,109 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认" config={config1}>
+        <SimpleBox
+          header="默认"
+          config={config1}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config1} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="显示天" config={config2}>
+        <SimpleBox
+          header="显示天"
+          config={config2}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config2} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="不显示小时" config={config3}>
+        <SimpleBox
+          header="不显示小时"
+          config={config3}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config3} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="自定义格式化" config={config4}>
+        <SimpleBox
+          header="自定义格式化"
+          config={config4}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config4} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="卡片式" config={config5}>
+        <SimpleBox
+          header="卡片式"
+          config={config5}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config5} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="卡片式自定义" config={config6}>
+        <SimpleBox
+          header="卡片式自定义"
+          config={config6}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config6} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="卡片填充式" config={config7}>
+        <SimpleBox
+          header="卡片填充式"
+          config={config7}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config7} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="卡片填充式自定义" config={config8}>
+        <SimpleBox
+          header="卡片填充式自定义"
+          config={config8}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config8} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="倒计时回调 [查看控制台]" config={config9}>
+        <SimpleBox
+          header="倒计时回调 [查看控制台]"
+          config={config9}
+          componentName="Countdown"
+          mockChildren={false}
+          useInnerBox
+        >
           <View>
             <Countdown {...config9} />
           </View>

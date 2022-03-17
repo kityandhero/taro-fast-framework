@@ -77,47 +77,111 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认">
+        <SimpleBox
+          header="默认"
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider />
         </SimpleBox>
 
-        <SimpleBox header="含有内容">
+        <SimpleBox
+          header="含有内容"
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider>默认内容在中间</Divider>
         </SimpleBox>
 
-        <SimpleBox header="方向 left" config={config1}>
+        <SimpleBox
+          header="方向 left"
+          config={config1}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config1}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="方向 right" config={config2}>
+        <SimpleBox
+          header="方向 right"
+          config={config2}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config2}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="设定颜色" config={config3}>
+        <SimpleBox
+          header="设定颜色"
+          config={config3}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config3}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="设定线宽度" config={config4}>
+        <SimpleBox
+          header="设定线宽度"
+          config={config4}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config4}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="线条类型 dashed" config={config5}>
+        <SimpleBox
+          header="线条类型 dashed"
+          config={config5}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config5}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="线条类型 dotted" config={config6}>
+        <SimpleBox
+          header="线条类型 dotted"
+          config={config6}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config6}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="设定上下间距" config={config7}>
+        <SimpleBox
+          header="设定上下间距"
+          config={config7}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config7}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="设定内容高度" config={config8}>
+        <SimpleBox
+          header="设定内容高度"
+          config={config8}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config8}>内容</Divider>
         </SimpleBox>
 
-        <SimpleBox header="附带图标" config={config9}>
+        <SimpleBox
+          header="附带图标"
+          config={config9}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config9}>
             <Space>
               <IconSearch size={32} />
@@ -126,7 +190,13 @@ export default class Index extends ContentPageBase {
           </Divider>
         </SimpleBox>
 
-        <SimpleBox header="附带图标" config={config10}>
+        <SimpleBox
+          header="附带图标"
+          config={config10}
+          componentName="Divider"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Divider {...config10}>
             <ActivityIndicator content="加载中" />
           </Divider>

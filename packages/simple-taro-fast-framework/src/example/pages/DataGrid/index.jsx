@@ -142,23 +142,58 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="列布局" extra="2列" config={config1}>
+        <SimpleBox
+          header="列布局"
+          extra="2列"
+          config={config1}
+          componentName="DataGrid"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <DataGrid {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="无边框列" extra="3列" config={config2}>
+        <SimpleBox
+          header="无边框列"
+          extra="3列"
+          config={config2}
+          componentName="DataGrid"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <DataGrid {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="长文本展示" extra="3列" config={config3}>
+        <SimpleBox
+          header="长文本展示"
+          extra="3列"
+          config={config3}
+          componentName="DataGrid"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <DataGrid {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="顶部对齐" extra="3列" config={config4}>
+        <SimpleBox
+          header="顶部对齐"
+          extra="3列"
+          config={config4}
+          componentName="DataGrid"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <DataGrid {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="行布局" extra="3列" config={config5}>
+        <SimpleBox
+          header="行布局"
+          extra="3列"
+          config={config5}
+          componentName="DataGrid"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <DataGrid {...config5} />
         </SimpleBox>
 

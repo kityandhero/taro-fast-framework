@@ -175,7 +175,13 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="组件展示" config={config1}>
+        <SimpleBox
+          header="组件展示"
+          config={config1}
+          componentName="Cascader"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Cascader {...config1} />
         </SimpleBox>
 

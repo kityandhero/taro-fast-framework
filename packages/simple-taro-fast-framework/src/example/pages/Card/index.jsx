@@ -10,6 +10,7 @@ import {
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconEdit } = Icon;
 
@@ -112,6 +113,19 @@ export default class Index extends ContentPageBase {
           <Item label="条目2" arrow />
           <Item label="条目3" arrow border={false} />
         </Card>
+
+        <CodeBox
+          componentName="Card"
+          mockChildren
+          useInnerBox={false}
+          config={{
+            header: '附带图标',
+            style: style,
+            headerStyle: cardHeaderStyle,
+            space: false,
+            extra: '扩展',
+          }}
+        />
 
         <PropertyBox config={Card.defaultProps} labelWidth={310} />
       </Space>

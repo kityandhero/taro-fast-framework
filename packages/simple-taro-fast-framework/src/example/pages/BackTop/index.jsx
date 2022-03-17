@@ -12,7 +12,6 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-// import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 import CodeBox from '../../../customComponents/CodeBox';
 

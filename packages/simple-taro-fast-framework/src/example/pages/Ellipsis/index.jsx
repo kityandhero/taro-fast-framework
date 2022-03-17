@@ -57,26 +57,44 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="显示一行文字" config={config1}>
+        <SimpleBox
+          header="显示一行文字"
+          config={config1}
+          componentName="Ellipsis"
+          mockChildren
+          useInnerBox
+        >
           <Ellipsis {...config1}>
             这是一段宽度限制长度的文字，后面的内容会省略。
           </Ellipsis>
         </SimpleBox>
 
-        <SimpleBox header="显示两行文字" config={config2}>
+        <SimpleBox
+          header="显示两行文字"
+          config={config2}
+          componentName="Ellipsis"
+          mockChildren
+          useInnerBox
+        >
           <Ellipsis {...config2}>
             这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,
             后面的内容会省略。
           </Ellipsis>
         </SimpleBox>
 
-        <SimpleBox header="显示三行文字" config={config3}>
+        <SimpleBox
+          header="显示三行文字"
+          config={config3}
+          componentName="Ellipsis"
+          mockChildren
+          useInnerBox
+        >
           <Ellipsis {...config3}>
             这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。
           </Ellipsis>
         </SimpleBox>
 
-        <PropertyBox config={Ellipsis.defaultProps} labelWidth={170} />
+        <PropertyBox config={Ellipsis.defaultProps} labelWidth={150} />
       </Space>
     );
   };
