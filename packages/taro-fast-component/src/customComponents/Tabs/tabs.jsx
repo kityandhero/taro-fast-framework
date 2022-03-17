@@ -96,6 +96,7 @@ class Tabs extends BaseComponent {
 
     this.state = {
       currentFlag: 0,
+      currentStage: 0,
       scrollFlag: false,
       scrollLeft: 0,
       scrollTop: 0,
@@ -120,6 +121,7 @@ class Tabs extends BaseComponent {
     if (currentNext !== currentPrev || scrollNext !== scrollPrev) {
       return {
         currentFlag: currentNext,
+        currentStage: currentNext,
         scrollFlag: scrollNext,
       };
     }
@@ -160,14 +162,20 @@ class Tabs extends BaseComponent {
       // 标签栏滚动
       switch (ENV) {
         case Taro.ENV_TYPE.WEAPP:
+          this.setState({
+            scrollIntoView: `tab${this.tabId}${Math.max(idx - 1, 0)}`,
+          });
+
           break;
+
         case Taro.ENV_TYPE.ALIPAY:
           break;
+
         case Taro.ENV_TYPE.SWAN:
-          const indexSWAN = Math.max(idx - 1, 0);
           this.setState({
-            scrollIntoView: `tab${this.tabId}${indexSWAN}`,
+            scrollIntoView: `tab${this.tabId}${Math.max(idx - 1, 0)}`,
           });
+
           break;
 
         case Taro.ENV_TYPE.WEB:
@@ -178,10 +186,12 @@ class Tabs extends BaseComponent {
               scrollTop: prevTabItem.offsetTop,
               scrollLeft: prevTabItem.offsetLeft,
             });
+
           break;
 
         default:
           console.warn('Tab 组件在该环境还未适配');
+
           break;
       }
     }
@@ -189,6 +199,10 @@ class Tabs extends BaseComponent {
 
   handleClick = (index, event) => {
     const { onClick } = this.props;
+
+    this.setState({
+      currentStage: index,
+    });
 
     if (isFunction(onClick)) {
       onClick(index, event);
@@ -211,7 +225,9 @@ class Tabs extends BaseComponent {
   };
 
   handleTouchMove = (e) => {
-    const { swipeable, current, tabList } = this.props;
+    const { swipeable, tabList } = this.props;
+    const { currentStage } = this.state;
+
     const direction = this.getDirection();
 
     if (!swipeable || direction === 'vertical') {
@@ -224,14 +240,14 @@ class Tabs extends BaseComponent {
 
     if (!this.isMoving && this.interval < MAX_INTERVAL && this.touchDot > 20) {
       // 向左滑动
-      if (current + 1 < maxIndex && moveDistance <= -MIN_DISTANCE) {
+      if (currentStage + 1 < maxIndex && moveDistance <= -MIN_DISTANCE) {
         this.isMoving = true;
-        this.handleClick(current + 1, e);
+        this.handleClick(currentStage + 1, e);
 
         // 向右滑动
-      } else if (current - 1 >= 0 && moveDistance >= MIN_DISTANCE) {
+      } else if (currentStage - 1 >= 0 && moveDistance >= MIN_DISTANCE) {
         this.isMoving = true;
-        this.handleClick(current - 1, e);
+        this.handleClick(currentStage - 1, e);
       }
     }
   };
@@ -254,8 +270,8 @@ class Tabs extends BaseComponent {
   };
 
   buildTabItemList = () => {
-    const { height, tabList, scroll, current } = this.props;
-    const { scrollLeft, scrollTop, scrollIntoView } = this.state;
+    const { height, tabList, scroll } = this.props;
+    const { currentStage, scrollLeft, scrollTop, scrollIntoView } = this.state;
 
     const direction = this.getDirection();
     const heightStyle = { height };
@@ -265,7 +281,7 @@ class Tabs extends BaseComponent {
     const tabItems = (tabList || []).map((item, idx) => {
       const itemCls = classNames({
         'tfc-tabs__item': true,
-        'tfc-tabs__item--active': current === idx,
+        'tfc-tabs__item--active': currentStage === idx,
       });
 
       const {
@@ -356,8 +372,9 @@ class Tabs extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, className, height, animated, tabList, scroll, current } =
-      this.props;
+    const { style, className, height, animated, tabList, scroll } = this.props;
+    const { currentStage } = this.state;
+
     const direction = this.getDirection();
 
     const heightStyle = { height };
@@ -365,15 +382,17 @@ class Tabs extends BaseComponent {
       height: direction === 'vertical' ? `${tabList.length * 100}%` : '1PX',
       width: direction === 'horizontal' ? `${tabList.length * 100}%` : '1PX',
     };
-    const bodyStyle = {};
-    let transformStyle = `translate3d(0px, -${current * 100}%, 0px)`;
+
+    let transformStyle = `translate3d(0px, -${currentStage * 100}%, 0px)`;
     if (direction === 'horizontal') {
-      transformStyle = `translate3d(-${current * 100}%, 0px, 0px)`;
+      transformStyle = `translate3d(-${currentStage * 100}%, 0px, 0px)`;
     }
-    Object.assign(bodyStyle, {
+
+    const bodyStyle = {
       transform: transformStyle,
       '-webkit-transform': transformStyle,
-    });
+    };
+
     if (!animated) {
       bodyStyle.transition = 'unset';
     }

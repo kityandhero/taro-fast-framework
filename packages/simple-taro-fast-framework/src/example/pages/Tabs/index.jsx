@@ -28,6 +28,7 @@ const tabList = [
     title: '标签页2',
     useBadge: true,
     badgeContent: '更多',
+    badgeColor: '#58ab3d',
     icon: <Icon size={36} imageMode value={logoImg} />,
   },
   { title: '标签页3' },
