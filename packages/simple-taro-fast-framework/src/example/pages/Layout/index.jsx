@@ -68,6 +68,11 @@ const o = {
       path: pathCollection.example.scaleBox.path,
     },
     {
+      id: 'TranslucentBox',
+      name: '半透明容器',
+      path: pathCollection.example.translucentBox.path,
+    },
+    {
       id: 'Swiper',
       name: '滑动布局',
       path: pathCollection.example.swiper.path,

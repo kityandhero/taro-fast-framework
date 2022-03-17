@@ -176,6 +176,9 @@ const examplePathCollection = {
   centerBox: {
     path: '/example/pages/centerBox/index',
   },
+  translucentBox: {
+    path: '/example/pages/translucentBox/index',
+  },
   thumbnailBox: {
     path: '/example/pages/thumbnailBox/index',
   },

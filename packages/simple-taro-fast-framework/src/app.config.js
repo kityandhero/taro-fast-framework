@@ -64,6 +64,7 @@ export default {
         'pages/floatAction/index',
         'pages/verticalBox/index',
         'pages/horizontalCenterBox/index',
+        'pages/translucentBox/index',
         'pages/flexBox/index',
         'pages/centerBox/index',
         'pages/thumbnailBox/index',
