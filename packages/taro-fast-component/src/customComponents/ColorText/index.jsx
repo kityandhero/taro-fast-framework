@@ -143,7 +143,7 @@ class ColorText extends BaseComponent {
           leftStyle={
             icon
               ? {
-                  ...{ paddingRight: transformSize(12) },
+                  ...{ paddingRight: transformSize(10) },
                   ...iconContainerStyle,
                 }
               : {}

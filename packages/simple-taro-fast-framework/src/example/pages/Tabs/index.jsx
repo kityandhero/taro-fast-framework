@@ -131,7 +131,7 @@ export default class Index extends ContentPageBase {
           </Tabs>
         </SimpleBox>
 
-        <SimpleBox header="滚动标签栏">
+        <SimpleBox header="滚动标签栏" space={false}>
           <Tabs
             current={this.state.current2}
             scroll
@@ -150,7 +150,7 @@ export default class Index extends ContentPageBase {
             <TabPanel current={this.state.current2} index={0}>
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(100),
                 }}
@@ -161,7 +161,7 @@ export default class Index extends ContentPageBase {
             <TabPanel current={this.state.current2} index={1}>
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(100),
                 }}
@@ -172,7 +172,7 @@ export default class Index extends ContentPageBase {
             <TabPanel current={this.state.current2} index={2}>
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(100),
                 }}
@@ -183,7 +183,7 @@ export default class Index extends ContentPageBase {
             <TabPanel current={this.state.current2} index={3}>
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(100),
                 }}
@@ -194,7 +194,7 @@ export default class Index extends ContentPageBase {
             <TabPanel current={this.state.current2} index={4}>
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(100),
                 }}
@@ -205,7 +205,7 @@ export default class Index extends ContentPageBase {
             <TabPanel current={this.state.current2} index={5}>
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(100),
                 }}
@@ -216,7 +216,7 @@ export default class Index extends ContentPageBase {
           </Tabs>
         </SimpleBox>
 
-        <SimpleBox header="垂直模式">
+        <SimpleBox header="垂直模式" space={false}>
           <Tabs
             current={this.state.current3}
             scroll
@@ -241,7 +241,7 @@ export default class Index extends ContentPageBase {
             >
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(200),
                 }}
@@ -256,7 +256,7 @@ export default class Index extends ContentPageBase {
             >
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(200),
                 }}
@@ -271,7 +271,7 @@ export default class Index extends ContentPageBase {
             >
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(200),
                 }}
@@ -286,7 +286,7 @@ export default class Index extends ContentPageBase {
             >
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(200),
                 }}
@@ -301,7 +301,7 @@ export default class Index extends ContentPageBase {
             >
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(200),
                 }}
@@ -316,7 +316,7 @@ export default class Index extends ContentPageBase {
             >
               <View
                 style={{
-                  fontSize: transformSize(18),
+                  fontSize: transformSize(28),
                   textAlign: 'center',
                   height: transformSize(200),
                 }}
@@ -327,7 +327,7 @@ export default class Index extends ContentPageBase {
           </Tabs>
         </SimpleBox>
 
-        <SimpleBox header="禁止内容切换动画">
+        <SimpleBox header="禁止内容切换动画" space={false}>
           <Tabs
             animated={false}
             current={this.state.current4}

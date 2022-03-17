@@ -64,7 +64,7 @@ const config7 = {
 };
 
 const config8 = {
-  icon: <IconEdit size={36} color="#ff3ce7" />,
+  icon: <IconEdit size={32} color="#ff3ce7" />,
   text: '文本文字',
 };
 
@@ -87,13 +87,18 @@ const config10 = {
 };
 
 const config11 = {
-  icon: <IconEdit size={36} color="#ff3ce7" />,
+  icon: <IconEdit size={30} color="#ff3ce7" />,
   textPrefix: '前缀',
   text: '文本文字',
   separatorStyle: {
     color: '#67ca31',
     margin: `0 ${transformSize(24)}`,
   },
+};
+
+const config12 = {
+  icon: <Icon size={40} color="#ff3ce7" value={logoImg} imageMode />,
+  text: '文本文字',
 };
 
 // eslint-disable-next-line no-undef
@@ -139,8 +144,12 @@ export default class Index extends ContentPageBase {
           <ColorText {...config7} />
         </SimpleBox>
 
-        <SimpleBox header="附带图标" config={config8}>
+        <SimpleBox header="附带内置图标" config={config8}>
           <ColorText {...config8} />
+        </SimpleBox>
+
+        <SimpleBox header="附带图片图标" config={config8}>
+          <ColorText {...config12} />
         </SimpleBox>
 
         <SimpleBox header="附带图片" config={config9}>
