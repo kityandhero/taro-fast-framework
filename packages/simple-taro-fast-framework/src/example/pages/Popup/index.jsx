@@ -1,22 +1,12 @@
-import {
-  Card,
-  Item,
-  Popup,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Item, Popup, Space } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import { cardHeaderStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 import './index.less';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
 
 const arcTopList = [
   {
@@ -84,10 +74,16 @@ const scrollList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '弹出容器',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Popup',
-    name: '弹出面板',
+    name: '弹出容器',
+    description: '弹出容器组件',
   };
 
   constructor(props) {
@@ -250,12 +246,7 @@ export default class Index extends ContentPageBase {
     return (
       <>
         <Space direction="vertical" fillWidth>
-          <Card
-            header="弹出位置"
-            style={style}
-            headerStyle={cardHeaderStyle}
-            space={false}
-          >
+          <SimpleBox header="弹出位置" space={false}>
             <Item label="中部弹出" arrow onClick={this.showBasic} />
             <Item label="顶部弹出" arrow onClick={this.showTop} />
             <Item
@@ -280,60 +271,54 @@ export default class Index extends ContentPageBase {
               space={false}
               border={false}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="变更上圆角" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="变更上圆角">
             <Selector
               options={arcTopList}
               value={arcTop}
               onChange={this.setArcTop}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="变更下圆角" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="变更下圆角">
             <Selector
               options={arcBottomList}
               value={arcBottom}
               onChange={this.setArcBottom}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card header="变更模式" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="变更模式">
             <Selector options={modeList} value={mode} onChange={this.setMode} />
-          </Card>
+          </SimpleBox>
 
-          <Card header="关闭按钮" style={style} headerStyle={cardHeaderStyle}>
+          <SimpleBox header="关闭按钮">
             <Selector
               options={showCloseList}
               value={showClose}
               onChange={this.setShowClose}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card
-            header="点击遮罩关闭面板"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
+          <SimpleBox header="点击遮罩关闭面板">
             <Selector
               options={closeWhenOverlayClickList}
               value={closeWhenOverlayClick}
               onChange={this.setCloseWhenOverlayClick}
             />
-          </Card>
+          </SimpleBox>
 
-          <Card
-            header="显示区域容器"
-            style={style}
-            headerStyle={cardHeaderStyle}
-          >
+          <SimpleBox header="显示区域容器">
             <Selector
               options={scrollList}
               value={scrollData}
               onChange={this.setScroll}
             />
-          </Card>
+          </SimpleBox>
         </Space>
+
+        <PropertyBox config={Popup.defaultProps} labelWidth={310} />
 
         <Popup
           visible={show.basic}

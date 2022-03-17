@@ -9,6 +9,7 @@ import {
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconEdit } = Icon;
 
@@ -19,10 +20,16 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '卡片',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Card',
     name: '卡片',
+    description: '卡片组件',
   };
 
   renderContent = () => {
@@ -105,6 +112,8 @@ export default class Index extends ContentPageBase {
           <Item label="条目2" arrow />
           <Item label="条目3" arrow border={false} />
         </Card>
+
+        <PropertyBox config={Card.defaultProps} labelWidth={310} />
       </Space>
     );
   };

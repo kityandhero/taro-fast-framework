@@ -1,20 +1,10 @@
 import { View } from '@tarojs/components';
 
-import {
-  Card,
-  Space,
-  ThumbnailBox,
-} from 'taro-fast-component/es/customComponents';
+import { Space, ThumbnailBox } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const boxStyle = {
   backgroundColor: '',
@@ -23,66 +13,93 @@ const boxStyle = {
 const contentText =
   '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文字';
 
+const config1 = {
+  expandText: '展开',
+  shrinkText: '收缩',
+};
+
+const config2 = {
+  repeatShrink: true,
+};
+
+const config3 = {
+  height: 400,
+  repeatShrink: true,
+};
+
+const config4 = {
+  backgroundColor: 'blue',
+  repeatShrink: true,
+};
+
+const config5 = {
+  actionBackgroundColor: 'blue',
+  repeatShrink: true,
+};
+
+const config6 = {
+  actionColor: 'green',
+  repeatShrink: true,
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '缩略容器',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ThumbnailBox',
     name: '缩略容器',
+    description: '缩略容器组件',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="简单使用" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="简单使用">
           <View style={boxStyle}>
             <ThumbnailBox>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="设置文字" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="设置文字" config={config1}>
           <View style={boxStyle}>
-            <ThumbnailBox expandText="展开" shrinkText="收缩">
-              {contentText}
-            </ThumbnailBox>
+            <ThumbnailBox {...config1}>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="可收缩" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="可收缩" config={config2}>
           <View style={boxStyle}>
-            <ThumbnailBox repeatShrink>{contentText}</ThumbnailBox>
+            <ThumbnailBox {...config2}>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="设置收缩高度" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="设置收缩高度" config={config3}>
           <View style={boxStyle}>
-            <ThumbnailBox height={400} repeatShrink>
-              {contentText}
-            </ThumbnailBox>
+            <ThumbnailBox {...config3}>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="背景" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="背景" config={config4}>
           <View style={boxStyle}>
-            <ThumbnailBox backgroundColor="blue" repeatShrink>
-              {contentText}
-            </ThumbnailBox>
+            <ThumbnailBox {...config4}>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="操作栏背景" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="操作栏背景" config={config5}>
           <View style={boxStyle}>
-            <ThumbnailBox actionBackgroundColor="blue" repeatShrink>
-              {contentText}
-            </ThumbnailBox>
+            <ThumbnailBox {...config5}>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
 
-        <Card header="操作栏颜色" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="操作栏颜色" config={config6}>
           <View style={boxStyle}>
-            <ThumbnailBox actionColor="green" repeatShrink>
-              {contentText}
-            </ThumbnailBox>
+            <ThumbnailBox {...config6}>{contentText}</ThumbnailBox>
           </View>
-        </Card>
+        </SimpleBox>
+
+        <PropertyBox config={ThumbnailBox.defaultProps} labelWidth={310} />
       </Space>
     );
   };
