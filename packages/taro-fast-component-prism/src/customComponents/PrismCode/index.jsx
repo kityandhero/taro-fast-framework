@@ -3,8 +3,7 @@ import Taro from '@tarojs/taro';
 
 import { copyToClipboard } from 'taro-fast-common/es/utils/tools';
 import { HtmlBox } from 'taro-fast-component/es/customComponents';
-
-import BaseComponent from '../BaseComponent';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
@@ -26,7 +25,7 @@ const defaultProps = {
   canCopy: false,
 };
 
-class PrismCode extends BaseComponent {
+class PrismCode extends ComponentBase {
   doWorkAdjustDidMount = () => {
     this.highlight();
   };
