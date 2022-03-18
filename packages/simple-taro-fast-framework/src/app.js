@@ -3,6 +3,7 @@ import { AppBase } from 'taro-fast-framework/es/framework';
 import 'taro-fast-common/es/constants.css';
 import 'taro-fast-component/es/index.css';
 import 'taro-fast-component-extra/es/index.css';
+import 'taro-fast-component-prism/es/index.css';
 
 import models from './models';
 

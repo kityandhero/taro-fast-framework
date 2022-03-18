@@ -19,6 +19,7 @@ import {
   HelpBox,
   Divider,
 } from 'taro-fast-component/es/customComponents';
+import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
 
@@ -105,21 +106,8 @@ class SimpleBox extends Component {
     return (
       <>
         <Divider contentPosition="left">代码示例 点击复制</Divider>
-        <View
-          style={{ textIndent: transformSize(10) }}
-        >{`<${componentName}`}</View>
-        {/* <View>{`<${componentName}`}</View> */}
-        <View>
-          <ColorText
-            color="#999"
-            text={code}
-            textStyle={{
-              fontSize: transformSize(26),
-              lineHeight: transformSize(32),
-            }}
-            canCopy
-          />
-        </View>
+
+        <PrismCode canCopy code={code} language="jsx" />
       </>
     );
   };
