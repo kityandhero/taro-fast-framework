@@ -6,6 +6,8 @@ import { HtmlBox } from 'taro-fast-component/es/customComponents';
 
 import BaseComponent from '../BaseComponent';
 
+import './index.less';
+
 if (process.env.TARO_ENV !== 'h5') {
   require('@tarojs/taro/html.css');
 }
