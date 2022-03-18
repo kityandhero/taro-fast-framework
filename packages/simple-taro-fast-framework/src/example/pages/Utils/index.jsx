@@ -5,6 +5,7 @@ import {
   formatDateIntervalWithNow,
   copyToClipboard,
   replaceTargetText,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   datetimeFormat,
@@ -141,7 +142,22 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <SimpleBox header="百分比格式化" space={false} extra="formatTarget">
+        <SimpleBox
+          header="百分比格式化"
+          space={false}
+          extra="formatTarget"
+          description={[
+            {
+              text: 'formatTarget({ target, format })',
+            },
+            {
+              text: 'target:需要格式化的数据',
+            },
+            {
+              text: 'format:格式化字符串',
+            },
+          ]}
+        >
           <Item
             label="0.24"
             border={false}
@@ -152,7 +168,22 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <SimpleBox header="货币格式化" space={false} extra="formatTarget">
+        <SimpleBox
+          header="货币格式化"
+          space={false}
+          extra="formatTarget"
+          description={[
+            {
+              text: 'formatTarget({ target, format })',
+            },
+            {
+              text: 'target:需要格式化的数据',
+            },
+            {
+              text: 'format:格式化字符串',
+            },
+          ]}
+        >
           <Item
             label="451.31"
             border={false}
@@ -163,7 +194,22 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <SimpleBox header="中文金额" space={false} extra="formatTarget">
+        <SimpleBox
+          header="中文金额"
+          space={false}
+          extra="formatTarget"
+          description={[
+            {
+              text: 'formatTarget({ target, format })',
+            },
+            {
+              text: 'target:需要格式化的数据',
+            },
+            {
+              text: 'format:格式化字符串',
+            },
+          ]}
+        >
           <Item
             label="451.31"
             border={false}
@@ -207,9 +253,6 @@ export default class Index extends ContentPageBase {
           extra="replaceTargetText"
           description={[
             {
-              text: 'text:使用此函数用以保证双端渲染一致',
-            },
-            {
               text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
             },
             {
@@ -239,6 +282,12 @@ export default class Index extends ContentPageBase {
           extra="transformSize"
           description={[
             {
+              text: 'transformSize(number)',
+            },
+            {
+              text: 'number:-2000 ~ 2000',
+            },
+            {
               text: '--tfc-1 ~ --tfc-2000 为内置css变量,小程序环境编译后单位为rpx,H5为rem',
             },
             {
@@ -250,12 +299,15 @@ export default class Index extends ContentPageBase {
             {
               text: '参数为非数字情况, 将按照参数值原样输出',
             },
+            {
+              text: 'text:使用此函数用以保证双端渲染一致',
+            },
           ]}
         >
           <Item
             label="transformSize(1)"
             border={false}
-            extra="执行结果: --tfc-1"
+            extra={`执行结果: ${transformSize(1)}`}
           />
         </SimpleBox>
       </Space>

@@ -39,7 +39,6 @@ const defaultProps = {
   extra: null,
   componentName: '',
   mockChildren: true,
-  footer: null,
 };
 
 class SimpleBox extends Component {
@@ -106,7 +105,10 @@ class SimpleBox extends Component {
     return (
       <>
         <Divider contentPosition="left">代码示例 点击复制</Divider>
-
+        <View
+          style={{ textIndent: transformSize(10) }}
+        >{`<${componentName}`}</View>
+        {/* <View>{`<${componentName}`}</View> */}
         <View>
           <ColorText
             color="#999"

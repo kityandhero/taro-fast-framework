@@ -214,7 +214,12 @@ export default class Index extends ContentPageBase {
           {this.buildGrid('logo', icons.logo)}
         </SimpleBox>
 
-        <SimpleBox header="图片模式" config={config1}>
+        <SimpleBox
+          header="图片模式"
+          config={config1}
+          componentName="Icon"
+          mockChildren={false}
+        >
           <Grid columns={3}>
             <Grid.Item>
               <FlexBox

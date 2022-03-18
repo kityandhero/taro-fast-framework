@@ -1,19 +1,7 @@
-import {
-  Card,
-  Space,
-  Button,
-  HelpBox,
-} from 'taro-fast-component/es/customComponents';
+import { Space, Button } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -24,29 +12,22 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'Color',
     name: '颜色',
+    description: '颜色说明',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
+        <SimpleBox
           header="颜色"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '内置CSS变量举例: --tfc-color-red',
-                },
-                {
-                  text: '使用举例: {color:var(--tfc-color-red)}',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: '内置CSS变量举例: --tfc-color-red',
+            },
+            {
+              text: '使用举例: {color:var(--tfc-color-red)}',
+            },
+          ]}
         >
           <Space wrap>
             <Button backgroundColor="var(--tfc-color-red)">red</Button>
@@ -62,9 +43,9 @@ export default class Index extends ContentPageBase {
             <Button backgroundColor="var(--tfc-color-grey)">grey</Button>
             <Button backgroundColor="var(--tfc-color-black)">black</Button>
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="浅色" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="浅色">
           <Space wrap>
             <Button backgroundColor="var(--tfc-color-red-light)">
               red-light
@@ -103,9 +84,9 @@ export default class Index extends ContentPageBase {
               black-light
             </Button>
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="渐变色" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="渐变色">
           <Space wrap>
             <Button backgroundColor={['#f43f3b', ' #ec008c']}>
               gradual-red
@@ -126,7 +107,7 @@ export default class Index extends ContentPageBase {
               gradual-blue
             </Button>
           </Space>
-        </Card>
+        </SimpleBox>
       </Space>
     );
   };
