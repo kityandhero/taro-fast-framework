@@ -1,0 +1,29 @@
+@font-size-base: var(--tfc-28);
+
+@class-prefix-tag: ~'tfc-circle';
+
+.@{class-prefix-tag} {
+  border-radius: 50%;
+  overflow: hidden;
+
+  &_body {
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+
+    &_inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 20;
+    }
+
+    &_back_ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      z-index: 1;
+    }
+  }
+}
