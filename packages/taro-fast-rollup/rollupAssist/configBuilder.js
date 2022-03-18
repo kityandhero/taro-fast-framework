@@ -48,6 +48,8 @@ const externalCollection = [
   'dva-loading',
   'dva-core',
   'classnames',
+  'prismjs',
+  'babel-plugin-prismjs',
 ];
 
 export function buildConfig({
