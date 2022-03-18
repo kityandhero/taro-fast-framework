@@ -2380,6 +2380,12 @@ export function handleInlayColor(color) {
     : color;
 }
 
+export function buildLinearGradient({ direct, list = [] }) {
+  const d = isNumber(direct) ? `${direct}deg` : direct;
+
+  return `linear-gradient(${d}, ${list.join()})`;
+}
+
 /**
  * 占位函数
  *
