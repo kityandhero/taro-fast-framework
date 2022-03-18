@@ -10,55 +10,41 @@ import {
   datetimeFormat,
   formatCollection,
 } from 'taro-fast-common/es/utils/constants';
-import {
-  Card,
-  Item,
-  Space,
-  HelpBox,
-} from 'taro-fast-component/es/customComponents';
+import { Item, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '功能函数',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Util',
     name: '功能函数',
+    description: '功能函数说明',
   };
 
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
+        <SimpleBox
           header="时间格式化"
-          style={style}
-          headerStyle={cardHeaderStyle}
           space={false}
           extra="formatDatetime"
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: 'formatDatetime({data,fmt})',
-                },
-                {
-                  text: 'data:即将格式化的数据',
-                },
-                {
-                  text: 'fmt:格式化字符串',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: 'formatDatetime({data,fmt})',
+            },
+            {
+              text: 'data:即将格式化的数据',
+            },
+            {
+              text: 'fmt:格式化字符串',
+            },
+          ]}
         >
           <Item
             label={datetimeFormat.year}
@@ -104,80 +90,58 @@ export default class Index extends ContentPageBase {
               fmt: 'YYYY年MM月DD日',
             })}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="格式化时间差"
-          style={style}
-          headerStyle={cardHeaderStyle}
           space={false}
           extra="指定起止时间"
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: 'formatDateInterval(start, end, opts = {})',
-                },
-                {
-                  text: 'start:起始时间',
-                },
-                {
-                  text: 'end:终止时间',
-                },
-                {
-                  text: 'opts:格式化配置',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: 'formatDateInterval(start, end, opts = {})',
+            },
+            {
+              text: 'start:起始时间',
+            },
+            {
+              text: 'end:终止时间',
+            },
+            {
+              text: 'opts:格式化配置',
+            },
+          ]}
         >
           <Item
             label="2022-01-01 ~ 2022-03-02"
             border={false}
             extra={formatDateInterval('2022-01-01', '2022-03-02')}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="格式化时间差"
-          style={style}
-          headerStyle={cardHeaderStyle}
           space={false}
           extra="距当前时间"
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: 'formatDateIntervalWithNow(time, opts = {})',
-                },
-                {
-                  text: 'time:指定的时间, 需要早于当前时间',
-                },
-                {
-                  text: 'opts:格式化配置',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: 'formatDateIntervalWithNow(time, opts = {})',
+            },
+            {
+              text: 'time:指定的时间, 需要早于当前时间',
+            },
+            {
+              text: 'opts:格式化配置',
+            },
+          ]}
         >
           <Item
             label="2022-01-22"
             border={false}
             extra={formatDateIntervalWithNow('2022-01-22')}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="百分比格式化"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-          extra="formatTarget"
-        >
+        <SimpleBox header="百分比格式化" space={false} extra="formatTarget">
           <Item
             label="0.24"
             border={false}
@@ -186,15 +150,9 @@ export default class Index extends ContentPageBase {
               format: formatCollection.percentage,
             })}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="货币格式化"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-          extra="formatTarget"
-        >
+        <SimpleBox header="货币格式化" space={false} extra="formatTarget">
           <Item
             label="451.31"
             border={false}
@@ -203,15 +161,9 @@ export default class Index extends ContentPageBase {
               format: formatCollection.money,
             })}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
-          header="中文金额"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-          extra="formatTarget"
-        >
+        <SimpleBox header="中文金额" space={false} extra="formatTarget">
           <Item
             label="451.31"
             border={false}
@@ -220,30 +172,22 @@ export default class Index extends ContentPageBase {
               format: formatCollection.chineseMoney,
             })}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="复制到剪贴板"
-          style={style}
-          headerStyle={cardHeaderStyle}
           space={false}
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: 'copyToClipboard({ text, successCallback = null })',
-                },
-                {
-                  text: 'text:需要复制的数据',
-                },
-                {
-                  text: 'successCallback:复制后的回调函数',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: 'copyToClipboard({ text, successCallback = null })',
+            },
+            {
+              text: 'text:需要复制的数据',
+            },
+            {
+              text: 'successCallback:复制后的回调函数',
+            },
+          ]}
         >
           <Item
             label="12345678"
@@ -255,81 +199,65 @@ export default class Index extends ContentPageBase {
               });
             }}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="替换指定字符串"
-          style={style}
-          headerStyle={cardHeaderStyle}
           space={false}
           extra="replaceTargetText"
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: 'text:使用此函数用以保证双端渲染一致',
-                },
-                {
-                  text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
-                },
-                {
-                  text: 'text:需要操作的字符串',
-                },
-                {
-                  text: 'replaceText:替换为的字符串',
-                },
-                {
-                  text: 'beforeKeepNumber:首部保留的字符串长度',
-                },
-                {
-                  text: 'afterKeepNumber:尾部保留的字符串长度',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: 'text:使用此函数用以保证双端渲染一致',
+            },
+            {
+              text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
+            },
+            {
+              text: 'text:需要操作的字符串',
+            },
+            {
+              text: 'replaceText:替换为的字符串',
+            },
+            {
+              text: 'beforeKeepNumber:首部保留的字符串长度',
+            },
+            {
+              text: 'afterKeepNumber:尾部保留的字符串长度',
+            },
+          ]}
         >
           <Item
             label="12345678"
             border={false}
             extra={replaceTargetText('12345678', '*****', 2, 2)}
           />
-        </Card>
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="使用内置像素变量"
-          style={style}
-          headerStyle={cardHeaderStyle}
           space={false}
           extra="transformSize"
-          footer={
-            <HelpBox
-              showTitle={false}
-              showNumber={false}
-              list={[
-                {
-                  text: '--tfc-1 ~ --tfc-2000 为内置css变量,小程序环境编译后单位为rpx,H5为rem',
-                },
-                {
-                  text: '1000 ~ 2000 之间,步长为10',
-                },
-                {
-                  text: '未在此数值范围之内的将输出px为单位的结,例如 2300px',
-                },
-                {
-                  text: '参数为非数字情况, 将按照参数值原样输出',
-                },
-              ]}
-            />
-          }
+          description={[
+            {
+              text: '--tfc-1 ~ --tfc-2000 为内置css变量,小程序环境编译后单位为rpx,H5为rem',
+            },
+            {
+              text: '1000 ~ 2000 之间,步长为10',
+            },
+            {
+              text: '未在此数值范围之内的将输出px为单位的结,例如 2300px',
+            },
+            {
+              text: '参数为非数字情况, 将按照参数值原样输出',
+            },
+          ]}
         >
           <Item
             label="transformSize(1)"
             border={false}
             extra="执行结果: --tfc-1"
           />
-        </Card>
+        </SimpleBox>
       </Space>
     );
   };

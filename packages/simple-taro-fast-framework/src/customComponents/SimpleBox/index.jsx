@@ -39,6 +39,7 @@ const defaultProps = {
   extra: null,
   componentName: '',
   mockChildren: true,
+  footer: null,
 };
 
 class SimpleBox extends Component {
@@ -121,19 +122,41 @@ class SimpleBox extends Component {
     );
   };
 
+  buildFooter = () => {
+    const { description } = this.props;
+
+    let listData = [];
+
+    if (isString(description)) {
+      if (stringIsNullOrWhiteSpace(description || null)) {
+        return null;
+      }
+
+      listData.push({
+        text: description,
+      });
+    }
+
+    if (isArray(description)) {
+      listData = description;
+    }
+
+    if (listData.length > 0) {
+      return <HelpBox showTitle={false} showNumber={false} list={listData} />;
+    }
+
+    if (isObject(description)) {
+      return description;
+    }
+  };
+
   render() {
-    const {
-      space,
-      prefix,
-      header,
-      description,
-      helpTitle,
-      extra,
-      useInnerBox,
-      children,
-    } = this.props;
+    const { space, prefix, header, helpTitle, extra, useInnerBox, children } =
+      this.props;
 
     const list = this.buildList();
+
+    const footer = this.buildFooter();
 
     return (
       <Card
@@ -150,11 +173,7 @@ class SimpleBox extends Component {
         }
         style={style}
         headerStyle={cardHeaderStyle}
-        footer={
-          stringIsNullOrWhiteSpace(description || null)
-            ? null
-            : `备注: ${description}.`
-        }
+        footer={footer}
         space={space}
         extra={extra}
         useInnerBox={false}
