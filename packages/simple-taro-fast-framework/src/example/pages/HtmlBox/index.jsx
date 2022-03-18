@@ -10,7 +10,9 @@ const config1 = {
 
 const config2 = {
   html: '<div>1</div>',
-  canCopy: false,
+  onClick: () => {
+    console.log('click');
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -39,8 +41,9 @@ export default class Index extends ContentPageBase {
         </SimpleBox>
 
         <SimpleBox
-          header="可复制"
+          header="点击事件"
           config={config2}
+          extra="查看控制台"
           componentName="HtmlBox"
           mockChildren={false}
           useInnerBox
