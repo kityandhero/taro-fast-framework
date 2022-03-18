@@ -152,6 +152,9 @@ const examplePathCollection = {
   helpBox: {
     path: '/example/pages/helpBox/index',
   },
+  htmlBox: {
+    path: '/example/pages/htmlBox/index',
+  },
   footer: {
     path: '/example/pages/footer/index',
   },

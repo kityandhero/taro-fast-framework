@@ -68,6 +68,12 @@ const o = {
       path: pathCollection.example.scaleBox.path,
     },
     {
+      id: 'HtmlBox',
+      name: '比例容器',
+      path: pathCollection.example.htmlBox.path,
+    },
+
+    {
       id: 'TranslucentBox',
       name: '半透明容器',
       path: pathCollection.example.translucentBox.path,

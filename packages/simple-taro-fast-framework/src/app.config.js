@@ -66,6 +66,7 @@ export default {
         'pages/horizontalCenterBox/index',
         'pages/translucentBox/index',
         'pages/flexBox/index',
+        'pages/htmlBox/index',
         'pages/centerBox/index',
         'pages/thumbnailBox/index',
         'pages/scaleBox/index',

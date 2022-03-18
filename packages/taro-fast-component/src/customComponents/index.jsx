@@ -65,3 +65,4 @@ export { default as BackTop } from './BackTop';
 export { default as Swiper } from './Swiper';
 export { default as HorizontalScrollBox } from './HorizontalScrollBox';
 export { default as TranslucentBox } from './TranslucentBox';
+export { default as HtmlBox } from './HtmlBox';
