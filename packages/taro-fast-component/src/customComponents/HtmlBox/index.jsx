@@ -10,7 +10,7 @@ if (process.env.TARO_ENV !== 'h5') {
 
 const defaultProps = {
   html: '',
-  canCopy: false,
+  onClick: null,
 };
 
 class HtmlBox extends BaseComponent {

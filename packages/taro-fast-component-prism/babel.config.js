@@ -21,5 +21,14 @@ module.exports = {
         version: '^7.7.7',
       },
     ],
+    [
+      'prismjs',
+      {
+        languages: ['javascript', 'css', 'html', 'jsx'],
+        plugins: ['line-numbers', 'show-language'],
+        theme: 'okaidia',
+        css: true,
+      },
+    ],
   ],
 };
