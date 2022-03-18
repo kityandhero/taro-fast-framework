@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.0.13](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-common@1.0.12...taro-fast-common@1.0.13) (2022-03-18)
+
+
+### Performance Improvements
+
+* **simple-taro-fast-framework:** uopdate ([dcda22f](https://github.com/kityandhero/taro-fast-framework/commit/dcda22fd0c8d0cf6919f5e58784607676691daaa))
+* **simple-taro-fast-framework:** update ([205a30b](https://github.com/kityandhero/taro-fast-framework/commit/205a30b569e5daf12f439e31cfc0d4d07726d539))
+* **simple-taro-fast-framework:** update ([4ba3574](https://github.com/kityandhero/taro-fast-framework/commit/4ba35749dbd3422f88ce2bac86d43599ca64356a))
+* **simple-taro-fast-framework:** update ([90baa18](https://github.com/kityandhero/taro-fast-framework/commit/90baa187443d852b46af91a58a055c0066315a73))
+* **simple-taro-fast-framework:** update ([55c8a64](https://github.com/kityandhero/taro-fast-framework/commit/55c8a6407645c11ef3e480e4d52d5a4832675062))
+* **simple-taro-fast-framework:** update ([4302509](https://github.com/kityandhero/taro-fast-framework/commit/4302509e4da74e60043ebcb61b8bc7f10950e439))
+* **simple-taro-fast-framework:** update ([9a044d2](https://github.com/kityandhero/taro-fast-framework/commit/9a044d2444ce7327f1bf3e7b52ccd0c89cebbc57))
+* **simple-taro-fast-framework:** update ([97917f2](https://github.com/kityandhero/taro-fast-framework/commit/97917f2f080382a2efd73a28f23e3377f4687ac2))
+* **simple-taro-fast-framework:** update ([33c439a](https://github.com/kityandhero/taro-fast-framework/commit/33c439a27d6d09bc790650305850235eff265924))
+* **simple-taro-fast-framework:** update ([81ea764](https://github.com/kityandhero/taro-fast-framework/commit/81ea76475017451d400aa4e9f179feddd45e3266))
+* **simple-taro-fast-framework:** update ([d6e38ba](https://github.com/kityandhero/taro-fast-framework/commit/d6e38ba2a96d59b9a99d4cc620d1ca71b67874c0))
+
+
+
+
 ### [1.0.12](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-common@1.0.11...taro-fast-common@1.0.12) (2022-01-11)
 
 **Note:** Version bump only for package taro-fast-common
