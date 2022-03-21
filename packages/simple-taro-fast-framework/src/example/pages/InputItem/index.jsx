@@ -1,281 +1,364 @@
-import {
-  InputItem,
-  Card,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { InputItem, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+function afterChange(v) {
+  console.log(v);
+}
+
+const config1 = {
+  value: '1',
+  afterChange,
 };
+
+const config111 = {
+  value: '1',
+  border: false,
+  afterChange,
+};
+
+const config2 = {
+  value: '1',
+  label: '手机号',
+  afterChange,
+};
+
+const config3 = {
+  value: '1',
+  label: '手机号',
+  required: true,
+  afterChange,
+};
+
+const config4 = {
+  label: '用户名',
+  labelStyle: {
+    color: 'red',
+  },
+  afterChange,
+};
+
+const config5 = {
+  label: '用户名',
+  align: 'right',
+  border: false,
+  afterChange,
+};
+
+const config6 = {
+  label: '用户名',
+  clearable: true,
+  afterChange,
+};
+
+const config7 = {
+  label: '用户名',
+  hidden: true,
+  afterChange,
+};
+
+const config8 = {
+  label: '用户名',
+  extra: '扩展部分',
+  afterChange,
+};
+
+const config9 = {
+  label: '密码',
+  password: true,
+  afterChange,
+};
+
+const config10 = {
+  label: '用户名',
+  placeholder: '请输入用户名',
+  afterChange,
+};
+
+const config11 = {
+  label: '用户名',
+  placeholder: '请输入用户名',
+  placeholderStyle: { color: '#45e325' },
+  afterChange,
+};
+
+const config12 = {
+  label: '用户名',
+  disabled: true,
+  afterChange,
+};
+
+const config13 = {
+  label: '用户名',
+  maxlength: 5,
+  afterChange,
+};
+
+const config14 = {
+  label: '用户名',
+  confirmType: 'go',
+  afterChange,
+};
+
+const config15 = {
+  label: '用户名',
+  afterChange,
+  onFocus: () => {
+    console.log('onFocus');
+  },
+};
+
+const config16 = {
+  label: '用户名',
+  afterChange,
+  onBlur: () => {
+    console.log('onBlur');
+  },
+};
+
+const config17 = {
+  label: '用户名',
+  afterChange,
+  onConfirm: () => {
+    console.log('onConfirm');
+  },
+};
+
+const config18 = {
+  label: '用户名',
+  afterChange,
+  onKeyboardHeightChange: () => {
+    console.log('onKeyboardHeightChange');
+  },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '输入项',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'InputItem',
     name: '输入项',
+    description: '输入项组件',
   };
 
   renderContent = () => {
-    const { value } = this.state;
-
     return (
       <Space direction="vertical" fillWidth>
-        <Card
+        <SimpleBox
           header="基础"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config1}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem value={value} border={false} />
-        </Card>
+          <InputItem {...config1} />
+        </SimpleBox>
 
-        <Card
-          header="Label"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="无下划线"
+          config={config111}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem value={value} label="用户名" />
-          <InputItem value={value} label="密码" />
-          <InputItem value={value} label="手机号" border={false} />
-        </Card>
+          <InputItem {...config111} />
+        </SimpleBox>
 
-        <Card
-          header="Required"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="设置标签"
+          config={config2}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem value={value} label="用户名" required border={false} />
-        </Card>
+          <InputItem {...config2} />
+        </SimpleBox>
 
-        <Card
-          header="labelStyle"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="必填项"
+          config={config3}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            labelStyle={{ color: 'red' }}
-            border={false}
-          />
-        </Card>
+          <InputItem {...config3} />
+        </SimpleBox>
 
-        <Card
-          header="Align Right"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="标签样式"
+          config={config4}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            align="right"
-            border={false}
-          />
-        </Card>
+          <InputItem {...config4} />
+        </SimpleBox>
 
-        <Card
-          header="Clearable"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="输入右对齐"
+          config={config5}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem value={value} label="用户名" clearable border={false} />
-        </Card>
+          <InputItem {...config5} />
+        </SimpleBox>
 
-        <Card
-          header="Hidden"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="可清除"
+          config={config6}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem value={value} label="用户名" hidden border={false} />
-        </Card>
+          <InputItem {...config6} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
+          header="设置隐藏"
+          config={config7}
+          space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox
+        >
+          <InputItem {...config7} />
+        </SimpleBox>
+
+        <SimpleBox
           header="Extra"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config8}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            extra="扩展部分"
-            border={false}
-          />
-        </Card>
+          <InputItem {...config8} />
+        </SimpleBox>
 
-        <Card
-          header="Password"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="密码模式"
+          config={config9}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem value={value} password label="密码" border={false} />
-        </Card>
+          <InputItem {...config9} />
+        </SimpleBox>
 
-        <Card
-          header="placeholder"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="占位提示"
+          config={config10}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            placeholder="请输入用户名"
-            border={false}
-          />
-        </Card>
+          <InputItem {...config10} />
+        </SimpleBox>
 
-        <Card
-          header="placeholderStyle"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="占位提示样式"
+          config={config11}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            placeholder="请输入用户名"
-            value={value}
-            placeholderStyle={{ color: '#45e325' }}
-            label="用户名"
-            border={false}
-          />
-        </Card>
+          <InputItem {...config11} />
+        </SimpleBox>
 
-        <Card
-          header="disabled"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="禁用模式"
+          config={config12}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            placeholder="请输入用户名"
-            disabled
-            border={false}
-          />
-        </Card>
+          <InputItem {...config12} />
+        </SimpleBox>
 
-        <Card
-          header="maxlength"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="最大输入长度"
+          config={config13}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            maxlength={5}
-            border={false}
-          />
-        </Card>
+          <InputItem {...config13} />
+        </SimpleBox>
 
-        <Card
-          header="confirmType"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="确认文字"
+          config={config14}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            confirmType="go"
-            border={false}
-          />
-        </Card>
+          <InputItem {...config14} />
+        </SimpleBox>
 
-        <Card
-          header="afterChange"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="获取焦点事件"
+          config={config15}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            afterChange={(v) => {
-              this.bannerNotify({
-                message: `值已更改为:${v}`,
-              });
-            }}
-            border={false}
-          />
-        </Card>
+          <InputItem {...config15} />
+        </SimpleBox>
 
-        <Card
-          header="onFocus"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="失去焦点事件"
+          config={config16}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            onFocus={(e) => {
-              console.log(e);
-            }}
-            border={false}
-          />
-        </Card>
+          <InputItem {...config16} />
+        </SimpleBox>
 
-        <Card
-          header="onBlur"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          space={false}
-        >
-          <InputItem
-            label="用户名"
-            value={value}
-            onBlur={(e) => {
-              console.log(e);
-            }}
-            border={false}
-          />
-        </Card>
-
-        <Card
+        <SimpleBox
           header="onConfirm"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config17}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            onConfirm={(e) => {
-              console.log(e);
-            }}
-            border={false}
-          />
-        </Card>
+          <InputItem {...config17} />
+        </SimpleBox>
 
-        <Card
-          header="onKeyboardHeightChange"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="键盘高度变更事件"
+          config={config18}
           space={false}
+          componentName="InputItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <InputItem
-            label="用户名"
-            value={value}
-            onKeyboardHeightChange={(e) => {
-              console.log(e);
-            }}
-            border={false}
-          />
-        </Card>
+          <InputItem {...config18} />
+        </SimpleBox>
+
+        <PropertyBox config={InputItem.defaultProps} labelWidth={360} />
       </Space>
     );
   };
