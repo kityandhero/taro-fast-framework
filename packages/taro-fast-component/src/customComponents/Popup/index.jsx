@@ -51,7 +51,7 @@ const defaultProps = {
   minWidth: '20%',
   bodyStyle: {},
   closeWhenOverlayClick: true,
-  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
+  closeIcon: null,
   closeIconStyle: {},
   position: 'bottom',
   /**
@@ -189,12 +189,13 @@ class Popup extends BaseComponent {
   };
 
   close = () => {
-    this.setState(
-      {
-        visibleStage: false,
-      },
-      this.handleClose,
-    );
+    console.log(111);
+
+    this.setState({
+      visibleStage: false,
+    });
+
+    this.handleClose();
   };
 
   getHeight = () => {
@@ -353,7 +354,7 @@ class Popup extends BaseComponent {
             ...(inCollection(['center'], position) ? { width: '100vw' } : {}),
           }}
         >
-          {showClose && closeIcon ? (
+          {showClose ? (
             <View
               className="tfc-popup__container__body__close"
               style={{
@@ -367,9 +368,13 @@ class Popup extends BaseComponent {
                   position: 'absolute',
                 },
               }}
-              onClick={this.close}
+              onClick={() => {
+                this.close();
+              }}
             >
-              <CenterBox>{closeIcon}</CenterBox>
+              <CenterBox>
+                {closeIcon || <IconCloseCircle size={36} color="#ccc" />}
+              </CenterBox>
             </View>
           ) : null}
 
