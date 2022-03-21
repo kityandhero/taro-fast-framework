@@ -12,6 +12,7 @@ import { Selector } from 'taro-fast-component-extra/es/customComponents';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const boxStyle = {
   width: transformSize(80),
@@ -230,6 +231,24 @@ export default class Index extends ContentPageBase {
               </Overlay>
             </View>
           </SimpleBox>
+
+          <CodeBox
+            componentName="Tabs"
+            mockChildren
+            useInnerBox={false}
+            config={{
+              visible: true,
+              mode: 'fullParent',
+              color: '#543202',
+              alpha: 0.5,
+              duration: 400,
+              zIndex: 400,
+              animal: 'ease-in',
+              onClick: () => {
+                console.log('onClick');
+              },
+            }}
+          />
 
           <SimpleBox header="遮罩层操控" space={false}>
             <Item label="显示全局遮罩层" arrow onClick={this.onClickShow1} />

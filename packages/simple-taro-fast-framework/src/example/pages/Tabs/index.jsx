@@ -11,6 +11,7 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 import logoImg from '../../../assets/images/logo.png';
 
 const { IconSketch } = Icon;
@@ -378,6 +379,37 @@ export default class Index extends ContentPageBase {
             </TabPanel>
           </Tabs>
         </SimpleBox>
+
+        <CodeBox
+          componentName="Tabs"
+          mockChildren
+          useInnerBox={false}
+          config={{
+            current: 2,
+            scroll: true,
+            tabList: [
+              { title: '标签页1' },
+              { title: '标签页2' },
+              { title: '标签页3' },
+              { title: '标签页4' },
+              { title: '标签页5' },
+              { title: '标签页6' },
+            ],
+            onClick: () => {
+              console.log('onClick');
+            },
+          }}
+        />
+
+        <CodeBox
+          componentName="TabPanel"
+          mockChildren
+          useInnerBox={false}
+          config={{
+            current: 2,
+            index: 5,
+          }}
+        />
 
         <PropertyBox
           header="Tabs 可配置项以及默认值"
