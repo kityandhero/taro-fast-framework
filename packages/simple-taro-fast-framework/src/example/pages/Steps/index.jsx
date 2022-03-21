@@ -124,23 +124,58 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="横向" config={config1}>
+        <SimpleBox
+          header="横向"
+          config={config1}
+          componentName="Steps"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon']}
+        >
           <Steps {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="横向（失败状态）" config={config2}>
+        <SimpleBox
+          header="横向（失败状态）"
+          config={config2}
+          componentName="Steps"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon']}
+        >
           <Steps {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="纵向" config={config3}>
+        <SimpleBox
+          header="纵向"
+          config={config3}
+          componentName="Steps"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon']}
+        >
           <Steps {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="纵向（失败状态）" config={config4}>
+        <SimpleBox
+          header="纵向（失败状态）"
+          config={config4}
+          componentName="Steps"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon']}
+        >
           <Steps {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="自定义图标和大小" config={config5}>
+        <SimpleBox
+          header="自定义图标和大小"
+          config={config5}
+          componentName="Steps"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon']}
+        >
           <Steps {...config5} />
         </SimpleBox>
 

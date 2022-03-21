@@ -53,9 +53,15 @@ class HelpBox extends BaseComponent {
       useBackground,
       color,
       fontSize,
+      hidden,
     } = this.props;
 
+    if (hidden) {
+      return null;
+    }
+
     const title = titleValue || '帮助信息';
+
     let list = [];
 
     if (isArray(listData)) {

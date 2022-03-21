@@ -50,7 +50,7 @@ const config5 = {
 };
 
 const config6 = {
-  title: '操作说明',
+  title: '操作说明隐藏',
   list,
   hidden: true,
 };
@@ -91,39 +91,93 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="一般用法" config={config1}>
+        <SimpleBox
+          header="一般用法"
+          config={config1}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="隐藏标题" config={config2}>
+        <SimpleBox
+          header="隐藏标题"
+          config={config2}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="不显示行号" config={config3}>
+        <SimpleBox
+          header="不显示行号"
+          config={config3}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="标题宽度" config={config4}>
+        <SimpleBox
+          header="标题宽度"
+          config={config4}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="使用背景" config={config5}>
+        <SimpleBox
+          header="使用背景"
+          config={config5}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="设置背景颜色" config={config7}>
+        <SimpleBox
+          header="设置背景颜色"
+          config={config7}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config7} />
         </SimpleBox>
 
-        <SimpleBox header="设置字体颜色" config={config8}>
+        <SimpleBox
+          header="设置字体颜色"
+          config={config8}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config8} />
         </SimpleBox>
 
-        <SimpleBox header="设置字体大小" config={config9}>
+        <SimpleBox
+          header="设置字体大小"
+          config={config9}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <HelpBox {...config9} />
         </SimpleBox>
 
-        <SimpleBox header="隐藏" config={config6}>
+        <SimpleBox
+          header="隐藏"
+          config={config6}
+          componentName="HelpBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <HelpBox {...config6} />
         </SimpleBox>
 

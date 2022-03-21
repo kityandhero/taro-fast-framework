@@ -43,16 +43,30 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
           return (result = result + `${key}={...} `);
         }
 
-        const vv = JSON.stringify(value);
+        let s = JSON.stringify(
+          value,
+          (k, v) => {
+            if (inCollection(ignorePropertyList, k)) {
+              return '{...}';
+            }
 
-        if (isUndefined(vv)) {
+            return v;
+          },
+          '\t',
+        );
+
+        if (isUndefined(s)) {
           result = result + `${key}={''} `;
         } else {
-          result =
-            result +
-            `${key}={${JSON.stringify(value, null, '\t')
-              .replace(/\t"/gm, '\t')
-              .replace(/":/gm, ':')}} `;
+          const matchCollection = s.match(/"[\S]*": /g);
+
+          if (isArray(matchCollection) && matchCollection.length > 0) {
+            matchCollection.forEach((o) => {
+              s = s.replace(o, o.replace(/"/g, ''));
+            });
+          }
+
+          result = result + `${key}={${s}} `;
         }
       } else {
         result = result + `${key}={${toString(value)}} `;

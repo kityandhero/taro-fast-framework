@@ -38,19 +38,43 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="仅图片" config={config1}>
+        <SimpleBox
+          header="仅图片"
+          config={config1}
+          componentName="Footer"
+          mockChildren={false}
+          useInnerBox
+        >
           <Footer {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="仅文字" config={config2}>
+        <SimpleBox
+          header="仅文字"
+          config={config2}
+          componentName="Footer"
+          mockChildren={false}
+          useInnerBox
+        >
           <Footer {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="仅描述" config={config3}>
+        <SimpleBox
+          header="仅描述"
+          config={config3}
+          componentName="Footer"
+          mockChildren={false}
+          useInnerBox
+        >
           <Footer {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="用法展示" config={config4}>
+        <SimpleBox
+          header="用法展示"
+          config={config4}
+          componentName="Footer"
+          mockChildren={false}
+          useInnerBox
+        >
           <Footer {...config4} />
         </SimpleBox>
 
