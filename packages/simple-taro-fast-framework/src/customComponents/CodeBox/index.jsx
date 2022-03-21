@@ -1,22 +1,10 @@
 import { Component } from 'react';
-import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
-import {
-  isArray,
-  isObject,
-  isFunction,
-  isBoolean,
-  isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-
-import { Card, ColorText } from 'taro-fast-component/es/customComponents';
+import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import { Card } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
+import { buildPrismCode } from '../../utils/tools';
 
 const style = {
   ...{
@@ -35,44 +23,9 @@ const defaultProps = {
 };
 
 class CodeBox extends Component {
-  buildConfig = () => {
-    const { config } = this.props;
-
-    let result = '';
-
-    Object.entries(config).forEach((d) => {
-      const [key, value] = d;
-
-      if (isBoolean(value) && value) {
-        result = result + `${key} `;
-      } else if (isString(value)) {
-        result = result + `${key}="${value}" `;
-      } else if (isFunction(value)) {
-        result = result + `${key}={${toString(value)}} `;
-      } else if (isObject(value) || isArray) {
-        result = result + `${key}={${JSON.stringify(value)}} `;
-      } else {
-        result = result + `${key}={${toString(value)}} `;
-      }
-    });
-
-    return result;
-  };
-
   render() {
-    const { header, description, componentName, mockChildren } = this.props;
-
-    if (stringIsNullOrWhiteSpace(componentName)) {
-      return null;
-    }
-
-    let code = '';
-
-    if (mockChildren) {
-      code = `<${componentName} ${this.buildConfig()}>...</${componentName}>`;
-    } else {
-      code = `<${componentName} ${this.buildConfig()} />`;
-    }
+    const { header, description, componentName, config, mockChildren } =
+      this.props;
 
     return (
       <Card
@@ -89,17 +42,7 @@ class CodeBox extends Component {
             : `备注: ${description}.`
         }
       >
-        <View>
-          <ColorText
-            color="#999"
-            text={code}
-            textStyle={{
-              fontSize: transformSize(26),
-              lineHeight: transformSize(32),
-            }}
-            canCopy
-          />
-        </View>
+        {buildPrismCode({ componentName, config, mockChildren })}
       </Card>
     );
   }

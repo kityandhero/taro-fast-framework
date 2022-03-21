@@ -54,31 +54,73 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认" config={config1}>
+        <SimpleBox
+          header="默认"
+          config={config1}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="设置颜色" config={config2}>
+        <SimpleBox
+          header="设置颜色"
+          config={config2}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="设置下划线" config={config3}>
+        <SimpleBox
+          header="设置下划线"
+          config={config3}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="设置字体大小" config={config4}>
+        <SimpleBox
+          header="设置字体大小"
+          config={config4}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="复制提示" config={config5}>
+        <SimpleBox
+          header="复制提示"
+          config={config5}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="未配置链接的提示" config={config5}>
+        <SimpleBox
+          header="未配置链接的提示"
+          config={config5}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="未配置链接的提示" config={config6}>
+        <SimpleBox
+          header="未配置链接的提示"
+          config={config6}
+          componentName="Link"
+          mockChildren={false}
+          useInnerBox={false}
+        >
           <Link {...config6} />
         </SimpleBox>
 

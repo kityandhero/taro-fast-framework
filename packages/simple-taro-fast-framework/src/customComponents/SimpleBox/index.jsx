@@ -8,7 +8,6 @@ import {
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   isArray,
-  isBoolean,
   isFunction,
   isObject,
   isString,
@@ -17,11 +16,10 @@ import {
   Card,
   ColorText,
   HelpBox,
-  Divider,
 } from 'taro-fast-component/es/customComponents';
-import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
+import { buildPrismCode } from '../../utils/tools';
 
 const style = {
   ...{
@@ -64,52 +62,10 @@ class SimpleBox extends Component {
     return list;
   };
 
-  buildConfig = () => {
-    const { config } = this.props;
-
-    let result = '';
-
-    Object.entries(config).forEach((d) => {
-      const [key, value] = d;
-
-      if (isBoolean(value) && value) {
-        result = result + `${key} `;
-      } else if (isString(value)) {
-        result = result + `${key}="${value}" `;
-      } else if (isObject(value) || isArray) {
-        result = result + `${key}={${JSON.stringify(value)}} `;
-      } else if (isFunction(value)) {
-        result = result + `${key}={${JSON.stringify(value)}} `;
-      } else {
-        result = result + `${key}={${toString(value)}} `;
-      }
-    });
-
-    return result;
-  };
-
   buildCode = () => {
-    const { componentName, mockChildren } = this.props;
+    const { componentName, config, mockChildren } = this.props;
 
-    if (stringIsNullOrWhiteSpace(componentName)) {
-      return null;
-    }
-
-    let code = '';
-
-    if (mockChildren) {
-      code = `<${componentName} ${this.buildConfig()}>...</${componentName}>`;
-    } else {
-      code = `<${componentName} ${this.buildConfig()} />`;
-    }
-
-    return (
-      <>
-        <Divider contentPosition="left">代码示例 点击复制</Divider>
-
-        <PrismCode canCopy code={code} language="jsx" />
-      </>
-    );
+    return buildPrismCode({ componentName, config, mockChildren });
   };
 
   buildFooter = () => {

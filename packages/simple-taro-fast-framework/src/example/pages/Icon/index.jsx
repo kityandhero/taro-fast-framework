@@ -143,6 +143,11 @@ const nameStyle = {
 };
 
 const config1 = {
+  size: 24,
+  value: 'sketch',
+};
+
+const config2 = {
   size: 42,
   imageMode: true,
   value: logoImg,
@@ -210,15 +215,22 @@ export default class Index extends ContentPageBase {
           {this.buildGrid('media', icons.media)}
         </SimpleBox>
 
-        <SimpleBox header="Logo">
+        <SimpleBox
+          header="Logo"
+          config={config1}
+          componentName="Icon"
+          mockChildren={false}
+          useInnerBox
+        >
           {this.buildGrid('logo', icons.logo)}
         </SimpleBox>
 
         <SimpleBox
           header="图片模式"
-          config={config1}
+          config={config2}
           componentName="Icon"
           mockChildren={false}
+          useInnerBox
         >
           <Grid columns={3}>
             <Grid.Item>
@@ -227,7 +239,7 @@ export default class Index extends ContentPageBase {
                 flexAuto="top"
                 top={
                   <CenterBox>
-                    <Icon {...config1} />
+                    <Icon {...config2} />
                   </CenterBox>
                 }
                 bottom={<View style={nameStyle}>外部图片</View>}
