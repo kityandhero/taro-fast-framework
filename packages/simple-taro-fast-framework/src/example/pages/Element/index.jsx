@@ -64,6 +64,11 @@ const o = {
       path: pathCollection.example.badge.path,
     },
     {
+      id: 'FloatAction',
+      name: '浮动菜单',
+      path: pathCollection.example.floatAction.path,
+    },
+    {
       id: 'Item',
       name: '条目项',
       path: pathCollection.example.item.path,
