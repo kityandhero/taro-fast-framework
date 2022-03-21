@@ -11,6 +11,8 @@ import {
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
@@ -28,10 +30,16 @@ const extraStyle = {
   backgroundColor: '#f5f7fa',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '单选',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Radio',
     name: '单选',
+    description: '单选组件',
   };
 
   constructor(props) {
@@ -266,6 +274,24 @@ export default class Index extends ContentPageBase {
             });
           }}
         />
+
+        <CodeBox
+          config={{
+            header: '更改回调',
+            layout: 'radio',
+            style,
+            border,
+            options: this.state.radioOptions1,
+            value: this.state.radioValue1,
+            extra: <View style={extraStyle}>layout: radio</View>,
+          }}
+          componentName="Collapse"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['extra']}
+        />
+
+        <PropertyBox config={Radio.defaultProps} labelWidth={360} />
       </Space>
     );
   };
