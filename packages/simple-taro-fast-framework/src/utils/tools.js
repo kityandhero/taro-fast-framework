@@ -68,6 +68,7 @@ export function buildPrismCode({
   config,
   mockChildren,
   ignorePropertyList = [],
+  showDivider = true,
 }) {
   if (stringIsNullOrWhiteSpace(componentName)) {
     return null;
@@ -89,7 +90,9 @@ export function buildPrismCode({
 
   return (
     <>
-      <Divider contentPosition="left">代码示例 点击复制</Divider>
+      {showDivider ? (
+        <Divider contentPosition="left">代码示例 点击复制</Divider>
+      ) : null}
 
       <PrismCode canCopy code={code} language="jsx" />
     </>

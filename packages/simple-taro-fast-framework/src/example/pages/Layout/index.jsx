@@ -69,14 +69,18 @@ const o = {
     },
     {
       id: 'HtmlBox',
-      name: '比例容器',
+      name: 'Html容器',
       path: pathCollection.example.htmlBox.path,
     },
-
     {
       id: 'TranslucentBox',
       name: '半透明容器',
       path: pathCollection.example.translucentBox.path,
+    },
+    {
+      id: 'Transition',
+      name: '动画容器',
+      path: pathCollection.example.transition.path,
     },
     {
       id: 'Swiper',

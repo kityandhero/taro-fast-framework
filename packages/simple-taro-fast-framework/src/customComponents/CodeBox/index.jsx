@@ -53,6 +53,7 @@ class CodeBox extends Component {
           config,
           mockChildren,
           ignorePropertyList,
+          showDivider: false,
         })}
       </Card>
     );

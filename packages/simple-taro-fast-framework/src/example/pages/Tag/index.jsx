@@ -7,6 +7,10 @@ import PropertyBox from '../../../customComponents/PropertyBox';
 
 const colorList = ['default', 'primary', 'success', 'warning', 'danger'];
 
+const config10 = {
+  color: '#2db7f5',
+};
+
 const config1 = {
   color: 'primary',
   fill: 'outline',
@@ -97,7 +101,12 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="基本用法">
+        <SimpleBox
+          header="基本用法"
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Tag>123</Tag>
         </SimpleBox>
 
@@ -113,15 +122,25 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="自定义颜色">
+        <SimpleBox
+          header="自定义颜色"
+          config={config10}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
-            <Tag color="#2db7f5">#2db7f5</Tag>
-            <Tag color="#87d068">#87d068</Tag>
-            <Tag color="#108ee9">#108ee9</Tag>
+            <Tag {...config10}>#2db7f5</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="线框填充" config={config1}>
+        <SimpleBox
+          header="线框填充"
+          config={config1}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             {colorList.map((o, i) => {
               return (
@@ -133,49 +152,97 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="圆角" config={config2}>
+        <SimpleBox
+          header="圆角"
+          config={config2}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config2}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="半圆角左" config={config3}>
+        <SimpleBox
+          header="半圆角左"
+          config={config3}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config3}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="半圆角右" config={config4}>
+        <SimpleBox
+          header="半圆角右"
+          config={config4}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config4}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="隐藏" config={config5}>
+        <SimpleBox
+          header="隐藏"
+          config={config5}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config5}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="onClick [查看控制台]" config={config6}>
+        <SimpleBox
+          header="onClick [查看控制台]"
+          config={config6}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config6}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="可关闭" config={config7}>
+        <SimpleBox
+          header="可关闭"
+          config={config7}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config7}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="设置可关闭颜色" config={config8}>
+        <SimpleBox
+          header="设置可关闭颜色"
+          config={config8}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config8}>标签</Tag>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="通过 CSS 变量进行个性化" config={config9}>
+        <SimpleBox
+          header="通过 CSS 变量进行个性化"
+          config={config9}
+          componentName="Tag"
+          mockChildren
+          useInnerBox
+        >
           <Space>
             <Tag {...config9}>标签</Tag>
           </Space>

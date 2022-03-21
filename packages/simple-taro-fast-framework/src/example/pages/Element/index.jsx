@@ -43,11 +43,6 @@ const o = {
       path: pathCollection.example.countdown.path,
     },
     {
-      id: 'Transition',
-      name: '变换动画',
-      path: pathCollection.example.transition.path,
-    },
-    {
       id: 'Notification',
       name: '动态通知',
       path: pathCollection.example.notification.path,

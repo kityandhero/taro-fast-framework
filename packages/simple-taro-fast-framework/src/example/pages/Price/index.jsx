@@ -67,27 +67,63 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="普通" config={config1}>
+        <SimpleBox
+          header="普通"
+          config={config1}
+          componentName="Price"
+          mockChildren={false}
+          useInnerBox
+        >
           <Price {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="修饰符" config={config2}>
+        <SimpleBox
+          header="修饰符"
+          config={config2}
+          componentName="Price"
+          mockChildren={false}
+          useInnerBox
+        >
           <Price {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="删除线" config={config3}>
+        <SimpleBox
+          header="删除线"
+          config={config3}
+          componentName="Price"
+          mockChildren={false}
+          useInnerBox
+        >
           <Price {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="外层样式" config={config4}>
+        <SimpleBox
+          header="外层样式"
+          config={config4}
+          componentName="Price"
+          mockChildren={false}
+          useInnerBox
+        >
           <Price {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="元素通用样式" config={config5}>
+        <SimpleBox
+          header="元素通用样式"
+          config={config5}
+          componentName="Price"
+          mockChildren={false}
+          useInnerBox
+        >
           <Price {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="复杂配置" config={config6}>
+        <SimpleBox
+          header="复杂配置"
+          config={config6}
+          componentName="Price"
+          mockChildren={false}
+          useInnerBox
+        >
           <Price {...config6} />
         </SimpleBox>
 

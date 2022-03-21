@@ -54,47 +54,105 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="例子">
+        <SimpleBox
+          header="例子"
+          componentName="Loading"
+          mockChildren={false}
+          useInnerBox
+        >
           <Loading />
         </SimpleBox>
 
-        <SimpleBox header="图标" config={config1}>
+        <SimpleBox
+          header="图标"
+          config={config1}
+          componentName="Loading"
+          mockChildren={false}
+          useInnerBox
+        >
           <Loading {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="设置颜色" config={config2}>
+        <SimpleBox
+          header="设置颜色"
+          config={config2}
+          componentName="Loading"
+          mockChildren={false}
+          useInnerBox
+        >
           <Loading {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="设置大小" config={config3}>
+        <SimpleBox
+          header="设置大小"
+          config={config3}
+          componentName="Loading"
+          mockChildren={false}
+          useInnerBox
+        >
           <Loading {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="设置线条宽度" config={config4}>
+        <SimpleBox
+          header="设置线条宽度"
+          config={config4}
+          componentName="Loading"
+          mockChildren={false}
+          useInnerBox
+        >
           <Loading {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="加载提示">
+        <SimpleBox
+          header="加载提示"
+          componentName="ActivityIndicator"
+          mockChildren={false}
+          useInnerBox
+        >
           <ActivityIndicator />
         </SimpleBox>
 
-        <SimpleBox header="加载提示图标" config={config5}>
+        <SimpleBox
+          header="加载提示图标"
+          config={config5}
+          componentName="ActivityIndicator"
+          mockChildren={false}
+          useInnerBox
+        >
           <ActivityIndicator {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="加载提示文字" config={config6}>
+        <SimpleBox
+          header="加载提示文字"
+          config={config6}
+          componentName="ActivityIndicator"
+          mockChildren={false}
+          useInnerBox
+        >
           <ActivityIndicator {...config6} />
         </SimpleBox>
 
-        <SimpleBox header="居中显示" config={config7}>
+        <SimpleBox
+          header="居中显示"
+          config={config7}
+          componentName="ActivityIndicator"
+          mockChildren={false}
+          useInnerBox
+        >
           <View
             style={{
               border: 'var(--tfc-1) solid #ccc',
               height: 'var(--tfc-200)',
               position: 'relative',
+              width: '100%',
             }}
           >
-            <ActivityIndicator {...config7} />
+            <ActivityIndicator
+              {...config7}
+              componentName="ActivityIndicator"
+              mockChildren={false}
+              useInnerBox
+            />
           </View>
         </SimpleBox>
 

@@ -7,6 +7,7 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 import './index.less';
 
@@ -143,6 +144,17 @@ export default class Index extends ContentPageBase {
             onClick={this.onClickCustom}
           />
         </SimpleBox>
+
+        <CodeBox
+          config={{
+            show: true,
+            name,
+            className: 'block',
+          }}
+          componentName="Transition"
+          mockChildren
+          useInnerBox={false}
+        />
 
         <PropertyBox config={Transition.defaultProps} labelWidth={230} />
 
