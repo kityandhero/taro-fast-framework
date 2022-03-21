@@ -189,8 +189,6 @@ class Popup extends BaseComponent {
   };
 
   close = () => {
-    console.log(111);
-
     this.setState({
       visibleStage: false,
     });
