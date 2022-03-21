@@ -35,15 +35,30 @@ export default class Index extends ContentPageBase {
           header="默认展示"
           description="默认长宽比为1, 即为正方形"
           config={config1}
+          componentName="ScaleBox"
+          mockChildren
+          useInnerBox={false}
         >
           <ScaleBox {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="设置长宽比" config={config2}>
+        <SimpleBox
+          header="设置长宽比"
+          config={config2}
+          componentName="ScaleBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <ScaleBox {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="设置padding" config={config3}>
+        <SimpleBox
+          header="设置padding"
+          config={config3}
+          componentName="ScaleBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <ScaleBox {...config3}>
             <View
               style={{

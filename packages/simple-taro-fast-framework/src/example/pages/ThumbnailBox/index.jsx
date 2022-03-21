@@ -57,43 +57,84 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="简单使用">
+        <SimpleBox
+          header="简单使用"
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox>{contentText}</ThumbnailBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="设置文字" config={config1}>
+        <SimpleBox
+          header="设置文字"
+          config={config1}
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox {...config1}>{contentText}</ThumbnailBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="可收缩" config={config2}>
+        <SimpleBox
+          header="可收缩"
+          config={config2}
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox {...config2}>{contentText}</ThumbnailBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="设置收缩高度" config={config3}>
+        <SimpleBox
+          header="设置收缩高度"
+          config={config3}
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox {...config3}>{contentText}</ThumbnailBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="背景" config={config4}>
+        <SimpleBox
+          header="背景"
+          config={config4}
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox {...config4}>{contentText}</ThumbnailBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="操作栏背景" config={config5}>
+        <SimpleBox
+          header="操作栏背景"
+          config={config5}
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox {...config5}>{contentText}</ThumbnailBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="操作栏颜色" config={config6}>
+        <SimpleBox
+          header="操作栏颜色"
+          config={config6}
+          componentName="ThumbnailBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <ThumbnailBox {...config6}>{contentText}</ThumbnailBox>
           </View>

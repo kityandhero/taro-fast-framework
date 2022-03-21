@@ -50,7 +50,13 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认布局" config={config1}>
+        <SimpleBox
+          header="默认布局"
+          config={config1}
+          componentName="HorizontalCenterBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={containorStyle}>
             <HorizontalCenterBox {...config1}>
               <View style={boxStyle}></View>
@@ -58,7 +64,13 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <SimpleBox header="不自动使用父级高度" config={config2}>
+        <SimpleBox
+          header="不自动使用父级高度"
+          config={config2}
+          componentName="HorizontalCenterBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={containorStyle}>
             <HorizontalCenterBox {...config2}>
               <View style={boxStyle}></View>

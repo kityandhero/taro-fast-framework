@@ -44,7 +44,13 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认" config={config1}>
+        <SimpleBox
+          header="默认"
+          config={config1}
+          componentName="TranslucentBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={boxStyle}>
             <CenterBox>
               <TranslucentBox {...config1}>

@@ -220,43 +220,113 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="垂直往复滚动" config={config1}>
+        <SimpleBox
+          header="垂直往复滚动"
+          config={config1}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="水平往复滚动" config={config2}>
+        <SimpleBox
+          header="水平往复滚动"
+          config={config2}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="图片水平往复滚动" config={config3}>
+        <SimpleBox
+          header="图片水平往复滚动"
+          config={config3}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="自动往复滚动" config={config4}>
+        <SimpleBox
+          header="自动往复滚动"
+          config={config4}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="自动循环滚动" config={config5}>
+        <SimpleBox
+          header="自动循环滚动"
+          config={config5}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config5} />
         </SimpleBox>
 
-        <SimpleBox header="显示指示器" config={config6}>
+        <SimpleBox
+          header="显示指示器"
+          config={config6}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config6} />
         </SimpleBox>
 
-        <SimpleBox header="关闭触摸变换" config={config7}>
+        <SimpleBox
+          header="关闭触摸变换"
+          config={config7}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config7} />
         </SimpleBox>
 
-        <SimpleBox header="设置轮播方向" config={config8}>
+        <SimpleBox
+          header="设置轮播方向"
+          config={config8}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config8} />
         </SimpleBox>
 
-        <SimpleBox header="设置停顿时间" config={config9}>
+        <SimpleBox
+          header="设置停顿时间"
+          config={config9}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config9} />
         </SimpleBox>
 
-        <SimpleBox header="使用前后控制" config={config10}>
+        <SimpleBox
+          header="使用前后控制"
+          config={config10}
+          componentName="Swiper"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <Swiper {...config10} />
         </SimpleBox>
 

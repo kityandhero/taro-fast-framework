@@ -97,19 +97,36 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     const { align, alignJustify } = this.state;
 
+    const config = {
+      align: align[0],
+      alignJustify: alignJustify[0],
+    };
+
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="单元素布局展示">
+        <SimpleBox
+          header="单元素布局展示"
+          config={config}
+          componentName="VerticalBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={containorStyle}>
-            <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
+            <VerticalBox {...config}>
               <View style={boxStyle}></View>
             </VerticalBox>
           </View>
         </SimpleBox>
 
-        <SimpleBox header="多元素布局展示">
+        <SimpleBox
+          header="多元素布局展示"
+          config={config}
+          componentName="VerticalBox"
+          mockChildren
+          useInnerBox={false}
+        >
           <View style={containorStyle}>
-            <VerticalBox align={align[0]} alignJustify={alignJustify[0]}>
+            <VerticalBox {...config}>
               <View style={boxStyle}></View>
               <View style={boxStyle}></View>
               <View style={boxStyle}></View>

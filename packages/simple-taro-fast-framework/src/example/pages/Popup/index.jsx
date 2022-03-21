@@ -5,6 +5,7 @@ import { cardHeaderStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 import './index.less';
 
@@ -241,8 +242,6 @@ export default class Index extends ContentPageBase {
       scroll: scrollData,
     } = this.state;
 
-    console.log(show);
-
     return (
       <>
         <Space direction="vertical" fillWidth>
@@ -272,6 +271,27 @@ export default class Index extends ContentPageBase {
               border={false}
             />
           </SimpleBox>
+
+          <CodeBox
+            componentName="FadeInBox"
+            mockChildren
+            useInnerBox={false}
+            config={{
+              visible: true,
+              header: '面板',
+              position: 'center',
+              mode: 'through',
+              showClose: true,
+              closeWhenOverlayClick: () => {
+                console.log('closeWhenOverlayClick');
+              },
+              arcTop: true,
+              arcBottom: true,
+              onClose: () => {
+                console.log('onClose');
+              },
+            }}
+          />
 
           <SimpleBox header="变更上圆角">
             <Selector

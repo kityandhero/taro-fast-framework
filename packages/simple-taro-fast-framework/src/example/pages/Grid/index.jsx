@@ -40,7 +40,13 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="用法展示" config={config1}>
+        <SimpleBox
+          header="用法展示"
+          config={config1}
+          componentName="Grid"
+          mockChildren
+          useInnerBox={false}
+        >
           <Grid {...config1}>
             <Grid.Item>
               <View style={itemStyle}>A</View>
@@ -60,7 +66,13 @@ export default class Index extends ContentPageBase {
           </Grid>
         </SimpleBox>
 
-        <SimpleBox header="控制格子的跨度" config={config2}>
+        <SimpleBox
+          header="控制格子的跨度"
+          config={config2}
+          componentName="Grid"
+          mockChildren
+          useInnerBox={false}
+        >
           <Grid {...config2}>
             <Grid.Item>
               <View style={itemStyle}>A</View>
@@ -83,13 +95,13 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Grid 可配置项以及默认值"
           config={Grid.defaultProps}
-          labelWidth={170}
+          labelWidth={240}
         />
 
         <PropertyBox
           header="Grid.Item 可配置项以及默认值"
           config={Grid.Item.defaultProps}
-          labelWidth={170}
+          labelWidth={100}
         />
       </Space>
     );

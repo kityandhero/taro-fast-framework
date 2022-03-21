@@ -53,7 +53,14 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认布局" config={config1}>
+        <SimpleBox
+          header="默认布局"
+          config={config1}
+          componentName="HorizontalScrollBox"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['itemBuilder']}
+        >
           <HorizontalScrollBox {...config1} />
         </SimpleBox>
 
