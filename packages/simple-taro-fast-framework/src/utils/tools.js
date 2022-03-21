@@ -28,9 +28,9 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
       } else if (isFunction(value)) {
         if (
           isArray(ignorePropertyList) &&
-          inCollection(ignorePropertyList, 'key')
+          inCollection(ignorePropertyList, key)
         ) {
-          return (result = result + `${key}={'function'}} `);
+          return (result = result + `${key}={() => {...}} `);
         }
 
         result =
@@ -39,6 +39,10 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
             .replace(/function .*?\(/, '(')
             .replace(/\) {/, ') => {')}} `;
       } else if (isObject(value) || isArray(value)) {
+        if (inCollection(ignorePropertyList, key)) {
+          return (result = result + `${key}={...} `);
+        }
+
         const vv = JSON.stringify(value);
 
         if (isUndefined(vv)) {

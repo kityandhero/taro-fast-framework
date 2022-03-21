@@ -8,6 +8,7 @@ import {
   CenterBox,
   Ellipsis,
   TranslucentBox,
+  Grid,
 } from 'taro-fast-component/es/customComponents';
 
 import { colStyle } from '@/customConfig/constants';
@@ -16,6 +17,38 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
+const imageModeCollection = [
+  'scaleToFill',
+  'aspectFit',
+  'aspectFill',
+  'widthFix',
+  'heightFix',
+  'top',
+  'bottom',
+  'center',
+  'left',
+  'right',
+  'top left',
+  'top right',
+  'bottom left',
+  'bottom right',
+];
+
+const boxStyle = {
+  padding: 'var(--tfc-20) 0',
+  height: 'var(--tfc-120)',
+  color: 'var(--tfc-color-grey)',
+};
+
+const nameStyle = {
+  width: '100%',
+  fontSize: 'var(--tfc-28)',
+  height: 'var(--tfc-36)',
+  lineHeight: 'var(--tfc-36)',
+  textAlign: 'center',
+  margin: 'var(--tfc-20) 0',
+};
+
 const imageBoxContainerStyle = {
   display: 'block',
   width: transformSize(220),
@@ -23,7 +56,7 @@ const imageBoxContainerStyle = {
 
 const imageBoxContainerMiniStyle = {
   display: 'block',
-  width: transformSize(100),
+  width: transformSize(80),
 };
 
 const imageContainerStyle = {
@@ -123,6 +156,31 @@ export default class Index extends ContentPageBase {
     description: '图片组件',
   };
 
+  buildGrid = (keyPrefix = '', list = []) => {
+    return (
+      <Grid columns={3}>
+        {list.map((item, index) => {
+          return (
+            <Grid.Item key={`${keyPrefix}_${index}`}>
+              <FlexBox
+                style={boxStyle}
+                flexAuto="top"
+                top={
+                  <CenterBox>
+                    <View style={imageBoxContainerMiniStyle}>
+                      <ImageBox imageMode={item} src={src} />
+                    </View>
+                  </CenterBox>
+                }
+                bottom={<View style={nameStyle}>{item}</View>}
+              />
+            </Grid.Item>
+          );
+        })}
+      </Grid>
+    );
+  };
+
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
@@ -205,63 +263,7 @@ export default class Index extends ContentPageBase {
         </SimpleBox>
 
         <SimpleBox header="imageMode [取值等同于微信Image]">
-          <Space wrap>
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="scaleToFill" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="aspectFit" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="aspectFill" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="widthFix" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="heightFix" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="top" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="bottom" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="center" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="left" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="right" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="top left" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="top right" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="bottom left" src={src} />
-            </View>
-
-            <View style={imageBoxContainerMiniStyle}>
-              <ImageBox imageMode="bottom right" src={src} />
-            </View>
-          </Space>
+          {this.buildGrid('imageMode', imageModeCollection)}
         </SimpleBox>
 
         <SimpleBox

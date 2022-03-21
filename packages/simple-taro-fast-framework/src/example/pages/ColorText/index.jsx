@@ -192,6 +192,7 @@ export default class Index extends ContentPageBase {
           componentName="ColorText"
           mockChildren={false}
           useInnerBox
+          ignorePropertyList={['icon']}
         >
           <ColorText {...config8} />
         </SimpleBox>
@@ -202,6 +203,7 @@ export default class Index extends ContentPageBase {
           componentName="ColorText"
           mockChildren={false}
           useInnerBox
+          ignorePropertyList={['icon']}
         >
           <ColorText {...config12} />
         </SimpleBox>
@@ -212,6 +214,7 @@ export default class Index extends ContentPageBase {
           componentName="ColorText"
           mockChildren={false}
           useInnerBox
+          ignorePropertyList={['icon']}
         >
           <ColorText {...config9} />
         </SimpleBox>
@@ -232,6 +235,7 @@ export default class Index extends ContentPageBase {
           componentName="ColorText"
           mockChildren={false}
           useInnerBox
+          ignorePropertyList={['icon']}
         >
           <ColorText {...config11} />
         </SimpleBox>

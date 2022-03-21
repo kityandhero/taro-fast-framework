@@ -4,6 +4,7 @@ import { View } from '@tarojs/components';
 import {
   stringIsNullOrWhiteSpace,
   transformSize,
+  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
@@ -11,6 +12,8 @@ import {
   isFunction,
   isObject,
   isString,
+  isUndefined,
+  isBoolean,
 } from 'taro-fast-common/es/utils/typeCheck';
 import {
   Card,
@@ -42,10 +45,46 @@ const defaultProps = {
 
 class SimpleBox extends Component {
   buildList = () => {
-    const { config } = this.props;
+    const { config, ignorePropertyList } = this.props;
 
     const list = Object.entries(config).map((d) => {
       const [key, value] = d;
+
+      if (!isUndefined(value)) {
+        if (isBoolean(value) && value) {
+          return {
+            text: `${key}: ${toString(value)}`,
+            ellipsis: true,
+          };
+        } else if (isString(value)) {
+          return {
+            text: `${key}: ${toString(value)}`,
+            ellipsis: true,
+          };
+        } else if (isFunction(value)) {
+          return {
+            text: `${key}: function`,
+            ellipsis: true,
+          };
+        } else if (isObject(value) || isArray(value)) {
+          if (inCollection(ignorePropertyList, key)) {
+            return {
+              text: `${key}: data/component`,
+              ellipsis: true,
+            };
+          }
+
+          return {
+            text: `${key}: ${JSON.stringify(value)}`,
+            ellipsis: true,
+          };
+        } else {
+          return {
+            text: `${key}: ${toString(value)}`,
+            ellipsis: true,
+          };
+        }
+      }
 
       return {
         text: `${key}: ${
