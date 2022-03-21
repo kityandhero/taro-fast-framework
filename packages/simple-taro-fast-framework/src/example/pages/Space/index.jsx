@@ -65,7 +65,12 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认">
+        <SimpleBox
+          header="默认"
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space>
             {new Array(4).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>
@@ -73,7 +78,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="设定间隔" config={config1}>
+        <SimpleBox
+          header="设定间隔"
+          config={config1}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space {...config1}>
             {new Array(3).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>
@@ -81,7 +92,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="自动换行" config={config4}>
+        <SimpleBox
+          header="自动换行"
+          config={config4}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space {...config4}>
             {new Array(8).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>
@@ -89,7 +106,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="设定双向间隔" config={config2}>
+        <SimpleBox
+          header="设定双向间隔"
+          config={config2}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space {...config2}>
             {new Array(10).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>
@@ -97,7 +120,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="设定方向" config={config3}>
+        <SimpleBox
+          header="设定方向"
+          config={config3}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space {...config3}>
             {new Array(4).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>
@@ -105,7 +134,13 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="设定方向 center" config={config7}>
+        <SimpleBox
+          header="设定方向 center"
+          config={config7}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <View className="space-align-block">
             <Space {...config7}>
               text
@@ -115,7 +150,13 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <SimpleBox header="设定方向 start" config={config8}>
+        <SimpleBox
+          header="设定方向 start"
+          config={config8}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <View className="space-align-block">
             <Space {...config8}>
               text
@@ -125,7 +166,13 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <SimpleBox header="设定方向 end" config={config9}>
+        <SimpleBox
+          header="设定方向 end"
+          config={config9}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <View className="space-align-block">
             <Space {...config9}>
               text
@@ -135,7 +182,13 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <SimpleBox header="设定方向 end" config={config10}>
+        <SimpleBox
+          header="设定方向 end"
+          config={config10}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <View className="space-align-block">
             <Space {...config10}>
               text
@@ -145,7 +198,13 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <SimpleBox header="占满父级宽度" config={config5}>
+        <SimpleBox
+          header="占满父级宽度"
+          config={config5}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+        >
           <Space {...config5}>
             {new Array(3).fill(null).map((_, index) => (
               <Button key={index} block color="primary" size="large">
@@ -155,7 +214,14 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="自定义间隔" config={config6}>
+        <SimpleBox
+          header="自定义间隔"
+          config={config6}
+          componentName="Space"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['split']}
+        >
           <Space {...config6}>
             {new Array(3).fill(null).map((_, index) => (
               <Button key={index}>Button</Button>

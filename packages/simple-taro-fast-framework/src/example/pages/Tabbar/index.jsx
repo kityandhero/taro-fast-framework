@@ -5,6 +5,7 @@ import { Divider, Tabbar } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -175,6 +176,17 @@ export default class Index extends ContentPageBase {
         <Divider>固定底部</Divider>
 
         <Tabbar value={value} fixed items={items2} onClick={this.changeTab} />
+
+        <CodeBox
+          componentName="Tabbar"
+          mockChildren={false}
+          useInnerBox={false}
+          config={{
+            value,
+            fixed: true,
+            items: items2,
+          }}
+        />
 
         <PropertyBox config={Tabbar.defaultProps} labelWidth={260} />
       </View>

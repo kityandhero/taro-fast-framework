@@ -126,23 +126,63 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="搜索模式" config={config1} extra="查看控制台">
+        <SimpleBox
+          header="搜索模式"
+          config={config1}
+          extra="查看控制台"
+          componentName="SearchBar"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon']}
+        >
           <SearchBar {...config1} />
         </SimpleBox>
 
-        <SimpleBox header="搜索模式 半圆形" config={config2} extra="查看控制台">
+        <SimpleBox
+          header="搜索模式 半圆形"
+          config={config2}
+          extra="查看控制台"
+          componentName="SearchBar"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon']}
+        >
           <SearchBar {...config2} />
         </SimpleBox>
 
-        <SimpleBox header="跳转模式" config={config3} extra="查看控制台">
+        <SimpleBox
+          header="跳转模式"
+          config={config3}
+          extra="查看控制台"
+          componentName="SearchBar"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon']}
+        >
           <SearchBar {...config3} />
         </SimpleBox>
 
-        <SimpleBox header="跳转模式 半圆形" config={config4} extra="查看控制台">
+        <SimpleBox
+          header="跳转模式 半圆形"
+          config={config4}
+          extra="查看控制台"
+          componentName="SearchBar"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon']}
+        >
           <SearchBar {...config4} />
         </SimpleBox>
 
-        <SimpleBox header="自定义样式" config={config5} extra="查看控制台">
+        <SimpleBox
+          header="自定义样式"
+          config={config5}
+          extra="查看控制台"
+          componentName="SearchBar"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon']}
+        >
           <SearchBar {...config5} />
         </SimpleBox>
 
