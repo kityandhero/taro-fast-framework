@@ -1,23 +1,96 @@
 import { connect } from 'react-redux';
 
 import {
-  Card,
   SwitchItem,
   Icon,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSketch } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+function onSwitchChange(v) {
+  console.log(v);
+}
+
+const config1 = {
+  label: '开关',
+  onChange: onSwitchChange,
 };
+
+const config2 = {
+  label: '开关',
+  border: false,
+};
+
+const config3 = {
+  label: '开关',
+  onChange: onSwitchChange,
+};
+
+const config4 = {
+  label: '开关',
+  confirm: {
+    title: '状态变更',
+    content: '状态即将发生改变,确定吗?',
+    confirmText: '确定',
+    confirmColor: '',
+    cancelText: '取消',
+    cancelColor: '',
+  },
+  // eslint-disable-next-line no-unused-vars
+  onChange: (value) => {},
+};
+
+const config5 = {
+  label: '开关',
+  color: 'green',
+};
+
+const config6 = {
+  label: '开关',
+  hidden: true,
+};
+
+const config7 = {
+  label: '开关',
+  disabled: true,
+  checked: true,
+};
+
+const config8 = {
+  label: '开关',
+  size: 1.5,
+};
+
+const config9 = {
+  label: '开关',
+  checkedText: '开',
+  uncheckedText: '关',
+};
+
+const config10 = {
+  prefix: <IconSketch size={36} />,
+  title: '这里是标题',
+  label: '开关',
+  description: '管理已授权的产品和设备',
+  confirm: true,
+  checked: true,
+  onChange: () => {
+    console.log('onChange');
+  },
+  afterChange: () => {
+    console.log('afterChange');
+  },
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '开关项',
+});
 
 @connect(({ simulation, global }) => ({
   simulation,
@@ -27,6 +100,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'SwitchItem',
     name: '开关项',
+    description: '开关项组件',
   };
 
   getApiData = (props) => {
@@ -67,126 +141,124 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { checked } = this.state;
-
     return (
       <Space direction="vertical" fillWidth>
-        <Card
+        <SimpleBox
           header="基础用法"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config1}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['onChange']}
         >
-          <SwitchItem label="开关" />
-        </Card>
+          <SwitchItem {...config1} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
+          header="无下划线"
+          config={config2}
+          space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['onChange']}
+        >
+          <SwitchItem {...config2} />
+        </SimpleBox>
+
+        <SimpleBox
           header="异步调用"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config3}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['onChange']}
         >
-          <SwitchItem label="开关" onChange={this.changeStatus} />
-        </Card>
+          <SwitchItem {...config3} onChange={this.changeStatus} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="异步调用前确认"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config4}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['onChange']}
         >
-          <SwitchItem
-            label="开关"
-            confirm={{
-              title: '状态变更',
-              content: '状态即将发生改变,确定吗?',
-              confirmText: '确定',
-              confirmColor: '',
-              cancelText: '取消',
-              cancelColor: '',
-            }}
-            onChange={this.simulationChangeStatus}
-          />
-        </Card>
+          <SwitchItem {...config4} onChange={this.simulationChangeStatus} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="颜色"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config5}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <SwitchItem label="开关" color="green" />
-        </Card>
+          <SwitchItem {...config5} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="隐藏状态"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config6}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox
         >
-          <SwitchItem label="开关" hidden />
-        </Card>
+          <SwitchItem {...config6} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="不可用"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config7}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <SwitchItem label="开关" disabled />
-          <SwitchItem label="开关" checked disabled />
-        </Card>
+          <SwitchItem {...config7} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="大小"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config8}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <SwitchItem label="开关" size={1.5} />
-        </Card>
+          <SwitchItem {...config8} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="内嵌文字"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config9}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <SwitchItem
-            label="二次校验开关"
-            checkedText="开"
-            uncheckedText="关"
-          />
-          <SwitchItem label="二次校验开关" checkedText="1" uncheckedText="0" />
-          <SwitchItem
-            label="二次校验开关"
-            labelStyle={{ color: 'red' }}
-            checkedText="✔"
-            uncheckedText="✘"
-          />
-        </Card>
+          <SwitchItem {...config9} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="复杂配置"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config10}
           space={false}
+          componentName="SwitchItem"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['prefix']}
         >
-          <SwitchItem
-            prefix={<IconSketch size={36} />}
-            title="这里是标题"
-            label="开关"
-            description="管理已授权的产品和设备"
-            confirm
-            checked={checked}
-            onChange={this.changeStatus}
-            afterChange={(value) => {
-              this.bannerNotify({
-                message: `状态已更改为:${value}`,
-              });
-            }}
-          />
-        </Card>
+          <SwitchItem {...config10} onChange={this.changeStatus} />
+        </SimpleBox>
+
+        <PropertyBox config={SwitchItem.defaultProps} labelWidth={360} />
       </Space>
     );
   };
