@@ -24,8 +24,14 @@ const defaultProps = {
 
 class CodeBox extends Component {
   render() {
-    const { header, description, componentName, config, mockChildren } =
-      this.props;
+    const {
+      header,
+      description,
+      componentName,
+      config,
+      mockChildren,
+      ignorePropertyList,
+    } = this.props;
 
     return (
       <Card
@@ -42,7 +48,12 @@ class CodeBox extends Component {
             : `备注: ${description}.`
         }
       >
-        {buildPrismCode({ componentName, config, mockChildren })}
+        {buildPrismCode({
+          componentName,
+          config,
+          mockChildren,
+          ignorePropertyList,
+        })}
       </Card>
     );
   }

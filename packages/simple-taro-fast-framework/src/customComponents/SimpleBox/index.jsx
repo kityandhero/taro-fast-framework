@@ -63,9 +63,15 @@ class SimpleBox extends Component {
   };
 
   buildCode = () => {
-    const { componentName, config, mockChildren } = this.props;
+    const { componentName, config, mockChildren, ignorePropertyList } =
+      this.props;
 
-    return buildPrismCode({ componentName, config, mockChildren });
+    return buildPrismCode({
+      componentName,
+      config,
+      mockChildren,
+      ignorePropertyList,
+    });
   };
 
   buildFooter = () => {

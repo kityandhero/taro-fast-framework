@@ -126,37 +126,79 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="普通使用" config={config1}>
-          <View style={imageBoxContainerStyle}>
+        <SimpleBox
+          header="普通使用"
+          config={config1}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
+          <View
+            style={imageBoxContainerStyle}
+            componentName="ImageBox"
+            mockChildren={false}
+            useInnerBox
+          >
             <ImageBox {...config1} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="指定容器样式" config={config2}>
+        <SimpleBox
+          header="指定容器样式"
+          config={config2}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config2} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="加载模式" config={config3}>
+        <SimpleBox
+          header="加载模式"
+          config={config3}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config3} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="使用遮罩" config={config4}>
+        <SimpleBox
+          header="使用遮罩"
+          config={config4}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config4} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="使用上层装饰" config={config5}>
+        <SimpleBox
+          header="使用上层装饰"
+          config={config5}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config5} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="使用上层装饰构建" config={config9}>
+        <SimpleBox
+          header="使用上层装饰构建"
+          config={config9}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['decorationBuilder']}
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config9} />
           </View>
@@ -222,19 +264,37 @@ export default class Index extends ContentPageBase {
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="圆形轮廓" config={config6}>
+        <SimpleBox
+          header="圆形轮廓"
+          config={config6}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config6} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="LazyLoad" config={config7}>
+        <SimpleBox
+          header="LazyLoad"
+          config={config7}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <View style={imageBoxContainerStyle}>
             <ImageBox {...config7} />
           </View>
         </SimpleBox>
 
-        <SimpleBox header="指定长宽比" config={config8}>
+        <SimpleBox
+          header="指定长宽比"
+          config={config8}
+          componentName="ImageBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <Space wrap size={16}>
             <View style={imageBoxContainerStyle}>
               <ImageBox aspectRatio={0.5} src={src} />

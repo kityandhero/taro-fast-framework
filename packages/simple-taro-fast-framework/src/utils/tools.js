@@ -1,4 +1,7 @@
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  inCollection,
+} from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
   isBoolean,
@@ -11,7 +14,7 @@ import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import { Divider } from 'taro-fast-component/es/customComponents';
 import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
 
-export function buildConfig({ config }) {
+export function buildConfig({ config, ignorePropertyList = [] }) {
   let result = '';
 
   Object.entries(config).forEach((d) => {
@@ -23,6 +26,13 @@ export function buildConfig({ config }) {
       } else if (isString(value)) {
         result = result + `${key}="${value}" `;
       } else if (isFunction(value)) {
+        if (
+          isArray(ignorePropertyList) &&
+          inCollection(ignorePropertyList, 'key')
+        ) {
+          return (result = result + `${key}={'function'}} `);
+        }
+
         result =
           result +
           `${key}={${toString(value)
@@ -49,7 +59,12 @@ export function buildConfig({ config }) {
   return result;
 }
 
-export function buildPrismCode({ componentName, config, mockChildren }) {
+export function buildPrismCode({
+  componentName,
+  config,
+  mockChildren,
+  ignorePropertyList = [],
+}) {
   if (stringIsNullOrWhiteSpace(componentName)) {
     return null;
   }
@@ -59,9 +74,13 @@ export function buildPrismCode({ componentName, config, mockChildren }) {
   if (mockChildren) {
     code = `<${componentName} ${buildConfig({
       config,
+      ignorePropertyList,
     })}>...</${componentName}>`;
   } else {
-    code = `<${componentName} ${buildConfig({ config })} />`;
+    code = `<${componentName} ${buildConfig({
+      config,
+      ignorePropertyList,
+    })} />`;
   }
 
   return (
