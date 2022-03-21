@@ -316,7 +316,7 @@ export default class Index extends ContentPageBase {
           </SimpleBox>
 
           <CodeBox
-            componentName="FadeInBox"
+            componentName="Popup"
             mockChildren
             useInnerBox={false}
             config={{

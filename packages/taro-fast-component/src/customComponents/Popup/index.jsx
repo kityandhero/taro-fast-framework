@@ -285,8 +285,8 @@ class Popup extends BaseComponent {
   };
 
   render() {
-    const { visibleStage } = this.state;
     const {
+      className,
       space,
       border,
       extra,
@@ -311,13 +311,14 @@ class Popup extends BaseComponent {
       onScrollToUpper,
       children,
     } = this.props;
+    const { visibleStage } = this.state;
 
     const rootClass = classNames(
       'tfc-popup',
       {
         'tfc-popup--active': visibleStage,
       },
-      this.props.className,
+      className,
     );
 
     const closeWhenOverlayClick = this.getCloseWhenOverlayClick();
