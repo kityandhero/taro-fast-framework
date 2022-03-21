@@ -33,11 +33,13 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
           return (result = result + `${key}={() => {...}} `);
         }
 
+        const s = toString(value);
+
         result =
           result +
-          `${key}={${toString(value)
-            .replace(/function .*?\(/, '(')
-            .replace(/\) {/, ') => {')}} `;
+          `${key}={${s
+            .replace(/function[\w\W]*?\(/, '(')
+            .replace(/\)[\w\W]*{/, ') => {')}} `;
       } else if (isObject(value) || isArray(value)) {
         if (inCollection(ignorePropertyList, key)) {
           return (result = result + `${key}={...} `);
