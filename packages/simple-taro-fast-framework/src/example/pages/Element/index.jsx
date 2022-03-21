@@ -13,6 +13,12 @@ const o = {
       path: pathCollection.example.ellipsis.path,
     },
     {
+      id: 'More',
+      name: '查看更多',
+      path: pathCollection.example.more.path,
+    },
+
+    {
       id: 'ImageBox',
       name: '图片',
       path: pathCollection.example.imageBox.path,

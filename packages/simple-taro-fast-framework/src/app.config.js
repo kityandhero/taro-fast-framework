@@ -20,6 +20,7 @@ export default {
         'pages/interact/index',
         'pages/webPage/index',
         'pages/ellipsis/index',
+        'pages/more/index',
         'pages/price/index',
         'pages/colorText/index',
         'pages/imageBox/index',

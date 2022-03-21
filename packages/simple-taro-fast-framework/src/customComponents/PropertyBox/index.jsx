@@ -3,12 +3,16 @@ import { Component } from 'react';
 import {
   stringIsNullOrWhiteSpace,
   transformSize,
+  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   isArray,
   isObject,
   isFunction,
+  isUndefined,
+  isBoolean,
+  isString,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { Card, DataGrid } from 'taro-fast-component/es/customComponents';
 
@@ -30,18 +34,62 @@ const defaultProps = {
 
 class PropertyBox extends Component {
   buildList = () => {
-    const { config } = this.props;
+    const { config, ignorePropertyList } = this.props;
 
     const list = Object.entries(config).map((d) => {
       const [key, value] = d;
 
+      if (!isUndefined(value)) {
+        if (isBoolean(value) && value) {
+          return {
+            label: key,
+            value: toString(value),
+            ellipsis: false,
+            canCopy: true,
+          };
+        } else if (isString(value)) {
+          return {
+            label: key,
+            value: toString(value),
+            ellipsis: false,
+            canCopy: true,
+          };
+        } else if (isFunction(value)) {
+          return {
+            label: key,
+            value: 'function',
+            ellipsis: false,
+            canCopy: true,
+          };
+        } else if (isObject(value) || isArray(value)) {
+          if (inCollection(ignorePropertyList, key)) {
+            return {
+              label: key,
+              value: 'data/component',
+              ellipsis: false,
+              canCopy: true,
+            };
+          }
+
+          return {
+            label: key,
+            value: JSON.stringify(value),
+            ellipsis: false,
+            canCopy: true,
+          };
+        } else {
+          return {
+            label: key,
+            value: toString(value),
+            ellipsis: false,
+            canCopy: true,
+          };
+        }
+      }
+
       return {
         label: key,
-        value: isFunction(value)
-          ? 'function'
-          : isObject(value) || isArray(value)
-          ? JSON.stringify(value)
-          : toString(value),
+        value: 'null',
         ellipsis: false,
         canCopy: true,
       };

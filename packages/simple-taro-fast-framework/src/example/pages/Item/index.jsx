@@ -11,6 +11,7 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -40,6 +41,12 @@ const users = [
     description: 'Commodi earum exercitationem id numquam vitae',
   },
 ];
+
+const config1 = {
+  label: '账单',
+  clickable: true,
+  arrow: true,
+};
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -130,6 +137,13 @@ export default class Index extends ContentPageBase {
             />
           ))}
         </SimpleBox>
+
+        <CodeBox
+          config={config1}
+          componentName="Item"
+          mockChildren={false}
+          useInnerBox={false}
+        />
 
         <PropertyBox config={Item.defaultProps} labelWidth={260} />
       </Space>

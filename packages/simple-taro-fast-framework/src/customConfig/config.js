@@ -41,6 +41,9 @@ const examplePathCollection = {
   ellipsis: {
     path: '/example/pages/ellipsis/index',
   },
+  more: {
+    path: '/example/pages/more/index',
+  },
   price: {
     path: '/example/pages/price/index',
   },

@@ -88,13 +88,24 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="附带图标" config={config1}>
+        <SimpleBox
+          header="附带图标"
+          config={config1}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
+        >
           <NoticeBar {...config1}>{notice}</NoticeBar>
         </SimpleBox>
 
         <SimpleBox
           header="可关闭 [single 模式非 marquee 下生效]"
           config={config2}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
         >
           <NoticeBar {...config2}>{notice}</NoticeBar>
         </SimpleBox>
@@ -102,30 +113,55 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="marquee模式 [将自动启用 single 模式]"
           config={config3}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
         >
           <NoticeBar {...config3}>{notice}</NoticeBar>
         </SimpleBox>
 
-        <SimpleBox header="自定义扩展 [single 模式下生效]" config={config4}>
+        <SimpleBox
+          header="自定义扩展 [single 模式下生效]"
+          config={config4}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
+        >
           <NoticeBar {...config4}>{notice}</NoticeBar>
         </SimpleBox>
 
-        <SimpleBox header="显示更多 [single 模式下生效]" config={config5}>
-          <NoticeBar {...config5}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox header="显示更多 [single 模式下生效]" config={config5}>
+        <SimpleBox
+          header="显示更多 [single 模式下生效]"
+          config={config5}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
+        >
           <NoticeBar {...config5}>{notice}</NoticeBar>
         </SimpleBox>
 
         <SimpleBox
           header="自定义”更多“文字 [single 模式下生效]"
           config={config6}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
         >
           <NoticeBar {...config6}>{notice}</NoticeBar>
         </SimpleBox>
 
-        <SimpleBox header="复杂例子" config={config7}>
+        <SimpleBox
+          header="复杂例子"
+          config={config7}
+          componentName="NoticeBar"
+          mockChildren
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'extra']}
+        >
           <NoticeBar {...config7}>{notice}</NoticeBar>
         </SimpleBox>
 

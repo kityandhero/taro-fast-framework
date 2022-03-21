@@ -115,8 +115,6 @@ class Badge extends BaseComponent {
     const wrapStyle = this.buildWrapStyle();
     const style = this.buildStyle();
 
-    console.log({ style });
-
     const element =
       isDot || content ? (
         <View

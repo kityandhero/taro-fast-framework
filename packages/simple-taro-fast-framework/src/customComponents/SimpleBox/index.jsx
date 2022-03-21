@@ -87,13 +87,7 @@ class SimpleBox extends Component {
       }
 
       return {
-        text: `${key}: ${
-          isFunction(value)
-            ? 'function'
-            : isObject(value) || isArray(value)
-            ? JSON.stringify(value)
-            : toString(value)
-        }`,
+        text: `${key}: null`,
         ellipsis: true,
       };
     });

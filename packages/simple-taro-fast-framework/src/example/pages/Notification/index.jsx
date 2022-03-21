@@ -1,19 +1,26 @@
-import { Card, Space, Button } from 'taro-fast-component/es/customComponents';
+import { Notification } from 'taro-fast-common/es/customComponents';
+import { Space, Button } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  message: '通消息知',
+  type: 'info',
 };
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '弹出通知',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Notification',
     name: '通知',
+    description: '通知组件',
   };
 
   handleClick = (type) => {
@@ -26,7 +33,7 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="触发通知" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="触发通知">
           <Space direction="vertical" fillWidth>
             <Button
               block
@@ -68,7 +75,16 @@ export default class Index extends ContentPageBase {
               警告消息
             </Button>
           </Space>
-        </Card>
+        </SimpleBox>
+
+        <CodeBox
+          config={config1}
+          componentName="Notification"
+          mockChildren={false}
+          useInnerBox={false}
+        />
+
+        <PropertyBox config={Notification.defaultProps} labelWidth={270} />
       </Space>
     );
   };
