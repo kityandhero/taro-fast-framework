@@ -356,6 +356,9 @@ class Popup extends BaseComponent {
             <View
               className="tfc-popup__container__body__close"
               style={{
+                ...{
+                  zIndex: 820,
+                },
                 ...closeIconStyle,
                 ...{
                   top: mode !== 'card' ? transformSize(12) : transformSize(32),

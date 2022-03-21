@@ -1,4 +1,13 @@
-import { Item, Popup, Space } from 'taro-fast-component/es/customComponents';
+import { View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  Item,
+  Popup,
+  Space,
+  CenterBox,
+  TranslucentBox,
+} from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import { cardHeaderStyle } from '../../../customConfig/constants';
@@ -8,6 +17,12 @@ import PropertyBox from '../../../customComponents/PropertyBox';
 import CodeBox from '../../../customComponents/CodeBox';
 
 import './index.less';
+
+const boxStyle = {
+  height: transformSize(220),
+  backgroundImage: 'var(--tfc-color-gradual-red)',
+  borderRadius: transformSize(10),
+};
 
 const arcTopList = [
   {
@@ -242,6 +257,34 @@ export default class Index extends ContentPageBase {
       scroll: scrollData,
     } = this.state;
 
+    const inner = (
+      <View
+        style={boxStyle}
+        onClick={() => {
+          console.log('click');
+        }}
+      >
+        <CenterBox>
+          <TranslucentBox
+            style={{
+              width: transformSize(200),
+            }}
+            backgroundColor="#000"
+            alpha={0.1}
+          >
+            <CenterBox
+              style={{
+                padding: `${transformSize(10)} ${transformSize(20)}`,
+                color: '#fff',
+              }}
+            >
+              内容
+            </CenterBox>
+          </TranslucentBox>
+        </CenterBox>
+      </View>
+    );
+
     return (
       <>
         <Space direction="vertical" fillWidth>
@@ -352,7 +395,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBasic}
         >
-          内容
+          {inner}
         </Popup>
 
         <Popup
@@ -367,7 +410,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideLeft}
         >
-          内容
+          {inner}
         </Popup>
 
         <Popup
@@ -382,7 +425,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideRight}
         >
-          内容
+          {inner}
         </Popup>
 
         <Popup
@@ -397,7 +440,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideTop}
         >
-          内容
+          {inner}
         </Popup>
 
         <Popup
@@ -412,7 +455,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBottom}
         >
-          内容
+          {inner}
         </Popup>
       </>
     );
