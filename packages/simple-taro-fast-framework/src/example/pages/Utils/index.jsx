@@ -310,6 +310,25 @@ export default class Index extends ContentPageBase {
             extra={`执行结果: ${transformSize(1)}`}
           />
         </SimpleBox>
+
+        <SimpleBox
+          header="构建渐变色"
+          space={false}
+          extra="buildLinearGradient"
+          description={[
+            {
+              text: 'buildLinearGradient(number,color...)',
+            },
+            {
+              text: '用法请参见颜色示例',
+            },
+          ]}
+        >
+          <Item
+            label="buildLinearGradient(45,#39b54a,#8dc63f)"
+            border={false}
+          />
+        </SimpleBox>
       </Space>
     );
   };

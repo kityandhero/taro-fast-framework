@@ -31,6 +31,10 @@ const boxStyle = {
   color: 'var(--tfc-color-grey)',
 };
 
+const boxExtensionStyle = {
+  height: 'var(--tfc-200)',
+};
+
 const nameStyle = {
   width: '100%',
   fontSize: 'var(--tfc-28)',
@@ -38,6 +42,21 @@ const nameStyle = {
   lineHeight: 'var(--tfc-36)',
   textAlign: 'center',
   margin: 'var(--tfc-20) 0',
+  overflow: 'hidden',
+};
+
+const nameExtensionStyle = {
+  margin: 'var(--tfc-0) 0',
+};
+
+const descriptionStyle = {
+  width: '100%',
+  fontSize: 'var(--tfc-24)',
+  height: 'var(--tfc-36)',
+  lineHeight: 'var(--tfc-36)',
+  textAlign: 'center',
+  margin: 'var(--tfc-0) 0',
+  overflow: 'hidden',
 };
 
 const config1 = {
@@ -214,6 +233,30 @@ const config3 = {
   ],
 };
 
+const config4 = {
+  column: 1,
+  list: [
+    {
+      color: ['#f43f3b', '#ec008c', '#ec708c'],
+      direct: 180,
+      name: `buildLinearGradient(180,#f43f3b,#ec008c,#ec708c)`,
+      shortName: '#f43f3b #ec008c #ec708c',
+    },
+    {
+      color: ['#ff9700', '#ed1c24', '#1d1c64'],
+      direct: 45,
+      name: `buildLinearGradient(45,#ff9700,#ed1c24,#1d1c64)`,
+      shortName: '#ff9700 #ed1c24 #1d1c64',
+    },
+    {
+      color: ['#9000ff', '#5e00ff', '#1e0fff', '#fe01ff'],
+      direct: 270,
+      name: `buildLinearGradient(270,#9000ff,#5e00ff,#1e0fff,#fe01ff)`,
+      shortName: '#9000ff #5e00ff #1e0fff #fe01ff',
+    },
+  ],
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '颜色',
@@ -242,7 +285,10 @@ export default class Index extends ContentPageBase {
           return (
             <Grid.Item key={`${keyPrefix}_${index}`}>
               <FlexBox
-                style={boxStyle}
+                style={{
+                  ...boxStyle,
+                  ...(gradient ? boxExtensionStyle : {}),
+                }}
                 flexAuto="top"
                 top={
                   <CenterBox>
@@ -278,13 +324,22 @@ export default class Index extends ContentPageBase {
                 }
                 bottom={
                   gradient ? (
-                    <Space direction="vertical" fillWidth>
-                      <View style={nameStyle}>{name}</View>
-                      <View style={nameStyle}>
+                    <Space direction="vertical" fillWidth size={10}>
+                      <View
+                        style={{
+                          ...nameStyle,
+                          ...(gradient ? nameExtensionStyle : {}),
+                        }}
+                      >
+                        {name}
+                      </View>
+                      <View style={descriptionStyle}>
+                        [
                         {buildLinearGradient({
                           direct,
                           list: color,
                         })}
+                        ]
                       </View>
                     </Space>
                   ) : (
@@ -332,11 +387,22 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="渐变色">
+        <SimpleBox header="二元渐变色">
           {this.buildGrid({
             column: config3.column,
             keyPrefix: 'config3',
             list: config3.list,
+            style: itemStyle2,
+            aspectRatio: 0.15,
+            gradient: true,
+          })}
+        </SimpleBox>
+
+        <SimpleBox header="复杂渐变色">
+          {this.buildGrid({
+            column: config4.column,
+            keyPrefix: 'config4',
+            list: config4.list,
             style: itemStyle2,
             aspectRatio: 0.15,
             gradient: true,

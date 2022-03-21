@@ -2,15 +2,13 @@ import { View } from '@tarojs/components';
 
 import { Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
+const config1 = {
+  style: {
+    width: 'var(--tfc-120)',
   },
-  ...cardStyle,
 };
 
 // eslint-disable-next-line no-undef
@@ -30,18 +28,22 @@ export default class Index extends ContentPageBase {
       <Space direction="vertical" fillWidth>
         <SimpleBox
           header="像素变量"
+          config={config1}
           description={[
             {
               text: '1000 ~ 2000 之间,步长变更为10',
             },
           ]}
+          componentName="Box"
+          mockChildren={false}
+          useInnerBox
         >
           <Space wrap>
             <View>--tfc-1 ~ --tfc-2000</View>
           </Space>
         </SimpleBox>
 
-        <SimpleBox header="其他" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox header="其他">
           <View>请参阅 taro-fast-common/es/constants.css</View>
         </SimpleBox>
       </Space>
