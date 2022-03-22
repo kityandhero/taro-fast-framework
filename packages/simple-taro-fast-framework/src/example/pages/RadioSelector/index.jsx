@@ -207,7 +207,7 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
         />
 
-        <PropertyBox config={RadioSelector.defaultProps} labelWidth={360} />
+        <PropertyBox config={RadioSelector.defaultProps} labelWidth={260} />
       </Space>
     );
   };

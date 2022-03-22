@@ -147,6 +147,23 @@ export default class Index extends ContentPageBase {
         />
 
         <Radio
+          header="Header Strip"
+          style={style}
+          border={border}
+          options={this.state.radioOptions1}
+          value={this.state.radioValue1}
+          strip
+          stripLeft={2}
+          stripWidth={6}
+          stripColor="#3378f4"
+          extra={
+            <Button size="mini" fill="none" onClick={this.toggleBorder}>
+              切换边框
+            </Button>
+          }
+        />
+
+        <Radio
           header="自定义选中图标"
           style={style}
           options={this.state.radioOptions1}
