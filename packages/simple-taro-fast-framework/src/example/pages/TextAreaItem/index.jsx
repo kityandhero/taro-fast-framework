@@ -110,7 +110,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="基础用法"
           config={config1}
-          space={false}
+          // space={false}
           componentName="TextAreaItem"
           mockChildren={false}
           useInnerBox={false}
@@ -122,7 +122,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="自定义"
           config={config2}
-          space={false}
+          // space={false}
           componentName="TextAreaItem"
           mockChildren={false}
           useInnerBox={false}
