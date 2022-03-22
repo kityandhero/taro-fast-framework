@@ -28,10 +28,16 @@ const extraStyle = {
   backgroundColor: '#f5f7fa',
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '复选',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'CheckBox',
     name: '复选',
+    description: '复选组件',
   };
 
   constructor(props) {

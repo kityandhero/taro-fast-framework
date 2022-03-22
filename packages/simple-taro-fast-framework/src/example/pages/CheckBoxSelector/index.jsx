@@ -18,10 +18,16 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '弹出式复选',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'CheckBox',
     name: '弹出式复选',
+    description: '弹出式复选组件',
   };
 
   constructor(props) {

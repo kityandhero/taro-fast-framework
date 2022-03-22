@@ -26,10 +26,16 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '进度环',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Circle',
     name: '进度环',
+    description: '进度环组件',
   };
 
   constructor(props) {
