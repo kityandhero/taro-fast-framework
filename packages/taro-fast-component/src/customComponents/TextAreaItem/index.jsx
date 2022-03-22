@@ -57,8 +57,24 @@ class TextAreaItem extends BaseComponent {
       ...this.state,
       ...{
         popupVisible: false,
+        valueFlag: '',
+        valueStage: '',
       },
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = prevState;
+
+    if (valueNext !== valuePrev) {
+      return {
+        valueFlag: valueNext,
+        valueStage: valueNext,
+      };
+    }
+
+    return {};
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -122,7 +138,6 @@ class TextAreaItem extends BaseComponent {
       style,
       border,
       disabled,
-      value,
       emptyValue,
       emptyValueStyle,
       editable,
@@ -139,7 +154,7 @@ class TextAreaItem extends BaseComponent {
       textareaStyle,
       confirmStyle,
     } = this.props;
-    const { popupVisible } = this.state;
+    const { popupVisible, valueStage } = this.state;
 
     return (
       <Item
@@ -172,7 +187,7 @@ class TextAreaItem extends BaseComponent {
         }
         showBody
         body={
-          stringIsNullOrWhiteSpace(value) ? (
+          stringIsNullOrWhiteSpace(valueStage) ? (
             <View
               style={{
                 ...{
@@ -196,7 +211,7 @@ class TextAreaItem extends BaseComponent {
               }}
               onClick={onContentClick}
             >
-              {value}
+              {valueStage}
             </Ellipsis>
           )
         }
@@ -247,7 +262,7 @@ class TextAreaItem extends BaseComponent {
                 ? styleToString(placeholderStyle)
                 : ''
             }
-            value={isString(value) ? value : toString(value)}
+            value={isString(valueStage) ? valueStage : toString(valueStage)}
             maxlength={contentMaxlength}
             placeholder={placeholder}
             disabled={disabled}
