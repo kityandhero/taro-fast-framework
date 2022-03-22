@@ -1,7 +1,4 @@
-import {
-  showInfoMessage,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Stepper, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -79,12 +76,12 @@ const config12 = {
 
 const config13 = {
   onFocus: () => {
-    showInfoMessage({
+    console.log({
       message: '获得焦点',
     });
   },
   onBlur: () => {
-    showInfoMessage({
+    console.log({
       message: '失去焦点',
     });
   },
