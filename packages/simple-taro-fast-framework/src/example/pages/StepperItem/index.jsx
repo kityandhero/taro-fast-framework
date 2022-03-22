@@ -1,28 +1,76 @@
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Icon,
   StepperItem,
-  HelpBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSketch } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+function onChangeCore(v) {
+  console.log(v);
+}
+
+const config1 = {
+  label: '购买数量',
+  border: false,
+  onChange: onChangeCore,
 };
+
+const config2 = {
+  label: '购买数量',
+  description: '请增减购买数量',
+  clickable: true,
+  arrow: true,
+  onChange: onChangeCore,
+};
+
+const config3 = {
+  label: '购买数量',
+  disabled: true,
+};
+
+const config4 = {
+  label: '购买数量',
+  stepperStyle: {
+    // '--border': `${transformSize(1)} solid #f5f5f5`,
+    '--border-inner': 'none',
+    '--height': transformSize(36),
+    '--input-width': transformSize(70),
+    '--input-background-color': '#ffffff',
+  },
+  iconSize: 20,
+  operateColor: '#fff',
+  backgroundColor: '#a123e4',
+  circle: true,
+  defaultValue: 45,
+  step: 1,
+};
+
+const config5 = {
+  ...{
+    prefix: <IconSketch size={36} />,
+    description: '请增减购买数量',
+    clickable: true,
+    arrow: true,
+  },
+  ...config4,
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '进步项',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'StepperItem',
     name: '进步项',
+    description: '进步项组件',
   };
 
   handleClick = (type) => {
@@ -35,131 +83,59 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card
+        <SimpleBox
           header="基础用法"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config1}
           space={false}
+          componentName="StepperItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <StepperItem label="购买数量" border={false} />
-        </Card>
-
-        <Card
+          <StepperItem {...config1} />
+        </SimpleBox>
+        <SimpleBox
           header="复杂布局"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config2}
           space={false}
+          componentName="StepperItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <StepperItem
-            label="购买数量"
-            description="请增减购买数量"
-            clickable
-            arrow
-          />
-          <StepperItem title="调整数量" label="购买数量" border={false} />
-        </Card>
-
-        <Card
+          <StepperItem {...config2} />
+        </SimpleBox>
+        <SimpleBox
           header="禁用状态"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config3}
           space={false}
+          componentName="StepperItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <StepperItem
-            label="购买数量"
-            disabled
-            prefix={<IconSketch size={36} />}
-            border={false}
-          />
-        </Card>
-
-        <Card
+          <StepperItem {...config3} />
+        </SimpleBox>
+        <SimpleBox
           header="自定义样式"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config4}
           space={false}
+          componentName="StepperItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <StepperItem
-            label="购买数量"
-            description="请增减购买数量"
-            clickable
-            arrow
-            stepperStyle={{
-              // '--border': `${transformSize(1)} solid #f5f5f5`,
-              '--border-inner': 'none',
-              '--height': transformSize(36),
-              '--input-width': transformSize(70),
-              '--input-background-color': '#ffffff',
-            }}
-            iconSize={20}
-            operateColor="#fff"
-            backgroundColor="#a123e4"
-            circle
-            defaultValue={45}
-            step={1}
-          />
+          <StepperItem {...config4} />
+        </SimpleBox>
 
-          <StepperItem
-            title="调整数量"
-            label="购买数量"
-            stepperStyle={{
-              // '--border': `${transformSize(1)} solid #f5f5f5`,
-              '--border-inner': 'none',
-              '--height': transformSize(36),
-              '--input-width': transformSize(70),
-              '--input-background-color': '#ffffff',
-            }}
-            iconSize={20}
-            operateColor="#fff"
-            backgroundColor="#a123e4"
-            circle
-            defaultValue={45}
-            step={1}
-            border={false}
-          />
-        </Card>
-
-        <Card
+        <SimpleBox
           header="复杂配置"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config5}
           space={false}
+          componentName="StepperItem"
+          mockChildren={false}
+          useInnerBox={false}
         >
-          <StepperItem
-            prefix={<IconSketch size={36} />}
-            title="调整数量"
-            label="购买数量"
-            description="请增减购买数量"
-            clickable
-            arrow
-            stepperStyle={{
-              // '--border': `${transformSize(1)} solid #f5f5f5`,
-              '--border-inner': 'none',
-              '--height': transformSize(36),
-              '--input-width': transformSize(70),
-              '--input-background-color': '#ffffff',
-            }}
-            iconSize={20}
-            operateColor="#fff"
-            backgroundColor="#a123e4"
-            circle
-            defaultValue={45}
-            step={1}
-            border={false}
-          />
-        </Card>
+          <StepperItem prefix={<IconSketch size={36} />} {...config5} />
+        </SimpleBox>
 
-        <Card header="属性说明 :" headerStyle={cardHeaderStyle}>
-          <HelpBox
-            showTitle={false}
-            showNumber={false}
-            list={[
-              {
-                text: '可配置值请参考 Item 与 Stepper.',
-              },
-            ]}
-          />
-        </Card>
+        <PropertyBox config={StepperItem.defaultProps} labelWidth={260} />
       </Space>
     );
   };

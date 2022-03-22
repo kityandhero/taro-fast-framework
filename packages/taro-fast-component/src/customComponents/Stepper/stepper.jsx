@@ -25,7 +25,7 @@ const defaultProps = {
   max: 100000,
   disabled: false,
   hidden: false,
-  editable: true,
+  inputReadOnly: false,
   useBackground: true,
   backgroundColor: '',
   circle: false,
@@ -184,12 +184,11 @@ export const Stepper = (p) => {
           onChange={(val) => {
             disabled || handleInputChange(val);
           }}
-          disabled={disabled}
+          disabled={disabled || inputReadOnly}
           onBlur={(e) => {
             setHasFocus(false);
             props.onBlur?.(e);
           }}
-          readOnly={inputReadOnly}
         />
       </View>
 

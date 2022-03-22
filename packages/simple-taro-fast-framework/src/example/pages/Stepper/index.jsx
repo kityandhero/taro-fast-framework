@@ -2,181 +2,278 @@ import {
   showInfoMessage,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { Card, Stepper, Space } from 'taro-fast-component/es/customComponents';
+import { Stepper, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+function onChangeCore(v) {
+  console.log(v);
+}
+
+const config1 = {
+  defaultValue: 1,
+  onChange: onChangeCore,
 };
+
+const config3 = {
+  step: 10,
+  defaultValue: 10,
+  onChange: onChangeCore,
+};
+
+const config4 = {
+  min: -5,
+  max: 5,
+  onChange: onChangeCore,
+};
+
+const config5 = {
+  digits: 0,
+  onChange: onChangeCore,
+};
+
+const config6 = {
+  digits: 1,
+  step: 0.1,
+  onChange: onChangeCore,
+};
+
+const config7 = {
+  disabled: true,
+};
+
+const config8 = {
+  inputReadOnly: true,
+};
+
+const config9 = {
+  style: {
+    width: transformSize(260),
+  },
+  defaultValue: 10000,
+  step: 10000,
+  onChange: onChangeCore,
+};
+
+const config10 = {
+  operateColor: '#a923e1',
+  defaultValue: 30,
+  step: 1,
+};
+
+const config11 = {
+  useBackground: false,
+  defaultValue: 30,
+  step: 1,
+};
+
+const config12 = {
+  operateColor: '#fff',
+  backgroundColor: '#a123e4',
+  circle: true,
+  defaultValue: 30,
+  step: 1,
+};
+
+const config13 = {
+  onFocus: () => {
+    showInfoMessage({
+      message: '获得焦点',
+    });
+  },
+  onBlur: () => {
+    showInfoMessage({
+      message: '失去焦点',
+    });
+  },
+};
+
+const config14 = {
+  style: {
+    '--border': `${transformSize(1)} solid #f5f5f5`,
+    '--border-inner': 'none',
+    '--height': transformSize(36),
+    '--input-width': transformSize(70),
+    '--input-background-color': '#ffffff',
+    width: transformSize(180),
+  },
+  defaultValue: 10000,
+  step: 10000,
+};
+
+const config15 = {
+  style: {
+    '--border-inner': 'none',
+    '--height': transformSize(36),
+    '--input-width': transformSize(70),
+    '--input-background-color': '#ffffff',
+  },
+  iconSize: 22,
+  operateColor: '#fff',
+  backgroundColor: '#a123e4',
+  circle: true,
+  defaultValue: 45,
+  step: 1,
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '进步器',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Stepper',
     name: '进步器',
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        num: 0,
-      },
-    };
-  }
-
-  setNum = (value) => {
-    this.setState({
-      num: value,
-    });
+    description: '进步器组件',
   };
 
   renderContent = () => {
-    const { num } = this.state;
-
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="基础用法(非受控)"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="基础用法"
+          config={config1}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
         >
-          <Stepper
-            defaultValue={1}
-            onChange={(value) => {
-              console.log(value);
-            }}
-          />
-        </Card>
+          <Stepper {...config1} />
+        </SimpleBox>
 
-        <Card header="受控组件" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper
-            value={num}
-            onChange={(value) => {
-              this.setNum(value);
-              console.log(value);
-            }}
-          />
-        </Card>
+        <SimpleBox
+          header="步长设置"
+          config={config3}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config3} />
+        </SimpleBox>
 
-        <Card header="步长设置" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper step={10} defaultValue={10} />
-        </Card>
+        <SimpleBox
+          header="设置输入范围"
+          config={config4}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config4} />
+        </SimpleBox>
 
-        <Card header="设置输入范围" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper min={-5} max={5} />
-        </Card>
+        <SimpleBox
+          header="格式化到整数"
+          config={config5}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config5} />
+        </SimpleBox>
 
-        <Card header="格式化到整数" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper digits={0} />
-        </Card>
-
-        <Card
+        <SimpleBox
           header="格式化到一位小数"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config6}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
         >
-          <Stepper digits={1} />
-        </Card>
+          <Stepper {...config6} />
+        </SimpleBox>
 
-        <Card header="禁用状态" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper disabled />
-        </Card>
+        <SimpleBox
+          header="禁用状态"
+          config={config7}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config7} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="输入框只读状态"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config8}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
         >
-          <Stepper inputReadOnly />
-        </Card>
+          <Stepper {...config8} />
+        </SimpleBox>
 
-        <Card header="自定义宽度" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper
-            style={{ width: transformSize(260) }}
-            defaultValue={10000}
-            step={10000}
-          />
-        </Card>
+        <SimpleBox
+          header="自定义宽度"
+          config={config9}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config9} />
+        </SimpleBox>
 
-        <Card header="自定义颜色" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper operateColor="#a923e1" defaultValue={30} step={1} />
-        </Card>
+        <SimpleBox
+          header="自定义颜色"
+          config={config10}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config10} />
+        </SimpleBox>
 
-        <Card header="无背景模式" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper useBackground={false} defaultValue={30} step={1} />
-        </Card>
+        <SimpleBox
+          header="无背景模式"
+          config={config11}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config11} />
+        </SimpleBox>
 
-        <Card header="圆形轮廓" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper
-            operateColor="#fff"
-            backgroundColor="#a123e4"
-            circle
-            defaultValue={30}
-            step={1}
-          />
-        </Card>
+        <SimpleBox
+          header="圆形轮廓"
+          config={config12}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config12} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="获得/失去焦点"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config13}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
         >
-          <Stepper
-            onFocus={() => {
-              showInfoMessage({
-                message: '获得焦点',
-              });
-            }}
-            onBlur={() => {
-              showInfoMessage({
-                message: '失去焦点',
-              });
-            }}
-          />
-        </Card>
+          <Stepper {...config13} />
+        </SimpleBox>
 
-        <Card
+        <SimpleBox
           header="自定义css变量"
-          style={style}
-          headerStyle={cardHeaderStyle}
+          config={config14}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
         >
-          <Stepper
-            style={{
-              '--border': `${transformSize(1)} solid #f5f5f5`,
-              '--border-inner': 'none',
-              '--height': transformSize(36),
-              '--input-width': transformSize(70),
-              '--input-background-color': '#ffffff',
-              width: transformSize(180),
-            }}
-            defaultValue={10000}
-            step={10000}
-          />
-        </Card>
+          <Stepper {...config14} />
+        </SimpleBox>
 
-        <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
-          <Stepper
-            style={{
-              '--border-inner': 'none',
-              '--height': transformSize(36),
-              '--input-width': transformSize(70),
-              '--input-background-color': '#ffffff',
-            }}
-            iconSize={22}
-            operateColor="#fff"
-            backgroundColor="#a123e4"
-            circle
-            defaultValue={45}
-            step={1}
-          />
-        </Card>
+        <SimpleBox
+          header="复杂配置"
+          config={config15}
+          componentName="Stepper"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Stepper {...config15} />
+        </SimpleBox>
+
+        <PropertyBox config={Stepper.defaultProps} labelWidth={230} />
       </Space>
     );
   };
