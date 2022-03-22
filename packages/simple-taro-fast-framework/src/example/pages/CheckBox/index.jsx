@@ -11,6 +11,8 @@ import {
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
@@ -27,6 +29,74 @@ const extraStyle = {
   color: '#aaa',
   backgroundColor: '#f5f7fa',
 };
+
+const checkBoxOptions1 = [
+  {
+    label: '复选项一',
+    value: 'option1',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项二',
+    value: 'option2',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项三',
+    value: 'option3',
+    extra: '扩展说明',
+  },
+];
+
+const checkBoxOptions2 = [
+  {
+    label: '复选项一',
+    value: 'option1',
+    description: '复选项描述一',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项二',
+    value: 'option2',
+    description: '复选项描述二',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项三',
+    value: 'option3',
+    description: '复选项描述三',
+    extra: '扩展说明',
+    span: 2,
+  },
+];
+
+const checkBoxOptions3 = [
+  {
+    label: '复选项一',
+    value: 'option1',
+    title: '选项的标题',
+    description: '复选项的简介描述',
+    prefix: <IconShoppingCart size={34} />,
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项二',
+    value: 'option2',
+    title: '选项的标题',
+    description: '复选项的简介描述',
+    prefix: <IconSketch size={34} />,
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项三禁用',
+    value: 'option3',
+    title: '选项的标题',
+    description: '复选项的简介描述',
+    disabled: true,
+    prefix: <IconSketch size={34} />,
+    extra: '扩展说明',
+  },
+];
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -50,71 +120,6 @@ export default class Index extends ContentPageBase {
         checkBoxValue1: ['option1'],
         checkBoxValue2: ['option1'],
         checkBoxValue3: ['option2'],
-        checkBoxOptions1: [
-          {
-            label: '复选项一',
-            value: 'option1',
-            extra: '扩展说明',
-          },
-          {
-            label: '复选项二',
-            value: 'option2',
-            extra: '扩展说明',
-          },
-          {
-            label: '复选项三',
-            value: 'option3',
-            extra: '扩展说明',
-          },
-        ],
-        checkBoxOptions2: [
-          {
-            label: '复选项一',
-            value: 'option1',
-            description: '复选项描述一',
-            extra: '扩展说明',
-          },
-          {
-            label: '复选项二',
-            value: 'option2',
-            description: '复选项描述二',
-            extra: '扩展说明',
-          },
-          {
-            label: '复选项三',
-            value: 'option3',
-            description: '复选项描述三',
-            extra: '扩展说明',
-            span: 2,
-          },
-        ],
-        checkBoxOptions3: [
-          {
-            label: '复选项一',
-            value: 'option1',
-            title: '选项的标题',
-            description: '复选项的简介描述',
-            prefix: <IconShoppingCart size={34} />,
-            extra: '扩展说明',
-          },
-          {
-            label: '复选项二',
-            value: 'option2',
-            title: '选项的标题',
-            description: '复选项的简介描述',
-            prefix: <IconSketch size={34} />,
-            extra: '扩展说明',
-          },
-          {
-            label: '复选项三禁用',
-            value: 'option3',
-            title: '选项的标题',
-            description: '复选项的简介描述',
-            disabled: true,
-            prefix: <IconSketch size={34} />,
-            extra: '扩展说明',
-          },
-        ],
       },
     };
   }
@@ -154,7 +159,7 @@ export default class Index extends ContentPageBase {
           header="基础用法"
           style={style}
           border={border}
-          options={this.state.checkBoxOptions1}
+          options={checkBoxOptions1}
           value={this.state.checkBoxValue1}
           extra={
             <Button
@@ -170,7 +175,7 @@ export default class Index extends ContentPageBase {
         <CheckBox
           header="自定义选中图标"
           style={style}
-          options={this.state.checkBoxOptions1}
+          options={checkBoxOptions1}
           value={this.state.checkBoxValue1}
           iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
           iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
@@ -180,7 +185,7 @@ export default class Index extends ContentPageBase {
         <CheckBox
           header="含有单项描述"
           style={style}
-          options={this.state.checkBoxOptions2}
+          options={checkBoxOptions2}
           value={this.state.checkBoxValue2}
           extra={<View style={extraStyle}>layout: list</View>}
         />
@@ -188,7 +193,7 @@ export default class Index extends ContentPageBase {
         <CheckBox
           header="单项禁用"
           style={style}
-          options={this.state.checkBoxOptions3}
+          options={checkBoxOptions3}
           value={this.state.checkBoxValue3}
           extra={<View style={extraStyle}>layout: list</View>}
         />
@@ -203,7 +208,7 @@ export default class Index extends ContentPageBase {
             layout="column"
             style={style}
             border={border}
-            options={this.state.checkBoxOptions1}
+            options={checkBoxOptions1}
             value={this.state.checkBoxValue1}
           />
         </Card>
@@ -219,7 +224,7 @@ export default class Index extends ContentPageBase {
             layout="column"
             style={style}
             border={border}
-            options={this.state.checkBoxOptions2}
+            options={checkBoxOptions2}
             value={this.state.checkBoxValue2}
             columns={2}
             columnGap={12}
@@ -237,7 +242,7 @@ export default class Index extends ContentPageBase {
             layout="space"
             style={style}
             border={border}
-            options={this.state.checkBoxOptions1}
+            options={checkBoxOptions1}
             value={this.state.checkBoxValue1}
             spaceSize={24}
           />
@@ -248,7 +253,7 @@ export default class Index extends ContentPageBase {
           layout="checkBox"
           style={style}
           border={border}
-          options={this.state.checkBoxOptions1}
+          options={checkBoxOptions1}
           value={this.state.checkBoxValue1}
           extra={<View style={extraStyle}>layout: checkBox</View>}
         />
@@ -257,7 +262,7 @@ export default class Index extends ContentPageBase {
           header="自定义选中图标"
           layout="checkBox"
           style={style}
-          options={this.state.checkBoxOptions1}
+          options={checkBoxOptions1}
           value={this.state.checkBoxValue1}
           iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
           iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
@@ -268,7 +273,7 @@ export default class Index extends ContentPageBase {
           header="含有单项描述"
           layout="checkBox"
           style={style}
-          options={this.state.checkBoxOptions2}
+          options={checkBoxOptions2}
           value={this.state.checkBoxValue2}
           extra={<View style={extraStyle}>layout: checkBox</View>}
         />
@@ -277,7 +282,7 @@ export default class Index extends ContentPageBase {
           header="单项禁用"
           layout="checkBox"
           style={style}
-          options={this.state.checkBoxOptions3}
+          options={checkBoxOptions3}
           value={this.state.checkBoxValue3}
           extra={<View style={extraStyle}>layout: checkBox</View>}
         />
@@ -286,7 +291,7 @@ export default class Index extends ContentPageBase {
           header="更改回调"
           layout="checkBox"
           style={style}
-          options={this.state.checkBoxOptions3}
+          options={checkBoxOptions3}
           value={this.state.checkBoxValue3}
           extra={<View style={extraStyle}>layout: checkBox</View>}
           afterChange={(value) => {
@@ -295,6 +300,24 @@ export default class Index extends ContentPageBase {
             });
           }}
         />
+
+        <CodeBox
+          config={{
+            header: '更改回调',
+            layout: 'checkBox',
+            style,
+            border,
+            options: checkBoxOptions1,
+            value: this.state.checkBoxValue1,
+            extra: <View style={extraStyle}>layout: checkBox</View>,
+          }}
+          componentName="CheckBox"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['extra']}
+        />
+
+        <PropertyBox config={CheckBox.defaultProps} labelWidth={260} />
       </Space>
     );
   };

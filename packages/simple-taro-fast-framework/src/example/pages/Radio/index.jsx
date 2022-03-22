@@ -302,7 +302,7 @@ export default class Index extends ContentPageBase {
             value: this.state.radioValue1,
             extra: <View style={extraStyle}>layout: radio</View>,
           }}
-          componentName="Collapse"
+          componentName="Radio"
           mockChildren={false}
           useInnerBox={false}
           ignorePropertyList={['extra']}
