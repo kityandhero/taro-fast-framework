@@ -3,7 +3,6 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Space,
   ProgressItem,
   Button,
@@ -11,16 +10,58 @@ import {
   HelpBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconCheckCircle } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
+const config1 = {
+  label: '当前进度',
+  percent: 20,
+  extra: '扩展',
+};
+
+const config2 = {
+  layout: 'vertical',
+  label: '当前进度',
+  percent: 20,
+  extra: '扩展',
+};
+
+const config3 = {
+  label: '剩余数量',
+  percent: 70,
+  borderRadius: 4,
+  showInfo: true,
+  fontSize: 28,
+  activeColor: '#FF3141',
+  backgroundColor: '#000000',
+  icon: <IconCheckCircle size={38} showInfo color="green" />,
+  extra: (
+    <Button
+      color="primary"
+      size="mini"
+      onClick={() => {
+        showInfoMessage({
+          message: 'click',
+        });
+      }}
+      style={{ marginLeft: transformSize(8) }}
+    >
+      立即抢
+    </Button>
+  ),
+  extraStyle: {
+    // padding: `0 ${transformSize(10)}`,
   },
-  ...cardStyle,
+};
+
+const config4 = {
+  ...config3,
+  ...{
+    layout: 'vertical',
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -38,89 +79,55 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="横向布局" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox
+          header="横向布局"
+          config={config1}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <Space direction="vertical" fillWidth>
-            <ProgressItem label="当前进度" percent={20} extra="扩展" />
+            <ProgressItem {...config1} />
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="纵向布局" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox
+          header="纵向布局"
+          config={config2}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <Space direction="vertical" fillWidth>
-            <ProgressItem
-              layout="vertical"
-              label="当前进度"
-              percent={20}
-              extra="扩展"
-            />
+            <ProgressItem {...config2} />
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="横向布局示例" style={style} headerStyle={cardHeaderStyle}>
-          <ProgressItem
-            label="剩余数量"
-            percent={70}
-            borderRadius={4}
-            showInfo
-            fontSize={28}
-            activeColor="#FF3141"
-            backgroundColor="#000000"
-            icon={<IconCheckCircle size={38} showInfo color="green" />}
-            extra={
-              <Button
-                color="primary"
-                size="mini"
-                onClick={() => {
-                  showInfoMessage({
-                    message: 'click',
-                  });
-                }}
-                style={{ marginLeft: transformSize(8) }}
-              >
-                立即抢
-              </Button>
-            }
-            extraStyle={
-              {
-                // padding: `0 ${transformSize(10)}`,
-              }
-            }
-          />
-        </Card>
+        <SimpleBox
+          header="横向布局示例"
+          config={config3}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon', 'extra']}
+        >
+          <ProgressItem {...config3} />
+        </SimpleBox>
 
-        <Card header="纵向布局示例" style={style} headerStyle={cardHeaderStyle}>
-          <ProgressItem
-            layout="vertical"
-            label="剩余数量"
-            percent={70}
-            borderRadius={4}
-            showInfo
-            fontSize={28}
-            activeColor="#FF3141"
-            backgroundColor="#000000"
-            icon={<IconCheckCircle size={38} showInfo color="green" />}
-            extra={
-              <Button
-                color="primary"
-                size="mini"
-                onClick={() => {
-                  showInfoMessage({
-                    message: 'click',
-                  });
-                }}
-                style={{ marginLeft: transformSize(8) }}
-              >
-                立即抢
-              </Button>
-            }
-            extraStyle={
-              {
-                // padding: `0 ${transformSize(10)}`,
-              }
-            }
-          />
-        </Card>
+        <SimpleBox
+          header="纵向布局示例"
+          config={config4}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon', 'extra']}
+        >
+          <ProgressItem {...config4} />
+        </SimpleBox>
 
-        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
+        <PropertyBox config={ProgressItem.defaultProps} labelWidth={310} />
+
+        <SimpleBox header="属性说明 :">
           <HelpBox
             showTitle={false}
             showNumber={false}
@@ -133,7 +140,7 @@ export default class Index extends ContentPageBase {
               },
             ]}
           />
-        </Card>
+        </SimpleBox>
       </Space>
     );
   };

@@ -1,25 +1,36 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Space,
   ProgressBox,
   Button,
   Icon,
   HelpBox,
+  CenterBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconCheckCircle } = Icon;
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  icon: <IconCheckCircle size={38} color="green" />,
+};
+
+const config2 = {
+  hidden: true,
+};
+
+const config3 = {
+  percent: 70,
+  borderRadius: 4,
+  showInfo: true,
+  animation: true,
+  fontSize: 28,
+  activeColor: '#FF3141',
+  backgroundColor: '#000000',
+  icon: <IconCheckCircle size={38} showInfo color="green" />,
 };
 
 // eslint-disable-next-line no-undef
@@ -66,58 +77,71 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="附带图标" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox
+          header="附带图标"
+          config={{ ...config1, ...{ percent } }}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon']}
+        >
           <Space direction="vertical" fillWidth>
-            <View>
-              <Button
-                color="primary"
-                size="mini"
-                disabled={percent === 100}
-                onClick={() => {
-                  this.setPercent(10);
-                }}
-                style={{ marginRight: transformSize(8) }}
-              >
-                进度+10
-              </Button>
-              <Button
-                color="primary"
-                size="mini"
-                fill="outline"
-                onClick={() => {
-                  this.reSetPercent();
-                }}
-              >
-                重置
-              </Button>
-            </View>
-            <ProgressBox
-              percent={percent}
-              icon={<IconCheckCircle size={38} color="green" />}
-            />
-          </Space>
-        </Card>
+            <ProgressBox {...config1} percent={percent} />
 
-        <Card header="隐藏模式" style={style} headerStyle={cardHeaderStyle}>
+            <CenterBox>
+              <Space>
+                <Button
+                  color="primary"
+                  size="small"
+                  disabled={percent === 100}
+                  onClick={() => {
+                    this.setPercent(10);
+                  }}
+                  style={{ marginRight: transformSize(8) }}
+                >
+                  进度+10
+                </Button>
+
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    this.reSetPercent();
+                  }}
+                >
+                  重置进度
+                </Button>
+              </Space>
+            </CenterBox>
+          </Space>
+        </SimpleBox>
+
+        <SimpleBox
+          header="隐藏模式"
+          config={{ ...config2, ...{ percent } }}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox
+        >
           <Space direction="vertical" fillWidth>
-            <ProgressBox hidden percent={percent} />
+            <ProgressBox {...config2} percent={percent} />
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
-          <ProgressBox
-            percent={70}
-            borderRadius={4}
-            showInfo
-            animation
-            fontSize={28}
-            activeColor="#FF3141"
-            backgroundColor="#000000"
-            icon={<IconCheckCircle size={38} showInfo color="green" />}
-          />
-        </Card>
+        <SimpleBox
+          header="复杂配置"
+          config={config3}
+          componentName="ProgressBox"
+          mockChildren={false}
+          useInnerBox
+          ignorePropertyList={['icon']}
+        >
+          <ProgressBox {...config3} />
+        </SimpleBox>
 
-        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
+        <PropertyBox config={ProgressBox.defaultProps} labelWidth={310} />
+
+        <SimpleBox header="属性说明 :">
           <HelpBox
             showTitle={false}
             showNumber={false}
@@ -127,7 +151,7 @@ export default class Index extends ContentPageBase {
               },
             ]}
           />
-        </Card>
+        </SimpleBox>
       </Space>
     );
   };

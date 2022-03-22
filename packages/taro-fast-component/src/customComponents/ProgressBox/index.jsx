@@ -62,7 +62,7 @@ class ProgressBox extends BaseComponent {
       <FlexBox
         style={style}
         left={
-          <VerticalBox>
+          <VerticalBox fillWidth>
             <Progress
               style={{ width: '100%' }}
               percent={percent}

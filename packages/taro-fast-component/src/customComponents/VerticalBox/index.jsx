@@ -9,6 +9,7 @@ const defaultProps = {
   innerStyle: {},
   align: 'center',
   alignJustify: 'flex-start',
+  fillWidth: false,
   onClick: null,
 };
 
@@ -22,7 +23,7 @@ class VerticalBox extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, innerStyle, align, alignJustify } = this.props;
+    const { style, fillWidth, innerStyle, align, alignJustify } = this.props;
 
     let alignStyle = 'center';
 
@@ -92,6 +93,11 @@ class VerticalBox extends BaseComponent {
           ...{
             height: '100%',
           },
+          ...(fillWidth
+            ? {
+                width: '100%',
+              }
+            : {}),
         }}
         onClick={this.triggerClick}
       >

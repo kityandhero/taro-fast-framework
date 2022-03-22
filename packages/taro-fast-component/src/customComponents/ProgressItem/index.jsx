@@ -138,7 +138,7 @@ class ProgressItem extends BaseComponent {
     }
 
     return (
-      <View>
+      <View style={{ width: '100%' }}>
         {labelComponent != null ? (
           <Row>
             <Col size={12} style={labelContainerStyle}>
