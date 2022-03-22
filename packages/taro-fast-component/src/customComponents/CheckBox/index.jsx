@@ -70,9 +70,15 @@ const defaultProps = {
   layout: 'list',
   header: null,
   headerStyle: {},
-  bodyStyle: {},
+  strip: false,
+  stripLeft: 0,
+  stripWidth: 8,
+  stripHeight: 36,
+  stripBorderRadius: 6,
+  stripColor: '#ccc',
   extra: null,
   extraContainerStyle: {},
+  bodyStyle: {},
   value: [],
   options: [],
   border: true,
@@ -168,6 +174,12 @@ class CheckBox extends BaseComponent {
       iconCheck,
       options,
       border,
+      strip,
+      stripLeft,
+      stripWidth,
+      stripHeight,
+      stripBorderRadius,
+      stripColor,
       extra,
       extraContainerStyle,
       columns,
@@ -319,6 +331,12 @@ class CheckBox extends BaseComponent {
         headerStyle={headerStyle}
         bodyStyle={bodyStyle}
         style={style}
+        strip={strip}
+        stripLeft={stripLeft}
+        stripWidth={stripWidth}
+        stripHeight={stripHeight}
+        stripBorderRadius={stripBorderRadius}
+        stripColor={stripColor}
         extra={extra}
         space={false}
       >

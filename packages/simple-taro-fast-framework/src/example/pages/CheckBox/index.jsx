@@ -173,6 +173,23 @@ export default class Index extends ContentPageBase {
         />
 
         <CheckBox
+          header="Header Strip"
+          style={style}
+          border={border}
+          options={checkBoxOptions1}
+          value={this.state.checkBoxValue1}
+          strip
+          stripLeft={2}
+          stripWidth={6}
+          stripColor="#3378f4"
+          extra={
+            <Button size="mini" fill="none" onClick={this.toggleBorder}>
+              切换边框
+            </Button>
+          }
+        />
+
+        <CheckBox
           header="自定义选中图标"
           style={style}
           options={checkBoxOptions1}
