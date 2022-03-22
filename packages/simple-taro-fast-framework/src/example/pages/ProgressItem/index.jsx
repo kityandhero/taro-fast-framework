@@ -23,10 +23,16 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '进度项',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ProgressItem',
     name: '进度项',
+    description: '进度项组件',
   };
 
   renderContent = () => {

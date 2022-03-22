@@ -1,28 +1,81 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Space,
   Progress,
   Button,
   HelpBox,
+  CenterBox,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import PropertyBox from '../../../customComponents/PropertyBox';
 
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
+const config1 = {
+  hidden: true,
 };
+
+const config2 = {
+  strokeWidth: 4,
+  fontSize: 20,
+  percent: 50,
+};
+
+const config3 = {
+  percent: 70,
+  animation: true,
+};
+
+const config4 = {
+  percent: 70,
+  borderRadius: 12,
+  activeColor: '#FF3141',
+  backgroundColor: '#000000',
+};
+
+const config5 = {
+  percent: 70,
+  animation: true,
+  activeColor: ['#FF0000', '#FFF200', '#1E9600'],
+};
+
+const config6 = {
+  percent: 70,
+  useBorderRadius: false,
+};
+
+const config7 = {
+  percent: 70,
+  showInfo: true,
+};
+
+const config8 = {
+  percent: 50,
+  showInfo: true,
+  fontSize: 20,
+};
+
+const config9 = {
+  percent: 70,
+  borderRadius: 12,
+  showInfo: true,
+  animation: true,
+  strokeWidth: 16,
+  fontSize: 36,
+  activeColor: '#FF3141',
+  backgroundColor: '#000000',
+};
+
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '价格',
+});
 
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Progress',
     name: '进度条',
+    description: '进度条组件',
   };
 
   constructor(props) {
@@ -57,101 +110,143 @@ export default class Index extends ContentPageBase {
 
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="进度动画" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <View>
-              <Button
-                color="primary"
-                size="mini"
-                disabled={percent === 100}
-                onClick={() => {
-                  this.setPercent(10);
-                }}
-                style={{ marginRight: transformSize(8) }}
-              >
-                进度+10
-              </Button>
-              <Button
-                color="primary"
-                size="mini"
-                fill="outline"
-                onClick={() => {
-                  this.reSetPercent();
-                }}
-              >
-                重置
-              </Button>
-            </View>
-
+        <SimpleBox
+          header="进度动画"
+          config={{ percent }}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox={false}
+        >
+          <Space direction="vertical" size={30} fillWidth>
             <Progress percent={percent} />
-          </Space>
-        </Card>
 
-        <Card header="隐藏模式" style={style} headerStyle={cardHeaderStyle}>
-          <Space direction="vertical" fillWidth>
-            <Progress hidden percent={percent} />
-          </Space>
-        </Card>
+            <CenterBox>
+              <Space>
+                <Button
+                  color="primary"
+                  size="small"
+                  disabled={percent === 100}
+                  onClick={() => {
+                    this.setPercent(10);
+                  }}
+                  style={{ marginRight: transformSize(8) }}
+                >
+                  进度+10
+                </Button>
 
-        <Card header="指定线条宽度" style={style} headerStyle={cardHeaderStyle}>
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    this.reSetPercent();
+                  }}
+                >
+                  重置进度
+                </Button>
+              </Space>
+            </CenterBox>
+          </Space>
+        </SimpleBox>
+
+        <SimpleBox
+          header="隐藏模式"
+          config={{ ...config1, ...{ percent } }}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
           <Space direction="vertical" fillWidth>
-            <Progress percent={50} strokeWidth={4} fontSize={20} />
+            <Progress {...config1} percent={percent} />
+          </Space>
+        </SimpleBox>
+
+        <SimpleBox
+          header="指定线条宽度"
+          config={config2}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Space direction="vertical" fillWidth>
+            <Progress {...config2} />
             <Progress percent={75} strokeWidth={8} />
             <Progress percent={100} strokeWidth={12} />
           </Space>
-        </Card>
+        </SimpleBox>
 
-        <Card header="展示动画" style={style} headerStyle={cardHeaderStyle}>
-          <Progress percent={70} animation />
-        </Card>
-
-        <Card header="指定颜色" style={style} headerStyle={cardHeaderStyle}>
-          <Progress
-            percent={70}
-            borderRadius={12}
-            activeColor="#FF3141"
-            backgroundColor="#000000"
-          />
-        </Card>
-
-        <Card header="渐变色" style={style} headerStyle={cardHeaderStyle}>
-          <Progress
-            percent={70}
-            animation
-            activeColor={['#FF0000', '#FFF200', '#1E9600']}
-          />
-        </Card>
-
-        <Card header="直角模式" style={style} headerStyle={cardHeaderStyle}>
-          <Progress percent={30} useBorderRadius={false} />
-        </Card>
-
-        <Card header="显示百分比" style={style} headerStyle={cardHeaderStyle}>
-          <Progress percent={50} showInfo />
-        </Card>
-
-        <Card
-          header="百分比字体大小"
-          style={style}
-          headerStyle={cardHeaderStyle}
+        <SimpleBox
+          header="展示动画"
+          config={config3}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
         >
-          <Progress percent={50} showInfo fontSize={20} />
-        </Card>
+          <Progress {...config3} />
+        </SimpleBox>
 
-        <Card header="复杂配置" style={style} headerStyle={cardHeaderStyle}>
-          <Progress
-            percent={70}
-            borderRadius={12}
-            showInfo
-            animation
-            strokeWidth={16}
-            fontSize={36}
-            activeColor="#FF3141"
-            backgroundColor="#000000"
-          />
-        </Card>
+        <SimpleBox
+          header="指定颜色"
+          config={config4}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Progress {...config4} />
+        </SimpleBox>
 
-        <Card header="属性说明 :" style={style} headerStyle={cardHeaderStyle}>
+        <SimpleBox
+          header="渐变色"
+          config={config5}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Progress {...config5} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="直角模式"
+          config={config6}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Progress {...config6} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="显示百分比"
+          config={config7}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Progress {...config7} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="百分比字体大小"
+          config={config8}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Progress {...config8} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="复杂配置"
+          config={config9}
+          componentName="Progress"
+          mockChildren={false}
+          useInnerBox
+        >
+          <Progress {...config9} />
+        </SimpleBox>
+
+        <PropertyBox config={Progress.defaultProps} labelWidth={230} />
+
+        <SimpleBox header="属性说明 :">
           <HelpBox
             showTitle={false}
             showNumber={false}
@@ -182,7 +277,7 @@ export default class Index extends ContentPageBase {
               },
             ]}
           />
-        </Card>
+        </SimpleBox>
       </Space>
     );
   };

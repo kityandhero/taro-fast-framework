@@ -22,10 +22,16 @@ const style = {
   ...cardStyle,
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '扩展进度条',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ProgressBox',
     name: '扩展进度条',
+    description: '扩展进度条组件',
   };
 
   constructor(props) {
