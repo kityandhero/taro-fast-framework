@@ -126,6 +126,7 @@ export default class Index extends ContentPageBase {
           componentName="TextAreaItem"
           mockChildren={false}
           useInnerBox={false}
+          ignorePropertyList={['prefix']}
         >
           <TextAreaItem {...config2} />
         </SimpleBox>
