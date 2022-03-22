@@ -1,6 +1,7 @@
 import { View, Textarea } from '@tarojs/components';
 
 import {
+  showInfoMessage,
   stringIsNullOrWhiteSpace,
   styleToString,
   transformSize,
@@ -50,6 +51,8 @@ const defaultProps = {
 class TextAreaItem extends BaseComponent {
   text = '';
 
+  textLength = 0;
+
   constructor(props) {
     super(props);
 
@@ -88,12 +91,30 @@ class TextAreaItem extends BaseComponent {
     }
   };
 
+  triggerFocus = () => {
+    const { contentMaxlength } = this.props;
+
+    if (this.text.length >= contentMaxlength) {
+      showInfoMessage({
+        message: '已达最大输入长度',
+      });
+    }
+  };
+
   triggerInput = (e) => {
+    const { contentMaxlength } = this.props;
+
     const {
       detail: { value },
     } = e;
 
     this.text = value;
+
+    if (this.text.length >= contentMaxlength) {
+      showInfoMessage({
+        message: '已达最大输入长度',
+      });
+    }
   };
 
   triggerConfirm = (e) => {
@@ -113,6 +134,7 @@ class TextAreaItem extends BaseComponent {
   triggerClose = () => {
     this.setState({
       popupVisible: false,
+      valueStage: this.text,
     });
 
     const { onChange } = this.props;
@@ -235,7 +257,6 @@ class TextAreaItem extends BaseComponent {
             </Button>
           }
           position={position}
-          // space={false}
           border
           bodyBorder
           footerBorder={false}
@@ -268,6 +289,7 @@ class TextAreaItem extends BaseComponent {
             disabled={disabled}
             showConfirmBar
             fixed
+            onFocus={this.triggerFocus}
             onInput={this.triggerInput}
             onConfirm={this.triggerConfirm}
           />

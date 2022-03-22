@@ -130,7 +130,7 @@ export default class Index extends ContentPageBase {
           <TextAreaItem {...config2} />
         </SimpleBox>
 
-        <PropertyBox config={TextAreaItem.defaultProps} labelWidth={230} />
+        <PropertyBox config={TextAreaItem.defaultProps} labelWidth={240} />
       </Space>
     );
   };
