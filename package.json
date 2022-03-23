@@ -27,7 +27,7 @@
     "publish:npm-component-extra": "nrm use npm && nrm ls && npm run publish:npm-component-extra-only && nrm use local && nrm ls",
     "publish:npm-component-prism": "nrm use npm && nrm ls && npm run publish:npm-component-prism-only && nrm use local && nrm ls",
     "publish:npm-framework": "nrm use npm && nrm ls && npm run publish:npm-framework-only && nrm use local && nrm ls",
-    "publish:npm": "nrm use npm && nrm ls && npm run publish:npm-cli-only && npm run publish:npm-common-only && npm run publish:npm-component-only && npm run publish:npm-component-extra-only && npm run publish:npm-component-prism-only && npm run publish:npm-framework-only && nrm use local && nrm ls",
+    "publish:npm": "nrm use npm && nrm ls && npm run publish:npm-common-only && npm run publish:npm-component-only && npm run publish:npm-component-extra-only && npm run publish:npm-component-prism-only && npm run publish:npm-framework-only && npm run publish:npm-cli-only && nrm use local && nrm ls",
     "cz": "cz",
     "scz": "git stage -A && npm run cz && git push",
     "commitlint": "npx commitlint --edit",
