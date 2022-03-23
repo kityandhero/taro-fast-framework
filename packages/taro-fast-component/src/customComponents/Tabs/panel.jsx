@@ -8,7 +8,7 @@ import BaseComponent from '../BaseComponent';
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
-  customStyle: '',
+  style: {},
   className: '',
   /**
    * Tab 方向，请跟 AtTabs 保持一致
@@ -30,11 +30,12 @@ const defaultProps = {
 class TabPanel extends BaseComponent {
   renderFurther() {
     const {
-      customStyle,
+      style,
       className,
       direction: directionSource,
       index,
       current,
+      children,
     } = this.props;
 
     const direction = inCollection(directionCollection, directionSource)
@@ -52,9 +53,9 @@ class TabPanel extends BaseComponent {
           },
           className,
         )}
-        style={customStyle}
+        style={style}
       >
-        {this.props.children}
+        {children}
       </View>
     );
   }

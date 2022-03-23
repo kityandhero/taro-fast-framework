@@ -7,9 +7,10 @@ import {
   getGuid,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
+import TabPanel from './panel';
 
 import './index.less';
 
@@ -27,6 +28,14 @@ const defaultProps = {
   className: '',
   titleStyle: {},
   titleActiveStyle: {},
+  headerBackgroundColor: '#fff',
+  underlineHeight: 2,
+  underlineHorizontalMargin: 0,
+  underlineColor: '#f0f0f0',
+  underlineActiveColor: '#6190e8',
+  showPanel: false,
+  panelStyle: {},
+  panelClassName: '',
   /**
    * Tab 方向，请跟 AtTabPane 保持一致
    * @default 'horizontal'
@@ -381,28 +390,33 @@ class Tabs extends BaseComponent {
     );
   };
 
-  renderFurther() {
-    const { style, className, height, animated, tabList, scroll, children } =
+  buildPanelList = () => {
+    const { height, animated, showPanel, tabList, panelStyle, panelClassName } =
       this.props;
     const { currentStage } = this.state;
+
+    if (!showPanel) {
+      return null;
+    }
+
+    const tabListAdjust = isArray(tabList) ? tabList : [];
+
+    if (tabListAdjust.length === 0) {
+      return null;
+    }
 
     const direction = this.getDirection();
 
     const heightStyle = { height };
 
-    const containerStyle = {
-      ...style,
-      ...heightStyle,
-    };
-
     const underlineStyle = {
       height:
         direction === 'vertical'
-          ? `${tabList.length * 100}%`
+          ? `${tabListAdjust.length * 100}%`
           : transformSize(1),
       width:
         direction === 'horizontal'
-          ? `${tabList.length * 100}%`
+          ? `${tabListAdjust.length * 100}%`
           : transformSize(1),
     };
 
@@ -423,6 +437,83 @@ class Tabs extends BaseComponent {
       bodyStyle.transition = 'unset';
     }
 
+    return (
+      <View
+        className="tfc-tabs__body"
+        onTouchStart={this.handleTouchStart}
+        onTouchEnd={this.handleTouchEnd}
+        catchMove
+        onTouchMove={this.handleTouchMove}
+        style={bodyStyle}
+      >
+        <View className="tfc-tabs__underline" style={underlineStyle}></View>
+
+        {tabListAdjust.map((item, index) => {
+          const { body } = {
+            ...{
+              body: null,
+            },
+            ...item,
+          };
+
+          return (
+            <TabPanel
+              key={`${this.prefixKey}_panel_${index}`}
+              index={index}
+              current={currentStage}
+              style={panelStyle}
+              className={panelClassName}
+              direction={direction}
+            >
+              {body || null}
+            </TabPanel>
+          );
+        })}
+      </View>
+    );
+  };
+
+  renderFurther() {
+    const {
+      style,
+      className,
+      headerBackgroundColor,
+      underlineHeight,
+      underlineHorizontalMargin,
+      underlineColor,
+      underlineActiveColor,
+      height,
+      scroll,
+    } = this.props;
+
+    const direction = this.getDirection();
+
+    const heightStyle = { height };
+
+    const containerStyle = {
+      ...style,
+      ...heightStyle,
+      ...(underlineHorizontalMargin > 0
+        ? {
+            '--underline-width': `calc(100% - ${transformSize(
+              underlineHorizontalMargin,
+            )} * 2)`,
+            '--underline-horizontal-margin': transformSize(
+              underlineHorizontalMargin,
+            ),
+          }
+        : {
+            '--underline-width': '100%',
+            '--underline-horizontal-margin': '0',
+          }),
+      ...{
+        '--underline-height': transformSize(underlineHeight),
+        '--underline-color': underlineColor,
+        '--underline-active-color': underlineActiveColor,
+        '--header-background-color': headerBackgroundColor,
+      },
+    };
+
     const containerClassName = classNames(
       {
         'tfc-tabs': true,
@@ -439,19 +530,7 @@ class Tabs extends BaseComponent {
       <View className={containerClassName} style={containerStyle}>
         {tabItemList}
 
-        {children ? (
-          <View
-            className="tfc-tabs__body"
-            onTouchStart={this.handleTouchStart}
-            onTouchEnd={this.handleTouchEnd}
-            catchMove
-            onTouchMove={this.handleTouchMove}
-            style={bodyStyle}
-          >
-            <View className="tfc-tabs__underline" style={underlineStyle}></View>
-            {this.props.children}
-          </View>
-        ) : null}
+        {this.buildPanelList()}
       </View>
     );
   }

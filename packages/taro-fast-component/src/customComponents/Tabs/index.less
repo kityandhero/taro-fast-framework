@@ -1,23 +1,20 @@
-@hd: 2;
-@color-text-base: #333;
-@tfc-tabs-color: @color-text-base;
+@tfc-tabs-color: #333;
 @tfc-tabs-pane-min-height: var(--tfc-200);
-@tfc-tabs-line-height: var(--tfc-2);
-@color-bg: #fff;
-@tfc-tabs-bg-color: @color-bg;
-@color-grey-5: #f0f0f0;
-@tfc-tabs-underline-color: @color-grey-5;
-@color-brand: #6190e8;
-@tfc-tabs-color-active: @color-brand;
 
-@class-prefix-tab: ~'.tfc-tabs';
+@class-prefix-tab: ~'tfc-tabs';
 
-@{class-prefix-tab} {
+.@{class-prefix-tab} {
+  --header-background-color: #fff;
+  --underline-width: 100%;
+  --underline-height: var(--tfc-2);
+  --underline-horizontal-margin: 0;
+  --underline-color: #f0f0f0;
+  --underline-active-color: #6190e8;
+
   width: 100%;
   height: 100%;
   overflow: hidden;
 
-  /* elements */
   &__item {
     position: relative;
     flex: 1;
@@ -32,17 +29,19 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 100%;
-      height: @tfc-tabs-line-height;
-      background-color: @tfc-tabs-color-active;
+      width: var(--underline-width);
+      height: var(--underline-height);
+      margin-left: var(--underline-horizontal-margin);
+      margin-right: var(--underline-horizontal-margin);
+      background-color: var(--underline-active-color);
       transform: scaleX(0);
       transition: all 0.15s;
     }
 
     &--active {
-      color: @tfc-tabs-color-active;
+      color: var(--underline-active-color);
 
-      @{class-prefix-tab}__item-underline {
+      .@{class-prefix-tab}__item-underline {
         transform: scaleX(1);
       }
     }
@@ -54,7 +53,7 @@
     width: 100%;
     text-align: center;
     white-space: nowrap;
-    background-color: @tfc-tabs-bg-color;
+    background-color: var(--header-background-color);
     box-sizing: border-box;
     overflow: -moz-scrollbars-none;
 
@@ -84,19 +83,18 @@
     bottom: auto;
     right: auto;
     width: 600%;
-    height: @tfc-tabs-line-height;
-    background-color: @tfc-tabs-underline-color;
+    height: var(--underline-height);
+    background-color: var(--underline-color);
   }
 
-  /* modifiers */
   &--scroll {
-    @{class-prefix-tab}__header {
+    .@{class-prefix-tab}__header {
       overflow-x: scroll;
       -webkit-overflow-scrolling: touch;
       white-space: nowrap;
     }
 
-    @{class-prefix-tab}__item {
+    .@{class-prefix-tab}__item {
       display: inline-block;
       overflow: visible;
     }
@@ -107,28 +105,28 @@
     flex: 1;
     overflow: hidden;
 
-    @{class-prefix-tab}__body {
+    .@{class-prefix-tab}__body {
       display: inline-block;
       flex: 1;
       height: @tfc-tabs-pane-min-height;
       width: auto;
     }
 
-    @{class-prefix-tab}__underline {
+    .@{class-prefix-tab}__underline {
       top: 0;
       left: 0;
       bottom: auto;
-      width: @tfc-tabs-line-height;
+      width: var(--underline-height);
       height: 100%;
     }
 
-    @{class-prefix-tab}__header {
+    .@{class-prefix-tab}__header {
       display: inline-block;
       width: auto;
       height: 100%;
     }
 
-    @{class-prefix-tab}__item {
+    .@{class-prefix-tab}__item {
       display: flex;
       justify-content: center;
       width: auto;
@@ -140,13 +138,13 @@
         right: 0;
         bottom: auto;
         left: auto;
-        width: @tfc-tabs-line-height;
+        width: var(--underline-height);
         height: 100%;
         transform: scaleY(0);
       }
 
       &--active {
-        @{class-prefix-tab}__item-underline {
+        .@{class-prefix-tab}__item-underline {
           transform: scaleY(1);
         }
       }
@@ -156,9 +154,9 @@
 
 /* hack SWAN */
 
-@{class-prefix-tab}--scroll@{class-prefix-tab}--horizontal@{class-prefix-tab}--SWAN {
-  @{class-prefix-tab}__item-underline {
-    bottom: @tfc-tabs-line-height;
+.@{class-prefix-tab}--scroll.@{class-prefix-tab}--horizontal.@{class-prefix-tab}--SWAN {
+  .@{class-prefix-tab}__item-underline {
+    bottom: var(--underline-height);
   }
 }
 
