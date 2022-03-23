@@ -1,0 +1,37 @@
+{
+  "name": "taro-fast-cli",
+  "version": "1.0.0",
+  "description": "taro-fast-cli",
+  "keywords": [
+    "taro-fast-cli"
+  ],
+  "author": "kityandhero <kityandhero@126.com>",
+  "homepage": "https://github.com/kityandhero/taro-fast-framework#readme",
+  "license": "MIT",
+  "main": "lib/taro-fast-cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
+  },
+  "dependencies": {
+    "commander": "^9.1.0",
+    "fs-extra": "^10.0.1"
+  },
+  "devDependencies": {
+    "download-git-repo": "^3.0.2",
+    "terminal-kit": "^2.4.0"
+  }
+}
