@@ -204,6 +204,8 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
           config={{
             scroll: true,
+            showPanel: true,
+            direction: 'vertical',
             tabList: [
               {
                 title: '标签页1',
@@ -230,6 +232,10 @@ export default class Index extends ContentPageBase {
                 body: null,
               },
             ],
+            panelStyle: {
+              backgroundColor: 'red',
+              padding: transformSize(40),
+            },
             onClick: () => {
               console.log('onClick');
             },
