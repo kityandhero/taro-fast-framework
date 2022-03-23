@@ -10,10 +10,11 @@
   "license": "MIT",
   "main": "lib/taro-fast-cli.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "bin": "bin",
+    "lib": "lib"
   },
   "files": [
+    "bin",
     "lib"
   ],
   "repository": {
