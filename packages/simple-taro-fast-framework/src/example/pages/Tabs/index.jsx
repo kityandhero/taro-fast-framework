@@ -61,41 +61,34 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  handleClick1 = (value) => {
-    this.setState({
-      current1: value,
-    });
-  };
-
-  handleClick2 = (value) => {
-    this.setState({
-      current2: value,
-    });
-  };
-
-  handleClick3 = (value) => {
-    this.setState({
-      current3: value,
-    });
-  };
-
-  handleClick4 = (value) => {
-    this.setState({
-      current4: value,
-    });
-  };
-
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="基本用法" space={false}>
+        <SimpleBox header="仅头部" space={false}>
           <Tabs
-            current={this.state.current1}
+            current={2}
             tabList={tabList}
-            onClick={(v) => {
-              this.handleClick1(v);
+            onClick={(i, e, item) => {
+              console.log(item);
             }}
-          >
+          />
+        </SimpleBox>
+
+        <SimpleBox header="文字样式" space={false}>
+          <Tabs
+            current={2}
+            titleStyle={{
+              color: '',
+            }}
+            tabList={tabList}
+            onClick={(i, e, item) => {
+              console.log(item);
+            }}
+          />
+        </SimpleBox>
+
+        <SimpleBox header="Panel联动" space={false}>
+          <Tabs current={this.state.current1} tabList={tabList}>
             <TabPanel current={this.state.current1} index={0}>
               <View
                 style={{
@@ -144,9 +137,6 @@ export default class Index extends ContentPageBase {
               { title: '标签页5' },
               { title: '标签页6' },
             ]}
-            onClick={(v) => {
-              this.handleClick2(v);
-            }}
           >
             <TabPanel current={this.state.current2} index={0}>
               <View
@@ -231,9 +221,6 @@ export default class Index extends ContentPageBase {
               { title: '标签页5' },
               { title: '标签页6' },
             ]}
-            onClick={(v) => {
-              this.handleClick3(v);
-            }}
           >
             <TabPanel
               direction="vertical"
@@ -337,9 +324,6 @@ export default class Index extends ContentPageBase {
               { title: '标签页2' },
               { title: '标签页3' },
             ]}
-            onClick={(v) => {
-              this.handleClick4(v);
-            }}
           >
             <TabPanel current={this.state.current4} index={0}>
               <View

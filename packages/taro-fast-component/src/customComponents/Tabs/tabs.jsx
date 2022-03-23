@@ -5,7 +5,6 @@ import { ScrollView, View } from '@tarojs/components';
 import {
   inCollection,
   getGuid,
-  mergeStyle,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
@@ -24,8 +23,10 @@ const MAX_INTERVAL = 10;
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
-  style: '',
+  style: {},
   className: '',
+  titleStyle: {},
+  titleActiveStyle: {},
   /**
    * Tab 方向，请跟 AtTabPane 保持一致
    * @default 'horizontal'
@@ -91,8 +92,6 @@ class Tabs extends BaseComponent {
 
   tabHeaderRef = null;
 
-  currentSequence = 0;
-
   constructor(props) {
     super(props);
 
@@ -100,6 +99,7 @@ class Tabs extends BaseComponent {
 
     this.state = {
       currentFlag: current,
+      currentStage: current,
       scrollFlag: false,
       scrollLeft: 0,
       scrollTop: 0,
@@ -115,8 +115,6 @@ class Tabs extends BaseComponent {
     this.interval = 0;
 
     this.isMoving = false;
-
-    this.currentSequence = current;
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -126,6 +124,7 @@ class Tabs extends BaseComponent {
     if (currentNext !== currentPrev || scrollNext !== scrollPrev) {
       return {
         currentFlag: currentNext,
+        currentStage: currentNext,
         scrollFlag: scrollNext,
       };
     }
@@ -133,23 +132,23 @@ class Tabs extends BaseComponent {
     return {};
   }
 
-  componentDidMount() {
+  doWorkAfterDidMount = () => {
+    const { currentStage } = this.state;
+
     this.getTabHeaderRef();
 
-    this.currentSequence = this.props.current;
+    this.updateScroll(currentStage);
+  };
 
-    this.updateScroll(this.props.current);
-  }
-
-  componentWillUnmount() {
+  doWorkBeforeUnmount = () => {
     this.tabHeaderRef = null;
-  }
+  };
 
   // eslint-disable-next-line no-unused-vars
   doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
     this.getTabHeaderRef();
 
-    this.updateScroll(this.props.current);
+    this.updateScroll();
 
     return null;
   };
@@ -164,13 +163,15 @@ class Tabs extends BaseComponent {
     return direction;
   };
 
-  updateScroll = (idx) => {
+  updateScroll = () => {
     if (this.props.scroll) {
+      const { currentStage } = this.state;
+
       // 标签栏滚动
       switch (ENV) {
         case Taro.ENV_TYPE.WEAPP:
           this.setState({
-            scrollIntoView: `tab${this.tabId}${Math.max(idx - 1, 0)}`,
+            scrollIntoView: `tab${this.tabId}${Math.max(currentStage - 1, 0)}`,
           });
 
           break;
@@ -180,13 +181,13 @@ class Tabs extends BaseComponent {
 
         case Taro.ENV_TYPE.SWAN:
           this.setState({
-            scrollIntoView: `tab${this.tabId}${Math.max(idx - 1, 0)}`,
+            scrollIntoView: `tab${this.tabId}${Math.max(currentStage - 1, 0)}`,
           });
 
           break;
 
         case Taro.ENV_TYPE.WEB:
-          const indexWEB = Math.max(idx - 1, 0);
+          const indexWEB = Math.max(currentStage - 1, 0);
           const prevTabItem = this.tabHeaderRef.childNodes[indexWEB];
           prevTabItem &&
             this.setState({
@@ -204,13 +205,15 @@ class Tabs extends BaseComponent {
     }
   };
 
-  handleClick = (index, event) => {
+  handleClick = (index, event, item) => {
     const { onClick } = this.props;
 
-    this.currentSequence = index;
+    this.setState({
+      currentStage: index,
+    });
 
     if (isFunction(onClick)) {
-      onClick(index, event);
+      onClick(index, event, item);
     }
   };
 
@@ -231,6 +234,7 @@ class Tabs extends BaseComponent {
 
   handleTouchMove = (e) => {
     const { swipeable, tabList } = this.props;
+    const { currentStage } = this.state;
 
     const direction = this.getDirection();
 
@@ -244,20 +248,14 @@ class Tabs extends BaseComponent {
 
     if (!this.isMoving && this.interval < MAX_INTERVAL && this.touchDot > 20) {
       // 向左滑动
-      if (
-        this.currentSequence + 1 < maxIndex &&
-        moveDistance <= -MIN_DISTANCE
-      ) {
+      if (currentStage + 1 < maxIndex && moveDistance <= -MIN_DISTANCE) {
         this.isMoving = true;
-        this.handleClick(this.currentSequence + 1, e);
+        this.handleClick(currentStage + 1, e);
 
         // 向右滑动
-      } else if (
-        this.currentSequence - 1 >= 0 &&
-        moveDistance >= MIN_DISTANCE
-      ) {
+      } else if (currentStage - 1 >= 0 && moveDistance >= MIN_DISTANCE) {
         this.isMoving = true;
-        this.handleClick(this.currentSequence - 1, e);
+        this.handleClick(currentStage - 1, e);
       }
     }
   };
@@ -280,8 +278,9 @@ class Tabs extends BaseComponent {
   };
 
   buildTabItemList = () => {
-    const { height, tabList, scroll } = this.props;
-    const { scrollLeft, scrollTop, scrollIntoView } = this.state;
+    const { titleStyle, titleActiveStyle, height, tabList, scroll } =
+      this.props;
+    const { currentStage, scrollLeft, scrollTop, scrollIntoView } = this.state;
 
     const direction = this.getDirection();
     const heightStyle = { height };
@@ -291,7 +290,7 @@ class Tabs extends BaseComponent {
     const tabItems = (tabList || []).map((item, idx) => {
       const itemCls = classNames({
         'tfc-tabs__item': true,
-        'tfc-tabs__item--active': this.currentSequence === idx,
+        'tfc-tabs__item--active': currentStage === idx,
       });
 
       const {
@@ -315,7 +314,16 @@ class Tabs extends BaseComponent {
         ...item,
       };
 
-      const titleCoreComponent = <ColorText icon={iconItem} text={title} />;
+      const titleCoreComponent = (
+        <ColorText
+          textStyle={{
+            ...titleStyle,
+            ...(currentStage === idx ? titleActiveStyle : {}),
+          }}
+          icon={iconItem}
+          text={title}
+        />
+      );
 
       const titleComponent = useBadge ? (
         <Badge
@@ -340,7 +348,7 @@ class Tabs extends BaseComponent {
           key={`tfc-tabs-item-${idx}`}
           style={styleItem || {}}
           onClick={(e) => {
-            this.handleClick(idx, e);
+            this.handleClick(idx, e, item);
           }}
         >
           {titleComponent}
@@ -374,33 +382,48 @@ class Tabs extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, className, height, animated, tabList, scroll } = this.props;
+    const { style, className, height, animated, tabList, scroll, children } =
+      this.props;
+    const { currentStage } = this.state;
 
     const direction = this.getDirection();
 
     const heightStyle = { height };
-    const underlineStyle = {
-      height: direction === 'vertical' ? `${tabList.length * 100}%` : '1PX',
-      width: direction === 'horizontal' ? `${tabList.length * 100}%` : '1PX',
+
+    const containerStyle = {
+      ...style,
+      ...heightStyle,
     };
 
-    let transformStyle = `translate3d(0px, -${
-      this.currentSequence * 100
-    }%, 0px)`;
+    const underlineStyle = {
+      height:
+        direction === 'vertical'
+          ? `${tabList.length * 100}%`
+          : transformSize(1),
+      width:
+        direction === 'horizontal'
+          ? `${tabList.length * 100}%`
+          : transformSize(1),
+    };
+
+    let transformStyle = `translate3d(0px, -${currentStage * 100}%, 0px)`;
     if (direction === 'horizontal') {
-      transformStyle = `translate3d(-${this.currentSequence * 100}%, 0px, 0px)`;
+      transformStyle = `translate3d(-${currentStage * 100}%, 0px, 0px)`;
     }
 
     const bodyStyle = {
-      transform: transformStyle,
-      '-webkit-transform': transformStyle,
+      ...{
+        transform: transformStyle,
+        '-webkit-transform': transformStyle,
+      },
+      ...heightStyle,
     };
 
     if (!animated) {
       bodyStyle.transition = 'unset';
     }
 
-    const rootCls = classNames(
+    const containerClassName = classNames(
       {
         'tfc-tabs': true,
         'tfc-tabs--scroll': scroll,
@@ -413,20 +436,22 @@ class Tabs extends BaseComponent {
     const tabItemList = this.buildTabItemList();
 
     return (
-      <View className={rootCls} style={mergeStyle(heightStyle, style)}>
+      <View className={containerClassName} style={containerStyle}>
         {tabItemList}
 
-        <View
-          className="tfc-tabs__body"
-          onTouchStart={this.handleTouchStart}
-          onTouchEnd={this.handleTouchEnd}
-          catchMove
-          onTouchMove={this.handleTouchMove}
-          style={mergeStyle(bodyStyle, heightStyle)}
-        >
-          <View className="tfc-tabs__underline" style={underlineStyle}></View>
-          {this.props.children}
-        </View>
+        {children ? (
+          <View
+            className="tfc-tabs__body"
+            onTouchStart={this.handleTouchStart}
+            onTouchEnd={this.handleTouchEnd}
+            catchMove
+            onTouchMove={this.handleTouchMove}
+            style={bodyStyle}
+          >
+            <View className="tfc-tabs__underline" style={underlineStyle}></View>
+            {this.props.children}
+          </View>
+        ) : null}
       </View>
     );
   }

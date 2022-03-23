@@ -3,6 +3,7 @@ import {
   transformSize,
   buildLinearGradient,
 } from 'taro-fast-common/es/utils/tools';
+import { colorPure, colorShadow } from 'taro-fast-common/es/utils/constants';
 
 import {
   Space,
@@ -63,62 +64,74 @@ const config1 = {
   column: 2,
   list: [
     {
-      color: 'var(--tfc-color-red)',
+      color: colorPure.red,
+      shadow: colorShadow.red,
       name: '--tfc-color-red',
       shortName: 'red',
     },
     {
-      color: 'var(--tfc-color-orange)',
+      color: colorPure.orange,
+      shadow: colorShadow.orange,
       name: '--tfc-color-orange',
       shortName: 'orange',
     },
     {
-      color: 'var(--tfc-color-yellow)',
+      color: colorPure.yellow,
+      shadow: colorShadow.yellow,
       name: '--tfc-color-yellow',
       shortName: 'yellow',
     },
     {
-      color: 'var(--tfc-color-olive)',
+      color: colorPure.olive,
+      shadow: colorShadow.olive,
       name: '--tfc-color-olive',
       shortName: 'olive',
     },
     {
-      color: 'var(--tfc-color-green)',
+      color: colorPure.green,
+      shadow: colorShadow.green,
       name: '--tfc-color-green',
       shortName: 'green',
     },
     {
-      color: 'var(--tfc-color-cyan)',
+      color: colorPure.cyan,
+      shadow: colorShadow.cyan,
       name: '--tfc-color-cyan',
       shortName: 'cyan',
     },
     {
-      color: 'var(--tfc-color-blue)',
+      color: colorPure.blue,
+      shadow: colorShadow.blue,
       name: '--tfc-color-blue',
       shortName: 'blue',
     },
     {
-      color: 'var(--tfc-color-purple)',
+      color: colorPure.purple,
+      shadow: colorShadow.purple,
       name: '--tfc-color-purple',
       shortName: 'purple',
     },
     {
-      color: 'var(--tfc-color-pink)',
+      color: colorPure.pink,
+      shadow: colorShadow.pink,
       name: '--tfc-color-pink',
       shortName: 'pink',
     },
     {
-      color: 'var(--tfc-color-brown)',
+      color: colorPure.brown,
+      shadow: colorShadow.brown,
       name: '--tfc-color-brown',
       shortName: 'brown',
     },
     {
-      color: 'var(--tfc-color-grey)',
+      color: colorPure.grey,
+      shadow: colorShadow.grey,
       name: '--tfc-color-grey',
       shortName: 'grey',
     },
     {
-      color: 'var(--tfc-color-black)',
+      color: colorPure.black,
+      shadow: colorShadow.black,
       name: '--tfc-color-black',
       shortName: 'black',
     },
@@ -275,12 +288,14 @@ export default class Index extends ContentPageBase {
     column = 2,
     list = [],
     gradient = false,
+    shadow = false,
+    onlyShadow = false,
     aspectRatio = 0.4,
   }) => {
     return (
       <Grid columns={column}>
         {list.map((item, index) => {
-          const { color, direct, shortName, name } = item;
+          const { color, shadow: shadowColor, direct, shortName, name } = item;
 
           return (
             <Grid.Item key={`${keyPrefix}_${index}`}>
@@ -302,9 +317,14 @@ export default class Index extends ContentPageBase {
                               }),
                             }
                           : {}),
-                        ...(!gradient
+                        ...(!gradient && !onlyShadow
                           ? {
                               backgroundColor: color,
+                            }
+                          : {}),
+                        ...(shadow
+                          ? {
+                              boxShadow: `0 var(--tfc-7) var(--tfc-12) 0 ${shadowColor}`,
                             }
                           : {}),
                         ...itemStyle,
@@ -358,7 +378,7 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="颜色"
+          header="纯色"
           description={[
             {
               text: '内置CSS变量举例: --tfc-color-red',
@@ -377,7 +397,30 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="浅色">
+        <SimpleBox header="纯阴影">
+          {this.buildGrid({
+            column: config1.column,
+            keyPrefix: 'config1_shadow',
+            list: config1.list,
+            style: itemStyle1,
+            aspectRatio: 0.4,
+            onlyShadow: true,
+            shadow: true,
+          })}
+        </SimpleBox>
+
+        <SimpleBox header="附带阴影">
+          {this.buildGrid({
+            column: config1.column,
+            keyPrefix: 'config1_shadow',
+            list: config1.list,
+            style: itemStyle1,
+            aspectRatio: 0.4,
+            shadow: true,
+          })}
+        </SimpleBox>
+
+        <SimpleBox header="纯浅色">
           {this.buildGrid({
             column: config2.column,
             keyPrefix: 'config2',
