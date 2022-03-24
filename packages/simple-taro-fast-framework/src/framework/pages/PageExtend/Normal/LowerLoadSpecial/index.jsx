@@ -69,6 +69,8 @@ definePageConfig({
 export default class Index extends ContentPageBase {
   enableLowerLoad = true;
 
+  enableAutoInitialLoadingIndicator = false;
+
   lowerLoadingPosition = 'fixed';
 
   pagingLoadMode = true;

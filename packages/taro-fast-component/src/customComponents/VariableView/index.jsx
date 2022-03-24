@@ -54,6 +54,8 @@ const defaultProps = {
   lowerLoadingSuspendBox: null,
   lowerLoadingFooterBox: null,
   lowerLoadingPosition: 'footer',
+  displayLowerLoadingFooterBoxWhenNoData: false,
+  existData: true,
   needNextLoad: false,
   emptyPlaceholderVisible: false,
   emptyPlaceholder: null,
@@ -412,7 +414,17 @@ class VariableView extends BaseComponent {
    * @returns
    */
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => {
-    const { lowerLoadingFooterBox } = this.props;
+    const {
+      existData,
+      displayLowerLoadingFooterBoxWhenNoData,
+      lowerLoadingFooterBox,
+    } = this.props;
+
+    if (!displayLowerLoadingFooterBoxWhenNoData) {
+      if (!existData) {
+        return null;
+      }
+    }
 
     return (
       lowerLoadingFooterBox || (

@@ -77,6 +77,16 @@ class Infrastructure extends ComponentBase {
   enablePullDownRefresh = false;
 
   /**
+   * 启用刷新中提示框
+   */
+  enableRefreshingBox = true;
+
+  /**
+   * 当不存在数据时是否显示底部上滑加载提示组件
+   */
+  displayLowerLoadingFooterBoxWhenNoData = false;
+
+  /**
    * 启用下拉刷新成功提示
    */
   enablePullDownRefreshSuccessNotification = false;
@@ -579,6 +589,7 @@ class Infrastructure extends ComponentBase {
         }
         enableSafeAreaInsetBottom={this.enableSafeAreaInsetBottom}
         enableCustomPullDown
+        useRefreshingBox={this.enableRefreshingBox}
         refreshingBoxEffect={getRefreshingBoxEffect(this.refreshingBoxEffect)}
         refreshColor={this.refreshColor}
         refreshBackgroundColor={this.refreshBackgroundColor}
@@ -600,6 +611,10 @@ class Infrastructure extends ComponentBase {
         refreshingBox={this.buildRefreshingBox()}
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
         lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
+        displayLowerLoadingFooterBoxWhenNoData={
+          this.displayLowerLoadingFooterBoxWhenNoData
+        }
+        existData={!this.judgeEmptyPlaceholderVisible()}
         upperBox={this.buildUpperBox()}
         onExternalScroll={(callback) => {
           this.onScroll(callback);
