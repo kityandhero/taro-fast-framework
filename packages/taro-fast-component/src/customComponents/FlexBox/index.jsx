@@ -209,6 +209,7 @@ class FlexBox extends BaseComponent {
 }
 
 FlexBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -274,6 +274,7 @@ class Countdown extends BaseComponent {
 }
 
 Countdown.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

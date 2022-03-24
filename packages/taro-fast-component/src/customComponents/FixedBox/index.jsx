@@ -74,6 +74,7 @@ class FixedBox extends BaseComponent {
 }
 
 FixedBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

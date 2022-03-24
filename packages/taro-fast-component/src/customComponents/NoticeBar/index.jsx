@@ -178,6 +178,7 @@ class NoticeBar extends BaseComponent {
 }
 
 NoticeBar.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -60,6 +60,7 @@ class Col extends BaseComponent {
 }
 
 Col.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

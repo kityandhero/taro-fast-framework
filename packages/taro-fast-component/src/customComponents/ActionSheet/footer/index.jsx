@@ -37,6 +37,7 @@ class ActionSheetFooter extends BaseComponent {
 }
 
 ActionSheetFooter.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

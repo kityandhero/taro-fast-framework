@@ -379,6 +379,7 @@ class InputItem extends BaseComponent {
 }
 
 InputItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

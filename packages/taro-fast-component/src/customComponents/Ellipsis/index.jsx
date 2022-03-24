@@ -58,6 +58,7 @@ class Ellipsis extends BaseComponent {
 }
 
 Ellipsis.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

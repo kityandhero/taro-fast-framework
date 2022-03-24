@@ -2,6 +2,8 @@ import { View } from '@tarojs/components';
 
 import { mergeProps } from 'taro-fast-common/es/utils/tools';
 
+import BaseComponent from '../BaseComponent';
+
 import './index.less';
 
 const defaultProps = {
@@ -40,5 +42,6 @@ export const FadeView = (p) => {
 };
 
 FadeView.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };

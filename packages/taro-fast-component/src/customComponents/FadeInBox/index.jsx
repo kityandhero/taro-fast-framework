@@ -57,6 +57,7 @@ class FadeInBox extends BaseComponent {
 }
 
 FadeInBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

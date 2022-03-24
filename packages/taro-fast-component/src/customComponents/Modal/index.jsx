@@ -212,6 +212,7 @@ class Modal extends BaseComponent {
 }
 
 Modal.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

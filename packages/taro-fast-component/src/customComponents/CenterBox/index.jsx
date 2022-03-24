@@ -24,6 +24,7 @@ class CenterBox extends BaseComponent {
 }
 
 CenterBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

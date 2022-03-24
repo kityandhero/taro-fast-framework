@@ -145,6 +145,7 @@ class Collapse extends BaseComponent {
 }
 
 Collapse.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

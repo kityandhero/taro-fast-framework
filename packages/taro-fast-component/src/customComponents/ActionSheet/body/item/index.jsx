@@ -44,6 +44,7 @@ class ActionSheetItem extends BaseComponent {
 }
 
 ActionSheetItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

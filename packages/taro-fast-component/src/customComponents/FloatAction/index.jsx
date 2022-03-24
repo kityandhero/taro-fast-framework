@@ -423,6 +423,7 @@ class FloatAction extends BaseComponent {
 }
 
 FloatAction.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

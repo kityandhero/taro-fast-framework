@@ -122,6 +122,7 @@ class BackTop extends BaseComponent {
 }
 
 BackTop.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -258,6 +258,7 @@ class ImageBox extends BaseComponent {
 }
 
 ImageBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

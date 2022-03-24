@@ -51,6 +51,7 @@ class ActivityIndicator extends BaseComponent {
 }
 
 ActivityIndicator.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -118,6 +118,7 @@ class HorizontalScrollBox extends BaseComponent {
 }
 
 HorizontalScrollBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

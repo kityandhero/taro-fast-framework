@@ -453,6 +453,7 @@ class Popup extends BaseComponent {
 }
 
 Popup.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

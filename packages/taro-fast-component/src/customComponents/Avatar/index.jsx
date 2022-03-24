@@ -54,6 +54,7 @@ class Avatar extends BaseComponent {
 }
 
 Avatar.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

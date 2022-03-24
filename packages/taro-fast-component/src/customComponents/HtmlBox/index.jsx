@@ -36,6 +36,7 @@ class HtmlBox extends BaseComponent {
 }
 
 HtmlBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

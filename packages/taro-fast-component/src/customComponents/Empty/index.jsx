@@ -8,6 +8,8 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
+import BaseComponent from '../BaseComponent';
+
 import Icon from '../Icon';
 
 import './index.less';
@@ -89,5 +91,6 @@ export const Empty = (p) => {
 };
 
 Empty.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };

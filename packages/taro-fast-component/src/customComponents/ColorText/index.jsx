@@ -168,6 +168,7 @@ class ColorText extends BaseComponent {
 }
 
 ColorText.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

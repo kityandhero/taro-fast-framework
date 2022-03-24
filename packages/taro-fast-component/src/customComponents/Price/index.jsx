@@ -97,6 +97,7 @@ class Price extends BaseComponent {
 }
 
 Price.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

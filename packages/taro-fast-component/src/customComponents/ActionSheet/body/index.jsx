@@ -19,6 +19,7 @@ class ActionSheetBody extends BaseComponent {
 }
 
 ActionSheetBody.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

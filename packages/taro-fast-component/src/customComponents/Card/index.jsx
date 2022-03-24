@@ -255,6 +255,7 @@ class Card extends BaseComponent {
 }
 
 Card.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

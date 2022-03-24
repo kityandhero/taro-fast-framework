@@ -398,6 +398,7 @@ class DataGrid extends BaseComponent {
 }
 
 DataGrid.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

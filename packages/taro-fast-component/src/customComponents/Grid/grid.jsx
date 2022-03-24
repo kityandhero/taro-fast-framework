@@ -61,6 +61,7 @@ class Grid extends BaseComponent {
 }
 
 Grid.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

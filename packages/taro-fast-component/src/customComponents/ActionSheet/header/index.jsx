@@ -20,6 +20,7 @@ class ActionSheetHeader extends BaseComponent {
 }
 
 ActionSheetHeader.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

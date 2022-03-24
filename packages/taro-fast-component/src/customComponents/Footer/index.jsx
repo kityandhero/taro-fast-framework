@@ -108,6 +108,7 @@ class Footer extends BaseComponent {
 }
 
 Footer.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

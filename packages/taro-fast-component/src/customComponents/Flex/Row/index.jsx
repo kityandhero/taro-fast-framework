@@ -82,6 +82,7 @@ class Row extends BaseComponent {
 }
 
 Row.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

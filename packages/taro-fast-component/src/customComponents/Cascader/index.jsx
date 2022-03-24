@@ -273,6 +273,7 @@ class Cascader extends BaseComponent {
 }
 
 Cascader.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

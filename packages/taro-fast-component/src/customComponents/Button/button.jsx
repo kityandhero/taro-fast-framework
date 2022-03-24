@@ -339,6 +339,7 @@ class Button extends BaseComponent {
 }
 
 Button.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

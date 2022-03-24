@@ -431,6 +431,7 @@ class CheckBox extends BaseComponent {
 }
 
 CheckBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

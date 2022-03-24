@@ -53,6 +53,7 @@ class More extends BaseComponent {
 }
 
 More.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

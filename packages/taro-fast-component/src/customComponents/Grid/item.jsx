@@ -46,6 +46,7 @@ class Item extends BaseComponent {
 }
 
 Item.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

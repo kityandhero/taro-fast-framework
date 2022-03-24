@@ -144,6 +144,7 @@ class Badge extends BaseComponent {
 Badge.dot = Symbol();
 
 Badge.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -98,6 +98,7 @@ class Loading extends BaseComponent {
 }
 
 Loading.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

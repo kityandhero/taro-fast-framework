@@ -129,6 +129,7 @@ class Line extends BaseComponent {
 }
 
 Line.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

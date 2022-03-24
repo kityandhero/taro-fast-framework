@@ -206,6 +206,7 @@ class Overlay extends BaseComponent {
 }
 
 Overlay.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

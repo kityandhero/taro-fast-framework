@@ -28,6 +28,7 @@ class HorizontalCenterBox extends BaseComponent {
 }
 
 HorizontalCenterBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

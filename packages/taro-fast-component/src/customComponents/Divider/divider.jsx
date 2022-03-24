@@ -99,6 +99,7 @@ class Divider extends BaseComponent {
 }
 
 Divider.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -212,6 +212,7 @@ class CheckBoxSelector extends BaseComponent {
 }
 
 CheckBoxSelector.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

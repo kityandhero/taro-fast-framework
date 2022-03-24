@@ -194,6 +194,7 @@ class HelpBox extends BaseComponent {
 }
 
 HelpBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

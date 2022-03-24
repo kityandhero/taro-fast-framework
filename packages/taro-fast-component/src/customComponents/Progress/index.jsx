@@ -194,6 +194,7 @@ class Progress extends BaseComponent {
 }
 
 Progress.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

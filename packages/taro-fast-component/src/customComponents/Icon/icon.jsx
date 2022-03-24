@@ -58,6 +58,7 @@ class Icon extends BaseComponent {
 }
 
 Icon.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
