@@ -83,7 +83,7 @@ export default class Index extends BasePageWrapper {
     const { sectionId } = urlParams;
 
     this.setState({
-      sectionId,
+      currentSectionId: sectionId,
       currentSectionIndex: getActiveSectionIndex({
         sectionId,
         sectionList: this.getSectionList(),
@@ -92,12 +92,12 @@ export default class Index extends BasePageWrapper {
   };
 
   initLoadRequestParams = (o) => {
-    const { sectionId } = this.state;
+    const { currentSectionId } = this.state;
 
     return {
       ...o,
       ...{
-        sectionId,
+        sectionId: currentSectionId,
       },
     };
   };
@@ -131,9 +131,10 @@ export default class Index extends BasePageWrapper {
 
     this.reloadData({
       otherState: {
-        sectionId,
+        currentSectionId: sectionId,
         currentSectionIndex,
       },
+      delay: 2100,
     });
   };
 
