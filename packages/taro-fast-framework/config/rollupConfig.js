@@ -12,6 +12,7 @@ const inputFile = {
     'utils/dva': 'src/utils/dva.js',
     'utils/dvaAssist': 'src/utils/dvaAssist.js',
     'utils/actionAssist': 'src/utils/actionAssist.js',
+    'utils/tools': 'src/utils/tools.js',
   },
   ...{
     'framework/index': 'src/framework/index.jsx',

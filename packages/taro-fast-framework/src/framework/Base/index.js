@@ -386,8 +386,6 @@ class Base extends Infrastructure {
               };
             }
 
-            this.setState(willSaveToState);
-
             if (!firstLoadSuccess) {
               this.afterFirstLoadSuccess();
 
@@ -401,6 +399,8 @@ class Base extends Infrastructure {
             }
 
             this.clearRequestingData();
+
+            this.setState(willSaveToState);
           })
           .catch((res) => {
             stopPullDownRefresh();

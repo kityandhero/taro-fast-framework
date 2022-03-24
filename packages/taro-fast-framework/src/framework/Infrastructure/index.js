@@ -224,6 +224,8 @@ class Infrastructure extends ComponentBase {
    */
   backTopThresholdDistance = 0;
 
+  currentInstance = Taro.getCurrentInstance();
+
   constructor(props) {
     super(props);
 
@@ -248,7 +250,7 @@ class Infrastructure extends ComponentBase {
 
   getUrlParams() {
     if (stringIsNullOrWhiteSpace(this.urlParamsCore)) {
-      this.urlParamsCore = Taro.getCurrentInstance().router.params;
+      this.urlParamsCore = this.currentInstance.router.params;
     }
 
     return this.urlParamsCore || {};

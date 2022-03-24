@@ -2,7 +2,18 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { formatDatetime, transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  formatDatetime,
+  transformSize,
+  stringIsNullOrWhiteSpace,
+  showNavigationBarLoading,
+  hideNavigationBarLoading,
+  stopPullDownRefresh,
+  recordError,
+  showErrorMessage,
+  recordObject,
+} from 'taro-fast-common/es/utils/tools';
+import { isEqual, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import {
   Space,
@@ -13,6 +24,7 @@ import {
   ColorText,
   Icon,
 } from 'taro-fast-component/es/customComponents';
+import { checkWhetherAuthorizeFall } from 'taro-fast-framework/es/utils/tools';
 
 import BasePageWrapper from '../BasePageWrapper';
 
@@ -22,7 +34,7 @@ const { IconClock, IconEye } = Icon;
 
 export const classPrefix = `simple-news-section`;
 
-function getActiveSectionIndex({ sectionId, sectionList }) {
+function getInitialSectionIndex({ sectionId, sectionList }) {
   let currentIndex = 0;
 
   sectionList.forEach((item, index) => {
@@ -56,6 +68,12 @@ export default class Index extends BasePageWrapper {
 
   enableBackTop = true;
 
+  sectionId = '';
+
+  sectionList = [];
+
+  initialSectionIndex = 0;
+
   constructor(props) {
     super(props);
 
@@ -63,8 +81,6 @@ export default class Index extends BasePageWrapper {
       ...this.state,
       ...{
         loadApiPath: 'article/pageList',
-        currentSectionId: '',
-        currentSectionIndex: 0,
       },
     };
   }
@@ -82,30 +98,226 @@ export default class Index extends BasePageWrapper {
 
     const { sectionId } = urlParams;
 
-    this.setState({
-      currentSectionId: sectionId,
-      currentSectionIndex: getActiveSectionIndex({
-        sectionId,
-        sectionList: this.getSectionList(),
-      }),
+    this.sectionList = this.getSectionList();
+    this.sectionId = sectionId;
+    this.initialSectionIndex = getInitialSectionIndex({
+      sectionId: this.sectionId,
+      sectionList: this.sectionList,
     });
   };
 
   initLoadRequestParams = (o) => {
-    const { currentSectionId } = this.state;
-
     return {
       ...o,
       ...{
-        sectionId: currentSectionId,
+        sectionId: this.sectionId,
       },
     };
   };
 
-  buildTabList = () => {
-    const sectionList = this.getSectionList();
+  loadFromApi = ({ requestData, callback }) => {
+    let loadApiPath = '';
 
-    const list = sectionList.map((item) => {
+    try {
+      const { dispatch } = this.props;
+
+      const requestingDataPre = this.getRequestingData();
+
+      const loadApiCustomPath = this.adjustLoadApiPath();
+
+      const loadApiPathCustom = stringIsNullOrWhiteSpace(loadApiCustomPath)
+        ? {}
+        : {
+            loadApiPath: loadApiCustomPath,
+          };
+
+      const { loadApiPath: loadApiPathValue, firstLoadSuccess } = {
+        ...this.state,
+        ...loadApiPathCustom,
+      };
+
+      loadApiPath = loadApiPathValue || '';
+
+      // 处理频繁的相同请求
+      if (
+        !isEqual(requestingDataPre, {
+          type: loadApiPath,
+          payload: requestData,
+        })
+      ) {
+        this.setRequestingData({ type: loadApiPath, payload: requestData });
+
+        if (this.enableNavigationBarLoading) {
+          showNavigationBarLoading();
+        }
+
+        dispatch({
+          type: loadApiPath,
+          payload: requestData,
+        })
+          .then(() => {
+            hideNavigationBarLoading();
+            stopPullDownRefresh();
+
+            let willSaveToState = {
+              dataLoading: false,
+              loadSuccess: false,
+              reloading: false,
+              searching: false,
+              refreshing: false,
+              paging: false,
+              dispatchComplete: true,
+            };
+
+            const metaOriginalData = this.getApiData(this.props);
+
+            if (isUndefined(metaOriginalData)) {
+              this.setState(willSaveToState);
+
+              return;
+            }
+
+            this.lastLoadParams = requestData;
+
+            const { dataSuccess, code: remoteCode } = metaOriginalData;
+
+            willSaveToState = {
+              ...willSaveToState,
+              ...{
+                loadSuccess: dataSuccess,
+              },
+            };
+
+            if (dataSuccess) {
+              const {
+                list: metaListDataRemote,
+                data: metaData,
+                extra: metaExtra,
+              } = {
+                ...{
+                  list: [],
+                  data: null,
+                  extra: null,
+                },
+                ...metaOriginalData,
+              };
+
+              const { metaListData: metaListDataPrev } = this.state;
+
+              const metaListData = !this.pagingLoadMode
+                ? [...metaListDataRemote]
+                : !this.useListDataAttachMode
+                ? [...metaListDataRemote]
+                : this.clearListDataBeforeAttach
+                ? [...metaListDataRemote]
+                : [...metaListDataPrev, ...metaListDataRemote];
+
+              willSaveToState = {
+                ...{
+                  metaData: metaData || null,
+                  metaExtra: metaExtra || null,
+                  metaListData: metaListData || [],
+                  metaOriginalData,
+                },
+                ...willSaveToState,
+              };
+
+              try {
+                this.triggerAfterLoadSuccess({
+                  metaData: metaData || null,
+                  metaListData: metaListData || [],
+                  metaExtra: metaExtra || null,
+                  metaOriginalData: metaOriginalData || null,
+                });
+              } catch (e) {
+                recordError(e);
+
+                const text = `${toString(e)},place view in the console`;
+
+                showErrorMessage({
+                  message: text,
+                });
+              }
+            } else {
+              if (checkWhetherAuthorizeFall(remoteCode)) {
+                this.doWhenAuthorizeFail(
+                  metaOriginalData,
+                  this.authorizeFailCallback,
+                );
+              }
+            }
+
+            const { reloading: reloadingComplete } = this.state;
+
+            if (reloadingComplete) {
+              this.afterReloadSuccess();
+              this.afterGetReLoadRequestResult(requestData, metaOriginalData);
+            }
+
+            if (!firstLoadSuccess) {
+              willSaveToState = {
+                ...willSaveToState,
+                ...{
+                  firstLoadSuccess: true,
+                },
+              };
+            }
+
+            if (!firstLoadSuccess) {
+              this.afterFirstLoadSuccess();
+
+              this.afterGetFirstRequestResult(requestData, metaOriginalData);
+            }
+
+            this.afterGetRequestResult(requestData, metaOriginalData);
+
+            if (typeof callback === 'function') {
+              callback();
+            }
+
+            this.clearRequestingData();
+
+            this.setState(willSaveToState);
+          })
+          .catch((res) => {
+            stopPullDownRefresh();
+            hideNavigationBarLoading();
+
+            recordObject(res);
+
+            this.setState({
+              dataLoading: false,
+              loadSuccess: false,
+              reloading: false,
+              searching: false,
+              refreshing: false,
+              paging: false,
+              dispatchComplete: true,
+            });
+          });
+      }
+    } catch (error) {
+      stopPullDownRefresh();
+      hideNavigationBarLoading();
+
+      recordObject({ loadApiPath, requestData });
+
+      this.setState({
+        dataLoading: false,
+        loadSuccess: false,
+        reloading: false,
+        searching: false,
+        refreshing: false,
+        paging: false,
+        dispatchComplete: true,
+      });
+
+      throw error;
+    }
+  };
+
+  buildTabList = () => {
+    const list = this.sectionList.map((item) => {
       const { sectionId, name } = item;
 
       return {
@@ -117,35 +329,25 @@ export default class Index extends BasePageWrapper {
     return list;
   };
 
-  triggerSectionClick = (item) => {
+  triggerSectionClick = (index, e, item) => {
     const { sectionId } = item;
 
-    const currentSectionIndex = getActiveSectionIndex({
-      sectionId,
-      sectionList: this.getSectionList(),
-    });
-
-    console.log({
-      currentSectionIndex,
-    });
+    this.sectionId = sectionId;
 
     this.reloadData({
-      otherState: {
-        currentSectionId: sectionId,
-        currentSectionIndex,
-      },
-      delay: 2100,
+      delay: 1000,
     });
   };
 
   renderFurther() {
-    const { currentSectionIndex, metaListData } = this.state;
+    const { metaListData } = this.state;
 
     return (
       <View className={classNames(classPrefix)}>
         <View className={classNames(`${classPrefix}__tab-containor`)}>
           <Tabs
-            current={currentSectionIndex}
+            showRenderCount
+            current={this.initialSectionIndex}
             scroll
             titleActiveStyle={{
               color: '#2467db',
@@ -156,7 +358,7 @@ export default class Index extends BasePageWrapper {
             underlineHorizontalMargin={20}
             tabList={this.buildTabList()}
             onClick={(index, e, item) => {
-              this.triggerSectionClick(item);
+              this.triggerSectionClick(index, e, item);
             }}
           />
         </View>
