@@ -21,6 +21,8 @@ const ENV = Taro.getEnv();
 const MIN_DISTANCE = 100;
 const MAX_INTERVAL = 10;
 
+const classPrefix = `tfc-tabs`;
+
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
@@ -298,8 +300,8 @@ class Tabs extends BaseComponent {
 
     const tabItems = (tabList || []).map((item, idx) => {
       const itemCls = classNames({
-        'tfc-tabs__item': true,
-        'tfc-tabs__item--active': currentStage === idx,
+        [`${classPrefix}__item`]: true,
+        [`${classPrefix}__item--active`]: currentStage === idx,
       });
 
       const {
@@ -354,7 +356,7 @@ class Tabs extends BaseComponent {
         <View
           className={itemCls}
           id={`tab${this.tabId}${idx}`}
-          key={`tfc-tabs-item-${idx}`}
+          key={`${classPrefix}-item-${idx}`}
           style={styleItem || {}}
           onClick={(e) => {
             this.handleClick(idx, e, item);
@@ -362,7 +364,7 @@ class Tabs extends BaseComponent {
         >
           {titleComponent}
 
-          <View className="tfc-tabs__item-underline"></View>
+          <View className={classNames(`${classPrefix}__item-underline`)}></View>
         </View>
       );
     });
@@ -370,7 +372,7 @@ class Tabs extends BaseComponent {
     return scroll ? (
       <ScrollView
         id={this.tabId}
-        className="tfc-tabs__header"
+        className={classNames(`${classPrefix}__header`)}
         style={heightStyle}
         scrollX={scrollX}
         scrollY={scrollY}
@@ -382,10 +384,12 @@ class Tabs extends BaseComponent {
         scrollIntoView={scrollIntoView}
         enableFlex
       >
-        {tabItems}
+        <View className={classNames(`${classPrefix}__item-container`)}>
+          {tabItems}
+        </View>
       </ScrollView>
     ) : (
-      <View id={this.tabId} className="tfc-tabs__header">
+      <View id={this.tabId} className={classNames(`${classPrefix}__header`)}>
         {tabItems}
       </View>
     );
@@ -440,14 +444,17 @@ class Tabs extends BaseComponent {
 
     return (
       <View
-        className="tfc-tabs__body"
+        className={classNames(`${classPrefix}__body`)}
         onTouchStart={this.handleTouchStart}
         onTouchEnd={this.handleTouchEnd}
         catchMove
         onTouchMove={this.handleTouchMove}
         style={bodyStyle}
       >
-        <View className="tfc-tabs__underline" style={underlineStyle}></View>
+        <View
+          className={classNames(`${classPrefix}__underline`)}
+          style={underlineStyle}
+        ></View>
 
         {tabListAdjust.map((item, index) => {
           const { body } = {
@@ -516,11 +523,11 @@ class Tabs extends BaseComponent {
     };
 
     const containerClassName = classNames(
+      classPrefix,
       {
-        'tfc-tabs': true,
-        'tfc-tabs--scroll': scroll,
-        [`tfc-tabs--${direction}`]: true,
-        [`tfc-tabs--${ENV}`]: true,
+        [`${classPrefix}--scroll`]: scroll,
+        [`${classPrefix}--${direction}`]: true,
+        [`${classPrefix}--${ENV}`]: true,
       },
       className,
     );

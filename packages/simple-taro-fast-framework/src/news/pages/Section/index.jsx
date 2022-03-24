@@ -136,6 +136,7 @@ export default class Index extends BasePageWrapper {
             titleActiveStyle={{
               color: '#2467db',
             }}
+            height="auto"
             underlineColor="#2467db"
             underlineHeight={4}
             underlineHorizontalMargin={20}
