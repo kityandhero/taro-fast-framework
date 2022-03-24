@@ -95,7 +95,10 @@ const config2 = {
 const config3 = {
   tabList: tabNoBodyList,
   onClick: (index, e, item) => {
-    console.log(item);
+    console.log({
+      index,
+      item,
+    });
   },
 };
 
