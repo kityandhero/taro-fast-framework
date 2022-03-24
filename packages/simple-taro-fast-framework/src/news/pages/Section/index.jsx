@@ -2,18 +2,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import {
-  formatDatetime,
-  transformSize,
-  stringIsNullOrWhiteSpace,
-  showNavigationBarLoading,
-  hideNavigationBarLoading,
-  stopPullDownRefresh,
-  recordError,
-  showErrorMessage,
-  recordObject,
-} from 'taro-fast-common/es/utils/tools';
-import { isEqual, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
+import { formatDatetime, transformSize } from 'taro-fast-common/es/utils/tools';
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import {
   Space,
@@ -24,7 +13,6 @@ import {
   ColorText,
   Icon,
 } from 'taro-fast-component/es/customComponents';
-import { checkWhetherAuthorizeFall } from 'taro-fast-framework/es/utils/tools';
 
 import BasePageWrapper from '../BasePageWrapper';
 
@@ -74,6 +62,8 @@ export default class Index extends BasePageWrapper {
 
   initialSectionIndex = 0;
 
+  tabList = [];
+
   constructor(props) {
     super(props);
 
@@ -104,6 +94,15 @@ export default class Index extends BasePageWrapper {
       sectionId: this.sectionId,
       sectionList: this.sectionList,
     });
+
+    this.tabList = this.sectionList.map((item) => {
+      const { sectionId: itemSectionId, name } = item;
+
+      return {
+        sectionId: itemSectionId,
+        title: name,
+      };
+    });
   };
 
   initLoadRequestParams = (o) => {
@@ -115,228 +114,33 @@ export default class Index extends BasePageWrapper {
     };
   };
 
-  loadFromApi = ({ requestData, callback }) => {
-    let loadApiPath = '';
-
-    try {
-      const { dispatch } = this.props;
-
-      const requestingDataPre = this.getRequestingData();
-
-      const loadApiCustomPath = this.adjustLoadApiPath();
-
-      const loadApiPathCustom = stringIsNullOrWhiteSpace(loadApiCustomPath)
-        ? {}
-        : {
-            loadApiPath: loadApiCustomPath,
-          };
-
-      const { loadApiPath: loadApiPathValue, firstLoadSuccess } = {
-        ...this.state,
-        ...loadApiPathCustom,
-      };
-
-      loadApiPath = loadApiPathValue || '';
-
-      // 处理频繁的相同请求
-      if (
-        !isEqual(requestingDataPre, {
-          type: loadApiPath,
-          payload: requestData,
-        })
-      ) {
-        this.setRequestingData({ type: loadApiPath, payload: requestData });
-
-        if (this.enableNavigationBarLoading) {
-          showNavigationBarLoading();
-        }
-
-        dispatch({
-          type: loadApiPath,
-          payload: requestData,
-        })
-          .then(() => {
-            hideNavigationBarLoading();
-            stopPullDownRefresh();
-
-            let willSaveToState = {
-              dataLoading: false,
-              loadSuccess: false,
-              reloading: false,
-              searching: false,
-              refreshing: false,
-              paging: false,
-              dispatchComplete: true,
-            };
-
-            const metaOriginalData = this.getApiData(this.props);
-
-            if (isUndefined(metaOriginalData)) {
-              this.setState(willSaveToState);
-
-              return;
-            }
-
-            this.lastLoadParams = requestData;
-
-            const { dataSuccess, code: remoteCode } = metaOriginalData;
-
-            willSaveToState = {
-              ...willSaveToState,
-              ...{
-                loadSuccess: dataSuccess,
-              },
-            };
-
-            if (dataSuccess) {
-              const {
-                list: metaListDataRemote,
-                data: metaData,
-                extra: metaExtra,
-              } = {
-                ...{
-                  list: [],
-                  data: null,
-                  extra: null,
-                },
-                ...metaOriginalData,
-              };
-
-              const { metaListData: metaListDataPrev } = this.state;
-
-              const metaListData = !this.pagingLoadMode
-                ? [...metaListDataRemote]
-                : !this.useListDataAttachMode
-                ? [...metaListDataRemote]
-                : this.clearListDataBeforeAttach
-                ? [...metaListDataRemote]
-                : [...metaListDataPrev, ...metaListDataRemote];
-
-              willSaveToState = {
-                ...{
-                  metaData: metaData || null,
-                  metaExtra: metaExtra || null,
-                  metaListData: metaListData || [],
-                  metaOriginalData,
-                },
-                ...willSaveToState,
-              };
-
-              try {
-                this.triggerAfterLoadSuccess({
-                  metaData: metaData || null,
-                  metaListData: metaListData || [],
-                  metaExtra: metaExtra || null,
-                  metaOriginalData: metaOriginalData || null,
-                });
-              } catch (e) {
-                recordError(e);
-
-                const text = `${toString(e)},place view in the console`;
-
-                showErrorMessage({
-                  message: text,
-                });
-              }
-            } else {
-              if (checkWhetherAuthorizeFall(remoteCode)) {
-                this.doWhenAuthorizeFail(
-                  metaOriginalData,
-                  this.authorizeFailCallback,
-                );
-              }
-            }
-
-            const { reloading: reloadingComplete } = this.state;
-
-            if (reloadingComplete) {
-              this.afterReloadSuccess();
-              this.afterGetReLoadRequestResult(requestData, metaOriginalData);
-            }
-
-            if (!firstLoadSuccess) {
-              willSaveToState = {
-                ...willSaveToState,
-                ...{
-                  firstLoadSuccess: true,
-                },
-              };
-            }
-
-            if (!firstLoadSuccess) {
-              this.afterFirstLoadSuccess();
-
-              this.afterGetFirstRequestResult(requestData, metaOriginalData);
-            }
-
-            this.afterGetRequestResult(requestData, metaOriginalData);
-
-            if (typeof callback === 'function') {
-              callback();
-            }
-
-            this.clearRequestingData();
-
-            this.setState(willSaveToState);
-          })
-          .catch((res) => {
-            stopPullDownRefresh();
-            hideNavigationBarLoading();
-
-            recordObject(res);
-
-            this.setState({
-              dataLoading: false,
-              loadSuccess: false,
-              reloading: false,
-              searching: false,
-              refreshing: false,
-              paging: false,
-              dispatchComplete: true,
-            });
-          });
-      }
-    } catch (error) {
-      stopPullDownRefresh();
-      hideNavigationBarLoading();
-
-      recordObject({ loadApiPath, requestData });
-
-      this.setState({
-        dataLoading: false,
-        loadSuccess: false,
-        reloading: false,
-        searching: false,
-        refreshing: false,
-        paging: false,
-        dispatchComplete: true,
-      });
-
-      throw error;
-    }
-  };
-
-  buildTabList = () => {
-    const list = this.sectionList.map((item) => {
-      const { sectionId, name } = item;
-
-      return {
-        sectionId,
-        title: name,
-      };
-    });
-
-    return list;
-  };
-
   triggerSectionClick = (index, e, item) => {
     const { sectionId } = item;
 
     this.sectionId = sectionId;
 
-    this.reloadData({
-      delay: 1000,
-    });
+    this.reloadData({ delay: 5000 });
+  };
+
+  buildTab = () => {
+    return (
+      <Tabs
+        showRenderCount
+        current={this.initialSectionIndex}
+        scroll
+        titleActiveStyle={{
+          color: '#2467db',
+        }}
+        height={transformSize(80)}
+        underlineColor="#2467db"
+        underlineHeight={4}
+        underlineHorizontalMargin={20}
+        tabList={this.tabList}
+        onClick={(index, e, item) => {
+          this.triggerSectionClick(index, e, item);
+        }}
+      />
+    );
   };
 
   renderFurther() {
@@ -344,24 +148,7 @@ export default class Index extends BasePageWrapper {
 
     return (
       <View className={classNames(classPrefix)}>
-        <View className={classNames(`${classPrefix}__tab-containor`)}>
-          <Tabs
-            showRenderCount
-            current={this.initialSectionIndex}
-            scroll
-            titleActiveStyle={{
-              color: '#2467db',
-            }}
-            height={transformSize(80)}
-            underlineColor="#2467db"
-            underlineHeight={4}
-            underlineHorizontalMargin={20}
-            tabList={this.buildTabList()}
-            onClick={(index, e, item) => {
-              this.triggerSectionClick(index, e, item);
-            }}
-          />
-        </View>
+        {this.buildTab()}
 
         <View className={classNames(`${classPrefix}__list-containor`)}>
           {this.judgeInitialActivityIndicatorVisible() ? (

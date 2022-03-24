@@ -181,10 +181,14 @@ class ComponentBase extends Component {
     this.doWorkWhenComponentHide();
   }
 
-  increaseCounter() {
+  increaseCounter(callback) {
     const { counter } = this.state;
 
-    this.setState({ counter: counter + 1 });
+    this.setState({ counter: counter + 1 }, () => {
+      if (isFunction(callback)) {
+        callback();
+      }
+    });
   }
 
   doDidMountTask = () => {
