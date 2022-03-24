@@ -30,17 +30,20 @@ const lineCapCollection = ['butt', 'round', 'square'];
 const defaultColor = '#d81e06';
 
 const defaultProps = {
-  style: {},
-  backRingStyle: {},
-  percent: 0,
-  size: 200,
-  color: defaultColor,
-  backRingColor: '#fff',
-  lineCap: 'round',
-  lineWidth: 18,
-  useLineColorGradient: false,
-  lineColorStart: defaultColor,
-  lineColorEnd: defaultColor,
+  ...ComponentBase.defaultProps,
+  ...{
+    style: {},
+    backRingStyle: {},
+    percent: 0,
+    size: 200,
+    color: defaultColor,
+    backRingColor: '#fff',
+    lineCap: 'round',
+    lineWidth: 18,
+    useLineColorGradient: false,
+    lineColorStart: defaultColor,
+    lineColorEnd: defaultColor,
+  },
 };
 
 class Circle extends ComponentBase {
@@ -411,7 +414,6 @@ class Circle extends ComponentBase {
 }
 
 Circle.defaultProps = {
-  ...ComponentBase.defaultProps,
   ...defaultProps,
 };
 

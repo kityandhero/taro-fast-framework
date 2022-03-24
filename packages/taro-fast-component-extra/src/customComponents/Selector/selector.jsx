@@ -10,12 +10,15 @@ const { IconCheck } = Icon;
 const classPrefix = `tfc-selector`;
 
 const defaultProps = {
-  multiple: false,
-  value: [],
-  options: [],
-  columns: 4,
-  disabled: false,
-  onChange: null,
+  ...ComponentBase.defaultProps,
+  ...{
+    multiple: false,
+    value: [],
+    options: [],
+    columns: 4,
+    disabled: false,
+    onChange: null,
+  },
 };
 
 class Selector extends ComponentBase {
@@ -149,7 +152,6 @@ class Selector extends ComponentBase {
 }
 
 Selector.defaultProps = {
-  ...ComponentBase.defaultProps,
   ...defaultProps,
 };
 
