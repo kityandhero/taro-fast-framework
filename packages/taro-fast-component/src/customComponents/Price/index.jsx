@@ -11,18 +11,15 @@ import './index.less';
 const classPrefix = `tfc-price`;
 
 const defaultProps = {
-  ...BaseComponent.defaultProps,
-  ...{
-    price: 0,
-    bodyStyle: {},
-    itemStyle: {},
-    prefix: '',
-    prefixStyle: {},
-    integerPartStyle: {},
-    pointStyle: {},
-    decimalPartStyle: {},
-    strikethrough: false,
-  },
+  price: 0,
+  bodyStyle: {},
+  itemStyle: {},
+  prefix: '',
+  prefixStyle: {},
+  integerPartStyle: {},
+  pointStyle: {},
+  decimalPartStyle: {},
+  strikethrough: false,
 };
 
 class Price extends BaseComponent {
@@ -100,6 +97,7 @@ class Price extends BaseComponent {
 }
 
 Price.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
