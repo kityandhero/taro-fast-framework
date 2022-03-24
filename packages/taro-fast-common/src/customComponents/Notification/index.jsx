@@ -168,6 +168,7 @@ class Notification extends ComponentBase {
 }
 
 Notification.defaultProps = {
+  ...ComponentBase.defaultProps,
   ...defaultProps,
 };
 
