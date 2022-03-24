@@ -1,8 +1,15 @@
 import { executiveRequest } from '../utils/request';
 
-export async function getOverviewData(params) {
+export async function pageListData(params) {
   return executiveRequest({
-    api: `/news/integration/overview`,
+    api: `/news/article/pageList`,
+    params,
+  });
+}
+
+export async function getData(params) {
+  return executiveRequest({
+    api: `/news/article/get`,
     params,
   });
 }

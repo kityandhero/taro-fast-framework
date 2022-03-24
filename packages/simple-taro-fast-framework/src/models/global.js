@@ -19,6 +19,7 @@ export default {
       needSyncUserInfo: false,
       globalQuery: { path: '', query: {}, scene: 0 },
       rankList: [],
+      sectionList: [],
     },
   },
 
@@ -56,10 +57,11 @@ export default {
         const { dataSuccess, data: metaData } = data;
 
         if (dataSuccess) {
-          const { rankList } = metaData;
+          const { rankList, sectionList } = metaData;
 
           result = {
             rankList,
+            sectionList,
           };
 
           setMetaDataCache(result);

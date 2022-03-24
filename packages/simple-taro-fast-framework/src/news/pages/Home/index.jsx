@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import {
   Space,
@@ -16,11 +16,12 @@ import {
   More,
 } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '../../../customComponents/PageWrapper';
+import BasePageWrapper from '../BasePageWrapper';
 
 import { classPrefix, buildItem } from './tools';
 
 import './index.less';
+import { pathCollection } from '../../../customConfig/config';
 
 const boxStyle = {
   padding: 'var(--tfc-20) 0',
@@ -47,7 +48,7 @@ definePageConfig({
   news,
   global,
 }))
-export default class Index extends PageWrapper {
+export default class Index extends BasePageWrapper {
   enablePullDownRefresh = true;
 
   enableBackTop = true;
@@ -107,6 +108,12 @@ export default class Index extends PageWrapper {
     );
 
     return [...list, ...list, ...list, ...list, ...list];
+  };
+
+  goToSection = (item) => {
+    const { sectionId } = item;
+
+    navigateTo(`${pathCollection.news.section.path}?sectionId=${sectionId}`);
   };
 
   renderFurther() {
@@ -202,7 +209,13 @@ export default class Index extends PageWrapper {
                     border={false}
                     bodyBorder={false}
                     space={false}
-                    extra={<More />}
+                    extra={
+                      <More
+                        onClick={() => {
+                          this.goToSection(item);
+                        }}
+                      />
+                    }
                     extraStyle={{ padding: 0 }}
                   >
                     {buildItem({

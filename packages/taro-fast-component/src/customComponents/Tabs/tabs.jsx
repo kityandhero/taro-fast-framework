@@ -380,6 +380,7 @@ class Tabs extends BaseComponent {
         scrollLeft={scrollLeft}
         scrollTop={scrollTop}
         scrollIntoView={scrollIntoView}
+        enableFlex
       >
         {tabItems}
       </ScrollView>

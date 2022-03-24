@@ -339,7 +339,7 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Tabs 可配置项以及默认值"
           config={Tabs.defaultProps}
-          labelWidth={360}
+          labelWidth={340}
         />
       </Space>
     );

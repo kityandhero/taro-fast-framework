@@ -4,16 +4,23 @@ import {
   handlePageListDataAssist,
 } from 'taro-fast-framework/es/utils/requestAssistor';
 
-import { getOverviewData } from '../services/news';
+import { pageListData, getData } from '../services/article';
 
 export default {
-  namespace: 'news',
+  namespace: 'article',
 
   state: {},
 
   effects: {
-    *getOverview({ payload }, { call, put }) {
-      const response = yield call(getOverviewData, payload);
+    *pageList({ payload }, { call, put }) {
+      const response = yield call(pageListData, payload);
+      yield put({
+        type: 'handlePageListData',
+        payload: response,
+      });
+    },
+    *get({ payload }, { call, put }) {
+      const response = yield call(getData, payload);
       yield put({
         type: 'handleCommonData',
         payload: response,

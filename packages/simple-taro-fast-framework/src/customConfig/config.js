@@ -332,6 +332,9 @@ const newsPathCollection = {
   home: {
     path: '/news/pages/home/index',
   },
+  section: {
+    path: '/news/pages/section/index',
+  },
 };
 
 export const pathCollection = {
