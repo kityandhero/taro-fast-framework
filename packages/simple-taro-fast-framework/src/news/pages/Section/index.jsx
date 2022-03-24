@@ -119,7 +119,7 @@ export default class Index extends BasePageWrapper {
 
     this.sectionId = sectionId;
 
-    this.reloadData({ delay: 5000 });
+    this.reloadData({ delay: 500 });
   };
 
   buildTab = () => {
