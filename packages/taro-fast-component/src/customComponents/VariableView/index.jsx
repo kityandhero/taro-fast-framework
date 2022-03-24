@@ -656,6 +656,7 @@ class VariableView extends BaseComponent {
 }
 
 VariableView.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

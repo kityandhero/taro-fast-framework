@@ -63,6 +63,7 @@ class TranslucentBox extends BaseComponent {
 }
 
 TranslucentBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

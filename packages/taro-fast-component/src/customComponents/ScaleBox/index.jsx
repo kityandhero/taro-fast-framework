@@ -93,6 +93,7 @@ class ScaleBox extends BaseComponent {
 }
 
 ScaleBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

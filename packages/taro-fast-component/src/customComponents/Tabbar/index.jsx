@@ -16,7 +16,6 @@ import './index.less';
 const classPrefix = `tfc-tabbar`;
 
 const defaultProps = {
-  hidden: false,
   style: {},
   // 当前匹配项的name
   value: null,
@@ -199,6 +198,7 @@ class Tabbar extends BaseComponent {
 }
 
 Tabbar.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

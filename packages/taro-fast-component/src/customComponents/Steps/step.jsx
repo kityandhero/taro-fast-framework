@@ -53,6 +53,7 @@ class Step extends BaseComponent {
 }
 
 Step.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -180,6 +180,7 @@ class Steps extends BaseComponent {
 }
 
 Steps.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

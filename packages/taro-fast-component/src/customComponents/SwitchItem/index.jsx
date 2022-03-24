@@ -13,7 +13,6 @@ const defaultProps = {
   prefix: null,
   border: true,
   extraContainerStyle: {},
-  hidden: false,
   disabled: false,
   checked: false,
   beforeChange: null,
@@ -82,6 +81,7 @@ class SwitchItem extends BaseComponent {
 }
 
 SwitchItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -19,7 +19,6 @@ const defaultProps = {
   digits: 0,
   max: 100000,
   disabled: false,
-  hidden: false,
   editable: true,
   useBackground: true,
   backgroundColor: '',
@@ -96,6 +95,7 @@ class StepperItem extends BaseComponent {
 }
 
 StepperItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

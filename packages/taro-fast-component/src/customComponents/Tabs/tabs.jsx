@@ -537,6 +537,7 @@ class Tabs extends BaseComponent {
 }
 
 Tabs.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

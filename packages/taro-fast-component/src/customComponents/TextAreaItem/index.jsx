@@ -28,7 +28,6 @@ const defaultProps = {
   description: null,
   prefix: null,
   border: true,
-  hidden: false,
   disabled: false,
   editable: true,
   position: 'bottom',
@@ -300,6 +299,7 @@ class TextAreaItem extends BaseComponent {
 }
 
 TextAreaItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

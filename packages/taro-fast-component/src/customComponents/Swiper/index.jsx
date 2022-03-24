@@ -33,7 +33,6 @@ const defaultProps = {
   current: 0,
   enableTouch: false,
   autoplay: false,
-  hidden: false,
   circular: false,
   vertical: false,
   className: '',
@@ -851,6 +850,7 @@ class Swiper extends BaseComponent {
 }
 
 Swiper.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

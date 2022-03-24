@@ -43,17 +43,12 @@ class SwiperItemContainer extends BaseComponent {
       return null;
     }
 
-    const { hidden, style: styleCustom } = {
+    const { style: styleCustom } = {
       ...{
-        hidden: false,
         style: {},
       },
       ...data,
     };
-
-    if (hidden) {
-      return null;
-    }
 
     const item = this.buildItem(data, itemIndex);
 
@@ -80,6 +75,7 @@ class SwiperItemContainer extends BaseComponent {
 }
 
 SwiperItemContainer.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

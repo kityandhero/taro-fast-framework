@@ -24,7 +24,6 @@ const defaultProps = {
   icon: <IconSearch size={28} color="#6b6ead" />,
   placeholder: '请输入搜索关键词',
   disabled: false,
-  hidden: false,
   valueStyle: {},
   placeholderStyle: {},
   showSearch: true,
@@ -195,6 +194,7 @@ class SearchBar extends BaseComponent {
 }
 
 SearchBar.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

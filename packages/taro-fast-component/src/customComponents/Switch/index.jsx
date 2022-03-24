@@ -30,7 +30,6 @@ const defaultProps = {
   uncheckedText: '',
   size: 2,
   color: '',
-  hidden: false,
   onChange: null,
   afterChange: null,
 };
@@ -243,6 +242,7 @@ class Switch extends BaseComponent {
 }
 
 Switch.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

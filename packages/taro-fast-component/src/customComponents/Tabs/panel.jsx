@@ -62,6 +62,7 @@ class TabPanel extends BaseComponent {
 }
 
 TabPanel.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

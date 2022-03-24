@@ -185,6 +185,7 @@ class ThumbnailBox extends BaseComponent {
 }
 
 ThumbnailBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

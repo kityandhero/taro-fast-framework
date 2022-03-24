@@ -5,6 +5,8 @@ import { View } from '@tarojs/components';
 import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
+import BaseComponent from '../BaseComponent';
+
 import { SpaceContext, getDirection } from './tools';
 import SpaceItem from './spaceItem';
 
@@ -127,5 +129,6 @@ export const Space = (props) => {
 };
 
 Space.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };

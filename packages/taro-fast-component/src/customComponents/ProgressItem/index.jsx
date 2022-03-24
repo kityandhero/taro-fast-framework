@@ -19,7 +19,6 @@ const layoutCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
   layout: '',
-  hidden: false,
   label: '',
   labelStyle: {},
   labelContainerStyle: {},
@@ -192,6 +191,7 @@ class ProgressItem extends BaseComponent {
 }
 
 ProgressItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -10,6 +10,8 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 
+import BaseComponent from '../BaseComponent';
+
 import CenterBox from '../CenterBox';
 import Icon from '../Icon';
 
@@ -36,6 +38,7 @@ const defaultProps = {
 
 export const Stepper = (p) => {
   const props = mergeProps(defaultProps, p);
+
   const {
     disabled,
     step,
@@ -211,5 +214,6 @@ export const Stepper = (p) => {
 };
 
 Stepper.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };

@@ -108,6 +108,7 @@ class VerticalBox extends BaseComponent {
 }
 
 VerticalBox.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -56,6 +56,7 @@ class SwiperIndicator extends BaseComponent {
 }
 
 SwiperIndicator.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -31,7 +31,6 @@ const defaultProps = {
   fill: 'solid',
   shape: 'rectangle',
   style: {},
-  hidden: false,
   closeable: false,
   closeColor: '#ccc',
   onClick: null,
@@ -142,6 +141,7 @@ class Tag extends BaseComponent {
 }
 
 Tag.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

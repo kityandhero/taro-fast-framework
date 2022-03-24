@@ -256,6 +256,7 @@ class PullIndicator extends BaseComponent {
 }
 
 PullIndicator.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

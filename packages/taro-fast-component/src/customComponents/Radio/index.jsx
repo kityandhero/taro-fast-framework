@@ -415,6 +415,7 @@ class Radio extends BaseComponent {
 }
 
 Radio.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 
 import { isObject } from 'taro-fast-common/es/utils/typeCheck';
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 const getClassNames = (name) => ({
   enter: `tfc-${name}-enter tfc-${name}-enter-active enter-class enter-active-class`,
@@ -10,22 +11,25 @@ const getClassNames = (name) => ({
 });
 
 export const defaultProps = {
-  classes: '',
-  show: false,
-  duration: 300,
-  name: 'fade',
-  onBeforeEnter: null,
-  onBeforeLeave: null,
-  onAfterEnter: null,
-  onAfterLeave: null,
-  onEnter: null,
-  onLeave: null,
-  enterClass: '',
-  enterActiveClass: '',
-  enterToClass: '',
-  leaveClass: '',
-  leaveActiveClass: '',
-  leaveToClass: '',
+  ...ComponentBase.defaultProps,
+  ...{
+    classes: '',
+    show: false,
+    duration: 300,
+    name: 'fade',
+    onBeforeEnter: null,
+    onBeforeLeave: null,
+    onAfterEnter: null,
+    onAfterLeave: null,
+    onEnter: null,
+    onLeave: null,
+    enterClass: '',
+    enterActiveClass: '',
+    enterToClass: '',
+    leaveClass: '',
+    leaveActiveClass: '',
+    leaveToClass: '',
+  },
 };
 
 export function useTransition({

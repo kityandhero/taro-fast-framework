@@ -27,7 +27,6 @@ const defaultProps = {
   active: false,
   color: '#606266',
   activeColor: '',
-  hidden: false,
   onClick: null,
 };
 
@@ -145,6 +144,7 @@ class TabbarItem extends BaseComponent {
 }
 
 TabbarItem.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 

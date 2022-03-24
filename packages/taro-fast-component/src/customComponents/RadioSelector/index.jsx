@@ -28,7 +28,6 @@ const defaultProps = {
   placeholderStyle: {},
   disabled: false,
   border: true,
-  hidden: false,
   options: [],
   position: 'bottom',
   closeIcon: <IconCloseCircle size={36} color="#ccc" />,
@@ -206,6 +205,7 @@ class RadioSelector extends BaseComponent {
 }
 
 RadioSelector.defaultProps = {
+  ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
