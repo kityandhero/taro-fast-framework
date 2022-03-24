@@ -25,6 +25,40 @@ const classPrefix = `tfc-tabs`;
 
 const directionCollection = ['horizontal', 'vertical'];
 
+function getScrollIntoView({ tabId, scroll, index }) {
+  const result = {};
+
+  if (scroll) {
+    const scrollIntoViewId = `tab${tabId}${Math.max(index - 1, 0)}`;
+
+    // 标签栏滚动
+    switch (ENV) {
+      case Taro.ENV_TYPE.WEAPP:
+        result.scrollIntoView = scrollIntoViewId;
+
+        break;
+
+      case Taro.ENV_TYPE.ALIPAY:
+        break;
+
+      case Taro.ENV_TYPE.SWAN:
+        result.scrollIntoView = scrollIntoViewId;
+
+        break;
+
+      case Taro.ENV_TYPE.WEB:
+        break;
+
+      default:
+        console.warn('Tab 组件在该环境还未适配');
+
+        break;
+    }
+  }
+
+  return result;
+}
+
 const defaultProps = {
   style: {},
   className: '',
@@ -47,7 +81,8 @@ const defaultProps = {
    * Tab 高度，当 tabDirection='vertical' 时，需要设置；
    * 当 tabDirection='horizontal' 时，会自动根据内容撑开，请勿设置
    */
-  height: '',
+  horizontalTabHeight: 82,
+  verticalHeight: 100,
   /**
    * 当前选中的标签索引值，从 0 计数，开发者需要通过 onClick 事件来改变 current，从而切换 tab
    * @default 0
@@ -106,18 +141,24 @@ class Tabs extends BaseComponent {
   constructor(props) {
     super(props);
 
-    const { current } = props;
+    this.tabId = getGuid();
+
+    const { scroll, current } = props;
 
     this.state = {
-      currentFlag: current,
-      currentStage: current,
-      scrollFlag: false,
-      scrollLeft: 0,
-      scrollTop: 0,
-      scrollIntoView: '',
+      ...this.state,
+      ...{
+        currentFlag: current,
+        currentStage: current,
+        scrollLeft: 0,
+        scrollTop: 0,
+      },
+      ...getScrollIntoView({
+        scroll,
+        index: current,
+        tabId: this.tabId,
+      }),
     };
-
-    this.tabId = getGuid();
 
     this.touchDot = 0;
 
@@ -129,14 +170,15 @@ class Tabs extends BaseComponent {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { current: currentNext, scroll: scrollNext } = nextProps;
-    const { currentFlag: currentPrev, scrollFlag: scrollPrev } = prevState;
+    const { current: currentNext } = nextProps;
+    const { currentFlag: currentPrev } = prevState;
 
-    if (currentNext !== currentPrev || scrollNext !== scrollPrev) {
+    if (currentNext !== currentPrev) {
       return {
-        currentFlag: currentNext,
-        currentStage: currentNext,
-        scrollFlag: scrollNext,
+        ...{
+          currentFlag: currentNext,
+          currentStage: currentNext,
+        },
       };
     }
 
@@ -144,11 +186,7 @@ class Tabs extends BaseComponent {
   }
 
   doWorkAfterDidMount = () => {
-    const { currentStage } = this.state;
-
     this.getTabHeaderRef();
-
-    this.updateScroll(currentStage);
   };
 
   doWorkBeforeUnmount = () => {
@@ -159,7 +197,12 @@ class Tabs extends BaseComponent {
   doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
     this.getTabHeaderRef();
 
-    this.updateScroll();
+    const { currentFlag: currentFlagPrev } = preState;
+    const { currentFlag: currentFlagNext } = this.state;
+
+    if (currentFlagPrev !== currentFlagNext) {
+      this.updateScroll();
+    }
 
     return null;
   };
@@ -175,15 +218,21 @@ class Tabs extends BaseComponent {
   };
 
   updateScroll = () => {
-    if (this.props.scroll) {
+    const { scroll } = this.props;
+
+    if (scroll) {
       const { currentStage } = this.state;
+
+      const stateWillChange = getScrollIntoView({
+        scroll,
+        index: currentStage,
+        tabId: this.tabId,
+      });
 
       // 标签栏滚动
       switch (ENV) {
         case Taro.ENV_TYPE.WEAPP:
-          this.setState({
-            scrollIntoView: `tab${this.tabId}${Math.max(currentStage - 1, 0)}`,
-          });
+          this.setState(stateWillChange);
 
           break;
 
@@ -191,15 +240,14 @@ class Tabs extends BaseComponent {
           break;
 
         case Taro.ENV_TYPE.SWAN:
-          this.setState({
-            scrollIntoView: `tab${this.tabId}${Math.max(currentStage - 1, 0)}`,
-          });
+          this.setState(stateWillChange);
 
           break;
 
         case Taro.ENV_TYPE.WEB:
           const indexWEB = Math.max(currentStage - 1, 0);
           const prevTabItem = this.tabHeaderRef.childNodes[indexWEB];
+
           prevTabItem &&
             this.setState({
               scrollTop: prevTabItem.offsetTop,
@@ -217,11 +265,22 @@ class Tabs extends BaseComponent {
   };
 
   handleClick = (index, event, item) => {
-    const { onClick } = this.props;
+    const { scroll, onClick } = this.props;
 
-    this.setState({
-      currentStage: index,
-    });
+    const currentStage = index;
+
+    const stateWillChange = {
+      ...{
+        currentStage,
+      },
+      ...getScrollIntoView({
+        scroll,
+        index,
+        tabId: this.tabId,
+      }),
+    };
+
+    this.setState(stateWillChange);
 
     if (isFunction(onClick)) {
       onClick(index, event, item);
@@ -289,12 +348,29 @@ class Tabs extends BaseComponent {
   };
 
   buildTabItemList = () => {
-    const { titleStyle, titleActiveStyle, height, tabList, scroll } =
-      this.props;
-    const { currentStage, scrollLeft, scrollTop, scrollIntoView } = this.state;
+    const {
+      titleStyle,
+      titleActiveStyle,
+      horizontalTabHeight,
+      verticalHeight,
+      tabList,
+      scroll,
+    } = this.props;
+    const { currentStage, scrollIntoView } = this.state;
 
     const direction = this.getDirection();
-    const heightStyle = { height };
+    const tabHeightStyle =
+      direction === 'horizontal'
+        ? {
+            height: transformSize(
+              horizontalTabHeight < defaultProps.horizontalTabHeight
+                ? defaultProps.horizontalTabHeight
+                : horizontalTabHeight,
+            ),
+          }
+        : {
+            height: transformSize(verticalHeight),
+          };
     const scrollX = direction === 'horizontal';
     const scrollY = direction === 'vertical';
 
@@ -373,31 +449,37 @@ class Tabs extends BaseComponent {
       <ScrollView
         id={this.tabId}
         className={classNames(`${classPrefix}__header`)}
-        style={heightStyle}
+        style={tabHeightStyle}
         scrollX={scrollX}
         scrollY={scrollY}
         scrollWithAnimation
         enhanced
         showScrollbar={false}
-        scrollLeft={scrollLeft}
-        scrollTop={scrollTop}
         scrollIntoView={scrollIntoView}
         enableFlex
       >
-        <View className={classNames(`${classPrefix}__item-container`)}>
-          {tabItems}
-        </View>
+        {tabItems}
       </ScrollView>
     ) : (
-      <View id={this.tabId} className={classNames(`${classPrefix}__header`)}>
+      <View
+        id={this.tabId}
+        className={classNames(`${classPrefix}__header`)}
+        style={tabHeightStyle}
+      >
         {tabItems}
       </View>
     );
   };
 
   buildPanelList = () => {
-    const { height, animated, showPanel, tabList, panelStyle, panelClassName } =
-      this.props;
+    const {
+      verticalHeight,
+      animated,
+      showPanel,
+      tabList,
+      panelStyle,
+      panelClassName,
+    } = this.props;
     const { currentStage } = this.state;
 
     if (!showPanel) {
@@ -412,7 +494,12 @@ class Tabs extends BaseComponent {
 
     const direction = this.getDirection();
 
-    const heightStyle = { height };
+    const verticalHeightStyle =
+      direction === 'vertical'
+        ? {
+            height: transformSize(verticalHeight),
+          }
+        : {};
 
     const underlineStyle = {
       height:
@@ -435,7 +522,7 @@ class Tabs extends BaseComponent {
         transform: transformStyle,
         '-webkit-transform': transformStyle,
       },
-      ...heightStyle,
+      ...verticalHeightStyle,
     };
 
     if (!animated) {
@@ -490,17 +577,19 @@ class Tabs extends BaseComponent {
       underlineHorizontalMargin,
       underlineColor,
       underlineActiveColor,
-      height,
+      verticalHeight,
       scroll,
     } = this.props;
 
     const direction = this.getDirection();
 
-    const heightStyle = { height };
-
     const containerStyle = {
       ...style,
-      ...heightStyle,
+      ...(direction === 'vertical'
+        ? {
+            height: transformSize(verticalHeight),
+          }
+        : {}),
       ...(underlineHorizontalMargin > 0
         ? {
             '--underline-width': `calc(100% - ${transformSize(

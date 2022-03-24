@@ -22,6 +22,20 @@ const { IconClock, IconEye } = Icon;
 
 export const classPrefix = `simple-news-section`;
 
+function getActiveSectionIndex({ sectionId, sectionList }) {
+  let currentIndex = 0;
+
+  sectionList.forEach((item, index) => {
+    const { sectionId: itemSectionId } = item;
+
+    if (itemSectionId === sectionId) {
+      currentIndex = index;
+    }
+  });
+
+  return currentIndex;
+}
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '新闻应用--栏目页',
@@ -68,25 +82,12 @@ export default class Index extends BasePageWrapper {
 
     const { sectionId } = urlParams;
 
-    let currentIndex = 0;
-
-    const sectionList = this.getSectionList();
-
-    sectionList.forEach((item, index) => {
-      const { sectionId: itemSectionId } = item;
-
-      if (itemSectionId === sectionId) {
-        currentIndex = index;
-      }
-    });
-
-    console.log({
-      currentIndex,
-    });
-
     this.setState({
       sectionId,
-      currentSectionIndex: currentIndex,
+      currentSectionIndex: getActiveSectionIndex({
+        sectionId,
+        sectionList: this.getSectionList(),
+      }),
     });
   };
 
@@ -119,9 +120,19 @@ export default class Index extends BasePageWrapper {
   triggerSectionClick = (item) => {
     const { sectionId } = item;
 
+    const currentSectionIndex = getActiveSectionIndex({
+      sectionId,
+      sectionList: this.getSectionList(),
+    });
+
+    console.log({
+      currentSectionIndex,
+    });
+
     this.reloadData({
       otherState: {
         sectionId,
+        currentSectionIndex,
       },
     });
   };
@@ -131,7 +142,7 @@ export default class Index extends BasePageWrapper {
 
     return (
       <View className={classNames(classPrefix)}>
-        <Space direction="vertical" fillWidth>
+        <View className={classNames(`${classPrefix}__tab-containor`)}>
           <Tabs
             current={currentSectionIndex}
             scroll
@@ -147,107 +158,105 @@ export default class Index extends BasePageWrapper {
               this.triggerSectionClick(item);
             }}
           />
+        </View>
 
-          <View className={classNames(`${classPrefix}__list-containor`)}>
-            {this.judgeInitialActivityIndicatorVisible() ? (
-              this.buildInitialActivityIndicator({})
-            ) : metaListData.length === 0 ? (
-              this.buildEmptyPlaceholder({
-                description: '还没有数据哦',
-              })
-            ) : (
-              <Space direction="vertical" fillWidth>
-                {metaListData.map((item) => {
-                  const {
-                    articleId,
-                    title,
-                    description,
-                    image,
-                    accessCount,
-                    createTime,
-                  } = item;
+        <View className={classNames(`${classPrefix}__list-containor`)}>
+          {this.judgeInitialActivityIndicatorVisible() ? (
+            this.buildInitialActivityIndicator({})
+          ) : metaListData.length === 0 ? (
+            this.buildEmptyPlaceholder({
+              description: '还没有数据哦',
+            })
+          ) : (
+            <Space direction="vertical" fillWidth>
+              {metaListData.map((item) => {
+                const {
+                  articleId,
+                  title,
+                  description,
+                  image,
+                  accessCount,
+                  createTime,
+                } = item;
 
-                  return (
-                    <FlexBox
-                      key={`article_${articleId}`}
-                      flexAuto="right"
-                      left={
-                        <View style={{ width: transformSize(260) }}>
-                          <ImageBox src={image} aspectRatio={0.74} />
-                        </View>
-                      }
-                      rightStyle={{
-                        paddingLeft: transformSize(28),
-                      }}
-                      right={
-                        <FlexBox
-                          style={{ width: '100%', height: '100%' }}
-                          flexAuto="top"
-                          verticalHeight={300}
-                          top={
+                return (
+                  <FlexBox
+                    key={`article_${articleId}`}
+                    flexAuto="right"
+                    left={
+                      <View style={{ width: transformSize(260) }}>
+                        <ImageBox src={image} aspectRatio={0.74} />
+                      </View>
+                    }
+                    rightStyle={{
+                      paddingLeft: transformSize(28),
+                    }}
+                    right={
+                      <FlexBox
+                        style={{ width: '100%', height: '100%' }}
+                        flexAuto="top"
+                        verticalHeight={300}
+                        top={
+                          <Ellipsis
+                            line={2}
+                            style={{
+                              height: transformSize(100),
+                              fontSize: transformSize(32),
+                              fontWeight: '700',
+                              lineHeight: transformSize(50),
+                              color: '#333',
+                            }}
+                          >
+                            {title}
+                          </Ellipsis>
+                        }
+                        bottom={
+                          <>
                             <Ellipsis
-                              line={2}
+                              line={1}
                               style={{
-                                height: transformSize(100),
-                                fontSize: transformSize(32),
-                                fontWeight: '700',
-                                lineHeight: transformSize(50),
-                                color: '#333',
+                                color: '#afb4b5',
+                                marginBottom: transformSize(14),
                               }}
                             >
-                              {title}
+                              {description}
                             </Ellipsis>
-                          }
-                          bottom={
-                            <>
-                              <Ellipsis
-                                line={1}
-                                style={{
-                                  color: '#afb4b5',
-                                  marginBottom: transformSize(14),
-                                }}
-                              >
-                                {description}
-                              </Ellipsis>
 
-                              <FlexBox
-                                flexAuto="right"
-                                leftStyle={{
-                                  width: transformSize(220),
-                                }}
-                                left={
-                                  <ColorText
-                                    color="#afb4b5"
-                                    fontSize={24}
-                                    icon={
-                                      <IconClock size={24} color="#afb4b5" />
-                                    }
-                                    text={formatDatetime({
-                                      data: createTime,
-                                      fmt: datetimeFormat.yearMonthDay,
-                                    })}
-                                  />
-                                }
-                                right={
-                                  <ColorText
-                                    color="#afb4b5"
-                                    fontSize={24}
-                                    icon={<IconEye size={24} color="#afb4b5" />}
-                                    text={accessCount}
-                                  />
-                                }
-                              />
-                            </>
-                          }
-                        />
-                      }
-                    />
-                  );
-                })}
-              </Space>
-            )}
-          </View>
-        </Space>
+                            <FlexBox
+                              flexAuto="right"
+                              leftStyle={{
+                                width: transformSize(220),
+                              }}
+                              left={
+                                <ColorText
+                                  color="#afb4b5"
+                                  fontSize={24}
+                                  icon={<IconClock size={24} color="#afb4b5" />}
+                                  text={formatDatetime({
+                                    data: createTime,
+                                    fmt: datetimeFormat.yearMonthDay,
+                                  })}
+                                />
+                              }
+                              right={
+                                <ColorText
+                                  color="#afb4b5"
+                                  fontSize={24}
+                                  icon={<IconEye size={24} color="#afb4b5" />}
+                                  text={accessCount}
+                                />
+                              }
+                            />
+                          </>
+                        }
+                      />
+                    }
+                  />
+                );
+              })}
+            </Space>
+          )}
+        </View>
       </View>
     );
   }

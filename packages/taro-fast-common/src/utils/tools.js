@@ -2088,7 +2088,11 @@ export function getFields(selector, context = null) {
 
     query
       .select(selector)
-      .fields({ node: true, size: true })
+      .fields({
+        node: true,
+        size: true,
+        properties: ['scrollX', 'scrollY'],
+      })
       .exec((rect = []) => {
         return resolve(rect[0]);
       });
@@ -2122,6 +2126,23 @@ export function getAllRect(selector, context = null) {
       .selectAll(selector)
       .boundingClientRect()
       .exec((rect = []) => resolve(rect[0]));
+  });
+}
+
+export function getScrollOffset(selector, context = null) {
+  return new Promise((resolve) => {
+    let query = createSelectorQuery();
+
+    if (context) {
+      query = query.in(context);
+    }
+
+    query
+      .select(selector)
+      .scrollOffset()
+      .exec((rect = []) => {
+        return resolve(rect[0]);
+      });
   });
 }
 

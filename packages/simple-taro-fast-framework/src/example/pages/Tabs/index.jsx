@@ -68,15 +68,15 @@ const tabDecorationList = tabNoBodyList.map((item, index) => {
   return item;
 });
 
-const tabNoBodyScrollList = buildTabList(6, false, {});
+const tabNoBodyScrollList = buildTabList(9, false, {});
 
-const tabScrollList = buildTabList(6, true, {
+const tabScrollList = buildTabList(9, true, {
   fontSize: transformSize(28),
   textAlign: 'center',
   padding: `${transformSize(100)} ${transformSize(50)}`,
 });
 
-const tabVerticalList = buildTabList(6, true, {
+const tabVerticalList = buildTabList(9, true, {
   fontSize: transformSize(28),
   textAlign: 'center',
   height: transformSize(200),
@@ -128,9 +128,7 @@ const config6 = {
   tabList: tabNoBodyList,
 };
 
-const config7 = {
-  tabList: tabDecorationList,
-};
+const config7 = { height: transformSize(80), tabList: tabDecorationList };
 
 const config8 = {
   showPanel: true,
@@ -152,7 +150,7 @@ const config11 = {
   current: 3,
   scroll: true,
   showPanel: true,
-  height: transformSize(200),
+  verticalHeight: transformSize(200),
   direction: 'vertical',
   tabList: tabVerticalList,
 };
@@ -339,7 +337,7 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Tabs 可配置项以及默认值"
           config={Tabs.defaultProps}
-          labelWidth={340}
+          labelWidth={360}
         />
       </Space>
     );
