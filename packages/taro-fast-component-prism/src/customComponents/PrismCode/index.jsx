@@ -65,6 +65,7 @@ class PrismCode extends ComponentBase {
 }
 
 PrismCode.defaultProps = {
+  ...ComponentBase.defaultProps,
   ...defaultProps,
 };
 

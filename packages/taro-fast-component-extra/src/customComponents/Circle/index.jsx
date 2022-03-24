@@ -411,6 +411,7 @@ class Circle extends ComponentBase {
 }
 
 Circle.defaultProps = {
+  ...ComponentBase.defaultProps,
   ...defaultProps,
 };
 

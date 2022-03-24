@@ -149,6 +149,7 @@ class Selector extends ComponentBase {
 }
 
 Selector.defaultProps = {
+  ...ComponentBase.defaultProps,
   ...defaultProps,
 };
 
