@@ -71,6 +71,11 @@ function shallowEqual(a, b) {
   return true;
 }
 
+const defaultProps = {
+  showRenderCount: false,
+  hidden: false,
+};
+
 class ComponentBase extends Component {
   loadRemoteRequestAfterMount = false;
 
@@ -308,5 +313,9 @@ class ComponentBase extends Component {
     return this.renderView();
   }
 }
+
+ComponentBase.defaultProps = {
+  ...defaultProps,
+};
 
 export default ComponentBase;

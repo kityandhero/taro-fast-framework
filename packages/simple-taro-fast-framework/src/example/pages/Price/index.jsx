@@ -65,6 +65,8 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
+    console.log(Price.defaultProps);
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
