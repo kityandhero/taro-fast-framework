@@ -245,6 +245,7 @@ class PullIndicator extends BaseComponent {
         <Transition
           show={refreshing && useRefreshingBox}
           className={classNames(`${classPrefix}__refreshing-box`)}
+          name="fade"
         >
           <View className={classNames(`${classPrefix}__refreshing-box__inner`)}>
             {this.buildRefreshingBox()}

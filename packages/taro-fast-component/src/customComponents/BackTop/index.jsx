@@ -109,6 +109,7 @@ class BackTop extends BaseComponent {
     return (
       <Transition
         show={visible}
+        name="fade"
         className={classNames(classPrefix)}
         style={style}
         onClick={this.triggerClick}

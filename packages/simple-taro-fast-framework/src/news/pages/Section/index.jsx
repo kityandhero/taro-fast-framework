@@ -241,33 +241,6 @@ export default class Index extends BasePageWrapper {
     );
   };
 
-  triggerAfterLoadSuccess = ({
-    metaData = null,
-    metaListData = [],
-    metaExtra = null,
-    metaOriginalData = null,
-  }) => {
-    if (this.pagingLoadMode) {
-      this.clearListDataBeforeAttach = false;
-
-      const { pageNo, pageSize, total } = {
-        ...{ pageNo, pageSize, total: 0 },
-        ...metaExtra,
-      };
-
-      this.pageNo = pageNo || 1;
-      this.pageSize = pageSize || 10;
-      this.total = total || 0;
-    }
-
-    this.afterLoadSuccess({
-      metaData,
-      metaListData,
-      metaExtra,
-      metaOriginalData,
-    });
-  };
-
   renderFurther() {
     const { metaListData } = this.state;
 

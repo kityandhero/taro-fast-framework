@@ -66,7 +66,7 @@ class FixedBox extends BaseComponent {
     }
 
     return (
-      <Transition show={show} style={styleAdjust}>
+      <Transition show={show} name="fade" style={styleAdjust}>
         {children}
       </Transition>
     );

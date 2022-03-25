@@ -530,13 +530,14 @@ class VariableView extends BaseComponent {
         : { '--lower-loading-border': `${lowerLoadingBorder}` }),
       ...{
         position: 'relative',
+        overflowX: 'hidden',
       },
     };
 
     const styleScroll = {
       ...styleAdjust,
       ...{
-        overflow: 'hidden',
+        overflowY: 'hidden',
       },
     };
 
@@ -554,6 +555,7 @@ class VariableView extends BaseComponent {
             [`${classPrefix}__lower-loading-box--fixed`]:
               lowerLoadingPosition === 'fixed',
           })}
+          name="fade"
         >
           <View
             className={classNames(`${classPrefix}__lower-loading-box__inner`)}
@@ -635,8 +637,6 @@ class VariableView extends BaseComponent {
       >
         {pullIndicator}
 
-        {lowerLoadingOuterBoxAdjust}
-
         {scroll ? (
           upperBox ? (
             <View
@@ -658,6 +658,8 @@ class VariableView extends BaseComponent {
 
         {!scroll ? upperBox : null}
         {!scroll ? children : null}
+
+        {lowerLoadingOuterBoxAdjust}
         {!scroll ? lowerLoadingFooterBoxAdjust : null}
         {!scroll && enableSafeAreaInsetBottom
           ? this.buildSafeAreaInsetBottom()
