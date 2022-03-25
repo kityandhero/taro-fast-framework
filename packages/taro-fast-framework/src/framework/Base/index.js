@@ -274,6 +274,8 @@ class Base extends Infrastructure {
           showNavigationBarLoading();
         }
 
+        const that = this;
+
         dispatch({
           type: loadApiPath,
           payload: requestData,
@@ -292,15 +294,15 @@ class Base extends Infrastructure {
               dispatchComplete: true,
             };
 
-            const metaOriginalData = this.getApiData(this.props);
+            const metaOriginalData = that.getApiData(that.props);
 
             if (isUndefined(metaOriginalData)) {
-              this.setState(willSaveToState);
+              that.setState(willSaveToState);
 
               return;
             }
 
-            this.lastLoadParams = requestData;
+            that.lastLoadParams = requestData;
 
             const { dataSuccess, code: remoteCode } = metaOriginalData;
 
@@ -325,13 +327,13 @@ class Base extends Infrastructure {
                 ...metaOriginalData,
               };
 
-              const { metaListData: metaListDataPrev } = this.state;
+              const { metaListData: metaListDataPrev } = that.state;
 
-              const metaListData = !this.pagingLoadMode
+              const metaListData = !that.pagingLoadMode
                 ? [...metaListDataRemote]
-                : !this.useListDataAttachMode
+                : !that.useListDataAttachMode
                 ? [...metaListDataRemote]
-                : this.clearListDataBeforeAttach
+                : that.clearListDataBeforeAttach
                 ? [...metaListDataRemote]
                 : [...metaListDataPrev, ...metaListDataRemote];
 
@@ -346,7 +348,7 @@ class Base extends Infrastructure {
               };
 
               try {
-                this.triggerAfterLoadSuccess({
+                that.triggerAfterLoadSuccess({
                   metaData: metaData || null,
                   metaListData: metaListData || [],
                   metaExtra: metaExtra || null,
@@ -362,11 +364,11 @@ class Base extends Infrastructure {
                 });
               }
 
-              const { reloading: reloadingComplete } = this.state;
+              const { reloading: reloadingComplete } = that.state;
 
               if (reloadingComplete) {
-                this.afterReloadSuccess();
-                this.afterGetReLoadRequestResult(requestData, metaOriginalData);
+                that.afterReloadSuccess();
+                that.afterGetReLoadRequestResult(requestData, metaOriginalData);
               }
 
               if (!firstLoadSuccess) {
@@ -379,28 +381,27 @@ class Base extends Infrastructure {
               }
 
               if (!firstLoadSuccess) {
-                this.afterFirstLoadSuccess();
-
-                this.afterGetFirstRequestResult(requestData, metaOriginalData);
+                that.afterFirstLoadSuccess();
+                that.afterGetFirstRequestResult(requestData, metaOriginalData);
               }
 
-              this.afterGetRequestResult(requestData, metaOriginalData);
+              that.afterGetRequestResult(requestData, metaOriginalData);
 
               if (typeof callback === 'function') {
                 callback();
               }
             } else {
               if (checkWhetherAuthorizeFail(remoteCode)) {
-                this.doWhenAuthorizeFail(
+                that.doWhenAuthorizeFail(
                   metaOriginalData,
-                  this.authorizeFailCallback,
+                  that.authorizeFailCallback,
                 );
               }
             }
 
-            this.clearRequestingData();
+            that.clearRequestingData();
 
-            this.setState(willSaveToState);
+            that.setState(willSaveToState);
           })
           .catch((res) => {
             stopPullDownRefresh();
@@ -408,7 +409,7 @@ class Base extends Infrastructure {
 
             recordObject(res);
 
-            this.setState({
+            that.setState({
               dataLoading: false,
               loadSuccess: false,
               reloading: false,
@@ -527,24 +528,22 @@ class Base extends Infrastructure {
    * 该方法如无必要，不要进行覆盖
    * @param {*} param0
    */
-  triggerAfterLoadSuccess({
+  triggerAfterLoadSuccess = ({
     metaData = null,
     metaListData = [],
     metaExtra = null,
     metaOriginalData = null,
-  }) {
-    if (this.pagingLoadMode) {
-      this.clearListDataBeforeAttach = false;
-
-      const { pageNo, pageSize, total } = {
-        ...{ pageNo, pageSize, total: 0 },
-        ...metaExtra,
-      };
-
-      this.pageNo = pageNo || 1;
-      this.pageSize = pageSize || 10;
-      this.total = total || 0;
-    }
+  }) => {
+    // if (this.pagingLoadMode) {
+    //   this.clearListDataBeforeAttach = false;
+    //   const { pageNo, pageSize, total } = {
+    //     ...{ pageNo, pageSize, total: 0 },
+    //     ...metaExtra,
+    //   };
+    //   this.pageNo = pageNo || 1;
+    //   this.pageSize = pageSize || 10;
+    //   this.total = total || 0;
+    // }
 
     this.afterLoadSuccess({
       metaData,
@@ -552,7 +551,7 @@ class Base extends Infrastructure {
       metaExtra,
       metaOriginalData,
     });
-  }
+  };
 }
 
 export default Base;

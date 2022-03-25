@@ -576,6 +576,13 @@ class Infrastructure extends ComponentBase {
   // eslint-disable-next-line no-unused-vars
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => null;
 
+  buildLowerLoadingFooterBoxElement = () => {
+    return this.buildLowerLoadingFooterBox(
+      this.showLowerLoading(),
+      this.judgeNeedNextLoad(),
+    );
+  };
+
   getEnableBackTop = () => {
     return !this.viewScrollMode && this.enableBackTop;
   };
@@ -615,7 +622,7 @@ class Infrastructure extends ComponentBase {
         lowerLoadingPosition={this.lowerLoadingPosition}
         refreshingBox={this.buildRefreshingBox()}
         lowerLoadingSuspendBox={this.buildLowerLoadingSuspendBox()}
-        lowerLoadingFooterBox={this.buildLowerLoadingFooterBox()}
+        lowerLoadingFooterBox={this.buildLowerLoadingFooterBoxElement()}
         displayLowerLoadingFooterBoxWhenNoData={
           this.displayLowerLoadingFooterBoxWhenNoData
         }

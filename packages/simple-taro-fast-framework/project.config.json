@@ -66,6 +66,13 @@
           "pathName": "news/pages/home/index",
           "query": "",
           "scene": null
+        },
+        {
+          "id": 3,
+          "name": "news/section",
+          "pathName": "news/pages/section/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
