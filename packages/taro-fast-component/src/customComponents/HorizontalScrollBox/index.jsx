@@ -150,8 +150,11 @@ class HorizontalScrollBox extends BaseComponent {
             height: transformSize(height),
           },
           ...itemStyle,
+          // ...{
+          //   width: `0 0 auto`,
+          // },
           ...{
-            width: `0 0 auto`,
+            display: 'inline-block',
           },
         }}
       >
@@ -176,21 +179,6 @@ class HorizontalScrollBox extends BaseComponent {
 
     const style = this.getStyle();
 
-    const flexStyle = {
-      ...{
-        display: 'flex',
-        flexWrap: 'nowrap',
-        height: transformSize(height),
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
-      },
-      ...(isNumber(gap) && toNumber(gap) > 0
-        ? {
-            gap: transformSize(gap),
-          }
-        : {}),
-    };
-
     const listData = isArray(list) ? list : [];
 
     const listItemCore = listData.map((item, index) => {
@@ -199,7 +187,7 @@ class HorizontalScrollBox extends BaseComponent {
 
     let listItem = [];
 
-    if (gap <= 0) {
+    if (!isNumber(gap) || gap <= 0) {
       listItem = [...listItemCore];
     } else {
       listItemCore.forEach((item, index) => {
@@ -209,11 +197,12 @@ class HorizontalScrollBox extends BaseComponent {
               key={`${this.keyPrefix}_gap_${index}`}
               style={{
                 height: transformSize(height),
+                display: 'inline-block',
+                width: transformSize(gap),
               }}
             >
               <View
                 style={{
-                  width: transformSize(gap),
                   height: '100%',
                 }}
               />
@@ -236,7 +225,6 @@ class HorizontalScrollBox extends BaseComponent {
               height: transformSize(height),
               whiteSpace: 'nowrap',
             },
-            ...flexStyle,
           }}
           scrollX
           scrollY={false}
@@ -245,7 +233,6 @@ class HorizontalScrollBox extends BaseComponent {
           enhanced
           bounces
           showScrollbar={false}
-          enableFlex
           scrollIntoView={scrollIntoView}
           onScroll={this.triggerScroll}
         >
