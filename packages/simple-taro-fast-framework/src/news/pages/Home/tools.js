@@ -34,7 +34,8 @@ export function buildItem({
   if (renderMode === 4) {
     return (
       <HorizontalScrollBox
-        gap={20}
+        height={transformSize(243)}
+        gap={30}
         list={articles}
         itemBuilder={(item) => {
           const { title, image } = item;

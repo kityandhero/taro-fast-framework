@@ -122,19 +122,23 @@ export default class Index extends BasePageWrapper {
 
     this.sectionId = sectionId;
 
+    // const that = this;
+
+    // setTimeout(() => {
+    //   that.increaseCounter();
+    // }, 2000);
+
     this.reloadData({ delay: 500 });
   };
 
   buildTab = () => {
     return (
       <Tabs
-        showRenderCount
-        current={this.initialSectionIndex}
+        // current={this.initialSectionIndex}
         scroll
         titleActiveStyle={{
           color: '#2467db',
         }}
-        height={transformSize(80)}
         underlineColor="#2467db"
         underlineHeight={4}
         underlineHorizontalMargin={20}

@@ -1,9 +1,12 @@
 import { View } from '@tarojs/components';
 
 import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
   HorizontalScrollBox,
   Space,
+  CenterBox,
+  Button,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -25,7 +28,7 @@ const config1 = {
   style: {
     height: transformSize(280),
   },
-  gap: 20,
+  gap: 30,
   list: [one, one, one, one, one, one, one, one, one, one],
   itemBuilder: (item, index) => {
     return (
@@ -50,7 +53,26 @@ export default class Index extends ContentPageBase {
     name: '水平滚动容器',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        current: 7,
+      },
+    };
+  }
+
+  setCurrent = (v) => {
+    this.setState({
+      current: toNumber(v),
+    });
+  };
+
   renderContent = () => {
+    const { current } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
@@ -61,12 +83,48 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
           ignorePropertyList={['itemBuilder']}
         >
-          <HorizontalScrollBox {...config1} />
+          <Space direction="vertical" size={30} fillWidth>
+            <HorizontalScrollBox {...config1} current={current} />
+
+            <CenterBox>
+              <Space>
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    this.setCurrent(0);
+                  }}
+                >
+                  滑动到 0
+                </Button>
+
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    this.setCurrent(2);
+                  }}
+                >
+                  滑动到 3
+                </Button>
+
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    this.setCurrent(4);
+                  }}
+                >
+                  滑动到 5
+                </Button>
+              </Space>
+            </CenterBox>
+          </Space>
         </SimpleBox>
 
         <PropertyBox
           config={HorizontalScrollBox.defaultProps}
-          labelWidth={170}
+          labelWidth={250}
         />
       </Space>
     );

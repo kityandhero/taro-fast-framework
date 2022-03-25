@@ -16,6 +16,7 @@ import './index.less';
 
 import Badge from '../Badge';
 import ColorText from '../ColorText';
+import HorizontalScrollBox from '../HorizontalScrollBox';
 
 const ENV = Taro.getEnv();
 const MIN_DISTANCE = 100;
@@ -25,42 +26,7 @@ const classPrefix = `tfc-tabs`;
 
 const directionCollection = ['horizontal', 'vertical'];
 
-function getScrollIntoView({ tabId, scroll, index }) {
-  const result = {};
-
-  if (scroll) {
-    const scrollIntoViewId = `tab${tabId}${Math.max(index - 1, 0)}`;
-
-    // 标签栏滚动
-    switch (ENV) {
-      case Taro.ENV_TYPE.WEAPP:
-        result.scrollIntoView = scrollIntoViewId;
-
-        break;
-
-      case Taro.ENV_TYPE.ALIPAY:
-        break;
-
-      case Taro.ENV_TYPE.SWAN:
-        result.scrollIntoView = scrollIntoViewId;
-
-        break;
-
-      case Taro.ENV_TYPE.WEB:
-        break;
-
-      default:
-        console.warn('Tab 组件在该环境还未适配');
-
-        break;
-    }
-  }
-
-  return result;
-}
-
 const defaultProps = {
-  style: {},
   className: '',
   titleStyle: {},
   titleActiveStyle: {},
@@ -143,7 +109,7 @@ class Tabs extends BaseComponent {
 
     this.tabId = getGuid();
 
-    const { scroll, current } = props;
+    const { current } = props;
 
     this.state = {
       ...this.state,
@@ -153,11 +119,6 @@ class Tabs extends BaseComponent {
         scrollLeft: 0,
         scrollTop: 0,
       },
-      ...getScrollIntoView({
-        scroll,
-        index: current,
-        tabId: this.tabId,
-      }),
     };
 
     this.touchDot = 0;
@@ -197,13 +158,6 @@ class Tabs extends BaseComponent {
   doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
     this.getTabHeaderRef();
 
-    const { currentFlag: currentFlagPrev } = preState;
-    const { currentFlag: currentFlagNext } = this.state;
-
-    if (currentFlagPrev !== currentFlagNext) {
-      this.updateScroll();
-    }
-
     return null;
   };
 
@@ -217,55 +171,8 @@ class Tabs extends BaseComponent {
     return direction;
   };
 
-  updateScroll = () => {
-    const { scroll } = this.props;
-
-    if (scroll) {
-      const { currentStage } = this.state;
-
-      const stateWillChange = getScrollIntoView({
-        scroll,
-        index: currentStage,
-        tabId: this.tabId,
-      });
-
-      // 标签栏滚动
-      switch (ENV) {
-        case Taro.ENV_TYPE.WEAPP:
-          this.setState(stateWillChange);
-
-          break;
-
-        case Taro.ENV_TYPE.ALIPAY:
-          break;
-
-        case Taro.ENV_TYPE.SWAN:
-          this.setState(stateWillChange);
-
-          break;
-
-        case Taro.ENV_TYPE.WEB:
-          const indexWEB = Math.max(currentStage - 1, 0);
-          const prevTabItem = this.tabHeaderRef.childNodes[indexWEB];
-
-          prevTabItem &&
-            this.setState({
-              scrollTop: prevTabItem.offsetTop,
-              scrollLeft: prevTabItem.offsetLeft,
-            });
-
-          break;
-
-        default:
-          console.warn('Tab 组件在该环境还未适配');
-
-          break;
-      }
-    }
-  };
-
   handleClick = (index, event, item) => {
-    const { scroll, onClick } = this.props;
+    const { onClick } = this.props;
 
     const currentStage = index;
 
@@ -273,11 +180,6 @@ class Tabs extends BaseComponent {
       ...{
         currentStage,
       },
-      ...getScrollIntoView({
-        scroll,
-        index,
-        tabId: this.tabId,
-      }),
     };
 
     this.setState(stateWillChange);
@@ -347,7 +249,105 @@ class Tabs extends BaseComponent {
     }
   };
 
-  buildTabItemList = () => {
+  buildTabItem = ({
+    item,
+    index,
+    currentIndex,
+    titleStyle,
+    titleActiveStyle,
+  }) => {
+    const itemCls = classNames({
+      [`${classPrefix}__item`]: true,
+      [`${classPrefix}__item--active`]: currentIndex === index,
+    });
+
+    const {
+      title,
+      style: styleItem,
+      useBadge,
+      badgeColor,
+      badgeDotSize,
+      badgeContent,
+      badgeStyle,
+      icon: iconItem,
+      badgeFontSize,
+    } = {
+      ...{
+        badgeDotSize: 16,
+        badgeStyle: {
+          marginTop: transformSize(-4),
+        },
+        badgeFontSize: 18,
+      },
+      ...item,
+    };
+
+    const titleCoreComponent = (
+      <ColorText
+        textStyle={{
+          ...titleStyle,
+          ...(currentIndex === index ? titleActiveStyle : {}),
+        }}
+        icon={iconItem}
+        text={title}
+      />
+    );
+
+    const titleComponent = useBadge ? (
+      <Badge
+        content={badgeContent}
+        color={badgeColor}
+        dotSize={badgeDotSize}
+        style={badgeStyle}
+        fontSize={badgeFontSize}
+        wrapHeight="100%"
+        wrapCenter
+      >
+        {titleCoreComponent}
+      </Badge>
+    ) : (
+      titleCoreComponent
+    );
+
+    return (
+      <View
+        className={itemCls}
+        key={`${this.keyPrefix}-item-${index}`}
+        style={{
+          ...styleItem,
+          ...{
+            display: 'flex',
+          },
+        }}
+        onClick={(e) => {
+          this.handleClick(index, e, item);
+        }}
+      >
+        {titleComponent}
+
+        <View className={classNames(`${classPrefix}__item-underline`)}></View>
+      </View>
+    );
+  };
+
+  buildTabItemList = ({
+    tabList,
+    currentIndex,
+    titleStyle,
+    titleActiveStyle,
+  }) => {
+    return tabList.map((item, index) => {
+      return this.buildTabItem({
+        item,
+        index,
+        currentIndex,
+        titleStyle,
+        titleActiveStyle,
+      });
+    });
+  };
+
+  buildTabHeader = () => {
     const {
       titleStyle,
       titleActiveStyle,
@@ -356,7 +356,7 @@ class Tabs extends BaseComponent {
       tabList,
       scroll,
     } = this.props;
-    const { currentStage, scrollIntoView } = this.state;
+    const { currentStage } = this.state;
 
     const direction = this.getDirection();
     const tabHeightStyle =
@@ -371,94 +371,84 @@ class Tabs extends BaseComponent {
         : {
             height: transformSize(verticalHeight),
           };
-    const scrollX = direction === 'horizontal';
-    const scrollY = direction === 'vertical';
+    // const scrollX = direction === 'horizontal';
+    // const scrollY = direction === 'vertical';
 
-    const tabItems = (tabList || []).map((item, idx) => {
-      const itemCls = classNames({
-        [`${classPrefix}__item`]: true,
-        [`${classPrefix}__item--active`]: currentStage === idx,
-      });
+    // const tabItems = (tabList || []).map((item, idx) => {});
 
-      const {
-        title,
-        style: styleItem,
-        useBadge,
-        badgeColor,
-        badgeDotSize,
-        badgeContent,
-        badgeStyle,
-        icon: iconItem,
-        badgeFontSize,
-      } = {
-        ...{
-          badgeDotSize: 16,
-          badgeStyle: {
-            marginTop: transformSize(-4),
-          },
-          badgeFontSize: 18,
-        },
-        ...item,
-      };
-
-      const titleCoreComponent = (
-        <ColorText
-          textStyle={{
-            ...titleStyle,
-            ...(currentStage === idx ? titleActiveStyle : {}),
+    if (direction === 'horizontal') {
+      return scroll ? (
+        <HorizontalScrollBox
+          current={currentStage}
+          leftScrollOffset={1}
+          height={transformSize(
+            horizontalTabHeight < defaultProps.horizontalTabHeight
+              ? defaultProps.horizontalTabHeight
+              : horizontalTabHeight,
+          )}
+          gap={0}
+          list={tabList}
+          itemBuilder={(item, index) => {
+            return this.buildTabItem({
+              item,
+              index,
+              currentIndex: currentStage,
+              titleStyle,
+              titleActiveStyle,
+            });
           }}
-          icon={iconItem}
-          text={title}
         />
-      );
-
-      const titleComponent = useBadge ? (
-        <Badge
-          content={badgeContent}
-          color={badgeColor}
-          dotSize={badgeDotSize}
-          style={badgeStyle}
-          fontSize={badgeFontSize}
-          wrapHeight="100%"
-          wrapCenter
-        >
-          {titleCoreComponent}
-        </Badge>
       ) : (
-        titleCoreComponent
-      );
-
-      return (
         <View
-          className={itemCls}
-          id={`tab${this.tabId}${idx}`}
-          key={`${classPrefix}-item-${idx}`}
-          style={styleItem || {}}
-          onClick={(e) => {
-            this.handleClick(idx, e, item);
+          id={this.tabId}
+          className={classNames(`${classPrefix}__header`)}
+          style={{
+            ...{
+              width: '100%',
+              height: transformSize(
+                horizontalTabHeight < defaultProps.horizontalTabHeight
+                  ? defaultProps.horizontalTabHeight
+                  : horizontalTabHeight,
+              ),
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              flexWrap: 'nowrap',
+              alignItems: 'center',
+              justifyItems: 'center',
+              justifyContent: 'center',
+            },
           }}
         >
-          {titleComponent}
-
-          <View className={classNames(`${classPrefix}__item-underline`)}></View>
+          {this.buildTabItemList({
+            tabList,
+            currentIndex: currentStage,
+            titleStyle,
+            titleActiveStyle,
+          })}
         </View>
       );
-    });
+    }
 
     return scroll ? (
       <ScrollView
         id={this.tabId}
         className={classNames(`${classPrefix}__header`)}
         style={tabHeightStyle}
-        scrollX={scrollX}
-        scrollY={scrollY}
+        // scrollX={scrollX}
+        // scrollY={scrollY}
         scrollWithAnimation
         enhanced
         showScrollbar={false}
-        scrollIntoView={scrollIntoView}
         enableFlex
       >
-        {tabItems}
+        <View className={classNames(`${classPrefix}__header__inner`)}>
+          {this.buildTabItemList({
+            tabList,
+            currentIndex: currentStage,
+            titleStyle,
+            titleActiveStyle,
+          })}
+        </View>
       </ScrollView>
     ) : (
       <View
@@ -466,7 +456,12 @@ class Tabs extends BaseComponent {
         className={classNames(`${classPrefix}__header`)}
         style={tabHeightStyle}
       >
-        {tabItems}
+        {this.buildTabItemList({
+          tabList,
+          currentIndex: currentStage,
+          titleStyle,
+          titleActiveStyle,
+        })}
       </View>
     );
   };
@@ -570,21 +565,19 @@ class Tabs extends BaseComponent {
 
   renderFurther() {
     const {
-      style,
-      className,
+      // className,
       headerBackgroundColor,
       underlineHeight,
       underlineHorizontalMargin,
       underlineColor,
       underlineActiveColor,
       verticalHeight,
-      scroll,
+      // scroll,
     } = this.props;
 
     const direction = this.getDirection();
 
     const containerStyle = {
-      ...style,
       ...(direction === 'vertical'
         ? {
             height: transformSize(verticalHeight),
@@ -611,21 +604,21 @@ class Tabs extends BaseComponent {
       },
     };
 
-    const containerClassName = classNames(
-      classPrefix,
-      {
-        [`${classPrefix}--scroll`]: scroll,
-        [`${classPrefix}--${direction}`]: true,
-        [`${classPrefix}--${ENV}`]: true,
-      },
-      className,
-    );
+    // const containerClassName = classNames(
+    //   classPrefix,
+    //   {
+    //     [`${classPrefix}--scroll`]: scroll,
+    //     [`${classPrefix}--${direction}`]: true,
+    //     [`${classPrefix}--${ENV}`]: true,
+    //   },
+    //   className,
+    // );
 
-    const tabItemList = this.buildTabItemList();
+    const tabHeader = this.buildTabHeader();
 
     return (
-      <View className={containerClassName} style={containerStyle}>
-        {tabItemList}
+      <View style={containerStyle}>
+        {tabHeader}
 
         {this.buildPanelList()}
       </View>

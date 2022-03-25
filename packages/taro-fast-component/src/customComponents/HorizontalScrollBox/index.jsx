@@ -13,22 +13,111 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 
+function buildId({ prefix, index }) {
+  return `${prefix}_item_${index}`;
+}
+
 const defaultProps = {
+  current: 0,
+  leftScrollOffset: 0,
   style: {},
+  height: '100%',
   gap: 0,
   list: [],
   itemBuilder: null,
 };
 
 class HorizontalScrollBox extends BaseComponent {
+  needInitScroll = false;
+
+  initScrollComplete = false;
+
+  leftScrollOffset = 0;
+
+  timer = null;
+
+  constructor(props) {
+    super(props);
+
+    const { current: currentValue } = props;
+
+    let current = toNumber(currentValue);
+
+    this.state = {
+      ...this.state,
+      ...{
+        scrollIntoView: '',
+      },
+    };
+
+    if (current > 0) {
+      this.needInitScroll = true;
+      this.initScrollComplete = false;
+    }
+  }
+
+  doWorkAfterDidMount = () => {
+    if (this.needInitScroll && !this.initScrollComplete) {
+      const { current } = this.props;
+
+      const leftScrollOffset = this.getLeftScrollOffset();
+
+      const that = this;
+
+      that.timer = setTimeout(() => {
+        that.setState({
+          scrollIntoView: buildId({
+            prefix: this.keyPrefix,
+            index: Math.max(current - leftScrollOffset, 0),
+          }),
+        });
+
+        that.initScrollComplete = true;
+      }, 300);
+    }
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
+    const { current: currentPrev } = preProps;
+    const { current } = this.props;
+
+    if (currentPrev != current) {
+      const leftScrollOffset = this.getLeftScrollOffset();
+
+      this.setState({
+        scrollIntoView: buildId({
+          prefix: this.keyPrefix,
+          index: Math.max(current - leftScrollOffset, 0),
+        }),
+      });
+    }
+
+    return null;
+  };
+
+  doWorkBeforeUnmount = () => {
+    clearTimeout(this.timer);
+  };
+
   getStyle = () => {
     const { style } = this.props;
 
     return style || {};
   };
 
+  getLeftScrollOffset = () => {
+    const { leftScrollOffset } = this.props;
+
+    if (toNumber(leftScrollOffset) > 0) {
+      return toNumber(leftScrollOffset);
+    }
+
+    return 0;
+  };
+
   buildItem = (item, index) => {
-    const { itemBuilder } = this.props;
+    const { height, itemBuilder } = this.props;
 
     let itemComponent = null;
 
@@ -52,9 +141,13 @@ class HorizontalScrollBox extends BaseComponent {
     return (
       <View
         key={`${this.keyPrefix}_${index}`}
+        id={buildId({
+          prefix: this.keyPrefix,
+          index,
+        })}
         style={{
           ...{
-            height: '100%',
+            height: transformSize(height),
           },
           ...itemStyle,
           ...{
@@ -67,8 +160,19 @@ class HorizontalScrollBox extends BaseComponent {
     );
   };
 
+  triggerScroll = () => {
+    const { scrollIntoView } = this.state;
+
+    if ((scrollIntoView || null) != null) {
+      this.setState({
+        scrollIntoView: '',
+      });
+    }
+  };
+
   renderFurther() {
-    const { gap, list } = this.props;
+    const { gap, height, list } = this.props;
+    const { scrollIntoView } = this.state;
 
     const style = this.getStyle();
 
@@ -76,7 +180,7 @@ class HorizontalScrollBox extends BaseComponent {
       ...{
         display: 'flex',
         flexWrap: 'nowrap',
-        height: '100%',
+        height: transformSize(height),
         alignItems: 'stretch',
         justifyContent: 'flex-start',
       },
@@ -89,13 +193,50 @@ class HorizontalScrollBox extends BaseComponent {
 
     const listData = isArray(list) ? list : [];
 
+    const listItemCore = listData.map((item, index) => {
+      return this.buildItem(item, index);
+    });
+
+    let listItem = [];
+
+    if (gap <= 0) {
+      listItem = [...listItemCore];
+    } else {
+      listItemCore.forEach((item, index) => {
+        if (index > 0) {
+          listItem.push(
+            <View
+              key={`${this.keyPrefix}_gap_${index}`}
+              style={{
+                height: transformSize(height),
+              }}
+            >
+              <View
+                style={{
+                  width: transformSize(gap),
+                  height: '100%',
+                }}
+              />
+            </View>,
+          );
+
+          listItem.push(item);
+        } else {
+          listItem.push(item);
+        }
+      });
+    }
+
     return (
       <View style={style}>
         <ScrollView
           style={{
-            width: '100%',
-            height: '100%',
-            whiteSpace: 'nowrap',
+            ...{
+              width: '100%',
+              height: transformSize(height),
+              whiteSpace: 'nowrap',
+            },
+            ...flexStyle,
           }}
           scrollX
           scrollY={false}
@@ -105,12 +246,10 @@ class HorizontalScrollBox extends BaseComponent {
           bounces
           showScrollbar={false}
           enableFlex
+          scrollIntoView={scrollIntoView}
+          onScroll={this.triggerScroll}
         >
-          <View style={flexStyle}>
-            {listData.map((item, index) => {
-              return this.buildItem(item, index);
-            })}
-          </View>
+          {listItem}
         </ScrollView>
       </View>
     );

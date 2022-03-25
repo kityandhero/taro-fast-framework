@@ -236,7 +236,8 @@ class ComponentBase extends Component {
     return null;
   };
 
-  doWorkWhenGetSnapshotBeforeUpdate = () => {
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
     return null;
   };
 

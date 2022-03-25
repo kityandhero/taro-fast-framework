@@ -23,6 +23,10 @@
     font-size: var(--tfc-26);
     text-overflow: ellipsis;
     overflow: hidden;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
 
     &-underline {
       display: block;
@@ -48,22 +52,10 @@
   }
 
   &__header {
-    position: relative;
-    display: flex;
     width: 100%;
-    text-align: center;
-    white-space: nowrap;
     background-color: var(--header-background-color);
     box-sizing: border-box;
-    overflow: -moz-scrollbars-none;
-
-    &::-webkit-scrollbar {
-      display: none;
-      width: 0 !important;
-      height: 0 !important;
-      color: transparent;
-      background: transparent;
-    }
+    white-space: nowrap;
   }
 
   &__body {
@@ -86,67 +78,54 @@
     height: var(--underline-height);
     background-color: var(--underline-color);
   }
+}
 
-  &--scroll {
-    .@{class-prefix-tab}__header {
-      overflow-x: scroll;
-      -webkit-overflow-scrolling: touch;
-      white-space: nowrap;
-    }
+.@{class-prefix-tab}--vertical {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 
-    .@{class-prefix-tab}__item {
-      display: inline-block;
-      overflow: visible;
-    }
+  .@{class-prefix-tab}__body {
+    display: inline-block;
+    flex: 1;
+    height: @tfc-tabs-pane-min-height;
+    width: auto;
   }
 
-  &--vertical {
+  .@{class-prefix-tab}__underline {
+    top: 0;
+    left: 0;
+    bottom: auto;
+    width: var(--underline-height);
+    height: 100%;
+  }
+
+  .@{class-prefix-tab}__header {
+    display: inline-block;
+    width: auto;
+    height: 100%;
+  }
+
+  .@{class-prefix-tab}__item {
     display: flex;
-    flex: 1;
-    overflow: hidden;
+    justify-content: center;
+    width: auto;
+    align-items: center;
 
-    .@{class-prefix-tab}__body {
-      display: inline-block;
-      flex: 1;
-      height: @tfc-tabs-pane-min-height;
-      width: auto;
-    }
-
-    .@{class-prefix-tab}__underline {
+    &-underline {
+      display: block;
       top: 0;
-      left: 0;
+      right: 0;
       bottom: auto;
+      left: auto;
       width: var(--underline-height);
       height: 100%;
+      transform: scaleY(0);
     }
 
-    .@{class-prefix-tab}__header {
-      display: inline-block;
-      width: auto;
-      height: 100%;
-    }
-
-    .@{class-prefix-tab}__item {
-      display: flex;
-      justify-content: center;
-      width: auto;
-      align-items: center;
-
-      &-underline {
-        display: block;
-        top: 0;
-        right: 0;
-        bottom: auto;
-        left: auto;
-        width: var(--underline-height);
-        height: 100%;
-        transform: scaleY(0);
-      }
-
-      &--active {
-        .@{class-prefix-tab}__item-underline {
-          transform: scaleY(1);
-        }
+    &--active {
+      .@{class-prefix-tab}__item-underline {
+        transform: scaleY(1);
       }
     }
   }
