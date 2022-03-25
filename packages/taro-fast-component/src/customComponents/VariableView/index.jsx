@@ -544,16 +544,12 @@ class VariableView extends BaseComponent {
     const upperBox = this.buildUpperBox();
 
     const lowerLoadingOuterBoxAdjust =
-      enableLowerLoad &&
-      (lowerLoadingPosition === 'absolute' ||
-        lowerLoadingPosition === 'fixed') ? (
+      enableLowerLoad && lowerLoadingPosition === 'outer' ? (
         <Transition
           show={lowerLoading}
           className={classNames(`${classPrefix}__lower-loading-box`, {
-            [`${classPrefix}__lower-loading-box--absolute`]:
-              lowerLoadingPosition === 'absolute',
-            [`${classPrefix}__lower-loading-box--fixed`]:
-              lowerLoadingPosition === 'fixed',
+            [`${classPrefix}__lower-loading-box--outer`]:
+              lowerLoadingPosition === 'outer',
           })}
           name="fade"
         >
@@ -567,9 +563,7 @@ class VariableView extends BaseComponent {
 
     const lowerLoadingFooterBoxAdjust =
       enableLowerLoad &&
-      ((lowerLoadingPosition !== 'absolute' &&
-        lowerLoadingPosition !== 'fixed') ||
-        (!lowerLoading && !needNextLoad)) ? (
+      (lowerLoadingPosition !== 'outer' || (!lowerLoading && !needNextLoad)) ? (
         <View onClick={this.onScrollToLower}>
           {this.buildLowerLoadingFooterBox(lowerLoading, needNextLoad)}
         </View>

@@ -39,7 +39,7 @@ const descriptionList = [
   },
   {
     label: '可配置加载提示组件显示模式',
-    value: 'lowerLoadingPosition = footer/absolute/fixed',
+    value: 'lowerLoadingPosition = footer/outer',
     ellipsis: false,
     canCopy: true,
   },

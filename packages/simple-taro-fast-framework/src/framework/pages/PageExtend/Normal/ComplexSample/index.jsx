@@ -39,7 +39,7 @@ export default class Index extends ContentPageBase {
 
   enableLowerLoad = true;
 
-  lowerLoadingPosition = 'fixed';
+  lowerLoadingPosition = 'outer';
 
   pagingLoadMode = true;
 

@@ -50,7 +50,7 @@ export default class Index extends BasePageWrapper {
 
   enableLowerLoad = true;
 
-  lowerLoadingPosition = 'fixed';
+  lowerLoadingPosition = 'outer';
 
   pagingLoadMode = true;
 
