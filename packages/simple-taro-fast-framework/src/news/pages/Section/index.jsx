@@ -139,10 +139,101 @@ export default class Index extends BasePageWrapper {
         underlineHeight={4}
         underlineHorizontalMargin={20}
         tabList={this.tabList}
-        onClick={(index, e, item) => {
-          this.triggerSectionClick(index, e, item);
-        }}
+        onClick={this.triggerSectionClick}
       />
+    );
+  };
+
+  buildListView = () => {
+    const { metaListData } = this.state;
+    return (
+      <Space direction="vertical" fillWidth>
+        {metaListData.map((item) => {
+          const {
+            articleId,
+            title,
+            description,
+            image,
+            accessCount,
+            createTime,
+          } = item;
+
+          return (
+            <FlexBox
+              key={`article_${articleId}`}
+              flexAuto="right"
+              left={
+                <View style={{ width: transformSize(260) }}>
+                  <ImageBox src={image} aspectRatio={0.74} />
+                </View>
+              }
+              rightStyle={{
+                paddingLeft: transformSize(28),
+              }}
+              right={
+                <FlexBox
+                  style={{ width: '100%', height: '100%' }}
+                  flexAuto="top"
+                  verticalHeight={300}
+                  top={
+                    <Ellipsis
+                      line={2}
+                      style={{
+                        height: transformSize(100),
+                        fontSize: transformSize(32),
+                        fontWeight: '700',
+                        lineHeight: transformSize(50),
+                        color: '#333',
+                      }}
+                    >
+                      {title}
+                    </Ellipsis>
+                  }
+                  bottom={
+                    <>
+                      <Ellipsis
+                        line={1}
+                        style={{
+                          color: '#afb4b5',
+                          marginBottom: transformSize(14),
+                        }}
+                      >
+                        {description}
+                      </Ellipsis>
+
+                      <FlexBox
+                        flexAuto="right"
+                        leftStyle={{
+                          width: transformSize(220),
+                        }}
+                        left={
+                          <ColorText
+                            color="#afb4b5"
+                            fontSize={24}
+                            icon={<IconClock size={24} color="#afb4b5" />}
+                            text={formatDatetime({
+                              data: createTime,
+                              fmt: datetimeFormat.yearMonthDay,
+                            })}
+                          />
+                        }
+                        right={
+                          <ColorText
+                            color="#afb4b5"
+                            fontSize={24}
+                            icon={<IconEye size={24} color="#afb4b5" />}
+                            text={accessCount}
+                          />
+                        }
+                      />
+                    </>
+                  }
+                />
+              }
+            />
+          );
+        })}
+      </Space>
     );
   };
 
@@ -154,101 +245,13 @@ export default class Index extends BasePageWrapper {
         {this.buildTab()}
 
         <View className={classNames(`${classPrefix}__list-containor`)}>
-          {this.judgeInitialActivityIndicatorVisible() ? (
-            this.buildInitialActivityIndicator({})
-          ) : metaListData.length === 0 ? (
-            this.buildEmptyPlaceholder({
-              description: '还没有数据哦',
-            })
-          ) : (
-            <Space direction="vertical" fillWidth>
-              {metaListData.map((item) => {
-                const {
-                  articleId,
-                  title,
-                  description,
-                  image,
-                  accessCount,
-                  createTime,
-                } = item;
-
-                return (
-                  <FlexBox
-                    key={`article_${articleId}`}
-                    flexAuto="right"
-                    left={
-                      <View style={{ width: transformSize(260) }}>
-                        <ImageBox src={image} aspectRatio={0.74} />
-                      </View>
-                    }
-                    rightStyle={{
-                      paddingLeft: transformSize(28),
-                    }}
-                    right={
-                      <FlexBox
-                        style={{ width: '100%', height: '100%' }}
-                        flexAuto="top"
-                        verticalHeight={300}
-                        top={
-                          <Ellipsis
-                            line={2}
-                            style={{
-                              height: transformSize(100),
-                              fontSize: transformSize(32),
-                              fontWeight: '700',
-                              lineHeight: transformSize(50),
-                              color: '#333',
-                            }}
-                          >
-                            {title}
-                          </Ellipsis>
-                        }
-                        bottom={
-                          <>
-                            <Ellipsis
-                              line={1}
-                              style={{
-                                color: '#afb4b5',
-                                marginBottom: transformSize(14),
-                              }}
-                            >
-                              {description}
-                            </Ellipsis>
-
-                            <FlexBox
-                              flexAuto="right"
-                              leftStyle={{
-                                width: transformSize(220),
-                              }}
-                              left={
-                                <ColorText
-                                  color="#afb4b5"
-                                  fontSize={24}
-                                  icon={<IconClock size={24} color="#afb4b5" />}
-                                  text={formatDatetime({
-                                    data: createTime,
-                                    fmt: datetimeFormat.yearMonthDay,
-                                  })}
-                                />
-                              }
-                              right={
-                                <ColorText
-                                  color="#afb4b5"
-                                  fontSize={24}
-                                  icon={<IconEye size={24} color="#afb4b5" />}
-                                  text={accessCount}
-                                />
-                              }
-                            />
-                          </>
-                        }
-                      />
-                    }
-                  />
-                );
-              })}
-            </Space>
-          )}
+          {this.judgeInitialActivityIndicatorVisible()
+            ? this.buildInitialActivityIndicator({})
+            : metaListData.length === 0
+            ? this.buildEmptyPlaceholder({
+                description: '还没有数据哦',
+              })
+            : this.buildListView()}
         </View>
       </View>
     );

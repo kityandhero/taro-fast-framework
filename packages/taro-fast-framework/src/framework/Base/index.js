@@ -361,6 +361,34 @@ class Base extends Infrastructure {
                   message: text,
                 });
               }
+
+              const { reloading: reloadingComplete } = this.state;
+
+              if (reloadingComplete) {
+                this.afterReloadSuccess();
+                this.afterGetReLoadRequestResult(requestData, metaOriginalData);
+              }
+
+              if (!firstLoadSuccess) {
+                willSaveToState = {
+                  ...willSaveToState,
+                  ...{
+                    firstLoadSuccess: true,
+                  },
+                };
+              }
+
+              if (!firstLoadSuccess) {
+                this.afterFirstLoadSuccess();
+
+                this.afterGetFirstRequestResult(requestData, metaOriginalData);
+              }
+
+              this.afterGetRequestResult(requestData, metaOriginalData);
+
+              if (typeof callback === 'function') {
+                callback();
+              }
             } else {
               if (checkWhetherAuthorizeFail(remoteCode)) {
                 this.doWhenAuthorizeFail(
@@ -368,34 +396,6 @@ class Base extends Infrastructure {
                   this.authorizeFailCallback,
                 );
               }
-            }
-
-            const { reloading: reloadingComplete } = this.state;
-
-            if (reloadingComplete) {
-              this.afterReloadSuccess();
-              this.afterGetReLoadRequestResult(requestData, metaOriginalData);
-            }
-
-            if (!firstLoadSuccess) {
-              willSaveToState = {
-                ...willSaveToState,
-                ...{
-                  firstLoadSuccess: true,
-                },
-              };
-            }
-
-            if (!firstLoadSuccess) {
-              this.afterFirstLoadSuccess();
-
-              this.afterGetFirstRequestResult(requestData, metaOriginalData);
-            }
-
-            this.afterGetRequestResult(requestData, metaOriginalData);
-
-            if (typeof callback === 'function') {
-              callback();
             }
 
             this.clearRequestingData();

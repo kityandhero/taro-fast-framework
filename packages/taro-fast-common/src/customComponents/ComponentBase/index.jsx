@@ -130,7 +130,9 @@ class ComponentBase extends Component {
     );
 
     if ((checkComponentUpdate || null) != null) {
-      return !!checkComponentUpdate;
+      if (!!checkComponentUpdate) {
+        return !!checkComponentUpdate;
+      }
     }
 
     const nextPropsIgnoreModel = filterModel(nextProps);
@@ -230,7 +232,9 @@ class ComponentBase extends Component {
   // eslint-disable-next-line no-unused-vars
   doWorkWhenDidUpdate = (preProps, preState, snapshot) => {};
 
-  doOtherCheckComponentUpdate = () => {};
+  doOtherCheckComponentUpdate = () => {
+    return null;
+  };
 
   doWorkWhenGetSnapshotBeforeUpdate = () => {
     return null;
