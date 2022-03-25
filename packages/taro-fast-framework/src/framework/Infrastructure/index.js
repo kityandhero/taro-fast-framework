@@ -140,7 +140,10 @@ class Infrastructure extends ComponentBase {
    */
   enableSafeAreaInsetBottom = true;
 
-  urlParamsCore = null;
+  /**
+   * 外部参数
+   */
+  externalParameter = null;
 
   /**
    * 初始化时加载数据请求的延迟时间
@@ -248,12 +251,10 @@ class Infrastructure extends ComponentBase {
     return null;
   }
 
-  getUrlParams() {
-    if (stringIsNullOrWhiteSpace(this.urlParamsCore)) {
-      this.urlParamsCore = this.currentInstance.router.params;
+  receiveExternalParameter() {
+    if ((this.externalParameter || null) == null) {
+      this.externalParameter = this.currentInstance.router.params;
     }
-
-    return this.urlParamsCore || {};
   }
 
   setNavigationBarTitle(params) {
@@ -359,6 +360,8 @@ class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
+    this.receiveExternalParameter();
+
     this.checkPermission();
 
     this.doWorkBeforeAdjustDidMount();

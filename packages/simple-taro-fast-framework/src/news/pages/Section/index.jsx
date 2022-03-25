@@ -84,12 +84,15 @@ export default class Index extends BasePageWrapper {
   };
 
   doWorkBeforeAdjustDidMount = () => {
-    const urlParams = this.getUrlParams();
-
-    const { sectionId } = urlParams;
+    const { sectionId } = {
+      ...{
+        sectionId: '',
+      },
+      ...this.externalParameter,
+    };
 
     this.sectionList = this.getSectionList();
-    this.sectionId = sectionId;
+    this.sectionId = sectionId || '';
     this.initialSectionIndex = getInitialSectionIndex({
       sectionId: this.sectionId,
       sectionList: this.sectionList,

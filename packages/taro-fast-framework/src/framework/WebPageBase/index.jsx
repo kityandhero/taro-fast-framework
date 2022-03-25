@@ -32,10 +32,10 @@ class WebPageBase extends Infrastructure {
   };
 
   getWebPageParams = () => {
-    const urlParams = this.getUrlParams();
+    const externalParams = this.externalParameter;
 
     let p = {
-      ...urlParams,
+      ...externalParams,
     };
 
     const { title: titleEncode, url: urlEncode } = p;
