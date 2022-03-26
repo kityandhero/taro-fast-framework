@@ -21,6 +21,7 @@ const { IconSketch } = Icon;
 const singlePanelComponent = (
   <View
     style={{
+      height: transformSize(800),
       padding: `${transformSize(100)} ${transformSize(50)}`,
       backgroundColor: '#FAFBFC',
       textAlign: 'center',
@@ -340,7 +341,7 @@ export default class Index extends ContentPageBase {
           useInnerBox
           innerBoxCenterMode={false}
           innerBoxPadding={false}
-          ignorePropertyList={['icon', 'body']}
+          ignorePropertyList={['icon', 'body', 'panel']}
           controlBox={
             <Grid columns={2} gap={12}>
               {this.buildGridItem({

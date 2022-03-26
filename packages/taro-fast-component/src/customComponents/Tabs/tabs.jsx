@@ -805,7 +805,7 @@ class Tabs extends BaseComponent {
       <View style={containerStyle}>
         <FlexBox
           flexAuto="right"
-          alignItems={singlePanel ? 'flex-start' : 'center'}
+          alignItems={singlePanel ? 'stretch' : 'center'}
           leftStyle={{
             width: transformSize(verticalTabWidth),
           }}
