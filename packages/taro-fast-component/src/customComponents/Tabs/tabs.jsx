@@ -31,6 +31,7 @@ const defaultProps = {
   titleStyle: {},
   titleActiveStyle: {},
   headerBackgroundColor: '#fff',
+  underline: true,
   underlineHorizontalPosition: 'bottom',
   underlineHorizontalHeight: 2,
   underlineHorizontalMargin: 0,
@@ -296,13 +297,14 @@ class Tabs extends BaseComponent {
   };
 
   buildTabItem = ({
+    underline,
     item,
     index,
     currentIndex,
     titleStyle,
     titleActiveStyle,
   }) => {
-    const itemCls = classNames({
+    const itemClassName = classNames({
       [`${classPrefix}__item`]: true,
       [`${classPrefix}__item--active`]: currentIndex === index,
     });
@@ -359,7 +361,7 @@ class Tabs extends BaseComponent {
 
     return (
       <View
-        className={itemCls}
+        className={itemClassName}
         key={`${this.keyPrefix}-item-${index}`}
         style={{
           ...styleItem,
@@ -373,19 +375,22 @@ class Tabs extends BaseComponent {
       >
         {titleComponent}
 
-        <View
-          className={classNames(`${classPrefix}__item-underline`, {
-            [`${classPrefix}__item-underline--horizontal`]:
-              direction === 'horizontal',
-            [`${classPrefix}__item-underline--vertical`]:
-              direction === 'vertical',
-          })}
-        ></View>
+        {underline ? (
+          <View
+            className={classNames(`${classPrefix}__item-underline`, {
+              [`${classPrefix}__item-underline--horizontal`]:
+                direction === 'horizontal',
+              [`${classPrefix}__item-underline--vertical`]:
+                direction === 'vertical',
+            })}
+          />
+        ) : null}
       </View>
     );
   };
 
   buildTabItemList = ({
+    underline,
     tabList,
     currentIndex,
     titleStyle,
@@ -393,6 +398,7 @@ class Tabs extends BaseComponent {
   }) => {
     return tabList.map((item, index) => {
       return this.buildTabItem({
+        underline,
         item,
         index,
         currentIndex,
@@ -411,6 +417,7 @@ class Tabs extends BaseComponent {
       verticalScrollHeight,
       tabList,
       scroll,
+      underline,
     } = this.props;
     const { currentStage } = this.state;
 
@@ -431,6 +438,7 @@ class Tabs extends BaseComponent {
           list={tabList}
           itemBuilder={(item, index) => {
             return this.buildTabItem({
+              underline,
               item,
               index,
               currentIndex: currentStage,
@@ -453,6 +461,7 @@ class Tabs extends BaseComponent {
           }}
         >
           {this.buildTabItemList({
+            underline,
             tabList,
             currentIndex: currentStage,
             titleStyle,
@@ -477,6 +486,7 @@ class Tabs extends BaseComponent {
         list={tabList}
         itemBuilder={(item, index) => {
           return this.buildTabItem({
+            underline,
             item,
             index,
             currentIndex: currentStage,
@@ -498,6 +508,7 @@ class Tabs extends BaseComponent {
         }}
       >
         {this.buildTabItemList({
+          underline,
           tabList,
           currentIndex: currentStage,
           titleStyle,

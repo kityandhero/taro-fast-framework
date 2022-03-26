@@ -185,6 +185,20 @@ const config6 = {
   tabList: tabNoBodyList,
 };
 
+const config61 = {
+  current: 2,
+  titleStyle: {
+    color: 'blue',
+    padding: `${transformSize(10)} ${transformSize(20)}`,
+  },
+  titleActiveStyle: {
+    color: 'red',
+    fontWeight: '800',
+  },
+  underline: false,
+  tabList: tabNoBodyList,
+};
+
 const config7 = {
   height: transformSize(80),
   tabList: tabDecorationList,
@@ -400,6 +414,16 @@ export default class Index extends ContentPageBase {
                   this.setState({
                     header: text,
                     currentConfig: config6,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '隐藏下划线',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config61,
                   });
                 },
               })}
