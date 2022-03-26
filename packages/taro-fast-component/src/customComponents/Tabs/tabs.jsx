@@ -36,7 +36,7 @@ const defaultProps = {
   underlineHorizontalMargin: 0,
   underlineVerticalPosition: 'right',
   underlineVerticalWidth: 2,
-  underlineVerticalMargin: 20,
+  underlineVerticalMargin: 16,
   underlineColor: '#f0f0f0',
   underlineActiveColor: '#6190e8',
   showPanel: false,
