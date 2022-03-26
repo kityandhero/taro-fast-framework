@@ -94,7 +94,9 @@ class ScrollBox extends BaseComponent {
   getStyle = () => {
     const { style } = this.props;
 
-    return style || {};
+    return {
+      ...(style || {}),
+    };
   };
 
   getDirection = () => {

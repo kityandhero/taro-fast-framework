@@ -27,7 +27,7 @@ const classPrefix = `tfc-tabs`;
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
-  className: '',
+  style: {},
   titleStyle: {},
   titleActiveStyle: {},
   headerBackgroundColor: '#fff',
@@ -40,6 +40,7 @@ const defaultProps = {
   underlineColor: '#f0f0f0',
   underlineActiveColor: '#6190e8',
   showPanel: false,
+  bodyStyle: {},
   panelStyle: {},
   /**
    * Tab 方向，请跟 AtTabPane 保持一致
@@ -53,7 +54,7 @@ const defaultProps = {
   horizontalTabHeight: 82,
   horizontalPanelHeight: 200,
   verticalTabWidth: 120,
-  verticalHeight: 100,
+  verticalScrollHeight: 100,
   /**
    * 当前选中的标签索引值，从 0 计数，开发者需要通过 onClick 事件来改变 current，从而切换 tab
    * @default 0
@@ -85,9 +86,9 @@ const defaultProps = {
 };
 
 class Tabs extends BaseComponent {
-  tabId = '';
-
   bodyId = '';
+
+  verticalHeaderId = '';
 
   /**
    * 触摸时的原点
@@ -114,8 +115,6 @@ class Tabs extends BaseComponent {
   constructor(props) {
     super(props);
 
-    this.tabId = getGuid();
-
     const { current } = props;
 
     this.state = {
@@ -139,6 +138,8 @@ class Tabs extends BaseComponent {
     this.isMoving = false;
 
     this.bodyId = getGuid();
+
+    this.verticalHeaderId = getGuid();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -151,6 +152,7 @@ class Tabs extends BaseComponent {
           currentFlag: currentNext,
           currentStage: currentNext,
           horizontalPanelWidth: 0,
+          verticalPanelHeight: 0,
         },
       };
     }
@@ -159,24 +161,43 @@ class Tabs extends BaseComponent {
   }
 
   doWorkAfterDidMount = () => {
+    const { scroll } = this.props;
+
+    const direction = this.getDirection();
+
     const that = this;
 
-    that.timerAdjust = setTimeout(() => {
-      getRect(`#${that.bodyId}`).then((rect) => {
-        if ((rect || null) != null) {
-          const { width } = rect;
+    if (direction === 'horizontal') {
+      that.timerAdjust = setTimeout(() => {
+        getRect(`#${that.bodyId}`).then((rect) => {
+          if ((rect || null) != null) {
+            const { width } = rect;
 
-          that.setState({
-            horizontalPanelWidth: width,
-          });
-        }
-      });
-    }, 200);
+            that.setState({
+              horizontalPanelWidth: width,
+            });
+          }
+        });
+      }, 200);
+    }
+
+    if (!scroll && direction === 'vertical') {
+      that.timerAdjust = setTimeout(() => {
+        getRect(`#${that.verticalHeaderId}`).then((rect) => {
+          if ((rect || null) != null) {
+            const { height } = rect;
+
+            that.setState({
+              verticalPanelHeight: height,
+            });
+          }
+        });
+      }, 200);
+    }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
-    return null;
+  doWorkBeforeUnmount = () => {
+    clearTimeout(this.timerAdjust);
   };
 
   getDirection = () => {
@@ -374,7 +395,7 @@ class Tabs extends BaseComponent {
       titleActiveStyle,
       horizontalTabHeight,
       verticalTabWidth,
-      verticalHeight,
+      verticalScrollHeight,
       tabList,
       scroll,
     } = this.props;
@@ -407,7 +428,6 @@ class Tabs extends BaseComponent {
         />
       ) : (
         <View
-          id={this.tabId}
           className={classNames(`${classPrefix}__header-horizontal`)}
           style={{
             ...{
@@ -438,7 +458,7 @@ class Tabs extends BaseComponent {
             ? defaultProps.verticalTabWidth
             : verticalTabWidth,
         )}
-        height={verticalHeight}
+        height={verticalScrollHeight}
         direction="vertical"
         gap={0}
         list={tabList}
@@ -454,7 +474,7 @@ class Tabs extends BaseComponent {
       />
     ) : (
       <View
-        id={this.tabId}
+        id={this.verticalHeaderId}
         className={classNames(`${classPrefix}__header-vertical`)}
         style={{
           width: transformSize(
@@ -462,7 +482,6 @@ class Tabs extends BaseComponent {
               ? defaultProps.verticalTabWidth
               : verticalTabWidth,
           ),
-          height: transformSize(verticalHeight),
         }}
       >
         {this.buildTabItemList({
@@ -477,14 +496,17 @@ class Tabs extends BaseComponent {
 
   buildPanelList = () => {
     const {
+      scroll,
       horizontalPanelHeight,
-      verticalHeight,
+      verticalScrollHeight,
       animated,
       showPanel,
       tabList,
+      bodyStyle,
       panelStyle,
     } = this.props;
-    const { currentStage, horizontalPanelWidth } = this.state;
+    const { currentStage, horizontalPanelWidth, verticalPanelHeight } =
+      this.state;
 
     if (!showPanel) {
       return null;
@@ -498,10 +520,12 @@ class Tabs extends BaseComponent {
 
     const direction = this.getDirection();
 
-    const verticalHeightStyle =
+    const verticalScrollHeightStyle =
       direction === 'vertical'
         ? {
-            height: transformSize(verticalHeight),
+            height: scroll
+              ? transformSize(verticalScrollHeight)
+              : `${verticalPanelHeight}px`,
           }
         : {};
 
@@ -510,22 +534,24 @@ class Tabs extends BaseComponent {
       transformStyle = `translate3d(-${currentStage * 100}%, 0px, 0px)`;
     }
 
-    const bodyStyle = {
+    const bodyInnerStyle = {
       ...{
         transform: transformStyle,
         '-webkit-transform': transformStyle,
       },
-      ...verticalHeightStyle,
+      ...verticalScrollHeightStyle,
     };
 
     if (!animated) {
-      bodyStyle.transition = 'unset';
+      bodyInnerStyle.transition = 'unset';
     }
 
     const panelContainerAdjust = {
       ...(direction === 'vertical'
         ? {
-            height: transformSize(verticalHeight),
+            height: scroll
+              ? transformSize(verticalScrollHeight)
+              : `${verticalPanelHeight}px`,
           }
         : {
             width: `${horizontalPanelWidth}px`,
@@ -536,6 +562,7 @@ class Tabs extends BaseComponent {
       <View
         id={this.bodyId}
         style={{
+          ...(bodyStyle || {}),
           ...(direction === 'horizontal'
             ? {
                 width: '100%',
@@ -545,10 +572,13 @@ class Tabs extends BaseComponent {
           ...(direction === 'vertical'
             ? {
                 width: '100%',
-                height: transformSize(verticalHeight),
+                height: scroll
+                  ? transformSize(verticalScrollHeight)
+                  : `${verticalPanelHeight}px`,
               }
             : {}),
           ...{
+            position: 'relative',
             overflow: 'hidden',
           },
         }}
@@ -562,7 +592,7 @@ class Tabs extends BaseComponent {
           onTouchEnd={this.handleTouchEnd}
           catchMove
           onTouchMove={this.handleTouchMove}
-          style={bodyStyle}
+          style={bodyInnerStyle}
         >
           {tabListAdjust.map((item, index) => {
             const { body } = {
@@ -592,6 +622,7 @@ class Tabs extends BaseComponent {
 
   renderFurther() {
     const {
+      style,
       headerBackgroundColor,
       underlineHorizontalPosition,
       underlineHorizontalHeight,
@@ -601,17 +632,19 @@ class Tabs extends BaseComponent {
       underlineVerticalPosition,
       underlineColor,
       underlineActiveColor,
-      verticalHeight,
+      verticalScrollHeight,
       verticalTabWidth,
+      scroll,
     } = this.props;
 
     const direction = this.getDirection();
 
     const containerStyle = {
+      ...style,
       ...(direction === 'vertical'
         ? {
+            ...(scroll ? { height: transformSize(verticalScrollHeight) } : {}),
             ...{
-              height: transformSize(verticalHeight),
               '--underline-vertical-width': transformSize(
                 underlineVerticalWidth,
               ),

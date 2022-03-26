@@ -82,7 +82,46 @@ const tabVerticalList = buildTabList(9, true, {
   height: transformSize(200),
 });
 
+const tabVerticalDecorationList = tabVerticalList.map((item, index) => {
+  if (index === 0) {
+    return {
+      ...item,
+      ...{
+        useBadge: true,
+        badgeColor: 'red',
+        badgeContent: Badge.dot,
+        icon: <IconSketch size={24} />,
+      },
+    };
+  }
+
+  if (index === 1) {
+    return {
+      ...item,
+      ...{
+        useBadge: true,
+        badgeContent: '更多',
+        badgeColor: '#58ab3d',
+        icon: <Icon size={36} imageMode value={logoImg} />,
+      },
+    };
+  }
+
+  return {
+    ...item,
+    ...{
+      icon: <IconSketch size={24} />,
+    },
+  };
+});
+
+const configHorizontalHeight = {
+  horizontalPanelHeight: 238,
+};
+
 const config1 = {
+  underline: true,
+  underlineHorizontalHeight: 1,
   current: 2,
   tabList: tabNoBodyList,
 };
@@ -128,9 +167,13 @@ const config6 = {
   tabList: tabNoBodyList,
 };
 
-const config7 = { height: transformSize(80), tabList: tabDecorationList };
+const config7 = {
+  height: transformSize(80),
+  tabList: tabDecorationList,
+};
 
 const config8 = {
+  ...configHorizontalHeight,
   showPanel: true,
   tabList: tabList,
 };
@@ -141,6 +184,7 @@ const config9 = {
 };
 
 const config10 = {
+  ...configHorizontalHeight,
   scroll: true,
   showPanel: true,
   tabList: tabScrollList,
@@ -148,20 +192,28 @@ const config10 = {
 
 const config11 = {
   current: 3,
-  scroll: true,
   showPanel: true,
-  verticalHeight: transformSize(200),
+  verticalScrollHeight: transformSize(500),
+  verticalTabWidth: transformSize(220),
+  style: {
+    borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
+  },
+  bodyStyle: {
+    borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+  },
   direction: 'vertical',
-  tabList: tabVerticalList,
+  tabList: tabVerticalDecorationList,
 };
 
 const config12 = {
+  ...configHorizontalHeight,
   animated: false,
   showPanel: true,
   tabList: tabList,
 };
 
 const config13 = {
+  horizontalPanelHeight: 318,
   animated: false,
   showPanel: true,
   panelStyle: {
@@ -169,6 +221,21 @@ const config13 = {
     padding: transformSize(40),
   },
   tabList: tabList,
+};
+
+const config14 = {
+  current: 3,
+  scroll: true,
+  showPanel: true,
+  verticalScrollHeight: transformSize(400),
+  style: {
+    borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
+  },
+  bodyStyle: {
+    borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+  },
+  direction: 'vertical',
+  tabList: tabVerticalList,
 };
 
 // eslint-disable-next-line no-undef
@@ -299,18 +366,6 @@ export default class Index extends ContentPageBase {
         </SimpleBox>
 
         <SimpleBox
-          header="垂直模式"
-          config={config11}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['body']}
-        >
-          <Tabs {...config11} />
-        </SimpleBox>
-
-        <SimpleBox
           header="禁止内容切换动画"
           config={config12}
           space={false}
@@ -334,10 +389,34 @@ export default class Index extends ContentPageBase {
           <Tabs {...config13} />
         </SimpleBox>
 
+        <SimpleBox
+          header="垂直模式"
+          config={config11}
+          space={false}
+          componentName="Tabs"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'body']}
+        >
+          <Tabs {...config11} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="垂直滚动模式"
+          config={config14}
+          space={false}
+          componentName="Tabs"
+          mockChildren={false}
+          useInnerBox={false}
+          ignorePropertyList={['icon', 'body']}
+        >
+          <Tabs {...config14} />
+        </SimpleBox>
+
         <PropertyBox
           header="Tabs 可配置项以及默认值"
           config={Tabs.defaultProps}
-          labelWidth={360}
+          labelWidth={370}
         />
       </Space>
     );

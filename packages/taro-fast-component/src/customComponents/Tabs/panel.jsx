@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { isObject } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -32,6 +33,12 @@ class TabPanel extends BaseComponent {
       ? directionSource
       : 'horizontal';
 
+    let hasPanelStyle = false;
+
+    if (isObject(panelStyle) && Object.keys(panelStyle).length > 0) {
+      hasPanelStyle = true;
+    }
+
     return (
       <View
         className={classNames(`${classPrefix}__pane`, {
@@ -40,7 +47,7 @@ class TabPanel extends BaseComponent {
         })}
         style={style}
       >
-        <View style={panelStyle}> {children}</View>
+        {hasPanelStyle ? <View style={panelStyle}> {children}</View> : children}
       </View>
     );
   }
