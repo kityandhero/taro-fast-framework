@@ -18,6 +18,18 @@ import logoImg from '../../../assets/images/logo.png';
 
 const { IconSketch } = Icon;
 
+const singlePanelComponent = (
+  <View
+    style={{
+      padding: `${transformSize(100)} ${transformSize(50)}`,
+      backgroundColor: '#FAFBFC',
+      textAlign: 'center',
+    }}
+  >
+    单面板
+  </View>
+);
+
 function buildPanel(i, style) {
   return <View style={style}>标签页{i + 1}的内容</View>;
 }
@@ -121,7 +133,7 @@ const tabVerticalDecorationList = tabVerticalList.map((item, index) => {
 });
 
 const configHorizontalHeight = {
-  horizontalPanelHeight: 238,
+  horizontalMultiPanelHeight: 238,
 };
 
 const config1 = {
@@ -177,9 +189,17 @@ const config7 = {
   tabList: tabDecorationList,
 };
 
+const config71 = {
+  showPanel: true,
+  singlePanel: true,
+  tabList: tabNoBodyList,
+  panel: singlePanelComponent,
+};
+
 const config8 = {
   ...configHorizontalHeight,
   showPanel: true,
+  singlePanel: false,
   tabList: tabList,
 };
 
@@ -192,12 +212,23 @@ const config10 = {
   ...configHorizontalHeight,
   scroll: true,
   showPanel: true,
+  singlePanel: false,
   tabList: tabScrollList,
+};
+
+const config101 = {
+  ...configHorizontalHeight,
+  scroll: true,
+  showPanel: true,
+  singlePanel: true,
+  tabList: tabScrollList,
+  panel: singlePanelComponent,
 };
 
 const config11 = {
   current: 3,
   showPanel: true,
+  singlePanel: false,
   verticalScrollHeight: transformSize(500),
   verticalTabWidth: transformSize(220),
   bodyStyle: {
@@ -205,6 +236,19 @@ const config11 = {
   },
   direction: 'vertical',
   tabList: tabVerticalDecorationList,
+};
+
+const config111 = {
+  current: 3,
+  showPanel: true,
+  singlePanel: true,
+  verticalTabWidth: transformSize(220),
+  bodyStyle: {
+    borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+  },
+  direction: 'vertical',
+  tabList: tabVerticalDecorationList,
+  panel: singlePanelComponent,
 };
 
 const config12 = {
@@ -215,9 +259,10 @@ const config12 = {
 };
 
 const config13 = {
-  horizontalPanelHeight: 318,
+  horizontalMultiPanelHeight: 318,
   animated: false,
   showPanel: true,
+  singlePanel: false,
   panelStyle: {
     backgroundColor: 'red',
     padding: transformSize(40),
@@ -229,6 +274,7 @@ const config14 = {
   current: 3,
   scroll: true,
   showPanel: true,
+  singlePanel: false,
   verticalScrollHeight: transformSize(400),
   bodyStyle: {
     borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
@@ -255,8 +301,8 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        header: '垂直滚动模式',
-        currentConfig: config14,
+        header: '仅头部',
+        currentConfig: config1,
       },
     };
   }
@@ -268,7 +314,7 @@ export default class Index extends ContentPageBase {
           <Button
             size="mini"
             style={{
-              width: '100%',
+              width: '98%',
             }}
             onClick={() => {
               handler(title);
@@ -368,7 +414,17 @@ export default class Index extends ContentPageBase {
               })}
 
               {this.buildGridItem({
-                title: '面板联动',
+                title: '单面板',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config71,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '多面板联动',
                 handler: (text) => {
                   this.setState({
                     header: text,
@@ -388,7 +444,17 @@ export default class Index extends ContentPageBase {
               })}
 
               {this.buildGridItem({
-                title: '滚动标签面板联动',
+                title: '滚动单面板',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config101,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '滚动多面板联动',
                 handler: (text) => {
                   this.setState({
                     header: text,
@@ -428,7 +494,17 @@ export default class Index extends ContentPageBase {
               })}
 
               {this.buildGridItem({
-                title: '垂直滚动模式',
+                title: '垂直单面板',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config111,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '垂直多面板滚动',
                 handler: (text) => {
                   this.setState({
                     header: text,

@@ -42,6 +42,8 @@ const defaultProps = {
   showPanel: false,
   bodyStyle: {},
   panelStyle: {},
+  singlePanel: true,
+  panel: null,
   /**
    * Tab 方向，请跟 AtTabPane 保持一致
    * @default 'horizontal'
@@ -52,7 +54,7 @@ const defaultProps = {
    * 当 tabDirection='horizontal' 时，会自动根据内容撑开，请勿设置
    */
   horizontalTabHeight: 82,
-  horizontalPanelHeight: 200,
+  horizontalMultiPanelHeight: 200,
   verticalTabWidth: 120,
   verticalScrollHeight: 100,
   /**
@@ -152,7 +154,7 @@ class Tabs extends BaseComponent {
           currentFlag: currentNext,
           currentStage: currentNext,
           horizontalPanelWidth: 0,
-          verticalPanelHeight: 0,
+          verticalMultiPanelHeight: 0,
         },
       };
     }
@@ -203,7 +205,7 @@ class Tabs extends BaseComponent {
             const { height } = rect;
 
             that.setState({
-              verticalPanelHeight: height,
+              verticalMultiPanelHeight: height,
             });
           }
         });
@@ -505,18 +507,16 @@ class Tabs extends BaseComponent {
     );
   };
 
-  buildPanelList = () => {
+  buildMultiPanel = () => {
     const {
       scroll,
-      horizontalPanelHeight,
       verticalScrollHeight,
       animated,
       showPanel,
       tabList,
-      bodyStyle,
       panelStyle,
     } = this.props;
-    const { currentStage, horizontalPanelWidth, verticalPanelHeight } =
+    const { currentStage, horizontalPanelWidth, verticalMultiPanelHeight } =
       this.state;
 
     if (!showPanel) {
@@ -536,7 +536,7 @@ class Tabs extends BaseComponent {
         ? {
             height: scroll
               ? transformSize(verticalScrollHeight)
-              : `${verticalPanelHeight}px`,
+              : `${verticalMultiPanelHeight}px`,
           }
         : {};
 
@@ -562,7 +562,7 @@ class Tabs extends BaseComponent {
         ? {
             height: scroll
               ? transformSize(verticalScrollHeight)
-              : `${verticalPanelHeight}px`,
+              : `${verticalMultiPanelHeight}px`,
           }
         : {
             width: `${horizontalPanelWidth}px`,
@@ -571,62 +571,136 @@ class Tabs extends BaseComponent {
 
     return (
       <View
+        className={classNames(`${classPrefix}__body`, {
+          [`${classPrefix}__body-horizontal`]: direction === 'horizontal',
+          [`${classPrefix}__body-vertical`]: direction === 'vertical',
+        })}
+        onTouchStart={this.handleTouchStart}
+        onTouchEnd={this.handleTouchEnd}
+        catchMove
+        onTouchMove={this.handleTouchMove}
+        style={bodyInnerStyle}
+      >
+        {tabListAdjust.map((item, index) => {
+          const { body } = {
+            ...{
+              body: null,
+            },
+            ...item,
+          };
+
+          return (
+            <TabPanel
+              key={`${this.prefixKey}_panel_${index}`}
+              index={index}
+              current={currentStage}
+              style={panelContainerAdjust}
+              panelStyle={panelStyle}
+              direction={direction}
+            >
+              {body || null}
+            </TabPanel>
+          );
+        })}
+      </View>
+    );
+  };
+
+  buildSinglePanel = () => {
+    const { panel } = this.props;
+
+    return panel;
+  };
+
+  buildBody = () => {
+    const {
+      scroll,
+      horizontalMultiPanelHeight,
+      verticalScrollHeight,
+      animated,
+      showPanel,
+      tabList,
+      bodyStyle,
+      singlePanel,
+    } = this.props;
+    const { currentStage, verticalMultiPanelHeight } = this.state;
+
+    if (!showPanel) {
+      return null;
+    }
+
+    const tabListAdjust = isArray(tabList) ? tabList : [];
+
+    if (tabListAdjust.length === 0) {
+      return null;
+    }
+
+    const direction = this.getDirection();
+
+    const verticalScrollHeightStyle =
+      direction === 'vertical'
+        ? {
+            height: scroll
+              ? transformSize(verticalScrollHeight)
+              : `${verticalMultiPanelHeight}px`,
+          }
+        : {};
+
+    let transformStyle = `translate3d(0px, -${currentStage * 100}%, 0px)`;
+    if (direction === 'horizontal') {
+      transformStyle = `translate3d(-${currentStage * 100}%, 0px, 0px)`;
+    }
+
+    const bodyInnerStyle = {
+      ...{
+        transform: transformStyle,
+        '-webkit-transform': transformStyle,
+      },
+      ...verticalScrollHeightStyle,
+    };
+
+    if (!animated) {
+      bodyInnerStyle.transition = 'unset';
+    }
+
+    return (
+      <View
         id={this.bodyId}
         style={{
           ...(bodyStyle || {}),
           ...(direction === 'horizontal'
             ? {
-                width: '100%',
-                height: transformSize(horizontalPanelHeight),
+                ...{
+                  width: '100%',
+                },
+                ...(singlePanel
+                  ? {}
+                  : { height: transformSize(horizontalMultiPanelHeight) }),
               }
             : {}),
           ...(direction === 'vertical'
             ? {
-                width: '100%',
-                height: scroll
-                  ? transformSize(verticalScrollHeight)
-                  : `${verticalPanelHeight}px`,
+                ...{
+                  width: '100%',
+                },
+                ...(singlePanel
+                  ? {}
+                  : {
+                      height: scroll
+                        ? transformSize(verticalScrollHeight)
+                        : `${verticalMultiPanelHeight}px`,
+                    }),
               }
             : {}),
-          ...{
-            position: 'relative',
-            overflow: 'hidden',
-          },
+          ...(singlePanel
+            ? {}
+            : {
+                position: 'relative',
+                overflow: 'hidden',
+              }),
         }}
       >
-        <View
-          className={classNames(`${classPrefix}__body`, {
-            [`${classPrefix}__body-horizontal`]: direction === 'horizontal',
-            [`${classPrefix}__body-vertical`]: direction === 'vertical',
-          })}
-          onTouchStart={this.handleTouchStart}
-          onTouchEnd={this.handleTouchEnd}
-          catchMove
-          onTouchMove={this.handleTouchMove}
-          style={bodyInnerStyle}
-        >
-          {tabListAdjust.map((item, index) => {
-            const { body } = {
-              ...{
-                body: null,
-              },
-              ...item,
-            };
-
-            return (
-              <TabPanel
-                key={`${this.prefixKey}_panel_${index}`}
-                index={index}
-                current={currentStage}
-                style={panelContainerAdjust}
-                panelStyle={panelStyle}
-                direction={direction}
-              >
-                {body || null}
-              </TabPanel>
-            );
-          })}
-        </View>
+        {singlePanel ? this.buildSinglePanel() : this.buildMultiPanel()}
       </View>
     );
   };
@@ -646,6 +720,7 @@ class Tabs extends BaseComponent {
       verticalScrollHeight,
       verticalTabWidth,
       scroll,
+      singlePanel,
     } = this.props;
 
     const direction = this.getDirection();
@@ -721,7 +796,7 @@ class Tabs extends BaseComponent {
         <View style={containerStyle}>
           {tabHeader}
 
-          {this.buildPanelList()}
+          {this.buildBody()}
         </View>
       );
     }
@@ -730,11 +805,12 @@ class Tabs extends BaseComponent {
       <View style={containerStyle}>
         <FlexBox
           flexAuto="right"
+          alignItems={singlePanel ? 'flex-start' : 'center'}
           leftStyle={{
             width: transformSize(verticalTabWidth),
           }}
           left={tabHeader}
-          right={this.buildPanelList()}
+          right={this.buildBody()}
         />
       </View>
     );
