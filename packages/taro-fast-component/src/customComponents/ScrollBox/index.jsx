@@ -18,6 +18,10 @@ function buildId({ prefix, index }) {
   return `${prefix}_item_${index}`;
 }
 
+function buildGapId({ prefix, index }) {
+  return `${prefix}_item_gap_${index}`;
+}
+
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
@@ -149,7 +153,7 @@ class ScrollBox extends BaseComponent {
 
     return (
       <View
-        key={`${this.keyPrefix}_${index}`}
+        key={`${this.keyPrefix}_key_item_${index}`}
         id={buildId({
           prefix: this.keyPrefix,
           index,
@@ -204,7 +208,11 @@ class ScrollBox extends BaseComponent {
         if (index > 0) {
           listItem.push(
             <View
-              key={`${this.keyPrefix}_gap_${index}`}
+              key={`${this.keyPrefix}_key_item_gap_${index}`}
+              id={buildGapId({
+                prefix: this.keyPrefix,
+                index,
+              })}
               style={{
                 display: direction === 'horizontal' ? 'inline-block' : 'block',
                 width:

@@ -39,7 +39,7 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
           result +
           `${key}={${s
             .replace(/function[\w\W]*?\(/, '(')
-            .replace(/\)[\w\W]*{/, ') => {')}} `;
+            .replace(/\)[\s]*{/, ') => {')}} `;
       } else if (isObject(value) || isArray(value)) {
         if (inCollection(ignorePropertyList, key)) {
           return (result = result + `${key}={...} `);

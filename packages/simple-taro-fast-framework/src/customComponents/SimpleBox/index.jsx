@@ -19,6 +19,7 @@ import {
   Card,
   ColorText,
   HelpBox,
+  Divider,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
@@ -41,6 +42,10 @@ const defaultProps = {
   extra: null,
   componentName: '',
   mockChildren: true,
+  useInnerBox: true,
+  innerBoxCenterMode: true,
+  innerBoxPadding: true,
+  controlBox: null,
 };
 
 class SimpleBox extends Component {
@@ -136,8 +141,18 @@ class SimpleBox extends Component {
   };
 
   render() {
-    const { space, prefix, header, helpTitle, extra, useInnerBox, children } =
-      this.props;
+    const {
+      space,
+      prefix,
+      header,
+      helpTitle,
+      extra,
+      useInnerBox,
+      innerBoxCenterMode,
+      innerBoxPadding,
+      controlBox,
+      children,
+    } = this.props;
 
     const list = this.buildList();
 
@@ -161,26 +176,39 @@ class SimpleBox extends Component {
         footer={footer}
         space={space}
         extra={extra}
-        useInnerBox={false}
       >
         {useInnerBox ? (
           <View
             style={{
-              width: 'calc(100% - var(--tfc-11) * 2)',
-              minHeight: transformSize(120),
-              border: 'var(--tfc-1) solid #ccc',
-              padding: 'var(--tfc-10) var(--tfc-10)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              ...{
+                minHeight: transformSize(120),
+                border: 'var(--tfc-1) solid #ccc',
+              },
+              ...(innerBoxPadding
+                ? {
+                    padding: 'var(--tfc-10) var(--tfc-10)',
+                  }
+                : {
+                    width: 'calc(100% - var(--tfc-1) * 2)',
+                  }),
+              ...(innerBoxCenterMode
+                ? {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }
+                : {}),
             }}
-            fillHeight={false}
           >
             {children}
           </View>
         ) : (
           children
         )}
+
+        {controlBox ? <Divider>样例切换</Divider> : null}
+
+        {controlBox}
 
         {list.length > 0 ? (
           <HelpBox

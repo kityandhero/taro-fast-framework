@@ -161,6 +161,21 @@ class Tabs extends BaseComponent {
   }
 
   doWorkAfterDidMount = () => {
+    this.adjustSize();
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
+    this.adjustSize();
+
+    return null;
+  };
+
+  doWorkBeforeUnmount = () => {
+    clearTimeout(this.timerAdjust);
+  };
+
+  adjustSize = () => {
     const { scroll } = this.props;
 
     const direction = this.getDirection();
@@ -194,10 +209,6 @@ class Tabs extends BaseComponent {
         });
       }, 200);
     }
-  };
-
-  doWorkBeforeUnmount = () => {
-    clearTimeout(this.timerAdjust);
   };
 
   getDirection = () => {

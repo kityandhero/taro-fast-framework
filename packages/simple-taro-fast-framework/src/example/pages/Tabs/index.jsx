@@ -1,4 +1,4 @@
-import { View } from '@tarojs/components';
+import { Button, View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
@@ -6,6 +6,9 @@ import {
   Badge,
   Icon,
   Space,
+  Grid,
+  ColorText,
+  CenterBox,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -24,8 +27,10 @@ function buildTabList(size, hasBody = false, style = {}) {
 
   for (let i = 0; i < size; i++) {
     result.push({
-      title: `标签页${i + 1}`,
-      body: hasBody ? buildPanel(i, style) : null,
+      ...{
+        title: `标签页${i + 1}`,
+      },
+      ...(hasBody ? { body: buildPanel(i, style) } : {}),
     });
   }
 
@@ -195,9 +200,6 @@ const config11 = {
   showPanel: true,
   verticalScrollHeight: transformSize(500),
   verticalTabWidth: transformSize(220),
-  style: {
-    borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
-  },
   bodyStyle: {
     borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
   },
@@ -228,9 +230,6 @@ const config14 = {
   scroll: true,
   showPanel: true,
   verticalScrollHeight: transformSize(400),
-  style: {
-    borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
-  },
   bodyStyle: {
     borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
   },
@@ -250,167 +249,197 @@ export default class Index extends ContentPageBase {
     description: '标签面板组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '垂直滚动模式',
+        currentConfig: config14,
+      },
+    };
+  }
+
+  buildGridItem = ({ title, handler }) => {
+    return (
+      <Grid.Item>
+        <CenterBox>
+          <Button
+            size="mini"
+            style={{
+              width: '100%',
+            }}
+            onClick={() => {
+              handler(title);
+            }}
+          >
+            <ColorText text={title} />
+          </Button>
+        </CenterBox>
+      </Grid.Item>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="仅头部"
-          config={config1}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Tabs {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏模式"
-          config={config2}
+          header={header}
+          config={currentConfig}
           componentName="Tabs"
           mockChildren={false}
           useInnerBox
-        >
-          <Tabs {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="点击事件"
-          config={config3}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Tabs {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="标头样式"
-          config={config4}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Tabs {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="头部背景"
-          config={config5}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Tabs {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="下划线样式"
-          config={config6}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Tabs {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="图标/徽记"
-          config={config7}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon']}
-        >
-          <Tabs {...config7} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="Panel联动"
-          config={config8}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
+          innerBoxCenterMode={false}
+          innerBoxPadding={false}
           ignorePropertyList={['icon', 'body']}
-        >
-          <Tabs {...config8} />
-        </SimpleBox>
+          controlBox={
+            <Grid columns={2} gap={12}>
+              {this.buildGridItem({
+                title: '仅头部',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config1,
+                  });
+                },
+              })}
 
-        <SimpleBox
-          header="滚动标签栏"
-          config={config9}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Tabs {...config9} />
-        </SimpleBox>
+              {this.buildGridItem({
+                title: '隐藏模式',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config2,
+                  });
+                },
+              })}
 
-        <SimpleBox
-          header="滚动标签栏Panel联动"
-          config={config10}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['body']}
-        >
-          <Tabs {...config10} />
-        </SimpleBox>
+              {this.buildGridItem({
+                title: '点击事件',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config3,
+                  });
+                },
+              })}
 
-        <SimpleBox
-          header="禁止内容切换动画"
-          config={config12}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['body']}
-        >
-          <Tabs {...config12} />
-        </SimpleBox>
+              {this.buildGridItem({
+                title: '标头样式',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config4,
+                  });
+                },
+              })}
 
-        <SimpleBox
-          header="Panel样式"
-          config={config13}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['body']}
-        >
-          <Tabs {...config13} />
-        </SimpleBox>
+              {this.buildGridItem({
+                title: '头部背景',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config5,
+                  });
+                },
+              })}
 
-        <SimpleBox
-          header="垂直模式"
-          config={config11}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'body']}
-        >
-          <Tabs {...config11} />
-        </SimpleBox>
+              {this.buildGridItem({
+                title: '下划线样式',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config6,
+                  });
+                },
+              })}
 
-        <SimpleBox
-          header="垂直滚动模式"
-          config={config14}
-          space={false}
-          componentName="Tabs"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'body']}
+              {this.buildGridItem({
+                title: '图标/徽记',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config7,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '面板联动',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config8,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '滚动标签',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config9,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '滚动标签面板联动',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config10,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '禁止内容切换动画',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config12,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '面板样式',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config13,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '垂直模式',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config11,
+                  });
+                },
+              })}
+
+              {this.buildGridItem({
+                title: '垂直滚动模式',
+                handler: (text) => {
+                  this.setState({
+                    header: text,
+                    currentConfig: config14,
+                  });
+                },
+              })}
+            </Grid>
+          }
         >
-          <Tabs {...config14} />
+          <Tabs {...currentConfig} />
         </SimpleBox>
 
         <PropertyBox

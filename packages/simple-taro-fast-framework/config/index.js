@@ -28,6 +28,7 @@ const config = {
     '@': path.resolve(__dirname, '..', 'src'),
   },
   mini: {
+    baseLevel: 20,
     postcss: {
       pxtransform: {
         enable: true,
