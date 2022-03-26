@@ -46,7 +46,8 @@ definePageConfig({
   global,
 }))
 export default class Index extends BasePageWrapper {
-  scrollView;
+  scrollViewMode = true;
+
   enablePullDownRefresh = true;
 
   enableLowerLoad = true;
@@ -135,7 +136,7 @@ export default class Index extends BasePageWrapper {
   buildTab = () => {
     return (
       <Tabs
-        // current={this.initialSectionIndex}
+        current={this.initialSectionIndex}
         scroll
         titleActiveStyle={{
           color: '#2467db',
@@ -242,13 +243,15 @@ export default class Index extends BasePageWrapper {
     );
   };
 
+  buildUpperBox = () => {
+    return this.buildTab();
+  };
+
   renderFurther() {
     const { metaListData } = this.state;
 
     return (
       <View className={classNames(classPrefix)}>
-        {this.buildTab()}
-
         <View className={classNames(`${classPrefix}__list-containor`)}>
           {this.judgeInitialActivityIndicatorVisible()
             ? this.buildInitialActivityIndicator({})
