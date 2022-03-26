@@ -3,6 +3,7 @@ import { View, ScrollView } from '@tarojs/components';
 import {
   showErrorMessage,
   transformSize,
+  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
@@ -17,17 +18,21 @@ function buildId({ prefix, index }) {
   return `${prefix}_item_${index}`;
 }
 
+const directionCollection = ['horizontal', 'vertical'];
+
 const defaultProps = {
   current: 0,
+  direction: 'horizontal',
   leftScrollOffset: 0,
   style: {},
+  width: '100%',
   height: '100%',
   gap: 0,
   list: [],
   itemBuilder: null,
 };
 
-class HorizontalScrollBox extends BaseComponent {
+class ScrollBox extends BaseComponent {
   needInitScroll = false;
 
   initScrollComplete = false;
@@ -82,17 +87,6 @@ class HorizontalScrollBox extends BaseComponent {
     return null;
   };
 
-  moveTo = (targetIndex) => {
-    const leftScrollOffset = this.getLeftScrollOffset();
-
-    this.setState({
-      scrollIntoView: buildId({
-        prefix: this.keyPrefix,
-        index: Math.max(targetIndex - leftScrollOffset, 0),
-      }),
-    });
-  };
-
   doWorkBeforeUnmount = () => {
     clearTimeout(this.timer);
   };
@@ -101,6 +95,16 @@ class HorizontalScrollBox extends BaseComponent {
     const { style } = this.props;
 
     return style || {};
+  };
+
+  getDirection = () => {
+    const { direction: directionSource } = this.props;
+
+    const direction = inCollection(directionCollection, directionSource)
+      ? directionSource
+      : 'horizontal';
+
+    return direction;
   };
 
   getLeftScrollOffset = () => {
@@ -114,7 +118,9 @@ class HorizontalScrollBox extends BaseComponent {
   };
 
   buildItem = (item, index) => {
-    const { height, itemBuilder } = this.props;
+    const { width, height, itemBuilder } = this.props;
+
+    const direction = this.getDirection();
 
     let itemComponent = null;
 
@@ -129,16 +135,12 @@ class HorizontalScrollBox extends BaseComponent {
     }
 
     const { style: itemStyle } = {
-      ...{
-        style: {
-          width: 'auto',
-        },
-      },
       ...item,
       ...{
         style: {
-          display: 'inline-block',
-          height: transformSize(height),
+          display: direction === 'horizontal' ? 'inline-block' : 'block',
+          width: direction === 'horizontal' ? 'auto' : transformSize(width),
+          height: direction === 'horizontal' ? transformSize(height) : 'auto',
         },
       },
     };
@@ -157,6 +159,17 @@ class HorizontalScrollBox extends BaseComponent {
     );
   };
 
+  moveTo = (targetIndex) => {
+    const leftScrollOffset = this.getLeftScrollOffset();
+
+    this.setState({
+      scrollIntoView: buildId({
+        prefix: this.keyPrefix,
+        index: Math.max(targetIndex - leftScrollOffset, 0),
+      }),
+    });
+  };
+
   triggerScroll = () => {
     const { scrollIntoView } = this.state;
 
@@ -168,9 +181,10 @@ class HorizontalScrollBox extends BaseComponent {
   };
 
   renderFurther() {
-    const { gap, height, list } = this.props;
+    const { gap, width, height, list } = this.props;
     const { scrollIntoView } = this.state;
 
+    const direction = this.getDirection();
     const style = this.getStyle();
 
     const listData = isArray(list) ? list : [];
@@ -190,9 +204,15 @@ class HorizontalScrollBox extends BaseComponent {
             <View
               key={`${this.keyPrefix}_gap_${index}`}
               style={{
-                display: 'inline-block',
-                width: transformSize(gap),
-                height: transformSize(height),
+                display: direction === 'horizontal' ? 'inline-block' : 'block',
+                width:
+                  direction === 'horizontal'
+                    ? transformSize(gap)
+                    : transformSize(width),
+                height:
+                  direction === 'horizontal'
+                    ? transformSize(height)
+                    : transformSize(gap),
               }}
             />,
           );
@@ -209,13 +229,17 @@ class HorizontalScrollBox extends BaseComponent {
         <ScrollView
           style={{
             ...{
-              width: '100%',
+              width: transformSize(width),
               height: transformSize(height),
-              whiteSpace: 'nowrap',
             },
+            ...(direction === 'horizontal'
+              ? {
+                  whiteSpace: 'nowrap',
+                }
+              : {}),
           }}
-          scrollX
-          scrollY={false}
+          scrollX={direction === 'horizontal'}
+          scrollY={direction !== 'horizontal'}
           scrollWithAnimation
           scrollAnchoring
           enhanced
@@ -231,9 +255,9 @@ class HorizontalScrollBox extends BaseComponent {
   }
 }
 
-HorizontalScrollBox.defaultProps = {
+ScrollBox.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default HorizontalScrollBox;
+export default ScrollBox;

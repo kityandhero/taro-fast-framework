@@ -122,7 +122,7 @@ const config5 = {
 
 const config6 = {
   current: 2,
-  underlineHeight: 6,
+  underlineHorizontalHeight: 6,
   underlineHorizontalMargin: 40,
   underlineColor: 'red',
   tabList: tabNoBodyList,

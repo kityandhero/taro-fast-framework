@@ -38,9 +38,9 @@ const o = {
       path: pathCollection.example.fadeInBox.path,
     },
     {
-      id: 'HorizontalScrollBox',
-      name: '水平滚动容器',
-      path: pathCollection.example.horizontalScrollBox.path,
+      id: 'ScrollBox',
+      name: '滚动容器',
+      path: pathCollection.example.scrollBox.path,
     },
     {
       id: 'HorizontalCenterBox',

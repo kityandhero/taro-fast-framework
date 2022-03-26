@@ -54,7 +54,7 @@ export default {
         'pages/popup/index',
         'pages/circle/index',
         'pages/swiper/index',
-        'pages/horizontalScrollBox/index',
+        'pages/scrollBox/index',
         'pages/radio/index',
         'pages/radioSelector/index',
         'pages/checkBox/index',

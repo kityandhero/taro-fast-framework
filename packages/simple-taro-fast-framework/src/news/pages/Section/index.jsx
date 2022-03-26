@@ -136,7 +136,7 @@ export default class Index extends BasePageWrapper {
           color: '#2467db',
         }}
         underlineColor="#2467db"
-        underlineHeight={4}
+        underlineHorizontalHeight={4}
         underlineHorizontalMargin={20}
         tabList={this.tabList}
         onClick={this.triggerSectionClick}

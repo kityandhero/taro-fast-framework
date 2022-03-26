@@ -5,36 +5,26 @@ import { inCollection } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
+const classPrefix = `tfc-tabs`;
+
 const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
   style: {},
-  className: '',
+  panelStyle: {},
   /**
    * Tab 方向，请跟 AtTabs 保持一致
    * @default 'horizontal'
    */
   direction: 'horizontal' | 'vertical',
-  /**
-   * 当前选中的标签索引值，从 0 计数，请跟 AtTabs 保持一致
-   * @default 0
-   */
-  current: 0,
-  /**
-   * tabPane 排序，从 0 计数
-   * @default 0
-   */
-  index: 0,
 };
 
 class TabPanel extends BaseComponent {
   renderFurther() {
     const {
       style,
-      className,
+      panelStyle,
       direction: directionSource,
-      index,
-      current,
       children,
     } = this.props;
 
@@ -44,18 +34,13 @@ class TabPanel extends BaseComponent {
 
     return (
       <View
-        className={classNames(
-          {
-            'tfc-tabs-pane': true,
-            'tfc-tabs-pane--vertical': direction === 'vertical',
-            'tfc-tabs-pane--active': index === current,
-            'tfc-tabs-pane--inactive': index !== current,
-          },
-          className,
-        )}
+        className={classNames(`${classPrefix}__pane`, {
+          [`${classPrefix}__pane-horizontal`]: direction === 'horizontal',
+          [`${classPrefix}__pane-vertical`]: direction === 'vertical',
+        })}
         style={style}
       >
-        {children}
+        <View style={panelStyle}> {children}</View>
       </View>
     );
   }
