@@ -24,7 +24,7 @@ const style = {
 const descriptionList = [
   {
     label: '使用普通视图 [普通视图为默认视图]',
-    value: 'viewScrollMode = false',
+    value: 'scrollViewMode = false',
     ellipsis: false,
     canCopy: true,
   },

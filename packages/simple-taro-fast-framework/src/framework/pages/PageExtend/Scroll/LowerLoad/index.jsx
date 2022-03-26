@@ -27,7 +27,7 @@ const style = {
 const descriptionList = [
   {
     label: '开启滚动视图',
-    value: 'viewScrollMode = true',
+    value: 'scrollViewMode = true',
     ellipsis: false,
     canCopy: true,
   },
@@ -67,7 +67,7 @@ definePageConfig({
   global,
 }))
 export default class Index extends ContentPageBase {
-  viewScrollMode = true;
+  scrollViewMode = true;
 
   enableLowerLoad = true;
 

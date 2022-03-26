@@ -69,7 +69,7 @@ class Infrastructure extends ComponentBase {
   /**
    * 滚动视图模式
    */
-  viewScrollMode = false;
+  scrollViewMode = false;
 
   /**
    * 启用下拉刷新
@@ -584,7 +584,7 @@ class Infrastructure extends ComponentBase {
   };
 
   getEnableBackTop = () => {
-    return !this.viewScrollMode && this.enableBackTop;
+    return !this.scrollViewMode && this.enableBackTop;
   };
 
   renderView() {
@@ -593,11 +593,11 @@ class Infrastructure extends ComponentBase {
     const vw = (
       <VariableView
         style={this.viewStyle}
-        scroll={this.viewScrollMode}
+        scroll={this.scrollViewMode}
         height="100vh"
         enablePullDownRefresh={this.enablePullDownRefresh}
         enableLowerLoad={
-          this.viewScrollMode ? this.enableLowerLoad : this.pagingLoadMode
+          this.scrollViewMode ? this.enableLowerLoad : this.pagingLoadMode
         }
         enableSafeAreaInsetBottom={this.enableSafeAreaInsetBottom}
         enableCustomPullDown

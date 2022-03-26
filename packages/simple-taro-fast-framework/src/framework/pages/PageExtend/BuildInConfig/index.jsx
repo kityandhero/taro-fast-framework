@@ -125,7 +125,7 @@ const configList = [
     canCopy: true,
   },
   {
-    label: 'viewScrollMode',
+    label: 'scrollViewMode',
     value: '是否使用ScrollView模式, 默认关闭',
     ellipsis: false,
     canCopy: true,

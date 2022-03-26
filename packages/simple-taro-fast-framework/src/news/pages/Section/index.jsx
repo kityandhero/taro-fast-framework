@@ -46,11 +46,12 @@ definePageConfig({
   global,
 }))
 export default class Index extends BasePageWrapper {
+  scrollView;
   enablePullDownRefresh = true;
 
   enableLowerLoad = true;
 
-  // lowerLoadingPosition = 'outer';
+  lowerLoadingPosition = 'outer';
 
   pagingLoadMode = true;
 

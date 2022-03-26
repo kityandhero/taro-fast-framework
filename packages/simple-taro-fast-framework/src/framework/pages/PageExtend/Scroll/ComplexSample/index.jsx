@@ -29,7 +29,7 @@ definePageConfig({
   global,
 }))
 export default class Index extends ContentPageBase {
-  viewScrollMode = true;
+  scrollViewMode = true;
 
   enablePullDownRefresh = true;
 
