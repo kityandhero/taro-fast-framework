@@ -124,12 +124,6 @@ export default class Index extends BasePageWrapper {
 
     this.sectionId = sectionId;
 
-    // const that = this;
-
-    // setTimeout(() => {
-    //   that.increaseCounter();
-    // }, 2000);
-
     this.reloadData({ delay: 500 });
   };
 
