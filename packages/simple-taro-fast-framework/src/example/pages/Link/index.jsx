@@ -110,7 +110,7 @@ export default class Index extends ContentPageBase {
           <Link {...currentConfig} />
         </SimpleBox>
 
-        <PropertyBox config={Link.defaultProps} labelWidth={270} />
+        <PropertyBox config={Link.defaultProps} labelWidth={230} />
       </Space>
     );
   };

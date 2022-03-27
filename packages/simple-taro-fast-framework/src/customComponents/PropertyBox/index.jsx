@@ -14,7 +14,12 @@ import {
   isBoolean,
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { Card, DataGrid } from 'taro-fast-component/es/customComponents';
+import {
+  Card,
+  DataGrid,
+  HelpBox,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
 
@@ -116,15 +121,31 @@ class PropertyBox extends Component {
             : `备注: ${description}.`
         }
       >
-        <DataGrid
-          list={this.buildList()}
-          border
-          column={1}
-          size="small"
-          labelStyle={{ width: transformSize(labelWidth) }}
-          emptyValue="暂无"
-          emptyStyle={{ color: '#ccc' }}
-        />
+        <Space direction="vertical" fillWidth>
+          <DataGrid
+            list={this.buildList()}
+            border
+            column={1}
+            size="small"
+            labelStyle={{ width: transformSize(labelWidth) }}
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+
+          <HelpBox
+            title="备注"
+            showTitle
+            showNumber={false}
+            list={[
+              {
+                text: 'showRenderCount: 在控制台显示渲染次数,仅应当用于开发调试模式.',
+              },
+              {
+                text: 'hidden: 通用属性, 用于在特定模式下隐藏控件(采用跳过不渲染模式达到隐藏效果).',
+              },
+            ]}
+          />
+        </Space>
       </Card>
     );
   }
