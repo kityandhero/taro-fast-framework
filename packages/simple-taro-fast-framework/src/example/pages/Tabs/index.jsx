@@ -1,4 +1,4 @@
-import { Button, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
@@ -6,9 +6,6 @@ import {
   Badge,
   Icon,
   Space,
-  Grid,
-  ColorText,
-  CenterBox,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -322,24 +319,81 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  buildGridItem = ({ title, handler }) => {
-    return (
-      <Grid.Item>
-        <CenterBox>
-          <Button
-            size="mini"
-            style={{
-              width: '98%',
-            }}
-            onClick={() => {
-              handler(title);
-            }}
-          >
-            <ColorText text={title} />
-          </Button>
-        </CenterBox>
-      </Grid.Item>
-    );
+  establishControlList = () => {
+    return [
+      {
+        header: '仅头部',
+        config: config1,
+      },
+      {
+        header: '隐藏模式',
+        config: config2,
+      },
+      {
+        header: '点击事件',
+        config: config3,
+      },
+      {
+        header: '标头样式',
+        config: config4,
+      },
+      {
+        header: '头部背景',
+        config: config5,
+      },
+      {
+        header: '下划线样式',
+        config: config6,
+      },
+      {
+        header: '隐藏下划线',
+        config: config61,
+      },
+      {
+        header: '图标/徽记',
+        config: config7,
+      },
+      {
+        header: '单面板',
+        config: config71,
+      },
+      {
+        header: '多面板联动',
+        config: config8,
+      },
+      {
+        header: '滚动标签',
+        config: config9,
+      },
+      {
+        header: '滚动单面板',
+        config: config101,
+      },
+      {
+        header: '滚动多面板联动',
+        config: config10,
+      },
+      {
+        header: '禁止内容切换动画',
+        config: config12,
+      },
+      {
+        header: '面板样式',
+        config: config13,
+      },
+      {
+        header: '垂直模式',
+        config: config11,
+      },
+      {
+        header: '垂直单面板',
+        config: config111,
+      },
+      {
+        header: '垂直多面板滚动',
+        config: config14,
+      },
+    ];
   };
 
   renderContent = () => {
@@ -356,189 +410,7 @@ export default class Index extends ContentPageBase {
           innerBoxCenterMode={false}
           innerBoxPadding={false}
           ignorePropertyList={['icon', 'body', 'panel']}
-          controlBox={
-            <Grid columns={2} gap={12}>
-              {this.buildGridItem({
-                title: '仅头部',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config1,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '隐藏模式',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config2,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '点击事件',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config3,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '标头样式',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config4,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '头部背景',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config5,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '下划线样式',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config6,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '隐藏下划线',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config61,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '图标/徽记',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config7,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '单面板',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config71,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '多面板联动',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config8,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '滚动标签',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config9,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '滚动单面板',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config101,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '滚动多面板联动',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config10,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '禁止内容切换动画',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config12,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '面板样式',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config13,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '垂直模式',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config11,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '垂直单面板',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config111,
-                  });
-                },
-              })}
-
-              {this.buildGridItem({
-                title: '垂直多面板滚动',
-                handler: (text) => {
-                  this.setState({
-                    header: text,
-                    currentConfig: config14,
-                  });
-                },
-              })}
-            </Grid>
-          }
+          controlBox={this.buildControlBox()}
         >
           <Tabs {...currentConfig} />
         </SimpleBox>
