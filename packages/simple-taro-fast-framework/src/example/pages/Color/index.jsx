@@ -387,6 +387,8 @@ export default class Index extends ContentPageBase {
               text: '使用举例: {color:var(--tfc-color-red)}',
             },
           ]}
+          mockChildren={false}
+          useInnerBox={false}
         >
           {this.buildGrid({
             column: config1.column,
@@ -397,7 +399,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="纯阴影">
+        <SimpleBox header="纯阴影" mockChildren={false} useInnerBox={false}>
           {this.buildGrid({
             column: config1.column,
             keyPrefix: 'config1_shadow',
@@ -409,7 +411,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="附带阴影">
+        <SimpleBox header="附带阴影" mockChildren={false} useInnerBox={false}>
           {this.buildGrid({
             column: config1.column,
             keyPrefix: 'config1_shadow',
@@ -420,7 +422,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="纯浅色">
+        <SimpleBox header="纯浅色" mockChildren={false} useInnerBox={false}>
           {this.buildGrid({
             column: config2.column,
             keyPrefix: 'config2',
@@ -430,7 +432,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="二元渐变色">
+        <SimpleBox header="二元渐变色" mockChildren={false} useInnerBox={false}>
           {this.buildGrid({
             column: config3.column,
             keyPrefix: 'config3',
@@ -441,7 +443,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="复杂渐变色">
+        <SimpleBox header="复杂渐变色" mockChildren={false} useInnerBox={false}>
           {this.buildGrid({
             column: config4.column,
             keyPrefix: 'config4',

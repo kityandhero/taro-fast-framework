@@ -39,69 +39,66 @@ export default class Index extends ContentPageBase {
     description: '线条组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '水平线',
+        currentConfig: {},
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '水平线',
+        config: {},
+      },
+      {
+        header: '设置宽度',
+        config: config1,
+      },
+      {
+        header: '设置高度',
+        config: config2,
+      },
+      {
+        header: '设置颜色',
+        config: config3,
+      },
+      {
+        header: '颜色渐变',
+        config: config4,
+      },
+      {
+        header: '垂直线',
+        config: config5,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="水平线"
+          header={header}
+          config={currentConfig}
           componentName="Line"
           mockChildren={false}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Line />
+          <Line {...currentConfig} />
         </SimpleBox>
 
-        <SimpleBox
-          header="设置宽度"
-          config={config1}
-          componentName="Line"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Line {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置高度"
-          config={config2}
-          componentName="Line"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Line {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置颜色"
-          config={config3}
-          componentName="Line"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Line {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="颜色渐变"
-          config={config4}
-          componentName="Line"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Line {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="垂直线"
-          config={config5}
-          componentName="Line"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Line {...config5} />
-        </SimpleBox>
-
-        <PropertyBox config={Line.defaultProps} labelWidth={270} />
+        <PropertyBox config={Line.defaultProps} labelWidth={260} />
       </Space>
     );
   };

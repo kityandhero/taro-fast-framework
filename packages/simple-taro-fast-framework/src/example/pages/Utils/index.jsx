@@ -46,6 +46,7 @@ export default class Index extends ContentPageBase {
               text: 'fmt:格式化字符串',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label={datetimeFormat.year}
@@ -111,6 +112,7 @@ export default class Index extends ContentPageBase {
               text: 'opts:格式化配置',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="2022-01-01 ~ 2022-03-02"
@@ -134,6 +136,7 @@ export default class Index extends ContentPageBase {
               text: 'opts:格式化配置',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="2022-01-22"
@@ -157,6 +160,7 @@ export default class Index extends ContentPageBase {
               text: 'format:格式化字符串',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="0.24"
@@ -183,6 +187,7 @@ export default class Index extends ContentPageBase {
               text: 'format:格式化字符串',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="451.31"
@@ -209,6 +214,7 @@ export default class Index extends ContentPageBase {
               text: 'format:格式化字符串',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="451.31"
@@ -234,6 +240,7 @@ export default class Index extends ContentPageBase {
               text: 'successCallback:复制后的回调函数',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="12345678"
@@ -268,6 +275,7 @@ export default class Index extends ContentPageBase {
               text: 'afterKeepNumber:尾部保留的字符串长度',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="12345678"
@@ -303,6 +311,7 @@ export default class Index extends ContentPageBase {
               text: 'text:使用此函数用以保证双端渲染一致',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="transformSize(1)"
@@ -323,6 +332,7 @@ export default class Index extends ContentPageBase {
               text: '用法请参见颜色示例',
             },
           ]}
+          useInnerBox={false}
         >
           <Item
             label="buildLinearGradient(45,#39b54a,#8dc63f)"

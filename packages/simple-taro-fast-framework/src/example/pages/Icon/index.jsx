@@ -191,27 +191,27 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="主要">
+        <SimpleBox header="主要" mockChildren={false} useInnerBox={false}>
           {this.buildGrid('main', icons.main)}
         </SimpleBox>
 
-        <SimpleBox header="文件">
+        <SimpleBox header="文件" mockChildren={false} useInnerBox={false}>
           {this.buildGrid('file', icons.file)}
         </SimpleBox>
 
-        <SimpleBox header="文本">
+        <SimpleBox header="文本" mockChildren={false} useInnerBox={false}>
           {this.buildGrid('text', icons.text)}
         </SimpleBox>
 
-        <SimpleBox header="箭头">
+        <SimpleBox header="箭头" mockChildren={false} useInnerBox={false}>
           {this.buildGrid('arrow', icons.arrow)}
         </SimpleBox>
 
-        <SimpleBox header="媒体控制">
+        <SimpleBox header="媒体控制" mockChildren={false} useInnerBox={false}>
           {this.buildGrid('mediaControl', icons.mediaControl)}
         </SimpleBox>
 
-        <SimpleBox header="多媒体">
+        <SimpleBox header="多媒体" mockChildren={false} useInnerBox={false}>
           {this.buildGrid('media', icons.media)}
         </SimpleBox>
 
@@ -220,7 +220,7 @@ export default class Index extends ContentPageBase {
           config={config1}
           componentName="Icon"
           mockChildren={false}
-          useInnerBox
+          useInnerBox={false}
         >
           {this.buildGrid('logo', icons.logo)}
         </SimpleBox>
@@ -230,7 +230,7 @@ export default class Index extends ContentPageBase {
           config={config2}
           componentName="Icon"
           mockChildren={false}
-          useInnerBox
+          useInnerBox={false}
         >
           <Grid columns={3}>
             <Grid.Item>
@@ -248,7 +248,7 @@ export default class Index extends ContentPageBase {
           </Grid>
         </SimpleBox>
 
-        <PropertyBox config={Icon.defaultProps} labelWidth={170} />
+        <PropertyBox config={Icon.defaultProps} labelWidth={240} />
 
         <Card
           header="使用说明 :"

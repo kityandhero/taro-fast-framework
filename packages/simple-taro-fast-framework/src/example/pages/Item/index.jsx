@@ -70,19 +70,19 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="基础用法" space={false}>
+        <SimpleBox header="基础用法" space={false} useInnerBox={false}>
           <Item label="1" />
           <Item label="2" />
           <Item label="3" border={false} />
         </SimpleBox>
 
-        <SimpleBox header="箭头" space={false}>
+        <SimpleBox header="箭头" space={false} useInnerBox={false}>
           <Item label="账单" arrow />
           <Item label="总资产" arrow />
           <Item label="设置" arrow border={false} />
         </SimpleBox>
 
-        <SimpleBox header="可点击" space={false}>
+        <SimpleBox header="可点击" space={false} useInnerBox={false}>
           <Item label="账单" clickable arrow onClick={this.handleClick} />
           <Item label="总资产" clickable arrow onClick={this.handleClick} />
           <Item
@@ -94,7 +94,7 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <SimpleBox header="复杂布局" space={false}>
+        <SimpleBox header="复杂布局" space={false} useInnerBox={false}>
           <Item label="新消息通知" extra={<Switch defaultChecked />} />
           <Item label="大字号模式" extra="未开启" clickable arrow />
           <Item
@@ -106,7 +106,7 @@ export default class Index extends ContentPageBase {
           <Item title="这里是标题" label="这里是主信息" border={false} />
         </SimpleBox>
 
-        <SimpleBox header="禁用状态" space={false}>
+        <SimpleBox header="禁用状态" space={false} useInnerBox={false}>
           <Item label="账单" disabled clickable arrow prefix={<IconSketch />} />
           <Item
             label="总资产"
@@ -116,7 +116,7 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <SimpleBox header="用户列表布局" space={false}>
+        <SimpleBox header="用户列表布局" space={false} useInnerBox={false}>
           {users.map((user, index) => (
             <Item
               key={user.name}
