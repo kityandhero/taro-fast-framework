@@ -149,7 +149,7 @@ const config9 = {
 
 const config10 = {
   src,
-  showMode: 'content-image',
+  showMode: 'pure',
 };
 
 // eslint-disable-next-line no-undef
@@ -286,7 +286,7 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <PropertyBox config={ImageBox.defaultProps} labelWidth={220} />
+        <PropertyBox config={ImageBox.defaultProps} labelWidth={230} />
       </Space>
     );
   };

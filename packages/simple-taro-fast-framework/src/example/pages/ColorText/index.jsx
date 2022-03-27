@@ -15,6 +15,10 @@ import logoImg from '../../../assets/images/logo.png';
 
 const { IconEdit } = Icon;
 
+const config0 = {
+  text: '文本文字',
+};
+
 const config1 = {
   textPrefix: '前缀',
   text: '文本文字',
@@ -24,6 +28,13 @@ const config2 = {
   textPrefix: '前缀',
   separator: '@',
   text: '文本文字',
+};
+
+const config21 = {
+  textPrefix: '前缀',
+  separator: '@',
+  text: '文本文字',
+  fontSize: 34,
 };
 
 const config3 = {
@@ -63,6 +74,12 @@ const config7 = {
   textPrefixStyle: { color: '#67ca31' },
 };
 
+const config71 = {
+  textPrefix: '前缀',
+  text: '文本文字',
+  style: { backgroundColor: '#f45231' },
+};
+
 const config8 = {
   icon: <IconEdit size={32} color="#ff3ce7" />,
   text: '文本文字',
@@ -77,6 +94,14 @@ const config9 = {
   text: '文本文字',
 };
 
+const config91 = {
+  icon: <IconEdit size={32} color="#ff3ce7" />,
+  text: '文本文字',
+  iconContainerStyle: {
+    backgroundColor: '#ccc',
+  },
+};
+
 const config10 = {
   textPrefix: '前缀',
   text: '文本文字',
@@ -86,13 +111,11 @@ const config10 = {
   },
 };
 
-const config11 = {
-  icon: <IconEdit size={30} color="#ff3ce7" />,
+const config101 = {
   textPrefix: '前缀',
   text: '文本文字',
-  separatorStyle: {
-    color: '#67ca31',
-    margin: `0 ${transformSize(24)}`,
+  textStyle: {
+    color: '#971731',
   },
 };
 
@@ -113,134 +136,107 @@ export default class Index extends ContentPageBase {
     description: '文字渲染',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '仅文字',
+        currentConfig: config0,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '仅文字',
+        config: config0,
+      },
+      {
+        header: '使用前缀',
+        config: config1,
+      },
+      {
+        header: '自定义分隔符',
+        config: config2,
+      },
+      {
+        header: '字体大小',
+        config: config21,
+      },
+      {
+        header: '点击复制',
+        config: config3,
+      },
+      {
+        header: '点击复制并回调',
+        config: config4,
+      },
+      {
+        header: '颜色',
+        config: config5,
+      },
+      {
+        header: '随机颜色',
+        config: config6,
+      },
+      {
+        header: '全局样式',
+        config: config71,
+      },
+      {
+        header: '前缀样式',
+        config: config7,
+      },
+      {
+        header: '分隔符样式',
+        config: config10,
+      },
+      {
+        header: '内容样式',
+        config: config101,
+      },
+      {
+        header: '附带内置图标',
+        config: config8,
+      },
+      {
+        header: '附带图片图标',
+        config: config12,
+      },
+      {
+        header: '附带图片',
+        config: config9,
+      },
+      {
+        header: '图片/图标容器样式',
+        config: config91,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="一般用法"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="ColorText"
           mockChildren={false}
           useInnerBox
-        >
-          <ColorText {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义分隔符"
-          config={config2}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="点击复制"
-          config={config3}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="点击复制并进行回调 [查看控制台]"
-          config={config4}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="颜色"
-          config={config5}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="随机颜色"
-          config={config6}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="前缀样式"
-          config={config7}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config7} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="附带内置图标"
-          config={config8}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
           ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <ColorText {...config8} />
+          <ColorText {...currentConfig} />
         </SimpleBox>
 
-        <SimpleBox
-          header="附带图片图标"
-          config={config8}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <ColorText {...config12} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="附带图片"
-          config={config9}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <ColorText {...config9} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="分隔符样式"
-          config={config10}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-        >
-          <ColorText {...config10} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂样例"
-          config={config11}
-          componentName="ColorText"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <ColorText {...config11} />
-        </SimpleBox>
-
-        <PropertyBox config={ColorText.defaultProps} labelWidth={270} />
+        <PropertyBox config={ColorText.defaultProps} labelWidth={260} />
       </Space>
     );
   };
