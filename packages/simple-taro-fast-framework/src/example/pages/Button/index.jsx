@@ -67,6 +67,15 @@ const config3 = {
   backgroundColor: '#45e209',
 };
 
+const config31 = {
+  ...configCore,
+  style: {
+    width: transformSize(180),
+  },
+  fontColor: '#fff',
+  backgroundColor: '#45e209',
+};
+
 const config5 = {
   ...configCore,
   backgroundColor: 'blue',
@@ -240,6 +249,10 @@ export default class Index extends ContentPageBase {
         config: config3,
       },
       {
+        header: '设置文字颜色',
+        config: config31,
+      },
+      {
         header: '渐变色',
         config: config2,
       },
@@ -368,7 +381,7 @@ export default class Index extends ContentPageBase {
           </Button>
         </SimpleBox>
 
-        <PropertyBox config={Button.defaultProps} labelWidth={330} />
+        <PropertyBox config={Button.defaultProps} labelWidth={300} />
       </Space>
     );
   };

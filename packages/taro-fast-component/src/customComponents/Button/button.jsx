@@ -10,8 +10,6 @@ import { Spin } from '../Spin';
 import ActivityIndicator from '../ActivityIndicator';
 import ColorText from '../ColorText';
 
-import { getStyle } from './tools';
-
 const classPrefix = `tfc-button`;
 
 const fillCollection = ['solid', 'outline', 'none'];
@@ -230,7 +228,7 @@ class Button extends BaseComponent {
 
     const styleAdjust = {
       ...style,
-      ...getStyle({
+      ...{
         backgroundColor,
         fill,
         fontColor,
@@ -243,7 +241,7 @@ class Button extends BaseComponent {
         paddingLeft,
         paddingRight,
         borderRadius,
-      }),
+      },
     };
 
     if (weappButton) {
