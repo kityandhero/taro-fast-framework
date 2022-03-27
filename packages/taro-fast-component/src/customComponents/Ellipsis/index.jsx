@@ -8,6 +8,7 @@ const defaultProps = {
   line: 1,
   style: {},
   className: '',
+  text: '',
   onClick: null,
 };
 
@@ -21,7 +22,7 @@ class Ellipsis extends BaseComponent {
   };
 
   renderFurther() {
-    const { className, line, style: sourceSource, children } = this.props;
+    const { className, line, style: sourceSource, text, children } = this.props;
 
     let styleMust = {};
 
@@ -51,7 +52,7 @@ class Ellipsis extends BaseComponent {
 
     return (
       <View className={className} style={style} onClick={this.triggerClick}>
-        {children}
+        {children ? children : text}
       </View>
     );
   }

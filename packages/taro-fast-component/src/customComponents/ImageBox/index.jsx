@@ -223,7 +223,7 @@ class ImageBox extends BaseComponent {
               }}
               src={src}
               lazyLoad={lazyLoad || false}
-              mode={imageMode}
+              mode={imageMode || null}
               onLoad={() => {
                 this.onImageLoadSuccess();
               }}
@@ -238,11 +238,12 @@ class ImageBox extends BaseComponent {
         </ScaleBox>
       );
     }
-    if (showMode === 'content-image') {
+
+    if (showMode === 'pure') {
       return (
         <View style={{ ...imageBoxStyleValue }}>
           <Image
-            className={classNames(`${classPrefix}-content-image`)}
+            className={classNames(`${classPrefix}-pure`)}
             src={src}
             lazyLoad={lazyLoad || false}
             mode="widthFix"

@@ -4,11 +4,12 @@ import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
   style: {},
+  fillWidth: false,
 };
 
 class CenterBox extends BaseComponent {
   renderFurther() {
-    const { style, innerStyle, children } = this.props;
+    const { style, fillWidth, innerStyle, children } = this.props;
 
     return (
       <VerticalBox
@@ -16,6 +17,7 @@ class CenterBox extends BaseComponent {
         alignJustify="center"
         style={style}
         innerStyle={innerStyle}
+        fillWidth={fillWidth}
       >
         {children}
       </VerticalBox>

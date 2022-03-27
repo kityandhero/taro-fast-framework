@@ -40,64 +40,63 @@ export default class Index extends ContentPageBase {
     description: '查看更多组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认',
+        currentConfig: {},
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '默认',
+        config: {},
+      },
+      {
+        header: '设置文字',
+        config: config1,
+      },
+      {
+        header: '设置图标',
+        config: config2,
+      },
+      {
+        header: '设置样式',
+        config: config3,
+      },
+      {
+        header: '点击事件',
+        config: config4,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="更多"
+          header={header}
+          config={currentConfig}
           componentName="More"
           mockChildren={false}
           useInnerBox
-        >
-          <More />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置文字"
-          config={config1}
-          componentName="More"
-          mockChildren={false}
-          useInnerBox
-        >
-          <More {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置图标"
-          config={config2}
-          componentName="More"
-          mockChildren={false}
-          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
           ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <More {...config2} />
+          <More {...currentConfig} />
         </SimpleBox>
 
-        <SimpleBox
-          header="设置样式"
-          config={config3}
-          componentName="More"
-          mockChildren={false}
-          useInnerBox
-        >
-          <More {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="点击事件"
-          config={config4}
-          componentName="More"
-          mockChildren={false}
-          useInnerBox
-        >
-          <More {...config4} />
-        </SimpleBox>
-
-        <PropertyBox
-          config={More.defaultProps}
-          labelWidth={270}
-          ignorePropertyList={['icon']}
-        />
+        <PropertyBox config={More.defaultProps} labelWidth={230} />
       </Space>
     );
   };

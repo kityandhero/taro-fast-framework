@@ -11,8 +11,6 @@ import {
   Grid,
 } from 'taro-fast-component/es/customComponents';
 
-import { colStyle } from '@/customConfig/constants';
-
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
@@ -60,7 +58,6 @@ const imageBoxContainerMiniStyle = {
 };
 
 const imageContainerStyle = {
-  padding: transformSize(2),
   backgroundColor: 'red',
 };
 
@@ -73,6 +70,12 @@ const config1 = {
 
 const config2 = {
   src,
+  padding: 10,
+};
+
+const config21 = {
+  src,
+  padding: 10,
   imageBoxStyle: imageContainerStyle,
 };
 
@@ -144,6 +147,11 @@ const config9 = {
   },
 };
 
+const config10 = {
+  src,
+  showMode: 'content-image',
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '图片',
@@ -154,6 +162,82 @@ export default class Index extends ContentPageBase {
     id: 'ImageBox',
     name: '图片',
     description: '图片组件',
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '普通例子',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishImageModeList = () => {
+    return imageModeCollection.map((item) => {
+      return {
+        span: 2,
+        header: `image mode - "${item}"`,
+        config: {
+          src,
+          imageMode: item,
+        },
+      };
+    });
+  };
+
+  establishControlList = () => {
+    return [
+      {
+        header: '普通例子',
+        config: config1,
+      },
+      {
+        header: '内边距',
+        config: config2,
+      },
+      {
+        header: '容器样式',
+        config: config21,
+      },
+      {
+        header: '加载模式',
+        config: config3,
+      },
+      {
+        header: '使用遮罩',
+        config: config4,
+      },
+      {
+        header: '使用上层装饰',
+        config: config5,
+      },
+      {
+        header: '使用上层装饰构建',
+        config: config9,
+      },
+      {
+        header: '圆形轮廓',
+        config: config6,
+      },
+      {
+        header: 'LazyLoad',
+        config: config7,
+      },
+      {
+        header: '指定长宽比',
+        config: config8,
+      },
+      ...this.establishImageModeList(),
+      {
+        span: 2,
+        header: '纯粹模式: 无特殊功能, 使用父容器宽度, 高度自动',
+        config: config10,
+      },
+    ];
   };
 
   buildGrid = (keyPrefix = '', list = []) => {
@@ -182,157 +266,24 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="普通使用"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="ImageBox"
           mockChildren={false}
           useInnerBox
-        >
-          <View
-            style={imageBoxContainerStyle}
-            componentName="ImageBox"
-            mockChildren={false}
-            useInnerBox
-          >
-            <ImageBox {...config1} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="指定容器样式"
-          config={config2}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
           <View style={imageBoxContainerStyle}>
-            <ImageBox {...config2} />
+            <ImageBox {...currentConfig} />
           </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="加载模式"
-          config={config3}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...config3} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="使用遮罩"
-          config={config4}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...config4} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="使用上层装饰"
-          config={config5}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...config5} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="使用上层装饰构建"
-          config={config9}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['decorationBuilder']}
-        >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...config9} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox header="imageMode [取值等同于微信Image]">
-          {this.buildGrid('imageMode', imageModeCollection)}
-        </SimpleBox>
-
-        <SimpleBox
-          header="圆形轮廓"
-          config={config6}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...config6} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="LazyLoad"
-          config={config7}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...config7} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="指定长宽比"
-          config={config8}
-          componentName="ImageBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Space wrap size={16}>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox aspectRatio={0.5} src={src} />
-            </View>
-            <View style={imageBoxContainerStyle}>
-              <ImageBox circle aspectRatio={0.5} src={src} />
-            </View>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox header="简单布局">
-          <Space direction="vertical" fillWidth>
-            <FlexBox
-              flexAuto="right"
-              left={
-                <View style={{ width: transformSize(100) }}>
-                  <ImageBox src={src} />
-                </View>
-              }
-              leftStyle={{ paddingRight: transformSize(10) }}
-              right="右侧"
-              rightStyle={colStyle}
-            />
-
-            <FlexBox
-              flexAuto="left"
-              left="左侧"
-              leftStyle={colStyle}
-              right={
-                <View style={{ width: transformSize(100) }}>
-                  <ImageBox circle src={src} />
-                </View>
-              }
-              rightStyle={{ paddingLeft: transformSize(10) }}
-            />
-          </Space>
         </SimpleBox>
 
         <PropertyBox config={ImageBox.defaultProps} labelWidth={220} />

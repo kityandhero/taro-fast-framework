@@ -13,12 +13,26 @@ const config1 = {
     lineHeight: transformSize(44),
     height: transformSize(44),
   },
+  text: '这是一段宽度限制长度的文字，后面的内容会省略。',
   onClick: () => {
     console.log('ellipsis click');
   },
 };
 
 const config2 = {
+  line: 2,
+  style: {
+    height: transformSize(88),
+    fontSize: transformSize(28),
+    lineHeight: transformSize(44),
+  },
+  text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
+  onClick: () => {
+    console.log('ellipsis click');
+  },
+};
+
+const config21 = {
   line: 2,
   style: {
     height: transformSize(88),
@@ -37,6 +51,7 @@ const config3 = {
     fontSize: transformSize(28),
     lineHeight: transformSize(44),
   },
+  text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
   onClick: () => {
     console.log('ellipsis click');
   },
@@ -54,47 +69,69 @@ export default class Index extends ContentPageBase {
     description: '文字省略组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '显示一行文字',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '显示一行文字',
+        config: config1,
+      },
+      {
+        header: '显示两行文字',
+        config: config2,
+      },
+      {
+        header: '显示三行文字',
+        config: config3,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="显示一行文字"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Ellipsis"
-          mockChildren
+          mockChildren={false}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Ellipsis {...config1}>
-            这是一段宽度限制长度的文字，后面的内容会省略。
-          </Ellipsis>
+          <Ellipsis {...currentConfig} />
         </SimpleBox>
 
         <SimpleBox
-          header="显示两行文字"
-          config={config2}
+          header="包裹模式"
+          config={config21}
           componentName="Ellipsis"
           mockChildren
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
         >
-          <Ellipsis {...config2}>
+          <Ellipsis {...config21}>
             这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,
             后面的内容会省略。
           </Ellipsis>
         </SimpleBox>
 
-        <SimpleBox
-          header="显示三行文字"
-          config={config3}
-          componentName="Ellipsis"
-          mockChildren
-          useInnerBox
-        >
-          <Ellipsis {...config3}>
-            这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。
-          </Ellipsis>
-        </SimpleBox>
-
-        <PropertyBox config={Ellipsis.defaultProps} labelWidth={150} />
+        <PropertyBox config={Ellipsis.defaultProps} labelWidth={230} />
       </Space>
     );
   };

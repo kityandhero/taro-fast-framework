@@ -33,8 +33,9 @@ export default class ContentPageBase extends PageWrapper {
     };
   }
 
-  buildControlItem = ({ header, config }) => {
+  buildControlItem = ({ header, config, span = 1 }) => {
     return this.buildGridItem({
+      span,
       title: header,
       handler: (text) => {
         this.setState({
@@ -45,9 +46,9 @@ export default class ContentPageBase extends PageWrapper {
     });
   };
 
-  buildGridItem = ({ title, handler }) => {
+  buildGridItem = ({ title, handler, span }) => {
     return (
-      <Grid.Item>
+      <Grid.Item span={span}>
         <CenterBox>
           <Button
             size="small"
@@ -77,12 +78,13 @@ export default class ContentPageBase extends PageWrapper {
     return (
       <Grid columns={2} gap={12}>
         {list.map((item, index) => {
-          const { header, config } = item;
+          const { header, config, span } = { ...{ span: 1 }, ...item };
 
           return this.buildControlItem({
             index,
             header,
             config,
+            span,
           });
         })}
       </Grid>
