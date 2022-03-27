@@ -30,9 +30,8 @@ const config4 = {
 
 const config5 = {
   price: 4.78,
-  bodyStyle: {
-    border: `${transformSize(2)} solid #ccc`,
-    padding: transformSize(6),
+  itemStyle: {
+    color: 'red',
   },
 };
 
@@ -64,69 +63,64 @@ export default class Index extends ContentPageBase {
     description: '价格组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '普通',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '普通',
+        config: config1,
+      },
+      {
+        header: '修饰符',
+        config: config2,
+      },
+      {
+        header: '删除线',
+        config: config3,
+      },
+      {
+        header: '外层样式',
+        config: config4,
+      },
+      {
+        header: '元素通用样式',
+        config: config5,
+      },
+      {
+        header: '复杂配置',
+        config: config6,
+      },
+    ];
+  };
+
   renderContent = () => {
-    console.log(Price.defaultProps);
+    const { header, currentConfig } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="普通"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Price"
           mockChildren={false}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Price {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="修饰符"
-          config={config2}
-          componentName="Price"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Price {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="删除线"
-          config={config3}
-          componentName="Price"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Price {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="外层样式"
-          config={config4}
-          componentName="Price"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Price {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="元素通用样式"
-          config={config5}
-          componentName="Price"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Price {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂配置"
-          config={config6}
-          componentName="Price"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Price {...config6} />
+          <Price {...currentConfig} />
         </SimpleBox>
 
         <PropertyBox config={Price.defaultProps} labelWidth={270} />

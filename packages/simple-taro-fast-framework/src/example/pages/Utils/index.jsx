@@ -32,6 +32,32 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
+          header="操获/取作时间"
+          space={false}
+          extra=""
+          description={[
+            {
+              text: 'getNow()',
+            },
+            {
+              text: 'addHour(datetime,number)',
+            },
+            {
+              text: 'addMinute(datetime,number)',
+            },
+            {
+              text: 'addSecond(datetime,number)',
+            },
+          ]}
+          useInnerBox={false}
+        >
+          <Item label="获取当前时间" extra="getNow" />
+          <Item label="增加指定小时数" extra="addHour" />
+          <Item label="增加指定分钟数" extra="addMinute" />
+          <Item label="增加指定秒数" extra="addSecond" />
+        </SimpleBox>
+
+        <SimpleBox
           header="时间格式化"
           space={false}
           extra="formatDatetime"

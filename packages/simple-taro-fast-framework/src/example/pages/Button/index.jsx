@@ -342,7 +342,6 @@ export default class Index extends ContentPageBase {
         header: '形状 rectangular',
         config: config22,
       },
-
       {
         header: '自定义间距边框',
         config: config23,

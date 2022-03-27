@@ -1,5 +1,3 @@
-import { View } from '@tarojs/components';
-
 import {
   getNow,
   addHour,
@@ -69,7 +67,7 @@ const config8 = {
 
 const config9 = {
   format: { hours: ':', minutes: ':', seconds: '' },
-  endTime: addSecond(getNow(), 10),
+  endTime: addSecond(getNow(), 20),
   afterEnd: () => {
     console.log({
       message: '时间到',
@@ -89,115 +87,77 @@ export default class Index extends ContentPageBase {
     description: '倒计时组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基本用法',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基本用法',
+        config: config1,
+      },
+      {
+        header: '显示天',
+        config: config2,
+      },
+      {
+        header: '不显示小时',
+        config: config3,
+      },
+      {
+        header: '自定义格式化',
+        config: config4,
+      },
+      {
+        header: '卡片式',
+        config: config5,
+      },
+      {
+        header: '卡片式自定义',
+        config: config6,
+      },
+      {
+        header: '卡片填充式',
+        config: config7,
+      },
+      {
+        header: '卡片填充式自定义',
+        config: config8,
+      },
+      {
+        span: 2,
+        header: '倒计时回调',
+        config: config9,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认"
-          config={config1}
-          componentName="Countdown"
-          mockChildren={false}
+          header={header}
+          config={currentConfig}
+          componentName="Button"
+          mockChildren
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <View>
-            <Countdown {...config1} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="显示天"
-          config={config2}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config2} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="不显示小时"
-          config={config3}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config3} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义格式化"
-          config={config4}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config4} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="卡片式"
-          config={config5}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config5} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="卡片式自定义"
-          config={config6}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config6} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="卡片填充式"
-          config={config7}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config7} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="卡片填充式自定义"
-          config={config8}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config8} />
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="倒计时回调 [查看控制台]"
-          config={config9}
-          componentName="Countdown"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View>
-            <Countdown {...config9} />
-          </View>
+          <Countdown {...currentConfig} />
         </SimpleBox>
 
         <PropertyBox config={Countdown.defaultProps} labelWidth={230} />

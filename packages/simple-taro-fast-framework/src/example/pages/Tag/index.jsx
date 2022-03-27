@@ -98,154 +98,98 @@ export default class Index extends ContentPageBase {
     description: '标签组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基本用法',
+        currentConfig: {},
+      },
+    };
+  }
+
+  establishColorList = () => {
+    return colorList.map((item) => {
+      return {
+        header: `内置颜色 - ${item}`,
+        config: {
+          color: item,
+        },
+      };
+    });
+  };
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基本用法',
+        config: {},
+      },
+      ...this.establishColorList(),
+      {
+        header: '自定义颜色',
+        config: config10,
+      },
+      {
+        header: '线框填充',
+        config: config1,
+      },
+      {
+        header: '圆角',
+        config: config2,
+      },
+      {
+        header: '半圆角左',
+        config: config3,
+      },
+      {
+        header: '半圆角右',
+        config: config4,
+      },
+      {
+        header: '隐藏',
+        config: config5,
+      },
+      {
+        header: '点击事件',
+        config: config6,
+      },
+      {
+        header: '可关闭',
+        config: config7,
+      },
+      {
+        span: 2,
+        header: '设置可关闭颜色',
+        config: config8,
+      },
+      {
+        span: 2,
+        header: '通过 CSS 变量进行个性化',
+        config: config9,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="基本用法"
-          componentName="Tag"
+          header={header}
+          config={currentConfig}
+          componentName="Button"
           mockChildren
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Tag>123</Tag>
-        </SimpleBox>
-
-        <SimpleBox header="内置颜色">
-          <Space>
-            {colorList.map((o, i) => {
-              return (
-                <Tag key={`${i}`} color={o}>
-                  {o}
-                </Tag>
-              );
-            })}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义颜色"
-          config={config10}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config10}>#2db7f5</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="线框填充"
-          config={config1}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            {colorList.map((o, i) => {
-              return (
-                <Tag key={`${i}`} color={o} {...config1}>
-                  {o}
-                </Tag>
-              );
-            })}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="圆角"
-          config={config2}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config2}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="半圆角左"
-          config={config3}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config3}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="半圆角右"
-          config={config4}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config4}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏"
-          config={config5}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config5}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="onClick [查看控制台]"
-          config={config6}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config6}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="可关闭"
-          config={config7}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config7}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置可关闭颜色"
-          config={config8}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config8}>标签</Tag>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="通过 CSS 变量进行个性化"
-          config={config9}
-          componentName="Tag"
-          mockChildren
-          useInnerBox
-        >
-          <Space>
-            <Tag {...config9}>标签</Tag>
-          </Space>
+          <Tag {...currentConfig}>标签</Tag>
         </SimpleBox>
 
         <PropertyBox config={Tag.defaultProps} labelWidth={270} />
