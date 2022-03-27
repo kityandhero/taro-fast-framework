@@ -51,77 +51,63 @@ export default class Index extends ContentPageBase {
     description: '链接组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '仅头部',
+        config: config1,
+      },
+      {
+        header: '设置颜色',
+        config: config2,
+      },
+      {
+        header: '设置下划线',
+        config: config3,
+      },
+      {
+        header: '设置字体大小',
+        config: config4,
+      },
+      {
+        header: '复制提示',
+        config: config5,
+      },
+      {
+        header: '未配置链接的提示',
+        config: config6,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Link"
           mockChildren={false}
-          useInnerBox={false}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Link {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置颜色"
-          config={config2}
-          componentName="Link"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Link {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置下划线"
-          config={config3}
-          componentName="Link"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Link {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置字体大小"
-          config={config4}
-          componentName="Link"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Link {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="复制提示"
-          config={config5}
-          componentName="Link"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Link {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="未配置链接的提示"
-          config={config5}
-          componentName="Link"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Link {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="未配置链接的提示"
-          config={config6}
-          componentName="Link"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Link {...config6} />
+          <Link {...currentConfig} />
         </SimpleBox>
 
         <PropertyBox config={Link.defaultProps} labelWidth={270} />
