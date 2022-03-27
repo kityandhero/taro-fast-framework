@@ -10,6 +10,8 @@ import { Spin } from '../Spin';
 import ActivityIndicator from '../ActivityIndicator';
 import ColorText from '../ColorText';
 
+import { getStyle } from './tools';
+
 const classPrefix = `tfc-button`;
 
 const fillCollection = ['solid', 'outline', 'none'];
@@ -146,12 +148,29 @@ class Button extends BaseComponent {
     }
   };
 
+  buildInner = () => {
+    const { fontColor, fontSize, icon, text, children } = this.props;
+
+    return children ? (
+      children
+    ) : text && !icon ? (
+      text
+    ) : text && icon ? (
+      <ColorText
+        color={fontColor}
+        fontSize={fontSize}
+        icon={icon}
+        text={text}
+      />
+    ) : icon ? (
+      icon
+    ) : null;
+  };
+
   renderFurther() {
     const {
       style,
       ripple,
-      icon,
-      text,
       backgroundColor,
       fontColor,
       borderColor,
@@ -181,7 +200,6 @@ class Button extends BaseComponent {
       onGetRealnameAuthInfo,
       onError,
       onOpenSetting,
-      children,
     } = this.props;
     const { rippleStyle } = this.state;
 
@@ -228,7 +246,7 @@ class Button extends BaseComponent {
 
     const styleAdjust = {
       ...style,
-      ...{
+      ...getStyle({
         backgroundColor,
         fill,
         fontColor,
@@ -241,7 +259,7 @@ class Button extends BaseComponent {
         paddingLeft,
         paddingRight,
         borderRadius,
-      },
+      }),
     };
 
     if (weappButton) {
@@ -281,13 +299,7 @@ class Button extends BaseComponent {
               text={loadingText}
               overlayBackgroundColor=""
             >
-              {children ? (
-                children
-              ) : text ? (
-                <ColorText icon={icon} text={text} />
-              ) : icon ? (
-                icon
-              ) : null}
+              {this.buildInner()}
             </Spin>
           ) : loading ? (
             <View className={`${classPrefix}-loading-wrapper`}>
@@ -298,13 +310,9 @@ class Button extends BaseComponent {
                 content={loadingText}
               />
             </View>
-          ) : children ? (
-            children
-          ) : text ? (
-            <ColorText icon={icon} text={text} />
-          ) : icon ? (
-            icon
-          ) : null}
+          ) : (
+            this.buildInner()
+          )}
         </ButtonWxApp>
       );
     }
@@ -332,13 +340,7 @@ class Button extends BaseComponent {
             text={loadingText}
             overlayBackgroundColor=""
           >
-            {children ? (
-              children
-            ) : text ? (
-              <ColorText icon={icon} text={text} />
-            ) : icon ? (
-              icon
-            ) : null}
+            {this.buildInner()}
           </Spin>
         ) : loading ? (
           <View className={`${classPrefix}-loading-wrapper`}>
@@ -349,13 +351,9 @@ class Button extends BaseComponent {
               content={loadingText}
             />
           </View>
-        ) : children ? (
-          children
-        ) : text ? (
-          <ColorText icon={icon} text={text} />
-        ) : icon ? (
-          icon
-        ) : null}
+        ) : (
+          this.buildInner()
+        )}
       </View>
     );
   }

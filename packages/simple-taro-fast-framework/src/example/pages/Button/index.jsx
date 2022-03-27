@@ -52,10 +52,12 @@ const config2 = {
 
 const config211 = {
   ...configCore,
+  fontColor: '#e1e111',
   icon: <IconSearch size={38} />,
 };
 
 const config212 = {
+  fontColor: '#e1e111',
   icon: <IconSearch size={38} />,
 };
 
