@@ -1,4 +1,5 @@
 import { View } from '@tarojs/components';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import {
   Grid,
@@ -32,10 +33,6 @@ export default class ContentPageBase extends PageWrapper {
     };
   }
 
-  establishControlList = () => {
-    return [];
-  };
-
   buildControlItem = ({ header, config }) => {
     return this.buildGridItem({
       title: header,
@@ -68,8 +65,11 @@ export default class ContentPageBase extends PageWrapper {
     );
   };
 
-  buildControlBox = () => {
-    const list = this.establishControlList();
+  buildControlBox = (list) => {
+    if (!isArray(list)) {
+      return null;
+    }
+
     if (list.length <= 0) {
       return null;
     }

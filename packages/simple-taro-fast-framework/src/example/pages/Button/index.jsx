@@ -29,95 +29,125 @@ const colorList = [
   'black',
 ];
 
+const configCore = {
+  text: '按钮',
+};
+
+const config0 = {
+  ...configCore,
+};
+
 const config1 = {
+  ...configCore,
   weappButton: true,
 };
 
 const config2 = {
-  style: {
-    width: transformSize(180),
-  },
-  fill: 'solid',
-};
-
-const config3 = {
+  ...configCore,
   style: {
     width: transformSize(280),
   },
   backgroundColor: ['#f43f3b', ' #ec008c'],
 };
 
-const config4 = {
+const config211 = {
+  ...configCore,
+  icon: <IconSearch size={38} />,
+};
+
+const config212 = {
+  icon: <IconSearch size={38} />,
+};
+
+const config3 = {
+  ...configCore,
+  style: {
+    width: transformSize(180),
+  },
   backgroundColor: '#45e209',
 };
 
 const config5 = {
+  ...configCore,
   backgroundColor: 'blue',
   fill: 'solid',
 };
 
 const config6 = {
+  ...configCore,
   backgroundColor: 'blue',
   fill: 'outline',
 };
 
 const config7 = {
+  ...configCore,
   backgroundColor: 'blue',
   fill: 'none',
 };
 
 const config8 = {
+  ...configCore,
   size: 'mini',
   backgroundColor: 'purple',
 };
 
 const config9 = {
+  ...configCore,
   size: 'small',
   backgroundColor: 'purple',
 };
 
 const config10 = {
+  ...configCore,
   size: 'middle',
   backgroundColor: 'purple',
 };
 
 const config11 = {
+  ...configCore,
   size: 'large',
   backgroundColor: 'purple',
 };
 
 const config12 = {
+  ...configCore,
   block: true,
-  size: 'mini',
+  size: 'small',
 };
 
 const config13 = {
+  ...configCore,
   block: true,
   size: 'small',
 };
 
 const config14 = {
+  ...configCore,
   block: true,
   size: 'middle',
 };
 
 const config15 = {
+  ...configCore,
   block: true,
   size: 'large',
 };
 
 const config16 = {
+  ...configCore,
   block: true,
   size: 'large',
   ripple: true,
 };
 
 const config17 = {
+  ...configCore,
   disabled: true,
   backgroundColor: 'blue',
 };
 
 const config18 = {
+  ...configCore,
   backgroundColor: 'blue',
   loading: true,
   loadingType: 'comet',
@@ -125,26 +155,31 @@ const config18 = {
 };
 
 const config19 = {
+  ...configCore,
   loading: true,
   loadingMode: 'overlay',
 };
 
 const config20 = {
+  ...configCore,
   shape: 'default',
   backgroundColor: 'blue',
 };
 
 const config21 = {
+  ...configCore,
   shape: 'rounded',
   backgroundColor: 'olive',
 };
 
 const config22 = {
+  ...configCore,
   shape: 'rectangular',
   backgroundColor: 'pink',
 };
 
 const config23 = {
+  ...configCore,
   shape: 'default',
   backgroundColor: 'blue',
   paddingTop: 2,
@@ -165,323 +200,172 @@ export default class Index extends ContentPageBase {
     description: '按钮组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '普通按钮',
+        currentConfig: config0,
+      },
+    };
+  }
+
+  establishColorList = () => {
+    return colorList.map((item) => {
+      return {
+        header: `内置颜色 - ${item}`,
+        config: {
+          ...configCore,
+          style: {
+            width: transformSize(180),
+          },
+          backgroundColor: item,
+          fill: 'solid',
+        },
+      };
+    });
+  };
+
+  establishControlList = () => {
+    return [
+      {
+        header: '普通按钮',
+        config: config0,
+      },
+      ...this.establishColorList(),
+      {
+        header: '自定义颜色',
+        config: config3,
+      },
+      {
+        header: '渐变色',
+        config: config2,
+      },
+      {
+        header: '微信按钮模式',
+        config: config1,
+      },
+      {
+        header: '附带图标',
+        config: config211,
+      },
+      {
+        header: '仅图标',
+        config: config212,
+      },
+      {
+        header: '填充模式 solid',
+        config: config5,
+      },
+      {
+        header: '填充模式 outline',
+        config: config6,
+      },
+      {
+        header: '填充模式 none',
+        config: config7,
+      },
+      {
+        header: '大小 mini',
+        config: config8,
+      },
+      {
+        header: '大小 small',
+        config: config9,
+      },
+      {
+        header: '大小 middle',
+        config: config10,
+      },
+      {
+        header: '大小 large',
+        config: config11,
+      },
+      {
+        header: '块级按钮 mini',
+        config: config12,
+      },
+      {
+        header: '块级按钮 small',
+        config: config13,
+      },
+      {
+        header: '块级按钮 middle',
+        config: config14,
+      },
+      {
+        header: '块级按钮 large',
+        config: config15,
+      },
+      {
+        header: '涟漪效果',
+        config: config16,
+      },
+      {
+        header: '禁用状态',
+        config: config17,
+      },
+      {
+        header: '加载中',
+        config: config18,
+      },
+      {
+        header: '加载中 overlay',
+        config: config19,
+      },
+      {
+        header: '形状 default',
+        config: config20,
+      },
+      {
+        header: '形状 rounded',
+        config: config21,
+      },
+      {
+        header: '形状 rectangular',
+        config: config22,
+      },
+
+      {
+        header: '自定义间距边框',
+        config: config23,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="普通按钮"
+          header={header}
+          config={currentConfig}
           componentName="Button"
-          mockChildren
-          useInnerBox={false}
+          mockChildren={false}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Button>按钮</Button>
+          <Button {...currentConfig} />
         </SimpleBox>
 
         <SimpleBox
-          header="微信按钮"
-          config={config1}
+          header="包裹模式"
+          config={{}}
           componentName="Button"
           mockChildren
-          useInnerBox={false}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
         >
-          <Button {...config1}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="内置颜色 附带阴影"
-          config={config2}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space wrap size={16}>
-            {colorList.map((o, i) => {
-              return (
-                <Button key={`${i}`} backgroundColor={o} {...config2}>
-                  {o}
-                </Button>
-              );
-            })}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="渐变色"
-          config={config3}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space wrap size={16}>
-            <Button
-              style={{
-                width: transformSize(280),
-              }}
-              backgroundColor={['#f43f3b', ' #ec008c']}
-            >
-              gradual-red
-            </Button>
-            <Button
-              style={{
-                width: transformSize(280),
-              }}
-              backgroundColor={['#ff9700', ' #ed1c24']}
-            >
-              gradual-orange
-            </Button>
-            <Button
-              style={{
-                width: transformSize(280),
-              }}
-              backgroundColor={['#39b54a', ' #8dc63f']}
-            >
-              yellow-green
-            </Button>
-            <Button
-              style={{
-                width: transformSize(280),
-              }}
-              backgroundColor={['#9000ff', ' #5e00ff']}
-            >
-              olive-purple
-            </Button>
-            <Button
-              style={{
-                width: transformSize(280),
-              }}
-              backgroundColor={['#ec008c', ' #6739b6']}
-            >
-              gradual-pink
-            </Button>
-            <Button
-              style={{
-                width: transformSize(280),
-              }}
-              backgroundColor={['#0081ff', ' #1cbbb4']}
-            >
-              gradual-blue
-            </Button>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置颜色"
-          config={config4}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space wrap size={16}>
-            <Button backgroundColor="#45e209">Solid</Button>
-            <Button backgroundColor="#99a2a9">Outline</Button>
-            <Button backgroundColor="#a5ee0f">None</Button>{' '}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="填充模式 solid"
-          config={config5}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config5}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="填充模式 outline"
-          config={config6}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config6}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="填充模式 none"
-          config={config7}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config7}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="大小 mini"
-          config={config8}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config8}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="大小 small"
-          config={config9}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config9}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="大小 middle"
-          config={config10}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config10}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="大小 large"
-          config={config11}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config11}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="块级按钮 mini"
-          config={config12}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config12}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="块级按钮 mini"
-          config={config13}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config13}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="块级按钮 mini"
-          config={config14}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config14}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="块级按钮 mini"
-          config={config15}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config15}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="涟漪效果"
-          config={config16}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config16}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="禁用状态"
-          config={config17}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config17}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="加载中"
-          config={config18}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config18}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="加载中"
-          config={config18}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config18}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="加载中 overlay"
-          config={config19}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config19}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox header="图标">
           <Button>
             <ColorText icon={<IconSearch size={38} />} text="搜索" />
           </Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="形状 default"
-          config={config20}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config20}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="形状 rounded"
-          config={config21}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config21}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="形状 rectangular"
-          config={config22}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config22}>按钮</Button>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义间距边框"
-          config={config23}
-          componentName="Button"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Button {...config23}>按钮</Button>
         </SimpleBox>
 
         <PropertyBox config={Button.defaultProps} labelWidth={330} />

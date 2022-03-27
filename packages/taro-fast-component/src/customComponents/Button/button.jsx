@@ -8,6 +8,7 @@ import BaseComponent from '../BaseComponent';
 
 import { Spin } from '../Spin';
 import ActivityIndicator from '../ActivityIndicator';
+import ColorText from '../ColorText';
 
 import { getStyle } from './tools';
 
@@ -37,6 +38,8 @@ const defaultProps = {
   hidden: false,
   ripple: false,
   style: {},
+  icon: null,
+  text: '',
   backgroundColor: '',
   fontColor: '',
   borderColor: '',
@@ -149,6 +152,8 @@ class Button extends BaseComponent {
     const {
       style,
       ripple,
+      icon,
+      text,
       backgroundColor,
       fontColor,
       borderColor,
@@ -278,7 +283,13 @@ class Button extends BaseComponent {
               text={loadingText}
               overlayBackgroundColor=""
             >
-              {children}
+              {children ? (
+                children
+              ) : text ? (
+                <ColorText icon={icon} text={text} />
+              ) : icon ? (
+                icon
+              ) : null}
             </Spin>
           ) : loading ? (
             <View className={`${classPrefix}-loading-wrapper`}>
@@ -289,9 +300,13 @@ class Button extends BaseComponent {
                 content={loadingText}
               />
             </View>
-          ) : (
+          ) : children ? (
             children
-          )}
+          ) : text ? (
+            <ColorText icon={icon} text={text} />
+          ) : icon ? (
+            icon
+          ) : null}
         </ButtonWxApp>
       );
     }
@@ -319,7 +334,13 @@ class Button extends BaseComponent {
             text={loadingText}
             overlayBackgroundColor=""
           >
-            {children}
+            {children ? (
+              children
+            ) : text ? (
+              <ColorText icon={icon} text={text} />
+            ) : icon ? (
+              icon
+            ) : null}
           </Spin>
         ) : loading ? (
           <View className={`${classPrefix}-loading-wrapper`}>
@@ -330,9 +351,13 @@ class Button extends BaseComponent {
               content={loadingText}
             />
           </View>
-        ) : (
+        ) : children ? (
           children
-        )}
+        ) : text ? (
+          <ColorText icon={icon} text={text} />
+        ) : icon ? (
+          icon
+        ) : null}
       </View>
     );
   }

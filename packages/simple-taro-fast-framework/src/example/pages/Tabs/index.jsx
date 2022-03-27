@@ -410,7 +410,7 @@ export default class Index extends ContentPageBase {
           innerBoxCenterMode={false}
           innerBoxPadding={false}
           ignorePropertyList={['icon', 'body', 'panel']}
-          controlBox={this.buildControlBox()}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
           <Tabs {...currentConfig} />
         </SimpleBox>
