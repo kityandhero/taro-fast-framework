@@ -113,13 +113,15 @@ export default class Index extends ContentPageBase {
       {
         header: '设定方向 center',
         config: config7,
-        inner: (
-          <>
-            text
-            <Button type="primary">Primary</Button>
-            <View className="mock-block">Block</View>
-          </>
-        ),
+        inner: [
+          'text',
+          <Button key="start-2" type="primary">
+            Primary
+          </Button>,
+          <View key="start-3" className="mock-block">
+            Block
+          </View>,
+        ],
         wrapBuilder: (one) => {
           return <View className="space-align-block">{one}</View>;
         },
@@ -127,13 +129,15 @@ export default class Index extends ContentPageBase {
       {
         header: '设定方向 start',
         config: config8,
-        inner: (
-          <>
-            text
-            <Button type="primary">Primary</Button>
-            <View className="mock-block">Block</View>
-          </>
-        ),
+        inner: [
+          'text',
+          <Button key="start-2" type="primary">
+            Primary
+          </Button>,
+          <View key="start-3" className="mock-block">
+            Block
+          </View>,
+        ],
         wrapBuilder: (one) => {
           return <View className="space-align-block">{one}</View>;
         },
@@ -141,13 +145,15 @@ export default class Index extends ContentPageBase {
       {
         header: '设定方向 end',
         config: config9,
-        inner: (
-          <>
-            text
-            <Button type="primary">Primary</Button>
-            <View className="mock-block">Block</View>
-          </>
-        ),
+        inner: [
+          'text',
+          <Button key="start-2" type="primary">
+            Primary
+          </Button>,
+          <View key="start-3" className="mock-block">
+            Block
+          </View>,
+        ],
         wrapBuilder: (one) => {
           return <View className="space-align-block">{one}</View>;
         },
@@ -155,13 +161,15 @@ export default class Index extends ContentPageBase {
       {
         header: '设定方向 baseline',
         config: config10,
-        inner: (
-          <>
-            text
-            <Button type="primary">Primary</Button>
-            <View className="mock-block">Block</View>
-          </>
-        ),
+        inner: [
+          'text',
+          <Button key="start-2" type="primary">
+            Primary
+          </Button>,
+          <View key="start-3" className="mock-block">
+            Block
+          </View>,
+        ],
         wrapBuilder: (one) => {
           return <View className="space-align-block">{one}</View>;
         },

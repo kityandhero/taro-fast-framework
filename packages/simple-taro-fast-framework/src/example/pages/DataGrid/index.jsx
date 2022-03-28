@@ -139,62 +139,67 @@ export default class Index extends ContentPageBase {
     description: '数据表格组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '列布局 2列',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '列布局 2列',
+        config: config1,
+      },
+      {
+        header: '无边框列 3列',
+        config: config2,
+      },
+      {
+        header: '长文本展示',
+        config: config3,
+      },
+      {
+        header: '顶部对齐',
+        config: config4,
+      },
+      {
+        header: '行布局',
+        config: config5,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <DataGrid key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </DataGrid>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="列布局"
-          extra="2列"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="DataGrid"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <DataGrid {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="无边框列"
-          extra="3列"
-          config={config2}
-          componentName="DataGrid"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <DataGrid {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="长文本展示"
-          extra="3列"
-          config={config3}
-          componentName="DataGrid"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <DataGrid {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="顶部对齐"
-          extra="3列"
-          config={config4}
-          componentName="DataGrid"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <DataGrid {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="行布局"
-          extra="3列"
-          config={config5}
-          componentName="DataGrid"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <DataGrid {...config5} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={DataGrid.defaultProps} labelWidth={280} />

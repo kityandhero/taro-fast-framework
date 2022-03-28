@@ -4,7 +4,9 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
-const config1 = {};
+const config1 = {
+  type: 'comet',
+};
 
 const config2 = {
   color: '#4589e1',
