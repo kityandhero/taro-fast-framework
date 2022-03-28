@@ -13,6 +13,7 @@ const defaultProps = {
   title: '',
   description: '',
   icon: null,
+  direction: '',
 };
 
 class Step extends BaseComponent {
@@ -23,26 +24,48 @@ class Step extends BaseComponent {
   };
 
   renderFurther() {
-    const { title, description, icon } = this.props;
+    const { title, description, icon, direction } = this.props;
 
     const status = this.getStatus();
 
     return (
       <View
         className={classNames(
-          `${classPrefix}`,
+          `${classPrefix}__item-${direction}`,
           `${classPrefix}__item__status-${status}`,
         )}
       >
-        <View className={`${classPrefix}__item__indicator`}>
-          <View className={`${classPrefix}__item__icon__container`}>
+        <View
+          className={classNames(
+            `${classPrefix}__item__indicator`,
+            `${classPrefix}__item-${direction}__indicator`,
+          )}
+        >
+          <View
+            className={classNames(
+              `${classPrefix}__item__indicator__icon__container`,
+              `${classPrefix}__item-${direction}__indicator__icon__container`,
+            )}
+          >
             {icon}
           </View>
+
+          <View
+            className={classNames(
+              `${classPrefix}__item__indicator__line`,
+              `${classPrefix}__item-${direction}__indicator__line`,
+            )}
+          />
         </View>
-        <View className={`${classPrefix}__item__content`}>
-          <View className={`${classPrefix}__item__title`}>{title}</View>
+
+        <View className={`${classPrefix}__item-${direction}__content`}>
+          <View className={`${classPrefix}__item-${direction}__content__title`}>
+            {title}
+          </View>
           {!!description && (
-            <View className={`${classPrefix}__item__description`}>
+            <View
+              className={`${classPrefix}__item-${direction}__content__description`}
+            >
               {description}
             </View>
           )}

@@ -116,6 +116,7 @@ class Steps extends BaseComponent {
     icon,
     status = 'wait',
     index,
+    direction,
   }) => {
     return (
       <Step
@@ -124,6 +125,7 @@ class Steps extends BaseComponent {
         description={description || ''}
         icon={icon || this.getIcon(status)}
         status={status || 'wait'}
+        direction={direction}
       />
     );
   };
@@ -170,6 +172,7 @@ class Steps extends BaseComponent {
               ? statusSource
               : 'wait',
             index,
+            direction,
           });
         })}
 
