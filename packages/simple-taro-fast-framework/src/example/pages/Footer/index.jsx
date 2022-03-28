@@ -35,47 +35,63 @@ export default class Index extends ContentPageBase {
     name: '底部',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '仅图片',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '仅图片',
+        config: config1,
+      },
+      {
+        header: '仅文字',
+        config: config2,
+      },
+      {
+        header: '仅描述',
+        config: config3,
+      },
+      {
+        header: '用法展示',
+        config: config4,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Footer key={key} {...config}>
+        {inner}
+      </Footer>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="仅图片"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Footer"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Footer {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="仅文字"
-          config={config2}
-          componentName="Footer"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Footer {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="仅描述"
-          config={config3}
-          componentName="Footer"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Footer {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="用法展示"
-          config={config4}
-          componentName="Footer"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Footer {...config4} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Footer.defaultProps} labelWidth={170} />
