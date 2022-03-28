@@ -1,10 +1,9 @@
-import { Text } from '@tarojs/components';
-
 import {
   Divider,
   Space,
   Icon,
   ActivityIndicator,
+  ColorText,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -12,7 +11,6 @@ import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
 const { IconSearch } = Icon;
-const { buildDivider } = Divider;
 
 const config1 = {
   contentPosition: 'left',
@@ -74,148 +72,120 @@ export default class Index extends ContentPageBase {
     description: '间隔线组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认',
+        currentConfig: {},
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '默认',
+        config: {},
+      },
+      {
+        header: '含有内容',
+        config: {},
+        inner: '默认内容在中间',
+      },
+      {
+        header: '含有内容',
+        config: {
+          style: {
+            color: '#1677ff',
+            borderColor: '#1677ff',
+            borderStyle: 'dashed',
+          },
+        },
+        inner: '内容',
+      },
+      {
+        header: '方向 left',
+        config: config1,
+        inner: '内容',
+      },
+      {
+        header: '方向 right',
+        config: config2,
+        inner: '内容',
+      },
+      {
+        header: '设定颜色',
+        config: config3,
+        inner: '内容',
+      },
+      {
+        header: '设定线宽度',
+        config: config4,
+        inner: '内容',
+      },
+      {
+        header: '线条类型 dashed',
+        config: config5,
+        inner: '内容',
+      },
+      {
+        header: '线条类型 dotted',
+        config: config6,
+        inner: '内容',
+      },
+      {
+        header: '设定上下间距',
+        config: config7,
+        inner: '内容',
+      },
+      {
+        header: '设定内容高度',
+        config: config8,
+        inner: '内容',
+      },
+      {
+        header: '包裹组件 图标文字',
+        config: config9,
+        inner: <ColorText icon={<IconSearch size={32} />} text="搜索" />,
+      },
+      {
+        header: '包裹组件2',
+        config: config10,
+        inner: <ActivityIndicator content="加载中" />,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Divider key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Divider>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认"
+          header={header}
+          config={currentConfig}
           componentName="Divider"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Divider />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="含有内容"
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider>默认内容在中间</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="方向 left"
-          config={config1}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config1}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="方向 right"
-          config={config2}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config2}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定颜色"
-          config={config3}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config3}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定线宽度"
-          config={config4}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config4}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="线条类型 dashed"
-          config={config5}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config5}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="线条类型 dotted"
-          config={config6}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config6}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定上下间距"
-          config={config7}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config7}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定内容高度"
-          config={config8}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config8}>内容</Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="附带图标"
-          config={config9}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config9}>
-            <Space>
-              <IconSearch size={32} />
-              <Text>搜索</Text>
-            </Space>
-          </Divider>
-        </SimpleBox>
-
-        <SimpleBox
-          header="附带图标"
-          config={config10}
-          componentName="Divider"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Divider {...config10}>
-            <ActivityIndicator content="加载中" />
-          </Divider>
-        </SimpleBox>
-
-        <SimpleBox header="buildDivider">
-          {buildDivider({
-            contentPosition: 'left',
-            style: {
-              color: '#1677ff',
-              borderColor: '#1677ff',
-              borderStyle: 'dashed',
-            },
-            icon: <IconSearch size={32} />,
-            text: '搜索',
-          })}
-        </SimpleBox>
-
-        <PropertyBox config={Divider.defaultProps} labelWidth={220} />
+        <PropertyBox config={Divider.defaultProps} labelWidth={240} />
       </Space>
     );
   };
