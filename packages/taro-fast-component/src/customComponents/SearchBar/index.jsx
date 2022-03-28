@@ -72,7 +72,7 @@ class SearchBar extends BaseComponent {
     const { onNavigate } = this.props;
 
     if (isFunction(onNavigate)) {
-      onNavigate();
+      onNavigate(this.searchText);
     }
   };
 

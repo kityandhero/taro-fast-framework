@@ -1,7 +1,4 @@
-import {
-  transformSize,
-  showInfoMessage,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Icon,
   SearchBar,
@@ -21,7 +18,7 @@ const config1 = {
   mode: 'search',
   onSearch: (v) => {
     console.log({
-      message: `触发搜索 ${v}`,
+      message: `search ${v}`,
     });
   },
 };
@@ -34,7 +31,7 @@ const config2 = {
   mode: 'search',
   onSearch: (v) => {
     console.log({
-      message: `触发搜索 ${v}`,
+      message: `search ${v}`,
     });
   },
 };
@@ -47,7 +44,7 @@ const config3 = {
   searchStyle: {},
   onNavigate: () => {
     console.log({
-      message: `触发跳转`,
+      message: `navigate`,
     });
   },
 };
@@ -61,7 +58,7 @@ const config4 = {
   showSearch: false,
   onNavigate: () => {
     console.log({
-      message: `触发跳转`,
+      message: `navigate`,
     });
   },
 };
@@ -87,7 +84,7 @@ const config5 = {
   },
   onNavigate: () => {
     console.log({
-      message: `触发跳转`,
+      message: `navigate`,
     });
   },
 };
@@ -104,86 +101,67 @@ export default class Index extends ContentPageBase {
     description: '搜索条组件',
   };
 
-  handleClick = (type) => {
-    this.bannerNotify({
-      message: '消息通知',
-      type: type,
-    });
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '搜索模式',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '搜索模式',
+        config: config1,
+      },
+      {
+        header: '搜索模式 半圆形',
+        config: config2,
+      },
+      {
+        header: '跳转模式',
+        config: config3,
+      },
+      {
+        header: '跳转模式 半圆形',
+        config: config4,
+      },
+      {
+        header: '自定义样式',
+        config: config5,
+      },
+    ];
   };
 
-  handleSearch = (v) => {
-    showInfoMessage({
-      message: `触发搜索 ${v}`,
-    });
-  };
-
-  handleNavigate = () => {
-    showInfoMessage({
-      message: `触发跳转`,
-    });
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <SearchBar key={key} {...config}>
+        {inner}
+      </SearchBar>
+    );
   };
 
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="搜索模式"
-          config={config1}
-          extra="查看控制台"
+          header={header}
+          config={currentConfig}
           componentName="SearchBar"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
-          ignorePropertyList={['icon']}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <SearchBar {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="搜索模式 半圆形"
-          config={config2}
-          extra="查看控制台"
-          componentName="SearchBar"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <SearchBar {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="跳转模式"
-          config={config3}
-          extra="查看控制台"
-          componentName="SearchBar"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <SearchBar {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="跳转模式 半圆形"
-          config={config4}
-          extra="查看控制台"
-          componentName="SearchBar"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <SearchBar {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义样式"
-          config={config5}
-          extra="查看控制台"
-          componentName="SearchBar"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <SearchBar {...config5} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={SearchBar.defaultProps} labelWidth={220} />

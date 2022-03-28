@@ -33,6 +33,7 @@ export default class Index extends ContentPageBase {
   headerData = {
     id: 'Footer',
     name: '底部',
+    description: '底部组件',
   };
 
   constructor(props) {
