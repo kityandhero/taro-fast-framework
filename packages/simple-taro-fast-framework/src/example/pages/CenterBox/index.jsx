@@ -34,21 +34,59 @@ export default class Index extends ContentPageBase {
     description: '居中容器组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '布局展示',
+        currentConfig: config1,
+        inner: <View style={boxStyle}></View>,
+        wrapBuilder: (o) => {
+          return <View style={containorStyle}>{o}</View>;
+        },
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '布局展示',
+        config: config1,
+        inner: <View style={boxStyle}></View>,
+        wrapBuilder: (o) => {
+          return <View style={containorStyle}>{o}</View>;
+        },
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <CenterBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </CenterBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="布局展示"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="CenterBox"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <View style={containorStyle}>
-            <CenterBox {...config1}>
-              <View style={boxStyle}></View>
-            </CenterBox>
-          </View>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={CenterBox.defaultProps} labelWidth={70} />

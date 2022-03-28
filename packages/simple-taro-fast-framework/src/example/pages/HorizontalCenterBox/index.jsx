@@ -47,35 +47,63 @@ export default class Index extends ContentPageBase {
     description: '水平居中',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认布局',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '默认布局',
+        config: config1,
+        inner: <View style={boxStyle}></View>,
+        wrapBuilder: (o) => {
+          return <View style={containorStyle}>{o}</View>;
+        },
+      },
+      {
+        header: '不自动使用父级高度',
+        config: config2,
+        inner: <View style={boxStyle}></View>,
+        wrapBuilder: (o) => {
+          return <View style={containorStyle}>{o}</View>;
+        },
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <HorizontalCenterBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </HorizontalCenterBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认布局"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="HorizontalCenterBox"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <View style={containorStyle}>
-            <HorizontalCenterBox {...config1}>
-              <View style={boxStyle}></View>
-            </HorizontalCenterBox>
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="不自动使用父级高度"
-          config={config2}
-          componentName="HorizontalCenterBox"
-          mockChildren
-          useInnerBox={false}
-        >
-          <View style={containorStyle}>
-            <HorizontalCenterBox {...config2}>
-              <View style={boxStyle}></View>
-            </HorizontalCenterBox>
-          </View>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox
