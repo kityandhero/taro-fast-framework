@@ -4,7 +4,6 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
-const { Step } = Steps;
 const { IconVolumePlus } = Icon;
 
 const config1 = {
@@ -121,75 +120,71 @@ export default class Index extends ContentPageBase {
     description: '步骤条组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '横向',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '横向',
+        config: config1,
+      },
+      {
+        header: '横向 (失败状态)',
+        config: config2,
+      },
+      {
+        header: '纵向',
+        config: config3,
+      },
+      {
+        header: '"纵向 (失败状态)',
+        config: config4,
+      },
+      {
+        header: '自定义图标和大小',
+        config: config5,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Steps key={key} {...config}>
+        {inner}
+      </Steps>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="横向"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Steps"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
           ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Steps {...config1} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="横向（失败状态）"
-          config={config2}
-          componentName="Steps"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon']}
-        >
-          <Steps {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="纵向"
-          config={config3}
-          componentName="Steps"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon']}
-        >
-          <Steps {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="纵向（失败状态）"
-          config={config4}
-          componentName="Steps"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon']}
-        >
-          <Steps {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义图标和大小"
-          config={config5}
-          componentName="Steps"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon']}
-        >
-          <Steps {...config5} />
-        </SimpleBox>
-
-        <PropertyBox
-          header="Steps 可配置项以及默认值"
-          config={Steps.defaultProps}
-          labelWidth={280}
-        />
-
-        <PropertyBox
-          header="Step 可配置项以及默认值"
-          config={Step.defaultProps}
-          labelWidth={150}
-        />
+        <PropertyBox config={Steps.defaultProps} labelWidth={280} />
       </Space>
     );
   };
