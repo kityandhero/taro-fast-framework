@@ -175,7 +175,7 @@ export default class Index extends ContentPageBase {
           config={currentConfig}
           componentName="Steps"
           mockChildren={!!inner}
-          useInnerBox={false}
+          useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
