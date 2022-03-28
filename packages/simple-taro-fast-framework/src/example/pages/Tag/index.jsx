@@ -174,7 +174,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <Tag key={key} {...config}>
-        {inner || '标签'}
+        {this.buildSimpleItemInner(inner || '标签')}
       </Tag>
     );
   };

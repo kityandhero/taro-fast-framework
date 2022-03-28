@@ -85,7 +85,7 @@ export default class Index extends ContentPageBase {
           },
         }}
       >
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </BackTop>
     );
   };

@@ -163,7 +163,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <Badge key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </Badge>
     );
   };
@@ -183,7 +183,7 @@ export default class Index extends ContentPageBase {
           innerBoxPadding
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Badge {...currentConfig}>{inner}</Badge>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Badge.defaultProps} labelWidth={240} />

@@ -140,7 +140,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <NoticeBar key={key} {...config}>
-        {inner || notice}
+        {this.buildSimpleItemInner(inner || notice)}
       </NoticeBar>
     );
   };

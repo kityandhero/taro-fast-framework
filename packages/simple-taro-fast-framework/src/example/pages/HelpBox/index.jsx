@@ -144,7 +144,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <HelpBox key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </HelpBox>
     );
   };

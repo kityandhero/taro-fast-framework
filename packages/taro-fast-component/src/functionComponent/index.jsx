@@ -88,7 +88,7 @@ export function buildButton({
       onError={onError}
       onOpenSetting={onOpenSetting}
     >
-      {inner}
+      {this.buildSimpleItemInner(inner)}
     </Button>
   );
 }

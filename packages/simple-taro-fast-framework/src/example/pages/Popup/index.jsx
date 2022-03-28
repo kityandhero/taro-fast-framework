@@ -395,7 +395,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBasic}
         >
-          {inner}
+          {this.buildSimpleItemInner(inner)}
         </Popup>
 
         <Popup
@@ -410,7 +410,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideLeft}
         >
-          {inner}
+          {this.buildSimpleItemInner(inner)}
         </Popup>
 
         <Popup
@@ -425,7 +425,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideRight}
         >
-          {inner}
+          {this.buildSimpleItemInner(inner)}
         </Popup>
 
         <Popup
@@ -440,7 +440,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideTop}
         >
-          {inner}
+          {this.buildSimpleItemInner(inner)}
         </Popup>
 
         <Popup
@@ -455,7 +455,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBottom}
         >
-          {inner}
+          {this.buildSimpleItemInner(inner)}
         </Popup>
       </>
     );

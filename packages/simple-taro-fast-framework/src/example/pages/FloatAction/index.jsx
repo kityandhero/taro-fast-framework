@@ -154,7 +154,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <FloatAction key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </FloatAction>
     );
   };

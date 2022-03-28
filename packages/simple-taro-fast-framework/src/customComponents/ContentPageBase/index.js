@@ -187,6 +187,16 @@ export default class ContentPageBase extends PageWrapper {
     return null;
   };
 
+  buildSimpleItemInner = (inner) => {
+    if (isArray(inner)) {
+      return inner.map((one) => {
+        return one;
+      });
+    }
+
+    return inner;
+  };
+
   renderContent = () => {
     return null;
   };

@@ -239,7 +239,7 @@ export default class Index extends ContentPageBase {
 
     return (
       <ImageBox key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </ImageBox>
     );
   };

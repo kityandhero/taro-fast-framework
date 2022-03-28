@@ -8,6 +8,14 @@ import PropertyBox from '../../../customComponents/PropertyBox';
 
 import './index.less';
 
+function buildButtonList(size, props) {
+  return new Array(size).fill(null).map((_, index) => (
+    <Button key={index} {...props}>
+      Button
+    </Button>
+  ));
+}
+
 const config1 = {
   size: 24,
 };
@@ -62,174 +70,147 @@ export default class Index extends ContentPageBase {
     description: '间隔布局组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认',
+        currentConfig: {},
+        inner: buildButtonList(4),
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基本用法',
+        config: {},
+        inner: buildButtonList(4),
+      },
+      {
+        header: '设定间隔',
+        config: config1,
+        inner: buildButtonList(3),
+      },
+      {
+        header: '自动换行',
+        config: config4,
+        inner: buildButtonList(8),
+      },
+      {
+        header: '设定双向间隔',
+        config: config2,
+        inner: buildButtonList(10),
+      },
+      {
+        header: '设定方向',
+        config: config3,
+        inner: buildButtonList(4),
+      },
+      {
+        header: '设定方向 center',
+        config: config7,
+        inner: (
+          <>
+            text
+            <Button type="primary">Primary</Button>
+            <View className="mock-block">Block</View>
+          </>
+        ),
+        wrapBuilder: (one) => {
+          return <View className="space-align-block">{one}</View>;
+        },
+      },
+      {
+        header: '设定方向 start',
+        config: config8,
+        inner: (
+          <>
+            text
+            <Button type="primary">Primary</Button>
+            <View className="mock-block">Block</View>
+          </>
+        ),
+        wrapBuilder: (one) => {
+          return <View className="space-align-block">{one}</View>;
+        },
+      },
+      {
+        header: '设定方向 end',
+        config: config9,
+        inner: (
+          <>
+            text
+            <Button type="primary">Primary</Button>
+            <View className="mock-block">Block</View>
+          </>
+        ),
+        wrapBuilder: (one) => {
+          return <View className="space-align-block">{one}</View>;
+        },
+      },
+      {
+        header: '设定方向 baseline',
+        config: config10,
+        inner: (
+          <>
+            text
+            <Button type="primary">Primary</Button>
+            <View className="mock-block">Block</View>
+          </>
+        ),
+        wrapBuilder: (one) => {
+          return <View className="space-align-block">{one}</View>;
+        },
+      },
+      {
+        header: '占满父级宽度',
+        config: config5,
+        inner: buildButtonList(3, {
+          block: true,
+          color: 'primary',
+          size: 'large',
+        }),
+      },
+      {
+        header: '自定义间隔',
+        config: config6,
+        inner: buildButtonList(3),
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Space key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Space>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认"
+          header={header}
+          config={currentConfig}
           componentName="Space"
-          mockChildren
-          useInnerBox={false}
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon', 'split']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Space>
-            {new Array(4).fill(null).map((_, index) => (
-              <Button key={index}>Button</Button>
-            ))}
-          </Space>
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="设定间隔"
-          config={config1}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space {...config1}>
-            {new Array(3).fill(null).map((_, index) => (
-              <Button key={index}>Button</Button>
-            ))}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自动换行"
-          config={config4}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space {...config4}>
-            {new Array(8).fill(null).map((_, index) => (
-              <Button key={index}>Button</Button>
-            ))}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定双向间隔"
-          config={config2}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space {...config2}>
-            {new Array(10).fill(null).map((_, index) => (
-              <Button key={index}>Button</Button>
-            ))}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定方向"
-          config={config3}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space {...config3}>
-            {new Array(4).fill(null).map((_, index) => (
-              <Button key={index}>Button</Button>
-            ))}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定方向 center"
-          config={config7}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <View className="space-align-block">
-            <Space {...config7}>
-              text
-              <Button type="primary">Primary</Button>
-              <View className="mock-block">Block</View>
-            </Space>
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定方向 start"
-          config={config8}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <View className="space-align-block">
-            <Space {...config8}>
-              text
-              <Button type="primary">Primary</Button>
-              <View className="mock-block">Block</View>
-            </Space>
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定方向 end"
-          config={config9}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <View className="space-align-block">
-            <Space {...config9}>
-              text
-              <Button type="primary">Primary</Button>
-              <View className="mock-block">Block</View>
-            </Space>
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="设定方向 end"
-          config={config10}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <View className="space-align-block">
-            <Space {...config10}>
-              text
-              <Button type="primary">Primary</Button>
-              <View className="mock-block">Block</View>
-            </Space>
-          </View>
-        </SimpleBox>
-
-        <SimpleBox
-          header="占满父级宽度"
-          config={config5}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Space {...config5}>
-            {new Array(3).fill(null).map((_, index) => (
-              <Button key={index} block color="primary" size="large">
-                Button
-              </Button>
-            ))}
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义间隔"
-          config={config6}
-          componentName="Space"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['split']}
-        >
-          <Space {...config6}>
-            {new Array(3).fill(null).map((_, index) => (
-              <Button key={index}>Button</Button>
-            ))}
-          </Space>
-        </SimpleBox>
-
-        <PropertyBox config={Space.defaultProps} labelWidth={220} />
+        <PropertyBox config={Space.defaultProps} labelWidth={240} />
       </Space>
     );
   };

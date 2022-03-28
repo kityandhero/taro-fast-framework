@@ -117,7 +117,7 @@ export default class Index extends ContentPageBase {
           },
         }}
       >
-        {inner || '内部内容'}
+        {this.buildSimpleItemInner(inner || '内部内容')}
       </FixedBox>
     );
   };

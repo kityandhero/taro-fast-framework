@@ -359,7 +359,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <Button key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </Button>
     );
   };

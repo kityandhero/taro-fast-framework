@@ -190,7 +190,7 @@ export default class Index extends ContentPageBase {
 
     return (
       <Tabbar key={key} {...{ ...config, ...{ value } }}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </Tabbar>
     );
   };

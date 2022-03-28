@@ -95,7 +95,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <Link key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </Link>
     );
   };

@@ -143,7 +143,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <Countdown key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </Countdown>
     );
   };

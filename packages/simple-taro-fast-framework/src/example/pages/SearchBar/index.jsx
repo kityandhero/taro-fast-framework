@@ -141,7 +141,7 @@ export default class Index extends ContentPageBase {
   buildSimpleItem = ({ key, config, inner }) => {
     return (
       <SearchBar key={key} {...config}>
-        {inner}
+        {this.buildSimpleItemInner(inner)}
       </SearchBar>
     );
   };
