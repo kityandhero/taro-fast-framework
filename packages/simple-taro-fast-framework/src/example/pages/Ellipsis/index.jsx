@@ -7,12 +7,10 @@ import PropertyBox from '../../../customComponents/PropertyBox';
 
 const config1 = {
   line: 1,
-  style: {
-    width: transformSize(250),
-    fontSize: transformSize(28),
-    lineHeight: transformSize(44),
-    height: transformSize(44),
-  },
+  width: transformSize(250),
+  height: transformSize(44),
+  fontSize: transformSize(28),
+  lineHeight: transformSize(44),
   text: '这是一段宽度限制长度的文字，后面的内容会省略。',
   onClick: () => {
     console.log('ellipsis click');
@@ -21,11 +19,9 @@ const config1 = {
 
 const config2 = {
   line: 2,
-  style: {
-    height: transformSize(88),
-    fontSize: transformSize(28),
-    lineHeight: transformSize(44),
-  },
+  height: transformSize(88),
+  fontSize: transformSize(28),
+  lineHeight: transformSize(44),
   text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
   onClick: () => {
     console.log('ellipsis click');
@@ -34,11 +30,9 @@ const config2 = {
 
 const config21 = {
   line: 2,
-  style: {
-    height: transformSize(88),
-    fontSize: transformSize(28),
-    lineHeight: transformSize(44),
-  },
+  height: transformSize(88),
+  fontSize: transformSize(28),
+  lineHeight: transformSize(44),
   onClick: () => {
     console.log('ellipsis click');
   },
@@ -46,12 +40,23 @@ const config21 = {
 
 const config3 = {
   line: 3,
+  height: transformSize(132),
+  fontSize: transformSize(28),
+  lineHeight: transformSize(44),
+  text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
+  onClick: () => {
+    console.log('ellipsis click');
+  },
+};
+
+const config4 = {
+  line: 2,
   style: {
-    height: transformSize(132),
+    height: transformSize(88),
     fontSize: transformSize(28),
     lineHeight: transformSize(44),
+    backgroundColor: '#ccc',
   },
-  text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
   onClick: () => {
     console.log('ellipsis click');
   },
@@ -94,6 +99,12 @@ export default class Index extends ContentPageBase {
       {
         header: '显示三行文字',
         config: config3,
+      },
+      {
+        header: '自定义样式',
+        config: config4,
+        inner:
+          '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字, 后面的内容会省略。',
       },
       {
         header: '包裹模式',

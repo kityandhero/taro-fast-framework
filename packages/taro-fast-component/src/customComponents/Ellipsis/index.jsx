@@ -6,6 +6,10 @@ import BaseComponent from '../BaseComponent';
 
 const defaultProps = {
   line: 1,
+  width: null,
+  height: null,
+  fontSize: null,
+  lineHeight: null,
   style: {},
   className: '',
   text: '',
@@ -22,26 +26,80 @@ class Ellipsis extends BaseComponent {
   };
 
   renderFurther() {
-    const { className, line, style: sourceSource, text, children } = this.props;
+    const {
+      className,
+      line,
+      style: sourceSource,
+      width,
+      height,
+      fontSize,
+      lineHeight,
+      text,
+      children,
+    } = this.props;
 
     let styleMust = {};
 
     if (line == 1) {
       styleMust = {
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
+        ...{
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+        },
+        ...((width || null) == null
+          ? {}
+          : {
+              width: width,
+            }),
+        ...((height || null) == null
+          ? {}
+          : {
+              height: height,
+            }),
+        ...((fontSize || null) == null
+          ? {}
+          : {
+              fontSize: fontSize,
+            }),
+        ...((lineHeight || null) == null
+          ? {}
+          : {
+              lineHeight: lineHeight,
+            }),
       };
     }
 
     if (line > 1) {
       styleMust = {
-        display: '-webkit-box',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'break-spaces',
-        '-webkit-line-clamp': `${line}`,
-        '-webkit-box-orient': 'vertical',
+        ...{
+          display: '-webkit-box',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'break-spaces',
+          '-webkit-line-clamp': `${line}`,
+          '-webkit-box-orient': 'vertical',
+        },
+        ...((width || null) == null
+          ? {}
+          : {
+              width: width,
+            }),
+        ...((height || null) == null
+          ? {}
+          : {
+              height: height,
+            }),
+        ...((fontSize || null) == null
+          ? {}
+          : {
+              fontSize: fontSize,
+            }),
+        ...((lineHeight || null) == null
+          ? {}
+          : {
+              lineHeight: lineHeight,
+            }),
       };
     }
 
