@@ -88,97 +88,83 @@ export default class Index extends ContentPageBase {
     name: '帮助提示',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '一般用法',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '一般用法',
+        config: config1,
+      },
+      {
+        header: '隐藏标题',
+        config: config2,
+      },
+      {
+        header: '不显示行号',
+        config: config3,
+      },
+      {
+        header: '标题宽度',
+        config: config4,
+      },
+      {
+        header: '使用背景',
+        config: config5,
+      },
+      {
+        header: '设置背景颜色',
+        config: config7,
+      },
+      {
+        header: '设置字体颜色',
+        config: config8,
+      },
+      {
+        header: '设置字体大小',
+        config: config9,
+      },
+      {
+        header: '隐藏',
+        config: config6,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <HelpBox key={key} {...config}>
+        {inner}
+      </HelpBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="一般用法"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏标题"
-          config={config2}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="不显示行号"
-          config={config3}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="标题宽度"
-          config={config4}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="使用背景"
-          config={config5}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置背景颜色"
-          config={config7}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config7} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置字体颜色"
-          config={config8}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config8} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置字体大小"
-          config={config9}
-          componentName="HelpBox"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <HelpBox {...config9} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏"
-          config={config6}
-          componentName="HelpBox"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <HelpBox {...config6} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={HelpBox.defaultProps} labelWidth={240} />

@@ -158,6 +158,7 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
           innerBoxCenterMode
           innerBoxPadding
+          ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}
