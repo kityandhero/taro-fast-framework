@@ -101,7 +101,7 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Grid.Item 可配置项以及默认值"
           config={Grid.Item.defaultProps}
-          labelWidth={100}
+          labelWidth={240}
         />
       </Space>
     );

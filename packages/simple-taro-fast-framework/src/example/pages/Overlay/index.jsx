@@ -308,7 +308,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <PropertyBox config={Overlay.defaultProps} labelWidth={130} />
+          <PropertyBox config={Overlay.defaultProps} labelWidth={240} />
         </Space>
 
         <Overlay

@@ -34,8 +34,9 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        header: '默认展示 正方形',
+        header: '默认展示',
         currentConfig: config1,
+        description: '默认长宽比为1, 即正方形',
       },
     };
   }
@@ -95,7 +96,7 @@ export default class Index extends ContentPageBase {
           {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={ScaleBox.defaultProps} labelWidth={140} />
+        <PropertyBox config={ScaleBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

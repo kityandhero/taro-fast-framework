@@ -495,7 +495,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <PropertyBox config={Swiper.defaultProps} labelWidth={170} />
+        <PropertyBox config={Swiper.defaultProps} labelWidth={240} />
       </Space>
     );
   };

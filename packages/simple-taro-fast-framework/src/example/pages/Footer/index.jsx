@@ -96,7 +96,7 @@ export default class Index extends ContentPageBase {
           {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={Footer.defaultProps} labelWidth={170} />
+        <PropertyBox config={Footer.defaultProps} labelWidth={240} />
       </Space>
     );
   };

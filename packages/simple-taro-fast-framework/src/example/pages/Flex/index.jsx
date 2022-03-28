@@ -81,13 +81,13 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Row 可配置项以及默认值"
           config={Row.defaultProps}
-          labelWidth={170}
+          labelWidth={240}
         />
 
         <PropertyBox
           header="Col 可配置项以及默认值"
           config={Col.defaultProps}
-          labelWidth={170}
+          labelWidth={240}
         />
       </Space>
     );
