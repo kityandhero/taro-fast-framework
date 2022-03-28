@@ -5,11 +5,11 @@ import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
 const config1 = {
-  html: '<div>1</div>',
+  html: '<div>渲染内容</div>',
 };
 
 const config2 = {
-  html: '<div>1</div>',
+  html: '<div>可点击</div>',
   onClick: () => {
     console.log('click');
   },
@@ -27,28 +27,57 @@ export default class Index extends ContentPageBase {
     description: 'Html容器组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '渲染Html',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '渲染Html',
+        config: config1,
+      },
+      {
+        header: '点击事件',
+        config: config2,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <HtmlBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </HtmlBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="渲染Html"
-          config={config1}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="HtmlBox"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon', 'top', 'bottom', 'left', 'right']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <HtmlBox {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="点击事件"
-          config={config2}
-          extra="查看控制台"
-          componentName="HtmlBox"
-          mockChildren={false}
-          useInnerBox
-        >
-          <HtmlBox {...config2} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={HtmlBox.defaultProps} labelWidth={240} />

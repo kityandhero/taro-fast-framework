@@ -41,23 +41,69 @@ export default class Index extends ContentPageBase {
     description: '半透明容器组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认',
+        currentConfig: config1,
+        inner: <CenterBox style={textBoxStyle}>内容</CenterBox>,
+        wrapBuilder: (o) => {
+          return (
+            <View style={boxStyle}>
+              <CenterBox>{o}</CenterBox>
+            </View>
+          );
+        },
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '默认',
+        config: config1,
+        inner: <CenterBox style={textBoxStyle}>内容</CenterBox>,
+        wrapBuilder: (o) => {
+          return (
+            <View style={boxStyle}>
+              <CenterBox>{o}</CenterBox>
+            </View>
+          );
+        },
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <TranslucentBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </TranslucentBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认"
-          config={config1}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="TranslucentBox"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon', 'top', 'bottom', 'left', 'right']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <View style={boxStyle}>
-            <CenterBox>
-              <TranslucentBox {...config1}>
-                <CenterBox style={textBoxStyle}>内容</CenterBox>
-              </TranslucentBox>
-            </CenterBox>
-          </View>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={TranslucentBox.defaultProps} labelWidth={240} />
