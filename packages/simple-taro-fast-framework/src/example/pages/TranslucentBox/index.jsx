@@ -60,7 +60,7 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <PropertyBox config={TranslucentBox.defaultProps} labelWidth={220} />
+        <PropertyBox config={TranslucentBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

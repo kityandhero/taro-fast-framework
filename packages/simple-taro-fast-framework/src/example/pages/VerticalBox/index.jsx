@@ -152,7 +152,7 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <PropertyBox config={VerticalBox.defaultProps} labelWidth={220} />
+        <PropertyBox config={VerticalBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

@@ -96,17 +96,6 @@ export default class Index extends ContentPageBase {
         inner: '默认内容在中间',
       },
       {
-        header: '含有内容',
-        config: {
-          style: {
-            color: '#1677ff',
-            borderColor: '#1677ff',
-            borderStyle: 'dashed',
-          },
-        },
-        inner: '内容',
-      },
-      {
         header: '方向 left',
         config: config1,
         inner: '内容',
@@ -152,7 +141,7 @@ export default class Index extends ContentPageBase {
         inner: <ColorText icon={<IconSearch size={32} />} text="搜索" />,
       },
       {
-        header: '包裹组件2',
+        header: '包裹组件 活动指示器',
         config: config10,
         inner: <ActivityIndicator content="加载中" />,
       },

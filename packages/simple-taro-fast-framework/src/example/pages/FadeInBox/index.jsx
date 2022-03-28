@@ -9,7 +9,6 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const style = {
   lineHeight: '1',
@@ -19,6 +18,11 @@ const style = {
 };
 
 const duration = 1200;
+
+const config1 = {
+  style,
+  duration,
+};
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -39,6 +43,8 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         show: false,
+        header: '样例',
+        currentConfig: config1,
       },
     };
   }
@@ -51,46 +57,48 @@ export default class Index extends ContentPageBase {
     }, 800);
   };
 
-  buildItem = () => {
+  establishControlList = () => {
+    return [
+      {
+        header: '样例',
+        config: config1,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    const { show } = this.state;
+
+    if (!show) {
+      return null;
+    }
+
     return (
-      <FadeInBox style={style} duration={duration}>
-        <CenterBox>FadeInBox</CenterBox>
+      <FadeInBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner || <CenterBox>FadeInBox</CenterBox>)}
       </FadeInBox>
     );
   };
 
   renderContent = () => {
-    const { show } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="默认">
-          <Space direction="vertical" fillWidth>
-            {show ? this.buildItem() : null}
-
-            {show ? this.buildItem() : null}
-
-            {show ? this.buildItem() : null}
-
-            {show ? this.buildItem() : null}
-
-            {show ? this.buildItem() : null}
-
-            {show ? this.buildItem() : null}
-          </Space>
+        <SimpleBox
+          header={header}
+          config={currentConfig}
+          componentName="FadeInBox"
+          mockChildren={!!inner}
+          useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <CodeBox
-          componentName="FadeInBox"
-          mockChildren
-          useInnerBox={false}
-          config={{
-            style,
-            duration,
-          }}
-        />
-
-        <PropertyBox config={FadeInBox.defaultProps} labelWidth={220} />
+        <PropertyBox config={FadeInBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

@@ -219,7 +219,7 @@ export default class Index extends ContentPageBase {
           {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={Cascader.defaultProps} labelWidth={220} />
+        <PropertyBox config={Cascader.defaultProps} labelWidth={240} />
       </Space>
     );
   };
