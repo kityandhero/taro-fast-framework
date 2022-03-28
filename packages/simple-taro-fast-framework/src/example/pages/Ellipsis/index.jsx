@@ -95,11 +95,25 @@ export default class Index extends ContentPageBase {
         header: '显示三行文字',
         config: config3,
       },
+      {
+        header: '包裹模式',
+        config: config21,
+        inner:
+          '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字, 后面的内容会省略。',
+      },
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Ellipsis key={key} {...config}>
+        {inner}
+      </Ellipsis>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -107,31 +121,16 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Ellipsis"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Ellipsis {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="包裹模式"
-          config={config21}
-          componentName="Ellipsis"
-          mockChildren
-          useInnerBox
-          innerBoxCenterMode
-          innerBoxPadding
-        >
-          <Ellipsis {...config21}>
-            这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,
-            后面的内容会省略。
-          </Ellipsis>
-        </SimpleBox>
-
-        <PropertyBox config={Ellipsis.defaultProps} labelWidth={230} />
+        <PropertyBox config={Ellipsis.defaultProps} labelWidth={240} />
       </Space>
     );
   };

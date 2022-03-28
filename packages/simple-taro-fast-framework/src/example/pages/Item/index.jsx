@@ -11,7 +11,6 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -42,11 +41,129 @@ const users = [
   },
 ];
 
-const config1 = {
-  label: '账单',
-  clickable: true,
-  arrow: true,
-};
+function clickHandler() {
+  console.log('click');
+}
+
+const config1 = [
+  {
+    label: '1',
+  },
+  {
+    label: '2',
+  },
+  {
+    label: '3',
+  },
+];
+
+const config11 = [
+  {
+    label: '1',
+    border: false,
+  },
+  {
+    label: '2',
+    border: false,
+  },
+  {
+    label: '3',
+    border: false,
+  },
+];
+
+const config2 = [
+  {
+    label: '账单',
+    arrow: true,
+  },
+  {
+    label: '总资产',
+    arrow: true,
+  },
+  {
+    label: '设置',
+    arrow: true,
+  },
+];
+
+const config3 = [
+  {
+    label: '账单',
+    clickable: true,
+    arrow: true,
+    onClick: clickHandler,
+  },
+  {
+    label: '总资产',
+    clickable: true,
+    arrow: true,
+    onClick: clickHandler,
+  },
+  {
+    label: '设置',
+    clickable: true,
+    arrow: true,
+
+    onClick: clickHandler,
+  },
+];
+
+const config4 = [
+  {
+    label: '新消息通知',
+    extra: <Switch defaultChecked />,
+  },
+  {
+    label: '大字号模式',
+    extra: '未开启',
+    clickable: true,
+    arrow: true,
+  },
+  {
+    label: '授权管理',
+    description: '管理已授权的产品和设备',
+    clickable: true,
+    arrow: true,
+  },
+  {
+    title: '这里是标题',
+    label: '这里是主信息',
+  },
+];
+
+const config5 = [
+  {
+    label: '账单',
+    disabled: true,
+    clickable: true,
+    arrow: true,
+    prefix: <IconSketch />,
+  },
+  {
+    label: '总资产',
+    disabled: true,
+    prefix: <IconShoppingCart />,
+  },
+];
+
+const config6 = users.map((user) => {
+  return {
+    label: user.name,
+    description: user.description,
+    prefix: (
+      <Image
+        src={user.avatar}
+        style={{
+          borderRadius: 20,
+          width: transformSize(80),
+          height: transformSize(80),
+        }}
+        fit="cover"
+      />
+    ),
+  };
+});
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -60,6 +177,59 @@ export default class Index extends ContentPageBase {
     description: '条目项组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '文字',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: config1,
+      },
+      {
+        header: '无底线',
+        config: config11,
+      },
+      {
+        header: '箭头',
+        config: config2,
+      },
+      {
+        header: '可点击',
+        config: config3,
+      },
+      {
+        header: '复杂布局',
+        config: config4,
+      },
+      {
+        header: '禁用状态',
+        config: config5,
+      },
+      {
+        header: '用户列表布局',
+        config: config6,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Item key={key} {...config}>
+        {inner}
+      </Item>
+    );
+  };
+
   handleClick = (type) => {
     this.bannerNotify({
       message: '消息通知',
@@ -68,82 +238,24 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="基础用法" space={false} useInnerBox={false}>
-          <Item label="1" />
-          <Item label="2" />
-          <Item label="3" border={false} />
-        </SimpleBox>
-
-        <SimpleBox header="箭头" space={false} useInnerBox={false}>
-          <Item label="账单" arrow />
-          <Item label="总资产" arrow />
-          <Item label="设置" arrow border={false} />
-        </SimpleBox>
-
-        <SimpleBox header="可点击" space={false} useInnerBox={false}>
-          <Item label="账单" clickable arrow onClick={this.handleClick} />
-          <Item label="总资产" clickable arrow onClick={this.handleClick} />
-          <Item
-            label="设置"
-            clickable
-            arrow
-            border={false}
-            onClick={this.handleClick}
-          />
-        </SimpleBox>
-
-        <SimpleBox header="复杂布局" space={false} useInnerBox={false}>
-          <Item label="新消息通知" extra={<Switch defaultChecked />} />
-          <Item label="大字号模式" extra="未开启" clickable arrow />
-          <Item
-            label="授权管理"
-            description="管理已授权的产品和设备"
-            clickable
-            arrow
-          />
-          <Item title="这里是标题" label="这里是主信息" border={false} />
-        </SimpleBox>
-
-        <SimpleBox header="禁用状态" space={false} useInnerBox={false}>
-          <Item label="账单" disabled clickable arrow prefix={<IconSketch />} />
-          <Item
-            label="总资产"
-            disabled
-            prefix={<IconShoppingCart />}
-            border={false}
-          />
-        </SimpleBox>
-
-        <SimpleBox header="用户列表布局" space={false} useInnerBox={false}>
-          {users.map((user, index) => (
-            <Item
-              key={user.name}
-              label={user.name}
-              border={index !== users.length - 1}
-              prefix={
-                <Image
-                  src={user.avatar}
-                  style={{
-                    borderRadius: 20,
-                    width: transformSize(80),
-                    height: transformSize(80),
-                  }}
-                  fit="cover"
-                />
-              }
-              description={user.description}
-            />
-          ))}
-        </SimpleBox>
-
-        <CodeBox
-          config={config1}
-          componentName="Item"
-          mockChildren={false}
+        <SimpleBox
+          header={header}
+          config={currentConfig}
+          space={false}
+          componentName="Badge"
+          mockChildren={!!inner}
           useInnerBox={false}
-        />
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['prefix', 'icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={Item.defaultProps} labelWidth={260} />
       </Space>

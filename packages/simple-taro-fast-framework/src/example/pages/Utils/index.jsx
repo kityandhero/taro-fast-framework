@@ -334,7 +334,7 @@ export default class Index extends ContentPageBase {
               text: '参数为非数字情况, 将按照参数值原样输出',
             },
             {
-              text: 'text:使用此函数用以保证双端渲染一致',
+              text: '使用此函数用以保证双端渲染一致',
             },
           ]}
           useInnerBox={false}

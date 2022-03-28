@@ -270,7 +270,7 @@ export default class Index extends ContentPageBase {
           <Stepper {...config15} />
         </SimpleBox>
 
-        <PropertyBox config={Stepper.defaultProps} labelWidth={230} />
+        <PropertyBox config={Stepper.defaultProps} labelWidth={240} />
       </Space>
     );
   };

@@ -160,6 +160,14 @@ export default class Index extends ContentPageBase {
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Badge key={key} {...config}>
+        {inner}
+      </Badge>
+    );
+  };
+
   renderContent = () => {
     const { header, currentConfig, inner } = this.state;
 
@@ -178,7 +186,7 @@ export default class Index extends ContentPageBase {
           <Badge {...currentConfig}>{inner}</Badge>
         </SimpleBox>
 
-        <PropertyBox config={Badge.defaultProps} labelWidth={230} />
+        <PropertyBox config={Badge.defaultProps} labelWidth={240} />
       </Space>
     );
   };

@@ -1,5 +1,4 @@
 import { View } from '@tarojs/components';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import {
   Grid,
@@ -7,6 +6,8 @@ import {
   CenterBox,
   Button,
 } from 'taro-fast-component/es/customComponents';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import Header from '../Header';
 import PageWrapper from '../PageWrapper';
@@ -30,27 +31,49 @@ export default class ContentPageBase extends PageWrapper {
         header: '',
         currentConfig: null,
         inner: null,
+        wrapBuilder: null,
       },
     };
   }
 
-  buildControlItem = ({ header, config, span = 1, inner = null }) => {
+  buildControlItem = ({
+    index,
+    keyPrefix,
+    header,
+    config,
+    span = 1,
+    inner = null,
+    wrapBuilder = null,
+  }) => {
     return this.buildGridItem({
+      index,
+      keyPrefix,
       span,
       title: header,
-      handler: (text) => {
+      inner,
+      wrapBuilder,
+      handler: (t, i, w) => {
         this.setState({
-          header: text,
+          header: t,
           currentConfig: config,
-          inner: inner,
+          inner: i,
+          wrapBuilder: w,
         });
       },
     });
   };
 
-  buildGridItem = ({ title, handler, span }) => {
+  buildGridItem = ({
+    index,
+    keyPrefix = '',
+    title,
+    handler,
+    span,
+    inner = null,
+    wrapBuilder = null,
+  }) => {
     return (
-      <Grid.Item span={span}>
+      <Grid.Item key={`${keyPrefix || 'no'}_item_${index}`} span={span}>
         <CenterBox>
           <Button
             size="small"
@@ -58,7 +81,7 @@ export default class ContentPageBase extends PageWrapper {
               width: '98%',
             }}
             onClick={() => {
-              handler(title);
+              handler(title, inner, wrapBuilder);
             }}
           >
             <ColorText text={title} />
@@ -77,24 +100,91 @@ export default class ContentPageBase extends PageWrapper {
       return null;
     }
 
+    const result = [];
+
+    let customSpan = false;
+
+    list.forEach((item, index) => {
+      const { header, config, span, inner, wrapBuilder } = {
+        ...{ span: 1, inner: null, wrapBuilder: null },
+        ...item,
+      };
+
+      if (span !== 1) {
+        customSpan = true;
+      }
+
+      if (isArray(config)) {
+        config.forEach((o, i) => {
+          result.push({
+            index: i,
+            keyPrefix: toString(index),
+            header,
+            config: o,
+            span,
+            inner,
+            wrapBuilder,
+          });
+        });
+      } else {
+        result.push({
+          index,
+          header,
+          config,
+          span,
+          inner,
+          wrapBuilder,
+        });
+      }
+    });
+
+    const listCount = list.length;
+
     return (
       <Grid columns={2} gap={12}>
         {list.map((item, index) => {
-          const { header, config, span, inner } = {
-            ...{ span: 1, inner: null },
+          const { header, keyPrefix, config, span, inner, wrapBuilder } = {
+            ...{ span: 1, keyPrefix: null, inner: null, wrapBuilder: null },
             ...item,
           };
 
           return this.buildControlItem({
             index,
+            keyPrefix,
             header,
             config,
-            span,
+            span: customSpan
+              ? span
+              : index === listCount - 1 && index % 2 === 0
+              ? 2
+              : span,
             inner,
+            wrapBuilder,
           });
         })}
       </Grid>
     );
+  };
+
+  buildSimpleList = () => {
+    const { currentConfig, inner, wrapBuilder } = this.state;
+
+    const list = isArray(currentConfig) ? currentConfig : [currentConfig];
+
+    const result = list.map((config, index) => {
+      return this.buildSimpleItem({ key: `simple_${index}`, config, inner });
+    });
+
+    if (isFunction(wrapBuilder)) {
+      return wrapBuilder(result);
+    }
+
+    return result;
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  buildSimpleItem = ({ key, config, inner }) => {
+    return null;
   };
 
   renderContent = () => {

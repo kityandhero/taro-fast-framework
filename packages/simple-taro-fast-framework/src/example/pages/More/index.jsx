@@ -77,8 +77,16 @@ export default class Index extends ContentPageBase {
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <More key={key} {...config}>
+        {inner}
+      </More>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -86,17 +94,17 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="More"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <More {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={More.defaultProps} labelWidth={230} />
+        <PropertyBox config={More.defaultProps} labelWidth={240} />
       </Space>
     );
   };

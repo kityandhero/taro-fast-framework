@@ -161,20 +161,26 @@ export default class Index extends ContentPageBase {
         config: config7,
       },
       {
-        span: 2,
         header: '设置可关闭颜色',
         config: config8,
       },
       {
-        span: 2,
-        header: '通过 CSS 变量进行个性化',
+        header: 'CSS 变量',
         config: config9,
       },
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Tag key={key} {...config}>
+        {inner || '标签'}
+      </Tag>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -182,14 +188,14 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Tag"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Tag {...currentConfig}>标签</Tag>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Tag.defaultProps} labelWidth={270} />

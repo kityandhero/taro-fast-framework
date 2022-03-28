@@ -156,7 +156,7 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
         />
 
-        <PropertyBox config={Transition.defaultProps} labelWidth={230} />
+        <PropertyBox config={Transition.defaultProps} labelWidth={240} />
 
         <Transition
           show={showTransition}

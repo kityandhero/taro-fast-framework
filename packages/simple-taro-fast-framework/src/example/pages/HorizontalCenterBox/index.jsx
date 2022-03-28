@@ -80,7 +80,7 @@ export default class Index extends ContentPageBase {
 
         <PropertyBox
           config={HorizontalCenterBox.defaultProps}
-          labelWidth={230}
+          labelWidth={240}
         />
       </Space>
     );

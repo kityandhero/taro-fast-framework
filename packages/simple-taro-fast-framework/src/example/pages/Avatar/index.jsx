@@ -88,8 +88,16 @@ export default class Index extends ContentPageBase {
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Avatar key={key} {...config}>
+        {inner}
+      </Avatar>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -97,16 +105,16 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Avatar"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Avatar {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={Avatar.defaultProps} labelWidth={230} />
+        <PropertyBox config={Avatar.defaultProps} labelWidth={240} />
       </Space>
     );
   };

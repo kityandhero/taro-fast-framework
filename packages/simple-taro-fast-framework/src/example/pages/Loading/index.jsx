@@ -4,9 +4,7 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
-const config1 = {
-  type: 'comet',
-};
+const config1 = {};
 
 const config2 = {
   color: '#4589e1',
@@ -64,15 +62,22 @@ export default class Index extends ContentPageBase {
         config: config3,
       },
       {
-        span: 2,
         header: '设置线条宽度',
         config: config4,
       },
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Loading key={key} {...config}>
+        {inner}
+      </Loading>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -80,13 +85,13 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Loading"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Loading {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox

@@ -145,11 +145,18 @@ export default class Index extends ContentPageBase {
         config: config5,
       },
       {
-        span: 2,
         header: '居中',
         config: config4,
       },
     ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <FloatAction key={key} {...config}>
+        {inner}
+      </FloatAction>
+    );
   };
 
   renderContent = () => {
@@ -168,7 +175,7 @@ export default class Index extends ContentPageBase {
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <FloatAction {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={FloatAction.defaultProps} labelWidth={300} />

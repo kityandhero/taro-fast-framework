@@ -199,6 +199,8 @@ const config23 = {
   paddingRight: 20,
 };
 
+const config24 = {};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '按钮',
@@ -346,11 +348,24 @@ export default class Index extends ContentPageBase {
         header: '自定义间距边框',
         config: config23,
       },
+      {
+        header: '包裹模式',
+        config: config24,
+        inner: <ColorText icon={<IconSearch size={38} />} text="搜索" />,
+      },
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Button key={key} {...config}>
+        {inner}
+      </Button>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -358,28 +373,14 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Button"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Button {...currentConfig} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="包裹模式"
-          config={{}}
-          componentName="Button"
-          mockChildren
-          useInnerBox
-          innerBoxCenterMode
-          innerBoxPadding
-        >
-          <Button>
-            <ColorText icon={<IconSearch size={38} />} text="搜索" />
-          </Button>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Button.defaultProps} labelWidth={300} />

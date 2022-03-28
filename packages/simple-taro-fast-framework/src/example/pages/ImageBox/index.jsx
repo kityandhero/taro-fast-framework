@@ -2,13 +2,11 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  FlexBox,
   ImageBox,
   Space,
   CenterBox,
   Ellipsis,
   TranslucentBox,
-  Grid,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -32,29 +30,9 @@ const imageModeCollection = [
   'bottom right',
 ];
 
-const boxStyle = {
-  padding: 'var(--tfc-20) 0',
-  height: 'var(--tfc-120)',
-  color: 'var(--tfc-color-grey)',
-};
-
-const nameStyle = {
-  width: '100%',
-  fontSize: 'var(--tfc-28)',
-  height: 'var(--tfc-36)',
-  lineHeight: 'var(--tfc-36)',
-  textAlign: 'center',
-  margin: 'var(--tfc-20) 0',
-};
-
 const imageBoxContainerStyle = {
   display: 'block',
   width: transformSize(220),
-};
-
-const imageBoxContainerMiniStyle = {
-  display: 'block',
-  width: transformSize(80),
 };
 
 const imageContainerStyle = {
@@ -63,6 +41,10 @@ const imageContainerStyle = {
 
 const src =
   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45';
+
+function wrapBuilder(one) {
+  return <View style={imageBoxContainerStyle}>{one}</View>;
+}
 
 const config1 = {
   src,
@@ -172,6 +154,7 @@ export default class Index extends ContentPageBase {
       ...{
         header: '普通例子',
         currentConfig: config1,
+        wrapBuilder,
       },
     };
   }
@@ -194,79 +177,75 @@ export default class Index extends ContentPageBase {
       {
         header: '普通例子',
         config: config1,
+        wrapBuilder,
       },
       {
         header: '内边距',
         config: config2,
+        wrapBuilder,
       },
       {
         header: '容器样式',
         config: config21,
+        wrapBuilder,
       },
       {
         header: '加载模式',
         config: config3,
+        wrapBuilder,
       },
       {
         header: '使用遮罩',
         config: config4,
+        wrapBuilder,
       },
       {
         header: '使用上层装饰',
         config: config5,
+        wrapBuilder,
       },
       {
         header: '使用上层装饰构建',
         config: config9,
+        wrapBuilder,
       },
       {
         header: '圆形轮廓',
         config: config6,
+        wrapBuilder,
       },
       {
         header: 'LazyLoad',
         config: config7,
+        wrapBuilder,
       },
       {
         header: '指定长宽比',
         config: config8,
+        wrapBuilder,
       },
       ...this.establishImageModeList(),
       {
         span: 2,
         header: '纯粹模式: 无特殊功能, 使用父容器宽度, 高度自动',
         config: config10,
+        wrapBuilder,
       },
     ];
   };
 
-  buildGrid = (keyPrefix = '', list = []) => {
+  buildSimpleItem = ({ key, config, inner }) => {
+    console.log(config);
+
     return (
-      <Grid columns={3}>
-        {list.map((item, index) => {
-          return (
-            <Grid.Item key={`${keyPrefix}_${index}`}>
-              <FlexBox
-                style={boxStyle}
-                flexAuto="top"
-                top={
-                  <CenterBox>
-                    <View style={imageBoxContainerMiniStyle}>
-                      <ImageBox imageMode={item} src={src} />
-                    </View>
-                  </CenterBox>
-                }
-                bottom={<View style={nameStyle}>{item}</View>}
-              />
-            </Grid.Item>
-          );
-        })}
-      </Grid>
+      <ImageBox key={key} {...config}>
+        {inner}
+      </ImageBox>
     );
   };
 
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -274,19 +253,17 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="ImageBox"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <View style={imageBoxContainerStyle}>
-            <ImageBox {...currentConfig} />
-          </View>
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={ImageBox.defaultProps} labelWidth={230} />
+        <PropertyBox config={ImageBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

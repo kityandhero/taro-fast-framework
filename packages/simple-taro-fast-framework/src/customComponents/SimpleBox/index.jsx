@@ -49,8 +49,20 @@ const defaultProps = {
 };
 
 class SimpleBox extends Component {
+  getFirstConfig = () => {
+    const { config } = this.props;
+
+    if (isArray(config)) {
+      return config[0];
+    }
+
+    return config;
+  };
+
   buildList = () => {
-    const { config, ignorePropertyList } = this.props;
+    const { ignorePropertyList } = this.props;
+
+    const config = this.getFirstConfig();
 
     const list = Object.entries(config).map((d) => {
       const [key, value] = d;
@@ -101,8 +113,9 @@ class SimpleBox extends Component {
   };
 
   buildCode = () => {
-    const { componentName, config, mockChildren, ignorePropertyList } =
-      this.props;
+    const { componentName, mockChildren, ignorePropertyList } = this.props;
+
+    const config = this.getFirstConfig();
 
     return buildPrismCode({
       componentName,

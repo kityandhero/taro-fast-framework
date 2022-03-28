@@ -57,15 +57,40 @@ export default class Index extends ContentPageBase {
         config: config5,
       },
       {
-        span: 2,
         header: '加载提示文字',
         config: config6,
+      },
+      {
+        header: '居中显示',
+        config: config7,
+        wrapBuilder: (one) => {
+          return (
+            <View
+              style={{
+                border: 'var(--tfc-1) solid #ccc',
+                height: 'var(--tfc-200)',
+                position: 'relative',
+                width: '100%',
+              }}
+            >
+              {one}
+            </View>
+          );
+        },
       },
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <ActivityIndicator key={key} {...config}>
+        {inner}
+      </ActivityIndicator>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -73,43 +98,24 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="ActivityIndicator"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <ActivityIndicator {...currentConfig} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="居中显示"
-          config={config7}
-          componentName="ActivityIndicator"
-          mockChildren={false}
-          useInnerBox
-        >
-          <View
-            style={{
-              border: 'var(--tfc-1) solid #ccc',
-              height: 'var(--tfc-200)',
-              position: 'relative',
-              width: '100%',
-            }}
-          >
-            <ActivityIndicator
-              {...config7}
-              componentName="ActivityIndicator"
-              mockChildren={false}
-              useInnerBox
-            />
-          </View>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox
           header="ActivityIndicator 可配置项以及默认值"
           config={ActivityIndicator.defaultProps}
           labelWidth={270}
+          description={[
+            {
+              text: 'center: 为true时, 需要父容器设置为相对定位',
+            },
+          ]}
         />
       </Space>
     );

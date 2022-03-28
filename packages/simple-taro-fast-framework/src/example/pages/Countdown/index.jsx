@@ -134,15 +134,22 @@ export default class Index extends ContentPageBase {
         config: config8,
       },
       {
-        span: 2,
         header: '倒计时回调',
         config: config9,
       },
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Countdown key={key} {...config}>
+        {inner}
+      </Countdown>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -150,17 +157,17 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Countdown"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Countdown {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={Countdown.defaultProps} labelWidth={230} />
+        <PropertyBox config={Countdown.defaultProps} labelWidth={240} />
       </Space>
     );
   };

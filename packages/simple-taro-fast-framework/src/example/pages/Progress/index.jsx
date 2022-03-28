@@ -244,7 +244,7 @@ export default class Index extends ContentPageBase {
           <Progress {...config9} />
         </SimpleBox>
 
-        <PropertyBox config={Progress.defaultProps} labelWidth={230} />
+        <PropertyBox config={Progress.defaultProps} labelWidth={240} />
 
         <SimpleBox header="属性说明 :">
           <HelpBox

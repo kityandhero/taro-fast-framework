@@ -396,8 +396,16 @@ export default class Index extends ContentPageBase {
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Tabs key={key} {...config}>
+        {inner}
+      </Tabs>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -405,14 +413,14 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Tabs"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode={false}
           innerBoxPadding={false}
           ignorePropertyList={['icon', 'body', 'panel']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Tabs {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox

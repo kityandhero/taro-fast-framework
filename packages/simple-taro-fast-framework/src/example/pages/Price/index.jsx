@@ -104,8 +104,16 @@ export default class Index extends ContentPageBase {
     ];
   };
 
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Price key={key} {...config}>
+        {inner}
+      </Price>
+    );
+  };
+
   renderContent = () => {
-    const { header, currentConfig } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -113,14 +121,14 @@ export default class Index extends ContentPageBase {
           header={header}
           config={currentConfig}
           componentName="Price"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Price {...currentConfig} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Price.defaultProps} labelWidth={270} />

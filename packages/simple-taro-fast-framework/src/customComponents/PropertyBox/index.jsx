@@ -115,11 +115,6 @@ class PropertyBox extends Component {
         header={header || '示例'}
         style={style}
         headerStyle={cardHeaderStyle}
-        footer={
-          stringIsNullOrWhiteSpace(description || null)
-            ? null
-            : `备注: ${description}.`
-        }
       >
         <Space direction="vertical" fillWidth>
           <DataGrid
@@ -143,6 +138,19 @@ class PropertyBox extends Component {
               {
                 text: 'hidden: 通用属性, 用于在特定模式下隐藏控件(采用跳过不渲染模式达到隐藏效果).',
               },
+              ...(isArray(description)
+                ? description
+                : isObject(description)
+                ? [description]
+                : []),
+              ...(isString(description) &&
+              !stringIsNullOrWhiteSpace(description)
+                ? [
+                    {
+                      text: description,
+                    },
+                  ]
+                : []),
             ]}
           />
         </Space>

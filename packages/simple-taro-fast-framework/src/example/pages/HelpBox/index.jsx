@@ -181,7 +181,7 @@ export default class Index extends ContentPageBase {
           <HelpBox {...config6} />
         </SimpleBox>
 
-        <PropertyBox config={HelpBox.defaultProps} labelWidth={230} />
+        <PropertyBox config={HelpBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

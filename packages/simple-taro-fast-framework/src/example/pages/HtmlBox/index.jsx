@@ -51,7 +51,7 @@ export default class Index extends ContentPageBase {
           <HtmlBox {...config2} />
         </SimpleBox>
 
-        <PropertyBox config={HtmlBox.defaultProps} labelWidth={230} />
+        <PropertyBox config={HtmlBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };
