@@ -79,6 +79,7 @@ export default {
         'pages/cascader/index',
         'pages/space/index',
         'pages/loading/index',
+        'pages/activityIndicator/index',
         'pages/collapse/index',
         'pages/tabbar/index',
         'pages/line/index',

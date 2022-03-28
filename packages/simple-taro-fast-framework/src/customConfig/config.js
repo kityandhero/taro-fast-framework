@@ -215,6 +215,9 @@ const examplePathCollection = {
   loading: {
     path: '/example/pages/loading/index',
   },
+  activityIndicator: {
+    path: '/example/pages/activityIndicator/index',
+  },
   collapse: {
     path: '/example/pages/collapse/index',
   },

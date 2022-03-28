@@ -35,8 +35,13 @@ const o = {
     },
     {
       id: 'Loading',
-      name: '加载提示',
+      name: '加载中',
       path: pathCollection.example.loading.path,
+    },
+    {
+      id: 'ActivityIndicator',
+      name: '活动提示器',
+      path: pathCollection.example.activityIndicator.path,
     },
     {
       id: 'Tag',

@@ -1,3 +1,5 @@
+import { View } from '@tarojs/components';
+
 import {
   Space,
   Loading,
@@ -8,21 +10,17 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
-const config1 = {
+const config5 = {
   type: 'comet',
 };
 
-const config2 = {
-  color: '#4589e1',
+const config6 = {
+  content: 'loading',
 };
 
-const config3 = {
-  size: 48,
-};
-
-const config4 = {
-  borderWidth: 8,
-  size: 60,
+const config7 = {
+  mode: 'center',
+  content: 'loading',
 };
 
 // eslint-disable-next-line no-undef
@@ -43,7 +41,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        header: '基础使用',
+        header: '加载提示',
         currentConfig: {},
       },
     };
@@ -52,25 +50,17 @@ export default class Index extends ContentPageBase {
   establishControlList = () => {
     return [
       {
-        header: '基础使用',
+        header: '加载提示',
         config: {},
       },
       {
         header: '设置图标',
-        config: config1,
-      },
-      {
-        header: '设置颜色',
-        config: config2,
-      },
-      {
-        header: '设置大小',
-        config: config3,
+        config: config5,
       },
       {
         span: 2,
-        header: '设置线条宽度',
-        config: config4,
+        header: '加载提示文字',
+        config: config6,
       },
     ];
   };
@@ -83,14 +73,38 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header={header}
           config={currentConfig}
-          componentName="Loading"
+          componentName="ActivityIndicator"
           mockChildren={false}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
           controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Loading {...currentConfig} />
+          <ActivityIndicator {...currentConfig} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="居中显示"
+          config={config7}
+          componentName="ActivityIndicator"
+          mockChildren={false}
+          useInnerBox
+        >
+          <View
+            style={{
+              border: 'var(--tfc-1) solid #ccc',
+              height: 'var(--tfc-200)',
+              position: 'relative',
+              width: '100%',
+            }}
+          >
+            <ActivityIndicator
+              {...config7}
+              componentName="ActivityIndicator"
+              mockChildren={false}
+              useInnerBox
+            />
+          </View>
         </SimpleBox>
 
         <PropertyBox
