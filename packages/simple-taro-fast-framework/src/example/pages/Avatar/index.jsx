@@ -47,67 +47,63 @@ export default class Index extends ContentPageBase {
     description: '头像组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '头像',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '头像',
+        config: config1,
+      },
+      {
+        header: '圆形头像',
+        config: config2,
+      },
+      {
+        header: '文字',
+        config: config3,
+      },
+      {
+        header: '圆形文字',
+        config: config4,
+      },
+      {
+        header: '小尺寸',
+        config: config5,
+      },
+      {
+        header: '大尺寸',
+        config: config6,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="头像"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Avatar"
           mockChildren={false}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Avatar {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="圆形头像"
-          config={config2}
-          componentName="Avatar"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Avatar {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="文字"
-          config={config3}
-          componentName="Avatar"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Avatar {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="圆形文字"
-          config={config4}
-          componentName="Avatar"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Avatar {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="小尺寸"
-          config={config5}
-          componentName="Avatar"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Avatar {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="大尺寸"
-          config={config6}
-          componentName="Avatar"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Avatar {...config6} />
+          <Avatar {...currentConfig} />
         </SimpleBox>
 
         <PropertyBox config={Avatar.defaultProps} labelWidth={230} />

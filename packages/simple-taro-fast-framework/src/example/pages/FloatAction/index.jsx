@@ -1,11 +1,14 @@
-import { View } from '@tarojs/components';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
-import { FloatAction, Icon } from 'taro-fast-component/es/customComponents';
+import {
+  FloatAction,
+  Icon,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconPhone } = Icon;
 
@@ -51,6 +54,53 @@ const buttons = [
   },
 ];
 
+const config1 = {
+  action:
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBAQLCR5MtjrbAAAAjUlEQVRo3u3ZMRKAIAxEUbDirp4nXnctFFDHBtDQ/O1Nnk6aHUMgZCBKMkmmNAtgOmL9M+IQQGVM95zljy8DAAAAAAAAAAAAAACALsDZcppSx7Q+WdtUvA5xffUtrjeA8/qQ21S9gc15/3Nfzw0M5O0G2kM5BQAAAAAAAAAAAAAAQGk33q0qZ/p/Q/JFdmei9usomnwIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTA0VDExOjA5OjMwKzA4OjAw1U4c3wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0wNFQxMTowOTozMCswODowMKQTpGMAAAAASUVORK5CYII=',
+  top: transformSize(20),
+  position: 'topLeft',
+  theme: 'balanced',
+  direction: 'horizontal',
+  reverse: true,
+  buttons,
+};
+
+const config2 = {
+  top: transformSize(20),
+  position: 'topRight',
+  theme: 'balanced',
+  direction: 'vertical',
+  reverse: true,
+  buttons,
+  closeAfterItemClick: false,
+};
+
+const config3 = {
+  position: 'bottomLeft',
+  theme: 'balanced',
+  direction: 'vertical',
+  buttons,
+};
+
+const config4 = {
+  action: '按钮',
+  actionRotate: false,
+  position: 'center',
+  theme: 'balanced',
+  direction: 'circle',
+  buttons,
+  spaceBetween: 80,
+};
+
+const config5 = {
+  position: 'bottomRight',
+  theme: 'balanced',
+  direction: 'horizontal',
+  overlay: true,
+  buttons,
+  closeAfterItemClick: true,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '浮动按钮',
@@ -63,93 +113,66 @@ export default class Index extends ContentPageBase {
     description: '浮动按钮组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '左上角',
+        currentConfig: config1,
+        inner: null,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '左上角',
+        config: config1,
+      },
+      {
+        header: '右上角',
+        config: config2,
+      },
+      {
+        header: '左下角',
+        config: config3,
+      },
+      {
+        header: '右下角',
+        config: config5,
+      },
+      {
+        span: 2,
+        header: '居中',
+        config: config4,
+      },
+    ];
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
-      <View className="index">
-        <FloatAction
-          action="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBAQLCR5MtjrbAAAAjUlEQVRo3u3ZMRKAIAxEUbDirp4nXnctFFDHBtDQ/O1Nnk6aHUMgZCBKMkmmNAtgOmL9M+IQQGVM95zljy8DAAAAAAAAAAAAAACALsDZcppSx7Q+WdtUvA5xffUtrjeA8/qQ21S9gc15/3Nfzw0M5O0G2kM5BQAAAAAAAAAAAAAAQGk33q0qZ/p/Q/JFdmei9usomnwIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTA0VDExOjA5OjMwKzA4OjAw1U4c3wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0wNFQxMTowOTozMCswODowMKQTpGMAAAAASUVORK5CYII="
-          top={transformSize(210)}
-          position="topLeft"
-          theme="balanced"
-          direction="horizontal"
-          reverse
-          buttons={buttons}
-          // bind:change="onChange"
-          // bind:click="onClick"
-          // bind:contact="onContact"
-          // bind:getuserinfo="onGotUserInfo"
-        />
-
-        <FloatAction
-          top={transformSize(210)}
-          position="topRight"
-          theme="balanced"
-          direction="vertical"
-          reverse
-          buttons={buttons}
-          closeAfterItemClick={false}
-          // bind:change="onChange"
-          // bind:click="onClick"
-          // bind:contact="onContact"
-          // bind:getuserinfo="onGotUserInfo"
-        />
-
-        <FloatAction
-          position="bottomLeft"
-          theme="balanced"
-          direction="vertical"
-          buttons={buttons}
-          // bind:change="onChange"
-          // bind:click="onClick"
-          // bind:contact="onContact"
-          // bind:getuserinfo="onGotUserInfo"
-        />
-
-        <FloatAction
-          action="按钮"
-          actionRotate={false}
-          position="center"
-          theme="balanced"
-          direction="circle"
-          buttons={buttons}
-          spaceBetween={80}
-          // bind:change="onChange"
-          // bind:click="onClick"
-          // bind:contact="onContact"
-          // bind:getuserinfo="onGotUserInfo"
-        />
-
-        <FloatAction
-          position="bottomRight"
-          theme="balanced"
-          direction="horizontal"
-          buttons={buttons}
-          overlay
-          closeWithOverlayClick
-          // bind:change="onChange"
-          // bind:click="onClick"
-          // bind:contact="onContact"
-          // bind:getuserinfo="onGotUserInfo"
-        />
-
-        <CodeBox
-          config={{
-            action: '按钮',
-            actionRotate: false,
-            position: 'center',
-            theme: 'balanced',
-            direction: 'circle',
-            buttons: buttons,
-            spaceBetween: 80,
-          }}
-          componentName="FloatAction"
-          mockChildren={false}
+      <Space direction="vertical" fillWidth>
+        <SimpleBox
+          header={header}
+          config={currentConfig}
+          componentName="Avatar"
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
           ignorePropertyList={['icon']}
-        />
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          <FloatAction {...currentConfig} />
+        </SimpleBox>
 
-        <PropertyBox config={FloatAction.defaultProps} labelWidth={290} />
-      </View>
+        <PropertyBox config={FloatAction.defaultProps} labelWidth={300} />
+      </Space>
     );
   };
 }

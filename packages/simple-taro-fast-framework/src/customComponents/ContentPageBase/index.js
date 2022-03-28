@@ -29,11 +29,12 @@ export default class ContentPageBase extends PageWrapper {
         spin: true,
         header: '',
         currentConfig: null,
+        inner: null,
       },
     };
   }
 
-  buildControlItem = ({ header, config, span = 1 }) => {
+  buildControlItem = ({ header, config, span = 1, inner = null }) => {
     return this.buildGridItem({
       span,
       title: header,
@@ -41,6 +42,7 @@ export default class ContentPageBase extends PageWrapper {
         this.setState({
           header: text,
           currentConfig: config,
+          inner: inner,
         });
       },
     });
@@ -78,13 +80,17 @@ export default class ContentPageBase extends PageWrapper {
     return (
       <Grid columns={2} gap={12}>
         {list.map((item, index) => {
-          const { header, config, span } = { ...{ span: 1 }, ...item };
+          const { header, config, span, inner } = {
+            ...{ span: 1, inner: null },
+            ...item,
+          };
 
           return this.buildControlItem({
             index,
             header,
             config,
             span,
+            inner,
           });
         })}
       </Grid>

@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 
 import {
   Space,
-  Loading,
   ActivityIndicator,
 } from 'taro-fast-component/es/customComponents';
 
@@ -106,12 +105,6 @@ export default class Index extends ContentPageBase {
             />
           </View>
         </SimpleBox>
-
-        <PropertyBox
-          header="Loading 可配置项以及默认值"
-          config={Loading.defaultProps}
-          labelWidth={270}
-        />
 
         <PropertyBox
           header="ActivityIndicator 可配置项以及默认值"

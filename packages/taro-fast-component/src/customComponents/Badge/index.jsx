@@ -16,7 +16,6 @@ const classPrefix = `tfc-badge`;
 const positionCollection = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
 
 const defaultProps = {
-  className: '',
   style: {},
   color: '#FF411C',
   content: null,
@@ -98,19 +97,15 @@ class Badge extends BaseComponent {
   };
 
   renderFurther() {
-    const { className, content, color, dot: dotSource, children } = this.props;
+    const { content, color, dot: dotSource, children } = this.props;
 
     const isDot = dotSource || content === Badge.dot;
 
-    const badgeCls = classNames(
-      classPrefix,
-      {
-        [`${classPrefix}-fixed`]: !!children,
-        [`${classPrefix}-dot`]: isDot,
-        [`${classPrefix}-content`]: !isDot,
-      },
-      className,
-    );
+    const badgeCls = classNames(classPrefix, {
+      [`${classPrefix}-fixed`]: !!children,
+      [`${classPrefix}-dot`]: isDot,
+      [`${classPrefix}-content`]: !isDot,
+    });
 
     const wrapStyle = this.buildWrapStyle();
     const style = this.buildStyle();

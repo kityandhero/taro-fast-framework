@@ -1,8 +1,4 @@
-import {
-  Space,
-  Loading,
-  ActivityIndicator,
-} from 'taro-fast-component/es/customComponents';
+import { Space, Loading } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
@@ -96,12 +92,6 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Loading 可配置项以及默认值"
           config={Loading.defaultProps}
-          labelWidth={270}
-        />
-
-        <PropertyBox
-          header="ActivityIndicator 可配置项以及默认值"
-          config={ActivityIndicator.defaultProps}
           labelWidth={270}
         />
       </Space>
