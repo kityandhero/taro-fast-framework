@@ -172,17 +172,51 @@ export default class Index extends ContentPageBase {
     description: '级联选择组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '组件展示',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '组件展示',
+        config: config1,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Cascader key={key} {...config}>
+        {inner}
+      </Cascader>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="组件展示"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="Cascader"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Cascader {...config1} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Cascader.defaultProps} labelWidth={220} />
