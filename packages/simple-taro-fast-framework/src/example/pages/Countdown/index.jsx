@@ -149,12 +149,13 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { header, currentConfig, inner } = this.state;
+    const { header, description, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
           header={header}
+          description={description}
           config={currentConfig}
           componentName="Countdown"
           mockChildren={!!inner}

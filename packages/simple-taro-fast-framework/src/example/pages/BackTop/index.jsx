@@ -114,7 +114,7 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { header, currentConfig, inner } = this.state;
+    const { header, description, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
@@ -132,6 +132,7 @@ export default class Index extends ContentPageBase {
 
         <SimpleBox
           header={header}
+          description={description}
           config={currentConfig}
           componentName="BackTop"
           mockChildren={!!inner}

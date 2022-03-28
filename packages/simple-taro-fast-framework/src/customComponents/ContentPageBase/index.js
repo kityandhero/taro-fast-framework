@@ -30,6 +30,7 @@ export default class ContentPageBase extends PageWrapper {
         spin: true,
         header: '',
         currentConfig: null,
+        description: null,
         inner: null,
         wrapBuilder: null,
       },
@@ -40,6 +41,7 @@ export default class ContentPageBase extends PageWrapper {
     index,
     keyPrefix,
     header,
+    description,
     config,
     span = 1,
     inner = null,
@@ -50,12 +52,23 @@ export default class ContentPageBase extends PageWrapper {
       keyPrefix,
       span,
       title: header,
+      description,
+      config,
       inner,
       wrapBuilder,
-      handler: (t, i, w) => {
+      handler: (one) => {
+        const {
+          header: t,
+          description: d,
+          config: c,
+          inner: i,
+          wrapBuilder: w,
+        } = one;
+
         this.setState({
           header: t,
-          currentConfig: config,
+          description: d,
+          currentConfig: c,
           inner: i,
           wrapBuilder: w,
         });
@@ -67,6 +80,8 @@ export default class ContentPageBase extends PageWrapper {
     index,
     keyPrefix = '',
     title,
+    description,
+    config,
     handler,
     span,
     inner = null,
@@ -81,7 +96,13 @@ export default class ContentPageBase extends PageWrapper {
               width: '98%',
             }}
             onClick={() => {
-              handler(title, inner, wrapBuilder);
+              handler({
+                header: title,
+                description,
+                config,
+                inner,
+                wrapBuilder,
+              });
             }}
           >
             <ColorText text={title} />
@@ -105,8 +126,14 @@ export default class ContentPageBase extends PageWrapper {
     let customSpan = false;
 
     list.forEach((item, index) => {
-      const { header, config, span, inner, wrapBuilder } = {
-        ...{ span: 1, inner: null, wrapBuilder: null },
+      const { header, description, config, span, inner, wrapBuilder } = {
+        ...{
+          header: '',
+          description: '',
+          span: 1,
+          inner: null,
+          wrapBuilder: null,
+        },
         ...item,
       };
 
@@ -120,6 +147,7 @@ export default class ContentPageBase extends PageWrapper {
             index: i,
             keyPrefix: toString(index),
             header,
+            description,
             config: o,
             span,
             inner,
@@ -130,6 +158,7 @@ export default class ContentPageBase extends PageWrapper {
         result.push({
           index,
           header,
+          description,
           config,
           span,
           inner,
@@ -143,8 +172,23 @@ export default class ContentPageBase extends PageWrapper {
     return (
       <Grid columns={2} gap={12}>
         {list.map((item, index) => {
-          const { header, keyPrefix, config, span, inner, wrapBuilder } = {
-            ...{ span: 1, keyPrefix: null, inner: null, wrapBuilder: null },
+          const {
+            header,
+            description,
+            keyPrefix,
+            config,
+            span,
+            inner,
+            wrapBuilder,
+          } = {
+            ...{
+              span: 1,
+              keyPrefix: null,
+              header: '',
+              description: '',
+              inner: null,
+              wrapBuilder: null,
+            },
             ...item,
           };
 
@@ -152,6 +196,7 @@ export default class ContentPageBase extends PageWrapper {
             index,
             keyPrefix,
             header,
+            description,
             config,
             span: customSpan
               ? span

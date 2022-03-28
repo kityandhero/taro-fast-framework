@@ -21,10 +21,14 @@ import {
   HelpBox,
   Divider,
   Space,
+  CenterBox,
+  Icon,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
 import { buildPrismCode } from '../../utils/tools';
+
+const { IconBell } = Icon;
 
 const style = {
   ...{
@@ -189,6 +193,16 @@ class SimpleBox extends Component {
     );
   };
 
+  buildDescriptionArea = () => {
+    const { description } = this.props;
+
+    if ((description || null) == null) {
+      return null;
+    }
+
+    return description;
+  };
+
   buildExtraArea = () => {
     const { extraArea } = this.props;
 
@@ -200,16 +214,31 @@ class SimpleBox extends Component {
   };
 
   buildJointArea = () => {
-    const extraArea = this.buildExtraArea();
     const exhibitionArea = this.buildExhibitionArea();
+    const descriptionArea = this.buildDescriptionArea();
+    const extraArea = this.buildExtraArea();
 
-    if ((extraArea || null) == null) {
+    if ((extraArea || null) == null && (descriptionArea || null) == null) {
       return exhibitionArea;
     }
 
     return (
       <Space direction="vertical" size={30} fillWidth>
         {exhibitionArea}
+
+        {stringIsNullOrWhiteSpace(descriptionArea) ? null : !isString(
+            descriptionArea,
+          ) ? (
+          descriptionArea
+        ) : (
+          <CenterBox>
+            <ColorText
+              color="#aaa"
+              icon={<IconBell size={30} />}
+              text={`: ${descriptionArea}`}
+            />
+          </CenterBox>
+        )}
 
         {extraArea}
       </Space>

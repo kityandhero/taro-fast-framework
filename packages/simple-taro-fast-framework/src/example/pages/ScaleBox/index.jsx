@@ -28,46 +28,71 @@ export default class Index extends ContentPageBase {
     description: '根据父容器大小，按照设定的长宽比等比例改变',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '默认展示 正方形',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '默认展示',
+        config: config1,
+        description: '默认长宽比为1, 即正方形',
+      },
+      {
+        header: '设置长宽比',
+        config: config2,
+      },
+      {
+        header: '设置padding',
+        config: config3,
+        description: 'padding将根据长宽比进行同比例缩放',
+        inner: (
+          <View
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#000',
+            }}
+          />
+        ),
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <ScaleBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </ScaleBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="默认展示"
-          description="默认长宽比为1, 即为正方形"
-          config={config1}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="ScaleBox"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <ScaleBox {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置长宽比"
-          config={config2}
-          componentName="ScaleBox"
-          mockChildren
-          useInnerBox={false}
-        >
-          <ScaleBox {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置padding"
-          config={config3}
-          componentName="ScaleBox"
-          mockChildren
-          useInnerBox={false}
-        >
-          <ScaleBox {...config3}>
-            <View
-              style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#000',
-              }}
-            />
-          </ScaleBox>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={ScaleBox.defaultProps} labelWidth={140} />
