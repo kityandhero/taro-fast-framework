@@ -1,11 +1,9 @@
-import { View } from '@tarojs/components';
-
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-import { Divider, Tabbar } from 'taro-fast-component/es/customComponents';
+import { Space, Tabbar } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -125,6 +123,18 @@ const items2 = [
   },
 ];
 
+const config1 = {
+  items: itemsIcon,
+};
+
+const config2 = {
+  items: itemsImage,
+};
+
+const config3 = {
+  items: itemsMix,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '底部导航栏',
@@ -144,9 +154,46 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         value: 'user',
+        header: '组件展示',
+        currentConfig: config1,
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '图标模式',
+        config: config1,
+      },
+      {
+        header: '图片模式',
+        config: config2,
+      },
+      {
+        header: '图标图片混合模式',
+        config: config3,
+      },
+      {
+        header: '固定底部',
+        config: {
+          fixed: true,
+          items: items2,
+          onClick: this.changeTab,
+        },
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    const { value } = this.state;
+
+    return (
+      <Tabbar key={key} {...{ ...config, ...{ value } }}>
+        {inner}
+      </Tabbar>
+    );
+  };
 
   changeTab = (o) => {
     const { name } = o;
@@ -157,39 +204,26 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { value } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
-      <View className="index">
-        <Divider>图标模式</Divider>
-
-        <Tabbar items={itemsIcon} />
-
-        <Divider>图片模式</Divider>
-
-        <Tabbar items={itemsImage} />
-
-        <Divider>图标图片混合模式</Divider>
-
-        <Tabbar items={itemsMix} itemWidth={130} />
-
-        <Divider>固定底部</Divider>
-
-        <Tabbar value={value} fixed items={items2} onClick={this.changeTab} />
-
-        <CodeBox
+      <Space direction="vertical" fillWidth>
+        <SimpleBox
+          header={header}
+          config={currentConfig}
           componentName="Tabbar"
-          mockChildren={false}
-          useInnerBox={false}
-          config={{
-            value,
-            fixed: true,
-            items: items2,
-          }}
-        />
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['onClick']}
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={Tabbar.defaultProps} labelWidth={260} />
-      </View>
+      </Space>
     );
   };
 }
