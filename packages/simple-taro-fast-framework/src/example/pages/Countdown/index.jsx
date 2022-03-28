@@ -149,7 +149,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header={header}
           config={currentConfig}
-          componentName="Button"
+          componentName="Countdown"
           mockChildren
           useInnerBox
           innerBoxCenterMode

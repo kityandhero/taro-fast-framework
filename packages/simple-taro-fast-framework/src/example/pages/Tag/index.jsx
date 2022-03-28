@@ -181,7 +181,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header={header}
           config={currentConfig}
-          componentName="Button"
+          componentName="Tag"
           mockChildren
           useInnerBox
           innerBoxCenterMode
