@@ -1,16 +1,57 @@
-import { View } from '@tarojs/components';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
-import { FixedBox } from 'taro-fast-component/es/customComponents';
+import { Space, FixedBox } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const style = {
   lineHeight: '1',
-  padding: transformSize(10),
+  padding: `${transformSize(40)} ${transformSize(80)}`,
   backgroundColor: '#ccc',
+  textAlign: 'center',
+};
+
+const config1 = {
+  zIndex: 1000,
+  style,
+};
+
+const config2 = {
+  zIndex: 1000,
+  style,
+  top: 0,
+  right: 0,
+};
+
+const config3 = {
+  zIndex: 1000,
+  style,
+  left: 0,
+  bottom: 0,
+};
+
+const config4 = {
+  zIndex: 1000,
+  style,
+  right: 0,
+  bottom: 0,
+};
+
+const config5 = {
+  zIndex: 1000,
+  width: 200,
+  height: 40,
+  zIndex: 1000,
+  center: true,
+  useTransition: true,
+  style: {
+    ...style,
+    ...{
+      textAlign: 'center',
+    },
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -32,87 +73,75 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         showTransition: true,
+        header: '仅左侧布局',
+        currentConfig: config1,
       },
     };
   }
 
-  doOtherWorkAfterDidMount = () => {
-    const that = this;
-
-    setTimeout(() => {
-      that.setState({ showTransition: false });
-    }, 3000);
+  establishControlList = () => {
+    return [
+      {
+        header: '左上',
+        config: config1,
+      },
+      {
+        header: '右上',
+        config: config2,
+      },
+      {
+        header: '左下',
+        config: config3,
+      },
+      {
+        header: '右下',
+        config: config4,
+      },
+      {
+        header: '附带动画',
+        config: config5,
+      },
+    ];
   };
 
-  renderContent = () => {
+  buildSimpleItem = ({ key, config, inner }) => {
     const { showTransition } = this.state;
 
     return (
-      <View style={{ height: '1400px' }}>
-        <FixedBox zIndex={1000} style={style}>
-          FixedBox
-        </FixedBox>
-
-        <FixedBox zIndex={1000} top={0} right={0} style={style}>
-          FixedBox
-        </FixedBox>
-
-        <FixedBox zIndex={1000} left={0} bottom={0} style={style}>
-          FixedBox
-        </FixedBox>
-
-        <FixedBox zIndex={1000} right={0} bottom={0} style={style}>
-          FixedBox
-        </FixedBox>
-
-        {/* <FixedBox top="50%" left={100} style={style}>
-          FixedBox
-        </FixedBox> */}
-
-        <FixedBox
-          show={showTransition}
-          width={200}
-          height={40}
-          zIndex={1000}
-          center
-          useTransition
-          style={{
-            ...style,
-            ...{
-              textAlign: 'center',
-            },
-          }}
-        >
-          FixedBox
-        </FixedBox>
-
-        {/* <FixedBox
-          show={showTransition}
-          top={200}
-          right={40}
-          height={60}
-          useTransition
-          style={style}
-        >
-          FixedTransitionBox
-        </FixedBox> */}
-
-        <CodeBox
-          componentName="FadeInBox"
-          mockChildren
-          useInnerBox={false}
-          config={{
+      <FixedBox
+        key={key}
+        {...{
+          ...config,
+          ...{
             show: showTransition,
-            top: 200,
-            right: 40,
-            height: 6,
-            useTransition: true,
-            style,
-          }}
-        />
+          },
+        }}
+      >
+        {inner || '内部内容'}
+      </FixedBox>
+    );
+  };
+
+  renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
+    return (
+      <Space direction="vertical" fillWidth>
+        <SimpleBox
+          header={header}
+          config={currentConfig}
+          componentName="FlexBox"
+          mockChildren={!!inner}
+          useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={FixedBox.defaultProps} labelWidth={270} />
-      </View>
+      </Space>
     );
   };
 }
