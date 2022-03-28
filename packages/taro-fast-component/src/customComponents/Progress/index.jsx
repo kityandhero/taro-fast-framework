@@ -184,6 +184,7 @@ class Progress extends BaseComponent {
                 style={{
                   fontSize: transformSize(fontSize),
                 }}
+                userSelect
               >{`${percent}%`}</Text>
             </CenterBox>
           </View>

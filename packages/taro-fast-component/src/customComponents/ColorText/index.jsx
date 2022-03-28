@@ -152,13 +152,19 @@ class ColorText extends BaseComponent {
             <VerticalBox style={{ lineHeight: '1' }}>
               {stringIsNullOrWhiteSpace(textPrefix) ? null : (
                 <>
-                  <Text style={textPrefixStyle || null}>{textPrefix}</Text>
+                  <Text style={textPrefixStyle || null} userSelect>
+                    {textPrefix}
+                  </Text>
                   {stringIsNullOrWhiteSpace(separator) ? null : (
-                    <Text style={separatorStyle || null}>{separator}</Text>
+                    <Text style={separatorStyle || null} userSelect>
+                      {separator}
+                    </Text>
                   )}
                 </>
               )}
-              <Text style={textStyle}>{text}</Text>
+              <Text style={textStyle} userSelect>
+                {text}
+              </Text>
             </VerticalBox>
           }
         />

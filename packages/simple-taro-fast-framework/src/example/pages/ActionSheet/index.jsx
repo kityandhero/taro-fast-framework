@@ -184,7 +184,11 @@ export default class Index extends ContentPageBase {
               },
             },
             {
-              content: <Text className="danger">清除位置信息并退出</Text>,
+              content: (
+                <Text className="danger" userSelect>
+                  清除位置信息并退出
+                </Text>
+              ),
               onClick: (v, e) => {
                 console.log({
                   value: v,

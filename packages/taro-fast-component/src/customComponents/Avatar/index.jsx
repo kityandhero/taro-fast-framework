@@ -39,7 +39,11 @@ class Avatar extends BaseComponent {
     if (image) {
       elem = <Image className="tfc-avatar__img" src={image} />;
     } else {
-      elem = <Text className="tfc-avatar__text">{letter}</Text>;
+      elem = (
+        <Text className="tfc-avatar__text" userSelect>
+          {letter}
+        </Text>
+      );
     }
 
     return (

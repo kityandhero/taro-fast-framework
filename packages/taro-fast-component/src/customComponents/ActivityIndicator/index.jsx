@@ -43,7 +43,9 @@ class ActivityIndicator extends BaseComponent {
           />
         </View>
         {content && (
-          <Text className="tfc-activity-indicator__content">{content}</Text>
+          <Text className="tfc-activity-indicator__content" userSelect>
+            {content}
+          </Text>
         )}
       </View>
     );

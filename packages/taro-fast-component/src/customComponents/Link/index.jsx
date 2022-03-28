@@ -131,6 +131,7 @@ class Line extends BaseComponent {
       <Text
         className={classNames(classPrefix)}
         style={style}
+        userSelect
         onClick={this.triggerClick}
       >
         {text}

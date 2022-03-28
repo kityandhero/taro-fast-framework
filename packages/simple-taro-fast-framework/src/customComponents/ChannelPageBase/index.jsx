@@ -60,7 +60,10 @@ export default class ChannelPageBase extends PageWrapper {
                     navigateTo(one.path);
                   }}
                 >
-                  <Text className="name">{`${one.id} ${one.name}`}</Text>
+                  <Text
+                    className="name"
+                    userSelect
+                  >{`${one.id} ${one.name}`}</Text>
                   <IconChevronRight size={36} />
                 </View>
               );

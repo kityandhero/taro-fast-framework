@@ -18,7 +18,7 @@ export function buildDivider({
       {icon || text ? (
         <Space>
           {icon}
-          <Text>{text}</Text>
+          <Text userSelect>{text}</Text>
         </Space>
       ) : null}
     </Divider>

@@ -42,7 +42,9 @@ class More extends BaseComponent {
           }
         }}
       >
-        <Text className={classNames(`${classPrefix}__text`)}>{text}</Text>
+        <Text className={classNames(`${classPrefix}__text`)} userSelect>
+          {text}
+        </Text>
 
         {icon ? (
           <View className={classNames(`${classPrefix}__icon`)}>{icon}</View>

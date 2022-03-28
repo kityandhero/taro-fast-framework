@@ -34,7 +34,9 @@ class ActionSheetItem extends BaseComponent {
         }}
       >
         {isString(children) ? (
-          <Text style={style}>{children}</Text>
+          <Text style={style} userSelect>
+            {children}
+          </Text>
         ) : (
           <CenterBox>{children}</CenterBox>
         )}
