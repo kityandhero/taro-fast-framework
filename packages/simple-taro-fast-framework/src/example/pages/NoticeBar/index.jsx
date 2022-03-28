@@ -85,84 +85,82 @@ export default class Index extends ContentPageBase {
     description: '通知条组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '附带图标',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        span: 2,
+        header: '附带图标',
+        config: config1,
+      },
+      {
+        span: 2,
+        header: '可关闭 [single 模式非 marquee 下生效]',
+        config: config2,
+      },
+      {
+        span: 2,
+        header: 'marquee模式 [将自动启用 single 模式]',
+        config: config3,
+      },
+      {
+        span: 2,
+        header: '自定义扩展 [single 模式下生效]',
+        config: config4,
+      },
+      {
+        span: 2,
+        header: '显示更多 [single 模式下生效]',
+        config: config5,
+      },
+      {
+        span: 2,
+        header: '自定义”更多“文字 [single 模式下生效]',
+        config: config6,
+      },
+      {
+        span: 2,
+        header: '复杂例子',
+        config: config7,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <NoticeBar key={key} {...config}>
+        {inner || notice}
+      </NoticeBar>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="附带图标"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="NoticeBar"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <NoticeBar {...config1}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox
-          header="可关闭 [single 模式非 marquee 下生效]"
-          config={config2}
-          componentName="NoticeBar"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <NoticeBar {...config2}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox
-          header="marquee模式 [将自动启用 single 模式]"
-          config={config3}
-          componentName="NoticeBar"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <NoticeBar {...config3}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义扩展 [single 模式下生效]"
-          config={config4}
-          componentName="NoticeBar"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <NoticeBar {...config4}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox
-          header="显示更多 [single 模式下生效]"
-          config={config5}
-          componentName="NoticeBar"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <NoticeBar {...config5}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义”更多“文字 [single 模式下生效]"
-          config={config6}
-          componentName="NoticeBar"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <NoticeBar {...config6}>{notice}</NoticeBar>
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂例子"
-          config={config7}
-          componentName="NoticeBar"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <NoticeBar {...config7}>{notice}</NoticeBar>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={NoticeBar.defaultProps} labelWidth={160} />
