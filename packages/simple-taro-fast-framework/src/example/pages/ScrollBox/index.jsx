@@ -79,9 +79,34 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         current: 7,
+        header: '默认',
+        currentConfig: config1,
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '水平模式',
+        config: config1,
+      },
+      {
+        header: '垂直模式',
+        config: config2,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    const { current } = this.state;
+
+    return (
+      <ScrollBox key={key} {...{ ...config, ...{ current } }}>
+        {this.buildSimpleItemInner(inner)}
+      </ScrollBox>
+    );
+  };
 
   setCurrent = (v) => {
     this.setState({
@@ -90,21 +115,21 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { current } = this.state;
+    const { header, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="水平模式 [默认]"
-          config={config1}
-          componentName="ScrollBox"
-          mockChildren={false}
+          header={header}
+          config={currentConfig}
+          componentName="Divider"
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
           ignorePropertyList={['itemBuilder']}
-        >
-          <Space direction="vertical" size={30} fillWidth>
-            <ScrollBox {...config1} current={current} />
-
+          controlBox={this.buildControlBox(this.establishControlList())}
+          extraArea={
             <CenterBox>
               <Space>
                 <Button
@@ -138,54 +163,9 @@ export default class Index extends ContentPageBase {
                 </Button>
               </Space>
             </CenterBox>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="垂直模式"
-          config={config2}
-          componentName="ScrollBox"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
+          }
         >
-          <Space direction="vertical" size={30} fillWidth>
-            <ScrollBox {...config2} current={current} />
-
-            <CenterBox>
-              <Space>
-                <Button
-                  color="primary"
-                  size="small"
-                  onClick={() => {
-                    this.setCurrent(0);
-                  }}
-                >
-                  滑动到 0
-                </Button>
-
-                <Button
-                  color="primary"
-                  size="small"
-                  onClick={() => {
-                    this.setCurrent(2);
-                  }}
-                >
-                  滑动到 3
-                </Button>
-
-                <Button
-                  color="primary"
-                  size="small"
-                  onClick={() => {
-                    this.setCurrent(4);
-                  }}
-                >
-                  滑动到 5
-                </Button>
-              </Space>
-            </CenterBox>
-          </Space>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={ScrollBox.defaultProps} labelWidth={250} />

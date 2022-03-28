@@ -20,6 +20,7 @@ import {
   ColorText,
   HelpBox,
   Divider,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
@@ -153,19 +154,70 @@ class SimpleBox extends Component {
     }
   };
 
+  buildExhibitionArea = () => {
+    const { useInnerBox, innerBoxCenterMode, innerBoxPadding, children } =
+      this.props;
+
+    return useInnerBox ? (
+      <View
+        style={{
+          ...{
+            minHeight: transformSize(120),
+            border: 'var(--tfc-1) solid #f2e5c0',
+            borderRadius: transformSize(6),
+          },
+          ...(innerBoxPadding
+            ? {
+                padding: 'var(--tfc-10) var(--tfc-10)',
+              }
+            : {
+                width: 'calc(100% - var(--tfc-1) * 2)',
+              }),
+          ...(innerBoxCenterMode
+            ? {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }
+            : {}),
+        }}
+      >
+        {children}
+      </View>
+    ) : (
+      children
+    );
+  };
+
+  buildExtraArea = () => {
+    const { extraArea } = this.props;
+
+    if ((extraArea || null) == null) {
+      return null;
+    }
+
+    return extraArea;
+  };
+
+  buildJointArea = () => {
+    const extraArea = this.buildExtraArea();
+    const exhibitionArea = this.buildExhibitionArea();
+
+    if ((extraArea || null) == null) {
+      return exhibitionArea;
+    }
+
+    return (
+      <Space direction="vertical" size={30} fillWidth>
+        {exhibitionArea}
+
+        {extraArea}
+      </Space>
+    );
+  };
+
   render() {
-    const {
-      space,
-      prefix,
-      header,
-      helpTitle,
-      extra,
-      useInnerBox,
-      innerBoxCenterMode,
-      innerBoxPadding,
-      controlBox,
-      children,
-    } = this.props;
+    const { space, prefix, header, helpTitle, extra, controlBox } = this.props;
 
     const list = this.buildList();
 
@@ -190,35 +242,7 @@ class SimpleBox extends Component {
         space={space}
         extra={extra}
       >
-        {useInnerBox ? (
-          <View
-            style={{
-              ...{
-                minHeight: transformSize(120),
-                border: 'var(--tfc-1) solid #f2e5c0',
-                borderRadius: transformSize(6),
-              },
-              ...(innerBoxPadding
-                ? {
-                    padding: 'var(--tfc-10) var(--tfc-10)',
-                  }
-                : {
-                    width: 'calc(100% - var(--tfc-1) * 2)',
-                  }),
-              ...(innerBoxCenterMode
-                ? {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }
-                : {}),
-            }}
-          >
-            {children}
-          </View>
-        ) : (
-          children
-        )}
+        {this.buildJointArea()}
 
         {controlBox ? <Divider>样例切换</Divider> : null}
 
