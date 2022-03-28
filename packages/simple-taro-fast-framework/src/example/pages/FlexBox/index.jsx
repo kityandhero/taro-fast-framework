@@ -102,65 +102,74 @@ export default class Index extends ContentPageBase {
     name: '自动布局',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '仅左侧布局',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '仅左侧布局',
+        config: config1,
+      },
+      {
+        header: '左侧自动布局',
+        config: config2,
+      },
+      {
+        span: 2,
+        header: '右侧自自动布局',
+        config: config3,
+      },
+      {
+        span: 2,
+        header: '上下自动布局 , 下部固定高度',
+        config: config4,
+      },
+      {
+        span: 2,
+        header: '上下自动布局 , 上部固定高度',
+        config: config5,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <FlexBox key={key} {...config}>
+        {inner}
+      </FlexBox>
+    );
+  };
+
   renderContent = () => {
+    const { header, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="仅左侧布局"
-          config={config1}
+          header={header}
+          config={currentConfig}
           componentName="FlexBox"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
-          ignorePropertyList={['left']}
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon', 'top', 'bottom', 'left', 'right']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <FlexBox {...config1} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="左侧自动布局"
-          config={config2}
-          componentName="FlexBox"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['left', 'right']}
-        >
-          <FlexBox {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="右侧自自动布局"
-          config={config3}
-          componentName="FlexBox"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['left', 'right']}
-        >
-          <FlexBox {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="上下自动布局 , 下部固定高度"
-          config={config4}
-          componentName="FlexBox"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['top', 'bottom']}
-        >
-          <FlexBox {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="上下自动布局 , 上部固定高度"
-          config={config5}
-          componentName="FlexBox"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['top', 'bottom']}
-        >
-          <FlexBox {...config5} />
-        </SimpleBox>
-
-        <PropertyBox config={FlexBox.defaultProps} labelWidth={270} />
+        <PropertyBox config={FlexBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };
