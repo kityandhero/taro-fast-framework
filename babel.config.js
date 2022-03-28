@@ -1,6 +1,6 @@
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(true)
   return {
-    babelrcRoots: [".", "packages/*"],
-  };
-};
+    babelrcRoots: ['.', 'packages/*'],
+  }
+}

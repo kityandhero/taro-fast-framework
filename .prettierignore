@@ -1,7 +1,19 @@
-*.log
-*.md
-*.lock
-*.swp
+**/*.log
+**/*.md
+**/*.lock
+**/*.swp
+**/*.txt
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.svg
+**/*.sqlite
+
+**/.czrc
+**/.gitattributes
+**/.browserslistrc
+
+.husky/*
 
 .cache
 .temp

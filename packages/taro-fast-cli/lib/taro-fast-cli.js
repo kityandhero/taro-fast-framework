@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-module.exports = taroFastCli;
+module.exports = taroFastCli
 
 function taroFastCli() {
-    // TODO
+  // TODO
 }
