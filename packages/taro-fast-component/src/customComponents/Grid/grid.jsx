@@ -37,7 +37,7 @@ class Grid extends BaseComponent {
     let itemComponent = null;
 
     if (isFunction(itemBuilder)) {
-      itemComponent = itemBuilder(item, index);
+      itemComponent = itemBuilder({ item, index });
     }
 
     if (itemComponent === null) {

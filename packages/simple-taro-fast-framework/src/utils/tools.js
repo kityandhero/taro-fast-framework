@@ -30,7 +30,9 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
           isArray(ignorePropertyList) &&
           inCollection(ignorePropertyList, key)
         ) {
-          return (result = result + `${key}={() => {...}} `);
+          result = result + `${key}={() => {...}} `;
+
+          return result;
         }
 
         const s = toString(value);

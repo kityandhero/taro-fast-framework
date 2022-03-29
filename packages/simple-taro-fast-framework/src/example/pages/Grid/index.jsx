@@ -142,6 +142,7 @@ export default class Index extends ContentPageBase {
             return <View style={itemStyle}>{text}</View>;
           },
         },
+        description: 'itemBuilder: 示例 ({ item, index })=>{...}',
       },
     ];
   };
@@ -168,61 +169,10 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
           innerBoxCenterMode
           innerBoxPadding
+          ignorePropertyList={['itemBuilder']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}
-        </SimpleBox>
-
-        <SimpleBox
-          header="用法展示"
-          config={config1}
-          componentName="Grid"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Grid {...config1}>
-            <Grid.Item>
-              <View style={itemStyle}>A</View>
-            </Grid.Item>
-            <Grid.Item>
-              <View style={itemStyle}>B</View>
-            </Grid.Item>
-            <Grid.Item>
-              <View style={itemStyle}>C</View>
-            </Grid.Item>
-            <Grid.Item>
-              <View style={itemStyle}>D</View>
-            </Grid.Item>
-            <Grid.Item>
-              <View style={itemStyle}>E</View>
-            </Grid.Item>
-          </Grid>
-        </SimpleBox>
-
-        <SimpleBox
-          header="控制格子的跨度"
-          config={config2}
-          componentName="Grid"
-          mockChildren
-          useInnerBox={false}
-        >
-          <Grid {...config2}>
-            <Grid.Item>
-              <View style={itemStyle}>A</View>
-            </Grid.Item>
-            <Grid.Item span={2}>
-              <View style={itemStyle}>B</View>
-            </Grid.Item>
-            <Grid.Item span={2}>
-              <View style={itemStyle}>C</View>
-            </Grid.Item>
-            <Grid.Item>
-              <View style={itemStyle}>D</View>
-            </Grid.Item>
-            <Grid.Item span={3}>
-              <View style={itemStyle}>E</View>
-            </Grid.Item>
-          </Grid>
         </SimpleBox>
 
         <PropertyBox
