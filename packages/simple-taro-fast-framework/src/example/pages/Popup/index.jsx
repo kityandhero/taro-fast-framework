@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Item,
   Popup,
   Space,
   CenterBox,
@@ -10,11 +9,9 @@ import {
 } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 import './index.less';
 
@@ -125,9 +122,110 @@ export default class Index extends ContentPageBase {
           customCloseIcon: false,
           customIconPosition: false,
         },
+        header: '',
+        currentConfig: {},
       },
     };
   }
+
+  establishControlList = () => {
+    const {
+      arcTop,
+      arcBottom,
+      mode,
+      showClose,
+      closeWhenOverlayClick,
+      scroll: scrollData,
+    } = this.state;
+
+    return [
+      {
+        header: '上部面板',
+        config: {
+          visible: true,
+          header: '上部面板',
+          position: 'top',
+          mode: mode[0],
+          showClose: showClose[0] === 'yes',
+          scroll: scrollData[0] === 'yes',
+          closeWhenOverlayClick: closeWhenOverlayClick[0] === 'yes',
+          arcTop: arcTop[0] === '上圆角',
+          arcBottom: arcBottom[0] === '下圆角',
+          onClose: this.hideTop,
+        },
+        callback: this.showTop,
+      },
+      {
+        header: '下部面板',
+        config: {
+          visible: true,
+          header: '下部面板',
+          position: 'bottom',
+          mode: mode[0],
+          showClose: showClose[0] === 'yes',
+          scroll: scrollData[0] === 'yes',
+          closeWhenOverlayClick: closeWhenOverlayClick[0] === 'yes',
+          arcTop: arcTop[0] === '上圆角',
+          arcBottom: arcBottom[0] === '下圆角',
+          onClose: this.hideBottom,
+        },
+        callback: this.showBottom,
+      },
+      {
+        header: '左侧面板',
+        config: {
+          visible: true,
+          header: '左侧面板',
+          position: 'left',
+          mode: mode[0],
+          showClose: showClose[0] === 'yes',
+          scroll: scrollData[0] === 'yes',
+          closeWhenOverlayClick: closeWhenOverlayClick[0] === 'yes',
+          arcTop: arcTop[0] === '上圆角',
+          arcBottom: arcBottom[0] === '下圆角',
+          onClose: this.hideLeft,
+        },
+        callback: this.showLeft,
+      },
+      {
+        header: '右侧面板',
+        config: {
+          visible: true,
+          header: '右侧面板',
+          position: 'right',
+          mode: mode[0],
+          showClose: showClose[0] === 'yes',
+          scroll: scrollData[0] === 'yes',
+          closeWhenOverlayClick: closeWhenOverlayClick[0] === 'yes',
+          arcTop: arcTop[0] === '上圆角',
+          arcBottom: arcBottom[0] === '下圆角',
+          onClose: this.hideRight,
+        },
+        callback: this.showRight,
+      },
+      {
+        header: '弹出面板',
+        config: {
+          visible: true,
+          header: '弹出面板',
+          position: 'center',
+          mode: mode[0],
+          showClose: showClose[0] === 'yes',
+          scroll: scrollData[0] === 'yes',
+          closeWhenOverlayClick: closeWhenOverlayClick[0] === 'yes',
+          arcTop: arcTop[0] === '上圆角',
+          arcBottom: arcBottom[0] === '下圆角',
+          onClose: this.hideBasic,
+        },
+        callback: this.showBasic,
+      },
+    ];
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  buildSimpleItem = ({ key, config, inner }) => {
+    return null;
+  };
 
   setArcTop = (value) => {
     this.setState({
@@ -248,6 +346,10 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     const {
+      header,
+      description,
+      currentConfig,
+      inner,
       show,
       arcTop,
       arcBottom,
@@ -257,7 +359,7 @@ export default class Index extends ContentPageBase {
       scroll: scrollData,
     } = this.state;
 
-    const inner = (
+    const innerTranslucentBox = (
       <View
         style={boxStyle}
         onClick={() => {
@@ -288,55 +390,22 @@ export default class Index extends ContentPageBase {
     return (
       <>
         <Space direction="vertical" fillWidth>
-          <SimpleBox header="弹出位置" space={false}>
-            <Item label="中部弹出" arrow onClick={this.showBasic} />
-            <Item label="顶部弹出" arrow onClick={this.showTop} />
-            <Item
-              label="底部弹出"
-              arrow
-              onClick={this.showBottom}
-              headerStyle={cardHeaderStyle}
-              space={false}
-            />
-            <Item
-              label="左侧弹出"
-              arrow
-              onClick={this.showLeft}
-              headerStyle={cardHeaderStyle}
-              space={false}
-            />
-            <Item
-              label="右侧弹出"
-              arrow
-              onClick={this.showRight}
-              headerStyle={cardHeaderStyle}
-              space={false}
-              border={false}
-            />
+          <SimpleBox
+            header={header}
+            description={description}
+            config={currentConfig}
+            componentName="Popup"
+            mockChildren={!!inner}
+            useInnerBox={false}
+            innerBoxCenterMode
+            innerBoxPadding
+            ignorePropertyList={['onClose']}
+            controlBox={this.buildControlBox(this.establishControlList())}
+          >
+            {this.buildSimpleList()}
           </SimpleBox>
 
-          <CodeBox
-            componentName="Popup"
-            mockChildren
-            useInnerBox={false}
-            config={{
-              visible: true,
-              header: '面板',
-              position: 'center',
-              mode: 'through',
-              showClose: true,
-              closeWhenOverlayClick: () => {
-                console.log('closeWhenOverlayClick');
-              },
-              arcTop: true,
-              arcBottom: true,
-              onClose: () => {
-                console.log('onClose');
-              },
-            }}
-          />
-
-          <SimpleBox header="变更上圆角">
+          <SimpleBox header="变更上圆角" useInnerBox={false}>
             <Selector
               options={arcTopList}
               value={arcTop}
@@ -344,7 +413,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="变更下圆角">
+          <SimpleBox header="变更下圆角" useInnerBox={false}>
             <Selector
               options={arcBottomList}
               value={arcBottom}
@@ -352,11 +421,11 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="变更模式">
+          <SimpleBox header="变更模式" useInnerBox={false}>
             <Selector options={modeList} value={mode} onChange={this.setMode} />
           </SimpleBox>
 
-          <SimpleBox header="关闭按钮">
+          <SimpleBox header="关闭按钮" useInnerBox={false}>
             <Selector
               options={showCloseList}
               value={showClose}
@@ -364,7 +433,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="点击遮罩关闭面板">
+          <SimpleBox header="点击遮罩关闭面板" useInnerBox={false}>
             <Selector
               options={closeWhenOverlayClickList}
               value={closeWhenOverlayClick}
@@ -372,7 +441,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="显示区域容器">
+          <SimpleBox header="显示区域容器" useInnerBox={false}>
             <Selector
               options={scrollList}
               value={scrollData}
@@ -385,7 +454,7 @@ export default class Index extends ContentPageBase {
 
         <Popup
           visible={show.basic}
-          header="面板"
+          header="中部面板"
           position="center"
           mode={mode[0]}
           showClose={showClose[0] === 'yes'}
@@ -395,7 +464,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBasic}
         >
-          {this.buildSimpleItemInner(inner)}
+          {innerTranslucentBox}
         </Popup>
 
         <Popup
@@ -410,7 +479,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideLeft}
         >
-          {this.buildSimpleItemInner(inner)}
+          {innerTranslucentBox}
         </Popup>
 
         <Popup
@@ -425,7 +494,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideRight}
         >
-          {this.buildSimpleItemInner(inner)}
+          {innerTranslucentBox}
         </Popup>
 
         <Popup
@@ -440,7 +509,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideTop}
         >
-          {this.buildSimpleItemInner(inner)}
+          {innerTranslucentBox}
         </Popup>
 
         <Popup
@@ -455,7 +524,7 @@ export default class Index extends ContentPageBase {
           arcBottom={arcBottom[0] === '下圆角'}
           onClose={this.hideBottom}
         >
-          {this.buildSimpleItemInner(inner)}
+          {innerTranslucentBox}
         </Popup>
       </>
     );
