@@ -1,18 +1,15 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   CheckBox,
   Icon,
   Button,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import { cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
@@ -21,13 +18,6 @@ const style = {
     backgroundColor: '#f5f7fa',
   },
   ...cardStyle,
-};
-
-const extraStyle = {
-  padding: `0 ${transformSize(12)}`,
-  fontSize: transformSize(24),
-  color: '#aaa',
-  backgroundColor: '#f5f7fa',
 };
 
 const checkBoxOptions1 = [
@@ -98,6 +88,142 @@ const checkBoxOptions3 = [
   },
 ];
 
+const config1 = {
+  header: '基础用法',
+  style: style,
+  options: checkBoxOptions1,
+  value: '',
+};
+
+const config2 = {
+  header: '无边框',
+  style: style,
+  border: false,
+  options: checkBoxOptions1,
+  value: '',
+};
+
+const config3 = {
+  header: '扩展栏',
+  style: style,
+  border: true,
+  options: checkBoxOptions1,
+  value: '',
+  extra: (
+    <Button
+      style={{ marginRight: transformSize(10) }}
+      size="mini"
+      fill="outline"
+      onClick={() => {
+        console.log('checkbox extra click');
+      }}
+    >
+      扩展
+    </Button>
+  ),
+};
+
+const config4 = {
+  header: 'Header Strip',
+  style: style,
+  border: true,
+  options: checkBoxOptions1,
+  value: '',
+  strip: true,
+  stripLeft: 2,
+  stripWidth: 6,
+  stripColor: '#3378f4',
+};
+
+const config5 = {
+  header: '自定义选中图标',
+  style,
+  options: checkBoxOptions1,
+  value: '',
+  iconCheck: <IconCheckCircle size={44} color="#1677ff" />,
+  iconUncheck: <IconCheckCircle size={44} color="#ccc" />,
+};
+
+const config6 = {
+  header: '含有单项描述',
+  style,
+  options: checkBoxOptions2,
+  value: '',
+};
+
+const config7 = {
+  header: '单项禁用',
+  style,
+  options: checkBoxOptions3,
+  value: '',
+};
+
+const config8 = {
+  layout: 'column',
+  options: checkBoxOptions1,
+  value: '',
+};
+
+const config9 = {
+  layout: 'column',
+  options: checkBoxOptions2,
+  value: '',
+  columns: 2,
+  columnGap: 12,
+};
+
+const config10 = {
+  layout: 'space',
+  spaceSize: 24,
+  options: checkBoxOptions1,
+  value: '',
+};
+
+const config11 = {
+  header: 'checkBox布局',
+  layout: 'checkBox',
+  options: checkBoxOptions1,
+  value: '',
+};
+
+const config12 = {
+  header: 'checkBox布局 自定义选中图标',
+  layout: 'checkBox',
+  options: checkBoxOptions1,
+  value: '',
+  iconCheck: <IconCheckCircle size={44} color="#1677ff" />,
+  iconUncheck: <IconCheckCircle size={44} color="#ccc" />,
+};
+
+const config13 = {
+  header: 'checkBox布局 含有单项描述',
+  style,
+  layout: 'checkBox',
+  options: checkBoxOptions2,
+  value: '',
+};
+
+const config14 = {
+  header: 'checkBox布局 单项禁用',
+  style,
+  layout: 'checkBox',
+  options: checkBoxOptions3,
+  value: '',
+};
+
+const config15 = {
+  header: 'checkBox布局 更改回调',
+  style,
+  layout: 'checkBox',
+  options: checkBoxOptions3,
+  value: '',
+  afterChange: (v) => {
+    console.log({
+      message: `值已更改为:${v.join()}`,
+    });
+  },
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '复选',
@@ -120,9 +246,89 @@ export default class Index extends ContentPageBase {
         checkBoxValue1: ['option1'],
         checkBoxValue2: ['option1'],
         checkBoxValue3: ['option2'],
+        header: '基础用法',
+        currentConfig: config1,
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: config1,
+      },
+      {
+        header: '无边框',
+        config: config2,
+      },
+      {
+        header: '扩展栏',
+        config: config3,
+      },
+      {
+        header: 'Header Strip',
+        config: config4,
+      },
+      {
+        header: '自定义选中图标',
+        config: config5,
+      },
+      {
+        header: '含有单项描述',
+        config: config6,
+      },
+      {
+        header: '单项禁用',
+        config: config7,
+      },
+      {
+        header: 'column布局 默认',
+        config: config8,
+      },
+      {
+        header: 'column布局 2列',
+        config: config9,
+      },
+      {
+        header: 'space布局',
+        config: config10,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局',
+        config: config11,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 自定义选中图标',
+        config: config12,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 含有单项描述',
+        config: config13,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 单项禁用',
+        config: config14,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 更改回调',
+        config: config15,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <CheckBox key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </CheckBox>
+    );
+  };
 
   handleCheckBoxChange = (value) => {
     this.setState({
@@ -151,188 +357,24 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { border } = this.state;
+    const { header, description, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
-        <CheckBox
-          header="基础用法"
-          style={style}
-          border={border}
-          options={checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          extra={
-            <Button
-              style={{ marginRight: transformSize(10) }}
-              size="column"
-              onClick={this.toggleBorder}
-            >
-              切换边框
-            </Button>
-          }
-        />
-
-        <CheckBox
-          header="Header Strip"
-          style={style}
-          border={border}
-          options={checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          strip
-          stripLeft={2}
-          stripWidth={6}
-          stripColor="#3378f4"
-          extra={
-            <Button size="mini" fill="none" onClick={this.toggleBorder}>
-              切换边框
-            </Button>
-          }
-        />
-
-        <CheckBox
-          header="自定义选中图标"
-          style={style}
-          options={checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
-          extra={<View style={extraStyle}>layout: list</View>}
-        />
-
-        <CheckBox
-          header="含有单项描述"
-          style={style}
-          options={checkBoxOptions2}
-          value={this.state.checkBoxValue2}
-          extra={<View style={extraStyle}>layout: list</View>}
-        />
-
-        <CheckBox
-          header="单项禁用"
-          style={style}
-          options={checkBoxOptions3}
-          value={this.state.checkBoxValue3}
-          extra={<View style={extraStyle}>layout: list</View>}
-        />
-
-        <Card
-          header="column默认布局"
-          headerStyle={cardHeaderStyle}
-          style={style}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
-          <CheckBox
-            layout="column"
-            style={style}
-            border={border}
-            options={checkBoxOptions1}
-            value={this.state.checkBoxValue1}
-          />
-        </Card>
-
-        <Card
-          header="column布局"
-          headerStyle={cardHeaderStyle}
-          style={style}
-          extra={<View style={extraStyle}>column: 2</View>}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
-          <CheckBox
-            layout="column"
-            style={style}
-            border={border}
-            options={checkBoxOptions2}
-            value={this.state.checkBoxValue2}
-            columns={2}
-            columnGap={12}
-          />
-        </Card>
-
-        <Card
-          header="space布局"
-          headerStyle={cardHeaderStyle}
-          style={style}
-          extra={<View style={extraStyle}>layout: space</View>}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
-          <CheckBox
-            layout="space"
-            style={style}
-            border={border}
-            options={checkBoxOptions1}
-            value={this.state.checkBoxValue1}
-            spaceSize={24}
-          />
-        </Card>
-
-        <CheckBox
-          header="基础用法"
-          layout="checkBox"
-          style={style}
-          border={border}
-          options={checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-        />
-
-        <CheckBox
-          header="自定义选中图标"
-          layout="checkBox"
-          style={style}
-          options={checkBoxOptions1}
-          value={this.state.checkBoxValue1}
-          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-          iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-        />
-
-        <CheckBox
-          header="含有单项描述"
-          layout="checkBox"
-          style={style}
-          options={checkBoxOptions2}
-          value={this.state.checkBoxValue2}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-        />
-
-        <CheckBox
-          header="单项禁用"
-          layout="checkBox"
-          style={style}
-          options={checkBoxOptions3}
-          value={this.state.checkBoxValue3}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-        />
-
-        <CheckBox
-          header="更改回调"
-          layout="checkBox"
-          style={style}
-          options={checkBoxOptions3}
-          value={this.state.checkBoxValue3}
-          extra={<View style={extraStyle}>layout: checkBox</View>}
-          afterChange={(value) => {
-            this.bannerNotify({
-              message: `值已更改为:${value.join()}`,
-            });
-          }}
-        />
-
-        <CodeBox
-          config={{
-            header: '更改回调',
-            layout: 'checkBox',
-            style,
-            border,
-            options: checkBoxOptions1,
-            value: this.state.checkBoxValue1,
-            extra: <View style={extraStyle}>layout: checkBox</View>,
-          }}
+        <SimpleBox
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="CheckBox"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
-          ignorePropertyList={['extra']}
-        />
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['extra', 'prefix']}
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={CheckBox.defaultProps} labelWidth={260} />
       </Space>
