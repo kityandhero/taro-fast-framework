@@ -147,7 +147,7 @@ export default class Index extends ContentPageBase {
         config: config3,
       },
       {
-        header: '"纵向 (失败状态)',
+        header: '纵向 (失败状态)',
         config: config4,
       },
       {

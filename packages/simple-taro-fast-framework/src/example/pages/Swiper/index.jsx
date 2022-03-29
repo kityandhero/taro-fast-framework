@@ -198,6 +198,71 @@ export default class Index extends ContentPageBase {
 
   maxSequence = 0;
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '垂直往复滚动',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '垂直往复滚动',
+        config: config1,
+      },
+      {
+        header: '水平往复滚动',
+        config: config2,
+      },
+      {
+        header: '图片水平往复滚动',
+        config: config3,
+      },
+      {
+        header: '自动往复滚动',
+        config: config4,
+      },
+      {
+        header: '自动循环滚动',
+        config: config5,
+      },
+      {
+        header: '显示指示器',
+        config: config6,
+      },
+      {
+        header: '关闭触摸变换',
+        config: config7,
+      },
+      {
+        header: '设置轮播方向',
+        config: config8,
+      },
+      {
+        header: '设置停顿时间',
+        config: config9,
+      },
+      {
+        header: '使用前后控制',
+        config: config10,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Swiper key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Swiper>
+    );
+  };
+
   // eslint-disable-next-line no-unused-vars
   onChange = (current) => {
     // console.log({
@@ -218,119 +283,26 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="垂直往复滚动"
-          config={config1}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="Swiper"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon', 'itemBuilder']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Swiper {...config1} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="水平往复滚动"
-          config={config2}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="图片水平往复滚动"
-          config={config3}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自动往复滚动"
-          config={config4}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自动循环滚动"
-          config={config5}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="显示指示器"
-          config={config6}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="关闭触摸变换"
-          config={config7}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config7} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置轮播方向"
-          config={config8}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config8} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置停顿时间"
-          config={config9}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config9} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="使用前后控制"
-          config={config10}
-          componentName="Swiper"
-          mockChildren
-          useInnerBox={false}
-          ignorePropertyList={['itemBuilder']}
-        >
-          <Swiper {...config10} />
-        </SimpleBox>
-
-        <SimpleBox header="小程序Swiper上下滚动">
+        <SimpleBox header="小程序Swiper上下滚动" useInnerBox={false}>
           {buildSwiper({
             style: { height: transformSize(40) },
             vertical: true,
@@ -367,7 +339,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="小程序Swiper左右滚动">
+        <SimpleBox header="小程序Swiper左右滚动" useInnerBox={false}>
           {buildSwiper({
             style: { height: transformSize(300) },
             circular: true,
@@ -404,7 +376,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="小程序Swiper左右滚动">
+        <SimpleBox header="小程序Swiper左右滚动" useInnerBox={false}>
           {buildSwiper({
             style: { height: transformSize(260) },
             previousMargin: transformSize(80),
@@ -446,7 +418,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <SimpleBox header="小程序Swiper左右滚动">
+        <SimpleBox header="小程序Swiper左右滚动" useInnerBox={false}>
           {buildSwiper({
             style: { height: transformSize(140) },
             previousMargin: transformSize(80),
@@ -495,7 +467,7 @@ export default class Index extends ContentPageBase {
           })}
         </SimpleBox>
 
-        <PropertyBox config={Swiper.defaultProps} labelWidth={240} />
+        <PropertyBox config={Swiper.defaultProps} labelWidth={280} />
       </Space>
     );
   };
