@@ -1,8 +1,16 @@
-import { Space, Collapse } from 'taro-fast-component/es/customComponents';
+import { Space, Collapse, Card } from 'taro-fast-component/es/customComponents';
 
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+
+const style = {
+  ...{
+    backgroundColor: '#f5f7fa',
+  },
+  ...cardStyle,
+};
 
 const list = [
   {
@@ -80,6 +88,18 @@ export default class Index extends ContentPageBase {
       ...{
         header: '基本展示',
         currentConfig: config1,
+        wrapBuilder: (o) => {
+          return (
+            <Card
+              header="容器"
+              style={style}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            >
+              {o}
+            </Card>
+          );
+        },
       },
     };
   }
@@ -89,14 +109,50 @@ export default class Index extends ContentPageBase {
       {
         header: '基本展示',
         config: config1,
+        wrapBuilder: (o) => {
+          return (
+            <Card
+              header="容器"
+              style={style}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            >
+              {o}
+            </Card>
+          );
+        },
       },
       {
         header: '唯一展开',
         config: config2,
+        wrapBuilder: (o) => {
+          return (
+            <Card
+              header="容器"
+              style={style}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            >
+              {o}
+            </Card>
+          );
+        },
       },
       {
         header: '禁用',
         config: config3,
+        wrapBuilder: (o) => {
+          return (
+            <Card
+              header="容器"
+              style={style}
+              headerStyle={cardHeaderStyle}
+              space={false}
+            >
+              {o}
+            </Card>
+          );
+        },
       },
     ];
   };
@@ -116,7 +172,6 @@ export default class Index extends ContentPageBase {
       <Space direction="vertical" fillWidth>
         <SimpleBox
           header={header}
-          space={false}
           description={description}
           config={currentConfig}
           componentName="Collapse"

@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Item,
   Overlay,
   CenterBox,
   Space,
@@ -12,7 +11,6 @@ import { Selector } from 'taro-fast-component-extra/es/customComponents';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const boxStyle = {
   width: transformSize(80),
@@ -114,9 +112,89 @@ export default class Index extends ContentPageBase {
         duration: ['300'],
         zIndex: ['810'],
         animal: ['ease-in'],
+        header: '显示全局遮罩层',
+        currentConfig: {
+          visible: true,
+          mode: 'fullScreen',
+          color: '#000',
+          alpha: '0.5',
+          duration: '300',
+          zIndex: '810',
+          animal: 'ease-in',
+        },
       },
     };
   }
+
+  establishControlList = () => {
+    const { color, alpha, duration, zIndex, animal } = this.state;
+
+    return [
+      {
+        span: 2,
+        header: '显示全局遮罩层',
+        config: {
+          visible: true,
+          mode: 'fullScreen',
+          color: color[0],
+          alpha: alpha[0],
+          duration: duration[0],
+          zIndex: zIndex[0],
+          animal: animal[0],
+        },
+        callback: this.onClickShow1,
+      },
+      {
+        span: 2,
+        header: '显示嵌入内容的全局遮罩层',
+        config: {
+          visible: true,
+          mode: 'fullScreen',
+          color: color[0],
+          alpha: alpha[0],
+          duration: duration[0],
+          zIndex: zIndex[0],
+          animal: animal[0],
+        },
+        callback: this.onClickShow2,
+        inner: <View style={boxStyle} />,
+      },
+      {
+        span: 2,
+        header: '显示容器遮罩层',
+        config: {
+          visible: true,
+          mode: 'fullParent',
+          color: color[0],
+          alpha: alpha[0],
+          duration: duration[0],
+          zIndex: zIndex[0],
+          animal: animal[0],
+        },
+        callback: this.onClickShow3,
+      },
+      {
+        span: 2,
+        header: '显示嵌入内容的容器遮罩层',
+        config: {
+          visible: true,
+          mode: 'fullParent',
+          color: color[0],
+          alpha: alpha[0],
+          duration: duration[0],
+          zIndex: zIndex[0],
+          animal: animal[0],
+        },
+        callback: this.onClickShow4,
+        inner: <View style={boxStyle} />,
+      },
+    ];
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  buildSimpleItem = ({ key, config, inner }) => {
+    return null;
+  };
 
   setColor = (value) => {
     this.setState({
@@ -197,13 +275,40 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { color, alpha, duration, zIndex, animal } = this.state;
+    const {
+      header,
+      description,
+      currentConfig,
+      inner,
+      color,
+      alpha,
+      duration,
+      zIndex,
+      animal,
+    } = this.state;
 
     return (
       <>
         <Space direction="vertical" fillWidth>
-          <SimpleBox header="展示容器">
-            <View style={{ height: transformSize(300), position: 'relative' }}>
+          <SimpleBox
+            header={header}
+            description={description}
+            config={currentConfig}
+            componentName="Overlay"
+            mockChildren={!!inner}
+            useInnerBox
+            innerBoxCenterMode
+            innerBoxPadding
+            // ignorePropertyList={['icon', 'body', 'panel']}
+            controlBox={this.buildControlBox(this.establishControlList())}
+          >
+            <View
+              style={{
+                width: '100%',
+                height: transformSize(300),
+                position: 'relative',
+              }}
+            >
               <CenterBox>父容器</CenterBox>
 
               <Overlay
@@ -232,42 +337,7 @@ export default class Index extends ContentPageBase {
             </View>
           </SimpleBox>
 
-          <CodeBox
-            componentName="Tabs"
-            mockChildren
-            useInnerBox={false}
-            config={{
-              visible: true,
-              mode: 'fullParent',
-              color: '#543202',
-              alpha: 0.5,
-              duration: 400,
-              zIndex: 400,
-              animal: 'ease-in',
-              onClick: () => {
-                console.log('onClick');
-              },
-            }}
-          />
-
-          <SimpleBox header="遮罩层操控" space={false}>
-            <Item label="显示全局遮罩层" arrow onClick={this.onClickShow1} />
-            <Item
-              label="显示嵌入内容的全局遮罩层"
-              arrow
-              onClick={this.onClickShow2}
-            />
-
-            <Item label="显示容器遮罩层" arrow onClick={this.onClickShow3} />
-            <Item
-              label="显示嵌入内容的容器遮罩层"
-              arrow
-              border={false}
-              onClick={this.onClickShow4}
-            />
-          </SimpleBox>
-
-          <SimpleBox header="设置颜色">
+          <SimpleBox header="设置颜色" useInnerBox={false}>
             <Selector
               options={colorList}
               value={color}
@@ -275,7 +345,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="设置动画">
+          <SimpleBox header="设置动画" useInnerBox={false}>
             <Selector
               options={animalList}
               value={animal}
@@ -284,7 +354,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="设置透明度">
+          <SimpleBox header="设置透明度" useInnerBox={false}>
             <Selector
               options={alphaList}
               value={alpha}
@@ -292,7 +362,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="设置过渡时间">
+          <SimpleBox header="设置过渡时间" useInnerBox={false}>
             <Selector
               options={durationList}
               value={duration}
@@ -300,7 +370,7 @@ export default class Index extends ContentPageBase {
             />
           </SimpleBox>
 
-          <SimpleBox header="设置Z轴">
+          <SimpleBox header="设置Z轴" useInnerBox={false}>
             <Selector
               options={zIndexList}
               value={zIndex}
