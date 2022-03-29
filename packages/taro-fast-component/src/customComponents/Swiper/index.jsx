@@ -843,9 +843,8 @@ class Swiper extends BaseComponent {
     if (!scaleMode) {
       return swiperCore;
     }
-    {
-      return <ScaleBox aspectRatio={aspectRatio}>{swiperCore}</ScaleBox>;
-    }
+
+    return <ScaleBox aspectRatio={aspectRatio}>{swiperCore}</ScaleBox>;
   }
 }
 

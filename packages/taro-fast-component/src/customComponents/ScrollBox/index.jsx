@@ -34,6 +34,7 @@ const defaultProps = {
   gap: 0,
   list: [],
   itemBuilder: null,
+  enableScroll: true,
 };
 
 class ScrollBox extends BaseComponent {
@@ -96,10 +97,15 @@ class ScrollBox extends BaseComponent {
   };
 
   getStyle = () => {
-    const { style } = this.props;
+    const { style, enableScroll } = this.props;
 
     return {
       ...(style || {}),
+      ...(!enableScroll
+        ? {
+            position: 'relative',
+          }
+        : {}),
     };
   };
 
@@ -186,6 +192,27 @@ class ScrollBox extends BaseComponent {
     }
   };
 
+  buildOverlay = () => {
+    const { enableScroll } = this.props;
+
+    if (enableScroll) {
+      return null;
+    }
+
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 10,
+          width: '100%',
+          height: '100%',
+        }}
+      />
+    );
+  };
+
   renderFurther() {
     const { gap, width, height, list } = this.props;
     const { scrollIntoView } = this.state;
@@ -236,6 +263,8 @@ class ScrollBox extends BaseComponent {
 
     return (
       <View style={style}>
+        {this.buildOverlay()}
+
         <ScrollView
           style={{
             ...{

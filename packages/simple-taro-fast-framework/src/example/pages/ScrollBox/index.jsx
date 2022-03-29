@@ -42,6 +42,25 @@ const config1 = {
   },
 };
 
+const config3 = {
+  height: 280,
+  direction: 'horizontal',
+  enableScroll: false,
+  gap: 30,
+  list: [one, one, one, one, one, one, one, one, one, one],
+  itemBuilder: (item, index) => {
+    return (
+      <View
+        style={{
+          width: transformSize(80 + (index + 1) * 45),
+          height: '100%',
+          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+        }}
+      ></View>
+    );
+  },
+};
+
 const config2 = {
   height: 700,
   direction: 'vertical',
@@ -94,6 +113,10 @@ export default class Index extends ContentPageBase {
       {
         header: '垂直模式',
         config: config2,
+      },
+      {
+        header: '禁止滚动',
+        config: config3,
       },
     ];
   };
