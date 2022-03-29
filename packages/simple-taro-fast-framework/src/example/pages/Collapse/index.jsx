@@ -3,7 +3,6 @@ import { Space, Collapse } from 'taro-fast-component/es/customComponents';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const list = [
   {
@@ -44,7 +43,21 @@ const config2 = {
 
 const config3 = {
   single: true,
-  list,
+  list: [
+    {
+      label: '标题1',
+      body: '面板1',
+    },
+    {
+      label: '标题2',
+      body: '面板2',
+    },
+    {
+      label: '标题3',
+      disabled: true,
+      body: '面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3面板3',
+    },
+  ],
 };
 
 // eslint-disable-next-line no-undef
@@ -59,29 +72,64 @@ export default class Index extends ContentPageBase {
     description: '折叠面板组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基本展示',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基本展示',
+        config: config1,
+      },
+      {
+        header: '唯一展开',
+        config: config2,
+      },
+      {
+        header: '禁用',
+        config: config3,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Collapse key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Collapse>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="基本展示" space={false}>
-          <Collapse {...config1} />
-        </SimpleBox>
-
-        <SimpleBox header="唯一展开" space={false}>
-          <Collapse {...config2} />
-        </SimpleBox>
-
-        <SimpleBox header="禁用" space={false}>
-          <Collapse {...config3} />
-        </SimpleBox>
-
-        <CodeBox
-          config={config3}
+        <SimpleBox
+          header={header}
+          space={false}
+          description={description}
+          config={currentConfig}
           componentName="Collapse"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
-        />
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
-        <PropertyBox config={Collapse.defaultProps} labelWidth={270} />
+        <PropertyBox config={Collapse.defaultProps} labelWidth={240} />
       </Space>
     );
   };
