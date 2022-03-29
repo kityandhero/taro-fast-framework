@@ -46,6 +46,7 @@ export default class ContentPageBase extends PageWrapper {
     span = 1,
     inner = null,
     wrapBuilder = null,
+    callback = null,
   }) => {
     return this.buildGridItem({
       index,
@@ -56,6 +57,7 @@ export default class ContentPageBase extends PageWrapper {
       config,
       inner,
       wrapBuilder,
+      callback,
       handler: (one) => {
         const {
           header: t,
@@ -63,6 +65,7 @@ export default class ContentPageBase extends PageWrapper {
           config: c,
           inner: i,
           wrapBuilder: w,
+          callback: cb,
         } = one;
 
         this.setState({
@@ -72,6 +75,10 @@ export default class ContentPageBase extends PageWrapper {
           inner: i,
           wrapBuilder: w,
         });
+
+        if (isFunction(cb)) {
+          cb(one);
+        }
       },
     });
   };
@@ -86,6 +93,7 @@ export default class ContentPageBase extends PageWrapper {
     span,
     inner = null,
     wrapBuilder = null,
+    callback = null,
   }) => {
     return (
       <Grid.Item key={`${keyPrefix || 'no'}_item_${index}`} span={span}>
@@ -102,6 +110,7 @@ export default class ContentPageBase extends PageWrapper {
                 config,
                 inner,
                 wrapBuilder,
+                callback,
               });
             }}
           >
@@ -180,6 +189,7 @@ export default class ContentPageBase extends PageWrapper {
             span,
             inner,
             wrapBuilder,
+            callback,
           } = {
             ...{
               span: 1,
@@ -188,6 +198,7 @@ export default class ContentPageBase extends PageWrapper {
               description: '',
               inner: null,
               wrapBuilder: null,
+              callback: null,
             },
             ...item,
           };
@@ -205,6 +216,7 @@ export default class ContentPageBase extends PageWrapper {
               : span,
             inner,
             wrapBuilder,
+            callback,
           });
         })}
       </Grid>
