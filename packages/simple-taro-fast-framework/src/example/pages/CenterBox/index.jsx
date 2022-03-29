@@ -90,7 +90,7 @@ export default class Index extends ContentPageBase {
           {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={CenterBox.defaultProps} labelWidth={70} />
+        <PropertyBox config={CenterBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };
