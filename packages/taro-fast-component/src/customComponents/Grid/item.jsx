@@ -14,7 +14,7 @@ const defaultProps = {
   /**
    * 点击事件
    */
-  onClick: 0,
+  onClick: null,
 };
 
 class Item extends BaseComponent {

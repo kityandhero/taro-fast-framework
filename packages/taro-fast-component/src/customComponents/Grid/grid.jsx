@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -17,6 +17,8 @@ const defaultProps = {
    */
   gap: 0,
   backgroundColor: '',
+  list: [],
+  itemBuilder: null,
   onClick: null,
 };
 
@@ -27,6 +29,56 @@ class Grid extends BaseComponent {
     if (isFunction(onClick)) {
       onClick(option.value);
     }
+  };
+
+  buildItem = ({ item, span = 1, index }) => {
+    const { itemBuilder } = this.props;
+
+    let itemComponent = null;
+
+    if (isFunction(itemBuilder)) {
+      itemComponent = itemBuilder(item, index);
+    }
+
+    if (itemComponent === null) {
+      return null;
+    }
+
+    const { onGridItemClick = null } = {
+      ...{ onGridItemClick: null },
+      ...item,
+    };
+
+    return (
+      <Grid.Item
+        key={`${this.keyPrefix}_key_build_item_${index}`}
+        span={span}
+        onClick={() => {
+          if (isFunction(onGridItemClick)) {
+            onGridItemClick({ item, index });
+          }
+        }}
+      >
+        {itemComponent}
+      </Grid.Item>
+    );
+  };
+
+  buildItemList = () => {
+    const { list } = this.props;
+
+    if (!isArray(list)) {
+      return null;
+    }
+
+    return list.map((item, index) => {
+      const { span = 1 } = {
+        ...{ span: 1 },
+        ...item,
+      };
+
+      return this.buildItem({ item, span, index });
+    });
   };
 
   renderFurther() {
@@ -54,6 +106,8 @@ class Grid extends BaseComponent {
 
     return (
       <View className={classPrefix} style={style} onClick={this.triggerClick}>
+        {this.buildItemList()}
+
         {this.props.children}
       </View>
     );

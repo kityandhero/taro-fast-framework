@@ -37,9 +37,142 @@ export default class Index extends ContentPageBase {
     description: '宫格布局',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '用法展示',
+        currentConfig: config1,
+        inner: [
+          <Grid.Item key="item-A">
+            <View style={itemStyle}>A</View>
+          </Grid.Item>,
+          <Grid.Item key="item-B">
+            <View style={itemStyle}>B</View>
+          </Grid.Item>,
+          <Grid.Item key="item-C">
+            <View style={itemStyle}>C</View>
+          </Grid.Item>,
+          <Grid.Item key="item-D">
+            <View style={itemStyle}>D</View>
+          </Grid.Item>,
+          <Grid.Item key="item-E">
+            <View style={itemStyle}>E</View>
+          </Grid.Item>,
+        ],
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '用法展示',
+        config: config1,
+        inner: [
+          <Grid.Item key="item-A">
+            <View style={itemStyle}>A</View>
+          </Grid.Item>,
+          <Grid.Item key="item-B">
+            <View style={itemStyle}>B</View>
+          </Grid.Item>,
+          <Grid.Item key="item-C">
+            <View style={itemStyle}>C</View>
+          </Grid.Item>,
+          <Grid.Item key="item-D">
+            <View style={itemStyle}>D</View>
+          </Grid.Item>,
+          <Grid.Item key="item-E">
+            <View style={itemStyle}>E</View>
+          </Grid.Item>,
+        ],
+      },
+      {
+        header: '控制格子的跨度',
+        config: config2,
+        inner: [
+          <Grid.Item key="item-A">
+            <View style={itemStyle}>A</View>
+          </Grid.Item>,
+          <Grid.Item key="item-B" span={2}>
+            <View style={itemStyle}>B</View>
+          </Grid.Item>,
+          <Grid.Item key="item-C" span={2}>
+            <View style={itemStyle}>C</View>
+          </Grid.Item>,
+          <Grid.Item key="item-D">
+            <View style={itemStyle}>D</View>
+          </Grid.Item>,
+          <Grid.Item key="item-E" span={3}>
+            <View style={itemStyle}>E</View>
+          </Grid.Item>,
+        ],
+      },
+      {
+        header: '元素生成模式',
+        config: {
+          ...config1,
+          list: [
+            {
+              text: 'A',
+              onGridItemClick: () => {
+                console.log('Grid Item Clicked');
+              },
+            },
+            {
+              text: 'B',
+            },
+            {
+              text: 'C',
+            },
+            {
+              span: 2,
+              text: 'D',
+            },
+            {
+              text: 'E',
+            },
+          ],
+          // eslint-disable-next-line no-unused-vars
+          itemBuilder: ({ item, index }) => {
+            const { text } = item;
+
+            return <View style={itemStyle}>{text}</View>;
+          },
+        },
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Grid key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Grid>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
+        <SimpleBox
+          header={header}
+          description={description}
+          config={currentConfig}
+          componentName="Grid"
+          mockChildren={!!inner}
+          useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
+
         <SimpleBox
           header="用法展示"
           config={config1}
