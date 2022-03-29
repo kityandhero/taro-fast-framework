@@ -38,14 +38,14 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="布局展示">
+        <SimpleBox header="布局展示" useInnerBox={false}>
           <Row justify="center" style={rowStyle}>
             <Col size={1} style={blueStyle}></Col>
             <Col size={1} style={greenStyle}></Col>
           </Row>
         </SimpleBox>
 
-        <SimpleBox header="布局展示">
+        <SimpleBox header="布局展示" useInnerBox={false}>
           <Row style={rowStyle}>
             <Col size={4} style={blueStyle}></Col>
             <Col size={4} style={redStyle}></Col>
@@ -53,7 +53,7 @@ export default class Index extends ContentPageBase {
           </Row>
         </SimpleBox>
 
-        <SimpleBox header="布局展示">
+        <SimpleBox header="布局展示" useInnerBox={false}>
           <Row style={rowStyle}>
             <Col size={6} style={blueStyle}></Col>
             <Col size={6} style={greenStyle}></Col>

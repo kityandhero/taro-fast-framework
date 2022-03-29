@@ -78,9 +78,28 @@ export default class Index extends ContentPageBase {
       ...{
         align: ['top'],
         alignJustify: ['start'],
+        header: '元素布局展示',
+        currentConfig: {
+          align: 'top',
+          alignJustify: 'start',
+        },
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '元素布局展示',
+        config: {},
+      },
+    ];
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  buildSimpleItem = ({ key, config, inner }) => {
+    return null;
+  };
 
   setAlignChecked = (value) => {
     this.setState({
@@ -95,7 +114,7 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { align, alignJustify } = this.state;
+    const { header, description, inner, align, alignJustify } = this.state;
 
     const config = {
       align: align[0],
@@ -105,36 +124,38 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="单元素布局展示"
-          config={config}
+          header={header}
+          description={description}
+          config={{
+            align: align[0],
+            alignJustify: alignJustify[0],
+          }}
           componentName="VerticalBox"
-          mockChildren
+          mockChildren={!!inner}
           useInnerBox={false}
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon', 'top', 'bottom', 'left', 'right']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <View style={containorStyle}>
-            <VerticalBox {...config}>
-              <View style={boxStyle}></View>
-            </VerticalBox>
-          </View>
+          <Space direction="vertical" fillWidth>
+            <View style={containorStyle}>
+              <VerticalBox {...config}>
+                <View style={boxStyle}></View>
+              </VerticalBox>
+            </View>
+
+            <View style={containorStyle}>
+              <VerticalBox {...config}>
+                <View style={boxStyle}></View>
+                <View style={boxStyle}></View>
+                <View style={boxStyle}></View>
+              </VerticalBox>
+            </View>
+          </Space>
         </SimpleBox>
 
-        <SimpleBox
-          header="多元素布局展示"
-          config={config}
-          componentName="VerticalBox"
-          mockChildren
-          useInnerBox={false}
-        >
-          <View style={containorStyle}>
-            <VerticalBox {...config}>
-              <View style={boxStyle}></View>
-              <View style={boxStyle}></View>
-              <View style={boxStyle}></View>
-            </VerticalBox>
-          </View>
-        </SimpleBox>
-
-        <SimpleBox header="变更align">
+        <SimpleBox header="变更align" useInnerBox={false}>
           <Selector
             columns={3}
             options={alignList}
@@ -143,7 +164,7 @@ export default class Index extends ContentPageBase {
           />
         </SimpleBox>
 
-        <SimpleBox header="变更alignJustify">
+        <SimpleBox header="变更alignJustify" useInnerBox={false}>
           <Selector
             columns={3}
             options={alignJustifyList}
