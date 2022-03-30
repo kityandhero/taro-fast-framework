@@ -160,10 +160,6 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        border: false,
-        checkBoxValue1: ['option1'],
-        checkBoxValue2: ['option1'],
-        checkBoxValue3: [],
         header: '默认展示',
         currentConfig: config1,
       },
@@ -220,24 +216,6 @@ export default class Index extends ContentPageBase {
     );
   };
 
-  handleCheckBoxChange = (value) => {
-    this.setState({
-      checkBoxValue1: value,
-    });
-  };
-
-  handleCheckBoxChangeSecond = (value) => {
-    this.setState({
-      checkBoxValue2: value,
-    });
-  };
-
-  handleCheckBoxChangeThird = (value) => {
-    this.setState({
-      checkBoxValue3: value,
-    });
-  };
-
   renderContent = () => {
     const { header, description, currentConfig, inner } = this.state;
 
@@ -252,6 +230,7 @@ export default class Index extends ContentPageBase {
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
+          ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}

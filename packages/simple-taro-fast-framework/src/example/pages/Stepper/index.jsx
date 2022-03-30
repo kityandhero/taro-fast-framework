@@ -127,147 +127,104 @@ export default class Index extends ContentPageBase {
     description: '进步器组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基础用法',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: config1,
+      },
+      {
+        header: '步长设置',
+        config: config3,
+      },
+      {
+        header: '设置输入范围',
+        config: config4,
+      },
+      {
+        header: '格式化到整数',
+        config: config5,
+      },
+      {
+        header: '格式化到一位小数',
+        config: config6,
+      },
+      {
+        header: '禁用状态',
+        config: config7,
+      },
+      {
+        header: '输入框只读状态',
+        config: config8,
+      },
+      {
+        header: '自定义宽度',
+        config: config9,
+      },
+      {
+        header: '自定义颜色',
+        config: config10,
+      },
+      {
+        header: '无背景模式',
+        config: config11,
+      },
+      {
+        header: '圆形轮廓',
+        config: config12,
+      },
+      {
+        header: '获得/失去焦点',
+        config: config13,
+      },
+      {
+        header: '自定义css变量',
+        config: config14,
+      },
+      {
+        header: '复杂配置',
+        config: config15,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Stepper key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Stepper>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="基础用法"
-          config={config1}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="Stepper"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Stepper {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="步长设置"
-          config={config3}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置输入范围"
-          config={config4}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="格式化到整数"
-          config={config5}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="格式化到一位小数"
-          config={config6}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="禁用状态"
-          config={config7}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config7} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="输入框只读状态"
-          config={config8}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config8} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义宽度"
-          config={config9}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config9} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义颜色"
-          config={config10}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config10} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="无背景模式"
-          config={config11}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config11} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="圆形轮廓"
-          config={config12}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config12} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="获得/失去焦点"
-          config={config13}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config13} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义css变量"
-          config={config14}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config14} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂配置"
-          config={config15}
-          componentName="Stepper"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Stepper {...config15} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Stepper.defaultProps} labelWidth={240} />

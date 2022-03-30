@@ -20,17 +20,19 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
   Object.entries(config).forEach((d) => {
     const [key, value] = d;
 
+    const keyAdjust = key.startsWith('--') ? `\"${key}\"` : key;
+
     if (!isUndefined(value)) {
       if (isBoolean(value) && value) {
-        result = result + `${key} `;
+        result = result + `${keyAdjust} `;
       } else if (isString(value)) {
-        result = result + `${key}="${value}" `;
+        result = result + `${keyAdjust}="${value}" `;
       } else if (isFunction(value)) {
         if (
           isArray(ignorePropertyList) &&
-          inCollection(ignorePropertyList, key)
+          inCollection(ignorePropertyList, keyAdjust)
         ) {
-          result = result + `${key}={() => {...}} `;
+          result = result + `${keyAdjust}={() => {...}} `;
 
           return result;
         }
@@ -39,12 +41,12 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
 
         result =
           result +
-          `${key}={${s
+          `${keyAdjust}={${s
             .replace(/function[\w\W]*?\(/, '(')
             .replace(/\)[\s]*{/, ') => {')}} `;
       } else if (isObject(value) || isArray(value)) {
-        if (inCollection(ignorePropertyList, key)) {
-          return (result = result + `${key}={...} `);
+        if (inCollection(ignorePropertyList, keyAdjust)) {
+          return (result = result + `${keyAdjust}={...} `);
         }
 
         let s = JSON.stringify(
@@ -60,9 +62,9 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
         );
 
         if (isUndefined(s)) {
-          result = result + `${key}={''} `;
+          result = result + `${keyAdjust}={''} `;
         } else {
-          const matchCollection = s.match(/"[\S]*": /g);
+          const matchCollection = s.match(/"[^-][\S]*": /g);
 
           if (isArray(matchCollection) && matchCollection.length > 0) {
             matchCollection.forEach((o) => {
@@ -70,10 +72,10 @@ export function buildConfig({ config, ignorePropertyList = [] }) {
             });
           }
 
-          result = result + `${key}={${s}} `;
+          result = result + `${keyAdjust}={${s}} `;
         }
       } else {
-        result = result + `${key}={${toString(value)}} `;
+        result = result + `${keyAdjust}={${toString(value)}} `;
       }
     }
   });

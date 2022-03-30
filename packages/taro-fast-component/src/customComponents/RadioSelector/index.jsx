@@ -16,6 +16,7 @@ import Icon from '../Icon';
 const { IconCloseCircle } = Icon;
 
 const defaultProps = {
+  label: '',
   title: '',
   prefix: null,
   style: {},
@@ -95,6 +96,7 @@ class RadioSelector extends BaseComponent {
 
   renderFurther() {
     const {
+      label,
       title,
       prefix,
       style,
@@ -126,7 +128,7 @@ class RadioSelector extends BaseComponent {
         <Item
           prefix={prefix}
           title={title}
-          label={children}
+          label={children || label}
           style={style}
           description={description}
           clickable

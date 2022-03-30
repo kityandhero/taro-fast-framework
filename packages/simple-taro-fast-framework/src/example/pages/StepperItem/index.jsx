@@ -73,66 +73,68 @@ export default class Index extends ContentPageBase {
     description: '进步项组件',
   };
 
-  handleClick = (type) => {
-    this.bannerNotify({
-      message: '消息通知',
-      type: type,
-    });
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基础用法',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: config1,
+      },
+      {
+        header: '复杂布局',
+        config: config2,
+      },
+      {
+        header: '禁用状态',
+        config: config3,
+      },
+      {
+        header: '自定义样式',
+        config: config4,
+      },
+      {
+        header: '复杂配置',
+        config: config5,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <StepperItem key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </StepperItem>
+    );
   };
 
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="基础用法"
-          config={config1}
-          space={false}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="StepperItem"
-          mockChildren={false}
-          useInnerBox={false}
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <StepperItem {...config1} />
-        </SimpleBox>
-        <SimpleBox
-          header="复杂布局"
-          config={config2}
-          space={false}
-          componentName="StepperItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <StepperItem {...config2} />
-        </SimpleBox>
-        <SimpleBox
-          header="禁用状态"
-          config={config3}
-          space={false}
-          componentName="StepperItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <StepperItem {...config3} />
-        </SimpleBox>
-        <SimpleBox
-          header="自定义样式"
-          config={config4}
-          space={false}
-          componentName="StepperItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <StepperItem {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂配置"
-          config={config5}
-          space={false}
-          componentName="StepperItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <StepperItem prefix={<IconSketch size={36} />} {...config5} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={StepperItem.defaultProps} labelWidth={260} />

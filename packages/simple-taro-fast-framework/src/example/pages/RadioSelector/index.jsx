@@ -3,12 +3,12 @@ import {
   RadioSelector,
   Tag,
   Space,
+  ColorText,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -26,27 +26,6 @@ const radioOptions1 = [
   {
     label: '单选项三',
     value: 'option3',
-    extra: '扩展说明',
-  },
-];
-
-const radioOptions2 = [
-  {
-    label: '单选项一',
-    value: 'option1',
-    description: '单选项描述一',
-    extra: '扩展说明',
-  },
-  {
-    label: '单选项二',
-    value: 'option2',
-    description: '单选项描述二',
-    extra: '扩展说明',
-  },
-  {
-    label: '单选项三',
-    value: 'option3',
-    description: '单选项描述三',
     extra: '扩展说明',
   },
 ];
@@ -80,9 +59,77 @@ const radioOptions3 = [
 ];
 
 const config1 = {
+  label: '类别',
   placeholder: '请选择类别',
-  value: radioOptions1[0].value,
+  value: [],
   options: radioOptions1,
+};
+
+const config2 = {
+  placeholder: '请选择类别',
+  value: [],
+  options: radioOptions1,
+};
+
+const config3 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  options: radioOptions1,
+  valueFormat: (v) => {
+    return <Tag color="success">{v}</Tag>;
+  },
+};
+
+const config4 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  options: radioOptions1,
+  afterChange: (v) => {
+    console.log(v);
+  },
+};
+
+const config5 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  arc: true,
+  options: radioOptions1,
+};
+
+const config6 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  border: false,
+  options: radioOptions1,
+};
+
+const config7 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  border: false,
+  options: radioOptions1,
+  position: 'center',
+};
+
+const config8 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  showClose: false,
+  options: radioOptions1,
+};
+
+const config9 = {
+  label: '复杂选项',
+  placeholder: '请选择类别',
+  value: [],
+  showClose: false,
+  options: radioOptions3,
 };
 
 // eslint-disable-next-line no-undef
@@ -103,109 +150,81 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        border: false,
-        radioValue1: 'option1',
-        radioValue2: 'option1',
-        radioValue3: '',
+        header: '默认展示',
+        currentConfig: config1,
       },
     };
   }
 
+  establishControlList = () => {
+    return [
+      {
+        header: '默认展示',
+        config: config1,
+      },
+      {
+        header: '内嵌容器',
+        config: config2,
+        inner: <ColorText color="red" text="类别" />,
+      },
+      {
+        header: '格式化值',
+        config: config3,
+      },
+      {
+        header: '变化后触发',
+        config: config4,
+      },
+      {
+        header: '弧形边角',
+        config: config5,
+      },
+      {
+        header: '无底线',
+        config: config6,
+      },
+      {
+        header: '面色面板居中',
+        config: config7,
+      },
+      {
+        header: '隐藏关闭按钮',
+        config: config8,
+      },
+      {
+        header: '复杂选项',
+        config: config9,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <RadioSelector key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </RadioSelector>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="下侧面板视图" space={false}>
-          <RadioSelector {...config1}>类别</RadioSelector>
-
-          <RadioSelector
-            placeholder="请选择类别"
-            value={this.state.radioValue1}
-            valueFormat={(v) => {
-              return <Tag color="default">{v}</Tag>;
-            }}
-            options={radioOptions1}
-          >
-            类别 [格式化值]
-          </RadioSelector>
-
-          <RadioSelector
-            placeholder="请选择目标"
-            value={this.state.radioValue2}
-            arc
-            options={radioOptions2}
-          >
-            目标
-          </RadioSelector>
-
-          <RadioSelector
-            placeholder="请选择产地"
-            showClose={false}
-            border={false}
-            value={this.state.radioValue3}
-            options={radioOptions3}
-          >
-            产地
-          </RadioSelector>
-        </SimpleBox>
-
-        <SimpleBox header="弹出面板视图" space={false}>
-          <RadioSelector
-            placeholder="请选择类别"
-            position="center"
-            value={this.state.radioValue1}
-            options={radioOptions1}
-          >
-            类别
-          </RadioSelector>
-
-          <RadioSelector
-            placeholder="请选择目标"
-            position="center"
-            value={this.state.radioValue2}
-            arc
-            options={radioOptions2}
-          >
-            目标
-          </RadioSelector>
-
-          <RadioSelector
-            placeholder="请选择产地"
-            position="center"
-            showClose={false}
-            border={false}
-            value={this.state.radioValue3}
-            options={radioOptions3}
-          >
-            产地
-          </RadioSelector>
-        </SimpleBox>
-
-        <SimpleBox header="更改回调" space={false}>
-          <RadioSelector
-            placeholder="请选择类别"
-            border={false}
-            value={this.state.radioValue1}
-            options={radioOptions1}
-            afterChange={(value) => {
-              this.bannerNotify({
-                message: `值已更改为:${value}`,
-              });
-            }}
-          >
-            类别
-          </RadioSelector>
-        </SimpleBox>
-
-        <CodeBox
-          config={{
-            placeholder: '请选择类别',
-            value: radioOptions1[0].value,
-            options: radioOptions1,
-          }}
+        <SimpleBox
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="RadioSelector"
-          mockChildren={false}
-          useInnerBox={false}
-        />
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['icon']}
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={RadioSelector.defaultProps} labelWidth={260} />
       </Space>
