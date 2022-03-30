@@ -5,8 +5,6 @@ export const colStyle = {
 
 export const cardHeaderStyle = {
   backgroundColor: '#f5f7fa',
-  // color: '#969696',
-  // backgroundColor: 'var(--tfc-color-ghost-white)',
   color: '--tfc-color-black',
 };
 
