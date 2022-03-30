@@ -1,18 +1,15 @@
-import { View } from '@tarojs/components';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Card,
   Radio,
   Icon,
   Button,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import { cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
@@ -23,11 +20,208 @@ const style = {
   ...cardStyle,
 };
 
-const extraStyle = {
-  padding: `0 ${transformSize(12)}`,
-  fontSize: transformSize(24),
-  color: '#aaa',
-  backgroundColor: '#f5f7fa',
+const radioOptions1 = [
+  {
+    label: '复选项一',
+    value: 'option1',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项二',
+    value: 'option2',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项三',
+    value: 'option3',
+    extra: '扩展说明',
+  },
+];
+
+const radioOptions2 = [
+  {
+    label: '复选项一',
+    value: 'option1',
+    description: '复选项描述一',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项二',
+    value: 'option2',
+    description: '复选项描述二',
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项三',
+    value: 'option3',
+    description: '复选项描述三',
+    extra: '扩展说明',
+    span: 2,
+  },
+];
+
+const radioOptions3 = [
+  {
+    label: '复选项一',
+    value: 'option1',
+    title: '选项的标题',
+    description: '复选项的简介描述',
+    prefix: <IconShoppingCart size={34} />,
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项二',
+    value: 'option2',
+    title: '选项的标题',
+    description: '复选项的简介描述',
+    prefix: <IconSketch size={34} />,
+    extra: '扩展说明',
+  },
+  {
+    label: '复选项三禁用',
+    value: 'option3',
+    title: '选项的标题',
+    description: '复选项的简介描述',
+    disabled: true,
+    prefix: <IconSketch size={34} />,
+    extra: '扩展说明',
+  },
+];
+
+const config1 = {
+  header: '基础用法',
+  style: style,
+  options: radioOptions1,
+  value: '',
+};
+
+const config2 = {
+  header: '无边框',
+  style: style,
+  border: false,
+  options: radioOptions1,
+  value: '',
+};
+
+const config3 = {
+  header: '扩展栏',
+  style: style,
+  border: true,
+  options: radioOptions1,
+  value: '',
+  extra: (
+    <Button
+      style={{ marginRight: transformSize(10) }}
+      size="mini"
+      fill="outline"
+      onClick={() => {
+        console.log('checkbox extra click');
+      }}
+    >
+      扩展
+    </Button>
+  ),
+};
+
+const config4 = {
+  header: 'Header Strip',
+  style: style,
+  border: true,
+  options: radioOptions1,
+  value: '',
+  strip: true,
+  stripLeft: 2,
+  stripWidth: 6,
+  stripColor: '#3378f4',
+};
+
+const config5 = {
+  header: '自定义选中图标',
+  style,
+  options: radioOptions1,
+  value: '',
+  iconCheck: <IconCheckCircle size={44} color="#1677ff" />,
+  iconUncheck: <IconCheckCircle size={44} color="#ccc" />,
+};
+
+const config6 = {
+  header: '含有单项描述',
+  style,
+  options: radioOptions2,
+  value: '',
+};
+
+const config7 = {
+  header: '单项禁用',
+  style,
+  options: radioOptions3,
+  value: '',
+};
+
+const config8 = {
+  layout: 'column',
+  options: radioOptions1,
+  value: '',
+};
+
+const config9 = {
+  layout: 'column',
+  options: radioOptions2,
+  value: '',
+  columns: 2,
+  columnGap: 12,
+};
+
+const config10 = {
+  layout: 'space',
+  spaceSize: 24,
+  options: radioOptions1,
+  value: '',
+};
+
+const config11 = {
+  header: 'radio布局',
+  layout: 'radio',
+  options: radioOptions1,
+  value: '',
+};
+
+const config12 = {
+  header: 'radio布局 自定义选中图标',
+  layout: 'radio',
+  options: radioOptions1,
+  value: '',
+  iconCheck: <IconCheckCircle size={44} color="#1677ff" />,
+  iconUncheck: <IconCheckCircle size={44} color="#ccc" />,
+};
+
+const config13 = {
+  header: 'radio布局 含有单项描述',
+  style,
+  layout: 'radio',
+  options: radioOptions2,
+  value: '',
+};
+
+const config14 = {
+  header: 'radio布局 单项禁用',
+  style,
+  layout: 'radio',
+  options: radioOptions3,
+  value: '',
+};
+
+const config15 = {
+  header: 'radio布局 更改回调',
+  style,
+  layout: 'radio',
+  options: radioOptions3,
+  value: '',
+  afterChange: (v) => {
+    console.log({
+      message: `值已更改为:${v}`,
+    });
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -52,261 +246,109 @@ export default class Index extends ContentPageBase {
         radioValue1: 'option1',
         radioValue2: 'option1',
         radioValue3: 'option2',
-        radioOptions1: [
-          {
-            label: '单选项一',
-            value: 'option1',
-            extra: '扩展说明',
-          },
-          {
-            label: '单选项二',
-            value: 'option2',
-            extra: '扩展说明',
-          },
-          {
-            label: '单选项三',
-            value: 'option3',
-            extra: '扩展说明',
-          },
-        ],
-        radioOptions2: [
-          {
-            label: '单选项一',
-            value: 'option1',
-            description: '单选项描述一',
-            extra: '扩展说明',
-          },
-          {
-            label: '单选项二',
-            value: 'option2',
-            description: '单选项描述二',
-            extra: '扩展说明',
-          },
-          {
-            label: '单选项三',
-            value: 'option3',
-            description: '单选项描述三',
-            extra: '扩展说明',
-          },
-        ],
-        radioOptions3: [
-          {
-            label: '单选项一',
-            value: 'option1',
-            title: '选项的标题',
-            description: '单选项的简介描述',
-            prefix: <IconShoppingCart size={34} />,
-            extra: '扩展说明',
-          },
-          {
-            label: '单选项二',
-            value: 'option2',
-            title: '选项的标题',
-            description: '单选项的简介描述',
-            prefix: <IconSketch size={34} />,
-            extra: '扩展说明',
-          },
-          {
-            label: '单选项三禁用',
-            value: 'option3',
-            title: '选项的标题',
-            description: '单选项的简介描述',
-            disabled: true,
-            prefix: <IconSketch size={34} />,
-            extra: '扩展说明',
-          },
-        ],
+        header: '基础用法',
+        currentConfig: config1,
       },
     };
   }
 
-  toggleBorder = () => {
-    const { border } = this.state;
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: config1,
+      },
+      {
+        header: '无边框',
+        config: config2,
+      },
+      {
+        header: '扩展栏',
+        config: config3,
+      },
+      {
+        header: 'Header Strip',
+        config: config4,
+      },
+      {
+        header: '自定义选中图标',
+        config: config5,
+      },
+      {
+        header: '含有单项描述',
+        config: config6,
+      },
+      {
+        header: '单项禁用',
+        config: config7,
+      },
+      {
+        header: 'column布局 默认',
+        config: config8,
+      },
+      {
+        header: 'column布局 2列',
+        config: config9,
+      },
+      {
+        header: 'space布局',
+        config: config10,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局',
+        config: config11,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 自定义选中图标',
+        config: config12,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 含有单项描述',
+        config: config13,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 单项禁用',
+        config: config14,
+      },
+      {
+        span: 2,
+        header: 'checkBox布局 更改回调',
+        config: config15,
+      },
+    ];
+  };
 
-    this.setState({
-      border: !border,
-    });
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Radio key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Radio>
+    );
   };
 
   renderContent = () => {
-    const { border } = this.state;
+    const { header, description, currentConfig, inner } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
-        <Radio
-          header="默认用法"
-          style={style}
-          border={border}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          extra={
-            <Button size="mini" fill="none" onClick={this.toggleBorder}>
-              切换边框
-            </Button>
-          }
-        />
-
-        <Radio
-          header="Header Strip"
-          style={style}
-          border={border}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          strip
-          stripLeft={2}
-          stripWidth={6}
-          stripColor="#3378f4"
-          extra={
-            <Button size="mini" fill="none" onClick={this.toggleBorder}>
-              切换边框
-            </Button>
-          }
-        />
-
-        <Radio
-          header="自定义选中图标"
-          style={style}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          iconCheck={<IconCheckCircle size={38} color="#1677ff" />}
-          extra={<View style={extraStyle}>layout: list</View>}
-        />
-
-        <Radio
-          header="含有单项描述"
-          style={style}
-          options={this.state.radioOptions2}
-          value={this.state.radioValue2}
-          extra={<View style={extraStyle}>layout: list</View>}
-        />
-
-        <Radio
-          header="单项禁用"
-          style={style}
-          options={this.state.radioOptions3}
-          value={this.state.radioValue3}
-          extra={<View style={extraStyle}>layout: list</View>}
-        />
-
-        <Card
-          header="column默认布局"
-          headerStyle={cardHeaderStyle}
-          style={style}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
-          <Radio
-            layout="column"
-            style={style}
-            border={border}
-            options={this.state.radioOptions2}
-            value={this.state.radioValue2}
-            columnGap={12}
-          />
-        </Card>
-
-        <Card
-          header="column布局"
-          headerStyle={cardHeaderStyle}
-          style={style}
-          extra={<View style={extraStyle}>column: 2</View>}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
-          <Radio
-            layout="column"
-            style={style}
-            border={border}
-            options={this.state.radioOptions2}
-            value={this.state.radioValue2}
-            columns={2}
-            columnGap={12}
-          />
-        </Card>
-
-        <Card
-          header="space布局"
-          headerStyle={cardHeaderStyle}
-          style={style}
-          extra={<View style={extraStyle}>layout: space</View>}
-          extraStyle={{ backgroundColor: '#f5f7fa' }}
-        >
-          <Radio
-            layout="space"
-            style={style}
-            border={border}
-            options={this.state.radioOptions2}
-            value={this.state.radioValue2}
-            spaceSize={24}
-          />
-        </Card>
-
-        <Radio
-          header="基础用法"
-          layout="radio"
-          style={style}
-          border={border}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          extra={<View style={extraStyle}>layout: radio</View>}
-        />
-
-        <Radio
-          header="自定义选中图标"
-          layout="radio"
-          style={style}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
-          extra={<View style={extraStyle}>layout: radio</View>}
-        />
-
-        <Radio
-          header="含有单项描述"
-          layout="radio"
-          style={style}
-          options={this.state.radioOptions2}
-          value={this.state.radioValue2}
-          extra={<View style={extraStyle}>layout: radio</View>}
-        />
-
-        <Radio
-          header="单项禁用"
-          layout="radio"
-          style={style}
-          options={this.state.radioOptions3}
-          value={this.state.radioValue3}
-          extra={<View style={extraStyle}>layout: radio</View>}
-        />
-
-        <Radio
-          header="更改回调"
-          layout="radio"
-          style={style}
-          border={border}
-          options={this.state.radioOptions1}
-          value={this.state.radioValue1}
-          extra={<View style={extraStyle}>layout: radio</View>}
-          afterChange={(value) => {
-            this.bannerNotify({
-              message: `值已更改为:${value}`,
-            });
-          }}
-        />
-
-        <CodeBox
-          config={{
-            header: '更改回调',
-            layout: 'radio',
-            style,
-            border,
-            options: this.state.radioOptions1,
-            value: this.state.radioValue1,
-            extra: <View style={extraStyle}>layout: radio</View>,
-          }}
+        <SimpleBox
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="Radio"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox={false}
-          ignorePropertyList={['extra']}
-        />
+          innerBoxCenterMode
+          innerBoxPadding
+          ignorePropertyList={['extra', 'prefix']}
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={Radio.defaultProps} labelWidth={360} />
       </Space>

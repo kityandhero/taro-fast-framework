@@ -330,32 +330,6 @@ export default class Index extends ContentPageBase {
     );
   };
 
-  handleCheckBoxChange = (value) => {
-    this.setState({
-      checkBoxValue1: value,
-    });
-  };
-
-  handleCheckBoxChangeSecond = (value) => {
-    this.setState({
-      checkBoxValue2: value,
-    });
-  };
-
-  handleCheckBoxChangeThird = (value) => {
-    this.setState({
-      checkBoxValue3: value,
-    });
-  };
-
-  toggleBorder = () => {
-    const { border } = this.state;
-
-    this.setState({
-      border: !border,
-    });
-  };
-
   renderContent = () => {
     const { header, description, currentConfig, inner } = this.state;
 
