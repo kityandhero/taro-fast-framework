@@ -3,12 +3,12 @@ import {
   CheckBoxSelector,
   Space,
   Tag,
+  ColorText,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
-import CodeBox from '../../../customComponents/CodeBox';
 
 const { IconSketch, IconShoppingCart } = Icon;
 
@@ -26,27 +26,6 @@ const checkBoxOptions1 = [
   {
     label: '复选项三',
     value: 'option3',
-    extra: '扩展说明',
-  },
-];
-
-const checkBoxOptions2 = [
-  {
-    label: '复选项一',
-    value: 'option1',
-    description: '复选项描述一',
-    extra: '扩展说明',
-  },
-  {
-    label: '复选项二',
-    value: 'option2',
-    description: '复选项描述二',
-    extra: '扩展说明',
-  },
-  {
-    label: '复选项三',
-    value: 'option3',
-    description: '复选项描述三',
     extra: '扩展说明',
   },
 ];
@@ -79,6 +58,90 @@ const checkBoxOptions3 = [
   },
 ];
 
+const config1 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  options: checkBoxOptions1,
+};
+
+const config2 = {
+  placeholder: '请选择类别',
+  value: [],
+  options: checkBoxOptions1,
+};
+
+const config3 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  options: checkBoxOptions1,
+  valueFormat: (v) => {
+    return (
+      <Space>
+        {v.map((o, i) => {
+          return (
+            <Tag key={`list_${i}`} color="success">
+              {o}
+            </Tag>
+          );
+        })}
+      </Space>
+    );
+  },
+};
+
+const config4 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  options: checkBoxOptions1,
+  afterChange: (v) => {
+    console.log(v);
+  },
+};
+
+const config5 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  arc: true,
+  options: checkBoxOptions1,
+};
+
+const config6 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  border: false,
+  options: checkBoxOptions1,
+};
+
+const config7 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  border: false,
+  options: checkBoxOptions1,
+  position: 'center',
+};
+
+const config8 = {
+  label: '类别',
+  placeholder: '请选择类别',
+  value: [],
+  showClose: false,
+  options: checkBoxOptions1,
+};
+
+const config9 = {
+  label: '复杂选项',
+  placeholder: '请选择类别',
+  value: [],
+  showClose: false,
+  options: checkBoxOptions3,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '弹出式复选',
@@ -101,9 +164,61 @@ export default class Index extends ContentPageBase {
         checkBoxValue1: ['option1'],
         checkBoxValue2: ['option1'],
         checkBoxValue3: [],
+        header: '默认展示',
+        currentConfig: config1,
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '默认展示',
+        config: config1,
+      },
+      {
+        header: '内嵌容器',
+        config: config2,
+        inner: <ColorText color="red" text="类别" />,
+      },
+      {
+        header: '格式化值',
+        config: config3,
+      },
+      {
+        header: '变化后触发',
+        config: config4,
+      },
+      {
+        header: '弧形边角',
+        config: config5,
+      },
+      {
+        header: '无底线',
+        config: config6,
+      },
+      {
+        header: '面色面板居中',
+        config: config7,
+      },
+      {
+        header: '隐藏关闭按钮',
+        config: config8,
+      },
+      {
+        header: '复杂选项',
+        config: config9,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <CheckBoxSelector key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </CheckBoxSelector>
+    );
+  };
 
   handleCheckBoxChange = (value) => {
     this.setState({
@@ -124,121 +239,23 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
-        <SimpleBox header="下侧面板视图" space={false}>
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            value={this.state.checkBoxValue1}
-            options={checkBoxOptions1}
-          >
-            类别
-          </CheckBoxSelector>
-
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            value={this.state.checkBoxValue1}
-            valueFormat={(v) => {
-              return (
-                <Space>
-                  {v.map((o, i) => {
-                    return (
-                      <Tag key={`list_${i}`} color="success">
-                        {o}
-                      </Tag>
-                    );
-                  })}
-                </Space>
-              );
-            }}
-            options={checkBoxOptions1}
-          >
-            类别 [格式化值]
-          </CheckBoxSelector>
-
-          <CheckBoxSelector
-            placeholder="请选择目标"
-            value={this.state.checkBoxValue2}
-            arc
-            options={checkBoxOptions2}
-            onChange={this.handleCheckBoxChangeSecond}
-          >
-            目标
-          </CheckBoxSelector>
-
-          <CheckBoxSelector
-            placeholder="请选择产地"
-            showClose={false}
-            border={false}
-            value={this.state.checkBoxValue3}
-            options={checkBoxOptions3}
-            onChange={this.handleCheckBoxChangeThird}
-          >
-            产地
-          </CheckBoxSelector>
-        </SimpleBox>
-
-        <SimpleBox header="弹出面板视图" space={false}>
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            position="center"
-            value={this.state.checkBoxValue1}
-            options={checkBoxOptions1}
-          >
-            类别
-          </CheckBoxSelector>
-
-          <CheckBoxSelector
-            placeholder="请选择目标"
-            position="center"
-            value={this.state.checkBoxValue2}
-            arc
-            options={checkBoxOptions2}
-            onChange={this.handleCheckBoxChangeSecond}
-          >
-            目标
-          </CheckBoxSelector>
-
-          <CheckBoxSelector
-            placeholder="请选择产地"
-            position="center"
-            showClose={false}
-            border={false}
-            value={this.state.checkBoxValue3}
-            options={checkBoxOptions3}
-            onChange={this.handleCheckBoxChangeThird}
-          >
-            产地
-          </CheckBoxSelector>
-        </SimpleBox>
-
-        <SimpleBox header="更改回调" space={false}>
-          <CheckBoxSelector
-            placeholder="请选择类别"
-            position="center"
-            border={false}
-            value={this.state.checkBoxValue1}
-            options={checkBoxOptions1}
-            afterChange={(value) => {
-              this.bannerNotify({
-                message: `值已更改为:${value}`,
-              });
-            }}
-          >
-            类别
-          </CheckBoxSelector>
-        </SimpleBox>
-
-        <CodeBox
-          config={{
-            placeholder: '请选择类别',
-            value: checkBoxOptions1[0].value,
-            options: checkBoxOptions1,
-          }}
+        <SimpleBox
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="CheckBoxSelector"
-          mockChildren={false}
-          useInnerBox={false}
-        />
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+        >
+          {this.buildSimpleList()}
+        </SimpleBox>
 
         <PropertyBox config={CheckBoxSelector.defaultProps} labelWidth={260} />
       </Space>

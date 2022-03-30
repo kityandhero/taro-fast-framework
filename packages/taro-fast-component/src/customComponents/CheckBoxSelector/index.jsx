@@ -16,6 +16,7 @@ import Icon from '../Icon';
 const { IconCloseCircle } = Icon;
 
 const defaultProps = {
+  label: '',
   title: '',
   prefix: null,
   style: {},
@@ -40,6 +41,7 @@ const defaultProps = {
   checkBoxBorder: true,
   checkBoxIconUncheck: null,
   checkBoxIconCheck: null,
+  afterChange: null,
 };
 
 class CheckBoxSelector extends BaseComponent {
@@ -98,6 +100,7 @@ class CheckBoxSelector extends BaseComponent {
 
   renderFurther() {
     const {
+      label,
       title,
       prefix,
       style,
@@ -129,7 +132,7 @@ class CheckBoxSelector extends BaseComponent {
         <Item
           prefix={prefix}
           title={title}
-          label={children}
+          label={children || label}
           style={style}
           description={description}
           clickable

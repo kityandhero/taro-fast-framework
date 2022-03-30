@@ -182,6 +182,7 @@ class SimpleBox extends Component {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexWrap: 'wrap',
               }
             : {}),
         }}
