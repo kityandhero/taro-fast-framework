@@ -1,3 +1,30 @@
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+import { stringify, parse } from 'qs';
+import filterLodash from 'lodash/filter';
+import sortByLodash from 'lodash/sortBy';
+import findIndexLodash from 'lodash/findIndex';
+import findLodash from 'lodash/find';
+import reverseLodash from 'lodash/reverse';
+import replaceLodash from 'lodash/replace';
+import trimLodash from 'lodash/trim';
+import removeLodash from 'lodash/remove';
+import differenceLodash from 'lodash/difference';
+import splitLodash from 'lodash/split';
+import getLodash from 'lodash/get';
+import sortedUniqLodash from 'lodash/sortedUniq';
+import endsWithLodash from 'lodash/endsWith';
+import assignLodash from 'lodash/assign';
+import assignWithLodash from 'lodash/assignWith';
+import forEachLodash from 'lodash/forEach';
+import memoizeLodash from 'lodash/memoize';
+import roundLodash from 'lodash/round';
+import floorLodash from 'lodash/floor';
+import gteLodash from 'lodash/gte';
+import firstLodash from 'lodash/first';
+import setLodash from 'lodash/set';
+import sizeLodash from 'lodash/size';
+import mapLodash from 'lodash/map';
 import React from 'react';
 import {
   ENV_TYPE,
@@ -28,35 +55,6 @@ import {
   stopPullDownRefresh as stopPullDownRefreshCore,
   pageScrollTo as pageScrollToCore,
 } from '@tarojs/taro';
-import classNames from 'classnames';
-import dayjs from 'dayjs';
-import { stringify, parse } from 'qs';
-import {
-  filter as filterLodash,
-  sortBy as sortByLodash,
-  findIndex as findIndexLodash,
-  find as findLodash,
-  reverse as reverseLodash,
-  replace as replaceLodash,
-  trim as trimLodash,
-  remove as removeLodash,
-  difference as differenceLodash,
-  split as splitLodash,
-  get as getLodash,
-  sortedUniq as sortedUniqLodash,
-  endsWith as endsWithLodash,
-  assign as assignLodash,
-  assignWith as assignWithLodash,
-  forEach as forEachLodash,
-  memoize as memoizeLodash,
-  round as roundLodash,
-  floor as floorLodash,
-  gte as gteLodash,
-  first as firstLodash,
-  map as mapLodash,
-  set as setLodash,
-  size as sizeLodash,
-} from 'lodash';
 
 import {
   notificationTypeCollection,
