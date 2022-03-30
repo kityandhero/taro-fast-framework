@@ -11,6 +11,8 @@ import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
 
+const config0 = {};
+
 const config1 = {
   hidden: true,
 };
@@ -85,9 +87,66 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         percent: 10,
+        header: '基础使用',
+        currentConfig: config0,
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础使用',
+        config: config0,
+      },
+      {
+        header: '隐藏模式',
+        config: config1,
+      },
+      {
+        header: '指定线条宽度',
+        config: config2,
+      },
+      {
+        header: '展示动画',
+        config: config3,
+      },
+      {
+        header: '指定颜色',
+        config: config4,
+      },
+      {
+        header: '渐变色',
+        config: config5,
+      },
+      {
+        header: '直角模式',
+        config: config6,
+      },
+      {
+        header: '显示百分比',
+        config: config7,
+      },
+      {
+        header: '百分比字体大小',
+        config: config8,
+      },
+      {
+        header: '复杂配置',
+        config: config9,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    const { percent } = this.state;
+
+    return (
+      <Progress key={key} {...{ ...config, ...{ percent } }}>
+        {this.buildSimpleItemInner(inner)}
+      </Progress>
+    );
+  };
 
   setPercent = (value) => {
     const { percent } = this.state;
@@ -106,20 +165,21 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { percent } = this.state;
+    const { header, description, currentConfig, inner, percent } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="进度动画"
-          config={{ percent }}
+          header={header}
+          description={description}
+          config={{ ...currentConfig, ...{ percent } }}
           componentName="Progress"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <Space direction="vertical" size={30} fillWidth>
-            <Progress percent={percent} />
-
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+          extraArea={
             <CenterBox>
               <Space>
                 <Button
@@ -145,103 +205,9 @@ export default class Index extends ContentPageBase {
                 </Button>
               </Space>
             </CenterBox>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏模式"
-          config={{ ...config1, ...{ percent } }}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
+          }
         >
-          <Space direction="vertical" fillWidth>
-            <Progress {...config1} percent={percent} />
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="指定线条宽度"
-          config={config2}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Space direction="vertical" fillWidth>
-            <Progress {...config2} />
-            <Progress percent={75} strokeWidth={8} />
-            <Progress percent={100} strokeWidth={12} />
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="展示动画"
-          config={config3}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="指定颜色"
-          config={config4}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="渐变色"
-          config={config5}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="直角模式"
-          config={config6}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="显示百分比"
-          config={config7}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config7} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="百分比字体大小"
-          config={config8}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config8} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂配置"
-          config={config9}
-          componentName="Progress"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Progress {...config9} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Progress.defaultProps} labelWidth={240} />
