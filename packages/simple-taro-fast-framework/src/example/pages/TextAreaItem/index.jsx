@@ -92,43 +92,50 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
-        border: false,
-        value: '',
+        header: '基础用法',
+        currentConfig: config1,
       },
     };
   }
 
-  triggerChange = (v) => {
-    this.setState({
-      value: v,
-    });
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: config1,
+      },
+      {
+        header: '自定义',
+        config: config2,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <TextAreaItem key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </TextAreaItem>
+    );
   };
 
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="基础用法"
-          config={config1}
-          // space={false}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="TextAreaItem"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['prefix']}
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <TextAreaItem {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义"
-          config={config2}
-          // space={false}
-          componentName="TextAreaItem"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['prefix']}
-        >
-          <TextAreaItem {...config2} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={TextAreaItem.defaultProps} labelWidth={240} />
