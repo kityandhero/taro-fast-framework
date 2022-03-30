@@ -146,219 +146,127 @@ export default class Index extends ContentPageBase {
     description: '输入项组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基础使用',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础使用',
+        config: config1,
+      },
+      {
+        header: '无下划线',
+        config: config111,
+      },
+      {
+        header: '设置标签',
+        config: config2,
+      },
+      {
+        header: '必填项',
+        config: config3,
+      },
+      {
+        header: '标签样式',
+        config: config4,
+      },
+      {
+        header: '输入右对齐',
+        config: config5,
+      },
+      {
+        header: '可清除',
+        config: config6,
+      },
+      {
+        header: '设置隐藏',
+        config: config7,
+      },
+      {
+        header: 'Extra',
+        config: config8,
+      },
+      {
+        header: '密码模式',
+        config: config9,
+      },
+      {
+        header: '占位提示',
+        config: config10,
+      },
+      {
+        header: '占位提示样式',
+        config: config11,
+      },
+      {
+        header: '禁用模式',
+        config: config12,
+      },
+      {
+        header: '最大输入长度',
+        config: config13,
+      },
+      {
+        header: '确认文字',
+        config: config14,
+      },
+      {
+        header: '获取焦点事件',
+        config: config15,
+      },
+      {
+        header: '失去焦点事件',
+        config: config16,
+      },
+      {
+        header: 'onConfirm',
+        config: config17,
+      },
+      {
+        header: '键盘高度变更事件',
+        config: config18,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <InputItem key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </InputItem>
+    );
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="基础"
-          config={config1}
-          space={false}
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config1} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="无下划线"
-          config={config111}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config111} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置标签"
-          config={config2}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config2} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="必填项"
-          config={config3}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="标签样式"
-          config={config4}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="输入右对齐"
-          config={config5}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config5} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="可清除"
-          config={config6}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="设置隐藏"
-          config={config7}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <InputItem {...config7} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
-        <SimpleBox
-          header="Extra"
-          config={config8}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config8} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="密码模式"
-          config={config9}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config9} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="占位提示"
-          config={config10}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config10} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="占位提示样式"
-          config={config11}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config11} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="禁用模式"
-          config={config12}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config12} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="最大输入长度"
-          config={config13}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config13} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="确认文字"
-          config={config14}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config14} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="获取焦点事件"
-          config={config15}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config15} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="失去焦点事件"
-          config={config16}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config16} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="onConfirm"
-          config={config17}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config17} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="键盘高度变更事件"
-          config={config18}
-          space={false}
-          componentName="InputItem"
-          mockChildren={false}
-          useInnerBox={false}
-        >
-          <InputItem {...config18} />
-        </SimpleBox>
-
-        <PropertyBox config={InputItem.defaultProps} labelWidth={360} />
+        <PropertyBox config={InputItem.defaultProps} labelWidth={350} />
       </Space>
     );
   };
