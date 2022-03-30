@@ -68,12 +68,79 @@ export default class Index extends ContentPageBase {
     description: '开关组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        header: '基础用法',
+        currentConfig: {},
+      },
+    };
+  }
+
   getApiData = (props) => {
     const {
       simulation: { data },
     } = props;
 
     return data;
+  };
+
+  establishControlList = () => {
+    return [
+      {
+        header: '基础用法',
+        config: {},
+      },
+      {
+        header: '异步调用',
+        config: {
+          ...config1,
+          onChange: this.changeStatus,
+        },
+      },
+      {
+        header: '异步调用前确认',
+        config: {
+          ...config2,
+          onChange: this.simulationChangeStatus,
+        },
+      },
+      {
+        header: '自定义颜色',
+        config: config3,
+      },
+      {
+        header: '隐藏模式',
+        config: config4,
+      },
+      {
+        header: '禁用模式',
+        config: config5,
+      },
+      {
+        header: '大小',
+        config: config6,
+      },
+      {
+        header: '内嵌文字',
+        config: config7,
+      },
+      {
+        header: '操作后回调',
+        config: config8,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    return (
+      <Switch key={key} {...config}>
+        {this.buildSimpleItemInner(inner)}
+      </Switch>
+    );
   };
 
   changeStatus = (value) => {
@@ -106,103 +173,23 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
+    const { header, description, currentConfig, inner } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="基础用法"
+          header={header}
+          description={description}
+          config={currentConfig}
           componentName="Switch"
-          mockChildren={false}
+          mockChildren={!!inner}
           useInnerBox
-        >
-          <Switch />
-        </SimpleBox>
-
-        <SimpleBox
-          header="异步调用"
-          config={config1}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
           ignorePropertyList={['onChange']}
+          controlBox={this.buildControlBox(this.establishControlList())}
         >
-          <Switch onChange={this.changeStatus} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="异步调用前确认"
-          config={config2}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['onChange']}
-        >
-          <Switch {...config2} onChange={this.simulationChangeStatus} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="自定义颜色"
-          config={config3}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Switch {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏模式"
-          config={config4}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Switch {...config4} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="禁用模式"
-          config={config5}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Space>
-            <Switch {...config5} />
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="大小"
-          config={config6}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Switch {...config6} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="内嵌文字"
-          config={config7}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Space>
-            <Switch {...config7} />
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="操作后回调"
-          config={config8}
-          componentName="Switch"
-          mockChildren={false}
-          useInnerBox
-        >
-          <Space>
-            <Switch {...config8} />
-          </Space>
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={Switch.defaultProps} labelWidth={360} />
