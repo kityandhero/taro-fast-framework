@@ -52,9 +52,38 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         percent: 10,
+        header: '附带图标',
+        currentConfig: config1,
       },
     };
   }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '附带图标',
+        config: config1,
+      },
+      {
+        header: '隐藏模式',
+        config: config2,
+      },
+      {
+        header: '复杂配置',
+        config: config3,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    const { percent } = this.state;
+
+    return (
+      <ProgressBox key={key} {...{ ...config, ...{ percent } }}>
+        {this.buildSimpleItemInner(inner)}
+      </ProgressBox>
+    );
+  };
 
   setPercent = (value) => {
     const { percent } = this.state;
@@ -73,21 +102,21 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { percent } = this.state;
+    const { header, description, currentConfig, inner, percent } = this.state;
 
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="附带图标"
-          config={{ ...config1, ...{ percent } }}
+          header={header}
+          description={description}
+          config={{ ...currentConfig, ...{ percent } }}
           componentName="ProgressBox"
-          mockChildren={false}
-          useInnerBox={false}
-          ignorePropertyList={['icon']}
-        >
-          <Space direction="vertical" fillWidth>
-            <ProgressBox {...config1} percent={percent} />
-
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+          extraArea={
             <CenterBox>
               <Space>
                 <Button
@@ -113,30 +142,9 @@ export default class Index extends ContentPageBase {
                 </Button>
               </Space>
             </CenterBox>
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="隐藏模式"
-          config={{ ...config2, ...{ percent } }}
-          componentName="ProgressBox"
-          mockChildren={false}
-          useInnerBox
+          }
         >
-          <Space direction="vertical" fillWidth>
-            <ProgressBox {...config2} percent={percent} />
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="复杂配置"
-          config={config3}
-          componentName="ProgressBox"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon']}
-        >
-          <ProgressBox {...config3} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={ProgressBox.defaultProps} labelWidth={310} />

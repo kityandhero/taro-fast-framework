@@ -8,6 +8,7 @@ import {
   Button,
   Icon,
   HelpBox,
+  CenterBox,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -76,53 +77,110 @@ export default class Index extends ContentPageBase {
     description: '进度项组件',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        percent: 10,
+        header: '横向布局',
+        currentConfig: config1,
+      },
+    };
+  }
+
+  establishControlList = () => {
+    return [
+      {
+        header: '横向布局',
+        config: config1,
+      },
+      {
+        header: '纵向布局',
+        config: config2,
+      },
+      {
+        header: '横向布局示例',
+        config: config3,
+      },
+      {
+        header: '纵向布局示例',
+        config: config4,
+      },
+    ];
+  };
+
+  buildSimpleItem = ({ key, config, inner }) => {
+    const { percent } = this.state;
+
+    return (
+      <ProgressItem key={key} {...{ ...config, ...{ percent } }}>
+        {this.buildSimpleItemInner(inner)}
+      </ProgressItem>
+    );
+  };
+
+  setPercent = (value) => {
+    const { percent } = this.state;
+
+    const v = percent + value;
+
+    this.setState({
+      percent: v >= 100 ? 100 : v,
+    });
+  };
+
+  reSetPercent = () => {
+    this.setState({
+      percent: 10,
+    });
+  };
+
   renderContent = () => {
+    const { header, description, currentConfig, inner, percent } = this.state;
+
     return (
       <Space direction="vertical" fillWidth>
         <SimpleBox
-          header="横向布局"
-          config={config1}
-          componentName="ProgressBox"
-          mockChildren={false}
+          header={header}
+          description={description}
+          config={{ ...currentConfig, ...{ percent } }}
+          componentName="ProgressItem"
+          mockChildren={!!inner}
           useInnerBox
-        >
-          <Space direction="vertical" fillWidth>
-            <ProgressItem {...config1} />
-          </Space>
-        </SimpleBox>
+          innerBoxCenterMode
+          innerBoxPadding
+          controlBox={this.buildControlBox(this.establishControlList())}
+          extraArea={
+            <CenterBox>
+              <Space>
+                <Button
+                  color="primary"
+                  size="small"
+                  disabled={percent === 100}
+                  onClick={() => {
+                    this.setPercent(10);
+                  }}
+                  style={{ marginRight: transformSize(8) }}
+                >
+                  进度+10
+                </Button>
 
-        <SimpleBox
-          header="纵向布局"
-          config={config2}
-          componentName="ProgressBox"
-          mockChildren={false}
-          useInnerBox
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    this.reSetPercent();
+                  }}
+                >
+                  重置进度
+                </Button>
+              </Space>
+            </CenterBox>
+          }
         >
-          <Space direction="vertical" fillWidth>
-            <ProgressItem {...config2} />
-          </Space>
-        </SimpleBox>
-
-        <SimpleBox
-          header="横向布局示例"
-          config={config3}
-          componentName="ProgressBox"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <ProgressItem {...config3} />
-        </SimpleBox>
-
-        <SimpleBox
-          header="纵向布局示例"
-          config={config4}
-          componentName="ProgressBox"
-          mockChildren={false}
-          useInnerBox
-          ignorePropertyList={['icon', 'extra']}
-        >
-          <ProgressItem {...config4} />
+          {this.buildSimpleList()}
         </SimpleBox>
 
         <PropertyBox config={ProgressItem.defaultProps} labelWidth={310} />
