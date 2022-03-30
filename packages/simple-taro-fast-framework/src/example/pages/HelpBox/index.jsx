@@ -6,7 +6,7 @@ import PropertyBox from '../../../customComponents/PropertyBox';
 
 const list = [
   {
-    text: 'Html数据展示，空白将替换为Empty.',
+    text: 'Html数据展示, 空白将替换为Empty.',
   },
   {
     text: '帮助条目2.',
