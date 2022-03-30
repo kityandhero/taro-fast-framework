@@ -71,6 +71,7 @@ export default {
         'pages/centerBox/index',
         'pages/thumbnailBox/index',
         'pages/scaleBox/index',
+        'pages/activityBackboardBox/index',
         'pages/dataGrid/index',
         'pages/searchBar/index',
         'pages/textAreaItem/index',

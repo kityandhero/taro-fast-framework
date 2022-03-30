@@ -191,6 +191,9 @@ const examplePathCollection = {
   scaleBox: {
     path: '/example/pages/scaleBox/index',
   },
+  activityBackboardBox: {
+    path: '/example/pages/activityBackboardBox/index',
+  },
   dataGrid: {
     path: '/example/pages/dataGrid/index',
   },

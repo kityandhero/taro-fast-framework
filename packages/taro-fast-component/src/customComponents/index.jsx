@@ -66,3 +66,4 @@ export { default as Swiper } from './Swiper';
 export { default as ScrollBox } from './ScrollBox';
 export { default as TranslucentBox } from './TranslucentBox';
 export { default as HtmlBox } from './HtmlBox';
+export { default as ActivityBackboardBox } from './ActivityBackboardBox';

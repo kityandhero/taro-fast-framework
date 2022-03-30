@@ -116,6 +116,11 @@ const list = [
     name: '折叠面板',
     path: pathCollection.example.collapse.path,
   },
+  {
+    id: 'ActivityBackboardBox',
+    name: '背板面板',
+    path: pathCollection.example.activityBackboardBox.path,
+  },
 ];
 
 const o = {

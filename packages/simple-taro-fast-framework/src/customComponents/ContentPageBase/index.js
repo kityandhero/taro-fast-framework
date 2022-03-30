@@ -246,6 +246,10 @@ export default class ContentPageBase extends PageWrapper {
 
   buildSimpleItemInner = (inner) => {
     if (isArray(inner)) {
+      if (inner.length === 1) {
+        return inner;
+      }
+
       return inner.map((one) => {
         return one;
       });
