@@ -29,8 +29,8 @@ export const storageKeyCollection = {
   location: 'location',
   map: 'map',
   effectiveCode: 'effectiveCode',
-  sessionId: 'sessionId',
-  sessionIdRefreshing: 'sessionIdRefreshing',
+  session: 'session',
+  sessionRefreshing: 'sessionRefreshing',
   nextCheckLoginUnixTime: 'nextCheckLoginUnixTime',
   needSyncInfo: 'needSyncInfo',
   locationMode: 'locationMode',
@@ -349,53 +349,53 @@ export function removeEffectiveCode() {
 }
 
 /**
- * 获取SessionId
+ * 获取Session
  *
  * @export
  * @param {*} fn
  * @returns
  */
-export function getSessionId() {
-  const key = storageKeyCollection.sessionId;
+export function getSession() {
+  const key = storageKeyCollection.session;
 
   return getStringFromLocalStorage(key);
 }
 
 /**
- * 设置SessionId
+ * 设置Session
  *
  * @export
  * @param {*} fn
  * @returns
  */
-export function setSessionId(sessionId) {
-  const key = storageKeyCollection.sessionId;
+export function setSession(session) {
+  const key = storageKeyCollection.session;
 
-  saveStringToLocalStorage(key, sessionId || '');
+  saveStringToLocalStorage(key, session || '');
 }
 
 /**
- * 移除SessionId
+ * 移除Session
  *
  * @export
  * @param {*} fn
  * @returns
  */
-export function removeSessionId() {
-  const key = storageKeyCollection.sessionId;
+export function removeSession() {
+  const key = storageKeyCollection.session;
 
   removeLocalStorage(key);
 }
 
 /**
- * 获取SessionIdRefreshing
+ * 获取SessionRefreshing
  *
  * @export
  * @param {*} fn
  * @returns
  */
-export function getSessionIdRefreshing() {
-  const key = storageKeyCollection.sessionIdRefreshing;
+export function getSessionRefreshing() {
+  const key = storageKeyCollection.sessionRefreshing;
 
   const v = getStringFromLocalStorage(key);
 
@@ -403,30 +403,27 @@ export function getSessionIdRefreshing() {
 }
 
 /**
- * 设置SessionIdRefreshing
+ * 设置SessionRefreshing
  *
  * @export
  * @param {*} fn
  * @returns
  */
-export function setSessionIdRefreshing(sessionIdRefreshing) {
-  const key = storageKeyCollection.sessionIdRefreshing;
+export function setSessionRefreshing(sessionRefreshing) {
+  const key = storageKeyCollection.sessionRefreshing;
 
-  saveStringToLocalStorage(
-    key,
-    sessionIdRefreshing || false ? 'true' : 'false',
-  );
+  saveStringToLocalStorage(key, sessionRefreshing || false ? 'true' : 'false');
 }
 
 /**
- * 移除SessionIdRefreshing
+ * 移除SessionRefreshing
  *
  * @export
  * @param {*} fn
  * @returns
  */
-export function removeSessionIdRefreshing() {
-  const key = storageKeyCollection.sessionIdRefreshing;
+export function removeSessionRefreshing() {
+  const key = storageKeyCollection.sessionRefreshing;
 
   removeLocalStorage(key);
 }

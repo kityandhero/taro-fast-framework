@@ -335,6 +335,9 @@ const frameworkPathCollection = {
 };
 
 const newsPathCollection = {
+  entry: {
+    path: '/news/pages/entry/index',
+  },
   home: {
     path: '/news/pages/home/index',
   },

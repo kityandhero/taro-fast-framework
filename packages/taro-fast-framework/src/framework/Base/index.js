@@ -8,6 +8,7 @@ import {
   showNavigationBarLoading,
   hideNavigationBarLoading,
   stopPullDownRefresh,
+  recordLog,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isUndefined,
@@ -42,6 +43,8 @@ class Base extends Infrastructure {
    * 执行初始化远程请求
    */
   doLoadRemoteRequest = () => {
+    recordLog('exec doLoadRemoteRequest');
+
     const { spin } = this;
 
     const that = this;

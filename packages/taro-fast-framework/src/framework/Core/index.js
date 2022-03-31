@@ -42,6 +42,23 @@ class Core extends Base {
     return global;
   };
 
+  getEntrance = () => {
+    const { entrance } = this.props;
+
+    if ((entrance || null) == null) {
+      const text =
+        'entrance is null, please set it to props or override function getEntrance. ';
+
+      showRuntimeError({
+        message: text,
+      });
+
+      throw new Error(text);
+    }
+
+    return entrance;
+  };
+
   getDispatch = () => {
     const { dispatch } = this.props;
 

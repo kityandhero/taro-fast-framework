@@ -1,24 +1,41 @@
+import Taro from '@tarojs/taro';
+
 import {
   getPhoneLocation,
   getSetting,
   showInfoMessage,
+  sleep,
+  recordObject,
+  recordLog,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 import {
   locateResult,
   locationModeCollection,
+  verifySignInResult,
 } from 'taro-fast-common/es/utils/constants';
+import Tips from 'taro-fast-common/es/utils/tips';
 
 import {
+  getEffectiveCode,
   getLastLocation,
   getLocation,
   getLocationMode,
   getMap,
+  getNextCheckLoginUnixTime,
+  getOpenId,
+  getSessionRefreshing,
+  getToken,
   removeLocation,
+  removeSession,
+  setEffectiveCode,
   setLastLocation,
   setLocation,
   setLocationMode,
   setMap,
+  setNextCheckLoginUnixTime,
+  setSession,
+  setSessionRefreshing,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
@@ -26,16 +43,12 @@ import Common from '../Common';
 
 const defaultLongitude = defaultSettingsLayoutCustom.getDefaultLongitude();
 const defaultLatitude = defaultSettingsLayoutCustom.getDefaultLatitude();
+const useLocation = defaultSettingsLayoutCustom.getUseLocation();
 
 /**
  * 业务调度核心底层
  */
 class SupplementCore extends Common {
-  /**
-   * 需要重新定位当再次呈现并且为自动定位模式时
-   */
-  needReLocationWhenRepeatedShow = false;
-
   doShowTask = () => {
     if (!this.firstShowHasTriggered) {
       this.doWorkWhenFirstShow();
@@ -44,7 +57,9 @@ class SupplementCore extends Common {
     } else {
       const that = this;
 
-      that.checkSessionId(() => {
+      that.setCurrentInfo();
+
+      that.checkSession(() => {
         if (that.verifyTicketValidity) {
           that.checkTicketValidity();
         }
@@ -54,8 +69,6 @@ class SupplementCore extends Common {
 
       if (that.needReLocationWhenRepeatedShow) {
         const locationMode = getLocationMode();
-
-        const useLocation = defaultSettingsLayoutCustom.getUseLocation();
 
         if (
           (useLocation || false) &&
@@ -96,6 +109,8 @@ class SupplementCore extends Common {
     fromLaunch = false,
     failCallback,
   }) {
+    recordLog('exec obtainLocation');
+
     let needRelocation = force || false;
 
     const location = getLocation();
@@ -369,6 +384,468 @@ class SupplementCore extends Common {
         force,
       });
     }
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchSetSignInResult = (data) => {
+    throw new Error(
+      'dispatchSetSignInResult need to be override, it need to be return a promise',
+    );
+  };
+
+  getSignInResult() {
+    const { signInResult } = this.getGlobal();
+
+    return signInResult;
+  }
+
+  setSignInResult({ data, callback = null }) {
+    let v = data;
+
+    if (v !== verifySignInResult.fail && v !== verifySignInResult.success) {
+      v = verifySignInResult.unknown;
+    }
+
+    this.dispatchSetSignInResult(v).then(() => {
+      if (isFunction(callback)) {
+        callback();
+      }
+    });
+  }
+
+  checkTicketValidity = (callback) => {
+    recordLog('exec checkTicketValidity');
+
+    const locationMode = getLocationMode();
+    const signInResult = this.getSignInResult();
+
+    if (signInResult === verifySignInResult.unknown) {
+      if (
+        (useLocation || false) &&
+        locationMode === locationModeCollection.auto
+      ) {
+        this.obtainLocation({
+          successCallback: () => {
+            this.signIn({}, callback);
+          },
+          focus: false,
+          showLoading: false,
+          fromLaunch: false,
+          failCallback: () => {
+            this.signIn({}, callback);
+          },
+        });
+      } else {
+        this.signIn({}, callback);
+      }
+    } else {
+      if (
+        (useLocation || false) &&
+        locationMode === locationModeCollection.auto
+      ) {
+        this.obtainLocation({
+          successCallback: () => {
+            this.checkTicketValidityAfterLocation(callback);
+          },
+          focus: false,
+          showLoading: false,
+          fromLaunch: false,
+          failCallback: () => {
+            this.checkTicketValidityAfterLocation(callback);
+          },
+        });
+      } else {
+        this.checkTicketValidityAfterLocation(callback);
+      }
+    }
+  };
+
+  checkTicketValidityAfterLocation(callback) {
+    const ticketValidityProcessDetection =
+      this.getTicketValidityProcessDetection();
+
+    if (ticketValidityProcessDetection) {
+      return;
+    }
+
+    const tokenCurrent = getToken();
+    const openIdCurrent = getOpenId();
+    const location = getLocation();
+
+    if (
+      (tokenCurrent || '') !== '' &&
+      (openIdCurrent || '') !== '' &&
+      (location || null) !== null
+    ) {
+      const signInResult = this.getSignInResult();
+
+      if (signInResult === verifySignInResult.fail) {
+        if (!this.verifyTicket) {
+          return;
+        } else {
+          if (isFunction(callback)) {
+            callback();
+          }
+
+          return;
+        }
+      }
+    }
+
+    this.checkTicketValidityCore(callback);
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchCheckTicketValidity = (data = {}) => {
+    throw new Error(
+      'dispatchCheckTicketValidity need override, dispatchCheckTicketValidity must return a promise',
+    );
+  };
+
+  checkTicketValidityCore(callback) {
+    const currentNextCheckLoginUnixTime = getNextCheckLoginUnixTime();
+
+    const currentUnixTime = parseInt(new Date().getTime() / 1000, 10);
+
+    if (currentUnixTime < currentNextCheckLoginUnixTime) {
+      if (isFunction(callback)) {
+        callback();
+      }
+
+      return;
+    }
+
+    this.dispatchCheckTicketValidity().then(() => {
+      const {
+        remoteCheck: { data },
+      } = this.props;
+
+      const { dataSuccess, data: metaData } = data;
+
+      if (dataSuccess) {
+        const { needRefresh, nextCheckLoginUnixTime } = metaData;
+
+        setNextCheckLoginUnixTime(nextCheckLoginUnixTime);
+
+        if (needRefresh) {
+          this.signIn({}, callback);
+        } else {
+          const signInResult = this.getSignInResult();
+
+          if (signInResult === verifySignInResult.fail && this.verifyTicket) {
+            this.doWhenCheckTicketValidityVerifySignInFail();
+          }
+
+          if (signInResult === verifySignInResult.success) {
+            if (isFunction(callback)) {
+              callback();
+            }
+          }
+
+          this.setTicketValidityProcessDetection({
+            data: false,
+          });
+        }
+      }
+    });
+  }
+
+  doWhenCheckTicketValidityVerifySignInFail = () => {};
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchRefreshSession = (data) => {
+    throw new Error(
+      'dispatchRefreshSession need override, dispatchRefreshSession must return a promise',
+    );
+  };
+
+  refreshSession = ({ callback }) => {
+    recordLog('exec refreshSession');
+
+    const sessionRefreshing = getSessionRefreshing();
+
+    if (!sessionRefreshing) {
+      setSessionRefreshing(true);
+
+      const that = this;
+
+      Taro.login({ timeout: 1000 })
+        .then((res) => {
+          const { code } = res;
+
+          if (code) {
+            setEffectiveCode(code);
+
+            that
+              .dispatchRefreshSession({ code })
+              .then(() => {
+                const {
+                  session: { data },
+                } = that.props;
+
+                const { dataSuccess, data: metaData } = data;
+
+                if (dataSuccess) {
+                  const { code: effectiveCodeRemote, session } = metaData;
+                  const effectiveCode = getEffectiveCode();
+
+                  if (effectiveCode === (effectiveCodeRemote || 'no')) {
+                    setSession(session);
+                  }
+
+                  if (isFunction(callback)) {
+                    callback();
+                  }
+                } else {
+                  removeSession();
+                }
+
+                setSessionRefreshing(false);
+              })
+              .catch(() => {
+                Tips.info('网络请求失败了，请检查下是否联网');
+
+                removeSession();
+
+                setSessionRefreshing(false);
+
+                if (isFunction(callback)) {
+                  callback();
+                }
+              });
+          } else {
+            Tips.info('获取微信Code失败');
+
+            removeSession();
+
+            setSessionRefreshing(false);
+
+            if (isFunction(callback)) {
+              callback();
+            }
+          }
+        })
+        .catch((error) => {
+          recordObject({ error, current: that });
+
+          showInfoMessage({
+            message: '微信登录失败',
+          });
+
+          removeSession();
+
+          setSessionRefreshing(false);
+
+          if (isFunction(callback)) {
+            callback();
+          }
+        });
+    } else {
+      this.retryRefreshSessionWhenRefreshing({
+        callback,
+      });
+    }
+  };
+
+  retryRefreshSessionWhenRefreshing({ callback, timeTotal = 0 }) {
+    if (timeTotal > 3000) {
+      Tips.info('长时间等待');
+
+      if (isFunction(callback)) {
+        callback();
+      }
+
+      return;
+    }
+
+    sleep(100, () => {
+      const sessionRefreshingAfterSleep = getSessionRefreshing();
+
+      if (sessionRefreshingAfterSleep) {
+        this.retryRefreshSessionWhenRefreshing({
+          callback,
+          timeTotal: timeTotal + 100,
+        });
+      } else {
+        if (isFunction(callback)) {
+          callback();
+        }
+      }
+    });
+  }
+
+  /**
+   * 调度并设置登录检测状态
+   * @param {*} data
+   */
+  // eslint-disable-next-line no-unused-vars
+  dispatchSetSignInProcessDetection = (data) => {
+    throw new Error(
+      'dispatchSignInProcessDetection need to be override, it need to be return a promise',
+    );
+  };
+
+  getSignInProcessDetection = () => {
+    const { signInProcessDetection } = this.getGlobal();
+
+    return !!signInProcessDetection;
+  };
+
+  setSignInProcessDetection = ({ data, callback }) => {
+    this.dispatchSetSignInProcessDetection(!!data).then(() => {
+      if (isFunction(callback)) {
+        callback();
+      }
+    });
+  };
+
+  signIn = (params, callback) => {
+    const that = this;
+
+    const locationMode = getLocationMode();
+
+    if ((useLocation || false) && locationMode == locationModeCollection.auto) {
+      this.obtainLocation({
+        // eslint-disable-next-line no-unused-vars
+        successCallback: ({ location, map }) => {
+          const { latitude, longitude } = location || {
+            latitude: 34.7533581487,
+            longitude: 113.6313915479,
+          };
+
+          params.latitude = latitude || '';
+          params.longitude = longitude || '';
+
+          const signInProcessDetection = that.getSignInProcessDetection();
+
+          if (!signInProcessDetection) {
+            that.setSignInProcessDetection({
+              data: true,
+              callback: () => {
+                that.signInCore(params, callback);
+              },
+            });
+          }
+        },
+        focus: false,
+        showLoading: false,
+        fromLaunch: false,
+        failCallback: () => {
+          const signInProcessDetection = that.getSignInProcessDetection();
+
+          if (!signInProcessDetection) {
+            that.setSignInProcessDetection({
+              data: true,
+              callback: () => {
+                that.signInCore(params, callback);
+              },
+            });
+          }
+        },
+      });
+    } else {
+      if (useLocation || false) {
+        that.signInWhenCheckProcessDetection({
+          params,
+          callback: (o, p) => {
+            o.setSignInProcessDetection({
+              data: true,
+              callback: () => {
+                o.signInCore(p, callback);
+              },
+            });
+          },
+          timeTotal: 0,
+        });
+      } else {
+        const signInProcessDetection = that.getSignInProcessDetection();
+
+        if (!signInProcessDetection) {
+          that.setSignInProcessDetection({
+            data: true,
+            callback: () => {
+              that.signInCore(params, callback);
+            },
+          });
+        }
+      }
+    }
+  };
+
+  signInWhenCheckProcessDetection({ params, callback, timeTotal = 0 }) {
+    const that = this;
+
+    if (timeTotal > 3000) {
+      if (isFunction(callback)) {
+        callback(that, params);
+      }
+
+      return;
+    }
+
+    sleep(100, () => {
+      const signInProcessDetection = that.getSignInProcessDetection();
+
+      if (signInProcessDetection) {
+        this.signInWhenCheckProcessDetection({
+          params,
+          callback,
+          timeTotal: timeTotal + 100,
+        });
+      } else {
+        if (isFunction(callback)) {
+          callback(that, params);
+        }
+      }
+    });
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchSingIn = (data = {}) => {
+    throw new Error(
+      'dispatchSingIn need override, dispatchSingIn must return a promise',
+    );
+  };
+
+  signInCore({ data, callback }) {
+    Tips.loading('处理中');
+
+    this.dispatchSingIn(data).then(() => {
+      const { data: entranceData } = this.getEntrance();
+
+      this.getApiData;
+
+      Tips.loaded();
+
+      const { dataSuccess, data: metaData } = entranceData;
+
+      this.setSignInProcessDetection({
+        data: false,
+      });
+
+      if (dataSuccess) {
+        this.doAfterSignInSuccess(metaData);
+
+        if (isFunction(callback)) {
+          callback(metaData);
+        }
+      } else {
+        removeSession();
+
+        showInfoMessage({
+          message: '登录失败',
+        });
+
+        this.doWhenSignInFail();
+      }
+    });
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  doAfterSignInSuccess = (data) => {};
+
+  doWhenSignInFail = () => {
+    throw new Error('doWhenSignInFail need to be override');
   };
 }
 

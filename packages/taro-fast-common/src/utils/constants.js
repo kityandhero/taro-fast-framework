@@ -31,6 +31,18 @@ export const underlyingExtensionState = {
   dataLoading: true,
 };
 
+export const verifyTicketValidityResult = {
+  unknown: -1,
+  fail: 0,
+  success: 1,
+};
+
+export const verifySignInResult = {
+  unknown: -1,
+  fail: 0,
+  success: 1,
+};
+
 export const locationModeCollection = {
   unknown: 0,
   auto: 1,

@@ -61,8 +61,15 @@
           "scene": null
         },
         {
+          "id": 11,
+          "name": "news/entry",
+          "pathName": "news/pages/entry/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "id": 2,
-          "name": "news",
+          "name": "news/home",
           "pathName": "news/pages/home/index",
           "query": "",
           "scene": null

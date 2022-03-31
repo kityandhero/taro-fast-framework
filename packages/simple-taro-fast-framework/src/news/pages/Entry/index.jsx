@@ -7,12 +7,13 @@ definePageConfig({
   navigationBarTitleText: '预加载',
 });
 
-@connect(({ session, global }) => ({
+@connect(({ entrance, session, global }) => ({
+  entrance,
   session,
   global,
 }))
 export default class Index extends BasePageWrapper {
   renderFurther() {
-    return <></>;
+    return <>预加载</>;
   }
 }

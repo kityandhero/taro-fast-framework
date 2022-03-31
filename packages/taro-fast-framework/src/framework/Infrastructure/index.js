@@ -8,8 +8,14 @@ import {
   isWechat,
   getSystemInfo,
   pageScrollTo,
+  sleep,
+  recordLog,
 } from 'taro-fast-common/es/utils/tools';
-import { underlyingState } from 'taro-fast-common/es/utils/constants';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  underlyingState,
+  locateResult,
+} from 'taro-fast-common/es/utils/constants';
 import {
   ComponentBase,
   Notification,
@@ -24,9 +30,18 @@ import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+
+import {
+  getSession,
+  getSessionRefreshing,
+  setCurrentUrl,
+} from '../../utils/globalStorageAssist';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
+const defaultDispatchLocationResultData = {
+  locationGet: false,
+  locationAuth: locateResult.unknown,
+};
 
 function getRefreshingBoxEffect(effect) {
   if (inCollection(refreshingBoxEffectCollection, effect)) {
@@ -230,6 +245,11 @@ class Infrastructure extends ComponentBase {
   currentInstance = Taro.getCurrentInstance();
 
   /**
+   * 需要重新定位当再次呈现并且为自动定位模式时
+   */
+  needReLocationWhenRepeatedShow = false;
+
+  /**
    * 校验本地登录凭据
    */
   verifyTicket = false;
@@ -364,6 +384,8 @@ class Infrastructure extends ComponentBase {
   doDidMountTask = () => {
     this.receiveExternalParameter();
 
+    this.setCurrentInfo();
+
     this.checkPermission();
 
     this.doWorkBeforeAdjustDidMount();
@@ -385,6 +407,8 @@ class Infrastructure extends ComponentBase {
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
   doSimulationFadeSpin = (callback = null) => {
+    recordLog('exec doSimulationFadeSpin');
+
     const { spin } = this.state;
 
     const that = this;
@@ -405,9 +429,11 @@ class Infrastructure extends ComponentBase {
   };
 
   prepareLoadRemoteRequest = () => {
+    recordLog('exec prepareLoadRemoteRequest');
+
     const that = this;
 
-    that.checkSessionId(() => {
+    that.checkSession(() => {
       if (!that.verifyTicket) {
         if (that.verifyTicketValidity) {
           that.checkTicketValidity();
@@ -433,14 +459,66 @@ class Infrastructure extends ComponentBase {
   };
 
   /**
-   * 检测SessionId
+   * 检测Session
    * @param {*} callback
    */
-  checkSessionId = (callback) => {
-    if (isFunction(callback)) {
-      callback();
+  checkSession = (callback) => {
+    recordLog('exec checkSession');
+
+    const sessionRefreshing = getSessionRefreshing();
+
+    if (!sessionRefreshing) {
+      const session = getSession();
+
+      var that = this;
+
+      if ((session || '') === '') {
+        this.refreshSession({ callback });
+      } else {
+        Taro.checkSession({
+          // eslint-disable-next-line no-unused-vars
+          success: (res) => {
+            if (isFunction(callback)) {
+              callback();
+            }
+          },
+          // eslint-disable-next-line no-unused-vars
+          fail(res) {
+            that.refreshSession({ callback });
+          },
+        });
+      }
+    } else {
+      this.checkSessionWhenSessionRefreshing(() => {
+        this.checkSession({ callback });
+      });
     }
   };
+
+  checkSessionWhenSessionRefreshing({ callback, timeTotal = 0 }) {
+    if (timeTotal > 3000) {
+      if (isFunction(callback)) {
+        callback();
+      }
+
+      return;
+    }
+
+    sleep(100, () => {
+      const sessionRefreshingAfterSleep = getSessionRefreshing();
+
+      if (sessionRefreshingAfterSleep) {
+        this.checkSessionWhenSessionRefreshing({
+          callback,
+          timeTotal: timeTotal + 100,
+        });
+      } else {
+        if (isFunction(callback)) {
+          callback();
+        }
+      }
+    });
+  }
 
   /**
    * 检测登录凭据
@@ -450,6 +528,71 @@ class Infrastructure extends ComponentBase {
     if (isFunction(callback)) {
       callback();
     }
+  };
+
+  /**
+   * 调度并设置登录检测状态
+   * @param {*} data
+   */
+  // eslint-disable-next-line no-unused-vars
+  dispatchSetTicketValidityProcessDetection = (data) => {
+    throw new Error(
+      'dispatchSetTicketValidityProcessDetection need to be override, it need to be return a promise',
+    );
+  };
+
+  getTicketValidityProcessDetection = () => {
+    const { ticketValidityProcessDetection } = this.getGlobal();
+
+    return !!ticketValidityProcessDetection;
+  };
+
+  setTicketValidityProcessDetection = ({ data, callback }) => {
+    this.dispatchSetTicketValidityProcessDetection(!!data).then(() => {
+      if (isFunction(callback)) {
+        callback();
+      }
+    });
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchLocationResult = (data = defaultDispatchLocationResultData) => {
+    throw new Error(
+      'dispatchLocationResult need override, dispatchLocationResult must return a promise',
+    );
+  };
+
+  getLocationResult() {
+    const { locationResult } = this.getGlobal();
+
+    return locationResult;
+  }
+
+  setLocationResult({ data, callback = null }) {
+    this.dispatchLocationResult(data).then((d) => {
+      if (isFunction(callback)) {
+        callback(d);
+      }
+    });
+  }
+
+  reloadRemoteMetaData = () => {};
+
+  // eslint-disable-next-line no-unused-vars
+  reverseGeocoder = ({ location, success, fail }) => {};
+
+  setCurrentInfo = () => {
+    const { path, params } = this.currentInstance.router;
+
+    let p = '';
+
+    const keys = Object.keys(params || {});
+
+    if (keys.length > 0) {
+      p = keys.map((o) => `${o}=${params[o]}`).join('&');
+    }
+
+    setCurrentUrl(`${path}${p === '' ? '' : `?${p}`}`);
   };
 
   bannerNotify = ({

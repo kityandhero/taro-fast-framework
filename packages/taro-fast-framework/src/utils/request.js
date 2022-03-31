@@ -16,7 +16,7 @@ import {
   getTokenKeyName,
   getToken,
   getOpenId,
-  getSessionId,
+  getSession,
   getLocationMode,
 } from './globalStorageAssist';
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
@@ -63,14 +63,14 @@ export class Request {
     try {
       const token = getToken() || 'anonymous';
       const openId = getOpenId();
-      const sessionId = getSessionId();
+      const session = getSession();
       const locationMode = getLocationMode();
 
       const headerChange = {
         ...(header || {}),
         ...{
           openId,
-          sessionId,
+          session,
           locationMode,
         },
       };
