@@ -452,10 +452,6 @@ class Infrastructure extends ComponentBase {
     }
   };
 
-  getMapInstance() {
-    throw new Error('getMapInstance need override to get map instance');
-  }
-
   bannerNotify = ({
     message,
     type = 'info',

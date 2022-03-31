@@ -161,9 +161,9 @@ class ComponentBase extends Component {
   componentWillUnmount() {
     this.doWorkBeforeUnmount();
 
-    this.setState = () => {};
-
     this.doWorkAfterUnmount();
+
+    this.setState = () => {};
   }
 
   componentDidShow() {
