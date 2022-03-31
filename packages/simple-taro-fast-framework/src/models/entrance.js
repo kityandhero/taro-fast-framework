@@ -4,7 +4,11 @@ import {
   handlePageListDataAssist,
 } from 'taro-fast-framework/es/utils/requestAssistor';
 
-import { signInData, registerData } from '../services/entrance';
+import {
+  signInData,
+  registerData,
+  checkTicketValidityData,
+} from '../services/entrance';
 
 export default {
   namespace: 'entrance',
@@ -14,6 +18,7 @@ export default {
   effects: {
     *signIn({ payload }, { call, put }) {
       const response = yield call(signInData, payload);
+
       yield put({
         type: 'handleCommonData',
         payload: response,
@@ -21,6 +26,15 @@ export default {
     },
     *register({ payload }, { call, put }) {
       const response = yield call(registerData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *checkTicketValidity({ payload }, { call, put }) {
+      const response = yield call(checkTicketValidityData, payload);
+
       yield put({
         type: 'handleCommonData',
         payload: response,

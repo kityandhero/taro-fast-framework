@@ -515,7 +515,7 @@ class SupplementCore extends Common {
       return;
     }
 
-    this.dispatchCheckTicketValidity().then(() => {
+    this.dispatchCheckTicketValidity({}).then(() => {
       const {
         remoteCheck: { data },
       } = this.props;
@@ -571,6 +571,8 @@ class SupplementCore extends Common {
 
       Taro.login({ timeout: 1000 })
         .then((res) => {
+          recordLog('exec Taro.login');
+
           const { code } = res;
 
           if (code) {

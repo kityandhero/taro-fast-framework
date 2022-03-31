@@ -2,6 +2,10 @@ import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class BasePageWrapper extends PageWrapper {
+  verifyTicket = true;
+
+  verifyTicketValidity = true;
+
   getDispatch = () => {
     const { dispatch } = this.props;
 
@@ -13,6 +17,15 @@ export default class BasePageWrapper extends PageWrapper {
 
     return dispatch({
       type: 'session/refreshSession',
+      payload: data,
+    });
+  };
+
+  dispatchCheckTicketValidity = (data) => {
+    const dispatch = this.getDispatch();
+
+    return dispatch({
+      type: 'entrance/checkTicketValidity',
       payload: data,
     });
   };
