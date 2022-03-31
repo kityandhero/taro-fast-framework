@@ -166,17 +166,7 @@ class ComponentBase extends Component {
   }
 
   componentDidShow() {
-    if (!this.firstShowHasTriggered) {
-      this.doWorkWhenFirstShow();
-
-      this.firstShowHasTriggered = true;
-    }
-
-    this.doWorkWhenRepeatedShow();
-
-    this.doWorkWhenShow();
-
-    this.doWorkAfterShow();
+    this.doShowTask();
   }
 
   componentDidHide() {
@@ -211,6 +201,20 @@ class ComponentBase extends Component {
     this.doOtherRemoteRequest();
 
     this.doOtherWorkAfterDidMount();
+  };
+
+  doShowTask = () => {
+    if (!this.firstShowHasTriggered) {
+      this.doWorkWhenFirstShow();
+
+      this.firstShowHasTriggered = true;
+    }
+
+    this.doWorkWhenRepeatedShow();
+
+    this.doWorkWhenEveryShow();
+
+    this.doWorkAfterShow();
   };
 
   checkPermission = () => {};
@@ -260,7 +264,7 @@ class ComponentBase extends Component {
 
   doWorkWhenRepeatedShow = () => {};
 
-  doWorkWhenShow = () => {};
+  doWorkWhenEveryShow = () => {};
 
   doWorkAfterShow = () => {};
 
