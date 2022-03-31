@@ -29,7 +29,8 @@ class Core extends Base {
     const { global } = this.props;
 
     if ((global || null) == null) {
-      const text = 'global is null, function getGlobal need override. ';
+      const text =
+        'global is null, please set it to props or override function getGlobal. ';
 
       showRuntimeError({
         message: text,
@@ -39,6 +40,23 @@ class Core extends Base {
     }
 
     return global;
+  };
+
+  getDispatch = () => {
+    const { dispatch } = this.props;
+
+    if ((dispatch || null) == null) {
+      const text =
+        'dispatch is null, please set it to props or override function getDispatch. ';
+
+      showRuntimeError({
+        message: text,
+      });
+
+      throw new Error(text);
+    }
+
+    return dispatch;
   };
 }
 

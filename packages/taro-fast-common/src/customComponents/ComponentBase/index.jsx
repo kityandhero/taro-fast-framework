@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro';
 import { Component } from 'react';
 
 import {
@@ -208,9 +209,9 @@ class ComponentBase extends Component {
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
+    } else {
+      this.doWorkWhenRepeatedShow();
     }
-
-    this.doWorkWhenRepeatedShow();
 
     this.doWorkWhenEveryShow();
 
@@ -304,6 +305,14 @@ class ComponentBase extends Component {
 
       recordText(text);
     }
+  }
+
+  /**
+   * 判断小程序的API, 回调, 参数, 组件等是否在当前版本可用
+   * @param {*} schema
+   */
+  canIUse(schema) {
+    return Taro.canIUse(schema);
   }
 
   renderFurther() {
