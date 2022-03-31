@@ -502,6 +502,12 @@ class SupplementCore extends Common {
     );
   };
 
+  getCheckTicketValidityApiData = () => {
+    throw new Error(
+      'getCheckTicketValidityApiData need override, getCheckTicketValidityApiData must return a object',
+    );
+  };
+
   checkTicketValidityCore(callback) {
     const currentNextCheckLoginUnixTime = getNextCheckLoginUnixTime();
 
@@ -516,11 +522,9 @@ class SupplementCore extends Common {
     }
 
     this.dispatchCheckTicketValidity({}).then(() => {
-      const {
-        remoteCheck: { data },
-      } = this.props;
+      const remoteData = this.getCheckTicketValidityApiData();
 
-      const { dataSuccess, data: metaData } = data;
+      const { dataSuccess, data: metaData } = remoteData;
 
       if (dataSuccess) {
         const { needRefresh, nextCheckLoginUnixTime } = metaData;

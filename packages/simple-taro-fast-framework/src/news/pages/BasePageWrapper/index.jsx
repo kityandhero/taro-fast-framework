@@ -30,6 +30,14 @@ export default class BasePageWrapper extends PageWrapper {
     });
   };
 
+  getCheckTicketValidityApiData = () => {
+    const {
+      entrance: { data },
+    } = this.props;
+
+    return data || {};
+  };
+
   getSectionList = () => {
     const { global } = this.props;
 
