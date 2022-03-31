@@ -125,6 +125,46 @@ export const defaultSettingsLayoutCustom = {
 
     return loginPath || '';
   },
+  getDefaultLongitude: () => {
+    const appInit = getAppInitConfigData();
+
+    const { defaultLongitude } = {
+      ...{ defaultLongitude: '' },
+      ...(appInit || {}),
+    };
+
+    return defaultLongitude || '';
+  },
+  getDefaultLatitude: () => {
+    const appInit = getAppInitConfigData();
+
+    const { defaultLatitude } = {
+      ...{ defaultLatitude: '' },
+      ...(appInit || {}),
+    };
+
+    return defaultLatitude || '';
+  },
+  getUseLocation: () => {
+    const appInit = getAppInitConfigData();
+
+    const { useLocation } = {
+      ...{ useLocation: false },
+      ...(appInit || {}),
+    };
+
+    return useLocation || false;
+  },
+  getMapKey: () => {
+    const appInit = getAppInitConfigData();
+
+    const { mapKey } = {
+      ...{ mapKey: '' },
+      ...(appInit || {}),
+    };
+
+    return mapKey || '';
+  },
   getApiVersion: () => {
     const appInit = getAppInitConfigData();
 

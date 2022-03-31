@@ -229,6 +229,16 @@ class Infrastructure extends ComponentBase {
 
   currentInstance = Taro.getCurrentInstance();
 
+  /**
+   * 校验本地登录凭据
+   */
+  verifyTicket = false;
+
+  /**
+   * 本地登录凭据有效性校验, 框架根据请求频次间隔性校验, 无需人工干预
+   */
+  verifyTicketValidity = false;
+
   constructor(props) {
     super(props);
 
@@ -364,11 +374,7 @@ class Infrastructure extends ComponentBase {
 
     this.doWorkAfterDidMount();
 
-    if (this.loadRemoteRequestAfterMount) {
-      this.doSimulationFadeSpin(this.doLoadRemoteRequest);
-    } else {
-      this.doSimulationFadeSpin();
-    }
+    this.doSimulationFadeSpin(this.prepareLoadRemoteRequest);
 
     this.doOtherRemoteRequest();
 
@@ -397,6 +403,58 @@ class Infrastructure extends ComponentBase {
       }
     }
   };
+
+  prepareLoadRemoteRequest = () => {
+    const that = this;
+
+    that.checkSessionId(() => {
+      if (!that.verifyTicket) {
+        if (that.verifyTicketValidity) {
+          that.checkTicketValidity();
+        }
+
+        if (that.loadRemoteRequestAfterMount) {
+          that.doLoadRemoteRequest();
+        }
+      } else {
+        if (that.verifyTicketValidity) {
+          that.checkTicketValidity(() => {
+            if (that.loadRemoteRequestAfterMount) {
+              that.doLoadRemoteRequest();
+            }
+          });
+        } else {
+          if (that.loadRemoteRequestAfterMount) {
+            that.doLoadRemoteRequest();
+          }
+        }
+      }
+    });
+  };
+
+  /**
+   * 检测SessionId
+   * @param {*} callback
+   */
+  checkSessionId = (callback) => {
+    if (isFunction(callback)) {
+      callback();
+    }
+  };
+
+  /**
+   * 检测登录凭据
+   * @param {*} callback
+   */
+  checkTicketValidity = (callback) => {
+    if (isFunction(callback)) {
+      callback();
+    }
+  };
+
+  getMapInstance() {
+    throw new Error('getMapInstance need override to get map instance');
+  }
 
   bannerNotify = ({
     message,
