@@ -1,8 +1,4 @@
-import {
-  handleCommonDataAssist,
-  handleListDataAssist,
-  handlePageListDataAssist,
-} from 'taro-fast-framework/es/utils/requestAssistor';
+import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
 
 import { getOverviewData } from '../services/news';
 
@@ -22,14 +18,6 @@ export default {
   },
 
   reducers: {
-    handleCommonData(state, action) {
-      return handleCommonDataAssist(state, action);
-    },
-    handleListData(state, action) {
-      return handleListDataAssist(state, action);
-    },
-    handlePageListData(state, action) {
-      return handlePageListDataAssist(state, action);
-    },
+    ...reducerCommonCollection,
   },
 };

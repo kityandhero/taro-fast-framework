@@ -2,6 +2,11 @@ import { create } from 'dva-core';
 import createLoading from 'dva-loading';
 
 import { recordError } from 'taro-fast-common/es/utils/tools';
+import {
+  handleCommonDataAssist,
+  handleListDataAssist,
+  handlePageListDataAssist,
+} from 'taro-fast-framework/es/utils/requestAssistor';
 
 let app;
 let store;
@@ -30,6 +35,18 @@ function createApp(opt) {
 
   return app;
 }
+
+export const reducerCommonCollection = {
+  handleCommonData(state, action) {
+    return handleCommonDataAssist(state, action);
+  },
+  handleListData(state, action) {
+    return handleListDataAssist(state, action);
+  },
+  handlePageListData(state, action) {
+    return handlePageListDataAssist(state, action);
+  },
+};
 
 export default {
   createApp,
