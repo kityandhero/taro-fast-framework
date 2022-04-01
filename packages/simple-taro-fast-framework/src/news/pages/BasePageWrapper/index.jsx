@@ -6,7 +6,13 @@ export default class BasePageWrapper extends PageWrapper {
 
   verifyTicketValidity = true;
 
-  getDispatch = () => {
+  getGlobalWrapper = () => {
+    const { global } = this.props;
+
+    return global;
+  };
+
+  getDispatchWrapper = () => {
     const { dispatch } = this.props;
 
     return dispatch;

@@ -394,7 +394,7 @@ class SupplementCore extends Common {
   };
 
   getSignInResult() {
-    const { signInResult } = this.getGlobal();
+    const { signInResult } = this.getGlobalWrapper();
 
     return signInResult;
   }
@@ -696,7 +696,7 @@ class SupplementCore extends Common {
   };
 
   getSignInProcessDetection = () => {
-    const { signInProcessDetection } = this.getGlobal();
+    const { signInProcessDetection } = this.getGlobalWrapper();
 
     return !!signInProcessDetection;
   };

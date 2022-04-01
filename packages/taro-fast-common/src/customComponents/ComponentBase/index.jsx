@@ -6,6 +6,7 @@ import {
   showErrorMessage,
   recordText,
   getGuid,
+  recordLog,
 } from '../../utils/tools';
 import { isFunction, isObject } from '../../utils/typeCheck';
 
@@ -270,6 +271,50 @@ class ComponentBase extends Component {
   doWorkAfterShow = () => {};
 
   doWorkWhenComponentHide = () => {};
+
+  getGlobal = () => {
+    const text = 'please override getGlobal, and return a object';
+
+    recordLog(text);
+
+    throw new Error(text);
+  };
+
+  getGlobalWrapper = () => {
+    const global = this.getGlobal();
+
+    if ((global || null) == null) {
+      recordError('global not allow null, please check getGlobal');
+    }
+
+    return global;
+  };
+
+  getDispatch = () => {
+    const text = 'please override getDispatch, and return a function';
+
+    recordLog(text);
+
+    throw new Error(text);
+  };
+
+  getDispatchWrapper = () => {
+    const dispatch = this.getDispatch();
+
+    if (!isFunction(dispatch)) {
+      recordError('dispatch not a function, please check getDispatch');
+    }
+
+    return dispatch;
+  };
+
+  dispatchApi = ({ type, payload }) => {
+    const dispatch = this.getDispatchWrapper();
+
+    recordLog(`modal access: ${type}`);
+
+    return dispatch({ type, payload });
+  };
 
   /**
    * 当登录失败时调用

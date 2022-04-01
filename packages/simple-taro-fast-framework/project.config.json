@@ -42,7 +42,7 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.23.1",
+  "libVersion": "2.23.2",
   "condition": {
     "miniprogram": {
       "list": [

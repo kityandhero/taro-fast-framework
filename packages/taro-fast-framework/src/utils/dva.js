@@ -33,7 +33,7 @@ function createApp(opt) {
 
 export default {
   createApp,
-  getDispatch() {
+  getDispatchWrapper() {
     return app.dispatch;
   },
 };

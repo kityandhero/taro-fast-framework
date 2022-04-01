@@ -10,7 +10,6 @@ import {
   pageScrollTo,
   sleep,
   recordLog,
-  showRuntimeError,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -282,29 +281,29 @@ class Infrastructure extends ComponentBase {
     return null;
   }
 
-  receiveExternalParameter() {
+  receiveExternalParameter = () => {
     if ((this.externalParameter || null) == null) {
       this.externalParameter = this.currentInstance.router.params;
     }
-  }
+  };
 
-  setNavigationBarTitle(params) {
+  setNavigationBarTitle = (params) => {
     return Taro.setNavigationBarTitle(params);
-  }
+  };
 
-  getUpdateManager() {
+  getUpdateManager = () => {
     return Taro.getUpdateManager();
-  }
+  };
 
-  showModal(params) {
+  showModal = (params) => {
     return Taro.showModal(params);
-  }
+  };
 
-  getCurrentPages() {
+  getCurrentPages = () => {
     return Taro.getCurrentPages();
-  }
+  };
 
-  checkWorkDoing() {
+  checkWorkDoing = () => {
     const {
       dataLoading,
       reloading,
@@ -332,7 +331,7 @@ class Infrastructure extends ComponentBase {
     }
 
     return false;
-  }
+  };
 
   onPageScroll(e) {
     const { backTopVisible } = this.state;
@@ -427,48 +426,6 @@ class Infrastructure extends ComponentBase {
         callback();
       }
     }
-  };
-
-  getGlobal = () => {
-    const { global } = this.props;
-
-    if ((global || null) == null) {
-      const text =
-        'global is null, please set it to props or override function getGlobal. ';
-
-      showRuntimeError({
-        message: text,
-      });
-
-      throw new Error(text);
-    }
-
-    return global;
-  };
-
-  getDispatch = () => {
-    const { dispatch } = this.props;
-
-    if ((dispatch || null) == null) {
-      const text =
-        'dispatch is null, please set it to props or override function getDispatch. ';
-
-      showRuntimeError({
-        message: text,
-      });
-
-      throw new Error(text);
-    }
-
-    return dispatch;
-  };
-
-  dispatchApi = ({ type, payload }) => {
-    const dispatch = this.getDispatch();
-
-    recordLog(`modal access: ${type}`);
-
-    return dispatch({ type, payload });
   };
 
   prepareLoadRemoteRequest = () => {
@@ -585,7 +542,7 @@ class Infrastructure extends ComponentBase {
   };
 
   getTicketValidityProcessDetection = () => {
-    const { ticketValidityProcessDetection } = this.getGlobal();
+    const { ticketValidityProcessDetection } = this.getGlobalWrapper();
 
     return !!ticketValidityProcessDetection;
   };
@@ -606,7 +563,7 @@ class Infrastructure extends ComponentBase {
   };
 
   getLocationResult() {
-    const { locationResult } = this.getGlobal();
+    const { locationResult } = this.getGlobalWrapper();
 
     return locationResult;
   }
