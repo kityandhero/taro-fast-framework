@@ -20,16 +20,74 @@ export default class PageWrapper extends AuthorizationWrapper {
 
   // loadRemoteRequestAfterMount = false;
 
+  getGlobal = () => {
+    const { global } = this.props;
+
+    return global;
+  };
+
+  getDispatch = () => {
+    const { dispatch } = this.props;
+
+    return dispatch;
+  };
+
+  dispatchCheckTicketValidity = (data) => {
+    return this.dispatchApi({
+      type: 'entrance/checkTicketValidity',
+      payload: data,
+    });
+  };
+
+  dispatchRefreshSession = (data) => {
+    return this.dispatchApi({
+      type: 'session/refreshSession',
+      payload: data,
+    });
+  };
+
+  dispatchSetSignInProcessDetection = (data) => {
+    return this.dispatchApi({
+      type: 'entrance/setSignInProcessDetection',
+      payload: !!data,
+    });
+  };
+
+  getCheckTicketValidityApiData = () => {
+    const {
+      entrance: { data },
+    } = this.props;
+
+    return data || {};
+  };
+
+  getRefreshSessionApiData = () => {
+    const {
+      session: { data },
+    } = this.props;
+
+    return data || {};
+  };
+
+  getSignInApiData = () => {
+    const {
+      entrance: { data },
+    } = this.props;
+
+    return data || {};
+  };
+
+  getRemoteMetaData = () => {
+    const global = this.getGlobalWrapper();
+
+    return global;
+  };
+
   reloadRemoteMetaData = () => {
     this.dispatchApi({
       type: 'global/getMetaData',
       payload: { force: true },
     });
-  };
-
-  getRemoteMetaData = () => {
-    const { global } = this.props;
-    return global;
   };
 
   /**

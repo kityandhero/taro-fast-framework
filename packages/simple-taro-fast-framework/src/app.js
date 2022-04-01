@@ -36,6 +36,8 @@ class App extends AppBase {
   loadRemoteMetaData = () => {
     const { dispatch } = this.store;
 
+    console.log('loadRemoteMetaData');
+
     dispatch({
       type: 'global/getMetaData',
       payload: { force: true },
