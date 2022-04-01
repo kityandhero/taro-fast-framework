@@ -35,6 +35,7 @@ import {
   getSession,
   getSessionRefreshing,
   setCurrentUrl,
+  setSessionRefreshing,
 } from '../../utils/globalStorageAssist';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
@@ -517,6 +518,8 @@ export default class Infrastructure extends ComponentBase {
     recordLog('exec checkSessionWhenSessionRefreshing');
 
     if (timeTotal > 3000) {
+      setSessionRefreshing(false);
+
       if (isFunction(callback)) {
         callback();
       }

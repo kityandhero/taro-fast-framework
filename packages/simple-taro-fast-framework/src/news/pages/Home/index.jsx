@@ -45,11 +45,12 @@ definePageConfig({
   backgroundColor: '#3778F4',
 });
 
-@connect(({ news, session, entrance, global }) => ({
+@connect(({ news, session, entrance, global, schedulingControl }) => ({
   news,
   session,
   entrance,
   global,
+  schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
   enablePullDownRefresh = true;

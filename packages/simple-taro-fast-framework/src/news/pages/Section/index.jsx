@@ -42,9 +42,10 @@ definePageConfig({
   navigationBarTitleText: '新闻应用--栏目页',
 });
 
-@connect(({ article, global }) => ({
+@connect(({ article, global, schedulingControl }) => ({
   article,
   global,
+  schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
   scrollViewMode = true;

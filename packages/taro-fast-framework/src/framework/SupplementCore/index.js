@@ -814,7 +814,7 @@ class SupplementCore extends Common {
   };
 
   signInCore({ data, callback }) {
-    Tips.loading('处理中');
+    // Tips.loading('处理中');
 
     this.dispatchSingIn(data).then(() => {
       Tips.loaded();
