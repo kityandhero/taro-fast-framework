@@ -2,7 +2,6 @@
  * 底层通用数据定义
  */
 export const modelCollection = {
-  signInProcessDetection: false,
   whetherList: [
     {
       key: 'b24a21cf-a45c-4b6a-9993-f6953d7eb1ee',
@@ -21,24 +20,6 @@ export const modelCollection = {
       availability: 1,
     },
   ],
-};
-
-export const effectCollection = {
-  *setSignInProcessDetection({ payload }, { put }) {
-    yield put({
-      type: 'changeSignInProcessDetection',
-      payload,
-    });
-  },
-};
-
-export const reducerCollection = {
-  changeSignInProcessDetection(state, { payload }) {
-    return {
-      ...state,
-      signInProcessDetection: payload,
-    };
-  },
 };
 
 /**

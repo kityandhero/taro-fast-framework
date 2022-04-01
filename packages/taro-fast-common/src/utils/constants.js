@@ -43,6 +43,12 @@ export const verifySignInResult = {
   success: 1,
 };
 
+export const locateResult = {
+  unknown: 0,
+  yes: 1,
+  no: 2,
+};
+
 export const locationModeCollection = {
   unknown: 0,
   auto: 1,
@@ -61,12 +67,6 @@ export const requestMethod = {
 export const zeroString = '0';
 
 export const zeroInt = 0;
-
-export const locateResult = {
-  unknown: 0,
-  yes: 1,
-  no: 2,
-};
 
 /**
  * 鉴权失败码

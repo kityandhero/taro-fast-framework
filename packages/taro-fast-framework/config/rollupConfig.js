@@ -17,6 +17,9 @@ const inputFile = {
   ...{
     'framework/index': 'src/framework/index.jsx',
   },
+  ...{
+    'models/index': 'src/models/index.js',
+  },
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {

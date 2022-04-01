@@ -27,12 +27,6 @@ export default class PageWrapper extends AuthorizationWrapper {
     return global;
   };
 
-  getDispatch = () => {
-    const { dispatch } = this.props;
-
-    return dispatch;
-  };
-
   dispatchCheckTicketValidity = (data) => {
     return this.dispatchApi({
       type: 'entrance/checkTicketValidity',

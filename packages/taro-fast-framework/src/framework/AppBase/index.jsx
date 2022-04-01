@@ -8,8 +8,10 @@ import {
   setTaroGlobalData,
   recordLog,
 } from 'taro-fast-common/es/utils/tools';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import { getStore } from '../../utils/dvaAssist';
+import modelCollection from '../../models/index';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
@@ -25,7 +27,10 @@ class AppBase extends Component {
 
     this.setAppInitCustomLocal(config);
 
-    modelNameList = models.map((item) => {
+    modelNameList = [
+      ...(isArray(models) ? models : [models]),
+      ...modelCollection,
+    ].map((item) => {
       const { namespace: ns } = item;
 
       return ns;

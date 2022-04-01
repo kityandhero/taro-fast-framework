@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import Taro from '@tarojs/taro';
 
 import {
@@ -55,6 +56,9 @@ function getRefreshingBoxEffect(effect) {
   return 'pull';
 }
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 class Infrastructure extends ComponentBase {
   /**
    * 页面是否使用渐显效果组件包裹
@@ -403,6 +407,12 @@ class Infrastructure extends ComponentBase {
     this.doOtherWorkAfterDidMount();
   };
 
+  getDispatch = () => {
+    const { dispatch } = this.props;
+
+    return dispatch;
+  };
+
   /**
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
@@ -544,13 +554,16 @@ class Infrastructure extends ComponentBase {
    */
   // eslint-disable-next-line no-unused-vars
   dispatchSetTicketValidityProcessDetection = (data) => {
-    throw new Error(
-      'dispatchSetTicketValidityProcessDetection need to be override, it need to be return a promise',
-    );
+    return this.dispatchApi({
+      type: 'schedulingControl/setTicketValidityProcessDetection',
+      payload: !!data,
+    });
   };
 
   getTicketValidityProcessDetection = () => {
-    const { ticketValidityProcessDetection } = this.getGlobalWrapper();
+    const {
+      schedulingControl: { ticketValidityProcessDetection },
+    } = this.props;
 
     return !!ticketValidityProcessDetection;
   };
@@ -563,11 +576,73 @@ class Infrastructure extends ComponentBase {
     });
   };
 
-  // eslint-disable-next-line no-unused-vars
+  dispatchSetSignInProcessDetection = (data) => {
+    return this.dispatchApi({
+      type: 'schedulingControl/setSignInProcessDetection',
+      payload: !!data,
+    });
+  };
+
+  getSignInProcessDetection = () => {
+    recordLog('exec getSignInProcessDetection');
+
+    const {
+      schedulingControl: { signInProcessDetection },
+    } = this.props;
+
+    return !!signInProcessDetection;
+  };
+
+  setSignInProcessDetection = ({ data, callback }) => {
+    recordLog('exec setSignInProcessDetection');
+
+    const that = this;
+
+    that.dispatchSetSignInProcessDetection(!!data).then(() => {
+      recordLog('exec dispatchSetSignInProcessDetection then');
+
+      if (isFunction(callback)) {
+        callback();
+      }
+    });
+  };
+
+  dispatchSetSignInResult = (data) => {
+    return this.dispatchApi({
+      type: 'schedulingControl/setSignInResult',
+      payload: data,
+    });
+  };
+
+  getSignInResult = () => {
+    recordLog('exec getSignInResult');
+
+    const {
+      schedulingControl: { signInResult },
+    } = this.props;
+
+    return signInResult;
+  };
+
+  setSignInResult = ({ data, callback }) => {
+    recordLog('exec setSignInResult');
+
+    const that = this;
+
+    that.dispatchSetSignInResult(data).then(() => {
+      recordLog('exec dispatchSetSignInResult then');
+
+      if (isFunction(callback)) {
+        callback();
+      }
+    });
+  };
+
   dispatchLocationResult = (data = defaultDispatchLocationResultData) => {
-    throw new Error(
-      'dispatchLocationResult need override, dispatchLocationResult must return a promise',
-    );
+    return this.dispatchApi({
+      type: 'schedulingControl/setLocationResult',
+      payload: data,
+    });
   };
 
   getLocationResult() {

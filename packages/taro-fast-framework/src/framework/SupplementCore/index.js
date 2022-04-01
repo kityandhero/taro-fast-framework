@@ -393,26 +393,6 @@ class SupplementCore extends Common {
     );
   };
 
-  getSignInResult() {
-    const { signInResult } = this.getGlobalWrapper();
-
-    return signInResult;
-  }
-
-  setSignInResult({ data, callback = null }) {
-    let v = data;
-
-    if (v !== verifySignInResult.fail && v !== verifySignInResult.success) {
-      v = verifySignInResult.unknown;
-    }
-
-    this.dispatchSetSignInResult(v).then(() => {
-      if (isFunction(callback)) {
-        callback();
-      }
-    });
-  }
-
   checkTicketValidity = (callback) => {
     recordLog('exec checkTicketValidity');
 
@@ -701,42 +681,6 @@ class SupplementCore extends Common {
       }
     });
   }
-
-  /**
-   * 调度并设置登录检测状态
-   * @param {*} data
-   */
-  // eslint-disable-next-line no-unused-vars
-  dispatchSetSignInProcessDetection = (data) => {
-    return this.dispatchApi({
-      type: 'global/setSignInProcessDetection',
-      payload: !!data,
-    });
-  };
-
-  getSignInProcessDetection = () => {
-    recordLog('exec getSignInProcessDetection');
-
-    const global = this.getGlobalWrapper();
-
-    const { signInProcessDetection } = global;
-
-    return !!signInProcessDetection;
-  };
-
-  setSignInProcessDetection = ({ data, callback }) => {
-    recordLog('exec setSignInProcessDetection');
-
-    const that = this;
-
-    that.dispatchSetSignInProcessDetection(!!data).then(() => {
-      recordLog('exec dispatchSetSignInProcessDetection then');
-
-      if (isFunction(callback)) {
-        callback();
-      }
-    });
-  };
 
   signIn = ({ data, callback }) => {
     const that = this;
