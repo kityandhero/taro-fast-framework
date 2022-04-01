@@ -7,10 +7,11 @@ definePageConfig({
   navigationBarTitleText: '预加载',
 });
 
-@connect(({ entrance, session, global }) => ({
+@connect(({ entrance, session, global, schedulingControl }) => ({
   entrance,
   session,
   global,
+  schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
   renderFurther() {

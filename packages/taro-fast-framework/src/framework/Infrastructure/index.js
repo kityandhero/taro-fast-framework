@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import Taro from '@tarojs/taro';
 
 import {
@@ -56,10 +55,7 @@ function getRefreshingBoxEffect(effect) {
   return 'pull';
 }
 
-@connect(({ schedulingControl }) => ({
-  schedulingControl,
-}))
-class Infrastructure extends ComponentBase {
+export default class Infrastructure extends ComponentBase {
   /**
    * 页面是否使用渐显效果组件包裹
    */
@@ -409,6 +405,12 @@ class Infrastructure extends ComponentBase {
 
   getDispatch = () => {
     const { dispatch } = this.props;
+
+    if ((dispatch || null) == null) {
+      throw new Error(
+        'dispatch is null, please set dispatch in props or override getDispatch,if use dva, please connect a model ',
+      );
+    }
 
     return dispatch;
   };
@@ -957,5 +959,3 @@ class Infrastructure extends ComponentBase {
     );
   }
 }
-
-export default Infrastructure;
