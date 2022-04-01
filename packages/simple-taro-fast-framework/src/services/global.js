@@ -7,6 +7,13 @@ export async function getData(params) {
   });
 }
 
+export async function exchangeShareData(params) {
+  return executiveRequest({
+    api: `/share/exchangeShare`,
+    params,
+  });
+}
+
 /**
  * 占位函数
  *

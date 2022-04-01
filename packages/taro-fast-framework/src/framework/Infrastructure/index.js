@@ -483,10 +483,10 @@ export default class Infrastructure extends ComponentBase {
 
     const sessionRefreshing = getSessionRefreshing();
 
+    const that = this;
+
     if (!sessionRefreshing) {
       const session = getSession();
-
-      var that = this;
 
       if ((session || '') === '') {
         that.refreshSession({ callback });
@@ -524,7 +524,7 @@ export default class Infrastructure extends ComponentBase {
       return;
     }
 
-    var that = this;
+    const that = this;
 
     sleep(100, () => {
       recordLog(`checkSessionWhenSessionRefreshing sleep ${timeTotal}`);

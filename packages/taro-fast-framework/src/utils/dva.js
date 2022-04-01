@@ -6,7 +6,7 @@ import {
   handleCommonDataAssist,
   handleListDataAssist,
   handlePageListDataAssist,
-} from 'taro-fast-framework/es/utils/requestAssistor';
+} from './requestAssistor';
 
 let app;
 let store;

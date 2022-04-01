@@ -4,7 +4,7 @@ import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
 
 import { getMetaDataCache, setMetaDataCache } from '@/utils/storageAssist';
-import { getData } from '@/services/global';
+import { getData, exchangeShareData } from '@/services/global';
 
 export default {
   namespace: 'global',
@@ -67,6 +67,14 @@ export default {
       yield put({
         type: 'changeMetaData',
         payload: result,
+      });
+    },
+    *exchangeShare({ payload }, { call, put }) {
+      const response = yield call(exchangeShareData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
       });
     },
   },

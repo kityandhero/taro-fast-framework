@@ -24,7 +24,7 @@ import { checkWhetherAuthorizeFail } from './tools';
  * @param {*} param0
  * @returns
  */
-export function getApiDataCore({ props, modelName }) {
+export function getApiDataCore({ props, modelName, key = 'data' }) {
   if (isUndefined(props)) {
     throw new Error('props is undefined, please check params.');
   }
@@ -37,11 +37,11 @@ export function getApiDataCore({ props, modelName }) {
     );
   }
 
-  const { data } = m;
+  const data = m[key];
 
   if ((data || null) == null) {
     recordError(
-      `getApiDataCore error: key “data” in model ${modelName} is null or undefined`,
+      `getApiDataCore error: key “${key}” in model ${modelName} is null or undefined`,
     );
   }
 

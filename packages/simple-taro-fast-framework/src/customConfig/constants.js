@@ -12,3 +12,9 @@ export const cardStyle = {
   borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
   borderRight: 'var(--tfc-1) solid var(--tfc-border-color)',
 };
+
+export const shareTransfer = {
+  home: '0',
+  section: '10',
+  webPage: '100',
+};

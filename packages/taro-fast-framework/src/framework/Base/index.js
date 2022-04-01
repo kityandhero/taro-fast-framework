@@ -18,6 +18,7 @@ import {
 import { toString, toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import { checkWhetherAuthorizeFail } from '../../utils/tools';
+import { getApiDataCore } from '../../utils/actionAssist';
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 
 import Infrastructure from '../Infrastructure';
@@ -488,12 +489,18 @@ class Base extends Infrastructure {
     }
   };
 
-  remoteRequest = ({ type, payload }) => {
+  remoteRequest = ({ type, payload, modelName = '', key = 'data' }) => {
     return this.dispatchApi({
       type,
       payload,
     }).then(() => {
-      const metaOriginalData = this.getApiData(this.props);
+      const metaOriginalData = stringIsNullOrWhiteSpace(modelName)
+        ? this.getApiData(this.props)
+        : getApiDataCore({
+            props: this.props,
+            modelName: 'simulation',
+            key: key || '',
+          });
 
       const { dataSuccess, code: remoteCode } = metaOriginalData;
 

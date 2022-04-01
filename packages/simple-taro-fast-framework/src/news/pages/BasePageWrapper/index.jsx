@@ -1,4 +1,6 @@
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+
+import { pathCollection } from '../../../customConfig/config';
 import PageWrapper from '../../../customComponents/PageWrapper';
 
 export default class BasePageWrapper extends PageWrapper {
@@ -18,4 +20,15 @@ export default class BasePageWrapper extends PageWrapper {
 
     return isArray(sectionList) ? sectionList : [];
   };
+
+  goToHomeTab(callback = null) {
+    this.switchTab({
+      url: `/${pathCollection.news.home.path}`,
+      success: () => {
+        if (isFunction(callback)) {
+          callback();
+        }
+      },
+    });
+  }
 }
