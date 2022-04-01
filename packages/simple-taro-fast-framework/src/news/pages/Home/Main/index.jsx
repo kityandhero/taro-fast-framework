@@ -17,10 +17,10 @@ import {
   More,
 } from 'taro-fast-component/es/customComponents';
 
-import { pathCollection } from '../../../customConfig/config';
-import BasePageWrapper from '../BasePageWrapper';
+import { pathCollection } from '../../../../customConfig/config';
+import BasePageWrapper from '../../BasePageWrapper';
 
-import { classPrefix, buildItem } from './tools';
+import { classPrefix, buildItem } from '../Assist/tools';
 
 import './index.less';
 
