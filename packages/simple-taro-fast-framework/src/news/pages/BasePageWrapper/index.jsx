@@ -28,7 +28,7 @@ export default class BasePageWrapper extends PageWrapper {
 
   dispatchSetSignInProcessDetection = (data) => {
     return this.dispatchApi({
-      type: 'global/setCheckSignInProcessing',
+      type: 'entrance/setSignInProcessDetection',
       payload: !!data,
     });
   };

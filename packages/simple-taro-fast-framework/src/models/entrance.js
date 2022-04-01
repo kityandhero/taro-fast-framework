@@ -40,9 +40,21 @@ export default {
         payload: response,
       });
     },
+    *setSignInProcessDetection({ payload }, { put }) {
+      yield put({
+        type: 'setSignInProcessDetection',
+        payload,
+      });
+    },
   },
 
   reducers: {
+    setSignInProcessDetection(state, { payload }) {
+      return {
+        ...state,
+        signInProcessDetection: payload,
+      };
+    },
     handleCommonData(state, action) {
       return handleCommonDataAssist(state, action);
     },
