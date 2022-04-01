@@ -128,7 +128,11 @@ export default {
     {
       root: 'news',
       name: '新闻应用',
-      pages: ['pages/entry/index', 'pages/home/index', 'pages/section/index'],
+      pages: [
+        'pages/entry/main/index',
+        'pages/home/main/index',
+        'pages/section/main/index',
+      ],
     },
   ],
 };

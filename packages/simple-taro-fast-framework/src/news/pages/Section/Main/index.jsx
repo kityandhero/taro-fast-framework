@@ -15,7 +15,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
-import BasePageWrapper from '../BasePageWrapper';
+import BasePageWrapper from '../../BasePageWrapper';
 
 import './index.less';
 

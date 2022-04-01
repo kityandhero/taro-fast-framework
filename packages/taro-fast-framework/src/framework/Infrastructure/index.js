@@ -251,12 +251,17 @@ export default class Infrastructure extends ComponentBase {
   needReLocationWhenRepeatedShow = false;
 
   /**
+   * 校验Session, 开启登录校验等功能前必须开启
+   */
+  verifySession = false;
+
+  /**
    * 校验本地登录凭据
    */
   verifyTicket = false;
 
   /**
-   * 本地登录凭据有效性校验, 框架根据请求频次间隔性校验, 无需人工干预
+   * 本地登录凭据有效性校验[凭据存在有效期的情况下], 框架根据请求频次间隔性校验, 无需人工干预
    */
   verifyTicketValidity = false;
 
@@ -480,6 +485,12 @@ export default class Infrastructure extends ComponentBase {
    * @param {*} callback
    */
   checkSession = (callback) => {
+    if (!this.verifySession) {
+      callback();
+
+      return;
+    }
+
     recordLog('exec checkSession');
 
     const sessionRefreshing = getSessionRefreshing();
