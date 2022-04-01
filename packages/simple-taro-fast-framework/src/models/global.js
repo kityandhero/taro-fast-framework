@@ -5,7 +5,11 @@ import {
   handleListDataAssist,
   handlePageListDataAssist,
 } from 'taro-fast-framework/es/utils/requestAssistor';
-import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
+import {
+  modelCollection,
+  effectCollection,
+  reducerCollection,
+} from 'taro-fast-framework/es/utils/globalModel';
 
 import { getMetaDataCache, setMetaDataCache } from '@/utils/storageAssist';
 import { getData } from '@/services/global';
@@ -73,6 +77,7 @@ export default {
         payload: result,
       });
     },
+    ...effectCollection,
   },
 
   reducers: {
@@ -91,5 +96,6 @@ export default {
         ...payload,
       };
     },
+    ...reducerCollection,
   },
 };

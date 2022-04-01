@@ -40,6 +40,7 @@
     "start:component-skipCompression": "npm run build:component-skipCompression && npm run start",
     "start:component-extra-skipCompression": "npm run build:component-extra-skipCompression && npm run start",
     "start:component-prism-skipCompression": "npm run build:component-prism-skipCompression && npm run start",
+    "start:framework-skipCompression": "npm run build:framework-skipCompression && npm run start",
     "start:weapp:simple": "cd packages/simple-taro-fast-framework && npm run start",
     "start:weapp:build": "npm run build:common-skipCompression && npm run build:component-skipCompression && npm run build:component-extra-skipCompression && npm run build:component-prism-skipCompression && npm run build:framework-skipCompression && npm run start:weapp:simple",
     "start:h5:simple": "cd packages/simple-taro-fast-framework && npm run start:h5",

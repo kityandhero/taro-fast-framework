@@ -9,7 +9,6 @@ import {
   recordLog,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   locateResult,
   locationModeCollection,
@@ -529,8 +528,6 @@ class SupplementCore extends Common {
 
     if (currentUnixTime < currentNextCheckLoginUnixTime) {
       if (isFunction(callback)) {
-        recordLog(callback);
-
         callback();
       }
 
@@ -711,17 +708,16 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   dispatchSetSignInProcessDetection = (data) => {
-    throw new Error(
-      'dispatchSignInProcessDetection need to be override, it need to be return a promise',
-    );
+    return this.dispatchApi({
+      type: 'global/setSignInProcessDetection',
+      payload: !!data,
+    });
   };
 
   getSignInProcessDetection = () => {
     recordLog('exec getSignInProcessDetection');
 
     const global = this.getGlobalWrapper();
-
-    recordObject(global);
 
     const { signInProcessDetection } = global;
 
@@ -730,7 +726,6 @@ class SupplementCore extends Common {
 
   setSignInProcessDetection = ({ data, callback }) => {
     recordLog('exec setSignInProcessDetection');
-    recordLog({ data, callback: toString(callback) });
 
     const that = this;
 

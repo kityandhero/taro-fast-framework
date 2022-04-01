@@ -47,10 +47,10 @@ export default class PageWrapper extends AuthorizationWrapper {
     });
   };
 
-  dispatchSetSignInProcessDetection = (data) => {
+  dispatchSingIn = (data) => {
     return this.dispatchApi({
-      type: 'entrance/setSignInProcessDetection',
-      payload: !!data,
+      type: 'entrance/signIn',
+      payload: data,
     });
   };
 
