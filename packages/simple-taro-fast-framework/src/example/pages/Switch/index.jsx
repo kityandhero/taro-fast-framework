@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { Switch, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -81,11 +82,7 @@ export default class Index extends ContentPageBase {
   }
 
   getApiData = (props) => {
-    const {
-      simulation: { data },
-    } = props;
-
-    return data;
+    return getApiDataCore({ props, modelName: 'simulation' });
   };
 
   establishControlList = () => {

@@ -57,7 +57,7 @@ export default class PageWrapper extends AuthorizationWrapper {
     const {
       entrance: { data },
     } = this.props;
-
+    console.log(data);
     return data || {};
   };
 

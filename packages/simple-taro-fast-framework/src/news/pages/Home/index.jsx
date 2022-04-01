@@ -4,6 +4,7 @@ import { View } from '@tarojs/components';
 
 import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Space,
   ImageBox,
@@ -68,11 +69,7 @@ export default class Index extends BasePageWrapper {
   }
 
   getApiData = (props) => {
-    const {
-      news: { data },
-    } = props;
-
-    return data;
+    return getApiDataCore({ props, modelName: 'simulation' });
   };
 
   afterLoadSuccess = ({

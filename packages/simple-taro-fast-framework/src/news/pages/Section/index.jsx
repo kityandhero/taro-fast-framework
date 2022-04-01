@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { formatDatetime, transformSize } from 'taro-fast-common/es/utils/tools';
+import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import {
   Space,
@@ -78,11 +79,7 @@ export default class Index extends BasePageWrapper {
   }
 
   getApiData = (props) => {
-    const {
-      article: { data },
-    } = props;
-
-    return data;
+    return getApiDataCore({ props, modelName: 'article' });
   };
 
   doWorkBeforeAdjustDidMount = () => {
