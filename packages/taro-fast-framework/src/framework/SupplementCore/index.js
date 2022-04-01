@@ -61,7 +61,9 @@ class SupplementCore extends Common {
 
       that.checkSession(() => {
         if (that.verifyTicketValidity) {
-          that.checkTicketValidity();
+          that.checkTicketValidity(() => {
+            that.doWorkWhenCheckTicketValidityOnRepeatedShow;
+          });
         }
       });
 
@@ -450,6 +452,8 @@ class SupplementCore extends Common {
       }
     }
   };
+
+  doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
   checkTicketValidityAfterLocation(callback) {
     const ticketValidityProcessDetection =

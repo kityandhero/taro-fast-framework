@@ -448,7 +448,9 @@ export default class Infrastructure extends ComponentBase {
     that.checkSession(() => {
       if (!that.verifyTicket) {
         if (that.verifyTicketValidity) {
-          that.checkTicketValidity();
+          that.checkTicketValidity(() => {
+            that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+          });
         }
 
         if (that.loadRemoteRequestAfterMount) {
@@ -460,6 +462,8 @@ export default class Infrastructure extends ComponentBase {
             if (that.loadRemoteRequestAfterMount) {
               that.doLoadRemoteRequest();
             }
+
+            that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
           });
         } else {
           if (that.loadRemoteRequestAfterMount) {
@@ -549,6 +553,8 @@ export default class Infrastructure extends ComponentBase {
       callback();
     }
   };
+
+  doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest = () => {};
 
   /**
    * 调度并设置登录检测状态

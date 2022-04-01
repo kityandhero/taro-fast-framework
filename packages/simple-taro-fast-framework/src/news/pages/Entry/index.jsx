@@ -14,6 +14,16 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
+  loadRemoteRequestAfterMount = false;
+
+  doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest = () => {
+    this.handleFromMerchant();
+  };
+
+  doWorkWhenCheckTicketValidityOnRepeatedShow = () => {
+    this.handleFromMerchant();
+  };
+
   renderFurther() {
     return <>预加载</>;
   }
