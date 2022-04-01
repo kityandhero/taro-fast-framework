@@ -17,12 +17,12 @@ import {
   More,
 } from 'taro-fast-component/es/customComponents';
 
+import { pathCollection } from '../../../customConfig/config';
 import BasePageWrapper from '../BasePageWrapper';
 
 import { classPrefix, buildItem } from './tools';
 
 import './index.less';
-import { pathCollection } from '../../../customConfig/config';
 
 const boxStyle = {
   padding: 'var(--tfc-20) 0',
