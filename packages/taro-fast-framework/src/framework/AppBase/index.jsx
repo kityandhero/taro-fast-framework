@@ -6,11 +6,14 @@ import {
   recordObject,
   getDefaultTaroGlobalData,
   setTaroGlobalData,
+  recordLog,
 } from 'taro-fast-common/es/utils/tools';
 
 import { getStore } from '../../utils/dvaAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
+
+let modelNameList = [];
 
 class AppBase extends Component {
   store = null;
@@ -21,6 +24,12 @@ class AppBase extends Component {
     super(props);
 
     this.setAppInitCustomLocal(config);
+
+    modelNameList = models.map((item) => {
+      const { namespace: ns } = item;
+
+      return ns;
+    });
 
     this.initDva(models);
   }
@@ -51,7 +60,7 @@ class AppBase extends Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    recordObject({ store: this.store });
+    recordLog(`modelNameList: ${modelNameList.join()}`);
 
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }
