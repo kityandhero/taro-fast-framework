@@ -9,6 +9,7 @@ import {
   recordLog,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   locateResult,
   locationModeCollection,
@@ -419,43 +420,54 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
     const signInResult = this.getSignInResult();
 
+    const that = this;
+
     if (signInResult === verifySignInResult.unknown) {
       if (
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        this.obtainLocation({
+        that.obtainLocation({
           successCallback: () => {
-            this.signIn({}, callback);
+            that.signIn({
+              data: {},
+              callback,
+            });
           },
           focus: false,
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            this.signIn({}, callback);
+            that.signIn({
+              data: {},
+              callback,
+            });
           },
         });
       } else {
-        this.signIn({}, callback);
+        that.signIn({
+          data: {},
+          callback,
+        });
       }
     } else {
       if (
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        this.obtainLocation({
+        that.obtainLocation({
           successCallback: () => {
-            this.checkTicketValidityAfterLocation(callback);
+            that.checkTicketValidityAfterLocation(callback);
           },
           focus: false,
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            this.checkTicketValidityAfterLocation(callback);
+            that.checkTicketValidityAfterLocation(callback);
           },
         });
       } else {
-        this.checkTicketValidityAfterLocation(callback);
+        that.checkTicketValidityAfterLocation(callback);
       }
     }
   };
@@ -509,20 +521,26 @@ class SupplementCore extends Common {
   };
 
   checkTicketValidityCore(callback) {
+    recordLog('exec checkTicketValidityCore');
+
     const currentNextCheckLoginUnixTime = getNextCheckLoginUnixTime();
 
     const currentUnixTime = parseInt(new Date().getTime() / 1000, 10);
 
     if (currentUnixTime < currentNextCheckLoginUnixTime) {
       if (isFunction(callback)) {
+        recordLog(callback);
+
         callback();
       }
 
       return;
     }
 
-    this.dispatchCheckTicketValidity({}).then(() => {
-      const remoteData = this.getCheckTicketValidityApiData();
+    const that = this;
+
+    that.dispatchCheckTicketValidity({}).then(() => {
+      const remoteData = that.getCheckTicketValidityApiData();
 
       const { dataSuccess, data: metaData } = remoteData;
 
@@ -532,12 +550,15 @@ class SupplementCore extends Common {
         setNextCheckLoginUnixTime(nextCheckLoginUnixTime);
 
         if (needRefresh) {
-          this.signIn({}, callback);
+          that.signIn({
+            data: {},
+            callback,
+          });
         } else {
-          const signInResult = this.getSignInResult();
+          const signInResult = that.getSignInResult();
 
-          if (signInResult === verifySignInResult.fail && this.verifyTicket) {
-            this.doWhenCheckTicketValidityVerifySignInFail();
+          if (signInResult === verifySignInResult.fail && that.verifyTicket) {
+            that.doWhenCheckTicketValidityVerifySignInFail();
           }
 
           if (signInResult === verifySignInResult.success) {
@@ -546,7 +567,7 @@ class SupplementCore extends Common {
             }
           }
 
-          this.setTicketValidityProcessDetection({
+          that.setTicketValidityProcessDetection({
             data: false,
           });
         }
@@ -696,26 +717,39 @@ class SupplementCore extends Common {
   };
 
   getSignInProcessDetection = () => {
-    const { signInProcessDetection } = this.getGlobalWrapper();
+    recordLog('exec getSignInProcessDetection');
+
+    const global = this.getGlobalWrapper();
+
+    recordObject(global);
+
+    const { signInProcessDetection } = global;
 
     return !!signInProcessDetection;
   };
 
   setSignInProcessDetection = ({ data, callback }) => {
-    this.dispatchSetSignInProcessDetection(!!data).then(() => {
+    recordLog('exec setSignInProcessDetection');
+    recordLog({ data, callback: toString(callback) });
+
+    const that = this;
+
+    that.dispatchSetSignInProcessDetection(!!data).then(() => {
+      recordLog('exec dispatchSetSignInProcessDetection then');
+
       if (isFunction(callback)) {
         callback();
       }
     });
   };
 
-  signIn = (params, callback) => {
+  signIn = ({ data, callback }) => {
     const that = this;
 
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      this.obtainLocation({
+      that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
         successCallback: ({ location, map }) => {
           const { latitude, longitude } = location || {
@@ -723,8 +757,8 @@ class SupplementCore extends Common {
             longitude: 113.6313915479,
           };
 
-          params.latitude = latitude || '';
-          params.longitude = longitude || '';
+          data.latitude = latitude || '';
+          data.longitude = longitude || '';
 
           const signInProcessDetection = that.getSignInProcessDetection();
 
@@ -732,7 +766,10 @@ class SupplementCore extends Common {
             that.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.signInCore(params, callback);
+                that.signInCore({
+                  data,
+                  callback,
+                });
               },
             });
           }
@@ -747,7 +784,10 @@ class SupplementCore extends Common {
             that.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.signInCore(params, callback);
+                that.signInCore({
+                  data,
+                  callback,
+                });
               },
             });
           }
@@ -756,12 +796,15 @@ class SupplementCore extends Common {
     } else {
       if (useLocation || false) {
         that.signInWhenCheckProcessDetection({
-          params,
+          data,
           callback: (o, p) => {
             o.setSignInProcessDetection({
               data: true,
               callback: () => {
-                o.signInCore(p, callback);
+                o.signInCore({
+                  data: p,
+                  callback,
+                });
               },
             });
           },
@@ -774,7 +817,7 @@ class SupplementCore extends Common {
           that.setSignInProcessDetection({
             data: true,
             callback: () => {
-              that.signInCore(params, callback);
+              that.signInCore({ data, callback });
             },
           });
         }
@@ -782,29 +825,33 @@ class SupplementCore extends Common {
     }
   };
 
-  signInWhenCheckProcessDetection({ params, callback, timeTotal = 0 }) {
+  signInWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
+    recordLog('exec signInWhenCheckProcessDetection');
+
     const that = this;
 
     if (timeTotal > 3000) {
       if (isFunction(callback)) {
-        callback(that, params);
+        callback(that, data);
       }
 
       return;
     }
 
     sleep(100, () => {
+      recordLog(`signInWhenCheckProcessDetection sleep ${timeTotal}`);
+
       const signInProcessDetection = that.getSignInProcessDetection();
 
       if (signInProcessDetection) {
-        this.signInWhenCheckProcessDetection({
-          params,
+        that.signInWhenCheckProcessDetection({
+          data,
           callback,
           timeTotal: timeTotal + 100,
         });
       } else {
         if (isFunction(callback)) {
-          callback(that, params);
+          callback(that, data);
         }
       }
     });

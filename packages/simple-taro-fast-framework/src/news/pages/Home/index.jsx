@@ -45,8 +45,10 @@ definePageConfig({
   backgroundColor: '#3778F4',
 });
 
-@connect(({ news, global }) => ({
+@connect(({ news, session, entrance, global }) => ({
   news,
+  session,
+  entrance,
   global,
 }))
 export default class Index extends BasePageWrapper {
@@ -69,7 +71,7 @@ export default class Index extends BasePageWrapper {
   }
 
   getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'simulation' });
+    return getApiDataCore({ props, modelName: 'news' });
   };
 
   afterLoadSuccess = ({

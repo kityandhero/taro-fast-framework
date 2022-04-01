@@ -1,5 +1,6 @@
 import { recordObject } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
+import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 export default class PageWrapper extends AuthorizationWrapper {
   loadRemoteRequestDelay = 100;
@@ -54,27 +55,15 @@ export default class PageWrapper extends AuthorizationWrapper {
   };
 
   getCheckTicketValidityApiData = () => {
-    const {
-      entrance: { data },
-    } = this.props;
-    console.log(data);
-    return data || {};
+    return getApiDataCore({ props: this.props, modelName: 'entrance' });
   };
 
   getRefreshSessionApiData = () => {
-    const {
-      session: { data },
-    } = this.props;
-
-    return data || {};
+    return getApiDataCore({ props: this.props, modelName: 'session' });
   };
 
   getSignInApiData = () => {
-    const {
-      entrance: { data },
-    } = this.props;
-
-    return data || {};
+    return getApiDataCore({ props: this.props, modelName: 'entrance' });
   };
 
   getRemoteMetaData = () => {

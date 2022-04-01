@@ -473,7 +473,7 @@ class Infrastructure extends ComponentBase {
       var that = this;
 
       if ((session || '') === '') {
-        this.refreshSession({ callback });
+        that.refreshSession({ callback });
       } else {
         Taro.checkSession({
           // eslint-disable-next-line no-unused-vars
@@ -489,13 +489,17 @@ class Infrastructure extends ComponentBase {
         });
       }
     } else {
-      this.checkSessionWhenSessionRefreshing(() => {
-        this.checkSession({ callback });
+      that.checkSessionWhenSessionRefreshing({
+        callback: () => {
+          that.checkSession({ callback });
+        },
       });
     }
   };
 
   checkSessionWhenSessionRefreshing({ callback, timeTotal = 0 }) {
+    recordLog('exec checkSessionWhenSessionRefreshing');
+
     if (timeTotal > 3000) {
       if (isFunction(callback)) {
         callback();
@@ -504,11 +508,15 @@ class Infrastructure extends ComponentBase {
       return;
     }
 
+    var that = this;
+
     sleep(100, () => {
+      recordLog(`checkSessionWhenSessionRefreshing sleep ${timeTotal}`);
+
       const sessionRefreshingAfterSleep = getSessionRefreshing();
 
       if (sessionRefreshingAfterSleep) {
-        this.checkSessionWhenSessionRefreshing({
+        that.checkSessionWhenSessionRefreshing({
           callback,
           timeTotal: timeTotal + 100,
         });
