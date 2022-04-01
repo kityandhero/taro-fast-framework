@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { isBrowser, navigateTo } from 'taro-fast-common/es/utils/tools';
@@ -101,7 +102,7 @@ const listData = [
     content: '查看资讯应用示例',
     icon: iconHOC,
     webPage: false,
-    path: pathCollection.news.home.path,
+    path: pathCollection.news.entry.path,
   },
   {
     id: 'WebPage',
@@ -131,6 +132,12 @@ definePageConfig({
   navigationBarTitleText: '首页',
 });
 
+@connect(({ entrance, session, global, schedulingControl }) => ({
+  entrance,
+  session,
+  global,
+  schedulingControl,
+}))
 export default class Index extends PageWrapper {
   onShareAppMessage() {
     const o = {

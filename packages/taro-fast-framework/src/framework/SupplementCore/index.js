@@ -614,7 +614,9 @@ class SupplementCore extends Common {
 
                 setSessionRefreshing(false);
               })
-              .catch(() => {
+              .catch((error) => {
+                recordObject({ error });
+
                 Tips.info('网络请求失败了，请检查下是否联网');
 
                 removeSession();

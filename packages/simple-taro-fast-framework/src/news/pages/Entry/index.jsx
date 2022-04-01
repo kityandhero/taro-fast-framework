@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import {
   recordObject,
   redirectTo,
@@ -172,6 +173,6 @@ export default class Index extends BasePageWrapper {
   }
 
   renderFurther() {
-    return <>预加载</>;
+    return <></>;
   }
 }

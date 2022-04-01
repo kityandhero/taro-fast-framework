@@ -42,8 +42,10 @@ definePageConfig({
   navigationBarTitleText: '新闻应用--栏目页',
 });
 
-@connect(({ article, global, schedulingControl }) => ({
+@connect(({ article, entrance, session, global, schedulingControl }) => ({
   article,
+  entrance,
+  session,
   global,
   schedulingControl,
 }))
