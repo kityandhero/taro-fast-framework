@@ -1,7 +1,4 @@
-import {
-  getDerivedStateFromPropsForUrlParamsCore,
-  showRuntimeError,
-} from 'taro-fast-common/es/utils/tools';
+import { getDerivedStateFromPropsForUrlParamsCore } from 'taro-fast-common/es/utils/tools';
 import { underlyingExtensionState } from 'taro-fast-common/es/utils/constants';
 
 import Base from '../Base';
@@ -24,57 +21,6 @@ class Core extends Base {
 
   // eslint-disable-next-line no-unused-vars
   checkNeedUpdate = (preProps, preState, snapshot) => false;
-
-  getGlobal = () => {
-    const { global } = this.props;
-
-    if ((global || null) == null) {
-      const text =
-        'global is null, please set it to props or override function getGlobal. ';
-
-      showRuntimeError({
-        message: text,
-      });
-
-      throw new Error(text);
-    }
-
-    return global;
-  };
-
-  getEntrance = () => {
-    const { entrance } = this.props;
-
-    if ((entrance || null) == null) {
-      const text =
-        'entrance is null, please set it to props or override function getEntrance. ';
-
-      showRuntimeError({
-        message: text,
-      });
-
-      throw new Error(text);
-    }
-
-    return entrance;
-  };
-
-  getDispatch = () => {
-    const { dispatch } = this.props;
-
-    if ((dispatch || null) == null) {
-      const text =
-        'dispatch is null, please set it to props or override function getDispatch. ';
-
-      showRuntimeError({
-        message: text,
-      });
-
-      throw new Error(text);
-    }
-
-    return dispatch;
-  };
 }
 
 export default Core;

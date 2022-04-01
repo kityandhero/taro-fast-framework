@@ -12,25 +12,44 @@ export default class BasePageWrapper extends PageWrapper {
     return dispatch;
   };
 
-  dispatchRefreshSession = (data) => {
-    const dispatch = this.getDispatch();
-
-    return dispatch({
-      type: 'session/refreshSession',
-      payload: data,
-    });
-  };
-
   dispatchCheckTicketValidity = (data) => {
-    const dispatch = this.getDispatch();
-
-    return dispatch({
+    return this.dispatchApi({
       type: 'entrance/checkTicketValidity',
       payload: data,
     });
   };
 
+  dispatchRefreshSession = (data) => {
+    return this.dispatchApi({
+      type: 'session/refreshSession',
+      payload: data,
+    });
+  };
+
+  dispatchSetSignInProcessDetection = (data) => {
+    return this.dispatchApi({
+      type: 'global/setCheckSignInProcessing',
+      payload: !!data,
+    });
+  };
+
   getCheckTicketValidityApiData = () => {
+    const {
+      entrance: { data },
+    } = this.props;
+
+    return data || {};
+  };
+
+  getRefreshSessionApiData = () => {
+    const {
+      session: { data },
+    } = this.props;
+
+    return data || {};
+  };
+
+  getSignInApiData = () => {
     const {
       entrance: { data },
     } = this.props;

@@ -245,8 +245,6 @@ class Base extends Infrastructure {
     let loadApiPath = '';
 
     try {
-      const { dispatch } = this.props;
-
       const requestingDataPre = this.getRequestingData();
 
       const loadApiCustomPath = this.adjustLoadApiPath();
@@ -279,7 +277,7 @@ class Base extends Infrastructure {
 
         const that = this;
 
-        dispatch({
+        this.dispatchApi({
           type: loadApiPath,
           payload: requestData,
         })
@@ -491,9 +489,7 @@ class Base extends Infrastructure {
   };
 
   remoteRequest = ({ type, payload }) => {
-    const { dispatch } = this.props;
-
-    return dispatch({
+    return this.dispatchApi({
       type,
       payload,
     }).then(() => {

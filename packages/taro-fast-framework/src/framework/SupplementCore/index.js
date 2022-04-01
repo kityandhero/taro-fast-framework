@@ -563,6 +563,12 @@ class SupplementCore extends Common {
     );
   };
 
+  getRefreshSessionApiData = () => {
+    throw new Error(
+      'getRefreshSessionApiData need override, getRefreshSessionApiData must return a object',
+    );
+  };
+
   refreshSession = ({ callback }) => {
     recordLog('exec refreshSession');
 
@@ -585,11 +591,9 @@ class SupplementCore extends Common {
             that
               .dispatchRefreshSession({ code })
               .then(() => {
-                const {
-                  session: { data },
-                } = that.props;
+                const remoteData = this.getRefreshSessionApiData();
 
-                const { dataSuccess, data: metaData } = data;
+                const { dataSuccess, data: metaData } = remoteData;
 
                 if (dataSuccess) {
                   const { code: effectiveCodeRemote, session } = metaData;
@@ -813,17 +817,21 @@ class SupplementCore extends Common {
     );
   };
 
+  getSignInApiData = () => {
+    throw new Error(
+      'getSignInApiData need override, getSignInApiData must return a object',
+    );
+  };
+
   signInCore({ data, callback }) {
     Tips.loading('处理中');
 
     this.dispatchSingIn(data).then(() => {
-      const { data: entranceData } = this.getEntrance();
-
-      this.getApiData;
-
       Tips.loaded();
 
-      const { dataSuccess, data: metaData } = entranceData;
+      const remoteData = this.getSignInApiData();
+
+      const { dataSuccess, data: metaData } = remoteData;
 
       this.setSignInProcessDetection({
         data: false,

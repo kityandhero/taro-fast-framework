@@ -21,9 +21,7 @@ export default class PageWrapper extends AuthorizationWrapper {
   // loadRemoteRequestAfterMount = false;
 
   reloadRemoteMetaData = () => {
-    const { dispatch } = this.props;
-
-    dispatch({
+    this.dispatchApi({
       type: 'global/getMetaData',
       payload: { force: true },
     });
