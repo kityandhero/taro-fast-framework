@@ -10,6 +10,8 @@ export default class BasePageWrapper extends PageWrapper {
 
   verifyTicketValidity = true;
 
+  needReLocationWhenRepeatedShow = true;
+
   getSectionList = () => {
     const { global } = this.props;
 
