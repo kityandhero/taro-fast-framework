@@ -93,6 +93,16 @@ export const defaultSettingsLayoutCustom = {
 
     return emptyLogo || emptyLogoImage;
   },
+  getTokenAnonymous: () => {
+    const appInit = getAppInitConfigData();
+
+    const { tokenAnonymous } = {
+      ...{ tokenAnonymous: 'anonymous' },
+      ...(appInit || {}),
+    };
+
+    return tokenAnonymous || 'anonymous';
+  },
   getApiSuccessCode: () => {
     const appInit = getAppInitConfigData();
 

@@ -21,6 +21,8 @@ import {
 } from './globalStorageAssist';
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
+const tokenAnonymous = defaultSettingsLayoutCustom.getTokenAnonymous();
+
 export class Request {
   /**
    *
@@ -61,7 +63,7 @@ export class Request {
    */
   static Post(url, data, header = {}, option) {
     try {
-      const token = getToken() || 'anonymous';
+      const token = getToken() || tokenAnonymous;
       const openId = getOpenId();
       const sessionId = getSession();
       const locationMode = getLocationMode();

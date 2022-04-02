@@ -501,17 +501,23 @@ export default class Infrastructure extends ComponentBase {
       const session = getSession();
 
       if ((session || '') === '') {
+        recordLog('info session is empty');
+
         that.refreshSession({ callback });
       } else {
         Taro.checkSession({
           // eslint-disable-next-line no-unused-vars
           success: (res) => {
+            recordLog('info session is effective');
+
             if (isFunction(callback)) {
               callback();
             }
           },
           // eslint-disable-next-line no-unused-vars
           fail(res) {
+            recordLog('info session is expired');
+
             that.refreshSession({ callback });
           },
         });

@@ -121,6 +121,7 @@ export const appInitDefault = {
   useVirtualRequest: false,
   showUseVirtualRequestMessage: false,
   apiVersion: '',
+  tokenAnonymous: 'anonymous',
   imageUploadMaxSize: 2,
   audioUploadMaxSize: 4,
   videoUploadMaxSize: 4,

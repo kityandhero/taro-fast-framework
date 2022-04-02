@@ -195,7 +195,13 @@ export function getTokenObject() {
 export function getToken() {
   const key = storageKeyCollection.token;
 
-  return getStringFromLocalStorage(key);
+  const token = getStringFromLocalStorage(key);
+
+  if ((token || null) == null) {
+    setToken('');
+  }
+
+  return token;
 }
 
 /**

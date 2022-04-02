@@ -404,6 +404,8 @@ class SupplementCore extends Common {
     const that = this;
 
     if (signInResult === verifySignInResult.unknown) {
+      recordLog(`info sign status is ${verifySignInResult.unknown}`);
+
       if (
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
