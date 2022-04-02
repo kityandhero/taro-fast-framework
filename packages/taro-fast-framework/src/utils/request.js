@@ -63,14 +63,14 @@ export class Request {
     try {
       const token = getToken() || 'anonymous';
       const openId = getOpenId();
-      const session = getSession();
+      const sessionId = getSession();
       const locationMode = getLocationMode();
 
       const headerChange = {
         ...(header || {}),
         ...{
           openId,
-          session,
+          sessionId,
           locationMode,
         },
       };
