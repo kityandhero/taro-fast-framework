@@ -192,9 +192,23 @@ export function buildComponentPrismCode({
 
 export function buildPagePrismCode({
   config,
+  renderCodeList = [],
   ignorePropertyList = [],
   showDivider = true,
 }) {
+  let renderCode = '';
+  if (renderCodeList.length === 0) {
+    renderCode = '...';
+  } else {
+    renderCodeList.forEach((one, index) => {
+      renderCode =
+        renderCode +
+        `${index === 0 ? '' : '\t  '}{${one}}${
+          index === renderCodeList.length - 1 ? '' : '\r\n'
+        }`;
+    });
+  }
+
   let code = `import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
@@ -212,7 +226,11 @@ export default class Index extends AuthorizationWrapper {${buildProperties({
   })}
 
   renderFurther() {
-    return (<View>...</View>);
+    return (
+      <View>
+      ${renderCode}
+      </View>
+    );
   }
 }`;
 

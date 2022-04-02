@@ -17,17 +17,39 @@ const defaultProps = {
   header: '配置示例 点击复制',
   list: [],
   config: {},
+  renderCodeList: [],
+  usageList: [],
   description: null,
   ignorePropertyList: [],
 };
 
 class CodePageBox extends Component {
   render() {
-    const { header, description, list, config, ignorePropertyList } =
-      this.props;
+    const {
+      header,
+      description,
+      list,
+      config,
+      renderCodeList,
+      usageList,
+      ignorePropertyList,
+      children,
+    } = this.props;
 
     return (
       <Space direction="vertical" fillWidth>
+        <Card
+          header="样式展示"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          strip
+          stripLeft={2}
+          stripWidth={6}
+          stripColor="#3378f4"
+        >
+          {children}
+        </Card>
+
         <Card
           header="配置说明"
           style={style}
@@ -39,6 +61,25 @@ class CodePageBox extends Component {
         >
           <DataGrid
             list={list}
+            border
+            layout="row"
+            size="small"
+            emptyValue="暂无"
+            emptyStyle={{ color: '#ccc' }}
+          />
+        </Card>
+
+        <Card
+          header="使用说明"
+          style={style}
+          headerStyle={cardHeaderStyle}
+          strip
+          stripLeft={2}
+          stripWidth={6}
+          stripColor="#ccc"
+        >
+          <DataGrid
+            list={usageList}
             border
             layout="row"
             size="small"
@@ -62,6 +103,7 @@ class CodePageBox extends Component {
           }
         >
           {buildPagePrismCode({
+            renderCodeList: renderCodeList,
             config,
             ignorePropertyList,
             showDivider: false,

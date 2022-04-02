@@ -1,23 +1,7 @@
-import { transformSize } from 'taro-fast-common/es/utils/tools';
-import {
-  Card,
-  Space,
-  DataGrid,
-  Divider,
-} from 'taro-fast-component/es/customComponents';
+import { Space, Divider } from 'taro-fast-component/es/customComponents';
 
-import {
-  cardHeaderStyle,
-  cardStyle,
-} from '../../../../../customConfig/constants';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
-
-const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
-  ...cardStyle,
-};
+import CodePageBox from '../../../../../customComponents/CodePageBox';
 
 const paramList = [
   {
@@ -72,12 +56,6 @@ const paramList = [
 
 const descriptionList = [
   {
-    label: '调用方法',
-    value: 'this.buildEmptyPlaceholder({ description: "提示文字" })',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
     label: '支持自定义重载',
     value: '重载覆写函数 buildEmptyPlaceholder = () => { return null; }',
     ellipsis: false,
@@ -100,7 +78,14 @@ export default class Index extends ContentPageBase {
   renderContent = () => {
     return (
       <Space direction="vertical" fillWidth>
-        <Card header="样式展示" style={style} headerStyle={cardHeaderStyle}>
+        <CodePageBox
+          list={paramList}
+          usageList={descriptionList}
+          renderCodeList={[
+            'this.buildEmptyPlaceholder({})',
+            `this.buildEmptyPlaceholder({description: '还没有数据哦'})`,
+          ]}
+        >
           {this.buildEmptyPlaceholder({})}
 
           <Divider />
@@ -108,30 +93,7 @@ export default class Index extends ContentPageBase {
           {this.buildEmptyPlaceholder({
             description: '还没有数据哦',
           })}
-        </Card>
-
-        <Card header="使用说明" style={style} headerStyle={cardHeaderStyle}>
-          <DataGrid
-            list={descriptionList}
-            border
-            layout="row"
-            size="small"
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
-
-        <Card header="可用参数" style={style} headerStyle={cardHeaderStyle}>
-          <DataGrid
-            list={paramList}
-            border
-            size="small"
-            column={1}
-            emptyValue="暂无"
-            labelStyle={{ width: transformSize(240) }}
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        </CodePageBox>
       </Space>
     );
   };
