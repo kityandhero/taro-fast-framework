@@ -45,7 +45,7 @@ import {
   switchTab as switchTabCore,
   reLaunch as reLaunchCore,
   navigateBack as navigateBackCore,
-  getPhoneLocation as getPhoneLocationCore,
+  getLocation as getGeographicalLocationCore,
   requestPayment as requestPaymentCore,
   uploadFile as uploadFileCore,
   downloadFile as downloadFileCore,
@@ -2041,8 +2041,8 @@ export function navigateBack(params) {
   return navigateBackCore(params);
 }
 
-export function getPhoneLocation(params) {
-  return getPhoneLocationCore(params);
+export function getGeographicalLocation(params) {
+  return getGeographicalLocationCore(params);
 }
 
 export function createAnimation(params) {

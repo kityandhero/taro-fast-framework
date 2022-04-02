@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 
 import {
-  getPhoneLocation,
+  getGeographicalLocation,
   getSetting,
   showInfoMessage,
   sleep,
@@ -161,7 +161,7 @@ class SupplementCore extends Common {
 
       const that = this;
 
-      getPhoneLocation({
+      getGeographicalLocation({
         success: (l) => {
           that.setLocationResult({
             data: {
