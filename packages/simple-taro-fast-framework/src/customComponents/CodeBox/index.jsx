@@ -4,7 +4,7 @@ import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { Card } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
-import { buildPrismCode } from '../../utils/tools';
+import { buildComponentPrismCode } from '../../utils/tools';
 
 const style = {
   ...{
@@ -48,7 +48,7 @@ class CodeBox extends Component {
             : `备注: ${description}.`
         }
       >
-        {buildPrismCode({
+        {buildComponentPrismCode({
           componentName,
           config,
           mockChildren,

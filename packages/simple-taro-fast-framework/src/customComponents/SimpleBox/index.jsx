@@ -26,7 +26,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
-import { buildPrismCode } from '../../utils/tools';
+import { buildComponentPrismCode } from '../../utils/tools';
 
 const { IconBell } = Icon;
 
@@ -122,7 +122,7 @@ class SimpleBox extends Component {
 
     const config = this.getFirstConfig();
 
-    return buildPrismCode({
+    return buildComponentPrismCode({
       componentName,
       config,
       mockChildren,
