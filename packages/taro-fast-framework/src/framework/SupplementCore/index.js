@@ -7,12 +7,14 @@ import {
   sleep,
   recordObject,
   recordLog,
+  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
   isUndefined,
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
   locateResult,
   locationModeCollection,
@@ -849,9 +851,13 @@ class SupplementCore extends Common {
       });
 
       if (dataSuccess) {
-        const token = that.parseTokenFromRemoteApiData(metaData);
+        that.setSignInResultOnSignIn({
+          signInResult: that.parseSignInResultFromRemoteApiData(metaData),
+        });
 
-        that.setTokenOnSignIn({ token });
+        that.setTokenOnSignIn({
+          token: that.parseTokenFromRemoteApiData(metaData),
+        });
 
         that.doAfterSignInSuccess(metaData);
 
@@ -871,7 +877,43 @@ class SupplementCore extends Common {
   }
 
   /**
-   * 从接口数据中解析出token
+   * 从接口数据中解析出sign in result
+   * @param {*} remoteData
+   */
+  // eslint-disable-next-line no-unused-vars
+  parseSignInResultFromRemoteApiData = (remoteData) => {
+    throw new Error(
+      `parseSignInResultFromRemoteApiData token must be number, ${verifySignInResult.unknown} mean unknown; ${verifySignInResult.fail} mean fail; ${verifySignInResult.success} mean success.`,
+    );
+  };
+
+  /**
+   * 将解析的 sign in result 进行本次存储, 该方法不应重载
+   * @param {*} remoteData
+   */
+  setSignInResultOnSignIn = ({ signInResult }) => {
+    const v = toNumber(signInResult);
+
+    if (
+      !inCollection(
+        [
+          verifySignInResult.unknown,
+          verifySignInResult.fail,
+          verifySignInResult.success,
+        ],
+        v,
+      )
+    ) {
+      throw new Error(`signInResult not allow ${signInResult}.`);
+    }
+
+    recordLog(`info signInResult is ${signInResult}`);
+
+    this.setSignInResult({ data: v });
+  };
+
+  /**
+   * 从接口数据中解析出sign in result
    * @param {*} remoteData
    */
   // eslint-disable-next-line no-unused-vars
