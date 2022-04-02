@@ -49,10 +49,6 @@ import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial'
 
 import Common from '../Common';
 
-const defaultLongitude = defaultSettingsLayoutCustom.getDefaultLongitude();
-const defaultLatitude = defaultSettingsLayoutCustom.getDefaultLatitude();
-const useLocation = defaultSettingsLayoutCustom.getUseLocation();
-
 /**
  * 业务调度核心底层
  */
@@ -78,6 +74,7 @@ class SupplementCore extends Common {
       that.doWorkWhenRepeatedShow();
 
       if (that.needReLocationWhenRepeatedShow) {
+        const useLocation = defaultSettingsLayoutCustom.getUseLocation();
         const locationMode = getLocationMode();
 
         if (
@@ -178,6 +175,10 @@ class SupplementCore extends Common {
 
           setLocation(l);
 
+          const defaultLongitude =
+            defaultSettingsLayoutCustom.getDefaultLongitude();
+          const defaultLatitude =
+            defaultSettingsLayoutCustom.getDefaultLatitude();
           const { latitude, longitude } = l;
 
           that.reverseGeocoder({
@@ -401,6 +402,7 @@ class SupplementCore extends Common {
   checkTicketValidity = (callback) => {
     recordLog('exec checkTicketValidity');
 
+    const useLocation = defaultSettingsLayoutCustom.getUseLocation();
     const locationMode = getLocationMode();
     const signInResult = this.getSignInResult();
 
@@ -708,6 +710,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
+    const useLocation = defaultSettingsLayoutCustom.getUseLocation();
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {

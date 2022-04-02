@@ -6,14 +6,10 @@ import {
   recordObject,
   getDefaultTaroGlobalData,
   setTaroGlobalData,
-  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
+import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import { getStore } from '../../utils/dvaAssist';
-import {
-  getLocationMode,
-  setLocationMode,
-} from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
@@ -40,9 +36,9 @@ class AppBase extends Component {
       return ns;
     });
 
-    this.initLocationMode();
-
     this.initDva(models);
+
+    this.initLocationMode();
   }
 
   componentDidMount() {
@@ -67,10 +63,17 @@ class AppBase extends Component {
   };
 
   initLocationMode = () => {
-    const locationMode = getLocationMode();
+    const { initialLocationMode } = appInitCustomObject;
 
-    if (stringIsNullOrWhiteSpace(locationMode)) {
-      setLocationMode(defaultSettingsLayoutCustom.getInitialLocationMode());
+    if (!isUndefined(initialLocationMode)) {
+      const { dispatch } = this.store;
+
+      dispatch({
+        type: 'schedulingControl/initialLocationMode',
+        payload: {
+          initialLocationMode,
+        },
+      });
     }
   };
 

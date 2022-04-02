@@ -1,3 +1,4 @@
+import { setLocationMode } from 'src/utils/globalStorageAssist';
 import {
   locateResult,
   verifySignInResult,
@@ -11,6 +12,7 @@ export default {
   namespace: 'schedulingControl',
 
   state: {
+    initialLocationModeComplete: whetherString.no,
     appInitCustomVisible: whetherString.no,
     modelNameListVisible: whetherString.no,
     locationResult: {
@@ -23,6 +25,12 @@ export default {
   },
 
   effects: {
+    *initialLocationMode({ payload }, { put }) {
+      yield put({
+        type: 'changeInitialLocationModeComplete',
+        payload,
+      });
+    },
     *showAppInitCustom({ payload }, { put }) {
       yield put({
         type: 'changeAppInitCustomVisible',
@@ -62,6 +70,20 @@ export default {
   },
 
   reducers: {
+    changeInitialLocationModeComplete(state, { payload }) {
+      const { initialLocationModeComplete } = state;
+
+      if (initialLocationModeComplete !== whetherString.yes) {
+        const { initialLocationMode } = payload;
+
+        setLocationMode(initialLocationMode);
+      }
+
+      return {
+        ...state,
+        initialLocationModeComplete: whetherString.yes,
+      };
+    },
     changeAppInitCustomVisible(state, { payload }) {
       const { appInitCustomVisible } = state;
 

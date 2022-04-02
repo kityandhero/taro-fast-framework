@@ -1,4 +1,5 @@
 import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
+import { locationModeCollection } from 'taro-fast-common/es/utils/constants';
 import { AppBase } from 'taro-fast-framework/es/framework';
 import 'taro-fast-common/es/constants.css';
 import 'taro-fast-component/es/index.css';
@@ -21,6 +22,7 @@ const config = {
   loginPath: '/user/login',
   apiVersion: 'v1',
   useLocation: true,
+  initialLocationMode: locationModeCollection.auto,
 };
 
 class App extends AppBase {
