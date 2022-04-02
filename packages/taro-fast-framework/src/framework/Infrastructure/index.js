@@ -622,7 +622,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setSignInProcessDetection = ({ data, callback }) => {
-    recordLog('exec setSignInProcessDetection');
+    recordLog(`exec setSignInProcessDetection ${data}`);
 
     const that = this;
 

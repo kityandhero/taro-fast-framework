@@ -8,7 +8,11 @@ import {
   recordObject,
   recordLog,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
+import {
+  isFunction,
+  isUndefined,
+  isString,
+} from 'taro-fast-common/es/utils/typeCheck';
 import {
   locateResult,
   locationModeCollection,
@@ -36,6 +40,7 @@ import {
   setNextCheckLoginUnixTime,
   setSession,
   setSessionRefreshing,
+  setToken,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
@@ -142,6 +147,8 @@ class SupplementCore extends Common {
           });
         }
       }
+    } else {
+      recordLog('info obtain location force');
     }
 
     if (needRelocation) {
@@ -404,7 +411,7 @@ class SupplementCore extends Common {
     const that = this;
 
     if (signInResult === verifySignInResult.unknown) {
-      recordLog(`info sign status is ${verifySignInResult.unknown}`);
+      recordLog(`info sign status is unknown`);
 
       if (
         (useLocation || false) &&
@@ -691,11 +698,15 @@ class SupplementCore extends Common {
   }
 
   signIn = ({ data, callback }) => {
+    recordLog('exec signIn');
+
     const that = this;
 
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
+      recordLog('info use location and automatic location');
+
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
         successCallback: ({ location, map }) => {
@@ -742,6 +753,8 @@ class SupplementCore extends Common {
       });
     } else {
       if (useLocation || false) {
+        recordLog('info use location and nonautomatic location');
+
         that.signInWhenCheckProcessDetection({
           data,
           callback: (o, p) => {
@@ -818,21 +831,29 @@ class SupplementCore extends Common {
   };
 
   signInCore({ data, callback }) {
+    recordLog('exec signInCore');
+
     // Tips.loading('处理中');
 
-    this.dispatchSingIn(data).then(() => {
+    const that = this;
+
+    that.dispatchSingIn(data).then(() => {
       Tips.loaded();
 
-      const remoteData = this.getSignInApiData();
+      const remoteData = that.getSignInApiData();
 
       const { dataSuccess, data: metaData } = remoteData;
 
-      this.setSignInProcessDetection({
+      that.setSignInProcessDetection({
         data: false,
       });
 
       if (dataSuccess) {
-        this.doAfterSignInSuccess(metaData);
+        const token = that.parseTokenFromRemoteApiData(metaData);
+
+        that.setTokenOnSignIn({ token });
+
+        that.doAfterSignInSuccess(metaData);
 
         if (isFunction(callback)) {
           callback(metaData);
@@ -844,10 +865,25 @@ class SupplementCore extends Common {
           message: '登录失败',
         });
 
-        this.doWhenSignInFail();
+        that.doWhenSignInFail();
       }
     });
   }
+
+  // eslint-disable-next-line no-unused-vars
+  parseTokenFromRemoteApiData = (remoteData) => {
+    throw new Error(
+      'parseTokenFromRemoteApiData need to be override, it must return a string',
+    );
+  };
+
+  setTokenOnSignIn = ({ token }) => {
+    if (!isString(token || '')) {
+      throw new Error('setTokenOnSignIn token must be string');
+    }
+
+    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+  };
 
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {};
