@@ -63,8 +63,6 @@ export default class PageWrapper extends AuthorizationWrapper {
       modelName: 'session',
     });
 
-    console.log({ data });
-
     return data;
   };
 
