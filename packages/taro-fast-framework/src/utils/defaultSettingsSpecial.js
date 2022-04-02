@@ -6,7 +6,9 @@ import {
   apiSuccessCode as apiSuccessCodeDefault,
   authenticationFailCode as authenticationFailCodeDefault,
   emptyLogo as emptyLogoImage,
+  locationModeCollection,
 } from 'taro-fast-common/es/utils/constants';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 export const defaultSettingsLayoutCustom = {
   /**
@@ -92,6 +94,16 @@ export const defaultSettingsLayoutCustom = {
     };
 
     return emptyLogo || emptyLogoImage;
+  },
+  getInitialLocationMode: () => {
+    const appInit = getAppInitConfigData();
+
+    const { initialLocationMode } = {
+      ...{ initialLocationMode: locationModeCollection.custom },
+      ...(appInit || {}),
+    };
+
+    return toNumber(initialLocationMode || locationModeCollection.custom);
   },
   getTokenAnonymous: () => {
     const appInit = getAppInitConfigData();

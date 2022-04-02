@@ -51,8 +51,8 @@ export const locateResult = {
 
 export const locationModeCollection = {
   unknown: 0,
-  auto: 1,
-  custom: 2,
+  auto: 10,
+  custom: 20,
 };
 
 export const requestMethod = {
@@ -122,6 +122,7 @@ export const appInitDefault = {
   showUseVirtualRequestMessage: false,
   apiVersion: '',
   tokenAnonymous: 'anonymous',
+  initialLocationMode: locationModeCollection.custom,
   imageUploadMaxSize: 2,
   audioUploadMaxSize: 4,
   videoUploadMaxSize: 4,

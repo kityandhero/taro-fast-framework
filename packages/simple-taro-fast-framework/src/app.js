@@ -20,6 +20,7 @@ const config = {
   authenticationFailCode: 2001,
   loginPath: '/user/login',
   apiVersion: 'v1',
+  useLocation: true,
 };
 
 class App extends AppBase {

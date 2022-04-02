@@ -7,9 +7,15 @@ import {
   getDefaultTaroGlobalData,
   setTaroGlobalData,
   recordLog,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 
 import { getStore } from '../../utils/dvaAssist';
+import {
+  getLocationMode,
+  setLocationMode,
+} from '../../utils/globalStorageAssist';
+import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
@@ -53,6 +59,14 @@ class AppBase extends Component {
 
   initDva = (models) => {
     this.store = getStore(models);
+  };
+
+  initLocationMode = () => {
+    const locationMode = getLocationMode();
+
+    if (stringIsNullOrWhiteSpace(locationMode)) {
+      setLocationMode(defaultSettingsLayoutCustom.getInitialLocationMode());
+    }
   };
 
   loadRemoteMetaData = () => {};
