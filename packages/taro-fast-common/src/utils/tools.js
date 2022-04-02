@@ -67,6 +67,7 @@ import {
   datetimeFormat,
   sortOperate,
   pxToRemRoot,
+  verifySignInResult,
 } from './constants';
 import {
   isArray,
@@ -2403,6 +2404,18 @@ export function buildLinearGradient({ direct, list = [] }) {
   const d = isNumber(direct) ? `${direct}deg` : direct;
 
   return `linear-gradient(${d}, ${list.join()})`;
+}
+
+export function getSignInResultDescription(v) {
+  let result = '';
+
+  Object.entries(verifySignInResult).forEach(([key, value]) => {
+    if (value === v) {
+      result = key;
+    }
+  });
+
+  return result;
 }
 
 /**

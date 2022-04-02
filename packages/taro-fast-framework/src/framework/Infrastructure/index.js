@@ -10,6 +10,7 @@ import {
   pageScrollTo,
   sleep,
   recordLog,
+  getSignInResultDescription,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -654,7 +655,11 @@ export default class Infrastructure extends ComponentBase {
 
   setSignInResult = ({ data, callback }) => {
     recordLog('exec setSignInResult');
-    recordLog(`info sign in result is ${data}`);
+    recordLog(
+      `info sign in result is ${data}, it mean ${getSignInResultDescription(
+        data,
+      )} `,
+    );
 
     const that = this;
 
