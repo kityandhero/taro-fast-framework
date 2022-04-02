@@ -8,6 +8,7 @@ import {
   recordObject,
   recordLog,
   inCollection,
+  getSignInResultDescription,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -406,12 +407,18 @@ class SupplementCore extends Common {
     const that = this;
 
     if (signInResult === verifySignInResult.unknown) {
-      recordLog(`info sign status is unknown`);
+      recordLog(
+        `info sign in result is ${signInResult}, it mean ${getSignInResultDescription(
+          signInResult,
+        )}`,
+      );
 
       if (
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
+        recordLog('info use location and automatic location');
+
         that.obtainLocation({
           successCallback: () => {
             that.signIn({
@@ -440,6 +447,8 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
+        recordLog('info use location and automatic location');
+
         that.obtainLocation({
           successCallback: () => {
             that.checkTicketValidityAfterLocation(callback);
@@ -460,6 +469,8 @@ class SupplementCore extends Common {
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
   checkTicketValidityAfterLocation(callback) {
+    recordLog('exec checkTicketValidityAfterLocation');
+
     const ticketValidityProcessDetection =
       this.getTicketValidityProcessDetection();
 
