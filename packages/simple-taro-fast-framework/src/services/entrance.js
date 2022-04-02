@@ -1,10 +1,20 @@
 import { getNow, addMinute } from 'taro-fast-common/es/utils/tools';
+import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
+
 import { executiveRequest } from '../utils/request';
 
 export async function signInData(params) {
   return executiveRequest({
     api: `/entrance/signIn`,
     params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        signInResult: verifySignInResult.fail,
+        token: '',
+      },
+    },
   });
 }
 

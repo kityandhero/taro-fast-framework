@@ -397,13 +397,6 @@ class SupplementCore extends Common {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  dispatchSetSignInResult = (data) => {
-    throw new Error(
-      'dispatchSetSignInResult need to be override, it need to be return a promise',
-    );
-  };
-
   checkTicketValidity = (callback) => {
     recordLog('exec checkTicketValidity');
 
@@ -883,7 +876,7 @@ class SupplementCore extends Common {
   // eslint-disable-next-line no-unused-vars
   parseSignInResultFromRemoteApiData = (remoteData) => {
     throw new Error(
-      `parseSignInResultFromRemoteApiData token must be number, ${verifySignInResult.unknown} mean unknown; ${verifySignInResult.fail} mean fail; ${verifySignInResult.success} mean success.`,
+      `parseSignInResultFromRemoteApiData token must be number as ${verifySignInResult.unknown}/${verifySignInResult.fail}/${verifySignInResult.success}, ${verifySignInResult.unknown} mean unknown; ${verifySignInResult.fail} mean fail; ${verifySignInResult.success} mean success.`,
     );
   };
 

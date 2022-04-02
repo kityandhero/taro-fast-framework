@@ -654,6 +654,7 @@ export default class Infrastructure extends ComponentBase {
 
   setSignInResult = ({ data, callback }) => {
     recordLog('exec setSignInResult');
+    recordLog(`info sign in result is ${data}`);
 
     const that = this;
 
