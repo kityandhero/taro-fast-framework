@@ -7,6 +7,7 @@ import {
   recordObject,
   recordError,
   recordText,
+  showErrorMessage,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { requestMethod } from 'taro-fast-common/es/utils/constants';
@@ -27,14 +28,18 @@ export class Request {
   /**
    *
    * @static request请求 基于 Taro.request
-   * @param {Options} opts
+   * @param {Options} o
    */
-  static async request(opts) {
-    let options = Object.assign(opts, {
-      fail: (res) => {
+  static async request(o) {
+    let options = Object.assign(o, {
+      fail: (error) => {
         Tips.loaded();
 
-        recordError(res);
+        showErrorMessage({
+          message: '请求失败, 请检查网络',
+        });
+
+        recordError(error);
       },
     });
 
