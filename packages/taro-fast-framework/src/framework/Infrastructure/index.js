@@ -11,6 +11,7 @@ import {
   sleep,
   recordLog,
   getSignInResultDescription,
+  recordObject,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -507,17 +508,16 @@ export default class Infrastructure extends ComponentBase {
         that.refreshSession({ callback });
       } else {
         Taro.checkSession({
-          // eslint-disable-next-line no-unused-vars
-          success: (res) => {
-            recordLog('info session is effective');
+          success: () => {
+            recordLog('info session is effective, ignore session refresh');
 
             if (isFunction(callback)) {
               callback();
             }
           },
-          // eslint-disable-next-line no-unused-vars
-          fail(res) {
+          fail(data) {
             recordLog('info session is expired');
+            recordObject(data);
 
             that.refreshSession({ callback });
           },
