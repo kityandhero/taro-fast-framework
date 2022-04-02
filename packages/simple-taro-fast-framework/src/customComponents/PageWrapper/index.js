@@ -49,15 +49,32 @@ export default class PageWrapper extends AuthorizationWrapper {
   };
 
   getCheckTicketValidityApiData = () => {
-    return getApiDataCore({ props: this.props, modelName: 'entrance' });
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'entrance',
+    });
+
+    return data;
   };
 
   getRefreshSessionApiData = () => {
-    return getApiDataCore({ props: this.props, modelName: 'session' });
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'session',
+    });
+
+    console.log({ data });
+
+    return data;
   };
 
   getSignInApiData = () => {
-    return getApiDataCore({ props: this.props, modelName: 'entrance' });
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'entrance',
+    });
+
+    return data;
   };
 
   getRemoteMetaData = () => {

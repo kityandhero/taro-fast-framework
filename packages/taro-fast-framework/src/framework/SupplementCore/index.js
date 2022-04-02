@@ -598,11 +598,11 @@ class SupplementCore extends Common {
                 const { dataSuccess, data: metaData } = remoteData;
 
                 if (dataSuccess) {
-                  const { code: effectiveCodeRemote, session } = metaData;
+                  const { code: effectiveCodeRemote, sessionId } = metaData;
                   const effectiveCode = getEffectiveCode();
 
                   if (effectiveCode === (effectiveCodeRemote || 'no')) {
-                    setSession(session);
+                    setSession(sessionId);
                   }
 
                   if (isFunction(callback)) {

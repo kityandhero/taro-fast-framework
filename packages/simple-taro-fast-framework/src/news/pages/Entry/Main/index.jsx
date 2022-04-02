@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
+import { View } from '@tarojs/components';
 
 import {
   recordObject,
   redirectTo,
-  showInfoMessage,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { ActivityIndicator } from 'taro-fast-component/es/customComponents';
 
 import { shareTransfer } from '../../../../customConfig/constants';
 import { pathCollection } from '../../../../customConfig/config';
@@ -26,6 +28,17 @@ definePageConfig({
 }))
 export default class Index extends BasePageWrapper {
   loadRemoteRequestAfterMount = false;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{
+        navigationNoticeVisible: false,
+      },
+    };
+  }
 
   doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest = () => {
     this.handleLogic();
@@ -57,8 +70,9 @@ export default class Index extends BasePageWrapper {
 
   exchangeShareData = ({ scene, urlParams, callback }) => {
     if (stringIsNullOrWhiteSpace(scene)) {
-      //跳转首页
-      // this.goToHomeTab();
+      this.showNavigationNotice();
+
+      redirectTo(pathCollection.news.home.path);
     }
 
     const json = `{${decodeURIComponent(scene)
@@ -132,21 +146,15 @@ export default class Index extends BasePageWrapper {
     };
 
     if (transfer === shareTransfer.home) {
-      showInfoMessage({
-        message: '即将为您跳转',
-      });
+      this.showNavigationNotice();
 
       redirectTo(pathCollection.news.home.path);
     } else if (transfer === shareTransfer.customer) {
-      showInfoMessage({
-        message: '即将为您跳转',
-      });
+      this.showNavigationNotice();
 
       redirectTo(pathCollection.news.section.path);
     } else if (transfer === shareTransfer.webPage) {
-      showInfoMessage({
-        message: '即将为您跳转',
-      });
+      this.showNavigationNotice();
 
       let title = '';
 
@@ -164,15 +172,34 @@ export default class Index extends BasePageWrapper {
         `${pathCollection.webPage.path}?title=${title}&url=${url}`,
       );
     } else {
-      showInfoMessage({
-        message: '即将为您跳转',
-      });
-
       redirectTo(pathCollection.news.home.path);
     }
   }
 
+  showNavigationNotice = () => {
+    this.setState({
+      navigationNoticeVisible: true,
+    });
+  };
+
   renderFurther() {
-    return <></>;
+    const { navigationNoticeVisible } = this.state;
+
+    return (
+      <View
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: transformSize(400),
+        }}
+      >
+        <ActivityIndicator
+          hidden={!navigationNoticeVisible}
+          mode="center"
+          type="comet"
+          content="正在为您跳转"
+        />
+      </View>
+    );
   }
 }
