@@ -870,6 +870,10 @@ class SupplementCore extends Common {
     });
   }
 
+  /**
+   * 从接口数据中解析出token
+   * @param {*} remoteData
+   */
   // eslint-disable-next-line no-unused-vars
   parseTokenFromRemoteApiData = (remoteData) => {
     throw new Error(
@@ -877,6 +881,10 @@ class SupplementCore extends Common {
     );
   };
 
+  /**
+   * 将解析的token进行本次存储, 该方法不应重载
+   * @param {*} remoteData
+   */
   setTokenOnSignIn = ({ token }) => {
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignIn token must be string');
@@ -885,9 +893,17 @@ class SupplementCore extends Common {
     setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
   };
 
+  /**
+   * 其他登录成功后的业务逻辑, 根据需要进行重载
+   * @param {*} remoteData
+   */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {};
 
+  /**
+   * 登录失败时的业务逻辑, 需要重载
+   * @param {*} remoteData
+   */
   doWhenSignInFail = () => {
     throw new Error('doWhenSignInFail need to be override');
   };

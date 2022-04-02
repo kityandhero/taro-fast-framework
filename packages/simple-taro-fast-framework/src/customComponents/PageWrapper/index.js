@@ -83,6 +83,12 @@ export default class PageWrapper extends AuthorizationWrapper {
     return global;
   };
 
+  parseTokenFromRemoteApiData = (remoteData) => {
+    const { token } = remoteData;
+
+    return token || '';
+  };
+
   reloadRemoteMetaData = () => {
     this.dispatchApi({
       type: 'global/getMetaData',
