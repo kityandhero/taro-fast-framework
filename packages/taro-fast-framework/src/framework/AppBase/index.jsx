@@ -14,12 +14,18 @@ import { getStore } from '../../utils/dvaAssist';
 import {
   getLocationMode,
   setLocationMode,
+  getAlreadyShowAppInitCustom,
+  setAlreadyShowAppInitCustom,
+  getAlreadyShowModelNameList,
+  setAlreadyShowModelNameList,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
 let modelNameList = [];
+
+let appInitCustomObject = {};
 
 class AppBase extends Component {
   store = null;
@@ -29,6 +35,8 @@ class AppBase extends Component {
   constructor(props, config, models) {
     super(props);
 
+    appInitCustomObject = config;
+
     this.setAppInitCustomLocal(config);
 
     modelNameList = models.map((item) => {
@@ -36,6 +44,8 @@ class AppBase extends Component {
 
       return ns;
     });
+
+    this.initLocationMode();
 
     this.initDva(models);
   }
@@ -71,10 +81,32 @@ class AppBase extends Component {
 
   loadRemoteMetaData = () => {};
 
+  showStartupInfo = () => {
+    const showLogInConsole = defaultSettingsLayoutCustom.getShowLogInConsole();
+
+    if (showLogInConsole) {
+      const showAppInitCustom = getAlreadyShowAppInitCustom();
+
+      if (!showAppInitCustom) {
+        recordObject(appInitCustomObject);
+      } else {
+        setAlreadyShowModelNameList(true);
+      }
+
+      const showModelNameList = getAlreadyShowModelNameList();
+
+      if (!showModelNameList) {
+        recordLog(`modelNameList: ${modelNameList.join()}`);
+      } else {
+        setAlreadyShowAppInitCustom(true);
+      }
+    }
+  };
+
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    recordLog(`modelNameList: ${modelNameList.join()}`);
+    this.showStartupInfo();
 
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }
