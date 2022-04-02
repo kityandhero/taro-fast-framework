@@ -14,6 +14,22 @@ import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import { Divider } from 'taro-fast-component/es/customComponents';
 import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
 
+import QQMapWX from '../libs/qqmap-wx-jssdk.min';
+
+/**
+ * 获取本地数据
+ * @export
+ * @param {*} key
+ * @param {*} value
+ */
+export function getQQMapWX() {
+  const mapSdk = new QQMapWX({
+    key: 'FHSBZ-INGWK-ANPJF-AJ4DG-LPTRS-HAFGY',
+  });
+
+  return mapSdk;
+}
+
 export function buildComponentProps({ config, ignorePropertyList = [] }) {
   let result = '';
 

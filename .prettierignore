@@ -12,6 +12,7 @@
 **/.czrc
 **/.gitattributes
 **/.browserslistrc
+**/*.min.js
 
 .husky/*
 

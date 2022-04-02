@@ -2,6 +2,8 @@ import { recordObject } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
+import { getQQMapWX } from '../../utils/tools';
+
 export default class PageWrapper extends AuthorizationWrapper {
   loadRemoteRequestDelay = 100;
 
@@ -106,5 +108,15 @@ export default class PageWrapper extends AuthorizationWrapper {
    */
   authorizeFailCallback = (remoteData) => {
     recordObject(remoteData);
+  };
+
+  reverseGeocoder = ({ location, success, fail }) => {
+    const map = getQQMapWX();
+
+    map.reverseGeocoder({
+      location,
+      success,
+      fail,
+    });
   };
 }
