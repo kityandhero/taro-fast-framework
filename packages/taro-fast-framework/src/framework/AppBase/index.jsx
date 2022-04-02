@@ -89,16 +89,16 @@ class AppBase extends Component {
 
       if (!showAppInitCustom) {
         recordObject(appInitCustomObject);
-      } else {
-        setAlreadyShowModelNameList(true);
+
+        setAlreadyShowAppInitCustom(true);
       }
 
       const showModelNameList = getAlreadyShowModelNameList();
 
       if (!showModelNameList) {
         recordLog(`modelNameList: ${modelNameList.join()}`);
-      } else {
-        setAlreadyShowAppInitCustom(true);
+
+        setAlreadyShowModelNameList(true);
       }
     }
   };
