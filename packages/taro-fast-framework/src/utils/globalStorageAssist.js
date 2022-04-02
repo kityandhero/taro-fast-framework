@@ -6,7 +6,6 @@ import {
   saveStringToLocalStorage,
   clearLocalStorage,
   showInfoMessage,
-  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -37,8 +36,6 @@ export const storageKeyCollection = {
   locationMode: 'locationMode',
   lastLocation: 'lastLocation',
   remoteCheck: 'remoteCheck',
-  alreadyShowAppInitCustom: 'alreadyShowAppInitCustom',
-  alreadyShowModelNameList: 'alreadyShowModelNameList',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -787,62 +784,6 @@ export function setRemoteCheckCache(o) {
   };
 
   return saveJsonToLocalStorage(key, d);
-}
-
-/**
- * 获取 AlreadyShowAppInitCustom
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getAlreadyShowAppInitCustom() {
-  const key = storageKeyCollection.alreadyShowAppInitCustom;
-
-  const v = getStringFromLocalStorage(key);
-
-  return stringIsNullOrWhiteSpace(v) ? false : toNumber(v) !== 0;
-}
-
-/**
- * 设置 AlreadyShowAppInitCustom
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function setAlreadyShowAppInitCustom(v) {
-  const key = storageKeyCollection.alreadyShowAppInitCustom;
-
-  saveStringToLocalStorage(key, !!v ? '1' : '0');
-}
-
-/**
- * 获取 AlreadyShowModelNameList
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getAlreadyShowModelNameList() {
-  const key = storageKeyCollection.alreadyShowModelNameList;
-
-  const v = getStringFromLocalStorage(key);
-
-  return stringIsNullOrWhiteSpace(v) ? false : toNumber(v) !== 0;
-}
-
-/**
- * 设置 AlreadyShowModelNameList
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function setAlreadyShowModelNameList(v) {
-  const key = storageKeyCollection.alreadyShowModelNameList;
-
-  saveStringToLocalStorage(key, !!v ? '1' : '0');
 }
 
 /**

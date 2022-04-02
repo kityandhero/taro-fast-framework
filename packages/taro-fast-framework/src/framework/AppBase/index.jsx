@@ -6,7 +6,6 @@ import {
   recordObject,
   getDefaultTaroGlobalData,
   setTaroGlobalData,
-  recordLog,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 
@@ -14,10 +13,6 @@ import { getStore } from '../../utils/dvaAssist';
 import {
   getLocationMode,
   setLocationMode,
-  getAlreadyShowAppInitCustom,
-  setAlreadyShowAppInitCustom,
-  getAlreadyShowModelNameList,
-  setAlreadyShowModelNameList,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
@@ -85,21 +80,21 @@ class AppBase extends Component {
     const showLogInConsole = defaultSettingsLayoutCustom.getShowLogInConsole();
 
     if (showLogInConsole) {
-      const showAppInitCustom = getAlreadyShowAppInitCustom();
+      const { dispatch } = this.store;
 
-      if (!showAppInitCustom) {
-        recordObject(appInitCustomObject);
+      dispatch({
+        type: 'schedulingControl/showAppInitCustom',
+        payload: {
+          config: appInitCustomObject,
+        },
+      });
 
-        setAlreadyShowAppInitCustom(true);
-      }
-
-      const showModelNameList = getAlreadyShowModelNameList();
-
-      if (!showModelNameList) {
-        recordLog(`modelNameList: ${modelNameList.join()}`);
-
-        setAlreadyShowModelNameList(true);
-      }
+      dispatch({
+        type: 'schedulingControl/showModelNameList',
+        payload: {
+          modelNameList: modelNameList.join(),
+        },
+      });
     }
   };
 

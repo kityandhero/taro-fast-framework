@@ -1,7 +1,9 @@
 import {
   locateResult,
   verifySignInResult,
+  whetherString,
 } from 'taro-fast-common/es/utils/constants';
+import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
 import { reducerCommonCollection } from '../utils/dva';
 
@@ -9,6 +11,8 @@ export default {
   namespace: 'schedulingControl',
 
   state: {
+    appInitCustomVisible: whetherString.no,
+    modelNameListVisible: whetherString.no,
     locationResult: {
       locationGet: false,
       locationAuth: locateResult.unknown,
@@ -19,6 +23,18 @@ export default {
   },
 
   effects: {
+    *showAppInitCustom({ payload }, { put }) {
+      yield put({
+        type: 'changeAppInitCustomVisible',
+        payload,
+      });
+    },
+    *showModelNameList({ payload }, { put }) {
+      yield put({
+        type: 'changeModelNameListVisible',
+        payload,
+      });
+    },
     *setLocationResult({ payload }, { put }) {
       yield put({
         type: 'changeLocationResult',
@@ -46,6 +62,34 @@ export default {
   },
 
   reducers: {
+    changeAppInitCustomVisible(state, { payload }) {
+      const { appInitCustomVisible } = state;
+
+      if (appInitCustomVisible !== whetherString.yes) {
+        const { config } = payload;
+
+        recordObject(config);
+      }
+
+      return {
+        ...state,
+        appInitCustomVisible: whetherString.yes,
+      };
+    },
+    changeModelNameListVisible(state, { payload }) {
+      const { modelNameListVisible } = state;
+
+      if (modelNameListVisible !== whetherString.yes) {
+        const { modelNameList } = payload;
+
+        recordLog(modelNameList);
+      }
+
+      return {
+        ...state,
+        modelNameListVisible: whetherString.yes,
+      };
+    },
     changeLocationResult(state, { payload }) {
       return {
         ...state,
