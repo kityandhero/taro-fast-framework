@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { Space, Card, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
@@ -38,55 +39,61 @@ class CodePageBox extends Component {
 
     return (
       <Space direction="vertical" fillWidth>
-        <Card
-          header="样式展示"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          strip
-          stripLeft={2}
-          stripWidth={6}
-          stripColor="#3378f4"
-        >
-          {children}
-        </Card>
+        {children ? (
+          <Card
+            header="样式展示"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            strip
+            stripLeft={2}
+            stripWidth={6}
+            stripColor="#3378f4"
+          >
+            {children}
+          </Card>
+        ) : null}
 
-        <Card
-          header="配置说明"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          strip
-          stripLeft={2}
-          stripWidth={6}
-          stripColor="#ccc"
-        >
-          <DataGrid
-            list={list}
-            border
-            layout="row"
-            size="small"
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        {isArray(list) && list.length > 0 ? (
+          <Card
+            header="配置说明"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            strip
+            stripLeft={2}
+            stripWidth={6}
+            stripColor="#ccc"
+          >
+            <DataGrid
+              list={list}
+              border
+              layout="row"
+              size="small"
+              emptyValue="暂无"
+              emptyStyle={{ color: '#ccc' }}
+            />
+          </Card>
+        ) : null}
 
-        <Card
-          header="使用说明"
-          style={style}
-          headerStyle={cardHeaderStyle}
-          strip
-          stripLeft={2}
-          stripWidth={6}
-          stripColor="#ccc"
-        >
-          <DataGrid
-            list={usageList}
-            border
-            layout="row"
-            size="small"
-            emptyValue="暂无"
-            emptyStyle={{ color: '#ccc' }}
-          />
-        </Card>
+        {isArray(usageList) && usageList.length > 0 ? (
+          <Card
+            header="使用说明"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            strip
+            stripLeft={2}
+            stripWidth={6}
+            stripColor="#ccc"
+          >
+            <DataGrid
+              list={usageList}
+              border
+              layout="row"
+              size="small"
+              emptyValue="暂无"
+              emptyStyle={{ color: '#ccc' }}
+            />
+          </Card>
+        ) : null}
 
         <Card
           strip
