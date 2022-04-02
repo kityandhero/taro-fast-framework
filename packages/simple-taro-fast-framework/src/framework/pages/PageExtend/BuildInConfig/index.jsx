@@ -215,11 +215,16 @@ const configList = [
   },
 ];
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '内置视图配置',
+});
+
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'config',
-    name: '内置配置属性',
-    description: '',
+    name: '内置视图配置',
+    description: '可配置的页面视图属性',
   };
 
   renderContent = () => {

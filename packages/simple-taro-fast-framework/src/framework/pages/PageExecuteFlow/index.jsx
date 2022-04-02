@@ -1,28 +1,29 @@
+import { sortBy } from 'taro-fast-common/es/utils/tools';
+
 import { pathCollection } from '../../../customConfig/config';
 import ChannelPageBase from '../../../customComponents/ChannelPageBase';
 
 import iconBasic from '../../../assets/images/icon-list-basic.png';
 
+const list = [
+  {
+    id: 'verifySession',
+    name: '检测Session状态',
+    path: pathCollection.framework.pageExecuteFlow.verifySession.path,
+  },
+];
+
 const o = {
   icon: iconBasic,
-  title: '快速开发框架',
-  list: [
-    {
-      id: 'PageExtend',
-      name: '扩展页面基架',
-      path: pathCollection.framework.pageExtend.path,
-    },
-    {
-      id: 'PageExecuteFlow',
-      name: '页面执行流程',
-      path: pathCollection.framework.pageExecuteFlow.path,
-    },
-  ],
+  title: '页面执行流程',
+  list: sortBy(list, (one) => {
+    return one.id;
+  }),
 };
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '快速开发框架',
+  navigationBarTitleText: '页面执行流程',
 });
 
 export default class Index extends ChannelPageBase {

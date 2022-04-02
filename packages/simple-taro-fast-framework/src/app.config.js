@@ -123,6 +123,8 @@ export default {
         'pages/pageExtend/scroll/lowerLoad/index',
         'pages/pageExtend/scroll/lowerLoadSpecial/index',
         'pages/pageExtend/scroll/complexSample/index',
+        'pages/pageExecuteFlow/index',
+        'pages/pageExecuteFlow/verifySession/index',
       ],
     },
     {

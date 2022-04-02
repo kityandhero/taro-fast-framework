@@ -332,6 +332,12 @@ const frameworkPathCollection = {
       },
     },
   },
+  pageExecuteFlow: {
+    path: '/framework/pages/pageExecuteFlow/index',
+    verifySession: {
+      path: '/framework/pages/pageExecuteFlow/verifySession/index',
+    },
+  },
 };
 
 const newsPathCollection = {
