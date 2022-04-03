@@ -22,15 +22,15 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useIsolateContext": true,
+    "useIsolateContext": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
@@ -59,6 +59,20 @@
           "id": 1,
           "name": "framework",
           "pathName": "framework/pages/home/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 400,
+          "name": "template/entry",
+          "pathName": "template/pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 410,
+          "name": "template/signIn",
+          "pathName": "template/pages/signIn/main/index",
           "query": "",
           "scene": null
         },

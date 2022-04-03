@@ -19,16 +19,19 @@ import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
 import Item from '../Item';
 import Icon from '../Icon';
+import Row from '../Flex/Row';
+import Col from '../Flex/Col';
 
 const { IconCloseCircle } = Icon;
 
+const layoutCollection = ['horizontal', 'vertical'];
 const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
 
 const defaultProps = {
   style: {},
-  title: null,
   description: null,
+  descriptionStyle: {},
   contentStyle: {},
   prefix: null,
   border: true,
@@ -109,6 +112,12 @@ class InputItem extends BaseComponent {
     }
   };
 
+  getLayout = () => {
+    const { layout } = this.props;
+
+    return inCollection(layoutCollection, layout) ? layout : 'horizontal';
+  };
+
   triggerChange = (v) => {
     const { afterChange } = this.props;
 
@@ -173,8 +182,8 @@ class InputItem extends BaseComponent {
     const {
       style,
       prefix,
-      title,
       description,
+      descriptionStyle,
       contentStyle,
       border,
       align,
@@ -206,10 +215,13 @@ class InputItem extends BaseComponent {
       holdKeyboard,
     } = this.props;
 
+    const layout = this.getLayout();
     const type = inCollection(typeCollection, typeSource) ? typeSource : 'text';
     const confirmType = inCollection(confirmTypeCollection, confirmTypeSource)
       ? confirmTypeSource
       : 'done';
+
+    const showBody = !!description;
 
     const labelComponent =
       isObject(label) ||
@@ -263,117 +275,200 @@ class InputItem extends BaseComponent {
         />
       ) : null;
 
-    return (
-      <Item
-        style={style}
-        prefix={prefix}
-        title={title}
-        label={labelComponent}
-        description={description}
-        contentStyle={{
-          ...{ width: transformSize(180) },
-          ...contentStyle,
-          ...{
-            flex: 'none',
-          },
-        }}
-        border={border}
-        extra={
+    const inputPart = (
+      <FlexBox
+        flexAuto="left"
+        style={{ width: '100%' }}
+        left={
           <FlexBox
             flexAuto="left"
             style={{ width: '100%' }}
             left={
-              <FlexBox
-                flexAuto="left"
-                style={{ width: '100%' }}
-                left={
-                  <Input
-                    value={this.currentValue}
-                    type={type}
-                    style={{
-                      ...{
-                        fontSize: transformSize(28),
-                        padding: `${transformSize(22)} 0 ${transformSize(
-                          22,
-                        )} 0`,
-                      },
-                      ...valueStyle,
-                      ...(align == 'right' ? { textAlign: 'right' } : {}),
-                      ...(align == 'center' ? { textAlign: 'center' } : {}),
-                      ...{ width: '100%' },
-                    }}
-                    password={!!password}
-                    placeholder={placeholder}
-                    placeholderStyle={
-                      isString(placeholderStyle)
-                        ? placeholderStyle
-                        : isObject(placeholderStyle)
-                        ? styleToString(placeholderStyle)
-                        : ''
-                    }
-                    placeholderClass={placeholderClass}
-                    disabled={disabled}
-                    maxlength={maxlength}
-                    cursorSpacing={cursorSpacing}
-                    confirmType={confirmType}
-                    confirmHold={confirmHold}
-                    cursor={cursor}
-                    selectionStart={selectionStart}
-                    selectionEnd={selectionEnd}
-                    adjustPosition={adjustPosition}
-                    holdKeyboard={holdKeyboard}
-                    onInput={this.onInput}
-                    onFocus={this.triggerFocus}
-                    onBlur={this.triggerBlur}
-                    onConfirm={this.triggerConfirm}
-                    onKeyboardHeightChange={this.triggerKeyboardHeightChange}
-                  />
+              <Input
+                value={this.currentValue}
+                type={type}
+                style={{
+                  ...{
+                    fontSize: transformSize(28),
+                    padding:
+                      layout === 'horizontal'
+                        ? `${transformSize(22)} 0 ${transformSize(
+                            showBody ? 11 : 22,
+                          )} 0`
+                        : `${transformSize(11)} 0 ${transformSize(
+                            showBody ? 11 : 22,
+                          )} 0`,
+                  },
+                  ...valueStyle,
+                  ...(align == 'right' ? { textAlign: 'right' } : {}),
+                  ...(align == 'center' ? { textAlign: 'center' } : {}),
+                  ...{ width: '100%' },
+                }}
+                password={!!password}
+                placeholder={placeholder}
+                placeholderStyle={
+                  isString(placeholderStyle)
+                    ? placeholderStyle
+                    : isObject(placeholderStyle)
+                    ? styleToString(placeholderStyle)
+                    : ''
                 }
-                leftStyle={inputContainerStyle}
-                right={
-                  clearable ? (
-                    <View
-                      style={{
-                        paddingLeft: transformSize(10),
-                        height: '100%',
-                      }}
-                      onClick={this.clearValue}
-                    >
-                      <VerticalBox>
-                        <IconCloseCircle
-                          size={toNumber(clearSize)}
-                          color={clearColor}
-                        />
-                      </VerticalBox>
-                    </View>
-                  ) : null
-                }
+                placeholderClass={placeholderClass}
+                disabled={disabled}
+                maxlength={maxlength}
+                cursorSpacing={cursorSpacing}
+                confirmType={confirmType}
+                confirmHold={confirmHold}
+                cursor={cursor}
+                selectionStart={selectionStart}
+                selectionEnd={selectionEnd}
+                adjustPosition={adjustPosition}
+                holdKeyboard={holdKeyboard}
+                onInput={this.onInput}
+                onFocus={this.triggerFocus}
+                onBlur={this.triggerBlur}
+                onConfirm={this.triggerConfirm}
+                onKeyboardHeightChange={this.triggerKeyboardHeightChange}
               />
             }
-            right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
-            rightStyle={
-              extra
-                ? {
-                    ...{
-                      fontSize: transformSize(28),
-                    },
-                    ...extraContainerStyle,
-                  }
-                : null
+            leftStyle={inputContainerStyle}
+            right={
+              clearable ? (
+                <View
+                  style={{
+                    paddingLeft: transformSize(10),
+                    height: '100%',
+                  }}
+                  onClick={this.clearValue}
+                >
+                  <VerticalBox>
+                    <IconCloseCircle
+                      size={toNumber(clearSize)}
+                      color={clearColor}
+                    />
+                  </VerticalBox>
+                </View>
+              ) : null
             }
           />
         }
-        extraContainerStyle={{
-          ...{
-            padding: `0 ${transformSize(24)} 0 0`,
-          },
-          ...inputStyle,
-          ...{
-            flex: 'auto',
-            paddingRight: '0',
-          },
-        }}
+        right={extra ? <VerticalBox>{extra}</VerticalBox> : null}
+        rightStyle={
+          extra
+            ? {
+                ...{
+                  fontSize: transformSize(28),
+                },
+                ...extraContainerStyle,
+              }
+            : null
+        }
       />
+    );
+
+    if (layout === 'horizontal') {
+      return (
+        <Item
+          style={style}
+          prefix={prefix}
+          prefixStyle={{
+            padding: `${transformSize(24)} 0 ${transformSize(
+              showBody ? 12 : 24,
+            )} 0`,
+          }}
+          label={labelComponent}
+          contentStyle={{
+            ...{ width: transformSize(180) },
+            ...contentStyle,
+            ...{
+              flex: 'none',
+              padding: `${transformSize(24)} 0 ${transformSize(
+                showBody ? 12 : 24,
+              )} 0`,
+            },
+          }}
+          border={border}
+          extra={inputPart}
+          extraContainerStyle={{
+            ...{
+              padding: `0 ${transformSize(24)} 0 0`,
+            },
+            ...inputStyle,
+            ...{
+              flex: 'auto',
+              paddingRight: '0',
+            },
+          }}
+          showBody={showBody}
+          body={description}
+          bodyContentStyle={{
+            ...descriptionStyle,
+            ...(showBody
+              ? {
+                  paddingTop: transformSize(11),
+                }
+              : {}),
+          }}
+        />
+      );
+    }
+
+    return (
+      <View style={{ width: '100%' }}>
+        {labelComponent != null ? (
+          <Row>
+            <Col size={12}>
+              <View
+                style={{
+                  padding: `${transformSize(22)} 0 ${transformSize(11)} 0`,
+                }}
+              >
+                <FlexBox left={prefix} right={labelComponent} />
+              </View>
+            </Col>
+          </Row>
+        ) : null}
+
+        <Row>
+          <Col size={12}>
+            <Item
+              style={style}
+              contentStyle={{
+                ...{ width: transformSize(180) },
+                ...contentStyle,
+                ...{
+                  flex: 'none',
+                  padding: `${transformSize(
+                    labelComponent != null ? 12 : 24,
+                  )} 0 ${transformSize(showBody ? 12 : 24)} 0`,
+                },
+              }}
+              border={border}
+              extra={inputPart}
+              extraContainerStyle={{
+                ...{
+                  padding: `0 ${transformSize(24)} 0 0`,
+                },
+                ...inputStyle,
+                ...{
+                  flex: 'auto',
+                  paddingRight: '0',
+                },
+              }}
+              showBody={showBody}
+              body={description}
+              bodyContentStyle={{
+                ...descriptionStyle,
+                ...(showBody
+                  ? {
+                      paddingTop: transformSize(11),
+                    }
+                  : {}),
+              }}
+            />
+          </Col>
+        </Row>
+      </View>
     );
   }
 }

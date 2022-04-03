@@ -128,6 +128,11 @@ export default {
       ],
     },
     {
+      root: 'template',
+      name: '模板页',
+      pages: ['pages/entry/main/index', 'pages/signIn/main/index'],
+    },
+    {
       root: 'news',
       name: '新闻应用',
       pages: [

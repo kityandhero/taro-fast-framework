@@ -39,9 +39,14 @@ const defaultProps = {
 };
 
 class ProgressItem extends BaseComponent {
+  getLayout = () => {
+    const { layout } = this.props;
+
+    return inCollection(layoutCollection, layout) ? layout : 'horizontal';
+  };
+
   renderFurther() {
     const {
-      layout: layoutSource,
       label,
       labelStyle,
       labelContainerStyle,
@@ -61,9 +66,7 @@ class ProgressItem extends BaseComponent {
       fontSize,
     } = this.props;
 
-    const layout = inCollection(layoutCollection, layoutSource)
-      ? layoutSource
-      : 'horizontal';
+    const layout = this.getLayout();
 
     let labelComponent = label;
 

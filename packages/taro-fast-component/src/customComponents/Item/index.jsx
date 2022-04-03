@@ -23,8 +23,9 @@ const defaultProps = {
   title: null,
   label: '请设置标题',
   description: null,
-  contentStyle: {},
   prefix: null,
+  prefixStyle: {},
+  contentStyle: {},
   extra: null,
   extraContainerStyle: {},
   clickable: false,
@@ -36,6 +37,8 @@ const defaultProps = {
   body: null,
   bodyStyle: {},
   bodyAnimate: false,
+  bodyInnerStyle: {},
+  bodyContentStyle: {},
 };
 
 class Item extends BaseComponent {
@@ -111,6 +114,8 @@ class Item extends BaseComponent {
       showBody,
       body,
       bodyStyle,
+      bodyInnerStyle,
+      bodyContentStyle,
       bodyAnimate,
       children,
     } = this.props;
@@ -133,8 +138,12 @@ class Item extends BaseComponent {
           <View
             id={this.bodyId}
             className={classNames(`${classPrefix}-body__inner`)}
+            style={bodyInnerStyle}
           >
-            <View className={classNames(`${classPrefix}-body__inner__content`)}>
+            <View
+              className={classNames(`${classPrefix}-body__inner__content`)}
+              style={bodyContentStyle}
+            >
               {body}
             </View>
           </View>

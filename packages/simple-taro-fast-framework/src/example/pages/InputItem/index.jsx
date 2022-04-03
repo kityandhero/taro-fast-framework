@@ -1,8 +1,14 @@
-import { InputItem, Space } from 'taro-fast-component/es/customComponents';
+import {
+  Icon,
+  InputItem,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+
+const { IconCheckCircle } = Icon;
 
 function afterChange(v) {
   console.log(v);
@@ -84,6 +90,16 @@ const config11 = {
   afterChange,
 };
 
+const config112 = {
+  label: '用户名',
+  title: '用户的名称',
+  description: '填写用户的名称, 例如 李明',
+  prefix: <IconCheckCircle size={38} showInfo color="green" />,
+  placeholder: '请输入用户名',
+  placeholderStyle: { color: '#45e325' },
+  afterChange,
+};
+
 const config12 = {
   label: '用户名',
   disabled: true,
@@ -132,6 +148,17 @@ const config18 = {
   onKeyboardHeightChange: () => {
     console.log('onKeyboardHeightChange');
   },
+};
+
+const config19 = {
+  required: true,
+  layout: 'vertical',
+  label: '用户名',
+  title: '用户的名称',
+  description: '填写用户的名称, 例如 李明',
+  prefix: <IconCheckCircle size={38} showInfo color="green" />,
+  placeholder: '请输入用户名',
+  placeholderStyle: { color: '#45e325' },
 };
 
 // eslint-disable-next-line no-undef
@@ -207,6 +234,14 @@ export default class Index extends ContentPageBase {
       {
         header: '占位提示样式',
         config: config11,
+      },
+      {
+        header: '复杂配置',
+        config: config112,
+      },
+      {
+        header: '垂直布局',
+        config: config19,
       },
       {
         header: '禁用模式',

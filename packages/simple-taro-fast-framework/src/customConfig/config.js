@@ -340,6 +340,15 @@ const frameworkPathCollection = {
   },
 };
 
+const templatePathCollection = {
+  entry: {
+    path: '/template/pages/entry/main/index',
+  },
+  signIn: {
+    path: '/template/pages/signIn/main/index',
+  },
+};
+
 const newsPathCollection = {
   entry: {
     path: '/news/pages/entry/main/index',
@@ -356,6 +365,7 @@ export const pathCollection = {
   root: rootPathCollection,
   example: examplePathCollection,
   framework: frameworkPathCollection,
+  template: templatePathCollection,
   news: newsPathCollection,
 };
 
