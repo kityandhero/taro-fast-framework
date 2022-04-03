@@ -371,9 +371,6 @@ class InputItem extends BaseComponent {
       return (
         <Item
           style={style}
-          prefixStyle={{
-            paddingBottom: transformSize(showBody ? 12 : 24),
-          }}
           label={labelComponent}
           contentStyle={{
             ...{ width: transformSize(180) },
@@ -410,7 +407,7 @@ class InputItem extends BaseComponent {
     }
 
     return (
-      <View style={{ width: '100%' }}>
+      <View style={{ ...{ width: '100%' }, ...style }}>
         {labelComponent != null ? (
           <Row>
             <Col size={12}>
@@ -418,7 +415,7 @@ class InputItem extends BaseComponent {
                 style={{
                   padding: `${transformSize(22)} ${transformSize(
                     24,
-                  )} ${transformSize(0)} ${transformSize(24)}`,
+                  )} ${transformSize(12)} ${transformSize(24)}`,
                 }}
               >
                 {labelComponent}
@@ -430,7 +427,7 @@ class InputItem extends BaseComponent {
         <Row>
           <Col size={12}>
             <Item
-              style={style}
+              label={null}
               contentStyle={{
                 ...{ width: transformSize(180) },
                 ...contentStyle,

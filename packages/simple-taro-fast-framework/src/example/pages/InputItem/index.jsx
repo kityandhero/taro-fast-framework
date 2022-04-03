@@ -93,7 +93,6 @@ const config11 = {
 const config112 = {
   required: true,
   label: '用户名',
-  title: '用户的名称',
   description: '填写用户的名称, 例如 李明',
   icon: <IconCheckCircle size={38} showInfo color="green" />,
   placeholder: '请输入用户名',
@@ -155,7 +154,6 @@ const config19 = {
   required: true,
   layout: 'vertical',
   label: '用户名',
-  title: '用户的名称',
   description: '填写用户的名称, 例如 李明',
   icon: <IconCheckCircle size={38} showInfo color="green" />,
   placeholder: '请输入用户名',
