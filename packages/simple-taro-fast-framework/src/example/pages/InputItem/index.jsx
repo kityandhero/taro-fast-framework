@@ -91,10 +91,11 @@ const config11 = {
 };
 
 const config112 = {
+  required: true,
   label: '用户名',
   title: '用户的名称',
   description: '填写用户的名称, 例如 李明',
-  prefix: <IconCheckCircle size={38} showInfo color="green" />,
+  icon: <IconCheckCircle size={38} showInfo color="green" />,
   placeholder: '请输入用户名',
   placeholderStyle: { color: '#45e325' },
   afterChange,
@@ -156,7 +157,7 @@ const config19 = {
   label: '用户名',
   title: '用户的名称',
   description: '填写用户的名称, 例如 李明',
-  prefix: <IconCheckCircle size={38} showInfo color="green" />,
+  icon: <IconCheckCircle size={38} showInfo color="green" />,
   placeholder: '请输入用户名',
   placeholderStyle: { color: '#45e325' },
 };

@@ -101,6 +101,7 @@ class Item extends BaseComponent {
     const {
       style,
       prefix,
+      prefixStyle,
       title,
       label,
       description,
@@ -169,7 +170,10 @@ class Item extends BaseComponent {
         >
           <View className={`${classPrefix}-header-content`}>
             {!!prefix ? (
-              <View className={`${classPrefix}-header-content-prefix`}>
+              <View
+                className={`${classPrefix}-header-content-prefix`}
+                style={prefixStyle}
+              >
                 {prefix}
               </View>
             ) : null}

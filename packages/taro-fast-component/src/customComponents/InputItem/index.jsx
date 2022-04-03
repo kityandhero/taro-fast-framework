@@ -21,6 +21,7 @@ import Item from '../Item';
 import Icon from '../Icon';
 import Row from '../Flex/Row';
 import Col from '../Flex/Col';
+import ColorText from '../ColorText';
 
 const { IconCloseCircle } = Icon;
 
@@ -33,7 +34,7 @@ const defaultProps = {
   description: null,
   descriptionStyle: {},
   contentStyle: {},
-  prefix: null,
+  icon: null,
   border: true,
   align: 'left',
   required: false,
@@ -181,7 +182,7 @@ class InputItem extends BaseComponent {
   renderFurther() {
     const {
       style,
-      prefix,
+      icon,
       description,
       descriptionStyle,
       contentStyle,
@@ -240,8 +241,8 @@ class InputItem extends BaseComponent {
                     verticalAlign: 'middle',
                     textAlign: 'center',
                     width: transformSize(24),
-                    height: transformSize(45),
-                    lineHeight: transformSize(45),
+                    height: transformSize(40),
+                    lineHeight: transformSize(40),
                     color: 'red',
                   }}
                 >
@@ -260,7 +261,7 @@ class InputItem extends BaseComponent {
                   ...labelStyle,
                 }}
               >
-                {label}
+                <ColorText icon={icon} text={label} />
               </View>
             </VerticalBox>
           }
@@ -370,11 +371,8 @@ class InputItem extends BaseComponent {
       return (
         <Item
           style={style}
-          prefix={prefix}
           prefixStyle={{
-            padding: `${transformSize(24)} 0 ${transformSize(
-              showBody ? 12 : 24,
-            )} 0`,
+            paddingBottom: transformSize(showBody ? 12 : 24),
           }}
           label={labelComponent}
           contentStyle={{
@@ -382,16 +380,14 @@ class InputItem extends BaseComponent {
             ...contentStyle,
             ...{
               flex: 'none',
-              padding: `${transformSize(24)} 0 ${transformSize(
-                showBody ? 12 : 24,
-              )} 0`,
+              paddingBottom: transformSize(showBody ? 12 : 24),
             },
           }}
           border={border}
           extra={inputPart}
           extraContainerStyle={{
             ...{
-              padding: `0 ${transformSize(24)} 0 0`,
+              padding: `0 ${transformSize(showBody ? 12 : 24)} 0 0`,
             },
             ...inputStyle,
             ...{
@@ -420,10 +416,12 @@ class InputItem extends BaseComponent {
             <Col size={12}>
               <View
                 style={{
-                  padding: `${transformSize(22)} 0 ${transformSize(11)} 0`,
+                  padding: `${transformSize(22)} ${transformSize(
+                    24,
+                  )} ${transformSize(0)} ${transformSize(24)}`,
                 }}
               >
-                <FlexBox left={prefix} right={labelComponent} />
+                {labelComponent}
               </View>
             </Col>
           </Row>
@@ -447,7 +445,7 @@ class InputItem extends BaseComponent {
               extra={inputPart}
               extraContainerStyle={{
                 ...{
-                  padding: `0 ${transformSize(24)} 0 0`,
+                  padding: `0 ${transformSize(showBody ? 12 : 24)} 0 0`,
                 },
                 ...inputStyle,
                 ...{
