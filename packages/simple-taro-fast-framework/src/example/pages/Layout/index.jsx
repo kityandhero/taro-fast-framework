@@ -117,9 +117,9 @@ const list = [
     path: pathCollection.example.collapse.path,
   },
   {
-    id: 'ActivityBackboardBox',
+    id: 'BackboardBox',
     name: '背板面板',
-    path: pathCollection.example.activityBackboardBox.path,
+    path: pathCollection.example.backboardBox.path,
   },
 ];
 

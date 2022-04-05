@@ -151,8 +151,10 @@ export default class Index extends BasePageWrapper {
               <View
                 className={classNames(`${classPrefix}__navContainor__navBox`)}
               >
-                <Grid columns={5}>
-                  {(navList || []).map((item, index) => {
+                <Grid
+                  columns={5}
+                  list={navList}
+                  itemBuilder={(item, index) => {
                     const { image, value } = item;
 
                     return (
@@ -175,8 +177,8 @@ export default class Index extends BasePageWrapper {
                         />
                       </Grid.Item>
                     );
-                  })}
-                </Grid>
+                  }}
+                />
               </View>
             </View>
 

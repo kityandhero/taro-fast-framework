@@ -23,14 +23,6 @@ const defaultProps = {
 };
 
 class Grid extends BaseComponent {
-  triggerClick = (option) => {
-    const { onClick } = this.props;
-
-    if (isFunction(onClick)) {
-      onClick(option.value);
-    }
-  };
-
   buildItem = ({ item, span = 1, index }) => {
     const { itemBuilder } = this.props;
 
@@ -44,20 +36,11 @@ class Grid extends BaseComponent {
       return null;
     }
 
-    const { onGridItemClick = null } = {
-      ...{ onGridItemClick: null },
-      ...item,
-    };
-
     return (
       <Grid.Item
         key={`${this.keyPrefix}_key_build_item_${index}`}
         span={span}
-        onClick={() => {
-          if (isFunction(onGridItemClick)) {
-            onGridItemClick({ item, index });
-          }
-        }}
+        onClick={this.triggerClick}
       >
         {itemComponent}
       </Grid.Item>
@@ -79,6 +62,14 @@ class Grid extends BaseComponent {
 
       return this.buildItem({ item, span, index });
     });
+  };
+
+  triggerClick = (item, index) => {
+    const { onClick } = this.props;
+
+    if (isFunction(onClick)) {
+      onClick(item, index);
+    }
   };
 
   renderFurther() {
@@ -105,7 +96,7 @@ class Grid extends BaseComponent {
     }
 
     return (
-      <View className={classPrefix} style={style} onClick={this.triggerClick}>
+      <View className={classPrefix} style={style}>
         {this.buildItemList()}
 
         {this.props.children}

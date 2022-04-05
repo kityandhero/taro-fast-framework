@@ -191,8 +191,8 @@ const examplePathCollection = {
   scaleBox: {
     path: '/example/pages/scaleBox/index',
   },
-  activityBackboardBox: {
-    path: '/example/pages/activityBackboardBox/index',
+  backboardBox: {
+    path: '/example/pages/backboardBox/index',
   },
   dataGrid: {
     path: '/example/pages/dataGrid/index',
@@ -346,6 +346,9 @@ const templatePathCollection = {
   },
   signIn: {
     path: '/template/pages/signIn/main/index',
+  },
+  gridBanner: {
+    path: '/template/pages/gridBanner/main/index',
   },
 };
 

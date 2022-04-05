@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Space,
-  ActivityBackboardBox,
+  BackboardBox,
   CenterBox,
 } from 'taro-fast-component/es/customComponents';
 
@@ -65,7 +65,7 @@ definePageConfig({
 
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'ActivityBackboardBox',
+    id: 'BackboardBox',
     name: '背板容器',
     description: '背板容器组件',
   };
@@ -100,9 +100,9 @@ export default class Index extends ContentPageBase {
 
   buildSimpleItem = ({ key, config, inner }) => {
     return (
-      <ActivityBackboardBox key={key} {...config}>
+      <BackboardBox key={key} {...config}>
         {this.buildSimpleItemInner(inner)}
-      </ActivityBackboardBox>
+      </BackboardBox>
     );
   };
 
@@ -115,7 +115,7 @@ export default class Index extends ContentPageBase {
           header={header}
           description={description}
           config={currentConfig}
-          componentName="ActivityBackboardBox"
+          componentName="BackboardBox"
           mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
@@ -134,10 +134,7 @@ export default class Index extends ContentPageBase {
           </View>
         </SimpleBox>
 
-        <PropertyBox
-          config={ActivityBackboardBox.defaultProps}
-          labelWidth={240}
-        />
+        <PropertyBox config={BackboardBox.defaultProps} labelWidth={240} />
       </Space>
     );
   };

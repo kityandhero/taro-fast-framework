@@ -14,7 +14,7 @@ const defaultProps = {
   onClick: null,
 };
 
-class ActivityBackboardBox extends BaseComponent {
+class BackboardBox extends BaseComponent {
   buildStyle = () => {
     const { style, height } = this.props;
 
@@ -87,9 +87,9 @@ class ActivityBackboardBox extends BaseComponent {
   }
 }
 
-ActivityBackboardBox.defaultProps = {
+BackboardBox.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default ActivityBackboardBox;
+export default BackboardBox;

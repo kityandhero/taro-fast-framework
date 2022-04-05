@@ -71,7 +71,7 @@ export default {
         'pages/centerBox/index',
         'pages/thumbnailBox/index',
         'pages/scaleBox/index',
-        'pages/activityBackboardBox/index',
+        'pages/backboardBox/index',
         'pages/dataGrid/index',
         'pages/searchBar/index',
         'pages/textAreaItem/index',
@@ -130,7 +130,11 @@ export default {
     {
       root: 'template',
       name: '模板页',
-      pages: ['pages/entry/main/index', 'pages/signIn/main/index'],
+      pages: [
+        'pages/entry/main/index',
+        'pages/signIn/main/index',
+        'pages/gridBanner/main/index',
+      ],
     },
     {
       root: 'news',
