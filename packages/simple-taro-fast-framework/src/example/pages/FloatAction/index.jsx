@@ -168,7 +168,7 @@ export default class Index extends ContentPageBase {
           header={header}
           description={description}
           config={currentConfig}
-          componentName="Avatar"
+          componentName="FloatAction"
           mockChildren={!!inner}
           useInnerBox={false}
           innerBoxCenterMode

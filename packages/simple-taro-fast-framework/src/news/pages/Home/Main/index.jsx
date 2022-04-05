@@ -2,7 +2,11 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  navigateTo,
+  redirectTo,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
@@ -15,6 +19,7 @@ import {
   CenterBox,
   Card,
   More,
+  FloatAction,
 } from 'taro-fast-component/es/customComponents';
 
 import { pathCollection } from '../../../../customConfig/config';
@@ -231,6 +236,28 @@ export default class Index extends BasePageWrapper {
             })}
           </Space>
         </View>
+
+        <FloatAction
+          position="bottomLeft"
+          theme="balanced"
+          direction="vertical"
+          buttons={[
+            {
+              label: '首页1',
+              icon: '1',
+              onClick: () => {
+                redirectTo(pathCollection.news.home.path);
+              },
+            },
+            {
+              label: '首页2',
+              icon: '2',
+              onClick: () => {
+                redirectTo(pathCollection.news.home2.path);
+              },
+            },
+          ]}
+        />
       </>
     );
   }

@@ -362,6 +362,9 @@ const newsPathCollection = {
   home: {
     path: '/news/pages/home/main/index',
   },
+  home2: {
+    path: '/news/pages/home2/main/index',
+  },
   section: {
     path: '/news/pages/section/main/index',
   },

@@ -143,6 +143,7 @@ export default {
       pages: [
         'pages/entry/main/index',
         'pages/home/main/index',
+        'pages/home2/main/index',
         'pages/section/main/index',
       ],
     },
