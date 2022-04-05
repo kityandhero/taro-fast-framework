@@ -283,7 +283,6 @@ export default class Index extends ContentPageBase {
   };
 
   buildGrid = ({
-    keyPrefix = '',
     style: itemStyle = {},
     column = 2,
     list = [],
@@ -293,84 +292,84 @@ export default class Index extends ContentPageBase {
     aspectRatio = 0.4,
   }) => {
     return (
-      <Grid columns={column}>
-        {list.map((item, index) => {
+      <Grid
+        columns={column}
+        list={list}
+        itemBuilder={({ item }) => {
           const { color, shadow: shadowColor, direct, shortName, name } = item;
 
           return (
-            <Grid.Item key={`${keyPrefix}_${index}`}>
-              <FlexBox
-                style={{
-                  ...boxStyle,
-                  ...(gradient ? boxExtensionStyle : {}),
-                }}
-                flexAuto="top"
-                top={
-                  <CenterBox>
-                    <ScaleBox
+            <FlexBox
+              style={{
+                ...boxStyle,
+                ...(gradient ? boxExtensionStyle : {}),
+              }}
+              flexAuto="top"
+              top={
+                <CenterBox>
+                  <ScaleBox
+                    style={{
+                      ...(gradient
+                        ? {
+                            backgroundImage: buildLinearGradient({
+                              direct,
+                              list: color,
+                            }),
+                          }
+                        : {}),
+                      ...(!gradient && !onlyShadow
+                        ? {
+                            backgroundColor: color,
+                          }
+                        : {}),
+                      ...(shadow
+                        ? {
+                            boxShadow: `0 var(--tfc-7) var(--tfc-12) 0 ${shadowColor}`,
+                          }
+                        : {}),
+                      ...itemStyle,
+                    }}
+                    aspectRatio={aspectRatio}
+                  >
+                    <CenterBox
                       style={{
-                        ...(gradient
-                          ? {
-                              backgroundImage: buildLinearGradient({
-                                direct,
-                                list: color,
-                              }),
-                            }
-                          : {}),
-                        ...(!gradient && !onlyShadow
-                          ? {
-                              backgroundColor: color,
-                            }
-                          : {}),
-                        ...(shadow
-                          ? {
-                              boxShadow: `0 var(--tfc-7) var(--tfc-12) 0 ${shadowColor}`,
-                            }
-                          : {}),
-                        ...itemStyle,
+                        fontSize: transformSize(30),
+                        color: '#fff',
                       }}
-                      aspectRatio={aspectRatio}
                     >
-                      <CenterBox
-                        style={{
-                          fontSize: transformSize(30),
-                          color: '#fff',
-                        }}
-                      >
-                        <View>{shortName}</View>
-                      </CenterBox>
-                    </ScaleBox>
-                  </CenterBox>
-                }
-                bottom={
-                  gradient ? (
-                    <Space direction="vertical" fillWidth size={10}>
-                      <View
-                        style={{
-                          ...nameStyle,
-                          ...(gradient ? nameExtensionStyle : {}),
-                        }}
-                      >
-                        {name}
-                      </View>
-                      <View style={descriptionStyle}>
-                        [
-                        {buildLinearGradient({
-                          direct,
-                          list: color,
-                        })}
-                        ]
-                      </View>
-                    </Space>
-                  ) : (
-                    <View style={nameStyle}>{name}</View>
-                  )
-                }
-              />
-            </Grid.Item>
+                      <View>{shortName}</View>
+                    </CenterBox>
+                  </ScaleBox>
+                </CenterBox>
+              }
+              bottom={
+                gradient ? (
+                  <Space direction="vertical" fillWidth size={10}>
+                    <View
+                      style={{
+                        ...nameStyle,
+                        ...(gradient ? nameExtensionStyle : {}),
+                      }}
+                    >
+                      {name}
+                    </View>
+                    <View style={descriptionStyle}>
+                      [
+                      {buildLinearGradient({
+                        direct,
+                        list: color,
+                      })}
+                      ]
+                    </View>
+                  </Space>
+                ) : (
+                  <View style={nameStyle}>{name}</View>
+                )
+              }
+            />
           );
-        })}
-      </Grid>
+        }}
+      />
     );
   };
 
@@ -379,7 +378,7 @@ export default class Index extends ContentPageBase {
       <Space direction="vertical" fillWidth>
         <SimpleBox
           header="纯色"
-          description={[
+          footer={[
             {
               text: '内置CSS变量举例: --tfc-color-red',
             },

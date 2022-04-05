@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
-import { CenterBox, Avatar } from 'taro-fast-component/es/customComponents';
+import {
+  CenterBox,
+  Avatar,
+  InputItem,
+  Space,
+  Button,
+} from 'taro-fast-component/es/customComponents';
 
 import BasePageWrapper from '../../BasePageWrapper';
 
@@ -39,6 +45,45 @@ export default class Index extends BasePageWrapper {
               />
             </View>
           </CenterBox>
+        </View>
+
+        <View className={classNames(`${classPrefix}__input`)}>
+          <Space direction="vertical" size={12} fillWidth>
+            <InputItem
+              layout="vertical"
+              label="账户"
+              labelStyle={{
+                color: '#8e8791',
+                fontSize: 22,
+              }}
+              placeholder="请输入过户名/手机号"
+            />
+
+            <InputItem
+              layout="vertical"
+              label="密码"
+              labelStyle={{
+                color: '#8e8791',
+                fontSize: 22,
+              }}
+              placeholder="请输入密码"
+            />
+          </Space>
+        </View>
+
+        <View className={classNames(`${classPrefix}__button`)}>
+          <Space direction="vertical" size={30} fillWidth>
+            <Button
+              text="注册"
+              backgroundColor={['#f43f3b', ' #ec008c']}
+              block
+              circle
+              size="middle"
+              shape="rounded"
+            />
+
+            <Button text="取消" block circle size="middle" shape="rounded" />
+          </Space>
         </View>
       </View>
     );

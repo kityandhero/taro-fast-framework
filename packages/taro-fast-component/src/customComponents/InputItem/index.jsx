@@ -261,7 +261,11 @@ class InputItem extends BaseComponent {
                   ...labelStyle,
                 }}
               >
-                <ColorText icon={icon} text={label} />
+                {isObject(label) ? (
+                  label
+                ) : (
+                  <ColorText icon={icon} text={label} />
+                )}
               </View>
             </VerticalBox>
           }
@@ -442,7 +446,9 @@ class InputItem extends BaseComponent {
               extra={inputPart}
               extraContainerStyle={{
                 ...{
-                  padding: `0 ${transformSize(showBody ? 12 : 24)} 0 0`,
+                  padding: `0 ${transformSize(
+                    showBody ? 12 : 24,
+                  )} 0 ${transformSize(24)}`,
                 },
                 ...inputStyle,
                 ...{

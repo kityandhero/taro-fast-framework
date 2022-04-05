@@ -131,31 +131,33 @@ class SimpleBox extends Component {
   };
 
   buildFooter = () => {
-    const { description } = this.props;
+    const { footer } = this.props;
 
     let listData = [];
 
-    if (isString(description)) {
-      if (stringIsNullOrWhiteSpace(description || null)) {
+    if (isString(footer)) {
+      if (stringIsNullOrWhiteSpace(footer || null)) {
         return null;
       }
 
       listData.push({
-        text: description,
+        text: footer,
       });
     }
 
-    if (isArray(description)) {
-      listData = description;
+    if (isArray(footer)) {
+      listData = footer;
     }
 
     if (listData.length > 0) {
       return <HelpBox showTitle={false} showNumber={false} list={listData} />;
     }
 
-    if (isObject(description)) {
-      return description;
+    if (isObject(footer)) {
+      return footer;
     }
+
+    return null;
   };
 
   buildExhibitionArea = () => {
