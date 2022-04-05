@@ -133,6 +133,7 @@ export default {
       pages: [
         'pages/entry/main/index',
         'pages/signIn/main/index',
+        'pages/register/main/index',
         'pages/gridBanner/main/index',
       ],
     },
