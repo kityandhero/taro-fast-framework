@@ -20,7 +20,7 @@ import {
   TranslucentBox,
 } from 'taro-fast-component/es/customComponents';
 
-export const classPrefix = `simple-news-home`;
+export const classPrefix = `simple-news-home2`;
 
 const { IconClock } = Icon;
 
