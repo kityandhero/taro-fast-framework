@@ -31,11 +31,13 @@ import {
   FadeView,
   BackTop,
   FixedBox,
+  Footer,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
+import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 
 import {
   getSession,
@@ -228,6 +230,11 @@ export default class Infrastructure extends ComponentBase {
   clearListDataBeforeAttach = false;
 
   pageScrollTop = 0;
+
+  /**
+   * 启用 Footer
+   */
+  enableFooter = false;
 
   /**
    * 启用返回头部, 仅默认容器模式有效
@@ -1016,6 +1023,28 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
+  buildBottomArea = () => {
+    return null;
+  };
+
+  buildFooter = () => {
+    if (!this.enableFooter) {
+      return null;
+    }
+
+    const image = defaultSettingsLayoutCustom.getFooterImage();
+    const text = defaultSettingsLayoutCustom.getFooterText();
+    const description = defaultSettingsLayoutCustom.getFooterDescription();
+
+    if (image || text || description) {
+      {
+        return <Footer image={image} text={text} description={description} />;
+      }
+    }
+
+    return null;
+  };
+
   closeCapsulePrompt = () => {
     this.setState({
       capsulePromptVisible: false,
@@ -1068,6 +1097,10 @@ export default class Infrastructure extends ComponentBase {
         }}
       >
         {this.renderFurther()}
+
+        {this.buildBottomArea()}
+
+        {this.buildFooter()}
       </VariableView>
     );
 

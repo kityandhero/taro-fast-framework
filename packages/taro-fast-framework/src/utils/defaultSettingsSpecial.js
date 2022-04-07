@@ -341,15 +341,35 @@ export const defaultSettingsLayoutCustom = {
 
     return leftBarText || '';
   },
-  getCopyright: () => {
+  getFooterImage: () => {
     const appInit = getAppInitConfigData();
 
-    const { copyright } = {
-      ...{ copyright: '' },
+    const { footerImage } = {
+      ...{ footerImage: '' },
       ...(appInit || {}),
     };
 
-    return copyright || '';
+    return footerImage || '';
+  },
+  getFooterText: () => {
+    const appInit = getAppInitConfigData();
+
+    const { footerText } = {
+      ...{ footerText: '' },
+      ...(appInit || {}),
+    };
+
+    return footerText || '';
+  },
+  getFooterDescription: () => {
+    const appInit = getAppInitConfigData();
+
+    const { footerDescription } = {
+      ...{ footerDescription: '' },
+      ...(appInit || {}),
+    };
+
+    return footerDescription || '';
   },
 };
 

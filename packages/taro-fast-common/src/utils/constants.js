@@ -101,7 +101,9 @@ export const appInitDefault = {
   shareLogoName: 'Logo',
   leftBarText: '左侧名称',
   companyName: '公司名称',
-  copyright: '版权描述',
+  footerImage: '',
+  footerText: '',
+  footerDescription: '版权描述',
   apiPrefix: {
     corsTargetProduction: '',
   },

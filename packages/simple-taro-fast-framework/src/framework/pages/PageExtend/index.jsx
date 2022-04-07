@@ -27,6 +27,11 @@ const list = [
     path: pathCollection.framework.pageExtend.capsulePrompt.path,
   },
   {
+    id: 'Footer',
+    name: '底部信息',
+    path: pathCollection.framework.pageExtend.footer.path,
+  },
+  {
     id: 'Normal',
     name: '普通视图',
     path: pathCollection.framework.pageExtend.normal.path,

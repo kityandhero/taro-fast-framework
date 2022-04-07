@@ -274,6 +274,9 @@ const frameworkPathCollection = {
     capsulePrompt: {
       path: '/framework/pages/pageExtend/capsulePrompt/index',
     },
+    footer: {
+      path: '/framework/pages/pageExtend/footer/index',
+    },
     normal: {
       path: '/framework/pages/pageExtend/normal/index',
       basic: {
