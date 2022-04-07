@@ -979,7 +979,7 @@ export default class Infrastructure extends ComponentBase {
         useTransition
         top={
           this.capsulePromptWithCustomHeadNavigation
-            ? `${height + top + 5}px`
+            ? `${height + top + 8}px`
             : `7px`
         }
         right={90}

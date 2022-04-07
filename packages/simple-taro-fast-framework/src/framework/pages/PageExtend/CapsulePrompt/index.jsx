@@ -36,8 +36,6 @@ export default class Index extends ContentPageBase {
   };
 
   buildCapsulePrompt = () => {
-    console.log(this);
-
     return (
       <View
         style={{
