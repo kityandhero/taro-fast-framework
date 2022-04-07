@@ -88,6 +88,9 @@ export default class Infrastructure extends ComponentBase {
    */
   enableCapsulePrompt = false;
 
+  /**
+   * 适配自定义头部布局
+   */
   capsulePromptWithCustomHeadNavigation = false;
 
   capsulePromptRight = 90;
