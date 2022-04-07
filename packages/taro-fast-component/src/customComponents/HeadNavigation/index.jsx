@@ -37,7 +37,7 @@ class HeadNavigation extends BaseComponent {
       placeholderHeight: `${top}px`,
       height: `${height}px`,
       boxHeight: `${height + top}px`,
-      rightWidth: `${width + 10 + 10}px`,
+      rightWidth: `${width + 20}px`,
     });
   };
 
