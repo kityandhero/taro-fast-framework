@@ -71,6 +71,9 @@ const examplePathCollection = {
   steps: {
     path: '/example/pages/steps/index',
   },
+  headNavigation: {
+    path: '/example/pages/headNavigation/index',
+  },
   divider: {
     path: '/example/pages/divider/index',
   },

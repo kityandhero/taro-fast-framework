@@ -23,6 +23,11 @@ const list = [
     path: pathCollection.example.imageBox.path,
   },
   {
+    id: 'HeadNavigation',
+    name: '头部导航',
+    path: pathCollection.example.headNavigation.path,
+  },
+  {
     id: 'ColorText',
     name: '文字渲染',
     path: pathCollection.example.colorText.path,

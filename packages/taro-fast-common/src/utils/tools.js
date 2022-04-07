@@ -54,6 +54,7 @@ import {
   hideNavigationBarLoading as hideNavigationBarLoadingCore,
   stopPullDownRefresh as stopPullDownRefreshCore,
   pageScrollTo as pageScrollToCore,
+  getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
 } from '@tarojs/taro';
 
 import {
@@ -184,6 +185,10 @@ export function stopPullDownRefresh() {
 
 export function pageScrollTo(params) {
   pageScrollToCore(params);
+}
+
+export function getMenuButtonBoundingClientRect() {
+  return getMenuButtonBoundingClientRectCore();
 }
 
 export function redirectTo(params) {

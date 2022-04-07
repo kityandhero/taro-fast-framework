@@ -893,6 +893,10 @@ export default class Infrastructure extends ComponentBase {
     return !this.scrollViewMode && this.enableBackTop;
   };
 
+  buildHeadNavigation = () => {
+    return null;
+  };
+
   renderView() {
     const { spin, backTopVisible } = this.state;
 
@@ -970,18 +974,24 @@ export default class Infrastructure extends ComponentBase {
 
     if (this.useFadeSpinWrapper) {
       return (
-        <Spin fullscreen spin={spin}>
-          <Notification />
+        <>
+          {this.buildHeadNavigation()}
 
-          <FadeView show={!spin}>{vw}</FadeView>
+          <Spin fullscreen spin={spin}>
+            <Notification />
 
-          {backTopElement}
-        </Spin>
+            <FadeView show={!spin}>{vw}</FadeView>
+
+            {backTopElement}
+          </Spin>
+        </>
       );
     }
 
     return (
       <>
+        {this.buildHeadNavigation()}
+
         <Notification />
 
         {vw}
