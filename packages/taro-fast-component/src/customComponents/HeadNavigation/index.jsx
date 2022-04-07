@@ -30,14 +30,14 @@ class HeadNavigation extends BaseComponent {
   doWorkAdjustDidMount = () => {
     const rect = getMenuButtonBoundingClientRect();
 
-    const { height, top, right } = rect;
+    const { width, height, top } = rect;
 
     this.setState({
       containerHeight: `${height + top + 10}px`,
       placeholderHeight: `${top}px`,
       height: `${height}px`,
       boxHeight: `${height + top}px`,
-      rightWidth: `${right + 10}px`,
+      rightWidth: `${width + 10 + 10}px`,
     });
   };
 
