@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro';
+import { View } from '@tarojs/components';
 
 import {
   showErrorMessage,
@@ -12,6 +13,8 @@ import {
   recordLog,
   getSignInResultDescription,
   recordObject,
+  transformSize,
+  getMenuButtonBoundingClientRect,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -27,6 +30,7 @@ import {
   Spin,
   FadeView,
   BackTop,
+  FixedBox,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
@@ -78,6 +82,23 @@ export default class Infrastructure extends ComponentBase {
    * 模拟渐显效果的持续时间
    */
   simulationFadeSpinDuration = 300;
+
+  /**
+   * 启用右上角操作提示
+   */
+  enableCapsulePrompt = false;
+
+  capsulePromptWithCustomHeadNavigation = false;
+
+  capsulePromptRight = 90;
+
+  capsulePromptXIndex = 20000;
+
+  capsulePromptBackgroundColor = '#fff0f4';
+
+  capsulePromptDelaySecond = 4000;
+
+  capsulePromptTimer = null;
 
   /**
    * 主视图容器自定义样式
@@ -276,6 +297,8 @@ export default class Infrastructure extends ComponentBase {
       ...{
         spin: true,
         backTopVisible: false,
+        capsulePromptVisible: false,
+        initCapsulePrompt: false,
       },
     };
 
@@ -409,7 +432,42 @@ export default class Infrastructure extends ComponentBase {
     this.doOtherRemoteRequest();
 
     this.doOtherWorkAfterDidMount();
+
+    const that = this;
+
+    if (this.enableCapsulePrompt) {
+      that.capsulePromptTimer = setTimeout(() => {
+        that.setState(
+          {
+            capsulePromptVisible: true,
+            initCapsulePrompt: true,
+          },
+          () => {
+            that.capsulePromptTimer = setTimeout(
+              () => {
+                that.setState({
+                  capsulePromptVisible: false,
+                });
+              },
+              that.capsulePromptDelaySecond <= 0
+                ? 2000
+                : that.capsulePromptDelaySecond,
+            );
+          },
+        );
+      }, 2000);
+    }
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.capsulePromptTimer);
+
+    this.doWorkBeforeUnmount();
+
+    this.doWorkAfterUnmount();
+
+    this.setState = () => {};
+  }
 
   getDispatch = () => {
     const { dispatch } = this.props;
@@ -897,6 +955,70 @@ export default class Infrastructure extends ComponentBase {
     return null;
   };
 
+  buildCapsulePrompt = () => {
+    return null;
+  };
+
+  buildCapsulePromptWrapper = () => {
+    const { initCapsulePrompt, capsulePromptVisible } = this.state;
+
+    if (!this.enableCapsulePrompt || !initCapsulePrompt) {
+      return null;
+    }
+
+    const rect = getMenuButtonBoundingClientRect();
+
+    const { height, top } = rect;
+
+    return (
+      <FixedBox
+        show={capsulePromptVisible}
+        useTransition
+        top={
+          this.capsulePromptWithCustomHeadNavigation
+            ? `${height + top + 5}px`
+            : `7px`
+        }
+        right={90}
+        zIndex={20000}
+        style={{
+          position: 'relative',
+          backgroundColor: this.capsulePromptBackgroundColor,
+          boxShadow: `0 0 ${transformSize(5)} ${transformSize(5)} ${
+            this.capsulePromptBackgroundColor
+          }`,
+          borderRadius: transformSize(10),
+          padding: `${transformSize(10)} ${transformSize(20)}`,
+        }}
+      >
+        <View>{this.buildCapsulePrompt()}</View>
+
+        <View
+          style={{
+            display: 'block',
+            position: 'absolute',
+            top: transformSize(-34),
+            right: transformSize(30),
+            width: transformSize(0),
+            height: transformSize(0),
+            borderTop: `${transformSize(20)} solid transparent`,
+            borderRight: `${transformSize(20)} solid transparent`,
+            borderBottom: `${transformSize(20)} solid ${
+              this.capsulePromptBackgroundColor
+            }`,
+            borderLeft: `${transformSize(20)} solid transparent`,
+          }}
+        />
+      </FixedBox>
+    );
+  };
+
+  closeCapsulePrompt = () => {
+    this.setState({
+      capsulePromptVisible: false,
+    });
+  };
+
   renderView() {
     const { spin, backTopVisible } = this.state;
 
@@ -977,6 +1099,8 @@ export default class Infrastructure extends ComponentBase {
         <>
           {this.buildHeadNavigation()}
 
+          {this.buildCapsulePromptWrapper()}
+
           <Spin fullscreen spin={spin}>
             <Notification />
 
@@ -991,6 +1115,8 @@ export default class Infrastructure extends ComponentBase {
     return (
       <>
         {this.buildHeadNavigation()}
+
+        {this.buildCapsulePromptWrapper()}
 
         <Notification />
 

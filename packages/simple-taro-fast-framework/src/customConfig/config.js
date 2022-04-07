@@ -271,6 +271,9 @@ const frameworkPathCollection = {
         path: '/framework/pages/pageExtend/builtInEffect/buildInitialActivityIndicator/index',
       },
     },
+    capsulePrompt: {
+      path: '/framework/pages/pageExtend/capsulePrompt/index',
+    },
     normal: {
       path: '/framework/pages/pageExtend/normal/index',
       basic: {

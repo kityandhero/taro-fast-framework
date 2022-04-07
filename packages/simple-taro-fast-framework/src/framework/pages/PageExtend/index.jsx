@@ -22,6 +22,11 @@ const list = [
     path: pathCollection.framework.pageExtend.builtInEffect.path,
   },
   {
+    id: 'CapsulePrompt',
+    name: '使用胶囊提示',
+    path: pathCollection.framework.pageExtend.capsulePrompt.path,
+  },
+  {
     id: 'Normal',
     name: '普通视图',
     path: pathCollection.framework.pageExtend.normal.path,
