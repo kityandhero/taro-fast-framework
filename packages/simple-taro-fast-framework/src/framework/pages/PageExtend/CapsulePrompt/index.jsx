@@ -14,6 +14,7 @@ export const classPrefix = `template-grid-banner`;
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '胶囊操作提示',
+  // navigationStyle: 'custom',
 });
 
 @connect(({ entrance, session, global, schedulingControl }) => ({
@@ -25,11 +26,7 @@ definePageConfig({
 export default class Index extends ContentPageBase {
   enableCapsulePrompt = true;
 
-  // capsulePromptXIndex = 20000;
-
-  // capsulePromptBackgroundColor = '#fff0f4';
-
-  // capsulePromptDelaySecond = 4000;
+  // capsulePromptWithCustomHeadNavigation = true;
 
   getApiData = (props) => {
     return getApiDataCore({ props, modelName: 'entrance' });
