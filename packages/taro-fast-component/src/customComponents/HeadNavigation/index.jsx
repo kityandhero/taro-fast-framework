@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { getMenuButtonBoundingClientRect } from 'taro-fast-common/es/utils/tools';
@@ -6,10 +5,6 @@ import { getMenuButtonBoundingClientRect } from 'taro-fast-common/es/utils/tools
 import BaseComponent from '../BaseComponent';
 import BackboardBox from '../BackboardBox';
 import FlexBox from '../FlexBox';
-
-import './index.less';
-
-const classPrefix = `tfc-head-navigation`;
 
 const defaultProps = {
   backboardStyle: {},
@@ -80,7 +75,6 @@ class HeadNavigation extends BaseComponent {
 
     return (
       <View
-        className={classNames(classPrefix)}
         style={{
           ...style,
           ...{
