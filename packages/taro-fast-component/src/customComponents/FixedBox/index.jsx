@@ -52,7 +52,6 @@ class FixedBox extends BaseComponent {
       ...(height != 'auto' ? { height: transformSize(height) } : {}),
       ...style,
       ...{
-        display: 'block',
         position: 'fixed',
         zIndex: zIndex,
       },
