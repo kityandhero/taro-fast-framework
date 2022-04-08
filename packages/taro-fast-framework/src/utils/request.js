@@ -63,11 +63,17 @@ export class Request {
 
   /**
    *
-   * @static 开始Post请求
+   * @static 开始请求
    * @returns
    * @memberof PostJson
    */
-  static Post(url, data, header = {}, option) {
+  static Execute({
+    url,
+    data,
+    header = {},
+    option,
+    method = requestMethod.post,
+  }) {
     try {
       const token = getToken() || tokenAnonymous;
       const openId = getOpenId();
@@ -100,10 +106,6 @@ export class Request {
       }
 
       let urlChange = url;
-
-      console.log({
-        url,
-      });
 
       if (
         toLower(url).startsWith('http://') ||
@@ -156,7 +158,7 @@ export class Request {
           url: urlChange,
           data: data || {},
           header: headerChange,
-          method: requestMethod.post,
+          method,
         },
       });
     } catch (e) {

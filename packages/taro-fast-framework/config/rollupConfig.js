@@ -20,6 +20,9 @@ const inputFile = {
   ...{
     'models/index': 'src/models/index.js',
   },
+  ...{
+    'services/schedulingControl': 'src/services/schedulingControl.js',
+  },
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {

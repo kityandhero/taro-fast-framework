@@ -1,4 +1,8 @@
-import { setLocationMode } from 'src/utils/globalStorageAssist';
+import {
+  getWeather,
+  setLocationMode,
+  setWeather,
+} from 'src/utils/globalStorageAssist';
 import {
   locateResult,
   verifySignInResult,
@@ -7,6 +11,8 @@ import {
 import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
 import { reducerCommonCollection } from '../utils/dva';
+
+import { getWeatherData } from '../services/schedulingControl';
 
 export default {
   namespace: 'schedulingControl',
@@ -25,6 +31,40 @@ export default {
   },
 
   effects: {
+    *getWeather({ payload }, { call, put }) {
+      let result = getWeather();
+
+      let fromRemote = false;
+
+      if ((result || null) == null) {
+        fromRemote = true;
+        result = {};
+      }
+
+      if (fromRemote) {
+        const response = yield call(getWeatherData, {
+          ...payload,
+          ...{
+            source: 'pc',
+            weather_type:
+              'observe|forecast_1h|forecast_24h|index|alarm|limit|tips|air|rise',
+          },
+        });
+
+        const { data: metaData } = response;
+
+        setWeather(metaData);
+
+        result = metaData;
+      }
+
+      yield put({
+        type: 'changeWeather',
+        payload: {
+          weather: result,
+        },
+      });
+    },
     *initialLocationMode({ payload }, { put }) {
       yield put({
         type: 'changeInitialLocationModeComplete',
@@ -70,6 +110,12 @@ export default {
   },
 
   reducers: {
+    changeWeather(state, { payload }) {
+      return {
+        ...state,
+        ...payload,
+      };
+    },
     changeInitialLocationModeComplete(state, { payload }) {
       const { initialLocationModeComplete } = state;
 

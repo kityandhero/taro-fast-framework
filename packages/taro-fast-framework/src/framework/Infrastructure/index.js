@@ -15,6 +15,7 @@ import {
   recordObject,
   transformSize,
   getMenuButtonBoundingClientRect,
+  getValueByKey,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -44,6 +45,7 @@ import {
   getSessionRefreshing,
   setCurrentUrl,
   setSessionRefreshing,
+  getMap,
 } from '../../utils/globalStorageAssist';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
@@ -763,6 +765,62 @@ export default class Infrastructure extends ComponentBase {
       }
     });
   }
+
+  getLocationWeather = ({ callback = null }) => {
+    const that = this;
+
+    const map = getMap();
+
+    if (map == null) {
+      that.obtainLocation({
+        successCallback: ({ map: mapSource }) => {
+          that.getLocationWeatherCore({
+            data: mapSource,
+            callback,
+          });
+        },
+        force: false,
+        showLoading: false,
+        fromLaunch: false,
+        failCallback: null,
+      });
+    } else {
+      that.getLocationWeatherCore({
+        data: map,
+        callback,
+      });
+    }
+  };
+
+  getLocationWeatherCore = ({ data, callback = null }) => {
+    const {
+      address_component: { province, city },
+    } = data;
+
+    this.getWeather({
+      data: {
+        province,
+        city,
+      },
+      callback,
+    });
+  };
+
+  getWeather = ({ data = {}, callback = null }) => {
+    return this.dispatchApi({
+      type: 'schedulingControl/getWeather',
+      payload: data,
+    }).then(() => {
+      const { weather } = getValueByKey({
+        data: this.props,
+        key: 'schedulingControl',
+      });
+
+      if (isFunction(callback)) {
+        callback(weather);
+      }
+    });
+  };
 
   reloadRemoteMetaData = () => {};
 

@@ -36,6 +36,7 @@ export const storageKeyCollection = {
   locationMode: 'locationMode',
   lastLocation: 'lastLocation',
   remoteCheck: 'remoteCheck',
+  weather: 'weather',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -784,6 +785,69 @@ export function setRemoteCheckCache(o) {
   };
 
   return saveJsonToLocalStorage(key, d);
+}
+
+/**
+ * 获取天气信息
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function getWeather() {
+  const key = storageKeyCollection.weather;
+
+  const l = getJsonFromLocalStorage(key);
+
+  if ((l || null) == null) {
+    return null;
+  }
+
+  const { dataVersion } = l;
+
+  if ((dataVersion || null) == null) {
+    return null;
+  }
+
+  // 地理位置信息有效期30分钟
+  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+
+  if (dataVersion !== now) {
+    return null;
+  }
+
+  return l;
+}
+
+/**
+ * 设置天气信息
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function setWeather(weather) {
+  const key = storageKeyCollection.weather;
+
+  // 地理位置信息有效期30分钟
+  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+
+  weather.dataVersion = nowVersion;
+
+  return saveJsonToLocalStorage(key, weather || '');
+}
+
+/**
+ * 移除天气信息
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function removeWeather() {
+  const key = storageKeyCollection.weather;
+
+  removeLocalStorage(key);
 }
 
 /**

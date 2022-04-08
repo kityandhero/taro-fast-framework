@@ -17,6 +17,7 @@ import {
   isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toLower, toUpper } from 'taro-fast-common/es/utils/typeConvert';
+import { requestMethod } from 'taro-fast-common/es/utils/constants';
 
 import { getToken } from './globalStorageAssist';
 import remoteRequest from './request';
@@ -521,7 +522,23 @@ export async function request({
   }
 
   if (trim(toUpper(method)) === 'POST') {
-    return remoteRequest.Post(url, params, header || {});
+    return remoteRequest.Execute({
+      url,
+      data: params,
+      header: header || {},
+      option: {},
+      method: requestMethod.post,
+    });
+  }
+
+  if (trim(toUpper(method)) === 'GET') {
+    return remoteRequest.Execute({
+      url,
+      data: params,
+      header: header || {},
+      option: {},
+      method: requestMethod.get,
+    });
   }
 
   throw new Error(`unsupported method:${method}`);

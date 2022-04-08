@@ -1,7 +1,7 @@
-import { executiveRequest } from '../utils/request';
+import { request } from '../utils/requestAssistor';
 
-export async function getData(params) {
-  return executiveRequest({
+export async function getWeatherData(params) {
+  return request({
     api: `https://wis.qq.com/weather/common`,
     urlParams: params,
     method: 'GET',
