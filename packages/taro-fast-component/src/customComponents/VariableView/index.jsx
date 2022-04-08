@@ -89,6 +89,9 @@ class VariableView extends BaseComponent {
 
   scrollRefresherFreshing = false;
 
+  /**
+   *内置属性, 禁止覆盖
+   */
   refreshBoxId = '';
 
   scrollViewId = '';

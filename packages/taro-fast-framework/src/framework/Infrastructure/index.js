@@ -229,6 +229,9 @@ export default class Infrastructure extends ComponentBase {
    */
   clearListDataBeforeAttach = false;
 
+  /**
+   * pageScrollTop
+   */
   pageScrollTop = 0;
 
   /**
