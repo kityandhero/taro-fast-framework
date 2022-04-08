@@ -6,6 +6,8 @@ import {
   copyToClipboard,
   replaceTargetText,
   transformSize,
+  getDayOfWeek,
+  getNowDayOfWeek,
 } from 'taro-fast-common/es/utils/tools';
 import {
   datetimeFormat,
@@ -35,7 +37,7 @@ export default class Index extends ContentPageBase {
           header="操获/取作时间"
           space={false}
           extra=""
-          description={[
+          footer={[
             {
               text: 'getNow()',
             },
@@ -61,7 +63,7 @@ export default class Index extends ContentPageBase {
           header="时间格式化"
           space={false}
           extra="formatDatetime"
-          description={[
+          footer={[
             {
               text: 'formatDatetime({data,fmt})',
             },
@@ -121,10 +123,46 @@ export default class Index extends ContentPageBase {
         </SimpleBox>
 
         <SimpleBox
+          header="获取周几"
+          space={false}
+          extra="getDayOfWeek"
+          footer={[
+            {
+              text: 'getDayOfWeek()',
+            },
+          ]}
+          useInnerBox={false}
+        >
+          <Item
+            label="getDayOfWeek({data:new Date()})"
+            border={false}
+            extra={getDayOfWeek({ data: new Date() })}
+          />
+        </SimpleBox>
+
+        <SimpleBox
+          header="获取当前周几"
+          space={false}
+          extra="getNowDayOfWeek"
+          footer={[
+            {
+              text: 'getNowDayOfWeek()',
+            },
+          ]}
+          useInnerBox={false}
+        >
+          <Item
+            label="getNowDayOfWeek()"
+            border={false}
+            extra={getNowDayOfWeek()}
+          />
+        </SimpleBox>
+
+        <SimpleBox
           header="格式化时间差"
           space={false}
           extra="指定起止时间"
-          description={[
+          footer={[
             {
               text: 'formatDateInterval(start, end, opts = {})',
             },
@@ -151,7 +189,7 @@ export default class Index extends ContentPageBase {
           header="格式化时间差"
           space={false}
           extra="距当前时间"
-          description={[
+          footer={[
             {
               text: 'formatDateIntervalWithNow(time, opts = {})',
             },
@@ -175,7 +213,7 @@ export default class Index extends ContentPageBase {
           header="百分比格式化"
           space={false}
           extra="formatTarget"
-          description={[
+          footer={[
             {
               text: 'formatTarget({ target, format })',
             },
@@ -202,7 +240,7 @@ export default class Index extends ContentPageBase {
           header="货币格式化"
           space={false}
           extra="formatTarget"
-          description={[
+          footer={[
             {
               text: 'formatTarget({ target, format })',
             },
@@ -229,7 +267,7 @@ export default class Index extends ContentPageBase {
           header="中文金额"
           space={false}
           extra="formatTarget"
-          description={[
+          footer={[
             {
               text: 'formatTarget({ target, format })',
             },
@@ -255,7 +293,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="复制到剪贴板"
           space={false}
-          description={[
+          footer={[
             {
               text: 'copyToClipboard({ text, successCallback = null })',
             },
@@ -284,7 +322,7 @@ export default class Index extends ContentPageBase {
           header="替换指定字符串"
           space={false}
           extra="replaceTargetText"
-          description={[
+          footer={[
             {
               text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
             },
@@ -314,7 +352,7 @@ export default class Index extends ContentPageBase {
           header="使用内置像素变量"
           space={false}
           extra="transformSize"
-          description={[
+          footer={[
             {
               text: 'transformSize(number)',
             },
@@ -350,7 +388,7 @@ export default class Index extends ContentPageBase {
           header="构建渐变色"
           space={false}
           extra="buildLinearGradient"
-          description={[
+          footer={[
             {
               text: 'buildLinearGradient(number,color...)',
             },

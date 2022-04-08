@@ -794,6 +794,14 @@ export function formatDatetime({
   return dayjs(date).format(fmt);
 }
 
+export function getDayOfWeek({ data: date }) {
+  return dayjs(date).day();
+}
+
+export function getNowDayOfWeek() {
+  return dayjs().day();
+}
+
 export function formatTarget({ target, format, option = {} }) {
   if (isFunction(format)) {
     return format(target);
