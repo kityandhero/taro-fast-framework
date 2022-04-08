@@ -1023,10 +1023,6 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
-  buildBottomArea = () => {
-    return null;
-  };
-
   buildFooter = () => {
     if (!this.enableFooter) {
       return null;
@@ -1092,15 +1088,12 @@ export default class Infrastructure extends ComponentBase {
         }
         existData={!this.judgeEmptyPlaceholderVisible()}
         upperBox={this.buildUpperBox()}
+        footer={this.buildFooter()}
         onExternalScroll={(callback) => {
           this.onScroll(callback);
         }}
       >
         {this.renderFurther()}
-
-        {this.buildBottomArea()}
-
-        {this.buildFooter()}
       </VariableView>
     );
 

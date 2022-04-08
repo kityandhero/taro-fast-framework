@@ -20,6 +20,8 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends ContentPageBase {
+  scrollViewMode = true;
+
   enableFooter = true;
 
   getApiData = (props) => {

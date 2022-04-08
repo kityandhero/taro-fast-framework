@@ -8,6 +8,7 @@ import {
   getRect,
   stringIsNullOrWhiteSpace,
   getSystemInfo,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -64,6 +65,7 @@ const defaultProps = {
   onRefresh: null,
   onLowerLoad: null,
   onExternalScroll: null,
+  footer: null,
 };
 
 class VariableView extends BaseComponent {
@@ -490,6 +492,7 @@ class VariableView extends BaseComponent {
       lowerLoadingPosition,
       useRefreshingBox,
       style,
+      footer,
       children,
     } = this.props;
     const { scrollRefreshTriggered } = this.state;
@@ -587,6 +590,8 @@ class VariableView extends BaseComponent {
     let scrollViewMain = null;
 
     if (scroll) {
+      const { height: heightScrollMode } = styleAdjust;
+
       scrollViewMain = (
         <ScrollView
           id={this.scrollViewId || ''}
@@ -609,16 +614,30 @@ class VariableView extends BaseComponent {
           fastDeceleration={scrollFastDeceleration}
           onRefresherRefresh={this.onScrollRefresherRefresh}
         >
-          <View>
+          <View
+            style={
+              footer
+                ? {
+                    minHeight: `calc(${heightScrollMode} - ${transformSize(
+                      90,
+                    )} - env(safe-area-inset-bottom))`,
+                  }
+                : {}
+            }
+          >
             {children}
 
             {lowerLoadingFooterBoxAdjust}
-
-            {enableSafeAreaInsetBottom ? this.buildSafeAreaInsetBottom() : null}
           </View>
+
+          {footer}
+
+          {enableSafeAreaInsetBottom ? this.buildSafeAreaInsetBottom() : null}
         </ScrollView>
       );
     }
+
+    const { minHeight } = styleAdjust;
 
     return (
       <View
@@ -648,16 +667,33 @@ class VariableView extends BaseComponent {
           ) : (
             scrollViewMain
           )
-        ) : null}
+        ) : (
+          <>
+            <View
+              style={
+                footer
+                  ? {
+                      minHeight: `calc(${minHeight} - ${transformSize(
+                        90,
+                      )} - env(safe-area-inset-bottom))`,
+                    }
+                  : {}
+              }
+            >
+              {upperBox}
 
-        {!scroll ? upperBox : null}
-        {!scroll ? children : null}
+              {children}
+
+              {lowerLoadingFooterBoxAdjust}
+            </View>
+
+            {footer}
+
+            {enableSafeAreaInsetBottom ? this.buildSafeAreaInsetBottom() : null}
+          </>
+        )}
 
         {lowerLoadingOuterBoxAdjust}
-        {!scroll ? lowerLoadingFooterBoxAdjust : null}
-        {!scroll && enableSafeAreaInsetBottom
-          ? this.buildSafeAreaInsetBottom()
-          : null}
       </View>
     );
   }
