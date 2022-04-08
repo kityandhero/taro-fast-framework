@@ -38,7 +38,6 @@ import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
-import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 
 import {
   getSession,
@@ -47,6 +46,7 @@ import {
   setSessionRefreshing,
   getMap,
 } from '../../utils/globalStorageAssist';
+import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
 const defaultDispatchLocationResultData = {
