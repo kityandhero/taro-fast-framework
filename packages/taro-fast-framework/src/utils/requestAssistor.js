@@ -16,7 +16,7 @@ import {
   isString,
   isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { toUpper } from 'taro-fast-common/es/utils/typeConvert';
+import { toLower, toUpper } from 'taro-fast-common/es/utils/typeConvert';
 
 import { getToken } from './globalStorageAssist';
 import remoteRequest from './request';
@@ -414,11 +414,20 @@ export async function request({
     throw new Error('api is not string');
   }
 
-  if (!stringIsNullOrWhiteSpace(apiVersion)) {
-    apiVersion = `/${apiVersion}/`;
-  }
+  let url = api;
 
-  let url = `${apiVersion}${api}`.replace('//', '/');
+  if (
+    toLower(url).startsWith('http://') ||
+    toLower(url).startsWith('https://')
+  ) {
+    url = api;
+  } else {
+    if (!stringIsNullOrWhiteSpace(apiVersion)) {
+      apiVersion = `/${apiVersion}/`;
+    }
+
+    url = `${apiVersion}${api}`.replace('//', '/');
+  }
 
   if ((urlParams || null) != null) {
     if (isString(urlParams)) {

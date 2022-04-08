@@ -10,6 +10,7 @@ import {
   showErrorMessage,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
+import { toLower } from 'taro-fast-common/es/utils/typeConvert';
 import { requestMethod } from 'taro-fast-common/es/utils/constants';
 import Tips from 'taro-fast-common/es/utils/tips';
 
@@ -100,11 +101,22 @@ export class Request {
 
       let urlChange = url;
 
-      if (!stringIsNullOrWhiteSpace(corsUrl)) {
-        if (url.indexOf(corsUrl) >= 0) {
-          urlChange = url;
-        } else {
-          urlChange = `${corsUrl}${url}`;
+      console.log({
+        url,
+      });
+
+      if (
+        toLower(url).startsWith('http://') ||
+        toLower(url).startsWith('https://')
+      ) {
+        urlChange = url;
+      } else {
+        if (!stringIsNullOrWhiteSpace(corsUrl)) {
+          if (url.indexOf(corsUrl) >= 0) {
+            urlChange = url;
+          } else {
+            urlChange = `${corsUrl}${url}`;
+          }
         }
       }
 

@@ -22,6 +22,11 @@ const o = {
       name: '宫格导航',
       path: pathCollection.template.gridBanner.path,
     },
+    {
+      id: 'weather',
+      name: '获取天气',
+      path: pathCollection.template.weather.path,
+    },
   ],
 };
 

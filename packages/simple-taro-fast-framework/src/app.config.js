@@ -138,6 +138,7 @@ export default {
         'pages/signIn/main/index',
         'pages/register/main/index',
         'pages/gridBanner/main/index',
+        'pages/weather/main/index',
       ],
     },
     {

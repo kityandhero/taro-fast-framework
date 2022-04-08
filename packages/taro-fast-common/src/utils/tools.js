@@ -25,6 +25,7 @@ import firstLodash from 'lodash/first';
 import setLodash from 'lodash/set';
 import sizeLodash from 'lodash/size';
 import mapLodash from 'lodash/map';
+import startsWithLodash from 'lodash/startsWith';
 import React from 'react';
 import {
   ENV_TYPE,
@@ -690,6 +691,10 @@ export function floor(v, len) {
 
 export function first(array) {
   return firstLodash(array);
+}
+
+export function startsWith(source, target) {
+  return startsWithLodash(source, target);
 }
 
 /**

@@ -362,6 +362,9 @@ const templatePathCollection = {
   gridBanner: {
     path: '/template/pages/gridBanner/main/index',
   },
+  weather: {
+    path: '/template/pages/weather/main/index',
+  },
 };
 
 const newsPathCollection = {

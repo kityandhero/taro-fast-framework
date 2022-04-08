@@ -498,7 +498,7 @@ class Base extends Infrastructure {
         ? this.getApiData(this.props)
         : getApiDataCore({
             props: this.props,
-            modelName: 'simulation',
+            modelName: modelName,
             key: key || '',
           });
 

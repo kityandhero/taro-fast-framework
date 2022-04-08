@@ -8,6 +8,7 @@ import simulation from './simulation';
 
 import news from './news';
 import article from './article';
+import weather from './weather';
 
 export default embedModelCollection(
   global,
@@ -16,4 +17,5 @@ export default embedModelCollection(
   simulation,
   news,
   article,
+  weather,
 );
