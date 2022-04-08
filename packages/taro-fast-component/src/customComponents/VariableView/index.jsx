@@ -649,7 +649,6 @@ class VariableView extends BaseComponent {
         onTouchEnd={this.onViewTouchEnd}
       >
         {pullIndicator}
-
         {scroll ? (
           upperBox ? (
             <View
@@ -667,31 +666,41 @@ class VariableView extends BaseComponent {
           ) : (
             scrollViewMain
           )
+        ) : null}
+
+        {scroll ? null : footer ? (
+          <View
+            style={
+              footer
+                ? {
+                    minHeight: `calc(${minHeight} - ${transformSize(
+                      90,
+                    )} - env(safe-area-inset-bottom))`,
+                  }
+                : {}
+            }
+          >
+            {upperBox}
+
+            {children}
+
+            {lowerLoadingFooterBoxAdjust}
+          </View>
         ) : (
           <>
-            <View
-              style={
-                footer
-                  ? {
-                      minHeight: `calc(${minHeight} - ${transformSize(
-                        90,
-                      )} - env(safe-area-inset-bottom))`,
-                    }
-                  : {}
-              }
-            >
-              {upperBox}
+            {upperBox}
 
-              {children}
+            {children}
 
-              {lowerLoadingFooterBoxAdjust}
-            </View>
-
-            {footer}
-
-            {enableSafeAreaInsetBottom ? this.buildSafeAreaInsetBottom() : null}
+            {lowerLoadingFooterBoxAdjust}
           </>
         )}
+
+        {scroll ? null : footer}
+
+        {!scroll && enableSafeAreaInsetBottom
+          ? this.buildSafeAreaInsetBottom()
+          : null}
 
         {lowerLoadingOuterBoxAdjust}
       </View>

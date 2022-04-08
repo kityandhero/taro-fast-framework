@@ -69,9 +69,8 @@ export default class Index extends ContentPageBase {
     return (
       <View
         style={{
-          width: '100%',
-          height: '100vh',
           backgroundColor: '#999',
+          height: transformSize(800),
         }}
       >
         <CenterBox>内容区域</CenterBox>
