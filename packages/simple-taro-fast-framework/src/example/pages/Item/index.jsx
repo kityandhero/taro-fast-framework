@@ -247,7 +247,7 @@ export default class Index extends ContentPageBase {
           description={description}
           config={currentConfig}
           space={false}
-          componentName="Badge"
+          componentName="Item"
           mockChildren={!!inner}
           useInnerBox={false}
           innerBoxCenterMode
