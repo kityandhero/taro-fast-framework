@@ -9,7 +9,9 @@ const defaultProps = {
   style: {},
   height: 100,
   backboardStyle: {},
+  backboardZIndex: 9,
   contentStyle: {},
+  contentZIndex: 10,
   backboardChildren: null,
   onClick: null,
 };
@@ -30,7 +32,7 @@ class BackboardBox extends BaseComponent {
   };
 
   buildBackboardStyle = () => {
-    const { backboardStyle } = this.props;
+    const { backboardStyle, backboardZIndex } = this.props;
 
     return {
       ...{
@@ -43,11 +45,14 @@ class BackboardBox extends BaseComponent {
         position: 'absolute',
         zIndex: 9,
       },
+      ...{
+        zIndex: backboardZIndex,
+      },
     };
   };
 
   buildContentStyle = () => {
-    const { contentStyle } = this.props;
+    const { contentStyle, contentZIndex } = this.props;
 
     return {
       ...contentStyle,
@@ -58,6 +63,9 @@ class BackboardBox extends BaseComponent {
         left: 0,
         width: '100%',
         height: '100%',
+      },
+      ...{
+        zIndex: contentZIndex,
       },
     };
   };

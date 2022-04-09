@@ -10,6 +10,7 @@ const defaultProps = {
   backboardStyle: {},
   contentStyle: {},
   backboardChildren: null,
+  bottom: null,
 };
 
 class HeadNavigation extends BaseComponent {
@@ -33,7 +34,7 @@ class HeadNavigation extends BaseComponent {
     const { width, height, top } = rect;
 
     this.setState({
-      containerHeight: `${height + top + 10}px`,
+      containerHeight: `${height + top + 8}px`,
       placeholderHeight: `${top}px`,
       height: `${height}px`,
       boxHeight: `${height + top}px`,
@@ -60,7 +61,7 @@ class HeadNavigation extends BaseComponent {
   };
 
   renderFurther() {
-    const { children, backboardChildren } = this.props;
+    const { children, backboardChildren, bottom } = this.props;
     const {
       containerHeight,
       placeholderHeight,
@@ -78,53 +79,64 @@ class HeadNavigation extends BaseComponent {
         style={{
           ...style,
           ...{
-            height: containerHeight,
+            minHeight: containerHeight,
             paddingBottom: '0 0 0 0',
             margin: '0 0 0 0',
+            overflow: 'hidden',
           },
         }}
       >
-        <BackboardBox
+        <FlexBox
           style={{
-            width: '100%',
-            paddingBottom: '8px',
+            minHeight: containerHeight,
           }}
-          height={boxHeight}
-          backboardStyle={backboardStyle}
-          contentStyle={{
-            ...contentStyle,
-            ...{
-              background: 'transparent',
-            },
-          }}
-          backboardChildren={backboardChildren}
-        >
-          <View
-            style={{
-              width: '100%',
-              height: placeholderHeight,
-              background: 'transparent',
-            }}
-          />
-
-          <FlexBox
-            style={{
-              width: '100%',
-              height: height,
-              background: 'transparent',
-            }}
-            flexAuto="left"
-            left={children}
-            right={
+          flexAuto="bottom"
+          top={
+            <BackboardBox
+              style={{
+                width: '100%',
+                paddingBottom: '8px',
+              }}
+              height={boxHeight}
+              backboardStyle={backboardStyle}
+              backboardZIndex="0"
+              contentStyle={{
+                ...contentStyle,
+                ...{
+                  background: 'transparent',
+                },
+              }}
+              backboardChildren={backboardChildren}
+            >
               <View
                 style={{
-                  width: rightWidth,
-                  height: height,
+                  width: '100%',
+                  height: placeholderHeight,
+                  background: 'transparent',
                 }}
               />
-            }
-          />
-        </BackboardBox>
+
+              <FlexBox
+                style={{
+                  width: '100%',
+                  height: height,
+                  background: 'transparent',
+                }}
+                flexAuto="left"
+                left={children}
+                right={
+                  <View
+                    style={{
+                      width: rightWidth,
+                      height: height,
+                    }}
+                  />
+                }
+              />
+            </BackboardBox>
+          }
+          bottom={bottom}
+        />
       </View>
     );
   }
