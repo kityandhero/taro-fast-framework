@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
@@ -220,6 +222,9 @@ definePageConfig({
   navigationBarTitleText: '内置视图配置',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'config',

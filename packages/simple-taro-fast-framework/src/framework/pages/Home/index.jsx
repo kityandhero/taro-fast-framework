@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { pathCollection } from '../../../customConfig/config';
 import ChannelPageBase from '../../../customComponents/ChannelPageBase';
 
@@ -25,6 +27,9 @@ definePageConfig({
   navigationBarTitleText: '快速开发框架',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ChannelPageBase {
   buildData = () => {
     return o;

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Space, Divider } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
@@ -68,6 +70,9 @@ definePageConfig({
   navigationBarTitleText: 'buildEmptyPlaceholder',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'buildEmptyPlaceholder',

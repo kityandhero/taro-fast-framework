@@ -19,6 +19,9 @@ definePageConfig({
   global,
   schedulingControl,
 }))
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   scrollViewMode = true;
 

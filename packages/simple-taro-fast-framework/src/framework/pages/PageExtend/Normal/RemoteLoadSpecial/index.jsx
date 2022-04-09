@@ -29,6 +29,9 @@ definePageConfig({
   simulation,
   global,
 }))
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   enableAutoInitialLoadingIndicator = false;
 

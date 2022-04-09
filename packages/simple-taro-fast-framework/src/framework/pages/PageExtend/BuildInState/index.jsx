@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
@@ -12,6 +14,9 @@ const style = {
 
 const configList = [];
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'config',

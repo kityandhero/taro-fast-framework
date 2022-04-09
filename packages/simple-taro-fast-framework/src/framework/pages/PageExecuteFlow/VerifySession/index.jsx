@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
@@ -17,6 +19,9 @@ definePageConfig({
   navigationBarTitleText: 'verify session',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'verifySession',

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { sortBy, isWechat } from 'taro-fast-common/es/utils/tools';
 
 import { pathCollection } from '../../../../customConfig/config';
@@ -72,6 +74,9 @@ definePageConfig({
   navigationBarTitleText: '首页',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ChannelPageBase {
   buildData = () => {
     return o;
