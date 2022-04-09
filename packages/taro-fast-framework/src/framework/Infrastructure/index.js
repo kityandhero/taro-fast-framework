@@ -570,12 +570,6 @@ export default class Infrastructure extends ComponentBase {
    * @param {*} callback
    */
   checkSession = (callback) => {
-    if (!this.verifySession) {
-      callback();
-
-      return;
-    }
-
     recordLog('exec checkSession');
 
     const sessionRefreshing = getSessionRefreshing();
