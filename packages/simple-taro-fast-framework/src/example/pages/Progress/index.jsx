@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Space,
@@ -73,6 +75,9 @@ definePageConfig({
   navigationBarTitleText: '价格',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Progress',

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   CheckBox,
@@ -229,6 +231,9 @@ definePageConfig({
   navigationBarTitleText: '复选',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'CheckBox',

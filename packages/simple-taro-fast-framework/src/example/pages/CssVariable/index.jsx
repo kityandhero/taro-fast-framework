@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Space } from 'taro-fast-component/es/customComponents';
@@ -16,6 +17,9 @@ definePageConfig({
   navigationBarTitleText: 'Css 全局变量',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Color',

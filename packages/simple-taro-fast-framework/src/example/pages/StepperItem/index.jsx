@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Icon,
@@ -66,6 +68,9 @@ definePageConfig({
   navigationBarTitleText: '进步项',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'StepperItem',

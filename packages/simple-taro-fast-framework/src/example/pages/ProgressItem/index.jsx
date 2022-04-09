@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   showInfoMessage,
   transformSize,
@@ -70,6 +72,9 @@ definePageConfig({
   navigationBarTitleText: '进度项',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ProgressItem',

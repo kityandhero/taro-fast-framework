@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { Image } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
@@ -236,6 +237,9 @@ definePageConfig({
   navigationBarTitleText: '条目项',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Item',

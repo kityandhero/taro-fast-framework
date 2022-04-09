@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import Taro from '@tarojs/taro';
 import { View, Text } from '@tarojs/components';
 
@@ -18,6 +19,9 @@ const style = {
   ...cardStyle,
 };
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ActionSheet',

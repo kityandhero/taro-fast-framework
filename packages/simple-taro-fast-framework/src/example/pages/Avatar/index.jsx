@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Space, Avatar } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -40,6 +42,9 @@ definePageConfig({
   navigationBarTitleText: '头像',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Avatar',

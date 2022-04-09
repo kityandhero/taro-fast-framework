@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import {
@@ -106,6 +108,9 @@ definePageConfig({
   navigationBarTitleText: '浮动按钮',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'FloatAction',

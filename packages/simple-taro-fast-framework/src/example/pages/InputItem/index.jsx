@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   Icon,
   InputItem,
@@ -165,6 +167,9 @@ definePageConfig({
   navigationBarTitleText: '输入项',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'InputItem',

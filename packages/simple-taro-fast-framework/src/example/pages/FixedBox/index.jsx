@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import { Space, FixedBox } from 'taro-fast-component/es/customComponents';
@@ -59,6 +61,9 @@ definePageConfig({
   navigationBarTitleText: 'Flex布局',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Flex',

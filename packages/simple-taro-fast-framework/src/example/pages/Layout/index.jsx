@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { sortBy } from 'taro-fast-common/es/utils/tools';
 
 import { pathCollection } from '../../../customConfig/config';
@@ -136,6 +138,9 @@ definePageConfig({
   navigationBarTitleText: '布局',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ChannelPageBase {
   buildData = () => {
     return o;

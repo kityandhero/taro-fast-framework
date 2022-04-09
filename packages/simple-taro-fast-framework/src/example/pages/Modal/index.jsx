@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
@@ -30,6 +31,9 @@ const buttonFillList = [
   },
 ];
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Modal',

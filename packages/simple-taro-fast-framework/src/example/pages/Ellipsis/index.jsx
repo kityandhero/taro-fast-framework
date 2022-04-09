@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Ellipsis, Space } from 'taro-fast-component/es/customComponents';
 
@@ -67,6 +69,9 @@ definePageConfig({
   navigationBarTitleText: '文字省略',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Ellipsis',

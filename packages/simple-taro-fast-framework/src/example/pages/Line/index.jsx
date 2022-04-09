@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Line, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -32,6 +34,9 @@ definePageConfig({
   navigationBarTitleText: '线条',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Line',

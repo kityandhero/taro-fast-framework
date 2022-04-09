@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   Divider,
   Space,
@@ -65,6 +67,9 @@ definePageConfig({
   navigationBarTitleText: '间隔线',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Divider',

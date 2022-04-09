@@ -1,4 +1,6 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
+
 import {
   transformSize,
   buildLinearGradient,
@@ -275,6 +277,9 @@ definePageConfig({
   navigationBarTitleText: '颜色',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Color',

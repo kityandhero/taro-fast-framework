@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
@@ -40,6 +41,9 @@ definePageConfig({
   navigationBarTitleText: '水平居中',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'HorizontalCenterBox',

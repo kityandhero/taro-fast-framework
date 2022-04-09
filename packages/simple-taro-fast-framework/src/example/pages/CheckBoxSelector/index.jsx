@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   Icon,
   CheckBoxSelector,
@@ -147,6 +149,9 @@ definePageConfig({
   navigationBarTitleText: '弹出式复选',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'CheckBox',

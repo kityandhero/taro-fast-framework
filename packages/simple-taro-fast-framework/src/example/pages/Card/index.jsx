@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   Card,
   Item,
@@ -80,6 +82,9 @@ definePageConfig({
   navigationBarTitleText: '卡片',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Card',

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { Space, Tabbar } from 'taro-fast-component/es/customComponents';
 
@@ -140,6 +142,9 @@ definePageConfig({
   navigationBarTitleText: '底部导航栏',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Tabbar',

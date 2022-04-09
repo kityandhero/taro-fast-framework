@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Notification } from 'taro-fast-common/es/customComponents';
 import { Space, Button } from 'taro-fast-component/es/customComponents';
 
@@ -16,6 +18,9 @@ definePageConfig({
   navigationBarTitleText: '弹出通知',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Notification',

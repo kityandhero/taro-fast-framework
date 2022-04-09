@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Space, Button, Line } from 'taro-fast-component/es/customComponents';
@@ -63,6 +64,9 @@ definePageConfig({
   navigationBarTitleText: '间隔布局',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Space',

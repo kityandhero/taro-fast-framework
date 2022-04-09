@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
@@ -22,6 +23,9 @@ definePageConfig({
   navigationBarTitleText: '返回头部',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Badge',

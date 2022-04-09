@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { useState } from 'react';
 
 import { Card, Space } from 'taro-fast-component/es/customComponents';
@@ -49,6 +50,9 @@ const RadioMode = () => {
   );
 };
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Selector',

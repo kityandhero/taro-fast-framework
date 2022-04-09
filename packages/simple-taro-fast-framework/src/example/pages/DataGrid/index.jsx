@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
@@ -132,6 +134,9 @@ definePageConfig({
   navigationBarTitleText: '数据表格',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'DataGrid',

@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View, Text } from '@tarojs/components';
 
 import {
@@ -31,6 +32,9 @@ definePageConfig({
   navigationBarTitleText: '进度环',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Circle',

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { Transition, Space } from 'taro-fast-component/es/customComponents';
 
@@ -72,6 +74,9 @@ definePageConfig({
   navigationBarTitleText: '变换动画',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Transition',

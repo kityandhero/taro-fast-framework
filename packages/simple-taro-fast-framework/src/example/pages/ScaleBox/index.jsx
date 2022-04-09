@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Space, ScaleBox } from 'taro-fast-component/es/customComponents';
@@ -21,6 +22,9 @@ definePageConfig({
   navigationBarTitleText: '比例容器',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'FadeInBox',

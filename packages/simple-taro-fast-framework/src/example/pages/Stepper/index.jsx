@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Stepper, Space } from 'taro-fast-component/es/customComponents';
 
@@ -120,6 +122,9 @@ definePageConfig({
   navigationBarTitleText: '进步器',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Stepper',

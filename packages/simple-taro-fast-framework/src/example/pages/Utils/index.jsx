@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   formatTarget,
   formatDatetime,
@@ -23,6 +25,9 @@ definePageConfig({
   navigationBarTitleText: '功能函数',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Util',

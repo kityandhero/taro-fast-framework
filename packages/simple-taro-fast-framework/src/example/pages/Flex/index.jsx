@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Row, Col, Space } from 'taro-fast-component/es/customComponents';
 
@@ -29,6 +31,9 @@ definePageConfig({
   backgroundColor: '#3778F4',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Flex',

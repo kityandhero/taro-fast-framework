@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   Icon,
   RadioSelector,
@@ -137,6 +139,9 @@ definePageConfig({
   navigationBarTitleText: '弹出式单选',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'RadioSelector',

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   getNow,
   addHour,
@@ -80,6 +82,9 @@ definePageConfig({
   navigationBarTitleText: '倒计时',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Countdown',

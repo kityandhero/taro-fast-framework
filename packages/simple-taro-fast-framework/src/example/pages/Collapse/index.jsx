@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Space, Collapse, Card } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -73,6 +75,9 @@ definePageConfig({
   navigationBarTitleText: '折叠面板',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Collapse',

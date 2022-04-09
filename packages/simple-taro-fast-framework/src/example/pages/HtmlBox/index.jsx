@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import { Space, HtmlBox } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -20,6 +22,9 @@ definePageConfig({
   navigationBarTitleText: 'Html容器',
 });
 
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'HtmlBox',

@@ -32,6 +32,9 @@ const style = {
   simulation,
   global,
 }))
+@connect(({ schedulingControl }) => ({
+  schedulingControl,
+}))
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'Interact',
