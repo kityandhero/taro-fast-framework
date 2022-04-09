@@ -546,29 +546,21 @@ export default class Infrastructure extends ComponentBase {
 
     that.checkSession(() => {
       if (!that.verifyTicket) {
-        if (that.verifyTicketValidity) {
-          that.checkTicketValidity(() => {
-            that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-          });
-        }
+        that.checkTicketValidity(() => {
+          that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+        });
 
         if (that.loadRemoteRequestAfterMount) {
           that.doLoadRemoteRequest();
         }
       } else {
-        if (that.verifyTicketValidity) {
-          that.checkTicketValidity(() => {
-            if (that.loadRemoteRequestAfterMount) {
-              that.doLoadRemoteRequest();
-            }
-
-            that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-          });
-        } else {
+        that.checkTicketValidity(() => {
           if (that.loadRemoteRequestAfterMount) {
             that.doLoadRemoteRequest();
           }
-        }
+
+          that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+        });
       }
     });
   };
