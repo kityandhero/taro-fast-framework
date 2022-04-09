@@ -1,7 +1,9 @@
 @class-prefix-item: ~'tfc-item';
 
 .@{class-prefix-item} {
-  --border-inner: var(--tfc-1) solid var(--tfc-border-color);
+  --border-width: var(--tfc-1);
+  --border-color: var(--tfc-border-color);
+  --border-inner: var(--border-width) solid var(--border-color);
 
   width: 100%;
   flex: none;

@@ -72,6 +72,36 @@ const config11 = [
   },
 ];
 
+const config111 = [
+  {
+    label: '1',
+    borderWidth: 6,
+  },
+  {
+    label: '2',
+    borderWidth: 6,
+  },
+  {
+    label: '3',
+    borderWidth: 6,
+  },
+];
+
+const config112 = [
+  {
+    label: '1',
+    borderColor: 'red',
+  },
+  {
+    label: '2',
+    borderColor: 'red',
+  },
+  {
+    label: '3',
+    borderColor: 'red',
+  },
+];
+
 const config2 = [
   {
     label: '账单',
@@ -84,6 +114,42 @@ const config2 = [
   {
     label: '设置',
     arrow: true,
+  },
+];
+
+const config211 = [
+  {
+    label: '账单',
+    arrow: true,
+    arrowSize: 28,
+  },
+  {
+    label: '总资产',
+    arrow: true,
+    arrowSize: 28,
+  },
+  {
+    label: '设置',
+    arrow: true,
+    arrowSize: 28,
+  },
+];
+
+const config212 = [
+  {
+    label: '账单',
+    arrow: true,
+    arrowColor: 'red',
+  },
+  {
+    label: '总资产',
+    arrow: true,
+    arrowColor: 'red',
+  },
+  {
+    label: '设置',
+    arrow: true,
+    arrowColor: 'red',
   },
 ];
 
@@ -138,12 +204,12 @@ const config5 = [
     disabled: true,
     clickable: true,
     arrow: true,
-    prefix: <IconSketch />,
+    prefix: <IconSketch size={32} />,
   },
   {
     label: '总资产',
     disabled: true,
-    prefix: <IconShoppingCart />,
+    prefix: <IconShoppingCart size={32} />,
   },
 ];
 
@@ -200,8 +266,24 @@ export default class Index extends ContentPageBase {
         config: config11,
       },
       {
+        header: '底线宽度',
+        config: config111,
+      },
+      {
+        header: '底线颜色',
+        config: config112,
+      },
+      {
         header: '箭头',
         config: config2,
+      },
+      {
+        header: '箭头大小',
+        config: config211,
+      },
+      {
+        header: '箭头颜色',
+        config: config212,
       },
       {
         header: '可点击',

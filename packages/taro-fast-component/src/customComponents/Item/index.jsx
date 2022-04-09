@@ -30,7 +30,11 @@ const defaultProps = {
   extraContainerStyle: {},
   clickable: false,
   border: true,
+  borderWidth: 1,
+  borderColor: 'var(--tfc-border-color)',
   arrow: false,
+  arrowSize: 40,
+  arrowColor: '',
   disabled: false,
   onClick: null,
   showBody: false,
@@ -67,6 +71,15 @@ class Item extends BaseComponent {
   // eslint-disable-next-line no-unused-vars
   doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
     this.updateBodyHeight();
+  };
+
+  getContainerStyle = () => {
+    const { borderWidth, borderColor } = this.props;
+
+    return {
+      '--border-width': transformSize(borderWidth),
+      '--border-color': borderColor,
+    };
   };
 
   updateBodyHeight = () => {
@@ -109,6 +122,8 @@ class Item extends BaseComponent {
       clickable,
       disabled,
       arrow,
+      arrowSize,
+      arrowColor,
       extra,
       extraContainerStyle,
       border,
@@ -120,6 +135,8 @@ class Item extends BaseComponent {
       bodyAnimate,
       children,
     } = this.props;
+
+    const containerStyle = this.getContainerStyle();
 
     const b =
       (body || null) != null ? (
@@ -152,7 +169,7 @@ class Item extends BaseComponent {
       ) : null;
 
     return (
-      <View className={classNames(`${classPrefix}`)}>
+      <View className={classNames(`${classPrefix}`)} style={containerStyle}>
         <View
           className={classNames(
             `${classPrefix}-header`,
@@ -213,12 +230,14 @@ class Item extends BaseComponent {
 
             {arrow ? (
               <View className={`${classPrefix}-header-content-arrow`}>
-                <IconChevronRight size={40} />
+                <IconChevronRight size={arrowSize} color={arrowColor} />
               </View>
             ) : null}
           </View>
         </View>
+
         {children}
+
         {b}
 
         {!border ? null : (
