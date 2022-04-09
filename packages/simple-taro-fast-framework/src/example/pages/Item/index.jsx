@@ -274,7 +274,7 @@ export default class Index extends ContentPageBase {
         config: config112,
       },
       {
-        header: '箭头',
+        header: '使用箭头',
         config: config2,
       },
       {
