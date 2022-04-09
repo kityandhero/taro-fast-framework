@@ -84,6 +84,15 @@ export default class PageWrapper extends AuthorizationWrapper {
     return data;
   };
 
+  getSignInSilentApiData = () => {
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'entrance',
+    });
+
+    return data;
+  };
+
   getRemoteMetaData = () => {
     const global = this.getGlobalWrapper();
 
