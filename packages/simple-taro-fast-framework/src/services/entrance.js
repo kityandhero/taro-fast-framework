@@ -18,6 +18,21 @@ export async function signInData(params) {
   });
 }
 
+export async function signInSilentData(params) {
+  return executiveRequest({
+    api: `/entrance/signInSilent`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        signInResult: verifySignInResult.fail,
+        token: '',
+      },
+    },
+  });
+}
+
 export async function registerData(params) {
   return executiveRequest({
     api: `/entrance/register`,

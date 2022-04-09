@@ -827,15 +827,28 @@ class SupplementCore extends Common {
   }
 
   // eslint-disable-next-line no-unused-vars
-  dispatchSingIn = (data = {}) => {
+  dispatchSignIn = (data = {}) => {
     throw new Error(
-      'dispatchSingIn need override, dispatchSingIn must return a promise',
+      'dispatchSignIn need override, dispatchSignIn must return a promise',
+    );
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchSignInSilent = (data = {}) => {
+    throw new Error(
+      'dispatchSignInSilent need override, dispatchSignInSilent must return a promise',
     );
   };
 
   getSignInApiData = () => {
     throw new Error(
       'getSignInApiData need override, getSignInApiData must return a object',
+    );
+  };
+
+  getSignInSilentApiData = () => {
+    throw new Error(
+      'getSignInSilentApiData need override, getSignInSilentApiData must return a object',
     );
   };
 
@@ -846,7 +859,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    that.dispatchSingIn(data).then(() => {
+    that.dispatchSignIn(data).then(() => {
       Tips.loaded();
 
       const remoteData = that.getSignInApiData();
@@ -879,6 +892,50 @@ class SupplementCore extends Common {
         });
 
         that.doWhenSignInFail();
+      }
+    });
+  }
+
+  signInSilentCore({ data, callback }) {
+    recordLog('exec signInSilentCore');
+
+    // Tips.loading('处理中');
+
+    const that = this;
+
+    that.dispatchSignInSilent(data).then(() => {
+      Tips.loaded();
+
+      const remoteData = that.getSignInSilentApiData();
+
+      const { dataSuccess, data: metaData } = remoteData;
+
+      that.setSignInProcessDetection({
+        data: false,
+      });
+
+      if (dataSuccess) {
+        that.setSignInResultOnSignIn({
+          signInResult: that.parseSignInResultFromRemoteApiData(metaData),
+        });
+
+        that.setTokenOnSignIn({
+          token: that.parseTokenFromRemoteApiData(metaData),
+        });
+
+        that.doAfterSignInSilentSuccess(metaData);
+
+        if (isFunction(callback)) {
+          callback(metaData);
+        }
+      } else {
+        removeSession();
+
+        showInfoMessage({
+          message: '静默登录失败',
+        });
+
+        that.doWhenSignInSilentFail();
       }
     });
   }
@@ -947,18 +1004,33 @@ class SupplementCore extends Common {
   };
 
   /**
-   * 其他登录成功后的业务逻辑, 根据需要进行重载
+   * 账户登录成功后的业务逻辑, 根据需要进行重载
    * @param {*} remoteData
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {};
 
   /**
-   * 登录失败时的业务逻辑, 需要重载
+   * 静默登录成功后的业务逻辑, 根据需要进行重载
+   * @param {*} remoteData
+   */
+  // eslint-disable-next-line no-unused-vars
+  doAfterSignInSilentSuccess = (data) => {};
+
+  /**
+   * 账户登录失败时的业务逻辑, 需要重载
    * @param {*} remoteData
    */
   doWhenSignInFail = () => {
     throw new Error('doWhenSignInFail need to be override');
+  };
+
+  /**
+   * 静默登录失败时的业务逻辑, 需要重载
+   * @param {*} remoteData
+   */
+  doWhenSignInSilentFail = () => {
+    throw new Error('doWhenSignInSilentFail need to be override');
   };
 }
 

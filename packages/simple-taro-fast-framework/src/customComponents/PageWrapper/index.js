@@ -43,9 +43,16 @@ export default class PageWrapper extends AuthorizationWrapper {
     });
   };
 
-  dispatchSingIn = (data) => {
+  dispatchSignIn = (data) => {
     return this.dispatchApi({
       type: 'entrance/signIn',
+      payload: data,
+    });
+  };
+
+  dispatchSignInSilent = (data) => {
+    return this.dispatchApi({
+      type: 'entrance/signInSilent',
       payload: data,
     });
   };
