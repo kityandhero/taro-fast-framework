@@ -105,7 +105,7 @@ export default class PageWrapper extends AuthorizationWrapper {
     return signInResult;
   };
 
-  parseTokenFromRemoteApiData = (remoteData) => {
+  parseTokenFromSignInApiData = (remoteData) => {
     const { token } = remoteData;
 
     return token || '';

@@ -12,7 +12,12 @@ import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
 import { reducerCommonCollection } from '../utils/dva';
 
-import { getWeatherData } from '../services/schedulingControl';
+import {
+  getWeatherData,
+  checkTicketValidityData,
+  refreshSessionData,
+  signInSilentData,
+} from '../services/schedulingControl';
 
 export default {
   namespace: 'schedulingControl',
@@ -31,6 +36,30 @@ export default {
   },
 
   effects: {
+    *signInSilent({ payload }, { call, put }) {
+      const response = yield call(signInSilentData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *checkTicketValidity({ payload }, { call, put }) {
+      const response = yield call(checkTicketValidityData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *refreshSession({ payload }, { call, put }) {
+      const response = yield call(refreshSessionData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
     *getWeather({ payload }, { call, put }) {
       let result = getWeather();
 

@@ -46,6 +46,7 @@ import {
   setToken,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
+import { getApiDataCore } from '../../utils/actionAssist';
 
 import Common from '../Common';
 
@@ -509,15 +510,31 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   dispatchCheckTicketValidity = (data = {}) => {
-    throw new Error(
-      'dispatchCheckTicketValidity need override, dispatchCheckTicketValidity must return a promise',
-    );
+    if (this.verifyTicket) {
+      throw new Error(
+        'dispatchCheckTicketValidity need override, dispatchCheckTicketValidity must return a promise',
+      );
+    }
+
+    return this.dispatchApi({
+      type: 'schedulingControl/checkTicketValidity',
+      payload: data,
+    });
   };
 
   getCheckTicketValidityApiData = () => {
-    throw new Error(
-      'getCheckTicketValidityApiData need override, getCheckTicketValidityApiData must return a object',
-    );
+    if (this.verifyTicket) {
+      throw new Error(
+        'getCheckTicketValidityApiData need override, getCheckTicketValidityApiData must return a object',
+      );
+    }
+
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+
+    return data;
   };
 
   checkTicketValidityCore(callback) {
@@ -577,15 +594,31 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   dispatchRefreshSession = (data) => {
-    throw new Error(
-      'dispatchRefreshSession need override, dispatchRefreshSession must return a promise',
-    );
+    if (this.verifySession) {
+      throw new Error(
+        'dispatchRefreshSession need override, dispatchRefreshSession must return a promise',
+      );
+    }
+
+    return this.dispatchApi({
+      type: 'schedulingControl/refreshSession',
+      payload: data,
+    });
   };
 
   getRefreshSessionApiData = () => {
-    throw new Error(
-      'getRefreshSessionApiData need override, getRefreshSessionApiData must return a object',
-    );
+    if (this.verifySession) {
+      throw new Error(
+        'getRefreshSessionApiData need override, getRefreshSessionApiData must return a object',
+      );
+    }
+
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+
+    return data;
   };
 
   refreshSession = ({ callback }) => {
@@ -835,9 +868,16 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   dispatchSignInSilent = (data = {}) => {
-    throw new Error(
-      'dispatchSignInSilent need override, dispatchSignInSilent must return a promise',
-    );
+    if (this.verifyTicket) {
+      throw new Error(
+        'dispatchSignInSilent need override, dispatchSignInSilent must return a promise',
+      );
+    }
+
+    return this.dispatchApi({
+      type: 'schedulingControl/signInSilent',
+      payload: data,
+    });
   };
 
   getSignInApiData = () => {
@@ -847,9 +887,18 @@ class SupplementCore extends Common {
   };
 
   getSignInSilentApiData = () => {
-    throw new Error(
-      'getSignInSilentApiData need override, getSignInSilentApiData must return a object',
-    );
+    if (this.verifyTicket) {
+      throw new Error(
+        'getSignInSilentApiData need override, getSignInSilentApiData must return a object',
+      );
+    }
+
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+
+    return data;
   };
 
   signInCore({ data, callback }) {
@@ -876,7 +925,7 @@ class SupplementCore extends Common {
         });
 
         that.setTokenOnSignIn({
-          token: that.parseTokenFromRemoteApiData(metaData),
+          token: that.parseTokenFromSignInApiData(metaData),
         });
 
         that.doAfterSignInSuccess(metaData);
@@ -919,8 +968,8 @@ class SupplementCore extends Common {
           signInResult: that.parseSignInResultFromRemoteApiData(metaData),
         });
 
-        that.setTokenOnSignIn({
-          token: that.parseTokenFromRemoteApiData(metaData),
+        that.setTokenOnSignInSilent({
+          token: that.parseTokenFromSignInSilentApiData(metaData),
         });
 
         that.doAfterSignInSilentSuccess(metaData);
@@ -985,10 +1034,27 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   // eslint-disable-next-line no-unused-vars
-  parseTokenFromRemoteApiData = (remoteData) => {
+  parseTokenFromSignInApiData = (remoteData) => {
     throw new Error(
-      'parseTokenFromRemoteApiData need to be override, it must return a string',
+      'parseTokenFromSignInApiData need to be override, it must return a string',
     );
+  };
+
+  /**
+   * 从接口数据中解析出sign in result
+   * @param {*} remoteData
+   */
+  // eslint-disable-next-line no-unused-vars
+  parseTokenFromSignInSilentApiData = (remoteData) => {
+    if (this.verifyTicket) {
+      throw new Error(
+        'parseTokenFromSignInSilentApiData need to be override, it must return a string',
+      );
+    }
+
+    const { token } = remoteData;
+
+    return token || '';
   };
 
   /**
@@ -1004,18 +1070,38 @@ class SupplementCore extends Common {
   };
 
   /**
+   * 将解析的token进行本次存储, 该方法不应重载
+   * @param {*} remoteData
+   */
+  setTokenOnSignInSilent = ({ token }) => {
+    if (!isString(token || '')) {
+      throw new Error('setTokenOnSignInSilent token must be string');
+    }
+
+    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+  };
+
+  /**
    * 账户登录成功后的业务逻辑, 根据需要进行重载
    * @param {*} remoteData
    */
   // eslint-disable-next-line no-unused-vars
-  doAfterSignInSuccess = (data) => {};
+  doAfterSignInSuccess = (data) => {
+    recordLog(
+      'doAfterSignInSuccess do nothing,if you need,you can override it: doAfterSignInSuccess = (data) => {}',
+    );
+  };
 
   /**
    * 静默登录成功后的业务逻辑, 根据需要进行重载
    * @param {*} remoteData
    */
   // eslint-disable-next-line no-unused-vars
-  doAfterSignInSilentSuccess = (data) => {};
+  doAfterSignInSilentSuccess = (data) => {
+    recordLog(
+      'doAfterSignInSilentSuccess do nothing,if you need,you can override it: doAfterSignInSilentSuccess = (data) => {}',
+    );
+  };
 
   /**
    * 账户登录失败时的业务逻辑, 需要重载
@@ -1030,7 +1116,9 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   doWhenSignInSilentFail = () => {
-    throw new Error('doWhenSignInSilentFail need to be override');
+    if (this.verifyTicket) {
+      throw new Error('doWhenSignInSilentFail need to be override');
+    }
   };
 }
 

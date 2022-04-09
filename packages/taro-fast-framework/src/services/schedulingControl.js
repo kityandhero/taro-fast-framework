@@ -1,3 +1,6 @@
+import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
+import { addMinute, getGuid, getNow } from 'taro-fast-common/es/utils/tools';
+
 import { request } from '../utils/requestAssistor';
 
 export async function getWeatherData(params) {
@@ -5,6 +8,53 @@ export async function getWeatherData(params) {
     api: `https://wis.qq.com/weather/common`,
     urlParams: params,
     method: 'GET',
+  });
+}
+
+export async function checkTicketValidityData(params) {
+  return request({
+    api: `/schedulingControl/checkTicketValidity`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        needRefresh: true,
+        nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
+      },
+    },
+  });
+}
+
+export async function refreshSessionData(params) {
+  const { code } = params;
+
+  return request({
+    api: `/schedulingControl/refreshSession`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        sessionId: getGuid(),
+        code: code || '',
+      },
+    },
+  });
+}
+
+export async function signInSilentData(params) {
+  return request({
+    api: `/schedulingControl/signInSilent`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        signInResult: verifySignInResult.fail,
+        token: '',
+      },
+    },
   });
 }
 
