@@ -327,6 +327,22 @@ export default class Infrastructure extends ComponentBase {
     return null;
   }
 
+  checkSchedulingControlExistence = () => {
+    const { schedulingControl } = this.props;
+
+    if ((schedulingControl || null) == null) {
+      showErrorMessage({
+        message: 'config error,check in console',
+      });
+
+      recordObject(this);
+
+      throw new Error(
+        'schedulingControl in props not exist, please connect it first',
+      );
+    }
+  };
+
   receiveExternalParameter = () => {
     if ((this.externalParameter || null) == null) {
       this.externalParameter = this.currentInstance.router.params;
@@ -428,6 +444,8 @@ export default class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
+    this.checkSchedulingControlExistence();
+
     this.receiveExternalParameter();
 
     this.setCurrentInfo();
