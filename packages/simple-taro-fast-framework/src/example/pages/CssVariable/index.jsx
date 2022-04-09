@@ -33,7 +33,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="像素变量"
           config={config1}
-          description={[
+          footer={[
             {
               text: '1000 ~ 2000 之间,步长变更为10',
             },
