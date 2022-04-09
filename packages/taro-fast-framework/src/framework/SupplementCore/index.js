@@ -859,6 +859,127 @@ class SupplementCore extends Common {
     });
   }
 
+  signInSilent = ({ data, callback }) => {
+    recordLog('exec signInSilent');
+
+    const that = this;
+
+    const useLocation = defaultSettingsLayoutCustom.getUseLocation();
+    const locationMode = getLocationMode();
+
+    if ((useLocation || false) && locationMode == locationModeCollection.auto) {
+      recordLog('info use location and automatic location');
+
+      that.obtainLocation({
+        // eslint-disable-next-line no-unused-vars
+        successCallback: ({ location, map }) => {
+          const { latitude, longitude } = location || {
+            latitude: 34.7533581487,
+            longitude: 113.6313915479,
+          };
+
+          data.latitude = latitude || '';
+          data.longitude = longitude || '';
+
+          const signInProcessDetection = that.getSignInProcessDetection();
+
+          if (!signInProcessDetection) {
+            that.setSignInProcessDetection({
+              data: true,
+              callback: () => {
+                that.signInSilentCore({
+                  data,
+                  callback,
+                });
+              },
+            });
+          }
+        },
+        focus: false,
+        showLoading: false,
+        fromLaunch: false,
+        failCallback: () => {
+          const signInProcessDetection = that.getSignInProcessDetection();
+
+          if (!signInProcessDetection) {
+            that.setSignInProcessDetection({
+              data: true,
+              callback: () => {
+                that.signInSilentCore({
+                  data,
+                  callback,
+                });
+              },
+            });
+          }
+        },
+      });
+    } else {
+      if (useLocation || false) {
+        recordLog('info use location and nonautomatic location');
+
+        that.signInSilentWhenCheckProcessDetection({
+          data,
+          callback: (o, p) => {
+            o.setSignInProcessDetection({
+              data: true,
+              callback: () => {
+                o.signInSilentCore({
+                  data: p,
+                  callback,
+                });
+              },
+            });
+          },
+          timeTotal: 0,
+        });
+      } else {
+        const signInProcessDetection = that.getSignInProcessDetection();
+
+        if (!signInProcessDetection) {
+          that.setSignInProcessDetection({
+            data: true,
+            callback: () => {
+              that.signInSilentCore({ data, callback });
+            },
+          });
+        }
+      }
+    }
+  };
+
+  signInSilentWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
+    recordLog('exec signInSilentWhenCheckProcessDetection');
+
+    const that = this;
+
+    if (timeTotal > 3000) {
+      if (isFunction(callback)) {
+        callback(that, data);
+      }
+
+      return;
+    }
+
+    sleep(100, () => {
+      recordLog(`signInSilentWhenCheckProcessDetection sleep ${timeTotal}`);
+
+      const signInProcessDetection = that.getSignInProcessDetection();
+
+      if (signInProcessDetection) {
+        that.signInSilentWhenCheckProcessDetection({
+          data,
+          callback,
+          timeTotal: timeTotal + 100,
+        });
+      } else {
+        if (isFunction(callback)) {
+          callback(that, data);
+        }
+      }
+    });
+  }
+
   // eslint-disable-next-line no-unused-vars
   dispatchSignIn = (data = {}) => {
     throw new Error(
