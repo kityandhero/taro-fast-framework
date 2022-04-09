@@ -1088,7 +1088,7 @@ class SupplementCore extends Common {
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {
     recordLog(
-      'doAfterSignInSuccess do nothing,if you need,you can override it: doAfterSignInSuccess = (data) => {}',
+      'info doAfterSignInSuccess do nothing,if you need,you can override it: doAfterSignInSuccess = (data) => {}',
     );
   };
 
@@ -1099,7 +1099,7 @@ class SupplementCore extends Common {
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSilentSuccess = (data) => {
     recordLog(
-      'doAfterSignInSilentSuccess do nothing,if you need,you can override it: doAfterSignInSilentSuccess = (data) => {}',
+      'info doAfterSignInSilentSuccess do nothing,if you need,you can override it: doAfterSignInSilentSuccess = (data) => {}',
     );
   };
 
