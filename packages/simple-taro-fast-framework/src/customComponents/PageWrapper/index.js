@@ -1,6 +1,6 @@
 import { recordObject } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+// import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { getQQMapWX } from '../../utils/tools';
 
@@ -29,69 +29,71 @@ export default class PageWrapper extends AuthorizationWrapper {
     return global;
   };
 
-  dispatchCheckTicketValidity = (data) => {
-    return this.dispatchApi({
-      type: 'entrance/checkTicketValidity',
-      payload: data,
-    });
-  };
+  // dispatchCheckTicketValidity = (data) => {
+  //   return this.dispatchApi({
+  //     type: 'entrance/checkTicketValidity',
+  //     payload: data,
+  //   });
+  // };
 
-  dispatchRefreshSession = (data) => {
-    return this.dispatchApi({
-      type: 'session/refreshSession',
-      payload: data,
-    });
-  };
+  // dispatchRefreshSession = (data) => {
+  //   return this.dispatchApi({
+  //     type: 'session/refreshSession',
+  //     payload: data,
+  //   });
+  // };
 
-  dispatchSignIn = (data) => {
-    return this.dispatchApi({
-      type: 'entrance/signIn',
-      payload: data,
-    });
-  };
+  // dispatchSignIn = (data) => {
+  //   return this.dispatchApi({
+  //     type: 'entrance/signIn',
+  //     payload: data,
+  //   });
+  // };
 
-  dispatchSignInSilent = (data) => {
-    return this.dispatchApi({
-      type: 'entrance/signInSilent',
-      payload: data,
-    });
-  };
+  // dispatchSignInSilent = (data) => {
+  //   return this.dispatchApi({
+  //     type: 'entrance/signInSilent',
+  //     payload: data,
+  //   });
+  // };
 
-  getCheckTicketValidityApiData = () => {
-    const data = getApiDataCore({
-      props: this.props,
-      modelName: 'entrance',
-    });
+  // getCheckTicketValidityApiData = () => {
+  //   console.log(this.props);
 
-    return data;
-  };
+  //   const data = getApiDataCore({
+  //     props: this.props,
+  //     modelName: 'entrance',
+  //   });
 
-  getRefreshSessionApiData = () => {
-    const data = getApiDataCore({
-      props: this.props,
-      modelName: 'session',
-    });
+  //   return data;
+  // };
 
-    return data;
-  };
+  // getRefreshSessionApiData = () => {
+  //   const data = getApiDataCore({
+  //     props: this.props,
+  //     modelName: 'session',
+  //   });
 
-  getSignInApiData = () => {
-    const data = getApiDataCore({
-      props: this.props,
-      modelName: 'entrance',
-    });
+  //   return data;
+  // };
 
-    return data;
-  };
+  // getSignInApiData = () => {
+  //   const data = getApiDataCore({
+  //     props: this.props,
+  //     modelName: 'entrance',
+  //   });
 
-  getSignInSilentApiData = () => {
-    const data = getApiDataCore({
-      props: this.props,
-      modelName: 'entrance',
-    });
+  //   return data;
+  // };
 
-    return data;
-  };
+  // getSignInSilentApiData = () => {
+  //   const data = getApiDataCore({
+  //     props: this.props,
+  //     modelName: 'entrance',
+  //   });
+
+  //   return data;
+  // };
 
   getRemoteMetaData = () => {
     const global = this.getGlobalWrapper();

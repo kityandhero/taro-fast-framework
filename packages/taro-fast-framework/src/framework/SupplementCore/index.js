@@ -424,7 +424,7 @@ class SupplementCore extends Common {
 
         that.obtainLocation({
           successCallback: () => {
-            that.signIn({
+            that.signInSilent({
               data: {},
               callback,
             });
@@ -433,14 +433,14 @@ class SupplementCore extends Common {
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            that.signIn({
+            that.signInSilent({
               data: {},
               callback,
             });
           },
         });
       } else {
-        that.signIn({
+        that.signInSilent({
           data: {},
           callback,
         });
@@ -565,7 +565,7 @@ class SupplementCore extends Common {
         setNextCheckLoginUnixTime(nextCheckLoginUnixTime);
 
         if (needRefresh) {
-          that.signIn({
+          that.signInSilent({
             data: {},
             callback,
           });
