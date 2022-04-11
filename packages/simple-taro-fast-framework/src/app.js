@@ -17,7 +17,7 @@ const config = {
   // showRequestInfo: checkEnvIsDevelopment(),
   showUseVirtualRequestMessage: false,
   apiPrefix: {
-    corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',
+    corsTargetDomain: 'https://universalitymallapi.1010101.cc',
   },
   apiSuccessCode: 200,
   authenticationFailCode: 2001,

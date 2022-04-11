@@ -1,14 +1,12 @@
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import { pathCollection } from '../../../customConfig/config';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import BasePageWrapperCore from '../BasePageWrapperCore';
 
-export default class BasePageWrapper extends PageWrapper {
-  verifySession = true;
+export default class BasePageWrapper extends BasePageWrapperCore {
+  // verifySession = true;
 
-  verifyTicket = true;
-
-  verifyTicketValidity = true;
+  // verifyTicketValidity = true;
 
   needReLocationWhenRepeatedShow = true;
 

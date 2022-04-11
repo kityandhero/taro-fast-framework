@@ -549,20 +549,24 @@ export default class Infrastructure extends ComponentBase {
 
     that.checkSession(() => {
       if (!that.verifyTicket) {
-        that.checkTicketValidity(() => {
-          that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+        that.checkTicketValidity({
+          callback: () => {
+            that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+          },
         });
 
         if (that.loadRemoteRequestAfterMount) {
           that.doLoadRemoteRequest();
         }
       } else {
-        that.checkTicketValidity(() => {
-          if (that.loadRemoteRequestAfterMount) {
-            that.doLoadRemoteRequest();
-          }
+        that.checkTicketValidity({
+          callback: () => {
+            if (that.loadRemoteRequestAfterMount) {
+              that.doLoadRemoteRequest();
+            }
 
-          that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+            that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+          },
         });
       }
     });
@@ -649,7 +653,7 @@ export default class Infrastructure extends ComponentBase {
    * 检测登录凭据
    * @param {*} callback
    */
-  checkTicketValidity = (callback) => {
+  checkTicketValidity = ({ callback }) => {
     if (isFunction(callback)) {
       callback();
     }

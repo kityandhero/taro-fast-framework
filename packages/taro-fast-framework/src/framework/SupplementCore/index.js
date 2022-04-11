@@ -66,8 +66,8 @@ class SupplementCore extends Common {
 
       that.checkSession(() => {
         if (that.verifyTicketValidity) {
-          that.checkTicketValidity(() => {
-            that.doWorkWhenCheckTicketValidityOnRepeatedShow;
+          that.checkTicketValidity({
+            callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
           });
         }
       });
@@ -400,7 +400,7 @@ class SupplementCore extends Common {
     }
   };
 
-  checkTicketValidity = (callback) => {
+  checkTicketValidity = ({ callback }) => {
     recordLog('exec checkTicketValidity');
 
     const useLocation = defaultSettingsLayoutCustom.getUseLocation();
@@ -454,24 +454,24 @@ class SupplementCore extends Common {
 
         that.obtainLocation({
           successCallback: () => {
-            that.checkTicketValidityAfterLocation(callback);
+            that.checkTicketValidityAfterLocation({ callback });
           },
           focus: false,
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            that.checkTicketValidityAfterLocation(callback);
+            that.checkTicketValidityAfterLocation({ callback });
           },
         });
       } else {
-        that.checkTicketValidityAfterLocation(callback);
+        that.checkTicketValidityAfterLocation({ callback });
       }
     }
   };
 
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
-  checkTicketValidityAfterLocation(callback) {
+  checkTicketValidityAfterLocation({ callback = null }) {
     recordLog('exec checkTicketValidityAfterLocation');
 
     const ticketValidityProcessDetection =
@@ -505,7 +505,7 @@ class SupplementCore extends Common {
       }
     }
 
-    this.checkTicketValidityCore(callback);
+    this.checkTicketValidityCore({ callback });
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -537,7 +537,7 @@ class SupplementCore extends Common {
     return data;
   };
 
-  checkTicketValidityCore(callback) {
+  checkTicketValidityCore({ callback = null }) {
     recordLog('exec checkTicketValidityCore');
 
     const currentNextCheckLoginUnixTime = getNextCheckLoginUnixTime();
@@ -1101,7 +1101,7 @@ class SupplementCore extends Common {
       } else {
         removeSession();
 
-        showInfoMessage({
+        recordObject({
           message: '静默登录失败',
         });
 
