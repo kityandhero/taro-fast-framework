@@ -16,6 +16,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import BasePageWrapper from '../../BasePageWrapper';
+import noCardImage from '../../../../assets/images/noCardImage.jpg';
 
 import './index.less';
 
@@ -164,7 +165,7 @@ export default class Index extends BasePageWrapper {
               flexAuto="right"
               left={
                 <View style={{ width: transformSize(260) }}>
-                  <ImageBox src={image} aspectRatio={0.74} />
+                  <ImageBox src={image || noCardImage} aspectRatio={0.74} />
                 </View>
               }
               rightStyle={{

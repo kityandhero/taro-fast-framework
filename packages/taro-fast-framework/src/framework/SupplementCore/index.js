@@ -1119,6 +1119,8 @@ class SupplementCore extends Common {
   }
 
   parseSignInResultFromRemoteApiDataWrapper = (remoteData) => {
+    recordLog('exec parseSignInResultFromRemoteApiDataWrapper');
+
     const verifySignInResult = getVerifySignInResult();
 
     const { signInResult } = {
@@ -1149,6 +1151,8 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setSignInResultOnSignIn = ({ signInResult }) => {
+    recordLog('exec setSignInResultOnSignIn');
+
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
 
@@ -1207,6 +1211,8 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignIn = ({ token }) => {
+    recordLog('exec setTokenOnSignIn');
+
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignIn token must be string');
     }
@@ -1219,6 +1225,8 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignInSilent = ({ token }) => {
+    recordLog('exec setTokenOnSignInSilent');
+
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignInSilent token must be string');
     }
