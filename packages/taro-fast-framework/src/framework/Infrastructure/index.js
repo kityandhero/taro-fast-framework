@@ -281,6 +281,9 @@ export default class Infrastructure extends ComponentBase {
    */
   backTopThresholdDistance = 0;
 
+  /**
+   * 当前实例
+   */
   currentInstance = Taro.getCurrentInstance();
 
   /**
