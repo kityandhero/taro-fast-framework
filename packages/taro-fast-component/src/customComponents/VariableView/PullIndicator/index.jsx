@@ -42,8 +42,22 @@ class PullIndicator extends BaseComponent {
 
   currentMove = 0;
 
+  refreshingIllusoryShow = false;
+
+  refreshingTimer = null;
+
   constructor(props) {
     super(props);
+
+    const { refreshing } = props;
+
+    this.state = {
+      ...this.state,
+      ...{
+        refreshingFlag: refreshing,
+        illusoryVisibleCompleted: true,
+      },
+    };
 
     this.refreshBoxAnimation = createAnimation({
       duration: 300,
@@ -60,6 +74,51 @@ class PullIndicator extends BaseComponent {
       refreshBoxPreloadAnimationData: this.refreshBoxPreloadAnimation.export(),
     };
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { refreshing: refreshingFlagNext } = nextProps;
+    const { refreshingFlag: refreshingFlagPrev } = prevState;
+
+    if (refreshingFlagNext !== refreshingFlagPrev) {
+      const data =
+        refreshingFlagNext && !refreshingFlagPrev
+          ? { illusoryVisibleCompleted: false }
+          : {};
+
+      return {
+        ...{
+          refreshingFlag: refreshingFlagNext,
+        },
+        ...data,
+      };
+    }
+
+    return {};
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+    const { refreshingFlag: refreshingFlagPrev } = preState;
+    const { refreshingFlag: refreshingFlagNext } = this.state;
+
+    if (!refreshingFlagPrev && refreshingFlagNext) {
+      const that = this;
+
+      that.refreshingIllusoryShow = true;
+
+      that.refreshingTimer = setTimeout(() => {
+        that.refreshingIllusoryShow = false;
+
+        that.setState({
+          illusoryVisibleCompleted: true,
+        });
+      }, 500);
+    }
+  };
+
+  doWorkBeforeUnmount = () => {
+    clearTimeout(this.refreshingTimer);
+  };
 
   getRefreshingBoxEffect = () => {
     const { refreshingBoxEffect } = this.props;
@@ -179,13 +238,13 @@ class PullIndicator extends BaseComponent {
       enablePullDownRefresh,
       useCustomPullDown,
       useRefreshingBox,
-      refreshing,
       maxMove,
     } = this.props;
     const {
       refreshBoxAnimationData,
       needRefresh,
       refreshBoxPreloadAnimationData,
+      refreshingFlag,
     } = this.state;
 
     const refreshingBoxEffect = this.getRefreshingBoxEffect();
@@ -243,7 +302,9 @@ class PullIndicator extends BaseComponent {
         ) : null}
 
         <Transition
-          show={refreshing && useRefreshingBox}
+          show={
+            (refreshingFlag && useRefreshingBox) || this.refreshingIllusoryShow
+          }
           className={classNames(`${classPrefix}__refreshing-box`)}
           name="fade"
         >

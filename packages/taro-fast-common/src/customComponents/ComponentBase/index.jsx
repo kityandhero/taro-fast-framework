@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro';
 import { Component } from 'react';
+import { toNumber } from 'src/utils/typeConvert';
 
 import {
   recordError,
@@ -8,7 +9,7 @@ import {
   getGuid,
   recordLog,
 } from '../../utils/tools';
-import { isFunction, isObject } from '../../utils/typeCheck';
+import { isFunction, isNumber, isObject } from '../../utils/typeCheck';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -178,11 +179,16 @@ class ComponentBase extends Component {
   increaseCounter(callback) {
     const { counter } = this.state;
 
-    this.setState({ counter: counter + 1 }, () => {
-      if (isFunction(callback)) {
-        callback();
-      }
-    });
+    this.setState(
+      {
+        counter: isNumber(counter) ? toNumber(counter) : 0 + 1,
+      },
+      () => {
+        if (isFunction(callback)) {
+          callback();
+        }
+      },
+    );
   }
 
   doDidMountTask = () => {
