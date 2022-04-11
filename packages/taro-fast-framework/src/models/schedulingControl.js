@@ -5,12 +5,12 @@ import {
 } from 'src/utils/globalStorageAssist';
 import {
   locateResult,
-  verifySignInResult,
   whetherString,
 } from 'taro-fast-common/es/utils/constants';
 import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
 import { reducerCommonCollection } from '../utils/dva';
+import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 
 import {
   getWeatherData,
@@ -30,7 +30,7 @@ export default {
       locationGet: false,
       locationAuth: locateResult.unknown,
     },
-    signInResult: verifySignInResult.unknown,
+    signInResult: defaultSettingsLayoutCustom.getSignInUnknownFlag(),
     ticketValidityProcessDetection: false,
     signInProcessDetection: false,
   },

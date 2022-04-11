@@ -49,9 +49,9 @@ export class Request {
     const { code } = response.data;
 
     if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
-      const loginPath = defaultSettingsLayoutCustom.getLoginPath();
+      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-      if (stringIsNullOrWhiteSpace(loginPath)) {
+      if (stringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 

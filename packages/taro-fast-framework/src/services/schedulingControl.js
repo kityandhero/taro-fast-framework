@@ -1,6 +1,6 @@
-import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
 import { addMinute, getGuid, getNow } from 'taro-fast-common/es/utils/tools';
 
+import { getVerifySignInResult } from '../utils/tools';
 import { request } from '../utils/requestAssistor';
 
 export async function getWeatherData(params) {
@@ -44,6 +44,8 @@ export async function refreshSessionData(params) {
 }
 
 export async function signInSilentData(params) {
+  const verifySignInResult = getVerifySignInResult();
+
   return request({
     api: `/schedulingControl/signInSilent`,
     params,

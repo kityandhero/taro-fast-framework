@@ -20,6 +20,8 @@ import {
   TranslucentBox,
 } from 'taro-fast-component/es/customComponents';
 
+import noCardImage from '../../../../assets/images/noCardImage.jpg';
+
 export const classPrefix = `simple-news-home2`;
 
 const { IconClock } = Icon;
@@ -43,7 +45,7 @@ export function buildItem({
           return (
             <View style={{ width: transformSize(280) }}>
               <ImageBox
-                src={image}
+                src={image || noCardImage}
                 aspectRatio={0.87}
                 decorationBuilder={() => {
                   return (
@@ -92,7 +94,7 @@ export function buildItem({
 
     return (
       <View>
-        <ImageBox src={image} aspectRatio={0.582} />
+        <ImageBox src={image || noCardImage} aspectRatio={0.582} />
 
         <Ellipsis
           line={1}
@@ -260,7 +262,7 @@ export function buildItem({
               }}
               right={
                 <View style={{ width: transformSize(260) }}>
-                  <ImageBox src={image} aspectRatio={0.74} />
+                  <ImageBox src={image || noCardImage} aspectRatio={0.74} />
                 </View>
               }
             />
@@ -270,7 +272,7 @@ export function buildItem({
         if (renderMode === 4) {
           return (
             <View style={{ width: transformSize(260) }}>
-              <ImageBox src={image} aspectRatio={0.87} />
+              <ImageBox src={image || noCardImage} aspectRatio={0.87} />
             </View>
           );
         }

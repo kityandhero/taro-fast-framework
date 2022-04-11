@@ -7,6 +7,7 @@ import {
   authenticationFailCode as authenticationFailCodeDefault,
   emptyLogo as emptyLogoImage,
   locationModeCollection,
+  verifySignInResult,
 } from 'taro-fast-common/es/utils/constants';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
@@ -137,15 +138,45 @@ export const defaultSettingsLayoutCustom = {
 
     return authenticationFailCode || authenticationFailCodeDefault;
   },
-  getLoginPath: () => {
+  getSignInSuccessFlag: () => {
     const appInit = getAppInitConfigData();
 
-    const { loginPath } = {
-      ...{ loginPath: '' },
+    const { signInSuccessFlag } = {
+      ...{ signInSuccessFlag: verifySignInResult.success },
       ...(appInit || {}),
     };
 
-    return loginPath || '';
+    return signInSuccessFlag || verifySignInResult.success;
+  },
+  getSignInFailFlag: () => {
+    const appInit = getAppInitConfigData();
+
+    const { signInFailFlag } = {
+      ...{ signInFailFlag: verifySignInResult.fail },
+      ...(appInit || {}),
+    };
+
+    return signInFailFlag || verifySignInResult.fail;
+  },
+  getSignInUnknownFlag: () => {
+    const appInit = getAppInitConfigData();
+
+    const { signInUnknownFlag } = {
+      ...{ signInUnknownFlag: verifySignInResult.unknown },
+      ...(appInit || {}),
+    };
+
+    return signInUnknownFlag || verifySignInResult.unknown;
+  },
+  getSignInPath: () => {
+    const appInit = getAppInitConfigData();
+
+    const { signInPath } = {
+      ...{ signInPath: '' },
+      ...(appInit || {}),
+    };
+
+    return signInPath || '';
   },
   getDefaultLongitude: () => {
     const appInit = getAppInitConfigData();

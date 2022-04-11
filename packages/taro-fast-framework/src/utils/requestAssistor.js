@@ -73,9 +73,11 @@ function dataExceptionNotice(d) {
           };
         }
       } else {
-        showErrorMessage({
-          message: messageText,
-        });
+        if (code !== authenticationFailCode) {
+          showErrorMessage({
+            message: messageText,
+          });
+        }
 
         taroGlobalData.lastCustomMessage = {
           code,
@@ -85,16 +87,16 @@ function dataExceptionNotice(d) {
       }
     }
 
-    const loginPath = defaultSettingsLayoutCustom.getLoginPath();
+    const signInPath = defaultSettingsLayoutCustom.getSignInPath();
     const authenticationFailCode =
       defaultSettingsLayoutCustom.getAuthenticationFailCode();
 
     if (code === authenticationFailCode) {
-      if (stringIsNullOrWhiteSpace(loginPath)) {
+      if (stringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 
-      redirectTo(loginPath);
+      redirectTo(signInPath);
     }
   }
 }
@@ -470,13 +472,13 @@ export async function request({
     }
 
     if (virtualNeedAuthorize && !verifyToken) {
-      const loginPath = defaultSettingsLayoutCustom.getLoginPath();
+      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-      if (stringIsNullOrWhiteSpace(loginPath)) {
+      if (stringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 
-      redirectTo(loginPath);
+      redirectTo(signInPath);
     } else {
       result = await apiVirtualAccess({
         virtualRequestDelay,

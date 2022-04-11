@@ -8,7 +8,6 @@ import {
   recordObject,
   recordLog,
   inCollection,
-  getSignInResultDescription,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -19,10 +18,13 @@ import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
   locateResult,
   locationModeCollection,
-  verifySignInResult,
 } from 'taro-fast-common/es/utils/constants';
 import Tips from 'taro-fast-common/es/utils/tips';
 
+import {
+  getSignInResultDescription,
+  getVerifySignInResult,
+} from '../../utils/tools';
 import {
   getEffectiveCode,
   getLastLocation,
@@ -406,6 +408,7 @@ class SupplementCore extends Common {
     const useLocation = defaultSettingsLayoutCustom.getUseLocation();
     const locationMode = getLocationMode();
     const signInResult = this.getSignInResult();
+    const verifySignInResult = getVerifySignInResult();
 
     const that = this;
 
@@ -480,6 +483,8 @@ class SupplementCore extends Common {
     if (ticketValidityProcessDetection) {
       return;
     }
+
+    const verifySignInResult = getVerifySignInResult();
 
     const tokenCurrent = getToken();
     const openIdCurrent = getOpenId();
@@ -570,6 +575,7 @@ class SupplementCore extends Common {
             callback,
           });
         } else {
+          const verifySignInResult = getVerifySignInResult();
           const signInResult = that.getSignInResult();
 
           if (signInResult === verifySignInResult.fail && that.verifyTicket) {
@@ -1042,7 +1048,8 @@ class SupplementCore extends Common {
 
       if (dataSuccess) {
         that.setSignInResultOnSignIn({
-          signInResult: that.parseSignInResultFromRemoteApiData(metaData),
+          signInResult:
+            that.parseSignInResultFromRemoteApiDataWrapper(metaData),
         });
 
         that.setTokenOnSignIn({
@@ -1086,7 +1093,8 @@ class SupplementCore extends Common {
 
       if (dataSuccess) {
         that.setSignInResultOnSignIn({
-          signInResult: that.parseSignInResultFromRemoteApiData(metaData),
+          signInResult:
+            that.parseSignInResultFromRemoteApiDataWrapper(metaData),
         });
 
         that.setTokenOnSignInSilent({
@@ -1110,12 +1118,27 @@ class SupplementCore extends Common {
     });
   }
 
+  parseSignInResultFromRemoteApiDataWrapper = (remoteData) => {
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...this.parseSignInResultFromRemoteApiData(remoteData),
+    };
+
+    return signInResult;
+  };
+
   /**
    * 从接口数据中解析出sign in result
    * @param {*} remoteData
    */
   // eslint-disable-next-line no-unused-vars
   parseSignInResultFromRemoteApiData = (remoteData) => {
+    const verifySignInResult = getVerifySignInResult();
+
     throw new Error(
       `parseSignInResultFromRemoteApiData token must be number as ${verifySignInResult.unknown}/${verifySignInResult.fail}/${verifySignInResult.success}, ${verifySignInResult.unknown} mean unknown; ${verifySignInResult.fail} mean fail; ${verifySignInResult.success} mean success.`,
     );
@@ -1127,6 +1150,7 @@ class SupplementCore extends Common {
    */
   setSignInResultOnSignIn = ({ signInResult }) => {
     const v = toNumber(signInResult);
+    const verifySignInResult = getVerifySignInResult();
 
     if (
       !inCollection(

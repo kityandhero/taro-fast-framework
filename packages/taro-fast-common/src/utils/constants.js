@@ -113,7 +113,7 @@ export const appInitDefault = {
   leftBarLogo: emptyLogo,
   apiSuccessCode,
   authenticationFailCode,
-  loginPath: '/user/login',
+  signInPath: '/user/login',
   useLocation: false,
   mapKey: '',
   defaultLatitude: '',
@@ -130,6 +130,9 @@ export const appInitDefault = {
   videoUploadMaxSize: 4,
   fileUploadMaxSize: 2,
   withoutPermissionRedirectPath: '',
+  signInSuccessFlag: verifySignInResult.success,
+  signInFailFlag: verifySignInResult.fail,
+  signInUnknownFlag: verifySignInResult.unknown,
 };
 
 /**

@@ -11,7 +11,6 @@ import {
   pageScrollTo,
   sleep,
   recordLog,
-  getSignInResultDescription,
   recordObject,
   transformSize,
   getMenuButtonBoundingClientRect,
@@ -39,6 +38,7 @@ import {
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
 
+import { getSignInResultDescription } from '../../utils/tools';
 import {
   getSession,
   getSessionRefreshing,

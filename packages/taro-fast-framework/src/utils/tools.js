@@ -1,3 +1,5 @@
+import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
+
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
 /**
@@ -10,6 +12,33 @@ export function checkWhetherAuthorizeFail(code) {
     defaultSettingsLayoutCustom.getAuthenticationFailCode();
 
   return authenticationFailCode === code;
+}
+
+export function getSignInResultDescription(v) {
+  let result = '';
+
+  const verifySignInResultData = getVerifySignInResult();
+
+  Object.entries(verifySignInResultData).forEach(([key, value]) => {
+    if (value === v) {
+      result = key;
+    }
+  });
+
+  return result;
+}
+
+/**
+ * 构建登录校验检测凭证
+ */
+export function getVerifySignInResult() {
+  const o = verifySignInResult;
+
+  o.success = defaultSettingsLayoutCustom.getSignInSuccessFlag();
+  o.fail = defaultSettingsLayoutCustom.getSignInFailFlag();
+  o.unknown = defaultSettingsLayoutCustom.getSignInUnknownFlag();
+
+  return o;
 }
 
 /**

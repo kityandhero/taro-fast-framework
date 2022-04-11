@@ -21,7 +21,7 @@ const config = {
   },
   apiSuccessCode: 200,
   authenticationFailCode: 2001,
-  loginPath: '/user/login',
+  signInPath: '/user/login',
   apiVersion: 'v1',
   useLocation: true,
   initialLocationMode: locationModeCollection.auto,
