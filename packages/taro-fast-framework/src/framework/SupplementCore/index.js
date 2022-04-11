@@ -1226,20 +1226,20 @@ class SupplementCore extends Common {
 
   /**
    * 账户登录失败时的业务逻辑, 需要重载
-   * @param {*} remoteData
    */
   doWhenSignInFail = () => {
-    throw new Error('doWhenSignInFail need to be override');
+    recordLog(
+      'info doWhenSignInFail do nothing,if you need,you can override it: doWhenSignInFail = () => {}',
+    );
   };
 
   /**
    * 静默登录失败时的业务逻辑, 需要重载
-   * @param {*} remoteData
    */
   doWhenSignInSilentFail = () => {
-    if (this.verifyTicket) {
-      throw new Error('doWhenSignInSilentFail need to be override');
-    }
+    recordLog(
+      'info doWhenSignInSilentFail do nothing,if you need,you can override it: doWhenSignInSilentFail = () => {}',
+    );
   };
 }
 
