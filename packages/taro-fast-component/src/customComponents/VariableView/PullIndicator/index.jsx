@@ -2,7 +2,11 @@ import classNames from 'classnames';
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
-import { createAnimation, inCollection } from 'taro-fast-common/es/utils/tools';
+import {
+  createAnimation,
+  inCollection,
+  getCurrentInstance,
+} from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../../BaseComponent';
@@ -32,6 +36,8 @@ const defaultProps = {
 };
 
 class PullIndicator extends BaseComponent {
+  currentInstance = getCurrentInstance();
+
   refreshBoxAnimation = null;
 
   refreshBoxPreloadAnimation = null;
@@ -193,20 +199,20 @@ class PullIndicator extends BaseComponent {
     );
   };
 
-  componentDidShow() {
-    this.bindMessageListener();
-  }
+  unbindMessageListener = () => {
+    Taro.eventCenter.off('tfc-pull-indicator');
+  };
 
   componentDidMount() {
-    this.bindMessageListener();
-  }
+    const onShowEventId = this.currentInstance.router.onShow;
+    const onHideEventId = this.currentInstance.router.onHide;
 
-  componentDidHide() {
-    Taro.eventCenter.off('tfc-pull-indicator');
+    Taro.eventCenter.on(onShowEventId, this.bindMessageListener);
+    Taro.eventCenter.on(onHideEventId, this.unbindMessageListener);
   }
 
   componentWillUnmount() {
-    Taro.eventCenter.off('tfc-pull-indicator');
+    this.unbindMessageListener();
   }
 
   buildRefreshingBox = () => {
@@ -234,6 +240,7 @@ class PullIndicator extends BaseComponent {
 
   renderFurther() {
     const {
+      id,
       className,
       enablePullDownRefresh,
       useCustomPullDown,
@@ -250,7 +257,7 @@ class PullIndicator extends BaseComponent {
     const refreshingBoxEffect = this.getRefreshingBoxEffect();
 
     return (
-      <View className={className}>
+      <View id={id} className={className}>
         {enablePullDownRefresh && useCustomPullDown ? (
           <View
             className={classNames(`${classPrefix}__refresh-box`, {

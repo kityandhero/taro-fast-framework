@@ -1,7 +1,11 @@
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { inCollection, transformSize } from '../../utils/tools';
+import {
+  getCurrentInstance,
+  inCollection,
+  transformSize,
+} from '../../utils/tools';
 import ComponentBase from '../../customComponents/ComponentBase';
 
 const typeCollection = ['info', 'success', 'error', 'warning'];
@@ -61,6 +65,8 @@ const styleHidden = {
 };
 
 class Notification extends ComponentBase {
+  currentInstance = getCurrentInstance();
+
   timer = null;
 
   constructor(props) {
@@ -112,20 +118,20 @@ class Notification extends ComponentBase {
     );
   };
 
-  componentDidShow() {
-    this.bindMessageListener();
-  }
+  unbindMessageListener = () => {
+    Taro.eventCenter.off('tfc-message');
+  };
 
   componentDidMount() {
-    this.bindMessageListener();
-  }
+    const onShowEventId = this.currentInstance.router.onShow;
+    const onHideEventId = this.currentInstance.router.onHide;
 
-  componentDidHide() {
-    Taro.eventCenter.off('tfc-message');
+    Taro.eventCenter.on(onShowEventId, this.bindMessageListener);
+    Taro.eventCenter.on(onHideEventId, this.unbindMessageListener);
   }
 
   componentWillUnmount() {
-    Taro.eventCenter.off('tfc-message');
+    this.unbindMessageListener();
   }
 
   render() {

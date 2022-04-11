@@ -56,6 +56,7 @@ import {
   stopPullDownRefresh as stopPullDownRefreshCore,
   pageScrollTo as pageScrollToCore,
   getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
+  getCurrentInstance as getCurrentInstanceCore,
 } from '@tarojs/taro';
 
 import {
@@ -177,6 +178,10 @@ export function hideNavigationBarLoading() {
   if (isWechat) {
     hideNavigationBarLoadingCore();
   }
+}
+
+export function getCurrentInstance() {
+  return getCurrentInstanceCore();
 }
 
 export function stopPullDownRefresh() {
