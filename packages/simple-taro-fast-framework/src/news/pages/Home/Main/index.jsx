@@ -24,6 +24,7 @@ import {
 
 import { pathCollection } from '../../../../customConfig/config';
 import BasePageWrapper from '../../BasePageWrapper';
+import noCardImage from '../../../../assets/images/noCardImage.jpg';
 
 import { classPrefix, buildItem } from '../Assist/tools';
 
@@ -147,7 +148,11 @@ export default class Index extends BasePageWrapper {
                 const { image } = o;
 
                 return (
-                  <ImageBox src={image} aspectRatio={0.371} padding={10} />
+                  <ImageBox
+                    src={image || noCardImage}
+                    aspectRatio={0.371}
+                    padding={10}
+                  />
                 );
               }}
             />
@@ -159,7 +164,7 @@ export default class Index extends BasePageWrapper {
                 <Grid
                   columns={5}
                   list={navList}
-                  itemBuilder={(item, index) => {
+                  itemBuilder={({ item, index }) => {
                     const { image, value } = item;
 
                     return (
@@ -174,7 +179,7 @@ export default class Index extends BasePageWrapper {
                                   `${classPrefix}__navContainor__navBox__imageBox`,
                                 )}
                               >
-                                <ImageBox src={image} />
+                                <ImageBox src={image || noCardImage} />
                               </View>
                             </CenterBox>
                           }
