@@ -14,6 +14,11 @@ const list = [
     path: pathCollection.example.flex.path,
   },
   {
+    id: 'HeadNavigation',
+    name: '头部导航',
+    path: pathCollection.example.headNavigation.path,
+  },
+  {
     id: 'FlexBox',
     name: '自动布局',
     path: pathCollection.example.flexBox.path,

@@ -18,16 +18,10 @@ const list = [
     name: '查看更多',
     path: pathCollection.example.more.path,
   },
-
   {
     id: 'ImageBox',
     name: '图片',
     path: pathCollection.example.imageBox.path,
-  },
-  {
-    id: 'HeadNavigation',
-    name: '头部导航',
-    path: pathCollection.example.headNavigation.path,
   },
   {
     id: 'ColorText',
