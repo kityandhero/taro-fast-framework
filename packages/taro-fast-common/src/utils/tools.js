@@ -46,7 +46,10 @@ import {
   switchTab as switchTabCore,
   reLaunch as reLaunchCore,
   navigateBack as navigateBackCore,
-  getLocation as getGeographicalLocationCore,
+  startLocationUpdate as startGeographicalLocationUpdateCore,
+  stopLocationUpdate as stopGeographicalLocationUpdateCore,
+  onLocationChange as onGeographicalLocationChangeCore,
+  offLocationChange as offGeographicalLocationChangeCore,
   requestPayment as requestPaymentCore,
   uploadFile as uploadFileCore,
   downloadFile as downloadFileCore,
@@ -2063,8 +2066,64 @@ export function navigateBack(params) {
   return navigateBackCore(params);
 }
 
-export function getGeographicalLocation(params) {
-  return getGeographicalLocationCore(params);
+export function startGeographicalLocationUpdate({ success, fail, complete }) {
+  recordLog('exec startGeographicalLocationUpdate');
+
+  startGeographicalLocationUpdateCore({
+    success,
+    fail,
+    complete,
+  });
+}
+
+export function stopGeographicalLocationUpdate({ success, fail, complete }) {
+  recordLog('exec stopGeographicalLocationUpdate');
+
+  stopGeographicalLocationUpdateCore({
+    success,
+    fail,
+    complete,
+  });
+}
+
+export function onGeographicalLocationChange(callback) {
+  recordLog('exec onGeographicalLocationChange');
+
+  onGeographicalLocationChangeCore(callback);
+}
+
+export function offGeographicalLocationChange(callback) {
+  recordLog('exec offGeographicalLocationChange');
+
+  offGeographicalLocationChangeCore(callback);
+}
+
+export function getGeographicalLocation({
+  success: successCallback,
+  fail,
+  complete: completeCallback,
+}) {
+  recordLog('exec getGeographicalLocation');
+
+  startGeographicalLocationUpdate({
+    success: () => {
+      onGeographicalLocationChange((res) => {
+        if (isFunction(successCallback)) {
+          successCallback(res);
+        }
+
+        offGeographicalLocationChange();
+      });
+    },
+    fail,
+    complete: (res) => {
+      if (isFunction(completeCallback)) {
+        completeCallback(res);
+      }
+
+      stopGeographicalLocationUpdate();
+    },
+  });
 }
 
 export function createAnimation(params) {
