@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
-import { CenterBox } from 'taro-fast-component/es/customComponents';
+import { Button, CenterBox } from 'taro-fast-component/es/customComponents';
 
 import BasePageWrapper from '../../BasePageWrapper';
 
@@ -35,12 +38,35 @@ export default class Index extends BasePageWrapper {
   };
 
   doWorkAdjustDidMount = () => {
+    this.buildWeatherData();
+  };
+
+  buildWeatherData = () => {
     this.getLocationWeather({
-      callback: ({ observe }) => {
-        const { degree, weather } = observe;
+      callback: (data) => {
+        console.log(data);
+
+        const {
+          observe: { degree, weather },
+        } = {
+          ...{
+            observe: {
+              degree: '',
+              degree: '',
+            },
+          },
+          ...data,
+        };
+
+        if (
+          stringIsNullOrWhiteSpace(weather) &&
+          stringIsNullOrWhiteSpace(degree)
+        ) {
+          return;
+        }
 
         this.setState({
-          weather: `当前天气: ${degree}°C ${weather}`,
+          weather: `天气${weather}, 温度${degree}°C`,
         });
       },
     });
@@ -57,6 +83,9 @@ export default class Index extends BasePageWrapper {
         }}
       >
         <CenterBox>{weather} </CenterBox>
+        <CenterBox>
+          <Button onClick={this.buildWeatherData} text="刷新" />
+        </CenterBox>
       </View>
     );
   }

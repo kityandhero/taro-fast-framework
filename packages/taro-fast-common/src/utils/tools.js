@@ -2121,6 +2121,8 @@ export function getGeographicalLocation({
 
   startGeographicalLocationUpdate({
     success: () => {
+      recordLog('info startGeographicalLocationUpdate success');
+
       onGeographicalLocationChange((res) => {
         try {
           if (isFunction(successCallback)) {
@@ -2132,16 +2134,28 @@ export function getGeographicalLocation({
           }
         } finally {
           offGeographicalLocationChange();
+
+          stopGeographicalLocationUpdate({});
         }
       });
     },
-    fail: failCallback,
+    fail: (res) => {
+      recordLog('info startGeographicalLocationUpdate fail');
+
+      try {
+        if (isFunction(failCallback)) {
+          failCallback(res);
+        }
+      } catch (e) {
+        recordError(e);
+      } finally {
+        stopGeographicalLocationUpdate({});
+      }
+    },
     complete: (res) => {
       if (isFunction(completeCallback)) {
         completeCallback(res);
       }
-
-      stopGeographicalLocationUpdate({});
     },
   });
 }
