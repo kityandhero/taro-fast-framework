@@ -29,13 +29,6 @@ export default class PageWrapper extends AuthorizationWrapper {
     return global;
   };
 
-  // dispatchRefreshSession = (data) => {
-  //   return this.dispatchApi({
-  //     type: 'session/refreshSession',
-  //     payload: data,
-  //   });
-  // };
-
   // dispatchSignIn = (data) => {
   //   return this.dispatchApi({
   //     type: 'entrance/signIn',
@@ -93,6 +86,12 @@ export default class PageWrapper extends AuthorizationWrapper {
     const { token } = remoteData;
 
     return token || '';
+  };
+
+  parseOpenIdFromSignInApiData = (remoteData) => {
+    const { openId } = remoteData;
+
+    return openId || '';
   };
 
   reloadRemoteMetaData = () => {

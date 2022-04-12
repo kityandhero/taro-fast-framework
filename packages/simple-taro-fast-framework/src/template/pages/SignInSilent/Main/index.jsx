@@ -5,6 +5,7 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { CenterBox } from 'taro-fast-component/es/customComponents';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
+import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
 
@@ -25,6 +26,18 @@ export default class Index extends BasePageWrapper {
   verifyTicket = true;
 
   verifyTicketValidity = true;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+      ...{},
+    };
+
+    //移除现有缓存, 仅为当前夜间环境测试使用, 常规使用时无需此步骤
+    removeSession();
+  }
 
   getApiData = (props) => {
     return getApiDataCore({ props, modelName: 'entrance' });

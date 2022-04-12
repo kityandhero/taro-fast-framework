@@ -47,7 +47,8 @@ definePageConfig({
   navigationBarTitleText: '模板页面',
 });
 
-@connect(({ schedulingControl }) => ({
+@connect(({ entrance, schedulingControl }) => ({
+  entrance,
   schedulingControl,
 }))
 export default class Index extends ChannelPageBase {

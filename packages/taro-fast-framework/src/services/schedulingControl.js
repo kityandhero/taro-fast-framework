@@ -55,6 +55,7 @@ export async function signInSilentData(params) {
       data: {
         signInResult: verifySignInResult.fail,
         token: '',
+        openId: '',
       },
     },
   });

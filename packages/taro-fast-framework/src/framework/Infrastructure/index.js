@@ -346,6 +346,11 @@ export default class Infrastructure extends ComponentBase {
     }
   };
 
+  /**
+   * 初始化框架内部数据，不提供外部使用
+   */
+  initializeInternalData = () => {};
+
   receiveExternalParameter = () => {
     if ((this.externalParameter || null) == null) {
       this.externalParameter = this.currentInstance.router.params;
@@ -448,6 +453,8 @@ export default class Infrastructure extends ComponentBase {
 
   doDidMountTask = () => {
     this.checkSchedulingControlExistence();
+
+    this.initializeInternalData();
 
     this.receiveExternalParameter();
 

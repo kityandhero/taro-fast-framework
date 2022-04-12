@@ -32,9 +32,10 @@ import {
   getLocationMode,
   getMap,
   getNextCheckLoginUnixTime,
-  getOpenId,
+  setOpenId,
   getSessionRefreshing,
-  getToken,
+  setSessionRefreshing,
+  setToken,
   removeLocation,
   removeSession,
   setEffectiveCode,
@@ -44,8 +45,6 @@ import {
   setMap,
   setNextCheckLoginUnixTime,
   setSession,
-  setSessionRefreshing,
-  setToken,
   getCurrentCustomer,
   setCurrentCustomer,
   removeCurrentCustomer,
@@ -426,7 +425,9 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        recordLog('info use location and automatic location');
+        recordLog(
+          'info use location and automatic location and sign in result is unknown',
+        );
 
         that.obtainLocation({
           successCallback: () => {
@@ -457,18 +458,18 @@ class SupplementCore extends Common {
         locationMode === locationModeCollection.auto
       ) {
         recordLog(
-          'info use location and automatic location on checkTicketValidity',
+          'info use location and automatic location on checkTicketValidity and sign in result is not unknown',
         );
 
         that.obtainLocation({
           successCallback: () => {
-            that.checkTicketValidityAfterLocation({ callback });
+            that.bridgeLogicOnCheckTicketValidity({ callback });
           },
           focus: false,
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            that.checkTicketValidityAfterLocation({ callback });
+            that.bridgeLogicOnCheckTicketValidity({ callback });
           },
         });
       } else {
@@ -476,15 +477,15 @@ class SupplementCore extends Common {
           'info do not use location or nonautomatic location on checkTicketValidity',
         );
 
-        that.checkTicketValidityAfterLocation({ callback });
+        that.bridgeLogicOnCheckTicketValidity({ callback });
       }
     }
   };
 
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
-  checkTicketValidityAfterLocation({ callback = null }) {
-    recordLog('exec checkTicketValidityAfterLocation');
+  bridgeLogicOnCheckTicketValidity({ callback = null }) {
+    recordLog('exec bridgeLogicOnCheckTicketValidity');
 
     const ticketValidityProcessDetection =
       this.getTicketValidityProcessDetection();
@@ -494,32 +495,29 @@ class SupplementCore extends Common {
     }
 
     const verifySignInResult = getVerifySignInResult();
+    const signInResult = this.getSignInResult();
 
-    const tokenCurrent = getToken();
-    const openIdCurrent = getOpenId();
-    const location = getLocation();
-
-    if (
-      (tokenCurrent || '') !== '' &&
-      (openIdCurrent || '') !== '' &&
-      (location || null) !== null
-    ) {
-      const signInResult = this.getSignInResult();
-
-      if (signInResult === verifySignInResult.fail) {
-        if (!this.verifyTicket) {
-          return;
-        } else {
-          if (isFunction(callback)) {
-            callback();
-          }
-
-          return;
+    if (signInResult === verifySignInResult.fail) {
+      if (!this.verifyTicket) {
+        if (isFunction(callback)) {
+          callback();
         }
+
+        return;
+      } else {
+        this.checkTicketValidityCore({
+          forceRefresh: true,
+          callback,
+        });
+
+        return;
       }
     }
 
-    this.checkTicketValidityCore({ callback });
+    this.checkTicketValidityCore({
+      forceRefresh: false,
+      callback,
+    });
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -551,8 +549,22 @@ class SupplementCore extends Common {
     return data;
   };
 
-  checkTicketValidityCore({ callback = null }) {
+  checkTicketValidityCore({
+    forceRefresh: forceRefreshValue = false,
+    callback = null,
+  }) {
     recordLog('exec checkTicketValidityCore');
+
+    const that = this;
+
+    if (forceRefreshValue) {
+      that.signInSilent({
+        data: {},
+        callback,
+      });
+
+      return;
+    }
 
     const currentNextCheckLoginUnixTime = getNextCheckLoginUnixTime();
 
@@ -565,8 +577,6 @@ class SupplementCore extends Common {
 
       return;
     }
-
-    const that = this;
 
     that.dispatchCheckTicketValidity({}).then(() => {
       const remoteData = that.getCheckTicketValidityApiData();
@@ -653,6 +663,8 @@ class SupplementCore extends Common {
           const { code } = res;
 
           if (code) {
+            recordLog(`info code: ${code}`);
+
             setEffectiveCode(code);
 
             that
@@ -762,7 +774,7 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      recordLog('info use location and automatic location');
+      recordLog('info use location and automatic location on sign in');
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -883,7 +895,7 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      recordLog('info use location and automatic location');
+      recordLog('info use location and automatic location on sign in silent');
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -1065,6 +1077,10 @@ class SupplementCore extends Common {
           token: that.parseTokenFromSignInApiData(metaData),
         });
 
+        that.setOpenIdOnSignIn({
+          token: that.parseOpenIdFromSignInApiData(metaData),
+        });
+
         removeCurrentCustomer();
 
         that.getCustomer({
@@ -1114,6 +1130,10 @@ class SupplementCore extends Common {
 
         that.setTokenOnSignInSilent({
           token: that.parseTokenFromSignInSilentApiData(metaData),
+        });
+
+        that.setOpenIdOnSignInSilent({
+          token: that.parseOpenIdFromSignInApiData(metaData),
         });
 
         removeCurrentCustomer();
@@ -1253,6 +1273,62 @@ class SupplementCore extends Common {
     }
 
     setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+  };
+
+  /**
+   * 从接口数据中解析出sign in result
+   * @param {*} remoteData
+   */
+  // eslint-disable-next-line no-unused-vars
+  parseOpenIdFromSignInApiData = (remoteData) => {
+    throw new Error(
+      'parseOpenIdFromSignInApiData need to be override, it must return a string',
+    );
+  };
+
+  /**
+   * 从接口数据中解析出sign in result
+   * @param {*} remoteData
+   */
+  // eslint-disable-next-line no-unused-vars
+  parseOpenIdFromSignInSilentApiData = (remoteData) => {
+    if (this.verifyTicket) {
+      throw new Error(
+        'parseOpenIdFromSignInSilentApiData need to be override, it must return a string',
+      );
+    }
+
+    const { openId } = remoteData;
+
+    return openId || '';
+  };
+
+  /**
+   * 将解析的openId进行本次存储, 该方法不应重载
+   * @param {*} remoteData
+   */
+  setOpenIdOnSignIn = ({ openId }) => {
+    recordLog('exec setOpenIdOnSignIn');
+
+    if (!isString(openId || '')) {
+      throw new Error('setOpenIdOnSignIn openId must be string');
+    }
+
+    setOpenId(openId || '');
+  };
+
+  /**
+   * 将解析的openId进行本次存储, 该方法不应重载
+   * @param {*} remoteData
+   */
+  setOpenIdOnSignInSilent = ({ openId }) => {
+    recordLog('exec setOpenIdOnSignInSilent');
+
+    if (!isString(openId || '')) {
+      throw new Error('setOpenIdOnSignInSilent openId must be string');
+    }
+
+    setOpenId(openId || '');
   };
 
   /**

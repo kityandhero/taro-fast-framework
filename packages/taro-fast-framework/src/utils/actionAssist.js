@@ -32,6 +32,8 @@ export function getApiDataCore({ props, modelName, key = 'data' }) {
   const m = getPathValue(props, modelName);
 
   if ((m || null) == null) {
+    recordObject(props);
+
     recordError(
       `getApiDataCore error: model ${modelName} is null or undefined`,
     );
@@ -40,6 +42,8 @@ export function getApiDataCore({ props, modelName, key = 'data' }) {
   const data = m[key];
 
   if ((data || null) == null) {
+    recordObject(props);
+
     recordError(
       `getApiDataCore error: key “${key}” in model ${modelName} is null or undefined`,
     );
