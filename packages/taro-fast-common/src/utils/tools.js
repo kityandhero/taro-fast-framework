@@ -2066,6 +2066,9 @@ export function navigateBack(params) {
   return navigateBackCore(params);
 }
 
+/**
+ * startGeographicalLocationUpdate
+ */
 export function startGeographicalLocationUpdate({
   success = null,
   fail = null,
