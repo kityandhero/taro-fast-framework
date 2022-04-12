@@ -1,22 +1,19 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { CenterBox } from 'taro-fast-component/es/customComponents';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
-import { Button, CenterBox } from 'taro-fast-component/es/customComponents';
+import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
 import BasePageWrapper from '../../BasePageWrapper';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '模板页--获取天气',
+  navigationBarTitleText: '模板页--静默登录',
 });
 
-@connect(({ customer, entrance, session, global, schedulingControl }) => ({
-  customer,
+@connect(({ entrance, session, global, schedulingControl }) => ({
   entrance,
   session,
   global,
@@ -29,56 +26,19 @@ export default class Index extends BasePageWrapper {
 
   verifyTicketValidity = true;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...this.state,
-      ...{
-        weather: '',
-      },
-    };
-  }
-
   getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'customer' });
+    return getApiDataCore({ props, modelName: 'entrance' });
   };
 
-  doWorkAdjustDidMount = () => {
-    this.buildWeatherData();
-  };
+  checkSignInSuccess = () => {
+    const verifySignInResult = getVerifySignInResult();
+    const v = this.getSignInResult();
 
-  buildWeatherData = () => {
-    this.getLocationWeather({
-      callback: (data) => {
-        const {
-          observe: { degree, weather },
-        } = {
-          ...{
-            observe: {
-              degree: '',
-              degree: '',
-            },
-          },
-          ...data,
-        };
-
-        if (
-          stringIsNullOrWhiteSpace(weather) &&
-          stringIsNullOrWhiteSpace(degree)
-        ) {
-          return;
-        }
-
-        this.setState({
-          weather: `天气${weather}, 温度${degree}°C`,
-        });
-      },
-    });
+    return v === verifySignInResult.success;
   };
 
   renderFurther() {
-    const { weather } = this.state;
+    const signInSuccess = this.checkSignInSuccess();
 
     return (
       <View
@@ -87,10 +47,7 @@ export default class Index extends BasePageWrapper {
           height: transformSize(400),
         }}
       >
-        <CenterBox>{weather} </CenterBox>
-        <CenterBox>
-          <Button onClick={this.buildWeatherData} text="刷新" />
-        </CenterBox>
+        <CenterBox>登录结果: {signInSuccess ? '成功' : '失败'} </CenterBox>
       </View>
     );
   }

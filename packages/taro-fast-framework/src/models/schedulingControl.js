@@ -3,10 +3,7 @@ import {
   setLocationMode,
   setWeather,
 } from 'src/utils/globalStorageAssist';
-import {
-  locateResult,
-  whetherString,
-} from 'taro-fast-common/es/utils/constants';
+import { locateResult } from 'taro-fast-common/es/utils/constants';
 import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
 import { reducerCommonCollection } from '../utils/dva';
@@ -24,9 +21,9 @@ export default {
   namespace: 'schedulingControl',
 
   state: {
-    initialLocationModeComplete: whetherString.no,
-    appInitCustomVisible: whetherString.no,
-    modelNameListVisible: whetherString.no,
+    initialLocationModeComplete: false,
+    appInitCustomVisible: false,
+    modelNameListVisible: false,
     locationResult: {
       locationGet: false,
       locationAuth: locateResult.unknown,
@@ -157,7 +154,7 @@ export default {
     changeInitialLocationModeComplete(state, { payload }) {
       const { initialLocationModeComplete } = state;
 
-      if (initialLocationModeComplete !== whetherString.yes) {
+      if (!initialLocationModeComplete) {
         const { initialLocationMode } = payload;
 
         setLocationMode(initialLocationMode);
@@ -165,13 +162,13 @@ export default {
 
       return {
         ...state,
-        initialLocationModeComplete: whetherString.yes,
+        initialLocationModeComplete: true,
       };
     },
     changeAppInitCustomVisible(state, { payload }) {
       const { appInitCustomVisible } = state;
 
-      if (appInitCustomVisible !== whetherString.yes) {
+      if (!appInitCustomVisible) {
         const { config } = payload;
 
         recordObject(config);
@@ -179,21 +176,21 @@ export default {
 
       return {
         ...state,
-        appInitCustomVisible: whetherString.yes,
+        appInitCustomVisible: true,
       };
     },
     changeModelNameListVisible(state, { payload }) {
       const { modelNameListVisible } = state;
 
-      if (modelNameListVisible !== whetherString.yes) {
+      if (!modelNameListVisible) {
         const { modelNameList } = payload;
 
-        recordLog(modelNameList);
+        recordLog(`all models: ${modelNameList}`);
       }
 
       return {
         ...state,
-        modelNameListVisible: whetherString.yes,
+        modelNameListVisible: true,
       };
     },
     changeLocationResult(state, { payload }) {

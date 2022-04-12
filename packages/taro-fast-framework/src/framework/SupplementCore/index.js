@@ -48,6 +48,7 @@ import {
   setToken,
   getCurrentCustomer,
   setCurrentCustomer,
+  removeCurrentCustomer,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import { getApiDataCore } from '../../utils/actionAssist';
@@ -455,7 +456,9 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        recordLog('info use location and automatic location');
+        recordLog(
+          'info use location and automatic location on checkTicketValidity',
+        );
 
         that.obtainLocation({
           successCallback: () => {
@@ -469,6 +472,10 @@ class SupplementCore extends Common {
           },
         });
       } else {
+        recordLog(
+          'info do not use location or nonautomatic location on checkTicketValidity',
+        );
+
         that.checkTicketValidityAfterLocation({ callback });
       }
     }
@@ -1058,6 +1065,8 @@ class SupplementCore extends Common {
           token: that.parseTokenFromSignInApiData(metaData),
         });
 
+        removeCurrentCustomer();
+
         that.getCustomer({
           callback: that.doAfterGetCustomerOnSignIn,
         });
@@ -1106,6 +1115,8 @@ class SupplementCore extends Common {
         that.setTokenOnSignInSilent({
           token: that.parseTokenFromSignInSilentApiData(metaData),
         });
+
+        removeCurrentCustomer();
 
         that.getCustomer({
           callback: that.doAfterGetCustomerOnSignInSilent,
@@ -1284,7 +1295,6 @@ class SupplementCore extends Common {
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
   dispatchGetCustomer = (data = {}) => {
     recordLog(
       'info built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
@@ -1309,12 +1319,20 @@ class SupplementCore extends Common {
     return data;
   };
 
-  getCustomer = ({ data = null, callback = null }) => {
+  getCustomer = ({ data = {}, force: forceValue = false, callback = null }) => {
     recordLog('exec getCustomer');
+
+    let force = forceValue;
 
     const currentCustomer = getCurrentCustomer();
 
-    if ((currentCustomer || null) != null) {
+    if (!force) {
+      if ((currentCustomer || null) == null) {
+        force = true;
+      }
+    }
+
+    if (!force) {
       recordLog('info getCustomer from local cache success');
 
       if (isFunction(callback)) {
@@ -1322,7 +1340,7 @@ class SupplementCore extends Common {
       }
     } else {
       recordLog(
-        'info getCustomer from local cache fail, then get from api dispatch',
+        'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
 
       this.dispatchGetCustomer(data || {}).then(() => {

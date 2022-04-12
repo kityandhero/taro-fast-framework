@@ -362,6 +362,9 @@ const templatePathCollection = {
   register: {
     path: '/template/pages/register/main/index',
   },
+  getCustomer: {
+    path: '/template/pages/getCustomer/main/index',
+  },
   gridBanner: {
     path: '/template/pages/gridBanner/main/index',
   },

@@ -25,6 +25,11 @@ const o = {
       path: pathCollection.template.register.path,
     },
     {
+      id: 'getCustomer',
+      name: '获取登录用户信息',
+      path: pathCollection.template.getCustomer.path,
+    },
+    {
       id: 'gridBanner',
       name: '宫格导航',
       path: pathCollection.template.gridBanner.path,
