@@ -2066,7 +2066,11 @@ export function navigateBack(params) {
   return navigateBackCore(params);
 }
 
-export function startGeographicalLocationUpdate({ success, fail, complete }) {
+export function startGeographicalLocationUpdate({
+  success = null,
+  fail = null,
+  complete = null,
+}) {
   recordLog('exec startGeographicalLocationUpdate');
 
   startGeographicalLocationUpdateCore({
@@ -2076,7 +2080,11 @@ export function startGeographicalLocationUpdate({ success, fail, complete }) {
   });
 }
 
-export function stopGeographicalLocationUpdate({ success, fail, complete }) {
+export function stopGeographicalLocationUpdate({
+  success = null,
+  fail = null,
+  complete = null,
+}) {
   recordLog('exec stopGeographicalLocationUpdate');
 
   stopGeographicalLocationUpdateCore({
@@ -2100,7 +2108,7 @@ export function offGeographicalLocationChange(callback) {
 
 export function getGeographicalLocation({
   success: successCallback,
-  fail,
+  fail: failCallback,
   complete: completeCallback,
 }) {
   recordLog('exec getGeographicalLocation');
@@ -2108,20 +2116,26 @@ export function getGeographicalLocation({
   startGeographicalLocationUpdate({
     success: () => {
       onGeographicalLocationChange((res) => {
-        if (isFunction(successCallback)) {
-          successCallback(res);
+        try {
+          if (isFunction(successCallback)) {
+            successCallback(res);
+          }
+        } catch {
+          if (isFunction(failCallback)) {
+            failCallback(res);
+          }
+        } finally {
+          offGeographicalLocationChange();
         }
-
-        offGeographicalLocationChange();
       });
     },
-    fail,
+    fail: failCallback,
     complete: (res) => {
       if (isFunction(completeCallback)) {
         completeCallback(res);
       }
 
-      stopGeographicalLocationUpdate();
+      stopGeographicalLocationUpdate({});
     },
   });
 }
