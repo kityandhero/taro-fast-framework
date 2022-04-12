@@ -356,6 +356,9 @@ const templatePathCollection = {
   signIn: {
     path: '/template/pages/signIn/main/index',
   },
+  signInSilent: {
+    path: '/template/pages/signInSilent/main/index',
+  },
   register: {
     path: '/template/pages/register/main/index',
   },

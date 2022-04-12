@@ -29,13 +29,6 @@ export default class PageWrapper extends AuthorizationWrapper {
     return global;
   };
 
-  // dispatchCheckTicketValidity = (data) => {
-  //   return this.dispatchApi({
-  //     type: 'entrance/checkTicketValidity',
-  //     payload: data,
-  //   });
-  // };
-
   // dispatchRefreshSession = (data) => {
   //   return this.dispatchApi({
   //     type: 'session/refreshSession',
@@ -55,17 +48,6 @@ export default class PageWrapper extends AuthorizationWrapper {
   //     type: 'entrance/signInSilent',
   //     payload: data,
   //   });
-  // };
-
-  // getCheckTicketValidityApiData = () => {
-  //   console.log(this.props);
-
-  //   const data = getApiDataCore({
-  //     props: this.props,
-  //     modelName: 'entrance',
-  //   });
-
-  //   return data;
   // };
 
   // getRefreshSessionApiData = () => {

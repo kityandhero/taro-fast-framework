@@ -13,10 +13,11 @@ import { reducerCommonCollection } from '../utils/dva';
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 
 import {
-  getWeatherData,
-  checkTicketValidityData,
   refreshSessionData,
+  checkTicketValidityData,
   signInSilentData,
+  getCustomerData,
+  getWeatherData,
 } from '../services/schedulingControl';
 
 export default {
@@ -36,8 +37,8 @@ export default {
   },
 
   effects: {
-    *signInSilent({ payload }, { call, put }) {
-      const response = yield call(signInSilentData, payload);
+    *refreshSession({ payload }, { call, put }) {
+      const response = yield call(refreshSessionData, payload);
 
       yield put({
         type: 'handleCommonData',
@@ -52,8 +53,16 @@ export default {
         payload: response,
       });
     },
-    *refreshSession({ payload }, { call, put }) {
-      const response = yield call(refreshSessionData, payload);
+    *signInSilent({ payload }, { call, put }) {
+      const response = yield call(signInSilentData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *getCustomer({ payload }, { call, put }) {
+      const response = yield call(getCustomerData, payload);
 
       yield put({
         type: 'handleCommonData',

@@ -46,6 +46,8 @@ import {
   setSession,
   setSessionRefreshing,
   setToken,
+  getCurrentCustomer,
+  setCurrentCustomer,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import { getApiDataCore } from '../../utils/actionAssist';
@@ -517,7 +519,7 @@ class SupplementCore extends Common {
   dispatchCheckTicketValidity = (data = {}) => {
     if (this.verifyTicket) {
       throw new Error(
-        'dispatchCheckTicketValidity need override, dispatchCheckTicketValidity must return a promise',
+        'dispatchCheckTicketValidity need override when verifyTicket set to true, dispatchCheckTicketValidity must return a promise',
       );
     }
 
@@ -530,7 +532,7 @@ class SupplementCore extends Common {
   getCheckTicketValidityApiData = () => {
     if (this.verifyTicket) {
       throw new Error(
-        'getCheckTicketValidityApiData need override, getCheckTicketValidityApiData must return a object',
+        'getCheckTicketValidityApiData need override when verifyTicket set to true, getCheckTicketValidityApiData must return a object',
       );
     }
 
@@ -1056,6 +1058,10 @@ class SupplementCore extends Common {
           token: that.parseTokenFromSignInApiData(metaData),
         });
 
+        that.getCustomer({
+          callback: that.doAfterGetCustomerOnSignIn,
+        });
+
         that.doAfterSignInSuccess(metaData);
 
         if (isFunction(callback)) {
@@ -1099,6 +1105,10 @@ class SupplementCore extends Common {
 
         that.setTokenOnSignInSilent({
           token: that.parseTokenFromSignInSilentApiData(metaData),
+        });
+
+        that.getCustomer({
+          callback: that.doAfterGetCustomerOnSignInSilent,
         });
 
         that.doAfterSignInSilentSuccess(metaData);
@@ -1271,6 +1281,77 @@ class SupplementCore extends Common {
   doWhenSignInSilentFail = () => {
     recordLog(
       'info doWhenSignInSilentFail do nothing,if you need,you can override it: doWhenSignInSilentFail = () => {}',
+    );
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  dispatchGetCustomer = (data = {}) => {
+    recordLog(
+      'info built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
+    );
+
+    return this.dispatchApi({
+      type: 'schedulingControl/getCustomer',
+      payload: data,
+    });
+  };
+
+  parseCustomerFromRemoteApiData = () => {
+    recordLog(
+      'info built-in parseCustomerFromRemoteApiData is a simulation,if you need actual business,you need override it: parseCustomerFromRemoteApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+    );
+
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+
+    return data;
+  };
+
+  getCustomer = ({ data = null, callback = null }) => {
+    recordLog('exec getCustomer');
+
+    const currentCustomer = getCurrentCustomer();
+
+    if ((currentCustomer || null) != null) {
+      recordLog('info getCustomer from local cache success');
+
+      if (isFunction(callback)) {
+        callback(currentCustomer);
+      }
+    } else {
+      recordLog(
+        'info getCustomer from local cache fail, then get from api dispatch',
+      );
+
+      this.dispatchGetCustomer(data || {}).then(() => {
+        const remoteData = this.parseCustomerFromRemoteApiData();
+
+        const { dataSuccess, data: metaData } = remoteData;
+
+        if (dataSuccess) {
+          setCurrentCustomer(metaData);
+
+          if (isFunction(callback)) {
+            callback(metaData);
+          }
+        }
+      });
+    }
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doAfterGetCustomerOnSignInSilent = (data) => {
+    recordLog(
+      'info doAfterGetCustomerOnSignInSilent do nothing,if you need,you can override it: doAfterGetCustomerOnSignInSilent = (data) => {}',
+    );
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doAfterGetCustomerOnSignIn = (data) => {
+    recordLog(
+      'info doAfterGetCustomerOnSignIn do nothing,if you need,you can override it: doAfterGetCustomerOnSignIn = (data) => {}',
     );
   };
 }

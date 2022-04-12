@@ -11,21 +11,6 @@ export async function getWeatherData(params) {
   });
 }
 
-export async function checkTicketValidityData(params) {
-  return request({
-    api: `/schedulingControl/checkTicketValidity`,
-    params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
-      data: {
-        needRefresh: true,
-        nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
-      },
-    },
-  });
-}
-
 export async function refreshSessionData(params) {
   const { code } = params;
 
@@ -43,6 +28,21 @@ export async function refreshSessionData(params) {
   });
 }
 
+export async function checkTicketValidityData(params) {
+  return request({
+    api: `/schedulingControl/checkTicketValidity`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        needRefresh: true,
+        nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
+      },
+    },
+  });
+}
+
 export async function signInSilentData(params) {
   const verifySignInResult = getVerifySignInResult();
 
@@ -55,6 +55,20 @@ export async function signInSilentData(params) {
       data: {
         signInResult: verifySignInResult.fail,
         token: '',
+      },
+    },
+  });
+}
+
+export async function getCustomerData(params) {
+  return request({
+    api: `/schedulingControl/getCustomer`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {
+        nickName: '',
       },
     },
   });

@@ -6,6 +6,7 @@ import {
   saveStringToLocalStorage,
   clearLocalStorage,
   showInfoMessage,
+  recordLog,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -37,6 +38,7 @@ export const storageKeyCollection = {
   lastLocation: 'lastLocation',
   remoteCheck: 'remoteCheck',
   weather: 'weather',
+  currentCustomer: 'currentCustomer',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -846,6 +848,73 @@ export function setWeather(weather) {
  */
 export function removeWeather() {
   const key = storageKeyCollection.weather;
+
+  removeLocalStorage(key);
+}
+
+/**
+ * 获取当前登陆人信息
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function getCurrentCustomer() {
+  recordLog('exec getCurrentCustomer from local cache');
+
+  const key = storageKeyCollection.currentCustomer;
+
+  const data = getJsonFromLocalStorage(key);
+
+  if ((data || null) == null) {
+    return null;
+  }
+
+  const { dataVersion } = data;
+
+  if ((dataVersion || null) == null) {
+    return null;
+  }
+
+  // 信息有效期30分钟
+  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+
+  if (dataVersion !== now) {
+    return null;
+  }
+
+  return data;
+}
+
+/**
+ * 设置当前登陆人信息
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function setCurrentCustomer(data) {
+  recordLog('exec setCurrentCustomer to local cache');
+
+  const key = storageKeyCollection.currentCustomer;
+
+  // 信息有效期30分钟
+  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+
+  data.dataVersion = nowVersion;
+
+  return saveJsonToLocalStorage(key, data || '');
+}
+
+/**
+ * 移除当前登陆人信息
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function removeCurrentCustomer() {
+  const key = storageKeyCollection.currentCustomer;
 
   removeLocalStorage(key);
 }

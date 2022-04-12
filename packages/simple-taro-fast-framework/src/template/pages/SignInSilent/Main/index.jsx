@@ -15,13 +15,20 @@ definePageConfig({
   navigationBarTitleText: '模板页--获取天气',
 });
 
-@connect(({ entrance, session, global, schedulingControl }) => ({
+@connect(({ customer, entrance, session, global, schedulingControl }) => ({
+  customer,
   entrance,
   session,
   global,
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
+  verifySession = true;
+
+  verifyTicket = true;
+
+  verifyTicketValidity = true;
+
   constructor(props) {
     super(props);
 
@@ -34,7 +41,7 @@ export default class Index extends BasePageWrapper {
   }
 
   getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+    return getApiDataCore({ props, modelName: 'customer' });
   };
 
   doWorkAdjustDidMount = () => {
