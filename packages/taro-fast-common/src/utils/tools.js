@@ -2083,6 +2083,9 @@ export function startGeographicalLocationUpdate({
   });
 }
 
+/**
+ * stopGeographicalLocationUpdate
+ */
 export function stopGeographicalLocationUpdate({
   success = null,
   fail = null,
