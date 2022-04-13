@@ -91,7 +91,7 @@ export function setSimulationMode(o) {
 
   return saveStringToLocalStorage(
     key,
-    o === whetherString.yes ? whetherString.yes : whetherString.no,
+    !!o ? whetherString.yes : whetherString.no,
   );
 }
 

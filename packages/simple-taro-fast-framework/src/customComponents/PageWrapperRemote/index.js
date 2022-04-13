@@ -1,16 +1,21 @@
 import { clearLocalStorage } from 'taro-fast-common/es/utils/tools';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
-import { getSimulationMode } from '../../utils/storageAssist';
+import {
+  getSimulationMode,
+  setSimulationMode,
+} from '../../utils/storageAssist';
 
 import PageWrapperCore from '../PageWrapperCore';
 
-export default class PageWrapper extends PageWrapperCore {
+export default class PageWrapperRemote extends PageWrapperCore {
   initializeInternalData = () => {
     const simulationMode = getSimulationMode();
-
+    console.log(11);
     if (simulationMode) {
       clearLocalStorage();
+
+      setSimulationMode(false);
     }
   };
 

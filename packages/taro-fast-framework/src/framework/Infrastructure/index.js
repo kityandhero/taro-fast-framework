@@ -346,10 +346,11 @@ export default class Infrastructure extends ComponentBase {
     }
   };
 
-  /**
-   * 初始化框架内部数据，不提供外部使用
-   */
-  initializeInternalData = () => {};
+  initializeInternalData = () => {
+    recordLog(
+      'info initializeInternalData do nothing, if you need to initialize config data, please use initializeData',
+    );
+  };
 
   receiveExternalParameter = () => {
     if ((this.externalParameter || null) == null) {
