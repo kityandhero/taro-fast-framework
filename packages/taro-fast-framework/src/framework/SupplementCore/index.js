@@ -8,6 +8,7 @@ import {
   recordObject,
   recordLog,
   inCollection,
+  recordError,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -692,7 +693,7 @@ class SupplementCore extends Common {
                 setSessionRefreshing(false);
               })
               .catch((error) => {
-                recordObject({ error });
+                recordError({ error });
 
                 Tips.info('网络请求失败了，请检查下是否联网');
 
@@ -717,7 +718,7 @@ class SupplementCore extends Common {
           }
         })
         .catch((error) => {
-          recordObject({ error, current: that });
+          recordError({ error, current: that });
 
           showInfoMessage({
             message: '微信登录失败',

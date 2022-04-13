@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
-  recordObject,
+  recordError,
   redirectTo,
   stringIsNullOrWhiteSpace,
   transformSize,
@@ -123,7 +123,7 @@ export default class Index extends BasePageWrapper {
         }
       })
       .catch((error) => {
-        recordObject({ error });
+        recordError({ error });
       });
   };
 

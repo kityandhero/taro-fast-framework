@@ -405,11 +405,11 @@ class Base extends Infrastructure {
 
             that.setState(willSaveToState);
           })
-          .catch((res) => {
+          .catch((error) => {
             stopPullDownRefresh();
             hideNavigationBarLoading();
 
-            recordObject(res);
+            recordError(error);
 
             that.setState({
               dataLoading: false,

@@ -11,7 +11,7 @@ import PageWrapperCore from '../PageWrapperCore';
 export default class PageWrapperRemote extends PageWrapperCore {
   initializeInternalData = () => {
     const simulationMode = getSimulationMode();
-    console.log(11);
+
     if (simulationMode) {
       clearLocalStorage();
 
@@ -34,8 +34,6 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getCheckTicketValidityApiData = () => {
-    console.log(this.props);
-
     const data = getApiDataCore({
       props: this.props,
       modelName: 'entrance',

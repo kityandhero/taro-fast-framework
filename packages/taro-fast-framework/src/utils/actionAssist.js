@@ -254,8 +254,8 @@ export async function actionCore({
                   dispatchComplete: true,
                 });
               })
-              .catch((res) => {
-                recordObject(res);
+              .catch((error) => {
+                recordError(error);
 
                 if (showProcessing) {
                   setTimeout(() => {

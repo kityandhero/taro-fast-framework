@@ -5,11 +5,12 @@ import {
   getStringFromLocalStorage,
   saveStringToLocalStorage,
 } from 'taro-fast-common/es/utils/tools';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { whetherString } from 'taro-fast-common/es/utils/constants';
 
 const storageKeyCollection = {
   metaData: 'metaData',
-  simulationMode: true,
+  simulationMode: 'simulationMode',
 };
 
 /**
@@ -91,7 +92,7 @@ export function setSimulationMode(o) {
 
   return saveStringToLocalStorage(
     key,
-    !!o ? whetherString.yes : whetherString.no,
+    toNumber(o) ? whetherString.yes : whetherString.no,
   );
 }
 
