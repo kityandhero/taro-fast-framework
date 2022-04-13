@@ -3,13 +3,13 @@ import { View, Text } from '@tarojs/components';
 import { navigateTo } from 'taro-fast-common/es/utils/tools';
 import { ImageBox, Icon } from 'taro-fast-component/es/customComponents';
 
-import PageWrapper from '../PageWrapper';
+import PageWrapperSimulation from '../PageWrapperSimulation';
 
 import './index.less';
 
 const { IconList, IconChevronRight } = Icon;
 
-export default class ChannelPageBase extends PageWrapper {
+export default class ChannelPageBase extends PageWrapperSimulation {
   constructor(props) {
     super(props);
 

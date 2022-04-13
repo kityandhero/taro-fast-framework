@@ -365,6 +365,8 @@ export function removeEffectiveCode() {
  * @returns
  */
 export function getSession() {
+  recordLog('info getSession');
+
   const key = storageKeyCollection.session;
 
   return getStringFromLocalStorage(key);
@@ -378,6 +380,8 @@ export function getSession() {
  * @returns
  */
 export function setSession(session) {
+  recordLog(`info setSession ${session}`);
+
   const key = storageKeyCollection.session;
 
   saveStringToLocalStorage(key, session || '');
@@ -391,6 +395,8 @@ export function setSession(session) {
  * @returns
  */
 export function removeSession() {
+  recordLog('info removeSession');
+
   const key = storageKeyCollection.session;
 
   removeLocalStorage(key);
@@ -404,6 +410,8 @@ export function removeSession() {
  * @returns
  */
 export function getSessionRefreshing() {
+  recordLog('info getSessionRefreshing');
+
   const key = storageKeyCollection.sessionRefreshing;
 
   const v = getStringFromLocalStorage(key);
@@ -419,6 +427,8 @@ export function getSessionRefreshing() {
  * @returns
  */
 export function setSessionRefreshing(sessionRefreshing) {
+  recordLog(`info setSessionRefreshing ${sessionRefreshing}`);
+
   const key = storageKeyCollection.sessionRefreshing;
 
   saveStringToLocalStorage(key, sessionRefreshing || false ? 'true' : 'false');
@@ -432,6 +442,8 @@ export function setSessionRefreshing(sessionRefreshing) {
  * @returns
  */
 export function removeSessionRefreshing() {
+  recordLog('info removeSessionRefreshing');
+
   const key = storageKeyCollection.sessionRefreshing;
 
   removeLocalStorage(key);

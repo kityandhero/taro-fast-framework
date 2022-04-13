@@ -9,12 +9,12 @@ import {
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
+import PageWrapperSimulation from '../PageWrapperSimulation';
 import Header from '../Header';
-import PageWrapper from '../PageWrapper';
 
 import './index.less';
 
-export default class ContentPageBase extends PageWrapper {
+export default class ContentPageBase extends PageWrapperSimulation {
   viewStyle = {
     backgroundColor: '#fff',
   };

@@ -15,11 +15,6 @@ const o = {
       path: pathCollection.template.signIn.path,
     },
     {
-      id: 'signInSilent',
-      name: '静默登录',
-      path: pathCollection.template.signInSilent.path,
-    },
-    {
       id: 'register',
       name: '微信注册页',
       path: pathCollection.template.register.path,

@@ -1,5 +1,5 @@
 // export const appId = 'pdainpxvam7wu8';
-export const appId = 'pdbfyj2zm0o9vk';
+export const appId = 'pdainpxvam7wu8';
 
 const rootPathCollection = {
   main: {
@@ -356,9 +356,6 @@ const templatePathCollection = {
   signIn: {
     path: '/template/pages/signIn/main/index',
   },
-  signInSilent: {
-    path: '/template/pages/signInSilent/main/index',
-  },
   register: {
     path: '/template/pages/register/main/index',
   },
@@ -370,6 +367,15 @@ const templatePathCollection = {
   },
   weather: {
     path: '/template/pages/weather/main/index',
+  },
+};
+
+const templateRemotePathCollection = {
+  entry: {
+    path: '/templateRemote/pages/entry/main/index',
+  },
+  signInSilent: {
+    path: '/templateRemote/pages/signInSilent/main/index',
   },
 };
 
@@ -393,6 +399,7 @@ export const pathCollection = {
   example: examplePathCollection,
   framework: frameworkPathCollection,
   template: templatePathCollection,
+  templateRemote: templateRemotePathCollection,
   news: newsPathCollection,
 };
 

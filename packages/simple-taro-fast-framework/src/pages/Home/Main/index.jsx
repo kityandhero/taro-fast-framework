@@ -9,7 +9,7 @@ import {
 } from 'taro-fast-component/es/customComponents';
 
 import { pathCollection } from '../../../customConfig/config';
-import PageWrapper from '../../../customComponents/PageWrapper';
+import PageWrapperSimulation from '../../../customComponents/PageWrapperSimulation';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -146,7 +146,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-export default class Index extends PageWrapper {
+export default class Index extends PageWrapperSimulation {
   onShareAppMessage() {
     const o = {
       ...{

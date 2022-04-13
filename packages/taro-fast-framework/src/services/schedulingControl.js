@@ -1,4 +1,9 @@
-import { addMinute, getGuid, getNow } from 'taro-fast-common/es/utils/tools';
+import {
+  addMinute,
+  getGuid,
+  getNow,
+  recordLog,
+} from 'taro-fast-common/es/utils/tools';
 
 import { getVerifySignInResult } from '../utils/tools';
 import { request } from '../utils/requestAssistor';
@@ -14,31 +19,41 @@ export async function getWeatherData(params) {
 export async function refreshSessionData(params) {
   const { code } = params;
 
+  const simulation = {
+    sessionId: getGuid(),
+    code: code || '',
+  };
+
+  recordLog(`info simulation session data: ${JSON.stringify(simulation)}`);
+
   return request({
     api: `/schedulingControl/refreshSession`,
     params,
     useVirtualRequest: true,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
-      data: {
-        sessionId: getGuid(),
-        code: code || '',
-      },
+      data: simulation,
     },
   });
 }
 
 export async function checkTicketValidityData(params) {
+  const simulation = {
+    needRefresh: true,
+    nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
+  };
+
+  recordLog(
+    `info simulation ticket validity data: ${JSON.stringify(simulation)}`,
+  );
+
   return request({
     api: `/schedulingControl/checkTicketValidity`,
     params,
     useVirtualRequest: true,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
-      data: {
-        needRefresh: true,
-        nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
-      },
+      data: simulation,
     },
   });
 }
@@ -46,31 +61,43 @@ export async function checkTicketValidityData(params) {
 export async function signInSilentData(params) {
   const verifySignInResult = getVerifySignInResult();
 
+  const simulation = {
+    signInResult: verifySignInResult.fail,
+    token: '',
+    openId: '',
+  };
+
+  recordLog(
+    `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
+  );
+
   return request({
     api: `/schedulingControl/signInSilent`,
     params,
     useVirtualRequest: true,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
-      data: {
-        signInResult: verifySignInResult.fail,
-        token: '',
-        openId: '',
-      },
+      data: simulation,
     },
   });
 }
 
 export async function getCustomerData(params) {
+  const simulation = {
+    nickName: '',
+  };
+
+  recordLog(
+    `info simulation customer silent data: ${JSON.stringify(simulation)}`,
+  );
+
   return request({
     api: `/schedulingControl/getCustomer`,
     params,
     useVirtualRequest: true,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
-      data: {
-        nickName: '',
-      },
+      data: simulation,
     },
   });
 }

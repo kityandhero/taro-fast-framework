@@ -2,12 +2,14 @@ import {
   removeLocalStorage,
   getJsonFromLocalStorage,
   saveJsonToLocalStorage,
+  getStringFromLocalStorage,
+  saveStringToLocalStorage,
 } from 'taro-fast-common/es/utils/tools';
-import { getToken } from 'taro-fast-framework/es/utils/globalStorageAssist';
+import { whetherString } from 'taro-fast-common/es/utils/constants';
 
 const storageKeyCollection = {
   metaData: 'metaData',
-  currentOperator: 'currentOperator',
+  simulationMode: true,
 };
 
 /**
@@ -72,56 +74,30 @@ export function removeMetaDataCache() {
   removeLocalStorage(key);
 }
 
-/**
- * 获取缓存
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getCurrentOperatorCache() {
-  const key = storageKeyCollection.currentOperator;
+export function getSimulationMode() {
+  const key = storageKeyCollection.simulationMode;
 
-  const d = getJsonFromLocalStorage(key);
+  const d = getStringFromLocalStorage(key);
 
   if ((d || null) == null) {
-    return null;
+    return false;
   }
 
-  if (d.flag === '' || d.flag !== getToken()) {
-    return null;
-  }
-
-  return d.data || null;
+  return d === whetherString.yes;
 }
 
-/**
- * 设置metaData缓存
- *
- * @export
- * @param {o} metaData数据
- * @returns
- */
-export function setCurrentOperatorCache(o) {
-  const key = storageKeyCollection.currentOperator;
+export function setSimulationMode(o) {
+  const key = storageKeyCollection.simulationMode;
 
-  const d = {
-    data: o || null,
-    flag: getToken() || '',
-  };
-
-  return saveJsonToLocalStorage(key, d);
+  return saveStringToLocalStorage(
+    key,
+    o === whetherString.yes ? whetherString.yes : whetherString.no,
+  );
 }
 
-/**
- * 移除经纬度信息
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function removeCurrentOperatorCache() {
-  const key = storageKeyCollection.currentOperator;
+export function removeSimulationMode() {
+  const key = storageKeyCollection.simulationMode;
+
   removeLocalStorage(key);
 }
 

@@ -556,11 +556,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     if (showModeModified === logShowMode.text) {
       const data = { record, level };
 
-      console.log(JSON.stringify(data));
+      console.error(JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ record, level });
+      console.error({ record, level });
     }
   }
 }
