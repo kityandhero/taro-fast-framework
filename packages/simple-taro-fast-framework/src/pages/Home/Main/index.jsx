@@ -105,6 +105,14 @@ const listData = [
     path: pathCollection.template.entry.path,
   },
   {
+    id: 'Template',
+    title: '远程模板页面',
+    content: '远程模板页面示例',
+    icon: iconHOC,
+    webPage: false,
+    path: pathCollection.templateRemote.entry.path,
+  },
+  {
     id: 'News',
     title: '资讯应用示例',
     content: '查看资讯应用示例',
