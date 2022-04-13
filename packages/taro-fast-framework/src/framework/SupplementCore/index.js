@@ -206,9 +206,8 @@ class SupplementCore extends Common {
                 });
               }
             },
-            // eslint-disable-next-line no-unused-vars
-            fail: (res) => {
-              // const { status, message } = res;
+            fail: (error) => {
+              recordError(error);
 
               if (mapData != null) {
                 setMap(mapData);
