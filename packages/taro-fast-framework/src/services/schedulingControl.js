@@ -83,9 +83,7 @@ export async function signInSilentData(params) {
 }
 
 export async function getCustomerData(params) {
-  const simulation = {
-    nickName: '',
-  };
+  const simulation = {};
 
   recordLog(
     `info simulation customer silent data: ${JSON.stringify(simulation)}`,
