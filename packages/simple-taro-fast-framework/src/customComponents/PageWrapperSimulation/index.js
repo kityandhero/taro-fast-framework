@@ -1,4 +1,5 @@
 import { clearLocalStorage } from 'taro-fast-common/es/utils/tools';
+import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
 import {
   getSimulationMode,
@@ -10,11 +11,16 @@ import PageWrapperCore from '../PageWrapperCore';
 export default class PageWrapperSimulation extends PageWrapperCore {
   initializeInternalData = () => {
     const simulationMode = getSimulationMode();
+    const verifySignInResult = getVerifySignInResult();
 
     if (!simulationMode) {
-      clearLocalStorage();
+      this.setSignInResult({
+        data: verifySignInResult.unknown,
+      });
 
-      setSimulationMode(true);
+      clearLocalStorage();
     }
+
+    setSimulationMode(true);
   };
 }

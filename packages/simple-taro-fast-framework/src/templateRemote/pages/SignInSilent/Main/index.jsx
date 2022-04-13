@@ -43,15 +43,25 @@ export default class Index extends BasePageWrapper {
     return getApiDataCore({ props, modelName: 'entrance' });
   };
 
-  checkSignInSuccess = () => {
+  getSignInResultText = () => {
     const verifySignInResult = getVerifySignInResult();
     const v = this.getSignInResult();
 
-    return v === verifySignInResult.success;
+    if (v === verifySignInResult.success) {
+      return '成功';
+    }
+
+    if (v === verifySignInResult.fail) {
+      return '用户尚未注册';
+    }
+
+    if (v === verifySignInResult.unknown) {
+      return '登陆中, 请稍后';
+    }
   };
 
   renderFurther() {
-    const signInSuccess = this.checkSignInSuccess();
+    const signInSuccessText = this.getSignInResultText();
 
     return (
       <View
@@ -60,7 +70,9 @@ export default class Index extends BasePageWrapper {
           height: transformSize(400),
         }}
       >
-        <CenterBox>登录结果: {signInSuccess ? '成功' : '失败'} </CenterBox>
+        <CenterBox>
+          <View>登录结果: {signInSuccessText}</View>
+        </CenterBox>
       </View>
     );
   }

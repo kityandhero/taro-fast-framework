@@ -1,4 +1,5 @@
 import { clearLocalStorage } from 'taro-fast-common/es/utils/tools';
+import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import {
@@ -11,12 +12,17 @@ import PageWrapperCore from '../PageWrapperCore';
 export default class PageWrapperRemote extends PageWrapperCore {
   initializeInternalData = () => {
     const simulationMode = getSimulationMode();
+    const verifySignInResult = getVerifySignInResult();
 
     if (simulationMode) {
-      clearLocalStorage();
+      this.setSignInResult({
+        data: verifySignInResult.unknown,
+      });
 
-      setSimulationMode(false);
+      clearLocalStorage();
     }
+
+    setSimulationMode(false);
   };
 
   dispatchRefreshSession = (data) => {
@@ -24,6 +30,15 @@ export default class PageWrapperRemote extends PageWrapperCore {
       type: 'session/refreshSession',
       payload: data,
     });
+  };
+
+  getRefreshSessionApiData = () => {
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'session',
+    });
+
+    return data;
   };
 
   dispatchCheckTicketValidity = (data) => {

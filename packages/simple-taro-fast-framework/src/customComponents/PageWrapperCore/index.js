@@ -43,15 +43,6 @@ export default class PageWrapper extends AuthorizationWrapper {
   //   });
   // };
 
-  // getRefreshSessionApiData = () => {
-  //   const data = getApiDataCore({
-  //     props: this.props,
-  //     modelName: 'session',
-  //   });
-
-  //   return data;
-  // };
-
   // getSignInApiData = () => {
   //   const data = getApiDataCore({
   //     props: this.props,
