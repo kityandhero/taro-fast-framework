@@ -1214,12 +1214,6 @@ class SupplementCore extends Common {
       throw new Error(`signInResult not allow ${signInResult}.`);
     }
 
-    recordInfo(
-      `info sign in result is ${signInResult}, it mean ${getSignInResultDescription(
-        signInResult,
-      )}`,
-    );
-
     this.setSignInResult({ data: v });
   };
 

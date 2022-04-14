@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { CenterBox } from 'taro-fast-component/es/customComponents';
+import { Button, Space } from 'taro-fast-component/es/customComponents';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
+import SimpleBox from '../../../../customComponents/SimpleBox';
+import CodePageBox from '../../../../customComponents/CodePageBox';
+
+const configList = [];
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -50,44 +53,99 @@ export default class Index extends BasePageWrapper {
     const that = this;
 
     that.getCustomer({
-      force: true,
       callback: (o) => {
-        console.log(o);
-
         const { nickname } = {
           ...{
             nickname: '',
           },
-          o,
+          ...o,
         };
+
+        console.log(nickname);
 
         that.setState({
           nickname,
         });
+
+        that.forceUpdate();
       },
     });
   };
 
+  showInConsole = () => {
+    console.log(getCurrentCustomer());
+  };
+
   renderFurther() {
-    // const customer = {
-    //   ...{
-    //     nickname: '',
-    //   },
-    //   ...getCurrentCustomer(),
-    // };
     const { nickname } = this.state;
 
-    console.log(getCurrentCustomer());
-
     return (
-      <View
-        style={{
-          width: '100%',
-          height: transformSize(400),
-        }}
-      >
-        <CenterBox>当前用户: {nickname} </CenterBox>
-      </View>
+      <Space direction="vertical" fillWidth>
+        <SimpleBox
+          header="请求结果"
+          mockChildren={false}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+        >
+          <View
+            style={{
+              paddingTop: 'var(--tfc-18)',
+              paddingBottom: 'var(--tfc-18)',
+            }}
+          >
+            当前用户: {nickname || '获取中, 请稍后'}
+          </View>
+
+          <Button
+            onClick={this.buildCustomerData}
+            block
+            size="small"
+            text="刷新"
+          />
+        </SimpleBox>
+
+        <CodePageBox
+          list={configList}
+          config={{
+            verifySession: true,
+            getApiData: `(props) => {
+              return getApiDataCore({ props, modelName: 'entrance' });
+            }`,
+            doWorkAdjustDidMount: `() => {
+              this.buildWeatherData();
+            }`,
+            buildWeatherData: `() => {
+              this.getLocationWeather({
+                callback: (data) => {
+                  const {
+                    observe: { degree, weather },
+                  } = {
+                    ...{
+                      observe: {
+                        degree: '',
+                        degree: '',
+                      },
+                    },
+                    ...data,
+                  };
+
+                  if (
+                    stringIsNullOrWhiteSpace(weather) &&
+                    stringIsNullOrWhiteSpace(degree)
+                  ) {
+                    return;
+                  }
+
+                  this.setState({
+                    weather: \`天气\${weather}, 温度\${degree}°C\`,
+                  });
+                },
+              });
+            }`,
+          }}
+        />
+      </Space>
     );
   }
 }

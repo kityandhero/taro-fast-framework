@@ -6,7 +6,6 @@ import {
   saveStringToLocalStorage,
   clearLocalStorage,
   showInfoMessage,
-  recordLog,
   recordWarn,
   recordDebug,
   recordInfo,
@@ -383,7 +382,7 @@ export function getSession() {
  * @returns
  */
 export function setSession(session) {
-  recordLog(`info setSession ${session}`);
+  recordInfo(`info setSession ${session}`);
 
   const key = storageKeyCollection.session;
 
@@ -430,7 +429,7 @@ export function getSessionRefreshing() {
  * @returns
  */
 export function setSessionRefreshing(sessionRefreshing) {
-  recordLog(`info setSessionRefreshing ${sessionRefreshing}`);
+  recordInfo(`info setSessionRefreshing ${sessionRefreshing}`);
 
   const key = storageKeyCollection.sessionRefreshing;
 
