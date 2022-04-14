@@ -419,7 +419,7 @@ class SupplementCore extends Common {
     const that = this;
 
     if (signInResult === verifySignInResult.unknown) {
-      recordLog(
+      recordInfo(
         `info sign in result is ${signInResult}, it mean ${getSignInResultDescription(
           signInResult,
         )}`,
@@ -429,7 +429,7 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        recordLog(
+        recordInfo(
           'info use location and automatic location and sign in result is unknown',
         );
 
@@ -461,7 +461,7 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        recordLog(
+        recordInfo(
           'info use location and automatic location on checkTicketValidity and sign in result is not unknown',
         );
 
@@ -477,7 +477,7 @@ class SupplementCore extends Common {
           },
         });
       } else {
-        recordLog(
+        recordInfo(
           'info do not use location or nonautomatic location on checkTicketValidity',
         );
 
@@ -667,7 +667,7 @@ class SupplementCore extends Common {
           const { code } = res;
 
           if (code) {
-            recordLog(`info code: ${code}`);
+            recordInfo(`info code: ${code}`);
 
             setEffectiveCode(code);
 
@@ -1214,7 +1214,7 @@ class SupplementCore extends Common {
       throw new Error(`signInResult not allow ${signInResult}.`);
     }
 
-    recordLog(
+    recordInfo(
       `info sign in result is ${signInResult}, it mean ${getSignInResultDescription(
         signInResult,
       )}`,
@@ -1419,7 +1419,7 @@ class SupplementCore extends Common {
         callback(currentCustomer);
       }
     } else {
-      recordLog(
+      recordInfo(
         'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
 

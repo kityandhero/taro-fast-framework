@@ -772,7 +772,7 @@ export default class Infrastructure extends ComponentBase {
 
   setSignInResult = ({ data, callback }) => {
     recordDebug('exec setSignInResult');
-    recordLog(
+    recordInfo(
       `info sign in result is ${data}, it mean ${getSignInResultDescription(
         data,
       )} `,

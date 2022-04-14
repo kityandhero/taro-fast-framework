@@ -2,7 +2,7 @@ import {
   addMinute,
   getGuid,
   getNow,
-  recordLog,
+  recordInfo,
 } from 'taro-fast-common/es/utils/tools';
 
 import { getVerifySignInResult } from '../utils/tools';
@@ -24,7 +24,7 @@ export async function refreshSessionData(params) {
     code: code || '',
   };
 
-  recordLog(`info simulation session data: ${JSON.stringify(simulation)}`);
+  recordInfo(`info simulation session data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/refreshSession`,
@@ -43,7 +43,7 @@ export async function checkTicketValidityData(params) {
     nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
   };
 
-  recordLog(
+  recordInfo(
     `info simulation ticket validity data: ${JSON.stringify(simulation)}`,
   );
 
@@ -63,7 +63,7 @@ export async function exchangePhoneData(params) {
     key: getGuid(),
   };
 
-  recordLog(`info simulation phone key data: ${JSON.stringify(simulation)}`);
+  recordInfo(`info simulation phone key data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/exchangePhone`,
@@ -85,7 +85,7 @@ export async function signInSilentData(params) {
     openId: '',
   };
 
-  recordLog(
+  recordInfo(
     `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
   );
 
@@ -103,7 +103,7 @@ export async function signInSilentData(params) {
 export async function getCustomerData(params) {
   const simulation = {};
 
-  recordLog(
+  recordInfo(
     `info simulation customer silent data: ${JSON.stringify(simulation)}`,
   );
 
