@@ -23,7 +23,8 @@ definePageConfig({
   navigationBarTitleText: '模板页--兑换手机信息',
 });
 
-@connect(({ entrance, session, global, schedulingControl }) => ({
+@connect(({ customer, entrance, session, global, schedulingControl }) => ({
+  customer,
   entrance,
   session,
   global,
