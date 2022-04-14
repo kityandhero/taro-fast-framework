@@ -10,6 +10,11 @@ const o = {
   title: '模板页面',
   list: [
     {
+      id: 'override',
+      name: '重载函数',
+      path: pathCollection.templateRemote.override.path,
+    },
+    {
       id: 'signInSilent',
       name: '静默登录',
       path: pathCollection.templateRemote.signInSilent.path,

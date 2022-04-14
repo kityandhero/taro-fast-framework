@@ -5,22 +5,14 @@ import { Space } from 'taro-fast-component/es/customComponents';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
-import SimpleBox from '../../../../customComponents/SimpleBox';
 import BasePageWrapper from '../../BasePageWrapper';
+import SimpleBox from '../../../../customComponents/SimpleBox';
 import CodePageBox from '../../../../customComponents/CodePageBox';
 
 const configList = [
   {
     label: 'verifySession',
     value: '开启 session 检测校验',
-    ellipsis: false,
-    canCopy: true,
-  },
-  {
-    label: 'getApiData',
-    value: `(props) => {
-      return getApiDataCore({ props, modelName: 'entrance' });
-    }`,
     ellipsis: false,
     canCopy: true,
   },
@@ -88,7 +80,6 @@ export default class Index extends BasePageWrapper {
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
-          // controlBox={this.buildControlBox(this.establishControlList())}
         >
           <View>phone key: {keyPhone || '请求中, 请稍后'}</View>
         </SimpleBox>
@@ -99,6 +90,23 @@ export default class Index extends BasePageWrapper {
             verifySession: true,
             getApiData: `(props) => {
               return getApiDataCore({ props, modelName: 'entrance' });
+            }`,
+            doWorkAdjustDidMount: `() => {
+              this.buildPhoneData();
+            }`,
+            buildPhoneData: `() => {
+              const that = this;
+
+              that.exchangePhone({
+                data: {},
+                callback: (o) => {
+                  const { key } = o;
+
+                  that.setState({
+                    keyPhone: key,
+                  });
+                },
+              });
             }`,
           }}
         />

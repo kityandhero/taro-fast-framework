@@ -15,6 +15,12 @@ import {
 import PageWrapperCore from '../PageWrapperCore';
 
 export default class PageWrapperRemote extends PageWrapperCore {
+  viewStyle = {
+    paddingLeft: 'var(--tfc-18)',
+    paddingRight: 'var(--tfc-18)',
+    backgroundColor: '#fff',
+  };
+
   adjustInternalData = () => {
     const simulationMode = getSimulationMode();
     const verifySignInResult = getVerifySignInResult();

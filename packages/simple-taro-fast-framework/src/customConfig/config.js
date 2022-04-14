@@ -374,6 +374,9 @@ const templateRemotePathCollection = {
   entry: {
     path: '/templateRemote/pages/entry/main/index',
   },
+  override: {
+    path: '/templateRemote/pages/override/main/index',
+  },
   signInSilent: {
     path: '/templateRemote/pages/signInSilent/main/index',
   },

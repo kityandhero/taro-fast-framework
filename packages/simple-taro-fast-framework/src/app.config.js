@@ -147,6 +147,7 @@ export default {
       name: '远程模板页',
       pages: [
         'pages/entry/main/index',
+        'pages/override/main/index',
         'pages/signInSilent/main/index',
         'pages/exchangePhone/main/index',
       ],
