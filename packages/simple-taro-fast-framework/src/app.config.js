@@ -145,7 +145,11 @@ export default {
     {
       root: 'templateRemote',
       name: '远程模板页',
-      pages: ['pages/entry/main/index', 'pages/signInSilent/main/index'],
+      pages: [
+        'pages/entry/main/index',
+        'pages/signInSilent/main/index',
+        'pages/exchangePhone/main/index',
+      ],
     },
     {
       root: 'news',

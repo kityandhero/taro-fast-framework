@@ -377,6 +377,9 @@ const templateRemotePathCollection = {
   signInSilent: {
     path: '/templateRemote/pages/signInSilent/main/index',
   },
+  exchangePhone: {
+    path: '/templateRemote/pages/exchangePhone/main/index',
+  },
 };
 
 const newsPathCollection = {

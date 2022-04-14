@@ -4,6 +4,7 @@ import {
   signInData,
   signInSilentData,
   registerData,
+  registerWithWeChatData,
   checkTicketValidityData,
 } from '../services/entrance';
 
@@ -31,6 +32,14 @@ export default {
     },
     *register({ payload }, { call, put }) {
       const response = yield call(registerData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *registerWithWeChat({ payload }, { call, put }) {
+      const response = yield call(registerWithWeChatData, payload);
 
       yield put({
         type: 'handleCommonData',

@@ -21,6 +21,13 @@ export async function registerData(params) {
   });
 }
 
+export async function registerWithWeChatData(params) {
+  return executiveRequest({
+    api: `/entrance/registerWithWeChat`,
+    params,
+  });
+}
+
 export async function checkTicketValidityData(params) {
   return executiveRequest({
     api: `/entrance/checkTicketValidity`,

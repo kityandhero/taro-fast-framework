@@ -1,5 +1,10 @@
 import { clearLocalStorage } from 'taro-fast-common/es/utils/tools';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
+import {
+  removeOpenId,
+  removeSession,
+  removeToken,
+} from 'taro-fast-framework/es/utils/globalStorageAssist';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import {
@@ -10,7 +15,7 @@ import {
 import PageWrapperCore from '../PageWrapperCore';
 
 export default class PageWrapperRemote extends PageWrapperCore {
-  initializeInternalData = () => {
+  adjustInternalData = () => {
     const simulationMode = getSimulationMode();
     const verifySignInResult = getVerifySignInResult();
 
@@ -23,6 +28,16 @@ export default class PageWrapperRemote extends PageWrapperCore {
     }
 
     setSimulationMode(false);
+  };
+
+  initializeInternalData = () => {
+    this.adjustInternalData();
+  };
+
+  adjustInternalDataOnRepeatedShow = () => {
+    removeSession();
+    removeOpenId();
+    removeToken();
   };
 
   dispatchRefreshSession = (data) => {

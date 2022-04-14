@@ -14,6 +14,11 @@ const o = {
       name: '静默登录',
       path: pathCollection.templateRemote.signInSilent.path,
     },
+    {
+      id: 'exchangePhone',
+      name: '静默登录',
+      path: pathCollection.templateRemote.exchangePhone.path,
+    },
   ],
 };
 

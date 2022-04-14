@@ -100,9 +100,13 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
 }
 
 export function buildProperties({ config, ignorePropertyList = [] }) {
-  let result = '';
+  let result = '\r\n  ';
 
-  Object.entries(config).forEach((d) => {
+  const entries = Object.entries(config);
+
+  const entryLength = entries.length;
+
+  entries.forEach((d, index) => {
     const [key, value] = d;
 
     const keyAdjust = key.startsWith('--') ? `\"${key}\"` : key;
@@ -113,7 +117,11 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
       if (isBoolean(value) && value) {
         result = result + `${keyAdjust} = ${value}; `;
       } else if (isString(value)) {
-        result = result + `${keyAdjust} = "${value}"; `;
+        if (value.indexOf('=>') >= 0) {
+          result = result + `${keyAdjust} = ${value}; `;
+        } else {
+          result = result + `${keyAdjust} = "${value}"; `;
+        }
       } else if (isFunction(value)) {
         if (
           isArray(ignorePropertyList) &&
@@ -163,6 +171,10 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
         }
       } else {
         result = result + `${keyAdjust} = ${toString(value)}; `;
+      }
+
+      if (index !== entryLength - 1) {
+        result = result + '\r\n  ';
       }
     }
   });

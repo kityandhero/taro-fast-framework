@@ -12,6 +12,7 @@ import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 import {
   refreshSessionData,
   checkTicketValidityData,
+  exchangePhoneData,
   signInSilentData,
   getCustomerData,
   getWeatherData,
@@ -44,6 +45,14 @@ export default {
     },
     *checkTicketValidity({ payload }, { call, put }) {
       const response = yield call(checkTicketValidityData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *exchangePhone({ payload }, { call, put }) {
+      const response = yield call(exchangePhoneData, payload);
 
       yield put({
         type: 'handleCommonData',

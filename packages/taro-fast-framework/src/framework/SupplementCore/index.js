@@ -67,6 +67,8 @@ class SupplementCore extends Common {
     } else {
       const that = this;
 
+      that.adjustInternalDataOnRepeatedShow();
+
       that.setCurrentInfo();
 
       that.checkSession(() => {
@@ -1447,6 +1449,45 @@ class SupplementCore extends Common {
     recordLog(
       'info doAfterGetCustomerOnSignIn do nothing,if you need,you can override it: doAfterGetCustomerOnSignIn = (data) => {}',
     );
+  };
+
+  dispatchExchangePhone = (data = {}) => {
+    recordLog(
+      'info built-in dispatchExchangePhone is a simulation,if you need actual business,you need override it: dispatchExchangePhone = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
+    );
+
+    return this.dispatchApi({
+      type: 'schedulingControl/exchangePhone',
+      payload: data,
+    });
+  };
+
+  getExchangePhoneApiData = () => {
+    return getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+  };
+
+  exchangePhone = ({ data, callback = null }) => {
+    const that = this;
+
+    that
+      .dispatchExchangePhone(data)
+      .then(() => {
+        const remoteData = that.getExchangePhoneApiData();
+
+        const { dataSuccess, data: metaData } = remoteData;
+
+        if (dataSuccess) {
+          if (isFunction(callback)) {
+            callback(metaData);
+          }
+        }
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   };
 }
 

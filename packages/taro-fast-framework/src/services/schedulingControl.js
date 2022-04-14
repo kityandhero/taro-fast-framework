@@ -58,6 +58,24 @@ export async function checkTicketValidityData(params) {
   });
 }
 
+export async function exchangePhoneData(params) {
+  const simulation = {
+    key: getGuid(),
+  };
+
+  recordLog(`info simulation phone key data: ${JSON.stringify(simulation)}`);
+
+  return request({
+    api: `/schedulingControl/exchangePhone`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: simulation,
+    },
+  });
+}
+
 export async function signInSilentData(params) {
   const verifySignInResult = getVerifySignInResult();
 

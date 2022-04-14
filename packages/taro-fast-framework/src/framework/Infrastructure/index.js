@@ -348,7 +348,13 @@ export default class Infrastructure extends ComponentBase {
 
   initializeInternalData = () => {
     recordLog(
-      'info initializeInternalData do nothing, if you need to initialize config data, please use initializeData',
+      'info initializeInternalData do nothing, if you need to initialize internal data, please use initializeInternalData',
+    );
+  };
+
+  adjustInternalDataOnRepeatedShow = () => {
+    recordLog(
+      'info adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please use adjustInternalDataOnRepeatedShow',
     );
   };
 
@@ -501,6 +507,22 @@ export default class Infrastructure extends ComponentBase {
         );
       }, 2000);
     }
+  };
+
+  doShowTask = () => {
+    if (!this.firstShowHasTriggered) {
+      this.doWorkWhenFirstShow();
+
+      this.firstShowHasTriggered = true;
+    } else {
+      this.adjustInternalDataOnRepeatedShow();
+
+      this.doWorkWhenRepeatedShow();
+    }
+
+    this.doWorkWhenEveryShow();
+
+    this.doWorkAfterShow();
   };
 
   componentWillUnmount() {
