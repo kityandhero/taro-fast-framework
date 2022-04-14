@@ -8,6 +8,7 @@ import {
   recordText,
   getGuid,
   recordLog,
+  recordDebug,
 } from '../../utils/tools';
 import { isFunction, isNumber, isObject } from '../../utils/typeCheck';
 
@@ -299,7 +300,7 @@ class ComponentBase extends Component {
   getDispatch = () => {
     const text = 'please override getDispatch, and return a function';
 
-    recordLog(text);
+    recordError(text);
 
     throw new Error(text);
   };
@@ -317,7 +318,7 @@ class ComponentBase extends Component {
   dispatchApi = ({ type, payload }) => {
     const dispatch = this.getDispatchWrapper();
 
-    recordLog(`modal access: ${type}`);
+    recordDebug(`modal access: ${type}`);
 
     return dispatch({ type, payload });
   };

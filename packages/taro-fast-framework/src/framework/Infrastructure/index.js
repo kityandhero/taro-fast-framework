@@ -15,6 +15,8 @@ import {
   transformSize,
   getMenuButtonBoundingClientRect,
   getValueByKey,
+  recordDebug,
+  recordInfo,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -347,13 +349,13 @@ export default class Infrastructure extends ComponentBase {
   };
 
   initializeInternalData = () => {
-    recordLog(
+    recordInfo(
       'info initializeInternalData do nothing, if you need to initialize internal data, please use initializeInternalData',
     );
   };
 
   adjustInternalDataOnRepeatedShow = () => {
-    recordLog(
+    recordInfo(
       'info adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please use adjustInternalDataOnRepeatedShow',
     );
   };
@@ -551,7 +553,7 @@ export default class Infrastructure extends ComponentBase {
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
   doSimulationFadeSpin = (callback = null) => {
-    recordLog('exec doSimulationFadeSpin');
+    recordDebug('exec doSimulationFadeSpin');
 
     const { spin } = this.state;
 
@@ -573,7 +575,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   prepareLoadRemoteRequest = () => {
-    recordLog('exec prepareLoadRemoteRequest');
+    recordDebug('exec prepareLoadRemoteRequest');
 
     const that = this;
 
@@ -607,7 +609,7 @@ export default class Infrastructure extends ComponentBase {
    * @param {*} callback
    */
   checkSession = (callback) => {
-    recordLog('exec checkSession');
+    recordDebug('exec checkSession');
 
     const sessionRefreshing = getSessionRefreshing();
 
@@ -617,20 +619,21 @@ export default class Infrastructure extends ComponentBase {
       const session = getSession();
 
       if ((session || '') === '') {
-        recordLog('info session is empty');
+        recordInfo('info session is empty');
 
         that.refreshSession({ callback });
       } else {
         Taro.checkSession({
           success: () => {
-            recordLog('info session is effective, ignore session refresh');
+            recordInfo('info session is effective, ignore session refresh');
 
             if (isFunction(callback)) {
               callback();
             }
           },
           fail(data) {
-            recordLog('info session is expired');
+            recordInfo('info session is expired');
+
             recordObject(data);
 
             that.refreshSession({ callback });
@@ -647,7 +650,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   checkSessionWhenSessionRefreshing({ callback, timeTotal = 0 }) {
-    recordLog('exec checkSessionWhenSessionRefreshing');
+    recordDebug('exec checkSessionWhenSessionRefreshing');
 
     if (timeTotal > 3000) {
       setSessionRefreshing(false);
@@ -727,7 +730,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getSignInProcessDetection = () => {
-    recordLog('exec getSignInProcessDetection');
+    recordDebug('exec getSignInProcessDetection');
 
     const {
       schedulingControl: { signInProcessDetection },
@@ -742,7 +745,7 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     that.dispatchSetSignInProcessDetection(!!data).then(() => {
-      recordLog('exec dispatchSetSignInProcessDetection then');
+      recordDebug('exec dispatchSetSignInProcessDetection then');
 
       if (isFunction(callback)) {
         callback();
@@ -758,7 +761,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getSignInResult = () => {
-    recordLog('exec getSignInResult');
+    recordDebug('exec getSignInResult');
 
     const {
       schedulingControl: { signInResult },
@@ -768,7 +771,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setSignInResult = ({ data, callback }) => {
-    recordLog('exec setSignInResult');
+    recordDebug('exec setSignInResult');
     recordLog(
       `info sign in result is ${data}, it mean ${getSignInResultDescription(
         data,
@@ -778,7 +781,7 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     that.dispatchSetSignInResult(data).then(() => {
-      recordLog('exec dispatchSetSignInResult then');
+      recordDebug('exec dispatchSetSignInResult then');
 
       if (isFunction(callback)) {
         callback();

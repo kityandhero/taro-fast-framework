@@ -544,7 +544,31 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     if (showModeModified === logShowMode.text) {
       const data = { record, level };
 
-      console.log(JSON.stringify(data));
+      console.log('%c%s', 'color:#00768f;', JSON.stringify(data));
+    }
+
+    if (showModeModified === logShowMode.object) {
+      console.log({ record, level });
+    }
+  }
+
+  if (logShowInConsole() && level === logLevel.warn) {
+    if (showModeModified === logShowMode.text) {
+      const data = { record, level };
+
+      console.log('%c%s', 'color:#ff4f49;', JSON.stringify(data));
+    }
+
+    if (showModeModified === logShowMode.object) {
+      console.log({ record, level });
+    }
+  }
+
+  if (logShowInConsole() && level === logLevel.info) {
+    if (showModeModified === logShowMode.text) {
+      const data = { record, level };
+
+      console.log('%c%s', 'color:#89ca78;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
@@ -562,6 +586,30 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     if (showModeModified === logShowMode.object) {
       console.error({ record, level });
     }
+  }
+}
+
+export function recordWarn(record) {
+  if (isString(record)) {
+    recordText(record, logLevel.warn);
+  } else {
+    recordObject(record, logLevel.warn);
+  }
+}
+
+export function recordInfo(record) {
+  if (isString(record)) {
+    recordText(record, logLevel.info);
+  } else {
+    recordObject(record, logLevel.info);
+  }
+}
+
+export function recordDebug(record) {
+  if (isString(record)) {
+    recordText(record, logLevel.debug);
+  } else {
+    recordObject(record, logLevel.debug);
   }
 }
 
@@ -2074,7 +2122,7 @@ export function startGeographicalLocationUpdate({
   fail = null,
   complete = null,
 }) {
-  recordLog('exec startGeographicalLocationUpdate');
+  recordDebug('exec startGeographicalLocationUpdate');
 
   startGeographicalLocationUpdateCore({
     success,
@@ -2091,7 +2139,7 @@ export function stopGeographicalLocationUpdate({
   fail = null,
   complete = null,
 }) {
-  recordLog('exec stopGeographicalLocationUpdate');
+  recordDebug('exec stopGeographicalLocationUpdate');
 
   stopGeographicalLocationUpdateCore({
     success,
@@ -2101,13 +2149,13 @@ export function stopGeographicalLocationUpdate({
 }
 
 export function onGeographicalLocationChange(callback) {
-  recordLog('exec onGeographicalLocationChange');
+  recordDebug('exec onGeographicalLocationChange');
 
   onGeographicalLocationChangeCore(callback);
 }
 
 export function offGeographicalLocationChange(callback) {
-  recordLog('exec offGeographicalLocationChange');
+  recordDebug('exec offGeographicalLocationChange');
 
   offGeographicalLocationChangeCore(callback);
 }
@@ -2117,11 +2165,11 @@ export function getGeographicalLocation({
   fail: failCallback,
   complete: completeCallback,
 }) {
-  recordLog('exec getGeographicalLocation');
+  recordDebug('exec getGeographicalLocation');
 
   startGeographicalLocationUpdate({
     success: () => {
-      recordLog('info startGeographicalLocationUpdate success');
+      recordInfo('info startGeographicalLocationUpdate success');
 
       onGeographicalLocationChange((res) => {
         try {
@@ -2140,7 +2188,7 @@ export function getGeographicalLocation({
       });
     },
     fail: (res) => {
-      recordLog('info startGeographicalLocationUpdate fail');
+      recordInfo('info startGeographicalLocationUpdate fail');
 
       try {
         if (isFunction(failCallback)) {

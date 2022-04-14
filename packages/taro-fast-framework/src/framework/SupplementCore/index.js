@@ -9,6 +9,8 @@ import {
   recordLog,
   inCollection,
   recordError,
+  recordDebug,
+  recordInfo,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -124,7 +126,7 @@ class SupplementCore extends Common {
     fromLaunch = false,
     failCallback,
   }) {
-    recordLog('exec obtainLocation');
+    recordDebug('exec obtainLocation');
 
     let needRelocation = force || false;
 
@@ -156,7 +158,7 @@ class SupplementCore extends Common {
         }
       }
     } else {
-      recordLog('info obtain location force');
+      recordInfo('info obtain location force');
     }
 
     if (needRelocation) {
@@ -407,7 +409,7 @@ class SupplementCore extends Common {
   };
 
   checkTicketValidity = ({ callback }) => {
-    recordLog('exec checkTicketValidity');
+    recordDebug('exec checkTicketValidity');
 
     const useLocation = defaultSettingsLayoutCustom.getUseLocation();
     const locationMode = getLocationMode();
@@ -487,7 +489,7 @@ class SupplementCore extends Common {
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
   bridgeLogicOnCheckTicketValidity({ callback = null }) {
-    recordLog('exec bridgeLogicOnCheckTicketValidity');
+    recordDebug('exec bridgeLogicOnCheckTicketValidity');
 
     const ticketValidityProcessDetection =
       this.getTicketValidityProcessDetection();
@@ -555,7 +557,7 @@ class SupplementCore extends Common {
     forceRefresh: forceRefreshValue = false,
     callback = null,
   }) {
-    recordLog('exec checkTicketValidityCore');
+    recordDebug('exec checkTicketValidityCore');
 
     const that = this;
 
@@ -649,7 +651,7 @@ class SupplementCore extends Common {
   };
 
   refreshSession = ({ callback }) => {
-    recordLog('exec refreshSession');
+    recordDebug('exec refreshSession');
 
     const sessionRefreshing = getSessionRefreshing();
 
@@ -660,7 +662,7 @@ class SupplementCore extends Common {
 
       Taro.login({ timeout: 1000 })
         .then((res) => {
-          recordLog('exec Taro.login');
+          recordDebug('exec Taro.login');
 
           const { code } = res;
 
@@ -768,7 +770,7 @@ class SupplementCore extends Common {
   }
 
   signIn = ({ data, callback }) => {
-    recordLog('exec signIn');
+    recordDebug('exec signIn');
 
     const that = this;
 
@@ -776,7 +778,7 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      recordLog('info use location and automatic location on sign in');
+      recordInfo('info use location and automatic location on sign in');
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -824,7 +826,7 @@ class SupplementCore extends Common {
       });
     } else {
       if (useLocation || false) {
-        recordLog('info use location and nonautomatic location');
+        recordInfo('info use location and nonautomatic location');
 
         that.signInWhenCheckProcessDetection({
           data,
@@ -857,7 +859,7 @@ class SupplementCore extends Common {
   };
 
   signInWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
-    recordLog('exec signInWhenCheckProcessDetection');
+    recordDebug('exec signInWhenCheckProcessDetection');
 
     const that = this;
 
@@ -889,7 +891,7 @@ class SupplementCore extends Common {
   }
 
   signInSilent = ({ data, callback }) => {
-    recordLog('exec signInSilent');
+    recordDebug('exec signInSilent');
 
     const that = this;
 
@@ -897,7 +899,7 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      recordLog('info use location and automatic location on sign in silent');
+      recordInfo('info use location and automatic location on sign in silent');
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -945,7 +947,7 @@ class SupplementCore extends Common {
       });
     } else {
       if (useLocation || false) {
-        recordLog('info use location and nonautomatic location');
+        recordInfo('info use location and nonautomatic location');
 
         that.signInSilentWhenCheckProcessDetection({
           data,
@@ -978,7 +980,7 @@ class SupplementCore extends Common {
   };
 
   signInSilentWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
-    recordLog('exec signInSilentWhenCheckProcessDetection');
+    recordDebug('exec signInSilentWhenCheckProcessDetection');
 
     const that = this;
 
@@ -1052,7 +1054,7 @@ class SupplementCore extends Common {
   };
 
   signInCore({ data, callback }) {
-    recordLog('exec signInCore');
+    recordDebug('exec signInCore');
 
     // Tips.loading('处理中');
 
@@ -1107,7 +1109,7 @@ class SupplementCore extends Common {
   }
 
   signInSilentCore({ data, callback }) {
-    recordLog('exec signInSilentCore');
+    recordDebug('exec signInSilentCore');
 
     // Tips.loading('处理中');
 
@@ -1162,7 +1164,7 @@ class SupplementCore extends Common {
   }
 
   parseSignInResultFromRemoteApiDataWrapper = (remoteData) => {
-    recordLog('exec parseSignInResultFromRemoteApiDataWrapper');
+    recordDebug('exec parseSignInResultFromRemoteApiDataWrapper');
 
     const verifySignInResult = getVerifySignInResult();
 
@@ -1194,7 +1196,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setSignInResultOnSignIn = ({ signInResult }) => {
-    recordLog('exec setSignInResultOnSignIn');
+    recordDebug('exec setSignInResultOnSignIn');
 
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
@@ -1254,7 +1256,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignIn = ({ token }) => {
-    recordLog('exec setTokenOnSignIn');
+    recordDebug('exec setTokenOnSignIn');
 
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignIn token must be string');
@@ -1268,7 +1270,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignInSilent = ({ token }) => {
-    recordLog('exec setTokenOnSignInSilent');
+    recordDebug('exec setTokenOnSignInSilent');
 
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignInSilent token must be string');
@@ -1310,7 +1312,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setOpenIdOnSignIn = ({ openId }) => {
-    recordLog('exec setOpenIdOnSignIn');
+    recordDebug('exec setOpenIdOnSignIn');
 
     if (!isString(openId || '')) {
       throw new Error('setOpenIdOnSignIn openId must be string');
@@ -1324,7 +1326,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setOpenIdOnSignInSilent = ({ openId }) => {
-    recordLog('exec setOpenIdOnSignInSilent');
+    recordDebug('exec setOpenIdOnSignInSilent');
 
     if (!isString(openId || '')) {
       throw new Error('setOpenIdOnSignInSilent openId must be string');
@@ -1339,7 +1341,7 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {
-    recordLog(
+    recordInfo(
       'info doAfterSignInSuccess do nothing,if you need,you can override it: doAfterSignInSuccess = (data) => {}',
     );
   };
@@ -1350,7 +1352,7 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSilentSuccess = (data) => {
-    recordLog(
+    recordInfo(
       'info doAfterSignInSilentSuccess do nothing,if you need,you can override it: doAfterSignInSilentSuccess = (data) => {}',
     );
   };
@@ -1359,7 +1361,7 @@ class SupplementCore extends Common {
    * 账户登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFail = () => {
-    recordLog(
+    recordInfo(
       'info doWhenSignInFail do nothing,if you need,you can override it: doWhenSignInFail = () => {}',
     );
   };
@@ -1368,13 +1370,13 @@ class SupplementCore extends Common {
    * 静默登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInSilentFail = () => {
-    recordLog(
+    recordInfo(
       'info doWhenSignInSilentFail do nothing,if you need,you can override it: doWhenSignInSilentFail = () => {}',
     );
   };
 
   dispatchGetCustomer = (data = {}) => {
-    recordLog(
+    recordInfo(
       'info built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
     );
 
@@ -1385,7 +1387,7 @@ class SupplementCore extends Common {
   };
 
   parseCustomerFromRemoteApiData = () => {
-    recordLog(
+    recordInfo(
       'info built-in parseCustomerFromRemoteApiData is a simulation,if you need actual business,you need override it: parseCustomerFromRemoteApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
     );
 
@@ -1398,7 +1400,7 @@ class SupplementCore extends Common {
   };
 
   getCustomer = ({ data = {}, force: forceValue = false, callback = null }) => {
-    recordLog('exec getCustomer');
+    recordDebug('exec getCustomer');
 
     let force = forceValue;
 
@@ -1411,7 +1413,7 @@ class SupplementCore extends Common {
     }
 
     if (!force) {
-      recordLog('info getCustomer from local cache success');
+      recordInfo('info getCustomer from local cache success');
 
       if (isFunction(callback)) {
         callback(currentCustomer);
@@ -1439,20 +1441,20 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   doAfterGetCustomerOnSignInSilent = (data) => {
-    recordLog(
+    recordInfo(
       'info doAfterGetCustomerOnSignInSilent do nothing,if you need,you can override it: doAfterGetCustomerOnSignInSilent = (data) => {}',
     );
   };
 
   // eslint-disable-next-line no-unused-vars
   doAfterGetCustomerOnSignIn = (data) => {
-    recordLog(
+    recordInfo(
       'info doAfterGetCustomerOnSignIn do nothing,if you need,you can override it: doAfterGetCustomerOnSignIn = (data) => {}',
     );
   };
 
   dispatchExchangePhone = (data = {}) => {
-    recordLog(
+    recordInfo(
       'info built-in dispatchExchangePhone is a simulation,if you need actual business,you need override it: dispatchExchangePhone = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
     );
 

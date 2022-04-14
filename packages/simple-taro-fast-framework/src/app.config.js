@@ -137,9 +137,8 @@ export default {
         'pages/entry/main/index',
         'pages/signIn/main/index',
         'pages/register/main/index',
-        'pages/getCustomer/main/index',
-        'pages/gridBanner/main/index',
         'pages/weather/main/index',
+        'pages/gridBanner/main/index',
       ],
     },
     {
@@ -150,6 +149,7 @@ export default {
         'pages/override/main/index',
         'pages/signInSilent/main/index',
         'pages/exchangePhone/main/index',
+        'pages/getCustomer/main/index',
       ],
     },
     {

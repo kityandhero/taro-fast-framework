@@ -1,9 +1,9 @@
-import { recordLog } from 'taro-fast-common/es/utils/tools';
+import { recordInfo } from 'taro-fast-common/es/utils/tools';
 
 import { executiveRequest } from '../utils/request';
 
 export async function getCustomerData(params) {
-  recordLog(
+  recordInfo(
     'info service "customer/getCurrentCustomer" use virtual request in this demo',
   );
 

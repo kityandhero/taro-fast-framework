@@ -33,7 +33,7 @@ export default class Index extends BasePageWrapper {
     this.state = {
       ...this.state,
       ...{
-        weather: '',
+        nickname: '',
       },
     };
   }
@@ -46,30 +46,38 @@ export default class Index extends BasePageWrapper {
     this.buildCustomerData();
   };
 
-  dispatchGetCustomer = (data = {}) => {
-    return this.dispatchApi({
-      type: 'customer/getCustomer',
-      payload: data,
-    });
-  };
-
-  parseCustomerFromRemoteApiData = () => {
-    const data = getApiDataCore({
-      props: this.props,
-      modelName: 'customer',
-    });
-
-    return data;
-  };
-
   buildCustomerData = () => {
-    this.getCustomer({
+    const that = this;
+
+    that.getCustomer({
       force: true,
+      callback: (o) => {
+        console.log(o);
+
+        const { nickname } = {
+          ...{
+            nickname: '',
+          },
+          o,
+        };
+
+        that.setState({
+          nickname,
+        });
+      },
     });
   };
 
   renderFurther() {
-    const customer = getCurrentCustomer();
+    // const customer = {
+    //   ...{
+    //     nickname: '',
+    //   },
+    //   ...getCurrentCustomer(),
+    // };
+    const { nickname } = this.state;
+
+    console.log(getCurrentCustomer());
 
     return (
       <View
@@ -78,7 +86,7 @@ export default class Index extends BasePageWrapper {
           height: transformSize(400),
         }}
       >
-        <CenterBox>当前用户: {customer.nickname} </CenterBox>
+        <CenterBox>当前用户: {nickname} </CenterBox>
       </View>
     );
   }

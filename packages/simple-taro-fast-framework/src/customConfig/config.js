@@ -359,9 +359,6 @@ const templatePathCollection = {
   register: {
     path: '/template/pages/register/main/index',
   },
-  getCustomer: {
-    path: '/template/pages/getCustomer/main/index',
-  },
   gridBanner: {
     path: '/template/pages/gridBanner/main/index',
   },
@@ -382,6 +379,9 @@ const templateRemotePathCollection = {
   },
   exchangePhone: {
     path: '/templateRemote/pages/exchangePhone/main/index',
+  },
+  getCustomer: {
+    path: '/templateRemote/pages/getCustomer/main/index',
   },
 };
 

@@ -264,6 +264,11 @@ export const logLevel = {
    * 错误
    */
   error: 'error',
+
+  /**
+   * 信息
+   */
+  info: 'info',
 };
 
 export const logShowMode = {

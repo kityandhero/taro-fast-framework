@@ -7,6 +7,9 @@ import {
   clearLocalStorage,
   showInfoMessage,
   recordLog,
+  recordWarn,
+  recordDebug,
+  recordInfo,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -365,7 +368,7 @@ export function removeEffectiveCode() {
  * @returns
  */
 export function getSession() {
-  recordLog('info getSession');
+  recordInfo('info getSession');
 
   const key = storageKeyCollection.session;
 
@@ -395,7 +398,7 @@ export function setSession(session) {
  * @returns
  */
 export function removeSession() {
-  recordLog('info removeSession');
+  recordInfo('info removeSession');
 
   const key = storageKeyCollection.session;
 
@@ -410,7 +413,7 @@ export function removeSession() {
  * @returns
  */
 export function getSessionRefreshing() {
-  recordLog('info getSessionRefreshing');
+  recordInfo('info getSessionRefreshing');
 
   const key = storageKeyCollection.sessionRefreshing;
 
@@ -442,7 +445,7 @@ export function setSessionRefreshing(sessionRefreshing) {
  * @returns
  */
 export function removeSessionRefreshing() {
-  recordLog('info removeSessionRefreshing');
+  recordInfo('info removeSessionRefreshing');
 
   const key = storageKeyCollection.sessionRefreshing;
 
@@ -762,23 +765,30 @@ export function setLastLocation(data) {
 export function getRemoteCheckCache() {
   const key = storageKeyCollection.remoteCheck;
 
-  const d = getJsonFromLocalStorage(key);
+  const o = getJsonFromLocalStorage(key);
 
-  if ((d || null) == null) {
+  if ((o || null) == null) {
     return null;
   }
 
-  if ((d.dataVersion || null) === null) {
+  if ((o.dataVersion || null) === null) {
     return null;
   }
 
   const now = parseInt(new Date().getTime() / 1000 / 10, 10);
 
-  if (d.dataVersion !== now) {
+  if (o.dataVersion !== now) {
     return null;
   }
 
-  return d.data || null;
+  const { data } = {
+    ...{
+      data: null,
+    },
+    ...o,
+  };
+
+  return data || null;
 }
 
 /**
@@ -811,13 +821,13 @@ export function setRemoteCheckCache(o) {
 export function getWeather() {
   const key = storageKeyCollection.weather;
 
-  const l = getJsonFromLocalStorage(key);
+  const o = getJsonFromLocalStorage(key);
 
-  if ((l || null) == null) {
+  if ((o || null) == null) {
     return null;
   }
 
-  const { dataVersion } = l;
+  const { dataVersion } = o;
 
   if ((dataVersion || null) == null) {
     return null;
@@ -830,7 +840,14 @@ export function getWeather() {
     return null;
   }
 
-  return l;
+  const { data } = {
+    ...{
+      data: null,
+    },
+    ...o,
+  };
+
+  return data || null;
 }
 
 /**
@@ -848,7 +865,12 @@ export function setWeather(weather) {
 
   weather.dataVersion = nowVersion;
 
-  return saveJsonToLocalStorage(key, weather || '');
+  const o = {
+    data: weather,
+    dataVersion: nowVersion,
+  };
+
+  return saveJsonToLocalStorage(key, o);
 }
 
 /**
@@ -872,17 +894,17 @@ export function removeWeather() {
  * @returns
  */
 export function getCurrentCustomer() {
-  recordLog('exec getCurrentCustomer from local cache');
+  recordDebug('exec getCurrentCustomer from local cache');
 
   const key = storageKeyCollection.currentCustomer;
 
-  const data = getJsonFromLocalStorage(key);
+  const o = getJsonFromLocalStorage(key);
 
-  if ((data || null) == null) {
+  if ((o || null) == null) {
     return null;
   }
 
-  const { dataVersion } = data;
+  const { dataVersion } = o;
 
   if ((dataVersion || null) == null) {
     return null;
@@ -892,10 +914,19 @@ export function getCurrentCustomer() {
   const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
 
   if (dataVersion !== now) {
+    recordWarn('info current customer cache expired, will return null');
+
     return null;
   }
 
-  return data;
+  const { data } = {
+    ...{
+      data: null,
+    },
+    ...o,
+  };
+
+  return data || null;
 }
 
 /**
@@ -906,16 +937,19 @@ export function getCurrentCustomer() {
  * @returns
  */
 export function setCurrentCustomer(data) {
-  recordLog('exec setCurrentCustomer to local cache');
+  recordDebug('exec setCurrentCustomer to local cache');
 
   const key = storageKeyCollection.currentCustomer;
 
   // 信息有效期30分钟
   const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
 
-  data.dataVersion = nowVersion;
+  const o = {
+    data,
+    dataVersion: nowVersion,
+  };
 
-  return saveJsonToLocalStorage(key, data || '');
+  return saveJsonToLocalStorage(key, o);
 }
 
 /**

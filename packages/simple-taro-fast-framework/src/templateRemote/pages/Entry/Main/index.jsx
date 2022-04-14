@@ -21,8 +21,13 @@ const o = {
     },
     {
       id: 'exchangePhone',
-      name: '静默登录',
+      name: '兑换手机号码',
       path: pathCollection.templateRemote.exchangePhone.path,
+    },
+    {
+      id: 'getCustomer',
+      name: '获取登录用户信息',
+      path: pathCollection.templateRemote.getCustomer.path,
     },
   ],
 };

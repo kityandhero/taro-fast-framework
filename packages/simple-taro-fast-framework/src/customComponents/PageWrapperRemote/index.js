@@ -94,4 +94,20 @@ export default class PageWrapperRemote extends PageWrapperCore {
 
     return token || '';
   };
+
+  dispatchGetCustomer = (data = {}) => {
+    return this.dispatchApi({
+      type: 'customer/getCustomer',
+      payload: data,
+    });
+  };
+
+  parseCustomerFromRemoteApiData = () => {
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'customer',
+    });
+
+    return data;
+  };
 }
