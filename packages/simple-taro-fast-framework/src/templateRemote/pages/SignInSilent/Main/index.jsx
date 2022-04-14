@@ -36,7 +36,8 @@ definePageConfig({
   navigationBarTitleText: '模板页--静默登录',
 });
 
-@connect(({ entrance, session, global, schedulingControl }) => ({
+@connect(({ customer, entrance, session, global, schedulingControl }) => ({
+  customer,
   entrance,
   session,
   global,
