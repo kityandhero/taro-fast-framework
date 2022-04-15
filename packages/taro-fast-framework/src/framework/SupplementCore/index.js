@@ -1074,7 +1074,7 @@ class SupplementCore extends Common {
       if (dataSuccess) {
         that.setSignInResultOnSignIn({
           signInResult:
-            that.parseSignInResultFromRemoteApiDataWrapper(metaData),
+            that.parseSignInResultFromSignInApiDataWrapper(metaData),
         });
 
         that.setTokenOnSignIn({
@@ -1129,7 +1129,7 @@ class SupplementCore extends Common {
       if (dataSuccess) {
         that.setSignInResultOnSignIn({
           signInResult:
-            that.parseSignInResultFromRemoteApiDataWrapper(metaData),
+            that.parseSignInResultFromSignInApiDataWrapper(metaData),
         });
 
         that.setTokenOnSignInSilent({
@@ -1163,8 +1163,8 @@ class SupplementCore extends Common {
     });
   }
 
-  parseSignInResultFromRemoteApiDataWrapper = (remoteData) => {
-    recordDebug('exec parseSignInResultFromRemoteApiDataWrapper');
+  parseSignInResultFromSignInApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSignInResultFromSignInApiDataWrapper');
 
     const verifySignInResult = getVerifySignInResult();
 
@@ -1172,23 +1172,28 @@ class SupplementCore extends Common {
       ...{
         signInResult: verifySignInResult.fail,
       },
-      ...this.parseSignInResultFromRemoteApiData(remoteData),
+      ...this.parseSignInResultFromSignInApiData(remoteData),
     };
 
     return signInResult;
   };
 
-  /**
-   * 从接口数据中解析出sign in result
-   * @param {*} remoteData
-   */
   // eslint-disable-next-line no-unused-vars
-  parseSignInResultFromRemoteApiData = (remoteData) => {
+  parseSignInResultFromSignInApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSignInResultFromSignInApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
     const verifySignInResult = getVerifySignInResult();
 
-    throw new Error(
-      `parseSignInResultFromRemoteApiData token must be number as ${verifySignInResult.unknown}/${verifySignInResult.fail}/${verifySignInResult.success}, ${verifySignInResult.unknown} mean unknown; ${verifySignInResult.fail} mean fail; ${verifySignInResult.success} mean success.`,
-    );
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...remoteData,
+    };
+
+    return signInResult || verifySignInResult.fail;
   };
 
   /**
@@ -1223,9 +1228,18 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   parseTokenFromSignInApiData = (remoteData) => {
-    throw new Error(
-      'parseTokenFromSignInApiData need to be override, it must return a string',
+    recordInfo(
+      'info built-in parseTokenFromSignInApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    const { token } = {
+      ...{
+        token: '',
+      },
+      ...remoteData,
+    };
+
+    return token || '';
   };
 
   /**
@@ -1234,13 +1248,16 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   parseTokenFromSignInSilentApiData = (remoteData) => {
-    if (this.verifyTicket) {
-      throw new Error(
-        'parseTokenFromSignInSilentApiData need to be override, it must return a string',
-      );
-    }
+    recordInfo(
+      'info built-in parseTokenFromSignInSilentApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
 
-    const { token } = remoteData;
+    const { token } = {
+      ...{
+        token: '',
+      },
+      ...remoteData,
+    };
 
     return token || '';
   };
@@ -1279,9 +1296,18 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   parseOpenIdFromSignInApiData = (remoteData) => {
-    throw new Error(
-      'parseOpenIdFromSignInApiData need to be override, it must return a string',
+    recordInfo(
+      'info built-in parseOpenIdFromSignInApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    const { openId } = {
+      ...{
+        openId: '',
+      },
+      ...remoteData,
+    };
+
+    return openId || '';
   };
 
   /**
@@ -1290,13 +1316,16 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   parseOpenIdFromSignInSilentApiData = (remoteData) => {
-    if (this.verifyTicket) {
-      throw new Error(
-        'parseOpenIdFromSignInSilentApiData need to be override, it must return a string',
-      );
-    }
+    recordInfo(
+      'info built-in parseOpenIdFromSignInSilentApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
 
-    const { openId } = remoteData;
+    const { openId } = {
+      ...{
+        openId: '',
+      },
+      ...remoteData,
+    };
 
     return openId || '';
   };
@@ -1517,17 +1546,19 @@ class SupplementCore extends Common {
         if (dataSuccess) {
           removeCurrentCustomer();
 
-          that.setSignInResultOnSignIn({
+          that.setSignInResultOnRegisterWithWeChat({
             signInResult:
-              that.parseSignInResultFromRemoteApiDataWrapper(metaData),
+              that.parseSignInResultFromRegisterWithWeChatApiDataWrapper(
+                metaData,
+              ),
           });
 
-          that.setTokenOnSignInSilent({
-            token: that.parseTokenFromSignInSilentApiData(metaData),
+          that.setTokenOnRegisterWithWeChat({
+            token: that.parseTokenFromRegisterWithWeChatApiData(metaData),
           });
 
-          that.setOpenIdOnSignInSilent({
-            token: that.parseOpenIdFromSignInApiData(metaData),
+          that.setOpenIdOnRegisterWithWeChat({
+            token: that.parseOpenIdFromRegisterWithWeChatApiData(metaData),
           });
 
           that.getCustomer({});
@@ -1560,6 +1591,10 @@ class SupplementCore extends Common {
     });
   };
 
+  /**
+   * 常规注册
+   * @param {*} param0
+   */
   register = ({ data, callback = null }) => {
     const that = this;
 
@@ -1573,17 +1608,17 @@ class SupplementCore extends Common {
         if (dataSuccess) {
           removeCurrentCustomer();
 
-          that.setSignInResultOnSignIn({
+          that.setSignInResultOnRegister({
             signInResult:
-              that.parseSignInResultFromRemoteApiDataWrapper(metaData),
+              that.parseSignInResultFromRegisterApiDataWrapper(metaData),
           });
 
-          that.setTokenOnSignInSilent({
-            token: that.parseTokenFromSignInSilentApiData(metaData),
+          that.setTokenOnRegister({
+            token: that.parseTokenFromRegisterApiData(metaData),
           });
 
-          that.setOpenIdOnSignInSilent({
-            token: that.parseOpenIdFromSignInApiData(metaData),
+          that.setOpenIdOnRegister({
+            token: that.parseOpenIdFromRegisterApiData(metaData),
           });
 
           that.getCustomer({});
@@ -1596,6 +1631,214 @@ class SupplementCore extends Common {
       .catch((error) => {
         recordError(error);
       });
+  };
+
+  parseSignInResultFromRegisterApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSignInResultFromRegisterApiDataWrapper');
+
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...this.parseSignInResultFromRegisterApiData(remoteData),
+    };
+
+    return signInResult;
+  };
+
+  parseSignInResultFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSignInResultFromRegisterWithWeChatApiDataWrapper');
+
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...this.parseSignInResultFromWithWeChatApiData(remoteData),
+    };
+
+    return signInResult;
+  };
+
+  parseSignInResultFromRegisterApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSignInResultFromRegisterApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...remoteData,
+    };
+
+    return signInResult || verifySignInResult.fail;
+  };
+
+  parseSignInResultFromRegisterWithWeChatApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSignInResultFromRegisterWithWeChatApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...remoteData,
+    };
+
+    return signInResult || verifySignInResult.fail;
+  };
+
+  setSignInResultOnRegister = ({ signInResult }) => {
+    recordDebug('exec setSignInResultOnSignIn');
+
+    const v = toNumber(signInResult);
+    const verifySignInResult = getVerifySignInResult();
+
+    if (
+      !inCollection(
+        [
+          verifySignInResult.unknown,
+          verifySignInResult.fail,
+          verifySignInResult.success,
+        ],
+        v,
+      )
+    ) {
+      throw new Error(`signInResult not allow ${signInResult}.`);
+    }
+
+    this.setSignInResult({ data: v });
+  };
+
+  setSignInResultOnRegisterWithWeChat = ({ signInResult }) => {
+    recordDebug('exec setSignInResultOnRegisterWithWeChat');
+
+    const v = toNumber(signInResult);
+    const verifySignInResult = getVerifySignInResult();
+
+    if (
+      !inCollection(
+        [
+          verifySignInResult.unknown,
+          verifySignInResult.fail,
+          verifySignInResult.success,
+        ],
+        v,
+      )
+    ) {
+      throw new Error(`signInResult not allow ${signInResult}.`);
+    }
+
+    this.setSignInResult({ data: v });
+  };
+
+  parseTokenFromRegisterApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseTokenFromRegisterApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const { token } = {
+      ...{
+        token: '',
+      },
+      ...remoteData,
+    };
+
+    return token || '';
+  };
+
+  parseTokenFromRegisterWithWeChatApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseTokenFromRegisterWithWeChatApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const { token } = {
+      ...{
+        token: '',
+      },
+      ...remoteData,
+    };
+
+    return token || '';
+  };
+
+  setTokenOnRegister = ({ token }) => {
+    recordDebug('exec setTokenOnRegister');
+
+    if (!isString(token || '')) {
+      throw new Error('setTokenOnRegister token must be string');
+    }
+
+    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+  };
+
+  setTokenOnRegisterWithWeChat = ({ token }) => {
+    recordDebug('exec setTokenOnRegisterWithWeChat');
+
+    if (!isString(token || '')) {
+      throw new Error('setTokenOnRegisterWithWeChat token must be string');
+    }
+
+    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+  };
+
+  parseOpenIdFromRegisterApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseOpenIdFromRegisterApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const { openId } = {
+      ...{
+        openId: '',
+      },
+      ...remoteData,
+    };
+
+    return openId || '';
+  };
+
+  parseOpenIdFromRegisterWithWeChatApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseOpenIdFromRegisterWithWeChatApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const { openId } = {
+      ...{
+        openId: '',
+      },
+      ...remoteData,
+    };
+
+    return openId || '';
+  };
+
+  setOpenIdOnRegister = ({ openId }) => {
+    recordDebug('exec setOpenIdOnRegister');
+
+    if (!isString(openId || '')) {
+      throw new Error('setOpenIdOnRegister openId must be string');
+    }
+
+    setOpenId(openId || '');
+  };
+
+  setOpenIdOnRegisterWithWeChat = ({ openId }) => {
+    recordDebug('exec setOpenIdOnRegisterWithWeChat');
+
+    if (!isString(openId || '')) {
+      throw new Error('setOpenIdOnRegisterWithWeChat openId must be string');
+    }
+
+    setOpenId(openId || '');
   };
 }
 

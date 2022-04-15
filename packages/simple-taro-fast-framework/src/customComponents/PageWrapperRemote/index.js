@@ -89,12 +89,6 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return getApiDataCore({ props: this.props, modelName: 'entrance' });
   };
 
-  parseTokenFromSignInSilentApiData = (remoteData) => {
-    const { token } = remoteData;
-
-    return token || '';
-  };
-
   dispatchGetCustomer = (data = {}) => {
     return this.dispatchApi({
       type: 'customer/getCustomer',
