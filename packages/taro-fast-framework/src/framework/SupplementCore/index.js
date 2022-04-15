@@ -1563,6 +1563,8 @@ class SupplementCore extends Common {
 
           that.getCustomer({});
 
+          that.doAfterRegisterWithWeChat(metaData);
+
           if (isFunction(callback)) {
             callback(metaData);
           }
@@ -1622,6 +1624,8 @@ class SupplementCore extends Common {
           });
 
           that.getCustomer({});
+
+          that.doAfterRegister(metaData);
 
           if (isFunction(callback)) {
             callback(metaData);
@@ -1839,6 +1843,20 @@ class SupplementCore extends Common {
     }
 
     setOpenId(openId || '');
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doAfterRegisterWithWeChat = (data) => {
+    recordInfo(
+      'info doAfterRegisterWithWeChat do nothing,if you need,you can override it: doAfterRegisterWithWeChat = (data) => {}',
+    );
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  doAfterRegister = (data) => {
+    recordInfo(
+      'info doAfterRegister do nothing,if you need,you can override it: doAfterRegister = (data) => {}',
+    );
   };
 }
 
