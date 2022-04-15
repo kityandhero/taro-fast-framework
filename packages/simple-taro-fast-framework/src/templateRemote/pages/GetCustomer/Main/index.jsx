@@ -61,8 +61,6 @@ export default class Index extends BasePageWrapper {
           ...o,
         };
 
-        console.log(nickname);
-
         that.setState({
           nickname,
         });
