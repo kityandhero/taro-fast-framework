@@ -1515,6 +1515,23 @@ class SupplementCore extends Common {
         const { dataSuccess, data: metaData } = remoteData;
 
         if (dataSuccess) {
+          removeCurrentCustomer();
+
+          that.setSignInResultOnSignIn({
+            signInResult:
+              that.parseSignInResultFromRemoteApiDataWrapper(metaData),
+          });
+
+          that.setTokenOnSignInSilent({
+            token: that.parseTokenFromSignInSilentApiData(metaData),
+          });
+
+          that.setOpenIdOnSignInSilent({
+            token: that.parseOpenIdFromSignInApiData(metaData),
+          });
+
+          that.getCustomer({});
+
           if (isFunction(callback)) {
             callback(metaData);
           }
@@ -1554,6 +1571,23 @@ class SupplementCore extends Common {
         const { dataSuccess, data: metaData } = remoteData;
 
         if (dataSuccess) {
+          removeCurrentCustomer();
+
+          that.setSignInResultOnSignIn({
+            signInResult:
+              that.parseSignInResultFromRemoteApiDataWrapper(metaData),
+          });
+
+          that.setTokenOnSignInSilent({
+            token: that.parseTokenFromSignInSilentApiData(metaData),
+          });
+
+          that.setOpenIdOnSignInSilent({
+            token: that.parseOpenIdFromSignInApiData(metaData),
+          });
+
+          that.getCustomer({});
+
           if (isFunction(callback)) {
             callback(metaData);
           }
