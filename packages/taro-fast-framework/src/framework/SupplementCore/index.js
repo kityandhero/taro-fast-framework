@@ -1485,6 +1485,84 @@ class SupplementCore extends Common {
         recordError(error);
       });
   };
+
+  dispatchRegisterWithWeChat = (data = {}) => {
+    recordInfo(
+      'info built-in dispatchRegisterWithWeChat is a simulation,if you need actual business,you need override it: dispatchRegisterWithWeChat = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
+    );
+
+    return this.dispatchApi({
+      type: 'schedulingControl/registerWithWeChat',
+      payload: data,
+    });
+  };
+
+  getRegisterWithWeChatApiData = () => {
+    return getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+  };
+
+  registerWithWeChat = ({ data, callback = null }) => {
+    const that = this;
+
+    that
+      .dispatchRegisterWithWeChat(data)
+      .then(() => {
+        const remoteData = that.getRegisterWithWeChatApiData();
+
+        const { dataSuccess, data: metaData } = remoteData;
+
+        if (dataSuccess) {
+          if (isFunction(callback)) {
+            callback(metaData);
+          }
+        }
+      })
+      .catch((error) => {
+        recordError(error);
+      });
+  };
+
+  dispatchRegister = (data = {}) => {
+    recordInfo(
+      'info built-in dispatchRegister is a simulation,if you need actual business,you need override it: dispatchRegister = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
+    );
+
+    return this.dispatchApi({
+      type: 'schedulingControl/register',
+      payload: data,
+    });
+  };
+
+  getRegisterApiData = () => {
+    return getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+  };
+
+  register = ({ data, callback = null }) => {
+    const that = this;
+
+    that
+      .dispatchRegister(data)
+      .then(() => {
+        const remoteData = that.getRegisterApiData();
+
+        const { dataSuccess, data: metaData } = remoteData;
+
+        if (dataSuccess) {
+          if (isFunction(callback)) {
+            callback(metaData);
+          }
+        }
+      })
+      .catch((error) => {
+        recordError(error);
+      });
+  };
 }
 
 export default SupplementCore;

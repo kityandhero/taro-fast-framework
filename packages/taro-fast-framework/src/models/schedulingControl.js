@@ -16,6 +16,8 @@ import {
   signInSilentData,
   getCustomerData,
   getWeatherData,
+  registerWithWeChatData,
+  registerData,
 } from '../services/schedulingControl';
 
 export default {
@@ -69,6 +71,22 @@ export default {
     },
     *getCustomer({ payload }, { call, put }) {
       const response = yield call(getCustomerData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *registerWithWeChat({ payload }, { call, put }) {
+      const response = yield call(registerWithWeChatData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *register({ payload }, { call, put }) {
+      const response = yield call(registerData, payload);
 
       yield put({
         type: 'handleCommonData',

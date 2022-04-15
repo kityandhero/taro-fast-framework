@@ -101,6 +101,30 @@ export default class Index extends BasePageWrapper {
                 modelName: 'session',
               });
             }`,
+            dispatchRegisterWithWeChat: `(data = {}) => {
+              return this.dispatchApi({
+                type: 'entrance/registerWithWeChat',
+                payload: data,
+              });
+            }`,
+            getRegisterWithWeChatApiData: `() => {
+              return getApiDataCore({
+                props: this.props,
+                modelName: 'entrance',
+              });
+            }`,
+            dispatchRegister: `(data = {}) => {
+              return this.dispatchApi({
+                type: 'entrance/register',
+                payload: data,
+              });
+            }`,
+            getRegisterApiData: `() => {
+              return getApiDataCore({
+                props: this.props,
+                modelName: 'entrance',
+              });
+            }`,
           }}
         />
       </Space>

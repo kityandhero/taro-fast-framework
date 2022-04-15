@@ -100,6 +100,54 @@ export async function signInSilentData(params) {
   });
 }
 
+export async function registerWithWeChatData(params) {
+  const verifySignInResult = getVerifySignInResult();
+
+  const simulation = {
+    signInResult: verifySignInResult.success,
+    token: getGuid(),
+    openId: getGuid(),
+  };
+
+  recordInfo(
+    `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
+  );
+
+  return request({
+    api: `/schedulingControl/registerWithWeChat`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: simulation,
+    },
+  });
+}
+
+export async function registerData(params) {
+  const verifySignInResult = getVerifySignInResult();
+
+  const simulation = {
+    signInResult: verifySignInResult.success,
+    token: getGuid(),
+    openId: getGuid(),
+  };
+
+  recordInfo(
+    `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
+  );
+
+  return request({
+    api: `/schedulingControl/register`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: simulation,
+    },
+  });
+}
+
 export async function getCustomerData(params) {
   const simulation = {};
 
