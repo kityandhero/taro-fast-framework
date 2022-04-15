@@ -21,68 +21,16 @@ export default class PageWrapper extends AuthorizationWrapper {
     backgroundColor: '#fff',
   };
 
-  // loadRemoteRequestAfterMount = false;
-
   getGlobal = () => {
     const { global } = this.props;
 
     return global;
   };
 
-  // dispatchSignIn = (data) => {
-  //   return this.dispatchApi({
-  //     type: 'entrance/signIn',
-  //     payload: data,
-  //   });
-  // };
-
-  // dispatchSignInSilent = (data) => {
-  //   return this.dispatchApi({
-  //     type: 'entrance/signInSilent',
-  //     payload: data,
-  //   });
-  // };
-
-  // getSignInApiData = () => {
-  //   const data = getApiDataCore({
-  //     props: this.props,
-  //     modelName: 'entrance',
-  //   });
-
-  //   return data;
-  // };
-
-  // getSignInSilentApiData = () => {
-  //   const data = getApiDataCore({
-  //     props: this.props,
-  //     modelName: 'entrance',
-  //   });
-
-  //   return data;
-  // };
-
   getRemoteMetaData = () => {
     const global = this.getGlobalWrapper();
 
     return global;
-  };
-
-  parseSignInResultFromRemoteApiData = (remoteData) => {
-    const { signInResult } = remoteData;
-
-    return signInResult;
-  };
-
-  parseTokenFromSignInApiData = (remoteData) => {
-    const { token } = remoteData;
-
-    return token || '';
-  };
-
-  parseOpenIdFromSignInApiData = (remoteData) => {
-    const { openId } = remoteData;
-
-    return openId || '';
   };
 
   reloadRemoteMetaData = () => {

@@ -90,11 +90,6 @@ export default class Index extends BasePageWrapper {
 
               return data;
             }`,
-            parseOpenIdFromSignInApiData: `(remoteData) => {
-              const { openId } = remoteData;
-
-              return openId || '';
-            }`,
             dispatchExchangePhone: `(data = {}) => {
               return this.dispatchApi({
                 type: 'session/exchangePhone',
