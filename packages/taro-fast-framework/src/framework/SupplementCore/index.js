@@ -1398,6 +1398,12 @@ class SupplementCore extends Common {
     );
   };
 
+  dispatchGetCustomerWrapper = (data = {}) => {
+    recordDebug('exec dispatchGetCustomerWrapper');
+
+    return this.dispatchGetCustomer(data);
+  };
+
   dispatchGetCustomer = (data = {}) => {
     recordInfo(
       'info built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
@@ -1407,6 +1413,12 @@ class SupplementCore extends Common {
       type: 'schedulingControl/getCustomer',
       payload: data,
     });
+  };
+
+  getCustomerApiDataWrapper = () => {
+    recordDebug('exec getCustomerApiDataWrapper');
+
+    return this.getCustomerApiData();
   };
 
   getCustomerApiData = () => {
@@ -1446,9 +1458,9 @@ class SupplementCore extends Common {
         'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
 
-      this.dispatchGetCustomer(data || {})
+      this.dispatchGetCustomerWrapper(data || {})
         .then(() => {
-          const remoteData = this.getCustomerApiData();
+          const remoteData = this.getCustomerApiDataWrapper();
 
           const { dataSuccess, data: metaData } = remoteData;
 
