@@ -97,6 +97,25 @@ const config2 = {
   },
 };
 
+const config3 = {
+  fixed: true,
+  backboardStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundImage: buildLinearGradient({
+      direct: 45,
+      list: ['#ff9700', '#ed1c24'],
+    }),
+  },
+  backboardChildren: (
+    <ImageBox
+      src="https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF"
+      aspectRatio={0.468}
+      borderRadius={false}
+    />
+  ),
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '头部导航',
@@ -161,6 +180,20 @@ export default class Index extends ContentPageBase {
       {
         header: '额外底部',
         config: config2,
+        inner: (
+          <View
+            style={{
+              paddingLeft: transformSize(30),
+              color: '#fff',
+            }}
+          >
+            头部标题
+          </View>
+        ),
+      },
+      {
+        header: 'Fixed模式',
+        config: config3,
         inner: (
           <View
             style={{

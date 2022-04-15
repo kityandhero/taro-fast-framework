@@ -84,6 +84,11 @@ export default class Index extends BasePageWrapper {
 
               return data;
             }`,
+            parseOpenIdFromSignInApiData: `(remoteData) => {
+              const { openId } = remoteData;
+
+              return openId || '';
+            }`,
           }}
         />
       </Space>

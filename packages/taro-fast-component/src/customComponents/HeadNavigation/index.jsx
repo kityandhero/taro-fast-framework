@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { getMenuButtonBoundingClientRect } from 'taro-fast-common/es/utils/tools';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import BackboardBox from '../BackboardBox';
@@ -11,6 +12,8 @@ const defaultProps = {
   contentStyle: {},
   backboardChildren: null,
   bottom: null,
+  fixed: false,
+  zIndex: 999,
 };
 
 class HeadNavigation extends BaseComponent {
@@ -43,9 +46,18 @@ class HeadNavigation extends BaseComponent {
   };
 
   getStyle = () => {
-    const { style } = this.props;
+    const { style, fixed, zIndex } = this.props;
 
-    return { ...style };
+    return {
+      ...style,
+      ...(fixed
+        ? {
+            width: '100%',
+            position: 'fixed',
+            zIndex: toString(zIndex),
+          }
+        : {}),
+    };
   };
 
   getBackboardStyle = () => {
