@@ -110,4 +110,18 @@ export default class PageWrapperRemote extends PageWrapperCore {
 
     return data;
   };
+
+  dispatchExchangePhone = (data = {}) => {
+    return this.dispatchApi({
+      type: 'session/exchangePhone',
+      payload: data,
+    });
+  };
+
+  getExchangePhoneApiData = () => {
+    return getApiDataCore({
+      props: this.props,
+      modelName: 'session',
+    });
+  };
 }

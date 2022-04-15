@@ -89,6 +89,18 @@ export default class Index extends BasePageWrapper {
 
               return openId || '';
             }`,
+            dispatchExchangePhone: `(data = {}) => {
+              return this.dispatchApi({
+                type: 'session/exchangePhone',
+                payload: data,
+              });
+            }`,
+            getExchangePhoneApiData: `() => {
+              return getApiDataCore({
+                props: this.props,
+                modelName: 'session',
+              });
+            }`,
           }}
         />
       </Space>
