@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-component-prism",
-  "version": "2.0.43",
+  "version": "2.0.44",
   "private": false,
   "description": "taro-fast-component-prism",
   "keywords": [
@@ -35,8 +35,8 @@
     "prismjs": "^1.27.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "taro-fast-common": "^1.0.36",
-    "taro-fast-component": "^2.0.45"
+    "taro-fast-common": "^1.0.37",
+    "taro-fast-component": "^2.0.46"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
