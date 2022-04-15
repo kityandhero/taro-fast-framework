@@ -1082,7 +1082,7 @@ class SupplementCore extends Common {
         });
 
         that.setOpenIdOnSignIn({
-          token: that.parseOpenIdFromSignInApiData(metaData),
+          openId: that.parseOpenIdFromSignInApiData(metaData),
         });
 
         removeCurrentCustomer();
@@ -1137,7 +1137,7 @@ class SupplementCore extends Common {
         });
 
         that.setOpenIdOnSignInSilent({
-          token: that.parseOpenIdFromSignInApiData(metaData),
+          openId: that.parseOpenIdFromSignInApiData(metaData),
         });
 
         removeCurrentCustomer();
@@ -1558,7 +1558,7 @@ class SupplementCore extends Common {
           });
 
           that.setOpenIdOnRegisterWithWeChat({
-            token: that.parseOpenIdFromRegisterWithWeChatApiData(metaData),
+            openId: that.parseOpenIdFromRegisterWithWeChatApiData(metaData),
           });
 
           that.getCustomer({});
@@ -1620,7 +1620,7 @@ class SupplementCore extends Common {
           });
 
           that.setOpenIdOnRegister({
-            token: that.parseOpenIdFromRegisterApiData(metaData),
+            openId: that.parseOpenIdFromRegisterApiData(metaData),
           });
 
           that.getCustomer({});
