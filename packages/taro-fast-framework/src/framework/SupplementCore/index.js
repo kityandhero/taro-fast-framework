@@ -1661,7 +1661,7 @@ class SupplementCore extends Common {
       ...{
         signInResult: verifySignInResult.fail,
       },
-      ...this.parseSignInResultFromWithWeChatApiData(remoteData),
+      ...this.parseSignInResultFromRegisterWithWeChatApiData(remoteData),
     };
 
     return signInResult;
