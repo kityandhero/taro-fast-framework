@@ -82,7 +82,7 @@ export default class Index extends BasePageWrapper {
                 payload: data,
               });
             }`,
-            parseCustomerFromRemoteApiData: `() => {
+            getCustomerApiData: `() => {
               const data = getApiDataCore({
                 props: this.props,
                 modelName: 'customer',
@@ -114,22 +114,6 @@ export default class Index extends BasePageWrapper {
                 modelName: 'entrance',
               });
             }`,
-            parseSignInResultFromRegisterWithWeChatApiData: `(remoteData) => {
-              const verifySignInResult = getVerifySignInResult();
-              const { signInResult } = remoteData;
-
-              return signInResult || verifySignInResult.fail;
-            }`,
-            parseTokenFromRegisterWithWeChatApiData: `(remoteData) => {
-              const { token } = remoteData;
-
-              return token || '';
-            }`,
-            parseOpenIdFromRegisterWithWeChatApiData: `(remoteData) => {
-              const { openId } = remoteData;
-
-              return openId || '';
-            }`,
             dispatchRegister: `(data = {}) => {
               return this.dispatchApi({
                 type: 'entrance/register',
@@ -141,22 +125,6 @@ export default class Index extends BasePageWrapper {
                 props: this.props,
                 modelName: 'entrance',
               });
-            }`,
-            parseSignInResultFromRegisterApiData: `(remoteData) => {
-              const verifySignInResult = getVerifySignInResult();
-              const { signInResult } = remoteData;
-
-              return signInResult || verifySignInResult.fail;
-            }`,
-            parseTokenFromRegisterApiData: `(remoteData) => {
-              const { token } = remoteData;
-
-              return token || '';
-            }`,
-            parseOpenIdFromRegisterApiData: `(remoteData) => {
-              const { openId } = remoteData;
-
-              return openId || '';
             }`,
           }}
         />

@@ -1409,9 +1409,9 @@ class SupplementCore extends Common {
     });
   };
 
-  parseCustomerFromRemoteApiData = () => {
+  getCustomerApiData = () => {
     recordInfo(
-      'info built-in parseCustomerFromRemoteApiData is a simulation,if you need actual business,you need override it: parseCustomerFromRemoteApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+      'info built-in getCustomerApiData is a simulation,if you need actual business,you need override it: getCustomerApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
     );
 
     const data = getApiDataCore({
@@ -1447,7 +1447,7 @@ class SupplementCore extends Common {
       );
 
       this.dispatchGetCustomer(data || {}).then(() => {
-        const remoteData = this.parseCustomerFromRemoteApiData();
+        const remoteData = this.getCustomerApiData();
 
         const { dataSuccess, data: metaData } = remoteData;
 

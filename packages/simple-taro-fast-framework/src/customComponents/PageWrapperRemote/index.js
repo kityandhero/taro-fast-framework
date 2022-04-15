@@ -96,7 +96,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 
-  parseCustomerFromRemoteApiData = () => {
+  getCustomerApiData = () => {
     const data = getApiDataCore({
       props: this.props,
       modelName: 'customer',
