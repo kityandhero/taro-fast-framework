@@ -315,6 +315,11 @@ class ComponentBase extends Component {
     return dispatch;
   };
 
+  /**
+   * dispatchApi
+   * @param {*} param0
+   * @returns
+   */
   dispatchApi = ({ type, payload }) => {
     const dispatch = this.getDispatchWrapper();
 
