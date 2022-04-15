@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro';
 import { Component } from 'react';
+import { getModelNameList } from 'src/utils/storageAssist';
 import { toNumber } from 'src/utils/typeConvert';
 
 import {
@@ -9,6 +10,10 @@ import {
   getGuid,
   recordLog,
   recordDebug,
+  stringIsNullOrWhiteSpace,
+  split,
+  inCollection,
+  recordInfo,
 } from '../../utils/tools';
 import { isFunction, isNumber, isObject } from '../../utils/typeCheck';
 
@@ -324,6 +329,26 @@ class ComponentBase extends Component {
     const dispatch = this.getDispatchWrapper();
 
     recordDebug(`modal access: ${type}`);
+
+    if (!stringIsNullOrWhiteSpace(type)) {
+      const l = split(type, '/');
+
+      if (l.length === 2) {
+        const modelName = l[0];
+
+        const ml = getModelNameList();
+
+        const modelNameList = split(ml, ',');
+
+        if (!inCollection(modelNameList, modelName)) {
+          recordInfo(`info current modelNameList: ${ml}`);
+
+          recordError(
+            `${modelName} not in modelNameList, please check model config`,
+          );
+        }
+      }
+    }
 
     return dispatch({ type, payload });
   };

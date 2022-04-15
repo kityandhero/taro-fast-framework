@@ -1,6 +1,7 @@
 import {
   getWeather,
   setLocationMode,
+  setModelNameList,
   setWeather,
 } from 'src/utils/globalStorageAssist';
 import { locateResult } from 'taro-fast-common/es/utils/constants';
@@ -213,6 +214,8 @@ export default {
         const { modelNameList } = payload;
 
         recordLog(`all models: ${modelNameList}`);
+
+        setModelNameList(modelNameList);
       }
 
       return {

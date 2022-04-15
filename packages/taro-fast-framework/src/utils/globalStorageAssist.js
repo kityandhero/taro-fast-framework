@@ -41,6 +41,7 @@ export const storageKeyCollection = {
   remoteCheck: 'remoteCheck',
   weather: 'weather',
   currentCustomer: 'currentCustomer',
+  modelNameList: 'modelNameList',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -960,6 +961,45 @@ export function setCurrentCustomer(data) {
  */
 export function removeCurrentCustomer() {
   const key = storageKeyCollection.currentCustomer;
+
+  removeLocalStorage(key);
+}
+
+/**
+ * 获取 modelNameList
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function getModelNameList() {
+  const key = storageKeyCollection.modelNameList;
+
+  return getStringFromLocalStorage(key);
+}
+
+/**
+ * 设置 modelNameList
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function setModelNameList(modelNameList) {
+  const key = storageKeyCollection.modelNameList;
+
+  return saveStringToLocalStorage(key, modelNameList || '');
+}
+
+/**
+ * 移除 modelNameList
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function removeModelNameList() {
+  const key = storageKeyCollection.modelNameList;
 
   removeLocalStorage(key);
 }
