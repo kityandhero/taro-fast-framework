@@ -8,6 +8,7 @@ import {
   recordError,
   recordText,
   showErrorMessage,
+  recordDebug,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { toLower } from 'taro-fast-common/es/utils/typeConvert';
@@ -143,6 +144,8 @@ export class Request {
           options: { header: headerChange },
         });
       }
+
+      recordDebug(`api request ${urlChange}`);
 
       return Request.request({
         ...{
