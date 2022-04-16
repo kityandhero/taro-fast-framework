@@ -1458,9 +1458,12 @@ class SupplementCore extends Common {
         'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
 
-      this.dispatchGetCustomerWrapper(data || {})
+      const that = this;
+
+      that
+        .dispatchGetCustomerWrapper(data || {})
         .then(() => {
-          const remoteData = this.getCustomerApiDataWrapper();
+          const remoteData = that.getCustomerApiDataWrapper();
 
           const { dataSuccess, data: metaData } = remoteData;
 
