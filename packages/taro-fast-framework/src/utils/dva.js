@@ -7,6 +7,7 @@ import {
   handleListDataAssist,
   handlePageListDataAssist,
 } from './requestAssistor';
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
 let app;
 let store;
@@ -45,6 +46,16 @@ export const reducerCommonCollection = {
   },
   handlePageListData(state, action) {
     return handlePageListDataAssist(state, action);
+  },
+};
+
+export const tacitlyState = {
+  data: {
+    code: defaultSettingsLayoutCustom.getApiSuccessCode(),
+    message: 'success',
+    data: {},
+    list: [],
+    extra: {},
   },
 };
 

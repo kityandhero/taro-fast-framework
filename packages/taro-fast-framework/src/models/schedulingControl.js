@@ -7,7 +7,7 @@ import {
 import { locateResult } from 'taro-fast-common/es/utils/constants';
 import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
-import { reducerCommonCollection } from '../utils/dva';
+import { reducerCommonCollection, tacitlyState } from '../utils/dva';
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 
 import {
@@ -25,23 +25,19 @@ export default {
   namespace: 'schedulingControl',
 
   state: {
-    initialLocationModeComplete: false,
-    appInitCustomVisible: false,
-    modelNameListVisible: false,
-    locationResult: {
-      locationGet: false,
-      locationAuth: locateResult.unknown,
+    ...{
+      initialLocationModeComplete: false,
+      appInitCustomVisible: false,
+      modelNameListVisible: false,
+      locationResult: {
+        locationGet: false,
+        locationAuth: locateResult.unknown,
+      },
+      signInResult: defaultSettingsLayoutCustom.getSignInUnknownFlag(),
+      ticketValidityProcessDetection: false,
+      signInProcessDetection: false,
     },
-    signInResult: defaultSettingsLayoutCustom.getSignInUnknownFlag(),
-    ticketValidityProcessDetection: false,
-    signInProcessDetection: false,
-    data: {
-      code: defaultSettingsLayoutCustom.getApiSuccessCode(),
-      message: 'success',
-      data: {},
-      list: [],
-      extra: {},
-    },
+    ...tacitlyState,
   },
 
   effects: {
