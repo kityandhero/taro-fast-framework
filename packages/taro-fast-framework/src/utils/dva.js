@@ -53,6 +53,7 @@ export const tacitlyState = {
   data: {
     code: defaultSettingsLayoutCustom.getApiSuccessCode(),
     message: 'success',
+    dataSuccess: true,
     data: {},
     list: [],
     extra: {},
