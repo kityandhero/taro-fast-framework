@@ -31,6 +31,7 @@ const defaultProps = {
   overlayText: '',
   loadingEffect: true,
   decoration: null,
+  errorImage: '',
 };
 
 class ImageBox extends BaseComponent {
@@ -128,6 +129,7 @@ class ImageBox extends BaseComponent {
       showOverlay: showOverlayValue,
       overlayText: overlayTextValue,
       loadingEffect: loadingEffectValue,
+      errorImage: errorImageSource,
     } = {
       ...this.props,
     };
@@ -224,7 +226,9 @@ class ImageBox extends BaseComponent {
                 ...borderRadiusDefaultStyle,
                 ...backgroundColor,
               }}
-              src={!loading && !loadSuccess ? errorImage : src}
+              src={
+                !loading && !loadSuccess ? errorImageSource || errorImage : src
+              }
               lazyLoad={lazyLoad || false}
               mode={imageMode || null}
               onLoad={() => {
@@ -247,7 +251,9 @@ class ImageBox extends BaseComponent {
         <View style={{ ...imageBoxStyleValue }}>
           <Image
             className={classNames(`${classPrefix}-pure`)}
-            src={!loading && !loadSuccess ? errorImage : src}
+            src={
+              !loading && !loadSuccess ? errorImageSource || errorImage : src
+            }
             lazyLoad={lazyLoad || false}
             mode="widthFix"
             onLoad={() => {
