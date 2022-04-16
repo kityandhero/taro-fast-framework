@@ -38,14 +38,32 @@ class ImageBox extends BaseComponent {
   constructor(props) {
     super(props);
 
+    const { src } = props;
+
     this.state = {
       ...this.state,
       ...{
+        srcFlag: src,
+        srcStage: src,
         hide: false,
         loading: true,
         loadSuccess: false,
       },
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { src: srcNext } = nextProps;
+    const { srcFlag: srcPrev } = prevState;
+
+    if (srcNext !== srcPrev) {
+      return {
+        srcFlag: srcNext,
+        srcStage: srcNext,
+      };
+    }
+
+    return {};
   }
 
   onImageLoadSuccess() {
@@ -56,18 +74,20 @@ class ImageBox extends BaseComponent {
   }
 
   onImageError() {
-    const { hideWhenLoadError } = this.props;
+    const { hideWhenLoadError, errorImage: errorImageSource } = this.props;
 
     if (hideWhenLoadError) {
       this.setState({
         hide: true,
         loading: false,
         loadSuccess: false,
+        srcStage: errorImageSource || errorImage,
       });
     } else {
       this.setState({
         loading: false,
         loadSuccess: false,
+        srcStage: errorImageSource || errorImage,
       });
     }
   }
@@ -117,7 +137,6 @@ class ImageBox extends BaseComponent {
   renderFurther() {
     const {
       lazyLoad,
-      src,
       padding,
       aspectRatio,
       imageBoxStyle,
@@ -133,6 +152,7 @@ class ImageBox extends BaseComponent {
     } = {
       ...this.props,
     };
+    const { srcStage } = this.state;
 
     const { hide, loading, loadSuccess } = this.state;
 
@@ -227,7 +247,9 @@ class ImageBox extends BaseComponent {
                 ...backgroundColor,
               }}
               src={
-                !loading && !loadSuccess ? errorImageSource || errorImage : src
+                !loading && !loadSuccess
+                  ? errorImageSource || errorImage
+                  : srcStage
               }
               lazyLoad={lazyLoad || false}
               mode={imageMode || null}
@@ -252,7 +274,9 @@ class ImageBox extends BaseComponent {
           <Image
             className={classNames(`${classPrefix}-pure`)}
             src={
-              !loading && !loadSuccess ? errorImageSource || errorImage : src
+              !loading && !loadSuccess
+                ? errorImageSource || errorImage
+                : srcStage
             }
             lazyLoad={lazyLoad || false}
             mode="widthFix"
