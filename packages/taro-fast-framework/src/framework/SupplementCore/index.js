@@ -1165,6 +1165,14 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromSignInApiDataWrapper',
+      );
+    }
+
     const { signInResult } = {
       ...{
         signInResult: verifySignInResult.fail,
@@ -1180,11 +1188,19 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromSignInSilentApiDataWrapper',
+      );
+    }
+
     const { signInResult } = {
       ...{
         signInResult: verifySignInResult.fail,
       },
-      ...this.parseSignInResultFromSignInApiData(remoteData),
+      ...this.parseSignInResultFromSignInSilentApiData(remoteData),
     };
 
     return signInResult;
@@ -1250,9 +1266,9 @@ class SupplementCore extends Common {
     if (
       !inCollection(
         [
-          verifySignInResult.unknown,
-          verifySignInResult.fail,
-          verifySignInResult.success,
+          toNumber(verifySignInResult.unknown),
+          toNumber(verifySignInResult.fail),
+          toNumber(verifySignInResult.success),
         ],
         v,
       )
@@ -1273,9 +1289,9 @@ class SupplementCore extends Common {
     if (
       !inCollection(
         [
-          verifySignInResult.unknown,
-          verifySignInResult.fail,
-          verifySignInResult.success,
+          toNumber(verifySignInResult.unknown),
+          toNumber(verifySignInResult.fail),
+          toNumber(verifySignInResult.success),
         ],
         v,
       )
