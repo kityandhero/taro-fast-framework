@@ -1,4 +1,7 @@
-import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
+import {
+  reducerCommonCollection,
+  tacitlyState,
+} from 'taro-fast-framework/es/utils/dva';
 
 import {
   signInData,
@@ -11,7 +14,9 @@ import {
 export default {
   namespace: 'entrance',
 
-  state: {},
+  state: {
+    ...tacitlyState,
+  },
 
   effects: {
     *signIn({ payload }, { call, put }) {

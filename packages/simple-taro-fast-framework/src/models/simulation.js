@@ -1,4 +1,7 @@
-import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
+import {
+  reducerCommonCollection,
+  tacitlyState,
+} from 'taro-fast-framework/es/utils/dva';
 
 import {
   pageListData,
@@ -13,7 +16,9 @@ import {
 export default {
   namespace: 'simulation',
 
-  state: {},
+  state: {
+    ...tacitlyState,
+  },
 
   effects: {
     *pageList({ payload }, { call, put }) {

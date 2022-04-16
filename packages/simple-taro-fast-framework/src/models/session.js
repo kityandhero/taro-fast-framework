@@ -1,11 +1,16 @@
-import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
+import {
+  reducerCommonCollection,
+  tacitlyState,
+} from 'taro-fast-framework/es/utils/dva';
 
 import { refreshSessionData } from '../services/session';
 
 export default {
   namespace: 'session',
 
-  state: {},
+  state: {
+    ...tacitlyState,
+  },
 
   effects: {
     *refreshSession({ payload }, { call, put }) {

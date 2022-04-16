@@ -1,6 +1,9 @@
 import { showInfoMessage } from 'taro-fast-common/es/utils/tools';
 import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
-import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
+import {
+  reducerCommonCollection,
+  tacitlyState,
+} from 'taro-fast-framework/es/utils/dva';
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
 
 import { getMetaDataCache, setMetaDataCache } from '@/utils/storageAssist';
@@ -17,6 +20,7 @@ export default {
       rankList: [],
       sectionList: [],
     },
+    ...tacitlyState,
   },
 
   effects: {

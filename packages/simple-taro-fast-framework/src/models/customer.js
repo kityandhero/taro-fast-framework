@@ -1,11 +1,16 @@
-import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
+import {
+  reducerCommonCollection,
+  tacitlyState,
+} from 'taro-fast-framework/es/utils/dva';
 
 import { getCustomerData } from '../services/customer';
 
 export default {
   namespace: 'customer',
 
-  state: {},
+  state: {
+    ...tacitlyState,
+  },
 
   effects: {
     *getCustomer({ payload }, { call, put }) {

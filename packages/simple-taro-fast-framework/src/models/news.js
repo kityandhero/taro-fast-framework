@@ -1,11 +1,16 @@
-import { reducerCommonCollection } from 'taro-fast-framework/es/utils/dva';
+import {
+  reducerCommonCollection,
+  tacitlyState,
+} from 'taro-fast-framework/es/utils/dva';
 
 import { getOverviewData } from '../services/news';
 
 export default {
   namespace: 'news',
 
-  state: {},
+  state: {
+    ...tacitlyState,
+  },
 
   effects: {
     *getOverview({ payload }, { call, put }) {
