@@ -12,7 +12,7 @@
     "changelog": "lerna version --conventional-commits --no-push --no-git-tag-version",
     "lerna": "lerna",
     "clean": "rimraf ./yarn-error.log && rimraf ./yarn.lock && rimraf ./package-lock.json && lerna clean -y",
-    "publish:f": "npm run build:all && npm run scz && lerna updated && lerna publish --yes",
+    "publish:f": "npm run scz && npm run build:all && lerna updated && lerna publish --yes",
     "publish:c": "npm run scz && lerna updated && lerna publish --yes",
     "publish:v": "lerna updated && lerna publish --yes",
     "publish:npm-cli-only": "cd packages/taro-fast-cli && npm publish",
