@@ -1127,9 +1127,9 @@ class SupplementCore extends Common {
       });
 
       if (dataSuccess) {
-        that.setSignInResultOnSignIn({
+        that.setSignInResultOnSignInSilent({
           signInResult:
-            that.parseSignInResultFromSignInApiDataWrapper(metaData),
+            that.parseSignInResultFromSignInSilentApiDataWrapper(metaData),
         });
 
         that.setTokenOnSignInSilent({
@@ -1137,7 +1137,7 @@ class SupplementCore extends Common {
         });
 
         that.setOpenIdOnSignInSilent({
-          openId: that.parseOpenIdFromSignInApiData(metaData),
+          openId: that.parseOpenIdFromSignInSilentApiData(metaData),
         });
 
         removeCurrentCustomer();
@@ -1178,7 +1178,21 @@ class SupplementCore extends Common {
     return signInResult;
   };
 
-  // eslint-disable-next-line no-unused-vars
+  parseSignInResultFromSignInSilentApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSignInResultFromSignInSilentApiDataWrapper');
+
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...this.parseSignInResultFromSignInApiData(remoteData),
+    };
+
+    return signInResult;
+  };
+
   parseSignInResultFromSignInApiData = (remoteData) => {
     recordInfo(
       'info built-in parseSignInResultFromSignInApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
@@ -1196,10 +1210,23 @@ class SupplementCore extends Common {
     return signInResult || verifySignInResult.fail;
   };
 
-  /**
-   * 将解析的 sign in result 进行本次存储, 该方法不应重载
-   * @param {*} remoteData
-   */
+  parseSignInResultFromSignInSilentApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSignInResultFromSignInSilentApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    const verifySignInResult = getVerifySignInResult();
+
+    const { signInResult } = {
+      ...{
+        signInResult: verifySignInResult.fail,
+      },
+      ...remoteData,
+    };
+
+    return signInResult || verifySignInResult.fail;
+  };
+
   setSignInResultOnSignIn = ({ signInResult }) => {
     recordDebug('exec setSignInResultOnSignIn');
     recordInfo(`info signInResult: ${signInResult}`);
@@ -1223,11 +1250,29 @@ class SupplementCore extends Common {
     this.setSignInResult({ data: v });
   };
 
-  /**
-   * 从接口数据中解析出sign in result
-   * @param {*} remoteData
-   */
-  // eslint-disable-next-line no-unused-vars
+  setSignInResultOnSignInSilent = ({ signInResult }) => {
+    recordDebug('exec setSignInResultOnSignInSilent');
+    recordInfo(`info signInResult: ${signInResult}`);
+
+    const v = toNumber(signInResult);
+    const verifySignInResult = getVerifySignInResult();
+
+    if (
+      !inCollection(
+        [
+          verifySignInResult.unknown,
+          verifySignInResult.fail,
+          verifySignInResult.success,
+        ],
+        v,
+      )
+    ) {
+      throw new Error(`signInResult not allow ${signInResult}.`);
+    }
+
+    this.setSignInResult({ data: v });
+  };
+
   parseTokenFromSignInApiData = (remoteData) => {
     recordInfo(
       'info built-in parseTokenFromSignInApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
