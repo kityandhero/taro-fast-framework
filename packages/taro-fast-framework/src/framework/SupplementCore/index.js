@@ -1202,6 +1202,7 @@ class SupplementCore extends Common {
    */
   setSignInResultOnSignIn = ({ signInResult }) => {
     recordDebug('exec setSignInResultOnSignIn');
+    recordInfo(`info signInResult: ${signInResult}`);
 
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
