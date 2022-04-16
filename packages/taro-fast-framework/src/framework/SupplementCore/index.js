@@ -1197,7 +1197,7 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
-    if (!inCollection(Object.keys(remoteData), 'signInResult')) {
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
       recordObject(remoteData);
 
       recordError(
@@ -1222,7 +1222,7 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
-    if (!inCollection(Object.keys(remoteData), 'signInResult')) {
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
       recordObject(remoteData);
 
       recordError(
@@ -1291,6 +1291,14 @@ class SupplementCore extends Common {
       'info built-in parseTokenFromSignInApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
+    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key token in parseTokenFromSignInApiData',
+      );
+    }
+
     const { token } = {
       ...{
         token: '',
@@ -1301,14 +1309,18 @@ class SupplementCore extends Common {
     return token || '';
   };
 
-  /**
-   * 从接口数据中解析出sign in result
-   * @param {*} remoteData
-   */
   parseTokenFromSignInSilentApiData = (remoteData) => {
     recordInfo(
       'info built-in parseTokenFromSignInSilentApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key token in parseTokenFromSignInSilentApiData',
+      );
+    }
 
     const { token } = {
       ...{
@@ -1344,14 +1356,18 @@ class SupplementCore extends Common {
     setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
   };
 
-  /**
-   * 从接口数据中解析出sign in result
-   * @param {*} remoteData
-   */
   parseOpenIdFromSignInApiData = (remoteData) => {
     recordInfo(
       'info built-in parseOpenIdFromSignInApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key openId in parseOpenIdFromSignInApiData',
+      );
+    }
 
     const { openId } = {
       ...{
@@ -1367,6 +1383,14 @@ class SupplementCore extends Common {
     recordInfo(
       'info built-in parseOpenIdFromSignInSilentApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key openId in parseOpenIdFromSignInSilentApiData',
+      );
+    }
 
     const { openId } = {
       ...{
@@ -1709,6 +1733,14 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromRegisterApiDataWrapper',
+      );
+    }
+
     const { signInResult } = {
       ...{
         signInResult: verifySignInResult.fail,
@@ -1723,6 +1755,14 @@ class SupplementCore extends Common {
     recordDebug('exec parseSignInResultFromRegisterWithWeChatApiDataWrapper');
 
     const verifySignInResult = getVerifySignInResult();
+
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromRegisterWithWeChatApiDataWrapper',
+      );
+    }
 
     const { signInResult } = {
       ...{
@@ -1741,6 +1781,14 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromRegisterApiData',
+      );
+    }
+
     const { signInResult } = {
       ...{
         signInResult: verifySignInResult.fail,
@@ -1757,6 +1805,14 @@ class SupplementCore extends Common {
     );
 
     const verifySignInResult = getVerifySignInResult();
+
+    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromRegisterWithWeChatApiData',
+      );
+    }
 
     const { signInResult } = {
       ...{
@@ -1817,6 +1873,14 @@ class SupplementCore extends Common {
       'info built-in parseTokenFromRegisterApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
+    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key token in parseTokenFromRegisterApiData',
+      );
+    }
+
     const { token } = {
       ...{
         token: '',
@@ -1831,6 +1895,14 @@ class SupplementCore extends Common {
     recordInfo(
       'info built-in parseTokenFromRegisterWithWeChatApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key token in parseTokenFromRegisterWithWeChatApiData',
+      );
+    }
 
     const { token } = {
       ...{
@@ -1867,6 +1939,14 @@ class SupplementCore extends Common {
       'info built-in parseOpenIdFromRegisterApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
+    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key openId in parseOpenIdFromRegisterApiData',
+      );
+    }
+
     const { openId } = {
       ...{
         openId: '',
@@ -1881,6 +1961,14 @@ class SupplementCore extends Common {
     recordInfo(
       'info built-in parseOpenIdFromRegisterWithWeChatApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
     );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key openId in parseOpenIdFromRegisterWithWeChatApiData',
+      );
+    }
 
     const { openId } = {
       ...{
