@@ -10,7 +10,6 @@ import {
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import { getStore } from '../../utils/dvaAssist';
-import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
@@ -80,25 +79,21 @@ class AppBase extends Component {
   loadRemoteMetaData = () => {};
 
   showStartupInfo = () => {
-    const showLogInConsole = defaultSettingsLayoutCustom.getShowLogInConsole();
+    const { dispatch } = this.store;
 
-    if (showLogInConsole) {
-      const { dispatch } = this.store;
+    dispatch({
+      type: 'schedulingControl/showAppInitCustom',
+      payload: {
+        config: appInitCustomObject,
+      },
+    });
 
-      dispatch({
-        type: 'schedulingControl/showAppInitCustom',
-        payload: {
-          config: appInitCustomObject,
-        },
-      });
-
-      dispatch({
-        type: 'schedulingControl/showModelNameList',
-        payload: {
-          modelNameList: modelNameList.join(),
-        },
-      });
-    }
+    dispatch({
+      type: 'schedulingControl/showModelNameList',
+      payload: {
+        modelNameList: modelNameList.join(),
+      },
+    });
   };
 
   // 在 App 类中的 render() 函数没有实际作用
