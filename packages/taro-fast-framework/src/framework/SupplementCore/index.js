@@ -1711,49 +1711,15 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterApiDataWrapper = (remoteData) => {
-    recordDebug('exec parseSignInResultFromRegisterApiDataWrapper');
+    recordDebug('exec parseSignInResultFromRegisterApiData');
 
-    const verifySignInResult = getVerifySignInResult();
-
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
-
-      recordError(
-        'params remoteData not exist key signInResult in parseSignInResultFromRegisterApiDataWrapper',
-      );
-    }
-
-    const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
-      ...this.parseSignInResultFromRegisterApiData(remoteData),
-    };
-
-    return signInResult;
+    return this.parseSignInResultFromRegisterApiData(remoteData);
   };
 
   parseSignInResultFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
-    recordDebug('exec parseSignInResultFromRegisterWithWeChatApiDataWrapper');
+    recordDebug('exec parseSignInResultFromRegisterWithWeChatApiData');
 
-    const verifySignInResult = getVerifySignInResult();
-
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
-
-      recordError(
-        'params remoteData not exist key signInResult in parseSignInResultFromRegisterWithWeChatApiDataWrapper',
-      );
-    }
-
-    const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
-      ...this.parseSignInResultFromRegisterWithWeChatApiData(remoteData),
-    };
-
-    return signInResult;
+    return this.parseSignInResultFromRegisterWithWeChatApiData(remoteData);
   };
 
   parseSignInResultFromRegisterApiData = (remoteData) => {
