@@ -1,7 +1,6 @@
 import {
   stringIsNullOrWhiteSpace,
   recordObject,
-  showRuntimeError,
   recordText,
   showErrorMessage,
   recordError,
@@ -9,6 +8,7 @@ import {
   hideNavigationBarLoading,
   stopPullDownRefresh,
   recordDebug,
+  recordInfo,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isUndefined,
@@ -24,20 +24,12 @@ import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
-  // 该方法必须重载覆盖
-  // eslint-disable-next-line no-unused-vars
   getApiData = (props) => {
-    const text = 'getApiData 方法需要重载实现';
+    recordInfo(
+      'info build-in getApiData modelName is schedulingControl, if you need custom logic,you need override it: getApiData = (props) => { return getApiDataCore({ props, modelName: "modelName" }) }',
+    );
 
-    showRuntimeError({
-      message: text,
-    });
-
-    return {
-      metaOriginalData: {
-        dataSuccess: false,
-      },
-    };
+    return getApiDataCore({ props, modelName: 'schedulingControl' });
   };
 
   /**

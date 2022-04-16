@@ -35,6 +35,13 @@ export default {
     signInResult: defaultSettingsLayoutCustom.getSignInUnknownFlag(),
     ticketValidityProcessDetection: false,
     signInProcessDetection: false,
+    data: {
+      code: defaultSettingsLayoutCustom.getApiSuccessCode(),
+      message: 'success',
+      data: {},
+      list: [],
+      extra: {},
+    },
   },
 
   effects: {
