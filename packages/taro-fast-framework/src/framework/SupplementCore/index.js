@@ -524,7 +524,6 @@ class SupplementCore extends Common {
     });
   }
 
-  // eslint-disable-next-line no-unused-vars
   dispatchCheckTicketValidity = (data = {}) => {
     if (this.verifyTicket) {
       throw new Error(
@@ -621,7 +620,6 @@ class SupplementCore extends Common {
 
   doWhenCheckTicketValidityVerifySignInFail = () => {};
 
-  // eslint-disable-next-line no-unused-vars
   dispatchRefreshSession = (data) => {
     if (this.verifySession) {
       throw new Error(
@@ -1018,7 +1016,6 @@ class SupplementCore extends Common {
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
   dispatchSignInSilent = (data = {}) => {
     if (this.verifyTicket) {
       throw new Error(
@@ -1200,6 +1197,14 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
+    if (!inCollection(Object.keys(remoteData), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromSignInApiData',
+      );
+    }
+
     const { signInResult } = {
       ...{
         signInResult: verifySignInResult.fail,
@@ -1216,6 +1221,14 @@ class SupplementCore extends Common {
     );
 
     const verifySignInResult = getVerifySignInResult();
+
+    if (!inCollection(Object.keys(remoteData), 'signInResult')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key signInResult in parseSignInResultFromSignInSilentApiData',
+      );
+    }
 
     const { signInResult } = {
       ...{
@@ -1292,7 +1305,6 @@ class SupplementCore extends Common {
    * 从接口数据中解析出sign in result
    * @param {*} remoteData
    */
-  // eslint-disable-next-line no-unused-vars
   parseTokenFromSignInSilentApiData = (remoteData) => {
     recordInfo(
       'info built-in parseTokenFromSignInSilentApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
@@ -1308,10 +1320,6 @@ class SupplementCore extends Common {
     return token || '';
   };
 
-  /**
-   * 将解析的token进行本次存储, 该方法不应重载
-   * @param {*} remoteData
-   */
   setTokenOnSignIn = ({ token }) => {
     recordDebug('exec setTokenOnSignIn');
 
@@ -1340,7 +1348,6 @@ class SupplementCore extends Common {
    * 从接口数据中解析出sign in result
    * @param {*} remoteData
    */
-  // eslint-disable-next-line no-unused-vars
   parseOpenIdFromSignInApiData = (remoteData) => {
     recordInfo(
       'info built-in parseOpenIdFromSignInApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
@@ -1356,11 +1363,6 @@ class SupplementCore extends Common {
     return openId || '';
   };
 
-  /**
-   * 从接口数据中解析出sign in result
-   * @param {*} remoteData
-   */
-  // eslint-disable-next-line no-unused-vars
   parseOpenIdFromSignInSilentApiData = (remoteData) => {
     recordInfo(
       'info built-in parseOpenIdFromSignInSilentApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
@@ -1376,10 +1378,6 @@ class SupplementCore extends Common {
     return openId || '';
   };
 
-  /**
-   * 将解析的openId进行本次存储, 该方法不应重载
-   * @param {*} remoteData
-   */
   setOpenIdOnSignIn = ({ openId }) => {
     recordDebug('exec setOpenIdOnSignIn');
 
