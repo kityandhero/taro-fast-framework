@@ -1161,49 +1161,15 @@ class SupplementCore extends Common {
   }
 
   parseSignInResultFromSignInApiDataWrapper = (remoteData) => {
-    recordDebug('exec parseSignInResultFromSignInApiDataWrapper');
+    recordDebug('exec parseSignInResultFromSignInApiData');
 
-    const verifySignInResult = getVerifySignInResult();
-
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
-
-      recordError(
-        'params remoteData not exist key signInResult in parseSignInResultFromSignInApiDataWrapper',
-      );
-    }
-
-    const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
-      ...this.parseSignInResultFromSignInApiData(remoteData),
-    };
-
-    return signInResult;
+    return this.parseSignInResultFromSignInApiData(remoteData);
   };
 
   parseSignInResultFromSignInSilentApiDataWrapper = (remoteData) => {
-    recordDebug('exec parseSignInResultFromSignInSilentApiDataWrapper');
+    recordDebug('exec parseSignInResultFromSignInSilentApiData');
 
-    const verifySignInResult = getVerifySignInResult();
-
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
-
-      recordError(
-        'params remoteData not exist key signInResult in parseSignInResultFromSignInSilentApiDataWrapper',
-      );
-    }
-
-    const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
-      ...this.parseSignInResultFromSignInSilentApiData(remoteData),
-    };
-
-    return signInResult;
+    return this.parseSignInResultFromSignInSilentApiData(remoteData);
   };
 
   parseSignInResultFromSignInApiData = (remoteData) => {
