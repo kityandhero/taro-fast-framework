@@ -1416,7 +1416,7 @@ class SupplementCore extends Common {
   };
 
   getCustomerApiDataWrapper = () => {
-    recordDebug('exec getCustomerApiDataWrapper');
+    recordDebug('exec getCustomerApiData');
 
     return this.getCustomerApiData();
   };
