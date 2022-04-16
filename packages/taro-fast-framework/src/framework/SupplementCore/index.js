@@ -1444,10 +1444,10 @@ class SupplementCore extends Common {
     if (!force) {
       if ((currentCustomer || null) == null) {
         force = true;
-      }
-
-      if (Object.keys(currentCustomer).length === 0) {
-        force = true;
+      } else {
+        if (Object.keys(currentCustomer).length === 0) {
+          force = true;
+        }
       }
     }
 
