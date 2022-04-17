@@ -414,11 +414,11 @@ export function removeSession() {
  * @returns
  */
 export function getSessionRefreshing() {
-  recordInfo('info getSessionRefreshing');
-
   const key = storageKeyCollection.sessionRefreshing;
 
   const v = getStringFromLocalStorage(key);
+
+  recordInfo(`info getSessionRefreshing: ${v === 'true'}`);
 
   return v === 'true';
 }
