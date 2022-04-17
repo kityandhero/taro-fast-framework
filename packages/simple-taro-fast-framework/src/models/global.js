@@ -11,10 +11,6 @@ export default {
 
   state: {
     ...(modelCollection || {}),
-    ...{
-      needSyncUserInfo: false,
-      globalQuery: { path: '', query: {}, scene: 0 },
-    },
     ...tacitlyState,
   },
 
