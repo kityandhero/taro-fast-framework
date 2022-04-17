@@ -49,6 +49,9 @@ export const reducerCommonCollection = {
   },
 };
 
+/**
+ * 初始化state
+ */
 export const tacitlyState = {
   data: {
     code: defaultSettingsLayoutCustom.getApiSuccessCode(),
