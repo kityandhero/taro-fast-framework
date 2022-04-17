@@ -580,6 +580,34 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     that.checkSession(() => {
+      that.getMetaData({
+        callback: () => {
+          if (!that.verifyTicket) {
+            that.checkTicketValidity({
+              callback: () => {
+                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+              },
+            });
+
+            if (that.loadRemoteRequestAfterMount) {
+              that.doLoadRemoteRequest();
+            }
+          } else {
+            that.checkTicketValidity({
+              callback: () => {
+                if (that.loadRemoteRequestAfterMount) {
+                  that.doLoadRemoteRequest();
+                }
+
+                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+              },
+            });
+          }
+        },
+      });
+    });
+
+    that.checkSession(() => {
       if (!that.verifyTicket) {
         that.checkTicketValidity({
           callback: () => {
@@ -681,6 +709,13 @@ export default class Infrastructure extends ComponentBase {
       }
     });
   }
+
+  // eslint-disable-next-line no-unused-vars
+  getMetaData = ({ data = {}, force: forceValue = false, callback = null }) => {
+    if (isFunction(callback)) {
+      callback();
+    }
+  };
 
   /**
    * 检测登录凭据
@@ -865,8 +900,6 @@ export default class Infrastructure extends ComponentBase {
       }
     });
   };
-
-  reloadRemoteMetaData = () => {};
 
   // eslint-disable-next-line no-unused-vars
   reverseGeocoder = ({ location, success, fail }) => {};

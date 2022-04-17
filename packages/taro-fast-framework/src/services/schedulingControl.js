@@ -1,9 +1,11 @@
 import {
   addMinute,
+  formatDatetime,
   getGuid,
   getNow,
   recordInfo,
 } from 'taro-fast-common/es/utils/tools';
+import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 
 import { getVerifySignInResult } from '../utils/tools';
 import { request } from '../utils/requestAssistor';
@@ -139,6 +141,26 @@ export async function registerData(params) {
 
   return request({
     api: `/schedulingControl/register`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: simulation,
+    },
+  });
+}
+
+export async function getMetaDataData(params) {
+  const simulation = {
+    time: formatDatetime(getNow, datetimeFormat.monthDayHourMinuteSecond),
+  };
+
+  recordInfo(
+    `info simulation meta data silent data: ${JSON.stringify(simulation)}`,
+  );
+
+  return request({
+    api: `/schedulingControl/getMetaData`,
     params,
     useVirtualRequest: true,
     virtualNeedAuthorize: false,

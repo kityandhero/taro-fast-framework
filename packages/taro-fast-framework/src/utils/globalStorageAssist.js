@@ -42,6 +42,7 @@ export const storageKeyCollection = {
   weather: 'weather',
   currentCustomer: 'currentCustomer',
   modelNameList: 'modelNameList',
+  metaData: 'metaData',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -1000,6 +1001,85 @@ export function setModelNameList(modelNameList) {
  */
 export function removeModelNameList() {
   const key = storageKeyCollection.modelNameList;
+
+  removeLocalStorage(key);
+}
+
+/**
+ * 获取元数据
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function getCurrentMetaData() {
+  recordDebug('exec getCurrentMetaData from local cache');
+
+  const key = storageKeyCollection.metaData;
+
+  const o = getJsonFromLocalStorage(key);
+
+  if ((o || null) == null) {
+    return null;
+  }
+
+  const { dataVersion } = o;
+
+  if ((dataVersion || null) == null) {
+    return null;
+  }
+
+  // 信息有效期30分钟
+  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+
+  if (dataVersion !== now) {
+    recordWarn('info meta data cache expired, will return null');
+
+    return null;
+  }
+
+  const { data } = {
+    ...{
+      data: null,
+    },
+    ...o,
+  };
+
+  return data || null;
+}
+
+/**
+ * 设置元数据
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function setCurrentMetaData(data) {
+  recordDebug('exec setMetaData to local cache');
+
+  const key = storageKeyCollection.metaData;
+
+  // 信息有效期30分钟
+  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+
+  const o = {
+    data,
+    dataVersion: nowVersion,
+  };
+
+  return saveJsonToLocalStorage(key, o);
+}
+
+/**
+ * 移除元数据
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function removeCurrentMetaData() {
+  const key = storageKeyCollection.metaData;
 
   removeLocalStorage(key);
 }

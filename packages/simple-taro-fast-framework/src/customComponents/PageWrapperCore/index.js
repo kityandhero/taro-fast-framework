@@ -33,13 +33,6 @@ export default class PageWrapper extends AuthorizationWrapper {
     return global;
   };
 
-  reloadRemoteMetaData = () => {
-    this.dispatchApi({
-      type: 'global/getMetaData',
-      payload: { force: true },
-    });
-  };
-
   /**
    * 登录校验失败时候的回调, 例如访问需要登录才能调用的接口
    * @returns

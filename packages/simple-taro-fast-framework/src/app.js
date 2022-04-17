@@ -41,15 +41,6 @@ class App extends AppBase {
   componentDidHide() {}
 
   componentDidCatchError() {}
-
-  loadRemoteMetaData = () => {
-    const { dispatch } = this.store;
-
-    dispatch({
-      type: 'global/getMetaData',
-      payload: { force: true },
-    });
-  };
 }
 
 export default App;

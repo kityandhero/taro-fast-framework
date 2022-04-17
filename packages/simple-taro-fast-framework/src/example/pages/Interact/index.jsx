@@ -129,12 +129,6 @@ export default class Index extends ContentPageBase {
             })}
 
             {buildButton({
-              inner: 'reloadRemoteMetaData',
-              loadingMode: 'overlay',
-              onClick: this.reloadRemoteMetaData,
-            })}
-
-            {buildButton({
               inner: 'showRemoteMetaDataInConsole',
               loadingMode: 'overlay',
               onClick: this.showRemoteMetaDataInConsole,

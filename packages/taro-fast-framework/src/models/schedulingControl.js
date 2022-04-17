@@ -15,6 +15,7 @@ import {
   checkTicketValidityData,
   exchangePhoneData,
   signInSilentData,
+  getMetaDataData,
   getCustomerData,
   getWeatherData,
   registerWithWeChatData,
@@ -67,6 +68,14 @@ export default {
     },
     *signInSilent({ payload }, { call, put }) {
       const response = yield call(signInSilentData, payload);
+
+      yield put({
+        type: 'handleCommonData',
+        payload: response,
+      });
+    },
+    *getMetaData({ payload }, { call, put }) {
+      const response = yield call(getMetaDataData, payload);
 
       yield put({
         type: 'handleCommonData',

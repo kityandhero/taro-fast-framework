@@ -44,11 +44,6 @@ class AppBase extends Component {
     recordObject({
       appInitConfig: getAppInitConfigData(),
     });
-
-    //延迟执行, 避免配置未合并完成前调用
-    setTimeout(() => {
-      this.loadRemoteMetaData();
-    }, 200);
   }
 
   setAppInitCustomLocal(config) {
@@ -75,8 +70,6 @@ class AppBase extends Component {
       });
     }
   };
-
-  loadRemoteMetaData = () => {};
 
   showStartupInfo = () => {
     const { dispatch } = this.store;

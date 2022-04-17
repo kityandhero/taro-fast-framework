@@ -51,6 +51,8 @@ import {
   getCurrentCustomer,
   setCurrentCustomer,
   removeCurrentCustomer,
+  getCurrentMetaData,
+  setCurrentMetaData,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import { getApiDataCore } from '../../utils/actionAssist';
@@ -1960,6 +1962,95 @@ class SupplementCore extends Common {
     recordInfo(
       'info doAfterRegister do nothing,if you need,you can override it: doAfterRegister = (data) => {}',
     );
+  };
+
+  dispatchGetMetaDataWrapper = (data = {}) => {
+    recordDebug('exec dispatchGetMetaDataWrapper');
+
+    return this.dispatchGetMetaData(data);
+  };
+
+  dispatchGetMetaData = (data = {}) => {
+    recordInfo(
+      'info built-in dispatchGetMetaData is a simulation,if you need actual business,you need override it: dispatchGetMetaData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
+    );
+
+    return this.dispatchApi({
+      type: 'schedulingControl/getMetaData',
+      payload: data,
+    });
+  };
+
+  getMetaDataApiDataWrapper = () => {
+    recordDebug('exec getMetaDataApiData');
+
+    return this.getMetaDataApiData();
+  };
+
+  getMetaDataApiData = () => {
+    recordInfo(
+      'info built-in getMetaDataApiData is a simulation,if you need actual business,you need override it: getMetaDataApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+    );
+
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+
+    return data;
+  };
+
+  getMetaData = ({ data = {}, force: forceValue = false, callback = null }) => {
+    recordDebug('exec getMetaData');
+
+    let force = forceValue;
+
+    const metaData = getCurrentMetaData();
+
+    if (!force) {
+      if ((metaData || null) == null) {
+        force = true;
+      } else {
+        if (Object.keys(metaData).length === 0) {
+          force = true;
+        }
+      }
+    }
+
+    if (!force) {
+      recordInfo('info getMetaData from local cache success');
+
+      if (isFunction(callback)) {
+        callback(metaData);
+      }
+    } else {
+      recordInfo(
+        'info getMetaData from local cache fail or force api request, shift to get from api dispatch',
+      );
+
+      const that = this;
+
+      that
+        .dispatchGetMetaDataWrapper(data || {})
+        .then(() => {
+          const remoteData = that.getMetaDataApiDataWrapper();
+
+          const { dataSuccess, data: v } = remoteData;
+
+          if (dataSuccess) {
+            setCurrentMetaData(v);
+
+            if (isFunction(callback)) {
+              callback(v);
+            }
+
+            that.increaseCounter();
+          }
+        })
+        .catch((error) => {
+          recordError(error);
+        });
+    }
   };
 }
 
