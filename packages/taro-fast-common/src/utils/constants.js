@@ -133,6 +133,7 @@ export const appInitDefault = {
   signInSuccessFlag: verifySignInResult.success,
   signInFailFlag: verifySignInResult.fail,
   signInUnknownFlag: verifySignInResult.unknown,
+  defaultMetaData: {},
 };
 
 /**

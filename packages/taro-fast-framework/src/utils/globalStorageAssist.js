@@ -1029,15 +1029,6 @@ export function getCurrentMetaData() {
     return null;
   }
 
-  // 信息有效期30分钟
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
-
-  if (dataVersion !== now) {
-    recordWarn('info meta data cache expired, will return null');
-
-    return null;
-  }
-
   const { data } = {
     ...{
       data: null,

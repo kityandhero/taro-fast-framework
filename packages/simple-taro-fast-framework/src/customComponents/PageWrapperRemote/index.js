@@ -62,6 +62,22 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return data;
   };
 
+  dispatchGetMetaData = (data) => {
+    return this.dispatchApi({
+      type: 'global/getMetaData',
+      payload: data,
+    });
+  };
+
+  getMetaDataApiData = () => {
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'global',
+    });
+
+    return data;
+  };
+
   dispatchCheckTicketValidity = (data) => {
     return this.dispatchApi({
       type: 'entrance/checkTicketValidity',

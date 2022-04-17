@@ -116,6 +116,16 @@ export const defaultSettingsLayoutCustom = {
 
     return tokenAnonymous || 'anonymous';
   },
+  getDefaultMetaData: () => {
+    const appInit = getAppInitConfigData();
+
+    const { defaultMetaData } = {
+      ...{ defaultMetaData: {} },
+      ...(appInit || {}),
+    };
+
+    return defaultMetaData || {};
+  },
   getApiSuccessCode: () => {
     const appInit = getAppInitConfigData();
 

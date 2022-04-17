@@ -2000,8 +2000,12 @@ class SupplementCore extends Common {
     return data;
   };
 
-  getMetaData = ({ data = {}, force: forceValue = false, callback = null }) => {
-    recordDebug('exec getMetaData');
+  initMetaData = ({
+    data = {},
+    force: forceValue = false,
+    callback = null,
+  }) => {
+    recordDebug('exec initMetaData');
 
     let force = forceValue;
 
@@ -2018,14 +2022,14 @@ class SupplementCore extends Common {
     }
 
     if (!force) {
-      recordInfo('info getMetaData from local cache success');
+      recordInfo('info check meta data from local cache success');
 
       if (isFunction(callback)) {
         callback(metaData);
       }
     } else {
       recordInfo(
-        'info getMetaData from local cache fail or force api request, shift to get from api dispatch',
+        'info check meta data from local cache fail or force api request, shift to get from api dispatch',
       );
 
       const that = this;
@@ -2051,6 +2055,13 @@ class SupplementCore extends Common {
           recordError(error);
         });
     }
+  };
+
+  getMetaData = () => {
+    return {
+      ...defaultSettingsLayoutCustom.getDefaultMetaData(),
+      ...(getCurrentMetaData() || {}),
+    };
   };
 }
 

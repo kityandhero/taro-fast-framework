@@ -42,6 +42,8 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends ChannelPageBase {
+  initMetaDataForce = true;
+
   buildData = () => {
     return o;
   };

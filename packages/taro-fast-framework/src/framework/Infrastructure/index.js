@@ -308,6 +308,10 @@ export default class Infrastructure extends ComponentBase {
    */
   verifyTicketValidity = false;
 
+  initMetaDataForce = false;
+
+  initMetaDataRequestData = {};
+
   constructor(props) {
     super(props);
 
@@ -580,7 +584,9 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     that.checkSession(() => {
-      that.getMetaData({
+      that.initMetaData({
+        data: that.initMetaDataRequestData || {},
+        force: !!that.initMetaDataForce,
         callback: () => {
           if (!that.verifyTicket) {
             that.checkTicketValidity({
@@ -710,8 +716,13 @@ export default class Infrastructure extends ComponentBase {
     });
   }
 
-  // eslint-disable-next-line no-unused-vars
-  getMetaData = ({ data = {}, force: forceValue = false, callback = null }) => {
+  initMetaData = ({
+    // eslint-disable-next-line no-unused-vars
+    data = {},
+    // eslint-disable-next-line no-unused-vars
+    force: forceValue = false,
+    callback = null,
+  }) => {
     if (isFunction(callback)) {
       callback();
     }
