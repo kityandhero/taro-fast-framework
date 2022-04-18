@@ -374,10 +374,6 @@ export default class Infrastructure extends ComponentBase {
     return Taro.setNavigationBarTitle(params);
   };
 
-  getUpdateManager = () => {
-    return Taro.getUpdateManager();
-  };
-
   showModal = (params) => {
     return Taro.showModal(params);
   };

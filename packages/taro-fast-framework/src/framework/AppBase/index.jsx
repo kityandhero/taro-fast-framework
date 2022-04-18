@@ -8,6 +8,7 @@ import {
   setTaroGlobalData,
   canIUse,
   clearLocalStorage,
+  getUpdateManager,
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -95,7 +96,7 @@ class AppBase extends Component {
 
   checkUpdateVersion = () => {
     if (canIUse('getUpdateManager')) {
-      const updateManager = this.getUpdateManager();
+      const updateManager = getUpdateManager();
 
       const that = this;
 

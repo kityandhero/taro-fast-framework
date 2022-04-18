@@ -61,6 +61,7 @@ import {
   getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
   getCurrentInstance as getCurrentInstanceCore,
   canIUse as canIUseCore,
+  getUpdateManager as getUpdateManagerCore,
 } from '@tarojs/taro';
 
 import {
@@ -190,6 +191,10 @@ export function getCurrentInstance() {
 
 export function canIUse(params) {
   return canIUseCore(params);
+}
+
+export function getUpdateManager(params) {
+  return getUpdateManagerCore(params);
 }
 
 export function stopPullDownRefresh() {
