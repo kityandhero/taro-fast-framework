@@ -1799,7 +1799,9 @@ class SupplementCore extends Common {
 
         if (dataSuccess) {
           const sessionEffective =
-            that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
+            that.parseSessionEffectiveFromRegisterWithWeChatApiDataWrapper(
+              metaData,
+            );
 
           if (!sessionEffective) {
             that.refreshSession({
@@ -1844,6 +1846,39 @@ class SupplementCore extends Common {
       });
   };
 
+  parseSessionEffectiveFromRegisterApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSessionEffectiveFromRegisterApiData');
+
+    return this.parseSessionEffectiveFromRegisterApiData(remoteData);
+  };
+
+  parseSessionEffectiveFromRegisterApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSessionEffectiveFromRegisterApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterApiData',
+      );
+
+      throw new Error(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterApiData',
+      );
+    }
+
+    const { sessionEffective } = {
+      ...{
+        sessionEffective: true,
+      },
+      ...remoteData,
+    };
+
+    return sessionEffective || false;
+  };
+
   dispatchRegister = (data = {}) => {
     recordInfo(
       'info built-in dispatchRegister is a simulation,if you need actual business,you need override it: dispatchRegister = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
@@ -1877,6 +1912,19 @@ class SupplementCore extends Common {
         const { dataSuccess, data: metaData } = remoteData;
 
         if (dataSuccess) {
+          const sessionEffective =
+            that.parseSessionEffectiveFromRegisterApiDataWrapper(metaData);
+
+          if (!sessionEffective) {
+            that.refreshSession({
+              callback: () => {
+                that.signInCore({ data, callback });
+              },
+            });
+
+            return;
+          }
+
           removeCurrentCustomer();
 
           that.setSignInResultOnRegister({
