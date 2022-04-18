@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-component-extra",
-  "version": "2.0.56",
+  "version": "2.0.57",
   "private": false,
   "description": "taro-fast-component-extra",
   "keywords": [
@@ -34,8 +34,8 @@
     "dayjs": "^1.11.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "taro-fast-common": "^1.0.46",
-    "taro-fast-component": "^2.0.58"
+    "taro-fast-common": "^1.0.47",
+    "taro-fast-component": "^2.0.59"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
