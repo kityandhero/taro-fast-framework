@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.0.8](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-rollup@1.0.7...taro-fast-rollup@1.0.8) (2022-04-18)
+
+**Note:** Version bump only for package taro-fast-rollup
+
+
+
+
+
 ### [1.0.7](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-rollup@1.0.6...taro-fast-rollup@1.0.7) (2022-04-15)
 
 **Note:** Version bump only for package taro-fast-rollup
