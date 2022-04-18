@@ -32,8 +32,8 @@
     "@tarojs/runtime": "3.4.6",
     "@tarojs/taro": "3.4.6",
     "dayjs": "^1.11.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
