@@ -60,30 +60,21 @@ function dataExceptionNotice(d) {
   if (code !== c.code) {
     if ((messageText || '') !== '') {
       const currentTime = new Date().getTime();
-      if (code === lastCustomMessage.code) {
-        if (currentTime - lastCustomMessage.time > 800) {
-          showErrorMessage({
-            message: messageText,
-          });
 
-          taroGlobalData.lastCustomMessage = {
-            code,
-            message: messageText,
-            time: currentTime,
-          };
-        }
-      } else {
-        if (code !== authenticationFailCode) {
-          showErrorMessage({
-            message: messageText,
-          });
-        }
+      if (code !== authenticationFailCode) {
+        if (code === lastCustomMessage.code) {
+          if (currentTime - lastCustomMessage.time > 800) {
+            showErrorMessage({
+              message: messageText,
+            });
 
-        taroGlobalData.lastCustomMessage = {
-          code,
-          message: messageText,
-          time: currentTime,
-        };
+            taroGlobalData.lastCustomMessage = {
+              code,
+              message: messageText,
+              time: currentTime,
+            };
+          }
+        }
       }
     }
 

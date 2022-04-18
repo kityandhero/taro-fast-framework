@@ -114,6 +114,7 @@ export const appInitDefault = {
   leftBarLogo: emptyLogo,
   apiSuccessCode,
   authenticationFailCode,
+  navigationToSignInWhenSignInSilentFail: false,
   signInPath: '/user/login',
   useLocation: false,
   mapKey: '',

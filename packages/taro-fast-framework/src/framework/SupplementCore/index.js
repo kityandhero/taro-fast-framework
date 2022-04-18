@@ -11,6 +11,8 @@ import {
   recordError,
   recordDebug,
   recordInfo,
+  stringIsNullOrWhiteSpace,
+  redirectTo,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -1115,7 +1117,7 @@ class SupplementCore extends Common {
           message: '登录失败',
         });
 
-        that.doWhenSignInFail();
+        that.doWhenSignInFailWrapper();
       }
     });
   }
@@ -1183,7 +1185,7 @@ class SupplementCore extends Common {
           message: '静默登录失败',
         });
 
-        that.doWhenSignInSilentFail();
+        that.doWhenSignInSilentFailWrapper();
       }
     });
   }
@@ -1525,12 +1527,39 @@ class SupplementCore extends Common {
   };
 
   /**
+   * 静默登录失败时的业务逻辑, 需要重载
+   */
+  doWhenSignInFailWrapper = () => {
+    recordDebug('exec doWhenSignInFail');
+
+    this.doWhenSignInFail();
+  };
+
+  /**
    * 账户登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFail = () => {
     recordInfo(
       'info doWhenSignInFail do nothing,if you need,you can override it: doWhenSignInFail = () => {}',
     );
+  };
+
+  doWhenSignInSilentFailWrapper = () => {
+    recordDebug('exec doWhenSignInSilentFail');
+
+    this.doWhenSignInSilentFail();
+
+    if (
+      defaultSettingsLayoutCustom.getNavigationToSignInWhenSignInSilentFail()
+    ) {
+      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+
+      if (stringIsNullOrWhiteSpace(signInPath)) {
+        throw new Error('缺少登录页面路径配置');
+      }
+
+      redirectTo(signInPath);
+    }
   };
 
   /**

@@ -126,6 +126,16 @@ export const defaultSettingsLayoutCustom = {
 
     return defaultMetaData || {};
   },
+  getNavigationToSignInWhenSignInSilentFail: () => {
+    const appInit = getAppInitConfigData();
+
+    const { navigationToSignInWhenSignInSilentFail } = {
+      ...{ navigationToSignInWhenSignInSilentFail: false },
+      ...(appInit || {}),
+    };
+
+    return navigationToSignInWhenSignInSilentFail || false;
+  },
   getApiSuccessCode: () => {
     const appInit = getAppInitConfigData();
 
