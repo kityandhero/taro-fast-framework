@@ -1572,22 +1572,24 @@ class SupplementCore extends Common {
   exchangePhone = ({ data, callback = null }) => {
     const that = this;
 
-    that
-      .dispatchExchangePhone(data)
-      .then(() => {
-        const remoteData = that.getExchangePhoneApiData();
+    that.checkSession(() => {
+      that
+        .dispatchExchangePhone(data)
+        .then(() => {
+          const remoteData = that.getExchangePhoneApiData();
 
-        const { dataSuccess, data: metaData } = remoteData;
+          const { dataSuccess, data: metaData } = remoteData;
 
-        if (dataSuccess) {
-          if (isFunction(callback)) {
-            callback(metaData);
+          if (dataSuccess) {
+            if (isFunction(callback)) {
+              callback(metaData);
+            }
           }
-        }
-      })
-      .catch((error) => {
-        recordError(error);
-      });
+        })
+        .catch((error) => {
+          recordError(error);
+        });
+    });
   };
 
   dispatchRegisterWithWeChat = (data = {}) => {

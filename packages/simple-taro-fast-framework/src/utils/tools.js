@@ -13,8 +13,15 @@ import {
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import { Divider } from 'taro-fast-component/es/customComponents';
 import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
+import {
+  removeCurrentCustomer,
+  removeOpenId,
+  removeSession,
+  removeToken,
+} from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import QQMapWX from '../libs/qqmap-wx-jssdk.min';
+import { removeMetaDataCache } from './storageAssist';
 
 /**
  * 获取本地数据
@@ -271,4 +278,12 @@ export default class Index extends AuthorizationWrapper {${buildProperties({
       <PrismCode canCopy code={code} language="jsx" />
     </>
   );
+}
+
+export function clearLocalDataWhenSimulationModeChanged() {
+  removeMetaDataCache();
+  removeSession();
+  removeOpenId();
+  removeToken();
+  removeCurrentCustomer();
 }

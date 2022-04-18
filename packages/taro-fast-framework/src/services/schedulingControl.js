@@ -82,9 +82,11 @@ export async function signInSilentData(params) {
   const verifySignInResult = getVerifySignInResult();
 
   const simulation = {
-    signInResult: verifySignInResult.fail,
-    token: '',
-    openId: '',
+    signInResult: verifySignInResult.success,
+    token: getGuid(),
+    openId: getGuid(),
+    sessionEffective: true,
+    needSyncInfo: false,
   };
 
   recordInfo(
@@ -109,6 +111,8 @@ export async function registerWithWeChatData(params) {
     signInResult: verifySignInResult.success,
     token: getGuid(),
     openId: getGuid(),
+    sessionEffective: true,
+    needSyncInfo: false,
   };
 
   recordInfo(
@@ -133,6 +137,8 @@ export async function registerData(params) {
     signInResult: verifySignInResult.success,
     token: getGuid(),
     openId: getGuid(),
+    sessionEffective: true,
+    needSyncInfo: false,
   };
 
   recordInfo(

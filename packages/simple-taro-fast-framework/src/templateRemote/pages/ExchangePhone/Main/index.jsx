@@ -1,7 +1,16 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { Space } from 'taro-fast-component/es/customComponents';
+import {
+  showErrorMessage,
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
+import {
+  Space,
+  CenterBox,
+  Button,
+} from 'taro-fast-component/es/customComponents';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
@@ -51,15 +60,29 @@ export default class Index extends BasePageWrapper {
     return getApiDataCore({ props, modelName: 'entrance' });
   };
 
-  doWorkAdjustDidMount = () => {
-    this.buildPhoneData();
-  };
+  triggerPhoneNumber = (e) => {
+    const {
+      detail: { encryptedData, iv, errMsg },
+    } = e;
 
-  buildPhoneData = () => {
     const that = this;
 
+    if (
+      stringIsNullOrWhiteSpace(encryptedData) ||
+      stringIsNullOrWhiteSpace(iv)
+    ) {
+      showErrorMessage({
+        message: errMsg,
+      });
+
+      return;
+    }
+
     that.exchangePhone({
-      data: {},
+      data: {
+        encryptedData,
+        iv,
+      },
       callback: (o) => {
         const { key } = o;
 
@@ -82,7 +105,30 @@ export default class Index extends BasePageWrapper {
           innerBoxCenterMode
           innerBoxPadding
         >
-          <View>phone key: {keyPhone || '请求中, 请稍后'}</View>
+          <View
+            style={{
+              padding: `${transformSize(20)} 0`,
+            }}
+          >
+            <Space direction="vertical" fillWidth size={30}>
+              <CenterBox>
+                <View>phone key: {keyPhone || '请先点击按钮'}</View>
+              </CenterBox>
+
+              <Button
+                weappButton
+                text="点击获取"
+                backgroundColor="#f5050e"
+                fontSize={32}
+                openType="getPhoneNumber"
+                block
+                circle
+                size="middle"
+                shape="rounded"
+                onGetPhoneNumber={this.triggerPhoneNumber}
+              />
+            </Space>
+          </View>
         </SimpleBox>
 
         <CodePageBox
@@ -92,14 +138,18 @@ export default class Index extends BasePageWrapper {
             getApiData: `(props) => {
               return getApiDataCore({ props, modelName: 'entrance' });
             }`,
-            doWorkAdjustDidMount: `() => {
-              this.buildPhoneData();
-            }`,
-            buildPhoneData: `() => {
+            triggerPhoneNumber: `(e) => {
+              const {
+                detail: { encryptedData, iv },
+              } = e;
+
               const that = this;
 
               that.exchangePhone({
-                data: {},
+                data: {
+                  encryptedData,
+                  iv,
+                },
                 callback: (o) => {
                   const { key } = o;
 

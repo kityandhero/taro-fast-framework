@@ -1,11 +1,6 @@
-import { clearLocalStorage } from 'taro-fast-common/es/utils/tools';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
-import {
-  removeOpenId,
-  removeSession,
-  removeToken,
-} from 'taro-fast-framework/es/utils/globalStorageAssist';
 
+import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
 import {
   getSimulationMode,
   setSimulationMode,
@@ -23,16 +18,14 @@ export default class PageWrapperSimulation extends PageWrapperCore {
         data: verifySignInResult.unknown,
       });
 
-      clearLocalStorage();
+      clearLocalDataWhenSimulationModeChanged();
     }
 
     setSimulationMode(true);
   };
 
   initializeInternalData = () => {
-    removeSession();
-    removeOpenId();
-    removeToken();
+    clearLocalDataWhenSimulationModeChanged();
   };
 
   adjustInternalDataOnRepeatedShow = () => {
