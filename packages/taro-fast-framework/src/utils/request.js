@@ -56,7 +56,7 @@ export class Request {
         throw new Error('缺少登录页面路径配置');
       }
 
-      Tips.toast('跳转登录页面');
+      // Tips.toast('跳转登录页面');
     }
 
     return response.data;
