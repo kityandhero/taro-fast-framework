@@ -60,6 +60,7 @@ import {
   pageScrollTo as pageScrollToCore,
   getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
   getCurrentInstance as getCurrentInstanceCore,
+  canIUse as canIUseCore,
 } from '@tarojs/taro';
 
 import {
@@ -185,6 +186,10 @@ export function hideNavigationBarLoading() {
 
 export function getCurrentInstance() {
   return getCurrentInstanceCore();
+}
+
+export function canIUse(params) {
+  return canIUseCore(params);
 }
 
 export function stopPullDownRefresh() {
@@ -853,8 +858,50 @@ export function getDayOfWeek({ data: date }) {
   return dayjs(date).day();
 }
 
-export function getNowDayOfWeek() {
-  return dayjs().day();
+export function getNowDayOfWeek(transferChinese = true) {
+  const day = dayjs().day();
+
+  if (!transferChinese) {
+    return day;
+  }
+
+  let result = '';
+
+  switch (toNumber(day)) {
+    case 0:
+      result = '日';
+      break;
+
+    case 1:
+      result = '一';
+      break;
+
+    case 2:
+      result = '二';
+      break;
+
+    case 3:
+      result = '三';
+      break;
+
+    case 4:
+      result = '四';
+      break;
+
+    case 5:
+      result = '五';
+      break;
+
+    case 6:
+      result = '六';
+      break;
+
+    default:
+      result = '';
+      break;
+  }
+
+  return stringIsNullOrWhiteSpace(result) ? '' : `星期${result}`;
 }
 
 export function formatTarget({ target, format, option = {} }) {
