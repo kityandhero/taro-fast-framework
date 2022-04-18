@@ -1071,6 +1071,19 @@ class SupplementCore extends Common {
       });
 
       if (dataSuccess) {
+        const sessionEffective =
+          that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
+
+        if (!sessionEffective) {
+          that.refreshSession({
+            callback: () => {
+              that.signInCore({ data, callback });
+            },
+          });
+
+          return;
+        }
+
         that.setSignInResultOnSignIn({
           signInResult:
             that.parseSignInResultFromSignInApiDataWrapper(metaData),
@@ -1126,6 +1139,19 @@ class SupplementCore extends Common {
       });
 
       if (dataSuccess) {
+        const sessionEffective =
+          that.parseSessionEffectiveFromSignInSilentApiDataWrapper(metaData);
+
+        if (!sessionEffective) {
+          that.refreshSession({
+            callback: () => {
+              that.signInSilentCore({ data, callback });
+            },
+          });
+
+          return;
+        }
+
         that.setSignInResultOnSignInSilent({
           signInResult:
             that.parseSignInResultFromSignInSilentApiDataWrapper(metaData),
@@ -1161,6 +1187,72 @@ class SupplementCore extends Common {
       }
     });
   }
+
+  parseSessionEffectiveFromSignInApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSessionEffectiveFromSignInApiData');
+
+    return this.parseSessionEffectiveFromSignInApiData(remoteData);
+  };
+
+  parseSessionEffectiveFromSignInSilentApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSessionEffectiveFromSignInSilentApiData');
+
+    return this.parseSessionEffectiveFromSignInSilentApiData(remoteData);
+  };
+
+  parseSessionEffectiveFromSignInApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSessionEffectiveFromSignInApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInApiData',
+      );
+
+      throw new Error(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInApiData',
+      );
+    }
+
+    const { sessionEffective } = {
+      ...{
+        sessionEffective: true,
+      },
+      ...remoteData,
+    };
+
+    return sessionEffective || false;
+  };
+
+  parseSessionEffectiveFromSignInSilentApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSessionEffectiveFromSignInSilentApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInSilentApiData',
+      );
+
+      throw new Error(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInSilentApiData',
+      );
+    }
+
+    const { sessionEffective } = {
+      ...{
+        sessionEffective: true,
+      },
+      ...remoteData,
+    };
+
+    return sessionEffective || false;
+  };
 
   parseSignInResultFromSignInApiDataWrapper = (remoteData) => {
     recordDebug('exec parseSignInResultFromSignInApiData');
@@ -1551,6 +1643,39 @@ class SupplementCore extends Common {
     );
   };
 
+  parseSessionEffectiveFromExchangePhoneApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSessionEffectiveFromExchangePhoneApiData');
+
+    return this.parseSessionEffectiveFromExchangePhoneApiData(remoteData);
+  };
+
+  parseSessionEffectiveFromExchangePhoneApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSessionEffectiveFromExchangePhoneApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromExchangePhoneApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromExchangePhoneApiData',
+      );
+
+      throw new Error(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromExchangePhoneApiData',
+      );
+    }
+
+    const { sessionEffective } = {
+      ...{
+        sessionEffective: true,
+      },
+      ...remoteData,
+    };
+
+    return sessionEffective || false;
+  };
+
   dispatchExchangePhone = (data = {}) => {
     recordInfo(
       'info built-in dispatchExchangePhone is a simulation,if you need actual business,you need override it: dispatchExchangePhone = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
@@ -1581,6 +1706,21 @@ class SupplementCore extends Common {
           const { dataSuccess, data: metaData } = remoteData;
 
           if (dataSuccess) {
+            const sessionEffective =
+              that.parseSessionEffectiveFromSignInSilentApiDataWrapper(
+                metaData,
+              );
+
+            if (!sessionEffective) {
+              that.refreshSession({
+                callback: () => {
+                  that.exchangePhone({ data, callback });
+                },
+              });
+
+              return;
+            }
+
             if (isFunction(callback)) {
               callback(metaData);
             }
@@ -1590,6 +1730,39 @@ class SupplementCore extends Common {
           recordError(error);
         });
     });
+  };
+
+  parseSessionEffectiveFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
+    recordDebug('exec parseSessionEffectiveFromRegisterWithWeChatApiData');
+
+    return this.parseSessionEffectiveFromRegisterWithWeChatApiData(remoteData);
+  };
+
+  parseSessionEffectiveFromRegisterWithWeChatApiData = (remoteData) => {
+    recordInfo(
+      'info built-in parseSessionEffectiveFromRegisterWithWeChatApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
+    );
+
+    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      recordObject(remoteData);
+
+      recordError(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterWithWeChatApiData',
+      );
+
+      throw new Error(
+        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterWithWeChatApiData',
+      );
+    }
+
+    const { sessionEffective } = {
+      ...{
+        sessionEffective: true,
+      },
+      ...remoteData,
+    };
+
+    return sessionEffective || false;
   };
 
   dispatchRegisterWithWeChat = (data = {}) => {
@@ -1613,14 +1786,31 @@ class SupplementCore extends Common {
   registerWithWeChat = ({ data, callback = null }) => {
     const that = this;
 
+    that.setState({ registering: true });
+
     that
       .dispatchRegisterWithWeChat(data)
       .then(() => {
+        that.setState({ registering: false });
+
         const remoteData = that.getRegisterWithWeChatApiData();
 
         const { dataSuccess, data: metaData } = remoteData;
 
         if (dataSuccess) {
+          const sessionEffective =
+            that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
+
+          if (!sessionEffective) {
+            that.refreshSession({
+              callback: () => {
+                that.signInCore({ data, callback });
+              },
+            });
+
+            return;
+          }
+
           removeCurrentCustomer();
 
           that.setSignInResultOnRegisterWithWeChat({
@@ -1648,6 +1838,8 @@ class SupplementCore extends Common {
         }
       })
       .catch((error) => {
+        that.setState({ registering: false });
+
         recordError(error);
       });
   };

@@ -12,6 +12,7 @@ export const underlyingState = {
   loadApiPath: '',
   firstLoadSuccess: false,
   loadSuccess: false,
+  registering: false,
   dataLoading: false,
   reloading: false,
   searching: false,
