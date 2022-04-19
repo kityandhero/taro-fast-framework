@@ -62,6 +62,7 @@ import {
   getCurrentInstance as getCurrentInstanceCore,
   canIUse as canIUseCore,
   getUpdateManager as getUpdateManagerCore,
+  previewImage as previewImageCore,
 } from '@tarojs/taro';
 
 import {
@@ -195,6 +196,10 @@ export function canIUse(params) {
 
 export function getUpdateManager(params) {
   return getUpdateManagerCore(params);
+}
+
+export function previewImage(params) {
+  return previewImageCore(params);
 }
 
 export function stopPullDownRefresh() {
