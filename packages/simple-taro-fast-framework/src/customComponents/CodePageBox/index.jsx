@@ -49,6 +49,7 @@ class CodePageBox extends Component {
             stripWidth={6}
             stripColor="#3378f4"
           >
+            ``
             {children}
           </Card>
         ) : null}

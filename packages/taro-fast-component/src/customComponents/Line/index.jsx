@@ -27,6 +27,7 @@ const defaultProps = {
   color: '',
   width: 0,
   height: 0,
+  transparent: false,
 };
 
 class Line extends BaseComponent {
@@ -41,7 +42,13 @@ class Line extends BaseComponent {
   };
 
   getColor = () => {
-    const { color } = this.props;
+    const { color, transparent } = this.props;
+
+    if (transparent) {
+      return {
+        '--background-color': 'transparent',
+      };
+    }
 
     if (isString(color)) {
       if (stringIsNullOrWhiteSpace(color)) {
