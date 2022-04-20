@@ -34,6 +34,7 @@ const defaultProps = {
   panelShadow: false,
   panelShadowColor: '#ccc',
   panelBorderRadius: 0,
+  closeOnClick: false,
 };
 
 export const dot = Symbol();
@@ -196,7 +197,7 @@ class Popover extends BaseComponent {
   };
 
   buildPopoverPanel = () => {
-    const { panelShadow, panel, panelBorderRadius } = this.props;
+    const { panelShadow, panel, panelBorderRadius, closeOnClick } = this.props;
     const { visible } = this.state;
 
     const position = this.getPosition();
@@ -217,6 +218,11 @@ class Popover extends BaseComponent {
           className={classNames(`${classPrefix}__outline__arrow`, {
             [`${classPrefix}__outline__arrow--${position}`]: true,
           })}
+          onClick={() => {
+            if (closeOnClick) {
+              this.toggleVisible();
+            }
+          }}
         />
 
         <View className={classNames(`${classPrefix}__outline__panel`)}>
@@ -247,11 +253,13 @@ class Popover extends BaseComponent {
         id={this.contentId}
         className={classNames(classPrefix)}
         style={style}
-        onClick={this.toggleVisible}
       >
         {position === 'top' ? this.buildPopoverPanel() : null}
 
-        <View className={classNames(`${classPrefix}__content`)}>
+        <View
+          className={classNames(`${classPrefix}__content`)}
+          onClick={this.toggleVisible}
+        >
           {children}
         </View>
 
