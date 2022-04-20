@@ -2574,6 +2574,11 @@ function toFixed(number, precision) {
   return (Math.round(wholeNumber / 10) * 10) / multiplier;
 }
 
+/**
+ * transformSize
+ * @param {*} si
+ * @returns
+ */
 export function transformSize(si) {
   if (isNumber(si)) {
     const s = toNumber(si);
