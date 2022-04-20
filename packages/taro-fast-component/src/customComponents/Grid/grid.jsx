@@ -36,11 +36,18 @@ class Grid extends BaseComponent {
       return null;
     }
 
+    const { onClick } = {
+      ...{
+        onClick: null,
+      },
+      ...item,
+    };
+
     return (
       <Grid.Item
         key={`${this.keyPrefix}_key_build_item_${index}`}
         span={span}
-        onClick={this.triggerClick}
+        onClick={onClick ? onClick : this.triggerClick}
       >
         {itemComponent}
       </Grid.Item>

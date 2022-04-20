@@ -31,7 +31,7 @@ const defaultProps = {
   panelPaddingRight: 10,
   panelPaddingTop: 10,
   panelPaddingBottom: 10,
-  panelShadow: true,
+  panelShadow: false,
   panelShadowColor: '#ccc',
 };
 
