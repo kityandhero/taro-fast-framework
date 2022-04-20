@@ -237,6 +237,7 @@ class Popover extends BaseComponent {
             })}
             style={{
               borderRadius: transformSize(panelBorderRadius),
+              overflow: 'hidden',
             }}
           >
             {panel}
