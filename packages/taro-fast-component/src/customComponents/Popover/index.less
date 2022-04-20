@@ -1,0 +1,92 @@
+@class-prefix-popover: ~'tfc-popover';
+
+.@{class-prefix-popover} {
+  --wrap-height: auto;
+  --background-color: #ccc;
+  --arrow-top: 0;
+  --arrow-bottom: 0;
+  --arrow-left: 0;
+  --arrow-border-top: 0;
+  --arrow-border-bottom: 0;
+  --arrow-border-left: 0;
+  --arrow-border-right: 0;
+  --panel-top: 0;
+  --panel-left: 0;
+  --panel-height: 0;
+  --panel-z-index: 0;
+  --panel-padding-left: 0;
+  --panel-padding-right: 0;
+  --panel-padding-top: 0;
+  --panel-padding-bottom: 0;
+  --panel-shadow-color: #ccc;
+
+  height: var(--wrap-height);
+
+  &__content {
+    position: static;
+  }
+
+  &__outline--horizontal {
+    width: 100%;
+    height: 0;
+  }
+
+  &__outline--vertical {
+    width: 100%;
+    height: 0;
+  }
+
+  &__outline {
+    position: relative;
+
+    &__arrow {
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: var(--arrow-border-top);
+      border-bottom: var(--arrow-border-bottom);
+      border-left: var(--arrow-border-left);
+      border-right: var(--arrow-border-right);
+      z-index: var(--panel-z-index);
+    }
+
+    &__arrow--top {
+      top: var(--arrow-top);
+      left: var(--arrow-left);
+    }
+
+    &__arrow--bottom {
+      top: var(--arrow-top);
+      left: var(--arrow-left);
+    }
+
+    &__panel {
+      display: block;
+      position: absolute;
+      top: var(--panel-top);
+      left: var(--panel-left);
+      height: var(--panel-height);
+      z-index: var(--panel-z-index);
+      width: 100vw;
+      background-color: transparent;
+
+      &__inner {
+        background-color: var(--background-color);
+        margin: var(--panel-padding-top) var(--panel-padding-right)
+          var(--panel-padding-bottom) var(--panel-padding-left);
+        width: calc(
+          100% - var(--panel-padding-left) - var(--panel-padding-right)
+        );
+        height: calc(
+          100% - var(--panel-padding-top) - var(--panel-padding-bottom)
+        );
+      }
+
+      &__inner--shadow {
+        box-shadow: var(--tfc-0) var(--tfc-0) var(--tfc-10) var(--tfc-5)
+          var(--panel-shadow-color);
+      }
+    }
+  }
+}

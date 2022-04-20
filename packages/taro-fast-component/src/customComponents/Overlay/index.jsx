@@ -24,6 +24,7 @@ const animalCollection = [
 const defaultProps = {
   visible: false,
   color: '#000',
+  transparent: false,
   alpha: 0.5,
   image: '',
   zIndex: 810,
@@ -83,7 +84,7 @@ class Overlay extends BaseComponent {
   };
 
   getStyle = () => {
-    const { visible, color, alpha, image, zIndex } = this.props;
+    const { visible, color, alpha, image, zIndex, transparent } = this.props;
     const { counter } = this.state;
 
     const mode = this.getMode();
@@ -157,7 +158,7 @@ class Overlay extends BaseComponent {
       ...(stringIsNullOrWhiteSpace(image)
         ? {
             backgroundColor:
-              color === 'transparent'
+              transparent || color === 'transparent'
                 ? 'transparent'
                 : `rgba(${colorHexToRGB(color, '')}, ${alpha})`,
           }

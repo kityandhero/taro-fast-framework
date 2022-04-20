@@ -68,3 +68,4 @@ export { default as TranslucentBox } from './TranslucentBox';
 export { default as HtmlBox } from './HtmlBox';
 export { default as BackboardBox } from './BackboardBox';
 export { default as HeadNavigation } from './HeadNavigation';
+export { default as Popover } from './Popover';

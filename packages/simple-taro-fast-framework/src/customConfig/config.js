@@ -77,6 +77,9 @@ const examplePathCollection = {
   divider: {
     path: '/example/pages/divider/index',
   },
+  popover: {
+    path: '/example/pages/popover/index',
+  },
   tag: {
     path: '/example/pages/tag/index',
   },

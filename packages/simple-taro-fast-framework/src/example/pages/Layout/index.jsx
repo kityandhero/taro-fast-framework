@@ -128,6 +128,11 @@ const list = [
     name: '背板面板',
     path: pathCollection.example.backboardBox.path,
   },
+  {
+    id: 'Popover',
+    name: '弹出面板',
+    path: pathCollection.example.popover.path,
+  },
 ];
 
 const o = {
