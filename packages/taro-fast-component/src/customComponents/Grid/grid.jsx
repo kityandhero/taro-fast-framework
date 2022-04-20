@@ -47,7 +47,9 @@ class Grid extends BaseComponent {
       <Grid.Item
         key={`${this.keyPrefix}_key_build_item_${index}`}
         span={span}
-        onClick={onClick ? onClick : this.triggerClick}
+        onClick={() => {
+          isFunction(onClick) ? onClick(item) : this.triggerClick(item);
+        }}
       >
         {itemComponent}
       </Grid.Item>
