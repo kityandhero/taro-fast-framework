@@ -219,17 +219,6 @@ class Popover extends BaseComponent {
           })}
         />
 
-        {/* <Overlay
-        visible
-        lockScroll
-        transparent
-        zIndex={10}
-        width="100vw"
-        height="100vh"
-        mode="fullScreen"
-        onClick={this.toggleVisible}
-      /> */}
-
         <View className={classNames(`${classPrefix}__outline__panel`)}>
           <View
             className={classNames(`${classPrefix}__outline__panel__inner`, {
