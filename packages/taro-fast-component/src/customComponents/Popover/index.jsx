@@ -33,6 +33,7 @@ const defaultProps = {
   panelPaddingBottom: 10,
   panelShadow: false,
   panelShadowColor: '#ccc',
+  panelBorderRadius: 0,
 };
 
 export const dot = Symbol();
@@ -77,8 +78,6 @@ class Popover extends BaseComponent {
       getRect(`#${that.contentId}`).then((rect) => {
         if ((rect || null) != null) {
           const { left, right, top, bottom, height } = rect;
-
-          console.log(rect);
 
           that.setState({
             left,
@@ -197,7 +196,7 @@ class Popover extends BaseComponent {
   };
 
   buildPopoverPanel = () => {
-    const { panelShadow, panel } = this.props;
+    const { panelShadow, panel, panelBorderRadius } = this.props;
     const { visible } = this.state;
 
     const position = this.getPosition();
@@ -236,6 +235,9 @@ class Popover extends BaseComponent {
             className={classNames(`${classPrefix}__outline__panel__inner`, {
               [`${classPrefix}__outline__panel__inner--shadow`]: panelShadow,
             })}
+            style={{
+              borderRadius: transformSize(panelBorderRadius),
+            }}
           >
             {panel}
           </View>

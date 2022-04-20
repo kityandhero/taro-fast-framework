@@ -82,7 +82,7 @@ class Grid extends BaseComponent {
   };
 
   renderFurther() {
-    const { gap, columns, backgroundColor } = this.props;
+    const { gap, columns, backgroundColor, children } = this.props;
 
     const style = {
       ...(!!backgroundColor
@@ -108,7 +108,7 @@ class Grid extends BaseComponent {
       <View className={classPrefix} style={style}>
         {this.buildItemList()}
 
-        {this.props.children}
+        {children}
       </View>
     );
   }
