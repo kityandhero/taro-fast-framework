@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { View, Image } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import {
   mergeProps,
@@ -12,6 +12,7 @@ import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 import BaseComponent from '../BaseComponent';
 
 import Icon from '../Icon';
+import ImageBox from '../ImageBox';
 
 import './index.less';
 
@@ -54,8 +55,7 @@ export const Empty = (p) => {
     typeof image === 'string' ? (
       stringIsNullOrWhiteSpace(image) ? null : (
         <View style={{ width: transformSize(imageWidth) }}>
-          <Image
-            className={`${classPrefix}-image`}
+          <ImageBox
             style={imageStyle}
             src={image}
             alt="empty"
