@@ -5,6 +5,7 @@ import {
   mergeProps,
   stringIsNullOrWhiteSpace,
   withNativeProps,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -22,6 +23,8 @@ const defaultProps = {
   iconStyle: {},
   image: '',
   imageStyle: {},
+  imageWidth: 100,
+  imageAspectRatio: 1,
   description: '',
   onImageClick: null,
   onDescriptionClick: null,
@@ -36,6 +39,8 @@ export const Empty = (p) => {
     iconStyle,
     image,
     imageStyle,
+    imageWidth,
+    imageAspectRatio,
     description,
     onImageClick,
     onDescriptionClick,
@@ -48,12 +53,15 @@ export const Empty = (p) => {
   const imageNode =
     typeof image === 'string' ? (
       stringIsNullOrWhiteSpace(image) ? null : (
-        <Image
-          className={`${classPrefix}-image`}
-          style={imageStyle}
-          src={image}
-          alt="empty"
-        />
+        <View style={{ width: transformSize(imageWidth) }}>
+          <Image
+            className={`${classPrefix}-image`}
+            style={imageStyle}
+            src={image}
+            alt="empty"
+            aspectRatio={imageAspectRatio}
+          />
+        </View>
       )
     ) : (
       image

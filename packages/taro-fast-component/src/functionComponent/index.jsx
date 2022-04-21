@@ -1,6 +1,9 @@
 import { View, Swiper, SwiperItem } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  transformSize,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import {
@@ -234,11 +237,13 @@ export function buildOption({
  * 构建空数据占位
  */
 export function buildEmptyPlaceholder({
-  icon = 'alert-circle',
+  icon = '',
   iconSize = 180,
   iconStyle = {},
   image = '',
   imageStyle = {},
+  imageWidth = 140,
+  imageAspectRatio = 1,
   description = '暂无数据',
   onImageClick = null,
   onDescriptionClick = null,
@@ -247,11 +252,17 @@ export function buildEmptyPlaceholder({
     <View style={{ margin: 'var(--tfc-20) 0' }}>
       <CenterBox>
         <Empty
-          icon={icon}
+          icon={
+            stringIsNullOrWhiteSpace(icon) && stringIsNullOrWhiteSpace(image)
+              ? 'alert-circle'
+              : icon
+          }
           iconSize={iconSize}
           iconStyle={iconStyle}
           image={image}
           imageStyle={imageStyle}
+          imageWidth={imageWidth}
+          imageAspectRatio={imageAspectRatio}
           description={description}
           onImageClick={onImageClick}
           onDescriptionClick={onDescriptionClick}

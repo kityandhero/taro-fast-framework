@@ -1008,11 +1008,13 @@ export default class Infrastructure extends ComponentBase {
    * 构建空数据占位
    */
   buildEmptyPlaceholder = ({
-    icon = 'alert-circle',
+    icon = '',
     iconSize = 180,
     iconStyle = {},
     image = '',
     imageStyle = {},
+    imageWidth = 140,
+    imageAspectRatio = 1,
     description = '暂无数据',
     onImageClick = null,
     onDescriptionClick = null,
@@ -1023,6 +1025,8 @@ export default class Infrastructure extends ComponentBase {
       iconStyle,
       image,
       imageStyle,
+      imageWidth,
+      imageAspectRatio,
       description,
       onImageClick,
       onDescriptionClick,
