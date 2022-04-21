@@ -4,10 +4,13 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
+import ScaleBox from '../ScaleBox';
 
 const defaultProps = {
   style: {},
   height: 100,
+  scaleMode: false,
+  aspectRatio: 1,
   backboardStyle: {},
   backboardZIndex: 9,
   contentStyle: {},
@@ -18,12 +21,16 @@ const defaultProps = {
 
 class BackboardBox extends BaseComponent {
   buildStyle = () => {
-    const { style, height } = this.props;
+    const { style, scaleMode, height } = this.props;
 
     return {
       ...style,
+      ...(scaleMode
+        ? {}
+        : {
+            height: transformSize(height),
+          }),
       ...{
-        height: transformSize(height),
         position: 'relative',
         flex: 'none',
         flexWrap: 'wrap',
@@ -79,11 +86,25 @@ class BackboardBox extends BaseComponent {
   };
 
   renderFurther() {
-    const { backboardChildren, children } = this.props;
+    const { scaleMode, aspectRatio, backboardChildren, children } = this.props;
 
     const style = this.buildStyle();
     const backboardStyle = this.buildBackboardStyle();
     const contentStyle = this.buildContentStyle();
+
+    if (scaleMode) {
+      return (
+        <ScaleBox
+          aspectRatio={aspectRatio}
+          style={style}
+          onClick={this.triggerClick}
+        >
+          <View style={backboardStyle}>{backboardChildren}</View>
+
+          <View style={contentStyle}> {children} </View>
+        </ScaleBox>
+      );
+    }
 
     return (
       <View style={style} onClick={this.triggerClick}>
