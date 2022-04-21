@@ -1144,6 +1144,10 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
+  buildExtendArea = () => {
+    return null;
+  };
+
   buildFooter = () => {
     if (!this.enableFooter) {
       return null;
@@ -1258,6 +1262,8 @@ export default class Infrastructure extends ComponentBase {
 
             {backTopElement}
           </Spin>
+
+          {this.buildExtendArea()}
         </>
       );
     }
@@ -1273,6 +1279,8 @@ export default class Infrastructure extends ComponentBase {
         {vw}
 
         {backTopElement}
+
+        {this.buildExtendArea()}
       </>
     );
   }
