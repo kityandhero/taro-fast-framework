@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Provider } from 'react-redux';
+import { removeSessionRefreshing } from 'src/utils/globalStorageAssist';
 
 import {
   getAppInitConfigData,
@@ -29,6 +30,8 @@ class AppBase extends Component {
     super(props);
 
     appInitCustomObject = config;
+
+    removeSessionRefreshing();
 
     this.setAppInitCustomLocal(config);
 
