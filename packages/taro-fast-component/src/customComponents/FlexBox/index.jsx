@@ -5,6 +5,7 @@ import {
   showErrorMessage,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -26,6 +27,7 @@ const defaultProps = {
   style: null,
   alignItems: 'center',
   stretch: true,
+  onClick: null,
 };
 
 const flexAutoCollection = ['left', 'right', 'top', 'bottom'];
@@ -49,6 +51,14 @@ class FlexBox extends BaseComponent {
       : inCollection(['top', 'bottom'], flexAuto)
       ? 'vertical'
       : 'horizontal';
+  };
+
+  triggerClick = () => {
+    const { onClick } = this.props;
+
+    if (isFunction(onClick)) {
+      onClick();
+    }
   };
 
   renderFurther() {
@@ -112,7 +122,7 @@ class FlexBox extends BaseComponent {
 
       if (flexAuto === 'left') {
         return (
-          <Row style={style}>
+          <Row style={style} onClick={this.triggerClick}>
             <Col
               auto
               align={stretch ? 'stretch' : ''}
@@ -134,7 +144,7 @@ class FlexBox extends BaseComponent {
       }
 
       return (
-        <Row style={style}>
+        <Row style={style} onClick={this.triggerClick}>
           <Col
             align={stretch ? 'stretch' : ''}
             style={{ ...(leftStyle || {}), ...styleCore }}
@@ -185,6 +195,7 @@ class FlexBox extends BaseComponent {
               }
             : {}),
         }}
+        onClick={this.triggerClick}
       >
         <View
           style={{

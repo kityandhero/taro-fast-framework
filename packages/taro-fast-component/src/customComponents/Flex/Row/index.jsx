@@ -5,7 +5,7 @@ import {
   forEach as _forEach,
   inCollection,
 } from 'taro-fast-common/es/utils/tools';
-import { isBoolean } from 'taro-fast-common/es/utils/typeCheck';
+import { isBoolean, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../../BaseComponent';
@@ -32,9 +32,18 @@ const defaultProps = {
   direction: '',
   alignContent: '',
   hidden: false,
+  onClick: null,
 };
 
 class Row extends BaseComponent {
+  triggerClick = () => {
+    const { onClick } = this.props;
+
+    if (isFunction(onClick)) {
+      onClick();
+    }
+  };
+
   renderFurther() {
     const { style } = this.props;
 
@@ -74,7 +83,11 @@ class Row extends BaseComponent {
     });
 
     return (
-      <View className={classNames(rootClass)} style={style}>
+      <View
+        className={classNames(rootClass)}
+        style={style}
+        onClick={this.triggerClick}
+      >
         {this.props.children}
       </View>
     );

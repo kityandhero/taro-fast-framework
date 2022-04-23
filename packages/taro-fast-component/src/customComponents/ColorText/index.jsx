@@ -6,7 +6,7 @@ import {
   getRandomColor,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -30,17 +30,22 @@ const defaultProps = {
   separatorStyle: {},
   canCopy: false,
   copySuccessCallback: null,
+  onClick: null,
 };
 
 class ColorText extends BaseComponent {
-  copyText = () => {
-    const { canCopy, copySuccessCallback, text } = this.props;
+  triggerClick = () => {
+    const { canCopy, copySuccessCallback, text, onClick } = this.props;
 
     if (canCopy && !stringIsNullOrWhiteSpace(text)) {
       copyToClipboard({
         text,
         successCallback: copySuccessCallback,
       });
+    }
+
+    if (isFunction(onClick)) {
+      onClick();
     }
   };
 
@@ -134,7 +139,7 @@ class ColorText extends BaseComponent {
       <View
         style={style}
         onClick={() => {
-          this.copyText();
+          this.triggerClick();
         }}
       >
         <FlexBox
