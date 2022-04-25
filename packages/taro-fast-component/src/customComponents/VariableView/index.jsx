@@ -620,6 +620,14 @@ class VariableView extends BaseComponent {
           fastDeceleration={scrollFastDeceleration}
           onRefresherRefresh={this.onScrollRefresherRefresh}
         >
+          {/* 由margin-top 垂直方向塌陷将导致的出现滚动条，加一个空元素处理 */}
+          <View
+            style={{
+              content: '',
+              overflow: 'hidden',
+            }}
+          />
+
           <View
             style={
               footer
