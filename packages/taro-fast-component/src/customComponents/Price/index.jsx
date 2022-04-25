@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize, formatMoney } from 'taro-fast-common/es/utils/tools';
+import {
+  transformSize,
+  formatMoney,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import { isMoney } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -19,6 +23,8 @@ const defaultProps = {
   integerPartStyle: {},
   pointStyle: {},
   decimalPartStyle: {},
+  unit: '',
+  unitStyle: {},
   strikethrough: false,
 };
 
@@ -33,6 +39,8 @@ class Price extends BaseComponent {
       integerPartStyle,
       pointStyle,
       decimalPartStyle,
+      unit,
+      unitStyle,
       strikethrough,
     } = this.props;
 
@@ -83,13 +91,20 @@ class Price extends BaseComponent {
           }}
         >
           <View style={{ ...itemStyle, ...(prefixStyle || {}) }}>{prefix}</View>
+
           <View style={{ ...itemStyle, ...(integerPartStyle || {}) }}>
             {integer}
           </View>
+
           <View style={{ ...itemStyle, ...(pointStyle || {}) }}>.</View>
+
           <View style={{ ...itemStyle, ...(decimalPartStyle || {}) }}>
             {decimal}
           </View>
+
+          {stringIsNullOrWhiteSpace(unit) ? null : (
+            <View style={{ ...itemStyle, ...(unitStyle || {}) }}>{unit}</View>
+          )}
         </View>
       </View>
     );
