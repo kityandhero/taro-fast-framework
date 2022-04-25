@@ -2601,11 +2601,6 @@ export function transformSize(si) {
   return si;
 }
 
-/**
- * handleInlayColor
- * @param {*} color
- * @returns
- */
 export function handleInlayColor(color) {
   return inCollection(
     [
