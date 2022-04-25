@@ -599,7 +599,7 @@ class VariableView extends BaseComponent {
         <ScrollView
           id={this.scrollViewId || ''}
           className={classNames(`${classPrefix}__scrollView`)}
-          style={upperBox ? { flex: 'flex: 1 1 auto' } : { height: '100%' }}
+          style={upperBox ? { flex: '1 1 auto' } : { height: '100%' }}
           refresherEnabled={!!enablePullDownRefresh && !enableCustomPullDown}
           refresherThreshold={scrollRefresherThreshold}
           refresherDefaultStyle={scrollRefresherDefaultStyle || ''}
