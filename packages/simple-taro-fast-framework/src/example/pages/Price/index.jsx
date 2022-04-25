@@ -45,6 +45,15 @@ const config51 = {
   },
 };
 
+const config52 = {
+  price: 4.78,
+  unit: '元',
+  unitStyle: {
+    color: 'red',
+  },
+  showDecimal: false,
+};
+
 const config6 = {
   price: 4.78,
   prefix: '¥',
@@ -117,6 +126,10 @@ export default class Index extends ContentPageBase {
       {
         header: '附带单位',
         config: config51,
+      },
+      {
+        header: '隐藏小数部分',
+        config: config52,
       },
       {
         header: '复杂配置',
