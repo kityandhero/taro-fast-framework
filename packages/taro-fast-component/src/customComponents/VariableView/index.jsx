@@ -96,6 +96,9 @@ class VariableView extends BaseComponent {
 
   scrollViewId = '';
 
+  /**
+   * needRefresh
+   */
   needRefresh = false;
 
   /**
