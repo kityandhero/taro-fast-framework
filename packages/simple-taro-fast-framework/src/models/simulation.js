@@ -1,5 +1,6 @@
 import {
   reducerCommonCollection,
+  reducerCommonNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
 
@@ -25,7 +26,7 @@ export default {
       const response = yield call(pageListData, payload);
 
       yield put({
-        type: 'handlePageListData',
+        type: reducerCommonNameCollection.handlePageListData,
         payload: response,
       });
     },
@@ -33,7 +34,7 @@ export default {
       const response = yield call(pageListEmptyData, payload);
 
       yield put({
-        type: 'handlePageListData',
+        type: reducerCommonNameCollection.handlePageListData,
         payload: response,
       });
     },
@@ -41,7 +42,7 @@ export default {
       const response = yield call(singleListData, payload);
 
       yield put({
-        type: 'handleListData',
+        type: reducerCommonNameCollection.handleListData,
         payload: response,
       });
     },
@@ -49,7 +50,7 @@ export default {
       const response = yield call(singleListEmptyData, payload);
 
       yield put({
-        type: 'handleListData',
+        type: reducerCommonNameCollection.handleListData,
         payload: response,
       });
     },
@@ -57,7 +58,7 @@ export default {
       const response = yield call(getOverviewData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -65,7 +66,7 @@ export default {
       const response = yield call(getData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -73,7 +74,7 @@ export default {
       const response = yield call(switchStatusData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },

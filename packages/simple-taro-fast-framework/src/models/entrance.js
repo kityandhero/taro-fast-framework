@@ -1,5 +1,6 @@
 import {
   reducerCommonCollection,
+  reducerCommonNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
 
@@ -23,7 +24,7 @@ export default {
       const response = yield call(signInData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -31,7 +32,7 @@ export default {
       const response = yield call(signInSilentData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -39,7 +40,7 @@ export default {
       const response = yield call(registerData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -47,7 +48,7 @@ export default {
       const response = yield call(registerWithWeChatData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -55,7 +56,7 @@ export default {
       const response = yield call(checkTicketValidityData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },

@@ -37,6 +37,12 @@ function createApp(opt) {
   return app;
 }
 
+export const reducerCommonNameCollection = {
+  handleCommonData: 'handleCommonData',
+  handleListData: 'handleListData',
+  handlePageListData: 'handlePageListData',
+};
+
 export const reducerCommonCollection = {
   handleCommonData(state, action) {
     return handleCommonDataAssist(state, action);

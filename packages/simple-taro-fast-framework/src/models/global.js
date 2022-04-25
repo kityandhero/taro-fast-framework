@@ -1,5 +1,6 @@
 import {
   reducerCommonCollection,
+  reducerCommonNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
@@ -19,7 +20,7 @@ export default {
       const response = yield call(getData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -27,7 +28,7 @@ export default {
       const response = yield call(exchangeShareData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },

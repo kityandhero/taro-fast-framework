@@ -1,5 +1,6 @@
 import {
   reducerCommonCollection,
+  reducerCommonNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
 
@@ -17,7 +18,7 @@ export default {
       const response = yield call(refreshSessionData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -25,7 +26,7 @@ export default {
       const response = yield call(exchangePhoneData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },

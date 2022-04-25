@@ -7,7 +7,11 @@ import {
 import { locateResult } from 'taro-fast-common/es/utils/constants';
 import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
-import { reducerCommonCollection, tacitlyState } from '../utils/dva';
+import {
+  reducerCommonCollection,
+  reducerCommonNameCollection,
+  tacitlyState,
+} from '../utils/dva';
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 
 import {
@@ -46,7 +50,7 @@ export default {
       const response = yield call(refreshSessionData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -54,7 +58,7 @@ export default {
       const response = yield call(checkTicketValidityData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -62,7 +66,7 @@ export default {
       const response = yield call(exchangePhoneData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -70,7 +74,7 @@ export default {
       const response = yield call(signInSilentData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -78,7 +82,7 @@ export default {
       const response = yield call(getMetaDataData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -86,7 +90,7 @@ export default {
       const response = yield call(getCustomerData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -94,7 +98,7 @@ export default {
       const response = yield call(registerWithWeChatData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
@@ -102,7 +106,7 @@ export default {
       const response = yield call(registerData, payload);
 
       yield put({
-        type: 'handleCommonData',
+        type: reducerCommonNameCollection.handleCommonData,
         payload: response,
       });
     },
