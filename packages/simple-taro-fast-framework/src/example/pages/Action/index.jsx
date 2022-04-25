@@ -33,6 +33,11 @@ const o = {
   }),
 };
 
+// eslint-disable-next-line no-undef
+definePageConfig({
+  navigationBarTitleText: '操作反馈',
+});
+
 @connect(({ schedulingControl }) => ({
   schedulingControl,
 }))
