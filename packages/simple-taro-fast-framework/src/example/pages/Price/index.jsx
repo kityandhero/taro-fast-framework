@@ -37,6 +37,14 @@ const config5 = {
   },
 };
 
+const config51 = {
+  price: 4.78,
+  unit: '元',
+  unitStyle: {
+    color: 'red',
+  },
+};
+
 const config6 = {
   price: 4.78,
   prefix: '¥',
@@ -51,6 +59,10 @@ const config6 = {
   integerPartStyle: { fontSize: transformSize(48) },
   pointStyle: { fontSize: transformSize(48) },
   decimalPartStyle: { fontSize: transformSize(48) },
+  unit: '元',
+  unitStyle: {
+    color: 'red',
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -101,6 +113,10 @@ export default class Index extends ContentPageBase {
       {
         header: '元素通用样式',
         config: config5,
+      },
+      {
+        header: '附带单位',
+        config: config51,
       },
       {
         header: '复杂配置',
