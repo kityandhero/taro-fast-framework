@@ -25,6 +25,7 @@ const defaultProps = {
   decimalPartStyle: {},
   unit: '',
   unitStyle: {},
+  showDecimal: true,
   strikethrough: false,
 };
 
@@ -41,6 +42,7 @@ class Price extends BaseComponent {
       decimalPartStyle,
       unit,
       unitStyle,
+      showDecimal,
       strikethrough,
     } = this.props;
 
@@ -96,11 +98,15 @@ class Price extends BaseComponent {
             {integer}
           </View>
 
-          <View style={{ ...itemStyle, ...(pointStyle || {}) }}>.</View>
+          {!showDecimal ? null : (
+            <View style={{ ...itemStyle, ...(pointStyle || {}) }}>.</View>
+          )}
 
-          <View style={{ ...itemStyle, ...(decimalPartStyle || {}) }}>
-            {decimal}
-          </View>
+          {!showDecimal ? null : (
+            <View style={{ ...itemStyle, ...(decimalPartStyle || {}) }}>
+              {decimal}
+            </View>
+          )}
 
           {stringIsNullOrWhiteSpace(unit) ? null : (
             <View style={{ ...itemStyle, ...(unitStyle || {}) }}>{unit}</View>
