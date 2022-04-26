@@ -56,6 +56,7 @@ const defaultProps = {
   placeholder: '请输入',
   placeholderStyle: { color: '#ccc' },
   placeholderClass: 'input-placeholder',
+  borderColor: 'var(--tfc-border-color)',
   disabled: false,
   maxlength: 140,
   cursorSpacing: 0,
@@ -197,6 +198,7 @@ class InputItem extends BaseComponent {
       labelStyle,
       inputStyle,
       valueStyle,
+      borderColor,
       inputContainerStyle,
       extraContainerStyle,
       type: typeSource,
@@ -404,6 +406,7 @@ class InputItem extends BaseComponent {
           }}
           showBody={showBody}
           body={description}
+          borderColor={borderColor}
           bodyContentStyle={{
             ...descriptionStyle,
             ...(showBody
@@ -449,6 +452,7 @@ class InputItem extends BaseComponent {
                 },
               }}
               border={border}
+              borderColor={borderColor}
               extra={inputPart}
               extraContainerStyle={{
                 ...{

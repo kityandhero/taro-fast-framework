@@ -53,6 +53,12 @@ const config4 = {
   afterChange,
 };
 
+const config41 = {
+  label: '用户名',
+  borderColor: 'red',
+  afterChange,
+};
+
 const config5 = {
   label: '用户名',
   align: 'right',
@@ -215,6 +221,10 @@ export default class Index extends ContentPageBase {
       {
         header: '标签样式',
         config: config4,
+      },
+      {
+        header: '底线颜色',
+        config: config41,
       },
       {
         header: '输入右对齐',
