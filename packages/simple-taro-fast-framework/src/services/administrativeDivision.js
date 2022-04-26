@@ -3,10 +3,6 @@ import { executiveRequest } from '../utils/request';
 import { administrativeDivisionListData } from '../assets/administrativeDivisionData';
 
 export async function singeListData(params) {
-  console.log({
-    administrativeDivisionListData,
-  });
-
   return executiveRequest({
     api: `/news/article/get`,
     params,

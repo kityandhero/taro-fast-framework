@@ -26,6 +26,7 @@ import setLodash from 'lodash/set';
 import sizeLodash from 'lodash/size';
 import mapLodash from 'lodash/map';
 import startsWithLodash from 'lodash/startsWith';
+import dropRightLodash from 'lodash/dropRight';
 import hash from 'object-hash';
 import React from 'react';
 import {
@@ -768,6 +769,10 @@ export function startsWith(source, target) {
   return startsWithLodash(source, target);
 }
 
+export function dropRight(array, n = 1) {
+  return dropRightLodash(array, n);
+}
+
 /**
  * 通过 key 获取对应得值
  */
@@ -1394,6 +1399,46 @@ function getBrowserInfoCore() {
   };
 }
 
+export function transformListData({
+  list = [],
+  convert = null,
+  recursiveKey = 'children',
+}) {
+  const listData = isArray(list) ? list : [list];
+
+  const l = listData.map((one) => {
+    return transformData({ data: one, convert, target: recursiveKey });
+  });
+
+  return l;
+}
+
+export function transformData({
+  data,
+  convert = null,
+  recursiveKey = 'children',
+}) {
+  if (!isFunction(convert)) {
+    return data;
+  }
+
+  const d = convert(data);
+
+  const children = data[recursiveKey];
+
+  let listData = [];
+
+  if (isArray(children)) {
+    listData = children.map((one) => {
+      return transformData({ data: one, convert, target: recursiveKey });
+    });
+  }
+
+  d.children = listData;
+
+  return d;
+}
+
 /**
  * 获取浏览器信息
  *
@@ -1758,6 +1803,14 @@ export function removeFromArray(array, predicate) {
 
 export function stringIsNullOrWhiteSpace(value) {
   return trim(replace(value || '', ' ', '')) === '';
+}
+
+export function sha1(v) {
+  return hash(v, { algorithm: 'sha1' });
+}
+
+export function md5(v) {
+  return hash(v, { algorithm: 'md5' });
 }
 
 /**
@@ -2386,14 +2439,6 @@ export function checkHasMore({ pageNo, pageSize, total }) {
   }
 
   return (pageNo || 0) * (pageSize || 0) < (total || 0);
-}
-
-export function sha1(value) {
-  return hash(value, { algorithm: 'sha1' });
-}
-
-export function md5(value) {
-  return hash(value, { algorithm: 'md5' });
 }
 
 export function checkEnvIsDevelopment() {

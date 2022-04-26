@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  dropRight,
+  md5,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -11,43 +15,11 @@ import './index.less';
 
 const classPrefix = `tfc-cascader`;
 
-function convertOption({ option = [], convert = null, target = 'children' }) {
-  const listData = isArray(option) ? option : [option];
-
-  return listData.map((one) => {
-    return convertItem({ item: one, convert, target });
-  });
-}
-
-function convertItem({ item, convert = null, target = 'children' }) {
-  if (!isFunction(convert)) {
-    return item;
-  }
-
-  const data = convert(item);
-
-  const children = item[target];
-
-  const listData = [];
-
-  if (isArray(children)) {
-    listData = children.map((one) => {
-      return convertItem({ item: one, convert, target });
-    });
-  }
-
-  data.children = listData;
-
-  return data;
-}
-
 const defaultProps = {
   style: {},
   border: false,
   options: [],
   value: [],
-  convert: null,
-  childrenKey: 'children',
   afterChange: null,
 };
 
@@ -57,10 +29,7 @@ class Cascader extends BaseComponent {
   constructor(props) {
     super(props);
 
-    const { value } = {
-      ...defaultProps,
-      ...props,
-    };
+    const { value, options } = props;
 
     const a = isArray(value) ? value : [];
 
@@ -69,56 +38,56 @@ class Cascader extends BaseComponent {
       ...{
         valueFlag: a,
         valueStage: a,
+        optionMd5Flag: md5(options),
         currentLevel: a.length === 0 ? 0 : a.length - 1,
       },
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+    const { value: valueNext, options: optionsNext } = nextProps;
+    const { valueFlag: valuePrev, optionMd5FlagPrev } = prevState;
 
-    if (!isArray(valueNext)) {
+    const valueNextAdjust = !isArray(valueNext) ? [] : valueNext;
+
+    console.log({
+      valueNextAdjust,
+      valuePrev,
+    });
+
+    const optionMd5FlagNext = md5(optionsNext);
+
+    const optionsChanged = optionMd5FlagPrev !== optionMd5FlagNext;
+
+    if (valueNextAdjust.join() === valuePrev.join() && !optionsChanged) {
       return null;
     }
 
-    if (valueNext.join() !== valuePrev.join()) {
-      return {
-        valueFlag: valueNext,
-        valueStage: valueNext,
-        currentLevel: valueNext.length === 0 ? 0 : valueNext.length - 1,
-      };
-    }
-
-    return null;
+    return {
+      ...(valueNextAdjust.join() !== valuePrev.join()
+        ? {
+            valueFlag: valueNextAdjust,
+            valueStage: valueNextAdjust,
+            currentLevel:
+              valueNextAdjust.length === 0 ? 0 : valueNextAdjust.length - 1,
+          }
+        : {}),
+      ...(optionsChanged
+        ? {
+            valueFlag: valueNextAdjust,
+            valueStage: valueNextAdjust,
+            currentLevel:
+              valueNextAdjust.length === 0 ? 0 : valueNextAdjust.length - 1,
+            optionMd5Flag: optionMd5FlagNext,
+          }
+        : {}),
+    };
   }
-
-  convertOptionList = () => {
-    const { options, convert, childrenKey } = this.props;
-
-    if (!isFunction(convert)) {
-      return options;
-    }
-
-    return convertOption({ options, convert, target: childrenKey });
-  };
 
   filterOptions = () => {
     const { options } = this.props;
 
     return isArray(options) ? options : [];
-  };
-
-  getLastValue = () => {
-    const { valueStage } = this.state;
-
-    if (valueStage.length > 0) {
-      const length = valueStage.length;
-
-      return this.getIndexValue(length - 1);
-    }
-
-    return null;
   };
 
   getIndexValue = (index) => {
@@ -142,6 +111,16 @@ class Cascader extends BaseComponent {
   };
 
   getIndexOptions = (index) => {
+    let result = this.getIndexOptionsCore(index);
+
+    if (result.length === 0) {
+      result = this.filterOptions();
+    }
+
+    return result;
+  };
+
+  getIndexOptionsCore = (index) => {
     if (index < 0) {
       return [];
     }
@@ -204,6 +183,11 @@ class Cascader extends BaseComponent {
           }
         });
       }
+    } else {
+      result.push({
+        label: '请选择',
+        value: '',
+      });
     }
 
     return result;
@@ -213,13 +197,16 @@ class Cascader extends BaseComponent {
     const { afterChange } = this.props;
     const { valueStage, currentLevel } = this.state;
 
-    const value = [...valueStage];
+    let value = [...valueStage];
 
     value[currentLevel] = v;
 
     if (value.join() !== valueStage.join()) {
       if (isArray(option.children) && option.children.length > 0) {
         value[currentLevel + 1] = '';
+
+        value = dropRight(value, value.length - (currentLevel + 1));
+
         this.flag = option.children[0].value;
 
         this.setState({
@@ -250,11 +237,19 @@ class Cascader extends BaseComponent {
 
   renderFurther() {
     const { style, border } = this.props;
-    const { currentLevel } = this.state;
+    const { currentLevel, valueStage } = this.state;
 
     const barData = this.getBarData();
     const currentOptions = this.getIndexOptions(currentLevel);
     const currentValue = this.getIndexValue(currentLevel);
+
+    console.log({
+      valueStage,
+      barData,
+      currentOptions,
+      currentValue,
+      currentLevel,
+    });
 
     return (
       <View className={classNames(classPrefix)}>

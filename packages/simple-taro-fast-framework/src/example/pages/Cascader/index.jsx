@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 
+import { transformListData } from 'taro-fast-common/es/utils/tools';
 import { Cascader, Space } from 'taro-fast-component/es/customComponents';
+import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
@@ -153,6 +155,19 @@ const options = [
   },
 ];
 
+function convertItem(data) {
+  const { name, code } = data;
+
+  return {
+    label: name,
+    value: code,
+  };
+}
+
+function afterChangeInConsole(d) {
+  console.log(d);
+}
+
 const config1 = {
   value: [
     options[2].value,
@@ -160,6 +175,7 @@ const config1 = {
     options[2].children[1].children[1].value,
   ],
   options,
+  afterChange: afterChangeInConsole,
 };
 
 // eslint-disable-next-line no-undef
@@ -185,22 +201,60 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         loadApiPath: 'administrativeDivision/singeList',
-        header: '组件展示',
+        header: '展示1',
         currentConfig: config1,
+        optionList: [],
       },
     };
   }
 
+  getApiData = (props) => {
+    return getApiDataCore({ props, modelName: 'administrativeDivision' });
+  };
+
+  afterLoadSuccess = ({
+    // eslint-disable-next-line no-unused-vars
+    metaData = null,
+    // eslint-disable-next-line no-unused-vars
+    metaListData = [],
+    // eslint-disable-next-line no-unused-vars
+    metaExtra = null,
+    // eslint-disable-next-line no-unused-vars
+    metaOriginalData = null,
+  }) => {
+    const optionList = transformListData({
+      list: metaListData,
+      convert: convertItem,
+      recursiveKey: 'children',
+    });
+
+    this.setState({
+      optionList,
+    });
+  };
+
   establishControlList = () => {
+    const { optionList } = this.state;
+
     return [
       {
-        header: '组件展示',
+        header: '展示1',
         config: config1,
+      },
+      {
+        header: '展示2',
+        config: {
+          value: [],
+          options: optionList,
+          afterChange: afterChangeInConsole,
+        },
       },
     ];
   };
 
   buildSimpleItem = ({ key, config, inner }) => {
+    console.log(config);
+
     return (
       <Cascader key={key} {...config}>
         {this.buildSimpleItemInner(inner)}
@@ -222,6 +276,7 @@ export default class Index extends ContentPageBase {
           useInnerBox={false}
           innerBoxCenterMode
           innerBoxPadding
+          ignorePropertyList={['options']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}
