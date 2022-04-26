@@ -32,6 +32,7 @@
     "@tarojs/runtime": "3.4.6",
     "@tarojs/taro": "3.4.6",
     "dayjs": "^1.11.1",
+    "object-hash": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -57,6 +58,7 @@
     "@tarojs/mini-runner": "3.4.6",
     "@tarojs/plugin-framework-react": "^3.4.6",
     "@tarojs/webpack-runner": "3.4.6",
+    "@types/object-hash": "^2.2.1",
     "@types/qs": "^6.9.7",
     "@types/react": "^18.0.5",
     "@types/webpack-env": "^1.16.4",

@@ -88,6 +88,7 @@ const externalCollection = [
   'classnames',
   'prismjs',
   'babel-plugin-prismjs',
+  'object-hash',
 ];
 
 export function buildConfig({

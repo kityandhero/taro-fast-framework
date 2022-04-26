@@ -26,6 +26,7 @@ import setLodash from 'lodash/set';
 import sizeLodash from 'lodash/size';
 import mapLodash from 'lodash/map';
 import startsWithLodash from 'lodash/startsWith';
+import hash from 'object-hash';
 import React from 'react';
 import {
   ENV_TYPE,
@@ -2385,6 +2386,14 @@ export function checkHasMore({ pageNo, pageSize, total }) {
   }
 
   return (pageNo || 0) * (pageSize || 0) < (total || 0);
+}
+
+export function sha1(value) {
+  return hash(value, { algorithm: 'sha1' });
+}
+
+export function md5(value) {
+  return hash(value, { algorithm: 'md5' });
 }
 
 export function checkEnvIsDevelopment() {
