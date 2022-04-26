@@ -59,10 +59,24 @@ const config41 = {
   afterChange,
 };
 
+const config42 = {
+  label: '用户名',
+  labelAlign: 'right',
+  afterChange,
+};
+
 const config5 = {
   label: '用户名',
   align: 'right',
   border: false,
+  afterChange,
+};
+
+const config51 = {
+  label: '用户名',
+  inputStyle: {
+    color: 'red',
+  },
   afterChange,
 };
 
@@ -223,12 +237,20 @@ export default class Index extends ContentPageBase {
         config: config4,
       },
       {
+        header: '标签右对齐',
+        config: config42,
+      },
+      {
         header: '底线颜色',
         config: config41,
       },
       {
         header: '输入右对齐',
         config: config5,
+      },
+      {
+        header: '输入栏样式',
+        config: config51,
       },
       {
         header: '可清除',

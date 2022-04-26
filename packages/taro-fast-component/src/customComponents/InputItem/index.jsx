@@ -43,6 +43,7 @@ const defaultProps = {
   clearSize: 36,
   clearColor: '#ccc',
   label: '',
+  labelAlign: 'left',
   extra: null,
   labelStyle: {},
   inputStyle: {},
@@ -194,6 +195,7 @@ class InputItem extends BaseComponent {
       clearSize,
       clearColor,
       label,
+      labelAlign,
       extra,
       labelStyle,
       inputStyle,
@@ -254,11 +256,14 @@ class InputItem extends BaseComponent {
             ) : null
           }
           right={
-            <VerticalBox>
+            <VerticalBox
+              alignJustify={labelAlign === 'right' ? 'end' : 'start'}
+            >
               <View
                 style={{
                   ...{
                     fontSize: transformSize(28),
+                    marginRight: transformSize(20),
                   },
                   ...labelStyle,
                 }}
@@ -303,7 +308,8 @@ class InputItem extends BaseComponent {
                 style={{
                   ...{
                     fontSize: transformSize(28),
-                    padding:
+                    borderColor: borderColor,
+                    margin:
                       layout === 'horizontal'
                         ? `${transformSize(22)} 0 ${transformSize(
                             showBody ? 11 : 22,
