@@ -264,7 +264,13 @@ class InputItem extends BaseComponent {
                 {isObject(label) ? (
                   label
                 ) : (
-                  <ColorText icon={icon} text={label} />
+                  <VerticalBox>
+                    <ColorText
+                      icon={icon}
+                      text={label}
+                      textStyle={labelStyle}
+                    />
+                  </VerticalBox>
                 )}
               </View>
             </VerticalBox>

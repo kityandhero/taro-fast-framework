@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Icon,
   InputItem,
@@ -9,6 +10,8 @@ import {
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+
+import logoImage from '../../../assets/images/logo.png';
 
 const { IconCheckCircle } = Icon;
 
@@ -44,7 +47,9 @@ const config4 = {
   label: '用户名',
   labelStyle: {
     color: 'red',
+    fontSize: transformSize(30),
   },
+  icon: <Icon value={logoImage} size={30} imageMode />,
   afterChange,
 };
 
