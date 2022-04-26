@@ -9,6 +9,7 @@ import simulation from './simulation';
 import news from './news';
 import article from './article';
 import customer from './customer';
+import administrativeDivision from './administrativeDivision';
 
 export default embedModelCollection(
   global,
@@ -18,4 +19,5 @@ export default embedModelCollection(
   news,
   article,
   customer,
+  administrativeDivision,
 );

@@ -167,7 +167,8 @@ definePageConfig({
   navigationBarTitleText: '级联选择',
 });
 
-@connect(({ schedulingControl }) => ({
+@connect(({ administrativeDivision, schedulingControl }) => ({
+  administrativeDivision,
   schedulingControl,
 }))
 export default class Index extends ContentPageBase {
@@ -183,6 +184,7 @@ export default class Index extends ContentPageBase {
     this.state = {
       ...this.state,
       ...{
+        loadApiPath: 'administrativeDivision/singeList',
         header: '组件展示',
         currentConfig: config1,
       },

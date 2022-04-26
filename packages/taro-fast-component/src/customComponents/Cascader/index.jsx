@@ -11,11 +11,43 @@ import './index.less';
 
 const classPrefix = `tfc-cascader`;
 
+function convertOption({ option = [], convert = null, target = 'children' }) {
+  const listData = isArray(option) ? option : [option];
+
+  return listData.map((one) => {
+    return convertItem({ item: one, convert, target });
+  });
+}
+
+function convertItem({ item, convert = null, target = 'children' }) {
+  if (!isFunction(convert)) {
+    return item;
+  }
+
+  const data = convert(item);
+
+  const children = item[target];
+
+  const listData = [];
+
+  if (isArray(children)) {
+    listData = children.map((one) => {
+      return convertItem({ item: one, convert, target });
+    });
+  }
+
+  data.children = listData;
+
+  return data;
+}
+
 const defaultProps = {
   style: {},
   border: false,
   options: [],
   value: [],
+  convert: null,
+  childrenKey: 'children',
   afterChange: null,
 };
 
@@ -60,6 +92,16 @@ class Cascader extends BaseComponent {
 
     return null;
   }
+
+  convertOptionList = () => {
+    const { options, convert, childrenKey } = this.props;
+
+    if (!isFunction(convert)) {
+      return options;
+    }
+
+    return convertOption({ options, convert, target: childrenKey });
+  };
 
   filterOptions = () => {
     const { options } = this.props;
