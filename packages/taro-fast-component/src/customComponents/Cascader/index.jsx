@@ -1,11 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  dropRight,
-  md5,
-} from 'taro-fast-common/es/utils/tools';
+import { stringIsNullOrWhiteSpace, md5 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -19,7 +15,10 @@ const defaultProps = {
   style: {},
   border: false,
   options: [],
+  useOptionCompareFlag: false,
+  optionCompareFlag: '',
   value: [],
+  asyncLoad: false,
   afterChange: null,
 };
 
@@ -29,37 +28,80 @@ class Cascader extends BaseComponent {
   constructor(props) {
     super(props);
 
-    const { value, options } = props;
+    const {
+      value,
+      options,
+      asyncLoad,
+      useOptionCompareFlag,
+      optionCompareFlag,
+    } = props;
 
     const a = isArray(value) ? value : [];
+
+    if (asyncLoad && useOptionCompareFlag) {
+      throw new Error(
+        'Cascader: useOptionCompareFlag not allow true when asyncLoad is true',
+      );
+    }
+
+    if (useOptionCompareFlag && stringIsNullOrWhiteSpace(optionCompareFlag)) {
+      throw new Error(
+        'Cascader: optionCompareFlag not allow empty when useOptionCompareFlag is true',
+      );
+    }
 
     this.state = {
       ...this.state,
       ...{
         valueFlag: a,
         valueStage: a,
-        optionMd5Flag: md5(options),
+        optionCompareFlag: useOptionCompareFlag
+          ? optionCompareFlag
+          : md5(options),
         currentLevel: a.length === 0 ? 0 : a.length - 1,
       },
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext, options: optionsNext } = nextProps;
-    const { valueFlag: valuePrev, optionMd5FlagPrev } = prevState;
+    const {
+      value: valueNext,
+      options: optionsNext,
+      useOptionCompareFlag,
+      optionCompareFlag: optionCompareFlagNext,
+      asyncLoad,
+    } = nextProps;
+    const { valueFlag: valuePrev, optionCompareFlag: optionCompareFlagPrev } =
+      prevState;
 
     const valueNextAdjust = !isArray(valueNext) ? [] : valueNext;
 
-    console.log({
-      valueNextAdjust,
-      valuePrev,
-    });
+    if (asyncLoad && useOptionCompareFlag) {
+      throw new Error(
+        'Cascader: useOptionCompareFlag not allow true when asyncLoad is true',
+      );
+    }
 
-    const optionMd5FlagNext = md5(optionsNext);
+    if (
+      useOptionCompareFlag &&
+      stringIsNullOrWhiteSpace(optionCompareFlagNext)
+    ) {
+      throw new Error(
+        'Cascader: optionCompareFlag is not allow empty when useOptionCompareFlag is true',
+      );
+    }
 
-    const optionsChanged = optionMd5FlagPrev !== optionMd5FlagNext;
+    const optionCompareFlagNextAdjust = useOptionCompareFlag
+      ? optionCompareFlagNext
+      : md5(optionsNext);
 
-    if (valueNextAdjust.join() === valuePrev.join() && !optionsChanged) {
+    const optionCompareFlagChanged =
+      optionCompareFlagPrev !== optionCompareFlagNextAdjust;
+
+    if (
+      valueNextAdjust.join() === valuePrev.join() &&
+      !optionCompareFlagChanged
+    ) {
       return null;
     }
 
@@ -72,13 +114,13 @@ class Cascader extends BaseComponent {
               valueNextAdjust.length === 0 ? 0 : valueNextAdjust.length - 1,
           }
         : {}),
-      ...(optionsChanged
+      ...(optionCompareFlagChanged
         ? {
             valueFlag: valueNextAdjust,
             valueStage: valueNextAdjust,
             currentLevel:
               valueNextAdjust.length === 0 ? 0 : valueNextAdjust.length - 1,
-            optionMd5Flag: optionMd5FlagNext,
+            optionCompareFlag: optionCompareFlagNextAdjust,
           }
         : {}),
     };
@@ -205,7 +247,7 @@ class Cascader extends BaseComponent {
       if (isArray(option.children) && option.children.length > 0) {
         value[currentLevel + 1] = '';
 
-        value = dropRight(value, value.length - (currentLevel + 1));
+        // value = dropRight(value, value.length - (currentLevel + 1));
 
         this.flag = option.children[0].value;
 
@@ -243,14 +285,6 @@ class Cascader extends BaseComponent {
     const currentOptions = this.getIndexOptions(currentLevel);
     const currentValue = this.getIndexValue(currentLevel);
 
-    console.log({
-      valueStage,
-      barData,
-      currentOptions,
-      currentValue,
-      currentLevel,
-    });
-
     return (
       <View className={classNames(classPrefix)}>
         <View className={classNames(`${classPrefix}__header`)}>
@@ -262,7 +296,7 @@ class Cascader extends BaseComponent {
                 <View
                   className={classNames(`${classPrefix}__header__bar__item`, {
                     [`${classPrefix}__header__bar__item__select`]:
-                      o.value === currentValue,
+                      valueStage.length === 0 || o.value === currentValue,
                   })}
                   key={key}
                   onClick={() => {

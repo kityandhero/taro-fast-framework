@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { transformListData } from 'taro-fast-common/es/utils/tools';
+import { md5, transformListData } from 'taro-fast-common/es/utils/tools';
 import { Cascader, Space } from 'taro-fast-component/es/customComponents';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
@@ -175,6 +175,8 @@ const config1 = {
     options[2].children[1].children[1].value,
   ],
   options,
+  useOptionCompareFlag: true,
+  optionCompareFlag: md5(options),
   afterChange: afterChangeInConsole,
 };
 
@@ -204,6 +206,7 @@ export default class Index extends ContentPageBase {
         header: '展示1',
         currentConfig: config1,
         optionList: [],
+        optionCompareFlag: '1',
       },
     };
   }
@@ -228,13 +231,20 @@ export default class Index extends ContentPageBase {
       recursiveKey: 'children',
     });
 
+    const optionCompareFlag = md5(optionList);
+
+    console.log({
+      optionCompareFlag,
+    });
+
     this.setState({
       optionList,
+      optionCompareFlag,
     });
   };
 
   establishControlList = () => {
-    const { optionList } = this.state;
+    const { optionList, optionCompareFlag } = this.state;
 
     return [
       {
@@ -246,6 +256,8 @@ export default class Index extends ContentPageBase {
         config: {
           value: [],
           options: optionList,
+          useOptionCompareFlag: true,
+          optionCompareFlag: optionCompareFlag,
           afterChange: afterChangeInConsole,
         },
       },
