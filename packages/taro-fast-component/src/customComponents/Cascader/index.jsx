@@ -266,14 +266,15 @@ class Cascader extends BaseComponent {
       if (isArray(option.children) && option.children.length > 0) {
         value[currentLevel + 1] = '';
 
-        if (value.length > currentLevel + 1) {
-          // eslint-disable-next-line no-shadow
-          value.forEach((v, i) => {
-            if (i > currentLevel + 1) {
-              value[i] = '';
-            }
-          });
-        }
+        const valueAdjust = [];
+
+        value.forEach((vv, i) => {
+          if (i <= currentLevel + 1) {
+            valueAdjust.push(vv);
+          }
+        });
+
+        value = valueAdjust;
 
         this.flag = option.children[0].value;
 
