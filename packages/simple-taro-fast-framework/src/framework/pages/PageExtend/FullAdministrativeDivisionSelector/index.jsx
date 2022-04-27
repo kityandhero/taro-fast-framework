@@ -14,12 +14,21 @@ definePageConfig({
   // navigationStyle: 'custom',
 });
 
-@connect(({ entrance, session, global, schedulingControl }) => ({
-  entrance,
-  session,
-  global,
-  schedulingControl,
-}))
+@connect(
+  ({
+    administrativeDivision,
+    entrance,
+    session,
+    global,
+    schedulingControl,
+  }) => ({
+    administrativeDivision,
+    entrance,
+    session,
+    global,
+    schedulingControl,
+  }),
+)
 @connect(({ schedulingControl }) => ({
   schedulingControl,
 }))

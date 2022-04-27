@@ -1,5 +1,10 @@
-import { recordObject } from 'taro-fast-common/es/utils/tools';
+import {
+  recordObject,
+  transformListData,
+} from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
+import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { getAdministrativeDivisionFullData } from 'taro-fast-framework/es/utils/globalStorageAssist';
 // import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { getQQMapWX } from '../../utils/tools';
@@ -49,5 +54,40 @@ export default class PageWrapper extends AuthorizationWrapper {
       success,
       fail,
     });
+  };
+
+  dispatchGetFullAdministrativeDivisionData = (data = {}) => {
+    return this.dispatchApi({
+      type: 'administrativeDivision/singeList',
+      payload: data,
+    });
+  };
+
+  getFullAdministrativeDivisionDataApiData = () => {
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'administrativeDivision',
+    });
+
+    return data;
+  };
+
+  transformFullAdministrativeDivisionData = () => {
+    const { list } = getAdministrativeDivisionFullData();
+
+    return (
+      transformListData({
+        list: list,
+        convert: (data) => {
+          const { name, code } = data;
+
+          return {
+            label: name,
+            value: code,
+          };
+        },
+        recursiveKey: 'children',
+      }) || []
+    );
   };
 }

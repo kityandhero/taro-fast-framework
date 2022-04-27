@@ -35,6 +35,8 @@ export async function refreshSessionData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -56,6 +58,8 @@ export async function checkTicketValidityData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -74,6 +78,8 @@ export async function exchangePhoneData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -100,6 +106,8 @@ export async function signInSilentData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -126,6 +134,8 @@ export async function registerWithWeChatData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -152,6 +162,8 @@ export async function registerData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -172,6 +184,8 @@ export async function getMetaDataData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -190,6 +204,8 @@ export async function getCustomerData(params) {
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
       data: simulation,
+      list: [],
+      extra: {},
     },
   });
 }
@@ -209,7 +225,9 @@ export async function getAdministrativeDivisionFullData(params) {
     useVirtualRequest: true,
     virtualNeedAuthorize: false,
     virtualSuccessResponse: {
+      data: {},
       list: simulation,
+      extra: {},
     },
   });
 }

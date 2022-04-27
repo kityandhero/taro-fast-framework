@@ -2355,14 +2355,14 @@ class SupplementCore extends Common {
   };
 
   getFullAdministrativeDivisionDataApiDataWrapper = () => {
-    recordDebug('exec getFullAdministrativeDivisionData');
+    recordDebug('exec getFullAdministrativeDivisionDataApiData');
 
-    return this.getFullAdministrativeDivisionData();
+    return this.getFullAdministrativeDivisionDataApiData();
   };
 
-  getFullAdministrativeDivisionData = () => {
+  getFullAdministrativeDivisionDataApiData = () => {
     recordInfo(
-      'info built-in getFullAdministrativeDivisionData is a simulation,if you need actual business,you need override it: getFullAdministrativeDivisionData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+      'info built-in getFullAdministrativeDivisionDataApiData is a simulation,if you need actual business,you need override it: getFullAdministrativeDivisionDataApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
     );
 
     const data = getApiDataCore({
@@ -2414,8 +2414,6 @@ class SupplementCore extends Common {
         .then(() => {
           const remoteData =
             that.getFullAdministrativeDivisionDataApiDataWrapper();
-
-          console.log(remoteData);
 
           const { dataSuccess, list: v } = remoteData;
 

@@ -17,6 +17,7 @@ import {
   getValueByKey,
   recordDebug,
   recordInfo,
+  transformListData,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -1187,7 +1188,7 @@ export default class Infrastructure extends ComponentBase {
 
     const { fullAdministrativeDivisionSelectorVisible } = this.state;
 
-    const { list, flag } = getAdministrativeDivisionFullData();
+    const { flag } = getAdministrativeDivisionFullData();
 
     return (
       <Popup
@@ -1200,9 +1201,11 @@ export default class Infrastructure extends ComponentBase {
         closeWhenOverlayClick
         arcTop
         arcBottom={false}
+        space={false}
+        onClose={this.hideFullAdministrativeDivisionSelector}
       >
         <Cascader
-          options={list || []}
+          options={this.transformFullAdministrativeDivisionData()}
           useOptionCompareFlag
           optionCompareFlag={flag}
           afterChange={(v) => {
@@ -1247,6 +1250,18 @@ export default class Infrastructure extends ComponentBase {
     this.setState({
       fullAdministrativeDivisionSelectorVisible: false,
     });
+  };
+
+  transformFullAdministrativeDivisionData = () => {
+    const { list } = getAdministrativeDivisionFullData();
+
+    return (
+      transformListData({
+        list: list,
+        convert: null,
+        recursiveKey: 'children',
+      }) || []
+    );
   };
 
   doAfterFullAdministrativeDivisionSelectorChanged = () => {};
