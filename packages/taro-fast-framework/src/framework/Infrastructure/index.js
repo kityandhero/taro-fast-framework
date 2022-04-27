@@ -1218,6 +1218,8 @@ export default class Infrastructure extends ComponentBase {
               value: v,
               optionList: option,
             });
+
+            this.increaseCounter();
           }}
         />
 
