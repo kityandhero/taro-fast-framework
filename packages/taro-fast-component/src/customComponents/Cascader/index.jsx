@@ -266,7 +266,14 @@ class Cascader extends BaseComponent {
       if (isArray(option.children) && option.children.length > 0) {
         value[currentLevel + 1] = '';
 
-        // value = dropRight(value, value.length - (currentLevel + 1));
+        if (value.length > currentLevel + 1) {
+          // eslint-disable-next-line no-shadow
+          value.forEach((v, i) => {
+            if (i > currentLevel + 1) {
+              value[i] = '';
+            }
+          });
+        }
 
         this.flag = option.children[0].value;
 
