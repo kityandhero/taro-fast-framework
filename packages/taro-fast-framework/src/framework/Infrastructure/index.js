@@ -37,6 +37,7 @@ import {
   Footer,
   Popup,
   Cascader,
+  Line,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
@@ -1219,6 +1220,10 @@ export default class Infrastructure extends ComponentBase {
             });
           }}
         />
+
+        <Line color="#eee" height={2} />
+
+        <Line transparent height={40} />
       </Popup>
     );
   };
