@@ -140,12 +140,16 @@ class ComponentBase extends Component {
 
     if ((checkComponentUpdate || null) != null) {
       if (!!checkComponentUpdate) {
+        this.doWorkBeforeUpdate(nextProps, nextState);
+
         return !!checkComponentUpdate;
       }
     }
 
     const nextPropsIgnoreModel = filterModel(nextProps);
     const currentPropsIgnoreModel = filterModel(this.props);
+
+    this.doWorkBeforeUpdate(nextProps, nextState);
 
     return (
       !shallowEqual(nextPropsIgnoreModel, currentPropsIgnoreModel) ||
@@ -246,6 +250,9 @@ class ComponentBase extends Component {
   doOtherRemoteRequest = () => {};
 
   doOtherWorkAfterDidMount = () => {};
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkBeforeUpdate = (nextProps, nextState) => {};
 
   // eslint-disable-next-line no-unused-vars
   doWorkWhenDidUpdate = (preProps, preState, snapshot) => {};

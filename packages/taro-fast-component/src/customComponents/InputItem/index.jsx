@@ -59,6 +59,7 @@ const defaultProps = {
   placeholderClass: 'input-placeholder',
   borderColor: 'var(--tfc-border-color)',
   disabled: false,
+  readonly: false,
   maxlength: 140,
   cursorSpacing: 0,
   confirmType: 'done',
@@ -85,7 +86,6 @@ class InputItem extends BaseComponent {
 
     this.state = {
       valueFlag: value,
-      counter: 0,
     };
 
     this.currentValue = value;
@@ -93,12 +93,11 @@ class InputItem extends BaseComponent {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev, counter } = prevState;
+    const { valueFlag: valuePrev } = prevState;
 
     if (valueNext !== valuePrev) {
       return {
         valueFlag: valueNext,
-        counter: counter + 1,
       };
     }
 
@@ -106,12 +105,12 @@ class InputItem extends BaseComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
-    const { valueFlag: valueFlagPre } = preState;
-    const { valueFlag } = this.state;
+  doWorkBeforeUpdate = (nextProps, nextState) => {
+    const { value: valueNext } = nextProps;
+    const { valueFlag: valuePrev } = this.state;
 
-    if (valueFlagPre !== valueFlag) {
-      this.currentValue = valueFlag;
+    if (valueNext !== valuePrev) {
+      this.currentValue = valueNext;
     }
   };
 
@@ -172,11 +171,9 @@ class InputItem extends BaseComponent {
   };
 
   clearValue = () => {
-    const { counter } = this.state;
-
     this.currentValue = '';
 
-    this.setState({ counter: counter + 1 });
+    this.increaseCounter();
 
     this.triggerChange('');
   };
@@ -209,6 +206,7 @@ class InputItem extends BaseComponent {
       placeholderStyle,
       placeholderClass,
       disabled,
+      readonly,
       maxlength,
       cursorSpacing,
       confirmType: confirmTypeSource,
@@ -302,53 +300,82 @@ class InputItem extends BaseComponent {
             flexAuto="left"
             style={{ width: '100%' }}
             left={
-              <Input
-                value={this.currentValue}
-                type={type}
-                style={{
-                  ...{
-                    fontSize: transformSize(28),
-                    borderColor: borderColor,
-                    margin:
-                      layout === 'horizontal'
-                        ? `${transformSize(22)} 0 ${transformSize(
-                            showBody ? 11 : 22,
-                          )} 0`
-                        : `${transformSize(11)} 0 ${transformSize(
-                            showBody ? 11 : 22,
-                          )} 0`,
-                  },
-                  ...valueStyle,
-                  ...(align == 'right' ? { textAlign: 'right' } : {}),
-                  ...(align == 'center' ? { textAlign: 'center' } : {}),
-                  ...{ width: '100%' },
-                }}
-                password={!!password}
-                placeholder={placeholder}
-                placeholderStyle={
-                  isString(placeholderStyle)
-                    ? placeholderStyle
-                    : isObject(placeholderStyle)
-                    ? styleToString(placeholderStyle)
-                    : ''
-                }
-                placeholderClass={placeholderClass}
-                disabled={disabled}
-                maxlength={maxlength}
-                cursorSpacing={cursorSpacing}
-                confirmType={confirmType}
-                confirmHold={confirmHold}
-                cursor={cursor}
-                selectionStart={selectionStart}
-                selectionEnd={selectionEnd}
-                adjustPosition={adjustPosition}
-                holdKeyboard={holdKeyboard}
-                onInput={this.onInput}
-                onFocus={this.triggerFocus}
-                onBlur={this.triggerBlur}
-                onConfirm={this.triggerConfirm}
-                onKeyboardHeightChange={this.triggerKeyboardHeightChange}
-              />
+              !disabled && readonly ? (
+                <View
+                  style={{
+                    ...{
+                      fontSize: transformSize(28),
+                      borderColor: borderColor,
+                      margin:
+                        layout === 'horizontal'
+                          ? `${transformSize(22)} 0 ${transformSize(
+                              showBody ? 11 : 22,
+                            )} 0`
+                          : `${transformSize(11)} 0 ${transformSize(
+                              showBody ? 11 : 22,
+                            )} 0`,
+                    },
+                    ...valueStyle,
+                    ...(align == 'right' ? { textAlign: 'right' } : {}),
+                    ...(align == 'center' ? { textAlign: 'center' } : {}),
+                    ...{ width: '100%' },
+                  }}
+                >
+                  {stringIsNullOrWhiteSpace(this.currentValue) ? (
+                    <View style={placeholderStyle}>{placeholder}</View>
+                  ) : (
+                    this.currentValue
+                  )}
+                </View>
+              ) : (
+                <Input
+                  value={this.currentValue}
+                  type={type}
+                  style={{
+                    ...{
+                      fontSize: transformSize(28),
+                      borderColor: borderColor,
+                      margin:
+                        layout === 'horizontal'
+                          ? `${transformSize(22)} 0 ${transformSize(
+                              showBody ? 11 : 22,
+                            )} 0`
+                          : `${transformSize(11)} 0 ${transformSize(
+                              showBody ? 11 : 22,
+                            )} 0`,
+                    },
+                    ...valueStyle,
+                    ...(align == 'right' ? { textAlign: 'right' } : {}),
+                    ...(align == 'center' ? { textAlign: 'center' } : {}),
+                    ...{ width: '100%' },
+                  }}
+                  password={!!password}
+                  placeholder={placeholder}
+                  placeholderStyle={
+                    isString(placeholderStyle)
+                      ? placeholderStyle
+                      : isObject(placeholderStyle)
+                      ? styleToString(placeholderStyle)
+                      : ''
+                  }
+                  placeholderClass={placeholderClass}
+                  disabled={disabled}
+                  maxlength={maxlength}
+                  cursorSpacing={cursorSpacing}
+                  confirmType={confirmType}
+                  confirmHold={confirmHold}
+                  cursor={cursor}
+                  selectionStart={selectionStart}
+                  selectionEnd={selectionEnd}
+                  adjustPosition={adjustPosition}
+                  holdKeyboard={holdKeyboard}
+                  onInput={this.onInput}
+                  onFocus={this.triggerFocus}
+                  onBlur={this.triggerBlur}
+                  onConfirm={this.triggerConfirm}
+                  onKeyboardHeightChange={this.triggerKeyboardHeightChange}
+                />
+              )
             }
             leftStyle={inputContainerStyle}
             right={

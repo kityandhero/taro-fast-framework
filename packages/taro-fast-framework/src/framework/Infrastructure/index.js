@@ -1218,8 +1218,6 @@ export default class Infrastructure extends ComponentBase {
               value: v,
               optionList: option,
             });
-
-            this.increaseCounter();
           }}
         />
 
@@ -1264,6 +1262,8 @@ export default class Infrastructure extends ComponentBase {
     this.setState({
       fullAdministrativeDivisionSelectorVisible: false,
     });
+
+    this.doAfterHideFullAdministrativeDivisionSelector();
   };
 
   transformFullAdministrativeDivisionData = () => {
@@ -1284,6 +1284,8 @@ export default class Infrastructure extends ComponentBase {
     // eslint-disable-next-line no-unused-vars
     optionList,
   }) => {};
+
+  doAfterHideFullAdministrativeDivisionSelector = () => {};
 
   renderView() {
     const { spin, backTopVisible } = this.state;
