@@ -24,6 +24,7 @@ import {
   getWeatherData,
   registerWithWeChatData,
   registerData,
+  getAdministrativeDivisionFullData,
 } from '../services/schedulingControl';
 
 export default {
@@ -91,6 +92,14 @@ export default {
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
+        payload: response,
+      });
+    },
+    *getFullAdministrativeDivisionData({ payload }, { call, put }) {
+      const response = yield call(getAdministrativeDivisionFullData, payload);
+
+      yield put({
+        type: reducerCommonNameCollection.handleListData,
         payload: response,
       });
     },

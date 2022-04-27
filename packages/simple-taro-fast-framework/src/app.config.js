@@ -105,6 +105,7 @@ export default {
         'pages/pageExtend/builtInEffect/buildEmptyPlaceholder/index',
         'pages/pageExtend/builtInEffect/buildInitialActivityIndicator/index',
         'pages/pageExtend/capsulePrompt/index',
+        'pages/pageExtend/fullAdministrativeDivisionSelector/index',
         'pages/pageExtend/footer/index',
         'pages/pageExtend/normal/index',
         'pages/pageExtend/normal/basic/index',

@@ -9,6 +9,7 @@ import {
   recordWarn,
   recordDebug,
   recordInfo,
+  md5,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
@@ -43,6 +44,7 @@ export const storageKeyCollection = {
   currentCustomer: 'currentCustomer',
   modelNameList: 'modelNameList',
   metaData: 'metaData',
+  administrativeDivisionFullData: 'administrativeDivisionFullData',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -1071,6 +1073,66 @@ export function setCurrentMetaData(data) {
  */
 export function removeCurrentMetaData() {
   const key = storageKeyCollection.metaData;
+
+  removeLocalStorage(key);
+}
+
+/**
+ * 获取地区数据资源缓存
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function getAdministrativeDivisionFullData() {
+  recordDebug('exec getAdministrativeDivisionFullData from local cache');
+
+  const key = storageKeyCollection.administrativeDivisionFullData;
+
+  const { list, flag } = {
+    ...{
+      list: [],
+      flag: 'md5',
+    },
+    ...getJsonFromLocalStorage(key),
+  };
+
+  return { list: list || [], flag: flag || 'md5' };
+}
+
+/**
+ * 设置地区数据资源缓存
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function setAdministrativeDivisionFullData(data) {
+  recordDebug('exec setAdministrativeDivisionFullData to local cache');
+
+  const key = storageKeyCollection.administrativeDivisionFullData;
+
+  const l = isArray(data) ? data : [];
+
+  const v = {
+    list: l,
+    flag: md5(l || []),
+  };
+
+  return saveJsonToLocalStorage(key, v);
+}
+
+/**
+ * 移除地区数据资源缓存
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function removeAdministrativeDivisionFullData() {
+  recordDebug('exec removeAdministrativeDivisionFullData');
+
+  const key = storageKeyCollection.administrativeDivisionFullData;
 
   removeLocalStorage(key);
 }

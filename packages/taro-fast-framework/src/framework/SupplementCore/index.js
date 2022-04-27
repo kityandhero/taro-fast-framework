@@ -55,6 +55,8 @@ import {
   removeCurrentCustomer,
   getCurrentMetaData,
   setCurrentMetaData,
+  getAdministrativeDivisionFullData,
+  setAdministrativeDivisionFullData,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import { getApiDataCore } from '../../utils/actionAssist';
@@ -2243,7 +2245,7 @@ class SupplementCore extends Common {
 
   dispatchGetMetaData = (data = {}) => {
     recordInfo(
-      'info built-in dispatchGetMetaData is a simulation,if you need actual business,you need override it: dispatchGetMetaData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
+      'info built-in dispatchGetMetaData is a simulation,if you need actual business,you need override it: dispatchGetMetaData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getMetaData\',payload: data,})"',
     );
 
     return this.dispatchApi({
@@ -2333,6 +2335,110 @@ class SupplementCore extends Common {
       ...defaultSettingsLayoutCustom.getDefaultMetaData(),
       ...(getCurrentMetaData() || {}),
     };
+  };
+
+  dispatchGetFullAdministrativeDivisionDataWrapper = (data = {}) => {
+    recordDebug('exec dispatchGetFullAdministrativeDivisionData');
+
+    return this.dispatchGetFullAdministrativeDivisionData(data);
+  };
+
+  dispatchGetFullAdministrativeDivisionData = (data = {}) => {
+    recordInfo(
+      'info built-in dispatchGetFullAdministrativeDivisionData is a simulation,if you need actual business,you need override it: dispatchGetFullAdministrativeDivisionData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getFullAdministrativeDivisionData\',payload: data,})"',
+    );
+
+    return this.dispatchApi({
+      type: 'schedulingControl/getFullAdministrativeDivisionData',
+      payload: data,
+    });
+  };
+
+  getFullAdministrativeDivisionDataApiDataWrapper = () => {
+    recordDebug('exec getFullAdministrativeDivisionData');
+
+    return this.getFullAdministrativeDivisionData();
+  };
+
+  getFullAdministrativeDivisionData = () => {
+    recordInfo(
+      'info built-in getFullAdministrativeDivisionData is a simulation,if you need actual business,you need override it: getFullAdministrativeDivisionData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+    );
+
+    const data = getApiDataCore({
+      props: this.props,
+      modelName: 'schedulingControl',
+    });
+
+    return data;
+  };
+
+  initFullAdministrativeDivisionData = ({
+    data = {},
+    force: forceValue = false,
+    callback = null,
+  }) => {
+    recordDebug('exec initFullAdministrativeDivisionData');
+
+    let force = forceValue;
+
+    const { list } = getAdministrativeDivisionFullData();
+
+    if (!force) {
+      if ((list || null) == null) {
+        force = true;
+      } else {
+        if (list.length === 0) {
+          force = true;
+        }
+      }
+    }
+
+    if (!force) {
+      recordInfo(
+        'info check administrative division full data from local cache success',
+      );
+
+      if (isFunction(callback)) {
+        callback(list);
+      }
+    } else {
+      recordInfo(
+        'info check administrative division full data from local cache fail or force api request, shift to get from api dispatch',
+      );
+
+      const that = this;
+
+      that
+        .dispatchGetFullAdministrativeDivisionDataWrapper(data || {})
+        .then(() => {
+          const remoteData =
+            that.getFullAdministrativeDivisionDataApiDataWrapper();
+
+          console.log(remoteData);
+
+          const { dataSuccess, list: v } = remoteData;
+
+          if (dataSuccess) {
+            setAdministrativeDivisionFullData(v);
+
+            if (isFunction(callback)) {
+              callback(v);
+            }
+
+            that.increaseCounter();
+          }
+        })
+        .catch((error) => {
+          recordError(error);
+        });
+    }
+  };
+
+  getFullAdministrativeDivisionData = () => {
+    const { list } = getAdministrativeDivisionFullData();
+
+    return list;
   };
 }
 

@@ -29,6 +29,12 @@ const list = [
     path: pathCollection.framework.pageExtend.capsulePrompt.path,
   },
   {
+    id: 'FullAdministrativeDivisionSelector',
+    name: '选择地区',
+    path: pathCollection.framework.pageExtend.fullAdministrativeDivisionSelector
+      .path,
+  },
+  {
     id: 'Footer',
     name: '底部信息',
     path: pathCollection.framework.pageExtend.footer.path,

@@ -194,6 +194,26 @@ export async function getCustomerData(params) {
   });
 }
 
+export async function getAdministrativeDivisionFullData(params) {
+  const simulation = [];
+
+  recordInfo(
+    `info simulation administrative division full data silent data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
+
+  return request({
+    api: `/schedulingControl/getAdministrativeDivisionFullData`,
+    params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      list: simulation,
+    },
+  });
+}
+
 /**
  * 占位函数
  *

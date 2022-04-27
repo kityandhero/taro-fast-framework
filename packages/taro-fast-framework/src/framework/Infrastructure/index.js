@@ -34,6 +34,8 @@ import {
   BackTop,
   FixedBox,
   Footer,
+  Popup,
+  Cascader,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
@@ -47,6 +49,7 @@ import {
   setCurrentUrl,
   setSessionRefreshing,
   getMap,
+  getAdministrativeDivisionFullData,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
@@ -312,6 +315,8 @@ export default class Infrastructure extends ComponentBase {
 
   initMetaDataRequestData = {};
 
+  useFullAdministrativeDivisionSelector = false;
+
   constructor(props) {
     super(props);
 
@@ -323,6 +328,7 @@ export default class Infrastructure extends ComponentBase {
         backTopVisible: false,
         capsulePromptVisible: false,
         initCapsulePrompt: false,
+        fullAdministrativeDivisionSelectorVisible: false,
       },
     };
 
@@ -607,6 +613,14 @@ export default class Infrastructure extends ComponentBase {
           }
         },
       });
+
+      if (that.useFullAdministrativeDivisionSelector) {
+        that.initFullAdministrativeDivisionData({
+          callback: (l) => {
+            that.doAfterInitFullAdministrativeDivisionData(l);
+          },
+        });
+      }
     });
   };
 
@@ -699,6 +713,20 @@ export default class Infrastructure extends ComponentBase {
       callback();
     }
   };
+
+  initFullAdministrativeDivisionData = ({
+    // eslint-disable-next-line no-unused-vars
+    data = {},
+    // eslint-disable-next-line no-unused-vars
+    force: forceValue = false,
+    callback = null,
+  }) => {
+    if (isFunction(callback)) {
+      callback();
+    }
+  };
+
+  doAfterInitFullAdministrativeDivisionData = () => {};
 
   /**
    * 检测登录凭据
@@ -1152,6 +1180,39 @@ export default class Infrastructure extends ComponentBase {
     return null;
   };
 
+  buildFullAdministrativeDivisionSelectorArea = () => {
+    if (!this.useFullAdministrativeDivisionSelector) {
+      return null;
+    }
+
+    const { fullAdministrativeDivisionSelectorVisible } = this.state;
+
+    const { list, flag } = getAdministrativeDivisionFullData();
+
+    return (
+      <Popup
+        visible={fullAdministrativeDivisionSelectorVisible}
+        header="选择地区"
+        position="bottom"
+        mode="through"
+        showClose={false}
+        scroll={false}
+        closeWhenOverlayClick
+        arcTop
+        arcBottom={false}
+      >
+        <Cascader
+          options={list || []}
+          useOptionCompareFlag
+          optionCompareFlag={flag}
+          afterChange={(v) => {
+            this.doAfterFullAdministrativeDivisionSelectorChanged(v);
+          }}
+        />
+      </Popup>
+    );
+  };
+
   buildFooter = () => {
     if (!this.enableFooter) {
       return null;
@@ -1175,6 +1236,20 @@ export default class Infrastructure extends ComponentBase {
       capsulePromptVisible: false,
     });
   };
+
+  showFullAdministrativeDivisionSelector = () => {
+    this.setState({
+      fullAdministrativeDivisionSelectorVisible: true,
+    });
+  };
+
+  hideFullAdministrativeDivisionSelector = () => {
+    this.setState({
+      fullAdministrativeDivisionSelectorVisible: false,
+    });
+  };
+
+  doAfterFullAdministrativeDivisionSelectorChanged = () => {};
 
   renderView() {
     const { spin, backTopVisible } = this.state;
@@ -1267,6 +1342,8 @@ export default class Infrastructure extends ComponentBase {
             {backTopElement}
           </Spin>
 
+          {this.buildFullAdministrativeDivisionSelectorArea()}
+
           {this.buildExtendArea()}
         </>
       );
@@ -1283,6 +1360,8 @@ export default class Infrastructure extends ComponentBase {
         {vw}
 
         {backTopElement}
+
+        {this.buildFullAdministrativeDivisionSelectorArea()}
 
         {this.buildExtendArea()}
       </>

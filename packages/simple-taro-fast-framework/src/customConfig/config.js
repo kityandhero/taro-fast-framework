@@ -277,6 +277,9 @@ const frameworkPathCollection = {
     capsulePrompt: {
       path: '/framework/pages/pageExtend/capsulePrompt/index',
     },
+    fullAdministrativeDivisionSelector: {
+      path: '/framework/pages/pageExtend/fullAdministrativeDivisionSelector/index',
+    },
     footer: {
       path: '/framework/pages/pageExtend/footer/index',
     },
