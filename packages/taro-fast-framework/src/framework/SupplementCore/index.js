@@ -64,7 +64,7 @@ import { getApiDataCore } from '../../utils/actionAssist';
 import Common from '../Common';
 
 /**
- * 业务调度核心底层
+ * 业务调度核心底层方法
  */
 class SupplementCore extends Common {
   doShowTask = () => {
