@@ -318,6 +318,8 @@ export default class Infrastructure extends ComponentBase {
 
   useFullAdministrativeDivisionSelector = false;
 
+  fullAdministrativeDivisionSelectorHeight = 400;
+
   constructor(props) {
     super(props);
 
@@ -1208,8 +1210,13 @@ export default class Infrastructure extends ComponentBase {
           options={this.transformFullAdministrativeDivisionData()}
           useOptionCompareFlag
           optionCompareFlag={flag}
-          afterChange={(v) => {
-            this.doAfterFullAdministrativeDivisionSelectorChanged(v);
+          scroll
+          height={this.fullAdministrativeDivisionSelectorHeight}
+          afterChange={(v, option) => {
+            this.doAfterFullAdministrativeDivisionSelectorChanged({
+              value: v,
+              optionList: option,
+            });
           }}
         />
       </Popup>
@@ -1264,7 +1271,12 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
-  doAfterFullAdministrativeDivisionSelectorChanged = () => {};
+  doAfterFullAdministrativeDivisionSelectorChanged = ({
+    // eslint-disable-next-line no-unused-vars
+    value,
+    // eslint-disable-next-line no-unused-vars
+    optionList,
+  }) => {};
 
   renderView() {
     const { spin, backTopVisible } = this.state;

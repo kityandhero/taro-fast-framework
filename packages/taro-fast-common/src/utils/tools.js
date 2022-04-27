@@ -27,6 +27,7 @@ import sizeLodash from 'lodash/size';
 import mapLodash from 'lodash/map';
 import startsWithLodash from 'lodash/startsWith';
 import dropRightLodash from 'lodash/dropRight';
+import uniqByLodash from 'lodash/uniqBy';
 import hash from 'object-hash';
 import React from 'react';
 import {
@@ -771,6 +772,10 @@ export function startsWith(source, target) {
 
 export function dropRight(array, n = 1) {
   return dropRightLodash(array, n);
+}
+
+export function uniqBy(array, iterate) {
+  return uniqByLodash(array, iterate);
 }
 
 /**

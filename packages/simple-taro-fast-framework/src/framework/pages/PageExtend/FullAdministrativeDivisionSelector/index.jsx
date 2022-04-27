@@ -50,6 +50,13 @@ export default class Index extends ContentPageBase {
     return getApiDataCore({ props, modelName: 'schedulingControl' });
   };
 
+  doAfterFullAdministrativeDivisionSelectorChanged = ({
+    value,
+    optionList,
+  }) => {
+    console.log({ value, optionList });
+  };
+
   renderFurther() {
     const { address } = this.state;
 

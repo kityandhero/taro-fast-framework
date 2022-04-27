@@ -1,7 +1,12 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
 
-import { stringIsNullOrWhiteSpace, md5 } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  md5,
+  transformSize,
+  find,
+} from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -20,10 +25,14 @@ const defaultProps = {
   value: [],
   asyncLoad: false,
   afterChange: null,
+  scroll: false,
+  height: 'auto',
 };
 
 class Cascader extends BaseComponent {
   flag = '';
+
+  selectedOptionList = [];
 
   constructor(props) {
     super(props);
@@ -125,6 +134,16 @@ class Cascader extends BaseComponent {
         : {}),
     };
   }
+
+  getBodyStyle = () => {
+    const { scroll, height } = this.props;
+
+    return {
+      ...(scroll && height !== 'auto'
+        ? {}
+        : { height: transformSize(height), overflow: 'hidden' }),
+    };
+  };
 
   filterOptions = () => {
     const { options } = this.props;
@@ -261,8 +280,24 @@ class Cascader extends BaseComponent {
         });
       }
 
+      this.selectedOptionList.push(option);
+
+      const selectedOptionListFiltered = [];
+
+      value.forEach((one) => {
+        const d = find(this.selectedOptionList, (o) => {
+          return o.value === one;
+        });
+
+        if (d != null) {
+          selectedOptionListFiltered.push(d);
+        }
+      });
+
+      this.selectedOptionList = selectedOptionListFiltered;
+
       if (isFunction(afterChange)) {
-        afterChange(value);
+        afterChange(value, this.selectedOptionList);
       }
     }
   };
@@ -278,12 +313,30 @@ class Cascader extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, border } = this.props;
+    const { style, border, scroll, height } = this.props;
     const { currentLevel, valueStage } = this.state;
 
     const barData = this.getBarData();
     const currentOptions = this.getIndexOptions(currentLevel);
     const currentValue = this.getIndexValue(currentLevel);
+
+    const selectArea = (
+      <Radio
+        style={{
+          ...style,
+          ...{
+            border: '0',
+          },
+        }}
+        bodyStyle={{
+          border: '0',
+        }}
+        border={border}
+        options={currentOptions}
+        value={currentValue}
+        afterChange={this.triggerChange}
+      />
+    );
 
     return (
       <View className={classNames(classPrefix)}>
@@ -321,23 +374,26 @@ class Cascader extends BaseComponent {
             })}
           </View>
         </View>
-        <View>
-          <Radio
+        {scroll ? (
+          <ScrollView
             style={{
-              ...style,
               ...{
-                border: '0',
+                height: transformSize(height),
               },
             }}
-            bodyStyle={{
-              border: '0',
-            }}
-            border={border}
-            options={currentOptions}
-            value={currentValue}
-            afterChange={this.triggerChange}
-          />
-        </View>
+            scrollX={false}
+            scrollY
+            scrollWithAnimation
+            scrollAnchoring
+            enhanced
+            bounces
+            showScrollbar={false}
+          >
+            {selectArea}
+          </ScrollView>
+        ) : (
+          <View>{selectArea}</View>
+        )}
       </View>
     );
   }
