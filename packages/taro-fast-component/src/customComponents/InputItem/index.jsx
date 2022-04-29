@@ -337,7 +337,7 @@ class InputItem extends BaseComponent {
                       borderColor: borderColor,
                       margin:
                         layout === 'horizontal'
-                          ? `${transformSize(22)} 0 ${transformSize(
+                          ? `${transformSize(0)} 0 ${transformSize(
                               showBody ? 11 : 22,
                             )} 0`
                           : `${transformSize(11)} 0 ${transformSize(
