@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Provider } from 'react-redux';
 import {
   removeAdministrativeDivisionFullData,
+  removeSelectedAddressData,
   removeSessionRefreshing,
 } from 'src/utils/globalStorageAssist';
 
@@ -35,6 +36,7 @@ class AppBase extends Component {
     appInitCustomObject = config;
 
     removeSessionRefreshing();
+    removeSelectedAddressData();
     removeAdministrativeDivisionFullData();
 
     this.setAppInitCustomLocal(config);
