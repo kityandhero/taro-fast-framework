@@ -14,9 +14,7 @@ import PropertyBox from '../../../customComponents/PropertyBox';
 const { IconSketch } = Icon;
 
 const config1 = {
-  // style: {
-  //   margin: transformSize(40),
-  // },
+  style: {},
   mode: 'search',
   onSearch: (v) => {
     console.log({
@@ -27,7 +25,6 @@ const config1 = {
 
 const config2 = {
   style: {
-    // margin: transformSize(40),
     borderRadius: transformSize(100),
   },
   mode: 'search',
@@ -39,9 +36,7 @@ const config2 = {
 };
 
 const config3 = {
-  // style: {
-  //   margin: transformSize(40),
-  // },
+  style: {},
   mode: 'navigate',
   searchStyle: {},
   onNavigate: () => {
@@ -53,7 +48,6 @@ const config3 = {
 
 const config4 = {
   style: {
-    // margin: transformSize(40),
     borderRadius: transformSize(100),
   },
   mode: 'navigate',
@@ -67,7 +61,6 @@ const config4 = {
 
 const config5 = {
   style: {
-    // margin: transformSize(40),
     borderRadius: transformSize(100),
   },
   align: 'center',
