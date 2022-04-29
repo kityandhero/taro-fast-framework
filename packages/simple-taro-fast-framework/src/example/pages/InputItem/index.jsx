@@ -30,6 +30,13 @@ const config111 = {
   afterChange,
 };
 
+const config113 = {
+  value: '1',
+  label: '手机号',
+  borderTopDistance: 20,
+  afterChange,
+};
+
 const config2 = {
   value: '1',
   label: '手机号',
@@ -223,6 +230,10 @@ export default class Index extends ContentPageBase {
       {
         header: '无下划线',
         config: config111,
+      },
+      {
+        header: '下划线上间距',
+        config: config113,
       },
       {
         header: '设置标签',

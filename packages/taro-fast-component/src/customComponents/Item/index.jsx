@@ -13,6 +13,7 @@ import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
 
 import './index.less';
+import Line from '../Line';
 
 const { IconChevronRight } = Icon;
 
@@ -31,6 +32,7 @@ const defaultProps = {
   clickable: false,
   border: true,
   borderWidth: 1,
+  borderTopDistance: 0,
   borderColor: 'var(--tfc-border-color)',
   arrow: false,
   arrowSize: 40,
@@ -127,6 +129,7 @@ class Item extends BaseComponent {
       extra,
       extraContainerStyle,
       border,
+      borderTopDistance,
       showBody,
       body,
       bodyStyle,
@@ -239,6 +242,10 @@ class Item extends BaseComponent {
         {children}
 
         {b}
+
+        {borderTopDistance > 0 ? (
+          <Line height={borderTopDistance} transparent />
+        ) : null}
 
         {!border ? null : (
           <View className={classNames(`${classPrefix}__bottom`)}>

@@ -58,6 +58,7 @@ const defaultProps = {
   placeholderStyle: { color: '#ccc' },
   placeholderClass: 'input-placeholder',
   borderColor: 'var(--tfc-border-color)',
+  borderTopDistance: 0,
   disabled: false,
   readonly: false,
   maxlength: 140,
@@ -198,6 +199,7 @@ class InputItem extends BaseComponent {
       inputStyle,
       valueStyle,
       borderColor,
+      borderTopDistance,
       inputContainerStyle,
       extraContainerStyle,
       type: typeSource,
@@ -285,7 +287,7 @@ class InputItem extends BaseComponent {
               paddingRight: transformSize(40),
             },
             ...{
-              height: '100%',
+              // height: '100%',
             },
           }}
         />
@@ -308,8 +310,8 @@ class InputItem extends BaseComponent {
                       borderColor: borderColor,
                       margin:
                         layout === 'horizontal'
-                          ? `${transformSize(22)} 0 ${transformSize(
-                              showBody ? 11 : 22,
+                          ? `${transformSize(0)} 0 ${transformSize(
+                              showBody ? 11 : 0,
                             )} 0`
                           : `${transformSize(11)} 0 ${transformSize(
                               showBody ? 11 : 22,
@@ -338,7 +340,7 @@ class InputItem extends BaseComponent {
                       margin:
                         layout === 'horizontal'
                           ? `${transformSize(0)} 0 ${transformSize(
-                              showBody ? 11 : 22,
+                              showBody ? 11 : 0,
                             )} 0`
                           : `${transformSize(11)} 0 ${transformSize(
                               showBody ? 11 : 22,
@@ -421,8 +423,11 @@ class InputItem extends BaseComponent {
             ...{ width: transformSize(180) },
             ...contentStyle,
             ...{
+              padding: '0',
+            },
+            ...{
               flex: 'none',
-              paddingBottom: transformSize(showBody ? 12 : 24),
+              paddingBottom: transformSize(showBody ? 12 : 0),
             },
           }}
           border={border}
@@ -440,6 +445,7 @@ class InputItem extends BaseComponent {
           showBody={showBody}
           body={description}
           borderColor={borderColor}
+          borderTopDistance={borderTopDistance}
           bodyContentStyle={{
             ...descriptionStyle,
             ...(showBody
@@ -486,6 +492,7 @@ class InputItem extends BaseComponent {
               }}
               border={border}
               borderColor={borderColor}
+              borderTopDistance={borderTopDistance}
               extra={inputPart}
               extraContainerStyle={{
                 ...{

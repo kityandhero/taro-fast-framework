@@ -103,6 +103,24 @@ const config112 = [
   },
 ];
 
+const config113 = [
+  {
+    label: '1',
+    borderTopDistance: 0,
+    borderColor: 'red',
+  },
+  {
+    label: '2',
+    borderTopDistance: 10,
+    borderColor: 'red',
+  },
+  {
+    label: '3',
+    borderTopDistance: 20,
+    borderColor: 'red',
+  },
+];
+
 const config2 = [
   {
     label: '账单',
@@ -276,6 +294,10 @@ export default class Index extends ContentPageBase {
       {
         header: '底线颜色',
         config: config112,
+      },
+      {
+        header: '底线上间距',
+        config: config113,
       },
       {
         header: '使用箭头',
