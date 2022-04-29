@@ -1,6 +1,6 @@
 {
   "name": "simple-taro-fast-framework",
-  "version": "1.0.114",
+  "version": "1.0.115",
   "private": true,
   "description": "基于Taro的快速开发框架基于Taro的快速开发框架",
   "templateInfo": {
@@ -64,7 +64,7 @@
     "taro-fast-component": "^2.0.83",
     "taro-fast-component-extra": "^2.0.81",
     "taro-fast-component-prism": "^2.0.81",
-    "taro-fast-framework": "^1.0.116"
+    "taro-fast-framework": "^1.0.117"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
