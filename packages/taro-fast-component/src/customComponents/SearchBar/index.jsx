@@ -31,6 +31,7 @@ const defaultProps = {
   searchStyle: {},
   clearSize: 32,
   mode: 'search',
+  clearable: false,
   onSearch: null,
   onNavigate: null,
 };
@@ -89,6 +90,7 @@ class SearchBar extends BaseComponent {
       searchText,
       searchStyle,
       clearSize,
+      clearable,
     } = this.props;
 
     const mode = this.getMode();
@@ -139,7 +141,7 @@ class SearchBar extends BaseComponent {
         <InputItem
           label={null}
           align={align}
-          clearable
+          clearable={clearable}
           placeholder={placeholder}
           placeholderStyle={{
             ...{
