@@ -39,9 +39,9 @@ const config3 = {
   style: {},
   mode: 'navigate',
   searchStyle: {},
-  onNavigate: () => {
+  onNavigate: (v) => {
     console.log({
-      message: `navigate`,
+      message: `navigate ${v}`,
     });
   },
 };
@@ -52,9 +52,9 @@ const config4 = {
   },
   mode: 'navigate',
   showSearch: false,
-  onNavigate: () => {
+  onNavigate: (v) => {
     console.log({
-      message: `navigate`,
+      message: `navigate ${v}`,
     });
   },
 };

@@ -33,7 +33,7 @@ const defaultProps = {
 };
 
 class SearchBar extends BaseComponent {
-  searchText = '';
+  searchValue = '';
 
   getMode = () => {
     const { mode } = this.props;
@@ -50,14 +50,14 @@ class SearchBar extends BaseComponent {
   };
 
   afterChange = (v) => {
-    this.searchText = v;
+    this.searchValue = v;
   };
 
   triggerSearch = () => {
     const { onSearch } = this.props;
 
     if (isFunction(onSearch)) {
-      onSearch(this.searchText || '');
+      onSearch(this.searchValue || '');
     }
   };
 
@@ -65,7 +65,7 @@ class SearchBar extends BaseComponent {
     const { onNavigate } = this.props;
 
     if (isFunction(onNavigate)) {
-      onNavigate(this.searchText || '');
+      onNavigate(this.searchValue || '');
     }
   };
 
@@ -180,7 +180,7 @@ class SearchBar extends BaseComponent {
                 }
               : {}
           }
-          onChange={this.afterChange}
+          afterChange={this.afterChange}
         />
       </View>
     );
