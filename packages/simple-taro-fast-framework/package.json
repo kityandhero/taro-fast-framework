@@ -1,6 +1,6 @@
 {
   "name": "simple-taro-fast-framework",
-  "version": "1.0.117",
+  "version": "1.0.118",
   "private": true,
   "description": "基于Taro的快速开发框架基于Taro的快速开发框架",
   "templateInfo": {
@@ -61,10 +61,10 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "taro-fast-common": "^1.0.52",
-    "taro-fast-component": "^2.0.85",
-    "taro-fast-component-extra": "^2.0.83",
-    "taro-fast-component-prism": "^2.0.83",
-    "taro-fast-framework": "^1.0.119"
+    "taro-fast-component": "^2.0.86",
+    "taro-fast-component-extra": "^2.0.84",
+    "taro-fast-component-prism": "^2.0.84",
+    "taro-fast-framework": "^1.0.120"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
