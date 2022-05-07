@@ -1,10 +1,6 @@
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -58,14 +54,10 @@ class SearchBar extends BaseComponent {
   };
 
   triggerSearch = () => {
-    if (stringIsNullOrWhiteSpace(this.searchText)) {
-      return;
-    }
-
     const { onSearch } = this.props;
 
     if (isFunction(onSearch)) {
-      onSearch(this.searchText);
+      onSearch(this.searchText || '');
     }
   };
 
@@ -73,7 +65,7 @@ class SearchBar extends BaseComponent {
     const { onNavigate } = this.props;
 
     if (isFunction(onNavigate)) {
-      onNavigate(this.searchText);
+      onNavigate(this.searchText || '');
     }
   };
 
