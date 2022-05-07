@@ -87,6 +87,7 @@ class InputItem extends BaseComponent {
 
     this.state = {
       valueFlag: value,
+      clearVisible: false,
     };
 
     this.currentValue = value;
@@ -121,6 +122,18 @@ class InputItem extends BaseComponent {
     return inCollection(layoutCollection, layout) ? layout : 'horizontal';
   };
 
+  checkClearDisplay = () => {
+    const { clearable } = this.props;
+
+    if (!clearable) {
+      return false;
+    }
+
+    const { clearVisible } = this.state;
+
+    return !!clearVisible;
+  };
+
   triggerChange = (v) => {
     const { afterChange } = this.props;
 
@@ -135,6 +148,24 @@ class InputItem extends BaseComponent {
     } = e;
 
     this.currentValue = v;
+
+    const { clearable } = this.props;
+
+    if (clearable) {
+      const { clearVisible } = this.state;
+
+      if (clearVisible && stringIsNullOrWhiteSpace(this.currentValue)) {
+        this.setState({
+          clearVisible: false,
+        });
+      }
+
+      if (!clearVisible && !stringIsNullOrWhiteSpace(this.currentValue)) {
+        this.setState({
+          clearVisible: true,
+        });
+      }
+    }
 
     this.triggerChange(v);
   };
@@ -189,7 +220,6 @@ class InputItem extends BaseComponent {
       border,
       align,
       required,
-      clearable,
       clearSize,
       clearColor,
       label,
@@ -227,6 +257,8 @@ class InputItem extends BaseComponent {
       : 'done';
 
     const showBody = !!description;
+
+    const clearDisplay = this.checkClearDisplay();
 
     const labelComponent =
       isObject(label) ||
@@ -381,7 +413,7 @@ class InputItem extends BaseComponent {
             }
             leftStyle={inputContainerStyle}
             right={
-              clearable ? (
+              clearDisplay ? (
                 <View
                   style={{
                     paddingLeft: transformSize(10),
