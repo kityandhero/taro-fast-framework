@@ -29,6 +29,8 @@ const defaultProps = {
   separator: ': ',
   separatorStyle: {},
   canCopy: false,
+  extra: null,
+  extraStyle: {},
   copySuccessCallback: null,
   onClick: null,
 };
@@ -111,15 +113,57 @@ class ColorText extends BaseComponent {
     };
   };
 
+  buildRight = () => {
+    const { textPrefix, text, separator, extra, extraStyle } = this.props;
+
+    const textPrefixStyle = this.buildTextPrefixStyle();
+
+    const separatorStyle = this.buildSeparatorStyle();
+
+    const textStyle = this.buildTextStyle();
+
+    const textPart = (
+      <VerticalBox style={{ lineHeight: '1' }}>
+        {stringIsNullOrWhiteSpace(textPrefix) ? null : (
+          <>
+            <Text style={textPrefixStyle || null} userSelect>
+              {textPrefix}
+            </Text>
+            {stringIsNullOrWhiteSpace(separator) ? null : (
+              <Text style={separatorStyle || null} userSelect>
+                {separator}
+              </Text>
+            )}
+          </>
+        )}
+        <Text style={textStyle} userSelect>
+          {text}
+        </Text>
+      </VerticalBox>
+    );
+
+    if ((extra || null) == null) {
+      return textPart;
+    }
+
+    return (
+      <FlexBox
+        flexAuto="left"
+        left={text}
+        leftStyle={textPart}
+        rightStyle={{
+          ...{
+            ...{ marginLeft: transformSize(12) },
+          },
+          ...(extraStyle || {}),
+        }}
+        right={<VerticalBox>{extra}</VerticalBox>}
+      />
+    );
+  };
+
   renderFurther() {
-    const {
-      style: styleSource,
-      icon,
-      iconContainerStyle,
-      textPrefix,
-      text,
-      separator,
-    } = this.props;
+    const { style: styleSource, icon, iconContainerStyle } = this.props;
 
     const color = this.getColor();
 
@@ -128,12 +172,6 @@ class ColorText extends BaseComponent {
       ...styleSource,
       ...{ display: 'inline-block' },
     };
-
-    const textPrefixStyle = this.buildTextPrefixStyle();
-
-    const separatorStyle = this.buildSeparatorStyle();
-
-    const textStyle = this.buildTextStyle();
 
     return (
       <View
@@ -153,25 +191,7 @@ class ColorText extends BaseComponent {
                 }
               : {}
           }
-          right={
-            <VerticalBox style={{ lineHeight: '1' }}>
-              {stringIsNullOrWhiteSpace(textPrefix) ? null : (
-                <>
-                  <Text style={textPrefixStyle || null} userSelect>
-                    {textPrefix}
-                  </Text>
-                  {stringIsNullOrWhiteSpace(separator) ? null : (
-                    <Text style={separatorStyle || null} userSelect>
-                      {separator}
-                    </Text>
-                  )}
-                </>
-              )}
-              <Text style={textStyle} userSelect>
-                {text}
-              </Text>
-            </VerticalBox>
-          }
+          right={this.buildRight()}
         />
       </View>
     );

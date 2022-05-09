@@ -125,6 +125,19 @@ const config12 = {
   text: '文本文字',
 };
 
+const config13 = {
+  text: '文本文字',
+  extra: <Icon size={40} color="#ff3ce7" value={logoImg} imageMode />,
+};
+
+const config131 = {
+  text: '文本文字',
+  extraStyle: {
+    backgroundColor: '#f45231',
+  },
+  extra: <Icon size={40} color="#ff3ce7" value={logoImg} imageMode />,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '文字渲染',
@@ -218,6 +231,14 @@ export default class Index extends ContentPageBase {
         header: '图片/图标容器样式',
         config: config91,
       },
+      {
+        header: '右侧扩展',
+        config: config13,
+      },
+      {
+        header: '右侧扩展额外样式',
+        config: config131,
+      },
     ];
   };
 
@@ -243,7 +264,7 @@ export default class Index extends ContentPageBase {
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
-          ignorePropertyList={['icon']}
+          ignorePropertyList={['icon', 'extra']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}
