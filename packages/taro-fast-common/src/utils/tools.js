@@ -2282,7 +2282,7 @@ export function offGeographicalLocationChange(callback) {
  * @param {*} fail     fail callback
  * @param {*} complete complete callback
  * @param {*} simulationMode true or false,do not set to true in production,unless you know what it does
- * @param {*} simulationData simulation data
+ * @param {*} simulationData simulation data for simulation mode set to true
  * @returns
  */
 export function getGeographicalLocation({
