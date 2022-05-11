@@ -4,7 +4,10 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
-import { getAdministrativeDivisionFullData } from 'taro-fast-framework/es/utils/globalStorageAssist';
+import {
+  getMap,
+  getAdministrativeDivisionFullData,
+} from 'taro-fast-framework/es/utils/globalStorageAssist';
 // import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { getQQMapWX } from '../../utils/tools';
@@ -89,5 +92,46 @@ export default class PageWrapper extends AuthorizationWrapper {
         recursiveKey: 'children',
       }) || []
     );
+  };
+
+  /**
+   * 此处重载仅为避免调用真实定位，实际使用请勿参照，直接使用即可
+   * @param {*} param0
+   */
+  getLocationWeather = ({ callback = null }) => {
+    const that = this;
+
+    const map = getMap();
+
+    if (map == null) {
+      that.obtainLocation({
+        successCallback: ({ map: mapSource }) => {
+          that.getLocationWeatherCore({
+            data: mapSource,
+            callback,
+          });
+        },
+        force: false,
+        showLoading: false,
+        fromLaunch: false,
+        failCallback: null,
+        simulationMode: true,
+        simulationData: {
+          latitude: 34.74821,
+          longitude: 113.61332,
+          speed: -1,
+          accuracy: 65,
+          altitude: 0,
+          verticalAccuracy: 65,
+          horizontalAccuracy: 65,
+          dataVersion: 917923,
+        },
+      });
+    } else {
+      that.getLocationWeatherCore({
+        data: map,
+        callback,
+      });
+    }
   };
 }

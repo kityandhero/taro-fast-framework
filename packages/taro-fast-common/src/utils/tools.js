@@ -2276,11 +2276,36 @@ export function offGeographicalLocationChange(callback) {
   offGeographicalLocationChangeCore(callback);
 }
 
+/**
+ *
+ * @param {*} success  success callback
+ * @param {*} fail     fail callback
+ * @param {*} complete complete callback
+ * @param {*} simulationMode true or false,do not set to true in production,unless you know what it does
+ * @param {*} simulationData simulation data
+ * @returns
+ */
 export function getGeographicalLocation({
   success: successCallback,
   fail: failCallback,
   complete: completeCallback,
+  simulationMode = false,
+  simulationData = null,
 }) {
+  if (simulationMode) {
+    recordInfo('info getGeographicalLocation simulationMode:true');
+
+    if ((simulationData || null) == null) {
+      throw new Error(
+        'simulationData is required and must be an object when simulationMode is true!',
+      );
+    }
+
+    successCallback(simulationData);
+
+    return;
+  }
+
   recordDebug('exec getGeographicalLocation');
 
   startGeographicalLocationUpdate({

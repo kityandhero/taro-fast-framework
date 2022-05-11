@@ -23,7 +23,7 @@ const config = {
   authenticationFailCode: 2001,
   signInPath: '/user/login',
   apiVersion: 'v1',
-  useLocation: true,
+  useLocation: false,
   initialLocationMode: locationModeCollection.auto,
   footerImage: LogoImage,
   footerText: '中国****科技有限公司',

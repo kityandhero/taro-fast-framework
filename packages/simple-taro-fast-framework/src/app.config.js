@@ -166,8 +166,8 @@ export default {
     },
   ],
   permission: {
-    'scope.userLocation': {
-      desc: '你的位置信息将用于获取所在地的天气等信息',
-    },
+    // 'scope.userLocation': {
+    //   desc: '你的位置信息将用于获取所在地的天气等信息',
+    // },
   },
 };

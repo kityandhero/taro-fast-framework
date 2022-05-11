@@ -121,17 +121,15 @@ class SupplementCore extends Common {
     this.doWorkAfterShow();
   };
 
-  /**
-   * 获取定位
-   * @param {*} param0
-   */
-  obtainLocation({
+  obtainLocation = ({
     successCallback,
     force = false,
     showLoading = false,
     fromLaunch = false,
     failCallback,
-  }) {
+    simulationMode = false,
+    simulationData = null,
+  }) => {
     recordDebug('exec obtainLocation');
 
     let needRelocation = force || false;
@@ -372,9 +370,11 @@ class SupplementCore extends Common {
           }
         },
         complete: () => {},
+        simulationMode,
+        simulationData,
       });
     }
-  }
+  };
 
   /**
    * 在重新显示时[自动定位情况下]重新定位成功后执行的业务逻辑
