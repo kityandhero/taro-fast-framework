@@ -27,12 +27,20 @@ const defaultProps = {
   panel: null,
   height: 40,
   position: 'top',
+  fillWidth: true,
+  panelWidth: '100vw',
+  panelAlign: 'center',
   panelPaddingLeft: 0,
   panelPaddingRight: 0,
   panelPaddingTop: 0,
   panelPaddingBottom: 0,
   panelShadow: false,
+  panelShadowHorizontal: 0,
+  panelShadowVertical: 0,
+  panelShadowBlur: 10,
+  panelShadowSpread: 5,
   panelShadowColor: '#ccc',
+  panelShadowMode: 'outset',
   panelBorderRadius: 0,
   closeOnClick: false,
 };
@@ -54,6 +62,7 @@ class Popover extends BaseComponent {
         top: 0,
         bottom: 0,
         right: 0,
+        contentWidth: 0,
         contentHeight: 0,
         visible: false,
       },
@@ -78,13 +87,14 @@ class Popover extends BaseComponent {
     that.timerAdjust = setTimeout(() => {
       getRect(`#${that.contentId}`).then((rect) => {
         if ((rect || null) != null) {
-          const { left, right, top, bottom, height } = rect;
+          const { left, right, top, bottom, width, height } = rect;
 
           that.setState({
             left,
             right,
             top,
             bottom,
+            contentWidth: width,
             contentHeight: height,
           });
         }
@@ -92,10 +102,65 @@ class Popover extends BaseComponent {
     }, 200);
   };
 
+  getFillWidth = () => {
+    const { fillWidth, panelWidth } = this.props;
+
+    return !!fillWidth || panelWidth === '100vw';
+  };
+
   getPosition = () => {
     const { position } = this.props;
 
     return inCollection(positionCollection, position) ? position : 'top';
+  };
+
+  getPanelLayout = () => {
+    const {
+      panelPaddingLeft,
+      panelPaddingRight,
+      panelPaddingTop,
+      panelPaddingBottom,
+      panelWidth,
+      panelAlign,
+    } = this.props;
+    const { left, contentWidth } = this.state;
+
+    const fillWidth = this.getFillWidth();
+
+    if (fillWidth) {
+      return {
+        panelPaddingLeft,
+        panelPaddingRight,
+        panelPaddingTop,
+        panelPaddingBottom,
+        left: `${0 - left}px`,
+        panelWidth: '100vw',
+      };
+    }
+
+    const centerAlign = `calc((${contentWidth}px - ${transformSize(
+      panelWidth,
+    )}) / 2)`;
+
+    const leftAlign = `0`;
+
+    const rightAlign = `calc((${contentWidth}px - ${transformSize(
+      panelWidth,
+    )}))`;
+
+    return {
+      panelPaddingLeft: 0,
+      panelPaddingRight: 0,
+      panelPaddingTop,
+      panelPaddingBottom,
+      left:
+        panelAlign === 'left'
+          ? leftAlign
+          : panelAlign === 'right'
+          ? rightAlign
+          : centerAlign,
+      panelWidth,
+    };
   };
 
   buildStyle = () => {
@@ -106,15 +171,24 @@ class Popover extends BaseComponent {
       height,
       panelShadow,
       panelShadowColor,
+      backgroundColor,
+      panelShadowHorizontal,
+      panelShadowVertical,
+      panelShadowBlur,
+      panelShadowSpread,
+      panelShadowMode,
+    } = this.props;
+
+    const position = this.getPosition();
+
+    const {
       panelPaddingLeft,
       panelPaddingRight,
       panelPaddingTop,
       panelPaddingBottom,
-      backgroundColor,
-    } = this.props;
-    const { left } = this.state;
-
-    const position = this.getPosition();
+      left,
+      panelWidth,
+    } = this.getPanelLayout();
 
     return {
       ...style,
@@ -145,7 +219,8 @@ class Popover extends BaseComponent {
             '--panel-top': `calc((${transformSize(height)} + ${transformSize(
               arrowSize,
             )} * 3 / 4 + ${transformSize(arrowDistance)}) * -1)`,
-            '--panel-left': `${0 - left}px`,
+            '--panel-left': left,
+            '--panel-width': transformSize(panelWidth),
           }
         : {}),
       ...(position === 'bottom'
@@ -169,7 +244,8 @@ class Popover extends BaseComponent {
             '--panel-top': `calc((${transformSize(
               arrowSize,
             )} * 3 / 4 + ${transformSize(arrowDistance)}))`,
-            '--panel-left': `${0 - left}px`,
+            '--panel-left': left,
+            '--panel-width': transformSize(panelWidth),
           }
         : {}),
       ...{
@@ -182,7 +258,13 @@ class Popover extends BaseComponent {
       },
       ...(panelShadow
         ? {
-            '--panel-shadow-color': panelShadowColor,
+            '--panel-shadow': `${transformSize(
+              panelShadowHorizontal,
+            )} ${transformSize(panelShadowVertical)} ${transformSize(
+              panelShadowBlur,
+            )} ${transformSize(panelShadowSpread)} ${panelShadowColor} ${
+              panelShadowMode === 'inset' ? 'inset' : ''
+            }`,
           }
         : {}),
     };
@@ -232,6 +314,7 @@ class Popover extends BaseComponent {
             })}
             style={{
               borderRadius: transformSize(panelBorderRadius),
+              height: '100%',
               overflow: 'hidden',
             }}
           >

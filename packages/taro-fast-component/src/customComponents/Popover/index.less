@@ -18,7 +18,8 @@
   --panel-padding-right: 0;
   --panel-padding-top: 0;
   --panel-padding-bottom: 0;
-  --panel-shadow-color: #ccc;
+  --panel-shadow: none;
+  --panel-width: 100vw;
 
   height: var(--wrap-height);
 
@@ -68,7 +69,7 @@
       left: var(--panel-left);
       height: var(--panel-height);
       z-index: var(--panel-z-index);
-      width: 100vw;
+      width: var(--panel-width);
       background-color: transparent;
 
       &__inner {
@@ -84,8 +85,7 @@
       }
 
       &__inner--shadow {
-        box-shadow: var(--tfc-0) var(--tfc-0) var(--tfc-10) var(--tfc-5)
-          var(--panel-shadow-color);
+        box-shadow: var(--panel-shadow);
       }
     }
   }

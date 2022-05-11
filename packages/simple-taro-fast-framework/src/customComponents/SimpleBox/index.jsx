@@ -48,6 +48,7 @@ const defaultProps = {
   componentName: '',
   mockChildren: true,
   useInnerBox: true,
+  innerBoxMinHeight: 120,
   innerBoxCenterMode: true,
   innerBoxPadding: true,
   controlBox: null,
@@ -161,14 +162,19 @@ class SimpleBox extends Component {
   };
 
   buildExhibitionArea = () => {
-    const { useInnerBox, innerBoxCenterMode, innerBoxPadding, children } =
-      this.props;
+    const {
+      useInnerBox,
+      innerBoxCenterMode,
+      innerBoxMinHeight,
+      innerBoxPadding,
+      children,
+    } = this.props;
 
     return useInnerBox ? (
       <View
         style={{
           ...{
-            minHeight: transformSize(120),
+            minHeight: transformSize(innerBoxMinHeight || 120),
             border: 'var(--tfc-1) solid #f2e5c0',
             borderRadius: transformSize(6),
           },
