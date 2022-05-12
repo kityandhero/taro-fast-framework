@@ -432,6 +432,16 @@ export const defaultSettingsLayoutCustom = {
 
     return footerDescription || '';
   },
+  getAppId: () => {
+    const appInit = getAppInitConfigData();
+
+    const { appId } = {
+      ...{ appId: '' },
+      ...(appInit || {}),
+    };
+
+    return appId || '';
+  },
 };
 
 /**

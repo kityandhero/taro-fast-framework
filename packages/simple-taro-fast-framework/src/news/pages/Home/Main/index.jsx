@@ -22,7 +22,7 @@ import {
   FloatAction,
 } from 'taro-fast-component/es/customComponents';
 
-import { pathCollection } from '../../../../customConfig/config';
+import { pathCollection } from '../../../../customConfig/pathConfig';
 import BasePageWrapper from '../../BasePageWrapper';
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 

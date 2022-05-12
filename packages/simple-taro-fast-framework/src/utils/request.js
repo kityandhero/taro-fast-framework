@@ -1,8 +1,6 @@
 import { request } from 'taro-fast-framework/es/utils/requestAssistor';
 import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 
-import { appId } from '../customConfig/config';
-
 /**
  * begin request（remote request / local virtual requests）
  * @param {*} api [string]: request address
@@ -35,18 +33,11 @@ export async function executiveRequest({
   virtualRequestResult = true,
   virtualNeedAuthorize = false,
 }) {
-  const headerChange = {
-    ...(header || {}),
-    ...{
-      appId,
-    },
-  };
-
   return request({
     api,
     urlParams,
     params,
-    header: headerChange,
+    header: header || {},
     method,
     useVirtualRequest,
     showUseVirtualRequestMessage,

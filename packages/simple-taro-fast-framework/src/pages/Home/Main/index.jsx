@@ -8,7 +8,7 @@ import {
   Icon,
 } from 'taro-fast-component/es/customComponents';
 
-import { pathCollection } from '../../../customConfig/config';
+import { pathCollection } from '../../../customConfig/pathConfig';
 import PageWrapperSimulation from '../../../customComponents/PageWrapperSimulation';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
@@ -128,7 +128,7 @@ const listData = [
     webPage: true,
     path: pathCollection.example.webPage.path,
     webPageTitle: 'H5版本',
-    webPageUrl: 'http://mtest.panduolakeji.com',
+    webPageUrl: 'http://mtest.1010101.cc',
     hidden: isBrowser,
   },
   {

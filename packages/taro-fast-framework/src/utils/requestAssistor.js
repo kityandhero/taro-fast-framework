@@ -9,6 +9,7 @@ import {
   redirectTo,
   trim,
   recordText,
+  recordInfo,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -514,11 +515,20 @@ export async function request({
     });
   }
 
+  const appId = defaultSettingsLayoutCustom.getAppId() || '';
+
+  if (stringIsNullOrWhiteSpace(appId)) {
+    recordInfo('info appId is header is empty');
+  }
+
   if (trim(toUpper(method)) === 'POST') {
     return remoteRequest.Execute({
       url,
       data: params,
-      header: header || {},
+      header: {
+        ...{ appId },
+        ...(header || {}),
+      },
       option: {},
       method: requestMethod.post,
     });
@@ -528,7 +538,10 @@ export async function request({
     return remoteRequest.Execute({
       url,
       data: params,
-      header: header || {},
+      header: {
+        ...{ appId },
+        ...(header || {}),
+      },
       option: {},
       method: requestMethod.get,
     });

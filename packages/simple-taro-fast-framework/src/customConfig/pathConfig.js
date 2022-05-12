@@ -1,6 +1,3 @@
-// export const appId = 'pdainpxvam7wu8';
-export const appId = 'pdainpxvam7wu8';
-
 const rootPathCollection = {
   main: {
     path: '/pages/home/main/index',

@@ -94,6 +94,7 @@ export const defaultEmptyImage = '/noImageSmall.png';
 export const emptyLogo = emptyLogoSource;
 
 export const appInitDefault = {
+  appId: '',
   platformName: '平台名称',
   appName: '应用名称',
   appDescription: '应用描述',

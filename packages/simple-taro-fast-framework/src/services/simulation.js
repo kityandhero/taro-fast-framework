@@ -71,8 +71,8 @@ const article = {
   renderTypeNote: '媒体渲染',
   statusNote: '已下线',
   image: defaultSettingsLayoutCustom.getEmptyLogo(),
-  video: 'http://file.panduolakeji.com/1053686316.mp4',
-  audio: 'http://file.panduolakeji.com/1057052295.mpeg',
+  video: 'http://file.1010101.cc/1053686316.mp4',
+  audio: 'http://file.1010101.cc/1057052295.mpeg',
   imageList: [
     defaultSettingsLayoutCustom.getEmptyLogo(),
     defaultSettingsLayoutCustom.getEmptyLogo(),
@@ -104,7 +104,7 @@ const article = {
       title: '段落',
       description: '',
       image:
-        'http://file.panduolakeji.com/1036865750.jpeg?imageMogr2/thumbnail/340x340/format/jpg/blur/1x0/quality/75',
+        'http://file.1010101.cc/1036865750.jpeg?imageMogr2/thumbnail/340x340/format/jpg/blur/1x0/quality/75',
       link: '',
       video: '',
       audio: '',
@@ -136,7 +136,7 @@ const article = {
       title: '图片',
       description: '',
       image:
-        'http://file.panduolakeji.com/530011601.jpeg?imageMogr2/thumbnail/340x340/format/jpg/blur/1x0/quality/75',
+        'http://file.1010101.cc/530011601.jpeg?imageMogr2/thumbnail/340x340/format/jpg/blur/1x0/quality/75',
       link: '',
       video: '',
       audio: '',

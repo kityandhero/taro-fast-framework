@@ -13,11 +13,12 @@ import models from './models';
 import './app.less';
 
 const config = {
+  appId: 'pdbkzlnf00wu0w',
   showLogInConsole: checkEnvIsDevelopment(),
   // showRequestInfo: checkEnvIsDevelopment(),
   showUseVirtualRequestMessage: false,
   apiPrefix: {
-    corsTargetDomain: 'https://universalitymallapi.panduolakeji.com',
+    corsTargetDomain: 'https://universalitymallapi.1010101.cc',
   },
   apiSuccessCode: 200,
   authenticationFailCode: 2001,

@@ -1,6 +1,6 @@
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import { pathCollection } from '../../../customConfig/config';
+import { pathCollection } from '../../../customConfig/pathConfig';
 import BasePageWrapperCore from '../BasePageWrapperCore';
 
 export default class BasePageWrapper extends BasePageWrapperCore {
