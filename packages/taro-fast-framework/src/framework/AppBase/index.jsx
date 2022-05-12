@@ -14,6 +14,7 @@ import {
   canIUse,
   clearLocalStorage,
   getUpdateManager,
+  isWechat,
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -104,33 +105,35 @@ class AppBase extends Component {
   };
 
   checkUpdateVersion = () => {
-    if (canIUse('getUpdateManager')) {
-      const updateManager = getUpdateManager();
+    if (isWechat) {
+      if (canIUse('getUpdateManager')) {
+        const updateManager = getUpdateManager();
 
-      const that = this;
+        const that = this;
 
-      updateManager.onCheckForUpdate((data) => {
-        if (data.hasUpdate) {
-          updateManager.onUpdateReady(() => {
-            clearLocalStorage;
+        updateManager.onCheckForUpdate((data) => {
+          if (data.hasUpdate) {
+            updateManager.onUpdateReady(() => {
+              clearLocalStorage;
 
-            updateManager.applyUpdate();
-          });
-          updateManager.onUpdateFailed(() => {
-            that.showModal({
-              title: '已经有新版本喽~',
-              content:
-                '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',
+              updateManager.applyUpdate();
             });
-          });
-        }
-      });
-    } else {
-      this.showModal({
-        title: '溫馨提示',
-        content:
-          '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
-      });
+            updateManager.onUpdateFailed(() => {
+              that.showModal({
+                title: '已经有新版本喽~',
+                content:
+                  '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',
+              });
+            });
+          }
+        });
+      } else {
+        this.showModal({
+          title: '溫馨提示',
+          content:
+            '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
+        });
+      }
     }
   };
 
