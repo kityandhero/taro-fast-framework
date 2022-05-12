@@ -442,6 +442,26 @@ export const defaultSettingsLayoutCustom = {
 
     return appId || '';
   },
+  getSimulationLocation: () => {
+    const appInit = getAppInitConfigData();
+
+    const { simulationLocation } = {
+      ...{ simulationLocation: false },
+      ...(appInit || {}),
+    };
+
+    return !!(simulationLocation || false);
+  },
+  getSimulationLocationData: () => {
+    const appInit = getAppInitConfigData();
+
+    const { simulationLocationData } = {
+      ...{ simulationLocationData: {} },
+      ...(appInit || {}),
+    };
+
+    return simulationLocationData || {};
+  },
 };
 
 /**

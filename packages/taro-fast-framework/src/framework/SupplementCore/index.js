@@ -18,6 +18,7 @@ import {
   isFunction,
   isUndefined,
   isString,
+  isObject,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
@@ -127,10 +128,26 @@ class SupplementCore extends Common {
     showLoading = false,
     fromLaunch = false,
     failCallback,
-    simulationMode = false,
-    simulationData = null,
   }) => {
     recordDebug('exec obtainLocation');
+
+    const simulationMode = defaultSettingsLayoutCustom.getSimulationLocation();
+    const simulationData =
+      defaultSettingsLayoutCustom.getSimulationLocationData();
+
+    if (simulationMode) {
+      recordInfo('info simulation location in config is true');
+
+      if (!isObject(simulationData)) {
+        recordObject({
+          simulationLocationData: simulationData,
+        });
+
+        throw new Error(
+          'simulation location Data must be an object when simulation location in config is true',
+        );
+      }
+    }
 
     let needRelocation = force || false;
 

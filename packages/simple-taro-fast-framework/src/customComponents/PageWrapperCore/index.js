@@ -115,17 +115,6 @@ export default class PageWrapper extends AuthorizationWrapper {
         showLoading: false,
         fromLaunch: false,
         failCallback: null,
-        simulationMode: true,
-        simulationData: {
-          latitude: 34.74821,
-          longitude: 113.61332,
-          speed: -1,
-          accuracy: 65,
-          altitude: 0,
-          verticalAccuracy: 65,
-          horizontalAccuracy: 65,
-          dataVersion: 917923,
-        },
       });
     } else {
       that.getLocationWeatherCore({

@@ -118,6 +118,8 @@ export const appInitDefault = {
   navigationToSignInWhenSignInSilentFail: false,
   signInPath: '/user/login',
   useLocation: false,
+  simulationLocation: false,
+  simulationLocationData: {},
   mapKey: '',
   defaultLatitude: '',
   defaultLongitude: '',
