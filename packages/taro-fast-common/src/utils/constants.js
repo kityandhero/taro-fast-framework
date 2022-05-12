@@ -136,6 +136,7 @@ export const appInitDefault = {
   signInFailFlag: verifySignInResult.fail,
   signInUnknownFlag: verifySignInResult.unknown,
   defaultMetaData: {},
+  weatherApi: 'https://wis.qq.com/weather/common',
 };
 
 /**

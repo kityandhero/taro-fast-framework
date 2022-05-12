@@ -4,15 +4,23 @@ import {
   getGuid,
   getNow,
   recordInfo,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 
 import { getVerifySignInResult } from '../utils/tools';
 import { request } from '../utils/requestAssistor';
+import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 
 export async function getWeatherData(params) {
+  const weatherApi = defaultSettingsLayoutCustom.getWeatherApi();
+
+  if (stringIsNullOrWhiteSpace(weatherApi)) {
+    throw new Error('weatherApi is null, please check it in app config');
+  }
+
   return request({
-    api: `https://wis.qq.com/weather/common`,
+    api: weatherApi,
     urlParams: params,
     method: 'GET',
   });

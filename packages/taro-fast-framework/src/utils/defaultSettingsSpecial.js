@@ -116,6 +116,16 @@ export const defaultSettingsLayoutCustom = {
 
     return tokenAnonymous || 'anonymous';
   },
+  getWeatherApi: () => {
+    const appInit = getAppInitConfigData();
+
+    const { weatherApi } = {
+      ...{ weatherApi: '' },
+      ...(appInit || {}),
+    };
+
+    return weatherApi || '';
+  },
   getDefaultMetaData: () => {
     const appInit = getAppInitConfigData();
 
