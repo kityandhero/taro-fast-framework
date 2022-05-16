@@ -189,6 +189,10 @@ export function hideNavigationBarLoading() {
   }
 }
 
+/**
+ *
+ * @returns get current page instance
+ */
 export function getCurrentInstance() {
   return getCurrentInstanceCore();
 }
