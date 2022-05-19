@@ -28,8 +28,8 @@
     "url": "https://github.com/kityandhero/taro-fast-framework/issues"
   },
   "dependencies": {
-    "commander": "^9.1.0",
-    "fs-extra": "^10.0.1"
+    "commander": "^9.2.0",
+    "fs-extra": "^10.1.0"
   },
   "devDependencies": {
     "download-git-repo": "^3.0.2",
