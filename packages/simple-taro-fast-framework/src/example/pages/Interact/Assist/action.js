@@ -1,13 +1,13 @@
 import { recordObject, recordText } from 'taro-fast-common/es/utils/tools';
 import {
-  getApiDataCore,
+  apiDataConvertCore,
   actionCore,
   actionSheetCore,
   actionModalCore,
 } from 'taro-fast-framework/es/utils/actionAssist';
 
-function getApiData(props) {
-  return getApiDataCore({ props, modelName: 'simulation' });
+function apiDataConvert(props) {
+  return apiDataConvertCore({ props, modelName: 'simulation' });
 }
 
 export function getOverviewAction({
@@ -22,7 +22,7 @@ export function getOverviewAction({
   actionCore({
     api: 'simulation/getOverview',
     params: handleData,
-    getApiData,
+    apiDataConvert,
     target,
     handleData,
     successCallback,
@@ -45,7 +45,7 @@ export function pageListAction({
   actionCore({
     api: 'simulation/pageList',
     params: handleData,
-    getApiData,
+    apiDataConvert,
     target,
     handleData,
     successCallback,

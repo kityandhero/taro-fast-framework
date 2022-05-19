@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Space,
   FlexBox,
@@ -58,8 +58,8 @@ export default class Index extends BasePageWrapper {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'news' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'news' });
   };
 
   doWorkBeforeAdjustDidMount = () => {

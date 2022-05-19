@@ -60,7 +60,7 @@ import {
   setAdministrativeDivisionFullData,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
-import { getApiDataCore } from '../../utils/actionAssist';
+import { apiDataConvertCore } from '../../utils/actionAssist';
 
 import Common from '../Common';
 
@@ -567,7 +567,7 @@ class SupplementCore extends Common {
       );
     }
 
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -663,7 +663,7 @@ class SupplementCore extends Common {
       );
     }
 
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -1065,7 +1065,7 @@ class SupplementCore extends Common {
       );
     }
 
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -1615,10 +1615,10 @@ class SupplementCore extends Common {
 
   getCustomerApiData = () => {
     recordInfo(
-      'info built-in getCustomerApiData is a simulation,if you need actual business,you need override it: getCustomerApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+      'info built-in getCustomerApiData is a simulation,if you need actual business,you need override it: getCustomerApiData = () => {} and return a object like "return apiDataConvertCore({props: this.props,modelName: \'schedulingControl\',})"',
     );
 
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -1736,7 +1736,7 @@ class SupplementCore extends Common {
   };
 
   getExchangePhoneApiData = () => {
-    return getApiDataCore({
+    return apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -1825,7 +1825,7 @@ class SupplementCore extends Common {
   };
 
   getRegisterWithWeChatApiData = () => {
-    return getApiDataCore({
+    return apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -1939,7 +1939,7 @@ class SupplementCore extends Common {
   };
 
   getRegisterApiData = () => {
-    return getApiDataCore({
+    return apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -2279,10 +2279,10 @@ class SupplementCore extends Common {
 
   getMetaDataApiData = () => {
     recordInfo(
-      'info built-in getMetaDataApiData is a simulation,if you need actual business,you need override it: getMetaDataApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+      'info built-in getMetaDataApiData is a simulation,if you need actual business,you need override it: getMetaDataApiData = () => {} and return a object like "return apiDataConvertCore({props: this.props,modelName: \'schedulingControl\',})"',
     );
 
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });
@@ -2379,10 +2379,10 @@ class SupplementCore extends Common {
 
   getFullAdministrativeDivisionDataApiData = () => {
     recordInfo(
-      'info built-in getFullAdministrativeDivisionDataApiData is a simulation,if you need actual business,you need override it: getFullAdministrativeDivisionDataApiData = () => {} and return a object like "return getApiDataCore({props: this.props,modelName: \'schedulingControl\',})"',
+      'info built-in getFullAdministrativeDivisionDataApiData is a simulation,if you need actual business,you need override it: getFullAdministrativeDivisionDataApiData = () => {} and return a object like "return apiDataConvertCore({props: this.props,modelName: \'schedulingControl\',})"',
     );
 
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
     });

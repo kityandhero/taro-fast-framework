@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { CenterBox, Icon } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
@@ -31,8 +31,8 @@ export default class Index extends ContentPageBase {
 
   // capsulePromptWithCustomHeadNavigation = true;
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   buildCapsulePrompt = () => {

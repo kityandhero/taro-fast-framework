@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { CenterBox } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
@@ -27,8 +27,8 @@ export default class Index extends ContentPageBase {
 
   enableFooter = true;
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   renderFurther() {

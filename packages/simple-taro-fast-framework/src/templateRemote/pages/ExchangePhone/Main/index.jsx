@@ -11,7 +11,7 @@ import {
   CenterBox,
   Button,
 } from 'taro-fast-component/es/customComponents';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
@@ -56,8 +56,8 @@ export default class Index extends BasePageWrapper {
     removeSession();
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   triggerPhoneNumber = (e) => {
@@ -135,8 +135,8 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            getApiData: `(props) => {
-              return getApiDataCore({ props, modelName: 'entrance' });
+            apiDataConvert: `(props) => {
+              return apiDataConvertCore({ props, modelName: 'entrance' });
             }`,
             triggerPhoneNumber: `(e) => {
               const {

@@ -18,18 +18,18 @@ import {
 import { toString, toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import { checkWhetherAuthorizeFail } from '../../utils/tools';
-import { getApiDataCore } from '../../utils/actionAssist';
+import { apiDataConvertCore } from '../../utils/actionAssist';
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 
 import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
-  getApiData = (props) => {
+  apiDataConvert = (props) => {
     recordInfo(
-      'info build-in getApiData modelName is schedulingControl, if you need custom logic,you need override it: getApiData = (props) => { return getApiDataCore({ props, modelName: "modelName" }) }',
+      'info build-in apiDataConvert modelName is schedulingControl, if you need custom logic,you need override it: apiDataConvert = (props) => { return apiDataConvertCore({ props, modelName: "modelName" }) }',
     );
 
-    return getApiDataCore({ props, modelName: 'schedulingControl' });
+    return apiDataConvertCore({ props, modelName: 'schedulingControl' });
   };
 
   /**
@@ -288,7 +288,7 @@ class Base extends Infrastructure {
               dispatchComplete: true,
             };
 
-            const metaOriginalData = that.getApiData(that.props);
+            const metaOriginalData = that.apiDataConvert(that.props);
 
             if (isUndefined(metaOriginalData)) {
               that.setState(willSaveToState);
@@ -487,8 +487,8 @@ class Base extends Infrastructure {
       payload,
     }).then(() => {
       const metaOriginalData = stringIsNullOrWhiteSpace(modelName)
-        ? this.getApiData(this.props)
-        : getApiDataCore({
+        ? this.apiDataConvert(this.props)
+        : apiDataConvertCore({
             props: this.props,
             modelName: modelName,
             key: key || '',

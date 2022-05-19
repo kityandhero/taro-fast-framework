@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { Space } from 'taro-fast-component/es/customComponents';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
 import CodePageBox from '../../../../customComponents/CodePageBox';
@@ -19,8 +19,8 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   renderFurther() {
@@ -35,7 +35,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getRefreshSessionApiData: `() => {
-              const data = getApiDataCore({
+              const data = apiDataConvertCore({
                 props: this.props,
                 modelName: 'session',
               });
@@ -49,7 +49,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getCheckTicketValidityApiData: `() => {
-              const data = getApiDataCore({
+              const data = apiDataConvertCore({
                 props: this.props,
                 modelName: 'entrance',
               });
@@ -63,7 +63,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getSignInSilentApiData: `() => {
-              return getApiDataCore({ props: this.props, modelName: 'entrance' });
+              return apiDataConvertCore({ props: this.props, modelName: 'entrance' });
             }`,
             parseSignInResultFromSignInApiData: `(remoteData) => {
               const verifySignInResult = getVerifySignInResult();
@@ -83,7 +83,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getCustomerApiData: `() => {
-              const data = getApiDataCore({
+              const data = apiDataConvertCore({
                 props: this.props,
                 modelName: 'customer',
               });
@@ -97,7 +97,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getExchangePhoneApiData: `() => {
-              return getApiDataCore({
+              return apiDataConvertCore({
                 props: this.props,
                 modelName: 'session',
               });
@@ -109,7 +109,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getRegisterWithWeChatApiData: `() => {
-              return getApiDataCore({
+              return apiDataConvertCore({
                 props: this.props,
                 modelName: 'entrance',
               });
@@ -121,7 +121,7 @@ export default class Index extends BasePageWrapper {
               });
             }`,
             getRegisterApiData: `() => {
-              return getApiDataCore({
+              return apiDataConvertCore({
                 props: this.props,
                 modelName: 'entrance',
               });

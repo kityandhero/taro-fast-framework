@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   SwitchItem,
   Icon,
@@ -119,8 +119,8 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'simulation' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'simulation' });
   };
 
   establishControlList = () => {

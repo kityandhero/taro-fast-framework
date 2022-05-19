@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 import { Space } from 'taro-fast-component/es/customComponents';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
@@ -62,8 +62,8 @@ export default class Index extends BasePageWrapper {
     removeSession();
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   getSignInResultText = () => {
@@ -102,8 +102,8 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            getApiData: `(props) => {
-              return getApiDataCore({ props, modelName: 'entrance' });
+            apiDataConvert: `(props) => {
+              return apiDataConvertCore({ props, modelName: 'entrance' });
             }`,
             getSignInResultText: `() => {
               const verifySignInResult = getVerifySignInResult();

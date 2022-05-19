@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Button, Space } from 'taro-fast-component/es/customComponents';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
@@ -41,8 +41,8 @@ export default class Index extends BasePageWrapper {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'customer' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'customer' });
   };
 
   doWorkAdjustDidMount = () => {
@@ -107,8 +107,8 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            getApiData: `(props) => {
-              return getApiDataCore({ props, modelName: 'entrance' });
+            apiDataConvert: `(props) => {
+              return apiDataConvertCore({ props, modelName: 'entrance' });
             }`,
             doWorkAdjustDidMount: `() => {
               this.buildWeatherData();

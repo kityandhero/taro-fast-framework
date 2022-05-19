@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { recordObject, transformSize } from 'taro-fast-common/es/utils/tools';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   VerticalBox,
   Space,
@@ -52,8 +52,8 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'simulation' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'simulation' });
   };
 
   onActionClick = () => {

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   CenterBox,
   Grid,
@@ -79,8 +79,8 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   renderFurther() {

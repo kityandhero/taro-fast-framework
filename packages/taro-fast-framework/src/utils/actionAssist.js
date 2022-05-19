@@ -20,11 +20,11 @@ import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import { checkWhetherAuthorizeFail } from './tools';
 
 /**
- * getApiDataCore
+ * apiDataConvertCore
  * @param {*} param0
  * @returns
  */
-export function getApiDataCore({ props, modelName, key = 'data' }) {
+export function apiDataConvertCore({ props, modelName, key = 'data' }) {
   if (isUndefined(props)) {
     throw new Error('props is undefined, please check params.');
   }
@@ -35,7 +35,7 @@ export function getApiDataCore({ props, modelName, key = 'data' }) {
     recordObject(props);
 
     recordError(
-      `getApiDataCore error: model ${modelName} is null or undefined`,
+      `apiDataConvertCore error: model ${modelName} is null or undefined`,
     );
   }
 
@@ -45,7 +45,7 @@ export function getApiDataCore({ props, modelName, key = 'data' }) {
     recordObject(props);
 
     recordError(
-      `getApiDataCore error: key “${key}” in model ${modelName} is null or undefined`,
+      `apiDataConvertCore error: key “${key}” in model ${modelName} is null or undefined`,
     );
   }
 
@@ -121,7 +121,7 @@ export function handleItem({ target, dataId, compareDataIdHandler, handler }) {
  * remote assess wrapper core
  * @param {*} api [string] remote api path.
  * @param {*} params [object] remote api params.
- * @param {*} getApiData [function] get api data handler.
+ * @param {*} apiDataConvert [function] get api data handler.
  * @param {*} target [object] target.
  * @param {*} handleData [object] origin processing data.
  * @param {*} failureCallback [function] remote access logic fail handler, eg. failureCallback(remoteData,whetherCauseByAuthorizeFail).
@@ -134,7 +134,7 @@ export function handleItem({ target, dataId, compareDataIdHandler, handler }) {
 export async function actionCore({
   api,
   params,
-  getApiData = null,
+  apiDataConvert = null,
   target,
   handleData,
   failureCallback,
@@ -194,15 +194,17 @@ export async function actionCore({
                   }, 200);
                 }
 
-                if (!isFunction(getApiData)) {
-                  throw new Error('actionCore: getApiData must be function');
+                if (!isFunction(apiDataConvert)) {
+                  throw new Error(
+                    'actionCore: apiDataConvert must be function',
+                  );
                 }
 
-                const data = getApiData(target.props);
+                const data = apiDataConvert(target.props);
 
                 if ((data || null) == null) {
                   throw new Error(
-                    'actionCore: getApiData result not allow null',
+                    'actionCore: apiDataConvert result not allow null',
                   );
                 }
 
@@ -210,18 +212,19 @@ export async function actionCore({
 
                 if (dataSuccess) {
                   const {
-                    list: listData,
-                    data: singleData,
-                    extra: extraData,
+                    list: remoteListData,
+                    data: remoteData,
+                    extra: remoteExtraData,
                   } = data;
 
                   let messageText = successMessage;
 
                   if (isFunction(successMessageBuilder)) {
                     messageText = successMessageBuilder({
-                      list: listData || [],
-                      data: singleData || {},
-                      extra: extraData || {},
+                      remoteListData: remoteListData || [],
+                      remoteData: remoteData || null,
+                      remoteExtraData: remoteExtraData || null,
+                      remoteOriginal: data,
                     });
                   }
 
@@ -233,11 +236,10 @@ export async function actionCore({
                     successCallback({
                       target,
                       handleData,
-                      remoteData: {
-                        list: listData || [],
-                        data: singleData || {},
-                        extra: extraData || {},
-                      },
+                      remoteListData: remoteListData || [],
+                      remoteData: remoteData || null,
+                      remoteExtraData: remoteExtraData || null,
+                      remoteOriginal: data,
                     });
                   }
                 } else {

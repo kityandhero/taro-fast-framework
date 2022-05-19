@@ -3,12 +3,12 @@ import {
   transformListData,
 } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   getMap,
   getAdministrativeDivisionFullData,
 } from 'taro-fast-framework/es/utils/globalStorageAssist';
-// import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+// import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { getQQMapWX } from '../../utils/tools';
 
@@ -67,7 +67,7 @@ export default class PageWrapper extends AuthorizationWrapper {
   };
 
   getFullAdministrativeDivisionDataApiData = () => {
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'administrativeDivision',
     });

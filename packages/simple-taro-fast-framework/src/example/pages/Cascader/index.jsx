@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { md5, transformListData } from 'taro-fast-common/es/utils/tools';
 import { Cascader, Space } from 'taro-fast-component/es/customComponents';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
@@ -211,8 +211,8 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'administrativeDivision' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'administrativeDivision' });
   };
 
   afterLoadSuccess = ({

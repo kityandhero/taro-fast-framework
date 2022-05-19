@@ -1,5 +1,5 @@
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
 import {
@@ -47,7 +47,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getRefreshSessionApiData = () => {
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'session',
     });
@@ -63,7 +63,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getMetaDataApiData = () => {
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'global',
     });
@@ -79,7 +79,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getCheckTicketValidityApiData = () => {
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'entrance',
     });
@@ -95,7 +95,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getSignInSilentApiData = () => {
-    return getApiDataCore({ props: this.props, modelName: 'entrance' });
+    return apiDataConvertCore({ props: this.props, modelName: 'entrance' });
   };
 
   dispatchGetCustomer = (data = {}) => {
@@ -106,7 +106,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getCustomerApiData = () => {
-    const data = getApiDataCore({
+    const data = apiDataConvertCore({
       props: this.props,
       modelName: 'customer',
     });
@@ -122,7 +122,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getExchangePhoneApiData = () => {
-    return getApiDataCore({
+    return apiDataConvertCore({
       props: this.props,
       modelName: 'session',
     });
@@ -136,7 +136,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getRegisterWithWeChatApiData = () => {
-    return getApiDataCore({
+    return apiDataConvertCore({
       props: this.props,
       modelName: 'entrance',
     });
@@ -150,7 +150,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
   };
 
   getRegisterApiData = () => {
-    return getApiDataCore({
+    return apiDataConvertCore({
       props: this.props,
       modelName: 'entrance',
     });

@@ -8,7 +8,7 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Space,
   ImageBox,
@@ -77,8 +77,8 @@ export default class Index extends BasePageWrapper {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'news' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'news' });
   };
 
   afterLoadSuccess = ({

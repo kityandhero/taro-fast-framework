@@ -5,7 +5,7 @@ import {
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Button,
   CenterBox,
@@ -47,8 +47,8 @@ export default class Index extends BasePageWrapper {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'entrance' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'entrance' });
   };
 
   doWorkAdjustDidMount = () => {
@@ -135,8 +135,8 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            getApiData: `(props) => {
-              return getApiDataCore({ props, modelName: 'entrance' });
+            apiDataConvert: `(props) => {
+              return apiDataConvertCore({ props, modelName: 'entrance' });
             }`,
             doWorkAdjustDidMount: `() => {
               this.buildWeatherData();

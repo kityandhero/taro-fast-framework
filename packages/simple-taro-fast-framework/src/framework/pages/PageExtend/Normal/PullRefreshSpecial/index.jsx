@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { getApiDataCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Card,
   Space,
@@ -88,8 +88,8 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  getApiData = (props) => {
-    return getApiDataCore({ props, modelName: 'simulation' });
+  apiDataConvert = (props) => {
+    return apiDataConvertCore({ props, modelName: 'simulation' });
   };
 
   renderContent = () => {
