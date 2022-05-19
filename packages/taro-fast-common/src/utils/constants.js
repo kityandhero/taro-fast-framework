@@ -28,6 +28,9 @@ export const underlyingState = {
   externalData: null,
 };
 
+/**
+ * 扩展state
+ */
 export const underlyingExtensionState = {
   dataLoading: true,
 };
