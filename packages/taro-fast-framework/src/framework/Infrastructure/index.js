@@ -313,6 +313,9 @@ export default class Infrastructure extends ComponentBase {
    */
   verifyTicketValidity = false;
 
+  /**
+   * 强制刷新元数据
+   */
   initMetaDataForce = false;
 
   initMetaDataRequestData = {};
