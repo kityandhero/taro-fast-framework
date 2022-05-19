@@ -1442,7 +1442,7 @@ export function transformData({
     });
   }
 
-  d.children = listData;
+  d[recursiveKey] = listData;
 
   return d;
 }
