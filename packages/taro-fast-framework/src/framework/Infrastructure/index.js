@@ -92,7 +92,7 @@ export default class Infrastructure extends ComponentBase {
   /**
    * 模拟渐显效果的持续时间
    */
-  simulationFadeSpinDuration = 300;
+  simulationFadeSpinDuration = 200;
 
   /**
    * 启用右上角操作提示
