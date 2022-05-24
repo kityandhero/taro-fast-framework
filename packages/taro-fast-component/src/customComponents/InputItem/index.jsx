@@ -352,7 +352,7 @@ class InputItem extends BaseComponent {
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
                     ...(align == 'center' ? { textAlign: 'center' } : {}),
-                    ...{ width: '100%' },
+                    // ...{ width: '100%' },
                   }}
                 >
                   {stringIsNullOrWhiteSpace(this.currentValue) ? (
@@ -381,7 +381,7 @@ class InputItem extends BaseComponent {
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
                     ...(align == 'center' ? { textAlign: 'center' } : {}),
-                    ...{ width: '100%' },
+                    // ...{ width: '100%' },
                   }}
                   password={!!password}
                   placeholder={placeholder}
