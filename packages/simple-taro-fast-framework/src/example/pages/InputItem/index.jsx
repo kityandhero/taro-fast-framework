@@ -194,6 +194,17 @@ const config19 = {
   placeholderStyle: { color: '#45e325' },
 };
 
+const config191 = {
+  required: true,
+  layout: 'vertical',
+  label: '描述',
+  description: '填写用户的名称, 例如 李明',
+  areaMode: true,
+  icon: <IconCheckCircle size={38} showInfo color="green" />,
+  placeholder: '请输入用户名',
+  placeholderStyle: { color: '#45e325' },
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '输入项',
@@ -302,6 +313,10 @@ export default class Index extends ContentPageBase {
       {
         header: '最大输入长度',
         config: config13,
+      },
+      {
+        header: '文本域模式',
+        config: config191,
       },
       {
         header: '确认文字',

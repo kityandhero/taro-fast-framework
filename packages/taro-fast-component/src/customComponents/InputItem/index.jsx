@@ -1,4 +1,4 @@
-import { View, Text, Input } from '@tarojs/components';
+import { View, Text, Input, Textarea } from '@tarojs/components';
 
 import {
   inCollection,
@@ -69,6 +69,8 @@ const defaultProps = {
   selectionStart: -1,
   selectionEnd: -1,
   adjustPosition: true,
+  areaMode: false,
+  areaAutoHeight: false,
   holdKeyboard: false,
   afterChange: null,
   onFocus: null,
@@ -248,6 +250,8 @@ class InputItem extends BaseComponent {
       selectionEnd,
       adjustPosition,
       holdKeyboard,
+      areaMode,
+      areaAutoHeight,
     } = this.props;
 
     const layout = this.getLayout();
@@ -361,6 +365,51 @@ class InputItem extends BaseComponent {
                     this.currentValue
                   )}
                 </View>
+              ) : areaMode ? (
+                <Textarea
+                  value={this.currentValue}
+                  style={{
+                    ...{
+                      fontSize: transformSize(28),
+                      borderColor: borderColor,
+                      margin:
+                        layout === 'horizontal'
+                          ? `${transformSize(0)} 0 ${transformSize(
+                              showBody ? 11 : 0,
+                            )} 0`
+                          : `${transformSize(11)} 0 ${transformSize(
+                              showBody ? 11 : 22,
+                            )} 0`,
+                    },
+                    ...valueStyle,
+                    ...(align == 'right' ? { textAlign: 'right' } : {}),
+                    ...(align == 'center' ? { textAlign: 'center' } : {}),
+                    // ...{ width: '100%' },
+                  }}
+                  placeholder={placeholder}
+                  placeholderStyle={
+                    isString(placeholderStyle)
+                      ? placeholderStyle
+                      : isObject(placeholderStyle)
+                      ? styleToString(placeholderStyle)
+                      : ''
+                  }
+                  autoHeight={areaAutoHeight}
+                  placeholderClass={placeholderClass}
+                  disabled={disabled}
+                  maxlength={maxlength}
+                  cursorSpacing={cursorSpacing}
+                  cursor={cursor}
+                  selectionStart={selectionStart}
+                  selectionEnd={selectionEnd}
+                  adjustPosition={adjustPosition}
+                  holdKeyboard={holdKeyboard}
+                  onInput={this.onInput}
+                  onFocus={this.triggerFocus}
+                  onBlur={this.triggerBlur}
+                  onConfirm={this.triggerConfirm}
+                  onKeyboardHeightChange={this.triggerKeyboardHeightChange}
+                />
               ) : (
                 <Input
                   value={this.currentValue}
