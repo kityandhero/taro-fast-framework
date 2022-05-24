@@ -8,7 +8,7 @@ import ScaleBox from '../ScaleBox';
 
 const defaultProps = {
   style: {},
-  height: 100,
+  height: 'auto',
   scaleMode: false,
   aspectRatio: 1,
   backboardStyle: {},
@@ -59,17 +59,17 @@ class BackboardBox extends BaseComponent {
   };
 
   buildContentStyle = () => {
-    const { contentStyle, contentZIndex } = this.props;
+    const { height, contentStyle, contentZIndex } = this.props;
 
     return {
       ...contentStyle,
       ...{
-        position: 'absolute',
+        position: 'relative',
         zIndex: 10,
         top: 0,
         left: 0,
         width: '100%',
-        height: '100%',
+        height: transformSize(height),
       },
       ...{
         zIndex: contentZIndex,
