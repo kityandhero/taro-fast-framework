@@ -22,6 +22,7 @@ import Divider from '../Divider';
 import PullIndicator from './PullIndicator';
 
 import './index.less';
+import Line from '../Line';
 
 const classPrefix = `tfc-variable-view`;
 
@@ -66,6 +67,7 @@ const defaultProps = {
   onLowerLoad: null,
   onExternalScroll: null,
   footer: null,
+  bottomSpaceHeight: 0,
 };
 
 class VariableView extends BaseComponent {
@@ -499,6 +501,7 @@ class VariableView extends BaseComponent {
       useRefreshingBox,
       style,
       footer,
+      bottomSpaceHeight,
       children,
     } = this.props;
     const { scrollRefreshTriggered } = this.state;
@@ -642,6 +645,10 @@ class VariableView extends BaseComponent {
             {children}
 
             {lowerLoadingFooterBoxAdjust}
+
+            {bottomSpaceHeight > 0 ? (
+              <Line transparent height={bottomSpaceHeight} />
+            ) : null}
           </View>
 
           {footer}
@@ -663,6 +670,7 @@ class VariableView extends BaseComponent {
         onTouchEnd={this.onViewTouchEnd}
       >
         {pullIndicator}
+
         {scroll ? (
           upperBox ? (
             <View
@@ -699,6 +707,10 @@ class VariableView extends BaseComponent {
             {children}
 
             {lowerLoadingFooterBoxAdjust}
+
+            {bottomSpaceHeight > 0 ? (
+              <Line transparent height={bottomSpaceHeight} />
+            ) : null}
           </View>
         ) : (
           <>

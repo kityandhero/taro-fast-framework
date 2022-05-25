@@ -324,6 +324,11 @@ export default class Infrastructure extends ComponentBase {
 
   fullAdministrativeDivisionSelectorHeight = 400;
 
+  /**
+   * 底部填充高度
+   */
+  bottomSpaceHeight = 0;
+
   constructor(props) {
     super(props);
 
@@ -1332,6 +1337,7 @@ export default class Infrastructure extends ComponentBase {
         existData={!this.judgeEmptyPlaceholderVisible()}
         upperBox={this.buildUpperBox()}
         footer={this.buildFooter()}
+        bottomSpaceHeight={this.bottomSpaceHeight}
         onExternalScroll={(callback) => {
           this.onScroll(callback);
         }}
