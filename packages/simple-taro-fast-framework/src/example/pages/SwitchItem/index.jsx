@@ -189,17 +189,11 @@ export default class Index extends ContentPageBase {
     return this.remoteRequest({
       type: 'simulation/switchStatus',
       payload: { status: value },
-    }).then(
-      (
-        {
-          // data
-        },
-      ) => {
-        // console.log(data);
+    }).then(({ data, list, extra, original }) => {
+      console.log({ data, list, extra, original });
 
-        return true;
-      },
-    );
+      return true;
+    });
   };
 
   simulationChangeStatus = () => {

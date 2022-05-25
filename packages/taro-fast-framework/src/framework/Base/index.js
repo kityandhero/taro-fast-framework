@@ -494,17 +494,20 @@ class Base extends Infrastructure {
             key: key || '',
           });
 
-      const { dataSuccess, code: remoteCode } = metaOriginalData;
+      const { dataSuccess, data: remoteData } = metaOriginalData;
 
       if (dataSuccess) {
-        const { list, data, extra } = metaOriginalData;
+        const { list, data, extra } = remoteData;
 
         return {
           list: list || [],
           data: data || {},
           extra: extra || {},
+          original: remoteData,
         };
       } else {
+        const { code: remoteCode } = remoteData;
+
         throw new Error(remoteCode);
       }
     });

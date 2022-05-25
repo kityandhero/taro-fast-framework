@@ -100,9 +100,7 @@ export default class Index extends BasePageWrapper {
       modelName: 'global',
     })
       .then(({ data }) => {
-        const {
-          data: { urlData: shareRemoteData },
-        } = data;
+        const { urlData: shareRemoteData } = data;
         const { transfer } = shareRemoteData;
 
         const mergeData = {};
