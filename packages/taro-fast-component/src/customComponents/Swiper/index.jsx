@@ -40,6 +40,7 @@ const defaultProps = {
   style: {},
   itemStyle: {},
   indicator: false,
+  indicatorBuilder: null,
   indicatorStyle: {},
   data: null,
   list: [],
@@ -738,6 +739,7 @@ class Swiper extends BaseComponent {
       itemBuilder,
       indicator,
       indicatorStyle,
+      indicatorBuilder,
       duration,
       controller,
       scaleMode,
@@ -832,6 +834,7 @@ class Swiper extends BaseComponent {
         {!!indicator ? (
           <SwiperIndicator
             indicator={currentStage}
+            indicatorBuilder={indicatorBuilder}
             list={list}
             style={indicatorStyle}
             direction={direction}
