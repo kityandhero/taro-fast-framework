@@ -11,6 +11,8 @@ const defaultProps = {
   style: {},
   list: [],
   direction: '',
+  indicator: 0,
+  indicatorBuilder: null,
 };
 
 class SwiperIndicator extends BaseComponent {
