@@ -2033,19 +2033,33 @@ class SupplementCore extends Common {
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
-            that.doAfterRegisterWithWeChat(metaData);
+            that.getCustomer({
+              successCallback: () => {
+                that.doAfterRegisterWithWeChat(metaData);
 
-            if (isFunction(successCallback)) {
-              successCallback(metaData);
-            }
+                if (isFunction(successCallback)) {
+                  successCallback(metaData);
+                }
+              },
+              failCallback,
+              completeCallback,
+            });
           } else {
             if (isFunction(failCallback)) {
               failCallback(metaData);
             }
+
+            if (isFunction(completeCallback)) {
+              completeCallback(metaData);
+            }
+          }
+        } else {
+          if (isFunction(failCallback)) {
+            failCallback();
           }
 
           if (isFunction(completeCallback)) {
-            completeCallback(metaData);
+            completeCallback();
           }
         }
       })
@@ -2188,11 +2202,35 @@ class SupplementCore extends Common {
               failCallback,
               completeCallback,
             });
+          } else {
+            if (isFunction(failCallback)) {
+              failCallback();
+            }
+
+            if (isFunction(completeCallback)) {
+              completeCallback();
+            }
+          }
+        } else {
+          if (isFunction(failCallback)) {
+            failCallback();
+          }
+
+          if (isFunction(completeCallback)) {
+            completeCallback();
           }
         }
       })
       .catch((error) => {
         recordError(error);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        if (isFunction(completeCallback)) {
+          completeCallback();
+        }
       });
   };
 
