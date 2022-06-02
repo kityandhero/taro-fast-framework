@@ -1121,14 +1121,16 @@ class SupplementCore extends Common {
         removeCurrentCustomer();
 
         that.getCustomer({
-          callback: that.doAfterGetCustomerOnSignIn,
+          callback: () => {
+            that.doAfterGetCustomerOnSignIn(metaData);
+
+            that.doAfterSignInSuccess(metaData);
+
+            if (isFunction(callback)) {
+              callback(metaData);
+            }
+          },
         });
-
-        that.doAfterSignInSuccess(metaData);
-
-        if (isFunction(callback)) {
-          callback(metaData);
-        }
       } else {
         removeSession();
 
@@ -1189,14 +1191,16 @@ class SupplementCore extends Common {
         removeCurrentCustomer();
 
         that.getCustomer({
-          callback: that.doAfterGetCustomerOnSignInSilent,
+          callback: () => {
+            that.doAfterGetCustomerOnSignInSilent(metaData);
+
+            that.doAfterSignInSilentSuccess(metaData);
+
+            if (isFunction(callback)) {
+              callback(metaData);
+            }
+          },
         });
-
-        that.doAfterSignInSilentSuccess(metaData);
-
-        if (isFunction(callback)) {
-          callback(metaData);
-        }
       } else {
         removeSession();
 
@@ -1882,15 +1886,11 @@ class SupplementCore extends Common {
             openId: that.parseOpenIdFromRegisterWithWeChatApiData(metaData),
           });
 
-          that.getCustomer({
-            callback: () => {
-              that.doAfterRegisterWithWeChat(metaData);
+          that.doAfterRegisterWithWeChat(metaData);
 
-              if (isFunction(callback)) {
-                callback(metaData);
-              }
-            },
-          });
+          if (isFunction(callback)) {
+            callback(metaData);
+          }
         }
       })
       .catch((error) => {
@@ -1994,13 +1994,15 @@ class SupplementCore extends Common {
             openId: that.parseOpenIdFromRegisterApiData(metaData),
           });
 
-          that.getCustomer({});
+          that.getCustomer({
+            callback: () => {
+              that.doAfterRegister(metaData);
 
-          that.doAfterRegister(metaData);
-
-          if (isFunction(callback)) {
-            callback(metaData);
-          }
+              if (isFunction(callback)) {
+                callback(metaData);
+              }
+            },
+          });
         }
       })
       .catch((error) => {
