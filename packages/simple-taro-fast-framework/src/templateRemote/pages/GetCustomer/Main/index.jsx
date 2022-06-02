@@ -53,7 +53,7 @@ export default class Index extends BasePageWrapper {
     const that = this;
 
     that.getCustomer({
-      callback: (o) => {
+      successCallback: (o) => {
         const { nickname } = {
           ...{
             nickname: '',
