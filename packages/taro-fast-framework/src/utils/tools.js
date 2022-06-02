@@ -1,4 +1,5 @@
 import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
@@ -20,7 +21,7 @@ export function getSignInResultDescription(v) {
   const verifySignInResultData = getVerifySignInResult();
 
   Object.entries(verifySignInResultData).forEach(([key, value]) => {
-    if (value === v) {
+    if (toString(value) === toString(v)) {
       result = key;
     }
   });
