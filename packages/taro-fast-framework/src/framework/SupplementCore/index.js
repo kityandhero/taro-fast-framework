@@ -1795,6 +1795,14 @@ class SupplementCore extends Common {
             if (isFunction(completeCallback)) {
               completeCallback(metaData);
             }
+          } else {
+            if (isFunction(failCallback)) {
+              failCallback();
+            }
+
+            if (isFunction(completeCallback)) {
+              completeCallback();
+            }
           }
         })
         .catch((error) => {
