@@ -1672,6 +1672,10 @@ class SupplementCore extends Common {
           }
         })
         .catch((error) => {
+          recordInfo(
+            'info getCustomer error,doAfterRegisterWithWeChat and callback will do not execute',
+          );
+
           recordError(error);
         });
     }
