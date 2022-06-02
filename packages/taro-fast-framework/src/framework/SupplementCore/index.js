@@ -1878,13 +1878,15 @@ class SupplementCore extends Common {
             openId: that.parseOpenIdFromRegisterWithWeChatApiData(metaData),
           });
 
-          that.getCustomer({});
+          that.getCustomer({
+            callback: () => {
+              that.doAfterRegisterWithWeChat(metaData);
 
-          that.doAfterRegisterWithWeChat(metaData);
-
-          if (isFunction(callback)) {
-            callback(metaData);
-          }
+              if (isFunction(callback)) {
+                callback(metaData);
+              }
+            },
+          });
         }
       })
       .catch((error) => {
