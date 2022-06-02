@@ -1171,15 +1171,13 @@ class SupplementCore extends Common {
         if (toString(signInResult) === toString(verifySignInResult.success)) {
           that.getCustomer({
             successCallback: () => {
-              setTimeout(() => {
-                if (isFunction(successCallback)) {
-                  successCallback(metaData);
-                }
+              if (isFunction(successCallback)) {
+                successCallback(metaData);
+              }
 
-                that.doAfterGetCustomerOnSignIn(metaData);
+              that.doAfterGetCustomerOnSignIn(metaData);
 
-                that.doAfterSignInSuccess(metaData);
-              }, 200);
+              that.doAfterSignInSuccess(metaData);
             },
             failCallback,
             completeCallback,
@@ -1281,15 +1279,13 @@ class SupplementCore extends Common {
         if (toString(signInResult) === toString(verifySignInResult.success)) {
           that.getCustomer({
             successCallback: () => {
-              setTimeout(() => {
-                if (isFunction(successCallback)) {
-                  successCallback(metaData);
-                }
+              if (isFunction(successCallback)) {
+                successCallback(metaData);
+              }
 
-                that.doAfterGetCustomerOnSignInSilent(metaData);
+              that.doAfterGetCustomerOnSignInSilent(metaData);
 
-                that.doAfterSignInSilentSuccess(metaData);
-              }, 200);
+              that.doAfterSignInSilentSuccess(metaData);
             },
             failCallback,
             completeCallback,
@@ -2039,13 +2035,11 @@ class SupplementCore extends Common {
           if (toString(signInResult) === toString(verifySignInResult.success)) {
             that.getCustomer({
               successCallback: () => {
-                setTimeout(() => {
-                  if (isFunction(successCallback)) {
-                    successCallback(metaData);
-                  }
+                if (isFunction(successCallback)) {
+                  successCallback(metaData);
+                }
 
-                  that.doAfterRegisterWithWeChat(metaData);
-                }, 200);
+                that.doAfterRegisterWithWeChat(metaData);
               },
               failCallback,
               completeCallback,
@@ -2199,13 +2193,11 @@ class SupplementCore extends Common {
           if (toString(signInResult) === toString(verifySignInResult.success)) {
             that.getCustomer({
               successCallback: () => {
-                setTimeout(() => {
-                  if (isFunction(successCallback)) {
-                    successCallback(metaData);
-                  }
+                if (isFunction(successCallback)) {
+                  successCallback(metaData);
+                }
 
-                  that.doAfterRegister(metaData);
-                }, 200);
+                that.doAfterRegister(metaData);
               },
               failCallback,
               completeCallback,
