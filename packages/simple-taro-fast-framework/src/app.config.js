@@ -141,6 +141,7 @@ export default {
         'pages/register/main/index',
         'pages/weather/main/index',
         'pages/gridBanner/main/index',
+        'pages/loading/main/index',
       ],
     },
     {

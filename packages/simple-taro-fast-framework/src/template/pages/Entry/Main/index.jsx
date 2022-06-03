@@ -29,6 +29,11 @@ const o = {
       name: '获取天气',
       path: pathCollection.template.weather.path,
     },
+    {
+      id: 'loading',
+      name: 'Loading-SVG',
+      path: pathCollection.template.loading.path,
+    },
   ],
 };
 

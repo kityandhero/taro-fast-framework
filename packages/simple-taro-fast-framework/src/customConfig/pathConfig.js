@@ -368,6 +368,9 @@ const templatePathCollection = {
   weather: {
     path: '/template/pages/weather/main/index',
   },
+  loading: {
+    path: '/template/pages/loading/main/index',
+  },
 };
 
 const templateRemotePathCollection = {
