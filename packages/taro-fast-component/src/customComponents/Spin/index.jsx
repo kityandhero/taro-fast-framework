@@ -1,7 +1,9 @@
 import { View } from '@tarojs/components';
 
-import Overlay from '../Overlay';
-import Loading from '../Loading';
+import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+
+import ActivityIndicator from '../ActivityIndicator';
+import CenterBox from '../CenterBox';
 
 import './index.less';
 
@@ -11,38 +13,77 @@ const defaultSpinSize = 32;
 export const Spin = (props) => {
   const {
     spin: spinValue,
+    text: textValue,
     showLoading: showLoadingValue,
     fullscreen: fullscreenValue,
     spinColor: spinColorValue,
     spinSize: spinSizeValue,
+    spinType = '',
     overlayBackgroundColor,
-    duration,
-    customerLoading,
+    customLoading,
   } = props;
 
   const spin = spinValue || false;
+  const text = textValue || '';
   const showLoading = showLoadingValue || false;
   const fullscreen = fullscreenValue || false;
   const spinColor = spinColorValue || defaultSpinColor;
   const spinSize = spinSizeValue || defaultSpinSize;
 
+  const handleTouchMove = (e) => {
+    if (fullscreen) {
+      e.stopPropagation();
+    }
+  };
+
   return (
     <View className="tfc_spin_containor">
-      <Overlay
-        visible={spin}
-        mode={fullscreen ? 'fullScreen' : 'fullParent'}
-        color={overlayBackgroundColor}
-        transparent
-        duration={duration}
+      <View
+        className={`tfc_spin_overlay_box ${
+          spin ? 'tfc_spin_overlay_box_show' : 'tfc_spin_overlay_box_hide'
+        }`}
+        style={{
+          width: fullscreen ? '100vw' : '100%',
+          height: fullscreen ? '100vh' : '100%',
+          transition: spin ? null : 'z-index 0.01s ease 0.2s',
+        }}
       >
-        {showLoading ? (
-          customerLoading ? (
-            customerLoading
-          ) : (
-            <Loading color={spinColor} size={spinSize} />
-          )
-        ) : null}
-      </Overlay>
+        <View
+          className={`tfc_spin_overlay ${
+            spin ? 'tfc_spin_overlay_show' : 'tfc_spin_overlay_hide'
+          }`}
+          style={{
+            ...{
+              width: fullscreen ? '100vw' : '100%',
+              height: fullscreen ? '100vh' : '100%',
+              transition: 'opacity 0.2s',
+            },
+            ...(stringIsNullOrWhiteSpace(overlayBackgroundColor)
+              ? {}
+              : { backgroundColor: overlayBackgroundColor }),
+          }}
+          catchMove={fullscreen}
+          onTouchMove={handleTouchMove}
+        >
+          <CenterBox>
+            {showLoading ? (
+              customLoading ? (
+                customLoading
+              ) : (
+                <ActivityIndicator
+                  visible={spin}
+                  content={text}
+                  color={spinColor}
+                  type={spinType}
+                  size={spinSize}
+                />
+              )
+            ) : (
+              <View className="tfc_content_box">{text}</View>
+            )}
+          </CenterBox>
+        </View>
+      </View>
 
       {props.children}
     </View>
@@ -57,6 +98,5 @@ Spin.defaultProps = {
   spinColor: defaultSpinColor,
   spinSize: defaultSpinSize,
   overlayBackgroundColor: '#f5f5f5',
-  duration: 300,
-  customerLoading: null,
+  customLoading: null,
 };

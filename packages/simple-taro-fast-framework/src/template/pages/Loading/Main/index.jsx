@@ -2,7 +2,11 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { ImageBox, Space } from 'taro-fast-component/es/customComponents';
+import {
+  ImageBox,
+  Space,
+  CenterBox,
+} from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../../customComponents/SimpleBox';
@@ -157,7 +161,23 @@ export default class Index extends ContentPageBase {
   };
 
   buildSimulationFadeSpinLoading = () => {
-    return <BallScaleMultiple size={120} color="#ed5565" />;
+    return (
+      <View>
+        <CenterBox>
+          <BallGridBeat size={78} color="#ed5565" />
+        </CenterBox>
+
+        <View
+          style={{
+            paddingTop: transformSize(16),
+            color: '#ed5565',
+            fontSize: transformSize(28),
+          }}
+        >
+          加载中, 请稍后
+        </View>
+      </View>
+    );
   };
 
   renderContent = () => {
