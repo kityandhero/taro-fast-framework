@@ -1386,7 +1386,7 @@ export default class Infrastructure extends ComponentBase {
           <Spin
             fullscreen
             spin={spin}
-            customerLoading={this.buildSimulationFadeSpinLoading()}
+            customLoading={this.buildSimulationFadeSpinLoading()}
           >
             <Notification />
 
