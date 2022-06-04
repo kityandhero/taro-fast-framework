@@ -156,6 +156,10 @@ export default class Index extends ContentPageBase {
     );
   };
 
+  buildSimulationFadeSpinLoading = () => {
+    return <BallScaleMultiple size={120} color="#ed5565" />;
+  };
+
   renderContent = () => {
     const { header, description, currentConfig, inner } = this.state;
 
@@ -282,7 +286,7 @@ export default class Index extends ContentPageBase {
           innerBoxBackgroundColor="#ed5565"
           ignorePropertyList={['icon']}
         >
-          <BallGridBeat size={57} />
+          <BallGridBeat size={80} />
         </SimpleBox>
       </Space>
     );

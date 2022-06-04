@@ -10,8 +10,8 @@
 
   &__item {
     background-color: var(--color);
-    width: calc(var(--size) / 3);
-    height: calc(var(--size) / 3);
+    width: calc(var(--size) / 3 - var(--margin) * 2);
+    height: calc(var(--size) / 3 - var(--margin) * 2);
     border-radius: 100%;
     margin: var(--margin);
     animation-fill-mode: both;
@@ -69,7 +69,7 @@
 
 @keyframes template-loading-keyframes-ball-grid-beat {
   50% {
-    opacity: 0.7;
+    opacity: 0.4;
   }
 
   100% {

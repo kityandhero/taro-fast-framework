@@ -1,11 +1,7 @@
 import { View } from '@tarojs/components';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-
-import Row from '../Flex/Row';
-import Col from '../Flex/Col';
-import VerticalBox from '../VerticalBox';
-import ActivityIndicator from '../ActivityIndicator';
+import Overlay from '../Overlay';
+import Loading from '../Loading';
 
 import './index.less';
 
@@ -15,80 +11,38 @@ const defaultSpinSize = 32;
 export const Spin = (props) => {
   const {
     spin: spinValue,
-    text: textValue,
     showLoading: showLoadingValue,
     fullscreen: fullscreenValue,
     spinColor: spinColorValue,
     spinSize: spinSizeValue,
-    spinType = '',
     overlayBackgroundColor,
+    duration,
+    customerLoading,
   } = props;
 
   const spin = spinValue || false;
-  const text = textValue || '';
   const showLoading = showLoadingValue || false;
   const fullscreen = fullscreenValue || false;
   const spinColor = spinColorValue || defaultSpinColor;
   const spinSize = spinSizeValue || defaultSpinSize;
 
-  const handleTouchMove = (e) => {
-    if (fullscreen) {
-      e.stopPropagation();
-    }
-  };
-
   return (
     <View className="tfc_spin_containor">
-      <View
-        className={`tfc_spin_overlay_box ${
-          spin ? 'tfc_spin_overlay_box_show' : 'tfc_spin_overlay_box_hide'
-        }`}
-        style={{
-          width: fullscreen ? '100vw' : '100%',
-          height: fullscreen ? '100vh' : '100%',
-          transition: spin ? null : 'z-index 0.01s ease 0.2s',
-        }}
+      <Overlay
+        visible={spin}
+        mode={fullscreen ? 'fullScreen' : 'fullParent'}
+        color={overlayBackgroundColor}
+        transparent
+        duration={duration}
       >
-        <View
-          className={`tfc_spin_overlay ${
-            spin ? 'tfc_spin_overlay_show' : 'tfc_spin_overlay_hide'
-          }`}
-          style={{
-            ...{
-              width: fullscreen ? '100vw' : '100%',
-              height: fullscreen ? '100vh' : '100%',
-              transition: 'opacity 0.2s',
-            },
-            ...(stringIsNullOrWhiteSpace(overlayBackgroundColor)
-              ? {}
-              : { backgroundColor: overlayBackgroundColor }),
-          }}
-          catchMove={fullscreen}
-          onTouchMove={handleTouchMove}
-        >
-          <View style={{ height: '100%' }}>
-            <Row align="center" style={{ height: '100%' }}>
-              <Col size={1} style={{ height: '100%' }} />
-              <Col size={10} style={{ height: '100%' }}>
-                <VerticalBox alignJustify="center">
-                  {showLoading ? (
-                    <ActivityIndicator
-                      visible={spin}
-                      content={text}
-                      color={spinColor}
-                      type={spinType}
-                      size={spinSize}
-                    ></ActivityIndicator>
-                  ) : (
-                    <View className="tfc_content_box">{text}</View>
-                  )}
-                </VerticalBox>
-              </Col>
-              <Col size={1} style={{ height: '100%' }} />
-            </Row>
-          </View>
-        </View>
-      </View>
+        {showLoading ? (
+          customerLoading ? (
+            customerLoading
+          ) : (
+            <Loading color={spinColor} size={spinSize} />
+          )
+        ) : null}
+      </Overlay>
 
       {props.children}
     </View>
@@ -103,4 +57,6 @@ Spin.defaultProps = {
   spinColor: defaultSpinColor,
   spinSize: defaultSpinSize,
   overlayBackgroundColor: '#f5f5f5',
+  duration: 300,
+  customerLoading: null,
 };

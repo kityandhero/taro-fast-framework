@@ -1130,6 +1130,10 @@ export default class Infrastructure extends ComponentBase {
     return null;
   };
 
+  buildSimulationFadeSpinLoading = () => {
+    return null;
+  };
+
   buildCapsulePrompt = () => {
     return null;
   };
@@ -1379,7 +1383,11 @@ export default class Infrastructure extends ComponentBase {
 
           {this.buildCapsulePromptWrapper()}
 
-          <Spin fullscreen spin={spin}>
+          <Spin
+            fullscreen
+            spin={spin}
+            customerLoading={this.buildSimulationFadeSpinLoading()}
+          >
             <Notification />
 
             <FadeView show={!spin}>{vw}</FadeView>
