@@ -167,6 +167,7 @@ class SimpleBox extends Component {
       innerBoxCenterMode,
       innerBoxMinHeight,
       innerBoxPadding,
+      innerBoxBackgroundColor,
       children,
     } = this.props;
 
@@ -178,6 +179,11 @@ class SimpleBox extends Component {
             border: 'var(--tfc-1) solid #f2e5c0',
             borderRadius: transformSize(6),
           },
+          ...(innerBoxBackgroundColor
+            ? {
+                backgroundColor: innerBoxBackgroundColor,
+              }
+            : {}),
           ...(innerBoxPadding
             ? {
                 padding: 'var(--tfc-10) var(--tfc-10)',

@@ -6,7 +6,6 @@ import { ImageBox, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../../customComponents/SimpleBox';
-import PropertyBox from '../../../../customComponents/PropertyBox';
 
 import ballsSvg from '../../../../assets/images/loading-balls.svg';
 import barsSvg from '../../../../assets/images/loading-bars.svg';
@@ -18,10 +17,16 @@ import spinSvg from '../../../../assets/images/loading-spin.svg';
 import spinningBubblesSvg from '../../../../assets/images/loading-spinning-bubbles.svg';
 import spokesSvg from '../../../../assets/images/loading-spokes.svg';
 
+import BallPulse from '../BallPulse';
+import BallGridPulse from '../BallGridPulse';
+import BallClipRotate from '../BallClipRotate';
+import BallScale from '../BallScale';
+import BallScaleMultiple from '../BallScaleMultiple';
+import BallGridBeat from '../BallGridBeat';
+
 const imageBoxContainerStyle = {
   display: 'block',
   width: transformSize(220),
-  backgroundColor: '#000',
 };
 
 function wrapBuilder(one) {
@@ -66,7 +71,7 @@ const config9 = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: 'LoadingImage',
+  navigationBarTitleText: 'Loading Svg Image',
 });
 
 @connect(({ schedulingControl }) => ({
@@ -75,8 +80,8 @@ definePageConfig({
 export default class Index extends ContentPageBase {
   headerData = {
     id: 'ImageBox',
-    name: 'Loading图片',
-    description: 'Loading图片示例',
+    name: 'Loading Svg',
+    description: 'Loading Svg',
   };
 
   constructor(props) {
@@ -165,13 +170,120 @@ export default class Index extends ContentPageBase {
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
           ignorePropertyList={['icon']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={ImageBox.defaultProps} labelWidth={240} />
+        <SimpleBox
+          header="BallPulse"
+          config={{
+            width: 20,
+            height: 20,
+            margin: 20,
+          }}
+          componentName="BallPulse"
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
+          ignorePropertyList={['icon']}
+        >
+          <BallPulse width={15} height={15} margin={2} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="BallGridPulse"
+          config={{
+            width: 15,
+            height: 15,
+            margin: 15,
+          }}
+          componentName="BallGridPulse"
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
+          ignorePropertyList={['icon']}
+        >
+          <BallGridPulse width={15} height={15} margin={2} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="BallClipRotate"
+          config={{
+            width: 15,
+            height: 15,
+            margin: 15,
+          }}
+          componentName="BallClipRotate"
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
+          ignorePropertyList={['icon']}
+        >
+          <BallClipRotate size={52} borderWidth={4} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="BallScale"
+          config={{
+            width: 15,
+            height: 15,
+            margin: 15,
+          }}
+          componentName="BallScale"
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
+          ignorePropertyList={['icon']}
+        >
+          <BallScale size={80} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="BallScaleMultiple"
+          config={{
+            width: 15,
+            height: 15,
+            margin: 15,
+          }}
+          componentName="BallScaleMultiple"
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
+          ignorePropertyList={['icon']}
+        >
+          <BallScaleMultiple size={80} />
+        </SimpleBox>
+
+        <SimpleBox
+          header="BallGridBeat"
+          config={{
+            width: 15,
+            height: 15,
+            margin: 15,
+          }}
+          componentName="BallGridBeat"
+          mockChildren={!!inner}
+          useInnerBox
+          innerBoxCenterMode
+          innerBoxPadding
+          innerBoxBackgroundColor="#ed5565"
+          ignorePropertyList={['icon']}
+        >
+          <BallGridBeat size={57} />
+        </SimpleBox>
       </Space>
     );
   };

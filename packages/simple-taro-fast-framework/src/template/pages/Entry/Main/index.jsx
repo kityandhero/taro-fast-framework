@@ -31,7 +31,7 @@ const o = {
     },
     {
       id: 'loading',
-      name: 'Loading-SVG',
+      name: 'SVG',
       path: pathCollection.template.loading.path,
     },
   ],
