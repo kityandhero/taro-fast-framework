@@ -66,6 +66,9 @@ class ImageBox extends BaseComponent {
     return {};
   }
 
+  /**
+   * onImageLoadSuccess
+   */
   onImageLoadSuccess() {
     this.setState({
       loading: false,
