@@ -11,6 +11,7 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
+  isNumber,
   isString,
   isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
@@ -143,6 +144,7 @@ export async function actionCore({
   successMessageBuilder = null,
   showProcessing = true,
   textProcessing = '处理中, 请稍后',
+  delay = 400,
 }) {
   if ((handleData || null) == null) {
     const text = 'actionCore : handleData not allow null';
@@ -181,115 +183,118 @@ export async function actionCore({
       },
       () => {
         // 延迟一定时间, 优化界面呈现
-        setTimeout(() => {
-          try {
-            dispatch({
-              type: api,
-              payload: params,
-            })
-              .then(() => {
-                if (showProcessing) {
-                  setTimeout(() => {
-                    Tips.loaded();
-                  }, 200);
-                }
-
-                if (!isFunction(apiDataConvert)) {
-                  throw new Error(
-                    'actionCore: apiDataConvert must be function',
-                  );
-                }
-
-                const data = apiDataConvert(target.props);
-
-                if ((data || null) == null) {
-                  throw new Error(
-                    'actionCore: apiDataConvert result not allow null',
-                  );
-                }
-
-                const { dataSuccess, code: remoteCode } = data;
-
-                if (dataSuccess) {
-                  const {
-                    list: remoteListData,
-                    data: remoteData,
-                    extra: remoteExtraData,
-                  } = data;
-
-                  let messageText = successMessage;
-
-                  if (isFunction(successMessageBuilder)) {
-                    messageText = successMessageBuilder({
-                      remoteListData: remoteListData || [],
-                      remoteData: remoteData || null,
-                      remoteExtraData: remoteExtraData || null,
-                      remoteOriginal: data,
-                    });
-                  }
-
-                  if (!stringIsNullOrWhiteSpace(messageText)) {
-                    notifySuccess(messageText);
-                  }
-
-                  if (isFunction(successCallback)) {
-                    successCallback({
-                      target,
-                      handleData,
-                      remoteListData: remoteListData || [],
-                      remoteData: remoteData || null,
-                      remoteExtraData: remoteExtraData || null,
-                      remoteOriginal: data,
-                    });
-                  }
-                } else {
-                  if (isFunction(failureCallback)) {
-                    failureCallback(
-                      data,
-                      checkWhetherAuthorizeFail(remoteCode || 0),
-                    );
-                  }
-                }
-
-                target.setState({
-                  processing: false,
-                  dispatchComplete: true,
-                });
-              })
-              .catch((error) => {
-                recordError(error);
-
-                if (showProcessing) {
-                  setTimeout(() => {
-                    Tips.loaded();
-                  }, 200);
-                }
-
-                target.setState({
-                  processing: false,
-                  dispatchComplete: true,
-                });
-              });
-          } catch (e) {
-            Tips.loaded();
-
-            const text = `${toString(
-              e,
-            )}, please confirm dispatch type exists first.`;
-
-            recordError({
-              message: text,
-              dispatchInfo: {
+        setTimeout(
+          () => {
+            try {
+              dispatch({
                 type: api,
                 payload: params,
-              },
-            });
+              })
+                .then(() => {
+                  if (showProcessing) {
+                    setTimeout(() => {
+                      Tips.loaded();
+                    }, 200);
+                  }
 
-            showErrorMessage({
-              message: text,
-            });
-          }
-        }, 400);
+                  if (!isFunction(apiDataConvert)) {
+                    throw new Error(
+                      'actionCore: apiDataConvert must be function',
+                    );
+                  }
+
+                  const data = apiDataConvert(target.props);
+
+                  if ((data || null) == null) {
+                    throw new Error(
+                      'actionCore: apiDataConvert result not allow null',
+                    );
+                  }
+
+                  const { dataSuccess, code: remoteCode } = data;
+
+                  if (dataSuccess) {
+                    const {
+                      list: remoteListData,
+                      data: remoteData,
+                      extra: remoteExtraData,
+                    } = data;
+
+                    let messageText = successMessage;
+
+                    if (isFunction(successMessageBuilder)) {
+                      messageText = successMessageBuilder({
+                        remoteListData: remoteListData || [],
+                        remoteData: remoteData || null,
+                        remoteExtraData: remoteExtraData || null,
+                        remoteOriginal: data,
+                      });
+                    }
+
+                    if (!stringIsNullOrWhiteSpace(messageText)) {
+                      notifySuccess(messageText);
+                    }
+
+                    if (isFunction(successCallback)) {
+                      successCallback({
+                        target,
+                        handleData,
+                        remoteListData: remoteListData || [],
+                        remoteData: remoteData || null,
+                        remoteExtraData: remoteExtraData || null,
+                        remoteOriginal: data,
+                      });
+                    }
+                  } else {
+                    if (isFunction(failureCallback)) {
+                      failureCallback(
+                        data,
+                        checkWhetherAuthorizeFail(remoteCode || 0),
+                      );
+                    }
+                  }
+
+                  target.setState({
+                    processing: false,
+                    dispatchComplete: true,
+                  });
+                })
+                .catch((error) => {
+                  recordError(error);
+
+                  if (showProcessing) {
+                    setTimeout(() => {
+                      Tips.loaded();
+                    }, 200);
+                  }
+
+                  target.setState({
+                    processing: false,
+                    dispatchComplete: true,
+                  });
+                });
+            } catch (e) {
+              Tips.loaded();
+
+              const text = `${toString(
+                e,
+              )}, please confirm dispatch type exists first.`;
+
+              recordError({
+                message: text,
+                dispatchInfo: {
+                  type: api,
+                  payload: params,
+                },
+              });
+
+              showErrorMessage({
+                message: text,
+              });
+            }
+          },
+          isNumber(delay) ? (delay < 0 ? 400 : delay) : 400,
+        );
       },
     );
   });
