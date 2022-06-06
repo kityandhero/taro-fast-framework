@@ -214,7 +214,7 @@ class ImageBox extends BaseComponent {
 
           {showMode == 'loading' ? <ActivityIndicator mode="center" /> : null}
 
-          {loadingEffect && loading && !showOverlay && !lazyLoad ? (
+          {loadingEffect && loading && !showOverlay && lazyLoad ? (
             <View
               className={classNames(
                 `${classPrefix}-overlay-box`,
