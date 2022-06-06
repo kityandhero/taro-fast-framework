@@ -59,6 +59,9 @@ export const locationModeCollection = {
   custom: 20,
 };
 
+/**
+ * request method collection
+ */
 export const requestMethod = {
   get: 'GET',
   post: 'POST',
