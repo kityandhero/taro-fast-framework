@@ -18,8 +18,6 @@ import {
 import Tips from 'taro-fast-common/es/utils/tips';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
-import { checkWhetherAuthorizeFail } from './tools';
-
 /**
  * apiDataConvertCore
  * @param {*} param0
@@ -211,7 +209,7 @@ export async function actionCore({
                     );
                   }
 
-                  const { dataSuccess, code: remoteCode } = data;
+                  const { dataSuccess } = data;
 
                   if (dataSuccess) {
                     const {
@@ -247,10 +245,12 @@ export async function actionCore({
                     }
                   } else {
                     if (isFunction(failureCallback)) {
-                      failureCallback(
-                        data,
-                        checkWhetherAuthorizeFail(remoteCode || 0),
-                      );
+                      failureCallback({
+                        target,
+                        handleData,
+                        remoteOriginal: data,
+                        error: null,
+                      });
                     }
                   }
 
@@ -267,6 +267,13 @@ export async function actionCore({
                       Tips.loaded();
                     }, 200);
                   }
+
+                  failureCallback({
+                    target,
+                    handleData,
+                    remoteOriginal: null,
+                    error,
+                  });
 
                   target.setState({
                     processing: false,
@@ -286,6 +293,13 @@ export async function actionCore({
                   type: api,
                   payload: params,
                 },
+              });
+
+              failureCallback({
+                target,
+                handleData,
+                remoteOriginal: null,
+                error: e,
               });
 
               showErrorMessage({
