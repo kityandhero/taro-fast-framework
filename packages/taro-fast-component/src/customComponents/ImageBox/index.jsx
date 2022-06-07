@@ -32,6 +32,7 @@ const defaultProps = {
   loadingEffect: true,
   decoration: null,
   errorImage: '',
+  noLoadingEffectColor: '#f0f0f0',
 };
 
 class ImageBox extends BaseComponent {
@@ -152,6 +153,7 @@ class ImageBox extends BaseComponent {
       overlayText: overlayTextValue,
       loadingEffect: loadingEffectValue,
       errorImage: errorImageSource,
+      noLoadingEffectColor,
     } = {
       ...this.props,
     };
@@ -223,13 +225,22 @@ class ImageBox extends BaseComponent {
                 `${classPrefix}-overlay-box`,
                 `${classPrefix}-overlay-loading`,
               )}
+              style={
+                loadingEffect
+                  ? {}
+                  : {
+                      backgroundColor: noLoadingEffectColor,
+                    }
+              }
               onClick={this.onImageClick}
             >
-              <View
-                className={classNames(`${classPrefix}-overlay-loading-inner`)}
-              >
-                <ActivityIndicator mode="center" />
-              </View>
+              {loadingEffect ? (
+                <View
+                  className={classNames(`${classPrefix}-overlay-loading-inner`)}
+                >
+                  <ActivityIndicator mode="center" />
+                </View>
+              ) : null}
             </View>
           ) : null}
 
