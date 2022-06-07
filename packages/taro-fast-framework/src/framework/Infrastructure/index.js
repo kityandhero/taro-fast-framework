@@ -484,7 +484,7 @@ export default class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
-    if (this.ignoreSessionRelatedLogic) {
+    if (!this.ignoreSessionRelatedLogic) {
       this.verifySession = false;
       this.verifyTicket = false;
       this.verifyTicketValidity = false;
