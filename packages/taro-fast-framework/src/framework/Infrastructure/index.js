@@ -299,7 +299,7 @@ export default class Infrastructure extends ComponentBase {
   needReLocationWhenRepeatedShow = false;
 
   /**
-   * 是否忽略 Session 相关的业务逻辑,如果忽略，将跳过 Ticket、TicketValidity、
+   * 是否忽略 Session 相关的业务逻辑,如果忽略，将跳过 checkTicket、checkTicketValidity、signInSilent and so on
    */
   ignoreSessionRelatedLogic = false;
 
@@ -609,6 +609,10 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     if (that.ignoreSessionRelatedLogic) {
+      recordInfo(
+        `info ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
+      );
+
       that.initMetaData({
         data: that.initMetaDataRequestData || {},
         force: !!that.initMetaDataForce,
