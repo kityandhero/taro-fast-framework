@@ -104,6 +104,9 @@ export default class Infrastructure extends ComponentBase {
    */
   capsulePromptWithCustomHeadNavigation = false;
 
+  /**
+   * 距右侧距离
+   */
   capsulePromptRight = 90;
 
   capsulePromptXIndex = 20000;
