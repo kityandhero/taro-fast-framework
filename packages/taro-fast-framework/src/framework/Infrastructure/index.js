@@ -299,7 +299,7 @@ export default class Infrastructure extends ComponentBase {
   needReLocationWhenRepeatedShow = false;
 
   /**
-   * 是否忽略 Session 相关的业务逻辑,如果忽略，将跳过 checkTicket、checkTicketValidity、signInSilent and so on
+   * 是否忽略 Session 相关的业务逻辑,如果忽略，将跳过 checkTicket、checkTicketValidity、signInSilent 以及其他相关逻辑
    */
   ignoreSessionRelatedLogic = false;
 
