@@ -623,6 +623,8 @@ export default class Infrastructure extends ComponentBase {
           if (that.loadRemoteRequestAfterMount) {
             that.doLoadRemoteRequest();
           }
+
+          that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
         },
       });
 
