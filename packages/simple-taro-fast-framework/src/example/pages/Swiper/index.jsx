@@ -8,6 +8,7 @@ import {
   ImageBox,
   Space,
   Swiper,
+  SwiperWrapper,
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
@@ -469,6 +470,56 @@ export default class Index extends ContentPageBase {
               );
             },
           })}
+        </SimpleBox>
+
+        <SimpleBox header="小程序Swiper左右滚动" useInnerBox={false}>
+          <SwiperWrapper
+            swiperConfig={{
+              previousMargin: transformSize(80),
+              nextMargin: transformSize(80),
+              easingFunction: 'easeInOutCubic',
+              indicatorColor: '#e21222',
+              indicatorActiveColor: '#459429',
+              circular: true,
+              indicatorDots: true,
+              autoplay: true,
+              displayMultipleItems: 1,
+            }}
+            list={[
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+            ]}
+            itemBuilder={(o) => {
+              const { image } = o;
+
+              return (
+                <View
+                  style={{
+                    height: '100%',
+                    padding: `0 ${transformSize(20)}`,
+                  }}
+                >
+                  <ImageBox src={image} />
+                </View>
+              );
+            }}
+          />
         </SimpleBox>
 
         <PropertyBox config={Swiper.defaultProps} labelWidth={280} />
