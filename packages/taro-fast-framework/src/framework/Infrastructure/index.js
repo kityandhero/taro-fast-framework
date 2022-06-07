@@ -299,6 +299,11 @@ export default class Infrastructure extends ComponentBase {
   needReLocationWhenRepeatedShow = false;
 
   /**
+   * 是否忽略 Session 相关的业务逻辑,如果忽略，将跳过 Ticket、TicketValidity、
+   */
+  ignoreSessionRelatedLogic = false;
+
+  /**
    * 校验Session, 开启登录校验等功能前必须开启
    */
   verifySession = false;
@@ -479,6 +484,12 @@ export default class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
+    if (this.ignoreSessionRelatedLogic) {
+      this.verifySession = false;
+      this.verifyTicket = false;
+      this.verifyTicketValidity = false;
+    }
+
     this.checkSchedulingControlExistence();
 
     this.initializeInternalData();
@@ -597,31 +608,13 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
-    that.checkSession(() => {
+    if (that.ignoreSessionRelatedLogic) {
       that.initMetaData({
         data: that.initMetaDataRequestData || {},
         force: !!that.initMetaDataForce,
         callback: () => {
-          if (!that.verifyTicket) {
-            that.checkTicketValidity({
-              callback: () => {
-                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-              },
-            });
-
-            if (that.loadRemoteRequestAfterMount) {
-              that.doLoadRemoteRequest();
-            }
-          } else {
-            that.checkTicketValidity({
-              callback: () => {
-                if (that.loadRemoteRequestAfterMount) {
-                  that.doLoadRemoteRequest();
-                }
-
-                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-              },
-            });
+          if (that.loadRemoteRequestAfterMount) {
+            that.doLoadRemoteRequest();
           }
         },
       });
@@ -633,7 +626,45 @@ export default class Infrastructure extends ComponentBase {
           },
         });
       }
-    });
+    } else {
+      that.checkSession(() => {
+        that.initMetaData({
+          data: that.initMetaDataRequestData || {},
+          force: !!that.initMetaDataForce,
+          callback: () => {
+            if (!that.verifyTicket) {
+              that.checkTicketValidity({
+                callback: () => {
+                  that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+                },
+              });
+
+              if (that.loadRemoteRequestAfterMount) {
+                that.doLoadRemoteRequest();
+              }
+            } else {
+              that.checkTicketValidity({
+                callback: () => {
+                  if (that.loadRemoteRequestAfterMount) {
+                    that.doLoadRemoteRequest();
+                  }
+
+                  that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+                },
+              });
+            }
+          },
+        });
+
+        if (that.useFullAdministrativeDivisionSelector) {
+          that.initFullAdministrativeDivisionData({
+            callback: (l) => {
+              that.doAfterInitFullAdministrativeDivisionData(l);
+            },
+          });
+        }
+      });
+    }
   };
 
   /**
