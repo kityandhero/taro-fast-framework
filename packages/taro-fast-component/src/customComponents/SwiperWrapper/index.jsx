@@ -1,25 +1,22 @@
 import { Swiper, SwiperItem, View } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isObject } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-import SwiperIndicator from './SwiperIndicator';
-
-import './index.less';
-
-const indicatorDirectionCollection = ['horizontal', 'vertical'];
+import ScaleBox from '../ScaleBox';
 
 const defaultProps = {
-  height: 0,
-  scaleMode: true,
+  height: 300,
+  style: {},
+  scaleMode: false,
   aspectRatio: 0.5,
   swiperConfig: {},
   list: [],
+  itemBuilder: null,
   indicatorBuilder: null,
   customIndicator: false,
-  indicatorStyle: {},
-  indicatorDirection: '',
+  indicatorBoxStyle: {},
 };
 
 class SwiperWrapper extends BaseComponent {
@@ -35,29 +32,22 @@ class SwiperWrapper extends BaseComponent {
   }
 
   getStyle = () => {
+    const { style, height, scaleMode } = this.props;
+
     return {
-      position: 'relative',
+      ...(style || {}),
+      ...(!scaleMode ? { height: transformSize(height) } : {}),
+      ...{ position: 'relative' },
     };
-  };
-
-  getIndicatorDirection = () => {
-    const { indicatorDirection } = this.props;
-
-    const direction = inCollection(
-      indicatorDirectionCollection,
-      indicatorDirection,
-    )
-      ? indicatorDirection
-      : 'horizontal';
-
-    return direction;
   };
 
   triggerChange = (e) => {
     const { customIndicator, onChange } = this.props;
 
     if (!!customIndicator) {
-      const { current } = e;
+      const {
+        detail: { current },
+      } = e;
 
       this.setState({ current });
     }
@@ -68,57 +58,123 @@ class SwiperWrapper extends BaseComponent {
   };
 
   buildItem = (item, index) => {
-    const { itemBuilder } = this.props;
+    const { height, scaleMode, aspectRatio, itemBuilder } = this.props;
+    const { current } = this.state;
 
     let inner = null;
 
     if (!isFunction(itemBuilder)) {
       inner = 'itemBuilder in props must be a function and return a component';
     } else {
-      inner = itemBuilder({ item, index });
+      inner = itemBuilder({
+        height,
+        scaleMode,
+        aspectRatio,
+        item,
+        active: current === index,
+        current,
+        index,
+        keyPrefix: this.keyPrefix,
+      });
     }
 
     return <SwiperItem key={`${this.keyPrefix}_${index}`}>{inner}</SwiperItem>;
   };
 
-  renderFurther() {
+  buildIndicator = (item, index) => {
+    const { height, scaleMode, aspectRatio, indicatorBuilder } = this.props;
+    const { current } = this.state;
+
+    if (isFunction(indicatorBuilder)) {
+      return indicatorBuilder({
+        height,
+        scaleMode,
+        aspectRatio,
+        item,
+        active: current === index,
+        current,
+        index,
+        keyPrefix: this.keyPrefix,
+      });
+    }
+
+    return null;
+  };
+
+  buildSwiper = () => {
     const {
       customIndicator,
       swiperConfig,
       list,
-      indicatorBuilder,
-      indicatorStyle,
       onTransition,
       onAnimationFinish,
     } = this.props;
-    const { current } = this.state;
-
-    const style = this.getStyle();
-    const indicatorDirection = this.getIndicatorDirection();
 
     const swiperConfigAdjust = isObject(swiperConfig || {}) ? swiperConfig : {};
 
-    swiperConfigAdjust.onChange = this.triggerChange;
+    swiperConfigAdjust.style = { width: '100%', height: '100%' };
+    (swiperConfigAdjust.indicatorDots = customIndicator
+      ? false
+      : swiperConfigAdjust.indicatorDots || false),
+      (swiperConfigAdjust.onChange = this.triggerChange);
     swiperConfigAdjust.onTransition = onTransition;
     swiperConfigAdjust.onAnimationFinish = onAnimationFinish;
 
     return (
-      <View style={style}>
-        <Swiper {...swiperConfig}>
-          {list.map((o, i) => {
-            return this.buildItem(o, i);
-          })}
-        </Swiper>
+      <Swiper {...swiperConfig}>
+        {list.map((o, i) => {
+          return this.buildItem(o, i);
+        })}
+      </Swiper>
+    );
+  };
 
-        {!!customIndicator ? (
-          <SwiperIndicator
-            indicator={current}
-            indicatorBuilder={indicatorBuilder}
-            list={list}
-            style={indicatorStyle}
-            direction={indicatorDirection}
-          />
-        ) : null}
+  buildIndicatorBox = () => {
+    const { customIndicator, indicatorBoxStyle, list } = this.props;
+
+    return !!customIndicator ? (
+      <View
+        style={{
+          ...{
+            width: '100%',
+            bottom: transformSize(20),
+            display: 'flex',
+            alignItems: 'center',
+            justifyItems: 'center',
+            alignContent: 'center',
+            justifyContent: 'center',
+          },
+          ...(indicatorBoxStyle || {}),
+          ...{ position: 'absolute' },
+        }}
+      >
+        {list.map((o, index) => {
+          return this.buildIndicator(o, index);
+        })}
+      </View>
+    ) : null;
+  };
+
+  renderFurther() {
+    const { scaleMode, aspectRatio } = this.props;
+
+    const style = this.getStyle();
+
+    if (scaleMode) {
+      return (
+        <ScaleBox style={style} aspectRatio={aspectRatio}>
+          {this.buildSwiper()}
+
+          {this.buildIndicatorBox()}
+        </ScaleBox>
+      );
+    }
+
+    return (
+      <View style={style}>
+        {this.buildSwiper()}
+
+        {this.buildIndicatorBox()}
       </View>
     );
   }

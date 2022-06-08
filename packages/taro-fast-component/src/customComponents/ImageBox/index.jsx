@@ -19,7 +19,7 @@ const classPrefix = `tfc-image-box`;
 const defaultProps = {
   src: '',
   padding: 0,
-  lazyLoad: true,
+  lazyLoad: false,
   aspectRatio: 1,
   imageBoxStyle: {},
   borderRadius: true,

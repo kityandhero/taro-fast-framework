@@ -474,6 +474,11 @@ export default class Index extends ContentPageBase {
 
         <SimpleBox header="小程序Swiper左右滚动" useInnerBox={false}>
           <SwiperWrapper
+            height={320}
+            scaleMode={false}
+            style={{
+              backgroundColor: '#000',
+            }}
             swiperConfig={{
               previousMargin: transformSize(80),
               nextMargin: transformSize(80),
@@ -505,8 +510,28 @@ export default class Index extends ContentPageBase {
                 image: imageUrl,
               },
             ]}
-            itemBuilder={(o) => {
-              const { image } = o;
+            itemBuilder={({
+              height: h,
+              scaleMode,
+              aspectRatio,
+              item,
+              active,
+              current,
+              index,
+              keyPrefix,
+            }) => {
+              console.log({
+                height: h,
+                scaleMode,
+                aspectRatio,
+                item,
+                active,
+                current,
+                index,
+                keyPrefix,
+              });
+
+              const { image } = item;
 
               return (
                 <View
@@ -515,7 +540,157 @@ export default class Index extends ContentPageBase {
                     padding: `0 ${transformSize(20)}`,
                   }}
                 >
-                  <ImageBox src={image} />
+                  <ImageBox src={image} aspectRatio={0.5} />
+                </View>
+              );
+            }}
+            customIndicator
+            indicatorBoxStyle={{
+              bottom: transformSize(20),
+            }}
+            indicatorBuilder={({
+              scaleMode,
+              aspectRatio,
+              item,
+              active,
+              current,
+              index,
+              keyPrefix,
+            }) => {
+              console.log({
+                scaleMode,
+                aspectRatio,
+                item,
+                active,
+                current,
+                index,
+                keyPrefix,
+              });
+
+              return (
+                <View
+                  style={{
+                    ...{
+                      width: transformSize(24),
+                      height: transformSize(24),
+                      backgroundColor: '#fff',
+                      borderRadius: '50%',
+                      fontSize: transformSize(16),
+                      textAlign: 'center',
+                      lineHeight: transformSize(24),
+                      marginLeft: transformSize(5),
+                      marginRight: transformSize(5),
+                    },
+                    ...(active
+                      ? {
+                          backgroundColor: '#f5060e',
+                          color: '#fff',
+                        }
+                      : {}),
+                  }}
+                >
+                  {index + 1}
+                </View>
+              );
+            }}
+          />
+        </SimpleBox>
+
+        <SimpleBox header="小程序Swiper左右滚动" useInnerBox={false}>
+          <SwiperWrapper
+            scaleMode
+            aspectRatio={0.6}
+            style={{
+              backgroundColor: '#000',
+            }}
+            swiperConfig={{
+              previousMargin: transformSize(80),
+              nextMargin: transformSize(80),
+              easingFunction: 'easeInOutCubic',
+              indicatorColor: '#e21222',
+              indicatorActiveColor: '#459429',
+              circular: true,
+              indicatorDots: true,
+              // autoplay: true,
+              displayMultipleItems: 1,
+            }}
+            list={[
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+              {
+                image: imageUrl,
+              },
+            ]}
+            itemBuilder={({ item }) => {
+              const { image } = item;
+
+              return (
+                <View
+                  style={{
+                    height: '100%',
+                    padding: `0 ${transformSize(20)}`,
+                  }}
+                >
+                  <ImageBox src={image} aspectRatio={0.62} />
+                </View>
+              );
+            }}
+            customIndicator
+            indicatorBuilder={({
+              scaleMode,
+              aspectRatio,
+              item,
+              active,
+              current,
+              index,
+              keyPrefix,
+            }) => {
+              console.log({
+                scaleMode,
+                aspectRatio,
+                item,
+                active,
+                current,
+                index,
+                keyPrefix,
+              });
+
+              return (
+                <View
+                  style={{
+                    ...{
+                      width: transformSize(24),
+                      height: transformSize(24),
+                      backgroundColor: '#fff',
+                      borderRadius: '50%',
+                      fontSize: transformSize(16),
+                      textAlign: 'center',
+                      lineHeight: transformSize(24),
+                      marginLeft: transformSize(5),
+                      marginRight: transformSize(5),
+                    },
+                    ...(active
+                      ? {
+                          backgroundColor: '#f5060e',
+                          color: '#fff',
+                        }
+                      : {}),
+                  }}
+                >
+                  {index + 1}
                 </View>
               );
             }}

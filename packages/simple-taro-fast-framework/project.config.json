@@ -56,6 +56,18 @@
                     "scene": null
                 },
                 {
+                    "name": "layout",
+                    "pathName": "example/pages/layout/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "swiper",
+                    "pathName": "example/pages/swiper/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
                     "name": "framework",
                     "pathName": "framework/pages/home/index",
                     "query": "",
