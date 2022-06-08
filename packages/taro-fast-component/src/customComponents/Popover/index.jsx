@@ -307,7 +307,14 @@ class Popover extends BaseComponent {
           }}
         />
 
-        <View className={classNames(`${classPrefix}__outline__panel`)}>
+        <View
+          className={classNames(`${classPrefix}__outline__panel`)}
+          onClick={() => {
+            if (closeOnClick) {
+              this.toggleVisible();
+            }
+          }}
+        >
           <View
             className={classNames(`${classPrefix}__outline__panel__inner`, {
               [`${classPrefix}__outline__panel__inner--shadow`]: panelShadow,
@@ -316,11 +323,6 @@ class Popover extends BaseComponent {
               borderRadius: transformSize(panelBorderRadius),
               height: '100%',
               overflow: 'hidden',
-            }}
-            onClick={() => {
-              if (closeOnClick) {
-                this.toggleVisible();
-              }
             }}
           >
             {panel}
