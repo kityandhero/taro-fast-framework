@@ -637,6 +637,8 @@ export default class Index extends ContentPageBase {
             itemBuilder={({ item }) => {
               const { image } = item;
 
+              console.log({ image });
+
               return (
                 <View
                   style={{

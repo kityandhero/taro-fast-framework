@@ -1,10 +1,12 @@
-import { Swiper, SwiperItem, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction, isObject } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
+
 import ScaleBox from '../ScaleBox';
+import SwiperAdapter from './SwiperAdapter';
 
 const defaultProps = {
   height: 300,
@@ -17,6 +19,9 @@ const defaultProps = {
   indicatorBuilder: null,
   customIndicator: false,
   indicatorBoxStyle: {},
+  onChange: null,
+  onTransition: null,
+  onAnimationFinish: null,
 };
 
 class SwiperWrapper extends BaseComponent {
@@ -57,30 +62,6 @@ class SwiperWrapper extends BaseComponent {
     }
   };
 
-  buildItem = (item, index) => {
-    const { height, scaleMode, aspectRatio, itemBuilder } = this.props;
-    const { current } = this.state;
-
-    let inner = null;
-
-    if (!isFunction(itemBuilder)) {
-      inner = 'itemBuilder in props must be a function and return a component';
-    } else {
-      inner = itemBuilder({
-        height,
-        scaleMode,
-        aspectRatio,
-        item,
-        active: current === index,
-        current,
-        index,
-        keyPrefix: this.keyPrefix,
-      });
-    }
-
-    return <SwiperItem key={`${this.keyPrefix}_${index}`}>{inner}</SwiperItem>;
-  };
-
   buildIndicator = (item, index) => {
     const { height, scaleMode, aspectRatio, indicatorBuilder } = this.props;
     const { current } = this.state;
@@ -99,34 +80,6 @@ class SwiperWrapper extends BaseComponent {
     }
 
     return null;
-  };
-
-  buildSwiper = () => {
-    const {
-      customIndicator,
-      swiperConfig,
-      list,
-      onTransition,
-      onAnimationFinish,
-    } = this.props;
-
-    const swiperConfigAdjust = isObject(swiperConfig || {}) ? swiperConfig : {};
-
-    swiperConfigAdjust.style = { width: '100%', height: '100%' };
-    (swiperConfigAdjust.indicatorDots = customIndicator
-      ? false
-      : swiperConfigAdjust.indicatorDots || false),
-      (swiperConfigAdjust.onChange = this.triggerChange);
-    swiperConfigAdjust.onTransition = onTransition;
-    swiperConfigAdjust.onAnimationFinish = onAnimationFinish;
-
-    return (
-      <Swiper {...swiperConfig}>
-        {list.map((o, i) => {
-          return this.buildItem(o, i);
-        })}
-      </Swiper>
-    );
   };
 
   buildIndicatorBox = () => {
@@ -156,14 +109,29 @@ class SwiperWrapper extends BaseComponent {
   };
 
   renderFurther() {
-    const { scaleMode, aspectRatio } = this.props;
+    const {
+      scaleMode,
+      swiperConfig,
+      list,
+      aspectRatio,
+      itemBuilder,
+      customIndicator,
+    } = this.props;
 
     const style = this.getStyle();
 
     if (scaleMode) {
       return (
         <ScaleBox style={style} aspectRatio={aspectRatio}>
-          {this.buildSwiper()}
+          <SwiperAdapter
+            scaleMode={scaleMode}
+            aspectRatio={aspectRatio}
+            swiperConfig={swiperConfig}
+            list={list}
+            itemBuilder={itemBuilder}
+            customIndicator={customIndicator}
+            onChange={this.triggerChange}
+          />
 
           {this.buildIndicatorBox()}
         </ScaleBox>
@@ -172,7 +140,15 @@ class SwiperWrapper extends BaseComponent {
 
     return (
       <View style={style}>
-        {this.buildSwiper()}
+        <SwiperAdapter
+          scaleMode={scaleMode}
+          aspectRatio={aspectRatio}
+          swiperConfig={swiperConfig}
+          list={list}
+          itemBuilder={itemBuilder}
+          customIndicator={customIndicator}
+          onChange={this.triggerChange}
+        />
 
         {this.buildIndicatorBox()}
       </View>
