@@ -11,6 +11,7 @@ const defaultProps = {
   list: [],
   itemBuilder: null,
   customIndicator: false,
+  duration: 500,
   onChange: null,
   onTransition: null,
   onAnimationFinish: null,
@@ -50,6 +51,7 @@ class SwiperAdapter extends BaseComponent {
       customIndicator,
       swiperConfig,
       list,
+      duration,
       onTransition,
       onAnimationFinish,
     } = this.props;
@@ -57,6 +59,7 @@ class SwiperAdapter extends BaseComponent {
     const swiperConfigAdjust = isObject(swiperConfig || {}) ? swiperConfig : {};
 
     swiperConfigAdjust.style = { width: '100%', height: '100%' };
+    swiperConfigAdjust.duration = duration;
     (swiperConfigAdjust.indicatorDots = customIndicator
       ? false
       : swiperConfigAdjust.indicatorDots || false),

@@ -19,6 +19,7 @@ const defaultProps = {
   indicatorBuilder: null,
   customIndicator: false,
   indicatorBoxStyle: {},
+  duration: 500,
   onChange: null,
   onTransition: null,
   onAnimationFinish: null,
@@ -47,14 +48,18 @@ class SwiperWrapper extends BaseComponent {
   };
 
   triggerChange = (e) => {
-    const { customIndicator, onChange } = this.props;
+    const { customIndicator, duration, onChange } = this.props;
 
     if (!!customIndicator) {
       const {
         detail: { current },
       } = e;
 
-      this.setState({ current });
+      const that = this;
+
+      setTimeout(() => {
+        that.setState({ current });
+      }, duration + 50);
     }
 
     if (isFunction(onChange)) {
@@ -116,6 +121,7 @@ class SwiperWrapper extends BaseComponent {
       aspectRatio,
       itemBuilder,
       customIndicator,
+      duration,
     } = this.props;
 
     const style = this.getStyle();
@@ -127,6 +133,7 @@ class SwiperWrapper extends BaseComponent {
             scaleMode={scaleMode}
             aspectRatio={aspectRatio}
             swiperConfig={swiperConfig}
+            duration={duration}
             list={list}
             itemBuilder={itemBuilder}
             customIndicator={customIndicator}
