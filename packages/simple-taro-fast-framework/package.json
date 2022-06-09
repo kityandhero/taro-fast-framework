@@ -100,6 +100,7 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "inquirer": "^8.2.4",
+    "lint-staged": "^13.0.0",
     "postcss": "^8.4.13",
     "postcss-less": "^6.0.0",
     "postcss-pxtorem": "^6.0.0",
