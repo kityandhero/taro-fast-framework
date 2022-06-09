@@ -46,6 +46,7 @@ export const storageKeyCollection = {
   metaData: 'metaData',
   administrativeDivisionFullData: 'administrativeDivisionFullData',
   selectedAddressData: 'selectedAddressData',
+  launchOption: 'launchOption',
 };
 
 export function getNearestLocalhostNotifyCache() {
@@ -1179,6 +1180,51 @@ export function removeSelectedAddressData() {
   recordDebug('exec removeSelectedAddressData');
 
   const key = storageKeyCollection.selectedAddressData;
+
+  removeLocalStorage(key);
+}
+
+/**
+ * 获取 launch option
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function getLaunchOption() {
+  recordDebug('exec getLaunchOption from local cache');
+
+  const key = storageKeyCollection.launchOption;
+
+  return getJsonFromLocalStorage(key) || null;
+}
+
+/**
+ * 设置 launch option
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function setLaunchOption(data) {
+  recordDebug('exec setLaunchOption to local cache');
+
+  const key = storageKeyCollection.launchOption;
+
+  return saveJsonToLocalStorage(key, data || '');
+}
+
+/**
+ * 移除 launch option
+ *
+ * @export
+ * @param {*} fn
+ * @returns
+ */
+export function removeLaunchOption() {
+  recordDebug('exec removeLaunchOption');
+
+  const key = storageKeyCollection.launchOption;
 
   removeLocalStorage(key);
 }

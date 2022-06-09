@@ -4,6 +4,7 @@ import {
   removeAdministrativeDivisionFullData,
   removeSelectedAddressData,
   removeSessionRefreshing,
+  setLaunchOption,
 } from 'src/utils/globalStorageAssist';
 
 import {
@@ -59,6 +60,10 @@ class AppBase extends Component {
     });
 
     this.checkUpdateVersion();
+  }
+
+  onLaunch(options) {
+    setLaunchOption(options);
   }
 
   setAppInitCustomLocal(config) {

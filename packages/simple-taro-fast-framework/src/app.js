@@ -47,12 +47,6 @@ class App extends AppBase {
   constructor(props) {
     super(props, config, models);
   }
-
-  componentDidShow() {}
-
-  componentDidHide() {}
-
-  componentDidCatchError() {}
 }
 
 export default App;
