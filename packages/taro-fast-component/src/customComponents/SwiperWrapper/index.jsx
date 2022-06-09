@@ -1,7 +1,8 @@
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 
@@ -20,6 +21,7 @@ const defaultProps = {
   customIndicator: false,
   indicatorBoxStyle: {},
   duration: 500,
+  indicatorDelayChange: 20,
   onChange: null,
   onTransition: null,
   onAnimationFinish: null,
@@ -48,7 +50,8 @@ class SwiperWrapper extends BaseComponent {
   };
 
   triggerChange = (e) => {
-    const { customIndicator, duration, onChange } = this.props;
+    const { customIndicator, duration, indicatorDelayChange, onChange } =
+      this.props;
 
     if (!!customIndicator) {
       const {
@@ -57,9 +60,15 @@ class SwiperWrapper extends BaseComponent {
 
       const that = this;
 
+      const indicatorDelayChangeAdjust = !isNumber(indicatorDelayChange)
+        ? defaultProps.indicatorDelayChange
+        : toNumber(indicatorDelayChange) <= 0
+        ? defaultProps.indicatorDelayChange
+        : toNumber(indicatorDelayChange);
+
       setTimeout(() => {
         that.setState({ current });
-      }, duration + 50);
+      }, duration + indicatorDelayChangeAdjust);
     }
 
     if (isFunction(onChange)) {

@@ -1,11 +1,5 @@
 import { Component } from 'react';
 import { Provider } from 'react-redux';
-import {
-  removeAdministrativeDivisionFullData,
-  removeSelectedAddressData,
-  removeSessionRefreshing,
-  setLaunchOption,
-} from 'src/utils/globalStorageAssist';
 
 import {
   getAppInitConfigData,
@@ -20,6 +14,12 @@ import {
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import { getStore } from '../../utils/dvaAssist';
+import {
+  removeAdministrativeDivisionFullData,
+  removeSelectedAddressData,
+  removeSessionRefreshing,
+  setLaunchOption,
+} from '../../utils/globalStorageAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
