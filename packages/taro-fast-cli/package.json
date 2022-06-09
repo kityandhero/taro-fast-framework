@@ -28,11 +28,17 @@
     "url": "https://github.com/kityandhero/taro-fast-framework/issues"
   },
   "dependencies": {
-    "commander": "^9.2.0",
-    "fs-extra": "^10.1.0"
+    "commander": "^9.0.0",
+    "download": "^8.0.0",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^10.0.1",
+    "hpagent": "^1.0.0",
+    "ping": "^0.4.2",
+    "shelljs": "^0.8.5",
+    "terminal-kit": "^2.4.0"
   },
   "devDependencies": {
-    "download-git-repo": "^3.0.2",
-    "terminal-kit": "^2.4.0"
+    "@types/fs-extra": "^9.0.13",
+    "@types/shelljs": "^0.8.11"
   }
 }
