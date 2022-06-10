@@ -114,24 +114,26 @@ class AppBase extends Component {
       if (canIUse('getUpdateManager')) {
         const updateManager = getUpdateManager();
 
-        const that = this;
+        if (updateManager) {
+          const that = this;
 
-        updateManager.onCheckForUpdate((data) => {
-          if (data.hasUpdate) {
-            updateManager.onUpdateReady(() => {
-              clearLocalStorage;
+          updateManager.onCheckForUpdate((data) => {
+            if (data.hasUpdate) {
+              updateManager.onUpdateReady(() => {
+                clearLocalStorage;
 
-              updateManager.applyUpdate();
-            });
-            updateManager.onUpdateFailed(() => {
-              that.showModal({
-                title: '已经有新版本喽~',
-                content:
-                  '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',
+                updateManager.applyUpdate();
               });
-            });
-          }
-        });
+              updateManager.onUpdateFailed(() => {
+                that.showModal({
+                  title: '已经有新版本喽~',
+                  content:
+                    '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',
+                });
+              });
+            }
+          });
+        }
       } else {
         this.showModal({
           title: '溫馨提示',
