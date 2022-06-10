@@ -2578,7 +2578,11 @@ class SupplementCore extends Common {
               callback(v);
             }
 
-            that.increaseCounter();
+            if (isFunction(callback)) {
+              callback(v);
+            }
+
+            that.doAfterLoadMetaDataByForce(v);
           }
         })
         .catch((error) => {
@@ -2593,6 +2597,9 @@ class SupplementCore extends Common {
       ...(getCurrentMetaData() || {}),
     };
   };
+
+  // eslint-disable-next-line no-unused-vars
+  doAfterLoadMetaDataByForce = (data) => {};
 
   dispatchGetFullAdministrativeDivisionDataWrapper = (data = {}) => {
     recordDebug('exec dispatchGetFullAdministrativeDivisionData');
