@@ -52,6 +52,7 @@ import {
   setSessionRefreshing,
   getMap,
   getAdministrativeDivisionFullData,
+  getLaunchOption,
 } from '../../utils/globalStorageAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
@@ -384,6 +385,13 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
+  // eslint-disable-next-line no-unused-vars
+  adjustByScene = (scene) => {
+    recordInfo(
+      'info adjustByScene do nothing, if you need to adjust something by different scene, please use adjustByScene',
+    );
+  };
+
   adjustInternalDataOnRepeatedShow = () => {
     recordInfo(
       'info adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please use adjustInternalDataOnRepeatedShow',
@@ -492,6 +500,15 @@ export default class Infrastructure extends ComponentBase {
       this.verifyTicket = false;
       this.verifyTicketValidity = false;
     }
+
+    const { scene } = {
+      ...{
+        scene: '',
+      },
+      ...getLaunchOption(),
+    };
+
+    this.adjustByScene(scene || '');
 
     this.checkSchedulingControlExistence();
 
