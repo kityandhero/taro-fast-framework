@@ -9,13 +9,16 @@
   "homepage": "https://github.com/kityandhero/taro-fast-framework#readme",
   "license": "MIT",
   "main": "lib/taro-fast-cli.js",
+  "bin": {
+    "taro-fast-cli": "./bin/cli.js"
+  },
   "directories": {
-    "bin": "bin",
-    "lib": "lib"
+    "lib": "lib",
+    "src": "src"
   },
   "files": [
-    "bin",
-    "lib"
+    "lib",
+    "src"
   ],
   "repository": {
     "type": "git",
