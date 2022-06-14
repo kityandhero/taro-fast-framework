@@ -1,5 +1,5 @@
-import Core from '../Core';
+import SupplementWrapper from '../SupplementWrapper';
 
-class AuthorizationWrapper extends Core {}
+class AuthorizationWrapper extends SupplementWrapper {}
 
 export default AuthorizationWrapper;
