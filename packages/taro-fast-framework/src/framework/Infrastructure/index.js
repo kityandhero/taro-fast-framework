@@ -503,7 +503,7 @@ export default class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
-    if (!this.ignoreSessionRelatedLogic) {
+    if (this.ignoreSessionRelatedLogic) {
       if (this.needSignIn) {
         throw new Error(
           'ignoreSessionRelatedLogic and needSignIn cannot be true at the same time',
