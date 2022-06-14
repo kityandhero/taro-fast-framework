@@ -656,8 +656,8 @@ export default class Infrastructure extends ComponentBase {
 
   checkAuthority = (permission) => checkHasAuthority(permission);
 
-  doWorkWhenCheckNeedSignInDidMountFail = () => {
-    recordDebug('exec doWorkWhenCheckNeedSignInDidMountFail');
+  doWorkWhenCheckPermissionFail = () => {
+    recordDebug('exec doWorkWhenCheckPermissionFail');
 
     const text = `无交互权限: ${this.componentAuthority}`;
 
