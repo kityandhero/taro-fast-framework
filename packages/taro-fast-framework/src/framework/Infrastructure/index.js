@@ -616,6 +616,8 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
+    that.setState({ signInSilentOverlayVisible: true });
+
     that.checkSession(() => {
       that.checkTicketValidity({
         callback: () => {
@@ -628,6 +630,8 @@ export default class Infrastructure extends ComponentBase {
             if (stringIsNullOrWhiteSpace(signInPath)) {
               throw new Error('未配置登录页面signInPath');
             }
+
+            that.setState({ signInSilentOverlayVisible: false });
 
             redirectTo(signInPath);
           } else {
