@@ -659,7 +659,7 @@ export default class Infrastructure extends ComponentBase {
   doWorkWhenCheckPermissionFail = () => {
     recordDebug('exec doWorkWhenCheckPermissionFail');
 
-    const text = `无交互权限: ${this.componentAuthority}`;
+    const text = `无交互权限: ${this.componentAuthority || ''}`;
 
     showRuntimeError({
       message: text,
