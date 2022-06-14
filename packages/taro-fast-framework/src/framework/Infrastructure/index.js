@@ -18,6 +18,8 @@ import {
   recordDebug,
   recordInfo,
   transformListData,
+  showRuntimeError,
+  redirectTo,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -38,13 +40,17 @@ import {
   Popup,
   Cascader,
   Line,
+  Overlay,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
 
-import { getSignInResultDescription } from '../../utils/tools';
+import {
+  getSignInResultDescription,
+  getVerifySignInResult,
+} from '../../utils/tools';
 import {
   getSession,
   getSessionRefreshing,
@@ -54,6 +60,7 @@ import {
   getAdministrativeDivisionFullData,
   getLaunchOption,
 } from '../../utils/globalStorageAssist';
+import { checkHasAuthority } from '../../utils/authority';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
@@ -346,6 +353,7 @@ export default class Infrastructure extends ComponentBase {
       ...underlyingState,
       ...{
         spin: true,
+        signInSilentOverlayVisible: false,
         backTopVisible: false,
         capsulePromptVisible: false,
         initCapsulePrompt: false,
@@ -496,9 +504,25 @@ export default class Infrastructure extends ComponentBase {
 
   doDidMountTask = () => {
     if (!this.ignoreSessionRelatedLogic) {
+      if (this.needSignIn) {
+        throw new Error(
+          'ignoreSessionRelatedLogic and needSignIn cannot be true at the same time',
+        );
+      }
+
       this.verifySession = false;
       this.verifyTicket = false;
       this.verifyTicketValidity = false;
+    } else {
+      if (this.needSignIn) {
+        recordInfo(
+          `info needSignIn is true; set checkTicket, checkTicketValidity, signInSilent and so on to true`,
+        );
+
+        this.verifySession = true;
+        this.verifyTicket = true;
+        this.verifyTicketValidity = true;
+      }
     }
 
     const { scene } = {
@@ -518,45 +542,137 @@ export default class Infrastructure extends ComponentBase {
 
     this.setCurrentInfo();
 
-    this.checkPermission();
+    const checkNeedSignInDidMountResult = this.checkNeedSignInDidMount();
 
-    this.doWorkBeforeAdjustDidMount();
+    if (!checkNeedSignInDidMountResult) {
+      this.doWorkWhenCheckNeedSignInDidMountFail();
+    } else {
+      const checkPermissionResult = this.checkPermission();
 
-    this.doWorkAdjustDidMount();
+      if (!checkPermissionResult) {
+        this.doWorkWhenCheckPermission();
+      } else {
+        this.doWorkBeforeAdjustDidMount();
 
-    this.doWorkAfterAdjustDidMount();
+        this.doWorkAdjustDidMount();
 
-    this.doWorkAfterDidMount();
+        this.doWorkAfterAdjustDidMount();
 
-    this.doSimulationFadeSpin(this.prepareLoadRemoteRequest);
+        this.doWorkAfterDidMount();
 
-    this.doOtherRemoteRequest();
+        this.doSimulationFadeSpin(this.prepareLoadRemoteRequest);
 
-    this.doOtherWorkAfterDidMount();
+        this.doOtherRemoteRequest();
+
+        this.doOtherWorkAfterDidMount();
+
+        const that = this;
+
+        if (this.enableCapsulePrompt) {
+          that.capsulePromptTimer = setTimeout(() => {
+            that.setState(
+              {
+                capsulePromptVisible: true,
+                initCapsulePrompt: true,
+              },
+              () => {
+                that.capsulePromptTimer = setTimeout(
+                  () => {
+                    that.setState({
+                      capsulePromptVisible: false,
+                    });
+                  },
+                  that.capsulePromptDelaySecond <= 0
+                    ? 2000
+                    : that.capsulePromptDelaySecond,
+                );
+              },
+            );
+          }, 2000);
+        }
+      }
+    }
+  };
+
+  checkNeedSignInDidMount = () => {
+    if (!this.needSignIn) {
+      return true;
+    }
+
+    recordDebug('exec checkNeedSignInDidMount');
+
+    const signInResult = this.getSignInResult();
+    const verifySignInResult = getVerifySignInResult();
+
+    if (signInResult !== verifySignInResult.success) {
+      return false;
+    }
+
+    return true;
+  };
+
+  doWorkWhenCheckNeedSignInDidMountFail = () => {
+    recordDebug('exec doWorkWhenCheckNeedSignInDidMountFail');
 
     const that = this;
 
-    if (this.enableCapsulePrompt) {
-      that.capsulePromptTimer = setTimeout(() => {
-        that.setState(
-          {
-            capsulePromptVisible: true,
-            initCapsulePrompt: true,
-          },
-          () => {
-            that.capsulePromptTimer = setTimeout(
-              () => {
-                that.setState({
-                  capsulePromptVisible: false,
-                });
-              },
-              that.capsulePromptDelaySecond <= 0
-                ? 2000
-                : that.capsulePromptDelaySecond,
-            );
-          },
-        );
-      }, 2000);
+    that.checkSession(() => {
+      that.checkTicketValidity({
+        callback: () => {
+          const signInResult = that.getSignInResult();
+          const verifySignInResult = getVerifySignInResult();
+
+          if (signInResult !== verifySignInResult.success) {
+            const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+
+            if (stringIsNullOrWhiteSpace(signInPath)) {
+              throw new Error('未配置登录页面signInPath');
+            }
+
+            redirectTo(signInPath);
+          } else {
+            that.setState({ signInSilentOverlayVisible: false });
+
+            that.doDidMountTask();
+          }
+        },
+      });
+    });
+  };
+
+  checkPermission = () => {
+    if (stringIsNullOrWhiteSpace(this.componentAuthority)) {
+      return true;
+    } else if (this.checkAuthority(this.componentAuthority)) {
+      return true;
+    }
+
+    return false;
+  };
+
+  checkAuthority = (permission) => checkHasAuthority(permission);
+
+  doWorkWhenCheckNeedSignInDidMountFail = () => {
+    recordDebug('exec doWorkWhenCheckNeedSignInDidMountFail');
+
+    const text = `无交互权限: ${this.componentAuthority}`;
+
+    showRuntimeError({
+      message: text,
+    });
+
+    const withoutPermissionRedirectPath =
+      defaultSettingsLayoutCustom.getWithoutPermissionRedirectPath();
+
+    if (stringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
+      throw new Error('未配置无交互权限时的跳转目标');
+    }
+
+    redirectTo(withoutPermissionRedirectPath);
+  };
+
+  goToSignIn = () => {
+    if (this.needSignIn) {
     }
   };
 
@@ -1356,6 +1472,23 @@ export default class Infrastructure extends ComponentBase {
 
   doAfterHideFullAdministrativeDivisionSelector = () => {};
 
+  buildSignInSilentOverlay = () => {
+    if (!this.needSignIn) {
+      return null;
+    }
+
+    const { signInSilentOverlayVisible } = this.state;
+
+    return (
+      <Overlay
+        visible={signInSilentOverlayVisible}
+        mode="fullScreen"
+        zIndex={8000}
+        onClick={this.hidePoster}
+      ></Overlay>
+    );
+  };
+
   renderView() {
     const { spin, backTopVisible } = this.state;
 
@@ -1455,6 +1588,8 @@ export default class Infrastructure extends ComponentBase {
           {this.buildFullAdministrativeDivisionSelectorArea()}
 
           {this.buildExtendArea()}
+
+          {this.buildSignInSilentOverlay()}
         </>
       );
     }
@@ -1474,6 +1609,8 @@ export default class Infrastructure extends ComponentBase {
         {this.buildFullAdministrativeDivisionSelectorArea()}
 
         {this.buildExtendArea()}
+
+        {this.buildSignInSilentOverlay()}
       </>
     );
   }

@@ -102,6 +102,16 @@ class ComponentBase extends Component {
    */
   keyPrefix = '';
 
+  /**
+   * 需要登录后才能访问
+   */
+  needSignIn = false;
+
+  /**
+   * 权限数据
+   */
+  componentAuthority = null;
+
   constructor(props) {
     super(props);
 
@@ -202,23 +212,33 @@ class ComponentBase extends Component {
   }
 
   doDidMountTask = () => {
-    this.checkPermission();
+    const checkNeedSignInDidMountResult = this.checkNeedSignInDidMount();
 
-    this.doWorkBeforeAdjustDidMount();
+    if (!checkNeedSignInDidMountResult) {
+      this.doWorkWhenCheckNeedSignInDidMountFail();
+    } else {
+      const checkPermissionResult = this.checkPermission();
 
-    this.doWorkAdjustDidMount();
+      if (!checkPermissionResult) {
+        this.doWorkWhenCheckPermission();
+      } else {
+        this.doWorkBeforeAdjustDidMount();
 
-    this.doWorkAfterAdjustDidMount();
+        this.doWorkAdjustDidMount();
 
-    this.doWorkAfterDidMount();
+        this.doWorkAfterAdjustDidMount();
 
-    if (this.loadRemoteRequestAfterMount) {
-      this.doLoadRemoteRequest();
+        this.doWorkAfterDidMount();
+
+        if (this.loadRemoteRequestAfterMount) {
+          this.doLoadRemoteRequest();
+        }
+
+        this.doOtherRemoteRequest();
+
+        this.doOtherWorkAfterDidMount();
+      }
     }
-
-    this.doOtherRemoteRequest();
-
-    this.doOtherWorkAfterDidMount();
   };
 
   doShowTask = () => {
@@ -235,7 +255,27 @@ class ComponentBase extends Component {
     this.doWorkAfterShow();
   };
 
-  checkPermission = () => {};
+  checkNeedSignInDidMount = () => {
+    return true;
+  };
+
+  checkPermission = () => {
+    return true;
+  };
+
+  doWorkWhenCheckNeedSignInDidMountFail = () => {
+    recordDebug('exec doWorkWhenCheckNeedSignInDidMountFail');
+    recordInfo(
+      'info doWorkWhenCheckNeedSignInDidMountFail do nothing,if you need,you can override it: doWorkWhenCheckNeedSignInDidMountFail = () => {}',
+    );
+  };
+
+  doWorkWhenCheckPermissionFail = () => {
+    recordDebug('exec doWorkWhenCheckPermissionFail');
+    recordInfo(
+      'info doWorkWhenCheckPermissionFail do nothing,if you need,you can override it: doWorkWhenCheckPermissionFail = () => {}',
+    );
+  };
 
   doWorkBeforeAdjustDidMount = () => {};
 
