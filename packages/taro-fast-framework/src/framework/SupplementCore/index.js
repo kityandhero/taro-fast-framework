@@ -471,6 +471,7 @@ class SupplementCore extends Common {
             that.signInSilent({
               data: {},
               successCallback: callback,
+              failCallback: signInSilentFailCallback,
             });
           },
         });
@@ -478,6 +479,7 @@ class SupplementCore extends Common {
         that.signInSilent({
           data: {},
           successCallback: callback,
+          failCallback: signInSilentFailCallback,
         });
       }
     } else {
