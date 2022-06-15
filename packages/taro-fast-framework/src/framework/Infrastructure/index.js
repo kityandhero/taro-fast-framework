@@ -20,6 +20,7 @@ import {
   transformListData,
   showRuntimeError,
   redirectTo,
+  buildLinearGradient,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import {
@@ -41,6 +42,7 @@ import {
   Cascader,
   Line,
   Overlay,
+  FlexBox,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
@@ -1497,7 +1499,66 @@ export default class Infrastructure extends ComponentBase {
   };
 
   buildSignInSilentOverlayPrompt = () => {
-    return null;
+    return (
+      <FlexBox
+        style={{
+          height: '100%',
+        }}
+        flexAuto="top"
+        top={<View></View>}
+        bottom={
+          <>
+            <View
+              style={{
+                position: 'relative',
+                width: transformSize(220),
+                height: transformSize(40),
+                borderRadius: transformSize(8),
+                overflow: 'hidden',
+              }}
+            >
+              <View
+                style={{
+                  position: 'absolute',
+                  backgroundImage: buildLinearGradient({
+                    direct: 45,
+                    list: ['#55904e', '#f9454c', '#755314'],
+                  }),
+                  backgroundSize: '400% 400%',
+                  top: transformSize(-10),
+                  left: '0',
+                  height: transformSize(60),
+                  width: '100%',
+                  zIndex: '0',
+                  opacity: '1',
+                  animation:
+                    'tfc-sign-in-silent-overlay-prompt 3s ease infinite',
+                }}
+              />
+
+              <View
+                style={{
+                  position: 'relative',
+                  zIndex: '1',
+                  top: '0',
+                  left: '0',
+                  widows: '100%',
+                  color: '#fff',
+                  textAlign: 'center',
+                  fontSize: transformSize(28),
+                  height: transformSize(40),
+                  lineHeight: transformSize(40),
+                }}
+              >
+                自动登陆中
+              </View>
+            </View>
+
+            <Line transparent height={80} />
+          </>
+        }
+      ></FlexBox>
+    );
   };
 
   renderView() {
