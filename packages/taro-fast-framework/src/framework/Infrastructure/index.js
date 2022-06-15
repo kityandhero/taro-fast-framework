@@ -1487,10 +1487,17 @@ export default class Infrastructure extends ComponentBase {
       <Overlay
         visible={signInSilentOverlayVisible}
         mode="fullScreen"
+        transparent
         zIndex={8000}
         onClick={this.hidePoster}
-      ></Overlay>
+      >
+        {this.buildSignInSilentOverlayPrompt()}
+      </Overlay>
     );
+  };
+
+  buildSignInSilentOverlayPrompt = () => {
+    return null;
   };
 
   renderView() {
