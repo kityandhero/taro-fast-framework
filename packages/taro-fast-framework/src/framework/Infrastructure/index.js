@@ -23,6 +23,7 @@ import {
   buildLinearGradient,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   underlyingState,
   locateResult,
@@ -618,32 +619,45 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
-    that.setState({ signInSilentOverlayVisible: true });
+    const signInResult = this.getSignInResult();
+    const verifySignInResult = getVerifySignInResult();
 
-    that.checkSession(() => {
-      that.checkTicketValidity({
-        callback: () => {
-          that.setState({ signInSilentOverlayVisible: false });
+    if (toString(signInResult) === toString(verifySignInResult.fail)) {
+      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-          that.doDidMountTask();
-        },
-        signInSilentFailCallback: () => {
-          recordDebug(
-            'exec signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
-          );
+      if (stringIsNullOrWhiteSpace(signInPath)) {
+        throw new Error('未配置登录页面signInPath');
+      }
 
-          const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+      redirectTo(signInPath);
+    } else {
+      that.setState({ signInSilentOverlayVisible: true });
 
-          if (stringIsNullOrWhiteSpace(signInPath)) {
-            throw new Error('未配置登录页面signInPath');
-          }
+      that.checkSession(() => {
+        that.checkTicketValidity({
+          callback: () => {
+            that.setState({ signInSilentOverlayVisible: false });
 
-          // that.setState({ signInSilentOverlayVisible: false });
+            that.doDidMountTask();
+          },
+          signInSilentFailCallback: () => {
+            recordDebug(
+              'exec signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
+            );
 
-          redirectTo(signInPath);
-        },
+            const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+
+            if (stringIsNullOrWhiteSpace(signInPath)) {
+              throw new Error('未配置登录页面signInPath');
+            }
+
+            // that.setState({ signInSilentOverlayVisible: false });
+
+            redirectTo(signInPath);
+          },
+        });
       });
-    });
+    }
   };
 
   checkPermission = () => {

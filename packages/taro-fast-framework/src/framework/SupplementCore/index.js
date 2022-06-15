@@ -1278,7 +1278,7 @@ class SupplementCore extends Common {
         removeCurrentCustomer();
 
         const verifySignInResult = getVerifySignInResult();
-        console.log(verifySignInResult);
+
         if (toString(signInResult) === toString(verifySignInResult.success)) {
           that.getCustomer({
             successCallback: () => {
