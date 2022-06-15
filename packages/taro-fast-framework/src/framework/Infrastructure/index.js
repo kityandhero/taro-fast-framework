@@ -628,6 +628,10 @@ export default class Infrastructure extends ComponentBase {
           that.doDidMountTask();
         },
         signInSilentFailCallback: () => {
+          recordDebug(
+            'exec signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
+          );
+
           const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
           if (stringIsNullOrWhiteSpace(signInPath)) {

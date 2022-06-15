@@ -1278,7 +1278,7 @@ class SupplementCore extends Common {
         removeCurrentCustomer();
 
         const verifySignInResult = getVerifySignInResult();
-
+        console.log(verifySignInResult);
         if (toString(signInResult) === toString(verifySignInResult.success)) {
           that.getCustomer({
             successCallback: () => {
@@ -1294,8 +1294,6 @@ class SupplementCore extends Common {
             completeCallback,
           });
         } else {
-          that.doWhenSignInSilentFailWrapper();
-
           if (isFunction(failCallback)) {
             failCallback();
           }
@@ -1303,6 +1301,8 @@ class SupplementCore extends Common {
           if (isFunction(completeCallback)) {
             completeCallback();
           }
+
+          that.doWhenSignInSilentFailWrapper();
         }
       } else {
         removeSession();
@@ -1311,8 +1311,6 @@ class SupplementCore extends Common {
           message: '静默登录失败',
         });
 
-        that.doWhenSignInSilentFailWrapper();
-
         if (isFunction(failCallback)) {
           failCallback();
         }
@@ -1320,6 +1318,8 @@ class SupplementCore extends Common {
         if (isFunction(completeCallback)) {
           completeCallback();
         }
+
+        that.doWhenSignInSilentFailWrapper();
       }
     });
   }
