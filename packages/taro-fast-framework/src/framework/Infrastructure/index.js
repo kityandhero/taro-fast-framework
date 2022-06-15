@@ -623,24 +623,20 @@ export default class Infrastructure extends ComponentBase {
     that.checkSession(() => {
       that.checkTicketValidity({
         callback: () => {
-          const signInResult = that.getSignInResult();
-          const verifySignInResult = getVerifySignInResult();
+          that.setState({ signInSilentOverlayVisible: false });
 
-          if (signInResult !== verifySignInResult.success) {
-            const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+          that.doDidMountTask();
+        },
+        signInSilentFailCallback: () => {
+          const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-            if (stringIsNullOrWhiteSpace(signInPath)) {
-              throw new Error('未配置登录页面signInPath');
-            }
-
-            that.setState({ signInSilentOverlayVisible: false });
-
-            redirectTo(signInPath);
-          } else {
-            that.setState({ signInSilentOverlayVisible: false });
-
-            that.doDidMountTask();
+          if (stringIsNullOrWhiteSpace(signInPath)) {
+            throw new Error('未配置登录页面signInPath');
           }
+
+          // that.setState({ signInSilentOverlayVisible: false });
+
+          redirectTo(signInPath);
         },
       });
     });
@@ -923,7 +919,13 @@ export default class Infrastructure extends ComponentBase {
    * 检测登录凭据
    * @param {*} callback
    */
-  checkTicketValidity = ({ callback }) => {
+  checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
+    if (signInSilentFailCallback) {
+      throw new Error(
+        'signInSilentFailCallback is not supported in base class Infrastructure',
+      );
+    }
+
     if (isFunction(callback)) {
       callback();
     }

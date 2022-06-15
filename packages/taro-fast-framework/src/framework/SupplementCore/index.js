@@ -431,7 +431,7 @@ class SupplementCore extends Common {
     }
   };
 
-  checkTicketValidity = ({ callback }) => {
+  checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
     recordDebug('exec checkTicketValidity');
 
     const useLocation = defaultSettingsLayoutCustom.getUseLocation();
@@ -461,6 +461,7 @@ class SupplementCore extends Common {
             that.signInSilent({
               data: {},
               successCallback: callback,
+              failCallback: signInSilentFailCallback,
             });
           },
           focus: false,
