@@ -77,6 +77,9 @@ class ImageBox extends BaseComponent {
     });
   }
 
+  /**
+   * onImageError
+   */
   onImageError() {
     const { hideWhenLoadError, errorImage: errorImageSource } = this.props;
 
