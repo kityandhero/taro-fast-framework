@@ -29,7 +29,7 @@ const defaultProps = {
   backgroundColor: '',
   showOverlay: false,
   overlayText: '',
-  loadingEffect: true,
+  loadingEffect: false,
   decoration: null,
   errorImage: '',
 };
@@ -194,6 +194,7 @@ class ImageBox extends BaseComponent {
           padding={padding}
           aspectRatio={aspectRatio}
           hide={hide}
+          bodySkeletonMode
         >
           {showOverlay ? (
             <View

@@ -16,6 +16,7 @@ const defaultProps = {
   hide: false,
   padding: 0,
   aspectRatio: 1,
+  bodySkeletonMode: false,
   onClick: null,
 };
 
@@ -35,6 +36,7 @@ class ScaleBox extends BaseComponent {
       hide,
       padding,
       aspectRatio: aspectRatioSource,
+      bodySkeletonMode,
       children,
     } = {
       ...this.props,
@@ -80,7 +82,14 @@ class ScaleBox extends BaseComponent {
           style={{ marginTop: `${aspectRatio * 100}%` }}
         />
 
-        <View className={classNames(`${classPrefix}__body`)}>{children}</View>
+        <View
+          className={classNames(`${classPrefix}__body`, {
+            [`${classPrefix}__body--transparent`]: !bodySkeletonMode,
+            [`${classPrefix}__body--skeleton`]: bodySkeletonMode,
+          })}
+        >
+          {children}
+        </View>
       </View>
     );
 

@@ -18,6 +18,28 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  &__body--transparent {
     background-color: transparent;
+  }
+
+  &__body--skeleton {
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0%) 40%,
+        rgba(255, 255, 255, 50%) 50%,
+        rgba(255, 255, 255, 0%) 60%
+      )
+      var(--loading-grey);
+    background-size: 200% 100%;
+    background-position-x: 180%;
+    animation: 1s tfc-scale-box-body-skeleton ease-in-out infinite;
+  }
+}
+
+@keyframes tfc-scale-box-body-skeleton {
+  to {
+    background-position-x: -20%;
   }
 }
