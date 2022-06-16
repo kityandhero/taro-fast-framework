@@ -748,12 +748,12 @@ export default class Infrastructure extends ComponentBase {
 
     if (that.useSimulationFadeSpin && spin) {
       setTimeout(() => {
-        that.setState({ spin: false }, () => {
-          if (isFunction(callback)) {
-            callback();
-          }
-        });
+        that.setState({ spin: false });
       }, that.simulationFadeSpinDuration);
+
+      if (isFunction(callback)) {
+        callback();
+      }
     } else {
       if (isFunction(callback)) {
         callback();
