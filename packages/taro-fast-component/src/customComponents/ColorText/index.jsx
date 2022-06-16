@@ -54,7 +54,7 @@ class ColorText extends BaseComponent {
   getColor = () => {
     const { color, randomSeed, seedOffset, randomColor } = this.props;
 
-    let colorValue = color || 'rgba(0, 0, 0, 0.85)';
+    let colorValue = color || 'rgba(0, 0, 0, 85%)';
 
     if (randomColor) {
       colorValue = getRandomColor({
