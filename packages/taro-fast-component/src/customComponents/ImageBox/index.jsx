@@ -31,6 +31,7 @@ const defaultProps = {
   overlayText: '',
   loadingEffect: false,
   decoration: null,
+  skeletonMode: false,
   errorImage: '',
 };
 
@@ -152,6 +153,7 @@ class ImageBox extends BaseComponent {
       overlayText: overlayTextValue,
       loadingEffect: loadingEffectValue,
       errorImage: errorImageSource,
+      skeletonMode,
     } = {
       ...this.props,
     };
@@ -194,7 +196,7 @@ class ImageBox extends BaseComponent {
           padding={padding}
           aspectRatio={aspectRatio}
           hide={hide}
-          bodySkeletonMode
+          bodySkeletonMode={skeletonMode}
         >
           {showOverlay ? (
             <View
