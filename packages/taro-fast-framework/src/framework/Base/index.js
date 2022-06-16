@@ -195,6 +195,7 @@ class Base extends Infrastructure {
               });
             } else {
               this.setState({
+                spin: false,
                 dataLoading: false,
                 loadSuccess: false,
                 reloading: false,
@@ -279,6 +280,7 @@ class Base extends Infrastructure {
             stopPullDownRefresh();
 
             let willSaveToState = {
+              spin: false,
               dataLoading: false,
               loadSuccess: false,
               reloading: false,
