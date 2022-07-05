@@ -1,6 +1,7 @@
 {
-  "extends": ["taro/react", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["taro/react", "prettier", "plugin:promise/recommended"],
+  "env": { "es6": true },
+  "plugins": ["simple-import-sort", "import", "prettier"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "requireConfigFile": false,
@@ -9,7 +10,8 @@
     }
   },
   "rules": {
-    "react/sort-comp": "off",
+    "camelias": 0,
+    "react/sort-comp": 2,
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -29,6 +31,9 @@
     "object-curly-newline": 0,
     "no-use-before-define": 0,
     "no-nested-ternary": 0,
+    "no-spaced-func": 2,
+    "no-this-before-super": 0,
+    "no-var": 0,
     "compat/compat": 0,
     "sort-imports": 0,
     "@typescript-eslint/no-this-alias": ["off"],

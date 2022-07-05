@@ -1,16 +1,15 @@
-import { connect } from 'react-redux';
+import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
-
+import { connect } from 'react-redux';
 import {
+  ActionSheet,
+  Button,
   Card,
   Space,
-  Button,
-  ActionSheet,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const style = {
   ...{
