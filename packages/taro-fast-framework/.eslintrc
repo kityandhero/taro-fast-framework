@@ -30,9 +30,15 @@
     "no-use-before-define": 0,
     "no-nested-ternary": 0,
     "compat/compat": 0,
+    "sort-imports": 0,
     "@typescript-eslint/no-this-alias": ["off"],
     "@typescript-eslint/no-unused-vars": 0,
     "@typescript-eslint/no-invalid-this": 0,
-    "jsx-quotes": ["error", "prefer-double"]
+    "jsx-quotes": ["error", "prefer-double"],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
   }
 }

@@ -42,6 +42,8 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/shelljs": "^0.8.11"
+    "@types/shelljs": "^0.8.11",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^8.0.1"
   }
 }
