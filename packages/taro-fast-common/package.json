@@ -55,6 +55,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-url": "^7.0.0",
     "@svgr/rollup": "^6.2.1",
+    "@tarojs/cli": "^3.4.13",
     "@tarojs/mini-runner": "3.4.13",
     "@tarojs/plugin-framework-react": "^3.4.13",
     "@tarojs/webpack-runner": "3.4.13",
