@@ -2,10 +2,9 @@ import { connect } from 'react-redux';
 
 import { sortBy } from 'taro-fast-common/es/utils/tools';
 
-import { pathCollection } from '../../../customConfig/pathConfig';
-import ChannelPageBase from '../../../customComponents/ChannelPageBase';
-
 import iconBasic from '../../../assets/images/icon-list-basic.png';
+import ChannelPageBase from '../../../customComponents/ChannelPageBase';
+import { pathCollection } from '../../../customConfig/pathConfig';
 
 const list = [
   {
@@ -122,6 +121,11 @@ const list = [
     id: 'BackTop',
     name: '返回头部',
     path: pathCollection.example.backTop.path,
+  },
+  {
+    id: 'MultiLineText',
+    name: '多行文本',
+    path: pathCollection.example.multiLineText.path,
   },
 ];
 

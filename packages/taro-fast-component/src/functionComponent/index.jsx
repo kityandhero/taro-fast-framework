@@ -1,18 +1,18 @@
-import { View, Swiper, SwiperItem } from '@tarojs/components';
+import { Swiper, SwiperItem, View } from '@tarojs/components';
 
 import {
-  transformSize,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import {
-  ColorText,
+  ActivityIndicator,
   Button,
   CenterBox,
+  ColorText,
   Empty,
   FadeInBox,
-  ActivityIndicator,
 } from '../customComponents';
 
 export function buildButton({

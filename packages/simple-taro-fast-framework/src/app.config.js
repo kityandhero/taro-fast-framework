@@ -74,6 +74,7 @@ export default {
         'pages/backboardBox/index',
         'pages/dataGrid/index',
         'pages/searchBar/index',
+        'pages/multiLineText/index',
         'pages/textAreaItem/index',
         'pages/actionSheet/index',
         'pages/modal/index',

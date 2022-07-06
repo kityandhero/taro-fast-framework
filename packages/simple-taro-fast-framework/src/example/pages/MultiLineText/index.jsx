@@ -1,49 +1,62 @@
 import { connect } from 'react-redux';
 
-import { Link, Space } from 'taro-fast-component/es/customComponents';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+import {
+  ColorText,
+  MultiLineText,
+  Space,
+} from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
 import SimpleBox from '../../../customComponents/SimpleBox';
 
-const url = 'http://www.a.com';
+const longText =
+  '长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本';
 
 const config1 = {
-  href: url,
-  text: '跳转链接',
+  text: longText,
 };
 
 const config2 = {
-  href: url,
-  text: '跳转链接',
-  color: 'green',
+  text: longText,
+  style: { color: 'green' },
 };
 
 const config3 = {
-  href: url,
-  text: '跳转链接',
-  underLine: true,
+  text: longText,
+  lineHeight: 50,
 };
 
 const config4 = {
-  href: url,
-  text: '跳转链接',
+  text: longText,
   fontSize: 40,
+  lineHeight: 50,
 };
 
 const config5 = {
-  href: url,
-  text: '跳转链接',
-  copyTips: '复制成功, 请使用外部浏览器访问',
+  text: longText,
+  prefixStyle: {
+    backgroundColor: 'red',
+    padding: `${transformSize(4)} ${transformSize(6)}`,
+  },
+  prefix: <ColorText text="前缀" />,
+  lineHeight: 36,
 };
 
 const config6 = {
-  text: '跳转链接',
+  text: longText,
+  suffixStyle: {
+    backgroundColor: 'red',
+    padding: `${transformSize(4)} ${transformSize(6)}`,
+  },
+  suffix: <ColorText text="后缀" />,
+  lineHeight: 36,
 };
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '链接',
+  navigationBarTitleText: '多行文本',
 });
 
 @connect(({ schedulingControl }) => ({
@@ -51,9 +64,9 @@ definePageConfig({
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'Link',
-    name: '链接',
-    description: '链接组件',
+    id: 'MultiLineText',
+    name: '多行文本',
+    description: '多行文本组件',
   };
 
   constructor(props) {
@@ -71,15 +84,15 @@ export default class Index extends ContentPageBase {
   establishControlList = () => {
     return [
       {
-        header: '仅头部',
+        header: '仅文字',
         config: config1,
       },
       {
-        header: '设置颜色',
+        header: '设置样式',
         config: config2,
       },
       {
-        header: '设置下划线',
+        header: '设置行高',
         config: config3,
       },
       {
@@ -87,11 +100,11 @@ export default class Index extends ContentPageBase {
         config: config4,
       },
       {
-        header: '复制提示',
+        header: '前缀',
         config: config5,
       },
       {
-        header: '未配置链接的提示',
+        header: '后缀',
         config: config6,
       },
     ];
@@ -99,9 +112,9 @@ export default class Index extends ContentPageBase {
 
   buildSimpleItem = ({ key, config, inner }) => {
     return (
-      <Link key={key} {...config}>
+      <MultiLineText key={key} {...config}>
         {this.buildSimpleItemInner(inner)}
-      </Link>
+      </MultiLineText>
     );
   };
 
@@ -114,17 +127,18 @@ export default class Index extends ContentPageBase {
           header={header}
           description={description}
           config={currentConfig}
-          componentName="Link"
+          componentName="MultiLineText"
           mockChildren={!!inner}
           useInnerBox
           innerBoxCenterMode
           innerBoxPadding
+          ignorePropertyList={['prefix', 'suffix']}
           controlBox={this.buildControlBox(this.establishControlList())}
         >
           {this.buildSimpleList()}
         </SimpleBox>
 
-        <PropertyBox config={Link.defaultProps} labelWidth={240} />
+        <PropertyBox config={MultiLineText.defaultProps} labelWidth={240} />
       </Space>
     );
   };

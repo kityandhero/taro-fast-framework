@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { Text } from '@tarojs/components';
 
 import {
+  copyToClipboard,
+  isBrowser,
+  isWechat,
+  showInfoMessage,
   showWarnMessage,
   stringIsNullOrWhiteSpace,
   transformSize,
-  isBrowser,
-  isWechat,
-  copyToClipboard,
-  showInfoMessage,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,

@@ -89,6 +89,9 @@ const examplePathCollection = {
   stepperItem: {
     path: '/example/pages/stepperItem/index',
   },
+  multiLineText: {
+    path: '/example/pages/multiLineText/index',
+  },
   button: {
     path: '/example/pages/button/index',
   },

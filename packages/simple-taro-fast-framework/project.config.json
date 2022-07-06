@@ -56,6 +56,12 @@
                     "scene": null
                 },
                 {
+                    "name": "multiLineText",
+                    "pathName": "example/pages/multiLineText/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
                     "name": "layout",
                     "pathName": "example/pages/layout/index",
                     "query": "",
