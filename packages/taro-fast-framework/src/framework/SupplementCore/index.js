@@ -1,67 +1,66 @@
 import Taro from '@tarojs/taro';
 
 import {
-  getGeographicalLocation,
-  getSetting,
-  showInfoMessage,
-  sleep,
-  recordObject,
-  recordLog,
-  inCollection,
-  recordError,
-  recordDebug,
-  recordInfo,
-  stringIsNullOrWhiteSpace,
-  redirectTo,
-} from 'taro-fast-common/es/utils/tools';
-import {
-  isFunction,
-  isUndefined,
-  isString,
-  isObject,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
-import {
   locateResult,
   locationModeCollection,
 } from 'taro-fast-common/es/utils/constants';
 import Tips from 'taro-fast-common/es/utils/tips';
+import {
+  getGeographicalLocation,
+  getSetting,
+  inCollection,
+  recordDebug,
+  recordError,
+  recordInfo,
+  recordLog,
+  recordObject,
+  redirectTo,
+  showInfoMessage,
+  sleep,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
+import {
+  isFunction,
+  isObject,
+  isString,
+  isUndefined,
+} from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
+import { apiDataConvertCore } from '../../utils/actionAssist';
+import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import {
-  getSignInResultDescription,
-  getVerifySignInResult,
-} from '../../utils/tools';
-import {
+  getAdministrativeDivisionFullData,
+  getCurrentCustomer,
+  getCurrentMetaData,
   getEffectiveCode,
   getLastLocation,
   getLocation,
   getLocationMode,
   getMap,
   getNextCheckLoginUnixTime,
-  setOpenId,
   getSessionRefreshing,
-  setSessionRefreshing,
-  setToken,
+  removeCurrentCustomer,
   removeLocation,
   removeSession,
+  setAdministrativeDivisionFullData,
+  setCurrentCustomer,
+  setCurrentMetaData,
   setEffectiveCode,
   setLastLocation,
   setLocation,
   setLocationMode,
   setMap,
   setNextCheckLoginUnixTime,
+  setOpenId,
   setSession,
-  getCurrentCustomer,
-  setCurrentCustomer,
-  removeCurrentCustomer,
-  getCurrentMetaData,
-  setCurrentMetaData,
-  getAdministrativeDivisionFullData,
-  setAdministrativeDivisionFullData,
+  setSessionRefreshing,
+  setToken,
 } from '../../utils/globalStorageAssist';
-import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
-import { apiDataConvertCore } from '../../utils/actionAssist';
-
+import {
+  getSignInResultDescription,
+  getVerifySignInResult,
+} from '../../utils/tools';
 import Common from '../Common';
 
 /**
@@ -607,41 +606,48 @@ class SupplementCore extends Common {
       return;
     }
 
-    that.dispatchCheckTicketValidity({}).then(() => {
-      const remoteData = that.getCheckTicketValidityApiData();
+    that
+      .dispatchCheckTicketValidity({})
+      .then(() => {
+        const remoteData = that.getCheckTicketValidityApiData();
 
-      const { dataSuccess, data: metaData } = remoteData;
+        const { dataSuccess, data: metaData } = remoteData;
 
-      if (dataSuccess) {
-        const { needRefresh, nextCheckLoginUnixTime } = metaData;
+        if (dataSuccess) {
+          const { needRefresh, nextCheckLoginUnixTime } = metaData;
 
-        setNextCheckLoginUnixTime(nextCheckLoginUnixTime);
+          setNextCheckLoginUnixTime(nextCheckLoginUnixTime);
 
-        if (needRefresh) {
-          that.signInSilent({
-            data: {},
-            successCallback: callback,
-          });
-        } else {
-          const verifySignInResult = getVerifySignInResult();
-          const signInResult = that.getSignInResult();
+          if (needRefresh) {
+            that.signInSilent({
+              data: {},
+              successCallback: callback,
+            });
+          } else {
+            const verifySignInResult = getVerifySignInResult();
+            const signInResult = that.getSignInResult();
 
-          if (signInResult === verifySignInResult.fail && that.verifyTicket) {
-            that.doWhenCheckTicketValidityVerifySignInFail();
-          }
-
-          if (signInResult === verifySignInResult.success) {
-            if (isFunction(callback)) {
-              callback();
+            if (signInResult === verifySignInResult.fail && that.verifyTicket) {
+              that.doWhenCheckTicketValidityVerifySignInFail();
             }
-          }
 
-          that.setTicketValidityProcessDetection({
-            data: false,
-          });
+            if (signInResult === verifySignInResult.success) {
+              if (isFunction(callback)) {
+                callback();
+              }
+            }
+
+            that.setTicketValidityProcessDetection({
+              data: false,
+            });
+          }
         }
-      }
-    });
+
+        return remoteData;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   }
 
   doWhenCheckTicketValidityVerifySignInFail = () => {};
@@ -718,6 +724,8 @@ class SupplementCore extends Common {
                 }
 
                 setSessionRefreshing(false);
+
+                return remoteData;
               })
               .catch((error) => {
                 recordError({ error });
@@ -743,6 +751,8 @@ class SupplementCore extends Common {
               callback();
             }
           }
+
+          return res;
         })
         .catch((error) => {
           recordError({ error, current: that });
@@ -1120,72 +1130,91 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    that.dispatchSignIn(data).then(() => {
-      Tips.loaded();
+    that
+      .dispatchSignIn(data)
+      .then(() => {
+        Tips.loaded();
 
-      const remoteData = that.getSignInApiData();
+        const remoteData = that.getSignInApiData();
 
-      const { dataSuccess, data: metaData } = remoteData;
+        const { dataSuccess, data: metaData } = remoteData;
 
-      that.setSignInProcessDetection({
-        data: false,
-      });
+        that.setSignInProcessDetection({
+          data: false,
+        });
 
-      if (dataSuccess) {
-        const sessionEffective =
-          that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
+        if (dataSuccess) {
+          const sessionEffective =
+            that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
 
-        if (!sessionEffective) {
-          that.refreshSession({
-            callback: () => {
-              that.signInCore({
-                data,
-                successCallback,
-                failCallback,
-                completeCallback,
-              });
-            },
+          if (!sessionEffective) {
+            that.refreshSession({
+              callback: () => {
+                that.signInCore({
+                  data,
+                  successCallback,
+                  failCallback,
+                  completeCallback,
+                });
+              },
+            });
+
+            return;
+          }
+
+          const signInResult =
+            that.parseSignInResultFromSignInApiDataWrapper(metaData);
+
+          that.setSignInResultOnSignIn({
+            signInResult,
           });
 
-          return;
-        }
+          const token = that.parseTokenFromSignInApiData(metaData);
 
-        const signInResult =
-          that.parseSignInResultFromSignInApiDataWrapper(metaData);
-
-        that.setSignInResultOnSignIn({
-          signInResult,
-        });
-
-        const token = that.parseTokenFromSignInApiData(metaData);
-
-        that.setTokenOnSignIn({
-          token,
-        });
-
-        that.setOpenIdOnSignIn({
-          openId: that.parseOpenIdFromSignInApiData(metaData),
-        });
-
-        removeCurrentCustomer();
-
-        const verifySignInResult = getVerifySignInResult();
-
-        if (toString(signInResult) === toString(verifySignInResult.success)) {
-          that.getCustomer({
-            successCallback: () => {
-              if (isFunction(successCallback)) {
-                successCallback(metaData);
-              }
-
-              that.doAfterGetCustomerOnSignIn(metaData);
-
-              that.doAfterSignInSuccess(metaData);
-            },
-            failCallback,
-            completeCallback,
+          that.setTokenOnSignIn({
+            token,
           });
+
+          that.setOpenIdOnSignIn({
+            openId: that.parseOpenIdFromSignInApiData(metaData),
+          });
+
+          removeCurrentCustomer();
+
+          const verifySignInResult = getVerifySignInResult();
+
+          if (toString(signInResult) === toString(verifySignInResult.success)) {
+            that.getCustomer({
+              successCallback: () => {
+                if (isFunction(successCallback)) {
+                  successCallback(metaData);
+                }
+
+                that.doAfterGetCustomerOnSignIn(metaData);
+
+                that.doAfterSignInSuccess(metaData);
+              },
+              failCallback,
+              completeCallback,
+            });
+          } else {
+            that.doWhenSignInFailWrapper();
+
+            if (isFunction(failCallback)) {
+              failCallback();
+            }
+
+            if (isFunction(completeCallback)) {
+              completeCallback();
+            }
+          }
         } else {
+          removeSession();
+
+          showInfoMessage({
+            message: '登录失败',
+          });
+
           that.doWhenSignInFailWrapper();
 
           if (isFunction(failCallback)) {
@@ -1196,24 +1225,12 @@ class SupplementCore extends Common {
             completeCallback();
           }
         }
-      } else {
-        removeSession();
 
-        showInfoMessage({
-          message: '登录失败',
-        });
-
-        that.doWhenSignInFailWrapper();
-
-        if (isFunction(failCallback)) {
-          failCallback();
-        }
-
-        if (isFunction(completeCallback)) {
-          completeCallback();
-        }
-      }
-    });
+        return remoteData;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   }
 
   signInSilentCore({
@@ -1228,72 +1245,91 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    that.dispatchSignInSilent(data).then(() => {
-      Tips.loaded();
+    that
+      .dispatchSignInSilent(data)
+      .then(() => {
+        Tips.loaded();
 
-      const remoteData = that.getSignInSilentApiData();
+        const remoteData = that.getSignInSilentApiData();
 
-      const { dataSuccess, data: metaData } = remoteData;
+        const { dataSuccess, data: metaData } = remoteData;
 
-      that.setSignInProcessDetection({
-        data: false,
-      });
+        that.setSignInProcessDetection({
+          data: false,
+        });
 
-      if (dataSuccess) {
-        const sessionEffective =
-          that.parseSessionEffectiveFromSignInSilentApiDataWrapper(metaData);
+        if (dataSuccess) {
+          const sessionEffective =
+            that.parseSessionEffectiveFromSignInSilentApiDataWrapper(metaData);
 
-        if (!sessionEffective) {
-          that.refreshSession({
-            callback: () => {
-              that.signInSilentCore({
-                data,
-                successCallback,
-                failCallback,
-                completeCallback,
-              });
-            },
+          if (!sessionEffective) {
+            that.refreshSession({
+              callback: () => {
+                that.signInSilentCore({
+                  data,
+                  successCallback,
+                  failCallback,
+                  completeCallback,
+                });
+              },
+            });
+
+            return;
+          }
+
+          const signInResult =
+            that.parseSignInResultFromSignInSilentApiDataWrapper(metaData);
+
+          that.setSignInResultOnSignInSilent({
+            signInResult,
           });
 
-          return;
-        }
+          const token = that.parseTokenFromSignInSilentApiData(metaData);
 
-        const signInResult =
-          that.parseSignInResultFromSignInSilentApiDataWrapper(metaData);
-
-        that.setSignInResultOnSignInSilent({
-          signInResult,
-        });
-
-        const token = that.parseTokenFromSignInSilentApiData(metaData);
-
-        that.setTokenOnSignInSilent({
-          token,
-        });
-
-        that.setOpenIdOnSignInSilent({
-          openId: that.parseOpenIdFromSignInSilentApiData(metaData),
-        });
-
-        removeCurrentCustomer();
-
-        const verifySignInResult = getVerifySignInResult();
-
-        if (toString(signInResult) === toString(verifySignInResult.success)) {
-          that.getCustomer({
-            successCallback: () => {
-              if (isFunction(successCallback)) {
-                successCallback(metaData);
-              }
-
-              that.doAfterGetCustomerOnSignInSilent(metaData);
-
-              that.doAfterSignInSilentSuccess(metaData);
-            },
-            failCallback,
-            completeCallback,
+          that.setTokenOnSignInSilent({
+            token,
           });
+
+          that.setOpenIdOnSignInSilent({
+            openId: that.parseOpenIdFromSignInSilentApiData(metaData),
+          });
+
+          removeCurrentCustomer();
+
+          const verifySignInResult = getVerifySignInResult();
+
+          if (toString(signInResult) === toString(verifySignInResult.success)) {
+            that.getCustomer({
+              successCallback: () => {
+                if (isFunction(successCallback)) {
+                  successCallback(metaData);
+                }
+
+                that.doAfterGetCustomerOnSignInSilent(metaData);
+
+                that.doAfterSignInSilentSuccess(metaData);
+              },
+              failCallback,
+              completeCallback,
+            });
+          } else {
+            if (isFunction(failCallback)) {
+              failCallback();
+            }
+
+            if (isFunction(completeCallback)) {
+              completeCallback();
+            }
+
+            that.doWhenSignInSilentFailWrapper();
+          }
         } else {
+          removeSession();
+
+          recordObject({
+            message: '静默登录失败',
+          });
+
           if (isFunction(failCallback)) {
             failCallback();
           }
@@ -1304,24 +1340,12 @@ class SupplementCore extends Common {
 
           that.doWhenSignInSilentFailWrapper();
         }
-      } else {
-        removeSession();
 
-        recordObject({
-          message: '静默登录失败',
-        });
-
-        if (isFunction(failCallback)) {
-          failCallback();
-        }
-
-        if (isFunction(completeCallback)) {
-          completeCallback();
-        }
-
-        that.doWhenSignInSilentFailWrapper();
-      }
-    });
+        return remoteData;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   }
 
   parseSessionEffectiveFromSignInApiDataWrapper = (remoteData) => {
@@ -1807,6 +1831,8 @@ class SupplementCore extends Common {
               completeCallback();
             }
           }
+
+          return remoteData;
         })
         .catch((error) => {
           recordInfo(
@@ -1922,6 +1948,8 @@ class SupplementCore extends Common {
               callback(metaData);
             }
           }
+
+          return remoteData;
         })
         .catch((error) => {
           recordError(error);
@@ -2073,6 +2101,8 @@ class SupplementCore extends Common {
             completeCallback();
           }
         }
+
+        return remoteData;
       })
       .catch((error) => {
         that.setState({ registering: false });
@@ -2231,6 +2261,8 @@ class SupplementCore extends Common {
             completeCallback();
           }
         }
+
+        return remoteData;
       })
       .catch((error) => {
         recordError(error);
@@ -2587,6 +2619,8 @@ class SupplementCore extends Common {
 
             that.doAfterLoadMetaDataByForce(v);
           }
+
+          return remoteData;
         })
         .catch((error) => {
           recordError(error);
@@ -2693,6 +2727,8 @@ class SupplementCore extends Common {
 
             that.increaseCounter();
           }
+
+          return remoteData;
         })
         .catch((error) => {
           recordError(error);

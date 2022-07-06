@@ -1,12 +1,13 @@
 import Taro from '@tarojs/taro';
 
+import Tips from 'taro-fast-common/es/utils/tips';
 import {
+  getPathValue,
   notifySuccess,
+  recordError,
+  recordObject,
   showErrorMessage,
   showRuntimeError,
-  recordObject,
-  getPathValue,
-  recordError,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import {
@@ -15,7 +16,6 @@ import {
   isString,
   isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
-import Tips from 'taro-fast-common/es/utils/tips';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 /**
@@ -258,6 +258,8 @@ export async function actionCore({
                     processing: false,
                     dispatchComplete: true,
                   });
+
+                  return;
                 })
                 .catch((error) => {
                   recordError(error);
