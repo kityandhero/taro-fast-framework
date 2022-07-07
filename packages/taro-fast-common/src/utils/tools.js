@@ -1,97 +1,97 @@
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import { stringify, parse } from 'qs';
-import filterLodash from 'lodash/filter';
-import sortByLodash from 'lodash/sortBy';
-import findIndexLodash from 'lodash/findIndex';
-import findLodash from 'lodash/find';
-import reverseLodash from 'lodash/reverse';
-import replaceLodash from 'lodash/replace';
-import trimLodash from 'lodash/trim';
-import removeLodash from 'lodash/remove';
-import differenceLodash from 'lodash/difference';
-import splitLodash from 'lodash/split';
-import getLodash from 'lodash/get';
-import sortedUniqLodash from 'lodash/sortedUniq';
-import endsWithLodash from 'lodash/endsWith';
 import assignLodash from 'lodash/assign';
 import assignWithLodash from 'lodash/assignWith';
-import forEachLodash from 'lodash/forEach';
-import memoizeLodash from 'lodash/memoize';
-import roundLodash from 'lodash/round';
-import floorLodash from 'lodash/floor';
-import gteLodash from 'lodash/gte';
+import differenceLodash from 'lodash/difference';
+import dropRightLodash from 'lodash/dropRight';
+import endsWithLodash from 'lodash/endsWith';
+import filterLodash from 'lodash/filter';
+import findLodash from 'lodash/find';
+import findIndexLodash from 'lodash/findIndex';
 import firstLodash from 'lodash/first';
+import floorLodash from 'lodash/floor';
+import forEachLodash from 'lodash/forEach';
+import getLodash from 'lodash/get';
+import gteLodash from 'lodash/gte';
+import mapLodash from 'lodash/map';
+import memoizeLodash from 'lodash/memoize';
+import removeLodash from 'lodash/remove';
+import replaceLodash from 'lodash/replace';
+import reverseLodash from 'lodash/reverse';
+import roundLodash from 'lodash/round';
 import setLodash from 'lodash/set';
 import sizeLodash from 'lodash/size';
-import mapLodash from 'lodash/map';
+import sortByLodash from 'lodash/sortBy';
+import sortedUniqLodash from 'lodash/sortedUniq';
+import splitLodash from 'lodash/split';
 import startsWithLodash from 'lodash/startsWith';
-import dropRightLodash from 'lodash/dropRight';
+import trimLodash from 'lodash/trim';
 import uniqByLodash from 'lodash/uniqBy';
 import hash from 'object-hash';
+import { parse, stringify } from 'qs';
 import React from 'react';
 import {
+  canIUse as canIUseCore,
+  clearStorage,
+  createAnimation as createAnimationCore,
+  createSelectorQuery as createSelectorQueryCore,
+  downloadFile as downloadFileCore,
   ENV_TYPE,
   getApp,
-  getEnv,
-  getStorageSync,
-  setStorageSync,
-  removeStorageSync,
-  clearStorage,
   getClipboardData as getClipboardDataCore,
-  setClipboardData as setClipboardDataCore,
-  createSelectorQuery as createSelectorQueryCore,
-  getSystemInfoSync,
-  redirectTo as redirectToCore,
-  navigateTo as navigateToCore,
-  createAnimation as createAnimationCore,
+  getCurrentInstance as getCurrentInstanceCore,
+  getEnv,
+  getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
   getSetting as getSettingCore,
-  switchTab as switchTabCore,
-  reLaunch as reLaunchCore,
+  getStorageSync,
+  getSystemInfoSync,
+  getUpdateManager as getUpdateManagerCore,
+  hideNavigationBarLoading as hideNavigationBarLoadingCore,
+  makePhoneCall as makePhoneCallCore,
   navigateBack as navigateBackCore,
+  navigateTo as navigateToCore,
+  offLocationChange as offGeographicalLocationChangeCore,
+  onLocationChange as onGeographicalLocationChangeCore,
+  pageScrollTo as pageScrollToCore,
+  previewImage as previewImageCore,
+  redirectTo as redirectToCore,
+  reLaunch as reLaunchCore,
+  removeStorageSync,
+  requestPayment as requestPaymentCore,
+  setClipboardData as setClipboardDataCore,
+  setStorageSync,
+  showNavigationBarLoading as showNavigationBarLoadingCore,
   startLocationUpdate as startGeographicalLocationUpdateCore,
   stopLocationUpdate as stopGeographicalLocationUpdateCore,
-  onLocationChange as onGeographicalLocationChangeCore,
-  offLocationChange as offGeographicalLocationChangeCore,
-  requestPayment as requestPaymentCore,
-  uploadFile as uploadFileCore,
-  downloadFile as downloadFileCore,
-  makePhoneCall as makePhoneCallCore,
-  showNavigationBarLoading as showNavigationBarLoadingCore,
-  hideNavigationBarLoading as hideNavigationBarLoadingCore,
   stopPullDownRefresh as stopPullDownRefreshCore,
-  pageScrollTo as pageScrollToCore,
-  getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
-  getCurrentInstance as getCurrentInstanceCore,
-  canIUse as canIUseCore,
-  getUpdateManager as getUpdateManagerCore,
-  previewImage as previewImageCore,
+  switchTab as switchTabCore,
+  uploadFile as uploadFileCore,
 } from '@tarojs/taro';
 
 import {
-  notificationTypeCollection,
-  messageTypeCollection,
-  logLevel,
-  logShowMode,
   appInitDefault,
   convertCollection,
-  formatCollection,
   datetimeFormat,
-  sortOperate,
+  formatCollection,
+  logLevel,
+  logShowMode,
+  messageTypeCollection,
+  notificationTypeCollection,
   pxToRemRoot,
+  sortOperate,
 } from './constants';
+import Tips from './tips';
 import {
   isArray,
   isEqualBySerialize,
   isFunction,
   isNull,
+  isNumber,
   isObject,
+  isPromise,
   isString,
   isUndefined,
-  isPromise,
-  isNumber,
 } from './typeCheck';
-import Tips from './tips';
 import { toDatetime, toMoney, toNumber } from './typeConvert';
 
 export const isBrowser = typeof document !== 'undefined' && !!document.scripts;

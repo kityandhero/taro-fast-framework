@@ -1,12 +1,12 @@
+import isBooleanLodash from 'lodash/isBoolean';
+import isDateLodash from 'lodash/isDate';
 import isEqualLodash from 'lodash/isEqual';
 import isFunctionLodash from 'lodash/isFunction';
-import isBooleanLodash from 'lodash/isBoolean';
-import isUndefinedLodash from 'lodash/isUndefined';
 import isNullLodash from 'lodash/isNull';
-import isDateLodash from 'lodash/isDate';
-import isStringLodash from 'lodash/isString';
-import isObjectLodash from 'lodash/isObject';
 import isNumberLodash from 'lodash/isNumber';
+import isObjectLodash from 'lodash/isObject';
+import isStringLodash from 'lodash/isString';
+import isUndefinedLodash from 'lodash/isUndefined';
 
 /**
  * 格式化时间

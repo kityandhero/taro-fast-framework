@@ -16,9 +16,7 @@ import {
   split,
   stringIsNullOrWhiteSpace,
 } from '../../utils/tools';
-import { isFunction, isNumber, isObject } from '../../utils/typeCheck';
-
-const hasOwnProperty = Object.prototype.hasOwnProperty;
+import { isEqual, isFunction, isNumber, isObject } from '../../utils/typeCheck';
 
 function filterModel(props) {
   const result = { ...props };
@@ -44,41 +42,7 @@ function filterModel(props) {
  * Returns true when the values of all keys are strictly equal.
  */
 function shallowEqual(a, b) {
-  // 调用Object.is判断是否相等, 相同返回true, 不同返回false
-  if (Object.is(a, b)) {
-    return true;
-  }
-
-  // object.is比较发现不等, 但并不代表真的不等, object对象还需要比较
-  // 这里判断是否是object, 如果不是, 那直接返回false
-  if (
-    typeof a !== 'object' ||
-    a === null ||
-    typeof b !== 'object' ||
-    b === null
-  ) {
-    return false;
-  }
-
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
-
-  // 比较对象中的keys长度, 不等返回false
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  // 比较对象中相同的key的val是否相等
-  for (let i = 0; i < keysA.length; i++) {
-    if (
-      !hasOwnProperty.call(b, keysA[i]) ||
-      !Object.is(a[keysA[i]], b[keysA[i]])
-    ) {
-      return false;
-    }
-  }
-
-  return true;
+  return isEqual(a, b);
 }
 
 const defaultProps = {
