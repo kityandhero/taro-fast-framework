@@ -42,6 +42,7 @@ class MultiLineText extends BaseComponent {
           ...(prefixStyle || {}),
           ...{
             display: 'inline-block',
+            verticalAlign: 'top',
           },
         }}
       >
@@ -63,6 +64,7 @@ class MultiLineText extends BaseComponent {
           ...(suffixStyle || {}),
           ...{
             display: 'inline-block',
+            verticalAlign: 'top',
           },
         }}
       >
