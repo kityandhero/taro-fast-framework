@@ -51,7 +51,6 @@ function wrapBuilder(one) {
 
 const config1 = {
   src,
-  showRenderCount: true,
 };
 
 const config2 = {

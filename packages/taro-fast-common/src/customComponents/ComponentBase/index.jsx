@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { getModelNameList } from 'src/utils/storageAssist';
 import { toNumber } from 'src/utils/typeConvert';
+import { CustomWrapper } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import {
@@ -48,6 +49,7 @@ function shallowEqual(a, b) {
 const defaultProps = {
   showRenderCount: false,
   hidden: false,
+  customWrapper: true,
 };
 
 class ComponentBase extends Component {
@@ -425,6 +427,12 @@ class ComponentBase extends Component {
   }
 
   renderView() {
+    const { customWrapper } = this.props;
+
+    if (customWrapper) {
+      return <CustomWrapper>{this.renderFurther()}</CustomWrapper>;
+    }
+
     return this.renderFurther();
   }
 
