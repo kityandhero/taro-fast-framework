@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.129](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.128...taro-fast-component-prism@2.0.129) (2022-07-07)
+
+**Note:** Version bump only for package taro-fast-component-prism
+
+
+
+
+
 ## [2.0.128](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.127...taro-fast-component-prism@2.0.128) (2022-07-07)
 
 **Note:** Version bump only for package taro-fast-component-prism
