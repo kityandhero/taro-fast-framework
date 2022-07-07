@@ -16,6 +16,8 @@ const defaultProps = {
    * 格子之间的间距
    */
   gap: 0,
+  gapHorizontal: 0,
+  gapVertical: 0,
   backgroundColor: '',
   list: [],
   itemBuilder: null,
@@ -82,7 +84,14 @@ class Grid extends BaseComponent {
   };
 
   renderFurther() {
-    const { gap, columns, backgroundColor, children } = this.props;
+    const {
+      gap,
+      gapHorizontal,
+      gapVertical,
+      columns,
+      backgroundColor,
+      children,
+    } = this.props;
 
     const style = {
       ...(!!backgroundColor
@@ -102,6 +111,14 @@ class Grid extends BaseComponent {
       } else {
         style['--gap'] = transformSize(gap);
       }
+    }
+
+    if (gapHorizontal !== undefined) {
+      style['--gap-horizontal'] = transformSize(gapHorizontal);
+    }
+
+    if (gapVertical !== undefined) {
+      style['--gap-vertical'] = transformSize(gapVertical);
     }
 
     return (
