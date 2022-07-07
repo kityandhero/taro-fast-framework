@@ -8,9 +8,9 @@ import {
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-import Transition from '../Transition';
-import Icon from '../Icon';
 import CenterBox from '../CenterBox';
+import Icon from '../Icon';
+import Transition from '../Transition';
 
 import './index.less';
 
@@ -27,7 +27,7 @@ const defaultProps = {
   iconColor: '',
   size: 80,
   transparent: false,
-  zIndex: 100,
+  zIndex: 9999,
   bottom: 160,
   right: 28,
   backgroundColor: 'var(--tfc-color-light)',
