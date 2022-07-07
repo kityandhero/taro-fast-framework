@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.128](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.0.127...taro-fast-component@2.0.128) (2022-07-07)
+
+
+### Performance Improvements
+
+* **simple-taro-fast-framework:** update ([3e6402a](https://github.com/kityandhero/taro-fast-framework/commit/3e6402a05615fe611ee7f869f5b93d58784df6eb))
+
+
+
 ## [2.0.127](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.0.126...taro-fast-component@2.0.127) (2022-07-07)
 
 **Note:** Version bump only for package taro-fast-component
