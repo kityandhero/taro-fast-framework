@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 
@@ -113,11 +114,11 @@ class Grid extends BaseComponent {
       }
     }
 
-    if (gapHorizontal !== undefined) {
+    if (toNumber(gapHorizontal) > 0) {
       style['--gap-horizontal'] = transformSize(gapHorizontal);
     }
 
-    if (gapVertical !== undefined) {
+    if (toNumber(gapVertical) > 0) {
       style['--gap-vertical'] = transformSize(gapVertical);
     }
 
