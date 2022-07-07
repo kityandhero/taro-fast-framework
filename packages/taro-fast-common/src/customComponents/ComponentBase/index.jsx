@@ -72,7 +72,7 @@ function shallowEqual(a, b) {
   for (let i = 0; i < keysA.length; i++) {
     if (
       !hasOwnProperty.call(b, keysA[i]) ||
-      !Object.is(a[keysA[i]], b[keysA[i]])
+      !shallowEqual(a[keysA[i]], b[keysA[i]])
     ) {
       return false;
     }
