@@ -3,16 +3,16 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  ImageBox,
-  Space,
   CenterBox,
   Ellipsis,
+  ImageBox,
+  Space,
   TranslucentBox,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const imageModeCollection = [
   'scaleToFill',
@@ -51,6 +51,7 @@ function wrapBuilder(one) {
 
 const config1 = {
   src,
+  showRenderCount: true,
 };
 
 const config2 = {
@@ -250,6 +251,8 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     const { header, description, currentConfig, inner } = this.state;
+
+    console.log(currentConfig);
 
     return (
       <Space direction="vertical" fillWidth>

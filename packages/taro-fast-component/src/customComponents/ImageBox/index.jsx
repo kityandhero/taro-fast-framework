@@ -1,16 +1,15 @@
 import classNames from 'classnames';
-import { View, Image } from '@tarojs/components';
+import { Image, View } from '@tarojs/components';
 
+import { errorImage } from 'taro-fast-common/es/utils/constants';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { errorImage } from 'taro-fast-common/es/utils/constants';
-
-import BaseComponent from '../BaseComponent';
 
 import ActivityIndicator from '../ActivityIndicator';
+import BaseComponent from '../BaseComponent';
 import HorizontalCenterBox from '../HorizontalCenterBox';
-import VerticalBox from '../VerticalBox';
 import ScaleBox from '../ScaleBox';
+import VerticalBox from '../VerticalBox';
 
 import './index.less';
 

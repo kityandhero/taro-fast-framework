@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { Card, Space, DataGrid } from 'taro-fast-component/es/customComponents';
+import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';
 
 const style = {
   ...{

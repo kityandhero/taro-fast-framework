@@ -11,7 +11,7 @@
   },
   "rules": {
     "camelias": 0,
-    "react/sort-comp": 2,
+    "react/sort-comp": 0,
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

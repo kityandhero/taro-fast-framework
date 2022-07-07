@@ -1,19 +1,20 @@
-import Taro from '@tarojs/taro';
 import { Component } from 'react';
 import { getModelNameList } from 'src/utils/storageAssist';
 import { toNumber } from 'src/utils/typeConvert';
+import Taro from '@tarojs/taro';
 
 import {
-  recordError,
-  showErrorMessage,
-  recordText,
   getGuid,
-  recordLog,
-  recordDebug,
-  stringIsNullOrWhiteSpace,
-  split,
   inCollection,
+  recordDebug,
+  recordError,
   recordInfo,
+  recordLog,
+  recordObject,
+  recordText,
+  showErrorMessage,
+  split,
+  stringIsNullOrWhiteSpace,
 } from '../../utils/tools';
 import { isFunction, isNumber, isObject } from '../../utils/typeCheck';
 
@@ -117,8 +118,7 @@ class ComponentBase extends Component {
 
     const { showRenderCount } = props;
 
-    this.showRenderCountInConsole =
-      this.showRenderCountInConsole || !!showRenderCount;
+    this.showRenderCountInConsole = !!showRenderCount || false;
 
     this.state = {
       error: null,
@@ -161,10 +161,20 @@ class ComponentBase extends Component {
 
     this.doWorkBeforeUpdate(nextProps, nextState);
 
-    return (
+    const compareResult =
       !shallowEqual(nextPropsIgnoreModel, currentPropsIgnoreModel) ||
-      !shallowEqual(nextState, this.state)
-    );
+      !shallowEqual(nextState, this.state);
+
+    if (this.showRenderCountInConsole && compareResult) {
+      recordObject({
+        nextPropsIgnoreModel,
+        currentPropsIgnoreModel,
+        nextState,
+        currentState: this.state,
+      });
+    }
+
+    return compareResult;
   }
 
   componentDidCatchError(error, info) {

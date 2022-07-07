@@ -5,10 +5,9 @@ import {
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
-  getMap,
   getAdministrativeDivisionFullData,
+  getMap,
 } from 'taro-fast-framework/es/utils/globalStorageAssist';
-// import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { getQQMapWX } from '../../utils/tools';
 
