@@ -1,22 +1,8 @@
-import { CustomWrapper } from '@tarojs/components';
-
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
-const defaultProps = {
-  customWrapper: true,
-};
+const defaultProps = {};
 
-class BaseComponent extends ComponentBase {
-  renderView() {
-    const { customWrapper } = this.props;
-
-    if (customWrapper) {
-      return <CustomWrapper>{this.renderFurther()}</CustomWrapper>;
-    }
-
-    return this.renderFurther();
-  }
-}
+class BaseComponent extends ComponentBase {}
 
 BaseComponent.defaultProps = {
   ...ComponentBase.defaultProps,
