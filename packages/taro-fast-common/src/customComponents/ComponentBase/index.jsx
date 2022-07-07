@@ -161,16 +161,23 @@ class ComponentBase extends Component {
 
     this.doWorkBeforeUpdate(nextProps, nextState);
 
-    const compareResult =
-      !shallowEqual(nextPropsIgnoreModel, currentPropsIgnoreModel) ||
-      !shallowEqual(nextState, this.state);
+    const comparePropsResult = !shallowEqual(
+      nextPropsIgnoreModel,
+      currentPropsIgnoreModel,
+    );
+
+    const compareStateResult = !shallowEqual(nextState, this.state);
+
+    const compareResult = comparePropsResult || compareStateResult;
 
     if (this.showRenderCountInConsole && compareResult) {
       recordObject({
         nextPropsIgnoreModel,
         currentPropsIgnoreModel,
+        comparePropsResult,
         nextState,
         currentState: this.state,
+        compareStateResult,
       });
     }
 
