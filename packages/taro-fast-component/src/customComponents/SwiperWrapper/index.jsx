@@ -21,7 +21,7 @@ const defaultProps = {
   customIndicator: false,
   indicatorBoxStyle: {},
   duration: 500,
-  indicatorBottom: 20,
+  indicatorBottomDistance: 20,
   indicatorDelayChange: 20,
   onChange: null,
   onTransition: null,
@@ -98,15 +98,19 @@ class SwiperWrapper extends BaseComponent {
   };
 
   buildIndicatorBox = () => {
-    const { customIndicator, indicatorBoxStyle, indicatorBottom, list } =
-      this.props;
+    const {
+      customIndicator,
+      indicatorBoxStyle,
+      indicatorBottomDistance,
+      list,
+    } = this.props;
 
     return !!customIndicator ? (
       <View
         style={{
           ...{
             width: '100%',
-            bottom: transformSize(indicatorBottom),
+            bottom: transformSize(indicatorBottomDistance),
             display: 'flex',
             alignItems: 'center',
             justifyItems: 'center',
