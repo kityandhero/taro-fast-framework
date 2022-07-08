@@ -1,9 +1,9 @@
 import Prism from 'prismjs';
 import Taro from '@tarojs/taro';
 
+import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import { copyToClipboard } from 'taro-fast-common/es/utils/tools';
 import { HtmlBox } from 'taro-fast-component/es/customComponents';
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
 
 import './index.less';
 
