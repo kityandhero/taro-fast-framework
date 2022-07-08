@@ -80,10 +80,6 @@ class ComponentBase extends Component {
   constructor(props) {
     super(props);
 
-    const { showRenderCount } = props;
-
-    this.showRenderCountInConsole = !!showRenderCount || false;
-
     this.state = {
       error: null,
       errorInfo: null,
@@ -107,6 +103,8 @@ class ComponentBase extends Component {
       return false;
     }
 
+    this.adjustShowRenderCountInConsole(nextProps, nextState);
+
     const checkComponentUpdate = this.doOtherCheckComponentUpdate(
       nextProps,
       nextState,
@@ -123,8 +121,6 @@ class ComponentBase extends Component {
     const nextPropsIgnoreModel = filterModel(nextProps);
     const currentPropsIgnoreModel = filterModel(this.props);
 
-    this.doWorkBeforeUpdate(nextProps, nextState);
-
     const comparePropsResult = !shallowEqual(
       nextPropsIgnoreModel,
       currentPropsIgnoreModel,
@@ -136,6 +132,7 @@ class ComponentBase extends Component {
 
     if (this.showRenderCountInConsole && compareResult) {
       recordObject({
+        message: 'shouldComponentUpdate:true',
         nextPropsIgnoreModel,
         currentPropsIgnoreModel,
         comparePropsResult,
@@ -143,6 +140,10 @@ class ComponentBase extends Component {
         currentState: this.state,
         compareStateResult,
       });
+    }
+
+    if (compareResult) {
+      this.doWorkBeforeUpdate(nextProps, nextState);
     }
 
     return compareResult;
@@ -257,6 +258,9 @@ class ComponentBase extends Component {
       'info doWorkWhenCheckPermissionFail do nothing,if you need,you can override it: doWorkWhenCheckPermissionFail = () => {}',
     );
   };
+
+  // eslint-disable-next-line no-unused-vars
+  adjustShowRenderCountInConsole = (nextProps, nextState) => {};
 
   doWorkBeforeAdjustDidMount = () => {};
 

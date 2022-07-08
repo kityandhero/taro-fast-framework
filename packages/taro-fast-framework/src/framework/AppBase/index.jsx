@@ -2,14 +2,14 @@ import { Component } from 'react';
 import { Provider } from 'react-redux';
 
 import {
-  getAppInitConfigData,
-  recordObject,
-  getDefaultTaroGlobalData,
-  setTaroGlobalData,
   canIUse,
   clearLocalStorage,
+  getAppInitConfigData,
+  getDefaultTaroGlobalData,
   getUpdateManager,
   isWechat,
+  recordObject,
+  setTaroGlobalData,
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 

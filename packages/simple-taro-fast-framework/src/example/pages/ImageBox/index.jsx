@@ -51,6 +51,7 @@ function wrapBuilder(one) {
 
 const config1 = {
   src,
+  showRenderCount: true,
 };
 
 const config2 = {
@@ -250,8 +251,6 @@ export default class Index extends ContentPageBase {
 
   renderContent = () => {
     const { header, description, currentConfig, inner } = this.state;
-
-    console.log(currentConfig);
 
     return (
       <Space direction="vertical" fillWidth>

@@ -1,70 +1,71 @@
-import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 
-import {
-  showErrorMessage,
-  stringIsNullOrWhiteSpace,
-  navigateTo,
-  inCollection,
-  isWechat,
-  getSystemInfo,
-  pageScrollTo,
-  sleep,
-  recordLog,
-  recordObject,
-  transformSize,
-  getMenuButtonBoundingClientRect,
-  getValueByKey,
-  recordDebug,
-  recordInfo,
-  transformListData,
-  showRuntimeError,
-  redirectTo,
-  buildLinearGradient,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
-import {
-  underlyingState,
-  locateResult,
-} from 'taro-fast-common/es/utils/constants';
 import {
   ComponentBase,
   Notification,
 } from 'taro-fast-common/es/customComponents';
 import {
-  VariableView,
-  Spin,
-  FadeView,
+  locateResult,
+  underlyingState,
+} from 'taro-fast-common/es/utils/constants';
+import {
+  buildLinearGradient,
+  getMenuButtonBoundingClientRect,
+  getSystemInfo,
+  getValueByKey,
+  inCollection,
+  isWechat,
+  navigateTo,
+  pageScrollTo,
+  recordDebug,
+  recordError,
+  recordInfo,
+  recordLog,
+  recordObject,
+  redirectTo,
+  showErrorMessage,
+  showRuntimeError,
+  sleep,
+  stringIsNullOrWhiteSpace,
+  transformListData,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
+import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
+import {
   BackTop,
-  FixedBox,
-  Footer,
-  Popup,
   Cascader,
+  FadeView,
+  FixedBox,
+  FlexBox,
+  Footer,
   Line,
   Overlay,
-  FlexBox,
+  Popup,
+  Spin,
+  VariableView,
 } from 'taro-fast-component/es/customComponents';
 import {
   buildEmptyPlaceholder as buildEmptyPlaceholderCore,
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
 
+import { checkHasAuthority } from '../../utils/authority';
+import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import {
-  getSignInResultDescription,
-  getVerifySignInResult,
-} from '../../utils/tools';
-import {
+  getAdministrativeDivisionFullData,
+  getLaunchOption,
+  getMap,
   getSession,
   getSessionRefreshing,
   setCurrentUrl,
   setSessionRefreshing,
-  getMap,
-  getAdministrativeDivisionFullData,
-  getLaunchOption,
 } from '../../utils/globalStorageAssist';
-import { checkHasAuthority } from '../../utils/authority';
-import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
+import {
+  getSignInResultDescription,
+  getVerifySignInResult,
+} from '../../utils/tools';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
 const defaultDispatchLocationResultData = {
@@ -974,11 +975,17 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setTicketValidityProcessDetection = ({ data, callback }) => {
-    this.dispatchSetTicketValidityProcessDetection(!!data).then(() => {
-      if (isFunction(callback)) {
-        callback();
-      }
-    });
+    this.dispatchSetTicketValidityProcessDetection(!!data)
+      .then(() => {
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        return null;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   };
 
   dispatchSetSignInProcessDetection = (data) => {
@@ -1003,13 +1010,20 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
-    that.dispatchSetSignInProcessDetection(!!data).then(() => {
-      recordDebug('exec dispatchSetSignInProcessDetection then');
+    that
+      .dispatchSetSignInProcessDetection(!!data)
+      .then(() => {
+        recordDebug('exec dispatchSetSignInProcessDetection then');
 
-      if (isFunction(callback)) {
-        callback();
-      }
-    });
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        return null;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   };
 
   dispatchSetSignInResult = (data) => {
@@ -1039,13 +1053,20 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
-    that.dispatchSetSignInResult(data).then(() => {
-      recordDebug('exec dispatchSetSignInResult then');
+    that
+      .dispatchSetSignInResult(data)
+      .then(() => {
+        recordDebug('exec dispatchSetSignInResult then');
 
-      if (isFunction(callback)) {
-        callback();
-      }
-    });
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        return null;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   };
 
   dispatchLocationResult = (data = defaultDispatchLocationResultData) => {
@@ -1062,11 +1083,17 @@ export default class Infrastructure extends ComponentBase {
   }
 
   setLocationResult({ data, callback = null }) {
-    this.dispatchLocationResult(data).then((d) => {
-      if (isFunction(callback)) {
-        callback(d);
-      }
-    });
+    this.dispatchLocationResult(data)
+      .then((d) => {
+        if (isFunction(callback)) {
+          callback(d);
+        }
+
+        return d;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   }
 
   getLocationWeather = ({ callback = null }) => {
@@ -1113,16 +1140,22 @@ export default class Infrastructure extends ComponentBase {
     return this.dispatchApi({
       type: 'schedulingControl/getWeather',
       payload: data,
-    }).then(() => {
-      const { weather } = getValueByKey({
-        data: this.props,
-        key: 'schedulingControl',
-      });
+    })
+      .then(() => {
+        const { weather } = getValueByKey({
+          data: this.props,
+          key: 'schedulingControl',
+        });
 
-      if (isFunction(callback)) {
-        callback(weather);
-      }
-    });
+        if (isFunction(callback)) {
+          callback(weather);
+        }
+
+        return weather;
+      })
+      .catch((error) => {
+        recordError(error);
+      });
   };
 
   // eslint-disable-next-line no-unused-vars
