@@ -52,6 +52,7 @@ import {
   navigateTo as navigateToCore,
   offLocationChange as offGeographicalLocationChangeCore,
   onLocationChange as onGeographicalLocationChangeCore,
+  openDocument as openDocumentCore,
   pageScrollTo as pageScrollToCore,
   previewImage as previewImageCore,
   redirectTo as redirectToCore,
@@ -2370,6 +2371,29 @@ export function uploadFile(params) {
 
 export function downloadFile(params) {
   return downloadFileCore(params);
+}
+
+export function downloadFileAndOpen({ url, successCallback = null }) {
+  downloadFile({
+    url,
+    success: (res) => {
+      if (res.statusCode === 200) {
+        if (isFunction(successCallback)) {
+          successCallback();
+        }
+
+        openDocument({
+          filePath: res.tempFilePath,
+          fileType: 'pdf',
+          showMenu: true,
+        });
+      }
+    },
+  });
+}
+
+export function openDocument(params) {
+  return openDocumentCore(params);
 }
 
 export function getClipboardData(params) {
