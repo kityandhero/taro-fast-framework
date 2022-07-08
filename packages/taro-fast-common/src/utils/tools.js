@@ -2373,6 +2373,9 @@ export function downloadFile(params) {
   return downloadFileCore(params);
 }
 
+/**
+ * downloadFileAndOpen
+ */
 export function downloadFileAndOpen({ url, successCallback = null }) {
   downloadFile({
     url,
