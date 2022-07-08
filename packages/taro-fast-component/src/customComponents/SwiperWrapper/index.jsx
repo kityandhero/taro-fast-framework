@@ -5,8 +5,8 @@ import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
 import ScaleBox from '../ScaleBox';
+
 import SwiperAdapter from './SwiperAdapter';
 
 const defaultProps = {
@@ -21,6 +21,7 @@ const defaultProps = {
   customIndicator: false,
   indicatorBoxStyle: {},
   duration: 500,
+  indicatorBottom: 20,
   indicatorDelayChange: 20,
   onChange: null,
   onTransition: null,
@@ -97,14 +98,15 @@ class SwiperWrapper extends BaseComponent {
   };
 
   buildIndicatorBox = () => {
-    const { customIndicator, indicatorBoxStyle, list } = this.props;
+    const { customIndicator, indicatorBoxStyle, indicatorBottom, list } =
+      this.props;
 
     return !!customIndicator ? (
       <View
         style={{
           ...{
             width: '100%',
-            bottom: transformSize(20),
+            bottom: transformSize(indicatorBottom),
             display: 'flex',
             alignItems: 'center',
             justifyItems: 'center',
