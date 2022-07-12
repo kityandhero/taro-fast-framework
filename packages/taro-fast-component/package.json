@@ -17,14 +17,14 @@
     "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js",
     "build": "rimraf ./es && rollup --config rollup.config.compression.js",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
+    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
     "precommit": "lint-staged",
     "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
-    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
-    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:style": "stylelint --fix \"./src/**/*.less\"",
-    "prettier": "prettier -c --write \"**/*\""
+    "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "npx eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:style": "npx stylelint --fix \"./src/**/*.less\"",
+    "prettier": "npx prettier -c --write \"**/*\""
   },
   "other": {},
   "dependencies": {
