@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
-  Space,
-  FlexBox,
   Card,
-  More,
-  Tabs,
+  FlexBox,
   Icon,
+  More,
+  Space,
+  Tabs,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { pathCollection } from '../../../../customConfig/pathConfig';
 import BasePageWrapper from '../../BasePageWrapper';
-
-import { classPrefix, buildItem } from '../Assist/tools';
+import { buildItem, classPrefix } from '../Assist/tools';
 
 import './index.less';
 

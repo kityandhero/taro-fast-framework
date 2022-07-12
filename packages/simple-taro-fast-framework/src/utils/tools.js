@@ -1,6 +1,6 @@
 import {
-  stringIsNullOrWhiteSpace,
   inCollection,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
@@ -21,6 +21,7 @@ import {
 } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import QQMapWX from '../libs/qqmap-wx-jssdk.min';
+
 import { removeMetaDataCache } from './storageAssist';
 
 /**

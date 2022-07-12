@@ -5,7 +5,7 @@ import {
 } from 'taro-fast-framework/es/utils/dva';
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
 
-import { getData, exchangeShareData } from '@/services/global';
+import { exchangeShareData, getData } from '@/services/global';
 
 export default {
   namespace: 'global',

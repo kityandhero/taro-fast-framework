@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
-  SwitchItem,
   Icon,
   Space,
+  SwitchItem,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconSketch } = Icon;
 

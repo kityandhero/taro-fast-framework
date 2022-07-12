@@ -1,12 +1,11 @@
-import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
-import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
 import {
   getSimulationMode,
   setSimulationMode,
 } from '../../utils/storageAssist';
-
+import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
 import PageWrapperCore from '../PageWrapperCore';
 
 export default class PageWrapperRemote extends PageWrapperCore {

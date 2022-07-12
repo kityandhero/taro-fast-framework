@@ -3,16 +3,16 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  NoticeBar,
   Icon,
-  Space,
   More,
+  NoticeBar,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconVolumePlus } = Icon;
 

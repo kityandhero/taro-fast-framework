@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
-import { View, Text } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
-import {
-  roundToTarget,
-  formatTarget,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
 import { formatCollection } from 'taro-fast-common/es/utils/constants';
 import {
-  Card,
+  formatTarget,
+  roundToTarget,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
+import {
   Button,
-  HorizontalCenterBox,
-  Space,
+  Card,
   Divider,
   FlexBox,
+  HorizontalCenterBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const style = {
   ...{

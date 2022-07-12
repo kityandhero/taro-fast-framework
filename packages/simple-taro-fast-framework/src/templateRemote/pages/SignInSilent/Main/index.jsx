@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
-import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 import { Space } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
+import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
-import BasePageWrapper from '../../BasePageWrapper';
-import SimpleBox from '../../../../customComponents/SimpleBox';
 import CodePageBox from '../../../../customComponents/CodePageBox';
+import SimpleBox from '../../../../customComponents/SimpleBox';
+import BasePageWrapper from '../../BasePageWrapper';
 
 const configList = [
   {

@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Icon,
-  StepperItem,
   Space,
+  StepperItem,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconSketch } = Icon;
 

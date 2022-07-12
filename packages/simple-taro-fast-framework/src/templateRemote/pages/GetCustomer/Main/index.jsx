@@ -5,9 +5,9 @@ import { Button, Space } from 'taro-fast-component/es/customComponents';
 import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
-import BasePageWrapper from '../../BasePageWrapper';
-import SimpleBox from '../../../../customComponents/SimpleBox';
 import CodePageBox from '../../../../customComponents/CodePageBox';
+import SimpleBox from '../../../../customComponents/SimpleBox';
+import BasePageWrapper from '../../BasePageWrapper';
 
 const configList = [];
 

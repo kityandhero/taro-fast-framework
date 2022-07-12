@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
 import { Notification } from 'taro-fast-common/es/customComponents';
-import { Space, Button } from 'taro-fast-component/es/customComponents';
+import { Button, Space } from 'taro-fast-component/es/customComponents';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import PropertyBox from '../../../customComponents/PropertyBox';
 import CodeBox from '../../../customComponents/CodeBox';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const config1 = {
   message: '通消息知',

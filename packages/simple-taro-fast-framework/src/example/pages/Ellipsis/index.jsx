@@ -4,8 +4,8 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Ellipsis, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const config1 = {
   line: 1,

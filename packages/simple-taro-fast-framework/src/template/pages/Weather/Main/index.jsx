@@ -5,16 +5,16 @@ import {
   stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Button,
   CenterBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
-import BasePageWrapper from '../../BasePageWrapper';
-import SimpleBox from '../../../../customComponents/SimpleBox';
 import CodePageBox from '../../../../customComponents/CodePageBox';
+import SimpleBox from '../../../../customComponents/SimpleBox';
+import BasePageWrapper from '../../BasePageWrapper';
 
 const configList = [];
 

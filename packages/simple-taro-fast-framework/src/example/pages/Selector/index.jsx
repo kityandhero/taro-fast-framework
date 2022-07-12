@@ -1,11 +1,11 @@
-import { connect } from 'react-redux';
 import { useState } from 'react';
+import { connect } from 'react-redux';
 
 import { Card, Space } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const style = {
   ...{

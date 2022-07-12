@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
-  Card,
   Button,
-  Modal,
+  Card,
   CenterBox,
+  Modal,
   Space,
 } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const style = {
   ...{

@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 
 import {
-  formatTarget,
-  formatDatetime,
-  formatDateInterval,
-  formatDateIntervalWithNow,
-  copyToClipboard,
-  replaceTargetText,
-  transformSize,
-  getDayOfWeek,
-  getNowDayOfWeek,
-} from 'taro-fast-common/es/utils/tools';
-import {
   datetimeFormat,
   formatCollection,
 } from 'taro-fast-common/es/utils/constants';
+import {
+  copyToClipboard,
+  formatDateInterval,
+  formatDateIntervalWithNow,
+  formatDatetime,
+  formatTarget,
+  getDayOfWeek,
+  getNowDayOfWeek,
+  replaceTargetText,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { Item, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

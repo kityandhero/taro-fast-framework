@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Card,
-  Space,
   Ellipsis,
   FadeInBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
-import { cardStyle } from '../../../../../customConfig/constants';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
+import { cardStyle } from '../../../../../customConfig/constants';
 
 const style = {
   ...{

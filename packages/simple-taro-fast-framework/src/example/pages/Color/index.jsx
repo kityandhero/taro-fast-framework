@@ -1,18 +1,17 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import {
-  transformSize,
-  buildLinearGradient,
-} from 'taro-fast-common/es/utils/tools';
 import { colorPure, colorShadow } from 'taro-fast-common/es/utils/constants';
-
 import {
-  Space,
-  Grid,
-  FlexBox,
+  buildLinearGradient,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
+import {
   CenterBox,
+  FlexBox,
+  Grid,
   ScaleBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

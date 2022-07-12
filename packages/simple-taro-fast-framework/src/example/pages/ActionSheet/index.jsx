@@ -1,6 +1,7 @@
+import { connect } from 'react-redux';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { connect } from 'react-redux';
+
 import {
   ActionSheet,
   Button,

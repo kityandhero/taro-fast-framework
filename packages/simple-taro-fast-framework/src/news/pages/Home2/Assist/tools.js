@@ -1,22 +1,22 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
+import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import {
-  transformSize,
   formatDatetime,
   inCollection,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
   CenterBox,
-  FlexBox,
-  ImageBox,
-  Ellipsis,
-  Space,
   ColorText,
+  Ellipsis,
+  FlexBox,
   Icon,
+  ImageBox,
   ScrollBox,
+  Space,
   TranslucentBox,
 } from 'taro-fast-component/es/customComponents';
 

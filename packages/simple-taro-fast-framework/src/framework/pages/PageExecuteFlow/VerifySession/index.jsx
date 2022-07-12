@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import { Space } from 'taro-fast-component/es/customComponents';
 
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
 import CodePageBox from '../../../../customComponents/CodePageBox';
+import ContentPageBase from '../../../../customComponents/ContentPageBase';
 
 const configList = [
   {

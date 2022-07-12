@@ -5,11 +5,11 @@ import {
 } from 'taro-fast-framework/es/utils/dva';
 
 import {
-  signInData,
-  signInSilentData,
+  checkTicketValidityData,
   registerData,
   registerWithWeChatData,
-  checkTicketValidityData,
+  signInData,
+  signInSilentData,
 } from '../services/entrance';
 
 export default {

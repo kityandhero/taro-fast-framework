@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Stepper, Space } from 'taro-fast-component/es/customComponents';
+import { Space, Stepper } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 function onChangeCore(v) {
   console.log(v);

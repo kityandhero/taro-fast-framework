@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { Space, Button, Line } from 'taro-fast-component/es/customComponents';
+import { Button, Line, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 import './index.less';
 

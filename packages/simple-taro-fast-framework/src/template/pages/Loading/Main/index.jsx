@@ -3,30 +3,28 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
+  CenterBox,
   ImageBox,
   Space,
-  CenterBox,
 } from 'taro-fast-component/es/customComponents';
-
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../../customComponents/SimpleBox';
 
 import ballsSvg from '../../../../assets/images/loading-balls.svg';
 import barsSvg from '../../../../assets/images/loading-bars.svg';
 import bubblesSvg from '../../../../assets/images/loading-bubbles.svg';
 import cubesSvg from '../../../../assets/images/loading-cubes.svg';
-import cylonRedSvg from '../../../../assets/images/loading-cylon-red.svg';
 import cylonSvg from '../../../../assets/images/loading-cylon.svg';
+import cylonRedSvg from '../../../../assets/images/loading-cylon-red.svg';
 import spinSvg from '../../../../assets/images/loading-spin.svg';
 import spinningBubblesSvg from '../../../../assets/images/loading-spinning-bubbles.svg';
 import spokesSvg from '../../../../assets/images/loading-spokes.svg';
-
-import BallPulse from '../BallPulse';
-import BallGridPulse from '../BallGridPulse';
+import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import SimpleBox from '../../../../customComponents/SimpleBox';
 import BallClipRotate from '../BallClipRotate';
+import BallGridBeat from '../BallGridBeat';
+import BallGridPulse from '../BallGridPulse';
+import BallPulse from '../BallPulse';
 import BallScale from '../BallScale';
 import BallScaleMultiple from '../BallScaleMultiple';
-import BallGridBeat from '../BallGridBeat';
 
 const imageBoxContainerStyle = {
   display: 'block',

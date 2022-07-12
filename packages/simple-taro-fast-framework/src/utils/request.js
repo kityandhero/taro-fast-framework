@@ -1,5 +1,5 @@
-import { request } from 'taro-fast-framework/es/utils/requestAssistor';
 import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
+import { request } from 'taro-fast-framework/es/utils/requestAssistor';
 
 /**
  * begin request（remote request / local virtual requests）

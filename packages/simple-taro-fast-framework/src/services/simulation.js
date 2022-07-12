@@ -1,5 +1,6 @@
 import { defaultEmptyImage } from 'taro-fast-common/es/utils/constants';
 import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
+
 import { executiveRequest } from '../utils/request';
 
 const imageFileList = [

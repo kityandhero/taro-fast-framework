@@ -4,8 +4,8 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Space, Tag } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const colorList = ['default', 'primary', 'success', 'warning', 'danger'];
 

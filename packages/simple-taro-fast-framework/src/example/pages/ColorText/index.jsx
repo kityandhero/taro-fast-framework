@@ -3,16 +3,16 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
+  ColorText,
   Icon,
   ImageBox,
-  ColorText,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import PropertyBox from '../../../customComponents/PropertyBox';
 import logoImg from '../../../assets/images/logo.png';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconEdit } = Icon;
 

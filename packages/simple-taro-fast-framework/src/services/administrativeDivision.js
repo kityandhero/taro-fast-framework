@@ -1,6 +1,5 @@
-import { executiveRequest } from '../utils/request';
-
 import { administrativeDivisionListData } from '../assets/administrativeDivisionData';
+import { executiveRequest } from '../utils/request';
 
 export async function singeListData(params) {
   return executiveRequest({

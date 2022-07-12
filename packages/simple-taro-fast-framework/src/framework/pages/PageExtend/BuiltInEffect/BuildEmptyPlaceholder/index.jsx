@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { Space, Divider } from 'taro-fast-component/es/customComponents';
+import { Divider, Space } from 'taro-fast-component/es/customComponents';
 
-import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import CodePageBox from '../../../../../customComponents/CodePageBox';
+import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 
 const paramList = [
   {

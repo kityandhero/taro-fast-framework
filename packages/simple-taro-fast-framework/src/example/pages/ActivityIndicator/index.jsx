@@ -1,5 +1,6 @@
-import { View } from '@tarojs/components';
 import { connect } from 'react-redux';
+import { View } from '@tarojs/components';
+
 import {
   ActivityIndicator,
   Space,

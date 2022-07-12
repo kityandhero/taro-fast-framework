@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { CenterBox, Icon } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 

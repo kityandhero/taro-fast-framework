@@ -1,19 +1,19 @@
 import { Component } from 'react';
 
 import {
+  inCollection,
   stringIsNullOrWhiteSpace,
   transformSize,
-  inCollection,
 } from 'taro-fast-common/es/utils/tools';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   isArray,
-  isObject,
-  isFunction,
-  isUndefined,
   isBoolean,
+  isFunction,
+  isObject,
   isString,
+  isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   Card,
   DataGrid,

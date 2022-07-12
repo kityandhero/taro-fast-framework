@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Space } from 'taro-fast-component/es/customComponents';
 import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
-import BasePageWrapper from '../../BasePageWrapper';
 import CodePageBox from '../../../../customComponents/CodePageBox';
+import BasePageWrapper from '../../BasePageWrapper';
 
 // eslint-disable-next-line no-undef
 definePageConfig({

@@ -2,21 +2,21 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { formatDatetime, transformSize } from 'taro-fast-common/es/utils/tools';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
+import { formatDatetime, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Space,
-  ImageBox,
-  FlexBox,
-  Tabs,
-  Ellipsis,
   ColorText,
+  Ellipsis,
+  FlexBox,
   Icon,
+  ImageBox,
+  Space,
+  Tabs,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
-import BasePageWrapper from '../../BasePageWrapper';
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
+import BasePageWrapper from '../../BasePageWrapper';
 
 import './index.less';
 

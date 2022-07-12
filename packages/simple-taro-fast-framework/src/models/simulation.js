@@ -5,12 +5,12 @@ import {
 } from 'taro-fast-framework/es/utils/dva';
 
 import {
+  getData,
+  getOverviewData,
   pageListData,
   pageListEmptyData,
   singleListData,
   singleListEmptyData,
-  getOverviewData,
-  getData,
   switchStatusData,
 } from '../services/simulation';
 

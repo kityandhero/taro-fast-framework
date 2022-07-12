@@ -4,12 +4,9 @@ import { View } from '@tarojs/components';
 import { isBrowser, navigateTo } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
-  ImageBox,
   Icon,
+  ImageBox,
 } from 'taro-fast-component/es/customComponents';
-
-import { pathCollection } from '../../../customConfig/pathConfig';
-import PageWrapperSimulation from '../../../customComponents/PageWrapperSimulation';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -19,6 +16,8 @@ import iconLayout from '../../../assets/images/icon-list-layout.png';
 // import iconNavigation from '../../../assets/images/icon-list-navigation.png';
 import iconView from '../../../assets/images/icon-list-view.png';
 import logoImg from '../../../assets/images/logo.png';
+import PageWrapperSimulation from '../../../customComponents/PageWrapperSimulation';
+import { pathCollection } from '../../../customConfig/pathConfig';
 
 import './index.less';
 

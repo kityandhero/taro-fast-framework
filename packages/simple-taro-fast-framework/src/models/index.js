@@ -1,15 +1,13 @@
 import { embedModelCollection } from 'taro-fast-framework/es/models';
 
-import global from './global';
-import session from './session';
-import entrance from './entrance';
-
-import simulation from './simulation';
-
-import news from './news';
+import administrativeDivision from './administrativeDivision';
 import article from './article';
 import customer from './customer';
-import administrativeDivision from './administrativeDivision';
+import entrance from './entrance';
+import global from './global';
+import news from './news';
+import session from './session';
+import simulation from './simulation';
 
 export default embedModelCollection(
   global,

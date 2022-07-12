@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import { Steps, Icon, Space } from 'taro-fast-component/es/customComponents';
+import { Icon, Space, Steps } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconVolumePlus } = Icon;
 

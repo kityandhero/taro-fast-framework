@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import './index.less';
 

@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
-  CenterBox,
   Avatar,
-  Space,
   Button,
+  CenterBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
 

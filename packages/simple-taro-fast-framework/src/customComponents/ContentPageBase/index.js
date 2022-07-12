@@ -1,16 +1,16 @@
 import { View } from '@tarojs/components';
 
-import {
-  Grid,
-  ColorText,
-  CenterBox,
-  Button,
-} from 'taro-fast-component/es/customComponents';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
+import {
+  Button,
+  CenterBox,
+  ColorText,
+  Grid,
+} from 'taro-fast-component/es/customComponents';
 
-import PageWrapperSimulation from '../PageWrapperSimulation';
 import Header from '../Header';
+import PageWrapperSimulation from '../PageWrapperSimulation';
 
 import './index.less';
 

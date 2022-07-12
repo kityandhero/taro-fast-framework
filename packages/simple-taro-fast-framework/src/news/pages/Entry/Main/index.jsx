@@ -12,7 +12,6 @@ import { ActivityIndicator } from 'taro-fast-component/es/customComponents';
 
 import { shareTransfer } from '../../../../customConfig/constants';
 import { pathCollection } from '../../../../customConfig/pathConfig';
-
 import BasePageWrapper from '../../BasePageWrapper';
 
 // eslint-disable-next-line no-undef
@@ -119,6 +118,8 @@ export default class Index extends BasePageWrapper {
         } else {
           //跳转首页
         }
+
+        return urlParamsChanged;
       })
       .catch((error) => {
         recordError({ error });

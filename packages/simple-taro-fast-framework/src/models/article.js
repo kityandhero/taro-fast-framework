@@ -4,7 +4,7 @@ import {
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
 
-import { pageListData, getData } from '../services/article';
+import { getData, pageListData } from '../services/article';
 
 export default {
   namespace: 'article',

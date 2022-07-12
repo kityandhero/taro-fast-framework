@@ -2,21 +2,21 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Card,
-  Space,
   DataGrid,
-  HelpBox,
   Ellipsis,
   FadeInBox,
+  HelpBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
+import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import {
   cardHeaderStyle,
   cardStyle,
 } from '../../../../../customConfig/constants';
-import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 
 const style = {
   ...{

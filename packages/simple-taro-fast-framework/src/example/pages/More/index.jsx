@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { Space, More, Icon } from 'taro-fast-component/es/customComponents';
+import { Icon, More, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const { IconShoppingCart } = Icon;
 

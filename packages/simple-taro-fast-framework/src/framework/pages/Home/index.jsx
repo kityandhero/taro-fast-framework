@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 
-import { pathCollection } from '../../../customConfig/pathConfig';
-import ChannelPageBase from '../../../customComponents/ChannelPageBase';
-
 import iconBasic from '../../../assets/images/icon-list-basic.png';
+import ChannelPageBase from '../../../customComponents/ChannelPageBase';
+import { pathCollection } from '../../../customConfig/pathConfig';
 
 const o = {
   icon: iconBasic,

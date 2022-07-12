@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { Space, Tabbar } from 'taro-fast-component/es/customComponents';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import PropertyBox from '../../../customComponents/PropertyBox';
-
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
 import iconForm from '../../../assets/images/icon-list-form.png';
 // import iconHOC from '../../../assets/images/icon-list-hoc.png';
 import iconLayout from '../../../assets/images/icon-list-layout.png';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const itemsIcon = [
   {

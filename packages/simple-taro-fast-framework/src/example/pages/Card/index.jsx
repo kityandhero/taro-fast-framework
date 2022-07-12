@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
 
 import {
+  Button,
   Card,
-  Item,
   ColorText,
   Icon,
-  Button,
+  Item,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const { IconEdit } = Icon;
 

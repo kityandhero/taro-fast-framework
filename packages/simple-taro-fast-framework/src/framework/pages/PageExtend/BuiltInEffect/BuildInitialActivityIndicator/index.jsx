@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   Card,
-  Space,
   Divider,
   FadeInBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
+import CodePageBox from '../../../../../customComponents/CodePageBox';
+import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import {
   cardHeaderStyle,
   cardStyle,
 } from '../../../../../customConfig/constants';
-import ContentPageBase from '../../../../../customComponents/ContentPageBase';
-import CodePageBox from '../../../../../customComponents/CodePageBox';
 
 const style = {
   ...{

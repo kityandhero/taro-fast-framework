@@ -1,7 +1,7 @@
-import { View, Text } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
 import { navigateTo } from 'taro-fast-common/es/utils/tools';
-import { ImageBox, Icon } from 'taro-fast-component/es/customComponents';
+import { Icon, ImageBox } from 'taro-fast-component/es/customComponents';
 
 import PageWrapperSimulation from '../PageWrapperSimulation';
 

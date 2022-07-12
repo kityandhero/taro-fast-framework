@@ -3,18 +3,18 @@ import { View } from '@tarojs/components';
 
 import {
   getSystemInfo,
-  transformSize,
   pageScrollTo,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  Space,
   BackTop,
   HorizontalCenterBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const config1 = {};
 

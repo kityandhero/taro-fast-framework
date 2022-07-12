@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { Space, Card, DataGrid } from 'taro-fast-component/es/customComponents';
+import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
 import { buildPagePrismCode } from '../../utils/tools';

@@ -1,12 +1,12 @@
+import { whetherString } from 'taro-fast-common/es/utils/constants';
 import {
-  removeLocalStorage,
   getJsonFromLocalStorage,
-  saveJsonToLocalStorage,
   getStringFromLocalStorage,
+  removeLocalStorage,
+  saveJsonToLocalStorage,
   saveStringToLocalStorage,
 } from 'taro-fast-common/es/utils/tools';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import { whetherString } from 'taro-fast-common/es/utils/constants';
 
 const storageKeyCollection = {
   metaData: 'metaData',

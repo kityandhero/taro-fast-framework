@@ -8,25 +8,24 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
-  Space,
-  ImageBox,
-  Swiper,
-  SearchBar,
-  Grid,
-  FlexBox,
-  CenterBox,
   Card,
-  More,
+  CenterBox,
+  FlexBox,
   FloatAction,
+  Grid,
+  ImageBox,
+  More,
+  SearchBar,
+  Space,
+  Swiper,
 } from 'taro-fast-component/es/customComponents';
+import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
+import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import { pathCollection } from '../../../../customConfig/pathConfig';
 import BasePageWrapper from '../../BasePageWrapper';
-import noCardImage from '../../../../assets/images/noCardImage.jpg';
-
-import { classPrefix, buildItem } from '../Assist/tools';
+import { buildItem, classPrefix } from '../Assist/tools';
 
 import './index.less';
 

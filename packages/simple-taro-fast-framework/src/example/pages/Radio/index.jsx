@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
-  Radio,
-  Icon,
   Button,
+  Icon,
+  Radio,
   Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
 import SimpleBox from '../../../customComponents/SimpleBox';
+import { cardStyle } from '../../../customConfig/constants';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 

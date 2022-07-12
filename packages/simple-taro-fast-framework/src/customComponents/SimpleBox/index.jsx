@@ -2,27 +2,27 @@ import { Component } from 'react';
 import { View } from '@tarojs/components';
 
 import {
+  inCollection,
   stringIsNullOrWhiteSpace,
   transformSize,
-  inCollection,
 } from 'taro-fast-common/es/utils/tools';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   isArray,
+  isBoolean,
   isFunction,
   isObject,
   isString,
   isUndefined,
-  isBoolean,
 } from 'taro-fast-common/es/utils/typeCheck';
+import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   Card,
-  ColorText,
-  HelpBox,
-  Divider,
-  Space,
   CenterBox,
+  ColorText,
+  Divider,
+  HelpBox,
   Icon,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';

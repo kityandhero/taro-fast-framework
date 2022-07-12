@@ -7,16 +7,16 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  Space,
-  CenterBox,
   Button,
+  CenterBox,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
-import BasePageWrapper from '../../BasePageWrapper';
-import SimpleBox from '../../../../customComponents/SimpleBox';
 import CodePageBox from '../../../../customComponents/CodePageBox';
+import SimpleBox from '../../../../customComponents/SimpleBox';
+import BasePageWrapper from '../../BasePageWrapper';
 
 const configList = [
   {

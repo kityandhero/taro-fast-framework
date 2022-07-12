@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import { Space, HtmlBox } from 'taro-fast-component/es/customComponents';
+import { HtmlBox, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 const config1 = {
   html: '<div>渲染内容</div>',

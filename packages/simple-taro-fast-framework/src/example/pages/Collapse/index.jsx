@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import { Space, Collapse, Card } from 'taro-fast-component/es/customComponents';
+import { Card, Collapse, Space } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const style = {
   ...{

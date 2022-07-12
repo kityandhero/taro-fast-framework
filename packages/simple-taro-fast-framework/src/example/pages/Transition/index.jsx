@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-import { Transition, Space } from 'taro-fast-component/es/customComponents';
+import { Space, Transition } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
 import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
 
 import './index.less';
 

@@ -3,19 +3,19 @@ import { View } from '@tarojs/components';
 
 import {
   Card,
-  Space,
-  HelpBox,
-  Grid,
-  FlexBox,
-  Icon,
   CenterBox,
+  FlexBox,
+  Grid,
+  HelpBox,
+  Icon,
+  Space,
 } from 'taro-fast-component/es/customComponents';
 
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import PropertyBox from '../../../customComponents/PropertyBox';
 import logoImg from '../../../assets/images/logo.png';
+import ContentPageBase from '../../../customComponents/ContentPageBase';
+import PropertyBox from '../../../customComponents/PropertyBox';
+import SimpleBox from '../../../customComponents/SimpleBox';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
 
 const icons = {
   main: [
