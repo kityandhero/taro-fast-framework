@@ -1,7 +1,7 @@
+import toLowerLodash from 'lodash/toLower';
 import toNumberLodash from 'lodash/toNumber';
 import toStringLodash from 'lodash/toString';
 import toUpperLodash from 'lodash/toUpper';
-import toLowerLodash from 'lodash/toLower';
 
 import { isDate, isMoney, isString } from './typeCheck';
 

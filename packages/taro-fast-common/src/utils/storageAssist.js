@@ -1,6 +1,6 @@
 import {
-  removeLocalStorage,
   getStringFromLocalStorage,
+  removeLocalStorage,
   saveStringToLocalStorage,
 } from './tools';
 

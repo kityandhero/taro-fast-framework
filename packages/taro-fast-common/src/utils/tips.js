@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro';
 
+import { recordError } from './tools';
 import { isFunction } from './typeCheck';
 
 /**
@@ -18,13 +19,19 @@ export default class Tips {
         icon: 'none',
         mask: true,
         duration: duration,
-      }).then((res) => {
-        if (isFunction(closeCallback)) {
-          setTimeout(() => {
-            closeCallback(res);
-          }, 500);
-        }
-      });
+      })
+        .then((res) => {
+          if (isFunction(closeCallback)) {
+            setTimeout(() => {
+              closeCallback(res);
+            }, 500);
+          }
+
+          return res;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 500);
   }
 
@@ -80,11 +87,17 @@ export default class Tips {
         icon: 'success',
         mask: true,
         duration: duration,
-      }).then((res) => {
-        if (isFunction(closeCallback)) {
-          closeCallback(res);
-        }
-      });
+      })
+        .then((res) => {
+          if (isFunction(closeCallback)) {
+            closeCallback(res);
+          }
+
+          return res;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 500);
   }
 
@@ -98,11 +111,17 @@ export default class Tips {
         icon: 'none',
         mask: true,
         duration: duration,
-      }).then((res) => {
-        if (isFunction(closeCallback)) {
-          closeCallback(res);
-        }
-      });
+      })
+        .then((res) => {
+          if (isFunction(closeCallback)) {
+            closeCallback(res);
+          }
+
+          return res;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 500);
   }
 
@@ -116,11 +135,17 @@ export default class Tips {
         icon: 'none',
         mask: true,
         duration: duration,
-      }).then((res) => {
-        if (isFunction(closeCallback)) {
-          closeCallback(res);
-        }
-      });
+      })
+        .then((res) => {
+          if (isFunction(closeCallback)) {
+            closeCallback(res);
+          }
+
+          return res;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 500);
   }
 
@@ -134,11 +159,17 @@ export default class Tips {
         icon: 'none',
         mask: true,
         duration: duration,
-      }).then((res) => {
-        if (isFunction(closeCallback)) {
-          closeCallback(res);
-        }
-      });
+      })
+        .then((res) => {
+          if (isFunction(closeCallback)) {
+            closeCallback(res);
+          }
+
+          return res;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 500);
   }
 
@@ -152,11 +183,17 @@ export default class Tips {
         icon: 'none',
         mask: true,
         duration: duration,
-      }).then((res) => {
-        if (isFunction(closeCallback)) {
-          closeCallback(res);
-        }
-      });
+      })
+        .then((res) => {
+          if (isFunction(closeCallback)) {
+            closeCallback(res);
+          }
+
+          return res;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 500);
   }
 }

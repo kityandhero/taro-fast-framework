@@ -1,8 +1,9 @@
 import nodeCache from 'node-cache';
+
 import {
+  getTaroGlobalData,
   recordError,
   stringIsNullOrWhiteSpace,
-  getTaroGlobalData,
 } from './tools';
 import { isArray, isNumber, isString } from './typeCheck';
 
