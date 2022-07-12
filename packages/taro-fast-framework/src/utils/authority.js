@@ -1,10 +1,16 @@
 import {
+  flushAllCache,
+  getCache,
+  hasCache,
+  setCache,
+} from 'taro-fast-common/es/utils/cacheAssist';
+import {
   getStringFromLocalStorage,
-  saveJsonToLocalStorage,
-  recordObject,
-  showErrorMessage,
-  recordError,
   getValueByKey,
+  recordError,
+  recordObject,
+  saveJsonToLocalStorage,
+  showErrorMessage,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import {
@@ -12,16 +18,10 @@ import {
   isObject,
   isString,
 } from 'taro-fast-common/es/utils/typeCheck';
-import {
-  hasCache,
-  setCache,
-  getCache,
-  flushAllCache,
-} from 'taro-fast-common/es/utils/cacheAssist';
 
 import {
-  storageKeyCollection,
   getAccessWayCollectionCache,
+  storageKeyCollection,
 } from './globalStorageAssist';
 
 const authorityCollectionCache = 'authorityCollectionCache';

@@ -1,26 +1,25 @@
 import {
-  stringIsNullOrWhiteSpace,
+  hideNavigationBarLoading,
+  recordDebug,
+  recordError,
+  recordInfo,
   recordObject,
   recordText,
   showErrorMessage,
-  recordError,
   showNavigationBarLoading,
-  hideNavigationBarLoading,
   stopPullDownRefresh,
-  recordDebug,
-  recordInfo,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  isUndefined,
-  isFunction,
   isEqual,
+  isFunction,
+  isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { toString, toNumber } from 'taro-fast-common/es/utils/typeConvert';
+import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
-import { checkWhetherAuthorizeFail } from '../../utils/tools';
 import { apiDataConvertCore } from '../../utils/actionAssist';
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
-
+import { checkWhetherAuthorizeFail } from '../../utils/tools';
 import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
@@ -398,6 +397,8 @@ class Base extends Infrastructure {
             that.clearRequestingData();
 
             that.setState(willSaveToState);
+
+            return metaOriginalData;
           })
           .catch((error) => {
             stopPullDownRefresh();

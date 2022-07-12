@@ -1,3 +1,4 @@
+import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import {
   addMinute,
   formatDatetime,
@@ -6,11 +7,10 @@ import {
   recordInfo,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 
-import { getVerifySignInResult } from '../utils/tools';
-import { request } from '../utils/requestAssistor';
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
+import { request } from '../utils/requestAssistor';
+import { getVerifySignInResult } from '../utils/tools';
 
 export async function getWeatherData(params) {
   const weatherApi = defaultSettingsLayoutCustom.getWeatherApi();

@@ -1,28 +1,28 @@
 import Taro from '@tarojs/taro';
 
+import { requestMethod } from 'taro-fast-common/es/utils/constants';
+import Tips from 'taro-fast-common/es/utils/tips';
 import {
   corsTarget,
-  trySendNearestLocalhostNotify,
-  stringIsNullOrWhiteSpace,
-  recordObject,
+  recordDebug,
   recordError,
+  recordObject,
   recordText,
   showErrorMessage,
-  recordDebug,
+  stringIsNullOrWhiteSpace,
+  trySendNearestLocalhostNotify,
 } from 'taro-fast-common/es/utils/tools';
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 import { toLower } from 'taro-fast-common/es/utils/typeConvert';
-import { requestMethod } from 'taro-fast-common/es/utils/constants';
-import Tips from 'taro-fast-common/es/utils/tips';
 
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import {
-  getTokenKeyName,
-  getToken,
+  getLocationMode,
   getOpenId,
   getSession,
-  getLocationMode,
+  getToken,
+  getTokenKeyName,
 } from './globalStorageAssist';
-import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
 const tokenAnonymous = defaultSettingsLayoutCustom.getTokenAnonymous();
 

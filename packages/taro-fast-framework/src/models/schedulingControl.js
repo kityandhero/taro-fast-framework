@@ -4,28 +4,28 @@ import {
   setModelNameList,
   setWeather,
 } from 'src/utils/globalStorageAssist';
+
 import { locateResult } from 'taro-fast-common/es/utils/constants';
 import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
 
+import {
+  checkTicketValidityData,
+  exchangePhoneData,
+  getAdministrativeDivisionFullData,
+  getCustomerData,
+  getMetaDataData,
+  getWeatherData,
+  refreshSessionData,
+  registerData,
+  registerWithWeChatData,
+  signInSilentData,
+} from '../services/schedulingControl';
+import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 import {
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
 } from '../utils/dva';
-import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
-
-import {
-  refreshSessionData,
-  checkTicketValidityData,
-  exchangePhoneData,
-  signInSilentData,
-  getMetaDataData,
-  getCustomerData,
-  getWeatherData,
-  registerWithWeChatData,
-  registerData,
-  getAdministrativeDivisionFullData,
-} from '../services/schedulingControl';
 
 export default {
   namespace: 'schedulingControl',

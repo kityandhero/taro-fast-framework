@@ -1,5 +1,5 @@
-import { getDerivedStateFromPropsForUrlParamsCore } from 'taro-fast-common/es/utils/tools';
 import { underlyingExtensionState } from 'taro-fast-common/es/utils/constants';
+import { getDerivedStateFromPropsForUrlParamsCore } from 'taro-fast-common/es/utils/tools';
 
 import Base from '../Base';
 

@@ -1,27 +1,27 @@
 import {
-  removeLocalStorage,
+  getCache,
+  hasCache,
+  setCache,
+} from 'taro-fast-common/es/utils/cacheAssist';
+import {
+  accessWaySpecialCollection,
+  locationModeCollection,
+} from 'taro-fast-common/es/utils/constants';
+import {
+  clearLocalStorage,
   getJsonFromLocalStorage,
   getStringFromLocalStorage,
-  saveJsonToLocalStorage,
-  saveStringToLocalStorage,
-  clearLocalStorage,
-  showInfoMessage,
-  recordWarn,
+  md5,
   recordDebug,
   recordInfo,
-  md5,
+  recordWarn,
+  removeLocalStorage,
+  saveJsonToLocalStorage,
+  saveStringToLocalStorage,
+  showInfoMessage,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
-import {
-  hasCache,
-  setCache,
-  getCache,
-} from 'taro-fast-common/es/utils/cacheAssist';
-import {
-  locationModeCollection,
-  accessWaySpecialCollection,
-} from 'taro-fast-common/es/utils/constants';
 
 export const storageKeyCollection = {
   token: 'token',

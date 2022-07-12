@@ -1,15 +1,16 @@
+import { requestMethod } from 'taro-fast-common/es/utils/constants';
 import {
-  recordObject,
-  stringIsNullOrWhiteSpace,
   corsTarget,
-  showInfoMessage,
-  queryStringify,
-  showErrorMessage,
   getTaroGlobalData,
-  redirectTo,
-  trim,
-  recordText,
+  queryStringify,
   recordInfo,
+  recordObject,
+  recordText,
+  redirectTo,
+  showErrorMessage,
+  showInfoMessage,
+  stringIsNullOrWhiteSpace,
+  trim,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
@@ -18,15 +19,14 @@ import {
   isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toLower, toUpper } from 'taro-fast-common/es/utils/typeConvert';
-import { requestMethod } from 'taro-fast-common/es/utils/constants';
 
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import { getToken } from './globalStorageAssist';
 import remoteRequest from './request';
-import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import {
   apiVirtualAccess,
-  apiVirtualSuccessData,
   apiVirtualFailData,
+  apiVirtualSuccessData,
 } from './virtualRequest';
 
 /**

@@ -2,12 +2,13 @@ import { create } from 'dva-core';
 import createLoading from 'dva-loading';
 
 import { recordError } from 'taro-fast-common/es/utils/tools';
+
+import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import {
   handleCommonDataAssist,
   handleListDataAssist,
   handlePageListDataAssist,
 } from './requestAssistor';
-import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 
 let app;
 let store;

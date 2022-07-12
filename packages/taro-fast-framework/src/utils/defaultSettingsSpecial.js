@@ -1,14 +1,14 @@
 import {
-  getAppInitConfigData,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import {
   apiSuccessCode as apiSuccessCodeDefault,
   authenticationFailCode as authenticationFailCodeDefault,
   emptyLogo as emptyLogoImage,
   locationModeCollection,
   verifySignInResult,
 } from 'taro-fast-common/es/utils/constants';
+import {
+  getAppInitConfigData,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 export const defaultSettingsLayoutCustom = {

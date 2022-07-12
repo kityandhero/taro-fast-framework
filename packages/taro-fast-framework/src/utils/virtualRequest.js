@@ -1,13 +1,14 @@
 import {
-  showRuntimeError,
-  stringIsNullOrWhiteSpace,
-  showWarnMessage,
+  recordError,
   redirectTo,
+  showRuntimeError,
+  showWarnMessage,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import { getToken } from './globalStorageAssist';
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
+import { getToken } from './globalStorageAssist';
 
 /**
  * 是否使用模拟访问
@@ -121,9 +122,15 @@ export async function apiVirtualSuccessAccess({
         }),
       );
     }, 300);
-  }).then((data) => {
-    result = data;
-  });
+  })
+    .then((data) => {
+      result = data;
+
+      return data;
+    })
+    .catch((res) => {
+      recordError(res);
+    });
 
   const { code } = result;
 
@@ -153,9 +160,15 @@ export async function apiVirtualFailAccess({
     setTimeout(() => {
       resolve(apiVirtualFailData(remoteResponse, needAuthorize));
     }, 300);
-  }).then((data) => {
-    result = data;
-  });
+  })
+    .then((data) => {
+      result = data;
+
+      return data;
+    })
+    .catch((res) => {
+      recordError(res);
+    });
 
   const { code, message: messageText } = result;
 
@@ -194,9 +207,15 @@ export async function apiVirtualAccess({
         virtualRequestDelay > 0 ? virtualRequestDelay : 0,
       );
     }
-  }).then((data) => {
-    result = data;
-  });
+  })
+    .then((data) => {
+      result = data;
+
+      return data;
+    })
+    .catch((res) => {
+      recordError(res);
+    });
 
   const { code, message: messageText } = result;
 
