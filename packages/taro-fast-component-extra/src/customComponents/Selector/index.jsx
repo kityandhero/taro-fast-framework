@@ -1,7 +1,7 @@
 import { attachPropertiesToComponent } from 'taro-fast-common/es/utils/tools';
 
-import Selector from './selector';
 import { buildOption } from './options';
+import Selector from './selector';
 
 import './index.less';
 
