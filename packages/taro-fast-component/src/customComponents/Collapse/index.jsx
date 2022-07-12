@@ -4,9 +4,8 @@ import { View } from '@tarojs/components';
 import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
-import Item from '../Item';
 import Icon from '../Icon';
+import Item from '../Item';
 
 import './index.less';
 

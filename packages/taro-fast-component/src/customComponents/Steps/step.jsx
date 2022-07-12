@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components';
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
 
 import { inCollection } from 'taro-fast-common/es/utils/tools';
 

@@ -1,15 +1,14 @@
-import { View, Text } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
 import {
-  stringIsNullOrWhiteSpace,
   copyToClipboard,
   getRandomColor,
+  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
 

@@ -1,5 +1,5 @@
-import { Image, Text, View } from '@tarojs/components';
 import classNames from 'classnames';
+import { Image, Text, View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
 

@@ -8,12 +8,11 @@ import {
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
-import VerticalBox from '../VerticalBox';
+import Col from '../Flex/Col';
+import Row from '../Flex/Row';
 import FlexBox from '../FlexBox';
 import ProgressBox from '../ProgressBox';
-import Row from '../Flex/Row';
-import Col from '../Flex/Col';
+import VerticalBox from '../VerticalBox';
 
 const layoutCollection = ['horizontal', 'vertical'];
 

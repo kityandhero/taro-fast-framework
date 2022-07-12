@@ -1,4 +1,4 @@
-import { View, Textarea } from '@tarojs/components';
+import { Textarea, View } from '@tarojs/components';
 
 import {
   showInfoMessage,
@@ -7,17 +7,16 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
-  isString,
-  isObject,
   isFunction,
+  isObject,
+  isString,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
 import Button from '../Button';
-import Item from '../Item';
 import Ellipsis from '../Ellipsis';
+import Item from '../Item';
 import Popup from '../Popup';
 
 const defaultProps = {

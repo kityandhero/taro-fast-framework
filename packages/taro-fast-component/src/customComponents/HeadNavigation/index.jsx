@@ -3,8 +3,8 @@ import { View } from '@tarojs/components';
 import { getMenuButtonBoundingClientRect } from 'taro-fast-common/es/utils/tools';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
-import BaseComponent from '../BaseComponent';
 import BackboardBox from '../BackboardBox';
+import BaseComponent from '../BaseComponent';
 import FlexBox from '../FlexBox';
 
 const defaultProps = {

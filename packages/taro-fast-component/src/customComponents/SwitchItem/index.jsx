@@ -1,7 +1,6 @@
 import BaseComponent from '../BaseComponent';
-
-import Switch from '../Switch';
 import Item from '../Item';
+import Switch from '../Switch';
 
 const defaultProps = {
   key: null,

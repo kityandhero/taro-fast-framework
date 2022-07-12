@@ -2,10 +2,9 @@ import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import FlexBox from '../FlexBox';
-import VerticalBox from '../VerticalBox';
 import Progress from '../Progress';
+import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
   hidden: false,

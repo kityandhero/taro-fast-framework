@@ -1,14 +1,13 @@
-import { View, Icon } from '@tarojs/components';
 import classNames from 'classnames';
+import { Icon, View } from '@tarojs/components';
 
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
+import CenterBox from '../CenterBox';
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
-import CenterBox from '../CenterBox';
 
 import './index.less';
 

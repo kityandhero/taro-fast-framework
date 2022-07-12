@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 
 import {
   recordError,
@@ -15,7 +15,6 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import { Spin } from '../Spin';
 
 import './index.less';
@@ -122,6 +121,8 @@ class Switch extends BaseComponent {
           } else {
             recordError('调用执行失败');
           }
+
+          return v;
         })
         .catch((res) => {
           recordError(res);

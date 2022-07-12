@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import { View, Text } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
-
 import Loading from '../Loading';
 
 import './index.less';

@@ -8,12 +8,11 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
-import Overlay from '../Overlay';
 import CenterBox from '../CenterBox';
+import Overlay from '../Overlay';
 
-import ActionSheetItem from './body/item';
 import ActionSheetBody from './body/index';
+import ActionSheetItem from './body/item';
 import ActionSheetFooter from './footer/index';
 import ActionSheetHeader from './header/index';
 

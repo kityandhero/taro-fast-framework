@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { isObject } from 'taro-fast-common/es/utils/typeCheck';
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { isObject } from 'taro-fast-common/es/utils/typeCheck';
 
 const getClassNames = (name) => ({
   enter: `tfc-${name}-enter tfc-${name}-enter-active enter-class enter-active-class`,

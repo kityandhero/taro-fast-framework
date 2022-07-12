@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import { ScrollView, View } from '@tarojs/components';
 
 import {
-  stringIsNullOrWhiteSpace,
-  md5,
-  transformSize,
   find,
+  md5,
+  stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 

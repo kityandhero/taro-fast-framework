@@ -7,11 +7,10 @@ import {
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
+import Icon from '../Icon';
+import Item from '../Item';
 import Popup from '../Popup';
 import Radio from '../Radio';
-import Item from '../Item';
-import Icon from '../Icon';
 
 const { IconCloseCircle } = Icon;
 

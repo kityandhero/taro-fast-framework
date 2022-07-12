@@ -1,28 +1,28 @@
 import classNames from 'classnames';
-import Taro from '@tarojs/taro';
 import { ScrollView, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 
 import {
   createSelectorQuery,
   getGuid,
   getRect,
-  stringIsNullOrWhiteSpace,
   getSystemInfo,
+  recordError,
+  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import BaseComponent from '../BaseComponent';
-
-import CenterBox from '../CenterBox';
 import ActivityIndicator from '../ActivityIndicator';
-import Transition from '../Transition';
+import BaseComponent from '../BaseComponent';
+import CenterBox from '../CenterBox';
 import Divider from '../Divider';
+import Line from '../Line';
+import Transition from '../Transition';
 
 import PullIndicator from './PullIndicator';
 
 import './index.less';
-import Line from '../Line';
 
 const classPrefix = `tfc-variable-view`;
 
@@ -380,14 +380,20 @@ class VariableView extends BaseComponent {
 
     const that = this;
 
-    getRect(`#${this.refreshBoxId}`).then((rect) => {
-      if (rect != null) {
-        const { height: refreshBoxHeight } = rect;
+    getRect(`#${this.refreshBoxId}`)
+      .then((rect) => {
+        if (rect != null) {
+          const { height: refreshBoxHeight } = rect;
 
-        that.refreshBoxHeight = refreshBoxHeight;
-        that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
-      }
-    });
+          that.refreshBoxHeight = refreshBoxHeight;
+          that.touchMoveMaxY = that.touchMoveMaxY + refreshBoxHeight;
+        }
+
+        return rect;
+      })
+      .catch((error) => {
+        recordError({ error });
+      });
   };
 
   /**

@@ -1,20 +1,19 @@
 import classNames from 'classnames';
-import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 
 import {
   createAnimation,
-  inCollection,
   getCurrentInstance,
+  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
+import ActivityIndicator from '../../ActivityIndicator';
 import BaseComponent from '../../BaseComponent';
-
 import CenterBox from '../../CenterBox';
 import Icon from '../../Icon';
 import Transition from '../../Transition';
-import ActivityIndicator from '../../ActivityIndicator';
 
 import './index.less';
 

@@ -2,18 +2,18 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
-  transformSize,
-  getRect,
   getGuid,
+  getRect,
+  recordError,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import Icon from '../Icon';
+import Line from '../Line';
 
 import './index.less';
-import Line from '../Line';
 
 const { IconChevronRight } = Icon;
 
@@ -90,13 +90,19 @@ class Item extends BaseComponent {
     if (body != null) {
       const that = this;
 
-      getRect(`#${that.bodyId}`).then((rect) => {
-        const { height } = { ...{ height: 0 }, ...rect };
+      getRect(`#${that.bodyId}`)
+        .then((rect) => {
+          const { height } = { ...{ height: 0 }, ...rect };
 
-        if (height > 0) {
-          that.bodyHeight = height;
-        }
-      });
+          if (height > 0) {
+            that.bodyHeight = height;
+          }
+
+          return rect;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }
   };
 

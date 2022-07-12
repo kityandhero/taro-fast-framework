@@ -2,9 +2,8 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
-import Transition from '../Transition';
-
 import BaseComponent from '../BaseComponent';
+import Transition from '../Transition';
 
 const defaultProps = {
   show: true,

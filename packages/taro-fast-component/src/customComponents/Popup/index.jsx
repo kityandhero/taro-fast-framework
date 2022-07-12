@@ -11,11 +11,10 @@ import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
-import Overlay from '../Overlay';
 import Card from '../Card';
-import Icon from '../Icon';
 import CenterBox from '../CenterBox';
+import Icon from '../Icon';
+import Overlay from '../Overlay';
 
 import './index.less';
 

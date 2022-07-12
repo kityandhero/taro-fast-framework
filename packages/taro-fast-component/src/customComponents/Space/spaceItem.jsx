@@ -1,9 +1,9 @@
-import { View } from '@tarojs/components';
 import React from 'react';
+import { View } from '@tarojs/components';
 
 import VerticalBox from '../VerticalBox';
 
-import { SpaceContext, getDirection } from './tools';
+import { getDirection, SpaceContext } from './tools';
 
 export default function SpaceItem({
   className = '',

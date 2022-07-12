@@ -2,22 +2,23 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
-  inCollection,
   getGuid,
-  transformSize,
   getRect,
+  inCollection,
+  recordError,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
+import Badge from '../Badge';
 import BaseComponent from '../BaseComponent';
+import ColorText from '../ColorText';
+import FlexBox from '../FlexBox';
+import ScrollBox from '../ScrollBox';
+
 import TabPanel from './panel';
 
 import './index.less';
-
-import Badge from '../Badge';
-import ColorText from '../ColorText';
-import ScrollBox from '../ScrollBox';
-import FlexBox from '../FlexBox';
 
 const MIN_DISTANCE = 100;
 const MAX_INTERVAL = 10;
@@ -187,29 +188,41 @@ class Tabs extends BaseComponent {
 
     if (direction === 'horizontal') {
       that.timerAdjust = setTimeout(() => {
-        getRect(`#${that.bodyId}`).then((rect) => {
-          if ((rect || null) != null) {
-            const { width } = rect;
+        getRect(`#${that.bodyId}`)
+          .then((rect) => {
+            if ((rect || null) != null) {
+              const { width } = rect;
 
-            that.setState({
-              horizontalPanelWidth: width,
-            });
-          }
-        });
+              that.setState({
+                horizontalPanelWidth: width,
+              });
+            }
+
+            return rect;
+          })
+          .catch((error) => {
+            recordError({ error });
+          });
       }, 200);
     }
 
     if (!scroll && direction === 'vertical') {
       that.timerAdjust = setTimeout(() => {
-        getRect(`#${that.verticalHeaderId}`).then((rect) => {
-          if ((rect || null) != null) {
-            const { height } = rect;
+        getRect(`#${that.verticalHeaderId}`)
+          .then((rect) => {
+            if ((rect || null) != null) {
+              const { height } = rect;
 
-            that.setState({
-              verticalMultiPanelHeight: height,
-            });
-          }
-        });
+              that.setState({
+                verticalMultiPanelHeight: height,
+              });
+            }
+
+            return rect;
+          })
+          .catch((error) => {
+            recordError({ error });
+          });
       }, 200);
     }
   };

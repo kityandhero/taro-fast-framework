@@ -1,5 +1,4 @@
 import BaseComponent from '../BaseComponent';
-
 import Item from '../Item';
 import Stepper from '../Stepper';
 

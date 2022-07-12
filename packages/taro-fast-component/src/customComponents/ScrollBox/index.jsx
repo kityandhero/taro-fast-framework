@@ -1,9 +1,9 @@
-import { View, ScrollView } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
 
 import {
+  inCollection,
   showErrorMessage,
   transformSize,
-  inCollection,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,

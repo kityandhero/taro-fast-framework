@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
-  transformSize,
   formatMoney,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isMoney } from 'taro-fast-common/es/utils/typeCheck';
 

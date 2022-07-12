@@ -4,11 +4,10 @@ import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
-import InputItem from '../InputItem';
-import VerticalBox from '../VerticalBox';
 import CenterBox from '../CenterBox';
 import Icon from '../Icon';
+import InputItem from '../InputItem';
+import VerticalBox from '../VerticalBox';
 
 const { IconSearch } = Icon;
 

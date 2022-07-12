@@ -1,27 +1,26 @@
-import { View, Text, Input, Textarea } from '@tarojs/components';
+import { Input, Text, Textarea, View } from '@tarojs/components';
 
 import {
   inCollection,
-  styleToString,
   stringIsNullOrWhiteSpace,
+  styleToString,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
-  isString,
   isObject,
+  isString,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
-import FlexBox from '../FlexBox';
-import VerticalBox from '../VerticalBox';
-import Item from '../Item';
-import Icon from '../Icon';
-import Row from '../Flex/Row';
-import Col from '../Flex/Col';
 import ColorText from '../ColorText';
+import Col from '../Flex/Col';
+import Row from '../Flex/Row';
+import FlexBox from '../FlexBox';
+import Icon from '../Icon';
+import Item from '../Item';
+import VerticalBox from '../VerticalBox';
 
 const { IconCloseCircle } = Icon;
 

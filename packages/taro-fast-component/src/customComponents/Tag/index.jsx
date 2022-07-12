@@ -1,11 +1,10 @@
 import classNames from 'classnames';
-import { View, Icon } from '@tarojs/components';
+import { Icon, View } from '@tarojs/components';
 
 import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
 

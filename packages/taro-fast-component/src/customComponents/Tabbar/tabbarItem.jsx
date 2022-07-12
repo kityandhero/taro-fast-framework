@@ -4,11 +4,10 @@ import { View } from '@tarojs/components';
 import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
-import BaseComponent from '../BaseComponent';
-
 import Badge from '../Badge';
-import ImageBox from '../ImageBox';
+import BaseComponent from '../BaseComponent';
 import Icon from '../Icon/icon';
+import ImageBox from '../ImageBox';
 
 import './index.less';
 

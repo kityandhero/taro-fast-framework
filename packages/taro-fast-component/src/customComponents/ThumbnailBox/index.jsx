@@ -7,12 +7,11 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 
-import FlexBox from '../FlexBox';
-import CenterBox from '../CenterBox';
-import Overlay from '../Overlay';
-import Icon from '../Icon';
-
 import BaseComponent from '../BaseComponent';
+import CenterBox from '../CenterBox';
+import FlexBox from '../FlexBox';
+import Icon from '../Icon';
+import Overlay from '../Overlay';
 
 import './index.less';
 

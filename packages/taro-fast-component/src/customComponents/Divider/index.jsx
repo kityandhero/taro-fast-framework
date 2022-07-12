@@ -3,6 +3,7 @@ import { Text } from '@tarojs/components';
 import { attachPropertiesToComponent } from 'taro-fast-common/es/utils/tools';
 
 import { Space } from '../Space';
+
 import Divider from './divider';
 
 import './index.less';

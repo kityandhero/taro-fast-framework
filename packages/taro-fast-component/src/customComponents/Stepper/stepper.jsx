@@ -1,17 +1,16 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { View, Input } from '@tarojs/components';
+import { Input, View } from '@tarojs/components';
 
-import {
-  withNativeProps,
-  mergeProps,
-  bound,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
+import {
+  bound,
+  mergeProps,
+  transformSize,
+  withNativeProps,
+} from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
-
 import CenterBox from '../CenterBox';
 import Icon from '../Icon';
 

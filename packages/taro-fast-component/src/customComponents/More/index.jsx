@@ -1,10 +1,9 @@
 import classNames from 'classnames';
-import { View, Text } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import Icon from '../Icon';
 
 import './index.less';

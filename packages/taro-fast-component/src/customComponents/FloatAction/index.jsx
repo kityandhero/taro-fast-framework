@@ -1,21 +1,20 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { getRect } from 'taro-fast-common/es/utils/tools';
+import { getRect, recordError } from 'taro-fast-common/es/utils/tools';
 import {
-  isUrl,
+  isFunction,
   isImageBase4,
   isString,
-  isFunction,
+  isUrl,
 } from 'taro-fast-common/es/utils/typeCheck';
 
-import BaseComponent from '../BaseComponent';
-
-import Overlay from '../Overlay';
 import Avatar from '../Avatar';
-import ImageBox from '../ImageBox';
+import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
 import Icon from '../Icon';
+import ImageBox from '../ImageBox';
+import Overlay from '../Overlay';
 
 import './index.less';
 
@@ -205,33 +204,39 @@ class FloatAction extends BaseComponent {
     }
 
     // 更新样式
-    getRect(`.${classPrefix}__action`).then((rect) => {
-      switch (direction) {
-        case 'horizontal':
-        case 'vertical':
-          buttons.forEach((_, index) => {
-            const offset = `${
-              sign * (rect.width + spaceBetween) * (index + 1)
-            }`;
-            const style = setTransform(offset, scale, duration, isH);
+    getRect(`.${classPrefix}__action`)
+      .then((rect) => {
+        switch (direction) {
+          case 'horizontal':
+          case 'vertical':
+            buttons.forEach((_, index) => {
+              const offset = `${
+                sign * (rect.width + spaceBetween) * (index + 1)
+              }`;
+              const style = setTransform(offset, scale, duration, isH);
 
-            buttonStyle.push(style);
-          });
-          break;
-        case 'circle':
-          const radius = rect.width + spaceBetween;
-          buttons.forEach((_, index) => {
-            buttonStyle.push(this.getCircleStyle(index, radius));
-          });
-          break;
-      }
+              buttonStyle.push(style);
+            });
+            break;
+          case 'circle':
+            const radius = rect.width + spaceBetween;
+            buttons.forEach((_, index) => {
+              buttonStyle.push(this.getCircleStyle(index, radius));
+            });
+            break;
+        }
 
-      const { buttonStyle: buttonStylePrev } = this.state;
+        const { buttonStyle: buttonStylePrev } = this.state;
 
-      if (buttonStylePrev !== buttonStyle) {
-        this.setState({ buttonStyle });
-      }
-    });
+        if (buttonStylePrev !== buttonStyle) {
+          this.setState({ buttonStyle });
+        }
+
+        return rect;
+      })
+      .catch((error) => {
+        recordError({ error });
+      });
   };
 
   /**

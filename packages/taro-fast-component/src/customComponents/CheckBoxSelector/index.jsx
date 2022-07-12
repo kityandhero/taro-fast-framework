@@ -7,11 +7,10 @@ import {
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
-import Popup from '../Popup';
 import CheckBox from '../CheckBox';
-import Item from '../Item';
 import Icon from '../Icon';
+import Item from '../Item';
+import Popup from '../Popup';
 
 const { IconCloseCircle } = Icon;
 

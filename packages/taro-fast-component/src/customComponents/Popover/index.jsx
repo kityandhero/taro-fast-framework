@@ -5,11 +5,11 @@ import {
   getGuid,
   getRect,
   inCollection,
+  recordError,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
-
 import Transition from '../Transition';
 
 import './index.less';
@@ -85,20 +85,26 @@ class Popover extends BaseComponent {
     const that = this;
 
     that.timerAdjust = setTimeout(() => {
-      getRect(`#${that.contentId}`).then((rect) => {
-        if ((rect || null) != null) {
-          const { left, right, top, bottom, width, height } = rect;
+      getRect(`#${that.contentId}`)
+        .then((rect) => {
+          if ((rect || null) != null) {
+            const { left, right, top, bottom, width, height } = rect;
 
-          that.setState({
-            left,
-            right,
-            top,
-            bottom,
-            contentWidth: width,
-            contentHeight: height,
-          });
-        }
-      });
+            that.setState({
+              left,
+              right,
+              top,
+              bottom,
+              contentWidth: width,
+              contentHeight: height,
+            });
+          }
+
+          return rect;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
     }, 200);
   };
 

@@ -5,6 +5,7 @@ import {
   getGuid,
   getRect,
   inCollection,
+  recordError,
   showErrorMessage,
   stringIsNullOrWhiteSpace,
   transformSize,
@@ -17,13 +18,13 @@ import {
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-import Icon from '../Icon';
 import CenterBox from '../CenterBox';
+import Icon from '../Icon';
 import ScaleBox from '../ScaleBox';
 
-import { classPrefix, checkTransform } from './tools';
-import SwiperItemContainer from './SwiperItemContainer';
 import SwiperIndicator from './SwiperIndicator';
+import SwiperItemContainer from './SwiperItemContainer';
+import { checkTransform, classPrefix } from './tools';
 
 import './index.less';
 
@@ -259,33 +260,39 @@ class Swiper extends BaseComponent {
 
     const that = this;
 
-    getRect(`#${this.swiperItemContainerId}`).then((rect) => {
-      if (rect != null) {
-        const {
-          width: swiperItemContainerWidth,
-          height: swiperItemContainerHeight,
-        } = rect;
+    getRect(`#${this.swiperItemContainerId}`)
+      .then((rect) => {
+        if (rect != null) {
+          const {
+            width: swiperItemContainerWidth,
+            height: swiperItemContainerHeight,
+          } = rect;
 
-        that.swiperItemContainerWidth = swiperItemContainerWidth;
-        that.swiperItemContainerHeight = swiperItemContainerHeight;
+          that.swiperItemContainerWidth = swiperItemContainerWidth;
+          that.swiperItemContainerHeight = swiperItemContainerHeight;
 
-        if (enableTouchDistance) {
-          that.touchStepDistance = Math.round(
-            vertical
-              ? swiperItemContainerHeight / (2 * that.touchTotalStep)
-              : swiperItemContainerWidth / (2 * that.touchTotalStep),
-          );
+          if (enableTouchDistance) {
+            that.touchStepDistance = Math.round(
+              vertical
+                ? swiperItemContainerHeight / (2 * that.touchTotalStep)
+                : swiperItemContainerWidth / (2 * that.touchTotalStep),
+            );
+          }
+
+          that.increaseCounter();
+
+          if (autoplay && !that.playing) {
+            that.playing = true;
+
+            that.autoPlay();
+          }
         }
 
-        that.increaseCounter();
-
-        if (autoplay && !that.playing) {
-          that.playing = true;
-
-          that.autoPlay();
-        }
-      }
-    });
+        return rect;
+      })
+      .catch((error) => {
+        recordError({ error });
+      });
 
     if (isFunction(onChange)) {
       onChange(currentStage);

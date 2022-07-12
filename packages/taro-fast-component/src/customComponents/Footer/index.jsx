@@ -6,10 +6,9 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
-
 import CenterBox from '../CenterBox';
-import VerticalBox from '../VerticalBox';
 import ImageBox from '../ImageBox';
+import VerticalBox from '../VerticalBox';
 
 const defaultProps = {
   style: {},

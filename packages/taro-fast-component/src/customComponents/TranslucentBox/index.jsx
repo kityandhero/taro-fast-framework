@@ -1,11 +1,11 @@
 import { View } from '@tarojs/components';
 
 import {
-  stringIsNullOrWhiteSpace,
   colorHexToRGB,
+  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 

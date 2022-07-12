@@ -1,12 +1,12 @@
-import { View } from '@tarojs/components';
 import { Fragment } from 'react';
+import { View } from '@tarojs/components';
 
 import {
-  stringIsNullOrWhiteSpace,
   copyToClipboard,
   getGuid,
-  transformSize,
   inCollection,
+  stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isArray,
@@ -16,13 +16,12 @@ import {
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
-import Ellipsis from '../Ellipsis';
-import FlexBox from '../FlexBox';
 import ColorText from '../ColorText';
-import Row from '../Flex/Row';
-import Col from '../Flex/Col';
 import { buildDivider } from '../Divider';
+import Ellipsis from '../Ellipsis';
+import Col from '../Flex/Col';
+import Row from '../Flex/Row';
+import FlexBox from '../FlexBox';
 
 const layoutCollection = ['row', 'column'];
 

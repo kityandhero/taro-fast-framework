@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { View, ScrollView } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
 
 import {
   handleInlayColor,
@@ -10,10 +10,9 @@ import {
 import { isString } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
+import Ellipsis from '../Ellipsis';
 import FlexBox from '../FlexBox';
 import VerticalBox from '../VerticalBox';
-import Ellipsis from '../Ellipsis';
 
 import './index.less';
 

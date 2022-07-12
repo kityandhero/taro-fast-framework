@@ -4,13 +4,12 @@ import { View } from '@tarojs/components';
 import {
   mergeProps,
   stringIsNullOrWhiteSpace,
-  withNativeProps,
   transformSize,
+  withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
 import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
 import Icon from '../Icon';
 import ImageBox from '../ImageBox';
 

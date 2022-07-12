@@ -4,11 +4,10 @@ import { View } from '@tarojs/components';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
-
-import Overlay from '../Overlay';
 import Card from '../Card';
-import Row from '../Flex/Row';
 import Col from '../Flex/Col';
+import Row from '../Flex/Row';
+import Overlay from '../Overlay';
 
 import './index.less';
 

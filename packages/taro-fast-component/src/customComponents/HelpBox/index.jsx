@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components';
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
 
 import {
   stringIsNullOrWhiteSpace,
@@ -9,9 +9,8 @@ import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
-import Divider from '../Divider';
 import DataGrid from '../DataGrid';
+import Divider from '../Divider';
 
 import './index.less';
 

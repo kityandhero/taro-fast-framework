@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { View, Text } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
 import {
   stringIsNullOrWhiteSpace,

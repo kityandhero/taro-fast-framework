@@ -1,5 +1,4 @@
 import BaseComponent from '../BaseComponent';
-
 import VerticalBox from '../VerticalBox';
 
 const defaultProps = {

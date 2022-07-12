@@ -1,7 +1,7 @@
 import {
+  handleInlayColor,
   stringIsNullOrWhiteSpace,
   transformSize,
-  handleInlayColor,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
 

@@ -1,7 +1,7 @@
 import { mergeProps } from 'taro-fast-common/es/utils/tools';
 
-import Icon from './icon';
 import { defaultProps } from './config';
+import Icon from './icon';
 
 export function buildIcon(p, value) {
   const props = mergeProps(defaultProps, p, {

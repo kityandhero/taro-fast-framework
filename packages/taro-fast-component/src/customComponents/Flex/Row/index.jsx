@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components';
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
 
 import {
   forEach as _forEach,

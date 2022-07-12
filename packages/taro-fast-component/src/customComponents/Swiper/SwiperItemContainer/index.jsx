@@ -4,7 +4,6 @@ import { View } from '@tarojs/components';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../../BaseComponent';
-
 import { classPrefix } from '../tools';
 
 const defaultProps = {

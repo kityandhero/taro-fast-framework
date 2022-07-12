@@ -1,15 +1,14 @@
 import { View } from '@tarojs/components';
 
 import {
-  inCollection,
   colorHexToRGB,
+  inCollection,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
-
 import CenterBox from '../CenterBox';
 
 const modeCollection = ['fullScreen', 'fullParent'];
