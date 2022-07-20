@@ -1033,6 +1033,13 @@ export default class Infrastructure extends ComponentBase {
     });
   };
 
+  checkSignInSuccess = () => {
+    const verifySignInResult = getVerifySignInResult();
+    const v = this.getSignInResult();
+
+    return v === verifySignInResult.success;
+  };
+
   getSignInResult = () => {
     recordDebug('exec getSignInResult');
 
