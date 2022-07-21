@@ -6,8 +6,10 @@ import Taro from '@tarojs/taro';
 import {
   getGuid,
   inCollection,
+  recordConfig,
   recordDebug,
   recordError,
+  recordExecute,
   recordInfo,
   recordLog,
   recordObject,
@@ -246,16 +248,16 @@ class ComponentBase extends Component {
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    recordDebug('exec doWorkWhenCheckNeedSignInDidMountFail');
-    recordInfo(
-      'info doWorkWhenCheckNeedSignInDidMountFail do nothing,if you need,you can override it: doWorkWhenCheckNeedSignInDidMountFail = () => {}',
+    recordExecute('doWorkWhenCheckNeedSignInDidMountFail');
+    recordConfig(
+      'doWorkWhenCheckNeedSignInDidMountFail do nothing,if you need,you can override it: doWorkWhenCheckNeedSignInDidMountFail = () => {}',
     );
   };
 
   doWorkWhenCheckPermissionFail = () => {
-    recordDebug('exec doWorkWhenCheckPermissionFail');
-    recordInfo(
-      'info doWorkWhenCheckPermissionFail do nothing,if you need,you can override it: doWorkWhenCheckPermissionFail = () => {}',
+    recordExecute('doWorkWhenCheckPermissionFail');
+    recordConfig(
+      'doWorkWhenCheckPermissionFail do nothing,if you need,you can override it: doWorkWhenCheckPermissionFail = () => {}',
     );
   };
 
@@ -368,7 +370,7 @@ class ComponentBase extends Component {
         const modelNameList = split(ml, ',');
 
         if (!inCollection(modelNameList, modelName)) {
-          recordInfo(`info current modelNameList: ${ml}`);
+          recordInfo(`current modelNameList: ${ml}`);
 
           recordError(
             `${modelName} not in modelNameList, please check model config`,

@@ -564,49 +564,73 @@ export function recordLog(record, showMode, level = logLevel.debug) {
 
   if (logShowInConsole() && level === logLevel.debug) {
     if (showModeModified === logShowMode.text) {
-      const data = { record, level };
+      const data = { debug: record, level };
 
       console.log('%c%s', 'color:#00768f;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ record, level });
+      console.log({ debug: record, level });
     }
   }
 
   if (logShowInConsole() && level === logLevel.warn) {
     if (showModeModified === logShowMode.text) {
-      const data = { record, level };
+      const data = { warn: record, level };
 
       console.log('%c%s', 'color:#ff4f49;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ record, level });
+      console.log({ warn: record, level });
     }
   }
 
   if (logShowInConsole() && level === logLevel.info) {
     if (showModeModified === logShowMode.text) {
-      const data = { record, level };
+      const data = { info: record, level };
 
       console.log('%c%s', 'color:#89ca78;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ record, level });
+      console.log({ info: record, level });
+    }
+  }
+
+  if (logShowInConsole() && level === logLevel.execute) {
+    if (showModeModified === logShowMode.text) {
+      const data = { execute: record, level };
+
+      console.log('%c%s', 'color:#C39BD3;', JSON.stringify(data));
+    }
+
+    if (showModeModified === logShowMode.object) {
+      console.log({ execute: record, level });
+    }
+  }
+
+  if (logShowInConsole() && level === logLevel.config) {
+    if (showModeModified === logShowMode.text) {
+      const data = { config: record, level };
+
+      console.log('%c%s', 'color:#F8C471;', JSON.stringify(data));
+    }
+
+    if (showModeModified === logShowMode.object) {
+      console.log({ config: record, level });
     }
   }
 
   if (level === logLevel.error) {
     if (showModeModified === logShowMode.text) {
-      const data = { record, level };
+      const data = { error: record, level };
 
       console.error(JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.error({ record, level });
+      console.error({ error: record, level });
     }
   }
 }
@@ -627,11 +651,27 @@ export function recordInfo(record) {
   }
 }
 
+export function recordConfig(record) {
+  if (isString(record)) {
+    recordText(record, logLevel.info);
+  } else {
+    recordObject(record, logLevel.info);
+  }
+}
+
 export function recordDebug(record) {
   if (isString(record)) {
     recordText(record, logLevel.debug);
   } else {
     recordObject(record, logLevel.debug);
+  }
+}
+
+export function recordExecute(record) {
+  if (isString(record)) {
+    recordText(record, logLevel.execute);
+  } else {
+    recordObject(record, logLevel.execute);
   }
 }
 
@@ -2242,7 +2282,7 @@ export function startGeographicalLocationUpdate({
   fail = null,
   complete = null,
 }) {
-  recordDebug('exec startGeographicalLocationUpdate');
+  recordExecute('startGeographicalLocationUpdate');
 
   startGeographicalLocationUpdateCore({
     success,
@@ -2259,7 +2299,7 @@ export function stopGeographicalLocationUpdate({
   fail = null,
   complete = null,
 }) {
-  recordDebug('exec stopGeographicalLocationUpdate');
+  recordExecute('stopGeographicalLocationUpdate');
 
   stopGeographicalLocationUpdateCore({
     success,
@@ -2269,13 +2309,13 @@ export function stopGeographicalLocationUpdate({
 }
 
 export function onGeographicalLocationChange(callback) {
-  recordDebug('exec onGeographicalLocationChange');
+  recordExecute('onGeographicalLocationChange');
 
   onGeographicalLocationChangeCore(callback);
 }
 
 export function offGeographicalLocationChange(callback) {
-  recordDebug('exec offGeographicalLocationChange');
+  recordExecute('offGeographicalLocationChange');
 
   offGeographicalLocationChangeCore(callback);
 }
@@ -2297,7 +2337,7 @@ export function getGeographicalLocation({
   simulationData = null,
 }) {
   if (simulationMode) {
-    recordInfo('info getGeographicalLocation simulationMode:true');
+    recordDebug('getGeographicalLocation simulationMode:true');
 
     if ((simulationData || null) == null) {
       throw new Error(
@@ -2310,11 +2350,11 @@ export function getGeographicalLocation({
     return;
   }
 
-  recordDebug('exec getGeographicalLocation');
+  recordExecute('getGeographicalLocation');
 
   startGeographicalLocationUpdate({
     success: () => {
-      recordInfo('info startGeographicalLocationUpdate success');
+      recordDebug('startGeographicalLocationUpdate callback success');
 
       onGeographicalLocationChange((res) => {
         try {
@@ -2333,7 +2373,7 @@ export function getGeographicalLocation({
       });
     },
     fail: (res) => {
-      recordInfo('info startGeographicalLocationUpdate fail');
+      recordDebug('startGeographicalLocationUpdate callback fail');
 
       try {
         if (isFunction(failCallback)) {

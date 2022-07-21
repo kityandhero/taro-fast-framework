@@ -1,8 +1,8 @@
 import {
   hideNavigationBarLoading,
-  recordDebug,
+  recordConfig,
   recordError,
-  recordInfo,
+  recordExecute,
   recordObject,
   recordText,
   showErrorMessage,
@@ -24,8 +24,8 @@ import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
   apiDataConvert = (props) => {
-    recordInfo(
-      'info build-in apiDataConvert modelName is schedulingControl, if you need custom logic,you need override it: apiDataConvert = (props) => { return apiDataConvertCore({ props, modelName: "modelName" }) }',
+    recordConfig(
+      'build-in apiDataConvert modelName is schedulingControl, if you need custom logic,you need override it: apiDataConvert = (props) => { return apiDataConvertCore({ props, modelName: "modelName" }) }',
     );
 
     return apiDataConvertCore({ props, modelName: 'schedulingControl' });
@@ -35,7 +35,7 @@ class Base extends Infrastructure {
    * 执行初始化远程请求
    */
   doLoadRemoteRequest = () => {
-    recordDebug('exec doLoadRemoteRequest');
+    recordExecute('doLoadRemoteRequest');
 
     const { spin } = this;
 

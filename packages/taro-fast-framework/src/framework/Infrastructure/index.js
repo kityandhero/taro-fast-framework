@@ -18,8 +18,10 @@ import {
   isWechat,
   navigateTo,
   pageScrollTo,
+  recordConfig,
   recordDebug,
   recordError,
+  recordExecute,
   recordInfo,
   recordLog,
   recordObject,
@@ -392,21 +394,21 @@ export default class Infrastructure extends ComponentBase {
   };
 
   initializeInternalData = () => {
-    recordInfo(
-      'info initializeInternalData do nothing, if you need to initialize internal data, please use initializeInternalData',
+    recordConfig(
+      'initializeInternalData do nothing, if you need to initialize internal data, please use initializeInternalData',
     );
   };
 
   // eslint-disable-next-line no-unused-vars
   adjustByScene = (scene) => {
-    recordInfo(
-      'info adjustByScene do nothing, if you need to adjust something by different scene, please use adjustByScene',
+    recordConfig(
+      'adjustByScene do nothing, if you need to adjust something by different scene, please use adjustByScene',
     );
   };
 
   adjustInternalDataOnRepeatedShow = () => {
-    recordInfo(
-      'info adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please use adjustInternalDataOnRepeatedShow',
+    recordConfig(
+      'adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please use adjustInternalDataOnRepeatedShow',
     );
   };
 
@@ -603,7 +605,7 @@ export default class Infrastructure extends ComponentBase {
       return true;
     }
 
-    recordDebug('exec checkNeedSignInDidMount');
+    recordExecute('checkNeedSignInDidMount');
 
     const signInResult = this.getSignInResult();
     const verifySignInResult = getVerifySignInResult();
@@ -616,7 +618,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    recordDebug('exec doWorkWhenCheckNeedSignInDidMountFail');
+    recordExecute('doWorkWhenCheckNeedSignInDidMountFail');
 
     const that = this;
 
@@ -676,7 +678,7 @@ export default class Infrastructure extends ComponentBase {
   checkAuthority = (permission) => checkHasAuthority(permission);
 
   doWorkWhenCheckPermissionFail = () => {
-    recordDebug('exec doWorkWhenCheckPermissionFail');
+    recordExecute('doWorkWhenCheckPermissionFail');
 
     const text = `无交互权限: ${this.componentAuthority || ''}`;
 
@@ -741,7 +743,7 @@ export default class Infrastructure extends ComponentBase {
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
   doSimulationFadeSpin = (callback = null) => {
-    recordDebug('exec doSimulationFadeSpin');
+    recordExecute('doSimulationFadeSpin');
 
     const { spin } = this.state;
 
@@ -763,7 +765,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   prepareLoadRemoteRequest = () => {
-    recordDebug('exec prepareLoadRemoteRequest');
+    recordExecute('prepareLoadRemoteRequest');
 
     const that = this;
 
@@ -837,7 +839,7 @@ export default class Infrastructure extends ComponentBase {
    * @param {*} callback
    */
   checkSession = (callback) => {
-    recordDebug('exec checkSession');
+    recordExecute('checkSession');
 
     const sessionRefreshing = getSessionRefreshing();
 
@@ -847,20 +849,20 @@ export default class Infrastructure extends ComponentBase {
       const session = getSession();
 
       if ((session || '') === '') {
-        recordInfo('info session is empty');
+        recordInfo('session is empty');
 
         that.refreshSession({ callback });
       } else {
         Taro.checkSession({
           success: () => {
-            recordInfo('info session is effective, ignore session refresh');
+            recordInfo('session is effective, ignore session refresh');
 
             if (isFunction(callback)) {
               callback();
             }
           },
           fail(data) {
-            recordInfo('info session is expired');
+            recordInfo('session is expired');
 
             recordObject(data);
 
@@ -878,7 +880,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   checkSessionWhenSessionRefreshing({ callback, timeTotal = 0 }) {
-    recordDebug('exec checkSessionWhenSessionRefreshing');
+    recordExecute('checkSessionWhenSessionRefreshing');
 
     if (timeTotal > 3000) {
       setSessionRefreshing(false);
@@ -996,7 +998,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getSignInProcessDetection = () => {
-    recordDebug('exec getSignInProcessDetection');
+    recordExecute('getSignInProcessDetection');
 
     const {
       schedulingControl: { signInProcessDetection },
@@ -1013,7 +1015,7 @@ export default class Infrastructure extends ComponentBase {
     that
       .dispatchSetSignInProcessDetection(!!data)
       .then(() => {
-        recordDebug('exec dispatchSetSignInProcessDetection then');
+        recordExecute('dispatchSetSignInProcessDetection then');
 
         if (isFunction(callback)) {
           callback();
@@ -1041,7 +1043,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getSignInResult = () => {
-    recordDebug('exec getSignInResult');
+    recordExecute('getSignInResult');
 
     const {
       schedulingControl: { signInResult },
@@ -1051,7 +1053,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setSignInResult = ({ data, callback }) => {
-    recordDebug('exec setSignInResult');
+    recordExecute('setSignInResult');
     recordInfo(
       `info sign in result is ${data}, it mean ${getSignInResultDescription(
         data,
@@ -1063,7 +1065,7 @@ export default class Infrastructure extends ComponentBase {
     that
       .dispatchSetSignInResult(data)
       .then(() => {
-        recordDebug('exec dispatchSetSignInResult then');
+        recordExecute('dispatchSetSignInResult then');
 
         if (isFunction(callback)) {
           callback();

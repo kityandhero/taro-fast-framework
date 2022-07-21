@@ -1,10 +1,10 @@
-import { recordInfo } from 'taro-fast-common/es/utils/tools';
+import { recordDebug } from 'taro-fast-common/es/utils/tools';
 
 import { executiveRequest } from '../utils/request';
 
 export async function getCustomerData(params) {
-  recordInfo(
-    'info service "customer/getCurrentCustomer" use virtual request in this demo',
+  recordDebug(
+    'service "customer/getCurrentCustomer" use virtual request in this demo',
   );
 
   return executiveRequest({

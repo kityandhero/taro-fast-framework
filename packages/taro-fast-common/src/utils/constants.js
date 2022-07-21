@@ -282,6 +282,16 @@ export const logLevel = {
    * 信息
    */
   info: 'info',
+
+  /**
+   * 配置
+   */
+  config: 'config',
+
+  /**
+   * 执行
+   */
+  execute: 'execute',
 };
 
 export const logShowMode = {

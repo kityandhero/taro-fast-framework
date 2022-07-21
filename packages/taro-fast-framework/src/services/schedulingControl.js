@@ -4,6 +4,7 @@ import {
   formatDatetime,
   getGuid,
   getNow,
+  recordDebug,
   recordInfo,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
@@ -34,7 +35,7 @@ export async function refreshSessionData(params) {
     code: code || '',
   };
 
-  recordInfo(`info simulation session data: ${JSON.stringify(simulation)}`);
+  recordDebug(`simulation session data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/refreshSession`,
@@ -77,7 +78,7 @@ export async function exchangePhoneData(params) {
     key: getGuid(),
   };
 
-  recordInfo(`info simulation phone key data: ${JSON.stringify(simulation)}`);
+  recordDebug(`simulation phone key data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/exchangePhone`,

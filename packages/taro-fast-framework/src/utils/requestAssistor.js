@@ -518,7 +518,7 @@ export async function request({
   const appId = defaultSettingsLayoutCustom.getAppId() || '';
 
   if (stringIsNullOrWhiteSpace(appId)) {
-    recordInfo('info appId is header is empty');
+    recordInfo('appId is header is empty');
   }
 
   if (trim(toUpper(method)) === 'POST') {
