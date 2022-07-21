@@ -22,7 +22,6 @@ import {
   recordDebug,
   recordError,
   recordExecute,
-  recordInfo,
   recordLog,
   recordObject,
   redirectTo,
@@ -849,20 +848,20 @@ export default class Infrastructure extends ComponentBase {
       const session = getSession();
 
       if ((session || '') === '') {
-        recordInfo('session is empty');
+        recordDebug('session is empty');
 
         that.refreshSession({ callback });
       } else {
         Taro.checkSession({
           success: () => {
-            recordInfo('session is effective, ignore session refresh');
+            recordDebug('session is effective, ignore session refresh');
 
             if (isFunction(callback)) {
               callback();
             }
           },
           fail(data) {
-            recordInfo('session is expired');
+            recordDebug('session is expired');
 
             recordObject(data);
 

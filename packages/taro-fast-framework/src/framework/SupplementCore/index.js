@@ -504,8 +504,8 @@ class SupplementCore extends Common {
           },
         });
       } else {
-        recordInfo(
-          'info do not use location or nonautomatic location on checkTicketValidity',
+        recordDebug(
+          'do not use location or nonautomatic location on checkTicketValidity',
         );
 
         that.bridgeLogicOnCheckTicketValidity({ callback });
