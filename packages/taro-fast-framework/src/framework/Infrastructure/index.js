@@ -647,7 +647,7 @@ export default class Infrastructure extends ComponentBase {
           },
           signInSilentFailCallback: () => {
             recordDebug(
-              'exec signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
+              'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
             );
 
             const signInPath = defaultSettingsLayoutCustom.getSignInPath();
@@ -1008,7 +1008,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setSignInProcessDetection = ({ data, callback }) => {
-    recordLog(`exec setSignInProcessDetection ${data}`);
+    recordLog(`setSignInProcessDetection ${data}`);
 
     const that = this;
 
