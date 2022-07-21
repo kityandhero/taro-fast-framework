@@ -70,24 +70,34 @@ function dataExceptionNotice(d) {
       `api call failed, code: ${codeAdjust}, message: ${messageText}`,
     );
 
-    if ((messageText || '') !== '') {
-      const currentTime = new Date().getTime();
+    const currentTime = new Date().getTime();
 
-      if (codeAdjust !== authenticationFailCode) {
-        if (codeAdjust === toNumber(lastCustomMessage.code)) {
-          if (currentTime - lastCustomMessage.time > 800) {
-            showErrorMessage({
-              message: messageText,
-            });
+    if (codeAdjust !== authenticationFailCode) {
+      if (codeAdjust === toNumber(lastCustomMessage.code)) {
+        if (currentTime - lastCustomMessage.time > 800) {
+          showErrorMessage({
+            message: messageText,
+          });
 
-            taroGlobalData.lastCustomMessage = {
-              code: codeAdjust,
-              message: messageText,
-              time: currentTime,
-            };
-          }
+          taroGlobalData.lastCustomMessage = {
+            code: codeAdjust,
+            message: messageText,
+            time: currentTime,
+          };
         }
+      } else {
+        showErrorMessage({
+          message: messageText,
+        });
+
+        taroGlobalData.lastCustomMessage = {
+          code: codeAdjust,
+          message: messageText,
+          time: currentTime,
+        };
       }
+    } else {
+      recordDebug(`api call failed, authentication fail`);
     }
 
     const signInPath = defaultSettingsLayoutCustom.getSignInPath();
