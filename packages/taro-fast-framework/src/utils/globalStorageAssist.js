@@ -374,7 +374,7 @@ export function removeEffectiveCode() {
  * @returns
  */
 export function getSession() {
-  recordInfo('getSession');
+  recordExecute('getSession');
 
   const key = storageKeyCollection.session;
 

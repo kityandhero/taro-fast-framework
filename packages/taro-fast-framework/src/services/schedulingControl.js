@@ -5,7 +5,6 @@ import {
   getGuid,
   getNow,
   recordDebug,
-  recordInfo,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 
@@ -56,9 +55,7 @@ export async function checkTicketValidityData(params) {
     nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
   };
 
-  recordInfo(
-    `info simulation ticket validity data: ${JSON.stringify(simulation)}`,
-  );
+  recordDebug(`simulation ticket validity data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/checkTicketValidity`,
@@ -104,9 +101,7 @@ export async function signInSilentData(params) {
     needSyncInfo: false,
   };
 
-  recordInfo(
-    `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
-  );
+  recordDebug(`simulation sign in silent data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/signInSilent`,
@@ -132,9 +127,7 @@ export async function registerWithWeChatData(params) {
     needSyncInfo: false,
   };
 
-  recordInfo(
-    `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
-  );
+  recordDebug(`simulation sign in silent data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/registerWithWeChat`,
@@ -160,9 +153,7 @@ export async function registerData(params) {
     needSyncInfo: false,
   };
 
-  recordInfo(
-    `info simulation sign in silent data: ${JSON.stringify(simulation)}`,
-  );
+  recordDebug(`simulation sign in silent data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/register`,
@@ -182,8 +173,8 @@ export async function getMetaDataData(params) {
     time: formatDatetime(getNow, datetimeFormat.monthDayHourMinuteSecond),
   };
 
-  recordInfo(
-    `info simulation meta data silent data: ${JSON.stringify(simulation)}`,
+  recordDebug(
+    `simulation meta data silent data: ${JSON.stringify(simulation)}`,
   );
 
   return request({
@@ -202,9 +193,7 @@ export async function getMetaDataData(params) {
 export async function getCustomerData(params) {
   const simulation = {};
 
-  recordInfo(
-    `info simulation customer silent data: ${JSON.stringify(simulation)}`,
-  );
+  recordDebug(`simulation customer silent data: ${JSON.stringify(simulation)}`);
 
   return request({
     api: `/schedulingControl/getCustomer`,
@@ -222,8 +211,8 @@ export async function getCustomerData(params) {
 export async function getAdministrativeDivisionFullData(params) {
   const simulation = [];
 
-  recordInfo(
-    `info simulation administrative division full data silent data: ${JSON.stringify(
+  recordDebug(
+    `simulation administrative division full data silent data: ${JSON.stringify(
       simulation,
     )}`,
   );

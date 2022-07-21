@@ -564,73 +564,73 @@ export function recordLog(record, showMode, level = logLevel.debug) {
 
   if (logShowInConsole() && level === logLevel.debug) {
     if (showModeModified === logShowMode.text) {
-      const data = { debug: record, level };
+      const data = { debug: record };
 
       console.log('%c%s', 'color:#00768f;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ debug: record, level });
+      console.log({ debug: record });
     }
   }
 
   if (logShowInConsole() && level === logLevel.warn) {
     if (showModeModified === logShowMode.text) {
-      const data = { warn: record, level };
+      const data = { warn: record };
 
       console.log('%c%s', 'color:#ff4f49;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ warn: record, level });
+      console.log({ warn: record });
     }
   }
 
   if (logShowInConsole() && level === logLevel.info) {
     if (showModeModified === logShowMode.text) {
-      const data = { info: record, level };
+      const data = { info: record };
 
       console.log('%c%s', 'color:#89ca78;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ info: record, level });
+      console.log({ info: record });
     }
   }
 
   if (logShowInConsole() && level === logLevel.execute) {
     if (showModeModified === logShowMode.text) {
-      const data = { execute: record, level };
+      const data = { execute: record };
 
       console.log('%c%s', 'color:#C39BD3;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ execute: record, level });
+      console.log({ execute: record });
     }
   }
 
   if (logShowInConsole() && level === logLevel.config) {
     if (showModeModified === logShowMode.text) {
-      const data = { config: record, level };
+      const data = { config: record };
 
       console.log('%c%s', 'color:#F8C471;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ config: record, level });
+      console.log({ config: record });
     }
   }
 
   if (level === logLevel.error) {
     if (showModeModified === logShowMode.text) {
-      const data = { error: record, level };
+      const data = { error: record };
 
       console.error(JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.error({ error: record, level });
+      console.error({ error: record });
     }
   }
 }
@@ -653,9 +653,9 @@ export function recordInfo(record) {
 
 export function recordConfig(record) {
   if (isString(record)) {
-    recordText(record, logLevel.info);
+    recordText(record, logLevel.config);
   } else {
-    recordObject(record, logLevel.info);
+    recordObject(record, logLevel.config);
   }
 }
 

@@ -521,8 +521,8 @@ export default class Infrastructure extends ComponentBase {
       this.verifyTicketValidity = false;
     } else {
       if (this.needSignIn) {
-        recordInfo(
-          `info needSignIn is true; set checkTicket, checkTicketValidity, signInSilent and so on to true`,
+        recordDebug(
+          `needSignIn is true; set checkTicket, checkTicketValidity, signInSilent and so on to true`,
         );
 
         this.verifySession = true;
@@ -770,8 +770,8 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     if (that.ignoreSessionRelatedLogic) {
-      recordInfo(
-        `info ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
+      recordDebug(
+        `ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
       );
 
       that.initMetaData({
@@ -1054,10 +1054,8 @@ export default class Infrastructure extends ComponentBase {
 
   setSignInResult = ({ data, callback }) => {
     recordExecute('setSignInResult');
-    recordInfo(
-      `info sign in result is ${data}, it mean ${getSignInResultDescription(
-        data,
-      )} `,
+    recordDebug(
+      `sign in result is ${data}, it mean ${getSignInResultDescription(data)} `,
     );
 
     const that = this;

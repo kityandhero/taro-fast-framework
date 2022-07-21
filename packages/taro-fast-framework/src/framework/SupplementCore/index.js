@@ -443,8 +443,8 @@ class SupplementCore extends Common {
     const that = this;
 
     if (signInResult === verifySignInResult.unknown) {
-      recordInfo(
-        `info sign in result is ${signInResult}, it mean ${getSignInResultDescription(
+      recordDebug(
+        `sign in result is ${signInResult}, it mean ${getSignInResultDescription(
           signInResult,
         )}`,
       );
