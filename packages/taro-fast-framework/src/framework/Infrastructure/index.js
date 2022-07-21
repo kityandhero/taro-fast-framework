@@ -394,20 +394,20 @@ export default class Infrastructure extends ComponentBase {
 
   initializeInternalData = () => {
     recordConfig(
-      'initializeInternalData do nothing, if you need to initialize internal data, please use initializeInternalData',
+      'initializeInternalData do nothing, if you need to initialize internal data, please override it: initializeInternalData = () => {}',
     );
   };
 
   // eslint-disable-next-line no-unused-vars
   adjustByScene = (scene) => {
     recordConfig(
-      'adjustByScene do nothing, if you need to adjust something by different scene, please use adjustByScene(scene)',
+      'adjustByScene do nothing, if you need to adjust something by different scene, please override it: adjustByScene = (scene) => {}',
     );
   };
 
   adjustInternalDataOnRepeatedShow = () => {
     recordConfig(
-      'adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please use adjustInternalDataOnRepeatedShow',
+      'adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please override it: adjustInternalDataOnRepeatedShow = () => {}',
     );
   };
 
