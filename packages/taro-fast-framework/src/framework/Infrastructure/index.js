@@ -402,7 +402,7 @@ export default class Infrastructure extends ComponentBase {
   // eslint-disable-next-line no-unused-vars
   adjustByScene = (scene) => {
     recordConfig(
-      'adjustByScene do nothing, if you need to adjust something by different scene, please use adjustByScene',
+      'adjustByScene do nothing, if you need to adjust something by different scene, please use adjustByScene(scene)',
     );
   };
 
