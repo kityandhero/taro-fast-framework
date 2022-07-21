@@ -52,7 +52,7 @@ function errorCustomData() {
  * @param {*} d 异常数据
  */
 function dataExceptionNotice(d) {
-  const { code1: code, message: messageText } = d;
+  const { code, message: messageText } = d;
   const c = errorCustomData();
 
   const taroGlobalData = getTaroGlobalData();
@@ -212,7 +212,11 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
   const { code, message: messageText } = d || errorCustomData();
   let v = {};
 
-  if (code === defaultSettingsLayoutCustom.getApiSuccessCode()) {
+  const codeAdjust = toNumber(code);
+
+  if (
+    codeAdjust === toNumber(defaultSettingsLayoutCustom.getApiSuccessCode())
+  ) {
     const { list: listData, extra: extraData } = d;
     const { pageNo } = extraData;
     const list = (listData || []).map((item, index) => {
@@ -229,7 +233,7 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
     });
 
     v = {
-      code,
+      code: codeAdjust,
       message: messageText,
       count: (list || []).length,
       list,
@@ -243,7 +247,7 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
     };
   } else {
     v = {
-      code,
+      code: codeAdjust,
       message: messageText || '网络异常',
       count: 0,
       list: [],
