@@ -3,6 +3,7 @@ import {
   corsTarget,
   getTaroGlobalData,
   queryStringify,
+  recordDebug,
   recordInfo,
   recordObject,
   recordText,
@@ -18,7 +19,11 @@ import {
   isString,
   isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
-import { toLower, toUpper } from 'taro-fast-common/es/utils/typeConvert';
+import {
+  toLower,
+  toNumber,
+  toUpper,
+} from 'taro-fast-common/es/utils/typeConvert';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import { getToken } from './globalStorageAssist';
@@ -47,7 +52,7 @@ function errorCustomData() {
  * @param {*} d 异常数据
  */
 function dataExceptionNotice(d) {
-  const { code, message: messageText } = d;
+  const { code1: code, message: messageText } = d;
   const c = errorCustomData();
 
   const taroGlobalData = getTaroGlobalData();
@@ -58,19 +63,25 @@ function dataExceptionNotice(d) {
     time: new Date().getTime(),
   };
 
-  if (code !== c.code) {
+  const codeAdjust = toNumber(code);
+
+  if (codeAdjust !== c.code) {
+    recordDebug(
+      `api call failed, code: ${codeAdjust}, message: ${messageText}`,
+    );
+
     if ((messageText || '') !== '') {
       const currentTime = new Date().getTime();
 
-      if (code !== authenticationFailCode) {
-        if (code === lastCustomMessage.code) {
+      if (codeAdjust !== authenticationFailCode) {
+        if (codeAdjust === toNumber(lastCustomMessage.code)) {
           if (currentTime - lastCustomMessage.time > 800) {
             showErrorMessage({
               message: messageText,
             });
 
             taroGlobalData.lastCustomMessage = {
-              code,
+              code: codeAdjust,
               message: messageText,
               time: currentTime,
             };
@@ -83,7 +94,7 @@ function dataExceptionNotice(d) {
     const authenticationFailCode =
       defaultSettingsLayoutCustom.getAuthenticationFailCode();
 
-    if (code === authenticationFailCode) {
+    if (codeAdjust === authenticationFailCode) {
       if (stringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
