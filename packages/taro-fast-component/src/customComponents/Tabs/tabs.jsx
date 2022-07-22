@@ -29,6 +29,8 @@ const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
   style: {},
+  itemStyle: {},
+  itemActiveStyle: {},
   titleStyle: {},
   titleActiveStyle: {},
   headerBackgroundColor: '#fff',
@@ -317,6 +319,8 @@ class Tabs extends BaseComponent {
     titleStyle,
     titleActiveStyle,
   }) => {
+    const { itemStyle, itemActiveStyle } = this.props;
+
     const itemClassName = classNames({
       [`${classPrefix}__item`]: true,
       [`${classPrefix}__item--active`]: currentIndex === index,
@@ -377,6 +381,8 @@ class Tabs extends BaseComponent {
         className={itemClassName}
         key={`${this.keyPrefix}-item-${index}`}
         style={{
+          ...itemStyle,
+          ...(currentIndex === index ? itemActiveStyle : {}),
           ...styleItem,
           ...{
             display: 'flex',
