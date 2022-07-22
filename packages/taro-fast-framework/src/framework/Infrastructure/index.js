@@ -1644,7 +1644,12 @@ export default class Infrastructure extends ComponentBase {
 
     const vw = (
       <VariableView
-        style={this.viewStyle}
+        style={{
+          ...this.viewStyle,
+          ...{
+            width: '100%',
+          },
+        }}
         scroll={this.scrollViewMode}
         height="100vh"
         enablePullDownRefresh={this.enablePullDownRefresh}
