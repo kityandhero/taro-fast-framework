@@ -351,6 +351,7 @@ export default class Infrastructure extends ComponentBase {
   bottomSpaceHeight = 0;
 
   sidePosition = 'left';
+  sideWidth = 100;
   sideStyle = {};
 
   constructor(props) {
@@ -1730,7 +1731,10 @@ export default class Infrastructure extends ComponentBase {
               ...(this.sideStyle || {}),
               ...{
                 height: '100vh',
-                overflow: 'auto',
+                width: transformSize(this.sideWidth),
+                padding: '0',
+                margin: '0',
+                border: '0',
               },
             }}
             left={
@@ -1738,6 +1742,7 @@ export default class Infrastructure extends ComponentBase {
                 style={{
                   ...{
                     height: '100vh',
+                    width: '100%',
                   },
                 }}
                 scrollX={false}
@@ -1766,7 +1771,10 @@ export default class Infrastructure extends ComponentBase {
               ...(this.sideStyle || {}),
               ...{
                 height: '100vh',
-                overflow: 'auto',
+                width: transformSize(this.sideWidth),
+                padding: '0',
+                margin: '0',
+                border: '0',
               },
             }}
             right={
