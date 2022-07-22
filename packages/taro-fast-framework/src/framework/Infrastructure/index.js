@@ -1,4 +1,4 @@
-import { View } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import {
@@ -1719,7 +1719,7 @@ export default class Infrastructure extends ComponentBase {
     const sideView = this.buildSideView();
 
     if (sideView != null) {
-      if (this.sidePosition === 'right') {
+      if (this.sidePosition === 'left') {
         mainContent = (
           <FlexBox
             style={{
@@ -1730,9 +1730,27 @@ export default class Infrastructure extends ComponentBase {
               ...(this.sideStyle || {}),
               ...{
                 height: '100vh',
+                overflow: 'auto',
               },
             }}
-            left={sideView}
+            left={
+              <ScrollView
+                style={{
+                  ...{
+                    height: '100vh',
+                  },
+                }}
+                scrollX={false}
+                scrollY
+                scrollWithAnimation
+                scrollAnchoring
+                enhanced
+                bounces
+                showScrollbar={false}
+              >
+                {sideView}
+              </ScrollView>
+            }
             right={vw}
           />
         );
@@ -1748,9 +1766,27 @@ export default class Infrastructure extends ComponentBase {
               ...(this.sideStyle || {}),
               ...{
                 height: '100vh',
+                overflow: 'auto',
               },
             }}
-            right={sideView}
+            right={
+              <ScrollView
+                style={{
+                  ...{
+                    height: '100vh',
+                  },
+                }}
+                scrollX={false}
+                scrollY
+                scrollWithAnimation
+                scrollAnchoring
+                enhanced
+                bounces
+                showScrollbar={false}
+              >
+                {sideView}
+              </ScrollView>
+            }
           />
         );
       }
