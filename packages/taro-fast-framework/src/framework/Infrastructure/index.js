@@ -1726,7 +1726,12 @@ export default class Infrastructure extends ComponentBase {
               height: '100vh',
             }}
             flexAuto="right"
-            leftStyle={this.sideStyle}
+            leftStyle={{
+              ...(this.sideStyle || {}),
+              ...{
+                height: '100vh',
+              },
+            }}
             left={sideView}
             right={vw}
           />
@@ -1739,7 +1744,12 @@ export default class Infrastructure extends ComponentBase {
             }}
             flexAuto="left"
             left={vw}
-            rightStyle={this.sideStyle}
+            rightStyle={{
+              ...(this.sideStyle || {}),
+              ...{
+                height: '100vh',
+              },
+            }}
             right={sideView}
           />
         );
