@@ -1734,6 +1734,8 @@ export default class Infrastructure extends ComponentBase {
                 style={{
                   ...(this.sideStyle || {}),
                   position: 'fixed',
+                  top: '0',
+                  left: '0',
                   height: '100vh',
                   width: transformSize(this.sideWidth),
                   padding: '0',
@@ -1778,6 +1780,8 @@ export default class Infrastructure extends ComponentBase {
                 style={{
                   ...(this.sideStyle || {}),
                   position: 'fixed',
+                  top: '0',
+                  right: '0',
                   height: '100vh',
                   width: transformSize(this.sideWidth),
                   padding: '0',
