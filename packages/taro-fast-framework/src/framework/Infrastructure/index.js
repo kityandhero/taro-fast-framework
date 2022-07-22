@@ -1738,23 +1738,34 @@ export default class Infrastructure extends ComponentBase {
               },
             }}
             left={
-              <ScrollView
+              <View
                 style={{
-                  ...{
-                    height: '100vh',
-                    width: '100%',
-                  },
+                  position: 'fixed',
+                  height: '100vh',
+                  width: transformSize(this.sideWidth),
+                  padding: '0',
+                  margin: '0',
+                  border: '0',
                 }}
-                scrollX={false}
-                scrollY
-                scrollWithAnimation
-                scrollAnchoring
-                enhanced
-                bounces
-                showScrollbar={false}
               >
-                {sideView}
-              </ScrollView>
+                <ScrollView
+                  style={{
+                    ...{
+                      height: '100vh',
+                      width: '100%',
+                    },
+                  }}
+                  scrollX={false}
+                  scrollY
+                  scrollWithAnimation
+                  scrollAnchoring
+                  enhanced
+                  bounces
+                  showScrollbar={false}
+                >
+                  {sideView}
+                </ScrollView>
+              </View>
             }
             right={vw}
           />
@@ -1778,22 +1789,33 @@ export default class Infrastructure extends ComponentBase {
               },
             }}
             right={
-              <ScrollView
+              <View
                 style={{
-                  ...{
-                    height: '100vh',
-                  },
+                  position: 'fixed',
+                  height: '100vh',
+                  width: transformSize(this.sideWidth),
+                  padding: '0',
+                  margin: '0',
+                  border: '0',
                 }}
-                scrollX={false}
-                scrollY
-                scrollWithAnimation
-                scrollAnchoring
-                enhanced
-                bounces
-                showScrollbar={false}
               >
-                {sideView}
-              </ScrollView>
+                <ScrollView
+                  style={{
+                    ...{
+                      height: '100vh',
+                    },
+                  }}
+                  scrollX={false}
+                  scrollY
+                  scrollWithAnimation
+                  scrollAnchoring
+                  enhanced
+                  bounces
+                  showScrollbar={false}
+                >
+                  {sideView}
+                </ScrollView>
+              </View>
             }
           />
         );
