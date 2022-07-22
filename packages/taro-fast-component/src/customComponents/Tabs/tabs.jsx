@@ -42,6 +42,7 @@ const defaultProps = {
   underlineVerticalWidth: 2,
   underlineVerticalMargin: 16,
   underlineColor: '#f0f0f0',
+  underlineBorderRadius: 0,
   underlineActiveColor: '#6190e8',
   showPanel: false,
   bodyStyle: {},
@@ -746,6 +747,7 @@ class Tabs extends BaseComponent {
       underlineVerticalMargin,
       underlineVerticalPosition,
       underlineColor,
+      underlineBorderRadius,
       underlineActiveColor,
       verticalScrollHeight,
       verticalTabWidth,
@@ -814,6 +816,7 @@ class Tabs extends BaseComponent {
         : {}),
       ...{
         '--underline-color': underlineColor,
+        '--underline-border-radius': transformSize(underlineBorderRadius),
         '--underline-active-color': underlineActiveColor,
         '--header-background-color': headerBackgroundColor,
       },
