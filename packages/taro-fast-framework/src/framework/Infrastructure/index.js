@@ -350,6 +350,9 @@ export default class Infrastructure extends ComponentBase {
    */
   bottomSpaceHeight = 0;
 
+  sidePosition = 'left';
+  sideStyle = {};
+
   constructor(props) {
     super(props);
 
@@ -1432,10 +1435,16 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
+  /**
+   * 创建扩展显示区域，应仅用于单窗等交互组件的创建
+   */
   buildExtendArea = () => {
     return null;
   };
 
+  /**
+   * 创建地址选择弹出面板
+   */
   buildFullAdministrativeDivisionSelectorArea = () => {
     if (!this.useFullAdministrativeDivisionSelector) {
       return null;
@@ -1539,6 +1548,10 @@ export default class Infrastructure extends ComponentBase {
 
   doAfterHideFullAdministrativeDivisionSelector = () => {};
 
+  buildSideView = () => {
+    return null;
+  };
+
   buildSignInSilentOverlay = () => {
     if (!this.needSignIn) {
       return null;
@@ -1559,6 +1572,9 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
+  /**
+   * 创建自动登录提示器
+   */
   buildSignInSilentOverlayPrompt = () => {
     return (
       <FlexBox
@@ -1699,6 +1715,39 @@ export default class Infrastructure extends ComponentBase {
       />
     ) : null;
 
+    let mainContent = null;
+    const sideView = this.buildSideView();
+
+    if (sideView != null) {
+      if (this.sidePosition === 'right') {
+        mainContent = (
+          <FlexBox
+            style={{
+              height: '100vh',
+            }}
+            flexAuto="right"
+            leftStyle={this.sideStyle}
+            left={sideView}
+            right={vw}
+          />
+        );
+      } else {
+        mainContent = (
+          <FlexBox
+            style={{
+              height: '100vh',
+            }}
+            flexAuto="left"
+            left={vw}
+            rightStyle={this.sideStyle}
+            right={sideView}
+          />
+        );
+      }
+    } else {
+      mainContent = vw;
+    }
+
     if (this.useFadeSpinWrapper) {
       return (
         <>
@@ -1713,7 +1762,7 @@ export default class Infrastructure extends ComponentBase {
           >
             <Notification />
 
-            <FadeView show={!spin}>{vw}</FadeView>
+            <FadeView show={!spin}>{mainContent}</FadeView>
 
             {backTopElement}
           </Spin>
@@ -1735,7 +1784,7 @@ export default class Infrastructure extends ComponentBase {
 
         <Notification />
 
-        {vw}
+        {mainContent}
 
         {backTopElement}
 
