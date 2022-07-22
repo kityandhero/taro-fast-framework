@@ -15,6 +15,8 @@ import './index.less';
 const classPrefix = `tfc-price`;
 
 const defaultProps = {
+  title: '',
+  titleStyle: {},
   price: 0,
   bodyStyle: {},
   itemStyle: {},
@@ -32,6 +34,8 @@ const defaultProps = {
 class Price extends BaseComponent {
   renderFurther() {
     const {
+      title,
+      titleStyle,
       price,
       prefix,
       bodyStyle: bodyStyleSource,
@@ -92,6 +96,10 @@ class Price extends BaseComponent {
             lineHeight: 1,
           }}
         >
+          {!stringIsNullOrWhiteSpace(title) ? (
+            <View style={{ ...itemStyle, ...(titleStyle || {}) }}>{title}</View>
+          ) : null}
+
           <View style={{ ...itemStyle, ...(prefixStyle || {}) }}>{prefix}</View>
 
           <View style={{ ...itemStyle, ...(integerPartStyle || {}) }}>
