@@ -1723,23 +1723,16 @@ export default class Infrastructure extends ComponentBase {
       if (this.sidePosition === 'left') {
         mainContent = (
           <FlexBox
-            style={{
-              height: '100vh',
-            }}
             flexAuto="right"
             leftStyle={{
-              ...(this.sideStyle || {}),
               ...{
-                height: '100vh',
                 width: transformSize(this.sideWidth),
-                padding: '0',
-                margin: '0',
-                border: '0',
               },
             }}
             left={
               <View
                 style={{
+                  ...(this.sideStyle || {}),
                   position: 'fixed',
                   height: '100vh',
                   width: transformSize(this.sideWidth),
@@ -1773,24 +1766,17 @@ export default class Infrastructure extends ComponentBase {
       } else {
         mainContent = (
           <FlexBox
-            style={{
-              height: '100vh',
-            }}
             flexAuto="left"
             left={vw}
             rightStyle={{
-              ...(this.sideStyle || {}),
               ...{
-                height: '100vh',
                 width: transformSize(this.sideWidth),
-                padding: '0',
-                margin: '0',
-                border: '0',
               },
             }}
             right={
               <View
                 style={{
+                  ...(this.sideStyle || {}),
                   position: 'fixed',
                   height: '100vh',
                   width: transformSize(this.sideWidth),
