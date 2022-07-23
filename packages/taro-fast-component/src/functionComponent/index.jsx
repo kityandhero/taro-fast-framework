@@ -1,4 +1,4 @@
-import { Swiper, SwiperItem, View } from '@tarojs/components';
+import { Swiper, SwiperItem } from '@tarojs/components';
 
 import {
   stringIsNullOrWhiteSpace,
@@ -249,7 +249,7 @@ export function buildEmptyPlaceholder({
   onDescriptionClick = null,
 }) {
   return (
-    <View style={{ margin: 'var(--tfc-20) 0' }}>
+    <FadeInBox style={{ margin: 'var(--tfc-20) 0' }}>
       <CenterBox>
         <Empty
           icon={
@@ -268,7 +268,7 @@ export function buildEmptyPlaceholder({
           onDescriptionClick={onDescriptionClick}
         />
       </CenterBox>
-    </View>
+    </FadeInBox>
   );
 }
 
