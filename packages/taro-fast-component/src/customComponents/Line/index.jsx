@@ -28,6 +28,7 @@ const defaultProps = {
   width: 0,
   height: 0,
   transparent: false,
+  borderRadius: 0,
 };
 
 class Line extends BaseComponent {
