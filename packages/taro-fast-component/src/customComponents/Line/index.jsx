@@ -79,7 +79,7 @@ class Line extends BaseComponent {
   };
 
   getStyle = () => {
-    const { margin, width, height } = this.props;
+    const { margin, width, height, borderRadius } = this.props;
 
     const direction = this.getDirection();
 
@@ -117,7 +117,14 @@ class Line extends BaseComponent {
       };
     }
 
-    return { ...sizeStyle, ...marginStyle, ...colorStyle };
+    return {
+      ...sizeStyle,
+      ...(borderRadius > 0
+        ? { '--border-radius': transformSize(borderRadius) }
+        : {}),
+      ...marginStyle,
+      ...colorStyle,
+    };
   };
 
   renderFurther() {
