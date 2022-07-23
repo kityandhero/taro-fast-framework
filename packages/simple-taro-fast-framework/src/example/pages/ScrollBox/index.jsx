@@ -43,6 +43,37 @@ const config1 = {
   },
 };
 
+const config11 = {
+  enableIndicator: true,
+  height: 280,
+  direction: 'horizontal',
+  gap: 30,
+  list: [one, one, one, one, one, one, one, one, one, one],
+  itemBuilder: (item, index) => {
+    return (
+      <View
+        style={{
+          width: transformSize(80 + (index + 1) * 45),
+          height: '100%',
+          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+        }}
+      ></View>
+    );
+  },
+  indicatorContainerStyle: {
+    bottom: transformSize(20),
+    height: transformSize(12),
+  },
+  indicatorTrackStyle: {
+    backgroundColor: '#ddd111',
+    borderRadius: transformSize(10),
+  },
+  indicatorStyle: {
+    backgroundColor: '#1ed1f1',
+    borderRadius: transformSize(10),
+  },
+};
+
 const config3 = {
   height: 280,
   direction: 'horizontal',
@@ -80,6 +111,35 @@ const config2 = {
   },
 };
 
+const config21 = {
+  height: 700,
+  direction: 'vertical',
+  gap: 30,
+  list: [one, one, one, one, one, one, one, one, one, one],
+  itemBuilder: (item, index) => {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: transformSize(80 + (index + 1) * 45),
+          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+        }}
+      ></View>
+    );
+  },
+  enableIndicator: true,
+  indicatorContainerStyle: {
+    bottom: transformSize(20),
+    height: transformSize(20),
+  },
+  indicatorTrackStyle: {
+    backgroundColor: '#ddd111',
+  },
+  indicatorStyle: {
+    backgroundColor: '#1ed1f1',
+  },
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '滚动容器',
@@ -102,8 +162,8 @@ export default class Index extends ContentPageBase {
       ...this.state,
       ...{
         current: 7,
-        header: '默认',
-        currentConfig: config1,
+        header: '水平模式显示导轨',
+        currentConfig: config11,
       },
     };
   }
@@ -111,8 +171,16 @@ export default class Index extends ContentPageBase {
   establishControlList = () => {
     return [
       {
+        header: '水平模式显示导轨',
+        config: config11,
+      },
+      {
         header: '水平模式',
         config: config1,
+      },
+      {
+        header: '垂直模式显示导轨',
+        config: config21,
       },
       {
         header: '垂直模式',

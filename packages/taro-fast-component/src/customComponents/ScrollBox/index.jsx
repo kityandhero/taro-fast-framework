@@ -1,26 +1,17 @@
-import { ScrollView, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import {
+  getGuid,
+  getRect,
   inCollection,
-  showErrorMessage,
+  recordError,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import {
-  isArray,
-  isFunction,
-  isNumber,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
+import CenterBox from '../CenterBox';
 
-function buildId({ prefix, index }) {
-  return `${prefix}_item_${index}`;
-}
-
-function buildGapId({ prefix, index }) {
-  return `${prefix}_item_gap_${index}`;
-}
+import ScrollBoxCore from './ScrollBoxCore';
 
 const directionCollection = ['horizontal', 'vertical'];
 
@@ -35,78 +26,91 @@ const defaultProps = {
   list: [],
   itemBuilder: null,
   enableScroll: true,
+  enableIndicator: false,
+  indicatorContainerStyle: {},
+  indicatorTrackStyle: {},
+  indicatorStyle: {},
 };
 
 class ScrollBox extends BaseComponent {
-  needInitScroll = false;
+  containerWidth = 0;
 
-  initScrollComplete = false;
+  containerHeight = 0;
 
-  leftScrollOffset = 0;
+  indicatorContainerWidth = 0;
 
-  timer = null;
+  indicatorContainerHeight = 0;
+
+  containerId = '';
+
+  indicatorContainerId = '';
+
+  timerAdjust = null;
 
   constructor(props) {
     super(props);
 
-    const { current: currentValue } = props;
-
-    let current = toNumber(currentValue);
-
     this.state = {
       ...this.state,
       ...{
-        scrollIntoView: '',
+        scrollLeft: 0,
+        scrollTop: 0,
+        scrollHeight: 0,
+        scrollWidth: 0,
+        deltaX: 0,
+        deltaY: 0,
       },
     };
 
-    if (current > 0) {
-      this.needInitScroll = true;
-      this.initScrollComplete = false;
-    }
+    this.containerId = getGuid();
+
+    this.indicatorContainerId = getGuid();
+
+    this.timerAdjust = null;
   }
 
   doWorkAfterDidMount = () => {
-    if (this.needInitScroll && !this.initScrollComplete) {
-      const { current } = this.props;
+    const { enableIndicator } = this.props;
 
-      const that = this;
-
-      that.timer = setTimeout(() => {
-        that.moveTo(current);
-
-        that.initScrollComplete = true;
-      }, 300);
+    if (enableIndicator) {
+      this.adjustLayout();
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
-    const { current: currentPrev } = preProps;
-    const { current } = this.props;
+  adjustLayout = () => {
+    const that = this;
+    console.log(1111111111111111111111111111);
+    that.timerAdjust = setTimeout(() => {
+      getRect(`#${that.containerId}`)
+        .then((rect) => {
+          if ((rect || null) != null) {
+            const { width, height } = rect;
 
-    if (currentPrev != current) {
-      this.moveTo(current);
-    }
-
-    return null;
-  };
-
-  doWorkBeforeUnmount = () => {
-    clearTimeout(this.timer);
-  };
-
-  getStyle = () => {
-    const { style, enableScroll } = this.props;
-
-    return {
-      ...(style || {}),
-      ...(!enableScroll
-        ? {
-            position: 'relative',
+            that.containerWidth = width;
+            that.containerHeight = height;
           }
-        : {}),
-    };
+
+          return rect;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
+
+      getRect(`#${that.indicatorContainerId}`)
+        .then((rect) => {
+          if ((rect || null) != null) {
+            const { width, height } = rect;
+
+            that.indicatorContainerWidth = width;
+            that.indicatorContainerHeight = height;
+          }
+
+          return rect;
+        })
+        .catch((error) => {
+          recordError({ error });
+        });
+    }, 200);
   };
 
   getDirection = () => {
@@ -119,176 +123,214 @@ class ScrollBox extends BaseComponent {
     return direction;
   };
 
-  getLeftScrollOffset = () => {
-    const { leftScrollOffset } = this.props;
+  buildIndicatorContainerStyle = () => {
+    const { indicatorContainerStyle } = this.props;
 
-    if (toNumber(leftScrollOffset) > 0) {
-      return toNumber(leftScrollOffset);
-    }
-
-    return 0;
-  };
-
-  buildItem = (item, index) => {
-    const { width, height, itemBuilder } = this.props;
-
-    const direction = this.getDirection();
-
-    let itemComponent = null;
-
-    if (isFunction(itemBuilder)) {
-      itemComponent = itemBuilder(item, index);
-    } else {
-      const text = 'itemBuilder must be a render function';
-
-      showErrorMessage({
-        message: text,
-      });
-    }
-
-    const { style: itemStyle } = {
-      ...item,
+    return {
       ...{
-        style: {
-          display: direction === 'horizontal' ? 'inline-block' : 'block',
-          width: direction === 'horizontal' ? 'auto' : transformSize(width),
-          height: direction === 'horizontal' ? transformSize(height) : 'auto',
-        },
+        width: '100%',
+        left: '0',
+        bottom: transformSize(20),
+        height: transformSize(20),
       },
+      ...indicatorContainerStyle,
     };
-
-    return (
-      <View
-        key={`${this.keyPrefix}_key_item_${index}`}
-        id={buildId({
-          prefix: this.keyPrefix,
-          index,
-        })}
-        style={itemStyle}
-      >
-        {itemComponent}
-      </View>
-    );
   };
 
-  moveTo = (targetIndex) => {
-    const leftScrollOffset = this.getLeftScrollOffset();
+  triggerChangeIndicator = (e) => {
+    const {
+      detail: {
+        scrollLeft,
+        scrollTop,
+        scrollHeight,
+        scrollWidth,
+        deltaX,
+        deltaY,
+      },
+    } = e;
 
     this.setState({
-      scrollIntoView: buildId({
-        prefix: this.keyPrefix,
-        index: Math.max(targetIndex - leftScrollOffset, 0),
-      }),
+      scrollLeft,
+      scrollTop,
+      scrollHeight,
+      scrollWidth,
+      deltaX,
+      deltaY,
     });
   };
 
-  triggerScroll = () => {
-    const { scrollIntoView } = this.state;
+  buildIndicator = ({
+    containerWidth,
+    containerHeight,
+    indicatorContainerWidth,
+    indicatorContainerHeight,
+    scrollLeft,
+    scrollTop,
+    scrollHeight,
+    scrollWidth,
+  }) => {
+    const { indicatorTrackStyle, indicatorStyle } = this.props;
 
-    if ((scrollIntoView || null) != null) {
-      this.setState({
-        scrollIntoView: '',
-      });
+    const direction = this.getDirection();
+
+    if (direction === 'horizontal') {
+      return (
+        <View
+          id={this.indicatorContainerId}
+          style={{
+            ...{
+              backgroundColor: '#ccc',
+              width: transformSize(100),
+              height: transformSize(8),
+            },
+            ...indicatorTrackStyle,
+          }}
+        >
+          <View
+            style={{
+              ...{
+                backgroundColor: '#ccc',
+              },
+              ...indicatorStyle,
+              ...{
+                width: `${Math.round(
+                  (indicatorContainerWidth / scrollWidth) * containerWidth,
+                )}px`,
+                height: '100%',
+                transition: 'transform 0.3s ease',
+                transform: `translateX(${Math.round(
+                  (scrollLeft * indicatorContainerWidth) / scrollWidth,
+                )}px)`,
+                padding: '0',
+                margin: '0',
+                border: '0',
+              },
+            }}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View
+          id={this.indicatorContainerId}
+          style={{
+            ...{
+              backgroundColor: '#ccc',
+              width: transformSize(8),
+              height: transformSize(100),
+              paddingLeft: transformSize(2),
+              paddingRight: transformSize(2),
+            },
+            ...indicatorTrackStyle,
+          }}
+        >
+          <View
+            style={{
+              ...{
+                backgroundColor: '#ccc',
+              },
+              ...indicatorStyle,
+              ...{
+                height: `${Math.round(
+                  (indicatorContainerHeight / scrollHeight) * containerHeight,
+                )}px`,
+                width: '100%',
+                transition: 'transform 0.3s ease',
+                transform: `translateX(${Math.round(
+                  (scrollTop * indicatorContainerHeight) / scrollHeight,
+                )}px)`,
+                padding: '0',
+                margin: '0',
+                border: '0',
+              },
+            }}
+          />
+        </View>
+      );
     }
   };
 
-  buildOverlay = () => {
-    const { enableScroll } = this.props;
+  buildIndicatorBox = () => {
+    const { scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY } =
+      this.state;
 
-    if (enableScroll) {
-      return null;
-    }
-
-    return (
-      <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: 10,
-          width: '100%',
-          height: '100%',
-        }}
-      />
-    );
+    return this.buildIndicator({
+      containerWidth: this.containerWidth,
+      containerHeight: this.containerHeight,
+      indicatorContainerWidth: this.indicatorContainerWidth,
+      indicatorContainerHeight: this.indicatorContainerHeight,
+      scrollLeft,
+      scrollTop,
+      scrollHeight,
+      scrollWidth,
+      deltaX,
+      deltaY,
+    });
   };
 
   renderFurther() {
-    const { gap, width, height, list } = this.props;
-    const { scrollIntoView } = this.state;
+    const {
+      current,
+      style,
+      direction,
+      leftScrollOffset,
+      gap,
+      width,
+      height,
+      list,
+      itemBuilder,
+      enableScroll,
+      enableIndicator,
+    } = this.props;
 
-    const direction = this.getDirection();
-    const style = this.getStyle();
-
-    const listData = isArray(list) ? list : [];
-
-    const listItemCore = listData.map((item, index) => {
-      return this.buildItem(item, index);
-    });
-
-    let listItem = [];
-
-    if (!isNumber(gap) || gap <= 0) {
-      listItem = [...listItemCore];
-    } else {
-      listItemCore.forEach((item, index) => {
-        if (index > 0) {
-          listItem.push(
-            <View
-              key={`${this.keyPrefix}_key_item_gap_${index}`}
-              id={buildGapId({
-                prefix: this.keyPrefix,
-                index,
-              })}
-              style={{
-                display: direction === 'horizontal' ? 'inline-block' : 'block',
-                width:
-                  direction === 'horizontal'
-                    ? transformSize(gap)
-                    : transformSize(width),
-                height:
-                  direction === 'horizontal'
-                    ? transformSize(height)
-                    : transformSize(gap),
-              }}
-            />,
-          );
-
-          listItem.push(item);
-        } else {
-          listItem.push(item);
-        }
-      });
+    if (!enableIndicator) {
+      return (
+        <ScrollBoxCore
+          current={current}
+          style={style}
+          direction={direction}
+          leftScrollOffset={leftScrollOffset}
+          width={width}
+          height={height}
+          gap={gap}
+          list={list}
+          itemBuilder={itemBuilder}
+          enableScroll={enableScroll}
+        />
+      );
     }
 
     return (
-      <View style={style}>
-        {this.buildOverlay()}
+      <View
+        id={this.containerId}
+        style={{
+          position: 'relative',
+          width: transformSize(width),
+          height: transformSize(height),
+        }}
+      >
+        <ScrollBoxCore
+          current={current}
+          style={style}
+          direction={direction}
+          leftScrollOffset={leftScrollOffset}
+          width={width}
+          height={height}
+          gap={gap}
+          list={list}
+          itemBuilder={itemBuilder}
+          enableScroll={enableScroll}
+          onScroll={this.triggerChangeIndicator}
+        />
 
-        <ScrollView
+        <View
           style={{
-            ...{
-              width: transformSize(width),
-              height: transformSize(height),
-            },
-            ...(direction === 'horizontal'
-              ? {
-                  whiteSpace: 'nowrap',
-                }
-              : {}),
+            ...this.buildIndicatorContainerStyle(),
+            ...{ position: 'absolute' },
           }}
-          scrollX={direction === 'horizontal'}
-          scrollY={direction !== 'horizontal'}
-          scrollWithAnimation
-          scrollAnchoring
-          enhanced
-          bounces
-          showScrollbar={false}
-          scrollIntoView={scrollIntoView}
-          onScroll={this.triggerScroll}
         >
-          {listItem}
-        </ScrollView>
+          <CenterBox>{this.buildIndicatorBox()}</CenterBox>
+        </View>
       </View>
     );
   }
