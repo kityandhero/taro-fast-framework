@@ -53,7 +53,7 @@ const defaultProps = {
   closeIcon: null,
   closeIconStyle: {},
   position: 'bottom',
-  zIndex: 820,
+  zIndex: 810,
   /**
    * 元素被关闭时候触发的事件
    */
@@ -215,8 +215,18 @@ class Popup extends BaseComponent {
     };
   };
 
+  getMainStyle = () => {
+    const { zIndex } = this.props;
+
+    return {
+      ...{
+        zIndex: zIndex,
+      },
+    };
+  };
+
   getBodyStyle = () => {
-    const { bodyStyle } = this.props;
+    const { bodyStyle, zIndex } = this.props;
 
     const height = this.getHeight();
     const width = this.getWidth();
@@ -226,6 +236,9 @@ class Popup extends BaseComponent {
       ...(bodyStyle || {}),
       ...(inCollection(['center', 'top', 'bottom'], position) ? height : {}),
       ...(inCollection(['left', 'right'], position) ? width : {}),
+      ...{
+        zIndex: zIndex + 10,
+      },
     };
   };
 
@@ -359,7 +372,7 @@ class Popup extends BaseComponent {
               className="tfc-popup__container__body__close"
               style={{
                 ...{
-                  zIndex: zIndex || defaultProps.zIndex,
+                  zIndex: zIndex + 20,
                 },
                 ...closeIconStyle,
                 ...{
@@ -431,7 +444,12 @@ class Popup extends BaseComponent {
     );
 
     return (
-      <View className={rootClass} catchMove onTouchMove={this.handleTouchMove}>
+      <View
+        className={rootClass}
+        style={this.getMainStyle()}
+        catchMove
+        onTouchMove={this.handleTouchMove}
+      >
         <Overlay
           visible={visibleStage}
           zIndex={0}
