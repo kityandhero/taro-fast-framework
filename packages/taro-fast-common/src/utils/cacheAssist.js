@@ -1,10 +1,7 @@
 import nodeCache from 'node-cache';
 
-import {
-  getTaroGlobalData,
-  recordError,
-  stringIsNullOrWhiteSpace,
-} from './tools';
+import { getTaroGlobalData } from './core';
+import { recordError, stringIsNullOrWhiteSpace } from './tools';
 import { isArray, isNumber, isString } from './typeCheck';
 
 function checkKey(key) {

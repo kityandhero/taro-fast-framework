@@ -16,7 +16,6 @@ import gteLodash from 'lodash/gte';
 import mapLodash from 'lodash/map';
 import memoizeLodash from 'lodash/memoize';
 import removeLodash from 'lodash/remove';
-import replaceLodash from 'lodash/replace';
 import reverseLodash from 'lodash/reverse';
 import roundLodash from 'lodash/round';
 import setLodash from 'lodash/set';
@@ -25,7 +24,6 @@ import sortByLodash from 'lodash/sortBy';
 import sortedUniqLodash from 'lodash/sortedUniq';
 import splitLodash from 'lodash/split';
 import startsWithLodash from 'lodash/startsWith';
-import trimLodash from 'lodash/trim';
 import uniqByLodash from 'lodash/uniqBy';
 import hash from 'object-hash';
 import { parse, stringify } from 'qs';
@@ -37,7 +35,6 @@ import {
   createSelectorQuery as createSelectorQueryCore,
   downloadFile as downloadFileCore,
   ENV_TYPE,
-  getApp,
   getClipboardData as getClipboardDataCore,
   getCurrentInstance as getCurrentInstanceCore,
   getEnv,
@@ -70,17 +67,38 @@ import {
 } from '@tarojs/taro';
 
 import {
-  appInitDefault,
+  inCollection as inCollectionCore,
+  replace as replaceCore,
+  stringIsNullOrWhiteSpace as stringIsNullOrWhiteSpaceCore,
+  trim as trimCore,
+} from './base';
+import {
   convertCollection,
   datetimeFormat,
   formatCollection,
   logLevel,
-  logShowMode,
   messageTypeCollection,
   notificationTypeCollection,
   pxToRemRoot,
   sortOperate,
 } from './constants';
+import {
+  getAppInitConfigData as getAppInitConfigDataCore,
+  getDefaultTaroGlobalData as getDefaultTaroGlobalDataCore,
+  getTaroGlobalData as getTaroGlobalDataCore,
+  setTaroGlobalData as setTaroGlobalDataCore,
+} from './core';
+import {
+  recordConfig as recordConfigCore,
+  recordDebug as recordDebugCore,
+  recordError as recordErrorCore,
+  recordExecute as recordExecuteCore,
+  recordInfo as recordInfoCore,
+  recordLog as recordLogCore,
+  recordObject as recordObjectCore,
+  recordText as recordTextCore,
+  recordWarn as recordWarnCore,
+} from './log';
 import Tips from './tips';
 import {
   isArray,
@@ -109,75 +127,19 @@ const storageKeyCollection = {
 let globalSystemInfo = null;
 
 export function getDefaultTaroGlobalData() {
-  return {
-    test: 'success',
-  };
+  return getDefaultTaroGlobalDataCore();
 }
 
 export function getTaroGlobalData() {
-  const ENV = getEnv();
-
-  // 标签栏滚动
-  switch (ENV) {
-    case ENV_TYPE.WEAPP:
-      const app = getApp();
-
-      if (isUndefined(app)) {
-        return null;
-      }
-
-      return app.$app.taroGlobalData;
-
-    case ENV_TYPE.ALIPAY:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-      break;
-
-    case ENV_TYPE.SWAN:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-      break;
-
-    case ENV_TYPE.WEB:
-      if (!window.taroGlobalData) {
-        window.taroGlobalData = getDefaultTaroGlobalData();
-      }
-
-      return window.taroGlobalData;
-
-    default:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-      break;
-  }
-
-  return null;
+  return getTaroGlobalDataCore();
 }
 
 export function setTaroGlobalData(config) {
-  const ENV = getEnv();
+  return setTaroGlobalDataCore(config);
+}
 
-  // 标签栏滚动
-  switch (ENV) {
-    case ENV_TYPE.WEAPP:
-      break;
-
-    case ENV_TYPE.ALIPAY:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-
-    case ENV_TYPE.SWAN:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-      break;
-
-    case ENV_TYPE.WEB:
-      if (!isObject(window.taroGlobalData)) {
-        window.taroGlobalData = {};
-      }
-
-      window.taroGlobalData.appInitCustomLocal = config;
-      break;
-
-    default:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
-      break;
-  }
+export function getAppInitConfigData() {
+  return getAppInitConfigDataCore();
 }
 
 export function showNavigationBarLoading() {
@@ -263,30 +225,6 @@ export function navigateTo(params) {
   showErrorMessage({
     message: text,
   });
-}
-
-export function getAppInitConfigData() {
-  let appInitConfig = appInitDefault;
-
-  const taroGlobalData = getTaroGlobalData();
-
-  if (taroGlobalData) {
-    if ((taroGlobalData.appInitCustomLocal || null) != null) {
-      appInitConfig = {
-        ...appInitConfig,
-        ...taroGlobalData.appInitCustomLocal,
-      };
-    }
-
-    if ((taroGlobalData.appInitCustomRemote || null) != null) {
-      appInitConfig = {
-        ...appInitConfig,
-        ...taroGlobalData.appInitCustomRemote,
-      };
-    }
-  }
-
-  return appInitConfig;
 }
 
 export function getValue(obj) {
@@ -540,150 +478,34 @@ export function showMessage({
  * @returns
  */
 export function recordLog(record, showMode, level = logLevel.debug) {
-  let showModeModified =
-    (showMode || null) == null || stringIsNullOrWhiteSpace(showMode)
-      ? logShowMode.unknown
-      : showMode;
-
-  if (
-    !inCollection(
-      [logShowMode.unknown, logShowMode.text, logShowMode.object],
-      showModeModified,
-    )
-  ) {
-    throw new Error(`无效的日志显示模式:${showModeModified}`);
-  }
-
-  if (showModeModified === logShowMode.unknown) {
-    if (isString(record)) {
-      showModeModified = logShowMode.text;
-    } else {
-      showModeModified = logShowMode.object;
-    }
-  }
-
-  if (logShowInConsole() && level === logLevel.debug) {
-    if (showModeModified === logShowMode.text) {
-      const data = { debug: record };
-
-      console.log('%c%s', 'color:#00768f;', JSON.stringify(data));
-    }
-
-    if (showModeModified === logShowMode.object) {
-      console.log({ debug: record });
-    }
-  }
-
-  if (logShowInConsole() && level === logLevel.warn) {
-    if (showModeModified === logShowMode.text) {
-      const data = { warn: record };
-
-      console.log('%c%s', 'color:#ff4f49;', JSON.stringify(data));
-    }
-
-    if (showModeModified === logShowMode.object) {
-      console.log({ warn: record });
-    }
-  }
-
-  if (logShowInConsole() && level === logLevel.info) {
-    if (showModeModified === logShowMode.text) {
-      const data = { info: record };
-
-      console.log('%c%s', 'color:#89ca78;', JSON.stringify(data));
-    }
-
-    if (showModeModified === logShowMode.object) {
-      console.log({ info: record });
-    }
-  }
-
-  if (logShowInConsole() && level === logLevel.execute) {
-    if (showModeModified === logShowMode.text) {
-      const data = { execute: record };
-
-      console.log('%c%s', 'color:#C39BD3;', JSON.stringify(data));
-    }
-
-    if (showModeModified === logShowMode.object) {
-      console.log({ execute: record });
-    }
-  }
-
-  if (logShowInConsole() && level === logLevel.config) {
-    if (showModeModified === logShowMode.text) {
-      const data = { config: record };
-
-      console.log('%c%s', 'color:#F8C471;', JSON.stringify(data));
-    }
-
-    if (showModeModified === logShowMode.object) {
-      console.log({ config: record });
-    }
-  }
-
-  if (level === logLevel.error) {
-    if (showModeModified === logShowMode.text) {
-      const data = { error: record };
-
-      console.error(JSON.stringify(data));
-    }
-
-    if (showModeModified === logShowMode.object) {
-      console.error({ error: record });
-    }
-  }
+  recordLogCore(record, showMode, level);
 }
 
 export function recordWarn(record) {
-  if (isString(record)) {
-    recordText(record, logLevel.warn);
-  } else {
-    recordObject(record, logLevel.warn);
-  }
+  recordWarnCore(record);
 }
 
 export function recordInfo(record) {
-  if (isString(record)) {
-    recordText(record, logLevel.info);
-  } else {
-    recordObject(record, logLevel.info);
-  }
+  recordInfoCore(record);
 }
 
 export function recordConfig(record) {
-  if (isString(record)) {
-    recordText(record, logLevel.config);
-  } else {
-    recordObject(record, logLevel.config);
-  }
+  recordConfigCore(record);
 }
 
 export function recordDebug(record) {
-  if (isString(record)) {
-    recordText(record, logLevel.debug);
-  } else {
-    recordObject(record, logLevel.debug);
-  }
+  recordDebugCore(record);
 }
 
 export function recordExecute(record) {
-  if (isString(record)) {
-    recordText(record, logLevel.execute);
-  } else {
-    recordObject(record, logLevel.execute);
-  }
+  recordExecuteCore(record);
 }
 
 /**
  * 记录错误信息
  */
 export function recordError(record) {
-  if (isString(record)) {
-    recordText(record, logLevel.error);
-  } else {
-    recordObject(record, logLevel.error);
-  }
+  recordErrorCore(record);
 }
 
 /**
@@ -694,7 +516,7 @@ export function recordError(record) {
  * @returns
  */
 export function recordText(record, level = logLevel.debug) {
-  recordLog(record, logShowMode.text, level);
+  recordTextCore(record, level);
 }
 
 /**
@@ -705,14 +527,7 @@ export function recordText(record, level = logLevel.debug) {
  * @returns
  */
 export function recordObject(record, level = logLevel.debug) {
-  recordLog(record, logShowMode.object, level);
-}
-
-function logShowInConsole() {
-  const appInit = getAppInitConfigData();
-  const result = !!(appInit.showLogInConsole || false);
-
-  return result;
+  recordObjectCore(record, level);
 }
 
 /**
@@ -759,23 +574,7 @@ export function getGuid(len = 8, radix = 16) {
  * 检测目标是否在数组址之中
  */
 export function inCollection(collection, value) {
-  let result = false;
-
-  if (!isArray(collection)) {
-    return result;
-  }
-
-  collection.some((o) => {
-    if (o === value) {
-      result = true;
-
-      return true;
-    }
-
-    return false;
-  });
-
-  return result;
+  return inCollectionCore(collection, value);
 }
 
 export function split(source, separator, limit = 1000) {
@@ -1818,11 +1617,11 @@ export function reverse(array) {
 }
 
 export function trim(source) {
-  return trimLodash(source);
+  return trimCore(source);
 }
 
 export function replace(source, pattern, replacement) {
-  return replaceLodash(source, pattern, replacement);
+  return replaceCore(source, pattern, replacement);
 }
 
 export function assign(target, source) {
@@ -1851,7 +1650,7 @@ export function removeFromArray(array, predicate) {
 }
 
 export function stringIsNullOrWhiteSpace(value) {
-  return trim(replace(value || '', ' ', '')) === '';
+  return stringIsNullOrWhiteSpaceCore(value);
 }
 
 export function sha1(v) {

@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro';
 
-import { recordError } from './tools';
+import { recordError } from './log';
 import { isFunction } from './typeCheck';
 
 /**
