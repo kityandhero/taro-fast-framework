@@ -53,6 +53,7 @@ const defaultProps = {
   closeIcon: null,
   closeIconStyle: {},
   position: 'bottom',
+  zIndex: 820,
   /**
    * 元素被关闭时候触发的事件
    */
@@ -295,6 +296,7 @@ class Popup extends BaseComponent {
       footer,
       footerBorder,
       footerStyle,
+      zIndex,
       closeIcon,
       closeIconStyle,
       scroll,
@@ -357,7 +359,7 @@ class Popup extends BaseComponent {
               className="tfc-popup__container__body__close"
               style={{
                 ...{
-                  zIndex: 820,
+                  zIndex: zIndex || defaultProps.zIndex,
                 },
                 ...closeIconStyle,
                 ...{
