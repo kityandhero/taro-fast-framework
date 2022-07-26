@@ -74,6 +74,8 @@ class ComponentBase extends Component {
    */
   needSignIn = false;
 
+  autoRedirectToSignIn = true;
+
   /**
    * 权限数据
    */

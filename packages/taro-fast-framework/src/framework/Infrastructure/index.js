@@ -629,15 +629,19 @@ export default class Infrastructure extends ComponentBase {
     const verifySignInResult = getVerifySignInResult();
 
     if (toString(signInResult) === toString(verifySignInResult.fail)) {
-      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+      if (this.autoRedirectToSignIn) {
+        const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-      if (stringIsNullOrWhiteSpace(signInPath)) {
-        throw new Error('未配置登录页面signInPath');
+        if (stringIsNullOrWhiteSpace(signInPath)) {
+          throw new Error('未配置登录页面signInPath');
+        }
+
+        setTimeout(() => {
+          redirectTo(signInPath);
+        }, 200);
+      } else {
+        this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
       }
-
-      setTimeout(() => {
-        redirectTo(signInPath);
-      }, 200);
     } else {
       that.setState({ signInSilentOverlayVisible: true });
 
@@ -666,6 +670,12 @@ export default class Infrastructure extends ComponentBase {
         });
       });
     }
+  };
+
+  doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {
+    recordConfig(
+      'doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn do nothing, if you need to do anything when check sign in fail and do not aut redirect to sign in path, please override it: doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {}',
+    );
   };
 
   checkPermission = () => {
