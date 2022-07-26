@@ -247,15 +247,23 @@ class ScrollBox extends BaseComponent {
                 index,
               })}
               style={{
-                display: direction === 'horizontal' ? 'inline-block' : 'block',
-                width:
-                  direction === 'horizontal'
-                    ? transformSize(gap)
-                    : transformSize(width),
-                height:
-                  direction === 'horizontal'
-                    ? transformSize(height)
-                    : transformSize(gap),
+                ...{
+                  display:
+                    direction === 'horizontal' ? 'inline-block' : 'block',
+                  width:
+                    direction === 'horizontal'
+                      ? transformSize(gap)
+                      : transformSize(width),
+                  height:
+                    direction === 'horizontal'
+                      ? transformSize(height)
+                      : transformSize(gap),
+                },
+                ...(direction === 'horizontal'
+                  ? {
+                      verticalAlign: 'top',
+                    }
+                  : {}),
               }}
             />,
           );
