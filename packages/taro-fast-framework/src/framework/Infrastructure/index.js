@@ -666,7 +666,10 @@ export default class Infrastructure extends ComponentBase {
 
               redirectTo(signInPath);
             } else {
-              that.setState({ signInSilentOverlayVisible: false });
+              that.setState({
+                spin: false,
+                signInSilentOverlayVisible: false,
+              });
 
               this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
             }
