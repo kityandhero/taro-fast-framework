@@ -179,6 +179,9 @@ const examplePathCollection = {
   flexBox: {
     path: '/example/pages/flexBox/index',
   },
+  extraBox: {
+    path: '/example/pages/extraBox/index',
+  },
   fadeInBox: {
     path: '/example/pages/fadeInBox/index',
   },

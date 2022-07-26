@@ -28,6 +28,11 @@ const list = [
     path: pathCollection.example.fixedBox.path,
   },
   {
+    id: 'ExtraBox',
+    name: 'Extra布局',
+    path: pathCollection.example.extraBox.path,
+  },
+  {
     id: 'Space',
     name: '间隔布局',
     path: pathCollection.example.space.path,

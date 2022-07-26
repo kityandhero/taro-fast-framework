@@ -61,6 +61,7 @@ export default {
         'pages/checkBoxSelector/index',
         'pages/countdown/index',
         'pages/helpBox/index',
+        'pages/extraBox/index',
         'pages/footer/index',
         'pages/floatAction/index',
         'pages/verticalBox/index',

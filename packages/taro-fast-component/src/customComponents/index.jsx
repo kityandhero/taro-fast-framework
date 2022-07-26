@@ -17,6 +17,7 @@ export { default as DataGrid } from './DataGrid';
 export { default as Divider } from './Divider';
 export { default as Ellipsis } from './Ellipsis';
 export { Empty } from './Empty';
+export { default as ExtraBox } from './ExtraBox';
 export { default as FadeInBox } from './FadeInBox';
 export { FadeView } from './FadeView';
 export { default as FixedBox } from './FixedBox';
