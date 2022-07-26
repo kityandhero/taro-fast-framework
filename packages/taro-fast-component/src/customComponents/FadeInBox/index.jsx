@@ -12,6 +12,7 @@ const classPrefix = `tfc-fade-in-box`;
 const defaultProps = {
   duration: 300,
   style: {},
+  onClick: null,
 };
 
 class FadeInBox extends BaseComponent {

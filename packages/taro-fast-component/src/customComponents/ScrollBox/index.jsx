@@ -79,7 +79,7 @@ class ScrollBox extends BaseComponent {
 
   adjustLayout = () => {
     const that = this;
-    console.log(1111111111111111111111111111);
+
     that.timerAdjust = setTimeout(() => {
       getRect(`#${that.containerId}`)
         .then((rect) => {
