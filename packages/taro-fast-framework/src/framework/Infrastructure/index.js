@@ -1106,7 +1106,7 @@ export default class Infrastructure extends ComponentBase {
       });
   }
 
-  getLocationWeather = ({ callback = null }) => {
+  getCurrentLocation = ({ callback = null }) => {
     const that = this;
 
     const map = getMap();
@@ -1114,9 +1114,8 @@ export default class Infrastructure extends ComponentBase {
     if (map == null) {
       that.obtainLocation({
         successCallback: ({ map: mapSource }) => {
-          that.getLocationWeatherCore({
-            data: mapSource,
-            callback,
+          callback({
+            map: mapSource,
           });
         },
         force: false,
@@ -1130,6 +1129,19 @@ export default class Infrastructure extends ComponentBase {
         callback,
       });
     }
+  };
+
+  getLocationWeather = ({ callback = null }) => {
+    const that = this;
+
+    that.getCurrentLocation({
+      callback: ({ map: mapSource }) => {
+        that.getLocationWeatherCore({
+          data: mapSource,
+          callback,
+        });
+      },
+    });
   };
 
   getLocationWeatherCore = ({ data, callback = null }) => {
