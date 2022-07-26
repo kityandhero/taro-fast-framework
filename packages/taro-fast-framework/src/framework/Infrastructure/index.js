@@ -657,15 +657,19 @@ export default class Infrastructure extends ComponentBase {
               'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
             );
 
-            const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+            if (this.autoRedirectToSignIn) {
+              const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-            if (stringIsNullOrWhiteSpace(signInPath)) {
-              throw new Error('未配置登录页面signInPath');
+              if (stringIsNullOrWhiteSpace(signInPath)) {
+                throw new Error('未配置登录页面signInPath');
+              }
+
+              // that.setState({ signInSilentOverlayVisible: false });
+
+              redirectTo(signInPath);
+            } else {
+              this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
             }
-
-            // that.setState({ signInSilentOverlayVisible: false });
-
-            redirectTo(signInPath);
           },
         });
       });
