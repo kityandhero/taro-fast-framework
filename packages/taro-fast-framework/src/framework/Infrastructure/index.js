@@ -664,8 +664,6 @@ export default class Infrastructure extends ComponentBase {
                 throw new Error('未配置登录页面signInPath');
               }
 
-              // that.setState({ signInSilentOverlayVisible: false });
-
               redirectTo(signInPath);
             } else {
               this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
