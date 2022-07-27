@@ -1222,14 +1222,15 @@ export default class Infrastructure extends ComponentBase {
     } else {
       recordInfo('map is not null');
 
-      that.getLocationWeatherCore({
-        data: map,
-        callback,
+      callback({
+        map,
       });
     }
   };
 
   getLocationWeather = ({ callback = null }) => {
+    recordExecute('getLocationWeather');
+
     const that = this;
 
     that.getCurrentLocation({
