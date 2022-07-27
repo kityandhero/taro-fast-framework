@@ -1236,6 +1236,12 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getLocationWeatherCore = ({ data, callback = null }) => {
+    recordExecute('getLocationWeatherCore');
+
+    recordObject({
+      data,
+    });
+
     const {
       address_component: { province, city },
     } = data;
