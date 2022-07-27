@@ -561,7 +561,7 @@ export default class Infrastructure extends ComponentBase {
     this.doWorkWhenShow();
   };
 
-  doWorkWhenShow = () => {
+  doWorkWhenShow = (callback = null) => {
     recordExecute('doWorkWhenShow');
 
     const checkNeedSignInWhenShowResult = this.checkNeedSignInWhenShow();
@@ -613,6 +613,10 @@ export default class Infrastructure extends ComponentBase {
               },
             );
           }, 2000);
+        }
+
+        if (isFunction(callback)) {
+          callback();
         }
       }
     }
@@ -786,6 +790,8 @@ export default class Infrastructure extends ComponentBase {
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
+
+      recordDebug('set this.firstShowHasTriggered to true');
     } else {
       recordDebug(
         `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
