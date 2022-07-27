@@ -649,6 +649,8 @@ export default class Infrastructure extends ComponentBase {
 
         this.repeatDoWorkWhenShow = true;
 
+        recordDebug('set this.repeatDoWorkWhenShow to true');
+
         setTimeout(() => {
           redirectTo(signInPath);
         }, 200);
@@ -657,17 +659,25 @@ export default class Infrastructure extends ComponentBase {
           spin: false,
         });
 
+        recordDebug('set state spin to false');
+
         this.repeatDoWorkWhenShow = true;
+
+        recordDebug('set this.repeatDoWorkWhenShow to true');
 
         this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
       }
     } else {
       that.setState({ signInSilentOverlayVisible: true });
 
+      recordDebug('set state signInSilentOverlayVisible to true');
+
       that.checkSession(() => {
         that.checkTicketValidity({
           callback: () => {
             that.setState({ signInSilentOverlayVisible: false });
+
+            recordDebug('set state signInSilentOverlayVisible to false');
 
             that.doDidMountTask();
           },
@@ -685,6 +695,8 @@ export default class Infrastructure extends ComponentBase {
 
               this.repeatDoWorkWhenShow = true;
 
+              recordDebug('set this.repeatDoWorkWhenShow to true');
+
               redirectTo(signInPath);
             } else {
               that.setState({
@@ -692,7 +704,13 @@ export default class Infrastructure extends ComponentBase {
                 signInSilentOverlayVisible: false,
               });
 
+              recordDebug(
+                'set state spin to true, signInSilentOverlayVisible to false',
+              );
+
               this.repeatDoWorkWhenShow = true;
+
+              recordDebug('set this.repeatDoWorkWhenShow to true');
 
               this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
             }
@@ -703,6 +721,10 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {
+    recordExecute(
+      'doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn',
+    );
+
     this.setState({
       signInPromptModalVisible: true,
     });
