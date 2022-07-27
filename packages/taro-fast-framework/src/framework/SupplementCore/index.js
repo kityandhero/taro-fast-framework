@@ -70,6 +70,12 @@ import Common from '../Common';
  */
 class SupplementCore extends Common {
   doShowTask = () => {
+    recordExecute('doShowTask');
+
+    recordDebug(
+      `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
+    );
+
     if (!this.firstShowHasTriggered) {
       this.doWorkWhenFirstShow();
 
@@ -81,13 +87,21 @@ class SupplementCore extends Common {
 
       that.setCurrentInfo();
 
-      that.checkSession(() => {
-        if (that.verifyTicketValidity) {
-          that.checkTicketValidity({
-            callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
-          });
-        }
-      });
+      recordDebug(
+        `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
+      );
+
+      if (this.repeatDoWorkWhenShow) {
+        this.doWorkWhenShow();
+      } else {
+        that.checkSession(() => {
+          if (that.verifyTicketValidity) {
+            that.checkTicketValidity({
+              callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
+            });
+          }
+        });
+      }
 
       that.doWorkWhenRepeatedShow();
 

@@ -358,6 +358,8 @@ export default class Infrastructure extends ComponentBase {
 
   repeatDoWorkWhenShow = false;
 
+  firstShowHasTriggered = false;
+
   constructor(props) {
     super(props);
 
@@ -776,11 +778,19 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doShowTask = () => {
+    recordDebug(
+      `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
+    );
+
     if (!this.firstShowHasTriggered) {
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
     } else {
+      recordDebug(
+        `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
+      );
+
       if (this.repeatDoWorkWhenShow) {
         this.doWorkWhenShow();
       }
