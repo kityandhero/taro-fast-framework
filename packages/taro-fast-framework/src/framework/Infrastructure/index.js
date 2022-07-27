@@ -1244,12 +1244,20 @@ export default class Infrastructure extends ComponentBase {
 
     const {
       address_component: { province, city },
-    } = data;
+    } = {
+      ...{
+        address_component: {
+          province: '',
+          city: '',
+        },
+      },
+      ...(data || {}),
+    };
 
     this.getWeather({
       data: {
-        province,
-        city,
+        province: province || '',
+        city: city || '',
       },
       callback,
     });
