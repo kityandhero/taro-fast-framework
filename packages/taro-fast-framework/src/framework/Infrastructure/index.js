@@ -22,6 +22,7 @@ import {
   recordDebug,
   recordError,
   recordExecute,
+  recordInfo,
   recordLog,
   recordObject,
   redirectTo,
@@ -1198,11 +1199,15 @@ export default class Infrastructure extends ComponentBase {
   }
 
   getCurrentLocation = ({ callback = null }) => {
+    recordExecute('getCurrentLocation');
+
     const that = this;
 
     const map = getMap();
 
-    if (map == null) {
+    if ((map || null) == null) {
+      recordInfo('map is null');
+
       that.obtainLocation({
         successCallback: ({ map: mapSource }) => {
           callback({
@@ -1215,6 +1220,8 @@ export default class Infrastructure extends ComponentBase {
         failCallback: null,
       });
     } else {
+      recordInfo('map is not null');
+
       that.getLocationWeatherCore({
         data: map,
         callback,
