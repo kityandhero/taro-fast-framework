@@ -640,6 +640,10 @@ export default class Infrastructure extends ComponentBase {
           redirectTo(signInPath);
         }, 200);
       } else {
+        that.setState({
+          spin: false,
+        });
+
         this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
       }
     } else {
