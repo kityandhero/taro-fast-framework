@@ -560,6 +560,8 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenShow = () => {
+    recordExecute('doWorkWhenShow');
+
     const checkNeedSignInWhenShowResult = this.checkNeedSignInWhenShow();
 
     if (!checkNeedSignInWhenShowResult) {
