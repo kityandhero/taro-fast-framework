@@ -1,0 +1,75 @@
+<html>
+  <header>
+    <title>test</title>
+    <style>
+      .body {
+        --ratio: 0.5;
+      }
+
+      .card-wrap {
+        text-align: center;
+      }
+
+      .news1 {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        background: skyblue;
+        overflow: visible;
+      }
+
+      .ribbon {
+        width: calc(106px * var(--ratio));
+        height: calc(108px * var(--ratio));
+        overflow: hidden;
+        position: absolute;
+        top: calc(-6px * var(--ratio));
+        left: calc(-6px * var(--ratio));
+      }
+
+      .ribbon1 {
+        line-height: calc(18px * var(--ratio));
+        text-align: center;
+        transform: rotate(-45deg);
+        position: relative;
+        padding: calc(8px * var(--ratio)) 0;
+        left: calc(-33px * var(--ratio));
+        top: calc(26px * var(--ratio));
+        width: calc(150px * var(--ratio));
+        background: goldenrod;
+        color: white;
+        box-shadow: 0 calc(5px * var(--ratio)) calc(5px * var(--ratio))
+          rgba(0, 0, 0, 0.1);
+        letter-spacing: 1px;
+        font-size: 8px;
+      }
+
+      .ribbon1:before,
+      .ribbon1:after {
+        content: '';
+        border-top: calc(4px * var(--ratio)) solid #4e7c7d;
+        border-left: calc(4px * var(--ratio)) solid transparent;
+        border-right: calc(4px * var(--ratio)) solid transparent;
+        position: absolute;
+        bottom: calc(-4px * var(--ratio));
+      }
+
+      .ribbon1:before {
+        left: 0;
+      }
+
+      .ribbon1:after {
+        right: 0;
+      }
+    </style>
+  </header>
+  <body class="body">
+    <div class="card-wrap">
+      <div class="news1">
+        <div class="ribbon">
+          <div class="ribbon1">热点</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

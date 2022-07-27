@@ -146,6 +146,12 @@ const examplePathCollection = {
   scrollBox: {
     path: '/example/pages/scrollBox/index',
   },
+  titleBox: {
+    path: '/example/pages/titleBox/index',
+  },
+  angleBox: {
+    path: '/example/pages/angleBox/index',
+  },
   radio: {
     path: '/example/pages/radio/index',
   },
