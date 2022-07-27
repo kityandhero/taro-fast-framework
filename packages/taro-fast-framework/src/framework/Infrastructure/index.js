@@ -673,7 +673,7 @@ export default class Infrastructure extends ComponentBase {
           },
           signInSilentFailCallback: () => {
             recordDebug(
-              'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
+              'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure.',
             );
 
             if (this.autoRedirectToSignIn) {
