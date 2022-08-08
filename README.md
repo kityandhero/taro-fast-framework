@@ -1,6 +1,6 @@
-# Antd Management Fast Framework
+# Taro Fast Framework
 
-This project is a repackaging of [Ant Design](https://ant.design/) and [Ant Design Pro](https://pro.ant.design) to quickly build an interface for back-end management projects. Follow is the quick guide for how to use.
+This project is a repackaging of [Taro](https://taro-docs.jd.com/) to quickly build an interface for back-end management projects. Follow is the quick guide for how to use.
 
 ## Environment Prepare
 
@@ -30,45 +30,71 @@ npm run lerna:b
 
 ## Provided Scripts
 
-Antd Management Fast Framework provides some useful script to help you quick start and build with web project, code style check and test.
+Taro Fast Framework provides some useful script to help you quick start and build with web project, code style check and test.
 
 Scripts provided in `package.json`. It's safe to modify or add additional script:
 
-### Build Framework And Start The Sample Project
+### Build Framework And Start The Weapp Sample Project
 
 ```bash
-npm run start:build
+npm run start:weapp:build
 ```
 
 ### Start The Sample Project Only
 
 ```bash
-npm start
+npm run start:weapp:simple
+
+(Ensure that the build is executed at least once)
 ```
 
-Wait for execution to complete, Open your browser to browse the website http://localhost:8841, The simulated login account and password is `admin/admin`
+Wait for execution to complete, you can open wechat development tool to view.
 
 ### Build Framework
 
 ```bash
-npm build:f
+npm run build:all
 ```
 
 ### Example Project Screenshot Preview
 
-[![Alt text](./document/images/01.png)](01.png)
+[![Alt text](./documents/screenshot/01.png)](01.png)
 
-[![Alt text](./document/images/02.png)](01.png)
+******
 
-[![Alt text](./document/images/03.png)](01.png)
+[![Alt text](./documents/screenshot/02.png)](01.png)
 
-[![Alt text](./document/images/04.png)](01.png)
+******
 
-[![Alt text](./document/images/05.png)](01.png)
+[![Alt text](./documents/screenshot/03.png)](01.png)
 
-[![Alt text](./document/images/06.png)](01.png)
+******
 
-[![Alt text](./document/images/07.png)](01.png)
+[![Alt text](./documents/screenshot/04.png)](01.png)
+
+******
+
+[![Alt text](./documents/screenshot/05.png)](01.png)
+
+******
+
+[![Alt text](./documents/screenshot/06.png)](01.png)
+
+******
+
+[![Alt text](./documents/screenshot/07.png)](01.png)
+
+******
+
+[![Alt text](./documents/screenshot/08.png)](01.png)
+
+******
+
+[![Alt text](./documents/screenshot/09.png)](01.png)
+
+******
+
+[![Alt text](./documents/screenshot/10.png)](01.png)
 
 ## More
 
@@ -76,11 +102,11 @@ welcome any feedback in our [github](https://github.com/kityandhero/taro-fast-fr
 
 ## Credits
 
-Many thanks to the following individuals, organisations and projects whose work is so important to the success of Antd Management Fast Framework (in no particular order):
+Many thanks to the following individuals, organisations and projects whose work is so important to the success of Taro Fast Framework (in no particular order):
 
-- Ant Design
-- Ant Design Pro
-- Umi
+- Taro
+- Rollup
+- Lodash
 - ...
 
 More dependencies are not listed, thanks all of them.
