@@ -85,12 +85,17 @@ const externalCollection = [
   'redux',
   'redux-logger',
   'redux-thunk',
-  'dva-loading',
-  'dva-core',
   'classnames',
   'prismjs',
   'babel-plugin-prismjs',
   'object-hash',
+  'invariant',
+  'flatten',
+  'mm',
+  'warning',
+  'global',
+  'is-plain-object',
+  'redux-saga',
 ];
 
 export function buildConfig({

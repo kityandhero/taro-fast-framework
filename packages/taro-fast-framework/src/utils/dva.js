@@ -1,7 +1,6 @@
-import { create } from 'dva-core';
-import createLoading from 'dva-loading';
-
+// import createLoading from 'dva-loading';
 import { recordError } from 'taro-fast-common/es/utils/tools';
+import { create } from 'taro-fast-dva/es';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import {
@@ -17,9 +16,9 @@ let registered;
 
 function createApp(opt) {
   app = create(opt);
-  app.use(createLoading({}));
+  // app.use(createLoading({}));
 
-  if (!registered) opt.models.forEach((model) => app.model(model));
+  if (!registered) opt.models.forEach(model => app.model(model));
   registered = true;
   app.start();
 

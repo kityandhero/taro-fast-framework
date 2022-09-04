@@ -30,6 +30,7 @@ export function buildConfig({ terser: whetherTerser = false }) {
     inputFile,
     terser: whetherTerser,
     externalCollection: [
+      ...['taro-fast-dva/es'],
       ...[
         'taro-fast-common/es/utils/cacheAssist',
         'taro-fast-common/es/utils/constants',

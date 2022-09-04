@@ -11,7 +11,7 @@ import {
 
 import { getQQMapWX } from '../../utils/tools';
 
-export default class PageWrapper extends AuthorizationWrapper {
+class PageWrapperCore extends AuthorizationWrapper {
   loadRemoteRequestDelay = 100;
 
   useFadeSpinWrapper = true;
@@ -44,7 +44,7 @@ export default class PageWrapper extends AuthorizationWrapper {
    * 登录校验失败时候的回调, 例如访问需要登录才能调用的接口
    * @returns
    */
-  authorizeFailCallback = (remoteData) => {
+  authorizeFailCallback = remoteData => {
     recordObject(remoteData);
   };
 
@@ -80,7 +80,7 @@ export default class PageWrapper extends AuthorizationWrapper {
     return (
       transformListData({
         list: list,
-        convert: (data) => {
+        convert: data => {
           const { name, code } = data;
 
           return {
@@ -123,3 +123,5 @@ export default class PageWrapper extends AuthorizationWrapper {
     }
   };
 }
+
+export default PageWrapperCore;
