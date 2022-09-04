@@ -1,4 +1,4 @@
-import isPlainObject from 'is-plain-object';
+import { isPlainObject } from 'is-plain-object';
 
 export { isPlainObject };
 export const isArray = Array.isArray.bind(Array);

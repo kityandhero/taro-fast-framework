@@ -2,7 +2,7 @@ const SHOW = '@@DVA_LOADING/SHOW';
 const HIDE = '@@DVA_LOADING/HIDE';
 const NAMESPACE = 'loading';
 
-function createLoading(opts = {}) {
+export function createLoading(opts = {}) {
   const namespace = opts.namespace || NAMESPACE;
 
   const { only = [], except = [] } = opts;
@@ -85,4 +85,12 @@ function createLoading(opts = {}) {
   };
 }
 
-export default createLoading;
+/**
+ * 占位函数
+ *
+ * @export
+ * @returns
+ */
+export async function empty() {
+  return {};
+}

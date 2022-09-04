@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { effects as sagaEffects } from 'redux-saga';
+import * as sagaEffects from 'redux-saga/effects';
 import warning from 'warning';
 
 import { NAMESPACE_SEP } from './constants';

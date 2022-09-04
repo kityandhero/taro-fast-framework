@@ -19,7 +19,7 @@ function createApp(opt) {
   app = create(opt);
   app.use(createLoading({}));
 
-  if (!registered) opt.models.forEach(model => app.model(model));
+  if (!registered) opt.models.forEach((model) => app.model(model));
   registered = true;
   app.start();
 
