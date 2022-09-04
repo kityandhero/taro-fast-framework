@@ -1,5 +1,6 @@
 export { default as ActionSheet } from './ActionSheet';
 export { default as ActivityIndicator } from './ActivityIndicator';
+export { default as AngleBox } from './AngleBox';
 export { default as Avatar } from './Avatar';
 export { default as BackboardBox } from './BackboardBox';
 export { default as BackTop } from './BackTop';
@@ -68,6 +69,7 @@ export { default as Tabs } from './Tabs';
 export { default as Tag } from './Tag';
 export { default as TextAreaItem } from './TextAreaItem';
 export { default as ThumbnailBox } from './ThumbnailBox';
+export { default as TitleBox } from './TitleBox';
 export { default as Transition } from './Transition';
 export { default as TranslucentBox } from './TranslucentBox';
 export { default as VariableView } from './VariableView';

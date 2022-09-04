@@ -22,6 +22,7 @@ import {
   recordDebug,
   recordError,
   recordExecute,
+  recordInfo,
   recordLog,
   recordObject,
   redirectTo,
@@ -37,11 +38,13 @@ import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   BackTop,
   Cascader,
+  CenterBox,
   FadeView,
   FixedBox,
   FlexBox,
   Footer,
   Line,
+  Modal,
   Overlay,
   Popup,
   Spin,
@@ -354,6 +357,10 @@ export default class Infrastructure extends ComponentBase {
   sideWidth = 100;
   sideStyle = {};
 
+  repeatDoWorkWhenShow = false;
+
+  firstShowHasTriggered = false;
+
   constructor(props) {
     super(props);
 
@@ -362,6 +369,7 @@ export default class Infrastructure extends ComponentBase {
       ...underlyingState,
       ...{
         spin: true,
+        signInPromptModalVisible: false,
         signInSilentOverlayVisible: false,
         backTopVisible: false,
         capsulePromptVisible: false,
@@ -551,9 +559,15 @@ export default class Infrastructure extends ComponentBase {
 
     this.setCurrentInfo();
 
-    const checkNeedSignInDidMountResult = this.checkNeedSignInDidMount();
+    this.doWorkWhenShow();
+  };
 
-    if (!checkNeedSignInDidMountResult) {
+  doWorkWhenShow = (callback = null) => {
+    recordExecute('doWorkWhenShow');
+
+    const checkNeedSignInWhenShowResult = this.checkNeedSignInWhenShow();
+
+    if (!checkNeedSignInWhenShowResult) {
       this.doWorkWhenCheckNeedSignInDidMountFail();
     } else {
       const checkPermissionResult = this.checkPermission();
@@ -561,6 +575,8 @@ export default class Infrastructure extends ComponentBase {
       if (!checkPermissionResult) {
         this.doWorkWhenCheckPermission();
       } else {
+        this.repeatDoWorkWhenShow = false;
+
         this.doWorkBeforeAdjustDidMount();
 
         this.doWorkAdjustDidMount();
@@ -599,16 +615,20 @@ export default class Infrastructure extends ComponentBase {
             );
           }, 2000);
         }
+
+        if (isFunction(callback)) {
+          callback();
+        }
       }
     }
   };
 
-  checkNeedSignInDidMount = () => {
+  checkNeedSignInWhenShow = () => {
     if (!this.needSignIn) {
       return true;
     }
 
-    recordExecute('checkNeedSignInDidMount');
+    recordExecute('checkNeedSignInWhenShow');
 
     const signInResult = this.getSignInResult();
     const verifySignInResult = getVerifySignInResult();
@@ -636,25 +656,43 @@ export default class Infrastructure extends ComponentBase {
           throw new Error('未配置登录页面signInPath');
         }
 
+        this.repeatDoWorkWhenShow = true;
+
+        recordDebug('set this.repeatDoWorkWhenShow to true');
+
         setTimeout(() => {
           redirectTo(signInPath);
         }, 200);
       } else {
+        that.setState({
+          spin: false,
+        });
+
+        recordDebug('set state spin to false');
+
+        this.repeatDoWorkWhenShow = true;
+
+        recordDebug('set this.repeatDoWorkWhenShow to true');
+
         this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
       }
     } else {
       that.setState({ signInSilentOverlayVisible: true });
+
+      recordDebug('set state signInSilentOverlayVisible to true');
 
       that.checkSession(() => {
         that.checkTicketValidity({
           callback: () => {
             that.setState({ signInSilentOverlayVisible: false });
 
+            recordDebug('set state signInSilentOverlayVisible to false');
+
             that.doDidMountTask();
           },
           signInSilentFailCallback: () => {
             recordDebug(
-              'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure',
+              'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure.',
             );
 
             if (this.autoRedirectToSignIn) {
@@ -664,12 +702,24 @@ export default class Infrastructure extends ComponentBase {
                 throw new Error('未配置登录页面signInPath');
               }
 
+              this.repeatDoWorkWhenShow = true;
+
+              recordDebug('set this.repeatDoWorkWhenShow to true');
+
               redirectTo(signInPath);
             } else {
               that.setState({
                 spin: false,
                 signInSilentOverlayVisible: false,
               });
+
+              recordDebug(
+                'set state spin to true, signInSilentOverlayVisible to false',
+              );
+
+              this.repeatDoWorkWhenShow = true;
+
+              recordDebug('set this.repeatDoWorkWhenShow to true');
 
               this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
             }
@@ -680,9 +730,13 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {
-    recordConfig(
-      'doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn do nothing, if you need to do anything when check sign in fail and do not aut redirect to sign in path, please override it: doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {}',
+    recordExecute(
+      'doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn',
     );
+
+    this.setState({
+      signInPromptModalVisible: true,
+    });
   };
 
   checkPermission = () => {
@@ -698,6 +752,8 @@ export default class Infrastructure extends ComponentBase {
   checkAuthority = (permission) => checkHasAuthority(permission);
 
   doWorkWhenCheckPermissionFail = () => {
+    this.repeatDoWorkWhenShow = true;
+
     recordExecute('doWorkWhenCheckPermissionFail');
 
     const text = `无交互权限: ${this.componentAuthority || ''}`;
@@ -717,16 +773,35 @@ export default class Infrastructure extends ComponentBase {
   };
 
   goToSignIn = () => {
-    if (this.needSignIn) {
+    const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+
+    if (stringIsNullOrWhiteSpace(signInPath)) {
+      throw new Error('未配置登录页面signInPath');
     }
+
+    navigateTo(signInPath);
   };
 
   doShowTask = () => {
+    recordDebug(
+      `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
+    );
+
     if (!this.firstShowHasTriggered) {
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
+
+      recordDebug('set this.firstShowHasTriggered to true');
     } else {
+      recordDebug(
+        `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
+      );
+
+      if (this.repeatDoWorkWhenShow) {
+        this.doWorkWhenShow();
+      }
+
       this.adjustInternalDataOnRepeatedShow();
 
       this.doWorkWhenRepeatedShow();
@@ -1124,11 +1199,15 @@ export default class Infrastructure extends ComponentBase {
   }
 
   getCurrentLocation = ({ callback = null }) => {
+    recordExecute('getCurrentLocation');
+
     const that = this;
 
     const map = getMap();
 
-    if (map == null) {
+    if ((map || null) == null) {
+      recordInfo('map is null');
+
       that.obtainLocation({
         successCallback: ({ map: mapSource }) => {
           callback({
@@ -1141,14 +1220,17 @@ export default class Infrastructure extends ComponentBase {
         failCallback: null,
       });
     } else {
-      that.getLocationWeatherCore({
-        data: map,
-        callback,
+      recordInfo('map is not null');
+
+      callback({
+        map,
       });
     }
   };
 
   getLocationWeather = ({ callback = null }) => {
+    recordExecute('getLocationWeather');
+
     const that = this;
 
     that.getCurrentLocation({
@@ -1162,14 +1244,28 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getLocationWeatherCore = ({ data, callback = null }) => {
+    recordExecute('getLocationWeatherCore');
+
+    recordObject({
+      data,
+    });
+
     const {
       address_component: { province, city },
-    } = data;
+    } = {
+      ...{
+        address_component: {
+          province: '',
+          city: '',
+        },
+      },
+      ...(data || {}),
+    };
 
     this.getWeather({
       data: {
-        province,
-        city,
+        province: province || '',
+        city: city || '',
       },
       callback,
     });
@@ -1602,6 +1698,65 @@ export default class Infrastructure extends ComponentBase {
     );
   };
 
+  buildSignInPromptArea = () => {
+    const { signInPromptModalVisible } = this.state;
+
+    return (
+      <Modal
+        visible={signInPromptModalVisible}
+        header={<CenterBox>操作提示</CenterBox>}
+        hideFooter
+      >
+        <View
+          style={{
+            paddingTop: transformSize(14),
+            paddingBottom: transformSize(14),
+          }}
+        >
+          <CenterBox>登录后才能查看这里的内容哦，快去登陆吧。</CenterBox>
+        </View>
+        <CenterBox>
+          <View
+            style={{
+              width: transformSize(380),
+            }}
+            onClick={() => {
+              this.setState({ signInPromptModalVisible: false });
+
+              this.goToSignIn();
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: '#128904',
+                borderRadius: transformSize(14),
+                height: transformSize(60),
+                lineHeight: transformSize(60),
+                color: '#fff',
+                textAlign: 'center',
+                fontSize: transformSize(28),
+                marginTop: transformSize(14),
+                marginBottom: transformSize(14),
+                marginLeft: transformSize(12),
+                marginRight: transformSize(12),
+              }}
+            >
+              立即登录
+            </View>
+          </View>
+        </CenterBox>
+      </Modal>
+    );
+  };
+
+  buildSignInPromptWrapper = () => {
+    if (!this.needSignIn || this.autoRedirectToSignIn) {
+      return null;
+    }
+
+    return this.buildSignInPromptArea();
+  };
+
   /**
    * 创建自动登录提示器
    */
@@ -1873,6 +2028,8 @@ export default class Infrastructure extends ComponentBase {
 
           {this.buildExtendArea()}
 
+          {this.buildSignInPromptWrapper()}
+
           {this.buildSignInSilentOverlay()}
         </>
       );
@@ -1893,6 +2050,8 @@ export default class Infrastructure extends ComponentBase {
         {this.buildFullAdministrativeDivisionSelectorArea()}
 
         {this.buildExtendArea()}
+
+        {this.buildSignInPromptWrapper()}
 
         {this.buildSignInSilentOverlay()}
       </>

@@ -53,6 +53,16 @@ const list = [
     path: pathCollection.example.scrollBox.path,
   },
   {
+    id: 'TitleBox',
+    name: '标题容器',
+    path: pathCollection.example.titleBox.path,
+  },
+  {
+    id: 'AngleBox',
+    name: '角标容器',
+    path: pathCollection.example.angleBox.path,
+  },
+  {
     id: 'HorizontalCenterBox',
     name: '水平居中',
     path: pathCollection.example.horizontalCenterBox.path,

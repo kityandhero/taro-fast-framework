@@ -70,10 +70,22 @@ import Common from '../Common';
  */
 class SupplementCore extends Common {
   doShowTask = () => {
+    recordExecute('doShowTask');
+
+    recordDebug(
+      `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
+    );
+
     if (!this.firstShowHasTriggered) {
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
+
+      recordDebug('set this.firstShowHasTriggered to true');
+
+      this.doWorkWhenEveryShow();
+
+      this.doWorkAfterShow();
     } else {
       const that = this;
 
@@ -81,46 +93,74 @@ class SupplementCore extends Common {
 
       that.setCurrentInfo();
 
-      that.checkSession(() => {
-        if (that.verifyTicketValidity) {
-          that.checkTicketValidity({
-            callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
-          });
-        }
-      });
+      recordDebug(
+        `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
+      );
 
-      that.doWorkWhenRepeatedShow();
+      if (this.repeatDoWorkWhenShow) {
+        this.doWorkWhenShow(() => {
+          that.doWorkWhenRepeatedShow();
 
-      if (that.needReLocationWhenRepeatedShow) {
-        const useLocation = defaultSettingsLayoutCustom.getUseLocation();
-        const locationMode = getLocationMode();
+          that.doWorkWithNeedReLocationWhenRepeatedShow();
 
-        if (
-          (useLocation || false) &&
-          locationMode === locationModeCollection.auto
-        ) {
-          that.obtainLocation({
-            successCallback: ({ location, map }) => {
-              that.executeLogicAfterAutomaticReLocationSuccessWhenRepeatedShow({
-                location,
-                map,
-                force: false,
-              });
-            },
-            force: false,
-            showLoading: false,
-            fromLaunch: false,
-            failCallback: null,
-          });
-        } else {
-          that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow();
-        }
+          this.doWorkWhenEveryShow();
+
+          this.doWorkAfterShow();
+        });
+      } else {
+        that.checkSession(() => {
+          if (that.verifyTicketValidity) {
+            that.checkTicketValidity({
+              callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
+            });
+          }
+        });
+
+        that.doWorkWhenRepeatedShow();
+
+        that.doWorkWithNeedReLocationWhenRepeatedShow();
+
+        this.doWorkWhenEveryShow();
+
+        this.doWorkAfterShow();
       }
     }
+  };
 
-    this.doWorkWhenEveryShow();
+  doWorkWithNeedReLocationWhenRepeatedShow = () => {
+    recordExecute('doWorkWithNeedReLocationWhenRepeatedShow');
 
-    this.doWorkAfterShow();
+    const that = this;
+
+    recordDebug(
+      `this.needReLocationWhenRepeatedShow is ${this.needReLocationWhenRepeatedShow} in doShowTask`,
+    );
+
+    if (that.needReLocationWhenRepeatedShow) {
+      const useLocation = defaultSettingsLayoutCustom.getUseLocation();
+      const locationMode = getLocationMode();
+
+      if (
+        (useLocation || false) &&
+        locationMode === locationModeCollection.auto
+      ) {
+        that.obtainLocation({
+          successCallback: ({ location, map }) => {
+            that.executeLogicAfterAutomaticReLocationSuccessWhenRepeatedShow({
+              location,
+              map,
+              force: false,
+            });
+          },
+          force: false,
+          showLoading: false,
+          fromLaunch: false,
+          failCallback: null,
+        });
+      } else {
+        that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow();
+      }
+    }
   };
 
   obtainLocation = ({
