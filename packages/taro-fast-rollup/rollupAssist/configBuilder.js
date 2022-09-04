@@ -1,15 +1,15 @@
-import resolve from '@rollup/plugin-node-resolve';
-import json from '@rollup/plugin-json';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
-import postcss from 'rollup-plugin-postcss';
-import svgr from '@svgr/rollup';
-import url from '@rollup/plugin-url';
-import { terser } from 'rollup-plugin-terser';
-import babelConfig from '@rollup/plugin-babel';
 // import pxtorem from 'postcss-pxtorem';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import postcss from 'rollup-plugin-postcss';
+import { terser } from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript2';
+import babelConfig from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
+import url from '@rollup/plugin-url';
+import svgr from '@svgr/rollup';
 
 // import { pxToRemRoot } from '../../taro-fast-common/src/utils/constants';
 

@@ -1,28 +1,20 @@
-import { buildConfig as buildConfigCore } from '../../taro-fast-rollup/rollupAssist/configBuilder'
+import { buildConfig as buildConfigCore } from '../../taro-fast-rollup/rollupAssist/configBuilder';
 
 const inputFile = {
   ...{
-    index: 'src/index.js',
+    'dva-core/index': 'src/dva-core/index.js',
   },
-}
+  ...{
+    'dva-loading/index': 'src/dva-loading/index.js',
+  },
+};
 
 export function buildConfig({ terser: whetherTerser = false }) {
   return buildConfigCore({
     inputFile,
     terser: whetherTerser,
-    externalCollection: [
-      'taro-fast-common/es/utils/cacheAssist',
-      'taro-fast-common/es/utils/constants',
-      'taro-fast-common/es/utils/mediaDefault',
-      'taro-fast-common/es/utils/tips',
-      'taro-fast-common/es/utils/tools',
-      'taro-fast-common/es/utils/typeCheck',
-      'taro-fast-common/es/utils/typeConvert',
-      'taro-fast-common/es/utils/provider',
-      'taro-fast-common/es/utils/hooks',
-      'taro-fast-common/es/customComponents',
-    ],
-  })
+    externalCollection: [],
+  });
 }
 
 /**
@@ -32,5 +24,5 @@ export function buildConfig({ terser: whetherTerser = false }) {
  * @returns
  */
 export function emptyExport() {
-  return {}
+  return {};
 }
