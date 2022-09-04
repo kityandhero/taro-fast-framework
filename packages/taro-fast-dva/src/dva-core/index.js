@@ -7,7 +7,7 @@ import createPromiseMiddleware from './createPromiseMiddleware';
 import createStore from './createStore';
 import getReducer from './getReducer';
 import getSaga from './getSaga';
-import Plugin, { filterHooks } from './Plugin';
+import Plugin, { filterHooks } from './plugin';
 import prefixNamespace from './prefixNamespace';
 import {
   run as runSubscription,
