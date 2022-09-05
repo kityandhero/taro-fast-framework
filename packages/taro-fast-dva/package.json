@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.9",
+    "@reduxjs/toolkit": "^1.8.5",
     "flatten": "^1.0.3",
     "global": "^4.4.0",
     "invariant": "^2.2.4",

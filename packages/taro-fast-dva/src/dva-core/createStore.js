@@ -1,7 +1,8 @@
 import flatten from 'flatten';
 import win from 'global/window';
 import invariant from 'invariant';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 import { isArray, returnSelf } from './utils';
 
@@ -11,7 +12,7 @@ export default function({
   plugin,
   sagaMiddleware,
   promiseMiddleware,
-  createOpts: { setupMiddlewares = returnSelf },
+  createOpts: { setupMiddleWares = returnSelf },
 }) {
   // extra enhancers
   const extraEnhancers = plugin.get('extraEnhancers');
@@ -20,11 +21,11 @@ export default function({
     `[app.start] extraEnhancers should be array, but got ${typeof extraEnhancers}`,
   );
 
-  const extraMiddlewares = plugin.get('onAction');
-  const middlewares = setupMiddlewares([
+  const extraMiddleWares = plugin.get('onAction');
+  const middleWares = setupMiddleWares([
     promiseMiddleware,
     sagaMiddleware,
-    ...flatten(extraMiddlewares),
+    ...flatten(extraMiddleWares),
   ]);
 
   const composeEnhancers =
@@ -33,7 +34,11 @@ export default function({
       ? win.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, maxAge: 30 })
       : compose;
 
-  const enhancers = [applyMiddleware(...middlewares), ...extraEnhancers];
+  const enhancers = [applyMiddleware(...middleWares), ...extraEnhancers];
 
-  return createStore(reducers, initialState, composeEnhancers(...enhancers));
+  return configureStore({
+    reducer: reducers,
+    preloadedState: initialState,
+    enhancers: composeEnhancers(...enhancers),
+  });
 }
