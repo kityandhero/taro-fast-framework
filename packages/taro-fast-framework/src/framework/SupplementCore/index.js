@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro';
 
+import { getCache, setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import {
   locateResult,
   locationModeCollection,
@@ -17,12 +18,14 @@ import {
   recordLog,
   recordObject,
   redirectTo,
+  showErrorMessage,
   showInfoMessage,
   sleep,
   stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
+  isNumber,
   isObject,
   isString,
   isUndefined,
@@ -1290,6 +1293,36 @@ class SupplementCore extends Common {
     recordExecute('signInSilentCore');
 
     // Tips.loading('处理中');
+
+    const tryRefreshSessionKey = 'tryRefreshSessionKeyTimes';
+
+    let tryRefreshSession = getCache({ key: tryRefreshSessionKey });
+
+    if (!isNumber(tryRefreshSession)) {
+      tryRefreshSession = 1;
+
+      setCache({
+        key: tryRefreshSessionKey,
+        value: tryRefreshSession,
+      });
+    } else {
+      // 最多重试 10 次
+      if (tryRefreshSession > 10) {
+        showErrorMessage({
+          message:
+            'signInSilentCore 重试超过最大限制,请检查 refreshSession 接口返回数据',
+        });
+
+        return;
+      }
+
+      tryRefreshSession += 1;
+
+      setCache({
+        key: tryRefreshSessionKey,
+        value: tryRefreshSession,
+      });
+    }
 
     const that = this;
 
