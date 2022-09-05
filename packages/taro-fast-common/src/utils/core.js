@@ -21,6 +21,10 @@ export function getTaroGlobalData() {
         return null;
       }
 
+      if (app.$app == null) {
+        return {};
+      }
+
       return app.$app.taroGlobalData;
 
     case ENV_TYPE.ALIPAY:
