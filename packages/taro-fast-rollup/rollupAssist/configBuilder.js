@@ -96,6 +96,7 @@ const externalCollection = [
   'global',
   'is-plain-object',
   'redux-saga',
+  '@reduxjs/toolkit',
 ];
 
 export function buildConfig({
