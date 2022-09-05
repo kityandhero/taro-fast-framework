@@ -1,4 +1,5 @@
 import {
+  handleDefaultParams,
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
@@ -14,12 +15,14 @@ export default {
   },
 
   effects: {
-    *refreshSession({ payload }, { call, put }) {
+    *refreshSession({ payload, alias }, { call, put }) {
       const response = yield call(refreshSessionData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
     *exchangePhone({ payload }, { call, put }) {
@@ -28,6 +31,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
   },

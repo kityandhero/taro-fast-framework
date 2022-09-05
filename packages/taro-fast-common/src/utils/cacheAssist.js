@@ -162,6 +162,16 @@ export function getCache({ key }) {
   return cachePool.get(key);
 }
 
+export function keys() {
+  const cachePool = getCachePool();
+
+  if (cachePool == null) {
+    throw new Error('cache pool not exist');
+  }
+
+  return cachePool.keys();
+}
+
 /**
  * Gets multiple saved values from the cache. Returns an empty object {} if not found or expired. If the value was found it returns an object with the key value pair.
  * @param {*} list

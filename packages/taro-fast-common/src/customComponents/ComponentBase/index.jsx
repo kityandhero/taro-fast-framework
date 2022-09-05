@@ -356,7 +356,7 @@ class ComponentBase extends Component {
     return dispatch;
   };
 
-  dispatchApi = ({ type, payload }) => {
+  dispatchApi = ({ type, payload, alias = 'data' }) => {
     const dispatch = this.getDispatchWrapper();
 
     recordDebug(`modal access: ${type}`);
@@ -381,7 +381,7 @@ class ComponentBase extends Component {
       }
     }
 
-    return dispatch({ type, payload });
+    return dispatch({ type, payload, alias });
   };
 
   /**

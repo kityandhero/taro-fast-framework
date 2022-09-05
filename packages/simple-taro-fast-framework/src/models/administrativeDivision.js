@@ -1,4 +1,5 @@
 import {
+  handleDefaultParams,
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
@@ -20,6 +21,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleListData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
   },

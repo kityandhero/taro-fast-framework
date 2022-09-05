@@ -1,4 +1,5 @@
 import {
+  handleDefaultParams,
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
@@ -16,12 +17,14 @@ export default {
   },
 
   effects: {
-    *getMetaData({ payload }, { call, put }) {
+    *getMetaData({ payload, alias }, { call, put }) {
       const response = yield call(getData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
     *exchangeShare({ payload }, { call, put }) {
@@ -30,6 +33,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
   },

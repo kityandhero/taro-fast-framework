@@ -45,14 +45,14 @@ export const reducerCommonNameCollection = {
 };
 
 export const reducerCommonCollection = {
-  handleCommonData(state, action) {
-    return handleCommonDataAssist(state, action);
+  handleCommonData(state, action, namespace) {
+    return handleCommonDataAssist(state, action, namespace);
   },
-  handleListData(state, action) {
-    return handleListDataAssist(state, action);
+  handleListData(state, action, namespace) {
+    return handleListDataAssist(state, action, namespace);
   },
-  handlePageListData(state, action) {
-    return handlePageListDataAssist(state, action);
+  handlePageListData(state, action, namespace) {
+    return handlePageListDataAssist(state, action, namespace);
   },
 };
 
@@ -68,6 +68,12 @@ export const tacitlyState = {
     list: [],
     extra: {},
   },
+};
+
+export const handleDefaultParams = {
+  callback: null,
+  pretreatment: null,
+  cacheData: false,
 };
 
 export default {

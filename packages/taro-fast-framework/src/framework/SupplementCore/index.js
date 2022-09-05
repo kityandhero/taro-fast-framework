@@ -601,6 +601,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/checkTicketValidity',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
     });
   };
 
@@ -614,6 +615,7 @@ class SupplementCore extends Common {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
+      key: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
     });
 
     return data;
@@ -704,6 +706,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/refreshSession',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
     });
   };
 
@@ -717,6 +720,7 @@ class SupplementCore extends Common {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
+      key: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
     });
 
     return data;
@@ -1136,6 +1140,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/signInSilent',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
     });
   };
 
@@ -1155,6 +1160,7 @@ class SupplementCore extends Common {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
+      key: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
     });
 
     return data;
@@ -2585,6 +2591,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/getMetaData',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getMetaDataAliasName(),
     });
   };
 
@@ -2602,6 +2609,7 @@ class SupplementCore extends Common {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'schedulingControl',
+      key: defaultSettingsLayoutCustom.getMetaDataAliasName(),
     });
 
     return data;
@@ -2650,10 +2658,6 @@ class SupplementCore extends Common {
 
           if (dataSuccess) {
             setCurrentMetaData(v);
-
-            if (isFunction(callback)) {
-              callback(v);
-            }
 
             if (isFunction(callback)) {
               callback(v);

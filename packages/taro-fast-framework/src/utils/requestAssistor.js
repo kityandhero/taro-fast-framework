@@ -1,7 +1,9 @@
+import { setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import { requestMethod } from 'taro-fast-common/es/utils/constants';
 import {
   corsTarget,
   getTaroGlobalData,
+  inCollection,
   queryStringify,
   recordDebug,
   recordInfo,
@@ -121,7 +123,7 @@ function dataExceptionNotice(d) {
  * @param {*} d
  * @returns
  */
-export function pretreatmentRemoteSingleData(d) {
+export function pretreatmentRemoteSingleData(d, dataHandler) {
   const { code, message: messageText } = d || errorCustomData();
   let v = {};
 
@@ -129,6 +131,11 @@ export function pretreatmentRemoteSingleData(d) {
 
   if (code === apiSuccessCode) {
     const { data, extra } = d;
+
+    if (isFunction(dataHandler)) {
+      v = dataHandler(d);
+    }
+
     v = {
       code,
       message: messageText,
@@ -286,34 +293,77 @@ export function pretreatmentRequestParams(params, customHandle) {
  * 常规数据出库辅助方法
  * @param {*} state
  * @param {*} action
- * @param {*} callback
+ * @param {*} namespace
  * @returns
  */
-export function handleCommonDataAssist(state, action, callback = null) {
-  const { payload: d, alias } = action;
+export function handleCommonDataAssist(state, action, namespace) {
+  const {
+    payload: d,
+    callback,
+    pretreatment,
+    alias,
+    cacheData: cacheDataValue,
+  } = {
+    ...{
+      callback: null,
+      pretreatment: null,
+      alias: null,
+      cacheData: false,
+    },
+    ...action,
+  };
 
-  let v = pretreatmentRemoteSingleData(d);
+  const cacheData = inCollection(
+    [
+      defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
+      defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
+      defaultSettingsLayoutCustom.getSignInSilentAliasName(),
+      defaultSettingsLayoutCustom.getMetaDataAliasName(),
+    ],
+    alias,
+  )
+    ? true
+    : cacheDataValue;
+
+  let v = pretreatmentRemoteSingleData(d, pretreatment);
 
   if (isFunction(callback)) {
     v = callback(v);
   }
 
-  if (isUndefined(alias)) {
-    return {
+  let result = null;
+
+  if (isUndefined(alias) || !isString(alias)) {
+    result = {
       ...state,
       data: v,
       fromRemote: true,
     };
+  } else {
+    result = {
+      ...state,
+      fromRemote: true,
+    };
+
+    result[alias] = v;
   }
 
-  const aliasData = {};
-  aliasData[alias] = v;
+  if (cacheData) {
+    const key = `${namespace}_${alias || 'data'}`;
 
-  return {
-    ...state,
-    ...aliasData,
-    fromRemote: true,
-  };
+    const cacheResult = setCache({
+      key,
+      value: v,
+    });
+
+    recordDebug(
+      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
+        cacheResult ? 'cache success' : 'cache fail'
+      }.`,
+    );
+  }
+
+  return result;
 }
 
 /**
@@ -324,13 +374,8 @@ export function handleCommonDataAssist(state, action, callback = null) {
  * @param {*} callback
  * @returns
  */
-export function handleListDataAssist(
-  state,
-  action,
-  pretreatment = null,
-  callback = null,
-) {
-  const { payload: d, alias } = action;
+export function handleListDataAssist(state, action, namespace) {
+  const { payload: d, callback, pretreatment, alias, cacheData } = action;
 
   let v = pretreatmentRemoteListData(d, pretreatment);
 
@@ -338,31 +383,43 @@ export function handleListDataAssist(
     v = callback(v);
   }
 
-  if (isUndefined(alias)) {
+  let result = null;
+
+  if (isUndefined(alias) || !isString(alias)) {
     return {
       ...state,
       data: v,
       fromRemote: true,
     };
+  } else {
+    result = {
+      ...state,
+      fromRemote: true,
+    };
+
+    result[alias] = v;
   }
 
-  const aliasData = {};
-  aliasData[alias] = v;
+  if (cacheData) {
+    const key = `${namespace}_${alias || 'data'}`;
 
-  return {
-    ...state,
-    ...aliasData,
-    fromRemote: true,
-  };
+    const cacheResult = setCache({
+      key,
+      value: v,
+    });
+
+    recordDebug(
+      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
+        cacheResult ? 'cache success' : 'cache fail'
+      }.`,
+    );
+  }
+
+  return result;
 }
 
-export function handlePageListDataAssist(
-  state,
-  action,
-  pretreatment = null,
-  callback = null,
-) {
-  const { payload: d, alias } = action;
+export function handlePageListDataAssist(state, action, namespace) {
+  const { payload: d, callback, pretreatment, alias, cacheData } = action;
 
   let v = pretreatmentRemotePageListData(d, pretreatment);
 
@@ -370,22 +427,39 @@ export function handlePageListDataAssist(
     v = callback(v);
   }
 
-  if (isUndefined(alias)) {
+  let result = null;
+
+  if (isUndefined(alias) || !isString(alias)) {
     return {
       ...state,
       data: v,
       fromRemote: true,
     };
+  } else {
+    result = {
+      ...state,
+      fromRemote: true,
+    };
+
+    result[alias] = v;
   }
 
-  const aliasData = {};
-  aliasData[alias] = v;
+  if (cacheData) {
+    const key = `${namespace}_${alias || 'data'}`;
 
-  return {
-    ...state,
-    ...aliasData,
-    fromRemote: true,
-  };
+    const cacheResult = setCache({
+      key,
+      value: v,
+    });
+
+    recordDebug(
+      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
+        cacheResult ? 'cache success' : 'cache fail'
+      }.`,
+    );
+  }
+
+  return result;
 }
 
 /**

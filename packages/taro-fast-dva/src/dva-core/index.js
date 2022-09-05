@@ -80,6 +80,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
       m.reducers,
       m.state,
       plugin._handleActions,
+      m.namespace,
     );
     store.replaceReducer(createReducer());
     if (m.effects) {
@@ -204,6 +205,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
         m.reducers,
         m.state,
         plugin._handleActions,
+        m.namespace,
       );
       if (m.effects) {
         sagas.push(

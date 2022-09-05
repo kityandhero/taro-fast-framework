@@ -1,4 +1,5 @@
 import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
+import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
 import {
@@ -42,6 +43,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'session/refreshSession',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
     });
   };
 
@@ -49,6 +51,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'session',
+      key: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
     });
 
     return data;
@@ -58,6 +61,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'global/getMetaData',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getMetaDataAliasName(),
     });
   };
 
@@ -65,6 +69,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'global',
+      key: defaultSettingsLayoutCustom.getMetaDataAliasName(),
     });
 
     return data;
@@ -74,6 +79,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'entrance/checkTicketValidity',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
     });
   };
 
@@ -81,6 +87,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     const data = apiDataConvertCore({
       props: this.props,
       modelName: 'entrance',
+      key: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
     });
 
     return data;
@@ -90,11 +97,16 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'entrance/signInSilent',
       payload: data,
+      alias: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
     });
   };
 
   getSignInSilentApiData = () => {
-    return apiDataConvertCore({ props: this.props, modelName: 'entrance' });
+    return apiDataConvertCore({
+      props: this.props,
+      modelName: 'entrance',
+      key: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
+    });
   };
 
   dispatchGetCustomer = (data = {}) => {

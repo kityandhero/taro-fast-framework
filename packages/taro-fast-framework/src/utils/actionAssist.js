@@ -1,8 +1,10 @@
 import Taro from '@tarojs/taro';
 
+import { getCache } from 'taro-fast-common/es/utils/cacheAssist';
 import Tips from 'taro-fast-common/es/utils/tips';
 import {
   getPathValue,
+  inCollection,
   notifySuccess,
   recordError,
   recordObject,
@@ -18,6 +20,8 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
+import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
+
 /**
  * apiDataConvertCore
  * @param {*} param0
@@ -28,7 +32,27 @@ export function apiDataConvertCore({ props, modelName, key = 'data' }) {
     throw new Error('props is undefined, please check params.');
   }
 
-  const m = getPathValue(props, modelName);
+  let m = null;
+
+  if (
+    inCollection(
+      [
+        defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
+        defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
+        defaultSettingsLayoutCustom.getSignInSilentAliasName(),
+        defaultSettingsLayoutCustom.getMetaDataAliasName(),
+      ],
+      key,
+    )
+  ) {
+    m = getCache({ key: `${modelName}_${key}` });
+  }
+
+  if ((m || null) != null) {
+    return m;
+  }
+
+  m = getPathValue(props, modelName);
 
   if ((m || null) == null) {
     recordObject(props);

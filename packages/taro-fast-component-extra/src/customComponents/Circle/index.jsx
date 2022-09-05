@@ -173,12 +173,6 @@ class Circle extends ComponentBase {
 
     getFields(`#${id}`)
       .then((n) => {
-        console.log({
-          id,
-          n,
-          t: that,
-        });
-
         if (!n) {
           return;
         }
@@ -228,10 +222,6 @@ class Circle extends ComponentBase {
 
           return;
         }
-
-        console.log({
-          ctx,
-        });
 
         ctx.lineWidth = lineWidth;
         ctx.lineCap = lineCap;

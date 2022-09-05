@@ -34,7 +34,9 @@ export async function refreshSessionData(params) {
     code: code || '',
   };
 
-  recordDebug(`simulation session data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `refreshSessionData simulation session data: ${JSON.stringify(simulation)}`,
+  );
 
   return request({
     api: `/schedulingControl/refreshSession`,
@@ -55,7 +57,11 @@ export async function checkTicketValidityData(params) {
     nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
   };
 
-  recordDebug(`simulation ticket validity data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `checkTicketValidityData simulation ticket validity data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
 
   return request({
     api: `/schedulingControl/checkTicketValidity`,
@@ -75,7 +81,11 @@ export async function exchangePhoneData(params) {
     key: getGuid(),
   };
 
-  recordDebug(`simulation phone key data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `exchangePhoneData simulation phone key data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
 
   return request({
     api: `/schedulingControl/exchangePhone`,
@@ -101,7 +111,11 @@ export async function signInSilentData(params) {
     needSyncInfo: false,
   };
 
-  recordDebug(`simulation sign in silent data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `signInSilentData simulation sign in silent data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
 
   return request({
     api: `/schedulingControl/signInSilent`,
@@ -127,7 +141,11 @@ export async function registerWithWeChatData(params) {
     needSyncInfo: false,
   };
 
-  recordDebug(`simulation sign in silent data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `registerWithWeChatData simulation sign in silent data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
 
   return request({
     api: `/schedulingControl/registerWithWeChat`,
@@ -153,7 +171,11 @@ export async function registerData(params) {
     needSyncInfo: false,
   };
 
-  recordDebug(`simulation sign in silent data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `registerData simulation sign in silent data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
 
   return request({
     api: `/schedulingControl/register`,
@@ -170,11 +192,13 @@ export async function registerData(params) {
 
 export async function getMetaDataData(params) {
   const simulation = {
-    time: formatDatetime(getNow, datetimeFormat.monthDayHourMinuteSecond),
+    time: formatDatetime(getNow(), datetimeFormat.monthDayHourMinuteSecond),
   };
 
   recordDebug(
-    `simulation meta data silent data: ${JSON.stringify(simulation)}`,
+    `getMetaDataData simulation meta data silent data: ${JSON.stringify(
+      simulation,
+    )}`,
   );
 
   return request({
@@ -193,7 +217,11 @@ export async function getMetaDataData(params) {
 export async function getCustomerData(params) {
   const simulation = {};
 
-  recordDebug(`simulation customer silent data: ${JSON.stringify(simulation)}`);
+  recordDebug(
+    `getCustomerData simulation customer silent data: ${JSON.stringify(
+      simulation,
+    )}`,
+  );
 
   return request({
     api: `/schedulingControl/getCustomer`,
@@ -212,7 +240,7 @@ export async function getAdministrativeDivisionFullData(params) {
   const simulation = [];
 
   recordDebug(
-    `simulation administrative division full data silent data: ${JSON.stringify(
+    `getAdministrativeDivisionFullData simulation administrative division full data silent data: ${JSON.stringify(
       simulation,
     )}`,
   );

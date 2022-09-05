@@ -1,4 +1,5 @@
 import {
+  handleDefaultParams,
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
@@ -26,14 +27,17 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
-    *signInSilent({ payload }, { call, put }) {
+    *signInSilent({ payload, alias }, { call, put }) {
       const response = yield call(signInSilentData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
     *register({ payload }, { call, put }) {
@@ -42,6 +46,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *registerWithWeChat({ payload }, { call, put }) {
@@ -50,14 +55,17 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
-    *checkTicketValidity({ payload }, { call, put }) {
+    *checkTicketValidity({ payload, alias }, { call, put }) {
       const response = yield call(checkTicketValidityData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
   },

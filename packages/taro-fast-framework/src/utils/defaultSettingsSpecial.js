@@ -462,6 +462,46 @@ export const defaultSettingsLayoutCustom = {
 
     return simulationLocationData || {};
   },
+  getRefreshSessionAliasName: () => {
+    const appInit = getAppInitConfigData();
+
+    const { refreshSessionAliasName } = {
+      ...{ refreshSessionAliasName: 'refreshSessionApiData' },
+      ...(appInit || {}),
+    };
+
+    return refreshSessionAliasName || 'refreshSessionApiData';
+  },
+  getCheckTicketValidityAliasName: () => {
+    const appInit = getAppInitConfigData();
+
+    const { checkTicketValidityAliasName } = {
+      ...{ checkTicketValidityAliasName: 'checkTicketValidityApiData' },
+      ...(appInit || {}),
+    };
+
+    return checkTicketValidityAliasName || 'checkTicketValidityApiData';
+  },
+  getSignInSilentAliasName: () => {
+    const appInit = getAppInitConfigData();
+
+    const { signInSilentAliasName } = {
+      ...{ signInSilentAliasName: 'signInSilentApiData' },
+      ...(appInit || {}),
+    };
+
+    return signInSilentAliasName || 'signInSilentApiData';
+  },
+  getMetaDataAliasName: () => {
+    const appInit = getAppInitConfigData();
+
+    const { metaDataAliasName } = {
+      ...{ metaDataAliasName: 'metaDataApiData' },
+      ...(appInit || {}),
+    };
+
+    return metaDataAliasName || 'metaDataApiData';
+  },
 };
 
 /**

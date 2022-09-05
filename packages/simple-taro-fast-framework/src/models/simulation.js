@@ -1,4 +1,5 @@
 import {
+  handleDefaultParams,
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
@@ -28,6 +29,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handlePageListData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *pageListEmpty({ payload }, { call, put }) {
@@ -36,6 +38,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handlePageListData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *singleList({ payload }, { call, put }) {
@@ -44,6 +47,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleListData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *singleListEmpty({ payload }, { call, put }) {
@@ -52,6 +56,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleListData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *getOverview({ payload }, { call, put }) {
@@ -60,6 +65,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *get({ payload }, { call, put }) {
@@ -68,6 +74,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
     *switchStatus({ payload }, { call, put }) {
@@ -76,6 +83,7 @@ export default {
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        ...handleDefaultParams,
       });
     },
   },

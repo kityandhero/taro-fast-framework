@@ -22,6 +22,7 @@ import {
 } from '../services/schedulingControl';
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 import {
+  handleDefaultParams,
   reducerCommonCollection,
   reducerCommonNameCollection,
   tacitlyState,
@@ -47,76 +48,94 @@ export default {
   },
 
   effects: {
-    *refreshSession({ payload }, { call, put }) {
+    *refreshSession({ payload, alias }, { call, put }) {
       const response = yield call(refreshSessionData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *checkTicketValidity({ payload }, { call, put }) {
+    *checkTicketValidity({ payload, alias }, { call, put }) {
       const response = yield call(checkTicketValidityData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *exchangePhone({ payload }, { call, put }) {
+    *exchangePhone({ payload, alias }, { call, put }) {
       const response = yield call(exchangePhoneData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *signInSilent({ payload }, { call, put }) {
+    *signInSilent({ payload, alias }, { call, put }) {
       const response = yield call(signInSilentData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *getMetaData({ payload }, { call, put }) {
+    *getMetaData({ payload, alias }, { call, put }) {
       const response = yield call(getMetaDataData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *getCustomer({ payload }, { call, put }) {
+    *getCustomer({ payload, alias }, { call, put }) {
       const response = yield call(getCustomerData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *getFullAdministrativeDivisionData({ payload }, { call, put }) {
+    *getFullAdministrativeDivisionData({ payload, alias }, { call, put }) {
       const response = yield call(getAdministrativeDivisionFullData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleListData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *registerWithWeChat({ payload }, { call, put }) {
+    *registerWithWeChat({ payload, alias }, { call, put }) {
       const response = yield call(registerWithWeChatData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
-    *register({ payload }, { call, put }) {
+    *register({ payload, alias }, { call, put }) {
       const response = yield call(registerData, payload);
 
       yield put({
         type: reducerCommonNameCollection.handleCommonData,
         payload: response,
+        alias,
+        ...handleDefaultParams,
       });
     },
     *getWeather({ payload }, { call, put }) {
