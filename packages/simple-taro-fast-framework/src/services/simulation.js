@@ -302,6 +302,11 @@ export async function getOverviewData(params) {
   return executiveRequest({
     api: `/simulation/overview`,
     params,
+    useVirtualRequest: true,
+    virtualNeedAuthorize: false,
+    virtualSuccessResponse: {
+      data: {},
+    },
   });
 }
 
