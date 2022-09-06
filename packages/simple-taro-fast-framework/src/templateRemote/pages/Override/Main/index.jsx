@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
 import { Space } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import BasePageWrapper from '../../BasePageWrapper';
@@ -19,10 +18,6 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
-
   renderFurther() {
     return (
       <Space direction="vertical" fillWidth>
@@ -34,36 +29,17 @@ export default class Index extends BasePageWrapper {
                 payload: data,
               });
             }`,
-            getRefreshSessionApiData: `() => {
-              const data = apiDataConvertCore({
-                props: this.props,
-                modelName: 'session',
-              });
-
-              return data;
-            }`,
             dispatchCheckTicketValidity: `(data) => {
               return this.dispatchApi({
                 type: 'entrance/checkTicketValidity',
                 payload: data,
               });
             }`,
-            getCheckTicketValidityApiData: `() => {
-              const data = apiDataConvertCore({
-                props: this.props,
-                modelName: 'entrance',
-              });
-
-              return data;
-            }`,
             dispatchSignInSilent: `(data) => {
               return this.dispatchApi({
                 type: 'entrance/signInSilent',
                 payload: data,
               });
-            }`,
-            getSignInSilentApiData: `() => {
-              return apiDataConvertCore({ props: this.props, modelName: 'entrance' });
             }`,
             parseSignInResultFromSignInApiData: `(remoteData) => {
               const verifySignInResult = getVerifySignInResult();
@@ -88,34 +64,16 @@ export default class Index extends BasePageWrapper {
                 payload: data,
               });
             }`,
-            getExchangePhoneApiData: `() => {
-              return apiDataConvertCore({
-                props: this.props,
-                modelName: 'session',
-              });
-            }`,
             dispatchRegisterWithWeChat: `(data = {}) => {
               return this.dispatchApi({
                 type: 'entrance/registerWithWeChat',
                 payload: data,
               });
             }`,
-            getRegisterWithWeChatApiData: `() => {
-              return apiDataConvertCore({
-                props: this.props,
-                modelName: 'entrance',
-              });
-            }`,
             dispatchRegister: `(data = {}) => {
               return this.dispatchApi({
                 type: 'entrance/register',
                 payload: data,
-              });
-            }`,
-            getRegisterApiData: `() => {
-              return apiDataConvertCore({
-                props: this.props,
-                modelName: 'entrance',
               });
             }`,
           }}

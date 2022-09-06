@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 
 import { md5, transformListData } from 'taro-fast-common/es/utils/tools';
 import { Cascader, Space } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
@@ -210,10 +209,6 @@ export default class Index extends ContentPageBase {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'administrativeDivision' });
-  };
 
   afterLoadSuccess = ({
     // eslint-disable-next-line no-unused-vars

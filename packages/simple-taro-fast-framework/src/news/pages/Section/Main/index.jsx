@@ -13,7 +13,6 @@ import {
   Space,
   Tabs,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import BasePageWrapper from '../../BasePageWrapper';
@@ -81,10 +80,6 @@ export default class Index extends BasePageWrapper {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'article' });
-  };
 
   doWorkBeforeAdjustDidMount = () => {
     const { sectionId } = {

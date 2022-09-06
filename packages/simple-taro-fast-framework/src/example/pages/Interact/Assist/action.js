@@ -3,12 +3,7 @@ import {
   actionCore,
   actionModalCore,
   actionSheetCore,
-  apiDataConvertCore,
 } from 'taro-fast-framework/es/utils/actionAssist';
-
-function apiDataConvert(props) {
-  return apiDataConvertCore({ props, modelName: 'simulation' });
-}
 
 export function getOverviewAction({
   target,
@@ -22,7 +17,6 @@ export function getOverviewAction({
   actionCore({
     api: 'simulation/getOverview',
     params: handleData,
-    apiDataConvert,
     target,
     handleData,
     successCallback,
@@ -45,7 +39,6 @@ export function pageListAction({
   actionCore({
     api: 'simulation/pageList',
     params: handleData,
-    apiDataConvert,
     target,
     handleData,
     successCallback,

@@ -11,7 +11,6 @@ import {
   Space,
   Tabs,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import { pathCollection } from '../../../../customConfig/pathConfig';
 import BasePageWrapper from '../../BasePageWrapper';
@@ -56,10 +55,6 @@ export default class Index extends BasePageWrapper {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'news' });
-  };
 
   doWorkBeforeAdjustDidMount = () => {
     const { sectionId } = {

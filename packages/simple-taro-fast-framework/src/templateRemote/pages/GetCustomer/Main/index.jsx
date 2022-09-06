@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Button, Space } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
@@ -40,10 +39,6 @@ export default class Index extends BasePageWrapper {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'customer' });
-  };
 
   doWorkAdjustDidMount = () => {
     this.buildCustomerData();
@@ -107,9 +102,6 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            apiDataConvert: `(props) => {
-              return apiDataConvertCore({ props, modelName: 'entrance' });
-            }`,
             doWorkAdjustDidMount: `() => {
               this.buildWeatherData();
             }`,

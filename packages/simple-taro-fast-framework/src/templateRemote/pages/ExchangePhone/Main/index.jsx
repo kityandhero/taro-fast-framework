@@ -11,7 +11,6 @@ import {
   CenterBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
@@ -55,10 +54,6 @@ export default class Index extends BasePageWrapper {
     //移除现有缓存, 仅为当前夜间环境测试使用, 常规使用时无需此步骤
     removeSession();
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
 
   triggerPhoneNumber = (e) => {
     const {
@@ -135,9 +130,6 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            apiDataConvert: `(props) => {
-              return apiDataConvertCore({ props, modelName: 'entrance' });
-            }`,
             triggerPhoneNumber: `(e) => {
               const {
                 detail: { encryptedData, iv },

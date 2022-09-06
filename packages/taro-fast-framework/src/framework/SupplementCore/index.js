@@ -32,7 +32,6 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
-import { apiDataConvertCore } from '../../utils/actionAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import {
   getAdministrativeDivisionFullData,
@@ -608,22 +607,6 @@ class SupplementCore extends Common {
     });
   };
 
-  getCheckTicketValidityApiData = () => {
-    if (this.verifyTicket) {
-      throw new Error(
-        'getCheckTicketValidityApiData need override when verifyTicket set to true, getCheckTicketValidityApiData must return a object',
-      );
-    }
-
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-      key: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
-    });
-
-    return data;
-  };
-
   checkTicketValidityCore({
     forceRefresh: forceRefreshValue = false,
     callback = null,
@@ -709,22 +692,6 @@ class SupplementCore extends Common {
       payload: data,
       alias: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
     });
-  };
-
-  getRefreshSessionApiData = () => {
-    if (this.verifySession) {
-      throw new Error(
-        'getRefreshSessionApiData need override, getRefreshSessionApiData must return a object',
-      );
-    }
-
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-      key: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
-    });
-
-    return data;
   };
 
   refreshSession = ({ callback }) => {
@@ -1147,22 +1114,6 @@ class SupplementCore extends Common {
     throw new Error(
       'getSignInApiData need override, getSignInApiData must return a object',
     );
-  };
-
-  getSignInSilentApiData = () => {
-    if (this.verifyTicket) {
-      throw new Error(
-        'getSignInSilentApiData need override, getSignInSilentApiData must return a object',
-      );
-    }
-
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-      key: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
-    });
-
-    return data;
   };
 
   signInCore({
@@ -1962,13 +1913,6 @@ class SupplementCore extends Common {
     });
   };
 
-  getExchangePhoneApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-    });
-  };
-
   exchangePhone = ({ data, callback = null }) => {
     const that = this;
 
@@ -2048,13 +1992,6 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/registerWithWeChat',
       payload: data,
-    });
-  };
-
-  getRegisterWithWeChatApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
     });
   };
 
@@ -2208,13 +2145,6 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/register',
       payload: data,
-    });
-  };
-
-  getRegisterApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
     });
   };
 

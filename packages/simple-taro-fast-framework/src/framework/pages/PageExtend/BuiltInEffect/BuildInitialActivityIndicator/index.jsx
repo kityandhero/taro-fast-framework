@@ -6,7 +6,6 @@ import {
   FadeInBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import CodePageBox from '../../../../../customComponents/CodePageBox';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
@@ -91,10 +90,6 @@ export default class Index extends ContentPageBase {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'simulation' });
-  };
 
   renderContent = () => {
     return (

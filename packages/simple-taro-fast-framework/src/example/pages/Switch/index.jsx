@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
 import { Space, Switch } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
@@ -83,10 +82,6 @@ export default class Index extends ContentPageBase {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'simulation' });
-  };
 
   establishControlList = () => {
     return [

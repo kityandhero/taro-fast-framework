@@ -8,7 +8,6 @@ import {
   Grid,
   ImageBox,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import logoImg from '../../../../assets/images/logo.png';
 import BasePageWrapper from '../../BasePageWrapper';
@@ -79,10 +78,6 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
-
   renderFurther() {
     return (
       <View className={classNames(classPrefix)}>

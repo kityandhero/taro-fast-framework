@@ -9,7 +9,6 @@ import {
   InputItem,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import BasePageWrapper from '../../BasePageWrapper';
 
@@ -29,10 +28,6 @@ definePageConfig({
   schedulingControl,
 }))
 export default class Index extends BasePageWrapper {
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
-
   renderFurther() {
     return (
       <View className={classNames(classPrefix)}>

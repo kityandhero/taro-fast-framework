@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { CenterBox } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 
@@ -26,10 +25,6 @@ export default class Index extends ContentPageBase {
   scrollViewMode = true;
 
   enableFooter = true;
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
 
   renderFurther() {
     return (

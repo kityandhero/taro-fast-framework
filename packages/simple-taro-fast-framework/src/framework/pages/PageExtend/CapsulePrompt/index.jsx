@@ -3,7 +3,6 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { CenterBox, Icon } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 
@@ -30,10 +29,6 @@ export default class Index extends ContentPageBase {
   enableCapsulePrompt = true;
 
   // capsulePromptWithCustomHeadNavigation = true;
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
 
   buildCapsulePrompt = () => {
     return (

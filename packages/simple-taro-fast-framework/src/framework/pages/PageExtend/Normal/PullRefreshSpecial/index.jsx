@@ -10,7 +10,6 @@ import {
   HelpBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import {
@@ -87,10 +86,6 @@ export default class Index extends ContentPageBase {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'simulation' });
-  };
 
   renderContent = () => {
     const { metaListData } = this.state;

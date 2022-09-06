@@ -10,7 +10,6 @@ import {
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -51,10 +50,6 @@ export default class Index extends ContentPageBase {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'simulation' });
-  };
 
   onActionClick = () => {
     getOverviewAction({

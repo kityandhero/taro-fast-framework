@@ -1,6 +1,5 @@
 import {
   hideNavigationBarLoading,
-  recordConfig,
   recordError,
   recordExecute,
   recordObject,
@@ -17,20 +16,11 @@ import {
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
-import { apiDataConvertCore } from '../../utils/actionAssist';
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 import { checkWhetherAuthorizeFail } from '../../utils/tools';
 import Infrastructure from '../Infrastructure';
 
 class Base extends Infrastructure {
-  apiDataConvert = (props) => {
-    recordConfig(
-      'build-in apiDataConvert modelName is schedulingControl, if you need custom logic,you need override it: apiDataConvert = (props) => { return apiDataConvertCore({ props, modelName: "modelName" }) }',
-    );
-
-    return apiDataConvertCore({ props, modelName: 'schedulingControl' });
-  };
-
   /**
    * 执行初始化远程请求
    */

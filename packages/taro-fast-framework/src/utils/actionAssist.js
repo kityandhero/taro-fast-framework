@@ -1,13 +1,9 @@
 import Taro from '@tarojs/taro';
 
-import { getCache } from 'taro-fast-common/es/utils/cacheAssist';
 import Tips from 'taro-fast-common/es/utils/tips';
 import {
-  getPathValue,
-  inCollection,
   notifySuccess,
   recordError,
-  recordObject,
   showErrorMessage,
   showRuntimeError,
   stringIsNullOrWhiteSpace,
@@ -16,64 +12,8 @@ import {
   isFunction,
   isNumber,
   isString,
-  isUndefined,
 } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
-
-import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
-
-/**
- * apiDataConvertCore
- * @param {*} param0
- * @returns
- */
-export function apiDataConvertCore({ props, modelName, key = 'data' }) {
-  if (isUndefined(props)) {
-    throw new Error('props is undefined, please check params.');
-  }
-
-  let m = null;
-
-  if (
-    inCollection(
-      [
-        defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
-        defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
-        defaultSettingsLayoutCustom.getSignInSilentAliasName(),
-        defaultSettingsLayoutCustom.getMetaDataAliasName(),
-      ],
-      key,
-    )
-  ) {
-    m = getCache({ key: `${modelName}_${key}` });
-  }
-
-  if ((m || null) != null) {
-    return m;
-  }
-
-  m = getPathValue(props, modelName);
-
-  if ((m || null) == null) {
-    recordObject(props);
-
-    recordError(
-      `apiDataConvertCore error: model ${modelName} is null or undefined`,
-    );
-  }
-
-  const data = m[key];
-
-  if ((data || null) == null) {
-    recordObject(props);
-
-    recordError(
-      `apiDataConvertCore error: key “${key}” in model ${modelName} is null or undefined`,
-    );
-  }
-
-  return data;
-}
 
 /**
  * 处理 actionCore 的异步请求结果

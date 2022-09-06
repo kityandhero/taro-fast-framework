@@ -10,7 +10,6 @@ import {
   CenterBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import SimpleBox from '../../../../customComponents/SimpleBox';
@@ -46,10 +45,6 @@ export default class Index extends BasePageWrapper {
       },
     };
   }
-
-  apiDataConvert = (props) => {
-    return apiDataConvertCore({ props, modelName: 'entrance' });
-  };
 
   doWorkAdjustDidMount = () => {
     this.buildWeatherData();
@@ -135,9 +130,6 @@ export default class Index extends BasePageWrapper {
           list={configList}
           config={{
             verifySession: true,
-            apiDataConvert: `(props) => {
-              return apiDataConvertCore({ props, modelName: 'entrance' });
-            }`,
             doWorkAdjustDidMount: `() => {
               this.buildWeatherData();
             }`,

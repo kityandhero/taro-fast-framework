@@ -1,4 +1,3 @@
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
@@ -47,16 +46,6 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 
-  getRefreshSessionApiData = () => {
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'session',
-      key: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
-    });
-
-    return data;
-  };
-
   dispatchGetMetaData = (data) => {
     return this.dispatchApi({
       type: 'global/getMetaData',
@@ -73,29 +62,11 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 
-  getCheckTicketValidityApiData = () => {
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'entrance',
-      key: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
-    });
-
-    return data;
-  };
-
   dispatchSignInSilent = (data) => {
     return this.dispatchApi({
       type: 'entrance/signInSilent',
       payload: data,
       alias: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
-    });
-  };
-
-  getSignInSilentApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'entrance',
-      key: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
     });
   };
 
@@ -113,13 +84,6 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 
-  getExchangePhoneApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'session',
-    });
-  };
-
   dispatchRegisterWithWeChat = (data = {}) => {
     return this.dispatchApi({
       type: 'entrance/registerWithWeChat',
@@ -127,24 +91,10 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 
-  getRegisterWithWeChatApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'entrance',
-    });
-  };
-
   dispatchRegister = (data = {}) => {
     return this.dispatchApi({
       type: 'entrance/register',
       payload: data,
-    });
-  };
-
-  getRegisterApiData = () => {
-    return apiDataConvertCore({
-      props: this.props,
-      modelName: 'entrance',
     });
   };
 }

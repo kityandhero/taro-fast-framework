@@ -1,10 +1,6 @@
 // import createLoading from 'dva-loading';
 import { setCache } from 'taro-fast-common/es/utils/cacheAssist';
-import {
-  inCollection,
-  recordDebug,
-  recordError,
-} from 'taro-fast-common/es/utils/tools';
+import { recordDebug, recordError } from 'taro-fast-common/es/utils/tools';
 import { isString, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 import { create } from 'taro-fast-dva/es/dva-core';
 import { createLoading } from 'taro-fast-dva/es/dva-loading';
@@ -53,7 +49,7 @@ function reducerDataAssist(state, action, namespace) {
   const {
     payload: v,
     alias,
-    cacheData: cacheDataValue,
+    cacheData: cacheData,
   } = {
     ...{
       callback: null,
@@ -63,18 +59,6 @@ function reducerDataAssist(state, action, namespace) {
     },
     ...action,
   };
-
-  const cacheData = inCollection(
-    [
-      defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
-      defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
-      defaultSettingsLayoutCustom.getSignInSilentAliasName(),
-      defaultSettingsLayoutCustom.getMetaDataAliasName(),
-    ],
-    alias,
-  )
-    ? true
-    : cacheDataValue;
 
   let result = null;
 
