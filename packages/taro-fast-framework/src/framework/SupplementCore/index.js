@@ -655,9 +655,7 @@ class SupplementCore extends Common {
 
     that
       .dispatchCheckTicketValidity({})
-      .then(() => {
-        const remoteData = that.getCheckTicketValidityApiData();
-
+      .then((remoteData) => {
         const { dataSuccess, data: metaData } = remoteData;
 
         if (dataSuccess) {
@@ -752,11 +750,7 @@ class SupplementCore extends Common {
 
             that
               .dispatchRefreshSession({ code })
-              .then((vv) => {
-                console.log(vv);
-
-                const remoteData = this.getRefreshSessionApiData();
-
+              .then((remoteData) => {
                 const { dataSuccess, data: metaData } = remoteData;
 
                 if (dataSuccess) {
@@ -1185,10 +1179,8 @@ class SupplementCore extends Common {
 
     that
       .dispatchSignIn(data)
-      .then(() => {
+      .then((remoteData) => {
         Tips.loaded();
-
-        const remoteData = that.getSignInApiData();
 
         const { dataSuccess, data: metaData } = remoteData;
 
@@ -1330,10 +1322,8 @@ class SupplementCore extends Common {
 
     that
       .dispatchSignInSilent(data)
-      .then(() => {
+      .then((remoteData) => {
         Tips.loaded();
-
-        const remoteData = that.getSignInSilentApiData();
 
         const { dataSuccess, data: metaData } = remoteData;
 
@@ -1829,25 +1819,6 @@ class SupplementCore extends Common {
     });
   };
 
-  getCustomerApiDataWrapper = () => {
-    recordExecute('getCustomerApiData');
-
-    return this.getCustomerApiData();
-  };
-
-  getCustomerApiData = () => {
-    recordConfig(
-      'built-in getCustomerApiData is a simulation,if you need actual business,you need override it: getCustomerApiData = () => {} and return a object like "return apiDataConvertCore({props: this.props,modelName: \'schedulingControl\',})"',
-    );
-
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-    });
-
-    return data;
-  };
-
   getCustomer = ({
     data = {},
     force: forceValue = false,
@@ -1890,9 +1861,7 @@ class SupplementCore extends Common {
 
       that
         .dispatchGetCustomerWrapper(data || {})
-        .then(() => {
-          const remoteData = that.getCustomerApiDataWrapper();
-
+        .then((remoteData) => {
           const { dataSuccess, data: metaData } = remoteData;
 
           if (dataSuccess) {
@@ -2006,9 +1975,7 @@ class SupplementCore extends Common {
     that.checkSession(() => {
       that
         .dispatchExchangePhone(data)
-        .then(() => {
-          const remoteData = that.getExchangePhoneApiData();
-
+        .then((remoteData) => {
           const { dataSuccess, data: metaData } = remoteData;
 
           if (dataSuccess) {
@@ -2103,10 +2070,8 @@ class SupplementCore extends Common {
 
     that
       .dispatchRegisterWithWeChat(data)
-      .then(() => {
+      .then((remoteData) => {
         that.setState({ registering: false });
-
-        const remoteData = that.getRegisterWithWeChatApiData();
 
         const { dataSuccess, data: metaData } = remoteData;
 
@@ -2267,9 +2232,7 @@ class SupplementCore extends Common {
 
     that
       .dispatchRegister(data)
-      .then(() => {
-        const remoteData = that.getRegisterApiData();
-
+      .then((remoteData) => {
         const { dataSuccess, data: metaData } = remoteData;
 
         if (dataSuccess) {
@@ -2630,26 +2593,6 @@ class SupplementCore extends Common {
     });
   };
 
-  getMetaDataApiDataWrapper = () => {
-    recordExecute('getMetaDataApiData');
-
-    return this.getMetaDataApiData();
-  };
-
-  getMetaDataApiData = () => {
-    recordConfig(
-      'built-in getMetaDataApiData is a simulation,if you need actual business,you need override it: getMetaDataApiData = () => {} and return a object like "return apiDataConvertCore({props: this.props,modelName: \'schedulingControl\',})"',
-    );
-
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-      key: defaultSettingsLayoutCustom.getMetaDataAliasName(),
-    });
-
-    return data;
-  };
-
   initMetaData = ({
     data = {},
     force: forceValue = false,
@@ -2686,9 +2629,7 @@ class SupplementCore extends Common {
 
       that
         .dispatchGetMetaDataWrapper(data || {})
-        .then(() => {
-          const remoteData = that.getMetaDataApiDataWrapper();
-
+        .then((remoteData) => {
           const { dataSuccess, data: v } = remoteData;
 
           if (dataSuccess) {
@@ -2736,25 +2677,6 @@ class SupplementCore extends Common {
     });
   };
 
-  getFullAdministrativeDivisionDataApiDataWrapper = () => {
-    recordExecute('getFullAdministrativeDivisionDataApiData');
-
-    return this.getFullAdministrativeDivisionDataApiData();
-  };
-
-  getFullAdministrativeDivisionDataApiData = () => {
-    recordConfig(
-      'built-in getFullAdministrativeDivisionDataApiData is a simulation,if you need actual business,you need override it: getFullAdministrativeDivisionDataApiData = () => {} and return a object like "return apiDataConvertCore({props: this.props,modelName: \'schedulingControl\',})"',
-    );
-
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'schedulingControl',
-    });
-
-    return data;
-  };
-
   initFullAdministrativeDivisionData = ({
     data = {},
     force: forceValue = false,
@@ -2793,10 +2715,7 @@ class SupplementCore extends Common {
 
       that
         .dispatchGetFullAdministrativeDivisionDataWrapper(data || {})
-        .then(() => {
-          const remoteData =
-            that.getFullAdministrativeDivisionDataApiDataWrapper();
-
+        .then((remoteData) => {
           const { dataSuccess, list: v } = remoteData;
 
           if (dataSuccess) {

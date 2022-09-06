@@ -4,7 +4,7 @@ import {
   reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
-import { pretreatmentRemotePageListData } from 'taro-fast-framework/es/utils/requestAssistor';
+import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { exchangePhoneData, refreshSessionData } from '../services/session';
 
@@ -19,7 +19,7 @@ export default {
     *refreshSession({ payload, alias }, { call, put }) {
       const response = yield call(refreshSessionData, payload);
 
-      const dataAdjust = pretreatmentRemotePageListData({ source: response });
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
       yield put({
         type: reducerNameCollection.reducerData,
@@ -33,7 +33,7 @@ export default {
     *exchangePhone({ payload, alias }, { call, put }) {
       const response = yield call(exchangePhoneData, payload);
 
-      const dataAdjust = pretreatmentRemotePageListData({ source: response });
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
       yield put({
         type: reducerNameCollection.reducerData,

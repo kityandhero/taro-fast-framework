@@ -13,7 +13,6 @@ import {
   buildLinearGradient,
   getMenuButtonBoundingClientRect,
   getSystemInfo,
-  getValueByKey,
   inCollection,
   isWechat,
   navigateTo,
@@ -1276,11 +1275,8 @@ export default class Infrastructure extends ComponentBase {
       type: 'schedulingControl/getWeather',
       payload: data,
     })
-      .then(() => {
-        const { weather } = getValueByKey({
-          data: this.props,
-          key: 'schedulingControl',
-        });
+      .then((remoteData) => {
+        const { weather } = remoteData;
 
         if (isFunction(callback)) {
           callback(weather);

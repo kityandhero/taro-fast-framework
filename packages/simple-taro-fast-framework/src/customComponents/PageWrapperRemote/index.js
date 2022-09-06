@@ -65,16 +65,6 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 
-  getMetaDataApiData = () => {
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'global',
-      key: defaultSettingsLayoutCustom.getMetaDataAliasName(),
-    });
-
-    return data;
-  };
-
   dispatchCheckTicketValidity = (data) => {
     return this.dispatchApi({
       type: 'entrance/checkTicketValidity',
@@ -114,15 +104,6 @@ export default class PageWrapperRemote extends PageWrapperCore {
       type: 'customer/getCustomer',
       payload: data,
     });
-  };
-
-  getCustomerApiData = () => {
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'customer',
-    });
-
-    return data;
   };
 
   dispatchExchangePhone = (data = {}) => {

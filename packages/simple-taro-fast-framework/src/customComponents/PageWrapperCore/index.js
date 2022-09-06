@@ -3,7 +3,6 @@ import {
   transformListData,
 } from 'taro-fast-common/es/utils/tools';
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
-import { apiDataConvertCore } from 'taro-fast-framework/es/utils/actionAssist';
 import {
   getAdministrativeDivisionFullData,
   getMap,
@@ -44,7 +43,7 @@ class PageWrapperCore extends AuthorizationWrapper {
    * 登录校验失败时候的回调, 例如访问需要登录才能调用的接口
    * @returns
    */
-  authorizeFailCallback = remoteData => {
+  authorizeFailCallback = (remoteData) => {
     recordObject(remoteData);
   };
 
@@ -65,22 +64,13 @@ class PageWrapperCore extends AuthorizationWrapper {
     });
   };
 
-  getFullAdministrativeDivisionDataApiData = () => {
-    const data = apiDataConvertCore({
-      props: this.props,
-      modelName: 'administrativeDivision',
-    });
-
-    return data;
-  };
-
   transformFullAdministrativeDivisionData = () => {
     const { list } = getAdministrativeDivisionFullData();
 
     return (
       transformListData({
         list: list,
-        convert: data => {
+        convert: (data) => {
           const { name, code } = data;
 
           return {

@@ -82,14 +82,6 @@ export default class Index extends BasePageWrapper {
                 payload: data,
               });
             }`,
-            getCustomerApiData: `() => {
-              const data = apiDataConvertCore({
-                props: this.props,
-                modelName: 'customer',
-              });
-
-              return data;
-            }`,
             dispatchExchangePhone: `(data = {}) => {
               return this.dispatchApi({
                 type: 'session/exchangePhone',
