@@ -23,7 +23,8 @@ class VerticalBox extends BaseComponent {
   };
 
   renderFurther() {
-    const { style, fillWidth, innerStyle, align, alignJustify } = this.props;
+    const { style, fillWidth, innerStyle, align, alignJustify, children } =
+      this.props;
 
     let alignStyle = 'center';
 
@@ -101,7 +102,7 @@ class VerticalBox extends BaseComponent {
         }}
         onClick={this.triggerClick}
       >
-        <View style={flexStyle}>{this.props.children}</View>
+        <View style={flexStyle}>{children}</View>
       </View>
     );
   }

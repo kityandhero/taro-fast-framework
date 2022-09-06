@@ -144,7 +144,6 @@ export function handleItem({ target, dataId, compareDataIdHandler, handler }) {
  * remote assess wrapper core
  * @param {*} api [string] remote api path.
  * @param {*} params [object] remote api params.
- * @param {*} apiDataConvert [function] get api data handler.
  * @param {*} target [object] target.
  * @param {*} handleData [object] origin processing data.
  * @param {*} failureCallback [function] remote access logic fail handler, eg. failureCallback(remoteData,whetherCauseByAuthorizeFail).
@@ -157,7 +156,6 @@ export function handleItem({ target, dataId, compareDataIdHandler, handler }) {
 export async function actionCore({
   api,
   params,
-  apiDataConvert = null,
   target,
   handleData,
   failureCallback,
@@ -198,146 +196,129 @@ export async function actionCore({
     Tips.loading(textProcessing || '处理中, 请稍后');
   }
 
-  target.setState({ processing: true }, () => {
-    target.setState(
-      {
-        dispatchComplete: false,
-      },
-      () => {
-        // 延迟一定时间, 优化界面呈现
-        setTimeout(
-          () => {
-            try {
-              dispatch({
-                type: api,
-                payload: params,
-              })
-                .then(() => {
-                  if (showProcessing) {
-                    setTimeout(() => {
-                      Tips.loaded();
-                    }, 200);
-                  }
+  await target.setDispatchCompleteToFalse(target, { processing: true });
 
-                  if (!isFunction(apiDataConvert)) {
-                    throw new Error(
-                      'actionCore: apiDataConvert must be function',
-                    );
-                  }
-
-                  const data = apiDataConvert(target.props);
-
-                  if ((data || null) == null) {
-                    throw new Error(
-                      'actionCore: apiDataConvert result not allow null',
-                    );
-                  }
-
-                  const { dataSuccess } = data;
-
-                  if (dataSuccess) {
-                    const {
-                      list: remoteListData,
-                      data: remoteData,
-                      extra: remoteExtraData,
-                    } = data;
-
-                    let messageText = successMessage;
-
-                    if (isFunction(successMessageBuilder)) {
-                      messageText = successMessageBuilder({
-                        remoteListData: remoteListData || [],
-                        remoteData: remoteData || null,
-                        remoteExtraData: remoteExtraData || null,
-                        remoteOriginal: data,
-                      });
-                    }
-
-                    if (!stringIsNullOrWhiteSpace(messageText)) {
-                      notifySuccess(messageText);
-                    }
-
-                    if (isFunction(successCallback)) {
-                      successCallback({
-                        target,
-                        handleData,
-                        remoteListData: remoteListData || [],
-                        remoteData: remoteData || null,
-                        remoteExtraData: remoteExtraData || null,
-                        remoteOriginal: data,
-                      });
-                    }
-                  } else {
-                    if (isFunction(failureCallback)) {
-                      failureCallback({
-                        target,
-                        handleData,
-                        remoteOriginal: data,
-                        error: null,
-                      });
-                    }
-                  }
-
-                  target.setState({
-                    processing: false,
-                    dispatchComplete: true,
-                  });
-
-                  return;
-                })
-                .catch((error) => {
-                  recordError(error);
-
-                  if (showProcessing) {
-                    setTimeout(() => {
-                      Tips.loaded();
-                    }, 200);
-                  }
-
-                  failureCallback({
-                    target,
-                    handleData,
-                    remoteOriginal: null,
-                    error,
-                  });
-
-                  target.setState({
-                    processing: false,
-                    dispatchComplete: true,
-                  });
-                });
-            } catch (e) {
-              Tips.loaded();
-
-              const text = `${toString(
-                e,
-              )}, please confirm dispatch type exists first.`;
-
-              recordError({
-                message: text,
-                dispatchInfo: {
-                  type: api,
-                  payload: params,
-                },
-              });
-
-              failureCallback({
-                target,
-                handleData,
-                remoteOriginal: null,
-                error: e,
-              });
-
-              showErrorMessage({
-                message: text,
-              });
+  // 延迟一定时间, 优化界面呈现
+  setTimeout(
+    () => {
+      try {
+        dispatch({
+          type: api,
+          payload: params,
+        })
+          .then((data) => {
+            if (showProcessing) {
+              setTimeout(() => {
+                Tips.loaded();
+              }, 200);
             }
+
+            if ((data || null) == null) {
+              throw new Error('exec result data is null');
+            }
+
+            const { dataSuccess } = data;
+
+            if (dataSuccess) {
+              const {
+                list: remoteListData,
+                data: remoteData,
+                extra: remoteExtraData,
+              } = data;
+
+              let messageText = successMessage;
+
+              if (isFunction(successMessageBuilder)) {
+                messageText = successMessageBuilder({
+                  remoteListData: remoteListData || [],
+                  remoteData: remoteData || null,
+                  remoteExtraData: remoteExtraData || null,
+                  remoteOriginal: data,
+                });
+              }
+
+              if (!stringIsNullOrWhiteSpace(messageText)) {
+                notifySuccess(messageText);
+              }
+
+              if (isFunction(successCallback)) {
+                successCallback({
+                  target,
+                  handleData,
+                  remoteListData: remoteListData || [],
+                  remoteData: remoteData || null,
+                  remoteExtraData: remoteExtraData || null,
+                  remoteOriginal: data,
+                });
+              }
+            } else {
+              if (isFunction(failureCallback)) {
+                failureCallback({
+                  target,
+                  handleData,
+                  remoteOriginal: data,
+                  error: null,
+                });
+              }
+            }
+
+            target.setState({
+              processing: false,
+              dispatchComplete: true,
+            });
+
+            return;
+          })
+          .catch((error) => {
+            recordError(error);
+
+            if (showProcessing) {
+              setTimeout(() => {
+                Tips.loaded();
+              }, 200);
+            }
+
+            failureCallback({
+              target,
+              handleData,
+              remoteOriginal: null,
+              error,
+            });
+
+            target.setState({
+              processing: false,
+              dispatchComplete: true,
+            });
+          });
+      } catch (e) {
+        Tips.loaded();
+
+        const text = `${toString(
+          e,
+        )}, please confirm dispatch type exists first.`;
+
+        recordError({
+          message: text,
+          dispatchInfo: {
+            type: api,
+            payload: params,
           },
-          isNumber(delay) ? (delay < 0 ? 400 : delay) : 400,
-        );
-      },
-    );
-  });
+        });
+
+        failureCallback({
+          target,
+          handleData,
+          remoteOriginal: null,
+          error: e,
+        });
+
+        showErrorMessage({
+          message: text,
+        });
+      }
+    },
+    isNumber(delay) ? (delay < 0 ? 400 : delay) : 400,
+  );
 }
 
 /**

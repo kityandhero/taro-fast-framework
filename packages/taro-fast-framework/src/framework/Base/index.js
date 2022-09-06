@@ -122,7 +122,19 @@ class Base extends Infrastructure {
     return '';
   };
 
-  initLoad = ({ otherState = {}, params = {}, delay = 0, callback = null }) => {
+  setDispatchCompleteToFalse = async (target, otherState) => {
+    target.setState({
+      ...(otherState || {}),
+      dispatchComplete: false,
+    });
+  };
+
+  initLoad = async ({
+    otherState = {},
+    params = {},
+    delay = 0,
+    callback = null,
+  }) => {
     const {
       loadApiPath,
       firstLoadSuccess,
@@ -140,6 +152,7 @@ class Base extends Infrastructure {
         // recordObject(this);
 
         this.setState({
+          spin: false,
           dataLoading: false,
           loadSuccess: false,
           reloading: false,
@@ -160,53 +173,48 @@ class Base extends Infrastructure {
         ...(otherState || {}),
       };
 
-      this.setState(willSaveState, () => {
-        this.setState(
-          {
-            dispatchComplete: false,
-          },
-          () => {
-            let submitData = {
-              ...(this.initLoadRequestParams() || {}),
-            };
+      const that = this;
 
-            submitData = pretreatmentRequestParams(submitData || {});
+      await that.setDispatchCompleteToFalse(that, willSaveState);
 
-            submitData = this.supplementLoadRequestParams(submitData || {});
+      let submitData = {
+        ...(that.initLoadRequestParams() || {}),
+      };
 
-            const checkResult = this.checkLoadRequestParams(submitData || {});
+      submitData = pretreatmentRequestParams(submitData || {});
 
-            if (checkResult) {
-              if (!firstLoadSuccess) {
-                this.beforeFirstLoadRequest(submitData || {});
-              }
+      submitData = that.supplementLoadRequestParams(submitData || {});
 
-              if (reloadingBefore) {
-                this.beforeReLoadRequest(submitData || {});
-              }
+      const checkResult = that.checkLoadRequestParams(submitData || {});
 
-              this.beforeRequest(submitData || {});
+      if (checkResult) {
+        if (!firstLoadSuccess) {
+          that.beforeFirstLoadRequest(submitData || {});
+        }
 
-              this.initLoadCore({
-                requestData: { ...(submitData || {}), ...params },
-                delay,
-                callback,
-              });
-            } else {
-              this.setState({
-                spin: false,
-                dataLoading: false,
-                loadSuccess: false,
-                reloading: false,
-                searching: false,
-                refreshing: false,
-                paging: false,
-                dispatchComplete: true,
-              });
-            }
-          },
-        );
-      });
+        if (reloadingBefore) {
+          that.beforeReLoadRequest(submitData || {});
+        }
+
+        that.beforeRequest(submitData || {});
+
+        that.initLoadCore({
+          requestData: { ...(submitData || {}), ...params },
+          delay,
+          callback,
+        });
+      } else {
+        that.setState({
+          spin: false,
+          dataLoading: false,
+          loadSuccess: false,
+          reloading: false,
+          searching: false,
+          refreshing: false,
+          paging: false,
+          dispatchComplete: true,
+        });
+      }
     } catch (error) {
       recordText({ loadApiPath });
 
@@ -274,7 +282,7 @@ class Base extends Infrastructure {
           type: loadApiPath,
           payload: requestData,
         })
-          .then(() => {
+          .then((metaOriginalData) => {
             hideNavigationBarLoading();
             stopPullDownRefresh();
 
@@ -288,8 +296,6 @@ class Base extends Infrastructure {
               paging: false,
               dispatchComplete: true,
             };
-
-            const metaOriginalData = that.apiDataConvert(that.props);
 
             if (isUndefined(metaOriginalData)) {
               that.setState(willSaveToState);
@@ -407,6 +413,7 @@ class Base extends Infrastructure {
             recordError(error);
 
             that.setState({
+              spin: false,
               dataLoading: false,
               loadSuccess: false,
               reloading: false,
@@ -424,6 +431,7 @@ class Base extends Infrastructure {
       recordObject({ loadApiPath, requestData });
 
       this.setState({
+        spin: false,
         dataLoading: false,
         loadSuccess: false,
         reloading: false,
@@ -484,19 +492,11 @@ class Base extends Infrastructure {
     }
   };
 
-  remoteRequest = ({ type, payload, modelName = '', key = 'data' }) => {
+  remoteRequest = ({ type, payload }) => {
     return this.dispatchApi({
       type,
       payload,
-    }).then(() => {
-      const metaOriginalData = stringIsNullOrWhiteSpace(modelName)
-        ? this.apiDataConvert(this.props)
-        : apiDataConvertCore({
-            props: this.props,
-            modelName: modelName,
-            key: key || '',
-          });
-
+    }).then((metaOriginalData) => {
       const { dataSuccess, code: remoteCode } = metaOriginalData;
 
       if (dataSuccess) {
