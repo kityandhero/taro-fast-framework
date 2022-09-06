@@ -182,7 +182,6 @@ class ColorText extends BaseComponent {
         <FlexBox
           flexAuto="right"
           left={icon ? <VerticalBox>{icon}</VerticalBox> : null}
-          // left={icon ? <View>{icon}</View> : null}
           leftStyle={
             icon
               ? {
@@ -191,7 +190,7 @@ class ColorText extends BaseComponent {
                 }
               : {}
           }
-          // right={this.buildRight()}
+          right={this.buildRight()}
         />
       </View>
     );
