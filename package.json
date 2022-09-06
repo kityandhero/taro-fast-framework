@@ -106,9 +106,9 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.9",
-    "@babel/plugin-proposal-decorators": "^7.18.10",
+    "@babel/plugin-proposal-decorators": "^7.19.0",
     "@babel/preset-react": "^7.18.6",
-    "@babel/runtime": "^7.18.9",
+    "@babel/runtime": "^7.19.0",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@commitlint/config-lerna-scopes": "^17.0.2",
