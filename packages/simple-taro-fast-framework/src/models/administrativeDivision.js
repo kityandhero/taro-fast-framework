@@ -1,9 +1,10 @@
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
+import { pretreatmentRemoteListData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { singeListData } from '../services/administrativeDivision';
 
@@ -15,18 +16,23 @@ export default {
   },
 
   effects: {
-    *singeList({ payload }, { call, put }) {
+    *singeList({ payload, alias }, { call, put }) {
       const response = yield call(singeListData, payload);
 
+      const dataAdjust = pretreatmentRemoteListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleListData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
   },
 
   reducers: {
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

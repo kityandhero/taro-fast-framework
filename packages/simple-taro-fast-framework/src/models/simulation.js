@@ -1,9 +1,14 @@
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
+import {
+  pretreatmentRemoteListData,
+  pretreatmentRemotePageListData,
+  pretreatmentRemoteSingleData,
+} from 'taro-fast-framework/es/utils/requestAssistor';
 
 import {
   getData,
@@ -23,72 +28,107 @@ export default {
   },
 
   effects: {
-    *pageList({ payload }, { call, put }) {
+    *pageList({ payload, alias }, { call, put }) {
       const response = yield call(pageListData, payload);
 
+      const dataAdjust = pretreatmentRemotePageListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handlePageListData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
-    *pageListEmpty({ payload }, { call, put }) {
+    *pageListEmpty({ payload, alias }, { call, put }) {
       const response = yield call(pageListEmptyData, payload);
 
+      const dataAdjust = pretreatmentRemotePageListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handlePageListData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
-    *singleList({ payload }, { call, put }) {
+    *singleList({ payload, alias }, { call, put }) {
       const response = yield call(singleListData, payload);
 
+      const dataAdjust = pretreatmentRemoteListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleListData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
-    *singleListEmpty({ payload }, { call, put }) {
+    *singleListEmpty({ payload, alias }, { call, put }) {
       const response = yield call(singleListEmptyData, payload);
 
+      const dataAdjust = pretreatmentRemoteListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleListData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
-    *getOverview({ payload }, { call, put }) {
+    *getOverview({ payload, alias }, { call, put }) {
       const response = yield call(getOverviewData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
-    *get({ payload }, { call, put }) {
+    *get({ payload, alias }, { call, put }) {
       const response = yield call(getData, payload);
 
-      yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
-      });
-    },
-    *switchStatus({ payload }, { call, put }) {
-      const response = yield call(switchStatusData, payload);
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
+    },
+    *switchStatus({ payload, alias }, { call, put }) {
+      const response = yield call(switchStatusData, payload);
+
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
+      yield put({
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
+      });
+
+      return dataAdjust;
     },
   },
 
   reducers: {
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

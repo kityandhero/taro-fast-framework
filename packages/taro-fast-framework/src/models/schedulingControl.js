@@ -22,11 +22,15 @@ import {
 } from '../services/schedulingControl';
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from '../utils/dva';
+import {
+  pretreatmentRemoteListData,
+  pretreatmentRemoteSingleData,
+} from '../utils/requestAssistor';
 
 export default {
   namespace: 'schedulingControl',
@@ -51,92 +55,128 @@ export default {
     *refreshSession({ payload, alias }, { call, put }) {
       const response = yield call(refreshSessionData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *checkTicketValidity({ payload, alias }, { call, put }) {
       const response = yield call(checkTicketValidityData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *exchangePhone({ payload, alias }, { call, put }) {
       const response = yield call(exchangePhoneData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *signInSilent({ payload, alias }, { call, put }) {
       const response = yield call(signInSilentData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *getMetaData({ payload, alias }, { call, put }) {
       const response = yield call(getMetaDataData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *getCustomer({ payload, alias }, { call, put }) {
       const response = yield call(getCustomerData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *getFullAdministrativeDivisionData({ payload, alias }, { call, put }) {
       const response = yield call(getAdministrativeDivisionFullData, payload);
 
+      const dataAdjust = pretreatmentRemoteListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleListData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *registerWithWeChat({ payload, alias }, { call, put }) {
       const response = yield call(registerWithWeChatData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *register({ payload, alias }, { call, put }) {
       const response = yield call(registerData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *getWeather({ payload }, { call, put }) {
       let result = getWeather();
@@ -165,12 +205,16 @@ export default {
         result = metaData;
       }
 
+      const dataAdjust = {
+        weather: result,
+      };
+
       yield put({
         type: 'changeWeather',
-        payload: {
-          weather: result,
-        },
+        payload: dataAdjust,
       });
+
+      return dataAdjust;
     },
     *initialLocationMode({ payload }, { put }) {
       yield put({
@@ -291,6 +335,6 @@ export default {
         signInProcessDetection: payload,
       };
     },
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

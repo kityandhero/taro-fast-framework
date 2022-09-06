@@ -1,9 +1,10 @@
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
+import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { getCustomerData } from '../services/customer';
 
@@ -15,18 +16,23 @@ export default {
   },
 
   effects: {
-    *getCustomer({ payload }, { call, put }) {
+    *getCustomer({ payload, alias }, { call, put }) {
       const response = yield call(getCustomerData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
   },
 
   reducers: {
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

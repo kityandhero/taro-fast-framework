@@ -1,10 +1,11 @@
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
+import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { exchangeShareData, getData } from '@/services/global';
 
@@ -20,25 +21,34 @@ export default {
     *getMetaData({ payload, alias }, { call, put }) {
       const response = yield call(getData, payload);
 
-      yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        alias,
-        ...handleDefaultParams,
-      });
-    },
-    *exchangeShare({ payload }, { call, put }) {
-      const response = yield call(exchangeShareData, payload);
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
+    },
+    *exchangeShare({ payload, alias }, { call, put }) {
+      const response = yield call(exchangeShareData, payload);
+
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
+      yield put({
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
+      });
+
+      return dataAdjust;
     },
   },
 
   reducers: {
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

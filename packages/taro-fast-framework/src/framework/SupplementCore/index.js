@@ -752,7 +752,9 @@ class SupplementCore extends Common {
 
             that
               .dispatchRefreshSession({ code })
-              .then(() => {
+              .then((vv) => {
+                console.log(vv);
+
                 const remoteData = this.getRefreshSessionApiData();
 
                 const { dataSuccess, data: metaData } = remoteData;

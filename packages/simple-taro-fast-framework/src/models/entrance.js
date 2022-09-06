@@ -1,9 +1,10 @@
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
+import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import {
   checkTicketValidityData,
@@ -21,56 +22,79 @@ export default {
   },
 
   effects: {
-    *signIn({ payload }, { call, put }) {
+    *signIn({ payload, alias }, { call, put }) {
       const response = yield call(signInData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
     *signInSilent({ payload, alias }, { call, put }) {
       const response = yield call(signInSilentData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
-    *register({ payload }, { call, put }) {
+    *register({ payload, alias }, { call, put }) {
       const response = yield call(registerData, payload);
 
-      yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
-      });
-    },
-    *registerWithWeChat({ payload }, { call, put }) {
-      const response = yield call(registerWithWeChatData, payload);
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
+    },
+    *registerWithWeChat({ payload, alias }, { call, put }) {
+      const response = yield call(registerWithWeChatData, payload);
+
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
+      yield put({
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
+      });
+
+      return dataAdjust;
     },
     *checkTicketValidity({ payload, alias }, { call, put }) {
       const response = yield call(checkTicketValidityData, payload);
 
+      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
         alias,
-        ...handleDefaultParams,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
   },
 
   reducers: {
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

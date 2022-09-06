@@ -1,9 +1,10 @@
 import {
-  handleDefaultParams,
-  reducerCommonCollection,
-  reducerCommonNameCollection,
+  reducerCollection,
+  reducerDefaultParams,
+  reducerNameCollection,
   tacitlyState,
 } from 'taro-fast-framework/es/utils/dva';
+import { pretreatmentRemotePageListData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { getOverviewData } from '../services/news';
 
@@ -15,17 +16,23 @@ export default {
   },
 
   effects: {
-    *getOverview({ payload }, { call, put }) {
+    *getOverview({ payload, alias }, { call, put }) {
       const response = yield call(getOverviewData, payload);
+
+      const dataAdjust = pretreatmentRemotePageListData({ source: response });
+
       yield put({
-        type: reducerCommonNameCollection.handleCommonData,
-        payload: response,
-        ...handleDefaultParams,
+        type: reducerNameCollection.reducerData,
+        payload: dataAdjust,
+        alias,
+        ...reducerDefaultParams,
       });
+
+      return dataAdjust;
     },
   },
 
   reducers: {
-    ...reducerCommonCollection,
+    ...reducerCollection,
   },
 };

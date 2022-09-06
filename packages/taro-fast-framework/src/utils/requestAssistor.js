@@ -3,7 +3,6 @@ import { requestMethod } from 'taro-fast-common/es/utils/constants';
 import {
   corsTarget,
   getTaroGlobalData,
-  inCollection,
   queryStringify,
   recordDebug,
   recordInfo,
@@ -120,20 +119,28 @@ function dataExceptionNotice(d) {
  * 预处理单项数据返回
  *
  * @export
- * @param {*} d
+ * @param {*} source 源数据
+ * @param {*} pretreatment 源数据预处理
+ * @param {*} successCallback 请求成功后的可回调函数
+ * @param {*} failCallback 请求失败后的可回调函数
  * @returns
  */
-export function pretreatmentRemoteSingleData(d, dataHandler) {
-  const { code, message: messageText } = d || errorCustomData();
+export function pretreatmentRemoteSingleData({
+  source,
+  pretreatment = null,
+  successCallback = null,
+  failCallback = null,
+}) {
+  const { code, message: messageText } = source || errorCustomData();
   let v = {};
 
   const apiSuccessCode = defaultSettingsLayoutCustom.getApiSuccessCode();
 
   if (code === apiSuccessCode) {
-    const { data, extra } = d;
+    const { data, extra } = source;
 
-    if (isFunction(dataHandler)) {
-      v = dataHandler(d);
+    if (isFunction(pretreatment)) {
+      v = pretreatment(source);
     }
 
     v = {
@@ -143,6 +150,10 @@ export function pretreatmentRemoteSingleData(d, dataHandler) {
       extra: extra || {},
       dataSuccess: true,
     };
+
+    if (isFunction(successCallback)) {
+      successCallback(v);
+    }
   } else {
     v = {
       code,
@@ -151,6 +162,10 @@ export function pretreatmentRemoteSingleData(d, dataHandler) {
       extra: null,
       dataSuccess: false,
     };
+
+    if (isFunction(failCallback)) {
+      failCallback(v);
+    }
 
     dataExceptionNotice(v);
   }
@@ -162,15 +177,31 @@ export function pretreatmentRemoteSingleData(d, dataHandler) {
  * 预处理集合数据返回
  *
  * @export
- * @param {*} d
+ * @param {*} source
+ * @param {*} pretreatment 源数据预处理
+ * @param {*} itemPretreatment 源数据项预处理
+ * @param {*} successCallback 请求成功后的可回调函数
+ * @param {*} failCallback 请求失败后的可回调函数
  * @returns
  */
-export function pretreatmentRemoteListData(d, itemHandler) {
-  const { code, message: messageText } = d || errorCustomData();
+export function pretreatmentRemoteListData({
+  source,
+  pretreatment = null,
+  itemPretreatment = null,
+  successCallback = null,
+  failCallback = null,
+}) {
+  const { code, message: messageText } = source || errorCustomData();
   let v = {};
 
   if (code === defaultSettingsLayoutCustom.getApiSuccessCode()) {
-    const { list: listData, extra: extraData } = d;
+    let sourceAdjust = source;
+
+    if (isFunction(pretreatment)) {
+      sourceAdjust = pretreatment(source);
+    }
+
+    const { list: listData, extra: extraData } = sourceAdjust;
     const list = (listData || []).map((item, index) => {
       let o = item;
 
@@ -178,9 +209,10 @@ export function pretreatmentRemoteListData(d, itemHandler) {
         o.key = `list-${index}`;
       }
 
-      if (typeof itemHandler === 'function') {
-        o = itemHandler(o);
+      if (isFunction(itemPretreatment)) {
+        o = itemPretreatment(o);
       }
+
       return o;
     });
 
@@ -192,6 +224,10 @@ export function pretreatmentRemoteListData(d, itemHandler) {
       extra: extraData,
       dataSuccess: true,
     };
+
+    if (isFunction(successCallback)) {
+      successCallback(v);
+    }
   } else {
     v = {
       code,
@@ -201,6 +237,10 @@ export function pretreatmentRemoteListData(d, itemHandler) {
       extra: null,
       dataSuccess: false,
     };
+
+    if (isFunction(failCallback)) {
+      failCallback(v);
+    }
 
     dataExceptionNotice(v);
   }
@@ -212,11 +252,21 @@ export function pretreatmentRemoteListData(d, itemHandler) {
  * 预处理分页数据返回
  *
  * @export
- * @param {*} d
+ * @param {*} source
+ * @param {*} pretreatment 源数据预处理
+ * @param {*} itemPretreatment 源数据项预处理
+ * @param {*} successCallback 请求成功后的可回调函数
+ * @param {*} failCallback 请求失败后的可回调函数
  * @returns
  */
-export function pretreatmentRemotePageListData(d, listItemHandler) {
-  const { code, message: messageText } = d || errorCustomData();
+export function pretreatmentRemotePageListData({
+  source,
+  pretreatment = null,
+  itemPretreatment = null,
+  successCallback = null,
+  failCallback = null,
+}) {
+  const { code, message: messageText } = source || errorCustomData();
   let v = {};
 
   const codeAdjust = toNumber(code);
@@ -224,7 +274,13 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
   if (
     codeAdjust === toNumber(defaultSettingsLayoutCustom.getApiSuccessCode())
   ) {
-    const { list: listData, extra: extraData } = d;
+    let sourceAdjust = source;
+
+    if (isFunction(pretreatment)) {
+      sourceAdjust = pretreatment(source);
+    }
+
+    const { list: listData, extra: extraData } = sourceAdjust;
     const { pageNo } = extraData;
     const list = (listData || []).map((item, index) => {
       let o = item;
@@ -233,9 +289,10 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
         o.key = `${pageNo}-${index}`;
       }
 
-      if (typeof listItemHandler === 'function') {
-        o = listItemHandler(o);
+      if (isFunction(itemPretreatment)) {
+        o = itemPretreatment(o);
       }
+
       return o;
     });
 
@@ -252,6 +309,10 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
       extra: extraData,
       dataSuccess: true,
     };
+
+    if (isFunction(successCallback)) {
+      successCallback(v);
+    }
   } else {
     v = {
       code: codeAdjust,
@@ -266,6 +327,10 @@ export function pretreatmentRemotePageListData(d, listItemHandler) {
       },
       dataSuccess: false,
     };
+
+    if (isFunction(failCallback)) {
+      failCallback(v);
+    }
 
     dataExceptionNotice(v);
   }
@@ -287,83 +352,6 @@ export function pretreatmentRequestParams(params, customHandle) {
   }
 
   return submitData;
-}
-
-/**
- * 常规数据出库辅助方法
- * @param {*} state
- * @param {*} action
- * @param {*} namespace
- * @returns
- */
-export function handleCommonDataAssist(state, action, namespace) {
-  const {
-    payload: d,
-    callback,
-    pretreatment,
-    alias,
-    cacheData: cacheDataValue,
-  } = {
-    ...{
-      callback: null,
-      pretreatment: null,
-      alias: null,
-      cacheData: false,
-    },
-    ...action,
-  };
-
-  const cacheData = inCollection(
-    [
-      defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
-      defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
-      defaultSettingsLayoutCustom.getSignInSilentAliasName(),
-      defaultSettingsLayoutCustom.getMetaDataAliasName(),
-    ],
-    alias,
-  )
-    ? true
-    : cacheDataValue;
-
-  let v = pretreatmentRemoteSingleData(d, pretreatment);
-
-  if (isFunction(callback)) {
-    v = callback(v);
-  }
-
-  let result = null;
-
-  if (isUndefined(alias) || !isString(alias)) {
-    result = {
-      ...state,
-      data: v,
-      fromRemote: true,
-    };
-  } else {
-    result = {
-      ...state,
-      fromRemote: true,
-    };
-
-    result[alias] = v;
-  }
-
-  if (cacheData) {
-    const key = `${namespace}_${alias || 'data'}`;
-
-    const cacheResult = setCache({
-      key,
-      value: v,
-    });
-
-    recordDebug(
-      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
-        cacheResult ? 'cache success' : 'cache fail'
-      }.`,
-    );
-  }
-
-  return result;
 }
 
 /**

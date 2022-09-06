@@ -1,14 +1,15 @@
 // import createLoading from 'dva-loading';
-import { recordError } from 'taro-fast-common/es/utils/tools';
+import { setCache } from 'taro-fast-common/es/utils/cacheAssist';
+import {
+  inCollection,
+  recordDebug,
+  recordError,
+} from 'taro-fast-common/es/utils/tools';
+import { isString, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 import { create } from 'taro-fast-dva/es/dva-core';
 import { createLoading } from 'taro-fast-dva/es/dva-loading';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
-import {
-  handleCommonDataAssist,
-  handleListDataAssist,
-  handlePageListDataAssist,
-} from './requestAssistor';
 
 let app;
 let store;
@@ -38,23 +39,77 @@ function createApp(opt) {
   return app;
 }
 
-export const reducerCommonNameCollection = {
-  handleCommonData: 'handleCommonData',
-  handleListData: 'handleListData',
-  handlePageListData: 'handlePageListData',
+export const reducerNameCollection = {
+  reducerData: 'reducerData',
 };
 
-export const reducerCommonCollection = {
-  handleCommonData(state, action, namespace) {
-    return handleCommonDataAssist(state, action, namespace);
-  },
-  handleListData(state, action, namespace) {
-    return handleListDataAssist(state, action, namespace);
-  },
-  handlePageListData(state, action, namespace) {
-    return handlePageListDataAssist(state, action, namespace);
+export const reducerCollection = {
+  reducerData(state, action, namespace) {
+    return reducerDataAssist(state, action, namespace);
   },
 };
+
+function reducerDataAssist(state, action, namespace) {
+  const {
+    payload: v,
+    alias,
+    cacheData: cacheDataValue,
+  } = {
+    ...{
+      callback: null,
+      pretreatment: null,
+      alias: null,
+      cacheData: false,
+    },
+    ...action,
+  };
+
+  const cacheData = inCollection(
+    [
+      defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
+      defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
+      defaultSettingsLayoutCustom.getSignInSilentAliasName(),
+      defaultSettingsLayoutCustom.getMetaDataAliasName(),
+    ],
+    alias,
+  )
+    ? true
+    : cacheDataValue;
+
+  let result = null;
+
+  if (isUndefined(alias) || !isString(alias)) {
+    result = {
+      ...state,
+      data: v,
+      fromRemote: true,
+    };
+  } else {
+    result = {
+      ...state,
+      fromRemote: true,
+    };
+
+    result[alias] = v;
+  }
+
+  if (cacheData) {
+    const key = `${namespace}_${alias || 'data'}`;
+
+    const cacheResult = setCache({
+      key,
+      value: v,
+    });
+
+    recordDebug(
+      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
+        cacheResult ? 'cache success' : 'cache fail'
+      }.`,
+    );
+  }
+
+  return result;
+}
 
 /**
  * 初始化state
@@ -70,10 +125,13 @@ export const tacitlyState = {
   },
 };
 
+export const reducerDefaultParams = {
+  cacheData: false,
+};
+
 export const handleDefaultParams = {
   callback: null,
   pretreatment: null,
-  cacheData: false,
 };
 
 export default {
