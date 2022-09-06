@@ -97,6 +97,7 @@ import {
   recordLog as recordLogCore,
   recordObject as recordObjectCore,
   recordText as recordTextCore,
+  recordTrace as recordTraceCore,
   recordWarn as recordWarnCore,
 } from './log';
 import Tips from './tips';
@@ -479,6 +480,10 @@ export function showMessage({
  */
 export function recordLog(record, showMode, level = logLevel.debug) {
   recordLogCore(record, showMode, level);
+}
+
+export function recordTrace(record) {
+  recordTraceCore(record);
 }
 
 export function recordWarn(record) {

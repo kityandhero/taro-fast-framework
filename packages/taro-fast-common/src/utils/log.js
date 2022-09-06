@@ -33,6 +33,18 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
   }
 
+  if (logShowInConsole() && level === logLevel.trace) {
+    if (showModeModified === logShowMode.text) {
+      const data = { trace: record };
+
+      console.log('%c%s', 'color:#2f271d;', JSON.stringify(data));
+    }
+
+    if (showModeModified === logShowMode.object) {
+      console.log({ trace: record });
+    }
+  }
+
   if (logShowInConsole() && level === logLevel.debug) {
     if (showModeModified === logShowMode.text) {
       const data = { debug: record };
@@ -130,6 +142,14 @@ export function recordConfig(record) {
   }
 }
 
+export function recordTrace(record) {
+  if (isString(record)) {
+    recordText(record, logLevel.trace);
+  } else {
+    recordObject(record, logLevel.trace);
+  }
+}
+
 export function recordDebug(record) {
   if (isString(record)) {
     recordText(record, logLevel.debug);
@@ -164,7 +184,7 @@ export function recordError(record) {
  * @param {*} str
  * @returns
  */
-export function recordText(record, level = logLevel.debug) {
+export function recordText(record, level = logLevel.trace) {
   recordLog(record, logShowMode.text, level);
 }
 
@@ -175,7 +195,7 @@ export function recordText(record, level = logLevel.debug) {
  * @param {*} str
  * @returns
  */
-export function recordObject(record, level = logLevel.debug) {
+export function recordObject(record, level = logLevel.trace) {
   recordLog(record, logShowMode.object, level);
 }
 

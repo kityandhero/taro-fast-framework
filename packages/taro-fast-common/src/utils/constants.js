@@ -268,6 +268,11 @@ export const whetherNumber = {
  */
 export const logLevel = {
   /**
+   * 跟踪
+   */
+  trace: 'trace',
+
+  /**
    * 调试
    */
   debug: 'debug',

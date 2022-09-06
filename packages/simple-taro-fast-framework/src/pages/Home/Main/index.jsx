@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
-import { isBrowser, navigateTo } from 'taro-fast-common/es/utils/tools';
+import {
+  isBrowser,
+  navigateTo,
+  recordTrace,
+} from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   Icon,
@@ -165,6 +169,10 @@ export default class Index extends PageWrapperSimulation {
   }
 
   renderFurther() {
+    recordTrace(
+      'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+    );
+
     // let r = '';
 
     // for (let i = 1000; i <= 2000; i = i + 10) {
