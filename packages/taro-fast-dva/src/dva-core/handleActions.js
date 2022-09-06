@@ -7,10 +7,13 @@ function identify(value) {
 function handleAction(actionType, reducer = identify, namespace) {
   return (state, action) => {
     const { type } = action;
+
     invariant(type, 'dispatch: action should be a plain Object with type');
+
     if (actionType === type) {
       return reducer(state, action, namespace);
     }
+
     return state;
   };
 }
