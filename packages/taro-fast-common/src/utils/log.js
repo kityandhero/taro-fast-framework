@@ -37,11 +37,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     if (showModeModified === logShowMode.text) {
       const data = { trace: record };
 
-      console.log('%c%s', 'color:#2f271d;', JSON.stringify(data));
+      console.log('%c%s', 'color:#596032;', JSON.stringify(data));
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ trace: record });
+      console.log('%c%s', 'color:#596032;', { trace: record });
     }
   }
 
