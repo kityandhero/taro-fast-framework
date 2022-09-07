@@ -526,8 +526,8 @@ export async function request({
 
   if (useVirtualRequest) {
     recordTrace(
-      `api request is virtual: simulation start${
-        virtualRequestDelay > 0 ? `, delay ${virtualRequestDelay}ms,` : ''
+      `api request is virtual: simulation start,${
+        virtualRequestDelay > 0 ? ` delay ${virtualRequestDelay}ms,` : ''
       } api is ${api}.`,
     );
 
