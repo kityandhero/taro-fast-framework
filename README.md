@@ -100,6 +100,10 @@ npm run build:all
 
 [![Alt text](https://github.com/kityandhero/github-images/blob/main/taro-fast-framework-images/screenshot/11.png?raw=true)](11.png)
 
+### Online Preview
+
+<img src="https://github.com/kityandhero/github-images/blob/main/taro-fast-framework-images/weapp_qrcode.jpg?raw=true" width=256 height=256 />
+
 ## More
 
 welcome any feedback in our [github](https://github.com/kityandhero/taro-fast-framework).

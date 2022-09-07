@@ -175,4 +175,5 @@ export default {
       desc: '你的位置信息将用于获取所在地的天气信息',
     },
   },
+  requiredPrivateInfos: ['getFuzzyLocation'],
 };
