@@ -8,6 +8,7 @@ import {
   recordInfo,
   recordObject,
   recordText,
+  recordTrace,
   redirectTo,
   showErrorMessage,
   showInfoMessage,
@@ -524,7 +525,11 @@ export async function request({
   const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
 
   if (useVirtualRequest) {
-    recordDebug(`api request is virtual: simulation start.`);
+    recordTrace(
+      `api request is virtual: simulation start${
+        virtualRequestDelay > 0 ? `, delay ${virtualRequestDelay}ms,` : ''
+      } api is ${api}.`,
+    );
 
     if (showUseVirtualRequestMessage) {
       setTimeout(

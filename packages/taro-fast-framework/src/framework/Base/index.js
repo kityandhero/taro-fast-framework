@@ -1,5 +1,6 @@
 import {
   hideNavigationBarLoading,
+  recordDebug,
   recordError,
   recordExecute,
   recordObject,
@@ -112,19 +113,7 @@ class Base extends Infrastructure {
     return '';
   };
 
-  setDispatchCompleteToFalse = async (target, otherState) => {
-    target.setState({
-      ...(otherState || {}),
-      dispatchComplete: false,
-    });
-  };
-
-  initLoad = async ({
-    otherState = {},
-    params = {},
-    delay = 0,
-    callback = null,
-  }) => {
+  initLoad = ({ otherState = {}, params = {}, delay = 0, callback = null }) => {
     const {
       loadApiPath,
       firstLoadSuccess,
@@ -140,6 +129,8 @@ class Base extends Infrastructure {
         // });
 
         // recordObject(this);
+
+        recordDebug('state dispatchComplete will set to true');
 
         this.setState({
           spin: false,
@@ -165,46 +156,57 @@ class Base extends Infrastructure {
 
       const that = this;
 
-      await that.setDispatchCompleteToFalse(that, willSaveState);
+      that.setState(
+        {
+          ...willSaveState,
+        },
+        () => {
+          recordDebug('state dispatchComplete will set to false');
 
-      let submitData = {
-        ...(that.initLoadRequestParams() || {}),
-      };
+          that.setState({ dispatchComplete: false });
 
-      submitData = pretreatmentRequestParams(submitData || {});
+          let submitData = {
+            ...(that.initLoadRequestParams() || {}),
+          };
 
-      submitData = that.supplementLoadRequestParams(submitData || {});
+          submitData = pretreatmentRequestParams(submitData || {});
 
-      const checkResult = that.checkLoadRequestParams(submitData || {});
+          submitData = that.supplementLoadRequestParams(submitData || {});
 
-      if (checkResult) {
-        if (!firstLoadSuccess) {
-          that.beforeFirstLoadRequest(submitData || {});
-        }
+          const checkResult = that.checkLoadRequestParams(submitData || {});
 
-        if (reloadingBefore) {
-          that.beforeReLoadRequest(submitData || {});
-        }
+          if (checkResult) {
+            if (!firstLoadSuccess) {
+              that.beforeFirstLoadRequest(submitData || {});
+            }
 
-        that.beforeRequest(submitData || {});
+            if (reloadingBefore) {
+              that.beforeReLoadRequest(submitData || {});
+            }
 
-        that.initLoadCore({
-          requestData: { ...(submitData || {}), ...params },
-          delay,
-          callback,
-        });
-      } else {
-        that.setState({
-          spin: false,
-          dataLoading: false,
-          loadSuccess: false,
-          reloading: false,
-          searching: false,
-          refreshing: false,
-          paging: false,
-          dispatchComplete: true,
-        });
-      }
+            that.beforeRequest(submitData || {});
+
+            that.initLoadCore({
+              requestData: { ...(submitData || {}), ...params },
+              delay,
+              callback,
+            });
+          } else {
+            recordDebug('state dispatchComplete will set to true');
+
+            that.setState({
+              spin: false,
+              dataLoading: false,
+              loadSuccess: false,
+              reloading: false,
+              searching: false,
+              refreshing: false,
+              paging: false,
+              dispatchComplete: true,
+            });
+          }
+        },
+      );
     } catch (error) {
       recordText({ loadApiPath });
 
@@ -275,6 +277,8 @@ class Base extends Infrastructure {
           .then((metaOriginalData) => {
             hideNavigationBarLoading();
             stopPullDownRefresh();
+
+            recordDebug('state dispatchComplete will set to true');
 
             let willSaveToState = {
               spin: false,
@@ -402,6 +406,8 @@ class Base extends Infrastructure {
 
             recordError(error);
 
+            recordDebug('state dispatchComplete will set to true');
+
             that.setState({
               spin: false,
               dataLoading: false,
@@ -419,6 +425,8 @@ class Base extends Infrastructure {
       hideNavigationBarLoading();
 
       recordObject({ loadApiPath, requestData });
+
+      recordDebug('state dispatchComplete will set to true');
 
       this.setState({
         spin: false,

@@ -280,7 +280,7 @@ export async function singleListData(params) {
     params,
     useVirtualRequest: true,
     virtualNeedAuthorize: false,
-    virtualRequestDelay: 3000,
+    virtualRequestDelay: 400,
     virtualSuccessResponse: {
       list: articleList.slice(0, 10),
     },

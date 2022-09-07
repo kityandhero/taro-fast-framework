@@ -1,6 +1,6 @@
 import {
-  recordDebug,
   recordError,
+  recordTrace,
   redirectTo,
   showRuntimeError,
   showWarnMessage,
@@ -210,7 +210,7 @@ export async function apiVirtualAccess({
     }
   })
     .then((data) => {
-      recordDebug(`api request is virtual: simulation completed.`);
+      recordTrace(`api request is virtual: simulation completed.`);
 
       result = data;
 
