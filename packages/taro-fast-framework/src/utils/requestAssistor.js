@@ -524,6 +524,8 @@ export async function request({
   const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
 
   if (useVirtualRequest) {
+    recordDebug(`api request is virtual: simulation start.`);
+
     if (showUseVirtualRequestMessage) {
       setTimeout(
         () => {

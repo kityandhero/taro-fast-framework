@@ -1,4 +1,5 @@
 import {
+  recordDebug,
   recordError,
   redirectTo,
   showRuntimeError,
@@ -209,6 +210,8 @@ export async function apiVirtualAccess({
     }
   })
     .then((data) => {
+      recordDebug(`api request is virtual: simulation completed.`);
+
       result = data;
 
       return data;

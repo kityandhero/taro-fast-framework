@@ -47,6 +47,8 @@ export class Request {
 
     const response = await Taro.request(options);
 
+    recordDebug(`api request complete: ${options.url}`);
+
     const { code } = response.data;
 
     if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
@@ -145,7 +147,7 @@ export class Request {
         });
       }
 
-      recordDebug(`api request ${urlChange}`);
+      recordDebug(`api request start: ${urlChange}`);
 
       return Request.request({
         ...{

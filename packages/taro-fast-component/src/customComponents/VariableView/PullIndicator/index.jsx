@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { startTransition } from 'react';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
@@ -114,8 +115,10 @@ class PullIndicator extends BaseComponent {
       that.refreshingTimer = setTimeout(() => {
         that.refreshingIllusoryShow = false;
 
-        that.setState({
-          illusoryVisibleCompleted: true,
+        startTransition(() => {
+          that.setState({
+            illusoryVisibleCompleted: true,
+          });
         });
       }, 500);
     }
@@ -142,51 +145,57 @@ class PullIndicator extends BaseComponent {
 
       const refreshingBoxEffect = this.getRefreshingBoxEffect();
 
+      const that = this;
+
       if (moveY === 0) {
-        this.currentPullAnimalStep = 1;
-        this.currentMove = 0;
+        that.currentPullAnimalStep = 1;
+        that.currentMove = 0;
 
-        this.setState({
-          ...{
-            refreshBoxAnimationData:
-              refreshingBoxEffect !== 'scale'
-                ? this.refreshBoxAnimation.translateY(moveY).step().export()
-                : this.refreshBoxAnimation
-                    .scale(moveY / maxMoveY)
-                    .step()
-                    .export(),
-            refreshBoxPreloadAnimationData: this.refreshBoxPreloadAnimation
-              .rotate(rotate)
-              .step()
-              .export(),
-          },
-          ...(isUndefined(needRefresh) ? {} : { needRefresh }),
-        });
-      } else {
-        const nextStep = Math.ceil(moveY / (maxMoveY / this.pullAnimalStep));
-
-        if (
-          this.currentPullAnimalStep != nextStep ||
-          (!isUndefined(needRefresh) && needRefreshPrev != needRefresh)
-        ) {
-          this.currentPullAnimalStep = nextStep;
-          this.currentMove = moveY;
-
-          this.setState({
+        startTransition(() => {
+          that.setState({
             ...{
               refreshBoxAnimationData:
                 refreshingBoxEffect !== 'scale'
-                  ? this.refreshBoxAnimation.translateY(moveY).step().export()
-                  : this.refreshBoxAnimation
+                  ? that.refreshBoxAnimation.translateY(moveY).step().export()
+                  : that.refreshBoxAnimation
                       .scale(moveY / maxMoveY)
                       .step()
                       .export(),
-              refreshBoxPreloadAnimationData: this.refreshBoxPreloadAnimation
+              refreshBoxPreloadAnimationData: that.refreshBoxPreloadAnimation
                 .rotate(rotate)
                 .step()
                 .export(),
             },
             ...(isUndefined(needRefresh) ? {} : { needRefresh }),
+          });
+        });
+      } else {
+        const nextStep = Math.ceil(moveY / (maxMoveY / that.pullAnimalStep));
+
+        if (
+          that.currentPullAnimalStep != nextStep ||
+          (!isUndefined(needRefresh) && needRefreshPrev != needRefresh)
+        ) {
+          that.currentPullAnimalStep = nextStep;
+          that.currentMove = moveY;
+
+          startTransition(() => {
+            that.setState({
+              ...{
+                refreshBoxAnimationData:
+                  refreshingBoxEffect !== 'scale'
+                    ? that.refreshBoxAnimation.translateY(moveY).step().export()
+                    : that.refreshBoxAnimation
+                        .scale(moveY / maxMoveY)
+                        .step()
+                        .export(),
+                refreshBoxPreloadAnimationData: that.refreshBoxPreloadAnimation
+                  .rotate(rotate)
+                  .step()
+                  .export(),
+              },
+              ...(isUndefined(needRefresh) ? {} : { needRefresh }),
+            });
           });
         }
       }

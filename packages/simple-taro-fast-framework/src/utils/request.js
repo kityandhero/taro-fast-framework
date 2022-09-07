@@ -9,6 +9,7 @@ import { request } from 'taro-fast-framework/es/utils/requestAssistor';
  * @param {*} method [string]: ’GET‘ or ’POST‘, default is ’POST‘
  * @param {*} useVirtualRequest [bool]: whether to apply virtual requests
  * @param {*} showUseVirtualRequestMessage [bool]: whether display virtual request message prompt
+ * @param {*} showUseVirtualRequestMessageDelay [bool]: delay a time to showUseVirtualRequestMessage
  * @param {*} virtualSuccessResponse [object]: virtual request success response data
  * @param {*} virtualFailResponse [object]: virtual request fail response data
  * @param {*} virtualRequestResult [object]:mandatory set virtual request result, generally used to debug
