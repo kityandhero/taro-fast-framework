@@ -89,8 +89,8 @@ const listData = [
   },
   {
     id: 'VariableView',
-    title: '快速开发框架',
-    content: '查看快速开发框架内置功能',
+    title: '开发框架',
+    content: '查看开发框架内置功能',
     icon: iconHOC,
     webPage: false,
     path: pathCollection.framework.home.path,
@@ -153,7 +153,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-export default class Index extends PageWrapperSimulation {
+class Index extends PageWrapperSimulation {
   onShareAppMessage() {
     const o = {
       ...{
@@ -229,3 +229,5 @@ export default class Index extends PageWrapperSimulation {
     );
   }
 }
+
+export default Index;

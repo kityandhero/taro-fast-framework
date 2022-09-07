@@ -6,7 +6,7 @@ import { pathCollection } from '../../../customConfig/pathConfig';
 
 const o = {
   icon: iconBasic,
-  title: '快速开发框架',
+  title: '开发框架',
   list: [
     {
       id: 'PageExtend',
@@ -23,7 +23,7 @@ const o = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '快速开发框架',
+  navigationBarTitleText: '开发框架',
 });
 
 @connect(({ schedulingControl }) => ({
