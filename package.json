@@ -116,7 +116,7 @@
     "@commitlint/cz-commitlint": "^17.1.2",
     "commitizen": "^4.2.5",
     "husky": "^8.0.1",
-    "lerna": "^5.5.0",
+    "lerna": "^5.5.1",
     "lint-staged": "^13.0.3",
     "stylelint": "^14.11.0",
     "stylelint-config-prettier": "^9.0.3",
