@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
@@ -13,6 +12,7 @@ import {
   ImageBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import logoImage from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

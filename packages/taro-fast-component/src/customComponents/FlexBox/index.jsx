@@ -119,39 +119,18 @@ class FlexBox extends BaseComponent {
         alignItems: alignItems || defaultProps.alignItems,
       };
 
-      if (flexAuto === 'left') {
-        return (
-          <Row style={style} onClick={this.triggerClick}>
-            <Col
-              auto
-              align={stretch ? 'stretch' : ''}
-              style={{ ...(leftStyle || {}), ...styleCore }}
-            >
-              {left}
-            </Col>
-
-            {(right || null) == null ? null : (
-              <Col
-                align={stretch ? 'stretch' : ''}
-                style={{ ...(rightStyle || {}), ...styleCore }}
-              >
-                {right}
-              </Col>
-            )}
-          </Row>
-        );
-      }
-
       return (
         <Row style={style} onClick={this.triggerClick}>
           <Col
+            auto={flexAuto !== 'right'}
             align={stretch ? 'stretch' : ''}
             style={{ ...(leftStyle || {}), ...styleCore }}
           >
             {left}
           </Col>
+
           <Col
-            auto
+            auto={flexAuto === 'right'}
             align={stretch ? 'stretch' : ''}
             style={{ ...(rightStyle || {}), ...styleCore }}
           >
@@ -199,7 +178,7 @@ class FlexBox extends BaseComponent {
         <View
           style={{
             ...topStyle,
-            ...(flexAuto === 'top' ? { flex: '1 1 auto' } : {}),
+            ...(flexAuto !== 'bottom' ? { flex: '1 1 auto' } : {}),
           }}
         >
           {top}

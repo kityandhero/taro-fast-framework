@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { Button, Space } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';

@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
@@ -13,6 +12,7 @@ import {
   Space,
   Tabs,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import BasePageWrapper from '../../BasePageWrapper';

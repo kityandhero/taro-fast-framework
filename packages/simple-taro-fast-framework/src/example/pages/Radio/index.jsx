@@ -1,5 +1,3 @@
-import { connect } from 'react-redux';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
@@ -7,6 +5,7 @@ import {
   Radio,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

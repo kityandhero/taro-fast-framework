@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
@@ -11,6 +10,7 @@ import {
   SwiperWrapper,
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { colorPure, colorShadow } from 'taro-fast-common/es/utils/constants';
@@ -13,6 +12,7 @@ import {
   ScaleBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';

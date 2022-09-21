@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
@@ -7,6 +6,7 @@ import {
   ImageBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ballsSvg from '../../../../assets/images/loading-balls.svg';
 import barsSvg from '../../../../assets/images/loading-bars.svg';

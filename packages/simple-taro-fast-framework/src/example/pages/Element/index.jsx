@@ -1,6 +1,5 @@
-import { connect } from 'react-redux';
-
 import { sortBy } from 'taro-fast-common/es/utils/tools';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import iconBasic from '../../../assets/images/icon-list-basic.png';
 import ChannelPageBase from '../../../customComponents/ChannelPageBase';

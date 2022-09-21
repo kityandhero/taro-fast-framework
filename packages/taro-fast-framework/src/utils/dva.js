@@ -1,4 +1,9 @@
 // import createLoading from 'dva-loading';
+import {
+  connect as connectRedux,
+  Provider as ProviderRedux,
+} from 'react-redux';
+
 import { setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import { recordDebug, recordError } from 'taro-fast-common/es/utils/tools';
 import { isString, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
@@ -117,6 +122,10 @@ export const handleDefaultParams = {
   callback: null,
   pretreatment: null,
 };
+
+export const Provider = ProviderRedux;
+
+export const connect = connectRedux;
 
 export default {
   createApp,

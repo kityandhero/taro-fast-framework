@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
@@ -9,6 +8,7 @@ import {
   InputItem,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import BasePageWrapper from '../../BasePageWrapper';
 

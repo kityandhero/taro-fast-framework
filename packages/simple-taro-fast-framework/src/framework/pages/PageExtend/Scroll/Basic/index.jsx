@@ -1,7 +1,6 @@
-import { connect } from 'react-redux';
-
 import { getGuid } from 'taro-fast-common/es/utils/tools';
 import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import {

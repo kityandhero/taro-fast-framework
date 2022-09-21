@@ -1,5 +1,3 @@
-import { connect } from 'react-redux';
-
 import { recordObject, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
@@ -10,6 +8,7 @@ import {
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';

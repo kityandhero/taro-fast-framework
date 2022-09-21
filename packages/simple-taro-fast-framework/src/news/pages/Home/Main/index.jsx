@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
@@ -20,6 +19,7 @@ import {
   Space,
   Swiper,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import { pathCollection } from '../../../../customConfig/pathConfig';

@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import { CenterBox } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 

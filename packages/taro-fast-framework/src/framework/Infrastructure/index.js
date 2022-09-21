@@ -1827,7 +1827,7 @@ export default class Infrastructure extends ComponentBase {
         style={{
           ...this.viewStyle,
           ...{
-            width: '100%',
+            // width: '100%',
           },
         }}
         scroll={this.scrollViewMode}

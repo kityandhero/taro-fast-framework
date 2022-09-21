@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { Text, View } from '@tarojs/components';
 
 import { formatCollection } from 'taro-fast-common/es/utils/constants';
@@ -16,6 +15,7 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';

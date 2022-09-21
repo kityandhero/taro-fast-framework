@@ -1,7 +1,6 @@
-import { connect } from 'react-redux';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Col, Row, Space } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import CodeBox from '../../../customComponents/CodeBox';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

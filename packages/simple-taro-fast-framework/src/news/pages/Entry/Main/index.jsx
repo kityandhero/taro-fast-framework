@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { View } from '@tarojs/components';
 
 import {
@@ -9,6 +8,7 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { ActivityIndicator } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import { shareTransfer } from '../../../../customConfig/constants';
 import { pathCollection } from '../../../../customConfig/pathConfig';

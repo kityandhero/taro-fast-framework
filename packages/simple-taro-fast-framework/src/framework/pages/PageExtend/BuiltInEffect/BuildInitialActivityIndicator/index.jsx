@@ -1,11 +1,10 @@
-import { connect } from 'react-redux';
-
 import {
   Card,
   Divider,
   FadeInBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import CodePageBox from '../../../../../customComponents/CodePageBox';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';

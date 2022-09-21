@@ -1,11 +1,10 @@
-import { connect } from 'react-redux';
-
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Icon,
   InputItem,
   Space,
 } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import logoImage from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

@@ -1,5 +1,3 @@
-import { connect } from 'react-redux';
-
 import {
   datetimeFormat,
   formatCollection,
@@ -16,6 +14,7 @@ import {
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { Item, Space } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';

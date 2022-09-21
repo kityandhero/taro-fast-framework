@@ -1,6 +1,5 @@
-import { connect } from 'react-redux';
-
 import { WebPageBase } from 'taro-fast-framework/es/framework';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 @connect(({ schedulingControl }) => ({
   schedulingControl,

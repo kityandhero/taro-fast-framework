@@ -1,6 +1,5 @@
-import { connect } from 'react-redux';
-
 import { Divider, Space } from 'taro-fast-component/es/customComponents';
+import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import CodePageBox from '../../../../../customComponents/CodePageBox';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';

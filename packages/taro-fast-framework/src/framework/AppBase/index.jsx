@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Provider } from 'react-redux';
 
 import {
   canIUse,
@@ -13,6 +12,7 @@ import {
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
+import { Provider } from '../../utils/dva';
 import { getStore } from '../../utils/dvaAssist';
 import {
   removeAdministrativeDivisionFullData,

@@ -263,7 +263,10 @@ export function buildItem({
 
         if (renderMode === 4) {
           return (
-            <View style={{ width: transformSize(260) }}>
+            <View
+              key={`article_${keyPrefix}_${i}`}
+              style={{ width: transformSize(260) }}
+            >
               <ImageBox src={image} aspectRatio={0.87} />
             </View>
           );

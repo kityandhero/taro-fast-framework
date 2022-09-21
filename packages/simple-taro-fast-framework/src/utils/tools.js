@@ -245,7 +245,7 @@ export function buildPagePrismCode({
     });
   }
 
-  let code = `import { connect } from 'react-redux';
+  let code = `import { connect } from 'taro-fast-framework/es/utils/dva';
 import { View } from '@tarojs/components';
 
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
