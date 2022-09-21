@@ -10,6 +10,9 @@ import {
 
 import { getQQMapWX } from '../../utils/tools';
 
+/**
+ * PageWrapperCore
+ */
 class PageWrapperCore extends AuthorizationWrapper {
   loadRemoteRequestDelay = 100;
 
