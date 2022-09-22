@@ -56,7 +56,38 @@ Wait for execution to complete, you can open wechat development tool to view.
 npm run build:all
 ```
 
-### Example Project Screenshot Preview
+### Project template
+
+Here repo is a template to quickly create a project.
+
+<https://github.com/kityandhero/taro-fast-template>
+
+The other way is use taro-fast-cli to initialize a project, it will download file from taro-fast-template repo.
+
+```bash
+npm install -g taro-fast-cli
+
+taro-fast-cli init
+```
+
+If framework have a new version update, can use a script to upgrade project, the script in package.json, it running through taro-fast-cli.
+
+```bash
+npm run reinstall 
+```
+
+The script content is "npm run clean && taro-fast-cli env && pnpm install".
+
+If you need a agent to visit github, you can use this way.
+
+
+```bash
+npm run reinstall:agent
+```
+
+The script content is "npm run clean && taro-fast-cli env --agent <http://127.0.0.1:7890> && pnpm install".
+
+### Framework Example Project Screenshot Preview
 
 [![Alt text](https://m1.im5i.com/2022/09/10/Uqe7ud.png?raw=true)](01.png)
 
