@@ -1822,13 +1822,15 @@ export default class Infrastructure extends ComponentBase {
   renderView() {
     const { spin, backTopVisible } = this.state;
 
+    const sideView = this.buildSideView();
+
     const vw = (
       <VariableView
         style={{
-          ...this.viewStyle,
           ...{
-            // width: '100%',
+            width: sideView != null ? '100%' : 'auto',
           },
+          ...this.viewStyle,
         }}
         scroll={this.scrollViewMode}
         height="100vh"
@@ -1902,7 +1904,6 @@ export default class Infrastructure extends ComponentBase {
     ) : null;
 
     let mainContent = null;
-    const sideView = this.buildSideView();
 
     if (sideView != null) {
       if (this.sidePosition === 'left') {
