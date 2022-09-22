@@ -27,10 +27,15 @@ const config = {
   alias: {
     '@': path.resolve(__dirname, '..', 'src'),
   },
-  // compiler: 'webpack5',
-  // cache: {
-  //   enable: true,
-  // },
+  compiler: {
+    type: 'webpack5',
+    prebundle: {
+      enable: false,
+    },
+  },
+  cache: {
+    enable: true,
+  },
   mini: {
     baseLevel: 20,
     postcss: {

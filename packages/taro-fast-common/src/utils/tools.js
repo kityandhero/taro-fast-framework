@@ -1248,7 +1248,10 @@ function getBrowserInfoCore() {
 
   return {
     versions: getBrowserVersion(),
-    language: (navigator.browserLanguage || navigator.language).toLowerCase(),
+    language: (
+      (navigator.browserLanguage || navigator.language) ??
+      ''
+    ).toLowerCase(),
   };
 }
 
@@ -2373,7 +2376,7 @@ export function styleToString(style) {
     let styleStr = '';
 
     Object.keys(style).forEach((key) => {
-      const lowerCaseKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+      const lowerCaseKey = (key.replace(/([A-Z])/g, '-$1') ?? '').toLowerCase();
       styleStr += `${lowerCaseKey}:${style[key]};`;
     });
 
@@ -2450,7 +2453,7 @@ export function colorHexToRGB(color, symbol = 'RGB') {
   const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
 
   // 把颜色值变成小写
-  let c = color.toLowerCase();
+  let c = (color ?? '').toLowerCase();
 
   if (reg.test(c)) {
     // 如果只有三位的值，需变成六位，如: #fff => #ffffff

@@ -22,7 +22,7 @@ const defaultProps = {
   aspectRatio: 1,
   imageBoxStyle: {},
   borderRadius: true,
-  imageMode: '',
+  imageMode: 'scaleToFill',
   showMode: 'box',
   circle: false,
   backgroundColor: '',
@@ -278,7 +278,7 @@ class ImageBox extends BaseComponent {
 
     if (showMode === 'pure') {
       return (
-        <View style={{ ...imageBoxStyleValue }}>
+        <View style={{ ...imageBoxStyleValue }} onClick={this.onImageClick}>
           <Image
             className={classNames(`${classPrefix}-pure`)}
             src={
@@ -292,7 +292,6 @@ class ImageBox extends BaseComponent {
               this.onImageLoadSuccess();
             }}
             onError={this.onImageError}
-            onClick={this.onImageClick}
           />
         </View>
       );
