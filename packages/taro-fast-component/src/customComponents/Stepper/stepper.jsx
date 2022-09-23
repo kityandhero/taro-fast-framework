@@ -9,6 +9,7 @@ import {
   transformSize,
   withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -33,6 +34,8 @@ const defaultProps = {
   operateColor: '',
   iconSize: 36,
   onChange: null,
+  onIncrease: null,
+  onReduce: null,
 };
 
 export const Stepper = (p) => {
@@ -49,6 +52,9 @@ export const Stepper = (p) => {
     operateColor,
     circle,
     iconSize,
+    onChange,
+    onIncrease,
+    onReduce,
   } = props;
 
   const operateStyle = {
@@ -110,6 +116,10 @@ export const Stepper = (p) => {
   const handleInputChange = (v) => {
     setInputValue(v);
     setValueWithCheck(parseFloat(v));
+
+    if (isFunction(onChange)) {
+      onChange(v);
+    }
   };
 
   const handleMinus = () => {
@@ -118,6 +128,10 @@ export const Stepper = (p) => {
     }
 
     setValueWithCheck(value - step);
+
+    if (isFunction(onReduce)) {
+      onReduce(value - step);
+    }
   };
 
   const handlePlus = () => {
@@ -126,6 +140,10 @@ export const Stepper = (p) => {
     }
 
     setValueWithCheck(value + step);
+
+    if (isFunction(onIncrease)) {
+      onIncrease(value - step);
+    }
   };
 
   const minusDisabled = () => {

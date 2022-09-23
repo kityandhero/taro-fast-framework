@@ -25,6 +25,8 @@ const defaultProps = {
   operateColor: '',
   iconSize: 36,
   onChange: null,
+  onIncrease: null,
+  onReduce: null,
 };
 
 class StepperItem extends BaseComponent {
@@ -52,6 +54,8 @@ class StepperItem extends BaseComponent {
       circle,
       iconSize,
       onChange,
+      onIncrease,
+      onReduce,
     } = this.props;
 
     return (
@@ -82,6 +86,8 @@ class StepperItem extends BaseComponent {
             operateColor={operateColor}
             iconSize={iconSize}
             onChange={onChange}
+            onIncrease={onIncrease}
+            onReduce={onReduce}
           />
         }
         extraContainerStyle={{
