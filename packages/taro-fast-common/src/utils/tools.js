@@ -2012,8 +2012,20 @@ export function sortCollectionByKey({
   return result;
 }
 
-export function queryStringify(data) {
-  return stringify(data);
+export function queryStringify(data, path = '') {
+  let result = stringify(data);
+
+  if (stringIsNullOrWhiteSpace(path)) {
+    return result;
+  }
+
+  if (stringIsNullOrWhiteSpace(result)) {
+    return path;
+  }
+
+  const connector = path.lastIndexOf('?') >= 0 ? '&' : '?';
+
+  return `${path}${connector}${result}`;
 }
 
 export function queryStringParse(data) {
