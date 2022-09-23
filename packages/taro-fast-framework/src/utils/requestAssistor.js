@@ -9,6 +9,7 @@ import {
   recordObject,
   recordText,
   recordTrace,
+  recordWarn,
   redirectTo,
   showErrorMessage,
   showInfoMessage,
@@ -54,8 +55,6 @@ function errorCustomData() {
  * @param {*} d 异常数据
  */
 function dataExceptionNotice(d) {
-  recordDebug({ exceptionNotice: d });
-
   const { code, message: messageText } = d;
   const c = errorCustomData();
 
@@ -70,13 +69,13 @@ function dataExceptionNotice(d) {
   const codeAdjust = toNumber(code);
 
   if (codeAdjust !== c.code) {
-    recordDebug(
-      `api call failed, code: ${codeAdjust}, message: ${messageText}`,
-    );
-
     const currentTime = new Date().getTime();
 
     if (codeAdjust !== authenticationFailCode) {
+      recordWarn(
+        `api call failed, code: ${codeAdjust}, message: ${messageText}`,
+      );
+
       if (codeAdjust === toNumber(lastCustomMessage.code)) {
         if (currentTime - lastCustomMessage.time > 800) {
           showErrorMessage({
