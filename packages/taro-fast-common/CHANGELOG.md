@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-common@1.0.86...taro-fast-common@1.1.0) (2022-09-23)
+
+
+### Features
+
+* **taro-fast-component:** queryStringify add nullable params path ([80e9ccc](https://github.com/kityandhero/taro-fast-framework/commit/80e9cccd8108c3b478ce10ffb2fd19d19e5abd4a))
+
+
+
 ## [1.0.86](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-common@1.0.85...taro-fast-common@1.0.86) (2022-09-22)
 
 **Note:** Version bump only for package taro-fast-common
