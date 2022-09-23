@@ -54,6 +54,8 @@ function errorCustomData() {
  * @param {*} d 异常数据
  */
 function dataExceptionNotice(d) {
+  recordDebug({ exceptionNotice: d });
+
   const { code, message: messageText } = d;
   const c = errorCustomData();
 
