@@ -41,8 +41,6 @@
     "terminal-kit": "^2.4.0"
   },
   "devDependencies": {
-    "@tarojs/mini-runner": "^3.5.5",
-    "@tarojs/webpack5-runner": "^3.5.5",
     "@types/fs-extra": "^9.0.13",
     "@types/shelljs": "^0.8.11",
     "eslint-plugin-promise": "^6.0.0",
