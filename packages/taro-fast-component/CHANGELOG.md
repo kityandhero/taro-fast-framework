@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.0.167...taro-fast-component@2.1.0) (2022-09-23)
+
+
+### Features
+
+* **simple-taro-fast-framework:** stepper support onIncrease onReduce ([56c4bdb](https://github.com/kityandhero/taro-fast-framework/commit/56c4bdb79e657a24842e65e47aa757d11698026c))
+
+
+
 ## [2.0.167](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.0.166...taro-fast-component@2.0.167) (2022-09-23)
 
 **Note:** Version bump only for package taro-fast-component
