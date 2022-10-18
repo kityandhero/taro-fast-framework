@@ -1,12 +1,12 @@
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import ComponentBase from '../../customComponents/ComponentBase';
 import {
   getCurrentInstance,
   inCollection,
   transformSize,
 } from '../../utils/tools';
+import ComponentBase from '../ComponentBase';
 
 const typeCollection = ['info', 'success', 'error', 'warning'];
 

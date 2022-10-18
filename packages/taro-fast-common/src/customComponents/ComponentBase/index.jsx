@@ -1,8 +1,7 @@
 import { Component } from 'react';
-import { getModelNameList } from 'src/utils/storageAssist';
-import { toNumber } from 'src/utils/typeConvert';
 import Taro from '@tarojs/taro';
 
+import { getModelNameList } from '../../utils/storageAssist';
 import {
   getGuid,
   inCollection,
@@ -19,6 +18,7 @@ import {
   stringIsNullOrWhiteSpace,
 } from '../../utils/tools';
 import { isEqual, isFunction, isNumber, isObject } from '../../utils/typeCheck';
+import { toNumber } from '../../utils/typeConvert';
 
 function filterModel(props) {
   const result = { ...props };

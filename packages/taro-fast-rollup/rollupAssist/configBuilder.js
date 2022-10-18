@@ -139,6 +139,8 @@ export function buildConfig({
         include: ['node_modules/**', '../../node_modules/**'],
       }),
       typescript({
+        check: true,
+        verbosity: 3,
         tsconfig: 'tsconfig.json',
       }),
       postcss({
