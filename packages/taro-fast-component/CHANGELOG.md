@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.1.0...taro-fast-component@2.1.1) (2022-10-18)
+
+
+### Bug Fixes
+
+* **taro-fast-component:** fix stepper default value bug ([ab369e8](https://github.com/kityandhero/taro-fast-framework/commit/ab369e8a7e0e01524fc736f9c9e40e50f0c4b341))
+
+
+
+
 ## [2.1.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.0.167...taro-fast-component@2.1.0) (2022-09-23)
 
 
