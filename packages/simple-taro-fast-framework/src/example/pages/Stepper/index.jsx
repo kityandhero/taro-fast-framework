@@ -15,6 +15,11 @@ const config1 = {
   onChange: onChangeCore,
 };
 
+const config101 = {
+  defaultValue: 3,
+  onChange: onChangeCore,
+};
+
 const config3 = {
   step: 10,
   defaultValue: 10,
@@ -148,6 +153,10 @@ export default class Index extends ContentPageBase {
       {
         header: '基础用法',
         config: config1,
+      },
+      {
+        header: '设置默认值',
+        config: config101,
       },
       {
         header: '步长设置',

@@ -34,7 +34,7 @@ const config = {
     },
   },
   cache: {
-    enable: true,
+    enable: false,
   },
   mini: {
     baseLevel: 20,

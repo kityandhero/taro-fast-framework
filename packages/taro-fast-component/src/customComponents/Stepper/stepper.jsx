@@ -10,6 +10,7 @@ import {
   withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -42,6 +43,7 @@ export const Stepper = (p) => {
   const props = mergeProps(defaultProps, p);
 
   const {
+    defaultValue: defaultValueSource,
     disabled,
     step,
     max,
@@ -83,8 +85,15 @@ export const Stepper = (p) => {
       : {}),
   };
 
+  const [defaultValue, setDefaultValue] = usePropsValue(props);
   const [value, setValue] = usePropsValue(props);
   const [inputValue, setInputValue] = useState(() => value.toString());
+
+  if (defaultValue != toNumber(defaultValueSource)) {
+    setDefaultValue(toNumber(defaultValueSource));
+    setValue(toNumber(defaultValueSource));
+    setInputValue(toNumber(defaultValueSource));
+  }
 
   function setValueWithCheck(v) {
     if (Number.isNaN(v)) {
@@ -96,16 +105,11 @@ export const Stepper = (p) => {
     if (props.digits || props.digits === 0) {
       target = parseFloat(target.toFixed(props.digits));
     }
+
     setValue(target);
   }
 
   const [hasFocus, setHasFocus] = useState(false);
-
-  useEffect(() => {
-    if (!hasFocus) {
-      setInputValue(value.toString());
-    }
-  }, [hasFocus, value]);
 
   useEffect(() => {
     if (!hasFocus) {
