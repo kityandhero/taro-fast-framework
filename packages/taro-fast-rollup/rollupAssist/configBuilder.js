@@ -1,7 +1,9 @@
 // import pxtorem from 'postcss-pxtorem';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+// import livereload from 'rollup-plugin-livereload';
 import postcss from 'rollup-plugin-postcss';
+// import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import babelConfig from '@rollup/plugin-babel';
@@ -103,6 +105,7 @@ export function buildConfig({
   inputFile,
   terser: whetherTerser = false,
   externalCollection: otherExternalCollection = [],
+  // serve: whetherServe = false,
 }) {
   const externals = [...externalCollection, ...(otherExternalCollection || [])];
 
@@ -170,6 +173,12 @@ export function buildConfig({
   if (whetherTerser) {
     config.plugins.push(terser());
   }
+
+  // if (whetherServe) {
+  //   config.plugins.push(livereload());
+
+  //   config.plugins.push(serve(whetherServe));
+  // }
 
   return config;
 }

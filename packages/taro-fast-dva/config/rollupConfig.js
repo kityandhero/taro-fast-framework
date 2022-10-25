@@ -14,6 +14,10 @@ export function buildConfig({ terser: whetherTerser = false }) {
     inputFile,
     terser: whetherTerser,
     externalCollection: [],
+    // serve: {
+    //   open: true,
+    //   port: 8082,
+    // },
   });
 }
 

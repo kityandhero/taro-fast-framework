@@ -9,6 +9,7 @@
     "publish:compression": "npm run build && yarn publish",
     "v:p": "npm version patch && yarn publish",
     "clean-file": "rimraf ./node_modules",
+    "dev": "rollup --config rollup.config.skipCompression.js --watch",
     "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js",
     "build": "rimraf ./es && rollup --config rollup.config.compression.js",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
@@ -43,7 +44,9 @@
     "@babel/runtime": "^7.19.0",
     "@tarojs/mini-runner": "^3.5.6",
     "mm": "^3.2.0",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^2.0.1"
   },
   "directories": {
     "es": "es"

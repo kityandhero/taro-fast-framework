@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev:dva",
+      "problemMatcher": [],
+      "label": "npm: dev:dva",
+      "detail": "cd packages/taro-fast-dva && npm run dev"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/taro-fast-common",
+      "problemMatcher": [],
+      "label": "npm: dev - packages/taro-fast-common",
+      "detail": "rollup --config rollup.config.skipCompression.js --watch"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/taro-fast-component",
+      "problemMatcher": [],
+      "label": "npm: dev - packages/taro-fast-component",
+      "detail": "rollup --config rollup.config.skipCompression.js --watch"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/taro-fast-component-extra",
+      "problemMatcher": [],
+      "label": "npm: dev - packages/taro-fast-component-extra",
+      "detail": "rollup --config rollup.config.skipCompression.js --watch"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/taro-fast-framework",
+      "problemMatcher": [],
+      "label": "npm: dev - packages/taro-fast-framework",
+      "detail": "rollup --config rollup.config.skipCompression.js --watch"
+    },
+    {
+      "type": "npm",
+      "script": "start:weapp:simple",
+      "problemMatcher": [],
+      "label": "npm: start:weapp:simple",
+      "detail": "cd packages/simple-taro-fast-framework && npm run start"
+    }
+  ]
+}
