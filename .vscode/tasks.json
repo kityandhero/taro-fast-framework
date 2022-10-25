@@ -10,42 +10,38 @@
     },
     {
       "type": "npm",
-      "script": "dev",
-      "path": "packages/taro-fast-common",
-      "problemMatcher": [],
-      "label": "npm: dev - packages/taro-fast-common",
-      "detail": "rollup --config rollup.config.skipCompression.js --watch"
-    },
-    {
-      "type": "npm",
-      "script": "dev",
-      "path": "packages/taro-fast-component",
-      "problemMatcher": [],
-      "label": "npm: dev - packages/taro-fast-component",
-      "detail": "rollup --config rollup.config.skipCompression.js --watch"
-    },
-    {
-      "type": "npm",
-      "script": "dev",
-      "path": "packages/taro-fast-component-extra",
-      "problemMatcher": [],
-      "label": "npm: dev - packages/taro-fast-component-extra",
-      "detail": "rollup --config rollup.config.skipCompression.js --watch"
-    },
-    {
-      "type": "npm",
-      "script": "dev",
-      "path": "packages/taro-fast-framework",
-      "problemMatcher": [],
-      "label": "npm: dev - packages/taro-fast-framework",
-      "detail": "rollup --config rollup.config.skipCompression.js --watch"
-    },
-    {
-      "type": "npm",
       "script": "start:weapp:simple",
       "problemMatcher": [],
       "label": "npm: start:weapp:simple",
       "detail": "cd packages/simple-taro-fast-framework && npm run start"
+    },
+    {
+      "type": "npm",
+      "script": "dev:common",
+      "problemMatcher": [],
+      "label": "npm: dev:common",
+      "detail": "cd packages/taro-fast-common && npm run dev"
+    },
+    {
+      "type": "npm",
+      "script": "dev:component",
+      "problemMatcher": [],
+      "label": "npm: dev:component",
+      "detail": "cd packages/taro-fast-component && npm run dev"
+    },
+    {
+      "type": "npm",
+      "script": "dev:component-extra",
+      "problemMatcher": [],
+      "label": "npm: dev:component-extra",
+      "detail": "cd packages/taro-fast-component-extra && npm run dev"
+    },
+    {
+      "type": "npm",
+      "script": "dev:framework",
+      "problemMatcher": [],
+      "label": "npm: dev:framework",
+      "detail": "cd packages/taro-fast-framework && npm run dev"
     }
   ]
 }

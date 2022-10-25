@@ -1,136 +1,137 @@
 {
-    "miniprogramRoot": "dist/weapp/",
-    "projectname": "taro-fast-framework",
-    "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-    "appid": "wx62fdfd617c79d8c4",
-    "setting": {
-        "urlCheck": false,
-        "es6": false,
-        "enhance": false,
-        "postcss": false,
-        "preloadBackgroundData": false,
-        "minified": true,
-        "newFeature": false,
-        "coverView": true,
-        "nodeModules": true,
-        "autoAudits": false,
-        "showShadowRootInWxmlPanel": true,
-        "scopeDataCheck": false,
-        "uglifyFileName": false,
-        "checkInvalidKey": true,
-        "checkSiteMap": false,
-        "uploadWithSourceMap": true,
-        "compileHotReLoad": false,
-        "lazyloadPlaceholderEnable": false,
-        "useMultiFrameRuntime": true,
-        "useApiHook": true,
-        "useApiHostProcess": true,
-        "babelSetting": {
-            "ignore": [],
-            "disablePlugins": [],
-            "outputPath": ""
+  "miniprogramRoot": "dist/weapp/",
+  "projectname": "taro-fast-framework",
+  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "appid": "wx62fdfd617c79d8c4",
+  "setting": {
+    "urlCheck": false,
+    "es6": false,
+    "enhance": false,
+    "postcss": false,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "lazyloadPlaceholderEnable": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true,
+    "useStaticServer": true,
+    "ignoreDevUnusedFiles": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.23.2",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "imageBox",
+          "pathName": "example/pages/imageBox/index",
+          "query": "",
+          "scene": null
         },
-        "useIsolateContext": true,
-        "userConfirmedBundleSwitch": false,
-        "packNpmManually": false,
-        "packNpmRelationList": [],
-        "minifyWXSS": true,
-        "disableUseStrict": false,
-        "minifyWXML": true,
-        "showES6CompileOption": false,
-        "useCompilerPlugins": false,
-        "ignoreUploadUnusedFiles": true,
-        "useStaticServer": true
-    },
-    "compileType": "miniprogram",
-    "libVersion": "2.23.2",
-    "simulatorType": "wechat",
-    "simulatorPluginLibVersion": {},
-    "condition": {
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "imageBox",
-                    "pathName": "example/pages/imageBox/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "multiLineText",
-                    "pathName": "example/pages/multiLineText/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "layout",
-                    "pathName": "example/pages/layout/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "swiper",
-                    "pathName": "example/pages/swiper/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "framework",
-                    "pathName": "framework/pages/home/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "template/entry",
-                    "pathName": "template/pages/entry/main/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "template/signIn",
-                    "pathName": "template/pages/signIn/main/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "templateRemote/entry",
-                    "pathName": "templateRemote/pages/entry/main/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "templateRemote/signInSilent",
-                    "pathName": "templateRemote/pages/signInSilent/main/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "news/entry",
-                    "pathName": "news/pages/entry/main/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "news/home",
-                    "pathName": "news/pages/home/main/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "news/section",
-                    "pathName": "news/pages/section/main/index",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "multiLineText",
+          "pathName": "example/pages/multiLineText/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "layout",
+          "pathName": "example/pages/layout/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "swiper",
+          "pathName": "example/pages/swiper/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "framework",
+          "pathName": "framework/pages/home/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "template/entry",
+          "pathName": "template/pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "template/signIn",
+          "pathName": "template/pages/signIn/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "templateRemote/entry",
+          "pathName": "templateRemote/pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "templateRemote/signInSilent",
+          "pathName": "templateRemote/pages/signInSilent/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "news/entry",
+          "pathName": "news/pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "news/home",
+          "pathName": "news/pages/home/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "news/section",
+          "pathName": "news/pages/section/main/index",
+          "query": "",
+          "scene": null
         }
-    },
-    "srcMiniprogramRoot": "dist/weapp/",
-    "packOptions": {
-        "ignore": [],
-        "include": []
-    },
-    "editorSetting": {
-        "tabIndent": "insertSpaces",
-        "tabSize": 4
+      ]
     }
+  },
+  "srcMiniprogramRoot": "dist/weapp/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 4
+  }
 }
