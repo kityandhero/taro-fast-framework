@@ -14,7 +14,7 @@
     "clean": "rimraf ./yarn-error.log && rimraf ./yarn.lock && rimraf ./package-lock.json && lerna clean -y && rimraf ./node_modules",
     "publish:f": "npm run scz && npm run build:all && lerna updated && lerna publish --yes",
     "publish:c": "npm run scz && lerna updated && lerna publish --yes",
-    "publish:v": "lerna updated && npm run build:all && lerna publish --yes",
+    "publish:v": "npm run build:all && lerna updated && lerna publish --yes",
     "publish:npm-cli-only": "cd packages/taro-fast-cli && npm publish",
     "publish:npm-common-only": "cd packages/taro-fast-common && npm publish",
     "publish:npm-component-only": "cd packages/taro-fast-component && npm publish",
