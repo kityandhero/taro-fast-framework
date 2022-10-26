@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.1.1...simple-taro-fast-framework@1.2.0) (2022-10-26)
+
+### Features
+
+- **taro-fast-component:** head navigation support gradient on scroll ([0a803e2](https://github.com/kityandhero/taro-fast-framework/commit/0a803e2131c253962247f9899a9447439ff30637))
+
 ## [1.1.1](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.1.0...simple-taro-fast-framework@1.1.1) (2022-10-26)
 
 **Note:** Version bump only for package simple-taro-fast-framework
