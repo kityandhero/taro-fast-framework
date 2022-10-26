@@ -2,7 +2,8 @@ import { View } from '@tarojs/components';
 
 import {
   buildLinearGradient,
-  getMenuButtonBoundingClientRect,
+  getGradient,
+  // getMenuButtonBoundingClientRect,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
@@ -18,6 +19,8 @@ import logoImage from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
 import SimpleBox from '../../../customComponents/SimpleBox';
+
+let headerHeight = 0;
 
 const config1 = {
   backboardStyle: {
@@ -35,7 +38,42 @@ const config1 = {
       borderRadius={false}
     />
   ),
+  onAdjustComplete: ({ containerHeight }) => {
+    headerHeight = containerHeight;
+  },
 };
+
+const config101 = {
+  backboardStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundImage: buildLinearGradient({
+      direct: 45,
+      list: ['#ff9700', '#ed1c24'],
+    }),
+  },
+  onAdjustComplete: ({ containerHeight }) => {
+    headerHeight = containerHeight;
+  },
+};
+
+// const config102 = {
+//   backboardStyle: {
+//     width: '100%',
+//     height: '100%',
+//     backgroundImage: buildLinearGradient({
+//       direct: 45,
+//       list: ['#ff9700', '#ed1c24'],
+//     }),
+//   },
+//   backboardChildren: (
+//     <ImageBox
+//       src="https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF"
+//       aspectRatio={0.468}
+//       borderRadius={false}
+//     />
+//   ),
+// };
 
 const config2 = {
   ...config1,
@@ -113,7 +151,47 @@ const config3 = {
       borderRadius={false}
     />
   ),
+  onAdjustComplete: ({ containerHeight }) => {
+    headerHeight = containerHeight;
+  },
 };
+
+const config301 = {
+  fixed: true,
+  backboardStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundImage: buildLinearGradient({
+      direct: 45,
+      list: ['#ff9700', '#ed1c24'],
+    }),
+  },
+  onAdjustComplete: ({ containerHeight }) => {
+    headerHeight = containerHeight;
+  },
+};
+
+function config302Builder({ scrollTop }) {
+  const c =
+    headerHeight > 0
+      ? scrollTop < headerHeight
+        ? getGradient({
+            progress: scrollTop / headerHeight,
+            startColor: '#901f81',
+            endColor: '#45f2e3',
+          })
+        : '#45f2e3'
+      : '#901f81';
+
+  return {
+    fixed: true,
+    backboardStyle: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: c,
+    },
+  };
+}
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -126,9 +204,12 @@ definePageConfig({
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'HelpBox',
-    name: '帮助提示',
+    id: 'HeadNavigation',
+    name: '头部导航',
+    description: '头部导航',
   };
+
+  gradientMode = false;
 
   constructor(props) {
     super(props);
@@ -152,18 +233,26 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  doWorkAdjustDidMount = () => {
-    setTimeout(() => {
-      const c = getMenuButtonBoundingClientRect();
+  // doWorkAdjustDidMount = () => {
+  //   setTimeout(() => {
+  //     const c = getMenuButtonBoundingClientRect();
 
-      console.log(c);
-    }, 1200);
+  //     console.log(c);
+  //   }, 1200);
+  // };
+
+  doWhenScroll = ({ scrollTop }) => {
+    if (this.gradientMode) {
+      const c = config302Builder({ scrollTop });
+
+      this.setState({ currentConfig: c });
+    }
   };
 
   establishControlList = () => {
     return [
       {
-        header: '简易头部',
+        header: '图片背景',
         config: config1,
         inner: (
           <View
@@ -175,6 +264,26 @@ export default class Index extends ContentPageBase {
             头部标题
           </View>
         ),
+        callback: () => {
+          this.gradientMode = false;
+        },
+      },
+      {
+        header: '渐变色背景',
+        config: config101,
+        inner: (
+          <View
+            style={{
+              paddingLeft: transformSize(30),
+              color: '#fff',
+            }}
+          >
+            头部标题
+          </View>
+        ),
+        callback: () => {
+          this.gradientMode = false;
+        },
       },
       {
         header: '额外底部',
@@ -189,9 +298,12 @@ export default class Index extends ContentPageBase {
             头部标题
           </View>
         ),
+        callback: () => {
+          this.gradientMode = false;
+        },
       },
       {
-        header: 'Fixed模式',
+        header: '图片Fixed',
         config: config3,
         inner: (
           <View
@@ -203,6 +315,43 @@ export default class Index extends ContentPageBase {
             头部标题
           </View>
         ),
+        callback: () => {
+          this.gradientMode = false;
+        },
+      },
+      {
+        header: '渐变色Fixed',
+        config: config301,
+        inner: (
+          <View
+            style={{
+              paddingLeft: transformSize(30),
+              color: '#fff',
+            }}
+          >
+            头部标题
+          </View>
+        ),
+        callback: () => {
+          this.gradientMode = false;
+        },
+      },
+      {
+        header: '滚动变色Fixed',
+        config: config302Builder({ scrollTop: 0 }),
+        inner: (
+          <View
+            style={{
+              paddingLeft: transformSize(30),
+              color: '#fff',
+            }}
+          >
+            头部标题
+          </View>
+        ),
+        callback: () => {
+          this.gradientMode = true;
+        },
       },
     ];
   };

@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { getMenuButtonBoundingClientRect } from 'taro-fast-common/es/utils/tools';
+import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import BackboardBox from '../BackboardBox';
@@ -14,6 +15,7 @@ const defaultProps = {
   bottom: null,
   fixed: false,
   zIndex: 999,
+  onAdjustComplete: null,
 };
 
 class HeadNavigation extends BaseComponent {
@@ -43,6 +45,12 @@ class HeadNavigation extends BaseComponent {
       boxHeight: `${height + top}px`,
       rightWidth: `${width + 15}px`,
     });
+
+    const { onAdjustComplete } = this.props;
+
+    if (isFunction(onAdjustComplete)) {
+      onAdjustComplete({ containerHeight: height + top + 8 });
+    }
   };
 
   getStyle = () => {
@@ -73,7 +81,7 @@ class HeadNavigation extends BaseComponent {
   };
 
   renderFurther() {
-    const { children, backboardChildren, bottom } = this.props;
+    const { fixed, children, backboardChildren, bottom } = this.props;
     const {
       containerHeight,
       placeholderHeight,
@@ -86,7 +94,7 @@ class HeadNavigation extends BaseComponent {
     const backboardStyle = this.getBackboardStyle();
     const contentStyle = this.getContentStyle();
 
-    return (
+    const nav = (
       <View
         style={{
           ...style,
@@ -151,6 +159,27 @@ class HeadNavigation extends BaseComponent {
         />
       </View>
     );
+
+    if (!fixed) {
+      return nav;
+    } else {
+      return (
+        <>
+          {nav}
+
+          <View
+            style={{
+              ...{
+                minHeight: containerHeight,
+                paddingBottom: '0 0 0 0',
+                margin: '0 0 0 0',
+                overflow: 'hidden',
+              },
+            }}
+          ></View>
+        </>
+      );
+    }
   }
 }
 

@@ -135,13 +135,22 @@ export default class ContentPageBase extends PageWrapperSimulation {
     let customSpan = false;
 
     list.forEach((item, index) => {
-      const { header, description, config, span, inner, wrapBuilder } = {
+      const {
+        header,
+        description,
+        config,
+        span,
+        inner,
+        wrapBuilder,
+        callback,
+      } = {
         ...{
           header: '',
           description: '',
           span: 1,
           inner: null,
           wrapBuilder: null,
+          callback: null,
         },
         ...item,
       };
@@ -161,6 +170,7 @@ export default class ContentPageBase extends PageWrapperSimulation {
             span,
             inner,
             wrapBuilder,
+            callback,
           });
         });
       } else {
@@ -172,6 +182,7 @@ export default class ContentPageBase extends PageWrapperSimulation {
           span,
           inner,
           wrapBuilder,
+          callback,
         });
       }
     });

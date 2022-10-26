@@ -1228,6 +1228,23 @@ export function getRandomColor({ seed }) {
   )}`.substr(-6)}`;
 }
 
+export function getGradient({ progress, startColor, endColor }) {
+  const start = colorHexToRGB(startColor, null, true);
+  const end = colorHexToRGB(endColor, null, true);
+
+  const [startRed, startBlue, startGreen] = start;
+
+  const [endRed, endBlue, endGreen] = end;
+
+  const result = [
+    (startRed + Math.round((endRed - startRed) * progress)).toString(16),
+    (startBlue + Math.round((endBlue - startBlue) * progress)).toString(16),
+    (startGreen + Math.round((endGreen - startGreen) * progress)).toString(16),
+  ];
+
+  return `#${result.join('')}`;
+}
+
 function getBrowserInfoCore() {
   const getBrowserVersion = () => {
     const u = navigator.userAgent;
@@ -2460,7 +2477,7 @@ export function bound(position, min, max) {
   return ret;
 }
 
-export function colorHexToRGB(color, symbol = 'RGB') {
+export function colorHexToRGB(color, symbol = 'RGB', arrayMode = false) {
   // 16进制颜色值的正则
   const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
 
@@ -2489,9 +2506,13 @@ export function colorHexToRGB(color, symbol = 'RGB') {
       return `${symbol}(${colorChange.join(',')})`;
     }
 
+    if (arrayMode) {
+      return colorChange;
+    }
+
     return colorChange.join(',');
   } else {
-    recordError('无效的16进制颜色');
+    recordError(`无效的16进制颜色:${color}`);
 
     return c;
   }

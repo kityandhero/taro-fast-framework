@@ -489,7 +489,12 @@ export default class Infrastructure extends ComponentBase {
         backTopVisible: false,
       });
     }
+
+    this.doWhenScroll({ scrollTop });
   }
+
+  // eslint-disable-next-line no-unused-vars
+  doWhenScroll = ({ scrollTop }) => {};
 
   onPullDownRefresh() {
     this.onRefresh();
