@@ -3,11 +3,9 @@ import { Component } from 'react';
 import {
   canIUse,
   clearLocalStorage,
-  getAppInitConfigData,
   getDefaultTaroGlobalData,
   getUpdateManager,
   isWechat,
-  recordObject,
   setTaroGlobalData,
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
@@ -55,15 +53,14 @@ class AppBase extends Component {
   }
 
   componentDidMount() {
-    recordObject({
-      appInitConfig: getAppInitConfigData(),
-    });
-
     this.checkUpdateVersion();
   }
 
   onLaunch(options) {
     setLaunchOption(options);
+
+    // 仅限小程序显示启动信息, 常规react生命周期中暂不支持
+    this.showStartupInfo();
   }
 
   setAppInitCustomLocal(config) {
@@ -147,8 +144,6 @@ class AppBase extends Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    this.showStartupInfo();
-
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }
 }

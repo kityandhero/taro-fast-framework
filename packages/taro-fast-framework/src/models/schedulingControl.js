@@ -6,7 +6,7 @@ import {
 } from 'src/utils/globalStorageAssist';
 
 import { locateResult } from 'taro-fast-common/es/utils/constants';
-import { recordLog, recordObject } from 'taro-fast-common/es/utils/tools';
+import { recordConfig, recordLog } from 'taro-fast-common/es/utils/tools';
 
 import {
   checkTicketValidityData,
@@ -287,7 +287,7 @@ export default {
       if (!appInitCustomVisible) {
         const { config } = payload;
 
-        recordObject(config);
+        recordConfig(config);
       }
 
       return {

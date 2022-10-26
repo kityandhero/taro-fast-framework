@@ -41,7 +41,7 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log('%c%s', 'color:#596032;', { trace: record });
+      console.log({ trace: record });
     }
   }
 
