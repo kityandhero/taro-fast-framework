@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-framework",
-  "version": "1.0.262",
+  "version": "1.1.0",
   "private": false,
   "description": "基于Taro的开发框架基于Taro的开发框架",
   "author": "kityandhero <kityandhero@126.com>",
@@ -53,9 +53,9 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
-    "taro-fast-common": "^1.1.1",
-    "taro-fast-component": "^2.1.2",
-    "taro-fast-dva": "^2.0.10"
+    "taro-fast-common": "^1.2.0",
+    "taro-fast-component": "^2.1.3",
+    "taro-fast-dva": "^2.0.11"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",

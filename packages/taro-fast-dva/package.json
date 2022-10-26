@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-dva",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
   "sideEffects": false,
   "license": "MIT",
