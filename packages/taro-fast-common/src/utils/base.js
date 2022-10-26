@@ -4,7 +4,7 @@ import trimLodash from 'lodash/trim';
 import { isArray } from './typeCheck';
 
 /**
- * 检测目标是否在数组址之中
+ * 检测目标是否在数组之中
  */
 export function inCollection(collection, value) {
   let result = false;
