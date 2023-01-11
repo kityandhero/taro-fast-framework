@@ -14,6 +14,7 @@
       "changelogPreset": "conventional-changelog-conventionalcommits"
     },
     "publish": {
+      "ignoreChanges": ["*.md", "pnpm-lock.yaml"],
       "conventionalCommits": true,
       "message": "chore(taro-fast-framework): publish",
       "changelogPreset": "conventional-changelog-conventionalcommits"
