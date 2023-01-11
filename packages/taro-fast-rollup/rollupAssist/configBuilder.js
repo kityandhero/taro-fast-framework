@@ -6,13 +6,13 @@ import postcss from 'rollup-plugin-postcss';
 // import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 import babelConfig from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import url from '@rollup/plugin-url';
 import svgr from '@svgr/rollup';
-
 // import { pxToRemRoot } from '../../taro-fast-common/src/utils/constants';
 
 const externalCollection = [
@@ -154,9 +154,10 @@ export function buildConfig({
         ],
         inject: { insertAt: 'top' },
         extract: true,
+        modules: true,
       }),
       babelConfig({
-        extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', 'ts', 'tsx'],
+        extensions: [...DEFAULT_EXTENSIONS, ...['ts', 'tsx']],
         babelHelpers: 'runtime',
       }),
     ],

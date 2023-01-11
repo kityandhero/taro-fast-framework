@@ -12,6 +12,9 @@
   "bin": {
     "taro-fast-cli": "./bin/cli.js"
   },
+  "scripts": {
+    "clean-file": "rimraf ./node_modules"
+  },
   "directories": {
     "lib": "lib",
     "src": "src"
@@ -23,9 +26,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/kityandhero/taro-fast-framework/issues"

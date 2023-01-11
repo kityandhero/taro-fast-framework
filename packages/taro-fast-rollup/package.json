@@ -7,6 +7,9 @@
   "homepage": "https://github.com/kityandhero/taro-fast-framework#readme",
   "license": "MIT",
   "main": "src/index.ts",
+  "scripts": {
+    "clean-file": "rimraf ./node_modules"
+  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-external-helpers": "^7.18.6",
