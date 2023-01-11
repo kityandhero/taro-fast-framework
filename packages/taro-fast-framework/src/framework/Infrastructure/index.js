@@ -24,6 +24,7 @@ import {
   recordInfo,
   recordLog,
   recordObject,
+  recordWarn,
   redirectTo,
   showErrorMessage,
   showRuntimeError,
@@ -524,28 +525,6 @@ export default class Infrastructure extends ComponentBase {
   }
 
   doDidMountTask = () => {
-    if (this.ignoreSessionRelatedLogic) {
-      if (this.needSignIn) {
-        throw new Error(
-          'ignoreSessionRelatedLogic and needSignIn cannot be true at the same time',
-        );
-      }
-
-      this.verifySession = false;
-      this.verifyTicket = false;
-      this.verifyTicketValidity = false;
-    } else {
-      if (this.needSignIn) {
-        recordDebug(
-          `needSignIn is true; set checkTicket, checkTicketValidity, signInSilent and so on to true`,
-        );
-
-        this.verifySession = true;
-        this.verifyTicket = true;
-        this.verifyTicketValidity = true;
-      }
-    }
-
     const { scene } = {
       ...{
         scene: '',
@@ -868,37 +847,10 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
-    const ENV = getEnv();
-
-    // 标签栏滚动
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
-        if (that.ignoreSessionRelatedLogic) {
-          that.prepareLoadRemoteRequestOnlyMetaData();
-        } else {
-          that.prepareLoadRemoteRequestWithCheckOnWeapp();
-        }
-
-        return;
-
-      case ENV_TYPE.ALIPAY:
-        console.warn(`框架在该环境[${ENV}]还未适配`);
-        break;
-
-      case ENV_TYPE.SWAN:
-        console.warn(`框架在该环境[${ENV}]还未适配`);
-        break;
-
-      case ENV_TYPE.WEB:
-        console.warn(`框架在该环境[${ENV}]还未适配微信接口调用`);
-
-        that.prepareLoadRemoteRequestOnlyMetaData();
-
-        return;
-
-      default:
-        console.warn(`框架在该环境[${ENV}]还未适配`);
-        break;
+    if (that.ignoreSessionRelatedLogic) {
+      that.prepareLoadRemoteRequestOnlyMetaData();
+    } else {
+      that.prepareLoadRemoteRequestWithCheckSession();
     }
   };
 
@@ -929,7 +881,8 @@ export default class Infrastructure extends ComponentBase {
       });
     }
   };
-  prepareLoadRemoteRequestWithCheckOnWeapp = () => {
+
+  prepareLoadRemoteRequestWithCheckSession = () => {
     const that = this;
 
     that.checkSession(() => {
@@ -977,6 +930,57 @@ export default class Infrastructure extends ComponentBase {
    */
   checkSession = (callback) => {
     recordExecute('checkSession');
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        break;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
+        );
+
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        break;
+
+      case ENV_TYPE.SWAN:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
+        );
+
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        break;
+
+      case ENV_TYPE.WEB:
+        recordWarn(
+          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
+        );
+
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        return;
+
+      default:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
+        );
+
+        if (isFunction(callback)) {
+          callback();
+        }
+
+        return;
+    }
 
     const sessionRefreshing = getSessionRefreshing();
 
@@ -1117,6 +1121,7 @@ export default class Infrastructure extends ComponentBase {
     this.dispatchSetTicketValidityProcessDetection(!!data)
       .then(() => {
         if (isFunction(callback)) {
+          // eslint-disable-next-line promise/no-callback-in-promise
           callback();
         }
 
@@ -1155,6 +1160,7 @@ export default class Infrastructure extends ComponentBase {
         recordExecute('dispatchSetSignInProcessDetection then');
 
         if (isFunction(callback)) {
+          // eslint-disable-next-line promise/no-callback-in-promise
           callback();
         }
 
@@ -1166,6 +1172,8 @@ export default class Infrastructure extends ComponentBase {
   };
 
   dispatchSetSignInResult = (data) => {
+    recordExecute('dispatchSetSignInResult');
+
     return this.dispatchApi({
       type: 'schedulingControl/setSignInResult',
       payload: data,
@@ -1203,6 +1211,7 @@ export default class Infrastructure extends ComponentBase {
         recordExecute('dispatchSetSignInResult then');
 
         if (isFunction(callback)) {
+          // eslint-disable-next-line promise/no-callback-in-promise
           callback();
         }
 
@@ -1220,6 +1229,171 @@ export default class Infrastructure extends ComponentBase {
     });
   };
 
+  getVerifySession = () => {
+    recordExecute('getVerifySession');
+
+    if (this.ignoreSessionRelatedLogic) {
+      recordInfo(
+        'because ignoreSessionRelatedLogic is true, so verifySession return false',
+      );
+
+      return false;
+    }
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        if (this.needSignIn) {
+          recordDebug(
+            `because needSignIn is true, so verifySession return true`,
+          );
+
+          return true;
+        }
+
+        return this.verifySession;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
+        );
+
+        return false;
+
+      case ENV_TYPE.SWAN:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
+        );
+
+        return false;
+
+      case ENV_TYPE.WEB:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
+        );
+
+        return false;
+
+      default:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
+        );
+
+        return false;
+    }
+  };
+
+  getVerifyTicket = () => {
+    recordExecute('getVerifyTicket');
+
+    if (this.ignoreSessionRelatedLogic) {
+      recordInfo(
+        'because ignoreSessionRelatedLogic is true, so verifyTicket return false',
+      );
+
+      return false;
+    }
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        if (this.needSignIn) {
+          recordDebug(
+            `because needSignIn is true, so verifyTicket return true`,
+          );
+
+          return true;
+        }
+
+        return this.verifyTicket;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
+        );
+
+        return false;
+
+      case ENV_TYPE.SWAN:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
+        );
+
+        return false;
+
+      case ENV_TYPE.WEB:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
+        );
+
+        return false;
+
+      default:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
+        );
+
+        return false;
+    }
+  };
+
+  getVerifyTicketValidity = () => {
+    recordExecute('getVerifyTicketValidity');
+
+    if (this.ignoreSessionRelatedLogic) {
+      recordInfo(
+        'because ignoreSessionRelatedLogic is true, so verifyTicketValidity return false',
+      );
+
+      return false;
+    }
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        if (this.needSignIn) {
+          recordDebug(
+            `because needSignIn is true, so verifyTicketValidity return true`,
+          );
+
+          return true;
+        }
+
+        return this.verifyTicketValidity;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
+        );
+
+        return false;
+
+      case ENV_TYPE.SWAN:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
+        );
+
+        return false;
+
+      case ENV_TYPE.WEB:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
+        );
+
+        return false;
+
+      default:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
+        );
+
+        return false;
+    }
+  };
+
   getLocationResult() {
     const { locationResult } = this.getGlobalWrapper();
 
@@ -1230,6 +1404,7 @@ export default class Infrastructure extends ComponentBase {
     this.dispatchLocationResult(data)
       .then((d) => {
         if (isFunction(callback)) {
+          // eslint-disable-next-line promise/no-callback-in-promise
           callback(d);
         }
 
@@ -1322,6 +1497,7 @@ export default class Infrastructure extends ComponentBase {
         const { weather } = remoteData;
 
         if (isFunction(callback)) {
+          // eslint-disable-next-line promise/no-callback-in-promise
           callback(weather);
         }
 
@@ -1551,6 +1727,41 @@ export default class Infrastructure extends ComponentBase {
 
     if (!this.enableCapsulePrompt || !initCapsulePrompt) {
       return null;
+    }
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        break;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
+        );
+
+        return null;
+
+      case ENV_TYPE.SWAN:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
+        );
+
+        return null;
+
+      case ENV_TYPE.WEB:
+        recordWarn(
+          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
+        );
+
+        return null;
+
+      default:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
+        );
+
+        return null;
     }
 
     const rect = getMenuButtonBoundingClientRect();

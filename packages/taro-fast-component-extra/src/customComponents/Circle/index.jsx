@@ -198,11 +198,11 @@ class Circle extends ComponentBase {
             break;
 
           case Taro.ENV_TYPE.ALIPAY:
-            recordError(`框架在该环境[${ENV}]还未适配`);
+            recordError(`framework with env [${ENV}] has no adaptation`);
             break;
 
           case Taro.ENV_TYPE.SWAN:
-            recordError(`框架在该环境[${ENV}]还未适配`);
+            recordError(`framework with env [${ENV}] has no adaptation`);
             break;
 
           case Taro.ENV_TYPE.WEB:
@@ -213,12 +213,12 @@ class Circle extends ComponentBase {
             break;
 
           default:
-            recordError(`框架在该环境[${ENV}]还未适配`);
+            recordError(`framework with env [${ENV}] has no adaptation`);
             break;
         }
 
         if (ctx == null) {
-          recordError(`框架在该环境[${ENV}]还未适配`);
+          recordError(`framework with env [${ENV}] has no adaptation`);
 
           return;
         }

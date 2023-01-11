@@ -41,7 +41,15 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ trace: record });
+      console.log(
+        '%c%s',
+        'color:#596032;',
+        JSON.stringify({
+          debug: 'check the following trace data',
+        }),
+      );
+
+      console.log(record);
     }
   }
 
@@ -53,7 +61,15 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ debug: record });
+      console.log(
+        '%c%s',
+        'color:#00768f;',
+        JSON.stringify({
+          debug: 'check the following debug data',
+        }),
+      );
+
+      console.log(record);
     }
   }
 
@@ -65,7 +81,15 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ warn: record });
+      console.log(
+        '%c%s',
+        'color:#ff4f49;',
+        JSON.stringify({
+          debug: 'check the following warn data',
+        }),
+      );
+
+      console.log(record);
     }
   }
 
@@ -77,7 +101,15 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ info: record });
+      console.log(
+        '%c%s',
+        'color:#89ca78;',
+        JSON.stringify({
+          debug: 'check the following info data',
+        }),
+      );
+
+      console.log(record);
     }
   }
 
@@ -89,7 +121,15 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ execute: record });
+      console.log(
+        '%c%s',
+        'color:#C39BD3;',
+        JSON.stringify({
+          debug: 'check the following execute data',
+        }),
+      );
+
+      console.log(record);
     }
   }
 
@@ -101,7 +141,15 @@ export function recordLog(record, showMode, level = logLevel.debug) {
     }
 
     if (showModeModified === logShowMode.object) {
-      console.log({ config: record });
+      console.log(
+        '%c%s',
+        'color:#F8C471;',
+        JSON.stringify({
+          config: 'check the following config data',
+        }),
+      );
+
+      console.log(record);
     }
   }
 

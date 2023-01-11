@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro';
+import Taro, { ENV_TYPE, getEnv } from '@tarojs/taro';
 
 import { getCache, setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import {
@@ -17,6 +17,7 @@ import {
   recordInfo,
   recordLog,
   recordObject,
+  recordWarn,
   redirectTo,
   showErrorMessage,
   showInfoMessage,
@@ -111,7 +112,7 @@ class SupplementCore extends Common {
         });
       } else {
         that.checkSession(() => {
-          if (that.verifyTicketValidity) {
+          if (that.getVerifyTicketValidity()) {
             that.checkTicketValidity({
               callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
             });
@@ -134,11 +135,54 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    recordDebug(
-      `this.needReLocationWhenRepeatedShow is ${this.needReLocationWhenRepeatedShow} in doShowTask`,
-    );
-
     if (that.needReLocationWhenRepeatedShow) {
+      const ENV = getEnv();
+
+      switch (ENV) {
+        case ENV_TYPE.WEAPP:
+          break;
+
+        case ENV_TYPE.ALIPAY:
+          recordWarn(
+            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
+          );
+
+          that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
+
+          return;
+
+        case ENV_TYPE.SWAN:
+          recordWarn(
+            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
+          );
+
+          that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
+
+          return;
+
+        case ENV_TYPE.WEB:
+          recordWarn(
+            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
+          );
+
+          that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
+
+          return;
+
+        default:
+          recordWarn(
+            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
+          );
+
+          that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
+
+          return;
+      }
+
+      recordDebug(
+        `this.needReLocationWhenRepeatedShow is ${this.needReLocationWhenRepeatedShow} in doShowTask`,
+      );
+
       const useLocation = defaultSettingsLayoutCustom.getUseLocation();
       const locationMode = getLocationMode();
 
@@ -160,7 +204,7 @@ class SupplementCore extends Common {
           failCallback: null,
         });
       } else {
-        that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow();
+        that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
       }
     }
   };
@@ -465,6 +509,8 @@ class SupplementCore extends Common {
     callback,
     force = false,
   }) => {
+    recordExecute('executeLogicAfterNonautomaticReLocationWhenRepeatedShow');
+
     if (isFunction(callback)) {
       callback({
         location,
@@ -571,7 +617,7 @@ class SupplementCore extends Common {
     const signInResult = this.getSignInResult();
 
     if (signInResult === verifySignInResult.fail) {
-      if (!this.verifyTicket) {
+      if (!this.getVerifyTicket()) {
         if (isFunction(callback)) {
           callback();
         }
@@ -594,7 +640,7 @@ class SupplementCore extends Common {
   }
 
   dispatchCheckTicketValidity = (data = {}) => {
-    if (this.verifyTicket) {
+    if (this.getVerifyTicket()) {
       throw new Error(
         'dispatchCheckTicketValidity need override when verifyTicket set to true, dispatchCheckTicketValidity must return a promise',
       );
@@ -655,7 +701,10 @@ class SupplementCore extends Common {
             const verifySignInResult = getVerifySignInResult();
             const signInResult = that.getSignInResult();
 
-            if (signInResult === verifySignInResult.fail && that.verifyTicket) {
+            if (
+              signInResult === verifySignInResult.fail &&
+              that.getVerifyTicket()
+            ) {
               that.doWhenCheckTicketValidityVerifySignInFail();
             }
 
@@ -681,7 +730,7 @@ class SupplementCore extends Common {
   doWhenCheckTicketValidityVerifySignInFail = () => {};
 
   dispatchRefreshSession = (data) => {
-    if (this.verifySession) {
+    if (this.getVerifySession()) {
       throw new Error(
         'dispatchRefreshSession need override, dispatchRefreshSession must return a promise',
       );
@@ -729,6 +778,7 @@ class SupplementCore extends Common {
                   }
 
                   if (isFunction(callback)) {
+                    // eslint-disable-next-line promise/no-callback-in-promise
                     callback();
                   }
                 } else {
@@ -749,6 +799,7 @@ class SupplementCore extends Common {
                 setSessionRefreshing(false);
 
                 if (isFunction(callback)) {
+                  // eslint-disable-next-line promise/no-callback-in-promise
                   callback();
                 }
               });
@@ -760,6 +811,7 @@ class SupplementCore extends Common {
             setSessionRefreshing(false);
 
             if (isFunction(callback)) {
+              // eslint-disable-next-line promise/no-callback-in-promise
               callback();
             }
           }
@@ -1097,7 +1149,7 @@ class SupplementCore extends Common {
   };
 
   dispatchSignInSilent = (data = {}) => {
-    if (this.verifyTicket) {
+    if (this.getVerifyTicket()) {
       throw new Error(
         'dispatchSignInSilent need override, dispatchSignInSilent must return a promise',
       );

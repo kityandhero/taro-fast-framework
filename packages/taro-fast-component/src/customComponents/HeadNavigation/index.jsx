@@ -1,6 +1,10 @@
 import { View } from '@tarojs/components';
+import { ENV_TYPE, getEnv } from '@tarojs/taro';
 
-import { getMenuButtonBoundingClientRect } from 'taro-fast-common/es/utils/tools';
+import {
+  getMenuButtonBoundingClientRect,
+  recordWarn,
+} from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
@@ -34,22 +38,73 @@ class HeadNavigation extends BaseComponent {
   }
 
   doWorkAdjustDidMount = () => {
-    const rect = getMenuButtonBoundingClientRect();
-
-    const { width, height, top } = rect;
-
-    this.setState({
-      containerHeight: `${height + top + 8}px`,
-      placeholderHeight: `${top}px`,
-      height: `${height}px`,
-      boxHeight: `${height + top}px`,
-      rightWidth: `${width + 15}px`,
-    });
-
     const { onAdjustComplete } = this.props;
 
-    if (isFunction(onAdjustComplete)) {
-      onAdjustComplete({ containerHeight: height + top + 8 });
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        const rect = getMenuButtonBoundingClientRect();
+
+        const { width, height, top } = rect;
+
+        this.setState({
+          containerHeight: `${height + top + 8}px`,
+          placeholderHeight: `${top}px`,
+          height: `${height}px`,
+          boxHeight: `${height + top}px`,
+          rightWidth: `${width + 15}px`,
+        });
+
+        if (isFunction(onAdjustComplete)) {
+          onAdjustComplete({ containerHeight: height + top + 8 });
+        }
+
+        return;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
+        );
+
+        if (isFunction(onAdjustComplete)) {
+          onAdjustComplete({});
+        }
+
+        return;
+
+      case ENV_TYPE.SWAN:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
+        );
+
+        if (isFunction(onAdjustComplete)) {
+          onAdjustComplete({});
+        }
+
+        return;
+
+      case ENV_TYPE.WEB:
+        recordWarn(
+          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
+        );
+
+        if (isFunction(onAdjustComplete)) {
+          onAdjustComplete({});
+        }
+
+        return;
+
+      default:
+        console.warn(
+          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
+        );
+
+        if (isFunction(onAdjustComplete)) {
+          onAdjustComplete({});
+        }
+
+        return;
     }
   };
 

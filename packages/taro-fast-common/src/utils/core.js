@@ -28,11 +28,11 @@ export function getTaroGlobalData() {
       return app.$app.taroGlobalData;
 
     case ENV_TYPE.ALIPAY:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
+      console.warn(`framework with env [${ENV}] has no adaptation`);
       break;
 
     case ENV_TYPE.SWAN:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
+      console.warn(`framework with env [${ENV}] has no adaptation`);
       break;
 
     case ENV_TYPE.WEB:
@@ -43,7 +43,7 @@ export function getTaroGlobalData() {
       return window.taroGlobalData;
 
     default:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
+      console.warn(`framework with env [${ENV}] has no adaptation`);
       break;
   }
 
@@ -59,10 +59,10 @@ export function setTaroGlobalData(config) {
       break;
 
     case ENV_TYPE.ALIPAY:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
+      console.warn(`framework with env [${ENV}] has no adaptation`);
 
     case ENV_TYPE.SWAN:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
+      console.warn(`framework with env [${ENV}] has no adaptation`);
       break;
 
     case ENV_TYPE.WEB:
@@ -74,7 +74,7 @@ export function setTaroGlobalData(config) {
       break;
 
     default:
-      console.warn(`框架在该环境[${ENV}]还未适配`);
+      console.warn(`framework with env [${ENV}] has no adaptation`);
       break;
   }
 }
