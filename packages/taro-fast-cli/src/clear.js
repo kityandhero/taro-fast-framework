@@ -1,6 +1,10 @@
-const { resolve } = require("path");
-const fs = require("fs-extra");
-const term = require("terminal-kit").terminal;
+const { resolve } = require('path');
+const fs = require('fs-extra');
+const term = require('terminal-kit').terminal;
+
+/**
+ * clear cli
+ */
 
 exports.run = async function (s, o) {
   term.green(`adjust develop environment\r`);
