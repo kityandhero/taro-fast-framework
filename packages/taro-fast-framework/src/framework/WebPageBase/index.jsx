@@ -1,10 +1,16 @@
 import { WebView } from '@tarojs/components';
+import { ENV_TYPE, getEnv } from '@tarojs/taro';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  recordWarn,
+  stringIsNullOrWhiteSpace,
+} from 'taro-fast-common/es/utils/tools';
 
 import Infrastructure from '../Infrastructure';
 
 class WebPageBase extends Infrastructure {
+  redirectWithWebEnv = true;
+
   constructor(props) {
     super(props);
 
@@ -59,6 +65,37 @@ class WebPageBase extends Infrastructure {
 
   renderFurther() {
     const { url } = this.state;
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        break;
+
+      case ENV_TYPE.ALIPAY:
+        break;
+
+      case ENV_TYPE.SWAN:
+        break;
+
+      case ENV_TYPE.WEB:
+        if (this.redirectWithWebEnv) {
+          recordWarn(
+            `framework with env [${ENV}] use redirect to handle load web page`,
+          );
+
+          if (window) {
+            window.location.href = url;
+          }
+
+          return <></>;
+        }
+
+        break;
+
+      default:
+        break;
+    }
 
     return <WebView src={url} />;
   }
