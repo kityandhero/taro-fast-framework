@@ -135,6 +135,7 @@
     "@commitlint/config-lerna-scopes": "^17.0.2",
     "@commitlint/cz-commitlint": "^17.1.2",
     "commitizen": "^4.2.5",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
     "husky": "^8.0.1",
     "lerna": "^6.0.1",
     "lint-staged": "^13.0.3",
