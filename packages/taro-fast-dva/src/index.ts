@@ -1,4 +1,4 @@
 /**
- *this is a entry
+ *this is entry
  */
 export default function init() {}
