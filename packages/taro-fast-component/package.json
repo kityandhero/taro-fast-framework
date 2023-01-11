@@ -130,6 +130,6 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "webpack": "^5.74.0"
   },
-  "gitHead": "1de3fe450a3c99b814a70f7ce8786b12d31eb224",
+  "gitHead": "da01009decf273f1876ceca879bdc84c086db5da",
   "other": {}
 }
