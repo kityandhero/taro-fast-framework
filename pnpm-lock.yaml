@@ -19,6 +19,9 @@ importers:
       husky: ^8.0.1
       lerna: ^6.0.1
       lint-staged: ^13.0.3
+      prettier: ^2.7.1
+      prettier-plugin-organize-imports: ^3
+      prettier-plugin-packagejson: ^2
       rollup-plugin-copy: ^3.4.0
       sleep-ms: ^2.0.1
       stylelint: ^14.14.0
@@ -42,6 +45,9 @@ importers:
       husky: 8.0.3
       lerna: 6.4.0
       lint-staged: 13.1.0
+      prettier: 2.8.2
+      prettier-plugin-organize-imports: 3.2.1_prettier@2.8.2
+      prettier-plugin-packagejson: 2.3.0_prettier@2.8.2
       sleep-ms: 2.0.1
       stylelint: 14.16.1
       stylelint-config-prettier: 9.0.4_stylelint@14.16.1
@@ -88,6 +94,7 @@ importers:
       babel-preset-taro: ^3.5.7
       classnames: ^2.3.2
       commitizen: ^4.2.5
+      conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
       eslint: ^8.26.0
       eslint-config-prettier: ^8.5.0
@@ -117,12 +124,12 @@ importers:
       stylelint-config-prettier: ^9.0.3
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.13.0
-      taro-fast-component: ^2.11.0
-      taro-fast-component-extra: ^2.9.0
-      taro-fast-component-prism: ^2.9.0
+      taro-fast-common: ^1.13.1
+      taro-fast-component: ^2.11.1
+      taro-fast-component-extra: ^2.9.1
+      taro-fast-component-prism: ^2.9.1
       taro-fast-dva: ^2.10.0
-      taro-fast-framework: ^1.11.0
+      taro-fast-framework: ^1.11.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -174,6 +181,7 @@ importers:
       babel-preset-taro: 3.5.11_l4wmzyfecaqdvyrxgh5436qxyu
       classnames: 2.3.2
       commitizen: 4.2.6
+      conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       eslint: 8.31.0
       eslint-config-prettier: 8.6.0_eslint@8.31.0
@@ -215,6 +223,9 @@ importers:
       hpagent: ^1.0.0
       husky: ^8.0.1
       ping: ^0.4.2
+      prettier: ^2.7.1
+      prettier-plugin-organize-imports: ^3
+      prettier-plugin-packagejson: ^2
       shelljs: ^0.8.5
       terminal-kit: ^2.4.0
     dependencies:
@@ -232,6 +243,9 @@ importers:
       eslint-plugin-promise: 6.1.1
       eslint-plugin-simple-import-sort: 7.0.0
       husky: 8.0.3
+      prettier: 2.8.2
+      prettier-plugin-organize-imports: 3.2.1_prettier@2.8.2
+      prettier-plugin-packagejson: 2.3.0_prettier@2.8.2
 
   packages/taro-fast-common:
     specifiers:
@@ -508,7 +522,7 @@ importers:
       stylelint-config-prettier: ^9.0.3
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.13.0
+      taro-fast-common: ^1.13.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -685,8 +699,8 @@ importers:
       stylelint-config-prettier: ^9.0.3
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.13.0
-      taro-fast-component: ^2.11.0
+      taro-fast-common: ^1.13.1
+      taro-fast-component: ^2.11.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -867,8 +881,8 @@ importers:
       stylelint-config-prettier: ^9.0.3
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.13.0
-      taro-fast-component: ^2.11.0
+      taro-fast-common: ^1.13.1
+      taro-fast-component: ^2.11.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -988,6 +1002,9 @@ importers:
       invariant: ^2.2.4
       is-plain-object: ^5.0.0
       mm: ^3.2.0
+      prettier: ^2.7.1
+      prettier-plugin-organize-imports: ^3
+      prettier-plugin-packagejson: ^2
       redux: ^4.2.0
       redux-saga: ^1.2.1
       rollup: ^3.2.3
@@ -1024,6 +1041,9 @@ importers:
       '@svgr/rollup': 6.5.1
       '@tarojs/mini-runner': 3.5.11
       mm: 3.2.1
+      prettier: 2.8.2
+      prettier-plugin-organize-imports: 3.2.1_prettier@2.8.2
+      prettier-plugin-packagejson: 2.3.0_prettier@2.8.2
       redux: 4.2.0
       rollup: 3.9.1
       rollup-plugin-livereload: 2.0.5
@@ -1123,8 +1143,8 @@ importers:
       stylelint-config-prettier: ^9.0.3
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.13.0
-      taro-fast-component: ^2.11.0
+      taro-fast-common: ^1.13.1
+      taro-fast-component: ^2.11.1
       taro-fast-dva: ^2.10.0
       webpack: ^5.74.0
     dependencies:
@@ -10034,7 +10054,7 @@ packages:
     dev: true
 
   /chokidar/1.7.0:
-    resolution: {integrity: sha512-mk8fAWcRUOxY7btlLtitj3A45jOwSAxH4tOFOoEGbVsl6cL6pPMWUy7dwZ/canfj3QEdP6FHSnf/l1c6/WkzVg==}
+    resolution: {integrity: sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=}
     deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
     requiresBuild: true
     dependencies:
@@ -13591,7 +13611,7 @@ packages:
     engines: {node: '>=6'}
 
   /file-uri-to-path/1.0.0:
-    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    resolution: {integrity: sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90=}
     requiresBuild: true
     dev: true
     optional: true
@@ -15139,7 +15159,7 @@ packages:
     engines: {node: '>= 4'}
 
   /image-size/0.5.5:
-    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
+    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
@@ -22426,7 +22446,7 @@ packages:
     dev: true
 
   /string.fromcodepoint/0.2.1:
-    resolution: {integrity: sha512-n69H31OnxSGSZyZbgBlvYIXlrMhJQ0dQAX1js1QDhpaUH6zmU3QYlj07bCwCNlPOu3oRXIubGPl2gDGnHsiCqg==}
+    resolution: {integrity: sha1-jZeDM8C8klOPUPOD5IiPPlYZ1lM=}
     dev: true
 
   /string.prototype.matchall/4.0.8:

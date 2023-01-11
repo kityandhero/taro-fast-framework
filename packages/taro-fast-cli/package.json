@@ -45,7 +45,10 @@
     "@types/shelljs": "^0.8.11",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "husky": "^8.0.1"
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3",
+    "prettier-plugin-packagejson": "^2"
   },
   "gitHead": "6bfee3113ac3fb9ab02bfcb26319b5aba42703f3"
 }
