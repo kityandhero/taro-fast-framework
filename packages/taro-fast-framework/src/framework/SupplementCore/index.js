@@ -218,6 +218,51 @@ class SupplementCore extends Common {
   }) => {
     recordExecute('obtainLocation');
 
+    const ENV = getEnv();
+
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore obtainLocation, only execute failCallback`;
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        break;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        return;
+
+      case ENV_TYPE.SWAN:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        return;
+
+      case ENV_TYPE.WEB:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        return;
+
+      default:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        return;
+    }
+
     const simulationMode = defaultSettingsLayoutCustom.getSimulationLocation();
     const simulationData =
       defaultSettingsLayoutCustom.getSimulationLocationData();
@@ -522,6 +567,51 @@ class SupplementCore extends Common {
 
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
     recordExecute('checkTicketValidity');
+
+    const ENV = getEnv();
+
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore checkTicketValidity, only execute signInSilentFailCallback`;
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        break;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(signInSilentFailCallback)) {
+          signInSilentFailCallback();
+        }
+
+        return;
+
+      case ENV_TYPE.SWAN:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(signInSilentFailCallback)) {
+          signInSilentFailCallback();
+        }
+
+        return;
+
+      case ENV_TYPE.WEB:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(signInSilentFailCallback)) {
+          signInSilentFailCallback();
+        }
+
+        return;
+
+      default:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(signInSilentFailCallback)) {
+          signInSilentFailCallback();
+        }
+
+        return;
+    }
 
     const useLocation = defaultSettingsLayoutCustom.getUseLocation();
     const locationMode = getLocationMode();
@@ -1288,6 +1378,67 @@ class SupplementCore extends Common {
     completeCallback = null,
   }) {
     recordExecute('signInSilentCore');
+
+    const ENV = getEnv();
+
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore obtainLocation, only execute failCallback`;
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        break;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        if (isFunction(completeCallback)) {
+          completeCallback();
+        }
+
+        return;
+
+      case ENV_TYPE.SWAN:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        if (isFunction(completeCallback)) {
+          completeCallback();
+        }
+
+        return;
+
+      case ENV_TYPE.WEB:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        if (isFunction(completeCallback)) {
+          completeCallback();
+        }
+
+        return;
+
+      default:
+        console.warn(noAdaptationMessage);
+
+        if (isFunction(failCallback)) {
+          failCallback();
+        }
+
+        if (isFunction(completeCallback)) {
+          completeCallback();
+        }
+
+        return;
+    }
 
     // Tips.loading('处理中');
 

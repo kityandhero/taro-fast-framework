@@ -53,7 +53,6 @@ export function getTaroGlobalData() {
 export function setTaroGlobalData(config) {
   const ENV = getEnv();
 
-  // 标签栏滚动
   switch (ENV) {
     case ENV_TYPE.WEAPP:
       break;

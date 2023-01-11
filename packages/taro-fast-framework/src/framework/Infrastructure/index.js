@@ -946,7 +946,7 @@ export default class Infrastructure extends ComponentBase {
           callback();
         }
 
-        break;
+        return;
 
       case ENV_TYPE.SWAN:
         console.warn(
@@ -957,7 +957,7 @@ export default class Infrastructure extends ComponentBase {
           callback();
         }
 
-        break;
+        return;
 
       case ENV_TYPE.WEB:
         recordWarn(
