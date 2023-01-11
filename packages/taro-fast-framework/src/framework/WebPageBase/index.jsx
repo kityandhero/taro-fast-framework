@@ -85,7 +85,7 @@ class WebPageBase extends Infrastructure {
           );
 
           if (window) {
-            window.location.href = url;
+            window.location.replace(url);
           }
 
           return <></>;
