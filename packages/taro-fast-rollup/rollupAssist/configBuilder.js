@@ -45,6 +45,7 @@ const externalCollection = [
   'lodash/sortBy',
   'lodash/findIndex',
   'lodash/find',
+  'lodash/dropRight',
   'lodash/reverse',
   'lodash/replace',
   'lodash/trim',

@@ -2,25 +2,31 @@
   "name": "taro-fast-dva",
   "version": "2.0.11",
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
-  "sideEffects": false,
   "license": "MIT",
+  "sideEffects": false,
   "main": "/src/index.ts",
+  "directories": {
+    "es": "es"
+  },
+  "files": [
+    "es"
+  ],
   "scripts": {
-    "publish:compression": "npm run build && yarn publish",
-    "v:p": "npm version patch && yarn publish",
+    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
+    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
     "clean-file": "rimraf ./node_modules",
     "dev": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch",
-    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
-    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
-    "precommit": "lint-staged",
     "lint-staged": "lint-staged",
     "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "npx eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
     "lint:style": "npx stylelint --fix \"./src/**/*.less\"",
-    "prettier": "npx prettier -c --write \"**/*\""
+    "precommit": "lint-staged",
+    "prettier": "npx prettier -c --write \"**/*\"",
+    "publish:compression": "npm run build && yarn publish",
+    "v:p": "npm version patch && yarn publish"
   },
   "dependencies": {
     "@babel/runtime": "^7.19.4",
@@ -31,9 +37,6 @@
     "is-plain-object": "^5.0.0",
     "redux-saga": "^1.2.1",
     "warning": "^4.0.3"
-  },
-  "peerDependencies": {
-    "redux": "4.x"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
@@ -48,11 +51,8 @@
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-serve": "^2.0.1"
   },
-  "directories": {
-    "es": "es"
+  "peerDependencies": {
+    "redux": "4.x"
   },
-  "files": [
-    "es"
-  ],
   "gitHead": "1de3fe450a3c99b814a70f7ce8786b12d31eb224"
 }

@@ -6,25 +6,38 @@
   "keywords": [
     "taro-fast-component-prism"
   ],
-  "author": "卢志涛 <kityandhero@126.com>",
   "homepage": "https://github.com/kityandhero/taro-fast-framework.git",
+  "bugs": {
+    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
+  },
   "license": "MIT",
+  "author": "卢志涛 <kityandhero@126.com>",
   "main": "/src/index.ts",
+  "directories": {
+    "es": "es"
+  },
+  "files": [
+    "es"
+  ],
   "scripts": {
-    "publish:compression": "npm run build && yarn publish",
-    "v:p": "npm version patch && yarn publish",
-    "clean-file": "rimraf ./node_modules",
-    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
     "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
+    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
+    "clean-file": "rimraf ./node_modules",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
-    "precommit": "lint-staged",
     "lint-staged": "lint-staged",
     "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "npx eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
     "lint:style": "npx stylelint --fix \"./src/**/*.less\"",
-    "prettier": "npx prettier -c --write \"**/*\""
+    "precommit": "lint-staged",
+    "prettier": "npx prettier -c --write \"**/*\"",
+    "publish:compression": "npm run build && yarn publish",
+    "v:p": "npm version patch && yarn publish"
   },
   "dependencies": {
     "@tarojs/components": "^3.5.7",
@@ -103,6 +116,8 @@
     "postcss-less": "^6.0.0",
     "postcss-pxtorem": "^6.0.0",
     "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3",
+    "prettier-plugin-packagejson": "^2",
     "react-refresh": "^0.14.0",
     "rollup": "^3.2.3",
     "rollup-plugin-livereload": "^2.0.5",
@@ -116,19 +131,6 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "webpack": "^5.74.0"
-  },
-  "directories": {
-    "es": "es"
-  },
-  "files": [
-    "es"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
-  },
-  "bugs": {
-    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
   },
   "gitHead": "1de3fe450a3c99b814a70f7ce8786b12d31eb224"
 }

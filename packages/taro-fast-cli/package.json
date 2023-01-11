@@ -5,15 +5,19 @@
   "keywords": [
     "taro-fast-cli"
   ],
-  "author": "kityandhero <kityandhero@126.com>",
   "homepage": "https://github.com/kityandhero/taro-fast-framework#readme",
+  "bugs": {
+    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
+  },
   "license": "MIT",
+  "author": "kityandhero <kityandhero@126.com>",
   "main": "lib/taro-fast-cli.js",
   "bin": {
     "taro-fast-cli": "./bin/cli.js"
-  },
-  "scripts": {
-    "clean-file": "rimraf ./node_modules"
   },
   "directories": {
     "lib": "lib",
@@ -23,12 +27,8 @@
     "lib/",
     "src/"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
-  },
-  "bugs": {
-    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
+  "scripts": {
+    "clean-file": "rimraf ./node_modules"
   },
   "dependencies": {
     "commander": "^9.0.0",

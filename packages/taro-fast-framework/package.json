@@ -3,30 +3,38 @@
   "version": "1.2.0",
   "private": false,
   "description": "基于Taro的开发框架基于Taro的开发框架",
-  "author": "kityandhero <kityandhero@126.com>",
-  "license": "MIT",
   "homepage": "https://github.com/kityandhero/taro-fast-framework.git",
-  "templateInfo": {
-    "name": "default",
-    "typescript": false,
-    "css": "less"
+  "bugs": {
+    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
+  },
+  "license": "MIT",
+  "author": "kityandhero <kityandhero@126.com>",
+  "directories": {
+    "es": "es"
+  },
+  "files": [
+    "es"
+  ],
   "scripts": {
-    "publish:compression": "npm run build && yarn publish",
-    "v:p": "npm version patch && yarn publish",
+    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
+    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
     "clean-file": "rimraf ./node_modules",
     "dev": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch",
-    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
-    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
-    "precommit": "lint-staged",
     "lint-staged": "lint-staged",
     "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "npx eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "npx prettier --check \"**/*\" --end-of-line auto",
     "lint:style": "npx stylelint --fix \"./src/**/*.less\"",
-    "prettier": "npx prettier -c --write \"**/*\""
+    "precommit": "lint-staged",
+    "prettier": "npx prettier -c --write \"**/*\"",
+    "publish:compression": "npm run build && yarn publish",
+    "v:p": "npm version patch && yarn publish"
   },
   "dependencies": {
     "@tarojs/components": "^3.5.7",
@@ -45,7 +53,6 @@
     "@tarojs/taro": "^3.5.7",
     "@tarojs/taro-h5": "^3.5.7",
     "dayjs": "^1.11.6",
-    "lodash": "^4.17.21",
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -110,6 +117,8 @@
     "postcss-less": "^6.0.0",
     "postcss-pxtorem": "^6.0.0",
     "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3",
+    "prettier-plugin-packagejson": "^2",
     "react-refresh": "^0.14.0",
     "rollup": "^3.2.3",
     "rollup-plugin-livereload": "^2.0.5",
@@ -124,18 +133,10 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "webpack": "^5.74.0"
   },
-  "files": [
-    "es"
-  ],
-  "directories": {
-    "es": "es"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kityandhero/taro-fast-framework.git"
-  },
-  "bugs": {
-    "url": "https://github.com/kityandhero/taro-fast-framework/issues"
-  },
-  "gitHead": "1de3fe450a3c99b814a70f7ce8786b12d31eb224"
+  "gitHead": "1de3fe450a3c99b814a70f7ce8786b12d31eb224",
+  "templateInfo": {
+    "name": "default",
+    "typescript": false,
+    "css": "less"
+  }
 }
