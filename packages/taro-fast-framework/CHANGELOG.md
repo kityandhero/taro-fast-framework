@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.5](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-framework@1.11.4...taro-fast-framework@1.11.5) (2023-01-11)
+
+
+### Bug Fixes
+
+* **simple-taro-fast-framework:** adjust web page render with h5 ([eb24bfa](https://github.com/kityandhero/taro-fast-framework/commit/eb24bfa5b2444d8ba663c4f9933c3230cc11c15e))
+
+
+
 ## [1.11.4](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-framework@1.11.3...taro-fast-framework@1.11.4) (2023-01-11)
 
 
