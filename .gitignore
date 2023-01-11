@@ -7,7 +7,9 @@
 **/.history
 
 # production
+**/build
 **/dist
+**/es
 
 # idea
 **/.idea
@@ -33,6 +35,9 @@ functions/mock
 **/coverage
 
 # lock
+/yarn.lock
+/package-lock.json
+/pnpm-lock.yaml
 **/yarn.lock
 **/package-lock.json
 **/pnpm-lock.yaml
@@ -52,9 +57,3 @@ screenshot
 
 # eslintcache
 .eslintcache
-
-# build
-**/build
-/yarn.lock
-/package-lock.json
-/packages/taro-fast-framework/es
