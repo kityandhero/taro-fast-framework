@@ -92,6 +92,7 @@
     "babel-preset-taro": "^3.5.7",
     "classnames": "^2.3.2",
     "commitizen": "^4.2.5",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
