@@ -18,8 +18,6 @@
 **/.temp
 **/.swc
 
-**/package-lock.json
-
 # mock
 functions/mock
 
@@ -39,9 +37,6 @@ functions/mock
 /yarn.lock
 /package-lock.json
 /pnpm-lock.yaml
-**/yarn.lock
-**/package-lock.json
-**/pnpm-lock.yaml
 
 # log
 *.log
