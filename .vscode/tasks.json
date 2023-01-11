@@ -42,6 +42,13 @@
       "problemMatcher": [],
       "label": "dev:framework",
       "detail": "cd packages/taro-fast-framework && npm run dev"
+    },
+    {
+      "type": "npm",
+      "script": "start:h5:simple",
+      "problemMatcher": [],
+      "label": "start:h5:simple",
+      "detail": "cd packages/simple-taro-fast-framework && npm run start:h5"
     }
   ]
 }

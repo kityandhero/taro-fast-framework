@@ -16,6 +16,7 @@
 
 # temp
 **/.temp
+**/.swc
 
 **/package-lock.json
 

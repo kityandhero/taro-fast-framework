@@ -1,5 +1,5 @@
 import { ScrollView, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import Taro, { ENV_TYPE, getEnv } from '@tarojs/taro';
 
 import {
   ComponentBase,
@@ -868,20 +868,96 @@ export default class Infrastructure extends ComponentBase {
 
     const that = this;
 
-    if (that.ignoreSessionRelatedLogic) {
-      recordDebug(
-        `ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
-      );
+    const ENV = getEnv();
 
+    // 标签栏滚动
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        if (that.ignoreSessionRelatedLogic) {
+          that.prepareLoadRemoteRequestOnlyMetaData();
+        } else {
+          that.prepareLoadRemoteRequestWithCheckOnWeapp();
+        }
+
+        return;
+
+      case ENV_TYPE.ALIPAY:
+        console.warn(`框架在该环境[${ENV}]还未适配`);
+        break;
+
+      case ENV_TYPE.SWAN:
+        console.warn(`框架在该环境[${ENV}]还未适配`);
+        break;
+
+      case ENV_TYPE.WEB:
+        console.warn(`框架在该环境[${ENV}]还未适配微信接口调用`);
+
+        that.prepareLoadRemoteRequestOnlyMetaData();
+
+        return;
+
+      default:
+        console.warn(`框架在该环境[${ENV}]还未适配`);
+        break;
+    }
+  };
+
+  prepareLoadRemoteRequestOnlyMetaData = () => {
+    const that = this;
+
+    recordDebug(
+      `ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
+    );
+
+    that.initMetaData({
+      data: that.initMetaDataRequestData || {},
+      force: !!that.initMetaDataForce,
+      callback: () => {
+        if (that.loadRemoteRequestAfterMount) {
+          that.doLoadRemoteRequest();
+        }
+
+        that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+      },
+    });
+
+    if (that.useFullAdministrativeDivisionSelector) {
+      that.initFullAdministrativeDivisionData({
+        callback: (l) => {
+          that.doAfterInitFullAdministrativeDivisionData(l);
+        },
+      });
+    }
+  };
+  prepareLoadRemoteRequestWithCheckOnWeapp = () => {
+    const that = this;
+
+    that.checkSession(() => {
       that.initMetaData({
         data: that.initMetaDataRequestData || {},
         force: !!that.initMetaDataForce,
         callback: () => {
-          if (that.loadRemoteRequestAfterMount) {
-            that.doLoadRemoteRequest();
-          }
+          if (!that.verifyTicket) {
+            that.checkTicketValidity({
+              callback: () => {
+                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+              },
+            });
 
-          that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+            if (that.loadRemoteRequestAfterMount) {
+              that.doLoadRemoteRequest();
+            }
+          } else {
+            that.checkTicketValidity({
+              callback: () => {
+                if (that.loadRemoteRequestAfterMount) {
+                  that.doLoadRemoteRequest();
+                }
+
+                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+              },
+            });
+          }
         },
       });
 
@@ -892,45 +968,7 @@ export default class Infrastructure extends ComponentBase {
           },
         });
       }
-    } else {
-      that.checkSession(() => {
-        that.initMetaData({
-          data: that.initMetaDataRequestData || {},
-          force: !!that.initMetaDataForce,
-          callback: () => {
-            if (!that.verifyTicket) {
-              that.checkTicketValidity({
-                callback: () => {
-                  that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-                },
-              });
-
-              if (that.loadRemoteRequestAfterMount) {
-                that.doLoadRemoteRequest();
-              }
-            } else {
-              that.checkTicketValidity({
-                callback: () => {
-                  if (that.loadRemoteRequestAfterMount) {
-                    that.doLoadRemoteRequest();
-                  }
-
-                  that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-                },
-              });
-            }
-          },
-        });
-
-        if (that.useFullAdministrativeDivisionSelector) {
-          that.initFullAdministrativeDivisionData({
-            callback: (l) => {
-              that.doAfterInitFullAdministrativeDivisionData(l);
-            },
-          });
-        }
-      });
-    }
+    });
   };
 
   /**

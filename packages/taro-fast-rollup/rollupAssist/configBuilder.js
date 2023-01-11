@@ -155,7 +155,7 @@ export function buildConfig({
         ],
         inject: { insertAt: 'top' },
         extract: true,
-        modules: true,
+        // modules: true,
       }),
       babelConfig({
         extensions: [...DEFAULT_EXTENSIONS, ...['ts', 'tsx']],
