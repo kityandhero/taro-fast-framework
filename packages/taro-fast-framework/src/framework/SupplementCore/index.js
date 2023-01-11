@@ -138,41 +138,35 @@ class SupplementCore extends Common {
     if (that.needReLocationWhenRepeatedShow) {
       const ENV = getEnv();
 
+      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`;
+
       switch (ENV) {
         case ENV_TYPE.WEAPP:
           break;
 
         case ENV_TYPE.ALIPAY:
-          recordWarn(
-            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
-          );
+          recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
         case ENV_TYPE.SWAN:
-          recordWarn(
-            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
-          );
+          recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
         case ENV_TYPE.WEB:
-          recordWarn(
-            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
-          );
+          recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
         default:
-          recordWarn(
-            `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`,
-          );
+          recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
@@ -227,7 +221,7 @@ class SupplementCore extends Common {
         break;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -236,7 +230,7 @@ class SupplementCore extends Common {
         return;
 
       case ENV_TYPE.SWAN:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -245,7 +239,7 @@ class SupplementCore extends Common {
         return;
 
       case ENV_TYPE.WEB:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -254,7 +248,7 @@ class SupplementCore extends Common {
         return;
 
       default:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -577,7 +571,7 @@ class SupplementCore extends Common {
         break;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
@@ -586,7 +580,7 @@ class SupplementCore extends Common {
         return;
 
       case ENV_TYPE.SWAN:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
@@ -595,7 +589,7 @@ class SupplementCore extends Common {
         return;
 
       case ENV_TYPE.WEB:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
@@ -604,7 +598,7 @@ class SupplementCore extends Common {
         return;
 
       default:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
@@ -1388,7 +1382,7 @@ class SupplementCore extends Common {
         break;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1401,7 +1395,7 @@ class SupplementCore extends Common {
         return;
 
       case ENV_TYPE.SWAN:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1414,7 +1408,7 @@ class SupplementCore extends Common {
         return;
 
       case ENV_TYPE.WEB:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1427,7 +1421,7 @@ class SupplementCore extends Common {
         return;
 
       default:
-        console.warn(noAdaptationMessage);
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();

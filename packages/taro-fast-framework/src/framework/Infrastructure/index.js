@@ -933,14 +933,14 @@ export default class Infrastructure extends ComponentBase {
 
     const ENV = getEnv();
 
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`;
+
     switch (ENV) {
       case ENV_TYPE.WEAPP:
         break;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -949,9 +949,7 @@ export default class Infrastructure extends ComponentBase {
         return;
 
       case ENV_TYPE.SWAN:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -960,9 +958,7 @@ export default class Infrastructure extends ComponentBase {
         return;
 
       case ENV_TYPE.WEB:
-        recordWarn(
-          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -971,9 +967,7 @@ export default class Infrastructure extends ComponentBase {
         return;
 
       default:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -1242,6 +1236,8 @@ export default class Infrastructure extends ComponentBase {
 
     const ENV = getEnv();
 
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifySession return false`;
+
     switch (ENV) {
       case ENV_TYPE.WEAPP:
         if (this.needSignIn) {
@@ -1255,30 +1251,22 @@ export default class Infrastructure extends ComponentBase {
         return this.verifySession;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       case ENV_TYPE.SWAN:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       case ENV_TYPE.WEB:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       default:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifySession return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
     }
@@ -1297,6 +1285,8 @@ export default class Infrastructure extends ComponentBase {
 
     const ENV = getEnv();
 
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicket return false`;
+
     switch (ENV) {
       case ENV_TYPE.WEAPP:
         if (this.needSignIn) {
@@ -1310,30 +1300,22 @@ export default class Infrastructure extends ComponentBase {
         return this.verifyTicket;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       case ENV_TYPE.SWAN:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       case ENV_TYPE.WEB:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       default:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicket return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
     }
@@ -1352,6 +1334,8 @@ export default class Infrastructure extends ComponentBase {
 
     const ENV = getEnv();
 
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`;
+
     switch (ENV) {
       case ENV_TYPE.WEAPP:
         if (this.needSignIn) {
@@ -1365,30 +1349,22 @@ export default class Infrastructure extends ComponentBase {
         return this.verifyTicketValidity;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       case ENV_TYPE.SWAN:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       case ENV_TYPE.WEB:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
 
       default:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return false;
     }
@@ -1731,35 +1707,29 @@ export default class Infrastructure extends ComponentBase {
 
     const ENV = getEnv();
 
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`;
+
     switch (ENV) {
       case ENV_TYPE.WEAPP:
         break;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return null;
 
       case ENV_TYPE.SWAN:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return null;
 
       case ENV_TYPE.WEB:
-        recordWarn(
-          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return null;
 
       default:
-        console.warn(
-          `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`,
-        );
+        recordWarn(noAdaptationMessage);
 
         return null;
     }

@@ -3,6 +3,7 @@ import { ENV_TYPE, getEnv } from '@tarojs/taro';
 
 import {
   getMenuButtonBoundingClientRect,
+  recordExecute,
   recordWarn,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
@@ -38,6 +39,8 @@ class HeadNavigation extends BaseComponent {
   }
 
   doWorkAdjustDidMount = () => {
+    recordExecute('doWorkAdjustDidMount');
+
     const { onAdjustComplete } = this.props;
 
     const ENV = getEnv();
@@ -63,7 +66,7 @@ class HeadNavigation extends BaseComponent {
         return;
 
       case ENV_TYPE.ALIPAY:
-        console.warn(
+        recordWarn(
           `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
         );
 
@@ -74,7 +77,7 @@ class HeadNavigation extends BaseComponent {
         return;
 
       case ENV_TYPE.SWAN:
-        console.warn(
+        recordWarn(
           `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
         );
 
@@ -96,7 +99,7 @@ class HeadNavigation extends BaseComponent {
         return;
 
       default:
-        console.warn(
+        recordWarn(
           `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
         );
 

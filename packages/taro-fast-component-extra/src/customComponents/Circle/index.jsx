@@ -8,6 +8,8 @@ import {
   getSystemInfo,
   inCollection,
   recordError,
+  recordExecute,
+  recordWarn,
   roundToTarget,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
@@ -165,6 +167,8 @@ class Circle extends ComponentBase {
       return;
     }
 
+    recordExecute('draw');
+
     let systemInfo = getSystemInfo();
 
     const dpr = systemInfo.pixelRatio;
@@ -198,11 +202,11 @@ class Circle extends ComponentBase {
             break;
 
           case Taro.ENV_TYPE.ALIPAY:
-            recordError(`framework with env [${ENV}] has no adaptation`);
+            recordWarn(`framework with env [${ENV}] has no adaptation`);
             break;
 
           case Taro.ENV_TYPE.SWAN:
-            recordError(`framework with env [${ENV}] has no adaptation`);
+            recordWarn(`framework with env [${ENV}] has no adaptation`);
             break;
 
           case Taro.ENV_TYPE.WEB:
@@ -213,12 +217,12 @@ class Circle extends ComponentBase {
             break;
 
           default:
-            recordError(`framework with env [${ENV}] has no adaptation`);
+            recordWarn(`framework with env [${ENV}] has no adaptation`);
             break;
         }
 
         if (ctx == null) {
-          recordError(`framework with env [${ENV}] has no adaptation`);
+          recordWarn(`framework with env [${ENV}] has no adaptation`);
 
           return;
         }
