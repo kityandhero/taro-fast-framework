@@ -3,7 +3,6 @@ import { View } from '@tarojs/components';
 import {
   buildLinearGradient,
   getGradient,
-  // getMenuButtonBoundingClientRect,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {
@@ -232,14 +231,6 @@ export default class Index extends ContentPageBase {
       },
     };
   }
-
-  // doWorkAdjustDidMount = () => {
-  //   setTimeout(() => {
-  //     const c = getMenuButtonBoundingClientRect();
-
-  //     console.log(c);
-  //   }, 1200);
-  // };
 
   doWhenScroll = ({ scrollTop }) => {
     if (this.gradientMode) {
