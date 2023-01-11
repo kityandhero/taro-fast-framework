@@ -133,7 +133,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "webpack": "^5.74.0"
   },
-  "gitHead": "b3ee769f55e7688f9cc1dfc72913c6da37d07fc1",
+  "gitHead": "6bfee3113ac3fb9ab02bfcb26319b5aba42703f3",
   "templateInfo": {
     "name": "default",
     "typescript": false,
