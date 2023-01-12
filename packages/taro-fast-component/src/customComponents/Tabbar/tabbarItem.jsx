@@ -118,6 +118,8 @@ class TabbarItem extends BaseComponent {
           className={classNames(`${classPrefix}__item__text`)}
           style={{
             color: active ? activeColor : color,
+            marginTop: transformSize(2),
+            fontSize: transformSize(24),
           }}
         >
           {text}

@@ -4,6 +4,7 @@ import { View } from '@tarojs/components';
 import {
   findIndex,
   stringIsNullOrWhiteSpace,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -119,6 +120,7 @@ class Tabbar extends BaseComponent {
 
     const style = {
       ...{
+        paddingTop: transformSize(3),
         '--border-color': borderColor,
         '--bar-background-color': backgroundColor,
       },
@@ -141,7 +143,12 @@ class Tabbar extends BaseComponent {
           catchMove
           onTouchMove={this.handleTouchMove}
         >
-          <View className={classNames(`${classPrefix}__content__item-wrapper`)}>
+          <View
+            className={classNames(`${classPrefix}__content__item-wrapper`)}
+            style={{
+              height: transformSize(100),
+            }}
+          >
             {(isArray(itemsAdjust) ? itemsAdjust : []).map((item, index) => {
               const itemAdjust = { ...TabbarItem.defaultProps, ...item };
 
