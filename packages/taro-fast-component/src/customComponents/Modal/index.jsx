@@ -60,8 +60,12 @@ const buttonNoFillStyle = {
 
 const buttonFillStyle = {
   padding: `${transformSize(16)} ${transformSize(14)}`,
+};
+
+const buttonSplitFillStyle = {
+  borderRightColor: 'var(--tfc-border-color)',
+  borderRightStyle: 'solid',
   borderRightWidth: transformSize(1),
-  borderLeftWidth: transformSize(1),
 };
 
 class Modal extends BaseComponent {
@@ -124,7 +128,6 @@ class Modal extends BaseComponent {
                   <View
                     className={classNames(`${classPrefix}__container__action`, {
                       [`${classPrefix}__container__action__fill`]: buttonFill,
-                      [`${classPrefix}__container__action__left`]: buttonFill,
                       [`${classPrefix}__container__action__no__fill`]:
                         !buttonFill,
                     })}
@@ -149,6 +152,9 @@ class Modal extends BaseComponent {
                           }
                         : {
                             ...buttonFillStyle,
+                            ...(showCancel && showConfirm
+                              ? buttonSplitFillStyle
+                              : {}),
                           }),
                       ...cancelStyle,
                     }}
@@ -164,7 +170,6 @@ class Modal extends BaseComponent {
                   <View
                     className={classNames(`${classPrefix}__container__action`, {
                       [`${classPrefix}__container__action__fill`]: buttonFill,
-                      [`${classPrefix}__container__action__right`]: buttonFill,
                       [`${classPrefix}__container__action__no__fill`]:
                         !buttonFill,
                     })}
