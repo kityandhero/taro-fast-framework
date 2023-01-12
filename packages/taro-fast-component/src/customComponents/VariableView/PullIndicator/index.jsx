@@ -301,6 +301,11 @@ class PullIndicator extends BaseComponent {
                     className={classNames(
                       `${classPrefix}__refresh-box__pull-refresh__iconBox`,
                     )}
+                    style={{
+                      padding: transformSize(6),
+                      width: transformSize(60),
+                      height: transformSize(60),
+                    }}
                   >
                     <IconLoading
                       className={classNames(
