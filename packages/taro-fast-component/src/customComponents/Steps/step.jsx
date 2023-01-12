@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -40,6 +40,11 @@ class Step extends BaseComponent {
             `${classPrefix}__item__indicator`,
             `${classPrefix}__item-${direction}__indicator`,
           )}
+          style={
+            direction === 'horizontal'
+              ? { height: transformSize(24) }
+              : { width: transformSize(48) }
+          }
         >
           <View
             className={classNames(
@@ -55,16 +60,33 @@ class Step extends BaseComponent {
               `${classPrefix}__item__indicator__line`,
               `${classPrefix}__item-${direction}__indicator__line`,
             )}
+            style={
+              direction === 'horizontal'
+                ? { height: transformSize(2) }
+                : { width: transformSize(2) }
+            }
           />
         </View>
 
-        <View className={`${classPrefix}__item-${direction}__content`}>
+        <View
+          className={`${classPrefix}__item-${direction}__content`}
+          style={
+            direction === 'horizontal'
+              ? { paddingTop: transformSize(22) }
+              : { paddingBottom: transformSize(28) }
+          }
+        >
           <View className={`${classPrefix}__item-${direction}__content__title`}>
             {title}
           </View>
           {!!description && (
             <View
               className={`${classPrefix}__item-${direction}__content__description`}
+              style={
+                direction === 'horizontal'
+                  ? { marginTop: transformSize(8) }
+                  : { paddingTop: transformSize(4) }
+              }
             >
               {description}
             </View>
