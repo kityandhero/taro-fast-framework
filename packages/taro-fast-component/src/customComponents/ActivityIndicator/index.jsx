@@ -15,11 +15,12 @@ const defaultProps = {
   mode: 'normal',
   content: '',
   className: '',
+  style: {},
 };
 
 class ActivityIndicator extends BaseComponent {
   render() {
-    const { color, size, type, borderWidth, mode, content, visible } =
+    const { color, size, type, borderWidth, mode, content, visible, style } =
       this.props;
 
     const rootClass = classNames(
@@ -32,7 +33,7 @@ class ActivityIndicator extends BaseComponent {
     );
 
     return (
-      <View className={rootClass}>
+      <View className={rootClass} style={style}>
         <View className="tfc-activity-indicator__body">
           <Loading
             size={size}

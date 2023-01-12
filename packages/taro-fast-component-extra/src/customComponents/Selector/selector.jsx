@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { Grid, Icon, Space } from 'taro-fast-component/es/customComponents';
 
@@ -108,6 +109,10 @@ class Selector extends ComponentBase {
         <View
           key={option.value}
           className={itemCls}
+          style={{
+            padding: `${transformSize(16)} ${transformSize(16)}`,
+            borderRadius: transformSize(4),
+          }}
           onClick={() => {
             if (disabled) {
               return;
@@ -119,15 +124,38 @@ class Selector extends ComponentBase {
           {option.label}
 
           {option.description && (
-            <View className={`${classPrefix}-item-description`}>
+            <View
+              className={`${classPrefix}-item-description`}
+              style={{
+                fontSize: transformSize(6),
+              }}
+            >
               {option.description}
             </View>
           )}
 
           {active && (
-            <View className={`${classPrefix}-check-mark-wrapper`}>
+            <View
+              className={`${classPrefix}-check-mark-wrapper`}
+              style={{
+                borderTop: `solid ${transformSize(16)} transparent`,
+                borderBottom: `solid ${transformSize(
+                  16,
+                )} var(--tfc-color-primary)`,
+                borderLeft: `solid ${transformSize(20)} transparent`,
+                borderRight: `solid ${transformSize(
+                  20,
+                )} var(--tfc-color-primary)`,
+              }}
+            >
               <IconCheck
                 className={`${classPrefix}-check-mark-wrapper-mark`}
+                style={{
+                  left: `calc(${transformSize(4)} * -1)`,
+                  top: `calc(${transformSize(8)} * -1)`,
+                  height: transformSize(12),
+                  width: transformSize(16),
+                }}
                 size={22}
                 color="#fff"
               />
@@ -138,7 +166,12 @@ class Selector extends ComponentBase {
     });
 
     return (
-      <View className={classPrefix}>
+      <View
+        className={classPrefix}
+        style={{
+          fontSize: transformSize(30),
+        }}
+      >
         {!columns && <Space wrap>{items}</Space>}
 
         {columns && (

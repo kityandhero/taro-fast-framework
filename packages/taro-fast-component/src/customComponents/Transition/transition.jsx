@@ -55,19 +55,27 @@ export function Transition(props) {
     onLeave,
   });
 
+  console.log({
+    ...buildRootStyle({
+      currentDuration,
+      display,
+      style,
+    }),
+  });
+
   return (
     <>
       <View
         className={'tfc-transition ' + classes + ` ${className || ''}`}
+        onTransitionEnd={onTransitionEnd}
+        {...others}
         style={{
           ...buildRootStyle({
             currentDuration,
             display,
+            style,
           }),
-          ...style,
         }}
-        onTransitionEnd={onTransitionEnd}
-        {...others}
         catchMove
       >
         {children}

@@ -361,6 +361,10 @@ export default class Infrastructure extends ComponentBase {
 
   firstShowHasTriggered = false;
 
+  privateCache = {
+    enablePullDownRefresh: null,
+  };
+
   constructor(props) {
     super(props);
 
@@ -1371,6 +1375,10 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getEnablePullDownRefresh = () => {
+    if (this.privateCache.enablePullDownRefresh != null) {
+      return this.privateCache.enablePullDownRefresh;
+    }
+
     recordExecute('getEnablePullDownRefresh');
 
     const ENV = getEnv();
@@ -1378,29 +1386,46 @@ export default class Infrastructure extends ComponentBase {
     const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so enablePullDownRefresh return false`;
 
     switch (ENV) {
-      case ENV_TYPE.WEAPP:
-        return this.enablePullDownRefresh;
+      case ENV_TYPE.WEAPP: {
+        this.privateCache.enablePullDownRefresh = this.enablePullDownRefresh;
 
-      case ENV_TYPE.ALIPAY:
+        break;
+      }
+
+      case ENV_TYPE.ALIPAY: {
         recordWarn(noAdaptationMessage);
 
-        return false;
+        this.privateCache.enablePullDownRefresh = false;
 
-      case ENV_TYPE.SWAN:
+        break;
+      }
+
+      case ENV_TYPE.SWAN: {
         recordWarn(noAdaptationMessage);
 
-        return false;
+        this.privateCache.enablePullDownRefresh = false;
 
-      case ENV_TYPE.WEB:
+        break;
+      }
+
+      case ENV_TYPE.WEB: {
         recordWarn(noAdaptationMessage);
 
-        return false;
+        this.privateCache.enablePullDownRefresh = false;
 
-      default:
+        break;
+      }
+
+      default: {
         recordWarn(noAdaptationMessage);
 
-        return false;
+        this.privateCache.enablePullDownRefresh = false;
+
+        break;
+      }
     }
+
+    return this.privateCache.enablePullDownRefresh;
   };
 
   getLocationResult() {

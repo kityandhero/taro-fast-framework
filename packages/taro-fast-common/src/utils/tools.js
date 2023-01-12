@@ -2603,10 +2603,10 @@ export function transformSize(si) {
       }
 
       if (s > 0) {
-        return `var(--tfc-${Math.ceil(s * fontSizeRatio)})`;
+        return `var(--tfc-${Math.floor(s * fontSizeRatio)})`;
       }
 
-      return `calc(var(--tfc-${Math.abs(Math.floor(s * fontSizeRatio))}) * -1)`;
+      return `calc(var(--tfc-${Math.floor(Math.abs(s * fontSizeRatio))}) * -1)`;
     }
 
     return `${s}px`;
