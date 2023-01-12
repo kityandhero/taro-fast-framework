@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.11.3...taro-fast-component@2.12.0) (2023-01-12)
+
+
+### Features
+
+* **simple-taro-fast-framework:** adjust style ([ba11939](https://github.com/kityandhero/taro-fast-framework/commit/ba1193981466d6e0b3b53e292f54dc201d56712f))
+* **simple-taro-fast-framework:** update ([46087c8](https://github.com/kityandhero/taro-fast-framework/commit/46087c8a92a3eb3fc09e574cb1d07924436c8183))
+
+
+### Bug Fixes
+
+* **simple-taro-fast-framework:** adjust dstyle ([2945c6a](https://github.com/kityandhero/taro-fast-framework/commit/2945c6a43d5e65cdc82b9e952824d228cb62da5f))
+* **simple-taro-fast-framework:** adjust style ([a338b19](https://github.com/kityandhero/taro-fast-framework/commit/a338b19f129f10977b6f546773501ea2067ac208))
+* **simple-taro-fast-framework:** adjust style ([3360304](https://github.com/kityandhero/taro-fast-framework/commit/3360304f0b5acc2cce76daf306c7fe4ca4a4a12a))
+* **simple-taro-fast-framework:** update ([83391bc](https://github.com/kityandhero/taro-fast-framework/commit/83391bcedb12abe02d7ff9ad892069b24c90dec5))
+* **simple-taro-fast-framework:** update ([479cac9](https://github.com/kityandhero/taro-fast-framework/commit/479cac9ceca738c40be530271fa568671d5953f2))
+* **simple-taro-fast-framework:** update ([625059e](https://github.com/kityandhero/taro-fast-framework/commit/625059ee66138d11ac1039c370b20eee998464f4))
+* **simple-taro-fast-framework:** update ([30ddf4f](https://github.com/kityandhero/taro-fast-framework/commit/30ddf4f20e60f69398abc09b6e47ee34350d2729))
+* **simple-taro-fast-framework:** update ([c4aca01](https://github.com/kityandhero/taro-fast-framework/commit/c4aca01ac89db199212aac3e970e6e53139321f9))
+
+
+
 ## [2.11.3](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.11.2...taro-fast-component@2.11.3) (2023-01-11)
 
 

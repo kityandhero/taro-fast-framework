@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-dva@2.10.1...taro-fast-dva@2.10.2) (2023-01-12)
+
+
+### Bug Fixes
+
+* **simple-taro-fast-framework:** update ([83391bc](https://github.com/kityandhero/taro-fast-framework/commit/83391bcedb12abe02d7ff9ad892069b24c90dec5))
+* **simple-taro-fast-framework:** update ([479cac9](https://github.com/kityandhero/taro-fast-framework/commit/479cac9ceca738c40be530271fa568671d5953f2))
+
+
+
 ## [2.10.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-dva@2.10.0...taro-fast-dva@2.10.1) (2023-01-11)
 
 **Note:** Version bump only for package taro-fast-dva
