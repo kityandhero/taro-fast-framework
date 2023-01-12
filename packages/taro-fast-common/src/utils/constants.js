@@ -2,7 +2,7 @@ import { emptyLogo as emptyLogoSource } from './mediaDefault';
 
 export const pxToRemRoot = {
   weapp: 32,
-  h5: 48,
+  h5: 24,
 };
 
 /**

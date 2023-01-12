@@ -1,3 +1,5 @@
+import { transformSize } from 'taro-fast-common/es/utils/tools';
+
 export const colStyle = {
   textAlign: 'center',
   backgroundColor: '#0092ffbf',
@@ -9,8 +11,8 @@ export const cardHeaderStyle = {
 };
 
 export const cardStyle = {
-  borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
-  borderRight: 'var(--tfc-1) solid var(--tfc-border-color)',
+  borderLeft: `${transformSize(1)} solid var(--tfc-border-color)`,
+  borderRight: `${transformSize(1)} solid var(--tfc-border-color)`,
 };
 
 export const shareTransfer = {

@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 import { ENV_TYPE, getEnv } from '@tarojs/taro';
 
 import {
+  getGuid,
   getMenuButtonBoundingClientRect,
   recordExecute,
   recordWarn,
@@ -24,18 +25,23 @@ const defaultProps = {
 };
 
 class HeadNavigation extends BaseComponent {
+  containerId = '';
+
   constructor(props) {
     super(props);
 
     this.state = {
       ...this.state,
       ...{
+        containerHeight: '',
         placeholderHeight: 0,
         boxHeight: 0,
         height: 0,
         rightWidth: 0,
       },
     };
+
+    this.containerId = getGuid();
   }
 
   doWorkAdjustDidMount = () => {
@@ -45,30 +51,32 @@ class HeadNavigation extends BaseComponent {
 
     const ENV = getEnv();
 
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`;
+
     switch (ENV) {
       case ENV_TYPE.WEAPP:
-        const rect = getMenuButtonBoundingClientRect();
+        {
+          const rect = getMenuButtonBoundingClientRect();
 
-        const { width, height, top } = rect;
+          const { width, height, top } = rect;
 
-        this.setState({
-          containerHeight: `${height + top + 8}px`,
-          placeholderHeight: `${top}px`,
-          height: `${height}px`,
-          boxHeight: `${height + top}px`,
-          rightWidth: `${width + 15}px`,
-        });
+          this.setState({
+            containerHeight: `${height + top + 8}px`,
+            placeholderHeight: `${top}px`,
+            height: `${height}px`,
+            boxHeight: `${height + top}px`,
+            rightWidth: `${width + 15}px`,
+          });
 
-        if (isFunction(onAdjustComplete)) {
-          onAdjustComplete({ containerHeight: height + top + 8 });
+          if (isFunction(onAdjustComplete)) {
+            onAdjustComplete({ containerHeight: height + top + 8 });
+          }
         }
 
         return;
 
       case ENV_TYPE.ALIPAY:
-        recordWarn(
-          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(onAdjustComplete)) {
           onAdjustComplete({});
@@ -77,9 +85,7 @@ class HeadNavigation extends BaseComponent {
         return;
 
       case ENV_TYPE.SWAN:
-        recordWarn(
-          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(onAdjustComplete)) {
           onAdjustComplete({});
@@ -88,20 +94,30 @@ class HeadNavigation extends BaseComponent {
         return;
 
       case ENV_TYPE.WEB:
-        recordWarn(
-          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
-        );
+        {
+          recordWarn(noAdaptationMessage);
 
-        if (isFunction(onAdjustComplete)) {
-          onAdjustComplete({});
+          const rect = document.getElementById(this.containerId);
+
+          const { width, height, top } = rect;
+
+          this.setState({
+            containerHeight: `${height + top + 8}px`,
+            placeholderHeight: `${top}px`,
+            height: `${height}px`,
+            boxHeight: `${height + top}px`,
+            rightWidth: `${width + 15}px`,
+          });
+
+          if (isFunction(onAdjustComplete)) {
+            onAdjustComplete({ containerHeight: height + top + 8 });
+          }
         }
 
         return;
 
       default:
-        recordWarn(
-          `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`,
-        );
+        recordWarn(noAdaptationMessage);
 
         if (isFunction(onAdjustComplete)) {
           onAdjustComplete({});
@@ -154,6 +170,7 @@ class HeadNavigation extends BaseComponent {
 
     const nav = (
       <View
+        id={this.containerId}
         style={{
           ...style,
           ...{
@@ -213,6 +230,9 @@ class HeadNavigation extends BaseComponent {
               />
             </BackboardBox>
           }
+          bottomStyle={{
+            position: 'relative',
+          }}
           bottom={bottom}
         />
       </View>

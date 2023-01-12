@@ -72,7 +72,7 @@ function buildHorizontalImageItem(o, i) {
       aspectRatio={0.371}
       padding={10}
       imageBoxStyle={{
-        margin: '0 var(--tfc-10)',
+        margin: `0 ${transformSize(10)}`,
         backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
       }}
     />

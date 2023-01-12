@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { getRect, recordError } from 'taro-fast-common/es/utils/tools';
+import {
+  getRect,
+  recordError,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import {
   isFunction,
   isImageBase4,
@@ -98,10 +102,10 @@ function buildClasses(
 }
 
 const defaultProps = {
-  left: 'var(--tfc-30)',
-  right: 'var(--tfc-30)',
-  top: 'var(--tfc-30)',
-  bottom: 'var(--tfc-30)',
+  left: transformSize(30),
+  right: transformSize(30),
+  top: transformSize(30),
+  bottom: transformSize(30),
   hoverClass: 'default',
   theme: 'balanced',
   position: 'bottomRight',

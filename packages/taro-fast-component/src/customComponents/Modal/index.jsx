@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -115,8 +116,9 @@ class Modal extends BaseComponent {
                     style={{
                       ...(!buttonFill
                         ? {
-                            border:
-                              'var(--tfc-2) solid var(--tfc-color-primary)',
+                            border: `${transformSize(
+                              2,
+                            )} solid var(--tfc-color-primary)`,
                             color: 'var(--tfc-color-primary)',
                           }
                         : {}),

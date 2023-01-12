@@ -1370,6 +1370,39 @@ export default class Infrastructure extends ComponentBase {
     }
   };
 
+  getEnablePullDownRefresh = () => {
+    recordExecute('getEnablePullDownRefresh');
+
+    const ENV = getEnv();
+
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so enablePullDownRefresh return false`;
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP:
+        return this.enablePullDownRefresh;
+
+      case ENV_TYPE.ALIPAY:
+        recordWarn(noAdaptationMessage);
+
+        return false;
+
+      case ENV_TYPE.SWAN:
+        recordWarn(noAdaptationMessage);
+
+        return false;
+
+      case ENV_TYPE.WEB:
+        recordWarn(noAdaptationMessage);
+
+        return false;
+
+      default:
+        recordWarn(noAdaptationMessage);
+
+        return false;
+    }
+  };
+
   getLocationResult() {
     const { locationResult } = this.getGlobalWrapper();
 
@@ -2058,7 +2091,7 @@ export default class Infrastructure extends ComponentBase {
         }}
         scroll={this.scrollViewMode}
         height="100vh"
-        enablePullDownRefresh={this.enablePullDownRefresh}
+        enablePullDownRefresh={this.getEnablePullDownRefresh()}
         enableLowerLoad={
           this.scrollViewMode ? this.enableLowerLoad : this.pagingLoadMode
         }

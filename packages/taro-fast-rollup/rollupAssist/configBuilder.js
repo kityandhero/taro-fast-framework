@@ -1,6 +1,6 @@
-// import pxtorem from 'postcss-pxtorem';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+// import pxtorem from 'postcss-pxtorem';
 // import livereload from 'rollup-plugin-livereload';
 import postcss from 'rollup-plugin-postcss';
 // import serve from 'rollup-plugin-serve';
@@ -13,6 +13,7 @@ import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import url from '@rollup/plugin-url';
 import svgr from '@svgr/rollup';
+
 // import { pxToRemRoot } from '../../taro-fast-common/src/utils/constants';
 
 const externalCollection = [
@@ -150,7 +151,7 @@ export function buildConfig({
       postcss({
         plugins: [
           autoprefixer(),
-          // pxtorem(pxtoremConfig),
+          //  pxtorem(pxtoremConfig),
           cssnano(),
         ],
         inject: { insertAt: 'top' },

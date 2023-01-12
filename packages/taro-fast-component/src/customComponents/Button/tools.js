@@ -46,7 +46,9 @@ export function getStyle({
     color = handleInlayColor(color);
 
     if (color !== backgroundColor) {
-      shadowColorAdjust = `var(--tfc-color-shadow-size) var(--tfc-color-${backgroundColor}-shadow)`;
+      shadowColorAdjust = `${transformSize(12)} ${transformSize(
+        12,
+      )} ${transformSize(16)} var(--tfc-color-${backgroundColor}-shadow)`;
     }
 
     if (fill === 'solid') {

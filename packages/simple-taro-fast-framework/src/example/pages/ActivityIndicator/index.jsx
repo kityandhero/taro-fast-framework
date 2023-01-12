@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   ActivityIndicator,
   Space,
@@ -71,8 +72,8 @@ export default class Index extends ContentPageBase {
           return (
             <View
               style={{
-                border: 'var(--tfc-1) solid #ccc',
-                height: 'var(--tfc-200)',
+                border: `${transformSize(1)} solid #ccc`,
+                height: transformSize(200),
                 position: 'relative',
                 width: '100%',
               }}

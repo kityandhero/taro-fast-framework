@@ -2575,6 +2575,26 @@ function toFixed(number, precision) {
  */
 export function transformSize(si) {
   if (isNumber(si)) {
+    let fontSizeRatio = 1;
+
+    const ENV = getEnv();
+
+    switch (ENV) {
+      case ENV_TYPE.WEB:
+        if (window.fontSizeRatio) {
+          fontSizeRatio = window.fontSizeRatio;
+        } else {
+          fontSizeRatio = 1;
+        }
+
+        break;
+
+      default:
+        fontSizeRatio = 1;
+
+        break;
+    }
+
     const s = toNumber(si);
 
     if (s >= -2000 && s <= 2000) {
@@ -2583,10 +2603,10 @@ export function transformSize(si) {
       }
 
       if (s > 0) {
-        return `var(--tfc-${s})`;
+        return `var(--tfc-${Math.ceil(s * fontSizeRatio)})`;
       }
 
-      return `calc(var(--tfc-${Math.abs(s)}) * -1)`;
+      return `calc(var(--tfc-${Math.abs(Math.floor(s * fontSizeRatio))}) * -1)`;
     }
 
     return `${s}px`;

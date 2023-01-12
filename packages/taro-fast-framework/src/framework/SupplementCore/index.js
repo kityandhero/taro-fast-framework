@@ -564,7 +564,7 @@ class SupplementCore extends Common {
 
     const ENV = getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore checkTicketValidity, only execute signInSilentFailCallback`;
+    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore checkTicketValidity, only execute callback and signInSilentFailCallback`;
 
     switch (ENV) {
       case ENV_TYPE.WEAPP:
@@ -572,6 +572,10 @@ class SupplementCore extends Common {
 
       case ENV_TYPE.ALIPAY:
         recordWarn(noAdaptationMessage);
+
+        if (isFunction(callback)) {
+          callback();
+        }
 
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
@@ -582,6 +586,10 @@ class SupplementCore extends Common {
       case ENV_TYPE.SWAN:
         recordWarn(noAdaptationMessage);
 
+        if (isFunction(callback)) {
+          callback();
+        }
+
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
         }
@@ -591,6 +599,10 @@ class SupplementCore extends Common {
       case ENV_TYPE.WEB:
         recordWarn(noAdaptationMessage);
 
+        if (isFunction(callback)) {
+          callback();
+        }
+
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();
         }
@@ -599,6 +611,10 @@ class SupplementCore extends Common {
 
       default:
         recordWarn(noAdaptationMessage);
+
+        if (isFunction(callback)) {
+          callback();
+        }
 
         if (isFunction(signInSilentFailCallback)) {
           signInSilentFailCallback();

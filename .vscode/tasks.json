@@ -49,6 +49,14 @@
       "problemMatcher": [],
       "label": "start:h5:simple",
       "detail": "cd packages/simple-taro-fast-framework && npm run start:h5"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/taro-fast-component-prism",
+      "problemMatcher": [],
+      "label": "dev:component-prism",
+      "detail": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch"
     }
   ]
 }

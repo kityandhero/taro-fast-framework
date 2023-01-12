@@ -28,36 +28,36 @@ const itemStyle2 = {
 };
 
 const boxStyle = {
-  padding: 'var(--tfc-20) 0',
-  height: 'var(--tfc-120)',
+  padding: `${transformSize(20)} 0`,
+  height: transformSize(120),
   color: 'var(--tfc-color-grey)',
 };
 
 const boxExtensionStyle = {
-  height: 'var(--tfc-200)',
+  height: transformSize(200),
 };
 
 const nameStyle = {
   width: '100%',
-  fontSize: 'var(--tfc-28)',
-  height: 'var(--tfc-36)',
-  lineHeight: 'var(--tfc-36)',
+  fontSize: transformSize(28),
+  height: transformSize(36),
+  lineHeight: transformSize(36),
   textAlign: 'center',
-  margin: 'var(--tfc-20) 0',
+  margin: `${transformSize(20)} 0`,
   overflow: 'hidden',
 };
 
 const nameExtensionStyle = {
-  margin: 'var(--tfc-0) 0',
+  margin: `${transformSize(0)} 0`,
 };
 
 const descriptionStyle = {
   width: '100%',
-  fontSize: 'var(--tfc-24)',
-  height: 'var(--tfc-36)',
-  lineHeight: 'var(--tfc-36)',
+  fontSize: transformSize(24),
+  height: transformSize(36),
+  lineHeight: transformSize(36),
   textAlign: 'center',
-  margin: 'var(--tfc-0) 0',
+  margin: `${transformSize(0)} 0`,
   overflow: 'hidden',
 };
 
@@ -328,7 +328,9 @@ export default class Index extends ContentPageBase {
                         : {}),
                       ...(shadow
                         ? {
-                            boxShadow: `0 var(--tfc-7) var(--tfc-12) 0 ${shadowColor}`,
+                            boxShadow: `0 ${transformSize(7)} ${transformSize(
+                              12,
+                            )} 0 ${shadowColor}`,
                           }
                         : {}),
                       ...itemStyle,

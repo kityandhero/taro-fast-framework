@@ -245,7 +245,7 @@ const config11 = {
   verticalScrollHeight: transformSize(500),
   verticalTabWidth: transformSize(220),
   bodyStyle: {
-    borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+    borderLeft: `${transformSize(1)} solid var(--tfc-border-color)`,
   },
   direction: 'vertical',
   tabList: tabVerticalDecorationList,
@@ -257,7 +257,7 @@ const config111 = {
   singlePanel: true,
   verticalTabWidth: transformSize(220),
   bodyStyle: {
-    borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+    borderLeft: `${transformSize(1)} solid var(--tfc-border-color)`,
   },
   direction: 'vertical',
   tabList: tabVerticalDecorationList,
@@ -290,7 +290,7 @@ const config14 = {
   singlePanel: false,
   verticalScrollHeight: transformSize(400),
   bodyStyle: {
-    borderLeft: 'var(--tfc-1) solid var(--tfc-border-color)',
+    borderLeft: `${transformSize(1)} solid var(--tfc-border-color)`,
   },
   direction: 'vertical',
   tabList: tabVerticalList,

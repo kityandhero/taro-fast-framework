@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   FlexBox,
@@ -17,18 +18,18 @@ import './index.less';
 export const classPrefix = `template-grid-banner`;
 
 const boxStyle = {
-  padding: 'var(--tfc-20) 0',
-  height: 'var(--tfc-120)',
+  padding: `${transformSize(20)} 0`,
+  height: transformSize(120),
   color: 'var(--tfc-color-grey)',
 };
 
 const nameStyle = {
   width: '100%',
-  fontSize: 'var(--tfc-28)',
-  height: 'var(--tfc-36)',
-  lineHeight: 'var(--tfc-36)',
+  fontSize: transformSize(28),
+  height: transformSize(36),
+  lineHeight: transformSize(36),
   textAlign: 'center',
-  margin: 'var(--tfc-20) 0',
+  margin: `${transformSize(20)} 0`,
 };
 
 const navList = [

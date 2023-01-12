@@ -53,7 +53,7 @@
     "lerna:build": "lerna run --stream --sort build",
     "lerna:create": "lerna create",
     "lerna:publish": "lerna publish --yes",
-    "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:all:fix": "npm run lint:common:fix && npm run lint:component:fix && npm run lint:component-extra:fix && npm run lint:component-prism:fix && npm run lint:framework:fix && npm run lint:simple:fix",

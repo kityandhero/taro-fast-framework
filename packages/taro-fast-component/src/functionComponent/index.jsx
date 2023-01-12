@@ -249,7 +249,7 @@ export function buildEmptyPlaceholder({
   onDescriptionClick = null,
 }) {
   return (
-    <FadeInBox style={{ margin: 'var(--tfc-20) 0' }}>
+    <FadeInBox style={{ margin: `${transformSize(20)} 0` }}>
       <CenterBox>
         <Empty
           icon={

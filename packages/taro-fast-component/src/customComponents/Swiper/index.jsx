@@ -670,7 +670,7 @@ class Swiper extends BaseComponent {
               opacity: '0.6',
               backgroundColor: '#ccc',
               borderRadius: '50%',
-              padding: 'var(--tfc-6)',
+              padding: transformSize(6),
             }}
           />
         </CenterBox>
@@ -710,7 +710,7 @@ class Swiper extends BaseComponent {
               opacity: '0.6',
               backgroundColor: '#ccc',
               borderRadius: '50%',
-              padding: 'var(--tfc-6)',
+              padding: transformSize(6),
             }}
           />
         </CenterBox>

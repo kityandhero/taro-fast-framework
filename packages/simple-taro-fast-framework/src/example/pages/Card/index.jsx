@@ -1,3 +1,4 @@
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   Card,
@@ -58,7 +59,7 @@ const config5 = {
   style: {
     ...style,
     ...{
-      borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
+      borderBottom: `${transformSize(1)} solid var(--tfc-border-color)`,
     },
   },
   headerStyle: cardHeaderStyle,

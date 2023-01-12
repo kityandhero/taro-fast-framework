@@ -1,7 +1,10 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import {
+  stringIsNullOrWhiteSpace,
+  transformSize,
+} from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import Badge from '../Badge';
@@ -74,7 +77,7 @@ class TabbarItem extends BaseComponent {
 
     const iconSize = 44;
 
-    const imageBoxStyle = { width: 'var(--tfc-44)' };
+    const imageBoxStyle = { width: transformSize(44) };
 
     const iconInactive = stringIsNullOrWhiteSpace(icon) ? (
       stringIsNullOrWhiteSpace(image) ? null : (

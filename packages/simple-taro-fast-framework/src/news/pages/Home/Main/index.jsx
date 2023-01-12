@@ -29,18 +29,18 @@ import { buildItem, classPrefix } from '../Assist/tools';
 import './index.less';
 
 const boxStyle = {
-  padding: 'var(--tfc-20) 0',
-  height: 'var(--tfc-120)',
+  padding: `${transformSize(20)} 0`,
+  height: transformSize(120),
   color: 'var(--tfc-color-grey)',
 };
 
 const nameStyle = {
   width: '100%',
-  fontSize: 'var(--tfc-28)',
-  height: 'var(--tfc-36)',
-  lineHeight: 'var(--tfc-36)',
+  fontSize: transformSize(28),
+  height: transformSize(36),
+  lineHeight: transformSize(36),
   textAlign: 'center',
-  margin: 'var(--tfc-20) 0',
+  margin: `${transformSize(20)} 0`,
 };
 
 // eslint-disable-next-line no-undef

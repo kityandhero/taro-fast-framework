@@ -19,6 +19,9 @@
             t = e.getBoundingClientRect().width;
           e.style.fontSize =
             t >= 640 ? '40px' : t <= 320 ? '20px' : (t / 320) * 20 + 'px';
+
+          window.fontSizeRatio =
+            16 / (t >= 640 ? 40 : t <= 320 ? 20 : (t / 320) * 20);
         }
         n.addEventListener('resize', function () {
           e();

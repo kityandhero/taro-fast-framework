@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components';
 
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Space } from 'taro-fast-component/es/customComponents';
 import { connect } from 'taro-fast-framework/es/utils/dva';
 
@@ -8,7 +9,7 @@ import SimpleBox from '../../../customComponents/SimpleBox';
 
 const config1 = {
   style: {
-    width: 'var(--tfc-120)',
+    width: transformSize(120),
   },
 };
 

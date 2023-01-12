@@ -176,7 +176,7 @@ class SimpleBox extends Component {
         style={{
           ...{
             minHeight: transformSize(innerBoxMinHeight || 120),
-            border: 'var(--tfc-1) solid #f2e5c0',
+            border: `${transformSize(1)} solid #f2e5c0`,
             borderRadius: transformSize(6),
           },
           ...(innerBoxBackgroundColor
@@ -186,10 +186,10 @@ class SimpleBox extends Component {
             : {}),
           ...(innerBoxPadding
             ? {
-                padding: 'var(--tfc-10) var(--tfc-10)',
+                padding: `${transformSize(10)} ${transformSize(10)}`,
               }
             : {
-                width: 'calc(100% - var(--tfc-1) * 2)',
+                width: `calc(100% - ${transformSize(1)} * 2)`,
               }),
           ...(innerBoxCenterMode
             ? {
