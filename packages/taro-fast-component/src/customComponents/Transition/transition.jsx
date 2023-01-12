@@ -55,14 +55,6 @@ export function Transition(props) {
     onLeave,
   });
 
-  console.log({
-    ...buildRootStyle({
-      currentDuration,
-      display,
-      style,
-    }),
-  });
-
   return (
     <>
       <View

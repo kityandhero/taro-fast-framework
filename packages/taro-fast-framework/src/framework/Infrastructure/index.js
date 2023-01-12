@@ -363,6 +363,9 @@ export default class Infrastructure extends ComponentBase {
 
   privateCache = {
     enablePullDownRefresh: null,
+    verifySession: null,
+    verifyTicket: null,
+    verifyTicketValidity: null,
   };
 
   constructor(props) {
@@ -1228,6 +1231,10 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getVerifySession = () => {
+    if (this.privateCache.verifySession != null) {
+      return this.privateCache.verifySession;
+    }
+
     recordExecute('getVerifySession');
 
     if (this.ignoreSessionRelatedLogic) {
@@ -1235,48 +1242,71 @@ export default class Infrastructure extends ComponentBase {
         'because ignoreSessionRelatedLogic is true, so verifySession return false',
       );
 
-      return false;
-    }
+      this.privateCache.verifySession = false;
+    } else {
+      const ENV = getEnv();
 
-    const ENV = getEnv();
+      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifySession return false`;
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifySession return false`;
+      switch (ENV) {
+        case ENV_TYPE.WEAPP: {
+          if (this.needSignIn) {
+            recordDebug(
+              `because needSignIn is true, so verifySession return true`,
+            );
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
-        if (this.needSignIn) {
-          recordDebug(
-            `because needSignIn is true, so verifySession return true`,
-          );
+            this.privateCache.verifySession = true;
+          } else {
+            this.privateCache.verifySession = this.verifySession;
+          }
 
-          return true;
+          break;
         }
 
-        return this.verifySession;
+        case ENV_TYPE.ALIPAY: {
+          recordWarn(noAdaptationMessage);
 
-      case ENV_TYPE.ALIPAY:
-        recordWarn(noAdaptationMessage);
+          this.privateCache.verifySession = false;
 
-        return false;
+          break;
+        }
 
-      case ENV_TYPE.SWAN:
-        recordWarn(noAdaptationMessage);
+        case ENV_TYPE.SWAN: {
+          recordWarn(noAdaptationMessage);
 
-        return false;
+          this.privateCache.verifySession = false;
 
-      case ENV_TYPE.WEB:
-        recordWarn(noAdaptationMessage);
+          break;
+        }
 
-        return false;
+        case ENV_TYPE.WEB: {
+          recordWarn(noAdaptationMessage);
 
-      default:
-        recordWarn(noAdaptationMessage);
+          this.privateCache.verifySession = false;
 
-        return false;
+          break;
+        }
+
+        default: {
+          recordWarn(noAdaptationMessage);
+
+          this.privateCache.verifySession = false;
+
+          break;
+        }
+      }
     }
+
+    recordInfo(`cache the verifySession -> ${this.privateCache.verifySession}`);
+
+    return this.privateCache.verifySession;
   };
 
   getVerifyTicket = () => {
+    if (this.privateCache.verifyTicket != null) {
+      return this.privateCache.verifyTicket;
+    }
+
     recordExecute('getVerifyTicket');
 
     if (this.ignoreSessionRelatedLogic) {
@@ -1284,48 +1314,71 @@ export default class Infrastructure extends ComponentBase {
         'because ignoreSessionRelatedLogic is true, so verifyTicket return false',
       );
 
-      return false;
-    }
+      this.privateCache.verifyTicket = false;
+    } else {
+      const ENV = getEnv();
 
-    const ENV = getEnv();
+      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicket return false`;
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicket return false`;
+      switch (ENV) {
+        case ENV_TYPE.WEAPP: {
+          if (this.needSignIn) {
+            recordDebug(
+              `because needSignIn is true, so verifyTicket return true`,
+            );
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
-        if (this.needSignIn) {
-          recordDebug(
-            `because needSignIn is true, so verifyTicket return true`,
-          );
+            this.privateCache.verifyTicket = true;
+          } else {
+            this.privateCache.verifyTicket = this.verifyTicket;
+          }
 
-          return true;
+          break;
         }
 
-        return this.verifyTicket;
+        case ENV_TYPE.ALIPAY: {
+          recordWarn(noAdaptationMessage);
 
-      case ENV_TYPE.ALIPAY:
-        recordWarn(noAdaptationMessage);
+          this.privateCache.verifyTicket = false;
 
-        return false;
+          break;
+        }
 
-      case ENV_TYPE.SWAN:
-        recordWarn(noAdaptationMessage);
+        case ENV_TYPE.SWAN: {
+          recordWarn(noAdaptationMessage);
 
-        return false;
+          this.privateCache.verifyTicket = false;
 
-      case ENV_TYPE.WEB:
-        recordWarn(noAdaptationMessage);
+          break;
+        }
 
-        return false;
+        case ENV_TYPE.WEB: {
+          recordWarn(noAdaptationMessage);
 
-      default:
-        recordWarn(noAdaptationMessage);
+          this.privateCache.verifyTicket = false;
 
-        return false;
+          break;
+        }
+
+        default: {
+          recordWarn(noAdaptationMessage);
+
+          this.privateCache.verifyTicket = false;
+
+          break;
+        }
+      }
     }
+
+    recordInfo(`cache the verifyTicket -> ${this.privateCache.verifyTicket}`);
+
+    return this.privateCache.verifyTicket;
   };
 
   getVerifyTicketValidity = () => {
+    if (this.privateCache.verifyTicketValidity != null) {
+      return this.privateCache.verifyTicketValidity;
+    }
+
     recordExecute('getVerifyTicketValidity');
 
     if (this.ignoreSessionRelatedLogic) {
@@ -1333,45 +1386,66 @@ export default class Infrastructure extends ComponentBase {
         'because ignoreSessionRelatedLogic is true, so verifyTicketValidity return false',
       );
 
-      return false;
-    }
+      this.privateCache.verifyTicketValidity = false;
+    } else {
+      const ENV = getEnv();
 
-    const ENV = getEnv();
+      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`;
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`;
+      switch (ENV) {
+        case ENV_TYPE.WEAPP: {
+          if (this.needSignIn) {
+            recordDebug(
+              `because needSignIn is true, so verifyTicketValidity return true`,
+            );
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
-        if (this.needSignIn) {
-          recordDebug(
-            `because needSignIn is true, so verifyTicketValidity return true`,
-          );
+            this.privateCache.verifyTicketValidity = true;
+          } else {
+            this.privateCache.verifyTicketValidity = this.verifyTicketValidity;
+          }
 
-          return true;
+          break;
         }
 
-        return this.verifyTicketValidity;
+        case ENV_TYPE.ALIPAY: {
+          recordWarn(noAdaptationMessage);
 
-      case ENV_TYPE.ALIPAY:
-        recordWarn(noAdaptationMessage);
+          this.privateCache.verifyTicketValidity = false;
 
-        return false;
+          break;
+        }
 
-      case ENV_TYPE.SWAN:
-        recordWarn(noAdaptationMessage);
+        case ENV_TYPE.SWAN: {
+          recordWarn(noAdaptationMessage);
 
-        return false;
+          this.privateCache.verifyTicketValidity = false;
 
-      case ENV_TYPE.WEB:
-        recordWarn(noAdaptationMessage);
+          break;
+        }
 
-        return false;
+        case ENV_TYPE.WEB: {
+          recordWarn(noAdaptationMessage);
 
-      default:
-        recordWarn(noAdaptationMessage);
+          this.privateCache.verifyTicketValidity = false;
 
-        return false;
+          break;
+        }
+
+        default: {
+          recordWarn(noAdaptationMessage);
+
+          this.privateCache.verifyTicketValidity = false;
+
+          break;
+        }
+      }
     }
+
+    recordInfo(
+      `cache the verifyTicketValidity -> ${this.privateCache.verifyTicketValidity}`,
+    );
+
+    return this.privateCache.verifyTicketValidity;
   };
 
   getEnablePullDownRefresh = () => {
@@ -1424,6 +1498,10 @@ export default class Infrastructure extends ComponentBase {
         break;
       }
     }
+
+    recordInfo(
+      `cache the enablePullDownRefresh -> ${this.privateCache.enablePullDownRefresh}`,
+    );
 
     return this.privateCache.enablePullDownRefresh;
   };
