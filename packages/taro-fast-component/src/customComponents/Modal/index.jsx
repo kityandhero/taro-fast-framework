@@ -44,6 +44,26 @@ const defaultProps = {
   onClose: null,
 };
 
+const actionStyle = {
+  height: transformSize(44),
+  fontSize: transformSize(30),
+  lineHeight: transformSize(44),
+};
+
+const buttonNoFillStyle = {
+  borderRadius: transformSize(14),
+  height: transformSize(60),
+  lineHeight: transformSize(60),
+  fontSize: transformSize(28),
+  margin: `${transformSize(28)} ${transformSize(48)}`,
+};
+
+const buttonFillStyle = {
+  padding: `${transformSize(16)} ${transformSize(14)}`,
+  borderRightWidth: transformSize(1),
+  borderLeftWidth: transformSize(1),
+};
+
 class Modal extends BaseComponent {
   triggerCancel = () => {
     const { onCancel } = this.props;
@@ -114,14 +134,22 @@ class Modal extends BaseComponent {
                         : 'none'
                     }
                     style={{
+                      ...{
+                        ...actionStyle,
+                      },
                       ...(!buttonFill
                         ? {
-                            border: `${transformSize(
-                              2,
-                            )} solid var(--tfc-color-primary)`,
-                            color: 'var(--tfc-color-primary)',
+                            ...buttonNoFillStyle,
+                            ...{
+                              border: `${transformSize(
+                                2,
+                              )} solid var(--tfc-color-primary)`,
+                              color: 'var(--tfc-color-primary)',
+                            },
                           }
-                        : {}),
+                        : {
+                            ...buttonFillStyle,
+                          }),
                       ...cancelStyle,
                     }}
                     onClick={this.triggerCancel}
@@ -146,12 +174,20 @@ class Modal extends BaseComponent {
                         : 'none'
                     }
                     style={{
+                      ...{
+                        ...actionStyle,
+                      },
                       ...(!buttonFill
                         ? {
-                            backgroundColor: 'var(--tfc-color-primary)',
-                            color: '#fff',
+                            ...buttonNoFillStyle,
+                            ...{
+                              backgroundColor: 'var(--tfc-color-primary)',
+                              color: '#fff',
+                            },
                           }
-                        : {}),
+                        : {
+                            ...buttonFillStyle,
+                          }),
                       ...confirmStyle,
                     }}
                     onClick={this.triggerConfirm}
@@ -202,6 +238,9 @@ class Modal extends BaseComponent {
               className={classNames({
                 [`${classPrefix}__container__content`]: true,
               })}
+              style={{
+                fontSize: transformSize(30),
+              }}
             >
               {children}
             </View>
