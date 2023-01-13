@@ -65,6 +65,12 @@ class Badge extends BaseComponent {
     const position = this.getPosition();
 
     return {
+      ...{
+        '--dot-size': transformSize(20),
+        '--font-size': transformSize(22),
+        minWidth: transformSize(16),
+        borderRadius: transformSize(100),
+      },
       ...style,
       ...(fontSize > 0
         ? {
@@ -119,6 +125,13 @@ class Badge extends BaseComponent {
             ...{
               backgroundColor: color || defaultProps.color,
             },
+            ...(!isDot
+              ? {
+                  padding: `0 ${transformSize(8)}`,
+                  height: transformSize(24),
+                  lineHeight: transformSize(24),
+                }
+              : {}),
           }}
         >
           {isDot ? Badge.dot : content}
@@ -128,6 +141,7 @@ class Badge extends BaseComponent {
     return children ? (
       <View className={`${classPrefix}-wrap`} style={wrapStyle}>
         {children}
+
         {element}
       </View>
     ) : (

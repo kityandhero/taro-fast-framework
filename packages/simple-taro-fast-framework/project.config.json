@@ -51,6 +51,12 @@
     "miniprogram": {
       "list": [
         {
+          "name": "badge",
+          "pathName": "example/pages/badge/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "backTop",
           "pathName": "example/pages/backTop/index",
           "query": "",
