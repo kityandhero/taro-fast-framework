@@ -6,6 +6,7 @@ import {
   getMenuButtonBoundingClientRect,
   recordExecute,
   recordWarn,
+  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
@@ -24,11 +25,15 @@ const defaultProps = {
   onAdjustComplete: null,
 };
 
+const ENV = null;
+
 class HeadNavigation extends BaseComponent {
   containerId = '';
 
   constructor(props) {
     super(props);
+
+    ENV = getEnv();
 
     this.state = {
       ...this.state,
@@ -49,7 +54,7 @@ class HeadNavigation extends BaseComponent {
 
     const { onAdjustComplete } = this.props;
 
-    const ENV = getEnv();
+    ENV = getEnv();
 
     const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`;
 
@@ -189,8 +194,15 @@ class HeadNavigation extends BaseComponent {
           top={
             <BackboardBox
               style={{
-                width: '100%',
-                paddingBottom: '8px',
+                ...{
+                  width: '100%',
+                  paddingBottom: transformSize(8),
+                },
+                ...(ENV == ENV_TYPE.WEB
+                  ? {
+                      paddingTop: transformSize(8),
+                    }
+                  : {}),
               }}
               height={boxHeight}
               backboardStyle={backboardStyle}
