@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-rollup@1.11.0...taro-fast-rollup@1.12.0) (2023-01-13)
+
+
+### Features
+
+* **taro-fast-common:** adjust style ([4214154](https://github.com/kityandhero/taro-fast-framework/commit/4214154e0e3c9edb1518da7a262e32f676313824))
+
+
+
+
 ## [1.11.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-rollup@1.10.0...taro-fast-rollup@1.11.0) (2023-01-12)
 
 
