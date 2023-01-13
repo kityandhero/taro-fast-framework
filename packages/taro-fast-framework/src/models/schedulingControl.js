@@ -6,7 +6,11 @@ import {
 } from 'src/utils/globalStorageAssist';
 
 import { locateResult } from 'taro-fast-common/es/utils/constants';
-import { recordConfig, recordLog } from 'taro-fast-common/es/utils/tools';
+import {
+  getAppInitConfigData,
+  recordConfig,
+  recordLog,
+} from 'taro-fast-common/es/utils/tools';
 
 import {
   checkTicketValidityData,
@@ -288,6 +292,10 @@ export default {
         const { config } = payload;
 
         recordConfig(config, 'appConfig');
+
+        const configMerge = getAppInitConfigData();
+
+        recordConfig(configMerge, 'appConfigMerge');
       }
 
       return {
