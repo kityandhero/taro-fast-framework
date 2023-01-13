@@ -51,6 +51,12 @@
     "miniprogram": {
       "list": [
         {
+          "name": "backTop",
+          "pathName": "example/pages/backTop/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "imageBox",
           "pathName": "example/pages/imageBox/index",
           "query": "",

@@ -21,6 +21,7 @@ const { IconChevronUp } = Icon;
 const defaultProps = {
   visible: false,
   bodyStyle: {},
+  borderRadius: 16,
   opacity: 0.8,
   icon: '',
   iconSize: 40,
@@ -47,34 +48,36 @@ class BackTop extends BaseComponent {
       backgroundColor,
       circle,
       opacity,
+      borderRadius,
     } = this.props;
 
     return {
-      ...(circle ? { '--border-radius': '50%' } : {}),
+      ...(circle
+        ? { '--border-radius': '50%' }
+        : {
+            '--border-radius':
+              borderRadius > 0
+                ? transformSize(borderRadius)
+                : transformSize(16),
+          }),
       ...(transparent
         ? { '--background-color': 'transparent' }
         : { '--background-color': backgroundColor }),
-      ...(size > 0
-        ? {
-            width: transformSize(size),
-            height: transformSize(size),
-          }
-        : {}),
+      ...{
+        width: size > 0 ? transformSize(size) : transformSize(80),
+        height: size > 0 ? transformSize(size) : transformSize(80),
+      },
       ...(zIndex > 0
         ? {
             '--z-index': `${zIndex}`,
           }
         : {}),
-      ...(bottom > 0
-        ? {
-            '--bottom': transformSize(bottom),
-          }
-        : {}),
-      ...(right > 0
-        ? {
-            '--right': transformSize(right),
-          }
-        : {}),
+      ...{
+        '--bottom': bottom > 0 ? transformSize(bottom) : transformSize(160),
+      },
+      ...{
+        '--right': right > 0 ? transformSize(right) : transformSize(28),
+      },
       ...(opacity >= 0 && opacity <= 1
         ? {
             '--opacity': `${opacity}`,
