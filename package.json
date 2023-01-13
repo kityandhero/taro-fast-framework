@@ -92,6 +92,7 @@
     "prettier": "npx prettier -c --write \"**/*\"",
     "publish:c": "npm run czs && lerna updated && lerna publish --yes",
     "publish:f": "npm run czs && npm run build:all && lerna updated && lerna publish --yes",
+    "publish:l": "lerna updated && lerna publish --yes",
     "publish:npm": "nrm use npm && npx sleepms 2000 && nrm ls && npm run publish:npm-common-only && npm run publish:npm-component-only && npm run publish:npm-component-extra-only && npm run publish:npm-component-prism-only && npm run publish:npm-framework-only && npm run publish:npm-cli-only && nrm use local && echo sleep 2000ms && npx sleepms 2000 && nrm ls",
     "publish:npm-cli": "nrm use npm && nrm ls && npm run publish:npm-cli-only && nrm use local && nrm ls",
     "publish:npm-cli-only": "cd packages/taro-fast-cli && npm publish",
