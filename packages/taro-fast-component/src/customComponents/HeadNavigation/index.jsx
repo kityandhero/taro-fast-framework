@@ -1,7 +1,6 @@
 import { View } from '@tarojs/components';
 
 import {
-  getGuid,
   getMenuButtonBoundingClientRect,
   recordExecute,
   recordWarn,
@@ -24,8 +23,6 @@ const defaultProps = {
 };
 
 class HeadNavigation extends BaseComponent {
-  containerId = '';
-
   constructor(props) {
     super(props);
 
@@ -40,8 +37,6 @@ class HeadNavigation extends BaseComponent {
         backboardBoxPaddingTop: 0,
       },
     };
-
-    this.containerId = getGuid();
   }
 
   doWorkAdjustDidMount = () => {
@@ -78,24 +73,16 @@ class HeadNavigation extends BaseComponent {
         return {};
       },
       handleWEB: () => {
-        const rect = document.getElementById(this.containerId);
+        this.setState({
+          containerHeight: `auto`,
+          placeholderHeight: 0,
+          height: `auto`,
+          boxHeight: `auto`,
+          rightWidth: transformSize(15),
+          backboardBoxPaddingTop: 8,
+        });
 
-        if (rect != null) {
-          const { height } = rect.getBoundingClientRect();
-
-          this.setState({
-            containerHeight: `${height + 8}px`,
-            placeholderHeight: 0,
-            height: `${height}px`,
-            boxHeight: `${height}px`,
-            rightWidth: transformSize(15),
-            backboardBoxPaddingTop: 8,
-          });
-
-          return { containerHeight: height + 8 };
-        }
-
-        return {};
+        return { containerHeight: 'auto' };
       },
       handleOther: () => {
         recordWarn(noAdaptationMessage);
@@ -150,7 +137,6 @@ class HeadNavigation extends BaseComponent {
 
     const nav = (
       <View
-        id={this.containerId}
         style={{
           ...style,
           ...{
