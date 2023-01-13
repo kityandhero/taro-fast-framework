@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.4...simple-taro-fast-framework@1.14.0) (2023-01-13)
+
+
+### Features
+
+* **taro-fast-common:** adjust log tools ([9943174](https://github.com/kityandhero/taro-fast-framework/commit/99431749e0b8dd75d06ef7e1c6fbaf5439d8948c))
+
+
+
 ## [1.13.4](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.3...simple-taro-fast-framework@1.13.4) (2023-01-13)
 
 **Note:** Version bump only for package simple-taro-fast-framework
