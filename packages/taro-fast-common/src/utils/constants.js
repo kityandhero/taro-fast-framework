@@ -112,6 +112,7 @@ export const defaultEmptyImage = '/noImageSmall.png';
 export const emptyLogo = emptyLogoSource;
 
 export const appInitDefault = {
+  webRootFontSize: '142%',
   appId: '',
   platformName: '平台名称',
   appName: '应用名称',

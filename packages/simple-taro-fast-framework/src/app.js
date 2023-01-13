@@ -8,6 +8,7 @@ import models from './models';
 import './app.less';
 
 const config = {
+  webRootFontSize: '152%',
   appId: 'pdbwl0roqjy03k',
   showLogInConsole: checkEnvIsDevelopment(),
   // showRequestInfo: checkEnvIsDevelopment(),

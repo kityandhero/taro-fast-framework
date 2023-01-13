@@ -10,7 +10,12 @@ import { isString } from './typeCheck';
  * @param {*} str
  * @returns
  */
-export function recordLog(record, showMode, level = logLevel.debug) {
+export function recordLog(
+  record,
+  showMode,
+  level = logLevel.debug,
+  objectModeDescription = '',
+) {
   let showModeModified =
     (showMode || null) == null || stringIsNullOrWhiteSpace(showMode)
       ? logShowMode.unknown
@@ -45,7 +50,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
         '%c%s',
         'color:#596032;',
         JSON.stringify({
-          debug: 'check the following trace data',
+          debug: `check the following trace data${
+            stringIsNullOrWhiteSpace(objectModeDescription)
+              ? ''
+              : ` -> ${objectModeDescription}`
+          }.`,
         }),
       );
 
@@ -65,7 +74,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
         '%c%s',
         'color:#00768f;',
         JSON.stringify({
-          debug: 'check the following debug data',
+          debug: `check the following debug data${
+            stringIsNullOrWhiteSpace(objectModeDescription)
+              ? ''
+              : ` -> ${objectModeDescription}`
+          }.`,
         }),
       );
 
@@ -85,7 +98,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
         '%c%s',
         'color:#ff4f49;',
         JSON.stringify({
-          debug: 'check the following warn data',
+          debug: `check the following warn data${
+            stringIsNullOrWhiteSpace(objectModeDescription)
+              ? ''
+              : ` -> ${objectModeDescription}`
+          }.`,
         }),
       );
 
@@ -105,7 +122,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
         '%c%s',
         'color:#89ca78;',
         JSON.stringify({
-          debug: 'check the following info data',
+          debug: `check the following info data${
+            stringIsNullOrWhiteSpace(objectModeDescription)
+              ? ''
+              : ` -> ${objectModeDescription}`
+          }.`,
         }),
       );
 
@@ -125,7 +146,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
         '%c%s',
         'color:#C39BD3;',
         JSON.stringify({
-          debug: 'check the following execute data',
+          debug: `check the following execute data${
+            stringIsNullOrWhiteSpace(objectModeDescription)
+              ? ''
+              : ` -> ${objectModeDescription}`
+          }.`,
         }),
       );
 
@@ -145,7 +170,11 @@ export function recordLog(record, showMode, level = logLevel.debug) {
         '%c%s',
         'color:#F8C471;',
         JSON.stringify({
-          config: 'check the following config data',
+          config: `check the following config data${
+            stringIsNullOrWhiteSpace(objectModeDescription)
+              ? ''
+              : ` -> ${objectModeDescription}`
+          }.`,
         }),
       );
 
@@ -166,62 +195,62 @@ export function recordLog(record, showMode, level = logLevel.debug) {
   }
 }
 
-export function recordWarn(record) {
+export function recordWarn(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.warn);
   } else {
-    recordObject(record, logLevel.warn);
+    recordObject(record, logLevel.warn, objectModeDescription);
   }
 }
 
-export function recordInfo(record) {
+export function recordInfo(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.info);
   } else {
-    recordObject(record, logLevel.info);
+    recordObject(record, logLevel.info, objectModeDescription);
   }
 }
 
-export function recordConfig(record) {
+export function recordConfig(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.config);
   } else {
-    recordObject(record, logLevel.config);
+    recordObject(record, logLevel.config, objectModeDescription);
   }
 }
 
-export function recordTrace(record) {
+export function recordTrace(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.trace);
   } else {
-    recordObject(record, logLevel.trace);
+    recordObject(record, logLevel.trace, objectModeDescription);
   }
 }
 
-export function recordDebug(record) {
+export function recordDebug(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.debug);
   } else {
-    recordObject(record, logLevel.debug);
+    recordObject(record, logLevel.debug, objectModeDescription);
   }
 }
 
-export function recordExecute(record) {
+export function recordExecute(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.execute);
   } else {
-    recordObject(record, logLevel.execute);
+    recordObject(record, logLevel.execute, objectModeDescription);
   }
 }
 
 /**
  * 记录错误信息
  */
-export function recordError(record) {
+export function recordError(record, objectModeDescription = '') {
   if (isString(record)) {
     recordText(record, logLevel.error);
   } else {
-    recordObject(record, logLevel.error);
+    recordObject(record, logLevel.error, objectModeDescription);
   }
 }
 
@@ -243,8 +272,12 @@ export function recordText(record, level = logLevel.trace) {
  * @param {*} str
  * @returns
  */
-export function recordObject(record, level = logLevel.trace) {
-  recordLog(record, logShowMode.object, level);
+export function recordObject(
+  record,
+  level = logLevel.trace,
+  objectModeDescription = '',
+) {
+  recordLog(record, logShowMode.object, level, objectModeDescription);
 }
 
 function logShowInConsole() {

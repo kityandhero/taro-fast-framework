@@ -12,6 +12,16 @@ import {
 import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 export const defaultSettingsLayoutCustom = {
+  getWebRootFontSize: () => {
+    const appInit = getAppInitConfigData();
+
+    const { webRootFontSize } = {
+      ...{ webRootFontSize: '142%' },
+      ...(appInit || {}),
+    };
+
+    return webRootFontSize || '142%';
+  },
   /**
    * 无权限时的跳转目标
    * @returns path string

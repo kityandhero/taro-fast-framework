@@ -486,39 +486,44 @@ export function showMessage({
  * @param {*} str
  * @returns
  */
-export function recordLog(record, showMode, level = logLevel.debug) {
-  recordLogCore(record, showMode, level);
+export function recordLog(
+  record,
+  showMode,
+  level = logLevel.debug,
+  objectModeDescription = '',
+) {
+  recordLogCore(record, showMode, level, objectModeDescription);
 }
 
-export function recordTrace(record) {
-  recordTraceCore(record);
+export function recordTrace(record, objectModeDescription = '') {
+  recordTraceCore(record, objectModeDescription);
 }
 
-export function recordWarn(record) {
-  recordWarnCore(record);
+export function recordWarn(record, objectModeDescription = '') {
+  recordWarnCore(record, objectModeDescription);
 }
 
-export function recordInfo(record) {
-  recordInfoCore(record);
+export function recordInfo(record, objectModeDescription = '') {
+  recordInfoCore(record, objectModeDescription);
 }
 
-export function recordConfig(record) {
-  recordConfigCore(record);
+export function recordConfig(record, objectModeDescription = '') {
+  recordConfigCore(record, objectModeDescription);
 }
 
-export function recordDebug(record) {
-  recordDebugCore(record);
+export function recordDebug(record, objectModeDescription = '') {
+  recordDebugCore(record, objectModeDescription);
 }
 
-export function recordExecute(record) {
-  recordExecuteCore(record);
+export function recordExecute(record, objectModeDescription = '') {
+  recordExecuteCore(record, objectModeDescription);
 }
 
 /**
  * 记录错误信息
  */
-export function recordError(record) {
-  recordErrorCore(record);
+export function recordError(record, objectModeDescription = '') {
+  recordErrorCore(record, objectModeDescription);
 }
 
 /**
@@ -539,8 +544,12 @@ export function recordText(record, level = logLevel.debug) {
  * @param {*} str
  * @returns
  */
-export function recordObject(record, level = logLevel.debug) {
-  recordObjectCore(record, level);
+export function recordObject(
+  record,
+  level = logLevel.debug,
+  objectModeDescription = '',
+) {
+  recordObjectCore(record, level, objectModeDescription);
 }
 
 /**

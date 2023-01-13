@@ -287,7 +287,7 @@ export default {
       if (!appInitCustomVisible) {
         const { config } = payload;
 
-        recordConfig(config);
+        recordConfig(config, 'appConfig');
       }
 
       return {
