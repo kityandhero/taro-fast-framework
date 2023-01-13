@@ -128,7 +128,7 @@ importers:
       taro-fast-component-extra: ^2.11.2
       taro-fast-component-prism: ^2.12.2
       taro-fast-dva: ^2.11.0
-      taro-fast-framework: ^1.15.0
+      taro-fast-framework: ^1.15.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
