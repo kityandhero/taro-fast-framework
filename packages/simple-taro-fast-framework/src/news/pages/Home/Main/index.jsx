@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
+  buildLinearGradient,
   navigateTo,
   redirectTo,
   transformSize,
@@ -10,11 +11,14 @@ import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import {
   Card,
   CenterBox,
+  ColorText,
   FlexBox,
   FloatAction,
   Grid,
+  HeadNavigation,
   ImageBox,
   More,
+  ScaleBox,
   SearchBar,
   Space,
   Swiper,
@@ -46,7 +50,8 @@ const nameStyle = {
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '新闻应用--首页',
-  backgroundColor: '#3778F4',
+  navigationStyle: 'custom',
+  // backgroundColor: '#3778F4',
 });
 
 @connect(({ news, session, entrance, global, schedulingControl }) => ({
@@ -94,6 +99,54 @@ export default class Index extends BasePageWrapper {
     });
   };
 
+  buildHeadNavigation = () => {
+    return (
+      <HeadNavigation
+        style={{
+          overflow: 'hidden',
+        }}
+        backboardStyle={{
+          width: '100%',
+          height: '100%',
+          backgroundImage: buildLinearGradient({
+            direct: 45,
+            list: ['#ff9700', '#ed1c24'],
+          }),
+        }}
+        backboardChildren={
+          <View>
+            <ScaleBox aspectRatio={0.243} />
+            {/* <ImageBox
+              src={headerBackgroundImage}
+              loadingEffect={false}
+              lazyLoad
+            /> */}
+          </View>
+        }
+      >
+        <FlexBox
+          flexAuto="right"
+          leftStyle={{
+            paddingLeft: transformSize(20),
+            paddingRight: transformSize(16),
+          }}
+          left={<ColorText color="#fff" fontSize={30} text="信息发布" />}
+          right={
+            <SearchBar
+              style={{
+                borderRadius: transformSize(100),
+              }}
+              circle
+              mode="navigate"
+              showSearch={false}
+              searchStyle={{}}
+            />
+          }
+        />
+      </HeadNavigation>
+    );
+  };
+
   buildSwiperListData = () => {
     const { advertisingList } = this.state;
 
@@ -121,7 +174,7 @@ export default class Index extends BasePageWrapper {
 
     return (
       <>
-        <View className={classNames(`${classPrefix}__searchBox`)}>
+        {/* <View className={classNames(`${classPrefix}__searchBox`)}>
           <SearchBar
             style={{
               margin: `${transformSize(10)} ${transformSize(20)}`,
@@ -129,7 +182,7 @@ export default class Index extends BasePageWrapper {
             }}
             mode="navigate"
           />
-        </View>
+        </View> */}
 
         <View className={classNames(`${classPrefix}__containor`)}>
           <Space direction="vertical" fillWidth>

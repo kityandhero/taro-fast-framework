@@ -1,5 +1,4 @@
 import { View } from '@tarojs/components';
-import { ENV_TYPE, getEnv } from '@tarojs/taro';
 
 import {
   getGuid,
@@ -8,7 +7,6 @@ import {
   recordWarn,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import BackboardBox from '../BackboardBox';
@@ -25,15 +23,11 @@ const defaultProps = {
   onAdjustComplete: null,
 };
 
-const ENV = null;
-
 class HeadNavigation extends BaseComponent {
   containerId = '';
 
   constructor(props) {
     super(props);
-
-    ENV = getEnv();
 
     this.state = {
       ...this.state,
@@ -43,6 +37,7 @@ class HeadNavigation extends BaseComponent {
         boxHeight: 0,
         height: 0,
         rightWidth: 0,
+        backboardBoxPaddingTop: 0,
       },
     };
 
@@ -54,82 +49,61 @@ class HeadNavigation extends BaseComponent {
 
     const { onAdjustComplete } = this.props;
 
-    ENV = getEnv();
+    const noAdaptationMessage = `framework with env [${this.getEnv()}] has no adaptation, ignore getMenuButtonBoundingClientRect`;
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore getMenuButtonBoundingClientRect`;
+    this.handleEnv({
+      handleWeapp: () => {
+        const rect = getMenuButtonBoundingClientRect();
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
-        {
-          const rect = getMenuButtonBoundingClientRect();
+        const { width, height, top } = rect;
 
-          const { width, height, top } = rect;
+        this.setState({
+          containerHeight: `${height + top + 8}px`,
+          placeholderHeight: `${top}px`,
+          height: `${height}px`,
+          boxHeight: `${height + top}px`,
+          rightWidth: `${width + 15}px`,
+        });
+
+        return { containerHeight: height + top + 8 };
+      },
+      handleAlipay: () => {
+        recordWarn(noAdaptationMessage);
+
+        return {};
+      },
+      handleSWAN: () => {
+        recordWarn(noAdaptationMessage);
+
+        return {};
+      },
+      handleWEB: () => {
+        const rect = document.getElementById(this.containerId);
+
+        if (rect != null) {
+          const { height } = rect.getBoundingClientRect();
 
           this.setState({
-            containerHeight: `${height + top + 8}px`,
-            placeholderHeight: `${top}px`,
+            containerHeight: `${height + 8}px`,
+            placeholderHeight: 0,
             height: `${height}px`,
-            boxHeight: `${height + top}px`,
-            rightWidth: `${width + 15}px`,
+            boxHeight: `${height}px`,
+            rightWidth: transformSize(15),
+            backboardBoxPaddingTop: 8,
           });
 
-          if (isFunction(onAdjustComplete)) {
-            onAdjustComplete({ containerHeight: height + top + 8 });
-          }
+          return { containerHeight: height + 8 };
         }
 
-        return;
-
-      case ENV_TYPE.ALIPAY:
+        return {};
+      },
+      handleOther: () => {
         recordWarn(noAdaptationMessage);
 
-        if (isFunction(onAdjustComplete)) {
-          onAdjustComplete({});
-        }
-
-        return;
-
-      case ENV_TYPE.SWAN:
-        recordWarn(noAdaptationMessage);
-
-        if (isFunction(onAdjustComplete)) {
-          onAdjustComplete({});
-        }
-
-        return;
-
-      case ENV_TYPE.WEB:
-        {
-          recordWarn(noAdaptationMessage);
-
-          const rect = document.getElementById(this.containerId);
-
-          const { width, height, top } = rect;
-
-          this.setState({
-            containerHeight: `${height + top + 8}px`,
-            placeholderHeight: `${top}px`,
-            height: `${height}px`,
-            boxHeight: `${height + top}px`,
-            rightWidth: `${width + 15}px`,
-          });
-
-          if (isFunction(onAdjustComplete)) {
-            onAdjustComplete({ containerHeight: height + top + 8 });
-          }
-        }
-
-        return;
-
-      default:
-        recordWarn(noAdaptationMessage);
-
-        if (isFunction(onAdjustComplete)) {
-          onAdjustComplete({});
-        }
-
-        return;
-    }
+        return {};
+      },
+      callback: onAdjustComplete,
+    });
   };
 
   getStyle = () => {
@@ -167,6 +141,7 @@ class HeadNavigation extends BaseComponent {
       boxHeight,
       height,
       rightWidth,
+      backboardBoxPaddingTop,
     } = this.state;
 
     const style = this.getStyle();
@@ -197,12 +172,8 @@ class HeadNavigation extends BaseComponent {
                 ...{
                   width: '100%',
                   paddingBottom: transformSize(8),
+                  paddingTop: transformSize(backboardBoxPaddingTop),
                 },
-                ...(ENV == ENV_TYPE.WEB
-                  ? {
-                      paddingTop: transformSize(8),
-                    }
-                  : {}),
               }}
               height={boxHeight}
               backboardStyle={backboardStyle}

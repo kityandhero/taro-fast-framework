@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Taro from '@tarojs/taro';
+import Taro, { ENV_TYPE, getEnv } from '@tarojs/taro';
 
 import { getModelNameList } from '../../utils/storageAssist';
 import {
@@ -19,6 +19,10 @@ import {
 } from '../../utils/tools';
 import { isEqual, isFunction, isNumber, isObject } from '../../utils/typeCheck';
 import { toNumber } from '../../utils/typeConvert';
+
+const ENV = getEnv();
+
+recordDebug({ currentEnv: ENV });
 
 function filterModel(props) {
   const result = { ...props };
@@ -319,6 +323,78 @@ class ComponentBase extends Component {
   doWorkAfterShow = () => {};
 
   doWorkWhenComponentHide = () => {};
+
+  getEnv = () => {
+    return ENV;
+  };
+
+  handleEnv = async (
+    {
+      handleWeapp = null,
+      handleAlipay = null,
+      handleSWAN = null,
+      handleWEB = null,
+      handleOther = null,
+      callback = null,
+    } = {
+      handleWeapp: null,
+      handleAlipay: null,
+      handleSWAN: null,
+      handleWEB: null,
+      handleOther: null,
+      callback: null,
+    },
+  ) => {
+    recordExecute('handleEnv');
+
+    let data = {};
+
+    switch (ENV) {
+      case ENV_TYPE.WEAPP: {
+        if (isFunction(handleWeapp)) {
+          data = (await handleWeapp()) || {};
+        }
+
+        break;
+      }
+
+      case ENV_TYPE.ALIPAY: {
+        if (isFunction(handleAlipay)) {
+          data = (await handleAlipay()) || {};
+        }
+
+        break;
+      }
+
+      case ENV_TYPE.SWAN: {
+        if (isFunction(handleSWAN)) {
+          data = (await handleSWAN()) || {};
+        }
+
+        break;
+      }
+
+      case ENV_TYPE.WEB: {
+        if (isFunction(handleWEB)) {
+          data = (await handleWEB()) || {};
+        }
+
+        break;
+      }
+
+      default: {
+        if (isFunction(handleOther)) {
+          data = (await handleOther()) || {};
+        }
+
+        break;
+      }
+    }
+
+    if (isFunction(callback)) {
+      await callback(data || {});
+    }
+  };
 
   getGlobal = () => {
     const text = 'please override getGlobal, and return a object';

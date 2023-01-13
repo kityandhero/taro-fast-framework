@@ -93,6 +93,7 @@ class SearchBar extends BaseComponent {
             // padding: `${transformSize(12)} ${transformSize(28)}`,
             backgroundColor: '#f7f8fa',
             overflow: 'hidden',
+            width: '100%',
           },
           ...style,
           ...{
