@@ -11,8 +11,8 @@
 .@{class-prefix-badge} {
   --right: 0;
   --top: 0;
-  --dot-size: var(--tfc-0);
-  --font-size: var(--tfc-0);
+  --dot-size: var(--tfc-20);
+  --font-size: var(--tfc-22);
 
   display: inline-block;
   color: #fff;
@@ -20,6 +20,8 @@
   text-align: center;
   vertical-align: middle;
   box-sizing: border-box;
+  min-width: var(--tfc-16);
+  border-radius: var(--tfc-100);
   font-size: var(--font-size);
   line-height: 1.2;
   white-space: nowrap;
@@ -29,6 +31,12 @@
     right: var(--right);
     top: var(--top);
     transform: translate(50%, -50%);
+  }
+
+  &-content {
+    padding: 0 var(--tfc-8);
+    height: var(--tfc-24);
+    line-height: var(--tfc-24);
   }
 
   &-dot {

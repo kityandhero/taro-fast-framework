@@ -5,11 +5,14 @@
   --checked-color: #e7f1ff;
 
   overflow: hidden;
+  font-size: var(--tfc-30);
   line-height: 1.4;
 
   &-item {
+    padding: var(--tfc-16) var(--tfc-32);
     position: relative;
     background-color: #f5f5f5;
+    border-radius: var(--tfc-4);
     color: #333;
     opacity: 1;
     display: inline-block;
@@ -18,6 +21,7 @@
     vertical-align: top;
 
     &-description {
+      font-size: var(--tfc-6);
       color: var(--tfc-color-weak);
     }
 
@@ -33,9 +37,17 @@
       bottom: 0;
       width: 0;
       height: 0;
+      border-top: solid var(--tfc-16) transparent;
+      border-bottom: solid var(--tfc-16) var(--tfc-color-primary);
+      border-left: solid var(--tfc-20) transparent;
+      border-right: solid var(--tfc-20) var(--tfc-color-primary);
 
       &-mark {
         position: absolute;
+        left: calc(var(--tfc-4) * -1);
+        top: calc(var(--tfc-8) * -1);
+        height: var(--tfc-12);
+        width: var(--tfc-16);
       }
     }
 

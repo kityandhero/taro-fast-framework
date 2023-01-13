@@ -125,7 +125,7 @@ export default class Index extends ContentPageBase {
         <View
           style={{
             height: transformSize(1200),
-            border: `${transformSize(2)} solid #ccc`,
+            border: 'var(--tfc-2) solid #ccc',
             backgroundColor: '#ccc',
           }}
         >

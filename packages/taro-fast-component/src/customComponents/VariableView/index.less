@@ -12,30 +12,40 @@
 
   &__pull-indicator {
     position: absolute;
+    top: calc(var(--tfc-72) * -1);
     width: 100%;
+    height: var(--tfc-72);
     z-index: 10000;
   }
 
   &__lower-loading-box {
     &__inner {
       background-color: transparent;
+      margin: var(--tfc-20) var(--tfc-40);
       display: flex;
       align-content: center;
       justify-content: center;
 
       &__lower-loading {
+        width: var(--tfc-400);
         opacity: 0.92;
         background-color: var(--lower-loading-background-color);
+        border-radius: var(--tfc-10);
         border: var(--lower-loading-border);
         display: flex;
         align-content: center;
         justify-content: center;
+
+        &__inner {
+          padding: var(--tfc-14) var(--tfc-24);
+        }
       }
     }
   }
 
   &__lower-loading-box--outer {
     position: absolute;
+    bottom: var(--tfc-20);
     left: 0;
     width: 100%;
     z-index: 120;

@@ -17,7 +17,7 @@ const typeCollection = ['ring', 'comet'];
 
 const defaultProps = {
   size: 0,
-  borderWidth: 1,
+  borderWidth: 0,
   color: '',
   type: 'ring',
 };
@@ -38,10 +38,12 @@ class Loading extends BaseComponent {
     let colorStyle = {};
     let borderWidthStyle = {};
 
-    sizeStyle = {
-      '--width': size > 0 ? transformSize(size) : transformSize(36),
-      '--height': size > 0 ? transformSize(size) : transformSize(36),
-    };
+    if (size > 0) {
+      sizeStyle = {
+        '--width': transformSize(size),
+        '--height': transformSize(size),
+      };
+    }
 
     if (!stringIsNullOrWhiteSpace(color)) {
       colorStyle = {
@@ -49,66 +51,39 @@ class Loading extends BaseComponent {
       };
     }
 
-    switch (type) {
-      case 'ring':
-        borderWidthStyle = {
-          '--ring-border-width':
-            borderWidth > 0 ? transformSize(borderWidth) : transformSize(1),
-        };
-        break;
+    if (borderWidth > 0) {
+      switch (type) {
+        case 'ring':
+          borderWidthStyle = {
+            '--ring-border-width': transformSize(borderWidth),
+          };
+          break;
 
-      case 'comet':
-        borderWidthStyle = {
-          '--comet-border-width':
-            borderWidth > 0 ? transformSize(borderWidth) : transformSize(4),
-        };
-        break;
+        case 'comet':
+          borderWidthStyle = {
+            '--comet-border-width': transformSize(borderWidth),
+          };
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
 
-    return {
-      ...sizeStyle,
-      ...colorStyle,
-      ...borderWidthStyle,
-      ...{
-        width: transformSize(36),
-        height: transformSize(36),
-      },
-    };
+    return { ...sizeStyle, ...colorStyle, ...borderWidthStyle };
   };
 
   renderFurther() {
     const type = this.getType();
     const style = this.getStyle();
 
-    const ringStyle = {
-      width: `calc(var(--width) - ${transformSize(
-        2,
-      )} - var(--ring-border-width) * 2)`,
-      height: `calc(var(--height) - ${transformSize(
-        2,
-      )} - var(--ring-border-width) * 2)`,
-      margin: transformSize(1),
-    };
-
     return (
       <View className={classNames(classPrefix)} style={style}>
         {type === 'ring' ? (
           <>
-            <View
-              className={classNames(`${classPrefix}__ring`)}
-              style={ringStyle}
-            />
-            <View
-              className={classNames(`${classPrefix}__ring`)}
-              style={ringStyle}
-            />
-            <View
-              className={classNames(`${classPrefix}__ring`)}
-              style={ringStyle}
-            />
+            <View className={classNames(`${classPrefix}__ring`)} />
+            <View className={classNames(`${classPrefix}__ring`)} />
+            <View className={classNames(`${classPrefix}__ring`)} />
           </>
         ) : null}
 

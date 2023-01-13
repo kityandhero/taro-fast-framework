@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Button as ButtonWxApp, View } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
+import { inCollection } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import ActivityIndicator from '../ActivityIndicator';
@@ -42,7 +42,6 @@ const defaultProps = {
   backgroundColor: '',
   fontColor: '',
   borderColor: '',
-  borderWidth: 0,
   fontSize: 0,
   paddingTop: 0,
   paddingBottom: 0,
@@ -132,8 +131,6 @@ class Button extends BaseComponent {
         rippleStyle: {
           top: `${y - offsetTop}px`,
           left: `${x - offsetLeft}px`,
-          width: transformSize(40),
-          height: transformSize(40),
           animation: 'tfc-button-ripple 0.4s linear',
         },
       });
@@ -176,7 +173,6 @@ class Button extends BaseComponent {
       backgroundColor,
       fontColor,
       borderColor,
-      borderWidth,
       fontSize,
       paddingTop,
       paddingBottom,
@@ -254,19 +250,15 @@ class Button extends BaseComponent {
         fill,
         fontColor,
         borderColor,
-        borderWidth: borderWidth > 0 ? borderWidth : 2,
-        fontSize: fontSize > 0 ? fontSize : 30,
+        fontSize,
         shadow,
         shadowColor,
-        paddingTop: paddingTop > 0 ? paddingTop : 15,
-        paddingBottom: paddingBottom > 0 ? paddingBottom : 15,
-        paddingLeft: paddingLeft > 0 ? paddingLeft : 24,
-        paddingRight: paddingRight > 0 ? paddingRight : 24,
-        borderRadius: borderRadius > 0 ? borderRadius : 8,
+        paddingTop,
+        paddingBottom,
+        paddingLeft,
+        paddingRight,
+        borderRadius,
       }),
-      ...(shape === 'rounded'
-        ? { '--border-radius': transformSize(2000) }
-        : {}),
     };
 
     if (weappButton) {

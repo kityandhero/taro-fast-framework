@@ -1,6 +1,5 @@
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { Button, Space } from 'taro-fast-component/es/customComponents';
 import { connect } from 'taro-fast-framework/es/utils/dva';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
@@ -84,8 +83,8 @@ export default class Index extends BasePageWrapper {
         >
           <View
             style={{
-              paddingTop: transformSize(18),
-              paddingBottom: transformSize(18),
+              paddingTop: 'var(--tfc-18)',
+              paddingBottom: 'var(--tfc-18)',
             }}
           >
             当前用户: {nickname || '获取中, 请稍后'}

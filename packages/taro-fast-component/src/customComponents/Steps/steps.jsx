@@ -43,23 +43,13 @@ class Steps extends BaseComponent {
       iconSize,
     } = this.props;
 
-    const direction = this.getDirection();
-
     return {
       ...{
-        '--title-font-size':
-          iconSize <= 0 ? transformSize(26) : transformSize(titleFontSize),
-        '--description-font-size':
-          iconSize <= 0
-            ? transformSize(24)
-            : transformSize(descriptionFontSize),
+        '--title-font-size': transformSize(titleFontSize),
+        '--description-font-size': transformSize(descriptionFontSize),
         '--indicator-margin-right': transformSize(indicatorMarginRight),
-        '--icon-size':
-          iconSize <= 0 ? transformSize(18) : transformSize(iconSize),
+        '--icon-size': transformSize(iconSize),
       },
-      ...(direction === 'horizontal'
-        ? { padding: `${transformSize(16)} 0` }
-        : { padding: `${transformSize(16)} ${transformSize(32)}` }),
     };
   };
 
@@ -69,11 +59,6 @@ class Steps extends BaseComponent {
         className={classNames(`${classPrefix}__item__icon__dot`, {
           [`${classPrefix}__item__icon__dot-processing`]: status === 'process',
         })}
-        style={{
-          width: transformSize(16),
-          height: transformSize(16),
-          borderRadius: transformSize(8),
-        }}
       />
     );
   };

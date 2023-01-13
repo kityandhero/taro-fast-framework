@@ -1,19 +1,24 @@
 @class-prefix-loading: ~'tfc-loading';
 
 .@{class-prefix-loading} {
-  --width: var(--tfc-0);
-  --height: var(--tfc-0);
+  --width: var(--tfc-36);
+  --height: var(--tfc-36);
   --color: var(--tfc-color-green);
-  --ring-border-width: var(--tfc-0);
-  --comet-border-width: var(--tfc-0);
+  --ring-border-width: var(--tfc-1);
+  --comet-border-width: var(--tfc-4);
 
   display: inline-block;
   position: relative;
+  width: var(--tfc-36);
+  height: var(--tfc-36);
 
   &__ring {
     box-sizing: border-box;
     display: block;
     position: absolute;
+    width: calc(var(--width) - var(--tfc-2) - var(--ring-border-width) * 2);
+    height: calc(var(--height) - var(--tfc-2) - var(--ring-border-width) * 2);
+    margin: var(--tfc-1);
     border-width: var(--ring-border-width);
     border-style: solid;
     border-color: var(--color) transparent transparent;

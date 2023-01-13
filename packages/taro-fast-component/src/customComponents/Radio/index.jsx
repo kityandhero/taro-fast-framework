@@ -197,7 +197,7 @@ class Radio extends BaseComponent {
                   flexAuto="right"
                   style={{
                     ...{
-                      padding: `${transformSize(10)} ${transformSize(12)}`,
+                      padding: 'var(--tfc-10) var(--tfc-12)',
                     },
                     ...styleItem,
                     ...(disabled
@@ -261,7 +261,7 @@ class Radio extends BaseComponent {
                   flexAuto="right"
                   style={{
                     ...{
-                      padding: `${transformSize(10)} ${transformSize(12)}`,
+                      padding: 'var(--tfc-10) var(--tfc-12)',
                     },
                     ...styleItem,
                     ...(disabled

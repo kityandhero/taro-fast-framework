@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
@@ -42,30 +41,6 @@ const defaultProps = {
   onCancel: null,
   onConfirm: null,
   onClose: null,
-};
-
-const actionStyle = {
-  height: transformSize(44),
-  fontSize: transformSize(30),
-  lineHeight: transformSize(44),
-};
-
-const buttonNoFillStyle = {
-  borderRadius: transformSize(14),
-  height: transformSize(60),
-  lineHeight: transformSize(60),
-  fontSize: transformSize(28),
-  margin: `${transformSize(28)} ${transformSize(48)}`,
-};
-
-const buttonFillStyle = {
-  padding: `${transformSize(16)} ${transformSize(14)}`,
-};
-
-const buttonSplitFillStyle = {
-  borderRightColor: 'var(--tfc-border-color)',
-  borderRightStyle: 'solid',
-  borderRightWidth: transformSize(1),
 };
 
 class Modal extends BaseComponent {
@@ -128,6 +103,8 @@ class Modal extends BaseComponent {
                   <View
                     className={classNames(`${classPrefix}__container__action`, {
                       [`${classPrefix}__container__action__fill`]: buttonFill,
+                      [`${classPrefix}__container__action__split`]:
+                        buttonFill && showCancel && showConfirm,
                       [`${classPrefix}__container__action__no__fill`]:
                         !buttonFill,
                     })}
@@ -137,25 +114,13 @@ class Modal extends BaseComponent {
                         : 'none'
                     }
                     style={{
-                      ...{
-                        ...actionStyle,
-                      },
                       ...(!buttonFill
                         ? {
-                            ...buttonNoFillStyle,
-                            ...{
-                              border: `${transformSize(
-                                2,
-                              )} solid var(--tfc-color-primary)`,
-                              color: 'var(--tfc-color-primary)',
-                            },
+                            border:
+                              'var(--tfc-2) solid var(--tfc-color-primary)',
+                            color: 'var(--tfc-color-primary)',
                           }
-                        : {
-                            ...buttonFillStyle,
-                            ...(showCancel && showConfirm
-                              ? buttonSplitFillStyle
-                              : {}),
-                          }),
+                        : {}),
                       ...cancelStyle,
                     }}
                     onClick={this.triggerCancel}
@@ -179,20 +144,12 @@ class Modal extends BaseComponent {
                         : 'none'
                     }
                     style={{
-                      ...{
-                        ...actionStyle,
-                      },
                       ...(!buttonFill
                         ? {
-                            ...buttonNoFillStyle,
-                            ...{
-                              backgroundColor: 'var(--tfc-color-primary)',
-                              color: '#fff',
-                            },
+                            backgroundColor: 'var(--tfc-color-primary)',
+                            color: '#fff',
                           }
-                        : {
-                            ...buttonFillStyle,
-                          }),
+                        : {}),
                       ...confirmStyle,
                     }}
                     onClick={this.triggerConfirm}
@@ -243,9 +200,6 @@ class Modal extends BaseComponent {
               className={classNames({
                 [`${classPrefix}__container__content`]: true,
               })}
-              style={{
-                fontSize: transformSize(30),
-              }}
             >
               {children}
             </View>

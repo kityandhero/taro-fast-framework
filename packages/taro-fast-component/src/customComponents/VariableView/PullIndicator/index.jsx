@@ -7,7 +7,6 @@ import {
   createAnimation,
   getCurrentInstance,
   inCollection,
-  transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
@@ -234,18 +233,11 @@ class PullIndicator extends BaseComponent {
             className={classNames(
               `${classPrefix}__refreshing-box__inner__refreshing`,
             )}
-            style={{
-              width: transformSize(280),
-            }}
           >
             <ActivityIndicator
               className={classNames(
                 `${classPrefix}__refreshing-box__inner__refreshing__inner`,
               )}
-              style={{
-                padding: `${transformSize(14)} ${transformSize(24)}`,
-                borderRadius: transformSize(10),
-              }}
               content="加载中"
             />
           </View>
@@ -285,7 +277,6 @@ class PullIndicator extends BaseComponent {
               refreshingBoxEffect !== 'scale'
                 ? {}
                 : {
-                    left: `calc(50% - ${transformSize(36)}`,
                     top: `${maxMove}px`,
                   }
             }
@@ -301,11 +292,6 @@ class PullIndicator extends BaseComponent {
                     className={classNames(
                       `${classPrefix}__refresh-box__pull-refresh__iconBox`,
                     )}
-                    style={{
-                      padding: transformSize(6),
-                      width: transformSize(60),
-                      height: transformSize(60),
-                    }}
                   >
                     <IconLoading
                       className={classNames(
@@ -335,17 +321,9 @@ class PullIndicator extends BaseComponent {
             (refreshingFlag && useRefreshingBox) || this.refreshingIllusoryShow
           }
           className={classNames(`${classPrefix}__refreshing-box`)}
-          style={{
-            top: transformSize(72),
-          }}
           name="fade"
         >
-          <View
-            className={classNames(`${classPrefix}__refreshing-box__inner`)}
-            style={{
-              margin: `${transformSize(20)} ${transformSize(40)}`,
-            }}
-          >
+          <View className={classNames(`${classPrefix}__refreshing-box__inner`)}>
             {this.buildRefreshingBox()}
           </View>
         </Transition>

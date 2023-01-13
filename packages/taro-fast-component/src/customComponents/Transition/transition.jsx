@@ -59,15 +59,15 @@ export function Transition(props) {
     <>
       <View
         className={'tfc-transition ' + classes + ` ${className || ''}`}
-        onTransitionEnd={onTransitionEnd}
-        {...others}
         style={{
           ...buildRootStyle({
             currentDuration,
             display,
-            style,
           }),
+          ...style,
         }}
+        onTransitionEnd={onTransitionEnd}
+        {...others}
         catchMove
       >
         {children}

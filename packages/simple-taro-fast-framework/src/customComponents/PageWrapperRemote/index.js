@@ -1,4 +1,3 @@
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
@@ -11,8 +10,8 @@ import PageWrapperCore from '../PageWrapperCore';
 
 export default class PageWrapperRemote extends PageWrapperCore {
   viewStyle = {
-    paddingLeft: transformSize(18),
-    paddingRight: transformSize(18),
+    paddingLeft: 'var(--tfc-18)',
+    paddingRight: 'var(--tfc-18)',
     backgroundColor: '#fff',
   };
 

@@ -410,15 +410,11 @@ class VariableView extends BaseComponent {
             className={classNames(
               `${classPrefix}__lower-loading-box__inner__lower-loading`,
             )}
-            style={{
-              width: transformSize(400),
-              borderRadius: transformSize(10),
-            }}
           >
             <ActivityIndicator
-              style={{
-                padding: `${transformSize(14)} ${transformSize(24)}`,
-              }}
+              className={classNames(
+                `${classPrefix}__lower-loading-box__inner__lower-loading__inner`,
+              )}
               content="加载中, 请稍后"
             />
           </View>
@@ -448,11 +444,7 @@ class VariableView extends BaseComponent {
 
     return (
       lowerLoadingFooterBox || (
-        <Divider
-          padding={`${transformSize(32)} ${transformSize(20)} ${transformSize(
-            32,
-          )} ${transformSize(20)}`}
-        >
+        <Divider padding="var(--tfc-32) var(--tfc-20) var(--tfc-32) var(--tfc-20)">
           {lowerLoading ? (
             <ActivityIndicator content="加载中" />
           ) : needNextLoad ? (
@@ -577,18 +569,10 @@ class VariableView extends BaseComponent {
             [`${classPrefix}__lower-loading-box--outer`]:
               lowerLoadingPosition === 'outer',
           })}
-          style={{
-            ...(lowerLoadingPosition === 'outer'
-              ? { bottom: transformSize(20) }
-              : {}),
-          }}
           name="fade"
         >
           <View
             className={classNames(`${classPrefix}__lower-loading-box__inner`)}
-            style={{
-              margin: `${transformSize(20)} ${transformSize(40)}`,
-            }}
           >
             {this.buildLowerLoadingSuspendBox()}
           </View>
@@ -604,13 +588,7 @@ class VariableView extends BaseComponent {
       ) : null;
 
     const pullIndicator = (
-      <View
-        className={classNames(`${classPrefix}__pull-indicator`)}
-        style={{
-          top: `calc(${transformSize(72)} * -1)`,
-          height: transformSize(72),
-        }}
-      >
+      <View className={classNames(`${classPrefix}__pull-indicator`)}>
         <PullIndicator
           id={this.refreshBoxId || ''}
           enablePullDownRefresh={enablePullDownRefresh}

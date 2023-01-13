@@ -24,7 +24,7 @@ const config1 = {
   backboardStyle: {
     height: transformSize(100),
     backgroundColor: 'red',
-    width: `calc(100% - ${transformSize(40)})`,
+    width: 'calc(100% - var(--tfc-40))',
     top: transformSize(-80),
     left: transformSize(20),
     right: transformSize(20),
@@ -46,7 +46,7 @@ const config2 = {
   backboardStyle: {
     height: transformSize(100),
     backgroundColor: 'red',
-    width: `calc(100% + ${transformSize(40)})`,
+    width: 'calc(100% + var(--tfc-40))',
     bottom: transformSize(-180),
     left: transformSize(-20),
     right: transformSize(-20),

@@ -10,7 +10,6 @@ export function getStyle({
   fill = 'solid',
   fontColor = '',
   borderColor = '',
-  borderWidth = 0,
   fontSize = 0,
   shadow = true,
   shadowColor = '',
@@ -21,9 +20,6 @@ export function getStyle({
   borderRadius = 0,
 }) {
   const sharpStyle = {
-    ...(borderWidth > 0
-      ? { '--border-width': transformSize(borderWidth) }
-      : {}),
     ...(paddingTop > 0 ? { '--padding-top': transformSize(paddingTop) } : {}),
     ...(paddingBottom > 0
       ? { '--padding-bottom': transformSize(paddingBottom) }
@@ -50,9 +46,7 @@ export function getStyle({
     color = handleInlayColor(color);
 
     if (color !== backgroundColor) {
-      shadowColorAdjust = `${transformSize(12)} ${transformSize(
-        12,
-      )} ${transformSize(16)} var(--tfc-color-${backgroundColor}-shadow)`;
+      shadowColorAdjust = `var(--tfc-color-shadow-size) var(--tfc-color-${backgroundColor}-shadow)`;
     }
 
     if (fill === 'solid') {

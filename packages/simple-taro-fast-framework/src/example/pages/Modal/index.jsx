@@ -1,6 +1,5 @@
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   Card,
@@ -273,13 +272,13 @@ export default class Index extends ContentPageBase {
             <View
               style={{
                 backgroundColor: 'red',
-                borderRadius: transformSize(14),
-                height: transformSize(60),
-                lineHeight: transformSize(60),
+                borderRadius: 'var(--tfc-14)',
+                height: 'var(--tfc-60)',
+                lineHeight: 'var(--tfc-60)',
                 color: '#fff',
                 textAlign: 'center',
-                fontSize: transformSize(28),
-                margin: `${transformSize(14)} ${transformSize(12)}`,
+                fontSize: 'var(--tfc-28)',
+                margin: 'var(--tfc-14) var(--tfc-12)',
               }}
               onClick={this.onClickHide5}
             >
@@ -299,19 +298,19 @@ export default class Index extends ContentPageBase {
           <CenterBox>
             <View
               style={{
-                width: transformSize(380),
+                width: 'var(--tfc-380)',
               }}
             >
               <View
                 style={{
                   backgroundColor: '#567432',
-                  borderRadius: transformSize(14),
-                  height: transformSize(60),
-                  lineHeight: transformSize(60),
+                  borderRadius: 'var(--tfc-14)',
+                  height: 'var(--tfc-60)',
+                  lineHeight: 'var(--tfc-60)',
                   color: '#fff',
                   textAlign: 'center',
-                  fontSize: transformSize(28),
-                  margin: `${transformSize(14)} ${transformSize(12)}`,
+                  fontSize: 'var(--tfc-28)',
+                  margin: 'var(--tfc-14) var(--tfc-12)',
                 }}
               >
                 按钮1
@@ -319,13 +318,13 @@ export default class Index extends ContentPageBase {
               <View
                 style={{
                   backgroundColor: '#128904',
-                  borderRadius: transformSize(14),
-                  height: transformSize(60),
-                  lineHeight: transformSize(60),
+                  borderRadius: 'var(--tfc-14)',
+                  height: 'var(--tfc-60)',
+                  lineHeight: 'var(--tfc-60)',
                   color: '#fff',
                   textAlign: 'center',
-                  fontSize: transformSize(28),
-                  margin: `${transformSize(14)} ${transformSize(12)}`,
+                  fontSize: 'var(--tfc-28)',
+                  margin: 'var(--tfc-14) var(--tfc-12)',
                 }}
               >
                 按钮2
@@ -333,13 +332,13 @@ export default class Index extends ContentPageBase {
               <View
                 style={{
                   backgroundColor: 'red',
-                  borderRadius: transformSize(14),
-                  height: transformSize(60),
-                  lineHeight: transformSize(60),
+                  borderRadius: 'var(--tfc-14)',
+                  height: 'var(--tfc-60)',
+                  lineHeight: 'var(--tfc-60)',
                   color: '#fff',
                   textAlign: 'center',
-                  fontSize: transformSize(28),
-                  margin: `${transformSize(14)} ${transformSize(12)}`,
+                  fontSize: 'var(--tfc-28)',
+                  margin: 'var(--tfc-14) var(--tfc-12)',
                 }}
                 onClick={this.onClickHide6}
               >

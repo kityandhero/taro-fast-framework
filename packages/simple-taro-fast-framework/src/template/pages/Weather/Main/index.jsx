@@ -30,8 +30,8 @@ definePageConfig({
 }))
 export default class Index extends BasePageWrapper {
   viewStyle = {
-    paddingLeft: transformSize(18),
-    paddingRight: transformSize(18),
+    paddingLeft: 'var(--tfc-18)',
+    paddingRight: 'var(--tfc-18)',
     backgroundColor: '#fff',
   };
 
@@ -111,8 +111,8 @@ export default class Index extends BasePageWrapper {
         >
           <View
             style={{
-              paddingTop: transformSize(18),
-              paddingBottom: transformSize(18),
+              paddingTop: 'var(--tfc-18)',
+              paddingBottom: 'var(--tfc-18)',
             }}
           >
             天气: {weather || '获取中, 请稍后'}

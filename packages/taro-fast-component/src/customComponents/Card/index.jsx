@@ -169,9 +169,7 @@ class Card extends BaseComponent {
           ...(!border ? { border: '0' } : {}),
           ...(shadow && !stringIsNullOrWhiteSpace(shadowColor)
             ? {
-                boxShadow: `${transformSize(12)} ${transformSize(
-                  12,
-                )} ${transformSize(16)} var(--tfc-color-${handleInlayColor(
+                boxShadow: `var(--tfc-color-shadow-size) var(--tfc-color-${handleInlayColor(
                   shadowColor,
                 )}-shadow)`,
               }

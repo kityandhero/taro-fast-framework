@@ -90,7 +90,6 @@ const config2 = {
             style={{
               width: transformSize(120),
               borderRadius: transformSize(10),
-              // backgroundColor: '#fff',
             }}
           >
             <ImageBox src={logoImage} />
@@ -118,7 +117,7 @@ const config2 = {
                 fontSize={24}
                 textPrefix="账号"
                 separatorStyle={{
-                  margin: `0 ${transformSize(6)}`,
+                  margin: '0 var(--tfc-6)',
                 }}
                 textStyle={{
                   marginLeft: transformSize(10),

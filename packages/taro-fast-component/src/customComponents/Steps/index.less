@@ -1,10 +1,10 @@
 @class-prefix-steps: ~'tfc-steps';
 
 .@{class-prefix-steps} {
-  --title-font-size: var(--tfc-0);
-  --description-font-size: var(--tfc-0);
+  --title-font-size: var(--tfc-26);
+  --description-font-size: var(--tfc-24);
   --indicator-margin-right: 0;
-  --icon-size: var(--tfc-0);
+  --icon-size: var(--tfc-18);
   --line-to-next-color: #e5e5e5;
   --dot-color: #e5e5e5;
 
@@ -14,6 +14,7 @@
   &-horizontal {
     display: flex;
     justify-content: space-around;
+    padding: var(--tfc-16) 0;
   }
 
   &__item-horizontal {
@@ -21,10 +22,12 @@
 
     &__indicator {
       width: 100%;
+      height: var(--tfc-24);
 
       &__line {
         left: 50%;
         top: 50%;
+        height: var(--tfc-2);
         transform: translateY(-50%);
         width: 100%;
       }
@@ -40,12 +43,14 @@
       width: 100%;
       text-align: center;
       font-size: var(--description-font-size);
+      padding-top: var(--tfc-22);
 
       &__title {
         font-size: var(--title-font-size);
       }
 
       &__description {
+        margin-top: var(--tfc-8);
         color: var(--tfc-color-weak);
       }
     }
@@ -57,17 +62,23 @@
     }
   }
 
+  &-vertical {
+    padding: var(--tfc-16) var(--tfc-32);
+  }
+
   &__item-vertical {
     display: flex;
     align-items: stretch;
 
     &__indicator {
       flex: none;
+      width: var(--tfc-48);
       margin-right: var(--indicator-margin-right);
 
       &__line {
         left: 50%;
         top: calc(var(--title-font-size) * 1.5 / 2);
+        width: var(--tfc-2);
         transform: translateX(-50%);
         height: 100%;
       }
@@ -81,6 +92,7 @@
 
     &__content {
       flex: auto;
+      padding-bottom: var(--tfc-28);
 
       &__title {
         font-size: var(--title-font-size);
@@ -88,6 +100,7 @@
       }
 
       &__description {
+        padding-top: var(--tfc-4);
         font-size: var(--description-font-size);
         color: var(--tfc-color-weak);
       }
@@ -153,14 +166,17 @@
   &__item__icon__dot {
     position: relative;
     display: block;
+    width: var(--tfc-16);
+    height: var(--tfc-16);
     background: var(--dot-color);
+    border-radius: var(--tfc-8);
   }
 
   &__item__icon__dot-processing {
     &::after {
       position: absolute;
-      top: -8%;
-      left: -12%;
+      top: -10%;
+      left: -10%;
       width: 100%;
       height: 100%;
       border: var(--tfc-1) solid var(--dot-color);

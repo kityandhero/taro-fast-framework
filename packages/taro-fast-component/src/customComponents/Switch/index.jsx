@@ -231,7 +231,7 @@ class Switch extends BaseComponent {
             hoverClass="none"
             style={{
               fontSize: transformSize(13 * size),
-              padding: `0 ${transformSize(4)}`,
+              padding: `0 var(--tfc-4)`,
             }}
           >
             {checkedStage ? checkedText : uncheckedText}
