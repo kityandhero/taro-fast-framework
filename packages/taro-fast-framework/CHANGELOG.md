@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-framework@1.13.2...taro-fast-framework@1.14.0) (2023-01-13)
+
+
+### Features
+
+* **taro-fast-common:** update Env info ([f6a9a99](https://github.com/kityandhero/taro-fast-framework/commit/f6a9a99d50a124100e9ccecfaa3a773d8f67e2b8))
+
+
+
 ## [1.13.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-framework@1.13.1...taro-fast-framework@1.13.2) (2023-01-13)
 
 **Note:** Version bump only for package taro-fast-framework
