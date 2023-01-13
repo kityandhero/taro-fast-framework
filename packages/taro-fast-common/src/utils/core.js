@@ -10,10 +10,10 @@ export function getDefaultTaroGlobalData() {
 }
 
 export function getTaroGlobalData() {
-  const ENV = getEnv();
+  const env = getEnv();
 
   // 标签栏滚动
-  switch (ENV) {
+  switch (env) {
     case ENV_TYPE.WEAPP:
       const app = getApp();
 
@@ -28,11 +28,11 @@ export function getTaroGlobalData() {
       return app.$app.taroGlobalData;
 
     case ENV_TYPE.ALIPAY:
-      console.warn(`framework with env [${ENV}] has no adaptation`);
+      console.warn(`framework with env [${env}] has no adaptation`);
       break;
 
     case ENV_TYPE.SWAN:
-      console.warn(`framework with env [${ENV}] has no adaptation`);
+      console.warn(`framework with env [${env}] has no adaptation`);
       break;
 
     case ENV_TYPE.WEB:
@@ -43,7 +43,7 @@ export function getTaroGlobalData() {
       return window.taroGlobalData;
 
     default:
-      console.warn(`framework with env [${ENV}] has no adaptation`);
+      console.warn(`framework with env [${env}] has no adaptation`);
       break;
   }
 
@@ -51,17 +51,17 @@ export function getTaroGlobalData() {
 }
 
 export function setTaroGlobalData(config) {
-  const ENV = getEnv();
+  const env = getEnv();
 
-  switch (ENV) {
+  switch (env) {
     case ENV_TYPE.WEAPP:
       break;
 
     case ENV_TYPE.ALIPAY:
-      console.warn(`framework with env [${ENV}] has no adaptation`);
+      console.warn(`framework with env [${env}] has no adaptation`);
 
     case ENV_TYPE.SWAN:
-      console.warn(`framework with env [${ENV}] has no adaptation`);
+      console.warn(`framework with env [${env}] has no adaptation`);
       break;
 
     case ENV_TYPE.WEB:
@@ -73,7 +73,7 @@ export function setTaroGlobalData(config) {
       break;
 
     default:
-      console.warn(`framework with env [${ENV}] has no adaptation`);
+      console.warn(`framework with env [${env}] has no adaptation`);
       break;
   }
 }

@@ -2,6 +2,7 @@ import { Canvas, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { envCollection } from 'taro-fast-common/es/utils/constants';
 import {
   getFields,
   getGuid,
@@ -187,11 +188,11 @@ class Circle extends ComponentBase {
         let ctx = null;
         let supportLineColorGradient = false;
 
-        const ENV = Taro.getEnv();
+        const env = this.getEnv();
 
         // 标签栏滚动
-        switch (ENV) {
-          case Taro.ENV_TYPE.WEAPP:
+        switch (env) {
+          case envCollection.WEAPP:
             const canvas = n.node;
 
             canvas.width = width;
@@ -201,15 +202,15 @@ class Circle extends ComponentBase {
             supportLineColorGradient = true;
             break;
 
-          case Taro.ENV_TYPE.ALIPAY:
-            recordWarn(`framework with env [${ENV}] has no adaptation`);
+          case envCollection.ALIPAY:
+            recordWarn(`framework with env [${env}] has no adaptation`);
             break;
 
-          case Taro.ENV_TYPE.SWAN:
-            recordWarn(`framework with env [${ENV}] has no adaptation`);
+          case envCollection.SWAN:
+            recordWarn(`framework with env [${env}] has no adaptation`);
             break;
 
-          case Taro.ENV_TYPE.WEB:
+          case envCollection.WEB:
             ctx = Taro.createCanvasContext(that.canvasId, that);
             ctx.canvas.width = width;
             ctx.canvas.height = height;
@@ -217,12 +218,12 @@ class Circle extends ComponentBase {
             break;
 
           default:
-            recordWarn(`framework with env [${ENV}] has no adaptation`);
+            recordWarn(`framework with env [${env}] has no adaptation`);
             break;
         }
 
         if (ctx == null) {
-          recordWarn(`framework with env [${ENV}] has no adaptation`);
+          recordWarn(`framework with env [${env}] has no adaptation`);
 
           return;
         }

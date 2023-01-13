@@ -5,6 +5,18 @@ export const pxToRemRoot = {
   h5: 24,
 };
 
+export const envCollection = {
+  WEAPP: 'WEAPP',
+  WEB: 'WEB',
+  RN: 'RN',
+  SWAN: 'SWAN',
+  ALIPAY: 'ALIPAY',
+  TT: 'TT',
+  QQ: 'QQ',
+  JD: 'JD',
+  UNKNOWN: 'UNKNOWN',
+};
+
 /**
  * 基础state
  */

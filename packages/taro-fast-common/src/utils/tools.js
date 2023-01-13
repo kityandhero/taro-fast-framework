@@ -34,10 +34,8 @@ import {
   createAnimation as createAnimationCore,
   createSelectorQuery as createSelectorQueryCore,
   downloadFile as downloadFileCore,
-  ENV_TYPE,
   getClipboardData as getClipboardDataCore,
   getCurrentInstance as getCurrentInstanceCore,
-  getEnv,
   getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
   getSetting as getSettingCore,
   getStorageSync,
@@ -75,6 +73,7 @@ import {
 import {
   convertCollection,
   datetimeFormat,
+  envCollection,
   formatCollection,
   logLevel,
   messageTypeCollection,
@@ -88,6 +87,7 @@ import {
   getTaroGlobalData as getTaroGlobalDataCore,
   setTaroGlobalData as setTaroGlobalDataCore,
 } from './core';
+import { checkEnv as checkEnvCore, getEnv as getEnvCore } from './env';
 import {
   recordConfig as recordConfigCore,
   recordDebug as recordDebugCore,
@@ -126,6 +126,14 @@ const storageKeyCollection = {
 };
 
 let globalSystemInfo = null;
+
+export function checkEnv() {
+  return checkEnvCore();
+}
+
+export function getEnv() {
+  return getEnvCore();
+}
 
 export function getDefaultTaroGlobalData() {
   return getDefaultTaroGlobalDataCore();
@@ -2519,7 +2527,7 @@ export function colorHexToRGB(color, symbol = 'RGB', arrayMode = false) {
 }
 
 export function handleTouchScroll(flag) {
-  if (getEnv() !== ENV_TYPE.WEB) {
+  if (getEnv() !== envCollection.WEB) {
     return;
   }
 

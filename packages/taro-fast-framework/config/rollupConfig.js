@@ -34,6 +34,7 @@ export function buildConfig({ terser: whetherTerser = false }) {
       ...[
         'taro-fast-common/es/utils/cacheAssist',
         'taro-fast-common/es/utils/constants',
+        'taro-fast-common/es/utils/env',
         'taro-fast-common/es/utils/mediaDefault',
         'taro-fast-common/es/utils/tips',
         'taro-fast-common/es/utils/tools',

@@ -1,11 +1,12 @@
 import { ScrollView, View } from '@tarojs/components';
-import Taro, { ENV_TYPE, getEnv } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 import {
   ComponentBase,
   Notification,
 } from 'taro-fast-common/es/customComponents';
 import {
+  envCollection,
   locateResult,
   underlyingState,
 } from 'taro-fast-common/es/utils/constants';
@@ -938,15 +939,15 @@ export default class Infrastructure extends ComponentBase {
   checkSession = (callback) => {
     recordExecute('checkSession');
 
-    const ENV = getEnv();
+    const env = this.getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore checkSession, only execute callback`;
+    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore checkSession, only execute callback`;
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
+    switch (env) {
+      case envCollection.WEAPP:
         break;
 
-      case ENV_TYPE.ALIPAY:
+      case envCollection.ALIPAY:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -955,7 +956,7 @@ export default class Infrastructure extends ComponentBase {
 
         return;
 
-      case ENV_TYPE.SWAN:
+      case envCollection.SWAN:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -964,7 +965,7 @@ export default class Infrastructure extends ComponentBase {
 
         return;
 
-      case ENV_TYPE.WEB:
+      case envCollection.WEB:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -1244,12 +1245,12 @@ export default class Infrastructure extends ComponentBase {
 
       this.privateCache.verifySession = false;
     } else {
-      const ENV = getEnv();
+      const env = this.getEnv();
 
-      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifySession return false`;
+      const noAdaptationMessage = `framework with env [${env}] has no adaptation, so verifySession return false`;
 
-      switch (ENV) {
-        case ENV_TYPE.WEAPP: {
+      switch (env) {
+        case envCollection.WEAPP: {
           if (this.needSignIn) {
             recordDebug(
               `because needSignIn is true, so verifySession return true`,
@@ -1263,7 +1264,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.ALIPAY: {
+        case envCollection.ALIPAY: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
@@ -1271,7 +1272,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.SWAN: {
+        case envCollection.SWAN: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
@@ -1279,7 +1280,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.WEB: {
+        case envCollection.WEB: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
@@ -1316,12 +1317,12 @@ export default class Infrastructure extends ComponentBase {
 
       this.privateCache.verifyTicket = false;
     } else {
-      const ENV = getEnv();
+      const env = this.getEnv();
 
-      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicket return false`;
+      const noAdaptationMessage = `framework with env [${env}] has no adaptation, so verifyTicket return false`;
 
-      switch (ENV) {
-        case ENV_TYPE.WEAPP: {
+      switch (env) {
+        case envCollection.WEAPP: {
           if (this.needSignIn) {
             recordDebug(
               `because needSignIn is true, so verifyTicket return true`,
@@ -1335,7 +1336,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.ALIPAY: {
+        case envCollection.ALIPAY: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
@@ -1343,7 +1344,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.SWAN: {
+        case envCollection.SWAN: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
@@ -1351,7 +1352,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.WEB: {
+        case envCollection.WEB: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
@@ -1388,12 +1389,12 @@ export default class Infrastructure extends ComponentBase {
 
       this.privateCache.verifyTicketValidity = false;
     } else {
-      const ENV = getEnv();
+      const env = this.getEnv();
 
-      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so verifyTicketValidity return false`;
+      const noAdaptationMessage = `framework with env [${env}] has no adaptation, so verifyTicketValidity return false`;
 
-      switch (ENV) {
-        case ENV_TYPE.WEAPP: {
+      switch (env) {
+        case envCollection.WEAPP: {
           if (this.needSignIn) {
             recordDebug(
               `because needSignIn is true, so verifyTicketValidity return true`,
@@ -1407,7 +1408,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.ALIPAY: {
+        case envCollection.ALIPAY: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
@@ -1415,7 +1416,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.SWAN: {
+        case envCollection.SWAN: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
@@ -1423,7 +1424,7 @@ export default class Infrastructure extends ComponentBase {
           break;
         }
 
-        case ENV_TYPE.WEB: {
+        case envCollection.WEB: {
           recordWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
@@ -1455,18 +1456,18 @@ export default class Infrastructure extends ComponentBase {
 
     recordExecute('getEnablePullDownRefresh');
 
-    const ENV = getEnv();
+    const env = this.getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, so enablePullDownRefresh return false`;
+    const noAdaptationMessage = `framework with env [${env}] has no adaptation, so enablePullDownRefresh return false`;
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP: {
+    switch (env) {
+      case envCollection.WEAPP: {
         this.privateCache.enablePullDownRefresh = this.enablePullDownRefresh;
 
         break;
       }
 
-      case ENV_TYPE.ALIPAY: {
+      case envCollection.ALIPAY: {
         recordWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
@@ -1474,7 +1475,7 @@ export default class Infrastructure extends ComponentBase {
         break;
       }
 
-      case ENV_TYPE.SWAN: {
+      case envCollection.SWAN: {
         recordWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
@@ -1482,7 +1483,7 @@ export default class Infrastructure extends ComponentBase {
         break;
       }
 
-      case ENV_TYPE.WEB: {
+      case envCollection.WEB: {
         recordWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
@@ -1841,25 +1842,25 @@ export default class Infrastructure extends ComponentBase {
       return null;
     }
 
-    const ENV = getEnv();
+    const env = this.getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore execute buildCapsulePromptWrapper`;
+    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore execute buildCapsulePromptWrapper`;
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
+    switch (env) {
+      case envCollection.WEAPP:
         break;
 
-      case ENV_TYPE.ALIPAY:
+      case envCollection.ALIPAY:
         recordWarn(noAdaptationMessage);
 
         return null;
 
-      case ENV_TYPE.SWAN:
+      case envCollection.SWAN:
         recordWarn(noAdaptationMessage);
 
         return null;
 
-      case ENV_TYPE.WEB:
+      case envCollection.WEB:
         recordWarn(noAdaptationMessage);
 
         return null;

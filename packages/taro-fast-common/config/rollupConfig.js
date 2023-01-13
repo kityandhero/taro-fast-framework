@@ -8,6 +8,7 @@ const inputFile = {
     'utils/typeConvert': 'src/utils/typeConvert.js',
     'utils/core': 'src/utils/core.js',
     'utils/base': 'src/utils/base.js',
+    'utils/env': 'src/utils/env.js',
     'utils/log': 'src/utils/log.js',
     'utils/tips': 'src/utils/tips.js',
     'utils/tools': 'src/utils/tools.js',

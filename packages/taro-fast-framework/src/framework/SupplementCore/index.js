@@ -1,7 +1,8 @@
-import Taro, { ENV_TYPE, getEnv } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 import { getCache, setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import {
+  envCollection,
   locateResult,
   locationModeCollection,
 } from 'taro-fast-common/es/utils/constants';
@@ -136,29 +137,29 @@ class SupplementCore extends Common {
     const that = this;
 
     if (that.needReLocationWhenRepeatedShow) {
-      const ENV = getEnv();
+      const env = this.getEnv();
 
-      const noAdaptationMessage = `framework with env [${ENV}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`;
+      const noAdaptationMessage = `framework with env [${env}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`;
 
-      switch (ENV) {
-        case ENV_TYPE.WEAPP:
+      switch (env) {
+        case envCollection.WEAPP:
           break;
 
-        case ENV_TYPE.ALIPAY:
+        case envCollection.ALIPAY:
           recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
-        case ENV_TYPE.SWAN:
+        case envCollection.SWAN:
           recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
-        case ENV_TYPE.WEB:
+        case envCollection.WEB:
           recordWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
@@ -212,15 +213,15 @@ class SupplementCore extends Common {
   }) => {
     recordExecute('obtainLocation');
 
-    const ENV = getEnv();
+    const env = this.getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore obtainLocation, only execute failCallback`;
+    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore obtainLocation, only execute failCallback`;
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
+    switch (env) {
+      case envCollection.WEAPP:
         break;
 
-      case ENV_TYPE.ALIPAY:
+      case envCollection.ALIPAY:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -229,7 +230,7 @@ class SupplementCore extends Common {
 
         return;
 
-      case ENV_TYPE.SWAN:
+      case envCollection.SWAN:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -238,7 +239,7 @@ class SupplementCore extends Common {
 
         return;
 
-      case ENV_TYPE.WEB:
+      case envCollection.WEB:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -562,15 +563,15 @@ class SupplementCore extends Common {
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
     recordExecute('checkTicketValidity');
 
-    const ENV = getEnv();
+    const env = this.getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore checkTicketValidity, only execute callback and signInSilentFailCallback`;
+    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore checkTicketValidity, only execute callback and signInSilentFailCallback`;
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
+    switch (env) {
+      case envCollection.WEAPP:
         break;
 
-      case ENV_TYPE.ALIPAY:
+      case envCollection.ALIPAY:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -583,7 +584,7 @@ class SupplementCore extends Common {
 
         return;
 
-      case ENV_TYPE.SWAN:
+      case envCollection.SWAN:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -596,7 +597,7 @@ class SupplementCore extends Common {
 
         return;
 
-      case ENV_TYPE.WEB:
+      case envCollection.WEB:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -810,6 +811,7 @@ class SupplementCore extends Common {
 
             if (signInResult === verifySignInResult.success) {
               if (isFunction(callback)) {
+                // eslint-disable-next-line promise/no-callback-in-promise
                 callback();
               }
             }
@@ -866,6 +868,7 @@ class SupplementCore extends Common {
 
             that
               .dispatchRefreshSession({ code })
+              // eslint-disable-next-line promise/no-nesting
               .then((remoteData) => {
                 const { dataSuccess, data: metaData } = remoteData;
 
@@ -889,6 +892,7 @@ class SupplementCore extends Common {
 
                 return remoteData;
               })
+              // eslint-disable-next-line promise/no-nesting
               .catch((error) => {
                 recordError({ error });
 
@@ -930,6 +934,7 @@ class SupplementCore extends Common {
           setSessionRefreshing(false);
 
           if (isFunction(callback)) {
+            // eslint-disable-next-line promise/no-callback-in-promise
             callback();
           }
         });
@@ -1389,15 +1394,15 @@ class SupplementCore extends Common {
   }) {
     recordExecute('signInSilentCore');
 
-    const ENV = getEnv();
+    const env = this.getEnv();
 
-    const noAdaptationMessage = `framework with env [${ENV}] has no adaptation, ignore obtainLocation, only execute failCallback`;
+    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore obtainLocation, only execute failCallback`;
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP:
+    switch (env) {
+      case envCollection.WEAPP:
         break;
 
-      case ENV_TYPE.ALIPAY:
+      case envCollection.ALIPAY:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1410,7 +1415,7 @@ class SupplementCore extends Common {
 
         return;
 
-      case ENV_TYPE.SWAN:
+      case envCollection.SWAN:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1423,7 +1428,7 @@ class SupplementCore extends Common {
 
         return;
 
-      case ENV_TYPE.WEB:
+      case envCollection.WEB:
         recordWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -2152,6 +2157,7 @@ class SupplementCore extends Common {
             }
 
             if (isFunction(callback)) {
+              // eslint-disable-next-line promise/no-callback-in-promise
               callback(metaData);
             }
           }
@@ -2779,6 +2785,7 @@ class SupplementCore extends Common {
             setCurrentMetaData(v);
 
             if (isFunction(callback)) {
+              // eslint-disable-next-line promise/no-callback-in-promise
               callback(v);
             }
 
@@ -2865,6 +2872,7 @@ class SupplementCore extends Common {
             setAdministrativeDivisionFullData(v);
 
             if (isFunction(callback)) {
+              // eslint-disable-next-line promise/no-callback-in-promise
               callback(v);
             }
 

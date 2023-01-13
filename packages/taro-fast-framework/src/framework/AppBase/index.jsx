@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import {
   canIUse,
+  checkEnv,
   clearLocalStorage,
   getDefaultTaroGlobalData,
   getUpdateManager,
@@ -57,6 +58,8 @@ class AppBase extends Component {
   }
 
   onLaunch(options) {
+    checkEnv();
+
     setLaunchOption(options);
 
     // 仅限小程序显示启动信息, 常规react生命周期中暂不支持

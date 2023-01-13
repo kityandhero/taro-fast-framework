@@ -1,8 +1,10 @@
 import { Component } from 'react';
-import Taro, { ENV_TYPE, getEnv } from '@tarojs/taro';
+import { envCollection } from 'src/utils/constants';
+import Taro from '@tarojs/taro';
 
 import { getModelNameList } from '../../utils/storageAssist';
 import {
+  getEnv,
   getGuid,
   inCollection,
   recordConfig,
@@ -19,10 +21,6 @@ import {
 } from '../../utils/tools';
 import { isEqual, isFunction, isNumber, isObject } from '../../utils/typeCheck';
 import { toNumber } from '../../utils/typeConvert';
-
-const ENV = getEnv();
-
-recordDebug({ currentEnv: ENV });
 
 function filterModel(props) {
   const result = { ...props };
@@ -57,6 +55,8 @@ const defaultProps = {
 };
 
 class ComponentBase extends Component {
+  componentName = '';
+
   loadRemoteRequestAfterMount = false;
 
   firstShowHasTriggered = false;
@@ -98,6 +98,8 @@ class ComponentBase extends Component {
   }
 
   componentDidMount() {
+    this.componentName = this.constructor.name;
+
     this.doDidMountTask();
   }
 
@@ -325,7 +327,7 @@ class ComponentBase extends Component {
   doWorkWhenComponentHide = () => {};
 
   getEnv = () => {
-    return ENV;
+    return getEnv();
   };
 
   handleEnv = async (
@@ -349,8 +351,8 @@ class ComponentBase extends Component {
 
     let data = {};
 
-    switch (ENV) {
-      case ENV_TYPE.WEAPP: {
+    switch (getEnv()) {
+      case envCollection.WEAPP: {
         if (isFunction(handleWeapp)) {
           data = (await handleWeapp()) || {};
         }
@@ -358,7 +360,7 @@ class ComponentBase extends Component {
         break;
       }
 
-      case ENV_TYPE.ALIPAY: {
+      case envCollection.ALIPAY: {
         if (isFunction(handleAlipay)) {
           data = (await handleAlipay()) || {};
         }
@@ -366,7 +368,7 @@ class ComponentBase extends Component {
         break;
       }
 
-      case ENV_TYPE.SWAN: {
+      case envCollection.SWAN: {
         if (isFunction(handleSWAN)) {
           data = (await handleSWAN()) || {};
         }
@@ -374,7 +376,7 @@ class ComponentBase extends Component {
         break;
       }
 
-      case ENV_TYPE.WEB: {
+      case envCollection.WEB: {
         if (isFunction(handleWEB)) {
           data = (await handleWEB()) || {};
         }
