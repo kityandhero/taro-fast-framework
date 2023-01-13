@@ -124,11 +124,11 @@ importers:
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
       taro-fast-common: ^1.16.0
-      taro-fast-component: ^2.14.0
-      taro-fast-component-extra: ^2.11.0
-      taro-fast-component-prism: ^2.12.0
+      taro-fast-component: ^2.14.1
+      taro-fast-component-extra: ^2.11.1
+      taro-fast-component-prism: ^2.12.1
       taro-fast-dva: ^2.11.0
-      taro-fast-framework: ^1.14.0
+      taro-fast-framework: ^1.14.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -699,7 +699,7 @@ importers:
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
       taro-fast-common: ^1.16.0
-      taro-fast-component: ^2.14.0
+      taro-fast-component: ^2.14.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -881,7 +881,7 @@ importers:
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
       taro-fast-common: ^1.16.0
-      taro-fast-component: ^2.14.0
+      taro-fast-component: ^2.14.1
       webpack: ^5.74.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -1143,7 +1143,7 @@ importers:
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
       taro-fast-common: ^1.16.0
-      taro-fast-component: ^2.14.0
+      taro-fast-component: ^2.14.1
       taro-fast-dva: ^2.11.0
       webpack: ^5.74.0
     dependencies:
