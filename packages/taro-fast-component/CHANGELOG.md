@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.13.1...taro-fast-component@2.13.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* **taro-fast-component:** adjust headerNavigation ([041f3de](https://github.com/kityandhero/taro-fast-framework/commit/041f3deb6bc849f575acff4de62ed7c9c4f9f656))
+
+
+
 ## [2.13.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component@2.13.0...taro-fast-component@2.13.1) (2023-01-13)
 
 
