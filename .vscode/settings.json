@@ -90,9 +90,12 @@
     "pify",
     "pmmmwh",
     "pnpm",
+    "postclean",
+    "postpublish",
     "powerpaste",
     "prebundle",
     "precommit",
+    "precz",
     "preload",
     "prettierrc",
     "prismjs",
@@ -153,5 +156,9 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  }
 }
