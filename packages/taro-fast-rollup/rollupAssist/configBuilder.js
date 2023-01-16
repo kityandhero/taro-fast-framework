@@ -41,6 +41,8 @@ const externalCollection = [
   '@tarojs/plugin-framework-react',
   '@tarojs/plugin-framework-vue2',
   '@tarojs/plugin-framework-vue3',
+  'easy-soft-utility',
+  'easy-soft-dva',
   'lodash',
   'lodash/filter',
   'lodash/sortBy',
@@ -138,6 +140,7 @@ export function buildConfig({
       url(),
       svgr(),
       resolve({
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
         preferBuiltins: false,
       }),
       commonjs({

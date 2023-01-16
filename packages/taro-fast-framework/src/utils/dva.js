@@ -1,4 +1,6 @@
 // import createLoading from 'dva-loading';
+import { create } from 'easy-soft-dva/es/dva-core';
+import { createLoading } from 'easy-soft-dva/es/dva-loading';
 import {
   connect as connectRedux,
   Provider as ProviderRedux,
@@ -7,8 +9,6 @@ import {
 import { setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import { recordDebug, recordError } from 'taro-fast-common/es/utils/tools';
 import { isString, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
-import { create } from 'taro-fast-dva/es/dva-core';
-import { createLoading } from 'taro-fast-dva/es/dva-loading';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 

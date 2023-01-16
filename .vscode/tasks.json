@@ -3,13 +3,6 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "dev:dva",
-      "problemMatcher": [],
-      "label": "dev:dva",
-      "detail": "cd packages/taro-fast-dva && npm run dev"
-    },
-    {
-      "type": "npm",
       "script": "start:weapp:simple",
       "problemMatcher": [],
       "label": "start:weapp:simple",
@@ -17,35 +10,35 @@
     },
     {
       "type": "npm",
-      "script": "dev:common",
+      "script": "dev:core-common",
       "problemMatcher": [],
       "label": "dev:common",
       "detail": "cd packages/taro-fast-common && npm run dev"
     },
     {
       "type": "npm",
-      "script": "dev:component",
+      "script": "dev:core-component",
       "problemMatcher": [],
       "label": "dev:component",
       "detail": "cd packages/taro-fast-component && npm run dev"
     },
     {
       "type": "npm",
-      "script": "dev:component-extra",
+      "script": "dev:core-component-extra",
       "problemMatcher": [],
       "label": "dev:component-extra",
       "detail": "cd packages/taro-fast-component-extra && npm run dev"
     },
     {
       "type": "npm",
-      "script": "dev:framework",
+      "script": "dev:core-framework",
       "problemMatcher": [],
       "label": "dev:framework",
       "detail": "cd packages/taro-fast-framework && npm run dev"
     },
     {
       "type": "npm",
-      "script": "start:h5:simple",
+      "script": "start:simple:h5",
       "problemMatcher": [],
       "label": "start:h5:simple",
       "detail": "cd packages/simple-taro-fast-framework && npm run start:h5"
@@ -55,7 +48,7 @@
       "script": "dev",
       "path": "packages/taro-fast-component-prism",
       "problemMatcher": [],
-      "label": "dev:component-prism",
+      "label": "dev:core-component-prism",
       "detail": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch"
     }
   ]

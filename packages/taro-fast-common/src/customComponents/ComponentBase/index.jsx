@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { envCollection } from 'src/utils/constants';
 import Taro from '@tarojs/taro';
 
+import { envCollection } from '../../utils/constants';
 import { getModelNameList } from '../../utils/storageAssist';
 import {
   getEnv,

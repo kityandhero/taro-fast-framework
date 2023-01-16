@@ -90,6 +90,7 @@
     "pify",
     "pmmmwh",
     "pnpm",
+    "postbuild",
     "postclean",
     "postpublish",
     "powerpaste",
