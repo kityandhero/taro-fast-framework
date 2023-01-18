@@ -1,4 +1,4 @@
-import { mergeProps } from 'taro-fast-common/es/utils/tools';
+import { mergeProps } from 'easy-soft-utility';
 
 import { defaultProps } from './config';
 import Icon from './icon';

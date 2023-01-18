@@ -1,16 +1,15 @@
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isBoolean,
   isFunction,
   isObject,
   isString,
   isUndefined,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
+  toString,
+} from 'easy-soft-utility';
+
 import { Divider } from 'taro-fast-component/es/customComponents';
 import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
 import {
@@ -54,7 +53,7 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
       } else if (isFunction(value)) {
         if (
           isArray(ignorePropertyList) &&
-          inCollection(ignorePropertyList, keyAdjust)
+          checkInCollection(ignorePropertyList, keyAdjust)
         ) {
           result = result + `${keyAdjust}={() => {...}} `;
 
@@ -69,14 +68,14 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
             .replace(/function[\w\W]*?\(/, '(')
             .replace(/\)[\s]*{/, ') => {')}} `;
       } else if (isObject(value) || isArray(value)) {
-        if (inCollection(ignorePropertyList, keyAdjust)) {
+        if (checkInCollection(ignorePropertyList, keyAdjust)) {
           return (result = result + `${keyAdjust}={...} `);
         }
 
         let s = JSON.stringify(
           value,
           (k, v) => {
-            if (inCollection(ignorePropertyList, k)) {
+            if (checkInCollection(ignorePropertyList, k)) {
               return '{...}';
             }
 
@@ -133,7 +132,7 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
       } else if (isFunction(value)) {
         if (
           isArray(ignorePropertyList) &&
-          inCollection(ignorePropertyList, keyAdjust)
+          checkInCollection(ignorePropertyList, keyAdjust)
         ) {
           result = result + `${keyAdjust} = "() => {...}"; `;
 
@@ -148,14 +147,14 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
             .replace(/function[\w\W]*?\(/, '(')
             .replace(/\)[\s]*{/, ') => {')}; `;
       } else if (isObject(value) || isArray(value)) {
-        if (inCollection(ignorePropertyList, keyAdjust)) {
+        if (checkInCollection(ignorePropertyList, keyAdjust)) {
           return (result = result + `${keyAdjust}="..."; `);
         }
 
         let s = JSON.stringify(
           value,
           (k, v) => {
-            if (inCollection(ignorePropertyList, k)) {
+            if (checkInCollection(ignorePropertyList, k)) {
               return '"...";';
             }
 
@@ -197,7 +196,7 @@ export function buildComponentPrismCode({
   ignorePropertyList = [],
   showDivider = true,
 }) {
-  if (stringIsNullOrWhiteSpace(componentName)) {
+  if (checkStringIsNullOrWhiteSpace(componentName)) {
     return null;
   }
 
@@ -245,7 +244,7 @@ export function buildPagePrismCode({
     });
   }
 
-  let code = `import { connect } from 'taro-fast-framework/es/utils/dva';
+  let code = `import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';

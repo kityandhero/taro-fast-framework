@@ -1,8 +1,74 @@
-import schedulingControl from './schedulingControl';
+import {
+  buildPromptModuleInfo,
+  isFunction,
+  logConfig,
+  logExecute,
+} from 'easy-soft-utility';
 
-export function embedModelCollection(...models) {
-  return [...models, schedulingControl];
+import { modulePackageName } from '../utils/definition';
+import { setModelNameList } from '../utils/globalStorageAssist';
+
+import { buildSchedulingControl } from './schedulingControl';
+
+export const modelContainer = {
+  builders: [],
+  buildComplete: false,
+  models: [],
+};
+
+/**
+ * Module Name.
+ */
+const moduleName = 'models';
+
+export function getBuilderCount() {
+  return modelContainer.builders.length;
 }
 
-// 这里记得export的是数组, 不是对象
-export default [schedulingControl];
+export function appendBuilder(builder) {
+  if (!isFunction(builder)) {
+    throw new Error(
+      buildPromptModuleInfo(
+        modulePackageName,
+        `appendBuilder -> builder must be none parameter function and return an object, current is ${typeof builder}`,
+        moduleName,
+      ),
+    );
+  }
+
+  modelContainer.builders.push(builder);
+}
+
+export function buildModelCollection() {
+  logExecute('buildModelCollection');
+
+  appendBuilder(buildSchedulingControl);
+
+  const list = modelContainer.builders.map((o) => {
+    const model = o();
+
+    return model;
+  });
+
+  modelContainer.buildComplete = true;
+
+  modelContainer.models = list;
+}
+
+export function getModelCollection() {
+  if (!modelContainer.buildComplete) {
+    buildModelCollection();
+
+    const modelNameList = modelContainer.models.map((item) => {
+      const { namespace: ns } = item;
+
+      return ns;
+    });
+
+    logConfig(`all models -> ${modelNameList}`);
+
+    setModelNameList(modelNameList);
+  }
+
+  return modelContainer.models;
+}

@@ -1,12 +1,13 @@
 import {
-  recordError,
-  recordTrace,
-  redirectTo,
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  logError,
+  logTrace,
   showRuntimeError,
   showWarnMessage,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+} from 'easy-soft-utility';
+
+import { redirectTo } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import { getToken } from './globalStorageAssist';
@@ -130,7 +131,7 @@ export async function apiVirtualSuccessAccess({
       return data;
     })
     .catch((res) => {
-      recordError(res);
+      logError(res);
     });
 
   const { code } = result;
@@ -138,7 +139,7 @@ export async function apiVirtualSuccessAccess({
   if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
     const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-    if (stringIsNullOrWhiteSpace(signInPath)) {
+    if (checkStringIsNullOrWhiteSpace(signInPath)) {
       throw new Error('缺少登录页面路径配置');
     }
 
@@ -168,7 +169,7 @@ export async function apiVirtualFailAccess({
       return data;
     })
     .catch((res) => {
-      recordError(res);
+      logError(res);
     });
 
   const { code, message: messageText } = result;
@@ -176,7 +177,7 @@ export async function apiVirtualFailAccess({
   if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
     const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-    if (stringIsNullOrWhiteSpace(signInPath)) {
+    if (checkStringIsNullOrWhiteSpace(signInPath)) {
       throw new Error('缺少登录页面路径配置');
     }
 
@@ -210,14 +211,14 @@ export async function apiVirtualAccess({
     }
   })
     .then((data) => {
-      recordTrace(`api request is virtual: simulation completed.`);
+      logTrace(`api request is virtual: simulation completed.`);
 
       result = data;
 
       return data;
     })
     .catch((res) => {
-      recordError(res);
+      logError(res);
     });
 
   const { code, message: messageText } = result;

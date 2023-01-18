@@ -1,8 +1,9 @@
 import classNames from 'classnames';
+import { connect } from 'easy-soft-dva';
+import { datetimeFormat, formatDatetime } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
-import { formatDatetime, transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   ColorText,
   Ellipsis,
@@ -12,7 +13,6 @@ import {
   Space,
   Tabs,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import BasePageWrapper from '../../BasePageWrapper';

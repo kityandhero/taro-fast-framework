@@ -1,12 +1,7 @@
+import { checkInCollection, getGuid, logError } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  getGuid,
-  getRect,
-  inCollection,
-  recordError,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -93,7 +88,7 @@ class ScrollBox extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
 
       getRect(`#${that.indicatorContainerId}`)
@@ -108,7 +103,7 @@ class ScrollBox extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 200);
   };
@@ -116,7 +111,7 @@ class ScrollBox extends BaseComponent {
   getDirection = () => {
     const { direction: directionSource } = this.props;
 
-    const direction = inCollection(directionCollection, directionSource)
+    const direction = checkInCollection(directionCollection, directionSource)
       ? directionSource
       : 'horizontal';
 

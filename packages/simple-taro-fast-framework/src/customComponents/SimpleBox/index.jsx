@@ -1,20 +1,18 @@
-import { Component } from 'react';
-import { View } from '@tarojs/components';
-
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isBoolean,
   isFunction,
   isObject,
   isString,
   isUndefined,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
+  toString,
+} from 'easy-soft-utility';
+import { Component } from 'react';
+import { View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   CenterBox,
@@ -90,7 +88,7 @@ class SimpleBox extends Component {
             ellipsis: true,
           };
         } else if (isObject(value) || isArray(value)) {
-          if (inCollection(ignorePropertyList, key)) {
+          if (checkInCollection(ignorePropertyList, key)) {
             return {
               text: `${key}: data/component`,
               ellipsis: true,
@@ -137,7 +135,7 @@ class SimpleBox extends Component {
     let listData = [];
 
     if (isString(footer)) {
-      if (stringIsNullOrWhiteSpace(footer || null)) {
+      if (checkStringIsNullOrWhiteSpace(footer || null)) {
         return null;
       }
 
@@ -241,7 +239,7 @@ class SimpleBox extends Component {
       <Space direction="vertical" size={30} fillWidth>
         {exhibitionArea}
 
-        {stringIsNullOrWhiteSpace(descriptionArea) ? null : !isString(
+        {checkStringIsNullOrWhiteSpace(descriptionArea) ? null : !isString(
             descriptionArea,
           ) ? (
           descriptionArea

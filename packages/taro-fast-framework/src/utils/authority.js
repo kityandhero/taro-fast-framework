@@ -1,23 +1,19 @@
 import {
+  checkStringIsNullOrWhiteSpace,
   flushAllCache,
   getCache,
-  hasCache,
-  setCache,
-} from 'taro-fast-common/es/utils/cacheAssist';
-import {
   getStringFromLocalStorage,
   getValueByKey,
-  recordError,
-  recordObject,
-  saveJsonToLocalStorage,
-  showErrorMessage,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  hasCache,
   isArray,
   isObject,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
+  logError,
+  logObject,
+  saveJsonToLocalStorage,
+  setCache,
+  showErrorMessage,
+} from 'easy-soft-utility';
 
 import {
   getAccessWayCollectionCache,
@@ -111,7 +107,7 @@ export function checkIsSuper() {
 
   const superPermission = getSuperPermission();
 
-  if (!stringIsNullOrWhiteSpace(superPermission)) {
+  if (!checkStringIsNullOrWhiteSpace(superPermission)) {
     const list = getAllAuthority();
     const isSuper = (list || []).find((o) => o === superPermission) || '';
 
@@ -168,7 +164,7 @@ function checkHasAuthorities(authCollection) {
     message: text,
   });
 
-  recordError({ authCollection });
+  logError({ authCollection });
 
   return result;
 }
@@ -179,7 +175,7 @@ function checkHasAuthorityCore(auth) {
   }
 
   if (isObject(auth)) {
-    recordObject({
+    logObject({
       auth,
       attachedTargetName:
         (this || null) != null
@@ -209,7 +205,7 @@ function checkHasAuthorityCore(auth) {
   const v = (list || []).find((o) => o === auth);
 
   if ((v ?? null) == null) {
-    recordObject({
+    logObject({
       checkAuthority: auth,
       listAuthority: list,
       accessWayCollection,
@@ -228,7 +224,7 @@ function checkHasAuthorityCore(auth) {
 
 export function checkHasAuthority(auth) {
   if (isObject(auth)) {
-    recordObject({
+    logObject({
       auth,
       attachedTargetName:
         (this || null) != null
@@ -247,7 +243,7 @@ export function checkHasAuthority(auth) {
     return checkHasAuthorityCore(auth);
   }
 
-  recordObject({
+  logObject({
     auth,
   });
 

@@ -1,13 +1,15 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  isString,
+} from 'easy-soft-utility';
 import { ScrollView, View } from '@tarojs/components';
 
 import {
   handleInlayColor,
-  inCollection,
-  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isString } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import Ellipsis from '../Ellipsis';
@@ -155,7 +157,7 @@ class Card extends BaseComponent {
       onScrollToLower,
     } = this.props;
 
-    const mode = inCollection(modeCollection, modeSource)
+    const mode = checkInCollection(modeCollection, modeSource)
       ? modeSource
       : 'through';
 
@@ -167,7 +169,7 @@ class Card extends BaseComponent {
         style={{
           ...style,
           ...(!border ? { border: '0' } : {}),
-          ...(shadow && !stringIsNullOrWhiteSpace(shadowColor)
+          ...(shadow && !checkStringIsNullOrWhiteSpace(shadowColor)
             ? {
                 boxShadow: `var(--tfc-color-shadow-size) var(--tfc-color-${handleInlayColor(
                   shadowColor,

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-commonjs
-const path = require('path');
+// const path = require('path');
 
 const config = {
   projectName: 'simple-taro-fast-framework',
@@ -13,7 +13,9 @@ const config = {
   sourceRoot: 'src',
   outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [['@tarojs/plugin-framework-react', { reactMode: 'concurrent' }]],
-  defineConstants: {},
+  defineConstants: {
+    SHOW_LOG_IN_CONSOLE: process.env.NODE_ENV === 'develop',
+  },
   copy: {
     patterns: [
       {
@@ -24,9 +26,9 @@ const config = {
     options: {},
   },
   framework: 'react',
-  alias: {
-    '@': path.resolve(__dirname, '..', 'src'),
-  },
+  // alias: {
+  //   '@': path.resolve(__dirname, '..', 'src'),
+  // },
   compiler: {
     type: 'webpack5',
     prebundle: {
@@ -81,6 +83,25 @@ const config = {
       host: 'localhost',
       port: 8903,
     },
+    // webpackChain(chain, webpack) {
+    //   console.log(webpack);
+
+    //   chain.merge({
+    //     module: {
+    //       rule: {
+    //         myloader: {
+    //           test: /\.md$/,
+    //           use: [
+    //             {
+    //               loader: 'raw-loader',
+    //               options: {},
+    //             },
+    //           ],
+    //         },
+    //       },
+    //     },
+    //   });
+    // },
   },
 };
 
@@ -88,5 +109,6 @@ export default function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'));
   }
+
   return merge({}, config, require('./prod'));
 }

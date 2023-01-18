@@ -1,11 +1,11 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -26,7 +26,7 @@ class Loading extends BaseComponent {
   getType = () => {
     const { type } = this.props;
 
-    return inCollection(typeCollection, type) ? type : 'ring';
+    return checkInCollection(typeCollection, type) ? type : 'ring';
   };
 
   getStyle = () => {
@@ -45,7 +45,7 @@ class Loading extends BaseComponent {
       };
     }
 
-    if (!stringIsNullOrWhiteSpace(color)) {
+    if (!checkStringIsNullOrWhiteSpace(color)) {
       colorStyle = {
         '--color': color,
       };

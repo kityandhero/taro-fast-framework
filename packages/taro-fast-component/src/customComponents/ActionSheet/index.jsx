@@ -1,11 +1,6 @@
 import classNames from 'classnames';
+import { isArray, isFunction, isString } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import {
-  isArray,
-  isFunction,
-  isString,
-} from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

@@ -1,7 +1,7 @@
+import { isObject } from 'easy-soft-utility';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
-import { isObject } from 'taro-fast-common/es/utils/typeCheck';
 
 const getClassNames = (name) => ({
   enter: `tfc-${name}-enter tfc-${name}-enter-active enter-class enter-active-class`,

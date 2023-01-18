@@ -1,7 +1,6 @@
 import classNames from 'classnames';
+import { isArray } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';

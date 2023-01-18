@@ -1,52 +1,55 @@
 import {
+  getTacitlyState,
   reducerCollection,
   reducerDefaultParams,
   reducerNameCollection,
-  tacitlyState,
-} from 'taro-fast-framework/es/utils/dva';
+} from 'easy-soft-dva';
+
 import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { exchangePhoneData, refreshSessionData } from '../services/session';
 
-export default {
-  namespace: 'session',
+export function buildSession() {
+  return {
+    namespace: 'session',
 
-  state: {
-    ...tacitlyState,
-  },
-
-  effects: {
-    *refreshSession({ payload, alias }, { call, put }) {
-      const response = yield call(refreshSessionData, payload);
-
-      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
-
-      yield put({
-        type: reducerNameCollection.reducerData,
-        payload: dataAdjust,
-        alias,
-        ...reducerDefaultParams,
-      });
-
-      return dataAdjust;
+    state: {
+      ...getTacitlyState(),
     },
-    *exchangePhone({ payload, alias }, { call, put }) {
-      const response = yield call(exchangePhoneData, payload);
 
-      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+    effects: {
+      *refreshSession({ payload, alias }, { call, put }) {
+        const response = yield call(refreshSessionData, payload);
 
-      yield put({
-        type: reducerNameCollection.reducerData,
-        payload: dataAdjust,
-        alias,
-        ...reducerDefaultParams,
-      });
+        const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
-      return dataAdjust;
+        yield put({
+          type: reducerNameCollection.reducerData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParams,
+        });
+
+        return dataAdjust;
+      },
+      *exchangePhone({ payload, alias }, { call, put }) {
+        const response = yield call(exchangePhoneData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
+        yield put({
+          type: reducerNameCollection.reducerData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParams,
+        });
+
+        return dataAdjust;
+      },
     },
-  },
 
-  reducers: {
-    ...reducerCollection,
-  },
-};
+    reducers: {
+      ...reducerCollection,
+    },
+  };
+}

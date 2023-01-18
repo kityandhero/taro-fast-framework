@@ -1,11 +1,11 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -34,7 +34,9 @@ class Badge extends BaseComponent {
   getPosition = () => {
     const { position } = this.props;
 
-    return inCollection(positionCollection, position) ? position : 'topRight';
+    return checkInCollection(positionCollection, position)
+      ? position
+      : 'topRight';
   };
 
   buildWrapStyle = () => {
@@ -42,7 +44,7 @@ class Badge extends BaseComponent {
 
     return {
       ...wrapStyle,
-      ...(!stringIsNullOrWhiteSpace(wrapHeight)
+      ...(!checkStringIsNullOrWhiteSpace(wrapHeight)
         ? {
             '--wrap-height': transformSize(wrapHeight),
           }

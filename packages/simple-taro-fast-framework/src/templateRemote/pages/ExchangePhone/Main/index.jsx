@@ -1,16 +1,16 @@
+import { connect } from 'easy-soft-dva';
+import {
+  checkStringIsNullOrWhiteSpace,
+  showErrorMessage,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  showErrorMessage,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   CenterBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
@@ -63,8 +63,8 @@ export default class Index extends BasePageWrapper {
     const that = this;
 
     if (
-      stringIsNullOrWhiteSpace(encryptedData) ||
-      stringIsNullOrWhiteSpace(iv)
+      checkStringIsNullOrWhiteSpace(encryptedData) ||
+      checkStringIsNullOrWhiteSpace(iv)
     ) {
       showErrorMessage({
         message: errMsg,

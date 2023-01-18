@@ -1,10 +1,9 @@
+import { connect } from 'easy-soft-dva';
+import { buildLinearGradient } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import { colorPure, colorShadow } from 'taro-fast-common/es/utils/constants';
-import {
-  buildLinearGradient,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   FlexBox,
@@ -12,7 +11,6 @@ import {
   ScaleBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';

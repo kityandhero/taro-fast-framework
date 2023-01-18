@@ -1,16 +1,14 @@
-import { ScrollView, View } from '@tarojs/components';
-
 import {
-  inCollection,
-  showErrorMessage,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
   isArray,
   isFunction,
   isNumber,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  showErrorMessage,
+  toNumber,
+} from 'easy-soft-utility';
+import { ScrollView, View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../../BaseComponent';
 
@@ -113,7 +111,7 @@ class ScrollBox extends BaseComponent {
   getDirection = () => {
     const { direction: directionSource } = this.props;
 
-    const direction = inCollection(directionCollection, directionSource)
+    const direction = checkInCollection(directionCollection, directionSource)
       ? directionSource
       : 'horizontal';
 

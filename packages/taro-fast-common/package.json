@@ -40,7 +40,7 @@
     "precommit": "lint-staged",
     "prettier": "npx prettier -c --write \"**/*\"",
     "publish:compression": "npm run build && yarn publish",
-    "tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json",
+    "tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
     "v:p": "npm version patch && yarn publish"
   },
   "dependencies": {
@@ -60,7 +60,7 @@
     "@tarojs/taro": "^3.5.11",
     "@tarojs/taro-h5": "^3.5.11",
     "dayjs": "^1.11.7",
-    "easy-soft-utility": "^2.2.3",
+    "easy-soft-utility": "^2.3.8",
     "lodash": "^4.17.21",
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",
@@ -94,7 +94,6 @@
     "@tarojs/webpack5-runner": "^3.5.11",
     "@types/lodash": "^4.14.191",
     "@types/object-hash": "^3.0.2",
-    "@types/qs": "^6.9.7",
     "@types/react": "^18.0.26",
     "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
@@ -125,7 +124,6 @@
     "prettier": "^2.8.3",
     "prettier-plugin-organize-imports": "^3",
     "prettier-plugin-packagejson": "^2",
-    "qs": "^6.11.0",
     "react-refresh": "^0.14.0",
     "rollup": "^3.10.0",
     "rollup-plugin-livereload": "^2.0.5",

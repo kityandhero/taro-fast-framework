@@ -1,29 +1,29 @@
-const { resolve } = require('path')
-const fs = require('fs-extra')
-const term = require('terminal-kit').terminal
-const shell = require('shelljs')
-const download = require('download')
-const agent = require('hpagent')
-const ping = require('ping')
+const { resolve } = require('path');
+const fs = require('fs-extra');
+const term = require('terminal-kit').terminal;
+const shell = require('shelljs');
+const download = require('download');
+const agent = require('hpagent');
+const ping = require('ping');
 
-const { HttpsProxyAgent } = agent
+const { HttpsProxyAgent } = agent;
 
 const packageUrlGithub =
-  'https://raw.githubusercontent.com/kityandhero/taro-fast-framework/master/packages/simple-taro-fast-framework/package.json'
+  'https://raw.githubusercontent.com/kityandhero/taro-fast-framework/master/packages/simple-taro-fast-framework/package.json';
 
 const packageUrlGitee =
-  'https://gitee.com/lzt/taro-fast-framework/raw/main/packages/simple-taro-fast-framework/package.json'
+  'https://gitee.com/lzt/taro-fast-framework/raw/main/packages/simple-taro-fast-framework/package.json';
 
 exports.run = async function (s, o) {
   const {
     _optionValues: { agent, file },
-  } = o
+  } = o;
 
-  let packageTempPath = ''
+  let packageTempPath = '';
 
-  showMessage(`prepare to update package.json: `)
+  showMessage(`prepare to update package.json: `);
 
-  showLine()
+  showLine();
 
   try {
     packageTempPath = await handleTempPackagePath({
@@ -31,15 +31,15 @@ exports.run = async function (s, o) {
       file,
       packageUrl: packageUrlGithub,
       repo: 'github',
-    })
+    });
   } catch (error) {
-    showLine()
+    showLine();
 
     showWarn(
       `use github repo failure! switch to gitee, gitee repo possible update delay.`,
-    )
+    );
 
-    showLine()
+    showLine();
 
     try {
       packageTempPath = await handleTempPackagePath({
@@ -47,42 +47,42 @@ exports.run = async function (s, o) {
         file,
         packageUrl: packageUrlGitee,
         repo: 'gitee',
-      })
+      });
     } catch (error) {
-      showLine()
+      showLine();
 
-      console.error(error)
+      console.error(error);
 
-      showLine()
+      showLine();
 
-      showWarn('download error, please check network')
+      showWarn('download error, please check network');
 
-      process.exit()
+      process.exit();
     }
   }
 
-  handlePackage(packageTempPath)
-}
+  handlePackage(packageTempPath);
+};
 
 async function handleTempPackagePath({ agent, file, packageUrl, repo }) {
-  let packageTempPath = ''
+  let packageTempPath = '';
 
   if (file) {
-    showMessage(`use local referential package.json`)
+    showMessage(`use local referential package.json`);
 
-    showMessage(`file path: ${file}`)
+    showMessage(`file path: ${file}`);
 
-    showLine()
+    showLine();
 
-    packageTempPath = resolve(file)
+    packageTempPath = resolve(file);
   } else {
-    showMessage(`try ${repo} repo`)
+    showMessage(`try ${repo} repo`);
 
     if (agent) {
-      showMessage(`agent: ${agent}`)
+      showMessage(`agent: ${agent}`);
     }
 
-    showMessage(`${repo} repo: ${packageUrl}`)
+    showMessage(`${repo} repo: ${packageUrl}`);
 
     await download(packageUrl, resolve(`./temp`), {
       ...(agent
@@ -99,68 +99,68 @@ async function handleTempPackagePath({ agent, file, packageUrl, repo }) {
             },
           }
         : {}),
-    })
+    });
 
-    showMessage(`use ${repo} repo success!`)
+    showMessage(`use ${repo} repo success!`);
 
-    packageTempPath = resolve(`./temp/package.json`)
+    packageTempPath = resolve(`./temp/package.json`);
 
-    showMessage(`packageTempPath: ${packageTempPath}`)
+    showMessage(`packageTempPath: ${packageTempPath}`);
   }
 
-  return packageTempPath
+  return packageTempPath;
 }
 
 function handlePackage(packageTempPath) {
-  showMessage(`referential package.json :${packageTempPath}`)
+  showMessage(`referential package.json :${packageTempPath}`);
 
-  const packageProjectPath = resolve(`./package.json`)
+  const packageProjectPath = resolve(`./package.json`);
 
   fs.readJson(packageTempPath)
     .then((packageTemp) => {
       fs.readJson(packageProjectPath)
         .then((p) => {
-          const dependencies = packageTemp.dependencies
-          const devDependencies = packageTemp.devDependencies
+          const dependencies = packageTemp.dependencies;
+          const devDependencies = packageTemp.devDependencies;
 
-          p.dependencies = dependencies
-          p.devDependencies = devDependencies
+          p.dependencies = dependencies;
+          p.devDependencies = devDependencies;
 
           fs.writeJson(packageProjectPath, p)
             .then(() => {
-              showMessage(`update package.json success!`)
+              showMessage(`update package.json success!`);
 
-              showLine()
+              showLine();
 
-              process.exit()
+              process.exit();
             })
             .catch((err) => {
-              console.error(err)
+              console.error(err);
 
-              process.exit()
-            })
+              process.exit();
+            });
         })
         .catch((err) => {
-          console.error(err)
+          console.error(err);
 
-          process.exit()
-        })
+          process.exit();
+        });
     })
     .catch((err) => {
-      console.error(err)
+      console.error(err);
 
-      process.exit()
-    })
+      process.exit();
+    });
 }
 
 function showMessage(message) {
-  term.green(`${message}\r\n`)
+  term.green(`${message}\r\n`);
 }
 
 function showWarn(message) {
-  term.red(`${message}\r\n`)
+  term.red(`${message}\r\n`);
 }
 
 function showLine() {
-  term.gray('------------------------------------\r\n')
+  term.gray('------------------------------------\r\n');
 }

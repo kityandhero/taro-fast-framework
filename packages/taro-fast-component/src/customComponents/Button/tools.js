@@ -1,9 +1,13 @@
 import {
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+  isString,
+} from 'easy-soft-utility';
+
+import {
   handleInlayColor,
-  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray, isString } from 'taro-fast-common/es/utils/typeCheck';
 
 export function getStyle({
   backgroundColor = '',
@@ -39,7 +43,7 @@ export function getStyle({
     let color = backgroundColor;
     let shadowColorAdjust = shadowColor;
 
-    if (stringIsNullOrWhiteSpace(color)) {
+    if (checkStringIsNullOrWhiteSpace(color)) {
       return { ...sharpStyle };
     }
 
@@ -55,7 +59,7 @@ export function getStyle({
           '--background-color': color,
           '--border-color': 'transparent',
         },
-        ...(stringIsNullOrWhiteSpace(fontColor)
+        ...(checkStringIsNullOrWhiteSpace(fontColor)
           ? color !== backgroundColor
             ? { '--text-color': 'var(--tfc-color-white)' }
             : {}
@@ -63,7 +67,7 @@ export function getStyle({
               '--text-color': fontColor,
             }),
         ...(fontSize > 0 ? { '--font-size': transformSize(fontSize) } : {}),
-        ...(shadow && !stringIsNullOrWhiteSpace(shadowColorAdjust)
+        ...(shadow && !checkStringIsNullOrWhiteSpace(shadowColorAdjust)
           ? { boxShadow: shadowColorAdjust }
           : {}),
         ...sharpStyle,
@@ -74,13 +78,13 @@ export function getStyle({
       return {
         ...{
           '--background-color': 'transparent',
-          '--border-color': stringIsNullOrWhiteSpace(borderColor)
+          '--border-color': checkStringIsNullOrWhiteSpace(borderColor)
             ? color !== backgroundColor
               ? color
               : handleInlayColor('back')
             : borderColor,
         },
-        ...(stringIsNullOrWhiteSpace(fontColor)
+        ...(checkStringIsNullOrWhiteSpace(fontColor)
           ? color !== backgroundColor
             ? { '--text-color': color }
             : {}
@@ -88,7 +92,7 @@ export function getStyle({
               '--text-color': fontColor,
             }),
         ...(fontSize > 0 ? { '--font-size': transformSize(fontSize) } : {}),
-        ...(shadow && !stringIsNullOrWhiteSpace(shadowColorAdjust)
+        ...(shadow && !checkStringIsNullOrWhiteSpace(shadowColorAdjust)
           ? { boxShadow: shadowColorAdjust }
           : {}),
         ...sharpStyle,
@@ -101,7 +105,7 @@ export function getStyle({
           '--background-color': 'transparent',
           '--border-color': 'transparent',
         },
-        ...(stringIsNullOrWhiteSpace(fontColor)
+        ...(checkStringIsNullOrWhiteSpace(fontColor)
           ? color !== backgroundColor
             ? { '--text-color': color }
             : {}
@@ -121,7 +125,7 @@ export function getStyle({
 
   if (isArray(backgroundColor)) {
     const a = backgroundColor.filter(
-      (o) => isString(o) && !stringIsNullOrWhiteSpace(o),
+      (o) => isString(o) && !checkStringIsNullOrWhiteSpace(o),
     );
 
     if (a.length > 0) {
@@ -137,7 +141,7 @@ export function getStyle({
   }
 
   return {
-    ...(stringIsNullOrWhiteSpace(fontColor)
+    ...(checkStringIsNullOrWhiteSpace(fontColor)
       ? {}
       : {
           '--text-color': fontColor,

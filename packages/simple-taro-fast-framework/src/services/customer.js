@@ -1,9 +1,9 @@
-import { recordDebug } from 'taro-fast-common/es/utils/tools';
+import { logDebug } from 'easy-soft-utility';
 
 import { executiveRequest } from '../utils/request';
 
 export async function getCustomerData(params) {
-  recordDebug(
+  logDebug(
     'service "customer/getCurrentCustomer" use virtual request in this demo',
   );
 

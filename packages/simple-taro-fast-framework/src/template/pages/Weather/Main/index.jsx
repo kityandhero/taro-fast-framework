@@ -1,15 +1,13 @@
+import { connect } from 'easy-soft-dva';
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   CenterBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import SimpleBox from '../../../../customComponents/SimpleBox';
@@ -66,8 +64,8 @@ export default class Index extends BasePageWrapper {
         };
 
         if (
-          stringIsNullOrWhiteSpace(weather) &&
-          stringIsNullOrWhiteSpace(degree)
+          checkStringIsNullOrWhiteSpace(weather) &&
+          checkStringIsNullOrWhiteSpace(degree)
         ) {
           return;
         }
@@ -149,8 +147,8 @@ export default class Index extends BasePageWrapper {
                   };
 
                   if (
-                    stringIsNullOrWhiteSpace(weather) &&
-                    stringIsNullOrWhiteSpace(degree)
+                    checkStringIsNullOrWhiteSpace(weather) &&
+                    checkStringIsNullOrWhiteSpace(degree)
                   ) {
                     return;
                   }

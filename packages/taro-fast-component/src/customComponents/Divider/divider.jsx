@@ -1,12 +1,13 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  isNumber,
+  isString,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isNumber, isString } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -28,7 +29,7 @@ class Divider extends BaseComponent {
   getContentPosition = () => {
     const { contentPosition: contentPositionSource } = this.props;
 
-    return inCollection(contentPositionCollection, contentPositionSource)
+    return checkInCollection(contentPositionCollection, contentPositionSource)
       ? contentPositionSource
       : 'center';
   };
@@ -37,7 +38,7 @@ class Divider extends BaseComponent {
     const { lineColor } = this.props;
 
     if (isString(lineColor)) {
-      if (stringIsNullOrWhiteSpace(lineColor)) {
+      if (checkStringIsNullOrWhiteSpace(lineColor)) {
         return '';
       }
 

@@ -1,3 +1,5 @@
+import { connect } from 'easy-soft-dva';
+
 import {
   CheckBoxSelector,
   ColorText,
@@ -5,7 +7,6 @@ import {
   Space,
   Tag,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

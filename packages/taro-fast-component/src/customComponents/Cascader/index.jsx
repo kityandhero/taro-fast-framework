@@ -1,13 +1,14 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  find,
+  isArray,
+  isFunction,
+  toMd5,
+} from 'easy-soft-utility';
 import { ScrollView, View } from '@tarojs/components';
 
-import {
-  find,
-  md5,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Radio from '../Radio';
@@ -53,7 +54,10 @@ class Cascader extends BaseComponent {
       );
     }
 
-    if (useOptionCompareFlag && stringIsNullOrWhiteSpace(optionCompareFlag)) {
+    if (
+      useOptionCompareFlag &&
+      checkStringIsNullOrWhiteSpace(optionCompareFlag)
+    ) {
       throw new Error(
         'Cascader: optionCompareFlag not allow empty when useOptionCompareFlag is true',
       );
@@ -66,7 +70,7 @@ class Cascader extends BaseComponent {
         valueStage: a,
         optionCompareFlag: useOptionCompareFlag
           ? optionCompareFlag
-          : md5(options),
+          : toMd5(options),
         currentLevel: a.length === 0 ? 0 : a.length - 1,
       },
     };
@@ -93,7 +97,7 @@ class Cascader extends BaseComponent {
 
     if (
       useOptionCompareFlag &&
-      stringIsNullOrWhiteSpace(optionCompareFlagNext)
+      checkStringIsNullOrWhiteSpace(optionCompareFlagNext)
     ) {
       throw new Error(
         'Cascader: optionCompareFlag is not allow empty when useOptionCompareFlag is true',
@@ -102,7 +106,7 @@ class Cascader extends BaseComponent {
 
     const optionCompareFlagNextAdjust = useOptionCompareFlag
       ? optionCompareFlagNext
-      : md5(optionsNext);
+      : toMd5(optionsNext);
 
     const optionCompareFlagChanged =
       optionCompareFlagPrev !== optionCompareFlagNextAdjust;
@@ -228,7 +232,7 @@ class Cascader extends BaseComponent {
         const options = this.getIndexOptions(i);
 
         options.some((o) => {
-          if (stringIsNullOrWhiteSpace(valueStage[i])) {
+          if (checkStringIsNullOrWhiteSpace(valueStage[i])) {
             result.push({
               label: '请选择',
               value: '',

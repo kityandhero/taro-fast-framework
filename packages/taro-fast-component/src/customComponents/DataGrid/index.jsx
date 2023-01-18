@@ -1,19 +1,19 @@
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  getGuid,
+  isArray,
+  isNumber,
+  isString,
+  toNumber,
+} from 'easy-soft-utility';
 import { Fragment } from 'react';
 import { View } from '@tarojs/components';
 
 import {
   copyToClipboard,
-  getGuid,
-  inCollection,
-  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import {
-  isArray,
-  isNumber,
-  isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import ColorText from '../ColorText';
@@ -50,7 +50,7 @@ class DataGrid extends BaseComponent {
   getLayout = () => {
     const { layout } = this.props;
 
-    return inCollection(layoutCollection, layout) ? layout : 'column';
+    return checkInCollection(layoutCollection, layout) ? layout : 'column';
   };
 
   renderFurther() {
@@ -152,7 +152,7 @@ class DataGrid extends BaseComponent {
           : {}),
       };
 
-      const titleComponent = stringIsNullOrWhiteSpace(title) ? null : (
+      const titleComponent = checkStringIsNullOrWhiteSpace(title) ? null : (
         <View
           style={{
             marginBottom: transformSize(16),
@@ -290,13 +290,13 @@ class DataGrid extends BaseComponent {
                           fontSize: transformSize(fontSizeSource),
                         },
                         ...(ellipsisLine > 1 &&
-                        !stringIsNullOrWhiteSpace(ellipsisHeight)
+                        !checkStringIsNullOrWhiteSpace(ellipsisHeight)
                           ? {
                               height: ellipsisHeight,
                             }
                           : {}),
                         ...(ellipsisLine > 1 &&
-                        !stringIsNullOrWhiteSpace(ellipsisLineHeight)
+                        !checkStringIsNullOrWhiteSpace(ellipsisLineHeight)
                           ? {
                               lineHeight: ellipsisLineHeight,
                             }
@@ -320,7 +320,7 @@ class DataGrid extends BaseComponent {
                 });
 
                 return (
-                  <Col size={12}>
+                  <Col key={itemKey} size={12}>
                     {border ? (
                       <View
                         style={{

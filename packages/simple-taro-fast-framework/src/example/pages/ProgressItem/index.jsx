@@ -1,7 +1,7 @@
-import {
-  showInfoMessage,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { connect } from 'easy-soft-dva';
+import { showInfoMessage } from 'easy-soft-utility';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   CenterBox,
@@ -10,7 +10,6 @@ import {
   ProgressItem,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

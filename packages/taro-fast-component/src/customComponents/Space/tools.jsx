@@ -1,6 +1,5 @@
+import { checkInCollection } from 'easy-soft-utility';
 import React from 'react';
-
-import { inCollection } from 'taro-fast-common/es/utils/tools';
 
 export const SpaceContext = React.createContext({
   latestIndex: 0,
@@ -12,7 +11,7 @@ export const SpaceContext = React.createContext({
 const directionCollection = ['horizontal', 'vertical'];
 
 export const getDirection = (direction) => {
-  return inCollection(directionCollection, direction)
+  return checkInCollection(directionCollection, direction)
     ? direction
     : 'horizontal';
 };

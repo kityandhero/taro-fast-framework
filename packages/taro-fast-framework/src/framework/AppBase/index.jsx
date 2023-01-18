@@ -1,25 +1,28 @@
+import { getStore, Provider } from 'easy-soft-dva';
+import {
+  checkStringIsNullOrWhiteSpace,
+  envCollection,
+  flushLocalStorage,
+  isUndefined,
+  logConfig,
+  logInfo,
+  toString,
+} from 'easy-soft-utility';
 import { Component } from 'react';
 
-import { envCollection } from 'taro-fast-common/es/utils/constants';
 import {
   canIUse,
   checkEnv,
-  clearLocalStorage,
   getDefaultTaroGlobalData,
   getEnv,
   getUpdateManager,
   isWechat,
-  recordConfig,
-  recordInfo,
   setTaroGlobalData,
-  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
+import { getModelCollection } from '../../models';
+import { configEnvironment } from '../../utils/configAssist';
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
-import { Provider } from '../../utils/dva';
-import { getStore } from '../../utils/dvaAssist';
 import {
   removeAdministrativeDivisionFullData,
   removeSelectedAddressData,
@@ -29,11 +32,9 @@ import {
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
-let modelNameList = [];
-
 let appInitCustomObject = {};
 
-function setRootFontSize() {
+function setMainFontSize() {
   const env = getEnv();
 
   if (env !== envCollection.WEB) {
@@ -42,7 +43,7 @@ function setRootFontSize() {
 
   const webRootFontSize = defaultSettingsLayoutCustom.getWebRootFontSize();
 
-  if (stringIsNullOrWhiteSpace(webRootFontSize)) {
+  if (checkStringIsNullOrWhiteSpace(webRootFontSize)) {
     return;
   }
 
@@ -52,38 +53,43 @@ function setRootFontSize() {
     if (doc) {
       doc.style.fontSize = toString(webRootFontSize);
 
-      recordInfo(
-        `set document font-size -> ${webRootFontSize}, it is in config.`,
-      );
+      logInfo(`set document font-size -> ${webRootFontSize}, it is in config.`);
     }
   }
 }
+
+let models = [];
+let initApplicationComplete = false;
 
 class AppBase extends Component {
   store = null;
 
   taroGlobalData = defaultTaroGlobalData;
 
-  constructor(props, config, models) {
+  constructor(props, config) {
     super(props);
 
-    appInitCustomObject = config;
+    if (!initApplicationComplete) {
+      this.setAppInitCustomLocal(config);
 
-    removeSessionRefreshing();
-    removeSelectedAddressData();
-    removeAdministrativeDivisionFullData();
+      configEnvironment();
 
-    this.setAppInitCustomLocal(config);
+      models = getModelCollection();
 
-    modelNameList = models.map((item) => {
-      const { namespace: ns } = item;
+      appInitCustomObject = config;
 
-      return ns;
-    });
+      removeSessionRefreshing();
+      removeSelectedAddressData();
+      removeAdministrativeDivisionFullData();
 
-    this.initDva(models);
+      this.initDva(models);
 
-    this.initLocationMode();
+      this.initLocationMode();
+    }
+
+    initApplicationComplete = true;
+
+    logInfo('application start complete');
   }
 
   componentDidMount() {
@@ -93,7 +99,7 @@ class AppBase extends Component {
   onLaunch(options) {
     checkEnv();
 
-    setRootFontSize();
+    setMainFontSize();
 
     setLaunchOption(options);
 
@@ -114,12 +120,12 @@ class AppBase extends Component {
   }
 
   doWhenBootstrap = () => {
-    recordConfig(
+    logConfig(
       'doWhenBootstrap do nothing, if you need do something on application bootstrap, please override it: doWhenBootstrap = () => {} in app.js(jsx/ts/tsx)',
     );
   };
 
-  initDva = (models) => {
+  initDva = () => {
     this.store = getStore(models);
   };
 
@@ -147,13 +153,6 @@ class AppBase extends Component {
         config: appInitCustomObject,
       },
     });
-
-    dispatch({
-      type: 'schedulingControl/showModelNameList',
-      payload: {
-        modelNameList: modelNameList.join(),
-      },
-    });
   };
 
   checkUpdateVersion = () => {
@@ -167,7 +166,7 @@ class AppBase extends Component {
           updateManager.onCheckForUpdate((data) => {
             if (data.hasUpdate) {
               updateManager.onUpdateReady(() => {
-                clearLocalStorage;
+                flushLocalStorage;
 
                 updateManager.applyUpdate();
               });

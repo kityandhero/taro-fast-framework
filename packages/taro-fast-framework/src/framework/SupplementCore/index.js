@@ -1,8 +1,31 @@
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  envCollection,
+  getCache,
+  isFunction,
+  isNumber,
+  isObject,
+  isString,
+  isUndefined,
+  logConfig,
+  logData,
+  logDebug,
+  logError,
+  logExecute,
+  logInfo,
+  logObject,
+  logWarn,
+  setCache,
+  showErrorMessage,
+  showInfoMessage,
+  sleep,
+  toNumber,
+  toString,
+} from 'easy-soft-utility';
 import Taro from '@tarojs/taro';
 
-import { getCache, setCache } from 'taro-fast-common/es/utils/cacheAssist';
 import {
-  envCollection,
   locateResult,
   locationModeCollection,
 } from 'taro-fast-common/es/utils/constants';
@@ -10,29 +33,8 @@ import Tips from 'taro-fast-common/es/utils/tips';
 import {
   getGeographicalLocation,
   getSetting,
-  inCollection,
-  recordConfig,
-  recordDebug,
-  recordError,
-  recordExecute,
-  recordInfo,
-  recordLog,
-  recordObject,
-  recordWarn,
   redirectTo,
-  showErrorMessage,
-  showInfoMessage,
-  sleep,
-  stringIsNullOrWhiteSpace,
 } from 'taro-fast-common/es/utils/tools';
-import {
-  isFunction,
-  isNumber,
-  isObject,
-  isString,
-  isUndefined,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
 import {
@@ -74,9 +76,9 @@ import Common from '../Common';
  */
 class SupplementCore extends Common {
   doShowTask = () => {
-    recordExecute('doShowTask');
+    logExecute('doShowTask');
 
-    recordDebug(
+    logDebug(
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
     );
 
@@ -85,7 +87,7 @@ class SupplementCore extends Common {
 
       this.firstShowHasTriggered = true;
 
-      recordDebug('set this.firstShowHasTriggered to true');
+      logDebug('set this.firstShowHasTriggered to true');
 
       this.doWorkWhenEveryShow();
 
@@ -97,7 +99,7 @@ class SupplementCore extends Common {
 
       that.setCurrentInfo();
 
-      recordDebug(
+      logDebug(
         `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
       );
 
@@ -132,7 +134,7 @@ class SupplementCore extends Common {
   };
 
   doWorkWithNeedReLocationWhenRepeatedShow = () => {
-    recordExecute('doWorkWithNeedReLocationWhenRepeatedShow');
+    logExecute('doWorkWithNeedReLocationWhenRepeatedShow');
 
     const that = this;
 
@@ -146,35 +148,35 @@ class SupplementCore extends Common {
           break;
 
         case envCollection.ALIPAY:
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
         case envCollection.SWAN:
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
         case envCollection.WEB:
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
 
         default:
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
       }
 
-      recordDebug(
+      logDebug(
         `this.needReLocationWhenRepeatedShow is ${this.needReLocationWhenRepeatedShow} in doShowTask`,
       );
 
@@ -211,7 +213,7 @@ class SupplementCore extends Common {
     fromLaunch = false,
     failCallback,
   }) => {
-    recordExecute('obtainLocation');
+    logExecute('obtainLocation');
 
     const env = this.getEnv();
 
@@ -222,7 +224,7 @@ class SupplementCore extends Common {
         break;
 
       case envCollection.ALIPAY:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -231,7 +233,7 @@ class SupplementCore extends Common {
         return;
 
       case envCollection.SWAN:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -240,7 +242,7 @@ class SupplementCore extends Common {
         return;
 
       case envCollection.WEB:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -249,7 +251,7 @@ class SupplementCore extends Common {
         return;
 
       default:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -263,10 +265,10 @@ class SupplementCore extends Common {
       defaultSettingsLayoutCustom.getSimulationLocationData();
 
     if (simulationMode) {
-      recordDebug('simulation location in config is true');
+      logDebug('simulation location in config is true');
 
       if (!isObject(simulationData)) {
-        recordObject({
+        logObject({
           simulationLocationData: simulationData,
         });
 
@@ -306,7 +308,7 @@ class SupplementCore extends Common {
         }
       }
     } else {
-      recordDebug('obtain location force');
+      logDebug('obtain location force');
     }
 
     if (needRelocation) {
@@ -359,7 +361,7 @@ class SupplementCore extends Common {
               }
             },
             fail: (error) => {
-              recordError(error);
+              logError(error);
 
               if (mapData != null) {
                 setMap(mapData);
@@ -549,7 +551,7 @@ class SupplementCore extends Common {
     callback,
     force = false,
   }) => {
-    recordExecute('executeLogicAfterNonautomaticReLocationWhenRepeatedShow');
+    logExecute('executeLogicAfterNonautomaticReLocationWhenRepeatedShow');
 
     if (isFunction(callback)) {
       callback({
@@ -561,7 +563,7 @@ class SupplementCore extends Common {
   };
 
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
-    recordExecute('checkTicketValidity');
+    logExecute('checkTicketValidity');
 
     const env = this.getEnv();
 
@@ -572,7 +574,7 @@ class SupplementCore extends Common {
         break;
 
       case envCollection.ALIPAY:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -585,7 +587,7 @@ class SupplementCore extends Common {
         return;
 
       case envCollection.SWAN:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -598,7 +600,7 @@ class SupplementCore extends Common {
         return;
 
       case envCollection.WEB:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -611,7 +613,7 @@ class SupplementCore extends Common {
         return;
 
       default:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -632,7 +634,7 @@ class SupplementCore extends Common {
     const that = this;
 
     if (signInResult === verifySignInResult.unknown) {
-      recordDebug(
+      logDebug(
         `sign in result is ${signInResult}, it mean ${getSignInResultDescription(
           signInResult,
         )}`,
@@ -642,7 +644,7 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        recordInfo(
+        logInfo(
           'info use location and automatic location and sign in result is unknown',
         );
 
@@ -677,7 +679,7 @@ class SupplementCore extends Common {
         (useLocation || false) &&
         locationMode === locationModeCollection.auto
       ) {
-        recordInfo(
+        logInfo(
           'info use location and automatic location on checkTicketValidity and sign in result is not unknown',
         );
 
@@ -693,7 +695,7 @@ class SupplementCore extends Common {
           },
         });
       } else {
-        recordDebug(
+        logDebug(
           'do not use location or nonautomatic location on checkTicketValidity',
         );
 
@@ -705,7 +707,7 @@ class SupplementCore extends Common {
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
   bridgeLogicOnCheckTicketValidity({ callback = null }) {
-    recordExecute('bridgeLogicOnCheckTicketValidity');
+    logExecute('bridgeLogicOnCheckTicketValidity');
 
     const ticketValidityProcessDetection =
       this.getTicketValidityProcessDetection();
@@ -758,7 +760,7 @@ class SupplementCore extends Common {
     forceRefresh: forceRefreshValue = false,
     callback = null,
   }) {
-    recordExecute('checkTicketValidityCore');
+    logExecute('checkTicketValidityCore');
 
     const that = this;
 
@@ -825,7 +827,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   }
 
@@ -846,7 +848,7 @@ class SupplementCore extends Common {
   };
 
   refreshSession = ({ callback }) => {
-    recordExecute('refreshSession');
+    logExecute('refreshSession');
 
     const sessionRefreshing = getSessionRefreshing();
 
@@ -857,12 +859,12 @@ class SupplementCore extends Common {
 
       Taro.login({ timeout: 1000 })
         .then((res) => {
-          recordExecute('Taro.login');
+          logExecute('Taro.login');
 
           const { code } = res;
 
           if (code) {
-            recordDebug(`code: ${code}`);
+            logDebug(`code: ${code}`);
 
             setEffectiveCode(code);
 
@@ -894,7 +896,7 @@ class SupplementCore extends Common {
               })
               // eslint-disable-next-line promise/no-nesting
               .catch((error) => {
-                recordError({ error });
+                logError({ error });
 
                 Tips.info('网络请求失败了，请检查下是否联网');
 
@@ -923,7 +925,7 @@ class SupplementCore extends Common {
           return res;
         })
         .catch((error) => {
-          recordError({ error, current: that });
+          logError({ error, current: that });
 
           showInfoMessage({
             message: '微信登录失败',
@@ -978,7 +980,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) => {
-    recordExecute('signIn');
+    logExecute('signIn');
 
     const that = this;
 
@@ -986,7 +988,7 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      recordDebug('use location and automatic location on sign in');
+      logDebug('use location and automatic location on sign in');
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -1038,7 +1040,7 @@ class SupplementCore extends Common {
       });
     } else {
       if (useLocation || false) {
-        recordDebug('use location and nonautomatic location');
+        logDebug('use location and nonautomatic location');
 
         that.signInWhenCheckProcessDetection({
           data,
@@ -1078,7 +1080,7 @@ class SupplementCore extends Common {
   };
 
   signInWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
-    recordExecute('signInWhenCheckProcessDetection');
+    logExecute('signInWhenCheckProcessDetection');
 
     const that = this;
 
@@ -1091,7 +1093,7 @@ class SupplementCore extends Common {
     }
 
     sleep(100, () => {
-      recordLog(`signInWhenCheckProcessDetection sleep ${timeTotal}`);
+      logData(`signInWhenCheckProcessDetection sleep ${timeTotal}`);
 
       const signInProcessDetection = that.getSignInProcessDetection();
 
@@ -1115,7 +1117,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) => {
-    recordExecute('signInSilent');
+    logExecute('signInSilent');
 
     const that = this;
 
@@ -1123,7 +1125,7 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      recordDebug('use location and automatic location on sign in silent');
+      logDebug('use location and automatic location on sign in silent');
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -1175,7 +1177,7 @@ class SupplementCore extends Common {
       });
     } else {
       if (useLocation || false) {
-        recordDebug('use location and nonautomatic location');
+        logDebug('use location and nonautomatic location');
 
         that.signInSilentWhenCheckProcessDetection({
           data,
@@ -1215,7 +1217,7 @@ class SupplementCore extends Common {
   };
 
   signInSilentWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
-    recordExecute('signInSilentWhenCheckProcessDetection');
+    logExecute('signInSilentWhenCheckProcessDetection');
 
     const that = this;
 
@@ -1228,7 +1230,7 @@ class SupplementCore extends Common {
     }
 
     sleep(100, () => {
-      recordLog(`signInSilentWhenCheckProcessDetection sleep ${timeTotal}`);
+      logData(`signInSilentWhenCheckProcessDetection sleep ${timeTotal}`);
 
       const signInProcessDetection = that.getSignInProcessDetection();
 
@@ -1279,7 +1281,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) {
-    recordExecute('signInCore');
+    logExecute('signInCore');
 
     // Tips.loading('处理中');
 
@@ -1382,7 +1384,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   }
 
@@ -1392,7 +1394,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) {
-    recordExecute('signInSilentCore');
+    logExecute('signInSilentCore');
 
     const env = this.getEnv();
 
@@ -1403,7 +1405,7 @@ class SupplementCore extends Common {
         break;
 
       case envCollection.ALIPAY:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1416,7 +1418,7 @@ class SupplementCore extends Common {
         return;
 
       case envCollection.SWAN:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1429,7 +1431,7 @@ class SupplementCore extends Common {
         return;
 
       case envCollection.WEB:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1442,7 +1444,7 @@ class SupplementCore extends Common {
         return;
 
       default:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -1568,7 +1570,7 @@ class SupplementCore extends Common {
         } else {
           removeSession();
 
-          recordObject({
+          logObject({
             message: '静默登录失败',
           });
 
@@ -1586,31 +1588,31 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   }
 
   parseSessionEffectiveFromSignInApiDataWrapper = (remoteData) => {
-    recordExecute('parseSessionEffectiveFromSignInApiData');
+    logExecute('parseSessionEffectiveFromSignInApiData');
 
     return this.parseSessionEffectiveFromSignInApiData(remoteData);
   };
 
   parseSessionEffectiveFromSignInSilentApiDataWrapper = (remoteData) => {
-    recordExecute('parseSessionEffectiveFromSignInSilentApiData');
+    logExecute('parseSessionEffectiveFromSignInSilentApiData');
 
     return this.parseSessionEffectiveFromSignInSilentApiData(remoteData);
   };
 
   parseSessionEffectiveFromSignInApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSessionEffectiveFromSignInApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInApiData',
       );
 
@@ -1630,14 +1632,14 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromSignInSilentApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSessionEffectiveFromSignInSilentApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInSilentApiData',
       );
 
@@ -1657,28 +1659,28 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromSignInApiDataWrapper = (remoteData) => {
-    recordExecute('parseSignInResultFromSignInApiData');
+    logExecute('parseSignInResultFromSignInApiData');
 
     return this.parseSignInResultFromSignInApiData(remoteData);
   };
 
   parseSignInResultFromSignInSilentApiDataWrapper = (remoteData) => {
-    recordExecute('parseSignInResultFromSignInSilentApiData');
+    logExecute('parseSignInResultFromSignInSilentApiData');
 
     return this.parseSignInResultFromSignInSilentApiData(remoteData);
   };
 
   parseSignInResultFromSignInApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSignInResultFromSignInApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
     const verifySignInResult = getVerifySignInResult();
 
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key signInResult in parseSignInResultFromSignInApiData',
       );
     }
@@ -1694,16 +1696,16 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromSignInSilentApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSignInResultFromSignInSilentApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
     const verifySignInResult = getVerifySignInResult();
 
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key signInResult in parseSignInResultFromSignInSilentApiData',
       );
     }
@@ -1719,14 +1721,14 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnSignIn = ({ signInResult }) => {
-    recordExecute('setSignInResultOnSignIn');
-    recordDebug(`signInResult: ${signInResult}`);
+    logExecute('setSignInResultOnSignIn');
+    logDebug(`signInResult: ${signInResult}`);
 
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
 
     if (
-      !inCollection(
+      !checkInCollection(
         [
           toNumber(verifySignInResult.unknown),
           toNumber(verifySignInResult.fail),
@@ -1742,14 +1744,14 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnSignInSilent = ({ signInResult }) => {
-    recordExecute('setSignInResultOnSignInSilent');
-    recordDebug(`signInResult: ${signInResult}`);
+    logExecute('setSignInResultOnSignInSilent');
+    logDebug(`signInResult: ${signInResult}`);
 
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
 
     if (
-      !inCollection(
+      !checkInCollection(
         [
           toNumber(verifySignInResult.unknown),
           toNumber(verifySignInResult.fail),
@@ -1765,14 +1767,14 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromSignInApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseTokenFromSignInApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key token in parseTokenFromSignInApiData',
       );
     }
@@ -1788,14 +1790,14 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromSignInSilentApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseTokenFromSignInSilentApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key token in parseTokenFromSignInSilentApiData',
       );
     }
@@ -1811,7 +1813,7 @@ class SupplementCore extends Common {
   };
 
   setTokenOnSignIn = ({ token }) => {
-    recordExecute('setTokenOnSignIn');
+    logExecute('setTokenOnSignIn');
 
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignIn token must be string');
@@ -1825,7 +1827,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignInSilent = ({ token }) => {
-    recordExecute('setTokenOnSignInSilent');
+    logExecute('setTokenOnSignInSilent');
 
     if (!isString(token || '')) {
       throw new Error('setTokenOnSignInSilent token must be string');
@@ -1835,14 +1837,14 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromSignInApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseOpenIdFromSignInApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key openId in parseOpenIdFromSignInApiData',
       );
     }
@@ -1858,14 +1860,14 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromSignInSilentApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseOpenIdFromSignInSilentApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromSignInSilentApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key openId in parseOpenIdFromSignInSilentApiData',
       );
     }
@@ -1881,7 +1883,7 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnSignIn = ({ openId }) => {
-    recordExecute('setOpenIdOnSignIn');
+    logExecute('setOpenIdOnSignIn');
 
     if (!isString(openId || '')) {
       throw new Error('setOpenIdOnSignIn openId must be string');
@@ -1895,7 +1897,7 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setOpenIdOnSignInSilent = ({ openId }) => {
-    recordExecute('setOpenIdOnSignInSilent');
+    logExecute('setOpenIdOnSignInSilent');
 
     if (!isString(openId || '')) {
       throw new Error('setOpenIdOnSignInSilent openId must be string');
@@ -1910,7 +1912,7 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {
-    recordConfig(
+    logConfig(
       'doAfterSignInSuccess do nothing,if you need,you can override it: doAfterSignInSuccess = (data) => {}',
     );
   };
@@ -1921,7 +1923,7 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSilentSuccess = (data) => {
-    recordConfig(
+    logConfig(
       'doAfterSignInSilentSuccess do nothing,if you need,you can override it: doAfterSignInSilentSuccess = (data) => {}',
     );
   };
@@ -1930,7 +1932,7 @@ class SupplementCore extends Common {
    * 静默登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFailWrapper = () => {
-    recordExecute('doWhenSignInFail');
+    logExecute('doWhenSignInFail');
 
     this.doWhenSignInFail();
   };
@@ -1939,13 +1941,13 @@ class SupplementCore extends Common {
    * 账户登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFail = () => {
-    recordConfig(
+    logConfig(
       'doWhenSignInFail do nothing,if you need,you can override it: doWhenSignInFail = () => {}',
     );
   };
 
   doWhenSignInSilentFailWrapper = () => {
-    recordExecute('doWhenSignInSilentFail');
+    logExecute('doWhenSignInSilentFail');
 
     this.doWhenSignInSilentFail();
 
@@ -1954,7 +1956,7 @@ class SupplementCore extends Common {
     ) {
       const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-      if (stringIsNullOrWhiteSpace(signInPath)) {
+      if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 
@@ -1966,19 +1968,19 @@ class SupplementCore extends Common {
    * 静默登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInSilentFail = () => {
-    recordConfig(
+    logConfig(
       'doWhenSignInSilentFail do nothing,if you need,you can override it: doWhenSignInSilentFail = () => {}',
     );
   };
 
   dispatchGetCustomerWrapper = (data = {}) => {
-    recordExecute('dispatchGetCustomerWrapper');
+    logExecute('dispatchGetCustomerWrapper');
 
     return this.dispatchGetCustomer(data);
   };
 
   dispatchGetCustomer = (data = {}) => {
-    recordConfig(
+    logConfig(
       'built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
     );
 
@@ -1995,7 +1997,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) => {
-    recordExecute('getCustomer');
+    logExecute('getCustomer');
 
     let force = forceValue;
 
@@ -2012,7 +2014,7 @@ class SupplementCore extends Common {
     }
 
     if (!force) {
-      recordDebug('getCustomer from local cache success');
+      logDebug('getCustomer from local cache success');
 
       if (isFunction(successCallback)) {
         successCallback(currentCustomer);
@@ -2022,7 +2024,7 @@ class SupplementCore extends Common {
         completeCallback(currentCustomer);
       }
     } else {
-      recordDebug(
+      logDebug(
         'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
 
@@ -2056,11 +2058,11 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          recordInfo(
+          logInfo(
             'info getCustomer error,doAfterRegisterWithWeChat and callback will do not execute',
           );
 
-          recordError(error);
+          logError(error);
 
           if (isFunction(failCallback)) {
             failCallback();
@@ -2075,33 +2077,33 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   doAfterGetCustomerOnSignInSilent = (data) => {
-    recordConfig(
+    logConfig(
       'doAfterGetCustomerOnSignInSilent do nothing,if you need,you can override it: doAfterGetCustomerOnSignInSilent = (data) => {}',
     );
   };
 
   // eslint-disable-next-line no-unused-vars
   doAfterGetCustomerOnSignIn = (data) => {
-    recordConfig(
+    logConfig(
       'doAfterGetCustomerOnSignIn do nothing,if you need,you can override it: doAfterGetCustomerOnSignIn = (data) => {}',
     );
   };
 
   parseSessionEffectiveFromExchangePhoneApiDataWrapper = (remoteData) => {
-    recordExecute('parseSessionEffectiveFromExchangePhoneApiData');
+    logExecute('parseSessionEffectiveFromExchangePhoneApiData');
 
     return this.parseSessionEffectiveFromExchangePhoneApiData(remoteData);
   };
 
   parseSessionEffectiveFromExchangePhoneApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSessionEffectiveFromExchangePhoneApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromExchangePhoneApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromExchangePhoneApiData',
       );
 
@@ -2121,7 +2123,7 @@ class SupplementCore extends Common {
   };
 
   dispatchExchangePhone = (data = {}) => {
-    recordConfig(
+    logConfig(
       'built-in dispatchExchangePhone is a simulation,if you need actual business,you need override it: dispatchExchangePhone = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
     );
 
@@ -2165,26 +2167,26 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          recordError(error);
+          logError(error);
         });
     });
   };
 
   parseSessionEffectiveFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
-    recordExecute('parseSessionEffectiveFromRegisterWithWeChatApiData');
+    logExecute('parseSessionEffectiveFromRegisterWithWeChatApiData');
 
     return this.parseSessionEffectiveFromRegisterWithWeChatApiData(remoteData);
   };
 
   parseSessionEffectiveFromRegisterWithWeChatApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSessionEffectiveFromRegisterWithWeChatApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterWithWeChatApiData',
       );
 
@@ -2204,7 +2206,7 @@ class SupplementCore extends Common {
   };
 
   dispatchRegisterWithWeChat = (data = {}) => {
-    recordConfig(
+    logConfig(
       'built-in dispatchRegisterWithWeChat is a simulation,if you need actual business,you need override it: dispatchRegisterWithWeChat = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
     );
 
@@ -2311,7 +2313,7 @@ class SupplementCore extends Common {
       .catch((error) => {
         that.setState({ registering: false });
 
-        recordError(error);
+        logError(error);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -2324,20 +2326,20 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromRegisterApiDataWrapper = (remoteData) => {
-    recordExecute('parseSessionEffectiveFromRegisterApiData');
+    logExecute('parseSessionEffectiveFromRegisterApiData');
 
     return this.parseSessionEffectiveFromRegisterApiData(remoteData);
   };
 
   parseSessionEffectiveFromRegisterApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSessionEffectiveFromRegisterApiData is "const { sessionEffective } = remoteData",if you need custom logic,you need override it: parseSessionEffectiveFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterApiData',
       );
 
@@ -2357,7 +2359,7 @@ class SupplementCore extends Common {
   };
 
   dispatchRegister = (data = {}) => {
-    recordConfig(
+    logConfig(
       'built-in dispatchRegister is a simulation,if you need actual business,you need override it: dispatchRegister = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
     );
 
@@ -2460,7 +2462,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -2473,28 +2475,28 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterApiDataWrapper = (remoteData) => {
-    recordExecute('parseSignInResultFromRegisterApiData');
+    logExecute('parseSignInResultFromRegisterApiData');
 
     return this.parseSignInResultFromRegisterApiData(remoteData);
   };
 
   parseSignInResultFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
-    recordExecute('parseSignInResultFromRegisterWithWeChatApiData');
+    logExecute('parseSignInResultFromRegisterWithWeChatApiData');
 
     return this.parseSignInResultFromRegisterWithWeChatApiData(remoteData);
   };
 
   parseSignInResultFromRegisterApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSignInResultFromRegisterApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
     const verifySignInResult = getVerifySignInResult();
 
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key signInResult in parseSignInResultFromRegisterApiData',
       );
     }
@@ -2510,16 +2512,16 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterWithWeChatApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseSignInResultFromRegisterWithWeChatApiData is "const { signInResult } = remoteData",if you need custom logic,you need override it: parseSignInResultFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
     const verifySignInResult = getVerifySignInResult();
 
-    if (!inCollection(Object.keys(remoteData || {}), 'signInResult')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key signInResult in parseSignInResultFromRegisterWithWeChatApiData',
       );
     }
@@ -2535,13 +2537,13 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnRegister = ({ signInResult }) => {
-    recordExecute('setSignInResultOnSignIn');
+    logExecute('setSignInResultOnSignIn');
 
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
 
     if (
-      !inCollection(
+      !checkInCollection(
         [
           verifySignInResult.unknown,
           verifySignInResult.fail,
@@ -2557,13 +2559,13 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnRegisterWithWeChat = ({ signInResult }) => {
-    recordExecute('setSignInResultOnRegisterWithWeChat');
+    logExecute('setSignInResultOnRegisterWithWeChat');
 
     const v = toNumber(signInResult);
     const verifySignInResult = getVerifySignInResult();
 
     if (
-      !inCollection(
+      !checkInCollection(
         [
           verifySignInResult.unknown,
           verifySignInResult.fail,
@@ -2579,14 +2581,14 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromRegisterApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseTokenFromRegisterApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key token in parseTokenFromRegisterApiData',
       );
     }
@@ -2602,14 +2604,14 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromRegisterWithWeChatApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseTokenFromRegisterWithWeChatApiData is "const { token } = remoteData",if you need custom logic,you need override it: parseTokenFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'token')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key token in parseTokenFromRegisterWithWeChatApiData',
       );
     }
@@ -2625,7 +2627,7 @@ class SupplementCore extends Common {
   };
 
   setTokenOnRegister = ({ token }) => {
-    recordExecute('setTokenOnRegister');
+    logExecute('setTokenOnRegister');
 
     if (!isString(token || '')) {
       throw new Error('setTokenOnRegister token must be string');
@@ -2635,7 +2637,7 @@ class SupplementCore extends Common {
   };
 
   setTokenOnRegisterWithWeChat = ({ token }) => {
-    recordExecute('setTokenOnRegisterWithWeChat');
+    logExecute('setTokenOnRegisterWithWeChat');
 
     if (!isString(token || '')) {
       throw new Error('setTokenOnRegisterWithWeChat token must be string');
@@ -2645,14 +2647,14 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromRegisterApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseOpenIdFromRegisterApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromRegisterApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key openId in parseOpenIdFromRegisterApiData',
       );
     }
@@ -2668,14 +2670,14 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromRegisterWithWeChatApiData = (remoteData) => {
-    recordConfig(
+    logConfig(
       'built-in parseOpenIdFromRegisterWithWeChatApiData is "const { openId } = remoteData",if you need custom logic,you need override it: parseOpenIdFromRegisterWithWeChatApiData = (remoteData) => {} and return a verifySignInResult value',
     );
 
-    if (!inCollection(Object.keys(remoteData || {}), 'openId')) {
-      recordObject(remoteData);
+    if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
+      logObject(remoteData);
 
-      recordError(
+      logError(
         'params remoteData not exist key openId in parseOpenIdFromRegisterWithWeChatApiData',
       );
     }
@@ -2691,7 +2693,7 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnRegister = ({ openId }) => {
-    recordExecute('setOpenIdOnRegister');
+    logExecute('setOpenIdOnRegister');
 
     if (!isString(openId || '')) {
       throw new Error('setOpenIdOnRegister openId must be string');
@@ -2701,7 +2703,7 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnRegisterWithWeChat = ({ openId }) => {
-    recordExecute('setOpenIdOnRegisterWithWeChat');
+    logExecute('setOpenIdOnRegisterWithWeChat');
 
     if (!isString(openId || '')) {
       throw new Error('setOpenIdOnRegisterWithWeChat openId must be string');
@@ -2712,26 +2714,26 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   doAfterRegisterWithWeChat = (data) => {
-    recordConfig(
+    logConfig(
       'doAfterRegisterWithWeChat do nothing,if you need,you can override it: doAfterRegisterWithWeChat = (data) => {}',
     );
   };
 
   // eslint-disable-next-line no-unused-vars
   doAfterRegister = (data) => {
-    recordConfig(
+    logConfig(
       'doAfterRegister do nothing,if you need,you can override it: doAfterRegister = (data) => {}',
     );
   };
 
   dispatchGetMetaDataWrapper = (data = {}) => {
-    recordExecute('dispatchGetMetaDataWrapper');
+    logExecute('dispatchGetMetaDataWrapper');
 
     return this.dispatchGetMetaData(data);
   };
 
   dispatchGetMetaData = (data = {}) => {
-    recordConfig(
+    logConfig(
       'built-in dispatchGetMetaData is a simulation,if you need actual business,you need override it: dispatchGetMetaData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getMetaData\',payload: data,})"',
     );
 
@@ -2747,7 +2749,7 @@ class SupplementCore extends Common {
     force: forceValue = false,
     callback = null,
   }) => {
-    recordExecute('initMetaData');
+    logExecute('initMetaData');
 
     let force = forceValue;
 
@@ -2764,13 +2766,13 @@ class SupplementCore extends Common {
     }
 
     if (!force) {
-      recordDebug('check meta data from local cache success');
+      logDebug('check meta data from local cache success');
 
       if (isFunction(callback)) {
         callback(metaData);
       }
     } else {
-      recordDebug(
+      logDebug(
         'info check meta data from local cache fail or force api request, shift to get from api dispatch',
       );
 
@@ -2795,7 +2797,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          recordError(error);
+          logError(error);
         });
     }
   };
@@ -2811,13 +2813,13 @@ class SupplementCore extends Common {
   doAfterLoadMetaDataByForce = (data) => {};
 
   dispatchGetFullAdministrativeDivisionDataWrapper = (data = {}) => {
-    recordExecute('dispatchGetFullAdministrativeDivisionData');
+    logExecute('dispatchGetFullAdministrativeDivisionData');
 
     return this.dispatchGetFullAdministrativeDivisionData(data);
   };
 
   dispatchGetFullAdministrativeDivisionData = (data = {}) => {
-    recordConfig(
+    logConfig(
       'built-in dispatchGetFullAdministrativeDivisionData is a simulation,if you need actual business,you need override it: dispatchGetFullAdministrativeDivisionData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getFullAdministrativeDivisionData\',payload: data,})"',
     );
 
@@ -2832,7 +2834,7 @@ class SupplementCore extends Common {
     force: forceValue = false,
     callback = null,
   }) => {
-    recordExecute('initFullAdministrativeDivisionData');
+    logExecute('initFullAdministrativeDivisionData');
 
     let force = forceValue;
 
@@ -2849,7 +2851,7 @@ class SupplementCore extends Common {
     }
 
     if (!force) {
-      recordInfo(
+      logInfo(
         'info check administrative division full data from local cache success',
       );
 
@@ -2857,7 +2859,7 @@ class SupplementCore extends Common {
         callback(list);
       }
     } else {
-      recordInfo(
+      logInfo(
         'info check administrative division full data from local cache fail or force api request, shift to get from api dispatch',
       );
 
@@ -2882,7 +2884,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          recordError(error);
+          logError(error);
         });
     }
   };

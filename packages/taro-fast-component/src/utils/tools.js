@@ -1,4 +1,4 @@
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray } from 'easy-soft-utility';
 
 const PREFIX = 'tfc-';
 

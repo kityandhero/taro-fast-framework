@@ -1,4 +1,4 @@
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { isArray, isFunction } from 'easy-soft-utility';
 
 import { pathCollection } from '../../../customConfig/pathConfig';
 import BasePageWrapperCore from '../BasePageWrapperCore';

@@ -1,9 +1,7 @@
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -27,9 +25,10 @@ class Footer extends BaseComponent {
     const descriptionHeight = 40;
 
     const showTop =
-      !stringIsNullOrWhiteSpace(image) || !stringIsNullOrWhiteSpace(text);
+      !checkStringIsNullOrWhiteSpace(image) ||
+      !checkStringIsNullOrWhiteSpace(text);
 
-    const showBottom = !stringIsNullOrWhiteSpace(description);
+    const showBottom = !checkStringIsNullOrWhiteSpace(description);
 
     const totalHeight =
       (showTop ? textHeight : 0) + (showBottom ? descriptionHeight : 0);
@@ -44,7 +43,7 @@ class Footer extends BaseComponent {
         {showTop ? (
           <View style={{ height: transformSize(textHeight) }}>
             <CenterBox>
-              {stringIsNullOrWhiteSpace(image) ? null : (
+              {checkStringIsNullOrWhiteSpace(image) ? null : (
                 <VerticalBox>
                   <View
                     style={{
@@ -57,7 +56,7 @@ class Footer extends BaseComponent {
                 </VerticalBox>
               )}
 
-              {stringIsNullOrWhiteSpace(text) ? null : (
+              {checkStringIsNullOrWhiteSpace(text) ? null : (
                 <VerticalBox>
                   <View
                     style={{
@@ -65,7 +64,7 @@ class Footer extends BaseComponent {
                         color: '#00000073',
                         fontSize: transformSize(24),
                       },
-                      ...(!stringIsNullOrWhiteSpace(color)
+                      ...(!checkStringIsNullOrWhiteSpace(color)
                         ? {
                             color,
                           }
@@ -89,7 +88,7 @@ class Footer extends BaseComponent {
                     color: '#00000073',
                     fontSize: transformSize(20),
                   },
-                  ...(!stringIsNullOrWhiteSpace(color)
+                  ...(!checkStringIsNullOrWhiteSpace(color)
                     ? {
                         color,
                       }

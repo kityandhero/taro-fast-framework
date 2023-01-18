@@ -1,8 +1,7 @@
+import { isArray, isFunction, toNumber } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 

@@ -1,12 +1,11 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
-
 import {
+  checkInCollection,
   forEach as _forEach,
-  inCollection,
-} from 'taro-fast-common/es/utils/tools';
-import { isBoolean, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
+  isBoolean,
+  isFunction,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
 
 import BaseComponent from '../../BaseComponent';
 
@@ -50,21 +49,24 @@ class Row extends BaseComponent {
     const rootClass = ['tfc-row'];
 
     _forEach(this.props, (value, key) => {
-      if (key === 'direction' && inCollection(directionCollection, value)) {
+      if (
+        key === 'direction' &&
+        checkInCollection(directionCollection, value)
+      ) {
         rootClass.push(`tfc-row__${key}--${value}`);
       }
 
-      if (key === 'align' && inCollection(alignCollection, value)) {
+      if (key === 'align' && checkInCollection(alignCollection, value)) {
         rootClass.push(`tfc-row__${key}--${value}`);
       }
 
-      if (key === 'justify' && inCollection(justifyCollection, value)) {
+      if (key === 'justify' && checkInCollection(justifyCollection, value)) {
         rootClass.push(`tfc-row__${key}--${value}`);
       }
 
       if (
         key === 'alignContent' &&
-        inCollection(alignContentCollection, value)
+        checkInCollection(alignContentCollection, value)
       ) {
         return rootClass.push(`tfc-row__align-content--${value}`);
       }

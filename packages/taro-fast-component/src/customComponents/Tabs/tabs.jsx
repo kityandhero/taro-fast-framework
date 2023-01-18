@@ -1,14 +1,14 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  getGuid,
+  isArray,
+  isFunction,
+  logError,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  getGuid,
-  getRect,
-  inCollection,
-  recordError,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
 import Badge from '../Badge';
 import BaseComponent from '../BaseComponent';
@@ -204,7 +204,7 @@ class Tabs extends BaseComponent {
             return rect;
           })
           .catch((error) => {
-            recordError({ error });
+            logError({ error });
           });
       }, 200);
     }
@@ -224,7 +224,7 @@ class Tabs extends BaseComponent {
             return rect;
           })
           .catch((error) => {
-            recordError({ error });
+            logError({ error });
           });
       }, 200);
     }
@@ -233,7 +233,7 @@ class Tabs extends BaseComponent {
   getDirection = () => {
     const { direction: directionSource } = this.props;
 
-    const direction = inCollection(directionCollection, directionSource)
+    const direction = checkInCollection(directionCollection, directionSource)
       ? directionSource
       : 'horizontal';
 

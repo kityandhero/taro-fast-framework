@@ -1,13 +1,13 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  datetimeFormat,
+  formatDatetime,
+  toNumber,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
-import {
-  formatDatetime,
-  inCollection,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   ColorText,
@@ -201,7 +201,7 @@ export function buildItem({
           );
         }
 
-        if (inCollection([3, 1], renderMode)) {
+        if (checkInCollection([3, 1], renderMode)) {
           return (
             <FlexBox
               key={`article_${keyPrefix}_${i}`}

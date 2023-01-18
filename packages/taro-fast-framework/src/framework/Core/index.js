@@ -1,4 +1,5 @@
-import { underlyingExtensionState } from 'taro-fast-common/es/utils/constants';
+import { underlyingExtensionState } from 'easy-soft-utility';
+
 import { getDerivedStateFromPropsForUrlParamsCore } from 'taro-fast-common/es/utils/tools';
 
 import Base from '../Base';

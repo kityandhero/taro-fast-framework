@@ -2,7 +2,7 @@ import {
   getStringFromLocalStorage,
   removeLocalStorage,
   saveStringToLocalStorage,
-} from './tools';
+} from 'easy-soft-utility';
 
 export const storageKeyCollection = {
   modelNameList: 'modelNameList',

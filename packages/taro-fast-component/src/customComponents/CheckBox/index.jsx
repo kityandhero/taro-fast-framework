@@ -1,16 +1,14 @@
-import { View } from '@tarojs/components';
-
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isFunction,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toLower } from 'taro-fast-common/es/utils/typeConvert';
+  toLower,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Card from '../Card';
@@ -119,7 +117,9 @@ class CheckBox extends BaseComponent {
     const { layout } = this.props;
 
     return toLower(
-      inCollection(layoutCollection, layout) ? layout : defaultProps.layout,
+      checkInCollection(layoutCollection, layout)
+        ? layout
+        : defaultProps.layout,
     );
   };
 
@@ -134,7 +134,7 @@ class CheckBox extends BaseComponent {
 
     let valueChanged = [];
 
-    if (inCollection(valueStage || [], value)) {
+    if (checkInCollection(valueStage || [], value)) {
       (valueStage || []).forEach((o) => {
         if (o !== value) {
           valueChanged.push(o);
@@ -149,7 +149,7 @@ class CheckBox extends BaseComponent {
     const result = [];
 
     valueChanged.forEach((o) => {
-      if (!stringIsNullOrWhiteSpace(o)) {
+      if (!checkStringIsNullOrWhiteSpace(o)) {
         result.push(o);
       }
     });
@@ -231,7 +231,7 @@ class CheckBox extends BaseComponent {
                     },
                   }}
                   left={
-                    inCollection(valueStage || [], valueItem)
+                    checkInCollection(valueStage || [], valueItem)
                       ? iconCheck || checkStatusIcon
                       : iconUncheck || uncheckStatusIcon
                   }
@@ -294,7 +294,7 @@ class CheckBox extends BaseComponent {
                     },
                   }}
                   left={
-                    inCollection(valueStage || [], valueItem)
+                    checkInCollection(valueStage || [], valueItem)
                       ? iconCheck || checkStatusIcon
                       : iconUncheck || uncheckStatusIcon
                   }
@@ -367,7 +367,7 @@ class CheckBox extends BaseComponent {
                 disabled={disabled}
                 border={index === listCount - 1 ? false : border}
                 extra={
-                  inCollection(valueStage || [], valueItem)
+                  checkInCollection(valueStage || [], valueItem)
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || uncheckStatusIconForListView
                 }
@@ -386,7 +386,7 @@ class CheckBox extends BaseComponent {
             <Item
               key={key}
               prefix={
-                inCollection(valueStage || [], valueItem)
+                checkInCollection(valueStage || [], valueItem)
                   ? iconCheck || checkStatusIcon
                   : iconUncheck || uncheckStatusIcon
               }

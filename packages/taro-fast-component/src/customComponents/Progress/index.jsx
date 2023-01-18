@@ -1,16 +1,14 @@
 import classNames from 'classnames';
-import { Text, View } from '@tarojs/components';
-
 import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isNumber,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  toNumber,
+} from 'easy-soft-utility';
+import { Text, View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -86,7 +84,7 @@ class Progress extends BaseComponent {
     const { activeColor } = this.props;
 
     if (isString(activeColor)) {
-      if (stringIsNullOrWhiteSpace(activeColor)) {
+      if (checkStringIsNullOrWhiteSpace(activeColor)) {
         return {};
       }
 
@@ -95,7 +93,7 @@ class Progress extends BaseComponent {
 
     if (isArray(activeColor)) {
       const a = activeColor.filter(
-        (o) => isString(o) && !stringIsNullOrWhiteSpace(o),
+        (o) => isString(o) && !checkStringIsNullOrWhiteSpace(o),
       );
 
       if (a.length > 0) {

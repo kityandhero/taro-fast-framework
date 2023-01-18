@@ -1,21 +1,25 @@
-import { embedModelCollection } from 'taro-fast-framework/es/models';
+import { appendBuilder } from 'taro-fast-framework/es/models';
 
-import administrativeDivision from './administrativeDivision';
-import article from './article';
-import customer from './customer';
-import entrance from './entrance';
-import global from './global';
-import news from './news';
-import session from './session';
-import simulation from './simulation';
+import { buildAdministrativeDivision } from './administrativeDivision';
+import { buildArticle } from './article';
+import { buildCustomer } from './customer';
+import { buildEntrance } from './entrance';
+import { buildGlobal } from './global';
+import { buildNews } from './news';
+import { buildSession } from './session';
+import { buildSimulation } from './simulation';
 
-export default embedModelCollection(
-  global,
-  session,
-  entrance,
-  simulation,
-  news,
-  article,
-  customer,
-  administrativeDivision,
-);
+function collectModelBuilder() {
+  appendBuilder(buildAdministrativeDivision);
+  appendBuilder(buildArticle);
+  appendBuilder(buildCustomer);
+  appendBuilder(buildEntrance);
+  appendBuilder(buildGlobal);
+  appendBuilder(buildNews);
+  appendBuilder(buildSession);
+  appendBuilder(buildSimulation);
+}
+
+collectModelBuilder();
+
+export function prepareModel() {}

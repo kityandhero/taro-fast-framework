@@ -1,12 +1,12 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  formatMoney,
+  isMoney,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  formatMoney,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isMoney } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -96,7 +96,7 @@ class Price extends BaseComponent {
             lineHeight: 1,
           }}
         >
-          {!stringIsNullOrWhiteSpace(title) ? (
+          {!checkStringIsNullOrWhiteSpace(title) ? (
             <View style={{ ...itemStyle, ...(titleStyle || {}) }}>{title}</View>
           ) : null}
 
@@ -116,7 +116,7 @@ class Price extends BaseComponent {
             </View>
           )}
 
-          {stringIsNullOrWhiteSpace(unit) ? null : (
+          {checkStringIsNullOrWhiteSpace(unit) ? null : (
             <View style={{ ...itemStyle, ...(unitStyle || {}) }}>{unit}</View>
           )}
         </View>

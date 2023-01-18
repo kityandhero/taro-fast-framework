@@ -1,9 +1,8 @@
 import classNames from 'classnames';
+import { errorImage, isFunction } from 'easy-soft-utility';
 import { Image, View } from '@tarojs/components';
 
-import { errorImage } from 'taro-fast-common/es/utils/constants';
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import ActivityIndicator from '../ActivityIndicator';
 import BaseComponent from '../BaseComponent';

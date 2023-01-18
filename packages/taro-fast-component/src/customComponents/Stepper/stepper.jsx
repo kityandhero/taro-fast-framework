@@ -1,16 +1,18 @@
 import classNames from 'classnames';
+import {
+  isFunction,
+  mergeProps,
+  toBoundary,
+  toNumber,
+} from 'easy-soft-utility';
 import { useEffect, useState } from 'react';
 import { Input, View } from '@tarojs/components';
 
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 import {
-  bound,
-  mergeProps,
   transformSize,
   withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -100,7 +102,7 @@ export const Stepper = (p) => {
       return;
     }
 
-    let target = bound(v, props.min, props.max);
+    let target = toBoundary(v, props.min, props.max);
 
     if (props.digits || props.digits === 0) {
       target = parseFloat(target.toFixed(props.digits));

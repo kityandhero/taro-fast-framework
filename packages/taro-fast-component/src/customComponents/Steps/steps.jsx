@@ -1,12 +1,12 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -30,7 +30,7 @@ class Steps extends BaseComponent {
   getDirection = () => {
     const { direction } = this.props;
 
-    return inCollection(directionCollection, direction)
+    return checkInCollection(directionCollection, direction)
       ? direction
       : 'horizontal';
   };
@@ -92,7 +92,7 @@ class Steps extends BaseComponent {
           ? listStatus[index]
           : '';
 
-      if (stringIsNullOrWhiteSpace(status)) {
+      if (checkStringIsNullOrWhiteSpace(status)) {
         if (statusPrev === 'finish') {
           status = 'process';
         } else {
@@ -168,7 +168,7 @@ class Steps extends BaseComponent {
             title,
             description,
             icon,
-            status: !stringIsNullOrWhiteSpace(statusSource)
+            status: !checkStringIsNullOrWhiteSpace(statusSource)
               ? statusSource
               : 'wait',
             index,

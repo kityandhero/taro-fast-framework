@@ -1,8 +1,6 @@
 import classNames from 'classnames';
+import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import Badge from '../Badge';
 import BaseComponent from '../BaseComponent';
@@ -76,18 +74,18 @@ class TabbarItem extends BaseComponent {
 
     const imageBoxStyle = { width: 'var(--tfc-44)' };
 
-    const iconInactive = stringIsNullOrWhiteSpace(icon) ? (
-      stringIsNullOrWhiteSpace(image) ? null : (
+    const iconInactive = checkStringIsNullOrWhiteSpace(icon) ? (
+      checkStringIsNullOrWhiteSpace(image) ? null : (
         <ImageBox src={image} imageBoxStyle={imageBoxStyle} />
       )
     ) : (
       <Icon value={icon} size={iconSize} />
     );
 
-    const iconActive = stringIsNullOrWhiteSpace(activeIcon) ? (
-      stringIsNullOrWhiteSpace(activeImage) ? (
-        stringIsNullOrWhiteSpace(icon) ? (
-          stringIsNullOrWhiteSpace(image) ? null : (
+    const iconActive = checkStringIsNullOrWhiteSpace(activeIcon) ? (
+      checkStringIsNullOrWhiteSpace(activeImage) ? (
+        checkStringIsNullOrWhiteSpace(icon) ? (
+          checkStringIsNullOrWhiteSpace(image) ? null : (
             <ImageBox src={image} imageBoxStyle={imageBoxStyle} />
           )
         ) : (
@@ -122,7 +120,7 @@ class TabbarItem extends BaseComponent {
       </>
     );
 
-    if (dot || !stringIsNullOrWhiteSpace(badgeContent)) {
+    if (dot || !checkStringIsNullOrWhiteSpace(badgeContent)) {
       itemCore = (
         <Badge color={badgeColor} content={badgeContent} dot={dot}>
           {itemCore}

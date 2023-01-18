@@ -1,4 +1,4 @@
-import { connect } from 'taro-fast-framework/es/utils/dva';
+import { connect } from 'easy-soft-dva';
 
 import iconBasic from '../../../assets/images/icon-list-basic.png';
 import ChannelPageBase from '../../../customComponents/ChannelPageBase';

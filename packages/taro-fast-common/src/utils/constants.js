@@ -5,48 +5,6 @@ export const pxToRemRoot = {
   h5: 24,
 };
 
-export const envCollection = {
-  WEAPP: 'WEAPP',
-  WEB: 'WEB',
-  RN: 'RN',
-  SWAN: 'SWAN',
-  ALIPAY: 'ALIPAY',
-  TT: 'TT',
-  QQ: 'QQ',
-  JD: 'JD',
-  UNKNOWN: 'UNKNOWN',
-};
-
-/**
- * 基础state
- */
-export const underlyingState = {
-  loadApiPath: '',
-  firstLoadSuccess: false,
-  loadSuccess: false,
-  registering: false,
-  dataLoading: false,
-  reloading: false,
-  searching: false,
-  refreshing: false,
-  paging: false,
-  processing: false,
-  dispatchComplete: true,
-  metaData: null,
-  metaExtra: null,
-  metaListData: [],
-  metaOriginalData: null,
-  urlParams: null,
-  externalData: null,
-};
-
-/**
- * 扩展state
- */
-export const underlyingExtensionState = {
-  dataLoading: true,
-};
-
 export const verifyTicketValidityResult = {
   unknown: -1,
   fail: 0,
@@ -72,22 +30,6 @@ export const locationModeCollection = {
 };
 
 /**
- * request method collection
- */
-export const requestMethod = {
-  get: 'GET',
-  post: 'POST',
-  put: 'PUT',
-  delete: 'DELETE',
-  trace: 'TRACE',
-  connect: 'CONNECT',
-};
-
-export const zeroString = '0';
-
-export const zeroInt = 0;
-
-/**
  * 鉴权失败码
  */
 export const authenticationFailCode = 2001;
@@ -96,11 +38,6 @@ export const authenticationFailCode = 2001;
  * Api请求成功码
  */
 export const apiSuccessCode = 200;
-
-/**
- * 1970-01-01 00:00
- */
-export const emptyDatetime = '1970-01-01 00:00';
 
 /**
  * 用户默认图
@@ -174,183 +111,6 @@ export const accessWaySpecialCollection = {
   },
 };
 
-/**
- * 转换集合
- */
-export const convertCollection = {
-  /**
-   * 数字
-   */
-  number: 'number',
-
-  /**
-   * 日期 date
-   */
-  datetime: 'datetime',
-
-  /**
-   * 字符串
-   */
-  string: 'string',
-
-  /**
-   * moment日期
-   */
-  moment: 'moment',
-
-  /**
-   * 金额
-   */
-  money: 'money',
-
-  /**
-   * 数组
-   */
-  array: 'array',
-};
-
-/**
- * 格式化集合
- */
-export const formatCollection = {
-  /**
-   * 金额 ￥ 0.00
-   */
-  money: 'money',
-
-  /**
-   * 格式化日期 YYYY-MM-DD hh:mm:ss
-   */
-  datetime: 'datetime',
-
-  /**
-   * 中文金额
-   */
-  chineseMoney: 'chineseMoney',
-
-  /**
-   * 百分比
-   */
-  percentage: 'percentage',
-};
-
-export const datetimeFormat = {
-  yearMonthDayHourMinuteSecond: 'YYYY-MM-DD HH:mm:ss',
-  yearMonthDayHourMinute: 'YYYY-MM-DD HH:mm',
-  yearMonthDay: 'YYYY-MM-DD',
-  yearMonth: 'YYYY-MM',
-  year: 'YYYY',
-  monthDayHourMinuteSecond: 'YYYY-MM-DD HH:mm:ss',
-  monthDayHourMinute: 'MM-DD HH:mm',
-  monthDay: 'MM-DD',
-  hourMinute: 'HH:mm',
-  hourMinuteSecond: 'HH:mm:ss',
-  month: 'MM',
-  day: 'DD',
-  hour: 'HH',
-  minute: 'mm',
-  second: 'ss',
-};
-
-/**
- * 排序动作
- */
-export const sortOperate = {
-  moveUp: 'moveUp',
-  moveDown: 'moveDown',
-};
-
-/**
- * 字符串类型 ‘0’/'1'
- */
-export const whetherString = {
-  no: '0',
-  yes: '1',
-};
-
-/**
- * 字符串类型 0/1
- */
-export const whetherNumber = {
-  no: 0,
-  yes: 1,
-};
-
-/**
- * 日志类型
- */
-export const logLevel = {
-  /**
-   * 跟踪
-   */
-  trace: 'trace',
-
-  /**
-   * 调试
-   */
-  debug: 'debug',
-
-  /**
-   * 警告
-   */
-  warn: 'warn',
-
-  /**
-   * 错误
-   */
-  error: 'error',
-
-  /**
-   * 信息
-   */
-  info: 'info',
-
-  /**
-   * 配置
-   */
-  config: 'config',
-
-  /**
-   * 执行
-   */
-  execute: 'execute',
-};
-
-export const logShowMode = {
-  /**
-   * 未知
-   */
-  unknown: 'unknown',
-
-  /**
-   * 文本
-   */
-  text: 'text',
-
-  /**
-   * 对象
-   */
-  object: 'object',
-};
-
-export const notificationTypeCollection = {
-  success: 'success',
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-  warn: 'warn',
-  open: 'open',
-};
-
-export const messageTypeCollection = {
-  success: 'success',
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-  warn: 'warn',
-  open: 'open',
-};
-
 export const colorStatus = {
   primary: 'var(--tfc-color-primary)',
   success: 'var(--tfc-color-success)',
@@ -422,21 +182,3 @@ export const colorShadow = {
   grey: 'var(--tfc-color-grey-shadow)',
   black: 'var(--tfc-color-black-shadow)',
 };
-
-export const transparentImage =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABLCAYAAACGGCK3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cExAQAAAMKg9U9tDQ8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA3NXV7AAHfw7zWAAAAAElFTkSuQmCC';
-
-/**
- * errorImage
- */
-export const errorImage = transparentImage;
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function empty() {
-  return {};
-}

@@ -1,32 +1,31 @@
-import { setCache } from 'taro-fast-common/es/utils/cacheAssist';
-import { requestMethod } from 'taro-fast-common/es/utils/constants';
 import {
-  corsTarget,
-  getTaroGlobalData,
-  queryStringify,
-  recordDebug,
-  recordInfo,
-  recordObject,
-  recordText,
-  recordTrace,
-  recordWarn,
-  redirectTo,
-  showErrorMessage,
-  showInfoMessage,
-  stringIsNullOrWhiteSpace,
-  trim,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  buildQueryStringify,
+  checkStringIsNullOrWhiteSpace,
   isFunction,
   isObject,
   isString,
   isUndefined,
-} from 'taro-fast-common/es/utils/typeCheck';
-import {
+  logDebug,
+  logInfo,
+  logObject,
+  logText,
+  logTrace,
+  logWarn,
+  requestMethod,
+  setCache,
+  showErrorMessage,
+  showInfoMessage,
   toLower,
   toNumber,
   toUpper,
-} from 'taro-fast-common/es/utils/typeConvert';
+  trim,
+} from 'easy-soft-utility';
+
+import {
+  corsTarget,
+  getTaroGlobalData,
+  redirectTo,
+} from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import { getToken } from './globalStorageAssist';
@@ -72,9 +71,7 @@ function dataExceptionNotice(d) {
     const currentTime = new Date().getTime();
 
     if (codeAdjust !== authenticationFailCode) {
-      recordWarn(
-        `api call failed, code: ${codeAdjust}, message: ${messageText}`,
-      );
+      logWarn(`api call failed, code: ${codeAdjust}, message: ${messageText}`);
 
       if (codeAdjust === toNumber(lastCustomMessage.code)) {
         if (currentTime - lastCustomMessage.time > 800) {
@@ -100,7 +97,7 @@ function dataExceptionNotice(d) {
         };
       }
     } else {
-      recordDebug(`api call failed, authentication fail`);
+      logDebug(`api call failed, authentication fail`);
     }
 
     const signInPath = defaultSettingsLayoutCustom.getSignInPath();
@@ -108,7 +105,7 @@ function dataExceptionNotice(d) {
       defaultSettingsLayoutCustom.getAuthenticationFailCode();
 
     if (codeAdjust === authenticationFailCode) {
-      if (stringIsNullOrWhiteSpace(signInPath)) {
+      if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 
@@ -398,7 +395,7 @@ export function handleListDataAssist(state, action, namespace) {
       value: v,
     });
 
-    recordDebug(
+    logDebug(
       `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
         cacheResult ? 'cache success' : 'cache fail'
       }.`,
@@ -442,7 +439,7 @@ export function handlePageListDataAssist(state, action, namespace) {
       value: v,
     });
 
-    recordDebug(
+    logDebug(
       `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
         cacheResult ? 'cache success' : 'cache fail'
       }.`,
@@ -487,13 +484,13 @@ export async function request({
   let apiVersion = defaultSettingsLayoutCustom.getApiVersion();
 
   if (!isString(apiVersion)) {
-    recordText(apiVersion);
+    logText(apiVersion);
 
     throw new Error('apiVersion is not string');
   }
 
   if (!isString(api)) {
-    recordText(api);
+    logText(api);
 
     throw new Error('api is not string');
   }
@@ -506,7 +503,7 @@ export async function request({
   ) {
     url = api;
   } else {
-    if (!stringIsNullOrWhiteSpace(apiVersion)) {
+    if (!checkStringIsNullOrWhiteSpace(apiVersion)) {
       apiVersion = `/${apiVersion}/`;
     }
 
@@ -519,14 +516,14 @@ export async function request({
     }
 
     if (isObject(urlParams)) {
-      url = `${url}?${queryStringify(urlParams)}`;
+      url = `${url}?${buildQueryStringify(urlParams)}`;
     }
   }
 
   const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
 
   if (useVirtualRequest) {
-    recordTrace(
+    logTrace(
       `api request is virtual: simulation start,${
         virtualRequestDelay > 0 ? ` delay ${virtualRequestDelay}ms,` : ''
       } api is ${api}.`,
@@ -553,7 +550,7 @@ export async function request({
     if (virtualNeedAuthorize) {
       const token = getToken();
 
-      if (!stringIsNullOrWhiteSpace(token)) {
+      if (!checkStringIsNullOrWhiteSpace(token)) {
         verifyToken = true;
       }
     }
@@ -561,7 +558,7 @@ export async function request({
     if (virtualNeedAuthorize && !verifyToken) {
       const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-      if (stringIsNullOrWhiteSpace(signInPath)) {
+      if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 
@@ -590,7 +587,7 @@ export async function request({
     }
 
     if (showRequestInfo) {
-      recordObject({
+      logObject({
         url,
         useVirtualRequest,
         virtualResponse: result,
@@ -602,7 +599,7 @@ export async function request({
   }
 
   if (showRequestInfo) {
-    recordObject({
+    logObject({
       api,
       apiVersion,
       apiChange: url,
@@ -612,8 +609,8 @@ export async function request({
 
   const appId = defaultSettingsLayoutCustom.getAppId() || '';
 
-  if (stringIsNullOrWhiteSpace(appId)) {
-    recordInfo('appId is header is empty');
+  if (checkStringIsNullOrWhiteSpace(appId)) {
+    logInfo('appId is header is empty');
   }
 
   if (trim(toUpper(method)) === 'POST') {
@@ -660,7 +657,7 @@ export function getApiVersion() {
 export function corsTargetWithApiVersion() {
   let apiVersion = getApiVersion();
 
-  if (!stringIsNullOrWhiteSpace(apiVersion)) {
+  if (!checkStringIsNullOrWhiteSpace(apiVersion)) {
     apiVersion = `/${apiVersion}`;
   }
 

@@ -1,12 +1,12 @@
-import { View } from '@tarojs/components';
-
 import {
-  colorHexToRGB,
-  inCollection,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  buildRGBColorFromHexColor,
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  isNumber,
+  toNumber,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -55,13 +55,13 @@ class Overlay extends BaseComponent {
   getMode = () => {
     const { mode } = this.props;
 
-    return inCollection(modeCollection, mode) ? mode : defaultProps.mode;
+    return checkInCollection(modeCollection, mode) ? mode : defaultProps.mode;
   };
 
   getAnimal = () => {
     const { animal } = this.props;
 
-    return inCollection(animalCollection, animal)
+    return checkInCollection(animalCollection, animal)
       ? animal
       : defaultProps.animal;
   };
@@ -154,12 +154,12 @@ class Overlay extends BaseComponent {
 
         transition: `opacity ${duration}ms ${animal}`,
       },
-      ...(stringIsNullOrWhiteSpace(image)
+      ...(checkStringIsNullOrWhiteSpace(image)
         ? {
             backgroundColor:
               transparent || color === 'transparent'
                 ? 'transparent'
-                : `rgba(${colorHexToRGB(color, '')}, ${alpha})`,
+                : `rgba(${buildRGBColorFromHexColor(color, '')}, ${alpha})`,
           }
         : {
             backgroundImage: image,

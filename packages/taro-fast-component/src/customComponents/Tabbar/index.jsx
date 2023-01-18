@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
-
 import {
+  checkStringIsNullOrWhiteSpace,
   findIndex,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+  isArray,
+  isFunction,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
 
@@ -47,7 +47,7 @@ function mergeItems(items, badges, props) {
   return itemList.map((o) => {
     const { name } = o;
 
-    if (!stringIsNullOrWhiteSpace(o)) {
+    if (!checkStringIsNullOrWhiteSpace(o)) {
       const badgeIndex = findIndex(badges, (one) => one.name === name);
 
       if (badgeIndex >= 0) {

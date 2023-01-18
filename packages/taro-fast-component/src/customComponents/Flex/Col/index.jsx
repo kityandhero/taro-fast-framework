@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
-
 import {
+  checkInCollection,
   forEach as _forEach,
-  inCollection,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+  isFunction,
+  isNumber,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
 
 import BaseComponent from '../../BaseComponent';
 
@@ -51,7 +51,7 @@ class Col extends BaseComponent {
         rootClass.push(`tfc-col-${value}`);
       }
 
-      if (key === 'align' && inCollection(alignCollection, value)) {
+      if (key === 'align' && checkInCollection(alignCollection, value)) {
         rootClass.push(`tfc-col__${key}--${value}`);
       }
 

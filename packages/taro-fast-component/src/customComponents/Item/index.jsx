@@ -1,13 +1,8 @@
 import classNames from 'classnames';
+import { getGuid, isFunction, logError } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  getGuid,
-  getRect,
-  recordError,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
@@ -101,7 +96,7 @@ class Item extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }
   };

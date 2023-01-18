@@ -5,6 +5,7 @@
 
 # templates
 **/templates/**
+**/.swc/**
 
 **/*.svg
 **/dist

@@ -1,17 +1,18 @@
+import { checkWhetherDevelopmentEnvironment } from 'easy-soft-utility';
+
 import { locationModeCollection } from 'taro-fast-common/es/utils/constants';
-import { checkEnvIsDevelopment } from 'taro-fast-common/es/utils/tools';
 import { AppBase } from 'taro-fast-framework/es/framework';
 
 import LogoImage from './assets/images/logo.png';
-import models from './models';
+import { prepareModel } from './models';
 
 import './app.less';
 
 const config = {
   webRootFontSize: '152%',
   appId: 'pdbwl0roqjy03k',
-  showLogInConsole: checkEnvIsDevelopment(),
-  // showRequestInfo: checkEnvIsDevelopment(),
+  showLogInConsole: checkWhetherDevelopmentEnvironment(),
+  // showRequestInfo: checkWhetherDevelopmentEnvironment(),
   showUseVirtualRequestMessage: false,
   apiPrefix: {
     corsTargetDomain: 'https://universalitymallapi.1010101.cc',
@@ -39,9 +40,11 @@ const config = {
   },
 };
 
+prepareModel();
+
 class App extends AppBase {
   constructor(props) {
-    super(props, config, models);
+    super(props, config);
   }
 }
 

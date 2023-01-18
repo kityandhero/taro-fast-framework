@@ -1,21 +1,23 @@
 import {
-  hideNavigationBarLoading,
-  recordDebug,
-  recordError,
-  recordExecute,
-  recordObject,
-  recordText,
-  showErrorMessage,
-  showNavigationBarLoading,
-  stopPullDownRefresh,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkStringIsNullOrWhiteSpace,
   isEqual,
   isFunction,
   isUndefined,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber, toString } from 'taro-fast-common/es/utils/typeConvert';
+  logDebug,
+  logError,
+  logExecute,
+  logObject,
+  logText,
+  showErrorMessage,
+  toNumber,
+  toString,
+} from 'easy-soft-utility';
+
+import {
+  hideNavigationBarLoading,
+  showNavigationBarLoading,
+  stopPullDownRefresh,
+} from 'taro-fast-common/es/utils/tools';
 
 import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 import { checkWhetherAuthorizeFail } from '../../utils/tools';
@@ -26,7 +28,7 @@ class Base extends Infrastructure {
    * 执行初始化远程请求
    */
   doLoadRemoteRequest = () => {
-    recordExecute('doLoadRemoteRequest');
+    logExecute('doLoadRemoteRequest');
 
     const { spin } = this;
 
@@ -128,9 +130,9 @@ class Base extends Infrastructure {
         //   message: text,
         // });
 
-        // recordObject(this);
+        // logObject(this);
 
-        recordDebug('state dispatchComplete will set to true');
+        logDebug('state dispatchComplete will set to true');
 
         this.setState({
           spin: false,
@@ -161,7 +163,7 @@ class Base extends Infrastructure {
           ...willSaveState,
         },
         () => {
-          recordDebug('state dispatchComplete will set to false');
+          logDebug('state dispatchComplete will set to false');
 
           that.setState({ dispatchComplete: false });
 
@@ -192,7 +194,7 @@ class Base extends Infrastructure {
               callback,
             });
           } else {
-            recordDebug('state dispatchComplete will set to true');
+            logDebug('state dispatchComplete will set to true');
 
             that.setState({
               spin: false,
@@ -208,7 +210,7 @@ class Base extends Infrastructure {
         },
       );
     } catch (error) {
-      recordText({ loadApiPath });
+      logText({ loadApiPath });
 
       throw error;
     }
@@ -242,7 +244,7 @@ class Base extends Infrastructure {
 
       const loadApiCustomPath = this.adjustLoadApiPath();
 
-      const loadApiPathCustom = stringIsNullOrWhiteSpace(loadApiCustomPath)
+      const loadApiPathCustom = checkStringIsNullOrWhiteSpace(loadApiCustomPath)
         ? {}
         : {
             loadApiPath: loadApiCustomPath,
@@ -278,7 +280,7 @@ class Base extends Infrastructure {
             hideNavigationBarLoading();
             stopPullDownRefresh();
 
-            recordDebug('state dispatchComplete will set to true');
+            logDebug('state dispatchComplete will set to true');
 
             let willSaveToState = {
               spin: false,
@@ -350,7 +352,7 @@ class Base extends Infrastructure {
                   metaOriginalData: metaOriginalData || null,
                 });
               } catch (e) {
-                recordError(e);
+                logError(e);
 
                 const text = `${toString(e)},place view in the console`;
 
@@ -404,9 +406,9 @@ class Base extends Infrastructure {
             stopPullDownRefresh();
             hideNavigationBarLoading();
 
-            recordError(error);
+            logError(error);
 
-            recordDebug('state dispatchComplete will set to true');
+            logDebug('state dispatchComplete will set to true');
 
             that.setState({
               spin: false,
@@ -424,9 +426,9 @@ class Base extends Infrastructure {
       stopPullDownRefresh();
       hideNavigationBarLoading();
 
-      recordObject({ loadApiPath, requestData });
+      logObject({ loadApiPath, requestData });
 
-      recordDebug('state dispatchComplete will set to true');
+      logDebug('state dispatchComplete will set to true');
 
       this.setState({
         spin: false,

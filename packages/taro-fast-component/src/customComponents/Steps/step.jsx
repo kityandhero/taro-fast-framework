@@ -1,7 +1,6 @@
 import classNames from 'classnames';
+import { checkInCollection } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { inCollection } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -20,7 +19,7 @@ class Step extends BaseComponent {
   getStatus = () => {
     const { status } = this.props;
 
-    return inCollection(statusCollection, status) ? status : 'wait';
+    return checkInCollection(statusCollection, status) ? status : 'wait';
   };
 
   renderFurther() {

@@ -1,11 +1,11 @@
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  isString,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isString } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Col from '../Flex/Col';
@@ -41,7 +41,7 @@ class ProgressItem extends BaseComponent {
   getLayout = () => {
     const { layout } = this.props;
 
-    return inCollection(layoutCollection, layout) ? layout : 'horizontal';
+    return checkInCollection(layoutCollection, layout) ? layout : 'horizontal';
   };
 
   renderFurther() {
@@ -70,7 +70,7 @@ class ProgressItem extends BaseComponent {
     let labelComponent = label;
 
     if (isString(label)) {
-      if (!stringIsNullOrWhiteSpace(label)) {
+      if (!checkStringIsNullOrWhiteSpace(label)) {
         labelComponent = (
           <VerticalBox>
             <View

@@ -1,7 +1,7 @@
+import { isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import ScaleBox from '../ScaleBox';

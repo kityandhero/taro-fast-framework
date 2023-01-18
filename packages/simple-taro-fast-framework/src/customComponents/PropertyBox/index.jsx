@@ -1,19 +1,17 @@
-import { Component } from 'react';
-
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isBoolean,
   isFunction,
   isObject,
   isString,
   isUndefined,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
+  toString,
+} from 'easy-soft-utility';
+import { Component } from 'react';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   DataGrid,
@@ -67,7 +65,7 @@ class PropertyBox extends Component {
             canCopy: true,
           };
         } else if (isObject(value) || isArray(value)) {
-          if (inCollection(ignorePropertyList, key)) {
+          if (checkInCollection(ignorePropertyList, key)) {
             return {
               label: key,
               value: 'data/component',
@@ -144,7 +142,7 @@ class PropertyBox extends Component {
                 ? [description]
                 : []),
               ...(isString(description) &&
-              !stringIsNullOrWhiteSpace(description)
+              !checkStringIsNullOrWhiteSpace(description)
                 ? [
                     {
                       text: description,

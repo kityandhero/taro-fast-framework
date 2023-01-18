@@ -1,28 +1,27 @@
 import {
+  flushLocalStorage,
   getCache,
+  getJsonFromLocalStorage,
+  getStringFromLocalStorage,
   hasCache,
+  isArray,
+  logDebug,
+  logExecute,
+  logInfo,
+  logWarn,
+  removeLocalStorage,
+  saveJsonToLocalStorage,
+  saveStringToLocalStorage,
   setCache,
-} from 'taro-fast-common/es/utils/cacheAssist';
+  showInfoMessage,
+  toMd5,
+  toNumber,
+} from 'easy-soft-utility';
+
 import {
   accessWaySpecialCollection,
   locationModeCollection,
 } from 'taro-fast-common/es/utils/constants';
-import {
-  clearLocalStorage,
-  getJsonFromLocalStorage,
-  getStringFromLocalStorage,
-  md5,
-  recordDebug,
-  recordExecute,
-  recordInfo,
-  recordWarn,
-  removeLocalStorage,
-  saveJsonToLocalStorage,
-  saveStringToLocalStorage,
-  showInfoMessage,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 export const storageKeyCollection = {
   token: 'token',
@@ -374,7 +373,7 @@ export function removeEffectiveCode() {
  * @returns
  */
 export function getSession() {
-  recordExecute('getSession');
+  logExecute('getSession');
 
   const key = storageKeyCollection.session;
 
@@ -389,7 +388,7 @@ export function getSession() {
  * @returns
  */
 export function setSession(session) {
-  recordDebug(`setSession ${session}`);
+  logDebug(`setSession ${session}`);
 
   const key = storageKeyCollection.session;
 
@@ -404,7 +403,7 @@ export function setSession(session) {
  * @returns
  */
 export function removeSession() {
-  recordInfo('removeSession');
+  logInfo('removeSession');
 
   const key = storageKeyCollection.session;
 
@@ -423,7 +422,7 @@ export function getSessionRefreshing() {
 
   const v = getStringFromLocalStorage(key);
 
-  recordDebug(`getSessionRefreshing: ${v === 'true'}`);
+  logDebug(`getSessionRefreshing: ${v === 'true'}`);
 
   return v === 'true';
 }
@@ -436,7 +435,7 @@ export function getSessionRefreshing() {
  * @returns
  */
 export function setSessionRefreshing(sessionRefreshing) {
-  recordDebug(`setSessionRefreshing ${sessionRefreshing}`);
+  logDebug(`setSessionRefreshing ${sessionRefreshing}`);
 
   const key = storageKeyCollection.sessionRefreshing;
 
@@ -451,7 +450,7 @@ export function setSessionRefreshing(sessionRefreshing) {
  * @returns
  */
 export function removeSessionRefreshing() {
-  recordInfo('removeSessionRefreshing');
+  logInfo('removeSessionRefreshing');
 
   const key = storageKeyCollection.sessionRefreshing;
 
@@ -900,7 +899,7 @@ export function removeWeather() {
  * @returns
  */
 export function getCurrentCustomer() {
-  recordExecute('getCurrentCustomer from local cache');
+  logExecute('getCurrentCustomer from local cache');
 
   const key = storageKeyCollection.currentCustomer;
 
@@ -920,7 +919,7 @@ export function getCurrentCustomer() {
   const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
 
   if (dataVersion !== now) {
-    recordWarn('info current customer cache expired, will return null');
+    logWarn('info current customer cache expired, will return null');
 
     return null;
   }
@@ -943,7 +942,7 @@ export function getCurrentCustomer() {
  * @returns
  */
 export function setCurrentCustomer(data) {
-  recordExecute('setCurrentCustomer to local cache');
+  logExecute('setCurrentCustomer to local cache');
 
   const key = storageKeyCollection.currentCustomer;
 
@@ -1018,7 +1017,7 @@ export function removeModelNameList() {
  * @returns
  */
 export function getCurrentMetaData() {
-  recordExecute('getCurrentMetaData from local cache');
+  logExecute('getCurrentMetaData from local cache');
 
   const key = storageKeyCollection.metaData;
 
@@ -1052,7 +1051,7 @@ export function getCurrentMetaData() {
  * @returns
  */
 export function setCurrentMetaData(data) {
-  recordExecute('setMetaData to local cache');
+  logExecute('setMetaData to local cache');
 
   const key = storageKeyCollection.metaData;
 
@@ -1088,7 +1087,7 @@ export function removeCurrentMetaData() {
  * @returns
  */
 export function getAdministrativeDivisionFullData() {
-  recordExecute('getAdministrativeDivisionFullData from local cache');
+  logExecute('getAdministrativeDivisionFullData from local cache');
 
   const key = storageKeyCollection.administrativeDivisionFullData;
 
@@ -1111,7 +1110,7 @@ export function getAdministrativeDivisionFullData() {
  * @returns
  */
 export function setAdministrativeDivisionFullData(data) {
-  recordExecute('setAdministrativeDivisionFullData to local cache');
+  logExecute('setAdministrativeDivisionFullData to local cache');
 
   const key = storageKeyCollection.administrativeDivisionFullData;
 
@@ -1119,7 +1118,7 @@ export function setAdministrativeDivisionFullData(data) {
 
   const v = {
     list: l,
-    flag: md5(l || []),
+    flag: toMd5(l || []),
   };
 
   return saveJsonToLocalStorage(key, v);
@@ -1133,7 +1132,7 @@ export function setAdministrativeDivisionFullData(data) {
  * @returns
  */
 export function removeAdministrativeDivisionFullData() {
-  recordExecute('removeAdministrativeDivisionFullData');
+  logExecute('removeAdministrativeDivisionFullData');
 
   const key = storageKeyCollection.administrativeDivisionFullData;
 
@@ -1148,7 +1147,7 @@ export function removeAdministrativeDivisionFullData() {
  * @returns
  */
 export function getSelectedAddressData() {
-  recordExecute('getSelectedAddressData from local cache');
+  logExecute('getSelectedAddressData from local cache');
 
   const key = storageKeyCollection.selectedAddressData;
 
@@ -1163,7 +1162,7 @@ export function getSelectedAddressData() {
  * @returns
  */
 export function setSelectedAddressData(data) {
-  recordExecute('setSelectedAddressData to local cache');
+  logExecute('setSelectedAddressData to local cache');
 
   const key = storageKeyCollection.selectedAddressData;
 
@@ -1178,7 +1177,7 @@ export function setSelectedAddressData(data) {
  * @returns
  */
 export function removeSelectedAddressData() {
-  recordExecute('removeSelectedAddressData');
+  logExecute('removeSelectedAddressData');
 
   const key = storageKeyCollection.selectedAddressData;
 
@@ -1193,7 +1192,7 @@ export function removeSelectedAddressData() {
  * @returns
  */
 export function getLaunchOption() {
-  recordExecute('getLaunchOption from local cache');
+  logExecute('getLaunchOption from local cache');
 
   const key = storageKeyCollection.launchOption;
 
@@ -1208,7 +1207,7 @@ export function getLaunchOption() {
  * @returns
  */
 export function setLaunchOption(data) {
-  recordExecute('setLaunchOption to local cache');
+  logExecute('setLaunchOption to local cache');
 
   const key = storageKeyCollection.launchOption;
 
@@ -1223,7 +1222,7 @@ export function setLaunchOption(data) {
  * @returns
  */
 export function removeLaunchOption() {
-  recordExecute('removeLaunchOption');
+  logExecute('removeLaunchOption');
 
   const key = storageKeyCollection.launchOption;
 
@@ -1236,5 +1235,5 @@ export function removeLaunchOption() {
  * @param {*} key
  */
 export function clearCustomData() {
-  clearLocalStorage();
+  flushLocalStorage();
 }

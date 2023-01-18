@@ -1,26 +1,29 @@
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  envCollection,
+  getGuid,
+  isEqual,
+  isFunction,
+  isNumber,
+  isObject,
+  logConfig,
+  logData,
+  logDebug,
+  logError,
+  logExecute,
+  logInfo,
+  logObject,
+  logText,
+  showErrorMessage,
+  split,
+  toNumber,
+} from 'easy-soft-utility';
 import { Component } from 'react';
 import Taro from '@tarojs/taro';
 
-import { envCollection } from '../../utils/constants';
 import { getModelNameList } from '../../utils/storageAssist';
-import {
-  getEnv,
-  getGuid,
-  inCollection,
-  recordConfig,
-  recordDebug,
-  recordError,
-  recordExecute,
-  recordInfo,
-  recordLog,
-  recordObject,
-  recordText,
-  showErrorMessage,
-  split,
-  stringIsNullOrWhiteSpace,
-} from '../../utils/tools';
-import { isEqual, isFunction, isNumber, isObject } from '../../utils/typeCheck';
-import { toNumber } from '../../utils/typeConvert';
+import { getEnv } from '../../utils/tools';
 
 function filterModel(props) {
   const result = { ...props };
@@ -141,7 +144,7 @@ class ComponentBase extends Component {
     const compareResult = comparePropsResult || compareStateResult;
 
     if (this.showRenderCountInConsole && compareResult) {
-      recordObject({
+      logObject({
         message: 'shouldComponentUpdate:true',
         nextPropsIgnoreModel,
         currentPropsIgnoreModel,
@@ -256,15 +259,17 @@ class ComponentBase extends Component {
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    recordExecute('doWorkWhenCheckNeedSignInDidMountFail');
-    recordConfig(
+    logExecute('doWorkWhenCheckNeedSignInDidMountFail');
+
+    logConfig(
       'doWorkWhenCheckNeedSignInDidMountFail do nothing,if you need,you can override it: doWorkWhenCheckNeedSignInDidMountFail = () => {}',
     );
   };
 
   doWorkWhenCheckPermissionFail = () => {
-    recordExecute('doWorkWhenCheckPermissionFail');
-    recordConfig(
+    logExecute('doWorkWhenCheckPermissionFail');
+
+    logConfig(
       'doWorkWhenCheckPermissionFail do nothing,if you need,you can override it: doWorkWhenCheckPermissionFail = () => {}',
     );
   };
@@ -306,7 +311,7 @@ class ComponentBase extends Component {
       message: 'error occurred, please view in console.',
     });
 
-    recordError({
+    logError({
       error,
       info,
     });
@@ -347,7 +352,7 @@ class ComponentBase extends Component {
       callback: null,
     },
   ) => {
-    recordExecute('handleEnv');
+    logExecute('handleEnv');
 
     let data = {};
 
@@ -401,7 +406,7 @@ class ComponentBase extends Component {
   getGlobal = () => {
     const text = 'please override getGlobal, and return a object';
 
-    recordLog(text);
+    logData(text);
 
     throw new Error(text);
   };
@@ -410,7 +415,7 @@ class ComponentBase extends Component {
     const global = this.getGlobal();
 
     if ((global || null) == null) {
-      recordError('global not allow null, please check getGlobal');
+      logError('global not allow null, please check getGlobal');
     }
 
     return global;
@@ -419,7 +424,7 @@ class ComponentBase extends Component {
   getDispatch = () => {
     const text = 'please override getDispatch, and return a function';
 
-    recordError(text);
+    logError(text);
 
     throw new Error(text);
   };
@@ -428,7 +433,7 @@ class ComponentBase extends Component {
     const dispatch = this.getDispatch();
 
     if (!isFunction(dispatch)) {
-      recordError('dispatch not a function, please check getDispatch');
+      logError('dispatch not a function, please check getDispatch');
     }
 
     return dispatch;
@@ -437,9 +442,9 @@ class ComponentBase extends Component {
   dispatchApi = ({ type, payload, alias = 'data' }) => {
     const dispatch = this.getDispatchWrapper();
 
-    recordDebug(`modal access: ${type}`);
+    logDebug(`modal access: ${type}`);
 
-    if (!stringIsNullOrWhiteSpace(type)) {
+    if (!checkStringIsNullOrWhiteSpace(type)) {
       const l = split(type, '/');
 
       if (l.length === 2) {
@@ -449,10 +454,10 @@ class ComponentBase extends Component {
 
         const modelNameList = split(ml, ',');
 
-        if (!inCollection(modelNameList, modelName)) {
-          recordInfo(`current modelNameList: ${ml}`);
+        if (!checkInCollection(modelNameList, modelName)) {
+          logInfo(`current modelNameList: ${ml}`);
 
-          recordError(
+          logError(
             `${modelName} not in modelNameList, please check model config`,
           );
         }
@@ -494,7 +499,7 @@ class ComponentBase extends Component {
 
       const text = `${this.constructor.name},renderFrequency:${this.renderCount}`;
 
-      recordText(text);
+      logText(text);
     }
   }
 

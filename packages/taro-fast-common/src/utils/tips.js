@@ -1,7 +1,5 @@
+import { isFunction, logError } from 'easy-soft-utility';
 import Taro from '@tarojs/taro';
-
-import { recordError } from './log';
-import { isFunction } from './typeCheck';
 
 /**
  * 提示与加载工具类
@@ -30,7 +28,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 500);
   }
@@ -96,7 +94,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 500);
   }
@@ -120,7 +118,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 500);
   }
@@ -144,7 +142,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 500);
   }
@@ -168,7 +166,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 500);
   }
@@ -192,7 +190,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 500);
   }

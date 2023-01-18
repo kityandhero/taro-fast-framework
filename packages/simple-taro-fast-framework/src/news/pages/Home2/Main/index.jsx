@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
 import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
@@ -10,7 +11,6 @@ import {
   Space,
   Tabs,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import { pathCollection } from '../../../../customConfig/pathConfig';
 import BasePageWrapper from '../../BasePageWrapper';

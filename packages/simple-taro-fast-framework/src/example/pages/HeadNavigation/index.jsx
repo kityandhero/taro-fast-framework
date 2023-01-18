@@ -1,10 +1,8 @@
+import { connect } from 'easy-soft-dva';
+import { buildHexColor, buildLinearGradient } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  buildLinearGradient,
-  getGradient,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   ColorText,
   FlexBox,
@@ -12,7 +10,6 @@ import {
   ImageBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import logoImage from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -173,7 +170,7 @@ function config302Builder({ scrollTop }) {
   const c =
     headerHeight > 0
       ? scrollTop < headerHeight
-        ? getGradient({
+        ? buildHexColor({
             progress: scrollTop / headerHeight,
             startColor: '#901f81',
             endColor: '#45f2e3',

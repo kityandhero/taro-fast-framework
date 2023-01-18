@@ -1,6 +1,5 @@
+import { attachPropertiesToComponent } from 'easy-soft-utility';
 import { Text } from '@tarojs/components';
-
-import { attachPropertiesToComponent } from 'taro-fast-common/es/utils/tools';
 
 import { Space } from '../Space';
 

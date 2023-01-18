@@ -90,6 +90,7 @@ importers:
       '@commitlint/config-lerna-scopes': ^17.4.2
       '@commitlint/cz-commitlint': ^17.4.2
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.10
+      '@reduxjs/toolkit': ^1.9.1
       '@tarojs/cli': ^3.5.11
       '@tarojs/components': ^3.5.11
       '@tarojs/helper': ^3.5.11
@@ -119,8 +120,8 @@ importers:
       commitizen: ^4.2.6
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      easy-soft-dva: ^3.2.3
-      easy-soft-utility: ^2.2.3
+      easy-soft-dva: ^3.6.13
+      easy-soft-utility: ^2.3.8
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -142,8 +143,8 @@ importers:
       prettier-plugin-packagejson: ^2
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-redux: ^8.0.5
       react-refresh: ^0.14.0
-      redux: ^4.2.0
       stylelint: ^14.16.1
       stylelint-config-css-modules: ^4.1.0
       stylelint-config-prettier: ^9.0.4
@@ -156,6 +157,7 @@ importers:
       taro-fast-framework: ^1.15.1
       webpack: ^5.75.0
     dependencies:
+      '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
       '@tarojs/components': 3.5.11_@types+react@18.0.26
       '@tarojs/helper': 3.5.11
       '@tarojs/plugin-framework-react': 3.5.11_fr2gtyhkl77djjcbgc63sdexle
@@ -171,11 +173,11 @@ importers:
       '@tarojs/shared': 3.5.11
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
-      easy-soft-dva: 3.2.3_react@18.2.0+redux@4.2.0
-      easy-soft-utility: 2.2.3
+      easy-soft-dva: 3.6.13_ib3m5ricvtkl2cll7qpr2f6lvq
+      easy-soft-utility: 2.3.8
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      redux: 4.2.0
+      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
       taro-fast-common: link:../taro-fast-common
       taro-fast-component: link:../taro-fast-component
       taro-fast-component-extra: link:../taro-fast-component-extra
@@ -315,7 +317,6 @@ importers:
       '@tarojs/webpack5-runner': ^3.5.11
       '@types/lodash': ^4.14.191
       '@types/object-hash': ^3.0.2
-      '@types/qs': ^6.9.7
       '@types/react': ^18.0.26
       '@types/webpack-env': ^1.18.0
       '@typescript-eslint/eslint-plugin': ^5.48.1
@@ -329,7 +330,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.2.3
+      easy-soft-utility: ^2.3.8
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -351,7 +352,6 @@ importers:
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
       prettier-plugin-packagejson: ^2
-      qs: ^6.11.0
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
@@ -384,7 +384,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.2.3
+      easy-soft-utility: 2.3.8
       lodash: 4.17.21
       node-cache: 5.1.2
       object-hash: 3.0.0
@@ -417,7 +417,6 @@ importers:
       '@tarojs/webpack5-runner': 3.5.11_b7pfi4oxvmvopf4pb2gj3f77xa
       '@types/lodash': 4.14.191
       '@types/object-hash': 3.0.2
-      '@types/qs': 6.9.7
       '@types/react': 18.0.26
       '@types/webpack-env': 1.18.0
       '@typescript-eslint/eslint-plugin': 5.48.1_eslint@8.32.0
@@ -448,7 +447,6 @@ importers:
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
-      qs: 6.11.0
       react-refresh: 0.14.0
       rollup: 3.10.0
       rollup-plugin-livereload: 2.0.5
@@ -517,7 +515,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.2.3
+      easy-soft-utility: ^2.3.8
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -569,7 +567,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.2.3
+      easy-soft-utility: 2.3.8
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       taro-fast-common: link:../taro-fast-common
@@ -696,7 +694,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.2.3
+      easy-soft-utility: ^2.3.8
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -749,7 +747,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.2.3
+      easy-soft-utility: 2.3.8
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       taro-fast-common: link:../taro-fast-common
@@ -879,7 +877,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.2.3
+      easy-soft-utility: ^2.3.8
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -933,7 +931,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.2.3
+      easy-soft-utility: 2.3.8
       prismjs: 1.29.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -1065,8 +1063,8 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-dva: ^3.2.3
-      easy-soft-utility: ^2.2.3
+      easy-soft-dva: ^3.6.13
+      easy-soft-utility: ^2.3.8
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -1089,9 +1087,6 @@ importers:
       react-dom: ^18.2.0
       react-redux: ^8.0.5
       react-refresh: ^0.14.0
-      redux: ^4.2.0
-      redux-logger: ^3.0.6
-      redux-thunk: ^2.4.2
       rollup: ^3.10.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -1123,14 +1118,11 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-dva: 3.2.3_mavs2rphp6tt25kjglq6uopfgy
-      easy-soft-utility: 2.2.3
+      easy-soft-dva: 3.6.13_ib3m5ricvtkl2cll7qpr2f6lvq
+      easy-soft-utility: 2.3.8
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.5_lyglh7ra5csqnudbq3lr4zb6du
-      redux: 4.2.0
-      redux-logger: 3.0.6
-      redux-thunk: 2.4.2_redux@4.2.0
+      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
       taro-fast-common: link:../taro-fast-common
       taro-fast-component: link:../taro-fast-component
     devDependencies:
@@ -5349,25 +5341,7 @@ packages:
     dependencies:
       immer: 9.0.17
       react: 18.2.0
-      react-redux: 8.0.5_lyglh7ra5csqnudbq3lr4zb6du
-      redux: 4.2.0
-      redux-thunk: 2.4.2_redux@4.2.0
-      reselect: 4.1.7
-    dev: false
-
-  /@reduxjs/toolkit/1.9.1_react@18.2.0:
-    resolution: {integrity: sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==}
-    peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || ^18
-      react-redux: ^7.2.1 || ^8.0.2
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-redux:
-        optional: true
-    dependencies:
-      immer: 9.0.17
-      react: 18.2.0
+      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
       redux: 4.2.0
       redux-thunk: 2.4.2_redux@4.2.0
       reselect: 4.1.7
@@ -9711,7 +9685,7 @@ packages:
     dev: true
 
   /chokidar/1.7.0:
-    resolution: {integrity: sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=}
+    resolution: {integrity: sha512-mk8fAWcRUOxY7btlLtitj3A45jOwSAxH4tOFOoEGbVsl6cL6pPMWUy7dwZ/canfj3QEdP6FHSnf/l1c6/WkzVg==}
     deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
     requiresBuild: true
     dependencies:
@@ -11232,10 +11206,6 @@ packages:
     resolution: {integrity: sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=}
     dev: true
 
-  /deep-diff/0.3.8:
-    resolution: {integrity: sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=}
-    dev: false
-
   /deep-equal/1.1.1:
     resolution: {integrity: sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==}
     dependencies:
@@ -11710,46 +11680,31 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /easy-soft-dva/3.2.3_mavs2rphp6tt25kjglq6uopfgy:
-    resolution: {integrity: sha512-FnaUzsQIMqA0/z/m9O3Ku/PspAS2EtaGkeeIFAxHLcjM03F+keJgWEvNImsbWntP5L2qLNuVHcNXGhC8yuclTQ==}
+  /easy-soft-dva/3.6.13_ib3m5ricvtkl2cll7qpr2f6lvq:
+    resolution: {integrity: sha512-nSfOZVYh7pytCs41KDWuw1jQl77o6D3E4Sq7cpMqQcJanclnFAiKsf6M97SN+x6q5tStTi/uqvsclP+bBEDELA==}
     peerDependencies:
       redux: 4.x
     dependencies:
       '@babel/runtime': 7.20.7
       '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
+      easy-soft-utility: 2.3.8
       flatten: 1.0.3
       global: 4.4.0
       invariant: 2.2.4
       is-plain-object: 5.0.0
-      redux: 4.2.0
+      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
       redux-saga: 1.2.2
       warning: 4.0.3
     transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
       - react
-      - react-redux
+      - react-dom
+      - react-native
     dev: false
 
-  /easy-soft-dva/3.2.3_react@18.2.0+redux@4.2.0:
-    resolution: {integrity: sha512-FnaUzsQIMqA0/z/m9O3Ku/PspAS2EtaGkeeIFAxHLcjM03F+keJgWEvNImsbWntP5L2qLNuVHcNXGhC8yuclTQ==}
-    peerDependencies:
-      redux: 4.x
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@reduxjs/toolkit': 1.9.1_react@18.2.0
-      flatten: 1.0.3
-      global: 4.4.0
-      invariant: 2.2.4
-      is-plain-object: 5.0.0
-      redux: 4.2.0
-      redux-saga: 1.2.2
-      warning: 4.0.3
-    transitivePeerDependencies:
-      - react
-      - react-redux
-    dev: false
-
-  /easy-soft-utility/2.2.3:
-    resolution: {integrity: sha512-cgN0H6uqV95xWG/63+v9RQW7Cm0JTEAeuBGSQo6CxGSpzrklY8ixrpnUzy+Ft+jGIMNbtdoCRtq6t6PpXmRsBw==}
+  /easy-soft-utility/2.3.8:
+    resolution: {integrity: sha512-F8bV1NY+3s2vlJZG51gcTyKmeucOkCV2+41ZRu9PswudLKChDrHRyjj/tgsKM2QE0NeIRGRGXyZ0CNc0UsgBXA==}
     dependencies:
       dayjs: 1.11.7
       js-base64: 3.7.4
@@ -13262,7 +13217,7 @@ packages:
     engines: {node: '>=6'}
 
   /file-uri-to-path/1.0.0:
-    resolution: {integrity: sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90=}
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
     requiresBuild: true
     dev: true
     optional: true
@@ -13484,6 +13439,7 @@ packages:
 
   /flatten/1.0.3:
     resolution: {integrity: sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==}
+    deprecated: flatten is deprecated in favor of utility frameworks such as lodash.
     dev: false
 
   /flush-write-stream/1.1.1:
@@ -14804,7 +14760,7 @@ packages:
     dev: true
 
   /image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
@@ -17105,7 +17061,7 @@ packages:
     engines: {node: '>=4'}
 
   /min-document/2.19.0:
-    resolution: {integrity: sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=}
+    resolution: {integrity: sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==}
     dependencies:
       dom-walk: 0.1.2
     dev: false
@@ -19592,7 +19548,7 @@ packages:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
   /process/0.11.10:
-    resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=}
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
 
   /progress/2.0.3:
@@ -19861,7 +19817,7 @@ packages:
       scheduler: 0.21.0
     dev: false
 
-  /react-redux/8.0.5_lyglh7ra5csqnudbq3lr4zb6du:
+  /react-redux/8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq:
     resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -19890,7 +19846,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
-      redux: 4.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
@@ -20086,12 +20041,6 @@ packages:
       indent-string: 4.0.0
       strip-indent: 3.0.0
     dev: true
-
-  /redux-logger/3.0.6:
-    resolution: {integrity: sha1-91VZZvMJjzyIYExEnPC69XeCdL8=}
-    dependencies:
-      deep-diff: 0.3.8
-    dev: false
 
   /redux-saga/1.2.2:
     resolution: {integrity: sha512-6xAHWgOqRP75MFuLq88waKK9/+6dCdMQjii2TohDMARVHeQ6HZrZoJ9HZ3dLqMWCZ9kj4iuS6CDsujgnovn11A==}
@@ -21763,7 +21712,7 @@ packages:
     dev: true
 
   /string.fromcodepoint/0.2.1:
-    resolution: {integrity: sha1-jZeDM8C8klOPUPOD5IiPPlYZ1lM=}
+    resolution: {integrity: sha512-n69H31OnxSGSZyZbgBlvYIXlrMhJQ0dQAX1js1QDhpaUH6zmU3QYlj07bCwCNlPOu3oRXIubGPl2gDGnHsiCqg==}
     dev: true
 
   /string.prototype.matchall/4.0.8:

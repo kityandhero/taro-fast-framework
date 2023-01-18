@@ -1,9 +1,9 @@
 import classNames from 'classnames';
+import { checkInCollection, isArray, isUndefined } from 'easy-soft-utility';
 import React from 'react';
 import { View } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
-import { isArray, isUndefined } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -28,7 +28,7 @@ const defaultProps = {
 };
 
 const getAlign = (align) => {
-  return inCollection(alignCollection, align) ? align : 'center';
+  return checkInCollection(alignCollection, align) ? align : 'center';
 };
 
 export const Space = (props) => {

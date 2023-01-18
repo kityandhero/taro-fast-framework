@@ -1,8 +1,8 @@
 import classNames from 'classnames';
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { Icon, View } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import FlexBox from '../FlexBox';
@@ -84,15 +84,15 @@ class Tag extends BaseComponent {
       return null;
     }
 
-    const color = inCollection(colorCollection, colorSource)
+    const color = checkInCollection(colorCollection, colorSource)
       ? colorRecord[colorSource]
       : colorSource;
 
-    const shape = inCollection(shapeCollection, shapeSource)
+    const shape = checkInCollection(shapeCollection, shapeSource)
       ? shapeSource
       : 'rectangle';
 
-    const fill = inCollection(fillCollection, fillSource)
+    const fill = checkInCollection(fillCollection, fillSource)
       ? fillSource
       : 'solid';
 

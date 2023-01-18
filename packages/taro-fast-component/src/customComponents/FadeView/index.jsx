@@ -1,6 +1,5 @@
+import { mergeProps } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { mergeProps } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 

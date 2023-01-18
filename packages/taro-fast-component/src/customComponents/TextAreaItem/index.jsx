@@ -1,17 +1,15 @@
-import { Textarea, View } from '@tarojs/components';
-
 import {
-  showInfoMessage,
-  stringIsNullOrWhiteSpace,
-  styleToString,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  buildStringStyle,
+  checkStringIsNullOrWhiteSpace,
   isFunction,
   isObject,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
+  showInfoMessage,
+  toString,
+} from 'easy-soft-utility';
+import { Textarea, View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Button from '../Button';
@@ -207,7 +205,7 @@ class TextAreaItem extends BaseComponent {
         }
         showBody
         body={
-          stringIsNullOrWhiteSpace(valueStage) ? (
+          checkStringIsNullOrWhiteSpace(valueStage) ? (
             <View
               style={{
                 ...{
@@ -278,7 +276,7 @@ class TextAreaItem extends BaseComponent {
               isString(placeholderStyle)
                 ? placeholderStyle
                 : isObject(placeholderStyle)
-                ? styleToString(placeholderStyle)
+                ? buildStringStyle(placeholderStyle)
                 : ''
             }
             value={isString(valueStage) ? valueStage : toString(valueStage)}

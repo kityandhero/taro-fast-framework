@@ -1,11 +1,8 @@
+import { checkInCollection } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import {
-  getCurrentInstance,
-  inCollection,
-  transformSize,
-} from '../../utils/tools';
+import { getCurrentInstance, transformSize } from '../../utils/tools';
 import ComponentBase from '../ComponentBase';
 
 const typeCollection = ['info', 'success', 'error', 'warning'];
@@ -88,7 +85,7 @@ class Notification extends ComponentBase {
     Taro.eventCenter.on('tfc-message', (options = {}) => {
       const { style, className, message, type: typeSource, duration } = options;
 
-      const type = inCollection(typeCollection, typeSource)
+      const type = checkInCollection(typeCollection, typeSource)
         ? typeSource
         : defaultProps.type;
 

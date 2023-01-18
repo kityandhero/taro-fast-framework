@@ -1,5 +1,7 @@
-import { isWechat, sortBy } from 'taro-fast-common/es/utils/tools';
-import { connect } from 'taro-fast-framework/es/utils/dva';
+import { connect } from 'easy-soft-dva';
+import { sortBy } from 'easy-soft-utility';
+
+import { isWechat } from 'taro-fast-common/es/utils/tools';
 
 import iconBasic from '../../../../assets/images/icon-list-basic.png';
 import ChannelPageBase from '../../../../customComponents/ChannelPageBase';

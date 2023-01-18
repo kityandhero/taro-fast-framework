@@ -1,7 +1,5 @@
-import {
-  recordObject,
-  transformListData,
-} from 'taro-fast-common/es/utils/tools';
+import { logObject, transformListData } from 'easy-soft-utility';
+
 import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 import {
   getAdministrativeDivisionFullData,
@@ -47,7 +45,7 @@ class PageWrapperCore extends AuthorizationWrapper {
    * @returns
    */
   authorizeFailCallback = (remoteData) => {
-    recordObject(remoteData);
+    logObject(remoteData);
   };
 
   reverseGeocoder = ({ location, success, fail }) => {

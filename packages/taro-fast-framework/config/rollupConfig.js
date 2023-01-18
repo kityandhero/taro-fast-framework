@@ -9,10 +9,9 @@ const inputFile = {
     'utils/requestAssistor': 'src/utils/requestAssistor.js',
     'utils/globalModel': 'src/utils/globalModel.js',
     'utils/defaultSettingsSpecial': 'src/utils/defaultSettingsSpecial.js',
-    'utils/dva': 'src/utils/dva.js',
-    'utils/dvaAssist': 'src/utils/dvaAssist.js',
     'utils/actionAssist': 'src/utils/actionAssist.js',
     'utils/tools': 'src/utils/tools.js',
+    'utils/configAssist': 'src/utils/configAssist.js',
   },
   ...{
     'framework/index': 'src/framework/index.jsx',
@@ -31,14 +30,11 @@ export function buildConfig({ terser: whetherTerser = false }) {
     terser: whetherTerser,
     externalCollection: [
       ...[
-        'taro-fast-common/es/utils/cacheAssist',
         'taro-fast-common/es/utils/constants',
         'taro-fast-common/es/utils/env',
         'taro-fast-common/es/utils/mediaDefault',
         'taro-fast-common/es/utils/tips',
         'taro-fast-common/es/utils/tools',
-        'taro-fast-common/es/utils/typeCheck',
-        'taro-fast-common/es/utils/typeConvert',
         'taro-fast-common/es/utils/provider',
         'taro-fast-common/es/utils/hooks',
         'taro-fast-common/es/customComponents',

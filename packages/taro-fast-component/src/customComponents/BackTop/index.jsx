@@ -1,11 +1,8 @@
 import classNames from 'classnames';
+import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -86,7 +83,7 @@ class BackTop extends BaseComponent {
   buildContent = () => {
     const { icon, iconSize, iconColor, content } = this.props;
 
-    return content || stringIsNullOrWhiteSpace(icon) ? (
+    return content || checkStringIsNullOrWhiteSpace(icon) ? (
       <IconChevronUp size={iconSize} color={iconColor} />
     ) : (
       <Icon value={icon} size={iconSize} color={iconColor} />

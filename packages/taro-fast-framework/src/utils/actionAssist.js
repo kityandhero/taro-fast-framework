@@ -1,20 +1,18 @@
-import Taro from '@tarojs/taro';
-
-import Tips from 'taro-fast-common/es/utils/tips';
 import {
-  notifySuccess,
-  recordDebug,
-  recordError,
-  showErrorMessage,
-  showRuntimeError,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkStringIsNullOrWhiteSpace,
   isFunction,
   isNumber,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
+  logDebug,
+  logError,
+  showErrorMessage,
+  showRuntimeError,
+  toString,
+} from 'easy-soft-utility';
+import Taro from '@tarojs/taro';
+
+import Tips from 'taro-fast-common/es/utils/tips';
+import { notifySuccess } from 'taro-fast-common/es/utils/tools';
 
 /**
  * 处理 actionCore 的异步请求结果
@@ -138,7 +136,7 @@ export async function actionCore({
   }
 
   target.setState({ processing: true }, () => {
-    recordDebug('state dispatchComplete will set to false');
+    logDebug('state dispatchComplete will set to false');
 
     target.setState({ dispatchComplete: false });
 
@@ -181,7 +179,7 @@ export async function actionCore({
                   });
                 }
 
-                if (!stringIsNullOrWhiteSpace(messageText)) {
+                if (!checkStringIsNullOrWhiteSpace(messageText)) {
                   notifySuccess(messageText);
                 }
 
@@ -206,7 +204,7 @@ export async function actionCore({
                 }
               }
 
-              recordDebug('state dispatchComplete will set to true');
+              logDebug('state dispatchComplete will set to true');
 
               target.setState({
                 processing: false,
@@ -216,7 +214,7 @@ export async function actionCore({
               return;
             })
             .catch((error) => {
-              recordError(error);
+              logError(error);
 
               if (showProcessing) {
                 setTimeout(() => {
@@ -231,7 +229,7 @@ export async function actionCore({
                 error,
               });
 
-              recordDebug('state dispatchComplete will set to true');
+              logDebug('state dispatchComplete will set to true');
 
               target.setState({
                 processing: false,
@@ -245,7 +243,7 @@ export async function actionCore({
             e,
           )}, please confirm dispatch type exists first.`;
 
-          recordError({
+          logError({
             message: text,
             dispatchInfo: {
               type: api,
@@ -312,7 +310,7 @@ export async function actionSheetCore({
     itemList: [confirmText || '确定'],
     itemColor: !isString(confirmColor)
       ? ''
-      : stringIsNullOrWhiteSpace(confirmColor)
+      : checkStringIsNullOrWhiteSpace(confirmColor)
       ? ''
       : confirmColor,
     success: () => {
@@ -338,7 +336,7 @@ export async function actionSheetCore({
       }
     },
   }).catch((res) => {
-    recordError({
+    logError({
       message: 'actionSheetCore: catch.',
       info: res,
     });
@@ -398,13 +396,13 @@ export async function actionModalCore({
     confirmText: confirmText || '确定',
     confirmColor: !isString(confirmColor)
       ? ''
-      : stringIsNullOrWhiteSpace(confirmColor)
+      : checkStringIsNullOrWhiteSpace(confirmColor)
       ? ''
       : confirmColor,
     cancelText: cancelText || '取消',
     cancelColor: !isString(cancelColor)
       ? ''
-      : stringIsNullOrWhiteSpace(cancelColor)
+      : checkStringIsNullOrWhiteSpace(cancelColor)
       ? ''
       : cancelColor,
     showCancel,
@@ -446,7 +444,7 @@ export async function actionModalCore({
       }
     },
   }).catch((res) => {
-    recordError({
+    logError({
       message: 'actionSheetCore: catch.',
       info: res,
     });

@@ -1,10 +1,7 @@
+import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
@@ -135,7 +132,7 @@ class RadioSelector extends BaseComponent {
           disabled={disabled}
           border={border}
           extra={
-            stringIsNullOrWhiteSpace(valueStage) ? (
+            checkStringIsNullOrWhiteSpace(valueStage) ? (
               <View
                 style={{
                   ...{

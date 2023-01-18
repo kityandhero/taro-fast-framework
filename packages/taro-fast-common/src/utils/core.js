@@ -1,7 +1,7 @@
+import { isObject, isUndefined } from 'easy-soft-utility';
 import { ENV_TYPE, getApp, getEnv } from '@tarojs/taro';
 
 import { appInitDefault } from './constants';
-import { isObject, isUndefined } from './typeCheck';
 
 export function getDefaultTaroGlobalData() {
   return {

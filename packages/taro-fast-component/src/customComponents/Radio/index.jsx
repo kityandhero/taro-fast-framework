@@ -1,16 +1,14 @@
-import { View } from '@tarojs/components';
-
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isFunction,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toLower } from 'taro-fast-common/es/utils/typeConvert';
+  toLower,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Card from '../Card';
@@ -117,7 +115,9 @@ class Radio extends BaseComponent {
     const { layout } = this.props;
 
     return toLower(
-      inCollection(layoutCollection, layout) ? layout : defaultProps.layout,
+      checkInCollection(layoutCollection, layout)
+        ? layout
+        : defaultProps.layout,
     );
   };
 
@@ -211,7 +211,7 @@ class Radio extends BaseComponent {
                     },
                   }}
                   left={
-                    !stringIsNullOrWhiteSpace(valueStage) &&
+                    !checkStringIsNullOrWhiteSpace(valueStage) &&
                     valueStage === valueItem
                       ? iconCheck || checkStatusIcon
                       : iconUncheck || uncheckStatusIcon
@@ -275,7 +275,7 @@ class Radio extends BaseComponent {
                     },
                   }}
                   left={
-                    !stringIsNullOrWhiteSpace(valueStage) &&
+                    !checkStringIsNullOrWhiteSpace(valueStage) &&
                     valueStage === valueItem
                       ? iconCheck || checkStatusIcon
                       : iconUncheck || uncheckStatusIcon
@@ -349,7 +349,7 @@ class Radio extends BaseComponent {
                 disabled={disabled}
                 border={index === listCount - 1 ? false : border}
                 extra={
-                  !stringIsNullOrWhiteSpace(valueStage) &&
+                  !checkStringIsNullOrWhiteSpace(valueStage) &&
                   valueStage === valueItem
                     ? iconCheck || checkStatusIconForListView
                     : iconUncheck || null
@@ -369,7 +369,7 @@ class Radio extends BaseComponent {
             <Item
               key={key}
               prefix={
-                !stringIsNullOrWhiteSpace(valueStage) &&
+                !checkStringIsNullOrWhiteSpace(valueStage) &&
                 valueStage === valueItem
                   ? iconCheck || checkStatusIcon
                   : iconUncheck || uncheckStatusIcon

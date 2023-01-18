@@ -1,7 +1,6 @@
+import { isArray, isFunction, toString } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   Button,
   CenterBox,

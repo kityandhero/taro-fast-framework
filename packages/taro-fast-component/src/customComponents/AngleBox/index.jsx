@@ -1,7 +1,7 @@
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { inCollection, transformSize } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -28,7 +28,7 @@ class AngleBox extends BaseComponent {
   getPosition = () => {
     const { position } = this.props;
 
-    return inCollection(
+    return checkInCollection(
       [
         positionCollection.topLeft,
         positionCollection.topRight,

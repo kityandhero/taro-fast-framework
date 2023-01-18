@@ -1,4 +1,7 @@
-import { recordObject, transformSize } from 'taro-fast-common/es/utils/tools';
+import { connect } from 'easy-soft-dva';
+import { logObject } from 'easy-soft-utility';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   Empty,
@@ -8,7 +11,6 @@ import {
   VerticalBox,
 } from 'taro-fast-component/es/customComponents';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -56,7 +58,7 @@ export default class Index extends ContentPageBase {
       handleData: {},
       successCallback: ({ remoteData }) => {
         {
-          recordObject(remoteData);
+          logObject(remoteData);
         }
       },
     });
@@ -68,7 +70,7 @@ export default class Index extends ContentPageBase {
       handleData: {},
       successCallback: ({ remoteData }) => {
         {
-          recordObject(remoteData);
+          logObject(remoteData);
         }
       },
     });
@@ -80,14 +82,14 @@ export default class Index extends ContentPageBase {
       handleData: {},
       successCallback: ({ remoteData }) => {
         {
-          recordObject(remoteData);
+          logObject(remoteData);
         }
       },
     });
   };
 
   showRemoteMetaDataInConsole = () => {
-    recordObject(this.getRemoteMetaData());
+    logObject(this.getRemoteMetaData());
   };
 
   renderContent = () => {

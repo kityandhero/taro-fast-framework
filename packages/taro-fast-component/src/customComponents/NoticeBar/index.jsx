@@ -1,8 +1,6 @@
 import classNames from 'classnames';
+import { isFunction, isNumber, toNumber } from 'easy-soft-utility';
 import { Icon, View } from '@tarojs/components';
-
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

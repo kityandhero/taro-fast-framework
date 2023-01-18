@@ -1,8 +1,6 @@
 import classNames from 'classnames';
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { Button as ButtonWxApp, View } from '@tarojs/components';
-
-import { inCollection } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import ActivityIndicator from '../ActivityIndicator';
 import BaseComponent from '../BaseComponent';
@@ -90,25 +88,25 @@ class Button extends BaseComponent {
   getFill = () => {
     const { fill } = this.props;
 
-    return inCollection(fillCollection, fill) ? fill : 'solid';
+    return checkInCollection(fillCollection, fill) ? fill : 'solid';
   };
 
   getType = () => {
     const { type } = this.props;
 
-    return inCollection(typeCollection, type) ? type : 'button';
+    return checkInCollection(typeCollection, type) ? type : 'button';
   };
 
   getShape = () => {
     const { shape } = this.props;
 
-    return inCollection(shapeCollection, shape) ? shape : 'default';
+    return checkInCollection(shapeCollection, shape) ? shape : 'default';
   };
 
   getSize = () => {
     const { size } = this.props;
 
-    return inCollection(sizeCollection, size) ? size : 'middle';
+    return checkInCollection(sizeCollection, size) ? size : 'middle';
   };
 
   triggerClick = (e) => {
@@ -215,11 +213,11 @@ class Button extends BaseComponent {
       paddingRight > 0 ||
       borderRadius > 0;
 
-    const scopeAdjust = inCollection(scopeCollection, scope)
+    const scopeAdjust = checkInCollection(scopeCollection, scope)
       ? scope
       : defaultProps.scope;
 
-    const openTypeAdjust = inCollection(openTypeCollection, openType)
+    const openTypeAdjust = checkInCollection(openTypeCollection, openType)
       ? openType
       : defaultProps.openType;
 

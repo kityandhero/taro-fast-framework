@@ -1,14 +1,14 @@
+import { connect } from 'easy-soft-dva';
+import { buildRandomHexColor, toNumber } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   CenterBox,
   ScrollBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
@@ -36,7 +36,7 @@ const config1 = {
         style={{
           width: transformSize(80 + (index + 1) * 45),
           height: '100%',
-          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+          backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
         }}
       ></View>
     );
@@ -55,7 +55,7 @@ const config11 = {
         style={{
           width: transformSize(80 + (index + 1) * 45),
           height: '100%',
-          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+          backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
         }}
       ></View>
     );
@@ -86,7 +86,7 @@ const config3 = {
         style={{
           width: transformSize(80 + (index + 1) * 45),
           height: '100%',
-          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+          backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
         }}
       ></View>
     );
@@ -104,7 +104,7 @@ const config2 = {
         style={{
           width: '100%',
           height: transformSize(80 + (index + 1) * 45),
-          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+          backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
         }}
       ></View>
     );
@@ -122,7 +122,7 @@ const config21 = {
         style={{
           width: '100%',
           height: transformSize(80 + (index + 1) * 45),
-          backgroundColor: getRandomColor({ seed: (index + 1) * 45 }),
+          backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
         }}
       ></View>
     );

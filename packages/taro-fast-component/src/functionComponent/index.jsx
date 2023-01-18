@@ -1,10 +1,11 @@
+import {
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+  isFunction,
+} from 'easy-soft-utility';
 import { Swiper, SwiperItem } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import {
   ActivityIndicator,
@@ -253,7 +254,8 @@ export function buildEmptyPlaceholder({
       <CenterBox>
         <Empty
           icon={
-            stringIsNullOrWhiteSpace(icon) && stringIsNullOrWhiteSpace(image)
+            checkStringIsNullOrWhiteSpace(icon) &&
+            checkStringIsNullOrWhiteSpace(image)
               ? 'alert-circle'
               : icon
           }

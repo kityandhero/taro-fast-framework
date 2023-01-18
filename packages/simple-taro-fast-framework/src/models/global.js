@@ -1,54 +1,57 @@
 import {
+  getTacitlyState,
   reducerCollection,
   reducerDefaultParams,
   reducerNameCollection,
-  tacitlyState,
-} from 'taro-fast-framework/es/utils/dva';
+} from 'easy-soft-dva';
+
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
 import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
-import { exchangeShareData, getData } from '@/services/global';
+import { exchangeShareData, getData } from '../services/global';
 
-export default {
-  namespace: 'global',
+export function buildGlobal() {
+  return {
+    namespace: 'global',
 
-  state: {
-    ...(modelCollection || {}),
-    ...tacitlyState,
-  },
-
-  effects: {
-    *getMetaData({ payload, alias }, { call, put }) {
-      const response = yield call(getData, payload);
-
-      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
-
-      yield put({
-        type: reducerNameCollection.reducerData,
-        payload: dataAdjust,
-        alias,
-        ...reducerDefaultParams,
-      });
-
-      return dataAdjust;
+    state: {
+      ...(modelCollection || {}),
+      ...getTacitlyState(),
     },
-    *exchangeShare({ payload, alias }, { call, put }) {
-      const response = yield call(exchangeShareData, payload);
 
-      const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+    effects: {
+      *getMetaData({ payload, alias }, { call, put }) {
+        const response = yield call(getData, payload);
 
-      yield put({
-        type: reducerNameCollection.reducerData,
-        payload: dataAdjust,
-        alias,
-        ...reducerDefaultParams,
-      });
+        const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
-      return dataAdjust;
+        yield put({
+          type: reducerNameCollection.reducerData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParams,
+        });
+
+        return dataAdjust;
+      },
+      *exchangeShare({ payload, alias }, { call, put }) {
+        const response = yield call(exchangeShareData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({ source: response });
+
+        yield put({
+          type: reducerNameCollection.reducerData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParams,
+        });
+
+        return dataAdjust;
+      },
     },
-  },
 
-  reducers: {
-    ...reducerCollection,
-  },
-};
+    reducers: {
+      ...reducerCollection,
+    },
+  };
+}

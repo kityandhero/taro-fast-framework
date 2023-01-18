@@ -1,3 +1,4 @@
+import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
@@ -9,7 +10,6 @@ import {
   HelpBox,
   Space,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import {

@@ -12,28 +12,28 @@
       "type": "npm",
       "script": "dev:core-common",
       "problemMatcher": [],
-      "label": "dev:common",
+      "label": "dev:core-common",
       "detail": "cd packages/taro-fast-common && npm run dev"
     },
     {
       "type": "npm",
       "script": "dev:core-component",
       "problemMatcher": [],
-      "label": "dev:component",
+      "label": "dev:core-component",
       "detail": "cd packages/taro-fast-component && npm run dev"
     },
     {
       "type": "npm",
       "script": "dev:core-component-extra",
       "problemMatcher": [],
-      "label": "dev:component-extra",
+      "label": "dev:core-component-extra",
       "detail": "cd packages/taro-fast-component-extra && npm run dev"
     },
     {
       "type": "npm",
       "script": "dev:core-framework",
       "problemMatcher": [],
-      "label": "dev:framework",
+      "label": "dev:core-framework",
       "detail": "cd packages/taro-fast-framework && npm run dev"
     },
     {

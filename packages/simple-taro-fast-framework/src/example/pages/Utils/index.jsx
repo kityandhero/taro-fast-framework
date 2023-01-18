@@ -1,20 +1,21 @@
+import { connect } from 'easy-soft-dva';
 import {
   datetimeFormat,
   formatCollection,
-} from 'taro-fast-common/es/utils/constants';
-import {
-  copyToClipboard,
   formatDateInterval,
   formatDateIntervalWithNow,
   formatDatetime,
   formatTarget,
   getDayOfWeek,
-  getNowDayOfWeek,
-  replaceTargetText,
+  getTodayOfWeek,
+  replaceWithKeep,
+} from 'easy-soft-utility';
+
+import {
+  copyToClipboard,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import { Item, Space } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';
@@ -147,18 +148,18 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="获取当前周几"
           space={false}
-          extra="getNowDayOfWeek"
+          extra="getTodayOfWeek"
           footer={[
             {
-              text: 'getNowDayOfWeek()',
+              text: 'getTodayOfWeek()',
             },
           ]}
           useInnerBox={false}
         >
           <Item
-            label="getNowDayOfWeek()"
+            label="getTodayOfWeek()"
             border={false}
-            extra={getNowDayOfWeek()}
+            extra={getTodayOfWeek()}
           />
         </SimpleBox>
 
@@ -325,10 +326,10 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header="替换指定字符串"
           space={false}
-          extra="replaceTargetText"
+          extra="replaceWithKeep"
           footer={[
             {
-              text: 'replaceTargetText(text,replaceText,beforeKeepNumber,afterKeepNumber)',
+              text: 'replaceWithKeep(text,replaceText,beforeKeepNumber,afterKeepNumber)',
             },
             {
               text: 'text:需要操作的字符串',
@@ -348,7 +349,7 @@ export default class Index extends ContentPageBase {
           <Item
             label="12345678"
             border={false}
-            extra={replaceTargetText('12345678', '*****', 2, 2)}
+            extra={replaceWithKeep('12345678', '*****', 2, 2)}
           />
         </SimpleBox>
 

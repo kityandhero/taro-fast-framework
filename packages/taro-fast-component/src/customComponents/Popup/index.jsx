@@ -1,14 +1,17 @@
 import classNames from 'classnames';
+import {
+  checkInCollection,
+  isFunction,
+  isNumber,
+  showRuntimeError,
+  toNumber,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import {
   handleTouchScroll,
-  inCollection,
-  showRuntimeError,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 
 import BaseComponent from '../BaseComponent';
 import Card from '../Card';
@@ -175,7 +178,7 @@ class Popup extends BaseComponent {
   getPosition = () => {
     const { position } = this.props;
 
-    return inCollection(positionCollection, position)
+    return checkInCollection(positionCollection, position)
       ? position
       : defaultProps.position;
   };
@@ -234,8 +237,10 @@ class Popup extends BaseComponent {
 
     return {
       ...(bodyStyle || {}),
-      ...(inCollection(['center', 'top', 'bottom'], position) ? height : {}),
-      ...(inCollection(['left', 'right'], position) ? width : {}),
+      ...(checkInCollection(['center', 'top', 'bottom'], position)
+        ? height
+        : {}),
+      ...(checkInCollection(['left', 'right'], position) ? width : {}),
       ...{
         zIndex: zIndex + 10,
       },
@@ -351,7 +356,7 @@ class Popup extends BaseComponent {
           ['tfc-popup__container__bottom']: position === 'bottom',
           ['tfc-popup__container__left']: position === 'left',
           ['tfc-popup__container__right']: position === 'right',
-          ['tfc-popup__container__absolute']: inCollection(
+          ['tfc-popup__container__absolute']: checkInCollection(
             ['left', 'right', 'top', 'bottom'],
             position,
           ),
@@ -361,10 +366,12 @@ class Popup extends BaseComponent {
         <View
           className="tfc-popup__container__body"
           style={{
-            ...(inCollection(['center', 'top', 'bottom'], position)
+            ...(checkInCollection(['center', 'top', 'bottom'], position)
               ? height
               : {}),
-            ...(inCollection(['center'], position) ? { width: '100vw' } : {}),
+            ...(checkInCollection(['center'], position)
+              ? { width: '100vw' }
+              : {}),
           }}
         >
           {showClose ? (
@@ -423,10 +430,10 @@ class Popup extends BaseComponent {
             onScrollToUpper={onScrollToUpper}
             onScrollToLower={onScrollToLower}
             style={{
-              ...(inCollection(['center', 'top', 'bottom'], position)
+              ...(checkInCollection(['center', 'top', 'bottom'], position)
                 ? height
                 : {}),
-              ...(inCollection(['left', 'right'], position)
+              ...(checkInCollection(['left', 'right'], position)
                 ? {
                     height:
                       mode !== 'card'
@@ -460,10 +467,10 @@ class Popup extends BaseComponent {
             }
           }}
         >
-          {inCollection(['center'], position) ? panel : null}
+          {checkInCollection(['center'], position) ? panel : null}
         </Overlay>
 
-        {inCollection(['left', 'right', 'top', 'bottom'], position)
+        {checkInCollection(['left', 'right', 'top', 'bottom'], position)
           ? panel
           : null}
       </View>

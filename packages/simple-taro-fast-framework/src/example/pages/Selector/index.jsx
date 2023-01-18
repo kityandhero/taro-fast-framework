@@ -1,8 +1,8 @@
+import { connect } from 'easy-soft-dva';
 import { useState } from 'react';
 
 import { Card, Space } from 'taro-fast-component/es/customComponents';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';

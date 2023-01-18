@@ -1,12 +1,15 @@
+import {
+  buildRandomHexColor,
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  isNumber,
+} from 'easy-soft-utility';
 import { Text, View } from '@tarojs/components';
 
 import {
   copyToClipboard,
-  getRandomColor,
-  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import FlexBox from '../FlexBox';
@@ -38,7 +41,7 @@ class ColorText extends BaseComponent {
   triggerClick = () => {
     const { canCopy, copySuccessCallback, text, onClick } = this.props;
 
-    if (canCopy && !stringIsNullOrWhiteSpace(text)) {
+    if (canCopy && !checkStringIsNullOrWhiteSpace(text)) {
       copyToClipboard({
         text,
         successCallback: copySuccessCallback,
@@ -56,7 +59,7 @@ class ColorText extends BaseComponent {
     let colorValue = color || 'rgba(0, 0, 0, 85%)';
 
     if (randomColor) {
-      colorValue = getRandomColor({
+      colorValue = buildRandomHexColor({
         seed: randomSeed + (isNumber(seedOffset) ? Math.abs(seedOffset) : 0),
       });
     }
@@ -70,7 +73,7 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     return {
-      ...(!stringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(!checkStringIsNullOrWhiteSpace(color) ? { color } : {}),
       ...(fontSize > 0
         ? {
             fontSize: transformSize(fontSize),
@@ -86,7 +89,7 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     return {
-      ...(!stringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(!checkStringIsNullOrWhiteSpace(color) ? { color } : {}),
       ...(fontSize > 0
         ? {
             fontSize: transformSize(fontSize),
@@ -102,7 +105,7 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     return {
-      ...(!stringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(!checkStringIsNullOrWhiteSpace(color) ? { color } : {}),
       ...(fontSize > 0
         ? {
             fontSize: transformSize(fontSize),
@@ -123,12 +126,12 @@ class ColorText extends BaseComponent {
 
     const textPart = (
       <VerticalBox style={{ lineHeight: '1' }}>
-        {stringIsNullOrWhiteSpace(textPrefix) ? null : (
+        {checkStringIsNullOrWhiteSpace(textPrefix) ? null : (
           <>
             <Text style={textPrefixStyle || null} userSelect>
               {textPrefix}
             </Text>
-            {stringIsNullOrWhiteSpace(separator) ? null : (
+            {checkStringIsNullOrWhiteSpace(separator) ? null : (
               <Text style={separatorStyle || null} userSelect>
                 {separator}
               </Text>

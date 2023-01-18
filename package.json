@@ -101,7 +101,7 @@
     "prepublish-npm-framework": "npm run change-nrm-npm",
     "publish-npm-framework": "nrm ls && npm run publish:npm-framework && nrm use local && npx sleepms 2000",
     "postpublish-npm-framework": "npm run change-nrm-local && nrm ls",
-    "prepublish:build": "npm run cz && npm run build:all",
+    "prepublish:build": "npm run cz && npm run change-nrm-local && npm run build:all",
     "publish:build": "npm run publish:lerna",
     "postpublish:build": "npm run publish-npm-all",
     "publish:lerna": "lerna updated && lerna publish --yes",

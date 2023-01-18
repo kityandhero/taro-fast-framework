@@ -1,17 +1,15 @@
-import { Input, Text, Textarea, View } from '@tarojs/components';
-
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  styleToString,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  buildStringStyle,
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isFunction,
   isObject,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  toNumber,
+} from 'easy-soft-utility';
+import { Input, Text, Textarea, View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import ColorText from '../ColorText';
@@ -120,7 +118,7 @@ class InputItem extends BaseComponent {
   getLayout = () => {
     const { layout } = this.props;
 
-    return inCollection(layoutCollection, layout) ? layout : 'horizontal';
+    return checkInCollection(layoutCollection, layout) ? layout : 'horizontal';
   };
 
   checkClearDisplay = () => {
@@ -155,13 +153,13 @@ class InputItem extends BaseComponent {
     if (clearable) {
       const { clearVisible } = this.state;
 
-      if (clearVisible && stringIsNullOrWhiteSpace(this.currentValue)) {
+      if (clearVisible && checkStringIsNullOrWhiteSpace(this.currentValue)) {
         this.setState({
           clearVisible: false,
         });
       }
 
-      if (!clearVisible && !stringIsNullOrWhiteSpace(this.currentValue)) {
+      if (!clearVisible && !checkStringIsNullOrWhiteSpace(this.currentValue)) {
         this.setState({
           clearVisible: true,
         });
@@ -254,8 +252,13 @@ class InputItem extends BaseComponent {
     } = this.props;
 
     const layout = this.getLayout();
-    const type = inCollection(typeCollection, typeSource) ? typeSource : 'text';
-    const confirmType = inCollection(confirmTypeCollection, confirmTypeSource)
+    const type = checkInCollection(typeCollection, typeSource)
+      ? typeSource
+      : 'text';
+    const confirmType = checkInCollection(
+      confirmTypeCollection,
+      confirmTypeSource,
+    )
       ? confirmTypeSource
       : 'done';
 
@@ -265,7 +268,7 @@ class InputItem extends BaseComponent {
 
     const labelComponent =
       isObject(label) ||
-      (isString(label) && !stringIsNullOrWhiteSpace(label)) ? (
+      (isString(label) && !checkStringIsNullOrWhiteSpace(label)) ? (
         <FlexBox
           style={{
             height: '100%',
@@ -358,7 +361,7 @@ class InputItem extends BaseComponent {
                     // ...{ width: '100%' },
                   }}
                 >
-                  {stringIsNullOrWhiteSpace(this.currentValue) ? (
+                  {checkStringIsNullOrWhiteSpace(this.currentValue) ? (
                     <View style={placeholderStyle}>{placeholder}</View>
                   ) : (
                     this.currentValue
@@ -390,7 +393,7 @@ class InputItem extends BaseComponent {
                     isString(placeholderStyle)
                       ? placeholderStyle
                       : isObject(placeholderStyle)
-                      ? styleToString(placeholderStyle)
+                      ? buildStringStyle(placeholderStyle)
                       : ''
                   }
                   autoHeight={areaAutoHeight}
@@ -437,7 +440,7 @@ class InputItem extends BaseComponent {
                     isString(placeholderStyle)
                       ? placeholderStyle
                       : isObject(placeholderStyle)
-                      ? styleToString(placeholderStyle)
+                      ? buildStringStyle(placeholderStyle)
                       : ''
                   }
                   placeholderClass={placeholderClass}

@@ -1,13 +1,8 @@
 import classNames from 'classnames';
+import { checkInCollection, getGuid, logError } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  getGuid,
-  getRect,
-  inCollection,
-  recordError,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Transition from '../Transition';
@@ -103,7 +98,7 @@ class Popover extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          recordError({ error });
+          logError({ error });
         });
     }, 200);
   };
@@ -117,7 +112,7 @@ class Popover extends BaseComponent {
   getPosition = () => {
     const { position } = this.props;
 
-    return inCollection(positionCollection, position) ? position : 'top';
+    return checkInCollection(positionCollection, position) ? position : 'top';
   };
 
   getPanelLayout = () => {
@@ -290,7 +285,7 @@ class Popover extends BaseComponent {
 
     const position = this.getPosition();
 
-    const mode = inCollection(['top', 'bottom'], position)
+    const mode = checkInCollection(['top', 'bottom'], position)
       ? 'horizontal'
       : 'vertical';
 

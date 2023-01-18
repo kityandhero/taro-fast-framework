@@ -15,8 +15,11 @@
 **/*.min.js
 
 .husky/*
+**/.swc/*
+**/es/*
 
 .cache
+.eslintcache
 .temp
 .idea
 .rn_temp
@@ -27,6 +30,10 @@
 .prettierignore
 .prettierrc
 .stylelintignore
+
+pnpm-lock.yaml
+cz.flag.json
+
 LICENSE
 
 node_modules

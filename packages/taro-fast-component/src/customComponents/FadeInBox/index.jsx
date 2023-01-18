@@ -1,7 +1,6 @@
 import classNames from 'classnames';
+import { isFunction, isNumber } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 

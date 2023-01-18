@@ -1,11 +1,11 @@
+import {
+  checkInCollection,
+  isFunction,
+  showErrorMessage,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  inCollection,
-  showErrorMessage,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import Col from '../Flex/Col';
@@ -35,7 +35,7 @@ class FlexBox extends BaseComponent {
   getDirection = () => {
     const { flexAuto } = this.props;
 
-    if (!inCollection(flexAutoCollection, flexAuto)) {
+    if (!checkInCollection(flexAutoCollection, flexAuto)) {
       const text = 'flexAuto 只能配置为 left/right/top/bottom';
 
       showErrorMessage({
@@ -45,9 +45,9 @@ class FlexBox extends BaseComponent {
       return 'horizontal';
     }
 
-    return inCollection(['left', 'right'], flexAuto)
+    return checkInCollection(['left', 'right'], flexAuto)
       ? 'horizontal'
-      : inCollection(['top', 'bottom'], flexAuto)
+      : checkInCollection(['top', 'bottom'], flexAuto)
       ? 'vertical'
       : 'horizontal';
   };
@@ -83,13 +83,13 @@ class FlexBox extends BaseComponent {
     let flexAuto = flexAutoSource;
 
     if (direction === 'horizontal') {
-      flexAuto = inCollection(['left', 'right'], flexAutoSource)
+      flexAuto = checkInCollection(['left', 'right'], flexAutoSource)
         ? flexAutoSource
         : 'left';
     }
 
     if (direction === 'vertical') {
-      flexAuto = inCollection(['top', 'bottom'], flexAutoSource)
+      flexAuto = checkInCollection(['top', 'bottom'], flexAutoSource)
         ? flexAutoSource
         : 'top';
     }

@@ -1,11 +1,7 @@
-import {
-  addHour,
-  addMinute,
-  addSecond,
-  getNow,
-} from 'taro-fast-common/es/utils/tools';
+import { connect } from 'easy-soft-dva';
+import { addHour, addMinute, addSecond, getNow } from 'easy-soft-utility';
+
 import { Countdown, Space } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

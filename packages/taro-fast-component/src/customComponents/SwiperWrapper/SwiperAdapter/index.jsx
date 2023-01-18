@@ -1,6 +1,5 @@
+import { isFunction, isObject } from 'easy-soft-utility';
 import { Swiper, SwiperItem } from '@tarojs/components';
-
-import { isFunction, isObject } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../../BaseComponent';
 

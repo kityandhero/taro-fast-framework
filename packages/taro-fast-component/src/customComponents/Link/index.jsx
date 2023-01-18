@@ -1,20 +1,20 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+  isNumber,
+  isString,
+  showInfoMessage,
+  showWarnMessage,
+} from 'easy-soft-utility';
 import { Text } from '@tarojs/components';
 
 import {
   copyToClipboard,
   isBrowser,
   isWechat,
-  showInfoMessage,
-  showWarnMessage,
-  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import {
-  isArray,
-  isNumber,
-  isString,
-} from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -36,7 +36,7 @@ class Line extends BaseComponent {
     const { color } = this.props;
 
     if (isString(color)) {
-      if (stringIsNullOrWhiteSpace(color)) {
+      if (checkStringIsNullOrWhiteSpace(color)) {
         return {};
       }
 
@@ -48,7 +48,7 @@ class Line extends BaseComponent {
 
     if (isArray(color)) {
       const a = color.filter(
-        (o) => isString(o) && !stringIsNullOrWhiteSpace(o),
+        (o) => isString(o) && !checkStringIsNullOrWhiteSpace(o),
       );
 
       if (a.length > 0) {
@@ -66,7 +66,7 @@ class Line extends BaseComponent {
     const { color, underLine, fontSize } = this.props;
 
     return {
-      ...(stringIsNullOrWhiteSpace(color)
+      ...(checkStringIsNullOrWhiteSpace(color)
         ? {}
         : {
             '--color': color,
@@ -84,7 +84,7 @@ class Line extends BaseComponent {
   triggerClick = () => {
     const { href, copyTips } = this.props;
 
-    if (stringIsNullOrWhiteSpace(href)) {
+    if (checkStringIsNullOrWhiteSpace(href)) {
       const text = '未配置跳转链接';
 
       showWarnMessage({
@@ -97,7 +97,7 @@ class Line extends BaseComponent {
     if (isWechat) {
       copyToClipboard({
         text: href,
-        successCallback: stringIsNullOrWhiteSpace(copyTips)
+        successCallback: checkStringIsNullOrWhiteSpace(copyTips)
           ? null
           : () => {
               showInfoMessage({

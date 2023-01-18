@@ -1,17 +1,15 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
-
 import {
-  inCollection,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   isArray,
   isNumber,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  toNumber,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 
@@ -35,7 +33,7 @@ class Line extends BaseComponent {
   getDirection = () => {
     const { direction: directionSource } = this.props;
 
-    const direction = inCollection(directionCollection, directionSource)
+    const direction = checkInCollection(directionCollection, directionSource)
       ? directionSource
       : 'horizontal';
 
@@ -52,7 +50,7 @@ class Line extends BaseComponent {
     }
 
     if (isString(color)) {
-      if (stringIsNullOrWhiteSpace(color)) {
+      if (checkStringIsNullOrWhiteSpace(color)) {
         return {};
       }
 
@@ -64,7 +62,7 @@ class Line extends BaseComponent {
 
     if (isArray(color)) {
       const a = color.filter(
-        (o) => isString(o) && !stringIsNullOrWhiteSpace(o),
+        (o) => isString(o) && !checkStringIsNullOrWhiteSpace(o),
       );
 
       if (a.length > 0) {
@@ -111,7 +109,7 @@ class Line extends BaseComponent {
         break;
     }
 
-    if (!stringIsNullOrWhiteSpace(margin)) {
+    if (!checkStringIsNullOrWhiteSpace(margin)) {
       marginStyle = {
         '--margin': isNumber(margin) ? transformSize(margin) : margin,
       };

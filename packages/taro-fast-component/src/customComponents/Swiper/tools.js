@@ -1,4 +1,4 @@
-import { inCollection } from 'taro-fast-common/es/utils/tools';
+import { checkInCollection } from 'easy-soft-utility';
 
 const transformCollection = ['slide'];
 
@@ -10,7 +10,9 @@ export const classPrefix = `tfc-swiper`;
  * @returns
  */
 export function checkTransform(transform) {
-  return inCollection(transformCollection, transform) ? transform : 'slide';
+  return checkInCollection(transformCollection, transform)
+    ? transform
+    : 'slide';
 }
 
 /**

@@ -1,10 +1,9 @@
-import { WebView } from '@tarojs/components';
-
-import { envCollection } from 'taro-fast-common/es/utils/constants';
 import {
-  recordWarn,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
+  checkStringIsNullOrWhiteSpace,
+  envCollection,
+  logWarn,
+} from 'easy-soft-utility';
+import { WebView } from '@tarojs/components';
 
 import Infrastructure from '../Infrastructure';
 
@@ -26,7 +25,7 @@ class WebPageBase extends Infrastructure {
   doWorkAdjustDidMount = () => {
     const { title, url } = this.getWebPageParams();
 
-    if (!stringIsNullOrWhiteSpace(title)) {
+    if (!checkStringIsNullOrWhiteSpace(title)) {
       const t = decodeURIComponent(title);
 
       this.setNavigationBarTitle({
@@ -49,11 +48,11 @@ class WebPageBase extends Infrastructure {
     let title = '';
     let url = '';
 
-    if (!stringIsNullOrWhiteSpace(titleEncode)) {
+    if (!checkStringIsNullOrWhiteSpace(titleEncode)) {
       title = decodeURIComponent(titleEncode);
     }
 
-    if (!stringIsNullOrWhiteSpace(urlEncode)) {
+    if (!checkStringIsNullOrWhiteSpace(urlEncode)) {
       url = decodeURIComponent(urlEncode);
     }
 
@@ -80,7 +79,7 @@ class WebPageBase extends Infrastructure {
 
       case envCollection.WEB:
         if (this.redirectWithWebEnv) {
-          recordWarn(
+          logWarn(
             `framework with env [${env}] use redirect to handle load web page`,
           );
 

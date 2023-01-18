@@ -1,5 +1,6 @@
+import { toString } from 'easy-soft-utility';
+
 import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 

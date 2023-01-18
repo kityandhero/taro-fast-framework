@@ -1,19 +1,19 @@
+import {
+  checkStringIsNullOrWhiteSpace,
+  isString,
+  logDebug,
+  logError,
+  logObject,
+  logText,
+  requestMethod,
+  showErrorMessage,
+  toLower,
+  trySendNearestLocalhostNotify,
+} from 'easy-soft-utility';
 import Taro from '@tarojs/taro';
 
-import { requestMethod } from 'taro-fast-common/es/utils/constants';
 import Tips from 'taro-fast-common/es/utils/tips';
-import {
-  corsTarget,
-  recordDebug,
-  recordError,
-  recordObject,
-  recordText,
-  showErrorMessage,
-  stringIsNullOrWhiteSpace,
-  trySendNearestLocalhostNotify,
-} from 'taro-fast-common/es/utils/tools';
-import { isString } from 'taro-fast-common/es/utils/typeCheck';
-import { toLower } from 'taro-fast-common/es/utils/typeConvert';
+import { corsTarget } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import {
@@ -41,20 +41,20 @@ export class Request {
           message: '请求失败, 请检查网络',
         });
 
-        recordError(error);
+        logError(error);
       },
     });
 
     const response = await Taro.request(options);
 
-    recordDebug(`api request complete: ${options.url}`);
+    logDebug(`api request complete: ${options.url}`);
 
     const { code } = response.data;
 
     if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
       const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-      if (stringIsNullOrWhiteSpace(signInPath)) {
+      if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
       }
 
@@ -97,13 +97,13 @@ export class Request {
       const corsUrl = corsTarget();
 
       if (!isString(corsUrl)) {
-        recordText(corsUrl);
+        logText(corsUrl);
 
         throw new Error('corsUrl is not string');
       }
 
       if (!isString(url)) {
-        recordText({ url });
+        logText({ url });
 
         throw new Error('url is not string');
       }
@@ -116,7 +116,7 @@ export class Request {
       ) {
         urlChange = url;
       } else {
-        if (!stringIsNullOrWhiteSpace(corsUrl)) {
+        if (!checkStringIsNullOrWhiteSpace(corsUrl)) {
           if (url.indexOf(corsUrl) >= 0) {
             urlChange = url;
           } else {
@@ -132,13 +132,13 @@ export class Request {
       }
 
       if (!isString(urlChange)) {
-        recordText({ urlChange });
+        logText({ urlChange });
 
         throw new Error('urlChange is not string');
       }
 
       if (showRequestInfo) {
-        recordObject({
+        logObject({
           corsUrl,
           api: url,
           apiAdjust: urlChange,
@@ -147,7 +147,7 @@ export class Request {
         });
       }
 
-      recordDebug(`api request start: ${urlChange}`);
+      logDebug(`api request start: ${urlChange}`);
 
       return Request.request({
         ...{
@@ -167,7 +167,7 @@ export class Request {
         },
       });
     } catch (e) {
-      recordError(e.stack);
+      logError(e.stack);
     }
   }
 }

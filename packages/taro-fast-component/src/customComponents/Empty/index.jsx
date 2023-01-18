@@ -1,13 +1,15 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isNull,
+  mergeProps,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import {
-  mergeProps,
-  stringIsNullOrWhiteSpace,
   transformSize,
   withNativeProps,
 } from 'taro-fast-common/es/utils/tools';
-import { isNull } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
@@ -46,13 +48,13 @@ export const Empty = (p) => {
     onDescriptionClick,
   } = props;
 
-  const iconNode = stringIsNullOrWhiteSpace(icon) ? null : (
+  const iconNode = checkStringIsNullOrWhiteSpace(icon) ? null : (
     <Icon value={icon} size={iconSize} style={iconStyle} />
   );
 
   const imageNode =
     typeof image === 'string' ? (
-      stringIsNullOrWhiteSpace(image) ? null : (
+      checkStringIsNullOrWhiteSpace(image) ? null : (
         <View style={{ width: transformSize(imageWidth) }}>
           <ImageBox
             style={imageStyle}
@@ -68,7 +70,7 @@ export const Empty = (p) => {
 
   const descriptionNode =
     typeof description === 'string' ? (
-      !stringIsNullOrWhiteSpace(description) ? (
+      !checkStringIsNullOrWhiteSpace(description) ? (
         <View
           className={classNames(`${classPrefix}-description`)}
           onClick={onDescriptionClick}

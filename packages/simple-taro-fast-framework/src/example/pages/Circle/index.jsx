@@ -1,11 +1,8 @@
+import { connect } from 'easy-soft-dva';
+import { formatCollection, formatTarget, toRound } from 'easy-soft-utility';
 import { Text, View } from '@tarojs/components';
 
-import { formatCollection } from 'taro-fast-common/es/utils/constants';
-import {
-  formatTarget,
-  roundToTarget,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Button,
   Card,
@@ -15,7 +12,6 @@ import {
   Space,
 } from 'taro-fast-component/es/customComponents';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
@@ -58,7 +54,7 @@ export default class Index extends ContentPageBase {
   setPercent = (v) => {
     const { percent } = this.state;
 
-    const tmp = roundToTarget(percent + v, 2);
+    const tmp = toRound(percent + v, 2);
 
     if (tmp <= 0) {
       this.setState({ percent: 0 });

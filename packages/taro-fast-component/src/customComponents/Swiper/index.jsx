@@ -1,21 +1,18 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
-
 import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
   getGuid,
-  getRect,
-  inCollection,
-  recordError,
-  showErrorMessage,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
   isArray,
   isFunction,
   isNumber,
-} from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  logError,
+  showErrorMessage,
+  toNumber,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
+
+import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -104,9 +101,9 @@ function getRealDirection({ priorityDirection, direction }) {
 
   const directionCollection = ['left', 'right'];
 
-  if (inCollection(directionCollection, priorityDirection)) {
+  if (checkInCollection(directionCollection, priorityDirection)) {
     directionAdjust = priorityDirection;
-  } else if (inCollection(directionCollection, direction)) {
+  } else if (checkInCollection(directionCollection, direction)) {
     directionAdjust = direction;
   } else {
     directionAdjust = defaultProps.direction;
@@ -291,7 +288,7 @@ class Swiper extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        recordError({ error });
+        logError({ error });
       });
 
     if (isFunction(onChange)) {
@@ -785,12 +782,12 @@ class Swiper extends BaseComponent {
         className={classNames(classPrefix, className)}
         style={{
           ...style,
-          ...(stringIsNullOrWhiteSpace(height)
+          ...(checkStringIsNullOrWhiteSpace(height)
             ? {}
             : {
                 '--height': transformSize(height),
               }),
-          ...(stringIsNullOrWhiteSpace(duration)
+          ...(checkStringIsNullOrWhiteSpace(duration)
             ? {}
             : {
                 '--track-translate-duration': `${duration}ms`,

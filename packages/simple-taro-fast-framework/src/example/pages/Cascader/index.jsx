@@ -1,6 +1,7 @@
-import { md5, transformListData } from 'taro-fast-common/es/utils/tools';
+import { connect } from 'easy-soft-dva';
+import { toMd5, transformListData } from 'easy-soft-utility';
+
 import { Cascader, Space } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
@@ -174,7 +175,7 @@ const config1 = {
   ],
   options,
   useOptionCompareFlag: true,
-  optionCompareFlag: md5(options),
+  optionCompareFlag: toMd5(options),
   afterChange: afterChangeInConsole,
 };
 
@@ -225,7 +226,7 @@ export default class Index extends ContentPageBase {
       recursiveKey: 'children',
     });
 
-    const optionCompareFlag = md5(optionList);
+    const optionCompareFlag = toMd5(optionList);
 
     console.log({
       optionCompareFlag,

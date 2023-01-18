@@ -1,5 +1,4 @@
-import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
-import { formatDatetime, getNow } from 'taro-fast-common/es/utils/tools';
+import { datetimeFormat, formatDatetime, getNow } from 'easy-soft-utility';
 
 import { executiveRequest } from '../utils/request';
 

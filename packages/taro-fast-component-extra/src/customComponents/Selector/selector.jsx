@@ -1,8 +1,8 @@
 import classNames from 'classnames';
+import { isArray, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
 import { Grid, Icon, Space } from 'taro-fast-component/es/customComponents';
 
 const { IconCheck } = Icon;

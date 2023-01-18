@@ -1,7 +1,7 @@
+import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
 import { Space } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 

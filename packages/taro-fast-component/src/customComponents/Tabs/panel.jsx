@@ -1,8 +1,6 @@
 import classNames from 'classnames';
+import { checkInCollection, isObject } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { inCollection } from 'taro-fast-common/es/utils/tools';
-import { isObject } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 
@@ -29,7 +27,7 @@ class TabPanel extends BaseComponent {
       children,
     } = this.props;
 
-    const direction = inCollection(directionCollection, directionSource)
+    const direction = checkInCollection(directionCollection, directionSource)
       ? directionSource
       : 'horizontal';
 

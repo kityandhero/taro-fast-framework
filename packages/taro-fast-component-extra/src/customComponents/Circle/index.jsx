@@ -1,21 +1,23 @@
+import {
+  checkInCollection,
+  envCollection,
+  getGuid,
+  isNumber,
+  logError,
+  logExecute,
+  logWarn,
+  toNumber,
+  toRound,
+} from 'easy-soft-utility';
 import { Canvas, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
-import { envCollection } from 'taro-fast-common/es/utils/constants';
 import {
   getFields,
-  getGuid,
   getSystemInfo,
-  inCollection,
-  recordError,
-  recordExecute,
-  recordWarn,
-  roundToTarget,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isNumber } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
 import {
   HorizontalCenterBox,
   VerticalBox,
@@ -110,13 +112,13 @@ class Circle extends ComponentBase {
   getPercent = () => {
     const { percent } = this.props;
 
-    return roundToTarget(percent, 2);
+    return toRound(percent, 2);
   };
 
   getLineCap = () => {
     const { lineCap } = this.props;
 
-    return inCollection(lineCapCollection, lineCap)
+    return checkInCollection(lineCapCollection, lineCap)
       ? lineCap
       : defaultProps.lineCap;
   };
@@ -168,7 +170,7 @@ class Circle extends ComponentBase {
       return;
     }
 
-    recordExecute('draw');
+    logExecute('draw');
 
     let systemInfo = getSystemInfo();
 
@@ -203,11 +205,11 @@ class Circle extends ComponentBase {
             break;
 
           case envCollection.ALIPAY:
-            recordWarn(`framework with env [${env}] has no adaptation`);
+            logWarn(`framework with env [${env}] has no adaptation`);
             break;
 
           case envCollection.SWAN:
-            recordWarn(`framework with env [${env}] has no adaptation`);
+            logWarn(`framework with env [${env}] has no adaptation`);
             break;
 
           case envCollection.WEB:
@@ -218,12 +220,12 @@ class Circle extends ComponentBase {
             break;
 
           default:
-            recordWarn(`framework with env [${env}] has no adaptation`);
+            logWarn(`framework with env [${env}] has no adaptation`);
             break;
         }
 
         if (ctx == null) {
-          recordWarn(`framework with env [${env}] has no adaptation`);
+          logWarn(`framework with env [${env}] has no adaptation`);
 
           return;
         }
@@ -257,7 +259,7 @@ class Circle extends ComponentBase {
         return n;
       })
       .catch((error) => {
-        recordError({ error });
+        logError({ error });
       });
   };
 
@@ -270,7 +272,7 @@ class Circle extends ComponentBase {
       this.facileCanvas(ctx, radius, 0, this.currentProcess);
     }
 
-    const next = roundToTarget(this.currentProcess + step, 2);
+    const next = toRound(this.currentProcess + step, 2);
 
     this.facileCanvas(ctx, radius, this.currentProcess, next);
 
@@ -298,7 +300,7 @@ class Circle extends ComponentBase {
 
     this.facileCanvas(ctx, radius, 0, this.currentProcess);
 
-    const next = roundToTarget(this.currentProcess - step, 2);
+    const next = toRound(this.currentProcess - step, 2);
 
     this.currentProcess = next;
 

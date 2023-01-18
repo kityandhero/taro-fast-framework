@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { checkInCollection, isUndefined } from 'easy-soft-utility';
 import { startTransition } from 'react';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -6,9 +7,7 @@ import Taro from '@tarojs/taro';
 import {
   createAnimation,
   getCurrentInstance,
-  inCollection,
 } from 'taro-fast-common/es/utils/tools';
-import { isUndefined } from 'taro-fast-common/es/utils/typeCheck';
 
 import ActivityIndicator from '../../ActivityIndicator';
 import BaseComponent from '../../BaseComponent';
@@ -131,7 +130,7 @@ class PullIndicator extends BaseComponent {
   getRefreshingBoxEffect = () => {
     const { refreshingBoxEffect } = this.props;
 
-    return inCollection(refreshingBoxEffectCollection, refreshingBoxEffect)
+    return checkInCollection(refreshingBoxEffectCollection, refreshingBoxEffect)
       ? refreshingBoxEffect
       : 'pull';
   };

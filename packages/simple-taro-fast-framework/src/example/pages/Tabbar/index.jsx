@@ -1,6 +1,7 @@
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
+import { connect } from 'easy-soft-dva';
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
+
 import { Space, Tabbar } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -201,7 +202,7 @@ export default class Index extends ContentPageBase {
   changeTab = (o) => {
     const { name } = o;
 
-    if (!stringIsNullOrWhiteSpace(name)) {
+    if (!checkStringIsNullOrWhiteSpace(name)) {
       this.setState({ value: name });
     }
   };

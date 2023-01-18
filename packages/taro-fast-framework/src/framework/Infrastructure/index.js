@@ -1,3 +1,25 @@
+import {
+  buildLinearGradient,
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  envCollection,
+  isArray,
+  isFunction,
+  logConfig,
+  logData,
+  logDebug,
+  logError,
+  logExecute,
+  logInfo,
+  logObject,
+  logWarn,
+  showErrorMessage,
+  showRuntimeError,
+  sleep,
+  toString,
+  transformListData,
+  underlyingState,
+} from 'easy-soft-utility';
 import { ScrollView, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
@@ -5,37 +27,16 @@ import {
   ComponentBase,
   Notification,
 } from 'taro-fast-common/es/customComponents';
+import { locateResult } from 'taro-fast-common/es/utils/constants';
 import {
-  envCollection,
-  locateResult,
-  underlyingState,
-} from 'taro-fast-common/es/utils/constants';
-import {
-  buildLinearGradient,
   getMenuButtonBoundingClientRect,
   getSystemInfo,
-  inCollection,
   isWechat,
   navigateTo,
   pageScrollTo,
-  recordConfig,
-  recordDebug,
-  recordError,
-  recordExecute,
-  recordInfo,
-  recordLog,
-  recordObject,
-  recordWarn,
   redirectTo,
-  showErrorMessage,
-  showRuntimeError,
-  sleep,
-  stringIsNullOrWhiteSpace,
-  transformListData,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray, isFunction } from 'taro-fast-common/es/utils/typeCheck';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 import {
   BackTop,
   Cascader,
@@ -79,7 +80,7 @@ const defaultDispatchLocationResultData = {
 };
 
 function getRefreshingBoxEffect(effect) {
-  if (inCollection(refreshingBoxEffectCollection, effect)) {
+  if (checkInCollection(refreshingBoxEffectCollection, effect)) {
     if (!isWechat) {
       return 'pull';
     }
@@ -404,7 +405,7 @@ export default class Infrastructure extends ComponentBase {
         message: 'config error,check in console',
       });
 
-      recordObject(this);
+      logObject(this);
 
       throw new Error(
         'schedulingControl in props not exist, please connect it first',
@@ -413,20 +414,20 @@ export default class Infrastructure extends ComponentBase {
   };
 
   initializeInternalData = () => {
-    recordConfig(
+    logConfig(
       'initializeInternalData do nothing, if you need to initialize internal data, please override it: initializeInternalData = () => {}',
     );
   };
 
   // eslint-disable-next-line no-unused-vars
   adjustByScene = (scene) => {
-    recordConfig(
+    logConfig(
       'adjustByScene do nothing, if you need to adjust something by different scene, please override it: adjustByScene = (scene) => {}',
     );
   };
 
   adjustInternalDataOnRepeatedShow = () => {
-    recordConfig(
+    logConfig(
       'adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please override it: adjustInternalDataOnRepeatedShow = () => {}',
     );
   };
@@ -516,7 +517,7 @@ export default class Infrastructure extends ComponentBase {
   }
 
   goToWebPage(pagePath, title, url) {
-    if (stringIsNullOrWhiteSpace(url)) {
+    if (checkStringIsNullOrWhiteSpace(url)) {
       const text = '缺少目标页面地址, 无法跳转';
 
       showErrorMessage({
@@ -554,7 +555,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenShow = (callback = null) => {
-    recordExecute('doWorkWhenShow');
+    logExecute('doWorkWhenShow');
 
     const checkNeedSignInWhenShowResult = this.checkNeedSignInWhenShow();
 
@@ -619,7 +620,7 @@ export default class Infrastructure extends ComponentBase {
       return true;
     }
 
-    recordExecute('checkNeedSignInWhenShow');
+    logExecute('checkNeedSignInWhenShow');
 
     const signInResult = this.getSignInResult();
     const verifySignInResult = getVerifySignInResult();
@@ -632,7 +633,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    recordExecute('doWorkWhenCheckNeedSignInDidMountFail');
+    logExecute('doWorkWhenCheckNeedSignInDidMountFail');
 
     const that = this;
 
@@ -643,13 +644,13 @@ export default class Infrastructure extends ComponentBase {
       if (this.autoRedirectToSignIn) {
         const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-        if (stringIsNullOrWhiteSpace(signInPath)) {
+        if (checkStringIsNullOrWhiteSpace(signInPath)) {
           throw new Error('未配置登录页面signInPath');
         }
 
         this.repeatDoWorkWhenShow = true;
 
-        recordDebug('set this.repeatDoWorkWhenShow to true');
+        logDebug('set this.repeatDoWorkWhenShow to true');
 
         setTimeout(() => {
           redirectTo(signInPath);
@@ -659,43 +660,43 @@ export default class Infrastructure extends ComponentBase {
           spin: false,
         });
 
-        recordDebug('set state spin to false');
+        logDebug('set state spin to false');
 
         this.repeatDoWorkWhenShow = true;
 
-        recordDebug('set this.repeatDoWorkWhenShow to true');
+        logDebug('set this.repeatDoWorkWhenShow to true');
 
         this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
       }
     } else {
       that.setState({ signInSilentOverlayVisible: true });
 
-      recordDebug('set state signInSilentOverlayVisible to true');
+      logDebug('set state signInSilentOverlayVisible to true');
 
       that.checkSession(() => {
         that.checkTicketValidity({
           callback: () => {
             that.setState({ signInSilentOverlayVisible: false });
 
-            recordDebug('set state signInSilentOverlayVisible to false');
+            logDebug('set state signInSilentOverlayVisible to false');
 
             that.doDidMountTask();
           },
           signInSilentFailCallback: () => {
-            recordDebug(
+            logDebug(
               'signInSilentFailCallback in doWorkWhenCheckNeedSignInDidMountFail and class Infrastructure.',
             );
 
             if (this.autoRedirectToSignIn) {
               const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-              if (stringIsNullOrWhiteSpace(signInPath)) {
+              if (checkStringIsNullOrWhiteSpace(signInPath)) {
                 throw new Error('未配置登录页面signInPath');
               }
 
               this.repeatDoWorkWhenShow = true;
 
-              recordDebug('set this.repeatDoWorkWhenShow to true');
+              logDebug('set this.repeatDoWorkWhenShow to true');
 
               redirectTo(signInPath);
             } else {
@@ -704,13 +705,13 @@ export default class Infrastructure extends ComponentBase {
                 signInSilentOverlayVisible: false,
               });
 
-              recordDebug(
+              logDebug(
                 'set state spin to true, signInSilentOverlayVisible to false',
               );
 
               this.repeatDoWorkWhenShow = true;
 
-              recordDebug('set this.repeatDoWorkWhenShow to true');
+              logDebug('set this.repeatDoWorkWhenShow to true');
 
               this.doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn();
             }
@@ -721,7 +722,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {
-    recordExecute(
+    logExecute(
       'doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn',
     );
 
@@ -731,7 +732,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   checkPermission = () => {
-    if (stringIsNullOrWhiteSpace(this.componentAuthority)) {
+    if (checkStringIsNullOrWhiteSpace(this.componentAuthority)) {
       return true;
     } else if (this.checkAuthority(this.componentAuthority)) {
       return true;
@@ -745,7 +746,7 @@ export default class Infrastructure extends ComponentBase {
   doWorkWhenCheckPermissionFail = () => {
     this.repeatDoWorkWhenShow = true;
 
-    recordExecute('doWorkWhenCheckPermissionFail');
+    logExecute('doWorkWhenCheckPermissionFail');
 
     const text = `无交互权限: ${this.componentAuthority || ''}`;
 
@@ -756,7 +757,7 @@ export default class Infrastructure extends ComponentBase {
     const withoutPermissionRedirectPath =
       defaultSettingsLayoutCustom.getWithoutPermissionRedirectPath();
 
-    if (stringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
+    if (checkStringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
       throw new Error('未配置无交互权限时的跳转目标');
     }
 
@@ -766,7 +767,7 @@ export default class Infrastructure extends ComponentBase {
   goToSignIn = () => {
     const signInPath = defaultSettingsLayoutCustom.getSignInPath();
 
-    if (stringIsNullOrWhiteSpace(signInPath)) {
+    if (checkStringIsNullOrWhiteSpace(signInPath)) {
       throw new Error('未配置登录页面signInPath');
     }
 
@@ -774,7 +775,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   doShowTask = () => {
-    recordDebug(
+    logDebug(
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
     );
 
@@ -783,9 +784,9 @@ export default class Infrastructure extends ComponentBase {
 
       this.firstShowHasTriggered = true;
 
-      recordDebug('set this.firstShowHasTriggered to true');
+      logDebug('set this.firstShowHasTriggered to true');
     } else {
-      recordDebug(
+      logDebug(
         `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
       );
 
@@ -829,7 +830,7 @@ export default class Infrastructure extends ComponentBase {
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
   doSimulationFadeSpin = (callback = null) => {
-    recordExecute('doSimulationFadeSpin');
+    logExecute('doSimulationFadeSpin');
 
     const { spin } = this.state;
 
@@ -851,7 +852,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   prepareLoadRemoteRequest = () => {
-    recordExecute('prepareLoadRemoteRequest');
+    logExecute('prepareLoadRemoteRequest');
 
     const that = this;
 
@@ -865,7 +866,7 @@ export default class Infrastructure extends ComponentBase {
   prepareLoadRemoteRequestOnlyMetaData = () => {
     const that = this;
 
-    recordDebug(
+    logDebug(
       `ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
     );
 
@@ -937,7 +938,7 @@ export default class Infrastructure extends ComponentBase {
    * @param {*} callback
    */
   checkSession = (callback) => {
-    recordExecute('checkSession');
+    logExecute('checkSession');
 
     const env = this.getEnv();
 
@@ -948,7 +949,7 @@ export default class Infrastructure extends ComponentBase {
         break;
 
       case envCollection.ALIPAY:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -957,7 +958,7 @@ export default class Infrastructure extends ComponentBase {
         return;
 
       case envCollection.SWAN:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -966,7 +967,7 @@ export default class Infrastructure extends ComponentBase {
         return;
 
       case envCollection.WEB:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -975,7 +976,7 @@ export default class Infrastructure extends ComponentBase {
         return;
 
       default:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
           callback();
@@ -992,22 +993,22 @@ export default class Infrastructure extends ComponentBase {
       const session = getSession();
 
       if ((session || '') === '') {
-        recordDebug('session is empty');
+        logDebug('session is empty');
 
         that.refreshSession({ callback });
       } else {
         Taro.checkSession({
           success: () => {
-            recordDebug('session is effective, ignore session refresh');
+            logDebug('session is effective, ignore session refresh');
 
             if (isFunction(callback)) {
               callback();
             }
           },
           fail(data) {
-            recordDebug('session is expired');
+            logDebug('session is expired');
 
-            recordObject(data);
+            logObject(data);
 
             that.refreshSession({ callback });
           },
@@ -1023,7 +1024,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   checkSessionWhenSessionRefreshing({ callback, timeTotal = 0 }) {
-    recordExecute('checkSessionWhenSessionRefreshing');
+    logExecute('checkSessionWhenSessionRefreshing');
 
     if (timeTotal > 3000) {
       setSessionRefreshing(false);
@@ -1038,7 +1039,7 @@ export default class Infrastructure extends ComponentBase {
     const that = this;
 
     sleep(100, () => {
-      recordLog(`checkSessionWhenSessionRefreshing sleep ${timeTotal}`);
+      logData(`checkSessionWhenSessionRefreshing sleep ${timeTotal}`);
 
       const sessionRefreshingAfterSleep = getSessionRefreshing();
 
@@ -1130,7 +1131,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   };
 
@@ -1142,7 +1143,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getSignInProcessDetection = () => {
-    recordExecute('getSignInProcessDetection');
+    logExecute('getSignInProcessDetection');
 
     const {
       schedulingControl: { signInProcessDetection },
@@ -1152,14 +1153,14 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setSignInProcessDetection = ({ data, callback }) => {
-    recordLog(`setSignInProcessDetection ${data}`);
+    logData(`setSignInProcessDetection ${data}`);
 
     const that = this;
 
     that
       .dispatchSetSignInProcessDetection(!!data)
       .then(() => {
-        recordExecute('dispatchSetSignInProcessDetection then');
+        logExecute('dispatchSetSignInProcessDetection then');
 
         if (isFunction(callback)) {
           // eslint-disable-next-line promise/no-callback-in-promise
@@ -1169,12 +1170,12 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   };
 
   dispatchSetSignInResult = (data) => {
-    recordExecute('dispatchSetSignInResult');
+    logExecute('dispatchSetSignInResult');
 
     return this.dispatchApi({
       type: 'schedulingControl/setSignInResult',
@@ -1190,7 +1191,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getSignInResult = () => {
-    recordExecute('getSignInResult');
+    logExecute('getSignInResult');
 
     const {
       schedulingControl: { signInResult },
@@ -1200,8 +1201,8 @@ export default class Infrastructure extends ComponentBase {
   };
 
   setSignInResult = ({ data, callback }) => {
-    recordExecute('setSignInResult');
-    recordDebug(
+    logExecute('setSignInResult');
+    logDebug(
       `sign in result is ${data}, it mean ${getSignInResultDescription(data)} `,
     );
 
@@ -1210,7 +1211,7 @@ export default class Infrastructure extends ComponentBase {
     that
       .dispatchSetSignInResult(data)
       .then(() => {
-        recordExecute('dispatchSetSignInResult then');
+        logExecute('dispatchSetSignInResult then');
 
         if (isFunction(callback)) {
           // eslint-disable-next-line promise/no-callback-in-promise
@@ -1220,7 +1221,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   };
 
@@ -1236,10 +1237,10 @@ export default class Infrastructure extends ComponentBase {
       return this.privateCache.verifySession;
     }
 
-    recordExecute('getVerifySession');
+    logExecute('getVerifySession');
 
     if (this.ignoreSessionRelatedLogic) {
-      recordInfo(
+      logInfo(
         'because ignoreSessionRelatedLogic is true, so verifySession return false',
       );
 
@@ -1252,7 +1253,7 @@ export default class Infrastructure extends ComponentBase {
       switch (env) {
         case envCollection.WEAPP: {
           if (this.needSignIn) {
-            recordDebug(
+            logDebug(
               `because needSignIn is true, so verifySession return true`,
             );
 
@@ -1265,7 +1266,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.ALIPAY: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
 
@@ -1273,7 +1274,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.SWAN: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
 
@@ -1281,7 +1282,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.WEB: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
 
@@ -1289,7 +1290,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         default: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
 
@@ -1298,7 +1299,7 @@ export default class Infrastructure extends ComponentBase {
       }
     }
 
-    recordInfo(`cache the verifySession -> ${this.privateCache.verifySession}`);
+    logInfo(`cache the verifySession -> ${this.privateCache.verifySession}`);
 
     return this.privateCache.verifySession;
   };
@@ -1308,10 +1309,10 @@ export default class Infrastructure extends ComponentBase {
       return this.privateCache.verifyTicket;
     }
 
-    recordExecute('getVerifyTicket');
+    logExecute('getVerifyTicket');
 
     if (this.ignoreSessionRelatedLogic) {
-      recordInfo(
+      logInfo(
         'because ignoreSessionRelatedLogic is true, so verifyTicket return false',
       );
 
@@ -1324,9 +1325,7 @@ export default class Infrastructure extends ComponentBase {
       switch (env) {
         case envCollection.WEAPP: {
           if (this.needSignIn) {
-            recordDebug(
-              `because needSignIn is true, so verifyTicket return true`,
-            );
+            logDebug(`because needSignIn is true, so verifyTicket return true`);
 
             this.privateCache.verifyTicket = true;
           } else {
@@ -1337,7 +1336,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.ALIPAY: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
 
@@ -1345,7 +1344,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.SWAN: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
 
@@ -1353,7 +1352,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.WEB: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
 
@@ -1361,7 +1360,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         default: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
 
@@ -1370,7 +1369,7 @@ export default class Infrastructure extends ComponentBase {
       }
     }
 
-    recordInfo(`cache the verifyTicket -> ${this.privateCache.verifyTicket}`);
+    logInfo(`cache the verifyTicket -> ${this.privateCache.verifyTicket}`);
 
     return this.privateCache.verifyTicket;
   };
@@ -1380,10 +1379,10 @@ export default class Infrastructure extends ComponentBase {
       return this.privateCache.verifyTicketValidity;
     }
 
-    recordExecute('getVerifyTicketValidity');
+    logExecute('getVerifyTicketValidity');
 
     if (this.ignoreSessionRelatedLogic) {
-      recordInfo(
+      logInfo(
         'because ignoreSessionRelatedLogic is true, so verifyTicketValidity return false',
       );
 
@@ -1396,7 +1395,7 @@ export default class Infrastructure extends ComponentBase {
       switch (env) {
         case envCollection.WEAPP: {
           if (this.needSignIn) {
-            recordDebug(
+            logDebug(
               `because needSignIn is true, so verifyTicketValidity return true`,
             );
 
@@ -1409,7 +1408,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.ALIPAY: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
 
@@ -1417,7 +1416,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.SWAN: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
 
@@ -1425,7 +1424,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         case envCollection.WEB: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
 
@@ -1433,7 +1432,7 @@ export default class Infrastructure extends ComponentBase {
         }
 
         default: {
-          recordWarn(noAdaptationMessage);
+          logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
 
@@ -1442,7 +1441,7 @@ export default class Infrastructure extends ComponentBase {
       }
     }
 
-    recordInfo(
+    logInfo(
       `cache the verifyTicketValidity -> ${this.privateCache.verifyTicketValidity}`,
     );
 
@@ -1454,7 +1453,7 @@ export default class Infrastructure extends ComponentBase {
       return this.privateCache.enablePullDownRefresh;
     }
 
-    recordExecute('getEnablePullDownRefresh');
+    logExecute('getEnablePullDownRefresh');
 
     const env = this.getEnv();
 
@@ -1468,7 +1467,7 @@ export default class Infrastructure extends ComponentBase {
       }
 
       case envCollection.ALIPAY: {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
 
@@ -1476,7 +1475,7 @@ export default class Infrastructure extends ComponentBase {
       }
 
       case envCollection.SWAN: {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
 
@@ -1484,7 +1483,7 @@ export default class Infrastructure extends ComponentBase {
       }
 
       case envCollection.WEB: {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
 
@@ -1492,7 +1491,7 @@ export default class Infrastructure extends ComponentBase {
       }
 
       default: {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
 
@@ -1500,7 +1499,7 @@ export default class Infrastructure extends ComponentBase {
       }
     }
 
-    recordInfo(
+    logInfo(
       `cache the enablePullDownRefresh -> ${this.privateCache.enablePullDownRefresh}`,
     );
 
@@ -1524,19 +1523,19 @@ export default class Infrastructure extends ComponentBase {
         return d;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   }
 
   getCurrentLocation = ({ callback = null }) => {
-    recordExecute('getCurrentLocation');
+    logExecute('getCurrentLocation');
 
     const that = this;
 
     const map = getMap();
 
     if ((map || null) == null) {
-      recordInfo('map is null');
+      logInfo('map is null');
 
       that.obtainLocation({
         successCallback: ({ map: mapSource }) => {
@@ -1550,7 +1549,7 @@ export default class Infrastructure extends ComponentBase {
         failCallback: null,
       });
     } else {
-      recordInfo('map is not null');
+      logInfo('map is not null');
 
       callback({
         map,
@@ -1559,7 +1558,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getLocationWeather = ({ callback = null }) => {
-    recordExecute('getLocationWeather');
+    logExecute('getLocationWeather');
 
     const that = this;
 
@@ -1574,9 +1573,9 @@ export default class Infrastructure extends ComponentBase {
   };
 
   getLocationWeatherCore = ({ data, callback = null }) => {
-    recordExecute('getLocationWeatherCore');
+    logExecute('getLocationWeatherCore');
 
-    recordObject({
+    logObject({
       data,
     });
 
@@ -1617,7 +1616,7 @@ export default class Infrastructure extends ComponentBase {
         return weather;
       })
       .catch((error) => {
-        recordError(error);
+        logError(error);
       });
   };
 
@@ -1678,7 +1677,7 @@ export default class Infrastructure extends ComponentBase {
   existLoadApi = () => {
     const { loadApiPath } = this.state;
 
-    return !stringIsNullOrWhiteSpace(loadApiPath);
+    return !checkStringIsNullOrWhiteSpace(loadApiPath);
   };
 
   onLowerLoad = () => {
@@ -1851,22 +1850,22 @@ export default class Infrastructure extends ComponentBase {
         break;
 
       case envCollection.ALIPAY:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return null;
 
       case envCollection.SWAN:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return null;
 
       case envCollection.WEB:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return null;
 
       default:
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return null;
     }
@@ -2245,10 +2244,10 @@ export default class Infrastructure extends ComponentBase {
           ...(this.backTopRight == null ? {} : { right: this.backTopRight }),
           ...(this.backTopBottom == null ? {} : { bottom: this.backTopBottom }),
           ...{ circle: !!this.backTopCircle },
-          ...(stringIsNullOrWhiteSpace(this.backTopIconColor)
+          ...(checkStringIsNullOrWhiteSpace(this.backTopIconColor)
             ? {}
             : { iconColor: this.backTopIconColor }),
-          ...(stringIsNullOrWhiteSpace(this.backTopBackgroundColor)
+          ...(checkStringIsNullOrWhiteSpace(this.backTopBackgroundColor)
             ? {}
             : { backgroundColor: this.backTopBackgroundColor }),
           ...(this.backTopOpacity == null

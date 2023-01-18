@@ -1,7 +1,7 @@
+import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
 import { Button, Space } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
@@ -121,8 +121,8 @@ export default class Index extends BasePageWrapper {
                   };
 
                   if (
-                    stringIsNullOrWhiteSpace(weather) &&
-                    stringIsNullOrWhiteSpace(degree)
+                    checkStringIsNullOrWhiteSpace(weather) &&
+                    checkStringIsNullOrWhiteSpace(degree)
                   ) {
                     return;
                   }

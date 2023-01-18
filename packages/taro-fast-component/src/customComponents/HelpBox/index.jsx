@@ -1,12 +1,12 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+  toNumber,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import DataGrid from '../DataGrid';
@@ -35,7 +35,7 @@ class HelpBox extends BaseComponent {
     const { useBackground, backgroundColor } = this.props;
 
     return {
-      ...(useBackground && stringIsNullOrWhiteSpace(backgroundColor)
+      ...(useBackground && checkStringIsNullOrWhiteSpace(backgroundColor)
         ? {}
         : { '--background': backgroundColor }),
     };
@@ -152,7 +152,7 @@ class HelpBox extends BaseComponent {
 
             return {
               key: key,
-              label: stringIsNullOrWhiteSpace(label)
+              label: checkStringIsNullOrWhiteSpace(label)
                 ? showNumber
                   ? no
                   : '•'

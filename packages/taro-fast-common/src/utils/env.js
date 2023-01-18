@@ -1,15 +1,18 @@
+import {
+  envCollection,
+  getCache,
+  logExecute,
+  logInfo,
+  setCache,
+} from 'easy-soft-utility';
 import { ENV_TYPE, getEnv as getEnvCore } from '@tarojs/taro';
-
-import { getCache, setCache } from './cacheAssist';
-import { envCollection } from './constants';
-import { recordExecute, recordInfo } from './log';
 
 const cacheKeyCollection = {
   currentEnv: 'currentEnv',
 };
 
 export function checkEnv() {
-  recordExecute('checkEnv');
+  logExecute('checkEnv');
 
   getEnv();
 }
@@ -92,7 +95,7 @@ function setEnvCache() {
     value: v,
   });
 
-  recordInfo(`current env -> ${v}`);
+  logInfo(`current env -> ${v}`);
 
   return v;
 }

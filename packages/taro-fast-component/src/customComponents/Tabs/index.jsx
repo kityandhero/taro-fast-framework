@@ -1,4 +1,4 @@
-import { attachPropertiesToComponent } from 'taro-fast-common/es/utils/tools';
+import { attachPropertiesToComponent } from 'easy-soft-utility';
 
 import TabPanel from './panel';
 import Tabs from './tabs';

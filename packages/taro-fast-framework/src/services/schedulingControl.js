@@ -1,12 +1,12 @@
-import { datetimeFormat } from 'taro-fast-common/es/utils/constants';
 import {
   addMinute,
+  checkStringIsNullOrWhiteSpace,
+  datetimeFormat,
   formatDatetime,
   getGuid,
   getNow,
-  recordDebug,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
+  logDebug,
+} from 'easy-soft-utility';
 
 import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
 import { request } from '../utils/requestAssistor';
@@ -15,7 +15,7 @@ import { getVerifySignInResult } from '../utils/tools';
 export async function getWeatherData(params) {
   const weatherApi = defaultSettingsLayoutCustom.getWeatherApi();
 
-  if (stringIsNullOrWhiteSpace(weatherApi)) {
+  if (checkStringIsNullOrWhiteSpace(weatherApi)) {
     throw new Error('weatherApi is null, please check it in app config');
   }
 
@@ -34,7 +34,7 @@ export async function refreshSessionData(params) {
     code: code || '',
   };
 
-  recordDebug(
+  logDebug(
     `refreshSessionData simulation session data: ${JSON.stringify(simulation)}`,
   );
 
@@ -57,7 +57,7 @@ export async function checkTicketValidityData(params) {
     nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
   };
 
-  recordDebug(
+  logDebug(
     `checkTicketValidityData simulation ticket validity data: ${JSON.stringify(
       simulation,
     )}`,
@@ -81,7 +81,7 @@ export async function exchangePhoneData(params) {
     key: getGuid(),
   };
 
-  recordDebug(
+  logDebug(
     `exchangePhoneData simulation phone key data: ${JSON.stringify(
       simulation,
     )}`,
@@ -111,7 +111,7 @@ export async function signInSilentData(params) {
     needSyncInfo: false,
   };
 
-  recordDebug(
+  logDebug(
     `signInSilentData simulation sign in silent data: ${JSON.stringify(
       simulation,
     )}`,
@@ -141,7 +141,7 @@ export async function registerWithWeChatData(params) {
     needSyncInfo: false,
   };
 
-  recordDebug(
+  logDebug(
     `registerWithWeChatData simulation sign in silent data: ${JSON.stringify(
       simulation,
     )}`,
@@ -171,7 +171,7 @@ export async function registerData(params) {
     needSyncInfo: false,
   };
 
-  recordDebug(
+  logDebug(
     `registerData simulation sign in silent data: ${JSON.stringify(
       simulation,
     )}`,
@@ -195,7 +195,7 @@ export async function getMetaDataData(params) {
     time: formatDatetime(getNow(), datetimeFormat.monthDayHourMinuteSecond),
   };
 
-  recordDebug(
+  logDebug(
     `getMetaDataData simulation meta data silent data: ${JSON.stringify(
       simulation,
     )}`,
@@ -217,7 +217,7 @@ export async function getMetaDataData(params) {
 export async function getCustomerData(params) {
   const simulation = {};
 
-  recordDebug(
+  logDebug(
     `getCustomerData simulation customer silent data: ${JSON.stringify(
       simulation,
     )}`,
@@ -239,7 +239,7 @@ export async function getCustomerData(params) {
 export async function getAdministrativeDivisionFullData(params) {
   const simulation = [];
 
-  recordDebug(
+  logDebug(
     `getAdministrativeDivisionFullData simulation administrative division full data silent data: ${JSON.stringify(
       simulation,
     )}`,

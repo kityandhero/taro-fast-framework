@@ -1,11 +1,11 @@
-import { View } from '@tarojs/components';
-
 import {
-  colorHexToRGB,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+  buildRGBColorFromHexColor,
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  isNumber,
+  toNumber,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
 
@@ -27,13 +27,13 @@ class TranslucentBox extends BaseComponent {
 
     return {
       ...style,
-      ...(stringIsNullOrWhiteSpace(backgroundColor)
+      ...(checkStringIsNullOrWhiteSpace(backgroundColor)
         ? {}
         : {
             backgroundColor:
               backgroundColor === 'transparent'
                 ? 'transparent'
-                : `rgba(${colorHexToRGB(
+                : `rgba(${buildRGBColorFromHexColor(
                     backgroundColor,
                     '',
                   )}, ${transparency})`,

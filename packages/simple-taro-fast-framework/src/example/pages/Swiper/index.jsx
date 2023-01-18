@@ -1,6 +1,8 @@
+import { connect } from 'easy-soft-dva';
+import { buildRandomHexColor } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { getRandomColor, transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   Ellipsis,
@@ -10,7 +12,6 @@ import {
   SwiperWrapper,
 } from 'taro-fast-component/es/customComponents';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';
@@ -53,7 +54,7 @@ function buildHorizontalTextItem(o, i) {
 
   return (
     <CenterBox
-      style={{ backgroundColor: getRandomColor({ seed: (i + 1) * 45 }) }}
+      style={{ backgroundColor: buildRandomHexColor({ seed: (i + 1) * 45 }) }}
     >
       {text}
     </CenterBox>
@@ -73,7 +74,7 @@ function buildHorizontalImageItem(o, i) {
       padding={10}
       imageBoxStyle={{
         margin: '0 var(--tfc-10)',
-        backgroundColor: getRandomColor({ seed: (i + 1) * 45 }),
+        backgroundColor: buildRandomHexColor({ seed: (i + 1) * 45 }),
       }}
     />
   );

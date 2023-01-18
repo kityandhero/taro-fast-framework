@@ -1,4 +1,5 @@
-import { recordObject, recordText } from 'taro-fast-common/es/utils/tools';
+import { logObject, logText } from 'easy-soft-utility';
+
 import {
   actionCore,
   actionModalCore,
@@ -89,10 +90,10 @@ export async function getOverviewActionSheet({
       });
     },
     errorCallback: ({ message }) => {
-      recordText({ message });
+      logText({ message });
     },
     completeCallback: ({ tapIndex, message }) => {
-      recordText({ tapIndex, message });
+      logText({ tapIndex, message });
     },
   });
 }
@@ -141,13 +142,13 @@ export async function getOverviewActionModal({
       });
     },
     cancelCallback: ({ message }) => {
-      recordText({ message });
+      logText({ message });
     },
     errorCallback: ({ message }) => {
-      recordText({ message });
+      logText({ message });
     },
     completeCallback: ({ message, confirm, cancel, content }) => {
-      recordObject({
+      logObject({
         message,
         confirm,
         cancel,

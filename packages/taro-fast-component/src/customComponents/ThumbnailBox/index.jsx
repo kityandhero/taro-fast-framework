@@ -1,11 +1,12 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  isNumber,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction, isNumber } from 'taro-fast-common/es/utils/typeCheck';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -53,17 +54,17 @@ class ThumbnailBox extends BaseComponent {
     const { expandStage } = this.state;
 
     return {
-      ...(stringIsNullOrWhiteSpace(backgroundColor)
+      ...(checkStringIsNullOrWhiteSpace(backgroundColor)
         ? {}
         : {
             '--background-color': backgroundColor,
           }),
-      ...(stringIsNullOrWhiteSpace(actionBackgroundColor)
+      ...(checkStringIsNullOrWhiteSpace(actionBackgroundColor)
         ? {}
         : {
             '--action-background-color': actionBackgroundColor,
           }),
-      ...(stringIsNullOrWhiteSpace(actionColor)
+      ...(checkStringIsNullOrWhiteSpace(actionColor)
         ? {}
         : {
             '--action-color': actionColor,

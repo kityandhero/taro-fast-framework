@@ -1,18 +1,16 @@
 import classNames from 'classnames';
-import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
-
 import {
-  recordError,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import {
+  checkStringIsNullOrWhiteSpace,
   isFunction,
   isObject,
   isPromise,
   isString,
-} from 'taro-fast-common/es/utils/typeCheck';
+  logError,
+} from 'easy-soft-utility';
+import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 
 import BaseComponent from '../BaseComponent';
 import { Spin } from '../Spin';
@@ -119,13 +117,13 @@ class Switch extends BaseComponent {
               afterChange(!checkedStage);
             }
           } else {
-            recordError('调用执行失败');
+            logError('调用执行失败');
           }
 
           return v;
         })
         .catch((res) => {
-          recordError(res);
+          logError(res);
         });
     } else {
       this.setState({
@@ -166,13 +164,13 @@ class Switch extends BaseComponent {
       confirmText: confirmText || '确定',
       confirmColor: !isString(confirmColor)
         ? ''
-        : stringIsNullOrWhiteSpace(confirmColor)
+        : checkStringIsNullOrWhiteSpace(confirmColor)
         ? ''
         : confirmColor,
       cancelText: cancelText || '取消',
       cancelColor: !isString(cancelColor)
         ? ''
-        : stringIsNullOrWhiteSpace(cancelColor)
+        : checkStringIsNullOrWhiteSpace(cancelColor)
         ? ''
         : cancelColor,
       success: ({ confirm: c }) => {

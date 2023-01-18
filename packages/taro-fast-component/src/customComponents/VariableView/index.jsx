@@ -1,17 +1,19 @@
 import classNames from 'classnames';
+import {
+  checkStringIsNullOrWhiteSpace,
+  getGuid,
+  isFunction,
+  logError,
+} from 'easy-soft-utility';
 import { ScrollView, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import {
   createSelectorQuery,
-  getGuid,
   getRect,
   getSystemInfo,
-  recordError,
-  stringIsNullOrWhiteSpace,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import ActivityIndicator from '../ActivityIndicator';
 import BaseComponent from '../BaseComponent';
@@ -392,7 +394,7 @@ class VariableView extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        recordError({ error });
+        logError({ error });
       });
   };
 
@@ -518,7 +520,7 @@ class VariableView extends BaseComponent {
 
     const styleAdjust = {
       ...style,
-      ...(stringIsNullOrWhiteSpace(height)
+      ...(checkStringIsNullOrWhiteSpace(height)
         ? {}
         : !scroll
         ? {
@@ -527,23 +529,23 @@ class VariableView extends BaseComponent {
         : {
             height: height,
           }),
-      ...(stringIsNullOrWhiteSpace(refreshColor)
+      ...(checkStringIsNullOrWhiteSpace(refreshColor)
         ? {}
         : { '--refresh-color': refreshColor }),
-      ...(stringIsNullOrWhiteSpace(refreshBackgroundColor)
+      ...(checkStringIsNullOrWhiteSpace(refreshBackgroundColor)
         ? {}
         : { '--refresh-background-color': refreshBackgroundColor }),
-      ...(stringIsNullOrWhiteSpace(refreshingBackgroundColor)
+      ...(checkStringIsNullOrWhiteSpace(refreshingBackgroundColor)
         ? {}
         : { '--refreshing-background-color': refreshingBackgroundColor }),
-      ...(stringIsNullOrWhiteSpace(refreshingBorder)
+      ...(checkStringIsNullOrWhiteSpace(refreshingBorder)
         ? {}
         : { '--refreshing-border': `${refreshingBorder}` }),
 
-      ...(stringIsNullOrWhiteSpace(lowerLoadingBackgroundColor)
+      ...(checkStringIsNullOrWhiteSpace(lowerLoadingBackgroundColor)
         ? {}
         : { '--lower-loading-background-color': lowerLoadingBackgroundColor }),
-      ...(stringIsNullOrWhiteSpace(lowerLoadingBorder)
+      ...(checkStringIsNullOrWhiteSpace(lowerLoadingBorder)
         ? {}
         : { '--lower-loading-border': `${lowerLoadingBorder}` }),
       ...{

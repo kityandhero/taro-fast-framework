@@ -1,14 +1,14 @@
+import { connect } from 'easy-soft-dva';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  logError,
+  toString,
+} from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import {
-  recordError,
-  redirectTo,
-  stringIsNullOrWhiteSpace,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
+import { redirectTo, transformSize } from 'taro-fast-common/es/utils/tools';
 import { ActivityIndicator } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import { shareTransfer } from '../../../../customConfig/constants';
 import { pathCollection } from '../../../../customConfig/pathConfig';
@@ -54,7 +54,7 @@ export default class Index extends BasePageWrapper {
 
     const that = this;
 
-    if (stringIsNullOrWhiteSpace(scene)) {
+    if (checkStringIsNullOrWhiteSpace(scene)) {
       that.handleParams(urlParams);
     } else {
       that.exchangeShareData({
@@ -68,7 +68,7 @@ export default class Index extends BasePageWrapper {
   };
 
   exchangeShareData = ({ scene, urlParams, callback }) => {
-    if (stringIsNullOrWhiteSpace(scene)) {
+    if (checkStringIsNullOrWhiteSpace(scene)) {
       this.showNavigationNotice();
 
       redirectTo(pathCollection.news.home.path);
@@ -87,7 +87,7 @@ export default class Index extends BasePageWrapper {
 
     const { shareId } = shareData;
 
-    if (stringIsNullOrWhiteSpace(shareId)) {
+    if (checkStringIsNullOrWhiteSpace(shareId)) {
       this.showError('无效的分享标识');
     }
 
@@ -104,7 +104,7 @@ export default class Index extends BasePageWrapper {
 
         const mergeData = {};
 
-        if (!stringIsNullOrWhiteSpace(toString(transfer || ''))) {
+        if (!checkStringIsNullOrWhiteSpace(toString(transfer || ''))) {
           mergeData.transfer = transfer;
         }
 
@@ -114,6 +114,7 @@ export default class Index extends BasePageWrapper {
         };
 
         if (isFunction(callback)) {
+          // eslint-disable-next-line promise/no-callback-in-promise
           callback(urlParamsChanged);
         } else {
           //跳转首页
@@ -122,7 +123,7 @@ export default class Index extends BasePageWrapper {
         return urlParamsChanged;
       })
       .catch((error) => {
-        recordError({ error });
+        logError({ error });
       });
   };
 
@@ -157,13 +158,13 @@ export default class Index extends BasePageWrapper {
 
       let title = '';
 
-      if (!stringIsNullOrWhiteSpace(titleEncode)) {
+      if (!checkStringIsNullOrWhiteSpace(titleEncode)) {
         title = decodeURIComponent(titleEncode);
       }
 
       let url = '';
 
-      if (!stringIsNullOrWhiteSpace(urlEncode)) {
+      if (!checkStringIsNullOrWhiteSpace(urlEncode)) {
         url = decodeURIComponent(urlEncode);
       }
 

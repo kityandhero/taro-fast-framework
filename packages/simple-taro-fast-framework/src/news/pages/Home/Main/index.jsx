@@ -1,13 +1,13 @@
 import classNames from 'classnames';
+import { connect } from 'easy-soft-dva';
+import { buildLinearGradient, isArray } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import {
-  buildLinearGradient,
   navigateTo,
   redirectTo,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import {
   Card,
   CenterBox,
@@ -23,7 +23,6 @@ import {
   Space,
   Swiper,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import { pathCollection } from '../../../../customConfig/pathConfig';

@@ -1,3 +1,5 @@
+import { checkStringIsNullOrWhiteSpace, toNumber } from 'easy-soft-utility';
+
 import {
   apiSuccessCode as apiSuccessCodeDefault,
   authenticationFailCode as authenticationFailCodeDefault,
@@ -5,11 +7,7 @@ import {
   locationModeCollection,
   verifySignInResult,
 } from 'taro-fast-common/es/utils/constants';
-import {
-  getAppInitConfigData,
-  stringIsNullOrWhiteSpace,
-} from 'taro-fast-common/es/utils/tools';
-import { toNumber } from 'taro-fast-common/es/utils/typeConvert';
+import { getAppInitConfigData } from 'taro-fast-common/es/utils/tools';
 
 export const defaultSettingsLayoutCustom = {
   getWebRootFontSize: () => {
@@ -389,7 +387,7 @@ export const defaultSettingsLayoutCustom = {
     return companyName || '';
   },
   getLeftBarLogo: (remoteLogo) => {
-    if (!stringIsNullOrWhiteSpace(remoteLogo || null)) {
+    if (!checkStringIsNullOrWhiteSpace(remoteLogo || null)) {
       return remoteLogo;
     }
 

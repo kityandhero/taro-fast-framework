@@ -1,3 +1,4 @@
+import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
 import { isBrowser, navigateTo } from 'taro-fast-common/es/utils/tools';
@@ -6,7 +7,6 @@ import {
   Icon,
   ImageBox,
 } from 'taro-fast-component/es/customComponents';
-import { connect } from 'taro-fast-framework/es/utils/dva';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';

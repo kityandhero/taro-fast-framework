@@ -1,7 +1,5 @@
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { inCollection } from 'taro-fast-common/es/utils/tools';
-import { isFunction } from 'taro-fast-common/es/utils/typeCheck';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';
@@ -23,7 +21,7 @@ class ExtraBox extends BaseComponent {
   getExtraPosition = () => {
     const { extraPosition } = this.props;
 
-    return inCollection(positionCollection, extraPosition)
+    return checkInCollection(positionCollection, extraPosition)
       ? extraPosition
       : defaultProps.extraPosition;
   };

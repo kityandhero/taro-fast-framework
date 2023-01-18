@@ -1,6 +1,5 @@
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
-
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
 
 import ActivityIndicator from '../ActivityIndicator';
 import CenterBox from '../CenterBox';
@@ -58,7 +57,7 @@ export const Spin = (props) => {
               height: fullscreen ? '100vh' : '100%',
               transition: 'opacity 0.2s',
             },
-            ...(stringIsNullOrWhiteSpace(overlayBackgroundColor)
+            ...(checkStringIsNullOrWhiteSpace(overlayBackgroundColor)
               ? {}
               : { backgroundColor: overlayBackgroundColor }),
           }}

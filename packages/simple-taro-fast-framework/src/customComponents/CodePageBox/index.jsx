@@ -1,7 +1,6 @@
+import { checkStringIsNullOrWhiteSpace, isArray } from 'easy-soft-utility';
 import { Component } from 'react';
 
-import { stringIsNullOrWhiteSpace } from 'taro-fast-common/es/utils/tools';
-import { isArray } from 'taro-fast-common/es/utils/typeCheck';
 import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
@@ -105,7 +104,7 @@ class CodePageBox extends Component {
           style={style}
           headerStyle={cardHeaderStyle}
           footer={
-            stringIsNullOrWhiteSpace(description || null)
+            checkStringIsNullOrWhiteSpace(description || null)
               ? null
               : `备注: ${description}.`
           }

@@ -1,12 +1,10 @@
+import { logExecute, logWarn, toString } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
 import {
   getMenuButtonBoundingClientRect,
-  recordExecute,
-  recordWarn,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
-import { toString } from 'taro-fast-common/es/utils/typeConvert';
 
 import BackboardBox from '../BackboardBox';
 import BaseComponent from '../BaseComponent';
@@ -40,7 +38,7 @@ class HeadNavigation extends BaseComponent {
   }
 
   doWorkAdjustDidMount = () => {
-    recordExecute('doWorkAdjustDidMount');
+    logExecute('doWorkAdjustDidMount');
 
     const { onAdjustComplete } = this.props;
 
@@ -63,12 +61,12 @@ class HeadNavigation extends BaseComponent {
         return { containerHeight: height + top + 8 };
       },
       handleAlipay: () => {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return {};
       },
       handleSWAN: () => {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return {};
       },
@@ -85,7 +83,7 @@ class HeadNavigation extends BaseComponent {
         return { containerHeight: 'auto' };
       },
       handleOther: () => {
-        recordWarn(noAdaptationMessage);
+        logWarn(noAdaptationMessage);
 
         return {};
       },
