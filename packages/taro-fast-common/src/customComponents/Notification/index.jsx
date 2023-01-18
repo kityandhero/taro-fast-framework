@@ -1,6 +1,7 @@
-import { checkInCollection } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+
+import { checkInCollection } from 'easy-soft-utility';
 
 import { getCurrentInstance, transformSize } from '../../utils/tools';
 import ComponentBase from '../ComponentBase';

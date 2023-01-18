@@ -44,7 +44,9 @@
       "error",
       {
         "groups": [
-          ["^(?!taro-fast-)[a-zA-Z0-9]", "^@(?!/)"],
+          ["^(?!taro-fast-)(?!easy-soft-)[a-zA-Z0-9]", "^@(?!/)"],
+          ["^(?!@/)(?!easy-soft-)(?!.)"],
+          ["^easy-soft-"],
           ["^(?!@/)(?!taro-fast-)(?!.)"],
           ["^taro-fast-"],
           ["^((@/).*|$)"],

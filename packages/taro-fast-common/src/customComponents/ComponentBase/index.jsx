@@ -1,3 +1,6 @@
+import { Component } from 'react';
+import Taro from '@tarojs/taro';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
@@ -19,8 +22,6 @@ import {
   split,
   toNumber,
 } from 'easy-soft-utility';
-import { Component } from 'react';
-import Taro from '@tarojs/taro';
 
 import { getModelNameList } from '../../utils/storageAssist';
 import { getEnv } from '../../utils/tools';

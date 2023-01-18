@@ -1,5 +1,6 @@
-import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { Component } from 'react';
+
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import { Card } from 'taro-fast-component/es/customComponents';
 
