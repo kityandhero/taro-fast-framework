@@ -1,3 +1,5 @@
+import Taro from '@tarojs/taro';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
@@ -23,7 +25,6 @@ import {
   toNumber,
   toString,
 } from 'easy-soft-utility';
-import Taro from '@tarojs/taro';
 
 import {
   locateResult,

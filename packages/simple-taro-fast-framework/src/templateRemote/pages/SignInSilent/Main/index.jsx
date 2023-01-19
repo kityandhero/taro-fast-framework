@@ -58,7 +58,7 @@ export default class Index extends BasePageWrapper {
       ...{},
     };
 
-    //移除现有缓存, 仅为当前夜间环境测试使用, 常规使用时无需此步骤
+    //移除现有缓存, 仅为当前页面环境测试使用, 常规使用时无需此步骤
     removeSession();
   }
 
