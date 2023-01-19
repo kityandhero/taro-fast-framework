@@ -92,6 +92,7 @@
     "pnpm",
     "postbuild",
     "postclean",
+    "postlint",
     "postpublish",
     "powerpaste",
     "prebundle",

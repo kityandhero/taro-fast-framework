@@ -1,5 +1,6 @@
-import { isArray, isFunction, toString } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { isArray, isFunction, toString } from 'easy-soft-utility';
 
 import {
   Button,

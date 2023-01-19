@@ -1,3 +1,5 @@
+import { Component } from 'react';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
@@ -9,7 +11,6 @@ import {
   isUndefined,
   toString,
 } from 'easy-soft-utility';
-import { Component } from 'react';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {

@@ -1,11 +1,12 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   datetimeFormat,
   formatDatetime,
   toNumber,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {

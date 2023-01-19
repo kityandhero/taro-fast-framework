@@ -1,5 +1,6 @@
-import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
+
+import { connect } from 'easy-soft-dva';
 
 import { isBrowser, navigateTo } from 'taro-fast-common/es/utils/tools';
 import {

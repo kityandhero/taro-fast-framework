@@ -1,5 +1,6 @@
-import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
+
+import { connect } from 'easy-soft-dva';
 
 import { Space, ThumbnailBox } from 'taro-fast-component/es/customComponents';
 

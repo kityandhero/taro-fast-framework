@@ -1,3 +1,5 @@
+import { View } from '@tarojs/components';
+
 import { connect } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
@@ -5,7 +7,6 @@ import {
   logError,
   toString,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import { redirectTo, transformSize } from 'taro-fast-common/es/utils/tools';
 import { ActivityIndicator } from 'taro-fast-component/es/customComponents';

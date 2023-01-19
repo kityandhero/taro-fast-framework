@@ -1,5 +1,6 @@
-import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
+
+import { connect } from 'easy-soft-dva';
 
 import { ScaleBox, Space } from 'taro-fast-component/es/customComponents';
 

@@ -1,5 +1,6 @@
-import { checkStringIsNullOrWhiteSpace, isArray } from 'easy-soft-utility';
 import { Component } from 'react';
+
+import { checkStringIsNullOrWhiteSpace, isArray } from 'easy-soft-utility';
 
 import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
 

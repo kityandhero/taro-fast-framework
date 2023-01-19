@@ -1,6 +1,7 @@
-import { connect } from 'easy-soft-dva';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+
+import { connect } from 'easy-soft-dva';
 
 import {
   ActionSheet,

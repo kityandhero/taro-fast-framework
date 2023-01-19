@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import { connect } from 'easy-soft-dva';
 import { buildLinearGradient, isArray } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import {
   navigateTo,

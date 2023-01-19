@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
+
+import { connect } from 'easy-soft-dva';
 
 import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
 import {
