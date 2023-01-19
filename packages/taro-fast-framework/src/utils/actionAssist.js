@@ -1,15 +1,16 @@
+import Taro from '@tarojs/taro';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isFunction,
   isNumber,
   isString,
   logDebug,
-  logError,
+  logException,
   showErrorMessage,
   showRuntimeError,
   toString,
 } from 'easy-soft-utility';
-import Taro from '@tarojs/taro';
 
 import Tips from 'taro-fast-common/es/utils/tips';
 import { notifySuccess } from 'taro-fast-common/es/utils/tools';
@@ -109,7 +110,7 @@ export async function actionCore({
     const text = 'actionCore : handleData not allow null';
 
     showErrorMessage({
-      message: text,
+      text: text,
     });
   }
 
@@ -214,7 +215,7 @@ export async function actionCore({
               return;
             })
             .catch((error) => {
-              logError(error);
+              logException(error.message);
 
               if (showProcessing) {
                 setTimeout(() => {
@@ -243,7 +244,7 @@ export async function actionCore({
             e,
           )}, please confirm dispatch type exists first.`;
 
-          logError({
+          logException({
             message: text,
             dispatchInfo: {
               type: api,
@@ -259,7 +260,7 @@ export async function actionCore({
           });
 
           showErrorMessage({
-            message: text,
+            text: text,
           });
         }
       },
@@ -336,10 +337,7 @@ export async function actionSheetCore({
       }
     },
   }).catch((res) => {
-    logError({
-      message: 'actionSheetCore: catch.',
-      info: res,
-    });
+    logException(`actionSheetCore: catch -> ${res.message}`);
   });
 }
 
@@ -444,10 +442,7 @@ export async function actionModalCore({
       }
     },
   }).catch((res) => {
-    logError({
-      message: 'actionSheetCore: catch.',
-      info: res,
-    });
+    logException(`actionSheetCore: catch -> ${res.message}`);
   });
 }
 

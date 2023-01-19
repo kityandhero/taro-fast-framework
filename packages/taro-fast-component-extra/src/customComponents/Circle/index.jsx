@@ -1,16 +1,17 @@
+import { Canvas, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+
 import {
   checkInCollection,
   envCollection,
   getGuid,
   isNumber,
-  logError,
+  logException,
   logExecute,
   logWarn,
   toNumber,
   toRound,
 } from 'easy-soft-utility';
-import { Canvas, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 
 import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import {
@@ -259,7 +260,7 @@ class Circle extends ComponentBase {
         return n;
       })
       .catch((error) => {
-        logError({ error });
+        logException(error.message);
       });
   };
 

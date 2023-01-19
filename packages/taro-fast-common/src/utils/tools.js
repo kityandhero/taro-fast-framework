@@ -1,20 +1,4 @@
 import classNames from 'classnames';
-import {
-  checkInCollection,
-  checkStringIsNullOrWhiteSpace,
-  envCollection,
-  isEqualBySerialize,
-  isFunction,
-  isNumber,
-  isObject,
-  isString,
-  logDebug,
-  logError,
-  logExecute,
-  messageTypeCollection,
-  notificationTypeCollection,
-  toNumber,
-} from 'easy-soft-utility';
 import React from 'react';
 import {
   canIUse,
@@ -51,6 +35,22 @@ import {
   switchTab,
   uploadFile,
 } from '@tarojs/taro';
+
+import {
+  checkInCollection,
+  envCollection,
+  isEqualBySerialize,
+  isFunction,
+  isNumber,
+  isObject,
+  isString,
+  logDebug,
+  logException,
+  logExecute,
+  notificationTypeCollection,
+  showErrorMessage,
+  toNumber,
+} from 'easy-soft-utility';
 
 import {
   getAppInitConfigData,
@@ -123,7 +123,7 @@ export function redirectTo(params) {
   const text = '无效的跳转参数';
 
   showErrorMessage({
-    message: text,
+    text: text,
   });
 }
 
@@ -145,7 +145,7 @@ export function navigateTo(params) {
   const text = '无效的跳转参数';
 
   showErrorMessage({
-    message: text,
+    text: text,
   });
 }
 
@@ -187,158 +187,6 @@ export function corsTarget() {
   }
 
   return corsTargetDomain;
-}
-
-export function showError(text) {
-  showErrorMessage({
-    message: text,
-  });
-}
-
-export function showRuntimeError({ message: messageText, showStack = true }) {
-  try {
-    if (!checkStringIsNullOrWhiteSpace(messageText || '')) {
-      showErrorMessage({
-        message: messageText,
-      });
-
-      logError({
-        message: messageText,
-      });
-    }
-
-    if (showStack) {
-      throw new Error(
-        `${
-          checkStringIsNullOrWhiteSpace(messageText || '')
-            ? ''
-            : `${toString(messageText)},`
-        }调用堆栈:`,
-      );
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(e.stack);
-  }
-}
-
-export function showSuccessMessage({
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.success,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
-export function showErrorMessage({
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.error,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
-export function showWarnMessage({
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.warn,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
-/**
- * 显示警告信息框
- */
-export function showWarningMessage({
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.warning,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
-/**
- * 显示消息信息
- */
-export function showInfoMessage({
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.info,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
-export function showOpenMessage({
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  showMessage({
-    type: messageTypeCollection.open,
-    message: messageText,
-    duration,
-    onClose,
-  });
-}
-
-export function showMessage({
-  type,
-  duration = 1500,
-  message: messageText,
-  onClose = () => {},
-}) {
-  requestAnimationFrame(() => {
-    switch (type) {
-      case messageTypeCollection.success:
-        Tips.success(messageText, duration, onClose);
-        break;
-
-      case messageTypeCollection.error:
-        Tips.error(messageText, duration, onClose);
-        break;
-
-      case messageTypeCollection.info:
-        Tips.info(messageText, duration, onClose);
-        break;
-
-      case messageTypeCollection.warning:
-        Tips.warning(messageText, duration, onClose);
-        break;
-
-      case messageTypeCollection.warn:
-        Tips.warn(messageText, duration, onClose);
-        break;
-
-      default:
-        Tips.toast(messageText, duration, onClose);
-        break;
-    }
-  });
 }
 
 /**
@@ -410,42 +258,42 @@ export function notifySuccess(text) {
  */
 export function notify({
   type = notificationTypeCollection.info,
-  message: messageValue,
+  message: messageContent,
   closeCallback = null,
 }) {
-  const { message: messageText } = {
+  const { message: text } = {
     ...{
       message: '操作结果',
     },
     ...{
-      message: messageValue,
+      message: messageContent,
     },
   };
 
   setTimeout(() => {
     switch (type) {
       case notificationTypeCollection.success:
-        Tips.success(messageText, 1500, closeCallback);
+        Tips.success(text, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.warning:
-        Tips.info(messageText, 1500, closeCallback);
+        Tips.info(text, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.error:
-        Tips.info(messageText, 1500, closeCallback);
+        Tips.info(text, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.info:
-        Tips.info(messageText, 1500, closeCallback);
+        Tips.info(text, 1500, closeCallback);
         break;
 
       case notificationTypeCollection.warn:
-        Tips.info(messageText, 1500, closeCallback);
+        Tips.info(text, 1500, closeCallback);
         break;
 
       default:
-        Tips.info(messageText, 1500, closeCallback);
+        Tips.info(text, 1500, closeCallback);
         break;
     }
   }, 600);
@@ -465,11 +313,13 @@ export function createSelectorQuery() {
 
 export function requestAnimationFrame(callback) {
   const systemInfo = getSystemInfoSync();
+
   if (systemInfo.platform === 'devtools') {
     return setTimeout(() => {
       callback();
     }, 33.333333333333336);
   }
+
   return createSelectorQuery()
     .selectViewport()
     .boundingClientRect()
@@ -592,7 +442,7 @@ export function getGeographicalLocation({
           failCallback(res);
         }
       } catch (e) {
-        logError(e);
+        logException(e.message);
       } finally {
         stopGeographicalLocationUpdate({});
       }

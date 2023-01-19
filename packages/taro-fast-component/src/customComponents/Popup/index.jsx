@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   isFunction,
@@ -6,7 +8,6 @@ import {
   showRuntimeError,
   toNumber,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import {
   handleTouchScroll,

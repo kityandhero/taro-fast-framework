@@ -1,12 +1,13 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   getGuid,
   isArray,
   isFunction,
-  logError,
+  logException,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -204,7 +205,7 @@ class Tabs extends BaseComponent {
             return rect;
           })
           .catch((error) => {
-            logError({ error });
+            logException(error.message);
           });
       }, 200);
     }
@@ -224,7 +225,7 @@ class Tabs extends BaseComponent {
             return rect;
           })
           .catch((error) => {
-            logError({ error });
+            logException(error.message);
           });
       }, 200);
     }

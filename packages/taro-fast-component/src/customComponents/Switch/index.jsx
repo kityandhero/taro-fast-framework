@@ -1,4 +1,7 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isFunction,
@@ -6,9 +9,8 @@ import {
   isPromise,
   isString,
   logError,
+  logException,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -108,11 +110,11 @@ class Switch extends BaseComponent {
     if (isFunction(onChange)) {
       this.execChange(!checkedStage)
         .then((v) => {
+          this.setState({ loading: false });
+
+          this.setState({ checkedStage: !checkedStage });
+
           if (v) {
-            this.setState({ loading: false });
-
-            this.setState({ checkedStage: !checkedStage });
-
             if (isFunction(afterChange)) {
               afterChange(!checkedStage);
             }
@@ -122,8 +124,8 @@ class Switch extends BaseComponent {
 
           return v;
         })
-        .catch((res) => {
-          logError(res);
+        .catch((error) => {
+          logException(error.message);
         });
     } else {
       this.setState({

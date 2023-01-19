@@ -1,9 +1,10 @@
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   isFunction,
   showErrorMessage,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -39,7 +40,7 @@ class FlexBox extends BaseComponent {
       const text = 'flexAuto 只能配置为 left/right/top/bottom';
 
       showErrorMessage({
-        message: text,
+        text: text,
       });
 
       return 'horizontal';

@@ -1,3 +1,5 @@
+import { ScrollView, View } from '@tarojs/components';
+
 import {
   checkInCollection,
   isArray,
@@ -6,7 +8,6 @@ import {
   showErrorMessage,
   toNumber,
 } from 'easy-soft-utility';
-import { ScrollView, View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -141,7 +142,7 @@ class ScrollBox extends BaseComponent {
       const text = 'itemBuilder must be a render function';
 
       showErrorMessage({
-        message: text,
+        text: text,
       });
     }
 

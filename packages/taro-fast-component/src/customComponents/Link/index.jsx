@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { Text } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
@@ -7,7 +9,6 @@ import {
   showInfoMessage,
   showWarnMessage,
 } from 'easy-soft-utility';
-import { Text } from '@tarojs/components';
 
 import {
   copyToClipboard,
@@ -88,7 +89,7 @@ class Line extends BaseComponent {
       const text = '未配置跳转链接';
 
       showWarnMessage({
-        message: text,
+        text: text,
       });
 
       return;
@@ -101,7 +102,7 @@ class Line extends BaseComponent {
           ? null
           : () => {
               showInfoMessage({
-                message: copyTips,
+                text: copyTips,
               });
             },
       });
@@ -117,7 +118,7 @@ class Line extends BaseComponent {
       const text = '暂未适配';
 
       showWarnMessage({
-        message: text,
+        text: text,
       });
     }
   };

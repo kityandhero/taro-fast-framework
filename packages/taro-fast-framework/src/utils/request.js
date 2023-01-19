@@ -1,8 +1,11 @@
+import Taro from '@tarojs/taro';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isString,
   logDebug,
-  logError,
+  logException,
+  logExecute,
   logObject,
   logText,
   requestMethod,
@@ -10,7 +13,6 @@ import {
   toLower,
   trySendNearestLocalhostNotify,
 } from 'easy-soft-utility';
-import Taro from '@tarojs/taro';
 
 import Tips from 'taro-fast-common/es/utils/tips';
 import { corsTarget } from 'taro-fast-common/es/utils/tools';
@@ -38,10 +40,10 @@ export class Request {
         Tips.loaded();
 
         showErrorMessage({
-          message: '请求失败, 请检查网络',
+          text: '请求失败, 请检查网络',
         });
 
-        logError(error);
+        logException(error);
       },
     });
 
@@ -167,7 +169,7 @@ export class Request {
         },
       });
     } catch (e) {
-      logError(e.stack);
+      logExecute(e.message);
     }
   }
 }

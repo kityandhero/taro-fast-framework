@@ -1,3 +1,5 @@
+import { Textarea, View } from '@tarojs/components';
+
 import {
   buildStringStyle,
   checkStringIsNullOrWhiteSpace,
@@ -7,7 +9,6 @@ import {
   showInfoMessage,
   toString,
 } from 'easy-soft-utility';
-import { Textarea, View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -92,7 +93,7 @@ class TextAreaItem extends BaseComponent {
 
     if (this.text.length >= contentMaxlength) {
       showInfoMessage({
-        message: '已达最大输入长度',
+        text: '已达最大输入长度',
       });
     }
   };
@@ -108,7 +109,7 @@ class TextAreaItem extends BaseComponent {
 
     if (this.text.length >= contentMaxlength) {
       showInfoMessage({
-        message: '已达最大输入长度',
+        text: '已达最大输入长度',
       });
     }
   };

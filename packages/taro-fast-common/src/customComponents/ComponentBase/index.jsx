@@ -14,6 +14,7 @@ import {
   logData,
   logDebug,
   logError,
+  logException,
   logExecute,
   logInfo,
   logObject,
@@ -309,13 +310,10 @@ class ComponentBase extends Component {
 
   doWhenCatchError = (error, info) => {
     showErrorMessage({
-      message: 'error occurred, please view in console.',
+      text: 'error occurred, please view in console.',
     });
 
-    logError({
-      error,
-      info,
-    });
+    logException({ message: error.message, data: info });
   };
 
   doWorkBeforeUnmount = () => {};
@@ -416,7 +414,7 @@ class ComponentBase extends Component {
     const global = this.getGlobal();
 
     if ((global || null) == null) {
-      logError('global not allow null, please check getGlobal');
+      logException('global not allow null, please check getGlobal');
     }
 
     return global;
@@ -434,7 +432,7 @@ class ComponentBase extends Component {
     const dispatch = this.getDispatch();
 
     if (!isFunction(dispatch)) {
-      logError('dispatch not a function, please check getDispatch');
+      logException('dispatch not a function, please check getDispatch');
     }
 
     return dispatch;
@@ -458,7 +456,7 @@ class ComponentBase extends Component {
         if (!checkInCollection(modelNameList, modelName)) {
           logInfo(`current modelNameList: ${ml}`);
 
-          logError(
+          logException(
             `${modelName} not in modelNameList, please check model config`,
           );
         }

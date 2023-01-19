@@ -1,7 +1,7 @@
 import {
   checkStringIsNullOrWhiteSpace,
   isFunction,
-  logError,
+  logException,
   logTrace,
   showRuntimeError,
   showWarnMessage,
@@ -131,7 +131,7 @@ export async function apiVirtualSuccessAccess({
       return data;
     })
     .catch((res) => {
-      logError(res);
+      logException(res);
     });
 
   const { code } = result;
@@ -169,7 +169,7 @@ export async function apiVirtualFailAccess({
       return data;
     })
     .catch((res) => {
-      logError(res);
+      logException(res);
     });
 
   const { code, message: messageText } = result;
@@ -184,7 +184,7 @@ export async function apiVirtualFailAccess({
     redirectTo(signInPath);
   } else if (code !== defaultSettingsLayoutCustom.getApiSuccessCode()) {
     showWarnMessage({
-      message: messageText,
+      text: messageText,
     });
   }
 
@@ -218,14 +218,14 @@ export async function apiVirtualAccess({
       return data;
     })
     .catch((res) => {
-      logError(res);
+      logException(res);
     });
 
   const { code, message: messageText } = result;
 
   if (code !== defaultSettingsLayoutCustom.getApiSuccessCode()) {
     showWarnMessage({
-      message: messageText,
+      text: messageText,
     });
   }
 

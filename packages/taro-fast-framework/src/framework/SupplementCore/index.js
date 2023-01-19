@@ -13,7 +13,7 @@ import {
   logConfig,
   logData,
   logDebug,
-  logError,
+  logException,
   logExecute,
   logInfo,
   logObject,
@@ -315,7 +315,7 @@ class SupplementCore extends Common {
     if (needRelocation) {
       if (showLoading) {
         showInfoMessage({
-          message: '定位中,请稍后',
+          text: '定位中,请稍后',
           duration: 1500,
         });
       }
@@ -362,7 +362,7 @@ class SupplementCore extends Common {
               }
             },
             fail: (error) => {
-              logError(error);
+              logException(error.message);
 
               if (mapData != null) {
                 setMap(mapData);
@@ -453,7 +453,7 @@ class SupplementCore extends Common {
             });
 
             showInfoMessage({
-              message: '您已禁止获取位置信息',
+              text: '您已禁止获取位置信息',
             });
           } else {
             getSetting({
@@ -470,13 +470,13 @@ class SupplementCore extends Common {
                       authLocation = locateResult.yes;
 
                       showInfoMessage({
-                        message: '获取定位失败',
+                        text: '获取定位失败',
                       });
                     } else {
                       authLocation = locateResult.no;
 
                       showInfoMessage({
-                        message: '您已拒绝程序获取定位信息',
+                        text: '您已拒绝程序获取定位信息',
                       });
                     }
                   }
@@ -505,7 +505,7 @@ class SupplementCore extends Common {
                 });
 
                 showInfoMessage({
-                  message: '获取定位权限信息失败',
+                  text: '获取定位权限信息失败',
                 });
               },
               complete: () => {},
@@ -828,7 +828,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   }
 
@@ -897,7 +897,7 @@ class SupplementCore extends Common {
               })
               // eslint-disable-next-line promise/no-nesting
               .catch((error) => {
-                logError({ error });
+                logException(error.message);
 
                 Tips.info('网络请求失败了，请检查下是否联网');
 
@@ -926,10 +926,10 @@ class SupplementCore extends Common {
           return res;
         })
         .catch((error) => {
-          logError({ error, current: that });
+          logException(error.message);
 
           showInfoMessage({
-            message: '微信登录失败',
+            text: '微信登录失败',
           });
 
           removeSession();
@@ -1368,7 +1368,7 @@ class SupplementCore extends Common {
           removeSession();
 
           showInfoMessage({
-            message: '登录失败',
+            text: '登录失败',
           });
 
           that.doWhenSignInFailWrapper();
@@ -1385,7 +1385,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   }
 
@@ -1475,8 +1475,7 @@ class SupplementCore extends Common {
       // 最多重试 10 次
       if (tryRefreshSession > 10) {
         showErrorMessage({
-          message:
-            'signInSilentCore 重试超过最大限制,请检查 refreshSession 接口返回数据',
+          text: 'signInSilentCore 重试超过最大限制,请检查 refreshSession 接口返回数据',
         });
 
         return;
@@ -1589,7 +1588,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   }
 
@@ -1613,13 +1612,11 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInApiData',
       );
 
-      throw new Error(
-        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInApiData',
-      );
+      return false;
     }
 
     const { sessionEffective } = {
@@ -1640,13 +1637,11 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInSilentApiData',
       );
 
-      throw new Error(
-        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInSilentApiData',
-      );
+      return false;
     }
 
     const { sessionEffective } = {
@@ -1681,7 +1676,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key signInResult in parseSignInResultFromSignInApiData',
       );
     }
@@ -1706,7 +1701,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key signInResult in parseSignInResultFromSignInSilentApiData',
       );
     }
@@ -1775,7 +1770,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key token in parseTokenFromSignInApiData',
       );
     }
@@ -1798,7 +1793,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key token in parseTokenFromSignInSilentApiData',
       );
     }
@@ -1845,7 +1840,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key openId in parseOpenIdFromSignInApiData',
       );
     }
@@ -1868,7 +1863,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key openId in parseOpenIdFromSignInSilentApiData',
       );
     }
@@ -2063,7 +2058,7 @@ class SupplementCore extends Common {
             'info getCustomer error,doAfterRegisterWithWeChat and callback will do not execute',
           );
 
-          logError(error);
+          logException(error.message);
 
           if (isFunction(failCallback)) {
             failCallback();
@@ -2104,7 +2099,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromExchangePhoneApiData',
       );
 
@@ -2168,7 +2163,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          logError(error);
+          logException(error.message);
         });
     });
   };
@@ -2187,7 +2182,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterWithWeChatApiData',
       );
 
@@ -2314,7 +2309,7 @@ class SupplementCore extends Common {
       .catch((error) => {
         that.setState({ registering: false });
 
-        logError(error);
+        logException(error.message);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -2340,7 +2335,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterApiData',
       );
 
@@ -2463,7 +2458,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -2497,7 +2492,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key signInResult in parseSignInResultFromRegisterApiData',
       );
     }
@@ -2522,7 +2517,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key signInResult in parseSignInResultFromRegisterWithWeChatApiData',
       );
     }
@@ -2589,7 +2584,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key token in parseTokenFromRegisterApiData',
       );
     }
@@ -2612,7 +2607,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key token in parseTokenFromRegisterWithWeChatApiData',
       );
     }
@@ -2655,7 +2650,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key openId in parseOpenIdFromRegisterApiData',
       );
     }
@@ -2678,7 +2673,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
       logObject(remoteData);
 
-      logError(
+      logException(
         'params remoteData not exist key openId in parseOpenIdFromRegisterWithWeChatApiData',
       );
     }
@@ -2798,7 +2793,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          logError(error);
+          logException(error.message);
         });
     }
   };
@@ -2885,7 +2880,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          logError(error);
+          logException(error.message);
         });
     }
   };

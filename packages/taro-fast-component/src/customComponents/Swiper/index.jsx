@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
@@ -6,11 +8,10 @@ import {
   isArray,
   isFunction,
   isNumber,
-  logError,
+  logException,
   showErrorMessage,
   toNumber,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -288,7 +289,7 @@ class Swiper extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        logError({ error });
+        logException(error.message);
       });
 
     if (isFunction(onChange)) {
@@ -762,7 +763,7 @@ class Swiper extends BaseComponent {
         const text = 'swiper: 不使用比例容器模式下, 需要指定 height';
 
         showErrorMessage({
-          message: text,
+          text: text,
         });
 
         return null;

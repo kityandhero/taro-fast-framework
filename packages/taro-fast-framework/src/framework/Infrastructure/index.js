@@ -1,3 +1,6 @@
+import { ScrollView, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+
 import {
   buildLinearGradient,
   checkInCollection,
@@ -8,7 +11,7 @@ import {
   logConfig,
   logData,
   logDebug,
-  logError,
+  logException,
   logExecute,
   logInfo,
   logObject,
@@ -20,8 +23,6 @@ import {
   transformListData,
   underlyingState,
 } from 'easy-soft-utility';
-import { ScrollView, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 
 import {
   ComponentBase,
@@ -402,7 +403,7 @@ export default class Infrastructure extends ComponentBase {
 
     if ((schedulingControl || null) == null) {
       showErrorMessage({
-        message: 'config error,check in console',
+        text: 'config error,check in console',
       });
 
       logObject(this);
@@ -471,7 +472,7 @@ export default class Infrastructure extends ComponentBase {
       const text = '数据正在处理中, 请稍等一下再点哦';
 
       showErrorMessage({
-        message: text,
+        text: text,
       });
 
       return true;
@@ -521,7 +522,7 @@ export default class Infrastructure extends ComponentBase {
       const text = '缺少目标页面地址, 无法跳转';
 
       showErrorMessage({
-        message: text,
+        text: text,
       });
 
       return;
@@ -1131,7 +1132,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   };
 
@@ -1170,7 +1171,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   };
 
@@ -1221,7 +1222,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   };
 
@@ -1523,7 +1524,7 @@ export default class Infrastructure extends ComponentBase {
         return d;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   }
 
@@ -1616,7 +1617,7 @@ export default class Infrastructure extends ComponentBase {
         return weather;
       })
       .catch((error) => {
-        logError(error);
+        logException(error.message);
       });
   };
 

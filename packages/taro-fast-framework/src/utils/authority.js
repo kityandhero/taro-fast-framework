@@ -8,7 +8,7 @@ import {
   isArray,
   isObject,
   isString,
-  logError,
+  logException,
   logObject,
   saveJsonToLocalStorage,
   setCache,
@@ -161,10 +161,10 @@ function checkHasAuthorities(authCollection) {
   const text = '无效的待验证权限';
 
   showErrorMessage({
-    message: text,
+    text: text,
   });
 
-  logError({ authCollection });
+  logException({ authCollection });
 
   return result;
 }

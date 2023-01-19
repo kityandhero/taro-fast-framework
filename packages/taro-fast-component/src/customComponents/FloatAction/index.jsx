@@ -1,12 +1,13 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   isFunction,
   isImageBase4,
   isString,
   isUrl,
-  logError,
+  logException,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import { getRect } from 'taro-fast-common/es/utils/tools';
 
@@ -236,7 +237,7 @@ class FloatAction extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        logError({ error });
+        logException(error.message);
       });
   };
 

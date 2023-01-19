@@ -76,7 +76,7 @@ function dataExceptionNotice(d) {
       if (codeAdjust === toNumber(lastCustomMessage.code)) {
         if (currentTime - lastCustomMessage.time > 800) {
           showErrorMessage({
-            message: messageText,
+            text: messageText,
           });
 
           taroGlobalData.lastCustomMessage = {
@@ -87,7 +87,7 @@ function dataExceptionNotice(d) {
         }
       } else {
         showErrorMessage({
-          message: messageText,
+          text: messageText,
         });
 
         taroGlobalData.lastCustomMessage = {
@@ -535,7 +535,7 @@ export async function request({
           const text = '由虚拟访问返回';
 
           showInfoMessage({
-            message: text,
+            text: text,
           });
         },
         showUseVirtualRequestMessageDelay > 0

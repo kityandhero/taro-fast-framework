@@ -4,7 +4,7 @@ import {
   isFunction,
   isUndefined,
   logDebug,
-  logError,
+  logException,
   logExecute,
   logObject,
   logText,
@@ -352,12 +352,12 @@ class Base extends Infrastructure {
                   metaOriginalData: metaOriginalData || null,
                 });
               } catch (e) {
-                logError(e);
+                logException(e.message);
 
                 const text = `${toString(e)},place view in the console`;
 
                 showErrorMessage({
-                  message: text,
+                  text: text,
                 });
               }
 
@@ -385,6 +385,7 @@ class Base extends Infrastructure {
               that.afterGetRequestResult(requestData, metaOriginalData);
 
               if (typeof callback === 'function') {
+                // eslint-disable-next-line promise/no-callback-in-promise
                 callback();
               }
             } else {
@@ -406,7 +407,7 @@ class Base extends Infrastructure {
             stopPullDownRefresh();
             hideNavigationBarLoading();
 
-            logError(error);
+            logException(error.message);
 
             logDebug('state dispatchComplete will set to true');
 

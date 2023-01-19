@@ -52,7 +52,7 @@ export default class Index extends BasePageWrapper {
       },
     };
 
-    //移除现有缓存, 仅为当前页面环境测试使用, 常规使用时无需此步骤
+    //移除现有缓存, 仅为当前环境测试使用, 常规使用时无需此步骤
     removeSession();
   }
 
@@ -68,7 +68,7 @@ export default class Index extends BasePageWrapper {
       checkStringIsNullOrWhiteSpace(iv)
     ) {
       showErrorMessage({
-        message: errMsg,
+        text: errMsg,
       });
 
       return;

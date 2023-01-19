@@ -1,5 +1,6 @@
-import { checkInCollection, getGuid, logError } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { checkInCollection, getGuid, logException } from 'easy-soft-utility';
 
 import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
 
@@ -88,7 +89,7 @@ class ScrollBox extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          logError({ error });
+          logException(error.message);
         });
 
       getRect(`#${that.indicatorContainerId}`)
@@ -103,7 +104,7 @@ class ScrollBox extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          logError({ error });
+          logException(error.message);
         });
     }, 200);
   };

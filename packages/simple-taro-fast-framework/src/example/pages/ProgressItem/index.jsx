@@ -45,7 +45,7 @@ const config3 = {
       size="mini"
       onClick={() => {
         showInfoMessage({
-          message: 'click',
+          text: 'click',
         });
       }}
       style={{ marginLeft: transformSize(8) }}

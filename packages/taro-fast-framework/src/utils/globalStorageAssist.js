@@ -744,7 +744,7 @@ export function setLastLocation(data) {
     const text = '无法存数无效位置数据';
 
     showInfoMessage({
-      message: text,
+      text: text,
     });
 
     return;

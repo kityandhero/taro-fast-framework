@@ -1,12 +1,13 @@
 import classNames from 'classnames';
+import { ScrollView, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+
 import {
   checkStringIsNullOrWhiteSpace,
   getGuid,
   isFunction,
-  logError,
+  logException,
 } from 'easy-soft-utility';
-import { ScrollView, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 
 import {
   createSelectorQuery,
@@ -394,7 +395,7 @@ class VariableView extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        logError({ error });
+        logException(error.message);
       });
   };
 

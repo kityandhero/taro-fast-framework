@@ -4,7 +4,8 @@ import { connect } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
   isFunction,
-  logError,
+  logException,
+  showSimpleErrorMessage,
   toString,
 } from 'easy-soft-utility';
 
@@ -89,7 +90,7 @@ export default class Index extends BasePageWrapper {
     const { shareId } = shareData;
 
     if (checkStringIsNullOrWhiteSpace(shareId)) {
-      this.showError('无效的分享标识');
+      showSimpleErrorMessage('无效的分享标识');
     }
 
     this.remoteRequest({
@@ -124,7 +125,7 @@ export default class Index extends BasePageWrapper {
         return urlParamsChanged;
       })
       .catch((error) => {
-        logError({ error });
+        logException(error.message);
       });
   };
 
