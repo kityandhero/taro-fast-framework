@@ -44,6 +44,7 @@ export default {
         'pages/progressBox/index',
         'pages/progressItem/index',
         'pages/notification/index',
+        'pages/message/index',
         'pages/grid/index',
         'pages/selector/index',
         'pages/tabs/index',

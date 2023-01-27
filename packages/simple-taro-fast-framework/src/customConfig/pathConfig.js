@@ -110,6 +110,9 @@ const examplePathCollection = {
   progressItem: {
     path: '/example/pages/progressItem/index',
   },
+  message: {
+    path: '/example/pages/message/index',
+  },
   notification: {
     path: '/example/pages/notification/index',
   },

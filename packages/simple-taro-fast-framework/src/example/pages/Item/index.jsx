@@ -340,7 +340,7 @@ export default class Index extends ContentPageBase {
   };
 
   handleClick = (type) => {
-    this.bannerNotify({
+    this.notifyMessage({
       message: '消息通知',
       type: type,
     });

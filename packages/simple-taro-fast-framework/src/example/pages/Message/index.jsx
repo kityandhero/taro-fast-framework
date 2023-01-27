@@ -1,21 +1,19 @@
 import { connect } from 'easy-soft-dva';
+import {
+  showSimpleErrorMessage,
+  showSimpleInfoMessage,
+  showSimpleOpenMessage,
+  showSimpleWarnMessage,
+} from 'easy-soft-utility';
 
-import { Notification } from 'taro-fast-common/es/customComponents';
 import { Button, Space } from 'taro-fast-component/es/customComponents';
 
-import CodeBox from '../../../customComponents/CodeBox';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
 import SimpleBox from '../../../customComponents/SimpleBox';
-
-const config1 = {
-  message: '通消息知',
-  type: 'info',
-};
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '弹出通知',
+  navigationBarTitleText: '消息提示',
 });
 
 @connect(({ schedulingControl }) => ({
@@ -23,14 +21,14 @@ definePageConfig({
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'Notification',
-    name: '通知',
-    description: '通知组件',
+    id: 'Message',
+    name: '消息',
+    description: '消息提示',
   };
 
   handleClick = (type) => {
     this.notifyMessage({
-      message: '消息通知',
+      message: '消息提示',
       type: type,
     });
   };
@@ -44,52 +42,43 @@ export default class Index extends ContentPageBase {
               block
               size="large"
               onClick={() => {
-                this.handleClick();
+                showSimpleOpenMessage('open message');
               }}
             >
-              普通消息
+              Open Message
             </Button>
 
             <Button
               block
               size="large"
               onClick={() => {
-                this.handleClick('success');
+                showSimpleInfoMessage('Info Message');
               }}
             >
-              成功消息
+              Info Message
             </Button>
 
             <Button
               block
               size="large"
               onClick={() => {
-                this.handleClick('error');
+                showSimpleWarnMessage('Warn Message');
               }}
             >
-              错误消息
+              Warn Message
             </Button>
 
             <Button
               block
               size="large"
               onClick={() => {
-                this.handleClick('warning');
+                showSimpleErrorMessage('Error Message');
               }}
             >
-              警告消息
+              Error Message
             </Button>
           </Space>
         </SimpleBox>
-
-        <CodeBox
-          config={config1}
-          componentName="Notification"
-          mockChildren={false}
-          useInnerBox={false}
-        />
-
-        <PropertyBox config={Notification.defaultProps} labelWidth={270} />
       </Space>
     );
   };

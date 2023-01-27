@@ -1,3 +1,5 @@
+import { Component } from 'react';
+
 import { getStore, Provider } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
@@ -8,7 +10,6 @@ import {
   logInfo,
   toString,
 } from 'easy-soft-utility';
-import { Component } from 'react';
 
 import {
   canIUse,

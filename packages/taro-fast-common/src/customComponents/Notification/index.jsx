@@ -110,7 +110,7 @@ class Notification extends ComponentBase {
       });
     });
 
-    Taro.bannerNotify = Taro.eventCenter.trigger.bind(
+    Taro.notifyMessage = Taro.eventCenter.trigger.bind(
       Taro.eventCenter,
       'tfc-message',
     );

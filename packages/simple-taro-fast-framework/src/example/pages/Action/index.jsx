@@ -17,9 +17,19 @@ const list = [
     path: pathCollection.example.floatAction.path,
   },
   {
+    id: 'Message',
+    name: '消息提示',
+    path: pathCollection.example.message.path,
+  },
+  {
     id: 'Modal',
     name: '弹窗',
     path: pathCollection.example.modal.path,
+  },
+  {
+    id: 'Notification',
+    name: '动态通知',
+    path: pathCollection.example.notification.path,
   },
 ];
 

@@ -1638,14 +1638,14 @@ export default class Infrastructure extends ComponentBase {
     setCurrentUrl(`${path}${p === '' ? '' : `?${p}`}`);
   };
 
-  bannerNotify = ({
+  notifyMessage = ({
     message,
     type = 'info',
     duration = 1500,
     customStyle = {},
     className = '',
   }) => {
-    Taro.bannerNotify({
+    Taro.notifyMessage({
       message,
       type,
       duration,
@@ -1666,7 +1666,7 @@ export default class Infrastructure extends ComponentBase {
     that.reloadData({
       callback: () => {
         if (that.enablePullDownRefreshSuccessNotification) {
-          that.bannerNotify({
+          that.notifyMessage({
             message: '刷新成功',
             type: 'success',
           });
