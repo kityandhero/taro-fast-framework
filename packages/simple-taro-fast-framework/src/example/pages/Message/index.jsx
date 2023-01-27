@@ -3,6 +3,8 @@ import {
   showSimpleErrorMessage,
   showSimpleInfoMessage,
   showSimpleOpenMessage,
+  showSimpleRuntimeError,
+  showSimpleSuccessMessage,
   showSimpleWarnMessage,
 } from 'easy-soft-utility';
 
@@ -62,6 +64,16 @@ export default class Index extends ContentPageBase {
               block
               size="large"
               onClick={() => {
+                showSimpleSuccessMessage('Success Message');
+              }}
+            >
+              Success Message
+            </Button>
+
+            <Button
+              block
+              size="large"
+              onClick={() => {
                 showSimpleWarnMessage('Warn Message');
               }}
             >
@@ -76,6 +88,16 @@ export default class Index extends ContentPageBase {
               }}
             >
               Error Message
+            </Button>
+
+            <Button
+              block
+              size="large"
+              onClick={() => {
+                showSimpleRuntimeError('Runtime Error Message');
+              }}
+            >
+              Runtime Error Message
             </Button>
           </Space>
         </SimpleBox>
