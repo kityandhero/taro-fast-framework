@@ -43,7 +43,6 @@
     "ios >= 8"
   ],
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.1",
     "@tarojs/components": "^3.5.11",
     "@tarojs/helper": "^3.5.11",
     "@tarojs/plugin-framework-react": "^3.5.11",

@@ -13,9 +13,6 @@ const config = {
   sourceRoot: 'src',
   outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [['@tarojs/plugin-framework-react', { reactMode: 'concurrent' }]],
-  defineConstants: {
-    SHOW_LOG_IN_CONSOLE: process.env.NODE_ENV === 'develop',
-  },
   copy: {
     patterns: [
       {
