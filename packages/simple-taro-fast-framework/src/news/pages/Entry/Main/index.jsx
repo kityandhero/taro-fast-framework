@@ -5,11 +5,12 @@ import {
   checkStringIsNullOrWhiteSpace,
   isFunction,
   logException,
+  redirectTo,
   showSimpleErrorMessage,
   toString,
 } from 'easy-soft-utility';
 
-import { redirectTo, transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import { ActivityIndicator } from 'taro-fast-component/es/customComponents';
 
 import { shareTransfer } from '../../../../customConfig/constants';

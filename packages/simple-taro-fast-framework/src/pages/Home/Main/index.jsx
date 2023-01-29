@@ -1,8 +1,9 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { navigateTo } from 'easy-soft-utility';
 
-import { isBrowser, navigateTo } from 'taro-fast-common/es/utils/tools';
+import { isBrowser } from 'taro-fast-common/es/utils/tools';
 import {
   CenterBox,
   Icon,

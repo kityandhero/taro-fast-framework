@@ -2,8 +2,9 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { navigateTo } from 'easy-soft-utility';
 
-import { navigateTo, transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   FlexBox,

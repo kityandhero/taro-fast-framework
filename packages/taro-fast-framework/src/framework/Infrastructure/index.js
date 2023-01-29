@@ -16,6 +16,8 @@ import {
   logInfo,
   logObject,
   logWarn,
+  navigateTo,
+  redirectTo,
   showErrorMessage,
   showRuntimeError,
   sleep,
@@ -33,9 +35,7 @@ import {
   getMenuButtonBoundingClientRect,
   getSystemInfo,
   isWechat,
-  navigateTo,
   pageScrollTo,
-  redirectTo,
   transformSize,
 } from 'taro-fast-common/es/utils/tools';
 import {

@@ -11,6 +11,7 @@ import {
   logText,
   logTrace,
   logWarn,
+  redirectTo,
   requestMethod,
   setCache,
   showErrorMessage,
@@ -21,11 +22,7 @@ import {
   trim,
 } from 'easy-soft-utility';
 
-import {
-  corsTarget,
-  getTaroGlobalData,
-  redirectTo,
-} from 'taro-fast-common/es/utils/tools';
+import { corsTarget, getTaroGlobalData } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import { getToken } from './globalStorageAssist';

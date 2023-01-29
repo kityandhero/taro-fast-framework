@@ -52,7 +52,8 @@ import {
   setLocalStorageGetter,
   setLocalStorageRemover,
   setLocalStorageSetter,
-  showErrorMessage,
+  setNavigator,
+  setRedirector,
   toNumber,
 } from 'easy-soft-utility';
 
@@ -103,50 +104,6 @@ export function hideNavigationBarLoading() {
   if (isWechat) {
     hideNavigationBarLoadingCore();
   }
-}
-
-export function redirectTo(params) {
-  if (isString(params)) {
-    redirectToCore({
-      url: params,
-    });
-
-    return;
-  }
-
-  if (isObject(params)) {
-    redirectToCore(params);
-
-    return;
-  }
-
-  const text = '无效的跳转参数';
-
-  showErrorMessage({
-    text: text,
-  });
-}
-
-export function navigateTo(params) {
-  if (isString(params)) {
-    navigateToCore({
-      url: params,
-    });
-
-    return;
-  }
-
-  if (isObject(params)) {
-    navigateToCore(params);
-
-    return;
-  }
-
-  const text = '无效的跳转参数';
-
-  showErrorMessage({
-    text: text,
-  });
 }
 
 /**
@@ -664,6 +621,38 @@ export function handleInlayColor(color) {
     : color;
 }
 
+function redirectTo(o) {
+  if (isString(o)) {
+    redirectToCore({
+      url: o,
+    });
+
+    return;
+  }
+
+  if (isObject(o)) {
+    redirectToCore(o);
+
+    return;
+  }
+}
+
+function navigateTo(o) {
+  if (isString(o)) {
+    navigateToCore({
+      url: o,
+    });
+
+    return;
+  }
+
+  if (isObject(o)) {
+    navigateToCore(o);
+
+    return;
+  }
+}
+
 /**
  * 设置 Local Storage 处理器
  */
@@ -672,4 +661,6 @@ export function setLocalStorageHandler() {
   setLocalStorageSetter(setStorageSync);
   setLocalStorageRemover(removeStorageSync);
   setLocalStorageFlusher(clearStorageSync);
+  setNavigator(navigateTo);
+  setRedirector(redirectTo);
 }

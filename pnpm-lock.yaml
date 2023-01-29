@@ -119,8 +119,8 @@ importers:
       commitizen: ^4.2.6
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      easy-soft-dva: ^3.6.19
-      easy-soft-utility: ^2.4.0
+      easy-soft-dva: ^3.6.21
+      easy-soft-utility: ^2.4.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -171,8 +171,8 @@ importers:
       '@tarojs/shared': 3.5.11
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
-      easy-soft-dva: 3.6.19_ib3m5ricvtkl2cll7qpr2f6lvq
-      easy-soft-utility: 2.4.0
+      easy-soft-dva: 3.6.21_ib3m5ricvtkl2cll7qpr2f6lvq
+      easy-soft-utility: 2.4.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
@@ -328,7 +328,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.4.0
+      easy-soft-utility: ^2.4.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -382,7 +382,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.0
+      easy-soft-utility: 2.4.2
       lodash: 4.17.21
       node-cache: 5.1.2
       object-hash: 3.0.0
@@ -513,7 +513,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.4.0
+      easy-soft-utility: ^2.4.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -565,7 +565,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.0
+      easy-soft-utility: 2.4.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       taro-fast-common: link:../taro-fast-common
@@ -692,7 +692,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.4.0
+      easy-soft-utility: ^2.4.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -745,7 +745,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.0
+      easy-soft-utility: 2.4.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       taro-fast-common: link:../taro-fast-common
@@ -875,7 +875,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-utility: ^2.4.0
+      easy-soft-utility: ^2.4.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -929,7 +929,7 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.0
+      easy-soft-utility: 2.4.2
       prismjs: 1.29.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -1061,8 +1061,8 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-dva: ^3.6.19
-      easy-soft-utility: ^2.4.0
+      easy-soft-dva: ^3.6.21
+      easy-soft-utility: ^2.4.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -1116,8 +1116,8 @@ importers:
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
       dayjs: 1.11.7
-      easy-soft-dva: 3.6.19_ib3m5ricvtkl2cll7qpr2f6lvq
-      easy-soft-utility: 2.4.0
+      easy-soft-dva: 3.6.21_ib3m5ricvtkl2cll7qpr2f6lvq
+      easy-soft-utility: 2.4.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
@@ -11678,14 +11678,14 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /easy-soft-dva/3.6.19_ib3m5ricvtkl2cll7qpr2f6lvq:
-    resolution: {integrity: sha512-zgyP9kODVoGufWjyXXRFgGkJZgbqRAf9i/gdwZL827D5ERUdyNmcCmHRuocwrMOiUuZbe7yWBlNrBCC03sMbxw==}
+  /easy-soft-dva/3.6.21_ib3m5ricvtkl2cll7qpr2f6lvq:
+    resolution: {integrity: sha512-6ZyegpBSI3+finPGJX/UhGiRt/vfZDokVZqhmMhTuUVudb3Bb2Km8p/tOn5zgsMLbM8Q5AE6xjjAEsuiOkg6HQ==}
     peerDependencies:
       redux: 4.x
     dependencies:
       '@babel/runtime': 7.20.7
       '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
-      easy-soft-utility: 2.4.0
+      easy-soft-utility: 2.4.2
       flatten: 1.0.3
       global: 4.4.0
       invariant: 2.2.4
@@ -11701,8 +11701,8 @@ packages:
       - react-native
     dev: false
 
-  /easy-soft-utility/2.4.0:
-    resolution: {integrity: sha512-fMoPFTLLzFPojQBpaDkDAzOG5m4JV9JX5CYgon3CVq/NwhrzVu4bmqJCSOAn8JTUK/0EVdNXPMBJ5wjOj6GyBQ==}
+  /easy-soft-utility/2.4.2:
+    resolution: {integrity: sha512-PG7XfNuTgVfDwnSzta7h0VOJ8MsXhZteJfrhQAYogp99gEQyr46US6y7RlARJvKr2v1x+tEirh/YxMASkTFJsw==}
     dependencies:
       dayjs: 1.11.7
       js-base64: 3.7.4

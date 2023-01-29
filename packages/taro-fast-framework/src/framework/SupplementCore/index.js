@@ -18,6 +18,7 @@ import {
   logInfo,
   logObject,
   logWarn,
+  redirectTo,
   setCache,
   showErrorMessage,
   showInfoMessage,
@@ -34,7 +35,6 @@ import Tips from 'taro-fast-common/es/utils/tips';
 import {
   getGeographicalLocation,
   getSetting,
-  redirectTo,
 } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';

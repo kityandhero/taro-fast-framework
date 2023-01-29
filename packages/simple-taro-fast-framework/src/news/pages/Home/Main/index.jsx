@@ -2,13 +2,14 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { buildLinearGradient, isArray } from 'easy-soft-utility';
-
 import {
+  buildLinearGradient,
+  isArray,
   navigateTo,
   redirectTo,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+} from 'easy-soft-utility';
+
+import { transformSize } from 'taro-fast-common/es/utils/tools';
 import {
   Card,
   CenterBox,

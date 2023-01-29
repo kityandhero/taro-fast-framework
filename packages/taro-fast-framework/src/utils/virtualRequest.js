@@ -3,11 +3,10 @@ import {
   isFunction,
   logException,
   logTrace,
+  redirectTo,
   showRuntimeError,
   showWarnMessage,
 } from 'easy-soft-utility';
-
-import { redirectTo } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
 import { getToken } from './globalStorageAssist';
