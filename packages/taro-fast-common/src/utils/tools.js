@@ -661,6 +661,20 @@ export function setLocalStorageHandler() {
   setLocalStorageSetter(setStorageSync);
   setLocalStorageRemover(removeStorageSync);
   setLocalStorageFlusher(clearStorageSync);
+}
+
+/**
+ * 设置 Navigation 处理器
+ */
+export function setNavigationHandler() {
   setNavigator(navigateTo);
   setRedirector(redirectTo);
+}
+
+/**
+ * 设置 easy-soft-utility 处理器
+ */
+export function setEasySoftUtilityHandler() {
+  setLocalStorageHandler();
+  setNavigationHandler();
 }

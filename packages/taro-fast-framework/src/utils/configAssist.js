@@ -17,7 +17,7 @@ import Tips from 'taro-fast-common/es/utils/tips';
 import {
   getTaroGlobalData,
   requestAnimationFrame,
-  setLocalStorageHandler,
+  setEasySoftUtilityHandler,
 } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
@@ -127,7 +127,7 @@ export function configEnvironment() {
 
   setLoggerDisplaySwitch(defaultSettingsLayoutCustom.getShowLogInConsole());
 
-  setLocalStorageHandler();
+  setEasySoftUtilityHandler();
 
   setStateDefaultCode(defaultSettingsLayoutCustom.getApiSuccessCode());
 
