@@ -10,7 +10,7 @@ const inputFile = {
     'utils/tools': 'src/utils/tools.js',
     'utils/hooks': 'src/utils/hooks.js',
     'utils/provider': 'src/utils/provider.js',
-    'utils/storageAssist': 'src/utils/storageAssist.js',
+    'utils/modelAssist': 'src/utils/modelAssist.js',
   },
   ...{
     'customComponents/index': 'src/customComponents/index.jsx',

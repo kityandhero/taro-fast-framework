@@ -8,10 +8,6 @@ import {
   setInfoMessageDisplayMonitor,
   setLoggerDisplaySwitch,
   setOpenMessageDisplayMonitor,
-  setStorageFlusher,
-  setStorageGetter,
-  setStorageRemover,
-  setStorageSetter,
   setSuccessMessageDisplayMonitor,
   setWarningMessageDisplayMonitor,
   setWarnMessageDisplayMonitor,
@@ -19,12 +15,9 @@ import {
 
 import Tips from 'taro-fast-common/es/utils/tips';
 import {
-  clearStorageSync,
-  getStorageSync,
   getTaroGlobalData,
-  removeStorageSync,
   requestAnimationFrame,
-  setStorageSync,
+  setLocalStorageHandler,
 } from 'taro-fast-common/es/utils/tools';
 
 import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
@@ -134,10 +127,7 @@ export function configEnvironment() {
 
   setLoggerDisplaySwitch(defaultSettingsLayoutCustom.getShowLogInConsole());
 
-  setStorageGetter(getStorageSync);
-  setStorageSetter(setStorageSync);
-  setStorageRemover(removeStorageSync);
-  setStorageFlusher(clearStorageSync);
+  setLocalStorageHandler();
 
   setStateDefaultCode(defaultSettingsLayoutCustom.getApiSuccessCode());
 

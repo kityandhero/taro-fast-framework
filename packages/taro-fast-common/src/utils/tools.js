@@ -48,6 +48,10 @@ import {
   logException,
   logExecute,
   notificationTypeCollection,
+  setLocalStorageFlusher,
+  setLocalStorageGetter,
+  setLocalStorageRemover,
+  setLocalStorageSetter,
   showErrorMessage,
   toNumber,
 } from 'easy-soft-utility';
@@ -73,7 +77,6 @@ let globalSystemInfo = null;
 export {
   canIUse,
   checkEnv,
-  clearStorageSync,
   downloadFile,
   getAppInitConfigData,
   getClipboardData,
@@ -81,17 +84,14 @@ export {
   getDefaultTaroGlobalData,
   getEnv,
   getMenuButtonBoundingClientRect,
-  getStorageSync,
   getTaroGlobalData,
   getUpdateManager,
   makePhoneCall,
   navigateBack,
   pageScrollTo,
   previewImage,
-  removeStorageSync,
   requestPayment,
   setClipboardData,
-  setStorageSync,
   setTaroGlobalData,
   showNavigationBarLoading,
   stopPullDownRefresh,
@@ -662,4 +662,14 @@ export function handleInlayColor(color) {
   )
     ? `var(--tfc-color-${color})`
     : color;
+}
+
+/**
+ * 设置 Local Storage 处理器
+ */
+export function setLocalStorageHandler() {
+  setLocalStorageGetter(getStorageSync);
+  setLocalStorageSetter(setStorageSync);
+  setLocalStorageRemover(removeStorageSync);
+  setLocalStorageFlusher(clearStorageSync);
 }

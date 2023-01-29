@@ -24,7 +24,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { getModelNameList } from '../../utils/storageAssist';
+import { getModelNameList } from '../../utils/modelAssist';
 import { getEnv } from '../../utils/tools';
 
 function filterModel(props) {

@@ -5,8 +5,9 @@ import {
   logExecute,
 } from 'easy-soft-utility';
 
+import { setModelNameList } from 'taro-fast-common/es/utils/modelAssist';
+
 import { modulePackageName } from '../utils/definition';
-import { setModelNameList } from '../utils/globalStorageAssist';
 
 import { buildSchedulingControl } from './schedulingControl';
 
@@ -59,15 +60,17 @@ export function getModelCollection() {
   if (!modelContainer.buildComplete) {
     buildModelCollection();
 
-    const modelNameList = modelContainer.models.map((item) => {
-      const { namespace: ns } = item;
+    const modelNames = modelContainer.models
+      .map((item) => {
+        const { namespace: ns } = item;
 
-      return ns;
-    });
+        return ns;
+      })
+      .join();
 
-    logConfig(`all models -> ${modelNameList}`);
+    logConfig(`all models -> ${modelNames}`);
 
-    setModelNameList(modelNameList);
+    setModelNameList(modelNames);
   }
 
   return modelContainer.models;

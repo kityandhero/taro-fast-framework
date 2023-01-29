@@ -1,5 +1,6 @@
-import { isObject, isUndefined } from 'easy-soft-utility';
 import { ENV_TYPE, getApp, getEnv } from '@tarojs/taro';
+
+import { isObject, isUndefined } from 'easy-soft-utility';
 
 import { appInitDefault } from './constants';
 
