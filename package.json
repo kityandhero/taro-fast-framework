@@ -41,6 +41,7 @@
     "commitlint": "npx commitlint --edit",
     "precz": "npm run update:cz:flag && git stage -A",
     "cz": "cz",
+    "postcz": "git push",
     "dev:core-common": "cd packages/taro-fast-common && npm run dev",
     "dev:core-component": "cd packages/taro-fast-component && npm run dev",
     "dev:core-component-extra": "cd packages/taro-fast-component-extra && npm run dev",
