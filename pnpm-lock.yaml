@@ -149,11 +149,11 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.1
-      taro-fast-component: ^2.15.1
-      taro-fast-component-extra: ^2.12.1
-      taro-fast-component-prism: ^2.13.1
-      taro-fast-framework: ^1.16.1
+      taro-fast-common: ^1.18.2
+      taro-fast-component: ^2.15.2
+      taro-fast-component-extra: ^2.12.2
+      taro-fast-component-prism: ^2.13.2
+      taro-fast-framework: ^1.16.2
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -546,7 +546,7 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.1
+      taro-fast-common: ^1.18.2
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -725,8 +725,8 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.1
-      taro-fast-component: ^2.15.1
+      taro-fast-common: ^1.18.2
+      taro-fast-component: ^2.15.2
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -909,8 +909,8 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.1
-      taro-fast-component: ^2.15.1
+      taro-fast-common: ^1.18.2
+      taro-fast-component: ^2.15.2
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -1096,8 +1096,8 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.1
-      taro-fast-component: ^2.15.1
+      taro-fast-common: ^1.18.2
+      taro-fast-component: ^2.15.2
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
