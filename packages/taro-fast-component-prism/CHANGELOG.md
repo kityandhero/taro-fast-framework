@@ -1,305 +1,226 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.13.3](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.13.2...taro-fast-component-prism@2.13.3) (2023-01-30)
+
+### Bug Fixes
+
+- **simple-taro-fast-framework:** update ([70ec277](https://github.com/kityandhero/taro-fast-framework/commit/70ec277fde4952067713ac07fb4a05ab755c85fb))
+- **simple-taro-fast-framework:** update ([8f44504](https://github.com/kityandhero/taro-fast-framework/commit/8f44504b0e387684468a8061e3eb673909a8df3e))
 
 ## [2.13.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.13.1...taro-fast-component-prism@2.13.2) (2023-01-29)
 
-
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([dd3801c](https://github.com/kityandhero/taro-fast-framework/commit/dd3801cda3281cb14982c5c1493597ac5fdc6253))
-
-
+- **simple-taro-fast-framework:** update ([dd3801c](https://github.com/kityandhero/taro-fast-framework/commit/dd3801cda3281cb14982c5c1493597ac5fdc6253))
 
 ## [2.13.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.13.0...taro-fast-component-prism@2.13.1) (2023-01-29)
 
-
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([dd33823](https://github.com/kityandhero/taro-fast-framework/commit/dd338235eb4a89deda32c2c0c08e706a2518bd69))
-
-
+- **simple-taro-fast-framework:** update ([dd33823](https://github.com/kityandhero/taro-fast-framework/commit/dd338235eb4a89deda32c2c0c08e706a2518bd69))
 
 ## [2.13.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.12.2...taro-fast-component-prism@2.13.0) (2023-01-27)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([dea3ad6](https://github.com/kityandhero/taro-fast-framework/commit/dea3ad60b5fe1ae8da67da4849ee08b3e034edfd))
-* **simple-taro-fast-framework:** update ([f55030b](https://github.com/kityandhero/taro-fast-framework/commit/f55030b416b75909b5a227ad79d809a0ab5db1cc))
-
+- **simple-taro-fast-framework:** update ([dea3ad6](https://github.com/kityandhero/taro-fast-framework/commit/dea3ad60b5fe1ae8da67da4849ee08b3e034edfd))
+- **simple-taro-fast-framework:** update ([f55030b](https://github.com/kityandhero/taro-fast-framework/commit/f55030b416b75909b5a227ad79d809a0ab5db1cc))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([9036515](https://github.com/kityandhero/taro-fast-framework/commit/90365152c49c9534759262fc649d3b38dde8ed21))
-* **simple-taro-fast-framework:** update ([590bae9](https://github.com/kityandhero/taro-fast-framework/commit/590bae9f6b0c585555a7ae3e2ab87f33857f5d48))
-
-
+- **simple-taro-fast-framework:** update ([9036515](https://github.com/kityandhero/taro-fast-framework/commit/90365152c49c9534759262fc649d3b38dde8ed21))
+- **simple-taro-fast-framework:** update ([590bae9](https://github.com/kityandhero/taro-fast-framework/commit/590bae9f6b0c585555a7ae3e2ab87f33857f5d48))
 
 ## [2.12.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.12.1...taro-fast-component-prism@2.12.2) (2023-01-13)
 
 **Note:** Version bump only for package taro-fast-component-prism
 
-
-
-
-
 ## [2.12.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.12.0...taro-fast-component-prism@2.12.1) (2023-01-13)
 
 **Note:** Version bump only for package taro-fast-component-prism
 
-
-
-
-
 ## [2.12.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.11.2...taro-fast-component-prism@2.12.0) (2023-01-13)
-
 
 ### Features
 
-* **taro-fast-common:** update Env info ([f6a9a99](https://github.com/kityandhero/taro-fast-framework/commit/f6a9a99d50a124100e9ccecfaa3a773d8f67e2b8))
-
-
+- **taro-fast-common:** update Env info ([f6a9a99](https://github.com/kityandhero/taro-fast-framework/commit/f6a9a99d50a124100e9ccecfaa3a773d8f67e2b8))
 
 ## [2.11.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.11.1...taro-fast-component-prism@2.11.2) (2023-01-13)
 
 **Note:** Version bump only for package taro-fast-component-prism
 
-
-
-
-
 ## [2.11.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.11.0...taro-fast-component-prism@2.11.1) (2023-01-13)
 
 **Note:** Version bump only for package taro-fast-component-prism
 
-
-
-
-
 ## [2.11.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.10.0...taro-fast-component-prism@2.11.0) (2023-01-13)
-
 
 ### Features
 
-* **taro-fast-common:** adjust style ([4214154](https://github.com/kityandhero/taro-fast-framework/commit/4214154e0e3c9edb1518da7a262e32f676313824))
-
-
-
+- **taro-fast-common:** adjust style ([4214154](https://github.com/kityandhero/taro-fast-framework/commit/4214154e0e3c9edb1518da7a262e32f676313824))
 
 ## [2.10.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.9.3...taro-fast-component-prism@2.10.0) (2023-01-12)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([46087c8](https://github.com/kityandhero/taro-fast-framework/commit/46087c8a92a3eb3fc09e574cb1d07924436c8183))
-
+- **simple-taro-fast-framework:** update ([46087c8](https://github.com/kityandhero/taro-fast-framework/commit/46087c8a92a3eb3fc09e574cb1d07924436c8183))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([83391bc](https://github.com/kityandhero/taro-fast-framework/commit/83391bcedb12abe02d7ff9ad892069b24c90dec5))
-* **simple-taro-fast-framework:** update ([479cac9](https://github.com/kityandhero/taro-fast-framework/commit/479cac9ceca738c40be530271fa568671d5953f2))
-
-
+- **simple-taro-fast-framework:** update ([83391bc](https://github.com/kityandhero/taro-fast-framework/commit/83391bcedb12abe02d7ff9ad892069b24c90dec5))
+- **simple-taro-fast-framework:** update ([479cac9](https://github.com/kityandhero/taro-fast-framework/commit/479cac9ceca738c40be530271fa568671d5953f2))
 
 ## [2.9.3](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.9.2...taro-fast-component-prism@2.9.3) (2023-01-11)
 
 **Note:** Version bump only for package taro-fast-component-prism
 
-
-
-
-
 ## [2.9.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.9.0...taro-fast-component-prism@2.9.2) (2023-01-11)
 
 **Note:** Version bump only for package taro-fast-component-prism
-
-
-
-
-
 
 ## [2.9.1](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.9.0...taro-fast-component-prism@2.9.1) (2023-01-11)
 
 **Note:** Version bump only for package taro-fast-component-prism
 
-
-
-
-
 ## [2.9.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.9.0) (2023-01-11)
-
 
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.8.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.8.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.7.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.7.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.6.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.6.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.5.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.5.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.4.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.4.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.3.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.3.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.2.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.2.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
-* **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
-
-
+- **simple-taro-fast-framework:** update ([1f47058](https://github.com/kityandhero/taro-fast-framework/commit/1f4705850ffa5526967b9f77d908447c1e9386f8))
+- **taro-fast-cli:** update ([6bfee31](https://github.com/kityandhero/taro-fast-framework/commit/6bfee3113ac3fb9ab02bfcb26319b5aba42703f3))
 
 ## [2.1.0](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.171...taro-fast-component-prism@2.1.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
-* **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
-* **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
-* **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** update ([3ff7088](https://github.com/kityandhero/taro-fast-framework/commit/3ff7088db6db214eacc443b1ec87e3f26b329766))
+- **simple-taro-fast-framework:** update ([5bc5951](https://github.com/kityandhero/taro-fast-framework/commit/5bc59511f53ae1d172a624b55dfc0dfcd8014f4d))
+- **simple-taro-fast-framework:** update ([b3ee769](https://github.com/kityandhero/taro-fast-framework/commit/b3ee769f55e7688f9cc1dfc72913c6da37d07fc1))
+- **simple-taro-fast-framework:** update ([da7960c](https://github.com/kityandhero/taro-fast-framework/commit/da7960c6fd699393120b486da459404e42b9a043))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [2.0.171](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.0.170...taro-fast-component-prism@2.0.171) (2022-10-26)
 

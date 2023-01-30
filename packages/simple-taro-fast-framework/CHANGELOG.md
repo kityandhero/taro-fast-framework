@@ -1,268 +1,185 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.16.2](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.16.1...simple-taro-fast-framework@1.16.2) (2023-01-30)
+
+### Bug Fixes
+
+- **simple-taro-fast-framework:** update ([70ec277](https://github.com/kityandhero/taro-fast-framework/commit/70ec277fde4952067713ac07fb4a05ab755c85fb))
+- **simple-taro-fast-framework:** update ([8f44504](https://github.com/kityandhero/taro-fast-framework/commit/8f44504b0e387684468a8061e3eb673909a8df3e))
 
 ## [1.16.1](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.16.0...simple-taro-fast-framework@1.16.1) (2023-01-29)
 
-
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([dd3801c](https://github.com/kityandhero/taro-fast-framework/commit/dd3801cda3281cb14982c5c1493597ac5fdc6253))
-
-
+- **simple-taro-fast-framework:** update ([dd3801c](https://github.com/kityandhero/taro-fast-framework/commit/dd3801cda3281cb14982c5c1493597ac5fdc6253))
 
 ## [1.16.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.15.0...simple-taro-fast-framework@1.16.0) (2023-01-29)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([ee50d6d](https://github.com/kityandhero/taro-fast-framework/commit/ee50d6ddfc3ac252f2fccfac540f44dd8ec85da0))
-
+- **simple-taro-fast-framework:** update ([ee50d6d](https://github.com/kityandhero/taro-fast-framework/commit/ee50d6ddfc3ac252f2fccfac540f44dd8ec85da0))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([dd33823](https://github.com/kityandhero/taro-fast-framework/commit/dd338235eb4a89deda32c2c0c08e706a2518bd69))
-
-
+- **simple-taro-fast-framework:** update ([dd33823](https://github.com/kityandhero/taro-fast-framework/commit/dd338235eb4a89deda32c2c0c08e706a2518bd69))
 
 ## [1.15.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.14.1...simple-taro-fast-framework@1.15.0) (2023-01-27)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** update ([dea3ad6](https://github.com/kityandhero/taro-fast-framework/commit/dea3ad60b5fe1ae8da67da4849ee08b3e034edfd))
-* **simple-taro-fast-framework:** update ([f55030b](https://github.com/kityandhero/taro-fast-framework/commit/f55030b416b75909b5a227ad79d809a0ab5db1cc))
-
+- **simple-taro-fast-framework:** update ([dea3ad6](https://github.com/kityandhero/taro-fast-framework/commit/dea3ad60b5fe1ae8da67da4849ee08b3e034edfd))
+- **simple-taro-fast-framework:** update ([f55030b](https://github.com/kityandhero/taro-fast-framework/commit/f55030b416b75909b5a227ad79d809a0ab5db1cc))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** update ([b87952e](https://github.com/kityandhero/taro-fast-framework/commit/b87952e0deab629102bb604cd970f7da61c34bbf))
-* **simple-taro-fast-framework:** update ([9036515](https://github.com/kityandhero/taro-fast-framework/commit/90365152c49c9534759262fc649d3b38dde8ed21))
-* **simple-taro-fast-framework:** update ([83e11a9](https://github.com/kityandhero/taro-fast-framework/commit/83e11a9c1e6a79fc3cd071e2b0efa0d1835b7273))
-* **simple-taro-fast-framework:** update ([590bae9](https://github.com/kityandhero/taro-fast-framework/commit/590bae9f6b0c585555a7ae3e2ab87f33857f5d48))
-* **taro-fast-common:** update ([ac033fb](https://github.com/kityandhero/taro-fast-framework/commit/ac033fbec4ef9e72a5047e3bd51a8d1732f8f318))
-
-
+- **simple-taro-fast-framework:** update ([b87952e](https://github.com/kityandhero/taro-fast-framework/commit/b87952e0deab629102bb604cd970f7da61c34bbf))
+- **simple-taro-fast-framework:** update ([9036515](https://github.com/kityandhero/taro-fast-framework/commit/90365152c49c9534759262fc649d3b38dde8ed21))
+- **simple-taro-fast-framework:** update ([83e11a9](https://github.com/kityandhero/taro-fast-framework/commit/83e11a9c1e6a79fc3cd071e2b0efa0d1835b7273))
+- **simple-taro-fast-framework:** update ([590bae9](https://github.com/kityandhero/taro-fast-framework/commit/590bae9f6b0c585555a7ae3e2ab87f33857f5d48))
+- **taro-fast-common:** update ([ac033fb](https://github.com/kityandhero/taro-fast-framework/commit/ac033fbec4ef9e72a5047e3bd51a8d1732f8f318))
 
 ## [1.14.1](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.14.0...simple-taro-fast-framework@1.14.1) (2023-01-13)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.14.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.4...simple-taro-fast-framework@1.14.0) (2023-01-13)
-
 
 ### Features
 
-* **taro-fast-common:** adjust log tools ([9943174](https://github.com/kityandhero/taro-fast-framework/commit/99431749e0b8dd75d06ef7e1c6fbaf5439d8948c))
-
-
+- **taro-fast-common:** adjust log tools ([9943174](https://github.com/kityandhero/taro-fast-framework/commit/99431749e0b8dd75d06ef7e1c6fbaf5439d8948c))
 
 ## [1.13.4](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.3...simple-taro-fast-framework@1.13.4) (2023-01-13)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.13.3](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.2...simple-taro-fast-framework@1.13.3) (2023-01-13)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.13.2](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.1...simple-taro-fast-framework@1.13.2) (2023-01-13)
-
 
 ### Bug Fixes
 
-* **taro-fast-component:** adjust headerNavigation ([041f3de](https://github.com/kityandhero/taro-fast-framework/commit/041f3deb6bc849f575acff4de62ed7c9c4f9f656))
-
-
+- **taro-fast-component:** adjust headerNavigation ([041f3de](https://github.com/kityandhero/taro-fast-framework/commit/041f3deb6bc849f575acff4de62ed7c9c4f9f656))
 
 ## [1.13.1](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.13.0...simple-taro-fast-framework@1.13.1) (2023-01-13)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.13.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.12.0...simple-taro-fast-framework@1.13.0) (2023-01-13)
-
 
 ### Features
 
-* **simple-taro-fast-framework:** adjust style ([41a057a](https://github.com/kityandhero/taro-fast-framework/commit/41a057a1fff816c9abee97f6c84998dee138c347))
-* **simple-taro-fast-framework:** adjust style ([e6714a9](https://github.com/kityandhero/taro-fast-framework/commit/e6714a941babbfb777115ed7c67a6bff65e606d5))
-
+- **simple-taro-fast-framework:** adjust style ([41a057a](https://github.com/kityandhero/taro-fast-framework/commit/41a057a1fff816c9abee97f6c84998dee138c347))
+- **simple-taro-fast-framework:** adjust style ([e6714a9](https://github.com/kityandhero/taro-fast-framework/commit/e6714a941babbfb777115ed7c67a6bff65e606d5))
 
 ### Bug Fixes
 
-* **simple-taro-fast-framework:** adjust style ([84fcd7e](https://github.com/kityandhero/taro-fast-framework/commit/84fcd7e601b1e34172f990dde72e1ce199cd7c10))
-* **simple-taro-fast-framework:** update ([3654c68](https://github.com/kityandhero/taro-fast-framework/commit/3654c684bc7f477873ec00ba47e3e591265d1d7f))
-
-
+- **simple-taro-fast-framework:** adjust style ([84fcd7e](https://github.com/kityandhero/taro-fast-framework/commit/84fcd7e601b1e34172f990dde72e1ce199cd7c10))
+- **simple-taro-fast-framework:** update ([3654c68](https://github.com/kityandhero/taro-fast-framework/commit/3654c684bc7f477873ec00ba47e3e591265d1d7f))
 
 ## [1.12.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.11.5...simple-taro-fast-framework@1.12.0) (2023-01-12)
 
-  
 ### Features
 
-* **simple-taro-fast-framework:** update ([46087c8](https://github.com/kityandhero/taro-fast-framework/commit/46087c8a92a3eb3fc09e574cb1d07924436c8183))
-
+- **simple-taro-fast-framework:** update ([46087c8](https://github.com/kityandhero/taro-fast-framework/commit/46087c8a92a3eb3fc09e574cb1d07924436c8183))
 
 ### Bug Fixes
- 
-* **simple-taro-fast-framework:** update ([c4aca01](https://github.com/kityandhero/taro-fast-framework/commit/c4aca01ac89db199212aac3e970e6e53139321f9))
 
-
+- **simple-taro-fast-framework:** update ([c4aca01](https://github.com/kityandhero/taro-fast-framework/commit/c4aca01ac89db199212aac3e970e6e53139321f9))
 
 ## [1.11.5](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.11.4...simple-taro-fast-framework@1.11.5) (2023-01-11)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.11.4](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.11.3...simple-taro-fast-framework@1.11.4) (2023-01-11)
 
 **Note:** Version bump only for package simple-taro-fast-framework
-
-
-
-
 
 ## [1.11.3](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.11.2...simple-taro-fast-framework@1.11.3) (2023-01-11)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.11.2](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.11.0...simple-taro-fast-framework@1.11.2) (2023-01-11)
 
 **Note:** Version bump only for package simple-taro-fast-framework
-
-
-
-
-
 
 ## [1.11.1](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.11.0...simple-taro-fast-framework@1.11.1) (2023-01-11)
 
 **Note:** Version bump only for package simple-taro-fast-framework
 
-
-
-
-
 ## [1.11.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.11.0) (2023-01-11)
-
 
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.10.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.10.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.9.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.9.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.8.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.8.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.7.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.7.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.6.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.6.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.5.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.5.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.4.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.4.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([b96c20d](https://github.com/kityandhero/taro-fast-framework/commit/b96c20d9468fd68e664fcc51f3d7cc652d12c83f))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.3.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.2.0...simple-taro-fast-framework@1.3.0) (2023-01-11)
 
-
 ### Features
 
-* **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
-* **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
-
-
+- **simple-taro-fast-framework:** 调整不同构建平台兼容性 ([1a8f784](https://github.com/kityandhero/taro-fast-framework/commit/1a8f784b8e0de032aeb9647c3b0a856abf308e26))
+- **simple-taro-fast-framework:** update ([fa55643](https://github.com/kityandhero/taro-fast-framework/commit/fa5564301ae3c9c0692eb5fb8b97a5ad73cc202f))
 
 ## [1.2.0](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.1.1...simple-taro-fast-framework@1.2.0) (2022-10-26)
 
