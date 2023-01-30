@@ -48,6 +48,9 @@ export const defaultEmptyImage = '/noImageSmall.png';
 
 export const emptyLogo = emptyLogoSource;
 
+/**
+ * 应用默认配置
+ */
 export const appInitDefault = {
   webRootFontSize: '142%',
   appId: '',
