@@ -1,20 +1,4 @@
-module.exports = {
-  pluginSearchDirs: false,
-  printWidth: 80,
-  singleQuote: true,
-  trailingComma: 'all',
-  proseWrap: 'never',
-  semi: true,
-  overrides: [
-    {
-      files: '.prettierrc',
-      options: {
-        parser: 'json',
-      },
-    },
-  ],
-  plugins: [
-    // 'prettier-plugin-organize-imports',
-    'prettier-plugin-packagejson',
-  ],
-};
+/* eslint-disable import/no-commonjs */
+var { generalConfig } = require("../../develop/config/prettier/config");
+
+module.exports = generalConfig;

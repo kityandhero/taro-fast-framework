@@ -1,4 +1,4 @@
-import { buildConfig as buildConfigCore } from '../../taro-fast-rollup/rollupAssist/configBuilder';
+import { buildConfig as buildConfigCore } from '../../../develop/config/rollup/configBuilder';
 
 const inputFile = {
   ...{
