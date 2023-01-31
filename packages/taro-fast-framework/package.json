@@ -20,11 +20,11 @@
     "es"
   ],
   "scripts": {
-    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
+    "build": "npx rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
     "postbuild": "npm run tsc:build",
-    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
+    "build:skipCompression": "npx rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
     "postbuild:skipCompression": "npm run tsc:build",
-    "clean-file": "rimraf ./node_modules",
+    "clean-file": "npx rimraf ./node_modules",
     "dev": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch --watch.onBundleEnd=\"npm run tsc:build\"",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
@@ -121,6 +121,7 @@
     "prettier-plugin-organize-imports": "^3",
     "prettier-plugin-packagejson": "^2",
     "react-refresh": "^0.14.0",
+    "rimraf": "^4.1.2",
     "rollup": "^3.10.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-postcss": "^4.0.2",

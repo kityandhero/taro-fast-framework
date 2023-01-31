@@ -43,6 +43,7 @@ importers:
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
       prettier-plugin-packagejson: ^2
+      rimraf: ^4.1.2
       rollup: ^3.12.0
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-livereload: ^2.0.5
@@ -93,6 +94,7 @@ importers:
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
+      rimraf: 4.1.2
       rollup: 3.12.0
       rollup-plugin-copy: 3.4.0
       rollup-plugin-livereload: 2.0.5
@@ -172,6 +174,7 @@ importers:
       react-dom: ^18.2.0
       react-redux: ^8.0.5
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       stylelint: ^14.16.1
       stylelint-config-css-modules: ^4.1.0
       stylelint-config-prettier: ^9.0.4
@@ -256,6 +259,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       stylelint: 14.16.1
       stylelint-config-css-modules: 4.1.0_stylelint@14.16.1
       stylelint-config-prettier: 9.0.4_stylelint@14.16.1
@@ -279,6 +283,7 @@ importers:
       prettier: ^2.7.1
       prettier-plugin-organize-imports: ^3
       prettier-plugin-packagejson: ^2
+      rimraf: ^4.1.2
       shelljs: ^0.8.5
       terminal-kit: ^2.4.0
     dependencies:
@@ -299,6 +304,7 @@ importers:
       prettier: 2.8.2
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.2
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.2
+      rimraf: 4.1.2
 
   packages/taro-fast-common:
     specifiers:
@@ -381,6 +387,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       rollup: ^3.10.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -474,6 +481,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       rollup: 3.10.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
@@ -563,6 +571,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       rollup: ^3.10.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -653,6 +662,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       rollup: 3.10.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
@@ -742,6 +752,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       rollup: ^3.10.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -834,6 +845,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       rollup: 3.10.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
@@ -926,6 +938,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       rollup: ^3.10.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -1021,6 +1034,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       rollup: 3.10.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
@@ -1113,6 +1127,7 @@ importers:
       react-dom: ^18.2.0
       react-redux: ^8.0.5
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       rollup: ^3.10.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -1208,6 +1223,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       rollup: 3.10.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
@@ -20968,6 +20984,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+
+  /rimraf/4.1.2:
+    resolution: {integrity: sha512-BlIbgFryTbw3Dz6hyoWFhKk+unCcHMSkZGrTFVAx2WmttdBSonsdtRlwiuTbDqTKr+UlXIUqJVS4QT5tUzGENQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /ripemd160/2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}

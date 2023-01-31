@@ -1,10 +1,10 @@
 {
   "*.{md,json}": ["prettier --cache --write"],
-  "*.{js,jsx}": [
-    "npx eslint --ext .js,.jsx,.ts,.tsx",
+  "*.{js,jsx}": ["npx eslint --ext .js,.jsx,.ts,.tsx", "prettier --cache --write"],
+  "*.{css,less}": [
+    "stylelint",
     "prettier --cache --write"
   ],
-  "*.{css,less}": ["stylelint", "prettier --cache --write"],
   "*.ts?(x)": [
     "npx eslint --ext .js,.jsx,.ts,.tsx",
     "prettier --cache --parser=typescript --write"
