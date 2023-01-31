@@ -77,6 +77,7 @@ let eslintIgnoreContent = `**/public
 *.zip
 *.txt
 *.7z
+rollup.config-*.cjs
 `;
 
 let prettierIgnoreContent = `# ignore dir
@@ -127,6 +128,7 @@ let prettierIgnoreContent = `# ignore dir
 .editorconfig
 .czrc
 .ga
+rollup.config-*.cjs
 pnpm-lock.yaml
 CNAME
 LICENSE
@@ -161,6 +163,7 @@ let gitIgnoreContent = `# See https://help.github.com/articles/ignoring-files/ f
 *.min.js
 
 # ignore special
+rollup.config-*.cjs
 yarn.lock
 package-lock.json
 .firebase

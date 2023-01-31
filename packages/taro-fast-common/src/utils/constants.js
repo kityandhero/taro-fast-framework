@@ -44,6 +44,9 @@ export const apiSuccessCode = 200;
  */
 export const defaultUserAvatar = '/user.png';
 
+/**
+ * Default Empty Image
+ */
 export const defaultEmptyImage = '/noImageSmall.png';
 
 export const emptyLogo = emptyLogoSource;

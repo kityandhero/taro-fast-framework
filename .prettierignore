@@ -46,6 +46,7 @@
 .editorconfig
 .czrc
 .ga
+rollup.config-*.cjs
 pnpm-lock.yaml
 CNAME
 LICENSE

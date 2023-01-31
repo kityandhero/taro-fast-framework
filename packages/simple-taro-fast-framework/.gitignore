@@ -19,6 +19,7 @@
 *.min.js
 
 # ignore special
+rollup.config-*.cjs
 yarn.lock
 package-lock.json
 .firebase
