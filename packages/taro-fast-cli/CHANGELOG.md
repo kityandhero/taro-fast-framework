@@ -1,6 +1,17 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.3](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-cli@1.11.2...taro-fast-cli@1.11.3) (2023-01-31)
+
+
+### Bug Fixes
+
+* **simple-taro-fast-framework:** update ([b233d01](https://github.com/kityandhero/taro-fast-framework/commit/b233d01324f403d32cab5f9f6d8509920ffcf848))
+* **simple-taro-fast-framework:** update ([0dca234](https://github.com/kityandhero/taro-fast-framework/commit/0dca234705c54e709adb89b5c9a43bea90a31f13))
+
+
 
 ## [1.11.2](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-cli@1.11.1...taro-fast-cli@1.11.2) (2023-01-31)
 
