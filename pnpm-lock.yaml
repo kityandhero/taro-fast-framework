@@ -180,11 +180,11 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.6
-      taro-fast-component: ^2.15.6
-      taro-fast-component-extra: ^2.12.6
-      taro-fast-component-prism: ^2.13.6
-      taro-fast-framework: ^1.16.6
+      taro-fast-common: ^1.18.7
+      taro-fast-component: ^2.15.7
+      taro-fast-component-extra: ^2.12.7
+      taro-fast-component-prism: ^2.13.7
+      taro-fast-framework: ^1.16.7
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -588,7 +588,7 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.6
+      taro-fast-common: ^1.18.7
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -771,8 +771,8 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.6
-      taro-fast-component: ^2.15.6
+      taro-fast-common: ^1.18.7
+      taro-fast-component: ^2.15.7
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -959,8 +959,8 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.6
-      taro-fast-component: ^2.15.6
+      taro-fast-common: ^1.18.7
+      taro-fast-component: ^2.15.7
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -1150,8 +1150,8 @@ importers:
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
       stylelint-declaration-block-no-ignored-properties: ^2.6.0
-      taro-fast-common: ^1.18.6
-      taro-fast-component: ^2.15.6
+      taro-fast-common: ^1.18.7
+      taro-fast-component: ^2.15.7
       webpack: ^5.75.0
     dependencies:
       '@tarojs/components': 3.5.11_@types+react@18.0.26
@@ -9629,7 +9629,7 @@ packages:
     dev: true
 
   /chokidar/1.7.0:
-    resolution: {integrity: sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=}
+    resolution: {integrity: sha512-mk8fAWcRUOxY7btlLtitj3A45jOwSAxH4tOFOoEGbVsl6cL6pPMWUy7dwZ/canfj3QEdP6FHSnf/l1c6/WkzVg==}
     deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
     requiresBuild: true
     dependencies:
@@ -13383,7 +13383,7 @@ packages:
     engines: {node: '>=6'}
 
   /file-uri-to-path/1.0.0:
-    resolution: {integrity: sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90=}
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
     requiresBuild: true
     dev: true
     optional: true
@@ -14920,7 +14920,7 @@ packages:
     dev: true
 
   /image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
@@ -22193,7 +22193,7 @@ packages:
     dev: true
 
   /string.fromcodepoint/0.2.1:
-    resolution: {integrity: sha1-jZeDM8C8klOPUPOD5IiPPlYZ1lM=}
+    resolution: {integrity: sha512-n69H31OnxSGSZyZbgBlvYIXlrMhJQ0dQAX1js1QDhpaUH6zmU3QYlj07bCwCNlPOu3oRXIubGPl2gDGnHsiCqg==}
     dev: true
 
   /string.prototype.matchall/4.0.8:
