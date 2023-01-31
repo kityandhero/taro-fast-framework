@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/no-commonjs
+/* eslint-disable import/no-commonjs */
+
 module.exports = {
   generalConfig: {
     pluginSearchDirs: false,

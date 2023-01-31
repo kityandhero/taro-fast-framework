@@ -1,3 +1,5 @@
+/* eslint-disable import/no-commonjs */
+
 module.exports = {
   generalRules: {
     camelias: 0,

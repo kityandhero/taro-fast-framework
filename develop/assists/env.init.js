@@ -1,4 +1,5 @@
 /* eslint-disable import/no-commonjs */
+
 let fs = require('fs');
 const { resolve } = require('path');
 

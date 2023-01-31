@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/no-commonjs
+/* eslint-disable import/no-commonjs */
+
 let recommendRules = require('../rules');
 
 let generalRules = recommendRules.generalRules;
@@ -7,7 +8,6 @@ let sortRules = recommendRules.sortRules;
 
 let rules = Object.assign(generalRules, sortRules, {});
 
-// eslint-disable-next-line import/no-commonjs
 module.exports = {
   generalConfig: {
     extends: ['taro/react', 'prettier', 'plugin:promise/recommended'],
