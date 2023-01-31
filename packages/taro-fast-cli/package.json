@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-cli",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "description": "taro-fast-cli",
   "keywords": [
     "taro-fast-cli"
@@ -46,9 +46,10 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^8.0.1",
-    "prettier": "^2.7.1",  "rimraf": "^4.1.2",
+    "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3",
-    "prettier-plugin-packagejson": "^2"
+    "prettier-plugin-packagejson": "^2",
+    "rimraf": "^4.1.2"
   },
   "gitHead": "6bfee3113ac3fb9ab02bfcb26319b5aba42703f3"
 }
