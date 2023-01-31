@@ -25,7 +25,7 @@
     "dev:tt": "npm run build:tt -- --watch",
     "dev:weapp": "npm run build:weapp -- --watch",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint-staged": "lint-staged",
+    "lint-staged": "npx lint-staged",
     "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "postlint:fix": "npm run lint:style",

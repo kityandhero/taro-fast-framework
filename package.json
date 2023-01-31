@@ -50,7 +50,7 @@
     "prelerna:bootstrap": "npm run change-nrm-local",
     "lerna:bootstrap": "husky install && git pull && pnpm install",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint-staged": "lint-staged",
+    "lint-staged": "npx lint-staged",
     "lint-staged:js": "npx eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:all:fix": "npm run lint:core-common:fix && npm run lint:core-component:fix && npm run lint:core-component-extra:fix && npm run lint:core-component-prism:fix && npm run lint:core-framework:fix && npm run lint:simple:fix",
     "lint:core-common:fix": "cd packages/taro-fast-common && ncu run lint:fix",

@@ -279,6 +279,7 @@ importers:
       fs-extra: ^10.0.1
       hpagent: ^1.0.0
       husky: ^8.0.1
+      lint-staged: ^13.1.0
       ping: ^0.4.2
       prettier: ^2.7.1
       prettier-plugin-organize-imports: ^3
@@ -301,6 +302,7 @@ importers:
       eslint-plugin-promise: 6.1.1
       eslint-plugin-simple-import-sort: 7.0.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       prettier: 2.8.2
       prettier-plugin-organize-imports: 3.2.1_prettier@2.8.2
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.2
@@ -375,6 +377,7 @@ importers:
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^8.0.0
       husky: ^8.0.3
+      lint-staged: ^13.1.0
       lodash: ^4.17.21
       node-cache: ^5.1.2
       object-hash: ^3.0.0
@@ -474,6 +477,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
       postcss-pxtorem: 6.0.0_postcss@8.4.21
@@ -562,6 +566,7 @@ importers:
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^8.0.0
       husky: ^8.0.3
+      lint-staged: ^13.1.0
       postcss: ^8.4.21
       postcss-less: ^6.0.0
       postcss-pxtorem: ^6.0.0
@@ -655,6 +660,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
       postcss-pxtorem: 6.0.0_postcss@8.4.21
@@ -743,6 +749,7 @@ importers:
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^8.0.0
       husky: ^8.0.3
+      lint-staged: ^13.1.0
       postcss: ^8.4.21
       postcss-less: ^6.0.0
       postcss-pxtorem: ^6.0.0
@@ -838,6 +845,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
       postcss-pxtorem: 6.0.0_postcss@8.4.21
@@ -928,6 +936,7 @@ importers:
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^8.0.0
       husky: ^8.0.3
+      lint-staged: ^13.1.0
       postcss: ^8.4.21
       postcss-less: ^6.0.0
       postcss-pxtorem: ^6.0.0
@@ -1027,6 +1036,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
       postcss-pxtorem: 6.0.0_postcss@8.4.21
@@ -1117,6 +1127,7 @@ importers:
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^8.0.0
       husky: ^8.0.3
+      lint-staged: ^13.1.0
       postcss: ^8.4.21
       postcss-less: ^6.0.0
       postcss-pxtorem: ^6.0.0
@@ -1216,6 +1227,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
       postcss-pxtorem: 6.0.0_postcss@8.4.21
@@ -9617,7 +9629,7 @@ packages:
     dev: true
 
   /chokidar/1.7.0:
-    resolution: {integrity: sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=}
+    resolution: {integrity: sha512-mk8fAWcRUOxY7btlLtitj3A45jOwSAxH4tOFOoEGbVsl6cL6pPMWUy7dwZ/canfj3QEdP6FHSnf/l1c6/WkzVg==}
     deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
     requiresBuild: true
     dependencies:
@@ -13371,7 +13383,7 @@ packages:
     engines: {node: '>=6'}
 
   /file-uri-to-path/1.0.0:
-    resolution: {integrity: sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90=}
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
     requiresBuild: true
     dev: true
     optional: true
@@ -14023,7 +14035,7 @@ packages:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
   /glob/6.0.4:
-    resolution: {integrity: sha1-DwiGD2oVUSey+t1PnOJLGqtuTSI=}
+    resolution: {integrity: sha512-MKZeRNyYZAVVVG1oZeLaWie1uweH40m9AZwIwxyPbTSX4hHrVYSzLg0Ro5Z5R7XKkIX+Cc6oD1rqeDJnwsB8/A==}
     dependencies:
       inflight: 1.0.6
       inherits: 2.0.4
@@ -14908,7 +14920,7 @@ packages:
     dev: true
 
   /image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
@@ -22181,7 +22193,7 @@ packages:
     dev: true
 
   /string.fromcodepoint/0.2.1:
-    resolution: {integrity: sha1-jZeDM8C8klOPUPOD5IiPPlYZ1lM=}
+    resolution: {integrity: sha512-n69H31OnxSGSZyZbgBlvYIXlrMhJQ0dQAX1js1QDhpaUH6zmU3QYlj07bCwCNlPOu3oRXIubGPl2gDGnHsiCqg==}
     dev: true
 
   /string.prototype.matchall/4.0.8:
