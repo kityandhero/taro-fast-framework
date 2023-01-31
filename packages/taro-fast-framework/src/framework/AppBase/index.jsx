@@ -49,7 +49,7 @@ function setMainFontSize() {
   }
 
   if (window) {
-    var doc = window.document.documentElement;
+    let doc = window.document.documentElement;
 
     if (doc) {
       doc.style.fontSize = toString(webRootFontSize);
