@@ -1,9 +1,10 @@
+import { Swiper, SwiperItem } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
   isFunction,
 } from 'easy-soft-utility';
-import { Swiper, SwiperItem } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common/es/utils/tools';
 
