@@ -13,12 +13,12 @@ import {
   toRound,
 } from 'easy-soft-utility';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
 import {
+  AbstractComponent,
   getFields,
   getSystemInfo,
   transformSize,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 import {
   HorizontalCenterBox,
   VerticalBox,
@@ -36,7 +36,7 @@ const lineCapCollection = ['butt', 'round', 'square'];
 const defaultColor = '#d81e06';
 
 const defaultProps = {
-  ...ComponentBase.defaultProps,
+  ...AbstractComponent.defaultProps,
   ...{
     style: {},
     backRingStyle: {},
@@ -52,7 +52,7 @@ const defaultProps = {
   },
 };
 
-class Circle extends ComponentBase {
+class Circle extends AbstractComponent {
   id = null;
 
   canvasId = null;

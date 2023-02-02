@@ -1,15 +1,13 @@
+import { Text, View } from '@tarojs/components';
+
 import {
   buildRandomHexColor,
   checkStringIsNullOrWhiteSpace,
   isFunction,
   isNumber,
 } from 'easy-soft-utility';
-import { Text, View } from '@tarojs/components';
 
-import {
-  copyToClipboard,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { copyToClipboard, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import FlexBox from '../FlexBox';

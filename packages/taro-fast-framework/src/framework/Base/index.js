@@ -18,7 +18,7 @@ import {
   hideNavigationBarLoading,
   showNavigationBarLoading,
   stopPullDownRefresh,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 
 import { checkWhetherAuthorizeFail } from '../../utils/tools';
 import Infrastructure from '../Infrastructure';

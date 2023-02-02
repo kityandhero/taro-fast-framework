@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 import {
   Card,
   FlexBox,

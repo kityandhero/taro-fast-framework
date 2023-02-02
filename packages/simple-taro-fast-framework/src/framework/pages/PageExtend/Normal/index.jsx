@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { sortBy } from 'easy-soft-utility';
 
-import { isWechat } from 'taro-fast-common/es/utils/tools';
+import { checkWeAppEnv } from 'taro-fast-common';
 
 import iconBasic from '../../../../assets/images/icon-list-basic.png';
 import ChannelPageBase from '../../../../customComponents/ChannelPageBase';
@@ -42,7 +42,7 @@ const list = [
     id: 'PullRefresh',
     name: '下拉刷新-缩放提示器效果',
     path: pathCollection.framework.pageExtend.normal.pullRefreshSpecial.path,
-    hidden: !isWechat,
+    hidden: !checkWeAppEnv(),
   },
   {
     id: 'LowerLoad',

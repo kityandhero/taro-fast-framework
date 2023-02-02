@@ -28,17 +28,15 @@ import {
 } from 'easy-soft-utility';
 
 import {
-  ComponentBase,
-  Notification,
-} from 'taro-fast-common/es/customComponents';
-import { locateResult } from 'taro-fast-common/es/utils/constants';
-import {
+  AbstractComponent,
+  checkWeAppEnv,
   getMenuButtonBoundingClientRect,
   getSystemInfo,
-  isWechat,
+  locateResult,
+  Notification,
   pageScrollTo,
   transformSize,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 import {
   BackTop,
   Cascader,
@@ -82,7 +80,7 @@ const defaultDispatchLocationResultData = {
 
 function getRefreshingBoxEffect(effect) {
   if (checkInCollection(refreshingBoxEffectCollection, effect)) {
-    if (!isWechat) {
+    if (!checkWeAppEnv()) {
       return 'pull';
     }
 
@@ -92,7 +90,7 @@ function getRefreshingBoxEffect(effect) {
   return 'pull';
 }
 
-export default class Infrastructure extends ComponentBase {
+export default class Infrastructure extends AbstractComponent {
   /**
    * 页面是否使用渐显效果组件包裹
    */

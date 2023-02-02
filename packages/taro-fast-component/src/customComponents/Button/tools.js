@@ -4,10 +4,7 @@ import {
   isString,
 } from 'easy-soft-utility';
 
-import {
-  handleInlayColor,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { handleInlayColor, transformSize } from 'taro-fast-common';
 
 export function getStyle({
   backgroundColor = '',

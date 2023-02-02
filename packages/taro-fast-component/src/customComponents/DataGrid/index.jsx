@@ -1,3 +1,6 @@
+import { Fragment } from 'react';
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
@@ -7,13 +10,8 @@ import {
   isString,
   toNumber,
 } from 'easy-soft-utility';
-import { Fragment } from 'react';
-import { View } from '@tarojs/components';
 
-import {
-  copyToClipboard,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { copyToClipboard, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import ColorText from '../ColorText';

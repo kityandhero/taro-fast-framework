@@ -3,7 +3,7 @@ import { Text, View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import { formatCollection, formatTarget, toRound } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 import {
   Button,
   Card,

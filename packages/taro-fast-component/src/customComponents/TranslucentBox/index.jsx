@@ -1,3 +1,5 @@
+import { View } from '@tarojs/components';
+
 import {
   buildRGBColorFromHexColor,
   checkStringIsNullOrWhiteSpace,
@@ -5,7 +7,6 @@ import {
   isNumber,
   toNumber,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
 

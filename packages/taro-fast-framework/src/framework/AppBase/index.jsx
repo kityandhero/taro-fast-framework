@@ -14,12 +14,12 @@ import {
 import {
   canIUse,
   checkEnv,
+  checkWeAppEnv,
   getDefaultTaroGlobalData,
   getEnv,
   getUpdateManager,
-  isWechat,
   setTaroGlobalData,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 
 import { getModelCollection } from '../../models';
 import { configEnvironment } from '../../utils/configAssist';
@@ -148,7 +148,7 @@ class AppBase extends Component {
   showStartupInfo = () => {};
 
   checkUpdateVersion = () => {
-    if (isWechat) {
+    if (checkWeAppEnv()) {
       if (canIUse('getUpdateManager')) {
         const updateManager = getUpdateManager();
 

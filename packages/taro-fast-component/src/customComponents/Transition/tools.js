@@ -1,7 +1,8 @@
-import { isObject } from 'easy-soft-utility';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { isObject } from 'easy-soft-utility';
+
+import { AbstractComponent } from 'taro-fast-common';
 
 const getClassNames = (name) => ({
   enter: `tfc-${name}-enter tfc-${name}-enter-active enter-class enter-active-class`,
@@ -11,7 +12,7 @@ const getClassNames = (name) => ({
 });
 
 export const defaultProps = {
-  ...ComponentBase.defaultProps,
+  ...AbstractComponent.defaultProps,
   ...{
     classes: '',
     show: false,

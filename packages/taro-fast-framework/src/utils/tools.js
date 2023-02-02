@@ -1,6 +1,6 @@
 import { toString } from 'easy-soft-utility';
 
-import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
+import { verifySignInResult } from 'taro-fast-common';
 
 import { getSettingsAgency } from './defaultSettingsSpecial';
 

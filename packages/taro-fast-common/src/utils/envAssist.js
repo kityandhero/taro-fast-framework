@@ -1,3 +1,5 @@
+import { ENV_TYPE, getEnv as getEnvCore } from '@tarojs/taro';
+
 import {
   envCollection,
   getCache,
@@ -5,7 +7,6 @@ import {
   logInfo,
   setCache,
 } from 'easy-soft-utility';
-import { ENV_TYPE, getEnv as getEnvCore } from '@tarojs/taro';
 
 const cacheKeyCollection = {
   currentEnv: 'currentEnv',
@@ -98,4 +99,16 @@ function setEnvCache() {
   logInfo(`current env -> ${v}`);
 
   return v;
+}
+
+export function checkWeAppEnv() {
+  const v = getEnv();
+
+  return v === envCollection.WEAPP;
+}
+
+export function checkWebEnv() {
+  const v = getEnv();
+
+  return v === envCollection.WEB;
 }

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { isFunction, isNumber, toNumber } from 'easy-soft-utility';
 import { Icon, View } from '@tarojs/components';
+
+import { isFunction, isNumber, toNumber } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

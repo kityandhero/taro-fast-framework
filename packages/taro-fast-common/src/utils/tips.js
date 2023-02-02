@@ -5,7 +5,7 @@ import { isFunction, logException } from 'easy-soft-utility';
 /**
  * 提示与加载工具类
  */
-export default class Tips {
+class Tips {
   static isLoading = false;
 
   /**
@@ -196,3 +196,5 @@ export default class Tips {
     }, 500);
   }
 }
+
+export { Tips };

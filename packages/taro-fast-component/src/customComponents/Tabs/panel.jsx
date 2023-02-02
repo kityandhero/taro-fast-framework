@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { checkInCollection, isObject } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { checkInCollection, isObject } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 

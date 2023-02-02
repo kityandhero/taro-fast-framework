@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 
 import Badge from '../Badge';
 import BaseComponent from '../BaseComponent';

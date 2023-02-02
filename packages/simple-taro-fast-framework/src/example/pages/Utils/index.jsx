@@ -11,10 +11,7 @@ import {
   replaceWithKeep,
 } from 'easy-soft-utility';
 
-import {
-  copyToClipboard,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { copyToClipboard, transformSize } from 'taro-fast-common';
 import { Item, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

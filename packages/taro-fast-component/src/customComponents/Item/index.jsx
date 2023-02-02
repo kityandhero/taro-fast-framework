@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { getGuid, isFunction, logException } from 'easy-soft-utility';
 
-import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';

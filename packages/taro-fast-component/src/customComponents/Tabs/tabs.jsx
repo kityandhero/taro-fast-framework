@@ -9,7 +9,7 @@ import {
   logException,
 } from 'easy-soft-utility';
 
-import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common';
 
 import Badge from '../Badge';
 import BaseComponent from '../BaseComponent';

@@ -1,15 +1,13 @@
 import classNames from 'classnames';
+import { ScrollView, View } from '@tarojs/components';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   isString,
 } from 'easy-soft-utility';
-import { ScrollView, View } from '@tarojs/components';
 
-import {
-  handleInlayColor,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { handleInlayColor, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Ellipsis from '../Ellipsis';
@@ -171,9 +169,10 @@ class Card extends BaseComponent {
           ...(!border ? { border: '0' } : {}),
           ...(shadow && !checkStringIsNullOrWhiteSpace(shadowColor)
             ? {
-                boxShadow: `var(--tfc-color-shadow-size) var(--tfc-color-${handleInlayColor(
+                boxShadow: `var(--tfc-color-shadow-size) ${handleInlayColor(
                   shadowColor,
-                )}-shadow)`,
+                  '-shadow',
+                )}`,
               }
             : {}),
           ...(mode === 'card'

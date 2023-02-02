@@ -1,5 +1,6 @@
-import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import ActivityIndicator from '../ActivityIndicator';
 import CenterBox from '../CenterBox';

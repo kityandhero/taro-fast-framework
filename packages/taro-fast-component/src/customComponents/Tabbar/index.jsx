@@ -1,11 +1,12 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   findIndex,
   isArray,
   isFunction,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import BaseComponent from '../BaseComponent';
 

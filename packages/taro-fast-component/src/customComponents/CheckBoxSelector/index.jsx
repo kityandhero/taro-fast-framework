@@ -1,11 +1,12 @@
+import { View } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
   isFunction,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import CheckBox from '../CheckBox';

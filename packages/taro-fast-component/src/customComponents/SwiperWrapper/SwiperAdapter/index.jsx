@@ -1,5 +1,6 @@
-import { isFunction, isObject } from 'easy-soft-utility';
 import { Swiper, SwiperItem } from '@tarojs/components';
+
+import { isFunction, isObject } from 'easy-soft-utility';
 
 import BaseComponent from '../../BaseComponent';
 

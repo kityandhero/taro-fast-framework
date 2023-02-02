@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { Button as ButtonWxApp, View } from '@tarojs/components';
+
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 
 import ActivityIndicator from '../ActivityIndicator';
 import BaseComponent from '../BaseComponent';

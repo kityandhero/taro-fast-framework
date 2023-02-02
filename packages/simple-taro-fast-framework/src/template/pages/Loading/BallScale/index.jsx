@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { AbstractComponent, transformSize } from 'taro-fast-common';
 
 import './index.less';
 
@@ -14,7 +13,7 @@ const defaultProps = {
   color: '#fff',
 };
 
-class BallScale extends ComponentBase {
+class BallScale extends AbstractComponent {
   getStyle = () => {
     const { size, margin, color } = this.props;
 
@@ -37,7 +36,7 @@ class BallScale extends ComponentBase {
 }
 
 BallScale.defaultProps = {
-  ...ComponentBase.defaultProps,
+  ...AbstractComponent.defaultProps,
   ...defaultProps,
 };
 

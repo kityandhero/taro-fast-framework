@@ -3,9 +3,8 @@ import {
   isFunction,
   logConfig,
   logExecute,
+  setModelNameList,
 } from 'easy-soft-utility';
-
-import { setModelNameList } from 'taro-fast-common/es/utils/modelAssist';
 
 import { modulePackageName } from '../utils/definition';
 

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { isArray, isFunction, isString } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { isArray, isFunction, isString } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

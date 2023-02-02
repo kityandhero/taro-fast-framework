@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "author": "卢志涛 <kityandhero@126.com>",
-  "main": "/src/index.ts",
+  "main": "es/index.js",
   "directories": {
     "es": "es"
   },
@@ -71,7 +71,7 @@
     "@tarojs/taro": "^3.5.12",
     "@tarojs/taro-h5": "^3.5.12",
     "dayjs": "^1.11.7",
-    "easy-soft-utility": "^2.4.32",
+    "easy-soft-utility": "^2.4.34",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "taro-fast-common": "^1.18.7",

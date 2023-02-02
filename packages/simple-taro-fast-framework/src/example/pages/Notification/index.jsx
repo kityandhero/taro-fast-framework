@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { Notification } from 'taro-fast-common/es/customComponents';
+import { Notification } from 'taro-fast-common';
 import { Button, Space } from 'taro-fast-component/es/customComponents';
 
 import CodeBox from '../../../customComponents/CodeBox';

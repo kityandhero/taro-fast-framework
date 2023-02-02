@@ -1,11 +1,12 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   forEach as _forEach,
   isFunction,
   isNumber,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
 import BaseComponent from '../../BaseComponent';
 

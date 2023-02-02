@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { checkInCollection, getGuid, logException } from 'easy-soft-utility';
 
-import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Transition from '../Transition';

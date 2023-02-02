@@ -9,10 +9,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import {
-  handleTouchScroll,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { handleTouchScroll, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Card from '../Card';

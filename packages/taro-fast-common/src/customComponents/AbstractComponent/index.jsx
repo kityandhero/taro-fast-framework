@@ -6,6 +6,7 @@ import {
   checkStringIsNullOrWhiteSpace,
   envCollection,
   getGuid,
+  getModelNameList,
   isEqual,
   isFunction,
   isNumber,
@@ -24,8 +25,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { getModelNameList } from '../../utils/modelAssist';
-import { getEnv } from '../../utils/tools';
+import { getEnv } from '../../utils/envAssist';
 
 function filterModel(props) {
   const result = { ...props };
@@ -59,7 +59,7 @@ const defaultProps = {
   hidden: false,
 };
 
-class ComponentBase extends Component {
+class AbstractComponent extends Component {
   componentName = '';
 
   loadRemoteRequestAfterMount = false;
@@ -531,8 +531,8 @@ class ComponentBase extends Component {
   }
 }
 
-ComponentBase.defaultProps = {
+AbstractComponent.defaultProps = {
   ...defaultProps,
 };
 
-export default ComponentBase;
+export { AbstractComponent };

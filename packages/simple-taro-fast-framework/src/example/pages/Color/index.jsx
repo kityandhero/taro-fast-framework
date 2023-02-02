@@ -3,8 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import { buildLinearGradient } from 'easy-soft-utility';
 
-import { colorPure, colorShadow } from 'taro-fast-common/es/utils/constants';
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { colorPure, colorShadow, transformSize } from 'taro-fast-common';
 import {
   CenterBox,
   FlexBox,

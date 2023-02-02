@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { checkInCollection, isArray, isUndefined } from 'easy-soft-utility';
 import React from 'react';
 import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { checkInCollection, isArray, isUndefined } from 'easy-soft-utility';
+
+import { transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 

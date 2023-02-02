@@ -1,5 +1,6 @@
-import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

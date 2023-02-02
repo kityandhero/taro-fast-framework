@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import { isArray, isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { isArray, isFunction } from 'easy-soft-utility';
+
+import { AbstractComponent } from 'taro-fast-common';
 import { Grid, Icon, Space } from 'taro-fast-component/es/customComponents';
 
 const { IconCheck } = Icon;
@@ -10,7 +11,7 @@ const { IconCheck } = Icon;
 const classPrefix = `tfc-selector`;
 
 const defaultProps = {
-  ...ComponentBase.defaultProps,
+  ...AbstractComponent.defaultProps,
   ...{
     multiple: false,
     value: [],
@@ -21,7 +22,7 @@ const defaultProps = {
   },
 };
 
-class Selector extends ComponentBase {
+class Selector extends AbstractComponent {
   constructor(props) {
     super(props);
 

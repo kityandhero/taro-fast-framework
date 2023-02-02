@@ -7,8 +7,6 @@ const rules = {
   ...sortRules,
 };
 
-console.log(rules);
-
 module.exports = {
   generalConfig: {
     extends: ['taro/react', 'prettier', 'plugin:promise/recommended'],

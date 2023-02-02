@@ -11,7 +11,7 @@ import {
   emptyLogo as emptyLogoImage,
   locationModeCollection,
   verifySignInResult,
-} from 'taro-fast-common/es/utils/constants';
+} from 'taro-fast-common';
 
 export function getSettingsAgency() {
   const appInit = getApplicationMergeConfig();

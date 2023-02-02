@@ -1,4 +1,4 @@
-import { locationModeCollection } from 'taro-fast-common/es/utils/constants';
+import { locationModeCollection } from 'taro-fast-common';
 import { AppBase } from 'taro-fast-framework/es/framework';
 
 import LogoImage from './assets/images/logo.png';

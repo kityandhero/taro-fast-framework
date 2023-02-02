@@ -9,7 +9,7 @@ import {
   redirectTo,
 } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 import {
   Card,
   CenterBox,

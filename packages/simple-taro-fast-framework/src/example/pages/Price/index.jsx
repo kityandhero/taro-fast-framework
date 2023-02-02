@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 import { Price, Space } from 'taro-fast-component/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

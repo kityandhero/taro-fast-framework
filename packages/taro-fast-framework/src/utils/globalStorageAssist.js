@@ -15,7 +15,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { locationModeCollection } from 'taro-fast-common/es/utils/constants';
+import { locationModeCollection } from 'taro-fast-common';
 
 export const storageKeyCollection = {
   currentUrl: 'currentUrl',

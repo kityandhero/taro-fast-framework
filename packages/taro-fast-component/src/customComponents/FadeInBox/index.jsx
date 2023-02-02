@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { isFunction, isNumber } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { isFunction, isNumber } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 

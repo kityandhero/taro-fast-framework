@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
-import { isBrowser } from 'taro-fast-common/es/utils/tools';
+import { checkWebEnv } from 'taro-fast-common';
 import {
   CenterBox,
   Icon,
@@ -130,7 +130,7 @@ const listData = [
     path: pathCollection.example.webPage.path,
     webPageTitle: 'H5版本',
     webPageUrl: 'http://mtest.1010101.cc',
-    hidden: isBrowser,
+    hidden: checkWebEnv(),
   },
   {
     id: 'CoreTools',

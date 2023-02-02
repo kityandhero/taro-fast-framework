@@ -1,12 +1,13 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isFunction,
   isNumber,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

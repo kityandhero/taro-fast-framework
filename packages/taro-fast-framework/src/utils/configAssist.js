@@ -10,7 +10,7 @@ import {
   setUrlGlobalPrefix,
 } from 'easy-soft-utility';
 
-import { setEasySoftUtilityHandler } from 'taro-fast-common/es/utils/tools';
+import { setEasySoftUtilityHandler } from 'taro-fast-common';
 
 import { getSettingsAgency } from './defaultSettingsSpecial';
 import { modulePackageName } from './definition';

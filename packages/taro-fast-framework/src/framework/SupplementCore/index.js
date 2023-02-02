@@ -31,14 +31,12 @@ import {
 } from 'easy-soft-utility';
 
 import {
-  locateResult,
-  locationModeCollection,
-} from 'taro-fast-common/es/utils/constants';
-import Tips from 'taro-fast-common/es/utils/tips';
-import {
   getGeographicalLocation,
   getSetting,
-} from 'taro-fast-common/es/utils/tools';
+  locateResult,
+  locationModeCollection,
+  Tips,
+} from 'taro-fast-common';
 
 import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import {

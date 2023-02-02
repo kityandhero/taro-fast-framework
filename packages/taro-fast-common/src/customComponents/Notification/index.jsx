@@ -1,10 +1,13 @@
 import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import Taro, { getCurrentInstance } from '@tarojs/taro';
 
-import { checkInCollection } from 'easy-soft-utility';
+import {
+  checkInCollection,
+  notificationTypeCollection,
+} from 'easy-soft-utility';
 
-import { getCurrentInstance, transformSize } from '../../utils/tools';
-import ComponentBase from '../ComponentBase';
+import { transformSize } from '../../utils/styleAssist';
+import { AbstractComponent } from '../AbstractComponent';
 
 const typeCollection = ['info', 'success', 'error', 'warning'];
 
@@ -36,6 +39,10 @@ const styleInit = {
   zIndex: '1010',
 };
 
+const styleOpen = {
+  background: '#CCCCCC',
+};
+
 const styleSuccess = {
   background: '#13ce66',
 };
@@ -62,7 +69,7 @@ const styleHidden = {
   transform: 'translate3d(0, -100%, 0)',
 };
 
-class Notification extends ComponentBase {
+class Notification extends AbstractComponent {
   currentInstance = getCurrentInstance();
 
   timer = null;
@@ -139,16 +146,28 @@ class Notification extends ComponentBase {
     let styleBackground = styleInfo;
 
     switch (typeStage) {
-      case 'success':
+      case notificationTypeCollection.open:
+        styleBackground = styleOpen;
+        break;
+
+      case notificationTypeCollection.loading:
+        styleBackground = styleOpen;
+        break;
+
+      case notificationTypeCollection.warn:
+        styleBackground = styleWarning;
+        break;
+
+      case notificationTypeCollection.warning:
+        styleBackground = styleWarning;
+        break;
+
+      case notificationTypeCollection.success:
         styleBackground = styleSuccess;
         break;
 
-      case 'error':
+      case notificationTypeCollection.error:
         styleBackground = styleError;
-        break;
-
-      case 'warning':
-        styleBackground = styleWarning;
         break;
 
       default:
@@ -172,8 +191,8 @@ class Notification extends ComponentBase {
 }
 
 Notification.defaultProps = {
-  ...ComponentBase.defaultProps,
+  ...AbstractComponent.defaultProps,
   ...defaultProps,
 };
 
-export default Notification;
+export { Notification };

@@ -49,13 +49,3 @@ export function usePropsValue(options) {
   });
   return [stateRef.current, setState];
 }
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function emptyExport() {
-  return {};
-}

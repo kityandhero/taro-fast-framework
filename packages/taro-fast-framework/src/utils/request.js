@@ -16,8 +16,7 @@ import {
   trySendNearestLocalhostNotify,
 } from 'easy-soft-utility';
 
-import Tips from 'taro-fast-common/es/utils/tips';
-import { corsTarget } from 'taro-fast-common/es/utils/tools';
+import { corsTarget, Tips } from 'taro-fast-common';
 
 import { getSettingsAgency } from './defaultSettingsSpecial';
 import { getLocationMode, getOpenId, getSession } from './globalStorageAssist';

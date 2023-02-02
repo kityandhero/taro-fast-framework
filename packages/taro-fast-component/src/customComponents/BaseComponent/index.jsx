@@ -1,8 +1,8 @@
-import { ComponentBase } from 'taro-fast-common/es/customComponents';
+import { AbstractComponent } from 'taro-fast-common';
 
 const defaultProps = {};
 
-class BaseComponent extends ComponentBase {
+class BaseComponent extends AbstractComponent {
   // eslint-disable-next-line no-unused-vars
   adjustShowRenderCountInConsole = (nextProps, nextState) => {
     {
@@ -14,7 +14,7 @@ class BaseComponent extends ComponentBase {
 }
 
 BaseComponent.defaultProps = {
-  ...ComponentBase.defaultProps,
+  ...AbstractComponent.defaultProps,
   ...defaultProps,
 };
 

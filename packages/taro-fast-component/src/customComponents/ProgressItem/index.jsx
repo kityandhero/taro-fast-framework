@@ -1,11 +1,12 @@
+import { View } from '@tarojs/components';
+
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   isString,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Col from '../Flex/Col';

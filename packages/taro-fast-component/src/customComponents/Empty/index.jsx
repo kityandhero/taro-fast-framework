@@ -1,15 +1,13 @@
 import classNames from 'classnames';
+import { View } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   isNull,
   mergeProps,
 } from 'easy-soft-utility';
-import { View } from '@tarojs/components';
 
-import {
-  transformSize,
-  withNativeProps,
-} from 'taro-fast-common/es/utils/tools';
+import { transformSize, withNativeProps } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';

@@ -1,10 +1,11 @@
-import { logExecute, logWarn, toString } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { logExecute, logWarn, toString } from 'easy-soft-utility';
 
 import {
   getMenuButtonBoundingClientRect,
   transformSize,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 
 import BackboardBox from '../BackboardBox';
 import BaseComponent from '../BaseComponent';

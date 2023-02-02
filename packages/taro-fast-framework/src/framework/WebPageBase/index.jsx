@@ -1,9 +1,10 @@
+import { WebView } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   envCollection,
   logWarn,
 } from 'easy-soft-utility';
-import { WebView } from '@tarojs/components';
 
 import Infrastructure from '../Infrastructure';
 

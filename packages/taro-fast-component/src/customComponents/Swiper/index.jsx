@@ -13,7 +13,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { getRect, transformSize } from 'taro-fast-common/es/utils/tools';
+import { getRect, transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import CenterBox from '../CenterBox';

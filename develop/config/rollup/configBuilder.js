@@ -188,12 +188,3 @@ export function buildConfig({
 
   return config;
 }
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function emptyExport() {
-  return {};
-}

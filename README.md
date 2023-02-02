@@ -73,13 +73,12 @@ taro-fast-cli init
 If framework have a new version update, can use a script to upgrade project, the script in package.json, it running through taro-fast-cli.
 
 ```bash
-npm run reinstall 
+npm run reinstall
 ```
 
 The script content is "npm run clean && taro-fast-cli env && pnpm install".
 
 If you need a agent to visit github, you can use this way.
-
 
 ```bash
 npm run reinstall:agent
@@ -91,43 +90,43 @@ The script content is "npm run clean && taro-fast-cli env --agent <http://127.0.
 
 [![Alt text](https://m1.im5i.com/2022/09/10/Uqe7ud.png?raw=true)](01.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/Uqezjw.png?raw=true)](02.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/Uqe5yG.png?raw=true)](03.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/Uqe2SF.png?raw=true)](04.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/UqeGmY.png?raw=true)](05.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/UqeSnK.png?raw=true)](06.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/UqeeGC.png?raw=true)](07.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/UqefwH.png?raw=true)](08.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/Uqeaia.png?raw=true)](09.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/UqelqT.png?raw=true)](10.png)
 
-******
+---
 
 [![Alt text](https://m1.im5i.com/2022/09/10/UqeyyA.png?raw=true)](11.png)
 

@@ -1,5 +1,6 @@
-import { mergeProps } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
+
+import { mergeProps } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 

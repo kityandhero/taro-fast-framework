@@ -9,7 +9,7 @@ import {
   logException,
 } from 'easy-soft-utility';
 
-import { getRect } from 'taro-fast-common/es/utils/tools';
+import { getRect } from 'taro-fast-common';
 
 import Avatar from '../Avatar';
 import BaseComponent from '../BaseComponent';

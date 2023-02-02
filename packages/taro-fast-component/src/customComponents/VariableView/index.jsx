@@ -14,7 +14,7 @@ import {
   getRect,
   getSystemInfo,
   transformSize,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 
 import ActivityIndicator from '../ActivityIndicator';
 import BaseComponent from '../BaseComponent';

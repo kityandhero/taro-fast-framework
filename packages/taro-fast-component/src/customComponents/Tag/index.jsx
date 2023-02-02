@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import { checkInCollection, isFunction } from 'easy-soft-utility';
 import { Icon, View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { checkInCollection, isFunction } from 'easy-soft-utility';
+
+import { transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import FlexBox from '../FlexBox';

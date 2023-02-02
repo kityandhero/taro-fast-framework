@@ -11,11 +11,11 @@ import {
 } from 'easy-soft-utility';
 
 import {
+  checkWeAppEnv,
+  checkWebEnv,
   copyToClipboard,
-  isBrowser,
-  isWechat,
   transformSize,
-} from 'taro-fast-common/es/utils/tools';
+} from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 
@@ -95,7 +95,7 @@ class Line extends BaseComponent {
       return;
     }
 
-    if (isWechat) {
+    if (checkWeAppEnv()) {
       copyToClipboard({
         text: href,
         successCallback: checkStringIsNullOrWhiteSpace(copyTips)
@@ -110,7 +110,7 @@ class Line extends BaseComponent {
       return;
     }
 
-    if (isBrowser) {
+    if (checkWebEnv()) {
       window.open(href);
 
       return;

@@ -2,11 +2,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import {
-  getSystemInfo,
-  pageScrollTo,
-  transformSize,
-} from 'taro-fast-common/es/utils/tools';
+import { getSystemInfo, pageScrollTo, transformSize } from 'taro-fast-common';
 import {
   BackTop,
   HorizontalCenterBox,

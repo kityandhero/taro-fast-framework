@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { showInfoMessage } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 import {
   Button,
   CenterBox,

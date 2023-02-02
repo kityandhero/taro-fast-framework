@@ -1,6 +1,7 @@
-import { isFunction } from 'easy-soft-utility';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+
+import { isFunction } from 'easy-soft-utility';
 
 import BaseComponent from '../BaseComponent';
 

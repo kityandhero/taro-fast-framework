@@ -9,11 +9,11 @@ import {
   logException,
   showErrorMessage,
   showRuntimeError,
+  showSimpleSuccessNotification,
   toString,
 } from 'easy-soft-utility';
 
-import Tips from 'taro-fast-common/es/utils/tips';
-import { notifySuccess } from 'taro-fast-common/es/utils/tools';
+import { Tips } from 'taro-fast-common';
 
 /**
  * 处理 actionCore 的异步请求结果
@@ -181,7 +181,7 @@ export async function actionCore({
                 }
 
                 if (!checkStringIsNullOrWhiteSpace(messageText)) {
-                  notifySuccess(messageText);
+                  showSimpleSuccessNotification(messageText);
                 }
 
                 if (isFunction(successCallback)) {

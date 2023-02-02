@@ -1,6 +1,6 @@
 import { requestMode } from 'easy-soft-utility';
 
-import { emptyLogo as emptyLogoSource } from './mediaDefault';
+import { emptyLogo } from './mediaDefault';
 
 export const pxToRemRoot = {
   weapp: 32,
@@ -50,8 +50,6 @@ export const defaultUserAvatar = '/user.png';
  * Default Empty Image
  */
 export const defaultEmptyImage = '/noImageSmall.png';
-
-export const emptyLogo = emptyLogoSource;
 
 /**
  * 应用默认配置

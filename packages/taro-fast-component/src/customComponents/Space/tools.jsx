@@ -1,5 +1,6 @@
-import { checkInCollection } from 'easy-soft-utility';
 import React from 'react';
+
+import { checkInCollection } from 'easy-soft-utility';
 
 export const SpaceContext = React.createContext({
   latestIndex: 0,

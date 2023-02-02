@@ -1,13 +1,11 @@
 import classNames from 'classnames';
-import { checkInCollection, isUndefined } from 'easy-soft-utility';
 import { startTransition } from 'react';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import {
-  createAnimation,
-  getCurrentInstance,
-} from 'taro-fast-common/es/utils/tools';
+import { checkInCollection, isUndefined } from 'easy-soft-utility';
+
+import { createAnimation, getCurrentInstance } from 'taro-fast-common';
 
 import ActivityIndicator from '../../ActivityIndicator';
 import BaseComponent from '../../BaseComponent';

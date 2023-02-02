@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { ScrollView, View } from '@tarojs/components';
+
 import {
   checkStringIsNullOrWhiteSpace,
   find,
@@ -6,9 +8,8 @@ import {
   isFunction,
   toMd5,
 } from 'easy-soft-utility';
-import { ScrollView, View } from '@tarojs/components';
 
-import { transformSize } from 'taro-fast-common/es/utils/tools';
+import { transformSize } from 'taro-fast-common';
 
 import BaseComponent from '../BaseComponent';
 import Radio from '../Radio';

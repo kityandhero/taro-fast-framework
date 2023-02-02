@@ -1,6 +1,10 @@
 import { ENV_TYPE, getApp, getEnv } from '@tarojs/taro';
 
-import { isObject, isUndefined } from 'easy-soft-utility';
+import {
+  getApplicationMergeConfig,
+  isObject,
+  isUndefined,
+} from 'easy-soft-utility';
 
 export function getDefaultTaroGlobalData() {
   return {
@@ -78,11 +82,25 @@ export function setTaroGlobalData(config) {
 }
 
 /**
- * 占位函数
- *
+ * corsTarget
+ * 跨域域名配置
  * @export
+ * @param {*} v
  * @returns
  */
-export function emptyExport() {
-  return {};
+export function corsTarget() {
+  const appInit = getApplicationMergeConfig();
+  let corsTargetDomain = '';
+
+  if (appInit.apiPrefix != null) {
+    if (appInit.apiPrefix.corsTargetDomain != null) {
+      const {
+        apiPrefix: { corsTargetDomain: corsTargetDomainRemote },
+      } = appInit;
+
+      corsTargetDomain = corsTargetDomainRemote;
+    }
+  }
+
+  return corsTargetDomain;
 }

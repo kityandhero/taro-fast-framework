@@ -9,7 +9,7 @@ import {
   pretreatmentRemoteSingleData,
 } from 'easy-soft-utility';
 
-import { locateResult } from 'taro-fast-common/es/utils/constants';
+import { locateResult } from 'taro-fast-common';
 
 import {
   checkTicketValidityData,
