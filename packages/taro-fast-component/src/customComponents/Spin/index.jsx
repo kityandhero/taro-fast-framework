@@ -2,15 +2,15 @@ import { View } from '@tarojs/components';
 
 import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
-import ActivityIndicator from '../ActivityIndicator';
-import CenterBox from '../CenterBox';
+import { ActivityIndicator } from '../ActivityIndicator';
+import { CenterBox } from '../CenterBox';
 
 import './index.less';
 
 const defaultSpinColor = '#13CE66';
 const defaultSpinSize = 32;
 
-export const Spin = (props) => {
+const Spin = (props) => {
   const {
     spin: spinValue,
     text: textValue,
@@ -100,3 +100,5 @@ Spin.defaultProps = {
   overlayBackgroundColor: '#f5f5f5',
   customLoading: null,
 };
+
+export { Spin };

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { isFunction, toDatetime } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -277,4 +277,4 @@ Countdown.defaultProps = {
   ...defaultProps,
 };
 
-export default Countdown;
+export { Countdown };

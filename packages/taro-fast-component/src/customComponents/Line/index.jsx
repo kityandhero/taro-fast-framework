@@ -12,7 +12,7 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -147,4 +147,4 @@ Line.defaultProps = {
   ...defaultProps,
 };
 
-export default Line;
+export { Line };

@@ -5,8 +5,8 @@ import { checkInCollection, getGuid, logException } from 'easy-soft-utility';
 
 import { getRect, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Transition from '../Transition';
+import { BaseComponent } from '../BaseComponent';
+import { Transition } from '../Transition';
 
 import './index.less';
 
@@ -40,8 +40,6 @@ const defaultProps = {
   panelBorderRadius: 0,
   closeOnClick: false,
 };
-
-export const dot = Symbol();
 
 class Popover extends BaseComponent {
   contentId = '';
@@ -368,4 +366,4 @@ Popover.defaultProps = {
   ...defaultProps,
 };
 
-export default Popover;
+export { Popover };

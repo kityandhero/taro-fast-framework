@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 const classPrefix = `tfc-grid`;
 
@@ -50,4 +50,4 @@ Item.defaultProps = {
   ...defaultProps,
 };
 
-export default Item;
+export { Item };

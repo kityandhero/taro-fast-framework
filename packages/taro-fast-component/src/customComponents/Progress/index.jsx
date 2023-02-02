@@ -11,8 +11,8 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
 
 import './index.less';
 
@@ -198,4 +198,4 @@ Progress.defaultProps = {
   ...defaultProps,
 };
 
-export default Progress;
+export { Progress };

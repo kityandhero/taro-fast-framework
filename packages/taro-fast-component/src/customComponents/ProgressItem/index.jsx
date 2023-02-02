@@ -8,12 +8,12 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
-import FlexBox from '../FlexBox';
-import ProgressBox from '../ProgressBox';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
+import { FlexBox } from '../FlexBox';
+import { ProgressBox } from '../ProgressBox';
+import { VerticalBox } from '../VerticalBox';
 
 const layoutCollection = ['horizontal', 'vertical'];
 
@@ -198,4 +198,4 @@ ProgressItem.defaultProps = {
   ...defaultProps,
 };
 
-export default ProgressItem;
+export { ProgressItem };

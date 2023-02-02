@@ -11,12 +11,12 @@ import {
 
 import { getRect } from 'taro-fast-common';
 
-import Avatar from '../Avatar';
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Icon from '../Icon';
-import ImageBox from '../ImageBox';
-import Overlay from '../Overlay';
+import { Avatar } from '../Avatar';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Icon } from '../Icon';
+import { ImageBox } from '../ImageBox';
+import { Overlay } from '../Overlay';
 
 import './index.less';
 
@@ -434,4 +434,4 @@ FloatAction.defaultProps = {
   ...defaultProps,
 };
 
-export default FloatAction;
+export { FloatAction };

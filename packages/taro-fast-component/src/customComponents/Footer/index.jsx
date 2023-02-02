@@ -4,10 +4,10 @@ import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import ImageBox from '../ImageBox';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { ImageBox } from '../ImageBox';
+import { VerticalBox } from '../VerticalBox';
 
 const defaultProps = {
   style: {},
@@ -111,4 +111,4 @@ Footer.defaultProps = {
   ...defaultProps,
 };
 
-export default Footer;
+export { Footer };

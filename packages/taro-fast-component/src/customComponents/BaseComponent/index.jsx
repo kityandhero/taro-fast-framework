@@ -18,4 +18,4 @@ BaseComponent.defaultProps = {
   ...defaultProps,
 };
 
-export default BaseComponent;
+export { BaseComponent };

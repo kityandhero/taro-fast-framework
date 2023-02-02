@@ -4,10 +4,10 @@ import { checkInCollection, getGuid, logException } from 'easy-soft-utility';
 
 import { getRect, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
 
-import ScrollBoxCore from './ScrollBoxCore';
+import { ScrollBoxCore } from './ScrollBoxCore';
 
 const directionCollection = ['horizontal', 'vertical'];
 
@@ -337,4 +337,4 @@ ScrollBox.defaultProps = {
   ...defaultProps,
 };
 
-export default ScrollBox;
+export { ScrollBox };

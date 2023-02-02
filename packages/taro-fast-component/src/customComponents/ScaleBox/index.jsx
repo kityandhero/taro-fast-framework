@@ -5,7 +5,7 @@ import { isFunction, isNumber } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -107,4 +107,4 @@ ScaleBox.defaultProps = {
   ...defaultProps,
 };
 
-export default ScaleBox;
+export { ScaleBox };

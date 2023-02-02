@@ -9,9 +9,9 @@ import {
 
 import { copyToClipboard, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import FlexBox from '../FlexBox';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { FlexBox } from '../FlexBox';
+import { VerticalBox } from '../VerticalBox';
 
 const defaultProps = {
   style: {},
@@ -203,4 +203,4 @@ ColorText.defaultProps = {
   ...defaultProps,
 };
 
-export default ColorText;
+export { ColorText };

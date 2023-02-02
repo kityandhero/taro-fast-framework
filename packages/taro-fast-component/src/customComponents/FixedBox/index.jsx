@@ -2,8 +2,8 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Transition from '../Transition';
+import { BaseComponent } from '../BaseComponent';
+import { Transition } from '../Transition';
 
 const defaultProps = {
   show: true,
@@ -82,4 +82,4 @@ FixedBox.defaultProps = {
   ...defaultProps,
 };
 
-export default FixedBox;
+export { FixedBox };

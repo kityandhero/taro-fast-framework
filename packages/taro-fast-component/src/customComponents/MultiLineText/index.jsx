@@ -2,8 +2,8 @@ import { View } from '@tarojs/components';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
 
 const defaultProps = {
   style: {},
@@ -93,4 +93,4 @@ MultiLineText.defaultProps = {
   ...defaultProps,
 };
 
-export default MultiLineText;
+export { MultiLineText };

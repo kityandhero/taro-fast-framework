@@ -1,5 +1,5 @@
-import Button from './button';
+import { Button } from './button';
 
 import './button.less';
 
-export default Button;
+export { Button };

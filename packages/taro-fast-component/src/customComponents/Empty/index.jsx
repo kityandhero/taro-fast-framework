@@ -9,9 +9,9 @@ import {
 
 import { transformSize, withNativeProps } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Icon from '../Icon';
-import ImageBox from '../ImageBox';
+import { BaseComponent } from '../BaseComponent';
+import { Icon } from '../Icon';
+import { ImageBox } from '../ImageBox';
 
 import './index.less';
 
@@ -30,7 +30,7 @@ const defaultProps = {
   onDescriptionClick: null,
 };
 
-export const Empty = (p) => {
+const Empty = (p) => {
   const props = mergeProps(defaultProps, p);
 
   const {
@@ -101,3 +101,5 @@ Empty.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
+
+export { Empty };

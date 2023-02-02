@@ -2,10 +2,10 @@ import { View } from '@tarojs/components';
 
 import { checkInCollection, isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
 
 const positionCollection = ['left', 'right'];
 
@@ -18,7 +18,7 @@ const defaultProps = {
   onClick: null,
 };
 
-class ExtraBox extends BaseComponent {
+class TitleBox extends BaseComponent {
   getExtraPosition = () => {
     const { extraPosition } = this.props;
 
@@ -87,9 +87,9 @@ class ExtraBox extends BaseComponent {
   }
 }
 
-ExtraBox.defaultProps = {
+TitleBox.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default ExtraBox;
+export { TitleBox };

@@ -1,6 +1,6 @@
-import BaseComponent from '../BaseComponent';
-import Item from '../Item';
-import Switch from '../Switch';
+import { BaseComponent } from '../BaseComponent';
+import { Item } from '../Item';
+import { Switch } from '../Switch';
 
 const defaultProps = {
   key: null,
@@ -84,4 +84,4 @@ SwitchItem.defaultProps = {
   ...defaultProps,
 };
 
-export default SwitchItem;
+export { SwitchItem };

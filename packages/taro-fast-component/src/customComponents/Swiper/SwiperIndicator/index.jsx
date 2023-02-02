@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../../BaseComponent';
+import { BaseComponent } from '../../BaseComponent';
 import { classPrefix } from '../tools';
 
 const defaultProps = {
@@ -61,4 +61,4 @@ SwiperIndicator.defaultProps = {
   ...defaultProps,
 };
 
-export default SwiperIndicator;
+export { SwiperIndicator };

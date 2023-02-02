@@ -8,7 +8,7 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -103,4 +103,4 @@ Loading.defaultProps = {
   ...defaultProps,
 };
 
-export default Loading;
+export { Loading };

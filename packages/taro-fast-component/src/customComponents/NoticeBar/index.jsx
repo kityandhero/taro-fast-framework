@@ -3,10 +3,10 @@ import { Icon, View } from '@tarojs/components';
 
 import { isFunction, isNumber, toNumber } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import FlexBox from '../FlexBox';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { FlexBox } from '../FlexBox';
+import { VerticalBox } from '../VerticalBox';
 
 import './index.less';
 
@@ -180,4 +180,4 @@ NoticeBar.defaultProps = {
   ...defaultProps,
 };
 
-export default NoticeBar;
+export { NoticeBar };

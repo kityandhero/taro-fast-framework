@@ -13,13 +13,13 @@ import {
 
 import { copyToClipboard, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import ColorText from '../ColorText';
-import { buildDivider } from '../Divider';
-import Ellipsis from '../Ellipsis';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
-import FlexBox from '../FlexBox';
+import { BaseComponent } from '../BaseComponent';
+import { ColorText } from '../ColorText';
+import { Ellipsis } from '../Ellipsis';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
+import { FlexBox } from '../FlexBox';
+import { buildDivider } from '../FunctionComponent';
 
 const layoutCollection = ['row', 'column'];
 
@@ -399,4 +399,4 @@ DataGrid.defaultProps = {
   ...defaultProps,
 };
 
-export default DataGrid;
+export { DataGrid };

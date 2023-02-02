@@ -12,11 +12,11 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Button from '../Button';
-import Ellipsis from '../Ellipsis';
-import Item from '../Item';
-import Popup from '../Popup';
+import { BaseComponent } from '../BaseComponent';
+import { Button } from '../Button';
+import { Ellipsis } from '../Ellipsis';
+import { Item } from '../Item';
+import { Popup } from '../Popup';
 
 const defaultProps = {
   key: null,
@@ -301,4 +301,4 @@ TextAreaItem.defaultProps = {
   ...defaultProps,
 };
 
-export default TextAreaItem;
+export { TextAreaItem };

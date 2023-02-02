@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ScrollView, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import { Taro } from '@tarojs/taro';
 
 import {
   checkStringIsNullOrWhiteSpace,
@@ -16,14 +16,14 @@ import {
   transformSize,
 } from 'taro-fast-common';
 
-import ActivityIndicator from '../ActivityIndicator';
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Divider from '../Divider';
-import Line from '../Line';
-import Transition from '../Transition';
+import { ActivityIndicator } from '../ActivityIndicator';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Divider } from '../Divider';
+import { Line } from '../Line';
+import { Transition } from '../Transition';
 
-import PullIndicator from './PullIndicator';
+import { PullIndicator } from './PullIndicator';
 
 import './index.less';
 
@@ -748,4 +748,4 @@ VariableView.defaultProps = {
   ...defaultProps,
 };
 
-export default VariableView;
+export { VariableView };

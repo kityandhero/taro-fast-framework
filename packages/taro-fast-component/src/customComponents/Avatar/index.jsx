@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Image, Text, View } from '@tarojs/components';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -62,4 +62,4 @@ Avatar.defaultProps = {
   ...defaultProps,
 };
 
-export default Avatar;
+export { Avatar };

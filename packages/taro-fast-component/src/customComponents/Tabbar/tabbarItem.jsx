@@ -3,10 +3,10 @@ import { View } from '@tarojs/components';
 
 import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 
-import Badge from '../Badge';
-import BaseComponent from '../BaseComponent';
-import Icon from '../Icon/icon';
-import ImageBox from '../ImageBox';
+import { Badge } from '../Badge';
+import { BaseComponent } from '../BaseComponent';
+import { Icon } from '../Icon/icon';
+import { ImageBox } from '../ImageBox';
 
 import './index.less';
 
@@ -146,4 +146,4 @@ TabbarItem.defaultProps = {
   ...defaultProps,
 };
 
-export default TabbarItem;
+export { TabbarItem };

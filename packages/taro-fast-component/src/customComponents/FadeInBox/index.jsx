@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { isFunction, isNumber } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -62,4 +62,4 @@ FadeInBox.defaultProps = {
   ...defaultProps,
 };
 
-export default FadeInBox;
+export { FadeInBox };

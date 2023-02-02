@@ -4,8 +4,8 @@ import { checkInCollection, isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
 
 const positionCollection = ['left', 'right'];
 
@@ -90,4 +90,4 @@ ExtraBox.defaultProps = {
   ...defaultProps,
 };
 
-export default ExtraBox;
+export { ExtraBox };

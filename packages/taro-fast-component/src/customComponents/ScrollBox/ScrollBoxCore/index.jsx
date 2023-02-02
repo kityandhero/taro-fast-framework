@@ -11,7 +11,7 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../../BaseComponent';
+import { BaseComponent } from '../../BaseComponent';
 
 function buildId({ prefix, index }) {
   return `${prefix}_item_${index}`;
@@ -37,7 +37,7 @@ const defaultProps = {
   onScroll: null,
 };
 
-class ScrollBox extends BaseComponent {
+class ScrollBoxCore extends BaseComponent {
   needInitScroll = false;
 
   initScrollComplete = false;
@@ -314,9 +314,9 @@ class ScrollBox extends BaseComponent {
   }
 }
 
-ScrollBox.defaultProps = {
+ScrollBoxCore.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default ScrollBox;
+export { ScrollBoxCore };

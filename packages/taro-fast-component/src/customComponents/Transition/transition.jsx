@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import { defaultProps, useTransition } from './tools';
 
@@ -13,8 +13,7 @@ function buildRootStyle(data) {
     ...(data.style || {}),
   };
 }
-
-export function Transition(props) {
+function Transition(props) {
   const {
     onBeforeEnter,
     onBeforeLeave,
@@ -81,4 +80,4 @@ Transition.defaultProps = {
   ...defaultProps,
 };
 
-export default Transition;
+export { Transition };

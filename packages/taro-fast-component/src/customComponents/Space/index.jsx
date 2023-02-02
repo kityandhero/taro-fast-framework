@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import React from 'react';
+import { React } from 'react';
 import { View } from '@tarojs/components';
 
 import { checkInCollection, isArray, isUndefined } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
-import SpaceItem from './spaceItem';
+import { SpaceItem } from './spaceItem';
 import { getDirection, SpaceContext } from './tools';
 
 import './index.less';
@@ -32,7 +32,7 @@ const getAlign = (align) => {
   return checkInCollection(alignCollection, align) ? align : 'center';
 };
 
-export const Space = (props) => {
+const Space = (props) => {
   const {
     size,
     align: alignSource,
@@ -133,3 +133,5 @@ Space.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
+
+export { Space };

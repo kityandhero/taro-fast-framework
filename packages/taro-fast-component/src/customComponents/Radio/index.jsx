@@ -11,12 +11,12 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Card from '../Card';
-import FlexBox from '../FlexBox';
-import Grid from '../Grid';
-import Icon from '../Icon';
-import Item from '../Item';
+import { BaseComponent } from '../BaseComponent';
+import { Card } from '../Card';
+import { FlexBox } from '../FlexBox';
+import { Grid } from '../Grid';
+import { Icon } from '../Icon';
+import { Item } from '../Item';
 import { Space } from '../Space';
 
 const { IconCheck } = Icon;
@@ -419,4 +419,4 @@ Radio.defaultProps = {
   ...defaultProps,
 };
 
-export default Radio;
+export { Radio };

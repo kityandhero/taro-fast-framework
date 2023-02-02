@@ -8,7 +8,7 @@ import {
   isFunction,
 } from 'easy-soft-utility';
 
-import BaseComponent from '../../BaseComponent';
+import { BaseComponent } from '../../BaseComponent';
 
 import './index.less';
 
@@ -102,4 +102,4 @@ Row.defaultProps = {
   ...defaultProps,
 };
 
-export default Row;
+export { Row };

@@ -1,17 +1,17 @@
 import classNames from 'classnames';
 import { startTransition } from 'react';
 import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import { Taro } from '@tarojs/taro';
 
 import { checkInCollection, isUndefined } from 'easy-soft-utility';
 
 import { createAnimation, getCurrentInstance } from 'taro-fast-common';
 
-import ActivityIndicator from '../../ActivityIndicator';
-import BaseComponent from '../../BaseComponent';
-import CenterBox from '../../CenterBox';
-import Icon from '../../Icon';
-import Transition from '../../Transition';
+import { ActivityIndicator } from '../../ActivityIndicator';
+import { BaseComponent } from '../../BaseComponent';
+import { CenterBox } from '../../CenterBox';
+import { Icon } from '../../Icon';
+import { Transition } from '../../Transition';
 
 import './index.less';
 
@@ -334,4 +334,4 @@ PullIndicator.defaultProps = {
   ...defaultProps,
 };
 
-export default PullIndicator;
+export { PullIndicator };

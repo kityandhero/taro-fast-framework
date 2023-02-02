@@ -8,7 +8,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 const defaultProps = {
   style: {},
@@ -68,4 +68,4 @@ TranslucentBox.defaultProps = {
   ...defaultProps,
 };
 
-export default TranslucentBox;
+export { TranslucentBox };

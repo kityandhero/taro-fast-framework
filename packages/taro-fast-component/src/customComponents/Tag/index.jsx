@@ -5,9 +5,9 @@ import { checkInCollection, isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import FlexBox from '../FlexBox';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { FlexBox } from '../FlexBox';
+import { VerticalBox } from '../VerticalBox';
 
 import './index.less';
 
@@ -145,4 +145,4 @@ Tag.defaultProps = {
   ...defaultProps,
 };
 
-export default Tag;
+export { Tag };

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { checkInCollection, isObject } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 const classPrefix = `tfc-tabs`;
 
@@ -57,4 +57,4 @@ TabPanel.defaultProps = {
   ...defaultProps,
 };
 
-export default TabPanel;
+export { TabPanel };

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import { checkInCollection } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 const classPrefix = `tfc-steps`;
 
@@ -80,4 +80,4 @@ Step.defaultProps = {
   ...defaultProps,
 };
 
-export default Step;
+export { Step };

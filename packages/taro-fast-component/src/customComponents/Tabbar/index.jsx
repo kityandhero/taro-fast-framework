@@ -8,9 +8,9 @@ import {
   isFunction,
 } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
-import TabbarItem from './tabbarItem';
+import { TabbarItem } from './tabbarItem';
 
 import './index.less';
 
@@ -203,4 +203,4 @@ Tabbar.defaultProps = {
   ...defaultProps,
 };
 
-export default Tabbar;
+export { Tabbar };

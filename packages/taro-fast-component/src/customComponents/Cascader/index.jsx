@@ -11,8 +11,8 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Radio from '../Radio';
+import { BaseComponent } from '../BaseComponent';
+import { Radio } from '../Radio';
 
 import './index.less';
 
@@ -417,4 +417,4 @@ Cascader.defaultProps = {
   ...defaultProps,
 };
 
-export default Cascader;
+export { Cascader };

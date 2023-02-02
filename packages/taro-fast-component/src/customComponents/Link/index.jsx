@@ -17,7 +17,7 @@ import {
   transformSize,
 } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -32,7 +32,7 @@ const defaultProps = {
   color: '',
 };
 
-class Line extends BaseComponent {
+class Link extends BaseComponent {
   getColor = () => {
     const { color } = this.props;
 
@@ -141,9 +141,9 @@ class Line extends BaseComponent {
   }
 }
 
-Line.defaultProps = {
+Link.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default Line;
+export { Link };

@@ -9,9 +9,9 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import DataGrid from '../DataGrid';
-import Divider from '../Divider';
+import { BaseComponent } from '../BaseComponent';
+import { DataGrid } from '../DataGrid';
+import { Divider } from '../Divider';
 
 import './index.less';
 
@@ -198,4 +198,4 @@ HelpBox.defaultProps = {
   ...defaultProps,
 };
 
-export default HelpBox;
+export { HelpBox };

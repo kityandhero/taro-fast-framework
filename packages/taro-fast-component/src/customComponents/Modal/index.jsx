@@ -3,11 +3,11 @@ import { View } from '@tarojs/components';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import Card from '../Card';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
-import Overlay from '../Overlay';
+import { BaseComponent } from '../BaseComponent';
+import { Card } from '../Card';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
+import { Overlay } from '../Overlay';
 
 import './index.less';
 
@@ -215,4 +215,4 @@ Modal.defaultProps = {
   ...defaultProps,
 };
 
-export default Modal;
+export { Modal };

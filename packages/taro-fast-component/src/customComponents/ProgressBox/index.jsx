@@ -2,10 +2,10 @@ import { isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import FlexBox from '../FlexBox';
-import Progress from '../Progress';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { FlexBox } from '../FlexBox';
+import { Progress } from '../Progress';
+import { VerticalBox } from '../VerticalBox';
 
 const defaultProps = {
   hidden: false,
@@ -90,4 +90,4 @@ ProgressBox.defaultProps = {
   ...defaultProps,
 };
 
-export default ProgressBox;
+export { ProgressBox };

@@ -2,7 +2,7 @@ import { Swiper, SwiperItem } from '@tarojs/components';
 
 import { isFunction, isObject } from 'easy-soft-utility';
 
-import BaseComponent from '../../BaseComponent';
+import { BaseComponent } from '../../BaseComponent';
 
 const defaultProps = {
   scaleMode: false,
@@ -82,4 +82,4 @@ SwiperAdapter.defaultProps = {
   ...defaultProps,
 };
 
-export default SwiperAdapter;
+export { SwiperAdapter };

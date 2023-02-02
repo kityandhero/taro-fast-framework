@@ -3,8 +3,8 @@ import { Text, View } from '@tarojs/components';
 
 import { isFunction, isString } from 'easy-soft-utility';
 
-import BaseComponent from '../../../BaseComponent';
-import CenterBox from '../../../CenterBox';
+import { BaseComponent } from '../../../BaseComponent';
+import { CenterBox } from '../../../CenterBox';
 
 const defaultProps = {
   onClick: null,
@@ -49,4 +49,4 @@ ActionSheetItem.defaultProps = {
   ...defaultProps,
 };
 
-export default ActionSheetItem;
+export { ActionSheetItem };

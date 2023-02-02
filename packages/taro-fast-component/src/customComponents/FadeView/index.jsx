@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { mergeProps } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -10,7 +10,7 @@ const defaultProps = {
   show: true,
 };
 
-export const FadeView = (p) => {
+const FadeView = (p) => {
   const props = mergeProps(defaultProps, p);
 
   const { show: showValue } = props;
@@ -45,3 +45,5 @@ FadeView.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
+
+export { FadeView };

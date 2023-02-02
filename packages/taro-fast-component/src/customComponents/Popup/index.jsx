@@ -11,11 +11,11 @@ import {
 
 import { handleTouchScroll, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Card from '../Card';
-import CenterBox from '../CenterBox';
-import Icon from '../Icon';
-import Overlay from '../Overlay';
+import { BaseComponent } from '../BaseComponent';
+import { Card } from '../Card';
+import { CenterBox } from '../CenterBox';
+import { Icon } from '../Icon';
+import { Overlay } from '../Overlay';
 
 import './index.less';
 
@@ -481,4 +481,4 @@ Popup.defaultProps = {
   ...defaultProps,
 };
 
-export default Popup;
+export { Popup };

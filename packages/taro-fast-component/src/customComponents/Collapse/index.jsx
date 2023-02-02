@@ -3,9 +3,9 @@ import { View } from '@tarojs/components';
 
 import { isArray } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import Icon from '../Icon';
-import Item from '../Item';
+import { BaseComponent } from '../BaseComponent';
+import { Icon } from '../Icon';
+import { Item } from '../Item';
 
 import './index.less';
 
@@ -148,4 +148,4 @@ Collapse.defaultProps = {
   ...defaultProps,
 };
 
-export default Collapse;
+export { Collapse };

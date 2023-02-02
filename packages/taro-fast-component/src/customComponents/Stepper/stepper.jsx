@@ -12,9 +12,9 @@ import {
 import { transformSize, withNativeProps } from 'taro-fast-common';
 import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Icon from '../Icon';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Icon } from '../Icon';
 
 const { IconAdd, IconSubtract } = Icon;
 

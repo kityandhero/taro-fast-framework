@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 const defaultProps = {
   line: 1,
@@ -121,4 +121,4 @@ Ellipsis.defaultProps = {
   ...defaultProps,
 };
 
-export default Ellipsis;
+export { Ellipsis };

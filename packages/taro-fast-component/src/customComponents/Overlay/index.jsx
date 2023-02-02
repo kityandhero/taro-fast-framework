@@ -9,8 +9,8 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
 
 const modeCollection = ['fullScreen', 'fullParent'];
 const animalCollection = [
@@ -211,4 +211,4 @@ Overlay.defaultProps = {
   ...defaultProps,
 };
 
-export default Overlay;
+export { Overlay };

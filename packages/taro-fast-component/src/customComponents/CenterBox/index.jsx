@@ -1,5 +1,5 @@
-import BaseComponent from '../BaseComponent';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { VerticalBox } from '../VerticalBox';
 
 const defaultProps = {
   style: {},
@@ -29,4 +29,4 @@ CenterBox.defaultProps = {
   ...defaultProps,
 };
 
-export default CenterBox;
+export { CenterBox };

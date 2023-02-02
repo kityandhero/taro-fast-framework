@@ -12,14 +12,14 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import ColorText from '../ColorText';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
-import FlexBox from '../FlexBox';
-import Icon from '../Icon';
-import Item from '../Item';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { ColorText } from '../ColorText';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
+import { FlexBox } from '../FlexBox';
+import { Icon } from '../Icon';
+import { Item } from '../Item';
+import { VerticalBox } from '../VerticalBox';
 
 const { IconCloseCircle } = Icon;
 
@@ -613,4 +613,4 @@ InputItem.defaultProps = {
   ...defaultProps,
 };
 
-export default InputItem;
+export { InputItem };

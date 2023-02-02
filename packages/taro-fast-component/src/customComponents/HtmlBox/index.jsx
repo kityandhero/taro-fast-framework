@@ -1,9 +1,9 @@
 import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import { Taro } from '@tarojs/taro';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 if (process.env.TARO_ENV !== 'h5') {
   require('@tarojs/taro/html.css');
@@ -48,4 +48,4 @@ HtmlBox.defaultProps = {
   ...defaultProps,
 };
 
-export default HtmlBox;
+export { HtmlBox };

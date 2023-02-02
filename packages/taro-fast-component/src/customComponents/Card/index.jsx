@@ -9,10 +9,10 @@ import {
 
 import { handleInlayColor, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Ellipsis from '../Ellipsis';
-import FlexBox from '../FlexBox';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { Ellipsis } from '../Ellipsis';
+import { FlexBox } from '../FlexBox';
+import { VerticalBox } from '../VerticalBox';
 
 import './index.less';
 
@@ -259,4 +259,4 @@ Card.defaultProps = {
   ...defaultProps,
 };
 
-export default Card;
+export { Card };

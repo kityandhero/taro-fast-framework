@@ -8,7 +8,7 @@ import {
   isNumber,
 } from 'easy-soft-utility';
 
-import BaseComponent from '../../BaseComponent';
+import { BaseComponent } from '../../BaseComponent';
 
 import './index.less';
 
@@ -78,4 +78,4 @@ Col.defaultProps = {
   ...defaultProps,
 };
 
-export default Col;
+export { Col };

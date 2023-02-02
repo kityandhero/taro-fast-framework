@@ -9,11 +9,11 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import FlexBox from '../FlexBox';
-import Icon from '../Icon';
-import Overlay from '../Overlay';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { FlexBox } from '../FlexBox';
+import { Icon } from '../Icon';
+import { Overlay } from '../Overlay';
 
 import './index.less';
 
@@ -190,4 +190,4 @@ ThumbnailBox.defaultProps = {
   ...defaultProps,
 };
 
-export default ThumbnailBox;
+export { ThumbnailBox };

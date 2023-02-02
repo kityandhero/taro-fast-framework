@@ -4,11 +4,11 @@ import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Icon from '../Icon';
-import Item from '../Item';
-import Popup from '../Popup';
-import Radio from '../Radio';
+import { BaseComponent } from '../BaseComponent';
+import { Icon } from '../Icon';
+import { Item } from '../Item';
+import { Popup } from '../Popup';
+import { Radio } from '../Radio';
 
 const { IconCloseCircle } = Icon;
 
@@ -208,4 +208,4 @@ RadioSelector.defaultProps = {
   ...defaultProps,
 };
 
-export default RadioSelector;
+export { RadioSelector };

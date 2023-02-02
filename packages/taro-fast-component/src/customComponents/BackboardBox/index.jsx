@@ -4,8 +4,8 @@ import { isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import ScaleBox from '../ScaleBox';
+import { BaseComponent } from '../BaseComponent';
+import { ScaleBox } from '../ScaleBox';
 
 const defaultProps = {
   style: {},
@@ -122,4 +122,4 @@ BackboardBox.defaultProps = {
   ...defaultProps,
 };
 
-export default BackboardBox;
+export { BackboardBox };

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import BaseComponent from '../../BaseComponent';
+import { BaseComponent } from '../../BaseComponent';
 
 const defaultProps = {};
 
@@ -24,4 +24,4 @@ ActionSheetHeader.defaultProps = {
   ...defaultProps,
 };
 
-export default ActionSheetHeader;
+export { ActionSheetHeader };

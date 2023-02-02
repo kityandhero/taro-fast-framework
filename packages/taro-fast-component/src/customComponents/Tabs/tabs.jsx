@@ -11,13 +11,13 @@ import {
 
 import { getRect, transformSize } from 'taro-fast-common';
 
-import Badge from '../Badge';
-import BaseComponent from '../BaseComponent';
-import ColorText from '../ColorText';
-import FlexBox from '../FlexBox';
-import ScrollBox from '../ScrollBox';
+import { Badge } from '../Badge';
+import { BaseComponent } from '../BaseComponent';
+import { ColorText } from '../ColorText';
+import { FlexBox } from '../FlexBox';
+import { ScrollBox } from '../ScrollBox';
 
-import TabPanel from './panel';
+import { TabPanel } from './panel';
 
 import './index.less';
 
@@ -851,9 +851,11 @@ class Tabs extends BaseComponent {
   }
 }
 
+Tabs.TabPanel = TabPanel;
+
 Tabs.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default Tabs;
+export { Tabs };

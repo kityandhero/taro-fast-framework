@@ -4,7 +4,9 @@ import { isArray, isFunction, toNumber } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
+
+import { Item } from './item';
 
 const classPrefix = `tfc-grid`;
 
@@ -132,9 +134,11 @@ class Grid extends BaseComponent {
   }
 }
 
+Grid.Item = Item;
+
 Grid.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default Grid;
+export { Grid };

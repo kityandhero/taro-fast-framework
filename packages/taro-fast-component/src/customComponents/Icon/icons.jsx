@@ -1,7 +1,7 @@
 import { mergeProps } from 'easy-soft-utility';
 
 import { defaultProps } from './config';
-import Icon from './icon';
+import { Icon } from './icon';
 
 export function buildIcon(p, value) {
   const props = mergeProps(defaultProps, p, {

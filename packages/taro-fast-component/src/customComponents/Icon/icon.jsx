@@ -5,8 +5,8 @@ import { isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import ImageBox from '../ImageBox';
+import { BaseComponent } from '../BaseComponent';
+import { ImageBox } from '../ImageBox';
 
 import { defaultProps } from './config';
 
@@ -63,4 +63,4 @@ Icon.defaultProps = {
   ...defaultProps,
 };
 
-export default Icon;
+export { Icon };

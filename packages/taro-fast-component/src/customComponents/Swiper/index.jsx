@@ -15,13 +15,13 @@ import {
 
 import { getRect, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Icon from '../Icon';
-import ScaleBox from '../ScaleBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Icon } from '../Icon';
+import { ScaleBox } from '../ScaleBox';
 
-import SwiperIndicator from './SwiperIndicator';
-import SwiperItemContainer from './SwiperItemContainer';
+import { SwiperIndicator } from './SwiperIndicator';
+import { SwiperItemContainer } from './SwiperItemContainer';
 import { checkTransform, classPrefix } from './tools';
 
 import './index.less';
@@ -861,4 +861,4 @@ Swiper.defaultProps = {
   ...defaultProps,
 };
 
-export default Swiper;
+export { Swiper };

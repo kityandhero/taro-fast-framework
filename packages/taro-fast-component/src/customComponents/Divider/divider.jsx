@@ -10,7 +10,9 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
+
+import './index.less';
 
 const classPrefix = `tfc-divider`;
 
@@ -105,4 +107,4 @@ Divider.defaultProps = {
   ...defaultProps,
 };
 
-export default Divider;
+export { Divider };

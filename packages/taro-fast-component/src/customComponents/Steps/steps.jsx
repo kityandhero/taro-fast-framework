@@ -9,9 +9,9 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
-import Step from './step';
+import { Step } from './step';
 
 const classPrefix = `tfc-steps`;
 
@@ -183,9 +183,11 @@ class Steps extends BaseComponent {
   }
 }
 
+Steps.Step = Step;
+
 Steps.defaultProps = {
   ...BaseComponent.defaultProps,
   ...defaultProps,
 };
 
-export default Steps;
+export { Steps };

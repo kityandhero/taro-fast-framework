@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { Text, View } from '@tarojs/components';
 
-import BaseComponent from '../BaseComponent';
-import Loading from '../Loading';
+import { BaseComponent } from '../BaseComponent';
+import { Loading } from '../Loading';
 
 import './index.less';
 
@@ -57,4 +57,4 @@ ActivityIndicator.defaultProps = {
   ...defaultProps,
 };
 
-export default ActivityIndicator;
+export { ActivityIndicator };

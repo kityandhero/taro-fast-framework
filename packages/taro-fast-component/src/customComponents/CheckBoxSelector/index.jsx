@@ -8,11 +8,11 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CheckBox from '../CheckBox';
-import Icon from '../Icon';
-import Item from '../Item';
-import Popup from '../Popup';
+import { BaseComponent } from '../BaseComponent';
+import { CheckBox } from '../CheckBox';
+import { Icon } from '../Icon';
+import { Item } from '../Item';
+import { Popup } from '../Popup';
 
 const { IconCloseCircle } = Icon;
 
@@ -220,4 +220,4 @@ CheckBoxSelector.defaultProps = {
   ...defaultProps,
 };
 
-export default CheckBoxSelector;
+export { CheckBoxSelector };

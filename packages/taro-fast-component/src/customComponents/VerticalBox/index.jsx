@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 const defaultProps = {
   style: {},
@@ -113,4 +113,4 @@ VerticalBox.defaultProps = {
   ...defaultProps,
 };
 
-export default VerticalBox;
+export { VerticalBox };

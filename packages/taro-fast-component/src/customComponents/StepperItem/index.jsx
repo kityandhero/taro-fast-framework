@@ -1,6 +1,6 @@
-import BaseComponent from '../BaseComponent';
-import Item from '../Item';
-import Stepper from '../Stepper';
+import { BaseComponent } from '../BaseComponent';
+import { Item } from '../Item';
+import { Stepper } from '../Stepper';
 
 const defaultProps = {
   key: null,
@@ -104,4 +104,4 @@ StepperItem.defaultProps = {
   ...defaultProps,
 };
 
-export default StepperItem;
+export { StepperItem };

@@ -5,11 +5,11 @@ import { errorImage, isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import ActivityIndicator from '../ActivityIndicator';
-import BaseComponent from '../BaseComponent';
-import HorizontalCenterBox from '../HorizontalCenterBox';
-import ScaleBox from '../ScaleBox';
-import VerticalBox from '../VerticalBox';
+import { ActivityIndicator } from '../ActivityIndicator';
+import { BaseComponent } from '../BaseComponent';
+import { HorizontalCenterBox } from '../HorizontalCenterBox';
+import { ScaleBox } from '../ScaleBox';
+import { VerticalBox } from '../VerticalBox';
 
 import './index.less';
 
@@ -306,4 +306,4 @@ ImageBox.defaultProps = {
   ...defaultProps,
 };
 
-export default ImageBox;
+export { ImageBox };

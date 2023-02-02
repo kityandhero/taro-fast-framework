@@ -1,6 +1,6 @@
-import BaseComponent from '../BaseComponent';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
+import { BaseComponent } from '../BaseComponent';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
 
 const defaultProps = {
   style: {},
@@ -31,4 +31,4 @@ HorizontalCenterBox.defaultProps = {
   ...defaultProps,
 };
 
-export default HorizontalCenterBox;
+export { HorizontalCenterBox };

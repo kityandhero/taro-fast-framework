@@ -7,9 +7,9 @@ import {
   transformSize,
 } from 'taro-fast-common';
 
-import BackboardBox from '../BackboardBox';
-import BaseComponent from '../BaseComponent';
-import FlexBox from '../FlexBox';
+import { BackboardBox } from '../BackboardBox';
+import { BaseComponent } from '../BaseComponent';
+import { FlexBox } from '../FlexBox';
 
 const defaultProps = {
   backboardStyle: {},
@@ -234,4 +234,4 @@ HeadNavigation.defaultProps = {
   ...defaultProps,
 };
 
-export default HeadNavigation;
+export { HeadNavigation };

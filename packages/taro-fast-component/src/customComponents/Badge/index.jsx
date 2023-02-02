@@ -8,7 +8,7 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 
 import './index.less';
 
@@ -28,8 +28,6 @@ const defaultProps = {
   wrapStyle: {},
   wrapCenter: false,
 };
-
-export const dot = Symbol();
 
 class Badge extends BaseComponent {
   getPosition = () => {
@@ -146,4 +144,4 @@ Badge.defaultProps = {
   ...defaultProps,
 };
 
-export default Badge;
+export { Badge };

@@ -8,9 +8,9 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
+import { BaseComponent } from '../BaseComponent';
+import { Col } from '../Flex/Col';
+import { Row } from '../Flex/Row';
 
 const defaultProps = {
   flexAuto: 'left',
@@ -203,4 +203,4 @@ FlexBox.defaultProps = {
   ...defaultProps,
 };
 
-export default FlexBox;
+export { FlexBox };

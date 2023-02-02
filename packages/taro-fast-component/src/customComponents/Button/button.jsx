@@ -3,9 +3,9 @@ import { Button as ButtonWxApp, View } from '@tarojs/components';
 
 import { checkInCollection, isFunction } from 'easy-soft-utility';
 
-import ActivityIndicator from '../ActivityIndicator';
-import BaseComponent from '../BaseComponent';
-import ColorText from '../ColorText';
+import { ActivityIndicator } from '../ActivityIndicator';
+import { BaseComponent } from '../BaseComponent';
+import { ColorText } from '../ColorText';
 import { Spin } from '../Spin';
 
 import { getStyle } from './tools';
@@ -362,4 +362,4 @@ Button.defaultProps = {
   ...defaultProps,
 };
 
-export default Button;
+export { Button };

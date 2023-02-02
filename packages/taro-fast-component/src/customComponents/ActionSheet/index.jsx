@@ -3,14 +3,14 @@ import { View } from '@tarojs/components';
 
 import { isArray, isFunction, isString } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Overlay from '../Overlay';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Overlay } from '../Overlay';
 
-import ActionSheetBody from './body/index';
-import ActionSheetItem from './body/item';
-import ActionSheetFooter from './footer/index';
-import ActionSheetHeader from './header/index';
+import { ActionSheetBody } from './body/index';
+import { ActionSheetItem } from './body/item';
+import { ActionSheetFooter } from './footer/index';
+import { ActionSheetHeader } from './header/index';
 
 import './index.less';
 
@@ -189,4 +189,4 @@ ActionSheet.defaultProps = {
   ...defaultProps,
 };
 
-export default ActionSheet;
+export { ActionSheet };

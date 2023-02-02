@@ -4,11 +4,11 @@ import { checkInCollection, isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Icon from '../Icon';
-import InputItem from '../InputItem';
-import VerticalBox from '../VerticalBox';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Icon } from '../Icon';
+import { InputItem } from '../InputItem';
+import { VerticalBox } from '../VerticalBox';
 
 const { IconSearch } = Icon;
 
@@ -193,4 +193,4 @@ SearchBar.defaultProps = {
   ...defaultProps,
 };
 
-export default SearchBar;
+export { SearchBar };

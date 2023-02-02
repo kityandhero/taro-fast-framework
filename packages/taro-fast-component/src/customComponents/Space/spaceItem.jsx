@@ -1,11 +1,11 @@
-import React from 'react';
+import { React } from 'react';
 import { View } from '@tarojs/components';
 
-import VerticalBox from '../VerticalBox';
+import { VerticalBox } from '../VerticalBox';
 
 import { getDirection, SpaceContext } from './tools';
 
-export default function SpaceItem({
+export function SpaceItem({
   className = '',
   direction: directionSource = 'horizontal',
   index = 0,

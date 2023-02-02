@@ -3,8 +3,8 @@ import { Text, View } from '@tarojs/components';
 
 import { isFunction } from 'easy-soft-utility';
 
-import BaseComponent from '../BaseComponent';
-import Icon from '../Icon';
+import { BaseComponent } from '../BaseComponent';
+import { Icon } from '../Icon';
 
 import './index.less';
 
@@ -58,4 +58,4 @@ More.defaultProps = {
   ...defaultProps,
 };
 
-export default More;
+export { More };

@@ -4,10 +4,10 @@ import { isFunction, isNumber, toNumber } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import ScaleBox from '../ScaleBox';
+import { BaseComponent } from '../BaseComponent';
+import { ScaleBox } from '../ScaleBox';
 
-import SwiperAdapter from './SwiperAdapter';
+import { SwiperAdapter } from './SwiperAdapter';
 
 const defaultProps = {
   height: 300,
@@ -183,4 +183,4 @@ SwiperWrapper.defaultProps = {
   ...defaultProps,
 };
 
-export default SwiperWrapper;
+export { SwiperWrapper };

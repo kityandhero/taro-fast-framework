@@ -5,9 +5,9 @@ import { getGuid, isFunction, logException } from 'easy-soft-utility';
 
 import { getRect, transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import Icon from '../Icon';
-import Line from '../Line';
+import { BaseComponent } from '../BaseComponent';
+import { Icon } from '../Icon';
+import { Line } from '../Line';
 
 import './index.less';
 
@@ -266,4 +266,4 @@ Item.defaultProps = {
   ...defaultProps,
 };
 
-export default Item;
+export { Item };

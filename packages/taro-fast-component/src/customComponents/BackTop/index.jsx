@@ -5,10 +5,10 @@ import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
-import BaseComponent from '../BaseComponent';
-import CenterBox from '../CenterBox';
-import Icon from '../Icon';
-import Transition from '../Transition';
+import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
+import { Icon } from '../Icon';
+import { Transition } from '../Transition';
 
 import './index.less';
 
@@ -125,4 +125,4 @@ BackTop.defaultProps = {
   ...defaultProps,
 };
 
-export default BackTop;
+export { BackTop };
