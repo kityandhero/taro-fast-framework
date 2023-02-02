@@ -2,7 +2,7 @@ import { toString } from 'easy-soft-utility';
 
 import { verifySignInResult } from 'taro-fast-common/es/utils/constants';
 
-import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
+import { getSettingsAgency } from './defaultSettingsSpecial';
 
 /**
  * 检测远程返回码是否代表登录失败
@@ -11,7 +11,7 @@ import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
  */
 export function checkWhetherAuthorizeFail(code) {
   const authenticationFailCode =
-    defaultSettingsLayoutCustom.getAuthenticationFailCode();
+    getSettingsAgency().getAuthenticationFailCode();
 
   return authenticationFailCode === code;
 }
@@ -36,19 +36,9 @@ export function getSignInResultDescription(v) {
 export function getVerifySignInResult() {
   const o = verifySignInResult;
 
-  o.success = defaultSettingsLayoutCustom.getSignInSuccessFlag();
-  o.fail = defaultSettingsLayoutCustom.getSignInFailFlag();
-  o.unknown = defaultSettingsLayoutCustom.getSignInUnknownFlag();
+  o.success = getSettingsAgency().getSignInSuccessFlag();
+  o.fail = getSettingsAgency().getSignInFailFlag();
+  o.unknown = getSettingsAgency().getSignInUnknownFlag();
 
   return o;
-}
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function empty() {
-  return {};
 }

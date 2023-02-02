@@ -32,13 +32,21 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/no-invalid-this': 0,
     'jsx-quotes': ['error', 'prefer-double'],
+    'import/export': 'error',
     'import/first': 'error',
+    'import/named': 'error',
     'import/newline-after-import': 'error',
+    'import/no-absolute-path': 'error',
+    // 开启将会极大增加检测执行时间
+    'import/no-cycle': 0,
+    'import/no-deprecated': 'error',
     'import/no-duplicates': 'error',
+    'import/no-unresolved': 'error',
+    'import/no-useless-path-segments': 'error',
+    'import/no-unused-modules': 'error',
   },
   sortRules: {
     'import/order': 0,
-    'sort-imports': 0,
     'simple-import-sort/imports': [
       'error',
       {
@@ -57,15 +65,6 @@ module.exports = {
       },
     ],
     'simple-import-sort/exports': 'error',
-  },
-  settings: {
-    react: {
-      /**
-       * "detect" automatically picks the version you have installed.
-       * You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
-       * default to latest and warns if missing
-       */
-      version: 'detect',
-    },
+    'sort-imports': 0,
   },
 };

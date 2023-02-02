@@ -1,14 +1,14 @@
-import { executiveRequest } from '../utils/request';
+import { request } from 'easy-soft-utility';
 
 export async function getData(params) {
-  return executiveRequest({
+  return request({
     api: `/metaData/get`,
     params,
   });
 }
 
 export async function exchangeShareData(params) {
-  return executiveRequest({
+  return request({
     api: `/share/exchangeShare`,
     params,
   });

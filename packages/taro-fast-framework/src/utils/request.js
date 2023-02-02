@@ -2,6 +2,8 @@ import Taro from '@tarojs/taro';
 
 import {
   checkStringIsNullOrWhiteSpace,
+  getToken,
+  getTokenKeyName,
   isString,
   logDebug,
   logException,
@@ -17,16 +19,8 @@ import {
 import Tips from 'taro-fast-common/es/utils/tips';
 import { corsTarget } from 'taro-fast-common/es/utils/tools';
 
-import { defaultSettingsLayoutCustom } from './defaultSettingsSpecial';
-import {
-  getLocationMode,
-  getOpenId,
-  getSession,
-  getToken,
-  getTokenKeyName,
-} from './globalStorageAssist';
-
-const tokenAnonymous = defaultSettingsLayoutCustom.getTokenAnonymous();
+import { getSettingsAgency } from './defaultSettingsSpecial';
+import { getLocationMode, getOpenId, getSession } from './globalStorageAssist';
 
 export class Request {
   /**
@@ -53,8 +47,8 @@ export class Request {
 
     const { code } = response.data;
 
-    if (code === defaultSettingsLayoutCustom.getAuthenticationFailCode()) {
-      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+    if (code === getSettingsAgency().getAuthenticationFailCode()) {
+      const signInPath = getSettingsAgency().getSignInPath();
 
       if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
@@ -80,7 +74,7 @@ export class Request {
     method = requestMethod.post,
   }) {
     try {
-      const token = getToken() || tokenAnonymous;
+      const token = getToken() || getSettingsAgency().getTokenAnonymous();
       const openId = getOpenId();
       const sessionId = getSession();
       const locationMode = getLocationMode();
@@ -127,7 +121,7 @@ export class Request {
         }
       }
 
-      const showRequestInfo = defaultSettingsLayoutCustom.getShowRequestInfo();
+      const showRequestInfo = getSettingsAgency().getShowRequestInfo();
 
       if (showRequestInfo) {
         trySendNearestLocalhostNotify({ text: corsUrl });

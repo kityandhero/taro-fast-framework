@@ -1,318 +1,298 @@
+/* eslint-disable promise/no-nesting */
+/* eslint-disable promise/no-promise-in-callback */
 /* eslint-disable import/no-commonjs */
 
-let fs = require('fs');
+const fs = require('fs');
+const fsExtra = require('fs-extra');
 const { resolve } = require('path');
+
+const eslintFile = require('../config/eslint/template/content');
+const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
+const prettierFile = require('../config/prettier/template/content');
+const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
+const stylelintFile = require('../config/stylelint/template/content');
+const editorFile = require('../config/editor/template/content');
+const editorAttributesFile = require('../config/git/template/attributes.content');
+const editorIgnoreFile = require('../config/git/template/ignore.content');
+const lintStagedFile = require('../config/lintStaged/template/content');
+const mainPackageFile = require('../config/package/template/main.content');
+const childrenPackageFile = require('../config/package/template/children.content');
+
+const mainEslintFileContent = eslintFile.mainContent;
+const packageEslintFileContent = eslintFile.packageContent;
+
+const eslintIgnoreContent = eslintIgnoreFile.content;
+
+const mainPrettierContent = prettierFile.mainContent;
+const packagePrettierContent = prettierFile.packageContent;
+
+const prettierIgnoreContent = prettierIgnoreFile.content;
+
+const mainStylelintContent = stylelintFile.mainContent;
+const packageStylelintContent = stylelintFile.packageContent;
+
+const editorConfigContent = editorFile.content;
+
+const gitAttributesContent = editorAttributesFile.content;
+
+const gitIgnoreContent = editorIgnoreFile.content;
+const lintStagedRcContent = lintStagedFile.content;
+
+const promptPath = false;
 
 function prompt(err, message) {
   if (err) {
     return console.error(err);
   }
 
-  console.log(message);
-}
-
-let rootEslintContent = `/* eslint-disable import/no-commonjs */
-let { generalConfig } = require('./develop/config/eslint/config');
-
-module.exports = generalConfig;
-`;
-
-let packageEslintContent = `/* eslint-disable import/no-commonjs */
-let { generalConfig } = require('../../develop/config/eslint/config');
-
-module.exports = generalConfig;
-`;
-
-let rootPrettierContent = `/* eslint-disable import/no-commonjs */
-let { generalConfig } = require('./develop/config/prettier/config');
-
-module.exports = generalConfig;
-`;
-
-let packagePrettierContent = `/* eslint-disable import/no-commonjs */
-var { generalConfig } = require("../../develop/config/prettier/config");
-
-module.exports = generalConfig;
-`;
-
-let rootStylelintContent = `/* eslint-disable import/no-commonjs */
-let { generalConfig } = require('./develop/config/stylelint/config');
-
-module.exports = generalConfig;
-`;
-
-let packageStylelintContent = `/* eslint-disable import/no-commonjs */
-let { generalConfig } = require('../../develop/config/stylelint/config');
-
-module.exports = generalConfig;
-`;
-
-let editorConfigContent = `# http://editorconfig.org
-root = true
-
-[*]
-indent_style = space
-indent_size = 2
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[*.md]
-trim_trailing_whitespace = false
-
-[Makefile]
-indent_style = tab
-`;
-
-let eslintIgnoreContent = `**/public
-**/lib
-**/es
-**/.history
-**/.husky
-**/.vs
-**/.swc
-
-*.d.ts
-*.log
-*.zip
-*.txt
-*.7z
-rollup.config-*.cjs
-`;
-
-let prettierIgnoreContent = `# ignore dir
-**/node_modules/**
-**/templates/**
-**/lib/**
-**/dist/**
-**/es/**
-**/.umi/**
-**/.umi-production/**
-**/.idea/**
-**/.ga/**
-**/.history/**
-**/.husky/**
-**/.vs/**
-**/.swc/**
-
-# ignore file
-*.png
-*.jpg
-*.jpeg
-*.rar
-*.zip
-*.7z
-*.ico
-*.gif
-*.toml
-*.lock
-*.tar.gz
-*.log
-*.txt
-*.text
-*.ejs
-*.svg
-*.min.js
-
-# ignore special
-.prettierrc.js
-.eslintignore
-.stylelintignore
-.gitattributes
-.browserslistrc
-.dockerignore
-.gitignore
-.prettierignore
-.eslintcache
-.npmrc
-.editorconfig
-.czrc
-.ga
-rollup.config-*.cjs
-pnpm-lock.yaml
-CNAME
-LICENSE
-`;
-
-let gitAttributesContent = `*.js eol=lf
-*.jsx eol=lf
-*.json eol=lf
-*.css eol=lf
-*.less eol=lf
-*.scss eol=lf
-`;
-
-let gitIgnoreContent = `# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-**/node_modules
-
-# ignore dir
-**/dist
-**/es
-**/.umi
-**/.umi-production
-**/.idea
-**/.history
-**/.swc
-
-# ignore file
-*.log
-*.d.ts
-*.bak
-*.min.js
-
-# ignore special
-rollup.config-*.cjs
-yarn.lock
-package-lock.json
-.firebase
-.eslintcache
-`;
-
-let lintStagedRcContent = `{
-  "*.{md,json}": ["prettier --cache --write"],
-  "*.{js,jsx}": ["npx eslint --ext .js,.jsx,.ts,.tsx", "prettier --cache --write"],
-  "*.{css,less}": [
-    "stylelint",
-    "prettier --cache --write"
-  ],
-  "*.ts?(x)": [
-    "npx eslint --ext .js,.jsx,.ts,.tsx",
-    "prettier --cache --parser=typescript --write"
-  ]
-}
-`;
-
-fs.writeFile('.eslintrc.js', rootEslintContent, (error) => {
-  prompt(error, `${resolve('./')}/.eslintrc.js config file update success`);
-});
-
-fs.writeFile('.prettierrc.js', rootPrettierContent, (error) => {
-  prompt(error, `${resolve('./')}/.prettierrc.js config file update success`);
-});
-
-fs.writeFile('.stylelintrc.js', rootStylelintContent, (error) => {
-  prompt(error, `${resolve('./')}/.stylelintrc.js config file update success`);
-});
-
-fs.writeFile('.editorconfig', editorConfigContent, (error) => {
-  prompt(error, `${resolve('./')}/.editorconfig config file update success`);
-});
-
-fs.writeFile('.eslintignore', eslintIgnoreContent, (error) => {
-  prompt(error, `${resolve('./')}/.eslintignore config file update success`);
-});
-
-fs.writeFile('.prettierignore', prettierIgnoreContent, (error) => {
-  prompt(error, `${resolve('./')}/.prettierignore config file update success`);
-});
-
-fs.writeFile('.gitattributes', gitAttributesContent, (error) => {
-  prompt(error, `${resolve('./')}/.gitattributes config file update success`);
-});
-
-fs.writeFile('.gitignore', gitIgnoreContent, (error) => {
-  prompt(error, `${resolve('./')}/.gitignore config file update success`);
-});
-
-fs.writeFile('.lintstagedrc', lintStagedRcContent, (error) => {
-  prompt(error, `${resolve('./')}/.lintstagedrc config file update success`);
-});
-
-const packagesDir = './packages/';
-
-const packagesPath = resolve(packagesDir);
-
-fs.readdir(packagesDir, (err, files) => {
-  if (err) {
-    throw err;
+  if (promptPath) {
+    console.log(message);
   }
+}
 
-  files.forEach((file) => {
-    const itemPath = `${packagesPath}/${file}`;
-
-    if (file && fs.lstatSync(itemPath).isDirectory()) {
-      fs.writeFile(
-        `${itemPath}/.eslintrc.js`,
-        packageEslintContent,
-        (error) => {
-          prompt(error, `${itemPath}/.eslintrc.js config file update success`);
-        },
-      );
-
-      fs.writeFile(
-        `${itemPath}/.prettierrc.js`,
-        packagePrettierContent,
-        (error) => {
-          prompt(
-            error,
-            `${itemPath}/.prettierrc.js config file update success`,
-          );
-        },
-      );
-
-      fs.writeFile(
-        `${itemPath}/.stylelintrc.js`,
-        packageStylelintContent,
-        (error) => {
-          prompt(
-            error,
-            `${itemPath}/.stylelintrc.js config file update success`,
-          );
-        },
-      );
-
-      fs.writeFile(
-        `${itemPath}/.editorconfig`,
-        editorConfigContent,
-        (error) => {
-          prompt(error, `${itemPath}/.editorconfig config file update success`);
-        },
-      );
-
-      fs.writeFile(
-        `${itemPath}/.eslintignore`,
-        eslintIgnoreContent,
-        (error) => {
-          prompt(error, `${itemPath}/.eslintignore config file update success`);
-        },
-      );
-
-      fs.writeFile(
-        `${itemPath}/.prettierignore`,
-        prettierIgnoreContent,
-        (error) => {
-          prompt(
-            error,
-            `${itemPath}/.prettierignore config file update success`,
-          );
-        },
-      );
-
-      fs.writeFile(
-        `${itemPath}/.gitattributes`,
-        gitAttributesContent,
-        (error) => {
-          prompt(
-            error,
-            `${itemPath}/.gitattributes config file update success`,
-          );
-        },
-      );
-
-      fs.writeFile(`${itemPath}/.gitignore`, gitIgnoreContent, (error) => {
-        prompt(error, `${itemPath}/.gitignore config file update success`);
-      });
-
-      fs.writeFile(
-        `${itemPath}/.lintstagedrc`,
-        lintStagedRcContent,
-        (error) => {
-          prompt(error, `${itemPath}/.lintstagedrc config file update success`);
-        },
-      );
-    }
+function createMain() {
+  fs.writeFile('.eslintrc.js', mainEslintFileContent, (error) => {
+    prompt(error, `${resolve('./')}/.eslintrc.js config file update success`);
   });
-});
+
+  fs.writeFile('.prettierrc.js', mainPrettierContent, (error) => {
+    prompt(error, `${resolve('./')}/.prettierrc.js config file update success`);
+  });
+
+  fs.writeFile('.stylelintrc.js', mainStylelintContent, (error) => {
+    prompt(
+      error,
+      `${resolve('./')}/.stylelintrc.js config file update success`,
+    );
+  });
+
+  fs.writeFile('.editorconfig', editorConfigContent, (error) => {
+    prompt(error, `${resolve('./')}/.editorconfig config file update success`);
+  });
+
+  fs.writeFile('.eslintignore', eslintIgnoreContent, (error) => {
+    prompt(error, `${resolve('./')}/.eslintignore config file update success`);
+  });
+
+  fs.writeFile('.prettierignore', prettierIgnoreContent, (error) => {
+    prompt(
+      error,
+      `${resolve('./')}/.prettierignore config file update success`,
+    );
+  });
+
+  fs.writeFile('.gitattributes', gitAttributesContent, (error) => {
+    prompt(error, `${resolve('./')}/.gitattributes config file update success`);
+  });
+
+  fs.writeFile('.gitignore', gitIgnoreContent, (error) => {
+    prompt(error, `${resolve('./')}/.gitignore config file update success`);
+  });
+
+  fs.writeFile('.lintstagedrc', lintStagedRcContent, (error) => {
+    prompt(error, `${resolve('./')}/.lintstagedrc config file update success`);
+  });
+}
+
+function createPackage() {
+  const packagesDir = './packages/';
+
+  const packagesPath = resolve(packagesDir);
+
+  fs.readdir(packagesDir, (err, files) => {
+    if (err) {
+      throw err;
+    }
+
+    files.forEach((file) => {
+      const itemPath = `${packagesPath}/${file}`;
+
+      if (file && fs.lstatSync(itemPath).isDirectory()) {
+        fs.writeFile(
+          `${itemPath}/.eslintrc.js`,
+          packageEslintFileContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.eslintrc.js config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(
+          `${itemPath}/.prettierrc.js`,
+          packagePrettierContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.prettierrc.js config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(
+          `${itemPath}/.stylelintrc.js`,
+          packageStylelintContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.stylelintrc.js config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(
+          `${itemPath}/.editorconfig`,
+          editorConfigContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.editorconfig config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(
+          `${itemPath}/.eslintignore`,
+          eslintIgnoreContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.eslintignore config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(
+          `${itemPath}/.prettierignore`,
+          prettierIgnoreContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.prettierignore config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(
+          `${itemPath}/.gitattributes`,
+          gitAttributesContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.gitattributes config file update success`,
+            );
+          },
+        );
+
+        fs.writeFile(`${itemPath}/.gitignore`, gitIgnoreContent, (error) => {
+          prompt(error, `${itemPath}/.gitignore config file update success`);
+        });
+
+        fs.writeFile(
+          `${itemPath}/.lintstagedrc`,
+          lintStagedRcContent,
+          (error) => {
+            prompt(
+              error,
+              `${itemPath}/.lintstagedrc config file update success`,
+            );
+          },
+        );
+      }
+    });
+  });
+}
+
+function adjustMainPackageJson() {
+  const mainProjectPath = resolve(`./package.json`);
+
+  fsExtra
+    .readJson(mainProjectPath)
+    .then((packageJson) => {
+      packageJson.scripts = {
+        ...(packageJson.scripts || {}),
+        ...mainPackageFile.lintScript,
+        ...mainPackageFile.prettierScript,
+      };
+
+      fsExtra
+        .writeJson(mainProjectPath, packageJson)
+        .then(() => {
+          console.log('adjust main package.json success');
+
+          return null;
+        })
+        .catch((err) => {
+          console.error(err);
+          return null;
+        });
+
+      return null;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function adjustChildrenPackageJson() {
+  const packagesDir = './packages/';
+
+  const packagesPath = resolve(packagesDir);
+
+  fs.readdir(packagesDir, (err, files) => {
+    if (err) {
+      throw err;
+    }
+
+    files.forEach((file) => {
+      const itemPath = `${packagesPath}/${file}`;
+
+      if (file && fs.lstatSync(itemPath).isDirectory()) {
+        const childPackageJsonPath = `${itemPath}/package.json`;
+
+        fsExtra
+          .readJson(childPackageJsonPath)
+          .then((packageJson) => {
+            packageJson.scripts = {
+              ...(packageJson.scripts || {}),
+              ...childrenPackageFile.lintScript,
+              ...childrenPackageFile.prettierScript,
+            };
+
+            fsExtra
+              .writeJson(childPackageJsonPath, packageJson)
+              .then(() => {
+                console.log('adjust child package.json success');
+
+                return null;
+              })
+              .catch((e) => {
+                console.error(e);
+
+                return null;
+              });
+
+            return null;
+          })
+          .catch((res) => {
+            console.error(res);
+
+            return null;
+          });
+      }
+    });
+  });
+}
+
+createMain();
+
+createPackage();
+
+console.log(
+  'config files [eslint,prettier,editor,git and other] write success',
+);
+
+adjustMainPackageJson();
+
+adjustChildrenPackageJson();

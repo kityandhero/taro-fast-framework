@@ -290,13 +290,3 @@ export function buildInitialActivityIndicator({
     </FadeInBox>
   );
 }
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function empty() {
-  return {};
-}

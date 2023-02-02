@@ -23,7 +23,7 @@ import {
 
 import { getModelCollection } from '../../models';
 import { configEnvironment } from '../../utils/configAssist';
-import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
+import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import {
   removeAdministrativeDivisionFullData,
   removeSelectedAddressData,
@@ -42,7 +42,7 @@ function setMainFontSize() {
     return;
   }
 
-  const webRootFontSize = defaultSettingsLayoutCustom.getWebRootFontSize();
+  const webRootFontSize = getSettingsAgency().getWebRootFontSize();
 
   if (checkStringIsNullOrWhiteSpace(webRootFontSize)) {
     return;
@@ -73,7 +73,7 @@ class AppBase extends Component {
     if (!initApplicationComplete) {
       this.setAppInitCustomLocal(config);
 
-      configEnvironment();
+      configEnvironment(config);
 
       models = getModelCollection();
 
@@ -145,16 +145,7 @@ class AppBase extends Component {
     }
   };
 
-  showStartupInfo = () => {
-    const { dispatch } = this.store;
-
-    dispatch({
-      type: 'schedulingControl/showAppInitCustom',
-      payload: {
-        config: appInitCustomObject,
-      },
-    });
-  };
+  showStartupInfo = () => {};
 
   checkUpdateVersion = () => {
     if (isWechat) {

@@ -1,5 +1,3 @@
-import { checkWhetherDevelopmentEnvironment } from 'easy-soft-utility';
-
 import { locationModeCollection } from 'taro-fast-common/es/utils/constants';
 import { AppBase } from 'taro-fast-framework/es/framework';
 
@@ -11,9 +9,8 @@ import './app.less';
 const config = {
   webRootFontSize: '152%',
   appId: 'pdbwl0roqjy03k',
-  showLogInConsole: checkWhetherDevelopmentEnvironment(),
   // showRequestInfo: checkWhetherDevelopmentEnvironment(),
-  showUseVirtualRequestMessage: false,
+  promptSimulation: false,
   apiPrefix: {
     corsTargetDomain: 'https://universalitymallapi.1010101.cc',
   },

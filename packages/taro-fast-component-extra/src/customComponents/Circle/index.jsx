@@ -260,7 +260,7 @@ class Circle extends ComponentBase {
         return n;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   };
 

@@ -4,12 +4,11 @@ import {
   reducerDefaultParams,
   reducerNameCollection,
 } from 'easy-soft-dva';
-
 import {
   pretreatmentRemoteListData,
   pretreatmentRemotePageListData,
   pretreatmentRemoteSingleData,
-} from 'taro-fast-framework/es/utils/requestAssistor';
+} from 'easy-soft-utility';
 
 import {
   getData,

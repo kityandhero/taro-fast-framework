@@ -215,7 +215,7 @@ export async function actionCore({
               return;
             })
             .catch((error) => {
-              logException(error.message);
+              logException(error);
 
               if (showProcessing) {
                 setTimeout(() => {
@@ -444,14 +444,4 @@ export async function actionModalCore({
   }).catch((res) => {
     logException(`actionSheetCore: catch -> ${res.message}`);
   });
-}
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function empty() {
-  return {};
 }

@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro';
 
 import {
   buildLinearGradient,
+  checkHasAuthority,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   envCollection,
@@ -58,8 +59,7 @@ import {
   buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
 } from 'taro-fast-component/es/functionComponent';
 
-import { checkHasAuthority } from '../../utils/authority';
-import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
+import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import {
   getAdministrativeDivisionFullData,
   getLaunchOption,
@@ -643,7 +643,7 @@ export default class Infrastructure extends ComponentBase {
 
     if (toString(signInResult) === toString(verifySignInResult.fail)) {
       if (this.autoRedirectToSignIn) {
-        const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+        const signInPath = getSettingsAgency().getSignInPath();
 
         if (checkStringIsNullOrWhiteSpace(signInPath)) {
           throw new Error('未配置登录页面signInPath');
@@ -689,7 +689,7 @@ export default class Infrastructure extends ComponentBase {
             );
 
             if (this.autoRedirectToSignIn) {
-              const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+              const signInPath = getSettingsAgency().getSignInPath();
 
               if (checkStringIsNullOrWhiteSpace(signInPath)) {
                 throw new Error('未配置登录页面signInPath');
@@ -756,7 +756,7 @@ export default class Infrastructure extends ComponentBase {
     });
 
     const withoutPermissionRedirectPath =
-      defaultSettingsLayoutCustom.getWithoutPermissionRedirectPath();
+      getSettingsAgency().getWithoutPermissionRedirectPath();
 
     if (checkStringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
       throw new Error('未配置无交互权限时的跳转目标');
@@ -766,7 +766,7 @@ export default class Infrastructure extends ComponentBase {
   };
 
   goToSignIn = () => {
-    const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+    const signInPath = getSettingsAgency().getSignInPath();
 
     if (checkStringIsNullOrWhiteSpace(signInPath)) {
       throw new Error('未配置登录页面signInPath');
@@ -1132,7 +1132,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   };
 
@@ -1171,7 +1171,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   };
 
@@ -1222,7 +1222,7 @@ export default class Infrastructure extends ComponentBase {
         return null;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   };
 
@@ -1524,7 +1524,7 @@ export default class Infrastructure extends ComponentBase {
         return d;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   }
 
@@ -1617,7 +1617,7 @@ export default class Infrastructure extends ComponentBase {
         return weather;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   };
 
@@ -1977,9 +1977,9 @@ export default class Infrastructure extends ComponentBase {
       return null;
     }
 
-    const image = defaultSettingsLayoutCustom.getFooterImage();
-    const text = defaultSettingsLayoutCustom.getFooterText();
-    const description = defaultSettingsLayoutCustom.getFooterDescription();
+    const image = getSettingsAgency().getFooterImage();
+    const text = getSettingsAgency().getFooterText();
+    const description = getSettingsAgency().getFooterDescription();
 
     if (image || text || description) {
       {

@@ -29,7 +29,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }, 500);
   }
@@ -95,7 +95,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }, 500);
   }
@@ -119,7 +119,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }, 500);
   }
@@ -143,7 +143,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }, 500);
   }
@@ -167,7 +167,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }, 500);
   }
@@ -191,7 +191,7 @@ export default class Tips {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }, 500);
   }

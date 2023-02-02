@@ -38,7 +38,9 @@ import {
 
 import {
   checkInCollection,
+  checkWhetherDevelopmentEnvironment,
   envCollection,
+  getApplicationMergeConfig,
   isEqualBySerialize,
   isFunction,
   isNumber,
@@ -47,18 +49,29 @@ import {
   logDebug,
   logException,
   logExecute,
+  messageTypeCollection,
   notificationTypeCollection,
+  setApplicationExternalConfigList,
+  setApplicationInitialConfig,
+  setErrorMessageDisplayMonitor,
+  setInfoMessageDisplayMonitor,
   setLocalStorageFlusher,
   setLocalStorageGetter,
   setLocalStorageRemover,
   setLocalStorageSetter,
+  setLoggerDisplaySwitch,
   setNavigator,
+  setOpenMessageDisplayMonitor,
   setRedirector,
+  setRuntimeDataStorage,
+  setSuccessMessageDisplayMonitor,
+  setWarningMessageDisplayMonitor,
+  setWarnMessageDisplayMonitor,
   toNumber,
 } from 'easy-soft-utility';
 
+import { appInitDefault } from './constants';
 import {
-  getAppInitConfigData,
   getDefaultTaroGlobalData,
   getTaroGlobalData,
   setTaroGlobalData,
@@ -79,7 +92,6 @@ export {
   canIUse,
   checkEnv,
   downloadFile,
-  getAppInitConfigData,
   getClipboardData,
   getCurrentInstance,
   getDefaultTaroGlobalData,
@@ -130,7 +142,7 @@ export function copyToClipboard({ text, successCallback = null }) {
  * @returns
  */
 export function corsTarget() {
-  const appInit = getAppInitConfigData();
+  const appInit = getApplicationMergeConfig();
   let corsTargetDomain = '';
 
   if (appInit.apiPrefix != null) {
@@ -653,6 +665,105 @@ function navigateTo(o) {
   }
 }
 
+function showMessage({ type, duration = 1500, text, onClose = () => {} }) {
+  requestAnimationFrame(() => {
+    switch (type) {
+      case messageTypeCollection.success:
+        Tips.success(text, duration, onClose);
+        break;
+
+      case messageTypeCollection.error:
+        Tips.error(text, duration, onClose);
+        break;
+
+      case messageTypeCollection.info:
+        Tips.info(text, duration, onClose);
+        break;
+
+      case messageTypeCollection.warning:
+        Tips.warning(text, duration, onClose);
+        break;
+
+      case messageTypeCollection.warn:
+        Tips.warn(text, duration, onClose);
+        break;
+
+      default:
+        Tips.toast(text, duration, onClose);
+        break;
+    }
+  });
+}
+
+function showSuccessMessage({ duration = 1500, text, onClose = () => {} }) {
+  showMessage({
+    type: messageTypeCollection.success,
+    text,
+    duration,
+    onClose,
+  });
+}
+
+function showErrorMessage({ duration = 1500, text, onClose = () => {} }) {
+  showMessage({
+    type: messageTypeCollection.error,
+    text,
+    duration,
+    onClose,
+  });
+}
+
+function showWarnMessage({ duration = 1500, text, onClose = () => {} }) {
+  showMessage({
+    type: messageTypeCollection.warn,
+    text,
+    duration,
+    onClose,
+  });
+}
+
+/**
+ * 显示警告信息框
+ */
+function showWarningMessage({ duration = 1500, text, onClose = () => {} }) {
+  showMessage({
+    type: messageTypeCollection.warning,
+    text,
+    duration,
+    onClose,
+  });
+}
+
+/**
+ * 显示消息信息
+ */
+function showInfoMessage({ duration = 1500, text, onClose = () => {} }) {
+  showMessage({
+    type: messageTypeCollection.info,
+    text,
+    duration,
+    onClose,
+  });
+}
+
+function showOpenMessage({ duration = 1500, text, onClose = () => {} }) {
+  showMessage({
+    type: messageTypeCollection.open,
+    text,
+    duration,
+    onClose,
+  });
+}
+
+function getShowLogInConsole() {
+  const { showLogInConsole } = {
+    ...{ showLogInConsole: false },
+    ...(getApplicationMergeConfig() || {}),
+  };
+
+  return showLogInConsole || false;
+}
+
 /**
  * 设置 Local Storage 处理器
  */
@@ -674,7 +785,27 @@ export function setNavigationHandler() {
 /**
  * 设置 easy-soft-utility 处理器
  */
-export function setEasySoftUtilityHandler() {
+export function setEasySoftUtilityHandler(...externalConfigs) {
   setLocalStorageHandler();
   setNavigationHandler();
+
+  setRuntimeDataStorage(getTaroGlobalData());
+
+  setApplicationInitialConfig({
+    ...appInitDefault,
+    ...{
+      showLogInConsole: checkWhetherDevelopmentEnvironment(),
+    },
+  });
+
+  setApplicationExternalConfigList(externalConfigs);
+
+  setLoggerDisplaySwitch(getShowLogInConsole());
+
+  setInfoMessageDisplayMonitor(showInfoMessage);
+  setOpenMessageDisplayMonitor(showOpenMessage);
+  setWarnMessageDisplayMonitor(showWarnMessage);
+  setWarningMessageDisplayMonitor(showWarningMessage);
+  setSuccessMessageDisplayMonitor(showSuccessMessage);
+  setErrorMessageDisplayMonitor(showErrorMessage);
 }

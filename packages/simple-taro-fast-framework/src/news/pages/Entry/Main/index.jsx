@@ -126,7 +126,7 @@ export default class Index extends BasePageWrapper {
         return urlParamsChanged;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   };
 

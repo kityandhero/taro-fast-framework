@@ -5,6 +5,7 @@ import {
   checkStringIsNullOrWhiteSpace,
   envCollection,
   getCache,
+  getLocalMetaData,
   isFunction,
   isNumber,
   isObject,
@@ -20,6 +21,8 @@ import {
   logWarn,
   redirectTo,
   setCache,
+  setLocalMetaData,
+  setToken,
   showErrorMessage,
   showInfoMessage,
   sleep,
@@ -37,11 +40,10 @@ import {
   getSetting,
 } from 'taro-fast-common/es/utils/tools';
 
-import { defaultSettingsLayoutCustom } from '../../utils/defaultSettingsSpecial';
+import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import {
   getAdministrativeDivisionFullData,
   getCurrentCustomer,
-  getCurrentMetaData,
   getEffectiveCode,
   getLastLocation,
   getLocation,
@@ -54,7 +56,6 @@ import {
   removeSession,
   setAdministrativeDivisionFullData,
   setCurrentCustomer,
-  setCurrentMetaData,
   setEffectiveCode,
   setLastLocation,
   setLocation,
@@ -64,7 +65,6 @@ import {
   setOpenId,
   setSession,
   setSessionRefreshing,
-  setToken,
 } from '../../utils/globalStorageAssist';
 import {
   getSignInResultDescription,
@@ -181,7 +181,7 @@ class SupplementCore extends Common {
         `this.needReLocationWhenRepeatedShow is ${this.needReLocationWhenRepeatedShow} in doShowTask`,
       );
 
-      const useLocation = defaultSettingsLayoutCustom.getUseLocation();
+      const useLocation = getSettingsAgency().getUseLocation();
       const locationMode = getLocationMode();
 
       if (
@@ -261,9 +261,8 @@ class SupplementCore extends Common {
         return;
     }
 
-    const simulationMode = defaultSettingsLayoutCustom.getSimulationLocation();
-    const simulationData =
-      defaultSettingsLayoutCustom.getSimulationLocationData();
+    const simulationMode = getSettingsAgency().getSimulationLocation();
+    const simulationData = getSettingsAgency().getSimulationLocationData();
 
     if (simulationMode) {
       logDebug('simulation location in config is true');
@@ -336,10 +335,8 @@ class SupplementCore extends Common {
 
           setLocation(l);
 
-          const defaultLongitude =
-            defaultSettingsLayoutCustom.getDefaultLongitude();
-          const defaultLatitude =
-            defaultSettingsLayoutCustom.getDefaultLatitude();
+          const defaultLongitude = getSettingsAgency().getDefaultLongitude();
+          const defaultLatitude = getSettingsAgency().getDefaultLatitude();
           const { latitude, longitude } = l;
 
           that.reverseGeocoder({
@@ -362,7 +359,7 @@ class SupplementCore extends Common {
               }
             },
             fail: (error) => {
-              logException(error.message);
+              logException(error);
 
               if (mapData != null) {
                 setMap(mapData);
@@ -627,7 +624,7 @@ class SupplementCore extends Common {
         return;
     }
 
-    const useLocation = defaultSettingsLayoutCustom.getUseLocation();
+    const useLocation = getSettingsAgency().getUseLocation();
     const locationMode = getLocationMode();
     const signInResult = this.getSignInResult();
     const verifySignInResult = getVerifySignInResult();
@@ -753,7 +750,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/checkTicketValidity',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
+      alias: getSettingsAgency().getCheckTicketValidityAliasName(),
     });
   };
 
@@ -828,7 +825,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   }
 
@@ -844,7 +841,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/refreshSession',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
+      alias: getSettingsAgency().getRefreshSessionAliasName(),
     });
   };
 
@@ -897,7 +894,7 @@ class SupplementCore extends Common {
               })
               // eslint-disable-next-line promise/no-nesting
               .catch((error) => {
-                logException(error.message);
+                logException(error);
 
                 Tips.info('网络请求失败了，请检查下是否联网');
 
@@ -926,7 +923,7 @@ class SupplementCore extends Common {
           return res;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
 
           showInfoMessage({
             text: '微信登录失败',
@@ -985,7 +982,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    const useLocation = defaultSettingsLayoutCustom.getUseLocation();
+    const useLocation = getSettingsAgency().getUseLocation();
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
@@ -1122,7 +1119,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    const useLocation = defaultSettingsLayoutCustom.getUseLocation();
+    const useLocation = getSettingsAgency().getUseLocation();
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
@@ -1266,7 +1263,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/signInSilent',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
+      alias: getSettingsAgency().getSignInSilentAliasName(),
     });
   };
 
@@ -1385,7 +1382,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   }
 
@@ -1588,7 +1585,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
       });
   }
 
@@ -1815,7 +1812,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnSignIn token must be string');
     }
 
-    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+    setToken(token || getSettingsAgency().getTokenAnonymous());
   };
 
   /**
@@ -1829,7 +1826,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnSignInSilent token must be string');
     }
 
-    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+    setToken(token || getSettingsAgency().getTokenAnonymous());
   };
 
   parseOpenIdFromSignInApiData = (remoteData) => {
@@ -1947,10 +1944,8 @@ class SupplementCore extends Common {
 
     this.doWhenSignInSilentFail();
 
-    if (
-      defaultSettingsLayoutCustom.getNavigationToSignInWhenSignInSilentFail()
-    ) {
-      const signInPath = defaultSettingsLayoutCustom.getSignInPath();
+    if (getSettingsAgency().getNavigationToSignInWhenSignInSilentFail()) {
+      const signInPath = getSettingsAgency().getSignInPath();
 
       if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
@@ -2058,7 +2053,7 @@ class SupplementCore extends Common {
             'info getCustomer error,doAfterRegisterWithWeChat and callback will do not execute',
           );
 
-          logException(error.message);
+          logException(error);
 
           if (isFunction(failCallback)) {
             failCallback();
@@ -2163,7 +2158,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     });
   };
@@ -2309,7 +2304,7 @@ class SupplementCore extends Common {
       .catch((error) => {
         that.setState({ registering: false });
 
-        logException(error.message);
+        logException(error);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -2458,7 +2453,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        logException(error.message);
+        logException(error);
 
         if (isFunction(failCallback)) {
           failCallback();
@@ -2629,7 +2624,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnRegister token must be string');
     }
 
-    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+    setToken(token || getSettingsAgency().getTokenAnonymous());
   };
 
   setTokenOnRegisterWithWeChat = ({ token }) => {
@@ -2639,7 +2634,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnRegisterWithWeChat token must be string');
     }
 
-    setToken(token || defaultSettingsLayoutCustom.getTokenAnonymous());
+    setToken(token || getSettingsAgency().getTokenAnonymous());
   };
 
   parseOpenIdFromRegisterApiData = (remoteData) => {
@@ -2736,7 +2731,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/getMetaData',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getMetaDataAliasName(),
+      alias: getSettingsAgency().getMetaDataAliasName(),
     });
   };
 
@@ -2749,7 +2744,7 @@ class SupplementCore extends Common {
 
     let force = forceValue;
 
-    const metaData = getCurrentMetaData();
+    const metaData = getLocalMetaData();
 
     if (!force) {
       if ((metaData || null) == null) {
@@ -2780,7 +2775,7 @@ class SupplementCore extends Common {
           const { dataSuccess, data: v } = remoteData;
 
           if (dataSuccess) {
-            setCurrentMetaData(v);
+            setLocalMetaData(v);
 
             if (isFunction(callback)) {
               // eslint-disable-next-line promise/no-callback-in-promise
@@ -2793,15 +2788,15 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }
   };
 
   getMetaData = () => {
     return {
-      ...defaultSettingsLayoutCustom.getDefaultMetaData(),
-      ...(getCurrentMetaData() || {}),
+      ...getSettingsAgency().getDefaultMetaData(),
+      ...(getLocalMetaData() || {}),
     };
   };
 
@@ -2880,7 +2875,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     }
   };

@@ -1,4 +1,4 @@
-import { defaultSettingsLayoutCustom } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
+import { getSettingsAgency } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
 import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
 
 import {
@@ -42,7 +42,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'session/refreshSession',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getRefreshSessionAliasName(),
+      alias: getSettingsAgency().getRefreshSessionAliasName(),
     });
   };
 
@@ -50,7 +50,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'global/getMetaData',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getMetaDataAliasName(),
+      alias: getSettingsAgency().getMetaDataAliasName(),
     });
   };
 
@@ -58,7 +58,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'entrance/checkTicketValidity',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getCheckTicketValidityAliasName(),
+      alias: getSettingsAgency().getCheckTicketValidityAliasName(),
     });
   };
 
@@ -66,7 +66,7 @@ export default class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'entrance/signInSilent',
       payload: data,
-      alias: defaultSettingsLayoutCustom.getSignInSilentAliasName(),
+      alias: getSettingsAgency().getSignInSilentAliasName(),
     });
   };
 

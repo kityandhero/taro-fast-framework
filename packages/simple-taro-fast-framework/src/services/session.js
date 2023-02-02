@@ -1,14 +1,14 @@
-import { executiveRequest } from '../utils/request';
+import { request } from 'easy-soft-utility';
 
 export async function refreshSessionData(params) {
-  return executiveRequest({
+  return request({
     api: `/weApp/session/refreshSession`,
     params,
   });
 }
 
 export async function exchangePhoneData(params) {
-  return executiveRequest({
+  return request({
     api: `/weApp/session/exchangePhone`,
     params,
   });

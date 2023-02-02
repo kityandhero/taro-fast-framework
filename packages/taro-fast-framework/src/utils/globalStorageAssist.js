@@ -1,9 +1,7 @@
 import {
   flushLocalStorage,
-  getCache,
   getJsonFromLocalStorage,
   getStringFromLocalStorage,
-  hasCache,
   isArray,
   logDebug,
   logExecute,
@@ -12,22 +10,14 @@ import {
   removeLocalStorage,
   saveJsonToLocalStorage,
   saveStringToLocalStorage,
-  setCache,
   showInfoMessage,
   toMd5,
   toNumber,
 } from 'easy-soft-utility';
 
-import {
-  accessWaySpecialCollection,
-  locationModeCollection,
-} from 'taro-fast-common/es/utils/constants';
+import { locationModeCollection } from 'taro-fast-common/es/utils/constants';
 
 export const storageKeyCollection = {
-  token: 'token',
-  accessWayCollection: 'accessWayCollection',
-  nearestLocalhostNotify: 'nearestLocalhostNotify',
-  authorityCollection: 'authorityCollection',
   currentUrl: 'currentUrl',
   openId: 'openId',
   location: 'location',
@@ -42,204 +32,10 @@ export const storageKeyCollection = {
   remoteCheck: 'remoteCheck',
   weather: 'weather',
   currentCustomer: 'currentCustomer',
-  modelNameList: 'modelNameList',
-  metaData: 'metaData',
   administrativeDivisionFullData: 'administrativeDivisionFullData',
   selectedAddressData: 'selectedAddressData',
   launchOption: 'launchOption',
 };
-
-export function getNearestLocalhostNotifyCache() {
-  const key = storageKeyCollection.nearestLocalhostNotify;
-
-  const d = getJsonFromLocalStorage(key);
-
-  if ((d || null) == null) {
-    return null;
-  }
-
-  if ((d.nearestTime || null) == null) {
-    return null;
-  }
-
-  return d || null;
-}
-
-export function setNearestLocalhostNotifyCache() {
-  const key = storageKeyCollection.nearestLocalhostNotify;
-
-  const now = parseInt(new Date().getTime() / 1000, 10);
-
-  const d = {
-    nearestTime: now,
-  };
-
-  return saveJsonToLocalStorage(key, d);
-}
-
-export function removeNearestLocalhostNotifyCache() {
-  const key = storageKeyCollection.nearestLocalhostNotify;
-  removeLocalStorage(key);
-}
-
-export function getAccessWayCollectionCache() {
-  let result = {};
-
-  const key = storageKeyCollection.accessWayCollection;
-
-  const existCache = hasCache({ key });
-
-  if (existCache) {
-    result = getCache({ key });
-
-    if (isArray(result)) {
-      return result;
-    }
-  }
-
-  const d = getJsonFromLocalStorage(key);
-
-  if ((d || null) == null) {
-    return { ...(accessWaySpecialCollection || {}) };
-  }
-
-  result = { ...(d || null), ...(accessWaySpecialCollection || {}) };
-
-  setCache({
-    key,
-    value: result,
-  });
-
-  return result;
-}
-
-export function setAccessWayCollectionCache(o) {
-  const key = storageKeyCollection.accessWayCollection;
-
-  saveJsonToLocalStorage(key, o || {});
-}
-
-/**
- * 获取useParamsData缓存
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getParamsDataCache(key) {
-  const d = getJsonFromLocalStorage(key);
-
-  if ((d || null) == null) {
-    removeParamsDataCache(key);
-    return null;
-  }
-
-  if ((d.dataVersion || '') === '') {
-    removeParamsDataCache(key);
-    return null;
-  }
-
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
-
-  if (d.dataVersion < now) {
-    removeParamsDataCache(key);
-    return null;
-  }
-
-  return d.useParamsData || null;
-}
-
-/**
- * 设置useParamsData缓存
- *
- * @export
- * @param {o} useParamsData数据
- * @returns
- */
-export function setParamsDataCache(key, o) {
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
-
-  const d = {
-    useParamsData: o || null,
-    dataVersion: now,
-  };
-
-  return saveJsonToLocalStorage(key, d);
-}
-
-/**
- * 移除信息
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function removeParamsDataCache(key) {
-  removeLocalStorage(key);
-}
-
-/**
- * 获取Token键名
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getTokenKeyName() {
-  return storageKeyCollection.token;
-}
-
-export function getTokenObject() {
-  const tokenSetObject = {};
-  tokenSetObject[`${getTokenKeyName()}`] = getToken() || '';
-
-  return tokenSetObject;
-}
-
-/**
- * Get Token
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getToken() {
-  const key = storageKeyCollection.token;
-
-  const token = getStringFromLocalStorage(key);
-
-  if ((token || null) == null) {
-    setToken('');
-  }
-
-  return token;
-}
-
-/**
- * Set Token
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function setToken(v) {
-  const key = storageKeyCollection.token;
-
-  return saveStringToLocalStorage(key, v);
-}
-
-/**
- * 移除Token
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function removeToken() {
-  const key = storageKeyCollection.token;
-
-  return removeLocalStorage(key);
-}
 
 /**
  * 获取CurrentUrl
@@ -966,76 +762,6 @@ export function setCurrentCustomer(data) {
  */
 export function removeCurrentCustomer() {
   const key = storageKeyCollection.currentCustomer;
-
-  removeLocalStorage(key);
-}
-
-/**
- * 获取元数据
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getCurrentMetaData() {
-  logExecute('getCurrentMetaData from local cache');
-
-  const key = storageKeyCollection.metaData;
-
-  const o = getJsonFromLocalStorage(key);
-
-  if ((o || null) == null) {
-    return null;
-  }
-
-  const { dataVersion } = o;
-
-  if ((dataVersion || null) == null) {
-    return null;
-  }
-
-  const { data } = {
-    ...{
-      data: null,
-    },
-    ...o,
-  };
-
-  return data || null;
-}
-
-/**
- * 设置元数据
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function setCurrentMetaData(data) {
-  logExecute('setMetaData to local cache');
-
-  const key = storageKeyCollection.metaData;
-
-  // 信息有效期30分钟
-  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
-
-  const o = {
-    data,
-    dataVersion: nowVersion,
-  };
-
-  return saveJsonToLocalStorage(key, o);
-}
-
-/**
- * 移除元数据
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function removeCurrentMetaData() {
-  const key = storageKeyCollection.metaData;
 
   removeLocalStorage(key);
 }

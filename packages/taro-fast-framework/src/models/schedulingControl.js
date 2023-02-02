@@ -4,10 +4,12 @@ import {
   reducerDefaultParams,
   reducerNameCollection,
 } from 'easy-soft-dva';
-import { logConfig } from 'easy-soft-utility';
+import {
+  pretreatmentRemoteListData,
+  pretreatmentRemoteSingleData,
+} from 'easy-soft-utility';
 
 import { locateResult } from 'taro-fast-common/es/utils/constants';
-import { getAppInitConfigData } from 'taro-fast-common/es/utils/tools';
 
 import {
   checkTicketValidityData,
@@ -21,16 +23,12 @@ import {
   registerWithWeChatData,
   signInSilentData,
 } from '../services/schedulingControl';
-import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
+import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
 import {
   getWeather,
   setLocationMode,
   setWeather,
 } from '../utils/globalStorageAssist';
-import {
-  pretreatmentRemoteListData,
-  pretreatmentRemoteSingleData,
-} from '../utils/requestAssistor';
 
 export function buildSchedulingControl() {
   return {
@@ -39,13 +37,12 @@ export function buildSchedulingControl() {
     state: {
       ...{
         initialLocationModeComplete: false,
-        appInitCustomVisible: false,
         modelNameListVisible: false,
         locationResult: {
           locationGet: false,
           locationAuth: locateResult.unknown,
         },
-        signInResult: defaultSettingsLayoutCustom.getSignInUnknownFlag(),
+        signInResult: getSettingsAgency().getSignInUnknownFlag(),
         ticketValidityProcessDetection: false,
         signInProcessDetection: false,
       },
@@ -223,12 +220,6 @@ export function buildSchedulingControl() {
           payload,
         });
       },
-      *showAppInitCustom({ payload }, { put }) {
-        yield put({
-          type: 'changeAppInitCustomVisible',
-          payload,
-        });
-      },
       *setLocationResult({ payload }, { put }) {
         yield put({
           type: 'changeLocationResult',
@@ -274,24 +265,6 @@ export function buildSchedulingControl() {
         return {
           ...state,
           initialLocationModeComplete: true,
-        };
-      },
-      changeAppInitCustomVisible(state, { payload }) {
-        const { appInitCustomVisible } = state;
-
-        if (!appInitCustomVisible) {
-          const { config } = payload;
-
-          logConfig(config, 'appConfig');
-
-          const configMerge = getAppInitConfigData();
-
-          logConfig(configMerge, 'appConfigMerge');
-        }
-
-        return {
-          ...state,
-          appInitCustomVisible: true,
         };
       },
       changeLocationResult(state, { payload }) {

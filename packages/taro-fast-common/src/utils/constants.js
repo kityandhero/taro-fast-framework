@@ -1,3 +1,5 @@
+import { requestMode } from 'easy-soft-utility';
+
 import { emptyLogo as emptyLogoSource } from './mediaDefault';
 
 export const pxToRemRoot = {
@@ -91,8 +93,8 @@ export const appInitDefault = {
   defaultLongitude: '',
   showLogInConsole: false,
   showRequestInfo: false,
-  useVirtualRequest: false,
-  showUseVirtualRequestMessage: false,
+  defaultRequestMode: requestMode.real,
+  promptSimulation: false,
   apiVersion: '',
   tokenAnonymous: 'anonymous',
   initialLocationMode: locationModeCollection.custom,
@@ -106,15 +108,6 @@ export const appInitDefault = {
   signInUnknownFlag: verifySignInResult.unknown,
   defaultMetaData: {},
   weatherApi: 'https://wis.qq.com/weather/common',
-};
-
-/**
- * accessWaySpecialCollection
- */
-export const accessWaySpecialCollection = {
-  super: {
-    permission: 'super',
-  },
 };
 
 export const colorStatus = {

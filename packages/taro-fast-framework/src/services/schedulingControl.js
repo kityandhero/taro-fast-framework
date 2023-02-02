@@ -6,14 +6,15 @@ import {
   getGuid,
   getNow,
   logDebug,
+  request,
+  requestMode,
 } from 'easy-soft-utility';
 
-import { defaultSettingsLayoutCustom } from '../utils/defaultSettingsSpecial';
-import { request } from '../utils/requestAssistor';
+import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
 import { getVerifySignInResult } from '../utils/tools';
 
 export async function getWeatherData(params) {
-  const weatherApi = defaultSettingsLayoutCustom.getWeatherApi();
+  const weatherApi = getSettingsAgency().getWeatherApi();
 
   if (checkStringIsNullOrWhiteSpace(weatherApi)) {
     throw new Error('weatherApi is null, please check it in app config');
@@ -41,9 +42,9 @@ export async function refreshSessionData(params) {
   return request({
     api: `/schedulingControl/refreshSession`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -66,9 +67,9 @@ export async function checkTicketValidityData(params) {
   return request({
     api: `/schedulingControl/checkTicketValidity`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -90,9 +91,9 @@ export async function exchangePhoneData(params) {
   return request({
     api: `/schedulingControl/exchangePhone`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -120,9 +121,9 @@ export async function signInSilentData(params) {
   return request({
     api: `/schedulingControl/signInSilent`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -150,9 +151,9 @@ export async function registerWithWeChatData(params) {
   return request({
     api: `/schedulingControl/registerWithWeChat`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -180,9 +181,9 @@ export async function registerData(params) {
   return request({
     api: `/schedulingControl/register`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -204,9 +205,9 @@ export async function getMetaDataData(params) {
   return request({
     api: `/schedulingControl/getMetaData`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -226,9 +227,9 @@ export async function getCustomerData(params) {
   return request({
     api: `/schedulingControl/getCustomer`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: simulation,
       list: [],
       extra: {},
@@ -248,9 +249,9 @@ export async function getAdministrativeDivisionFullData(params) {
   return request({
     api: `/schedulingControl/getAdministrativeDivisionFullData`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: {},
       list: simulation,
       extra: {},

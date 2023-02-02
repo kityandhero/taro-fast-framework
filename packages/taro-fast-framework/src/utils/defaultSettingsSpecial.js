@@ -1,4 +1,9 @@
-import { checkStringIsNullOrWhiteSpace, toNumber } from 'easy-soft-utility';
+import {
+  checkStringIsNullOrWhiteSpace,
+  getApplicationMergeConfig,
+  requestMode,
+  toNumber,
+} from 'easy-soft-utility';
 
 import {
   apiSuccessCode as apiSuccessCodeDefault,
@@ -7,517 +12,406 @@ import {
   locationModeCollection,
   verifySignInResult,
 } from 'taro-fast-common/es/utils/constants';
-import { getAppInitConfigData } from 'taro-fast-common/es/utils/tools';
 
-export const defaultSettingsLayoutCustom = {
-  getWebRootFontSize: () => {
-    const appInit = getAppInitConfigData();
+export function getSettingsAgency() {
+  const appInit = getApplicationMergeConfig();
 
-    const { webRootFontSize } = {
-      ...{ webRootFontSize: '142%' },
-      ...(appInit || {}),
-    };
-
-    return webRootFontSize || '142%';
-  },
-  /**
-   * 无权限时的跳转目标
-   * @returns path string
-   */
-  getWithoutPermissionRedirectPath: () => {
-    const appInit = getAppInitConfigData();
-
-    const { withoutPermissionRedirectPath } = {
-      ...{ withoutPermissionRedirectPath: '' },
-      ...(appInit || {}),
-    };
-
-    return withoutPermissionRedirectPath || '';
-  },
-  getFileUploadMaxSize: () => {
-    const appInit = getAppInitConfigData();
-
-    const { fileUploadMaxSize } = {
-      ...{ fileUploadMaxSize: 2 },
-      ...(appInit || {}),
-    };
-
-    return fileUploadMaxSize || 2;
-  },
-  getAudioUploadMaxSize: () => {
-    const appInit = getAppInitConfigData();
-
-    const { audioUploadMaxSize } = {
-      ...{ audioUploadMaxSize: 4 },
-      ...(appInit || {}),
-    };
-
-    return audioUploadMaxSize || 4;
-  },
-  getVideoUploadMaxSize: () => {
-    const appInit = getAppInitConfigData();
-
-    const { videoUploadMaxSize } = {
-      ...{ videoUploadMaxSize: 4 },
-      ...(appInit || {}),
-    };
-
-    return videoUploadMaxSize || 4;
-  },
-  getImageUploadMaxSize: () => {
-    const appInit = getAppInitConfigData();
-
-    const { imageUploadMaxSize } = {
-      ...{ imageUploadMaxSize: 2 },
-      ...(appInit || {}),
-    };
-
-    return imageUploadMaxSize || 2;
-  },
-  getShowSelectLanguage: () => {
-    const appInit = getAppInitConfigData();
-
-    const { showSelectLanguage } = {
-      ...{ showSelectLanguage: false },
-      ...(appInit || {}),
-    };
-
-    return showSelectLanguage || false;
-  },
-  getShowLogoInLoginView: () => {
-    const appInit = getAppInitConfigData();
-
-    const { showLogoInLoginView } = {
-      ...{ showLogoInLoginView: false },
-      ...(appInit || {}),
-    };
-
-    return showLogoInLoginView || false;
-  },
-  getEmptyLogo: () => {
-    const appInit = getAppInitConfigData();
-
-    const { emptyLogo } = {
-      ...{ emptyLogo: emptyLogoImage },
-      ...(appInit || {}),
-    };
-
-    return emptyLogo || emptyLogoImage;
-  },
-  getInitialLocationMode: () => {
-    const appInit = getAppInitConfigData();
-
-    const { initialLocationMode } = {
-      ...{ initialLocationMode: locationModeCollection.custom },
-      ...(appInit || {}),
-    };
-
-    return toNumber(initialLocationMode || locationModeCollection.custom);
-  },
-  getTokenAnonymous: () => {
-    const appInit = getAppInitConfigData();
-
-    const { tokenAnonymous } = {
-      ...{ tokenAnonymous: 'anonymous' },
-      ...(appInit || {}),
-    };
-
-    return tokenAnonymous || 'anonymous';
-  },
-  getWeatherApi: () => {
-    const appInit = getAppInitConfigData();
-
-    const { weatherApi } = {
-      ...{ weatherApi: '' },
-      ...(appInit || {}),
-    };
-
-    return weatherApi || '';
-  },
-  getDefaultMetaData: () => {
-    const appInit = getAppInitConfigData();
-
-    const { defaultMetaData } = {
-      ...{ defaultMetaData: {} },
-      ...(appInit || {}),
-    };
-
-    return defaultMetaData || {};
-  },
-  getNavigationToSignInWhenSignInSilentFail: () => {
-    const appInit = getAppInitConfigData();
-
-    const { navigationToSignInWhenSignInSilentFail } = {
-      ...{ navigationToSignInWhenSignInSilentFail: false },
-      ...(appInit || {}),
-    };
-
-    return navigationToSignInWhenSignInSilentFail || false;
-  },
-  getApiSuccessCode: () => {
-    const appInit = getAppInitConfigData();
-
-    const { apiSuccessCode } = {
-      ...{ apiSuccessCode: apiSuccessCodeDefault },
-      ...(appInit || {}),
-    };
-
-    return apiSuccessCode || apiSuccessCodeDefault;
-  },
-  getAuthenticationFailCode: () => {
-    const appInit = getAppInitConfigData();
-
-    const { authenticationFailCode } = {
-      ...{
-        authenticationFailCode: authenticationFailCodeDefault,
+  return {
+    getWebRootFontSize: () => {
+      const { webRootFontSize } = {
+        ...{ webRootFontSize: '142%' },
         ...(appInit || {}),
-      },
-    };
-
-    return authenticationFailCode || authenticationFailCodeDefault;
-  },
-  getSignInSuccessFlag: () => {
-    const appInit = getAppInitConfigData();
-
-    const { signInSuccessFlag } = {
-      ...{ signInSuccessFlag: verifySignInResult.success },
-      ...(appInit || {}),
-    };
-
-    return signInSuccessFlag || verifySignInResult.success;
-  },
-  getSignInFailFlag: () => {
-    const appInit = getAppInitConfigData();
-
-    const { signInFailFlag } = {
-      ...{ signInFailFlag: verifySignInResult.fail },
-      ...(appInit || {}),
-    };
-
-    return signInFailFlag || verifySignInResult.fail;
-  },
-  getSignInUnknownFlag: () => {
-    const appInit = getAppInitConfigData();
-
-    const { signInUnknownFlag } = {
-      ...{ signInUnknownFlag: verifySignInResult.unknown },
-      ...(appInit || {}),
-    };
-
-    return signInUnknownFlag || verifySignInResult.unknown;
-  },
-  getSignInPath: () => {
-    const appInit = getAppInitConfigData();
-
-    const { signInPath } = {
-      ...{ signInPath: '' },
-      ...(appInit || {}),
-    };
-
-    return signInPath || '';
-  },
-  getDefaultLongitude: () => {
-    const appInit = getAppInitConfigData();
-
-    const { defaultLongitude } = {
-      ...{ defaultLongitude: '' },
-      ...(appInit || {}),
-    };
-
-    return defaultLongitude || '';
-  },
-  getDefaultLatitude: () => {
-    const appInit = getAppInitConfigData();
-
-    const { defaultLatitude } = {
-      ...{ defaultLatitude: '' },
-      ...(appInit || {}),
-    };
-
-    return defaultLatitude || '';
-  },
-  getUseLocation: () => {
-    const appInit = getAppInitConfigData();
-
-    const { useLocation } = {
-      ...{ useLocation: false },
-      ...(appInit || {}),
-    };
-
-    return useLocation || false;
-  },
-  getMapKey: () => {
-    const appInit = getAppInitConfigData();
-
-    const { mapKey } = {
-      ...{ mapKey: '' },
-      ...(appInit || {}),
-    };
-
-    return mapKey || '';
-  },
-  getApiVersion: () => {
-    const appInit = getAppInitConfigData();
-
-    const { apiVersion } = {
-      ...{ apiVersion: '' },
-      ...(appInit || {}),
-    };
-
-    return apiVersion || '';
-  },
-  getUseVirtualRequest: () => {
-    const appInit = getAppInitConfigData();
-
-    const { useVirtualRequest } = {
-      ...{ useVirtualRequest: false },
-      ...(appInit || {}),
-    };
-
-    return useVirtualRequest || false;
-  },
-  getShowUseVirtualRequestMessage: () => {
-    const appInit = getAppInitConfigData();
-
-    const { showUseVirtualRequestMessage } = {
-      ...{ showUseVirtualRequestMessage: false },
-      ...(appInit || {}),
-    };
-
-    return showUseVirtualRequestMessage || false;
-  },
-  getShowLogInConsole: () => {
-    const appInit = getAppInitConfigData();
-
-    const { showLogInConsole } = {
-      ...{ showLogInConsole: false },
-      ...(appInit || {}),
-    };
-
-    return showLogInConsole || false;
-  },
-  getShowRequestInfo: () => {
-    const appInit = getAppInitConfigData();
-
-    const { showRequestInfo } = {
-      ...{ showRequestInfo: false },
-      ...(appInit || {}),
-    };
-
-    return showRequestInfo || false;
-  },
-  getPlatformName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { platformName } = {
-      ...{ platformName: '' },
-      ...(appInit || {}),
-    };
-
-    return platformName || '';
-  },
-  getAppName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { appName } = {
-      ...{ appName: '' },
-      ...(appInit || {}),
-    };
-
-    return appName || '';
-  },
-  getAppDescription: () => {
-    const appInit = getAppInitConfigData();
-
-    const { appDescription } = {
-      ...{ appDescription: '' },
-      ...(appInit || {}),
-    };
-
-    return appDescription || '';
-  },
-  getTitle: () => {
-    const appInit = getAppInitConfigData();
-
-    const { appName } = {
-      ...{ appName: '' },
-      ...(appInit || {}),
-    };
-
-    return appName || '';
-  },
-  getLoginLogo: () => {
-    const appInit = getAppInitConfigData();
-
-    const { loginLogo } = {
-      ...{ loginLogo: emptyLogoImage },
-      ...(appInit || {}),
-    };
-
-    return loginLogo || emptyLogoImage;
-  },
-  getShareLogo: () => {
-    const appInit = getAppInitConfigData();
-
-    const { shareLogo } = {
-      ...{ shareLogo: emptyLogoImage },
-      ...(appInit || {}),
-    };
-
-    return shareLogo || emptyLogoImage;
-  },
-  getShareLogoName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { shareLogoName } = {
-      ...{ shareLogoName: '' },
-      ...(appInit || {}),
-    };
-
-    return shareLogoName || '';
-  },
-  getCompanyName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { companyName } = {
-      ...{ companyName: '' },
-      ...(appInit || {}),
-    };
-
-    return companyName || '';
-  },
-  getLeftBarLogo: (remoteLogo) => {
-    if (!checkStringIsNullOrWhiteSpace(remoteLogo || null)) {
-      return remoteLogo;
-    }
-
-    const appInit = getAppInitConfigData();
-
-    const { leftBarLogo } = {
-      ...{ leftBarLogo: emptyLogoImage },
-      ...(appInit || {}),
-    };
-
-    return leftBarLogo || emptyLogoImage;
-  },
-  getLeftBarText: () => {
-    const appInit = getAppInitConfigData();
-
-    const { leftBarText } = {
-      ...{ leftBarText: '' },
-      ...(appInit || {}),
-    };
-
-    return leftBarText || '';
-  },
-  getFooterImage: () => {
-    const appInit = getAppInitConfigData();
-
-    const { footerImage } = {
-      ...{ footerImage: '' },
-      ...(appInit || {}),
-    };
-
-    return footerImage || '';
-  },
-  getFooterText: () => {
-    const appInit = getAppInitConfigData();
-
-    const { footerText } = {
-      ...{ footerText: '' },
-      ...(appInit || {}),
-    };
-
-    return footerText || '';
-  },
-  getFooterDescription: () => {
-    const appInit = getAppInitConfigData();
-
-    const { footerDescription } = {
-      ...{ footerDescription: '' },
-      ...(appInit || {}),
-    };
-
-    return footerDescription || '';
-  },
-  getAppId: () => {
-    const appInit = getAppInitConfigData();
-
-    const { appId } = {
-      ...{ appId: '' },
-      ...(appInit || {}),
-    };
-
-    return appId || '';
-  },
-  getSimulationLocation: () => {
-    const appInit = getAppInitConfigData();
-
-    const { simulationLocation } = {
-      ...{ simulationLocation: false },
-      ...(appInit || {}),
-    };
-
-    return !!(simulationLocation || false);
-  },
-  getSimulationLocationData: () => {
-    const appInit = getAppInitConfigData();
-
-    const { simulationLocationData } = {
-      ...{ simulationLocationData: {} },
-      ...(appInit || {}),
-    };
-
-    return simulationLocationData || {};
-  },
-  getRefreshSessionAliasName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { refreshSessionAliasName } = {
-      ...{ refreshSessionAliasName: 'refreshSessionApiData' },
-      ...(appInit || {}),
-    };
-
-    return refreshSessionAliasName || 'refreshSessionApiData';
-  },
-  getCheckTicketValidityAliasName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { checkTicketValidityAliasName } = {
-      ...{ checkTicketValidityAliasName: 'checkTicketValidityApiData' },
-      ...(appInit || {}),
-    };
-
-    return checkTicketValidityAliasName || 'checkTicketValidityApiData';
-  },
-  getSignInSilentAliasName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { signInSilentAliasName } = {
-      ...{ signInSilentAliasName: 'signInSilentApiData' },
-      ...(appInit || {}),
-    };
-
-    return signInSilentAliasName || 'signInSilentApiData';
-  },
-  getMetaDataAliasName: () => {
-    const appInit = getAppInitConfigData();
-
-    const { metaDataAliasName } = {
-      ...{ metaDataAliasName: 'metaDataApiData' },
-      ...(appInit || {}),
-    };
-
-    return metaDataAliasName || 'metaDataApiData';
-  },
-};
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function empty() {
-  return {};
+      };
+
+      return webRootFontSize || '142%';
+    },
+    /**
+     * 无权限时的跳转目标
+     * @returns path string
+     */
+    getWithoutPermissionRedirectPath: () => {
+      const { withoutPermissionRedirectPath } = {
+        ...{ withoutPermissionRedirectPath: '' },
+        ...(appInit || {}),
+      };
+
+      return withoutPermissionRedirectPath || '';
+    },
+    getFileUploadMaxSize: () => {
+      const { fileUploadMaxSize } = {
+        ...{ fileUploadMaxSize: 2 },
+        ...(appInit || {}),
+      };
+
+      return fileUploadMaxSize || 2;
+    },
+    getAudioUploadMaxSize: () => {
+      const { audioUploadMaxSize } = {
+        ...{ audioUploadMaxSize: 4 },
+        ...(appInit || {}),
+      };
+
+      return audioUploadMaxSize || 4;
+    },
+    getVideoUploadMaxSize: () => {
+      const { videoUploadMaxSize } = {
+        ...{ videoUploadMaxSize: 4 },
+        ...(appInit || {}),
+      };
+
+      return videoUploadMaxSize || 4;
+    },
+    getImageUploadMaxSize: () => {
+      const { imageUploadMaxSize } = {
+        ...{ imageUploadMaxSize: 2 },
+        ...(appInit || {}),
+      };
+
+      return imageUploadMaxSize || 2;
+    },
+    getShowSelectLanguage: () => {
+      const { showSelectLanguage } = {
+        ...{ showSelectLanguage: false },
+        ...(appInit || {}),
+      };
+
+      return showSelectLanguage || false;
+    },
+    getShowLogoInLoginView: () => {
+      const { showLogoInLoginView } = {
+        ...{ showLogoInLoginView: false },
+        ...(appInit || {}),
+      };
+
+      return showLogoInLoginView || false;
+    },
+    getEmptyLogo: () => {
+      const { emptyLogo } = {
+        ...{ emptyLogo: emptyLogoImage },
+        ...(appInit || {}),
+      };
+
+      return emptyLogo || emptyLogoImage;
+    },
+    getInitialLocationMode: () => {
+      const { initialLocationMode } = {
+        ...{ initialLocationMode: locationModeCollection.custom },
+        ...(appInit || {}),
+      };
+
+      return toNumber(initialLocationMode || locationModeCollection.custom);
+    },
+    getTokenAnonymous: () => {
+      const { tokenAnonymous } = {
+        ...{ tokenAnonymous: 'anonymous' },
+        ...(appInit || {}),
+      };
+
+      return tokenAnonymous || 'anonymous';
+    },
+    getWeatherApi: () => {
+      const { weatherApi } = {
+        ...{ weatherApi: '' },
+        ...(appInit || {}),
+      };
+
+      return weatherApi || '';
+    },
+    getDefaultMetaData: () => {
+      const { defaultMetaData } = {
+        ...{ defaultMetaData: {} },
+        ...(appInit || {}),
+      };
+
+      return defaultMetaData || {};
+    },
+    getNavigationToSignInWhenSignInSilentFail: () => {
+      const { navigationToSignInWhenSignInSilentFail } = {
+        ...{ navigationToSignInWhenSignInSilentFail: false },
+        ...(appInit || {}),
+      };
+
+      return navigationToSignInWhenSignInSilentFail || false;
+    },
+    getApiSuccessCode: () => {
+      const { apiSuccessCode } = {
+        ...{ apiSuccessCode: apiSuccessCodeDefault },
+        ...(appInit || {}),
+      };
+
+      return apiSuccessCode || apiSuccessCodeDefault;
+    },
+    getAuthenticationFailCode: () => {
+      const { authenticationFailCode } = {
+        ...{
+          authenticationFailCode: authenticationFailCodeDefault,
+          ...(appInit || {}),
+        },
+      };
+
+      return authenticationFailCode || authenticationFailCodeDefault;
+    },
+    getSignInSuccessFlag: () => {
+      const { signInSuccessFlag } = {
+        ...{ signInSuccessFlag: verifySignInResult.success },
+        ...(appInit || {}),
+      };
+
+      return signInSuccessFlag || verifySignInResult.success;
+    },
+    getSignInFailFlag: () => {
+      const { signInFailFlag } = {
+        ...{ signInFailFlag: verifySignInResult.fail },
+        ...(appInit || {}),
+      };
+
+      return signInFailFlag || verifySignInResult.fail;
+    },
+    getSignInUnknownFlag: () => {
+      const { signInUnknownFlag } = {
+        ...{ signInUnknownFlag: verifySignInResult.unknown },
+        ...(appInit || {}),
+      };
+
+      return signInUnknownFlag || verifySignInResult.unknown;
+    },
+    getSignInPath: () => {
+      const { signInPath } = {
+        ...{ signInPath: '' },
+        ...(appInit || {}),
+      };
+
+      return signInPath || '';
+    },
+    getDefaultLongitude: () => {
+      const { defaultLongitude } = {
+        ...{ defaultLongitude: '' },
+        ...(appInit || {}),
+      };
+
+      return defaultLongitude || '';
+    },
+    getDefaultLatitude: () => {
+      const { defaultLatitude } = {
+        ...{ defaultLatitude: '' },
+        ...(appInit || {}),
+      };
+
+      return defaultLatitude || '';
+    },
+    getUseLocation: () => {
+      const { useLocation } = {
+        ...{ useLocation: false },
+        ...(appInit || {}),
+      };
+
+      return useLocation || false;
+    },
+    getMapKey: () => {
+      const { mapKey } = {
+        ...{ mapKey: '' },
+        ...(appInit || {}),
+      };
+
+      return mapKey || '';
+    },
+    getApiVersion: () => {
+      const { apiVersion } = {
+        ...{ apiVersion: '' },
+        ...(appInit || {}),
+      };
+
+      return apiVersion || '';
+    },
+    getDefaultRequestMode: () => {
+      const { defaultRequestMode } = {
+        ...{ defaultRequestMode: requestMode.real },
+        ...(appInit || {}),
+      };
+
+      return checkStringIsNullOrWhiteSpace(defaultRequestMode)
+        ? requestMode.real
+        : defaultRequestMode;
+    },
+    getPromptSimulation: () => {
+      const { promptSimulation } = {
+        ...{ promptSimulation: false },
+        ...(appInit || {}),
+      };
+
+      return promptSimulation || false;
+    },
+    getShowRequestInfo: () => {
+      const { showRequestInfo } = {
+        ...{ showRequestInfo: false },
+        ...(appInit || {}),
+      };
+
+      return showRequestInfo || false;
+    },
+    getPlatformName: () => {
+      const { platformName } = {
+        ...{ platformName: '' },
+        ...(appInit || {}),
+      };
+
+      return platformName || '';
+    },
+    getAppName: () => {
+      const { appName } = {
+        ...{ appName: '' },
+        ...(appInit || {}),
+      };
+
+      return appName || '';
+    },
+    getAppDescription: () => {
+      const { appDescription } = {
+        ...{ appDescription: '' },
+        ...(appInit || {}),
+      };
+
+      return appDescription || '';
+    },
+    getTitle: () => {
+      const { appName } = {
+        ...{ appName: '' },
+        ...(appInit || {}),
+      };
+
+      return appName || '';
+    },
+    getLoginLogo: () => {
+      const { loginLogo } = {
+        ...{ loginLogo: emptyLogoImage },
+        ...(appInit || {}),
+      };
+
+      return loginLogo || emptyLogoImage;
+    },
+    getShareLogo: () => {
+      const { shareLogo } = {
+        ...{ shareLogo: emptyLogoImage },
+        ...(appInit || {}),
+      };
+
+      return shareLogo || emptyLogoImage;
+    },
+    getShareLogoName: () => {
+      const { shareLogoName } = {
+        ...{ shareLogoName: '' },
+        ...(appInit || {}),
+      };
+
+      return shareLogoName || '';
+    },
+    getCompanyName: () => {
+      const { companyName } = {
+        ...{ companyName: '' },
+        ...(appInit || {}),
+      };
+
+      return companyName || '';
+    },
+    getLeftBarLogo: (remoteLogo) => {
+      if (!checkStringIsNullOrWhiteSpace(remoteLogo || null)) {
+        return remoteLogo;
+      }
+
+      const { leftBarLogo } = {
+        ...{ leftBarLogo: emptyLogoImage },
+        ...(appInit || {}),
+      };
+
+      return leftBarLogo || emptyLogoImage;
+    },
+    getLeftBarText: () => {
+      const { leftBarText } = {
+        ...{ leftBarText: '' },
+        ...(appInit || {}),
+      };
+
+      return leftBarText || '';
+    },
+    getFooterImage: () => {
+      const { footerImage } = {
+        ...{ footerImage: '' },
+        ...(appInit || {}),
+      };
+
+      return footerImage || '';
+    },
+    getFooterText: () => {
+      const { footerText } = {
+        ...{ footerText: '' },
+        ...(appInit || {}),
+      };
+
+      return footerText || '';
+    },
+    getFooterDescription: () => {
+      const { footerDescription } = {
+        ...{ footerDescription: '' },
+        ...(appInit || {}),
+      };
+
+      return footerDescription || '';
+    },
+    getAppId: () => {
+      const { appId } = {
+        ...{ appId: '' },
+        ...(appInit || {}),
+      };
+
+      return appId || '';
+    },
+    getSimulationLocation: () => {
+      const { simulationLocation } = {
+        ...{ simulationLocation: false },
+        ...(appInit || {}),
+      };
+
+      return !!(simulationLocation || false);
+    },
+    getSimulationLocationData: () => {
+      const { simulationLocationData } = {
+        ...{ simulationLocationData: {} },
+        ...(appInit || {}),
+      };
+
+      return simulationLocationData || {};
+    },
+    getRefreshSessionAliasName: () => {
+      const { refreshSessionAliasName } = {
+        ...{ refreshSessionAliasName: 'refreshSessionApiData' },
+        ...(appInit || {}),
+      };
+
+      return refreshSessionAliasName || 'refreshSessionApiData';
+    },
+    getCheckTicketValidityAliasName: () => {
+      const { checkTicketValidityAliasName } = {
+        ...{ checkTicketValidityAliasName: 'checkTicketValidityApiData' },
+        ...(appInit || {}),
+      };
+
+      return checkTicketValidityAliasName || 'checkTicketValidityApiData';
+    },
+    getSignInSilentAliasName: () => {
+      const { signInSilentAliasName } = {
+        ...{ signInSilentAliasName: 'signInSilentApiData' },
+        ...(appInit || {}),
+      };
+
+      return signInSilentAliasName || 'signInSilentApiData';
+    },
+    getMetaDataAliasName: () => {
+      const { metaDataAliasName } = {
+        ...{ metaDataAliasName: 'metaDataApiData' },
+        ...(appInit || {}),
+      };
+
+      return metaDataAliasName || 'metaDataApiData';
+    },
+  };
 }

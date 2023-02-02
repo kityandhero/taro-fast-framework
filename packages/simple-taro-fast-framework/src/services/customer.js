@@ -1,18 +1,16 @@
-import { logDebug } from 'easy-soft-utility';
-
-import { executiveRequest } from '../utils/request';
+import { logDebug, request, requestMode } from 'easy-soft-utility';
 
 export async function getCustomerData(params) {
   logDebug(
     'service "customer/getCurrentCustomer" use virtual request in this demo',
   );
 
-  return executiveRequest({
+  return request({
     api: `/customer/getCurrentCustomer`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: {
         nickname: 'lucy',
         age: 15,

@@ -125,7 +125,7 @@ class Switch extends BaseComponent {
           return v;
         })
         .catch((error) => {
-          logException(error.message);
+          logException(error);
         });
     } else {
       this.setState({

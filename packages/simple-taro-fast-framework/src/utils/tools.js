@@ -7,6 +7,7 @@ import {
   isObject,
   isString,
   isUndefined,
+  removeToken,
   toString,
 } from 'easy-soft-utility';
 
@@ -16,7 +17,6 @@ import {
   removeCurrentCustomer,
   removeOpenId,
   removeSession,
-  removeToken,
 } from 'taro-fast-framework/es/utils/globalStorageAssist';
 
 import QQMapWX from '../libs/qqmap-wx-jssdk.min';

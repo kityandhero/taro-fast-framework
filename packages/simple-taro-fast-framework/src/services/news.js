@@ -1,6 +1,10 @@
-import { datetimeFormat, formatDatetime, getNow } from 'easy-soft-utility';
-
-import { executiveRequest } from '../utils/request';
+import {
+  datetimeFormat,
+  formatDatetime,
+  getNow,
+  request,
+  requestMode,
+} from 'easy-soft-utility';
 
 const galleryItem = {
   galleryId: '1',
@@ -68,12 +72,12 @@ function createEmptyList(size) {
 }
 
 export async function getOverviewData(params) {
-  return executiveRequest({
+  return request({
     api: `/news/integration/overview`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       data: {
         galleryList: createEmptyList(4).map((o, index) => {
           const no = `gallery_item_${index + 1}`;

@@ -2,8 +2,6 @@ import { ENV_TYPE, getApp, getEnv } from '@tarojs/taro';
 
 import { isObject, isUndefined } from 'easy-soft-utility';
 
-import { appInitDefault } from './constants';
-
 export function getDefaultTaroGlobalData() {
   return {
     test: 'success',
@@ -77,30 +75,6 @@ export function setTaroGlobalData(config) {
       console.warn(`framework with env [${env}] has no adaptation`);
       break;
   }
-}
-
-export function getAppInitConfigData() {
-  let appInitConfig = appInitDefault;
-
-  const taroGlobalData = getTaroGlobalData();
-
-  if (taroGlobalData) {
-    if ((taroGlobalData.appInitCustomLocal || null) != null) {
-      appInitConfig = {
-        ...appInitConfig,
-        ...taroGlobalData.appInitCustomLocal,
-      };
-    }
-
-    if ((taroGlobalData.appInitCustomRemote || null) != null) {
-      appInitConfig = {
-        ...appInitConfig,
-        ...taroGlobalData.appInitCustomRemote,
-      };
-    }
-  }
-
-  return appInitConfig;
 }
 
 /**

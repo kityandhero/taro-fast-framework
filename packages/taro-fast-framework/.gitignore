@@ -10,13 +10,12 @@
 **/.umi-production
 **/.idea
 **/.history
-**/.swc
+**/.vs
 
 # ignore file
 *.log
 *.d.ts
 *.bak
-*.min.js
 
 # ignore special
 rollup.config-*.cjs

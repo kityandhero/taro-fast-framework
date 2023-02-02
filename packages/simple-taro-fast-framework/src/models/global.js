@@ -4,9 +4,9 @@ import {
   reducerDefaultParams,
   reducerNameCollection,
 } from 'easy-soft-dva';
+import { pretreatmentRemoteSingleData } from 'easy-soft-utility';
 
 import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
-import { pretreatmentRemoteSingleData } from 'taro-fast-framework/es/utils/requestAssistor';
 
 import { exchangeShareData, getData } from '../services/global';
 

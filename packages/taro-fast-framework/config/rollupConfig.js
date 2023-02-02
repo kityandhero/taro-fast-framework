@@ -3,10 +3,7 @@ import { buildConfig as buildConfigCore } from '../../../develop/config/rollup/c
 const inputFile = {
   ...{
     'utils/globalStorageAssist': 'src/utils/globalStorageAssist.js',
-    'utils/authority': 'src/utils/authority.js',
     'utils/request': 'src/utils/request.js',
-    'utils/virtualRequest': 'src/utils/virtualRequest.js',
-    'utils/requestAssistor': 'src/utils/requestAssistor.js',
     'utils/globalModel': 'src/utils/globalModel.js',
     'utils/defaultSettingsSpecial': 'src/utils/defaultSettingsSpecial.js',
     'utils/actionAssist': 'src/utils/actionAssist.js',

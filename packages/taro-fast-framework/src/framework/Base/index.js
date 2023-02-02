@@ -8,6 +8,7 @@ import {
   logExecute,
   logObject,
   logText,
+  pretreatmentRequestParams,
   showErrorMessage,
   toNumber,
   toString,
@@ -19,7 +20,6 @@ import {
   stopPullDownRefresh,
 } from 'taro-fast-common/es/utils/tools';
 
-import { pretreatmentRequestParams } from '../../utils/requestAssistor';
 import { checkWhetherAuthorizeFail } from '../../utils/tools';
 import Infrastructure from '../Infrastructure';
 
@@ -407,7 +407,7 @@ class Base extends Infrastructure {
             stopPullDownRefresh();
             hideNavigationBarLoading();
 
-            logException(error.message);
+            logException(error);
 
             logDebug('state dispatchComplete will set to true');
 

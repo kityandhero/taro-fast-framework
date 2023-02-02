@@ -13,28 +13,35 @@
       "script": "dev:core-common",
       "problemMatcher": [],
       "label": "dev:core-common",
-      "detail": "cd packages/taro-fast-common && npm run dev"
+      "detail": "cd packages/taro-fast-common && npm run dev:rollup"
     },
     {
       "type": "npm",
       "script": "dev:core-component",
       "problemMatcher": [],
       "label": "dev:core-component",
-      "detail": "cd packages/taro-fast-component && npm run dev"
+      "detail": "cd packages/taro-fast-component && npm run dev:rollup"
     },
     {
       "type": "npm",
       "script": "dev:core-component-extra",
       "problemMatcher": [],
       "label": "dev:core-component-extra",
-      "detail": "cd packages/taro-fast-component-extra && npm run dev"
+      "detail": "cd packages/taro-fast-component-extra && npm run dev:rollup"
+    },
+    {
+      "type": "npm",
+      "script": "dev:core-component-prism",
+      "problemMatcher": [],
+      "label": "dev:core-component-prism",
+      "detail": "cd packages/taro-fast-component-prism && npm run dev:rollup"
     },
     {
       "type": "npm",
       "script": "dev:core-framework",
       "problemMatcher": [],
       "label": "dev:core-framework",
-      "detail": "cd packages/taro-fast-framework && npm run dev"
+      "detail": "cd packages/taro-fast-framework && npm run dev:rollup"
     },
     {
       "type": "npm",
@@ -42,14 +49,6 @@
       "problemMatcher": [],
       "label": "start:h5:simple",
       "detail": "cd packages/simple-taro-fast-framework && npm run start:h5"
-    },
-    {
-      "type": "npm",
-      "script": "dev",
-      "path": "packages/taro-fast-component-prism",
-      "problemMatcher": [],
-      "label": "dev:core-component-prism",
-      "detail": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch"
     }
   ]
 }

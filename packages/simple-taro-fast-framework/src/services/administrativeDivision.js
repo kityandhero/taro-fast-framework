@@ -1,13 +1,14 @@
+import { request, requestMode } from 'easy-soft-utility';
+
 import { administrativeDivisionListData } from '../assets/administrativeDivisionData';
-import { executiveRequest } from '../utils/request';
 
 export async function singeListData(params) {
-  return executiveRequest({
+  return request({
     api: `/news/article/get`,
     params,
-    useVirtualRequest: true,
-    virtualNeedAuthorize: false,
-    virtualSuccessResponse: {
+    mode: requestMode.simulation,
+    simulativeAuthorize: false,
+    simulativeSuccessResponse: {
       list: administrativeDivisionListData,
     },
   });
