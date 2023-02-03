@@ -5,7 +5,7 @@ import {
   Button,
   CenterBox,
   HelpBox,
-  Icon,
+  IconCheckCircle,
   ProgressBox,
   Space,
 } from 'taro-fast-component';
@@ -15,8 +15,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconCheckCircle } = Icon;
 
 const config1 = {
   icon: <IconCheckCircle size={38} color="green" />,

@@ -6,7 +6,7 @@ import { Space } from 'taro-fast-component';
 import { getVerifySignInResult, removeSession } from 'taro-fast-framework';
 
 import { CodePageBox, SimpleBox } from '../../../../customComponents';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 const configList = [
   {

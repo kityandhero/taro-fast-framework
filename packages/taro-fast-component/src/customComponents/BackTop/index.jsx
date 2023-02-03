@@ -7,14 +7,12 @@ import { transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';
-import { Icon } from '../Icon';
+import { Icon, IconChevronUp } from '../Icon';
 import { Transition } from '../Transition';
 
 import './index.less';
 
 const classPrefix = `tfc-back-top`;
-
-const { IconChevronUp } = Icon;
 
 const defaultProps = {
   visible: false,

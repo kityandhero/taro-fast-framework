@@ -4,7 +4,7 @@ import {
   Button,
   Card,
   ColorText,
-  Icon,
+  IconEdit,
   Item,
   Space,
 } from 'taro-fast-component';
@@ -15,8 +15,6 @@ import {
   SimpleBox,
 } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
-
-const { IconEdit } = Icon;
 
 const style = {
   ...{

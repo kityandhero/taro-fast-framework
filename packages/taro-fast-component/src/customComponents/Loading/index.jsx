@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
+  buildStringStyle,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
 } from 'easy-soft-utility';
@@ -78,8 +79,10 @@ class Loading extends BaseComponent {
     const type = this.getType();
     const style = this.getStyle();
 
+    console.log(buildStringStyle(style));
+
     return (
-      <View className={classNames(classPrefix)} style={style}>
+      <View className={classNames(classPrefix)} style={buildStringStyle(style)}>
         {type === 'ring' ? (
           <>
             <View className={classNames(`${classPrefix}__ring`)} />

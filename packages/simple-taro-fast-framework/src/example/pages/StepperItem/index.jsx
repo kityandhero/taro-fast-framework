@@ -1,15 +1,13 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Icon, Space, StepperItem } from 'taro-fast-component';
+import { IconSketch, Space, StepperItem } from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch } = Icon;
 
 function onChangeCore(v) {
   console.log(v);

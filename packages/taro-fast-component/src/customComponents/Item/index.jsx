@@ -6,12 +6,10 @@ import { getGuid, isFunction, logException } from 'easy-soft-utility';
 import { getRect, transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
-import { Icon } from '../Icon';
+import { IconChevronRight } from '../Icon';
 import { Line } from '../Line';
 
 import './index.less';
-
-const { IconChevronRight } = Icon;
 
 const classPrefix = `tfc-item`;
 

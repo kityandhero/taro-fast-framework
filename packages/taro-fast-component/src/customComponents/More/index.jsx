@@ -4,11 +4,9 @@ import { Text, View } from '@tarojs/components';
 import { isFunction } from 'easy-soft-utility';
 
 import { BaseComponent } from '../BaseComponent';
-import { Icon } from '../Icon';
+import { IconChevronRight } from '../Icon';
 
 import './index.less';
-
-const { IconChevronRight } = Icon;
 
 const classPrefix = `tfc-more`;
 

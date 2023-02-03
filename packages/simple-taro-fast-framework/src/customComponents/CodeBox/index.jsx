@@ -5,7 +5,7 @@ import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { Card } from 'taro-fast-component';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig';
-import { buildComponentPrismCode } from '../../utils/tools';
+import { buildComponentPrismCode } from '../../utils';
 
 const style = {
   ...{

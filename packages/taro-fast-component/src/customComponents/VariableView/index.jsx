@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ScrollView, View } from '@tarojs/components';
-import { Taro } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 import {
   checkStringIsNullOrWhiteSpace,

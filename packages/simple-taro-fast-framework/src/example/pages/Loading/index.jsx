@@ -8,8 +8,6 @@ import {
   SimpleBox,
 } from '../../../customComponents';
 
-const { Scale } = Loading;
-
 const config1 = {
   type: 'comet',
 };
@@ -109,25 +107,6 @@ export default class Index extends ContentPageBase {
         <PropertyBox
           header="Loading 可配置项以及默认值"
           config={Loading.defaultProps}
-          labelWidth={270}
-        />
-
-        <SimpleBox
-          header="Loading.Scale"
-          componentName="Loading.Scale"
-          mockChildren={!!inner}
-          useInnerBox
-          innerBoxCenterMode
-          innerBoxPadding
-          innerBoxBackgroundColor="#333"
-          controlBox={this.buildControlBox(this.establishControlList())}
-        >
-          <Scale></Scale>
-        </SimpleBox>
-
-        <PropertyBox
-          header="Loading.Scale"
-          config={Scale.defaultProps}
           labelWidth={270}
         />
       </Space>

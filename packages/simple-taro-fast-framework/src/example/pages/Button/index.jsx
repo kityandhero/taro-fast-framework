@@ -1,15 +1,13 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Button, ColorText, Icon, Space } from 'taro-fast-component';
+import { Button, ColorText, IconSearch, Space } from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSearch } = Icon;
 
 const colorList = [
   'red',

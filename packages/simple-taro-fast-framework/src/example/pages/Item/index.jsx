@@ -3,15 +3,19 @@ import { Image } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Icon, Item, Space, Switch } from 'taro-fast-component';
+import {
+  IconShoppingCart,
+  IconSketch,
+  Item,
+  Space,
+  Switch,
+} from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch, IconShoppingCart } = Icon;
 
 const users = [
   {

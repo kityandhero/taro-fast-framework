@@ -1,29 +1,54 @@
 import { ENV_TYPE, getEnv as getEnvCore } from '@tarojs/taro';
 
 import {
+  buildPromptModuleInfo,
+  checkStringIsNullOrWhiteSpace,
+  checkWhetherDevelopmentEnvironment,
+  displayTextMessage,
   envCollection,
   getCache,
-  logExecute,
-  logInfo,
+  logColorCollection,
   setCache,
 } from 'easy-soft-utility';
+
+import { modulePackageName } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'envAssist';
+
+function buildPromptModuleInfoText(text) {
+  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+}
 
 const cacheKeyCollection = {
   currentEnv: 'currentEnv',
 };
 
 export function checkEnv() {
-  logExecute('checkEnv');
-
   getEnv();
 }
 
 export function getEnv() {
-  let v = getCache({
-    key: cacheKeyCollection.currentEnv,
-  });
+  let v = '';
 
-  if ((v || null) == null) {
+  try {
+    v = getCache({
+      key: cacheKeyCollection.currentEnv,
+    });
+  } catch {
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: buildPromptModuleInfoText('call cache fail with getCache'),
+        color: logColorCollection.warn,
+        dataDescription: 'warn',
+        ancillaryInformation: '',
+      });
+    }
+  }
+
+  if (checkStringIsNullOrWhiteSpace(v)) {
     v = setEnvCache();
   }
 
@@ -91,12 +116,30 @@ function setEnvCache() {
     }
   }
 
-  setCache({
-    key: cacheKeyCollection.currentEnv,
-    value: v,
-  });
+  try {
+    setCache({
+      key: cacheKeyCollection.currentEnv,
+      value: v,
+    });
+  } catch {
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: buildPromptModuleInfoText('call cache fail with setCache'),
+        color: logColorCollection.warn,
+        dataDescription: 'warn',
+        ancillaryInformation: '',
+      });
+    }
+  }
 
-  logInfo(`current env -> ${v}`);
+  if (checkWhetherDevelopmentEnvironment()) {
+    displayTextMessage({
+      text: buildPromptModuleInfoText(`current env -> ${v}`),
+      color: logColorCollection.info,
+      dataDescription: 'info',
+      ancillaryInformation: '',
+    });
+  }
 
   return v;
 }

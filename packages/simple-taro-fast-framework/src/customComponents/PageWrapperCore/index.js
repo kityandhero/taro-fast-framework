@@ -6,7 +6,7 @@ import {
   getMap,
 } from 'taro-fast-framework';
 
-import { getQQMapWX } from '../../utils/tools';
+import { getQQMapWX } from '../../utils';
 
 /**
  * PageWrapperCore

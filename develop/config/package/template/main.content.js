@@ -37,6 +37,7 @@ const lintScript = {
   'postncu:u:all': 'pnpm install',
   'install:dependence:dev': 'node ./develop/assists/globalDependence.js',
   'postinstall:dependence:dev': 'pnpm install',
+  precommit: 'npm run lint:staged',
 };
 
 const prettierScript = {

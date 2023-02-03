@@ -1,6 +1,6 @@
 import { PageWrapperRemote } from '../../../customComponents';
 
-export default class BasePageWrapper extends PageWrapperRemote {
+class BasePageWrapper extends PageWrapperRemote {
   verifySession = false;
 
   verifyTicket = false;
@@ -9,3 +9,5 @@ export default class BasePageWrapper extends PageWrapperRemote {
 
   needReLocationWhenRepeatedShow = false;
 }
+
+export { BasePageWrapper };

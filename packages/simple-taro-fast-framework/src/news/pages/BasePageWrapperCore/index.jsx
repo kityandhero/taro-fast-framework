@@ -1,5 +1,7 @@
-import { PageWrapperSimulation } from '../../../customComponents/PageWrapperSimulation';
+import { PageWrapperSimulation } from '../../../customComponents';
 
-export default class BasePageWrapper extends PageWrapperSimulation {
+class BasePageWrapperCore extends PageWrapperSimulation {
   verifyTicket = false;
 }
+
+export { BasePageWrapperCore };

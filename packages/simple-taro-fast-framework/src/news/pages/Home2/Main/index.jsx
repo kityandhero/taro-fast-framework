@@ -5,15 +5,20 @@ import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import { Card, FlexBox, Icon, More, Space, Tabs } from 'taro-fast-component';
+import {
+  Card,
+  FlexBox,
+  IconBulletList,
+  More,
+  Space,
+  Tabs,
+} from 'taro-fast-component';
 
 import { pathCollection } from '../../../../customConfig';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 import { buildItem, classPrefix } from '../Assist/tools';
 
 import './index.less';
-
-const { IconBulletList } = Icon;
 
 // eslint-disable-next-line no-undef
 definePageConfig({

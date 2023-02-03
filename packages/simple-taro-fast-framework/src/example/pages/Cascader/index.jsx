@@ -262,8 +262,6 @@ export default class Index extends ContentPageBase {
   };
 
   buildSimpleItem = ({ key, config, inner }) => {
-    console.log(config);
-
     return (
       <Cascader key={key} {...config}>
         {this.buildSimpleItemInner(inner)}

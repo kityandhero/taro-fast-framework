@@ -20,8 +20,6 @@
     "build:core-component-skip-compression": "cd packages/taro-fast-component && npm run build:skipCompression",
     "build:core-framework-compression": "cd packages/taro-fast-framework && npm run build",
     "build:core-framework-skip-compression": "cd packages/taro-fast-framework && npm run build:skipCompression",
-    "build:core:simple:h5": "npm run build:all && npm run build:simple:h5",
-    "build:core:simple:weapp": "npm run build:all && npm run build:simple:weapp",
     "build:simple:h5": "cd packages/simple-taro-fast-framework && npm run build:h5",
     "build:simple:weapp": "cd packages/simple-taro-fast-framework && npm run build:weapp",
     "change-nrm-local": "nrm use local && npm run sleep:change-nrm",

@@ -14,15 +14,13 @@ import { getRect } from 'taro-fast-common';
 import { Avatar } from '../Avatar';
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';
-import { Icon } from '../Icon';
+import { IconAdd, IconEdit } from '../Icon';
 import { ImageBox } from '../ImageBox';
 import { Overlay } from '../Overlay';
 
 import './index.less';
 
 const unit = 'px';
-
-const { IconAdd, IconEdit } = Icon;
 
 const classPrefix = `tfc-float-action`;
 

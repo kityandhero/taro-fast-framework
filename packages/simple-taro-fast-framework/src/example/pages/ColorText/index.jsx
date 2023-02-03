@@ -3,7 +3,13 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { ColorText, Icon, ImageBox, Space } from 'taro-fast-component';
+import {
+  ColorText,
+  Icon,
+  IconEdit,
+  ImageBox,
+  Space,
+} from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
 import {
@@ -11,8 +17,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconEdit } = Icon;
 
 const config0 = {
   text: '文本文字',

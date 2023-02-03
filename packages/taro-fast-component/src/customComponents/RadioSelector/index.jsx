@@ -5,12 +5,10 @@ import { checkStringIsNullOrWhiteSpace, isFunction } from 'easy-soft-utility';
 import { transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
-import { Icon } from '../Icon';
+import { IconCloseCircle } from '../Icon';
 import { Item } from '../Item';
 import { Popup } from '../Popup';
 import { Radio } from '../Radio';
-
-const { IconCloseCircle } = Icon;
 
 const defaultProps = {
   label: '',

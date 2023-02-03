@@ -2,7 +2,8 @@ import { connect } from 'easy-soft-dva';
 
 import {
   ColorText,
-  Icon,
+  IconShoppingCart,
+  IconSketch,
   RadioSelector,
   Space,
   Tag,
@@ -13,8 +14,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch, IconShoppingCart } = Icon;
 
 const radioOptions1 = [
   {

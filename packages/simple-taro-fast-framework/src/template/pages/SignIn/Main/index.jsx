@@ -11,7 +11,7 @@ import {
   Space,
 } from 'taro-fast-component';
 
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 import './index.less';
 

@@ -5,7 +5,7 @@ import { checkStringIsNullOrWhiteSpace, isArray } from 'easy-soft-utility';
 import { Card, DataGrid, Space } from 'taro-fast-component';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig';
-import { buildPagePrismCode } from '../../utils/tools';
+import { buildPagePrismCode } from '../../utils';
 
 const style = {
   ...{

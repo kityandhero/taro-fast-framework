@@ -14,12 +14,10 @@ import { handleTouchScroll, transformSize } from 'taro-fast-common';
 import { BaseComponent } from '../BaseComponent';
 import { Card } from '../Card';
 import { CenterBox } from '../CenterBox';
-import { Icon } from '../Icon';
+import { IconCloseCircle } from '../Icon';
 import { Overlay } from '../Overlay';
 
 import './index.less';
-
-const { IconCloseCircle } = Icon;
 
 const positionCollection = ['bottom', 'top', 'left', 'right', 'center'];
 

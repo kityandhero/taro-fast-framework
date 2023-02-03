@@ -4,9 +4,7 @@ import { View } from '@tarojs/components';
 import { isArray, isFunction } from 'easy-soft-utility';
 
 import { AbstractComponent } from 'taro-fast-common';
-import { Grid, Icon, Space } from 'taro-fast-component';
-
-const { IconCheck } = Icon;
+import { Grid, IconCheck, Space } from 'taro-fast-component';
 
 const classPrefix = `tfc-selector`;
 

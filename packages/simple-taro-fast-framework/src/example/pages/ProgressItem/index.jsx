@@ -6,7 +6,7 @@ import {
   Button,
   CenterBox,
   HelpBox,
-  Icon,
+  IconCheckCircle,
   ProgressItem,
   Space,
 } from 'taro-fast-component';
@@ -16,8 +16,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconCheckCircle } = Icon;
 
 const config1 = {
   label: '当前进度',

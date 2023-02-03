@@ -1,14 +1,12 @@
 import { connect } from 'easy-soft-dva';
 
-import { Icon, Space, Steps } from 'taro-fast-component';
+import { IconVolumePlus, Space, Steps } from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconVolumePlus } = Icon;
 
 const config1 = {
   list: [

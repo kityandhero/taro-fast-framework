@@ -1,15 +1,13 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Icon, SearchBar, Space } from 'taro-fast-component';
+import { IconSketch, SearchBar, Space } from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch } = Icon;
 
 const config1 = {
   style: {},

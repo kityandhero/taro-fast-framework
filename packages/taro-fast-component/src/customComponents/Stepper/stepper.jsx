@@ -17,9 +17,7 @@ import {
 
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';
-import { Icon } from '../Icon';
-
-const { IconAdd, IconSubtract } = Icon;
+import { IconAdd, IconSubtract } from '../Icon';
 
 const classPrefix = `tfc-stepper`;
 

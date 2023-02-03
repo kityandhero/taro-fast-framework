@@ -10,11 +10,9 @@ import { transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
 import { CheckBox } from '../CheckBox';
-import { Icon } from '../Icon';
+import { IconCloseCircle } from '../Icon';
 import { Item } from '../Item';
 import { Popup } from '../Popup';
-
-const { IconCloseCircle } = Icon;
 
 const defaultProps = {
   label: '',

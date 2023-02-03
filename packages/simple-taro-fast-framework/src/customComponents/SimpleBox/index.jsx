@@ -20,14 +20,12 @@ import {
   ColorText,
   Divider,
   HelpBox,
-  Icon,
+  IconBell,
   Space,
 } from 'taro-fast-component';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig';
-import { buildComponentPrismCode } from '../../utils/tools';
-
-const { IconBell } = Icon;
+import { buildComponentPrismCode } from '../../utils';
 
 const style = {
   ...{

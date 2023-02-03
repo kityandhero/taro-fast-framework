@@ -4,14 +4,12 @@ import { View } from '@tarojs/components';
 import { isArray } from 'easy-soft-utility';
 
 import { BaseComponent } from '../BaseComponent';
-import { Icon } from '../Icon';
+import { IconChevronDown } from '../Icon';
 import { Item } from '../Item';
 
 import './index.less';
 
 const classPrefix = `tfc-collapse`;
-
-const { IconChevronDown } = Icon;
 
 const defaultProps = {
   style: {},

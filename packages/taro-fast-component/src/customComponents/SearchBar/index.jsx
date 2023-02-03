@@ -6,11 +6,9 @@ import { transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';
-import { Icon } from '../Icon';
+import { IconSearch } from '../Icon';
 import { InputItem } from '../InputItem';
 import { VerticalBox } from '../VerticalBox';
-
-const { IconSearch } = Icon;
 
 const modeCollection = ['search', 'navigate'];
 

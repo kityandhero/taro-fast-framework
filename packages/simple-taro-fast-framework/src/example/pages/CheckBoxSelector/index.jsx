@@ -3,7 +3,8 @@ import { connect } from 'easy-soft-dva';
 import {
   CheckBoxSelector,
   ColorText,
-  Icon,
+  IconShoppingCart,
+  IconSketch,
   Space,
   Tag,
 } from 'taro-fast-component';
@@ -13,8 +14,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch, IconShoppingCart } = Icon;
 
 const checkBoxOptions1 = [
   {

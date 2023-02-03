@@ -3,11 +3,9 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { CenterBox, Icon } from 'taro-fast-component';
+import { CenterBox, IconClose } from 'taro-fast-component';
 
 import { ContentPageBase } from '../../../../customComponents';
-
-const { IconClose } = Icon;
 
 export const classPrefix = `template-grid-banner`;
 

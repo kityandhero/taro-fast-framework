@@ -1,9 +1,9 @@
 import { isArray, isFunction } from 'easy-soft-utility';
 
 import { pathCollection } from '../../../customConfig';
-import BasePageWrapperCore from '../BasePageWrapperCore';
+import { BasePageWrapperCore } from '../BasePageWrapperCore';
 
-export default class BasePageWrapper extends BasePageWrapperCore {
+class BasePageWrapper extends BasePageWrapperCore {
   // verifySession = true;
 
   // verifyTicketValidity = true;
@@ -34,3 +34,5 @@ export default class BasePageWrapper extends BasePageWrapperCore {
     });
   }
 }
+
+export { BasePageWrapper };

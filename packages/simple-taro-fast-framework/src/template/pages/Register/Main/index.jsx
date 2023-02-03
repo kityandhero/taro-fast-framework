@@ -5,7 +5,7 @@ import { connect } from 'easy-soft-dva';
 
 import { Avatar, Button, CenterBox, Space } from 'taro-fast-component';
 
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 import './index.less';
 

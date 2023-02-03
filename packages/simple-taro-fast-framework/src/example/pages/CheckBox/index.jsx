@@ -1,7 +1,14 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Button, CheckBox, Icon, Space } from 'taro-fast-component';
+import {
+  Button,
+  CheckBox,
+  IconCheckCircle,
+  IconShoppingCart,
+  IconSketch,
+  Space,
+} from 'taro-fast-component';
 
 import {
   ContentPageBase,
@@ -9,8 +16,6 @@ import {
   SimpleBox,
 } from '../../../customComponents';
 import { cardStyle } from '../../../customConfig';
-
-const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 
 const style = {
   ...{

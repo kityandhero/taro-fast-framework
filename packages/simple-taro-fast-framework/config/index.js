@@ -37,6 +37,7 @@ const config = {
   },
   mini: {
     baseLevel: 20,
+    // debugReact: true,
     postcss: {
       pxtransform: {
         enable: true,

@@ -2,13 +2,11 @@ import { Text, View } from '@tarojs/components';
 
 import { navigateTo } from 'easy-soft-utility';
 
-import { Icon, ImageBox } from 'taro-fast-component';
+import { IconChevronRight, IconList, ImageBox } from 'taro-fast-component';
 
 import { PageWrapperSimulation } from '../PageWrapperSimulation';
 
 import './index.less';
-
-const { IconList, IconChevronRight } = Icon;
 
 class ChannelPageBase extends PageWrapperSimulation {
   constructor(props) {

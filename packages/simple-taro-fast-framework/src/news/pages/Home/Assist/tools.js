@@ -14,7 +14,7 @@ import {
   ColorText,
   Ellipsis,
   FlexBox,
-  Icon,
+  IconClock,
   ImageBox,
   ScrollBox,
   Space,
@@ -24,8 +24,6 @@ import {
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 
 export const classPrefix = `simple-news-home`;
-
-const { IconClock } = Icon;
 
 export function buildItem({
   keyPrefix = '',

@@ -9,18 +9,17 @@ import {
   ColorText,
   Ellipsis,
   FlexBox,
-  Icon,
+  IconClock,
+  IconEye,
   ImageBox,
   Space,
   Tabs,
 } from 'taro-fast-component';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 import './index.less';
-
-const { IconClock, IconEye } = Icon;
 
 export const classPrefix = `simple-news-section`;
 

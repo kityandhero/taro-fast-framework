@@ -14,7 +14,7 @@ import {
   ColorText,
   Ellipsis,
   FlexBox,
-  Icon,
+  IconClock,
   ImageBox,
   ScrollBox,
   Space,
@@ -22,8 +22,6 @@ import {
 } from 'taro-fast-component';
 
 export const classPrefix = `simple-news-home`;
-
-const { IconClock } = Icon;
 
 export function buildItem({
   keyPrefix = '',

@@ -7,7 +7,7 @@ import { transformSize } from 'taro-fast-common';
 import { Button, CenterBox, Space } from 'taro-fast-component';
 
 import { CodePageBox, SimpleBox } from '../../../../customComponents';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 const configList = [];
 

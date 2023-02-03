@@ -14,7 +14,7 @@ import { transformSize } from 'taro-fast-common';
 import { ActivityIndicator } from 'taro-fast-component';
 
 import { pathCollection, shareTransfer } from '../../../../customConfig';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 // eslint-disable-next-line no-undef
 definePageConfig({

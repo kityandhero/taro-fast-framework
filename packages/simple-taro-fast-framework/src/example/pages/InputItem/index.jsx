@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Icon, InputItem, Space } from 'taro-fast-component';
+import { Icon, IconCheckCircle, InputItem, Space } from 'taro-fast-component';
 
 import logoImage from '../../../assets/images/logo.png';
 import {
@@ -9,8 +9,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconCheckCircle } = Icon;
 
 function afterChange(v) {
   console.log(v);

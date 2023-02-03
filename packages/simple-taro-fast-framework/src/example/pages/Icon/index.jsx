@@ -270,10 +270,10 @@ export default class Index extends ContentPageBase {
                 text: '导入组件: import { Icon } from "taro-fast-component".',
               },
               {
-                text: '导入图标: 例如 const { IconAdd } = Icon.',
+                text: '导入图标: 例如 import { IconAdd } from "taro-fast-component".',
               },
               {
-                text: '导入方法: 例如 const { buildIcon } = Icon.',
+                text: '导入方法: 例如 import { buildIcon } from "taro-fast-component".',
               },
               {
                 text: '按名称使用: 例如 <Icon value={add} size={40} />.',

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Icon, More, NoticeBar, Space } from 'taro-fast-component';
+import { IconVolumePlus, More, NoticeBar, Space } from 'taro-fast-component';
 import {} from 'taro-fast-component-extra';
 
 import {
@@ -11,8 +11,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconVolumePlus } = Icon;
 
 const notice =
   '这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏';

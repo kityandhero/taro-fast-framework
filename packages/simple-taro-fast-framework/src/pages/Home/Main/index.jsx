@@ -4,7 +4,7 @@ import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
 import { checkWebEnv } from 'taro-fast-common';
-import { CenterBox, Icon, ImageBox } from 'taro-fast-component';
+import { CenterBox, IconChevronRight, ImageBox } from 'taro-fast-component';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';
@@ -14,12 +14,10 @@ import iconLayout from '../../../assets/images/icon-list-layout.png';
 // import iconNavigation from '../../../assets/images/icon-list-navigation.png';
 import iconView from '../../../assets/images/icon-list-view.png';
 import logoImg from '../../../assets/images/logo.png';
-import { PageWrapperSimulation } from '../../../customComponents/PageWrapperSimulation';
+import { PageWrapperSimulation } from '../../../customComponents';
 import { pathCollection } from '../../../customConfig';
 
 import './index.less';
-
-const { IconChevronRight } = Icon;
 
 const listData = [
   {

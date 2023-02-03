@@ -1,10 +1,10 @@
 import { getVerifySignInResult } from 'taro-fast-framework';
 
 import {
+  clearLocalDataWhenSimulationModeChanged,
   getSimulationMode,
   setSimulationMode,
-} from '../../utils/storageAssist';
-import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
+} from '../../utils';
 import { PageWrapperCore } from '../PageWrapperCore';
 
 class PageWrapperSimulation extends PageWrapperCore {

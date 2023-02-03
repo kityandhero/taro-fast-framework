@@ -12,14 +12,12 @@ import { transformSize } from 'taro-fast-common';
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';
 import { FlexBox } from '../FlexBox';
-import { Icon } from '../Icon';
+import { IconChevronDown, IconChevronUp } from '../Icon';
 import { Overlay } from '../Overlay';
 
 import './index.less';
 
 const classPrefix = `tfc-thumbnail-box`;
-
-const { IconChevronUp, IconChevronDown } = Icon;
 
 const actionHeight = 60;
 

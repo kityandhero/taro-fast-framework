@@ -1,14 +1,12 @@
 import { connect } from 'easy-soft-dva';
 
-import { Icon, Space, SwitchItem } from 'taro-fast-component';
+import { IconSketch, Space, SwitchItem } from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch } = Icon;
 
 function onSwitchChange(v) {
   console.log(v);

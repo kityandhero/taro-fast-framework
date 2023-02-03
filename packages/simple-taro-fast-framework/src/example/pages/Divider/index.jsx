@@ -4,7 +4,7 @@ import {
   ActivityIndicator,
   ColorText,
   Divider,
-  Icon,
+  IconSearch,
   Space,
 } from 'taro-fast-component';
 
@@ -13,8 +13,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSearch } = Icon;
 
 const config1 = {
   contentPosition: 'left',

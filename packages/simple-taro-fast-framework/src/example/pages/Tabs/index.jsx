@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Badge, Icon, Space, Tabs } from 'taro-fast-component';
+import { Badge, Icon, IconSketch, Space, Tabs } from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
 import {
@@ -11,8 +11,6 @@ import {
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconSketch } = Icon;
 
 const singlePanelComponent = (
   <View

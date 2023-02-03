@@ -1,15 +1,13 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Icon, More, Space } from 'taro-fast-component';
+import { IconShoppingCart, More, Space } from 'taro-fast-component';
 
 import {
   ContentPageBase,
   PropertyBox,
   SimpleBox,
 } from '../../../customComponents';
-
-const { IconShoppingCart } = Icon;
 
 const config1 = {
   text: '查看更多',

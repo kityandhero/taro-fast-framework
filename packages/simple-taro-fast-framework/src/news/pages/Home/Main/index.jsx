@@ -28,7 +28,7 @@ import {
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import { pathCollection } from '../../../../customConfig';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 import { buildItem, classPrefix } from '../Assist/tools';
 
 import './index.less';

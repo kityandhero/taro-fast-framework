@@ -3,7 +3,7 @@ import { connect } from 'easy-soft-dva';
 import { Space } from 'taro-fast-component';
 
 import { CodePageBox } from '../../../../customComponents';
-import BasePageWrapper from '../../BasePageWrapper';
+import { BasePageWrapper } from '../../BasePageWrapper';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
