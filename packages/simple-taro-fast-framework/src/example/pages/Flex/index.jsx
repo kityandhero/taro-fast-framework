@@ -3,10 +3,12 @@ import { connect } from 'easy-soft-dva';
 import { transformSize } from 'taro-fast-common';
 import { Col, Row, Space } from 'taro-fast-component';
 
-import CodeBox from '../../../customComponents/CodeBox';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  CodeBox,
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const rowStyle = {
   height: transformSize(80),

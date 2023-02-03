@@ -6,8 +6,7 @@ import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 import { transformSize } from 'taro-fast-common';
 import { Button, CenterBox, Space } from 'taro-fast-component';
 
-import CodePageBox from '../../../../customComponents/CodePageBox';
-import SimpleBox from '../../../../customComponents/SimpleBox';
+import { CodePageBox, SimpleBox } from '../../../../customComponents';
 import BasePageWrapper from '../../BasePageWrapper';
 
 const configList = [];

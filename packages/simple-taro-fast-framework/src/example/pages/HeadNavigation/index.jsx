@@ -13,9 +13,11 @@ import {
 } from 'taro-fast-component';
 
 import logoImage from '../../../assets/images/logo.png';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 let headerHeight = 0;
 

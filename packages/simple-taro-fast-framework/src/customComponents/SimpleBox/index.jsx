@@ -24,7 +24,7 @@ import {
   Space,
 } from 'taro-fast-component';
 
-import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../customConfig';
 import { buildComponentPrismCode } from '../../utils/tools';
 
 const { IconBell } = Icon;
@@ -311,4 +311,4 @@ SimpleBox.defaultProps = {
   ...defaultProps,
 };
 
-export default SimpleBox;
+export { SimpleBox };

@@ -7,7 +7,7 @@ import {
 import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
 import PageWrapperCore from '../PageWrapperCore';
 
-export default class PageWrapperRemote extends PageWrapperCore {
+class PageWrapperRemote extends PageWrapperCore {
   viewStyle = {
     paddingLeft: 'var(--tfc-18)',
     paddingRight: 'var(--tfc-18)',
@@ -97,3 +97,5 @@ export default class PageWrapperRemote extends PageWrapperCore {
     });
   };
 }
+
+export { PageWrapperRemote };

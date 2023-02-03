@@ -4,7 +4,7 @@ import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import { Card } from 'taro-fast-component';
 
-import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../customConfig';
 import { buildComponentPrismCode } from '../../utils/tools';
 
 const style = {
@@ -65,4 +65,4 @@ CodeBox.defaultProps = {
   ...defaultProps,
 };
 
-export default CodeBox;
+export { CodeBox };

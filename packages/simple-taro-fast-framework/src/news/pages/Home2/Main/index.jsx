@@ -7,7 +7,7 @@ import { navigateTo } from 'easy-soft-utility';
 import { transformSize } from 'taro-fast-common';
 import { Card, FlexBox, Icon, More, Space, Tabs } from 'taro-fast-component';
 
-import { pathCollection } from '../../../../customConfig/pathConfig';
+import { pathCollection } from '../../../../customConfig';
 import BasePageWrapper from '../../BasePageWrapper';
 import { buildItem, classPrefix } from '../Assist/tools';
 

@@ -4,9 +4,11 @@ import { connect } from 'easy-soft-dva';
 
 import { Space, ThumbnailBox } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const boxStyle = {
   backgroundColor: '',

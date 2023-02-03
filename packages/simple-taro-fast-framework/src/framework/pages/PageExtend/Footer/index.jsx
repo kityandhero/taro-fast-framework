@@ -4,7 +4,7 @@ import { connect } from 'easy-soft-dva';
 
 import { CenterBox } from 'taro-fast-component';
 
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import { ContentPageBase } from '../../../../customComponents';
 
 export const classPrefix = `template-grid-banner`;
 

@@ -5,11 +5,8 @@ import { connect } from 'easy-soft-dva';
 import { transformSize } from 'taro-fast-common';
 import { Card, CenterBox, DataGrid, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../../../customComponents/ContentPageBase';
-import {
-  cardHeaderStyle,
-  cardStyle,
-} from '../../../../../customConfig/constants';
+import { ContentPageBase } from '../../../../../customComponents';
+import { cardHeaderStyle, cardStyle } from '../../../../../customConfig';
 
 const style = {
   ...{

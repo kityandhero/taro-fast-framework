@@ -3,9 +3,11 @@ import { connect } from 'easy-soft-dva';
 import { transformSize } from 'taro-fast-common';
 import { FixedBox, Space, TitleBox } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const configCore = {
   style: {

@@ -4,9 +4,11 @@ import { transformSize } from 'taro-fast-common';
 import { Icon, InputItem, Space } from 'taro-fast-component';
 
 import logoImage from '../../../assets/images/logo.png';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const { IconCheckCircle } = Icon;
 

@@ -13,13 +13,3 @@ export async function exchangePhoneData(params) {
     params,
   });
 }
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export async function empty() {
-  return {};
-}

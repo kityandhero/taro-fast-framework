@@ -8,9 +8,11 @@ import iconBasic from '../../../assets/images/icon-list-basic.png';
 import iconForm from '../../../assets/images/icon-list-form.png';
 // import iconHOC from '../../../assets/images/icon-list-hoc.png';
 import iconLayout from '../../../assets/images/icon-list-layout.png';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const itemsIcon = [
   {

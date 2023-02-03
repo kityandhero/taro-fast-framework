@@ -5,8 +5,8 @@ import { connect } from 'easy-soft-dva';
 import { transformSize } from 'taro-fast-common';
 import { Card, Ellipsis, FadeInBox, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../../../customComponents/ContentPageBase';
-import { cardStyle } from '../../../../../customConfig/constants';
+import { ContentPageBase } from '../../../../../customComponents';
+import { cardStyle } from '../../../../../customConfig';
 
 const style = {
   ...{

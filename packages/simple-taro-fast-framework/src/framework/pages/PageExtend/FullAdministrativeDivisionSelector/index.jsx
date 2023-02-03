@@ -5,7 +5,7 @@ import { connect } from 'easy-soft-dva';
 import { transformSize } from 'taro-fast-common';
 import { Button, InputItem } from 'taro-fast-component';
 
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import { ContentPageBase } from '../../../../customComponents';
 
 export const classPrefix = `template-grid-banner`;
 

@@ -15,7 +15,7 @@ import {
 import { transformSize } from 'taro-fast-common';
 import { Card, DataGrid, HelpBox, Space } from 'taro-fast-component';
 
-import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../customConfig';
 
 const style = {
   ...{
@@ -157,4 +157,4 @@ PropertyBox.defaultProps = {
   ...defaultProps,
 };
 
-export default PropertyBox;
+export { PropertyBox };

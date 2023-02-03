@@ -2,9 +2,11 @@ import { connect } from 'easy-soft-dva';
 
 import { Line, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const config1 = {
   width: 400,

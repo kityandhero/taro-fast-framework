@@ -10,7 +10,7 @@ import './index.less';
 
 const { IconList, IconChevronRight } = Icon;
 
-export default class ChannelPageBase extends PageWrapperSimulation {
+class ChannelPageBase extends PageWrapperSimulation {
   constructor(props) {
     super(props);
 
@@ -79,3 +79,5 @@ export default class ChannelPageBase extends PageWrapperSimulation {
     return this.renderChannelView();
   }
 }
+
+export { ChannelPageBase };

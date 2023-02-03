@@ -3,9 +3,11 @@ import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import { Space, Transition } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 import './index.less';
 

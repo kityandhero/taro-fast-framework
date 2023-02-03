@@ -13,10 +13,12 @@ import {
 } from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const icons = {
   main: [

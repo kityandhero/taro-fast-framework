@@ -1,6 +1,6 @@
 import { isArray, isFunction } from 'easy-soft-utility';
 
-import { pathCollection } from '../../../customConfig/pathConfig';
+import { pathCollection } from '../../../customConfig';
 import BasePageWrapperCore from '../BasePageWrapperCore';
 
 export default class BasePageWrapper extends BasePageWrapperCore {

@@ -2,10 +2,12 @@ import { connect } from 'easy-soft-dva';
 
 import { Card, Collapse, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
   ...{

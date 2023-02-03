@@ -4,8 +4,8 @@ import { sortBy } from 'easy-soft-utility';
 import { checkWeAppEnv } from 'taro-fast-common';
 
 import iconBasic from '../../../../assets/images/icon-list-basic.png';
-import ChannelPageBase from '../../../../customComponents/ChannelPageBase';
-import { pathCollection } from '../../../../customConfig/pathConfig';
+import { ChannelPageBase } from '../../../../customComponents';
+import { pathCollection } from '../../../../customConfig';
 
 const list = [
   {

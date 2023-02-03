@@ -6,9 +6,11 @@ import { transformSize } from 'taro-fast-common';
 import { Icon, More, NoticeBar, Space } from 'taro-fast-component';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const { IconVolumePlus } = Icon;
 

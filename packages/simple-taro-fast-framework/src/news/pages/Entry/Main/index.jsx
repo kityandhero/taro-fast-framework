@@ -13,8 +13,7 @@ import {
 import { transformSize } from 'taro-fast-common';
 import { ActivityIndicator } from 'taro-fast-component';
 
-import { shareTransfer } from '../../../../customConfig/constants';
-import { pathCollection } from '../../../../customConfig/pathConfig';
+import { pathCollection, shareTransfer } from '../../../../customConfig';
 import BasePageWrapper from '../../BasePageWrapper';
 
 // eslint-disable-next-line no-undef

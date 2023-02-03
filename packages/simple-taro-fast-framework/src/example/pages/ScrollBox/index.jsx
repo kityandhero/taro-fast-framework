@@ -6,9 +6,11 @@ import { buildRandomHexColor, toNumber } from 'easy-soft-utility';
 import { transformSize } from 'taro-fast-common';
 import { Button, CenterBox, ScrollBox, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const itemStyle = {
   backgroundColor: '#ccc',

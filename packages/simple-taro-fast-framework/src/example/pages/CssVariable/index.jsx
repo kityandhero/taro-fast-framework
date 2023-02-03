@@ -4,8 +4,7 @@ import { connect } from 'easy-soft-dva';
 
 import { Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import { ContentPageBase, SimpleBox } from '../../../customComponents';
 
 const config1 = {
   style: {

@@ -3,10 +3,12 @@ import { connect } from 'easy-soft-dva';
 import { transformSize } from 'taro-fast-common';
 import { Button, CheckBox, Icon, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
-import { cardStyle } from '../../../customConfig/constants';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
+import { cardStyle } from '../../../customConfig';
 
 const { IconSketch, IconShoppingCart, IconCheckCircle } = Icon;
 

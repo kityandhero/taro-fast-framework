@@ -6,9 +6,11 @@ import { transformSize } from 'taro-fast-common';
 import { ColorText, Icon, ImageBox, Space } from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const { IconEdit } = Icon;
 

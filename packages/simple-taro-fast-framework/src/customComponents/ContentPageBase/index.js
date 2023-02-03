@@ -9,7 +9,7 @@ import PageWrapperSimulation from '../PageWrapperSimulation';
 
 import './index.less';
 
-export default class ContentPageBase extends PageWrapperSimulation {
+class ContentPageBase extends PageWrapperSimulation {
   viewStyle = {
     backgroundColor: '#fff',
   };
@@ -293,3 +293,5 @@ export default class ContentPageBase extends PageWrapperSimulation {
     return this.renderContentView();
   }
 }
+
+export { ContentPageBase };

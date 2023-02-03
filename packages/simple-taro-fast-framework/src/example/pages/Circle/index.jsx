@@ -14,8 +14,8 @@ import {
 } from 'taro-fast-component';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import { ContentPageBase } from '../../../customComponents';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
   ...{

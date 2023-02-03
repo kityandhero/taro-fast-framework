@@ -12,8 +12,8 @@ import {
 } from 'taro-fast-component';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import { ContentPageBase } from '../../../customComponents';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 import {
   getOverviewAction,

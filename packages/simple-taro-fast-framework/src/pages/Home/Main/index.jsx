@@ -15,7 +15,7 @@ import iconLayout from '../../../assets/images/icon-list-layout.png';
 import iconView from '../../../assets/images/icon-list-view.png';
 import logoImg from '../../../assets/images/logo.png';
 import PageWrapperSimulation from '../../../customComponents/PageWrapperSimulation';
-import { pathCollection } from '../../../customConfig/pathConfig';
+import { pathCollection } from '../../../customConfig';
 
 import './index.less';
 

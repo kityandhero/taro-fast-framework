@@ -2,8 +2,7 @@ import { connect } from 'easy-soft-dva';
 
 import { Space } from 'taro-fast-component';
 
-import CodePageBox from '../../../../customComponents/CodePageBox';
-import ContentPageBase from '../../../../customComponents/ContentPageBase';
+import { CodePageBox, ContentPageBase } from '../../../../customComponents';
 
 const configList = [
   {

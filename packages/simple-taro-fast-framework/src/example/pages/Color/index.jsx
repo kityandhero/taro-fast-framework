@@ -6,8 +6,7 @@ import { buildLinearGradient } from 'easy-soft-utility';
 import { colorPure, colorShadow, transformSize } from 'taro-fast-common';
 import { CenterBox, FlexBox, Grid, ScaleBox, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import { ContentPageBase, SimpleBox } from '../../../customComponents';
 
 const itemStyle1 = {
   width: transformSize(200),

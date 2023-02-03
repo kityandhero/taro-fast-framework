@@ -3,9 +3,11 @@ import { addHour, addMinute, addSecond, getNow } from 'easy-soft-utility';
 
 import { Countdown, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const config1 = {
   endTime: addMinute(getNow(), 15),

@@ -2,9 +2,11 @@ import { connect } from 'easy-soft-dva';
 
 import { Space, Switch } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import PropertyBox from '../../../customComponents/PropertyBox';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import {
+  ContentPageBase,
+  PropertyBox,
+  SimpleBox,
+} from '../../../customComponents';
 
 const config1 = {
   // eslint-disable-next-line no-unused-vars

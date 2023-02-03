@@ -2,8 +2,8 @@ import { connect } from 'easy-soft-dva';
 import { sortBy } from 'easy-soft-utility';
 
 import iconBasic from '../../../../assets/images/icon-list-basic.png';
-import ChannelPageBase from '../../../../customComponents/ChannelPageBase';
-import { pathCollection } from '../../../../customConfig/pathConfig';
+import { ChannelPageBase } from '../../../../customComponents';
+import { pathCollection } from '../../../../customConfig';
 
 const list = [
   {

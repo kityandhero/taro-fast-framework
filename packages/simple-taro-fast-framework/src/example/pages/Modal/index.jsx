@@ -5,8 +5,8 @@ import { connect } from 'easy-soft-dva';
 import { Button, Card, CenterBox, Modal, Space } from 'taro-fast-component';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import { cardHeaderStyle, cardStyle } from '../../../customConfig/constants';
+import { ContentPageBase } from '../../../customComponents';
+import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
   ...{

@@ -10,8 +10,7 @@ import {
 
 import { Button, Space } from 'taro-fast-component';
 
-import ContentPageBase from '../../../customComponents/ContentPageBase';
-import SimpleBox from '../../../customComponents/SimpleBox';
+import { ContentPageBase, SimpleBox } from '../../../customComponents';
 
 // eslint-disable-next-line no-undef
 definePageConfig({

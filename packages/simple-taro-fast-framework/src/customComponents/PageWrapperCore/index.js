@@ -115,4 +115,4 @@ class PageWrapperCore extends AuthorizationWrapper {
   };
 }
 
-export default PageWrapperCore;
+export { PageWrapperCore };

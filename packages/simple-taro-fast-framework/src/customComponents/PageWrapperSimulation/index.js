@@ -7,7 +7,7 @@ import {
 import { clearLocalDataWhenSimulationModeChanged } from '../../utils/tools';
 import PageWrapperCore from '../PageWrapperCore';
 
-export default class PageWrapperSimulation extends PageWrapperCore {
+class PageWrapperSimulation extends PageWrapperCore {
   adjustInternalData = () => {
     const simulationMode = getSimulationMode();
     const verifySignInResult = getVerifySignInResult();
@@ -31,3 +31,5 @@ export default class PageWrapperSimulation extends PageWrapperCore {
     this.adjustInternalData();
   };
 }
+
+export { PageWrapperSimulation };

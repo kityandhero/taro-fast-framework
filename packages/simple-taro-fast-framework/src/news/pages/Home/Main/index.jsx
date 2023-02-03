@@ -27,7 +27,7 @@ import {
 } from 'taro-fast-component';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
-import { pathCollection } from '../../../../customConfig/pathConfig';
+import { pathCollection } from '../../../../customConfig';
 import BasePageWrapper from '../../BasePageWrapper';
 import { buildItem, classPrefix } from '../Assist/tools';
 

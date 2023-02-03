@@ -429,13 +429,3 @@ export const pathCollection = {
   templateRemote: templateRemotePathCollection,
   news: newsPathCollection,
 };
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export async function empty() {
-  return {};
-}

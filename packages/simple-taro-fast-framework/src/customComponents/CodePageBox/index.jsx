@@ -4,7 +4,7 @@ import { checkStringIsNullOrWhiteSpace, isArray } from 'easy-soft-utility';
 
 import { Card, DataGrid, Space } from 'taro-fast-component';
 
-import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
+import { cardHeaderStyle, cardStyle } from '../../customConfig';
 import { buildPagePrismCode } from '../../utils/tools';
 
 const style = {
@@ -126,4 +126,4 @@ CodePageBox.defaultProps = {
   ...defaultProps,
 };
 
-export default CodePageBox;
+export { CodePageBox };
