@@ -14,13 +14,3 @@ export function checkTransform(transform) {
     ? transform
     : 'slide';
 }
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export async function empty() {
-  return {};
-}
