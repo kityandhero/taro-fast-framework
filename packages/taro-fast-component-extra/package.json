@@ -71,7 +71,7 @@
     "@tarojs/taro": "^3.5.12",
     "@tarojs/taro-h5": "^3.5.12",
     "dayjs": "^1.11.7",
-    "easy-soft-utility": "^2.4.34",
+    "easy-soft-utility": "^2.4.36",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "taro-fast-common": "^1.18.7",

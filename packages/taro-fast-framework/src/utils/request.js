@@ -19,9 +19,11 @@ import {
 import { corsTarget, Tips } from 'taro-fast-common';
 
 import { getSettingsAgency } from './defaultSettingsSpecial';
-import { getLocationMode, getOpenId, getSession } from './globalStorageAssist';
+import { getLocationMode } from './locationAssist';
+import { getOpenId } from './openIdAssist';
+import { getSession } from './sessionAssist';
 
-export class Request {
+class Request {
   /**
    *
    * @static request请求 基于 Taro.request
@@ -167,4 +169,4 @@ export class Request {
   }
 }
 
-export default Request;
+export { Request };

@@ -1,6 +1,6 @@
 import { request, requestMode } from 'easy-soft-utility';
 
-import { getSettingsAgency } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
+import { getSettingsAgency } from 'taro-fast-framework';
 
 function buildAbundantArticle() {
   return {

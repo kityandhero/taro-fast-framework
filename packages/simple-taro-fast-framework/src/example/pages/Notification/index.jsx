@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 
 import { Notification } from 'taro-fast-common';
-import { Button, Space } from 'taro-fast-component/es/customComponents';
+import { Button, Space } from 'taro-fast-component';
 
 import CodeBox from '../../../customComponents/CodeBox';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

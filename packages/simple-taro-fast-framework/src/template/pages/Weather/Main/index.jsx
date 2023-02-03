@@ -4,11 +4,7 @@ import { connect } from 'easy-soft-dva';
 import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Button,
-  CenterBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Button, CenterBox, Space } from 'taro-fast-component';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import SimpleBox from '../../../../customComponents/SimpleBox';

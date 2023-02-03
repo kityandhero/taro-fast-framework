@@ -1,5 +1,4 @@
-import { getSettingsAgency } from 'taro-fast-framework/es/utils/defaultSettingsSpecial';
-import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
+import { getSettingsAgency, getVerifySignInResult } from 'taro-fast-framework';
 
 import {
   getSimulationMode,

@@ -39,6 +39,8 @@ import {
 } from 'taro-fast-common';
 import {
   BackTop,
+  buildEmptyPlaceholder as buildEmptyPlaceholderCore,
+  buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
   Cascader,
   CenterBox,
   FadeView,
@@ -51,26 +53,22 @@ import {
   Popup,
   Spin,
   VariableView,
-} from 'taro-fast-component/es/customComponents';
-import {
-  buildEmptyPlaceholder as buildEmptyPlaceholderCore,
-  buildInitialActivityIndicator as buildInitialActivityIndicatorCore,
-} from 'taro-fast-component/es/functionComponent';
+} from 'taro-fast-component';
 
-import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
-import {
-  getAdministrativeDivisionFullData,
-  getLaunchOption,
-  getMap,
-  getSession,
-  getSessionRefreshing,
-  setCurrentUrl,
-  setSessionRefreshing,
-} from '../../utils/globalStorageAssist';
+import { getAdministrativeDivisionFullData } from '../../services/schedulingControl';
 import {
   getSignInResultDescription,
   getVerifySignInResult,
-} from '../../utils/tools';
+} from '../../utils/common';
+import { setCurrentUrl } from '../../utils/currentUrlAssist';
+import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
+import { getLaunchOption } from '../../utils/launchOptionAssist';
+import { getMap } from '../../utils/locationAssist';
+import { getSession } from '../../utils/sessionAssist';
+import {
+  getSessionRefreshing,
+  setSessionRefreshing,
+} from '../../utils/sessionRefreshingAssist';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
 const defaultDispatchLocationResultData = {
@@ -90,7 +88,7 @@ function getRefreshingBoxEffect(effect) {
   return 'pull';
 }
 
-export default class Infrastructure extends AbstractComponent {
+class Infrastructure extends AbstractComponent {
   /**
    * 页面是否使用渐显效果组件包裹
    */
@@ -2414,3 +2412,5 @@ export default class Infrastructure extends AbstractComponent {
     );
   }
 }
+
+export { Infrastructure };

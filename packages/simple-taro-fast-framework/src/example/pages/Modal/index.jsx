@@ -2,13 +2,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import {
-  Button,
-  Card,
-  CenterBox,
-  Modal,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Button, Card, CenterBox, Modal, Space } from 'taro-fast-component';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

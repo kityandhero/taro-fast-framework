@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
+import { Card, DataGrid, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../../customComponents/ContentPageBase';
 import { cardHeaderStyle, cardStyle } from '../../../../customConfig/constants';

@@ -14,7 +14,7 @@ import { setEasySoftUtilityHandler } from 'taro-fast-common';
 
 import { getSettingsAgency } from './defaultSettingsSpecial';
 import { modulePackageName } from './definition';
-import remoteRequest from './request';
+import { Request as remoteRequest } from './request';
 
 let configEnvironmentComplete = false;
 

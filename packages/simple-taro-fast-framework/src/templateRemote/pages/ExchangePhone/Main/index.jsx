@@ -7,12 +7,8 @@ import {
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Button,
-  CenterBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
-import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
+import { Button, CenterBox, Space } from 'taro-fast-component';
+import { removeSession } from 'taro-fast-framework';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import SimpleBox from '../../../../customComponents/SimpleBox';

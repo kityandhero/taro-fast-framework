@@ -6,7 +6,7 @@ import {
   Divider,
   Icon,
   Space,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { Avatar, Space } from 'taro-fast-component/es/customComponents';
+import { Avatar, Space } from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

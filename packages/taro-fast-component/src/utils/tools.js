@@ -45,6 +45,8 @@ function traversing(mods, conf) {
 
 export function bem(name, conf) {
   const mods = [];
+
   traversing(mods, conf);
+
   return join(name, mods);
 }

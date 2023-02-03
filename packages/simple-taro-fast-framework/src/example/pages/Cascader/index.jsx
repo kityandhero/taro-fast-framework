@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { toMd5, transformListData } from 'easy-soft-utility';
 
-import { Cascader, Space } from 'taro-fast-component/es/customComponents';
+import { Cascader, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

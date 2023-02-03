@@ -24,7 +24,7 @@ import {
   SearchBar,
   Space,
   Swiper,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import { pathCollection } from '../../../../customConfig/pathConfig';

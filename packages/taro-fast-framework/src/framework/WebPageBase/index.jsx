@@ -6,7 +6,7 @@ import {
   logWarn,
 } from 'easy-soft-utility';
 
-import Infrastructure from '../Infrastructure';
+import { Infrastructure } from '../Infrastructure';
 
 class WebPageBase extends Infrastructure {
   redirectWithWebEnv = true;
@@ -101,4 +101,4 @@ class WebPageBase extends Infrastructure {
   }
 }
 
-export default WebPageBase;
+export { WebPageBase };

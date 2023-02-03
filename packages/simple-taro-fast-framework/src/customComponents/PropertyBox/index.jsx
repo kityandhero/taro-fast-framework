@@ -13,12 +13,7 @@ import {
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Card,
-  DataGrid,
-  HelpBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Card, DataGrid, HelpBox, Space } from 'taro-fast-component';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
 

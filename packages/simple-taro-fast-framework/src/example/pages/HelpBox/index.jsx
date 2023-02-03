@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { HelpBox, Space } from 'taro-fast-component/es/customComponents';
+import { HelpBox, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

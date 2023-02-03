@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { addHour, addMinute, addSecond, getNow } from 'easy-soft-utility';
 
-import { Countdown, Space } from 'taro-fast-component/es/customComponents';
+import { Countdown, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

@@ -2,7 +2,7 @@ import { underlyingExtensionState } from 'easy-soft-utility';
 
 import { getDerivedStateFromPropsForUrlParamsCore } from 'taro-fast-common';
 
-import Base from '../Base';
+import { Base } from '../Base';
 
 class Core extends Base {
   loadRemoteRequestAfterMount = true;
@@ -24,4 +24,4 @@ class Core extends Base {
   checkNeedUpdate = (preProps, preState, snapshot) => false;
 }
 
-export default Core;
+export { Core };

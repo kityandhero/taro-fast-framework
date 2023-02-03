@@ -22,14 +22,12 @@ import {
 } from 'taro-fast-common';
 
 import { getModelCollection } from '../../models';
+import { removeAdministrativeDivisionFullDataCache } from '../../utils/administrativeDivisionFullDataCacheAssist';
 import { configEnvironment } from '../../utils/configAssist';
 import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
-import {
-  removeAdministrativeDivisionFullData,
-  removeSelectedAddressData,
-  removeSessionRefreshing,
-  setLaunchOption,
-} from '../../utils/globalStorageAssist';
+import { setLaunchOption } from '../../utils/launchOptionAssist';
+import { removeSelectedAddressData } from '../../utils/selectedAddressDataAssist';
+import { removeSessionRefreshing } from '../../utils/sessionRefreshingAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
@@ -81,7 +79,7 @@ class AppBase extends Component {
 
       removeSessionRefreshing();
       removeSelectedAddressData();
-      removeAdministrativeDivisionFullData();
+      removeAdministrativeDivisionFullDataCache();
 
       this.initDva(models);
 
@@ -189,4 +187,4 @@ class AppBase extends Component {
   }
 }
 
-export default AppBase;
+export { AppBase };

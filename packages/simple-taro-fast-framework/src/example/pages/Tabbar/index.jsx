@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
-import { Space, Tabbar } from 'taro-fast-component/es/customComponents';
+import { Space, Tabbar } from 'taro-fast-component';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';

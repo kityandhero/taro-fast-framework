@@ -4,9 +4,10 @@ import {
   reducerDefaultParams,
   reducerNameCollection,
 } from 'easy-soft-dva';
-import { pretreatmentRemoteSingleData } from 'easy-soft-utility';
-
-import { modelCollection } from 'taro-fast-framework/es/utils/globalModel';
+import {
+  modelGlobalCollection,
+  pretreatmentRemoteSingleData,
+} from 'easy-soft-utility';
 
 import { exchangeShareData, getData } from '../services/global';
 
@@ -15,7 +16,7 @@ export function buildGlobal() {
     namespace: 'global',
 
     state: {
-      ...(modelCollection || {}),
+      ...(modelGlobalCollection || {}),
       ...getTacitlyState(),
     },
 

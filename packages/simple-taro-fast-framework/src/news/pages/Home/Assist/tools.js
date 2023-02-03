@@ -19,7 +19,7 @@ import {
   ScrollBox,
   Space,
   TranslucentBox,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 

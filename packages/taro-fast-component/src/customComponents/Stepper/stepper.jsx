@@ -9,8 +9,11 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { transformSize, withNativeProps } from 'taro-fast-common';
-import { usePropsValue } from 'taro-fast-common/es/utils/hooks';
+import {
+  transformSize,
+  usePropsValue,
+  withNativeProps,
+} from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';

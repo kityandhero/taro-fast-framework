@@ -11,7 +11,7 @@ import {
   FlexBox,
   HorizontalCenterBox,
   Space,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 import { Circle } from 'taro-fast-component-extra/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

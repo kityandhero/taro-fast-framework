@@ -9,7 +9,7 @@ import {
   Space,
   Spin,
   VerticalBox,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

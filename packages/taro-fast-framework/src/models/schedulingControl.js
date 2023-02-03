@@ -24,11 +24,8 @@ import {
   signInSilentData,
 } from '../services/schedulingControl';
 import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
-import {
-  getWeather,
-  setLocationMode,
-  setWeather,
-} from '../utils/globalStorageAssist';
+import { setLocationMode } from '../utils/locationAssist';
+import { getWeather, setWeather } from '../utils/weatherAssist';
 
 export function buildSchedulingControl() {
   return {

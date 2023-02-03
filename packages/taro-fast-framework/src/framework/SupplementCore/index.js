@@ -38,37 +38,44 @@ import {
   Tips,
 } from 'taro-fast-common';
 
+import { getAdministrativeDivisionFullData } from '../../services/schedulingControl';
+import { setAdministrativeDivisionFullDataCache } from '../../utils/administrativeDivisionFullDataCacheAssist';
+import {
+  getSignInResultDescription,
+  getVerifySignInResult,
+} from '../../utils/common';
+import {
+  getCurrentCustomer,
+  removeCurrentCustomer,
+  setCurrentCustomer,
+} from '../../utils/currentCustomerAssist';
 import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import {
-  getAdministrativeDivisionFullData,
-  getCurrentCustomer,
   getEffectiveCode,
+  setEffectiveCode,
+} from '../../utils/effectiveCodeAssist';
+import {
   getLastLocation,
   getLocation,
   getLocationMode,
   getMap,
-  getNextCheckLoginUnixTime,
-  getSessionRefreshing,
-  removeCurrentCustomer,
   removeLocation,
-  removeSession,
-  setAdministrativeDivisionFullData,
-  setCurrentCustomer,
-  setEffectiveCode,
   setLastLocation,
   setLocation,
   setLocationMode,
   setMap,
-  setNextCheckLoginUnixTime,
-  setOpenId,
-  setSession,
-  setSessionRefreshing,
-} from '../../utils/globalStorageAssist';
+} from '../../utils/locationAssist';
 import {
-  getSignInResultDescription,
-  getVerifySignInResult,
-} from '../../utils/tools';
-import Common from '../Common';
+  getNextCheckLoginUnixTime,
+  setNextCheckLoginUnixTime,
+} from '../../utils/nextCheckLoginUnixTimeAssist';
+import { setOpenId } from '../../utils/openIdAssist';
+import { removeSession, setSession } from '../../utils/sessionAssist';
+import {
+  getSessionRefreshing,
+  setSessionRefreshing,
+} from '../../utils/sessionRefreshingAssist';
+import { Common } from '../Common';
 
 /**
  * 业务调度核心底层方法
@@ -2860,7 +2867,7 @@ class SupplementCore extends Common {
           const { dataSuccess, list: v } = remoteData;
 
           if (dataSuccess) {
-            setAdministrativeDivisionFullData(v);
+            setAdministrativeDivisionFullDataCache(v);
 
             if (isFunction(callback)) {
               // eslint-disable-next-line promise/no-callback-in-promise
@@ -2885,4 +2892,4 @@ class SupplementCore extends Common {
   };
 }
 
-export default SupplementCore;
+export { SupplementCore };

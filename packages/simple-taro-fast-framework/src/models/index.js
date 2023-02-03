@@ -1,4 +1,4 @@
-import { appendBuilder } from 'taro-fast-framework/es/models';
+import { appendBuilder } from 'taro-fast-framework';
 
 import { buildAdministrativeDivision } from './administrativeDivision';
 import { buildArticle } from './article';

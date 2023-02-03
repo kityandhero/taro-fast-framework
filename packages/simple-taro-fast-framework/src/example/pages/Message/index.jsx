@@ -8,7 +8,7 @@ import {
   showSimpleWarnMessage,
 } from 'easy-soft-utility';
 
-import { Button, Space } from 'taro-fast-component/es/customComponents';
+import { Button, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';

@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import { isArray, isFunction } from 'easy-soft-utility';
 
 import { AbstractComponent } from 'taro-fast-common';
-import { Grid, Icon, Space } from 'taro-fast-component/es/customComponents';
+import { Grid, Icon, Space } from 'taro-fast-component';
 
 const { IconCheck } = Icon;
 
@@ -156,4 +156,4 @@ Selector.defaultProps = {
   ...defaultProps,
 };
 
-export default Selector;
+export { Selector };

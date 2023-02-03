@@ -2,7 +2,7 @@ import Prism from 'prismjs';
 import Taro from '@tarojs/taro';
 
 import { AbstractComponent, copyToClipboard } from 'taro-fast-common';
-import { HtmlBox } from 'taro-fast-component/es/customComponents';
+import { HtmlBox } from 'taro-fast-component';
 
 import './index.less';
 
@@ -68,4 +68,4 @@ PrismCode.defaultProps = {
   ...defaultProps,
 };
 
-export default PrismCode;
+export { PrismCode };

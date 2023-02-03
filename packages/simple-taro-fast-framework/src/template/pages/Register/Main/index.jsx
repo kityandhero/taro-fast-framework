@@ -3,12 +3,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import {
-  Avatar,
-  Button,
-  CenterBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Avatar, Button, CenterBox, Space } from 'taro-fast-component';
 
 import BasePageWrapper from '../../BasePageWrapper';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { connect } from 'easy-soft-dva';
 
-import { Card, Space } from 'taro-fast-component/es/customComponents';
+import { Card, Space } from 'taro-fast-component';
 import { Selector } from 'taro-fast-component-extra/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

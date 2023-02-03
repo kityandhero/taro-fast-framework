@@ -19,10 +19,7 @@ import {
   getSystemInfo,
   transformSize,
 } from 'taro-fast-common';
-import {
-  HorizontalCenterBox,
-  VerticalBox,
-} from 'taro-fast-component/es/customComponents';
+import { HorizontalCenterBox, VerticalBox } from 'taro-fast-component';
 
 import './index.less';
 
@@ -421,4 +418,4 @@ Circle.defaultProps = {
   ...defaultProps,
 };
 
-export default Circle;
+export { Circle };

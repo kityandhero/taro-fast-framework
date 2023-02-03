@@ -1,5 +1,5 @@
-import SupplementCore from '../SupplementCore';
+import { SupplementCore } from '../SupplementCore';
 
 class Supplement extends SupplementCore {}
 
-export default Supplement;
+export { Supplement };

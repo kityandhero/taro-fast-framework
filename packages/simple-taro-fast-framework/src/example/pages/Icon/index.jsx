@@ -10,7 +10,7 @@ import {
   HelpBox,
   Icon,
   Space,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';
@@ -265,7 +265,7 @@ export default class Index extends ContentPageBase {
             showNumber={false}
             list={[
               {
-                text: '导入组件: import { Icon } from "taro-fast-component/es/customComponents".',
+                text: '导入组件: import { Icon } from "taro-fast-component".',
               },
               {
                 text: '导入图标: 例如 const { IconAdd } = Icon.',

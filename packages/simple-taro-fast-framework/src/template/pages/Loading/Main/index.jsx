@@ -3,11 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  CenterBox,
-  ImageBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { CenterBox, ImageBox, Space } from 'taro-fast-component';
 
 import ballsSvg from '../../../../assets/images/loading-balls.svg';
 import barsSvg from '../../../../assets/images/loading-bars.svg';

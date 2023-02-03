@@ -8,77 +8,11 @@ import {
   logDebug,
   logException,
   showErrorMessage,
-  showRuntimeError,
   showSimpleSuccessNotification,
   toString,
 } from 'easy-soft-utility';
 
 import { Tips } from 'taro-fast-common';
-
-/**
- * 处理 actionCore 的异步请求结果
- * @param {*} param0
- * @returns
- */
-export function handleItem({ target, dataId, compareDataIdHandler, handler }) {
-  if ((target || null) == null) {
-    throw new Error('actionCore: target not allow null');
-  }
-
-  if ((target.state || null) == null) {
-    throw new Error('actionCore: target.state not allow null');
-  }
-
-  const { metaOriginalData } = target.state;
-
-  if ((metaOriginalData || null) == null) {
-    throw new Error('actionCore: target.state.metaOriginalData not allow null');
-  }
-
-  let indexData = -1;
-
-  if (!isFunction(compareDataIdHandler)) {
-    const text = `compareDataIdHandler mast be function`;
-
-    showRuntimeError({
-      message: text,
-    });
-
-    return;
-  }
-
-  if (!isFunction(handler)) {
-    const text = `handler mast be function`;
-
-    showRuntimeError({
-      message: text,
-    });
-
-    return;
-  }
-
-  if ((metaOriginalData.list || null) == null) {
-    throw new Error(
-      'actionCore: target.state.metaOriginalData.list must be array',
-    );
-  }
-
-  metaOriginalData.list.forEach((o, index) => {
-    const compareDataId = compareDataIdHandler(o);
-
-    if (compareDataId === dataId) {
-      indexData = index;
-    }
-  });
-
-  if (indexData >= 0) {
-    metaOriginalData.list[indexData] = handler(
-      metaOriginalData.list[indexData],
-    );
-
-    target.setState({ metaOriginalData });
-  }
-}
 
 /**
  * remote assess wrapper core

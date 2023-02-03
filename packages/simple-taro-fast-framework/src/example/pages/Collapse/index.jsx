@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { Card, Collapse, Space } from 'taro-fast-component/es/customComponents';
+import { Card, Collapse, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

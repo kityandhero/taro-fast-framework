@@ -3,12 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Badge,
-  Icon,
-  Space,
-  Tabs,
-} from 'taro-fast-component/es/customComponents';
+import { Badge, Icon, Space, Tabs } from 'taro-fast-component';
 
 import logoImg from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

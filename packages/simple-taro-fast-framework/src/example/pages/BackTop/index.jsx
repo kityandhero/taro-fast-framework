@@ -3,11 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { getSystemInfo, pageScrollTo, transformSize } from 'taro-fast-common';
-import {
-  BackTop,
-  HorizontalCenterBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { BackTop, HorizontalCenterBox, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

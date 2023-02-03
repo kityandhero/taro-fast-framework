@@ -1,4 +1,4 @@
-import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
+import { getVerifySignInResult } from 'taro-fast-framework';
 
 import {
   getSimulationMode,

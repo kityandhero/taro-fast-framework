@@ -100,6 +100,7 @@
     "postlint",
     "postncu",
     "postpublish",
+    "postupdate",
     "powerpaste",
     "prebundle",
     "precommit",

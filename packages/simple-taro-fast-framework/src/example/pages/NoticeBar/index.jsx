@@ -3,12 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Icon,
-  More,
-  NoticeBar,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Icon, More, NoticeBar, Space } from 'taro-fast-component';
 import {} from 'taro-fast-component-extra/es/customComponents';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

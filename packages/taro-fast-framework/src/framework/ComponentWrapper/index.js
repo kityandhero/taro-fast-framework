@@ -1,5 +1,5 @@
-import Base from '../Base';
+import { Base } from '../Base';
 
 class ComponentWrapper extends Base {}
 
-export default ComponentWrapper;
+export { ComponentWrapper };

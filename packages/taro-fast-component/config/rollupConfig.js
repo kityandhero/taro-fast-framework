@@ -2,10 +2,7 @@ import { buildConfig as buildConfigCore } from '../../../develop/config/rollup/c
 
 const inputFile = {
   ...{
-    'customComponents/index': 'src/customComponents/index.jsx',
-  },
-  ...{
-    'functionComponent/index': 'src/functionComponent/index.jsx',
+    index: 'src/index.jsx',
   },
 };
 

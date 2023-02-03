@@ -19,7 +19,7 @@ import {
   ScrollBox,
   Space,
   TranslucentBox,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 export const classPrefix = `simple-news-home`;
 

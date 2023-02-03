@@ -22,7 +22,7 @@ import {
   HelpBox,
   Icon,
   Space,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import { cardHeaderStyle, cardStyle } from '../../customConfig/constants';
 import { buildComponentPrismCode } from '../../utils/tools';

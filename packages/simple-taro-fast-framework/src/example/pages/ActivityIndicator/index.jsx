@@ -2,10 +2,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import {
-  ActivityIndicator,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { ActivityIndicator, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

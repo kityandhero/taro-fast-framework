@@ -11,13 +11,13 @@ import {
   toString,
 } from 'easy-soft-utility';
 
-import { Divider } from 'taro-fast-component/es/customComponents';
+import { Divider } from 'taro-fast-component';
 import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
 import {
   removeCurrentCustomer,
   removeOpenId,
   removeSession,
-} from 'taro-fast-framework/es/utils/globalStorageAssist';
+} from 'taro-fast-framework';
 
 import QQMapWX from '../libs/qqmap-wx-jssdk.min';
 
@@ -247,7 +247,7 @@ export function buildPagePrismCode({
   let code = `import { connect } from 'easy-soft-dva';
 import { View } from '@tarojs/components';
 
-import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
+import { AuthorizationWrapper } from 'taro-fast-framework';
 
 @connect(({ session, entrance, global, schedulingControl }) => ({
   session,

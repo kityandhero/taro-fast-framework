@@ -1,5 +1,5 @@
 import { locationModeCollection } from 'taro-fast-common';
-import { AppBase } from 'taro-fast-framework/es/framework';
+import { AppBase } from 'taro-fast-framework';
 
 import LogoImage from './assets/images/logo.png';
 import { prepareModel } from './models';

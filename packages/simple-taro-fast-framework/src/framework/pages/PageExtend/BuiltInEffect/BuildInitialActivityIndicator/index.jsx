@@ -1,11 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import {
-  Card,
-  Divider,
-  FadeInBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Card, Divider, FadeInBox, Space } from 'taro-fast-component';
 
 import CodePageBox from '../../../../../customComponents/CodePageBox';
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';

@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import { Space } from 'taro-fast-component/es/customComponents';
+import { Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';

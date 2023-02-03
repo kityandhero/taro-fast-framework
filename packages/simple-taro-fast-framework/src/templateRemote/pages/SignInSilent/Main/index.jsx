@@ -2,9 +2,8 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import { Space } from 'taro-fast-component/es/customComponents';
-import { removeSession } from 'taro-fast-framework/es/utils/globalStorageAssist';
-import { getVerifySignInResult } from 'taro-fast-framework/es/utils/tools';
+import { Space } from 'taro-fast-component';
+import { getVerifySignInResult, removeSession } from 'taro-fast-framework';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import SimpleBox from '../../../../customComponents/SimpleBox';

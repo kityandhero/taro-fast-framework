@@ -71,7 +71,7 @@
     "@tarojs/taro": "^3.5.12",
     "@tarojs/taro-h5": "^3.5.12",
     "dayjs": "^1.11.7",
-    "easy-soft-utility": "^2.4.34",
+    "easy-soft-utility": "^2.4.36",
     "lodash": "^4.17.21",
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",

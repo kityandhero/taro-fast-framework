@@ -9,7 +9,7 @@ import {
   CenterBox,
   InputItem,
   Space,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import BasePageWrapper from '../../BasePageWrapper';
 

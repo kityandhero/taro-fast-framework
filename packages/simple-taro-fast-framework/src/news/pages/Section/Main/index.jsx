@@ -13,7 +13,7 @@ import {
   ImageBox,
   Space,
   Tabs,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import noCardImage from '../../../../assets/images/noCardImage.jpg';
 import BasePageWrapper from '../../BasePageWrapper';

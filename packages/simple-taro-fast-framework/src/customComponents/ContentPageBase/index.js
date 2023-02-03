@@ -2,12 +2,7 @@ import { View } from '@tarojs/components';
 
 import { isArray, isFunction, toString } from 'easy-soft-utility';
 
-import {
-  Button,
-  CenterBox,
-  ColorText,
-  Grid,
-} from 'taro-fast-component/es/customComponents';
+import { Button, CenterBox, ColorText, Grid } from 'taro-fast-component';
 
 import Header from '../Header';
 import PageWrapperSimulation from '../PageWrapperSimulation';

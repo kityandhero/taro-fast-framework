@@ -1,10 +1,10 @@
 import { logObject, transformListData } from 'easy-soft-utility';
 
-import { AuthorizationWrapper } from 'taro-fast-framework/es/framework';
 import {
-  getAdministrativeDivisionFullData,
+  AuthorizationWrapper,
+  getAdministrativeDivisionFullDataCache,
   getMap,
-} from 'taro-fast-framework/es/utils/globalStorageAssist';
+} from 'taro-fast-framework';
 
 import { getQQMapWX } from '../../utils/tools';
 
@@ -66,7 +66,7 @@ class PageWrapperCore extends AuthorizationWrapper {
   };
 
   transformFullAdministrativeDivisionData = () => {
-    const { list } = getAdministrativeDivisionFullData();
+    const { list } = getAdministrativeDivisionFullDataCache();
 
     return (
       transformListData({

@@ -28,6 +28,8 @@ const lintScript = {
   'show:info':
     'echo node version && node --version && echo npm version && npm --version && echo ------------ && npx lerna ls -a -l',
   'update:cz:flag': 'node ./develop/assists/cz.flag.refresh.js',
+  'update:special': 'node ./develop/assists/update.special.js',
+  'postupdate:special': 'pnpm install',
   reinstall: 'npm run lerna:bootstrap',
   'sleep:change-nrm': 'node ./develop/assists/sleep.js',
   'lint:staged': 'npx lint-staged',

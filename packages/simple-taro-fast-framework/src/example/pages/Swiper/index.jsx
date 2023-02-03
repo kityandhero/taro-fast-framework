@@ -11,7 +11,7 @@ import {
   Space,
   Swiper,
   SwiperWrapper,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';

@@ -12,7 +12,7 @@ import {
 } from 'easy-soft-utility';
 
 import { copyToClipboard, transformSize } from 'taro-fast-common';
-import { Item, Space } from 'taro-fast-component/es/customComponents';
+import { Item, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import SimpleBox from '../../../customComponents/SimpleBox';

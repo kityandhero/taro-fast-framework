@@ -2,8 +2,8 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import { Button, Space } from 'taro-fast-component/es/customComponents';
-import { getCurrentCustomer } from 'taro-fast-framework/es/utils/globalStorageAssist';
+import { Button, Space } from 'taro-fast-component';
+import { getCurrentCustomer } from 'taro-fast-framework';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import SimpleBox from '../../../../customComponents/SimpleBox';

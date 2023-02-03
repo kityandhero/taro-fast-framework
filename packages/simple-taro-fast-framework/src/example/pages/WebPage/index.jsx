@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { WebPageBase } from 'taro-fast-framework/es/framework';
+import { WebPageBase } from 'taro-fast-framework';
 
 @connect(({ schedulingControl }) => ({
   schedulingControl,

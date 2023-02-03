@@ -1,6 +1,6 @@
 import { connect } from 'easy-soft-dva';
 
-import { Space } from 'taro-fast-component/es/customComponents';
+import { Space } from 'taro-fast-component';
 
 import CodePageBox from '../../../../customComponents/CodePageBox';
 import BasePageWrapper from '../../BasePageWrapper';

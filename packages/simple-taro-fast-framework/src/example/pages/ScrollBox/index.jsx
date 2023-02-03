@@ -4,12 +4,7 @@ import { connect } from 'easy-soft-dva';
 import { buildRandomHexColor, toNumber } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Button,
-  CenterBox,
-  ScrollBox,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { Button, CenterBox, ScrollBox, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

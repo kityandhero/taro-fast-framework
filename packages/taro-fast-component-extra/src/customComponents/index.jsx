@@ -1,2 +1,2 @@
-export { default as Circle } from './Circle';
-export { default as Selector } from './Selector';
+export * from './Circle';
+export * from './Selector';

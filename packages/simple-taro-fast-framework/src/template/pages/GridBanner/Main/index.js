@@ -3,12 +3,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import {
-  CenterBox,
-  FlexBox,
-  Grid,
-  ImageBox,
-} from 'taro-fast-component/es/customComponents';
+import { CenterBox, FlexBox, Grid, ImageBox } from 'taro-fast-component';
 
 import logoImg from '../../../../assets/images/logo.png';
 import BasePageWrapper from '../../BasePageWrapper';

@@ -20,8 +20,8 @@ import {
   stopPullDownRefresh,
 } from 'taro-fast-common';
 
-import { checkWhetherAuthorizeFail } from '../../utils/tools';
-import Infrastructure from '../Infrastructure';
+import { checkWhetherAuthorizeFail } from '../../utils/common';
+import { Infrastructure } from '../Infrastructure';
 
 class Base extends Infrastructure {
   /**
@@ -559,4 +559,4 @@ class Base extends Infrastructure {
   }
 }
 
-export default Base;
+export { Base };

@@ -4,11 +4,7 @@ import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
 import { checkWebEnv } from 'taro-fast-common';
-import {
-  CenterBox,
-  Icon,
-  ImageBox,
-} from 'taro-fast-component/es/customComponents';
+import { CenterBox, Icon, ImageBox } from 'taro-fast-component';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
 import iconBasic from '../../../assets/images/icon-list-basic.png';

@@ -1,11 +1,7 @@
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  ColorText,
-  MultiLineText,
-  Space,
-} from 'taro-fast-component/es/customComponents';
+import { ColorText, MultiLineText, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../customComponents/ContentPageBase';
 import PropertyBox from '../../../customComponents/PropertyBox';

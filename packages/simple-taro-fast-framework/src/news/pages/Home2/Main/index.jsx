@@ -5,14 +5,7 @@ import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  Card,
-  FlexBox,
-  Icon,
-  More,
-  Space,
-  Tabs,
-} from 'taro-fast-component/es/customComponents';
+import { Card, FlexBox, Icon, More, Space, Tabs } from 'taro-fast-component';
 
 import { pathCollection } from '../../../../customConfig/pathConfig';
 import BasePageWrapper from '../../BasePageWrapper';

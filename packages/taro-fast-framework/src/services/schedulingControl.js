@@ -10,8 +10,8 @@ import {
   requestMode,
 } from 'easy-soft-utility';
 
+import { getVerifySignInResult } from '../utils/common';
 import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
-import { getVerifySignInResult } from '../utils/tools';
 
 export async function getWeatherData(params) {
   const weatherApi = getSettingsAgency().getWeatherApi();

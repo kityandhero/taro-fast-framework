@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { getGuid } from 'easy-soft-utility';
 
-import { Card, DataGrid, Space } from 'taro-fast-component/es/customComponents';
+import { Card, DataGrid, Space } from 'taro-fast-component';
 
 import ContentPageBase from '../../../../../customComponents/ContentPageBase';
 import {

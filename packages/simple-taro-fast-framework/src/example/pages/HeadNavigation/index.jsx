@@ -10,7 +10,7 @@ import {
   HeadNavigation,
   ImageBox,
   Space,
-} from 'taro-fast-component/es/customComponents';
+} from 'taro-fast-component';
 
 import logoImage from '../../../assets/images/logo.png';
 import ContentPageBase from '../../../customComponents/ContentPageBase';

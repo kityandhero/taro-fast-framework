@@ -4,7 +4,7 @@ import {
   actionCore,
   actionModalCore,
   actionSheetCore,
-} from 'taro-fast-framework/es/utils/actionAssist';
+} from 'taro-fast-framework';
 
 export function getOverviewAction({
   target,
