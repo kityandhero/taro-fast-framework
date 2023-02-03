@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 import { View } from '@tarojs/components';
 
 import { VerticalBox } from '../VerticalBox';

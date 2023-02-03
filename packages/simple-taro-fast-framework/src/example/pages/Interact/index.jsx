@@ -3,6 +3,7 @@ import { logObject } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import {
+  buildButton,
   Card,
   Empty,
   FadeView,
@@ -10,7 +11,6 @@ import {
   Spin,
   VerticalBox,
 } from 'taro-fast-component';
-import { buildButton } from 'taro-fast-component/es/functionComponent';
 
 import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';

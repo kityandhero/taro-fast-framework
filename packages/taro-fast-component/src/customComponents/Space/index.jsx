@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { React } from 'react';
+import React from 'react';
 import { View } from '@tarojs/components';
 
 import { checkInCollection, isArray, isUndefined } from 'easy-soft-utility';

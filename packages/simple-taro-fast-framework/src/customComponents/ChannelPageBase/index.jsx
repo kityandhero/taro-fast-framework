@@ -4,7 +4,7 @@ import { navigateTo } from 'easy-soft-utility';
 
 import { Icon, ImageBox } from 'taro-fast-component';
 
-import PageWrapperSimulation from '../PageWrapperSimulation';
+import { PageWrapperSimulation } from '../PageWrapperSimulation';
 
 import './index.less';
 

@@ -118,12 +118,12 @@ export function buildConfig({
   //   propList: ['*'],
   // };
 
-  console.log({
-    inputFile,
-    terser: whetherTerser,
-    externals,
-    // pxtorem: pxtoremConfig,
-  });
+  // console.log({
+  //   inputFile,
+  //   terser: whetherTerser,
+  //   externals,
+  //   // pxtorem: pxtoremConfig,
+  // });
 
   const config = {
     external: (d) => {

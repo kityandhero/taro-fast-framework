@@ -4,7 +4,7 @@ import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
 import { Icon, More, NoticeBar, Space } from 'taro-fast-component';
-import {} from 'taro-fast-component-extra/es/customComponents';
+import {} from 'taro-fast-component-extra';
 
 import {
   ContentPageBase,

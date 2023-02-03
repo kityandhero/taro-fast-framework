@@ -48,7 +48,7 @@ export default class Index extends ContentPageBase {
         </SimpleBox>
 
         <SimpleBox header="其他">
-          <View>请参阅 taro-fast-common/es/constants.css</View>
+          <View>请参阅 taro-fast-common/es/index.css</View>
         </SimpleBox>
       </Space>
     );

@@ -5,9 +5,7 @@ const lintScript = {
   'change-nrm-npm': 'nrm use npm && npm run sleep:change-nrm',
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'preclean:all':
-    'rimraf ./yarn-error.log && rimraf ./yarn.lock && rimraf ./package-lock.json',
-  'clean:all': 'lerna clean -y',
+  'clean:all': 'node ./develop/assists/clean.js',
   commitlint: 'npx commitlint --edit',
   'config:env': 'node ./develop/assists/env.init.js',
   precz: 'npm run update:cz:flag && git stage -A',
@@ -37,6 +35,8 @@ const lintScript = {
   'prepublish:build': 'pnpm install && npm run cz && npm run build:all',
   'publish:build': 'npm run publish:lerna',
   'postncu:u:all': 'pnpm install',
+  'install:dependence:dev': 'node ./develop/assists/globalDependence.js',
+  'postinstall:dependence:dev': 'pnpm install',
 };
 
 const prettierScript = {

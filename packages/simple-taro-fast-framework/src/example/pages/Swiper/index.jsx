@@ -5,6 +5,7 @@ import { buildRandomHexColor } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import {
+  buildSwiper,
   CenterBox,
   Ellipsis,
   ImageBox,
@@ -12,7 +13,6 @@ import {
   Swiper,
   SwiperWrapper,
 } from 'taro-fast-component';
-import { buildSwiper } from 'taro-fast-component/es/functionComponent';
 
 import {
   ContentPageBase,

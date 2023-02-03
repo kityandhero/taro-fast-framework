@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { Button, Card, CenterBox, Modal, Space } from 'taro-fast-component';
-import { Selector } from 'taro-fast-component-extra/es/customComponents';
+import { Selector } from 'taro-fast-component-extra';
 
 import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';

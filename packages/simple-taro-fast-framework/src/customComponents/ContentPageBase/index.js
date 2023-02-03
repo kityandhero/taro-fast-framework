@@ -4,8 +4,8 @@ import { isArray, isFunction, toString } from 'easy-soft-utility';
 
 import { Button, CenterBox, ColorText, Grid } from 'taro-fast-component';
 
-import Header from '../Header';
-import PageWrapperSimulation from '../PageWrapperSimulation';
+import { Header } from '../Header';
+import { PageWrapperSimulation } from '../PageWrapperSimulation';
 
 import './index.less';
 

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import './index.less';
 
-class DocsHeader extends Component {
+class Header extends Component {
   render() {
     const { title, description } = this.props;
 
@@ -20,8 +20,8 @@ class DocsHeader extends Component {
   }
 }
 
-DocsHeader.defaultProps = {
+Header.defaultProps = {
   title: '标题',
 };
 
-export { DocsHeader };
+export { Header };

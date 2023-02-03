@@ -12,7 +12,7 @@ import {
 } from 'easy-soft-utility';
 
 import { Divider } from 'taro-fast-component';
-import { PrismCode } from 'taro-fast-component-prism/es/customComponents';
+import { PrismCode } from 'taro-fast-component-prism';
 import {
   removeCurrentCustomer,
   removeOpenId,
