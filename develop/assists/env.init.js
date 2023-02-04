@@ -5,6 +5,7 @@
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const { resolve } = require('path');
+const { loopPackage } = require('./resources/package.assist');
 
 const eslintFile = require('../config/eslint/template/content');
 const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
@@ -95,111 +96,63 @@ function createMain() {
 }
 
 function createPackage() {
-  const packagesDir = './packages/';
+  loopPackage(({ absolutePath }) => {
+    const itemPath = absolutePath;
 
-  const packagesPath = resolve(packagesDir);
+    fs.writeFile(
+      `${itemPath}/.eslintrc.js`,
+      packageEslintFileContent,
+      (error) => {
+        prompt(error, `${itemPath}/.eslintrc.js config file update success`);
+      },
+    );
 
-  fs.readdir(packagesDir, (err, files) => {
-    if (err) {
-      throw err;
-    }
+    fs.writeFile(
+      `${itemPath}/.prettierrc.js`,
+      packagePrettierContent,
+      (error) => {
+        prompt(error, `${itemPath}/.prettierrc.js config file update success`);
+      },
+    );
 
-    files.forEach((file) => {
-      const itemPath = `${packagesPath}/${file}`;
+    fs.writeFile(
+      `${itemPath}/.stylelintrc.js`,
+      packageStylelintContent,
+      (error) => {
+        prompt(error, `${itemPath}/.stylelintrc.js config file update success`);
+      },
+    );
 
-      if (file && fs.lstatSync(itemPath).isDirectory()) {
-        fs.writeFile(
-          `${itemPath}/.eslintrc.js`,
-          packageEslintFileContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.eslintrc.js config file update success`,
-            );
-          },
-        );
+    fs.writeFile(`${itemPath}/.editorconfig`, editorConfigContent, (error) => {
+      prompt(error, `${itemPath}/.editorconfig config file update success`);
+    });
 
-        fs.writeFile(
-          `${itemPath}/.prettierrc.js`,
-          packagePrettierContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.prettierrc.js config file update success`,
-            );
-          },
-        );
+    fs.writeFile(`${itemPath}/.eslintignore`, eslintIgnoreContent, (error) => {
+      prompt(error, `${itemPath}/.eslintignore config file update success`);
+    });
 
-        fs.writeFile(
-          `${itemPath}/.stylelintrc.js`,
-          packageStylelintContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.stylelintrc.js config file update success`,
-            );
-          },
-        );
+    fs.writeFile(
+      `${itemPath}/.prettierignore`,
+      prettierIgnoreContent,
+      (error) => {
+        prompt(error, `${itemPath}/.prettierignore config file update success`);
+      },
+    );
 
-        fs.writeFile(
-          `${itemPath}/.editorconfig`,
-          editorConfigContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.editorconfig config file update success`,
-            );
-          },
-        );
+    fs.writeFile(
+      `${itemPath}/.gitattributes`,
+      gitAttributesContent,
+      (error) => {
+        prompt(error, `${itemPath}/.gitattributes config file update success`);
+      },
+    );
 
-        fs.writeFile(
-          `${itemPath}/.eslintignore`,
-          eslintIgnoreContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.eslintignore config file update success`,
-            );
-          },
-        );
+    fs.writeFile(`${itemPath}/.gitignore`, gitIgnoreContent, (error) => {
+      prompt(error, `${itemPath}/.gitignore config file update success`);
+    });
 
-        fs.writeFile(
-          `${itemPath}/.prettierignore`,
-          prettierIgnoreContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.prettierignore config file update success`,
-            );
-          },
-        );
-
-        fs.writeFile(
-          `${itemPath}/.gitattributes`,
-          gitAttributesContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.gitattributes config file update success`,
-            );
-          },
-        );
-
-        fs.writeFile(`${itemPath}/.gitignore`, gitIgnoreContent, (error) => {
-          prompt(error, `${itemPath}/.gitignore config file update success`);
-        });
-
-        fs.writeFile(
-          `${itemPath}/.lintstagedrc`,
-          lintStagedRcContent,
-          (error) => {
-            prompt(
-              error,
-              `${itemPath}/.lintstagedrc config file update success`,
-            );
-          },
-        );
-      }
+    fs.writeFile(`${itemPath}/.lintstagedrc`, lintStagedRcContent, (error) => {
+      prompt(error, `${itemPath}/.lintstagedrc config file update success`);
     });
   });
 }
@@ -236,52 +189,40 @@ function adjustMainPackageJson() {
 }
 
 function adjustChildrenPackageJson() {
-  const packagesDir = './packages/';
+  loopPackage(({ absolutePath }) => {
+    const itemPath = absolutePath;
 
-  const packagesPath = resolve(packagesDir);
+    const childPackageJsonPath = `${itemPath}/package.json`;
 
-  fs.readdir(packagesDir, (err, files) => {
-    if (err) {
-      throw err;
-    }
-
-    files.forEach((file) => {
-      const itemPath = `${packagesPath}/${file}`;
-
-      if (file && fs.lstatSync(itemPath).isDirectory()) {
-        const childPackageJsonPath = `${itemPath}/package.json`;
+    fsExtra
+      .readJson(childPackageJsonPath)
+      .then((packageJson) => {
+        packageJson.scripts = {
+          ...(packageJson.scripts || {}),
+          ...childrenPackageFile.lintScript,
+          ...childrenPackageFile.prettierScript,
+        };
 
         fsExtra
-          .readJson(childPackageJsonPath)
-          .then((packageJson) => {
-            packageJson.scripts = {
-              ...(packageJson.scripts || {}),
-              ...childrenPackageFile.lintScript,
-              ...childrenPackageFile.prettierScript,
-            };
-
-            fsExtra
-              .writeJson(childPackageJsonPath, packageJson)
-              .then(() => {
-                console.log('adjust child package.json success');
-
-                return null;
-              })
-              .catch((e) => {
-                console.error(e);
-
-                return null;
-              });
+          .writeJson(childPackageJsonPath, packageJson)
+          .then(() => {
+            console.log('adjust child package.json success');
 
             return null;
           })
-          .catch((res) => {
-            console.error(res);
+          .catch((e) => {
+            console.error(e);
 
             return null;
           });
-      }
-    });
+
+        return null;
+      })
+      .catch((res) => {
+        console.error(res);
+
+        return null;
+      });
   });
 }
 
