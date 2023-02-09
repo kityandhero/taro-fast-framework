@@ -28,16 +28,15 @@ export default class Index extends ContentPageBase {
     description: '返回头部组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        visible1: false,
-        header: '样例1',
-        currentConfig: config1,
-      },
+
+      visible1: false,
+      header: '样例1',
+      currentConfig: config1,
     };
 
     const { screenHeight } = getSystemInfo();
@@ -78,10 +77,9 @@ export default class Index extends ContentPageBase {
         key={key}
         {...{
           ...config,
-          ...{
-            visible: visible1,
-            onClick: this.scrollToTop,
-          },
+
+          visible: visible1,
+          onClick: this.scrollToTop,
         }}
       >
         {this.buildSimpleItemInner(inner)}
@@ -89,16 +87,16 @@ export default class Index extends ContentPageBase {
     );
   };
 
-  onPageScroll(e) {
+  onPageScroll(event) {
     const { visible1 } = this.state;
 
-    if (!visible1 && e.scrollTop >= this.thresholdDistance) {
+    if (!visible1 && event.scrollTop >= this.thresholdDistance) {
       this.setState({
         visible1: true,
       });
     }
 
-    if (visible1 && e.scrollTop < this.thresholdDistance) {
+    if (visible1 && event.scrollTop < this.thresholdDistance) {
       this.setState({
         visible1: false,
       });

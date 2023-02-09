@@ -22,19 +22,18 @@ const defaultProps = {
 };
 
 class HeadNavigation extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        containerHeight: '',
-        placeholderHeight: 0,
-        boxHeight: 0,
-        height: 0,
-        rightWidth: 0,
-        backboardBoxPaddingTop: 0,
-      },
+
+      containerHeight: '',
+      placeholderHeight: 0,
+      boxHeight: 0,
+      height: 0,
+      rightWidth: 0,
+      backboardBoxPaddingTop: 0,
     };
   }
 
@@ -43,7 +42,7 @@ class HeadNavigation extends BaseComponent {
 
     const { onAdjustComplete } = this.props;
 
-    const noAdaptationMessage = `framework with env [${this.getEnv()}] has no adaptation, ignore getMenuButtonBoundingClientRect`;
+    const noAdaptationMessage = `framework with env [${this.getEnvironment()}] has no adaptation, ignore getMenuButtonBoundingClientRect`;
 
     this.handleEnv({
       handleWeapp: () => {
@@ -138,12 +137,11 @@ class HeadNavigation extends BaseComponent {
       <View
         style={{
           ...style,
-          ...{
-            minHeight: containerHeight,
-            paddingBottom: '0 0 0 0',
-            margin: '0 0 0 0',
-            overflow: 'hidden',
-          },
+
+          minHeight: containerHeight,
+          paddingBottom: '0 0 0 0',
+          margin: '0 0 0 0',
+          overflow: 'hidden',
         }}
       >
         <FlexBox
@@ -154,20 +152,17 @@ class HeadNavigation extends BaseComponent {
           top={
             <BackboardBox
               style={{
-                ...{
-                  width: '100%',
-                  paddingBottom: transformSize(8),
-                  paddingTop: transformSize(backboardBoxPaddingTop),
-                },
+                width: '100%',
+                paddingBottom: transformSize(8),
+                paddingTop: transformSize(backboardBoxPaddingTop),
               }}
               height={boxHeight}
               backboardStyle={backboardStyle}
               backboardZIndex="0"
               contentStyle={{
                 ...contentStyle,
-                ...{
-                  background: 'transparent',
-                },
+
+                background: 'transparent',
               }}
               backboardChildren={backboardChildren}
             >
@@ -206,26 +201,22 @@ class HeadNavigation extends BaseComponent {
       </View>
     );
 
-    if (!fixed) {
-      return nav;
-    } else {
-      return (
-        <>
-          {nav}
+    return fixed ? (
+      <>
+        {nav}
 
-          <View
-            style={{
-              ...{
-                minHeight: containerHeight,
-                paddingBottom: '0 0 0 0',
-                margin: '0 0 0 0',
-                overflow: 'hidden',
-              },
-            }}
-          ></View>
-        </>
-      );
-    }
+        <View
+          style={{
+            minHeight: containerHeight,
+            paddingBottom: '0 0 0 0',
+            margin: '0 0 0 0',
+            overflow: 'hidden',
+          }}
+        ></View>
+      </>
+    ) : (
+      nav
+    );
   }
 }
 

@@ -63,7 +63,7 @@ function createEmptyList(size) {
   const list = [];
 
   if (size > 0) {
-    for (let i = 0; i < size; i++) {
+    for (let index = 0; index < size; index++) {
       list.push({});
     }
   }
@@ -71,10 +71,10 @@ function createEmptyList(size) {
   return list;
 }
 
-export async function getOverviewData(params) {
+export async function getOverviewData(parameters) {
   return request({
     api: `/news/integration/overview`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -84,11 +84,10 @@ export async function getOverviewData(params) {
 
           return {
             ...galleryItem,
-            ...{
-              galleryId: no,
-              key: no,
-              title: galleryItem.title + no,
-            },
+
+            galleryId: no,
+            key: no,
+            title: galleryItem.title + no,
           };
         }),
         navList: createEmptyList(8).map((o, index) => {
@@ -96,48 +95,45 @@ export async function getOverviewData(params) {
 
           return {
             ...navItem,
-            ...{
-              id: no,
-              key: no,
-              value: `导航${index + 1}`,
-            },
+
+            id: no,
+            key: no,
+            value: `导航${index + 1}`,
           };
         }),
-        sectionList: createEmptyList(6).map((o, i) => {
-          const sectionNo = `section_item_${i + 1}`;
+        sectionList: createEmptyList(6).map((o, index_) => {
+          const sectionNo = `section_item_${index_ + 1}`;
 
           return {
             ...sectionItem,
-            ...{
-              sectionId: sectionNo,
-              key: sectionNo,
-              name: `栏目${i + 1}`,
-              description: `栏目${i + 1}简介描述`,
-              config: {
-                renderMode: `${i + 1}`,
-              },
-              articles: createEmptyList(4).map((one, index) => {
-                const no = `${sectionNo}_article_item_${index + 1}`;
 
-                return {
-                  ...articleItem,
-                  ...{
-                    id: no,
-                    key: no,
-                    title: `栏目${i + 1}文章${
-                      index + 1
-                    }的标题标题标题标题标题标题标题标题`,
-                    description: `栏目${i + 1}文章${
-                      index + 1
-                    }简介描述简介描述简介描述简介描述简介描述`,
-                    createTime: formatDatetime({
-                      data: getNow(),
-                      fmt: datetimeFormat.yearMonthDayHourMinuteSecond,
-                    }),
-                  },
-                };
-              }),
+            sectionId: sectionNo,
+            key: sectionNo,
+            name: `栏目${index_ + 1}`,
+            description: `栏目${index_ + 1}简介描述`,
+            config: {
+              renderMode: `${index_ + 1}`,
             },
+            articles: createEmptyList(4).map((one, index) => {
+              const no = `${sectionNo}_article_item_${index + 1}`;
+
+              return {
+                ...articleItem,
+
+                id: no,
+                key: no,
+                title: `栏目${index_ + 1}文章${
+                  index + 1
+                }的标题标题标题标题标题标题标题标题`,
+                description: `栏目${index_ + 1}文章${
+                  index + 1
+                }简介描述简介描述简介描述简介描述简介描述`,
+                createTime: formatDatetime({
+                  data: getNow(),
+                  fmt: datetimeFormat.yearMonthDayHourMinuteSecond,
+                }),
+              };
+            }),
           };
         }),
       },

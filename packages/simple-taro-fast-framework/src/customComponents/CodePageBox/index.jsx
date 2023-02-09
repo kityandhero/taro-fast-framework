@@ -8,9 +8,7 @@ import { cardHeaderStyle, cardStyle } from '../../customConfig';
 import { buildPagePrismCode } from '../../utils';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 

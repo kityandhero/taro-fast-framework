@@ -67,17 +67,16 @@ export default class Index extends BasePageWrapper {
 
   enableBackTop = true;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'news/getOverview',
-        advertisingList: [],
-        sectionList: [],
-        navList: [],
-      },
+
+      loadApiPath: 'news/getOverview',
+      advertisingList: [],
+      sectionList: [],
+      navList: [],
     };
   }
 
@@ -244,9 +243,7 @@ export default class Index extends BasePageWrapper {
               const { config = {}, name, articles } = item;
 
               const { renderMode } = {
-                ...{
-                  renderMode: '0',
-                },
+                renderMode: '0',
                 ...config,
               };
 

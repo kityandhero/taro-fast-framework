@@ -10,9 +10,7 @@ import {
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -87,26 +85,25 @@ export default class Index extends ContentPageBase {
     description: '折叠面板组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基本展示',
-        currentConfig: config1,
-        wrapBuilder: (o) => {
-          return (
-            <Card
-              header="容器"
-              style={style}
-              headerStyle={cardHeaderStyle}
-              space={false}
-            >
-              {o}
-            </Card>
-          );
-        },
+
+      header: '基本展示',
+      currentConfig: config1,
+      wrapBuilder: (o) => {
+        return (
+          <Card
+            header="容器"
+            style={style}
+            headerStyle={cardHeaderStyle}
+            space={false}
+          >
+            {o}
+          </Card>
+        );
       },
     };
   }

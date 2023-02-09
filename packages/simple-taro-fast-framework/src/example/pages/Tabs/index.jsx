@@ -25,19 +25,17 @@ const singlePanelComponent = (
   </View>
 );
 
-function buildPanel(i, style) {
-  return <View style={style}>标签页{i + 1}的内容</View>;
+function buildPanel(index, style) {
+  return <View style={style}>标签页{index + 1}的内容</View>;
 }
 
 function buildTabList(size, hasBody = false, style = {}) {
   const result = [];
 
-  for (let i = 0; i < size; i++) {
+  for (let index = 0; index < size; index++) {
     result.push({
-      ...{
-        title: `标签页${i + 1}`,
-      },
-      ...(hasBody ? { body: buildPanel(i, style) } : {}),
+      title: `标签页${index + 1}`,
+      ...(hasBody ? { body: buildPanel(index, style) } : {}),
     });
   }
 
@@ -56,24 +54,22 @@ const tabDecorationList = tabNoBodyList.map((item, index) => {
   if (index === 0) {
     return {
       ...item,
-      ...{
-        useBadge: true,
-        badgeColor: 'red',
-        badgeContent: Badge.dot,
-        icon: <IconSketch size={24} />,
-      },
+
+      useBadge: true,
+      badgeColor: 'red',
+      badgeContent: Badge.dot,
+      icon: <IconSketch size={24} />,
     };
   }
 
   if (index === 1) {
     return {
       ...item,
-      ...{
-        useBadge: true,
-        badgeContent: '更多',
-        badgeColor: '#58ab3d',
-        icon: <Icon size={36} imageMode value={logoImg} />,
-      },
+
+      useBadge: true,
+      badgeContent: '更多',
+      badgeColor: '#58ab3d',
+      icon: <Icon size={36} imageMode value={logoImg} />,
     };
   }
 
@@ -98,32 +94,29 @@ const tabVerticalDecorationList = tabVerticalList.map((item, index) => {
   if (index === 0) {
     return {
       ...item,
-      ...{
-        useBadge: true,
-        badgeColor: 'red',
-        badgeContent: Badge.dot,
-        icon: <IconSketch size={24} />,
-      },
+
+      useBadge: true,
+      badgeColor: 'red',
+      badgeContent: Badge.dot,
+      icon: <IconSketch size={24} />,
     };
   }
 
   if (index === 1) {
     return {
       ...item,
-      ...{
-        useBadge: true,
-        badgeContent: '更多',
-        badgeColor: '#58ab3d',
-        icon: <Icon size={36} imageMode value={logoImg} />,
-      },
+
+      useBadge: true,
+      badgeContent: '更多',
+      badgeColor: '#58ab3d',
+      icon: <Icon size={36} imageMode value={logoImg} />,
     };
   }
 
   return {
     ...item,
-    ...{
-      icon: <IconSketch size={24} />,
-    },
+
+    icon: <IconSketch size={24} />,
   };
 });
 
@@ -145,7 +138,7 @@ const config2 = {
 
 const config3 = {
   tabList: tabNoBodyList,
-  onClick: (index, e, item) => {
+  onClick: (index, event, item) => {
     console.log({
       index,
       item,
@@ -300,22 +293,21 @@ definePageConfig({
 @connect(({ schedulingControl }) => ({
   schedulingControl,
 }))
-export default class Index extends ContentPageBase {
+class Index extends ContentPageBase {
   headerData = {
     id: 'Tabs',
     name: '标签面板',
     description: '标签面板组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '仅头部',
-        currentConfig: config1,
-      },
+
+      header: '仅头部',
+      currentConfig: config1,
     };
   }
 
@@ -433,3 +425,5 @@ export default class Index extends ContentPageBase {
     );
   };
 }
+
+export default Index;

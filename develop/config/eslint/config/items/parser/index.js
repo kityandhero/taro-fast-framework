@@ -2,11 +2,9 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
+const { parserOptions: embedParserOptions } = require('./embed');
+const { parserOptions: customParserOptions } = require('./custom');
+
 module.exports = {
-  parserOptions: {
-    requireConfigFile: false,
-    babelOptions: {
-      presets: ['@babel/preset-react'],
-    },
-  },
-}
+  parserOptions: { ...embedParserOptions, ...customParserOptions },
+};

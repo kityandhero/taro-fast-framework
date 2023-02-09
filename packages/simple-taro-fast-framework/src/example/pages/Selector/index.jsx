@@ -9,9 +9,7 @@ import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -43,7 +41,7 @@ const RadioMode = () => {
       options={ItemList}
       value={[value]}
       onChange={(v) => {
-        if (v.length) {
+        if (v.length > 0) {
           setValue(v[0]);
         }
       }}
@@ -67,7 +65,7 @@ export default class Index extends ContentPageBase {
           <Selector
             options={ItemList}
             value={['1']}
-            onChange={(arr, extend) => console.log(arr, extend.items)}
+            onChange={(array, extend) => console.log(array, extend.items)}
           />
         </Card>
 
@@ -76,7 +74,7 @@ export default class Index extends ContentPageBase {
             options={ItemList}
             value={['2', '3']}
             multiple
-            onChange={(arr, extend) => console.log(arr, extend.items)}
+            onChange={(array, extend) => console.log(array, extend.items)}
           />
         </Card>
 
@@ -85,7 +83,7 @@ export default class Index extends ContentPageBase {
             options={ItemList}
             value={['1']}
             disabled
-            onChange={(arr) => console.log(arr)}
+            onChange={(array) => console.log(array)}
           />
         </Card>
 
@@ -95,7 +93,7 @@ export default class Index extends ContentPageBase {
             options={ItemList}
             value={['2', '3']}
             multiple
-            onChange={(arr) => console.log(arr)}
+            onChange={(array) => console.log(array)}
           />
         </Card>
 
@@ -105,7 +103,7 @@ export default class Index extends ContentPageBase {
             options={ItemList}
             value={['2', '3']}
             multiple
-            onChange={(arr) => console.log(arr)}
+            onChange={(array) => console.log(array)}
           />
         </Card>
 

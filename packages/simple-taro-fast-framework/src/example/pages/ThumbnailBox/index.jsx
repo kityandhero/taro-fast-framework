@@ -61,17 +61,16 @@ export default class Index extends ContentPageBase {
     description: '缩略容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '简单使用',
-        currentConfig: {},
-        wrapBuilder: (o) => {
-          return <View style={boxStyle}>{o}</View>;
-        },
+
+      header: '简单使用',
+      currentConfig: {},
+      wrapBuilder: (o) => {
+        return <View style={boxStyle}>{o}</View>;
       },
     };
   }

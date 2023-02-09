@@ -34,9 +34,8 @@ const config1 = {
 
 const config2 = {
   ...configCore,
-  ...{
-    extraPosition: 'left',
-  },
+
+  extraPosition: 'left',
 };
 
 // eslint-disable-next-line no-undef
@@ -54,17 +53,16 @@ export default class Index extends ContentPageBase {
     description: '附带额外区域的容器',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        showTransition: true,
-        header: '布局展示',
-        currentConfig: config1,
-        inner: <CenterBox>children</CenterBox>,
-      },
+
+      showTransition: true,
+      header: '布局展示',
+      currentConfig: config1,
+      inner: <CenterBox>children</CenterBox>,
     };
   }
 

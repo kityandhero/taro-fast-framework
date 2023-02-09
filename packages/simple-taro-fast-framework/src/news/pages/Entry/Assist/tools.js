@@ -109,13 +109,13 @@ export function buildItem({
 
   return (
     <Space direction="vertical" fillWidth size={renderMode === 2 ? 28 : 34}>
-      {(articles || []).map((o, i) => {
+      {(articles || []).map((o, index) => {
         const { title, description, image, createTime } = o;
 
         if (renderMode === 2) {
           return (
             <FlexBox
-              key={`article_${keyPrefix}_${i}`}
+              key={`article_${keyPrefix}_${index}`}
               flexAuto="right"
               left={
                 <View
@@ -203,7 +203,7 @@ export function buildItem({
         if (checkInCollection([3, 1], renderMode)) {
           return (
             <FlexBox
-              key={`article_${keyPrefix}_${i}`}
+              key={`article_${keyPrefix}_${index}`}
               flexAuto="right"
               left={
                 <View style={{ width: transformSize(260) }}>
@@ -263,7 +263,7 @@ export function buildItem({
         if (renderMode === 4) {
           return (
             <View
-              key={`article_${keyPrefix}_${i}`}
+              key={`article_${keyPrefix}_${index}`}
               style={{ width: transformSize(260) }}
             >
               <ImageBox src={image} aspectRatio={0.87} />

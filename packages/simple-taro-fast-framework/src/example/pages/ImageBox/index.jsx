@@ -43,7 +43,7 @@ const imageContainerStyle = {
   backgroundColor: 'red',
 };
 
-const src =
+const source =
   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45';
 
 // const src = 'https://file.1010101.cc/2129867544.png';
@@ -53,34 +53,34 @@ function wrapBuilder(one) {
 }
 
 const config1 = {
-  src,
+  src: source,
   showRenderCount: true,
 };
 
 const config2 = {
-  src,
+  src: source,
   padding: 10,
 };
 
 const config21 = {
-  src,
+  src: source,
   padding: 10,
   imageBoxStyle: imageContainerStyle,
 };
 
 const config3 = {
-  src,
+  src: source,
   showMode: 'loading',
 };
 
 const config4 = {
-  src,
+  src: source,
   showOverlay: true,
   overlayText: '售罄',
 };
 
 const config5 = {
-  src,
+  src: source,
   decoration: {
     style: {
       color: 'blue',
@@ -90,22 +90,22 @@ const config5 = {
 };
 
 const config6 = {
-  src,
+  src: source,
   circle: true,
 };
 
 const config7 = {
-  src,
+  src: source,
   lazyLoad: true,
 };
 
 const config8 = {
-  src,
+  src: source,
   aspectRatio: 0.5,
 };
 
 const config9 = {
-  src,
+  src: source,
   decorationBuilder: () => {
     return (
       <TranslucentBox
@@ -137,7 +137,7 @@ const config9 = {
 };
 
 const config10 = {
-  src,
+  src: source,
   showMode: 'pure',
 };
 
@@ -156,16 +156,15 @@ export default class Index extends ContentPageBase {
     description: '图片组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '普通例子',
-        currentConfig: config1,
-        wrapBuilder,
-      },
+
+      header: '普通例子',
+      currentConfig: config1,
+      wrapBuilder,
     };
   }
 
@@ -175,7 +174,7 @@ export default class Index extends ContentPageBase {
         span: 2,
         header: `image mode - "${item}"`,
         config: {
-          src,
+          src: source,
           imageMode: item,
         },
       };

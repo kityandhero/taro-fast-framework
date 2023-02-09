@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/temp",
     "baseUrl": ".",
     "jsx": "react-jsx",
+    "allowJs": true,
+    "experimentalDecorators": true,
     "paths": {
       "@/*": ["./src/*"]
     }

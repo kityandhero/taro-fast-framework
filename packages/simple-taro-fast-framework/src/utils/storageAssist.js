@@ -33,7 +33,7 @@ export function getMetaDataCache() {
     return null;
   }
 
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 5, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 60 / 5, 10);
 
   if (d.dataVersion < now) {
     return null;
@@ -52,7 +52,7 @@ export function getMetaDataCache() {
 export function setMetaDataCache(o) {
   const key = storageKeyCollection.metaData;
 
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   const d = {
     metaData: o || null,

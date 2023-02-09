@@ -1,36 +1,36 @@
 import { request } from 'easy-soft-utility';
 
-export async function signInData(params) {
+export async function signInData(parameters) {
   return request({
     api: `/entrance/signIn`,
-    params,
+    params: parameters,
   });
 }
 
-export async function signInSilentData(params) {
+export async function signInSilentData(parameters) {
   return request({
     api: `/entrance/signInSilent`,
-    params,
+    params: parameters,
   });
 }
 
-export async function registerData(params) {
+export async function registerData(parameters) {
   return request({
     api: `/entrance/register`,
-    params,
+    params: parameters,
   });
 }
 
-export async function registerWithWeChatData(params) {
+export async function registerWithWeChatData(parameters) {
   return request({
     api: `/entrance/registerWithWeChat`,
-    params,
+    params: parameters,
   });
 }
 
-export async function checkTicketValidityData(params) {
+export async function checkTicketValidityData(parameters) {
   return request({
     api: `/entrance/checkTicketValidity`,
-    params,
+    params: parameters,
   });
 }

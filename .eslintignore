@@ -12,3 +12,7 @@
 *.7z
 *.min.js
 rollup.config-*.cjs
+
+.eslintrc.js
+.prettierrc.js
+.stylelintrc.js

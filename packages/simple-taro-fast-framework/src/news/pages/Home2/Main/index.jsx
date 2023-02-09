@@ -42,25 +42,22 @@ export default class Index extends BasePageWrapper {
 
   initialSectionIndex = 0;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'news/getOverview',
-        advertisingList: [],
-        sectionList: [],
-        navList: [],
-      },
+
+      loadApiPath: 'news/getOverview',
+      advertisingList: [],
+      sectionList: [],
+      navList: [],
     };
   }
 
   doWorkBeforeAdjustDidMount = () => {
     const { sectionId } = {
-      ...{
-        sectionId: '',
-      },
+      sectionId: '',
       ...this.externalParameter,
     };
 
@@ -153,9 +150,7 @@ export default class Index extends BasePageWrapper {
               const { config = {}, name, articles } = item;
 
               const { renderMode } = {
-                ...{
-                  renderMode: '0',
-                },
+                renderMode: '0',
                 ...config,
               };
 

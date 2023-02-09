@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import { navigateTo } from 'easy-soft-utility';
 
-import { checkWebEnv } from 'taro-fast-common';
+import { checkWebEnvironment } from 'taro-fast-common';
 import { CenterBox, IconChevronRight, ImageBox } from 'taro-fast-component';
 
 import iconAction from '../../../assets/images/icon-list-action.png';
@@ -124,7 +124,7 @@ const listData = [
     path: pathCollection.example.webPage.path,
     webPageTitle: 'H5版本',
     webPageUrl: 'http://mtest.1010101.cc',
-    hidden: checkWebEnv(),
+    hidden: checkWebEnvironment(),
   },
   {
     id: 'CoreTools',
@@ -152,9 +152,7 @@ definePageConfig({
 class Index extends PageWrapperSimulation {
   onShareAppMessage() {
     const o = {
-      ...{
-        path: pathCollection.example.main.path,
-      },
+      path: pathCollection.example.main.path,
     };
 
     return o;
@@ -193,10 +191,10 @@ class Index extends PageWrapperSimulation {
                   const { webPage } = item;
 
                   if (webPage) {
-                    const { webPageTitle, webPageUrl } = item;
+                    const { webPageTitle, webPageUrl, path } = item;
 
                     this.goToWebPage(
-                      item.path,
+                      path,
                       webPageTitle || '',
                       webPageUrl || '',
                     );

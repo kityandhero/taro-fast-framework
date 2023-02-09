@@ -9,9 +9,7 @@ import { ContentPageBase } from '../../../../../customComponents';
 import { cardStyle } from '../../../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -34,14 +32,13 @@ export default class Index extends ContentPageBase {
     description: '使用初始加载提示器',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'simulation/singleList',
-      },
+
+      loadApiPath: 'simulation/singleList',
     };
   }
 

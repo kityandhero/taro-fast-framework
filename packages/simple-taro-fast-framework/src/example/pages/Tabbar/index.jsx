@@ -153,16 +153,15 @@ export default class Index extends ContentPageBase {
     description: '底部导航栏组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        value: 'user',
-        header: '组件展示',
-        currentConfig: config1,
-      },
+
+      value: 'user',
+      header: '组件展示',
+      currentConfig: config1,
     };
   }
 
@@ -195,7 +194,7 @@ export default class Index extends ContentPageBase {
     const { value } = this.state;
 
     return (
-      <Tabbar key={key} {...{ ...config, ...{ value } }}>
+      <Tabbar key={key} {...{ ...config, value }}>
         {this.buildSimpleItemInner(inner)}
       </Tabbar>
     );

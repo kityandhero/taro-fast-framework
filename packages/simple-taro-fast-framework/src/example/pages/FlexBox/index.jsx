@@ -12,7 +12,7 @@ import {
 } from '../../../customComponents';
 import { colStyle } from '../../../customConfig';
 
-const src =
+const source =
   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F21052112102250D-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643989392&t=18546318aa0f8e3e126ab26965ca6f45';
 
 const boxStyle = {
@@ -37,7 +37,7 @@ const config2 = {
   rightStyle: { paddingLeft: transformSize(10) },
   right: (
     <View style={{ width: transformSize(100) }}>
-      <ImageBox circle src={src} />
+      <ImageBox circle src={source} />
     </View>
   ),
 };
@@ -48,7 +48,7 @@ const config3 = {
   leftStyle: { paddingRight: transformSize(10) },
   left: (
     <View style={{ width: transformSize(100) }}>
-      <ImageBox src={src} />
+      <ImageBox src={source} />
     </View>
   ),
   rightStyle: colStyle,
@@ -58,12 +58,13 @@ const config3 = {
 const config4 = {
   flexAuto: 'top',
   verticalHeight: 300,
-  top: <View style={{ ...autoStyle, ...{ width: '100%', height: '100%' } }} />,
+  top: <View style={{ ...autoStyle, width: '100%', height: '100%' }} />,
   bottom: (
     <View
       style={{
         ...boxStyle,
-        ...{ width: '100%', height: transformSize(80) },
+        width: '100%',
+        height: transformSize(80),
       }}
     />
   ),
@@ -76,7 +77,8 @@ const config5 = {
     <View
       style={{
         ...autoStyle,
-        ...{ width: '100%', height: transformSize(80) },
+        width: '100%',
+        height: transformSize(80),
       }}
     />
   ),
@@ -84,7 +86,8 @@ const config5 = {
     <View
       style={{
         ...boxStyle,
-        ...{ width: '100%', height: '100%' },
+        width: '100%',
+        height: '100%',
       }}
     />
   ),
@@ -104,15 +107,14 @@ export default class Index extends ContentPageBase {
     name: '自动布局',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '仅左侧布局',
-        currentConfig: config1,
-      },
+
+      header: '仅左侧布局',
+      currentConfig: config1,
     };
   }
 

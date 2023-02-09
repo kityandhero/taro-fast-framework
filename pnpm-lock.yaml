@@ -32,7 +32,7 @@ importers:
       conventional-changelog-conventionalcommits: ^5.0.0
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.89
+      easy-soft-develop: ^2.0.108
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -98,7 +98,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cssnano: 5.1.14_postcss@8.4.21
       dayjs: 1.11.7
-      easy-soft-develop: 2.0.89
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -190,9 +190,9 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      easy-soft-develop: ^2.0.82
-      easy-soft-dva: ^3.6.55
-      easy-soft-utility: ^2.4.36
+      easy-soft-develop: ^2.0.108
+      easy-soft-dva: ^3.6.56
+      easy-soft-utility: ^2.4.37
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -257,8 +257,8 @@ importers:
       '@tarojs/shared': 3.6.0
       '@tarojs/taro': 3.6.0_@types+react@18.0.27
       '@tarojs/taro-h5': 3.6.0_3stiutgnnbnfnf3uowm5cip22i
-      easy-soft-dva: 3.6.55_7lqvh3ci3dfnk3gopjbbc46hl4
-      easy-soft-utility: 2.4.36
+      easy-soft-dva: 3.6.56_7lqvh3ci3dfnk3gopjbbc46hl4
+      easy-soft-utility: 2.4.37
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_7lqvh3ci3dfnk3gopjbbc46hl4
@@ -305,7 +305,7 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      easy-soft-develop: 2.0.85
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -408,8 +408,8 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.82
-      easy-soft-utility: ^2.4.36
+      easy-soft-develop: ^2.0.108
+      easy-soft-utility: ^2.4.37
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -472,7 +472,7 @@ importers:
       '@tarojs/taro': 3.6.0_@types+react@18.0.27
       '@tarojs/taro-h5': 3.6.0_3stiutgnnbnfnf3uowm5cip22i
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.36
+      easy-soft-utility: 2.4.37
       lodash: 4.17.21
       node-cache: 5.1.2
       object-hash: 3.0.0
@@ -522,7 +522,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.85
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -625,8 +625,8 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.82
-      easy-soft-utility: ^2.4.36
+      easy-soft-develop: ^2.0.108
+      easy-soft-utility: ^2.4.37
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -687,7 +687,7 @@ importers:
       '@tarojs/taro': 3.6.0_@types+react@18.0.27
       '@tarojs/taro-h5': 3.6.0_3stiutgnnbnfnf3uowm5cip22i
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.36
+      easy-soft-utility: 2.4.37
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       taro-fast-common: link:../taro-fast-common
@@ -735,7 +735,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.85
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -838,8 +838,8 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.82
-      easy-soft-utility: ^2.4.36
+      easy-soft-develop: ^2.0.108
+      easy-soft-utility: ^2.4.37
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -901,7 +901,7 @@ importers:
       '@tarojs/taro': 3.6.0_@types+react@18.0.27
       '@tarojs/taro-h5': 3.6.0_3stiutgnnbnfnf3uowm5cip22i
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.36
+      easy-soft-utility: 2.4.37
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       taro-fast-common: link:../taro-fast-common
@@ -950,7 +950,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.85
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -1055,8 +1055,8 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.82
-      easy-soft-utility: ^2.4.36
+      easy-soft-develop: ^2.0.108
+      easy-soft-utility: ^2.4.37
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -1119,7 +1119,7 @@ importers:
       '@tarojs/taro': 3.6.0_@types+react@18.0.27
       '@tarojs/taro-h5': 3.6.0_3stiutgnnbnfnf3uowm5cip22i
       dayjs: 1.11.7
-      easy-soft-utility: 2.4.36
+      easy-soft-utility: 2.4.37
       prismjs: 1.29.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -1171,7 +1171,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.85
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -1277,9 +1277,9 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.82
-      easy-soft-dva: ^3.6.55
-      easy-soft-utility: ^2.4.36
+      easy-soft-develop: ^2.0.108
+      easy-soft-dva: ^3.6.56
+      easy-soft-utility: ^2.4.37
       eslint: ^8.33.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -1342,8 +1342,8 @@ importers:
       '@tarojs/taro': 3.6.0_@types+react@18.0.27
       '@tarojs/taro-h5': 3.6.0_3stiutgnnbnfnf3uowm5cip22i
       dayjs: 1.11.7
-      easy-soft-dva: 3.6.55_7lqvh3ci3dfnk3gopjbbc46hl4
-      easy-soft-utility: 2.4.36
+      easy-soft-dva: 3.6.56_7lqvh3ci3dfnk3gopjbbc46hl4
+      easy-soft-utility: 2.4.37
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_7lqvh3ci3dfnk3gopjbbc46hl4
@@ -1396,7 +1396,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.85
+      easy-soft-develop: 2.0.108
       eslint: 8.33.0
       eslint-config-airbnb: 19.0.4_uhus6rimx3ujvztlky4xaizltu
       eslint-config-airbnb-typescript: 17.0.0_iph2ynp6l7un6bfvggyqyumsiu
@@ -10715,8 +10715,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /easy-soft-develop/2.0.85:
-    resolution: {integrity: sha512-hh6L3muNKWOwdCXHQyLtDuhWOs57hhnwDYtAzwfz8R8IycIm2/YjpyWNy5EDt/nAClEVIhKGFzBbRXyC26Ld4A==}
+  /easy-soft-develop/2.0.108:
+    resolution: {integrity: sha512-57epV0NfzdG6zx5YjSdkGBJvVE58FQWqACyr0EbKLqtkJ7VjVNN/RDtGk0NlUN+MST4oPyWc3vqbb/gv5oe65w==}
     hasBin: true
     dependencies:
       commander: 10.0.0
@@ -10730,29 +10730,14 @@ packages:
       terminal-kit: 3.0.0
     dev: true
 
-  /easy-soft-develop/2.0.89:
-    resolution: {integrity: sha512-YmqA2nofUhQKqtjsiYilqLGeNR9hMOK0NfWq/tWxzubOTzHh9GTrPvSNvb5Bi0ZLr8lTanhdtQKz/S01Oe5rVg==}
-    hasBin: true
-    dependencies:
-      commander: 10.0.0
-      download: 8.0.0
-      download-git-repo: 3.0.2
-      fs-extra: 11.1.0
-      hpagent: 1.2.0
-      ping: 0.4.2
-      rimraf: 4.1.2
-      shelljs: 0.8.5
-      terminal-kit: 3.0.0
-    dev: true
-
-  /easy-soft-dva/3.6.55_7lqvh3ci3dfnk3gopjbbc46hl4:
-    resolution: {integrity: sha512-eWnmxuj2WynYf/LWuhuomnwwRsAmUqtNsCBd/C5Ma/dVN+s+tCkfFdYaDPnfXqxL2qnD0Ic4tyKck4doLXaRsA==}
+  /easy-soft-dva/3.6.56_7lqvh3ci3dfnk3gopjbbc46hl4:
+    resolution: {integrity: sha512-UmICU0HxMTsVkWLwOxnTOU10b0Y3hoXdrhqrxpkKl595GaM7mpLcMaJliV1vKZiONECLbN0m8KC29lPw/HTQ3A==}
     peerDependencies:
       redux: 4.x
     dependencies:
       '@babel/runtime': 7.20.13
       '@reduxjs/toolkit': 1.9.2_k4ae6lp43ej6mezo3ztvx6pykq
-      easy-soft-utility: 2.4.36
+      easy-soft-utility: 2.4.37
       flatten: 1.0.3
       global: 4.4.0
       invariant: 2.2.4
@@ -10769,11 +10754,11 @@ packages:
       - react-native
     dev: false
 
-  /easy-soft-utility/2.4.36:
-    resolution: {integrity: sha512-bbZSGbqVOsppEu72khdG/uboaX0xwbGGPPwIM1ntWoM2cO4iok2Srfip6n4Ev0MqpOrhg7f8qMP2lmoMkCfF3A==}
+  /easy-soft-utility/2.4.37:
+    resolution: {integrity: sha512-N8iFHkG/x1/ngcPrPCVPIDepuAtLW4pzvLDigrEizgMcUYHlHeFgJlqXQtG8lYDR+vxf77hCFX4JdPH0vAujZw==}
     dependencies:
       dayjs: 1.11.7
-      js-base64: 3.7.4
+      js-base64: 3.7.5
       lodash: 4.17.21
       node-cache: 5.1.2
       object-hash: 3.0.0
@@ -12567,7 +12552,6 @@ packages:
 
   /flatten/1.0.3:
     resolution: {integrity: sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==}
-    deprecated: flatten is deprecated in favor of utility frameworks such as lodash.
     dev: false
 
   /flush-write-stream/1.1.1:
@@ -14766,8 +14750,8 @@ packages:
     resolution: {integrity: sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==}
     dev: true
 
-  /js-base64/3.7.4:
-    resolution: {integrity: sha512-wpM/wi20Tl+3ifTyi0RdDckS4YTD4Lf953mBRrpG8547T7hInHNPEj8+ck4gB8VDcGyeAWFK++Wb/fU1BeavKQ==}
+  /js-base64/3.7.5:
+    resolution: {integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==}
     dev: false
 
   /js-sdsl/4.2.0:
@@ -16044,7 +16028,7 @@ packages:
     dev: true
 
   /min-document/2.19.0:
-    resolution: {integrity: sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==}
+    resolution: {integrity: sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=}
     dependencies:
       dom-walk: 0.1.2
     dev: false
@@ -18432,7 +18416,7 @@ packages:
     dev: true
 
   /process/0.11.10:
-    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=}
     engines: {node: '>= 0.6.0'}
 
   /progress/2.0.3:

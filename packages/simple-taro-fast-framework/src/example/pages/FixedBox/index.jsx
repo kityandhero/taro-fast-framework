@@ -46,14 +46,12 @@ const config5 = {
   zIndex: 1000,
   width: 200,
   height: 40,
-  zIndex: 1000,
   center: true,
   useTransition: true,
   style: {
     ...style,
-    ...{
-      textAlign: 'center',
-    },
+
+    textAlign: 'center',
   },
 };
 
@@ -72,16 +70,15 @@ export default class Index extends ContentPageBase {
     description: '固定容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        showTransition: true,
-        header: '仅左侧布局',
-        currentConfig: config1,
-      },
+
+      showTransition: true,
+      header: '仅左侧布局',
+      currentConfig: config1,
     };
   }
 
@@ -118,9 +115,8 @@ export default class Index extends ContentPageBase {
         key={key}
         {...{
           ...config,
-          ...{
-            show: showTransition,
-          },
+
+          show: showTransition,
         }}
       >
         {this.buildSimpleItemInner(inner || '内部内容')}

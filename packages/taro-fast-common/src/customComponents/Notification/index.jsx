@@ -74,8 +74,8 @@ class Notification extends AbstractComponent {
 
   timer = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       show: false,
@@ -146,33 +146,40 @@ class Notification extends AbstractComponent {
     let styleBackground = styleInfo;
 
     switch (typeStage) {
-      case notificationTypeCollection.open:
+      case notificationTypeCollection.open: {
         styleBackground = styleOpen;
         break;
+      }
 
-      case notificationTypeCollection.loading:
+      case notificationTypeCollection.loading: {
         styleBackground = styleOpen;
         break;
+      }
 
-      case notificationTypeCollection.warn:
+      case notificationTypeCollection.warn: {
         styleBackground = styleWarning;
         break;
+      }
 
-      case notificationTypeCollection.warning:
+      case notificationTypeCollection.warning: {
         styleBackground = styleWarning;
         break;
+      }
 
-      case notificationTypeCollection.success:
+      case notificationTypeCollection.success: {
         styleBackground = styleSuccess;
         break;
+      }
 
-      case notificationTypeCollection.error:
+      case notificationTypeCollection.error: {
         styleBackground = styleError;
         break;
+      }
 
-      default:
+      default: {
         styleBackground = styleInfo;
         break;
+      }
     }
 
     const style = {

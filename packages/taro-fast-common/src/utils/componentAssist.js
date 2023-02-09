@@ -3,30 +3,30 @@ import React, { useContext } from 'react';
 
 import { isEqualBySerialize, isFunction } from 'easy-soft-utility';
 
-export function withNativeProps(props, element) {
+export function withNativeProperties(properties, element) {
   const p = {
     ...element.props,
   };
 
-  if (props.className) {
-    p.className = classNames(element.props.className, props.className);
+  if (properties.className) {
+    p.className = classNames(element.props.className, properties.className);
   }
 
-  if (props.style) {
+  if (properties.style) {
     p.style = {
       ...p.style,
-      ...props.style,
+      ...properties.style,
     };
   }
 
-  if (props.tabIndex !== undefined) {
-    p.tabIndex = props.tabIndex;
+  if (properties.tabIndex !== undefined) {
+    p.tabIndex = properties.tabIndex;
   }
 
-  for (const key in props) {
-    if (!props.hasOwnProperty(key)) continue;
+  for (const key in properties) {
+    if (!Object.prototype.hasOwnProperty.call(properties, key)) continue;
     if (key.startsWith('data-') || key.startsWith('aria-')) {
-      p[key] = props[key];
+      p[key] = properties[key];
     }
   }
 
@@ -37,13 +37,15 @@ export function withNativeProps(props, element) {
  * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state,
  * @export
  */
-export function getDerivedStateFromPropsForUrlParamsCore(nextProps) {
-  const { match } = nextProps;
+export function getDerivedStateFromPropertiesForUrlParametersCore(
+  nextProperties,
+) {
+  const { match } = nextProperties;
 
-  if ((match || null) != null) {
+  if ((match || null) != undefined) {
     const { params } = match;
 
-    if ((params || null) != null) {
+    if ((params || null) != undefined) {
       return { urlParams: params };
     }
   }
@@ -55,57 +57,54 @@ export function getDerivedStateFromPropsForUrlParamsCore(nextProps) {
  * Reacts生命周期getDerivedStateFromProps 辅助函数用于将url参数解析到返回值中用于设定state,如果值重复, 则返回null,
  * @export
  */
-export function getDerivedStateFromPropsForUrlParams(
-  nextProps,
-  prevState,
-  defaultUrlParams = { id: '' },
-  parseUrlParamsForSetState = null,
+export function getDerivedStateFromPropertiesForUrlParameters(
+  nextProperties,
+  previousState,
+  defaultUrlParameters = null,
+  parseUrlParametersForSetState = null,
 ) {
-  let stateUrlParams = getDerivedStateFromPropsForUrlParamsCore(
-    nextProps,
-    prevState,
+  let stateUrlParameters = getDerivedStateFromPropertiesForUrlParametersCore(
+    nextProperties,
+    previousState,
   );
 
-  stateUrlParams = stateUrlParams || { urlParams: defaultUrlParams };
+  stateUrlParameters = stateUrlParameters || {
+    urlParams: defaultUrlParameters || { id: '' },
+  };
 
-  const { urlParams: urlParamsPrev } = prevState;
+  const { urlParams: urlParametersPrevious } = previousState;
 
-  const { urlParams } = stateUrlParams;
+  const { urlParams } = stateUrlParameters;
 
-  if (
-    isEqualBySerialize(
-      { ...(urlParamsPrev || {}), ...{} },
-      { ...(urlParams || {}), ...{} },
-    )
-  ) {
-    return prevState;
+  if (isEqualBySerialize({ ...urlParametersPrevious }, { ...urlParams })) {
+    return previousState;
   }
 
-  if (isFunction(parseUrlParamsForSetState)) {
-    const data = parseUrlParamsForSetState(stateUrlParams);
+  if (isFunction(parseUrlParametersForSetState)) {
+    const data = parseUrlParametersForSetState(stateUrlParameters);
 
-    return { ...prevState, ...stateUrlParams, ...data };
+    return { ...previousState, ...stateUrlParameters, ...data };
   }
 
-  return { ...prevState, ...stateUrlParams };
+  return { ...previousState, ...stateUrlParameters };
 }
 
-export const defaultConfigRef = {
+export const defaultConfigReference = {
   current: {},
 };
 
 export function setDefaultConfig(config) {
-  defaultConfigRef.current = config;
+  defaultConfigReference.current = config;
 }
 
 export function getDefaultConfig() {
-  return defaultConfigRef.current;
+  return defaultConfigReference.current;
 }
 
 const ConfigContext = React.createContext(null);
 
-export const ConfigProvider = (props) => {
-  const { children, ...config } = props;
+export const ConfigProvider = (properties) => {
+  const { children, ...config } = properties;
   const parentConfig = useConfig();
 
   return (

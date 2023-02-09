@@ -12,12 +12,14 @@ import {
 
 import './index.less';
 
-function buildButtonList(size, props) {
-  return new Array(size).fill(null).map((_, index) => (
-    <Button key={index} {...props}>
-      Button
-    </Button>
-  ));
+function buildButtonList(size, properties) {
+  return Array.from({ length: size })
+    .fill(null)
+    .map((_, index) => (
+      <Button key={index} {...properties}>
+        Button
+      </Button>
+    ));
 }
 
 const config1 = {
@@ -77,16 +79,15 @@ export default class Index extends ContentPageBase {
     description: '间隔布局组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认',
-        currentConfig: {},
-        inner: buildButtonList(4),
-      },
+
+      header: '默认',
+      currentConfig: {},
+      inner: buildButtonList(4),
     };
   }
 

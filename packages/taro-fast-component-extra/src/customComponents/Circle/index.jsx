@@ -34,19 +34,18 @@ const defaultColor = '#d81e06';
 
 const defaultProps = {
   ...AbstractComponent.defaultProps,
-  ...{
-    style: {},
-    backRingStyle: {},
-    percent: 0,
-    size: 200,
-    color: defaultColor,
-    backRingColor: '#fff',
-    lineCap: 'round',
-    lineWidth: 18,
-    useLineColorGradient: false,
-    lineColorStart: defaultColor,
-    lineColorEnd: defaultColor,
-  },
+
+  style: {},
+  backRingStyle: {},
+  percent: 0,
+  size: 200,
+  color: defaultColor,
+  backRingColor: '#fff',
+  lineCap: 'round',
+  lineWidth: 18,
+  useLineColorGradient: false,
+  lineColorStart: defaultColor,
+  lineColorEnd: defaultColor,
 };
 
 class Circle extends AbstractComponent {
@@ -56,14 +55,13 @@ class Circle extends AbstractComponent {
 
   currentProcess = 0;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        show: true,
-      },
+
+      show: true,
     };
 
     this.id = getGuid();
@@ -79,7 +77,7 @@ class Circle extends AbstractComponent {
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
     this.drawPercent(this.getPercent());
   };
 
@@ -185,73 +183,78 @@ class Circle extends AbstractComponent {
         const width = n.width * dpr;
         const height = n.height * dpr;
 
-        let ctx = null;
+        let context = null;
         let supportLineColorGradient = false;
 
-        const env = this.getEnv();
+        const environment = this.getEnvironment();
 
         // 标签栏滚动
-        switch (env) {
-          case envCollection.WEAPP:
+        switch (environment) {
+          case envCollection.WEAPP: {
             const canvas = n.node;
 
             canvas.width = width;
             canvas.height = height;
 
-            ctx = canvas.getContext('2d');
+            context = canvas.getContext('2d');
             supportLineColorGradient = true;
             break;
+          }
 
-          case envCollection.ALIPAY:
-            logWarn(`framework with env [${env}] has no adaptation`);
+          case envCollection.ALIPAY: {
+            logWarn(`framework with env [${environment}] has no adaptation`);
             break;
+          }
 
-          case envCollection.SWAN:
-            logWarn(`framework with env [${env}] has no adaptation`);
+          case envCollection.SWAN: {
+            logWarn(`framework with env [${environment}] has no adaptation`);
             break;
+          }
 
-          case envCollection.WEB:
-            ctx = Taro.createCanvasContext(that.canvasId, that);
-            ctx.canvas.width = width;
-            ctx.canvas.height = height;
+          case envCollection.WEB: {
+            context = Taro.createCanvasContext(that.canvasId, that);
+            context.canvas.width = width;
+            context.canvas.height = height;
 
             break;
+          }
 
-          default:
-            logWarn(`framework with env [${env}] has no adaptation`);
+          default: {
+            logWarn(`framework with env [${environment}] has no adaptation`);
             break;
+          }
         }
 
-        if (ctx == null) {
-          logWarn(`framework with env [${env}] has no adaptation`);
+        if (context == null) {
+          logWarn(`framework with env [${environment}] has no adaptation`);
 
           return;
         }
 
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = lineCap;
+        context.lineWidth = lineWidth;
+        context.lineCap = lineCap;
 
-        ctx.clearRect(0, 0, width, height);
-        ctx.translate(width / 2, height / 2);
+        context.clearRect(0, 0, width, height);
+        context.translate(width / 2, height / 2);
 
         if (useLineColorGradient && supportLineColorGradient) {
-          const g = ctx.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
+          const g = context.createLinearGradient(0, 0, 180, 0); //创建渐变对象  渐变开始点和渐变结束点
 
           g.addColorStop(0, lineColorStart); //添加颜色点
           g.addColorStop(1, lineColorEnd); //添加颜色点
 
-          ctx.strokeStyle = g; //使用渐变对象作为圆环的颜色
+          context.strokeStyle = g; //使用渐变对象作为圆环的颜色
         } else {
-          ctx.strokeStyle = color;
+          context.strokeStyle = color;
         }
 
         const radius = width / 2 - lineAdjust - lineWidth;
         if (that.currentProcess < percent) {
-          that.increase(ctx, width, height, radius, percent);
+          that.increase(context, width, height, radius, percent);
         }
 
         if (that.currentProcess > percent) {
-          that.reduce(ctx, width, height, radius, percent);
+          that.reduce(context, width, height, radius, percent);
         }
 
         return n;
@@ -261,59 +264,59 @@ class Circle extends AbstractComponent {
       });
   };
 
-  increase = (ctx, width, height, radius, percent, drawBegin = false) => {
+  increase = (context, width, height, radius, percent, drawBegin = false) => {
     if (this.currentProcess >= percent) {
       return;
     }
 
     if (!drawBegin) {
-      this.facileCanvas(ctx, radius, 0, this.currentProcess);
+      this.facileCanvas(context, radius, 0, this.currentProcess);
     }
 
     const next = toRound(this.currentProcess + step, 2);
 
-    this.facileCanvas(ctx, radius, this.currentProcess, next);
+    this.facileCanvas(context, radius, this.currentProcess, next);
 
     this.currentProcess = next;
 
     const that = this;
 
     setTimeout(function () {
-      that.increase(ctx, width, height, radius, percent, true);
+      that.increase(context, width, height, radius, percent, true);
     }, 10);
   };
 
-  reduce = (ctx, width, height, radius, endPercent) => {
+  reduce = (context, width, height, radius, endPercent) => {
     const that = this;
 
     if (this.currentProcess < endPercent) {
       if (this.currentProcess < 0) {
-        ctx.clearRect(0 - width / 2, 0 - height / 2, width, height);
+        context.clearRect(0 - width / 2, 0 - height / 2, width, height);
         this.currentProcess = 0;
       }
       return;
     }
 
-    ctx.clearRect(0 - width / 2, 0 - height / 2, width, height);
+    context.clearRect(0 - width / 2, 0 - height / 2, width, height);
 
-    this.facileCanvas(ctx, radius, 0, this.currentProcess);
+    this.facileCanvas(context, radius, 0, this.currentProcess);
 
     const next = toRound(this.currentProcess - step, 2);
 
     this.currentProcess = next;
 
     if (this.currentProcess === 0) {
-      ctx.clearRect(0 - width / 2, 0 - height / 2, width, height);
+      context.clearRect(0 - width / 2, 0 - height / 2, width, height);
     }
 
     setTimeout(function () {
-      that.reduce(ctx, width, height, radius, endPercent, true);
+      that.reduce(context, width, height, radius, endPercent, true);
     }, 20);
   };
 
-  facileCanvas = (ctx, radius, startPercent, endPercent) => {
-    ctx.beginPath();
-    ctx.arc(
+  facileCanvas = (context, radius, startPercent, endPercent) => {
+    context.beginPath();
+    context.arc(
       0,
       0,
       radius,
@@ -321,8 +324,8 @@ class Circle extends AbstractComponent {
       2 * endPercent * Math.PI - 0.5 * Math.PI,
       false,
     );
-    ctx.stroke();
-    ctx.closePath();
+    context.stroke();
+    context.closePath();
   };
 
   renderFurther() {
@@ -339,10 +342,9 @@ class Circle extends AbstractComponent {
             className={classPrefix}
             style={{
               ...style,
-              ...{
-                width: transformSize(size),
-                height: transformSize(size),
-              },
+
+              width: transformSize(size),
+              height: transformSize(size),
             }}
           >
             <View
@@ -358,15 +360,14 @@ class Circle extends AbstractComponent {
                 className={`${classPrefix}_body_inner`}
                 style={{
                   ...backRingStyle,
-                  ...{
-                    zIndex: '10',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                  },
+
+                  zIndex: '10',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
                 }}
               >
                 <HorizontalCenterBox>
@@ -380,22 +381,19 @@ class Circle extends AbstractComponent {
                 <View
                   style={{
                     ...backRingStyle,
-                    ...{
-                      width: transformSize(size - 1 - 2 * lineWidth),
-                      height: transformSize(size - 1 - 2 * lineWidth),
-                      borderRadius: '50%',
-                      border: `${transformSize(
-                        lineAdjust + lineWidth,
-                      )} solid ${backRingColor}`,
-                    },
+
+                    width: transformSize(size - 1 - 2 * lineWidth),
+                    height: transformSize(size - 1 - 2 * lineWidth),
+                    borderRadius: '50%',
+                    border: `${transformSize(
+                      lineAdjust + lineWidth,
+                    )} solid ${backRingColor}`,
                   }}
                 ></View>
               </View>
               <Canvas
                 type="2d"
                 style={{
-                  width: transformSize(size),
-                  height: transformSize(size),
                   zIndex: '5',
                   position: 'absolute',
                   top: 0,

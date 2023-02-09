@@ -9,9 +9,7 @@ import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -35,20 +33,19 @@ export default class Index extends ContentPageBase {
     name: '弹窗',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        show1: false,
-        show2: false,
-        show3: false,
-        show4: false,
-        show5: false,
-        show6: false,
-        buttonFill: ['default'],
-      },
+
+      show1: false,
+      show2: false,
+      show3: false,
+      show4: false,
+      show5: false,
+      show6: false,
+      buttonFill: ['default'],
     };
   }
 
@@ -131,7 +128,7 @@ export default class Index extends ContentPageBase {
   };
 
   renderContent = () => {
-    const { buttonFill } = this.state;
+    const { buttonFill, show2, show1, show3, show4, show5, show6 } = this.state;
 
     return (
       <>
@@ -214,7 +211,7 @@ export default class Index extends ContentPageBase {
         </Space>
 
         <Modal
-          visible={this.state.show1}
+          visible={show1}
           buttonFill={
             buttonFill.length > 0 ? buttonFill[0] === 'default' : true
           }
@@ -226,7 +223,7 @@ export default class Index extends ContentPageBase {
         </Modal>
 
         <Modal
-          visible={this.state.show2}
+          visible={show2}
           buttonFill={
             buttonFill.length > 0 ? buttonFill[0] === 'default' : true
           }
@@ -237,7 +234,7 @@ export default class Index extends ContentPageBase {
         </Modal>
 
         <Modal
-          visible={this.state.show3}
+          visible={show3}
           buttonFill={
             buttonFill.length > 0 ? buttonFill[0] === 'default' : true
           }
@@ -249,7 +246,7 @@ export default class Index extends ContentPageBase {
         </Modal>
 
         <Modal
-          visible={this.state.show4}
+          visible={show4}
           buttonFill={
             buttonFill.length > 0 ? buttonFill[0] === 'default' : true
           }
@@ -261,7 +258,7 @@ export default class Index extends ContentPageBase {
         </Modal>
 
         <Modal
-          visible={this.state.show5}
+          visible={show5}
           header={<CenterBox>这里是标题</CenterBox>}
           footer={
             <View
@@ -285,7 +282,7 @@ export default class Index extends ContentPageBase {
         </Modal>
 
         <Modal
-          visible={this.state.show6}
+          visible={show6}
           header={<CenterBox>这里是标题</CenterBox>}
           hideFooter
         >

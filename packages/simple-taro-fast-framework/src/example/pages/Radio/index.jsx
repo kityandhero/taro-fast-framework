@@ -18,9 +18,7 @@ import {
 import { cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -243,19 +241,18 @@ export default class Index extends ContentPageBase {
     description: '单选组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        border: false,
-        radioValue1: 'option1',
-        radioValue2: 'option1',
-        radioValue3: 'option2',
-        header: '基础用法',
-        currentConfig: config1,
-      },
+
+      border: false,
+      radioValue1: 'option1',
+      radioValue2: 'option1',
+      radioValue3: 'option2',
+      header: '基础用法',
+      currentConfig: config1,
     };
   }
 

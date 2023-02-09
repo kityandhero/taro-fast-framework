@@ -1,4 +1,4 @@
-import { ENV_TYPE, getApp, getEnv } from '@tarojs/taro';
+import { ENV_TYPE, getApp, getEnvironment } from '@tarojs/taro';
 
 import {
   getApplicationMergeConfig,
@@ -13,71 +13,86 @@ export function getDefaultTaroGlobalData() {
 }
 
 export function getTaroGlobalData() {
-  const env = getEnv();
+  const environment = getEnvironment();
 
   // 标签栏滚动
-  switch (env) {
-    case ENV_TYPE.WEAPP:
+  switch (environment) {
+    case ENV_TYPE.WEAPP: {
       const app = getApp();
 
       if (isUndefined(app)) {
         return null;
       }
 
-      if (app.$app == null) {
+      if (app.$app == undefined) {
         return {};
       }
 
       return app.$app.taroGlobalData;
+    }
 
-    case ENV_TYPE.ALIPAY:
-      console.warn(`framework with env [${env}] has no adaptation`);
+    case ENV_TYPE.ALIPAY: {
+      console.warn(`framework with env [${environment}] has no adaptation`);
       break;
+    }
 
-    case ENV_TYPE.SWAN:
-      console.warn(`framework with env [${env}] has no adaptation`);
+    case ENV_TYPE.SWAN: {
+      console.warn(`framework with env [${environment}] has no adaptation`);
       break;
+    }
 
-    case ENV_TYPE.WEB:
+    case ENV_TYPE.WEB: {
       if (!window.taroGlobalData) {
         window.taroGlobalData = getDefaultTaroGlobalData();
       }
 
       return window.taroGlobalData;
+    }
 
-    default:
-      console.warn(`framework with env [${env}] has no adaptation`);
+    default: {
+      console.warn(`framework with env [${environment}] has no adaptation`);
       break;
+    }
   }
 
   return null;
 }
 
 export function setTaroGlobalData(config) {
-  const env = getEnv();
+  const environment = getEnvironment();
 
-  switch (env) {
-    case ENV_TYPE.WEAPP:
+  switch (environment) {
+    case ENV_TYPE.WEAPP: {
       break;
+    }
 
-    case ENV_TYPE.ALIPAY:
-      console.warn(`framework with env [${env}] has no adaptation`);
+    case ENV_TYPE.ALIPAY: {
+      console.warn(`framework with env [${environment}] has no adaptation`);
 
-    case ENV_TYPE.SWAN:
-      console.warn(`framework with env [${env}] has no adaptation`);
       break;
+    }
 
-    case ENV_TYPE.WEB:
+    case ENV_TYPE.SWAN: {
+      console.warn(`framework with env [${environment}] has no adaptation`);
+
+      break;
+    }
+
+    case ENV_TYPE.WEB: {
       if (!isObject(window.taroGlobalData)) {
         window.taroGlobalData = {};
       }
 
       window.taroGlobalData.appInitCustomLocal = config;
-      break;
 
-    default:
-      console.warn(`framework with env [${env}] has no adaptation`);
       break;
+    }
+
+    default: {
+      console.warn(`framework with env [${environment}] has no adaptation`);
+
+      break;
+    }
   }
 }
 
@@ -92,14 +107,15 @@ export function corsTarget() {
   const appInit = getApplicationMergeConfig();
   let corsTargetDomain = '';
 
-  if (appInit.apiPrefix != null) {
-    if (appInit.apiPrefix.corsTargetDomain != null) {
-      const {
-        apiPrefix: { corsTargetDomain: corsTargetDomainRemote },
-      } = appInit;
+  if (
+    appInit.apiPrefix != undefined &&
+    appInit.apiPrefix.corsTargetDomain != undefined
+  ) {
+    const {
+      apiPrefix: { corsTargetDomain: corsTargetDomainRemote },
+    } = appInit;
 
-      corsTargetDomain = corsTargetDomainRemote;
-    }
+    corsTargetDomain = corsTargetDomainRemote;
   }
 
   return corsTargetDomain;

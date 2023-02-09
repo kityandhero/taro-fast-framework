@@ -1,31 +1,17 @@
 import {
-  canIUse,
   createAnimation as createAnimationCore,
   createSelectorQuery as createSelectorQueryCore,
   downloadFile,
-  getClipboardData,
-  getCurrentInstance,
-  getMenuButtonBoundingClientRect,
   getSetting as getSettingCore,
   getSystemInfoSync,
-  getUpdateManager,
   hideNavigationBarLoading as hideNavigationBarLoadingCore,
-  makePhoneCall,
-  navigateBack,
   offLocationChange as offGeographicalLocationChangeCore,
   onLocationChange as onGeographicalLocationChangeCore,
   openDocument as openDocumentCore,
-  pageScrollTo,
-  previewImage,
   reLaunch as reLaunchCore,
-  requestPayment,
   setClipboardData,
-  showNavigationBarLoading,
   startLocationUpdate as startGeographicalLocationUpdateCore,
   stopLocationUpdate as stopGeographicalLocationUpdateCore,
-  stopPullDownRefresh,
-  switchTab,
-  uploadFile,
 } from '@tarojs/taro';
 
 import {
@@ -35,44 +21,28 @@ import {
   logExecute,
 } from 'easy-soft-utility';
 
-import { checkWeAppEnv, checkWebEnv } from './envAssist';
+import {
+  checkWeAppEnvironment as checkWeAppEnvironmentironment,
+  checkWebEnvironment as checkWebEnvironmentironment,
+} from './environmentAssist';
 import { transformSize } from './styleAssist';
 
 let globalSystemInfo = null;
 
-export {
-  canIUse,
-  downloadFile,
-  getClipboardData,
-  getCurrentInstance,
-  getMenuButtonBoundingClientRect,
-  getUpdateManager,
-  makePhoneCall,
-  navigateBack,
-  pageScrollTo,
-  previewImage,
-  requestPayment,
-  setClipboardData,
-  showNavigationBarLoading,
-  stopPullDownRefresh,
-  switchTab,
-  uploadFile,
-};
-
 export function getSystemInfo() {
-  if (globalSystemInfo == null) {
+  if (globalSystemInfo == undefined) {
     globalSystemInfo = getSystemInfoSync();
   }
 
   return globalSystemInfo;
 }
 
-export function getSetting(params) {
-  return getSettingCore(params);
+export function getSetting(parameters) {
+  return getSettingCore(parameters);
 }
 
-export function reLaunch(params) {
-  return reLaunchCore(params);
+export function reLaunch(parameters) {
+  return reLaunchCore(parameters);
 }
 
 export function createSelectorQuery() {
@@ -144,7 +114,7 @@ export function getGeographicalLocation({
   if (simulationMode) {
     logDebug('getGeographicalLocation simulationMode:true');
 
-    if ((simulationData || null) == null) {
+    if ((simulationData || null) == undefined) {
       throw new Error(
         'simulationData is required and must be an object when simulationMode is true!',
       );
@@ -161,14 +131,14 @@ export function getGeographicalLocation({
     success: () => {
       logDebug('startGeographicalLocationUpdate callback success');
 
-      onGeographicalLocationChange((res) => {
+      onGeographicalLocationChange((response) => {
         try {
           if (isFunction(successCallback)) {
-            successCallback(res);
+            successCallback(response);
           }
         } catch {
           if (isFunction(failCallback)) {
-            failCallback(res);
+            failCallback(response);
           }
         } finally {
           offGeographicalLocationChange();
@@ -177,29 +147,29 @@ export function getGeographicalLocation({
         }
       });
     },
-    fail: (res) => {
+    fail: (response) => {
       logDebug('startGeographicalLocationUpdate callback fail');
 
       try {
         if (isFunction(failCallback)) {
-          failCallback(res);
+          failCallback(response);
         }
-      } catch (e) {
-        logException(e.message);
+      } catch (error) {
+        logException(error.message);
       } finally {
         stopGeographicalLocationUpdate({});
       }
     },
-    complete: (res) => {
+    complete: (response) => {
       if (isFunction(completeCallback)) {
-        completeCallback(res);
+        completeCallback(response);
       }
     },
   });
 }
 
-export function createAnimation(params) {
-  return createAnimationCore(params);
+export function createAnimation(parameters) {
+  return createAnimationCore(parameters);
 }
 
 export function getSelectorQuery() {
@@ -212,14 +182,14 @@ export function getSelectorQuery() {
 export function downloadFileAndOpen({ url, successCallback = null }) {
   downloadFile({
     url,
-    success: (res) => {
-      if (res.statusCode === 200) {
+    success: (response) => {
+      if (response.statusCode === 200) {
         if (isFunction(successCallback)) {
           successCallback();
         }
 
         openDocument({
-          filePath: res.tempFilePath,
+          filePath: response.tempFilePath,
           fileType: 'pdf',
           showMenu: true,
         });
@@ -228,8 +198,8 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
   });
 }
 
-export function openDocument(params) {
-  return openDocumentCore(params);
+export function openDocument(parameters) {
+  return openDocumentCore(parameters);
 }
 
 export function getFields(selector, context = null) {
@@ -306,7 +276,7 @@ export function requestAnimationFrame(callback) {
   if (systemInfo.platform === 'devtools') {
     return setTimeout(() => {
       callback();
-    }, 33.333333333333336);
+    }, 33.333_333_333_333_336);
   }
 
   return createSelectorQuery()
@@ -318,7 +288,7 @@ export function requestAnimationFrame(callback) {
 }
 
 export function hideNavigationBarLoading() {
-  if (checkWeAppEnv()) {
+  if (checkWeAppEnvironmentironment()) {
     hideNavigationBarLoadingCore();
   }
 }
@@ -331,16 +301,16 @@ export function hideNavigationBarLoading() {
 export function copyToClipboard({ text, successCallback = null }) {
   setClipboardData({
     data: text,
-    success: (res) => {
+    success: (response) => {
       if (isFunction(successCallback)) {
-        successCallback(text, res);
+        successCallback(text, response);
       }
     },
   });
 }
 
 export function handleTouchScroll(flag) {
-  if (checkWebEnv()) {
+  if (checkWebEnvironmentironment()) {
     return;
   }
 
@@ -361,3 +331,22 @@ export function handleTouchScroll(flag) {
     document.documentElement.scrollTop = scrollTop;
   }
 }
+
+export {
+  canIUse,
+  downloadFile,
+  getClipboardData,
+  getCurrentInstance,
+  getMenuButtonBoundingClientRect,
+  getUpdateManager,
+  makePhoneCall,
+  navigateBack,
+  pageScrollTo,
+  previewImage,
+  requestPayment,
+  setClipboardData,
+  showNavigationBarLoading,
+  stopPullDownRefresh,
+  switchTab,
+  uploadFile,
+} from '@tarojs/taro';

@@ -150,15 +150,14 @@ export default class Index extends ContentPageBase {
     description: '弹出式单选组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认展示',
-        currentConfig: config1,
-      },
+
+      header: '默认展示',
+      currentConfig: config1,
     };
   }
 

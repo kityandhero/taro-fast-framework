@@ -18,9 +18,7 @@ import { Card, DataGrid, HelpBox, Space } from 'taro-fast-component';
 import { cardHeaderStyle, cardStyle } from '../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 

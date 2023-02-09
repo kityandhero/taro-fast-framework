@@ -26,22 +26,22 @@ const config = {
     'Copyright © 2022. All Rights Reserved. 京ICP备 ******** 号-2',
   simulationLocation: true,
   simulationLocationData: {
-    latitude: 34.74821,
-    longitude: 113.61332,
+    latitude: '34.74821',
+    longitude: '113.61332',
     speed: -1,
     accuracy: 65,
     altitude: 0,
     verticalAccuracy: 65,
     horizontalAccuracy: 65,
-    dataVersion: 917923,
+    dataVersion: '917923',
   },
 };
 
 prepareModel();
 
 class App extends AppBase {
-  constructor(props) {
-    super(props, config);
+  constructor(properties) {
+    super(properties, config);
   }
 }
 

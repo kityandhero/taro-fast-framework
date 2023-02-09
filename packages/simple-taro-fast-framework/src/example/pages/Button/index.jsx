@@ -213,15 +213,14 @@ export default class Index extends ContentPageBase {
     description: '按钮组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '普通按钮',
-        currentConfig: config0,
-      },
+
+      header: '普通按钮',
+      currentConfig: config0,
     };
   }
 

@@ -46,15 +46,14 @@ export default class Index extends ContentPageBase {
     description: '线条组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '水平线',
-        currentConfig: {},
-      },
+
+      header: '水平线',
+      currentConfig: {},
     };
   }
 

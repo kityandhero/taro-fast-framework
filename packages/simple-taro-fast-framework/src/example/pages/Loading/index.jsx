@@ -40,15 +40,14 @@ export default class Index extends ContentPageBase {
     description: '加载提示组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基础使用',
-        currentConfig: {},
-      },
+
+      header: '基础使用',
+      currentConfig: {},
     };
   }
 

@@ -28,9 +28,7 @@ import { cardHeaderStyle, cardStyle } from '../../customConfig';
 import { buildComponentPrismCode } from '../../utils';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -171,11 +169,9 @@ class SimpleBox extends Component {
     return useInnerBox ? (
       <View
         style={{
-          ...{
-            minHeight: transformSize(innerBoxMinHeight || 120),
-            border: 'var(--tfc-1) solid #f2e5c0',
-            borderRadius: transformSize(6),
-          },
+          minHeight: transformSize(innerBoxMinHeight || 120),
+          border: 'var(--tfc-1) solid #f2e5c0',
+          borderRadius: transformSize(6),
           ...(innerBoxBackgroundColor
             ? {
                 backgroundColor: innerBoxBackgroundColor,
@@ -238,11 +234,9 @@ class SimpleBox extends Component {
       <Space direction="vertical" size={30} fillWidth>
         {exhibitionArea}
 
-        {checkStringIsNullOrWhiteSpace(descriptionArea) ? null : !isString(
+        {checkStringIsNullOrWhiteSpace(descriptionArea) ? null : isString(
             descriptionArea,
           ) ? (
-          descriptionArea
-        ) : (
           <CenterBox>
             <ColorText
               color="#aaa"
@@ -250,6 +244,8 @@ class SimpleBox extends Component {
               text={`: ${descriptionArea}`}
             />
           </CenterBox>
+        ) : (
+          descriptionArea
         )}
 
         {extraArea}

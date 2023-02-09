@@ -7,9 +7,7 @@ import { ContentPageBase } from '../../../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -38,14 +36,13 @@ export default class Index extends ContentPageBase {
     name: '滚动视图',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        counter: 0,
-      },
+
+      counter: 0,
     };
 
     this.targetId = getGuid();

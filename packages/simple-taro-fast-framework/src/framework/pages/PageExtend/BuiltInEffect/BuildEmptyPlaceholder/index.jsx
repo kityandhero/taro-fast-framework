@@ -4,7 +4,7 @@ import { Divider, Space } from 'taro-fast-component';
 
 import { CodePageBox, ContentPageBase } from '../../../../../customComponents';
 
-const paramList = [
+const parameterList = [
   {
     label: 'icon',
     value: '以内置图标显示提示, string, 默认值 "alert-circle"',
@@ -83,7 +83,7 @@ export default class Index extends ContentPageBase {
     return (
       <Space direction="vertical" fillWidth>
         <CodePageBox
-          list={paramList}
+          list={parameterList}
           usageList={descriptionList}
           renderCodeList={[
             'this.buildEmptyPlaceholder({})',

@@ -7,7 +7,7 @@ import {
   mergeProps,
 } from 'easy-soft-utility';
 
-import { transformSize, withNativeProps } from 'taro-fast-common';
+import { transformSize, withNativeProperties } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
 import { Icon } from '../Icon';
@@ -31,7 +31,7 @@ const defaultProps = {
 };
 
 const Empty = (p) => {
-  const props = mergeProps(defaultProps, p);
+  const properties = mergeProps(defaultProps, p);
 
   const {
     icon,
@@ -44,7 +44,7 @@ const Empty = (p) => {
     description,
     onImageClick,
     onDescriptionClick,
-  } = props;
+  } = properties;
 
   const iconNode = checkStringIsNullOrWhiteSpace(icon) ? null : (
     <Icon value={icon} size={iconSize} style={iconStyle} />
@@ -68,20 +68,20 @@ const Empty = (p) => {
 
   const descriptionNode =
     typeof description === 'string' ? (
-      !checkStringIsNullOrWhiteSpace(description) ? (
+      checkStringIsNullOrWhiteSpace(description) ? null : (
         <View
           className={classNames(`${classPrefix}-description`)}
           onClick={onDescriptionClick}
         >
           {description}
         </View>
-      ) : null
-    ) : !isNull(description) ? (
+      )
+    ) : isNull(description) ? null : (
       description
-    ) : null;
+    );
 
-  return withNativeProps(
-    props,
+  return withNativeProperties(
+    properties,
     <View className={classPrefix}>
       {iconNode || imageNode ? (
         <View

@@ -16,19 +16,18 @@ class ContentPageBase extends PageWrapperSimulation {
 
   headerData = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        spin: true,
-        header: '',
-        currentConfig: null,
-        description: null,
-        inner: null,
-        wrapBuilder: null,
-      },
+
+      spin: true,
+      header: '',
+      currentConfig: null,
+      description: null,
+      inner: null,
+      wrapBuilder: null,
     };
   }
 
@@ -58,21 +57,21 @@ class ContentPageBase extends PageWrapperSimulation {
           header: t,
           description: d,
           config: c,
-          inner: i,
+          inner: index_,
           wrapBuilder: w,
-          callback: cb,
+          callback: callback_,
         } = one;
 
         this.setState({
           header: t,
           description: d,
           currentConfig: c,
-          inner: i,
+          inner: index_,
           wrapBuilder: w,
         });
 
-        if (isFunction(cb)) {
-          cb(one);
+        if (isFunction(callback_)) {
+          callback_(one);
         }
       },
     });
@@ -129,7 +128,7 @@ class ContentPageBase extends PageWrapperSimulation {
 
     let customSpan = false;
 
-    list.forEach((item, index) => {
+    for (const [index, item] of list.entries()) {
       const {
         header,
         description,
@@ -139,14 +138,12 @@ class ContentPageBase extends PageWrapperSimulation {
         wrapBuilder,
         callback,
       } = {
-        ...{
-          header: '',
-          description: '',
-          span: 1,
-          inner: null,
-          wrapBuilder: null,
-          callback: null,
-        },
+        header: '',
+        description: '',
+        span: 1,
+        inner: null,
+        wrapBuilder: null,
+        callback: null,
         ...item,
       };
 
@@ -155,9 +152,9 @@ class ContentPageBase extends PageWrapperSimulation {
       }
 
       if (isArray(config)) {
-        config.forEach((o, i) => {
+        for (const [index_, o] of config.entries()) {
           result.push({
-            index: i,
+            index: index_,
             keyPrefix: toString(index),
             header,
             description,
@@ -167,7 +164,7 @@ class ContentPageBase extends PageWrapperSimulation {
             wrapBuilder,
             callback,
           });
-        });
+        }
       } else {
         result.push({
           index,
@@ -180,7 +177,7 @@ class ContentPageBase extends PageWrapperSimulation {
           callback,
         });
       }
-    });
+    }
 
     const listCount = list.length;
 
@@ -197,15 +194,13 @@ class ContentPageBase extends PageWrapperSimulation {
             wrapBuilder,
             callback,
           } = {
-            ...{
-              span: 1,
-              keyPrefix: null,
-              header: '',
-              description: '',
-              inner: null,
-              wrapBuilder: null,
-              callback: null,
-            },
+            span: 1,
+            keyPrefix: null,
+            header: '',
+            description: '',
+            inner: null,
+            wrapBuilder: null,
+            callback: null,
             ...item,
           };
 
@@ -270,11 +265,9 @@ class ContentPageBase extends PageWrapperSimulation {
 
   renderContentView = () => {
     const { id, name, description } = {
-      ...{
-        id: '',
-        name: '',
-        description: '',
-      },
+      id: '',
+      name: '',
+      description: '',
       ...this.headerData,
     };
 

@@ -81,15 +81,14 @@ export default class Index extends ContentPageBase {
     description: '文字省略组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '显示一行文字',
-        currentConfig: config1,
-      },
+
+      header: '显示一行文字',
+      currentConfig: config1,
     };
   }
 

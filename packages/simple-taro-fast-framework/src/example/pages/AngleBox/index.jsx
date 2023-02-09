@@ -23,30 +23,26 @@ const configCore = {
 
 const config1 = {
   ...configCore,
-  ...{
-    position: 'topLeft',
-  },
+
+  position: 'topLeft',
 };
 
 const config2 = {
   ...configCore,
-  ...{
-    position: 'topRight',
-  },
+
+  position: 'topRight',
 };
 
 const config3 = {
   ...configCore,
-  ...{
-    position: 'bottomLeft',
-  },
+
+  position: 'bottomLeft',
 };
 
 const config4 = {
   ...configCore,
-  ...{
-    position: 'bottomRight',
-  },
+
+  position: 'bottomRight',
 };
 
 // eslint-disable-next-line no-undef
@@ -64,17 +60,16 @@ export default class Index extends ContentPageBase {
     description: '角标容器',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        showTransition: true,
-        header: '左上角标',
-        currentConfig: config1,
-        inner: <CenterBox>内部内容</CenterBox>,
-      },
+
+      showTransition: true,
+      header: '左上角标',
+      currentConfig: config1,
+      inner: <CenterBox>内部内容</CenterBox>,
     };
   }
 

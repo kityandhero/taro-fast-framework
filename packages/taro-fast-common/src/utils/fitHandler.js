@@ -15,8 +15,8 @@ import { setNavigationHandler } from './navigationAssist';
 
 function getShowLogInConsole() {
   const { showLogInConsole } = {
-    ...{ showLogInConsole: false },
-    ...(getApplicationMergeConfig() || {}),
+    showLogInConsole: false,
+    ...getApplicationMergeConfig(),
   };
 
   return showLogInConsole || false;
@@ -33,9 +33,8 @@ export function setEasySoftUtilityHandler(...externalConfigs) {
 
   setApplicationInitialConfig({
     ...appInitDefault,
-    ...{
-      showLogInConsole: checkWhetherDevelopmentEnvironment(),
-    },
+
+    showLogInConsole: checkWhetherDevelopmentEnvironment(),
   });
 
   setApplicationExternalConfigList(externalConfigs);

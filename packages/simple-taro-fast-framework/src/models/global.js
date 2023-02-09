@@ -16,7 +16,7 @@ export function buildGlobal() {
     namespace: 'global',
 
     state: {
-      ...(modelGlobalCollection || {}),
+      ...modelGlobalCollection,
       ...getTacitlyState(),
     },
 

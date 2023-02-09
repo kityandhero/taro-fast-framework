@@ -22,9 +22,7 @@ import {
 } from './Assist/action';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -41,14 +39,13 @@ export default class Index extends ContentPageBase {
     name: '交互操作',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'simulation/getOverview',
-      },
+
+      loadApiPath: 'simulation/getOverview',
     };
   }
 

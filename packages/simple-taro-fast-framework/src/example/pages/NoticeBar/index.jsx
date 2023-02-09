@@ -85,15 +85,14 @@ export default class Index extends ContentPageBase {
     description: '通知条组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '附带图标',
-        currentConfig: config1,
-      },
+
+      header: '附带图标',
+      currentConfig: config1,
     };
   }
 

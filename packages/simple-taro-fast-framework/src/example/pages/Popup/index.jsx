@@ -101,32 +101,31 @@ export default class Index extends ContentPageBase {
     description: '弹出容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        arcTop: ['上直角'],
-        arcBottom: ['下直角'],
-        mode: ['through'],
-        showClose: ['no'],
-        closeWhenOverlayClick: ['yes'],
-        scroll: ['no'],
-        show: {
-          basic: false,
-          top: false,
-          bottom: false,
-          left: false,
-          right: false,
-          round: false,
-          closeIcon: false,
-          customCloseIcon: false,
-          customIconPosition: false,
-        },
-        header: '',
-        currentConfig: {},
+
+      arcTop: ['上直角'],
+      arcBottom: ['下直角'],
+      mode: ['through'],
+      showClose: ['no'],
+      closeWhenOverlayClick: ['yes'],
+      scroll: ['no'],
+      show: {
+        basic: false,
+        top: false,
+        bottom: false,
+        left: false,
+        right: false,
+        round: false,
+        closeIcon: false,
+        customCloseIcon: false,
+        customIconPosition: false,
       },
+      header: '',
+      currentConfig: {},
     };
   }
 

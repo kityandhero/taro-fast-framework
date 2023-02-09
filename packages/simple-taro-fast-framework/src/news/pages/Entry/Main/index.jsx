@@ -30,14 +30,13 @@ definePageConfig({
 export default class Index extends BasePageWrapper {
   loadRemoteRequestAfterMount = false;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        navigationNoticeVisible: false,
-      },
+
+      navigationNoticeVisible: false,
     };
   }
 
@@ -50,18 +49,18 @@ export default class Index extends BasePageWrapper {
   };
 
   handleLogic = () => {
-    const urlParams = this.externalParameter;
+    const urlParameters = this.externalParameter;
 
-    const { scene } = urlParams || { scene: '' };
+    const { scene } = urlParameters || { scene: '' };
 
     const that = this;
 
     if (checkStringIsNullOrWhiteSpace(scene)) {
-      that.handleParams(urlParams);
+      that.handleParams(urlParameters);
     } else {
       that.exchangeShareData({
         scene,
-        urlParams,
+        urlParams: urlParameters,
         callback: (p) => {
           that.handleParams(p);
         },
@@ -79,11 +78,11 @@ export default class Index extends BasePageWrapper {
     const json = `{${decodeURIComponent(scene)
       .split('&')
       .map((o) => {
-        const item = `\"${o}\"`.replace('=', '":"');
+        const item = `\\"${o}\\"`.replace('=', '":"');
 
         return item;
       })
-      .join()}}`;
+      .join(',')}}`;
 
     const shareData = JSON.parse(json);
 
@@ -110,71 +109,80 @@ export default class Index extends BasePageWrapper {
           mergeData.transfer = transfer;
         }
 
-        const urlParamsChanged = {
+        const urlParametersChanged = {
           ...urlParams,
           ...mergeData,
         };
 
         if (isFunction(callback)) {
           // eslint-disable-next-line promise/no-callback-in-promise
-          callback(urlParamsChanged);
+          callback(urlParametersChanged);
         } else {
           //跳转首页
         }
 
-        return urlParamsChanged;
+        return urlParametersChanged;
       })
       .catch((error) => {
         logException(error);
       });
   };
 
-  handleParams(urlParams) {
-    this.handleRedirect(urlParams);
+  handleParams(urlParameters) {
+    this.handleRedirect(urlParameters);
   }
 
-  handleRedirect(urlParams) {
+  handleRedirect(urlParameters) {
     const {
       transfer,
       title: titleEncode,
       url: urlEncode,
     } = {
-      ...{
-        transfer: shareTransfer.home,
-        title: '',
-        url: '',
-      },
-      ...urlParams,
+      transfer: shareTransfer.home,
+      title: '',
+      url: '',
+      ...urlParameters,
     };
 
-    if (transfer === shareTransfer.home) {
-      this.showNavigationNotice();
+    switch (transfer) {
+      case shareTransfer.home: {
+        this.showNavigationNotice();
 
-      redirectTo(pathCollection.news.home.path);
-    } else if (transfer === shareTransfer.customer) {
-      this.showNavigationNotice();
+        redirectTo(pathCollection.news.home.path);
 
-      redirectTo(pathCollection.news.section.path);
-    } else if (transfer === shareTransfer.webPage) {
-      this.showNavigationNotice();
-
-      let title = '';
-
-      if (!checkStringIsNullOrWhiteSpace(titleEncode)) {
-        title = decodeURIComponent(titleEncode);
+        break;
       }
+      case shareTransfer.customer: {
+        this.showNavigationNotice();
 
-      let url = '';
+        redirectTo(pathCollection.news.section.path);
 
-      if (!checkStringIsNullOrWhiteSpace(urlEncode)) {
-        url = decodeURIComponent(urlEncode);
+        break;
       }
+      case shareTransfer.webPage: {
+        this.showNavigationNotice();
 
-      this.redirectToPath(
-        `${pathCollection.webPage.path}?title=${title}&url=${url}`,
-      );
-    } else {
-      redirectTo(pathCollection.news.home.path);
+        let title = '';
+
+        if (!checkStringIsNullOrWhiteSpace(titleEncode)) {
+          title = decodeURIComponent(titleEncode);
+        }
+
+        let url = '';
+
+        if (!checkStringIsNullOrWhiteSpace(urlEncode)) {
+          url = decodeURIComponent(urlEncode);
+        }
+
+        this.redirectToPath(
+          `${pathCollection.webPage.path}?title=${title}&url=${url}`,
+        );
+
+        break;
+      }
+      default: {
+        redirectTo(pathCollection.news.home.path);
+      }
     }
   }
 

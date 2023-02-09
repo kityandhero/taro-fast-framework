@@ -11,8 +11,8 @@ import {
 
 import {
   transformSize,
-  usePropsValue,
-  withNativeProps,
+  usePropertiesValue,
+  withNativeProperties,
 } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
@@ -26,7 +26,7 @@ const defaultProps = {
   step: 1,
   min: 0,
   digits: 0,
-  max: 100000,
+  max: 100_000,
   disabled: false,
   hidden: false,
   inputReadOnly: false,
@@ -41,7 +41,7 @@ const defaultProps = {
 };
 
 export const Stepper = (p) => {
-  const props = mergeProps(defaultProps, p);
+  const properties = mergeProps(defaultProps, p);
 
   const {
     defaultValue: defaultValueSource,
@@ -58,10 +58,10 @@ export const Stepper = (p) => {
     onChange,
     onIncrease,
     onReduce,
-  } = props;
+  } = properties;
 
   const operateStyle = {
-    ...(!!operateColor
+    ...(operateColor
       ? {
           '--button-text-color': operateColor,
         }
@@ -70,7 +70,7 @@ export const Stepper = (p) => {
 
   const colorStyle = {
     ...(useBackground
-      ? !!backgroundColor
+      ? backgroundColor
         ? {
             '--button-background-color': backgroundColor,
           }
@@ -86,8 +86,8 @@ export const Stepper = (p) => {
       : {}),
   };
 
-  const [defaultValue, setDefaultValue] = usePropsValue(props);
-  const [value, setValue] = usePropsValue(props);
+  const [defaultValue, setDefaultValue] = usePropertiesValue(properties);
+  const [value, setValue] = usePropertiesValue(properties);
   const [inputValue, setInputValue] = useState(() => value.toString());
 
   if (defaultValue != toNumber(defaultValueSource)) {
@@ -101,10 +101,12 @@ export const Stepper = (p) => {
       return;
     }
 
-    let target = toBoundary(v, props.min, props.max);
+    const { min, max, digits } = properties;
 
-    if (props.digits || props.digits === 0) {
-      target = parseFloat(target.toFixed(props.digits));
+    let target = toBoundary(v, min, max);
+
+    if (digits || digits === 0) {
+      target = Number.parseFloat(target.toFixed(digits));
     }
 
     setValue(target);
@@ -120,7 +122,7 @@ export const Stepper = (p) => {
 
   const handleInputChange = (v) => {
     setInputValue(v);
-    setValueWithCheck(parseFloat(v));
+    setValueWithCheck(Number.parseFloat(v));
 
     if (isFunction(onChange)) {
       onChange(v);
@@ -152,23 +154,15 @@ export const Stepper = (p) => {
   };
 
   const minusDisabled = () => {
-    if (min === undefined) {
-      return disabled;
-    } else {
-      return disabled || value <= min;
-    }
+    return min === undefined ? disabled : disabled || value <= min;
   };
 
   const plusDisabled = () => {
-    if (max === undefined) {
-      return disabled;
-    } else {
-      return disabled || value >= max;
-    }
+    return max === undefined ? disabled : disabled || value >= max;
   };
 
-  return withNativeProps(
-    props,
+  return withNativeProperties(
+    properties,
     <View
       className={classNames(classPrefix, {
         [`${classPrefix}-disabled`]: disabled,
@@ -194,25 +188,23 @@ export const Stepper = (p) => {
         <Input
           className={`${classPrefix}-input`}
           style={{
-            ...{
-              textAlign: 'center',
-              fontSize: transformSize(26),
-            },
+            textAlign: 'center',
+            fontSize: transformSize(26),
             ...colorStyle,
             ...(circle ? { '--input-background-color': 'transparent' } : {}),
           }}
-          onFocus={(e) => {
+          onFocus={(error) => {
             setHasFocus(true);
-            props.onFocus?.(e);
+            properties.onFocus?.(error);
           }}
           value={inputValue}
-          onChange={(val) => {
-            disabled || handleInputChange(val);
+          onChange={(v) => {
+            disabled || handleInputChange(v);
           }}
           disabled={disabled || inputReadOnly}
-          onBlur={(e) => {
+          onBlur={(error) => {
             setHasFocus(false);
-            props.onBlur?.(e);
+            properties.onBlur?.(error);
           }}
         />
       </View>

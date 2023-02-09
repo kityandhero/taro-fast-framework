@@ -1,13 +1,13 @@
 import { logDebug, request, requestMode } from 'easy-soft-utility';
 
-export async function getCustomerData(params) {
+export async function getCustomerData(parameters) {
   logDebug(
     'service "customer/getCurrentCustomer" use virtual request in this demo',
   );
 
   return request({
     api: `/customer/getCurrentCustomer`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {

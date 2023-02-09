@@ -38,16 +38,15 @@ export default class Index extends ContentPageBase {
     description: '渐显容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        show: false,
-        header: '样例',
-        currentConfig: config1,
-      },
+
+      show: false,
+      header: '样例',
+      currentConfig: config1,
     };
   }
 

@@ -82,9 +82,9 @@ const config3 = {
   valueFormat: (v) => {
     return (
       <Space>
-        {v.map((o, i) => {
+        {v.map((o, index) => {
           return (
-            <Tag key={`list_${i}`} color="success">
+            <Tag key={`list_${index}`} color="success">
               {o}
             </Tag>
           );
@@ -160,15 +160,14 @@ export default class Index extends ContentPageBase {
     description: '弹出式复选组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认展示',
-        currentConfig: config1,
-      },
+
+      header: '默认展示',
+      currentConfig: config1,
     };
   }
 

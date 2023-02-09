@@ -14,9 +14,7 @@ class BasePageWrapper extends BasePageWrapperCore {
     const { global } = this.props;
 
     const { sectionList } = {
-      ...{
-        sectionList: [],
-      },
+      sectionList: [],
       ...global,
     };
 

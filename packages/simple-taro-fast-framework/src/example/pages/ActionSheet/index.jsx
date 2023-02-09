@@ -9,9 +9,7 @@ import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -24,16 +22,15 @@ export default class Index extends ContentPageBase {
     name: '动作面板',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        visible1: false,
-        visible2: false,
-        visible3: false,
-      },
+
+      visible1: false,
+      visible2: false,
+      visible3: false,
     };
   }
 
@@ -189,10 +186,10 @@ export default class Index extends ContentPageBase {
                   清除位置信息并退出
                 </Text>
               ),
-              onClick: (v, e) => {
+              onClick: (v, event) => {
                 console.log({
                   value: v,
-                  e,
+                  e: event,
                 });
                 this.showToast('成功清除位置');
               },

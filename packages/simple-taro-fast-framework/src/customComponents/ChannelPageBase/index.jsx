@@ -9,14 +9,12 @@ import { PageWrapperSimulation } from '../PageWrapperSimulation';
 import './index.less';
 
 class ChannelPageBase extends PageWrapperSimulation {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        spin: true,
-      },
+      spin: true,
     };
   }
 
@@ -45,7 +43,7 @@ class ChannelPageBase extends PageWrapperSimulation {
         <View className="panel-body">
           <View className="component-list">
             {list.map((one, index) => {
-              const { hidden } = one;
+              const { hidden, path, id } = one;
 
               if (hidden) {
                 return null;
@@ -56,13 +54,10 @@ class ChannelPageBase extends PageWrapperSimulation {
                   className="component-list__item"
                   key={`${index}`}
                   onClick={() => {
-                    navigateTo(one.path);
+                    navigateTo(path);
                   }}
                 >
-                  <Text
-                    className="name"
-                    userSelect
-                  >{`${one.id} ${one.name}`}</Text>
+                  <Text className="name" userSelect>{`${id} ${one.name}`}</Text>
                   <IconChevronRight size={36} />
                 </View>
               );

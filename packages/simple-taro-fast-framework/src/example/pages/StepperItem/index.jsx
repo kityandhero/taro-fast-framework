@@ -50,12 +50,10 @@ const config4 = {
 };
 
 const config5 = {
-  ...{
-    prefix: <IconSketch size={36} />,
-    description: '请增减购买数量',
-    clickable: true,
-    arrow: true,
-  },
+  prefix: <IconSketch size={36} />,
+  description: '请增减购买数量',
+  clickable: true,
+  arrow: true,
   ...config4,
 };
 
@@ -74,15 +72,14 @@ export default class Index extends ContentPageBase {
     description: '进步项组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基础用法',
-        currentConfig: config1,
-      },
+
+      header: '基础用法',
+      currentConfig: config1,
     };
   }
 

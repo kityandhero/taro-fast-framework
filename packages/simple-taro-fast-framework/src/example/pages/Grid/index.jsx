@@ -44,32 +44,31 @@ export default class Index extends ContentPageBase {
     description: '宫格布局',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '用法展示',
-        currentConfig: config1,
-        inner: [
-          <Grid.Item key="item-A">
-            <View style={itemStyle}>A</View>
-          </Grid.Item>,
-          <Grid.Item key="item-B">
-            <View style={itemStyle}>B</View>
-          </Grid.Item>,
-          <Grid.Item key="item-C">
-            <View style={itemStyle}>C</View>
-          </Grid.Item>,
-          <Grid.Item key="item-D">
-            <View style={itemStyle}>D</View>
-          </Grid.Item>,
-          <Grid.Item key="item-E">
-            <View style={itemStyle}>E</View>
-          </Grid.Item>,
-        ],
-      },
+
+      header: '用法展示',
+      currentConfig: config1,
+      inner: [
+        <Grid.Item key="item-A">
+          <View style={itemStyle}>A</View>
+        </Grid.Item>,
+        <Grid.Item key="item-B">
+          <View style={itemStyle}>B</View>
+        </Grid.Item>,
+        <Grid.Item key="item-C">
+          <View style={itemStyle}>C</View>
+        </Grid.Item>,
+        <Grid.Item key="item-D">
+          <View style={itemStyle}>D</View>
+        </Grid.Item>,
+        <Grid.Item key="item-E">
+          <View style={itemStyle}>E</View>
+        </Grid.Item>,
+      ],
     };
   }
 

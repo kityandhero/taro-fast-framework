@@ -60,9 +60,8 @@ const config3 = {
 
 const config4 = {
   ...config3,
-  ...{
-    layout: 'vertical',
-  },
+
+  layout: 'vertical',
 };
 
 // eslint-disable-next-line no-undef
@@ -80,16 +79,15 @@ export default class Index extends ContentPageBase {
     description: '进度项组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        percent: 10,
-        header: '横向布局',
-        currentConfig: config1,
-      },
+
+      percent: 10,
+      header: '横向布局',
+      currentConfig: config1,
     };
   }
 
@@ -118,7 +116,7 @@ export default class Index extends ContentPageBase {
     const { percent } = this.state;
 
     return (
-      <ProgressItem key={key} {...{ ...config, ...{ percent } }}>
+      <ProgressItem key={key} {...{ ...config, percent }}>
         {this.buildSimpleItemInner(inner)}
       </ProgressItem>
     );
@@ -148,7 +146,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header={header}
           description={description}
-          config={{ ...currentConfig, ...{ percent } }}
+          config={{ ...currentConfig, percent }}
           componentName="ProgressItem"
           mockChildren={!!inner}
           useInnerBox

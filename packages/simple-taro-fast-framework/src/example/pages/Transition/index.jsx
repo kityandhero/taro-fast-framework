@@ -86,19 +86,18 @@ export default class Index extends ContentPageBase {
     description: '变换动画容器',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        showTransition: false,
-        name: 'fade',
-        showTransitionCustom: false,
-        header: 'fade',
-        currentConfig: config1,
-        inner: '内部内容',
-      },
+
+      showTransition: false,
+      name: 'fade',
+      showTransitionCustom: false,
+      header: 'fade',
+      currentConfig: config1,
+      inner: '内部内容',
     };
   }
 
@@ -194,9 +193,7 @@ export default class Index extends ContentPageBase {
     const {
       config: { name },
     } = {
-      ...{
-        config: {},
-      },
+      config: {},
       ...o,
     };
 

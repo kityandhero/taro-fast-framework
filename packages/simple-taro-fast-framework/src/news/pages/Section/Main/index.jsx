@@ -26,13 +26,13 @@ export const classPrefix = `simple-news-section`;
 function getInitialSectionIndex({ sectionId, sectionList }) {
   let currentIndex = 0;
 
-  sectionList.forEach((item, index) => {
+  for (const [index, item] of sectionList.entries()) {
     const { sectionId: itemSectionId } = item;
 
     if (itemSectionId === sectionId) {
       currentIndex = index;
     }
-  });
+  }
 
   return currentIndex;
 }
@@ -70,22 +70,19 @@ export default class Index extends BasePageWrapper {
 
   tabList = [];
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'article/pageList',
-      },
+
+      loadApiPath: 'article/pageList',
     };
   }
 
   doWorkBeforeAdjustDidMount = () => {
     const { sectionId } = {
-      ...{
-        sectionId: '',
-      },
+      sectionId: '',
       ...this.externalParameter,
     };
 
@@ -109,13 +106,11 @@ export default class Index extends BasePageWrapper {
   initLoadRequestParams = (o) => {
     return {
       ...o,
-      ...{
-        sectionId: this.sectionId,
-      },
+      sectionId: this.sectionId,
     };
   };
 
-  triggerSectionClick = (index, e, item) => {
+  triggerSectionClick = (index, event, item) => {
     const { sectionId } = item;
 
     this.sectionId = sectionId;

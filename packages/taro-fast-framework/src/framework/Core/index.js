@@ -1,14 +1,14 @@
 import { underlyingExtensionState } from 'easy-soft-utility';
 
-import { getDerivedStateFromPropsForUrlParamsCore } from 'taro-fast-common';
+import { getDerivedStateFromPropertiesForUrlParametersCore } from 'taro-fast-common';
 
 import { Base } from '../Base';
 
 class Core extends Base {
   loadRemoteRequestAfterMount = true;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
@@ -16,12 +16,15 @@ class Core extends Base {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return getDerivedStateFromPropsForUrlParamsCore(nextProps, prevState);
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    return getDerivedStateFromPropertiesForUrlParametersCore(
+      nextProperties,
+      previousState,
+    );
   }
 
   // eslint-disable-next-line no-unused-vars
-  checkNeedUpdate = (preProps, preState, snapshot) => false;
+  checkNeedUpdate = (preProperties, preState, snapshot) => false;
 }
 
 export { Core };

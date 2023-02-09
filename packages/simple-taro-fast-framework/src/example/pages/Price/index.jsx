@@ -91,15 +91,14 @@ export default class Index extends ContentPageBase {
     description: '价格组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '普通',
-        currentConfig: config1,
-      },
+
+      header: '普通',
+      currentConfig: config1,
     };
   }
 

@@ -1,7 +1,7 @@
 import { connect } from 'easy-soft-dva';
 import { sortBy } from 'easy-soft-utility';
 
-import { checkWeAppEnv } from 'taro-fast-common';
+import { checkWeAppEnvironment } from 'taro-fast-common';
 
 import iconBasic from '../../../../assets/images/icon-list-basic.png';
 import { ChannelPageBase } from '../../../../customComponents';
@@ -37,7 +37,7 @@ const list = [
     id: 'PullRefresh',
     name: '下拉刷新-缩放提示器效果',
     path: pathCollection.framework.pageExtend.scroll.pullRefreshSpecial.path,
-    hidden: !checkWeAppEnv(),
+    hidden: !checkWeAppEnvironment(),
   },
   {
     id: 'LowerLoad',

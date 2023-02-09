@@ -16,7 +16,7 @@ const defaultProps = {
   step: 1,
   min: 0,
   digits: 0,
-  max: 100000,
+  max: 9999,
   disabled: false,
   editable: true,
   useBackground: true,
@@ -91,7 +91,6 @@ class StepperItem extends BaseComponent {
           />
         }
         extraContainerStyle={{
-          ...{},
           ...extraContainerStyle,
         }}
       />

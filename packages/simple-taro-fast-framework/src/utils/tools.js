@@ -37,13 +37,13 @@ export function getQQMapWX() {
   return mapSdk;
 }
 
-export function buildComponentProps({ config, ignorePropertyList = [] }) {
+export function buildComponentProperties({ config, ignorePropertyList = [] }) {
   let result = '';
 
-  Object.entries(config).forEach((d) => {
+  for (const d of Object.entries(config)) {
     const [key, value] = d;
 
-    const keyAdjust = key.startsWith('--') ? `\"${key}\"` : key;
+    const keyAdjust = key.startsWith('--') ? `\\"${key}\\"` : key;
 
     if (!isUndefined(value)) {
       if (isBoolean(value) && value) {
@@ -57,7 +57,8 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
         ) {
           result = result + `${keyAdjust}={() => {...}} `;
 
-          return result;
+          result;
+          continue;
         }
 
         const s = toString(value);
@@ -65,11 +66,12 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
         result =
           result +
           `${keyAdjust}={${s
-            .replace(/function[\w\W]*?\(/, '(')
-            .replace(/\)[\s]*{/, ') => {')}} `;
+            .replace(/function[\W\w]*?\(/, '(')
+            .replace(/\)\s*{/, ') => {')}} `;
       } else if (isObject(value) || isArray(value)) {
         if (checkInCollection(ignorePropertyList, keyAdjust)) {
-          return (result = result + `${keyAdjust}={...} `);
+          result = result + `${keyAdjust}={...} `;
+          continue;
         }
 
         let s = JSON.stringify(
@@ -87,12 +89,12 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
         if (isUndefined(s)) {
           result = result + `${keyAdjust}={''} `;
         } else {
-          const matchCollection = s.match(/"[^-][\S]*": /g);
+          const matchCollection = s.match(/"[^-]\S*": /g);
 
           if (isArray(matchCollection) && matchCollection.length > 0) {
-            matchCollection.forEach((o) => {
+            for (const o of matchCollection) {
               s = s.replace(o, o.replace(/"/g, ''));
-            });
+            }
           }
 
           result = result + `${keyAdjust}={${s}} `;
@@ -101,7 +103,7 @@ export function buildComponentProps({ config, ignorePropertyList = [] }) {
         result = result + `${keyAdjust}={${toString(value)}} `;
       }
     }
-  });
+  }
 
   return result;
 }
@@ -113,10 +115,10 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
 
   const entryLength = entries.length;
 
-  entries.forEach((d, index) => {
+  for (const [index, d] of entries.entries()) {
     const [key, value] = d;
 
-    const keyAdjust = key.startsWith('--') ? `\"${key}\"` : key;
+    const keyAdjust = key.startsWith('--') ? `\\"${key}\\"` : key;
 
     if (!isUndefined(value)) {
       result = result + '\r\n  ';
@@ -124,11 +126,9 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
       if (isBoolean(value) && value) {
         result = result + `${keyAdjust} = ${value}; `;
       } else if (isString(value)) {
-        if (value.indexOf('=>') >= 0) {
-          result = result + `${keyAdjust} = ${value}; `;
-        } else {
-          result = result + `${keyAdjust} = "${value}"; `;
-        }
+        result = value.includes('=>')
+          ? result + `${keyAdjust} = ${value}; `
+          : result + `${keyAdjust} = "${value}"; `;
       } else if (isFunction(value)) {
         if (
           isArray(ignorePropertyList) &&
@@ -136,7 +136,8 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
         ) {
           result = result + `${keyAdjust} = "() => {...}"; `;
 
-          return result;
+          result;
+          continue;
         }
 
         const s = toString(value);
@@ -144,11 +145,12 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
         result =
           result +
           `${keyAdjust} = ${s
-            .replace(/function[\w\W]*?\(/, '(')
-            .replace(/\)[\s]*{/, ') => {')}; `;
+            .replace(/function[\W\w]*?\(/, '(')
+            .replace(/\)\s*{/, ') => {')}; `;
       } else if (isObject(value) || isArray(value)) {
         if (checkInCollection(ignorePropertyList, keyAdjust)) {
-          return (result = result + `${keyAdjust}="..."; `);
+          result = result + `${keyAdjust}="..."; `;
+          continue;
         }
 
         let s = JSON.stringify(
@@ -166,12 +168,12 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
         if (isUndefined(s)) {
           result = result + `${keyAdjust}=''; `;
         } else {
-          const matchCollection = s.match(/"[^-][\S]*": /g);
+          const matchCollection = s.match(/"[^-]\S*": /g);
 
           if (isArray(matchCollection) && matchCollection.length > 0) {
-            matchCollection.forEach((o) => {
+            for (const o of matchCollection) {
               s = s.replace(o, o.replace(/"/g, ''));
-            });
+            }
           }
 
           result = result + `${keyAdjust} = ${s}; `;
@@ -184,7 +186,7 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
         result = result + '\r\n  ';
       }
     }
-  });
+  }
 
   return result;
 }
@@ -202,17 +204,15 @@ export function buildComponentPrismCode({
 
   let code = '';
 
-  if (mockChildren) {
-    code = `<${componentName} ${buildComponentProps({
-      config,
-      ignorePropertyList,
-    })}>...</${componentName}>`;
-  } else {
-    code = `<${componentName} ${buildComponentProps({
-      config,
-      ignorePropertyList,
-    })} />`;
-  }
+  code = mockChildren
+    ? `<${componentName} ${buildComponentProperties({
+        config,
+        ignorePropertyList,
+      })}>...</${componentName}>`
+    : `<${componentName} ${buildComponentProperties({
+        config,
+        ignorePropertyList,
+      })} />`;
 
   return (
     <>
@@ -235,13 +235,13 @@ export function buildPagePrismCode({
   if (renderCodeList.length === 0) {
     renderCode = '...';
   } else {
-    renderCodeList.forEach((one, index) => {
+    for (const [index, one] of renderCodeList.entries()) {
       renderCode =
         renderCode +
         `${index === 0 ? '' : '\t  '}{${one}}${
           index === renderCodeList.length - 1 ? '' : '\r\n'
         }`;
-    });
+    }
   }
 
   let code = `import { connect } from 'easy-soft-dva';

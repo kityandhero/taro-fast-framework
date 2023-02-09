@@ -88,17 +88,7 @@ class SupplementCore extends Common {
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
     );
 
-    if (!this.firstShowHasTriggered) {
-      this.doWorkWhenFirstShow();
-
-      this.firstShowHasTriggered = true;
-
-      logDebug('set this.firstShowHasTriggered to true');
-
-      this.doWorkWhenEveryShow();
-
-      this.doWorkAfterShow();
-    } else {
+    if (this.firstShowHasTriggered) {
       const that = this;
 
       that.adjustInternalDataOnRepeatedShow();
@@ -136,6 +126,16 @@ class SupplementCore extends Common {
 
         this.doWorkAfterShow();
       }
+    } else {
+      this.doWorkWhenFirstShow();
+
+      this.firstShowHasTriggered = true;
+
+      logDebug('set this.firstShowHasTriggered to true');
+
+      this.doWorkWhenEveryShow();
+
+      this.doWorkAfterShow();
     }
   };
 
@@ -145,41 +145,46 @@ class SupplementCore extends Common {
     const that = this;
 
     if (that.needReLocationWhenRepeatedShow) {
-      const env = this.getEnv();
+      const environment = this.getEnvironment();
 
-      const noAdaptationMessage = `framework with env [${env}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`;
+      const noAdaptationMessage = `framework with env [${environment}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`;
 
-      switch (env) {
-        case envCollection.WEAPP:
+      switch (environment) {
+        case envCollection.WEAPP: {
           break;
+        }
 
-        case envCollection.ALIPAY:
+        case envCollection.ALIPAY: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
+        }
 
-        case envCollection.SWAN:
+        case envCollection.SWAN: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
+        }
 
-        case envCollection.WEB:
+        case envCollection.WEB: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
+        }
 
-        default:
+        default: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
 
           return;
+        }
       }
 
       logDebug(
@@ -221,15 +226,16 @@ class SupplementCore extends Common {
   }) => {
     logExecute('obtainLocation');
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore obtainLocation, only execute failCallback`;
+    const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore obtainLocation, only execute failCallback`;
 
-    switch (env) {
-      case envCollection.WEAPP:
+    switch (environment) {
+      case envCollection.WEAPP: {
         break;
+      }
 
-      case envCollection.ALIPAY:
+      case envCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -237,8 +243,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      case envCollection.SWAN:
+      case envCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -246,8 +253,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      case envCollection.WEB:
+      case envCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -255,8 +263,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      default:
+      default: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -264,6 +273,7 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
     }
 
     const simulationMode = getSettingsAgency().getSimulationLocation();
@@ -293,7 +303,9 @@ class SupplementCore extends Common {
       removeLocation();
     }
 
-    if (!force) {
+    if (force) {
+      logDebug('obtain location force');
+    } else {
       if ((location || null) == null || (mapData || null) == null) {
         needRelocation = true;
       } else {
@@ -312,8 +324,6 @@ class SupplementCore extends Common {
           });
         }
       }
-    } else {
-      logDebug('obtain location force');
     }
 
     if (needRelocation) {
@@ -346,11 +356,11 @@ class SupplementCore extends Common {
 
           that.reverseGeocoder({
             location: {
-              latitude: !latitude ? defaultLatitude : latitude,
-              longitude: !longitude ? defaultLongitude : longitude,
+              latitude: latitude ?? defaultLatitude,
+              longitude: longitude ?? defaultLongitude,
             },
-            success: (res) => {
-              const { result } = res;
+            success: (response) => {
+              const { result } = response;
 
               setMap(result);
 
@@ -366,52 +376,18 @@ class SupplementCore extends Common {
             fail: (error) => {
               logException(error);
 
-              if (mapData != null) {
-                setMap(mapData);
-                setLastLocation(mapData);
-
-                if (isFunction(successCallback)) {
-                  successCallback({
-                    location: l,
-                    map: mapData,
-                  });
-                }
-              } else {
+              if (mapData == null) {
                 const mapDataLast = getLastLocation();
 
-                if (mapDataLast != null) {
-                  if (isFunction(successCallback)) {
-                    successCallback({
-                      location: l,
-                      map: mapDataLast,
-                    });
-                  }
-                } else {
+                if (mapDataLast == null) {
                   setLocationMode(locationModeCollection.custom);
 
                   if (location != null) {
                     setLocation(location);
                   }
 
-                  if (mapData != null) {
-                    setMap(mapData);
-                    setLastLocation(mapData);
-
-                    if (isFunction(successCallback)) {
-                      successCallback({
-                        location: l,
-                        map: mapData,
-                      });
-                    }
-                  } else {
-                    if (mapDataLast != null) {
-                      if (isFunction(successCallback)) {
-                        successCallback({
-                          location: l,
-                          map: mapDataLast,
-                        });
-                      }
-                    } else {
+                  if (mapData == null) {
+                    if (mapDataLast == null) {
                       setLocationMode(locationModeCollection.custom);
 
                       if (location != null) {
@@ -424,8 +400,42 @@ class SupplementCore extends Common {
                           map: null,
                         });
                       }
+                    } else {
+                      if (isFunction(successCallback)) {
+                        successCallback({
+                          location: l,
+                          map: mapDataLast,
+                        });
+                      }
+                    }
+                  } else {
+                    setMap(mapData);
+                    setLastLocation(mapData);
+
+                    if (isFunction(successCallback)) {
+                      successCallback({
+                        location: l,
+                        map: mapData,
+                      });
                     }
                   }
+                } else {
+                  if (isFunction(successCallback)) {
+                    successCallback({
+                      location: l,
+                      map: mapDataLast,
+                    });
+                  }
+                }
+              } else {
+                setMap(mapData);
+                setLastLocation(mapData);
+
+                if (isFunction(successCallback)) {
+                  successCallback({
+                    location: l,
+                    map: mapData,
+                  });
                 }
               }
             },
@@ -459,8 +469,8 @@ class SupplementCore extends Common {
             });
           } else {
             getSetting({
-              success: (res) => {
-                const { authSetting } = res;
+              success: (response) => {
+                const { authSetting } = response;
 
                 let authLocation = locateResult.unknown;
 
@@ -492,9 +502,8 @@ class SupplementCore extends Common {
                   callback: null,
                 });
 
-                if (fromLaunch) {
-                  if (authLocation === locateResult.unknown) {
-                  }
+                if (fromLaunch && authLocation === locateResult.unknown) {
+                  //do nothing
                 }
               },
               fail: () => {
@@ -568,15 +577,16 @@ class SupplementCore extends Common {
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
     logExecute('checkTicketValidity');
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore checkTicketValidity, only execute callback and signInSilentFailCallback`;
+    const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore checkTicketValidity, only execute callback and signInSilentFailCallback`;
 
-    switch (env) {
-      case envCollection.WEAPP:
+    switch (environment) {
+      case envCollection.WEAPP: {
         break;
+      }
 
-      case envCollection.ALIPAY:
+      case envCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -588,8 +598,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      case envCollection.SWAN:
+      case envCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -601,8 +612,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      case envCollection.WEB:
+      case envCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -614,8 +626,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      default:
+      default: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -627,6 +640,7 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
     }
 
     const useLocation = getSettingsAgency().getUseLocation();
@@ -723,17 +737,17 @@ class SupplementCore extends Common {
     const signInResult = this.getSignInResult();
 
     if (signInResult === verifySignInResult.fail) {
-      if (!this.getVerifyTicket()) {
-        if (isFunction(callback)) {
-          callback();
-        }
-
-        return;
-      } else {
+      if (this.getVerifyTicket()) {
         this.checkTicketValidityCore({
           forceRefresh: true,
           callback,
         });
+
+        return;
+      } else {
+        if (isFunction(callback)) {
+          callback();
+        }
 
         return;
       }
@@ -778,7 +792,7 @@ class SupplementCore extends Common {
 
     const currentNextCheckLoginUnixTime = getNextCheckLoginUnixTime();
 
-    const currentUnixTime = parseInt(new Date().getTime() / 1000, 10);
+    const currentUnixTime = Number.parseInt(Date.now() / 1000, 10);
 
     if (currentUnixTime < currentNextCheckLoginUnixTime) {
       if (isFunction(callback)) {
@@ -814,11 +828,12 @@ class SupplementCore extends Common {
               that.doWhenCheckTicketValidityVerifySignInFail();
             }
 
-            if (signInResult === verifySignInResult.success) {
-              if (isFunction(callback)) {
-                // eslint-disable-next-line promise/no-callback-in-promise
-                callback();
-              }
+            if (
+              signInResult === verifySignInResult.success &&
+              isFunction(callback)
+            ) {
+              // eslint-disable-next-line promise/no-callback-in-promise
+              callback();
             }
 
             that.setTicketValidityProcessDetection({
@@ -855,16 +870,20 @@ class SupplementCore extends Common {
 
     const sessionRefreshing = getSessionRefreshing();
 
-    if (!sessionRefreshing) {
+    if (sessionRefreshing) {
+      this.retryRefreshSessionWhenRefreshing({
+        callback,
+      });
+    } else {
       setSessionRefreshing(true);
 
       const that = this;
 
       Taro.login({ timeout: 1000 })
-        .then((res) => {
+        .then((response) => {
           logExecute('Taro.login');
 
-          const { code } = res;
+          const { code } = response;
 
           if (code) {
             logDebug(`code: ${code}`);
@@ -925,7 +944,7 @@ class SupplementCore extends Common {
             }
           }
 
-          return res;
+          return response;
         })
         .catch((error) => {
           logException(error);
@@ -943,10 +962,6 @@ class SupplementCore extends Common {
             callback();
           }
         });
-    } else {
-      this.retryRefreshSessionWhenRefreshing({
-        callback,
-      });
     }
   };
 
@@ -997,8 +1012,8 @@ class SupplementCore extends Common {
         // eslint-disable-next-line no-unused-vars
         successCallback: ({ location, map }) => {
           const { latitude, longitude } = location || {
-            latitude: 34.7533581487,
-            longitude: 113.6313915479,
+            latitude: 34.753_358_148_7,
+            longitude: 113.631_391_547_9,
           };
 
           data.latitude = latitude || '';
@@ -1134,8 +1149,8 @@ class SupplementCore extends Common {
         // eslint-disable-next-line no-unused-vars
         successCallback: ({ location, map }) => {
           const { latitude, longitude } = location || {
-            latitude: 34.7533581487,
-            longitude: 113.6313915479,
+            latitude: 34.753_358_148_7,
+            longitude: 113.631_391_547_9,
           };
 
           data.latitude = latitude || '';
@@ -1399,15 +1414,16 @@ class SupplementCore extends Common {
   }) {
     logExecute('signInSilentCore');
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore obtainLocation, only execute failCallback`;
+    const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore obtainLocation, only execute failCallback`;
 
-    switch (env) {
-      case envCollection.WEAPP:
+    switch (environment) {
+      case envCollection.WEAPP: {
         break;
+      }
 
-      case envCollection.ALIPAY:
+      case envCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1419,8 +1435,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      case envCollection.SWAN:
+      case envCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1432,8 +1449,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      case envCollection.WEB:
+      case envCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1445,8 +1463,9 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
 
-      default:
+      default: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1458,6 +1477,7 @@ class SupplementCore extends Common {
         }
 
         return;
+      }
     }
 
     // Tips.loading('处理中');
@@ -1466,14 +1486,7 @@ class SupplementCore extends Common {
 
     let tryRefreshSession = getCache({ key: tryRefreshSessionKey });
 
-    if (!isNumber(tryRefreshSession)) {
-      tryRefreshSession = 1;
-
-      setCache({
-        key: tryRefreshSessionKey,
-        value: tryRefreshSession,
-      });
-    } else {
+    if (isNumber(tryRefreshSession)) {
       // 最多重试 10 次
       if (tryRefreshSession > 10) {
         showErrorMessage({
@@ -1484,6 +1497,13 @@ class SupplementCore extends Common {
       }
 
       tryRefreshSession += 1;
+
+      setCache({
+        key: tryRefreshSessionKey,
+        value: tryRefreshSession,
+      });
+    } else {
+      tryRefreshSession = 1;
 
       setCache({
         key: tryRefreshSessionKey,
@@ -1622,9 +1642,7 @@ class SupplementCore extends Common {
     }
 
     const { sessionEffective } = {
-      ...{
-        sessionEffective: true,
-      },
+      sessionEffective: true,
       ...remoteData,
     };
 
@@ -1647,9 +1665,7 @@ class SupplementCore extends Common {
     }
 
     const { sessionEffective } = {
-      ...{
-        sessionEffective: true,
-      },
+      sessionEffective: true,
       ...remoteData,
     };
 
@@ -1684,9 +1700,7 @@ class SupplementCore extends Common {
     }
 
     const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
+      signInResult: verifySignInResult.fail,
       ...remoteData,
     };
 
@@ -1709,9 +1723,7 @@ class SupplementCore extends Common {
     }
 
     const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
+      signInResult: verifySignInResult.fail,
       ...remoteData,
     };
 
@@ -1778,9 +1790,7 @@ class SupplementCore extends Common {
     }
 
     const { token } = {
-      ...{
-        token: '',
-      },
+      token: '',
       ...remoteData,
     };
 
@@ -1801,9 +1811,7 @@ class SupplementCore extends Common {
     }
 
     const { token } = {
-      ...{
-        token: '',
-      },
+      token: '',
       ...remoteData,
     };
 
@@ -1848,9 +1856,7 @@ class SupplementCore extends Common {
     }
 
     const { openId } = {
-      ...{
-        openId: '',
-      },
+      openId: '',
       ...remoteData,
     };
 
@@ -1871,9 +1877,7 @@ class SupplementCore extends Common {
     }
 
     const { openId } = {
-      ...{
-        openId: '',
-      },
+      openId: '',
       ...remoteData,
     };
 
@@ -2009,17 +2013,7 @@ class SupplementCore extends Common {
       }
     }
 
-    if (!force) {
-      logDebug('getCustomer from local cache success');
-
-      if (isFunction(successCallback)) {
-        successCallback(currentCustomer);
-      }
-
-      if (isFunction(completeCallback)) {
-        completeCallback(currentCustomer);
-      }
-    } else {
+    if (force) {
       logDebug(
         'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
@@ -2068,6 +2062,16 @@ class SupplementCore extends Common {
             completeCallback();
           }
         });
+    } else {
+      logDebug('getCustomer from local cache success');
+
+      if (isFunction(successCallback)) {
+        successCallback(currentCustomer);
+      }
+
+      if (isFunction(completeCallback)) {
+        completeCallback(currentCustomer);
+      }
     }
   };
 
@@ -2109,9 +2113,7 @@ class SupplementCore extends Common {
     }
 
     const { sessionEffective } = {
-      ...{
-        sessionEffective: true,
-      },
+      sessionEffective: true,
       ...remoteData,
     };
 
@@ -2192,9 +2194,7 @@ class SupplementCore extends Common {
     }
 
     const { sessionEffective } = {
-      ...{
-        sessionEffective: true,
-      },
+      sessionEffective: true,
       ...remoteData,
     };
 
@@ -2345,9 +2345,7 @@ class SupplementCore extends Common {
     }
 
     const { sessionEffective } = {
-      ...{
-        sessionEffective: true,
-      },
+      sessionEffective: true,
       ...remoteData,
     };
 
@@ -2498,9 +2496,7 @@ class SupplementCore extends Common {
     }
 
     const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
+      signInResult: verifySignInResult.fail,
       ...remoteData,
     };
 
@@ -2523,9 +2519,7 @@ class SupplementCore extends Common {
     }
 
     const { signInResult } = {
-      ...{
-        signInResult: verifySignInResult.fail,
-      },
+      signInResult: verifySignInResult.fail,
       ...remoteData,
     };
 
@@ -2590,9 +2584,7 @@ class SupplementCore extends Common {
     }
 
     const { token } = {
-      ...{
-        token: '',
-      },
+      token: '',
       ...remoteData,
     };
 
@@ -2613,9 +2605,7 @@ class SupplementCore extends Common {
     }
 
     const { token } = {
-      ...{
-        token: '',
-      },
+      token: '',
       ...remoteData,
     };
 
@@ -2656,9 +2646,7 @@ class SupplementCore extends Common {
     }
 
     const { openId } = {
-      ...{
-        openId: '',
-      },
+      openId: '',
       ...remoteData,
     };
 
@@ -2679,9 +2667,7 @@ class SupplementCore extends Common {
     }
 
     const { openId } = {
-      ...{
-        openId: '',
-      },
+      openId: '',
       ...remoteData,
     };
 
@@ -2761,13 +2747,7 @@ class SupplementCore extends Common {
       }
     }
 
-    if (!force) {
-      logDebug('check meta data from local cache success');
-
-      if (isFunction(callback)) {
-        callback(metaData);
-      }
-    } else {
+    if (force) {
       logDebug(
         'info check meta data from local cache fail or force api request, shift to get from api dispatch',
       );
@@ -2795,13 +2775,19 @@ class SupplementCore extends Common {
         .catch((error) => {
           logException(error);
         });
+    } else {
+      logDebug('check meta data from local cache success');
+
+      if (isFunction(callback)) {
+        callback(metaData);
+      }
     }
   };
 
   getMetaData = () => {
     return {
       ...getSettingsAgency().getDefaultMetaData(),
-      ...(getLocalMetaData() || {}),
+      ...getLocalMetaData(),
     };
   };
 
@@ -2846,15 +2832,7 @@ class SupplementCore extends Common {
       }
     }
 
-    if (!force) {
-      logInfo(
-        'info check administrative division full data from local cache success',
-      );
-
-      if (isFunction(callback)) {
-        callback(list);
-      }
-    } else {
+    if (force) {
       logInfo(
         'info check administrative division full data from local cache fail or force api request, shift to get from api dispatch',
       );
@@ -2882,6 +2860,14 @@ class SupplementCore extends Common {
         .catch((error) => {
           logException(error);
         });
+    } else {
+      logInfo(
+        'info check administrative division full data from local cache success',
+      );
+
+      if (isFunction(callback)) {
+        callback(list);
+      }
     }
   };
 

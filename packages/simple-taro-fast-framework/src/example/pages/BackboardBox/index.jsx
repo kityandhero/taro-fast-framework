@@ -73,16 +73,15 @@ export default class Index extends ContentPageBase {
     description: '背板容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '使用样例1',
-        currentConfig: config1,
-        inner: <CenterBox style={textBoxStyle}>容器内容</CenterBox>,
-      },
+
+      header: '使用样例1',
+      currentConfig: config1,
+      inner: <CenterBox style={textBoxStyle}>容器内容</CenterBox>,
     };
   }
 

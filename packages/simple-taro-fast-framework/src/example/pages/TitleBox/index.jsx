@@ -28,13 +28,12 @@ const config1 = {
 
 const config2 = {
   ...configCore,
-  ...{
-    subtitle: '这是副标题',
-    subtitleStyle: {
-      color: 'green',
-      fontSize: transformSize(26),
-      paddingLeft: transformSize(14),
-    },
+
+  subtitle: '这是副标题',
+  subtitleStyle: {
+    color: 'green',
+    fontSize: transformSize(26),
+    paddingLeft: transformSize(14),
   },
 };
 
@@ -53,16 +52,15 @@ export default class Index extends ContentPageBase {
     description: '标题容器',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        showTransition: true,
-        header: '布局展示',
-        currentConfig: config1,
-      },
+
+      showTransition: true,
+      header: '布局展示',
+      currentConfig: config1,
     };
   }
 

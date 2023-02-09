@@ -197,18 +197,17 @@ export default class Index extends ContentPageBase {
     description: '级联选择组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'administrativeDivision/singeList',
-        header: '展示1',
-        currentConfig: config1,
-        optionList: [],
-        optionCompareFlag: '1',
-      },
+
+      loadApiPath: 'administrativeDivision/singeList',
+      header: '展示1',
+      currentConfig: config1,
+      optionList: [],
+      optionCompareFlag: '1',
     };
   }
 

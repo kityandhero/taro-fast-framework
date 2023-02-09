@@ -44,22 +44,21 @@ export default class Index extends ContentPageBase {
     description: '半透明容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认',
-        currentConfig: config1,
-        inner: <CenterBox style={textBoxStyle}>内容</CenterBox>,
-        wrapBuilder: (o) => {
-          return (
-            <View style={boxStyle}>
-              <CenterBox>{o}</CenterBox>
-            </View>
-          );
-        },
+
+      header: '默认',
+      currentConfig: config1,
+      inner: <CenterBox style={textBoxStyle}>内容</CenterBox>,
+      wrapBuilder: (o) => {
+        return (
+          <View style={boxStyle}>
+            <CenterBox>{o}</CenterBox>
+          </View>
+        );
       },
     };
   }

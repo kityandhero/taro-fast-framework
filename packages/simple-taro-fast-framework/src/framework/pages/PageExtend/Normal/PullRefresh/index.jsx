@@ -16,9 +16,7 @@ import { ContentPageBase } from '../../../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -72,14 +70,13 @@ export default class Index extends ContentPageBase {
     description: '默认提示器效果',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'simulation/singleList',
-      },
+
+      loadApiPath: 'simulation/singleList',
     };
   }
 

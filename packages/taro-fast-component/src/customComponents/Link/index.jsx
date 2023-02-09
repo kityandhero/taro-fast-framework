@@ -11,8 +11,8 @@ import {
 } from 'easy-soft-utility';
 
 import {
-  checkWeAppEnv,
-  checkWebEnv,
+  checkWeAppEnvironment,
+  checkWebEnvironment,
   copyToClipboard,
   transformSize,
 } from 'taro-fast-common';
@@ -55,7 +55,7 @@ class Link extends BaseComponent {
       if (a.length > 0) {
         return {
           '--background-color': 'null',
-          '--background-image': `linear-gradient(45deg, ${a.join()})`,
+          '--background-image': `linear-gradient(45deg, ${a.join(',')})`,
         };
       }
     }
@@ -95,7 +95,7 @@ class Link extends BaseComponent {
       return;
     }
 
-    if (checkWeAppEnv()) {
+    if (checkWeAppEnvironment()) {
       copyToClipboard({
         text: href,
         successCallback: checkStringIsNullOrWhiteSpace(copyTips)
@@ -110,7 +110,7 @@ class Link extends BaseComponent {
       return;
     }
 
-    if (checkWebEnv()) {
+    if (checkWebEnvironment()) {
       window.open(href);
 
       return;

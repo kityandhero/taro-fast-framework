@@ -48,12 +48,11 @@ export default class Index extends BasePageWrapper {
 
   verifyTicketValidity = true;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{},
     };
 
     //移除现有缓存, 仅为当前页面环境测试使用, 常规使用时无需此步骤

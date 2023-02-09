@@ -87,16 +87,15 @@ export default class Index extends ContentPageBase {
     description: '进度条组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        percent: 10,
-        header: '基础使用',
-        currentConfig: config0,
-      },
+
+      percent: 10,
+      header: '基础使用',
+      currentConfig: config0,
     };
   }
 
@@ -149,7 +148,7 @@ export default class Index extends ContentPageBase {
     const { percent } = this.state;
 
     return (
-      <Progress key={key} {...{ ...config, ...{ percent } }}>
+      <Progress key={key} {...{ ...config, percent }}>
         {this.buildSimpleItemInner(inner)}
       </Progress>
     );
@@ -179,7 +178,7 @@ export default class Index extends ContentPageBase {
         <SimpleBox
           header={header}
           description={description}
-          config={{ ...currentConfig, ...{ percent } }}
+          config={{ ...currentConfig, percent }}
           componentName="Progress"
           mockChildren={!!inner}
           useInnerBox

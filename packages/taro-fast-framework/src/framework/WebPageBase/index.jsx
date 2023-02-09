@@ -11,15 +11,14 @@ import { Infrastructure } from '../Infrastructure';
 class WebPageBase extends Infrastructure {
   redirectWithWebEnv = true;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        title: '',
-        url: '',
-      },
+
+      title: '',
+      url: '',
     };
   }
 
@@ -38,10 +37,10 @@ class WebPageBase extends Infrastructure {
   };
 
   getWebPageParams = () => {
-    const externalParams = this.externalParameter;
+    const externalParameters = this.externalParameter;
 
     let p = {
-      ...externalParams,
+      ...externalParameters,
     };
 
     const { title: titleEncode, url: urlEncode } = p;
@@ -66,22 +65,25 @@ class WebPageBase extends Infrastructure {
   renderFurther() {
     const { url } = this.state;
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    switch (env) {
-      case envCollection.WEAPP:
+    switch (environment) {
+      case envCollection.WEAPP: {
         break;
+      }
 
-      case envCollection.ALIPAY:
+      case envCollection.ALIPAY: {
         break;
+      }
 
-      case envCollection.SWAN:
+      case envCollection.SWAN: {
         break;
+      }
 
-      case envCollection.WEB:
+      case envCollection.WEB: {
         if (this.redirectWithWebEnv) {
           logWarn(
-            `framework with env [${env}] use redirect to handle load web page`,
+            `framework with env [${environment}] use redirect to handle load web page`,
           );
 
           if (window) {
@@ -92,9 +94,11 @@ class WebPageBase extends Infrastructure {
         }
 
         break;
+      }
 
-      default:
+      default: {
         break;
+      }
     }
 
     return <WebView src={url} />;

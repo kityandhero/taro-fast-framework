@@ -89,15 +89,14 @@ export default class Index extends ContentPageBase {
     description: '倒计时组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基本用法',
-        currentConfig: config1,
-      },
+
+      header: '基本用法',
+      currentConfig: config1,
     };
   }
 

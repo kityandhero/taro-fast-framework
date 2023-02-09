@@ -1,27 +1,28 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-export function useMemoizedFn(fn) {
-  if (process.env.NODE_ENV === 'development') {
-    if (typeof fn !== 'function') {
-      console.error(
-        `useMemoizedFn expected parameter is a function, got ${typeof fn}`,
-      );
-    }
+export function useMemoizedFunction(function_) {
+  if (
+    process.env.NODE_ENV === 'development' &&
+    typeof function_ !== 'function'
+  ) {
+    console.error(
+      `useMemoizedFunction expected parameter is a function, got ${typeof function_}`,
+    );
   }
 
-  const fnRef = useRef(fn);
+  const functionReference = useRef(function_);
 
-  fnRef.current = useMemo(() => fn, [fn]);
+  functionReference.current = useMemo(() => function_, [function_]);
 
-  const memoizedFn = useRef();
+  const memoizedFunction = useRef();
 
-  if (!memoizedFn.current) {
-    memoizedFn.current = function (...args) {
-      return fnRef.current.apply(this, args);
+  if (!memoizedFunction.current) {
+    memoizedFunction.current = function (...arguments_) {
+      return functionReference.current.apply(this, arguments_);
     };
   }
 
-  return memoizedFn.current;
+  return memoizedFunction.current;
 }
 
 export const useUpdate = () => {
@@ -30,22 +31,22 @@ export const useUpdate = () => {
   return useCallback(() => setState({}), []);
 };
 
-export function usePropsValue(options) {
+export function usePropertiesValue(options) {
   const { value, defaultValue, onChange } = options;
 
   const update = useUpdate();
 
-  const stateRef = useRef(value !== undefined ? value : defaultValue);
+  const stateReference = useRef(value === undefined ? defaultValue : value);
   if (value !== undefined) {
-    stateRef.current = value;
+    stateReference.current = value;
   }
 
-  const setState = useMemoizedFn((v) => {
+  const setState = useMemoizedFunction((v) => {
     if (value === undefined) {
-      stateRef.current = v;
+      stateReference.current = v;
       update();
     }
     onChange?.(v);
   });
-  return [stateRef.current, setState];
+  return [stateReference.current, setState];
 }

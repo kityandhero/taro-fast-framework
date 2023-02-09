@@ -77,19 +77,18 @@ export default class Index extends ContentPageBase {
     description: '垂直容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        align: ['top'],
-        alignJustify: ['start'],
-        header: '元素布局展示',
-        currentConfig: {
-          align: 'top',
-          alignJustify: 'start',
-        },
+
+      align: ['top'],
+      alignJustify: ['start'],
+      header: '元素布局展示',
+      currentConfig: {
+        align: 'top',
+        alignJustify: 'start',
       },
     };
   }

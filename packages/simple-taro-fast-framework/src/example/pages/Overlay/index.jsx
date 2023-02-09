@@ -100,31 +100,30 @@ export default class Index extends ContentPageBase {
     description: '遮罩容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        show1: false,
-        show2: false,
-        show3: false,
-        show4: false,
-        color: ['#000'],
-        alpha: ['0.5'],
-        duration: ['300'],
-        zIndex: ['810'],
-        animal: ['ease-in'],
-        header: '显示全局遮罩层',
-        currentConfig: {
-          visible: true,
-          mode: 'fullScreen',
-          color: '#000',
-          alpha: '0.5',
-          duration: '300',
-          zIndex: '810',
-          animal: 'ease-in',
-        },
+
+      show1: false,
+      show2: false,
+      show3: false,
+      show4: false,
+      color: ['#000'],
+      alpha: ['0.5'],
+      duration: ['300'],
+      zIndex: ['810'],
+      animal: ['ease-in'],
+      header: '显示全局遮罩层',
+      currentConfig: {
+        visible: true,
+        mode: 'fullScreen',
+        color: '#000',
+        alpha: '0.5',
+        duration: '300',
+        zIndex: '810',
+        animal: 'ease-in',
       },
     };
   }
@@ -288,6 +287,10 @@ export default class Index extends ContentPageBase {
       duration,
       zIndex,
       animal,
+      show3,
+      show4,
+      show1,
+      show2,
     } = this.state;
 
     return (
@@ -315,7 +318,7 @@ export default class Index extends ContentPageBase {
               <CenterBox>父容器</CenterBox>
 
               <Overlay
-                visible={this.state.show3}
+                visible={show3}
                 mode="fullParent"
                 color={color[0]}
                 alpha={alpha[0]}
@@ -326,7 +329,7 @@ export default class Index extends ContentPageBase {
               />
 
               <Overlay
-                visible={this.state.show4}
+                visible={show4}
                 mode="fullParent"
                 color={color[0]}
                 alpha={alpha[0]}
@@ -385,7 +388,7 @@ export default class Index extends ContentPageBase {
         </Space>
 
         <Overlay
-          visible={this.state.show1}
+          visible={show1}
           mode="fullScreen"
           color={color[0]}
           alpha={alpha[0]}
@@ -396,7 +399,7 @@ export default class Index extends ContentPageBase {
         />
 
         <Overlay
-          visible={this.state.show2}
+          visible={show2}
           mode="fullScreen"
           color={color[0]}
           alpha={alpha[0]}

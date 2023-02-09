@@ -42,38 +42,47 @@ const mainFileContentList = [
   {
     name: '.eslintrc.js',
     content: mainEslintFileContent,
+    coverFile: true,
   },
   {
     name: '.prettierrc.js',
     content: mainPrettierContent,
+    coverFile: true,
   },
   {
     name: '.stylelintrc.js',
     content: mainStylelintContent,
+    coverFile: true,
   },
   {
     name: '.editorconfig',
     content: editorConfigContent,
+    coverFile: true,
   },
   {
     name: '.eslintignore',
     content: eslintIgnoreContent,
+    coverFile: false,
   },
   {
     name: '.prettierignore',
     content: prettierIgnoreContent,
+    coverFile: false,
   },
   {
     name: '.gitattributes',
     content: gitAttributesContent,
+    coverFile: true,
   },
   {
     name: '.gitignore',
     content: gitIgnoreContent,
+    coverFile: false,
   },
   {
     name: '.lintstagedrc',
     content: lintStagedRcContent,
+    coverFile: false,
   },
 ];
 
@@ -81,38 +90,47 @@ const packageFileContentList = [
   {
     name: '.eslintrc.js',
     content: packageEslintFileContent,
+    coverFile: true,
   },
   {
     name: '.prettierrc.js',
     content: packagePrettierContent,
+    coverFile: true,
   },
   {
     name: '.stylelintrc.js',
     content: packageStylelintContent,
+    coverFile: true,
   },
   {
     name: '.editorconfig',
     content: editorConfigContent,
+    coverFile: true,
   },
   {
     name: '.eslintignore',
     content: eslintIgnoreContent,
+    coverFile: false,
   },
   {
     name: '.prettierignore',
     content: prettierIgnoreContent,
+    coverFile: false,
   },
   {
     name: '.gitattributes',
     content: gitAttributesContent,
+    coverFile: true,
   },
   {
     name: '.gitignore',
     content: gitIgnoreContent,
+    coverFile: false,
   },
   {
     name: '.lintstagedrc',
     content: lintStagedRcContent,
+    coverFile: false,
   },
 ];
 

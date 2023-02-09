@@ -35,16 +35,15 @@ export default class Index extends ContentPageBase {
     description: '根据父容器大小，按照设定的长宽比等比例改变',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认展示',
-        currentConfig: config1,
-        description: '默认长宽比为1, 即正方形',
-      },
+
+      header: '默认展示',
+      currentConfig: config1,
+      description: '默认长宽比为1, 即正方形',
     };
   }
 

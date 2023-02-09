@@ -82,16 +82,15 @@ export default class Index extends ContentPageBase {
     description: 'Loading Svg',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '普通例子',
-        currentConfig: config1,
-        wrapBuilder,
-      },
+
+      header: '普通例子',
+      currentConfig: config1,
+      wrapBuilder,
     };
   }
 

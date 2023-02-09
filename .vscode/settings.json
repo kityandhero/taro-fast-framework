@@ -156,6 +156,13 @@
     "zindex"
   ],
   "git.ignoreLimitWarning": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/dist": true,
+    "**/es": true
+  },
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

@@ -29,14 +29,13 @@ export default class Index extends BasePageWrapper {
 
   verifyTicketValidity = true;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        nickname: '',
-      },
+
+      nickname: '',
     };
   }
 
@@ -50,9 +49,7 @@ export default class Index extends BasePageWrapper {
     that.getCustomer({
       successCallback: (o) => {
         const { nickname } = {
-          ...{
-            nickname: '',
-          },
+          nickname: '',
           ...o,
         };
 

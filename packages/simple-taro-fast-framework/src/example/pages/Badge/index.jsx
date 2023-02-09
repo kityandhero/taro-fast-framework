@@ -90,16 +90,15 @@ export default class Index extends ContentPageBase {
     description: '徽记组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '文字',
-        currentConfig: config1,
-        inner: innerComponent,
-      },
+
+      header: '文字',
+      currentConfig: config1,
+      inner: innerComponent,
     };
   }
 

@@ -146,15 +146,14 @@ export default class Index extends ContentPageBase {
     description: '数据表格组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '列布局 2列',
-        currentConfig: config1,
-      },
+
+      header: '列布局 2列',
+      currentConfig: config1,
     };
   }
 

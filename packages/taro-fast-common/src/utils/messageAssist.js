@@ -13,29 +13,35 @@ import { Tips } from './tips';
 function showMessage({ type, duration = 1500, text, onClose = () => {} }) {
   requestAnimationFrame(() => {
     switch (type) {
-      case messageTypeCollection.success:
+      case messageTypeCollection.success: {
         Tips.success(text, duration, onClose);
         break;
+      }
 
-      case messageTypeCollection.error:
+      case messageTypeCollection.error: {
         Tips.error(text, duration, onClose);
         break;
+      }
 
-      case messageTypeCollection.info:
+      case messageTypeCollection.info: {
         Tips.info(text, duration, onClose);
         break;
+      }
 
-      case messageTypeCollection.warning:
+      case messageTypeCollection.warning: {
         Tips.warning(text, duration, onClose);
         break;
+      }
 
-      case messageTypeCollection.warn:
+      case messageTypeCollection.warn: {
         Tips.warn(text, duration, onClose);
         break;
+      }
 
-      default:
+      default: {
         Tips.toast(text, duration, onClose);
         break;
+      }
     }
   });
 }

@@ -3,8 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common';
-import { Button, CenterBox, Space } from 'taro-fast-component';
+import { Button, Space } from 'taro-fast-component';
 
 import { CodePageBox, SimpleBox } from '../../../../customComponents';
 import { BasePageWrapper } from '../../BasePageWrapper';
@@ -29,14 +28,13 @@ export default class Index extends BasePageWrapper {
     backgroundColor: '#fff',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        weather: '',
-      },
+
+      weather: '',
     };
   }
 
@@ -50,11 +48,9 @@ export default class Index extends BasePageWrapper {
         const {
           observe: { degree, weather },
         } = {
-          ...{
-            observe: {
-              degree: '',
-              degree: '',
-            },
+          observe: {
+            degree: '',
+            weather: '',
           },
           ...data,
         };
@@ -72,24 +68,6 @@ export default class Index extends BasePageWrapper {
       },
     });
   };
-
-  renderFurther() {
-    const { weather } = this.state;
-
-    return (
-      <View
-        style={{
-          width: '100%',
-          height: transformSize(400),
-        }}
-      >
-        <CenterBox>{weather} </CenterBox>
-        <CenterBox>
-          <Button onClick={this.buildWeatherData} text="刷新" />
-        </CenterBox>
-      </View>
-    );
-  }
 
   renderFurther() {
     const { weather } = this.state;

@@ -2,10 +2,10 @@ import { request, requestMode } from 'easy-soft-utility';
 
 import { administrativeDivisionListData } from '../assets/administrativeDivisionData';
 
-export async function singeListData(params) {
+export async function singeListData(parameters) {
   return request({
     api: `/news/article/get`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {

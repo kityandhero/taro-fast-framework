@@ -51,18 +51,17 @@ export default class Index extends ContentPageBase {
     description: '水平居中',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认布局',
-        currentConfig: config1,
-        inner: <View style={boxStyle}></View>,
-        wrapBuilder: (o) => {
-          return <View style={containorStyle}>{o}</View>;
-        },
+
+      header: '默认布局',
+      currentConfig: config1,
+      inner: <View style={boxStyle}></View>,
+      wrapBuilder: (o) => {
+        return <View style={containorStyle}>{o}</View>;
       },
     };
   }

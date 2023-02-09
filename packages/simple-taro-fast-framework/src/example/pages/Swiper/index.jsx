@@ -52,19 +52,21 @@ const listText = [
 
 const itemHorizontalStyle = {};
 
-function buildHorizontalTextItem(o, i) {
+function buildHorizontalTextItem(o, index) {
   const { text } = o;
 
   return (
     <CenterBox
-      style={{ backgroundColor: buildRandomHexColor({ seed: (i + 1) * 45 }) }}
+      style={{
+        backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
+      }}
     >
       {text}
     </CenterBox>
   );
 }
 
-function buildHorizontalImageItem(o, i) {
+function buildHorizontalImageItem(o, index) {
   const {
     //  text,
     image,
@@ -77,7 +79,7 @@ function buildHorizontalImageItem(o, i) {
       padding={10}
       imageBoxStyle={{
         margin: '0 var(--tfc-10)',
-        backgroundColor: buildRandomHexColor({ seed: (i + 1) * 45 }),
+        backgroundColor: buildRandomHexColor({ seed: (index + 1) * 45 }),
       }}
     />
   );
@@ -92,98 +94,84 @@ const configCore = {
 };
 
 const config1 = {
-  ...{
-    vertical: true,
-    enableTouch: true,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  vertical: true,
+  enableTouch: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config2 = {
-  ...{ enableTouch: true, itemBuilder: buildHorizontalTextItem },
+  enableTouch: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config3 = {
-  ...{ enableTouch: true, itemBuilder: buildHorizontalImageItem },
+  enableTouch: true,
+  itemBuilder: buildHorizontalImageItem,
   ...configCore,
 };
 
 const config4 = {
-  ...{
-    autoplay: true,
-    enableTouch: true,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  enableTouch: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config5 = {
-  ...{
-    autoplay: true,
-    circular: true,
-    enableTouch: true,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  circular: true,
+  enableTouch: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config6 = {
-  ...{
-    autoplay: true,
-    circular: true,
-    enableTouch: true,
-    indicator: true,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  circular: true,
+  enableTouch: true,
+  indicator: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config7 = {
-  ...{
-    autoplay: true,
-    circular: true,
-    enableTouch: false,
-    indicator: true,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  circular: true,
+  enableTouch: false,
+  indicator: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config8 = {
-  ...{
-    autoplay: true,
-    circular: true,
-    enableTouch: false,
-    indicator: true,
-    direction: 'right',
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  circular: true,
+  enableTouch: false,
+  indicator: true,
+  direction: 'right',
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config9 = {
-  ...{
-    autoplay: true,
-    circular: true,
-    enableTouch: false,
-    indicator: true,
-    interval: 5000,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  circular: true,
+  enableTouch: false,
+  indicator: true,
+  interval: 5000,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
 const config10 = {
-  ...{
-    autoplay: true,
-    circular: true,
-    enableTouch: false,
-    indicator: true,
-    controller: true,
-    itemBuilder: buildHorizontalTextItem,
-  },
+  autoplay: true,
+  circular: true,
+  enableTouch: false,
+  indicator: true,
+  controller: true,
+  itemBuilder: buildHorizontalTextItem,
   ...configCore,
 };
 
@@ -207,15 +195,14 @@ export default class Index extends ContentPageBase {
 
   maxSequence = 0;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '垂直往复滚动',
-        currentConfig: config1,
-      },
+
+      header: '垂直往复滚动',
+      currentConfig: config1,
     };
   }
 
@@ -574,17 +561,15 @@ export default class Index extends ContentPageBase {
               return (
                 <View
                   style={{
-                    ...{
-                      width: transformSize(24),
-                      height: transformSize(24),
-                      backgroundColor: '#fff',
-                      borderRadius: '50%',
-                      fontSize: transformSize(16),
-                      textAlign: 'center',
-                      lineHeight: transformSize(24),
-                      marginLeft: transformSize(5),
-                      marginRight: transformSize(5),
-                    },
+                    width: transformSize(24),
+                    height: transformSize(24),
+                    backgroundColor: '#fff',
+                    borderRadius: '50%',
+                    fontSize: transformSize(16),
+                    textAlign: 'center',
+                    lineHeight: transformSize(24),
+                    marginLeft: transformSize(5),
+                    marginRight: transformSize(5),
                     ...(active
                       ? {
                           backgroundColor: '#f5060e',
@@ -677,17 +662,15 @@ export default class Index extends ContentPageBase {
               return (
                 <View
                   style={{
-                    ...{
-                      width: transformSize(24),
-                      height: transformSize(24),
-                      backgroundColor: '#fff',
-                      borderRadius: '50%',
-                      fontSize: transformSize(16),
-                      textAlign: 'center',
-                      lineHeight: transformSize(24),
-                      marginLeft: transformSize(5),
-                      marginRight: transformSize(5),
-                    },
+                    width: transformSize(24),
+                    height: transformSize(24),
+                    backgroundColor: '#fff',
+                    borderRadius: '50%',
+                    fontSize: transformSize(16),
+                    textAlign: 'center',
+                    lineHeight: transformSize(24),
+                    marginLeft: transformSize(5),
+                    marginRight: transformSize(5),
                     ...(active
                       ? {
                           backgroundColor: '#f5060e',

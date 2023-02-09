@@ -41,18 +41,17 @@ export default class Index extends ContentPageBase {
     description: '居中容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '布局展示',
-        currentConfig: config1,
-        inner: <View style={boxStyle}></View>,
-        wrapBuilder: (o) => {
-          return <View style={containorStyle}>{o}</View>;
-        },
+
+      header: '布局展示',
+      currentConfig: config1,
+      inner: <View style={boxStyle}></View>,
+      wrapBuilder: (o) => {
+        return <View style={containorStyle}>{o}</View>;
       },
     };
   }

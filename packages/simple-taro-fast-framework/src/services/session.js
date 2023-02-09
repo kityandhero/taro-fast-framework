@@ -1,15 +1,15 @@
 import { request } from 'easy-soft-utility';
 
-export async function refreshSessionData(params) {
+export async function refreshSessionData(parameters) {
   return request({
     api: `/weApp/session/refreshSession`,
-    params,
+    params: parameters,
   });
 }
 
-export async function exchangePhoneData(params) {
+export async function exchangePhoneData(parameters) {
   return request({
     api: `/weApp/session/exchangePhone`,
-    params,
+    params: parameters,
   });
 }

@@ -95,15 +95,14 @@ export default class Index extends ContentPageBase {
     name: '帮助提示',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '一般用法',
-        currentConfig: config1,
-      },
+
+      header: '一般用法',
+      currentConfig: config1,
     };
   }
 

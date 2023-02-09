@@ -153,16 +153,15 @@ export default class Index extends ContentPageBase {
     description: '滚动容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        current: 7,
-        header: '水平模式显示导轨',
-        currentConfig: config11,
-      },
+
+      current: 7,
+      header: '水平模式显示导轨',
+      currentConfig: config11,
     };
   }
 
@@ -195,7 +194,7 @@ export default class Index extends ContentPageBase {
     const { current } = this.state;
 
     return (
-      <ScrollBox key={key} {...{ ...config, ...{ current } }}>
+      <ScrollBox key={key} {...{ ...config, current }}>
         {this.buildSimpleItemInner(inner)}
       </ScrollBox>
     );

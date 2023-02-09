@@ -9,9 +9,7 @@ import { ContentPageBase } from '../../../../../customComponents';
 import { cardStyle } from '../../../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -32,8 +30,6 @@ export default class Index extends ContentPageBase {
 
   enablePullDownRefresh = true;
 
-  enablePullDownRefresh = true;
-
   enableAutoInitialLoadingIndicator = false;
 
   enablePullDownRefreshSuccessNotification = true;
@@ -49,14 +45,13 @@ export default class Index extends ContentPageBase {
     name: '复杂示例',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'simulation/pageList',
-      },
+
+      loadApiPath: 'simulation/pageList',
     };
   }
 

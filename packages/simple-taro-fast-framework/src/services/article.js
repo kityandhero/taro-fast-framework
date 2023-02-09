@@ -1,15 +1,15 @@
 import { request } from 'easy-soft-utility';
 
-export async function pageListData(params) {
+export async function pageListData(parameters) {
   return request({
     api: `/news/article/pageList`,
-    params,
+    params: parameters,
   });
 }
 
-export async function getData(params) {
+export async function getData(parameters) {
   return request({
     api: `/news/article/get`,
-    params,
+    params: parameters,
   });
 }

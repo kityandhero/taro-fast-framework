@@ -52,21 +52,20 @@ export default class Index extends ContentPageBase {
 
   districtCode = 0;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        address: '',
-      },
+
+      address: '',
     };
   }
 
   doAfterFullAdministrativeDivisionSelectorChanged = ({ optionList }) => {
     console.log(optionList);
 
-    if (optionList.length >= 1) {
+    if (optionList.length > 0) {
       this.provinceName = optionList[0].label;
       this.provinceCode = optionList[0].value;
     }

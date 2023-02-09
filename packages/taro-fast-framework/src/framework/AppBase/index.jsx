@@ -13,10 +13,10 @@ import {
 
 import {
   canIUse,
-  checkEnv,
-  checkWeAppEnv,
+  checkEnvironment,
+  checkWeAppEnvironment,
   getDefaultTaroGlobalData,
-  getEnv,
+  getEnvironment,
   getUpdateManager,
   setTaroGlobalData,
 } from 'taro-fast-common';
@@ -34,9 +34,9 @@ const defaultTaroGlobalData = getDefaultTaroGlobalData();
 let appInitCustomObject = {};
 
 function setMainFontSize() {
-  const env = getEnv();
+  const environment = getEnvironment();
 
-  if (env !== envCollection.WEB) {
+  if (environment !== envCollection.WEB) {
     return;
   }
 
@@ -47,10 +47,10 @@ function setMainFontSize() {
   }
 
   if (window) {
-    let doc = window.document.documentElement;
+    let document_ = window.document.documentElement;
 
-    if (doc) {
-      doc.style.fontSize = toString(webRootFontSize);
+    if (document_) {
+      document_.style.fontSize = toString(webRootFontSize);
 
       logInfo(`set document font-size -> ${webRootFontSize}, it is in config.`);
     }
@@ -65,8 +65,8 @@ class AppBase extends Component {
 
   taroGlobalData = defaultTaroGlobalData;
 
-  constructor(props, config) {
-    super(props);
+  constructor(properties, config) {
+    super(properties);
 
     if (!initApplicationComplete) {
       this.setAppInitCustomLocal(config);
@@ -96,7 +96,7 @@ class AppBase extends Component {
   }
 
   onLaunch(options) {
-    checkEnv();
+    checkEnvironment();
 
     setMainFontSize();
 
@@ -146,7 +146,7 @@ class AppBase extends Component {
   showStartupInfo = () => {};
 
   checkUpdateVersion = () => {
-    if (checkWeAppEnv()) {
+    if (checkWeAppEnvironment()) {
       if (canIUse('getUpdateManager')) {
         const updateManager = getUpdateManager();
 

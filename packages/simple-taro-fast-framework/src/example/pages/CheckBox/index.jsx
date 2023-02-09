@@ -18,9 +18,7 @@ import {
 import { cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -223,7 +221,7 @@ const config15 = {
   value: '',
   afterChange: (v) => {
     console.log({
-      message: `值已更改为:${v.join()}`,
+      message: `值已更改为:${v.join(',')}`,
     });
   },
 };
@@ -243,19 +241,18 @@ export default class Index extends ContentPageBase {
     description: '复选组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        border: false,
-        checkBoxValue1: ['option1'],
-        checkBoxValue2: ['option1'],
-        checkBoxValue3: ['option2'],
-        header: '基础用法',
-        currentConfig: config1,
-      },
+
+      border: false,
+      checkBoxValue1: ['option1'],
+      checkBoxValue2: ['option1'],
+      checkBoxValue3: ['option2'],
+      header: '基础用法',
+      currentConfig: config1,
     };
   }
 

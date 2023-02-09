@@ -37,24 +37,23 @@ definePageConfig({
 export default class Index extends BasePageWrapper {
   verifySession = true;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        keyPhone: '',
-      },
+
+      keyPhone: '',
     };
 
     //移除现有缓存, 仅为当前环境测试使用, 常规使用时无需此步骤
     removeSession();
   }
 
-  triggerPhoneNumber = (e) => {
+  triggerPhoneNumber = (event) => {
     const {
       detail: { encryptedData, iv, errMsg },
-    } = e;
+    } = event;
 
     const that = this;
 

@@ -193,14 +193,13 @@ function buildArticleList() {
 
     return {
       ...simpleData,
-      ...{
-        articleId: no,
-        key: no,
-        title: simpleData.title + no,
-        subtitle: simpleData.subtitle + no,
-        description: simpleData.description + no,
-        image: '',
-      },
+
+      articleId: no,
+      key: no,
+      title: simpleData.title + no,
+      subtitle: simpleData.subtitle + no,
+      description: simpleData.description + no,
+      image: '',
     };
   });
 
@@ -264,14 +263,14 @@ const articleEmptyList = [
   {},
 ];
 
-export async function pageListData(params) {
-  const { pageNo, pageSize } = params;
+export async function pageListData(parameters) {
+  const { pageNo, pageSize } = parameters;
 
   const list = getArticleList();
 
   return request({
     api: `/simulation/pageList`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -288,14 +287,14 @@ export async function pageListData(params) {
   });
 }
 
-export async function pageListEmptyData(params) {
-  const { pageNo, pageSize } = params;
+export async function pageListEmptyData(parameters) {
+  const { pageNo, pageSize } = parameters;
 
   const list = [];
 
   return request({
     api: `/simulation/pageListEmpty`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -312,10 +311,10 @@ export async function pageListEmptyData(params) {
   });
 }
 
-export async function singleListData(params) {
+export async function singleListData(parameters) {
   return request({
     api: `/simulation/singleList`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulateRequestDelay: 400,
@@ -325,10 +324,10 @@ export async function singleListData(params) {
   });
 }
 
-export async function singleListEmptyData(params) {
+export async function singleListEmptyData(parameters) {
   return request({
     api: `/simulation/singleListEmpty`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -337,10 +336,10 @@ export async function singleListEmptyData(params) {
   });
 }
 
-export async function getOverviewData(params) {
+export async function getOverviewData(parameters) {
   return request({
     api: `/simulation/overview`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -349,10 +348,10 @@ export async function getOverviewData(params) {
   });
 }
 
-export async function getData(params) {
+export async function getData(parameters) {
   return request({
     api: `/simulation/get`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -361,12 +360,12 @@ export async function getData(params) {
   });
 }
 
-export async function switchStatusData(params) {
-  const { status } = params;
+export async function switchStatusData(parameters) {
+  const { status } = parameters;
 
   return request({
     api: `/simulation/switchStatus`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {

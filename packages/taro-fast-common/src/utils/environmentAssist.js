@@ -1,4 +1,4 @@
-import { ENV_TYPE, getEnv as getEnvCore } from '@tarojs/taro';
+import { ENV_TYPE, getEnv as getEnvironmentCore } from '@tarojs/taro';
 
 import {
   buildPromptModuleInfo,
@@ -26,11 +26,11 @@ const cacheKeyCollection = {
   currentEnv: 'currentEnv',
 };
 
-export function checkEnv() {
-  getEnv();
+export function checkEnvironment() {
+  getEnvironment();
 }
 
-export function getEnv() {
+export function getEnvironment() {
   let v = '';
 
   try {
@@ -49,18 +49,18 @@ export function getEnv() {
   }
 
   if (checkStringIsNullOrWhiteSpace(v)) {
-    v = setEnvCache();
+    v = setEnvironmentCache();
   }
 
   return v;
 }
 
-function setEnvCache() {
+function setEnvironmentCache() {
   let v = envCollection.UNKNOWN;
 
-  const env = getEnvCore();
+  const environment = getEnvironmentCore();
 
-  switch (env) {
+  switch (environment) {
     case ENV_TYPE.WEAPP: {
       v = envCollection.WEAPP;
 
@@ -144,14 +144,14 @@ function setEnvCache() {
   return v;
 }
 
-export function checkWeAppEnv() {
-  const v = getEnv();
+export function checkWeAppEnvironment() {
+  const v = getEnvironment();
 
   return v === envCollection.WEAPP;
 }
 
-export function checkWebEnv() {
-  const v = getEnv();
+export function checkWebEnvironment() {
+  const v = getEnvironment();
 
   return v === envCollection.WEB;
 }

@@ -34,15 +34,14 @@ export default class Index extends ContentPageBase {
     description: 'Html容器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '渲染Html',
-        currentConfig: config1,
-      },
+
+      header: '渲染Html',
+      currentConfig: config1,
     };
   }
 

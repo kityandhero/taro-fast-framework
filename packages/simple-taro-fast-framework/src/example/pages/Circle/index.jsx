@@ -18,9 +18,7 @@ import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -39,37 +37,36 @@ export default class Index extends ContentPageBase {
     description: '进度环组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        color: '#ee0a24',
-        percent: 0.3,
-        size: 400,
-      },
+
+      color: '#ee0a24',
+      percent: 0.3,
+      size: 400,
     };
   }
 
   setPercent = (v) => {
     const { percent } = this.state;
 
-    const tmp = toRound(percent + v, 2);
+    const temporary = toRound(percent + v, 2);
 
-    if (tmp <= 0) {
+    if (temporary <= 0) {
       this.setState({ percent: 0 });
 
       return;
     }
 
-    if (tmp >= 1) {
+    if (temporary >= 1) {
       this.setState({ percent: 1 });
 
       return;
     }
 
-    this.setState({ percent: tmp });
+    this.setState({ percent: temporary });
   };
 
   renderContent = () => {

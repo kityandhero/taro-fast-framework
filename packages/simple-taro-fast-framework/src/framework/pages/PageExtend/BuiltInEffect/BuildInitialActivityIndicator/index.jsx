@@ -6,9 +6,7 @@ import { CodePageBox, ContentPageBase } from '../../../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -35,7 +33,7 @@ const descriptionList = [
   },
 ];
 
-const paramList = [
+const parameterList = [
   {
     label: 'type',
     value: '图标模式, ring/comet, 默认值 "comet"',
@@ -71,14 +69,13 @@ export default class Index extends ContentPageBase {
     description: '构建初始加载提示',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        loadApiPath: 'simulation/get',
-      },
+
+      loadApiPath: 'simulation/get',
     };
   }
 
@@ -98,7 +95,7 @@ export default class Index extends ContentPageBase {
         </Card>
 
         <CodePageBox
-          list={paramList}
+          list={parameterList}
           usageList={descriptionList}
           renderCodeList={[
             'this.buildInitialActivityIndicator({})',

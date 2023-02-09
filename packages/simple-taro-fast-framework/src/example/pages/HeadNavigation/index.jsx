@@ -76,60 +76,59 @@ const config101 = {
 
 const config2 = {
   ...config1,
-  ...{
-    bottom: (
-      <FlexBox
-        style={{ width: '100%' }}
-        flexAuto="right"
-        leftStyle={{
-          marginLeft: transformSize(24),
-          marginRight: transformSize(24),
-        }}
-        left={
-          <View
-            style={{
-              width: transformSize(120),
-              borderRadius: transformSize(10),
-            }}
-          >
-            <ImageBox src={logoImage} />
-          </View>
-        }
-        right={
-          <FlexBox
-            flexAuto="bottom"
-            style={{
-              height: '100%',
-            }}
-            top={
-              <View
-                style={{
-                  height: transformSize(40),
-                  paddingTop: transformSize(10),
-                }}
-              >
-                <ColorText color="#fff" fontSize={30} text="用户昵称" />
-              </View>
-            }
-            bottom={
-              <ColorText
-                color="#fff"
-                fontSize={24}
-                textPrefix="账号"
-                separatorStyle={{
-                  margin: '0 var(--tfc-6)',
-                }}
-                textStyle={{
-                  marginLeft: transformSize(10),
-                }}
-                text="123456789"
-              />
-            }
-          />
-        }
-      />
-    ),
-  },
+
+  bottom: (
+    <FlexBox
+      style={{ width: '100%' }}
+      flexAuto="right"
+      leftStyle={{
+        marginLeft: transformSize(24),
+        marginRight: transformSize(24),
+      }}
+      left={
+        <View
+          style={{
+            width: transformSize(120),
+            borderRadius: transformSize(10),
+          }}
+        >
+          <ImageBox src={logoImage} />
+        </View>
+      }
+      right={
+        <FlexBox
+          flexAuto="bottom"
+          style={{
+            height: '100%',
+          }}
+          top={
+            <View
+              style={{
+                height: transformSize(40),
+                paddingTop: transformSize(10),
+              }}
+            >
+              <ColorText color="#fff" fontSize={30} text="用户昵称" />
+            </View>
+          }
+          bottom={
+            <ColorText
+              color="#fff"
+              fontSize={24}
+              textPrefix="账号"
+              separatorStyle={{
+                margin: '0 var(--tfc-6)',
+              }}
+              textStyle={{
+                marginLeft: transformSize(10),
+              }}
+              text="123456789"
+            />
+          }
+        />
+      }
+    />
+  ),
 };
 
 const config3 = {
@@ -209,25 +208,24 @@ export default class Index extends ContentPageBase {
 
   gradientMode = false;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '简易头部',
-        currentConfig: config1,
-        inner: (
-          <View
-            style={{
-              paddingLeft: transformSize(30),
-              color: '#fff',
-            }}
-          >
-            头部标题
-          </View>
-        ),
-      },
+
+      header: '简易头部',
+      currentConfig: config1,
+      inner: (
+        <View
+          style={{
+            paddingLeft: transformSize(30),
+            color: '#fff',
+          }}
+        >
+          头部标题
+        </View>
+      ),
     };
   }
 

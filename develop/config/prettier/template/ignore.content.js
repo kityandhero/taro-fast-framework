@@ -36,7 +36,6 @@ const content = `# ignore dir
 *.min.js
 
 # ignore special
-.prettierrc.js
 .eslintignore
 .stylelintignore
 .gitattributes

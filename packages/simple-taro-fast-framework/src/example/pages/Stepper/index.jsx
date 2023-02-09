@@ -58,8 +58,8 @@ const config9 = {
   style: {
     width: transformSize(260),
   },
-  defaultValue: 10000,
-  step: 10000,
+  defaultValue: 10_000,
+  step: 10_000,
   onChange: onChangeCore,
 };
 
@@ -105,8 +105,8 @@ const config14 = {
     '--input-background-color': '#ffffff',
     width: transformSize(180),
   },
-  defaultValue: 10000,
-  step: 10000,
+  defaultValue: 10_000,
+  step: 10_000,
 };
 
 const config15 = {
@@ -139,15 +139,14 @@ export default class Index extends ContentPageBase {
     description: '进步器组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基础用法',
-        currentConfig: config1,
-      },
+
+      header: '基础用法',
+      currentConfig: config1,
     };
   }
 

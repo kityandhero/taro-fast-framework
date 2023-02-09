@@ -29,7 +29,7 @@ import {
 
 import {
   AbstractComponent,
-  checkWeAppEnv,
+  checkWeAppEnvironment,
   getMenuButtonBoundingClientRect,
   getSystemInfo,
   locateResult,
@@ -78,7 +78,7 @@ const defaultDispatchLocationResultData = {
 
 function getRefreshingBoxEffect(effect) {
   if (checkInCollection(refreshingBoxEffectCollection, effect)) {
-    if (!checkWeAppEnv()) {
+    if (!checkWeAppEnvironment()) {
       return 'pull';
     }
 
@@ -124,7 +124,7 @@ class Infrastructure extends AbstractComponent {
    */
   capsulePromptRight = 90;
 
-  capsulePromptXIndex = 20000;
+  capsulePromptXIndex = 20_000;
 
   capsulePromptBackgroundColor = '#fff0f4';
 
@@ -367,21 +367,20 @@ class Infrastructure extends AbstractComponent {
     verifyTicketValidity: null,
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
       ...underlyingState,
-      ...{
-        spin: true,
-        signInPromptModalVisible: false,
-        signInSilentOverlayVisible: false,
-        backTopVisible: false,
-        capsulePromptVisible: false,
-        initCapsulePrompt: false,
-        fullAdministrativeDivisionSelectorVisible: false,
-      },
+
+      spin: true,
+      signInPromptModalVisible: false,
+      signInSilentOverlayVisible: false,
+      backTopVisible: false,
+      capsulePromptVisible: false,
+      initCapsulePrompt: false,
+      fullAdministrativeDivisionSelectorVisible: false,
     };
 
     const { screenHeight } = getSystemInfo();
@@ -390,7 +389,7 @@ class Infrastructure extends AbstractComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProperties, previousState) {
     return null;
   }
 
@@ -435,12 +434,12 @@ class Infrastructure extends AbstractComponent {
     }
   };
 
-  setNavigationBarTitle = (params) => {
-    return Taro.setNavigationBarTitle(params);
+  setNavigationBarTitle = (parameters) => {
+    return Taro.setNavigationBarTitle(parameters);
   };
 
-  showModal = (params) => {
-    return Taro.showModal(params);
+  showModal = (parameters) => {
+    return Taro.showModal(parameters);
   };
 
   getCurrentPages = () => {
@@ -477,21 +476,21 @@ class Infrastructure extends AbstractComponent {
     return false;
   };
 
-  onPageScroll(e) {
+  onPageScroll(event) {
     const { backTopVisible } = this.state;
-    const { scrollTop } = e;
+    const { scrollTop } = event;
 
     this.pageScrollTop = scrollTop;
 
     this.onScroll({ scrollTop });
 
-    if (!backTopVisible && e.scrollTop >= this.backTopThresholdDistance) {
+    if (!backTopVisible && scrollTop >= this.backTopThresholdDistance) {
       this.setState({
         backTopVisible: true,
       });
     }
 
-    if (backTopVisible && e.scrollTop < this.backTopThresholdDistance) {
+    if (backTopVisible && scrollTop < this.backTopThresholdDistance) {
       this.setState({
         backTopVisible: false,
       });
@@ -532,9 +531,7 @@ class Infrastructure extends AbstractComponent {
 
   doDidMountTask = () => {
     const { scene } = {
-      ...{
-        scene: '',
-      },
+      scene: '',
       ...getLaunchOption(),
     };
 
@@ -556,14 +553,10 @@ class Infrastructure extends AbstractComponent {
 
     const checkNeedSignInWhenShowResult = this.checkNeedSignInWhenShow();
 
-    if (!checkNeedSignInWhenShowResult) {
-      this.doWorkWhenCheckNeedSignInDidMountFail();
-    } else {
+    if (checkNeedSignInWhenShowResult) {
       const checkPermissionResult = this.checkPermission();
 
-      if (!checkPermissionResult) {
-        this.doWorkWhenCheckPermission();
-      } else {
+      if (checkPermissionResult) {
         this.repeatDoWorkWhenShow = false;
 
         this.doWorkBeforeAdjustDidMount();
@@ -608,7 +601,11 @@ class Infrastructure extends AbstractComponent {
         if (isFunction(callback)) {
           callback();
         }
+      } else {
+        this.doWorkWhenCheckPermission();
       }
+    } else {
+      this.doWorkWhenCheckNeedSignInDidMountFail();
     }
   };
 
@@ -776,13 +773,7 @@ class Infrastructure extends AbstractComponent {
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
     );
 
-    if (!this.firstShowHasTriggered) {
-      this.doWorkWhenFirstShow();
-
-      this.firstShowHasTriggered = true;
-
-      logDebug('set this.firstShowHasTriggered to true');
-    } else {
+    if (this.firstShowHasTriggered) {
       logDebug(
         `this.repeatDoWorkWhenShow is ${this.repeatDoWorkWhenShow} in doShowTask`,
       );
@@ -794,6 +785,12 @@ class Infrastructure extends AbstractComponent {
       this.adjustInternalDataOnRepeatedShow();
 
       this.doWorkWhenRepeatedShow();
+    } else {
+      this.doWorkWhenFirstShow();
+
+      this.firstShowHasTriggered = true;
+
+      logDebug('set this.firstShowHasTriggered to true');
     }
 
     this.doWorkWhenEveryShow();
@@ -896,17 +893,7 @@ class Infrastructure extends AbstractComponent {
         data: that.initMetaDataRequestData || {},
         force: !!that.initMetaDataForce,
         callback: () => {
-          if (!that.verifyTicket) {
-            that.checkTicketValidity({
-              callback: () => {
-                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
-              },
-            });
-
-            if (that.loadRemoteRequestAfterMount) {
-              that.doLoadRemoteRequest();
-            }
-          } else {
+          if (that.verifyTicket) {
             that.checkTicketValidity({
               callback: () => {
                 if (that.loadRemoteRequestAfterMount) {
@@ -916,6 +903,16 @@ class Infrastructure extends AbstractComponent {
                 that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
               },
             });
+          } else {
+            that.checkTicketValidity({
+              callback: () => {
+                that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
+              },
+            });
+
+            if (that.loadRemoteRequestAfterMount) {
+              that.doLoadRemoteRequest();
+            }
           }
         },
       });
@@ -937,15 +934,16 @@ class Infrastructure extends AbstractComponent {
   checkSession = (callback) => {
     logExecute('checkSession');
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore checkSession, only execute callback`;
+    const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore checkSession, only execute callback`;
 
-    switch (env) {
-      case envCollection.WEAPP:
+    switch (environment) {
+      case envCollection.WEAPP: {
         break;
+      }
 
-      case envCollection.ALIPAY:
+      case envCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -953,8 +951,9 @@ class Infrastructure extends AbstractComponent {
         }
 
         return;
+      }
 
-      case envCollection.SWAN:
+      case envCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -962,8 +961,9 @@ class Infrastructure extends AbstractComponent {
         }
 
         return;
+      }
 
-      case envCollection.WEB:
+      case envCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -971,8 +971,9 @@ class Infrastructure extends AbstractComponent {
         }
 
         return;
+      }
 
-      default:
+      default: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -980,13 +981,20 @@ class Infrastructure extends AbstractComponent {
         }
 
         return;
+      }
     }
 
     const sessionRefreshing = getSessionRefreshing();
 
     const that = this;
 
-    if (!sessionRefreshing) {
+    if (sessionRefreshing) {
+      that.checkSessionWhenSessionRefreshing({
+        callback: () => {
+          that.checkSession({ callback });
+        },
+      });
+    } else {
       const session = getSession();
 
       if ((session || '') === '') {
@@ -1011,12 +1019,6 @@ class Infrastructure extends AbstractComponent {
           },
         });
       }
-    } else {
-      that.checkSessionWhenSessionRefreshing({
-        callback: () => {
-          that.checkSession({ callback });
-        },
-      });
     }
   };
 
@@ -1243,11 +1245,11 @@ class Infrastructure extends AbstractComponent {
 
       this.privateCache.verifySession = false;
     } else {
-      const env = this.getEnv();
+      const environment = this.getEnvironment();
 
-      const noAdaptationMessage = `framework with env [${env}] has no adaptation, so verifySession return false`;
+      const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so verifySession return false`;
 
-      switch (env) {
+      switch (environment) {
         case envCollection.WEAPP: {
           if (this.needSignIn) {
             logDebug(
@@ -1315,11 +1317,11 @@ class Infrastructure extends AbstractComponent {
 
       this.privateCache.verifyTicket = false;
     } else {
-      const env = this.getEnv();
+      const environment = this.getEnvironment();
 
-      const noAdaptationMessage = `framework with env [${env}] has no adaptation, so verifyTicket return false`;
+      const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so verifyTicket return false`;
 
-      switch (env) {
+      switch (environment) {
         case envCollection.WEAPP: {
           if (this.needSignIn) {
             logDebug(`because needSignIn is true, so verifyTicket return true`);
@@ -1385,11 +1387,11 @@ class Infrastructure extends AbstractComponent {
 
       this.privateCache.verifyTicketValidity = false;
     } else {
-      const env = this.getEnv();
+      const environment = this.getEnvironment();
 
-      const noAdaptationMessage = `framework with env [${env}] has no adaptation, so verifyTicketValidity return false`;
+      const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so verifyTicketValidity return false`;
 
-      switch (env) {
+      switch (environment) {
         case envCollection.WEAPP: {
           if (this.needSignIn) {
             logDebug(
@@ -1452,11 +1454,11 @@ class Infrastructure extends AbstractComponent {
 
     logExecute('getEnablePullDownRefresh');
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    const noAdaptationMessage = `framework with env [${env}] has no adaptation, so enablePullDownRefresh return false`;
+    const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so enablePullDownRefresh return false`;
 
-    switch (env) {
+    switch (environment) {
       case envCollection.WEAPP: {
         this.privateCache.enablePullDownRefresh = this.enablePullDownRefresh;
 
@@ -1579,13 +1581,11 @@ class Infrastructure extends AbstractComponent {
     const {
       address_component: { province, city },
     } = {
-      ...{
-        address_component: {
-          province: '',
-          city: '',
-        },
+      address_component: {
+        province: '',
+        city: '',
       },
-      ...(data || {}),
+      ...data,
     };
 
     this.getWeather({
@@ -1838,33 +1838,38 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    const env = this.getEnv();
+    const environment = this.getEnvironment();
 
-    const noAdaptationMessage = `framework with env [${env}] has no adaptation, ignore execute buildCapsulePromptWrapper`;
+    const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore execute buildCapsulePromptWrapper`;
 
-    switch (env) {
-      case envCollection.WEAPP:
+    switch (environment) {
+      case envCollection.WEAPP: {
         break;
+      }
 
-      case envCollection.ALIPAY:
+      case envCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         return null;
+      }
 
-      case envCollection.SWAN:
+      case envCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         return null;
+      }
 
-      case envCollection.WEB:
+      case envCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         return null;
+      }
 
-      default:
+      default: {
         logWarn(noAdaptationMessage);
 
         return null;
+      }
     }
 
     const rect = getMenuButtonBoundingClientRect();
@@ -1881,7 +1886,7 @@ class Infrastructure extends AbstractComponent {
             : `7px`
         }
         right={90}
-        zIndex={20000}
+        zIndex={20_000}
         style={{
           position: 'relative',
           backgroundColor: this.capsulePromptBackgroundColor,
@@ -2184,9 +2189,7 @@ class Infrastructure extends AbstractComponent {
     const vw = (
       <VariableView
         style={{
-          ...{
-            width: sideView != null ? '100%' : 'auto',
-          },
+          width: sideView == null ? 'auto' : '100%',
           ...this.viewStyle,
         }}
         scroll={this.scrollViewMode}
@@ -2240,7 +2243,7 @@ class Infrastructure extends AbstractComponent {
         {...{
           ...(this.backTopRight == null ? {} : { right: this.backTopRight }),
           ...(this.backTopBottom == null ? {} : { bottom: this.backTopBottom }),
-          ...{ circle: !!this.backTopCircle },
+          circle: !!this.backTopCircle,
           ...(checkStringIsNullOrWhiteSpace(this.backTopIconColor)
             ? {}
             : { iconColor: this.backTopIconColor }),
@@ -2262,20 +2265,20 @@ class Infrastructure extends AbstractComponent {
 
     let mainContent = null;
 
-    if (sideView != null) {
-      if (this.sidePosition === 'left') {
-        mainContent = (
+    if (sideView == null) {
+      mainContent = vw;
+    } else {
+      mainContent =
+        this.sidePosition === 'left' ? (
           <FlexBox
             flexAuto="right"
             leftStyle={{
-              ...{
-                width: transformSize(this.sideWidth),
-              },
+              width: transformSize(this.sideWidth),
             }}
             left={
               <View
                 style={{
-                  ...(this.sideStyle || {}),
+                  ...this.sideStyle,
                   position: 'fixed',
                   zIndex: '1',
                   top: '0',
@@ -2289,10 +2292,8 @@ class Infrastructure extends AbstractComponent {
               >
                 <ScrollView
                   style={{
-                    ...{
-                      height: '100vh',
-                      width: '100%',
-                    },
+                    height: '100vh',
+                    width: '100%',
                   }}
                   scrollX={false}
                   scrollY
@@ -2308,21 +2309,17 @@ class Infrastructure extends AbstractComponent {
             }
             right={vw}
           />
-        );
-      } else {
-        mainContent = (
+        ) : (
           <FlexBox
             flexAuto="left"
             left={vw}
             rightStyle={{
-              ...{
-                width: transformSize(this.sideWidth),
-              },
+              width: transformSize(this.sideWidth),
             }}
             right={
               <View
                 style={{
-                  ...(this.sideStyle || {}),
+                  ...this.sideStyle,
                   position: 'fixed',
                   zIndex: '1',
                   top: '0',
@@ -2336,9 +2333,7 @@ class Infrastructure extends AbstractComponent {
               >
                 <ScrollView
                   style={{
-                    ...{
-                      height: '100vh',
-                    },
+                    height: '100vh',
                   }}
                   scrollX={false}
                   scrollY
@@ -2354,9 +2349,6 @@ class Infrastructure extends AbstractComponent {
             }
           />
         );
-      }
-    } else {
-      mainContent = vw;
     }
 
     if (this.useFadeSpinWrapper) {

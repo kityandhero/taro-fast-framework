@@ -17,9 +17,7 @@ import {
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
 const style = {
-  ...{
-    backgroundColor: '#f5f7fa',
-  },
+  backgroundColor: '#f5f7fa',
   ...cardStyle,
 };
 
@@ -58,9 +56,8 @@ const config5 = {
   header: '卡片模式',
   style: {
     ...style,
-    ...{
-      borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
-    },
+
+    borderBottom: 'var(--tfc-1) solid var(--tfc-border-color)',
   },
   headerStyle: cardHeaderStyle,
   mode: 'card',
@@ -92,17 +89,16 @@ export default class Index extends ContentPageBase {
     description: '卡片组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '默认布局',
-        currentConfig: config1,
-        inner:
-          '这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域',
-      },
+
+      header: '默认布局',
+      currentConfig: config1,
+      inner:
+        '这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域,这是内容区域',
     };
   }
 

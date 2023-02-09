@@ -102,15 +102,14 @@ export default class Index extends ContentPageBase {
     description: '开关项组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基础用法',
-        currentConfig: config1,
-      },
+
+      header: '基础用法',
+      currentConfig: config1,
     };
   }
 
@@ -192,7 +191,7 @@ export default class Index extends ContentPageBase {
       setTimeout(() => {
         try {
           resolve(true);
-        } catch (e) {
+        } catch {
           reject(true);
         }
       }, 2000);

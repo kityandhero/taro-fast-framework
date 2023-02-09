@@ -25,22 +25,20 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { getEnv } from '../../utils/envAssist';
+import { getEnvironment } from '../../utils/environmentAssist';
 
-function filterModel(props) {
-  const result = { ...props };
+function filterModel(properties) {
+  const result = { ...properties };
 
   delete result.loading;
 
-  Object.entries(result).forEach((o) => {
+  for (const o of Object.entries(result)) {
     const [k, v] = o;
 
-    if (isObject(v)) {
-      if (!!v.fromRemote) {
-        delete result[k];
-      }
+    if (isObject(v) && !!v.fromRemote) {
+      delete result[k];
     }
-  });
+  }
 
   return result;
 }
@@ -90,8 +88,8 @@ class AbstractComponent extends Component {
    */
   componentAuthority = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       error: null,
@@ -108,49 +106,47 @@ class AbstractComponent extends Component {
     this.doDidMountTask();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProperties, nextState) {
     const { dispatchComplete } = {
-      ...{ dispatchComplete: true },
+      dispatchComplete: true,
       ...nextState,
     };
 
-    if (!!!dispatchComplete) {
+    if (!dispatchComplete) {
       return false;
     }
 
-    this.adjustShowRenderCountInConsole(nextProps, nextState);
+    this.adjustShowRenderCountInConsole(nextProperties, nextState);
 
     const checkComponentUpdate = this.doOtherCheckComponentUpdate(
-      nextProps,
+      nextProperties,
       nextState,
     );
 
-    if ((checkComponentUpdate || null) != null) {
-      if (!!checkComponentUpdate) {
-        this.doWorkBeforeUpdate(nextProps, nextState);
+    if ((checkComponentUpdate || null) != undefined && !!checkComponentUpdate) {
+      this.doWorkBeforeUpdate(nextProperties, nextState);
 
-        return !!checkComponentUpdate;
-      }
+      return !!checkComponentUpdate;
     }
 
-    const nextPropsIgnoreModel = filterModel(nextProps);
-    const currentPropsIgnoreModel = filterModel(this.props);
+    const nextPropertiesIgnoreModel = filterModel(nextProperties);
+    const currentPropertiesIgnoreModel = filterModel(this.props);
 
-    const comparePropsResult = !shallowEqual(
-      nextPropsIgnoreModel,
-      currentPropsIgnoreModel,
+    const comparePropertiesResult = !shallowEqual(
+      nextPropertiesIgnoreModel,
+      currentPropertiesIgnoreModel,
     );
 
     const compareStateResult = !shallowEqual(nextState, this.state);
 
-    const compareResult = comparePropsResult || compareStateResult;
+    const compareResult = comparePropertiesResult || compareStateResult;
 
     if (this.showRenderCountInConsole && compareResult) {
       logObject({
         message: 'shouldComponentUpdate:true',
-        nextPropsIgnoreModel,
-        currentPropsIgnoreModel,
-        comparePropsResult,
+        nextPropsIgnoreModel: nextPropertiesIgnoreModel,
+        currentPropsIgnoreModel: currentPropertiesIgnoreModel,
+        comparePropsResult: comparePropertiesResult,
         nextState,
         currentState: this.state,
         compareStateResult,
@@ -158,7 +154,7 @@ class AbstractComponent extends Component {
     }
 
     if (compareResult) {
-      this.doWorkBeforeUpdate(nextProps, nextState);
+      this.doWorkBeforeUpdate(nextProperties, nextState);
     }
 
     return compareResult;
@@ -169,12 +165,12 @@ class AbstractComponent extends Component {
   }
 
   // eslint-disable-next-line react/sort-comp
-  getSnapshotBeforeUpdate(preProps, preState) {
-    return this.doWorkWhenGetSnapshotBeforeUpdate(preProps, preState);
+  getSnapshotBeforeUpdate(preProperties, preState) {
+    return this.doWorkWhenGetSnapshotBeforeUpdate(preProperties, preState);
   }
 
-  componentDidUpdate(preProps, preState, snapshot) {
-    this.doWorkWhenDidUpdate(preProps, preState, snapshot);
+  componentDidUpdate(preProperties, preState, snapshot) {
+    this.doWorkWhenDidUpdate(preProperties, preState, snapshot);
   }
 
   componentWillUnmount() {
@@ -211,14 +207,10 @@ class AbstractComponent extends Component {
   doDidMountTask = () => {
     const checkNeedSignInDidMountResult = this.checkNeedSignInDidMount();
 
-    if (!checkNeedSignInDidMountResult) {
-      this.doWorkWhenCheckNeedSignInDidMountFail();
-    } else {
+    if (checkNeedSignInDidMountResult) {
       const checkPermissionResult = this.checkPermission();
 
-      if (!checkPermissionResult) {
-        this.doWorkWhenCheckPermission();
-      } else {
+      if (checkPermissionResult) {
         this.doWorkBeforeAdjustDidMount();
 
         this.doWorkAdjustDidMount();
@@ -234,17 +226,21 @@ class AbstractComponent extends Component {
         this.doOtherRemoteRequest();
 
         this.doOtherWorkAfterDidMount();
+      } else {
+        this.doWorkWhenCheckPermission();
       }
+    } else {
+      this.doWorkWhenCheckNeedSignInDidMountFail();
     }
   };
 
   doShowTask = () => {
-    if (!this.firstShowHasTriggered) {
+    if (this.firstShowHasTriggered) {
+      this.doWorkWhenRepeatedShow();
+    } else {
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
-    } else {
-      this.doWorkWhenRepeatedShow();
     }
 
     this.doWorkWhenEveryShow();
@@ -277,7 +273,7 @@ class AbstractComponent extends Component {
   };
 
   // eslint-disable-next-line no-unused-vars
-  adjustShowRenderCountInConsole = (nextProps, nextState) => {};
+  adjustShowRenderCountInConsole = (nextProperties, nextState) => {};
 
   doWorkBeforeAdjustDidMount = () => {};
 
@@ -294,17 +290,17 @@ class AbstractComponent extends Component {
   doOtherWorkAfterDidMount = () => {};
 
   // eslint-disable-next-line no-unused-vars
-  doWorkBeforeUpdate = (nextProps, nextState) => {};
+  doWorkBeforeUpdate = (nextProperties, nextState) => {};
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {};
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {};
 
   doOtherCheckComponentUpdate = () => {
     return null;
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
+  doWorkWhenGetSnapshotBeforeUpdate = (preProperties, preState) => {
     return null;
   };
 
@@ -330,32 +326,23 @@ class AbstractComponent extends Component {
 
   doWorkWhenComponentHide = () => {};
 
-  getEnv = () => {
-    return getEnv();
+  getEnvironment = () => {
+    return getEnvironment();
   };
 
-  handleEnv = async (
-    {
-      handleWeapp = null,
-      handleAlipay = null,
-      handleSWAN = null,
-      handleWEB = null,
-      handleOther = null,
-      callback = null,
-    } = {
-      handleWeapp: null,
-      handleAlipay: null,
-      handleSWAN: null,
-      handleWEB: null,
-      handleOther: null,
-      callback: null,
-    },
-  ) => {
+  handleEnv = async ({
+    handleWeapp = null,
+    handleAlipay = null,
+    handleSWAN = null,
+    handleWEB = null,
+    handleOther = null,
+    callback = null,
+  }) => {
     logExecute('handleEnv');
 
     let data = {};
 
-    switch (getEnv()) {
+    switch (getEnvironment()) {
       case envCollection.WEAPP: {
         if (isFunction(handleWeapp)) {
           data = (await handleWeapp()) || {};
@@ -413,7 +400,7 @@ class AbstractComponent extends Component {
   getGlobalWrapper = () => {
     const global = this.getGlobal();
 
-    if ((global || null) == null) {
+    if ((global || null) == undefined) {
       logException('global not allow null, please check getGlobal');
     }
 
@@ -478,9 +465,9 @@ class AbstractComponent extends Component {
     }
   };
 
-  ignoreTouchMove = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
+  ignoreTouchMove = (error) => {
+    error.stopPropagation();
+    error.preventDefault();
   };
 
   /**

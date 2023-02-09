@@ -155,15 +155,14 @@ export default class Index extends ContentPageBase {
     description: '文字渲染',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '仅文字',
-        currentConfig: config0,
-      },
+
+      header: '仅文字',
+      currentConfig: config0,
     };
   }
 

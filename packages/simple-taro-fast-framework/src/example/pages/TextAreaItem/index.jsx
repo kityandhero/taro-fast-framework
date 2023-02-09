@@ -89,15 +89,14 @@ export default class Index extends ContentPageBase {
     description: '文本域编辑组件',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        header: '基础用法',
-        currentConfig: config1,
-      },
+
+      header: '基础用法',
+      currentConfig: config1,
     };
   }
 
