@@ -1,4 +1,4 @@
-import { ENV_TYPE, getApp, getEnvironment } from '@tarojs/taro';
+import { ENV_TYPE, getApp, getEnv as getEnvironment } from '@tarojs/taro';
 
 import {
   getApplicationMergeConfig,
