@@ -1,24 +1,32 @@
-/* eslint-disable import/no-commonjs */
+/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+/* eslint-disable no-useless-escape */
 
-let { generalRules, sortRules } = require('../rules');
-
-const rules = {
-  ...generalRules,
-  ...sortRules,
-};
+const { rules } = require('./items/rules');
+const { parserOptions } = require('./items/parser');
+const { pluginCollection } = require('./items/plugins');
+const { extendCollection } = require('./items/extends');
 
 module.exports = {
   generalConfig: {
-    extends: ['taro/react', 'prettier', 'plugin:promise/recommended'],
+    extends: [
+      'eslint:recommended',
+      'plugin:react/recommended',
+      'plugin:unicorn/recommended',
+      'plugin:promise/recommended',
+      'prettier',
+      ...extendCollection,
+    ],
     env: { es6: true },
-    plugins: ['simple-import-sort', 'import', 'prettier'],
+    plugins: [
+      'unicorn',
+      'simple-import-sort',
+      'import',
+      'prettier',
+      ...pluginCollection,
+    ],
     parser: '@babel/eslint-parser',
-    parserOptions: {
-      requireConfigFile: false,
-      babelOptions: {
-        presets: ['@babel/preset-react'],
-      },
-    },
+    parserOptions: parserOptions,
     rules: rules,
     settings: {
       'import/parsers': {

@@ -102,6 +102,7 @@
     "postncu",
     "postpublish",
     "postupdate",
+    "postz",
     "powerpaste",
     "prebundle",
     "precommit",
@@ -110,6 +111,7 @@
     "preload",
     "prencu",
     "prettierrc",
+    "prez",
     "prismjs",
     "projectname",
     "pxtorem",
@@ -153,11 +155,6 @@
     "ychecker",
     "zindex"
   ],
-  "eslint.workingDirectories": [
-    "packages/taro-fast-framework",
-    "packages/simple-taro-fast-framework"
-  ],
-  "eslint.packageManager": "yarn",
   "git.ignoreLimitWarning": true,
   "files.exclude": {
     "**/.git": true,

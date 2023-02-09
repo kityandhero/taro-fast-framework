@@ -1,29 +1,9 @@
-/* eslint-disable import/no-commonjs */
-try {
-  const shell = require('shelljs');
+/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+/* eslint-disable no-useless-escape */
 
-  const { loopPackage } = require('./package.assist');
+const { clean } = require('easy-soft-develop');
 
-  const ncuCommand = `npx rimraf ./yarn-error.log && npx rimraf ./yarn.lock && npx rimraf ./package-lock.json && npx rimraf ./src/.umi && npx rimraf ./node_modules`;
+const { cleanCommand, cleanCollection } = require('./config');
 
-  function adjustMainPackageJson() {
-    shell.exec(ncuCommand);
-  }
-
-  function adjustChildrenPackageJson() {
-    loopPackage(({ name }) => {
-      shell.exec(`cd ./packages/${name} && ${ncuCommand}`);
-    });
-  }
-
-  console.log(`clean start`);
-  console.log('');
-
-  shell.exec(`lerna clean -y`);
-
-  adjustChildrenPackageJson();
-
-  adjustMainPackageJson();
-
-  console.log('clean success');
-} catch {}
+clean(cleanCommand, cleanCollection);

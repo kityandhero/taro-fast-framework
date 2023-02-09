@@ -126,14 +126,7 @@ export function buildConfig({
   // });
 
   const config = {
-    external: (d) => {
-      return (
-        /^react$/.test(d) ||
-        /^@tarojs\/taro$/.test(d) ||
-        /^@tarojs\/taro-h5$/.test(d) ||
-        d.includes('@babel/runtime')
-      );
-    },
+    external: externals,
     input: inputFile,
     plugins: [
       json(),
@@ -162,16 +155,16 @@ export function buildConfig({
         // modules: true,
       }),
       babelConfig({
-        extensions: [...DEFAULT_EXTENSIONS, ...['ts', 'tsx']],
+        extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx'],
         babelHelpers: 'runtime',
       }),
     ],
-    external: externals,
     output: {
       entryFileNames: '[name].js',
       dir: 'es',
       chunkFileNames: '[name].js',
       format: 'es',
+      // eslint-disable-next-line no-undef
       sourcemap: process.env.NODE_ENV === 'development',
     },
   };
