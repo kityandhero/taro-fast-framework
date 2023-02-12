@@ -1,7 +1,7 @@
 import {
   getTacitlyState,
   reducerCollection,
-  reducerDefaultParams,
+  reducerDefaultParameters,
   reducerNameCollection,
 } from 'easy-soft-dva';
 import { pretreatmentRemoteSingleData } from 'easy-soft-utility';
@@ -26,7 +26,7 @@ export function buildCustomer() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;

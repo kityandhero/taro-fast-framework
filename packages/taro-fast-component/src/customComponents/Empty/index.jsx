@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import {
   checkStringIsNullOrWhiteSpace,
   isNull,
-  mergeProps,
+  mergeProperties,
 } from 'easy-soft-utility';
 
 import { transformSize, withNativeProperties } from 'taro-fast-common';
@@ -31,7 +31,7 @@ const defaultProps = {
 };
 
 const Empty = (p) => {
-  const properties = mergeProps(defaultProps, p);
+  const properties = mergeProperties(defaultProps, p);
 
   const {
     icon,

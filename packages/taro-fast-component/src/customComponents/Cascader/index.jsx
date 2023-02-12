@@ -36,8 +36,8 @@ class Cascader extends BaseComponent {
 
   selectedOptionList = [];
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     const {
       value,
@@ -45,7 +45,7 @@ class Cascader extends BaseComponent {
       asyncLoad,
       useOptionCompareFlag,
       optionCompareFlag,
-    } = props;
+    } = properties;
 
     const a = isArray(value) ? value : [];
 
@@ -66,29 +66,30 @@ class Cascader extends BaseComponent {
 
     this.state = {
       ...this.state,
-      ...{
-        valueFlag: a,
-        valueStage: a,
-        optionCompareFlag: useOptionCompareFlag
-          ? optionCompareFlag
-          : toMd5(options),
-        currentLevel: a.length === 0 ? 0 : a.length - 1,
-      },
+
+      valueFlag: a,
+      valueStage: a,
+      optionCompareFlag: useOptionCompareFlag
+        ? optionCompareFlag
+        : toMd5(options),
+      currentLevel: a.length === 0 ? 0 : a.length - 1,
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProperties, previousState) {
     const {
       value: valueNext,
       options: optionsNext,
       useOptionCompareFlag,
       optionCompareFlag: optionCompareFlagNext,
       asyncLoad,
-    } = nextProps;
-    const { valueFlag: valuePrev, optionCompareFlag: optionCompareFlagPrev } =
-      prevState;
+    } = nextProperties;
+    const {
+      valueFlag: valuePrevious,
+      optionCompareFlag: optionCompareFlagPrevious,
+    } = previousState;
 
-    const valueNextAdjust = !isArray(valueNext) ? [] : valueNext;
+    const valueNextAdjust = isArray(valueNext) ? valueNext : [];
 
     if (asyncLoad && useOptionCompareFlag) {
       throw new Error(
@@ -110,24 +111,24 @@ class Cascader extends BaseComponent {
       : toMd5(optionsNext);
 
     const optionCompareFlagChanged =
-      optionCompareFlagPrev !== optionCompareFlagNextAdjust;
+      optionCompareFlagPrevious !== optionCompareFlagNextAdjust;
 
     if (
-      valueNextAdjust.join() === valuePrev.join() &&
+      valueNextAdjust.join(',') === valuePrevious.join(',') &&
       !optionCompareFlagChanged
     ) {
       return null;
     }
 
     return {
-      ...(valueNextAdjust.join() !== valuePrev.join()
-        ? {
+      ...(valueNextAdjust.join(',') === valuePrevious.join(',')
+        ? {}
+        : {
             valueFlag: valueNextAdjust,
             valueStage: valueNextAdjust,
             currentLevel:
               valueNextAdjust.length === 0 ? 0 : valueNextAdjust.length - 1,
-          }
-        : {}),
+          }),
       ...(optionCompareFlagChanged
         ? {
             valueFlag: valueNextAdjust,
@@ -195,8 +196,8 @@ class Cascader extends BaseComponent {
 
     let children = this.filterOptions();
 
-    for (let i = 0; i <= index; i++) {
-      const v = this.getIndexValue(i) || this.flag;
+    for (let index_ = 0; index_ <= index; index_++) {
+      const v = this.getIndexValue(index_) || this.flag;
 
       const exist = children.some((o) => {
         if (o.value === v) {
@@ -229,11 +230,11 @@ class Cascader extends BaseComponent {
     if (valueStage.length > 0) {
       const count = valueStage.length;
 
-      for (let i = 0; i < count; i++) {
-        const options = this.getIndexOptions(i);
+      for (let index = 0; index < count; index++) {
+        const options = this.getIndexOptions(index);
 
         options.some((o) => {
-          if (checkStringIsNullOrWhiteSpace(valueStage[i])) {
+          if (checkStringIsNullOrWhiteSpace(valueStage[index])) {
             result.push({
               label: '请选择',
               value: '',
@@ -241,7 +242,7 @@ class Cascader extends BaseComponent {
 
             return true;
           } else {
-            if (o.value === valueStage[i]) {
+            if (o.value === valueStage[index]) {
               result.push(o);
 
               return true;
@@ -267,17 +268,17 @@ class Cascader extends BaseComponent {
 
     value[currentLevel] = v;
 
-    if (value.join() !== valueStage.join()) {
+    if (value.join('') !== valueStage.join('')) {
       if (isArray(option.children) && option.children.length > 0) {
         value[currentLevel + 1] = '';
 
         const valueAdjust = [];
 
-        value.forEach((vv, i) => {
-          if (i <= currentLevel + 1) {
+        for (const [index, vv] of value.entries()) {
+          if (index <= currentLevel + 1) {
             valueAdjust.push(vv);
           }
-        });
+        }
 
         value = valueAdjust;
 
@@ -297,7 +298,7 @@ class Cascader extends BaseComponent {
 
       const selectedOptionListFiltered = [];
 
-      value.forEach((one) => {
+      for (const one of value) {
         const d = find(this.selectedOptionList, (o) => {
           return o.value === one;
         });
@@ -305,7 +306,7 @@ class Cascader extends BaseComponent {
         if (d != null) {
           selectedOptionListFiltered.push(d);
         }
-      });
+      }
 
       this.selectedOptionList = selectedOptionListFiltered;
 
@@ -337,9 +338,8 @@ class Cascader extends BaseComponent {
       <Radio
         style={{
           ...style,
-          ...{
-            border: '0',
-          },
+
+          border: '0',
         }}
         bodyStyle={{
           border: '0',
@@ -355,8 +355,8 @@ class Cascader extends BaseComponent {
       <View className={classNames(classPrefix)}>
         <View className={classNames(`${classPrefix}__header`)}>
           <View className={classNames(`${classPrefix}__header__bar`)}>
-            {barData.map((o, i) => {
-              const key = `bar_${i}`;
+            {barData.map((o, index) => {
+              const key = `bar_${index}`;
 
               return (
                 <View
@@ -366,7 +366,7 @@ class Cascader extends BaseComponent {
                   })}
                   key={key}
                   onClick={() => {
-                    this.changeLevel(i);
+                    this.changeLevel(index);
                   }}
                 >
                   <View
@@ -390,9 +390,7 @@ class Cascader extends BaseComponent {
         {scroll ? (
           <ScrollView
             style={{
-              ...{
-                height: transformSize(height),
-              },
+              height: transformSize(height),
             }}
             scrollX={false}
             scrollY

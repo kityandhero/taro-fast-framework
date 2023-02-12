@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { mergeProps } from 'easy-soft-utility';
+import { mergeProperties } from 'easy-soft-utility';
 
 import { BaseComponent } from '../BaseComponent';
 
@@ -11,19 +11,11 @@ const defaultProps = {
 };
 
 const FadeView = (p) => {
-  const props = mergeProps(defaultProps, p);
+  const properties = mergeProperties(defaultProps, p);
 
-  const { show: showValue } = props;
+  const { show: showValue, children } = properties;
 
   const show = showValue || false;
-
-  // eslint-disable-next-line no-unused-vars
-  const handleTouchMove = (e) => {
-    // eslint-disable-next-line no-undef
-    if (fullscreen) {
-      e.stopPropagation();
-    }
-  };
 
   return (
     <View
@@ -36,7 +28,7 @@ const FadeView = (p) => {
         transition: 'opacity 0.2s',
       }}
     >
-      {props.children}
+      {children}
     </View>
   );
 };

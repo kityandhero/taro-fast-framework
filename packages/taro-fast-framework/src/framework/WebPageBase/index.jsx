@@ -2,7 +2,7 @@ import { WebView } from '@tarojs/components';
 
 import {
   checkStringIsNullOrWhiteSpace,
-  envCollection,
+  environmentCollection,
   logWarn,
 } from 'easy-soft-utility';
 
@@ -68,19 +68,19 @@ class WebPageBase extends Infrastructure {
     const environment = this.getEnvironment();
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         break;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         break;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         if (this.redirectWithWebEnv) {
           logWarn(
             `framework with env [${environment}] use redirect to handle load web page`,

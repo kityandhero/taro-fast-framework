@@ -4,7 +4,7 @@ import { Input, View } from '@tarojs/components';
 
 import {
   isFunction,
-  mergeProps,
+  mergeProperties,
   toBoundary,
   toNumber,
 } from 'easy-soft-utility';
@@ -41,7 +41,7 @@ const defaultProps = {
 };
 
 export const Stepper = (p) => {
-  const properties = mergeProps(defaultProps, p);
+  const properties = mergeProperties(defaultProps, p);
 
   const {
     defaultValue: defaultValueSource,

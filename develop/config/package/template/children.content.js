@@ -2,8 +2,17 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const lintScript = {
+const commitScript = {
   precommit: 'npm run z:lint:staged',
+};
+
+const documentationScript = {
+  'prez:documentation:generate': 'npx rimraf ./docs && npm run z:documentation:lint',
+  'z:documentation:generate': 'npx documentation build src/** -f html --github -o docs',
+  'z:documentation:lint': 'npx documentation lint src/**',
+};
+
+const lintScript = {
   'z:lint:file:all': 'npm run z:lint:script:all && npm run z:lint:style:all',
   'z:lint:file:all:fix': 'npm run z:lint:script:all:fix && npm run z:lint:style:all:fix',
   'z:lint:file:change': 'npm run z:lint:script:change && npm run z:lint:style:all',
@@ -15,13 +24,12 @@ const lintScript = {
   'z:lint:script:change:fix': 'npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src && npm run z:lint:style:fix',
   'postz:lint:script:change:fix': 'npm run prettier:format:change',
   'z:lint:staged': 'npx lint-staged --quiet',
-  'z:lint:style:all': 'npx stylelint "./src/**/*.less"',
-  'z:lint:style:all:fix': 'npx stylelint --fix "./src/**/*.less"',
+  'z:lint:style:all': 'npx stylelint --allow-empty-input "./src/**/*.{css,scss,less}"',
+  'z:lint:style:all:fix': 'npx stylelint --allow-empty-input --fix "./src/**/*.{css,scss,less}"',
   'postz:lint:style:all:fix': 'npm run z:prettier:format:all',
-  'z:lint:style:change': 'npx stylelint --cache "./src/**/*.less"',
-  'z:lint:style:change:fix': 'npx stylelint --cache --fix "./src/**/*.less"',
+  'z:lint:style:change': 'npx stylelint --allow-empty-input --cache "./src/**/*.{css,scss,less}"',
+  'z:lint:style:change:fix': 'npx stylelint --allow-empty-input --cache --fix "./src/**/*.{css,scss,less}"',
   'postz:lint:style:change:fix': 'npm run prettier:format:change',
-  'z:tsc:build': 'echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete',
 };
 
 const prettierScript = {
@@ -30,7 +38,14 @@ const prettierScript = {
   'z:prettier:package.json': 'npx prettier --write ./package.json',
 };
 
+const tscScript = {
+  'z:tsc:build': 'echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete',
+};
+
 module.exports = {
+  ...commitScript,
+  ...documentationScript,
   ...lintScript,
   ...prettierScript,
+  ...tscScript,
 };

@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { getStore, Provider } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
-  envCollection,
+  environmentCollection,
   flushLocalStorage,
   isUndefined,
   logConfig,
@@ -36,7 +36,7 @@ let appInitCustomObject = {};
 function setMainFontSize() {
   const environment = getEnvironment();
 
-  if (environment !== envCollection.WEB) {
+  if (environment !== environmentCollection.WEB) {
     return;
   }
 

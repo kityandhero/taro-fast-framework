@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro';
 
 import {
   checkInCollection,
-  envCollection,
+  environmentCollection,
   getGuid,
   isNumber,
   logException,
@@ -190,7 +190,7 @@ class Circle extends AbstractComponent {
 
         // 标签栏滚动
         switch (environment) {
-          case envCollection.WEAPP: {
+          case environmentCollection.WEAPP: {
             const canvas = n.node;
 
             canvas.width = width;
@@ -201,17 +201,17 @@ class Circle extends AbstractComponent {
             break;
           }
 
-          case envCollection.ALIPAY: {
+          case environmentCollection.ALIPAY: {
             logWarn(`framework with env [${environment}] has no adaptation`);
             break;
           }
 
-          case envCollection.SWAN: {
+          case environmentCollection.SWAN: {
             logWarn(`framework with env [${environment}] has no adaptation`);
             break;
           }
 
-          case envCollection.WEB: {
+          case environmentCollection.WEB: {
             context = Taro.createCanvasContext(that.canvasId, that);
             context.canvas.width = width;
             context.canvas.height = height;

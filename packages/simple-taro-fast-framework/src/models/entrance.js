@@ -1,7 +1,7 @@
 import {
   getTacitlyState,
   reducerCollection,
-  reducerDefaultParams,
+  reducerDefaultParameters,
   reducerNameCollection,
 } from 'easy-soft-dva';
 import { pretreatmentRemoteSingleData } from 'easy-soft-utility';
@@ -32,7 +32,7 @@ export function buildEntrance() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -46,7 +46,7 @@ export function buildEntrance() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -60,7 +60,7 @@ export function buildEntrance() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -74,7 +74,7 @@ export function buildEntrance() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -88,7 +88,7 @@ export function buildEntrance() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;

@@ -6,7 +6,7 @@ import {
   checkHasAuthority,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
-  envCollection,
+  environmentCollection,
   isArray,
   isFunction,
   logConfig,
@@ -939,11 +939,11 @@ class Infrastructure extends AbstractComponent {
     const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore checkSession, only execute callback`;
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -953,7 +953,7 @@ class Infrastructure extends AbstractComponent {
         return;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -963,7 +963,7 @@ class Infrastructure extends AbstractComponent {
         return;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -1250,7 +1250,7 @@ class Infrastructure extends AbstractComponent {
       const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so verifySession return false`;
 
       switch (environment) {
-        case envCollection.WEAPP: {
+        case environmentCollection.WEAPP: {
           if (this.needSignIn) {
             logDebug(
               `because needSignIn is true, so verifySession return true`,
@@ -1264,7 +1264,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.ALIPAY: {
+        case environmentCollection.ALIPAY: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
@@ -1272,7 +1272,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.SWAN: {
+        case environmentCollection.SWAN: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
@@ -1280,7 +1280,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.WEB: {
+        case environmentCollection.WEB: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifySession = false;
@@ -1322,7 +1322,7 @@ class Infrastructure extends AbstractComponent {
       const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so verifyTicket return false`;
 
       switch (environment) {
-        case envCollection.WEAPP: {
+        case environmentCollection.WEAPP: {
           if (this.needSignIn) {
             logDebug(`because needSignIn is true, so verifyTicket return true`);
 
@@ -1334,7 +1334,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.ALIPAY: {
+        case environmentCollection.ALIPAY: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
@@ -1342,7 +1342,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.SWAN: {
+        case environmentCollection.SWAN: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
@@ -1350,7 +1350,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.WEB: {
+        case environmentCollection.WEB: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicket = false;
@@ -1392,7 +1392,7 @@ class Infrastructure extends AbstractComponent {
       const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so verifyTicketValidity return false`;
 
       switch (environment) {
-        case envCollection.WEAPP: {
+        case environmentCollection.WEAPP: {
           if (this.needSignIn) {
             logDebug(
               `because needSignIn is true, so verifyTicketValidity return true`,
@@ -1406,7 +1406,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.ALIPAY: {
+        case environmentCollection.ALIPAY: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
@@ -1414,7 +1414,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.SWAN: {
+        case environmentCollection.SWAN: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
@@ -1422,7 +1422,7 @@ class Infrastructure extends AbstractComponent {
           break;
         }
 
-        case envCollection.WEB: {
+        case environmentCollection.WEB: {
           logWarn(noAdaptationMessage);
 
           this.privateCache.verifyTicketValidity = false;
@@ -1459,13 +1459,13 @@ class Infrastructure extends AbstractComponent {
     const noAdaptationMessage = `framework with env [${environment}] has no adaptation, so enablePullDownRefresh return false`;
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         this.privateCache.enablePullDownRefresh = this.enablePullDownRefresh;
 
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
@@ -1473,7 +1473,7 @@ class Infrastructure extends AbstractComponent {
         break;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
@@ -1481,7 +1481,7 @@ class Infrastructure extends AbstractComponent {
         break;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         this.privateCache.enablePullDownRefresh = false;
@@ -1843,23 +1843,23 @@ class Infrastructure extends AbstractComponent {
     const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore execute buildCapsulePromptWrapper`;
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         return null;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         return null;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         return null;

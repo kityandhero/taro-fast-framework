@@ -1,14 +1,14 @@
-import { mergeProps } from 'easy-soft-utility';
+import { mergeProperties } from 'easy-soft-utility';
 
 import { defaultProps } from './config';
 import { Icon } from './icon';
 
 export function buildIcon(p, value) {
-  const props = mergeProps(defaultProps, p, {
+  const properties = mergeProperties(defaultProps, p, {
     value: value,
   });
 
-  return <Icon {...props} />;
+  return <Icon {...properties} />;
 }
 
 export const IconAdd = (p) => {
@@ -259,6 +259,7 @@ export const IconPlaylist = (p) => {
   return buildIcon(p, 'playlist');
 };
 
+// eslint-disable-next-line unicorn/prevent-abbreviations
 export const IconPrev = (p) => {
   return buildIcon(p, 'prev');
 };

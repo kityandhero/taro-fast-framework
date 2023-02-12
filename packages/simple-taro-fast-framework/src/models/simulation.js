@@ -1,7 +1,7 @@
 import {
   getTacitlyState,
   reducerCollection,
-  reducerDefaultParams,
+  reducerDefaultParameters,
   reducerNameCollection,
 } from 'easy-soft-dva';
 import {
@@ -38,7 +38,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -52,7 +52,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -66,7 +66,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -80,7 +80,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -94,7 +94,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -108,7 +108,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -122,7 +122,7 @@ export function buildSimulation() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;

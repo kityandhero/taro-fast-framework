@@ -1,7 +1,7 @@
 import {
   getTacitlyState,
   reducerCollection,
-  reducerDefaultParams,
+  reducerDefaultParameters,
   reducerNameCollection,
 } from 'easy-soft-dva';
 import {
@@ -32,17 +32,15 @@ export function buildSchedulingControl() {
     namespace: 'schedulingControl',
 
     state: {
-      ...{
-        initialLocationModeComplete: false,
-        modelNameListVisible: false,
-        locationResult: {
-          locationGet: false,
-          locationAuth: locateResult.unknown,
-        },
-        signInResult: getSettingsAgency().getSignInUnknownFlag(),
-        ticketValidityProcessDetection: false,
-        signInProcessDetection: false,
+      initialLocationModeComplete: false,
+      modelNameListVisible: false,
+      locationResult: {
+        locationGet: false,
+        locationAuth: locateResult.unknown,
       },
+      signInResult: getSettingsAgency().getSignInUnknownFlag(),
+      ticketValidityProcessDetection: false,
+      signInProcessDetection: false,
       ...getTacitlyState(),
     },
 
@@ -56,7 +54,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -70,7 +68,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -84,7 +82,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -98,7 +96,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -112,7 +110,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -126,7 +124,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -140,7 +138,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -154,7 +152,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -168,7 +166,7 @@ export function buildSchedulingControl() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -186,11 +184,10 @@ export function buildSchedulingControl() {
         if (fromRemote) {
           const response = yield call(getWeatherData, {
             ...payload,
-            ...{
-              source: 'pc',
-              weather_type:
-                'observe|forecast_1h|forecast_24h|index|alarm|limit|tips|air|rise',
-            },
+
+            source: 'pc',
+            weather_type:
+              'observe|forecast_1h|forecast_24h|index|alarm|limit|tips|air|rise',
           });
 
           const { data: metaData } = response;

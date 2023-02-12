@@ -42,14 +42,13 @@ class Overlay extends BaseComponent {
 
   startCountMonitor = false;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        counter: 0,
-      },
+
+      counter: 0,
     };
   }
 
@@ -97,7 +96,7 @@ class Overlay extends BaseComponent {
 
     let v = {};
 
-    if (!!visible) {
+    if (visible) {
       v = {
         visibility: 'visible',
         opacity: '1',
@@ -121,9 +120,8 @@ class Overlay extends BaseComponent {
             : {
                 visibility: 'visible',
               }),
-          ...{
-            opacity: '0',
-          },
+
+          opacity: '0',
         };
 
         if (!this.visibilityChanged) {
@@ -145,16 +143,13 @@ class Overlay extends BaseComponent {
 
     return {
       ...v,
-      ...{
-        top: '0',
-        left: '0',
-        position,
-        width,
-        height,
-        zIndex,
-
-        transition: `opacity ${duration}ms ${animal}`,
-      },
+      top: '0',
+      left: '0',
+      position,
+      width,
+      height,
+      zIndex,
+      transition: `opacity ${duration}ms ${animal}`,
       ...(checkStringIsNullOrWhiteSpace(image)
         ? {
             backgroundColor:
@@ -168,11 +163,11 @@ class Overlay extends BaseComponent {
     };
   };
 
-  handleTouchMove = (e) => {
+  handleTouchMove = (error) => {
     const { lockScroll } = this.props;
 
     if (lockScroll) {
-      this.ignoreTouchMove(e);
+      this.ignoreTouchMove(error);
     }
   };
 

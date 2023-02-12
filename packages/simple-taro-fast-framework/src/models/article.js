@@ -1,7 +1,7 @@
 import {
   getTacitlyState,
   reducerCollection,
-  reducerDefaultParams,
+  reducerDefaultParameters,
   reducerNameCollection,
 } from 'easy-soft-dva';
 import {
@@ -29,7 +29,7 @@ export function buildArticle() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;
@@ -43,7 +43,7 @@ export function buildArticle() {
           type: reducerNameCollection.reducerData,
           payload: dataAdjust,
           alias,
-          ...reducerDefaultParams,
+          ...reducerDefaultParameters,
         });
 
         return dataAdjust;

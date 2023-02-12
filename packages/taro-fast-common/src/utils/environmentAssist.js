@@ -5,7 +5,7 @@ import {
   checkStringIsNullOrWhiteSpace,
   checkWhetherDevelopmentEnvironment,
   displayTextMessage,
-  envCollection,
+  environmentCollection,
   getCache,
   logColorCollection,
   setCache,
@@ -56,61 +56,61 @@ export function getEnvironment() {
 }
 
 function setEnvironmentCache() {
-  let v = envCollection.UNKNOWN;
+  let v = environmentCollection.UNKNOWN;
 
   const environment = getEnvironmentCore();
 
   switch (environment) {
     case ENV_TYPE.WEAPP: {
-      v = envCollection.WEAPP;
+      v = environmentCollection.WEAPP;
 
       break;
     }
 
     case ENV_TYPE.WEB: {
-      v = envCollection.WEB;
+      v = environmentCollection.WEB;
 
       break;
     }
 
     case ENV_TYPE.RN: {
-      v = envCollection.RN;
+      v = environmentCollection.RN;
 
       break;
     }
 
     case ENV_TYPE.SWAN: {
-      v = envCollection.SWAN;
+      v = environmentCollection.SWAN;
 
       break;
     }
 
     case ENV_TYPE.ALIPAY: {
-      v = envCollection.ALIPAY;
+      v = environmentCollection.ALIPAY;
 
       break;
     }
 
     case ENV_TYPE.TT: {
-      v = envCollection.TT;
+      v = environmentCollection.TT;
 
       break;
     }
 
     case ENV_TYPE.QQ: {
-      v = envCollection.QQ;
+      v = environmentCollection.QQ;
 
       break;
     }
 
     case ENV_TYPE.JD: {
-      v = envCollection.JD;
+      v = environmentCollection.JD;
 
       break;
     }
 
     default: {
-      v = envCollection.UNKNOWN;
+      v = environmentCollection.UNKNOWN;
 
       break;
     }
@@ -147,11 +147,11 @@ function setEnvironmentCache() {
 export function checkWeAppEnvironment() {
   const v = getEnvironment();
 
-  return v === envCollection.WEAPP;
+  return v === environmentCollection.WEAPP;
 }
 
 export function checkWebEnvironment() {
   const v = getEnvironment();
 
-  return v === envCollection.WEB;
+  return v === environmentCollection.WEB;
 }

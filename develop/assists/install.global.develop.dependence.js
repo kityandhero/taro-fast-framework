@@ -2,8 +2,18 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const { installGlobalDevelopDependencePackages } = require('easy-soft-develop');
+const { installDevelopDependencePackages } = require('easy-soft-develop');
 
-const { developDependencePackageCollection } = require('./config');
+const {
+  globalDevelopPackageList,
+  mainDevelopPackageList,
+  childrenDevelopPackageList,
+  childrenSpecialDevelopPackageList,
+} = require('./config');
 
-installGlobalDevelopDependencePackages(developDependencePackageCollection);
+installDevelopDependencePackages({
+  globalDevelopPackageList,
+  mainDevelopPackageList,
+  childrenDevelopPackageList,
+  childrenSpecialDevelopPackageList,
+});

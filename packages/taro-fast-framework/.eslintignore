@@ -12,3 +12,5 @@
 *.7z
 *.min.js
 rollup.config-*.cjs
+
+.prettierrc.js

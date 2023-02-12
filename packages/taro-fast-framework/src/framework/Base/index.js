@@ -8,7 +8,7 @@ import {
   logExecute,
   logObject,
   logText,
-  pretreatmentRequestParams,
+  pretreatmentRequestParameters,
   showErrorMessage,
   toNumber,
   toString,
@@ -85,11 +85,11 @@ class Base extends Infrastructure {
     return this.lastRequestingData;
   }
 
-  setRequestingData(params, callback) {
+  setRequestingData(parameters, callback) {
     const d =
-      params == null
+      parameters == null
         ? { type: '', payload: {} }
-        : { ...{ type: '', payload: {} }, ...params };
+        : { type: '', payload: {}, ...parameters };
 
     this.lastRequestingData = d;
 
@@ -115,7 +115,12 @@ class Base extends Infrastructure {
     return '';
   };
 
-  initLoad = ({ otherState = {}, params = {}, delay = 0, callback = null }) => {
+  initLoad = ({
+    otherState = {},
+    params: parameters = {},
+    delay = 0,
+    callback = null,
+  }) => {
     const {
       loadApiPath,
       firstLoadSuccess,
@@ -149,11 +154,9 @@ class Base extends Infrastructure {
       }
 
       const willSaveState = {
-        ...{
-          dataLoading: true,
-          loadSuccess: false,
-        },
-        ...(otherState || {}),
+        dataLoading: true,
+        loadSuccess: false,
+        ...otherState,
       };
 
       const that = this;
@@ -168,10 +171,10 @@ class Base extends Infrastructure {
           that.setState({ dispatchComplete: false });
 
           let submitData = {
-            ...(that.initLoadRequestParams() || {}),
+            ...that.initLoadRequestParams(),
           };
 
-          submitData = pretreatmentRequestParams(submitData || {});
+          submitData = pretreatmentRequestParameters(submitData || {});
 
           submitData = that.supplementLoadRequestParams(submitData || {});
 
@@ -189,7 +192,7 @@ class Base extends Infrastructure {
             that.beforeRequest(submitData || {});
 
             that.initLoadCore({
-              requestData: { ...(submitData || {}), ...params },
+              requestData: { ...submitData, ...parameters },
               delay,
               callback,
             });
@@ -305,9 +308,8 @@ class Base extends Infrastructure {
 
             willSaveToState = {
               ...willSaveToState,
-              ...{
-                loadSuccess: dataSuccess,
-              },
+
+              loadSuccess: dataSuccess,
             };
 
             if (dataSuccess) {
@@ -316,31 +318,27 @@ class Base extends Infrastructure {
                 data: metaData,
                 extra: metaExtra,
               } = {
-                ...{
-                  list: [],
-                  data: null,
-                  extra: null,
-                },
+                list: [],
+                data: null,
+                extra: null,
                 ...metaOriginalData,
               };
 
-              const { metaListData: metaListDataPrev } = that.state;
+              const { metaListData: metaListDataPrevious } = that.state;
 
-              const metaListData = !that.pagingLoadMode
-                ? [...metaListDataRemote]
-                : !that.useListDataAttachMode
-                ? [...metaListDataRemote]
-                : that.clearListDataBeforeAttach
-                ? [...metaListDataRemote]
-                : [...metaListDataPrev, ...metaListDataRemote];
+              const metaListData = that.pagingLoadMode
+                ? that.useListDataAttachMode
+                  ? that.clearListDataBeforeAttach
+                    ? [...metaListDataRemote]
+                    : [...metaListDataPrevious, ...metaListDataRemote]
+                  : [...metaListDataRemote]
+                : [...metaListDataRemote];
 
               willSaveToState = {
-                ...{
-                  metaData: metaData || null,
-                  metaExtra: metaExtra || null,
-                  metaListData: metaListData || [],
-                  metaOriginalData,
-                },
+                metaData: metaData || null,
+                metaExtra: metaExtra || null,
+                metaListData: metaListData || [],
+                metaOriginalData,
                 ...willSaveToState,
               };
 
@@ -351,10 +349,10 @@ class Base extends Infrastructure {
                   metaExtra: metaExtra || null,
                   metaOriginalData: metaOriginalData || null,
                 });
-              } catch (e) {
-                logException(e.message);
+              } catch (error_) {
+                logException(error_.message);
 
-                const text = `${toString(e)},place view in the console`;
+                const text = `${toString(error_)},place view in the console`;
 
                 showErrorMessage({
                   text: text,
@@ -371,9 +369,8 @@ class Base extends Infrastructure {
               if (!firstLoadSuccess) {
                 willSaveToState = {
                   ...willSaveToState,
-                  ...{
-                    firstLoadSuccess: true,
-                  },
+
+                  firstLoadSuccess: true,
                 };
               }
 
@@ -462,18 +459,18 @@ class Base extends Infrastructure {
   afterReloadSuccess = () => {};
 
   loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {
-    const params = this.pagingLoadMode
+    const parameters = this.pagingLoadMode
       ? {
           pageNo: (this.pageNo || 0) + 1,
           pageSize: this.pageSize || 10,
         }
       : {};
 
-    this.initLoad({ otherState, params, delay, callback });
+    this.initLoad({ otherState, params: parameters, delay, callback });
   };
 
   reloadData = ({ otherState, callback = null, delay = 0 }) => {
-    const s = { ...(otherState || {}), ...{ reloading: true } };
+    const s = { ...otherState, reloading: true };
 
     if (this.pagingLoadMode) {
       this.pageNo = 0;
@@ -541,7 +538,9 @@ class Base extends Infrastructure {
       this.clearListDataBeforeAttach = false;
 
       const { pageNo, pageSize, total } = {
-        ...{ pageNo, pageSize, total: 0 },
+        pageNo,
+        pageSize,
+        total: 0,
         ...metaExtra,
       };
 

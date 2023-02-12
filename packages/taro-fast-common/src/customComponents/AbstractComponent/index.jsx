@@ -4,7 +4,7 @@ import Taro from '@tarojs/taro';
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
-  envCollection,
+  environmentCollection,
   getGuid,
   getModelNameList,
   isEqual,
@@ -343,7 +343,7 @@ class AbstractComponent extends Component {
     let data = {};
 
     switch (getEnvironment()) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         if (isFunction(handleWeapp)) {
           data = (await handleWeapp()) || {};
         }
@@ -351,7 +351,7 @@ class AbstractComponent extends Component {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         if (isFunction(handleAlipay)) {
           data = (await handleAlipay()) || {};
         }
@@ -359,7 +359,7 @@ class AbstractComponent extends Component {
         break;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         if (isFunction(handleSWAN)) {
           data = (await handleSWAN()) || {};
         }
@@ -367,7 +367,7 @@ class AbstractComponent extends Component {
         break;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         if (isFunction(handleWEB)) {
           data = (await handleWEB()) || {};
         }

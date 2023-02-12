@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro';
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
-  envCollection,
+  environmentCollection,
   getCache,
   getLocalMetaData,
   isFunction,
@@ -150,11 +150,11 @@ class SupplementCore extends Common {
       const noAdaptationMessage = `framework with env [${environment}] has no adaptation location, only execute executeLogicAfterNonautomaticReLocationWhenRepeatedShow`;
 
       switch (environment) {
-        case envCollection.WEAPP: {
+        case environmentCollection.WEAPP: {
           break;
         }
 
-        case envCollection.ALIPAY: {
+        case environmentCollection.ALIPAY: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
@@ -162,7 +162,7 @@ class SupplementCore extends Common {
           return;
         }
 
-        case envCollection.SWAN: {
+        case environmentCollection.SWAN: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
@@ -170,7 +170,7 @@ class SupplementCore extends Common {
           return;
         }
 
-        case envCollection.WEB: {
+        case environmentCollection.WEB: {
           logWarn(noAdaptationMessage);
 
           that.executeLogicAfterNonautomaticReLocationWhenRepeatedShow({});
@@ -231,11 +231,11 @@ class SupplementCore extends Common {
     const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore obtainLocation, only execute failCallback`;
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -245,7 +245,7 @@ class SupplementCore extends Common {
         return;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -255,7 +255,7 @@ class SupplementCore extends Common {
         return;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -582,11 +582,11 @@ class SupplementCore extends Common {
     const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore checkTicketValidity, only execute callback and signInSilentFailCallback`;
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -600,7 +600,7 @@ class SupplementCore extends Common {
         return;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -614,7 +614,7 @@ class SupplementCore extends Common {
         return;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
@@ -1419,11 +1419,11 @@ class SupplementCore extends Common {
     const noAdaptationMessage = `framework with env [${environment}] has no adaptation, ignore obtainLocation, only execute failCallback`;
 
     switch (environment) {
-      case envCollection.WEAPP: {
+      case environmentCollection.WEAPP: {
         break;
       }
 
-      case envCollection.ALIPAY: {
+      case environmentCollection.ALIPAY: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1437,7 +1437,7 @@ class SupplementCore extends Common {
         return;
       }
 
-      case envCollection.SWAN: {
+      case environmentCollection.SWAN: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
@@ -1451,7 +1451,7 @@ class SupplementCore extends Common {
         return;
       }
 
-      case envCollection.WEB: {
+      case environmentCollection.WEB: {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
