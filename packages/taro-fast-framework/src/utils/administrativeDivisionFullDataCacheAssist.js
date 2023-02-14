@@ -24,10 +24,8 @@ export function getAdministrativeDivisionFullDataCache() {
   const key = storageKeyCollection.administrativeDivisionFullData;
 
   const { list, flag } = {
-    ...{
-      list: [],
-      flag: 'md5',
-    },
+    list: [],
+    flag: 'md5',
     ...getJsonFromLocalStorage(key),
   };
 

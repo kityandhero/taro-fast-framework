@@ -27,16 +27,14 @@ export function getRemoteCheckCache() {
     return null;
   }
 
-  const now = parseInt(new Date().getTime() / 1000 / 10, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 10, 10);
 
   if (o.dataVersion !== now) {
     return null;
   }
 
   const { data } = {
-    ...{
-      data: null,
-    },
+    data: null,
     ...o,
   };
 
@@ -53,7 +51,7 @@ export function getRemoteCheckCache() {
 export function setRemoteCheckCache(o) {
   const key = storageKeyCollection.remoteCheck;
 
-  const now = parseInt(new Date().getTime() / 1000 / 10, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 10, 10);
 
   const d = {
     data: o || null,

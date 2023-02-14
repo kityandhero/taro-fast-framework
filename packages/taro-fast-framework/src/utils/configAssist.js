@@ -1,4 +1,3 @@
-import { setStateDefaultCode } from 'easy-soft-dva';
 import {
   buildPromptModuleInfo,
   getApplicationExternalConfigList,
@@ -7,6 +6,7 @@ import {
   logConfig,
   logDebug,
   setRequestHandler,
+  setStateDefaultCode,
   setUrlGlobalPrefix,
 } from 'easy-soft-utility';
 

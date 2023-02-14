@@ -23,13 +23,13 @@ import { getLocationMode } from './locationAssist';
 import { getOpenId } from './openIdAssist';
 import { getSession } from './sessionAssist';
 
-class Request {
+const Request = {
   /**
    *
    * @static request请求 基于 Taro.request
    * @param {Options} o
    */
-  static async request(o) {
+  async request(o) {
     let options = Object.assign(o, {
       fail: (error) => {
         Tips.loaded();
@@ -59,7 +59,7 @@ class Request {
     }
 
     return response.data;
-  }
+  },
 
   /**
    *
@@ -67,13 +67,7 @@ class Request {
    * @returns
    * @memberof PostJson
    */
-  static Execute({
-    url,
-    data,
-    header = {},
-    option,
-    method = requestMethod.post,
-  }) {
+  Execute({ url, data, header = {}, option, method = requestMethod.post }) {
     try {
       const token = getToken() || getSettingsAgency().getTokenAnonymous();
       const openId = getOpenId();
@@ -81,12 +75,10 @@ class Request {
       const locationMode = getLocationMode();
 
       const headerChange = {
-        ...(header || {}),
-        ...{
-          openId,
-          sessionId,
-          locationMode,
-        },
+        ...header,
+        openId,
+        sessionId,
+        locationMode,
       };
 
       headerChange[`${getTokenKeyName()}`] = token;
@@ -114,11 +106,7 @@ class Request {
         urlChange = url;
       } else {
         if (!checkStringIsNullOrWhiteSpace(corsUrl)) {
-          if (url.indexOf(corsUrl) >= 0) {
-            urlChange = url;
-          } else {
-            urlChange = `${corsUrl}${url}`;
-          }
+          urlChange = url.includes(corsUrl) ? url : `${corsUrl}${url}`;
         }
       }
 
@@ -147,26 +135,22 @@ class Request {
       logDebug(`api request start: ${urlChange}`);
 
       return Request.request({
-        ...{
-          mode: 'cors',
-          dataType: 'json',
-          cache: 'no-cache',
-          fail: (res) => {
-            console.lod(res);
-          },
+        mode: 'cors',
+        dataType: 'json',
+        cache: 'no-cache',
+        fail: (response) => {
+          console.lod(response);
         },
-        ...(option || {}),
-        ...{
-          url: urlChange,
-          data: data || {},
-          header: headerChange,
-          method,
-        },
+        ...option,
+        url: urlChange,
+        data: data || {},
+        header: headerChange,
+        method,
       });
-    } catch (e) {
-      logExecute(e.message);
+    } catch (error_) {
+      logExecute(error_.message);
     }
-  }
-}
+  },
+};
 
 export { Request };

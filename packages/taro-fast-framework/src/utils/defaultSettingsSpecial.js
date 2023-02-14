@@ -13,14 +13,20 @@ import {
   verifySignInResult,
 } from 'taro-fast-common';
 
+let agency = null;
+
 export function getSettingsAgency() {
+  if (agency != null) {
+    return agency;
+  }
+
   const appInit = getApplicationMergeConfig();
 
-  return {
+  agency = {
     getWebRootFontSize: () => {
       const { webRootFontSize } = {
-        ...{ webRootFontSize: '142%' },
-        ...(appInit || {}),
+        webRootFontSize: '142%',
+        ...appInit,
       };
 
       return webRootFontSize || '142%';
@@ -31,202 +37,200 @@ export function getSettingsAgency() {
      */
     getWithoutPermissionRedirectPath: () => {
       const { withoutPermissionRedirectPath } = {
-        ...{ withoutPermissionRedirectPath: '' },
-        ...(appInit || {}),
+        withoutPermissionRedirectPath: '',
+        ...appInit,
       };
 
       return withoutPermissionRedirectPath || '';
     },
     getFileUploadMaxSize: () => {
       const { fileUploadMaxSize } = {
-        ...{ fileUploadMaxSize: 2 },
-        ...(appInit || {}),
+        fileUploadMaxSize: 2,
+        ...appInit,
       };
 
       return fileUploadMaxSize || 2;
     },
     getAudioUploadMaxSize: () => {
       const { audioUploadMaxSize } = {
-        ...{ audioUploadMaxSize: 4 },
-        ...(appInit || {}),
+        audioUploadMaxSize: 4,
+        ...appInit,
       };
 
       return audioUploadMaxSize || 4;
     },
     getVideoUploadMaxSize: () => {
       const { videoUploadMaxSize } = {
-        ...{ videoUploadMaxSize: 4 },
-        ...(appInit || {}),
+        videoUploadMaxSize: 4,
+        ...appInit,
       };
 
       return videoUploadMaxSize || 4;
     },
     getImageUploadMaxSize: () => {
       const { imageUploadMaxSize } = {
-        ...{ imageUploadMaxSize: 2 },
-        ...(appInit || {}),
+        imageUploadMaxSize: 2,
+        ...appInit,
       };
 
       return imageUploadMaxSize || 2;
     },
     getShowSelectLanguage: () => {
       const { showSelectLanguage } = {
-        ...{ showSelectLanguage: false },
-        ...(appInit || {}),
+        showSelectLanguage: false,
+        ...appInit,
       };
 
       return showSelectLanguage || false;
     },
     getShowLogoInLoginView: () => {
       const { showLogoInLoginView } = {
-        ...{ showLogoInLoginView: false },
-        ...(appInit || {}),
+        showLogoInLoginView: false,
+        ...appInit,
       };
 
       return showLogoInLoginView || false;
     },
     getEmptyLogo: () => {
       const { emptyLogo } = {
-        ...{ emptyLogo: emptyLogoImage },
-        ...(appInit || {}),
+        emptyLogo: emptyLogoImage,
+        ...appInit,
       };
 
       return emptyLogo || emptyLogoImage;
     },
     getInitialLocationMode: () => {
       const { initialLocationMode } = {
-        ...{ initialLocationMode: locationModeCollection.custom },
-        ...(appInit || {}),
+        initialLocationMode: locationModeCollection.custom,
+        ...appInit,
       };
 
       return toNumber(initialLocationMode || locationModeCollection.custom);
     },
     getTokenAnonymous: () => {
       const { tokenAnonymous } = {
-        ...{ tokenAnonymous: 'anonymous' },
-        ...(appInit || {}),
+        tokenAnonymous: 'anonymous',
+        ...appInit,
       };
 
       return tokenAnonymous || 'anonymous';
     },
     getWeatherApi: () => {
       const { weatherApi } = {
-        ...{ weatherApi: '' },
-        ...(appInit || {}),
+        weatherApi: '',
+        ...appInit,
       };
 
       return weatherApi || '';
     },
     getDefaultMetaData: () => {
       const { defaultMetaData } = {
-        ...{ defaultMetaData: {} },
-        ...(appInit || {}),
+        defaultMetaData: {},
+        ...appInit,
       };
 
       return defaultMetaData || {};
     },
     getNavigationToSignInWhenSignInSilentFail: () => {
       const { navigationToSignInWhenSignInSilentFail } = {
-        ...{ navigationToSignInWhenSignInSilentFail: false },
-        ...(appInit || {}),
+        navigationToSignInWhenSignInSilentFail: false,
+        ...appInit,
       };
 
       return navigationToSignInWhenSignInSilentFail || false;
     },
     getApiSuccessCode: () => {
       const { apiSuccessCode } = {
-        ...{ apiSuccessCode: apiSuccessCodeDefault },
-        ...(appInit || {}),
+        apiSuccessCode: apiSuccessCodeDefault,
+        ...appInit,
       };
 
       return apiSuccessCode || apiSuccessCodeDefault;
     },
     getAuthenticationFailCode: () => {
       const { authenticationFailCode } = {
-        ...{
-          authenticationFailCode: authenticationFailCodeDefault,
-          ...(appInit || {}),
-        },
+        authenticationFailCode: authenticationFailCodeDefault,
+        ...appInit,
       };
 
       return authenticationFailCode || authenticationFailCodeDefault;
     },
     getSignInSuccessFlag: () => {
       const { signInSuccessFlag } = {
-        ...{ signInSuccessFlag: verifySignInResult.success },
-        ...(appInit || {}),
+        signInSuccessFlag: verifySignInResult.success,
+        ...appInit,
       };
 
       return signInSuccessFlag || verifySignInResult.success;
     },
     getSignInFailFlag: () => {
       const { signInFailFlag } = {
-        ...{ signInFailFlag: verifySignInResult.fail },
-        ...(appInit || {}),
+        signInFailFlag: verifySignInResult.fail,
+        ...appInit,
       };
 
       return signInFailFlag || verifySignInResult.fail;
     },
     getSignInUnknownFlag: () => {
       const { signInUnknownFlag } = {
-        ...{ signInUnknownFlag: verifySignInResult.unknown },
-        ...(appInit || {}),
+        signInUnknownFlag: verifySignInResult.unknown,
+        ...appInit,
       };
 
       return signInUnknownFlag || verifySignInResult.unknown;
     },
     getSignInPath: () => {
       const { signInPath } = {
-        ...{ signInPath: '' },
-        ...(appInit || {}),
+        signInPath: '',
+        ...appInit,
       };
 
       return signInPath || '';
     },
     getDefaultLongitude: () => {
       const { defaultLongitude } = {
-        ...{ defaultLongitude: '' },
-        ...(appInit || {}),
+        defaultLongitude: '',
+        ...appInit,
       };
 
       return defaultLongitude || '';
     },
     getDefaultLatitude: () => {
       const { defaultLatitude } = {
-        ...{ defaultLatitude: '' },
-        ...(appInit || {}),
+        defaultLatitude: '',
+        ...appInit,
       };
 
       return defaultLatitude || '';
     },
     getUseLocation: () => {
       const { useLocation } = {
-        ...{ useLocation: false },
-        ...(appInit || {}),
+        useLocation: false,
+        ...appInit,
       };
 
       return useLocation || false;
     },
     getMapKey: () => {
       const { mapKey } = {
-        ...{ mapKey: '' },
-        ...(appInit || {}),
+        mapKey: '',
+        ...appInit,
       };
 
       return mapKey || '';
     },
     getApiVersion: () => {
       const { apiVersion } = {
-        ...{ apiVersion: '' },
-        ...(appInit || {}),
+        apiVersion: '',
+        ...appInit,
       };
 
       return apiVersion || '';
     },
     getDefaultRequestMode: () => {
       const { defaultRequestMode } = {
-        ...{ defaultRequestMode: requestMode.real },
-        ...(appInit || {}),
+        defaultRequestMode: requestMode.real,
+        ...appInit,
       };
 
       return checkStringIsNullOrWhiteSpace(defaultRequestMode)
@@ -235,80 +239,80 @@ export function getSettingsAgency() {
     },
     getPromptSimulation: () => {
       const { promptSimulation } = {
-        ...{ promptSimulation: false },
-        ...(appInit || {}),
+        promptSimulation: false,
+        ...appInit,
       };
 
       return promptSimulation || false;
     },
     getShowRequestInfo: () => {
       const { showRequestInfo } = {
-        ...{ showRequestInfo: false },
-        ...(appInit || {}),
+        showRequestInfo: false,
+        ...appInit,
       };
 
       return showRequestInfo || false;
     },
     getPlatformName: () => {
       const { platformName } = {
-        ...{ platformName: '' },
-        ...(appInit || {}),
+        platformName: '',
+        ...appInit,
       };
 
       return platformName || '';
     },
     getAppName: () => {
       const { appName } = {
-        ...{ appName: '' },
-        ...(appInit || {}),
+        appName: '',
+        ...appInit,
       };
 
       return appName || '';
     },
     getAppDescription: () => {
       const { appDescription } = {
-        ...{ appDescription: '' },
-        ...(appInit || {}),
+        appDescription: '',
+        ...appInit,
       };
 
       return appDescription || '';
     },
     getTitle: () => {
       const { appName } = {
-        ...{ appName: '' },
-        ...(appInit || {}),
+        appName: '',
+        ...appInit,
       };
 
       return appName || '';
     },
     getLoginLogo: () => {
       const { loginLogo } = {
-        ...{ loginLogo: emptyLogoImage },
-        ...(appInit || {}),
+        loginLogo: emptyLogoImage,
+        ...appInit,
       };
 
       return loginLogo || emptyLogoImage;
     },
     getShareLogo: () => {
       const { shareLogo } = {
-        ...{ shareLogo: emptyLogoImage },
-        ...(appInit || {}),
+        shareLogo: emptyLogoImage,
+        ...appInit,
       };
 
       return shareLogo || emptyLogoImage;
     },
     getShareLogoName: () => {
       const { shareLogoName } = {
-        ...{ shareLogoName: '' },
-        ...(appInit || {}),
+        shareLogoName: '',
+        ...appInit,
       };
 
       return shareLogoName || '';
     },
     getCompanyName: () => {
       const { companyName } = {
-        ...{ companyName: '' },
-        ...(appInit || {}),
+        companyName: '',
+        ...appInit,
       };
 
       return companyName || '';
@@ -319,99 +323,101 @@ export function getSettingsAgency() {
       }
 
       const { leftBarLogo } = {
-        ...{ leftBarLogo: emptyLogoImage },
-        ...(appInit || {}),
+        leftBarLogo: emptyLogoImage,
+        ...appInit,
       };
 
       return leftBarLogo || emptyLogoImage;
     },
     getLeftBarText: () => {
       const { leftBarText } = {
-        ...{ leftBarText: '' },
-        ...(appInit || {}),
+        leftBarText: '',
+        ...appInit,
       };
 
       return leftBarText || '';
     },
     getFooterImage: () => {
       const { footerImage } = {
-        ...{ footerImage: '' },
-        ...(appInit || {}),
+        footerImage: '',
+        ...appInit,
       };
 
       return footerImage || '';
     },
     getFooterText: () => {
       const { footerText } = {
-        ...{ footerText: '' },
-        ...(appInit || {}),
+        footerText: '',
+        ...appInit,
       };
 
       return footerText || '';
     },
     getFooterDescription: () => {
       const { footerDescription } = {
-        ...{ footerDescription: '' },
-        ...(appInit || {}),
+        footerDescription: '',
+        ...appInit,
       };
 
       return footerDescription || '';
     },
     getAppId: () => {
       const { appId } = {
-        ...{ appId: '' },
-        ...(appInit || {}),
+        appId: '',
+        ...appInit,
       };
 
       return appId || '';
     },
     getSimulationLocation: () => {
       const { simulationLocation } = {
-        ...{ simulationLocation: false },
-        ...(appInit || {}),
+        simulationLocation: false,
+        ...appInit,
       };
 
       return !!(simulationLocation || false);
     },
     getSimulationLocationData: () => {
       const { simulationLocationData } = {
-        ...{ simulationLocationData: {} },
-        ...(appInit || {}),
+        simulationLocationData: {},
+        ...appInit,
       };
 
       return simulationLocationData || {};
     },
     getRefreshSessionAliasName: () => {
       const { refreshSessionAliasName } = {
-        ...{ refreshSessionAliasName: 'refreshSessionApiData' },
-        ...(appInit || {}),
+        refreshSessionAliasName: 'refreshSessionApiData',
+        ...appInit,
       };
 
       return refreshSessionAliasName || 'refreshSessionApiData';
     },
     getCheckTicketValidityAliasName: () => {
       const { checkTicketValidityAliasName } = {
-        ...{ checkTicketValidityAliasName: 'checkTicketValidityApiData' },
-        ...(appInit || {}),
+        checkTicketValidityAliasName: 'checkTicketValidityApiData',
+        ...appInit,
       };
 
       return checkTicketValidityAliasName || 'checkTicketValidityApiData';
     },
     getSignInSilentAliasName: () => {
       const { signInSilentAliasName } = {
-        ...{ signInSilentAliasName: 'signInSilentApiData' },
-        ...(appInit || {}),
+        signInSilentAliasName: 'signInSilentApiData',
+        ...appInit,
       };
 
       return signInSilentAliasName || 'signInSilentApiData';
     },
     getMetaDataAliasName: () => {
       const { metaDataAliasName } = {
-        ...{ metaDataAliasName: 'metaDataApiData' },
-        ...(appInit || {}),
+        metaDataAliasName: 'metaDataApiData',
+        ...appInit,
       };
 
       return metaDataAliasName || 'metaDataApiData';
     },
   };
+
+  return agency;
 }

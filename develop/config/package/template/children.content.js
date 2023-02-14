@@ -21,15 +21,15 @@ const lintScript = {
   'z:lint:script:all:fix': 'npx eslint --fix --ext .js,.jsx,.ts,.tsx ./src',
   'postz:lint:script:all:fix': 'npm run z:prettier:format:all',
   'z:lint:script:change': 'npx eslint --cache --ext .js,.jsx,.ts,.tsx ./src',
-  'z:lint:script:change:fix': 'npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src && npm run z:lint:style:fix',
-  'postz:lint:script:change:fix': 'npm run prettier:format:change',
+  'z:lint:script:change:fix': 'npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src',
+  'postz:lint:script:change:fix': 'npm run z:prettier:format:change',
   'z:lint:staged': 'npx lint-staged --quiet',
   'z:lint:style:all': 'npx stylelint --allow-empty-input "./src/**/*.{css,scss,less}"',
   'z:lint:style:all:fix': 'npx stylelint --allow-empty-input --fix "./src/**/*.{css,scss,less}"',
   'postz:lint:style:all:fix': 'npm run z:prettier:format:all',
   'z:lint:style:change': 'npx stylelint --allow-empty-input --cache "./src/**/*.{css,scss,less}"',
   'z:lint:style:change:fix': 'npx stylelint --allow-empty-input --cache --fix "./src/**/*.{css,scss,less}"',
-  'postz:lint:style:change:fix': 'npm run prettier:format:change',
+  'postz:lint:style:change:fix': 'npm run z:prettier:format:change',
 };
 
 const prettierScript = {

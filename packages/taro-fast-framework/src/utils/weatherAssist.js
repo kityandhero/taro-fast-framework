@@ -31,16 +31,14 @@ export function getWeather() {
   }
 
   // 地理位置信息有效期30分钟
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   if (dataVersion !== now) {
     return null;
   }
 
   const { data } = {
-    ...{
-      data: null,
-    },
+    data: null,
     ...o,
   };
 
@@ -58,7 +56,7 @@ export function setWeather(weather) {
   const key = storageKeyCollection.weather;
 
   // 地理位置信息有效期30分钟
-  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const nowVersion = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   weather.dataVersion = nowVersion;
 

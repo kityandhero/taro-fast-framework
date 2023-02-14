@@ -1,12 +1,10 @@
 import {
   getTacitlyState,
+  pretreatmentRemoteListData,
+  pretreatmentRemoteSingleData,
   reducerCollection,
   reducerDefaultParameters,
   reducerNameCollection,
-} from 'easy-soft-dva';
-import {
-  pretreatmentRemoteListData,
-  pretreatmentRemoteSingleData,
 } from 'easy-soft-utility';
 
 import { locateResult } from 'taro-fast-common';

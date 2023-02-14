@@ -2,9 +2,11 @@ import { Component } from 'react';
 
 import { getStore, Provider } from 'easy-soft-dva';
 import {
+  appendEmbedBuilder,
   checkStringIsNullOrWhiteSpace,
   environmentCollection,
   flushLocalStorage,
+  getModelCollection,
   isUndefined,
   logConfig,
   logInfo,
@@ -21,7 +23,7 @@ import {
   setTaroGlobalData,
 } from 'taro-fast-common';
 
-import { getModelCollection } from '../../models';
+import { buildSchedulingControl } from '../../models/schedulingControl';
 import { removeAdministrativeDivisionFullDataCache } from '../../utils/administrativeDivisionFullDataCacheAssist';
 import { configEnvironment } from '../../utils/configAssist';
 import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
@@ -56,6 +58,8 @@ function setMainFontSize() {
     }
   }
 }
+
+appendEmbedBuilder(buildSchedulingControl);
 
 let models = [];
 let initApplicationComplete = false;

@@ -35,7 +35,7 @@ export function getCurrentCustomer() {
   }
 
   // 信息有效期30分钟
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   if (dataVersion !== now) {
     logWarn('info current customer cache expired, will return null');
@@ -44,9 +44,7 @@ export function getCurrentCustomer() {
   }
 
   const { data } = {
-    ...{
-      data: null,
-    },
+    data: null,
     ...o,
   };
 
@@ -66,7 +64,7 @@ export function setCurrentCustomer(data) {
   const key = storageKeyCollection.currentCustomer;
 
   // 信息有效期30分钟
-  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const nowVersion = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   const o = {
     data,

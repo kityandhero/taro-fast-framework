@@ -65,7 +65,7 @@ export function getModelCollection() {
 
         return ns;
       })
-      .join();
+      .join(',');
 
     logConfig(`all models -> ${modelNames}`);
 

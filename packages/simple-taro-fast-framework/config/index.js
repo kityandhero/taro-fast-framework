@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-module */
 // eslint-disable-next-line import/no-commonjs
 // const path = require('path');
 
@@ -62,6 +63,7 @@ const config = {
     // },
   },
   h5: {
+    // debugReact: true,
     publicPath: '/',
     staticDirectory: 'static',
     postcss: {

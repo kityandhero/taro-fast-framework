@@ -20,7 +20,7 @@ const coreRules = {
 
 const reactRules = {
   'react/sort-comp': 0,
-  'react/jsx-uses-react': 'off',
+  'react/jsx-uses-react': 2,
   'react/react-in-jsx-scope': 'off',
   'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   'react/jsx-wrap-multilines': 0,

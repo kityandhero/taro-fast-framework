@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
-  buildStringStyle,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
 } from 'easy-soft-utility';
@@ -55,20 +54,23 @@ class Loading extends BaseComponent {
 
     if (borderWidth > 0) {
       switch (type) {
-        case 'ring':
+        case 'ring': {
           borderWidthStyle = {
             '--ring-border-width': transformSize(borderWidth),
           };
           break;
+        }
 
-        case 'comet':
+        case 'comet': {
           borderWidthStyle = {
             '--comet-border-width': transformSize(borderWidth),
           };
           break;
+        }
 
-        default:
+        default: {
           break;
+        }
       }
     }
 
@@ -79,10 +81,8 @@ class Loading extends BaseComponent {
     const type = this.getType();
     const style = this.getStyle();
 
-    console.log(buildStringStyle(style));
-
     return (
-      <View className={classNames(classPrefix)} style={buildStringStyle(style)}>
+      <View className={classNames(classPrefix)} style={style}>
         {type === 'ring' ? (
           <>
             <View className={classNames(`${classPrefix}__ring`)} />

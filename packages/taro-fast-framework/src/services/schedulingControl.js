@@ -13,7 +13,7 @@ import {
 import { getVerifySignInResult } from '../utils/common';
 import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
 
-export async function getWeatherData(params) {
+export async function getWeatherData(parameters) {
   const weatherApi = getSettingsAgency().getWeatherApi();
 
   if (checkStringIsNullOrWhiteSpace(weatherApi)) {
@@ -22,13 +22,13 @@ export async function getWeatherData(params) {
 
   return request({
     api: weatherApi,
-    urlParams: params,
+    urlParams: parameters,
     method: 'GET',
   });
 }
 
-export async function refreshSessionData(params) {
-  const { code } = params;
+export async function refreshSessionData(parameters) {
+  const { code } = parameters;
 
   const simulation = {
     sessionId: getGuid(),
@@ -41,7 +41,7 @@ export async function refreshSessionData(params) {
 
   return request({
     api: `/schedulingControl/refreshSession`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -52,7 +52,7 @@ export async function refreshSessionData(params) {
   });
 }
 
-export async function checkTicketValidityData(params) {
+export async function checkTicketValidityData(parameters) {
   const simulation = {
     needRefresh: true,
     nextCheckLoginUnixTime: Math.round(addMinute(getNow(), 30) / 1000),
@@ -66,7 +66,7 @@ export async function checkTicketValidityData(params) {
 
   return request({
     api: `/schedulingControl/checkTicketValidity`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -77,7 +77,7 @@ export async function checkTicketValidityData(params) {
   });
 }
 
-export async function exchangePhoneData(params) {
+export async function exchangePhoneData(parameters) {
   const simulation = {
     key: getGuid(),
   };
@@ -90,7 +90,7 @@ export async function exchangePhoneData(params) {
 
   return request({
     api: `/schedulingControl/exchangePhone`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -101,7 +101,7 @@ export async function exchangePhoneData(params) {
   });
 }
 
-export async function signInSilentData(params) {
+export async function signInSilentData(parameters) {
   const verifySignInResult = getVerifySignInResult();
 
   const simulation = {
@@ -120,7 +120,7 @@ export async function signInSilentData(params) {
 
   return request({
     api: `/schedulingControl/signInSilent`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -131,7 +131,7 @@ export async function signInSilentData(params) {
   });
 }
 
-export async function registerWithWeChatData(params) {
+export async function registerWithWeChatData(parameters) {
   const verifySignInResult = getVerifySignInResult();
 
   const simulation = {
@@ -150,7 +150,7 @@ export async function registerWithWeChatData(params) {
 
   return request({
     api: `/schedulingControl/registerWithWeChat`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -161,7 +161,7 @@ export async function registerWithWeChatData(params) {
   });
 }
 
-export async function registerData(params) {
+export async function registerData(parameters) {
   const verifySignInResult = getVerifySignInResult();
 
   const simulation = {
@@ -180,7 +180,7 @@ export async function registerData(params) {
 
   return request({
     api: `/schedulingControl/register`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -191,7 +191,7 @@ export async function registerData(params) {
   });
 }
 
-export async function getMetaDataData(params) {
+export async function getMetaDataData(parameters) {
   const simulation = {
     time: formatDatetime(getNow(), datetimeFormat.monthDayHourMinuteSecond),
   };
@@ -204,7 +204,7 @@ export async function getMetaDataData(params) {
 
   return request({
     api: `/schedulingControl/getMetaData`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -215,7 +215,7 @@ export async function getMetaDataData(params) {
   });
 }
 
-export async function getCustomerData(params) {
+export async function getCustomerData(parameters) {
   const simulation = {};
 
   logDebug(
@@ -226,7 +226,7 @@ export async function getCustomerData(params) {
 
   return request({
     api: `/schedulingControl/getCustomer`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {
@@ -237,7 +237,7 @@ export async function getCustomerData(params) {
   });
 }
 
-export async function getAdministrativeDivisionFullData(params) {
+export async function getAdministrativeDivisionFullData(parameters) {
   const simulation = [];
 
   logDebug(
@@ -248,7 +248,7 @@ export async function getAdministrativeDivisionFullData(params) {
 
   return request({
     api: `/schedulingControl/getAdministrativeDivisionFullData`,
-    params,
+    params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,
     simulativeSuccessResponse: {

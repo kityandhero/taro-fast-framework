@@ -21,11 +21,11 @@ export function getSignInResultDescription(v) {
 
   const verifySignInResultData = getVerifySignInResult();
 
-  Object.entries(verifySignInResultData).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(verifySignInResultData)) {
     if (toString(value) === toString(v)) {
       result = key;
     }
-  });
+  }
 
   return result;
 }

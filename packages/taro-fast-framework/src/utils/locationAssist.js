@@ -42,7 +42,7 @@ export function getLocation() {
     }
 
     // 地理位置信息有效期30分钟
-    const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+    const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
     if (dataVersion !== now) {
       return null;
@@ -65,7 +65,7 @@ export function setLocation(location) {
   const key = storageKeyCollection.location;
 
   // 地理位置信息有效期30分钟
-  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const nowVersion = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   location.dataVersion = nowVersion;
 
@@ -97,7 +97,7 @@ export function getLocationMode() {
 
   const s = getStringFromLocalStorage(key);
 
-  const v = parseInt(s, 10);
+  const v = Number.parseInt(s, 10);
 
   return v === locationModeCollection.auto ||
     v === locationModeCollection.custom
@@ -119,7 +119,7 @@ export function setLocationMode(locationMode) {
     removeMap();
   }
 
-  const v = parseInt(
+  const v = Number.parseInt(
     locationMode || 0 ? locationMode : locationModeCollection.unknown,
     10,
   );
@@ -158,7 +158,7 @@ export function getMap() {
     }
 
     // 地理位置信息有效期30分钟
-    const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+    const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
     if (dataVersion !== now) {
       return null;
@@ -181,7 +181,7 @@ export function setMap(map) {
   const key = storageKeyCollection.map;
 
   // 地理位置信息有效期30分钟
-  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const nowVersion = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   map.dataVersion = nowVersion;
 

@@ -171,11 +171,11 @@ export async function actionCore({
                 dispatchComplete: true,
               });
             });
-        } catch (e) {
+        } catch (error_) {
           Tips.loaded();
 
           const text = `${toString(
-            e,
+            error_,
           )}, please confirm dispatch type exists first.`;
 
           logException({
@@ -190,7 +190,7 @@ export async function actionCore({
             target,
             handleData,
             remoteOriginal: null,
-            error: e,
+            error: error_,
           });
 
           showErrorMessage({
@@ -243,11 +243,11 @@ export async function actionSheetCore({
   Taro.showActionSheet({
     alertText: title || '',
     itemList: [confirmText || '确定'],
-    itemColor: !isString(confirmColor)
-      ? ''
-      : checkStringIsNullOrWhiteSpace(confirmColor)
-      ? ''
-      : confirmColor,
+    itemColor: isString(confirmColor)
+      ? checkStringIsNullOrWhiteSpace(confirmColor)
+        ? ''
+        : confirmColor
+      : '',
     success: () => {
       confirmAction({
         target,
@@ -270,8 +270,8 @@ export async function actionSheetCore({
         completeCallback({ tapIndex, message: errMsg });
       }
     },
-  }).catch((res) => {
-    logException(`actionSheetCore: catch -> ${res.message}`);
+  }).catch((error_) => {
+    logException(`actionSheetCore: catch -> ${error_.message}`);
   });
 }
 
@@ -326,17 +326,17 @@ export async function actionModalCore({
     title,
     content,
     confirmText: confirmText || '确定',
-    confirmColor: !isString(confirmColor)
-      ? ''
-      : checkStringIsNullOrWhiteSpace(confirmColor)
-      ? ''
-      : confirmColor,
+    confirmColor: isString(confirmColor)
+      ? checkStringIsNullOrWhiteSpace(confirmColor)
+        ? ''
+        : confirmColor
+      : '',
     cancelText: cancelText || '取消',
-    cancelColor: !isString(cancelColor)
-      ? ''
-      : checkStringIsNullOrWhiteSpace(cancelColor)
-      ? ''
-      : cancelColor,
+    cancelColor: isString(cancelColor)
+      ? checkStringIsNullOrWhiteSpace(cancelColor)
+        ? ''
+        : cancelColor
+      : '',
     showCancel,
     success: ({ confirm, cancel, errMsg }) => {
       if (confirm) {
@@ -352,12 +352,10 @@ export async function actionModalCore({
         });
       }
 
-      if (cancel) {
-        if (isFunction(cancelCallback)) {
-          cancelCallback({
-            message: errMsg,
-          });
-        }
+      if (cancel && isFunction(cancelCallback)) {
+        cancelCallback({
+          message: errMsg,
+        });
       }
     },
     fail: ({ errMsg }) => {
@@ -375,7 +373,7 @@ export async function actionModalCore({
         });
       }
     },
-  }).catch((res) => {
-    logException(`actionSheetCore: catch -> ${res.message}`);
+  }).catch((error_) => {
+    logException(`actionSheetCore: catch -> ${error_.message}`);
   });
 }

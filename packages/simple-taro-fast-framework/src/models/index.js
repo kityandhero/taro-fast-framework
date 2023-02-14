@@ -1,4 +1,4 @@
-import { appendBuilder } from 'taro-fast-framework';
+import { appendExtraBuilder } from 'easy-soft-utility';
 
 import { buildAdministrativeDivision } from './administrativeDivision';
 import { buildArticle } from './article';
@@ -10,14 +10,14 @@ import { buildSession } from './session';
 import { buildSimulation } from './simulation';
 
 function collectModelBuilder() {
-  appendBuilder(buildAdministrativeDivision);
-  appendBuilder(buildArticle);
-  appendBuilder(buildCustomer);
-  appendBuilder(buildEntrance);
-  appendBuilder(buildGlobal);
-  appendBuilder(buildNews);
-  appendBuilder(buildSession);
-  appendBuilder(buildSimulation);
+  appendExtraBuilder(buildAdministrativeDivision);
+  appendExtraBuilder(buildArticle);
+  appendExtraBuilder(buildCustomer);
+  appendExtraBuilder(buildEntrance);
+  appendExtraBuilder(buildGlobal);
+  appendExtraBuilder(buildNews);
+  appendExtraBuilder(buildSession);
+  appendExtraBuilder(buildSimulation);
 }
 
 collectModelBuilder();
