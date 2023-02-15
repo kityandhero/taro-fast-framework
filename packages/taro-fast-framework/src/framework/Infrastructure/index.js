@@ -61,7 +61,6 @@ import {
   getVerifySignInResult,
 } from '../../utils/common';
 import { setCurrentUrl } from '../../utils/currentUrlAssist';
-import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import { getLaunchOption } from '../../utils/launchOptionAssist';
 import { getMap } from '../../utils/locationAssist';
 import { getSession } from '../../utils/sessionAssist';
@@ -69,6 +68,13 @@ import {
   getSessionRefreshing,
   setSessionRefreshing,
 } from '../../utils/sessionRefreshingAssist';
+import {
+  getFooterDescription,
+  getFooterImage,
+  getFooterText,
+  getSignInPath,
+  getWithoutPermissionRedirectPath,
+} from '../../utils/settingsAssist';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
 const defaultDispatchLocationResultData = {
@@ -636,7 +642,7 @@ class Infrastructure extends AbstractComponent {
 
     if (toString(signInResult) === toString(verifySignInResult.fail)) {
       if (this.autoRedirectToSignIn) {
-        const signInPath = getSettingsAgency().getSignInPath();
+        const signInPath = getSignInPath();
 
         if (checkStringIsNullOrWhiteSpace(signInPath)) {
           throw new Error('未配置登录页面signInPath');
@@ -682,7 +688,7 @@ class Infrastructure extends AbstractComponent {
             );
 
             if (this.autoRedirectToSignIn) {
-              const signInPath = getSettingsAgency().getSignInPath();
+              const signInPath = getSignInPath();
 
               if (checkStringIsNullOrWhiteSpace(signInPath)) {
                 throw new Error('未配置登录页面signInPath');
@@ -748,8 +754,7 @@ class Infrastructure extends AbstractComponent {
       message: text,
     });
 
-    const withoutPermissionRedirectPath =
-      getSettingsAgency().getWithoutPermissionRedirectPath();
+    const withoutPermissionRedirectPath = getWithoutPermissionRedirectPath();
 
     if (checkStringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
       throw new Error('未配置无交互权限时的跳转目标');
@@ -759,7 +764,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   goToSignIn = () => {
-    const signInPath = getSettingsAgency().getSignInPath();
+    const signInPath = getSignInPath();
 
     if (checkStringIsNullOrWhiteSpace(signInPath)) {
       throw new Error('未配置登录页面signInPath');
@@ -1978,9 +1983,9 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    const image = getSettingsAgency().getFooterImage();
-    const text = getSettingsAgency().getFooterText();
-    const description = getSettingsAgency().getFooterDescription();
+    const image = getFooterImage();
+    const text = getFooterText();
+    const description = getFooterDescription();
 
     if (image || text || description) {
       {

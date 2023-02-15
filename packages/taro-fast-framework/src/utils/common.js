@@ -2,7 +2,12 @@ import { toString } from 'easy-soft-utility';
 
 import { verifySignInResult } from 'taro-fast-common';
 
-import { getSettingsAgency } from './defaultSettingsSpecial';
+import {
+  getAuthenticationFailCode,
+  getSignInFailFlag,
+  getSignInSuccessFlag,
+  getSignInUnknownFlag,
+} from './settingsAssist';
 
 /**
  * 检测远程返回码是否代表登录失败
@@ -10,8 +15,7 @@ import { getSettingsAgency } from './defaultSettingsSpecial';
  * @returns
  */
 export function checkWhetherAuthorizeFail(code) {
-  const authenticationFailCode =
-    getSettingsAgency().getAuthenticationFailCode();
+  const authenticationFailCode = getAuthenticationFailCode();
 
   return authenticationFailCode === code;
 }
@@ -36,9 +40,9 @@ export function getSignInResultDescription(v) {
 export function getVerifySignInResult() {
   const o = verifySignInResult;
 
-  o.success = getSettingsAgency().getSignInSuccessFlag();
-  o.fail = getSettingsAgency().getSignInFailFlag();
-  o.unknown = getSettingsAgency().getSignInUnknownFlag();
+  o.success = getSignInSuccessFlag();
+  o.fail = getSignInFailFlag();
+  o.unknown = getSignInUnknownFlag();
 
   return o;
 }

@@ -24,12 +24,12 @@ const toolsScript = {
 const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'prez:publish-npm-all': 'npm run z:change:nrm:npm',
+  'prez:publish-npm-all': 'npm run z:change:npm:registry:npm',
   'z:publish-npm-all': 'npm run z:publish:npm-all',
-  'postz:publish-npm-all': 'npm run z:change:nrm:local',
-  'prez:publish:lerna': 'npm run z:change:nrm:npm',
+  'postz:publish-npm-all': 'npm run z:change:npm:registry:local',
+  'prez:publish:lerna': 'npm run z:change:npm:registry:npm',
   'z:publish:lerna': 'lerna updated && npm run z:lerna:publish',
-  'postz:publish:lerna': 'npm run z:change:nrm:local && npm run z:publish-npm-all',
+  'postz:publish:lerna': 'npm run z:change:npm:registry:local && npm run z:publish-npm-all',
   'prez:publish:build': 'npm run z:install && npm run cz && npm run z:build:all',
   'z:publish:build': 'npm run z:publish:lerna',
 };
@@ -52,16 +52,16 @@ const lernaScript = {
 const installScript = {
   "z:reinstall": 'npm run z:lerna:bootstrap',
   "postinstall": "npm run z:initial:environment",
-  "prez:install.global.develop.dependence": "npm run z:change:nrm:local",
+  "prez:install.global.develop.dependence": "npm run z:change:npm:registry:local",
   "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence",
   "postz:install.global.develop.dependence": "npm run z:install",
-  "prez:install": "npm run z:change:nrm:local",
+  "prez:install": "npm run z:change:npm:registry:local",
   "z:install": "pnpm install",
 };
 
 const nrmScript = {
-  "z:change:nrm:local": "nrm use local",
-  "z:change:nrm:npm": "nrm use npm",
+  "z:change:npm:registry:local": "nrm use local",
+  "z:change:npm:registry:npm": "nrm use npm",
 };
 
 const commitScript = {

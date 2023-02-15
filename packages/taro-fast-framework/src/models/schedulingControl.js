@@ -21,8 +21,8 @@ import {
   registerWithWeChatData,
   signInSilentData,
 } from '../services/schedulingControl';
-import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
 import { setLocationMode } from '../utils/locationAssist';
+import { getSignInUnknownFlag } from '../utils/settingsAssist';
 import { getWeather, setWeather } from '../utils/weatherAssist';
 
 export function buildSchedulingControl() {
@@ -36,7 +36,7 @@ export function buildSchedulingControl() {
         locationGet: false,
         locationAuth: locateResult.unknown,
       },
-      signInResult: getSettingsAgency().getSignInUnknownFlag(),
+      signInResult: getSignInUnknownFlag(),
       ticketValidityProcessDetection: false,
       signInProcessDetection: false,
       ...getTacitlyState(),

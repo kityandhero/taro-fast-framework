@@ -86,6 +86,7 @@ export const appInitDefault = {
   checkTicketValidityAliasName: 'checkTicketValidityApiData',
   signInSilentAliasName: 'signInSilentApiData',
   metaDataAliasName: 'metaDataApiData',
+  metaDataApi: '',
   mapKey: '',
   defaultLatitude: '',
   defaultLongitude: '',

@@ -11,10 +11,10 @@ import {
 } from 'easy-soft-utility';
 
 import { getVerifySignInResult } from '../utils/common';
-import { getSettingsAgency } from '../utils/defaultSettingsSpecial';
+import { getWeatherApi } from '../utils/settingsAssist';
 
 export async function getWeatherData(parameters) {
-  const weatherApi = getSettingsAgency().getWeatherApi();
+  const weatherApi = getWeatherApi();
 
   if (checkStringIsNullOrWhiteSpace(weatherApi)) {
     throw new Error('weatherApi is null, please check it in app config');

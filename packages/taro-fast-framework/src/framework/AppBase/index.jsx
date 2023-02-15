@@ -26,10 +26,10 @@ import {
 import { buildSchedulingControl } from '../../models/schedulingControl';
 import { removeAdministrativeDivisionFullDataCache } from '../../utils/administrativeDivisionFullDataCacheAssist';
 import { configEnvironment } from '../../utils/configAssist';
-import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import { setLaunchOption } from '../../utils/launchOptionAssist';
 import { removeSelectedAddressData } from '../../utils/selectedAddressDataAssist';
 import { removeSessionRefreshing } from '../../utils/sessionRefreshingAssist';
+import { getWebRootFontSize } from '../../utils/settingsAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 
@@ -42,7 +42,7 @@ function setMainFontSize() {
     return;
   }
 
-  const webRootFontSize = getSettingsAgency().getWebRootFontSize();
+  const webRootFontSize = getWebRootFontSize();
 
   if (checkStringIsNullOrWhiteSpace(webRootFontSize)) {
     return;

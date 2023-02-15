@@ -1,6 +1,6 @@
 import { request, requestMode } from 'easy-soft-utility';
 
-import { getSettingsAgency } from 'taro-fast-framework';
+import { getEmptyLogo } from 'taro-fast-framework';
 
 function buildAbundantArticle() {
   return {
@@ -31,15 +31,15 @@ function buildAbundantArticle() {
     key: '1430367617461391360',
     renderTypeNote: '媒体渲染',
     statusNote: '已下线',
-    image: getSettingsAgency().getEmptyLogo(),
+    image: getEmptyLogo(),
     video: 'http://file.1010101.cc/1053686316.mp4',
     audio: 'http://file.1010101.cc/1057052295.mpeg',
     imageList: [
-      getSettingsAgency().getEmptyLogo(),
-      getSettingsAgency().getEmptyLogo(),
-      getSettingsAgency().getEmptyLogo(),
-      getSettingsAgency().getEmptyLogo(),
-      getSettingsAgency().getEmptyLogo(),
+      getEmptyLogo(),
+      getEmptyLogo(),
+      getEmptyLogo(),
+      getEmptyLogo(),
+      getEmptyLogo(),
     ],
     imageFileList: imageFileList,
     mediaItemList: [
@@ -136,11 +136,8 @@ function buildSimpleArticle() {
     key: '',
     renderTypeNote: '媒体渲染',
     statusNote: '已下线',
-    image: getSettingsAgency().getEmptyLogo(),
-    imageList: [
-      getSettingsAgency().getEmptyLogo(),
-      getSettingsAgency().getEmptyLogo(),
-    ],
+    image: getEmptyLogo(),
+    imageList: [getEmptyLogo(), getEmptyLogo()],
     imageFileList: imageFileList,
     mediaItemList: [],
   };

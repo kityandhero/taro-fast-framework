@@ -12,9 +12,9 @@ import {
 
 import { setEasySoftUtilityHandler } from 'taro-fast-common';
 
-import { getSettingsAgency } from './defaultSettingsSpecial';
 import { modulePackageName } from './definition';
 import { Request as remoteRequest } from './request';
+import { getApiSuccessCode, getApiVersion } from './settingsAssist';
 
 let configEnvironmentComplete = false;
 
@@ -30,9 +30,9 @@ export function configEnvironment(externalConfigs) {
 
   setEasySoftUtilityHandler(externalConfigs);
 
-  setStateDefaultCode(getSettingsAgency().getApiSuccessCode());
+  setStateDefaultCode(getApiSuccessCode());
 
-  setUrlGlobalPrefix(getSettingsAgency().getApiVersion());
+  setUrlGlobalPrefix(getApiVersion());
 
   setRequestHandler(remoteRequest.Execute);
 

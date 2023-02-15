@@ -1,4 +1,10 @@
-import { getSettingsAgency, getVerifySignInResult } from 'taro-fast-framework';
+import {
+  getCheckTicketValidityAliasName,
+  getMetaDataAliasName,
+  getRefreshSessionAliasName,
+  getSignInSilentAliasName,
+  getVerifySignInResult,
+} from 'taro-fast-framework';
 
 import {
   clearLocalDataWhenSimulationModeChanged,
@@ -41,7 +47,7 @@ class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'session/refreshSession',
       payload: data,
-      alias: getSettingsAgency().getRefreshSessionAliasName(),
+      alias: getRefreshSessionAliasName(),
     });
   };
 
@@ -49,7 +55,7 @@ class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'global/getMetaData',
       payload: data,
-      alias: getSettingsAgency().getMetaDataAliasName(),
+      alias: getMetaDataAliasName(),
     });
   };
 
@@ -57,7 +63,7 @@ class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'entrance/checkTicketValidity',
       payload: data,
-      alias: getSettingsAgency().getCheckTicketValidityAliasName(),
+      alias: getCheckTicketValidityAliasName(),
     });
   };
 
@@ -65,7 +71,7 @@ class PageWrapperRemote extends PageWrapperCore {
     return this.dispatchApi({
       type: 'entrance/signInSilent',
       payload: data,
-      alias: getSettingsAgency().getSignInSilentAliasName(),
+      alias: getSignInSilentAliasName(),
     });
   };
 

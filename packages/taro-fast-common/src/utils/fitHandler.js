@@ -33,7 +33,6 @@ export function setEasySoftUtilityHandler(...externalConfigs) {
 
   setApplicationInitialConfig({
     ...appInitDefault,
-
     showLogInConsole: checkWhetherDevelopmentEnvironment(),
   });
 

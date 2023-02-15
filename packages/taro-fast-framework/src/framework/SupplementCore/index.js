@@ -49,7 +49,6 @@ import {
   removeCurrentCustomer,
   setCurrentCustomer,
 } from '../../utils/currentCustomerAssist';
-import { getSettingsAgency } from '../../utils/defaultSettingsSpecial';
 import {
   getEffectiveCode,
   setEffectiveCode,
@@ -75,6 +74,21 @@ import {
   getSessionRefreshing,
   setSessionRefreshing,
 } from '../../utils/sessionRefreshingAssist';
+import {
+  getCheckTicketValidityAliasName,
+  getDefaultLatitude,
+  getDefaultLongitude,
+  getDefaultMetaData,
+  getMetaDataAliasName,
+  getNavigationToSignInWhenSignInSilentFail,
+  getRefreshSessionAliasName,
+  getSignInPath,
+  getSignInSilentAliasName,
+  getSimulationLocation,
+  getSimulationLocationData,
+  getTokenAnonymous,
+  getUseLocation,
+} from '../../utils/settingsAssist';
 import { Common } from '../Common';
 
 /**
@@ -191,7 +205,7 @@ class SupplementCore extends Common {
         `this.needReLocationWhenRepeatedShow is ${this.needReLocationWhenRepeatedShow} in doShowTask`,
       );
 
-      const useLocation = getSettingsAgency().getUseLocation();
+      const useLocation = getUseLocation();
       const locationMode = getLocationMode();
 
       if (
@@ -276,8 +290,8 @@ class SupplementCore extends Common {
       }
     }
 
-    const simulationMode = getSettingsAgency().getSimulationLocation();
-    const simulationData = getSettingsAgency().getSimulationLocationData();
+    const simulationMode = getSimulationLocation();
+    const simulationData = getSimulationLocationData();
 
     if (simulationMode) {
       logDebug('simulation location in config is true');
@@ -350,8 +364,8 @@ class SupplementCore extends Common {
 
           setLocation(l);
 
-          const defaultLongitude = getSettingsAgency().getDefaultLongitude();
-          const defaultLatitude = getSettingsAgency().getDefaultLatitude();
+          const defaultLongitude = getDefaultLongitude();
+          const defaultLatitude = getDefaultLatitude();
           const { latitude, longitude } = l;
 
           that.reverseGeocoder({
@@ -643,7 +657,7 @@ class SupplementCore extends Common {
       }
     }
 
-    const useLocation = getSettingsAgency().getUseLocation();
+    const useLocation = getUseLocation();
     const locationMode = getLocationMode();
     const signInResult = this.getSignInResult();
     const verifySignInResult = getVerifySignInResult();
@@ -769,7 +783,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/checkTicketValidity',
       payload: data,
-      alias: getSettingsAgency().getCheckTicketValidityAliasName(),
+      alias: getCheckTicketValidityAliasName(),
     });
   };
 
@@ -861,7 +875,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/refreshSession',
       payload: data,
-      alias: getSettingsAgency().getRefreshSessionAliasName(),
+      alias: getRefreshSessionAliasName(),
     });
   };
 
@@ -1002,7 +1016,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    const useLocation = getSettingsAgency().getUseLocation();
+    const useLocation = getUseLocation();
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
@@ -1139,7 +1153,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    const useLocation = getSettingsAgency().getUseLocation();
+    const useLocation = getUseLocation();
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
@@ -1283,7 +1297,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/signInSilent',
       payload: data,
-      alias: getSettingsAgency().getSignInSilentAliasName(),
+      alias: getSignInSilentAliasName(),
     });
   };
 
@@ -1825,7 +1839,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnSignIn token must be string');
     }
 
-    setToken(token || getSettingsAgency().getTokenAnonymous());
+    setToken(token || getTokenAnonymous());
   };
 
   /**
@@ -1839,7 +1853,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnSignInSilent token must be string');
     }
 
-    setToken(token || getSettingsAgency().getTokenAnonymous());
+    setToken(token || getTokenAnonymous());
   };
 
   parseOpenIdFromSignInApiData = (remoteData) => {
@@ -1953,8 +1967,8 @@ class SupplementCore extends Common {
 
     this.doWhenSignInSilentFail();
 
-    if (getSettingsAgency().getNavigationToSignInWhenSignInSilentFail()) {
-      const signInPath = getSettingsAgency().getSignInPath();
+    if (getNavigationToSignInWhenSignInSilentFail()) {
+      const signInPath = getSignInPath();
 
       if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
@@ -2619,7 +2633,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnRegister token must be string');
     }
 
-    setToken(token || getSettingsAgency().getTokenAnonymous());
+    setToken(token || getTokenAnonymous());
   };
 
   setTokenOnRegisterWithWeChat = ({ token }) => {
@@ -2629,7 +2643,7 @@ class SupplementCore extends Common {
       throw new Error('setTokenOnRegisterWithWeChat token must be string');
     }
 
-    setToken(token || getSettingsAgency().getTokenAnonymous());
+    setToken(token || getTokenAnonymous());
   };
 
   parseOpenIdFromRegisterApiData = (remoteData) => {
@@ -2722,7 +2736,7 @@ class SupplementCore extends Common {
     return this.dispatchApi({
       type: 'schedulingControl/getMetaData',
       payload: data,
-      alias: getSettingsAgency().getMetaDataAliasName(),
+      alias: getMetaDataAliasName(),
     });
   };
 
@@ -2786,7 +2800,7 @@ class SupplementCore extends Common {
 
   getMetaData = () => {
     return {
-      ...getSettingsAgency().getDefaultMetaData(),
+      ...getDefaultMetaData(),
       ...getLocalMetaData(),
     };
   };

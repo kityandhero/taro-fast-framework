@@ -18,10 +18,15 @@ import {
 
 import { corsTarget, Tips } from 'taro-fast-common';
 
-import { getSettingsAgency } from './defaultSettingsSpecial';
 import { getLocationMode } from './locationAssist';
 import { getOpenId } from './openIdAssist';
 import { getSession } from './sessionAssist';
+import {
+  getAuthenticationFailCode,
+  getShowRequestInfo,
+  getSignInPath,
+  getTokenAnonymous,
+} from './settingsAssist';
 
 const Request = {
   /**
@@ -48,8 +53,8 @@ const Request = {
 
     const { code } = response.data;
 
-    if (code === getSettingsAgency().getAuthenticationFailCode()) {
-      const signInPath = getSettingsAgency().getSignInPath();
+    if (code === getAuthenticationFailCode()) {
+      const signInPath = getSignInPath();
 
       if (checkStringIsNullOrWhiteSpace(signInPath)) {
         throw new Error('缺少登录页面路径配置');
@@ -69,7 +74,7 @@ const Request = {
    */
   Execute({ url, data, header = {}, option, method = requestMethod.post }) {
     try {
-      const token = getToken() || getSettingsAgency().getTokenAnonymous();
+      const token = getToken() || getTokenAnonymous();
       const openId = getOpenId();
       const sessionId = getSession();
       const locationMode = getLocationMode();
@@ -110,7 +115,7 @@ const Request = {
         }
       }
 
-      const showRequestInfo = getSettingsAgency().getShowRequestInfo();
+      const showRequestInfo = getShowRequestInfo();
 
       if (showRequestInfo) {
         trySendNearestLocalhostNotify({ text: corsUrl });
