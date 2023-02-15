@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-component",
-  "version": "2.15.9",
+  "version": "2.15.10",
   "private": false,
   "description": "taro-fast-component",
   "keywords": [
@@ -76,7 +76,7 @@
     "easy-soft-utility": "^2.4.45",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "taro-fast-common": "^1.18.9"
+    "taro-fast-common": "^1.18.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
