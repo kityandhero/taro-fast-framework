@@ -12,6 +12,8 @@ const developPackageList = [
   '@rollup/plugin-replace',
   '@rollup/plugin-url',
   '@svgr/rollup',
+  'autoprefixer',
+  'cssnano',
   'rollup',
   'rollup-plugin-copy',
   'rollup-plugin-livereload',
@@ -21,13 +23,28 @@ const developPackageList = [
   'rollup-plugin-typescript2',
 ];
 
-const childrenSpecialDevelopPackageList = {
-  'taro-fast-common': developPackageList,
-  'taro-fast-component': developPackageList,
-  'taro-fast-component-extra': developPackageList,
-  'taro-fast-component-prism': developPackageList,
-  'taro-fast-framework': developPackageList,
-};
+const childrenSpecialDevelopPackageList = [
+  {
+    name: 'taro-fast-common',
+    packages: developPackageList,
+  },
+  {
+    name: 'taro-fast-component',
+    packages: developPackageList,
+  },
+  {
+    name: 'taro-fast-component-extra',
+    packages: developPackageList,
+  },
+  {
+    name: 'taro-fast-component-prism',
+    packages: developPackageList,
+  },
+  {
+    name: 'taro-fast-framework',
+    packages: developPackageList,
+  },
+];
 
 module.exports = {
   childrenSpecialDevelopPackageList,
