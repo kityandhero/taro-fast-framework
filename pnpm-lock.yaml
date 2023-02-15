@@ -32,7 +32,7 @@ importers:
       conventional-changelog-conventionalcommits: ^5.0.0
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -98,7 +98,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cssnano: 5.1.14_postcss@8.4.21
       dayjs: 1.11.7
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -191,7 +191,7 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       easy-soft-dva: ^3.6.65
       easy-soft-utility: ^2.4.45
       eslint: ^8.34.0
@@ -307,7 +307,7 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -411,7 +411,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       easy-soft-utility: ^2.4.45
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
@@ -526,7 +526,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -630,7 +630,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       easy-soft-utility: ^2.4.45
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
@@ -741,7 +741,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -845,7 +845,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       easy-soft-utility: ^2.4.45
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
@@ -958,7 +958,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -1064,7 +1064,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       easy-soft-utility: ^2.4.45
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
@@ -1181,7 +1181,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -1288,7 +1288,7 @@ importers:
       cross-env: ^7.0.3
       cssnano: ^5.1.14
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.123
+      easy-soft-develop: ^2.0.125
       easy-soft-dva: ^3.6.65
       easy-soft-utility: ^2.4.45
       eslint: ^8.34.0
@@ -1408,7 +1408,7 @@ importers:
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
       cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.123
+      easy-soft-develop: 2.0.125
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -10216,8 +10216,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /easy-soft-develop/2.0.123:
-    resolution: {integrity: sha512-BhSfcLp3uMgWhAHaDWDpKRnPe67BvlACgQTFdjslibouN23KAV7ZFfMpXxXlx2aLlQYqX9DyxFtH8ndUnqWGLw==}
+  /easy-soft-develop/2.0.125:
+    resolution: {integrity: sha512-UmuE5lO0xkeU9VdS8cU6yqV2qZtJqNpzGfY+unkR1jxgOt16MetN/RVIpR/sGgC/TQHj8iohh/RVM2hjmksKeg==}
     hasBin: true
     dependencies:
       commander: 10.0.0
