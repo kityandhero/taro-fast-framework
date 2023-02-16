@@ -30,7 +30,7 @@ importers:
       autoprefixer: ^10.4.13
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
-      cssnano: ^5.1.14
+      cssnano: ^5.1.15
       dayjs: ^1.11.7
       easy-soft-develop: ^2.0.133
       eslint: ^8.34.0
@@ -96,7 +96,7 @@ importers:
       autoprefixer: 10.4.13_postcss@8.4.21
       commitizen: 4.3.0
       conventional-changelog-conventionalcommits: 5.0.0
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       dayjs: 1.11.7
       easy-soft-develop: 2.0.133
       eslint: 8.34.0
@@ -377,7 +377,7 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      cssnano: ^5.1.14
+      cssnano: ^5.1.15
       dayjs: ^1.11.7
       easy-soft-develop: ^2.0.133
       easy-soft-utility: ^2.4.45
@@ -493,7 +493,7 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       easy-soft-develop: 2.0.133
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
@@ -596,7 +596,7 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      cssnano: ^5.1.14
+      cssnano: ^5.1.15
       dayjs: ^1.11.7
       easy-soft-develop: ^2.0.133
       easy-soft-utility: ^2.4.45
@@ -708,7 +708,7 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       easy-soft-develop: 2.0.133
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
@@ -811,7 +811,7 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      cssnano: ^5.1.14
+      cssnano: ^5.1.15
       dayjs: ^1.11.7
       easy-soft-develop: ^2.0.133
       easy-soft-utility: ^2.4.45
@@ -925,7 +925,7 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       easy-soft-develop: 2.0.133
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
@@ -1030,7 +1030,7 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      cssnano: ^5.1.14
+      cssnano: ^5.1.15
       dayjs: ^1.11.7
       easy-soft-develop: ^2.0.133
       easy-soft-utility: ^2.4.45
@@ -1148,7 +1148,7 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       easy-soft-develop: 2.0.133
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
@@ -1254,11 +1254,11 @@ importers:
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
       cross-env: ^7.0.3
-      cssnano: ^5.1.14
+      cssnano: ^5.1.15
       dayjs: ^1.11.7
-      easy-soft-develop: ^2.0.133
-      easy-soft-dva: ^3.6.65
-      easy-soft-utility: ^2.4.45
+      easy-soft-develop: ^2.0.136
+      easy-soft-dva: ^3.6.69
+      easy-soft-utility: ^2.4.49
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -1321,8 +1321,8 @@ importers:
       '@tarojs/taro': 3.6.1_@types+react@18.0.28
       '@tarojs/taro-h5': 3.6.1_@types+react@18.0.28
       dayjs: 1.11.7
-      easy-soft-dva: 3.6.65_s372u7p65oq7za7vcs4kbbft3q
-      easy-soft-utility: 2.4.45
+      easy-soft-dva: 3.6.69_s372u7p65oq7za7vcs4kbbft3q
+      easy-soft-utility: 2.4.49
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_s372u7p65oq7za7vcs4kbbft3q
@@ -1375,8 +1375,8 @@ importers:
       commitizen: 4.3.0_@swc+core@1.3.25
       conventional-changelog-conventionalcommits: 5.0.0
       cross-env: 7.0.3
-      cssnano: 5.1.14_postcss@8.4.21
-      easy-soft-develop: 2.0.133
+      cssnano: 5.1.15_postcss@8.4.21
+      easy-soft-develop: 2.0.136
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-config-airbnb-typescript: 17.0.0_h3dulgfgfusekiekwlmue7kjri
@@ -9240,7 +9240,7 @@ packages:
         optional: true
     dependencies:
       '@parcel/css': 1.14.0
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       csso: 5.0.5
       esbuild: 0.14.54
       jest-worker: 27.5.1
@@ -9321,8 +9321,8 @@ packages:
     hasBin: true
     dev: true
 
-  /cssnano-preset-default/5.2.13_postcss@8.4.21:
-    resolution: {integrity: sha512-PX7sQ4Pb+UtOWuz8A1d+Rbi+WimBIxJTRyBdgGp1J75VU0r/HFQeLnMYgHiCAp6AR4rqrc7Y4R+1Rjk3KJz6DQ==}
+  /cssnano-preset-default/5.2.14_postcss@8.4.21:
+    resolution: {integrity: sha512-t0SFesj/ZV2OTylqQVOrFgEh5uanxbO6ZAdeCrNsUQ6fVuXwYTxJPNAGvGTxHbD68ldIJNec7PyYZDBrfDQ+6A==}
     engines: {node: ^10 || ^12 || >=14.0}
     peerDependencies:
       postcss: ^8.2.15
@@ -9331,14 +9331,14 @@ packages:
       cssnano-utils: 3.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-calc: 8.2.4_postcss@8.4.21
-      postcss-colormin: 5.3.0_postcss@8.4.21
+      postcss-colormin: 5.3.1_postcss@8.4.21
       postcss-convert-values: 5.1.3_postcss@8.4.21
       postcss-discard-comments: 5.1.2_postcss@8.4.21
       postcss-discard-duplicates: 5.1.0_postcss@8.4.21
       postcss-discard-empty: 5.1.1_postcss@8.4.21
       postcss-discard-overridden: 5.1.0_postcss@8.4.21
       postcss-merge-longhand: 5.1.7_postcss@8.4.21
-      postcss-merge-rules: 5.1.3_postcss@8.4.21
+      postcss-merge-rules: 5.1.4_postcss@8.4.21
       postcss-minify-font-values: 5.1.0_postcss@8.4.21
       postcss-minify-gradients: 5.1.1_postcss@8.4.21
       postcss-minify-params: 5.1.4_postcss@8.4.21
@@ -9353,7 +9353,7 @@ packages:
       postcss-normalize-url: 5.1.0_postcss@8.4.21
       postcss-normalize-whitespace: 5.1.1_postcss@8.4.21
       postcss-ordered-values: 5.1.3_postcss@8.4.21
-      postcss-reduce-initial: 5.1.1_postcss@8.4.21
+      postcss-reduce-initial: 5.1.2_postcss@8.4.21
       postcss-reduce-transforms: 5.1.0_postcss@8.4.21
       postcss-svgo: 5.1.0_postcss@8.4.21
       postcss-unique-selectors: 5.1.1_postcss@8.4.21
@@ -9368,13 +9368,13 @@ packages:
       postcss: 8.4.21
     dev: true
 
-  /cssnano/5.1.14_postcss@8.4.21:
-    resolution: {integrity: sha512-Oou7ihiTocbKqi0J1bB+TRJIQX5RMR3JghA8hcWSw9mjBLQ5Y3RWqEDoYG3sRNlAbCIXpqMoZGbq5KDR3vdzgw==}
+  /cssnano/5.1.15_postcss@8.4.21:
+    resolution: {integrity: sha512-j+BKgDcLDQA+eDifLx0EO4XSA56b7uut3BQFH+wbSaSTuGLuiyTa/wbRYthUXX8LC9mLg+WWKe8h+qJuwTAbHw==}
     engines: {node: ^10 || ^12 || >=14.0}
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      cssnano-preset-default: 5.2.13_postcss@8.4.21
+      cssnano-preset-default: 5.2.14_postcss@8.4.21
       lilconfig: 2.0.6
       postcss: 8.4.21
       yaml: 1.10.2
@@ -10199,6 +10199,21 @@ packages:
       terminal-kit: 3.0.0
     dev: true
 
+  /easy-soft-develop/2.0.136:
+    resolution: {integrity: sha512-i9RqeoeE6lh3xVijLOhPNfj2MYpuICPz3J5395T/kvVVBUzoo4i9NiM5HhotnEtEFUESo6Y+hL4cYZL6lgrVug==}
+    hasBin: true
+    dependencies:
+      commander: 10.0.0
+      download: 8.0.0
+      download-git-repo: 3.0.2
+      fs-extra: 11.1.0
+      hpagent: 1.2.0
+      ping: 0.4.2
+      rimraf: 4.1.2
+      shelljs: 0.8.5
+      terminal-kit: 3.0.0
+    dev: true
+
   /easy-soft-dva/3.6.65_s372u7p65oq7za7vcs4kbbft3q:
     resolution: {integrity: sha512-L6+YhAVQ+qZj1JpbKT0RB7ZnlWVMwUV5tFOQc+c2t89z9+h8p7FZ3DnHeJH+lrmIxCaWQZaNGmCYULNetIbkew==}
     peerDependencies:
@@ -10223,8 +10238,44 @@ packages:
       - react-native
     dev: false
 
+  /easy-soft-dva/3.6.69_s372u7p65oq7za7vcs4kbbft3q:
+    resolution: {integrity: sha512-o6zZTvhZkenCS5ndCwnxWWiQpHzISoYZUIU3PpHuGJQn98gik5LrT8nifi079NS6BuLZ/6Xuou+ZqzB5cW9wKg==}
+    peerDependencies:
+      redux: 4.x
+    dependencies:
+      '@babel/runtime': 7.20.13
+      '@reduxjs/toolkit': 1.9.2_k4ae6lp43ej6mezo3ztvx6pykq
+      easy-soft-utility: 2.4.49
+      flatten: 1.0.3
+      global: 4.4.0
+      invariant: 2.2.4
+      is-plain-object: 5.0.0
+      react-redux: 8.0.5_s372u7p65oq7za7vcs4kbbft3q
+      redux: 4.2.1
+      redux-saga: 1.2.2
+      warning: 4.0.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react
+      - react-dom
+      - react-native
+    dev: false
+
   /easy-soft-utility/2.4.45:
     resolution: {integrity: sha512-m76wiOaYxISFBZzYOmHrTsEJaJsZP5auNtqNM26cMx5y1AGsndxIMW1i/Kf2v1T4mwm7QenmRG7t55SjApgAhA==}
+    dependencies:
+      dayjs: 1.11.7
+      js-base64: 3.7.5
+      lodash: 4.17.21
+      node-cache: 5.1.2
+      object-hash: 3.0.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /easy-soft-utility/2.4.49:
+    resolution: {integrity: sha512-STmrvhvN1jhw8skz+cJEozD3XzN2w6YaWq25F0VSMFYdX3yTMJxq13dbhKL+e5EeL4ZDw59IddYI2DcEsQ+aBA==}
     dependencies:
       dayjs: 1.11.7
       js-base64: 3.7.5
@@ -15040,7 +15091,7 @@ packages:
     dev: true
 
   /lodash.memoize/4.1.2:
-    resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
+    resolution: {integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=}
     dev: true
 
   /lodash.merge/4.6.2:
@@ -17328,8 +17379,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-colormin/5.3.0_postcss@8.4.21:
-    resolution: {integrity: sha512-WdDO4gOFG2Z8n4P8TWBpshnL3JpmNmJwdnfP2gbk2qBA8PWwOYcmjmI/t3CmMeL72a7Hkd+x/Mg9O2/0rD54Pg==}
+  /postcss-colormin/5.3.1_postcss@8.4.21:
+    resolution: {integrity: sha512-UsWQG0AqTFQmpBegeLLc1+c3jIqBNB0zlDGRWR+dQ3pRKJL1oeMzyqmH3o2PIfn9MBdNrVPWhDbT769LxCTLJQ==}
     engines: {node: ^10 || ^12 || >=14.0}
     peerDependencies:
       postcss: ^8.2.15
@@ -17506,8 +17557,8 @@ packages:
       stylehacks: 5.1.1_postcss@8.4.21
     dev: true
 
-  /postcss-merge-rules/5.1.3_postcss@8.4.21:
-    resolution: {integrity: sha512-LbLd7uFC00vpOuMvyZop8+vvhnfRGpp2S+IMQKeuOZZapPRY4SMq5ErjQeHbHsjCUgJkRNrlU+LmxsKIqPKQlA==}
+  /postcss-merge-rules/5.1.4_postcss@8.4.21:
+    resolution: {integrity: sha512-0R2IuYpgU93y9lhVbO/OylTtKMVcHb67zjWIfCiKR9rWL3GUk1677LAqD/BcHizukdZEjT8Ru3oHRoAYoJy44g==}
     engines: {node: ^10 || ^12 || >=14.0}
     peerDependencies:
       postcss: ^8.2.15
@@ -17746,8 +17797,8 @@ packages:
       postcss: 8.4.21
     dev: true
 
-  /postcss-reduce-initial/5.1.1_postcss@8.4.21:
-    resolution: {integrity: sha512-//jeDqWcHPuXGZLoolFrUXBDyuEGbr9S2rMo19bkTIjBQ4PqkaO+oI8wua5BOUxpfi97i3PCoInsiFIEBfkm9w==}
+  /postcss-reduce-initial/5.1.2_postcss@8.4.21:
+    resolution: {integrity: sha512-dE/y2XRaqAi6OvjzD22pjTUQ8eOfc6m/natGHgKFBK9DxFmIm69YmaRVQrGgFlEfc1HePIurY0TmDeROK05rIg==}
     engines: {node: ^10 || ^12 || >=14.0}
     peerDependencies:
       postcss: ^8.2.15
@@ -19061,7 +19112,7 @@ packages:
     dependencies:
       chalk: 4.1.2
       concat-with-sourcemaps: 1.1.0
-      cssnano: 5.1.14_postcss@8.4.21
+      cssnano: 5.1.15_postcss@8.4.21
       import-cwd: 3.0.0
       p-queue: 6.6.2
       pify: 5.0.0
