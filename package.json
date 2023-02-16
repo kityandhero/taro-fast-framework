@@ -9,8 +9,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build:all": "npm run build:core-common-compression && npm run build:core-component-compression && npm run build:core-component-extra-compression && npm run build:core-component-prism-compression && npm run build:core-framework-compression",
-    "build:all-compression-skip": "npm run build:core-common-compression-skip && npm run build:core-component-compression-skip && npm run build:core-component-extra-compression-skip && npm run build:core-component-prism-compression-skip && npm run build:core-framework-compression-skip",
+    "build:core-all-compression": "npm run build:core-common-compression && npm run build:core-component-compression && npm run build:core-component-extra-compression && npm run build:core-component-prism-compression && npm run build:core-framework-compression",
+    "build:core-all-compression-skip": "npm run build:core-common-compression-skip && npm run build:core-component-compression-skip && npm run build:core-component-extra-compression-skip && npm run build:core-component-prism-compression-skip && npm run build:core-framework-compression-skip",
     "build:core-common-compression": "cd packages/taro-fast-common && npm run build:rollup",
     "build:core-common-compression-skip": "cd packages/taro-fast-common && npm run build:rollup:skipCompression",
     "build:core-component-compression": "cd packages/taro-fast-component && npm run build:rollup",
