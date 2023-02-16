@@ -25,7 +25,7 @@ import { setLocationMode } from '../utils/locationAssist';
 import { getSignInUnknownFlag } from '../utils/settingsAssist';
 import { getWeather, setWeather } from '../utils/weatherAssist';
 
-export function buildSchedulingControl() {
+export function buildSchedulingControlModel() {
   return {
     namespace: 'schedulingControl',
 

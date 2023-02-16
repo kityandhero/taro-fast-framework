@@ -23,7 +23,7 @@ import {
   setTaroGlobalData,
 } from 'taro-fast-common';
 
-import { buildSchedulingControl } from '../../models/schedulingControl';
+import { buildSchedulingControlModel } from '../../models/schedulingControl';
 import { removeAdministrativeDivisionFullDataCache } from '../../utils/administrativeDivisionFullDataCacheAssist';
 import { configEnvironment } from '../../utils/configAssist';
 import { setLaunchOption } from '../../utils/launchOptionAssist';
@@ -59,7 +59,7 @@ function setMainFontSize() {
   }
 }
 
-appendEmbedBuilder(buildSchedulingControl);
+appendEmbedBuilder(buildSchedulingControlModel);
 
 let models = [];
 let initApplicationComplete = false;
