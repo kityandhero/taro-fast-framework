@@ -1,10 +1,10 @@
 import {
   getTacitlyState,
+  pretreatmentRemoteListData,
   reducerCollection,
   reducerDefaultParameters,
   reducerNameCollection,
-} from 'easy-soft-dva';
-import { pretreatmentRemoteListData } from 'easy-soft-utility';
+} from 'easy-soft-utility';
 
 import { singeListData } from '../services/administrativeDivision';
 
