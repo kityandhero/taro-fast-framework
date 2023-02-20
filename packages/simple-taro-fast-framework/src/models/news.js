@@ -1,10 +1,10 @@
 import {
   getTacitlyState,
+  pretreatmentRemoteSingleData,
   reducerCollection,
   reducerDefaultParameters,
   reducerNameCollection,
-} from 'easy-soft-dva';
-import { pretreatmentRemoteSingleData } from 'easy-soft-utility';
+} from 'easy-soft-utility';
 
 import { getOverviewData } from '../services/news';
 

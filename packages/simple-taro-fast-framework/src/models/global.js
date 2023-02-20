@@ -1,12 +1,10 @@
 import {
   getTacitlyState,
+  modelGlobalCollection,
+  pretreatmentRemoteSingleData,
   reducerCollection,
   reducerDefaultParameters,
   reducerNameCollection,
-} from 'easy-soft-dva';
-import {
-  modelGlobalCollection,
-  pretreatmentRemoteSingleData,
 } from 'easy-soft-utility';
 
 import { exchangeShareData, getData } from '../services/global';

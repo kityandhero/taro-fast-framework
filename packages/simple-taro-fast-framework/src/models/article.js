@@ -1,12 +1,10 @@
 import {
   getTacitlyState,
+  pretreatmentRemotePageListData,
+  pretreatmentRemoteSingleData,
   reducerCollection,
   reducerDefaultParameters,
   reducerNameCollection,
-} from 'easy-soft-dva';
-import {
-  pretreatmentRemotePageListData,
-  pretreatmentRemoteSingleData,
 } from 'easy-soft-utility';
 
 import { getData, pageListData } from '../services/article';
