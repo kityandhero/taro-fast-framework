@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.13](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.16.12...simple-taro-fast-framework@1.16.13) (2023-02-20)
+
+### Bug Fixes
+
+- **simple-taro-fast-framework:** update ([9f8036b](https://github.com/kityandhero/taro-fast-framework/commit/9f8036b35a8b3c8aa3d56da048e216949d6a670c))
+- **simple-taro-fast-framework:** update ([6d6a09f](https://github.com/kityandhero/taro-fast-framework/commit/6d6a09f9451bbc2771e00dab47f787ca94476a18))
+
 ## [1.16.12](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.16.11...simple-taro-fast-framework@1.16.12) (2023-02-16)
 
 **Note:** Version bump only for package simple-taro-fast-framework
