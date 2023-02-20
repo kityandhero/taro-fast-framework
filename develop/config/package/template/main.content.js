@@ -24,12 +24,9 @@ const toolsScript = {
 const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'prez:publish-npm-all': 'npm run z:change:npm:registry:npm',
-  'z:publish-npm-all': 'npm run z:publish:npm-all',
-  'postz:publish-npm-all': 'npm run z:change:npm:registry:local',
   'prez:publish:lerna': 'npm run z:change:npm:registry:npm',
   'z:publish:lerna': 'lerna updated && npm run z:lerna:publish',
-  'postz:publish:lerna': 'npm run z:change:npm:registry:local && npm run z:publish-npm-all',
+  'postz:publish:lerna': 'npm run z:change:npm:registry:local && npm run z:publish:npm-all',
   'prez:publish:build': 'npm run z:install && npm run cz && npm run z:build:all',
   'z:publish:build': 'npm run z:publish:lerna',
 };

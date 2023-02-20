@@ -6,7 +6,6 @@ import {
   logConfig,
   logDebug,
   setRequestHandler,
-  setStateDefaultCode,
   setUrlGlobalPrefix,
 } from 'easy-soft-utility';
 
@@ -14,7 +13,7 @@ import { setEasySoftUtilityHandler } from 'taro-fast-common';
 
 import { modulePackageName } from './definition';
 import { Request as remoteRequest } from './request';
-import { getApiSuccessCode, getApiVersion } from './settingsAssist';
+import { getApiVersion } from './settingsAssist';
 
 let configEnvironmentComplete = false;
 
@@ -29,8 +28,6 @@ export function configEnvironment(externalConfigs) {
   }
 
   setEasySoftUtilityHandler(externalConfigs);
-
-  setStateDefaultCode(getApiSuccessCode());
 
   setUrlGlobalPrefix(getApiVersion());
 
