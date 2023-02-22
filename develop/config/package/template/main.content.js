@@ -4,6 +4,7 @@
 
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',
+  'z:lint:staged:quiet': 'npx lint-staged --quiet',
 };
 
 const prepareScript = {
@@ -66,7 +67,7 @@ const commitScript = {
   precz: 'npm run z:commit:refresh && git stage -A',
   cz: 'cz',
   postcz: 'git push',
-  precommit: 'npm run z:lint:staged',
+  precommit: 'npm run z:lint:staged:quiet',
   "z:commit:refresh": "npx easy-soft-develop commit-refresh",
 };
 
@@ -78,8 +79,8 @@ const prettierScript = {
 };
 
 const ncuScript = {
-  'z:check:all-package-version': 'npx easy-soft-develop check-all-package-version',
-  'z:update:all-package-version': 'npx easy-soft-develop update-all-package-version',
+  'z:check:all-package-version': 'easy-soft-develop check-all-package-version',
+  'z:update:all-package-version': 'easy-soft-develop update-all-package-version',
   'postz:update:all-package-version': 'npm run z:install',
   'z:update:special-package-version': 'node ./develop/assists/package.update.special.version.js',
   'postz:update:special-package-version': 'npm run z:install',
