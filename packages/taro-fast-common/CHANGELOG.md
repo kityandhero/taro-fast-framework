@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.14](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-common@1.18.13...taro-fast-common@1.18.14) (2023-02-22)
+
+### Bug Fixes
+
+- **simple-taro-fast-framework:** update ([1b1e4bb](https://github.com/kityandhero/taro-fast-framework/commit/1b1e4bb7bcb5d7ded65912d65a868295ecfa1714))
+
 ## [1.18.13](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-common@1.18.12...taro-fast-common@1.18.13) (2023-02-20)
 
 ### Bug Fixes
