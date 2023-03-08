@@ -1,6 +1,6 @@
 {
   "name": "simple-taro-fast-framework",
-  "version": "1.16.14",
+  "version": "1.16.15",
   "private": true,
   "description": "基于Taro的开发框架基于Taro的开发框架",
   "author": "",
@@ -81,11 +81,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "taro-fast-common": "^1.18.14",
-    "taro-fast-component": "^2.15.14",
-    "taro-fast-component-extra": "^2.12.14",
-    "taro-fast-component-prism": "^2.13.14",
-    "taro-fast-framework": "^1.16.15"
+    "taro-fast-common": "^1.18.15",
+    "taro-fast-component": "^2.15.15",
+    "taro-fast-component-extra": "^2.12.15",
+    "taro-fast-component-prism": "^2.13.15",
+    "taro-fast-framework": "^1.16.16"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
