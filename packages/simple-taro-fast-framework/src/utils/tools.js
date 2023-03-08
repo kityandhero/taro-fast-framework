@@ -7,6 +7,7 @@ import {
   isObject,
   isString,
   isUndefined,
+  removeLocalMetaData,
   removeToken,
   toString,
 } from 'easy-soft-utility';
@@ -20,8 +21,6 @@ import {
 } from 'taro-fast-framework';
 
 import QQMapWX from '../libs/qqmap-wx-jssdk.min';
-
-import { removeMetaDataCache } from './storageAssist';
 
 /**
  * 获取本地数据
@@ -281,7 +280,7 @@ export default class Index extends AuthorizationWrapper {${buildProperties({
 }
 
 export function clearLocalDataWhenSimulationModeChanged() {
-  removeMetaDataCache();
+  removeLocalMetaData();
   removeSession();
   removeOpenId();
   removeToken();
