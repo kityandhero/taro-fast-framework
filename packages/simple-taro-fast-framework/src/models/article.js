@@ -24,7 +24,7 @@ export function buildArticle() {
         const dataAdjust = pretreatmentRemotePageListData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -38,7 +38,7 @@ export function buildArticle() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,

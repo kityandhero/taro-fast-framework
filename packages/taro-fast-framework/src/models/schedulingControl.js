@@ -49,7 +49,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -63,7 +63,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -77,7 +77,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -91,7 +91,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -105,7 +105,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -119,7 +119,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -133,7 +133,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteListData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -147,7 +147,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,
@@ -161,7 +161,7 @@ export function buildSchedulingControlModel() {
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 
         yield put({
-          type: reducerNameCollection.reducerData,
+          type: reducerNameCollection.reducerRemoteData,
           payload: dataAdjust,
           alias,
           ...reducerDefaultParameters,

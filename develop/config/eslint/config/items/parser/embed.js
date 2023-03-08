@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const parserOptions = {
+const parserJsOptions = {
   requireConfigFile: false,
   babelOptions: {
     presets: ['@babel/preset-react'],
@@ -13,6 +13,13 @@ const parserOptions = {
   },
 };
 
+const parserTsOptions = {
+  ecmaFeatures: {
+    jsx: true,
+  },
+};
+
 module.exports = {
-  parserOptions: { ...parserOptions },
+  parserJsOptions: { ...parserJsOptions },
+  parserTsOptions: { ...parserTsOptions },
 };

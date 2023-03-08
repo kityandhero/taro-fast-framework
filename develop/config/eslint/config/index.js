@@ -3,7 +3,7 @@
 /* eslint-disable no-useless-escape */
 
 const { rules } = require('./items/rules');
-const { parserOptions } = require('./items/parser');
+const { parserJsOptions, parserTsOptions } = require('./items/parser');
 const { pluginCollection } = require('./items/plugins');
 const { extendCollection } = require('./items/extends');
 const { settings } = require('./items/settings');
@@ -22,11 +22,16 @@ module.exports = {
       shelljs: true,
       node: true,
     },
-    plugins: [
-      ...pluginCollection,
-    ],
+    plugins: [...pluginCollection],
     parser: '@babel/eslint-parser',
-    parserOptions: parserOptions,
+    parserOptions: parserJsOptions,
+    overrides: [
+      {
+        files: ['*.ts', '*.tsx'],
+        parser: '@typescript-eslint/parser',
+        parserOptions: parserTsOptions,
+      },
+    ],
     rules: rules,
     settings: settings,
   },

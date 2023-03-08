@@ -2,9 +2,16 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const { parserOptions: embedParserOptions } = require('./embed');
-const { parserOptions: customParserOptions } = require('./custom');
+const {
+  parserJsOptions: embedParserJsOptions,
+  parserTsOptions: embedParserTsOptions,
+} = require('./embed');
+const {
+  parserJsOptions: customParserJsOptions,
+  parserTsOptions: customParserTsOptions,
+} = require('./custom');
 
 module.exports = {
-  parserOptions: { ...embedParserOptions, ...customParserOptions },
+  parserJsOptions: { ...embedParserJsOptions, ...customParserJsOptions },
+  parserTsOptions: { ...embedParserTsOptions, ...customParserTsOptions },
 };
