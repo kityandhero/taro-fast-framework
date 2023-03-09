@@ -4,29 +4,39 @@
 
 const content = `# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ignore dependencies dir
 **/node_modules
 
-# ignore dir
+# ignore distribute dir
 **/dist
 **/es
+
+# ignore temporary dir
 **/.umi
 **/.umi-production
+
+# ignore config dir
 **/.idea
 **/.history
+**/.swc
 **/.vs
 
-# ignore file
+# ignore jest dir
+**/coverage
+
+# ignore general file
 *.log
 *.d.ts
 *.bak
 
-# ignore special
+# ignore special file
 rollup.config-*.cjs
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
 .firebase
 .eslintcache
+
 `;
 
 module.exports = {

@@ -43,10 +43,15 @@ const tscScript = {
   'z:tsc:build': 'echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete',
 };
 
+const jestScript = {
+  'z:test': 'cross-env NODE_ENV=test jest',
+};
+
 module.exports = {
   ...commitScript,
   ...documentationScript,
   ...lintScript,
   ...prettierScript,
   ...tscScript,
+  ...jestScript,
 };
