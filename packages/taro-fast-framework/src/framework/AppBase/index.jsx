@@ -1,12 +1,11 @@
 import { Component } from 'react';
 
-import { getStore, Provider } from 'easy-soft-dva';
+import { ApplicationProvider, getDispatch } from 'easy-soft-dva';
 import {
   appendEmbedBuilder,
   checkStringIsNullOrWhiteSpace,
   environmentCollection,
   flushLocalStorage,
-  getModelCollection,
   isUndefined,
   logConfig,
   logInfo,
@@ -48,20 +47,15 @@ function setMainFontSize() {
     return;
   }
 
-  if (window) {
-    let document_ = window.document.documentElement;
+  if (window && window.document.documentElement) {
+    window.document.documentElement.style.fontSize = toString(webRootFontSize);
 
-    if (document_) {
-      document_.style.fontSize = toString(webRootFontSize);
-
-      logInfo(`set document font-size -> ${webRootFontSize}, it is in config.`);
-    }
+    logInfo(`set document font-size -> ${webRootFontSize}, it is in config.`);
   }
 }
 
 appendEmbedBuilder(buildSchedulingControlModel);
 
-let models = [];
 let initApplicationComplete = false;
 
 class AppBase extends Component {
@@ -77,15 +71,11 @@ class AppBase extends Component {
 
       configEnvironment(config);
 
-      models = getModelCollection();
-
       appInitCustomObject = config;
 
       removeSessionRefreshing();
       removeSelectedAddressData();
       removeAdministrativeDivisionFullDataCache();
-
-      this.initDva(models);
 
       this.initLocationMode();
     }
@@ -128,15 +118,11 @@ class AppBase extends Component {
     );
   };
 
-  initDva = () => {
-    this.store = getStore(models);
-  };
-
   initLocationMode = () => {
     const { initialLocationMode } = appInitCustomObject;
 
     if (!isUndefined(initialLocationMode)) {
-      const { dispatch } = this.store;
+      const dispatch = getDispatch();
 
       dispatch({
         type: 'schedulingControl/initialLocationMode',
@@ -187,7 +173,7 @@ class AppBase extends Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    return <Provider store={this.store}>{this.props.children}</Provider>;
+    return <ApplicationProvider>{this.props.children}</ApplicationProvider>;
   }
 }
 

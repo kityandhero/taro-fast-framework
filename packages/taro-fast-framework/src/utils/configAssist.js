@@ -1,10 +1,15 @@
 import {
+  initializeApplication,
+  setApplicationInitialOption,
+} from 'easy-soft-dva';
+import {
   buildPromptModuleInfo,
   getApplicationExternalConfigList,
   getApplicationInitialConfig,
   getApplicationMergeConfig,
   logConfig,
   logDebug,
+  logDevelop,
   setRequestHandler,
   setUrlGlobalPrefix,
 } from 'easy-soft-utility';
@@ -41,6 +46,8 @@ export function configEnvironment(externalConfigs) {
     ),
   );
 
+  logDevelop('--------------------------------------------');
+
   logConfig(getApplicationInitialConfig(), 'initialConfig');
 
   logConfig(
@@ -49,4 +56,12 @@ export function configEnvironment(externalConfigs) {
   );
 
   logConfig(getApplicationMergeConfig(), 'combinedConfig');
+
+  logDevelop('--------------------------------------------');
+
+  setApplicationInitialOption();
+
+  initializeApplication();
+
+  logDevelop('--------------------------------------------');
 }

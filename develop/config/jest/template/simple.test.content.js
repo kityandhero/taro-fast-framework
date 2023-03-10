@@ -2,8 +2,10 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const content = `test('jest simple', () => {
-  expect(true).toBe(true);
+const content = `describe('group test description', () => {
+  test('simple test will be true', () => {
+    expect(true).toBe(true);
+  });
 });
 `;
 
