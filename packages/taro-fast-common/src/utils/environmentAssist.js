@@ -8,6 +8,7 @@ import {
   environmentCollection,
   getCache,
   logColorCollection,
+  mergeTextMessage,
   setCache,
 } from 'easy-soft-utility';
 
@@ -18,8 +19,12 @@ import { modulePackageName } from './definition';
  */
 const moduleName = 'envAssist';
 
-function buildPromptModuleInfoText(text) {
-  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
 }
 
 const cacheKeyCollection = {
@@ -37,7 +42,9 @@ export function getEnvironment() {
     v = getCache({
       key: cacheKeyCollection.currentEnv,
     });
-  } catch {
+  } catch (error) {
+    console.log(error);
+
     if (checkWhetherDevelopmentEnvironment()) {
       displayTextMessage({
         text: buildPromptModuleInfoText('call cache fail with getCache'),

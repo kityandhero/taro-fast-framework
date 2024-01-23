@@ -34,10 +34,10 @@ const defaultProps = {
 };
 
 class Switch extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { checked } = props;
+    const { checked } = properties;
 
     this.state = {
       checkedFlag: checked,
@@ -46,11 +46,11 @@ class Switch extends BaseComponent {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { checked: checkedNext } = nextProps;
-    const { checkedFlag: checkedPrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { checked: checkedNext } = nextProperties;
+    const { checkedFlag: checkedPrevious } = previousState;
 
-    if (checkedNext !== checkedPrev) {
+    if (checkedNext !== checkedPrevious) {
       return {
         checkedFlag: checkedNext,
         checkedStage: checkedNext,
@@ -76,8 +76,8 @@ class Switch extends BaseComponent {
         const changeResult = onChange(v);
 
         resolve(changeResult);
-      } catch (e) {
-        reject(e);
+      } catch (error_) {
+        reject(error_);
       }
     });
   };
@@ -147,14 +147,12 @@ class Switch extends BaseComponent {
       cancelText,
       cancelColor,
     } = {
-      ...{
-        title: '状态变更',
-        content: '状态即将发生改变,确定吗?',
-        confirmText: '确定',
-        confirmColor: '',
-        cancelText: '取消',
-        cancelColor: '',
-      },
+      title: '状态变更',
+      content: '状态即将发生改变,确定吗?',
+      confirmText: '确定',
+      confirmColor: '',
+      cancelText: '取消',
+      cancelColor: '',
       ...(isObject(confirm) ? confirm : {}),
     };
 
@@ -164,17 +162,17 @@ class Switch extends BaseComponent {
       title,
       content,
       confirmText: confirmText || '确定',
-      confirmColor: !isString(confirmColor)
-        ? ''
-        : checkStringIsNullOrWhiteSpace(confirmColor)
-        ? ''
-        : confirmColor,
+      confirmColor: isString(confirmColor)
+        ? checkStringIsNullOrWhiteSpace(confirmColor)
+          ? ''
+          : confirmColor
+        : '',
       cancelText: cancelText || '取消',
-      cancelColor: !isString(cancelColor)
-        ? ''
-        : checkStringIsNullOrWhiteSpace(cancelColor)
-        ? ''
-        : cancelColor,
+      cancelColor: isString(cancelColor)
+        ? checkStringIsNullOrWhiteSpace(cancelColor)
+          ? ''
+          : cancelColor
+        : '',
       success: ({ confirm: c }) => {
         if (c) {
           that.handleChange();
@@ -202,11 +200,9 @@ class Switch extends BaseComponent {
           [`${classPrefix}-disabled`]: disabled,
         })}
         style={{
-          ...{
-            '--width': transformSize(50 * size),
-            '--height': transformSize(30 * size),
-          },
-          ...(!!color
+          '--width': transformSize(50 * size),
+          '--height': transformSize(30 * size),
+          ...(color
             ? {
                 '--checked-color': color,
               }

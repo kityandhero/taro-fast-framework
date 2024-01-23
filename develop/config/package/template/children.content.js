@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable import/no-commonjs */
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
@@ -7,29 +8,39 @@ const commitScript = {
 };
 
 const documentationScript = {
-  'prez:documentation:generate': 'npx rimraf ./docs && npm run z:documentation:lint',
-  'z:documentation:generate': 'npx documentation build src/** -f html --github -o docs',
+  'prez:documentation:generate':
+    'npx rimraf ./docs && npm run z:documentation:lint',
+  'z:documentation:generate':
+    'npx documentation build src/** -f html --github -o docs',
   'z:documentation:lint': 'npx documentation lint src/**',
 };
 
 const lintScript = {
   'z:lint:file:all': 'npm run z:lint:script:all && npm run z:lint:style:all',
-  'z:lint:file:all:fix': 'npm run z:lint:script:all:fix && npm run z:lint:style:all:fix',
-  'z:lint:file:change': 'npm run z:lint:script:change && npm run z:lint:style:all',
-  'z:lint:file:change:fix': 'npm run z:lint:script:change:fix && npm run z:lint:style:all:fix',
+  'z:lint:file:all:fix':
+    'npm run z:lint:script:all:fix && npm run z:lint:style:all:fix',
+  'z:lint:file:change':
+    'npm run z:lint:script:change && npm run z:lint:style:all',
+  'z:lint:file:change:fix':
+    'npm run z:lint:script:change:fix && npm run z:lint:style:all:fix',
   'z:lint:script:all': 'npx eslint --ext .js,.jsx,.ts,.tsx ./src',
   'z:lint:script:all:fix': 'npx eslint --fix --ext .js,.jsx,.ts,.tsx ./src',
   'postz:lint:script:all:fix': 'npm run z:prettier:format:all',
   'z:lint:script:change': 'npx eslint --cache --ext .js,.jsx,.ts,.tsx ./src',
-  'z:lint:script:change:fix': 'npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src',
+  'z:lint:script:change:fix':
+    'npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src',
   'postz:lint:script:change:fix': 'npm run z:prettier:format:change',
   'z:lint:staged': 'npx lint-staged',
   'z:lint:staged:quiet': 'npx lint-staged --quiet',
-  'z:lint:style:all': 'npx stylelint --allow-empty-input "./src/**/*.{css,scss,less}"',
-  'z:lint:style:all:fix': 'npx stylelint --allow-empty-input --fix "./src/**/*.{css,scss,less}"',
+  'z:lint:style:all':
+    'npx stylelint --allow-empty-input "./src/**/*.{css,scss,less}"',
+  'z:lint:style:all:fix':
+    'npx stylelint --allow-empty-input --fix "./src/**/*.{css,scss,less}"',
   'postz:lint:style:all:fix': 'npm run z:prettier:format:all',
-  'z:lint:style:change': 'npx stylelint --allow-empty-input --cache "./src/**/*.{css,scss,less}"',
-  'z:lint:style:change:fix': 'npx stylelint --allow-empty-input --cache --fix "./src/**/*.{css,scss,less}"',
+  'z:lint:style:change':
+    'npx stylelint --allow-empty-input --cache "./src/**/*.{css,scss,less}"',
+  'z:lint:style:change:fix':
+    'npx stylelint --allow-empty-input --cache --fix "./src/**/*.{css,scss,less}"',
   'postz:lint:style:change:fix': 'npm run z:prettier:format:change',
 };
 
@@ -40,7 +51,8 @@ const prettierScript = {
 };
 
 const tscScript = {
-  'z:tsc:build': 'echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete',
+  'z:tsc:build':
+    'echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete',
 };
 
 const jestScript = {

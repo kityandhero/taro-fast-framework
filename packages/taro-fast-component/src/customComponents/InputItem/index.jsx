@@ -78,10 +78,10 @@ const defaultProps = {
 class InputItem extends BaseComponent {
   currentValue = '';
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { value } = props;
+    const { value } = properties;
 
     this.state = {
       valueFlag: value,
@@ -91,11 +91,11 @@ class InputItem extends BaseComponent {
     this.currentValue = value;
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext,
       };
@@ -105,11 +105,11 @@ class InputItem extends BaseComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  doWorkBeforeUpdate = (nextProps, nextState) => {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = this.state;
+  doWorkBeforeUpdate = (nextProperties, nextState) => {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = this.state;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       this.currentValue = valueNext;
     }
   };
@@ -140,10 +140,10 @@ class InputItem extends BaseComponent {
     }
   };
 
-  onInput = (e) => {
+  onInput = (event) => {
     const {
       detail: { value: v },
-    } = e;
+    } = event;
 
     this.currentValue = v;
 
@@ -168,35 +168,35 @@ class InputItem extends BaseComponent {
     this.triggerChange(v);
   };
 
-  triggerFocus = (e) => {
+  triggerFocus = (event) => {
     const { onFocus } = this.props;
 
     if (isFunction(onFocus)) {
-      onFocus(e);
+      onFocus(event);
     }
   };
 
-  triggerBlur = (e) => {
+  triggerBlur = (event) => {
     const { onBlur } = this.props;
 
     if (isFunction(onBlur)) {
-      onBlur(e);
+      onBlur(event);
     }
   };
 
-  triggerConfirm = (e) => {
+  triggerConfirm = (event) => {
     const { onConfirm } = this.props;
 
     if (isFunction(onConfirm)) {
-      onConfirm(e);
+      onConfirm(event);
     }
   };
 
-  triggerKeyboardHeightChange = (e) => {
+  triggerKeyboardHeightChange = (event) => {
     const { onKeyboardHeightChange } = this.props;
 
     if (isFunction(onKeyboardHeightChange)) {
-      onKeyboardHeightChange(e);
+      onKeyboardHeightChange(event);
     }
   };
 
@@ -274,7 +274,7 @@ class InputItem extends BaseComponent {
           }}
           flexAuto="right"
           left={
-            !!required ? (
+            required ? (
               <VerticalBox>
                 <Text
                   style={{
@@ -298,10 +298,8 @@ class InputItem extends BaseComponent {
             >
               <View
                 style={{
-                  ...{
-                    fontSize: transformSize(28),
-                    marginRight: transformSize(20),
-                  },
+                  fontSize: transformSize(28),
+                  marginRight: transformSize(20),
                   ...labelStyle,
                 }}
               >
@@ -320,12 +318,7 @@ class InputItem extends BaseComponent {
             </VerticalBox>
           }
           rightStyle={{
-            ...{
-              paddingRight: transformSize(40),
-            },
-            ...{
-              // height: '100%',
-            },
+            paddingRight: transformSize(40),
           }}
         />
       ) : null;
@@ -342,18 +335,16 @@ class InputItem extends BaseComponent {
               !disabled && readonly ? (
                 <View
                   style={{
-                    ...{
-                      fontSize: transformSize(28),
-                      borderColor: borderColor,
-                      margin:
-                        layout === 'horizontal'
-                          ? `${transformSize(0)} 0 ${transformSize(
-                              showBody ? 11 : 0,
-                            )} 0`
-                          : `${transformSize(11)} 0 ${transformSize(
-                              showBody ? 11 : 22,
-                            )} 0`,
-                    },
+                    fontSize: transformSize(28),
+                    borderColor: borderColor,
+                    margin:
+                      layout === 'horizontal'
+                        ? `${transformSize(0)} 0 ${transformSize(
+                            showBody ? 11 : 0,
+                          )} 0`
+                        : `${transformSize(11)} 0 ${transformSize(
+                            showBody ? 11 : 22,
+                          )} 0`,
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
                     ...(align == 'center' ? { textAlign: 'center' } : {}),
@@ -370,18 +361,16 @@ class InputItem extends BaseComponent {
                 <Textarea
                   value={this.currentValue}
                   style={{
-                    ...{
-                      fontSize: transformSize(28),
-                      borderColor: borderColor,
-                      margin:
-                        layout === 'horizontal'
-                          ? `${transformSize(0)} 0 ${transformSize(
-                              showBody ? 11 : 0,
-                            )} 0`
-                          : `${transformSize(11)} 0 ${transformSize(
-                              showBody ? 11 : 22,
-                            )} 0`,
-                    },
+                    fontSize: transformSize(28),
+                    borderColor: borderColor,
+                    margin:
+                      layout === 'horizontal'
+                        ? `${transformSize(0)} 0 ${transformSize(
+                            showBody ? 11 : 0,
+                          )} 0`
+                        : `${transformSize(11)} 0 ${transformSize(
+                            showBody ? 11 : 22,
+                          )} 0`,
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
                     ...(align == 'center' ? { textAlign: 'center' } : {}),
@@ -392,8 +381,8 @@ class InputItem extends BaseComponent {
                     isString(placeholderStyle)
                       ? placeholderStyle
                       : isObject(placeholderStyle)
-                      ? buildStringStyle(placeholderStyle)
-                      : ''
+                        ? buildStringStyle(placeholderStyle)
+                        : ''
                   }
                   autoHeight={areaAutoHeight}
                   placeholderClass={placeholderClass}
@@ -416,18 +405,16 @@ class InputItem extends BaseComponent {
                   value={this.currentValue}
                   type={type}
                   style={{
-                    ...{
-                      fontSize: transformSize(28),
-                      borderColor: borderColor,
-                      margin:
-                        layout === 'horizontal'
-                          ? `${transformSize(0)} 0 ${transformSize(
-                              showBody ? 11 : 0,
-                            )} 0`
-                          : `${transformSize(11)} 0 ${transformSize(
-                              showBody ? 11 : 22,
-                            )} 0`,
-                    },
+                    fontSize: transformSize(28),
+                    borderColor: borderColor,
+                    margin:
+                      layout === 'horizontal'
+                        ? `${transformSize(0)} 0 ${transformSize(
+                            showBody ? 11 : 0,
+                          )} 0`
+                        : `${transformSize(11)} 0 ${transformSize(
+                            showBody ? 11 : 22,
+                          )} 0`,
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
                     ...(align == 'center' ? { textAlign: 'center' } : {}),
@@ -439,8 +426,8 @@ class InputItem extends BaseComponent {
                     isString(placeholderStyle)
                       ? placeholderStyle
                       : isObject(placeholderStyle)
-                      ? buildStringStyle(placeholderStyle)
-                      : ''
+                        ? buildStringStyle(placeholderStyle)
+                        : ''
                   }
                   placeholderClass={placeholderClass}
                   disabled={disabled}
@@ -486,9 +473,7 @@ class InputItem extends BaseComponent {
         rightStyle={
           extra
             ? {
-                ...{
-                  fontSize: transformSize(28),
-                },
+                fontSize: transformSize(28),
                 ...extraContainerStyle,
               }
             : null
@@ -502,27 +487,21 @@ class InputItem extends BaseComponent {
           style={style}
           label={labelComponent}
           contentStyle={{
-            ...{ width: transformSize(180) },
+            width: transformSize(180),
             ...contentStyle,
-            ...{
-              padding: '0',
-            },
-            ...{
-              flex: 'none',
-              paddingBottom: transformSize(showBody ? 12 : 0),
-            },
+
+            padding: '0',
+            flex: 'none',
+            paddingBottom: transformSize(showBody ? 12 : 0),
           }}
           border={border}
           extra={inputPart}
           extraContainerStyle={{
-            ...{
-              padding: `0 ${transformSize(showBody ? 12 : 24)} 0 0`,
-            },
+            padding: `0 ${transformSize(showBody ? 12 : 24)} 0 0`,
             ...inputStyle,
-            ...{
-              flex: 'auto',
-              paddingRight: '0',
-            },
+
+            flex: 'auto',
+            paddingRight: '0',
           }}
           showBody={showBody}
           body={description}
@@ -541,8 +520,8 @@ class InputItem extends BaseComponent {
     }
 
     return (
-      <View style={{ ...{ width: '100%' }, ...style }}>
-        {labelComponent != null ? (
+      <View style={{ width: '100%', ...style }}>
+        {labelComponent == null ? null : (
           <Row>
             <Col size={12}>
               <View
@@ -556,37 +535,33 @@ class InputItem extends BaseComponent {
               </View>
             </Col>
           </Row>
-        ) : null}
+        )}
 
         <Row>
           <Col size={12}>
             <Item
               label={null}
               contentStyle={{
-                ...{ width: transformSize(180) },
+                width: transformSize(180),
                 ...contentStyle,
-                ...{
-                  flex: 'none',
-                  padding: `${transformSize(
-                    labelComponent != null ? 12 : 24,
-                  )} 0 ${transformSize(showBody ? 12 : 24)} 0`,
-                },
+
+                flex: 'none',
+                padding: `${transformSize(
+                  labelComponent == null ? 24 : 12,
+                )} 0 ${transformSize(showBody ? 12 : 24)} 0`,
               }}
               border={border}
               borderColor={borderColor}
               borderTopDistance={borderTopDistance}
               extra={inputPart}
               extraContainerStyle={{
-                ...{
-                  padding: `0 ${transformSize(
-                    showBody ? 12 : 24,
-                  )} 0 ${transformSize(24)}`,
-                },
+                padding: `0 ${transformSize(
+                  showBody ? 12 : 24,
+                )} 0 ${transformSize(24)}`,
                 ...inputStyle,
-                ...{
-                  flex: 'auto',
-                  paddingRight: '0',
-                },
+
+                flex: 'auto',
+                paddingRight: '0',
               }}
               showBody={showBody}
               body={description}

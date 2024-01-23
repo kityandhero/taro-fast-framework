@@ -35,7 +35,6 @@ const defaultProps = {
   className: '',
   itemStyle: {},
   style: {},
-  itemStyle: {},
   indicator: false,
   indicatorBuilder: null,
   indicatorStyle: {},
@@ -89,8 +88,8 @@ function checkSequence({ sequence, list, automaticCorrection = true }) {
     sequenceAdjust < 0
       ? itemCount - 1
       : sequenceAdjust > itemCount - 1
-      ? 0
-      : sequenceAdjust;
+        ? 0
+        : sequenceAdjust;
 
   return sequenceAdjust;
 }
@@ -127,17 +126,13 @@ function getNextSequence({
   let sequenceAdjust = sequence;
 
   if (circular) {
-    if (directionAdjust === 'left') {
-      sequenceAdjust = sequence + step;
-    } else {
-      sequenceAdjust = sequence - step;
-    }
+    sequenceAdjust =
+      directionAdjust === 'left' ? sequence + step : sequence - step;
   } else {
     if (sequence <= 0) {
       sequenceAdjust = 1;
     } else if (sequence >= maxSequence) {
       sequenceAdjust = maxSequence - 1;
-    } else {
     }
   }
 
@@ -173,10 +168,10 @@ class Swiper extends BaseComponent {
 
   touchStepDistance = 0;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { current, direction, list } = props;
+    const { current, direction, list } = properties;
 
     const sequence =
       checkSequence({
@@ -187,23 +182,22 @@ class Swiper extends BaseComponent {
 
     this.state = {
       ...this.state,
-      ...{
-        currentFlag: sequence,
-        currentStage: sequence,
-        play: false,
-        offset: 0,
-      },
+
+      currentFlag: sequence,
+      currentStage: sequence,
+      play: false,
+      offset: 0,
     };
 
     this.swiperItemContainerId = getGuid();
     this.tempDirection = direction;
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { current: currentNext, list } = nextProps;
-    const { currentFlag: currentPrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { current: currentNext, list } = nextProperties;
+    const { currentFlag: currentPrevious } = previousState;
 
-    if (currentNext !== currentPrev) {
+    if (currentNext !== currentPrevious) {
       const sequence = checkSequence({
         sequence: currentNext,
         list,
@@ -227,15 +221,15 @@ class Swiper extends BaseComponent {
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
-    const { direction: directionPrev, list: listPrev } = preProps;
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
+    const { direction: directionPrevious, list: listPrevious } = preProperties;
     const { direction: directionNext, list: listNext } = this.props;
 
-    if (directionPrev !== directionNext) {
+    if (directionPrevious !== directionNext) {
       this.tempDirection = directionNext;
     }
 
-    if (listPrev.length !== listNext.length) {
+    if (listPrevious.length !== listNext.length) {
       this.delayAdjustView();
     }
   };
@@ -312,7 +306,16 @@ class Swiper extends BaseComponent {
       let nextSequence = 0;
       let d = that.tempDirection;
 
-      if (!circular) {
+      if (circular) {
+        nextSequence = getNextSequence({
+          circular,
+          priorityDirection: this.priorityDirection,
+          direction: direction,
+          sequence: currentStage,
+          step: 1,
+          maxSequence: itemCount - 1,
+        });
+      } else {
         if (d === 'right' && currentStage === 0) {
           d = 'left';
 
@@ -332,15 +335,6 @@ class Swiper extends BaseComponent {
         if (d === 'right') {
           nextSequence = currentStage - 1;
         }
-      } else {
-        nextSequence = getNextSequence({
-          circular,
-          priorityDirection: this.priorityDirection,
-          direction: direction,
-          sequence: currentStage,
-          step: 1,
-          maxSequence: itemCount - 1,
-        });
       }
 
       that.slide(nextSequence, 0);
@@ -389,20 +383,17 @@ class Swiper extends BaseComponent {
     const directionCoefficient = directionAdjust === 'left' ? 1 : -1;
 
     return {
-      ...{
-        transform: `translateX(${
-          -1 * currentStage * this.swiperItemContainerWidth +
-          directionCoefficient *
-            (offset > this.swiperItemContainerWidth
-              ? this.swiperItemContainerWidth
-              : offset) *
-            ((currentStage === 0 && this.priorityDirection === 'right') ||
-            (currentStage === itemCount - 1 &&
-              this.priorityDirection === 'left')
-              ? 0
-              : -1)
-        }px)`,
-      },
+      transform: `translateX(${
+        -1 * currentStage * this.swiperItemContainerWidth +
+        directionCoefficient *
+          (offset > this.swiperItemContainerWidth
+            ? this.swiperItemContainerWidth
+            : offset) *
+          ((currentStage === 0 && this.priorityDirection === 'right') ||
+          (currentStage === itemCount - 1 && this.priorityDirection === 'left')
+            ? 0
+            : -1)
+      }px)`,
       ...(this.touching ? { transitionDuration: '0' } : {}),
     };
   };
@@ -436,27 +427,25 @@ class Swiper extends BaseComponent {
     const directionCoefficient = directionAdjust === 'left' ? 1 : -1;
 
     return {
-      ...{
-        transform:
-          index === currentStage
-            ? offset === 0
-              ? 'none'
-              : `translateX(${
-                  directionCoefficient *
-                  (offset > this.swiperItemContainerWidth
-                    ? this.swiperItemContainerWidth
-                    : offset) *
-                  -1
-                }px)`
+      transform:
+        index === currentStage
+          ? offset === 0
+            ? 'none'
             : `translateX(${
-                multiple * this.swiperItemContainerWidth +
                 directionCoefficient *
-                  (offset > this.swiperItemContainerWidth
-                    ? this.swiperItemContainerWidth
-                    : offset) *
-                  -1
-              }px)`,
-      },
+                (offset > this.swiperItemContainerWidth
+                  ? this.swiperItemContainerWidth
+                  : offset) *
+                -1
+              }px)`
+          : `translateX(${
+              multiple * this.swiperItemContainerWidth +
+              directionCoefficient *
+                (offset > this.swiperItemContainerWidth
+                  ? this.swiperItemContainerWidth
+                  : offset) *
+                -1
+            }px)`,
       ...(offset === 0 &&
       directionCoefficient * multiple > 0 &&
       Math.abs(currentStage - index) != 1 &&
@@ -470,14 +459,14 @@ class Swiper extends BaseComponent {
     };
   };
 
-  onTouchStart = (e) => {
+  onTouchStart = (event) => {
     const { autoplay, enableTouch, enableTouchDistance } = this.props;
 
     if (!enableTouch) {
       return;
     }
 
-    this.touchStart = e.touches[0].pageX;
+    this.touchStart = event.touches[0].pageX;
 
     this.touching = true;
 
@@ -492,7 +481,7 @@ class Swiper extends BaseComponent {
     }
   };
 
-  onTouchMove = (e) => {
+  onTouchMove = (event) => {
     const { enableTouch, enableTouchDistance } = this.props;
 
     if (!enableTouch) {
@@ -500,7 +489,7 @@ class Swiper extends BaseComponent {
     }
 
     if (this.touching) {
-      const { pageX } = e.touches[0];
+      const { pageX } = event.touches[0];
 
       this.touchEnd = pageX;
 
@@ -521,11 +510,8 @@ class Swiper extends BaseComponent {
 
       const itemCount = getArrayCount(list);
 
-      if (this.touchStart > this.touchEnd) {
-        this.priorityDirection = 'left';
-      } else {
-        this.priorityDirection = 'right';
-      }
+      this.priorityDirection =
+        this.touchStart > this.touchEnd ? 'left' : 'right';
 
       if (circular) {
         this.slide(
@@ -555,7 +541,28 @@ class Swiper extends BaseComponent {
       const { currentStage } = this.state;
       const itemCount = getArrayCount(list);
 
-      if (!circular) {
+      if (circular) {
+        if (
+          Math.abs(this.touchStart - this.touchEnd) >=
+          Math.floor(this.swiperItemContainerWidth / 2)
+        ) {
+          this.priorityDirection =
+            this.touchStart > this.touchEnd ? 'left' : 'right';
+
+          const nextSequence = getNextSequence({
+            circular,
+            priorityDirection: this.priorityDirection,
+            direction: direction,
+            sequence: currentStage,
+            step: 1,
+            maxSequence: itemCount - 1,
+          });
+
+          this.slide(nextSequence, 0);
+        } else {
+          this.slide(currentStage, 0);
+        }
+      } else {
         if (
           (currentStage === 0 && this.touchStart <= this.touchEnd) ||
           (currentStage === itemCount - 1 && this.touchStart >= this.touchEnd)
@@ -580,30 +587,6 @@ class Swiper extends BaseComponent {
           } else {
             this.slide(currentStage, 0);
           }
-        }
-      } else {
-        if (
-          Math.abs(this.touchStart - this.touchEnd) >=
-          Math.floor(this.swiperItemContainerWidth / 2)
-        ) {
-          if (this.touchStart > this.touchEnd) {
-            this.priorityDirection = 'left';
-          } else {
-            this.priorityDirection = 'right';
-          }
-
-          const nextSequence = getNextSequence({
-            circular,
-            priorityDirection: this.priorityDirection,
-            direction: direction,
-            sequence: currentStage,
-            step: 1,
-            maxSequence: itemCount - 1,
-          });
-
-          this.slide(nextSequence, 0);
-        } else {
-          this.slide(currentStage, 0);
         }
       }
     }
@@ -650,14 +633,14 @@ class Swiper extends BaseComponent {
   buildPrev = () => {
     const { prevStyle, prevBuilder } = this.props;
 
-    let prevElement = null;
+    let previousElement = null;
 
     if (isFunction(prevBuilder)) {
-      prevElement = prevBuilder() || null;
+      previousElement = prevBuilder() || null;
     }
 
-    if (prevElement == null) {
-      prevElement = (
+    if (previousElement == null) {
+      previousElement = (
         <CenterBox>
           <IconChevronLeft
             color="var(--tfc-color-primary)"
@@ -682,7 +665,7 @@ class Swiper extends BaseComponent {
         style={prevStyle}
         onClick={this.goToPrev}
       >
-        {prevElement}
+        {previousElement}
       </View>
     );
   };
@@ -756,7 +739,9 @@ class Swiper extends BaseComponent {
 
     let height = toNumber(heightSource || 0);
 
-    if (!scaleMode) {
+    if (scaleMode) {
+      height = '100%';
+    } else {
       if (height <= 0) {
         const text = 'swiper: 不使用比例容器模式下, 需要指定 height';
 
@@ -766,8 +751,6 @@ class Swiper extends BaseComponent {
 
         return null;
       }
-    } else {
-      height = '100%';
     }
 
     const listData = isArray(list) ? list : [];
@@ -834,7 +817,7 @@ class Swiper extends BaseComponent {
           })}
         </View>
 
-        {!!indicator ? (
+        {indicator ? (
           <SwiperIndicator
             indicator={currentStage}
             indicatorBuilder={indicatorBuilder}

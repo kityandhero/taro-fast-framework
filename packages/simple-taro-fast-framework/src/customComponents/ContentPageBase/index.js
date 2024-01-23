@@ -213,8 +213,8 @@ class ContentPageBase extends PageWrapperSimulation {
             span: customSpan
               ? span
               : index === listCount - 1 && index % 2 === 0
-              ? 2
-              : span,
+                ? 2
+                : span,
             inner,
             wrapBuilder,
             callback,

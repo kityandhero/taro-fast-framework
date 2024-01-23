@@ -241,10 +241,10 @@ export default class Index extends BasePageWrapper {
           {this.judgeInitialActivityIndicatorVisible()
             ? this.buildInitialActivityIndicator({})
             : metaListData.length === 0
-            ? this.buildEmptyPlaceholder({
-                description: '还没有数据哦',
-              })
-            : this.buildListView()}
+              ? this.buildEmptyPlaceholder({
+                  description: '还没有数据哦',
+                })
+              : this.buildListView()}
         </View>
       </View>
     );

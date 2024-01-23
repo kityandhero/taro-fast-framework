@@ -58,11 +58,11 @@ class DataGrid extends BaseComponent {
 
     if (isArray(list)) {
       const dataList = list.map((o, index) => {
-        const d = { ...{}, ...o };
+        const d = { ...o };
 
         d.key = `item_${index}`;
 
-        return { ...{ canCopy: false }, ...d };
+        return { canCopy: false, ...d };
       });
 
       let column = 2;
@@ -81,7 +81,7 @@ class DataGrid extends BaseComponent {
         columnVerticalAlign,
       } = {
         ...defaultProps,
-        ...(this.props || {}),
+        ...this.props,
       };
 
       if (!isNumber(columnSource)) {
@@ -125,27 +125,19 @@ class DataGrid extends BaseComponent {
         : null;
 
       const labelStyle = {
-        ...{
-          fontSize: transformSize(28),
-          width: transformSize(180),
-        },
-        ...(labelStyleSource || {}),
+        fontSize: transformSize(28),
+        width: transformSize(180),
+        ...labelStyleSource,
         ...(border ? { margin } : {}),
         ...(layout === 'row' ? { width: 'auto' } : {}),
       };
 
       const contentStyle = {
-        ...{
-          fontSize: transformSize(30),
-        },
-        ...(contentStyleSource || {}),
+        fontSize: transformSize(30),
+        ...contentStyleSource,
         ...(border
           ? {
-              ...{
-                margin: `${transformSize(32)} ${transformSize(48)}`,
-              },
-
-              ...{ margin },
+              margin: `${transformSize(32)} ${transformSize(48)}`,
             }
           : {}),
       };
@@ -183,19 +175,17 @@ class DataGrid extends BaseComponent {
                 dividerPosition,
                 dividerStyle,
               } = {
-                ...{
-                  ellipsis: true,
-                  ellipsisLine: 1,
-                  ellipsisLineHeight: '',
-                  ellipsisHeight: '',
-                  hidden: false,
-                  divider: false,
-                  dividerIcon: null,
-                  dividerText: '',
-                  dividerPosition: '',
-                  dividerStyle: {},
-                },
-                ...(item || {}),
+                ellipsis: true,
+                ellipsisLine: 1,
+                ellipsisLineHeight: '',
+                ellipsisHeight: '',
+                hidden: false,
+                divider: false,
+                dividerIcon: null,
+                dividerText: '',
+                dividerPosition: '',
+                dividerStyle: {},
+                ...item,
               };
 
               if (hiddenItem) {
@@ -220,29 +210,27 @@ class DataGrid extends BaseComponent {
                 span: itemSpanSource,
                 canCopy: itemCanCopy,
                 copyData: itemCopyData,
-                props: itemProps,
+                props: itemProperties,
               } = {
-                ...{
-                  key: getGuid(),
-                  label: '',
-                  value: '',
-                  emptyValue: null,
-                  emptyStyle: null,
-                  span: 1,
-                  canCopy: false,
-                  copyData: null,
-                  props: null,
-                },
-                ...(item || {}),
+                key: getGuid(),
+                label: '',
+                value: '',
+                emptyValue: null,
+                emptyStyle: null,
+                span: 1,
+                canCopy: false,
+                copyData: null,
+                props: null,
+                ...item,
               };
 
               const itemSpan = isNumber(itemSpanSource)
                 ? itemSpanSource
-                : !isString(itemSpanSource)
-                ? 1
-                : itemSpanSource === 'fill'
-                ? column
-                : 1;
+                : isString(itemSpanSource)
+                  ? itemSpanSource === 'fill'
+                    ? column
+                    : 1
+                  : 1;
 
               const v = itemValue || itemEmptyValue || globalEmptyValue;
 
@@ -262,14 +250,13 @@ class DataGrid extends BaseComponent {
                     ...contentStyle,
                     ...(isEmpty ? globalEmptyStyle || {} : {}),
                     ...(isEmpty ? itemEmptyStyle || {} : {}),
-                    ...{
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                      display: '-webkit-box',
-                      textOverflow: 'ellipsis',
-                      wordBreak: 'break-all',
-                      whiteSpace: 'normal',
-                    },
+
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    textOverflow: 'ellipsis',
+                    wordBreak: 'break-all',
+                    whiteSpace: 'normal',
                   }}
                   onClick={() => {
                     if (itemCanCopy && (itemCanCopy || null) != null) {
@@ -283,10 +270,8 @@ class DataGrid extends BaseComponent {
                     <Ellipsis
                       line={ellipsisLine}
                       style={{
-                        ...{
-                          width: '100%',
-                          fontSize: transformSize(fontSizeSource),
-                        },
+                        width: '100%',
+                        fontSize: transformSize(fontSizeSource),
                         ...(ellipsisLine > 1 &&
                         !checkStringIsNullOrWhiteSpace(ellipsisHeight)
                           ? {
@@ -309,7 +294,7 @@ class DataGrid extends BaseComponent {
                 </View>
               );
 
-              if (!!divider) {
+              if (divider) {
                 const dividerElement = buildDivider({
                   contentPosition: dividerPosition || null,
                   icon: dividerIcon || '',
@@ -344,7 +329,7 @@ class DataGrid extends BaseComponent {
                         ? 12
                         : columnSize * (toNumber(itemSpan) || 1)
                     }
-                    {...(itemProps || {})}
+                    {...(itemProperties || {})}
                   >
                     <FlexBox
                       alignItems={
@@ -353,7 +338,7 @@ class DataGrid extends BaseComponent {
                       flexAuto="right"
                       left={labelComponent}
                       leftStyle={{
-                        ...{ backgroundColor },
+                        backgroundColor,
                         ...(border
                           ? { borderRight: `${transformSize(2)} solid #f0f0f0` }
                           : {}),
@@ -369,17 +354,16 @@ class DataGrid extends BaseComponent {
                   <Col
                     style={{
                       ...itemStyle,
-                      ...{
-                        backgroundColor,
-                      },
+
+                      backgroundColor,
                     }}
                     size={12}
-                    {...(itemProps || {})}
+                    {...(itemProperties || {})}
                   >
                     {labelComponent}
                   </Col>
 
-                  <Col style={itemStyle} size={12} {...(itemProps || {})}>
+                  <Col style={itemStyle} size={12} {...(itemProperties || {})}>
                     {valueComponent}
                   </Col>
                 </Fragment>

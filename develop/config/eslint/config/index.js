@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable import/no-commonjs */
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
@@ -10,9 +11,7 @@ const { settings } = require('./items/settings');
 
 module.exports = {
   generalConfig: {
-    extends: [
-      ...extendCollection,
-    ],
+    extends: [...extendCollection],
     env: {
       es6: true,
       browser: true,

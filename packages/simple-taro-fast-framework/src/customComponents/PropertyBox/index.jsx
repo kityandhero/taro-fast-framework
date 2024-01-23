@@ -133,8 +133,8 @@ class PropertyBox extends Component {
               ...(isArray(description)
                 ? description
                 : isObject(description)
-                ? [description]
-                : []),
+                  ? [description]
+                  : []),
               ...(isString(description) &&
               !checkStringIsNullOrWhiteSpace(description)
                 ? [

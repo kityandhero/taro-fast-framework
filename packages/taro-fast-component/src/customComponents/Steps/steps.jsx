@@ -45,12 +45,10 @@ class Steps extends BaseComponent {
     } = this.props;
 
     return {
-      ...{
-        '--title-font-size': transformSize(titleFontSize),
-        '--description-font-size': transformSize(descriptionFontSize),
-        '--indicator-margin-right': transformSize(indicatorMarginRight),
-        '--icon-size': transformSize(iconSize),
-      },
+      '--title-font-size': transformSize(titleFontSize),
+      '--description-font-size': transformSize(descriptionFontSize),
+      '--indicator-margin-right': transformSize(indicatorMarginRight),
+      '--icon-size': transformSize(iconSize),
     };
   };
 
@@ -83,30 +81,26 @@ class Steps extends BaseComponent {
 
     const result = [];
 
-    let statusPrev = '';
+    let statusPrevious = '';
 
-    listData.forEach((item, index) => {
+    for (const [index, item] of listData.entries()) {
       let status =
         count <= statusCount
           ? listStatus[index]
           : index <= statusCount
-          ? listStatus[index]
-          : '';
+            ? listStatus[index]
+            : '';
 
       if (checkStringIsNullOrWhiteSpace(status)) {
-        if (statusPrev === 'finish') {
-          status = 'process';
-        } else {
-          status = 'wait';
-        }
+        status = statusPrevious === 'finish' ? 'process' : 'wait';
       }
 
-      statusPrev = status;
+      statusPrevious = status;
 
       delete item.status;
 
-      result.push({ ...item, ...{ status } });
-    });
+      result.push({ ...item, status });
+    }
 
     return result;
   };
@@ -169,9 +163,9 @@ class Steps extends BaseComponent {
             title,
             description,
             icon,
-            status: !checkStringIsNullOrWhiteSpace(statusSource)
-              ? statusSource
-              : 'wait',
+            status: checkStringIsNullOrWhiteSpace(statusSource)
+              ? 'wait'
+              : statusSource,
             index,
             direction,
           });

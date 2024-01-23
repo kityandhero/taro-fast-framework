@@ -121,16 +121,14 @@ class VariableView extends BaseComponent {
    */
   externalTouchContinue = false;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     const { screenHeight } = getSystemInfo();
 
     this.state = {
       ...this.state,
-      ...{
-        scrollRefreshTriggered: false,
-      },
+      scrollRefreshTriggered: false,
     };
 
     this.refreshBoxId = getGuid();
@@ -153,7 +151,7 @@ class VariableView extends BaseComponent {
     }, 400);
   };
 
-  onViewTouchStart = (e) => {
+  onViewTouchStart = (event) => {
     const { scroll } = this.props;
 
     const useCustomPullDown = this.checkUseCustomPullDown();
@@ -171,7 +169,7 @@ class VariableView extends BaseComponent {
           if (scrollTop === 0) {
             this.prepareRefresh = true;
 
-            this.touchStartY = e.touches[0].pageY;
+            this.touchStartY = event.touches[0].pageY;
           }
         })
         .exec();
@@ -187,16 +185,16 @@ class VariableView extends BaseComponent {
           if (scrollTop === 0) {
             that.prepareRefresh = true;
 
-            that.touchStartY = e.touches[0].pageY;
+            that.touchStartY = event.touches[0].pageY;
 
-            this.externalTouchStartY = e.touches[0].pageY;
+            this.externalTouchStartY = event.touches[0].pageY;
           }
         });
       }
     }
   };
 
-  onViewTouchMove = (e) => {
+  onViewTouchMove = (event) => {
     const useCustomPullDown = this.checkUseCustomPullDown();
 
     if (!useCustomPullDown) {
@@ -204,7 +202,7 @@ class VariableView extends BaseComponent {
     }
 
     if (this.prepareRefresh) {
-      const { pageY } = e.touches[0];
+      const { pageY } = event.touches[0];
 
       //进行滑档评判
       if (!this.externalTouchDirectionJudgeComplete) {
@@ -232,28 +230,22 @@ class VariableView extends BaseComponent {
 
       let needRefreshData = {};
 
-      if (moveY === this.touchMoveMaxY) {
-        if (!this.needRefresh) {
-          needRefreshData = { needRefresh: true };
+      if (moveY === this.touchMoveMaxY && !this.needRefresh) {
+        needRefreshData = { needRefresh: true };
 
-          this.needRefresh = true;
-        }
+        this.needRefresh = true;
       }
 
-      if (moveY < this.touchMoveMaxY) {
-        if (this.needRefresh) {
-          needRefreshData = { needRefresh: false };
+      if (moveY < this.touchMoveMaxY && this.needRefresh) {
+        needRefreshData = { needRefresh: false };
 
-          this.needRefresh = false;
-        }
+        this.needRefresh = false;
       }
 
       Taro.changePullIndicator({
-        ...{
-          maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
-          moveY: moveY / this.calculatePercentage,
-          rotate: (moveY / this.touchMoveMaxY) * 360,
-        },
+        maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
+        moveY: moveY / this.calculatePercentage,
+        rotate: (moveY / this.touchMoveMaxY) * 360,
         ...needRefreshData,
       });
     }
@@ -271,11 +263,9 @@ class VariableView extends BaseComponent {
 
     if (this.prepareRefresh) {
       Taro.changePullIndicator({
-        ...{
-          maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
-          moveY: 0,
-          rotate: 0,
-        },
+        maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
+        moveY: 0,
+        rotate: 0,
       });
 
       this.prepareRefresh = false;
@@ -311,11 +301,9 @@ class VariableView extends BaseComponent {
       }
 
       Taro.changePullIndicator({
-        ...{
-          maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
-          moveY: 0,
-          rotate: 0,
-        },
+        maxMoveY: this.touchMoveMaxY / this.calculatePercentage,
+        moveY: 0,
+        rotate: 0,
         ...needRefreshData,
       });
 
@@ -439,10 +427,8 @@ class VariableView extends BaseComponent {
       lowerLoadingFooterBox,
     } = this.props;
 
-    if (!displayLowerLoadingFooterBoxWhenNoData) {
-      if (!existData) {
-        return null;
-      }
+    if (!displayLowerLoadingFooterBoxWhenNoData && !existData) {
+      return null;
     }
 
     return (
@@ -523,13 +509,13 @@ class VariableView extends BaseComponent {
       ...style,
       ...(checkStringIsNullOrWhiteSpace(height)
         ? {}
-        : !scroll
-        ? {
-            minHeight: height,
-          }
-        : {
-            height: height,
-          }),
+        : scroll
+          ? {
+              height: height,
+            }
+          : {
+              minHeight: height,
+            }),
       ...(checkStringIsNullOrWhiteSpace(refreshColor)
         ? {}
         : { '--refresh-color': refreshColor }),
@@ -549,17 +535,14 @@ class VariableView extends BaseComponent {
       ...(checkStringIsNullOrWhiteSpace(lowerLoadingBorder)
         ? {}
         : { '--lower-loading-border': `${lowerLoadingBorder}` }),
-      ...{
-        position: 'relative',
-        overflowX: 'hidden',
-      },
+
+      position: 'relative',
+      overflowX: 'hidden',
     };
 
     const styleScroll = {
       ...styleAdjust,
-      ...{
-        overflowY: 'hidden',
-      },
+      overflowY: 'hidden',
     };
 
     const upperBox = this.buildUpperBox();

@@ -44,26 +44,24 @@ const defaultProps = {
 };
 
 class CheckBoxSelector extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { value } = props;
+    const { value } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        valueFlag: value,
-        valueStage: value,
-        popupVisible: false,
-      },
+      valueFlag: value,
+      valueStage: value,
+      popupVisible: false,
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext,
         valueStage: valueNext,
@@ -142,10 +140,8 @@ class CheckBoxSelector extends BaseComponent {
             checkStringIsNullOrWhiteSpace(valueStage) ? (
               <View
                 style={{
-                  ...{
-                    fontSize: transformSize(30),
-                    color: '#999 ',
-                  },
+                  fontSize: transformSize(30),
+                  color: '#999 ',
                   ...placeholderStyle,
                 }}
               >
@@ -154,24 +150,20 @@ class CheckBoxSelector extends BaseComponent {
             ) : (
               <View
                 style={{
-                  ...{
-                    fontSize: transformSize(30),
-                  },
+                  fontSize: transformSize(30),
                   ...valueStyle,
                 }}
               >
                 {isFunction(valueFormat)
                   ? valueFormat(valueStage)
                   : isArray(valueStage)
-                  ? valueStage.join()
-                  : valueStage}
+                    ? valueStage.join(',')
+                    : valueStage}
               </View>
             )
           }
           extraContainerStyle={{
-            ...{
-              paddingRight: transformSize(24),
-            },
+            paddingRight: transformSize(24),
             ...extraContainerStyle,
           }}
           onClick={this.showPopup}
@@ -195,9 +187,8 @@ class CheckBoxSelector extends BaseComponent {
             value={valueStage}
             style={{
               ...checkBoxStyle,
-              ...{
-                borderTop: '0',
-              },
+
+              borderTop: '0',
             }}
             layout={checkBoxLayout}
             bodyStyle={checkBoxBodyStyle}

@@ -10,6 +10,7 @@ import {
   logConfig,
   logDebug,
   logDevelop,
+  mergeTextMessage,
   setRequestHandler,
   setUrlGlobalPrefix,
 } from 'easy-soft-utility';
@@ -27,10 +28,22 @@ let configEnvironmentComplete = false;
  */
 const moduleName = 'configAssist';
 
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
+
 export function configEnvironment(externalConfigs) {
   if (configEnvironmentComplete) {
     return;
   }
+
+  logDevelop(externalConfigs, buildPromptModuleInfoText('configEnvironment'));
+
+  logDevelop('--------config environment start--------');
 
   setEasySoftUtilityHandler(externalConfigs);
 
@@ -46,7 +59,7 @@ export function configEnvironment(externalConfigs) {
     ),
   );
 
-  logDevelop('--------------------------------------------');
+  logDevelop('--------config environment end--------');
 
   logConfig(getApplicationInitialConfig(), 'initialConfig');
 

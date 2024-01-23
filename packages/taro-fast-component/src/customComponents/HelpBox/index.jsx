@@ -67,17 +67,15 @@ class HelpBox extends BaseComponent {
     if (isArray(listData)) {
       list = listData.map((o, index) => {
         const d = {
-          ...{
-            key: '',
-            label: '',
-            text: '',
-            span: 1,
-            labelStyle: null,
-            contentStyle: null,
-            canCopy: false,
-            copyData: null,
-            ellipsis: false,
-          },
+          key: '',
+          label: '',
+          text: '',
+          span: 1,
+          labelStyle: null,
+          contentStyle: null,
+          canCopy: false,
+          copyData: null,
+          ellipsis: false,
           ...o,
         };
 
@@ -175,8 +173,8 @@ class HelpBox extends BaseComponent {
             width: customLabelWidth
               ? labelWidthStyle
               : showNumber
-              ? transformSize(44)
-              : transformSize(24),
+                ? transformSize(44)
+                : transformSize(24),
             color,
             fontSize: transformSize(fontSize),
           }}

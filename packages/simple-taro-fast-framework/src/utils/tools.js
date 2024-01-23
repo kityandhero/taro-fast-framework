@@ -92,7 +92,7 @@ export function buildComponentProperties({ config, ignorePropertyList = [] }) {
 
           if (isArray(matchCollection) && matchCollection.length > 0) {
             for (const o of matchCollection) {
-              s = s.replace(o, o.replace(/"/g, ''));
+              s = s.replaceAll(o, o.replaceAll('"', ''));
             }
           }
 
@@ -171,7 +171,7 @@ export function buildProperties({ config, ignorePropertyList = [] }) {
 
           if (isArray(matchCollection) && matchCollection.length > 0) {
             for (const o of matchCollection) {
-              s = s.replace(o, o.replace(/"/g, ''));
+              s = s.replaceAll(o, o.replaceAll('"', ''));
             }
           }
 

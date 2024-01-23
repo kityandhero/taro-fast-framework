@@ -22,11 +22,11 @@ const defaultProps = {
 };
 
 class ScaleBox extends BaseComponent {
-  triggerClick = (e) => {
+  triggerClick = (event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(e);
+      onClick(event);
     }
   };
 
@@ -47,26 +47,25 @@ class ScaleBox extends BaseComponent {
       return null;
     }
 
-    let aspectRatio = !isNumber(aspectRatioSource)
-      ? 1
-      : aspectRatioSource < 0
-      ? 1
-      : aspectRatioSource;
+    let aspectRatio = isNumber(aspectRatioSource)
+      ? aspectRatioSource < 0
+        ? 1
+        : aspectRatioSource
+      : 1;
 
-    const containerProps = {
+    const containerProperties = {
       className: classNames(classPrefix, className),
       style: {
         ...style,
-        ...{
-          padding: 0,
-        },
+
+        padding: 0,
       },
     };
 
     const innerView = (
       <View
         {...(padding <= 0
-          ? containerProps
+          ? containerProperties
           : {
               style: {
                 margin: `${transformSize(
@@ -98,7 +97,7 @@ class ScaleBox extends BaseComponent {
       return innerView;
     }
 
-    return <View {...containerProps}>{innerView}</View>;
+    return <View {...containerProperties}>{innerView}</View>;
   }
 }
 

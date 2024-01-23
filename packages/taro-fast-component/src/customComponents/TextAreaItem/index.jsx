@@ -50,24 +50,22 @@ class TextAreaItem extends BaseComponent {
 
   textLength = 0;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        popupVisible: false,
-        valueFlag: '',
-        valueStage: '',
-      },
+      popupVisible: false,
+      valueFlag: '',
+      valueStage: '',
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext,
         valueStage: valueNext,
@@ -78,7 +76,7 @@ class TextAreaItem extends BaseComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
     const { popupVisible: popupVisiblePre } = preState;
     const { popupVisible } = this.state;
     const { value } = this.props;
@@ -98,12 +96,12 @@ class TextAreaItem extends BaseComponent {
     }
   };
 
-  triggerInput = (e) => {
+  triggerInput = (event) => {
     const { contentMaxlength } = this.props;
 
     const {
       detail: { value },
-    } = e;
+    } = event;
 
     this.text = value;
 
@@ -114,10 +112,10 @@ class TextAreaItem extends BaseComponent {
     }
   };
 
-  triggerConfirm = (e) => {
+  triggerConfirm = (event) => {
     const {
       detail: { value },
-    } = e;
+    } = event;
 
     this.text = value;
 
@@ -191,9 +189,7 @@ class TextAreaItem extends BaseComponent {
           editable ? (
             <Button
               style={{
-                ...{
-                  fontSize: transformSize(28),
-                },
+                fontSize: transformSize(28),
                 ...editButtonStyle,
               }}
               fill="none"
@@ -209,10 +205,8 @@ class TextAreaItem extends BaseComponent {
           checkStringIsNullOrWhiteSpace(valueStage) ? (
             <View
               style={{
-                ...{
-                  fontSize: transformSize(28),
-                  color: '#666',
-                },
+                fontSize: transformSize(28),
+                color: '#666',
                 ...emptyValueStyle,
               }}
             >
@@ -222,10 +216,8 @@ class TextAreaItem extends BaseComponent {
             <Ellipsis
               line={contentLine}
               style={{
-                ...{
-                  fontSize: transformSize(28),
-                  color: '#666',
-                },
+                fontSize: transformSize(28),
+                color: '#666',
                 ...contentStyle,
               }}
               onClick={onContentClick}
@@ -241,9 +233,7 @@ class TextAreaItem extends BaseComponent {
           extra={
             <Button
               style={{
-                ...{
-                  fontSize: transformSize(28),
-                },
+                fontSize: transformSize(28),
                 ...confirmStyle,
               }}
               fill="none"
@@ -266,19 +256,18 @@ class TextAreaItem extends BaseComponent {
         >
           <Textarea
             style={{
-              ...{ fontSize: transformSize(28) },
+              fontSize: transformSize(28),
               ...textareaStyle,
-              ...{
-                width: '100%',
-                height: transformSize(300),
-              },
+
+              width: '100%',
+              height: transformSize(300),
             }}
             placeholderStyle={
               isString(placeholderStyle)
                 ? placeholderStyle
                 : isObject(placeholderStyle)
-                ? buildStringStyle(placeholderStyle)
-                : ''
+                  ? buildStringStyle(placeholderStyle)
+                  : ''
             }
             value={isString(valueStage) ? valueStage : toString(valueStage)}
             maxlength={contentMaxlength}

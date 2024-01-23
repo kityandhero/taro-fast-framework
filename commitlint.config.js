@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
+/* eslint-disable import/no-commonjs */
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
 module.exports = {
   extends: [
     '@commitlint/config-conventional',
-    '@commitlint/config-lerna-scopes',
+    '@commitlint/config-pnpm-scopes',
   ],
   parserPreset: 'conventional-changelog-conventionalcommits',
   prompt: {

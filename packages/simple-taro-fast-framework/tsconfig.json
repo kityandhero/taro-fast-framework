@@ -6,9 +6,9 @@
     "allowJs": true,
     "experimentalDecorators": true,
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+    },
   },
   "include": ["*.js", "*.d.ts", "src", "config/**/*.js", "test"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

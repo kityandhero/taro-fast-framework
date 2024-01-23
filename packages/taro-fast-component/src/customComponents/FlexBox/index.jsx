@@ -49,8 +49,8 @@ class FlexBox extends BaseComponent {
     return checkInCollection(['left', 'right'], flexAuto)
       ? 'horizontal'
       : checkInCollection(['top', 'bottom'], flexAuto)
-      ? 'vertical'
-      : 'horizontal';
+        ? 'vertical'
+        : 'horizontal';
   };
 
   triggerClick = () => {
@@ -97,8 +97,8 @@ class FlexBox extends BaseComponent {
 
     if (direction === 'horizontal') {
       const style = {
-        ...(styleSource || {}),
-        ...(!(allowWrap || false) ? { flexWrap: 'nowrap' } : {}),
+        ...styleSource,
+        ...(allowWrap || false ? {} : { flexWrap: 'nowrap' }),
       };
 
       if (left == null || right == null) {
@@ -125,7 +125,7 @@ class FlexBox extends BaseComponent {
           <Col
             auto={flexAuto !== 'right'}
             align={stretch ? 'stretch' : ''}
-            style={{ ...(leftStyle || {}), ...styleCore }}
+            style={{ ...leftStyle, ...styleCore }}
           >
             {left}
           </Col>
@@ -133,7 +133,7 @@ class FlexBox extends BaseComponent {
           <Col
             auto={flexAuto === 'right'}
             align={stretch ? 'stretch' : ''}
-            style={{ ...(rightStyle || {}), ...styleCore }}
+            style={{ ...rightStyle, ...styleCore }}
           >
             {right}
           </Col>
@@ -160,14 +160,11 @@ class FlexBox extends BaseComponent {
     return (
       <View
         style={{
-          ...{
-            height: verticalHeightAdjust,
-          },
+          height: verticalHeightAdjust,
           ...styleSource,
-          ...{
-            display: 'flex',
-            flexFlow: 'column',
-          },
+
+          display: 'flex',
+          flexFlow: 'column',
           ...(stretch
             ? {
                 alignItems: 'stretch',
@@ -179,7 +176,7 @@ class FlexBox extends BaseComponent {
         <View
           style={{
             ...topStyle,
-            ...(flexAuto !== 'bottom' ? { flex: '1 1 auto' } : {}),
+            ...(flexAuto === 'bottom' ? {} : { flex: '1 1 auto' }),
           }}
         >
           {top}

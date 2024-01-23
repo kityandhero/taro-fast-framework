@@ -107,7 +107,6 @@
     "prebundle",
     "precommit",
     "precz",
-    "prelerna",
     "preload",
     "prencu",
     "prettierrc",
@@ -155,6 +154,17 @@
     "ychecker",
     "zindex"
   ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "eslint.validate": [
+    "json",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
   "git.ignoreLimitWarning": true,
   "search.exclude": {
     "**/node_modules": true,
@@ -175,8 +185,8 @@
     "**/.factorypath": true
   },
   "explorerExclude.backup": null,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
-  }
+  "emmet.includeLanguages": {
+    "ejs": "html"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

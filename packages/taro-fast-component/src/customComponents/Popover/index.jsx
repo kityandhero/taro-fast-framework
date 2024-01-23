@@ -46,20 +46,18 @@ class Popover extends BaseComponent {
 
   timerAdjust = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        left: 0,
-        top: 0,
-        bottom: 0,
-        right: 0,
-        contentWidth: 0,
-        contentHeight: 0,
-        visible: false,
-      },
+      left: 0,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      contentWidth: 0,
+      contentHeight: 0,
+      visible: false,
     };
 
     this.contentId = getGuid();
@@ -157,8 +155,8 @@ class Popover extends BaseComponent {
         panelAlign === 'left'
           ? leftAlign
           : panelAlign === 'right'
-          ? rightAlign
-          : centerAlign,
+            ? rightAlign
+            : centerAlign,
       panelWidth,
     };
   };
@@ -192,12 +190,9 @@ class Popover extends BaseComponent {
 
     return {
       ...style,
-      ...{
-        position: 'relative',
-      },
-      ...{
-        '--background-color': backgroundColor,
-      },
+
+      position: 'relative',
+      '--background-color': backgroundColor,
       ...(position === 'top'
         ? {
             '--arrow-top': `calc((${transformSize(arrowSize)} + ${transformSize(
@@ -248,14 +243,13 @@ class Popover extends BaseComponent {
             '--panel-width': transformSize(panelWidth),
           }
         : {}),
-      ...{
-        '--panel-height': transformSize(height),
-        '--panel-z-index': 11,
-        '--panel-padding-left': transformSize(panelPaddingLeft),
-        '--panel-padding-right': transformSize(panelPaddingRight),
-        '--panel-padding-top': transformSize(panelPaddingTop),
-        '--panel-padding-bottom': transformSize(panelPaddingBottom),
-      },
+
+      '--panel-height': transformSize(height),
+      '--panel-z-index': 11,
+      '--panel-padding-left': transformSize(panelPaddingLeft),
+      '--panel-padding-right': transformSize(panelPaddingRight),
+      '--panel-padding-top': transformSize(panelPaddingTop),
+      '--panel-padding-bottom': transformSize(panelPaddingBottom),
       ...(panelShadow
         ? {
             '--panel-shadow': `${transformSize(
@@ -274,7 +268,7 @@ class Popover extends BaseComponent {
     const { visible } = this.state;
 
     this.setState({
-      visible: !!!visible,
+      visible: !visible,
     });
   };
 

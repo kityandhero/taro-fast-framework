@@ -29,14 +29,12 @@ const defaultProps = {
 };
 
 class SwiperWrapper extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        current: 0,
-      },
+      current: 0,
     };
   }
 
@@ -44,28 +42,28 @@ class SwiperWrapper extends BaseComponent {
     const { style, height, scaleMode } = this.props;
 
     return {
-      ...(style || {}),
-      ...(!scaleMode ? { height: transformSize(height) } : {}),
-      ...{ position: 'relative' },
+      ...style,
+      ...(scaleMode ? {} : { height: transformSize(height) }),
+      position: 'relative',
     };
   };
 
-  triggerChange = (e) => {
+  triggerChange = (event) => {
     const { customIndicator, duration, indicatorDelayChange, onChange } =
       this.props;
 
-    if (!!customIndicator) {
+    if (customIndicator) {
       const {
         detail: { current },
-      } = e;
+      } = event;
 
       const that = this;
 
-      const indicatorDelayChangeAdjust = !isNumber(indicatorDelayChange)
-        ? defaultProps.indicatorDelayChange
-        : toNumber(indicatorDelayChange) <= 0
-        ? defaultProps.indicatorDelayChange
-        : toNumber(indicatorDelayChange);
+      const indicatorDelayChangeAdjust = isNumber(indicatorDelayChange)
+        ? toNumber(indicatorDelayChange) <= 0
+          ? defaultProps.indicatorDelayChange
+          : toNumber(indicatorDelayChange)
+        : defaultProps.indicatorDelayChange;
 
       setTimeout(() => {
         that.setState({ current });
@@ -73,7 +71,7 @@ class SwiperWrapper extends BaseComponent {
     }
 
     if (isFunction(onChange)) {
-      onChange(e);
+      onChange(event);
     }
   };
 
@@ -105,20 +103,18 @@ class SwiperWrapper extends BaseComponent {
       list,
     } = this.props;
 
-    return !!customIndicator ? (
+    return customIndicator ? (
       <View
         style={{
-          ...{
-            width: '100%',
-            bottom: transformSize(indicatorBottomDistance),
-            display: 'flex',
-            alignItems: 'center',
-            justifyItems: 'center',
-            alignContent: 'center',
-            justifyContent: 'center',
-          },
-          ...(indicatorBoxStyle || {}),
-          ...{ position: 'absolute' },
+          width: '100%',
+          bottom: transformSize(indicatorBottomDistance),
+          display: 'flex',
+          alignItems: 'center',
+          justifyItems: 'center',
+          alignContent: 'center',
+          justifyContent: 'center',
+          ...indicatorBoxStyle,
+          position: 'absolute',
         }}
       >
         {list.map((o, index) => {
