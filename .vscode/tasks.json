@@ -6,7 +6,7 @@
       "script": "start:weapp:simple",
       "problemMatcher": [],
       "label": "start:weapp:simple",
-      "detail": "cd packages/simple-taro-fast-framework && npm run start"
+      "detail": "cd examples/simple-taro-fast-framework && npm run start"
     },
     {
       "type": "npm",
@@ -48,7 +48,7 @@
       "script": "start:simple:h5",
       "problemMatcher": [],
       "label": "start:h5:simple",
-      "detail": "cd packages/simple-taro-fast-framework && npm run start:h5"
+      "detail": "cd examples/simple-taro-fast-framework && npm run start:h5"
     }
   ]
 }
