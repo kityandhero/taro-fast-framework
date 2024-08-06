@@ -84,11 +84,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
-    "taro-fast-common": "^1.18.16",
-    "taro-fast-component": "^2.15.16",
-    "taro-fast-component-extra": "^2.12.16",
-    "taro-fast-component-prism": "^2.13.16",
-    "taro-fast-framework": "^1.16.17"
+    "taro-fast-common": "workspace:*",
+    "taro-fast-component": "workspace:*",
+    "taro-fast-component-extra": "workspace:*",
+    "taro-fast-component-prism": "workspace:*",
+    "taro-fast-framework": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
