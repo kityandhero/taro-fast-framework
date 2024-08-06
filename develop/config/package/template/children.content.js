@@ -7,12 +7,10 @@ const commitScript = {
   precommit: 'npm run z:lint:staged:quiet',
 };
 
-const documentationScript = {
-  'prez:documentation:generate':
-    'npx rimraf ./docs && npm run z:documentation:lint',
-  'z:documentation:generate':
-    'npx documentation build src/** -f html --github -o docs',
-  'z:documentation:lint': 'npx documentation lint src/**',
+const jsdocScript = {
+  'prez:jsdoc:generate': 'npm run z:jsdoc:clear',
+  'z:jsdoc:generate': 'npx jsdoc -c .jsdoc.js',
+  'z:jsdoc:clear': 'npx easy-soft-develop rimraf --path ./docs',
 };
 
 const lintScript = {
@@ -61,7 +59,7 @@ const jestScript = {
 
 module.exports = {
   ...commitScript,
-  ...documentationScript,
+  ...jsdocScript,
   ...lintScript,
   ...prettierScript,
   ...tscScript,

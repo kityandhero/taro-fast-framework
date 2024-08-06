@@ -9,14 +9,10 @@ const lintScript = {
 };
 
 const prepareScript = {
-  prepare:
-    'pnpm changeset init && npm run z:husky:install && echo do other prepare work with here before run z:husky:install',
-  'z:husky:install': 'npx husky install',
+  prepare: 'echo do other prepare work with here before install package',
 };
 
 const toolsScript = {
-  postinstall:
-    'npm run z:initial:environment && echo do other postinstall work with here',
   'z:show:info':
     'echo node version && node --version && echo npm version && npm --version',
   'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
@@ -45,13 +41,11 @@ const environmentScript = {
 
 const repositoryScript = {
   'z:repository:publish': 'pnpm -r publish',
-  'z:bootstrap':
-    'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
+  'z:bootstrap': 'npm run z:clean && git pull && npm run z:install',
 };
 
 const installScript = {
   'z:reinstall': 'npm run z:bootstrap',
-  postinstall: 'npm run z:initial:environment',
   'prez:install.global.develop.dependence':
     'npm run z:change:npm:registry:local',
   'z:install.global.develop.dependence':
@@ -59,6 +53,10 @@ const installScript = {
   'postz:install.global.develop.dependence': 'npm run z:install',
   'prez:install': 'npm run z:change:npm:registry:local',
   'z:install': 'pnpm install',
+  'postz:install':
+    'pnpm changeset init && npm run z:husky && npm run z:post:extra:install && npm run z:initial:environment',
+  'z:post:extra:install': 'echo do other postinstall work with here',
+  'z:husky': 'npx husky',
 };
 
 const nrmScript = {
@@ -87,14 +85,21 @@ const prettierScript = {
 const ncuScript = {
   'z:check:all-package-version':
     'npx easy-soft-develop check-all-package-version',
+  'z:check:every-package-version':
+    'npx easy-soft-develop check-every-package-version',
   'prez:update:all-package-version':
     'node ./develop/assists/install.global.develop.dependence',
   'z:update:all-package-version':
-    'npx easy-soft-develop update-all-package-version',
-  'postz:update:all-package-version': 'npm run z:install',
+    'npx easy-soft-develop update-all-package-version --autoInstall false',
+  'postz:update:all-package-version': 'npm run z:reinstall',
+  'prez:update:every-package-version':
+    'node ./develop/assists/install.global.develop.dependence',
+  'z:update:every-package-version':
+    'npx easy-soft-develop update-every-package-version',
+  'postz:update:every-package-version': 'npm run z:reinstall',
   'z:update:special-package-version':
     'node ./develop/assists/package.update.special.version.js',
-  'postz:update:special-package-version': 'npm run z:install',
+  'postz:update:special-package-version': 'npm run z:reinstall',
 };
 
 module.exports = {

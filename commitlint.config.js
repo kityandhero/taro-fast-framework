@@ -10,105 +10,77 @@ module.exports = {
   ],
   parserPreset: 'conventional-changelog-conventionalcommits',
   prompt: {
+    useEmoji: true,
+    customScopesAlias: '以上都不是？我要自定义',
+    emptyScopesAlias: '跳过',
+    emptyIssuePrefixAlias: '跳过',
+    customIssuePrefixAlias: '自定义前缀',
     messages: {
-      skip: '[可跳过]',
-      max: '[字数上限: %d]',
-      min: '[字数下限: %d]',
-      emptyWarning: '此为必填项目, 不能为空白',
-      upperLimitWarning: '超过最大限制',
-      lowerLimitWarning: '低于最小限制',
+      type: '择要提交的更改类型:',
+      scope: '此更改的范围是什么(例如:组件或文件名):',
+      customScope: '此更改的范围是什么(例如:组件或文件名):',
+      subject: '用简短的祈使语句描述变化:',
+      body: '对变更提供更详细的描述, "|" 为多行间隔符 (可空):',
+      breaking: '有什么破坏性的变化吗, "|" 为多行间隔符 (可空):',
+      footerPrefixesSelect: '通过下列选择变更列表的ISSUES类型 (可空):',
+      customFooterPrefix: '输入 ISSUES 前缀:',
+      footer: '列出此更改引起的任何 ISSUES. 例如: #31, #34:',
+      generatingByAI: '通过AI生成你提交主题...',
+      generatedSelectByAI: '通过AI生成合适的主题:',
+      confirmCommit: '是否提交或修改commit ?',
     },
-    questions: {
-      type: {
-        description: '择要提交的更改类型:',
-        enum: {
-          feat: {
-            description: '新功能/特性',
-            title: 'Features',
-            emoji: '✨',
-          },
-          fix: {
-            description: 'Bug修补',
-            title: 'Bug Fixes',
-            emoji: '🐛',
-          },
-          docs: {
-            description: '仅文档变更',
-            title: 'Documentation',
-            emoji: '📚',
-          },
-          style: {
-            description: '不影响含义的更改(空白、格式、错误码、分号等)',
-            title: 'Styles',
-            emoji: '💎',
-          },
-          refactor: {
-            description: '代码重构(既不修复bug也不添加特性的更改)',
-            title: 'Code Refactoring',
-            emoji: '📦',
-          },
-          perf: {
-            description: '改进性能的调整',
-            title: 'Performance Improvements',
-            emoji: '🚀',
-          },
-          test: {
-            description: '添加缺失的测试或纠正现有的测试',
-            title: 'Tests',
-            emoji: '🚨',
-          },
-          build: {
-            description:
-              '影响构建系统或外部依赖的更改(例如:gulp, broccoli, npm等)',
-            title: 'Builds',
-            emoji: '🛠',
-          },
-          ci: {
-            description:
-              '更改CI配置文件和脚本(例如:Travis、Circle、BrowserStack、SauceLabs等)',
-            title: 'Continuous Integrations',
-            emoji: '⚙️',
-          },
-          chore: {
-            description: '其他不修改src或测试文件的更改',
-            title: 'Chores',
-            emoji: '♻️',
-          },
-          revert: {
-            description: '恢复前一个提交',
-            title: 'Reverts',
-            emoji: '🗑',
-          },
-        },
+    types: [
+      { value: 'feat', name: 'feat:     ✨  含有新功能', emoji: ':sparkles:' },
+      { value: 'fix', name: 'fix:      🐛  Bug修复', emoji: ':bug:' },
+      {
+        value: 'docs',
+        name: 'docs:     📝  仅文档更改',
+        emoji: ':memo:',
       },
-      scope: {
-        description: '此更改的范围是什么(例如:组件或文件名)',
+      {
+        value: 'style',
+        name: 'style:    💄  不影响代码含义的更改',
+        emoji: ':lipstick:',
       },
-      subject: {
-        description: '用简短的祈使语句描述变化',
+      {
+        value: 'refactor',
+        name: 'refactor: ♻️  既不修复错误也不增加功能的代码更改',
+        emoji: ':recycle:',
       },
-      body: {
-        description: '对变更提供更详细的描述',
+      {
+        value: 'perf',
+        name: 'perf:     ⚡️ 改进性能的代码更改',
+        emoji: ':zap:',
       },
-      isBreaking: {
-        description: '有什么突破性的变化吗?',
+      {
+        value: 'test',
+        name: 'test:     ✅  添加缺失的测试或更正现有的测试',
+        emoji: ':white_check_mark:',
       },
-      breakingBody: {
-        description: '中断变更提交需要一个主体. 请输入提交本身的更长的描述',
+      {
+        value: 'build',
+        name: 'build:    📦️ 影响构建系统或外部依赖的更改',
+        emoji: ':package:',
       },
-      breaking: {
-        description: '描述突破性的变化',
+      {
+        value: 'ci',
+        name: 'ci:       🎡  对CI配置文件和脚本的更改',
+        emoji: ':ferris_wheel:',
       },
-      isIssueAffected: {
-        description: '这个变化会影响任何未决问题吗?',
+      {
+        value: 'chore',
+        name: 'chore:    🔨  其他不修改src或测试文件的更改',
+        emoji: ':hammer:',
       },
-      issuesBody: {
-        description:
-          '如果问题被关闭, 则提交需要一个主体. 请输入提交本身的更长的描述',
+      {
+        value: 'revert',
+        name: 'revert:   ⏪️ 恢复之前的提交',
+        emoji: ':rewind:',
       },
-      issues: {
-        description: '添加问题引用(例如:"fix #123",  "re #123".)',
-      },
-    },
+    ],
+    issuePrefixes: [
+      { value: 'link', name: 'link:     链接 ISSUES 进行中' },
+      { value: 'closed', name: 'closed:   标记 ISSUES 已完成' },
+    ],
   },
 };

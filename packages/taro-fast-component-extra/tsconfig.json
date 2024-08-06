@@ -19,7 +19,7 @@
     "strict": true,
     "declaration": true,
     "declarationDir": "es",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": true
   },
   "include": ["src/**/*"],
   "exclude": [
@@ -29,6 +29,6 @@
     "dist",
     "scripts",
     "webpack",
-    "jest",
-  ],
+    "jest"
+  ]
 }

@@ -3,12 +3,6 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-function buildConfig(api) {
-  api.cache(true);
+const { generalConfig } = require('../../develop/config/jsdoc/config');
 
-  return {
-    babelrcRoots: ['.', 'packages/*', 'examples/*'],
-  };
-}
-
-module.exports = buildConfig;
+module.exports = generalConfig;

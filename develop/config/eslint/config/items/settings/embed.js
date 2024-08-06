@@ -17,7 +17,11 @@ const items = {
       alwaysTryTypes: true,
 
       // use an array of glob patterns
-      directory: ['./tsconfig.json', './packages/*/tsconfig.json'],
+      directory: [
+        './tsconfig.json',
+        './packages/*/tsconfig.json',
+        './examples/*/tsconfig.json',
+      ],
     },
   },
 };

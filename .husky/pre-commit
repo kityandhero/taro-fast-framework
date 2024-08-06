@@ -1,7 +1,2 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 echo ---------------------
 echo exec husky pre-commit
-
-npm run z:lint:staged

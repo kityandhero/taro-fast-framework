@@ -6,6 +6,8 @@
 const { initialEnvironment } = require('easy-soft-develop');
 
 const eslintFile = require('../config/eslint/template/content');
+const ncuFile = require('../config/ncu/template/content');
+const jsdocFile = require('../config/jsdoc/template/content');
 const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
 const prettierFile = require('../config/prettier/template/content');
 const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
@@ -24,6 +26,11 @@ const childrenCustomPackageFile = require('../config/package/custom/children.con
 
 const mainEslintFileContent = eslintFile.mainContent;
 const packageEslintFileContent = eslintFile.packageContent;
+
+const mainNcuFileContent = ncuFile.mainContent;
+const packageNcuFileContent = ncuFile.packageContent;
+
+const packageJsdocFileContent = jsdocFile.packageContent;
 
 const eslintIgnoreContent = eslintIgnoreFile.content;
 
@@ -51,6 +58,11 @@ const mainFileContentList = [
   {
     name: '.eslintrc.js',
     content: mainEslintFileContent,
+    coverFile: true,
+  },
+  {
+    name: '.ncurc.js',
+    content: mainNcuFileContent,
     coverFile: true,
   },
   {
@@ -104,6 +116,16 @@ const packageFileContentList = [
   {
     name: '.eslintrc.js',
     content: packageEslintFileContent,
+    coverFile: true,
+  },
+  {
+    name: '.ncurc.js',
+    content: packageNcuFileContent,
+    coverFile: true,
+  },
+  {
+    name: '.jsdoc.js',
+    content: packageJsdocFileContent,
     coverFile: true,
   },
   {
