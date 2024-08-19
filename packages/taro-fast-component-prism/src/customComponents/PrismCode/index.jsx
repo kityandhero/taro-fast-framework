@@ -7,14 +7,15 @@ import { HtmlBox } from 'taro-fast-component';
 import './index.less';
 
 if (process.env.TARO_ENV !== 'h5') {
+  // eslint-disable-next-line unicorn/prefer-module
   require('@tarojs/taro/html.css');
 }
 
-Taro.options.html.transformElement = (el) => {
-  if (el.nodeName === 'text') {
-    el.setAttribute('decode', 'true');
+Taro.options.html.transformElement = (element) => {
+  if (element.nodeName === 'text') {
+    element.setAttribute('decode', 'true');
   }
-  return el;
+  return element;
 };
 
 const defaultProps = {
@@ -30,7 +31,7 @@ class PrismCode extends AbstractComponent {
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
     this.highlight();
   };
 
@@ -44,7 +45,7 @@ class PrismCode extends AbstractComponent {
     const { plugins, language } = this.props;
 
     return `<pre class="${
-      !plugins ? '' : plugins.join(' ')
+      plugins ? plugins.join(' ') : ''
     } tfc-prism-code-box"><code class="${`language-${language}`}">${this.highlight()}</code></pre>`;
   };
 

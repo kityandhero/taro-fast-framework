@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- update
+
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [2.13.16](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-component-prism@2.13.15...taro-fast-component-prism@2.13.16) (2023-03-10)
