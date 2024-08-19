@@ -1,5 +1,14 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-component@3.0.1
+  - taro-fast-common@3.0.1
+
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [1.16.17](https://github.com/kityandhero/taro-fast-framework/compare/taro-fast-framework@1.16.16...taro-fast-framework@1.16.17) (2023-03-10)
