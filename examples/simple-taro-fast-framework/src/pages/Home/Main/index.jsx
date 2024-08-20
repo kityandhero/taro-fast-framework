@@ -152,7 +152,7 @@ definePageConfig({
 class Index extends PageWrapperSimulation {
   onShareAppMessage() {
     const o = {
-      path: pathCollection.example.main.path,
+      path: pathCollection.root.main.path,
     };
 
     return o;

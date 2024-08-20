@@ -24,9 +24,10 @@ const config = {
     options: {},
   },
   framework: 'react',
-  // alias: {
-  //   '@': path.resolve(__dirname, '..', 'src'),
-  // },
+  alias: {
+    '@tarojs/runtime': require.resolve('@tarojs/runtime'),
+    // '@': path.resolve(__dirname, '..', 'src'),
+  },
   compiler: {
     type: 'webpack5',
     prebundle: {
@@ -106,7 +107,7 @@ const config = {
   },
 };
 
-export default function (merge) {
+export default function mergeConfig(merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'));
   }

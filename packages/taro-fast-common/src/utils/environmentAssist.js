@@ -6,6 +6,7 @@ import {
   checkWhetherDevelopmentEnvironment,
   displayTextMessage,
   environmentCollection,
+  existCachePool,
   getCache,
   logColorCollection,
   mergeTextMessage,
@@ -35,34 +36,7 @@ export function checkEnvironment() {
   getEnvironment();
 }
 
-export function getEnvironment() {
-  let v = '';
-
-  try {
-    v = getCache({
-      key: cacheKeyCollection.currentEnv,
-    });
-  } catch (error) {
-    console.log(error);
-
-    if (checkWhetherDevelopmentEnvironment()) {
-      displayTextMessage({
-        text: buildPromptModuleInfoText('call cache fail with getCache'),
-        color: logColorCollection.warn,
-        dataDescription: 'warn',
-        ancillaryInformation: '',
-      });
-    }
-  }
-
-  if (checkStringIsNullOrWhiteSpace(v)) {
-    v = setEnvironmentCache();
-  }
-
-  return v;
-}
-
-function setEnvironmentCache() {
+export function getEnvironmentPure() {
   let v = environmentCollection.UNKNOWN;
 
   const environment = getEnvironmentCore();
@@ -122,6 +96,43 @@ function setEnvironmentCache() {
       break;
     }
   }
+
+  return v;
+}
+
+export function getEnvironment() {
+  let v = '';
+
+  if (!existCachePool()) {
+    return getEnvironmentPure();
+  }
+
+  try {
+    v = getCache({
+      key: cacheKeyCollection.currentEnv,
+    });
+  } catch (error) {
+    console.log(error);
+
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: buildPromptModuleInfoText('call cache fail with getCache'),
+        color: logColorCollection.warn,
+        dataDescription: 'warn',
+        ancillaryInformation: '',
+      });
+    }
+  }
+
+  if (checkStringIsNullOrWhiteSpace(v)) {
+    v = setEnvironmentCache();
+  }
+
+  return v;
+}
+
+function setEnvironmentCache() {
+  let v = getEnvironmentPure();
 
   try {
     setCache({

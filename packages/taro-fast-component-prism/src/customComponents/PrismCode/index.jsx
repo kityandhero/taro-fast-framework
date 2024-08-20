@@ -1,8 +1,8 @@
 import Prism from 'prismjs';
+import { RichText } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { AbstractComponent, copyToClipboard } from 'taro-fast-common';
-import { HtmlBox } from 'taro-fast-component';
 
 import './index.less';
 
@@ -60,7 +60,8 @@ class PrismCode extends AbstractComponent {
   };
 
   renderFurther() {
-    return <HtmlBox html={this.buildHtml()} onClick={this.triggerClick} />;
+    return <RichText nodes={this.buildHtml()} onTap={this.triggerClick} />;
+    // return <HtmlBox html={this.buildHtml()} onClick={this.triggerClick} />;
   }
 }
 
