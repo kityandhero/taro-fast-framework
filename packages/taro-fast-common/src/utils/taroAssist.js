@@ -22,8 +22,8 @@ import {
 } from 'easy-soft-utility';
 
 import {
-  checkWeAppEnvironment as checkWeAppEnvironmentironment,
-  checkWebEnvironment as checkWebEnvironmentironment,
+  checkWeAppEnvironment,
+  checkWebEnvironment,
 } from './environmentAssist';
 import { transformSize } from './styleAssist';
 
@@ -288,7 +288,7 @@ export function requestAnimationFrame(callback) {
 }
 
 export function hideNavigationBarLoading() {
-  if (checkWeAppEnvironmentironment()) {
+  if (checkWeAppEnvironment()) {
     hideNavigationBarLoadingCore();
   }
 }
@@ -310,7 +310,7 @@ export function copyToClipboard({ text, successCallback = null }) {
 }
 
 export function handleTouchScroll(flag) {
-  if (checkWebEnvironmentironment()) {
+  if (checkWebEnvironment()) {
     return;
   }
 

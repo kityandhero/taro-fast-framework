@@ -22,6 +22,7 @@ import { getLocationMode } from './locationAssist';
 import { getOpenId } from './openIdAssist';
 import { getSession } from './sessionAssist';
 import {
+  getAppId,
   getAuthenticationFailCode,
   getShowRequestInfo,
   getSignInPath,
@@ -75,12 +76,14 @@ const Request = {
   Execute({ url, data, header = {}, option, method = requestMethod.post }) {
     try {
       const token = getToken() || getTokenAnonymous();
-      const openId = getOpenId();
-      const sessionId = getSession();
-      const locationMode = getLocationMode();
+      const appId = getAppId() ?? '';
+      const openId = getOpenId() ?? '';
+      const sessionId = getSession() ?? '';
+      const locationMode = getLocationMode() ?? '';
 
       const headerChange = {
         ...header,
+        appId,
         openId,
         sessionId,
         locationMode,
