@@ -43,11 +43,11 @@ class Badge extends BaseComponent {
 
     return {
       ...wrapStyle,
-      ...(!checkStringIsNullOrWhiteSpace(wrapHeight)
-        ? {
+      ...(checkStringIsNullOrWhiteSpace(wrapHeight)
+        ? {}
+        : {
             '--wrap-height': transformSize(wrapHeight),
-          }
-        : {}),
+          }),
       ...(wrapCenter
         ? {
             display: 'flex',
@@ -117,9 +117,8 @@ class Badge extends BaseComponent {
           className={badgeCls}
           style={{
             ...style,
-            ...{
-              backgroundColor: color || defaultProps.color,
-            },
+
+            backgroundColor: color || defaultProps.color,
           }}
         >
           {isDot ? Badge.dot : content}

@@ -43,9 +43,7 @@ class SwiperItemContainer extends BaseComponent {
     }
 
     const { style: styleCustom } = {
-      ...{
-        style: {},
-      },
+      style: {},
       ...data,
     };
 

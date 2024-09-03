@@ -10,36 +10,33 @@ const classPrefix = `tfc-selector`;
 
 const defaultProps = {
   ...AbstractComponent.defaultProps,
-  ...{
-    multiple: false,
-    value: [],
-    options: [],
-    columns: 4,
-    disabled: false,
-    onChange: null,
-  },
+  multiple: false,
+  value: [],
+  options: [],
+  columns: 4,
+  disabled: false,
+  onChange: null,
 };
 
 class Selector extends AbstractComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { value } = props;
+    const { value } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        valueFlag: value || [],
-        valueTemp: value || [],
-      },
+
+      valueFlag: value || [],
+      valueTemp: value || [],
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext || [],
         valueTemp: valueNext || [],
@@ -57,32 +54,32 @@ class Selector extends AbstractComponent {
       throw new Error('Selector Options must be array');
     }
 
-    let val = [];
+    let value = [];
 
     if (multiple) {
-      val = active
+      value = active
         ? valueTemp.filter((v) => v !== option.value)
         : [...valueTemp, option.value];
 
       this.setState({
-        valueTemp: val,
+        valueTemp: value,
       });
     } else {
-      val = active ? [] : [option.value];
+      value = active ? [] : [option.value];
 
       this.setState({
-        valueTemp: val,
+        valueTemp: value,
       });
     }
 
     const extend = {
       get items() {
-        return options.filter((o) => val.includes(o.value));
+        return options.filter((o) => value.includes(o.value));
       },
     };
 
     if (isFunction(onChange)) {
-      onChange(val, extend);
+      onChange(value, extend);
     }
   };
 

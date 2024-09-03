@@ -30,31 +30,30 @@ const defaultProps = {
   afterEnd: null,
 };
 
-function formatNum(num) {
-  return num <= 9 ? `0${num}` : `${num}`;
+function formatNumber(o) {
+  return o <= 9 ? `0${o}` : `${o}`;
 }
 
 class Countdown extends BaseComponent {
   timer = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        day: 0,
-        hour: 0,
-        minute: 0,
-        second: 0,
-        endTime: null,
-      },
+
+      day: 0,
+      hour: 0,
+      minute: 0,
+      second: 0,
+      endTime: null,
     };
   }
 
   // eslint-disable-next-line no-unused-vars
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { endTime } = nextProps;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { endTime } = nextProperties;
 
     return { endTime };
   }
@@ -68,7 +67,7 @@ class Countdown extends BaseComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
     const { endTime } = this.state;
 
     if (this.timer != null) {
@@ -86,7 +85,7 @@ class Countdown extends BaseComponent {
 
   countFun = (time) => {
     const et = toDatetime(time).getTime();
-    let sysSecond = et - new Date().getTime();
+    let sysSecond = et - Date.now();
 
     this.timer = setInterval(() => {
       // 防止倒计时出现负数
@@ -135,7 +134,7 @@ class Countdown extends BaseComponent {
     const { day, hour, minute, second } = this.state;
 
     const valueStyleChanged = {
-      ...(!!valueColor
+      ...(valueColor
         ? {
             color: valueColor,
           }
@@ -158,7 +157,7 @@ class Countdown extends BaseComponent {
     };
 
     const separatorColorChanged = {
-      ...(!!separatorColor
+      ...(separatorColor
         ? {
             color: separatorColor,
           }
@@ -186,7 +185,7 @@ class Countdown extends BaseComponent {
             })}
             style={valueStyleChanged}
           >
-            {formatNum(day)}
+            {formatNumber(day)}
           </View>
         ) : null}
         {showDay ? (
@@ -211,7 +210,7 @@ class Countdown extends BaseComponent {
             })}
             style={valueStyleChanged}
           >
-            {formatNum(hour)}
+            {formatNumber(hour)}
           </View>
         ) : null}
         {showHour ? (
@@ -235,7 +234,7 @@ class Countdown extends BaseComponent {
           })}
           style={valueStyleChanged}
         >
-          {formatNum(minute)}
+          {formatNumber(minute)}
         </View>
         <View
           className={classNames({
@@ -256,7 +255,7 @@ class Countdown extends BaseComponent {
           })}
           style={valueStyleChanged}
         >
-          {formatNum(second)}
+          {formatNumber(second)}
         </View>
         <View
           className={classNames({

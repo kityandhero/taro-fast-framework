@@ -38,7 +38,7 @@ class Footer extends BaseComponent {
       <View
         style={{
           ...style,
-          ...{ height: transformSize(totalHeight) },
+          height: transformSize(totalHeight),
         }}
       >
         {showTop ? (
@@ -61,15 +61,13 @@ class Footer extends BaseComponent {
                 <VerticalBox>
                   <View
                     style={{
-                      ...{
-                        color: '#00000073',
-                        fontSize: transformSize(24),
-                      },
-                      ...(!checkStringIsNullOrWhiteSpace(color)
-                        ? {
+                      color: '#00000073',
+                      fontSize: transformSize(24),
+                      ...(checkStringIsNullOrWhiteSpace(color)
+                        ? {}
+                        : {
                             color,
-                          }
-                        : {}),
+                          }),
                     }}
                   >
                     {text}
@@ -85,15 +83,13 @@ class Footer extends BaseComponent {
             <CenterBox>
               <View
                 style={{
-                  ...{
-                    color: '#00000073',
-                    fontSize: transformSize(20),
-                  },
-                  ...(!checkStringIsNullOrWhiteSpace(color)
-                    ? {
+                  color: '#00000073',
+                  fontSize: transformSize(20),
+                  ...(checkStringIsNullOrWhiteSpace(color)
+                    ? {}
+                    : {
                         color,
-                      }
-                    : {}),
+                      }),
                 }}
               >
                 {description}

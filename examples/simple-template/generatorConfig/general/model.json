@@ -1,0 +1,123 @@
+{
+  "list": [
+    {
+      "apis": [
+        {
+          "title": "刷新会话",
+          "api": "/wechatApplication/session/refreshSession",
+          "effect": "refreshSession",
+          "service": "refreshSessionData",
+          "type": "singleData"
+        },
+        {
+          "title": "交换手机号",
+          "api": "/wechatApplication/session/exchangePhone",
+          "effect": "exchangePhone",
+          "service": "exchangePhoneData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "会话相关",
+      "name": "session"
+    },
+    {
+      "apis": [
+        {
+          "title": "登录",
+          "api": "/wechatApplication/entrance/signIn",
+          "effect": "signIn",
+          "service": "signInData",
+          "type": "singleData"
+        },
+        {
+          "title": "静默登录",
+          "api": "/wechatApplication/entrance/signInSilent",
+          "effect": "signInSilent",
+          "service": "signInSilentData",
+          "type": "singleData"
+        },
+        {
+          "title": "凭证校验",
+          "api": "/wechatApplication/entrance/checkTicketValidity",
+          "effect": "checkTicketValidity",
+          "service": "checkTicketValidityData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "登录注册相关",
+      "name": "entrance"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取元数据",
+          "api": "/wechatApplication/metaData/get",
+          "effect": "getMetaData",
+          "service": "getMetaDataData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "一般数据相关",
+      "name": "global"
+    },
+    {
+      "apis": [
+        {
+          "title": "存储分享参数",
+          "api": "/wechatApplication/share/createShareUrlParams",
+          "effect": "createShareUrlParameters",
+          "service": "createShareUrlParametersData",
+          "type": "singleData"
+        },
+        {
+          "title": "兑换分享数据",
+          "api": "/wechatApplication/share/exchangeShare",
+          "effect": "exchangeShare",
+          "service": "exchangeShareData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "分享相关",
+      "name": "share"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取当前登录用户信息",
+          "api": "/wechatApplication/customerCenter/customer/getCurrentInfo",
+          "effect": "getCurrentInfo",
+          "service": "getCurrentInfoData",
+          "type": "singleData"
+        },
+        {
+          "title": "获取信息",
+          "api": "/wechatApplication/customerCenter/customer/getCustomer",
+          "effect": "getCustomer",
+          "service": "getCustomerData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "用户相关",
+      "name": "customer"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取当前登录用户信息",
+          "api": "/wechatApplication/administrativeDivision/singleListTreeThreeLevel",
+          "effect": "singleListTreeThreeLevel",
+          "service": "singleListTreeThreeLevelData",
+          "type": "singleListData"
+        }
+      ],
+      "cover": true,
+      "title": "地理数据",
+      "name": "administrativeDivision"
+    }
+  ]
+}

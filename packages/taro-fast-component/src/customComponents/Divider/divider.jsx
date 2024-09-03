@@ -84,14 +84,9 @@ class Divider extends BaseComponent {
                 '--line-style': lineStyle,
               }
             : {}),
-          ...{
-            padding: isNumber(padding)
-              ? `${transformSize(padding)} 0`
-              : padding,
-          },
-          ...{
-            height: transformSize(height > 0 ? height : 38),
-          },
+
+          padding: isNumber(padding) ? `${transformSize(padding)} 0` : padding,
+          height: transformSize(height > 0 ? height : 38),
         }}
       >
         {children ? (

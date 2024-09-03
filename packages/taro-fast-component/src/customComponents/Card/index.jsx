@@ -166,7 +166,7 @@ class Card extends BaseComponent {
         className={classNames(classPrefix, `${classPrefix}-${mode}`)}
         style={{
           ...style,
-          ...(!border ? { border: '0' } : {}),
+          ...(border ? {} : { border: '0' }),
           ...(shadow && !checkStringIsNullOrWhiteSpace(shadowColor)
             ? {
                 boxShadow: `var(--tfc-color-shadow-size) ${handleInlayColor(
@@ -199,7 +199,7 @@ class Card extends BaseComponent {
             rightStyle={
               extra
                 ? {
-                    ...{ padding: `0 ${transformSize(18)} 0 0` },
+                    padding: `0 ${transformSize(18)} 0 0`,
                     ...(isString(extra) ? { fontSize: transformSize(28) } : {}),
                     ...extraStyle,
                   }
@@ -214,7 +214,7 @@ class Card extends BaseComponent {
           })}
           style={{
             ...bodyStyle,
-            ...(!bodyBorder ? { border: '0' } : {}),
+            ...(bodyBorder ? {} : { border: '0' }),
           }}
         >
           {scroll ? (
@@ -243,7 +243,7 @@ class Card extends BaseComponent {
             className={classNames(`${classPrefix}-footer`)}
             style={{
               ...footerStyle,
-              ...(!footerBorder ? { border: '0' } : {}),
+              ...(footerBorder ? {} : { border: '0' }),
             }}
           >
             {footer}

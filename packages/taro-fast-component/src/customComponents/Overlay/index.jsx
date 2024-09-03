@@ -47,7 +47,6 @@ class Overlay extends BaseComponent {
 
     this.state = {
       ...this.state,
-
       counter: 0,
     };
   }

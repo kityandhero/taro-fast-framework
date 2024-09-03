@@ -42,11 +42,11 @@ class TranslucentBox extends BaseComponent {
     };
   };
 
-  triggerClick = (value, e) => {
+  triggerClick = (value, event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(value, e);
+      onClick(value, event);
     }
   };
 

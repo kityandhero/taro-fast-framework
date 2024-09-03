@@ -71,7 +71,7 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     return {
-      ...(!checkStringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(checkStringIsNullOrWhiteSpace(color) ? {} : { color }),
       ...(fontSize > 0
         ? {
             fontSize: transformSize(fontSize),
@@ -87,7 +87,7 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     return {
-      ...(!checkStringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(checkStringIsNullOrWhiteSpace(color) ? {} : { color }),
       ...(fontSize > 0
         ? {
             fontSize: transformSize(fontSize),
@@ -103,7 +103,7 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     return {
-      ...(!checkStringIsNullOrWhiteSpace(color) ? { color } : {}),
+      ...(checkStringIsNullOrWhiteSpace(color) ? {} : { color }),
       ...(fontSize > 0
         ? {
             fontSize: transformSize(fontSize),
@@ -152,10 +152,8 @@ class ColorText extends BaseComponent {
         left={text}
         leftStyle={textPart}
         rightStyle={{
-          ...{
-            ...{ marginLeft: transformSize(12) },
-          },
-          ...(extraStyle || {}),
+          marginLeft: transformSize(12),
+          ...extraStyle,
         }}
         right={<VerticalBox>{extra}</VerticalBox>}
       />
@@ -168,9 +166,9 @@ class ColorText extends BaseComponent {
     const color = this.getColor();
 
     const style = {
-      ...{ color },
+      color,
       ...styleSource,
-      ...{ display: 'inline-block' },
+      display: 'inline-block',
     };
 
     return (
@@ -186,7 +184,7 @@ class ColorText extends BaseComponent {
           leftStyle={
             icon
               ? {
-                  ...{ marginRight: transformSize(10) },
+                  marginRight: transformSize(10),
                   ...iconContainerStyle,
                 }
               : {}

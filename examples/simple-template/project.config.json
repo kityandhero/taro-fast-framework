@@ -1,0 +1,83 @@
+{
+  "miniprogramRoot": "dist/weapp/",
+  "projectname": "taro-fast-application",
+  "description": "项目配置文件, 详见文档: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "appid": "wx1e4429235f514c47",
+  "ignoreDevUnusedFiles": false,
+  "ignoreUploadUnusedFiles": false,
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "enhance": false,
+    "postcss": false,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "lazyloadPlaceholderEnable": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true,
+    "useStaticServer": true,
+    "condition": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.17.0",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "entry",
+          "pathName": "pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "home",
+          "pathName": "pages/home/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "customer",
+          "pathName": "pages/customer/main/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  },
+  "srcMiniprogramRoot": "dist/weapp/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
+}

@@ -94,73 +94,70 @@ class Modal extends BaseComponent {
     if (!hideFooter) {
       f = footer;
 
-      if (!f) {
-        if (!!showCancel || !!showConfirm) {
-          f = (
-            <Row>
-              {showCancel ? (
-                <Col size={!!showCancel && !!showConfirm ? 6 : 12}>
-                  <View
-                    className={classNames(`${classPrefix}__container__action`, {
-                      [`${classPrefix}__container__action__fill`]: buttonFill,
-                      [`${classPrefix}__container__action__split`]:
-                        buttonFill && showCancel && showConfirm,
-                      [`${classPrefix}__container__action__no__fill`]:
-                        !buttonFill,
-                    })}
-                    hoverClass={
-                      buttonFill
-                        ? `${classPrefix}__container__action--hover`
-                        : 'none'
-                    }
-                    style={{
-                      ...(!buttonFill
-                        ? {
-                            border:
-                              'var(--tfc-2) solid var(--tfc-color-primary)',
-                            color: 'var(--tfc-color-primary)',
-                          }
-                        : {}),
-                      ...cancelStyle,
-                    }}
-                    onClick={this.triggerCancel}
-                  >
-                    {cancelText}
-                  </View>
-                </Col>
-              ) : null}
+      if (!f && (!!showCancel || !!showConfirm)) {
+        f = (
+          <Row>
+            {showCancel ? (
+              <Col size={!!showCancel && !!showConfirm ? 6 : 12}>
+                <View
+                  className={classNames(`${classPrefix}__container__action`, {
+                    [`${classPrefix}__container__action__fill`]: buttonFill,
+                    [`${classPrefix}__container__action__split`]:
+                      buttonFill && showCancel && showConfirm,
+                    [`${classPrefix}__container__action__no__fill`]:
+                      !buttonFill,
+                  })}
+                  hoverClass={
+                    buttonFill
+                      ? `${classPrefix}__container__action--hover`
+                      : 'none'
+                  }
+                  style={{
+                    ...(buttonFill
+                      ? {}
+                      : {
+                          border: 'var(--tfc-2) solid var(--tfc-color-primary)',
+                          color: 'var(--tfc-color-primary)',
+                        }),
+                    ...cancelStyle,
+                  }}
+                  onClick={this.triggerCancel}
+                >
+                  {cancelText}
+                </View>
+              </Col>
+            ) : null}
 
-              {showConfirm ? (
-                <Col size={!!showCancel && !!showConfirm ? 6 : 12}>
-                  <View
-                    className={classNames(`${classPrefix}__container__action`, {
-                      [`${classPrefix}__container__action__fill`]: buttonFill,
-                      [`${classPrefix}__container__action__no__fill`]:
-                        !buttonFill,
-                    })}
-                    hoverClass={
-                      buttonFill
-                        ? `${classPrefix}__container__action--hover`
-                        : 'none'
-                    }
-                    style={{
-                      ...(!buttonFill
-                        ? {
-                            backgroundColor: 'var(--tfc-color-primary)',
-                            color: '#fff',
-                          }
-                        : {}),
-                      ...confirmStyle,
-                    }}
-                    onClick={this.triggerConfirm}
-                  >
-                    {confirmText}
-                  </View>
-                </Col>
-              ) : null}
-            </Row>
-          );
-        }
+            {showConfirm ? (
+              <Col size={!!showCancel && !!showConfirm ? 6 : 12}>
+                <View
+                  className={classNames(`${classPrefix}__container__action`, {
+                    [`${classPrefix}__container__action__fill`]: buttonFill,
+                    [`${classPrefix}__container__action__no__fill`]:
+                      !buttonFill,
+                  })}
+                  hoverClass={
+                    buttonFill
+                      ? `${classPrefix}__container__action--hover`
+                      : 'none'
+                  }
+                  style={{
+                    ...(buttonFill
+                      ? {}
+                      : {
+                          backgroundColor: 'var(--tfc-color-primary)',
+                          color: '#fff',
+                        }),
+                    ...confirmStyle,
+                  }}
+                  onClick={this.triggerConfirm}
+                >
+                  {confirmText}
+                </View>
+              </Col>
+            ) : null}
+          </Row>
+        );
       }
     }
 
@@ -184,14 +181,14 @@ class Modal extends BaseComponent {
         >
           <Card
             mode="card"
-            style={{ ...style, ...{ width: width } }}
+            style={{ ...style, width: width }}
             header={header}
             headerStyle={headerStyle}
             bodyBorder={bodyBorder}
             bodyStyle={bodyStyle}
             footer={f}
             footerBorder={!hideFooter && buttonFill}
-            footerStyle={{ ...{ padding: '0' }, ...footerStyle }}
+            footerStyle={{ padding: '0', ...footerStyle }}
             space={space}
             extra={extra}
             extraStyle={extraStyle}

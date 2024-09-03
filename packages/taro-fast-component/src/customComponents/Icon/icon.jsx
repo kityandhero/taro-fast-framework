@@ -30,9 +30,7 @@ class Icon extends BaseComponent {
           className={classNames(className)}
           style={{
             ...style,
-            ...{
-              width: transformSize(size),
-            },
+            width: transformSize(size),
           }}
           onClick={this.handleClick}
         >

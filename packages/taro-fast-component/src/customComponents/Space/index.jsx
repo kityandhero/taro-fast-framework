@@ -32,7 +32,7 @@ const getAlign = (align) => {
   return checkInCollection(alignCollection, align) ? align : 'center';
 };
 
-const Space = (props) => {
+const Space = (properties) => {
   const {
     size,
     align: alignSource,
@@ -44,8 +44,8 @@ const Space = (props) => {
     style,
     wrap = false,
     fillWidth = false,
-    ...otherProps
-  } = props;
+    ...otherProperties
+  } = properties;
 
   const direction = getDirection(directionSource);
   const align = getAlign(alignSource);
@@ -72,19 +72,19 @@ const Space = (props) => {
 
   let latestIndex = 0;
 
-  const nodes = isUndefined(props.children)
+  const nodes = isUndefined(properties.children)
     ? []
-    : React.Children.map(props.children, (child, i) => {
+    : React.Children.map(properties.children, (child, index) => {
         if (child !== null && child !== undefined) {
-          latestIndex = i;
+          latestIndex = index;
         }
 
         return (
           <SpaceItem
             className={itemClassName}
-            key={`${itemClassName}-${i}`}
+            key={`${itemClassName}-${index}`}
             direction={direction}
-            index={i}
+            index={index}
             marginDirection={marginDirection}
             split={split}
             wrap={wrap}
@@ -120,7 +120,7 @@ const Space = (props) => {
         ...style,
         ...(fillWidth ? { width: '100%' } : {}),
       }}
-      {...otherProps}
+      {...otherProperties}
     >
       <SpaceContext.Provider value={spaceContext}>
         {nodes}

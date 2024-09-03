@@ -10,7 +10,7 @@ import './index.less';
 const defaultSpinColor = '#13CE66';
 const defaultSpinSize = 32;
 
-const Spin = (props) => {
+const Spin = (properties) => {
   const {
     spin: spinValue,
     text: textValue,
@@ -21,7 +21,7 @@ const Spin = (props) => {
     spinType = '',
     overlayBackgroundColor,
     customLoading,
-  } = props;
+  } = properties;
 
   const spin = spinValue || false;
   const text = textValue || '';
@@ -30,9 +30,9 @@ const Spin = (props) => {
   const spinColor = spinColorValue || defaultSpinColor;
   const spinSize = spinSizeValue || defaultSpinSize;
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (event) => {
     if (fullscreen) {
-      e.stopPropagation();
+      event.stopPropagation();
     }
   };
 
@@ -53,11 +53,9 @@ const Spin = (props) => {
             spin ? 'tfc_spin_overlay_show' : 'tfc_spin_overlay_hide'
           }`}
           style={{
-            ...{
-              width: fullscreen ? '100vw' : '100%',
-              height: fullscreen ? '100vh' : '100%',
-              transition: 'opacity 0.2s',
-            },
+            width: fullscreen ? '100vw' : '100%',
+            height: fullscreen ? '100vh' : '100%',
+            transition: 'opacity 0.2s',
             ...(checkStringIsNullOrWhiteSpace(overlayBackgroundColor)
               ? {}
               : { backgroundColor: overlayBackgroundColor }),
@@ -67,9 +65,7 @@ const Spin = (props) => {
         >
           <CenterBox>
             {showLoading ? (
-              customLoading ? (
-                customLoading
-              ) : (
+              (customLoading ?? (
                 <ActivityIndicator
                   visible={spin}
                   content={text}
@@ -77,7 +73,7 @@ const Spin = (props) => {
                   type={spinType}
                   size={spinSize}
                 />
-              )
+              ))
             ) : (
               <View className="tfc_content_box">{text}</View>
             )}
@@ -85,7 +81,7 @@ const Spin = (props) => {
         </View>
       </View>
 
-      {props.children}
+      {properties.children}
     </View>
   );
 };

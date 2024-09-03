@@ -101,7 +101,7 @@ export const Stepper = (p) => {
       return;
     }
 
-    const { min, max, digits } = properties;
+    const { digits } = properties;
 
     let target = toBoundary(v, min, max);
 

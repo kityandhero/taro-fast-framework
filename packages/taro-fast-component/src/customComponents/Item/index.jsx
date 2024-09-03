@@ -46,8 +46,8 @@ class Item extends BaseComponent {
 
   bodyHeight = -1;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.bodyId = getGuid();
   }
@@ -65,7 +65,7 @@ class Item extends BaseComponent {
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
     this.updateBodyHeight();
   };
 
@@ -86,7 +86,7 @@ class Item extends BaseComponent {
 
       getRect(`#${that.bodyId}`)
         .then((rect) => {
-          const { height } = { ...{ height: 0 }, ...rect };
+          const { height } = { height: 0, ...rect };
 
           if (height > 0) {
             that.bodyHeight = height;
@@ -103,7 +103,7 @@ class Item extends BaseComponent {
   triggerClick = () => {
     const { disabled, onClick } = this.props;
 
-    if (!!disabled) {
+    if (disabled) {
       return;
     }
 
@@ -142,7 +142,7 @@ class Item extends BaseComponent {
     const containerStyle = this.getContainerStyle();
 
     const b =
-      (body || null) != null ? (
+      (body || null) == null ? null : (
         <View
           className={classNames(`${classPrefix}-body`, {
             [`${classPrefix}-body__animate`]: bodyAnimate,
@@ -169,7 +169,7 @@ class Item extends BaseComponent {
             </View>
           </View>
         </View>
-      ) : null;
+      );
 
     return (
       <View className={classNames(`${classPrefix}`)} style={containerStyle}>
@@ -189,7 +189,7 @@ class Item extends BaseComponent {
           onClick={this.triggerClick}
         >
           <View className={`${classPrefix}-header-content`}>
-            {!!prefix ? (
+            {prefix ? (
               <View
                 className={`${classPrefix}-header-content-prefix`}
                 style={prefixStyle}
@@ -221,9 +221,7 @@ class Item extends BaseComponent {
               <View
                 className={`${classPrefix}-header-content-extra`}
                 style={{
-                  ...{
-                    fontSize: transformSize(28),
-                  },
+                  fontSize: transformSize(28),
                   ...extraContainerStyle,
                 }}
               >
@@ -247,13 +245,13 @@ class Item extends BaseComponent {
           <Line height={borderTopDistance} transparent />
         ) : null}
 
-        {!border ? null : (
+        {border ? (
           <View className={classNames(`${classPrefix}__bottom`)}>
             <View
               className={classNames(`${classPrefix}__bottom__border`)}
             ></View>
           </View>
-        )}
+        ) : null}
       </View>
     );
   }

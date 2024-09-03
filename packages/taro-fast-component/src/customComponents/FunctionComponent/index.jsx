@@ -152,19 +152,19 @@ export function buildSwiper({
       displayMultipleItems={displayMultipleItems}
       skipHiddenItemLayout={skipHiddenItemLayout}
       easingFunction={easingFunction}
-      onChange={(e) => {
+      onChange={(event) => {
         if (isFunction(onChange)) {
-          onChange(e);
+          onChange(event);
         }
       }}
-      onTransition={(e) => {
+      onTransition={(event) => {
         if (isFunction(onTransition)) {
-          onTransition(e);
+          onTransition(event);
         }
       }}
-      onAnimationFinish={(e) => {
+      onAnimationFinish={(event) => {
         if (isFunction(onAnimationFinish)) {
-          onAnimationFinish(e);
+          onAnimationFinish(event);
         }
       }}
     >

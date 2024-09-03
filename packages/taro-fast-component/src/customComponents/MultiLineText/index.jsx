@@ -21,11 +21,9 @@ class MultiLineText extends BaseComponent {
     const { style, lineHeight, fontSize } = this.props;
 
     return {
-      ...(style || {}),
-      ...{
-        lineHeight: transformSize(lineHeight),
-        fontSize: transformSize(fontSize),
-      },
+      ...style,
+      lineHeight: transformSize(lineHeight),
+      fontSize: transformSize(fontSize),
     };
   };
 
@@ -39,11 +37,9 @@ class MultiLineText extends BaseComponent {
     return (
       <View
         style={{
-          ...(prefixStyle || {}),
-          ...{
-            display: 'inline-block',
-            verticalAlign: 'top',
-          },
+          ...prefixStyle,
+          display: 'inline-block',
+          verticalAlign: 'top',
         }}
       >
         <CenterBox>{prefix}</CenterBox>
@@ -61,11 +57,9 @@ class MultiLineText extends BaseComponent {
     return (
       <View
         style={{
-          ...(suffixStyle || {}),
-          ...{
-            display: 'inline-block',
-            verticalAlign: 'top',
-          },
+          ...suffixStyle,
+          display: 'inline-block',
+          verticalAlign: 'top',
         }}
       >
         <CenterBox>{suffix}</CenterBox>

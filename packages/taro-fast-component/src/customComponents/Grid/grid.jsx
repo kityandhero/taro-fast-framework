@@ -42,9 +42,7 @@ class Grid extends BaseComponent {
     }
 
     const { onClick } = {
-      ...{
-        onClick: null,
-      },
+      onClick: null,
       ...item,
     };
 
@@ -70,7 +68,7 @@ class Grid extends BaseComponent {
 
     return list.map((item, index) => {
       const { span = 1 } = {
-        ...{ span: 1 },
+        span: 1,
         ...item,
       };
 
@@ -97,14 +95,13 @@ class Grid extends BaseComponent {
     } = this.props;
 
     const style = {
-      ...(!!backgroundColor
+      ...(backgroundColor
         ? {
             backgroundColor: backgroundColor,
           }
         : {}),
-      ...{
-        '--columns': columns.toString(),
-      },
+
+      '--columns': columns.toString(),
     };
 
     if (gap !== undefined) {

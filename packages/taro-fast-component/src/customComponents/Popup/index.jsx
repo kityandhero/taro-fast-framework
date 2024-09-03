@@ -108,21 +108,21 @@ const defaultProps = {
 };
 
 class Popup extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { visible } = props;
+    const { visible } = properties;
 
     this.state = {
       visibleStage: visible,
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { visible: visibleNext } = nextProps;
-    const { visibleStage: visiblePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { visible: visibleNext } = nextProperties;
+    const { visibleStage: visiblePrevious } = previousState;
 
-    if (visibleNext !== visiblePrev) {
+    if (visibleNext !== visiblePrevious) {
       handleTouchScroll(visibleNext);
 
       return {
@@ -218,9 +218,7 @@ class Popup extends BaseComponent {
     const { zIndex } = this.props;
 
     return {
-      ...{
-        zIndex: zIndex,
-      },
+      zIndex: zIndex,
     };
   };
 
@@ -232,14 +230,13 @@ class Popup extends BaseComponent {
     const position = this.getPosition();
 
     return {
-      ...(bodyStyle || {}),
+      ...bodyStyle,
       ...(checkInCollection(['center', 'top', 'bottom'], position)
         ? height
         : {}),
       ...(checkInCollection(['left', 'right'], position) ? width : {}),
-      ...{
-        zIndex: zIndex + 10,
-      },
+
+      zIndex: zIndex + 10,
     };
   };
 
@@ -294,8 +291,8 @@ class Popup extends BaseComponent {
     return position === 'center' ? true : showClose;
   };
 
-  handleTouchMove = (e) => {
-    this.ignoreTouchMove(e);
+  handleTouchMove = (event) => {
+    this.ignoreTouchMove(event);
   };
 
   render() {
@@ -337,7 +334,7 @@ class Popup extends BaseComponent {
     );
 
     const closeWhenOverlayClick = this.getCloseWhenOverlayClick();
-    const showClose = !closeWhenOverlayClick ? true : this.getShowClose();
+    const showClose = closeWhenOverlayClick ? this.getShowClose() : true;
     const mode = this.getMode();
     const bodyStyle = this.getBodyStyle();
     const arcStyle = this.getArcStyle();
@@ -374,18 +371,14 @@ class Popup extends BaseComponent {
             <View
               className="tfc-popup__container__body__close"
               style={{
-                ...{
-                  zIndex: zIndex + 20,
-                },
+                zIndex: zIndex + 20,
                 ...closeIconStyle,
-                ...{
-                  top: mode !== 'card' ? transformSize(12) : transformSize(32),
-                  right:
-                    mode !== 'card' ? transformSize(12) : transformSize(32),
-                  height: transformSize(40),
-                  width: transformSize(40),
-                  position: 'absolute',
-                },
+
+                top: mode === 'card' ? transformSize(32) : transformSize(12),
+                right: mode === 'card' ? transformSize(32) : transformSize(12),
+                height: transformSize(40),
+                width: transformSize(40),
+                position: 'absolute',
               }}
               onClick={() => {
                 this.close();
@@ -406,10 +399,9 @@ class Popup extends BaseComponent {
             header={header}
             headerStyle={{
               ...headerStyle,
-              ...{
-                paddingTop: transformSize(10),
-                paddingBottom: transformSize(10),
-              },
+
+              paddingTop: transformSize(10),
+              paddingBottom: transformSize(10),
             }}
             extra={extra}
             footer={footer}
@@ -432,9 +424,9 @@ class Popup extends BaseComponent {
               ...(checkInCollection(['left', 'right'], position)
                 ? {
                     height:
-                      mode !== 'card'
-                        ? '100%'
-                        : `calc(100% - ${transformSize(48)})`,
+                      mode === 'card'
+                        ? `calc(100% - ${transformSize(48)})`
+                        : '100%',
                   }
                 : {}),
               ...arcStyle,

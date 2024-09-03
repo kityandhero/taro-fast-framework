@@ -52,14 +52,12 @@ export function getStyle({
 
     if (fill === 'solid') {
       return {
-        ...{
-          '--background-color': color,
-          '--border-color': 'transparent',
-        },
+        '--background-color': color,
+        '--border-color': 'transparent',
         ...(checkStringIsNullOrWhiteSpace(fontColor)
-          ? color !== backgroundColor
-            ? { '--text-color': 'var(--tfc-color-white)' }
-            : {}
+          ? color === backgroundColor
+            ? {}
+            : { '--text-color': 'var(--tfc-color-white)' }
           : {
               '--text-color': fontColor,
             }),
@@ -73,18 +71,16 @@ export function getStyle({
 
     if (fill === 'outline') {
       return {
-        ...{
-          '--background-color': 'transparent',
-          '--border-color': checkStringIsNullOrWhiteSpace(borderColor)
-            ? color !== backgroundColor
-              ? color
-              : handleInlayColor('back')
-            : borderColor,
-        },
+        '--background-color': 'transparent',
+        '--border-color': checkStringIsNullOrWhiteSpace(borderColor)
+          ? color === backgroundColor
+            ? handleInlayColor('back')
+            : color
+          : borderColor,
         ...(checkStringIsNullOrWhiteSpace(fontColor)
-          ? color !== backgroundColor
-            ? { '--text-color': color }
-            : {}
+          ? color === backgroundColor
+            ? {}
+            : { '--text-color': color }
           : {
               '--text-color': fontColor,
             }),
@@ -98,14 +94,12 @@ export function getStyle({
 
     if (fill === 'none') {
       return {
-        ...{
-          '--background-color': 'transparent',
-          '--border-color': 'transparent',
-        },
+        '--background-color': 'transparent',
+        '--border-color': 'transparent',
         ...(checkStringIsNullOrWhiteSpace(fontColor)
-          ? color !== backgroundColor
-            ? { '--text-color': color }
-            : {}
+          ? color === backgroundColor
+            ? {}
+            : { '--text-color': color }
           : {
               '--text-color': fontColor,
             }),
@@ -127,11 +121,9 @@ export function getStyle({
 
     if (a.length > 0) {
       return {
-        ...{
-          '--background-image': `linear-gradient(45deg, ${handleInlayColor(
-            a,
-          ).join()})`,
-        },
+        '--background-image': `linear-gradient(45deg, ${handleInlayColor(
+          a,
+        ).join(',')})`,
         ...sharpStyle,
       };
     }

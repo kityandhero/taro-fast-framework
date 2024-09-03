@@ -44,20 +44,20 @@ const defaultProps = {
 };
 
 class ActionSheet extends BaseComponent {
-  constructor(props) {
-    super(props);
-    const { visible } = props;
+  constructor(properties) {
+    super(properties);
+    const { visible } = properties;
 
     this.state = {
       visibleStage: visible,
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { visible: visibleNext } = nextProps;
-    const { visibleStage: visiblePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { visible: visibleNext } = nextProperties;
+    const { visibleStage: visiblePrevious } = previousState;
 
-    if (visibleNext !== visiblePrev) {
+    if (visibleNext !== visiblePrevious) {
       return {
         visibleStage: visibleNext,
       };
@@ -93,8 +93,8 @@ class ActionSheet extends BaseComponent {
     );
   };
 
-  handleTouchMove = (e) => {
-    this.ignoreTouchMove(e);
+  handleTouchMove = (event) => {
+    this.ignoreTouchMove(event);
   };
 
   renderFurther() {
@@ -137,7 +137,7 @@ class ActionSheet extends BaseComponent {
             'tfc-action-sheet__container__active': visibleStage,
           })}
         >
-          {!!title ? (
+          {title ? (
             <ActionSheetHeader style={headerStyle}>
               {isString(title) ? title : <CenterBox>{title}</CenterBox>}
             </ActionSheetHeader>
@@ -161,8 +161,8 @@ class ActionSheet extends BaseComponent {
                   className={classNameItem}
                   style={styleItem}
                   value={value || ''}
-                  onClick={(v, e) => {
-                    onItemClick(v, e);
+                  onClick={(v, event) => {
+                    onItemClick(v, event);
 
                     this.close();
                   }}

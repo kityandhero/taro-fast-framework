@@ -25,7 +25,7 @@ const defaultProps = {
   // 是否显示上方边框
   border: true,
   // 元素层级z-index
-  zIndex: 12000,
+  zIndex: 12_000,
   // 选中标签的颜色
   activeColor: 'red',
   // 未选中标签的颜色
@@ -42,7 +42,7 @@ const defaultProps = {
   onClick: null,
 };
 
-function mergeItems(items, badges, props) {
+function mergeItems(items, badges, properties) {
   const itemList = isArray(items) ? items : [];
 
   return itemList.map((o) => {
@@ -52,36 +52,35 @@ function mergeItems(items, badges, props) {
       const badgeIndex = findIndex(badges, (one) => one.name === name);
 
       if (badgeIndex >= 0) {
-        return { ...props, ...o, ...badges[badgeIndex] };
+        return { ...properties, ...o, ...badges[badgeIndex] };
       }
     }
 
-    return { ...props, ...o };
+    return { ...properties, ...o };
   });
 }
 
 class Tabbar extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { activeColor, color, badgeColor, items, badges } = props;
+    const { activeColor, color, badgeColor, items, badges } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        placeholderHeight: 50,
-        itemsAdjust: mergeItems(items, badges, {
-          activeColor,
-          color,
-          badgeColor,
-        }),
-      },
+
+      placeholderHeight: 50,
+      itemsAdjust: mergeItems(items, badges, {
+        activeColor,
+        color,
+        badgeColor,
+      }),
     };
   }
 
   // eslint-disable-next-line no-unused-vars
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { activeColor, color, badgeColor, items, badges } = nextProps;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { activeColor, color, badgeColor, items, badges } = nextProperties;
 
     return {
       itemsAdjust: mergeItems(items, badges, {
@@ -92,8 +91,8 @@ class Tabbar extends BaseComponent {
     };
   }
 
-  handleTouchMove = (e) => {
-    this.ignoreTouchMove(e);
+  handleTouchMove = (event) => {
+    this.ignoreTouchMove(event);
   };
 
   triggerClick = (o) => {
@@ -119,10 +118,8 @@ class Tabbar extends BaseComponent {
     const { placeholderHeight, itemsAdjust } = this.state;
 
     const style = {
-      ...{
-        '--border-color': borderColor,
-        '--bar-background-color': backgroundColor,
-      },
+      '--border-color': borderColor,
+      '--bar-background-color': backgroundColor,
       ...(zIndex > 0 ? { zIndex: `${zIndex}` } : {}),
       ...styleSource,
     };

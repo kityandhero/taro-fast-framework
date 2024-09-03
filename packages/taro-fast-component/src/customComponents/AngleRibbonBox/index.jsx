@@ -45,9 +45,7 @@ class AngleBox extends BaseComponent {
 
     return {
       ...style,
-      ...{
-        position: 'relative',
-      },
+      position: 'relative',
     };
   };
 
@@ -59,48 +57,51 @@ class AngleBox extends BaseComponent {
     let style = {};
 
     switch (position) {
-      case positionCollection.topLeft:
+      case positionCollection.topLeft: {
         style = {
           top: '0',
           left: '0',
           background: `linear-gradient(135deg, ${backgroundColor} 50%, transparent 50%)`,
         };
         break;
+      }
 
-      case positionCollection.topRight:
+      case positionCollection.topRight: {
         style = {
           top: '0',
           right: '0',
           background: `linear-gradient(-135deg, ${backgroundColor} 50%, transparent 50%)`,
         };
         break;
+      }
 
-      case positionCollection.bottomLeft:
+      case positionCollection.bottomLeft: {
         style = {
           bottom: '0',
           left: '0',
           background: `linear-gradient(45deg, ${backgroundColor} 50%, transparent 50%)`,
         };
         break;
+      }
 
-      case positionCollection.bottomRight:
+      case positionCollection.bottomRight: {
         style = {
           bottom: '0',
           right: '0',
           background: `linear-gradient(-45deg, ${backgroundColor} 50%, transparent 50%)`,
         };
         break;
+      }
     }
 
     return {
       ...style,
-      ...{
-        position: 'absolute',
-        overflow: 'hidden',
-        zIndex: '1',
-        width: transformSize(angleSize),
-        height: transformSize(angleSize),
-      },
+
+      position: 'absolute',
+      overflow: 'hidden',
+      zIndex: '1',
+      width: transformSize(angleSize),
+      height: transformSize(angleSize),
     };
   };
 
@@ -118,40 +119,43 @@ class AngleBox extends BaseComponent {
     let style = {};
 
     switch (position) {
-      case positionCollection.topLeft:
+      case positionCollection.topLeft: {
         style = {
           transform: 'rotate(-45deg)',
         };
         break;
+      }
 
-      case positionCollection.topRight:
+      case positionCollection.topRight: {
         style = {
           transform: 'rotate(45deg)',
         };
         break;
+      }
 
-      case positionCollection.bottomLeft:
+      case positionCollection.bottomLeft: {
         style = {
           transform: 'rotate(135deg)',
         };
         break;
+      }
 
-      case positionCollection.bottomRight:
+      case positionCollection.bottomRight: {
         style = {
           transform: 'rotate(-135deg)',
         };
         break;
+      }
     }
 
     return {
       ...style,
-      ...{
-        position: 'absolute',
-        top: '-10.5%',
-        left: '-10.5%',
-        width: '121.4%',
-        height: '121.4%',
-      },
+
+      position: 'absolute',
+      top: '-10.5%',
+      left: '-10.5%',
+      width: '121.4%',
+      height: '121.4%',
     };
   };
 
@@ -160,7 +164,6 @@ class AngleBox extends BaseComponent {
 
     return {
       ...subtitleStyle,
-      ...{},
     };
   };
 

@@ -35,31 +35,29 @@ const defaultProps = {
 };
 
 class ImageBox extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { src } = props;
+    const { src } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        srcFlag: src,
-        srcStage: src,
-        hide: false,
-        loading: true,
-        loadSuccess: false,
-      },
+      srcFlag: src,
+      srcStage: src,
+      hide: false,
+      loading: true,
+      loadSuccess: false,
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { src: srcNext } = nextProps;
-    const { srcFlag: srcPrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { src: sourceNext } = nextProperties;
+    const { srcFlag: sourcePrevious } = previousState;
 
-    if (srcNext !== srcPrev) {
+    if (sourceNext !== sourcePrevious) {
       return {
-        srcFlag: srcNext,
-        srcStage: srcNext,
+        srcFlag: sourceNext,
+        srcStage: sourceNext,
       };
     }
 

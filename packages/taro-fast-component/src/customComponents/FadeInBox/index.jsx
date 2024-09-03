@@ -18,26 +18,24 @@ const defaultProps = {
 class FadeInBox extends BaseComponent {
   fadeInAnimation = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     const { duration } = this.props;
 
     this.state = {
       ...this.state,
-      ...{
-        animalStyle: isNumber(duration)
-          ? { '--animation-duration': `${duration}ms` }
-          : {},
-      },
+      animalStyle: isNumber(duration)
+        ? { '--animation-duration': `${duration}ms` }
+        : {},
     };
   }
 
-  triggerClick = (value, e) => {
+  triggerClick = (value, event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(value, e);
+      onClick(value, event);
     }
   };
 

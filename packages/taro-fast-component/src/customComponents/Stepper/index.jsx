@@ -1,5 +1,3 @@
-import { Stepper } from './stepper';
-
 import './index.less';
 
-export { Stepper };
+export { Stepper } from './stepper';

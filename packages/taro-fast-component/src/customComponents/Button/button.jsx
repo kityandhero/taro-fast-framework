@@ -75,14 +75,13 @@ const defaultProps = {
 };
 
 class Button extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        rippleStyle: {},
-      },
+
+      rippleStyle: {},
     };
   }
 
@@ -110,7 +109,7 @@ class Button extends BaseComponent {
     return checkInCollection(sizeCollection, size) ? size : 'middle';
   };
 
-  triggerClick = (e) => {
+  triggerClick = (event) => {
     const { ripple, onClick } = this.props;
 
     if (ripple) {
@@ -121,7 +120,7 @@ class Button extends BaseComponent {
         mpEvent: {
           currentTarget: { offsetLeft, offsetTop },
         },
-      } = e;
+      } = event;
 
       const x = touches[0].pageX;
       const y = touches[0].pageY;
@@ -142,27 +141,28 @@ class Button extends BaseComponent {
     }
 
     if (isFunction(onClick)) {
-      onClick(e);
+      onClick(event);
     }
   };
 
   buildInner = () => {
     const { fontColor, fontSize, icon, text, children } = this.props;
 
-    return children ? (
-      children
-    ) : text && !icon ? (
-      text
-    ) : text && icon ? (
-      <ColorText
-        color={fontColor}
-        fontSize={fontSize}
-        icon={icon}
-        text={text}
-      />
-    ) : icon ? (
-      icon
-    ) : null;
+    return (
+      children ??
+      (text && !icon ? (
+        text
+      ) : text && icon ? (
+        <ColorText
+          color={fontColor}
+          fontSize={fontSize}
+          icon={icon}
+          text={text}
+        />
+      ) : (
+        (icon ?? null)
+      ))
+    );
   };
 
   renderFurther() {

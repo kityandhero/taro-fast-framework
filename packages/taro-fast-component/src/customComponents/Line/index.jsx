@@ -69,7 +69,7 @@ class Line extends BaseComponent {
       if (a.length > 0) {
         return {
           '--background-color': 'null',
-          '--background-image': `linear-gradient(45deg, ${a.join()})`,
+          '--background-image': `linear-gradient(45deg, ${a.join(',')})`,
         };
       }
     }
@@ -87,7 +87,7 @@ class Line extends BaseComponent {
     let colorStyle = this.getColor();
 
     switch (direction) {
-      case 'horizontal':
+      case 'horizontal': {
         sizeStyle = {
           ...(isNumber(width) && toNumber(width) > 0
             ? { '--width': transformSize(width) }
@@ -97,8 +97,9 @@ class Line extends BaseComponent {
             : { '--height': transformSize(1) }),
         };
         break;
+      }
 
-      default:
+      default: {
         sizeStyle = {
           ...(isNumber(width) && toNumber(width) > 0
             ? { '--width': transformSize(width) }
@@ -108,6 +109,7 @@ class Line extends BaseComponent {
             : { '--height': '100%' }),
         };
         break;
+      }
     }
 
     if (!checkStringIsNullOrWhiteSpace(margin)) {

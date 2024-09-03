@@ -6,14 +6,12 @@ import { defaultProps, useTransition } from './tools';
 
 function buildRootStyle(data) {
   return {
-    ...{
-      transitionDuration: data.currentDuration + 'ms',
-    },
+    transitionDuration: data.currentDuration + 'ms',
     ...(data.display ? {} : { display: 'none' }),
-    ...(data.style || {}),
+    ...data.style,
   };
 }
-function Transition(props) {
+function Transition(properties) {
   const {
     onBeforeEnter,
     onBeforeLeave,
@@ -34,7 +32,7 @@ function Transition(props) {
     leaveActiveClass,
     leaveToClass,
     ...others
-  } = props;
+  } = properties;
 
   const { currentDuration, classes, display, onTransitionEnd } = useTransition({
     show,

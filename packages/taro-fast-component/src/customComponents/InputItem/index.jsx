@@ -5,6 +5,7 @@ import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   isFunction,
+  isNumber,
   isObject,
   isString,
   toNumber,
@@ -42,6 +43,7 @@ const defaultProps = {
   labelAlign: 'left',
   extra: null,
   labelStyle: {},
+  labelWidth: 0,
   inputStyle: {},
   valueStyle: {},
   labelContainerStyle: {},
@@ -222,6 +224,7 @@ class InputItem extends BaseComponent {
       clearColor,
       label,
       labelAlign,
+      labelWidth,
       extra,
       labelStyle,
       inputStyle,
@@ -489,7 +492,9 @@ class InputItem extends BaseComponent {
           contentStyle={{
             width: transformSize(180),
             ...contentStyle,
-
+            ...(isNumber(labelWidth) && toNumber(labelWidth) > 0
+              ? { width: transformSize(labelWidth) }
+              : {}),
             padding: '0',
             flex: 'none',
             paddingBottom: transformSize(showBody ? 12 : 0),
@@ -544,7 +549,6 @@ class InputItem extends BaseComponent {
               contentStyle={{
                 width: transformSize(180),
                 ...contentStyle,
-
                 flex: 'none',
                 padding: `${transformSize(
                   labelComponent == null ? 24 : 12,

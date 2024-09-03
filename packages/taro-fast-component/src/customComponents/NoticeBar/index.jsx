@@ -23,26 +23,24 @@ const defaultProps = {
 };
 
 class NoticeBar extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const animElemId = `J_${Math.ceil(Math.random() * 10e5).toString(36)}`;
+    const animElementId = `J_${Math.ceil(Math.random() * 10e5).toString(36)}`;
 
     this.state = {
       ...this.state,
-      ...{
-        show: true,
-        animElemId,
-        durationValue: 8,
-      },
+      show: true,
+      animElemId: animElementId,
+      durationValue: 8,
     };
   }
 
   // eslint-disable-next-line no-unused-vars
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProperties, previousState) {
     const { duration: durationNext } = {
       ...defaultProps,
-      ...nextProps,
+      ...nextProperties,
     };
 
     return {
@@ -131,7 +129,7 @@ class NoticeBar extends BaseComponent {
                 <FlexBox
                   left={
                     <View className="tfc-notice-bar__content">
-                      {!!icon ? (
+                      {icon ? (
                         <View className="tfc-notice-bar__content-icon">
                           <CenterBox>{icon}</CenterBox>
                         </View>
@@ -154,7 +152,7 @@ class NoticeBar extends BaseComponent {
             />
           ) : (
             <View className="tfc-notice-bar__content">
-              {!!icon ? (
+              {icon ? (
                 <View className="tfc-notice-bar__content-icon">{icon}</View>
               ) : null}
 

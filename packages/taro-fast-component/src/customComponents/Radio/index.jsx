@@ -34,9 +34,7 @@ const uncheckStatusIcon = (
   <View
     style={{
       ...iconContainerStyle,
-      ...{
-        borderColor: '#ccc',
-      },
+      borderColor: '#ccc',
     }}
   ></View>
 );
@@ -45,12 +43,11 @@ const checkStatusIcon = (
   <View
     style={{
       ...iconContainerStyle,
-      ...{
-        borderColor: '#1677ff',
-        backgroundColor: '#1677ff',
-        display: 'flex',
-        alignSelf: 'center',
-      },
+
+      borderColor: '#1677ff',
+      backgroundColor: '#1677ff',
+      display: 'flex',
+      alignSelf: 'center',
     }}
   >
     <IconCheck size={30} color="#fff" />
@@ -85,10 +82,10 @@ const defaultProps = {
 };
 
 class Radio extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { value } = props;
+    const { value } = properties;
 
     this.state = {
       valueFlag: value,
@@ -96,11 +93,11 @@ class Radio extends BaseComponent {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext,
         valueStage: valueNext,
@@ -195,9 +192,7 @@ class Radio extends BaseComponent {
                 <FlexBox
                   flexAuto="right"
                   style={{
-                    ...{
-                      padding: 'var(--tfc-10) var(--tfc-12)',
-                    },
+                    padding: 'var(--tfc-10) var(--tfc-12)',
                     ...styleItem,
                     ...(disabled
                       ? {
@@ -205,9 +200,8 @@ class Radio extends BaseComponent {
                           pointerEvents: 'none',
                         }
                       : {}),
-                    ...{
-                      height: '100%',
-                    },
+
+                    height: '100%',
                   }}
                   left={
                     !checkStringIsNullOrWhiteSpace(valueStage) &&
@@ -219,9 +213,7 @@ class Radio extends BaseComponent {
                     isString(label) ? (
                       <View
                         style={{
-                          ...{
-                            fontSize: transformSize(28),
-                          },
+                          fontSize: transformSize(28),
                         }}
                       >
                         {label}
@@ -259,9 +251,7 @@ class Radio extends BaseComponent {
                 <FlexBox
                   flexAuto="right"
                   style={{
-                    ...{
-                      padding: 'var(--tfc-10) var(--tfc-12)',
-                    },
+                    padding: 'var(--tfc-10) var(--tfc-12)',
                     ...styleItem,
                     ...(disabled
                       ? {
@@ -269,9 +259,8 @@ class Radio extends BaseComponent {
                           pointerEvents: 'none',
                         }
                       : {}),
-                    ...{
-                      height: '100%',
-                    },
+
+                    height: '100%',
                   }}
                   left={
                     !checkStringIsNullOrWhiteSpace(valueStage) &&
@@ -283,9 +272,7 @@ class Radio extends BaseComponent {
                     isString(label) ? (
                       <View
                         style={{
-                          ...{
-                            fontSize: transformSize(28),
-                          },
+                          fontSize: transformSize(28),
                         }}
                       >
                         {label}
@@ -354,7 +341,6 @@ class Radio extends BaseComponent {
                     : iconUncheck || null
                 }
                 extraContainerStyle={{
-                  ...{},
                   ...extraContainerStyle,
                 }}
                 onClick={() => {
@@ -398,7 +384,6 @@ class Radio extends BaseComponent {
                 ) : null
               }
               extraContainerStyle={{
-                ...{},
                 ...extraContainerStyle,
               }}
               onClick={() => {

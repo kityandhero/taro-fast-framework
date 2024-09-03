@@ -34,7 +34,6 @@ const defaultColor = '#d81e06';
 
 const defaultProps = {
   ...AbstractComponent.defaultProps,
-
   style: {},
   backRingStyle: {},
   percent: 0,
@@ -60,7 +59,6 @@ class Circle extends AbstractComponent {
 
     this.state = {
       ...this.state,
-
       show: true,
     };
 

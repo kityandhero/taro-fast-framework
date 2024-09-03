@@ -18,6 +18,7 @@ export * from './DataGrid';
 export * from './Divider';
 export * from './Ellipsis';
 export * from './Empty';
+export * from './EverySpace';
 export * from './ExtraBox';
 export * from './FadeInBox';
 export * from './FadeView';

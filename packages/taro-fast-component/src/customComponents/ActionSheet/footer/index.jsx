@@ -10,11 +10,11 @@ const defaultProps = {
 };
 
 class ActionSheetFooter extends BaseComponent {
-  triggerClick = (...args) => {
+  triggerClick = (...o) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(...args);
+      onClick(...o);
     }
   };
 

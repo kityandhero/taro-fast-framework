@@ -1,0 +1,125 @@
+// eslint-disable-next-line no-undef
+export default defineAppConfig({
+  pages: [
+    'pages/entry/main/index',
+    'pages/home/main/index',
+    // 'pages/checkIn/main/index',
+    // 'pages/ask/main/index',
+    // 'pages/affair/main/index',
+    // 'pages/life/main/index',
+    'pages/customer/main/index',
+  ],
+  window: {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: 'WeChat',
+    navigationBarTextStyle: 'white',
+  },
+  subpackages: [
+    // {
+    //   root: 'section',
+    //   name: '栏目',
+    //   pages: [
+    //     'pages/section/overview/index',
+    //     'pages/empty/main/index',
+    //     'pages/section/main/index',
+    //     'pages/section/pageList/index',
+    //     'pages/section/child/index',
+    //     'pages/media/main/index',
+    //     'pages/media/child/index',
+    //     'pages/media/content/index',
+    //     'pages/article/main/index',
+    //     'pages/discuss/main/index',
+    //     'pages/discuss/add/index',
+    //     'pages/search/main/index',
+    //     'pages/search/pageList/index',
+    //     'pages/contact/main/index',
+    //   ],
+    // },
+    {
+      root: 'webPage',
+      name: '网页',
+      pages: [
+        'pages/general/main/index',
+        //  'pages/article/main/index',
+      ],
+    },
+    {
+      root: 'customer',
+      name: '用户',
+      pages: [
+        'pages/signIn/main/index',
+        // 'pages/knowledgeCompetition/main/index',
+        // 'pages/scoreCenter/main/index',
+        // 'pages/articleFavourite/main/index',
+        // 'pages/articleAccessHistory/main/index',
+        // 'pages/checkIn/main/index',
+        // 'pages/scoreMall/main/index',
+        // 'pages/scoreMall/detail/index',
+        // 'pages/scoreMall/exchangeConfirm/index',
+        // 'pages/scoreMall/exchangeSuccess/index',
+        // 'pages/scoreMall/exchangePageList/index',
+        // 'pages/shippingAddress/singleList/index',
+        // 'pages/shippingAddress/add/index',
+        // 'pages/shippingAddress/edit/index',
+      ],
+    },
+  ],
+  // preloadRule: {
+  //   'pages/entry/main/index': {
+  //     network: 'all',
+  //     packages: ['section'],
+  //   },
+  // },
+  // permission: {
+  //   'scope.userLocation': {
+  //     desc: '你的位置信息将用于显示当地天气等信息。',
+  //   },
+  // },
+  // requiredPrivateInfos: [
+  //   'getLocation',
+  //   'onLocationChange',
+  //   'chooseAddress',
+  //   'choosePoi',
+  //   'chooseLocation',
+  //   'startLocationUpdate',
+  // ],
+  serviceProviderTicket: '',
+  tabBar: {
+    color: '#353535',
+    selectedColor: '#3778F4',
+    borderStyle: 'black',
+    list: [
+      {
+        pagePath: 'pages/home/main/index',
+        iconPath: './assets/tab-bar/home.png',
+        selectedIconPath: './assets/tab-bar/home-active.png',
+        text: '首页',
+      },
+      // {
+      //   pagePath: 'pages/approval/main/index',
+      //   iconPath: './assets/tab-bar/home.png',
+      //   selectedIconPath: './assets/tab-bar/home-active.png',
+      //   text: '审批',
+      // },
+      // {
+      //   pagePath: 'pages/workbench/main/index',
+      //   iconPath: './assets/tab-bar/workbench.png',
+      //   selectedIconPath: './assets/tab-bar/workbench-active.png',
+      //   text: '工作台',
+      // },
+      // {
+      //   pagePath: 'pages/contact/main/index',
+      //   iconPath: './assets/tab-bar/news.png',
+      //   selectedIconPath: './assets/tab-bar/news-active.png',
+      //   text: '通讯录',
+      // },
+      {
+        pagePath: 'pages/customer/main/index',
+        iconPath: './assets/tab-bar/user.png',
+        selectedIconPath: './assets/tab-bar/user-active.png',
+        text: '我的',
+      },
+    ],
+  },
+});

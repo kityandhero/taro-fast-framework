@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 
-import { isFunction } from 'easy-soft-utility';
+import { isFunction, isNumber } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 
@@ -31,11 +31,9 @@ class BackboardBox extends BaseComponent {
         : {
             height: transformSize(height),
           }),
-      ...{
-        position: 'relative',
-        flex: 'none',
-        flexWrap: 'wrap',
-      },
+      position: 'relative',
+      flex: 'none',
+      flexWrap: 'wrap',
     };
   };
 
@@ -43,19 +41,12 @@ class BackboardBox extends BaseComponent {
     const { backboardStyle, backboardZIndex } = this.props;
 
     return {
-      ...{
-        top: 0,
-        left: 0,
-        width: '100%',
-      },
+      top: 0,
+      left: 0,
+      width: '100%',
       ...backboardStyle,
-      ...{
-        position: 'absolute',
-        zIndex: 9,
-      },
-      ...{
-        zIndex: backboardZIndex,
-      },
+      position: 'absolute',
+      zIndex: isNumber(backboardZIndex) ? backboardZIndex : 9,
     };
   };
 
@@ -64,25 +55,20 @@ class BackboardBox extends BaseComponent {
 
     return {
       ...contentStyle,
-      ...{
-        position: 'relative',
-        zIndex: 10,
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: transformSize(height),
-      },
-      ...{
-        zIndex: contentZIndex,
-      },
+      position: 'relative',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: transformSize(height),
+      zIndex: isNumber(contentZIndex) ? contentZIndex : 10,
     };
   };
 
-  triggerClick = (value, e) => {
+  triggerClick = (value, event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(value, e);
+      onClick(value, event);
     }
   };
 

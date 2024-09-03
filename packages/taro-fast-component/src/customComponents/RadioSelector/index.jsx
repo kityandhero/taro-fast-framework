@@ -39,10 +39,10 @@ const defaultProps = {
 };
 
 class RadioSelector extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { value } = props;
+    const { value } = properties;
 
     this.state = {
       valueFlag: value,
@@ -51,11 +51,11 @@ class RadioSelector extends BaseComponent {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext,
         valueStage: valueNext,
@@ -134,10 +134,8 @@ class RadioSelector extends BaseComponent {
             checkStringIsNullOrWhiteSpace(valueStage) ? (
               <View
                 style={{
-                  ...{
-                    fontSize: transformSize(30),
-                    color: '#999 ',
-                  },
+                  fontSize: transformSize(30),
+                  color: '#999 ',
                   ...placeholderStyle,
                 }}
               >
@@ -146,9 +144,7 @@ class RadioSelector extends BaseComponent {
             ) : (
               <View
                 style={{
-                  ...{
-                    fontSize: transformSize(30),
-                  },
+                  fontSize: transformSize(30),
                   ...valueStyle,
                 }}
               >
@@ -157,9 +153,7 @@ class RadioSelector extends BaseComponent {
             )
           }
           extraContainerStyle={{
-            ...{
-              paddingRight: transformSize(24),
-            },
+            paddingRight: transformSize(24),
             ...extraContainerStyle,
           }}
           onClick={this.showPopup}
@@ -183,9 +177,8 @@ class RadioSelector extends BaseComponent {
             value={valueStage}
             style={{
               ...radioStyle,
-              ...{
-                borderTop: '0',
-              },
+
+              borderTop: '0',
             }}
             layout={radioLayout}
             bodyStyle={radioBodyStyle}

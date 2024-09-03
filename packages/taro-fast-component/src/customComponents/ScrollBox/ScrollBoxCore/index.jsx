@@ -46,18 +46,17 @@ class ScrollBoxCore extends BaseComponent {
 
   timer = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { current: currentValue } = props;
+    const { current: currentValue } = properties;
 
     let current = toNumber(currentValue);
 
     this.state = {
       ...this.state,
-      ...{
-        scrollIntoView: '',
-      },
+
+      scrollIntoView: '',
     };
 
     if (current > 0) {
@@ -81,11 +80,11 @@ class ScrollBoxCore extends BaseComponent {
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
-    const { current: currentPrev } = preProps;
+  doWorkWhenGetSnapshotBeforeUpdate = (preProperties, preState) => {
+    const { current: currentPrevious } = preProperties;
     const { current } = this.props;
 
-    if (currentPrev != current) {
+    if (currentPrevious != current) {
       this.moveTo(current);
     }
 
@@ -100,12 +99,12 @@ class ScrollBoxCore extends BaseComponent {
     const { style, enableScroll } = this.props;
 
     return {
-      ...(style || {}),
-      ...(!enableScroll
-        ? {
+      ...style,
+      ...(enableScroll
+        ? {}
+        : {
             position: 'relative',
-          }
-        : {}),
+          }),
     };
   };
 
@@ -148,19 +147,16 @@ class ScrollBoxCore extends BaseComponent {
 
     const { style: itemStyle } = {
       ...item,
-      ...{
-        style: {
-          ...{
-            display: direction === 'horizontal' ? 'inline-block' : 'block',
-            width: direction === 'horizontal' ? 'auto' : transformSize(width),
-            height: direction === 'horizontal' ? transformSize(height) : 'auto',
-          },
-          ...(direction === 'horizontal'
-            ? {
-                verticalAlign: 'top',
-              }
-            : {}),
-        },
+
+      style: {
+        display: direction === 'horizontal' ? 'inline-block' : 'block',
+        width: direction === 'horizontal' ? 'auto' : transformSize(width),
+        height: direction === 'horizontal' ? transformSize(height) : 'auto',
+        ...(direction === 'horizontal'
+          ? {
+              verticalAlign: 'top',
+            }
+          : {}),
       },
     };
 
@@ -189,7 +185,7 @@ class ScrollBoxCore extends BaseComponent {
     });
   };
 
-  triggerScroll = (e) => {
+  triggerScroll = (event) => {
     const { onScroll } = this.props;
     const { scrollIntoView } = this.state;
 
@@ -200,7 +196,7 @@ class ScrollBoxCore extends BaseComponent {
     }
 
     if (isFunction(onScroll)) {
-      onScroll(e);
+      onScroll(event);
     }
   };
 
@@ -243,7 +239,7 @@ class ScrollBoxCore extends BaseComponent {
     if (!isNumber(gap) || gap <= 0) {
       listItem = [...listItemCore];
     } else {
-      listItemCore.forEach((item, index) => {
+      for (const [index, item] of listItemCore.entries()) {
         if (index > 0) {
           listItem.push(
             <View
@@ -253,18 +249,15 @@ class ScrollBoxCore extends BaseComponent {
                 index,
               })}
               style={{
-                ...{
-                  display:
-                    direction === 'horizontal' ? 'inline-block' : 'block',
-                  width:
-                    direction === 'horizontal'
-                      ? transformSize(gap)
-                      : transformSize(width),
-                  height:
-                    direction === 'horizontal'
-                      ? transformSize(height)
-                      : transformSize(gap),
-                },
+                display: direction === 'horizontal' ? 'inline-block' : 'block',
+                width:
+                  direction === 'horizontal'
+                    ? transformSize(gap)
+                    : transformSize(width),
+                height:
+                  direction === 'horizontal'
+                    ? transformSize(height)
+                    : transformSize(gap),
                 ...(direction === 'horizontal'
                   ? {
                       verticalAlign: 'top',
@@ -272,13 +265,12 @@ class ScrollBoxCore extends BaseComponent {
                   : {}),
               }}
             />,
+            item,
           );
-
-          listItem.push(item);
         } else {
           listItem.push(item);
         }
-      });
+      }
     }
 
     return (
@@ -287,10 +279,8 @@ class ScrollBoxCore extends BaseComponent {
 
         <ScrollView
           style={{
-            ...{
-              width: transformSize(width),
-              height: transformSize(height),
-            },
+            width: transformSize(width),
+            height: transformSize(height),
             ...(direction === 'horizontal'
               ? {
                   whiteSpace: 'nowrap',

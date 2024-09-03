@@ -13,7 +13,7 @@ class HorizontalCenterBox extends BaseComponent {
 
     const style = {
       ...styleSource,
-      ...(!!fillHeight ? { height: '100%' } : {}),
+      ...(fillHeight ? { height: '100%' } : {}),
     };
 
     return (

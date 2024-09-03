@@ -88,19 +88,16 @@ class SearchBar extends BaseComponent {
     return (
       <View
         style={{
-          ...{
-            // padding: `${transformSize(12)} ${transformSize(28)}`,
-            backgroundColor: '#f7f8fa',
-            overflow: 'hidden',
-            width: '100%',
-          },
+          // padding: `${transformSize(12)} ${transformSize(28)}`,
+          backgroundColor: '#f7f8fa',
+          overflow: 'hidden',
+          width: '100%',
           ...style,
-          ...{
-            position: 'relative',
-          },
+
+          position: 'relative',
         }}
       >
-        {mode !== 'navigate' ? null : (
+        {mode === 'navigate' ? (
           <View
             style={{
               position: 'absolute',
@@ -113,7 +110,7 @@ class SearchBar extends BaseComponent {
             }}
             onClick={this.triggerNavigate}
           />
-        )}
+        ) : null}
 
         <View
           style={{
@@ -135,18 +132,14 @@ class SearchBar extends BaseComponent {
           clearable={clearable}
           placeholder={placeholder}
           placeholderStyle={{
-            ...{
-              fontSize: transformSize(28),
-            },
+            fontSize: transformSize(28),
             ...placeholderStyle,
           }}
           style={{
             paddingLeft: transformSize(70),
           }}
           valueStyle={{
-            ...{
-              padding: `${transformSize(10)} 0 ${transformSize(10)} 0`,
-            },
+            padding: `${transformSize(10)} 0 ${transformSize(10)} 0`,
             valueStyle,
           }}
           clearSize={clearSize}
@@ -157,10 +150,8 @@ class SearchBar extends BaseComponent {
               <VerticalBox>
                 <View
                   style={{
-                    ...{
-                      fontSize: transformSize(28),
-                      paddingLeft: transformSize(20),
-                    },
+                    fontSize: transformSize(28),
+                    paddingLeft: transformSize(20),
                     ...searchStyle,
                   }}
                   onClick={this.triggerSearch}
@@ -173,9 +164,7 @@ class SearchBar extends BaseComponent {
           extraContainerStyle={
             showSearch
               ? {
-                  ...{
-                    padding: `0 ${transformSize(2)} 0 0`,
-                  },
+                  padding: `0 ${transformSize(2)} 0 0`,
                 }
               : {}
           }

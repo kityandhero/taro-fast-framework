@@ -17,11 +17,11 @@ const defaultProps = {
 };
 
 class Ellipsis extends BaseComponent {
-  triggerClick = (e) => {
+  triggerClick = (event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(e);
+      onClick(event);
     }
   };
 
@@ -42,11 +42,9 @@ class Ellipsis extends BaseComponent {
 
     if (line == 1) {
       styleMust = {
-        ...{
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
-        },
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
         ...((width || null) == null
           ? {}
           : {
@@ -72,14 +70,12 @@ class Ellipsis extends BaseComponent {
 
     if (line > 1) {
       styleMust = {
-        ...{
-          display: '-webkit-box',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'break-spaces',
-          '-webkit-line-clamp': `${line}`,
-          '-webkit-box-orient': 'vertical',
-        },
+        display: '-webkit-box',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'break-spaces',
+        '-webkit-line-clamp': `${line}`,
+        '-webkit-box-orient': 'vertical',
         ...((width || null) == null
           ? {}
           : {
@@ -110,7 +106,7 @@ class Ellipsis extends BaseComponent {
 
     return (
       <View className={className} style={style} onClick={this.triggerClick}>
-        {children ? children : text}
+        {children ?? text}
       </View>
     );
   }

@@ -32,9 +32,7 @@ class TitleBox extends BaseComponent {
 
     return {
       ...style,
-      ...{
-        position: 'relative',
-      },
+      position: 'relative',
     };
   };
 
@@ -43,7 +41,6 @@ class TitleBox extends BaseComponent {
 
     return {
       ...titleStyle,
-      ...{},
     };
   };
 
@@ -52,7 +49,6 @@ class TitleBox extends BaseComponent {
 
     return {
       ...subtitleStyle,
-      ...{},
     };
   };
 

@@ -43,19 +43,17 @@ class ScrollBox extends BaseComponent {
 
   timerAdjust = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        scrollLeft: 0,
-        scrollTop: 0,
-        scrollHeight: 0,
-        scrollWidth: 0,
-        deltaX: 0,
-        deltaY: 0,
-      },
+      scrollLeft: 0,
+      scrollTop: 0,
+      scrollHeight: 0,
+      scrollWidth: 0,
+      deltaX: 0,
+      deltaY: 0,
     };
 
     this.containerId = getGuid();
@@ -123,17 +121,15 @@ class ScrollBox extends BaseComponent {
     const { indicatorContainerStyle } = this.props;
 
     return {
-      ...{
-        width: '100%',
-        left: '0',
-        bottom: transformSize(20),
-        height: transformSize(20),
-      },
+      width: '100%',
+      left: '0',
+      bottom: transformSize(20),
+      height: transformSize(20),
       ...indicatorContainerStyle,
     };
   };
 
-  triggerChangeIndicator = (e) => {
+  triggerChangeIndicator = (event) => {
     const {
       detail: {
         scrollLeft,
@@ -143,7 +139,7 @@ class ScrollBox extends BaseComponent {
         deltaX,
         deltaY,
       },
-    } = e;
+    } = event;
 
     this.setState({
       scrollLeft,
@@ -169,81 +165,67 @@ class ScrollBox extends BaseComponent {
 
     const direction = this.getDirection();
 
-    if (direction === 'horizontal') {
-      return (
+    return direction === 'horizontal' ? (
+      <View
+        id={this.indicatorContainerId}
+        style={{
+          backgroundColor: '#ccc',
+          width: transformSize(100),
+          height: transformSize(8),
+          ...indicatorTrackStyle,
+        }}
+      >
         <View
-          id={this.indicatorContainerId}
           style={{
-            ...{
-              backgroundColor: '#ccc',
-              width: transformSize(100),
-              height: transformSize(8),
-            },
-            ...indicatorTrackStyle,
+            backgroundColor: '#ccc',
+            ...indicatorStyle,
+
+            width: `${Math.round(
+              (indicatorContainerWidth / scrollWidth) * containerWidth,
+            )}px`,
+            height: '100%',
+            transition: 'transform 0.3s ease',
+            transform: `translateX(${Math.round(
+              (scrollLeft * indicatorContainerWidth) / scrollWidth,
+            )}px)`,
+            padding: '0',
+            margin: '0',
+            border: '0',
           }}
-        >
-          <View
-            style={{
-              ...{
-                backgroundColor: '#ccc',
-              },
-              ...indicatorStyle,
-              ...{
-                width: `${Math.round(
-                  (indicatorContainerWidth / scrollWidth) * containerWidth,
-                )}px`,
-                height: '100%',
-                transition: 'transform 0.3s ease',
-                transform: `translateX(${Math.round(
-                  (scrollLeft * indicatorContainerWidth) / scrollWidth,
-                )}px)`,
-                padding: '0',
-                margin: '0',
-                border: '0',
-              },
-            }}
-          />
-        </View>
-      );
-    } else {
-      return (
+        />
+      </View>
+    ) : (
+      <View
+        id={this.indicatorContainerId}
+        style={{
+          backgroundColor: '#ccc',
+          width: transformSize(8),
+          height: transformSize(100),
+          paddingLeft: transformSize(2),
+          paddingRight: transformSize(2),
+          ...indicatorTrackStyle,
+        }}
+      >
         <View
-          id={this.indicatorContainerId}
           style={{
-            ...{
-              backgroundColor: '#ccc',
-              width: transformSize(8),
-              height: transformSize(100),
-              paddingLeft: transformSize(2),
-              paddingRight: transformSize(2),
-            },
-            ...indicatorTrackStyle,
+            backgroundColor: '#ccc',
+            ...indicatorStyle,
+
+            height: `${Math.round(
+              (indicatorContainerHeight / scrollHeight) * containerHeight,
+            )}px`,
+            width: '100%',
+            transition: 'transform 0.3s ease',
+            transform: `translateX(${Math.round(
+              (scrollTop * indicatorContainerHeight) / scrollHeight,
+            )}px)`,
+            padding: '0',
+            margin: '0',
+            border: '0',
           }}
-        >
-          <View
-            style={{
-              ...{
-                backgroundColor: '#ccc',
-              },
-              ...indicatorStyle,
-              ...{
-                height: `${Math.round(
-                  (indicatorContainerHeight / scrollHeight) * containerHeight,
-                )}px`,
-                width: '100%',
-                transition: 'transform 0.3s ease',
-                transform: `translateX(${Math.round(
-                  (scrollTop * indicatorContainerHeight) / scrollHeight,
-                )}px)`,
-                padding: '0',
-                margin: '0',
-                border: '0',
-              },
-            }}
-          />
-        </View>
-      );
-    }
+        />
+      </View>
+    );
   };
 
   buildIndicatorBox = () => {
@@ -322,7 +304,7 @@ class ScrollBox extends BaseComponent {
         <View
           style={{
             ...this.buildIndicatorContainerStyle(),
-            ...{ position: 'absolute' },
+            position: 'absolute',
           }}
         >
           <CenterBox>{this.buildIndicatorBox()}</CenterBox>

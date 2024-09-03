@@ -29,14 +29,12 @@ const defaultProps = {
 };
 
 class TabbarItem extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        placeholderHeight: 50,
-      },
+      placeholderHeight: 50,
     };
   }
 
@@ -65,9 +63,7 @@ class TabbarItem extends BaseComponent {
     } = this.props;
 
     const style = {
-      ...{
-        '--item-color': color,
-      },
+      '--item-color': color,
       ...styleSource,
     };
 

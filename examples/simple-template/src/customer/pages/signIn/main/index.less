@@ -1,0 +1,23 @@
+@class-prefix-customer-sign-in: ~'customer-sign-in';
+
+.@{class-prefix-customer-sign-in} {
+  &__logo {
+    &__inner {
+      &__image {
+        background-color: red;
+      }
+
+      &__image-box {
+        width: var(--tfc-180);
+        border-radius: var(--tfc-30);
+        overflow: hidden;
+        box-shadow: var(--tfc-0) var(--tfc-0) var(--tfc-10) var(--tfc-5) #ccc;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: var(--tfc-180);
+    padding: 0 var(--tfc-80);
+  }
+}

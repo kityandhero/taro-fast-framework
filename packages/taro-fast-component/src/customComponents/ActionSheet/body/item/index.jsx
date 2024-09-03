@@ -11,11 +11,11 @@ const defaultProps = {
 };
 
 class ActionSheetItem extends BaseComponent {
-  triggerClick = (value, e) => {
+  triggerClick = (value, event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(value, e);
+      onClick(value, event);
     }
   };
 
@@ -28,8 +28,8 @@ class ActionSheetItem extends BaseComponent {
       <View
         className={rootClass}
         hoverClass="tfc-action-sheet__item--hover"
-        onClick={(e) => {
-          this.triggerClick(value, e);
+        onClick={(event) => {
+          this.triggerClick(value, event);
         }}
       >
         {isString(children) ? (

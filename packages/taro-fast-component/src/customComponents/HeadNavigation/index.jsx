@@ -27,7 +27,6 @@ class HeadNavigation extends BaseComponent {
 
     this.state = {
       ...this.state,
-
       containerHeight: '',
       placeholderHeight: 0,
       boxHeight: 0,

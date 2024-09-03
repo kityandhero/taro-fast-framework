@@ -34,9 +34,7 @@ const uncheckStatusIcon = (
   <View
     style={{
       ...iconContainerStyle,
-      ...{
-        borderColor: '#ccc',
-      },
+      borderColor: '#ccc',
     }}
   ></View>
 );
@@ -45,12 +43,10 @@ const checkStatusIcon = (
   <View
     style={{
       ...iconContainerStyle,
-      ...{
-        borderColor: '#1677ff',
-        backgroundColor: '#1677ff',
-        display: 'flex',
-        alignSelf: 'center',
-      },
+      borderColor: '#1677ff',
+      backgroundColor: '#1677ff',
+      display: 'flex',
+      alignSelf: 'center',
     }}
   >
     <IconCheck size={30} color="#fff" />
@@ -87,10 +83,10 @@ const defaultProps = {
 };
 
 class CheckBox extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { value } = props;
+    const { value } = properties;
 
     this.state = {
       valueFlag: value,
@@ -98,11 +94,11 @@ class CheckBox extends BaseComponent {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { value: valueNext } = nextProps;
-    const { valueFlag: valuePrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { value: valueNext } = nextProperties;
+    const { valueFlag: valuePrevious } = previousState;
 
-    if (valueNext !== valuePrev) {
+    if (valueNext !== valuePrevious) {
       return {
         valueFlag: valueNext,
         valueStage: valueNext,
@@ -134,11 +130,11 @@ class CheckBox extends BaseComponent {
     let valueChanged = [];
 
     if (checkInCollection(valueStage || [], value)) {
-      (valueStage || []).forEach((o) => {
+      for (const o of valueStage || []) {
         if (o !== value) {
           valueChanged.push(o);
         }
-      });
+      }
     } else {
       valueChanged = [...(valueStage || [])];
 
@@ -147,11 +143,11 @@ class CheckBox extends BaseComponent {
 
     const result = [];
 
-    valueChanged.forEach((o) => {
+    for (const o of valueChanged) {
       if (!checkStringIsNullOrWhiteSpace(o)) {
         result.push(o);
       }
-    });
+    }
 
     this.setState({
       valueStage: [...result],
@@ -215,9 +211,7 @@ class CheckBox extends BaseComponent {
                 <FlexBox
                   flexAuto="right"
                   style={{
-                    ...{
-                      padding: 'var(--tfc-10) var(--tfc-12)',
-                    },
+                    padding: 'var(--tfc-10) var(--tfc-12)',
                     ...styleItem,
                     ...(disabled
                       ? {
@@ -225,9 +219,8 @@ class CheckBox extends BaseComponent {
                           pointerEvents: 'none',
                         }
                       : {}),
-                    ...{
-                      height: '100%',
-                    },
+
+                    height: '100%',
                   }}
                   left={
                     checkInCollection(valueStage || [], valueItem)
@@ -238,9 +231,7 @@ class CheckBox extends BaseComponent {
                     isString(label) ? (
                       <View
                         style={{
-                          ...{
-                            fontSize: transformSize(28),
-                          },
+                          fontSize: transformSize(28),
                         }}
                       >
                         {label}
@@ -278,9 +269,7 @@ class CheckBox extends BaseComponent {
                 <FlexBox
                   flexAuto="right"
                   style={{
-                    ...{
-                      padding: 'var(--tfc-10) var(--tfc-12)',
-                    },
+                    padding: 'var(--tfc-10) var(--tfc-12)',
                     ...styleItem,
                     ...(disabled
                       ? {
@@ -288,9 +277,8 @@ class CheckBox extends BaseComponent {
                           pointerEvents: 'none',
                         }
                       : {}),
-                    ...{
-                      height: '100%',
-                    },
+
+                    height: '100%',
                   }}
                   left={
                     checkInCollection(valueStage || [], valueItem)
@@ -301,9 +289,7 @@ class CheckBox extends BaseComponent {
                     isString(label) ? (
                       <View
                         style={{
-                          ...{
-                            fontSize: transformSize(28),
-                          },
+                          fontSize: transformSize(28),
                         }}
                       >
                         {label}
@@ -371,7 +357,6 @@ class CheckBox extends BaseComponent {
                     : iconUncheck || uncheckStatusIconForListView
                 }
                 extraContainerStyle={{
-                  ...{},
                   ...extraContainerStyle,
                 }}
                 onClick={() => {
@@ -414,7 +399,6 @@ class CheckBox extends BaseComponent {
                 ) : null
               }
               extraContainerStyle={{
-                ...{},
                 ...extraContainerStyle,
               }}
               onClick={() => {

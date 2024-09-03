@@ -70,19 +70,15 @@ class Price extends BaseComponent {
 
     const bodyStyle = {
       ...bodyStyleSource,
-      ...{
-        display: 'inline-block',
-      },
+
+      display: 'inline-block',
     };
 
     const itemStyle = {
-      ...{
-        fontSize: transformSize(28),
-      },
+      fontSize: transformSize(28),
       ...itemStyleSource,
-      ...{
-        verticalAlign: 'bottom',
-      },
+
+      verticalAlign: 'bottom',
     };
 
     return (
@@ -97,28 +93,24 @@ class Price extends BaseComponent {
             lineHeight: 1,
           }}
         >
-          {!checkStringIsNullOrWhiteSpace(title) ? (
-            <View style={{ ...itemStyle, ...(titleStyle || {}) }}>{title}</View>
+          {checkStringIsNullOrWhiteSpace(title) ? null : (
+            <View style={{ ...itemStyle, ...titleStyle }}>{title}</View>
+          )}
+
+          <View style={{ ...itemStyle, ...prefixStyle }}>{prefix}</View>
+
+          <View style={{ ...itemStyle, ...integerPartStyle }}>{integer}</View>
+
+          {showDecimal ? (
+            <View style={{ ...itemStyle, ...pointStyle }}>.</View>
           ) : null}
 
-          <View style={{ ...itemStyle, ...(prefixStyle || {}) }}>{prefix}</View>
-
-          <View style={{ ...itemStyle, ...(integerPartStyle || {}) }}>
-            {integer}
-          </View>
-
-          {!showDecimal ? null : (
-            <View style={{ ...itemStyle, ...(pointStyle || {}) }}>.</View>
-          )}
-
-          {!showDecimal ? null : (
-            <View style={{ ...itemStyle, ...(decimalPartStyle || {}) }}>
-              {decimal}
-            </View>
-          )}
+          {showDecimal ? (
+            <View style={{ ...itemStyle, ...decimalPartStyle }}>{decimal}</View>
+          ) : null}
 
           {checkStringIsNullOrWhiteSpace(unit) ? null : (
-            <View style={{ ...itemStyle, ...(unitStyle || {}) }}>{unit}</View>
+            <View style={{ ...itemStyle, ...unitStyle }}>{unit}</View>
           )}
         </View>
       </View>

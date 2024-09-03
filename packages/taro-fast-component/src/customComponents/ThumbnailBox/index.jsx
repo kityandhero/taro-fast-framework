@@ -34,16 +34,14 @@ const defaultProps = {
 };
 
 class ThumbnailBox extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { initialExpand } = props;
+    const { initialExpand } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        expandStage: initialExpand,
-      },
+      expandStage: initialExpand,
     };
   }
 
@@ -162,7 +160,7 @@ class ThumbnailBox extends BaseComponent {
                 flexAuto="left"
                 left={
                   <View className={classNames(`${classPrefix}__action__box`)}>
-                    {!expandStage ? expandText : shrinkText}
+                    {expandStage ? shrinkText : expandText}
                   </View>
                 }
                 right={

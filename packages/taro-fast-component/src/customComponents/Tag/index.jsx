@@ -37,22 +37,20 @@ const defaultProps = {
 };
 
 class Tag extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        show: true,
-      },
+      show: true,
     };
   }
 
-  triggerClick = (e) => {
+  triggerClick = (event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(e);
+      onClick(event);
     }
   };
 
@@ -98,11 +96,9 @@ class Tag extends BaseComponent {
       : 'solid';
 
     const style = {
-      ...{
-        '--border-color': color,
-        '--text-color': fill === 'outline' ? color : '#ffffff',
-        '--background-color': fill === 'outline' ? 'transparent' : color,
-      },
+      '--border-color': color,
+      '--text-color': fill === 'outline' ? color : '#ffffff',
+      '--background-color': fill === 'outline' ? 'transparent' : color,
       ...styleOther,
     };
 

@@ -129,22 +129,21 @@ const defaultProps = {
 };
 
 class FloatAction extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        buttonStyle: [],
-        buttonVisible: false,
-      },
+
+      buttonStyle: [],
+      buttonVisible: false,
     };
   }
 
   updated = (buttonVisible) => {
-    const { buttonVisible: buttonVisiblePrev } = this.state;
+    const { buttonVisible: buttonVisiblePrevious } = this.state;
 
-    if (buttonVisiblePrev !== buttonVisible) {
+    if (buttonVisiblePrevious !== buttonVisible) {
       this.setState({
         buttonVisible,
       });
@@ -190,13 +189,14 @@ class FloatAction extends BaseComponent {
 
     // 重置样式
     if (isReset) {
+      // eslint-disable-next-line unicorn/no-array-for-each
       buttons.forEach(() => {
         buttonStyle.push('opacity: 0; transform: translate3d(0, 0, 0)');
       });
 
-      const { buttonStyle: buttonStylePrev } = this.state;
+      const { buttonStyle: buttonStylePrevious } = this.state;
 
-      if (buttonStylePrev !== buttonStyle) {
+      if (buttonStylePrevious !== buttonStyle) {
         this.setState({ buttonStyle });
       }
 
@@ -208,27 +208,31 @@ class FloatAction extends BaseComponent {
       .then((rect) => {
         switch (direction) {
           case 'horizontal':
-          case 'vertical':
-            buttons.forEach((_, index) => {
+          case 'vertical': {
+            // eslint-disable-next-line no-unused-vars
+            for (const [index, _] of buttons.entries()) {
               const offset = `${
                 sign * (rect.width + spaceBetween) * (index + 1)
               }`;
               const style = setTransform(offset, scale, duration, isH);
 
               buttonStyle.push(style);
-            });
+            }
             break;
-          case 'circle':
+          }
+          case 'circle': {
             const radius = rect.width + spaceBetween;
-            buttons.forEach((_, index) => {
+            // eslint-disable-next-line no-unused-vars
+            for (const [index, _] of buttons.entries()) {
               buttonStyle.push(this.getCircleStyle(index, radius));
-            });
+            }
             break;
+          }
         }
 
-        const { buttonStyle: buttonStylePrev } = this.state;
+        const { buttonStyle: buttonStylePrevious } = this.state;
 
-        if (buttonStylePrev !== buttonStyle) {
+        if (buttonStylePrevious !== buttonStyle) {
           this.setState({ buttonStyle });
         }
 
@@ -257,8 +261,8 @@ class FloatAction extends BaseComponent {
     let x = sin(currentAngle) * radius;
     let y = cos(currentAngle) * radius;
 
-    x = parseFloat(x.toFixed(6));
-    y = parseFloat(y.toFixed(6));
+    x = Number.parseFloat(x.toFixed(6));
+    y = Number.parseFloat(y.toFixed(6));
 
     const transform = `transform: scale(${scale}) translate3d(${x}${unit}, ${y}${unit}, 0)`;
 
@@ -375,7 +379,7 @@ class FloatAction extends BaseComponent {
                 className={classes.button[index].wrap}
                 disabled={button.disabled}
                 hoverClass={
-                  !button.disabled ? classes.button[index].hover : 'none'
+                  button.disabled ? 'none' : classes.button[index].hover
                 }
                 hoverStopPropagation={button.hoverStopPropagation}
                 hoverStartTime={button.hoverStartTime}

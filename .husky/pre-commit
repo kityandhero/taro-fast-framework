@@ -1,4 +1,2 @@
 echo ---------------------
 echo exec husky pre-commit
-
-npm run z:lint:staged

@@ -71,7 +71,6 @@ class SwitchItem extends BaseComponent {
           />
         }
         extraContainerStyle={{
-          ...{},
           ...extraContainerStyle,
         }}
       />

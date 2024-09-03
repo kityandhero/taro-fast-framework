@@ -47,17 +47,15 @@ class PullIndicator extends BaseComponent {
 
   refreshingTimer = null;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { refreshing } = props;
+    const { refreshing } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        refreshingFlag: refreshing,
-        illusoryVisibleCompleted: true,
-      },
+      refreshingFlag: refreshing,
+      illusoryVisibleCompleted: true,
     };
 
     this.refreshBoxAnimation = createAnimation({
@@ -76,20 +74,18 @@ class PullIndicator extends BaseComponent {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { refreshing: refreshingFlagNext } = nextProps;
-    const { refreshingFlag: refreshingFlagPrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { refreshing: refreshingFlagNext } = nextProperties;
+    const { refreshingFlag: refreshingFlagPrevious } = previousState;
 
-    if (refreshingFlagNext !== refreshingFlagPrev) {
+    if (refreshingFlagNext !== refreshingFlagPrevious) {
       const data =
-        refreshingFlagNext && !refreshingFlagPrev
+        refreshingFlagNext && !refreshingFlagPrevious
           ? { illusoryVisibleCompleted: false }
           : {};
 
       return {
-        ...{
-          refreshingFlag: refreshingFlagNext,
-        },
+        refreshingFlag: refreshingFlagNext,
         ...data,
       };
     }
@@ -98,11 +94,11 @@ class PullIndicator extends BaseComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProps, preState, snapshot) => {
-    const { refreshingFlag: refreshingFlagPrev } = preState;
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
+    const { refreshingFlag: refreshingFlagPrevious } = preState;
     const { refreshingFlag: refreshingFlagNext } = this.state;
 
-    if (!refreshingFlagPrev && refreshingFlagNext) {
+    if (!refreshingFlagPrevious && refreshingFlagNext) {
       const that = this;
 
       that.refreshingIllusoryShow = true;
@@ -134,7 +130,7 @@ class PullIndicator extends BaseComponent {
   bindMessageListener = () => {
     Taro.eventCenter.on('tfc-pull-indicator', (options = {}) => {
       const { maxMoveY, moveY, rotate, needRefresh } = options;
-      const { needRefresh: needRefreshPrev } = this.state;
+      const { needRefresh: needRefreshPrevious } = this.state;
 
       this.maxMoveY = maxMoveY;
 
@@ -148,19 +144,17 @@ class PullIndicator extends BaseComponent {
 
         startTransition(() => {
           that.setState({
-            ...{
-              refreshBoxAnimationData:
-                refreshingBoxEffect !== 'scale'
-                  ? that.refreshBoxAnimation.translateY(moveY).step().export()
-                  : that.refreshBoxAnimation
-                      .scale(moveY / maxMoveY)
-                      .step()
-                      .export(),
-              refreshBoxPreloadAnimationData: that.refreshBoxPreloadAnimation
-                .rotate(rotate)
-                .step()
-                .export(),
-            },
+            refreshBoxAnimationData:
+              refreshingBoxEffect === 'scale'
+                ? that.refreshBoxAnimation
+                    .scale(moveY / maxMoveY)
+                    .step()
+                    .export()
+                : that.refreshBoxAnimation.translateY(moveY).step().export(),
+            refreshBoxPreloadAnimationData: that.refreshBoxPreloadAnimation
+              .rotate(rotate)
+              .step()
+              .export(),
             ...(isUndefined(needRefresh) ? {} : { needRefresh }),
           });
         });
@@ -169,26 +163,24 @@ class PullIndicator extends BaseComponent {
 
         if (
           that.currentPullAnimalStep != nextStep ||
-          (!isUndefined(needRefresh) && needRefreshPrev != needRefresh)
+          (!isUndefined(needRefresh) && needRefreshPrevious != needRefresh)
         ) {
           that.currentPullAnimalStep = nextStep;
           that.currentMove = moveY;
 
           startTransition(() => {
             that.setState({
-              ...{
-                refreshBoxAnimationData:
-                  refreshingBoxEffect !== 'scale'
-                    ? that.refreshBoxAnimation.translateY(moveY).step().export()
-                    : that.refreshBoxAnimation
-                        .scale(moveY / maxMoveY)
-                        .step()
-                        .export(),
-                refreshBoxPreloadAnimationData: that.refreshBoxPreloadAnimation
-                  .rotate(rotate)
-                  .step()
-                  .export(),
-              },
+              refreshBoxAnimationData:
+                refreshingBoxEffect === 'scale'
+                  ? that.refreshBoxAnimation
+                      .scale(moveY / maxMoveY)
+                      .step()
+                      .export()
+                  : that.refreshBoxAnimation.translateY(moveY).step().export(),
+              refreshBoxPreloadAnimationData: that.refreshBoxPreloadAnimation
+                .rotate(rotate)
+                .step()
+                .export(),
               ...(isUndefined(needRefresh) ? {} : { needRefresh }),
             });
           });
@@ -269,11 +261,11 @@ class PullIndicator extends BaseComponent {
             })}
             animation={refreshBoxAnimationData}
             style={
-              refreshingBoxEffect !== 'scale'
-                ? {}
-                : {
+              refreshingBoxEffect === 'scale'
+                ? {
                     top: `${maxMove}px`,
                   }
+                : {}
             }
           >
             <View

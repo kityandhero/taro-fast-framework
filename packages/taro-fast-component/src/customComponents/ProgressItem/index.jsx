@@ -71,25 +71,19 @@ class ProgressItem extends BaseComponent {
     let labelComponent = label;
 
     if (isString(label)) {
-      if (!checkStringIsNullOrWhiteSpace(label)) {
-        labelComponent = (
-          <VerticalBox>
-            <View
-              style={{
-                ...{
-                  fontSize: transformSize(30),
-                  paddingRight: transformSize(20),
-                },
-                ...labelStyle,
-              }}
-            >
-              {label}
-            </View>
-          </VerticalBox>
-        );
-      } else {
-        labelComponent = null;
-      }
+      labelComponent = checkStringIsNullOrWhiteSpace(label) ? null : (
+        <VerticalBox>
+          <View
+            style={{
+              fontSize: transformSize(30),
+              paddingRight: transformSize(20),
+              ...labelStyle,
+            }}
+          >
+            {label}
+          </View>
+        </VerticalBox>
+      );
     }
 
     if (layout == 'horizontal') {
@@ -118,7 +112,7 @@ class ProgressItem extends BaseComponent {
                   fontSize={fontSize}
                 />
               }
-              right={extra ? extra : null}
+              right={extra ?? null}
               rightStyle={
                 extra
                   ? {
@@ -141,13 +135,13 @@ class ProgressItem extends BaseComponent {
 
     return (
       <View style={{ width: '100%' }}>
-        {labelComponent != null ? (
+        {labelComponent == null ? null : (
           <Row>
             <Col size={12} style={labelContainerStyle}>
               {labelComponent}
             </Col>
           </Row>
-        ) : null}
+        )}
 
         <Row>
           <Col size={12}>
@@ -170,7 +164,7 @@ class ProgressItem extends BaseComponent {
                   fontSize={fontSize}
                 />
               }
-              right={extra ? extra : null}
+              right={extra ?? null}
               rightStyle={
                 extra
                   ? {

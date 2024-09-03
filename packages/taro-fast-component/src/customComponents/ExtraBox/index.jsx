@@ -32,9 +32,7 @@ class ExtraBox extends BaseComponent {
 
     return {
       ...style,
-      ...{
-        position: 'relative',
-      },
+      position: 'relative',
     };
   };
 
@@ -45,12 +43,10 @@ class ExtraBox extends BaseComponent {
 
     return {
       ...extraContainerStyle,
-      ...{
-        position: 'absolute',
-        height: '100%',
-        top: '0',
-        width: transformSize(extraWidth),
-      },
+      position: 'absolute',
+      height: '100%',
+      top: '0',
+      width: transformSize(extraWidth),
       ...(extraPosition === 'right' ? { right: '0' } : { left: '0' }),
     };
   };

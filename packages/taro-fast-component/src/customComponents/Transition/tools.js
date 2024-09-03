@@ -13,24 +13,22 @@ const getClassNames = (name) => ({
 
 export const defaultProps = {
   ...AbstractComponent.defaultProps,
-  ...{
-    classes: '',
-    show: false,
-    duration: 300,
-    name: 'fade',
-    onBeforeEnter: null,
-    onBeforeLeave: null,
-    onAfterEnter: null,
-    onAfterLeave: null,
-    onEnter: null,
-    onLeave: null,
-    enterClass: '',
-    enterActiveClass: '',
-    enterToClass: '',
-    leaveClass: '',
-    leaveActiveClass: '',
-    leaveToClass: '',
-  },
+  classes: '',
+  show: false,
+  duration: 300,
+  name: 'fade',
+  onBeforeEnter: null,
+  onBeforeLeave: null,
+  onAfterEnter: null,
+  onAfterLeave: null,
+  onEnter: null,
+  onLeave: null,
+  enterClass: '',
+  enterActiveClass: '',
+  enterToClass: '',
+  leaveClass: '',
+  leaveActiveClass: '',
+  leaveToClass: '',
 };
 
 export function useTransition({
@@ -97,7 +95,9 @@ export function useTransition({
     // debugger
     // const { duration, name } = this.data
 
-    const currentDurationTemp = isObject(duration) ? duration.enter : duration;
+    const currentDurationTemporary = isObject(duration)
+      ? duration.enter
+      : duration;
     status.current = 'enter';
     // this.$emit('before-enter')
     onBeforeEnter?.();
@@ -110,7 +110,7 @@ export function useTransition({
       setInitializationCompleted(true);
       setDisplay(true);
       setClasses(classNames.enter);
-      setCurrentDuration(currentDurationTemp);
+      setCurrentDuration(currentDurationTemporary);
 
       requestAnimationFrame(() => {
         if (status.current !== 'enter') {
@@ -126,7 +126,9 @@ export function useTransition({
     if (!display) {
       return;
     }
-    const currentDurationTemp = isObject(duration) ? duration.leave : duration;
+    const currentDurationTemporary = isObject(duration)
+      ? duration.leave
+      : duration;
     status.current = 'leave';
     onBeforeLeave?.();
     requestAnimationFrame(() => {
@@ -136,14 +138,14 @@ export function useTransition({
       // this.$emit('leave')
       onLeave?.();
       setClasses(classNames.leave);
-      setCurrentDuration(currentDurationTemp);
+      setCurrentDuration(currentDurationTemporary);
 
       requestAnimationFrame(() => {
         if (status.current !== 'leave') {
           return;
         }
         transitionEnded.current = false;
-        setTimeout(() => onTransitionEnd(), currentDurationTemp);
+        setTimeout(() => onTransitionEnd(), currentDurationTemporary);
         setClasses(classNames['leave-to']);
       });
     });

@@ -99,7 +99,7 @@ class Progress extends BaseComponent {
 
       if (a.length > 0) {
         return {
-          backgroundImage: `linear-gradient(to right, ${a.join()})`,
+          backgroundImage: `linear-gradient(to right, ${a.join(',')})`,
         };
       }
     }
@@ -125,10 +125,9 @@ class Progress extends BaseComponent {
 
     const styleContainer = {
       ...style,
-      ...{
-        display: 'flex',
-        alignItems: 'center',
-      },
+
+      display: 'flex',
+      alignItems: 'center',
     };
 
     const containerStyle = {
@@ -141,10 +140,8 @@ class Progress extends BaseComponent {
     };
 
     const progressStyle = {
-      ...{
-        width: percent && `${+percent}%`,
-        height: transformSize(strokeWidth),
-      },
+      width: percent && `${+percent}%`,
+      height: transformSize(strokeWidth),
       ...activeColor,
       ...(useBorderRadius
         ? {

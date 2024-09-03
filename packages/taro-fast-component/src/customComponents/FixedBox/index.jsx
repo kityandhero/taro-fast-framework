@@ -43,17 +43,16 @@ class FixedBox extends BaseComponent {
             left: '0',
           }
         : {}),
-      ...(top != null ? { top: transformSize(top) } : {}),
-      ...(right != null ? { right: transformSize(right) } : {}),
-      ...(bottom != null ? { bottom: transformSize(bottom) } : {}),
-      ...(left != null ? { left: transformSize(left) } : {}),
-      ...(width != 'auto' ? { width: transformSize(width) } : {}),
-      ...(height != 'auto' ? { height: transformSize(height) } : {}),
+      ...(top == null ? {} : { top: transformSize(top) }),
+      ...(right == null ? {} : { right: transformSize(right) }),
+      ...(bottom == null ? {} : { bottom: transformSize(bottom) }),
+      ...(left == null ? {} : { left: transformSize(left) }),
+      ...(width == 'auto' ? {} : { width: transformSize(width) }),
+      ...(height == 'auto' ? {} : { height: transformSize(height) }),
       ...style,
-      ...{
-        position: 'fixed',
-        zIndex: zIndex,
-      },
+
+      position: 'fixed',
+      zIndex: zIndex,
       ...(center
         ? {
             margin: 'auto',

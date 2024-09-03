@@ -25,11 +25,11 @@ const defaultProps = {
 };
 
 class ProgressBox extends BaseComponent {
-  triggerActiveEnd = (e) => {
+  triggerActiveEnd = (event) => {
     const { onActiveEnd } = this.props;
 
     if (isFunction(onActiveEnd)) {
-      onActiveEnd(e);
+      onActiveEnd(event);
     }
   };
 
@@ -51,11 +51,8 @@ class ProgressBox extends BaseComponent {
     } = this.props;
 
     const iconContainerStyle = {
-      ...{
-        paddingLeft: transformSize(10),
-      },
+      paddingLeft: transformSize(10),
       ...iconContainerStyleSource,
-      ...{},
     };
 
     return (

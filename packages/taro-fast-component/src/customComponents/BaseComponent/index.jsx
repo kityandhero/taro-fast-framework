@@ -4,9 +4,9 @@ const defaultProps = {};
 
 class BaseComponent extends AbstractComponent {
   // eslint-disable-next-line no-unused-vars
-  adjustShowRenderCountInConsole = (nextProps, nextState) => {
+  adjustShowRenderCountInConsole = (nextProperties, nextState) => {
     {
-      const { showRenderCount } = nextProps;
+      const { showRenderCount } = nextProperties;
 
       this.showRenderCountInConsole = !!showRenderCount || false;
     }

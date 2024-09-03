@@ -22,23 +22,21 @@ const defaultProps = {
 };
 
 class Collapse extends BaseComponent {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.state = {
       ...this.state,
-      ...{
-        listStage: [],
-        openList: [],
-      },
+      listStage: [],
+      openList: [],
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { list: listNext, single } = nextProps;
-    const { listStage: listPrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { list: listNext, single } = nextProperties;
+    const { listStage: listPrevious } = previousState;
 
-    if (JSON.stringify(listNext) !== JSON.stringify(listPrev)) {
+    if (JSON.stringify(listNext) !== JSON.stringify(listPrevious)) {
       let firstOpen = false;
 
       const openList = (isArray(listNext) ? listNext : []).map((o) => {
@@ -58,22 +56,22 @@ class Collapse extends BaseComponent {
     return {};
   }
 
-  triggerClick = (o, i) => {
+  triggerClick = (o, index_) => {
     const { single } = this.props;
     let { openList } = this.state;
 
     if (single) {
       openList = openList.map((item, index) => {
-        if (i !== index) {
+        if (index_ !== index) {
           return false;
         }
 
         return item;
       });
 
-      openList[i] = !!!openList[i];
+      openList[index_] = !openList[index_];
     } else {
-      openList[i] = !!!openList[i];
+      openList[index_] = !openList[index_];
     }
 
     this.setState({ openList: [...openList] });

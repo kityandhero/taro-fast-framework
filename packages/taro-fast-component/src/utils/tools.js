@@ -4,9 +4,9 @@ const PREFIX = 'tfc-';
 
 const REGEXP = new RegExp('{|}|"', 'g');
 
-function keys(obj) {
-  return JSON.stringify(obj)
-    .replace(REGEXP, '')
+function keys(object) {
+  return JSON.stringify(object)
+    .replaceAll(REGEXP, '')
     .split(',')
     .map(function (item) {
       return item.split(':')[0];
@@ -15,38 +15,41 @@ function keys(obj) {
 
 function join(name, mods) {
   name = PREFIX + name;
-  mods = mods.map(function (mod) {
-    return name + '--' + mod;
+
+  mods = mods.map(function (o) {
+    return name + '--' + o;
   });
+
   mods.unshift(name);
+
   return mods.join(' ');
 }
 
-function traversing(mods, conf) {
-  if (!conf) {
+function traversing(mods, o) {
+  if (!o) {
     return;
   }
 
   // 加前缀
-  if (typeof conf === 'string' || typeof conf === 'number') {
-    mods.push(conf);
-  } else if (isArray(conf)) {
+  if (typeof o === 'string' || typeof o === 'number') {
+    mods.push(o);
+  } else if (isArray(o)) {
     // 加前缀
-    conf.forEach(function (item) {
+    for (const item of o) {
       traversing(mods, item);
-    });
-  } else if (typeof conf === 'object') {
+    }
+  } else if (typeof o === 'object') {
     // 加属性
-    keys(conf).forEach(function (key) {
-      conf[key] && mods.push(key);
-    });
+    for (const key of keys(o)) {
+      o[key] && mods.push(key);
+    }
   }
 }
 
-export function bem(name, conf) {
+export function bem(name, o) {
   const mods = [];
 
-  traversing(mods, conf);
+  traversing(mods, o);
 
   return join(name, mods);
 }

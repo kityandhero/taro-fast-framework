@@ -34,24 +34,22 @@ class Avatar extends BaseComponent {
 
     if (text) letter = text[0];
 
-    let elem;
+    let element;
 
-    if (image) {
-      elem = <Image className="tfc-avatar__img" src={image} />;
-    } else {
-      elem = (
-        <Text className="tfc-avatar__text" userSelect>
-          {letter}
-        </Text>
-      );
-    }
+    element = image ? (
+      <Image className="tfc-avatar__img" src={image} />
+    ) : (
+      <Text className="tfc-avatar__text" userSelect>
+        {letter}
+      </Text>
+    );
 
     return (
       <View
         className={classNames(rootClassName, classObject, this.props.className)}
         style={style}
       >
-        {elem}
+        {element}
       </View>
     );
   }

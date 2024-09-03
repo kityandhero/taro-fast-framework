@@ -120,19 +120,17 @@ class Tabs extends BaseComponent {
    */
   isMoving = false;
 
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
-    const { current } = props;
+    const { current } = properties;
 
     this.state = {
       ...this.state,
-      ...{
-        currentFlag: current,
-        currentStage: current,
-        scrollLeft: 0,
-        scrollTop: 0,
-      },
+      currentFlag: current,
+      currentStage: current,
+      scrollLeft: 0,
+      scrollTop: 0,
     };
 
     this.touchDot = 0;
@@ -150,18 +148,16 @@ class Tabs extends BaseComponent {
     this.verticalHeaderId = getGuid();
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { current: currentNext } = nextProps;
-    const { currentFlag: currentPrev } = prevState;
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { current: currentNext } = nextProperties;
+    const { currentFlag: currentPrevious } = previousState;
 
-    if (currentNext !== currentPrev) {
+    if (currentNext !== currentPrevious) {
       return {
-        ...{
-          currentFlag: currentNext,
-          currentStage: currentNext,
-          horizontalPanelWidth: 0,
-          verticalMultiPanelHeight: 0,
-        },
+        currentFlag: currentNext,
+        currentStage: currentNext,
+        horizontalPanelWidth: 0,
+        verticalMultiPanelHeight: 0,
       };
     }
 
@@ -173,7 +169,7 @@ class Tabs extends BaseComponent {
   };
 
   // eslint-disable-next-line no-unused-vars
-  doWorkWhenGetSnapshotBeforeUpdate = (preProps, preState) => {
+  doWorkWhenGetSnapshotBeforeUpdate = (preProperties, preState) => {
     this.adjustSize();
 
     return null;
@@ -247,9 +243,7 @@ class Tabs extends BaseComponent {
     const currentStage = index;
 
     const stateWillChange = {
-      ...{
-        currentStage,
-      },
+      currentStage,
     };
 
     this.setState(stateWillChange);
@@ -259,7 +253,7 @@ class Tabs extends BaseComponent {
     }
   };
 
-  handleTouchStart = (e) => {
+  handleTouchStart = (event) => {
     const { swipeable } = this.props;
     const direction = this.getDirection();
 
@@ -267,14 +261,14 @@ class Tabs extends BaseComponent {
       return;
     }
 
-    this.touchDot = e.touches[0].pageX;
+    this.touchDot = event.touches[0].pageX;
 
     this.timer = setInterval(() => {
       this.interval++;
     }, 100);
   };
 
-  handleTouchMove = (e) => {
+  handleTouchMove = (event) => {
     const { swipeable, tabList } = this.props;
     const { currentStage } = this.state;
 
@@ -284,7 +278,7 @@ class Tabs extends BaseComponent {
       return;
     }
 
-    const touchMove = e.touches[0].pageX;
+    const touchMove = event.touches[0].pageX;
     const moveDistance = touchMove - this.touchDot;
     const maxIndex = tabList.length;
 
@@ -292,12 +286,12 @@ class Tabs extends BaseComponent {
       // 向左滑动
       if (currentStage + 1 < maxIndex && moveDistance <= -MIN_DISTANCE) {
         this.isMoving = true;
-        this.handleClick(currentStage + 1, e);
+        this.handleClick(currentStage + 1, event);
 
         // 向右滑动
       } else if (currentStage - 1 >= 0 && moveDistance >= MIN_DISTANCE) {
         this.isMoving = true;
-        this.handleClick(currentStage - 1, e);
+        this.handleClick(currentStage - 1, event);
       }
     }
   };
@@ -339,13 +333,11 @@ class Tabs extends BaseComponent {
       icon: iconItem,
       badgeFontSize,
     } = {
-      ...{
-        badgeDotSize: 16,
-        badgeStyle: {
-          marginTop: transformSize(-4),
-        },
-        badgeFontSize: 18,
+      badgeDotSize: 16,
+      badgeStyle: {
+        marginTop: transformSize(-4),
       },
+      badgeFontSize: 18,
       ...item,
     };
 
@@ -386,12 +378,11 @@ class Tabs extends BaseComponent {
           ...itemStyle,
           ...(currentIndex === index ? itemActiveStyle : {}),
           ...styleItem,
-          ...{
-            display: 'flex',
-          },
+
+          display: 'flex',
         }}
-        onClick={(e) => {
-          this.handleClick(index, e, item);
+        onClick={(event) => {
+          this.handleClick(index, event, item);
         }}
       >
         {titleComponent}
@@ -472,13 +463,11 @@ class Tabs extends BaseComponent {
         <View
           className={classNames(`${classPrefix}__header-horizontal`)}
           style={{
-            ...{
-              height: transformSize(
-                horizontalTabHeight < defaultProps.horizontalTabHeight
-                  ? defaultProps.horizontalTabHeight
-                  : horizontalTabHeight,
-              ),
-            },
+            height: transformSize(
+              horizontalTabHeight < defaultProps.horizontalTabHeight
+                ? defaultProps.horizontalTabHeight
+                : horizontalTabHeight,
+            ),
           }}
         >
           {this.buildTabItemList({
@@ -578,10 +567,8 @@ class Tabs extends BaseComponent {
     }
 
     const bodyInnerStyle = {
-      ...{
-        transform: transformStyle,
-        '-webkit-transform': transformStyle,
-      },
+      transform: transformStyle,
+      '-webkit-transform': transformStyle,
       ...verticalScrollHeightStyle,
     };
 
@@ -615,9 +602,7 @@ class Tabs extends BaseComponent {
       >
         {tabListAdjust.map((item, index) => {
           const { body } = {
-            ...{
-              body: null,
-            },
+            body: null,
             ...item,
           };
 
@@ -684,10 +669,8 @@ class Tabs extends BaseComponent {
     }
 
     const bodyInnerStyle = {
-      ...{
-        transform: transformStyle,
-        '-webkit-transform': transformStyle,
-      },
+      transform: transformStyle,
+      '-webkit-transform': transformStyle,
       ...verticalScrollHeightStyle,
     };
 
@@ -699,12 +682,10 @@ class Tabs extends BaseComponent {
       <View
         id={this.bodyId}
         style={{
-          ...(bodyStyle || {}),
+          ...bodyStyle,
           ...(direction === 'horizontal'
             ? {
-                ...{
-                  width: '100%',
-                },
+                width: '100%',
                 ...(singlePanel
                   ? {}
                   : { height: transformSize(horizontalMultiPanelHeight) }),
@@ -712,9 +693,7 @@ class Tabs extends BaseComponent {
             : {}),
           ...(direction === 'vertical'
             ? {
-                ...{
-                  width: '100%',
-                },
+                width: '100%',
                 ...(singlePanel
                   ? {}
                   : {
@@ -763,19 +742,16 @@ class Tabs extends BaseComponent {
       ...(direction === 'vertical'
         ? {
             ...(scroll ? { height: transformSize(verticalScrollHeight) } : {}),
-            ...{
-              '--underline-vertical-width': transformSize(
-                underlineVerticalWidth,
-              ),
-              '--underline-vertical-height':
-                underlineVerticalMargin > 0
-                  ? `calc(100% - ${transformSize(underlineVerticalMargin)} * 2)`
-                  : '100%',
-              '--underline-vertical-margin':
-                underlineVerticalMargin > 0
-                  ? transformSize(underlineVerticalMargin)
-                  : '0',
-            },
+
+            '--underline-vertical-width': transformSize(underlineVerticalWidth),
+            '--underline-vertical-height':
+              underlineVerticalMargin > 0
+                ? `calc(100% - ${transformSize(underlineVerticalMargin)} * 2)`
+                : '100%',
+            '--underline-vertical-margin':
+              underlineVerticalMargin > 0
+                ? transformSize(underlineVerticalMargin)
+                : '0',
             ...(underlineVerticalPosition === 'right'
               ? {
                   '--underline-right': '0',
@@ -789,21 +765,17 @@ class Tabs extends BaseComponent {
         : {}),
       ...(direction === 'horizontal'
         ? {
-            ...{
-              '--underline-horizontal-height': transformSize(
-                underlineHorizontalHeight,
-              ),
-              '--underline-horizontal-width':
-                underlineHorizontalMargin > 0
-                  ? `calc(100% - ${transformSize(
-                      underlineHorizontalMargin,
-                    )} * 2)`
-                  : '100%',
-              '--underline-horizontal-margin':
-                underlineHorizontalMargin > 0
-                  ? transformSize(underlineHorizontalMargin)
-                  : '0',
-            },
+            '--underline-horizontal-height': transformSize(
+              underlineHorizontalHeight,
+            ),
+            '--underline-horizontal-width':
+              underlineHorizontalMargin > 0
+                ? `calc(100% - ${transformSize(underlineHorizontalMargin)} * 2)`
+                : '100%',
+            '--underline-horizontal-margin':
+              underlineHorizontalMargin > 0
+                ? transformSize(underlineHorizontalMargin)
+                : '0',
             ...(underlineHorizontalPosition === 'bottom'
               ? {
                   '--underline-bottom': '0',
@@ -815,12 +787,11 @@ class Tabs extends BaseComponent {
                 }),
           }
         : {}),
-      ...{
-        '--underline-color': underlineColor,
-        '--underline-border-radius': transformSize(underlineBorderRadius),
-        '--underline-active-color': underlineActiveColor,
-        '--header-background-color': headerBackgroundColor,
-      },
+
+      '--underline-color': underlineColor,
+      '--underline-border-radius': transformSize(underlineBorderRadius),
+      '--underline-active-color': underlineActiveColor,
+      '--header-background-color': headerBackgroundColor,
     };
 
     const tabHeader = this.buildTabHeader();

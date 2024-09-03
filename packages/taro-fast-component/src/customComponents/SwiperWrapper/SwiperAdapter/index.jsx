@@ -18,11 +18,11 @@ const defaultProps = {
 };
 
 class SwiperAdapter extends BaseComponent {
-  triggerChange = (e) => {
+  triggerChange = (event) => {
     const { onChange } = this.props;
 
     if (isFunction(onChange)) {
-      onChange(e);
+      onChange(event);
     }
   };
 
@@ -31,17 +31,15 @@ class SwiperAdapter extends BaseComponent {
 
     let inner = null;
 
-    if (!isFunction(itemBuilder)) {
-      inner = 'itemBuilder in props must be a function and return a component';
-    } else {
-      inner = itemBuilder({
-        scaleMode,
-        aspectRatio,
-        item,
-        index,
-        keyPrefix: this.keyPrefix,
-      });
-    }
+    inner = isFunction(itemBuilder)
+      ? itemBuilder({
+          scaleMode,
+          aspectRatio,
+          item,
+          index,
+          keyPrefix: this.keyPrefix,
+        })
+      : 'itemBuilder in props must be a function and return a component';
 
     return <SwiperItem key={`${this.keyPrefix}_${index}`}>{inner}</SwiperItem>;
   };
@@ -69,8 +67,8 @@ class SwiperAdapter extends BaseComponent {
 
     return (
       <Swiper {...swiperConfig}>
-        {list.map((o, i) => {
-          return this.buildItem(o, i);
+        {list.map((o, index) => {
+          return this.buildItem(o, index);
         })}
       </Swiper>
     );

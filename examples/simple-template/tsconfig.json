@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/temp",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["*.js", "*.d.ts", "src", "config/**/*.js", "test"],
+  "exclude": ["node_modules"]
+}

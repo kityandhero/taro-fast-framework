@@ -18,11 +18,11 @@ const defaultProps = {
 };
 
 class Item extends BaseComponent {
-  triggerClick = (e) => {
+  triggerClick = (event) => {
     const { onClick } = this.props;
 
     if (isFunction(onClick)) {
-      onClick(e);
+      onClick(event);
     }
   };
 
