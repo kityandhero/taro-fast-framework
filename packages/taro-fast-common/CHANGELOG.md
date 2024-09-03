@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.1
+
+### Patch Changes
+
+- update
+
 ## 3.1.0
 
 ### Minor Changes
