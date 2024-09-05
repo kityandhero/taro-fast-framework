@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "sourceMap": true,
+    "baseUrl": ".",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "es",
+    "dist",
+    "scripts",
+    "webpack",
+    "jest"
+  ]
+}

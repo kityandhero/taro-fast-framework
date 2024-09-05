@@ -6,8 +6,7 @@ import {
   showSimpleErrorMessage,
 } from 'easy-soft-utility';
 
-import { getDerivedStateFromPropertiesForUrlParameters } from 'antd-management-fast-common';
-import { iconBuilder } from 'antd-management-fast-component';
+import { getDerivedStateFromPropertiesForUrlParametersCore } from 'taro-fast-common';
 
 import { accessWayCollection } from '../../../customConfig';
 import {
@@ -54,7 +53,7 @@ class Edit extends DataTabContainerSupplement {
   }
 
   static getDerivedStateFromProps(nextProperties, previousState) {
-    return getDerivedStateFromPropertiesForUrlParameters(
+    return getDerivedStateFromPropertiesForUrlParametersCore(
       nextProperties,
       previousState,
       { id: '' },
@@ -133,9 +132,7 @@ class Edit extends DataTabContainerSupplement {
     });
   };
 
-  establishPageHeaderAvatarConfig = () => {
-    return { icon: iconBuilder.snippets() };
-  };
+
 
   establishPageHeaderTitlePrefix = () => {
     return '标题';
@@ -161,7 +158,6 @@ class Edit extends DataTabContainerSupplement {
         {
           key: 'setOnline',
           text: '设为上线',
-          icon: iconBuilder.checkCircle(),
           handleButtonClick: ({ handleData }) => {
             that.setOnline(handleData);
           },
@@ -176,7 +172,6 @@ class Edit extends DataTabContainerSupplement {
         {
           key: 'setOffline',
           text: '设为下线',
-          icon: iconBuilder.download(),
           handleButtonClick: ({ handleData }) => {
             that.setOffline(handleData);
           },
@@ -220,7 +215,6 @@ class Edit extends DataTabContainerSupplement {
       items: [
         {
           key: 'refreshCache',
-          icon: iconBuilder.reload(),
           text: '刷新缓存',
           confirm: true,
           title: '即将刷新缓存，确定吗？',

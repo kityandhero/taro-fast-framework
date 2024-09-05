@@ -3,7 +3,11 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
+// this is entry.
+
+const { checkDevelopment, taroFastConfig } = require('./configAssist');
+
 module.exports = {
-  collectCoverage: true,
-  verbose: true,
+  checkDevelopment,
+  taroFastConfig,
 };

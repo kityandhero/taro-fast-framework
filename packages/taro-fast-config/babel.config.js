@@ -4,6 +4,5 @@
 /* eslint-disable no-useless-escape */
 
 module.exports = {
-  collectCoverage: true,
-  verbose: true,
+  presets: ['@babel/preset-env'],
 };

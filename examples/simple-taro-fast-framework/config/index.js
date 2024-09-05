@@ -2,7 +2,10 @@
 // eslint-disable-next-line import/no-commonjs
 // const path = require('path');
 
+import { taroFastConfig } from 'taro-fast-config';
+
 const config = {
+  ...taroFastConfig.general,
   projectName: 'simple-taro-fast-framework',
   date: '2021-12-30',
   designWidth: 750,
@@ -13,105 +16,18 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: `dist/${process.env.TARO_ENV}`,
-  plugins: [['@tarojs/plugin-framework-react', { reactMode: 'concurrent' }]],
-  copy: {
-    patterns: [
-      {
-        from: 'src/sitemap.json',
-        to: 'dist/sitemap.json',
-      },
-    ],
-    options: {},
-  },
-  framework: 'react',
-  alias: {
-    '@tarojs/runtime': require.resolve('@tarojs/runtime'),
-    // '@': path.resolve(__dirname, '..', 'src'),
-  },
-  compiler: {
-    type: 'webpack5',
-    prebundle: {
-      enable: false,
-      force: true,
-      exclude: [
-        'taro-fast-common',
-        'taro-fast-component',
-        'taro-fast-component-extra',
-        'taro-fast-component-prism',
-        'taro-fast-framework',
-      ],
-    },
-  },
-  cache: {
-    enable: false,
-    // enable: true,
-  },
   mini: {
+    ...taroFastConfig.mini,
     // baseLevel: 33,
     debugReact: true,
-    postcss: {
-      pxtransform: {
-        enable: true,
-        config: {},
-      },
-      url: {
-        enable: true,
-        config: {
-          limit: 1024, // 设定转换尺寸上限
-        },
-      },
-      cssModules: {
-        enable: false, // 默认为 false, 如需使用 css modules 功能, 则设为 true
-        config: {
-          namingPattern: 'module', // 转换模式, 取值为 global/module
-          generateScopedName: '[name]__[local]___[hash:base64:5]',
-        },
-      },
-    },
-    // prerender: {
-    //   match: ['pages/**', 'example/**', 'framework/**'],
-    // },
   },
   h5: {
-    // debugReact: true,
-    publicPath: '/',
-    staticDirectory: 'static',
-    postcss: {
-      autoprefixer: {
-        enable: true,
-        config: {},
-      },
-      cssModules: {
-        enable: false, // 默认为 false, 如需使用 css modules 功能, 则设为 true
-        config: {
-          namingPattern: 'module', // 转换模式, 取值为 global/module
-          generateScopedName: '[name]__[local]___[hash:base64:5]',
-        },
-      },
-    },
+    ...taroFastConfig.h5,
+    debugReact: true,
     devServer: {
       host: 'localhost',
       port: 8903,
     },
-    // webpackChain(chain, webpack) {
-    //   console.log(webpack);
-
-    //   chain.merge({
-    //     module: {
-    //       rule: {
-    //         myloader: {
-    //           test: /\.md$/,
-    //           use: [
-    //             {
-    //               loader: 'raw-loader',
-    //               options: {},
-    //             },
-    //           ],
-    //         },
-    //       },
-    //     },
-    //   });
-    // },
   },
 };
 

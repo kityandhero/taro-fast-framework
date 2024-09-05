@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-framework-template",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "description": "taro-fast-framework-template",
   "author": "",
@@ -90,6 +90,7 @@
     "taro-fast-component": "workspace:*",
     "taro-fast-component-extra": "workspace:*",
     "taro-fast-component-prism": "workspace:*",
+    "taro-fast-config": "workspace:*",
     "taro-fast-framework": "workspace:*"
   },
   "devDependencies": {
@@ -168,6 +169,7 @@
     "stylelint-config-standard": "^36.0.1",
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-order": "^6.0.4",
+    "taro-fast-config": "workspace:*",
     "webpack": "^5.94.0"
   },
   "optionalDependencies": {

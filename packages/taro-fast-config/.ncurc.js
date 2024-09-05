@@ -3,7 +3,6 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-module.exports = {
-  collectCoverage: true,
-  verbose: true,
-};
+const { generalConfig } = require('../../develop/config/ncu/config');
+
+module.exports = generalConfig;

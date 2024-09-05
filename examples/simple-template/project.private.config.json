@@ -3,5 +3,6 @@
   "projectname": "taro-fast-framework-template",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "3.5.5"
 }
