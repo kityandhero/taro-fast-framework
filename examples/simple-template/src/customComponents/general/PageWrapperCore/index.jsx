@@ -100,6 +100,13 @@ class PageWrapperCore extends AuthorizationWrapper {
     });
   };
 
+  dispatchSignIn = (data) => {
+    return this.dispatchApi({
+      type: modelTypeCollection.entranceTypeCollection.signInWithPhone,
+      payload: data,
+    });
+  };
+
   dispatchSignInSilent = (data) => {
     return this.dispatchApi({
       type: modelTypeCollection.entranceTypeCollection.signInSilent,

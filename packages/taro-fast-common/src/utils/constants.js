@@ -2,6 +2,13 @@ import { requestMode } from 'easy-soft-utility';
 
 import { emptyLogo } from './mediaDefault';
 
+/**
+ * Empty logic.
+ * @constant {string}
+ * @default 'empty-logic'
+ */
+export const emptyLogic = 'empty-logic';
+
 export const pxToRemRoot = {
   weapp: 32,
   h5: 24,

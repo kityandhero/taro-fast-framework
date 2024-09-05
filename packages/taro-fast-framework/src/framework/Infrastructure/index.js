@@ -17,11 +17,13 @@ import {
   logInfo,
   logObject,
   logWarn,
+  mergeArrowText,
   navigateTo,
   redirectTo,
   showErrorMessage,
   showRuntimeError,
   sleep,
+  toBoolean,
   toString,
   transformListData,
   underlyingState,
@@ -30,6 +32,7 @@ import {
 import {
   AbstractComponent,
   checkWeAppEnvironment,
+  emptyLogic,
   getMenuButtonBoundingClientRect,
   getSystemInfo,
   locateResult,
@@ -94,7 +97,14 @@ function getRefreshingBoxEffect(effect) {
   return 'pull';
 }
 
+const primaryCallName = 'framework::Infrastructure';
+
 class Infrastructure extends AbstractComponent {
+  /**
+   * 调用提示开完设置是否完成
+   */
+  showCallProcessSwitchPromptComplete = false;
+
   /**
    * 页面是否使用渐显效果组件包裹
    */
@@ -1157,18 +1167,47 @@ class Infrastructure extends AbstractComponent {
   };
 
   setSignInProcessDetection = ({ data, callback }) => {
-    logData(`setSignInProcessDetection ${data}`);
-
     const that = this;
+
+    that.logCallTrack({ data }, primaryCallName, 'setSignInProcessDetection');
+
+    that.logCallTrace(
+      {},
+      primaryCallName,
+      'setSignInProcessDetection',
+      'dispatchSetSignInProcessDetection',
+    );
 
     that
       .dispatchSetSignInProcessDetection(!!data)
       .then(() => {
-        logExecute('dispatchSetSignInProcessDetection then');
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'setSignInProcessDetection',
+          'then',
+        );
 
         if (isFunction(callback)) {
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'setSignInProcessDetection',
+            'then',
+            'callback',
+          );
+
           // eslint-disable-next-line promise/no-callback-in-promise
           callback();
+        } else {
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'setSignInProcessDetection',
+            'then',
+            'callback',
+            emptyLogic,
+          );
         }
 
         return null;
@@ -1179,23 +1218,49 @@ class Infrastructure extends AbstractComponent {
   };
 
   dispatchSetSignInResult = (data) => {
-    logExecute('dispatchSetSignInResult');
+    this.logCallTrack({}, primaryCallName, 'dispatchSetSignInResult');
 
-    return this.dispatchApi({
+    const o = {
       type: 'schedulingControl/setSignInResult',
       payload: data,
-    });
+    };
+
+    this.logCallTrace(
+      o,
+      primaryCallName,
+      'dispatchSetSignInResult',
+      'dispatchApi',
+    );
+
+    return this.dispatchApi(o);
   };
 
   checkSignInSuccess = () => {
+    this.logCallTrack({}, primaryCallName, 'checkSignInSuccess');
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'checkSignInSuccess',
+      'getVerifySignInResult',
+    );
+
     const verifySignInResult = getVerifySignInResult();
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'checkSignInSuccess',
+      'getSignInResult',
+    );
+
     const v = this.getSignInResult();
 
     return v === verifySignInResult.success;
   };
 
   getSignInResult = () => {
-    logExecute('getSignInResult');
+    this.logCallTrack({}, primaryCallName, 'getSignInResult');
 
     const {
       schedulingControl: { signInResult },
@@ -1205,21 +1270,49 @@ class Infrastructure extends AbstractComponent {
   };
 
   setSignInResult = ({ data, callback }) => {
-    logExecute('setSignInResult');
-    logDebug(
-      `sign in result is ${data}, it mean ${getSignInResultDescription(data)} `,
+    const that = this;
+
+    that.logCallTrack(
+      {
+        data,
+        info: `sign in result is ${data}, it mean ${getSignInResultDescription(data)} `,
+      },
+      primaryCallName,
+      'setSignInResult',
     );
 
-    const that = this;
+    that.logCallTrace(
+      { data },
+      primaryCallName,
+      'setSignInResult',
+      'dispatchSetSignInResult',
+    );
 
     that
       .dispatchSetSignInResult(data)
       .then(() => {
-        logExecute('dispatchSetSignInResult then');
-
         if (isFunction(callback)) {
+          that.logCallTrace(
+            { data },
+            primaryCallName,
+            'setSignInResult',
+            'dispatchSetSignInResult',
+            'then',
+            'callback',
+          );
+
           // eslint-disable-next-line promise/no-callback-in-promise
           callback();
+        } else {
+          that.logCallTrace(
+            { data },
+            primaryCallName,
+            'setSignInResult',
+            'dispatchSetSignInResult',
+            'then',
+            'callback',
+            emptyLogic,
+          );
         }
 
         return null;
@@ -1740,6 +1833,22 @@ class Infrastructure extends AbstractComponent {
     return (
       firstLoadSuccess && isArray(metaListData) && metaListData.length === 0
     );
+  };
+
+  promptCallProcessSwitch = () => {
+    if (!this.showCallProcessSwitchPromptComplete) {
+      logDebug(
+        {},
+        mergeArrowText(
+          this.componentName,
+          'showCallProcess',
+          toString(toBoolean(this.showCallProcess)),
+          'do not show call process, if want wo show it, please set "showCallProcess" in properties to true',
+        ),
+      );
+
+      this.showCallProcessSwitchPromptComplete = true;
+    }
   };
 
   /**

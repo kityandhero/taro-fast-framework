@@ -20,4 +20,7 @@ export const customerPathGeneralCollection = {
   signIn: {
     path: '/customer/pages/signIn/main/index',
   },
+  signInWithWeChat: {
+    path: '/customer/pages/signInWithWeChat/main/index',
+  },
 };

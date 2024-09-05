@@ -9,6 +9,26 @@ export async function signInData(parameters) {
   });
 }
 
+export const signInWithPhoneDataApiAddress =
+  '/wechatApplication/entrance/signInWithPhone';
+
+export async function signInWithPhoneData(parameters) {
+  return request({
+    api: signInWithPhoneDataApiAddress,
+    params: parameters,
+  });
+}
+
+export const signInWithEmailDataApiAddress =
+  '/wechatApplication/entrance/signInWithEmail';
+
+export async function signInWithEmailData(parameters) {
+  return request({
+    api: signInWithEmailDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const signInSilentDataApiAddress =
   '/wechatApplication/entrance/signInSilent';
 

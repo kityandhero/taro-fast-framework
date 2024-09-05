@@ -1,36 +1,32 @@
-import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 
-import { navigateBack, transformSize } from 'taro-fast-common';
+// import { convertCollection, getValueByKey } from 'easy-soft-utility';
+import { transformSize } from 'taro-fast-common';
 import {
-  BackboardBox,
   Button,
   CenterBox,
   ColorText,
-  FixedBox,
-  HeadNavigation,
-  IconChevronLeft,
-  IconHome,
+  FlexBox,
   ImageBox,
+  InputItem,
   Line,
   Space,
 } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../../customComponents';
-import { filePrefix, logoImage } from '../../../../customConfig';
+import { signInInputPassword, signInInputUser } from '../../../../customConfig';
 
+// import { signInAction, signInWithPhoneAction } from '../assist/action';
 import './index.less';
 
 export const classPrefix = `customer-sign-in`;
 
-const backgroundImage = `${filePrefix}441115552.jpeg`;
-
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '用户登录/注册',
-  navigationStyle: 'custom',
+  navigationBarTitleText: '用户登录',
+  // navigationStyle: 'custom',
 });
 
 @connect(({ customer, entrance, session, global, schedulingControl }) => ({
@@ -41,148 +37,177 @@ definePageConfig({
   schedulingControl,
 }))
 class SignIn extends PageWrapper {
+  showCallProcess = true;
+
   viewStyle = {
-    backgroundColor: '#bc0509',
+    backgroundColor: '#fff',
   };
 
-  buildHeadNavigation = () => {
-    return (
-      <HeadNavigation
-        fixed
-        style={{
-          overflow: 'hidden',
-        }}
-        backboardStyle={{
-          width: '100%',
-          // height: '100%',
-        }}
-        bottom={null}
-      >
-        <View
-          style={{
-            backgroundColor: '#fff',
-            padding: `${transformSize(8)} ${transformSize(26)} ${transformSize(
-              8,
-            )} ${transformSize(16)}`,
-            marginLeft: transformSize(20),
-            borderRadius: transformSize(40),
-          }}
-        >
-          <Space size={30}>
-            <IconChevronLeft
-              size={38}
-              onClick={() => {
-                navigateBack();
-              }}
-            />
+  phone = '';
 
-            <IconHome size={38} onClick={this.goToHomeTab} />
-          </Space>
-        </View>
-      </HeadNavigation>
-    );
+  password = '';
+
+  triggerPhoneChanged = (v) => {
+    this.phone = v;
   };
 
-  triggerPhoneNumber = (event) => {
-    const {
-      detail: { encryptedData, iv },
-    } = event;
+  triggerPasswordChanged = (v) => {
+    this.password = v;
+  };
 
-    const that = this;
-
-    that.registerWithWeChat({
+  signInWithPhone = () => {
+    this.signIn({
       data: {
-        encryptedData,
-        iv,
-      },
-      successCallback: (o) => {
-        const { key } = o;
-
-        that.setState({
-          keyPhone: key,
-        });
+        phone: this.phone,
+        password: this.password,
       },
     });
+
+    // signInWithPhoneAction({
+    //   target: this,
+    //   handleData: {
+    //     phone: this.phone,
+    //     password: this.password,
+    //   },
+    //   successCallback: ({ target, remoteData }) => {
+    //     const openId = target.parseOpenIdFromSignInApiData(remoteData);
+
+    //     const token = target.parseTokenFromSignInApiData(remoteData);
+    //   },
+    //   failCallback: ({ target }) => {
+    //     // target.setState({ processing: false });
+    //   },
+    // });
   };
 
   renderFurther() {
     const { registering } = this.state;
 
     return (
-      <BackboardBox
-        backboardStyle={{
-          width: '100%',
-        }}
-        backboardChildren={
-          <>
-            <ImageBox
-              src={backgroundImage}
-              aspectRatio={1.778_67}
-              borderRadius={false}
-            />
-          </>
-        }
-      >
-        <View className={classNames(classPrefix)}>
-          <Line transparent height={360} />
+      <View>
+        <Line transparent height={180} />
 
-          <View className={classNames(`${classPrefix}__logo`)}>
-            <CenterBox>
-              <View className={classNames(`${classPrefix}__logo__inner`)}>
+        <View
+          style={{
+            paddingLeft: transformSize(60),
+            paddingRight: transformSize(60),
+          }}
+        >
+          <View
+            style={{
+              // fontWeight: 'bold',
+              fontSize: transformSize(44),
+            }}
+          >
+            登录
+          </View>
+
+          <Line transparent height={80} />
+
+          <View
+            style={{
+              paddingBottom: transformSize(16),
+              borderBottom: `${transformSize(2)} solid #eee`,
+            }}
+          >
+            <FlexBox
+              flexAuto="right"
+              left={
                 <View
-                  className={classNames(
-                    `${classPrefix}__logo__inner__image-box`,
-                  )}
+                  style={{
+                    width: transformSize(40),
+                  }}
                 >
-                  <ImageBox src={logoImage} />
+                  <ImageBox src={signInInputUser} />
                 </View>
-              </View>
-            </CenterBox>
+              }
+              leftStyle={{
+                marginRight: transformSize(16),
+              }}
+              right={
+                <InputItem
+                  placeholder="请输入您的手机号"
+                  border={false}
+                  clearable
+                  afterChange={this.triggerPhoneChanged}
+                />
+              }
+            />
           </View>
 
-          <View className={classNames(`${classPrefix}__button`)}>
-            <Space direction="vertical" size={30} fillWidth>
-              <Button
-                weappButton
-                text="使用微信进行注册/登录"
-                backgroundColor="#f5050e"
-                fontSize={32}
-                loading={registering || false}
-                openType="getPhoneNumber"
-                block
-                circle
-                size="middle"
-                shape="rounded"
-                onGetPhoneNumber={this.triggerPhoneNumber}
-              />
+          <Line transparent height={40} />
 
-              <Button
-                text="返回"
-                backgroundColor="#fff"
-                fontColor="#f5050e"
-                fontSize={32}
-                block
-                circle
-                size="middle"
-                shape="rounded"
-                onClick={() => {
-                  navigateBack();
-                }}
-              />
+          <View
+            style={{
+              paddingBottom: transformSize(16),
+              borderBottom: `${transformSize(2)} solid #eee`,
+            }}
+          >
+            <FlexBox
+              flexAuto="right"
+              left={
+                <View
+                  style={{
+                    width: transformSize(40),
+                  }}
+                >
+                  <ImageBox src={signInInputPassword} />
+                </View>
+              }
+              leftStyle={{
+                marginRight: transformSize(16),
+              }}
+              right={
+                <InputItem
+                  placeholder="请输入密码"
+                  password
+                  border={false}
+                  clearable
+                  afterChange={this.triggerPasswordChanged}
+                />
+              }
+            />
+          </View>
+
+          <Line transparent height={20} />
+
+          <FlexBox
+            flexAuto="left"
+            left={<View></View>}
+            leftStyle={{
+              marginRight: transformSize(16),
+            }}
+            right={<ColorText fontSize={28} color="#ccc" text="忘记密码?" />}
+          />
+
+          <Line transparent height={80} />
+
+          <Button
+            weappButton
+            text="登录"
+            backgroundColor="#0075ff"
+            fontSize={32}
+            loading={registering || false}
+            openType="getPhoneNumber"
+            block
+            circle
+            size="middle"
+            // shape="rounded"
+            onGetPhoneNumber={this.triggerPhoneNumber}
+            onClick={this.signInWithPhone}
+          />
+
+          <Line transparent height={40} />
+
+          <CenterBox>
+            <Space size={20}>
+              <ColorText fontSize={28} color="#518bc0" text="账户登录" />
+
+              <ColorText fontSize={28} color="#ccc" text="验证码登录" />
             </Space>
-          </View>
-
-          <FixedBox bottom={70} width="100%">
-            <CenterBox>
-              <ColorText
-                fontSize={32}
-                color="#fff"
-                text="中共驻马店市委宣传部官方发布"
-              />
-            </CenterBox>
-          </FixedBox>
+          </CenterBox>
         </View>
-      </BackboardBox>
+      </View>
     );
   }
 }

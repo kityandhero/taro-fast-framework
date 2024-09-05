@@ -31,6 +31,7 @@ import {
 } from 'easy-soft-utility';
 
 import {
+  emptyLogic,
   getGeographicalLocation,
   getSetting,
   locateResult,
@@ -90,6 +91,8 @@ import {
   getUseLocation,
 } from '../../utils/settingsAssist';
 import { Common } from '../Common';
+
+const primaryCallName = 'framework::SupplementCore';
 
 /**
  * 业务调度核心底层方法
@@ -738,7 +741,14 @@ class SupplementCore extends Common {
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {};
 
   bridgeLogicOnCheckTicketValidity({ callback = null }) {
-    logExecute('bridgeLogicOnCheckTicketValidity');
+    this.logCallTrack({}, primaryCallName, 'bridgeLogicOnCheckTicketValidity');
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'bridgeLogicOnCheckTicketValidity',
+      'getTicketValidityProcessDetection',
+    );
 
     const ticketValidityProcessDetection =
       this.getTicketValidityProcessDetection();
@@ -747,25 +757,78 @@ class SupplementCore extends Common {
       return;
     }
 
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'bridgeLogicOnCheckTicketValidity',
+      'getVerifySignInResult',
+    );
+
     const verifySignInResult = getVerifySignInResult();
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'bridgeLogicOnCheckTicketValidity',
+      'getSignInResult',
+    );
+
     const signInResult = this.getSignInResult();
 
     if (signInResult === verifySignInResult.fail) {
+      this.logCallTrace(
+        {},
+        primaryCallName,
+        'bridgeLogicOnCheckTicketValidity',
+        'getVerifyTicket',
+      );
+
       if (this.getVerifyTicket()) {
+        const forceRefresh = true;
+
+        this.logCallTrace(
+          { forceRefresh },
+          primaryCallName,
+          'bridgeLogicOnCheckTicketValidity',
+          'checkTicketValidityCore',
+        );
+
         this.checkTicketValidityCore({
-          forceRefresh: true,
+          forceRefresh,
           callback,
         });
 
         return;
       } else {
         if (isFunction(callback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'bridgeLogicOnCheckTicketValidity',
+            'callback',
+          );
+
           callback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'bridgeLogicOnCheckTicketValidity',
+            'callback',
+            emptyLogic,
+          );
         }
 
         return;
       }
     }
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'bridgeLogicOnCheckTicketValidity',
+      'checkTicketValidityCore',
+    );
 
     this.checkTicketValidityCore({
       forceRefresh: false,
@@ -774,28 +837,68 @@ class SupplementCore extends Common {
   }
 
   dispatchCheckTicketValidity = (data = {}) => {
+    this.logCallTrack({ data }, primaryCallName, 'dispatchCheckTicketValidity');
+
+    this.logCallTrace(
+      o,
+      primaryCallName,
+      'dispatchCheckTicketValidity',
+      'getVerifyTicket',
+    );
+
     if (this.getVerifyTicket()) {
-      throw new Error(
-        'dispatchCheckTicketValidity need override when verifyTicket set to true, dispatchCheckTicketValidity must return a promise',
+      const info =
+        'dispatchCheckTicketValidity need override when verifyTicket set to true, dispatchCheckTicketValidity must return a promise';
+
+      this.logCallTrace(
+        o,
+        primaryCallName,
+        'dispatchCheckTicketValidity',
+        'error',
+        info,
       );
+
+      throw new Error(info);
     }
 
-    return this.dispatchApi({
+    const o = {
       type: 'schedulingControl/checkTicketValidity',
       payload: data,
       alias: getCheckTicketValidityAliasName(),
-    });
+    };
+
+    this.logCallTrace(
+      o,
+      primaryCallName,
+      'dispatchCheckTicketValidity',
+      'dispatchApi',
+    );
+
+    return this.dispatchApi(o);
   };
 
   checkTicketValidityCore({
     forceRefresh: forceRefreshValue = false,
     callback = null,
   }) {
-    logExecute('checkTicketValidityCore');
+    this.logCallTrack(
+      {
+        forceRefresh: forceRefreshValue,
+      },
+      primaryCallName,
+      'checkTicketValidityCore',
+    );
 
     const that = this;
 
     if (forceRefreshValue) {
+      that.logCallTrace(
+        {},
+        primaryCallName,
+        'checkTicketValidityCore',
+        'signInSilent',
+      );
+
       that.signInSilent({
         data: {},
         successCallback: callback,
@@ -1020,7 +1123,16 @@ class SupplementCore extends Common {
     const locationMode = getLocationMode();
 
     if ((useLocation || false) && locationMode == locationModeCollection.auto) {
-      logDebug('use location and automatic location on sign in');
+      this.logCallTrace(
+        {
+          useLocation,
+          locationMode,
+        },
+        primaryCallName,
+        'signIn',
+        'obtainLocation',
+        'use location and automatic location on sign in',
+      );
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -1074,12 +1186,46 @@ class SupplementCore extends Common {
       if (useLocation || false) {
         logDebug('use location and nonautomatic location');
 
+        that.logCallTrace(
+          {
+            useLocation,
+          },
+          primaryCallName,
+          'signIn',
+          'signInWhenCheckProcessDetection',
+          'use location and nonautomatic location',
+        );
+
         that.signInWhenCheckProcessDetection({
           data,
           callback: (o, p) => {
+            that.logCallTrace(
+              {
+                useLocation,
+              },
+              primaryCallName,
+              'signIn',
+              'signInWhenCheckProcessDetection',
+              'callback',
+              'setSignInProcessDetection',
+            );
+
             o.setSignInProcessDetection({
               data: true,
               callback: () => {
+                that.logCallTrace(
+                  {
+                    useLocation,
+                  },
+                  primaryCallName,
+                  'signIn',
+                  'signInWhenCheckProcessDetection',
+                  'callback',
+                  'setSignInProcessDetection',
+                  'callback',
+                  'signInCore',
+                );
+
                 o.signInCore({
                   data: p,
                   successCallback,
@@ -1282,16 +1428,43 @@ class SupplementCore extends Common {
 
   // eslint-disable-next-line no-unused-vars
   dispatchSignIn = (data = {}) => {
-    throw new Error(
-      'dispatchSignIn need override, dispatchSignIn must return a promise',
+    const info =
+      'dispatchSignIn need override, dispatchSignIn must return a promise';
+
+    this.logCallTrack(
+      { data },
+      primaryCallName,
+      'dispatchSignIn',
+      'error',
+      info,
     );
+
+    throw new Error(info);
   };
 
   dispatchSignInSilent = (data = {}) => {
+    this.logCallTrack({ data }, primaryCallName, 'dispatchSignInSilent');
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'dispatchSignInSilent',
+      'getVerifyTicket',
+    );
+
     if (this.getVerifyTicket()) {
-      throw new Error(
-        'dispatchSignInSilent need override, dispatchSignInSilent must return a promise',
+      const info =
+        'dispatchSignInSilent need override, dispatchSignInSilent must return a promise';
+
+      this.logCallTrace(
+        { data },
+        primaryCallName,
+        'dispatchSignInSilent',
+        'error',
+        info,
       );
+
+      throw new Error(info);
     }
 
     return this.dispatchApi({
@@ -1313,11 +1486,18 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) {
-    logExecute('signInCore');
-
     // Tips.loading('处理中');
 
     const that = this;
+
+    that.logCallTrack({ data }, primaryCallName, 'signInCore');
+
+    that.logCallTrace(
+      { data },
+      primaryCallName,
+      'signInCore',
+      'dispatchSignIn',
+    );
 
     that
       .dispatchSignIn(data)
@@ -1326,17 +1506,60 @@ class SupplementCore extends Common {
 
         const { dataSuccess, data: metaData } = remoteData;
 
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'signInCore',
+          'dispatchSignIn',
+          'then',
+          'setSignInProcessDetection',
+        );
+
         that.setSignInProcessDetection({
           data: false,
         });
 
         if (dataSuccess) {
+          that.logCallTrace(
+            { metaData },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSessionEffectiveFromSignInApiDataWrapper',
+          );
+
           const sessionEffective =
             that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
 
           if (!sessionEffective) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInCore',
+              'dispatchSignIn',
+              'then',
+              'setSignInProcessDetection',
+              'parseSessionEffectiveFromSignInApiDataWrapper',
+              'refreshSession',
+            );
+
             that.refreshSession({
               callback: () => {
+                that.logCallTrace(
+                  { data },
+                  primaryCallName,
+                  'signInCore',
+                  'dispatchSignIn',
+                  'then',
+                  'setSignInProcessDetection',
+                  'parseSessionEffectiveFromSignInApiDataWrapper',
+                  'refreshSession',
+                  'callback',
+                  'signInCore',
+                );
+
                 that.signInCore({
                   data,
                   successCallback,
@@ -1349,35 +1572,175 @@ class SupplementCore extends Common {
             return;
           }
 
+          that.logCallTrace(
+            { metaData },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+          );
+
           const signInResult =
             that.parseSignInResultFromSignInApiDataWrapper(metaData);
+
+          that.logCallTrace(
+            { signInResult },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+            'setSignInResultOnSignIn',
+          );
 
           that.setSignInResultOnSignIn({
             signInResult,
           });
 
+          that.logCallTrace(
+            { metaData },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+            'parseTokenFromSignInApiData',
+          );
+
           const token = that.parseTokenFromSignInApiData(metaData);
+
+          that.logCallTrace(
+            { token },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+            'setTokenOnSignIn',
+          );
 
           that.setTokenOnSignIn({
             token,
           });
 
+          that.logCallTrace(
+            { metaData },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+            'parseOpenIdFromSignInApiData',
+          );
+
+          const openId = that.parseOpenIdFromSignInApiData(metaData);
+
+          that.logCallTrace(
+            { openId },
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+            'setOpenIdOnSignIn',
+          );
+
           that.setOpenIdOnSignIn({
-            openId: that.parseOpenIdFromSignInApiData(metaData),
+            openId,
           });
 
           removeCurrentCustomer();
 
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'setSignInProcessDetection',
+            'parseSignInResultFromSignInApiDataWrapper',
+            'getVerifySignInResult',
+          );
+
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInCore',
+              'dispatchSignIn',
+              'then',
+              'setSignInProcessDetection',
+              'parseSignInResultFromSignInApiDataWrapper',
+              'getCustomer',
+            );
+
             that.getCustomer({
               successCallback: () => {
                 if (isFunction(successCallback)) {
+                  that.logCallTrace(
+                    { metaData },
+                    primaryCallName,
+                    'signInCore',
+                    'dispatchSignIn',
+                    'then',
+                    'setSignInProcessDetection',
+                    'parseSignInResultFromSignInApiDataWrapper',
+                    'getCustomer',
+                    'successCallback',
+                  );
+
                   successCallback(metaData);
+                } else {
+                  that.logCallTrace(
+                    {},
+                    primaryCallName,
+                    'signInCore',
+                    'dispatchSignIn',
+                    'then',
+                    'setSignInProcessDetection',
+                    'parseSignInResultFromSignInApiDataWrapper',
+                    'getCustomer',
+                    'successCallback',
+                    emptyLogic,
+                  );
                 }
 
+                that.logCallTrace(
+                  { metaData },
+                  primaryCallName,
+                  'signInCore',
+                  'dispatchSignIn',
+                  'then',
+                  'setSignInProcessDetection',
+                  'parseSignInResultFromSignInApiDataWrapper',
+                  'getCustomer',
+                  'successCallback',
+                  'doAfterGetCustomerOnSignIn',
+                );
+
                 that.doAfterGetCustomerOnSignIn(metaData);
+
+                that.logCallTrace(
+                  { metaData },
+                  primaryCallName,
+                  'signInCore',
+                  'dispatchSignIn',
+                  'then',
+                  'setSignInProcessDetection',
+                  'parseSignInResultFromSignInApiDataWrapper',
+                  'getCustomer',
+                  'successCallback',
+                  'doAfterSignInSuccess',
+                );
 
                 that.doAfterSignInSuccess(metaData);
               },
@@ -1402,14 +1765,61 @@ class SupplementCore extends Common {
             text: '登录失败',
           });
 
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'signInCore',
+            'dispatchSignIn',
+            'then',
+            'doWhenSignInFailWrapper',
+          );
+
           that.doWhenSignInFailWrapper();
 
           if (isFunction(failCallback)) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInCore',
+              'dispatchSignIn',
+              'then',
+              'failCallback',
+            );
+
             failCallback();
+          } else {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInCore',
+              'dispatchSignIn',
+              'then',
+              'failCallback',
+              emptyLogic,
+            );
           }
 
           if (isFunction(completeCallback)) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInCore',
+              'dispatchSignIn',
+              'then',
+              'completeCallback',
+            );
+
             completeCallback();
+          } else {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInCore',
+              'dispatchSignIn',
+              'then',
+              'completeCallback',
+              emptyLogic,
+            );
           }
         }
 
@@ -1426,7 +1836,14 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) {
-    logExecute('signInSilentCore');
+    this.logCallTrack({ data }, primaryCallName, 'signInSilentCore');
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'signInSilentCore',
+      'getEnvironment',
+    );
 
     const environment = this.getEnvironment();
 
@@ -1441,11 +1858,45 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.ALIPAY,
+            'failCallback',
+          );
+
           failCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.ALIPAY,
+            'failCallback',
+            emptyLogic,
+          );
         }
 
         if (isFunction(completeCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.ALIPAY,
+            'completeCallback',
+          );
+
           completeCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.ALIPAY,
+            'completeCallback',
+            emptyLogic,
+          );
         }
 
         return;
@@ -1455,11 +1906,45 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.SWAN,
+            'failCallback',
+          );
+
           failCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.SWAN,
+            'failCallback',
+            emptyLogic,
+          );
         }
 
         if (isFunction(completeCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.ALIPAY,
+            'completeCallback',
+          );
+
           completeCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.SWAN,
+            'completeCallback',
+            emptyLogic,
+          );
         }
 
         return;
@@ -1469,11 +1954,45 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.WEB,
+            'failCallback',
+          );
+
           failCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.WEB,
+            'failCallback',
+            emptyLogic,
+          );
         }
 
         if (isFunction(completeCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.WEB,
+            'completeCallback',
+          );
+
           completeCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            environmentCollection.WEB,
+            'completeCallback',
+            emptyLogic,
+          );
         }
 
         return;
@@ -1483,11 +2002,45 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            'case none',
+            'failCallback',
+          );
+
           failCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            'case none',
+            'failCallback',
+            emptyLogic,
+          );
         }
 
         if (isFunction(completeCallback)) {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            'case none',
+            'completeCallback',
+          );
+
           completeCallback();
+        } else {
+          this.logCallTrace(
+            {},
+            primaryCallName,
+            'signInSilentCore',
+            'case none',
+            'completeCallback',
+            emptyLogic,
+          );
         }
 
         return;
@@ -1527,6 +2080,13 @@ class SupplementCore extends Common {
 
     const that = this;
 
+    that.logCallTrace(
+      data,
+      primaryCallName,
+      'signInSilentCore',
+      'dispatchSignInSilent',
+    );
+
     that
       .dispatchSignInSilent(data)
       .then((remoteData) => {
@@ -1534,17 +2094,55 @@ class SupplementCore extends Common {
 
         const { dataSuccess, data: metaData } = remoteData;
 
+        that.logCallTrace(
+          { data: false },
+          primaryCallName,
+          'signInSilentCore',
+          'dispatchSignInSilent',
+          'then',
+          'setSignInProcessDetection',
+        );
+
         that.setSignInProcessDetection({
           data: false,
         });
 
         if (dataSuccess) {
+          that.logCallTrace(
+            metaData,
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'parseSessionEffectiveFromSignInSilentApiDataWrapper',
+          );
+
           const sessionEffective =
             that.parseSessionEffectiveFromSignInSilentApiDataWrapper(metaData);
 
           if (!sessionEffective) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInSilentCore',
+              'dispatchSignInSilent',
+              'then',
+              'refreshSession',
+            );
+
             that.refreshSession({
               callback: () => {
+                that.logCallTrace(
+                  { data },
+                  primaryCallName,
+                  'signInSilentCore',
+                  'dispatchSignInSilent',
+                  'then',
+                  'refreshSession',
+                  'callback',
+                  'signInSilentCore',
+                );
+
                 that.signInSilentCore({
                   data,
                   successCallback,
@@ -1557,21 +2155,77 @@ class SupplementCore extends Common {
             return;
           }
 
+          that.logCallTrace(
+            metaData,
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'parseSignInResultFromSignInSilentApiDataWrapper',
+          );
+
           const signInResult =
             that.parseSignInResultFromSignInSilentApiDataWrapper(metaData);
+
+          that.logCallTrace(
+            { signInResult },
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'setSignInResultOnSignInSilent',
+          );
 
           that.setSignInResultOnSignInSilent({
             signInResult,
           });
 
+          that.logCallTrace(
+            metaData,
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'parseTokenFromSignInSilentApiData',
+          );
+
           const token = that.parseTokenFromSignInSilentApiData(metaData);
+
+          that.logCallTrace(
+            { token },
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'setTokenOnSignInSilent',
+          );
 
           that.setTokenOnSignInSilent({
             token,
           });
 
+          that.logCallTrace(
+            metaData,
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'parseOpenIdFromSignInSilentApiData',
+          );
+
+          const openId = that.parseOpenIdFromSignInSilentApiData(metaData);
+
+          that.logCallTrace(
+            { openId },
+            primaryCallName,
+            'signInSilentCore',
+            'dispatchSignInSilent',
+            'then',
+            'setOpenIdOnSignInSilent',
+          );
+
           that.setOpenIdOnSignInSilent({
-            openId: that.parseOpenIdFromSignInSilentApiData(metaData),
+            openId,
           });
 
           removeCurrentCustomer();
@@ -1579,13 +2233,65 @@ class SupplementCore extends Common {
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'signInSilentCore',
+              'dispatchSignInSilent',
+              'then',
+              'getCustomer',
+            );
+
             that.getCustomer({
               successCallback: () => {
                 if (isFunction(successCallback)) {
+                  that.logCallTrace(
+                    { metaData },
+                    primaryCallName,
+                    'signInSilentCore',
+                    'dispatchSignInSilent',
+                    'then',
+                    'getCustomer',
+                    'successCallback',
+                  );
+
                   successCallback(metaData);
+                } else {
+                  that.logCallTrace(
+                    {},
+                    primaryCallName,
+                    'signInSilentCore',
+                    'dispatchSignInSilent',
+                    'then',
+                    'getCustomer',
+                    'successCallback',
+                    emptyLogic,
+                  );
                 }
 
+                that.logCallTrace(
+                  { metaData },
+                  primaryCallName,
+                  'signInSilentCore',
+                  'dispatchSignInSilent',
+                  'then',
+                  'getCustomer',
+                  'successCallback',
+                  'doAfterGetCustomerOnSignInSilent',
+                );
+
                 that.doAfterGetCustomerOnSignInSilent(metaData);
+
+                that.logCallTrace(
+                  { metaData },
+                  primaryCallName,
+                  'signInSilentCore',
+                  'dispatchSignInSilent',
+                  'then',
+                  'getCustomer',
+                  'successCallback',
+                  'doAfterSignInSilentSuccess',
+                );
 
                 that.doAfterSignInSilentSuccess(metaData);
               },
@@ -1629,13 +2335,35 @@ class SupplementCore extends Common {
   }
 
   parseSessionEffectiveFromSignInApiDataWrapper = (remoteData) => {
-    logExecute('parseSessionEffectiveFromSignInApiData');
+    this.logCallTrack(
+      {},
+      primaryCallName,
+      'parseSessionEffectiveFromSignInApiDataWrapper',
+    );
+
+    this.logCallTrace(
+      { remoteData },
+      primaryCallName,
+      'parseSessionEffectiveFromSignInApiDataWrapper',
+      'parseSessionEffectiveFromSignInApiData',
+    );
 
     return this.parseSessionEffectiveFromSignInApiData(remoteData);
   };
 
   parseSessionEffectiveFromSignInSilentApiDataWrapper = (remoteData) => {
-    logExecute('parseSessionEffectiveFromSignInSilentApiData');
+    this.logCallTrack(
+      {},
+      primaryCallName,
+      'parseSessionEffectiveFromSignInSilentApiDataWrapper',
+    );
+
+    this.logCallTrace(
+      { remoteData },
+      primaryCallName,
+      'parseSessionEffectiveFromSignInSilentApiDataWrapper',
+      'parseSessionEffectiveFromSignInSilentApiData',
+    );
 
     return this.parseSessionEffectiveFromSignInSilentApiData(remoteData);
   };
@@ -1847,11 +2575,28 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignInSilent = ({ token }) => {
-    logExecute('setTokenOnSignInSilent');
+    this.logCallTrack({ token }, primaryCallName, 'setTokenOnSignInSilent');
 
     if (!isString(token || '')) {
-      throw new Error('setTokenOnSignInSilent token must be string');
+      const info = 'token must be string';
+
+      this.logCallTrace(
+        { token },
+        primaryCallName,
+        'setTokenOnSignInSilent',
+        'error',
+        info,
+      );
+
+      throw new Error(info);
     }
+
+    this.logCallTrace(
+      { token: token || getTokenAnonymous() },
+      primaryCallName,
+      'setTokenOnSignInSilent',
+      'setToken',
+    );
 
     setToken(token || getTokenAnonymous());
   };
@@ -1899,11 +2644,30 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnSignIn = ({ openId }) => {
-    logExecute('setOpenIdOnSignIn');
+    this.logCallTrack({ openId }, primaryCallName, 'setOpenIdOnSignIn');
 
     if (!isString(openId || '')) {
-      throw new Error('setOpenIdOnSignIn openId must be string');
+      const info = 'openId must be string';
+
+      this.logCallTrace(
+        { openId },
+        primaryCallName,
+        'setOpenIdOnSignIn',
+        'error',
+        info,
+      );
+
+      throw new Error(info);
     }
+
+    this.logCallTrace(
+      {
+        openId: openId || '',
+      },
+      primaryCallName,
+      'setOpenIdOnSignIn',
+      'setOpenId',
+    );
 
     setOpenId(openId || '');
   };
@@ -1913,11 +2677,30 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setOpenIdOnSignInSilent = ({ openId }) => {
-    logExecute('setOpenIdOnSignInSilent');
+    this.logCallTrack({ openId }, primaryCallName, 'setOpenIdOnSignInSilent');
 
     if (!isString(openId || '')) {
-      throw new Error('setOpenIdOnSignInSilent openId must be string');
+      const info = 'openId must be string';
+
+      this.logCallTrace(
+        { openId },
+        primaryCallName,
+        'setOpenIdOnSignInSilent',
+        'error',
+        info,
+      );
+
+      throw new Error(info);
     }
+
+    this.logCallTrace(
+      {
+        openId: openId || '',
+      },
+      primaryCallName,
+      'setOpenIdOnSignInSilent',
+      'setOpenId',
+    );
 
     setOpenId(openId || '');
   };
@@ -1948,7 +2731,14 @@ class SupplementCore extends Common {
    * 静默登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFailWrapper = () => {
-    logExecute('doWhenSignInFail');
+    this.logCallTrack({}, primaryCallName, 'doWhenSignInFailWrapper');
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'doWhenSignInFailWrapper',
+      'doWhenSignInFail',
+    );
 
     this.doWhenSignInFail();
   };
@@ -1963,7 +2753,14 @@ class SupplementCore extends Common {
   };
 
   doWhenSignInSilentFailWrapper = () => {
-    logExecute('doWhenSignInSilentFail');
+    this.logCallTrack({}, primaryCallName, 'doWhenSignInSilentFailWrapper');
+
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'doWhenSignInSilentFailWrapper',
+      'doWhenSignInSilentFail',
+    );
 
     this.doWhenSignInSilentFail();
 
@@ -1971,7 +2768,18 @@ class SupplementCore extends Common {
       const signInPath = getSignInPath();
 
       if (checkStringIsNullOrWhiteSpace(signInPath)) {
-        throw new Error('缺少登录页面路径配置');
+        const info = '缺少登录页面路径配置';
+
+        this.logCallTrace(
+          {},
+          primaryCallName,
+          'doWhenSignInSilentFailWrapper',
+          'doWhenSignInSilentFail',
+          'error',
+          info,
+        );
+
+        throw new Error(info);
       }
 
       redirectTo(signInPath);
@@ -1988,20 +2796,33 @@ class SupplementCore extends Common {
   };
 
   dispatchGetCustomerWrapper = (data = {}) => {
-    logExecute('dispatchGetCustomerWrapper');
+    this.logCallTrack({}, primaryCallName, 'dispatchGetCustomerWrapper');
+
+    this.logCallTrace(
+      data,
+      primaryCallName,
+      'dispatchGetCustomerWrapper',
+      'dispatchGetCustomer',
+    );
 
     return this.dispatchGetCustomer(data);
   };
 
   dispatchGetCustomer = (data = {}) => {
+    this.logCallTrack({}, primaryCallName, 'dispatchGetCustomer');
+
     logConfig(
       'built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
     );
 
-    return this.dispatchApi({
+    const o = {
       type: 'schedulingControl/getCustomer',
       payload: data,
-    });
+    };
+
+    this.logCallTrace(o, primaryCallName, 'dispatchGetCustomer', 'dispatchApi');
+
+    return this.dispatchApi(o);
   };
 
   getCustomer = ({
@@ -2011,7 +2832,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) => {
-    logExecute('getCustomer');
+    this.logCallTrack({}, primaryCallName, 'getCustomer');
 
     let force = forceValue;
 

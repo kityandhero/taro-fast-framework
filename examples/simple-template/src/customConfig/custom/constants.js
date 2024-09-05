@@ -1,12 +1,16 @@
-export const filePrefix = `https://file.1010101.cc/`;
+export const filePrefix = `http://file.oa.32306.net/general/image/`;
 
-export const logoImage = `${filePrefix}746868813.jpeg`;
+export const signInLogo = `${filePrefix}746868813.jpeg`;
 
 export const emptyListImage = `${filePrefix}1271828067.png`;
 
 export const defaultListImage = `${filePrefix}248664008.jpeg`;
 
 export const defaultShareImage = `${filePrefix}1078748955.jpeg`;
+
+export const signInBackground = `${filePrefix}441115552.jpeg`;
+export const signInInputUser = `${filePrefix}1830877727918526464.png`;
+export const signInInputPassword = `${filePrefix}1830881952803196928.png`;
 
 export const shareTransfer = {
   home: '0',

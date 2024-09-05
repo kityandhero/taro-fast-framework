@@ -10,10 +10,14 @@ import {
   checkTicketValidityData,
   signInData,
   signInSilentData,
+  signInWithEmailData,
+  signInWithPhoneData,
 } from '../../services/entrance';
 
 export const entranceTypeCollection = {
   signIn: 'entrance/signIn',
+  signInWithPhone: 'entrance/signInWithPhone',
+  signInWithEmail: 'entrance/signInWithEmail',
   signInSilent: 'entrance/signInSilent',
   checkTicketValidity: 'entrance/checkTicketValidity',
 };
@@ -37,6 +41,58 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(signInData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *signInWithPhone(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(signInWithPhoneData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *signInWithEmail(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(signInWithEmailData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

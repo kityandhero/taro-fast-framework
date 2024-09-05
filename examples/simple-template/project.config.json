@@ -51,20 +51,32 @@
     "miniprogram": {
       "list": [
         {
-          "name": "entry",
+          "name": "pages/entry",
           "pathName": "pages/entry/main/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "home",
+          "name": "pages/home",
           "pathName": "pages/home/main/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "customer",
+          "name": "pages/customer",
           "pathName": "pages/customer/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "customer/signIn",
+          "pathName": "customer/pages/signIn/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "customer/signInWithWeChat",
+          "pathName": "customer/pages/signInWithWeChat/main/index",
           "query": "",
           "scene": null
         }

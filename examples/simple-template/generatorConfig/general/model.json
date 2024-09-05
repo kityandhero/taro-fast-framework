@@ -24,10 +24,24 @@
     {
       "apis": [
         {
-          "title": "登录",
+          "title": "账户登录",
           "api": "/wechatApplication/entrance/signIn",
           "effect": "signIn",
           "service": "signInData",
+          "type": "singleData"
+        },
+        {
+          "title": "手机登录",
+          "api": "/wechatApplication/entrance/signInWithPhone",
+          "effect": "signInWithPhone",
+          "service": "signInWithPhoneData",
+          "type": "singleData"
+        },
+        {
+          "title": "邮箱登录",
+          "api": "/wechatApplication/entrance/signInWithEmail",
+          "effect": "signInWithEmail",
+          "service": "signInWithEmailData",
           "type": "singleData"
         },
         {
@@ -88,22 +102,15 @@
       "apis": [
         {
           "title": "获取当前登录用户信息",
-          "api": "/wechatApplication/customerCenter/customer/getCurrentInfo",
+          "api": "/wechatApplication/user/getCurrentInfo",
           "effect": "getCurrentInfo",
           "service": "getCurrentInfoData",
-          "type": "singleData"
-        },
-        {
-          "title": "获取信息",
-          "api": "/wechatApplication/customerCenter/customer/getCustomer",
-          "effect": "getCustomer",
-          "service": "getCustomerData",
           "type": "singleData"
         }
       ],
       "cover": true,
       "title": "用户相关",
-      "name": "customer"
+      "name": "user"
     },
     {
       "apis": [

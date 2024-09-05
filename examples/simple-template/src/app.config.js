@@ -49,6 +49,7 @@ export default defineAppConfig({
       name: '用户',
       pages: [
         'pages/signIn/main/index',
+        'pages/signInWithWeChat/main/index',
         // 'pages/knowledgeCompetition/main/index',
         // 'pages/scoreCenter/main/index',
         // 'pages/articleFavourite/main/index',

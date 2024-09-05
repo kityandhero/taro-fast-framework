@@ -11,6 +11,9 @@ import {
   isFunction,
   isNumber,
   isObject,
+  logCallResult as logCallResultCore,
+  logCallTrace as logCallTraceCore,
+  logCallTrack as logCallTrackCore,
   logConfig,
   logData,
   logDebug,
@@ -20,6 +23,7 @@ import {
   logInfo,
   logObject,
   logText,
+  mergeArrowText,
   showErrorMessage,
   split,
   toNumber,
@@ -57,11 +61,27 @@ const defaultProps = {
   hidden: false,
 };
 
+const primaryCallName = 'taro-fast-common::AbstractComponent';
+
 class AbstractComponent extends Component {
+  /**
+   * 在控制台显示组建内调用序列, 仅为进行开发辅助
+   */
+  showCallProcess = false;
+
+  /**
+   *当前组件名称
+   */
   componentName = '';
 
+  /**
+   * 挂载完成后立即发出远程请求
+   */
   loadRemoteRequestAfterMount = false;
 
+  /**
+   * 第一次显示已经被触发
+   */
   firstShowHasTriggered = false;
 
   /**
@@ -69,6 +89,9 @@ class AbstractComponent extends Component {
    */
   showRenderCountInConsole = false;
 
+  /**
+   * 渲染总次数
+   */
   renderCount = 0;
 
   /**
@@ -81,6 +104,9 @@ class AbstractComponent extends Component {
    */
   needSignIn = false;
 
+  /**
+   * 是否自动跳转登录页
+   */
   autoRedirectToSignIn = true;
 
   /**
@@ -489,6 +515,50 @@ class AbstractComponent extends Component {
     }
   }
 
+  promptCallProcessSwitch = () => {};
+
+  /**
+   * log call track
+   * @param {*} message
+   */
+  logCallTrack(data, ...messages) {
+    if (!this.showCallProcess) {
+      this.promptCallProcessSwitch();
+
+      return;
+    }
+
+    logCallTrackCore(data, mergeArrowText(this.componentName, ...messages));
+  }
+
+  /**
+   * log call trace
+   * @param {*} message
+   */
+  logCallTrace(data, ...messages) {
+    if (!this.showCallProcess) {
+      this.promptCallProcessSwitch();
+
+      return;
+    }
+
+    logCallTraceCore(data, mergeArrowText(this.componentName, ...messages));
+  }
+
+  /**
+   * log call result
+   * @param {*} message
+   */
+  logCallResult(data, ...messages) {
+    if (!this.showCallProcess) {
+      this.promptCallProcessSwitch();
+
+      return;
+    }
+
+    logCallResultCore(data, mergeArrowText(this.componentName, ...messages));
+  }
+
   /**
    * 判断小程序的API, 回调, 参数, 组件等是否在当前版本可用
    * @param {*} schema
@@ -512,7 +582,11 @@ class AbstractComponent extends Component {
       return null;
     }
 
+    this.logCallTrack({}, primaryCallName, 'render');
+
     this.showRenderCount();
+
+    this.logCallTrace({}, primaryCallName, 'render', 'trigger', 'renderView');
 
     return this.renderView();
   }
