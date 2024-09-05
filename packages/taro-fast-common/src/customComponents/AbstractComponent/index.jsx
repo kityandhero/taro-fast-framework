@@ -61,7 +61,7 @@ const defaultProps = {
   hidden: false,
 };
 
-const primaryCallName = 'taro-fast-common::AbstractComponent';
+const primaryCallName = 'common::AbstractComponent';
 
 class AbstractComponent extends Component {
   /**

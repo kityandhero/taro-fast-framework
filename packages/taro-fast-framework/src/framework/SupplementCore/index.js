@@ -99,7 +99,7 @@ const primaryCallName = 'framework::SupplementCore';
  */
 class SupplementCore extends Common {
   doShowTask = () => {
-    logExecute('doShowTask');
+    this.logCallTrack({}, primaryCallName, 'doShowTask');
 
     logDebug(
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
@@ -108,7 +108,16 @@ class SupplementCore extends Common {
     if (this.firstShowHasTriggered) {
       const that = this;
 
+      that.logCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'adjustInternalDataOnRepeatedShow',
+      );
+
       that.adjustInternalDataOnRepeatedShow();
+
+      that.logCallTrace({}, primaryCallName, 'doShowTask', 'setCurrentInfo');
 
       that.setCurrentInfo();
 
@@ -117,40 +126,161 @@ class SupplementCore extends Common {
       );
 
       if (this.repeatDoWorkWhenShow) {
+        that.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkWhenShow');
+
         this.doWorkWhenShow(() => {
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'doShowTask',
+            'doWorkWhenShow',
+            'callback',
+            'doWorkWhenRepeatedShow',
+          );
+
           that.doWorkWhenRepeatedShow();
+
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'doShowTask',
+            'doWorkWhenShow',
+            'callback',
+            'doWorkWithNeedReLocationWhenRepeatedShow',
+          );
 
           that.doWorkWithNeedReLocationWhenRepeatedShow();
 
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'doShowTask',
+            'doWorkWhenShow',
+            'callback',
+            'doWorkWhenEveryShow',
+          );
+
           this.doWorkWhenEveryShow();
+
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'doShowTask',
+            'doWorkWhenShow',
+            'callback',
+            'doWorkAfterShow',
+          );
 
           this.doWorkAfterShow();
         });
       } else {
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+          'callback',
+          'checkSession',
+        );
+
         that.checkSession(() => {
+          that.logCallTrace(
+            {},
+            primaryCallName,
+            'doShowTask',
+            'doWorkWhenShow',
+            'callback',
+            'checkSession',
+            'callback',
+            'getVerifyTicketValidity',
+          );
+
           if (that.getVerifyTicketValidity()) {
+            that.logCallTrace(
+              {},
+              primaryCallName,
+              'doShowTask',
+              'doWorkWhenShow',
+              'callback',
+              'checkSession',
+              'callback',
+              'checkTicketValidity',
+            );
+
             that.checkTicketValidity({
               callback: that.doWorkWhenCheckTicketValidityOnRepeatedShow,
             });
           }
         });
 
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+          'callback',
+          'doWorkWhenRepeatedShow',
+        );
+
         that.doWorkWhenRepeatedShow();
+
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+          'callback',
+          'doWorkWithNeedReLocationWhenRepeatedShow',
+        );
 
         that.doWorkWithNeedReLocationWhenRepeatedShow();
 
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+          'callback',
+          'doWorkWhenEveryShow',
+        );
+
         this.doWorkWhenEveryShow();
+
+        that.logCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+          'callback',
+          'doWorkAfterShow',
+        );
 
         this.doWorkAfterShow();
       }
     } else {
+      this.logCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'doWorkWhenFirstShow',
+      );
+
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
 
       logDebug('set this.firstShowHasTriggered to true');
 
+      this.logCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'doWorkWhenEveryShow',
+      );
+
       this.doWorkWhenEveryShow();
+
+      this.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkAfterShow');
 
       this.doWorkAfterShow();
     }
@@ -580,19 +710,50 @@ class SupplementCore extends Common {
     callback,
     force = false,
   }) => {
-    logExecute('executeLogicAfterNonautomaticReLocationWhenRepeatedShow');
+    this.logCallTrack(
+      {
+        location,
+        map,
+        force,
+      },
+      primaryCallName,
+      'executeLogicAfterNonautomaticReLocationWhenRepeatedShow',
+    );
 
     if (isFunction(callback)) {
+      this.logCallTrace(
+        {
+          location,
+          map,
+          force,
+        },
+        primaryCallName,
+        'executeLogicAfterNonautomaticReLocationWhenRepeatedShow',
+        'callback',
+      );
+
       callback({
         location,
         map,
         force,
       });
+    } else {
+      this.logCallTrace(
+        {
+          location,
+          map,
+          force,
+        },
+        primaryCallName,
+        'executeLogicAfterNonautomaticReLocationWhenRepeatedShow',
+        'callback',
+        emptyLogic,
+      );
     }
   };
 
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
-    logExecute('checkTicketValidity');
+    this.logCallTrack({}, primaryCallName, 'checkTicketValidity');
 
     const environment = this.getEnvironment();
 
@@ -1115,9 +1276,9 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) => {
-    logExecute('signIn');
-
     const that = this;
+
+    that.logCallTrack({ data }, primaryCallName, 'signIn');
 
     const useLocation = getUseLocation();
     const locationMode = getLocationMode();
@@ -1184,8 +1345,6 @@ class SupplementCore extends Common {
       });
     } else {
       if (useLocation || false) {
-        logDebug('use location and nonautomatic location');
-
         that.logCallTrace(
           {
             useLocation,
@@ -2561,11 +2720,28 @@ class SupplementCore extends Common {
   };
 
   setTokenOnSignIn = ({ token }) => {
-    logExecute('setTokenOnSignIn');
+    this.logCallTrack({ token }, primaryCallName, 'setTokenOnSignIn');
 
     if (!isString(token || '')) {
-      throw new Error('setTokenOnSignIn token must be string');
+      const info = 'token must be string';
+
+      this.logCallTrace(
+        { token },
+        primaryCallName,
+        'setTokenOnSignIn',
+        'error',
+        info,
+      );
+
+      throw new Error(info);
     }
+
+    this.logCallTrace(
+      { token: token || getTokenAnonymous() },
+      primaryCallName,
+      'setTokenOnSignIn',
+      'setToken',
+    );
 
     setToken(token || getTokenAnonymous());
   };

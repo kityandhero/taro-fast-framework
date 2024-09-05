@@ -839,7 +839,7 @@ class Infrastructure extends AbstractComponent {
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
   doSimulationFadeSpin = (callback = null) => {
-    logExecute('doSimulationFadeSpin');
+    this.logCallTrack({}, primaryCallName, 'doSimulationFadeSpin');
 
     const { spin } = this.state;
 
@@ -849,25 +849,50 @@ class Infrastructure extends AbstractComponent {
       setTimeout(() => {
         that.setState({ spin: false });
       }, that.simulationFadeSpinDuration);
+    }
 
-      if (isFunction(callback)) {
-        callback();
-      }
+    if (isFunction(callback)) {
+      that.logCallTrace(
+        {},
+        primaryCallName,
+        'doSimulationFadeSpin',
+        'callback',
+      );
+
+      callback();
     } else {
-      if (isFunction(callback)) {
-        callback();
-      }
+      that.logCallTrace(
+        {},
+        primaryCallName,
+        'doSimulationFadeSpin',
+        'callback',
+        emptyLogic,
+      );
     }
   };
 
   prepareLoadRemoteRequest = () => {
-    logExecute('prepareLoadRemoteRequest');
-
     const that = this;
 
+    that.logCallTrack({}, primaryCallName, 'prepareLoadRemoteRequest');
+
     if (that.ignoreSessionRelatedLogic) {
+      that.logCallTrace(
+        {},
+        primaryCallName,
+        'prepareLoadRemoteRequest',
+        'prepareLoadRemoteRequestOnlyMetaData',
+      );
+
       that.prepareLoadRemoteRequestOnlyMetaData();
     } else {
+      that.logCallTrace(
+        {},
+        primaryCallName,
+        'prepareLoadRemoteRequest',
+        'prepareLoadRemoteRequestWithCheckSession',
+      );
+
       that.prepareLoadRemoteRequestWithCheckSession();
     }
   };
@@ -1550,7 +1575,7 @@ class Infrastructure extends AbstractComponent {
       return this.privateCache.enablePullDownRefresh;
     }
 
-    logExecute('getEnablePullDownRefresh');
+    this.logCallTrack({}, primaryCallName, 'getEnablePullDownRefresh');
 
     const environment = this.getEnvironment();
 

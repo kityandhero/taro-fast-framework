@@ -5,7 +5,6 @@ import {
   isUndefined,
   logDebug,
   logException,
-  logExecute,
   logObject,
   logText,
   pretreatmentRequestParameters,
@@ -23,18 +22,29 @@ import {
 import { checkWhetherAuthorizeFail } from '../../utils/common';
 import { Infrastructure } from '../Infrastructure';
 
+const primaryCallName = 'framework::Base';
+
 class Base extends Infrastructure {
   /**
    * 执行初始化远程请求
    */
   doLoadRemoteRequest = () => {
-    logExecute('doLoadRemoteRequest');
+    this.logCallTrack({}, primaryCallName, 'doLoadRemoteRequest');
 
     const { spin } = this;
 
     const that = this;
 
     if (that.pagingLoadMode) {
+      that.logCallTrace(
+        {
+          delay: that.loadRemoteRequestDelay,
+        },
+        primaryCallName,
+        'doLoadRemoteRequest',
+        'loadNextPage',
+      );
+
       that.loadNextPage({
         delay: that.loadRemoteRequestDelay,
         callback: () => {
@@ -48,6 +58,15 @@ class Base extends Infrastructure {
         },
       });
     } else {
+      that.logCallTrace(
+        {
+          delay: that.loadRemoteRequestDelay,
+        },
+        primaryCallName,
+        'doLoadRemoteRequest',
+        'initLoad',
+      );
+
       that.initLoad({
         delay: that.loadRemoteRequestDelay,
         callback: () => {
