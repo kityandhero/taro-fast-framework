@@ -1,4 +1,5 @@
 import { connect } from 'easy-soft-dva';
+import { logConfig } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import {
@@ -116,8 +117,8 @@ const config3 = {
       style={{ marginRight: transformSize(10) }}
       size="mini"
       fill="outline"
-      onClick={() => {
-        console.log('checkbox extra click');
+      onClick={(o) => {
+        logConfig(o, 'checkbox extra click');
       }}
     >
       扩展
@@ -220,9 +221,7 @@ const config15 = {
   options: checkBoxOptions3,
   value: '',
   afterChange: (v) => {
-    console.log({
-      message: `值已更改为:${v.join(',')}`,
-    });
+    logConfig(v, 'afterChange');
   },
 };
 

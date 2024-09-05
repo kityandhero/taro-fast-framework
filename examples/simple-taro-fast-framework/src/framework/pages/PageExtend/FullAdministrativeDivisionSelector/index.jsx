@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Button, InputItem } from 'taro-fast-component';
@@ -111,10 +112,10 @@ export default class Index extends ContentPageBase {
             />
           }
           afterChange={(v) => {
-            console.log(v);
+            logConsole(v, 'afterChange');
           }}
-          onClick={() => {
-            console.log(11);
+          onClick={(o) => {
+            logConsole(o, 'onClick');
           }}
         />
       </View>

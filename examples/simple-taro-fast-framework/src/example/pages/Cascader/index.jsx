@@ -1,5 +1,5 @@
 import { connect } from 'easy-soft-dva';
-import { toMd5, transformListData } from 'easy-soft-utility';
+import { logConfig, toMd5, transformListData } from 'easy-soft-utility';
 
 import { Cascader, Space } from 'taro-fast-component';
 
@@ -166,7 +166,7 @@ function convertItem(data) {
 }
 
 function afterChangeInConsole(d) {
-  console.log(d);
+  logConfig(d, 'afterChangeInConsole');
 }
 
 const config1 = {
@@ -229,9 +229,12 @@ export default class Index extends ContentPageBase {
 
     const optionCompareFlag = toMd5(optionList);
 
-    console.log({
-      optionCompareFlag,
-    });
+    logConfig(
+      {
+        optionCompareFlag,
+      },
+      'afterLoadSuccess',
+    );
 
     this.setState({
       optionList,

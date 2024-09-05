@@ -1,5 +1,11 @@
 import { connect } from 'easy-soft-dva';
-import { addHour, addMinute, addSecond, getNow } from 'easy-soft-utility';
+import {
+  addHour,
+  addMinute,
+  addSecond,
+  getNow,
+  logConfig,
+} from 'easy-soft-utility';
 
 import { Countdown, Space } from 'taro-fast-component';
 
@@ -68,9 +74,12 @@ const config9 = {
   format: { hours: ':', minutes: ':', seconds: '' },
   endTime: addSecond(getNow(), 20),
   afterEnd: () => {
-    console.log({
-      message: '时间到',
-    });
+    logConfig(
+      {
+        message: '时间到',
+      },
+      '时间到',
+    );
   },
 };
 

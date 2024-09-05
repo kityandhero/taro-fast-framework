@@ -105,6 +105,12 @@
                     "scene": null
                 },
                 {
+                    "name": "example/form/inputItem",
+                    "pathName": "example/pages/inputItem/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
                     "name": "templateRemote/entry",
                     "pathName": "templateRemote/pages/entry/main/index",
                     "query": "",

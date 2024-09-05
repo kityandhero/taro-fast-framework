@@ -1,4 +1,5 @@
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Icon, IconCheckCircle, InputItem, Space } from 'taro-fast-component';
@@ -11,7 +12,7 @@ import {
 } from '../../../customComponents';
 
 function afterChange(v) {
-  console.log(v);
+  logConsole(v, 'afterChange');
 }
 
 const config1 = {

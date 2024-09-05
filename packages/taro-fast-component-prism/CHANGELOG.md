@@ -1,5 +1,23 @@
 # Change Log
 
+## 3.0.10
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-component@3.0.9
+  - taro-fast-common@3.1.3
+
+## 3.0.9
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-component@3.0.8
+  - taro-fast-common@3.1.2
+
 ## 3.0.8
 
 ### Patch Changes

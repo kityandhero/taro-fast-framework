@@ -1,4 +1,5 @@
 import { connect } from 'easy-soft-dva';
+import { logConfig } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Ellipsis, Space } from 'taro-fast-component';
@@ -16,8 +17,8 @@ const config1 = {
   fontSize: transformSize(28),
   lineHeight: transformSize(44),
   text: '这是一段宽度限制长度的文字，后面的内容会省略。',
-  onClick: () => {
-    console.log('ellipsis click');
+  onClick: (o) => {
+    logConfig(o, 'ellipsis click');
   },
 };
 
@@ -27,8 +28,8 @@ const config2 = {
   fontSize: transformSize(28),
   lineHeight: transformSize(44),
   text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
-  onClick: () => {
-    console.log('ellipsis click');
+  onClick: (o) => {
+    logConfig(o, 'ellipsis click');
   },
 };
 
@@ -37,8 +38,8 @@ const config21 = {
   height: transformSize(88),
   fontSize: transformSize(28),
   lineHeight: transformSize(44),
-  onClick: () => {
-    console.log('ellipsis click');
+  onClick: (o) => {
+    logConfig(o, '时间到');
   },
 };
 
@@ -48,8 +49,8 @@ const config3 = {
   fontSize: transformSize(28),
   lineHeight: transformSize(44),
   text: '这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长x的文字,后面的内容会省略。',
-  onClick: () => {
-    console.log('ellipsis click');
+  onClick: (o) => {
+    logConfig(o, 'ellipsis click');
   },
 };
 
@@ -61,8 +62,8 @@ const config4 = {
     lineHeight: transformSize(44),
     backgroundColor: '#ccc',
   },
-  onClick: () => {
-    console.log('ellipsis click');
+  onClick: (o) => {
+    logConfig(o, 'ellipsis click');
   },
 };
 

@@ -1,9 +1,15 @@
 import Prism from 'prismjs';
-import { RichText } from '@tarojs/components';
+import { Textarea, View } from '@tarojs/components';
+// import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { AbstractComponent, copyToClipboard } from 'taro-fast-common';
+import {
+  AbstractComponent,
+  copyToClipboard,
+  transformSize,
+} from 'taro-fast-common';
 
+// import { HtmlBox } from 'taro-fast-component';
 import './index.less';
 
 if (process.env.TARO_ENV !== 'h5') {
@@ -60,7 +66,37 @@ class PrismCode extends AbstractComponent {
   };
 
   renderFurther() {
-    return <RichText nodes={this.buildHtml()} onTap={this.triggerClick} />;
+    const { code } = this.props;
+
+    return (
+      <View
+        style={{
+          backgroundColor: '#000',
+          borderRadius: transformSize(10),
+          paddingTop: transformSize(10),
+          paddingLeft: transformSize(10),
+          paddingRight: transformSize(10),
+          paddingBottom: transformSize(10),
+        }}
+        onClick={this.triggerClick}
+      >
+        <Textarea
+          style={{
+            width: '100%',
+            color: '#fff',
+            fontSize: transformSize(24),
+          }}
+          autoHeight
+          disabled
+          value={code}
+          maxlength={-1}
+        />
+      </View>
+    );
+
+    // return <View onClick={this.triggerClick}>{code}</View>;
+
+    // return <RichText nodes={this.buildHtml()} onTap={this.triggerClick} />;
     // return <HtmlBox html={this.buildHtml()} onClick={this.triggerClick} />;
   }
 }

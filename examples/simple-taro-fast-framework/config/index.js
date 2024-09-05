@@ -32,15 +32,23 @@ const config = {
     type: 'webpack5',
     prebundle: {
       enable: false,
+      force: true,
+      exclude: [
+        'taro-fast-common',
+        'taro-fast-component',
+        'taro-fast-component-extra',
+        'taro-fast-component-prism',
+        'taro-fast-framework',
+      ],
     },
   },
   cache: {
-    // enable: false,
-    enable: true,
+    enable: false,
+    // enable: true,
   },
   mini: {
-    baseLevel: 20,
-    // debugReact: true,
+    // baseLevel: 33,
+    debugReact: true,
     postcss: {
       pxtransform: {
         enable: true,

@@ -2,6 +2,7 @@ import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { connect } from 'easy-soft-dva';
+import { logConfig } from 'easy-soft-utility';
 
 import { ActionSheet, Button, Card, Space } from 'taro-fast-component';
 
@@ -108,14 +109,16 @@ export default class Index extends ContentPageBase {
             {
               content: '按钮一',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮一');
+
                 this.showToast('点击了按钮一');
               },
             },
             {
               content: '按钮二',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮二');
+
                 this.showToast('点击了按钮二');
               },
             },
@@ -136,21 +139,24 @@ export default class Index extends ContentPageBase {
             {
               content: '按钮一',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮一');
+
                 this.showToast('点击了按钮一');
               },
             },
             {
               content: '按钮二',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮二');
+
                 this.showToast('点击了按钮二');
               },
             },
             {
               content: '按钮三',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮三');
+
                 this.showToast('点击了按钮三');
               },
             },
@@ -169,14 +175,16 @@ export default class Index extends ContentPageBase {
             {
               content: '按钮一',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮一');
+
                 this.showToast('点击了按钮一');
               },
             },
             {
               content: '按钮二',
               onClick: (v) => {
-                console.log(v);
+                logConfig(v, '按钮二');
+
                 this.showToast('点击了按钮二');
               },
             },
@@ -187,10 +195,13 @@ export default class Index extends ContentPageBase {
                 </Text>
               ),
               onClick: (v, event) => {
-                console.log({
-                  value: v,
-                  e: event,
-                });
+                logConfig(
+                  {
+                    value: v,
+                    e: event,
+                  },
+                  '清除',
+                );
                 this.showToast('成功清除位置');
               },
             },

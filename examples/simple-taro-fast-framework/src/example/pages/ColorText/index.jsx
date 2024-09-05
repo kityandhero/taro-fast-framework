@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { logConfig } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import {
@@ -53,7 +54,7 @@ const config4 = {
   text: '文本文字',
   canCopy: true,
   copySuccessCallback: (v) => {
-    console.log(`copySuccessCallback: ${v}`);
+    logConfig(v, 'copySuccessCallback');
   },
 };
 

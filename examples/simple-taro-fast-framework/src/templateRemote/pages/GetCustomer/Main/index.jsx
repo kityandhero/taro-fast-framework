@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { Button, Space } from 'taro-fast-component';
 import { getCurrentCustomer } from 'taro-fast-framework';
@@ -63,7 +64,7 @@ export default class Index extends BasePageWrapper {
   };
 
   showInConsole = () => {
-    console.log(getCurrentCustomer());
+    logConsole(getCurrentCustomer(), 'showInConsole');
   };
 
   renderFurther() {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Input, Text, Textarea, View } from '@tarojs/components';
 
 import {
@@ -8,6 +9,7 @@ import {
   isNumber,
   isObject,
   isString,
+  throttle,
   toNumber,
 } from 'easy-soft-utility';
 
@@ -80,6 +82,8 @@ const defaultProps = {
 class InputItem extends BaseComponent {
   currentValue = '';
 
+  inputRef = React.createRef();
+
   constructor(properties) {
     super(properties);
 
@@ -87,7 +91,7 @@ class InputItem extends BaseComponent {
 
     this.state = {
       valueFlag: value,
-      clearVisible: false,
+      focus: false,
     };
 
     this.currentValue = value;
@@ -122,18 +126,6 @@ class InputItem extends BaseComponent {
     return checkInCollection(layoutCollection, layout) ? layout : 'horizontal';
   };
 
-  checkClearDisplay = () => {
-    const { clearable } = this.props;
-
-    if (!clearable) {
-      return false;
-    }
-
-    const { clearVisible } = this.state;
-
-    return !!clearVisible;
-  };
-
   triggerChange = (v) => {
     const { afterChange } = this.props;
 
@@ -147,31 +139,19 @@ class InputItem extends BaseComponent {
       detail: { value: v },
     } = event;
 
-    this.currentValue = v;
+    const that = this;
 
-    const { clearable } = this.props;
+    that.currentValue = v;
 
-    if (clearable) {
-      const { clearVisible } = this.state;
-
-      if (clearVisible && checkStringIsNullOrWhiteSpace(this.currentValue)) {
-        this.setState({
-          clearVisible: false,
-        });
-      }
-
-      if (!clearVisible && !checkStringIsNullOrWhiteSpace(this.currentValue)) {
-        this.setState({
-          clearVisible: true,
-        });
-      }
-    }
-
-    this.triggerChange(v);
+    that.triggerChange(that.currentValue);
   };
 
   triggerFocus = (event) => {
     const { onFocus } = this.props;
+
+    this.setState({
+      focus: true,
+    });
 
     if (isFunction(onFocus)) {
       onFocus(event);
@@ -180,6 +160,10 @@ class InputItem extends BaseComponent {
 
   triggerBlur = (event) => {
     const { onBlur } = this.props;
+
+    this.setState({
+      focus: false,
+    });
 
     if (isFunction(onBlur)) {
       onBlur(event);
@@ -204,10 +188,13 @@ class InputItem extends BaseComponent {
 
   clearValue = () => {
     this.currentValue = '';
+    this.inputRef.current.value = '';
 
-    this.increaseCounter();
+    this.setState({
+      focus: true,
+    });
 
-    this.triggerChange('');
+    this.triggerChange(this.currentValue);
   };
 
   renderFurther() {
@@ -251,7 +238,10 @@ class InputItem extends BaseComponent {
       holdKeyboard,
       areaMode,
       areaAutoHeight,
+      clearable,
     } = this.props;
+
+    const { focus } = this.state;
 
     const layout = this.getLayout();
     const type = checkInCollection(typeCollection, typeSource)
@@ -265,8 +255,6 @@ class InputItem extends BaseComponent {
       : 'done';
 
     const showBody = !!description;
-
-    const clearDisplay = this.checkClearDisplay();
 
     const labelComponent =
       isObject(label) ||
@@ -397,7 +385,7 @@ class InputItem extends BaseComponent {
                   selectionEnd={selectionEnd}
                   adjustPosition={adjustPosition}
                   holdKeyboard={holdKeyboard}
-                  onInput={this.onInput}
+                  onInput={throttle(this.onInput, 400)}
                   onFocus={this.triggerFocus}
                   onBlur={this.triggerBlur}
                   onConfirm={this.triggerConfirm}
@@ -405,8 +393,10 @@ class InputItem extends BaseComponent {
                 />
               ) : (
                 <Input
-                  value={this.currentValue}
+                  ref={this.inputRef}
+                  defaultValue={this.currentValue}
                   type={type}
+                  focus={focus}
                   style={{
                     fontSize: transformSize(28),
                     borderColor: borderColor,
@@ -443,7 +433,7 @@ class InputItem extends BaseComponent {
                   selectionEnd={selectionEnd}
                   adjustPosition={adjustPosition}
                   holdKeyboard={holdKeyboard}
-                  onInput={this.onInput}
+                  onInput={throttle(this.onInput, 400)}
                   onFocus={this.triggerFocus}
                   onBlur={this.triggerBlur}
                   onConfirm={this.triggerConfirm}
@@ -453,7 +443,7 @@ class InputItem extends BaseComponent {
             }
             leftStyle={inputContainerStyle}
             right={
-              clearDisplay ? (
+              clearable ? (
                 <View
                   style={{
                     paddingLeft: transformSize(10),

@@ -1,5 +1,29 @@
 # Change Log
 
+## 1.16.18
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-component-extra@3.0.9
+  - taro-fast-component-prism@3.0.10
+  - taro-fast-component@3.0.9
+  - taro-fast-framework@3.1.3
+  - taro-fast-common@3.1.3
+
+## 1.16.17
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-component-extra@3.0.8
+  - taro-fast-component-prism@3.0.9
+  - taro-fast-component@3.0.8
+  - taro-fast-framework@3.1.2
+  - taro-fast-common@3.1.2
+
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [1.16.16](https://github.com/kityandhero/taro-fast-framework/compare/simple-taro-fast-framework@1.16.15...simple-taro-fast-framework@1.16.16) (2023-03-10)
