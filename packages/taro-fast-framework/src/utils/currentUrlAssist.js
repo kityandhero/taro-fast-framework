@@ -1,8 +1,16 @@
 import {
   getJsonFromLocalStorage,
+  logTrace,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'currentCustomerAssist';
 
 const storageKeyCollection = {
   currentUrl: 'currentUrl',
@@ -16,6 +24,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getCurrentUrl() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getCurrentUrl'));
+
   const key = storageKeyCollection.currentUrl;
 
   return getJsonFromLocalStorage(key);
@@ -29,6 +39,8 @@ export function getCurrentUrl() {
  * @returns
  */
 export function setCurrentUrl(url) {
+  logTrace({ url }, buildPromptModuleInfoText(moduleName, 'setCurrentUrl'));
+
   const key = storageKeyCollection.currentUrl;
 
   const isTab = (url || '').startsWith('/pages/');
@@ -49,6 +61,8 @@ export function setCurrentUrl(url) {
  * @returns
  */
 export function removeCurrentUrl() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeCurrentUrl'));
+
   const key = storageKeyCollection.currentUrl;
 
   removeLocalStorage(key);

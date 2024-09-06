@@ -7,12 +7,21 @@ import {
   isString,
   logDebug,
   logException,
+  logTrace,
   showErrorMessage,
   showSimpleSuccessNotification,
   toString,
 } from 'easy-soft-utility';
 
 import { Tips } from 'taro-fast-common';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'routeAssist';
 
 /**
  * remote assess wrapper core
@@ -40,6 +49,8 @@ export async function actionCore({
   textProcessing = '处理中, 请稍后',
   delay = 400,
 }) {
+  logTrace(arguments[0], buildPromptModuleInfoText(moduleName, 'actionCore'));
+
   if ((handleData || null) == null) {
     const text = 'actionCore : handleData not allow null';
 

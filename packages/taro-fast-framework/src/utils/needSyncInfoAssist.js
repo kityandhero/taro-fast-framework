@@ -1,7 +1,15 @@
 import {
   getStringFromLocalStorage,
+  logTrace,
   saveStringToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'needSyncInfoAssist';
 
 const storageKeyCollection = {
   needSyncInfo: 'needSyncInfo',
@@ -15,6 +23,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getNeedSyncInfo() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getNeedSyncInfo'));
+
   const key = storageKeyCollection.needSyncInfo;
 
   const need = (getStringFromLocalStorage(key) || '') === '0';
@@ -30,6 +40,8 @@ export function getNeedSyncInfo() {
  * @returns
  */
 export function setNeedSyncInfo(need) {
+  logTrace({ need }, buildPromptModuleInfoText(moduleName, 'setNeedSyncInfo'));
+
   const key = storageKeyCollection.needSyncInfo;
 
   saveStringToLocalStorage(key, `${(need || false) == false ? 0 : 1}`);

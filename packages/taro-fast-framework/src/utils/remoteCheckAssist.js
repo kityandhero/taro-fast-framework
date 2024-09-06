@@ -1,7 +1,15 @@
 import {
   getJsonFromLocalStorage,
+  logTrace,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'remoteCheckAssist';
 
 const storageKeyCollection = {
   remoteCheck: 'remoteCheck',
@@ -15,6 +23,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getRemoteCheckCache() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getRemoteCheckCache'));
+
   const key = storageKeyCollection.remoteCheck;
 
   const o = getJsonFromLocalStorage(key);
@@ -49,6 +59,11 @@ export function getRemoteCheckCache() {
  * @returns
  */
 export function setRemoteCheckCache(o) {
+  logTrace(
+    arguments[0],
+    buildPromptModuleInfoText(moduleName, 'setRemoteCheckCache'),
+  );
+
   const key = storageKeyCollection.remoteCheck;
 
   const now = Number.parseInt(Date.now() / 1000 / 10, 10);

@@ -1,10 +1,17 @@
 import {
   getJsonFromLocalStorage,
-  logExecute,
+  logTrace,
   logWarn,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'currentCustomerAssist';
 
 export const storageKeyCollection = {
   currentCustomer: 'currentCustomer',
@@ -18,7 +25,7 @@ export const storageKeyCollection = {
  * @returns
  */
 export function getCurrentCustomer() {
-  logExecute('getCurrentCustomer from local cache');
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getCurrentCustomer'));
 
   const key = storageKeyCollection.currentCustomer;
 
@@ -59,7 +66,10 @@ export function getCurrentCustomer() {
  * @returns
  */
 export function setCurrentCustomer(data) {
-  logExecute('setCurrentCustomer to local cache');
+  logTrace(
+    arguments[0],
+    buildPromptModuleInfoText(moduleName, 'setCurrentCustomer'),
+  );
 
   const key = storageKeyCollection.currentCustomer;
 
@@ -82,6 +92,8 @@ export function setCurrentCustomer(data) {
  * @returns
  */
 export function removeCurrentCustomer() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeCurrentCustomer'));
+
   const key = storageKeyCollection.currentCustomer;
 
   removeLocalStorage(key);

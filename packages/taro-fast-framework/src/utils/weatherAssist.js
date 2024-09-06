@@ -1,8 +1,16 @@
 import {
   getJsonFromLocalStorage,
+  logTrace,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'weatherAssist';
 
 const storageKeyCollection = {
   weather: 'weather',
@@ -16,6 +24,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getWeather() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getWeather'));
+
   const key = storageKeyCollection.weather;
 
   const o = getJsonFromLocalStorage(key);
@@ -53,6 +63,8 @@ export function getWeather() {
  * @returns
  */
 export function setWeather(weather) {
+  logTrace({ weather }, buildPromptModuleInfoText(moduleName, 'setWeather'));
+
   const key = storageKeyCollection.weather;
 
   // 地理位置信息有效期30分钟
@@ -76,6 +88,8 @@ export function setWeather(weather) {
  * @returns
  */
 export function removeWeather() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeWeather'));
+
   const key = storageKeyCollection.weather;
 
   removeLocalStorage(key);

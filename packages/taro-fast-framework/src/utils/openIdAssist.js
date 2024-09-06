@@ -1,8 +1,16 @@
 import {
   getStringFromLocalStorage,
+  logTrace,
   removeLocalStorage,
   saveStringToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'openIdAssist';
 
 const storageKeyCollection = {
   openId: 'openId',
@@ -16,6 +24,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getOpenId() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getOpenId'));
+
   const key = storageKeyCollection.openId;
 
   return getStringFromLocalStorage(key);
@@ -29,6 +39,8 @@ export function getOpenId() {
  * @returns
  */
 export function setOpenId(openId) {
+  logTrace({ openId }, buildPromptModuleInfoText(moduleName, 'setOpenId'));
+
   const key = storageKeyCollection.openId;
 
   return saveStringToLocalStorage(key, openId || '');
@@ -42,6 +54,8 @@ export function setOpenId(openId) {
  * @returns
  */
 export function removeOpenId() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeOpenId'));
+
   const key = storageKeyCollection.openId;
 
   removeLocalStorage(key);

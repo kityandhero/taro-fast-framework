@@ -1,6 +1,7 @@
 import {
   getJsonFromLocalStorage,
   getStringFromLocalStorage,
+  logTrace,
   removeLocalStorage,
   saveJsonToLocalStorage,
   saveStringToLocalStorage,
@@ -8,6 +9,13 @@ import {
 } from 'easy-soft-utility';
 
 import { locationModeCollection } from 'taro-fast-common';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'locationAssist';
 
 const storageKeyCollection = {
   location: 'location',
@@ -24,6 +32,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getLocation() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getLocation'));
+
   const key = storageKeyCollection.location;
 
   const l = getJsonFromLocalStorage(key);
@@ -62,6 +72,8 @@ export function getLocation() {
  * @returns
  */
 export function setLocation(location) {
+  logTrace({ location }, buildPromptModuleInfoText(moduleName, 'setLocation'));
+
   const key = storageKeyCollection.location;
 
   // 地理位置信息有效期30分钟
@@ -80,6 +92,8 @@ export function setLocation(location) {
  * @returns
  */
 export function removeLocation() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeLocation'));
+
   const key = storageKeyCollection.location;
 
   removeLocalStorage(key);
@@ -93,6 +107,8 @@ export function removeLocation() {
  * @returns
  */
 export function getLocationMode() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getLocationMode'));
+
   const key = storageKeyCollection.locationMode;
 
   const s = getStringFromLocalStorage(key);
@@ -113,6 +129,11 @@ export function getLocationMode() {
  * @returns
  */
 export function setLocationMode(locationMode) {
+  logTrace(
+    { locationMode },
+    buildPromptModuleInfoText(moduleName, 'setLocationMode'),
+  );
+
   const key = storageKeyCollection.locationMode;
 
   if (locationMode === locationModeCollection.custom) {
@@ -140,6 +161,8 @@ export function setLocationMode(locationMode) {
  * @returns
  */
 export function getMap() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getMap'));
+
   const key = storageKeyCollection.map;
 
   const data = getJsonFromLocalStorage(key);
@@ -178,6 +201,8 @@ export function getMap() {
  * @returns
  */
 export function setMap(map) {
+  logTrace({ map }, buildPromptModuleInfoText(moduleName, 'setMap'));
+
   const key = storageKeyCollection.map;
 
   // 地理位置信息有效期30分钟
@@ -196,6 +221,8 @@ export function setMap(map) {
  * @returns
  */
 export function removeMap() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeMap'));
+
   const key = storageKeyCollection.map;
 
   removeLocalStorage(key);
@@ -209,6 +236,8 @@ export function removeMap() {
  * @returns
  */
 export function getLastLocation() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getLastLocation'));
+
   const key = storageKeyCollection.lastLocation;
 
   let data = getJsonFromLocalStorage(key);
@@ -232,6 +261,11 @@ export function getLastLocation() {
  * @returns
  */
 export function setLastLocation(data) {
+  logTrace(
+    arguments[0],
+    buildPromptModuleInfoText(moduleName, 'setLastLocation'),
+  );
+
   if ((data || null) == null) {
     const text = '无法存数无效位置数据';
 

@@ -1,9 +1,17 @@
 import {
   getJsonFromLocalStorage,
-  logExecute,
+  logTrace,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'routeAssist';
 
 const storageKeyCollection = {
   selectedAddressData: 'selectedAddressData',
@@ -17,7 +25,7 @@ const storageKeyCollection = {
  * @returns
  */
 export function getSelectedAddressData() {
-  logExecute('getSelectedAddressData from local cache');
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getSelectedAddressData'));
 
   const key = storageKeyCollection.selectedAddressData;
 
@@ -32,7 +40,10 @@ export function getSelectedAddressData() {
  * @returns
  */
 export function setSelectedAddressData(data) {
-  logExecute('setSelectedAddressData to local cache');
+  logTrace(
+    arguments[0],
+    buildPromptModuleInfoText(moduleName, 'setSelectedAddressData'),
+  );
 
   const key = storageKeyCollection.selectedAddressData;
 
@@ -47,7 +58,10 @@ export function setSelectedAddressData(data) {
  * @returns
  */
 export function removeSelectedAddressData() {
-  logExecute('removeSelectedAddressData');
+  logTrace(
+    {},
+    buildPromptModuleInfoText(moduleName, 'removeSelectedAddressData'),
+  );
 
   const key = storageKeyCollection.selectedAddressData;
 

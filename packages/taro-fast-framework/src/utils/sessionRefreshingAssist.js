@@ -1,10 +1,17 @@
 import {
   getStringFromLocalStorage,
   logDebug,
-  logInfo,
+  logTrace,
   removeLocalStorage,
   saveStringToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'sessionRefreshingAssist';
 
 const storageKeyCollection = {
   sessionRefreshing: 'sessionRefreshing',
@@ -18,6 +25,8 @@ const storageKeyCollection = {
  * @returns
  */
 export function getSessionRefreshing() {
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getSessionRefreshing'));
+
   const key = storageKeyCollection.sessionRefreshing;
 
   const v = getStringFromLocalStorage(key);
@@ -35,7 +44,10 @@ export function getSessionRefreshing() {
  * @returns
  */
 export function setSessionRefreshing(sessionRefreshing) {
-  logDebug(`setSessionRefreshing ${sessionRefreshing}`);
+  logTrace(
+    { sessionRefreshing },
+    buildPromptModuleInfoText(moduleName, 'setSessionRefreshing'),
+  );
 
   const key = storageKeyCollection.sessionRefreshing;
 
@@ -50,7 +62,10 @@ export function setSessionRefreshing(sessionRefreshing) {
  * @returns
  */
 export function removeSessionRefreshing() {
-  logInfo('removeSessionRefreshing');
+  logTrace(
+    {},
+    buildPromptModuleInfoText(moduleName, 'removeSessionRefreshing'),
+  );
 
   const key = storageKeyCollection.sessionRefreshing;
 

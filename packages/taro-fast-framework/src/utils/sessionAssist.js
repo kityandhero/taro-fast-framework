@@ -1,11 +1,16 @@
 import {
   getStringFromLocalStorage,
-  logDebug,
-  logExecute,
-  logInfo,
+  logTrace,
   removeLocalStorage,
   saveStringToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'sessionAssist';
 
 const storageKeyCollection = {
   session: 'session',
@@ -19,7 +24,7 @@ const storageKeyCollection = {
  * @returns
  */
 export function getSession() {
-  logExecute('getSession');
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getSession'));
 
   const key = storageKeyCollection.session;
 
@@ -34,7 +39,7 @@ export function getSession() {
  * @returns
  */
 export function setSession(session) {
-  logDebug(`setSession ${session}`);
+  logTrace({ session }, buildPromptModuleInfoText(moduleName, 'setSession'));
 
   const key = storageKeyCollection.session;
 
@@ -49,7 +54,7 @@ export function setSession(session) {
  * @returns
  */
 export function removeSession() {
-  logInfo('removeSession');
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeSession'));
 
   const key = storageKeyCollection.session;
 

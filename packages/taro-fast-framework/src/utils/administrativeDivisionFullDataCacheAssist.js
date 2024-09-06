@@ -1,11 +1,19 @@
 import {
   getJsonFromLocalStorage,
   isArray,
-  logExecute,
+  logTrace,
   removeLocalStorage,
   saveJsonToLocalStorage,
   toMd5,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'administrativeDivisionFullDataCacheAssist';
 
 const storageKeyCollection = {
   administrativeDivisionFullData: 'administrativeDivisionFullData',
@@ -19,7 +27,13 @@ const storageKeyCollection = {
  * @returns
  */
 export function getAdministrativeDivisionFullDataCache() {
-  logExecute('getAdministrativeDivisionFullData from local cache');
+  logTrace(
+    {},
+    buildPromptModuleInfoText(
+      moduleName,
+      'getAdministrativeDivisionFullDataCache',
+    ),
+  );
 
   const key = storageKeyCollection.administrativeDivisionFullData;
 
@@ -40,7 +54,13 @@ export function getAdministrativeDivisionFullDataCache() {
  * @returns
  */
 export function setAdministrativeDivisionFullDataCache(data) {
-  logExecute('setAdministrativeDivisionFullData to local cache');
+  logTrace(
+    arguments[0],
+    buildPromptModuleInfoText(
+      moduleName,
+      'setAdministrativeDivisionFullDataCache',
+    ),
+  );
 
   const key = storageKeyCollection.administrativeDivisionFullData;
 
@@ -62,7 +82,13 @@ export function setAdministrativeDivisionFullDataCache(data) {
  * @returns
  */
 export function removeAdministrativeDivisionFullDataCache() {
-  logExecute('removeAdministrativeDivisionFullData');
+  logTrace(
+    {},
+    buildPromptModuleInfoText(
+      moduleName,
+      'removeAdministrativeDivisionFullDataCache',
+    ),
+  );
 
   const key = storageKeyCollection.administrativeDivisionFullData;
 

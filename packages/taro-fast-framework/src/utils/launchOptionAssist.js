@@ -1,9 +1,17 @@
 import {
   getJsonFromLocalStorage,
-  logExecute,
+  logTrace,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
+
+import { buildPromptModuleInfoText } from './definition';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'launchOptionAssist';
 
 const storageKeyCollection = {
   launchOption: 'launchOption',
@@ -17,7 +25,7 @@ const storageKeyCollection = {
  * @returns
  */
 export function getLaunchOption() {
-  logExecute('getLaunchOption from local cache');
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'getLaunchOption'));
 
   const key = storageKeyCollection.launchOption;
 
@@ -32,7 +40,10 @@ export function getLaunchOption() {
  * @returns
  */
 export function setLaunchOption(data) {
-  logExecute('setLaunchOption to local cache');
+  logTrace(
+    arguments[0],
+    buildPromptModuleInfoText(moduleName, 'setLaunchOption'),
+  );
 
   const key = storageKeyCollection.launchOption;
 
@@ -47,7 +58,7 @@ export function setLaunchOption(data) {
  * @returns
  */
 export function removeLaunchOption() {
-  logExecute('removeLaunchOption');
+  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeLaunchOption'));
 
   const key = storageKeyCollection.launchOption;
 
