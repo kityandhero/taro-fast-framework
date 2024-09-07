@@ -763,11 +763,10 @@ class Infrastructure extends AbstractComponent {
           const info = '未配置登录页面signInPath';
 
           that.logCallTrace(
-            {},
+            { error: info },
             primaryCallName,
             'doWorkWhenCheckNeedSignInDidMountFail',
             'error',
-            info,
           );
 
           throw new Error(info);
@@ -1520,9 +1519,7 @@ class Infrastructure extends AbstractComponent {
 
       if (isFunction(callback)) {
         this.logCallTrace(
-          {
-            timeTotal,
-          },
+          {},
           primaryCallName,
           'checkSessionWhenSessionRefreshing',
           'callback',
@@ -1531,9 +1528,7 @@ class Infrastructure extends AbstractComponent {
         callback();
       } else {
         this.logCallTrace(
-          {
-            timeTotal,
-          },
+          {},
           primaryCallName,
           'checkSessionWhenSessionRefreshing',
           'callback',
@@ -1568,9 +1563,7 @@ class Infrastructure extends AbstractComponent {
       } else {
         if (isFunction(callback)) {
           this.logCallTrace(
-            {
-              timeTotal,
-            },
+            {},
             primaryCallName,
             'checkSessionWhenSessionRefreshing',
             'callback',
@@ -1579,9 +1572,7 @@ class Infrastructure extends AbstractComponent {
           callback();
         } else {
           this.logCallTrace(
-            {
-              timeTotal,
-            },
+            {},
             primaryCallName,
             'checkSessionWhenSessionRefreshing',
             'callback',
@@ -1593,13 +1584,18 @@ class Infrastructure extends AbstractComponent {
   }
 
   initMetaData = ({
-    // eslint-disable-next-line no-unused-vars
     data = {},
-    // eslint-disable-next-line no-unused-vars
     force: forceValue = false,
     callback = null,
   }) => {
-    this.logCallTrack({}, primaryCallName, 'initMetaData');
+    this.logCallTrack(
+      {
+        data,
+        force: forceValue,
+      },
+      primaryCallName,
+      'initMetaData',
+    );
 
     if (isFunction(callback)) {
       this.logCallTrace({}, primaryCallName, 'initMetaData', 'callback');
@@ -1670,11 +1666,10 @@ class Infrastructure extends AbstractComponent {
         'signInSilentFailCallback is not supported in base class Infrastructure';
 
       this.logCallTrack(
-        {},
+        { error: info },
         primaryCallName,
         'checkTicketValidity',
         'error',
-        info,
       );
 
       throw new Error(info);
@@ -1930,7 +1925,7 @@ class Infrastructure extends AbstractComponent {
       .then(() => {
         if (isFunction(callback)) {
           that.logCallTrace(
-            { data },
+            {},
             primaryCallName,
             'setSignInResult',
             'dispatchSetSignInResult',
@@ -1942,7 +1937,7 @@ class Infrastructure extends AbstractComponent {
           callback();
         } else {
           that.logCallTrace(
-            { data },
+            {},
             primaryCallName,
             'setSignInResult',
             'dispatchSetSignInResult',
@@ -2373,7 +2368,7 @@ class Infrastructure extends AbstractComponent {
             });
           } else {
             that.logCallTrace(
-              { map },
+              {},
               primaryCallName,
               'getCurrentLocation',
               'obtainLocation',
