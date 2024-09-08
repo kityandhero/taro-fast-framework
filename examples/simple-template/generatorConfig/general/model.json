@@ -109,8 +109,8 @@
         }
       ],
       "cover": true,
-      "title": "用户相关",
-      "name": "user"
+      "title": "登陆人相关",
+      "name": "customer"
     },
     {
       "apis": [

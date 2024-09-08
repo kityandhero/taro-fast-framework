@@ -3,6 +3,10 @@ import {
   buildModel as buildAdministrativeDivisionModel,
 } from './administrativeDivision';
 import {
+  buildModel as buildCustomerModel,
+  customerTypeCollection,
+} from './customer';
+import {
   buildModel as buildEntranceModel,
   entranceTypeCollection,
 } from './entrance';
@@ -12,14 +16,13 @@ import {
   sessionTypeCollection,
 } from './session';
 import { buildModel as buildShareModel, shareTypeCollection } from './share';
-import { buildModel as buildUserModel, userTypeCollection } from './user';
 
 export const modelTypeCollection = {
   sessionTypeCollection,
   entranceTypeCollection,
   globalTypeCollection,
   shareTypeCollection,
-  userTypeCollection,
+  customerTypeCollection,
   administrativeDivisionTypeCollection,
 };
 
@@ -31,7 +34,7 @@ export function listModelBuilder() {
     buildEntranceModel,
     buildGlobalModel,
     buildShareModel,
-    buildUserModel,
+    buildCustomerModel,
     buildAdministrativeDivisionModel,
   );
 

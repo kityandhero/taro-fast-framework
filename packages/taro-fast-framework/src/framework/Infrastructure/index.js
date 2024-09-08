@@ -1845,6 +1845,14 @@ class Infrastructure extends AbstractComponent {
         return null;
       })
       .catch((error) => {
+        that.logCallTrace(
+          { error },
+          primaryCallName,
+          'setSignInProcessDetection',
+          'catch',
+          'error',
+        );
+
         logException(error);
       });
   };

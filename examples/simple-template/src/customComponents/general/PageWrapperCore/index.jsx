@@ -107,11 +107,11 @@ class PageWrapperCore extends AuthorizationWrapper {
     });
   };
 
-  dispatchSignInSilent = (data) => {
-    return this.dispatchApi({
+  getSignInApiEffect = (data) => {
+    return {
       type: modelTypeCollection.entranceTypeCollection.signInSilent,
       payload: data,
-    });
+    };
   };
 
   parseSignInResultFromSignInSilentApiData = (remoteData) => {

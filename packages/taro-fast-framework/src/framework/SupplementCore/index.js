@@ -748,6 +748,17 @@ class SupplementCore extends Common {
               }
             },
             fail: (error) => {
+              that.logCallTrace(
+                { error },
+                primaryCallName,
+                'obtainLocation',
+                'getGeographicalLocation',
+                'success',
+                'reverseGeocoder',
+                'fail',
+                'error',
+              );
+
               logException(error);
 
               if (mapData == null) {
@@ -1896,6 +1907,15 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
+        that.logCallTrace(
+          { error },
+          primaryCallName,
+          'checkTicketValidityCore',
+          'dispatchCheckTicketValidity',
+          'catch',
+          'error',
+        );
+
         logException(error);
       });
   }
@@ -2927,12 +2947,18 @@ class SupplementCore extends Common {
       {},
       primaryCallName,
       'dispatchSignInSilent',
-      'getVerifyTicket',
+      'getSignInApiEffect',
     );
 
-    if (this.getVerifyTicket()) {
-      const info =
-        'dispatchSignInSilent need override, dispatchSignInSilent must return a promise';
+    const { type, payload, alias } = {
+      type: '',
+      payload: null,
+      ...this.getSignInApiEffect(data),
+      alias: getSignInSilentAliasName(),
+    };
+
+    if (checkStringIsNullOrWhiteSpace(type)) {
+      const info = 'signInApiEffect type disallow empty';
 
       this.logCallTrace(
         { error: info },
@@ -2945,9 +2971,9 @@ class SupplementCore extends Common {
     }
 
     const o = {
-      type: 'schedulingControl/signInSilent',
-      payload: data,
-      alias: getSignInSilentAliasName(),
+      type,
+      payload,
+      alias,
     };
 
     this.logCallTrace(
@@ -2958,6 +2984,16 @@ class SupplementCore extends Common {
     );
 
     return this.dispatchApi(o);
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  getSignInApiEffect = (data) => {
+    const info =
+      'getSignInApiEffect need override, getSignInApiEffect must return a object like {type,payload,alias:""}';
+
+    this.logCallTrack({}, primaryCallName, 'getSignInApiData', 'error', info);
+
+    throw new Error(info);
   };
 
   getSignInApiData = () => {
