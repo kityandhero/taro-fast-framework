@@ -79,11 +79,11 @@ class PageWrapperCore extends AuthorizationWrapper {
     );
   };
 
-  dispatchCheckTicketValidity = (data) => {
-    return this.dispatchApi({
+  getCheckTicketValidityApiEffect = (data) => {
+    return {
       type: modelTypeCollection.entranceTypeCollection.checkTicketValidity,
       payload: data,
-    });
+    };
   };
 
   getRefreshSessionApiEffect = (data) => {
@@ -120,18 +120,18 @@ class PageWrapperCore extends AuthorizationWrapper {
     return signInResult;
   };
 
-  dispatchRegisterWithWeChat = (data = {}) => {
-    return this.dispatchApi({
+  getRegisterWithWeChatApiEffect = (data = {}) => {
+    return {
       type: modelTypeCollection.entranceTypeCollection.registerWithWeChat,
       payload: data,
-    });
+    };
   };
 
-  dispatchExchangePhone = (data = {}) => {
-    return this.dispatchApi({
+  getExchangePhoneApiEffect = (data = {}) => {
+    return {
       type: modelTypeCollection.sessionTypeCollection.exchangePhone,
       payload: data,
-    });
+    };
   };
 
   getGetCustomerApiEffect = (data = {}) => {
@@ -167,12 +167,12 @@ class PageWrapperCore extends AuthorizationWrapper {
     return openId || '';
   };
 
-  dispatchGetFullAdministrativeDivisionData = (data = {}) => {
-    return this.dispatchApi({
+  getGetFullAdministrativeDivisionDataApiEffect = (data = {}) => {
+    return {
       type: modelTypeCollection.administrativeDivisionTypeCollection
         .singleListTreeThreeLevel,
       payload: data,
-    });
+    };
   };
 
   transformFullAdministrativeDivisionData = () => {

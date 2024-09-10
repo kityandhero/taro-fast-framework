@@ -437,6 +437,46 @@ export function getCheckTicketValidityAliasName() {
   return checkTicketValidityAliasName || 'checkTicketValidityApiData';
 }
 
+export function getRegisterWithWeChatAliasName() {
+  const { registerWithWeChatAliasName } = {
+    registerWithWeChatAliasName: 'registerWithWeChatApiData',
+    ...getApplicationMergeConfig(),
+  };
+
+  return registerWithWeChatAliasName || 'registerWithWeChatApiData';
+}
+
+export function getRegisterAliasName() {
+  const { registerAliasName } = {
+    registerAliasName: 'registerApiData',
+    ...getApplicationMergeConfig(),
+  };
+
+  return registerAliasName || 'registerApiData';
+}
+
+export function getExchangePhoneAliasName() {
+  const { exchangePhoneAliasName } = {
+    exchangePhoneAliasName: 'exchangePhoneApiData',
+    ...getApplicationMergeConfig(),
+  };
+
+  return exchangePhoneAliasName || 'exchangePhoneApiData';
+}
+
+export function getGetFullAdministrativeDivisionDataAliasName() {
+  const { fullAdministrativeDivisionDataAliasName } = {
+    fullAdministrativeDivisionDataAliasName:
+      'fullAdministrativeDivisionDataApiData',
+    ...getApplicationMergeConfig(),
+  };
+
+  return (
+    fullAdministrativeDivisionDataAliasName ||
+    'fullAdministrativeDivisionDataApiData'
+  );
+}
+
 export function getSignInAliasName() {
   const { signInAliasName } = {
     signInAliasName: 'signInApiData',
