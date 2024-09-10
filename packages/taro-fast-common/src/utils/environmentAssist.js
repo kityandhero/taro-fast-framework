@@ -1,7 +1,6 @@
 import { ENV_TYPE, getEnv as getEnvironmentCore } from '@tarojs/taro';
 
 import {
-  buildPromptModuleInfo,
   checkStringIsNullOrWhiteSpace,
   checkWhetherDevelopmentEnvironment,
   displayTextMessage,
@@ -9,24 +8,15 @@ import {
   existCachePool,
   getCache,
   logColorCollection,
-  mergeTextMessage,
   setCache,
 } from 'easy-soft-utility';
 
-import { modulePackageName } from './definition';
+import { buildPromptModuleInfoText } from './definition';
 
 /**
  * Module Name.
  */
 const moduleName = 'envAssist';
-
-function buildPromptModuleInfoText(text, ancillaryInformation = '') {
-  return buildPromptModuleInfo(
-    modulePackageName,
-    mergeTextMessage(text, ancillaryInformation),
-    moduleName,
-  );
-}
 
 const cacheKeyCollection = {
   currentEnv: 'currentEnv',
@@ -116,7 +106,10 @@ export function getEnvironment() {
 
     if (checkWhetherDevelopmentEnvironment()) {
       displayTextMessage({
-        text: buildPromptModuleInfoText('call cache fail with getCache'),
+        text: buildPromptModuleInfoText(
+          moduleName,
+          'call cache fail with getCache',
+        ),
         color: logColorCollection.warn,
         dataDescription: 'warn',
         ancillaryInformation: '',

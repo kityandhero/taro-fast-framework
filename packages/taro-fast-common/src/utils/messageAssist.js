@@ -1,7 +1,5 @@
 import {
-  buildPromptModuleInfo,
   logDevelop,
-  mergeTextMessage,
   messageTypeCollection,
   setErrorMessageDisplayMonitor,
   setInfoMessageDisplayMonitor,
@@ -11,21 +9,13 @@ import {
   setWarnMessageDisplayMonitor,
 } from 'easy-soft-utility';
 
-import { modulePackageName } from './definition';
+import { buildPromptModuleInfoText } from './definition';
 import { Tips } from './tips';
 
 /**
  * Module Name.
  */
 const moduleName = 'messageAssist';
-
-function buildPromptModuleInfoText(text, ancillaryInformation = '') {
-  return buildPromptModuleInfo(
-    modulePackageName,
-    mergeTextMessage(text, ancillaryInformation),
-    moduleName,
-  );
-}
 
 function showMessage({ type, duration = 1500, text, onClose = () => {} }) {
   requestAnimationFrame(() => {
@@ -130,6 +120,7 @@ export function setMessageDisplayMonitor() {
   logDevelop(
     {},
     buildPromptModuleInfoText(
+      moduleName,
       'setMessageDisplayMonitor',
       'fill implementation with easy-soft-utility',
     ),

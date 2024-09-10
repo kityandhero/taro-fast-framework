@@ -6,29 +6,19 @@ import {
 } from '@tarojs/taro';
 
 import {
-  buildPromptModuleInfo,
   logDevelop,
-  mergeTextMessage,
   setLocalStorageFlusher,
   setLocalStorageGetter,
   setLocalStorageRemover,
   setLocalStorageSetter,
 } from 'easy-soft-utility';
 
-import { modulePackageName } from './definition';
+import { buildPromptModuleInfoText } from './definition';
 
 /**
  * Module Name.
  */
 const moduleName = 'localStorageAssist';
-
-function buildPromptModuleInfoText(text, ancillaryInformation = '') {
-  return buildPromptModuleInfo(
-    modulePackageName,
-    mergeTextMessage(text, ancillaryInformation),
-    moduleName,
-  );
-}
 
 /**
  * 设置 Local Storage 处理器
@@ -37,6 +27,7 @@ export function setLocalStorageHandler() {
   logDevelop(
     {},
     buildPromptModuleInfoText(
+      moduleName,
       'setLocalStorageHandler',
       'fill implementation with easy-soft-utility',
     ),

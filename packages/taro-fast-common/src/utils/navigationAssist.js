@@ -4,29 +4,19 @@ import {
 } from '@tarojs/taro';
 
 import {
-  buildPromptModuleInfo,
   isObject,
   isString,
   logDevelop,
-  mergeTextMessage,
   setNavigator,
   setRedirector,
 } from 'easy-soft-utility';
 
-import { modulePackageName } from './definition';
+import { buildPromptModuleInfoText } from './definition';
 
 /**
  * Module Name.
  */
 const moduleName = 'navigationAssist';
-
-function buildPromptModuleInfoText(text, ancillaryInformation = '') {
-  return buildPromptModuleInfo(
-    modulePackageName,
-    mergeTextMessage(text, ancillaryInformation),
-    moduleName,
-  );
-}
 
 function redirectTo(o) {
   if (isString(o)) {
@@ -67,6 +57,7 @@ export function setNavigationHandler() {
   logDevelop(
     {},
     buildPromptModuleInfoText(
+      moduleName,
       'setNavigationHandler',
       'fill implementation with easy-soft-utility',
     ),
