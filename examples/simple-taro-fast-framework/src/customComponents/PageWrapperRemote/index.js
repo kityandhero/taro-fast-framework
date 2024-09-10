@@ -43,64 +43,64 @@ class PageWrapperRemote extends PageWrapperCore {
     clearLocalDataWhenSimulationModeChanged();
   };
 
-  dispatchRefreshSession = (data) => {
-    return this.dispatchApi({
+  getRefreshSessionApiEffect = (data) => {
+    return {
       type: 'session/refreshSession',
       payload: data,
       alias: getRefreshSessionAliasName(),
-    });
+    };
   };
 
-  dispatchGetMetaData = (data) => {
-    return this.dispatchApi({
+  getMetaDataApiEffect = (data) => {
+    return {
       type: 'global/getMetaData',
       payload: data,
       alias: getMetaDataAliasName(),
-    });
+    };
   };
 
-  dispatchCheckTicketValidity = (data) => {
-    return this.dispatchApi({
+  getCheckTicketValidityApiEffect = (data) => {
+    return {
       type: 'entrance/checkTicketValidity',
       payload: data,
       alias: getCheckTicketValidityAliasName(),
-    });
+    };
   };
 
-  dispatchSignInSilent = (data) => {
-    return this.dispatchApi({
+  getSignInSilentApiEffect = (data) => {
+    return {
       type: 'entrance/signInSilent',
       payload: data,
       alias: getSignInSilentAliasName(),
-    });
+    };
   };
 
-  dispatchGetCustomer = (data = {}) => {
-    return this.dispatchApi({
+  getGetCustomerApiEffect = (data = {}) => {
+    return {
       type: 'customer/getCustomer',
       payload: data,
-    });
+    };
   };
 
-  dispatchExchangePhone = (data = {}) => {
-    return this.dispatchApi({
+  getExchangePhoneApiEffect = (data = {}) => {
+    return {
       type: 'session/exchangePhone',
       payload: data,
-    });
+    };
   };
 
-  dispatchRegisterWithWeChat = (data = {}) => {
-    return this.dispatchApi({
+  getRegisterWithWeChatApiEffect = (data = {}) => {
+    return {
       type: 'entrance/registerWithWeChat',
       payload: data,
-    });
+    };
   };
 
-  dispatchRegister = (data = {}) => {
-    return this.dispatchApi({
+  getRegisterApiEffect = (data = {}) => {
+    return {
       type: 'entrance/register',
       payload: data,
-    });
+    };
   };
 }
 

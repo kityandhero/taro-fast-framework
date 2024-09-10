@@ -58,11 +58,11 @@ class PageWrapperCore extends AuthorizationWrapper {
     });
   };
 
-  dispatchGetFullAdministrativeDivisionData = (data = {}) => {
-    return this.dispatchApi({
+  getGetFullAdministrativeDivisionDataApiEffect = (data = {}) => {
+    return {
       type: 'administrativeDivision/singeList',
       payload: data,
-    });
+    };
   };
 
   transformFullAdministrativeDivisionData = () => {

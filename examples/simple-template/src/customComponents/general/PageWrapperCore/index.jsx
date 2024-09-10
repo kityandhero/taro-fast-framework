@@ -102,7 +102,7 @@ class PageWrapperCore extends AuthorizationWrapper {
 
   getSignInApiEffect = (data) => {
     return {
-      type: modelTypeCollection.entranceTypeCollection.signIn,
+      type: modelTypeCollection.entranceTypeCollection.signInWithPhone,
       payload: data,
     };
   };
