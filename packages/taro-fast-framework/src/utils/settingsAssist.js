@@ -437,6 +437,15 @@ export function getCheckTicketValidityAliasName() {
   return checkTicketValidityAliasName || 'checkTicketValidityApiData';
 }
 
+export function getSignInAliasName() {
+  const { signInAliasName } = {
+    signInAliasName: 'signInApiData',
+    ...getApplicationMergeConfig(),
+  };
+
+  return signInAliasName || 'signInApiData';
+}
+
 export function getSignInSilentAliasName() {
   const { signInSilentAliasName } = {
     signInSilentAliasName: 'signInSilentApiData',
@@ -462,4 +471,13 @@ export function getMetaDataAliasName() {
   };
 
   return metaDataAliasName || 'metaDataApiData';
+}
+
+export function getGetCustomerAliasName() {
+  const { getCustomerAliasName } = {
+    getCustomerAliasName: 'getCustomerApiData',
+    ...getApplicationMergeConfig(),
+  };
+
+  return getCustomerAliasName || 'getCustomerApiData';
 }

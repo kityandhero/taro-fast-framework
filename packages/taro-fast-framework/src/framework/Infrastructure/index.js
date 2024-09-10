@@ -1958,6 +1958,14 @@ class Infrastructure extends AbstractComponent {
         return null;
       })
       .catch((error) => {
+        that.logCallTrace(
+          { error },
+          primaryCallName,
+          'setSignInResult',
+          'dispatchSetSignInResult',
+          'catch',
+        );
+
         logException(error);
       });
   };

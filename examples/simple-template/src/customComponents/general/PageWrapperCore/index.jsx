@@ -86,28 +86,28 @@ class PageWrapperCore extends AuthorizationWrapper {
     });
   };
 
-  dispatchRefreshSession = (data) => {
-    return this.dispatchApi({
+  getRefreshSessionApiEffect = (data) => {
+    return {
       type: modelTypeCollection.sessionTypeCollection.refreshSession,
       payload: data,
-    });
+    };
   };
 
-  dispatchGetMetaData = (data) => {
-    return this.dispatchApi({
+  getMetaDataApiEffect = (data) => {
+    return {
       type: modelTypeCollection.globalTypeCollection.getMetaData,
       payload: data,
-    });
-  };
-
-  dispatchSignIn = (data) => {
-    return this.dispatchApi({
-      type: modelTypeCollection.entranceTypeCollection.signInWithPhone,
-      payload: data,
-    });
+    };
   };
 
   getSignInApiEffect = (data) => {
+    return {
+      type: modelTypeCollection.entranceTypeCollection.signIn,
+      payload: data,
+    };
+  };
+
+  getSignInSilentApiEffect = (data) => {
     return {
       type: modelTypeCollection.entranceTypeCollection.signInSilent,
       payload: data,
@@ -134,11 +134,11 @@ class PageWrapperCore extends AuthorizationWrapper {
     });
   };
 
-  dispatchGetCustomer = (data = {}) => {
-    return this.dispatchApi({
-      type: modelTypeCollection.customerTypeCollection.getCustomer,
+  getGetCustomerApiEffect = (data = {}) => {
+    return {
+      type: modelTypeCollection.customerTypeCollection.getCurrentInfo,
       payload: data,
-    });
+    };
   };
 
   reloadRemoteMetaData = () => {

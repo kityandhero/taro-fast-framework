@@ -80,9 +80,11 @@ import {
   getDefaultLatitude,
   getDefaultLongitude,
   getDefaultMetaData,
+  getGetCustomerAliasName,
   getMetaDataAliasName,
   getNavigationToSignInWhenSignInSilentFail,
   getRefreshSessionAliasName,
+  getSignInAliasName,
   getSignInPath,
   getSignInSilentAliasName,
   getSimulationLocation,
@@ -1936,12 +1938,18 @@ class SupplementCore extends Common {
       {},
       primaryCallName,
       'dispatchRefreshSession',
-      'getVerifySession',
+      'getRefreshSessionApiEffect',
     );
 
-    if (this.getVerifySession()) {
-      const info =
-        'dispatchRefreshSession need override, dispatchRefreshSession must return a promise';
+    const { type, payload, alias } = {
+      type: '',
+      payload: null,
+      ...this.getRefreshSessionApiEffect(data),
+      alias: getRefreshSessionAliasName(),
+    };
+
+    if (checkStringIsNullOrWhiteSpace(type)) {
+      const info = 'getRefreshSessionApiEffect type disallow empty';
 
       this.logCallTrace(
         { error: info },
@@ -1954,9 +1962,9 @@ class SupplementCore extends Common {
     }
 
     const o = {
-      type: 'schedulingControl/refreshSession',
-      payload: data,
-      alias: getRefreshSessionAliasName(),
+      type,
+      payload,
+      alias,
     };
 
     this.logCallTrace(
@@ -1967,6 +1975,21 @@ class SupplementCore extends Common {
     );
 
     return this.dispatchApi(o);
+  };
+
+  getRefreshSessionApiEffect = (data) => {
+    const info =
+      'getRefreshSessionApiEffect need override, getRefreshSessionApiEffect must return a object like {type,payload,alias:""}';
+
+    this.logCallTrack(
+      data,
+      primaryCallName,
+      'getRefreshSessionApiEffect',
+      'error',
+      info,
+    );
+
+    throw new Error(info);
   };
 
   refreshSession = ({ callback }) => {
@@ -2925,16 +2948,57 @@ class SupplementCore extends Common {
     });
   }
 
-  // eslint-disable-next-line no-unused-vars
   dispatchSignIn = (data = {}) => {
-    const info =
-      'dispatchSignIn need override, dispatchSignIn must return a promise';
+    this.logCallTrack({ data }, primaryCallName, 'dispatchSignIn');
 
-    this.logCallTrack(
-      { error: info },
+    this.logCallTrace(
+      {},
       primaryCallName,
       'dispatchSignIn',
+      'getSignInApiEffect',
+    );
+
+    const { type, payload, alias } = {
+      type: '',
+      payload: null,
+      ...this.getSignInApiEffect(data),
+      alias: getSignInAliasName(),
+    };
+
+    if (checkStringIsNullOrWhiteSpace(type)) {
+      const info = 'signInApiEffect type disallow empty';
+
+      this.logCallTrace(
+        { error: info },
+        primaryCallName,
+        'dispatchSignIn',
+        'error',
+      );
+
+      throw new Error(info);
+    }
+
+    const o = {
+      type,
+      payload,
+      alias,
+    };
+
+    this.logCallTrace(o, primaryCallName, 'dispatchSignIn', 'dispatchApi');
+
+    return this.dispatchApi(o);
+  };
+
+  getSignInApiEffect = (data) => {
+    const info =
+      'getSignInApiEffect need override, getSignInApiEffect must return a object like {type,payload,alias:""}';
+
+    this.logCallTrack(
+      data,
+      primaryCallName,
+      'getSignInApiEffect',
       'error',
+      info,
     );
 
     throw new Error(info);
@@ -2953,12 +3017,12 @@ class SupplementCore extends Common {
     const { type, payload, alias } = {
       type: '',
       payload: null,
-      ...this.getSignInApiEffect(data),
+      ...this.getSignInSilentApiEffect(data),
       alias: getSignInSilentAliasName(),
     };
 
     if (checkStringIsNullOrWhiteSpace(type)) {
-      const info = 'signInApiEffect type disallow empty';
+      const info = 'signInSilentApiEffect type disallow empty';
 
       this.logCallTrace(
         { error: info },
@@ -2986,12 +3050,17 @@ class SupplementCore extends Common {
     return this.dispatchApi(o);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  getSignInApiEffect = (data) => {
+  getSignInSilentApiEffect = (data) => {
     const info =
-      'getSignInApiEffect need override, getSignInApiEffect must return a object like {type,payload,alias:""}';
+      'getSignInSilentApiEffect need override, getSignInSilentApiEffect must return a object like {type,payload,alias:""}';
 
-    this.logCallTrack({}, primaryCallName, 'getSignInApiData', 'error', info);
+    this.logCallTrack(
+      data,
+      primaryCallName,
+      'getSignInSilentApiEffect',
+      'error',
+      info,
+    );
 
     throw new Error(info);
   };
@@ -3906,7 +3975,10 @@ class SupplementCore extends Common {
       })
       .catch((error) => {
         that.logCallTrace(
-          { error },
+          {
+            error,
+            dispatchSignInSilentParams: data,
+          },
           primaryCallName,
           'signInSilentCore',
           'dispatchSignInSilent',
@@ -4483,20 +4555,60 @@ class SupplementCore extends Common {
   };
 
   dispatchGetCustomer = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchGetCustomer');
+    this.logCallTrack({ data }, primaryCallName, 'dispatchGetCustomer');
 
-    logConfig(
-      'built-in dispatchGetCustomer is a simulation,if you need actual business,you need override it: dispatchGetCustomer = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getCustomer\',payload: data,})"',
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'dispatchGetCustomer',
+      'getGetCustomerApiEffect',
     );
 
+    const { type, payload, alias } = {
+      type: '',
+      payload: null,
+      ...this.getGetCustomerApiEffect(data),
+      alias: getGetCustomerAliasName(),
+    };
+
+    if (checkStringIsNullOrWhiteSpace(type)) {
+      const info = 'getGetCustomerApiEffect type disallow empty';
+
+      this.logCallTrace(
+        {
+          error: info,
+          type,
+          payload,
+          alias,
+        },
+        primaryCallName,
+        'dispatchGetCustomer',
+        'error',
+      );
+
+      throw new Error(info);
+    }
+
     const o = {
-      type: 'schedulingControl/getCustomer',
-      payload: data,
+      type,
+      payload,
+      alias,
     };
 
     this.logCallTrace(o, primaryCallName, 'dispatchGetCustomer', 'dispatchApi');
 
     return this.dispatchApi(o);
+  };
+
+  getGetCustomerApiEffect = (data) => {
+    logConfig(
+      'built-in getGetCustomerApiEffect is a simulation,if you need actual business,you need override it: getGetCustomerApiEffect = (data) => {} and return a object like "return {type: \'schedulingControl/getCustomer\',payload: data,}"',
+    );
+
+    return {
+      type: 'schedulingControl/getCustomer',
+      payload: data,
+    };
   };
 
   getCustomer = ({
@@ -6271,21 +6383,57 @@ class SupplementCore extends Common {
   };
 
   dispatchGetMetaData = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchGetMetaData');
+    this.logCallTrack({ data }, primaryCallName, 'dispatchGetMetaData');
 
-    logConfig(
-      'built-in dispatchGetMetaData is a simulation,if you need actual business,you need override it: dispatchGetMetaData = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/getMetaData\',payload: data,})"',
+    this.logCallTrace(
+      {},
+      primaryCallName,
+      'dispatchGetMetaData',
+      'getMetaDataApiEffect',
     );
 
-    const o = {
-      type: 'schedulingControl/getMetaData',
-      payload: data,
+    const { type, payload, alias } = {
+      type: '',
+      payload: null,
+      ...this.getMetaDataApiEffect(data),
       alias: getMetaDataAliasName(),
+    };
+
+    if (checkStringIsNullOrWhiteSpace(type)) {
+      const info = 'getMetaDataApiEffect type disallow empty';
+
+      this.logCallTrace(
+        { error: info },
+        primaryCallName,
+        'dispatchGetMetaData',
+        'error',
+      );
+
+      throw new Error(info);
+    }
+
+    const o = {
+      type,
+      payload,
+      alias,
     };
 
     this.logCallTrace(o, primaryCallName, 'dispatchGetMetaData', 'dispatchApi');
 
     return this.dispatchApi(o);
+  };
+
+  getMetaDataApiEffect = (data) => {
+    this.logCallTrack(data, primaryCallName, 'getMetaDataApiEffect');
+
+    logConfig(
+      'built-in getMetaDataApiEffect is a simulation,if you need actual business,you need override it: getMetaDataApiEffect = (data) => {} and return a object like "return {type: \'schedulingControl/getMetaData\',payload: data,}"',
+    );
+
+    return {
+      type: 'schedulingControl/getMetaData',
+      payload: data,
+    };
   };
 
   initMetaData = ({
