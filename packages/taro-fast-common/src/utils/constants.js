@@ -187,3 +187,9 @@ export const colorShadow = {
   grey: 'var(--tfc-color-grey-shadow)',
   black: 'var(--tfc-color-black-shadow)',
 };
+
+export const callProcessType = {
+  functionLogic: 10,
+  emptyLogic: 20,
+  renderLogic: 30,
+};

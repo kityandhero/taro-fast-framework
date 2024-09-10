@@ -29,14 +29,14 @@ class Base extends Infrastructure {
    * 执行初始化远程请求
    */
   doLoadRemoteRequest = () => {
-    this.logCallTrack({}, primaryCallName, 'doLoadRemoteRequest');
+    this.logFunctionCallTrack({}, primaryCallName, 'doLoadRemoteRequest');
 
     const { spin } = this;
 
     const that = this;
 
     if (that.pagingLoadMode) {
-      that.logCallTrace(
+      that.logFunctionCallTrack(
         {
           delay: that.loadRemoteRequestDelay,
         },
@@ -58,7 +58,7 @@ class Base extends Infrastructure {
         },
       });
     } else {
-      that.logCallTrace(
+      that.logFunctionCallTrack(
         {
           delay: that.loadRemoteRequestDelay,
         },

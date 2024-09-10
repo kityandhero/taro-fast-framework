@@ -564,9 +564,9 @@ class Infrastructure extends AbstractComponent {
   };
 
   doWorkWhenShow = (callback = null) => {
-    this.logCallTrack({}, primaryCallName, 'doWorkWhenShow');
+    this.logFunctionCallTrack({}, primaryCallName, 'doWorkWhenShow');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'doWorkWhenShow',
@@ -576,7 +576,7 @@ class Infrastructure extends AbstractComponent {
     const checkNeedSignInWhenShowResult = this.checkNeedSignInWhenShow();
 
     if (checkNeedSignInWhenShowResult) {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doWorkWhenShow',
@@ -588,7 +588,7 @@ class Infrastructure extends AbstractComponent {
       if (checkPermissionResult) {
         this.repeatDoWorkWhenShow = false;
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -597,7 +597,7 @@ class Infrastructure extends AbstractComponent {
 
         this.doWorkBeforeAdjustDidMount();
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -606,7 +606,7 @@ class Infrastructure extends AbstractComponent {
 
         this.doWorkAdjustDidMount();
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -615,7 +615,7 @@ class Infrastructure extends AbstractComponent {
 
         this.doWorkAfterAdjustDidMount();
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -624,7 +624,7 @@ class Infrastructure extends AbstractComponent {
 
         this.doWorkAfterDidMount();
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -633,7 +633,7 @@ class Infrastructure extends AbstractComponent {
 
         this.doSimulationFadeSpin(this.prepareLoadRemoteRequest);
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -642,7 +642,7 @@ class Infrastructure extends AbstractComponent {
 
         this.doOtherRemoteRequest();
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -677,11 +677,16 @@ class Infrastructure extends AbstractComponent {
         }
 
         if (isFunction(callback)) {
-          this.logCallTrace({}, primaryCallName, 'doWorkWhenShow', 'callback');
+          this.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'doWorkWhenShow',
+            'callback',
+          );
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'doWorkWhenShow',
@@ -690,7 +695,7 @@ class Infrastructure extends AbstractComponent {
           );
         }
       } else {
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenShow',
@@ -700,7 +705,7 @@ class Infrastructure extends AbstractComponent {
         this.doWorkWhenCheckPermission();
       }
     } else {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doWorkWhenShow',
@@ -716,9 +721,9 @@ class Infrastructure extends AbstractComponent {
       return true;
     }
 
-    this.logCallTrack({}, primaryCallName, 'checkNeedSignInWhenShow');
+    this.logFunctionCallTrack({}, primaryCallName, 'checkNeedSignInWhenShow');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'checkNeedSignInWhenShow',
@@ -737,7 +742,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'doWorkWhenCheckNeedSignInDidMountFail',
@@ -745,7 +750,7 @@ class Infrastructure extends AbstractComponent {
 
     const that = this;
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'doWorkWhenCheckNeedSignInDidMountFail',
@@ -762,7 +767,7 @@ class Infrastructure extends AbstractComponent {
         if (checkStringIsNullOrWhiteSpace(signInPath)) {
           const info = '未配置登录页面signInPath';
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { error: info },
             primaryCallName,
             'doWorkWhenCheckNeedSignInDidMountFail',
@@ -790,7 +795,7 @@ class Infrastructure extends AbstractComponent {
 
         logDebug('set this.repeatDoWorkWhenShow to true');
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenCheckNeedSignInDidMountFail',
@@ -804,7 +809,7 @@ class Infrastructure extends AbstractComponent {
 
       logDebug('set state signInSilentOverlayVisible to true');
 
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'doWorkWhenCheckNeedSignInDidMountFail',
@@ -812,7 +817,7 @@ class Infrastructure extends AbstractComponent {
       );
 
       that.checkSession(() => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWhenCheckNeedSignInDidMountFail',
@@ -827,7 +832,7 @@ class Infrastructure extends AbstractComponent {
 
             logDebug('set state signInSilentOverlayVisible to false');
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'doWorkWhenCheckNeedSignInDidMountFail',
@@ -871,7 +876,7 @@ class Infrastructure extends AbstractComponent {
 
               logDebug('set this.repeatDoWorkWhenShow to true');
 
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 {},
                 primaryCallName,
                 'doWorkWhenCheckNeedSignInDidMountFail',
@@ -891,7 +896,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'doWorkWhenCheckNeedSignInDidMountFailAndNotAutoRedirectToSignIn',
@@ -903,13 +908,18 @@ class Infrastructure extends AbstractComponent {
   };
 
   checkPermission = () => {
-    this.logCallTrack({}, primaryCallName, 'checkPermission');
+    this.logFunctionCallTrack({}, primaryCallName, 'checkPermission');
 
     if (checkStringIsNullOrWhiteSpace(this.componentAuthority)) {
       return true;
     }
 
-    this.logCallTrace({}, primaryCallName, 'checkPermission', 'checkAuthority');
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'checkPermission',
+      'checkAuthority',
+    );
 
     if (this.checkAuthority(this.componentAuthority)) {
       return true;
@@ -923,7 +933,11 @@ class Infrastructure extends AbstractComponent {
   doWorkWhenCheckPermissionFail = () => {
     this.repeatDoWorkWhenShow = true;
 
-    this.logCallTrack({}, primaryCallName, 'doWorkWhenCheckPermissionFail');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenCheckPermissionFail',
+    );
 
     const text = `无交互权限: ${this.componentAuthority || ''}`;
 
@@ -941,7 +955,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   goToSignIn = () => {
-    this.logCallTrack({}, primaryCallName, 'goToSignIn');
+    this.logFunctionCallTrack({}, primaryCallName, 'goToSignIn');
 
     const signInPath = getSignInPath();
 
@@ -953,7 +967,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   doShowTask = () => {
-    this.logCallTrack({}, primaryCallName, 'doShowTask');
+    this.logFunctionCallTrack({}, primaryCallName, 'doShowTask');
 
     logDebug(
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
@@ -965,12 +979,17 @@ class Infrastructure extends AbstractComponent {
       );
 
       if (this.repeatDoWorkWhenShow) {
-        this.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkWhenShow');
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+        );
 
         this.doWorkWhenShow();
       }
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doShowTask',
@@ -979,7 +998,7 @@ class Infrastructure extends AbstractComponent {
 
       this.adjustInternalDataOnRepeatedShow();
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doShowTask',
@@ -988,7 +1007,7 @@ class Infrastructure extends AbstractComponent {
 
       this.doWorkWhenRepeatedShow();
     } else {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doShowTask',
@@ -1002,21 +1021,31 @@ class Infrastructure extends AbstractComponent {
       logDebug('set this.firstShowHasTriggered to true');
     }
 
-    this.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkWhenEveryShow');
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doShowTask',
+      'doWorkWhenEveryShow',
+    );
 
     this.doWorkWhenEveryShow();
 
-    this.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkAfterShow');
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doShowTask',
+      'doWorkAfterShow',
+    );
 
     this.doWorkAfterShow();
   };
 
   componentWillUnmount() {
-    this.logCallTrack({}, primaryCallName, 'componentWillUnmount');
+    this.logFunctionCallTrack({}, primaryCallName, 'componentWillUnmount');
 
     clearTimeout(this.capsulePromptTimer);
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'componentWillUnmount',
@@ -1025,7 +1054,7 @@ class Infrastructure extends AbstractComponent {
 
     this.doWorkBeforeUnmount();
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'componentWillUnmount',
@@ -1038,7 +1067,7 @@ class Infrastructure extends AbstractComponent {
   }
 
   getDispatch = () => {
-    this.logCallTrack({}, primaryCallName, 'getDispatch');
+    this.logFunctionCallTrack({}, primaryCallName, 'getDispatch');
 
     const { dispatch } = this.props;
 
@@ -1046,7 +1075,13 @@ class Infrastructure extends AbstractComponent {
       const info =
         'dispatch is null, please set dispatch in props or override getDispatch,if use dva, please connect a model ';
 
-      this.logCallTrace({}, primaryCallName, 'getDispatch', 'error', info);
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'getDispatch',
+        'error',
+        info,
+      );
 
       throw new Error(info);
     }
@@ -1058,7 +1093,7 @@ class Infrastructure extends AbstractComponent {
    * 执行模拟渐显加载效果, 该方法不要覆写
    */
   doSimulationFadeSpin = (callback = null) => {
-    this.logCallTrack({}, primaryCallName, 'doSimulationFadeSpin');
+    this.logFunctionCallTrack({}, primaryCallName, 'doSimulationFadeSpin');
 
     const { spin } = this.state;
 
@@ -1071,7 +1106,7 @@ class Infrastructure extends AbstractComponent {
     }
 
     if (isFunction(callback)) {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'doSimulationFadeSpin',
@@ -1080,7 +1115,7 @@ class Infrastructure extends AbstractComponent {
 
       callback();
     } else {
-      that.logCallTrace(
+      that.logEmptyCallTrace(
         {},
         primaryCallName,
         'doSimulationFadeSpin',
@@ -1093,10 +1128,10 @@ class Infrastructure extends AbstractComponent {
   prepareLoadRemoteRequest = () => {
     const that = this;
 
-    that.logCallTrack({}, primaryCallName, 'prepareLoadRemoteRequest');
+    that.logFunctionCallTrack({}, primaryCallName, 'prepareLoadRemoteRequest');
 
     if (that.ignoreSessionRelatedLogic) {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'prepareLoadRemoteRequest',
@@ -1105,7 +1140,7 @@ class Infrastructure extends AbstractComponent {
 
       that.prepareLoadRemoteRequestOnlyMetaData();
     } else {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'prepareLoadRemoteRequest',
@@ -1119,7 +1154,7 @@ class Infrastructure extends AbstractComponent {
   prepareLoadRemoteRequestOnlyMetaData = () => {
     const that = this;
 
-    that.logCallTrack(
+    that.logFunctionCallTrack(
       {},
       primaryCallName,
       'prepareLoadRemoteRequestOnlyMetaData',
@@ -1129,7 +1164,7 @@ class Infrastructure extends AbstractComponent {
       `ignoreSessionRelatedLogic is true; ignore checkTicket, checkTicketValidity, signInSilent and so on`,
     );
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'prepareLoadRemoteRequestOnlyMetaData',
@@ -1141,7 +1176,7 @@ class Infrastructure extends AbstractComponent {
       force: !!that.initMetaDataForce,
       callback: () => {
         if (that.loadRemoteRequestAfterMount) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'prepareLoadRemoteRequestOnlyMetaData',
@@ -1153,7 +1188,7 @@ class Infrastructure extends AbstractComponent {
           that.doLoadRemoteRequest();
         }
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'prepareLoadRemoteRequestOnlyMetaData',
@@ -1167,7 +1202,7 @@ class Infrastructure extends AbstractComponent {
     });
 
     if (that.useFullAdministrativeDivisionSelector) {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'prepareLoadRemoteRequestOnlyMetaData',
@@ -1176,7 +1211,7 @@ class Infrastructure extends AbstractComponent {
 
       that.initFullAdministrativeDivisionData({
         callback: (l) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             l,
             primaryCallName,
             'prepareLoadRemoteRequestOnlyMetaData',
@@ -1194,13 +1229,13 @@ class Infrastructure extends AbstractComponent {
   prepareLoadRemoteRequestWithCheckSession = () => {
     const that = this;
 
-    that.logCallTrack(
+    that.logFunctionCallTrack(
       {},
       primaryCallName,
       'prepareLoadRemoteRequestWithCheckSession',
     );
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'prepareLoadRemoteRequestWithCheckSession',
@@ -1208,7 +1243,7 @@ class Infrastructure extends AbstractComponent {
     );
 
     that.checkSession(() => {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'prepareLoadRemoteRequestWithCheckSession',
@@ -1222,7 +1257,7 @@ class Infrastructure extends AbstractComponent {
         force: !!that.initMetaDataForce,
         callback: () => {
           if (that.verifyTicket) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'prepareLoadRemoteRequestWithCheckSession',
@@ -1236,7 +1271,7 @@ class Infrastructure extends AbstractComponent {
             that.checkTicketValidity({
               callback: () => {
                 if (that.loadRemoteRequestAfterMount) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     {},
                     primaryCallName,
                     'prepareLoadRemoteRequestWithCheckSession',
@@ -1252,7 +1287,7 @@ class Infrastructure extends AbstractComponent {
                   that.doLoadRemoteRequest();
                 }
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   {},
                   primaryCallName,
                   'prepareLoadRemoteRequestWithCheckSession',
@@ -1283,7 +1318,7 @@ class Infrastructure extends AbstractComponent {
       });
 
       if (that.useFullAdministrativeDivisionSelector) {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'prepareLoadRemoteRequestWithCheckSession',
@@ -1294,7 +1329,7 @@ class Infrastructure extends AbstractComponent {
 
         that.initFullAdministrativeDivisionData({
           callback: (l) => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               l,
               primaryCallName,
               'prepareLoadRemoteRequestWithCheckSession',
@@ -1317,9 +1352,14 @@ class Infrastructure extends AbstractComponent {
    * @param {*} callback
    */
   checkSession = (callback) => {
-    this.logCallTrack({}, primaryCallName, 'checkSession');
+    this.logFunctionCallTrack({}, primaryCallName, 'checkSession');
 
-    this.logCallTrace({}, primaryCallName, 'checkSession', 'getEnvironment');
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'checkSession',
+      'getEnvironment',
+    );
 
     const environment = this.getEnvironment();
 
@@ -1334,11 +1374,16 @@ class Infrastructure extends AbstractComponent {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrack({}, primaryCallName, 'checkSession', 'callback');
+          this.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'checkSession',
+            'callback',
+          );
 
           callback();
         } else {
-          this.logCallTrack(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkSession',
@@ -1354,11 +1399,16 @@ class Infrastructure extends AbstractComponent {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrack({}, primaryCallName, 'checkSession', 'callback');
+          this.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'checkSession',
+            'callback',
+          );
 
           callback();
         } else {
-          this.logCallTrack(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkSession',
@@ -1374,11 +1424,16 @@ class Infrastructure extends AbstractComponent {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrack({}, primaryCallName, 'checkSession', 'callback');
+          this.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'checkSession',
+            'callback',
+          );
 
           callback();
         } else {
-          this.logCallTrack(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkSession',
@@ -1394,11 +1449,16 @@ class Infrastructure extends AbstractComponent {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrack({}, primaryCallName, 'checkSession', 'callback');
+          this.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'checkSession',
+            'callback',
+          );
 
           callback();
         } else {
-          this.logCallTrack(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkSession',
@@ -1416,7 +1476,7 @@ class Infrastructure extends AbstractComponent {
     const that = this;
 
     if (sessionRefreshing) {
-      that.logCallTrack(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'checkSession',
@@ -1425,7 +1485,7 @@ class Infrastructure extends AbstractComponent {
 
       that.checkSessionWhenSessionRefreshing({
         callback: () => {
-          that.logCallTrack(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkSession',
@@ -1443,7 +1503,7 @@ class Infrastructure extends AbstractComponent {
       if ((session || '') === '') {
         logDebug('session is empty');
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkSession',
@@ -1452,7 +1512,7 @@ class Infrastructure extends AbstractComponent {
 
         that.refreshSession({ callback });
       } else {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkSession',
@@ -1464,7 +1524,7 @@ class Infrastructure extends AbstractComponent {
             logDebug('session is effective, ignore session refresh');
 
             if (isFunction(callback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 {},
                 primaryCallName,
                 'checkSession',
@@ -1475,7 +1535,7 @@ class Infrastructure extends AbstractComponent {
 
               callback();
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'checkSession',
@@ -1489,7 +1549,7 @@ class Infrastructure extends AbstractComponent {
           fail(data) {
             logDebug(data, 'session is expired');
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkSession',
@@ -1506,7 +1566,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   checkSessionWhenSessionRefreshing({ callback, timeTotal = 0 }) {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         timeTotal,
       },
@@ -1518,7 +1578,7 @@ class Infrastructure extends AbstractComponent {
       setSessionRefreshing(false);
 
       if (isFunction(callback)) {
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkSessionWhenSessionRefreshing',
@@ -1527,7 +1587,7 @@ class Infrastructure extends AbstractComponent {
 
         callback();
       } else {
-        this.logCallTrace(
+        this.logEmptyCallTrace(
           {},
           primaryCallName,
           'checkSessionWhenSessionRefreshing',
@@ -1547,7 +1607,7 @@ class Infrastructure extends AbstractComponent {
       const sessionRefreshingAfterSleep = getSessionRefreshing();
 
       if (sessionRefreshingAfterSleep) {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {
             timeTotal: timeTotal + 100,
           },
@@ -1562,7 +1622,7 @@ class Infrastructure extends AbstractComponent {
         });
       } else {
         if (isFunction(callback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkSessionWhenSessionRefreshing',
@@ -1571,7 +1631,7 @@ class Infrastructure extends AbstractComponent {
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkSessionWhenSessionRefreshing',
@@ -1588,7 +1648,7 @@ class Infrastructure extends AbstractComponent {
     force: forceValue = false,
     callback = null,
   }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         data,
         force: forceValue,
@@ -1598,11 +1658,16 @@ class Infrastructure extends AbstractComponent {
     );
 
     if (isFunction(callback)) {
-      this.logCallTrace({}, primaryCallName, 'initMetaData', 'callback');
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'initMetaData',
+        'callback',
+      );
 
       callback();
     } else {
-      this.logCallTrace(
+      this.logEmptyCallTrace(
         {},
         primaryCallName,
         'initMetaData',
@@ -1619,14 +1684,14 @@ class Infrastructure extends AbstractComponent {
     force: forceValue = false,
     callback = null,
   }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'initFullAdministrativeDivisionData',
     );
 
     if (isFunction(callback)) {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'initFullAdministrativeDivisionData',
@@ -1635,7 +1700,7 @@ class Infrastructure extends AbstractComponent {
 
       callback();
     } else {
-      this.logCallTrace(
+      this.logEmptyCallTrace(
         {},
         primaryCallName,
         'initFullAdministrativeDivisionData',
@@ -1646,7 +1711,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   doAfterInitFullAdministrativeDivisionData = () => {
-    this.logCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doAfterInitFullAdministrativeDivisionData',
@@ -1659,13 +1724,13 @@ class Infrastructure extends AbstractComponent {
    * @param {*} callback
    */
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
-    this.logCallTrack({}, primaryCallName, 'checkTicketValidity');
+    this.logFunctionCallTrack({}, primaryCallName, 'checkTicketValidity');
 
     if (signInSilentFailCallback) {
       const info =
         'signInSilentFailCallback is not supported in base class Infrastructure';
 
-      this.logCallTrack(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'checkTicketValidity',
@@ -1676,11 +1741,16 @@ class Infrastructure extends AbstractComponent {
     }
 
     if (isFunction(callback)) {
-      this.logCallTrace({}, primaryCallName, 'checkTicketValidity', 'callback');
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'checkTicketValidity',
+        'callback',
+      );
 
       callback();
     } else {
-      this.logCallTrace(
+      this.logEmptyCallTrace(
         {},
         primaryCallName,
         'checkTicketValidity',
@@ -1691,7 +1761,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest = () => {
-    this.logCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest',
@@ -1705,7 +1775,7 @@ class Infrastructure extends AbstractComponent {
    */
   // eslint-disable-next-line no-unused-vars
   dispatchSetTicketValidityProcessDetection = (data) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'dispatchSetTicketValidityProcessDetection',
@@ -1716,7 +1786,7 @@ class Infrastructure extends AbstractComponent {
       payload: !!data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchSetTicketValidityProcessDetection',
@@ -1727,7 +1797,11 @@ class Infrastructure extends AbstractComponent {
   };
 
   getTicketValidityProcessDetection = () => {
-    this.logCallTrack({}, primaryCallName, 'getTicketValidityProcessDetection');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'getTicketValidityProcessDetection',
+    );
 
     const {
       schedulingControl: { ticketValidityProcessDetection },
@@ -1739,9 +1813,13 @@ class Infrastructure extends AbstractComponent {
   setTicketValidityProcessDetection = ({ data, callback }) => {
     const that = this;
 
-    this.logCallTrack({}, primaryCallName, 'setTicketValidityProcessDetection');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'setTicketValidityProcessDetection',
+    );
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'setTicketValidityProcessDetection',
@@ -1752,7 +1830,7 @@ class Infrastructure extends AbstractComponent {
       .dispatchSetTicketValidityProcessDetection(!!data)
       .then(() => {
         if (isFunction(callback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'setTicketValidityProcessDetection',
@@ -1764,7 +1842,7 @@ class Infrastructure extends AbstractComponent {
           // eslint-disable-next-line promise/no-callback-in-promise
           callback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'setTicketValidityProcessDetection',
@@ -1783,20 +1861,29 @@ class Infrastructure extends AbstractComponent {
   };
 
   dispatchSetSignInProcessDetection = (data) => {
-    this.logCallTrack({}, primaryCallName, 'dispatchSetSignInProcessDetection');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'dispatchSetSignInProcessDetection',
+    );
 
     const o = {
       type: 'schedulingControl/setSignInProcessDetection',
       payload: !!data,
     };
 
-    this.logCallTrace(o, primaryCallName, 'doShowTask', 'doWorkWhenFirstShow');
+    this.logFunctionCallTrace(
+      o,
+      primaryCallName,
+      'doShowTask',
+      'doWorkWhenFirstShow',
+    );
 
     return this.dispatchApi(o);
   };
 
   getSignInProcessDetection = () => {
-    this.logCallTrack({}, primaryCallName, 'getSignInProcessDetection');
+    this.logFunctionCallTrack({}, primaryCallName, 'getSignInProcessDetection');
 
     const {
       schedulingControl: { signInProcessDetection },
@@ -1808,9 +1895,13 @@ class Infrastructure extends AbstractComponent {
   setSignInProcessDetection = ({ data, callback }) => {
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'setSignInProcessDetection');
+    that.logFunctionCallTrack(
+      { data },
+      primaryCallName,
+      'setSignInProcessDetection',
+    );
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'setSignInProcessDetection',
@@ -1821,7 +1912,7 @@ class Infrastructure extends AbstractComponent {
       .dispatchSetSignInProcessDetection(!!data)
       .then(() => {
         if (isFunction(callback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'setSignInProcessDetection',
@@ -1832,7 +1923,7 @@ class Infrastructure extends AbstractComponent {
           // eslint-disable-next-line promise/no-callback-in-promise
           callback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'setSignInProcessDetection',
@@ -1845,7 +1936,7 @@ class Infrastructure extends AbstractComponent {
         return null;
       })
       .catch((error) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { error },
           primaryCallName,
           'setSignInProcessDetection',
@@ -1858,14 +1949,14 @@ class Infrastructure extends AbstractComponent {
   };
 
   dispatchSetSignInResult = (data) => {
-    this.logCallTrack({}, primaryCallName, 'dispatchSetSignInResult');
+    this.logFunctionCallTrack({}, primaryCallName, 'dispatchSetSignInResult');
 
     const o = {
       type: 'schedulingControl/setSignInResult',
       payload: data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchSetSignInResult',
@@ -1876,9 +1967,9 @@ class Infrastructure extends AbstractComponent {
   };
 
   checkSignInSuccess = () => {
-    this.logCallTrack({}, primaryCallName, 'checkSignInSuccess');
+    this.logFunctionCallTrack({}, primaryCallName, 'checkSignInSuccess');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'checkSignInSuccess',
@@ -1887,7 +1978,7 @@ class Infrastructure extends AbstractComponent {
 
     const verifySignInResult = getVerifySignInResult();
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'checkSignInSuccess',
@@ -1900,7 +1991,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   getSignInResult = () => {
-    this.logCallTrack({}, primaryCallName, 'getSignInResult');
+    this.logFunctionCallTrack({}, primaryCallName, 'getSignInResult');
 
     const {
       schedulingControl: { signInResult },
@@ -1912,7 +2003,7 @@ class Infrastructure extends AbstractComponent {
   setSignInResult = ({ data, callback }) => {
     const that = this;
 
-    that.logCallTrack(
+    that.logFunctionCallTrack(
       {
         data,
         info: `sign in result is ${data}, it mean ${getSignInResultDescription(data)} `,
@@ -1921,7 +2012,7 @@ class Infrastructure extends AbstractComponent {
       'setSignInResult',
     );
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       { data },
       primaryCallName,
       'setSignInResult',
@@ -1932,7 +2023,7 @@ class Infrastructure extends AbstractComponent {
       .dispatchSetSignInResult(data)
       .then(() => {
         if (isFunction(callback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'setSignInResult',
@@ -1944,7 +2035,7 @@ class Infrastructure extends AbstractComponent {
           // eslint-disable-next-line promise/no-callback-in-promise
           callback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'setSignInResult',
@@ -1958,7 +2049,7 @@ class Infrastructure extends AbstractComponent {
         return null;
       })
       .catch((error) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { error },
           primaryCallName,
           'setSignInResult',
@@ -1971,14 +2062,14 @@ class Infrastructure extends AbstractComponent {
   };
 
   dispatchLocationResult = (data = defaultDispatchLocationResultData) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchLocationResult');
+    this.logFunctionCallTrack(data, primaryCallName, 'dispatchLocationResult');
 
     const o = {
       type: 'schedulingControl/setLocationResult',
       payload: data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchLocationResult',
@@ -1993,7 +2084,7 @@ class Infrastructure extends AbstractComponent {
       return this.privateCache.verifySession;
     }
 
-    this.logCallTrack({}, primaryCallName, 'getVerifySession');
+    this.logFunctionCallTrack({}, primaryCallName, 'getVerifySession');
 
     if (this.ignoreSessionRelatedLogic) {
       logInfo(
@@ -2002,7 +2093,7 @@ class Infrastructure extends AbstractComponent {
 
       this.privateCache.verifySession = false;
     } else {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'getVerifySession',
@@ -2072,7 +2163,7 @@ class Infrastructure extends AbstractComponent {
       return this.privateCache.verifyTicket;
     }
 
-    this.logCallTrack({}, primaryCallName, 'getVerifyTicket');
+    this.logFunctionCallTrack({}, primaryCallName, 'getVerifyTicket');
 
     if (this.ignoreSessionRelatedLogic) {
       logInfo(
@@ -2081,7 +2172,7 @@ class Infrastructure extends AbstractComponent {
 
       this.privateCache.verifyTicket = false;
     } else {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'getVerifyTicket',
@@ -2149,7 +2240,7 @@ class Infrastructure extends AbstractComponent {
       return this.privateCache.verifyTicketValidity;
     }
 
-    this.logCallTrack({}, primaryCallName, 'getVerifyTicketValidity');
+    this.logFunctionCallTrack({}, primaryCallName, 'getVerifyTicketValidity');
 
     if (this.ignoreSessionRelatedLogic) {
       logInfo(
@@ -2158,7 +2249,7 @@ class Infrastructure extends AbstractComponent {
 
       this.privateCache.verifyTicketValidity = false;
     } else {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'getVerifyTicketValidity',
@@ -2230,9 +2321,9 @@ class Infrastructure extends AbstractComponent {
       return this.privateCache.enablePullDownRefresh;
     }
 
-    this.logCallTrack({}, primaryCallName, 'getEnablePullDownRefresh');
+    this.logFunctionCallTrack({}, primaryCallName, 'getEnablePullDownRefresh');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'getEnablePullDownRefresh',
@@ -2291,9 +2382,9 @@ class Infrastructure extends AbstractComponent {
   };
 
   getLocationResult() {
-    this.logCallTrack({}, primaryCallName, 'getLocationResult');
+    this.logFunctionCallTrack({}, primaryCallName, 'getLocationResult');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'getLocationResult',
@@ -2308,9 +2399,9 @@ class Infrastructure extends AbstractComponent {
   setLocationResult({ data, callback = null }) {
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'setLocationResult');
+    that.logFunctionCallTrack({ data }, primaryCallName, 'setLocationResult');
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'setLocationResult',
@@ -2320,7 +2411,7 @@ class Infrastructure extends AbstractComponent {
     this.dispatchLocationResult(data)
       .then((d) => {
         if (isFunction(callback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'setLocationResult',
@@ -2332,7 +2423,7 @@ class Infrastructure extends AbstractComponent {
           // eslint-disable-next-line promise/no-callback-in-promise
           callback(d);
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'setLocationResult',
@@ -2353,14 +2444,14 @@ class Infrastructure extends AbstractComponent {
   getCurrentLocation = ({ callback = null }) => {
     const that = this;
 
-    that.logCallTrack({}, primaryCallName, 'getCurrentLocation');
+    that.logFunctionCallTrack({}, primaryCallName, 'getCurrentLocation');
 
     const map = getMap();
 
     if ((map || null) == null) {
       logInfo('map is null');
 
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'getCurrentLocation',
@@ -2370,7 +2461,7 @@ class Infrastructure extends AbstractComponent {
       that.obtainLocation({
         successCallback: ({ map: mapSource }) => {
           if (isFunction(callback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               { map },
               primaryCallName,
               'getCurrentLocation',
@@ -2383,7 +2474,7 @@ class Infrastructure extends AbstractComponent {
               map: mapSource,
             });
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'getCurrentLocation',
@@ -2402,10 +2493,10 @@ class Infrastructure extends AbstractComponent {
     } else {
       logInfo('map is not null');
 
-      that.logCallTrack({}, primaryCallName, 'getCurrentLocation');
+      that.logFunctionCallTrace({}, primaryCallName, 'getCurrentLocation');
 
       if (isFunction(callback)) {
-        that.logCallTrack(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'getCurrentLocation',
@@ -2416,7 +2507,7 @@ class Infrastructure extends AbstractComponent {
           map,
         });
       } else {
-        that.logCallTrack(
+        that.logEmptyCallTrace(
           {},
           primaryCallName,
           'getCurrentLocation',
@@ -2430,9 +2521,9 @@ class Infrastructure extends AbstractComponent {
   getLocationWeather = ({ callback = null }) => {
     const that = this;
 
-    that.logCallTrack({}, primaryCallName, 'getLocationWeather');
+    that.logFunctionCallTrack({}, primaryCallName, 'getLocationWeather');
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'getLocationWeather',
@@ -2441,7 +2532,7 @@ class Infrastructure extends AbstractComponent {
 
     that.getCurrentLocation({
       callback: ({ map: mapSource }) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'getLocationWeather',
@@ -2459,7 +2550,11 @@ class Infrastructure extends AbstractComponent {
   };
 
   getLocationWeatherCore = ({ data, callback = null }) => {
-    this.logCallTrack({ data }, primaryCallName, 'getLocationWeatherCore');
+    this.logFunctionCallTrack(
+      { data },
+      primaryCallName,
+      'getLocationWeatherCore',
+    );
 
     const {
       address_component: { province, city },
@@ -2471,7 +2566,7 @@ class Infrastructure extends AbstractComponent {
       ...data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'getLocationWeatherCore',
@@ -2490,21 +2585,21 @@ class Infrastructure extends AbstractComponent {
   getWeather = ({ data = {}, callback = null }) => {
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'getWeather');
+    that.logFunctionCallTrack({ data }, primaryCallName, 'getWeather');
 
     const o = {
       type: 'schedulingControl/getWeather',
       payload: data,
     };
 
-    that.logCallTrace(o, primaryCallName, 'getWeather', 'dispatchApi');
+    that.logFunctionCallTrace(o, primaryCallName, 'getWeather', 'dispatchApi');
 
     return this.dispatchApi(o)
       .then((remoteData) => {
         const { weather } = remoteData;
 
         if (isFunction(callback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             weather,
             primaryCallName,
             'getWeather',
@@ -2516,7 +2611,7 @@ class Infrastructure extends AbstractComponent {
           // eslint-disable-next-line promise/no-callback-in-promise
           callback(weather);
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'getWeather',
@@ -2536,7 +2631,7 @@ class Infrastructure extends AbstractComponent {
 
   // eslint-disable-next-line no-unused-vars
   reverseGeocoder = ({ location, success, fail }) => {
-    this.logCallTrack(
+    this.logEmptyCallTrack(
       { location },
       primaryCallName,
       'reverseGeocoder',
@@ -2545,7 +2640,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   setCurrentInfo = () => {
-    this.logCallTrack({}, primaryCallName, 'setCurrentInfo');
+    this.logFunctionCallTrack({}, primaryCallName, 'setCurrentInfo');
 
     const { path, params } = this.currentInstance.router;
 
@@ -2567,9 +2662,9 @@ class Infrastructure extends AbstractComponent {
     customStyle = {},
     className = '',
   }) => {
-    this.logCallTrack({ message }, primaryCallName, 'notifyMessage');
+    this.logFunctionCallTrack({ message }, primaryCallName, 'notifyMessage');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'notifyMessage',
@@ -2594,9 +2689,9 @@ class Infrastructure extends AbstractComponent {
   onRefresh = () => {
     const that = this;
 
-    that.logCallTrack({}, primaryCallName, 'onRefresh');
+    that.logFunctionCallTrack({}, primaryCallName, 'onRefresh');
 
-    that.logCallTrace({}, primaryCallName, 'onRefresh', 'reloadData');
+    that.logFunctionCallTrace({}, primaryCallName, 'onRefresh', 'reloadData');
 
     that.reloadData({
       callback: () => {
@@ -2611,7 +2706,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   existLoadApi = () => {
-    this.logCallTrack({}, primaryCallName, 'existLoadApi');
+    this.logFunctionCallTrack({}, primaryCallName, 'existLoadApi');
 
     const { loadApiPath } = this.state;
 
@@ -2619,29 +2714,34 @@ class Infrastructure extends AbstractComponent {
   };
 
   onLowerLoad = () => {
-    this.logCallTrack({}, primaryCallName, 'onLowerLoad');
+    this.logFunctionCallTrack({}, primaryCallName, 'onLowerLoad');
 
-    this.logCallTrace({}, primaryCallName, 'onLowerLoad', 'loadNextPage');
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'onLowerLoad',
+      'loadNextPage',
+    );
 
     this.loadNextPage({});
   };
 
   // eslint-disable-next-line no-unused-vars
   loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {
-    this.logCallTrack({}, primaryCallName, 'loadNextPage', emptyLogic);
+    this.logEmptyCallTrack({}, primaryCallName, 'loadNextPage', emptyLogic);
   };
 
   // eslint-disable-next-line no-unused-vars
   reloadData = ({ otherState, callback = null, delay = 0 }) => {
-    this.logCallTrack({}, primaryCallName, 'reloadData', emptyLogic);
+    this.logEmptyCallTrack({}, primaryCallName, 'reloadData', emptyLogic);
   };
 
   showScrollRefreshing = () => {
-    this.logCallTrack({}, primaryCallName, 'showScrollRefreshing');
+    this.logFunctionCallTrack({}, primaryCallName, 'showScrollRefreshing');
 
     const { firstLoadSuccess, dataLoading, reloading } = this.state;
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'showScrollRefreshing',
@@ -2660,11 +2760,16 @@ class Infrastructure extends AbstractComponent {
   };
 
   showLowerLoading = () => {
-    this.logCallTrack({}, primaryCallName, 'showLowerLoading');
+    this.logFunctionCallTrack({}, primaryCallName, 'showLowerLoading');
 
     const { firstLoadSuccess, dataLoading, reloading } = this.state;
 
-    this.logCallTrace({}, primaryCallName, 'showLowerLoading', 'existLoadApi');
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'showLowerLoading',
+      'existLoadApi',
+    );
 
     return (
       (this.loadRemoteRequestAfterMount &&
@@ -2682,7 +2787,7 @@ class Infrastructure extends AbstractComponent {
    * @returns bool
    */
   judgeInitialActivityIndicatorVisible = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'judgeInitialActivityIndicatorVisible',
@@ -2698,7 +2803,11 @@ class Infrastructure extends AbstractComponent {
    * @returns bool
    */
   judgeEmptyPlaceholderVisible = () => {
-    this.logCallTrack({}, primaryCallName, 'judgeEmptyPlaceholderVisible');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'judgeEmptyPlaceholderVisible',
+    );
 
     const { firstLoadSuccess, metaListData } = this.state;
 
@@ -2738,7 +2847,7 @@ class Infrastructure extends AbstractComponent {
     onImageClick = null,
     onDescriptionClick = null,
   }) => {
-    this.logCallTrack({}, primaryCallName, 'buildEmptyPlaceholder');
+    this.logRenderCallTrack({}, primaryCallName, 'buildEmptyPlaceholder');
 
     return buildEmptyPlaceholderCore({
       icon,
@@ -2761,7 +2870,7 @@ class Infrastructure extends AbstractComponent {
     type = 'comet',
     description = '加载中',
   }) => {
-    this.logCallTrack(
+    this.logRenderCallTrack(
       {
         type,
         description,
@@ -2777,7 +2886,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   buildUpperBox = () => {
-    this.logCallTrack({}, primaryCallName, 'buildUpperBox', emptyLogic);
+    this.logRenderCallTrack({}, primaryCallName, 'buildUpperBox', emptyLogic);
 
     return null;
   };
@@ -2787,13 +2896,18 @@ class Infrastructure extends AbstractComponent {
    * @returns bool
    */
   judgeNeedNextLoad = () => {
-    this.logCallTrack({}, primaryCallName, 'judgeNeedNextLoad');
+    this.logFunctionCallTrack({}, primaryCallName, 'judgeNeedNextLoad');
 
     return true;
   };
 
   buildRefreshingBox = () => {
-    this.logCallTrack({}, primaryCallName, 'buildRefreshingBox', emptyLogic);
+    this.logRenderCallTrack(
+      {},
+      primaryCallName,
+      'buildRefreshingBox',
+      emptyLogic,
+    );
 
     return null;
   };
@@ -2803,7 +2917,7 @@ class Infrastructure extends AbstractComponent {
    * @returns
    */
   buildLowerLoadingSuspendBox = () => {
-    this.logCallTrack(
+    this.logRenderCallTrack(
       {},
       primaryCallName,
       'buildLowerLoadingSuspendBox',
@@ -2821,7 +2935,7 @@ class Infrastructure extends AbstractComponent {
    */
   // eslint-disable-next-line no-unused-vars
   buildLowerLoadingFooterBox = (lowerLoading, needNextLoad) => {
-    this.logCallTrack(
+    this.logRenderCallTrack(
       {},
       primaryCallName,
       'buildLowerLoadingFooterBox',
@@ -2832,9 +2946,13 @@ class Infrastructure extends AbstractComponent {
   };
 
   buildLowerLoadingFooterBoxElement = () => {
-    this.logCallTrack({}, primaryCallName, 'buildLowerLoadingFooterBoxElement');
+    this.logRenderCallTrack(
+      {},
+      primaryCallName,
+      'buildLowerLoadingFooterBoxElement',
+    );
 
-    this.logCallTrace(
+    this.logRenderCallTrace(
       {},
       primaryCallName,
       'buildLowerLoadingFooterBoxElement',
@@ -2848,19 +2966,24 @@ class Infrastructure extends AbstractComponent {
   };
 
   getEnableBackTop = () => {
-    this.logCallTrack({}, primaryCallName, 'getEnableBackTop');
+    this.logFunctionCallTrack({}, primaryCallName, 'getEnableBackTop');
 
     return !this.scrollViewMode && this.enableBackTop;
   };
 
   buildHeadNavigation = () => {
-    this.logCallTrack({}, primaryCallName, 'buildHeadNavigation', emptyLogic);
+    this.logRenderCallTrack(
+      {},
+      primaryCallName,
+      'buildHeadNavigation',
+      emptyLogic,
+    );
 
     return null;
   };
 
   buildSimulationFadeSpinLoading = () => {
-    this.logCallTrack(
+    this.logRenderCallTrack(
       {},
       primaryCallName,
       'buildSimulationFadeSpinLoading',
@@ -2871,13 +2994,18 @@ class Infrastructure extends AbstractComponent {
   };
 
   buildCapsulePrompt = () => {
-    this.logCallTrack({}, primaryCallName, 'buildCapsulePrompt', emptyLogic);
+    this.logRenderCallTrack(
+      {},
+      primaryCallName,
+      'buildCapsulePrompt',
+      emptyLogic,
+    );
 
     return null;
   };
 
   buildCapsulePromptWrapper = () => {
-    this.logCallTrack({}, primaryCallName, 'buildCapsulePromptWrapper');
+    this.logRenderCallTrack({}, primaryCallName, 'buildCapsulePromptWrapper');
 
     const { initCapsulePrompt, capsulePromptVisible } = this.state;
 
@@ -2885,7 +3013,7 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'buildCapsulePromptWrapper',
@@ -2977,7 +3105,7 @@ class Infrastructure extends AbstractComponent {
    * 创建扩展显示区域，应仅用于单窗等交互组件的创建
    */
   buildExtendArea = () => {
-    this.logCallTrack({}, primaryCallName, 'buildExtendArea', emptyLogic);
+    this.logRenderCallTrack({}, primaryCallName, 'buildExtendArea', emptyLogic);
 
     return null;
   };
@@ -2990,7 +3118,7 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    this.logCallTrack(
+    this.logRenderCallTrack(
       {},
       primaryCallName,
       'buildFullAdministrativeDivisionSelectorArea',
@@ -3040,7 +3168,7 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    this.logCallTrack({}, primaryCallName, 'buildFooter');
+    this.logRenderCallTrack({}, primaryCallName, 'buildFooter');
 
     const image = getFooterImage();
     const text = getFooterText();
@@ -3056,7 +3184,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   closeCapsulePrompt = () => {
-    this.logCallTrack({}, primaryCallName, 'closeCapsulePrompt');
+    this.logFunctionCallTrack({}, primaryCallName, 'closeCapsulePrompt');
 
     this.setState({
       capsulePromptVisible: false,
@@ -3064,7 +3192,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   showFullAdministrativeDivisionSelector = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'showFullAdministrativeDivisionSelector',
@@ -3076,7 +3204,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   hideFullAdministrativeDivisionSelector = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'hideFullAdministrativeDivisionSelector',
@@ -3086,7 +3214,7 @@ class Infrastructure extends AbstractComponent {
       fullAdministrativeDivisionSelectorVisible: false,
     });
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'hideFullAdministrativeDivisionSelector',
@@ -3097,7 +3225,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   transformFullAdministrativeDivisionData = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'transformFullAdministrativeDivisionData',
@@ -3120,7 +3248,7 @@ class Infrastructure extends AbstractComponent {
     // eslint-disable-next-line no-unused-vars
     optionList,
   }) => {
-    this.logCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doAfterFullAdministrativeDivisionSelectorChanged',
@@ -3129,7 +3257,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   doAfterHideFullAdministrativeDivisionSelector = () => {
-    this.logCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doAfterHideFullAdministrativeDivisionSelector',
@@ -3138,7 +3266,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   buildSideView = () => {
-    this.logCallTrack({}, primaryCallName, 'buildSideView', emptyLogic);
+    this.logRenderCallTrack({}, primaryCallName, 'buildSideView', emptyLogic);
 
     return null;
   };
@@ -3148,7 +3276,7 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    this.logCallTrack({}, primaryCallName, 'buildSignInSilentOverlay');
+    this.logRenderCallTrack({}, primaryCallName, 'buildSignInSilentOverlay');
 
     const { signInSilentOverlayVisible } = this.state;
 
@@ -3166,7 +3294,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   buildSignInPromptArea = () => {
-    this.logCallTrack({}, primaryCallName, 'buildSignInPromptArea');
+    this.logRenderCallTrack({}, primaryCallName, 'buildSignInPromptArea');
 
     const { signInPromptModalVisible } = this.state;
 
@@ -3223,9 +3351,9 @@ class Infrastructure extends AbstractComponent {
       return null;
     }
 
-    this.logCallTrack({}, primaryCallName, 'buildSignInPromptWrapper');
+    this.logRenderCallTrack({}, primaryCallName, 'buildSignInPromptWrapper');
 
-    this.logCallTrace(
+    this.logRenderCallTrace(
       {},
       primaryCallName,
       'buildSignInPromptWrapper',
@@ -3239,7 +3367,11 @@ class Infrastructure extends AbstractComponent {
    * 创建自动登录提示器
    */
   buildSignInSilentOverlayPrompt = () => {
-    this.logCallTrack({}, primaryCallName, 'buildSignInSilentOverlayPrompt');
+    this.logRenderCallTrack(
+      {},
+      primaryCallName,
+      'buildSignInSilentOverlayPrompt',
+    );
 
     return (
       <FlexBox
@@ -3304,7 +3436,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   renderView() {
-    this.logCallTrace({}, primaryCallName, 'renderView');
+    this.logRenderCallTrack({}, primaryCallName, 'renderView');
 
     const { spin, backTopVisible } = this.state;
 

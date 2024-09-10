@@ -29,6 +29,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
+import { callProcessType } from '../../utils/constants';
 import { getEnvironment } from '../../utils/environmentAssist';
 
 function filterModel(properties) {
@@ -68,6 +69,8 @@ class AbstractComponent extends Component {
    * 在控制台显示组建内调用序列, 仅为进行开发辅助
    */
   showCallProcess = false;
+
+  callProcessCollection = [callProcessType.functionLogic];
 
   /**
    *当前组件名称
@@ -521,10 +524,14 @@ class AbstractComponent extends Component {
    * log call track
    * @param {*} message
    */
-  logCallTrack(data, ...messages) {
+  logCallTrack(type, data, ...messages) {
     if (!this.showCallProcess) {
       this.promptCallProcessSwitch();
 
+      return;
+    }
+
+    if (!checkInCollection(this.callProcessCollection, type)) {
       return;
     }
 
@@ -532,17 +539,93 @@ class AbstractComponent extends Component {
   }
 
   /**
+   * log call track
+   * @param {*} message
+   */
+  logFunctionCallTrack(data, ...messages) {
+    this.logCallTrack(
+      callProcessType.functionLogic,
+      data,
+      mergeArrowText(this.componentName, ...messages),
+    );
+  }
+
+  /**
+   * log call track
+   * @param {*} message
+   */
+  logEmptyCallTrack(data, ...messages) {
+    this.logCallTrack(
+      callProcessType.emptyLogic,
+      data,
+      mergeArrowText(this.componentName, ...messages),
+    );
+  }
+
+  /**
+   * log call track
+   * @param {*} message
+   */
+  logRenderCallTrack(data, ...messages) {
+    this.logCallTrack(
+      callProcessType.renderLogic,
+      data,
+      mergeArrowText(this.componentName, ...messages),
+    );
+  }
+
+  /**
    * log call trace
    * @param {*} message
    */
-  logCallTrace(data, ...messages) {
+  logCallTrace(type, data, ...messages) {
     if (!this.showCallProcess) {
       this.promptCallProcessSwitch();
 
       return;
     }
 
+    if (!checkInCollection(this.callProcessCollection, type)) {
+      return;
+    }
+
     logCallTraceCore(data, mergeArrowText(this.componentName, ...messages));
+  }
+
+  /**
+   * log call track
+   * @param {*} message
+   */
+  logFunctionCallTrace(data, ...messages) {
+    this.logCallTrace(
+      callProcessType.functionLogic,
+      data,
+      mergeArrowText(this.componentName, ...messages),
+    );
+  }
+
+  /**
+   * log call track
+   * @param {*} message
+   */
+  logEmptyCallTrace(data, ...messages) {
+    this.logCallTrace(
+      callProcessType.emptyLogic,
+      data,
+      mergeArrowText(this.componentName, ...messages),
+    );
+  }
+
+  /**
+   * log call track
+   * @param {*} message
+   */
+  logRenderCallTrace(data, ...messages) {
+    this.logCallTrace(
+      callProcessType.renderLogic,
+      data,
+      mergeArrowText(this.componentName, ...messages),
+    );
   }
 
   /**
@@ -582,11 +665,17 @@ class AbstractComponent extends Component {
       return null;
     }
 
-    this.logCallTrack({}, primaryCallName, 'render');
+    this.logRenderCallTrack({}, primaryCallName, 'render');
 
     this.showRenderCount();
 
-    this.logCallTrace({}, primaryCallName, 'render', 'trigger', 'renderView');
+    this.logRenderCallTrace(
+      {},
+      primaryCallName,
+      'render',
+      'trigger',
+      'renderView',
+    );
 
     return this.renderView();
   }

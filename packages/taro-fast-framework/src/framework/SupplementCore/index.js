@@ -101,7 +101,7 @@ const primaryCallName = 'framework::SupplementCore';
  */
 class SupplementCore extends Common {
   doShowTask = () => {
-    this.logCallTrack({}, primaryCallName, 'doShowTask');
+    this.logFunctionCallTrack({}, primaryCallName, 'doShowTask');
 
     logDebug(
       `this.firstShowHasTriggered is ${this.firstShowHasTriggered} in doShowTask`,
@@ -110,7 +110,7 @@ class SupplementCore extends Common {
     if (this.firstShowHasTriggered) {
       const that = this;
 
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'doShowTask',
@@ -119,7 +119,12 @@ class SupplementCore extends Common {
 
       that.adjustInternalDataOnRepeatedShow();
 
-      that.logCallTrace({}, primaryCallName, 'doShowTask', 'setCurrentInfo');
+      that.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'setCurrentInfo',
+      );
 
       that.setCurrentInfo();
 
@@ -128,10 +133,15 @@ class SupplementCore extends Common {
       );
 
       if (this.repeatDoWorkWhenShow) {
-        that.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkWhenShow');
+        that.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doShowTask',
+          'doWorkWhenShow',
+        );
 
         this.doWorkWhenShow(() => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doShowTask',
@@ -142,7 +152,7 @@ class SupplementCore extends Common {
 
           that.doWorkWhenRepeatedShow();
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doShowTask',
@@ -153,7 +163,7 @@ class SupplementCore extends Common {
 
           that.doWorkWithNeedReLocationWhenRepeatedShow();
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doShowTask',
@@ -164,7 +174,7 @@ class SupplementCore extends Common {
 
           this.doWorkWhenEveryShow();
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doShowTask',
@@ -176,7 +186,7 @@ class SupplementCore extends Common {
           this.doWorkAfterShow();
         });
       } else {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doShowTask',
@@ -186,7 +196,7 @@ class SupplementCore extends Common {
         );
 
         that.checkSession(() => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doShowTask',
@@ -198,7 +208,7 @@ class SupplementCore extends Common {
           );
 
           if (that.getVerifyTicketValidity()) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'doShowTask',
@@ -215,7 +225,7 @@ class SupplementCore extends Common {
           }
         });
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doShowTask',
@@ -226,7 +236,7 @@ class SupplementCore extends Common {
 
         that.doWorkWhenRepeatedShow();
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doShowTask',
@@ -237,7 +247,7 @@ class SupplementCore extends Common {
 
         that.doWorkWithNeedReLocationWhenRepeatedShow();
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doShowTask',
@@ -248,7 +258,7 @@ class SupplementCore extends Common {
 
         this.doWorkWhenEveryShow();
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doShowTask',
@@ -260,7 +270,7 @@ class SupplementCore extends Common {
         this.doWorkAfterShow();
       }
     } else {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doShowTask',
@@ -273,7 +283,7 @@ class SupplementCore extends Common {
 
       logDebug('set this.firstShowHasTriggered to true');
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'doShowTask',
@@ -282,14 +292,19 @@ class SupplementCore extends Common {
 
       this.doWorkWhenEveryShow();
 
-      this.logCallTrace({}, primaryCallName, 'doShowTask', 'doWorkAfterShow');
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'doWorkAfterShow',
+      );
 
       this.doWorkAfterShow();
     }
   };
 
   doWorkWithNeedReLocationWhenRepeatedShow = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -298,7 +313,7 @@ class SupplementCore extends Common {
     const that = this;
 
     if (that.needReLocationWhenRepeatedShow) {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -317,7 +332,7 @@ class SupplementCore extends Common {
         case environmentCollection.ALIPAY: {
           logWarn(noAdaptationMessage);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -332,7 +347,7 @@ class SupplementCore extends Common {
         case environmentCollection.SWAN: {
           logWarn(noAdaptationMessage);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -347,7 +362,7 @@ class SupplementCore extends Common {
         case environmentCollection.WEB: {
           logWarn(noAdaptationMessage);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -362,7 +377,7 @@ class SupplementCore extends Common {
         default: {
           logWarn(noAdaptationMessage);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -390,7 +405,7 @@ class SupplementCore extends Common {
           `useLocation is false and locationMode is locationModeCollection.auto`,
         );
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -399,7 +414,7 @@ class SupplementCore extends Common {
 
         that.obtainLocation({
           successCallback: ({ location, map }) => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               { location, map },
               primaryCallName,
               'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -420,7 +435,7 @@ class SupplementCore extends Common {
           failCallback: null,
         });
       } else {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'doWorkWithNeedReLocationWhenRepeatedShow',
@@ -441,7 +456,7 @@ class SupplementCore extends Common {
   }) => {
     const that = this;
 
-    that.logCallTrack(
+    that.logFunctionCallTrack(
       {
         force,
         showLoading,
@@ -451,7 +466,12 @@ class SupplementCore extends Common {
       'obtainLocation',
     );
 
-    that.logCallTrace({}, primaryCallName, 'obtainLocation', 'getEnvironment');
+    that.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'obtainLocation',
+      'getEnvironment',
+    );
 
     const environment = that.getEnvironment();
 
@@ -466,7 +486,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -475,7 +495,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -491,7 +511,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -500,7 +520,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -516,7 +536,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -525,7 +545,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -541,7 +561,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -550,7 +570,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -573,7 +593,7 @@ class SupplementCore extends Common {
         const info =
           'simulation location Data must be an object when simulation location in config is true';
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {
             simulationLocationData: simulationData,
             error: info,
@@ -603,7 +623,7 @@ class SupplementCore extends Common {
       if ((location || null) == null || (mapData || null) == null) {
         needRelocation = true;
       } else {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {
             data: {
               locationGet: true,
@@ -624,7 +644,7 @@ class SupplementCore extends Common {
         });
 
         if (isFunction(successCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {
               location,
               map: mapData,
@@ -639,7 +659,7 @@ class SupplementCore extends Common {
             map: mapData,
           });
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'obtainLocation',
@@ -660,7 +680,7 @@ class SupplementCore extends Common {
 
       getGeographicalLocation({
         success: (l) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {
               data: {
                 locationGet: true,
@@ -690,7 +710,7 @@ class SupplementCore extends Common {
           const defaultLatitude = getDefaultLatitude();
           const { latitude, longitude } = l;
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {
               location: {
                 latitude: latitude ?? defaultLatitude,
@@ -717,7 +737,7 @@ class SupplementCore extends Common {
               setLastLocation(result);
 
               if (isFunction(successCallback)) {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   {
                     location: l,
                     map: result,
@@ -736,7 +756,7 @@ class SupplementCore extends Common {
                   map: result,
                 });
               } else {
-                that.logCallTrace(
+                that.logEmptyCallTrace(
                   {},
                   primaryCallName,
                   'obtainLocation',
@@ -750,7 +770,7 @@ class SupplementCore extends Common {
               }
             },
             fail: (error) => {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 { error },
                 primaryCallName,
                 'obtainLocation',
@@ -782,7 +802,7 @@ class SupplementCore extends Common {
                       }
 
                       if (isFunction(successCallback)) {
-                        that.logCallTrace(
+                        that.logFunctionCallTrace(
                           {
                             location: l,
                             map: null,
@@ -801,7 +821,7 @@ class SupplementCore extends Common {
                           map: null,
                         });
                       } else {
-                        that.logCallTrace(
+                        that.logEmptyCallTrace(
                           {},
                           primaryCallName,
                           'obtainLocation',
@@ -815,7 +835,7 @@ class SupplementCore extends Common {
                       }
                     } else {
                       if (isFunction(successCallback)) {
-                        that.logCallTrace(
+                        that.logFunctionCallTrace(
                           {
                             location: l,
                             map: mapDataLast,
@@ -834,7 +854,7 @@ class SupplementCore extends Common {
                           map: mapDataLast,
                         });
                       } else {
-                        that.logCallTrace(
+                        that.logEmptyCallTrace(
                           {},
                           primaryCallName,
                           'obtainLocation',
@@ -852,7 +872,7 @@ class SupplementCore extends Common {
                     setLastLocation(mapData);
 
                     if (isFunction(successCallback)) {
-                      that.logCallTrace(
+                      that.logFunctionCallTrace(
                         {
                           location: l,
                           map: mapData,
@@ -871,7 +891,7 @@ class SupplementCore extends Common {
                         map: mapData,
                       });
                     } else {
-                      that.logCallTrace(
+                      that.logEmptyCallTrace(
                         {},
                         primaryCallName,
                         'obtainLocation',
@@ -886,7 +906,7 @@ class SupplementCore extends Common {
                   }
                 } else {
                   if (isFunction(successCallback)) {
-                    that.logCallTrace(
+                    that.logFunctionCallTrace(
                       {
                         location: l,
                         map: mapDataLast,
@@ -905,7 +925,7 @@ class SupplementCore extends Common {
                       map: mapDataLast,
                     });
                   } else {
-                    that.logCallTrace(
+                    that.logEmptyCallTrace(
                       {},
                       primaryCallName,
                       'obtainLocation',
@@ -923,7 +943,7 @@ class SupplementCore extends Common {
                 setLastLocation(mapData);
 
                 if (isFunction(successCallback)) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     {
                       location: l,
                       map: mapData,
@@ -942,7 +962,7 @@ class SupplementCore extends Common {
                     map: mapData,
                   });
                 } else {
-                  that.logCallTrace(
+                  that.logEmptyCallTrace(
                     {},
                     primaryCallName,
                     'obtainLocation',
@@ -957,7 +977,7 @@ class SupplementCore extends Common {
               }
             },
             complete: function () {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'obtainLocation',
@@ -984,7 +1004,7 @@ class SupplementCore extends Common {
           const { errMsg } = failLocationResult;
 
           if (errMsg === 'getLocation:fail auth deny') {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 data: {
                   locationGet: false,
@@ -1010,7 +1030,7 @@ class SupplementCore extends Common {
               text: '您已禁止获取位置信息',
             });
           } else {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'obtainLocation',
@@ -1045,7 +1065,7 @@ class SupplementCore extends Common {
                   }
                 }
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   {
                     data: {
                       locationGet: false,
@@ -1074,7 +1094,7 @@ class SupplementCore extends Common {
                 }
               },
               fail: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   {
                     data: {
                       locationGet: false,
@@ -1103,7 +1123,7 @@ class SupplementCore extends Common {
                 });
               },
               complete: () => {
-                that.logCallTrace(
+                that.logEmptyCallTrace(
                   {},
                   primaryCallName,
                   'obtainLocation',
@@ -1118,7 +1138,7 @@ class SupplementCore extends Common {
           }
 
           if (isFunction(failCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 data: {
                   locationGet: false,
@@ -1134,7 +1154,7 @@ class SupplementCore extends Common {
 
             failCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'obtainLocation',
@@ -1162,7 +1182,7 @@ class SupplementCore extends Common {
     callback,
     force = false,
   }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         location,
         map,
@@ -1173,7 +1193,7 @@ class SupplementCore extends Common {
     );
 
     if (isFunction(callback)) {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {
           location,
           map,
@@ -1190,7 +1210,7 @@ class SupplementCore extends Common {
         force,
       });
     } else {
-      this.logCallTrace(
+      this.logEmptyCallTrace(
         {},
         primaryCallName,
         'executeLogicAfterAutomaticReLocationSuccessWhenRepeatedShow',
@@ -1210,7 +1230,7 @@ class SupplementCore extends Common {
     callback,
     force = false,
   }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         location,
         map,
@@ -1221,7 +1241,7 @@ class SupplementCore extends Common {
     );
 
     if (isFunction(callback)) {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {
           location,
           map,
@@ -1238,7 +1258,7 @@ class SupplementCore extends Common {
         force,
       });
     } else {
-      this.logCallTrace(
+      this.logEmptyCallTrace(
         {},
         primaryCallName,
         'executeLogicAfterNonautomaticReLocationWhenRepeatedShow',
@@ -1249,9 +1269,9 @@ class SupplementCore extends Common {
   };
 
   checkTicketValidity = ({ callback, signInSilentFailCallback = null }) => {
-    this.logCallTrack({}, primaryCallName, 'checkTicketValidity');
+    this.logFunctionCallTrack({}, primaryCallName, 'checkTicketValidity');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'checkTicketValidity',
@@ -1271,7 +1291,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1280,7 +1300,7 @@ class SupplementCore extends Common {
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1290,7 +1310,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(signInSilentFailCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1299,7 +1319,7 @@ class SupplementCore extends Common {
 
           signInSilentFailCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1315,7 +1335,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1324,7 +1344,7 @@ class SupplementCore extends Common {
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1334,7 +1354,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(signInSilentFailCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1343,7 +1363,7 @@ class SupplementCore extends Common {
 
           signInSilentFailCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1359,7 +1379,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1368,7 +1388,7 @@ class SupplementCore extends Common {
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1378,7 +1398,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(signInSilentFailCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1387,7 +1407,7 @@ class SupplementCore extends Common {
 
           signInSilentFailCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1403,7 +1423,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(callback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1412,7 +1432,7 @@ class SupplementCore extends Common {
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1422,7 +1442,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(signInSilentFailCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1431,7 +1451,7 @@ class SupplementCore extends Common {
 
           signInSilentFailCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'checkTicketValidity',
@@ -1447,7 +1467,7 @@ class SupplementCore extends Common {
     const useLocation = getUseLocation();
     const locationMode = getLocationMode();
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'checkTicketValidity',
@@ -1475,7 +1495,7 @@ class SupplementCore extends Common {
           'info use location and automatic location and sign in result is unknown',
         );
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkTicketValidity',
@@ -1484,7 +1504,7 @@ class SupplementCore extends Common {
 
         that.obtainLocation({
           successCallback: () => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkTicketValidity',
@@ -1503,7 +1523,7 @@ class SupplementCore extends Common {
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkTicketValidity',
@@ -1535,7 +1555,7 @@ class SupplementCore extends Common {
           'info use location and automatic location on checkTicketValidity and sign in result is not unknown',
         );
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkTicketValidity',
@@ -1544,7 +1564,7 @@ class SupplementCore extends Common {
 
         that.obtainLocation({
           successCallback: () => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkTicketValidity',
@@ -1559,7 +1579,7 @@ class SupplementCore extends Common {
           showLoading: false,
           fromLaunch: false,
           failCallback: () => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkTicketValidity',
@@ -1576,7 +1596,7 @@ class SupplementCore extends Common {
           'do not use location or nonautomatic location on checkTicketValidity',
         );
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkTicketValidity',
@@ -1589,7 +1609,7 @@ class SupplementCore extends Common {
   };
 
   doWorkWhenCheckTicketValidityOnRepeatedShow = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'doWorkWhenCheckTicketValidityOnRepeatedShow',
@@ -1598,9 +1618,13 @@ class SupplementCore extends Common {
   };
 
   bridgeLogicOnCheckTicketValidity({ callback = null }) {
-    this.logCallTrack({}, primaryCallName, 'bridgeLogicOnCheckTicketValidity');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'bridgeLogicOnCheckTicketValidity',
+    );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'bridgeLogicOnCheckTicketValidity',
@@ -1614,7 +1638,7 @@ class SupplementCore extends Common {
       return;
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'bridgeLogicOnCheckTicketValidity',
@@ -1623,7 +1647,7 @@ class SupplementCore extends Common {
 
     const verifySignInResult = getVerifySignInResult();
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'bridgeLogicOnCheckTicketValidity',
@@ -1633,7 +1657,7 @@ class SupplementCore extends Common {
     const signInResult = this.getSignInResult();
 
     if (signInResult === verifySignInResult.fail) {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'bridgeLogicOnCheckTicketValidity',
@@ -1643,7 +1667,7 @@ class SupplementCore extends Common {
       if (this.getVerifyTicket()) {
         const forceRefresh = true;
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           { forceRefresh },
           primaryCallName,
           'bridgeLogicOnCheckTicketValidity',
@@ -1658,7 +1682,7 @@ class SupplementCore extends Common {
         return;
       } else {
         if (isFunction(callback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'bridgeLogicOnCheckTicketValidity',
@@ -1667,7 +1691,7 @@ class SupplementCore extends Common {
 
           callback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'bridgeLogicOnCheckTicketValidity',
@@ -1680,7 +1704,7 @@ class SupplementCore extends Common {
       }
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'bridgeLogicOnCheckTicketValidity',
@@ -1694,9 +1718,13 @@ class SupplementCore extends Common {
   }
 
   dispatchCheckTicketValidity = (data = {}) => {
-    this.logCallTrack({ data }, primaryCallName, 'dispatchCheckTicketValidity');
+    this.logFunctionCallTrack(
+      { data },
+      primaryCallName,
+      'dispatchCheckTicketValidity',
+    );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchCheckTicketValidity',
@@ -1707,7 +1735,7 @@ class SupplementCore extends Common {
       const info =
         'dispatchCheckTicketValidity need override when verifyTicket set to true, dispatchCheckTicketValidity must return a promise';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'dispatchCheckTicketValidity',
@@ -1723,7 +1751,7 @@ class SupplementCore extends Common {
       alias: getCheckTicketValidityAliasName(),
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchCheckTicketValidity',
@@ -1737,7 +1765,7 @@ class SupplementCore extends Common {
     forceRefresh: forceRefreshValue = false,
     callback = null,
   }) {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         forceRefresh: forceRefreshValue,
       },
@@ -1748,7 +1776,7 @@ class SupplementCore extends Common {
     const that = this;
 
     if (forceRefreshValue) {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'checkTicketValidityCore',
@@ -1769,7 +1797,7 @@ class SupplementCore extends Common {
 
     if (currentUnixTime < currentNextCheckLoginUnixTime) {
       if (isFunction(callback)) {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'checkTicketValidityCore',
@@ -1778,7 +1806,7 @@ class SupplementCore extends Common {
 
         callback();
       } else {
-        that.logCallTrace(
+        that.logEmptyCallTrace(
           {},
           primaryCallName,
           'checkTicketValidityCore',
@@ -1790,7 +1818,7 @@ class SupplementCore extends Common {
       return;
     }
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'checkTicketValidityCore',
@@ -1808,7 +1836,7 @@ class SupplementCore extends Common {
           setNextCheckLoginUnixTime(nextCheckLoginUnixTime);
 
           if (needRefresh) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 data: {},
               },
@@ -1826,7 +1854,7 @@ class SupplementCore extends Common {
           } else {
             const verifySignInResult = getVerifySignInResult();
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkTicketValidityCore',
@@ -1837,7 +1865,7 @@ class SupplementCore extends Common {
 
             const signInResult = that.getSignInResult();
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'checkTicketValidityCore',
@@ -1850,7 +1878,7 @@ class SupplementCore extends Common {
               signInResult === verifySignInResult.fail &&
               that.getVerifyTicket()
             ) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 {},
                 primaryCallName,
                 'checkTicketValidityCore',
@@ -1866,7 +1894,7 @@ class SupplementCore extends Common {
               signInResult === verifySignInResult.success &&
               isFunction(callback)
             ) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 {},
                 primaryCallName,
                 'checkTicketValidityCore',
@@ -1878,7 +1906,7 @@ class SupplementCore extends Common {
               // eslint-disable-next-line promise/no-callback-in-promise
               callback();
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'checkTicketValidityCore',
@@ -1889,7 +1917,7 @@ class SupplementCore extends Common {
               );
             }
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 data: false,
               },
@@ -1909,7 +1937,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { error },
           primaryCallName,
           'checkTicketValidityCore',
@@ -1923,7 +1951,7 @@ class SupplementCore extends Common {
   }
 
   doWhenCheckTicketValidityVerifySignInFail = () => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {},
       primaryCallName,
       'doWhenCheckTicketValidityVerifySignInFail',
@@ -1932,9 +1960,9 @@ class SupplementCore extends Common {
   };
 
   dispatchRefreshSession = (data) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchRefreshSession');
+    this.logFunctionCallTrack(data, primaryCallName, 'dispatchRefreshSession');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'dispatchRefreshSession',
@@ -1951,7 +1979,7 @@ class SupplementCore extends Common {
     if (checkStringIsNullOrWhiteSpace(type)) {
       const info = 'getRefreshSessionApiEffect type disallow empty';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'dispatchRefreshSession',
@@ -1967,7 +1995,7 @@ class SupplementCore extends Common {
       alias,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchRefreshSession',
@@ -1981,7 +2009,7 @@ class SupplementCore extends Common {
     const info =
       'getRefreshSessionApiEffect need override, getRefreshSessionApiEffect must return a object like {type,payload,alias:""}';
 
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'getRefreshSessionApiEffect',
@@ -1993,12 +2021,12 @@ class SupplementCore extends Common {
   };
 
   refreshSession = ({ callback }) => {
-    this.logCallTrack({}, primaryCallName, 'refreshSession');
+    this.logFunctionCallTrack({}, primaryCallName, 'refreshSession');
 
     const sessionRefreshing = getSessionRefreshing();
 
     if (sessionRefreshing) {
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {},
         primaryCallName,
         'refreshSession',
@@ -2013,11 +2041,16 @@ class SupplementCore extends Common {
 
       const that = this;
 
-      that.logCallTrace({}, primaryCallName, 'refreshSession', 'Taro.login');
+      that.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'refreshSession',
+        'Taro.login',
+      );
 
       Taro.login({ timeout: 1000 })
         .then((response) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             response,
             primaryCallName,
             'refreshSession',
@@ -2032,7 +2065,7 @@ class SupplementCore extends Common {
 
             setEffectiveCode(code);
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 code,
               },
@@ -2058,7 +2091,7 @@ class SupplementCore extends Common {
                   }
 
                   if (isFunction(callback)) {
-                    that.logCallTrace(
+                    that.logFunctionCallTrace(
                       {},
                       primaryCallName,
                       'refreshSession',
@@ -2072,7 +2105,7 @@ class SupplementCore extends Common {
                     // eslint-disable-next-line promise/no-callback-in-promise
                     callback();
                   } else {
-                    that.logCallTrace(
+                    that.logEmptyCallTrace(
                       {},
                       primaryCallName,
                       'refreshSession',
@@ -2094,7 +2127,7 @@ class SupplementCore extends Common {
               })
               // eslint-disable-next-line promise/no-nesting
               .catch((error) => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { error },
                   primaryCallName,
                   'refreshSession',
@@ -2111,7 +2144,7 @@ class SupplementCore extends Common {
                 setSessionRefreshing(false);
 
                 if (isFunction(callback)) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     {},
                     primaryCallName,
                     'refreshSession',
@@ -2125,7 +2158,7 @@ class SupplementCore extends Common {
                   // eslint-disable-next-line promise/no-callback-in-promise
                   callback();
                 } else {
-                  that.logCallTrace(
+                  that.logEmptyCallTrace(
                     {},
                     primaryCallName,
                     'refreshSession',
@@ -2146,7 +2179,7 @@ class SupplementCore extends Common {
             setSessionRefreshing(false);
 
             if (isFunction(callback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 response,
                 primaryCallName,
                 'refreshSession',
@@ -2158,7 +2191,7 @@ class SupplementCore extends Common {
               // eslint-disable-next-line promise/no-callback-in-promise
               callback();
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'refreshSession',
@@ -2173,7 +2206,7 @@ class SupplementCore extends Common {
           return response;
         })
         .catch((error) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { error },
             primaryCallName,
             'refreshSession',
@@ -2190,7 +2223,7 @@ class SupplementCore extends Common {
           setSessionRefreshing(false);
 
           if (isFunction(callback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'refreshSession',
@@ -2202,7 +2235,7 @@ class SupplementCore extends Common {
             // eslint-disable-next-line promise/no-callback-in-promise
             callback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'refreshSession',
@@ -2217,7 +2250,7 @@ class SupplementCore extends Common {
   };
 
   retryRefreshSessionWhenRefreshing({ callback, timeTotal = 0 }) {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         timeTotal,
       },
@@ -2229,7 +2262,7 @@ class SupplementCore extends Common {
       Tips.info('长时间等待');
 
       if (isFunction(callback)) {
-        this.logCallTrack(
+        this.logFunctionCallTrace(
           {
             timeTotal,
           },
@@ -2240,7 +2273,7 @@ class SupplementCore extends Common {
 
         callback();
       } else {
-        this.logCallTrack(
+        this.logEmptyCallTrace(
           {},
           primaryCallName,
           'retryRefreshSessionWhenRefreshing',
@@ -2252,7 +2285,7 @@ class SupplementCore extends Common {
       return;
     }
 
-    this.logCallTrack(
+    this.logFunctionCallTrace(
       100,
       primaryCallName,
       'retryRefreshSessionWhenRefreshing',
@@ -2265,7 +2298,7 @@ class SupplementCore extends Common {
       if (sessionRefreshingAfterSleep) {
         const timeTotalAdjust = timeTotal + 100;
 
-        this.logCallTrack(
+        this.logFunctionCallTrace(
           {
             timeTotal: timeTotalAdjust,
           },
@@ -2281,7 +2314,7 @@ class SupplementCore extends Common {
         });
       } else {
         if (isFunction(callback)) {
-          this.logCallTrack(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'retryRefreshSessionWhenRefreshing',
@@ -2291,7 +2324,7 @@ class SupplementCore extends Common {
 
           callback();
         } else {
-          this.logCallTrack(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'retryRefreshSessionWhenRefreshing',
@@ -2312,7 +2345,7 @@ class SupplementCore extends Common {
   }) => {
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'signIn');
+    that.logFunctionCallTrack({ data }, primaryCallName, 'signIn');
 
     const useLocation = getUseLocation();
     const locationMode = getLocationMode();
@@ -2326,7 +2359,12 @@ class SupplementCore extends Common {
         'use location and automatic location on sign in',
       );
 
-      that.logCallTrace({}, primaryCallName, 'signIn', 'obtainLocation');
+      that.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'signIn',
+        'obtainLocation',
+      );
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -2339,7 +2377,7 @@ class SupplementCore extends Common {
           data.latitude = latitude || '';
           data.longitude = longitude || '';
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signIn',
@@ -2351,7 +2389,7 @@ class SupplementCore extends Common {
           const signInProcessDetection = that.getSignInProcessDetection();
 
           if (!signInProcessDetection) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 data: true,
               },
@@ -2365,7 +2403,7 @@ class SupplementCore extends Common {
             that.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   {
                     data,
                   },
@@ -2392,7 +2430,7 @@ class SupplementCore extends Common {
         showLoading: false,
         fromLaunch: false,
         failCallback: () => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signIn',
@@ -2404,7 +2442,7 @@ class SupplementCore extends Common {
           const signInProcessDetection = that.getSignInProcessDetection();
 
           if (!signInProcessDetection) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               { data: true },
               primaryCallName,
               'signIn',
@@ -2416,7 +2454,7 @@ class SupplementCore extends Common {
             that.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data },
                   primaryCallName,
                   'signIn',
@@ -2442,7 +2480,7 @@ class SupplementCore extends Common {
       if (useLocation || false) {
         logDebug({ useLocation }, 'use location and nonautomatic location');
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {
             data,
           },
@@ -2454,7 +2492,7 @@ class SupplementCore extends Common {
         that.signInWhenCheckProcessDetection({
           data,
           callback: (o, p) => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {
                 data: true,
               },
@@ -2468,7 +2506,7 @@ class SupplementCore extends Common {
             o.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   {
                     data: p,
                   },
@@ -2493,7 +2531,7 @@ class SupplementCore extends Common {
           timeTotal: 0,
         });
       } else {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'signIn',
@@ -2503,7 +2541,7 @@ class SupplementCore extends Common {
         const signInProcessDetection = that.getSignInProcessDetection();
 
         if (!signInProcessDetection) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { data: true },
             primaryCallName,
             'signIn',
@@ -2513,7 +2551,7 @@ class SupplementCore extends Common {
           that.setSignInProcessDetection({
             data: true,
             callback: () => {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 { data },
                 primaryCallName,
                 'signIn',
@@ -2538,7 +2576,7 @@ class SupplementCore extends Common {
   signInWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
     const that = this;
 
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         data,
         timeTotal,
@@ -2549,7 +2587,7 @@ class SupplementCore extends Common {
 
     if (timeTotal > 3000) {
       if (isFunction(callback)) {
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           data,
           primaryCallName,
           'signInWhenCheckProcessDetection',
@@ -2558,7 +2596,7 @@ class SupplementCore extends Common {
 
         callback(that, data);
       } else {
-        this.logCallTrace(
+        this.logEmptyCallTrace(
           {},
           primaryCallName,
           'signInWhenCheckProcessDetection',
@@ -2572,7 +2610,7 @@ class SupplementCore extends Common {
 
     logData(`signInWhenCheckProcessDetection sleep ${timeTotal}`);
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'signInWhenCheckProcessDetection',
@@ -2580,7 +2618,7 @@ class SupplementCore extends Common {
     );
 
     sleep(100, () => {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'signInWhenCheckProcessDetection',
@@ -2593,7 +2631,7 @@ class SupplementCore extends Common {
       if (signInProcessDetection) {
         const timeTotalAdjust = timeTotal + 100;
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {
             data,
             timeTotal: timeTotalAdjust,
@@ -2611,7 +2649,7 @@ class SupplementCore extends Common {
         });
       } else {
         if (isFunction(callback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             data,
             primaryCallName,
             'signInWhenCheckProcessDetection',
@@ -2621,7 +2659,7 @@ class SupplementCore extends Common {
 
           callback(that, data);
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInWhenCheckProcessDetection',
@@ -2642,7 +2680,7 @@ class SupplementCore extends Common {
   }) => {
     const that = this;
 
-    this.logCallTrack({ data }, primaryCallName, 'signInSilent');
+    this.logFunctionCallTrack({ data }, primaryCallName, 'signInSilent');
 
     const useLocation = getUseLocation();
     const locationMode = getLocationMode();
@@ -2656,7 +2694,12 @@ class SupplementCore extends Common {
         'use location and automatic location on sign in silent',
       );
 
-      that.logCallTrace({}, primaryCallName, 'signInSilent', 'obtainLocation');
+      that.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'signInSilent',
+        'obtainLocation',
+      );
 
       that.obtainLocation({
         // eslint-disable-next-line no-unused-vars
@@ -2669,7 +2712,7 @@ class SupplementCore extends Common {
           data.latitude = latitude || '';
           data.longitude = longitude || '';
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilent',
@@ -2681,7 +2724,7 @@ class SupplementCore extends Common {
           const signInProcessDetection = that.getSignInProcessDetection();
 
           if (!signInProcessDetection) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               { data: true },
               primaryCallName,
               'signInSilent',
@@ -2693,7 +2736,7 @@ class SupplementCore extends Common {
             that.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data },
                   primaryCallName,
                   'signInSilent',
@@ -2718,7 +2761,7 @@ class SupplementCore extends Common {
         showLoading: false,
         fromLaunch: false,
         failCallback: () => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilent',
@@ -2730,7 +2773,7 @@ class SupplementCore extends Common {
           const signInProcessDetection = that.getSignInProcessDetection();
 
           if (!signInProcessDetection) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               { data: true },
               primaryCallName,
               'signInSilent',
@@ -2742,7 +2785,7 @@ class SupplementCore extends Common {
             that.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data },
                   primaryCallName,
                   'signInSilent',
@@ -2768,7 +2811,7 @@ class SupplementCore extends Common {
       if (useLocation || false) {
         logDebug({ useLocation }, 'use location and nonautomatic location');
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { data },
           primaryCallName,
           'signInSilent',
@@ -2778,7 +2821,7 @@ class SupplementCore extends Common {
         that.signInSilentWhenCheckProcessDetection({
           data,
           callback: (o, p) => {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               { data: true },
               primaryCallName,
               'signInSilent',
@@ -2790,7 +2833,7 @@ class SupplementCore extends Common {
             o.setSignInProcessDetection({
               data: true,
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data: p },
                   primaryCallName,
                   'signInSilent',
@@ -2813,7 +2856,7 @@ class SupplementCore extends Common {
           timeTotal: 0,
         });
       } else {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'signInSilent',
@@ -2823,7 +2866,7 @@ class SupplementCore extends Common {
         const signInProcessDetection = that.getSignInProcessDetection();
 
         if (!signInProcessDetection) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { data: true },
             primaryCallName,
             'signInSilent',
@@ -2833,7 +2876,7 @@ class SupplementCore extends Common {
           that.setSignInProcessDetection({
             data: true,
             callback: () => {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 { data },
                 primaryCallName,
                 'signInSilent',
@@ -2856,7 +2899,7 @@ class SupplementCore extends Common {
   };
 
   signInSilentWhenCheckProcessDetection({ data, callback, timeTotal = 0 }) {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       { data, timeTotal },
       primaryCallName,
       'signInSilentWhenCheckProcessDetection',
@@ -2866,7 +2909,7 @@ class SupplementCore extends Common {
 
     if (timeTotal > 3000) {
       if (isFunction(callback)) {
-        that.logCallTrack(
+        that.logFunctionCallTrace(
           {},
           primaryCallName,
           'signInSilentWhenCheckProcessDetection',
@@ -2875,7 +2918,7 @@ class SupplementCore extends Common {
 
         callback(that, data);
       } else {
-        that.logCallTrack(
+        that.logEmptyCallTrace(
           {},
           primaryCallName,
           'signInSilentWhenCheckProcessDetection',
@@ -2887,7 +2930,7 @@ class SupplementCore extends Common {
       return;
     }
 
-    that.logCallTrack(
+    that.logFunctionCallTrace(
       {},
       primaryCallName,
       'signInSilentWhenCheckProcessDetection',
@@ -2897,7 +2940,7 @@ class SupplementCore extends Common {
     sleep(100, () => {
       logDebug(`signInSilentWhenCheckProcessDetection sleep ${timeTotal}`);
 
-      that.logCallTrack(
+      that.logFunctionCallTrace(
         {},
         primaryCallName,
         'signInSilentWhenCheckProcessDetection',
@@ -2910,7 +2953,7 @@ class SupplementCore extends Common {
       if (signInProcessDetection) {
         const timeTotalAdjust = timeTotal + 100;
 
-        that.logCallTrack(
+        that.logFunctionCallTrace(
           { data, timeTotal: timeTotalAdjust },
           primaryCallName,
           'signInSilentWhenCheckProcessDetection',
@@ -2925,7 +2968,7 @@ class SupplementCore extends Common {
         });
       } else {
         if (isFunction(callback)) {
-          that.logCallTrack(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentWhenCheckProcessDetection',
@@ -2935,7 +2978,7 @@ class SupplementCore extends Common {
 
           callback(that, data);
         } else {
-          that.logCallTrack(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentWhenCheckProcessDetection',
@@ -2949,9 +2992,9 @@ class SupplementCore extends Common {
   }
 
   dispatchSignIn = (data = {}) => {
-    this.logCallTrack({ data }, primaryCallName, 'dispatchSignIn');
+    this.logFunctionCallTrack({ data }, primaryCallName, 'dispatchSignIn');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'dispatchSignIn',
@@ -2968,7 +3011,7 @@ class SupplementCore extends Common {
     if (checkStringIsNullOrWhiteSpace(type)) {
       const info = 'signInApiEffect type disallow empty';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'dispatchSignIn',
@@ -2984,7 +3027,12 @@ class SupplementCore extends Common {
       alias,
     };
 
-    this.logCallTrace(o, primaryCallName, 'dispatchSignIn', 'dispatchApi');
+    this.logFunctionCallTrace(
+      o,
+      primaryCallName,
+      'dispatchSignIn',
+      'dispatchApi',
+    );
 
     return this.dispatchApi(o);
   };
@@ -2993,7 +3041,7 @@ class SupplementCore extends Common {
     const info =
       'getSignInApiEffect need override, getSignInApiEffect must return a object like {type,payload,alias:""}';
 
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'getSignInApiEffect',
@@ -3005,9 +3053,13 @@ class SupplementCore extends Common {
   };
 
   dispatchSignInSilent = (data = {}) => {
-    this.logCallTrack({ data }, primaryCallName, 'dispatchSignInSilent');
+    this.logFunctionCallTrack(
+      { data },
+      primaryCallName,
+      'dispatchSignInSilent',
+    );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'dispatchSignInSilent',
@@ -3024,7 +3076,7 @@ class SupplementCore extends Common {
     if (checkStringIsNullOrWhiteSpace(type)) {
       const info = 'signInSilentApiEffect type disallow empty';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'dispatchSignInSilent',
@@ -3040,7 +3092,7 @@ class SupplementCore extends Common {
       alias,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchSignInSilent',
@@ -3054,7 +3106,7 @@ class SupplementCore extends Common {
     const info =
       'getSignInSilentApiEffect need override, getSignInSilentApiEffect must return a object like {type,payload,alias:""}';
 
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'getSignInSilentApiEffect',
@@ -3069,7 +3121,13 @@ class SupplementCore extends Common {
     const info =
       'getSignInApiData need override, getSignInApiData must return a object';
 
-    this.logCallTrack({}, primaryCallName, 'getSignInApiData', 'error', info);
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'getSignInApiData',
+      'error',
+      info,
+    );
 
     throw new Error(info);
   };
@@ -3084,9 +3142,14 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'signInCore');
+    that.logFunctionCallTrack({ data }, primaryCallName, 'signInCore');
 
-    that.logCallTrace(data, primaryCallName, 'signInCore', 'dispatchSignIn');
+    that.logFunctionCallTrace(
+      data,
+      primaryCallName,
+      'signInCore',
+      'dispatchSignIn',
+    );
 
     that
       .dispatchSignIn(data)
@@ -3095,7 +3158,7 @@ class SupplementCore extends Common {
 
         const { dataSuccess, data: metaData } = remoteData;
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { data: false },
           primaryCallName,
           'signInCore',
@@ -3109,7 +3172,7 @@ class SupplementCore extends Common {
         });
 
         if (dataSuccess) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { metaData },
             primaryCallName,
             'signInCore',
@@ -3123,7 +3186,7 @@ class SupplementCore extends Common {
             that.parseSessionEffectiveFromSignInApiDataWrapper(metaData);
 
           if (!sessionEffective) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInCore',
@@ -3136,7 +3199,7 @@ class SupplementCore extends Common {
 
             that.refreshSession({
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data },
                   primaryCallName,
                   'signInCore',
@@ -3161,7 +3224,7 @@ class SupplementCore extends Common {
             return;
           }
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { metaData },
             primaryCallName,
             'signInCore',
@@ -3174,7 +3237,7 @@ class SupplementCore extends Common {
           const signInResult =
             that.parseSignInResultFromSignInApiDataWrapper(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { signInResult },
             primaryCallName,
             'signInCore',
@@ -3189,7 +3252,7 @@ class SupplementCore extends Common {
             signInResult,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { metaData },
             primaryCallName,
             'signInCore',
@@ -3202,7 +3265,7 @@ class SupplementCore extends Common {
 
           const token = that.parseTokenFromSignInApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { token },
             primaryCallName,
             'signInCore',
@@ -3217,7 +3280,7 @@ class SupplementCore extends Common {
             token,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { metaData },
             primaryCallName,
             'signInCore',
@@ -3230,7 +3293,7 @@ class SupplementCore extends Common {
 
           const openId = that.parseOpenIdFromSignInApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { openId },
             primaryCallName,
             'signInCore',
@@ -3247,7 +3310,7 @@ class SupplementCore extends Common {
 
           removeCurrentCustomer();
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInCore',
@@ -3261,7 +3324,7 @@ class SupplementCore extends Common {
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInCore',
@@ -3275,7 +3338,7 @@ class SupplementCore extends Common {
             that.getCustomer({
               successCallback: () => {
                 if (isFunction(successCallback)) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     metaData,
                     primaryCallName,
                     'signInCore',
@@ -3289,7 +3352,7 @@ class SupplementCore extends Common {
 
                   successCallback(metaData);
                 } else {
-                  that.logCallTrace(
+                  that.logEmptyCallTrace(
                     {},
                     primaryCallName,
                     'signInCore',
@@ -3303,7 +3366,7 @@ class SupplementCore extends Common {
                   );
                 }
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   metaData,
                   primaryCallName,
                   'signInCore',
@@ -3318,7 +3381,7 @@ class SupplementCore extends Common {
 
                 that.doAfterGetCustomerOnSignIn(metaData);
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   metaData,
                   primaryCallName,
                   'signInCore',
@@ -3354,7 +3417,7 @@ class SupplementCore extends Common {
             text: '登录失败',
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInCore',
@@ -3366,7 +3429,7 @@ class SupplementCore extends Common {
           that.doWhenSignInFailWrapper();
 
           if (isFunction(failCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInCore',
@@ -3377,7 +3440,7 @@ class SupplementCore extends Common {
 
             failCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'signInCore',
@@ -3389,7 +3452,7 @@ class SupplementCore extends Common {
           }
 
           if (isFunction(completeCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInCore',
@@ -3400,7 +3463,7 @@ class SupplementCore extends Common {
 
             completeCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'signInCore',
@@ -3415,7 +3478,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { error },
           primaryCallName,
           'signInCore',
@@ -3433,9 +3496,9 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) {
-    this.logCallTrack({ data }, primaryCallName, 'signInSilentCore');
+    this.logFunctionCallTrack({ data }, primaryCallName, 'signInSilentCore');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'signInSilentCore',
@@ -3455,7 +3518,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3465,7 +3528,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3476,7 +3539,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(completeCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3486,7 +3549,7 @@ class SupplementCore extends Common {
 
           completeCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3503,7 +3566,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3513,7 +3576,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3524,7 +3587,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(completeCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3534,7 +3597,7 @@ class SupplementCore extends Common {
 
           completeCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3551,7 +3614,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3561,7 +3624,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3572,7 +3635,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(completeCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3582,7 +3645,7 @@ class SupplementCore extends Common {
 
           completeCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3599,7 +3662,7 @@ class SupplementCore extends Common {
         logWarn(noAdaptationMessage);
 
         if (isFunction(failCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3609,7 +3672,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3620,7 +3683,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(completeCallback)) {
-          this.logCallTrace(
+          this.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3630,7 +3693,7 @@ class SupplementCore extends Common {
 
           completeCallback();
         } else {
-          this.logCallTrace(
+          this.logEmptyCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3677,7 +3740,7 @@ class SupplementCore extends Common {
 
     const that = this;
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       data,
       primaryCallName,
       'signInSilentCore',
@@ -3691,7 +3754,7 @@ class SupplementCore extends Common {
 
         const { dataSuccess, data: metaData } = remoteData;
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { data: false },
           primaryCallName,
           'signInSilentCore',
@@ -3705,7 +3768,7 @@ class SupplementCore extends Common {
         });
 
         if (dataSuccess) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'signInSilentCore',
@@ -3718,7 +3781,7 @@ class SupplementCore extends Common {
             that.parseSessionEffectiveFromSignInSilentApiDataWrapper(metaData);
 
           if (!sessionEffective) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInSilentCore',
@@ -3729,7 +3792,7 @@ class SupplementCore extends Common {
 
             that.refreshSession({
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data },
                   primaryCallName,
                   'signInSilentCore',
@@ -3752,7 +3815,7 @@ class SupplementCore extends Common {
             return;
           }
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'signInSilentCore',
@@ -3764,7 +3827,7 @@ class SupplementCore extends Common {
           const signInResult =
             that.parseSignInResultFromSignInSilentApiDataWrapper(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { signInResult },
             primaryCallName,
             'signInSilentCore',
@@ -3777,7 +3840,7 @@ class SupplementCore extends Common {
             signInResult,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'signInSilentCore',
@@ -3788,7 +3851,7 @@ class SupplementCore extends Common {
 
           const token = that.parseTokenFromSignInSilentApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { token },
             primaryCallName,
             'signInSilentCore',
@@ -3801,7 +3864,7 @@ class SupplementCore extends Common {
             token,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'signInSilentCore',
@@ -3812,7 +3875,7 @@ class SupplementCore extends Common {
 
           const openId = that.parseOpenIdFromSignInSilentApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { openId },
             primaryCallName,
             'signInSilentCore',
@@ -3830,7 +3893,7 @@ class SupplementCore extends Common {
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInSilentCore',
@@ -3842,7 +3905,7 @@ class SupplementCore extends Common {
             that.getCustomer({
               successCallback: () => {
                 if (isFunction(successCallback)) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     { metaData },
                     primaryCallName,
                     'signInSilentCore',
@@ -3854,7 +3917,7 @@ class SupplementCore extends Common {
 
                   successCallback(metaData);
                 } else {
-                  that.logCallTrace(
+                  that.logEmptyCallTrace(
                     {},
                     primaryCallName,
                     'signInSilentCore',
@@ -3866,7 +3929,7 @@ class SupplementCore extends Common {
                   );
                 }
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { metaData },
                   primaryCallName,
                   'signInSilentCore',
@@ -3879,7 +3942,7 @@ class SupplementCore extends Common {
 
                 that.doAfterGetCustomerOnSignInSilent(metaData);
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { metaData },
                   primaryCallName,
                   'signInSilentCore',
@@ -3914,7 +3977,7 @@ class SupplementCore extends Common {
           });
 
           if (isFunction(failCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInSilentCore',
@@ -3925,7 +3988,7 @@ class SupplementCore extends Common {
 
             failCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'signInSilentCore',
@@ -3937,7 +4000,7 @@ class SupplementCore extends Common {
           }
 
           if (isFunction(completeCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'signInSilentCore',
@@ -3948,7 +4011,7 @@ class SupplementCore extends Common {
 
             completeCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'signInSilentCore',
@@ -3959,7 +4022,7 @@ class SupplementCore extends Common {
             );
           }
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'signInSilentCore',
@@ -3974,7 +4037,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           {
             error,
             dispatchSignInSilentParams: data,
@@ -3990,13 +4053,13 @@ class SupplementCore extends Common {
   }
 
   parseSessionEffectiveFromSignInApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromSignInApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromSignInApiDataWrapper',
@@ -4007,13 +4070,13 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromSignInSilentApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromSignInSilentApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromSignInSilentApiDataWrapper',
@@ -4024,7 +4087,7 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromSignInApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromSignInApiData',
@@ -4052,7 +4115,7 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromSignInSilentApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromSignInSilentApiData',
@@ -4080,13 +4143,13 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromSignInApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromSignInApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSignInResultFromSignInApiDataWrapper',
@@ -4097,13 +4160,13 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromSignInSilentApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromSignInSilentApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSignInResultFromSignInSilentApiDataWrapper',
@@ -4114,7 +4177,7 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromSignInApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromSignInApiData',
@@ -4142,7 +4205,7 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromSignInSilentApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromSignInSilentApiData',
@@ -4170,7 +4233,7 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnSignIn = ({ signInResult }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       { signInResult },
       primaryCallName,
       'setSignInResultOnSignIn',
@@ -4193,7 +4256,7 @@ class SupplementCore extends Common {
     ) {
       const info = `signInResult not allow ${signInResult}.`;
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setSignInResultOnSignIn',
@@ -4203,7 +4266,7 @@ class SupplementCore extends Common {
       throw new Error(info);
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       { data: v },
       primaryCallName,
       'setSignInResultOnSignIn',
@@ -4214,7 +4277,7 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnSignInSilent = ({ signInResult }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       { signInResult },
       primaryCallName,
       'setSignInResultOnSignInSilent',
@@ -4236,7 +4299,7 @@ class SupplementCore extends Common {
     ) {
       const info = `signInResult not allow ${signInResult}.`;
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setSignInResultOnSignInSilent',
@@ -4246,7 +4309,7 @@ class SupplementCore extends Common {
       throw new Error(info);
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       { data: v },
       primaryCallName,
       'setSignInResultOnSignInSilent',
@@ -4257,7 +4320,7 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromSignInApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseTokenFromSignInApiData',
@@ -4283,7 +4346,7 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromSignInSilentApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseTokenFromSignInSilentApiData',
@@ -4309,12 +4372,12 @@ class SupplementCore extends Common {
   };
 
   setTokenOnSignIn = ({ token }) => {
-    this.logCallTrack({ token }, primaryCallName, 'setTokenOnSignIn');
+    this.logFunctionCallTrack({ token }, primaryCallName, 'setTokenOnSignIn');
 
     if (!isString(token || '')) {
       const info = 'token must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setTokenOnSignIn',
@@ -4332,12 +4395,16 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setTokenOnSignInSilent = ({ token }) => {
-    this.logCallTrack({ token }, primaryCallName, 'setTokenOnSignInSilent');
+    this.logFunctionCallTrack(
+      { token },
+      primaryCallName,
+      'setTokenOnSignInSilent',
+    );
 
     if (!isString(token || '')) {
       const info = 'token must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setTokenOnSignInSilent',
@@ -4351,7 +4418,7 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromSignInApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseOpenIdFromSignInApiData',
@@ -4377,7 +4444,7 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromSignInSilentApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseOpenIdFromSignInSilentApiData',
@@ -4403,12 +4470,12 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnSignIn = ({ openId }) => {
-    this.logCallTrack({ openId }, primaryCallName, 'setOpenIdOnSignIn');
+    this.logFunctionCallTrack({ openId }, primaryCallName, 'setOpenIdOnSignIn');
 
     if (!isString(openId || '')) {
       const info = 'openId must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setOpenIdOnSignIn',
@@ -4426,12 +4493,16 @@ class SupplementCore extends Common {
    * @param {*} remoteData
    */
   setOpenIdOnSignInSilent = ({ openId }) => {
-    this.logCallTrack({ openId }, primaryCallName, 'setOpenIdOnSignInSilent');
+    this.logFunctionCallTrack(
+      { openId },
+      primaryCallName,
+      'setOpenIdOnSignInSilent',
+    );
 
     if (!isString(openId || '')) {
       const info = 'openId must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setOpenIdOnSignInSilent',
@@ -4450,7 +4521,7 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSuccess = (data) => {
-    this.logCallTrack(data, primaryCallName, 'doAfterSignInSuccess');
+    this.logFunctionCallTrack(data, primaryCallName, 'doAfterSignInSuccess');
 
     logConfig(
       'doAfterSignInSuccess do nothing,if you need,you can override it: doAfterSignInSuccess = (data) => {}',
@@ -4463,7 +4534,11 @@ class SupplementCore extends Common {
    */
   // eslint-disable-next-line no-unused-vars
   doAfterSignInSilentSuccess = (data) => {
-    this.logCallTrack(data, primaryCallName, 'doAfterSignInSilentSuccess');
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'doAfterSignInSilentSuccess',
+    );
 
     logConfig(
       'doAfterSignInSilentSuccess do nothing,if you need,you can override it: doAfterSignInSilentSuccess = (data) => {}',
@@ -4474,9 +4549,9 @@ class SupplementCore extends Common {
    * 静默登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFailWrapper = () => {
-    this.logCallTrack({}, primaryCallName, 'doWhenSignInFailWrapper');
+    this.logFunctionCallTrack({}, primaryCallName, 'doWhenSignInFailWrapper');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'doWhenSignInFailWrapper',
@@ -4490,7 +4565,7 @@ class SupplementCore extends Common {
    * 账户登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInFail = () => {
-    this.logCallTrack({}, primaryCallName, 'doWhenSignInFail');
+    this.logFunctionCallTrack({}, primaryCallName, 'doWhenSignInFail');
 
     logConfig(
       'doWhenSignInFail do nothing,if you need,you can override it: doWhenSignInFail = () => {}',
@@ -4498,9 +4573,13 @@ class SupplementCore extends Common {
   };
 
   doWhenSignInSilentFailWrapper = () => {
-    this.logCallTrack({}, primaryCallName, 'doWhenSignInSilentFailWrapper');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWhenSignInSilentFailWrapper',
+    );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'doWhenSignInSilentFailWrapper',
@@ -4515,7 +4594,7 @@ class SupplementCore extends Common {
       if (checkStringIsNullOrWhiteSpace(signInPath)) {
         const info = '缺少登录页面路径配置';
 
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           { error: info },
           primaryCallName,
           'doWhenSignInSilentFailWrapper',
@@ -4534,7 +4613,7 @@ class SupplementCore extends Common {
    * 静默登录失败时的业务逻辑, 需要重载
    */
   doWhenSignInSilentFail = () => {
-    this.logCallTrack({}, primaryCallName, 'doWhenSignInSilentFail');
+    this.logFunctionCallTrack({}, primaryCallName, 'doWhenSignInSilentFail');
 
     logConfig(
       'doWhenSignInSilentFail do nothing,if you need,you can override it: doWhenSignInSilentFail = () => {}',
@@ -4542,9 +4621,13 @@ class SupplementCore extends Common {
   };
 
   dispatchGetCustomerWrapper = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchGetCustomerWrapper');
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'dispatchGetCustomerWrapper',
+    );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       data,
       primaryCallName,
       'dispatchGetCustomerWrapper',
@@ -4555,9 +4638,9 @@ class SupplementCore extends Common {
   };
 
   dispatchGetCustomer = (data = {}) => {
-    this.logCallTrack({ data }, primaryCallName, 'dispatchGetCustomer');
+    this.logFunctionCallTrack({ data }, primaryCallName, 'dispatchGetCustomer');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'dispatchGetCustomer',
@@ -4574,7 +4657,7 @@ class SupplementCore extends Common {
     if (checkStringIsNullOrWhiteSpace(type)) {
       const info = 'getGetCustomerApiEffect type disallow empty';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         {
           error: info,
           type,
@@ -4595,12 +4678,19 @@ class SupplementCore extends Common {
       alias,
     };
 
-    this.logCallTrace(o, primaryCallName, 'dispatchGetCustomer', 'dispatchApi');
+    this.logFunctionCallTrace(
+      o,
+      primaryCallName,
+      'dispatchGetCustomer',
+      'dispatchApi',
+    );
 
     return this.dispatchApi(o);
   };
 
   getGetCustomerApiEffect = (data) => {
+    this.logFunctionCallTrack(data, primaryCallName, 'getGetCustomerApiEffect');
+
     logConfig(
       'built-in getGetCustomerApiEffect is a simulation,if you need actual business,you need override it: getGetCustomerApiEffect = (data) => {} and return a object like "return {type: \'schedulingControl/getCustomer\',payload: data,}"',
     );
@@ -4618,7 +4708,7 @@ class SupplementCore extends Common {
     failCallback = null,
     completeCallback = null,
   }) => {
-    this.logCallTrack({ data, force }, primaryCallName, 'getCustomer');
+    this.logFunctionCallTrack({ data, force }, primaryCallName, 'getCustomer');
 
     let force = forceValue;
 
@@ -4641,7 +4731,7 @@ class SupplementCore extends Common {
         'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
       );
 
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         data,
         primaryCallName,
         'getCustomer',
@@ -4658,7 +4748,7 @@ class SupplementCore extends Common {
             setCurrentCustomer(metaData);
 
             if (isFunction(successCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'getCustomer',
@@ -4669,7 +4759,7 @@ class SupplementCore extends Common {
 
               successCallback(metaData);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'getCustomer',
@@ -4681,7 +4771,7 @@ class SupplementCore extends Common {
             }
 
             if (isFunction(completeCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'getCustomer',
@@ -4692,7 +4782,7 @@ class SupplementCore extends Common {
 
               completeCallback(metaData);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'getCustomer',
@@ -4704,7 +4794,7 @@ class SupplementCore extends Common {
             }
           } else {
             if (isFunction(failCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'getCustomer',
@@ -4715,7 +4805,7 @@ class SupplementCore extends Common {
 
               failCallback();
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'getCustomer',
@@ -4727,7 +4817,7 @@ class SupplementCore extends Common {
             }
 
             if (isFunction(completeCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'getCustomer',
@@ -4738,7 +4828,7 @@ class SupplementCore extends Common {
 
               completeCallback(metaData);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'getCustomer',
@@ -4753,7 +4843,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { error },
             primaryCallName,
             'getCustomer',
@@ -4769,7 +4859,7 @@ class SupplementCore extends Common {
           logException(error);
 
           if (isFunction(failCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'getCustomer',
@@ -4780,7 +4870,7 @@ class SupplementCore extends Common {
 
             failCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'getCustomer',
@@ -4792,7 +4882,7 @@ class SupplementCore extends Common {
           }
 
           if (isFunction(completeCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'getCustomer',
@@ -4803,7 +4893,7 @@ class SupplementCore extends Common {
 
             completeCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'getCustomer',
@@ -4818,7 +4908,7 @@ class SupplementCore extends Common {
       logDebug('getCustomer from local cache success');
 
       if (isFunction(successCallback)) {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           currentCustomer,
           primaryCallName,
           'getCustomer',
@@ -4827,7 +4917,7 @@ class SupplementCore extends Common {
 
         successCallback(currentCustomer);
       } else {
-        that.logCallTrace(
+        that.logEmptyCallTrace(
           {},
           primaryCallName,
           'getCustomer',
@@ -4837,7 +4927,7 @@ class SupplementCore extends Common {
       }
 
       if (isFunction(completeCallback)) {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           currentCustomer,
           primaryCallName,
           'getCustomer',
@@ -4846,7 +4936,7 @@ class SupplementCore extends Common {
 
         completeCallback(currentCustomer);
       } else {
-        that.logCallTrace(
+        that.logEmptyCallTrace(
           {},
           primaryCallName,
           'getCustomer',
@@ -4858,7 +4948,7 @@ class SupplementCore extends Common {
   };
 
   doAfterGetCustomerOnSignInSilent = (data) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'doAfterGetCustomerOnSignInSilent',
@@ -4870,7 +4960,11 @@ class SupplementCore extends Common {
   };
 
   doAfterGetCustomerOnSignIn = (data) => {
-    this.logCallTrack(data, primaryCallName, 'doAfterGetCustomerOnSignIn');
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'doAfterGetCustomerOnSignIn',
+    );
 
     logConfig(
       'doAfterGetCustomerOnSignIn do nothing,if you need,you can override it: doAfterGetCustomerOnSignIn = (data) => {}',
@@ -4878,13 +4972,13 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromExchangePhoneApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromExchangePhoneApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromExchangePhoneApiDataWrapper',
@@ -4895,7 +4989,7 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromExchangePhoneApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromExchangePhoneApiData',
@@ -4909,7 +5003,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromExchangePhoneApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseSessionEffectiveFromExchangePhoneApiData',
@@ -4930,7 +5024,7 @@ class SupplementCore extends Common {
   };
 
   dispatchExchangePhone = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchExchangePhone');
+    this.logFunctionCallTrack(data, primaryCallName, 'dispatchExchangePhone');
 
     logConfig(
       'built-in dispatchExchangePhone is a simulation,if you need actual business,you need override it: dispatchExchangePhone = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
@@ -4941,7 +5035,7 @@ class SupplementCore extends Common {
       payload: data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchExchangePhone',
@@ -4954,12 +5048,17 @@ class SupplementCore extends Common {
   exchangePhone = ({ data, callback = null }) => {
     const that = this;
 
-    this.logCallTrack({ data }, primaryCallName, 'exchangePhone');
+    this.logFunctionCallTrack({ data }, primaryCallName, 'exchangePhone');
 
-    that.logCallTrace({}, primaryCallName, 'exchangePhone', 'checkSession');
+    that.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'exchangePhone',
+      'checkSession',
+    );
 
     that.checkSession(() => {
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         data,
         primaryCallName,
         'exchangePhone',
@@ -4976,7 +5075,7 @@ class SupplementCore extends Common {
           logDebug(`dataSuccess is ${dataSuccess}`);
 
           if (dataSuccess) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               metaData,
               primaryCallName,
               'exchangePhone',
@@ -4995,7 +5094,7 @@ class SupplementCore extends Common {
             logDebug(`sessionEffective is ${sessionEffective}`);
 
             if (!sessionEffective) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'exchangePhone',
@@ -5008,7 +5107,7 @@ class SupplementCore extends Common {
 
               that.refreshSession({
                 callback: () => {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     { data },
                     primaryCallName,
                     'exchangePhone',
@@ -5029,7 +5128,7 @@ class SupplementCore extends Common {
             }
 
             if (isFunction(callback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'exchangePhone',
@@ -5043,7 +5142,7 @@ class SupplementCore extends Common {
               // eslint-disable-next-line promise/no-callback-in-promise
               callback(metaData);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'exchangePhone',
@@ -5060,7 +5159,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { error },
             primaryCallName,
             'exchangePhone',
@@ -5076,13 +5175,13 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromRegisterWithWeChatApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromRegisterWithWeChatApiDataWrapper',
@@ -5093,7 +5192,7 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromRegisterWithWeChatApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromRegisterWithWeChatApiData',
@@ -5107,7 +5206,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterWithWeChatApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseSessionEffectiveFromRegisterWithWeChatApiData',
@@ -5128,7 +5227,11 @@ class SupplementCore extends Common {
   };
 
   dispatchRegisterWithWeChat = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchRegisterWithWeChat');
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'dispatchRegisterWithWeChat',
+    );
 
     logConfig(
       'built-in dispatchRegisterWithWeChat is a simulation,if you need actual business,you need override it: dispatchRegisterWithWeChat = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
@@ -5139,7 +5242,7 @@ class SupplementCore extends Common {
       payload: data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'dispatchRegisterWithWeChat',
@@ -5157,11 +5260,11 @@ class SupplementCore extends Common {
   }) => {
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'registerWithWeChat');
+    that.logFunctionCallTrack({ data }, primaryCallName, 'registerWithWeChat');
 
     that.setState({ registering: true });
 
-    that.logCallTrace(
+    that.logFunctionCallTrace(
       data,
       primaryCallName,
       'registerWithWeChat',
@@ -5178,7 +5281,7 @@ class SupplementCore extends Common {
         logDebug(`dataSuccess is ${dataSuccess}`);
 
         if (dataSuccess) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'registerWithWeChat',
@@ -5193,7 +5296,7 @@ class SupplementCore extends Common {
             );
 
           if (!sessionEffective) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               metaData,
               primaryCallName,
               'registerWithWeChat',
@@ -5204,7 +5307,7 @@ class SupplementCore extends Common {
 
             that.refreshSession({
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   data,
                   primaryCallName,
                   'registerWithWeChat',
@@ -5229,7 +5332,7 @@ class SupplementCore extends Common {
 
           removeCurrentCustomer();
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'registerWithWeChat',
@@ -5243,7 +5346,7 @@ class SupplementCore extends Common {
               metaData,
             );
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { signInResult },
             primaryCallName,
             'registerWithWeChat',
@@ -5256,7 +5359,7 @@ class SupplementCore extends Common {
             signInResult,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'registerWithWeChat',
@@ -5267,7 +5370,7 @@ class SupplementCore extends Common {
 
           const token = that.parseTokenFromRegisterWithWeChatApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { token },
             primaryCallName,
             'registerWithWeChat',
@@ -5280,7 +5383,7 @@ class SupplementCore extends Common {
             token,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'registerWithWeChat',
@@ -5292,7 +5395,7 @@ class SupplementCore extends Common {
           const openId =
             that.parseOpenIdFromRegisterWithWeChatApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { openId },
             primaryCallName,
             'registerWithWeChat',
@@ -5306,7 +5409,7 @@ class SupplementCore extends Common {
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'registerWithWeChat',
@@ -5318,7 +5421,7 @@ class SupplementCore extends Common {
             that.getCustomer({
               successCallback: () => {
                 if (isFunction(successCallback)) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     metaData,
                     primaryCallName,
                     'registerWithWeChat',
@@ -5330,7 +5433,7 @@ class SupplementCore extends Common {
 
                   successCallback(metaData);
                 } else {
-                  that.logCallTrace(
+                  that.logEmptyCallTrace(
                     {},
                     primaryCallName,
                     'registerWithWeChat',
@@ -5342,7 +5445,7 @@ class SupplementCore extends Common {
                   );
                 }
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   metaData,
                   primaryCallName,
                   'registerWithWeChat',
@@ -5360,7 +5463,7 @@ class SupplementCore extends Common {
             });
           } else {
             if (isFunction(failCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'registerWithWeChat',
@@ -5371,7 +5474,7 @@ class SupplementCore extends Common {
 
               failCallback(metaData);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'registerWithWeChat',
@@ -5383,7 +5486,7 @@ class SupplementCore extends Common {
             }
 
             if (isFunction(completeCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
                 'registerWithWeChat',
@@ -5394,7 +5497,7 @@ class SupplementCore extends Common {
 
               completeCallback(metaData);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'registerWithWeChat',
@@ -5407,7 +5510,7 @@ class SupplementCore extends Common {
           }
         } else {
           if (isFunction(failCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'registerWithWeChat',
@@ -5418,7 +5521,7 @@ class SupplementCore extends Common {
 
             failCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'registerWithWeChat',
@@ -5430,7 +5533,7 @@ class SupplementCore extends Common {
           }
 
           if (isFunction(completeCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'registerWithWeChat',
@@ -5441,7 +5544,7 @@ class SupplementCore extends Common {
 
             completeCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'registerWithWeChat',
@@ -5458,7 +5561,7 @@ class SupplementCore extends Common {
       .catch((error) => {
         that.setState({ registering: false });
 
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { error },
           primaryCallName,
           'registerWithWeChat',
@@ -5469,7 +5572,7 @@ class SupplementCore extends Common {
         logException(error);
 
         if (isFunction(failCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'registerWithWeChat',
@@ -5480,7 +5583,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'registerWithWeChat',
@@ -5492,7 +5595,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(completeCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'registerWithWeChat',
@@ -5503,7 +5606,7 @@ class SupplementCore extends Common {
 
           completeCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'registerWithWeChat',
@@ -5517,13 +5620,19 @@ class SupplementCore extends Common {
   };
 
   parseSessionEffectiveFromRegisterApiDataWrapper = (remoteData) => {
+    this.logFunctionCallTrack(
+      remoteData,
+      primaryCallName,
+      'parseSessionEffectiveFromRegisterApiDataWrapper',
+    );
+
     logExecute('parseSessionEffectiveFromRegisterApiData');
 
     return this.parseSessionEffectiveFromRegisterApiData(remoteData);
   };
 
   parseSessionEffectiveFromRegisterApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSessionEffectiveFromRegisterApiData',
@@ -5537,7 +5646,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key sessionEffective in parseSessionEffectiveFromRegisterApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseSessionEffectiveFromRegisterApiData',
@@ -5558,7 +5667,7 @@ class SupplementCore extends Common {
   };
 
   dispatchRegister = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchRegister');
+    this.logFunctionCallTrack(data, primaryCallName, 'dispatchRegister');
 
     logConfig(
       'built-in dispatchRegister is a simulation,if you need actual business,you need override it: dispatchRegister = (data) => {} and return a promise dispatchApi like "return this.dispatchApi({type: \'schedulingControl/exchangePhone\',payload: data,})"',
@@ -5569,7 +5678,12 @@ class SupplementCore extends Common {
       payload: data,
     };
 
-    this.logCallTrace(o, primaryCallName, 'dispatchRegister', 'dispatchApi');
+    this.logFunctionCallTrace(
+      o,
+      primaryCallName,
+      'dispatchRegister',
+      'dispatchApi',
+    );
 
     return this.dispatchApi(o);
   };
@@ -5586,9 +5700,14 @@ class SupplementCore extends Common {
   }) => {
     const that = this;
 
-    that.logCallTrack({ data }, primaryCallName, 'register');
+    that.logFunctionCallTrack({ data }, primaryCallName, 'register');
 
-    that.logCallTrace(data, primaryCallName, 'register', 'dispatchRegister');
+    that.logFunctionCallTrace(
+      data,
+      primaryCallName,
+      'register',
+      'dispatchRegister',
+    );
 
     that
       .dispatchRegister(data)
@@ -5598,7 +5717,7 @@ class SupplementCore extends Common {
         logDebug(`dataSuccess is ${dataSuccess}`);
 
         if (dataSuccess) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'register',
@@ -5611,7 +5730,7 @@ class SupplementCore extends Common {
             that.parseSessionEffectiveFromRegisterApiDataWrapper(metaData);
 
           if (!sessionEffective) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'register',
@@ -5622,7 +5741,7 @@ class SupplementCore extends Common {
 
             that.refreshSession({
               callback: () => {
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   { data },
                   primaryCallName,
                   'register',
@@ -5647,7 +5766,7 @@ class SupplementCore extends Common {
 
           removeCurrentCustomer();
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'register',
@@ -5659,7 +5778,7 @@ class SupplementCore extends Common {
           const signInResult =
             that.parseSignInResultFromRegisterApiDataWrapper(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { signInResult },
             primaryCallName,
             'register',
@@ -5672,7 +5791,7 @@ class SupplementCore extends Common {
             signInResult,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'register',
@@ -5683,7 +5802,7 @@ class SupplementCore extends Common {
 
           const token = that.parseTokenFromRegisterApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { token },
             primaryCallName,
             'register',
@@ -5696,7 +5815,7 @@ class SupplementCore extends Common {
             token,
           });
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             metaData,
             primaryCallName,
             'register',
@@ -5707,7 +5826,7 @@ class SupplementCore extends Common {
 
           const openId = that.parseOpenIdFromRegisterApiData(metaData);
 
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { openId },
             primaryCallName,
             'register',
@@ -5723,7 +5842,7 @@ class SupplementCore extends Common {
           const verifySignInResult = getVerifySignInResult();
 
           if (toString(signInResult) === toString(verifySignInResult.success)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'register',
@@ -5735,7 +5854,7 @@ class SupplementCore extends Common {
             that.getCustomer({
               successCallback: () => {
                 if (isFunction(successCallback)) {
-                  that.logCallTrace(
+                  that.logFunctionCallTrace(
                     metaData,
                     primaryCallName,
                     'register',
@@ -5748,7 +5867,7 @@ class SupplementCore extends Common {
 
                   successCallback(metaData);
                 } else {
-                  that.logCallTrace(
+                  that.logEmptyCallTrace(
                     {},
                     primaryCallName,
                     'register',
@@ -5761,7 +5880,7 @@ class SupplementCore extends Common {
                   );
                 }
 
-                that.logCallTrace(
+                that.logFunctionCallTrace(
                   metaData,
                   primaryCallName,
                   'register',
@@ -5779,7 +5898,7 @@ class SupplementCore extends Common {
             });
           } else {
             if (isFunction(failCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 {},
                 primaryCallName,
                 'register',
@@ -5792,7 +5911,7 @@ class SupplementCore extends Common {
 
               failCallback();
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'register',
@@ -5806,7 +5925,7 @@ class SupplementCore extends Common {
             }
 
             if (isFunction(completeCallback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 {},
                 primaryCallName,
                 'register',
@@ -5819,7 +5938,7 @@ class SupplementCore extends Common {
 
               completeCallback();
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'register',
@@ -5834,7 +5953,7 @@ class SupplementCore extends Common {
           }
         } else {
           if (isFunction(failCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'register',
@@ -5845,7 +5964,7 @@ class SupplementCore extends Common {
 
             failCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'register',
@@ -5857,7 +5976,7 @@ class SupplementCore extends Common {
           }
 
           if (isFunction(completeCallback)) {
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'register',
@@ -5868,7 +5987,7 @@ class SupplementCore extends Common {
 
             completeCallback();
           } else {
-            that.logCallTrace(
+            that.logEmptyCallTrace(
               {},
               primaryCallName,
               'register',
@@ -5883,7 +6002,7 @@ class SupplementCore extends Common {
         return remoteData;
       })
       .catch((error) => {
-        that.logCallTrace(
+        that.logFunctionCallTrace(
           { error },
           primaryCallName,
           'register',
@@ -5894,7 +6013,7 @@ class SupplementCore extends Common {
         logException(error);
 
         if (isFunction(failCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'register',
@@ -5905,7 +6024,7 @@ class SupplementCore extends Common {
 
           failCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'register',
@@ -5917,7 +6036,7 @@ class SupplementCore extends Common {
         }
 
         if (isFunction(completeCallback)) {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             {},
             primaryCallName,
             'register',
@@ -5928,7 +6047,7 @@ class SupplementCore extends Common {
 
           completeCallback();
         } else {
-          that.logCallTrace(
+          that.logEmptyCallTrace(
             {},
             primaryCallName,
             'register',
@@ -5942,13 +6061,13 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromRegisterApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSignInResultFromRegisterApiDataWrapper',
@@ -5959,13 +6078,13 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterWithWeChatApiDataWrapper = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromRegisterWithWeChatApiDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       remoteData,
       primaryCallName,
       'parseSignInResultFromRegisterWithWeChatApiDataWrapper',
@@ -5976,7 +6095,7 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromRegisterApiData',
@@ -5992,7 +6111,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key signInResult in parseSignInResultFromRegisterApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseSignInResultFromRegisterApiData',
@@ -6011,7 +6130,7 @@ class SupplementCore extends Common {
   };
 
   parseSignInResultFromRegisterWithWeChatApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseSignInResultFromRegisterWithWeChatApiData',
@@ -6027,7 +6146,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key signInResult in parseSignInResultFromRegisterWithWeChatApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseSignInResultFromRegisterWithWeChatApiData',
@@ -6046,7 +6165,7 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnRegister = ({ signInResult }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         signInResult,
       },
@@ -6069,7 +6188,7 @@ class SupplementCore extends Common {
     ) {
       const info = `signInResult not allow ${signInResult}.`;
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setSignInResultOnRegister',
@@ -6079,7 +6198,7 @@ class SupplementCore extends Common {
       throw new Error(info);
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       { data: v },
       primaryCallName,
       'setSignInResultOnRegister',
@@ -6090,7 +6209,7 @@ class SupplementCore extends Common {
   };
 
   setSignInResultOnRegisterWithWeChat = ({ signInResult }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         signInResult,
       },
@@ -6113,7 +6232,7 @@ class SupplementCore extends Common {
     ) {
       const info = `signInResult not allow ${signInResult}.`;
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setSignInResultOnRegisterWithWeChat',
@@ -6123,7 +6242,7 @@ class SupplementCore extends Common {
       throw new Error(info);
     }
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       { data: v },
       primaryCallName,
       'setSignInResultOnRegisterWithWeChat',
@@ -6134,7 +6253,7 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromRegisterApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseTokenFromRegisterApiData',
@@ -6148,7 +6267,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key token in parseTokenFromRegisterApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseTokenFromRegisterApiData',
@@ -6167,7 +6286,7 @@ class SupplementCore extends Common {
   };
 
   parseTokenFromRegisterWithWeChatApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseTokenFromRegisterWithWeChatApiData',
@@ -6181,7 +6300,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key token in parseTokenFromRegisterWithWeChatApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseTokenFromRegisterWithWeChatApiData',
@@ -6200,12 +6319,12 @@ class SupplementCore extends Common {
   };
 
   setTokenOnRegister = ({ token }) => {
-    this.logCallTrack({ token }, primaryCallName, 'setTokenOnRegister');
+    this.logFunctionCallTrack({ token }, primaryCallName, 'setTokenOnRegister');
 
     if (!isString(token || '')) {
       const info = 'setTokenOnRegister token must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setTokenOnRegister',
@@ -6219,7 +6338,7 @@ class SupplementCore extends Common {
   };
 
   setTokenOnRegisterWithWeChat = ({ token }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       { token },
       primaryCallName,
       'setTokenOnRegisterWithWeChat',
@@ -6228,7 +6347,7 @@ class SupplementCore extends Common {
     if (!isString(token || '')) {
       const info = 'setTokenOnRegisterWithWeChat token must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setTokenOnRegisterWithWeChat',
@@ -6242,7 +6361,7 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromRegisterApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseOpenIdFromRegisterApiData',
@@ -6256,7 +6375,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key openId in parseOpenIdFromRegisterApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseOpenIdFromRegisterApiData',
@@ -6275,7 +6394,7 @@ class SupplementCore extends Common {
   };
 
   parseOpenIdFromRegisterWithWeChatApiData = (remoteData) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       remoteData,
       primaryCallName,
       'parseOpenIdFromRegisterWithWeChatApiData',
@@ -6289,7 +6408,7 @@ class SupplementCore extends Common {
       const info =
         'params remoteData not exist key openId in parseOpenIdFromRegisterWithWeChatApiData';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'parseOpenIdFromRegisterApiData',
@@ -6308,12 +6427,16 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnRegister = ({ openId }) => {
-    this.logCallTrack({ openId }, primaryCallName, 'setOpenIdOnRegister');
+    this.logFunctionCallTrack(
+      { openId },
+      primaryCallName,
+      'setOpenIdOnRegister',
+    );
 
     if (!isString(openId || '')) {
       const info = 'setOpenIdOnRegister openId must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setOpenIdOnRegister',
@@ -6329,7 +6452,7 @@ class SupplementCore extends Common {
   };
 
   setOpenIdOnRegisterWithWeChat = ({ openId }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       { openId },
       primaryCallName,
       'setOpenIdOnRegisterWithWeChat',
@@ -6338,7 +6461,7 @@ class SupplementCore extends Common {
     if (!isString(openId || '')) {
       const info = 'setOpenIdOnRegisterWithWeChat openId must be string';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'setOpenIdOnRegisterWithWeChat',
@@ -6354,7 +6477,11 @@ class SupplementCore extends Common {
   };
 
   doAfterRegisterWithWeChat = (data) => {
-    this.logCallTrack(data, primaryCallName, 'doAfterRegisterWithWeChat');
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'doAfterRegisterWithWeChat',
+    );
 
     logConfig(
       'doAfterRegisterWithWeChat do nothing,if you need,you can override it: doAfterRegisterWithWeChat = (data) => {}',
@@ -6362,7 +6489,7 @@ class SupplementCore extends Common {
   };
 
   doAfterRegister = (data) => {
-    this.logCallTrack(data, primaryCallName, 'doAfterRegister');
+    this.logFunctionCallTrack(data, primaryCallName, 'doAfterRegister');
 
     logConfig(
       'doAfterRegister do nothing,if you need,you can override it: doAfterRegister = (data) => {}',
@@ -6370,9 +6497,13 @@ class SupplementCore extends Common {
   };
 
   dispatchGetMetaDataWrapper = (data = {}) => {
-    this.logCallTrack(data, primaryCallName, 'dispatchGetMetaDataWrapper');
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'dispatchGetMetaDataWrapper',
+    );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       data,
       primaryCallName,
       'dispatchGetMetaDataWrapper',
@@ -6383,9 +6514,9 @@ class SupplementCore extends Common {
   };
 
   dispatchGetMetaData = (data = {}) => {
-    this.logCallTrack({ data }, primaryCallName, 'dispatchGetMetaData');
+    this.logFunctionCallTrack({ data }, primaryCallName, 'dispatchGetMetaData');
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       {},
       primaryCallName,
       'dispatchGetMetaData',
@@ -6402,7 +6533,7 @@ class SupplementCore extends Common {
     if (checkStringIsNullOrWhiteSpace(type)) {
       const info = 'getMetaDataApiEffect type disallow empty';
 
-      this.logCallTrace(
+      this.logFunctionCallTrace(
         { error: info },
         primaryCallName,
         'dispatchGetMetaData',
@@ -6418,13 +6549,18 @@ class SupplementCore extends Common {
       alias,
     };
 
-    this.logCallTrace(o, primaryCallName, 'dispatchGetMetaData', 'dispatchApi');
+    this.logFunctionCallTrace(
+      o,
+      primaryCallName,
+      'dispatchGetMetaData',
+      'dispatchApi',
+    );
 
     return this.dispatchApi(o);
   };
 
   getMetaDataApiEffect = (data) => {
-    this.logCallTrack(data, primaryCallName, 'getMetaDataApiEffect');
+    this.logFunctionCallTrack(data, primaryCallName, 'getMetaDataApiEffect');
 
     logConfig(
       'built-in getMetaDataApiEffect is a simulation,if you need actual business,you need override it: getMetaDataApiEffect = (data) => {} and return a object like "return {type: \'schedulingControl/getMetaData\',payload: data,}"',
@@ -6441,7 +6577,7 @@ class SupplementCore extends Common {
     force: forceValue = false,
     callback = null,
   }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         data,
         force: forceValue,
@@ -6471,7 +6607,7 @@ class SupplementCore extends Common {
 
       const that = this;
 
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         data,
         primaryCallName,
         'initMetaData',
@@ -6489,7 +6625,7 @@ class SupplementCore extends Common {
             setLocalMetaData(v);
 
             if (isFunction(callback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 v,
                 primaryCallName,
                 'initMetaData',
@@ -6501,7 +6637,7 @@ class SupplementCore extends Common {
               // eslint-disable-next-line promise/no-callback-in-promise
               callback(v);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'initMetaData',
@@ -6512,7 +6648,7 @@ class SupplementCore extends Common {
               );
             }
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               v,
               primaryCallName,
               'initMetaData',
@@ -6527,7 +6663,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { error },
             primaryCallName,
             'initMetaData',
@@ -6541,11 +6677,16 @@ class SupplementCore extends Common {
       logDebug('check meta data from local cache success');
 
       if (isFunction(callback)) {
-        this.logCallTrace({}, primaryCallName, 'initMetaData', 'callback');
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'initMetaData',
+          'callback',
+        );
 
         callback(metaData);
       } else {
-        this.logCallTrace(
+        this.logEmptyCallTrace(
           {},
           primaryCallName,
           'initMetaData',
@@ -6557,7 +6698,7 @@ class SupplementCore extends Common {
   };
 
   getMetaData = () => {
-    this.logCallTrack({}, primaryCallName, 'getMetaData');
+    this.logFunctionCallTrack({}, primaryCallName, 'getMetaData');
 
     return {
       ...getDefaultMetaData(),
@@ -6566,7 +6707,7 @@ class SupplementCore extends Common {
   };
 
   doAfterLoadMetaDataByForce = (data) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'doAfterLoadMetaDataByForce',
@@ -6575,13 +6716,13 @@ class SupplementCore extends Common {
   };
 
   dispatchGetFullAdministrativeDivisionDataWrapper = (data = {}) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'dispatchGetFullAdministrativeDivisionDataWrapper',
     );
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       data,
       primaryCallName,
       'dispatchGetFullAdministrativeDivisionDataWrapper',
@@ -6592,7 +6733,7 @@ class SupplementCore extends Common {
   };
 
   dispatchGetFullAdministrativeDivisionData = (data = {}) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       data,
       primaryCallName,
       'dispatchGetFullAdministrativeDivisionData',
@@ -6607,7 +6748,7 @@ class SupplementCore extends Common {
       payload: data,
     };
 
-    this.logCallTrace(
+    this.logFunctionCallTrace(
       o,
       primaryCallName,
       'dispatchGetFullAdministrativeDivisionData',
@@ -6622,7 +6763,7 @@ class SupplementCore extends Common {
     force: forceValue = false,
     callback = null,
   }) => {
-    this.logCallTrack(
+    this.logFunctionCallTrack(
       {
         data,
         force: forceValue,
@@ -6652,7 +6793,7 @@ class SupplementCore extends Common {
 
       const that = this;
 
-      that.logCallTrace(
+      that.logFunctionCallTrace(
         data,
         primaryCallName,
         'initFullAdministrativeDivisionData',
@@ -6670,7 +6811,7 @@ class SupplementCore extends Common {
             setAdministrativeDivisionFullDataCache(v);
 
             if (isFunction(callback)) {
-              that.logCallTrace(
+              that.logFunctionCallTrace(
                 v,
                 primaryCallName,
                 'initFullAdministrativeDivisionData',
@@ -6682,7 +6823,7 @@ class SupplementCore extends Common {
               // eslint-disable-next-line promise/no-callback-in-promise
               callback(v);
             } else {
-              that.logCallTrace(
+              that.logEmptyCallTrace(
                 {},
                 primaryCallName,
                 'initFullAdministrativeDivisionData',
@@ -6693,7 +6834,7 @@ class SupplementCore extends Common {
               );
             }
 
-            that.logCallTrace(
+            that.logFunctionCallTrace(
               {},
               primaryCallName,
               'initFullAdministrativeDivisionData',
@@ -6708,7 +6849,7 @@ class SupplementCore extends Common {
           return remoteData;
         })
         .catch((error) => {
-          that.logCallTrace(
+          that.logFunctionCallTrace(
             { error },
             primaryCallName,
             'initFullAdministrativeDivisionData',
@@ -6724,7 +6865,7 @@ class SupplementCore extends Common {
       );
 
       if (isFunction(callback)) {
-        this.logCallTrace(
+        this.logFunctionCallTrace(
           {},
           primaryCallName,
           'initFullAdministrativeDivisionData',
@@ -6733,7 +6874,7 @@ class SupplementCore extends Common {
 
         callback();
       } else {
-        this.logCallTrace(
+        this.logEmptyCallTrace(
           {},
           primaryCallName,
           'initFullAdministrativeDivisionData',
@@ -6745,7 +6886,11 @@ class SupplementCore extends Common {
   };
 
   getFullAdministrativeDivisionData = () => {
-    this.logCallTrack({}, primaryCallName, 'getFullAdministrativeDivisionData');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'getFullAdministrativeDivisionData',
+    );
 
     const { list } = getAdministrativeDivisionFullData();
 
