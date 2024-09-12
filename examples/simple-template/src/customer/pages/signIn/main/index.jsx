@@ -54,14 +54,6 @@ class SignIn extends PageWrapper {
 
   password = '';
 
-  triggerPhoneChanged = (v) => {
-    this.phone = v;
-  };
-
-  triggerPasswordChanged = (v) => {
-    this.password = v;
-  };
-
   signInWithPhone = () => {
     this.signIn({
       data: {
@@ -69,22 +61,14 @@ class SignIn extends PageWrapper {
         password: this.password,
       },
     });
+  };
 
-    // signInWithPhoneAction({
-    //   target: this,
-    //   handleData: {
-    //     phone: this.phone,
-    //     password: this.password,
-    //   },
-    //   successCallback: ({ target, remoteData }) => {
-    //     const openId = target.parseOpenIdFromSignInApiData(remoteData);
+  triggerPhoneChanged = (v) => {
+    this.phone = v;
+  };
 
-    //     const token = target.parseTokenFromSignInApiData(remoteData);
-    //   },
-    //   failCallback: ({ target }) => {
-    //     // target.setState({ processing: false });
-    //   },
-    // });
+  triggerPasswordChanged = (v) => {
+    this.password = v;
   };
 
   renderFurther() {
@@ -200,7 +184,14 @@ class SignIn extends PageWrapper {
             leftStyle={{
               marginRight: transformSize(16),
             }}
-            right={<ColorText fontSize={28} color="#ccc" text="忘记密码?" />}
+            right={
+              <ColorText
+                fontSize={28}
+                color="#ccc"
+                text="忘记密码?"
+                onClick={this.goToResetPassword}
+              />
+            }
           />
 
           <Line transparent height={80} />

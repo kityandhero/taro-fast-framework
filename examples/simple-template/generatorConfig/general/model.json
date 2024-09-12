@@ -66,10 +66,24 @@
           "type": "singleData"
         },
         {
-          "title": "凭证校验",
+          "title": "刷新验证码",
           "api": "/wechatApplication/entrance/refreshCaptcha",
           "effect": "refreshCaptcha",
           "service": "refreshCaptchaData",
+          "type": "singleData"
+        },
+        {
+          "title": "发送重置密码短信验证码",
+          "api": "/wechatApplication/entrance/sendRetrievePasswordMessage",
+          "effect": "sendRetrievePasswordMessage",
+          "service": "sendRetrievePasswordMessageData",
+          "type": "singleData"
+        },
+        {
+          "title": "重置密码",
+          "api": "/wechatApplication/entrance/retrievePassword",
+          "effect": "retrievePassword",
+          "service": "retrievePasswordData",
           "type": "singleData"
         }
       ],

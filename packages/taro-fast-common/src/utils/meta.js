@@ -1,6 +1,7 @@
 import { ENV_TYPE, getApp, getEnv as getEnvironment } from '@tarojs/taro';
 
 import {
+  checkStringIsNullOrWhiteSpace,
   getApplicationMergeConfig,
   isObject,
   isUndefined,
@@ -119,4 +120,12 @@ export function corsTarget() {
   }
 
   return corsTargetDomain;
+}
+
+export function buildBase64Image(v) {
+  if (checkStringIsNullOrWhiteSpace(v)) {
+    return '';
+  }
+
+  return `data:image/png;base64,${v}`;
 }

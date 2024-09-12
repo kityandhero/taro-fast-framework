@@ -16,6 +16,7 @@ const defaultProps = {
   fillCard: false,
   showDay: false,
   showHour: true,
+  showMinute: true,
   format: {
     day: '天',
     hours: '时',
@@ -42,7 +43,6 @@ class Countdown extends BaseComponent {
 
     this.state = {
       ...this.state,
-
       day: 0,
       hour: 0,
       minute: 0,
@@ -125,6 +125,7 @@ class Countdown extends BaseComponent {
       cardMode,
       fillCard,
       showHour,
+      showMinute,
       valueColor,
       separatorColor,
       borderColor,
@@ -188,6 +189,7 @@ class Countdown extends BaseComponent {
             {formatNumber(day)}
           </View>
         ) : null}
+
         {showDay ? (
           <View
             className={classNames({
@@ -213,6 +215,7 @@ class Countdown extends BaseComponent {
             {formatNumber(hour)}
           </View>
         ) : null}
+
         {showHour ? (
           <View
             className={classNames({
@@ -225,26 +228,31 @@ class Countdown extends BaseComponent {
           </View>
         ) : null}
 
-        <View
-          className={classNames({
-            [`${classPrefix}__item`]: true,
-            [`${classPrefix}__value`]: true,
-            [`${classPrefix}__value_no_fill`]: !!cardMode && !fillCard,
-            [`${classPrefix}__value_fill`]: !!cardMode && !!fillCard,
-          })}
-          style={valueStyleChanged}
-        >
-          {formatNumber(minute)}
-        </View>
-        <View
-          className={classNames({
-            [`${classPrefix}__item`]: true,
-            [`${classPrefix}__separator`]: true,
-          })}
-          style={separatorColorChanged}
-        >
-          {format.minutes}
-        </View>
+        {showMinute ? (
+          <View
+            className={classNames({
+              [`${classPrefix}__item`]: true,
+              [`${classPrefix}__value`]: true,
+              [`${classPrefix}__value_no_fill`]: !!cardMode && !fillCard,
+              [`${classPrefix}__value_fill`]: !!cardMode && !!fillCard,
+            })}
+            style={valueStyleChanged}
+          >
+            {formatNumber(minute)}
+          </View>
+        ) : null}
+
+        {showMinute ? (
+          <View
+            className={classNames({
+              [`${classPrefix}__item`]: true,
+              [`${classPrefix}__separator`]: true,
+            })}
+            style={separatorColorChanged}
+          >
+            {format.minutes}
+          </View>
+        ) : null}
 
         <View
           className={classNames({
@@ -257,6 +265,7 @@ class Countdown extends BaseComponent {
         >
           {formatNumber(second)}
         </View>
+
         <View
           className={classNames({
             [`${classPrefix}__item`]: true,

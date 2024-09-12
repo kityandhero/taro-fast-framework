@@ -68,3 +68,23 @@ export async function refreshCaptchaData(parameters) {
     params: parameters,
   });
 }
+
+export const sendRetrievePasswordMessageDataApiAddress =
+  '/wechatApplication/entrance/sendRetrievePasswordMessage';
+
+export async function sendRetrievePasswordMessageData(parameters) {
+  return request({
+    api: sendRetrievePasswordMessageDataApiAddress,
+    params: parameters,
+  });
+}
+
+export const retrievePasswordDataApiAddress =
+  '/wechatApplication/entrance/retrievePassword';
+
+export async function retrievePasswordData(parameters) {
+  return request({
+    api: retrievePasswordDataApiAddress,
+    params: parameters,
+  });
+}

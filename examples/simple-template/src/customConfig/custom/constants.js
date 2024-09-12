@@ -12,8 +12,9 @@ export const signInInputUser = `${filePrefix}1830877727918526464.png`;
 export const signInInputPassword = `${filePrefix}1830881952803196928.png`;
 
 export const resetPasswordPhone = `${filePrefix}1834035561451622400.png`;
-export const resetPasswordCaptcha = `${filePrefix}1834035653227188224.png`;
-export const resetPasswordCode = `${filePrefix}1834035653227188224.png`;
+export const resetPasswordShieldBlue = `${filePrefix}1834035653227188224.png`;
+export const resetPasswordShieldGrey = `${filePrefix}1834145367885746176.png`;
+export const resetPasswordKeyBlue = `${filePrefix}1834146507838853120.png`;
 
 export const shareTransfer = {
   home: '0',

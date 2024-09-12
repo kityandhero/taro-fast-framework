@@ -10,6 +10,8 @@ import {
   checkTicketValidityData,
   refreshCaptchaData,
   resetPasswordData,
+  retrievePasswordData,
+  sendRetrievePasswordMessageData,
   signInData,
   signInSilentData,
   signInWithEmailData,
@@ -24,6 +26,8 @@ export const entranceTypeCollection = {
   resetPassword: 'entrance/resetPassword',
   checkTicketValidity: 'entrance/checkTicketValidity',
   refreshCaptcha: 'entrance/refreshCaptcha',
+  sendRetrievePasswordMessage: 'entrance/sendRetrievePasswordMessage',
+  retrievePassword: 'entrance/retrievePassword',
 };
 
 export function buildModel() {
@@ -201,6 +205,58 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(refreshCaptchaData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *sendRetrievePasswordMessage(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(sendRetrievePasswordMessageData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *retrievePassword(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(retrievePasswordData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

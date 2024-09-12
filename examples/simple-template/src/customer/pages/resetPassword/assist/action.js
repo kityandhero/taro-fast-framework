@@ -18,13 +18,13 @@ export async function refreshCaptchaAction({
   });
 }
 
-export async function signInWithPhoneAction({
+export async function sendRetrievePasswordMessageAction({
   target,
   handleData,
   successCallback,
 }) {
   actionCore({
-    api: modelTypeCollection.entranceTypeCollection.signInWithPhone,
+    api: modelTypeCollection.entranceTypeCollection.sendRetrievePasswordMessage,
     params: {
       phone: getValueByKey({
         data: handleData,
@@ -32,9 +32,15 @@ export async function signInWithPhoneAction({
         convert: convertCollection.string,
         defaultValue: '',
       }),
-      password: getValueByKey({
+      captchaKey: getValueByKey({
         data: handleData,
-        key: 'password',
+        key: 'captchaKey',
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+      captchaCode: getValueByKey({
+        data: handleData,
+        key: 'captchaCode',
         convert: convertCollection.string,
         defaultValue: '',
       }),
@@ -45,23 +51,35 @@ export async function signInWithPhoneAction({
   });
 }
 
-export async function signInWithEmailAction({
+export async function retrievePasswordAction({
   target,
   handleData,
   successCallback,
 }) {
   actionCore({
-    api: modelTypeCollection.entranceTypeCollection.signInWithEmail,
+    api: modelTypeCollection.entranceTypeCollection.retrievePassword,
     params: {
-      email: getValueByKey({
+      phone: getValueByKey({
         data: handleData,
-        key: 'email',
+        key: 'phone',
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+      smsCode: getValueByKey({
+        data: handleData,
+        key: 'smsCode',
         convert: convertCollection.string,
         defaultValue: '',
       }),
       password: getValueByKey({
         data: handleData,
         key: 'password',
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+      passwordVerify: getValueByKey({
+        data: handleData,
+        key: 'passwordVerify',
         convert: convertCollection.string,
         defaultValue: '',
       }),
