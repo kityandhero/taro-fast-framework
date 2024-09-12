@@ -5,7 +5,7 @@ import { PageWrapperCore } from '../../general/PageWrapperCore';
 
 class PageWrapperExtra extends PageWrapperCore {
   goToResetPassword = () => {
-    navigateTo(pathCollection.customer.resetPassword);
+    navigateTo(pathCollection.customer.resetPassword.path);
   };
 }
 

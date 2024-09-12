@@ -185,16 +185,16 @@ class SignIn extends PageWrapper {
               marginRight: transformSize(16),
             }}
             right={
-              <ColorText
-                fontSize={28}
-                color="#ccc"
-                text="忘记密码?"
+              <View
+                style={{ paddingBottom: transformSize(14) }}
                 onClick={this.goToResetPassword}
-              />
+              >
+                <ColorText fontSize={28} color="#ccc" text="忘记密码?" />
+              </View>
             }
           />
 
-          <Line transparent height={80} />
+          <Line transparent height={66} />
 
           <Button
             weappButton

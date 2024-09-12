@@ -16,7 +16,6 @@ import {
   Button,
   CenterBox,
   // CenterBox,
-  ColorText,
   Countdown,
   FlexBox,
   ImageBox,
@@ -238,16 +237,16 @@ class ResetPassword extends PageWrapper {
   };
 
   showFirstStep = () => {
+    this.setState({ step: 1 });
+  };
+
+  showSecondStep = () => {
     if (checkStringIsNullOrWhiteSpace(this.smsCode)) {
       showSimpleErrorMessage('请输入短信验证码');
 
       return;
     }
 
-    this.setState({ step: 1 });
-  };
-
-  showSecondStep = () => {
     this.setState({ step: 2 });
   };
 
@@ -373,15 +372,6 @@ class ResetPassword extends PageWrapper {
         </View>
 
         <Line transparent height={20} />
-
-        <FlexBox
-          flexAuto="left"
-          left={<View></View>}
-          leftStyle={{
-            marginRight: transformSize(16),
-          }}
-          right={<ColorText fontSize={28} color="#ccc" text="忘记密码?" />}
-        />
 
         <Line transparent height={80} />
 
