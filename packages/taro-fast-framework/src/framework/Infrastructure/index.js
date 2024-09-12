@@ -14,7 +14,6 @@ import {
   logDebug,
   logException,
   logInfo,
-  logObject,
   logWarn,
   mergeArrowText,
   navigateTo,
@@ -409,6 +408,12 @@ class Infrastructure extends AbstractComponent {
   }
 
   checkSchedulingControlExistence = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'checkSchedulingControlExistence',
+    );
+
     const { schedulingControl } = this.props;
 
     if ((schedulingControl || null) == null) {
@@ -416,52 +421,116 @@ class Infrastructure extends AbstractComponent {
         text: 'config error,check in console',
       });
 
-      logObject(this);
+      const info =
+        'schedulingControl in props not exist, please connect it first';
 
-      throw new Error(
-        'schedulingControl in props not exist, please connect it first',
+      this.logFunctionCallTrace(
+        {
+          error: info,
+          current: this,
+        },
+        primaryCallName,
+        'checkSchedulingControlExistence',
+        'error',
       );
+
+      throw new Error(info);
     }
   };
 
   initializeInternalData = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'initializeInternalData',
+      emptyLogic,
+    );
+
     logConfig(
       'initializeInternalData do nothing, if you need to initialize internal data, please override it: initializeInternalData = () => {}',
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
   adjustByScene = (scene) => {
+    this.logFunctionCallTrack(
+      { scene },
+      primaryCallName,
+      'adjustByScene',
+      emptyLogic,
+    );
+
     logConfig(
       'adjustByScene do nothing, if you need to adjust something by different scene, please override it: adjustByScene = (scene) => {}',
     );
   };
 
   adjustInternalDataOnRepeatedShow = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'adjustInternalDataOnRepeatedShow',
+      emptyLogic,
+    );
+
     logConfig(
       'adjustInternalDataOnRepeatedShow do nothing, if you need to adjust initialize internal data, please override it: adjustInternalDataOnRepeatedShow = () => {}',
     );
   };
 
   receiveExternalParameter = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'receiveExternalParameter');
+
     if ((this.externalParameter || null) == null) {
       this.externalParameter = this.currentInstance.router.params;
     }
   };
 
   setNavigationBarTitle = (parameters) => {
+    this.logFunctionCallTrack(
+      parameters,
+      primaryCallName,
+      'setNavigationBarTitle',
+    );
+
+    this.logFunctionCallTrace(
+      parameters,
+      primaryCallName,
+      'setNavigationBarTitle',
+      'Taro.setNavigationBarTitle',
+    );
+
     return Taro.setNavigationBarTitle(parameters);
   };
 
   showModal = (parameters) => {
+    this.logFunctionCallTrack(parameters, primaryCallName, 'showModal');
+
+    this.logFunctionCallTrace(
+      parameters,
+      primaryCallName,
+      'showModal',
+      'Taro.showModal',
+    );
+
     return Taro.showModal(parameters);
   };
 
   getCurrentPages = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'getCurrentPages');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'getCurrentPages',
+      'Taro.getCurrentPages',
+    );
+
     return Taro.getCurrentPages();
   };
 
   checkWorkDoing = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'checkWorkDoing');
+
     const {
       dataLoading,
       reloading,
@@ -518,22 +587,66 @@ class Infrastructure extends AbstractComponent {
   doWhenScroll = ({ scrollTop }) => {};
 
   onPullDownRefresh() {
+    this.logFunctionCallTrack({}, primaryCallName, 'onPullDownRefresh');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'onPullDownRefresh',
+      'onRefresh',
+    );
+
     this.onRefresh();
   }
 
   onReachBottom() {
+    this.logFunctionCallTrack({}, primaryCallName, 'onReachBottom');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'onReachBottom',
+      'judgeNeedNextLoad',
+    );
+
     if (this.enableLowerLoad && this.judgeNeedNextLoad()) {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'onReachBottom',
+        'onLowerLoad',
+      );
+
       this.onLowerLoad();
     }
   }
 
   goToWebPage(pagePath, title, url) {
+    this.logFunctionCallTrack(
+      {
+        pagePath,
+        title,
+        url,
+      },
+      primaryCallName,
+      'goToWebPage',
+    );
+
     if (checkStringIsNullOrWhiteSpace(url)) {
-      const text = '缺少目标页面地址, 无法跳转';
+      const info = '缺少目标页面地址, 无法跳转';
 
       showErrorMessage({
-        text: text,
+        text: info,
       });
+
+      this.logFunctionCallTrace(
+        {
+          error: info,
+        },
+        primaryCallName,
+        'goToWebPage',
+        'error',
+      );
 
       return;
     }
@@ -545,20 +658,66 @@ class Infrastructure extends AbstractComponent {
   }
 
   doDidMountTask = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'doDidMountTask');
+
     const { scene } = {
       scene: '',
       ...getLaunchOption(),
     };
 
+    this.logFunctionCallTrace(
+      {
+        scene: scene || '',
+      },
+      primaryCallName,
+      'doDidMountTask',
+      'adjustByScene',
+    );
+
     this.adjustByScene(scene || '');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doDidMountTask',
+      'checkSchedulingControlExistence',
+    );
 
     this.checkSchedulingControlExistence();
 
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doDidMountTask',
+      'initializeInternalData',
+    );
+
     this.initializeInternalData();
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doDidMountTask',
+      'receiveExternalParameter',
+    );
 
     this.receiveExternalParameter();
 
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doDidMountTask',
+      'setCurrentInfo',
+    );
+
     this.setCurrentInfo();
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doDidMountTask',
+      'doWorkWhenShow',
+    );
 
     this.doWorkWhenShow();
   };
@@ -928,7 +1087,17 @@ class Infrastructure extends AbstractComponent {
     return false;
   };
 
-  checkAuthority = (permission) => checkHasAuthority(permission);
+  checkAuthority = (permission) => {
+    this.logFunctionCallTrack(
+      {
+        permission,
+      },
+      primaryCallName,
+      'checkAuthority',
+    );
+
+    return checkHasAuthority(permission);
+  };
 
   doWorkWhenCheckPermissionFail = () => {
     this.repeatDoWorkWhenShow = true;
@@ -939,16 +1108,36 @@ class Infrastructure extends AbstractComponent {
       'doWorkWhenCheckPermissionFail',
     );
 
-    const text = `无交互权限: ${this.componentAuthority || ''}`;
+    let info = `无交互权限: ${this.componentAuthority || ''}`;
+
+    this.logFunctionCallTrace(
+      {
+        error: info,
+      },
+      primaryCallName,
+      'doWorkWhenCheckPermissionFail',
+      'error',
+    );
 
     showRuntimeError({
-      message: text,
+      message: info,
     });
 
     const withoutPermissionRedirectPath = getWithoutPermissionRedirectPath();
 
     if (checkStringIsNullOrWhiteSpace(withoutPermissionRedirectPath)) {
-      throw new Error('未配置无交互权限时的跳转目标');
+      info = '未配置无交互权限时的跳转目标';
+
+      this.logFunctionCallTrace(
+        {
+          error: info,
+        },
+        primaryCallName,
+        'doWorkWhenCheckPermissionFail',
+        'error',
+      );
+
+      throw new Error(info);
     }
 
     redirectTo(withoutPermissionRedirectPath);
@@ -960,7 +1149,18 @@ class Infrastructure extends AbstractComponent {
     const signInPath = getSignInPath();
 
     if (checkStringIsNullOrWhiteSpace(signInPath)) {
-      throw new Error('未配置登录页面signInPath');
+      const info = '未配置登录页面signInPath';
+
+      this.logFunctionCallTrace(
+        {
+          error: info,
+        },
+        primaryCallName,
+        'goToSignIn',
+        'error',
+      );
+
+      throw new Error(info);
     }
 
     navigateTo(signInPath);
@@ -1304,13 +1504,48 @@ class Infrastructure extends AbstractComponent {
               },
             });
           } else {
+            that.logFunctionCallTrace(
+              {},
+              primaryCallName,
+              'prepareLoadRemoteRequestWithCheckSession',
+              'checkSession',
+              'callback',
+              'initMetaData',
+              'callback',
+              'checkTicketValidity',
+            );
+
             that.checkTicketValidity({
               callback: () => {
+                that.logFunctionCallTrace(
+                  {},
+                  primaryCallName,
+                  'prepareLoadRemoteRequestWithCheckSession',
+                  'checkSession',
+                  'callback',
+                  'initMetaData',
+                  'callback',
+                  'checkTicketValidity',
+                  'callback',
+                  'doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest',
+                );
+
                 that.doWorkWhenCheckTicketValidityOnPrepareLoadRemoteRequest();
               },
             });
 
             if (that.loadRemoteRequestAfterMount) {
+              that.logFunctionCallTrace(
+                {},
+                primaryCallName,
+                'prepareLoadRemoteRequestWithCheckSession',
+                'checkSession',
+                'callback',
+                'initMetaData',
+                'callback',
+                'doLoadRemoteRequest',
+              );
+
               that.doLoadRemoteRequest();
             }
           }
@@ -2437,6 +2672,17 @@ class Infrastructure extends AbstractComponent {
         return d;
       })
       .catch((error) => {
+        this.logFunctionCallTrace(
+          {
+            error,
+          },
+          primaryCallName,
+          'setLocationResult',
+          'dispatchLocationResult',
+          'catch',
+          'error',
+        );
+
         logException(error);
       });
   }
@@ -2625,6 +2871,17 @@ class Infrastructure extends AbstractComponent {
         return weather;
       })
       .catch((error) => {
+        that.logFunctionCallTrace(
+          {
+            error,
+          },
+          primaryCallName,
+          'getWeather',
+          'dispatchApi',
+          'catch',
+          'error',
+        );
+
         logException(error);
       });
   };
@@ -2653,6 +2910,25 @@ class Infrastructure extends AbstractComponent {
     }
 
     setCurrentUrl(`${path}${p === '' ? '' : `?${p}`}`);
+  };
+
+  promptCallProcessSwitch = () => {
+    if (!this.showCallProcessSwitchPromptComplete) {
+      logDebug(
+        {
+          componentName: this.constructor.name,
+          showCallTrack: toString(toBoolean(this.showCallTrack)),
+          showCallTrace: toString(toBoolean(this.showCallTrace)),
+          showCallResult: toString(toBoolean(this.showCallResult)),
+        },
+        mergeArrowText(
+          this.constructor.name,
+          'do not show any call process, if want wo show it, please set "showCallTrack|showCallTrace|showCallResult" in properties to true',
+        ),
+      );
+
+      this.showCallProcessSwitchPromptComplete = true;
+    }
   };
 
   notifyMessage = ({
@@ -2814,22 +3090,6 @@ class Infrastructure extends AbstractComponent {
     return (
       firstLoadSuccess && isArray(metaListData) && metaListData.length === 0
     );
-  };
-
-  promptCallProcessSwitch = () => {
-    if (!this.showCallProcessSwitchPromptComplete) {
-      logDebug(
-        {},
-        mergeArrowText(
-          this.componentName,
-          'showCallProcess',
-          toString(toBoolean(this.showCallProcess)),
-          'do not show call process, if want wo show it, please set "showCallProcess" in properties to true',
-        ),
-      );
-
-      this.showCallProcessSwitchPromptComplete = true;
-    }
   };
 
   /**

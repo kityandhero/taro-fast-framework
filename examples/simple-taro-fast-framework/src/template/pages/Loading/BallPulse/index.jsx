@@ -44,4 +44,4 @@ BallPulse.defaultProps = {
   ...defaultProps,
 };
 
-export default BallPulse;
+export { BallPulse };

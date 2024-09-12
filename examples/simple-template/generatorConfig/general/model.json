@@ -52,10 +52,24 @@
           "type": "singleData"
         },
         {
+          "title": "静默登录",
+          "api": "/wechatApplication/entrance/resetPassword",
+          "effect": "resetPassword",
+          "service": "resetPasswordData",
+          "type": "singleData"
+        },
+        {
           "title": "凭证校验",
           "api": "/wechatApplication/entrance/checkTicketValidity",
           "effect": "checkTicketValidity",
           "service": "checkTicketValidityData",
+          "type": "singleData"
+        },
+        {
+          "title": "凭证校验",
+          "api": "/wechatApplication/entrance/refreshCaptcha",
+          "effect": "refreshCaptcha",
+          "service": "refreshCaptchaData",
           "type": "singleData"
         }
       ],

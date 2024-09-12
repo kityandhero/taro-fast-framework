@@ -15,12 +15,12 @@ import spinSvg from '../../../../assets/images/loading-spin.svg';
 import spinningBubblesSvg from '../../../../assets/images/loading-spinning-bubbles.svg';
 import spokesSvg from '../../../../assets/images/loading-spokes.svg';
 import { ContentPageBase, SimpleBox } from '../../../../customComponents';
-import BallClipRotate from '../BallClipRotate';
-import BallGridBeat from '../BallGridBeat';
-import BallGridPulse from '../BallGridPulse';
-import BallPulse from '../BallPulse';
-import BallScale from '../BallScale';
-import BallScaleMultiple from '../BallScaleMultiple';
+import { BallClipRotate } from '../BallClipRotate';
+import { BallGridBeat } from '../BallGridBeat';
+import { BallGridPulse } from '../BallGridPulse';
+import { BallPulse } from '../BallPulse';
+import { BallScale } from '../BallScale';
+import { BallScaleMultiple } from '../BallScaleMultiple';
 
 const imageBoxContainerStyle = {
   display: 'block',

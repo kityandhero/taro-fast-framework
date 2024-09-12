@@ -52,4 +52,4 @@ BallGridPulse.defaultProps = {
   ...defaultProps,
 };
 
-export default BallGridPulse;
+export { BallGridPulse };

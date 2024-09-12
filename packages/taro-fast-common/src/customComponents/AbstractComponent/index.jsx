@@ -15,11 +15,8 @@ import {
   logCallTrace as logCallTraceCore,
   logCallTrack as logCallTrackCore,
   logConfig,
-  logData,
   logDebug,
-  logError,
   logException,
-  logExecute,
   logInfo,
   logObject,
   logText,
@@ -29,7 +26,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { callProcessType } from '../../utils/constants';
+import { callProcessType, emptyLogic } from '../../utils/constants';
 import { getEnvironment } from '../../utils/environmentAssist';
 
 function filterModel(properties) {
@@ -68,7 +65,17 @@ class AbstractComponent extends Component {
   /**
    * 在控制台显示组建内调用序列, 仅为进行开发辅助
    */
-  showCallProcess = false;
+  showCallTrack = false;
+
+  /**
+   * 在控制台显示组建内触发序列, 仅为进行开发辅助
+   */
+  showCallTrace = false;
+
+  /**
+   * 在控制台显示组建内结果序列, 仅为进行开发辅助
+   */
+  showCallResult = false;
 
   callProcessCollection = [callProcessType.functionLogic];
 
@@ -132,10 +139,21 @@ class AbstractComponent extends Component {
   componentDidMount() {
     this.componentName = this.constructor.name;
 
+    this.logFunctionCallTrack({}, primaryCallName, 'componentDidMount');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'componentDidMount',
+      'doDidMountTask',
+    );
+
     this.doDidMountTask();
   }
 
   shouldComponentUpdate(nextProperties, nextState) {
+    this.logFunctionCallTrack({}, primaryCallName, 'shouldComponentUpdate');
+
     const { dispatchComplete } = {
       dispatchComplete: true,
       ...nextState,
@@ -145,7 +163,34 @@ class AbstractComponent extends Component {
       return false;
     }
 
+    this.logFunctionCallTrace(
+      {
+        nextProperties,
+        nextState,
+      },
+      primaryCallName,
+      'shouldComponentUpdate',
+      'adjustShowRenderCountInConsole',
+    );
+
     this.adjustShowRenderCountInConsole(nextProperties, nextState);
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'shouldComponentUpdate',
+      'doOtherCheckComponentUpdate',
+    );
+
+    this.logFunctionCallTrace(
+      {
+        nextProperties,
+        nextState,
+      },
+      primaryCallName,
+      'shouldComponentUpdate',
+      'doOtherCheckComponentUpdate',
+    );
 
     const checkComponentUpdate = this.doOtherCheckComponentUpdate(
       nextProperties,
@@ -153,6 +198,16 @@ class AbstractComponent extends Component {
     );
 
     if ((checkComponentUpdate || null) != undefined && !!checkComponentUpdate) {
+      this.logFunctionCallTrace(
+        {
+          nextProperties,
+          nextState,
+        },
+        primaryCallName,
+        'shouldComponentUpdate',
+        'doWorkBeforeUpdate',
+      );
+
       this.doWorkBeforeUpdate(nextProperties, nextState);
 
       return !!checkComponentUpdate;
@@ -183,6 +238,16 @@ class AbstractComponent extends Component {
     }
 
     if (compareResult) {
+      this.logFunctionCallTrace(
+        {
+          nextProperties,
+          nextState,
+        },
+        primaryCallName,
+        'shouldComponentUpdate',
+        'doWorkBeforeUpdate',
+      );
+
       this.doWorkBeforeUpdate(nextProperties, nextState);
     }
 
@@ -190,20 +255,95 @@ class AbstractComponent extends Component {
   }
 
   componentDidCatchError(error, info) {
+    this.logFunctionCallTrack(
+      {
+        error,
+        info,
+      },
+      primaryCallName,
+      'componentDidCatchError',
+    );
+
+    this.logFunctionCallTrace(
+      {
+        error,
+        info,
+      },
+      primaryCallName,
+      'componentDidCatchError',
+      'doWhenCatchError',
+    );
+
     this.doWhenCatchError(error, info);
   }
 
   // eslint-disable-next-line react/sort-comp
   getSnapshotBeforeUpdate(preProperties, preState) {
+    this.logFunctionCallTrack(
+      {
+        preProperties,
+        preState,
+      },
+      primaryCallName,
+      'getSnapshotBeforeUpdate',
+    );
+
+    this.logFunctionCallTrace(
+      {
+        preProperties,
+        preState,
+      },
+      primaryCallName,
+      'getSnapshotBeforeUpdate',
+      'doWorkWhenGetSnapshotBeforeUpdate',
+    );
+
     return this.doWorkWhenGetSnapshotBeforeUpdate(preProperties, preState);
   }
 
   componentDidUpdate(preProperties, preState, snapshot) {
+    this.logFunctionCallTrack(
+      {
+        preProperties,
+        preState,
+        snapshot,
+      },
+      primaryCallName,
+      'componentDidUpdate',
+    );
+
+    this.logFunctionCallTrace(
+      {
+        preProperties,
+        preState,
+        snapshot,
+      },
+      primaryCallName,
+      'componentDidUpdate',
+      'doWorkWhenDidUpdate',
+    );
+
     this.doWorkWhenDidUpdate(preProperties, preState, snapshot);
   }
 
   componentWillUnmount() {
+    this.logFunctionCallTrack({}, primaryCallName, 'componentWillUnmount');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'componentWillUnmount',
+      'doWorkBeforeUnmount',
+    );
+
     this.doWorkBeforeUnmount();
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'componentWillUnmount',
+      'doWorkAfterUnmount',
+    );
 
     this.doWorkAfterUnmount();
 
@@ -211,10 +351,28 @@ class AbstractComponent extends Component {
   }
 
   componentDidShow() {
+    this.logFunctionCallTrack({}, primaryCallName, 'componentDidShow');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'componentDidShow',
+      'doShowTask',
+    );
+
     this.doShowTask();
   }
 
   componentDidHide() {
+    this.logFunctionCallTrack({}, primaryCallName, 'componentDidHide');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'componentDidHide',
+      'doWorkWhenComponentHide',
+    );
+
     this.doWorkWhenComponentHide();
   }
 
@@ -234,59 +392,176 @@ class AbstractComponent extends Component {
   }
 
   doDidMountTask = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'doDidMountTask');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doDidMountTask',
+      'checkNeedSignInDidMount',
+    );
+
     const checkNeedSignInDidMountResult = this.checkNeedSignInDidMount();
 
     if (checkNeedSignInDidMountResult) {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doDidMountTask',
+        'checkPermission',
+      );
+
       const checkPermissionResult = this.checkPermission();
 
       if (checkPermissionResult) {
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doWorkBeforeAdjustDidMount',
+        );
+
         this.doWorkBeforeAdjustDidMount();
+
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doWorkAdjustDidMount',
+        );
 
         this.doWorkAdjustDidMount();
 
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doWorkAfterAdjustDidMount',
+        );
+
         this.doWorkAfterAdjustDidMount();
+
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doWorkAfterDidMount',
+        );
 
         this.doWorkAfterDidMount();
 
         if (this.loadRemoteRequestAfterMount) {
+          this.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'doDidMountTask',
+            'doLoadRemoteRequest',
+          );
+
           this.doLoadRemoteRequest();
         }
 
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doOtherRemoteRequest',
+        );
+
         this.doOtherRemoteRequest();
+
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doOtherWorkAfterDidMount',
+        );
 
         this.doOtherWorkAfterDidMount();
       } else {
+        this.logFunctionCallTrace(
+          {},
+          primaryCallName,
+          'doDidMountTask',
+          'doWorkWhenCheckPermission',
+        );
+
         this.doWorkWhenCheckPermission();
       }
     } else {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doDidMountTask',
+        'doWorkWhenCheckNeedSignInDidMountFail',
+      );
+
       this.doWorkWhenCheckNeedSignInDidMountFail();
     }
   };
 
   doShowTask = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'doShowTask');
+
     if (this.firstShowHasTriggered) {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'doWorkWhenRepeatedShow',
+      );
+
       this.doWorkWhenRepeatedShow();
     } else {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doShowTask',
+        'doWorkWhenFirstShow',
+      );
+
       this.doWorkWhenFirstShow();
 
       this.firstShowHasTriggered = true;
     }
 
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doShowTask',
+      'doWorkWhenEveryShow',
+    );
+
     this.doWorkWhenEveryShow();
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'doShowTask',
+      'doWorkAfterShow',
+    );
 
     this.doWorkAfterShow();
   };
 
   checkNeedSignInDidMount = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'doShowTask', 'true');
+
     return true;
   };
 
   checkPermission = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'checkPermission', 'true');
+
     return true;
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    logExecute('doWorkWhenCheckNeedSignInDidMountFail');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenCheckNeedSignInDidMountFail',
+    );
 
     logConfig(
       'doWorkWhenCheckNeedSignInDidMountFail do nothing,if you need,you can override it: doWorkWhenCheckNeedSignInDidMountFail = () => {}',
@@ -294,46 +569,152 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenCheckPermissionFail = () => {
-    logExecute('doWorkWhenCheckPermissionFail');
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenCheckPermissionFail',
+    );
 
     logConfig(
       'doWorkWhenCheckPermissionFail do nothing,if you need,you can override it: doWorkWhenCheckPermissionFail = () => {}',
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
-  adjustShowRenderCountInConsole = (nextProperties, nextState) => {};
+  adjustShowRenderCountInConsole = (nextProperties, nextState) => {
+    this.logFunctionCallTrack(
+      {
+        nextProperties,
+        nextState,
+      },
+      primaryCallName,
+      'adjustShowRenderCountInConsole',
+      emptyLogic,
+    );
+  };
 
-  doWorkBeforeAdjustDidMount = () => {};
+  doWorkBeforeAdjustDidMount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkBeforeAdjustDidMount',
+      emptyLogic,
+    );
+  };
 
-  doWorkAdjustDidMount = () => {};
+  doWorkAdjustDidMount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkAdjustDidMount',
+      emptyLogic,
+    );
+  };
 
-  doWorkAfterAdjustDidMount = () => {};
+  doWorkAfterAdjustDidMount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkAfterAdjustDidMount',
+      emptyLogic,
+    );
+  };
 
-  doWorkAfterDidMount = () => {};
+  doWorkAfterDidMount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkAfterDidMount',
+      emptyLogic,
+    );
+  };
 
-  doLoadRemoteRequest = () => {};
+  doLoadRemoteRequest = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doLoadRemoteRequest',
+      emptyLogic,
+    );
+  };
 
-  doOtherRemoteRequest = () => {};
+  doOtherRemoteRequest = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doOtherRemoteRequest',
+      emptyLogic,
+    );
+  };
 
-  doOtherWorkAfterDidMount = () => {};
+  doOtherWorkAfterDidMount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doOtherWorkAfterDidMount',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  doWorkBeforeUpdate = (nextProperties, nextState) => {};
+  doWorkBeforeUpdate = (nextProperties, nextState) => {
+    this.logFunctionCallTrack(
+      {
+        nextProperties,
+        nextState,
+      },
+      primaryCallName,
+      'doWorkBeforeUpdate',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {};
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
+    this.logFunctionCallTrack(
+      {
+        preProperties,
+        preState,
+        snapshot,
+      },
+      primaryCallName,
+      'doWorkWhenDidUpdate',
+      emptyLogic,
+    );
+  };
 
   doOtherCheckComponentUpdate = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doOtherCheckComponentUpdate',
+      emptyLogic,
+    );
+
     return null;
   };
 
-  // eslint-disable-next-line no-unused-vars
   doWorkWhenGetSnapshotBeforeUpdate = (preProperties, preState) => {
+    this.logFunctionCallTrack(
+      {
+        preProperties,
+        preState,
+      },
+      primaryCallName,
+      'doWorkWhenGetSnapshotBeforeUpdate',
+      emptyLogic,
+    );
+
     return null;
   };
 
   doWhenCatchError = (error, info) => {
+    this.logFunctionCallTrack(
+      {
+        error,
+        info,
+      },
+      primaryCallName,
+      'doWhenCatchError',
+    );
+
     showErrorMessage({
       text: 'error occurred, please view in console.',
     });
@@ -341,21 +722,72 @@ class AbstractComponent extends Component {
     logException({ message: error.message, data: info });
   };
 
-  doWorkBeforeUnmount = () => {};
+  doWorkBeforeUnmount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkBeforeUnmount',
+      emptyLogic,
+    );
+  };
 
-  doWorkAfterUnmount = () => {};
+  doWorkAfterUnmount = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkAfterUnmount',
+      emptyLogic,
+    );
+  };
 
-  doWorkWhenFirstShow = () => {};
+  doWorkWhenFirstShow = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenFirstShow',
+      emptyLogic,
+    );
+  };
 
-  doWorkWhenRepeatedShow = () => {};
+  doWorkWhenRepeatedShow = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenRepeatedShow',
+      emptyLogic,
+    );
+  };
 
-  doWorkWhenEveryShow = () => {};
+  doWorkWhenEveryShow = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenEveryShow',
+      emptyLogic,
+    );
+  };
 
-  doWorkAfterShow = () => {};
+  doWorkAfterShow = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkAfterShow',
+      emptyLogic,
+    );
+  };
 
-  doWorkWhenComponentHide = () => {};
+  doWorkWhenComponentHide = () => {
+    this.logFunctionCallTrack(
+      {},
+      primaryCallName,
+      'doWorkWhenComponentHide',
+      emptyLogic,
+    );
+  };
 
   getEnvironment = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'getEnvironment');
+
     return getEnvironment();
   };
 
@@ -367,7 +799,7 @@ class AbstractComponent extends Component {
     handleOther = null,
     callback = null,
   }) => {
-    logExecute('handleEnv');
+    this.logFunctionCallTrack({}, primaryCallName, 'handleEnv');
 
     let data = {};
 
@@ -419,42 +851,97 @@ class AbstractComponent extends Component {
   };
 
   getGlobal = () => {
-    const text = 'please override getGlobal, and return a object';
+    this.logFunctionCallTrack({}, primaryCallName, 'getGlobal');
 
-    logData(text);
+    const info = 'please override getGlobal, and return a object';
 
-    throw new Error(text);
+    this.logFunctionCallTrace(
+      {
+        error: info,
+      },
+      primaryCallName,
+      'getGlobal',
+      'error',
+    );
+
+    throw new Error(info);
   };
 
   getGlobalWrapper = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'getGlobalWrapper');
+
     const global = this.getGlobal();
 
     if ((global || null) == undefined) {
-      logException('global not allow null, please check getGlobal');
+      const info = 'global not allow null, please check getGlobal';
+
+      this.logFunctionCallTrace(
+        {
+          error: info,
+        },
+        primaryCallName,
+        'getGlobalWrapper',
+        'error',
+      );
+
+      logException(info);
     }
 
     return global;
   };
 
   getDispatch = () => {
-    const text = 'please override getDispatch, and return a function';
+    this.logFunctionCallTrack({}, primaryCallName, 'getDispatch');
 
-    logError(text);
+    const info = 'please override getDispatch, and return a function';
 
-    throw new Error(text);
+    this.logFunctionCallTrace(
+      {
+        error: info,
+      },
+      primaryCallName,
+      'getGlobalWrapper',
+      'error',
+    );
+
+    logException(info);
+
+    throw new Error(info);
   };
 
   getDispatchWrapper = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'getDispatchWrapper');
+
     const dispatch = this.getDispatch();
 
     if (!isFunction(dispatch)) {
-      logException('dispatch not a function, please check getDispatch');
+      const info = 'dispatch not a function, please check getDispatch';
+
+      this.logFunctionCallTrace(
+        {
+          error: info,
+        },
+        primaryCallName,
+        'getDispatchWrapper',
+        'error',
+      );
+
+      logException(info);
     }
 
     return dispatch;
   };
 
   dispatchApi = ({ type, payload, alias = 'data' }) => {
+    this.logFunctionCallTrack({}, primaryCallName, 'dispatchApi');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'dispatchApi',
+      'getDispatchWrapper',
+    );
+
     const dispatch = this.getDispatchWrapper();
 
     logDebug(`modal access: ${type}`);
@@ -472,9 +959,18 @@ class AbstractComponent extends Component {
         if (!checkInCollection(modelNameList, modelName)) {
           logInfo(`current modelNameList: ${ml}`);
 
-          logException(
-            `${modelName} not in modelNameList, please check model config`,
+          const info = `${modelName} not in modelNameList, please check model config`;
+
+          this.logFunctionCallTrace(
+            {
+              error: info,
+            },
+            primaryCallName,
+            'dispatchApi',
+            'error',
           );
+
+          logException(info);
         }
       }
     }
@@ -489,8 +985,25 @@ class AbstractComponent extends Component {
    */
   // eslint-disable-next-line no-unused-vars
   doWhenAuthorizeFail = (remoteData, callback) => {
+    this.logFunctionCallTrack({}, primaryCallName, 'doWhenAuthorizeFail');
+
     if (isFunction(callback)) {
+      this.logFunctionCallTrace(
+        remoteData,
+        primaryCallName,
+        'doWhenAuthorizeFail',
+        'callback',
+      );
+
       callback(remoteData);
+    } else {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'doWhenAuthorizeFail',
+        'callback',
+        emptyLogic,
+      );
     }
   };
 
@@ -503,8 +1016,14 @@ class AbstractComponent extends Component {
    * 登录失败时的回调定义
    * @param {*} remoteData [object] 远程返回数据
    */
-  // eslint-disable-next-line no-unused-vars
-  authorizeFailCallback = (remoteData) => {};
+  authorizeFailCallback = (remoteData) => {
+    this.logFunctionCallTrack(
+      remoteData,
+      primaryCallName,
+      'authorizeFailCallback',
+      emptyLogic,
+    );
+  };
 
   showRenderCount() {
     if (this.showRenderCountInConsole) {
@@ -525,7 +1044,7 @@ class AbstractComponent extends Component {
    * @param {*} message
    */
   logCallTrack(type, data, ...messages) {
-    if (!this.showCallProcess) {
+    if (!this.showCallTrack) {
       this.promptCallProcessSwitch();
 
       return;
@@ -535,7 +1054,7 @@ class AbstractComponent extends Component {
       return;
     }
 
-    logCallTrackCore(data, mergeArrowText(this.componentName, ...messages));
+    logCallTrackCore(data, mergeArrowText(this.constructor.name, ...messages));
   }
 
   /**
@@ -546,7 +1065,7 @@ class AbstractComponent extends Component {
     this.logCallTrack(
       callProcessType.functionLogic,
       data,
-      mergeArrowText(this.componentName, ...messages),
+      mergeArrowText(...messages),
     );
   }
 
@@ -558,7 +1077,7 @@ class AbstractComponent extends Component {
     this.logCallTrack(
       callProcessType.emptyLogic,
       data,
-      mergeArrowText(this.componentName, ...messages),
+      mergeArrowText(...messages),
     );
   }
 
@@ -570,7 +1089,7 @@ class AbstractComponent extends Component {
     this.logCallTrack(
       callProcessType.renderLogic,
       data,
-      mergeArrowText(this.componentName, ...messages),
+      mergeArrowText(...messages),
     );
   }
 
@@ -579,7 +1098,7 @@ class AbstractComponent extends Component {
    * @param {*} message
    */
   logCallTrace(type, data, ...messages) {
-    if (!this.showCallProcess) {
+    if (!this.showCallTrace) {
       this.promptCallProcessSwitch();
 
       return;
@@ -589,7 +1108,7 @@ class AbstractComponent extends Component {
       return;
     }
 
-    logCallTraceCore(data, mergeArrowText(this.componentName, ...messages));
+    logCallTraceCore(data, mergeArrowText(this.constructor.name, ...messages));
   }
 
   /**
@@ -600,7 +1119,7 @@ class AbstractComponent extends Component {
     this.logCallTrace(
       callProcessType.functionLogic,
       data,
-      mergeArrowText(this.componentName, ...messages),
+      mergeArrowText(...messages),
     );
   }
 
@@ -612,7 +1131,7 @@ class AbstractComponent extends Component {
     this.logCallTrace(
       callProcessType.emptyLogic,
       data,
-      mergeArrowText(this.componentName, ...messages),
+      mergeArrowText(...messages),
     );
   }
 
@@ -624,7 +1143,7 @@ class AbstractComponent extends Component {
     this.logCallTrace(
       callProcessType.renderLogic,
       data,
-      mergeArrowText(this.componentName, ...messages),
+      mergeArrowText(...messages),
     );
   }
 
@@ -633,13 +1152,13 @@ class AbstractComponent extends Component {
    * @param {*} message
    */
   logCallResult(data, ...messages) {
-    if (!this.showCallProcess) {
+    if (!this.showCallResult) {
       this.promptCallProcessSwitch();
 
       return;
     }
 
-    logCallResultCore(data, mergeArrowText(this.componentName, ...messages));
+    logCallResultCore(data, mergeArrowText(this.constructor.name, ...messages));
   }
 
   /**
@@ -651,10 +1170,22 @@ class AbstractComponent extends Component {
   }
 
   renderFurther() {
+    this.logRenderCallTrack({}, primaryCallName, 'renderFurther', emptyLogic);
+
     return null;
   }
 
   renderView() {
+    this.logRenderCallTrack({}, primaryCallName, 'renderView');
+
+    this.logRenderCallTrace(
+      {},
+      primaryCallName,
+      'render',
+      'renderView',
+      'renderFurther',
+    );
+
     return this.renderFurther();
   }
 
@@ -669,13 +1200,7 @@ class AbstractComponent extends Component {
 
     this.showRenderCount();
 
-    this.logRenderCallTrace(
-      {},
-      primaryCallName,
-      'render',
-      'trigger',
-      'renderView',
-    );
+    this.logRenderCallTrace({}, primaryCallName, 'render', 'renderView');
 
     return this.renderView();
   }

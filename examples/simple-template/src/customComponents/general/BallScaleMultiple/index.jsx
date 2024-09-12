@@ -42,4 +42,4 @@ BallScaleMultiple.defaultProps = {
   ...defaultProps,
 };
 
-export default BallScaleMultiple;
+export { BallScaleMultiple };

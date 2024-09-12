@@ -48,4 +48,4 @@ BallGridBeat.defaultProps = {
   ...defaultProps,
 };
 
-export default BallGridBeat;
+export { BallGridBeat };

@@ -8,6 +8,8 @@ import {
 
 import {
   checkTicketValidityData,
+  refreshCaptchaData,
+  resetPasswordData,
   signInData,
   signInSilentData,
   signInWithEmailData,
@@ -19,7 +21,9 @@ export const entranceTypeCollection = {
   signInWithPhone: 'entrance/signInWithPhone',
   signInWithEmail: 'entrance/signInWithEmail',
   signInSilent: 'entrance/signInSilent',
+  resetPassword: 'entrance/resetPassword',
   checkTicketValidity: 'entrance/checkTicketValidity',
+  refreshCaptcha: 'entrance/refreshCaptcha',
 };
 
 export function buildModel() {
@@ -135,6 +139,32 @@ export function buildModel() {
 
         return dataAdjust;
       },
+      *resetPassword(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(resetPasswordData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
       *checkTicketValidity(
         {
           payload,
@@ -145,6 +175,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(checkTicketValidityData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *refreshCaptcha(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(refreshCaptchaData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

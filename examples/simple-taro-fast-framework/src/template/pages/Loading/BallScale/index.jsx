@@ -40,4 +40,4 @@ BallScale.defaultProps = {
   ...defaultProps,
 };
 
-export default BallScale;
+export { BallScale };

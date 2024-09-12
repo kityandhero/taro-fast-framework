@@ -42,4 +42,4 @@ BallClipRotate.defaultProps = {
   ...defaultProps,
 };
 
-export default BallClipRotate;
+export { BallClipRotate };

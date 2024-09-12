@@ -7,7 +7,7 @@ import {
   transformListData,
 } from 'easy-soft-utility';
 
-import { navigateBack, transformSize } from 'taro-fast-common';
+import { callProcessType, navigateBack, transformSize } from 'taro-fast-common';
 import { CenterBox } from 'taro-fast-component';
 import {
   AuthorizationWrapper,
@@ -16,9 +16,14 @@ import {
 
 import { modelTypeCollection } from '../../../modelBuilders';
 import { getQQMapWX } from '../../../utils';
-import BallGridBeat from '../BallGridBeat';
+import { BallGridBeat } from '../BallGridBeat';
 
 class PageWrapperCore extends AuthorizationWrapper {
+  callProcessCollection = [
+    callProcessType.functionLogic,
+    // callProcessType.emptyLogic,
+  ];
+
   loadRemoteRequestDelay = 0;
 
   useFadeSpinWrapper = true;

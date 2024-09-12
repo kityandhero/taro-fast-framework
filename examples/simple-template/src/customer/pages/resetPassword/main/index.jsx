@@ -18,9 +18,8 @@ import {
 
 import { PageWrapper } from '../../../../customComponents';
 import {
-  signInInputPassword,
-  signInInputUser,
-  signInLogo,
+  resetPasswordCaptcha,
+  resetPasswordPhone,
 } from '../../../../customConfig';
 
 // import { signInAction, signInWithPhoneAction } from '../assist/action';
@@ -41,8 +40,8 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class SignIn extends PageWrapper {
-  // showCallTrack = true;
+class ResetPassword extends PageWrapper {
+  showCallTrack = true;
 
   // showCallTrace = true;
 
@@ -53,6 +52,8 @@ class SignIn extends PageWrapper {
   phone = '';
 
   password = '';
+
+  doOtherRemoteRequest = () => {};
 
   triggerPhoneChanged = (v) => {
     this.phone = v;
@@ -69,22 +70,6 @@ class SignIn extends PageWrapper {
         password: this.password,
       },
     });
-
-    // signInWithPhoneAction({
-    //   target: this,
-    //   handleData: {
-    //     phone: this.phone,
-    //     password: this.password,
-    //   },
-    //   successCallback: ({ target, remoteData }) => {
-    //     const openId = target.parseOpenIdFromSignInApiData(remoteData);
-
-    //     const token = target.parseTokenFromSignInApiData(remoteData);
-    //   },
-    //   failCallback: ({ target }) => {
-    //     // target.setState({ processing: false });
-    //   },
-    // });
   };
 
   renderFurther() {
@@ -92,23 +77,36 @@ class SignIn extends PageWrapper {
 
     return (
       <View>
-        <Line transparent height={120} />
+        <Line transparent height={70} />
 
         <CenterBox>
-          <View style={{ width: transformSize(140) }}>
-            <ImageBox src={signInLogo} />
+          <View
+            style={{
+              width: transformSize(90),
+              height: transformSize(90),
+              borderRadius: '50%',
+              backgroundColor: '#0e72ff',
+            }}
+          ></View>
+        </CenterBox>
+
+        <Line transparent height={40} />
+
+        <CenterBox>
+          <View style={{ fontSize: transformSize(36), fontWeight: 'bold' }}>
+            密码重置
           </View>
         </CenterBox>
 
-        <Line transparent height={50} />
+        <Line transparent height={10} />
 
         <CenterBox>
-          <View style={{ fontSize: transformSize(32) }}>
+          <View style={{ fontSize: transformSize(28) }}>
             欢迎来到产投OA系统
           </View>
         </CenterBox>
 
-        <Line transparent height={60} />
+        <Line transparent height={180} />
 
         <View
           style={{
@@ -116,17 +114,6 @@ class SignIn extends PageWrapper {
             paddingRight: transformSize(60),
           }}
         >
-          <View
-            style={{
-              // fontWeight: 'bold',
-              fontSize: transformSize(44),
-            }}
-          >
-            登录
-          </View>
-
-          <Line transparent height={80} />
-
           <View
             style={{
               paddingBottom: transformSize(16),
@@ -141,7 +128,7 @@ class SignIn extends PageWrapper {
                     width: transformSize(40),
                   }}
                 >
-                  <ImageBox src={signInInputUser} />
+                  <ImageBox src={resetPasswordPhone} />
                 </View>
               }
               leftStyle={{
@@ -151,7 +138,7 @@ class SignIn extends PageWrapper {
                 <InputItem
                   placeholder="请输入您的手机号"
                   border={false}
-                  clearable
+                  clearable={false}
                   afterChange={this.triggerPhoneChanged}
                 />
               }
@@ -174,7 +161,7 @@ class SignIn extends PageWrapper {
                     width: transformSize(40),
                   }}
                 >
-                  <ImageBox src={signInInputPassword} />
+                  <ImageBox src={resetPasswordCaptcha} />
                 </View>
               }
               leftStyle={{
@@ -182,10 +169,46 @@ class SignIn extends PageWrapper {
               }}
               right={
                 <InputItem
-                  placeholder="请输入密码"
+                  placeholder="请输入图形验证码"
                   password
                   border={false}
-                  clearable
+                  clearable={false}
+                  extra={<View>获取验证码</View>}
+                  afterChange={this.triggerPasswordChanged}
+                />
+              }
+            />
+          </View>
+
+          <Line transparent height={80} />
+
+          <View
+            style={{
+              paddingBottom: transformSize(16),
+              borderBottom: `${transformSize(2)} solid #eee`,
+            }}
+          >
+            <FlexBox
+              flexAuto="right"
+              left={
+                <View
+                  style={{
+                    width: transformSize(40),
+                  }}
+                >
+                  <ImageBox src={resetPasswordCaptcha} />
+                </View>
+              }
+              leftStyle={{
+                marginRight: transformSize(16),
+              }}
+              right={
+                <InputItem
+                  placeholder=""
+                  password
+                  border={false}
+                  clearable={false}
+                  extra={<View>获取验证码</View>}
                   afterChange={this.triggerPasswordChanged}
                 />
               }
@@ -235,4 +258,4 @@ class SignIn extends PageWrapper {
   }
 }
 
-export default SignIn;
+export default ResetPassword;

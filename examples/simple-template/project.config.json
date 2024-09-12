@@ -79,6 +79,12 @@
           "pathName": "customer/pages/signInWithWeChat/main/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "customer/resetPassword",
+          "pathName": "customer/pages/resetPassword/main/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
