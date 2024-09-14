@@ -19,6 +19,7 @@ import {
   getDefaultTaroGlobalData,
   getEnvironment,
   getUpdateManager,
+  getWebRootFontSize,
   setTaroGlobalData,
 } from 'taro-fast-common';
 
@@ -28,7 +29,6 @@ import { configEnvironment } from '../../utils/configAssist';
 import { setLaunchOption } from '../../utils/launchOptionAssist';
 import { removeSelectedAddressData } from '../../utils/selectedAddressDataAssist';
 import { removeSessionRefreshing } from '../../utils/sessionRefreshingAssist';
-import { getWebRootFontSize } from '../../utils/settingsAssist';
 
 const defaultTaroGlobalData = getDefaultTaroGlobalData();
 

@@ -16,6 +16,8 @@ export const resetPasswordShieldBlue = `${filePrefix}1834035653227188224.png`;
 export const resetPasswordShieldGrey = `${filePrefix}1834145367885746176.png`;
 export const resetPasswordKeyBlue = `${filePrefix}1834146507838853120.png`;
 
+export const ellipsisVerticalImage = `${filePrefix}1834582979146551296.png`;
+
 export const shareTransfer = {
   home: '0',
   section: '10',

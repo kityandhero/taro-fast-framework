@@ -8,10 +8,10 @@ import {
 import {
   apiSuccessCode as apiSuccessCodeDefault,
   authenticationFailCode as authenticationFailCodeDefault,
-  emptyLogo as emptyLogoImage,
   locationModeCollection,
   verifySignInResult,
-} from 'taro-fast-common';
+} from './constants';
+import { emptyLogo as emptyLogoImage } from './mediaDefault';
 
 export function getWebRootFontSize() {
   const { webRootFontSize } = {

@@ -5,6 +5,9 @@ export const rootPathGeneralCollection = {
   home: {
     path: '/pages/home/main/index',
   },
+  flowCase: {
+    path: '/pages/flowCase/main/index',
+  },
   customer: {
     path: '/pages/customer/main/index',
   },

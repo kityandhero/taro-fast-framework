@@ -129,6 +129,27 @@
     {
       "apis": [
         {
+          "title": "待审批流程实例分页列表",
+          "api": "/wechatApplication/workflowCase/pageListWaitApprove",
+          "effect": "pageListWaitApprove",
+          "service": "pageListWaitApproveData",
+          "type": "pageList"
+        },
+        {
+          "title": "已审批流程实例分页列表",
+          "api": "/wechatApplication/workflowCase/pageListLatestApprove",
+          "effect": "pageListLatestApprove",
+          "service": "pageListLatestApproveData",
+          "type": "pageList"
+        }
+      ],
+      "cover": true,
+      "title": "审批相关",
+      "name": "flowCase"
+    },
+    {
+      "apis": [
+        {
           "title": "获取当前登录用户信息",
           "api": "/wechatApplication/user/getCurrentInfo",
           "effect": "getCurrentInfo",

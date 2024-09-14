@@ -16,18 +16,19 @@ import {
   trySendNearestLocalhostNotify,
 } from 'easy-soft-utility';
 
-import { corsTarget, Tips } from 'taro-fast-common';
-
-import { getLocationMode } from './locationAssist';
-import { getOpenId } from './openIdAssist';
-import { getSession } from './sessionAssist';
 import {
+  corsTarget,
   getAppId,
   getAuthenticationFailCode,
   getShowRequestInfo,
   getSignInPath,
   getTokenAnonymous,
-} from './settingsAssist';
+  Tips,
+} from 'taro-fast-common';
+
+import { getLocationMode } from './locationAssist';
+import { getOpenId } from './openIdAssist';
+import { getSession } from './sessionAssist';
 
 const Request = {
   /**

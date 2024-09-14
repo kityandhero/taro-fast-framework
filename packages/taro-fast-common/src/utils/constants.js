@@ -49,16 +49,6 @@ export const authenticationFailCode = 2001;
 export const apiSuccessCode = 200;
 
 /**
- * 用户默认图
- */
-export const defaultUserAvatar = '/user.png';
-
-/**
- * Default Empty Image
- */
-export const defaultEmptyImage = '/noImageSmall.png';
-
-/**
  * 应用默认配置
  */
 export const appInitDefault = {

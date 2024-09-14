@@ -10,8 +10,9 @@ import {
   requestMode,
 } from 'easy-soft-utility';
 
+import { getWeatherApi } from 'taro-fast-common';
+
 import { getVerifySignInResult } from '../utils/common';
-import { getWeatherApi } from '../utils/settingsAssist';
 
 export async function getWeatherData(parameters) {
   const weatherApi = getWeatherApi();

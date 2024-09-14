@@ -21,7 +21,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class PageMain extends PageWrapper {
+class customer extends PageWrapper {
   viewStyle = {
     backgroundColor: '#f5f5f5',
   };
@@ -45,4 +45,4 @@ class PageMain extends PageWrapper {
   }
 }
 
-export default PageMain;
+export default customer;

@@ -6,7 +6,6 @@ import {
   logDebug,
   logException,
   logObject,
-  logText,
   pretreatmentRequestParameters,
   showErrorMessage,
   toNumber,
@@ -14,6 +13,7 @@ import {
 } from 'easy-soft-utility';
 
 import {
+  emptyLogic,
   hideNavigationBarLoading,
   showNavigationBarLoading,
   stopPullDownRefresh,
@@ -36,7 +36,7 @@ class Base extends Infrastructure {
     const that = this;
 
     if (that.pagingLoadMode) {
-      that.logFunctionCallTrack(
+      that.logFunctionCallTrace(
         {
           delay: that.loadRemoteRequestDelay,
         },
@@ -58,7 +58,7 @@ class Base extends Infrastructure {
         },
       });
     } else {
-      that.logFunctionCallTrack(
+      that.logFunctionCallTrace(
         {
           delay: that.loadRemoteRequestDelay,
         },
@@ -82,29 +82,78 @@ class Base extends Infrastructure {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  beforeFirstLoadRequest = (submitData) => {};
+  beforeFirstLoadRequest = (submitData) => {
+    this.logEmptyCallTrack(
+      submitData,
+      primaryCallName,
+      'beforeFirstLoadRequest',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  beforeReLoadRequest = (submitData) => {};
+  beforeReLoadRequest = (submitData) => {
+    this.logEmptyCallTrack(
+      submitData,
+      primaryCallName,
+      'beforeReLoadRequest',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  beforeRequest = (submitData) => {};
+  beforeRequest = (submitData) => {
+    this.logEmptyCallTrack(
+      submitData,
+      primaryCallName,
+      'beforeRequest',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  afterGetFirstRequestResult = (submitData, responseData) => {};
+  afterGetFirstRequestResult = (submitData, responseData) => {
+    this.logEmptyCallTrack(
+      {
+        submitData,
+        responseData,
+      },
+      primaryCallName,
+      'afterGetFirstRequestResult',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  afterGetRequestResult = (submitData, responseData) => {};
+  afterGetRequestResult = (submitData, responseData) => {
+    this.logEmptyCallTrack(
+      {
+        submitData,
+        responseData,
+      },
+      primaryCallName,
+      'afterGetRequestResult',
+      emptyLogic,
+    );
+  };
 
-  // eslint-disable-next-line no-unused-vars
-  afterGetReLoadRequestResult = (submitData, responseData) => {};
+  afterGetReLoadRequestResult = (submitData, responseData) => {
+    this.logEmptyCallTrack(
+      {
+        submitData,
+        responseData,
+      },
+      primaryCallName,
+      'afterGetReLoadRequestResult',
+      emptyLogic,
+    );
+  };
 
   getRequestingData() {
+    this.logFunctionCallTrack({}, primaryCallName, 'getRequestingData');
+
     return this.lastRequestingData;
   }
 
   setRequestingData(parameters, callback) {
+    this.logFunctionCallTrack(parameters, primaryCallName, 'setRequestingData');
+
     const d =
       parameters == null
         ? { type: '', payload: {} }
@@ -113,24 +162,79 @@ class Base extends Infrastructure {
     this.lastRequestingData = d;
 
     if (isFunction(callback)) {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'setRequestingData',
+        'callback',
+      );
+
       callback();
+    } else {
+      this.logEmptyCallTrace(
+        {},
+        primaryCallName,
+        'setRequestingData',
+        emptyLogic,
+      );
     }
   }
 
   clearRequestingData() {
+    this.logFunctionCallTrack({}, primaryCallName, 'clearRequestingData');
+
+    this.logFunctionCallTrace(
+      {},
+      primaryCallName,
+      'clearRequestingData',
+      'setRequestingData',
+    );
+
     this.setRequestingData({ type: '', payload: {} });
   }
 
-  initLoadRequestParams = (o) => o || {};
+  initLoadRequestParams = (o) => {
+    this.logEmptyCallTrack(
+      o,
+      primaryCallName,
+      'initLoadRequestParams',
+      emptyLogic,
+    );
 
-  supplementLoadRequestParams = (o) => o || {};
+    return o || {};
+  };
+
+  supplementLoadRequestParams = (o) => {
+    this.logEmptyCallTrack(
+      o,
+      primaryCallName,
+      'supplementLoadRequestParams',
+      emptyLogic,
+    );
+
+    return o || {};
+  };
 
   // eslint-disable-next-line no-unused-vars
   checkLoadRequestParams = (o) => {
+    this.logEmptyCallTrack(
+      o,
+      primaryCallName,
+      'checkLoadRequestParams',
+      'true',
+    );
+
     return true;
   };
 
   adjustLoadApiPath = () => {
+    this.logEmptyCallTrack(
+      {},
+      primaryCallName,
+      'adjustLoadApiPath',
+      emptyLogic,
+    );
+
     return '';
   };
 
@@ -140,25 +244,29 @@ class Base extends Infrastructure {
     delay = 0,
     callback = null,
   }) => {
+    const that = this;
+
+    that.logFunctionCallTrack(
+      {
+        otherState,
+        params: parameters,
+        delay,
+      },
+      primaryCallName,
+      'initLoad',
+    );
+
     const {
       loadApiPath,
       firstLoadSuccess,
       reloading: reloadingBefore,
-    } = this.state;
+    } = that.state;
 
     try {
       if ((loadApiPath || '') === '') {
-        // const text = 'loadApiPath需要配置';
-
-        // showRuntimeError({
-        //   message: text,
-        // });
-
-        // logObject(this);
-
         logDebug('state dispatchComplete will set to true');
 
-        this.setState({
+        that.setState({
           spin: false,
           dataLoading: false,
           loadSuccess: false,
@@ -178,8 +286,6 @@ class Base extends Infrastructure {
         ...otherState,
       };
 
-      const that = this;
-
       that.setState(
         {
           ...willSaveState,
@@ -189,26 +295,85 @@ class Base extends Infrastructure {
 
           that.setState({ dispatchComplete: false });
 
+          that.logFunctionCallTrace(
+            {},
+            primaryCallName,
+            'initLoad',
+            'initLoadRequestParams',
+          );
+
           let submitData = {
             ...that.initLoadRequestParams(),
           };
 
+          that.logFunctionCallTrace(
+            submitData || {},
+            primaryCallName,
+            'initLoad',
+            'pretreatmentRequestParameters',
+          );
+
           submitData = pretreatmentRequestParameters(submitData || {});
 
+          that.logFunctionCallTrace(
+            submitData || {},
+            primaryCallName,
+            'initLoad',
+            'supplementLoadRequestParams',
+          );
+
           submitData = that.supplementLoadRequestParams(submitData || {});
+
+          that.logFunctionCallTrace(
+            submitData || {},
+            primaryCallName,
+            'initLoad',
+            'checkLoadRequestParams',
+          );
 
           const checkResult = that.checkLoadRequestParams(submitData || {});
 
           if (checkResult) {
             if (!firstLoadSuccess) {
+              that.logFunctionCallTrace(
+                submitData || {},
+                primaryCallName,
+                'initLoad',
+                'beforeFirstLoadRequest',
+              );
+
               that.beforeFirstLoadRequest(submitData || {});
             }
 
             if (reloadingBefore) {
+              that.logFunctionCallTrace(
+                submitData || {},
+                primaryCallName,
+                'initLoad',
+                'beforeReLoadRequest',
+              );
+
               that.beforeReLoadRequest(submitData || {});
             }
 
+            that.logFunctionCallTrace(
+              submitData || {},
+              primaryCallName,
+              'initLoad',
+              'beforeRequest',
+            );
+
             that.beforeRequest(submitData || {});
+
+            that.logFunctionCallTrace(
+              {
+                requestData: { ...submitData, ...parameters },
+                delay,
+              },
+              primaryCallName,
+              'initLoad',
+              'initLoadCore',
+            );
 
             that.initLoadCore({
               requestData: { ...submitData, ...parameters },
@@ -232,24 +397,60 @@ class Base extends Infrastructure {
         },
       );
     } catch (error) {
-      logText({ loadApiPath });
+      that.logFunctionCallTrace(
+        {
+          error,
+          loadApiPath,
+        },
+        primaryCallName,
+        'initLoad',
+        'catch',
+        'error',
+      );
 
       throw error;
     }
   };
 
   initLoadCore = ({ requestData, delay = 0, callback }) => {
+    const that = this;
+
+    that.logFunctionCallTrack(
+      {
+        requestData,
+        delay,
+      },
+      primaryCallName,
+      'initLoadCore',
+    );
+
     const delayTime = toNumber(delay);
 
     if (delayTime <= 0) {
-      this.loadFromApi({
+      that.logFunctionCallTrace(
+        {
+          requestData,
+        },
+        primaryCallName,
+        'initLoadCore',
+        'loadFromApi',
+      );
+
+      that.loadFromApi({
         requestData,
         callback,
       });
     } else {
-      const that = this;
-
       setTimeout(() => {
+        that.logFunctionCallTrace(
+          {
+            requestData,
+          },
+          primaryCallName,
+          'initLoadCore',
+          'loadFromApi',
+        );
+
         that.loadFromApi({
           requestData,
           callback,
@@ -259,10 +460,34 @@ class Base extends Infrastructure {
   };
 
   loadFromApi = ({ requestData, callback }) => {
+    const that = this;
+
+    that.logFunctionCallTrack(
+      {
+        requestData,
+      },
+      primaryCallName,
+      'loadFromApi',
+    );
+
     let loadApiPath = '';
 
     try {
+      that.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'loadFromApi',
+        'getRequestingData',
+      );
+
       const requestingDataPre = this.getRequestingData();
+
+      that.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'loadFromApi',
+        'adjustLoadApiPath',
+      );
 
       const loadApiCustomPath = this.adjustLoadApiPath();
 
@@ -286,13 +511,31 @@ class Base extends Infrastructure {
           payload: requestData,
         })
       ) {
+        that.logFunctionCallTrace(
+          {
+            type: loadApiPath,
+            payload: requestData,
+          },
+          primaryCallName,
+          'loadFromApi',
+          'setRequestingData',
+        );
+
         this.setRequestingData({ type: loadApiPath, payload: requestData });
 
         if (this.enableNavigationBarLoading) {
           showNavigationBarLoading();
         }
 
-        const that = this;
+        that.logFunctionCallTrace(
+          {
+            type: loadApiPath,
+            payload: requestData,
+          },
+          primaryCallName,
+          'loadFromApi',
+          'dispatchApi',
+        );
 
         this.dispatchApi({
           type: loadApiPath,
@@ -362,16 +605,42 @@ class Base extends Infrastructure {
               };
 
               try {
+                that.logFunctionCallTrace(
+                  {
+                    metaData: metaData || null,
+                    metaListData: metaListData || [],
+                    metaExtra: metaExtra || null,
+                    metaOriginalData: metaOriginalData || null,
+                  },
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'triggerAfterLoadSuccess',
+                );
+
                 that.triggerAfterLoadSuccess({
                   metaData: metaData || null,
                   metaListData: metaListData || [],
                   metaExtra: metaExtra || null,
                   metaOriginalData: metaOriginalData || null,
                 });
-              } catch (error_) {
-                logException(error_.message);
+              } catch (error) {
+                that.logFunctionCallTrace(
+                  {
+                    error,
+                  },
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'catch',
+                  'error',
+                );
 
-                const text = `${toString(error_)},place view in the console`;
+                logException(error.message);
+
+                const text = `${toString(error)},place view in the console`;
 
                 showErrorMessage({
                   text: text,
@@ -381,7 +650,29 @@ class Base extends Infrastructure {
               const { reloading: reloadingComplete } = that.state;
 
               if (reloadingComplete) {
+                that.logFunctionCallTrace(
+                  {},
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'afterReloadSuccess',
+                );
+
                 that.afterReloadSuccess();
+
+                that.logFunctionCallTrace(
+                  {
+                    requestData,
+                    metaOriginalData,
+                  },
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'afterGetReLoadRequestResult',
+                );
+
                 that.afterGetReLoadRequestResult(requestData, metaOriginalData);
               }
 
@@ -394,24 +685,101 @@ class Base extends Infrastructure {
               }
 
               if (!firstLoadSuccess) {
+                that.logFunctionCallTrace(
+                  {},
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'afterFirstLoadSuccess',
+                );
+
                 that.afterFirstLoadSuccess();
+
+                that.logFunctionCallTrace(
+                  {
+                    requestData,
+                    metaOriginalData,
+                  },
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'afterGetFirstRequestResult',
+                );
+
                 that.afterGetFirstRequestResult(requestData, metaOriginalData);
               }
+
+              that.logFunctionCallTrace(
+                {
+                  requestData,
+                  metaOriginalData,
+                },
+                primaryCallName,
+                'loadFromApi',
+                'dispatchApi',
+                'then',
+                'afterGetRequestResult',
+              );
 
               that.afterGetRequestResult(requestData, metaOriginalData);
 
               if (typeof callback === 'function') {
+                that.logFunctionCallTrace(
+                  {
+                    requestData,
+                    metaOriginalData,
+                  },
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'callback',
+                );
+
                 // eslint-disable-next-line promise/no-callback-in-promise
                 callback();
+              } else {
+                that.logEmptyCallTrace(
+                  {
+                    requestData,
+                    metaOriginalData,
+                  },
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'callback',
+                  emptyLogic,
+                );
               }
             } else {
               if (checkWhetherAuthorizeFail(remoteCode)) {
+                that.logFunctionCallTrace(
+                  metaOriginalData,
+                  primaryCallName,
+                  'loadFromApi',
+                  'dispatchApi',
+                  'then',
+                  'doWhenAuthorizeFail',
+                );
+
                 that.doWhenAuthorizeFail(
                   metaOriginalData,
                   that.authorizeFailCallback,
                 );
               }
             }
+
+            that.logFunctionCallTrace(
+              {},
+              primaryCallName,
+              'loadFromApi',
+              'dispatchApi',
+              'then',
+              'clearRequestingData',
+            );
 
             that.clearRequestingData();
 
@@ -422,6 +790,15 @@ class Base extends Infrastructure {
           .catch((error) => {
             stopPullDownRefresh();
             hideNavigationBarLoading();
+
+            that.logFunctionCallTrace(
+              { error },
+              primaryCallName,
+              'loadFromApi',
+              'dispatchApi',
+              'catch',
+              'error',
+            );
 
             logException(error);
 
@@ -445,6 +822,13 @@ class Base extends Infrastructure {
 
       logObject({ loadApiPath, requestData });
 
+      that.logFunctionCallTrace(
+        { error },
+        primaryCallName,
+        'loadFromApi',
+        'catch',
+      );
+
       logDebug('state dispatchComplete will set to true');
 
       this.setState({
@@ -462,22 +846,53 @@ class Base extends Infrastructure {
     }
   };
 
-  afterFirstLoadSuccess = () => {};
+  afterFirstLoadSuccess = () => {
+    this.logEmptyCallTrack(
+      {},
+      primaryCallName,
+      'afterFirstLoadSuccess',
+      emptyLogic,
+    );
+  };
 
   afterLoadSuccess = ({
-    // eslint-disable-next-line no-unused-vars
     metaData = null,
-    // eslint-disable-next-line no-unused-vars
     metaListData = [],
-    // eslint-disable-next-line no-unused-vars
     metaExtra = null,
-    // eslint-disable-next-line no-unused-vars
     metaOriginalData = null,
-  }) => {};
+  }) => {
+    this.logEmptyCallTrack(
+      {
+        metaData,
+        metaListData,
+        metaExtra,
+        metaOriginalData,
+      },
+      primaryCallName,
+      'afterLoadSuccess',
+      emptyLogic,
+    );
+  };
 
-  afterReloadSuccess = () => {};
+  afterReloadSuccess = () => {
+    this.logEmptyCallTrack(
+      {},
+      primaryCallName,
+      'afterReloadSuccess',
+      emptyLogic,
+    );
+  };
 
   loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {
+    this.logFunctionCallTrack(
+      {
+        otherState,
+        delay,
+      },
+      primaryCallName,
+      'loadNextPage',
+    );
+
     const parameters = this.pagingLoadMode
       ? {
           pageNo: (this.pageNo || 0) + 1,
@@ -485,15 +900,45 @@ class Base extends Infrastructure {
         }
       : {};
 
+    this.logFunctionCallTrace(
+      {
+        otherState,
+        params: parameters,
+        delay,
+      },
+      primaryCallName,
+      'loadNextPage',
+      'initLoad',
+    );
+
     this.initLoad({ otherState, params: parameters, delay, callback });
   };
 
   reloadData = ({ otherState, callback = null, delay = 0 }) => {
+    this.logFunctionCallTrack(
+      {
+        otherState,
+        delay,
+      },
+      primaryCallName,
+      'reloadData',
+    );
+
     const s = { ...otherState, reloading: true };
 
     if (this.pagingLoadMode) {
       this.pageNo = 0;
       this.clearListDataBeforeAttach = true;
+
+      this.logFunctionCallTrace(
+        {
+          otherState: s,
+          delay: delay || 0,
+        },
+        primaryCallName,
+        'reloadData',
+        'loadNextPage',
+      );
 
       this.loadNextPage({
         otherState: s,
@@ -501,6 +946,16 @@ class Base extends Infrastructure {
         callback: callback || null,
       });
     } else {
+      this.logFunctionCallTrace(
+        {
+          otherState: s,
+          delay: delay || 0,
+        },
+        primaryCallName,
+        'reloadData',
+        'initLoad',
+      );
+
       this.initLoad({
         otherState: s,
         delay: delay || 0,
@@ -510,28 +965,65 @@ class Base extends Infrastructure {
   };
 
   remoteRequest = ({ type, payload }) => {
-    return this.dispatchApi({
-      type,
-      payload,
-    }).then((metaOriginalData) => {
-      const { dataSuccess, code: remoteCode } = metaOriginalData;
+    const that = this;
 
-      if (dataSuccess) {
-        const { list, data, extra } = metaOriginalData;
+    that.logFunctionCallTrack(
+      {
+        type,
+        payload,
+      },
+      primaryCallName,
+      'remoteRequest',
+    );
 
-        return {
-          list: list || [],
-          data: data || {},
-          extra: extra || {},
-          original: metaOriginalData,
-        };
-      } else {
-        throw new Error(remoteCode);
-      }
-    });
+    that.logFunctionCallTrace(
+      {
+        type,
+        payload,
+      },
+      primaryCallName,
+      'remoteRequest',
+      'dispatchApi',
+    );
+
+    return that
+      .dispatchApi({
+        type,
+        payload,
+      })
+      .then((metaOriginalData) => {
+        const { dataSuccess, code: remoteCode } = metaOriginalData;
+
+        if (dataSuccess) {
+          const { list, data, extra } = metaOriginalData;
+
+          return {
+            list: list || [],
+            data: data || {},
+            extra: extra || {},
+            original: metaOriginalData,
+          };
+        } else {
+          throw new Error(remoteCode);
+        }
+      })
+      .catch((error) => {
+        that.logFunctionCallTrace(
+          { error },
+          primaryCallName,
+          'remoteRequest',
+          'dispatchApi',
+          'catch',
+          'error',
+        );
+
+        logException(error);
+      });
   };
 
   judgeNeedNextLoad = () => {
+    this.logFunctionCallTrack({}, primaryCallName, 'judgeNeedNextLoad');
+
     if (!this.pagingLoadMode) {
       return false;
     }
@@ -553,6 +1045,17 @@ class Base extends Infrastructure {
     metaExtra = null,
     metaOriginalData = null,
   }) {
+    this.logFunctionCallTrack(
+      {
+        metaData,
+        metaListData,
+        metaExtra,
+        metaOriginalData,
+      },
+      primaryCallName,
+      'triggerAfterLoadSuccess',
+    );
+
     if (this.pagingLoadMode) {
       this.clearListDataBeforeAttach = false;
 
@@ -567,6 +1070,18 @@ class Base extends Infrastructure {
       this.pageSize = pageSize || 10;
       this.total = total || 0;
     }
+
+    this.logFunctionCallTrace(
+      {
+        metaData,
+        metaListData,
+        metaExtra,
+        metaOriginalData,
+      },
+      primaryCallName,
+      'triggerAfterLoadSuccess',
+      'afterLoadSuccess',
+    );
 
     this.afterLoadSuccess({
       metaData,

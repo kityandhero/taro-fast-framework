@@ -557,10 +557,11 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenCheckNeedSignInDidMountFail = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenCheckNeedSignInDidMountFail',
+      emptyLogic,
     );
 
     logConfig(
@@ -569,10 +570,11 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenCheckPermissionFail = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenCheckPermissionFail',
+      emptyLogic,
     );
 
     logConfig(
@@ -581,7 +583,7 @@ class AbstractComponent extends Component {
   };
 
   adjustShowRenderCountInConsole = (nextProperties, nextState) => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {
         nextProperties,
         nextState,
@@ -593,7 +595,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkBeforeAdjustDidMount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkBeforeAdjustDidMount',
@@ -602,7 +604,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkAdjustDidMount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkAdjustDidMount',
@@ -611,7 +613,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkAfterAdjustDidMount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkAfterAdjustDidMount',
@@ -620,7 +622,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkAfterDidMount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkAfterDidMount',
@@ -629,7 +631,7 @@ class AbstractComponent extends Component {
   };
 
   doLoadRemoteRequest = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doLoadRemoteRequest',
@@ -638,7 +640,7 @@ class AbstractComponent extends Component {
   };
 
   doOtherRemoteRequest = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doOtherRemoteRequest',
@@ -647,7 +649,7 @@ class AbstractComponent extends Component {
   };
 
   doOtherWorkAfterDidMount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doOtherWorkAfterDidMount',
@@ -656,7 +658,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkBeforeUpdate = (nextProperties, nextState) => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {
         nextProperties,
         nextState,
@@ -668,7 +670,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {
         preProperties,
         preState,
@@ -681,7 +683,7 @@ class AbstractComponent extends Component {
   };
 
   doOtherCheckComponentUpdate = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doOtherCheckComponentUpdate',
@@ -692,7 +694,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenGetSnapshotBeforeUpdate = (preProperties, preState) => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {
         preProperties,
         preState,
@@ -723,7 +725,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkBeforeUnmount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkBeforeUnmount',
@@ -732,7 +734,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkAfterUnmount = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkAfterUnmount',
@@ -741,7 +743,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenFirstShow = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenFirstShow',
@@ -750,7 +752,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenRepeatedShow = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenRepeatedShow',
@@ -759,7 +761,7 @@ class AbstractComponent extends Component {
   };
 
   doWorkWhenEveryShow = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenEveryShow',
@@ -768,16 +770,11 @@ class AbstractComponent extends Component {
   };
 
   doWorkAfterShow = () => {
-    this.logFunctionCallTrack(
-      {},
-      primaryCallName,
-      'doWorkAfterShow',
-      emptyLogic,
-    );
+    this.logEmptyCallTrack({}, primaryCallName, 'doWorkAfterShow', emptyLogic);
   };
 
   doWorkWhenComponentHide = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'doWorkWhenComponentHide',

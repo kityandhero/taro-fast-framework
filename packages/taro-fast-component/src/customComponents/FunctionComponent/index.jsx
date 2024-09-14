@@ -6,7 +6,7 @@ import {
   isFunction,
 } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common';
+import { emptyImage, transformSize } from 'taro-fast-common';
 
 import { ActivityIndicator } from '../ActivityIndicator';
 import { Button } from '../Button';
@@ -242,10 +242,10 @@ export function buildEmptyPlaceholder({
   icon = '',
   iconSize = 180,
   iconStyle = {},
-  image = '',
+  image = emptyImage,
   imageStyle = {},
   imageWidth = 140,
-  imageAspectRatio = 1,
+  imageAspectRatio = 0.7156,
   description = '暂无数据',
   onImageClick = null,
   onDescriptionClick = null,

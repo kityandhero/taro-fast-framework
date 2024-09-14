@@ -7,6 +7,10 @@ class PageWrapperExtra extends PageWrapperCore {
   goToResetPassword = () => {
     navigateTo(pathCollection.customer.resetPassword.path);
   };
+
+  goToFlowCase = () => {
+    navigateTo(pathCollection.root.flowCase.path);
+  };
 }
 
 export { PageWrapperExtra };

@@ -19,7 +19,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class PageMain extends PageWrapper {
+class Home extends PageWrapper {
   onShareAppMessage() {
     const o = {
       path: pathCollection.root.home.path,
@@ -43,4 +43,4 @@ class PageMain extends PageWrapper {
   }
 }
 
-export default PageMain;
+export default Home;

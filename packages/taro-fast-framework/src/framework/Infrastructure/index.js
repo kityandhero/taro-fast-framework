@@ -30,9 +30,15 @@ import {
 import {
   AbstractComponent,
   checkWeAppEnvironment,
+  emptyImage,
   emptyLogic,
+  getFooterDescription,
+  getFooterImage,
+  getFooterText,
   getMenuButtonBoundingClientRect,
+  getSignInPath,
   getSystemInfo,
+  getWithoutPermissionRedirectPath,
   locateResult,
   Notification,
   pageScrollTo,
@@ -69,13 +75,6 @@ import {
   getSessionRefreshing,
   setSessionRefreshing,
 } from '../../utils/sessionRefreshingAssist';
-import {
-  getFooterDescription,
-  getFooterImage,
-  getFooterText,
-  getSignInPath,
-  getWithoutPermissionRedirectPath,
-} from '../../utils/settingsAssist';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
 const defaultDispatchLocationResultData = {
@@ -439,7 +438,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   initializeInternalData = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'initializeInternalData',
@@ -452,7 +451,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   adjustByScene = (scene) => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       { scene },
       primaryCallName,
       'adjustByScene',
@@ -465,7 +464,7 @@ class Infrastructure extends AbstractComponent {
   };
 
   adjustInternalDataOnRepeatedShow = () => {
-    this.logFunctionCallTrack(
+    this.logEmptyCallTrack(
       {},
       primaryCallName,
       'adjustInternalDataOnRepeatedShow',
@@ -3004,12 +3003,22 @@ class Infrastructure extends AbstractComponent {
 
   // eslint-disable-next-line no-unused-vars
   loadNextPage = ({ otherState = {}, delay = 0, callback = null }) => {
-    this.logEmptyCallTrack({}, primaryCallName, 'loadNextPage', emptyLogic);
+    this.logEmptyCallTrack(
+      { otherState, delay },
+      primaryCallName,
+      'loadNextPage',
+      emptyLogic,
+    );
   };
 
   // eslint-disable-next-line no-unused-vars
   reloadData = ({ otherState, callback = null, delay = 0 }) => {
-    this.logEmptyCallTrack({}, primaryCallName, 'reloadData', emptyLogic);
+    this.logEmptyCallTrack(
+      { otherState, delay },
+      primaryCallName,
+      'reloadData',
+      emptyLogic,
+    );
   };
 
   showScrollRefreshing = () => {
@@ -3099,10 +3108,10 @@ class Infrastructure extends AbstractComponent {
     icon = '',
     iconSize = 180,
     iconStyle = {},
-    image = '',
+    image = emptyImage,
     imageStyle = {},
     imageWidth = 140,
-    imageAspectRatio = 1,
+    imageAspectRatio = 0.7156,
     description = '暂无数据',
     onImageClick = null,
     onDescriptionClick = null,

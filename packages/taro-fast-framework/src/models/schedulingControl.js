@@ -7,7 +7,7 @@ import {
   reducerNameCollection,
 } from 'easy-soft-utility';
 
-import { locateResult } from 'taro-fast-common';
+import { getSignInUnknownFlag, locateResult } from 'taro-fast-common';
 
 import {
   checkTicketValidityData,
@@ -22,7 +22,6 @@ import {
   signInSilentData,
 } from '../services/schedulingControl';
 import { setLocationMode } from '../utils/locationAssist';
-import { getSignInUnknownFlag } from '../utils/settingsAssist';
 import { getWeather, setWeather } from '../utils/weatherAssist';
 
 export function buildSchedulingControlModel() {

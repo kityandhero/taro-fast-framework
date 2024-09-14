@@ -63,6 +63,12 @@
           "scene": null
         },
         {
+          "name": "pages/flowCase",
+          "pathName": "pages/flowCase/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "pages/customer",
           "pathName": "pages/customer/main/index",
           "query": "",

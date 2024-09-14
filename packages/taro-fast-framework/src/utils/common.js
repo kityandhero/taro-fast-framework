@@ -1,14 +1,14 @@
 import { logTrace, toString } from 'easy-soft-utility';
 
-import { verifySignInResult } from 'taro-fast-common';
-
-import { buildPromptModuleInfoText } from './definition';
 import {
   getAuthenticationFailCode,
   getSignInFailFlag,
   getSignInSuccessFlag,
   getSignInUnknownFlag,
-} from './settingsAssist';
+  verifySignInResult,
+} from 'taro-fast-common';
+
+import { buildPromptModuleInfoText } from './definition';
 
 /**
  * Module Name.

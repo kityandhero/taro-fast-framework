@@ -14,11 +14,10 @@ import {
   setUrlGlobalPrefix,
 } from 'easy-soft-utility';
 
-import { setEasySoftUtilityHandler } from 'taro-fast-common';
+import { getApiVersion, setEasySoftUtilityHandler } from 'taro-fast-common';
 
 import { buildPromptModuleInfoText, modulePackageName } from './definition';
 import { Request as remoteRequest } from './request';
-import { getApiVersion } from './settingsAssist';
 
 let configEnvironmentComplete = false;
 

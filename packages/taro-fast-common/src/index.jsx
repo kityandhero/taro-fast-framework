@@ -10,6 +10,7 @@ export * from './utils/messageAssist';
 export * from './utils/meta';
 export * from './utils/navigationAssist';
 export * from './utils/notificationAssist';
+export * from './utils/settingsAssist';
 export * from './utils/styleAssist';
 export * from './utils/taroAssist';
 export * from './utils/tips';

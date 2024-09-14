@@ -16,5 +16,4 @@ export * from './request';
 export * from './selectedAddressDataAssist';
 export * from './sessionAssist';
 export * from './sessionRefreshingAssist';
-export * from './settingsAssist';
 export * from './weatherAssist';

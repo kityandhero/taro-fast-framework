@@ -21,7 +21,7 @@ import { BallGridBeat } from '../BallGridBeat';
 class PageWrapperCore extends AuthorizationWrapper {
   callProcessCollection = [
     callProcessType.functionLogic,
-    // callProcessType.emptyLogic,
+    callProcessType.emptyLogic,
   ];
 
   loadRemoteRequestDelay = 0;

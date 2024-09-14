@@ -3,6 +3,7 @@ export default defineAppConfig({
   pages: [
     'pages/entry/main/index',
     'pages/home/main/index',
+    'pages/flowCase/main/index',
     // 'pages/checkIn/main/index',
     // 'pages/ask/main/index',
     // 'pages/affair/main/index',
@@ -98,12 +99,12 @@ export default defineAppConfig({
         selectedIconPath: './assets/tab-bar/home-active.png',
         text: '首页',
       },
-      // {
-      //   pagePath: 'pages/approval/main/index',
-      //   iconPath: './assets/tab-bar/home.png',
-      //   selectedIconPath: './assets/tab-bar/home-active.png',
-      //   text: '审批',
-      // },
+      {
+        pagePath: 'pages/flowCase/main/index',
+        iconPath: './assets/tab-bar/approve.png',
+        selectedIconPath: './assets/tab-bar/approve_active.png',
+        text: '审批',
+      },
       // {
       //   pagePath: 'pages/workbench/main/index',
       //   iconPath: './assets/tab-bar/workbench.png',
