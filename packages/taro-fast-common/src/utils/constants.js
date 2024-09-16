@@ -183,3 +183,16 @@ export const callProcessType = {
   emptyLogic: 20,
   renderLogic: 30,
 };
+
+export const formNameCollection = {
+  createTime: {
+    label: '创建时间',
+    name: 'createTime',
+    helper: '数据的创建时间',
+  },
+  customOperate: {
+    label: '操作',
+    name: 'operateName',
+    helper: '',
+  },
+};

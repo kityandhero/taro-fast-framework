@@ -1,29 +1,15 @@
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { CustomWrapper, View } from '@tarojs/components';
 import * as Taro from '@tarojs/taro';
 
 import { connect } from 'easy-soft-dva';
-import {
-  checkStringIsNullOrWhiteSpace,
-  datetimeFormat,
-  formatDatetime,
-} from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import {
-  ColorText,
-  Ellipsis,
-  FlexBox,
-  IconClock,
-  ImageBox,
-  Line,
-  Space,
-  Tabs,
-} from 'taro-fast-component';
+import { Line, Space, Tabs } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../customComponents';
-import { defaultListImage } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
+import { buildLatestApproveItem, buildWaitApproveItem } from '../assist/tools';
 
 import './index.less';
 
@@ -61,12 +47,15 @@ definePageConfig({
   schedulingControl,
 }))
 class FlowCase extends PageWrapper {
-  showCallTrack = true;
+  // showCallTrack = true;
 
   // showCallTrace = true;
 
   viewStyle = {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#fcfbfc',
+    paddingLeft: transformSize(20),
+    paddingRight: transformSize(20),
+    paddingBottom: transformSize(20),
   };
 
   initialTabIndex = 0;
@@ -85,7 +74,7 @@ class FlowCase extends PageWrapper {
   }
 
   adjustLoadApiPath = () => {
-    return this.initialTabIndex == waitApproveFlag
+    return this.initialTabIndex === 0
       ? modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove
       : modelTypeCollection.flowCaseTypeCollection.pageListLatestApprove;
   };
@@ -136,138 +125,28 @@ class FlowCase extends PageWrapper {
 
     return (
       <CustomWrapper>
-        <Space direction="vertical" fillWidth size={26} split={<Line />}>
-          {metaListData.map((item) => {
-            const {
-              articleId,
-              title,
-              author,
-              image,
-              // redirect,
-              // renderType,
-              createTime,
-            } = item;
+        <Line transparent height={16} />
 
-            return (
-              <FlexBox
-                key={`article_${articleId}`}
-                flexAuto="left"
-                left={
-                  <FlexBox
-                    style={{ width: '100%', height: '100%' }}
-                    flexAuto="top"
-                    verticalHeight={300}
-                    top={
-                      checkStringIsNullOrWhiteSpace(image) ? (
-                        <View
-                          style={{
-                            fontSize: transformSize(30),
-                            lineHeight: transformSize(40),
-                            color: '#333',
-                          }}
-                          onClick={() => {
-                            // goToArticle({
-                            //   articleId,
-                            //   title,
-                            //   redirect,
-                            //   renderType,
-                            // });
-                          }}
-                        >
-                          {title}
-                        </View>
-                      ) : (
-                        <Ellipsis
-                          line={3}
-                          style={{
-                            height: transformSize(120),
-                            fontSize: transformSize(30),
-                            lineHeight: transformSize(40),
-                            color: '#333',
-                          }}
-                          onClick={() => {
-                            // goToArticle({
-                            //   articleId,
-                            //   title,
-                            //   redirect,
-                            //   renderType,
-                            // });
-                          }}
-                        >
-                          {title}
-                        </Ellipsis>
-                      )
-                    }
-                    bottom={
-                      <>
-                        <FlexBox
-                          style={{
-                            marginTop: transformSize(20),
-                          }}
-                          flexAuto="right"
-                          leftStyle={{
-                            width: transformSize(140),
-                            marginRight: transformSize(20),
-                          }}
-                          left={
-                            <ColorText
-                              color="#afb4b5"
-                              fontSize={24}
-                              text={author}
-                              onClick={() => {
-                                // goToArticle({
-                                //   articleId,
-                                //   title,
-                                //   redirect,
-                                //   renderType,
-                                // });
-                              }}
-                            />
-                          }
-                          right={
-                            <ColorText
-                              color="#afb4b5"
-                              fontSize={24}
-                              icon={<IconClock size={24} color="#afb4b5" />}
-                              text={formatDatetime({
-                                data: createTime,
-                                fmt: datetimeFormat.yearMonthDay,
-                              })}
-                              onClick={() => {
-                                // goToArticle({
-                                //   articleId,
-                                //   title,
-                                //   redirect,
-                                //   renderType,
-                                // });
-                              }}
-                            />
-                          }
-                        />
-                      </>
-                    }
-                  />
-                }
-                rightStyle={{
-                  paddingLeft: transformSize(26),
-                }}
-                right={
-                  checkStringIsNullOrWhiteSpace(image) ? null : (
-                    <View
-                      style={{ width: transformSize(220) }}
-                      onClick={() => {
-                        // goToArticle({ articleId, title, redirect, renderType });
-                      }}
-                    >
-                      <ImageBox
-                        src={image || defaultListImage}
-                        aspectRatio={0.74}
-                      />
-                    </View>
-                  )
-                }
-              />
-            );
+        <Space
+          direction="vertical"
+          fillWidth
+          size={26}
+          split={<Line transparent height={16} />}
+        >
+          {metaListData.map((item) => {
+            const { workflowCaseId } = item;
+
+            if (this.initialTabIndex === 0) {
+              return buildWaitApproveItem({
+                key: `waitApprove_${workflowCaseId}`,
+                data: item,
+              });
+            }
+
+            return buildLatestApproveItem({
+              key: `waitApprove_${workflowCaseId}`,
+              data: item,
+            });
           })}
         </Space>
       </CustomWrapper>
@@ -285,7 +164,7 @@ class FlowCase extends PageWrapper {
       <View className={classNames(classPrefix)}>
         <View className={classNames(`${classPrefix}__list-containor`)}>
           {this.judgeInitialActivityIndicatorVisible() ? (
-            this.buildInitialActivityIndicator({})
+            <>{/* {this.buildInitialActivityIndicator({})} */}</>
           ) : metaListData.length === 0 ? (
             <View
               style={{

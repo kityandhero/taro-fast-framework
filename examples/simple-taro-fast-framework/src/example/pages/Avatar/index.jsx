@@ -59,7 +59,6 @@ export default class Index extends ContentPageBase {
 
     this.state = {
       ...this.state,
-
       header: '头像',
       currentConfig: config1,
     };

@@ -1,7 +1,12 @@
 import classNames from 'classnames';
-import { Image, Text, View } from '@tarojs/components';
+import { Image, View } from '@tarojs/components';
+
+import { toNumber } from 'easy-soft-utility';
+
+import { canToNumber, transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
+import { CenterBox } from '../CenterBox';
 
 import './index.less';
 
@@ -17,18 +22,87 @@ const defaultProps = {
   text: '',
   image: '',
   style: {},
+  backgroundColor: '#e5e5e5',
+  color: '#fff',
   className: '',
 };
 
 class Avatar extends BaseComponent {
+  getSize = () => {
+    const { size } = this.props;
+
+    let sizeValue = 100;
+
+    if (canToNumber(size)) {
+      sizeValue = toNumber(size);
+
+      return sizeValue;
+    }
+
+    switch (size) {
+      case SIZE_CLASS.large: {
+        sizeValue = 120;
+        break;
+      }
+
+      case SIZE_CLASS.normal: {
+        sizeValue = 100;
+        break;
+      }
+
+      case SIZE_CLASS.small: {
+        sizeValue = 80;
+        break;
+      }
+
+      default: {
+        sizeValue = 100;
+        break;
+      }
+    }
+
+    return sizeValue;
+  };
+
+  getBoxStyle = () => {
+    const { style, backgroundColor, circle, color } = this.props;
+
+    const size = this.getSize();
+
+    return {
+      ...style,
+      borderRadius: circle ? '50%' : transformSize(toNumber(size * 0.08)),
+      boxShadow: `0 0 ${transformSize(toNumber(size * 0.5))} 0 rgb(0 0 0 / 5%)`,
+      backgroundColor,
+      color,
+      width: transformSize(size),
+      height: transformSize(size),
+    };
+  };
+
+  getFontStyle = () => {
+    const { color } = this.props;
+
+    const size = this.getSize();
+
+    return {
+      fontSize: transformSize(toNumber(size * 0.4)),
+      color,
+    };
+  };
+
   renderFurther() {
-    const { size, circle, image, text, style } = this.props;
+    const { size, circle, image, text } = this.props;
     const rootClassName = ['tfc-avatar'];
     const iconSize = SIZE_CLASS[size || 'normal'];
     const classObject = {
       [`tfc-avatar--${iconSize}`]: iconSize,
       'tfc-avatar--circle': circle,
     };
+
+    const boxStyle = this.getBoxStyle();
+
+    const fontStyle = this.getFontStyle();
 
     let letter = '';
 
@@ -39,15 +113,15 @@ class Avatar extends BaseComponent {
     element = image ? (
       <Image className="tfc-avatar__img" src={image} />
     ) : (
-      <Text className="tfc-avatar__text" userSelect>
-        {letter}
-      </Text>
+      <View className="tfc-avatar__text" style={fontStyle} userSelect>
+        <CenterBox>{letter}</CenterBox>
+      </View>
     );
 
     return (
       <View
         className={classNames(rootClassName, classObject, this.props.className)}
-        style={style}
+        style={boxStyle}
       >
         {element}
       </View>

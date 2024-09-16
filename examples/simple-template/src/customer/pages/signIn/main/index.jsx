@@ -202,12 +202,9 @@ class SignIn extends PageWrapper {
             backgroundColor="#0075ff"
             fontSize={32}
             loading={registering || false}
-            openType="getPhoneNumber"
             block
             circle
             size="middle"
-            // shape="rounded"
-            onGetPhoneNumber={this.triggerPhoneNumber}
             onClick={this.signInWithPhone}
           />
 

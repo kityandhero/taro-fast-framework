@@ -3,6 +3,7 @@ import { Text, View } from '@tarojs/components';
 import {
   buildRandomHexColor,
   checkStringIsNullOrWhiteSpace,
+  isEmptyObject,
   isFunction,
   isNumber,
 } from 'easy-soft-utility';
@@ -124,12 +125,13 @@ class ColorText extends BaseComponent {
 
     const textPart = (
       <VerticalBox style={{ lineHeight: '1' }}>
-        {checkStringIsNullOrWhiteSpace(textPrefix) ? null : (
+        {(textPrefix || '') == '' ? null : (
           <>
             <Text style={textPrefixStyle || null} userSelect>
               {textPrefix}
             </Text>
-            {checkStringIsNullOrWhiteSpace(separator) ? null : (
+            {(separator || '') == '' &&
+            isEmptyObject(separatorStyle || {}) ? null : (
               <Text style={separatorStyle || null} userSelect>
                 {separator}
               </Text>
