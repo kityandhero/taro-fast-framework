@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-config",
-  "version": "1.1.104",
+  "version": "1.1.105",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -63,8 +63,8 @@
     "@commitlint/config-pnpm-scopes": "^19.5.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@types/jest": "^29.5.13",
-    "@types/node": "^22.5.4",
-    "@typescript-eslint/parser": "^8.5.0",
+    "@types/node": "^22.5.5",
+    "@typescript-eslint/parser": "^8.6.0",
     "babel-jest": "^29.7.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^8.0.0",

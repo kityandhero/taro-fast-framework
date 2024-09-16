@@ -1,19 +1,16 @@
-import classNames from 'classnames';
 import { CustomWrapper, View } from '@tarojs/components';
 import * as Taro from '@tarojs/taro';
 
 import { connect } from 'easy-soft-dva';
+import { navigateTo } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Line, Space, Tabs } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../customComponents';
+import { pathCollection } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
 import { buildLatestApproveItem, buildWaitApproveItem } from '../assist/tools';
-
-import './index.less';
-
-export const classPrefix = `root-customer`;
 
 const waitApproveFlag = 'c14bbdb2b6214288bdfe11a266a89b47';
 const latestApproveFlag = 'eb15add13d584a459d00423c373613b5';
@@ -39,8 +36,8 @@ definePageConfig({
   // navigationStyle: 'custom',
 });
 
-@connect(({ customer, session, entrance, global, schedulingControl }) => ({
-  customer,
+@connect(({ flowCase, session, entrance, global, schedulingControl }) => ({
+  flowCase,
   session,
   entrance,
   global,
@@ -69,7 +66,6 @@ class FlowCase extends PageWrapper {
       ...this.state,
       loadApiPath:
         modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove,
-      customer: null,
     };
   }
 
@@ -91,6 +87,10 @@ class FlowCase extends PageWrapper {
     this.reloadData({
       delay: 500,
     });
+  };
+
+  goToApprove = (id) => {
+    navigateTo(`${pathCollection.customer.approve.path}?id=${id}`);
   };
 
   buildTab = () => {
@@ -161,28 +161,26 @@ class FlowCase extends PageWrapper {
     const { metaListData } = this.state;
 
     return (
-      <View className={classNames(classPrefix)}>
-        <View className={classNames(`${classPrefix}__list-containor`)}>
-          {this.judgeInitialActivityIndicatorVisible() ? (
-            <>{/* {this.buildInitialActivityIndicator({})} */}</>
-          ) : metaListData.length === 0 ? (
-            <View
-              style={{
-                paddingTop: transformSize(100),
-              }}
-            >
-              {this.buildEmptyPlaceholder({
-                imageWidth: 200,
-                description: '还没有数据哦',
-                descriptionStyle: {
-                  marginTop: transformSize(60),
-                },
-              })}
-            </View>
-          ) : (
-            this.buildListView()
-          )}
-        </View>
+      <View>
+        {this.judgeInitialActivityIndicatorVisible() ? (
+          <>{/* {this.buildInitialActivityIndicator({})} */}</>
+        ) : metaListData.length === 0 ? (
+          <View
+            style={{
+              paddingTop: transformSize(100),
+            }}
+          >
+            {this.buildEmptyPlaceholder({
+              imageWidth: 200,
+              description: '还没有数据哦',
+              descriptionStyle: {
+                marginTop: transformSize(60),
+              },
+            })}
+          </View>
+        ) : (
+          this.buildListView()
+        )}
       </View>
     );
   }

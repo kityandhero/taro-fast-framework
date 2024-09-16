@@ -52,6 +52,7 @@ export default defineAppConfig({
         'pages/signIn/main/index',
         'pages/signInWithWeChat/main/index',
         'pages/resetPassword/main/index',
+        'pages/approve/main/index',
         // 'pages/knowledgeCompetition/main/index',
         // 'pages/scoreCenter/main/index',
         // 'pages/articleFavourite/main/index',

@@ -29,4 +29,7 @@ export const customerPathGeneralCollection = {
   resetPassword: {
     path: '/customer/pages/resetPassword/main/index',
   },
+  approve: {
+    path: '/customer/pages/approve/main/index',
+  },
 };

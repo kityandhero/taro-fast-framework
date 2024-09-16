@@ -4,7 +4,6 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
-  logConsole,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
@@ -102,17 +101,11 @@ export function buildLatestApproveItem({ key, data }) {
     convert: convertCollection.string,
   });
 
-  logConsole(description);
-
   return (
     <View key={key} style={latestApproveItemBoxStyle}>
-      <Line transparent height={10} />
+      <View style={titleStyle}>{title}</View>
 
       <Line color="#eee" height={2} />
-
-      <Line transparent height={10} />
-
-      <View style={titleStyle}>{title}</View>
 
       {checkStringIsNullOrWhiteSpace(description) ? null : (
         <View style={descriptionStyle}>{description}</View>
