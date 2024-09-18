@@ -140,12 +140,18 @@ class FlowCase extends PageWrapper {
               return buildWaitApproveItem({
                 key: `waitApprove_${workflowCaseId}`,
                 data: item,
+                onClick: () => {
+                  this.goToApprove(workflowCaseId);
+                },
               });
             }
 
             return buildLatestApproveItem({
               key: `waitApprove_${workflowCaseId}`,
               data: item,
+              onClick: () => {
+                this.goToApprove(workflowCaseId);
+              },
             });
           })}
         </Space>

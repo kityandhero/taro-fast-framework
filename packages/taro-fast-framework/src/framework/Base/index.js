@@ -855,7 +855,7 @@ class Base extends Infrastructure {
     );
   };
 
-  afterLoadSuccess = ({
+  doOtherAfterLoadSuccess = ({
     metaData = null,
     metaListData = [],
     metaExtra = null,
@@ -869,7 +869,7 @@ class Base extends Infrastructure {
         metaOriginalData,
       },
       primaryCallName,
-      'afterLoadSuccess',
+      'doOtherAfterLoadSuccess',
       emptyLogic,
     );
   };
@@ -1080,10 +1080,10 @@ class Base extends Infrastructure {
       },
       primaryCallName,
       'triggerAfterLoadSuccess',
-      'afterLoadSuccess',
+      'doOtherAfterLoadSuccess',
     );
 
-    this.afterLoadSuccess({
+    this.doOtherAfterLoadSuccess({
       metaData,
       metaListData,
       metaExtra,

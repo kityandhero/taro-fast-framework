@@ -1,6 +1,6 @@
 import { request, requestMode } from 'easy-soft-utility';
 
-import { getEmptyLogo } from 'taro-fast-framework';
+import { getEmptyLogo } from 'taro-fast-common';
 
 function buildAbundantArticle() {
   return {

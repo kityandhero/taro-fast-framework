@@ -1,6 +1,6 @@
 import {
   getStringFromLocalStorage,
-  logTrace,
+  logExecute,
   removeLocalStorage,
   saveStringToLocalStorage,
 } from 'easy-soft-utility';
@@ -24,7 +24,7 @@ const storageKeyCollection = {
  * @returns
  */
 export function getEffectiveCode() {
-  logTrace({}, buildPromptModuleInfoText(moduleName, 'getEffectiveCode'));
+  logExecute({}, buildPromptModuleInfoText(moduleName, 'getEffectiveCode'));
 
   const key = storageKeyCollection.effectiveCode;
 
@@ -39,7 +39,7 @@ export function getEffectiveCode() {
  * @returns
  */
 export function setEffectiveCode(effectiveCode) {
-  logTrace(
+  logExecute(
     { effectiveCode },
     buildPromptModuleInfoText(moduleName, 'setEffectiveCode'),
   );
@@ -57,7 +57,7 @@ export function setEffectiveCode(effectiveCode) {
  * @returns
  */
 export function removeEffectiveCode() {
-  logTrace({}, buildPromptModuleInfoText(moduleName, 'removeEffectiveCode'));
+  logExecute({}, buildPromptModuleInfoText(moduleName, 'removeEffectiveCode'));
 
   const key = storageKeyCollection.effectiveCode;
 

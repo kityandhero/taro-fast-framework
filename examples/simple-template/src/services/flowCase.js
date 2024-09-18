@@ -19,3 +19,12 @@ export async function pageListLatestApproveData(parameters) {
     params: parameters,
   });
 }
+
+export const getDataApiAddress = '/wechatApplication/workflowCase/get';
+
+export async function getData(parameters) {
+  return request({
+    api: getDataApiAddress,
+    params: parameters,
+  });
+}

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { Image, View } from '@tarojs/components';
 
-import { toNumber } from 'easy-soft-utility';
+import { canToNumber, toNumber } from 'easy-soft-utility';
 
-import { canToNumber, transformSize } from 'taro-fast-common';
+import { transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';

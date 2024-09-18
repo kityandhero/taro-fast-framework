@@ -38,7 +38,10 @@ const defaultProps = {
   footerStyle: {},
   space: true,
   strip: false,
+  stripCenter: true,
+  stripTop: 0,
   stripLeft: 0,
+  stripBottom: 0,
   stripWidth: 8,
   stripHeight: 36,
   stripBorderRadius: 6,
@@ -121,6 +124,32 @@ class Card extends BaseComponent {
     };
   };
 
+  buildStripStyle = () => {
+    const { strip, stripCenter, stripTop, stripBottom } = this.props;
+
+    if (!strip) {
+      return {};
+    }
+    if (stripCenter) {
+      return {
+        top: '0',
+        bottom: '0',
+        margin: 'auto',
+      };
+    }
+
+    if (stripTop === 0 && stripBottom === 0) {
+      return {
+        top: '0',
+      };
+    }
+
+    return {
+      ...(stripTop > 0 ? { top: transformSize(stripTop) } : {}),
+      ...(stripBottom > 0 ? { bottom: transformSize(stripBottom) } : {}),
+    };
+  };
+
   renderFurther() {
     const {
       shadow,
@@ -161,6 +190,8 @@ class Card extends BaseComponent {
 
     const style = this.buildStyle();
 
+    const stripStyle = this.buildStripStyle();
+
     return (
       <View
         className={classNames(classPrefix, `${classPrefix}-${mode}`)}
@@ -191,7 +222,10 @@ class Card extends BaseComponent {
                 {headerEllipsis ? <Ellipsis> {header}</Ellipsis> : header}
 
                 {strip ? (
-                  <View className={`${classPrefix}-header__strip`} />
+                  <View
+                    className={`${classPrefix}-header__strip`}
+                    style={stripStyle}
+                  />
                 ) : null}
               </View>
             }

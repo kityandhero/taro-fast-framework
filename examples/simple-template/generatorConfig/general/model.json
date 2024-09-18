@@ -141,6 +141,13 @@
           "effect": "pageListLatestApprove",
           "service": "pageListLatestApproveData",
           "type": "pageList"
+        },
+        {
+          "title": "获取详情",
+          "api": "/wechatApplication/workflowCase/get",
+          "effect": "get",
+          "service": "getData",
+          "type": "singleData"
         }
       ],
       "cover": true,

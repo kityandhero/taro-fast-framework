@@ -5,30 +5,56 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
+  logConsole,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import { Avatar, ColorText, FlexBox, Line, Tag } from 'taro-fast-component';
+import {
+  Avatar,
+  Card,
+  ColorText,
+  FlexBox,
+  Line,
+  Space,
+  Tag,
+} from 'taro-fast-component';
 
 import { PageWrapper } from '../../../../customComponents';
 import { userGreyImage } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { fieldData } from '../common/data';
 
-const titleStyle = {
+const stripTopValue = 22;
+const stripHeightValue = 26;
+
+const headerStyle = {
   color: '#181818',
-  fontSize: transformSize(28),
+  fontSize: transformSize(30),
   lineHeight: transformSize(38),
   fontWeight: 'bold',
-  paddingTop: transformSize(10),
-  paddingBottom: transformSize(10),
+  paddingLeft: transformSize(26),
+  paddingRight: transformSize(26),
+};
+
+const bodyStyle = {
+  paddingLeft: transformSize(26),
+  paddingRight: transformSize(26),
+  paddingBottom: transformSize(20),
 };
 
 const descriptionStyle = {
   color: '#7e7e7e',
-  fontSize: transformSize(26),
+  fontSize: transformSize(24),
   lineHeight: transformSize(34),
   paddingBottom: transformSize(10),
+};
+
+const formTitleStyle = {
+  marginBottom: transformSize(10),
+};
+
+const formValueStyle = {
+  marginBottom: transformSize(8),
 };
 
 // eslint-disable-next-line no-undef
@@ -44,29 +70,104 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class FlowCase extends PageWrapper {
+class Approve extends PageWrapper {
   // showCallTrack = true;
 
-  // showCallTrace = true;
+  showCallTrace = true;
 
   viewStyle = {
     backgroundColor: '#fcfbfc',
-    paddingLeft: transformSize(20),
-    paddingRight: transformSize(20),
-    paddingBottom: transformSize(20),
   };
 
-  initialTabIndex = 0;
+  enableAutoInitialLoadingIndicator = false;
+
+  enableBackTop = true;
 
   constructor(properties) {
     super(properties);
 
     this.state = {
       ...this.state,
-      loadApiPath:
-        modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove,
+      loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
+      formItemList: [],
     };
   }
+
+  supplementLoadRequestParams = (o) => {
+    const id = getValueByKey({
+      data: this.externalParameter,
+      key: 'id',
+      defaultValue: '',
+    });
+
+    o[fieldData.workflowCaseId.name] = id;
+
+    return { ...o };
+  };
+
+  doOtherAfterLoadSuccess = ({
+    metaData = null,
+    // eslint-disable-next-line no-unused-vars
+    metaListData = [],
+    // eslint-disable-next-line no-unused-vars
+    metaExtra = null,
+    // eslint-disable-next-line no-unused-vars
+    metaOriginalData = null,
+  }) => {
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldData.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const listFormStorage = getValueByKey({
+      data: metaData,
+      key: fieldData.listFormStorage.name,
+      convert: convertCollection.array,
+    }).map((o) => {
+      const { nameNote: title, value } = o;
+
+      return { title, value };
+    });
+
+    const formItemList = [
+      {
+        title: '编号',
+        value: workflowCaseId,
+      },
+      ...listFormStorage,
+    ];
+
+    logConsole(formItemList);
+
+    this.setState({
+      formItemList: [...formItemList],
+    });
+  };
+
+  handleLogic = () => {
+    const urlParameters = this.externalParameter;
+
+    const { scene } = {
+      scene: '',
+      ...urlParameters,
+    };
+
+    const that = this;
+
+    if (checkStringIsNullOrWhiteSpace(scene)) {
+      that.handleParams(urlParameters);
+    } else {
+      that.exchangeShareData({
+        scene,
+        urlParams: urlParameters,
+        callback: (p) => {
+          that.handleParams(p);
+        },
+      });
+    }
+  };
 
   buildTitleBox = () => {
     const { metaData } = this.state;
@@ -114,14 +215,27 @@ class FlowCase extends PageWrapper {
     });
 
     return (
-      <View>
-        <View style={titleStyle}>{title}</View>
-
+      <Card
+        header={title}
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        bodyBorder={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+      >
         {checkStringIsNullOrWhiteSpace(description) ? null : (
-          <View style={descriptionStyle}>{description}</View>
-        )}
+          <>
+            <View style={descriptionStyle}>详情: {description}</View>
 
-        <Line transparent height={10} />
+            <Line transparent height={10} />
+          </>
+        )}
 
         <FlexBox
           style={{ width: '100%' }}
@@ -129,7 +243,7 @@ class FlowCase extends PageWrapper {
           leftStyle={{
             marginRight: transformSize(12),
           }}
-          left={<Avatar circle size={40} image={userAvatar || userGreyImage} />}
+          left={<Avatar circle size={34} image={userAvatar || userGreyImage} />}
           right={
             <FlexBox
               flexAuto="left"
@@ -137,7 +251,7 @@ class FlowCase extends PageWrapper {
                 <View>
                   <ColorText
                     color="#7d7d7d"
-                    fontSize={26}
+                    fontSize={24}
                     textPrefixStyle={{
                       fontWeight: 'bold',
                     }}
@@ -146,7 +260,6 @@ class FlowCase extends PageWrapper {
                     separatorStyle={{
                       marginRight: transformSize(14),
                     }}
-                    s
                     text={lastSubmitApprovalTime}
                   />
                 </View>
@@ -159,24 +272,102 @@ class FlowCase extends PageWrapper {
             />
           }
         />
-      </View>
+      </Card>
     );
   };
 
   buildFormBox = () => {
-    return <View></View>;
+    const { formItemList } = this.state;
+
+    return (
+      <Card bodyStyle={bodyStyle} border={false} bodyBorder={false}>
+        <Space direction="vertical" size={26} fillWidth>
+          {formItemList.map((o, index) => {
+            const { title, value } = o;
+
+            return (
+              <FlexBox
+                key={`form_item_${index}`}
+                style={{ width: '100%' }}
+                flexAuto="right"
+                leftStyle={{
+                  marginRight: transformSize(22),
+                }}
+                left={
+                  <View style={{ width: '100%' }}>
+                    <View style={formTitleStyle}>{title}: </View>
+                  </View>
+                }
+                right={
+                  <View style={{ width: '100%' }}>
+                    <View style={formValueStyle}>{value}</View>
+
+                    <Line color="#eee" height={2} />
+                  </View>
+                }
+              />
+            );
+          })}
+        </Space>
+      </Card>
+    );
   };
 
   buildProcessBox = () => {
-    return <View></View>;
+    return (
+      <Card
+        header="进度"
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        bodyBorder={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+      ></Card>
+    );
   };
 
   buildAttachmentBox = () => {
-    return <View></View>;
+    return (
+      <Card
+        header="附件"
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        bodyBorder={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+      ></Card>
+    );
   };
 
   buildHistoryBox = () => {
-    return <View></View>;
+    return (
+      <Card
+        header="审批记录"
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        bodyBorder={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+      ></Card>
+    );
   };
 
   renderFurther() {
@@ -185,7 +376,7 @@ class FlowCase extends PageWrapper {
     return (
       <View>
         {this.judgeInitialActivityIndicatorVisible() ? (
-          <>{/* {this.buildInitialActivityIndicator({})} */}</>
+          <>{this.buildInitialActivityIndicator({})}</>
         ) : metaData == null ? (
           <View
             style={{
@@ -204,11 +395,19 @@ class FlowCase extends PageWrapper {
           <>
             {this.buildTitleBox()}
 
+            <Line transparent height={20} />
+
             {this.buildFormBox()}
+
+            <Line transparent height={20} />
 
             {this.buildProcessBox()}
 
+            <Line transparent height={20} />
+
             {this.buildAttachmentBox()}
+
+            <Line transparent height={20} />
 
             {this.buildHistoryBox()}
           </>
@@ -218,4 +417,4 @@ class FlowCase extends PageWrapper {
   }
 }
 
-export default FlowCase;
+export default Approve;

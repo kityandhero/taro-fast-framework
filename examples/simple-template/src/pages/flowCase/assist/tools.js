@@ -58,7 +58,7 @@ const descriptionStyle = {
   paddingBottom: transformSize(10),
 };
 
-export function buildLatestApproveItem({ key, data }) {
+export function buildLatestApproveItem({ key, data, onClick }) {
   const title = getValueByKey({
     data: data,
     key: fieldData.title.name,
@@ -102,16 +102,22 @@ export function buildLatestApproveItem({ key, data }) {
   });
 
   return (
-    <View key={key} style={latestApproveItemBoxStyle}>
+    <View key={key} style={latestApproveItemBoxStyle} onClick={onClick}>
       <View style={titleStyle}>{title}</View>
+
+      <Line transparent height={10} />
 
       <Line color="#eee" height={2} />
 
-      {checkStringIsNullOrWhiteSpace(description) ? null : (
-        <View style={descriptionStyle}>{description}</View>
-      )}
+      <Line transparent height={20} />
 
-      <Line transparent height={10} />
+      {checkStringIsNullOrWhiteSpace(description) ? null : (
+        <>
+          <View style={descriptionStyle}>{description}</View>
+
+          <Line transparent height={10} />
+        </>
+      )}
 
       <FlexBox
         style={{ width: '100%' }}
@@ -177,7 +183,7 @@ export function buildLatestApproveItem({ key, data }) {
   );
 }
 
-export function buildWaitApproveItem({ key, data }) {
+export function buildWaitApproveItem({ key, data, onClick }) {
   const title = getValueByKey({
     data: data,
     key: fieldData.title.name,
@@ -292,7 +298,7 @@ export function buildWaitApproveItem({ key, data }) {
         }
       />
 
-      <Line transparent height={10} />
+      <Line transparent height={20} />
 
       <Line color="#eee" height={2} />
 
@@ -314,7 +320,7 @@ export function buildWaitApproveItem({ key, data }) {
         block
         circle
         size="middle"
-        // onClick={this.signInWithPhone}
+        onClick={onClick}
       />
 
       <Line transparent height={10} />

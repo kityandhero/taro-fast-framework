@@ -211,7 +211,7 @@ export default class Index extends ContentPageBase {
     };
   }
 
-  afterLoadSuccess = ({
+  doOtherAfterLoadSuccess = ({
     // eslint-disable-next-line no-unused-vars
     metaData = null,
     // eslint-disable-next-line no-unused-vars
@@ -233,7 +233,7 @@ export default class Index extends ContentPageBase {
       {
         optionCompareFlag,
       },
-      'afterLoadSuccess',
+      'doOtherAfterLoadSuccess',
     );
 
     this.setState({

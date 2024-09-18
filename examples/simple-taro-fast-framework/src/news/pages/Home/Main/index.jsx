@@ -80,7 +80,7 @@ export default class Index extends BasePageWrapper {
     };
   }
 
-  afterLoadSuccess = ({
+  doOtherAfterLoadSuccess = ({
     // eslint-disable-next-line no-unused-vars
     metaData = null,
     // eslint-disable-next-line no-unused-vars

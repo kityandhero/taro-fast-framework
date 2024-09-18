@@ -3,18 +3,9 @@ import { ENV_TYPE, getApp, getEnv as getEnvironment } from '@tarojs/taro';
 import {
   checkStringIsNullOrWhiteSpace,
   getApplicationMergeConfig,
-  isNumber,
   isObject,
   isUndefined,
 } from 'easy-soft-utility';
-
-export function canToNumber(v) {
-  if (isNumber(v)) {
-    return true;
-  }
-
-  return !Number.isNaN(Number(v));
-}
 
 export function getDefaultTaroGlobalData() {
   return {
