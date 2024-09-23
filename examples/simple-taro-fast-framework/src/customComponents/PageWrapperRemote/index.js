@@ -3,8 +3,8 @@ import {
   getMetaDataAliasName,
   getRefreshSessionAliasName,
   getSignInSilentAliasName,
-  getVerifySignInResult,
-} from 'taro-fast-framework';
+} from 'taro-fast-common';
+import { getVerifySignInResult } from 'taro-fast-framework';
 
 import {
   clearLocalDataWhenSimulationModeChanged,

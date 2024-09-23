@@ -2,26 +2,40 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 import {
+  checkInCollection,
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
   logConsole,
+  whetherNumber,
+  zeroInt,
 } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common';
+import { emptyImage, transformSize } from 'taro-fast-common';
 import {
   Avatar,
   Card,
   ColorText,
+  Empty,
   FlexBox,
+  IconCalendar,
+  IconTags,
+  ImageBox,
   Line,
   Space,
+  Steps,
   Tag,
+  VerticalBox,
 } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../../customComponents';
-import { userGreyImage } from '../../../../customConfig';
+import {
+  flowCaseStatusCollection,
+  userGreyImage,
+  viewStyle,
+} from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
+import { buildListApprove } from '../assist/tools';
 import { fieldData } from '../common/data';
 
 const stripTopValue = 22;
@@ -29,7 +43,7 @@ const stripHeightValue = 26;
 
 const headerStyle = {
   color: '#181818',
-  fontSize: transformSize(30),
+  fontSize: transformSize(32),
   lineHeight: transformSize(38),
   fontWeight: 'bold',
   paddingLeft: transformSize(26),
@@ -55,6 +69,24 @@ const formTitleStyle = {
 
 const formValueStyle = {
   marginBottom: transformSize(8),
+  fontWeight: 'bold',
+};
+
+const approveTitleStyle = {
+  fontSize: transformSize(28),
+  fontWeight: 'bold',
+};
+
+const approveNoteStyle = {
+  fontSize: transformSize(28),
+};
+
+const approveSignetStyle = {
+  width: transformSize(200),
+};
+
+const approveTimeStyle = {
+  paddingBottom: transformSize(10),
 };
 
 // eslint-disable-next-line no-undef
@@ -76,7 +108,7 @@ class Approve extends PageWrapper {
   showCallTrace = true;
 
   viewStyle = {
-    backgroundColor: '#fcfbfc',
+    ...viewStyle,
   };
 
   enableAutoInitialLoadingIndicator = false;
@@ -90,6 +122,10 @@ class Approve extends PageWrapper {
       ...this.state,
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
       formItemList: [],
+      listApprove: [],
+      canApprove: whetherNumber.no,
+      existAttachment: whetherNumber.no,
+      approveComplete: whetherNumber.no,
     };
   }
 
@@ -121,6 +157,31 @@ class Approve extends PageWrapper {
       convert: convertCollection.string,
     });
 
+    const canApprove = getValueByKey({
+      data: metaData,
+      key: fieldData.canApprove.name,
+      defaultValue: whetherNumber.no,
+      convert: convertCollection.number,
+    });
+
+    const status = getValueByKey({
+      data: metaData,
+      key: fieldData.status.name,
+      defaultValue: zeroInt,
+      convert: convertCollection.number,
+    });
+
+    const approveComplete = checkInCollection(
+      [
+        flowCaseStatusCollection.forcedEnd,
+        flowCaseStatusCollection.success,
+        flowCaseStatusCollection.refuse,
+      ],
+      status,
+    )
+      ? whetherNumber.yes
+      : whetherNumber.no;
+
     const listFormStorage = getValueByKey({
       data: metaData,
       key: fieldData.listFormStorage.name,
@@ -131,6 +192,35 @@ class Approve extends PageWrapper {
       return { title, value };
     });
 
+    const nextApproveWorkflowNode = getValueByKey({
+      data: metaData,
+      key: fieldData.nextApproveWorkflowNode.name,
+      defaultValue: {},
+    });
+
+    const listChainApprove = getValueByKey({
+      data: metaData,
+      key: fieldData.listChainApprove.name,
+      convert: convertCollection.array,
+      defaultValue: [],
+    });
+
+    const listProcessHistory = getValueByKey({
+      data: metaData,
+      key: fieldData.listProcessHistory.name,
+      convert: convertCollection.array,
+      defaultValue: [],
+    });
+
+    const listAttachment = getValueByKey({
+      data: metaData,
+      key: fieldData.listAttachment.name,
+      convert: convertCollection.array,
+      defaultValue: [],
+    });
+
+    const existAttachment = listAttachment.length > 0;
+
     const formItemList = [
       {
         title: '编号',
@@ -139,10 +229,21 @@ class Approve extends PageWrapper {
       ...listFormStorage,
     ];
 
-    logConsole(formItemList);
+    const listApprove = buildListApprove({
+      listChainApprove,
+      listProcessHistory,
+      nextApproveWorkflowNode,
+    });
+
+    logConsole({ listApprove });
 
     this.setState({
+      canApprove,
       formItemList: [...formItemList],
+      listApprove: [...listApprove],
+      listAttachment: [...listAttachment],
+      existAttachment,
+      approveComplete,
     });
   };
 
@@ -251,7 +352,7 @@ class Approve extends PageWrapper {
                 <View>
                   <ColorText
                     color="#7d7d7d"
-                    fontSize={24}
+                    fontSize={26}
                     textPrefixStyle={{
                       fontWeight: 'bold',
                     }}
@@ -314,6 +415,15 @@ class Approve extends PageWrapper {
   };
 
   buildProcessBox = () => {
+    const { canApprove, approveComplete, listApprove } = this.state;
+
+    if (
+      canApprove !== whetherNumber.yes &&
+      approveComplete !== whetherNumber.yes
+    ) {
+      return null;
+    }
+
     return (
       <Card
         header="进度"
@@ -321,18 +431,97 @@ class Approve extends PageWrapper {
         bodyStyle={{ ...bodyStyle }}
         space={false}
         border={false}
-        bodyBorder={false}
         headerEllipsis={false}
         stripCenter={false}
         stripTop={stripTopValue}
         stripHeight={stripHeightValue}
         strip
         stripColor="#0075fe"
-      ></Card>
+        extra={<IconCalendar size={36} color="#888" />}
+      >
+        <Steps
+          direction="vertical"
+          current={1}
+          titleFontSize={28}
+          descriptionFontSize={26}
+          indicatorMarginRight={12}
+          iconSize={20}
+          style={{
+            paddingTop: transformSize(16),
+            paddingRight: 0,
+            paddingBottom: 0,
+            paddingLeft: 0,
+          }}
+          itemStyle={{
+            paddingBottom: transformSize(12),
+          }}
+          list={listApprove}
+          titleBuilder={(o) => {
+            const { title } = o;
+
+            return <View style={approveTitleStyle}>{title}:</View>;
+          }}
+          descriptionBuilder={(o) => {
+            const { note, signet, time, status } = o;
+
+            if (checkInCollection(['wait', 'process'], status)) {
+              return null;
+            }
+
+            return (
+              <>
+                <Line transparent height={10} />
+
+                <View style={approveNoteStyle}>{note}</View>
+
+                <Line transparent height={16} />
+
+                <FlexBox
+                  flexAuto="left"
+                  left={<View></View>}
+                  right={
+                    <View>
+                      <FlexBox
+                        style={{ width: '100%' }}
+                        flexAuto="right"
+                        leftStyle={{
+                          marginRight: transformSize(12),
+                        }}
+                        left={
+                          <View style={approveSignetStyle}>
+                            <ImageBox aspectRatio={0.353} src={signet} />
+                          </View>
+                        }
+                        right={
+                          <VerticalBox align="bottom" alignJustify="center">
+                            <View style={approveTimeStyle}>
+                              <ColorText
+                                color="#7d7d7d"
+                                fontSize={26}
+                                text={time}
+                              />
+                            </View>
+                          </VerticalBox>
+                        }
+                      />
+                    </View>
+                  }
+                />
+
+                <Line transparent height={10} />
+
+                <Line color="#eee" height={2} />
+              </>
+            );
+          }}
+        />
+      </Card>
     );
   };
 
   buildAttachmentBox = () => {
+    const { existAttachment } = this.state;
+
     return (
       <Card
         header="附件"
@@ -340,14 +529,26 @@ class Approve extends PageWrapper {
         bodyStyle={{ ...bodyStyle }}
         space={false}
         border={false}
-        bodyBorder={false}
         headerEllipsis={false}
         stripCenter={false}
         stripTop={stripTopValue}
         stripHeight={stripHeightValue}
         strip
         stripColor="#0075fe"
-      ></Card>
+        extra={<IconTags size={36} color="#888" />}
+        // bodyStyle
+      >
+        {existAttachment ? (
+          <View>11</View>
+        ) : (
+          <Empty
+            icon=""
+            image={emptyImage}
+            imageAspectRatio={0.7156}
+            description="无附件"
+          />
+        )}
+      </Card>
     );
   };
 
@@ -392,25 +593,17 @@ class Approve extends PageWrapper {
             })}
           </View>
         ) : (
-          <>
+          <Space direction="vertical" fillWidth size={18}>
             {this.buildTitleBox()}
-
-            <Line transparent height={20} />
 
             {this.buildFormBox()}
 
-            <Line transparent height={20} />
-
             {this.buildProcessBox()}
-
-            <Line transparent height={20} />
 
             {this.buildAttachmentBox()}
 
-            <Line transparent height={20} />
-
             {this.buildHistoryBox()}
-          </>
+          </Space>
         )}
       </View>
     );

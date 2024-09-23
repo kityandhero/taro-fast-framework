@@ -28,6 +28,10 @@ export const shareTransfer = {
   webPage: '100',
 };
 
+export const viewStyle = {
+  backgroundColor: '#f1f1f1',
+};
+
 export const colStyle = {
   textAlign: 'center',
   backgroundColor: '#0092ffbf',

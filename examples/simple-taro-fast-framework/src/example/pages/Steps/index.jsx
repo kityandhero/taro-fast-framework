@@ -13,32 +13,35 @@ const config1 = {
     {
       title: '标题1',
       description: '描述',
+      status: 'finish',
     },
     {
       title: '标题2',
       description: '描述',
+      status: 'process',
     },
     {
       title: '标题3',
       description: '描述',
+      status: 'wait',
     },
   ],
-  listStatus: ['finish', 'process', 'wait'],
 };
 
 const config2 = {
   list: [
     {
       title: '第一步',
+      status: 'finish',
     },
     {
       title: '第二步',
+      status: 'error',
     },
     {
       title: '第三步',
     },
   ],
-  listStatus: ['finish', 'error'],
 };
 
 const config3 = {
@@ -46,15 +49,17 @@ const config3 = {
   list: [
     {
       title: '填写机构信息',
+      status: 'finish',
     },
     {
       title: '签约机构',
+      status: 'process',
     },
     {
       title: '关联服务区',
+      status: 'wait',
     },
   ],
-  listStatus: ['finish', 'process', 'wait'],
 };
 
 const config4 = {
@@ -62,7 +67,7 @@ const config4 = {
   list: [
     {
       title: '填写机构信息',
-      status: 'process',
+      status: 'finish',
       description: '完成时间: 2020-12-01 12:30',
     },
     {
@@ -80,7 +85,6 @@ const config4 = {
       status: 'error',
     },
   ],
-  listStatus: ['finish', 'finish', 'finish', 'error'],
 };
 
 const config5 = {
@@ -95,19 +99,60 @@ const config5 = {
       title: '填写机构信息',
       description: '这里是一些描述',
       icon: <IconVolumePlus size={34} />,
+      status: 'finish',
     },
     {
       title: '签约机构',
       description: '这里是一些描述',
       icon: <IconVolumePlus size={34} />,
+      status: 'finish',
     },
     {
       title: '关联服务区',
       description: '这里是一些描述',
       icon: <IconVolumePlus size={34} />,
+      status: 'process',
     },
   ],
-  listStatus: ['finish', 'finish', 'process'],
+};
+
+const config6 = {
+  direction: 'vertical',
+  current: 1,
+  titleFontSize: 28,
+  descriptionFontSize: 26,
+  indicatorMarginRight: 12,
+  iconSize: 20,
+  list: [
+    {
+      title: '填写机构信息',
+      description: '这里是一些描述',
+      icon: <IconVolumePlus size={34} />,
+      status: 'finish',
+    },
+    {
+      title: '签约机构',
+      description: '这里是一些描述',
+      icon: <IconVolumePlus size={34} />,
+      status: 'finish',
+    },
+    {
+      title: '关联服务区',
+      description: '这里是一些描述',
+      icon: <IconVolumePlus size={34} />,
+      status: 'process',
+    },
+  ],
+  titleBuilder: (o) => {
+    const { title } = o;
+
+    return `${title}-${title}`;
+  },
+  descriptionBuilder: (o) => {
+    const { description } = o;
+
+    return `${description}-${description}`;
+  },
 };
 
 // eslint-disable-next-line no-undef
@@ -130,7 +175,6 @@ export default class Index extends ContentPageBase {
 
     this.state = {
       ...this.state,
-
       header: '横向',
       currentConfig: config1,
     };
@@ -157,6 +201,10 @@ export default class Index extends ContentPageBase {
       {
         header: '自定义图标和大小',
         config: config5,
+      },
+      {
+        header: '自定义构建',
+        config: config6,
       },
     ];
   };

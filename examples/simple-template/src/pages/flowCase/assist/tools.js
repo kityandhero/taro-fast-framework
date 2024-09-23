@@ -20,26 +20,28 @@ import { userGreyImage } from '../../../customConfig';
 // import { ellipsisVerticalImage } from '../../../customConfig';
 import { fieldData } from '../common/data';
 
-const waitApproveItemBoxStyle = {
+const commonBoxStyle = {
   backgroundColor: '#fff',
   borderWidth: transformSize(1),
-  borderRadius: transformSize(10),
+  borderRadius: transformSize(16),
   overflow: 'hidden',
-  padding: transformSize(12),
+  paddingTop: transformSize(12),
   paddingLeft: transformSize(16),
   paddingRight: transformSize(16),
+  paddingBottom: transformSize(18),
   marginBottom: transformSize(10),
 };
 
+const createApproveItemBoxStyle = {
+  ...commonBoxStyle,
+};
+
+const waitApproveItemBoxStyle = {
+  ...commonBoxStyle,
+};
+
 const latestApproveItemBoxStyle = {
-  backgroundColor: '#fff',
-  borderWidth: transformSize(1),
-  borderRadius: transformSize(10),
-  overflow: 'hidden',
-  padding: transformSize(12),
-  paddingLeft: transformSize(16),
-  paddingRight: transformSize(16),
-  marginBottom: transformSize(10),
+  ...commonBoxStyle,
 };
 
 const titleStyle = {
@@ -57,6 +59,107 @@ const descriptionStyle = {
   lineHeight: transformSize(34),
   paddingBottom: transformSize(10),
 };
+
+export function buildCreateApproveItem({ key, data, onClick }) {
+  const title = getValueByKey({
+    data: data,
+    key: fieldData.title.name,
+    defaultValue: '',
+    convert: convertCollection.string,
+  });
+
+  const description = getValueByKey({
+    data: data,
+    key: fieldData.description.name,
+    defaultValue: '',
+    convert: convertCollection.string,
+  });
+
+  const userAvatar = getValueByKey({
+    data: data,
+    key: fieldData.userAvatar.name,
+    defaultValue: '',
+    convert: convertCollection.string,
+  });
+
+  const userRealName = getValueByKey({
+    data: data,
+    key: fieldData.userRealName.name,
+    defaultValue: '',
+    convert: convertCollection.string,
+  });
+
+  const statusNote = getValueByKey({
+    data: data,
+    key: fieldData.statusNote.name,
+    defaultValue: '',
+    convert: convertCollection.string,
+  });
+
+  const lastSubmitApprovalTime = getValueByKey({
+    data: data,
+    key: fieldData.lastSubmitApprovalTime.name,
+    defaultValue: '',
+    convert: convertCollection.string,
+  });
+
+  return (
+    <View key={key} style={createApproveItemBoxStyle} onClick={onClick}>
+      <View style={titleStyle}>{title}</View>
+
+      <Line transparent height={10} />
+
+      <Line color="#eee" height={2} />
+
+      <Line transparent height={20} />
+
+      {checkStringIsNullOrWhiteSpace(description) ? null : (
+        <>
+          <View style={descriptionStyle}>{description}</View>
+
+          <Line transparent height={10} />
+        </>
+      )}
+
+      <FlexBox
+        style={{ width: '100%' }}
+        flexAuto="right"
+        leftStyle={{
+          marginRight: transformSize(12),
+        }}
+        left={<Avatar circle size={40} image={userAvatar || userGreyImage} />}
+        right={
+          <FlexBox
+            flexAuto="left"
+            left={
+              <View>
+                <ColorText
+                  color="#7d7d7d"
+                  fontSize={26}
+                  textPrefixStyle={{
+                    fontWeight: 'bold',
+                  }}
+                  textPrefix={userRealName}
+                  separator=""
+                  separatorStyle={{
+                    marginRight: transformSize(14),
+                  }}
+                  s
+                  text={lastSubmitApprovalTime}
+                />
+              </View>
+            }
+            right={
+              <Tag color="#71bcea" fill="outline">
+                {statusNote}
+              </Tag>
+            }
+          />
+        }
+      />
+    </View>
+  );
+}
 
 export function buildLatestApproveItem({ key, data, onClick }) {
   const title = getValueByKey({
@@ -146,30 +249,6 @@ export function buildLatestApproveItem({ key, data, onClick }) {
                   text={lastSubmitApprovalTime}
                 />
               </View>
-
-              // <FlexBox
-              //   flexAuto="bottom"
-              //   style={{
-              //     height: '100%',
-              //   }}
-              //   top={
-              //     <View
-              //       style={{
-              //         height: transformSize(34),
-              //         paddingTop: transformSize(2),
-              //       }}
-              //     >
-
-              //     </View>
-              //   }
-              //   bottom={
-              //     <ColorText
-              //       color="#666"
-              //       fontSize={24}
-              //       text={lastSubmitApprovalTime}
-              //     />
-              //   }
-              // />
             }
             right={
               <Tag color="#71bcea" fill="outline">

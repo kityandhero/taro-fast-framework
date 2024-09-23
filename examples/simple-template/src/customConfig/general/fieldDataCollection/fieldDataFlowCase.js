@@ -133,7 +133,7 @@ const fieldExtraData = {
   },
   nextApproveWorkflowNode: {
     label: '下一审批节点',
-    name: 'latestApproveWorkflowNode',
+    name: 'nextApproveWorkflowNode',
     helper: '',
   },
   nextApproveWorkflowNodeId: {

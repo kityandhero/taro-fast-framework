@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { checkInCollection } from 'easy-soft-utility';
+import { checkInCollection, isFunction } from 'easy-soft-utility';
 
 import { BaseComponent } from '../BaseComponent';
 
@@ -12,8 +12,14 @@ const statusCollection = ['wait', 'process', 'finish', 'error'];
 const defaultProps = {
   title: '',
   description: '',
+  status: 'wait',
   icon: null,
   direction: '',
+  data: null,
+  bodyStyle: null,
+  style: null,
+  titleBuilder: null,
+  descriptionBuilder: null,
 };
 
 class Step extends BaseComponent {
@@ -24,9 +30,27 @@ class Step extends BaseComponent {
   };
 
   renderFurther() {
-    const { title, description, icon, direction } = this.props;
+    const {
+      title,
+      description,
+      icon,
+      direction,
+      data,
+      style,
+      bodyStyle,
+      titleBuilder,
+      descriptionBuilder,
+    } = this.props;
 
     const status = this.getStatus();
+
+    const titleComponent = isFunction(titleBuilder)
+      ? titleBuilder(data)
+      : title;
+
+    const descriptionComponent = isFunction(descriptionBuilder)
+      ? descriptionBuilder(data)
+      : description;
 
     return (
       <View
@@ -58,15 +82,19 @@ class Step extends BaseComponent {
           />
         </View>
 
-        <View className={`${classPrefix}__item-${direction}__content`}>
+        <View
+          className={`${classPrefix}__item-${direction}__content`}
+          style={{ ...bodyStyle, ...style }}
+        >
           <View className={`${classPrefix}__item-${direction}__content__title`}>
-            {title}
+            {titleComponent}
           </View>
-          {!!description && (
+
+          {descriptionComponent && (
             <View
               className={`${classPrefix}__item-${direction}__content__description`}
             >
-              {description}
+              {descriptionComponent}
             </View>
           )}
         </View>

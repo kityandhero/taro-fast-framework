@@ -19,12 +19,15 @@ const directionCollection = ['horizontal', 'vertical'];
 
 const defaultProps = {
   direction: 'horizontal',
+  itemStyle: null,
   list: [],
   listStatus: [],
   titleFontSize: 26,
   descriptionFontSize: 24,
   indicatorMarginRight: 0,
   iconSize: 18,
+  titleBuilder: null,
+  descriptionBuilder: null,
 };
 
 class Steps extends BaseComponent {
@@ -42,13 +45,48 @@ class Steps extends BaseComponent {
       descriptionFontSize,
       indicatorMarginRight,
       iconSize,
+      style,
     } = this.props;
+
+    const direction = this.getDirection();
+
+    let paddingStyle = {};
+
+    switch (direction) {
+      case 'horizontal': {
+        paddingStyle = {
+          paddingTop: transformSize(16),
+          paddingRight: 0,
+          paddingBottom: transformSize(16),
+          paddingLeft: 0,
+        };
+
+        break;
+      }
+
+      case 'vertical': {
+        paddingStyle = {
+          paddingTop: transformSize(16),
+          paddingRight: transformSize(32),
+          paddingBottom: transformSize(16),
+          paddingLeft: transformSize(32),
+        };
+
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
 
     return {
       '--title-font-size': transformSize(titleFontSize),
       '--description-font-size': transformSize(descriptionFontSize),
       '--indicator-margin-right': transformSize(indicatorMarginRight),
       '--icon-size': transformSize(iconSize),
+      ...paddingStyle,
+      ...style,
     };
   };
 
@@ -62,47 +100,49 @@ class Steps extends BaseComponent {
     );
   };
 
-  buildListStatus = () => {
-    const { listStatus } = this.props;
+  // buildListStatus = () => {
+  //   const { listStatus } = this.props;
 
-    const listStatusData = isArray(listStatus) ? listStatus : [];
+  //   const listStatusData = isArray(listStatus) ? listStatus : [];
 
-    return listStatusData;
-  };
+  //   return listStatusData;
+  // };
 
   buildList = () => {
     const { list } = this.props;
 
     const listData = isArray(list) ? list : [];
 
-    const listStatus = this.buildListStatus();
-    const count = listData.length;
-    const statusCount = listStatus.length;
+    return listData;
 
-    const result = [];
+    // const listStatus = this.buildListStatus();
+    // const count = listData.length;
+    // const statusCount = listStatus.length;
 
-    let statusPrevious = '';
+    // const result = [];
 
-    for (const [index, item] of listData.entries()) {
-      let status =
-        count <= statusCount
-          ? listStatus[index]
-          : index <= statusCount
-            ? listStatus[index]
-            : '';
+    // let statusPrevious = '';
 
-      if (checkStringIsNullOrWhiteSpace(status)) {
-        status = statusPrevious === 'finish' ? 'process' : 'wait';
-      }
+    // for (const [index, item] of listData.entries()) {
+    //   let status =
+    //     count <= statusCount
+    //       ? listStatus[index]
+    //       : index <= statusCount
+    //         ? listStatus[index]
+    //         : '';
 
-      statusPrevious = status;
+    //   if (checkStringIsNullOrWhiteSpace(status)) {
+    //     status = statusPrevious === 'finish' ? 'process' : 'wait';
+    //   }
 
-      delete item.status;
+    //   statusPrevious = status;
 
-      result.push({ ...item, status });
-    }
+    //   delete item.status;
 
-    return result;
+    //   result.push({ ...item, status });
+    // }
+
+    // return result;
   };
 
   buildItem = ({
@@ -112,7 +152,11 @@ class Steps extends BaseComponent {
     status = 'wait',
     index,
     direction,
+    data = null,
+    style = null,
   }) => {
+    const { titleBuilder, descriptionBuilder, itemStyle } = this.props;
+
     return (
       <Step
         key={`${this.keyPrefix}_${index}`}
@@ -121,6 +165,11 @@ class Steps extends BaseComponent {
         icon={icon || this.getIcon(status)}
         status={status || 'wait'}
         direction={direction}
+        data={data}
+        style={style || null}
+        bodyStyle={itemStyle || null}
+        titleBuilder={titleBuilder}
+        descriptionBuilder={descriptionBuilder}
       />
     );
   };
@@ -168,6 +217,7 @@ class Steps extends BaseComponent {
               : statusSource,
             index,
             direction,
+            data: item,
           });
         })}
 

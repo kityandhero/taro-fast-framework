@@ -8,14 +8,23 @@ import { transformSize } from 'taro-fast-common';
 import { Line, Space, Tabs } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../customComponents';
-import { pathCollection } from '../../../customConfig';
+import { pathCollection, viewStyle } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
-import { buildLatestApproveItem, buildWaitApproveItem } from '../assist/tools';
+import {
+  buildCreateApproveItem,
+  buildLatestApproveItem,
+  buildWaitApproveItem,
+} from '../assist/tools';
 
+const createApproveFlag = '6dff5474f77a4dfba4034f4b56e4eb96';
 const waitApproveFlag = 'c14bbdb2b6214288bdfe11a266a89b47';
 const latestApproveFlag = 'eb15add13d584a459d00423c373613b5';
 
 const tabCollection = [
+  {
+    key: createApproveFlag,
+    title: '已发起',
+  },
   {
     key: waitApproveFlag,
     title: '待审批',
@@ -27,12 +36,35 @@ const tabCollection = [
 ];
 
 function getTabIndex(key) {
-  return key === waitApproveFlag ? 0 : 1;
+  let result = 0;
+
+  switch (key) {
+    case createApproveFlag: {
+      result = 0;
+      break;
+    }
+    case waitApproveFlag: {
+      result = 1;
+      break;
+    }
+
+    case latestApproveFlag: {
+      result = 2;
+      break;
+    }
+
+    default: {
+      result = 0;
+      break;
+    }
+  }
+
+  return result;
 }
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '用户中心',
+  navigationBarTitleText: '审批',
   // navigationStyle: 'custom',
 });
 
@@ -49,11 +81,11 @@ class FlowCase extends PageWrapper {
   // showCallTrace = true;
 
   viewStyle = {
-    backgroundColor: '#fcfbfc',
-    paddingLeft: transformSize(20),
-    paddingRight: transformSize(20),
+    ...viewStyle,
     paddingBottom: transformSize(20),
   };
+
+  enableBackTop = true;
 
   initialTabIndex = 0;
 
@@ -64,15 +96,35 @@ class FlowCase extends PageWrapper {
 
     this.state = {
       ...this.state,
-      loadApiPath:
-        modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove,
+      loadApiPath: modelTypeCollection.flowCaseTypeCollection.pageList,
     };
   }
 
   adjustLoadApiPath = () => {
-    return this.initialTabIndex === 0
-      ? modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove
-      : modelTypeCollection.flowCaseTypeCollection.pageListLatestApprove;
+    let api = '';
+
+    switch (this.initialTabIndex) {
+      case 0: {
+        api = modelTypeCollection.flowCaseTypeCollection.pageList;
+        break;
+      }
+      case 1: {
+        api = modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove;
+        break;
+      }
+
+      case 2: {
+        api = modelTypeCollection.flowCaseTypeCollection.pageListLatestApprove;
+        break;
+      }
+
+      default: {
+        api = '';
+        break;
+      }
+    }
+
+    return api;
   };
 
   triggerTabClick = (index, event, item) => {
@@ -99,6 +151,7 @@ class FlowCase extends PageWrapper {
         style={{
           paddingLeft: transformSize(12),
           paddingRight: transformSize(12),
+          backgroundColor: '#ffffff',
         }}
       >
         <CustomWrapper>
@@ -127,34 +180,51 @@ class FlowCase extends PageWrapper {
       <CustomWrapper>
         <Line transparent height={16} />
 
-        <Space
-          direction="vertical"
-          fillWidth
-          size={26}
-          split={<Line transparent height={16} />}
+        <View
+          style={{
+            paddingLeft: transformSize(20),
+            paddingRight: transformSize(20),
+          }}
         >
-          {metaListData.map((item) => {
-            const { workflowCaseId } = item;
+          <Space
+            direction="vertical"
+            fillWidth
+            size={10}
+            // split={<Line transparent height={16} />}
+          >
+            {metaListData.map((item) => {
+              const { workflowCaseId } = item;
 
-            if (this.initialTabIndex === 0) {
-              return buildWaitApproveItem({
+              if (this.initialTabIndex === 0) {
+                return buildCreateApproveItem({
+                  key: `waitApprove_${workflowCaseId}`,
+                  data: item,
+                  onClick: () => {
+                    this.goToApprove(workflowCaseId);
+                  },
+                });
+              }
+
+              if (this.initialTabIndex === 1) {
+                return buildWaitApproveItem({
+                  key: `waitApprove_${workflowCaseId}`,
+                  data: item,
+                  onClick: () => {
+                    this.goToApprove(workflowCaseId);
+                  },
+                });
+              }
+
+              return buildLatestApproveItem({
                 key: `waitApprove_${workflowCaseId}`,
                 data: item,
                 onClick: () => {
                   this.goToApprove(workflowCaseId);
                 },
               });
-            }
-
-            return buildLatestApproveItem({
-              key: `waitApprove_${workflowCaseId}`,
-              data: item,
-              onClick: () => {
-                this.goToApprove(workflowCaseId);
-              },
-            });
-          })}
-        </Space>
+            })}
+          </Space>
+        </View>
       </CustomWrapper>
     );
   };

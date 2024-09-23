@@ -129,6 +129,13 @@
     {
       "apis": [
         {
+          "title": "已创建流程实例分页列表",
+          "api": "/wechatApplication/workflowCase/pageList",
+          "effect": "pageList",
+          "service": "pageListData",
+          "type": "pageList"
+        },
+        {
           "title": "待审批流程实例分页列表",
           "api": "/wechatApplication/workflowCase/pageListWaitApprove",
           "effect": "pageListWaitApprove",
