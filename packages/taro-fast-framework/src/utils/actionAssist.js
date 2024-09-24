@@ -160,6 +160,8 @@ export async function actionCore({
               return;
             })
             .catch((error) => {
+              logDebug({ api, error }, 'actionCore error');
+
               logException(error);
 
               if (showProcessing) {
@@ -168,12 +170,14 @@ export async function actionCore({
                 }, 200);
               }
 
-              failureCallback({
-                target,
-                handleData,
-                remoteOriginal: null,
-                error,
-              });
+              if (isFunction(failureCallback)) {
+                failureCallback({
+                  target,
+                  handleData,
+                  remoteOriginal: null,
+                  error,
+                });
+              }
 
               logDebug('state dispatchComplete will set to true');
 
@@ -182,11 +186,13 @@ export async function actionCore({
                 dispatchComplete: true,
               });
             });
-        } catch (error_) {
+        } catch (error) {
+          logDebug({ api, error }, 'actionCore error');
+
           Tips.loaded();
 
           const text = `${toString(
-            error_,
+            error,
           )}, please confirm dispatch type exists first.`;
 
           logException({
@@ -201,7 +207,7 @@ export async function actionCore({
             target,
             handleData,
             remoteOriginal: null,
-            error: error_,
+            error: error,
           });
 
           showErrorMessage({

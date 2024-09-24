@@ -17,7 +17,6 @@ import {
   Avatar,
   Button,
   Card,
-  CenterBox,
   ColorText,
   Empty,
   FixedBox,
@@ -26,7 +25,6 @@ import {
   IconTags,
   ImageBox,
   Line,
-  Modal,
   MultiLineText,
   Space,
   Steps,
@@ -45,6 +43,7 @@ import { modelTypeCollection } from '../../../../modelBuilders';
 import { submitApprovalAction } from '../assist/action';
 import { buildListApprove } from '../assist/tools';
 import { fieldData } from '../common/data';
+import { SubmitModal } from '../submitModal';
 
 const stripTopValue = 22;
 const stripHeightValue = 26;
@@ -145,10 +144,10 @@ class Approve extends PageWrapper {
       formItemList: [],
       listApprove: [],
       listAttachment: [],
+      canEdit: whetherNumber.no,
       canApprove: whetherNumber.no,
       existAttachment: whetherNumber.no,
       approveComplete: whetherNumber.no,
-      confirmSubmitModalDisplay: false,
     };
   }
 
@@ -178,6 +177,13 @@ class Approve extends PageWrapper {
       key: fieldData.workflowCaseId.name,
       defaultValue: '',
       convert: convertCollection.string,
+    });
+
+    const canEdit = getValueByKey({
+      data: metaData,
+      key: fieldData.canEdit.name,
+      defaultValue: whetherNumber.no,
+      convert: convertCollection.number,
     });
 
     const canApprove = getValueByKey({
@@ -261,6 +267,7 @@ class Approve extends PageWrapper {
     logConsole({ listApprove });
 
     this.setState({
+      canEdit,
       canApprove,
       formItemList: [...formItemList],
       listApprove: [...listApprove],
@@ -271,11 +278,7 @@ class Approve extends PageWrapper {
   };
 
   confirmSubmit = () => {
-    this.setState({ confirmSubmitModalDisplay: true });
-  };
-
-  confirmClose = () => {
-    this.setState({ confirmSubmitModalDisplay: false });
+    SubmitModal.open();
   };
 
   submitApproval = () => {
@@ -296,7 +299,7 @@ class Approve extends PageWrapper {
       successCallback: ({ target }) => {
         showSuccessNotification('提交审批成功');
 
-        target.reloadData();
+        target.reloadData({});
       },
     });
   };
@@ -656,7 +659,39 @@ class Approve extends PageWrapper {
   };
 
   buildActionBox = () => {
-    const { canApprove } = this.state;
+    const { canEdit, canApprove } = this.state;
+
+    if (canEdit === whetherNumber.no && canApprove === whetherNumber.no) {
+      return (
+        <>
+          <Line transparent height={18} />
+
+          <View
+            style={{
+              width: '100%',
+            }}
+          >
+            <View
+              style={{
+                paddingLeft: transformSize(18),
+                paddingRight: transformSize(18),
+              }}
+            >
+              <Button
+                text="返回"
+                fontSize={24}
+                backgroundColor="#fff"
+                block
+                size="middle"
+                onClick={() => {
+                  navigateBack();
+                }}
+              />
+            </View>
+          </View>
+        </>
+      );
+    }
 
     return (
       <View
@@ -759,19 +794,7 @@ class Approve extends PageWrapper {
   };
 
   renderInteractiveArea = () => {
-    const { confirmSubmitModalDisplay } = this.state;
-
-    return (
-      <Modal
-        visible={confirmSubmitModalDisplay}
-        // buttonFill={buttonFill.length > 0 ? buttonFill[0] === 'default' : true}
-        header={<CenterBox>提交审批</CenterBox>}
-        onCancel={this.confirmClose}
-        // onConfirm={this.submitApproval}
-      >
-        即将提交审批，确定吗？
-      </Modal>
-    );
+    return <SubmitModal afterOk={this.submitApproval} />;
   };
 
   renderFurther() {
