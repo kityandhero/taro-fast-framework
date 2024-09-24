@@ -7,21 +7,27 @@ import {
   convertCollection,
   getValueByKey,
   logConsole,
+  showSuccessNotification,
   whetherNumber,
   zeroInt,
 } from 'easy-soft-utility';
 
-import { emptyImage, transformSize } from 'taro-fast-common';
+import { emptyImage, navigateBack, transformSize } from 'taro-fast-common';
 import {
   Avatar,
+  Button,
   Card,
+  CenterBox,
   ColorText,
   Empty,
+  FixedBox,
   FlexBox,
   IconCalendar,
   IconTags,
   ImageBox,
   Line,
+  Modal,
+  MultiLineText,
   Space,
   Steps,
   Tag,
@@ -30,11 +36,13 @@ import {
 
 import { PageWrapper } from '../../../../customComponents';
 import {
+  fileTextBlueImage,
   flowCaseStatusCollection,
   userGreyImage,
   viewStyle,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
+import { submitApprovalAction } from '../assist/action';
 import { buildListApprove } from '../assist/tools';
 import { fieldData } from '../common/data';
 
@@ -89,6 +97,19 @@ const approveTimeStyle = {
   paddingBottom: transformSize(10),
 };
 
+const attachmentBoxStyle = {
+  paddingTop: transformSize(16),
+  paddingBottom: transformSize(16),
+};
+
+const attachmentIconStyle = {
+  width: transformSize(46),
+};
+
+const attachmentTitleStyle = {
+  // paddingBottom: transformSize(10),
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '用户中心',
@@ -123,9 +144,11 @@ class Approve extends PageWrapper {
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
       formItemList: [],
       listApprove: [],
+      listAttachment: [],
       canApprove: whetherNumber.no,
       existAttachment: whetherNumber.no,
       approveComplete: whetherNumber.no,
+      confirmSubmitModalDisplay: false,
     };
   }
 
@@ -247,27 +270,43 @@ class Approve extends PageWrapper {
     });
   };
 
-  handleLogic = () => {
-    const urlParameters = this.externalParameter;
+  confirmSubmit = () => {
+    this.setState({ confirmSubmitModalDisplay: true });
+  };
 
-    const { scene } = {
-      scene: '',
-      ...urlParameters,
-    };
+  confirmClose = () => {
+    this.setState({ confirmSubmitModalDisplay: false });
+  };
 
-    const that = this;
+  submitApproval = () => {
+    const { metaData } = this.state;
 
-    if (checkStringIsNullOrWhiteSpace(scene)) {
-      that.handleParams(urlParameters);
-    } else {
-      that.exchangeShareData({
-        scene,
-        urlParams: urlParameters,
-        callback: (p) => {
-          that.handleParams(p);
-        },
-      });
-    }
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldData.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    submitApprovalAction({
+      target: this,
+      handleData: {
+        workflowCaseId,
+      },
+      successCallback: ({ target }) => {
+        showSuccessNotification('提交审批成功');
+
+        target.reloadData();
+      },
+    });
+  };
+
+  judgeDisplayHistory = () => {
+    const { canApprove, approveComplete } = this.state;
+
+    return (
+      canApprove === whetherNumber.yes || approveComplete === whetherNumber.yes
+    );
   };
 
   buildTitleBox = () => {
@@ -415,12 +454,9 @@ class Approve extends PageWrapper {
   };
 
   buildProcessBox = () => {
-    const { canApprove, approveComplete, listApprove } = this.state;
+    const { listApprove } = this.state;
 
-    if (
-      canApprove !== whetherNumber.yes &&
-      approveComplete !== whetherNumber.yes
-    ) {
+    if (!this.judgeDisplayHistory()) {
       return null;
     }
 
@@ -520,7 +556,7 @@ class Approve extends PageWrapper {
   };
 
   buildAttachmentBox = () => {
-    const { existAttachment } = this.state;
+    const { existAttachment, listAttachment } = this.state;
 
     return (
       <Card
@@ -539,7 +575,51 @@ class Approve extends PageWrapper {
         // bodyStyle
       >
         {existAttachment ? (
-          <View>11</View>
+          <View>
+            <Space
+              direction="vertical"
+              fillWidth
+              size={0}
+              split={<Line height={2} />}
+            >
+              {listAttachment.map((o, index) => {
+                const { alias } = {
+                  alias: '',
+                  ...o,
+                };
+
+                return (
+                  <View key={`attachment_${index}`} style={attachmentBoxStyle}>
+                    <FlexBox
+                      flexAuto="right"
+                      leftStyle={{
+                        marginRight: transformSize(10),
+                      }}
+                      left={
+                        <VerticalBox>
+                          <View style={attachmentIconStyle}>
+                            <ImageBox src={fileTextBlueImage} />
+                          </View>
+                        </VerticalBox>
+                      }
+                      right={
+                        <View style={attachmentTitleStyle}>
+                          <MultiLineText
+                            style={{
+                              color: '#8290a1',
+                            }}
+                            fontSize={26}
+                            lineHeight={36}
+                            text={alias}
+                          />
+                        </View>
+                      }
+                    />
+                  </View>
+                );
+              })}
+            </Space>
+          </View>
         ) : (
           <Empty
             icon=""
@@ -553,6 +633,10 @@ class Approve extends PageWrapper {
   };
 
   buildHistoryBox = () => {
+    if (!this.judgeDisplayHistory()) {
+      return null;
+    }
+
     return (
       <Card
         header="审批记录"
@@ -568,6 +652,125 @@ class Approve extends PageWrapper {
         strip
         stripColor="#0075fe"
       ></Card>
+    );
+  };
+
+  buildActionBox = () => {
+    const { canApprove } = this.state;
+
+    return (
+      <View
+        style={{
+          width: '100%',
+          backgroundColor: '#fff',
+        }}
+      >
+        <FixedBox style={{ width: '100%' }} zIndex={1000} bottom={0}>
+          <Line color="#eee" height={2} />
+
+          <View
+            style={{
+              backgroundColor: '#fff',
+              paddingTop: transformSize(16),
+              paddingBottom: transformSize(16),
+              paddingLeft: transformSize(26),
+              paddingRight: transformSize(26),
+            }}
+          >
+            <FlexBox
+              flexAuto="left"
+              left={
+                <Button
+                  weappButton
+                  text="驳回"
+                  backgroundColor="#fc5e3d"
+                  fontColor="#fff"
+                  fontSize={24}
+                  paddingTop={14}
+                  paddingBottom={14}
+                  paddingLeft={32}
+                  paddingRight={32}
+                  size="middle"
+                  hidden={!canApprove}
+                />
+              }
+              right={
+                <View>
+                  <FlexBox
+                    flexAuto="left"
+                    leftStyle={{
+                      marginRight: transformSize(30),
+                    }}
+                    left={
+                      <Button
+                        weappButton
+                        fill="none"
+                        text="返回"
+                        fontColor="#4599ea"
+                        fontSize={24}
+                        paddingTop={14}
+                        paddingBottom={14}
+                        paddingLeft={20}
+                        paddingRight={20}
+                        size="middle"
+                        onClick={() => {
+                          navigateBack();
+                        }}
+                      />
+                    }
+                    right={
+                      canApprove ? (
+                        <Button
+                          weappButton
+                          text="批准"
+                          backgroundColor="#0075ff"
+                          fontColor="#fff"
+                          fontSize={24}
+                          paddingTop={14}
+                          paddingBottom={14}
+                          paddingLeft={32}
+                          paddingRight={32}
+                          size="middle"
+                        />
+                      ) : (
+                        <Button
+                          weappButton
+                          text="提交审批"
+                          backgroundColor="#2da44e"
+                          fontColor="#fff"
+                          fontSize={24}
+                          paddingTop={14}
+                          paddingBottom={14}
+                          paddingLeft={32}
+                          paddingRight={32}
+                          size="middle"
+                          onClick={this.confirmSubmit}
+                        />
+                      )
+                    }
+                  />
+                </View>
+              }
+            />
+          </View>
+        </FixedBox>
+      </View>
+    );
+  };
+
+  renderInteractiveArea = () => {
+    const { confirmSubmitModalDisplay } = this.state;
+
+    return (
+      <Modal
+        visible={confirmSubmitModalDisplay}
+        // buttonFill={buttonFill.length > 0 ? buttonFill[0] === 'default' : true}
+        header={<CenterBox>提交审批</CenterBox>}
+        onCancel={this.confirmClose}
+        // onConfirm={this.submitApproval}
+      >
+        即将提交审批，确定吗？
+      </Modal>
     );
   };
 
@@ -593,17 +796,23 @@ class Approve extends PageWrapper {
             })}
           </View>
         ) : (
-          <Space direction="vertical" fillWidth size={18}>
-            {this.buildTitleBox()}
+          <>
+            <View>
+              <Space direction="vertical" fillWidth size={18}>
+                {this.buildTitleBox()}
 
-            {this.buildFormBox()}
+                {this.buildFormBox()}
 
-            {this.buildProcessBox()}
+                {this.buildProcessBox()}
 
-            {this.buildAttachmentBox()}
+                {this.buildAttachmentBox()}
 
-            {this.buildHistoryBox()}
-          </Space>
+                {this.buildHistoryBox()}
+              </Space>
+            </View>
+
+            {this.buildActionBox()}
+          </>
         )}
       </View>
     );

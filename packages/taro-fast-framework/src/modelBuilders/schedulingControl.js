@@ -24,7 +24,7 @@ import {
 import { setLocationMode } from '../utils/locationAssist';
 import { getWeather, setWeather } from '../utils/weatherAssist';
 
-export function buildSchedulingControlModel() {
+export function buildModel() {
   return {
     namespace: 'schedulingControl',
 

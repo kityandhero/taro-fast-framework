@@ -17,9 +17,15 @@ export const resetPasswordShieldGrey = `${filePrefix}1834145367885746176.png`;
 export const resetPasswordKeyBlue = `${filePrefix}1834146507838853120.png`;
 
 export const ellipsisVerticalImage = `${filePrefix}1834582979146551296.png`;
-
 export const clockGreyImage = `${filePrefix}1835127965797715968.png`;
 export const userGreyImage = `${filePrefix}1835127918024593408.png`;
+export const arrowRightGreyImage = `${filePrefix}1838386682953601024.png`;
+export const arrowDownGreyImage = `${filePrefix}1838387011803811840.png`;
+export const fileTextBlueImage = `${filePrefix}1838387395452604416.png`;
+export const arrowDownBlueImage = `${filePrefix}1838387678228385792.png`;
+export const ringBlueImage = `${filePrefix}1838388046450528256.png`;
+export const signetBlueImage = `${filePrefix}1838388838901354496.png`;
+export const verticalBarBlueImage = `${filePrefix}1838389282411253760.png`;
 
 export const shareTransfer = {
   home: '0',

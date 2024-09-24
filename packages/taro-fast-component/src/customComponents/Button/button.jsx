@@ -150,9 +150,7 @@ class Button extends BaseComponent {
 
     return (
       children ??
-      (text && !icon ? (
-        text
-      ) : text && icon ? (
+      (!!fontColor || !!fontSize || !!icon ? (
         <ColorText
           color={fontColor}
           fontSize={fontSize}
@@ -160,9 +158,25 @@ class Button extends BaseComponent {
           text={text}
         />
       ) : (
-        (icon ?? null)
+        text
       ))
     );
+
+    // return (
+    //   children ??
+    //   (text && !icon ? (
+    //     text
+    //   ) : text && icon ? (
+    //     <ColorText
+    //       color={fontColor}
+    //       fontSize={fontSize}
+    //       icon={icon}
+    //       text={text}
+    //     />
+    //   ) : (
+    //     (icon ?? null)
+    //   ))
+    // );
   };
 
   renderFurther() {

@@ -148,7 +148,7 @@ const Request = {
         dataType: 'json',
         cache: 'no-cache',
         fail: (response) => {
-          console.lod(response);
+          logDebug({ response }, `request fail: ${urlChange}`);
         },
         ...option,
         url: urlChange,

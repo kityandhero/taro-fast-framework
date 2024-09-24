@@ -2,7 +2,6 @@ import { Component } from 'react';
 
 import { ApplicationProvider, getDispatch } from 'easy-soft-dva';
 import {
-  appendEmbedBuilder,
   checkStringIsNullOrWhiteSpace,
   environmentCollection,
   flushLocalStorage,
@@ -23,7 +22,7 @@ import {
   setTaroGlobalData,
 } from 'taro-fast-common';
 
-import { buildSchedulingControlModel } from '../../models/schedulingControl';
+import { appendEmbedModelBuilder } from '../../modelBuilders';
 import { removeAdministrativeDivisionFullDataCache } from '../../utils/administrativeDivisionFullDataCacheAssist';
 import { configEnvironment } from '../../utils/configAssist';
 import { setLaunchOption } from '../../utils/launchOptionAssist';
@@ -54,7 +53,7 @@ function setMainFontSize() {
   }
 }
 
-appendEmbedBuilder(buildSchedulingControlModel);
+appendEmbedModelBuilder();
 
 let initApplicationComplete = false;
 

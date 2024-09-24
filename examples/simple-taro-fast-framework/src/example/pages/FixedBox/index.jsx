@@ -57,7 +57,7 @@ const config5 = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: 'Flex布局',
+  navigationBarTitleText: 'FixedBox布局',
 });
 
 @connect(({ schedulingControl }) => ({
@@ -65,7 +65,7 @@ definePageConfig({
 }))
 export default class Index extends ContentPageBase {
   headerData = {
-    id: 'Flex',
+    id: 'FixedBox',
     name: '固定容器',
     description: '固定容器组件',
   };
@@ -133,7 +133,7 @@ export default class Index extends ContentPageBase {
           header={header}
           description={description}
           config={currentConfig}
-          componentName="FlexBox"
+          componentName="FixedBox"
           mockChildren={!!inner}
           useInnerBox={false}
           innerBoxCenterMode

@@ -1166,6 +1166,10 @@ class AbstractComponent extends Component {
     return Taro.canIUse(schema);
   }
 
+  renderInteractiveArea = () => {
+    return null;
+  };
+
   renderFurther() {
     this.logRenderCallTrack({}, primaryCallName, 'renderFurther', emptyLogic);
 
@@ -1199,7 +1203,13 @@ class AbstractComponent extends Component {
 
     this.logRenderCallTrace({}, primaryCallName, 'render', 'renderView');
 
-    return this.renderView();
+    return (
+      <>
+        {this.renderView()}
+
+        {this.renderInteractiveArea()}
+      </>
+    );
   }
 }
 

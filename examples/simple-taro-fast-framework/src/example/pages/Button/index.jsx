@@ -63,7 +63,7 @@ const config3 = {
   style: {
     width: transformSize(180),
   },
-  backgroundColor: '#45e209',
+  backgroundColor: '#19e6f4',
 };
 
 const config31 = {
@@ -71,7 +71,7 @@ const config31 = {
   style: {
     width: transformSize(180),
   },
-  fontColor: '#fff',
+  fontColor: 'red',
   backgroundColor: '#45e209',
 };
 

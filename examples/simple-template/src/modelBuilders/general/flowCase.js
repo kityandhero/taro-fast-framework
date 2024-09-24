@@ -12,6 +12,7 @@ import {
   pageListData,
   pageListLatestApproveData,
   pageListWaitApproveData,
+  submitApprovalData,
 } from '../../services/flowCase';
 
 export const flowCaseTypeCollection = {
@@ -19,6 +20,7 @@ export const flowCaseTypeCollection = {
   pageListWaitApprove: 'flowCase/pageListWaitApprove',
   pageListLatestApprove: 'flowCase/pageListLatestApprove',
   get: 'flowCase/get',
+  submitApproval: 'flowCase/submitApproval',
 };
 
 export function buildModel() {
@@ -118,6 +120,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(getData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *submitApproval(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(submitApprovalData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

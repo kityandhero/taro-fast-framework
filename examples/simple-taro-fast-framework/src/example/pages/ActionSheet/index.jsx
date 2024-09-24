@@ -9,6 +9,8 @@ import { ActionSheet, Button, Card, Space } from 'taro-fast-component';
 import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
+import { ActionSheetExtraSimple } from './ActionSheetExtraSimple';
+
 const style = {
   backgroundColor: '#f5f7fa',
   ...cardStyle,
@@ -99,6 +101,16 @@ export default class Index extends ContentPageBase {
             >
               打开 ActionSheet 自定义选项
             </Button>
+
+            <Button
+              block
+              size="large"
+              onClick={() => {
+                ActionSheetExtraSimple.open();
+              }}
+            >
+              打开 ActionSheetExtraSimple
+            </Button>
           </Space>
         </Card>
 
@@ -173,39 +185,47 @@ export default class Index extends ContentPageBase {
           title="清除位置信息后， 别人将不能查看到你"
           options={[
             {
+              value: 'one',
               content: '按钮一',
-              onClick: (v) => {
-                logConfig(v, '按钮一');
-
-                this.showToast('点击了按钮一');
-              },
             },
             {
+              value: 'two',
               content: '按钮二',
-              onClick: (v) => {
-                logConfig(v, '按钮二');
-
-                this.showToast('点击了按钮二');
-              },
             },
             {
+              value: 'three',
               content: (
                 <Text className="danger" userSelect>
                   清除位置信息并退出
                 </Text>
               ),
-              onClick: (v, event) => {
-                logConfig(
-                  {
-                    value: v,
-                    e: event,
-                  },
-                  '清除',
-                );
-                this.showToast('成功清除位置');
-              },
             },
           ]}
+        />
+
+        <ActionSheetExtraSimple
+          options={[
+            {
+              value: 'one',
+              content: '按钮一',
+            },
+            {
+              value: 'two',
+              content: '按钮二',
+            },
+            {
+              value: 'three',
+              content: (
+                <Text className="danger" userSelect>
+                  清除位置信息并退出
+                </Text>
+              ),
+            },
+          ]}
+          // eslint-disable-next-line no-unused-vars
+          afterOption={(v, o, event) => {
+            console.log(v);
+          }}
         />
       </View>
     );

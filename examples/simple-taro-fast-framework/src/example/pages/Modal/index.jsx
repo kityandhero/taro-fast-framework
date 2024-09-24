@@ -8,6 +8,8 @@ import { Selector } from 'taro-fast-component-extra';
 import { ContentPageBase } from '../../../customComponents';
 import { cardHeaderStyle, cardStyle } from '../../../customConfig';
 
+import { ModelExtraSimple } from './ModelExtraSimple';
+
 const style = {
   backgroundColor: '#f5f7fa',
   ...cardStyle,
@@ -38,7 +40,6 @@ export default class Index extends ContentPageBase {
 
     this.state = {
       ...this.state,
-
       show1: false,
       show2: false,
       show3: false,
@@ -194,6 +195,16 @@ export default class Index extends ContentPageBase {
               >
                 多个按钮
               </Button>
+
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  ModelExtraSimple.open();
+                }}
+              >
+                ModelExtraSimple
+              </Button>
             </Space>
           </Card>
 
@@ -339,6 +350,8 @@ export default class Index extends ContentPageBase {
             </View>
           </CenterBox>
         </Modal>
+
+        <ModelExtraSimple />
       </>
     );
   };

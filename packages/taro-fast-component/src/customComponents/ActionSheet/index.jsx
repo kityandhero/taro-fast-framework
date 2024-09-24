@@ -36,6 +36,7 @@ const defaultProps = {
    * 点击了底部取消按钮触发的事件
    */
   onCancel: null,
+  onOptionClick: null,
   options: [],
   style: {},
   headerStyle: {},
@@ -46,6 +47,7 @@ const defaultProps = {
 class ActionSheet extends BaseComponent {
   constructor(properties) {
     super(properties);
+
     const { visible } = properties;
 
     this.state = {
@@ -107,6 +109,7 @@ class ActionSheet extends BaseComponent {
       headerStyle,
       bodyStyle,
       footerStyle,
+      onOptionClick,
     } = this.props;
     const { visibleStage } = this.state;
 
@@ -150,7 +153,6 @@ class ActionSheet extends BaseComponent {
                 style: styleItem,
                 value,
                 content,
-                onClick: onItemClick,
               } = o;
 
               const key = `item_${index}`;
@@ -162,9 +164,13 @@ class ActionSheet extends BaseComponent {
                   style={styleItem}
                   value={value || ''}
                   onClick={(v, event) => {
-                    onItemClick(v, event);
-
                     this.close();
+
+                    if (!isFunction(onOptionClick)) {
+                      return;
+                    }
+
+                    onOptionClick(v, o, event);
                   }}
                 >
                   {content}

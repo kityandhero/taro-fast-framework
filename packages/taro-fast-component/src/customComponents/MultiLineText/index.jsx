@@ -21,6 +21,7 @@ class MultiLineText extends BaseComponent {
     const { style, lineHeight, fontSize } = this.props;
 
     return {
+      whiteSpace: 'normal',
       ...style,
       lineHeight: transformSize(lineHeight),
       fontSize: transformSize(fontSize),

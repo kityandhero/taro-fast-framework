@@ -38,3 +38,13 @@ export async function getData(parameters) {
     params: parameters,
   });
 }
+
+export const submitApprovalDataApiAddress =
+  '/wechatApplication/workflowCase/submitApproval';
+
+export async function submitApprovalData(parameters) {
+  return request({
+    api: submitApprovalDataApiAddress,
+    params: parameters,
+  });
+}

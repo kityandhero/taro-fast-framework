@@ -5,6 +5,7 @@ export * from './Avatar';
 export * from './BackboardBox';
 export * from './BackTop';
 export * from './Badge';
+export * from './BaseComponent';
 export * from './Button';
 export * from './Card';
 export * from './Cascader';
