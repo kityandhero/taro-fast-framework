@@ -1,9 +1,9 @@
-import { ModalWrapperBase, switchControlAssist } from 'taro-fast-framework';
+import { PopupWrapperBase, switchControlAssist } from 'taro-fast-framework';
 
 // 显隐控制标记, 必须设置, 标记需要全局唯一
-const visibleFlag = '3235affd41f84a118e552f32ef746350';
+const visibleFlag = '2c995e09ac2c4fe2966e728c935676eb';
 
-class SubmitModal extends ModalWrapperBase {
+class ApprovePopup extends PopupWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }
@@ -19,12 +19,6 @@ class SubmitModal extends ModalWrapperBase {
       ...this.state,
     };
   }
-
-  buildTitle = () => '提交审批';
-
-  buildContent = () => {
-    return '即将提交审批，确定吗？';
-  };
 }
 
-export { SubmitModal };
+export { ApprovePopup };

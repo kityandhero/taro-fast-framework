@@ -40,6 +40,7 @@ import {
   viewStyle,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
+import { ApprovePopup } from '../approvePopup';
 import { submitApprovalAction } from '../assist/action';
 import { buildListApprove } from '../assist/tools';
 import { fieldData } from '../common/data';
@@ -277,10 +278,6 @@ class Approve extends PageWrapper {
     });
   };
 
-  confirmSubmit = () => {
-    SubmitModal.open();
-  };
-
   submitApproval = () => {
     const { metaData } = this.state;
 
@@ -310,6 +307,14 @@ class Approve extends PageWrapper {
     return (
       canApprove === whetherNumber.yes || approveComplete === whetherNumber.yes
     );
+  };
+
+  confirmSubmit = () => {
+    SubmitModal.open();
+  };
+
+  showApprovePopup = () => {
+    ApprovePopup.open();
   };
 
   buildTitleBox = () => {
@@ -635,29 +640,6 @@ class Approve extends PageWrapper {
     );
   };
 
-  buildHistoryBox = () => {
-    if (!this.judgeDisplayHistory()) {
-      return null;
-    }
-
-    return (
-      <Card
-        header="审批记录"
-        headerStyle={headerStyle}
-        bodyStyle={{ ...bodyStyle }}
-        space={false}
-        border={false}
-        bodyBorder={false}
-        headerEllipsis={false}
-        stripCenter={false}
-        stripTop={stripTopValue}
-        stripHeight={stripHeightValue}
-        strip
-        stripColor="#0075fe"
-      ></Card>
-    );
-  };
-
   buildActionBox = () => {
     const { canEdit, canApprove } = this.state;
 
@@ -700,7 +682,7 @@ class Approve extends PageWrapper {
           backgroundColor: '#fff',
         }}
       >
-        <FixedBox style={{ width: '100%' }} zIndex={1000} bottom={0}>
+        <FixedBox style={{ width: '100%' }} zIndex={100} bottom={0}>
           <Line color="#eee" height={2} />
 
           <View
@@ -766,6 +748,7 @@ class Approve extends PageWrapper {
                           paddingLeft={32}
                           paddingRight={32}
                           size="middle"
+                          onClick={this.showApprovePopup}
                         />
                       ) : (
                         <Button
@@ -794,7 +777,15 @@ class Approve extends PageWrapper {
   };
 
   renderInteractiveArea = () => {
-    return <SubmitModal afterOk={this.submitApproval} />;
+    return (
+      <>
+        <SubmitModal afterOk={this.submitApproval} />
+
+        <ApprovePopup mode="through" position="center" header="弹出面板">
+          11
+        </ApprovePopup>
+      </>
+    );
   };
 
   renderFurther() {
@@ -829,8 +820,6 @@ class Approve extends PageWrapper {
                 {this.buildProcessBox()}
 
                 {this.buildAttachmentBox()}
-
-                {this.buildHistoryBox()}
               </Space>
             </View>
 

@@ -4,11 +4,12 @@ import { emptyLogic } from 'taro-fast-common';
 
 import { ActionSheetExtra } from '../../components';
 import { switchControlAssist } from '../../utils';
-import { InteractiveBase } from '../InteractiveBase';
+import { InteractiveCancelableBase } from '../InteractiveCancelableBase';
 
-const primaryCallName = 'framework::ActionSheetBase';
+const primaryCallName =
+  'framework::interactiveWrappers::ActionSheetWrapperBase';
 
-class ActionSheetBase extends InteractiveBase {
+class ActionSheetWrapperBase extends InteractiveCancelableBase {
   /**
    * 构造函数
    * @param {Object} properties 属性值集合。
@@ -67,4 +68,4 @@ class ActionSheetBase extends InteractiveBase {
   }
 }
 
-export { ActionSheetBase };
+export { ActionSheetWrapperBase };

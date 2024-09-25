@@ -1,9 +1,12 @@
-import { ActionSheetBase, switchControlAssist } from 'taro-fast-framework';
+import {
+  ActionSheetWrapperBase,
+  switchControlAssist,
+} from 'taro-fast-framework';
 
 // 显隐控制标记, 必须设置, 标记需要全局唯一
 const visibleFlag = '8a9dcfa4493f44249c4eb2c1a524014e';
 
-class ActionSheetExtraSimple extends ActionSheetBase {
+class ActionSheetExtraSimple extends ActionSheetWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }

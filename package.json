@@ -24,6 +24,7 @@
     "build:core-framework-compression-skip": "cd packages/taro-fast-framework && npm run build:rollup:skipCompression",
     "build:simple:h5": "cd examples/simple-taro-fast-framework && npm run build:h5",
     "build:simple:weapp": "cd examples/simple-taro-fast-framework && npm run build:weapp",
+    "build:template:weapp": "cd examples/simple-template && npm run o:build",
     "commitlint": "npx commitlint --edit",
     "config:env": "node ./develop/assists/env.init.js",
     "precz": "npm run z:test && npm run z:commit:refresh && git stage -A",

@@ -1,9 +1,9 @@
-import { ModalBase, switchControlAssist } from 'taro-fast-framework';
+import { ModalWrapperBase, switchControlAssist } from 'taro-fast-framework';
 
 // 显隐控制标记, 必须设置, 标记需要全局唯一
 const visibleFlag = '5bae0c0e743f4ed48ab305d3d1b0466d';
 
-class ModelExtraSimple extends ModalBase {
+class ModelExtraSimple extends ModalWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }

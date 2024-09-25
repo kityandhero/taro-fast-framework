@@ -17,7 +17,7 @@ const defaultProps = {
   style: {},
   width: '70vw',
   visible: false,
-  color: '#000',
+  color: '#000000',
   alpha: 0.3,
   zIndex: 810,
   header: null,

@@ -3,12 +3,12 @@ import { PureComponent } from 'react';
 import { connect } from 'easy-soft-dva';
 import { logTrace } from 'easy-soft-utility';
 
-import { ActionSheet } from 'taro-fast-component';
+import { Popup } from 'taro-fast-component';
 
 @connect(({ switchControl }) => ({
   switchControl,
 }))
-class ActionSheetExtra extends PureComponent {
+class PopupExtra extends PureComponent {
   getProperties = () => {
     return { flag: '', ...this.props };
   };
@@ -22,11 +22,11 @@ class ActionSheetExtra extends PureComponent {
       {
         flag,
       },
-      v ? 'ActionSheet show' : 'ActionSheet hide',
+      v ? 'Popup show' : 'Popup hide',
     );
 
-    return <ActionSheet {...rest} visible={v || false} />;
+    return <Popup {...rest} visible={v || false} />;
   }
 }
 
-export { ActionSheetExtra };
+export { PopupExtra };

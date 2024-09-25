@@ -394,6 +394,7 @@ export function buildWaitApproveItem({ key, data, onClick }) {
       <Button
         weappButton
         text="去处理"
+        fontColor="#fff"
         backgroundColor="#0075ff"
         fontSize={32}
         block

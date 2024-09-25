@@ -4,11 +4,11 @@ import { emptyLogic } from 'taro-fast-common';
 
 import { ModalExtra } from '../../components';
 import { switchControlAssist } from '../../utils';
-import { InteractiveBase } from '../InteractiveBase';
+import { InteractiveCancelableBase } from '../InteractiveCancelableBase';
 
-const primaryCallName = 'framework::ModalBase';
+const primaryCallName = 'framework::interactiveWrappers::ModalWrapperBase';
 
-class ModalBase extends InteractiveBase {
+class ModalWrapperBase extends InteractiveCancelableBase {
   /**
    * 构造函数
    * @param {Object} properties 属性值集合。
@@ -20,6 +20,33 @@ class ModalBase extends InteractiveBase {
       ...this.state,
     };
   }
+
+  handleCancel = () => {
+    this.logCallTrack({}, primaryCallName, 'handleCancel');
+
+    switchControlAssist.close(this.getVisibleFlag());
+
+    const { afterCancel } = this.props;
+
+    if (isFunction(afterCancel)) {
+      this.logFunctionCallTrace(
+        {},
+        primaryCallName,
+        'handleCancel',
+        'afterCancel',
+      );
+
+      afterCancel();
+    } else {
+      this.logEmptyCallTrace(
+        {},
+        primaryCallName,
+        'handleCancel',
+        'afterCancel',
+        emptyLogic,
+      );
+    }
+  };
 
   handleOk = () => {
     this.logCallTrack({}, primaryCallName, 'handleOk');
@@ -58,7 +85,7 @@ class ModalBase extends InteractiveBase {
         title={this.buildTitle()}
         flag={this.getVisibleFlag()}
         onConfirm={this.handleOk}
-        onCancel={this.handleCancel}
+        onClose={this.handleCancel}
       >
         {this.buildContent()}
       </ModalExtra>
@@ -66,4 +93,4 @@ class ModalBase extends InteractiveBase {
   }
 }
 
-export { ModalBase };
+export { ModalWrapperBase };

@@ -2,7 +2,7 @@ import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { connect } from 'easy-soft-dva';
-import { logConfig } from 'easy-soft-utility';
+import { logConfig, logConsole } from 'easy-soft-utility';
 
 import { ActionSheet, Button, Card, Space } from 'taro-fast-component';
 
@@ -224,7 +224,10 @@ export default class Index extends ContentPageBase {
           ]}
           // eslint-disable-next-line no-unused-vars
           afterOption={(v, o, event) => {
-            console.log(v);
+            logConsole(v, 'ActionSheetExtraSimple');
+          }}
+          afterCancel={() => {
+            logConsole('点击了取消', 'ActionSheetExtraSimple');
           }}
         />
       </View>

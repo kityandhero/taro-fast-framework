@@ -137,6 +137,7 @@ class FlowCase extends PageWrapper {
     });
 
     this.reloadData({
+      otherState: { metaListData: [] },
       delay: 500,
     });
   };
@@ -234,13 +235,13 @@ class FlowCase extends PageWrapper {
   };
 
   renderFurther() {
-    const { metaListData } = this.state;
+    const { reloading, metaListData } = this.state;
 
     return (
       <View>
         {this.judgeInitialActivityIndicatorVisible() ? (
           <>{/* {this.buildInitialActivityIndicator({})} */}</>
-        ) : metaListData.length === 0 ? (
+        ) : metaListData.length === 0 && !reloading ? (
           <View
             style={{
               paddingTop: transformSize(100),

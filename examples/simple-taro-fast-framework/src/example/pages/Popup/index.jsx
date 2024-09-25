@@ -1,9 +1,6 @@
-import { View } from '@tarojs/components';
-
 import { connect } from 'easy-soft-dva';
 
-import { transformSize } from 'taro-fast-common';
-import { CenterBox, Popup, Space, TranslucentBox } from 'taro-fast-component';
+import { Popup, Space } from 'taro-fast-component';
 import { Selector } from 'taro-fast-component-extra';
 
 import {
@@ -12,13 +9,10 @@ import {
   SimpleBox,
 } from '../../../customComponents';
 
-import './index.less';
+import { PopupExtraSimple } from './PopupExtraSimple';
+import { InnerTranslucentBox } from './tools';
 
-const boxStyle = {
-  height: transformSize(220),
-  backgroundImage: 'var(--tfc-color-gradual-red)',
-  borderRadius: transformSize(10),
-};
+import './index.less';
 
 const arcTopList = [
   {
@@ -106,7 +100,6 @@ export default class Index extends ContentPageBase {
 
     this.state = {
       ...this.state,
-
       arcTop: ['上直角'],
       arcBottom: ['下直角'],
       mode: ['through'],
@@ -219,6 +212,17 @@ export default class Index extends ContentPageBase {
           onClose: this.hideBasic,
         },
         callback: this.showBasic,
+      },
+      {
+        header: 'PopupExtraSimple',
+        config: {
+          onClick: () => {
+            PopupExtraSimple.open();
+          },
+        },
+        callback: () => {
+          PopupExtraSimple.open();
+        },
       },
     ];
   };
@@ -360,33 +364,7 @@ export default class Index extends ContentPageBase {
       scroll: scrollData,
     } = this.state;
 
-    const innerTranslucentBox = (
-      <View
-        style={boxStyle}
-        onClick={() => {
-          console.log('click');
-        }}
-      >
-        <CenterBox>
-          <TranslucentBox
-            style={{
-              width: transformSize(200),
-            }}
-            backgroundColor="#000"
-            alpha={0.1}
-          >
-            <CenterBox
-              style={{
-                padding: `${transformSize(10)} ${transformSize(20)}`,
-                color: '#fff',
-              }}
-            >
-              内容
-            </CenterBox>
-          </TranslucentBox>
-        </CenterBox>
-      </View>
-    );
+    const innerTranslucentBox = <InnerTranslucentBox />;
 
     return (
       <>
@@ -527,6 +505,19 @@ export default class Index extends ContentPageBase {
         >
           {innerTranslucentBox}
         </Popup>
+
+        <PopupExtraSimple
+          header="'这里是PopupExtraSimple标题'"
+          position="bottom"
+          mode={mode[0]}
+          showClose={showClose[0] === 'yes'}
+          scroll={scrollData[0] === 'yes'}
+          closeWhenOverlayClick={closeWhenOverlayClick[0] === 'yes'}
+          arcTop={arcTop[0] === '上圆角'}
+          arcBottom={arcBottom[0] === '下圆角'}
+        >
+          {innerTranslucentBox}
+        </PopupExtraSimple>
       </>
     );
   };

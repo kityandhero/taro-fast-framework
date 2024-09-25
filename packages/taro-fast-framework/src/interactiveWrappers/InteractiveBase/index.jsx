@@ -1,15 +1,11 @@
 import {
   checkStringIsNullOrWhiteSpace,
-  isFunction,
   mergeArrowText,
 } from 'easy-soft-utility';
 
-import { emptyLogic } from 'taro-fast-common';
 import { BaseComponent } from 'taro-fast-component';
 
-import { switchControlAssist } from '../../utils';
-
-const primaryCallName = 'framework::InteractiveBase';
+const primaryCallName = 'framework::interactiveWrappers::InteractiveBase';
 
 class InteractiveBase extends BaseComponent {
   /**
@@ -62,33 +58,6 @@ class InteractiveBase extends BaseComponent {
 
     return flag || this.visibleFlag;
   }
-
-  handleCancel = () => {
-    this.logCallTrack({}, primaryCallName, 'handleCancel');
-
-    switchControlAssist.close(this.getVisibleFlag());
-
-    const { afterCancel } = this.props;
-
-    if (isFunction(afterCancel)) {
-      this.logFunctionCallTrace(
-        {},
-        primaryCallName,
-        'handleCancel',
-        'afterCancel',
-      );
-
-      afterCancel();
-    } else {
-      this.logEmptyCallTrace(
-        {},
-        primaryCallName,
-        'handleCancel',
-        'afterCancel',
-        emptyLogic,
-      );
-    }
-  };
 }
 
 export { InteractiveBase };

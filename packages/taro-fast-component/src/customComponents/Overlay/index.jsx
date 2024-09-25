@@ -23,7 +23,7 @@ const animalCollection = [
 
 const defaultProps = {
   visible: false,
-  color: '#000',
+  color: '#000000',
   transparent: false,
   alpha: 0.5,
   image: '',
