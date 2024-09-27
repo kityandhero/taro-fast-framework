@@ -1,7 +1,8 @@
 import { PopupExtra } from '../../components';
+import { buildPrimaryCallName } from '../definition';
 import { InteractiveCloseableBase } from '../InteractiveCloseableBase';
 
-const primaryCallName = 'framework::interactiveWrappers::PopupWrapperBase';
+const primaryCallName = buildPrimaryCallName('PopupWrapperBase');
 
 class PopupWrapperBase extends InteractiveCloseableBase {
   /**

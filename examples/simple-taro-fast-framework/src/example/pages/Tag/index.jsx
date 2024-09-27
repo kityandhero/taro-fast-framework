@@ -1,4 +1,5 @@
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Space, Tag } from 'taro-fast-component';
@@ -42,7 +43,7 @@ const config5 = {
 const config6 = {
   color: 'default',
   onClick: () => {
-    console.log({
+    logConsole({
       message: 'tag click',
     });
   },
@@ -52,12 +53,12 @@ const config7 = {
   color: 'default',
   closeable: true,
   onClick: () => {
-    console.log({
+    logConsole({
       message: 'tag click',
     });
   },
   onClose: () => {
-    console.log({
+    logConsole({
       message: 'tag close',
     });
   },
@@ -68,12 +69,12 @@ const config8 = {
   closeable: true,
   closeColor: '#28e745',
   onClick: () => {
-    console.log({
+    logConsole({
       message: 'tag click',
     });
   },
   onClose: () => {
-    console.log({
+    logConsole({
       message: 'tag close',
     });
   },

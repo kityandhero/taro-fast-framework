@@ -55,8 +55,6 @@ export default class Index extends ContentPageBase {
   };
 
   closeCapsulePrompt = () => {
-    console.log(11);
-
     this.setState({
       capsulePromptVisible: false,
     });

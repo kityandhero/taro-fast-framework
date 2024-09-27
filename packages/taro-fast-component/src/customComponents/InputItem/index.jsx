@@ -22,6 +22,7 @@ import { Row } from '../Flex/Row';
 import { FlexBox } from '../FlexBox';
 import { IconCloseCircle } from '../Icon';
 import { Item } from '../Item';
+import { Line } from '../Line';
 import { VerticalBox } from '../VerticalBox';
 
 const layoutCollection = ['horizontal', 'vertical'];
@@ -70,6 +71,7 @@ const defaultProps = {
   selectionEnd: -1,
   adjustPosition: true,
   areaMode: false,
+  areaHeight: 100,
   areaAutoHeight: false,
   holdKeyboard: false,
   afterChange: null,
@@ -237,6 +239,7 @@ class InputItem extends BaseComponent {
       adjustPosition,
       holdKeyboard,
       areaMode,
+      areaHeight,
       areaAutoHeight,
       clearable,
     } = this.props;
@@ -254,7 +257,7 @@ class InputItem extends BaseComponent {
       ? confirmTypeSource
       : 'done';
 
-    const showBody = !!description;
+    const showDescription = !!description;
 
     const labelComponent =
       isObject(label) ||
@@ -331,10 +334,10 @@ class InputItem extends BaseComponent {
                     margin:
                       layout === 'horizontal'
                         ? `${transformSize(0)} 0 ${transformSize(
-                            showBody ? 11 : 0,
+                            showDescription ? 11 : 0,
                           )} 0`
                         : `${transformSize(11)} 0 ${transformSize(
-                            showBody ? 11 : 22,
+                            showDescription ? 11 : 22,
                           )} 0`,
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
@@ -349,48 +352,58 @@ class InputItem extends BaseComponent {
                   )}
                 </View>
               ) : areaMode ? (
-                <Textarea
-                  value={this.currentValue}
+                <View
                   style={{
-                    fontSize: transformSize(28),
-                    borderColor: borderColor,
                     margin:
                       layout === 'horizontal'
                         ? `${transformSize(0)} 0 ${transformSize(
-                            showBody ? 11 : 0,
+                            showDescription ? 11 : 0,
                           )} 0`
-                        : `${transformSize(11)} 0 ${transformSize(
-                            showBody ? 11 : 22,
+                        : `${transformSize(0)} 0 ${transformSize(
+                            showDescription ? 11 : 0,
                           )} 0`,
-                    ...valueStyle,
-                    ...(align == 'right' ? { textAlign: 'right' } : {}),
-                    ...(align == 'center' ? { textAlign: 'center' } : {}),
-                    // ...{ width: '100%' },
                   }}
-                  placeholder={placeholder}
-                  placeholderStyle={
-                    isString(placeholderStyle)
-                      ? placeholderStyle
-                      : isObject(placeholderStyle)
-                        ? buildStringStyle(placeholderStyle)
-                        : ''
-                  }
-                  autoHeight={areaAutoHeight}
-                  placeholderClass={placeholderClass}
-                  disabled={disabled}
-                  maxlength={maxlength}
-                  cursorSpacing={cursorSpacing}
-                  cursor={cursor}
-                  selectionStart={selectionStart}
-                  selectionEnd={selectionEnd}
-                  adjustPosition={adjustPosition}
-                  holdKeyboard={holdKeyboard}
-                  onInput={throttle(this.onInput, 400)}
-                  onFocus={this.triggerFocus}
-                  onBlur={this.triggerBlur}
-                  onConfirm={this.triggerConfirm}
-                  onKeyboardHeightChange={this.triggerKeyboardHeightChange}
-                />
+                >
+                  <Textarea
+                    ref={this.inputRef}
+                    defaultValue={this.currentValue}
+                    style={{
+                      fontSize: transformSize(28),
+                      borderColor: borderColor,
+                      ...valueStyle,
+                      width: '100%',
+                      ...(align == 'right' ? { textAlign: 'right' } : {}),
+                      ...(align == 'center' ? { textAlign: 'center' } : {}),
+                      ...(areaAutoHeight
+                        ? {}
+                        : { height: transformSize(areaHeight) }),
+                      // ...{ width: '100%' },
+                    }}
+                    placeholder={placeholder}
+                    placeholderStyle={
+                      isString(placeholderStyle)
+                        ? placeholderStyle
+                        : isObject(placeholderStyle)
+                          ? buildStringStyle(placeholderStyle)
+                          : ''
+                    }
+                    autoHeight={areaAutoHeight}
+                    placeholderClass={placeholderClass}
+                    disabled={disabled}
+                    maxlength={maxlength}
+                    cursorSpacing={cursorSpacing}
+                    cursor={cursor}
+                    selectionStart={selectionStart}
+                    selectionEnd={selectionEnd}
+                    adjustPosition={adjustPosition}
+                    holdKeyboard={holdKeyboard}
+                    onInput={throttle(this.onInput, 400)}
+                    onFocus={this.triggerFocus}
+                    onBlur={this.triggerBlur}
+                    onConfirm={this.triggerConfirm}
+                    onKeyboardHeightChange={this.triggerKeyboardHeightChange}
+                  />
+                </View>
               ) : (
                 <Input
                   ref={this.inputRef}
@@ -403,10 +416,10 @@ class InputItem extends BaseComponent {
                     margin:
                       layout === 'horizontal'
                         ? `${transformSize(0)} 0 ${transformSize(
-                            showBody ? 11 : 0,
+                            showDescription ? 11 : 0,
                           )} 0`
                         : `${transformSize(11)} 0 ${transformSize(
-                            showBody ? 11 : 22,
+                            showDescription ? 11 : 22,
                           )} 0`,
                     ...valueStyle,
                     ...(align == 'right' ? { textAlign: 'right' } : {}),
@@ -487,24 +500,23 @@ class InputItem extends BaseComponent {
               : {}),
             padding: '0',
             flex: 'none',
-            paddingBottom: transformSize(showBody ? 12 : 0),
+            paddingBottom: transformSize(showDescription ? 12 : 0),
           }}
           border={border}
           extra={inputPart}
           extraContainerStyle={{
-            padding: `0 ${transformSize(showBody ? 12 : 24)} 0 0`,
+            padding: `0 ${transformSize(showDescription ? 12 : 24)} 0 0`,
             ...inputStyle,
-
             flex: 'auto',
             paddingRight: '0',
           }}
-          showBody={showBody}
+          showBody={showDescription}
           body={description}
           borderColor={borderColor}
           borderTopDistance={borderTopDistance}
           bodyContentStyle={{
             ...descriptionStyle,
-            ...(showBody
+            ...(showDescription
               ? {
                   paddingTop: transformSize(11),
                 }
@@ -534,6 +546,17 @@ class InputItem extends BaseComponent {
 
         <Row>
           <Col size={12}>
+            {/* <View
+              style={{
+                padding: `0 ${transformSize(
+                  showBody ? 12 : 24,
+                )} 0 ${transformSize(24)}`,
+                ...inputStyle,
+              }}
+            >
+              {inputPart}
+            </View> */}
+
             <Item
               label={null}
               contentStyle={{
@@ -542,31 +565,54 @@ class InputItem extends BaseComponent {
                 flex: 'none',
                 padding: `${transformSize(
                   labelComponent == null ? 24 : 12,
-                )} 0 ${transformSize(showBody ? 12 : 24)} 0`,
+                )} 0 ${transformSize(showDescription ? 12 : 24)} 0`,
               }}
-              border={border}
-              borderColor={borderColor}
-              borderTopDistance={borderTopDistance}
-              extra={inputPart}
-              extraContainerStyle={{
-                padding: `0 ${transformSize(
-                  showBody ? 12 : 24,
-                )} 0 ${transformSize(24)}`,
-                ...inputStyle,
-
-                flex: 'auto',
-                paddingRight: '0',
-              }}
-              showBody={showBody}
-              body={description}
+              border={false}
+              borderTopDistance={0}
+              // extra={inputPart}
+              // extraContainerStyle={{
+              //   padding: `0 ${transformSize(
+              //     showBody ? 12 : 24,
+              //   )} 0 ${transformSize(24)}`,
+              //   ...inputStyle,
+              //   flex: 'auto',
+              //   paddingLeft: '0',
+              //   paddingRight: '0',
+              // }}
+              showBody
               bodyContentStyle={{
-                ...descriptionStyle,
-                ...(showBody
-                  ? {
-                      paddingTop: transformSize(11),
-                    }
-                  : {}),
+                borderTop: 0,
+                paddingTop: transformSize(4),
+                paddingBottom: 0,
               }}
+              body={
+                <View>
+                  {inputPart}
+
+                  {border ? (
+                    <>
+                      <Line transparent height={borderTopDistance} />
+
+                      <Line color={borderColor} height={2} />
+                    </>
+                  ) : null}
+
+                  {showDescription ? (
+                    <View
+                      style={{
+                        ...descriptionStyle,
+                        ...(showDescription
+                          ? {
+                              paddingTop: transformSize(11),
+                            }
+                          : {}),
+                      }}
+                    >
+                      {description}
+                    </View>
+                  ) : null}
+                </View>
+              }
             />
           </Col>
         </Row>

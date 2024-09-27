@@ -5,7 +5,9 @@ import {
 
 import { BaseComponent } from 'taro-fast-component';
 
-const primaryCallName = 'framework::interactiveWrappers::InteractiveBase';
+import { buildPrimaryCallName } from '../definition';
+
+const primaryCallName = buildPrimaryCallName('InteractiveBase');
 
 class InteractiveBase extends BaseComponent {
   /**

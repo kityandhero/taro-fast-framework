@@ -4,10 +4,10 @@ import { emptyLogic } from 'taro-fast-common';
 
 import { ActionSheetExtra } from '../../components';
 import { switchControlAssist } from '../../utils';
+import { buildPrimaryCallName } from '../definition';
 import { InteractiveCancelableBase } from '../InteractiveCancelableBase';
 
-const primaryCallName =
-  'framework::interactiveWrappers::ActionSheetWrapperBase';
+const primaryCallName = buildPrimaryCallName('ActionSheetWrapperBase');
 
 class ActionSheetWrapperBase extends InteractiveCancelableBase {
   /**

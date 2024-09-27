@@ -5,7 +5,6 @@ import {
   isEmptyArray,
   isEmptyObject,
   isObject,
-  logConsole,
 } from 'easy-soft-utility';
 
 import {
@@ -54,8 +53,6 @@ function transferChainApproveList(
 
     processNoteId = workflowNodeId;
   }
-
-  logConsole({ processNoteId });
 
   const listApproveAdjust = isArray(listApprove) ? listApprove : [];
 

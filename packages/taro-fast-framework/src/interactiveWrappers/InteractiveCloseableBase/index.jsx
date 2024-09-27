@@ -3,10 +3,10 @@ import { isFunction } from 'easy-soft-utility';
 import { emptyLogic } from 'taro-fast-common';
 
 import { switchControlAssist } from '../../utils';
+import { buildPrimaryCallName } from '../definition';
 import { InteractiveBase } from '../InteractiveBase';
 
-const primaryCallName =
-  'framework::interactiveWrappers::InteractiveCloseableBase';
+const primaryCallName = buildPrimaryCallName('InteractiveCloseableBase');
 
 class InteractiveCloseableBase extends InteractiveBase {
   /**

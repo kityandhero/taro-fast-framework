@@ -4,9 +4,10 @@ import { emptyLogic } from 'taro-fast-common';
 
 import { ModalExtra } from '../../components';
 import { switchControlAssist } from '../../utils';
+import { buildPrimaryCallName } from '../definition';
 import { InteractiveCancelableBase } from '../InteractiveCancelableBase';
 
-const primaryCallName = 'framework::interactiveWrappers::ModalWrapperBase';
+const primaryCallName = buildPrimaryCallName('ModalWrapperBase');
 
 class ModalWrapperBase extends InteractiveCancelableBase {
   /**

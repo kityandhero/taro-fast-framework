@@ -1,4 +1,5 @@
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { IconSketch, SearchBar, Space } from 'taro-fast-component';
@@ -74,7 +75,7 @@ const config5 = {
     color: '#4532e5',
   },
   onNavigate: () => {
-    console.log({
+    logConsole({
       message: `navigate`,
     });
   },

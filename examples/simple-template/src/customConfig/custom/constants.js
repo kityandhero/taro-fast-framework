@@ -54,3 +54,21 @@ export const cardStyle = {
 };
 
 export const QQMapKey = '';
+
+export const simpleApply = {
+  nodeId: 'd442580d7942405a90090e852c263235',
+  title: '',
+  note: '',
+  name: '',
+  signet: '',
+  time: '',
+};
+
+export const simpleAttention = {
+  nodeId: '7e12b5a52297430ab3c779dc0d449c71',
+  title: '',
+  note: '',
+  name: '',
+  signet: '',
+  time: '',
+};

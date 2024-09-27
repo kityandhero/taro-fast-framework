@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { ImageBox, Space, TextAreaItem } from 'taro-fast-component';
@@ -12,7 +13,7 @@ import {
 } from '../../../customComponents';
 
 function onChangeCore(v) {
-  console.log(v);
+  logConsole(v);
 }
 
 const text =

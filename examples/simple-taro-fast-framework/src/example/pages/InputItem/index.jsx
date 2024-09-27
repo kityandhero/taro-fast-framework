@@ -196,6 +196,7 @@ const config191 = {
   label: '描述',
   description: '填写用户的名称, 例如 李明',
   areaMode: true,
+  border: true,
   icon: <IconCheckCircle size={38} showInfo color="green" />,
   placeholder: '请输入用户名',
   placeholderStyle: { color: '#45e325' },

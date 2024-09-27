@@ -1,8 +1,6 @@
 {
   "miniprogramRoot": "dist/weapp/",
-  "projectname": "taro-fast-application",
   "description": "项目配置文件, 详见文档: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "appid": "wx1e4429235f514c47",
   "ignoreDevUnusedFiles": false,
   "ignoreUploadUnusedFiles": false,
   "setting": {
@@ -25,8 +23,6 @@
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -46,7 +42,6 @@
     "condition": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.17.0",
   "condition": {
     "miniprogram": {
       "list": [
@@ -102,12 +97,13 @@
     }
   },
   "srcMiniprogramRoot": "dist/weapp/",
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
   "packOptions": {
     "ignore": [],
     "include": []
   },
-  "editorSetting": {
-    "tabIndent": "insertSpaces",
-    "tabSize": 2
-  }
+  "appid": "wx1e4429235f514c47"
 }

@@ -165,8 +165,6 @@ class Index extends PageWrapperSimulation {
     //   r += `--tfc-${i}: ${i}px;`;
     // }
 
-    // console.log(r);
-
     return (
       <View className="page page-index">
         <CenterBox>

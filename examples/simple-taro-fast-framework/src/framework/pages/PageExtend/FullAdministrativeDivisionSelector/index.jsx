@@ -64,8 +64,6 @@ export default class Index extends ContentPageBase {
   }
 
   doAfterFullAdministrativeDivisionSelectorChanged = ({ optionList }) => {
-    console.log(optionList);
-
     if (optionList.length > 0) {
       this.provinceName = optionList[0].label;
       this.provinceCode = optionList[0].value;

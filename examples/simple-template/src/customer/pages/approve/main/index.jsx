@@ -6,7 +6,9 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
-  logConsole,
+  isArray,
+  isEmptyArray,
+  logException,
   showSuccessNotification,
   whetherNumber,
   zeroInt,
@@ -24,6 +26,7 @@ import {
   IconCalendar,
   IconTags,
   ImageBox,
+  InputItem,
   Line,
   MultiLineText,
   Space,
@@ -31,11 +34,16 @@ import {
   Tag,
   VerticalBox,
 } from 'taro-fast-component';
+import { DocumentPrintDesigner } from 'taro-fast-design-playground';
 
 import { PageWrapper } from '../../../../customComponents';
 import {
+  emptySignet,
+  fieldDataFlowFormDesign,
   fileTextBlueImage,
   flowCaseStatusCollection,
+  simpleApply,
+  simpleAttention,
   userGreyImage,
   viewStyle,
 } from '../../../../customConfig';
@@ -142,6 +150,8 @@ class Approve extends PageWrapper {
     this.state = {
       ...this.state,
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
+      workflowFormDesign: {},
+      listFormStorage: [],
       formItemList: [],
       listApprove: [],
       listAttachment: [],
@@ -201,6 +211,11 @@ class Approve extends PageWrapper {
       convert: convertCollection.number,
     });
 
+    const { workflowFormDesign } = {
+      workflowFormDesign: {},
+      ...metaData,
+    };
+
     const approveComplete = checkInCollection(
       [
         flowCaseStatusCollection.forcedEnd,
@@ -217,9 +232,9 @@ class Approve extends PageWrapper {
       key: fieldData.listFormStorage.name,
       convert: convertCollection.array,
     }).map((o) => {
-      const { nameNote: title, value } = o;
+      const { nameNote: title, name, value } = o;
 
-      return { title, value };
+      return { title, name, value };
     });
 
     const nextApproveWorkflowNode = getValueByKey({
@@ -265,17 +280,183 @@ class Approve extends PageWrapper {
       nextApproveWorkflowNode,
     });
 
-    logConsole({ listApprove });
-
     this.setState({
       canEdit,
       canApprove,
+      workflowFormDesign: workflowFormDesign || {},
+      listFormStorage: [...listFormStorage],
       formItemList: [...formItemList],
       listApprove: [...listApprove],
       listAttachment: [...listAttachment],
       existAttachment,
       approveComplete,
     });
+  };
+
+  analysisDocumentConfig = () => {
+    const { metaData, workflowFormDesign } = this.state;
+
+    const applicantSignSwitch = getValueByKey({
+      data: metaData,
+      key: fieldData.applicantSignSwitch.name,
+      convert: convertCollection.number,
+    });
+
+    const applicantStatementTitle = getValueByKey({
+      data: metaData,
+      key: fieldData.applicantStatementTitle.name,
+      convert: convertCollection.string,
+    });
+
+    const applicantStatementContent = getValueByKey({
+      data: metaData,
+      key: fieldData.applicantStatementContent.name,
+      convert: convertCollection.string,
+    });
+
+    const applicantUserSignet = getValueByKey({
+      data: metaData,
+      key: fieldData.applicantUserSignet.name,
+      convert: convertCollection.string,
+    });
+
+    const attentionSignSwitch = getValueByKey({
+      data: metaData,
+      key: fieldData.attentionSignSwitch.name,
+      convert: convertCollection.number,
+    });
+
+    const attentionStatementTitle = getValueByKey({
+      data: metaData,
+      key: fieldData.attentionStatementTitle.name,
+      convert: convertCollection.string,
+    });
+
+    const attentionStatementContent = getValueByKey({
+      data: metaData,
+      key: fieldData.attentionStatementContent.name,
+      convert: convertCollection.string,
+    });
+
+    const attentionUserSignet = getValueByKey({
+      data: metaData,
+      key: fieldData.attentionUserSignet.name,
+      convert: convertCollection.string,
+    });
+
+    const remarkSchemaList = getValueByKey({
+      data: workflowFormDesign,
+      key: fieldDataFlowFormDesign.remarkSchemaList.name,
+      convert: convertCollection.array,
+    });
+
+    const documentSchema = getValueByKey({
+      data: workflowFormDesign,
+      key: fieldDataFlowFormDesign.documentSchema.name,
+      defaultValue: {},
+    });
+
+    const { general, items: itemsSource } = {
+      general: {},
+      items: [],
+      ...documentSchema,
+    };
+
+    const dataSchema = getValueByKey({
+      data: workflowFormDesign,
+      key: fieldDataFlowFormDesign.dataSchema.name,
+      defaultValue: '[]',
+    });
+
+    let listDataSchema = [];
+
+    try {
+      listDataSchema = JSON.parse(dataSchema);
+    } catch (error) {
+      logException(error);
+    }
+
+    let items = [];
+
+    if (
+      isArray(itemsSource) &&
+      !isEmptyArray(itemsSource) &&
+      isArray(listDataSchema)
+    ) {
+      for (const o of listDataSchema) {
+        const { name } = { name: '', ...o };
+
+        if (checkStringIsNullOrWhiteSpace(name)) {
+          continue;
+        }
+
+        let config = {};
+
+        for (const one of itemsSource) {
+          const { name: nameOne } = { name: '', ...one };
+
+          if (nameOne === name) {
+            config = one;
+
+            break;
+          }
+        }
+
+        items.push({ ...config, ...o });
+      }
+    } else {
+      items = listDataSchema;
+    }
+
+    const listApply = [
+      {
+        ...simpleApply,
+        title: applicantStatementTitle,
+        note: applicantStatementContent,
+        ...(checkStringIsNullOrWhiteSpace(applicantUserSignet)
+          ? {
+              signet: emptySignet,
+            }
+          : {
+              signet: applicantUserSignet,
+            }),
+        time: getValueByKey({
+          data: metaData,
+          key: fieldData.applicantTime.name,
+          convert: convertCollection.string,
+        }),
+      },
+    ];
+
+    const listAttention = [
+      {
+        ...simpleAttention,
+        title: attentionStatementTitle,
+        note: attentionStatementContent,
+        ...(checkStringIsNullOrWhiteSpace(attentionUserSignet)
+          ? {
+              signet: emptySignet,
+            }
+          : {
+              signet: attentionUserSignet,
+            }),
+        time: getValueByKey({
+          data: metaData,
+          key: fieldData.attentionTime.name,
+          convert: convertCollection.string,
+        }),
+      },
+    ];
+
+    return {
+      general: general || {},
+      items,
+      remarkSchemaList,
+      showApply: applicantSignSwitch === whetherNumber.yes,
+      listApply,
+      showAttention: attentionSignSwitch === whetherNumber.yes,
+      listAttention,
+    };
   };
 
   submitApproval = () => {
@@ -425,7 +606,35 @@ class Approve extends PageWrapper {
   };
 
   buildFormBox = () => {
-    const { formItemList } = this.state;
+    const {
+      metaData,
+      listFormStorage,
+      formItemList,
+      listApprove,
+      listChainApprove,
+    } = this.state;
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldData.workflowCaseId.name,
+      convert: convertCollection.string,
+    });
+
+    const qRCodeImage = getValueByKey({
+      data: metaData,
+      key: fieldData.qRCodeImage.name,
+      convert: convertCollection.string,
+    });
+
+    const {
+      general,
+      items,
+      showApply,
+      listApply,
+      showAttention,
+      listAttention,
+      remarkSchemaList,
+    } = this.analysisDocumentConfig();
 
     return (
       <Card bodyStyle={bodyStyle} border={false} bodyBorder={false}>
@@ -442,13 +651,18 @@ class Approve extends PageWrapper {
                   marginRight: transformSize(22),
                 }}
                 left={
-                  <View style={{ width: '100%' }}>
+                  <VerticalBox align="top" alignJustify="center">
                     <View style={formTitleStyle}>{title}: </View>
-                  </View>
+                  </VerticalBox>
                 }
                 right={
                   <View style={{ width: '100%' }}>
-                    <View style={formValueStyle}>{value}</View>
+                    <MultiLineText
+                      style={formValueStyle}
+                      fontSize={26}
+                      lineHeight={36}
+                      text={value}
+                    />
 
                     <Line color="#eee" height={2} />
                   </View>
@@ -456,6 +670,36 @@ class Approve extends PageWrapper {
               />
             );
           })}
+
+          <DocumentPrintDesigner
+            title={getValueByKey({
+              data: metaData,
+              key: fieldData.workflowName.name,
+            })}
+            schema={{
+              general,
+              items,
+            }}
+            values={listFormStorage}
+            showApply={showApply}
+            applyList={listApply}
+            showAttention={showAttention}
+            attentionList={listAttention}
+            approveList={isArray(listApprove) ? listApprove : []}
+            allApproveProcessList={listChainApprove}
+            signetStyle={{
+              top: transformSize(-2),
+            }}
+            remarkTitle="备注"
+            remarkName="remark"
+            remarkList={remarkSchemaList}
+            showQRCode
+            qRCodeImage={qRCodeImage}
+            qRCodeHeight={40}
+            showSerialNumber
+            serialNumberTitle="审批流水号: "
+            serialNumberContent={workflowCaseId}
+          />
         </Space>
       </Card>
     );
@@ -640,6 +884,18 @@ class Approve extends PageWrapper {
     );
   };
 
+  buildActionPlaceholderBox = () => {
+    const { canEdit, canApprove } = this.state;
+
+    if (canEdit === whetherNumber.no && canApprove === whetherNumber.no) {
+      return null;
+    }
+
+    return <Line color="#000" height={290} />;
+
+    // return <Line transparent height={18} />;
+  };
+
   buildActionBox = () => {
     const { canEdit, canApprove } = this.state;
 
@@ -684,6 +940,41 @@ class Approve extends PageWrapper {
       >
         <FixedBox style={{ width: '100%' }} zIndex={100} bottom={0}>
           <Line color="#eee" height={2} />
+
+          <Card
+            header="审批意见"
+            headerStyle={headerStyle}
+            bodyStyle={{
+              ...bodyStyle,
+              paddingBottom: 0,
+            }}
+            space={false}
+            border={false}
+            bodyBorder={false}
+            headerEllipsis={false}
+            stripCenter={false}
+            stripTop={stripTopValue}
+            stripHeight={stripHeightValue}
+            strip
+            stripColor="#0075fe"
+          >
+            <View
+              style={{
+                backgroundColor: '#fcfbfc',
+                borderRadius: transformSize(8),
+                overflow: 'hidden',
+              }}
+            >
+              <InputItem
+                required
+                layout="vertical"
+                areaMode
+                areaHeight={180}
+                border={false}
+                placeholder="请输入审批意见"
+              />
+            </View>
+          </Card>
 
           <View
             style={{
@@ -811,7 +1102,7 @@ class Approve extends PageWrapper {
           </View>
         ) : (
           <>
-            <View>
+            <View style={{ overflowX: 'hidden' }}>
               <Space direction="vertical" fillWidth size={18}>
                 {this.buildTitleBox()}
 
@@ -820,6 +1111,8 @@ class Approve extends PageWrapper {
                 {this.buildProcessBox()}
 
                 {this.buildAttachmentBox()}
+
+                {this.buildActionPlaceholderBox()}
               </Space>
             </View>
 

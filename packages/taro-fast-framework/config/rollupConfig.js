@@ -13,6 +13,7 @@ export function buildConfig({ terser: whetherTerser = false }) {
       'taro-fast-component',
       'taro-fast-component-extra',
       'taro-fast-component-prism',
+      'taro-fast-design-playground',
     ],
   });
 }

@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 
 import { connect } from 'easy-soft-dva';
-import { isString, logTrace } from 'easy-soft-utility';
+import { isString } from 'easy-soft-utility';
 
 import { CenterBox, Modal } from 'taro-fast-component';
 
@@ -18,13 +18,6 @@ class ModalExtra extends PureComponent {
       this.getProperties();
 
     const v = !!switchControl[flag];
-
-    logTrace(
-      {
-        flag,
-      },
-      v ? 'Modal show' : 'Modal hide',
-    );
 
     const header = isString(title || '') ? (
       <CenterBox>{title}</CenterBox>

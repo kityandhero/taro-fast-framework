@@ -151,8 +151,8 @@ class Item extends BaseComponent {
             ...bodyStyle,
             ...(showBody
               ? this.bodyHeight > 0
-                ? { maxHeight: `${this.bodyHeight}px` }
-                : { maxHeight: '150px' }
+                ? { maxHeight: transformSize(this.bodyHeight) }
+                : { maxHeight: transformSize(200) }
               : { maxHeight: 0 }),
           }}
         >

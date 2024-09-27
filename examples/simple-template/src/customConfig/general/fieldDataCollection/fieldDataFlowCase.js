@@ -260,6 +260,11 @@ export const fieldDataFlowCase = {
     name: 'caseNameTemplate',
     helper: '设置实例名模板, 示例: {flowName} 事由{reason}',
   },
+  qRCodeImage: {
+    label: '二维码',
+    name: 'qRCodeImage',
+    helper: '',
+  },
   smsTemplate: {
     label: '短信通知模版 ',
     name: 'smsTemplate',
