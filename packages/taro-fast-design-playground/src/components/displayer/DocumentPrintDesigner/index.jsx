@@ -45,7 +45,7 @@ const defaultProperties = {
   qRCodeImage: '',
   qRCodeTitle: '防伪二维码:',
   qRCodeDescription: '扫码查看防伪标识',
-  qRCodeHeight: 40,
+  qRCodeHeight: 52,
   qRCodeStyle: {},
   showSerialNumber: false,
   serialNumberTitle: '流水号',

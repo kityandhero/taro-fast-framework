@@ -15,7 +15,8 @@ export const colorStyle = {
 export const lineStyle = {};
 
 export const documentTitleStyle = {
-  fontSize: transformSize(36),
+  fontSize: transformSize(32),
+  lineHeight: transformSize(50),
 };
 
 export const labelFrontStyle = {

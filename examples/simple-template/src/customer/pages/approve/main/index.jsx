@@ -5,10 +5,12 @@ import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   convertCollection,
+  formatDatetime,
   getValueByKey,
   isArray,
   isEmptyArray,
   logException,
+  showSimpleErrorMessage,
   showSuccessNotification,
   whetherNumber,
   zeroInt,
@@ -30,7 +32,7 @@ import {
   Line,
   MultiLineText,
   Space,
-  Steps,
+  // Steps,
   Tag,
   VerticalBox,
 } from 'taro-fast-component';
@@ -48,9 +50,12 @@ import {
   viewStyle,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
-import { ApprovePopup } from '../approvePopup';
-import { submitApprovalAction } from '../assist/action';
-import { buildListApprove } from '../assist/tools';
+import {
+  passAction,
+  refuseAction,
+  submitApprovalAction,
+} from '../assist/action';
+import { buildListApprove, buildListHistory } from '../assist/tools';
 import { fieldData } from '../common/data';
 import { SubmitModal } from '../submitModal';
 
@@ -79,31 +84,31 @@ const descriptionStyle = {
   paddingBottom: transformSize(10),
 };
 
-const formTitleStyle = {
-  marginBottom: transformSize(10),
-};
+// const formTitleStyle = {
+//   marginBottom: transformSize(10),
+// };
 
-const formValueStyle = {
-  marginBottom: transformSize(8),
-  fontWeight: 'bold',
-};
+// const formValueStyle = {
+//   marginBottom: transformSize(8),
+//   fontWeight: 'bold',
+// };
 
-const approveTitleStyle = {
-  fontSize: transformSize(28),
-  fontWeight: 'bold',
-};
+// const approveTitleStyle = {
+//   fontSize: transformSize(28),
+//   fontWeight: 'bold',
+// };
 
-const approveNoteStyle = {
-  fontSize: transformSize(28),
-};
+// const approveNoteStyle = {
+//   fontSize: transformSize(28),
+// };
 
-const approveSignetStyle = {
-  width: transformSize(200),
-};
+// const approveSignetStyle = {
+//   width: transformSize(200),
+// };
 
-const approveTimeStyle = {
-  paddingBottom: transformSize(10),
-};
+// const approveTimeStyle = {
+//   paddingBottom: transformSize(10),
+// };
 
 const attachmentBoxStyle = {
   paddingTop: transformSize(16),
@@ -116,6 +121,24 @@ const attachmentIconStyle = {
 
 const attachmentTitleStyle = {
   // paddingBottom: transformSize(10),
+};
+
+const historyBoxStyle = {
+  paddingTop: transformSize(16),
+  paddingBottom: transformSize(16),
+};
+
+const historyBoxItemStyle = {
+  paddingTop: transformSize(6),
+  paddingBottom: transformSize(6),
+};
+
+const historyTitleStyle = {
+  // paddingBottom: transformSize(10),
+};
+
+const historyValueStyle = {
+  // width: transformSize(46),
 };
 
 // eslint-disable-next-line no-undef
@@ -144,6 +167,8 @@ class Approve extends PageWrapper {
 
   enableBackTop = true;
 
+  note = '';
+
   constructor(properties) {
     super(properties);
 
@@ -152,8 +177,9 @@ class Approve extends PageWrapper {
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
       workflowFormDesign: {},
       listFormStorage: [],
-      formItemList: [],
+      // formItemList: [],
       listApprove: [],
+      listHistory: [],
       listAttachment: [],
       canEdit: whetherNumber.no,
       canApprove: whetherNumber.no,
@@ -183,12 +209,12 @@ class Approve extends PageWrapper {
     // eslint-disable-next-line no-unused-vars
     metaOriginalData = null,
   }) => {
-    const workflowCaseId = getValueByKey({
-      data: metaData,
-      key: fieldData.workflowCaseId.name,
-      defaultValue: '',
-      convert: convertCollection.string,
-    });
+    // const workflowCaseId = getValueByKey({
+    //   data: metaData,
+    //   key: fieldData.workflowCaseId.name,
+    //   defaultValue: '',
+    //   convert: convertCollection.string,
+    // });
 
     const canEdit = getValueByKey({
       data: metaData,
@@ -266,13 +292,13 @@ class Approve extends PageWrapper {
 
     const existAttachment = listAttachment.length > 0;
 
-    const formItemList = [
-      {
-        title: '编号',
-        value: workflowCaseId,
-      },
-      ...listFormStorage,
-    ];
+    // const formItemList = [
+    //   {
+    //     title: '编号',
+    //     value: workflowCaseId,
+    //   },
+    //   ...listFormStorage,
+    // ];
 
     const listApprove = buildListApprove({
       listChainApprove,
@@ -280,14 +306,20 @@ class Approve extends PageWrapper {
       nextApproveWorkflowNode,
     });
 
+    const listHistory = buildListHistory({
+      listProcessHistory,
+    });
+
     this.setState({
       canEdit,
       canApprove,
       workflowFormDesign: workflowFormDesign || {},
       listFormStorage: [...listFormStorage],
-      formItemList: [...formItemList],
+      // formItemList: [...formItemList],
       listApprove: [...listApprove],
+      listHistory: [...listHistory],
       listAttachment: [...listAttachment],
+      // listProcessHistory: [...listProcessHistory],
       existAttachment,
       approveComplete,
     });
@@ -494,8 +526,68 @@ class Approve extends PageWrapper {
     SubmitModal.open();
   };
 
-  showApprovePopup = () => {
-    ApprovePopup.open();
+  pass = () => {
+    const { metaData } = this.state;
+
+    if (checkStringIsNullOrWhiteSpace(this.note)) {
+      showSimpleErrorMessage('请输入审批意见');
+
+      return;
+    }
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldData.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    passAction({
+      target: this,
+      handleData: {
+        workflowCaseId,
+        note: this.note,
+      },
+      successCallback: ({ target }) => {
+        showSuccessNotification('审批完成');
+
+        target.reloadData({});
+      },
+    });
+  };
+
+  refuse = () => {
+    const { metaData } = this.state;
+
+    if (checkStringIsNullOrWhiteSpace(this.note)) {
+      showSimpleErrorMessage('请输入审批意见');
+
+      return;
+    }
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldData.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    refuseAction({
+      target: this,
+      handleData: {
+        workflowCaseId,
+        note: this.note,
+      },
+      successCallback: ({ target }) => {
+        showSuccessNotification('审批完成');
+
+        target.reloadData({});
+      },
+    });
+  };
+
+  triggerNoteChanged = (v) => {
+    this.note = v;
   };
 
   buildTitleBox = () => {
@@ -609,7 +701,7 @@ class Approve extends PageWrapper {
     const {
       metaData,
       listFormStorage,
-      formItemList,
+      // formItemList,
       listApprove,
       listChainApprove,
     } = this.state;
@@ -639,7 +731,7 @@ class Approve extends PageWrapper {
     return (
       <Card bodyStyle={bodyStyle} border={false} bodyBorder={false}>
         <Space direction="vertical" size={26} fillWidth>
-          {formItemList.map((o, index) => {
+          {/* {formItemList.map((o, index) => {
             const { title, value } = o;
 
             return (
@@ -669,7 +761,7 @@ class Approve extends PageWrapper {
                 }
               />
             );
-          })}
+          })} */}
 
           <DocumentPrintDesigner
             title={getValueByKey({
@@ -695,7 +787,7 @@ class Approve extends PageWrapper {
             remarkList={remarkSchemaList}
             showQRCode
             qRCodeImage={qRCodeImage}
-            qRCodeHeight={40}
+            qRCodeHeight={52}
             showSerialNumber
             serialNumberTitle="审批流水号: "
             serialNumberContent={workflowCaseId}
@@ -705,107 +797,107 @@ class Approve extends PageWrapper {
     );
   };
 
-  buildProcessBox = () => {
-    const { listApprove } = this.state;
+  // buildProcessBox = () => {
+  //   const { listApprove } = this.state;
 
-    if (!this.judgeDisplayHistory()) {
-      return null;
-    }
+  //   if (!this.judgeDisplayHistory()) {
+  //     return null;
+  //   }
 
-    return (
-      <Card
-        header="进度"
-        headerStyle={headerStyle}
-        bodyStyle={{ ...bodyStyle }}
-        space={false}
-        border={false}
-        headerEllipsis={false}
-        stripCenter={false}
-        stripTop={stripTopValue}
-        stripHeight={stripHeightValue}
-        strip
-        stripColor="#0075fe"
-        extra={<IconCalendar size={36} color="#888" />}
-      >
-        <Steps
-          direction="vertical"
-          current={1}
-          titleFontSize={28}
-          descriptionFontSize={26}
-          indicatorMarginRight={12}
-          iconSize={20}
-          style={{
-            paddingTop: transformSize(16),
-            paddingRight: 0,
-            paddingBottom: 0,
-            paddingLeft: 0,
-          }}
-          itemStyle={{
-            paddingBottom: transformSize(12),
-          }}
-          list={listApprove}
-          titleBuilder={(o) => {
-            const { title } = o;
+  //   return (
+  //     <Card
+  //       header="进度"
+  //       headerStyle={headerStyle}
+  //       bodyStyle={{ ...bodyStyle }}
+  //       space={false}
+  //       border={false}
+  //       headerEllipsis={false}
+  //       stripCenter={false}
+  //       stripTop={stripTopValue}
+  //       stripHeight={stripHeightValue}
+  //       strip
+  //       stripColor="#0075fe"
+  //       extra={<IconCalendar size={36} color="#888" />}
+  //     >
+  //       <Steps
+  //         direction="vertical"
+  //         current={1}
+  //         titleFontSize={28}
+  //         descriptionFontSize={26}
+  //         indicatorMarginRight={12}
+  //         iconSize={20}
+  //         style={{
+  //           paddingTop: transformSize(16),
+  //           paddingRight: 0,
+  //           paddingBottom: 0,
+  //           paddingLeft: 0,
+  //         }}
+  //         itemStyle={{
+  //           paddingBottom: transformSize(12),
+  //         }}
+  //         list={listApprove}
+  //         titleBuilder={(o) => {
+  //           const { title } = o;
 
-            return <View style={approveTitleStyle}>{title}:</View>;
-          }}
-          descriptionBuilder={(o) => {
-            const { note, signet, time, status } = o;
+  //           return <View style={approveTitleStyle}>{title}:</View>;
+  //         }}
+  //         descriptionBuilder={(o) => {
+  //           const { note, signet, time, status } = o;
 
-            if (checkInCollection(['wait', 'process'], status)) {
-              return null;
-            }
+  //           if (checkInCollection(['wait', 'process'], status)) {
+  //             return null;
+  //           }
 
-            return (
-              <>
-                <Line transparent height={10} />
+  //           return (
+  //             <>
+  //               <Line transparent height={10} />
 
-                <View style={approveNoteStyle}>{note}</View>
+  //               <View style={approveNoteStyle}>{note}</View>
 
-                <Line transparent height={16} />
+  //               <Line transparent height={16} />
 
-                <FlexBox
-                  flexAuto="left"
-                  left={<View></View>}
-                  right={
-                    <View>
-                      <FlexBox
-                        style={{ width: '100%' }}
-                        flexAuto="right"
-                        leftStyle={{
-                          marginRight: transformSize(12),
-                        }}
-                        left={
-                          <View style={approveSignetStyle}>
-                            <ImageBox aspectRatio={0.353} src={signet} />
-                          </View>
-                        }
-                        right={
-                          <VerticalBox align="bottom" alignJustify="center">
-                            <View style={approveTimeStyle}>
-                              <ColorText
-                                color="#7d7d7d"
-                                fontSize={26}
-                                text={time}
-                              />
-                            </View>
-                          </VerticalBox>
-                        }
-                      />
-                    </View>
-                  }
-                />
+  //               <FlexBox
+  //                 flexAuto="left"
+  //                 left={<View></View>}
+  //                 right={
+  //                   <View>
+  //                     <FlexBox
+  //                       style={{ width: '100%' }}
+  //                       flexAuto="right"
+  //                       leftStyle={{
+  //                         marginRight: transformSize(12),
+  //                       }}
+  //                       left={
+  //                         <View style={approveSignetStyle}>
+  //                           <ImageBox aspectRatio={0.353} src={signet} />
+  //                         </View>
+  //                       }
+  //                       right={
+  //                         <VerticalBox align="bottom" alignJustify="center">
+  //                           <View style={approveTimeStyle}>
+  //                             <ColorText
+  //                               color="#7d7d7d"
+  //                               fontSize={26}
+  //                               text={time}
+  //                             />
+  //                           </View>
+  //                         </VerticalBox>
+  //                       }
+  //                     />
+  //                   </View>
+  //                 }
+  //               />
 
-                <Line transparent height={10} />
+  //               <Line transparent height={10} />
 
-                <Line color="#eee" height={2} />
-              </>
-            );
-          }}
-        />
-      </Card>
-    );
-  };
+  //               <Line color="#eee" height={2} />
+  //             </>
+  //           );
+  //         }}
+  //       />
+  //     </Card>
+  //   );
+  // };
 
   buildAttachmentBox = () => {
     const { existAttachment, listAttachment } = this.state;
@@ -880,6 +972,211 @@ class Approve extends PageWrapper {
             description="无附件"
           />
         )}
+      </Card>
+    );
+  };
+
+  buildHistoryBox = () => {
+    const { listHistory } = this.state;
+
+    if (!this.judgeDisplayHistory()) {
+      return null;
+    }
+
+    return (
+      <Card
+        header="审批记录"
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+        extra={<IconCalendar size={36} color="#888" />}
+      >
+        {listHistory.length > 0 ? (
+          <View>
+            <Space
+              direction="vertical"
+              fillWidth
+              size={0}
+              split={<Line height={2} />}
+            >
+              {listHistory.map((o, index) => {
+                const { title, name, time, action } = o;
+
+                return (
+                  <View key={`history_${index}`} style={historyBoxStyle}>
+                    <FlexBox
+                      flexAuto="left"
+                      style={historyBoxItemStyle}
+                      leftStyle={{
+                        marginRight: transformSize(10),
+                      }}
+                      left={
+                        <VerticalBox>
+                          <View style={historyTitleStyle}>步骤：</View>
+                        </VerticalBox>
+                      }
+                      right={
+                        <VerticalBox>
+                          <View style={historyValueStyle}>{title}</View>
+                        </VerticalBox>
+                      }
+                    />
+
+                    <FlexBox
+                      flexAuto="left"
+                      style={historyBoxItemStyle}
+                      leftStyle={{
+                        marginRight: transformSize(10),
+                      }}
+                      left={
+                        <VerticalBox>
+                          <View style={historyTitleStyle}>名称：</View>
+                        </VerticalBox>
+                      }
+                      right={
+                        <VerticalBox>
+                          <View style={historyValueStyle}>{name}</View>
+                        </VerticalBox>
+                      }
+                    />
+
+                    <FlexBox
+                      flexAuto="left"
+                      style={historyBoxItemStyle}
+                      leftStyle={{
+                        marginRight: transformSize(10),
+                      }}
+                      left={
+                        <VerticalBox>
+                          <View style={historyTitleStyle}>时间：</View>
+                        </VerticalBox>
+                      }
+                      right={
+                        <VerticalBox>
+                          <View style={historyValueStyle}>
+                            {formatDatetime({
+                              data: time,
+                              format: 'YYYY年MM月DD日 HH:mm:ss',
+                            })}
+                          </View>
+                        </VerticalBox>
+                      }
+                    />
+
+                    <FlexBox
+                      flexAuto="left"
+                      style={historyBoxItemStyle}
+                      leftStyle={{
+                        marginRight: transformSize(10),
+                      }}
+                      left={
+                        <VerticalBox>
+                          <View style={historyTitleStyle}>审核：</View>
+                        </VerticalBox>
+                      }
+                      right={
+                        <VerticalBox>
+                          <View style={historyValueStyle}>{action}</View>
+                        </VerticalBox>
+                      }
+                    />
+                  </View>
+                );
+              })}
+            </Space>
+          </View>
+        ) : (
+          <Empty
+            icon=""
+            image={emptyImage}
+            imageAspectRatio={0.7156}
+            description="无记录"
+          />
+        )}
+
+        {/* <Steps
+          direction="vertical"
+          current={1}
+          titleFontSize={28}
+          descriptionFontSize={26}
+          indicatorMarginRight={12}
+          iconSize={20}
+          style={{
+            paddingTop: transformSize(16),
+            paddingRight: 0,
+            paddingBottom: 0,
+            paddingLeft: 0,
+          }}
+          itemStyle={{
+            paddingBottom: transformSize(12),
+          }}
+          list={listApprove}
+          titleBuilder={(o) => {
+            const { title } = o;
+
+            return <View style={approveTitleStyle}>{title}:</View>;
+          }}
+          descriptionBuilder={(o) => {
+            const { note, signet, time, status } = o;
+
+            if (checkInCollection(['wait', 'process'], status)) {
+              return null;
+            }
+
+            return (
+              <>
+                <Line transparent height={10} />
+
+                <View style={approveNoteStyle}>{note}</View>
+
+                <Line transparent height={16} />
+
+                <FlexBox
+                  flexAuto="left"
+                  left={<View></View>}
+                  right={
+                    <View>
+                      <FlexBox
+                        style={{ width: '100%' }}
+                        flexAuto="right"
+                        leftStyle={{
+                          marginRight: transformSize(12),
+                        }}
+                        left={
+                          <View style={approveSignetStyle}>
+                            <ImageBox aspectRatio={0.353} src={signet} />
+                          </View>
+                        }
+                        right={
+                          <VerticalBox align="bottom" alignJustify="center">
+                            <View style={approveTimeStyle}>
+                              <ColorText
+                                color="#7d7d7d"
+                                fontSize={26}
+                                text={time}
+                              />
+                            </View>
+                          </VerticalBox>
+                        }
+                      />
+                    </View>
+                  }
+                />
+
+                <Line transparent height={10} />
+
+                <Line color="#eee" height={2} />
+              </>
+            );
+          }}
+        /> */}
       </Card>
     );
   };
@@ -972,6 +1269,7 @@ class Approve extends PageWrapper {
                 areaHeight={180}
                 border={false}
                 placeholder="请输入审批意见"
+                afterChange={this.triggerNoteChanged}
               />
             </View>
           </Card>
@@ -1000,6 +1298,7 @@ class Approve extends PageWrapper {
                   paddingRight={32}
                   size="middle"
                   hidden={!canApprove}
+                  onClick={this.refuse}
                 />
               }
               right={
@@ -1039,7 +1338,7 @@ class Approve extends PageWrapper {
                           paddingLeft={32}
                           paddingRight={32}
                           size="middle"
-                          onClick={this.showApprovePopup}
+                          onClick={this.pass}
                         />
                       ) : (
                         <Button
@@ -1071,10 +1370,6 @@ class Approve extends PageWrapper {
     return (
       <>
         <SubmitModal afterOk={this.submitApproval} />
-
-        <ApprovePopup mode="through" position="center" header="弹出面板">
-          11
-        </ApprovePopup>
       </>
     );
   };
@@ -1108,9 +1403,11 @@ class Approve extends PageWrapper {
 
                 {this.buildFormBox()}
 
-                {this.buildProcessBox()}
-
                 {this.buildAttachmentBox()}
+
+                {/* {this.buildProcessBox()} */}
+
+                {this.buildHistoryBox()}
 
                 {this.buildActionPlaceholderBox()}
               </Space>

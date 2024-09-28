@@ -48,3 +48,21 @@ export async function submitApprovalData(parameters) {
     params: parameters,
   });
 }
+
+export const passDataApiAddress = '/wechatApplication/workflowCase/pass';
+
+export async function passData(parameters) {
+  return request({
+    api: passDataApiAddress,
+    params: parameters,
+  });
+}
+
+export const refuseDataApiAddress = '/wechatApplication/workflowCase/refuse';
+
+export async function refuseData(parameters) {
+  return request({
+    api: refuseDataApiAddress,
+    params: parameters,
+  });
+}

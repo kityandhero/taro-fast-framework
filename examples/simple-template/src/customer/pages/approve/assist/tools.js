@@ -77,7 +77,7 @@ function transferChainApproveList(
       if (listFilter.length > 0) {
         const o = listFilter[0];
 
-        const { title, note, name, signet, time } = { ...one, ...o };
+        const { title, note, name, signet, time, action } = { ...one, ...o };
 
         list.push({
           nodeId,
@@ -86,6 +86,7 @@ function transferChainApproveList(
           name,
           signet: signet || emptySignet,
           time,
+          action,
           status: 'finish',
         });
       }
@@ -101,7 +102,7 @@ function transferChainApproveList(
   return list;
 }
 
-function transferApprove(listProcessHistory) {
+function filterApprove(listProcessHistory) {
   const listApprove = filter(listProcessHistory, (one) => {
     const { approveActionMode } = {
       approveActionMode: 0,
@@ -117,12 +118,14 @@ function transferApprove(listProcessHistory) {
       approveUserName,
       approveUserSignet,
       approveTime,
+      approveActionNote,
     } = {
       approveWorkflowNodeName: '',
       note: '',
       approveUserName: '张三',
       approveUserSignet: '',
       approveTime: '',
+      approveActionNote: '',
       ...o,
     };
 
@@ -133,11 +136,18 @@ function transferApprove(listProcessHistory) {
       name: approveUserName,
       signet: approveUserSignet || emptySignet,
       time: approveTime,
+      action: approveActionNote,
       status: 'finish',
     };
   });
 
   return listApprove;
+}
+
+export function buildListHistory({ listProcessHistory }) {
+  const listHistory = filterApprove(listProcessHistory);
+
+  return listHistory;
 }
 
 export function buildListApprove({
@@ -146,7 +156,7 @@ export function buildListApprove({
   nextApproveWorkflowNode,
 }) {
   const listApprove = transferChainApproveList(
-    transferApprove(listProcessHistory),
+    filterApprove(listProcessHistory),
     listChainApprove,
     nextApproveWorkflowNode,
   );

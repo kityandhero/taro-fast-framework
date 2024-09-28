@@ -10,10 +10,6 @@ import {
   buildModel as buildEntranceModel,
   entranceTypeCollection,
 } from './entrance';
-import {
-  buildModel as buildFlowCaseModel,
-  flowCaseTypeCollection,
-} from './flowCase';
 import { buildModel as buildGlobalModel, globalTypeCollection } from './global';
 import {
   buildModel as buildSessionModel,
@@ -26,7 +22,6 @@ export const modelTypeCollection = {
   entranceTypeCollection,
   globalTypeCollection,
   shareTypeCollection,
-  flowCaseTypeCollection,
   customerTypeCollection,
   administrativeDivisionTypeCollection,
 };
@@ -39,7 +34,6 @@ export function listModelBuilder() {
     buildEntranceModel,
     buildGlobalModel,
     buildShareModel,
-    buildFlowCaseModel,
     buildCustomerModel,
     buildAdministrativeDivisionModel,
   );

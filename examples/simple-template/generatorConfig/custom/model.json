@@ -1,3 +1,60 @@
 {
-  "list": []
+  "list": [
+    {
+      "apis": [
+        {
+          "title": "已创建流程实例分页列表",
+          "api": "/wechatApplication/workflowCase/pageList",
+          "effect": "pageList",
+          "service": "pageListData",
+          "type": "pageList"
+        },
+        {
+          "title": "待审批流程实例分页列表",
+          "api": "/wechatApplication/workflowCase/pageListWaitApprove",
+          "effect": "pageListWaitApprove",
+          "service": "pageListWaitApproveData",
+          "type": "pageList"
+        },
+        {
+          "title": "已审批流程实例分页列表",
+          "api": "/wechatApplication/workflowCase/pageListLatestApprove",
+          "effect": "pageListLatestApprove",
+          "service": "pageListLatestApproveData",
+          "type": "pageList"
+        },
+        {
+          "title": "获取详情",
+          "api": "/wechatApplication/workflowCase/get",
+          "effect": "get",
+          "service": "getData",
+          "type": "singleData"
+        },
+        {
+          "title": "提交审批",
+          "api": "/wechatApplication/workflowCase/submitApproval",
+          "effect": "submitApproval",
+          "service": "submitApprovalData",
+          "type": "singleData"
+        },
+        {
+          "title": "通过",
+          "api": "/wechatApplication/workflowCase/pass",
+          "effect": "pass",
+          "service": "passData",
+          "type": "singleData"
+        },
+        {
+          "title": "拒绝",
+          "api": "/wechatApplication/workflowCase/refuse",
+          "effect": "refuse",
+          "service": "refuseData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "审批相关",
+      "name": "flowCase"
+    }
+  ]
 }
