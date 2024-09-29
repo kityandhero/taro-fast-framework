@@ -1,10 +1,9 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { logConsole } from 'easy-soft-utility';
+import { getCurrentOperatorCache, logConsole } from 'easy-soft-utility';
 
 import { Button, Space } from 'taro-fast-component';
-import { getCurrentCustomer } from 'taro-fast-framework';
 
 import { CodePageBox, SimpleBox } from '../../../../customComponents';
 import { BasePageWrapper } from '../../BasePageWrapper';
@@ -64,7 +63,7 @@ export default class Index extends BasePageWrapper {
   };
 
   showInConsole = () => {
-    logConsole(getCurrentCustomer(), 'showInConsole');
+    logConsole(getCurrentOperatorCache(), 'showInConsole');
   };
 
   renderFurther() {

@@ -8,20 +8,46 @@ import {
   isFunction,
 } from 'easy-soft-utility';
 
+import {
+  flexAlignCollection,
+  flexAlignContentCollection,
+  flexDirectionCollection,
+  flexJustifyCollection,
+} from 'taro-fast-common';
+
 import { BaseComponent } from '../../BaseComponent';
 
 import './index.less';
 
-const directionCollection = ['row', 'column', 'row-reverse', 'column-reverse'];
-const alignCollection = ['start', 'end', 'center', 'stretch', 'baseline'];
-const justifyCollection = ['start', 'end', 'center', 'between', 'around'];
+const directionCollection = [
+  flexDirectionCollection.row,
+  flexDirectionCollection.column,
+  flexDirectionCollection.rowReverse,
+  flexDirectionCollection.columnReverse,
+];
+const alignCollection = [
+  flexAlignCollection.start,
+  flexAlignCollection.end,
+  flexAlignCollection.center,
+  flexAlignCollection.stretch,
+  flexAlignCollection.baseline,
+];
+const justifyCollection = [
+  flexJustifyCollection.start,
+  flexJustifyCollection.end,
+  flexJustifyCollection.center,
+  flexJustifyCollection.between,
+  flexJustifyCollection.evenly,
+  flexJustifyCollection.around,
+];
 const alignContentCollection = [
-  'start',
-  'end',
-  'center',
-  'between',
-  'around',
-  'stretch',
+  flexAlignContentCollection.start,
+  flexAlignContentCollection.end,
+  flexAlignContentCollection.center,
+  flexAlignContentCollection.between,
+  flexAlignContentCollection.evenly,
+  flexAlignContentCollection.around,
+  flexAlignContentCollection.stretch,
 ];
 
 const defaultProps = {

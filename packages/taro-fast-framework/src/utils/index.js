@@ -2,7 +2,6 @@ export * from './actionAssist';
 export * from './administrativeDivisionFullDataCacheAssist';
 export * from './common';
 export * from './configAssist';
-export * from './currentCustomerAssist';
 export * from './currentUrlAssist';
 export * from './definition';
 export * from './effectiveCodeAssist';

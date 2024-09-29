@@ -5,6 +5,7 @@ import {
   checkStringIsNullOrWhiteSpace,
   environmentCollection,
   getCache,
+  getCurrentOperatorCache,
   getLocalMetaData,
   isFunction,
   isNumber,
@@ -20,7 +21,9 @@ import {
   logObject,
   logWarn,
   redirectTo,
+  removeCurrentOperatorCache,
   setCache,
+  setCurrentOperatorCache,
   setLocalMetaData,
   setToken,
   showErrorMessage,
@@ -64,11 +67,6 @@ import {
   getSignInResultDescription,
   getVerifySignInResult,
 } from '../../utils/common';
-import {
-  getCurrentCustomer,
-  removeCurrentCustomer,
-  setCurrentCustomer,
-} from '../../utils/currentCustomerAssist';
 import {
   getEffectiveCode,
   setEffectiveCode,
@@ -3319,7 +3317,7 @@ class SupplementCore extends Common {
             openId,
           });
 
-          removeCurrentCustomer();
+          removeCurrentOperatorCache();
 
           that.logFunctionCallTrace(
             {},
@@ -3899,7 +3897,7 @@ class SupplementCore extends Common {
             openId,
           });
 
-          removeCurrentCustomer();
+          removeCurrentOperatorCache();
 
           const verifySignInResult = getVerifySignInResult();
 
@@ -4718,8 +4716,9 @@ class SupplementCore extends Common {
     this.logFunctionCallTrack({ data, force }, primaryCallName, 'getCustomer');
 
     let force = forceValue;
+    let existCurrentCustomer = false;
 
-    const currentCustomer = getCurrentCustomer();
+    const currentCustomer = getCurrentOperatorCache();
 
     if (!force) {
       if ((currentCustomer || null) == null) {
@@ -4727,6 +4726,8 @@ class SupplementCore extends Common {
       } else {
         if (Object.keys(currentCustomer).length === 0) {
           force = true;
+        } else {
+          existCurrentCustomer = true;
         }
       }
     }
@@ -4734,9 +4735,15 @@ class SupplementCore extends Common {
     const that = this;
 
     if (force) {
-      logDebug(
-        'info getCustomer from local cache fail or force api request, shift to get from api dispatch',
-      );
+      if (existCurrentCustomer) {
+        logDebug(
+          'getCustomer with force api request, shift to get from api dispatch',
+        );
+      } else {
+        logDebug(
+          'getCustomer from local cache fail, shift to get from api dispatch',
+        );
+      }
 
       that.logFunctionCallTrace(
         data,
@@ -4752,7 +4759,7 @@ class SupplementCore extends Common {
           logDebug(`dataSuccess is ${dataSuccess}`);
 
           if (dataSuccess) {
-            setCurrentCustomer(metaData);
+            setCurrentOperatorCache(metaData);
 
             if (isFunction(successCallback)) {
               that.logFunctionCallTrace(
@@ -4912,7 +4919,7 @@ class SupplementCore extends Common {
           }
         });
     } else {
-      logDebug('getCustomer from local cache success');
+      logDebug(currentCustomer, 'getCustomer from local cache success');
 
       if (isFunction(successCallback)) {
         that.logFunctionCallTrace(
@@ -5404,7 +5411,7 @@ class SupplementCore extends Common {
             return;
           }
 
-          removeCurrentCustomer();
+          removeCurrentOperatorCache();
 
           that.logFunctionCallTrace(
             metaData,
@@ -5875,7 +5882,7 @@ class SupplementCore extends Common {
             return;
           }
 
-          removeCurrentCustomer();
+          removeCurrentOperatorCache();
 
           that.logFunctionCallTrace(
             metaData,
@@ -5948,7 +5955,7 @@ class SupplementCore extends Common {
 
           that.setOpenIdOnRegister({ openId });
 
-          removeCurrentCustomer();
+          removeCurrentOperatorCache();
 
           const verifySignInResult = getVerifySignInResult();
 

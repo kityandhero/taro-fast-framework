@@ -196,3 +196,37 @@ export const formNameCollection = {
     helper: '',
   },
 };
+
+export const flexDirectionCollection = {
+  row: 'row',
+  column: 'column',
+  rowReverse: 'row-reverse',
+  columnReverse: 'column-reverse',
+};
+
+export const flexAlignCollection = {
+  start: 'start',
+  end: 'end',
+  center: 'center',
+  stretch: 'stretch',
+  baseline: 'baseline',
+};
+
+export const flexJustifyCollection = {
+  start: 'start',
+  end: 'end',
+  center: 'center',
+  between: 'between',
+  evenly: 'evenly',
+  around: 'around',
+};
+
+export const flexAlignContentCollection = {
+  start: 'start',
+  end: 'end',
+  center: 'center',
+  between: 'between',
+  evenly: 'evenly',
+  around: 'around',
+  stretch: 'stretch',
+};

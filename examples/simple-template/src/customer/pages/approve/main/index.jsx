@@ -11,12 +11,18 @@ import {
   isEmptyArray,
   logException,
   showSimpleErrorMessage,
+  showSimpleWarnMessage,
   showSuccessNotification,
   whetherNumber,
   zeroInt,
 } from 'easy-soft-utility';
 
-import { emptyImage, navigateBack, transformSize } from 'taro-fast-common';
+import {
+  downloadFileAndOpen,
+  emptyImage,
+  navigateBack,
+  transformSize,
+} from 'taro-fast-common';
 import {
   Avatar,
   Button,
@@ -157,7 +163,7 @@ definePageConfig({
 class Approve extends PageWrapper {
   // showCallTrack = true;
 
-  showCallTrace = true;
+  // showCallTrace = true;
 
   viewStyle = {
     ...viewStyle,
@@ -590,6 +596,31 @@ class Approve extends PageWrapper {
     this.note = v;
   };
 
+  startDownload = ({ attachment }) => {
+    const that = this;
+
+    if (checkStringIsNullOrWhiteSpace(attachment)) {
+      showSimpleWarnMessage('附件链接无效');
+
+      return;
+    }
+
+    that.notifyMessage({
+      message: '即将为您下载',
+      type: 'info',
+    });
+
+    downloadFileAndOpen({
+      url: attachment,
+      successCallback: () => {
+        that.bannerNotify({
+          message: '下载成功',
+          type: 'success',
+        });
+      },
+    });
+  };
+
   buildTitleBox = () => {
     const { metaData } = this.state;
 
@@ -730,8 +761,8 @@ class Approve extends PageWrapper {
 
     return (
       <Card bodyStyle={bodyStyle} border={false} bodyBorder={false}>
-        <Space direction="vertical" size={26} fillWidth>
-          {/* {formItemList.map((o, index) => {
+        {/* <Space direction="vertical" size={26} fillWidth>
+          {formItemList.map((o, index) => {
             const { title, value } = o;
 
             return (
@@ -761,38 +792,39 @@ class Approve extends PageWrapper {
                 }
               />
             );
-          })} */}
+          })}
+        </Space> */}
 
-          <DocumentPrintDesigner
-            title={getValueByKey({
-              data: metaData,
-              key: fieldData.workflowName.name,
-            })}
-            schema={{
-              general,
-              items,
-            }}
-            values={listFormStorage}
-            showApply={showApply}
-            applyList={listApply}
-            showAttention={showAttention}
-            attentionList={listAttention}
-            approveList={isArray(listApprove) ? listApprove : []}
-            allApproveProcessList={listChainApprove}
-            signetStyle={{
-              top: transformSize(-2),
-            }}
-            remarkTitle="备注"
-            remarkName="remark"
-            remarkList={remarkSchemaList}
-            showQRCode
-            qRCodeImage={qRCodeImage}
-            qRCodeHeight={52}
-            showSerialNumber
-            serialNumberTitle="审批流水号: "
-            serialNumberContent={workflowCaseId}
-          />
-        </Space>
+        <DocumentPrintDesigner
+          title={getValueByKey({
+            data: metaData,
+            key: fieldData.workflowName.name,
+          })}
+          schema={{
+            general,
+            items,
+          }}
+          borderColor="#999"
+          values={listFormStorage}
+          showApply={showApply}
+          applyList={listApply}
+          showAttention={showAttention}
+          attentionList={listAttention}
+          approveList={isArray(listApprove) ? listApprove : []}
+          allApproveProcessList={listChainApprove}
+          signetStyle={{
+            top: transformSize(-2),
+          }}
+          remarkTitle="备注"
+          remarkName="remark"
+          remarkList={remarkSchemaList}
+          showQRCode
+          qRCodeImage={qRCodeImage}
+          qRCodeHeight={60}
+          showSerialNumber
+          serialNumberTitle="审批流水号: "
+          serialNumberContent={workflowCaseId}
+        />
       </Card>
     );
   };
@@ -927,13 +959,26 @@ class Approve extends PageWrapper {
               split={<Line height={2} />}
             >
               {listAttachment.map((o, index) => {
-                const { alias } = {
+                const { alias, existPdf, url, urlPdf } = {
                   alias: '',
+                  existPdf: whetherNumber.no,
+                  url: '',
+                  urlPdf: '',
                   ...o,
                 };
 
                 return (
-                  <View key={`attachment_${index}`} style={attachmentBoxStyle}>
+                  <View
+                    key={`attachment_${index}`}
+                    style={attachmentBoxStyle}
+                    onClick={() => {
+                      if (existPdf === whetherNumber.yes) {
+                        this.startDownload({ attachment: urlPdf });
+                      } else {
+                        this.startDownload({ attachment: url });
+                      }
+                    }}
+                  >
                     <FlexBox
                       flexAuto="right"
                       leftStyle={{

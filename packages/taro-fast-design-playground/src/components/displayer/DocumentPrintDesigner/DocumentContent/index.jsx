@@ -104,7 +104,7 @@ const defaultProperties = {
   items: [],
   values: {},
   style: null,
-  color: colorDefault,
+  borderColor: colorDefault,
   title: '表格标题',
   titleContainerStyle: null,
   titleStyle: null,
@@ -118,7 +118,6 @@ const defaultProperties = {
   valueStyle: null,
   onItemsChange: null,
   onGeneralChange: null,
-  useRemark: false,
   showApply: false,
   applyList: [],
   showAttention: false,
@@ -132,7 +131,7 @@ const defaultProperties = {
   qRCodeTitle: '防伪二维码:',
   qRCodeDescription: '扫码查看防伪标识',
   qRCodeImage: '',
-  qRCodeHeight: 52,
+  qRCodeHeight: 74,
   qRCodeStyle: {},
   showSerialNumber: false,
   serialNumberTitle: '流水号',
@@ -177,7 +176,6 @@ class DocumentContent extends PureComponent {
       return (
         <View
           style={{
-            height: transformSize(qRCodeHeightAdjust),
             paddingTop: transformSize(paddingTop),
           }}
         >
@@ -226,8 +224,8 @@ class DocumentContent extends PureComponent {
             <FlexBox
               flexAuto="left"
               style={{ width: '100%' }}
-              left={<ColorText text={serialNumberTitle} />}
-              right={<ColorText text={serialNumberContent} />}
+              left={<ColorText fontSize={24} text={serialNumberTitle} />}
+              right={<ColorText fontSize={24} text={serialNumberContent} />}
             />
           </VerticalBox>
         </View>
@@ -238,7 +236,6 @@ class DocumentContent extends PureComponent {
       return (
         <View
           style={{
-            height: transformSize(qRCodeHeightAdjust),
             paddingTop: transformSize(paddingTop),
           }}
         >
@@ -250,12 +247,12 @@ class DocumentContent extends PureComponent {
                 flexAuto="top"
                 top={
                   <View>
-                    <ColorText text={qRCodeTitle} />
+                    <ColorText fontSize={24} text={qRCodeTitle} />
                   </View>
                 }
                 bottom={
                   <View>
-                    <ColorText text={qRCodeDescription} />
+                    <ColorText fontSize={24} text={qRCodeDescription} />
                   </View>
                 }
               />
@@ -283,7 +280,7 @@ class DocumentContent extends PureComponent {
       general,
       items: itemsSource,
       style,
-      color,
+      borderColor,
       labelColumnWidth,
       labelColumnStyle,
       labelContainerStyle,
@@ -312,7 +309,7 @@ class DocumentContent extends PureComponent {
     const items = adjustItemCollection(itemsSource);
 
     const lineAdjustStyle = {
-      borderBottom: `${transformSize(1)} solid ${color}`,
+      borderBottom: `${transformSize(1)} solid ${borderColor}`,
       ...lineStyle,
     };
 
@@ -321,8 +318,8 @@ class DocumentContent extends PureComponent {
       paddingBottom: transformSize(12),
       paddingLeft: transformSize(10),
       paddingRight: transformSize(10),
-      borderLeft: `${transformSize(1)} solid ${color}`,
-      borderRight: `${transformSize(1)} solid ${color}`,
+      borderLeft: `${transformSize(1)} solid ${borderColor}`,
+      borderRight: `${transformSize(1)} solid ${borderColor}`,
       width: transformSize(labelColumnWidth),
       textAlign: 'center',
       ...labelFrontStyle,
@@ -332,7 +329,7 @@ class DocumentContent extends PureComponent {
     };
 
     const valueBoxStyle = {
-      borderRight: `${transformSize(1)} solid ${color}`,
+      borderRight: `${transformSize(1)} solid ${borderColor}`,
       ...valueFrontStyle,
       ...colorStyle,
       ...fontFamilyStyle,
@@ -433,7 +430,7 @@ class DocumentContent extends PureComponent {
 
         <View
           style={{
-            borderTop: `${transformSize(1)} solid ${color}`,
+            borderTop: `${transformSize(1)} solid ${borderColor}`,
             ...style,
           }}
         >

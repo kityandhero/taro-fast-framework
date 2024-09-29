@@ -97,7 +97,6 @@ class VerticalBox extends BaseComponent {
       <View
         style={{
           ...style,
-
           height: '100%',
           ...(fillWidth
             ? {

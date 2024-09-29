@@ -1,7 +1,13 @@
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
-import { getGuid, isFunction, logException } from 'easy-soft-utility';
+import {
+  canToNumber,
+  getGuid,
+  isFunction,
+  logException,
+  toNumber,
+} from 'easy-soft-utility';
 
 import { getRect, transformSize } from 'taro-fast-common';
 
@@ -30,6 +36,7 @@ const defaultProps = {
   borderColor: 'var(--tfc-border-color)',
   arrow: false,
   arrowSize: 40,
+  headerPaddingSize: 0,
   arrowColor: '',
   disabled: false,
   onClick: null,
@@ -123,6 +130,7 @@ class Item extends BaseComponent {
       contentStyle,
       clickable,
       disabled,
+      headerPaddingSize,
       arrow,
       arrowSize,
       arrowColor,
@@ -140,6 +148,15 @@ class Item extends BaseComponent {
     } = this.props;
 
     const containerStyle = this.getContainerStyle();
+
+    let headerPaddingStyle = {};
+
+    if (canToNumber(headerPaddingSize) && toNumber(headerPaddingSize) > 0) {
+      headerPaddingStyle = {
+        paddingTop: transformSize(headerPaddingSize),
+        paddingBottom: transformSize(headerPaddingSize),
+      };
+    }
 
     const b =
       (body || null) == null ? null : (
@@ -192,7 +209,10 @@ class Item extends BaseComponent {
             {prefix ? (
               <View
                 className={`${classPrefix}-header-content-prefix`}
-                style={prefixStyle}
+                style={{
+                  ...prefixStyle,
+                  ...headerPaddingStyle,
+                }}
               >
                 {prefix}
               </View>
@@ -201,7 +221,10 @@ class Item extends BaseComponent {
             {!!title || !!label || !!description ? (
               <View
                 className={`${classPrefix}-header-content-main`}
-                style={contentStyle}
+                style={{
+                  ...contentStyle,
+                  ...headerPaddingStyle,
+                }}
               >
                 {title ? (
                   <View className={`${classPrefix}-header-title`}>{title}</View>

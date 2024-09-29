@@ -7,6 +7,7 @@ import {
   isObject,
   isString,
   isUndefined,
+  removeCurrentOperatorCache,
   removeLocalMetaData,
   removeToken,
   toString,
@@ -14,11 +15,7 @@ import {
 
 import { Divider } from 'taro-fast-component';
 import { PrismCode } from 'taro-fast-component-prism';
-import {
-  removeCurrentCustomer,
-  removeOpenId,
-  removeSession,
-} from 'taro-fast-framework';
+import { removeOpenId, removeSession } from 'taro-fast-framework';
 
 import QQMapWX from '../libs/qqmap-wx-jssdk.min';
 
@@ -284,5 +281,5 @@ export function clearLocalDataWhenSimulationModeChanged() {
   removeSession();
   removeOpenId();
   removeToken();
-  removeCurrentCustomer();
+  removeCurrentOperatorCache();
 }
