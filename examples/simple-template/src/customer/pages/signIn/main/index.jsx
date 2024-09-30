@@ -18,9 +18,9 @@ import {
 
 import { PageWrapper } from '../../../../customComponents';
 import {
+  logoBlueImage,
   signInInputPassword,
   signInInputUser,
-  signInLogo,
 } from '../../../../customConfig';
 
 // import { signInAction, signInWithPhoneAction } from '../assist/action';
@@ -80,7 +80,7 @@ class SignIn extends PageWrapper {
 
         <CenterBox>
           <View style={{ width: transformSize(140) }}>
-            <ImageBox src={signInLogo} />
+            <ImageBox src={logoBlueImage} />
           </View>
         </CenterBox>
 

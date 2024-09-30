@@ -116,6 +116,9 @@ const examplePathCollection = {
   notification: {
     path: '/example/pages/notification/index',
   },
+  imagePicker: {
+    path: '/example/pages/imagePicker/index',
+  },
   grid: {
     path: '/example/pages/grid/index',
   },

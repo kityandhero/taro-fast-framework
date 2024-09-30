@@ -36,7 +36,8 @@ const defaultProps = {
   borderColor: 'var(--tfc-border-color)',
   arrow: false,
   arrowSize: 40,
-  headerPaddingSize: 0,
+  headerTopBottomPadding: -1,
+  headerRightPadding: -1,
   arrowColor: '',
   disabled: false,
   onClick: null,
@@ -130,7 +131,8 @@ class Item extends BaseComponent {
       contentStyle,
       clickable,
       disabled,
-      headerPaddingSize,
+      headerTopBottomPadding,
+      headerRightPadding,
       arrow,
       arrowSize,
       arrowColor,
@@ -149,12 +151,23 @@ class Item extends BaseComponent {
 
     const containerStyle = this.getContainerStyle();
 
-    let headerPaddingStyle = {};
+    let headerTopBottomPaddingStyle = {};
 
-    if (canToNumber(headerPaddingSize) && toNumber(headerPaddingSize) > 0) {
-      headerPaddingStyle = {
-        paddingTop: transformSize(headerPaddingSize),
-        paddingBottom: transformSize(headerPaddingSize),
+    if (
+      canToNumber(headerTopBottomPadding) &&
+      toNumber(headerTopBottomPadding) >= 0
+    ) {
+      headerTopBottomPaddingStyle = {
+        paddingTop: transformSize(headerTopBottomPadding),
+        paddingBottom: transformSize(headerTopBottomPadding),
+      };
+    }
+
+    let headerRightPaddingStyle = {};
+
+    if (canToNumber(headerRightPadding) && toNumber(headerRightPadding) >= 0) {
+      headerRightPaddingStyle = {
+        paddingRight: transformSize(headerRightPadding),
       };
     }
 
@@ -202,7 +215,7 @@ class Item extends BaseComponent {
               : 'none'
           }
           hoverStartTime={5}
-          style={style}
+          style={{ ...style, ...headerRightPaddingStyle }}
           onClick={this.triggerClick}
         >
           <View className={`${classPrefix}-header-content`}>
@@ -211,7 +224,7 @@ class Item extends BaseComponent {
                 className={`${classPrefix}-header-content-prefix`}
                 style={{
                   ...prefixStyle,
-                  ...headerPaddingStyle,
+                  ...headerTopBottomPaddingStyle,
                 }}
               >
                 {prefix}
@@ -223,7 +236,7 @@ class Item extends BaseComponent {
                 className={`${classPrefix}-header-content-main`}
                 style={{
                   ...contentStyle,
-                  ...headerPaddingStyle,
+                  ...headerTopBottomPaddingStyle,
                 }}
               >
                 {title ? (

@@ -19,7 +19,7 @@ import {
 } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../../customComponents';
-import { signInBackground, signInLogo } from '../../../../customConfig';
+import { logoBlueImage, signInBackground } from '../../../../customConfig';
 
 import './index.less';
 
@@ -132,7 +132,7 @@ class SignIn extends PageWrapper {
                     `${classPrefix}__logo__inner__image-box`,
                   )}
                 >
-                  <ImageBox src={signInLogo} />
+                  <ImageBox src={logoBlueImage} />
                 </View>
               </View>
             </CenterBox>

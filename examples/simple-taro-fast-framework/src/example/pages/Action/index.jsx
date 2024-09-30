@@ -31,6 +31,11 @@ const list = [
     name: '动态通知',
     path: pathCollection.example.notification.path,
   },
+  {
+    id: 'ImagePicker',
+    name: '图片选择',
+    path: pathCollection.example.imagePicker.path,
+  },
 ];
 
 const o = {

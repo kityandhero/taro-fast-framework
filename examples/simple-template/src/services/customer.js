@@ -9,3 +9,13 @@ export async function getCurrentInfoData(parameters) {
     params: parameters,
   });
 }
+
+export const changePasswordDataApiAddress =
+  '/wechatApplication/user/changePassword';
+
+export async function changePasswordData(parameters) {
+  return request({
+    api: changePasswordDataApiAddress,
+    params: parameters,
+  });
+}

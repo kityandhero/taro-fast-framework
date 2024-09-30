@@ -37,6 +37,7 @@ export * from './HorizontalCenterBox';
 export * from './HtmlBox';
 export * from './Icon';
 export * from './ImageBox';
+export * from './ImagePicker';
 export * from './InputItem';
 export * from './Item';
 export * from './Line';

@@ -6,10 +6,14 @@ import {
   reducerNameCollection,
 } from 'easy-soft-utility';
 
-import { getCurrentInfoData } from '../../services/customer';
+import {
+  changePasswordData,
+  getCurrentInfoData,
+} from '../../services/customer';
 
 export const customerTypeCollection = {
   getCurrentInfo: 'customer/getCurrentInfo',
+  changePassword: 'customer/changePassword',
 };
 
 export function buildModel() {
@@ -31,6 +35,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(getCurrentInfoData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *changePassword(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(changePasswordData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

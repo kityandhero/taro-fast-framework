@@ -1,4 +1,5 @@
 import {
+  chooseImage as chooseImageCore,
   createAnimation as createAnimationCore,
   createSelectorQuery as createSelectorQueryCore,
   downloadFile,
@@ -330,6 +331,24 @@ export function handleTouchScroll(flag) {
 
     document.documentElement.scrollTop = scrollTop;
   }
+}
+
+export function chooseImage({
+  count = 9,
+  sizeType = ['original', 'compressed'],
+  sourceType = ['album', 'camera'],
+  success: successCallback,
+  fail: failCallback,
+  complete: completeCallback,
+}) {
+  chooseImageCore({
+    count,
+    sizeType,
+    sourceType,
+    success: successCallback,
+    fail: failCallback,
+    complete: completeCallback,
+  });
 }
 
 export {

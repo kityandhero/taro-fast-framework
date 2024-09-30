@@ -134,6 +134,13 @@
           "effect": "getCurrentInfo",
           "service": "getCurrentInfoData",
           "type": "singleData"
+        },
+        {
+          "title": "变更密码",
+          "api": "/wechatApplication/user/changePassword",
+          "effect": "changePassword",
+          "service": "changePasswordData",
+          "type": "singleData"
         }
       ],
       "cover": true,

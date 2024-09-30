@@ -6,8 +6,8 @@ export const defaultListImage = `${filePrefix}248664008.jpeg`;
 
 export const defaultShareImage = `${filePrefix}1078748955.jpeg`;
 
+export const logoBlueImage = `${filePrefix}1834027210680438784.png`;
 export const signInBackground = `${filePrefix}441115552.jpeg`;
-export const signInLogo = `${filePrefix}1834027210680438784.png`;
 export const signInInputUser = `${filePrefix}1830877727918526464.png`;
 export const signInInputPassword = `${filePrefix}1830881952803196928.png`;
 
@@ -33,6 +33,7 @@ export const warnOrangeImage = `${filePrefix}1840418592189976576.png`;
 export const addGreenImage = `${filePrefix}1840418855730679808.png`;
 export const hexagonBlueImage = `${filePrefix}1840419175542165504.png`;
 export const boardOrangeImage = `${filePrefix}1840419392656117760.png`;
+export const noDataImage = `${filePrefix}1840537324228841472.png`;
 
 export const shareTransfer = {
   home: '0',

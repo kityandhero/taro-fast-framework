@@ -33,13 +33,11 @@ import {
   warnOrangeImage,
 } from '../../../customConfig';
 
-import './index.less';
-
 export const classPrefix = `root-customer`;
 
 const fontColor = '#080808';
 
-const headerPaddingSize = 20;
+const headerTopBottomPadding = 20;
 
 const menuTitleStyle = {
   fontSize: transformSize(36),
@@ -242,6 +240,9 @@ class customer extends PageWrapper {
                     style={{
                       width: transformSize(48),
                     }}
+                    onClick={() => {
+                      this.goToEditInformation();
+                    }}
                   >
                     <ImageBox src={editGreyImage} circle={false} />
                   </View>
@@ -256,12 +257,12 @@ class customer extends PageWrapper {
     );
   };
 
-  buildMenuItem = ({ icon, title }) => {
+  buildMenuItem = ({ icon, title, onClick }) => {
     return (
       <Item
         label={title}
         contentStyle={menuTitleStyle}
-        headerPaddingSize={headerPaddingSize}
+        headerTopBottomPadding={headerTopBottomPadding}
         prefix={
           <VerticalBox>
             <View
@@ -275,6 +276,7 @@ class customer extends PageWrapper {
         }
         border={false}
         arrow
+        onClick={onClick ?? null}
       />
     );
   };
@@ -328,6 +330,9 @@ class customer extends PageWrapper {
             {this.buildMenuItem({
               title: '安全中心',
               icon: lockRedImage,
+              onClick: () => {
+                this.goToChangePassword();
+              },
             })}
 
             {this.buildMenuItem({
