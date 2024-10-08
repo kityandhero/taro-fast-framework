@@ -1,6 +1,6 @@
-import { fieldDataFlowCase } from '../../../customConfig';
+import { fieldDataFlowCase } from '../../general/fieldDataCollection';
 
-export const fieldData = {
+export const fieldDataWorkflowCase = {
   ...fieldDataFlowCase,
   workflowCaseId: {
     label: '数据标识',

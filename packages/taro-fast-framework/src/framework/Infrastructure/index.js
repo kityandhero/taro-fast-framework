@@ -2,11 +2,14 @@ import { ScrollView, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import {
+  adjustUrl,
   buildLinearGradient,
   checkHasAuthority,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   environmentCollection,
+  getToken,
+  getUrlGlobalPrefix,
   isArray,
   isFunction,
   logConfig,
@@ -30,6 +33,7 @@ import {
 import {
   AbstractComponent,
   checkWeAppEnvironment,
+  corsTarget,
   emptyImage,
   emptyLogic,
   getFooterDescription,
@@ -42,7 +46,9 @@ import {
   locateResult,
   Notification,
   pageScrollTo,
+  Tips,
   transformSize,
+  uploadFile,
 } from 'taro-fast-common';
 import {
   BackTop,
@@ -64,17 +70,16 @@ import {
 
 import { getAdministrativeDivisionFullData } from '../../services/schedulingControl';
 import {
+  getLaunchOption,
+  getMap,
+  getOpenId,
+  getSession,
+  getSessionRefreshing,
   getSignInResultDescription,
   getVerifySignInResult,
-} from '../../utils/common';
-import { setCurrentUrl } from '../../utils/currentUrlAssist';
-import { getLaunchOption } from '../../utils/launchOptionAssist';
-import { getMap } from '../../utils/locationAssist';
-import { getSession } from '../../utils/sessionAssist';
-import {
-  getSessionRefreshing,
+  setCurrentUrl,
   setSessionRefreshing,
-} from '../../utils/sessionRefreshingAssist';
+} from '../../utils';
 
 const refreshingBoxEffectCollection = ['pull', 'scale'];
 const defaultDispatchLocationResultData = {
@@ -2953,6 +2958,160 @@ class Infrastructure extends AbstractComponent {
       customStyle: customStyle,
       className: className,
     });
+  };
+
+  uploadSingleImage = ({
+    autoAppendCorsUrl = true,
+    uploadUrl,
+    filePath,
+    name = 'file',
+    header = {},
+  }) => {
+    this.logFunctionCallTrack(
+      {
+        autoAppendCorsUrl,
+        uploadUrl,
+        filePath,
+        name,
+        header,
+      },
+      primaryCallName,
+      'uploadSingleImage',
+    );
+
+    const that = this;
+
+    Tips.loading(`图片上传中`);
+
+    uploadFile({
+      url: autoAppendCorsUrl
+        ? adjustUrl(uploadUrl, `${corsTarget()}/${getUrlGlobalPrefix()}`)
+        : uploadUrl,
+      filePath: filePath,
+      name: name,
+      header: {
+        token: getToken(),
+        openId: getOpenId(),
+        ...header,
+      },
+      success: (response) => {
+        Tips.loaded();
+
+        const { data: jsonString } = response;
+
+        const responseData = JSON.parse(jsonString);
+
+        this.logFunctionCallTrace(
+          responseData,
+          primaryCallName,
+          'uploadSingleImage',
+          'checkUploadSingleImageSuccess',
+        );
+
+        if (this.checkUploadSingleImageSuccess(responseData)) {
+          this.logFunctionCallTrace(
+            responseData,
+            primaryCallName,
+            'uploadSingleImage',
+            'analysisUploadSingleImageSuccessData',
+          );
+
+          const {
+            imageUrl,
+            name: fileName,
+            data,
+          } = this.analysisUploadSingleImageSuccessData(responseData);
+
+          this.logFunctionCallTrace(
+            {
+              imageUrl,
+              name: fileName,
+              data,
+            },
+            primaryCallName,
+            'uploadSingleImage',
+            'doAfterUploadSingleImageSuccess',
+          );
+
+          that.doAfterUploadSingleImageSuccess({
+            imageUrl,
+            name: fileName,
+            data,
+          });
+        } else {
+          this.logFunctionCallTrace(
+            responseData,
+            primaryCallName,
+            'uploadSingleImage',
+            'getUploadSingleImageMessage',
+          );
+
+          const { message } = this.getUploadSingleImageMessage(responseData);
+
+          Tips.info(message || '服务器错误');
+
+          return;
+        }
+      },
+      fail: () => {
+        Tips.loaded();
+
+        Tips.info(`图片上传失败`);
+      },
+    });
+  };
+
+  checkUploadSingleImageSuccess = (data) => {
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'checkUploadSingleImageSuccess',
+    );
+
+    const { success } = {
+      success: false,
+      ...data,
+    };
+
+    return !!success;
+  };
+
+  getUploadSingleImageMessage = (data) => {
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'getUploadSingleImageMessage',
+    );
+
+    const { message } = {
+      message: '',
+      ...data,
+    };
+
+    return message || '';
+  };
+
+  analysisUploadSingleImageSuccessData = (o) => {
+    this.logFunctionCallTrack(
+      o,
+      primaryCallName,
+      'analysisUploadSingleImageSuccessData',
+    );
+
+    const { data } = o;
+
+    const { imageUrl, name } = data;
+
+    return { imageUrl, name, data };
+  };
+
+  doAfterUploadSingleImageSuccess = (data) => {
+    this.logEmptyCallTrack(
+      data,
+      primaryCallName,
+      'doAfterUploadSingleImageSuccess',
+      emptyLogic,
+    );
   };
 
   onScroll = (callback) => {

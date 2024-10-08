@@ -16,9 +16,7 @@ import {
   Tag,
 } from 'taro-fast-component';
 
-import { userGreyImage } from '../../../customConfig';
-// import { ellipsisVerticalImage } from '../../../customConfig';
-import { fieldData } from '../common/data';
+import { fieldDataWorkflowCase, userGreyImage } from '../../../customConfig';
 
 const commonBoxStyle = {
   backgroundColor: '#fff',
@@ -63,42 +61,42 @@ const descriptionStyle = {
 export function buildCreateApproveItem({ key, data, onClick }) {
   const title = getValueByKey({
     data: data,
-    key: fieldData.title.name,
+    key: fieldDataWorkflowCase.title.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const description = getValueByKey({
     data: data,
-    key: fieldData.description.name,
+    key: fieldDataWorkflowCase.description.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const userAvatar = getValueByKey({
     data: data,
-    key: fieldData.userAvatar.name,
+    key: fieldDataWorkflowCase.userAvatar.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const userRealName = getValueByKey({
     data: data,
-    key: fieldData.userRealName.name,
+    key: fieldDataWorkflowCase.userRealName.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const statusNote = getValueByKey({
     data: data,
-    key: fieldData.statusNote.name,
+    key: fieldDataWorkflowCase.statusNote.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const lastSubmitApprovalTime = getValueByKey({
     data: data,
-    key: fieldData.lastSubmitApprovalTime.name,
+    key: fieldDataWorkflowCase.lastSubmitApprovalTime.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
@@ -164,42 +162,42 @@ export function buildCreateApproveItem({ key, data, onClick }) {
 export function buildLatestApproveItem({ key, data, onClick }) {
   const title = getValueByKey({
     data: data,
-    key: fieldData.title.name,
+    key: fieldDataWorkflowCase.title.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const description = getValueByKey({
     data: data,
-    key: fieldData.description.name,
+    key: fieldDataWorkflowCase.description.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const userAvatar = getValueByKey({
     data: data,
-    key: fieldData.userAvatar.name,
+    key: fieldDataWorkflowCase.userAvatar.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const userRealName = getValueByKey({
     data: data,
-    key: fieldData.userRealName.name,
+    key: fieldDataWorkflowCase.userRealName.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const statusNote = getValueByKey({
     data: data,
-    key: fieldData.statusNote.name,
+    key: fieldDataWorkflowCase.statusNote.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const lastSubmitApprovalTime = getValueByKey({
     data: data,
-    key: fieldData.lastSubmitApprovalTime.name,
+    key: fieldDataWorkflowCase.lastSubmitApprovalTime.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
@@ -265,42 +263,42 @@ export function buildLatestApproveItem({ key, data, onClick }) {
 export function buildWaitApproveItem({ key, data, onClick }) {
   const title = getValueByKey({
     data: data,
-    key: fieldData.title.name,
+    key: fieldDataWorkflowCase.title.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const description = getValueByKey({
     data: data,
-    key: fieldData.description.name,
+    key: fieldDataWorkflowCase.description.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const userAvatar = getValueByKey({
     data: data,
-    key: fieldData.userAvatar.name,
+    key: fieldDataWorkflowCase.userAvatar.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const userRealName = getValueByKey({
     data: data,
-    key: fieldData.userRealName.name,
+    key: fieldDataWorkflowCase.userRealName.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const statusNote = getValueByKey({
     data: data,
-    key: fieldData.statusNote.name,
+    key: fieldDataWorkflowCase.statusNote.name,
     defaultValue: '',
     convert: convertCollection.string,
   });
 
   const lastSubmitApprovalTime = getValueByKey({
     data: data,
-    key: fieldData.lastSubmitApprovalTime.name,
+    key: fieldDataWorkflowCase.lastSubmitApprovalTime.name,
     defaultValue: '',
     convert: convertCollection.string,
   });

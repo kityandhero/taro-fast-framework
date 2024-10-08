@@ -44,7 +44,7 @@ import {
 } from 'taro-fast-component';
 import { DocumentPrintDesigner } from 'taro-fast-design-playground';
 
-import { PageWrapper } from '../../../../customComponents';
+import { PageNeedSignInWrapper } from '../../../../customComponents';
 import {
   emptySignet,
   fieldDataFlowFormDesign,
@@ -160,7 +160,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class Approve extends PageWrapper {
+class Approve extends PageNeedSignInWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;

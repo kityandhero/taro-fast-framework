@@ -1,15 +1,15 @@
 export const rootPathGeneralCollection = {
+  customer: {
+    path: '/pages/customer/main/index',
+  },
   entry: {
     path: '/pages/entry/main/index',
-  },
-  home: {
-    path: '/pages/home/main/index',
   },
   flowCase: {
     path: '/pages/flowCase/main/index',
   },
-  customer: {
-    path: '/pages/customer/main/index',
+  home: {
+    path: '/pages/home/main/index',
   },
 };
 
@@ -20,14 +20,8 @@ export const webPagePathGeneralCollection = {
 };
 
 export const customerPathGeneralCollection = {
-  signIn: {
-    path: '/customer/pages/signIn/main/index',
-  },
-  signInWithWeChat: {
-    path: '/customer/pages/signInWithWeChat/main/index',
-  },
-  resetPassword: {
-    path: '/customer/pages/resetPassword/main/index',
+  approve: {
+    path: '/customer/pages/approve/main/index',
   },
   changePassword: {
     path: '/customer/pages/changePassword/main/index',
@@ -35,7 +29,31 @@ export const customerPathGeneralCollection = {
   editInformation: {
     path: '/customer/pages/editInformation/main/index',
   },
-  approve: {
-    path: '/customer/pages/approve/main/index',
+  pageListCreateApprove: {
+    path: '/customer/pages/pageListCreateApprove/main/index',
+  },
+  pageListLatestApprove: {
+    path: '/customer/pages/pageListLatestApprove/main/index',
+  },
+  pageListWaitApprove: {
+    path: '/customer/pages/pageListWaitApprove/main/index',
+  },
+  resetPassword: {
+    path: '/customer/pages/resetPassword/main/index',
+  },
+  setAddress: {
+    path: '/customer/pages/setAddress/main/index',
+  },
+  setAvatar: {
+    path: '/customer/pages/setAvatar/main/index',
+  },
+  setBirthday: {
+    path: '/customer/pages/setBirthday/main/index',
+  },
+  signIn: {
+    path: '/customer/pages/signIn/main/index',
+  },
+  signInWithWeChat: {
+    path: '/customer/pages/signInWithWeChat/main/index',
   },
 };

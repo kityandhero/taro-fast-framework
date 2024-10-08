@@ -7,12 +7,13 @@ import {
   isFunction,
   logException,
   toNumber,
+  transparentImage,
 } from 'easy-soft-utility';
 
 import { getRect, transformSize } from 'taro-fast-common';
 
 import { BaseComponent } from '../BaseComponent';
-import { IconChevronRight } from '../Icon';
+import { Icon, IconChevronRight } from '../Icon';
 import { Line } from '../Line';
 
 import './index.less';
@@ -35,6 +36,7 @@ const defaultProps = {
   borderTopDistance: 0,
   borderColor: 'var(--tfc-border-color)',
   arrow: false,
+  arrowTransparent: false,
   arrowSize: 40,
   headerTopBottomPadding: -1,
   headerRightPadding: -1,
@@ -134,6 +136,7 @@ class Item extends BaseComponent {
       headerTopBottomPadding,
       headerRightPadding,
       arrow,
+      arrowTransparent,
       arrowSize,
       arrowColor,
       extra,
@@ -267,7 +270,11 @@ class Item extends BaseComponent {
 
             {arrow ? (
               <View className={`${classPrefix}-header-content-arrow`}>
-                <IconChevronRight size={arrowSize} color={arrowColor} />
+                {arrowTransparent ? (
+                  <Icon size={arrowSize} imageMode value={transparentImage} />
+                ) : (
+                  <IconChevronRight size={arrowSize} color={arrowColor} />
+                )}
               </View>
             ) : null}
           </View>

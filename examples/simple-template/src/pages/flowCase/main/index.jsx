@@ -2,19 +2,18 @@ import { CustomWrapper, View } from '@tarojs/components';
 import * as Taro from '@tarojs/taro';
 
 import { connect } from 'easy-soft-dva';
-import { navigateTo } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Line, Space, Tabs } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../customComponents';
-import { pathCollection, viewStyle } from '../../../customConfig';
+import { viewStyle } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
 import {
   buildCreateApproveItem,
   buildLatestApproveItem,
   buildWaitApproveItem,
-} from '../assist/tools';
+} from '../../../utils';
 
 const createApproveFlag = '6dff5474f77a4dfba4034f4b56e4eb96';
 const waitApproveFlag = 'c14bbdb2b6214288bdfe11a266a89b47';
@@ -140,10 +139,6 @@ class FlowCase extends PageWrapper {
       otherState: { metaListData: [] },
       delay: 500,
     });
-  };
-
-  goToApprove = (id) => {
-    navigateTo(`${pathCollection.customer.approve.path}?id=${id}`);
   };
 
   buildTab = () => {

@@ -19,7 +19,7 @@ import {
   // Space,
 } from 'taro-fast-component';
 
-import { PageWrapper } from '../../../../customComponents';
+import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { logoBlueImage, resetPasswordKeyBlue } from '../../../../customConfig';
 import { changePasswordAction } from '../assist/action';
 
@@ -41,7 +41,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class ChangePassword extends PageWrapper {
+class ChangePassword extends PageNeedSignInWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;

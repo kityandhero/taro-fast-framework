@@ -570,7 +570,6 @@ class Base extends Infrastructure {
 
             willSaveToState = {
               ...willSaveToState,
-
               loadSuccess: dataSuccess,
             };
 

@@ -3912,10 +3912,10 @@ class SupplementCore extends Common {
             );
 
             that.getCustomer({
-              successCallback: () => {
+              successCallback: (customerData) => {
                 if (isFunction(successCallback)) {
                   that.logFunctionCallTrace(
-                    { metaData },
+                    customerData,
                     primaryCallName,
                     'signInSilentCore',
                     'dispatchSignInSilent',
@@ -3939,7 +3939,7 @@ class SupplementCore extends Common {
                 }
 
                 that.logFunctionCallTrace(
-                  { metaData },
+                  customerData,
                   primaryCallName,
                   'signInSilentCore',
                   'dispatchSignInSilent',
@@ -3949,7 +3949,7 @@ class SupplementCore extends Common {
                   'doAfterGetCustomerOnSignInSilent',
                 );
 
-                that.doAfterGetCustomerOnSignInSilent(metaData);
+                that.doAfterGetCustomerOnSignInSilent(customerData);
 
                 that.logFunctionCallTrace(
                   { metaData },

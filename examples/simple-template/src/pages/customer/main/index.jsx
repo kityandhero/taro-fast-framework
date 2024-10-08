@@ -1,7 +1,7 @@
 import { CustomWrapper, View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
+import { checkStringIsNullOrWhiteSpace, logConsole } from 'easy-soft-utility';
 
 import {
   emptyAvatar,
@@ -81,6 +81,18 @@ class customer extends PageWrapper {
 
   doWorkAdjustDidMount = () => {
     this.buildCustomerData();
+  };
+
+  doWorkWhenRepeatedShow = () => {
+    this.buildCustomerData();
+  };
+
+  doAfterGetCustomerOnSignInSilent = (data) => {
+    logConsole(data);
+
+    this.setState({
+      currentCustomer: data,
+    });
   };
 
   buildCustomerData = () => {
@@ -309,16 +321,25 @@ class customer extends PageWrapper {
             {this.buildMenuItem({
               title: '我发起的',
               icon: addGreenImage,
+              onClick: () => {
+                this.goToPageListCreateApprove();
+              },
             })}
 
             {this.buildMenuItem({
               title: '待审批',
               icon: warnOrangeImage,
+              onClick: () => {
+                this.goToPageListWaitApprove();
+              },
             })}
 
             {this.buildMenuItem({
               title: '已结束',
               icon: listCheckBlueImage,
+              onClick: () => {
+                this.goToPageListLatestApprove();
+              },
             })}
 
             <Line transparent height={20} />
