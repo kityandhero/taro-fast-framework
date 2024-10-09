@@ -34,6 +34,7 @@ export const addGreenImage = `${filePrefix}1840418855730679808.png`;
 export const hexagonBlueImage = `${filePrefix}1840419175542165504.png`;
 export const boardOrangeImage = `${filePrefix}1840419392656117760.png`;
 export const noDataImage = `${filePrefix}1840537324228841472.png`;
+export const newMessageImage = `${filePrefix}1843823776698077184.png`;
 
 export const shareTransfer = {
   home: '0',

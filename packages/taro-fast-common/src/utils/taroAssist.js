@@ -6,8 +6,10 @@ import {
   getSetting as getSettingCore,
   getSystemInfoSync,
   hideNavigationBarLoading as hideNavigationBarLoadingCore,
+  navigateToMiniProgram as navigateToMiniProgramCore,
   offLocationChange as offGeographicalLocationChangeCore,
   onLocationChange as onGeographicalLocationChangeCore,
+  openChannelsLive as openChannelsLiveCore,
   openDocument as openDocumentCore,
   reLaunch as reLaunchCore,
   setClipboardData,
@@ -349,6 +351,14 @@ export function chooseImage({
     fail: failCallback,
     complete: completeCallback,
   });
+}
+
+export function navigateToMiniProgram(options) {
+  navigateToMiniProgramCore(options);
+}
+
+export function openChannelsLive(options) {
+  openChannelsLiveCore(options);
 }
 
 export {

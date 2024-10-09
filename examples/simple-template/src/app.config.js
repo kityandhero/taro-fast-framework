@@ -91,9 +91,9 @@ export default defineAppConfig({
     list: [
       {
         pagePath: 'pages/home/main/index',
-        iconPath: './assets/tab-bar/home.png',
-        selectedIconPath: './assets/tab-bar/home-active.png',
-        text: '首页',
+        iconPath: './assets/tab-bar/workbench.png',
+        selectedIconPath: './assets/tab-bar/workbench-active.png',
+        text: '工作台',
       },
       {
         pagePath: 'pages/flowCase/main/index',

@@ -3,6 +3,20 @@
     {
       "apis": [
         {
+          "title": "获取工作台整合数据",
+          "api": "/wechatApplication/workbench/getIntegration",
+          "effect": "getIntegration",
+          "service": "getIntegrationData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "工作台",
+      "name": "workbench"
+    },
+    {
+      "apis": [
+        {
           "title": "已创建流程实例分页列表",
           "api": "/wechatApplication/workflowCase/pageList",
           "effect": "pageList",

@@ -1,13 +1,12 @@
 import { CustomWrapper, View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { navigateTo } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Line, Space } from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
-import { pathCollection, viewStyle } from '../../../../customConfig';
+import { viewStyle } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { buildWaitApproveItem } from '../../../../utils';
 
@@ -41,12 +40,16 @@ class PageListWaitApprove extends PageNeedSignInWrapper {
 
     this.state = {
       ...this.state,
-      loadApiPath: modelTypeCollection.flowCaseTypeCollection.pageList,
+      loadApiPath:
+        modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove,
     };
   }
 
-  goToApprove = (id) => {
-    navigateTo(`${pathCollection.customer.approve.path}?id=${id}`);
+  doWorkWhenRepeatedShow = () => {
+    this.reloadData({
+      otherState: { metaListData: [] },
+      delay: 800,
+    });
   };
 
   buildListView = () => {
