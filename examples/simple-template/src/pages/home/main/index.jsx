@@ -35,6 +35,10 @@ definePageConfig({
   schedulingControl,
 }))
 class Home extends PageNeedSignInWrapper {
+  // showCallTrack = true;
+
+  // showCallTrace = true;
+
   viewStyle = {
     ...viewStyle,
     // backgroundColor: '#fff',
@@ -87,6 +91,10 @@ class Home extends PageNeedSignInWrapper {
     });
   };
 
+  doWorkWhenRepeatedShow = () => {
+    this.reloadData({});
+  };
+
   onShareAppMessage() {
     const o = {
       path: pathCollection.root.home.path,
@@ -132,13 +140,29 @@ class Home extends PageNeedSignInWrapper {
 
         <SwiperBox list={carouselList} />
 
-        <TitleBox title="最近待审批事项" />
+        <TitleBox
+          title="最近待审批事项"
+          onClick={() => {
+            this.goToPageListWaitApprove();
+          }}
+        />
 
-        <WaitApproveBox list={waitApproveFlowCaseList} />
+        <WaitApproveBox
+          list={waitApproveFlowCaseList}
+          onItemClick={this.goToApprove}
+        />
 
-        <TitleBox title="通知公告" />
+        <TitleBox
+          title="通知公告"
+          onClick={() => {
+            this.goToPageListNotice();
+          }}
+        />
 
-        <NotificationBox list={notificationList} />
+        <NotificationBox
+          list={notificationList}
+          onItemClick={this.goToNoticeDetail}
+        />
       </View>
     );
   }

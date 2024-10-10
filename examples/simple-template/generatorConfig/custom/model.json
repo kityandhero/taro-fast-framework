@@ -69,6 +69,27 @@
       "cover": true,
       "title": "审批相关",
       "name": "flowCase"
+    },
+    {
+      "apis": [
+        {
+          "title": "分页列表",
+          "api": "/wechatApplication/notice/pageList",
+          "effect": "pageList",
+          "service": "pageListData",
+          "type": "pageList"
+        },
+        {
+          "title": "获取详情",
+          "api": "/wechatApplication/notice/get",
+          "effect": "get",
+          "service": "getData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "通知公告",
+      "name": "notice"
     }
   ]
 }

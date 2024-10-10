@@ -19,6 +19,40 @@ class PageWrapperExtra extends PageWrapperCore {
   goToFlowCase = () => {
     navigateTo(pathCollection.root.flowCase.path);
   };
+
+  goToPageListCreateApprove = () => {
+    navigateTo({
+      url: pathCollection.customer.pageListCreateApprove.path,
+    });
+  };
+
+  goToPageListLatestApprove = () => {
+    navigateTo({
+      url: pathCollection.customer.pageListLatestApprove.path,
+    });
+  };
+
+  goToPageListWaitApprove = () => {
+    navigateTo({
+      url: pathCollection.customer.pageListWaitApprove.path,
+    });
+  };
+
+  goToApprove = (id) => {
+    navigateTo(`${pathCollection.customer.approve.path}?id=${id}`);
+  };
+
+  goToPageListNotice = () => {
+    navigateTo({
+      url: pathCollection.information.pageListNotice.path,
+    });
+  };
+
+  goToNoticeDetail = (id) => {
+    navigateTo(
+      `${pathCollection.information.noticeDetail.path}?noticeId=${id}`,
+    );
+  };
 }
 
 export { PageWrapperExtra };

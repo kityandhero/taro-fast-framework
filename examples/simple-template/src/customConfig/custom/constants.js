@@ -38,8 +38,8 @@ export const newMessageImage = `${filePrefix}1843823776698077184.png`;
 
 export const shareTransfer = {
   home: '0',
-  section: '10',
-  article: '20',
+  // section: '10',
+  // article: '20',
   webPage: '100',
 };
 

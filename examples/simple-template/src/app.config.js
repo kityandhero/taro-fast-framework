@@ -1,14 +1,10 @@
 // eslint-disable-next-line no-undef
 export default defineAppConfig({
   pages: [
-    'pages/entry/main/index',
-    'pages/home/main/index',
-    'pages/flowCase/main/index',
-    // 'pages/checkIn/main/index',
-    // 'pages/ask/main/index',
-    // 'pages/affair/main/index',
-    // 'pages/life/main/index',
     'pages/customer/main/index',
+    'pages/entry/main/index',
+    'pages/flowCase/main/index',
+    'pages/home/main/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -17,33 +13,18 @@ export default defineAppConfig({
     navigationBarTextStyle: 'white',
   },
   subpackages: [
-    // {
-    //   root: 'section',
-    //   name: '栏目',
-    //   pages: [
-    //     'pages/section/overview/index',
-    //     'pages/empty/main/index',
-    //     'pages/section/main/index',
-    //     'pages/section/pageList/index',
-    //     'pages/section/child/index',
-    //     'pages/media/main/index',
-    //     'pages/media/child/index',
-    //     'pages/media/content/index',
-    //     'pages/article/main/index',
-    //     'pages/discuss/main/index',
-    //     'pages/discuss/add/index',
-    //     'pages/search/main/index',
-    //     'pages/search/pageList/index',
-    //     'pages/contact/main/index',
-    //   ],
-    // },
+    {
+      root: 'information',
+      name: '信息',
+      pages: [
+        'pages/pageListNotice/main/index',
+        'pages/noticeDetail/main/index',
+      ],
+    },
     {
       root: 'webPage',
       name: '网页',
-      pages: [
-        'pages/general/main/index',
-        //  'pages/article/main/index',
-      ],
+      pages: ['pages/general/main/index'],
     },
     {
       root: 'customer',
@@ -64,12 +45,12 @@ export default defineAppConfig({
       ],
     },
   ],
-  // preloadRule: {
-  //   'pages/entry/main/index': {
-  //     network: 'all',
-  //     packages: ['section'],
-  //   },
-  // },
+  preloadRule: {
+    'pages/entry/main/index': {
+      network: 'all',
+      packages: ['information'],
+    },
+  },
   // permission: {
   //   'scope.userLocation': {
   //     desc: '你的位置信息将用于显示当地天气等信息。',

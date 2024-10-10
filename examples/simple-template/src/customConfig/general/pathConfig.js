@@ -1,15 +1,6 @@
 export const rootPathGeneralCollection = {
-  customer: {
-    path: '/pages/customer/main/index',
-  },
   entry: {
     path: '/pages/entry/main/index',
-  },
-  flowCase: {
-    path: '/pages/flowCase/main/index',
-  },
-  home: {
-    path: '/pages/home/main/index',
   },
 };
 
@@ -19,24 +10,14 @@ export const webPagePathGeneralCollection = {
   },
 };
 
+export const informationPathGeneralCollection = {};
+
 export const customerPathGeneralCollection = {
-  approve: {
-    path: '/customer/pages/approve/main/index',
-  },
   changePassword: {
     path: '/customer/pages/changePassword/main/index',
   },
   editInformation: {
     path: '/customer/pages/editInformation/main/index',
-  },
-  pageListCreateApprove: {
-    path: '/customer/pages/pageListCreateApprove/main/index',
-  },
-  pageListLatestApprove: {
-    path: '/customer/pages/pageListLatestApprove/main/index',
-  },
-  pageListWaitApprove: {
-    path: '/customer/pages/pageListWaitApprove/main/index',
   },
   resetPassword: {
     path: '/customer/pages/resetPassword/main/index',

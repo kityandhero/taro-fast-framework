@@ -548,7 +548,7 @@ function WaitApproveFlowCaseItem({ data, onClick = null }) {
   );
 }
 
-export function WaitApproveBox({ list = [] }) {
+export function WaitApproveBox({ list = [], onItemClick = null }) {
   return (
     <CustomWrapper>
       <View>
@@ -560,6 +560,13 @@ export function WaitApproveBox({ list = [] }) {
               <WaitApproveFlowCaseItem
                 key={`waitApprove_${workflowCaseId}`}
                 data={item}
+                onClick={() => {
+                  if (!isFunction(onItemClick)) {
+                    return;
+                  }
+
+                  onItemClick(workflowCaseId);
+                }}
               />
             );
           })}
@@ -709,7 +716,7 @@ export function NotificationItem({ data, onClick = null }) {
   );
 }
 
-export function NotificationBox({ list = [] }) {
+export function NotificationBox({ list = [], onItemClick = null }) {
   return (
     <CustomWrapper>
       <View>
@@ -717,7 +724,19 @@ export function NotificationBox({ list = [] }) {
           {list.map((item) => {
             const { id } = item;
 
-            return <NotificationItem key={`notification_${id}`} data={item} />;
+            return (
+              <NotificationItem
+                key={`notification_${id}`}
+                data={item}
+                onClick={() => {
+                  if (!isFunction(onItemClick)) {
+                    return;
+                  }
+
+                  onItemClick(id);
+                }}
+              />
+            );
           })}
         </Space>
       </View>
