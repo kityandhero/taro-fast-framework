@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
+import { isFunction } from 'easy-soft-utility';
+
 export function useMemoizedFunction(function_) {
   if (
     process.env.NODE_ENV === 'development' &&
@@ -46,7 +48,10 @@ export function usePropertiesValue(options) {
       stateReference.current = v;
       update();
     }
-    onChange?.(v);
+
+    if (isFunction(onChange)) {
+      onChange(v);
+    }
   });
   return [stateReference.current, setState];
 }

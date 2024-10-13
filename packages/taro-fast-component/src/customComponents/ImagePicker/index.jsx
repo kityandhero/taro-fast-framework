@@ -137,7 +137,7 @@ class ImagePicker extends Component {
       })
       .catch((error) => {
         if (isFunction(onFail)) {
-          onFail?.(error);
+          onFail(error);
         }
 
         return null;

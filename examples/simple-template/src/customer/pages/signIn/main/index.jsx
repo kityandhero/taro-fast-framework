@@ -54,6 +54,10 @@ class SignIn extends PageWrapper {
 
   password = '';
 
+  doAfterSignInSuccess = () => {
+    this.goToHomeTab();
+  };
+
   signInWithPhone = () => {
     this.signIn({
       data: {
@@ -200,6 +204,7 @@ class SignIn extends PageWrapper {
             weappButton
             text="登录"
             backgroundColor="#0075ff"
+            fontColor="#fff"
             fontSize={32}
             loading={registering || false}
             block

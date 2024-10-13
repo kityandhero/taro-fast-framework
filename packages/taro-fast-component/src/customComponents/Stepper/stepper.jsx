@@ -195,7 +195,10 @@ export const Stepper = (p) => {
           }}
           onFocus={(error) => {
             setHasFocus(true);
-            properties.onFocus?.(error);
+
+            if (isFunction(properties.onFocus)) {
+              properties.onFocus(error);
+            }
           }}
           value={inputValue}
           onChange={(v) => {
@@ -204,7 +207,10 @@ export const Stepper = (p) => {
           disabled={disabled || inputReadOnly}
           onBlur={(error) => {
             setHasFocus(false);
-            properties.onBlur?.(error);
+
+            if (isFunction(properties.onBlur)) {
+              properties.onBlur(error);
+            }
           }}
         />
       </View>

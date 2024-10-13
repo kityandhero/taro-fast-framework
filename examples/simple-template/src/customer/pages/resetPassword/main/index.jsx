@@ -379,6 +379,7 @@ class ResetPassword extends PageWrapper {
           weappButton
           text="下一步"
           backgroundColor="#0075ff"
+          fontColor="#fff"
           fontSize={32}
           // loading={ false}
           openType="getPhoneNumber"
@@ -468,6 +469,7 @@ class ResetPassword extends PageWrapper {
           weappButton
           text="立即重置"
           backgroundColor="#0075ff"
+          fontColor="#fff"
           fontSize={32}
           // loading={ false}
           openType="getPhoneNumber"

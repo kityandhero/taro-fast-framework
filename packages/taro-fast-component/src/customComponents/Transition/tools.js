@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { isObject } from 'easy-soft-utility';
+import { isFunction, isObject } from 'easy-soft-utility';
 
 import { AbstractComponent } from 'taro-fast-common';
 
@@ -80,9 +80,13 @@ export function useTransition({
     }
     transitionEnded.current = true;
     if (status.current === 'enter') {
-      onAfterEnter?.();
+      if (isFunction(onAfterEnter)) {
+        onAfterEnter();
+      }
     } else {
-      onAfterLeave?.();
+      if (isFunction(onAfterLeave)) {
+        onAfterLeave();
+      }
     }
 
     if (!show && display) {
@@ -99,14 +103,22 @@ export function useTransition({
       ? duration.enter
       : duration;
     status.current = 'enter';
+
     // this.$emit('before-enter')
-    onBeforeEnter?.();
+
+    if (isFunction(onBeforeEnter)) {
+      onBeforeEnter();
+    }
+
     requestAnimationFrame(() => {
       if (status.current !== 'enter') {
         return;
       }
 
-      onEnter?.();
+      if (isFunction(onEnter)) {
+        onEnter();
+      }
+
       setInitializationCompleted(true);
       setDisplay(true);
       setClasses(classNames.enter);
@@ -130,13 +142,21 @@ export function useTransition({
       ? duration.leave
       : duration;
     status.current = 'leave';
-    onBeforeLeave?.();
+
+    if (isFunction(onBeforeLeave)) {
+      onBeforeLeave();
+    }
+
     requestAnimationFrame(() => {
       if (status.current !== 'leave') {
         return;
       }
+
       // this.$emit('leave')
-      onLeave?.();
+      if (isFunction(onLeave)) {
+        onLeave();
+      }
+
       setClasses(classNames.leave);
       setCurrentDuration(currentDurationTemporary);
 
