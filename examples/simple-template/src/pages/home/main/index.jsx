@@ -9,9 +9,9 @@ import { Line } from 'taro-fast-component';
 import { PageNeedSignInWrapper } from '../../../customComponents/general';
 import { pathCollection, viewStyle } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
+import { HeadNavigationBox } from '../../../utils';
 import {
   GridBox,
-  HeadNavigationBox,
   NoticeBox,
   NotificationBox,
   SearchBox,
@@ -42,8 +42,8 @@ class Home extends PageNeedSignInWrapper {
   viewStyle = {
     ...viewStyle,
     // backgroundColor: '#fff',
-    paddingLeft: transformSize(24),
-    paddingRight: transformSize(24),
+    paddingLeft: transformSize(12),
+    paddingRight: transformSize(12),
   };
 
   constructor(properties) {
@@ -111,7 +111,7 @@ class Home extends PageNeedSignInWrapper {
       ...currentCustomer,
     };
 
-    return <HeadNavigationBox name={subsidiaryName} />;
+    return <HeadNavigationBox title={subsidiaryName} titleBold arrow />;
   };
 
   renderFurther() {

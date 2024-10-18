@@ -4,7 +4,11 @@ import * as Taro from '@tarojs/taro';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Line, Space, Tabs } from 'taro-fast-component';
+import {
+  // Line,
+  Space,
+  Tabs,
+} from 'taro-fast-component';
 
 import { PageWrapper } from '../../../customComponents';
 import { viewStyle } from '../../../customConfig';
@@ -13,58 +17,51 @@ import {
   buildCreateApproveItem,
   buildLatestApproveItem,
   buildWaitApproveItem,
+  HeadNavigationBox,
 } from '../../../utils';
 
 const createApproveFlag = '6dff5474f77a4dfba4034f4b56e4eb96';
 const waitApproveFlag = 'c14bbdb2b6214288bdfe11a266a89b47';
 const latestApproveFlag = 'eb15add13d584a459d00423c373613b5';
 
+const createApproveTab = {
+  key: createApproveFlag,
+  title: '已发起',
+};
+
+const waitApproveTab = {
+  key: waitApproveFlag,
+  title: '待审批',
+};
+
+const latestApproveTab = {
+  key: latestApproveFlag,
+  title: '已审批',
+};
+
 const tabCollection = [
-  {
-    key: createApproveFlag,
-    title: '已发起',
-  },
-  {
-    key: waitApproveFlag,
-    title: '待审批',
-  },
-  {
-    key: latestApproveFlag,
-    title: '已审批',
-  },
+  // {
+  //   key: createApproveFlag,
+  //   title: '已发起',
+  // },
+  waitApproveTab,
+  latestApproveTab,
 ];
 
 function getTabIndex(key) {
-  let result = 0;
-
-  switch (key) {
-    case createApproveFlag: {
-      result = 0;
-      break;
-    }
-    case waitApproveFlag: {
-      result = 1;
-      break;
-    }
-
-    case latestApproveFlag: {
-      result = 2;
-      break;
-    }
-
-    default: {
-      result = 0;
-      break;
+  for (const [index, { key: itemKey }] of tabCollection.entries()) {
+    if (itemKey === key) {
+      return index;
     }
   }
 
-  return result;
+  return 0;
 }
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '审批',
-  // navigationStyle: 'custom',
+  navigationBarTitleText: '事项审批',
+  navigationStyle: 'custom',
 });
 
 @connect(({ flowCase, session, entrance, global, schedulingControl }) => ({
@@ -81,12 +78,13 @@ class FlowCase extends PageWrapper {
 
   viewStyle = {
     ...viewStyle,
+    backgroundColor: '#f6f6f6',
     paddingBottom: transformSize(20),
   };
 
   enableBackTop = true;
 
-  initialTabIndex = 0;
+  tabKey = waitApproveTab.key;
 
   tabList = tabCollection;
 
@@ -102,17 +100,17 @@ class FlowCase extends PageWrapper {
   adjustLoadApiPath = () => {
     let api = '';
 
-    switch (this.initialTabIndex) {
-      case 0: {
+    switch (this.tabKey) {
+      case createApproveTab.key: {
         api = modelTypeCollection.flowCaseTypeCollection.pageList;
         break;
       }
-      case 1: {
+      case waitApproveTab.key: {
         api = modelTypeCollection.flowCaseTypeCollection.pageListWaitApprove;
         break;
       }
 
-      case 2: {
+      case latestApproveTab.key: {
         api = modelTypeCollection.flowCaseTypeCollection.pageListLatestApprove;
         break;
       }
@@ -129,7 +127,7 @@ class FlowCase extends PageWrapper {
   triggerTabClick = (index, event, item) => {
     const { key, title } = item;
 
-    this.initialTabIndex = getTabIndex(key);
+    this.tabKey = key;
 
     Taro.setNavigationBarTitle({
       title: title,
@@ -141,26 +139,31 @@ class FlowCase extends PageWrapper {
     });
   };
 
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="事项审批" />;
+  };
+
   buildTab = () => {
     return (
       <View
         style={{
-          paddingLeft: transformSize(12),
-          paddingRight: transformSize(12),
+          // paddingLeft: transformSize(12),
+          // paddingRight: transformSize(12),
           backgroundColor: '#ffffff',
         }}
       >
         <CustomWrapper>
           <Tabs
-            current={this.initialTabIndex}
-            scroll
+            current={getTabIndex(this.tabKey)}
+            // scroll
             titleActiveStyle={{
               color: '#0171fa',
               fontWight: '600',
             }}
             underlineActiveColor="#0171fa"
             underlineHorizontalHeight={4}
-            underlineHorizontalMargin={20}
+            underlineHorizontalMargin={120}
+            headerBackgroundColor="#f6f6f6"
             tabList={this.tabList}
             onClick={this.triggerTabClick}
           />
@@ -174,13 +177,15 @@ class FlowCase extends PageWrapper {
 
     return (
       <CustomWrapper>
-        <Line transparent height={16} />
+        {/* <Line transparent height={16} /> */}
 
         <View
-          style={{
-            paddingLeft: transformSize(20),
-            paddingRight: transformSize(20),
-          }}
+          style={
+            {
+              // paddingLeft: transformSize(20),
+              // paddingRight: transformSize(20),
+            }
+          }
         >
           <Space
             direction="vertical"
@@ -191,7 +196,7 @@ class FlowCase extends PageWrapper {
             {metaListData.map((item) => {
               const { workflowCaseId } = item;
 
-              if (this.initialTabIndex === 0) {
+              if (this.tabKey === createApproveTab.key) {
                 return buildCreateApproveItem({
                   key: `waitApprove_${workflowCaseId}`,
                   data: item,
@@ -201,7 +206,7 @@ class FlowCase extends PageWrapper {
                 });
               }
 
-              if (this.initialTabIndex === 1) {
+              if (this.tabKey === waitApproveTab.key) {
                 return buildWaitApproveItem({
                   key: `waitApprove_${workflowCaseId}`,
                   data: item,

@@ -20,8 +20,8 @@ import { fieldDataWorkflowCase, userGreyImage } from '../../../customConfig';
 
 const commonBoxStyle = {
   backgroundColor: '#fff',
-  borderWidth: transformSize(1),
-  borderRadius: transformSize(16),
+  // borderWidth: transformSize(1),
+  // borderRadius: transformSize(16),
   overflow: 'hidden',
   paddingTop: transformSize(12),
   paddingLeft: transformSize(16),

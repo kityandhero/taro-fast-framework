@@ -5,6 +5,7 @@ import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   convertCollection,
+  datetimeFormat,
   formatDatetime,
   getValueByKey,
   isArray,
@@ -13,6 +14,7 @@ import {
   showSimpleErrorMessage,
   showSimpleWarnMessage,
   showSuccessNotification,
+  toDatetime,
   whetherNumber,
   zeroInt,
 } from 'easy-soft-utility';
@@ -38,7 +40,7 @@ import {
   Line,
   MultiLineText,
   Space,
-  // Steps,
+  Steps,
   Tag,
   VerticalBox,
 } from 'taro-fast-component';
@@ -56,6 +58,7 @@ import {
   viewStyle,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
+import { HeadNavigationBox } from '../../../../utils';
 import {
   passAction,
   refuseAction,
@@ -65,13 +68,13 @@ import { buildListApprove, buildListHistory } from '../assist/tools';
 import { fieldData } from '../common/data';
 import { SubmitModal } from '../submitModal';
 
-const stripTopValue = 22;
-const stripHeightValue = 26;
+const stripTopValue = 24;
+const stripHeightValue = 32;
 
 const headerStyle = {
   color: '#181818',
   fontSize: transformSize(32),
-  lineHeight: transformSize(38),
+  lineHeight: transformSize(46),
   fontWeight: 'bold',
   paddingLeft: transformSize(26),
   paddingRight: transformSize(26),
@@ -90,31 +93,32 @@ const descriptionStyle = {
   paddingBottom: transformSize(10),
 };
 
-// const formTitleStyle = {
-//   marginBottom: transformSize(10),
-// };
+const formTitleStyle = {
+  fontSize: transformSize(30),
+  marginBottom: transformSize(10),
+};
 
-// const formValueStyle = {
-//   marginBottom: transformSize(8),
-//   fontWeight: 'bold',
-// };
+const formValueStyle = {
+  marginBottom: transformSize(8),
+  fontWeight: 'bold',
+};
 
-// const approveTitleStyle = {
-//   fontSize: transformSize(28),
-//   fontWeight: 'bold',
-// };
+const approveTitleStyle = {
+  fontSize: transformSize(28),
+  fontWeight: 'bold',
+};
 
-// const approveNoteStyle = {
-//   fontSize: transformSize(28),
-// };
+const approveNoteStyle = {
+  fontSize: transformSize(28),
+};
 
-// const approveSignetStyle = {
-//   width: transformSize(200),
-// };
+const approveSignetStyle = {
+  width: transformSize(200),
+};
 
-// const approveTimeStyle = {
-//   paddingBottom: transformSize(10),
-// };
+const approveTimeStyle = {
+  paddingBottom: transformSize(10),
+};
 
 const attachmentBoxStyle = {
   paddingTop: transformSize(16),
@@ -135,22 +139,24 @@ const historyBoxStyle = {
 };
 
 const historyBoxItemStyle = {
-  paddingTop: transformSize(6),
-  paddingBottom: transformSize(6),
+  paddingTop: transformSize(8),
+  paddingBottom: transformSize(8),
 };
 
 const historyTitleStyle = {
+  fontSize: transformSize(32),
   // paddingBottom: transformSize(10),
 };
 
 const historyValueStyle = {
+  fontSize: transformSize(32),
   // width: transformSize(46),
 };
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '用户中心',
-  // navigationStyle: 'custom',
+  navigationBarTitleText: '事项审批',
+  navigationStyle: 'custom',
 });
 
 @connect(({ flowCase, session, entrance, global, schedulingControl }) => ({
@@ -183,7 +189,7 @@ class Approve extends PageNeedSignInWrapper {
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
       workflowFormDesign: {},
       listFormStorage: [],
-      // formItemList: [],
+      formItemList: [],
       listApprove: [],
       listHistory: [],
       listAttachment: [],
@@ -191,6 +197,7 @@ class Approve extends PageNeedSignInWrapper {
       canApprove: whetherNumber.no,
       existAttachment: whetherNumber.no,
       approveComplete: whetherNumber.no,
+      useDocumentView: whetherNumber.no,
     };
   }
 
@@ -215,12 +222,12 @@ class Approve extends PageNeedSignInWrapper {
     // eslint-disable-next-line no-unused-vars
     metaOriginalData = null,
   }) => {
-    // const workflowCaseId = getValueByKey({
-    //   data: metaData,
-    //   key: fieldData.workflowCaseId.name,
-    //   defaultValue: '',
-    //   convert: convertCollection.string,
-    // });
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldData.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
 
     const canEdit = getValueByKey({
       data: metaData,
@@ -264,9 +271,41 @@ class Approve extends PageNeedSignInWrapper {
       key: fieldData.listFormStorage.name,
       convert: convertCollection.array,
     }).map((o) => {
-      const { nameNote: title, name, value } = o;
+      const { nameNote: title, name, value, displayValue, valueType } = o;
 
-      return { title, name, value };
+      let displayValueAdjust = displayValue;
+
+      if (valueType === 500) {
+        try {
+          const vList = JSON.parse(displayValue);
+
+          if (isArray(vList) && vList.length === 2) {
+            const vListAdjust = vList.map((one) => {
+              try {
+                return formatDatetime({
+                  data: toDatetime(one),
+                  format: datetimeFormat.yearMonthDayHourMinute,
+                });
+              } catch {
+                return one;
+              }
+            });
+
+            displayValueAdjust = vListAdjust.join(' ~ ');
+          } else {
+            displayValueAdjust = displayValue;
+          }
+        } catch {
+          displayValueAdjust = displayValue;
+        }
+      }
+
+      return {
+        title,
+        name,
+        value,
+        displayValue: displayValueAdjust,
+      };
     });
 
     const nextApproveWorkflowNode = getValueByKey({
@@ -298,13 +337,14 @@ class Approve extends PageNeedSignInWrapper {
 
     const existAttachment = listAttachment.length > 0;
 
-    // const formItemList = [
-    //   {
-    //     title: '编号',
-    //     value: workflowCaseId,
-    //   },
-    //   ...listFormStorage,
-    // ];
+    const formItemList = [
+      {
+        title: '编号',
+        value: workflowCaseId,
+        displayValue: workflowCaseId,
+      },
+      ...listFormStorage,
+    ];
 
     const listApprove = buildListApprove({
       listChainApprove,
@@ -321,7 +361,7 @@ class Approve extends PageNeedSignInWrapper {
       canApprove,
       workflowFormDesign: workflowFormDesign || {},
       listFormStorage: [...listFormStorage],
-      // formItemList: [...formItemList],
+      formItemList: [...formItemList],
       listApprove: [...listApprove],
       listHistory: [...listHistory],
       listAttachment: [...listAttachment],
@@ -613,12 +653,16 @@ class Approve extends PageNeedSignInWrapper {
     downloadFileAndOpen({
       url: attachment,
       successCallback: () => {
-        that.bannerNotify({
+        that.notifyMessage({
           message: '下载成功',
           type: 'success',
         });
       },
     });
+  };
+
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="审批详情" />;
   };
 
   buildTitleBox = () => {
@@ -730,9 +774,10 @@ class Approve extends PageNeedSignInWrapper {
 
   buildFormBox = () => {
     const {
+      useDocumentView,
       metaData,
       listFormStorage,
-      // formItemList,
+      formItemList,
       listApprove,
       listChainApprove,
     } = this.state;
@@ -761,175 +806,177 @@ class Approve extends PageNeedSignInWrapper {
 
     return (
       <Card bodyStyle={bodyStyle} border={false} bodyBorder={false}>
-        {/* <Space direction="vertical" size={26} fillWidth>
-          {formItemList.map((o, index) => {
-            const { title, value } = o;
+        {useDocumentView === whetherNumber.no ? (
+          <Space direction="vertical" size={26} fillWidth>
+            {formItemList.map((o, index) => {
+              const { title, displayValue } = o;
 
-            return (
-              <FlexBox
-                key={`form_item_${index}`}
-                style={{ width: '100%' }}
-                flexAuto="right"
-                leftStyle={{
-                  marginRight: transformSize(22),
-                }}
-                left={
-                  <VerticalBox align="top" alignJustify="center">
-                    <View style={formTitleStyle}>{title}: </View>
-                  </VerticalBox>
-                }
-                right={
-                  <View style={{ width: '100%' }}>
-                    <MultiLineText
-                      style={formValueStyle}
-                      fontSize={26}
-                      lineHeight={36}
-                      text={value}
-                    />
+              return (
+                <FlexBox
+                  key={`form_item_${index}`}
+                  style={{ width: '100%' }}
+                  flexAuto="right"
+                  leftStyle={{
+                    marginRight: transformSize(22),
+                  }}
+                  left={
+                    <VerticalBox align="top" alignJustify="center">
+                      <View style={formTitleStyle}>{title}: </View>
+                    </VerticalBox>
+                  }
+                  right={
+                    <View style={{ width: '100%' }}>
+                      <MultiLineText
+                        style={formValueStyle}
+                        fontSize={30}
+                        lineHeight={40}
+                        text={displayValue}
+                      />
 
-                    <Line color="#eee" height={2} />
-                  </View>
-                }
-              />
-            );
-          })}
-        </Space> */}
-
-        <DocumentPrintDesigner
-          title={getValueByKey({
-            data: metaData,
-            key: fieldData.workflowName.name,
-          })}
-          schema={{
-            general,
-            items,
-          }}
-          borderColor="#999"
-          values={listFormStorage}
-          showApply={showApply}
-          applyList={listApply}
-          showAttention={showAttention}
-          attentionList={listAttention}
-          approveList={isArray(listApprove) ? listApprove : []}
-          allApproveProcessList={listChainApprove}
-          signetStyle={{
-            top: transformSize(-2),
-          }}
-          remarkTitle="备注"
-          remarkName="remark"
-          remarkList={remarkSchemaList}
-          showQRCode
-          qRCodeImage={qRCodeImage}
-          qRCodeHeight={60}
-          showSerialNumber
-          serialNumberTitle="审批流水号: "
-          serialNumberContent={workflowCaseId}
-        />
+                      <Line color="#eee" height={2} />
+                    </View>
+                  }
+                />
+              );
+            })}
+          </Space>
+        ) : (
+          <DocumentPrintDesigner
+            title={getValueByKey({
+              data: metaData,
+              key: fieldData.workflowName.name,
+            })}
+            schema={{
+              general,
+              items,
+            }}
+            borderColor="#999"
+            values={listFormStorage}
+            showApply={showApply}
+            applyList={listApply}
+            showAttention={showAttention}
+            attentionList={listAttention}
+            approveList={isArray(listApprove) ? listApprove : []}
+            allApproveProcessList={listChainApprove}
+            signetStyle={{
+              top: transformSize(-2),
+            }}
+            remarkTitle="备注"
+            remarkName="remark"
+            remarkList={remarkSchemaList}
+            showQRCode
+            qRCodeImage={qRCodeImage}
+            qRCodeHeight={60}
+            showSerialNumber
+            serialNumberTitle="审批流水号: "
+            serialNumberContent={workflowCaseId}
+          />
+        )}
       </Card>
     );
   };
 
-  // buildProcessBox = () => {
-  //   const { listApprove } = this.state;
+  buildProcessBox = () => {
+    const { listApprove } = this.state;
 
-  //   if (!this.judgeDisplayHistory()) {
-  //     return null;
-  //   }
+    if (!this.judgeDisplayHistory()) {
+      return null;
+    }
 
-  //   return (
-  //     <Card
-  //       header="进度"
-  //       headerStyle={headerStyle}
-  //       bodyStyle={{ ...bodyStyle }}
-  //       space={false}
-  //       border={false}
-  //       headerEllipsis={false}
-  //       stripCenter={false}
-  //       stripTop={stripTopValue}
-  //       stripHeight={stripHeightValue}
-  //       strip
-  //       stripColor="#0075fe"
-  //       extra={<IconCalendar size={36} color="#888" />}
-  //     >
-  //       <Steps
-  //         direction="vertical"
-  //         current={1}
-  //         titleFontSize={28}
-  //         descriptionFontSize={26}
-  //         indicatorMarginRight={12}
-  //         iconSize={20}
-  //         style={{
-  //           paddingTop: transformSize(16),
-  //           paddingRight: 0,
-  //           paddingBottom: 0,
-  //           paddingLeft: 0,
-  //         }}
-  //         itemStyle={{
-  //           paddingBottom: transformSize(12),
-  //         }}
-  //         list={listApprove}
-  //         titleBuilder={(o) => {
-  //           const { title } = o;
+    return (
+      <Card
+        header="进度"
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+        extra={<IconCalendar size={36} color="#888" />}
+      >
+        <Steps
+          direction="vertical"
+          current={1}
+          titleFontSize={28}
+          descriptionFontSize={26}
+          indicatorMarginRight={12}
+          iconSize={20}
+          style={{
+            paddingTop: transformSize(16),
+            paddingRight: 0,
+            paddingBottom: 0,
+            paddingLeft: 0,
+          }}
+          itemStyle={{
+            paddingBottom: transformSize(12),
+          }}
+          list={listApprove}
+          titleBuilder={(o) => {
+            const { title } = o;
 
-  //           return <View style={approveTitleStyle}>{title}:</View>;
-  //         }}
-  //         descriptionBuilder={(o) => {
-  //           const { note, signet, time, status } = o;
+            return <View style={approveTitleStyle}>{title}:</View>;
+          }}
+          descriptionBuilder={(o) => {
+            const { note, signet, time, status } = o;
 
-  //           if (checkInCollection(['wait', 'process'], status)) {
-  //             return null;
-  //           }
+            if (checkInCollection(['wait', 'process'], status)) {
+              return null;
+            }
 
-  //           return (
-  //             <>
-  //               <Line transparent height={10} />
+            return (
+              <>
+                <Line transparent height={10} />
 
-  //               <View style={approveNoteStyle}>{note}</View>
+                <View style={approveNoteStyle}>{note}</View>
 
-  //               <Line transparent height={16} />
+                <Line transparent height={16} />
 
-  //               <FlexBox
-  //                 flexAuto="left"
-  //                 left={<View></View>}
-  //                 right={
-  //                   <View>
-  //                     <FlexBox
-  //                       style={{ width: '100%' }}
-  //                       flexAuto="right"
-  //                       leftStyle={{
-  //                         marginRight: transformSize(12),
-  //                       }}
-  //                       left={
-  //                         <View style={approveSignetStyle}>
-  //                           <ImageBox aspectRatio={0.353} src={signet} />
-  //                         </View>
-  //                       }
-  //                       right={
-  //                         <VerticalBox align="bottom" alignJustify="center">
-  //                           <View style={approveTimeStyle}>
-  //                             <ColorText
-  //                               color="#7d7d7d"
-  //                               fontSize={26}
-  //                               text={time}
-  //                             />
-  //                           </View>
-  //                         </VerticalBox>
-  //                       }
-  //                     />
-  //                   </View>
-  //                 }
-  //               />
+                <FlexBox
+                  flexAuto="left"
+                  left={<View></View>}
+                  right={
+                    <View>
+                      <FlexBox
+                        style={{ width: '100%' }}
+                        flexAuto="right"
+                        leftStyle={{
+                          marginRight: transformSize(12),
+                        }}
+                        left={
+                          <View style={approveSignetStyle}>
+                            <ImageBox aspectRatio={0.353} src={signet} />
+                          </View>
+                        }
+                        right={
+                          <VerticalBox align="bottom" alignJustify="center">
+                            <View style={approveTimeStyle}>
+                              <ColorText
+                                color="#7d7d7d"
+                                fontSize={26}
+                                text={time}
+                              />
+                            </View>
+                          </VerticalBox>
+                        }
+                      />
+                    </View>
+                  }
+                />
 
-  //               <Line transparent height={10} />
+                <Line transparent height={10} />
 
-  //               <Line color="#eee" height={2} />
-  //             </>
-  //           );
-  //         }}
-  //       />
-  //     </Card>
-  //   );
-  // };
+                <Line color="#eee" height={2} />
+              </>
+            );
+          }}
+        />
+      </Card>
+    );
+  };
 
   buildAttachmentBox = () => {
     const { existAttachment, listAttachment } = this.state;
@@ -1233,9 +1280,7 @@ class Approve extends PageNeedSignInWrapper {
       return null;
     }
 
-    return <Line color="#000" height={290} />;
-
-    // return <Line transparent height={18} />;
+    return <Line transparent height={350} />;
   };
 
   buildActionBox = () => {
@@ -1268,6 +1313,8 @@ class Approve extends PageNeedSignInWrapper {
                 }}
               />
             </View>
+
+            <Line transparent height={60} />
           </View>
         </>
       );
@@ -1420,7 +1467,7 @@ class Approve extends PageNeedSignInWrapper {
   };
 
   renderFurther() {
-    const { metaData } = this.state;
+    const { useDocumentView, metaData } = this.state;
 
     return (
       <View>
@@ -1450,7 +1497,9 @@ class Approve extends PageNeedSignInWrapper {
 
                 {this.buildAttachmentBox()}
 
-                {/* {this.buildProcessBox()} */}
+                {useDocumentView === whetherNumber.no
+                  ? this.buildProcessBox()
+                  : null}
 
                 {this.buildHistoryBox()}
 

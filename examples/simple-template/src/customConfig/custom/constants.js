@@ -44,7 +44,8 @@ export const shareTransfer = {
 };
 
 export const viewStyle = {
-  backgroundColor: '#f1f1f1',
+  backgroundColor: '#fcfbfc',
+  // backgroundColor: '#f1f1f1',
 };
 
 export const colStyle = {

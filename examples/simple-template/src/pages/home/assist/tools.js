@@ -22,7 +22,6 @@ import {
   Ellipsis,
   FlexBox,
   Grid,
-  HeadNavigation,
   ImageBox,
   Line,
   MultiLineText,
@@ -34,7 +33,6 @@ import {
 } from 'taro-fast-component';
 
 import {
-  arrowDownGreyImage,
   arrowRightGreyImage,
   fieldDataWorkflowCase,
   newMessageImage,
@@ -67,44 +65,6 @@ const gridNameStyle = {
   marginTop: transformSize(4),
   color: '#333',
 };
-
-export function HeadNavigationBox({ name = '' }) {
-  return (
-    <HeadNavigation
-      style={{
-        overflow: 'hidden',
-      }}
-      backboardStyle={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#fff',
-      }}
-    >
-      <FlexBox
-        flexAuto="right"
-        leftStyle={{
-          paddingLeft: transformSize(20),
-          paddingRight: transformSize(16),
-        }}
-        left={
-          <ColorText
-            color="#323232"
-            fontSize={34}
-            text={name || '无归属企业'}
-            style={{ fontWeight: 'bold' }}
-          />
-        }
-        right={
-          <VerticalBox>
-            <View style={{ width: transformSize(30) }}>
-              <ImageBox src={arrowDownGreyImage} />
-            </View>
-          </VerticalBox>
-        }
-      />
-    </HeadNavigation>
-  );
-}
 
 export function SearchBox() {
   return (

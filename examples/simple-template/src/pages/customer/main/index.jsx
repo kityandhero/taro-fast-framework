@@ -32,6 +32,7 @@ import {
   viewStyle,
   warnOrangeImage,
 } from '../../../customConfig';
+import { HeadNavigationBox } from '../../../utils';
 
 export const classPrefix = `root-customer`;
 
@@ -47,7 +48,7 @@ const menuTitleStyle = {
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '用户中心',
-  // navigationStyle: 'custom',
+  navigationStyle: 'custom',
 });
 
 @connect(({ customer, session, entrance, global, schedulingControl }) => ({
@@ -65,8 +66,8 @@ class customer extends PageWrapper {
   viewStyle = {
     ...viewStyle,
     backgroundColor: '#fff',
-    paddingLeft: transformSize(28),
-    paddingRight: transformSize(28),
+    // paddingLeft: transformSize(28),
+    // paddingRight: transformSize(28),
   };
 
   constructor(properties) {
@@ -115,6 +116,10 @@ class customer extends PageWrapper {
     }
   };
 
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="个人中心" />;
+  };
+
   buildTopInfoBox = () => {
     const { currentCustomer } = this.state;
 
@@ -142,127 +147,135 @@ class customer extends PageWrapper {
 
     return (
       <CustomWrapper>
-        <FlexBox
-          style={{ width: '100%' }}
-          flexAuto="right"
-          leftStyle={{
-            marginRight: transformSize(24),
+        <Line transparent height={10} />
+        <View
+          style={{
+            paddingLeft: transformSize(28),
+            paddingRight: transformSize(28),
           }}
-          left={
-            <View
-              style={{
-                width: transformSize(140),
-                borderRadius: transformSize(10),
-                backgroundColor: '#fff',
-              }}
-              onClick={() => {
-                if (!signInSuccess) {
-                  this.goToSignIn();
-                }
-              }}
-            >
-              <ImageBox
-                src={avatar || emptyAvatar}
-                circle
-                imageBoxStyle={{
+        >
+          <FlexBox
+            style={{ width: '100%' }}
+            flexAuto="right"
+            leftStyle={{
+              marginRight: transformSize(24),
+            }}
+            left={
+              <View
+                style={{
+                  width: transformSize(140),
+                  borderRadius: transformSize(10),
                   backgroundColor: '#fff',
                 }}
-                errorImage={emptyAvatar}
-              />
-            </View>
-          }
-          right={
-            <FlexBox
-              style={{ width: '100%', height: '100%' }}
-              flexAuto="left"
-              left={
-                <>
-                  <Row
-                    direction={flexDirectionCollection.column}
-                    justify={flexJustifyCollection.between}
-                  >
-                    <Col
-                      style={{
-                        paddingLeft: transformSize(10),
-                        paddingRight: transformSize(10),
-                        paddingTop: transformSize(5),
-                        paddingBottom: transformSize(5),
-                      }}
+                onClick={() => {
+                  if (!signInSuccess) {
+                    this.goToSignIn();
+                  }
+                }}
+              >
+                <ImageBox
+                  src={avatar || emptyAvatar}
+                  circle
+                  imageBoxStyle={{
+                    backgroundColor: '#fff',
+                  }}
+                  errorImage={emptyAvatar}
+                />
+              </View>
+            }
+            right={
+              <FlexBox
+                style={{ width: '100%', height: '100%' }}
+                flexAuto="left"
+                left={
+                  <>
+                    <Row
+                      direction={flexDirectionCollection.column}
+                      justify={flexJustifyCollection.between}
                     >
-                      <ColorText
-                        color="#080808"
-                        fontSize={32}
+                      <Col
                         style={{
-                          fontWeight: 'bold',
+                          paddingLeft: transformSize(10),
+                          paddingRight: transformSize(10),
+                          paddingTop: transformSize(5),
+                          paddingBottom: transformSize(5),
                         }}
-                        text={signInSuccess ? name : `点击登录`}
-                      />
-                    </Col>
+                      >
+                        <ColorText
+                          color="#080808"
+                          fontSize={32}
+                          style={{
+                            fontWeight: 'bold',
+                          }}
+                          text={signInSuccess ? name : `点击登录`}
+                        />
+                      </Col>
 
-                    <Col>
-                      <FlexBox
-                        flexAuto="right"
-                        left={
-                          <View
-                            style={{
-                              backgroundColor: '#ecf4ff',
-                              paddingLeft: transformSize(16),
-                              paddingRight: transformSize(16),
-                              paddingTop: transformSize(5),
-                              paddingBottom: transformSize(5),
-                              marginTop: transformSize(4),
-                              marginBottom: transformSize(4),
-                            }}
-                          >
-                            <ColorText
-                              color="#3a6292"
-                              fontSize={28}
-                              text={
-                                signInSuccess
-                                  ? departmentPosition.join(' - ')
-                                  : `登录后显示`
-                              }
-                            />
-                          </View>
-                        }
-                        right={<View />}
-                      />
-                    </Col>
+                      <Col>
+                        <FlexBox
+                          flexAuto="right"
+                          left={
+                            <View
+                              style={{
+                                backgroundColor: '#ecf4ff',
+                                paddingLeft: transformSize(16),
+                                paddingRight: transformSize(16),
+                                paddingTop: transformSize(5),
+                                paddingBottom: transformSize(5),
+                                marginTop: transformSize(4),
+                                marginBottom: transformSize(4),
+                              }}
+                            >
+                              <ColorText
+                                color="#3a6292"
+                                fontSize={28}
+                                text={
+                                  signInSuccess
+                                    ? departmentPosition.join(' - ')
+                                    : `登录后显示`
+                                }
+                              />
+                            </View>
+                          }
+                          right={<View />}
+                        />
+                      </Col>
 
-                    <Col
+                      <Col
+                        style={{
+                          paddingLeft: transformSize(10),
+                          paddingRight: transformSize(10),
+                          paddingTop: transformSize(5),
+                          paddingBottom: transformSize(5),
+                        }}
+                      >
+                        <ColorText
+                          color="#080808"
+                          fontSize={32}
+                          text={signInSuccess ? subsidiaryName : `登录后显示`}
+                        />
+                      </Col>
+                    </Row>
+                  </>
+                }
+                right={
+                  <VerticalBox>
+                    <View
                       style={{
-                        paddingLeft: transformSize(10),
-                        paddingRight: transformSize(10),
-                        paddingTop: transformSize(5),
-                        paddingBottom: transformSize(5),
+                        width: transformSize(48),
+                      }}
+                      onClick={() => {
+                        this.goToEditInformation();
                       }}
                     >
-                      <ColorText
-                        color="#080808"
-                        fontSize={32}
-                        text={signInSuccess ? subsidiaryName : `登录后显示`}
-                      />
-                    </Col>
-                  </Row>
-                </>
-              }
-              right={
-                <VerticalBox>
-                  <View
-                    style={{
-                      width: transformSize(48),
-                    }}
-                    onClick={() => {
-                      this.goToEditInformation();
-                    }}
-                  >
-                    <ImageBox src={editGreyImage} circle={false} />
-                  </View>
-                </VerticalBox>
-              }
-            />
-          }
-        />
+                      <ImageBox src={editGreyImage} circle={false} />
+                    </View>
+                  </VerticalBox>
+                }
+              />
+            }
+          />
+        </View>
 
         <Line transparent height={30} />
       </CustomWrapper>
@@ -271,25 +284,31 @@ class customer extends PageWrapper {
 
   buildMenuItem = ({ icon, title, onClick }) => {
     return (
-      <Item
-        label={title}
-        contentStyle={menuTitleStyle}
-        headerTopBottomPadding={headerTopBottomPadding}
-        prefix={
-          <VerticalBox>
-            <View
-              style={{
-                width: transformSize(48),
-              }}
-            >
-              <ImageBox src={icon} circle={false} />
-            </View>
-          </VerticalBox>
-        }
-        border={false}
-        arrow
-        onClick={onClick ?? null}
-      />
+      <View
+        style={{
+          paddingLeft: transformSize(28),
+        }}
+      >
+        <Item
+          label={title}
+          contentStyle={menuTitleStyle}
+          headerTopBottomPadding={headerTopBottomPadding}
+          prefix={
+            <VerticalBox>
+              <View
+                style={{
+                  width: transformSize(48),
+                }}
+              >
+                <ImageBox src={icon} circle={false} />
+              </View>
+            </VerticalBox>
+          }
+          border={false}
+          arrow
+          onClick={onClick ?? null}
+        />
+      </View>
     );
   };
 
@@ -309,6 +328,7 @@ class customer extends PageWrapper {
               style={{
                 paddingTop: transformSize(30),
                 paddingBottom: transformSize(30),
+                paddingLeft: transformSize(28),
               }}
             >
               <ColorText

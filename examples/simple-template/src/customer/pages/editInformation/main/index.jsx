@@ -8,6 +8,7 @@ import { ImageBox, Item, Line, Space, VerticalBox } from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { viewStyle } from '../../../../customConfig';
+import { HeadNavigationBox } from '../../../../utils';
 import { GenderActionSheet } from '../../../customComponents';
 import { setGenderAction } from '../assist/action';
 
@@ -34,7 +35,7 @@ const menuTitleStyle = {
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '个人信息',
-  // navigationStyle: 'custom',
+  navigationStyle: 'custom',
 });
 
 @connect(({ customer, session, entrance, global, schedulingControl }) => ({
@@ -83,6 +84,10 @@ class customer extends PageNeedSignInWrapper {
         target.refreshCustomerData(true);
       },
     });
+  };
+
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="我的信息" />;
   };
 
   renderInteractiveArea = () => {

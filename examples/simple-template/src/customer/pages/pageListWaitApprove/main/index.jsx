@@ -3,17 +3,20 @@ import { CustomWrapper, View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 
 import { transformSize } from 'taro-fast-common';
-import { Line, Space } from 'taro-fast-component';
+import {
+  // Line,
+  Space,
+} from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { viewStyle } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
-import { buildWaitApproveItem } from '../../../../utils';
+import { buildWaitApproveItem, HeadNavigationBox } from '../../../../utils';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '待审批',
-  // navigationStyle: 'custom',
+  navigationStyle: 'custom',
 });
 
 @connect(({ flowCase, session, entrance, global, schedulingControl }) => ({
@@ -30,6 +33,7 @@ class PageListWaitApprove extends PageNeedSignInWrapper {
 
   viewStyle = {
     ...viewStyle,
+    backgroundColor: '#f6f6f6',
     paddingBottom: transformSize(20),
   };
 
@@ -52,18 +56,24 @@ class PageListWaitApprove extends PageNeedSignInWrapper {
     });
   };
 
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="待处理审批" />;
+  };
+
   buildListView = () => {
     const { metaListData } = this.state;
 
     return (
       <CustomWrapper>
-        <Line transparent height={16} />
+        {/* <Line transparent height={16} /> */}
 
         <View
-          style={{
-            paddingLeft: transformSize(20),
-            paddingRight: transformSize(20),
-          }}
+          style={
+            {
+              // paddingLeft: transformSize(20),
+              // paddingRight: transformSize(20),
+            }
+          }
         >
           <Space direction="vertical" fillWidth size={10}>
             {metaListData.map((item) => {
