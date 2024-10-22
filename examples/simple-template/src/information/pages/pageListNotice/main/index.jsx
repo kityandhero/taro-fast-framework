@@ -8,12 +8,13 @@ import { Line, Space } from 'taro-fast-component';
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { viewStyle } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
+import { HeadNavigationBox } from '../../../../utils';
 import { NotificationItem } from '../assist/tools';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '通告列表',
-  // navigationStyle: 'custom',
+  navigationBarTitleText: '通知公告',
+  navigationStyle: 'custom',
 });
 
 @connect(({ notice, session, entrance, global, schedulingControl }) => ({
@@ -43,6 +44,10 @@ class PageListNotice extends PageNeedSignInWrapper {
       loadApiPath: modelTypeCollection.noticeTypeCollection.pageList,
     };
   }
+
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="通知公告" />;
+  };
 
   buildListView = () => {
     const { metaListData } = this.state;

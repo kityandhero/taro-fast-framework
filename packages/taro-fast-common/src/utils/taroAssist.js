@@ -6,6 +6,7 @@ import {
   getSetting as getSettingCore,
   getSystemInfoSync,
   hideNavigationBarLoading as hideNavigationBarLoadingCore,
+  makePhoneCall as makePhoneCallCore,
   navigateToMiniProgram as navigateToMiniProgramCore,
   offLocationChange as offGeographicalLocationChangeCore,
   onLocationChange as onGeographicalLocationChangeCore,
@@ -361,6 +362,10 @@ export function openChannelsLive(options) {
   openChannelsLiveCore(options);
 }
 
+export function makePhoneCall(options) {
+  makePhoneCallCore(options);
+}
+
 export {
   canIUse,
   downloadFile,
@@ -368,7 +373,6 @@ export {
   getCurrentInstance,
   getMenuButtonBoundingClientRect,
   getUpdateManager,
-  makePhoneCall,
   navigateBack,
   pageScrollTo,
   previewImage,

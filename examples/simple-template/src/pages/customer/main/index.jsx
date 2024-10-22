@@ -1,7 +1,7 @@
 import { CustomWrapper, View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { checkStringIsNullOrWhiteSpace, logConsole } from 'easy-soft-utility';
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
 
 import {
   emptyAvatar,
@@ -89,8 +89,6 @@ class customer extends PageWrapper {
   };
 
   doAfterGetCustomerOnSignInSilent = (data) => {
-    logConsole(data);
-
     this.setState({
       currentCustomer: data,
     });
@@ -148,6 +146,7 @@ class customer extends PageWrapper {
     return (
       <CustomWrapper>
         <Line transparent height={10} />
+
         <View
           style={{
             paddingLeft: transformSize(28),

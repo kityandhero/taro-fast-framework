@@ -22,6 +22,11 @@ export default defineAppConfig({
       ],
     },
     {
+      root: 'communication',
+      name: '通讯',
+      pages: ['pages/singleListAddressBook/main/index'],
+    },
+    {
       root: 'webPage',
       name: '网页',
       pages: ['pages/general/main/index'],
@@ -48,7 +53,7 @@ export default defineAppConfig({
   preloadRule: {
     'pages/entry/main/index': {
       network: 'all',
-      packages: ['information'],
+      packages: ['information', 'communication'],
     },
   },
   // permission: {

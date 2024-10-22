@@ -90,6 +90,27 @@
       "cover": true,
       "title": "通知公告",
       "name": "notice"
+    },
+    {
+      "apis": [
+        {
+          "title": "单页列表【按字母分组】",
+          "api": "/wechatApplication/addressBook/singleListLetterGroup",
+          "effect": "singleListLetterGroup",
+          "service": "singleListLetterGroupData",
+          "type": "singleList"
+        },
+        {
+          "title": "单页列表【按部分分组】",
+          "api": "/wechatApplication/addressBook/singleListDepartmentGroup",
+          "effect": "singleListDepartmentGroup",
+          "service": "singleListDepartmentGroupData",
+          "type": "singleList"
+        }
+      ],
+      "cover": true,
+      "title": "通讯录",
+      "name": "addressBook"
     }
   ]
 }

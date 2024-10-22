@@ -32,6 +32,13 @@ const informationPathCollection = {
   },
 };
 
+const communicationPathCollection = {
+  ...informationPathGeneralCollection,
+  singleListAddressBook: {
+    path: '/communication/pages/singleListAddressBook/main/index',
+  },
+};
+
 const customerPathCollection = {
   ...customerPathGeneralCollection,
   pageListCreateApprove: {
@@ -53,4 +60,5 @@ export const pathCustomCollection = {
   webpage: webPagePathCollection,
   customer: customerPathCollection,
   information: informationPathCollection,
+  communication: communicationPathCollection,
 };

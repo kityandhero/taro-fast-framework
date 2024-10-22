@@ -11,11 +11,7 @@ import {
   whetherNumber,
 } from 'easy-soft-utility';
 
-import {
-  emptyImage,
-  navigateToMiniProgram,
-  transformSize,
-} from 'taro-fast-common';
+import { emptyImage, transformSize } from 'taro-fast-common';
 import {
   CenterBox,
   ColorText,
@@ -82,48 +78,10 @@ export function SearchBox() {
   );
 }
 
-export function GridBox({ list = [] }) {
+export function GridBox({ list = [], onItemClick = null }) {
   if (!isArray(list) || isEmptyArray(list)) {
     return null;
   }
-
-  const listData = list.map((item) => {
-    const {
-      //  value,
-      type,
-      path,
-      exteriorMicroAppId,
-    } = item;
-
-    if (type === 'html' && !checkStringIsNullOrWhiteSpace(path)) {
-      // item.onClick = () => {
-      //   goToGeneralWebPage({
-      //     path: pathCollection.webpage.general.path,
-      //     title: value || '',
-      //     url: path,
-      //   });
-      // };
-    }
-
-    if (type === 'page' && !checkStringIsNullOrWhiteSpace(path)) {
-      // item.onClick = () => {
-      //   navigateTo({
-      //     url: path,
-      //   });
-      // };
-    }
-
-    if (
-      type === 'exteriorMicroApp' &&
-      !checkStringIsNullOrWhiteSpace(exteriorMicroAppId)
-    ) {
-      item.onClick = () => {
-        navigateToMiniProgram({ appId: exteriorMicroAppId });
-      };
-    }
-
-    return item;
-  });
 
   return (
     <View
@@ -135,7 +93,7 @@ export function GridBox({ list = [] }) {
       <CustomWrapper>
         <Grid
           columns={4}
-          list={listData}
+          list={list}
           itemBuilder={({ item }) => {
             const { image, value } = item;
 
@@ -149,7 +107,7 @@ export function GridBox({ list = [] }) {
                       <ImageBox
                         src={image || emptyImage}
                         // aspectRatio={0.682}
-                        loadingEffect={false}
+                        // loadingEffect={false}
                         lazyLoad
                       />
                     </View>
@@ -158,6 +116,13 @@ export function GridBox({ list = [] }) {
                 bottom={<View style={gridNameStyle}>{value}</View>}
               />
             );
+          }}
+          onClick={(o) => {
+            if (!isFunction(onItemClick)) {
+              return;
+            }
+
+            onItemClick(o);
           }}
         />
       </CustomWrapper>

@@ -1,9 +1,13 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { isArray } from 'easy-soft-utility';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+  navigateTo,
+} from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common';
+import { navigateToMiniProgram, transformSize } from 'taro-fast-common';
 import { Line } from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../customComponents/general';
@@ -103,6 +107,31 @@ class Home extends PageNeedSignInWrapper {
     return o;
   }
 
+  onGridItemClick = (item) => {
+    const { value, type, path, exteriorMicroAppId } = item;
+
+    if (type === 'html' && !checkStringIsNullOrWhiteSpace(path)) {
+      this.goToGeneralWebPage({
+        path: pathCollection.webpage.general.path,
+        title: value || '',
+        url: path,
+      });
+    }
+
+    if (type === 'page' && !checkStringIsNullOrWhiteSpace(path)) {
+      navigateTo({
+        url: path,
+      });
+    }
+
+    if (
+      type === 'exteriorMicroApp' &&
+      !checkStringIsNullOrWhiteSpace(exteriorMicroAppId)
+    ) {
+      navigateToMiniProgram({ appId: exteriorMicroAppId });
+    }
+  };
+
   buildHeadNavigation = () => {
     const { currentCustomer } = this.state;
 
@@ -130,7 +159,7 @@ class Home extends PageNeedSignInWrapper {
 
         <Line transparent height={spiteHeight} />
 
-        <GridBox list={navigationList} />
+        <GridBox list={navigationList} onItemClick={this.onGridItemClick} />
 
         <Line transparent height={spiteHeight} />
 
