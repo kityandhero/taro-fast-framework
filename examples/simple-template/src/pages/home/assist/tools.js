@@ -130,10 +130,22 @@ export function GridBox({ list = [], onItemClick = null }) {
   );
 }
 
-export function NoticeBox({ text = '', onClick = null }) {
-  if (checkStringIsNullOrWhiteSpace(text)) {
+export function NoticeBox({ data = '', onClick = null }) {
+  const { message, type, id, key } = {
+    message: '暂无最新消息',
+    type: 'none',
+    id: '',
+    key: '',
+    ...data,
+  };
+
+  if (checkStringIsNullOrWhiteSpace(message)) {
     return null;
   }
+
+  const messageAdjust = checkStringIsNullOrWhiteSpace(message)
+    ? '暂无最新消息'
+    : message;
 
   return (
     <View
@@ -151,7 +163,12 @@ export function NoticeBox({ text = '', onClick = null }) {
           return;
         }
 
-        onClick();
+        onClick({
+          message,
+          type,
+          id,
+          key,
+        });
       }}
     >
       <FlexBox
@@ -184,7 +201,7 @@ export function NoticeBox({ text = '', onClick = null }) {
                   style={{ color: '#7e7e7e' }}
                   fontSize={30}
                   lineHeight={36}
-                  text={text}
+                  text={messageAdjust}
                 />
               </VerticalBox>
             }

@@ -49,6 +49,52 @@ export const authenticationFailCode = 2001;
 export const apiSuccessCode = 200;
 
 /**
+ * 小程序支持的可预览文件类型集合
+ */
+export const fileTypeCanPreviewCollection = {
+  doc: 'doc',
+  docx: 'docx',
+  xls: 'xls',
+  xlsx: 'xlsx',
+  ppt: 'ppt',
+  pptx: 'pptx',
+  pdf: 'pdf',
+};
+
+/**
+ * 小程序支持的可预览文件类型数组
+ */
+export const fileTypeCanPreviewList = [
+  fileTypeCanPreviewCollection.doc,
+  fileTypeCanPreviewCollection.docx,
+  fileTypeCanPreviewCollection.xls,
+  fileTypeCanPreviewCollection.xlsx,
+  fileTypeCanPreviewCollection.ppt,
+  fileTypeCanPreviewCollection.pptx,
+  fileTypeCanPreviewCollection.pdf,
+];
+
+/**
+ * 可预览图片文件类型集合
+ */
+export const imageTypePreviewCollection = {
+  jpg: 'jpg',
+  jpeg: 'jpeg',
+  png: 'png',
+  gif: 'gif',
+};
+
+/**
+ * 可预览图片文件类型数组
+ */
+export const imageTypePreviewList = [
+  imageTypePreviewCollection.jpeg,
+  imageTypePreviewCollection.jpeg,
+  imageTypePreviewCollection.png,
+  imageTypePreviewCollection.gif,
+];
+
+/**
  * 应用默认配置
  */
 export const appInitDefault = {

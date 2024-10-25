@@ -7,7 +7,7 @@ import { transformSize } from 'taro-fast-common';
 import { BaseComponent } from '../BaseComponent';
 import { CenterBox } from '../CenterBox';
 
-const positionCollection = {
+const angleBoxPositionCollection = {
   topLeft: 'topLeft',
   topRight: 'topRight',
   bottomLeft: 'bottomLeft',
@@ -20,7 +20,7 @@ const defaultProps = {
   angleSize: 60,
   fontSize: 26,
   color: '#fff',
-  position: positionCollection.topLeft,
+  position: angleBoxPositionCollection.topLeft,
   backgroundColor: 'green',
   onClick: null,
 };
@@ -31,15 +31,15 @@ class AngleBox extends BaseComponent {
 
     return checkInCollection(
       [
-        positionCollection.topLeft,
-        positionCollection.topRight,
-        positionCollection.bottomLeft,
-        positionCollection.bottomRight,
+        angleBoxPositionCollection.topLeft,
+        angleBoxPositionCollection.topRight,
+        angleBoxPositionCollection.bottomLeft,
+        angleBoxPositionCollection.bottomRight,
       ],
       position,
     )
       ? position
-      : positionCollection.topLeft;
+      : angleBoxPositionCollection.topLeft;
   };
 
   getStyle = () => {
@@ -59,7 +59,7 @@ class AngleBox extends BaseComponent {
     let style = {};
 
     switch (position) {
-      case positionCollection.topLeft: {
+      case angleBoxPositionCollection.topLeft: {
         style = {
           top: '0',
           left: '0',
@@ -68,7 +68,7 @@ class AngleBox extends BaseComponent {
         break;
       }
 
-      case positionCollection.topRight: {
+      case angleBoxPositionCollection.topRight: {
         style = {
           top: '0',
           right: '0',
@@ -77,7 +77,7 @@ class AngleBox extends BaseComponent {
         break;
       }
 
-      case positionCollection.bottomLeft: {
+      case angleBoxPositionCollection.bottomLeft: {
         style = {
           bottom: '0',
           left: '0',
@@ -86,7 +86,7 @@ class AngleBox extends BaseComponent {
         break;
       }
 
-      case positionCollection.bottomRight: {
+      case angleBoxPositionCollection.bottomRight: {
         style = {
           bottom: '0',
           right: '0',
@@ -98,7 +98,6 @@ class AngleBox extends BaseComponent {
 
     return {
       ...style,
-
       position: 'absolute',
       overflow: 'hidden',
       zIndex: '1',
@@ -121,28 +120,28 @@ class AngleBox extends BaseComponent {
     let style = {};
 
     switch (position) {
-      case positionCollection.topLeft: {
+      case angleBoxPositionCollection.topLeft: {
         style = {
           transform: 'rotate(-45deg)',
         };
         break;
       }
 
-      case positionCollection.topRight: {
+      case angleBoxPositionCollection.topRight: {
         style = {
           transform: 'rotate(45deg)',
         };
         break;
       }
 
-      case positionCollection.bottomLeft: {
+      case angleBoxPositionCollection.bottomLeft: {
         style = {
           transform: 'rotate(-135deg)',
         };
         break;
       }
 
-      case positionCollection.bottomRight: {
+      case angleBoxPositionCollection.bottomRight: {
         style = {
           transform: 'rotate(135deg)',
         };
@@ -152,7 +151,6 @@ class AngleBox extends BaseComponent {
 
     return {
       ...style,
-
       position: 'absolute',
       top: '-10.5%',
       left: '-10.5%',
@@ -213,4 +211,4 @@ AngleBox.defaultProps = {
   ...defaultProps,
 };
 
-export { AngleBox };
+export { AngleBox, angleBoxPositionCollection };

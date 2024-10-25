@@ -18,3 +18,21 @@ export const shareTransfer = {
   section: '10',
   webPage: '100',
 };
+
+export const interactiveConfigEmpty = {
+  name: '',
+  description: '',
+  valueType: '',
+  defaultValue: '',
+  simpleFunction: '',
+  optionalValues: [],
+};
+
+export const interactiveConfigCollection = {
+  object: 'object',
+  string: 'string',
+  number: 'number',
+  component: 'component',
+  function: 'function',
+  boolean: 'boolean',
+};

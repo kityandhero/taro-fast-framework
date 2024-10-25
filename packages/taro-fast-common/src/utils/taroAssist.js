@@ -12,6 +12,7 @@ import {
   onLocationChange as onGeographicalLocationChangeCore,
   openChannelsLive as openChannelsLiveCore,
   openDocument as openDocumentCore,
+  previewImage as previewImageCore,
   reLaunch as reLaunchCore,
   setClipboardData,
   startLocationUpdate as startGeographicalLocationUpdateCore,
@@ -19,12 +20,15 @@ import {
 } from '@tarojs/taro';
 
 import {
+  checkInCollection,
   isFunction,
   logDebug,
   logException,
   logExecute,
+  showWarnMessage,
 } from 'easy-soft-utility';
 
+import { fileTypeCanPreviewList, imageTypePreviewList } from './constants';
 import {
   checkWeAppEnvironment,
   checkWebEnvironment,
@@ -192,11 +196,37 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
           successCallback();
         }
 
-        openDocument({
-          filePath: response.tempFilePath,
-          fileType: 'pdf',
-          showMenu: true,
-        });
+        const filePath = response.tempFilePath;
+
+        if (filePath.lastIndexOf('.') < 0) {
+          showWarnMessage('无法文件解析扩展名，预览失败');
+
+          return;
+        }
+
+        const extensionName = filePath.slice(
+          filePath.lastIndexOf('.') + 1 - filePath.length,
+        );
+
+        if (checkInCollection(fileTypeCanPreviewList, extensionName)) {
+          openDocument({
+            filePath: filePath,
+            showMenu: true,
+          });
+
+          return;
+        }
+
+        if (checkInCollection(imageTypePreviewList, extensionName)) {
+          previewImage({
+            urls: [filePath],
+            showMenu: true,
+          });
+
+          return;
+        }
+
+        showWarnMessage('不支持的文件类型，无法预览');
       }
     },
   });
@@ -204,6 +234,10 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
 
 export function openDocument(parameters) {
   return openDocumentCore(parameters);
+}
+
+export function previewImage(parameters) {
+  return previewImageCore(parameters);
 }
 
 export function getFields(selector, context = null) {
@@ -375,7 +409,6 @@ export {
   getUpdateManager,
   navigateBack,
   pageScrollTo,
-  previewImage,
   requestPayment,
   setClipboardData,
   showNavigationBarLoading,

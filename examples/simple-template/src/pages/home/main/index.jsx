@@ -4,6 +4,7 @@ import { connect } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
+  isEmptyArray,
   navigateTo,
 } from 'easy-soft-utility';
 
@@ -78,13 +79,27 @@ class Home extends PageNeedSignInWrapper {
       carouselList,
       waitApproveFlowCaseList,
       notificationList,
+      latestMessageList,
     } = {
       navigationList: [],
       carouselList: [],
       waitApproveFlowCaseList: [],
       notificationList: [],
+      latestMessageList: [],
       ...metaData,
     };
+
+    let latestMessage = null;
+
+    latestMessage = isEmptyArray(latestMessageList)
+      ? {
+          message: '暂无最新消息',
+          type: 'none',
+          id: '',
+          key: '',
+        }
+      : latestMessageList[0];
+
     this.setState({
       navigationList: isArray(navigationList) ? navigationList : [],
       carouselList: isArray(carouselList) ? carouselList : [],
@@ -92,6 +107,7 @@ class Home extends PageNeedSignInWrapper {
         ? waitApproveFlowCaseList
         : [],
       notificationList: isArray(notificationList) ? notificationList : [],
+      latestMessage: latestMessage,
     });
   };
 
@@ -149,6 +165,7 @@ class Home extends PageNeedSignInWrapper {
       carouselList,
       waitApproveFlowCaseList,
       notificationList,
+      latestMessage,
     } = this.state;
 
     return (
@@ -163,7 +180,7 @@ class Home extends PageNeedSignInWrapper {
 
         <Line transparent height={spiteHeight} />
 
-        <NoticeBox text="您有一条审批需要处理 XX公司付款审批单" />
+        <NoticeBox data={latestMessage} />
 
         <Line transparent height={spiteHeight} />
 

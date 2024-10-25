@@ -10,7 +10,7 @@ import { CenterBox } from '../CenterBox';
 
 import './index.less';
 
-const SIZE_CLASS = {
+const avatarSizeCollection = {
   large: 'large',
   normal: 'normal',
   small: 'small',
@@ -40,17 +40,17 @@ class Avatar extends BaseComponent {
     }
 
     switch (size) {
-      case SIZE_CLASS.large: {
+      case avatarSizeCollection.large: {
         sizeValue = 120;
         break;
       }
 
-      case SIZE_CLASS.normal: {
+      case avatarSizeCollection.normal: {
         sizeValue = 100;
         break;
       }
 
-      case SIZE_CLASS.small: {
+      case avatarSizeCollection.small: {
         sizeValue = 80;
         break;
       }
@@ -94,7 +94,7 @@ class Avatar extends BaseComponent {
   renderFurther() {
     const { size, circle, image, text } = this.props;
     const rootClassName = ['tfc-avatar'];
-    const iconSize = SIZE_CLASS[size || 'normal'];
+    const iconSize = avatarSizeCollection[size || 'normal'];
     const classObject = {
       [`tfc-avatar--${iconSize}`]: iconSize,
       'tfc-avatar--circle': circle,
@@ -134,4 +134,4 @@ Avatar.defaultProps = {
   ...defaultProps,
 };
 
-export { Avatar };
+export { Avatar, avatarSizeCollection };

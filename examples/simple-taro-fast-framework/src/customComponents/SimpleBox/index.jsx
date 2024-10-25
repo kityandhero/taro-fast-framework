@@ -254,9 +254,7 @@ class SimpleBox extends Component {
   };
 
   render() {
-    const { space, prefix, header, helpTitle, extra, controlBox } = this.props;
-
-    const list = this.buildList();
+    const { space, prefix, header, extra, controlBox } = this.props;
 
     const footer = this.buildFooter();
 
@@ -281,11 +279,11 @@ class SimpleBox extends Component {
       >
         {this.buildJointArea()}
 
-        {controlBox ? <Divider>样例切换</Divider> : null}
+        {controlBox ? <Divider>属性描述与示例切换</Divider> : null}
 
         {controlBox}
 
-        {list.length > 0 ? (
+        {/* {list.length > 0 ? (
           <HelpBox
             title={helpTitle}
             showTitle
@@ -293,7 +291,7 @@ class SimpleBox extends Component {
             showNumber={false}
             list={this.buildList()}
           />
-        ) : null}
+        ) : null} */}
 
         {this.buildCode()}
       </Card>

@@ -1,9 +1,19 @@
-import { navigateTo } from 'easy-soft-utility';
+import { isFunction, navigateTo } from 'easy-soft-utility';
 
 import { pathCollection } from '../../../customConfig';
 import { PageWrapperCore } from '../../general/PageWrapperCore';
 
 class PageWrapperExtra extends PageWrapperCore {
+  goToFlowCaseTab(callback = null) {
+    this.switchTab({
+      url: `/${pathCollection.root.flowCase.path}`,
+      success: () => {
+        if (isFunction(callback)) {
+          callback();
+        }
+      },
+    });
+  }
   goToResetPassword = () => {
     navigateTo(pathCollection.customer.resetPassword.path);
   };

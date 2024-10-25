@@ -13,6 +13,7 @@ import {
   logException,
   showSimpleErrorMessage,
   showSimpleWarnMessage,
+  showSuccessMessage,
   showSuccessNotification,
   toDatetime,
   whetherNumber,
@@ -595,7 +596,7 @@ class Approve extends PageNeedSignInWrapper {
         note: this.note,
       },
       successCallback: ({ target }) => {
-        showSuccessNotification('审批完成');
+        showSuccessMessage('审批完成');
 
         target.reloadData({});
       },
@@ -625,7 +626,7 @@ class Approve extends PageNeedSignInWrapper {
         note: this.note,
       },
       successCallback: ({ target }) => {
-        showSuccessNotification('审批完成');
+        showSuccessMessage('审批完成');
 
         target.reloadData({});
       },
@@ -1055,6 +1056,24 @@ class Approve extends PageNeedSignInWrapper {
                 );
               })}
             </Space>
+
+            <View>
+              <ColorText
+                textPrefix="注"
+                textPrefixStyle={{
+                  color: '#a5a5a5',
+                }}
+                separator=":"
+                separatorStyle={{
+                  color: '#a5a5a5',
+                  marginRight: transformSize(14),
+                }}
+                text="点击进行预览，文件较大时，需要耗费时间下载."
+                textStyle={{
+                  color: '#a5a5a5',
+                }}
+              />
+            </View>
           </View>
         ) : (
           <Empty
@@ -1360,6 +1379,9 @@ class Approve extends PageNeedSignInWrapper {
                 areaMode
                 areaHeight={180}
                 border={false}
+                valueStyle={{
+                  color: '#333',
+                }}
                 placeholder="请输入审批意见"
                 afterChange={this.triggerNoteChanged}
               />

@@ -212,9 +212,7 @@ export function buildComponentPrismCode({
 
   return (
     <>
-      {showDivider ? (
-        <Divider contentPosition="left">代码示例 点击复制</Divider>
-      ) : null}
+      {showDivider ? <Divider>代码示例 点击复制</Divider> : null}
 
       <PrismCode canCopy code={code} language="jsx" />
     </>
