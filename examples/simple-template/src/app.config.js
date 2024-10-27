@@ -37,6 +37,7 @@ export default defineAppConfig({
       pages: [
         'pages/approve/main/index',
         'pages/changePassword/main/index',
+        'pages/detailFlowCase/main/index',
         'pages/editInformation/main/index',
         'pages/pageListCreateApprove/main/index',
         'pages/pageListLatestApprove/main/index',

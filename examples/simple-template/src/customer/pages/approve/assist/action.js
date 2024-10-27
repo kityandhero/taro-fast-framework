@@ -2,9 +2,11 @@ import { convertCollection, getValueByKey } from 'easy-soft-utility';
 
 import { actionCore } from 'taro-fast-framework';
 
-import { fieldDataFlowCaseProcessHistory } from '../../../../customConfig';
+import {
+  fieldDataFlowCaseProcessHistory,
+  fieldDataWorkflowCase,
+} from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
-import { fieldData } from '../common/data';
 
 export async function submitApprovalAction({
   target,
@@ -16,7 +18,7 @@ export async function submitApprovalAction({
     params: {
       workflowCaseId: getValueByKey({
         data: handleData,
-        key: fieldData.workflowCaseId.name,
+        key: fieldDataWorkflowCase.workflowCaseId.name,
         convert: convertCollection.string,
         defaultValue: '',
       }),
@@ -33,7 +35,7 @@ export async function passAction({ target, handleData, successCallback }) {
     params: {
       flowCaseId: getValueByKey({
         data: handleData,
-        key: fieldData.workflowCaseId.name,
+        key: fieldDataWorkflowCase.workflowCaseId.name,
         convert: convertCollection.string,
         defaultValue: '',
       }),
@@ -56,7 +58,7 @@ export async function refuseAction({ target, handleData, successCallback }) {
     params: {
       flowCaseId: getValueByKey({
         data: handleData,
-        key: fieldData.workflowCaseId.name,
+        key: fieldDataWorkflowCase.workflowCaseId.name,
         convert: convertCollection.string,
         defaultValue: '',
       }),

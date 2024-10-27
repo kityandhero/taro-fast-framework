@@ -10,7 +10,7 @@ import {
 import {
   emptySignet,
   flowApproveActionModeCollection,
-} from '../../../../customConfig';
+} from '../../customConfig';
 
 function transferChainApproveList(
   listApprove,
@@ -102,14 +102,21 @@ function transferChainApproveList(
   return list;
 }
 
-function filterApprove(listProcessHistory) {
+function filterApprove(approveBatchNumber, listProcessHistory) {
   const listApprove = filter(listProcessHistory, (one) => {
-    const { approveActionMode } = {
+    const {
+      approveActionMode,
+      approveBatchNumber: processHistoryApproveBatchNumber,
+    } = {
       approveActionMode: 0,
+      approveBatchNumber: 0,
       ...one,
     };
 
-    return approveActionMode === flowApproveActionModeCollection.manualControl;
+    return (
+      approveActionMode === flowApproveActionModeCollection.manualControl &&
+      processHistoryApproveBatchNumber === approveBatchNumber
+    );
   }).map((o) => {
     const {
       note,
@@ -144,19 +151,20 @@ function filterApprove(listProcessHistory) {
   return listApprove;
 }
 
-export function buildListHistory({ listProcessHistory }) {
-  const listHistory = filterApprove(listProcessHistory);
+export function buildListHistory({ approveBatchNumber, listProcessHistory }) {
+  const listHistory = filterApprove(approveBatchNumber, listProcessHistory);
 
   return listHistory;
 }
 
 export function buildListApprove({
+  approveBatchNumber,
   listChainApprove,
   listProcessHistory,
   nextApproveWorkflowNode,
 }) {
   const listApprove = transferChainApproveList(
-    filterApprove(listProcessHistory),
+    filterApprove(approveBatchNumber, listProcessHistory),
     listChainApprove,
     nextApproveWorkflowNode,
   );

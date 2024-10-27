@@ -52,6 +52,10 @@ class PageWrapperExtra extends PageWrapperCore {
     navigateTo(`${pathCollection.customer.approve.path}?id=${id}`);
   };
 
+  goToDetailFlowCase = (id) => {
+    navigateTo(`${pathCollection.customer.detailFlowCase.path}?id=${id}`);
+  };
+
   goToPageListNotice = () => {
     navigateTo({
       url: pathCollection.information.pageListNotice.path,

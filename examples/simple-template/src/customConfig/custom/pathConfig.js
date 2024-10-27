@@ -53,6 +53,9 @@ const customerPathCollection = {
   approve: {
     path: '/customer/pages/approve/main/index',
   },
+  detailFlowCase: {
+    path: '/customer/pages/detailFlowCase/main/index',
+  },
 };
 
 export const pathCustomCollection = {
