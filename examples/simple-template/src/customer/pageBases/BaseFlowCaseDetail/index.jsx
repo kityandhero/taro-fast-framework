@@ -45,6 +45,7 @@ import {
   fieldDataFlowFormDesign,
   fieldDataWorkflowCase,
   fileTextBlueImage,
+  flowApproveMobileViewModeCollection,
   flowCaseStatusCollection,
   simpleApply,
   simpleAttention,
@@ -229,6 +230,18 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       convert: convertCollection.number,
     });
 
+    let approverMobileApproveViewMode =
+      flowApproveMobileViewModeCollection.form;
+
+    if (canApprove === whetherNumber.yes) {
+      approverMobileApproveViewMode = getValueByKey({
+        data: metaData,
+        key: fieldDataWorkflowCase.approverMobileApproveViewMode.name,
+        defaultValue: flowApproveMobileViewModeCollection.form,
+        convert: convertCollection.number,
+      });
+    }
+
     const status = getValueByKey({
       data: metaData,
       key: fieldDataWorkflowCase.status.name,
@@ -356,6 +369,11 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       // listProcessHistory: [...listProcessHistory],
       existAttachment,
       approveComplete,
+      useDocumentView:
+        approverMobileApproveViewMode ===
+        flowApproveMobileViewModeCollection.document
+          ? whetherNumber.yes
+          : whetherNumber.no,
     });
   };
 

@@ -46,6 +46,7 @@ export default defineAppConfig({
         'pages/setAddress/main/index',
         'pages/setAvatar/main/index',
         'pages/setBirthday/main/index',
+        'pages/setting/main/index',
         'pages/signIn/main/index',
         'pages/signInWithWeChat/main/index',
       ],

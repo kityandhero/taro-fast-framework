@@ -378,6 +378,9 @@ class customer extends PageWrapper {
             {this.buildMenuItem({
               title: '设置与隐私',
               icon: hexagonBlueImage,
+              onClick: () => {
+                this.goToSetting();
+              },
             })}
 
             {this.buildMenuItem({

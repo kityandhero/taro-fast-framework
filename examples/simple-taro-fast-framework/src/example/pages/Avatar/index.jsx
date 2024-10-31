@@ -27,15 +27,14 @@ export default class Index extends ContentPageWrapper {
     description: '头像组件',
   };
 
-  configCore = configCore;
+  targetComponentName = 'Avatar';
 
   constructor(properties) {
-    super(properties);
+    super(properties, configCore);
 
     this.state = {
       ...this.state,
       header: '头像',
-      currentConfig: configCore,
     };
   }
 

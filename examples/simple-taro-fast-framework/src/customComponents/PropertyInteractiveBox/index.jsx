@@ -226,7 +226,7 @@ class PropertyInteractiveBox extends Component {
                     >
                       <Space wrap style={{ width: '100%' }}>
                         {optionalValues.map((one, index_) => {
-                          const { title, value: ov } = one;
+                          const { title, value: ov, otherState = {} } = one;
 
                           return (
                             <View
@@ -253,7 +253,7 @@ class PropertyInteractiveBox extends Component {
 
                                 data[name] = ov;
 
-                                onOptionalValueClick(data);
+                                onOptionalValueClick(data, otherState || {});
                               }}
                             >
                               {title}

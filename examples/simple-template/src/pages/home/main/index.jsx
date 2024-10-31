@@ -172,7 +172,11 @@ class Home extends PageNeedSignInWrapper {
       <View className="page page-index">
         <Line transparent height={spiteHeight} />
 
-        <SearchBox />
+        <SearchBox
+          afterScanCode={(o) => {
+            this.goToDetailFlowCase(o);
+          }}
+        />
 
         <Line transparent height={spiteHeight} />
 

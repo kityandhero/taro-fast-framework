@@ -46,6 +46,16 @@ export async function setAddressData(parameters) {
   });
 }
 
+export const setMobileApproveViewModeDataApiAddress =
+  '/wechatApplication/user/setMobileApproveViewMode';
+
+export async function setMobileApproveViewModeData(parameters) {
+  return request({
+    api: setMobileApproveViewModeDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const changePasswordDataApiAddress =
   '/wechatApplication/user/changePassword';
 

@@ -21,7 +21,6 @@ class ContentPageBase extends PageWrapperSimulation {
 
     this.state = {
       ...this.state,
-
       spin: true,
       header: '',
       currentConfig: null,

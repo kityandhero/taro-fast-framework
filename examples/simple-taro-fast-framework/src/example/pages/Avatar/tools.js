@@ -17,18 +17,18 @@ export function buildInteractiveConfigList() {
       defaultValue: Avatar.defaultProps.style,
       optionalValues: [
         {
-          title: 'border-red',
+          title: 'border-red-solid',
           value: {
             borderWidth: transformSize(2),
-            borderType: 'solid',
+            borderStyle: 'solid',
             borderColor: 'red',
           },
         },
         {
-          title: 'border-blue',
+          title: 'border-blue-dashed',
           value: {
             borderWidth: transformSize(2),
-            borderType: 'solid',
+            borderStyle: 'dashed',
             borderColor: 'blue',
           },
         },

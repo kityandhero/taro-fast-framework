@@ -236,6 +236,11 @@ const fieldExtraData = {
     name: 'attentionTime',
     helper: '',
   },
+  approverMobileApproveViewMode: {
+    label: '审批人的移动端审批视图模式',
+    name: 'approverMobileApproveViewMode',
+    helper: '',
+  },
 };
 
 export const fieldDataFlowCase = {

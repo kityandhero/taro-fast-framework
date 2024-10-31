@@ -14,6 +14,7 @@ import {
   openDocument as openDocumentCore,
   previewImage as previewImageCore,
   reLaunch as reLaunchCore,
+  scanCode as scanCodeCore,
   setClipboardData,
   startLocationUpdate as startGeographicalLocationUpdateCore,
   stopLocationUpdate as stopGeographicalLocationUpdateCore,
@@ -382,6 +383,62 @@ export function chooseImage({
     count,
     sizeType,
     sourceType,
+    success: successCallback,
+    fail: failCallback,
+    complete: completeCallback,
+  });
+}
+
+export const scanCodeScanTypeCollection = {
+  /**
+   * 一维码
+   */
+  barCode: 'barCode',
+
+  /**
+   * 二维码
+   */
+  qrCode: 'qrCode',
+
+  /**
+   * Data Matrix 码
+   */
+  datamatrix: 'datamatrix',
+
+  /**
+   * PDF417 条码
+   */
+  pdf417: 'pdf417',
+};
+
+export function scanCode({
+  onlyFromCamera = false,
+  scanType: scanTypeCollection = [
+    scanCodeScanTypeCollection.barCode,
+    scanCodeScanTypeCollection.qrCode,
+  ],
+  success: successCallback = ({
+    // eslint-disable-next-line no-unused-vars
+    charSet,
+    // eslint-disable-next-line no-unused-vars
+    path,
+    // eslint-disable-next-line no-unused-vars
+    rawData,
+    // eslint-disable-next-line no-unused-vars
+    result,
+    // eslint-disable-next-line no-unused-vars
+    scanType,
+    // eslint-disable-next-line no-unused-vars
+    errorMessage,
+  }) => {},
+  // eslint-disable-next-line no-unused-vars
+  fail: failCallback = (response) => {},
+  // eslint-disable-next-line no-unused-vars
+  complete: completeCallback = (response) => {},
+}) {
+  scanCodeCore({
+    onlyFromCamera,
+    scanType: scanTypeCollection,
     success: successCallback,
     fail: failCallback,
     complete: completeCallback,

@@ -11,7 +11,7 @@ import {
   whetherNumber,
 } from 'easy-soft-utility';
 
-import { emptyImage, transformSize } from 'taro-fast-common';
+import { emptyImage, scanCode, transformSize } from 'taro-fast-common';
 import {
   CenterBox,
   ColorText,
@@ -33,6 +33,7 @@ import {
   fieldDataWorkflowCase,
   newMessageImage,
   noDataImage,
+  scanCodeBlueImage,
 } from '../../../customConfig';
 
 import { boxBorderRadiusStyle, spiteHeight } from './constant';
@@ -62,18 +63,58 @@ const gridNameStyle = {
   color: '#333',
 };
 
-export function SearchBox() {
+export function SearchBox({ afterScanCode = null }) {
   return (
-    <SearchBar
-      style={{
-        backgroundColor: '#fff',
-        borderRadius: transformSize(20),
+    <FlexBox
+      flexAuto="left"
+      left={
+        <SearchBar
+          style={{
+            backgroundColor: '#fff',
+            borderRadius: transformSize(20),
+          }}
+          circle={false}
+          mode="navigate"
+          showSearch={false}
+          searchStyle={{}}
+        />
+      }
+      rightStyle={{
+        paddingLeft: transformSize(20),
+        paddingRight: transformSize(20),
       }}
-      circle={false}
-      mode="navigate"
-      showSearch={false}
-      searchStyle={{}}
-      // onNavigate={this.goToSearch}
+      right={
+        <View
+          style={{ width: transformSize(40) }}
+          onClick={() => {
+            if (!isFunction(afterScanCode)) {
+              return;
+            }
+
+            scanCode({
+              onlyFromCamera: true,
+              success: ({
+                // eslint-disable-next-line no-unused-vars
+                charSet,
+                // eslint-disable-next-line no-unused-vars
+                path,
+                // eslint-disable-next-line no-unused-vars
+                rawData,
+                // eslint-disable-next-line no-unused-vars
+                result,
+                // eslint-disable-next-line no-unused-vars
+                scanType,
+                // eslint-disable-next-line no-unused-vars
+                errorMessage,
+              }) => {
+                afterScanCode(result);
+              },
+            });
+          }}
+        >
+          <ImageBox src={scanCodeBlueImage} lazyLoad />
+        </View>
+      }
     />
   );
 }

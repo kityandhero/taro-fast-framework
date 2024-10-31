@@ -45,7 +45,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class customer extends PageNeedSignInWrapper {
+class EditInformation extends PageNeedSignInWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;
@@ -206,4 +206,4 @@ class customer extends PageNeedSignInWrapper {
   }
 }
 
-export default customer;
+export default EditInformation;

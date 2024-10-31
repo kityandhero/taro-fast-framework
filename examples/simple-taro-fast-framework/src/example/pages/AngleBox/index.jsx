@@ -35,15 +35,14 @@ export default class Index extends ContentPageWrapper {
     description: '角标容器',
   };
 
-  configCore = configCore;
+  targetComponentName = 'AngleBox';
 
   constructor(properties) {
-    super(properties);
+    super(properties, configCore);
 
     this.state = {
       ...this.state,
       showTransition: true,
-      currentConfig: configCore,
       inner: <CenterBox>内部内容</CenterBox>,
     };
   }

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { isArray, isFunction } from 'easy-soft-utility';
 
 import { AbstractComponent } from 'taro-fast-common';
-import { HelpBox, Space } from 'taro-fast-component';
+import { CenterBox, HelpBox, Space } from 'taro-fast-component';
 
 import {
   interactiveConfigCollection,
@@ -17,19 +17,26 @@ import { SimpleBox } from '../SimpleBox';
 class ContentPageWrapper extends ContentPageBase {
   configCore = {};
 
-  constructor(properties) {
+  centerSimple = true;
+
+  targetComponentName = 'ComponentName';
+
+  constructor(properties, initialConfig) {
     super(properties);
 
     this.state = {
       ...this.state,
+      currentConfig: initialConfig,
     };
+
+    this.configCore = initialConfig;
   }
 
   buildInteractiveConfig = () => {
     return [];
   };
 
-  onOptionalValueClick = (o) => {
+  onOptionalValueClick = (o, otherState) => {
     const { currentConfig: currentConfigPrevious } = this.state;
 
     const { style: styleCore } = this.configCore;
@@ -51,7 +58,7 @@ class ContentPageWrapper extends ContentPageBase {
       style,
     };
 
-    this.setState({ currentConfig: valueAdjust });
+    this.setState({ ...otherState, currentConfig: valueAdjust });
   };
 
   buildControlBox = () => {
@@ -106,8 +113,8 @@ class ContentPageWrapper extends ContentPageBase {
     return (
       <PropertyInteractiveBox
         list={listAdjust}
-        onOptionalValueClick={(o) => {
-          this.onOptionalValueClick(o);
+        onOptionalValueClick={(o, otherState) => {
+          this.onOptionalValueClick(o, otherState);
         }}
       />
     );
@@ -157,14 +164,18 @@ class ContentPageWrapper extends ContentPageBase {
           header={header}
           description={description}
           config={currentConfig}
-          componentName="FlexBox"
+          componentName={this.targetComponentName}
           mockChildren={!!inner}
           useInnerBox={false}
           innerBoxCenterMode
           innerBoxPadding
           controlBox={this.buildControlBox()}
         >
-          {this.buildSimpleList()}
+          {this.centerSimple ? (
+            <CenterBox>{this.buildSimpleList()}</CenterBox>
+          ) : (
+            this.buildSimpleList()
+          )}
         </SimpleBox>
 
         <HelpBox

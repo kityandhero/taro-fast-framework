@@ -67,6 +67,10 @@ class PageWrapperExtra extends PageWrapperCore {
       `${pathCollection.information.noticeDetail.path}?noticeId=${id}`,
     );
   };
+
+  goToSetting = () => {
+    navigateTo(pathCollection.customer.setting.path);
+  };
 }
 
 export { PageWrapperExtra };

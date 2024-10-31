@@ -164,6 +164,13 @@
           "type": "singleData"
         },
         {
+          "title": "设置移动审批视图模式",
+          "api": "/wechatApplication/user/setMobileApproveViewMode",
+          "effect": "setMobileApproveViewMode",
+          "service": "setMobileApproveViewModeData",
+          "type": "singleData"
+        },
+        {
           "title": "变更密码",
           "api": "/wechatApplication/user/changePassword",
           "effect": "changePassword",

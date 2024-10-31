@@ -14,20 +14,28 @@ import './index.less';
 
 const classPrefix = `tfc-loading`;
 
-const typeCollection = ['ring', 'comet'];
+const loadingTypeCollection = {
+  ring: 'ring',
+  comet: 'comet',
+};
 
 const defaultProps = {
-  size: 0,
-  borderWidth: 0,
+  size: 36,
+  borderWidth: 1,
   color: '',
-  type: 'ring',
+  type: loadingTypeCollection.ring,
 };
 
 class Loading extends BaseComponent {
   getType = () => {
     const { type } = this.props;
 
-    return checkInCollection(typeCollection, type) ? type : 'ring';
+    return checkInCollection(
+      [loadingTypeCollection.ring, loadingTypeCollection.comet],
+      type,
+    )
+      ? type
+      : loadingTypeCollection.ring;
   };
 
   getStyle = () => {
@@ -106,4 +114,4 @@ Loading.defaultProps = {
   ...defaultProps,
 };
 
-export { Loading };
+export { Loading, loadingTypeCollection };

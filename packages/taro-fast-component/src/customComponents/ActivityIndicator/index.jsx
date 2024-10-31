@@ -2,17 +2,24 @@ import classNames from 'classnames';
 import { Text, View } from '@tarojs/components';
 
 import { BaseComponent } from '../BaseComponent';
-import { Loading } from '../Loading';
+import { Loading, loadingTypeCollection } from '../Loading';
 
 import './index.less';
 
+const activityIndicatorTypeCollection = loadingTypeCollection;
+
+const activityIndicatorModeCollection = {
+  normal: 'normal',
+  center: 'center',
+};
+
 const defaultProps = {
   visible: true,
-  size: 0,
-  borderWidth: 0,
-  color: '',
-  type: 'ring',
-  mode: 'normal',
+  size: Loading.defaultProps.size,
+  borderWidth: Loading.defaultProps.borderWidth,
+  color: Loading.defaultProps.color,
+  type: activityIndicatorTypeCollection.ring,
+  mode: activityIndicatorModeCollection.normal,
   content: '',
   className: '',
   style: {},
@@ -42,6 +49,7 @@ class ActivityIndicator extends BaseComponent {
             borderWidth={borderWidth}
           />
         </View>
+
         {content && (
           <Text className="tfc-activity-indicator__content" userSelect>
             {content}
@@ -57,4 +65,8 @@ ActivityIndicator.defaultProps = {
   ...defaultProps,
 };
 
-export { ActivityIndicator };
+export {
+  ActivityIndicator,
+  activityIndicatorModeCollection,
+  activityIndicatorTypeCollection,
+};

@@ -56,6 +56,9 @@ const customerPathCollection = {
   detailFlowCase: {
     path: '/customer/pages/detailFlowCase/main/index',
   },
+  setting: {
+    path: '/customer/pages/setting/main/index',
+  },
 };
 
 export const pathCustomCollection = {
