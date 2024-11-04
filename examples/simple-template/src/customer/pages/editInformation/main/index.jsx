@@ -4,7 +4,14 @@ import { connect } from 'easy-soft-dva';
 import { showSuccessNotification } from 'easy-soft-utility';
 
 import { emptyAvatar, transformSize } from 'taro-fast-common';
-import { ImageBox, Item, Line, Space, VerticalBox } from 'taro-fast-component';
+import {
+  ColorText,
+  ImageBox,
+  Item,
+  Line,
+  Space,
+  VerticalBox,
+} from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { viewStyle } from '../../../../customConfig';
@@ -28,7 +35,7 @@ const groupBoxStyle = {
 };
 
 const menuTitleStyle = {
-  fontSize: transformSize(32),
+  fontSize: transformSize(34),
   color: fontColor,
 };
 
@@ -143,7 +150,12 @@ class EditInformation extends PageNeedSignInWrapper {
               border={false}
               arrow
               arrowTransparent
-              extra={name}
+              extra={
+                <ColorText
+                  textStyle={{ fontSize: transformSize(32) }}
+                  text={name}
+                />
+              }
             />
 
             <Item
@@ -194,7 +206,12 @@ class EditInformation extends PageNeedSignInWrapper {
               headerRightPadding={headerRightPadding}
               border={false}
               arrow
-              extra={genderNote}
+              extra={
+                <ColorText
+                  textStyle={{ fontSize: transformSize(32) }}
+                  text={genderNote}
+                />
+              }
               onClick={() => {
                 this.showGenderActionSheet();
               }}

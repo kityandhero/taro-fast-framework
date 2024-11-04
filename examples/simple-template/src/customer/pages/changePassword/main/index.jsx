@@ -209,7 +209,7 @@ class ChangePassword extends PageNeedSignInWrapper {
         <View
           style={{
             color: '#ccc',
-            fontSize: transformSize(24),
+            fontSize: transformSize(26),
             paddingLeft: transformSize(54),
           }}
         >

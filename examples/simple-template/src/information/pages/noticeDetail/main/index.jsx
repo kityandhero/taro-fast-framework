@@ -108,6 +108,7 @@ class NoticeDetail extends PageWrapper {
           <View
             style={{
               fontSize: transformSize(40),
+              lineHeight: transformSize(50),
               fontWeight: 'bold',
               paddingTop: transformSize(6),
               paddingBottom: transformSize(6),
@@ -121,7 +122,8 @@ class NoticeDetail extends PageWrapper {
           {checkStringIsNullOrWhiteSpace(subtitle) ? null : (
             <View
               style={{
-                fontSize: transformSize(32),
+                fontSize: transformSize(34),
+                lineHeight: transformSize(48),
                 paddingTop: transformSize(12),
                 paddingBottom: transformSize(12),
                 color: '#8d8d8d',
@@ -134,7 +136,8 @@ class NoticeDetail extends PageWrapper {
 
           <View
             style={{
-              fontSize: transformSize(28),
+              fontSize: transformSize(30),
+              lineHeight: transformSize(44),
               paddingTop: transformSize(6),
               paddingBottom: transformSize(6),
               color: '#333',
@@ -149,7 +152,8 @@ class NoticeDetail extends PageWrapper {
 
           <View
             style={{
-              fontSize: transformSize(28),
+              fontSize: transformSize(30),
+              lineHeight: transformSize(44),
               paddingTop: transformSize(6),
               paddingBottom: transformSize(6),
               color: '#333',

@@ -364,9 +364,6 @@ export default class Index extends ContentPageBase {
               text: '--tfc-1 ~ --tfc-2000 为内置css变量,小程序环境编译后单位为rpx,H5为rem',
             },
             {
-              text: '1000 ~ 2000 之间,步长为10',
-            },
-            {
               text: '未在此数值范围之内的将输出px为单位的结,例如 2300px',
             },
             {

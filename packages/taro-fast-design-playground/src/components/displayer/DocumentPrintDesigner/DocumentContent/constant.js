@@ -15,18 +15,23 @@ export const colorStyle = {
 export const lineStyle = {};
 
 export const documentTitleStyle = {
-  fontSize: transformSize(32),
-  lineHeight: transformSize(50),
+  fontSize: transformSize(34),
+  lineHeight: transformSize(54),
+  paddingBottom: transformSize(10),
 };
 
 export const labelFrontStyle = {
-  fontSize: transformSize(28),
-  lineHeight: transformSize(36),
+  fontSize: transformSize(30),
+  lineHeight: transformSize(38),
+  paddingTop: transformSize(6),
+  paddingBottom: transformSize(6),
 };
 
 export const valueFrontStyle = {
-  fontSize: transformSize(28),
-  lineHeight: transformSize(36),
+  fontSize: transformSize(30),
+  lineHeight: transformSize(38),
+  paddingTop: transformSize(6),
+  paddingBottom: transformSize(6),
 };
 
 export const highlightModeCollection = {
@@ -43,12 +48,13 @@ export const currencyDisplayStyle = {
 export const defaultConfig = {
   labelWidth: '180',
   width: zeroString,
-  minHeight: '50',
+  minHeight: '70',
   // height: 'auto',
   fullLine: whetherString.yes,
   currencyDisplay: whetherString.no,
   firstPosition: whetherString.no,
   enumList: [],
+  lineStyle: {},
 };
 
 export const valueDisplayModeCollection = {

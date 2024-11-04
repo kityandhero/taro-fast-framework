@@ -156,6 +156,9 @@ class FlowCase extends PageWrapper {
           <Tabs
             current={getTabIndex(this.tabKey)}
             // scroll
+            titleStyle={{
+              fontSize: transformSize(30),
+            }}
             titleActiveStyle={{
               color: '#0171fa',
               fontWight: '600',
@@ -190,7 +193,7 @@ class FlowCase extends PageWrapper {
           <Space
             direction="vertical"
             fillWidth
-            size={10}
+            size={8}
             // split={<Line transparent height={16} />}
           >
             {metaListData.map((item) => {

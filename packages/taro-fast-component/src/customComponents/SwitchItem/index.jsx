@@ -8,6 +8,7 @@ const defaultProps = {
   style: {},
   title: null,
   label: '',
+  contentStyle: {},
   description: null,
   prefix: null,
   border: true,
@@ -31,6 +32,7 @@ class SwitchItem extends BaseComponent {
       prefix,
       title,
       label,
+      contentStyle,
       description,
       style,
       border,
@@ -52,6 +54,7 @@ class SwitchItem extends BaseComponent {
         title={title}
         label={label}
         style={style}
+        contentStyle={contentStyle}
         description={description}
         clickable={false}
         arrow={false}

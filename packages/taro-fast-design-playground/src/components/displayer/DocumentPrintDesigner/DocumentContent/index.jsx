@@ -131,7 +131,7 @@ const defaultProperties = {
   qRCodeTitle: '防伪二维码:',
   qRCodeDescription: '扫码查看防伪标识',
   qRCodeImage: '',
-  qRCodeHeight: 74,
+  qRCodeHeight: 78,
   qRCodeStyle: {},
   showSerialNumber: false,
   serialNumberTitle: '流水号',
@@ -187,12 +187,12 @@ class DocumentContent extends PureComponent {
                 flexAuto="top"
                 top={
                   <View>
-                    <ColorText fontSize={24} text={serialNumberTitle} />
+                    <ColorText fontSize={26} text={serialNumberTitle} />
                   </View>
                 }
                 bottom={
                   <View>
-                    <ColorText fontSize={24} text={serialNumberContent} />
+                    <ColorText fontSize={26} text={serialNumberContent} />
                   </View>
                 }
               />

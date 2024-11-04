@@ -146,7 +146,7 @@ class SetAvatar extends PageNeedSignInWrapper {
         <Line transparent height={22} />
 
         <CenterBox>
-          <ColorText color="#ccc" fontSize={24} text="点击头像更换图片" />
+          <ColorText color="#ccc" fontSize={26} text="点击头像更换图片" />
         </CenterBox>
 
         <Line transparent height={80} />

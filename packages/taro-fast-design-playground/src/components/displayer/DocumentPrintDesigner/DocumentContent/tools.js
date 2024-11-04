@@ -369,6 +369,16 @@ export function buildDisplayValue(data, values) {
           textPrefix="小写￥"
           separator=""
           text={v}
+          fontSize={30}
+          textPrefixStyle={{
+            lineHeight: transformSize(42),
+          }}
+          separatorStyle={{
+            lineHeight: transformSize(42),
+          }}
+          textStyle={{
+            lineHeight: transformSize(42),
+          }}
         />
 
         <Line transparent height={10} />
@@ -376,8 +386,8 @@ export function buildDisplayValue(data, values) {
         <MultiLineText
           prefix="人民币（大写）"
           style={currencyDisplayStyle}
-          fontSize={26}
-          lineHeight={36}
+          fontSize={30}
+          lineHeight={42}
           text={formatMoneyToChinese({ target: toNumber(v) })}
         />
       </View>
@@ -388,8 +398,8 @@ export function buildDisplayValue(data, values) {
 
       <MultiLineText
         // style={formValueStyle}
-        fontSize={26}
-        lineHeight={36}
+        fontSize={30}
+        lineHeight={42}
         text={v}
       />
     </VerticalBox>

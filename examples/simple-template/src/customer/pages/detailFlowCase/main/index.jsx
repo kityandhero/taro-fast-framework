@@ -1,17 +1,9 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import {
-  checkStringIsNullOrWhiteSpace,
-  showSimpleWarnMessage,
-  whetherNumber,
-} from 'easy-soft-utility';
+import { whetherNumber } from 'easy-soft-utility';
 
-import {
-  downloadFileAndOpen,
-  navigateBack,
-  transformSize,
-} from 'taro-fast-common';
+import { navigateBack, transformSize } from 'taro-fast-common';
 import { Button, Line } from 'taro-fast-component';
 
 import { HeadNavigationBox } from '../../../../utils';
@@ -41,31 +33,6 @@ class DetailFlowCase extends BaseFlowCaseDetail {
 
   triggerNoteChanged = (v) => {
     this.note = v;
-  };
-
-  startDownload = ({ attachment }) => {
-    const that = this;
-
-    if (checkStringIsNullOrWhiteSpace(attachment)) {
-      showSimpleWarnMessage('附件链接无效');
-
-      return;
-    }
-
-    that.notifyMessage({
-      message: '即将为您下载',
-      type: 'info',
-    });
-
-    downloadFileAndOpen({
-      url: attachment,
-      successCallback: () => {
-        that.notifyMessage({
-          message: '下载成功',
-          type: 'success',
-        });
-      },
-    });
   };
 
   buildHeadNavigation = () => {
@@ -114,6 +81,10 @@ class DetailFlowCase extends BaseFlowCaseDetail {
         </View>
       </>
     );
+  };
+
+  renderInteractiveArea = () => {
+    return <>{this.renderFilePreviewPopup()}</>;
   };
 }
 

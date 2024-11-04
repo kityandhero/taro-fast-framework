@@ -98,10 +98,10 @@ function LineApprove(properties) {
                   paddingLeft: transformSize(10),
                   paddingRight: transformSize(10),
                   ...labelContainerStyle,
-                  fontSize: transformSize(26),
+                  fontSize: transformSize(30),
                 }}
               >
-                <MultiLineText fontSize={26} lineHeight={36} text={title} />
+                <MultiLineText fontSize={30} lineHeight={42} text={title} />
               </View>
             </CenterBox>
           </View>
@@ -148,6 +148,8 @@ function LineApprove(properties) {
                         paddingRight: 0,
                         paddingBottom: transformSize(5),
                         paddingLeft: 0,
+                        fontSize: transformSize(30),
+                        lineHeight: transformSize(42),
                       }}
                     >
                       {note}
@@ -178,7 +180,7 @@ function LineApprove(properties) {
                               >
                                 <View
                                   style={{
-                                    width: transformSize(140),
+                                    width: transformSize(160),
                                     top: '0',
                                     ...signetStyle,
                                     right: '0',
@@ -199,11 +201,11 @@ function LineApprove(properties) {
                             right={
                               <View
                                 style={{
-                                  fontSize: transformSize(24),
+                                  fontSize: transformSize(28),
                                   paddingTop: transformSize(16),
                                   paddingBottom: transformSize(6),
-                                  height: transformSize(40),
-                                  lineHeight: transformSize(40),
+                                  height: transformSize(42),
+                                  lineHeight: transformSize(42),
                                   fontWeight: 'normal',
                                 }}
                               >

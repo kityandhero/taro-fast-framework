@@ -54,7 +54,7 @@ export function HeadNavigationBox({
             <VerticalBox>
               <View style={{ width: transformSize(30) }}>
                 {/* <ImageBox src={arrowDownGreyImage} /> */}
-                <IconChevronDown size={34} color="#fff" />
+                <IconChevronDown size={36} color="#fff" />
               </View>
             </VerticalBox>
           ) : (

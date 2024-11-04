@@ -43,23 +43,23 @@ const gridStyle = {
 };
 
 const gridBoxStyle = {
-  padding: `${transformSize(20)} 0`,
+  padding: `${transformSize(24)} 0`,
   height: transformSize(120),
   color: 'var(--tfc-color-grey)',
 };
 
 const gridImageStyle = {
-  width: transformSize(80),
+  width: transformSize(70),
 };
 
 const gridNameStyle = {
   width: '100%',
-  fontSize: transformSize(24),
+  fontSize: transformSize(32),
   height: transformSize(36),
   lineHeight: transformSize(36),
   textAlign: 'center',
-  marginBottom: transformSize(20),
-  marginTop: transformSize(4),
+  // marginBottom: transformSize(20),
+  marginTop: transformSize(12),
   color: '#333',
 };
 
@@ -76,7 +76,9 @@ export function SearchBox({ afterScanCode = null }) {
           circle={false}
           mode="navigate"
           showSearch={false}
-          searchStyle={{}}
+          searchStyle={{
+            fontSize: transformSize(30),
+          }}
         />
       }
       rightStyle={{
@@ -240,7 +242,7 @@ export function NoticeBox({ data = '', onClick = null }) {
               <VerticalBox>
                 <MultiLineText
                   style={{ color: '#7e7e7e' }}
-                  fontSize={30}
+                  fontSize={32}
                   lineHeight={36}
                   text={messageAdjust}
                 />
@@ -384,7 +386,7 @@ export function TitleBox({ title = '', onClick = null }) {
                   <View
                     style={{
                       color: '#333',
-                      fontSize: transformSize(30),
+                      fontSize: transformSize(34),
                       fontWeight: 'bold',
                     }}
                   >
@@ -466,7 +468,7 @@ function WaitApproveFlowCaseItem({ data, onClick = null }) {
       <View
         style={{
           color: '#181818',
-          fontSize: transformSize(28),
+          fontSize: transformSize(30),
           lineHeight: transformSize(38),
           fontWeight: 'bold',
           paddingTop: transformSize(10),
@@ -487,7 +489,7 @@ function WaitApproveFlowCaseItem({ data, onClick = null }) {
           <View
             style={{
               color: '#818181',
-              fontSize: transformSize(26),
+              fontSize: transformSize(28),
               lineHeight: transformSize(34),
               paddingBottom: transformSize(10),
             }}
@@ -505,7 +507,7 @@ function WaitApproveFlowCaseItem({ data, onClick = null }) {
           <View>
             <ColorText
               color="#7d7d7d"
-              fontSize={26}
+              fontSize={28}
               textPrefixStyle={
                 {
                   // fontWeight: 'bold',
@@ -631,7 +633,7 @@ export function NotificationItem({ data, onClick = null }) {
               <View
                 style={{
                   color: titleColor || '#333',
-                  fontSize: transformSize(28),
+                  fontSize: transformSize(30),
                   lineHeight: transformSize(38),
                   fontWeight: 'bold',
                   paddingTop: transformSize(10),
@@ -669,15 +671,15 @@ export function NotificationItem({ data, onClick = null }) {
 
       <Line color="#f8f8f8" height={2} />
 
-      <Line transparent height={20} />
+      <Line transparent height={12} />
 
       {checkStringIsNullOrWhiteSpace(description) ? null : (
         <>
           <View
             style={{
               color: '#818181',
-              fontSize: transformSize(26),
-              lineHeight: transformSize(34),
+              fontSize: transformSize(28),
+              lineHeight: transformSize(44),
               paddingBottom: transformSize(10),
             }}
           >
@@ -691,7 +693,7 @@ export function NotificationItem({ data, onClick = null }) {
         left={<View></View>}
         right={
           <View>
-            <ColorText color="#3f3f3f" fontSize={26} text={createTime} />
+            <ColorText color="#3f3f3f" fontSize={28} text={createTime} />
           </View>
         }
       />

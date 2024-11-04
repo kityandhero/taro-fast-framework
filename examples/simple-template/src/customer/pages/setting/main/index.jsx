@@ -17,12 +17,19 @@ import { setMobileApproveViewModeAction } from '../assist/action';
 
 export const classPrefix = `root-customer`;
 
+const fontColor = '#080808';
+
 const groupBoxStyle = {
   backgroundColor: '#fff',
   paddingLeft: transformSize(20),
   paddingRight: transformSize(20),
   paddingTop: transformSize(14),
   paddingBottom: transformSize(14),
+};
+
+const menuTitleStyle = {
+  fontSize: transformSize(34),
+  color: fontColor,
 };
 
 // eslint-disable-next-line no-undef
@@ -132,7 +139,8 @@ class Setting extends PageNeedSignInWrapper {
             split={<Line height={2} />}
           >
             <SwitchItem
-              label="审批时表单呈现模式"
+              label="审批表单呈现模式"
+              contentStyle={menuTitleStyle}
               checkedText="文档"
               uncheckedText="表单"
               border={false}

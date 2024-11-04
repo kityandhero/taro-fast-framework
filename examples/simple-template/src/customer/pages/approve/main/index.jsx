@@ -6,17 +6,12 @@ import {
   convertCollection,
   getValueByKey,
   showSimpleErrorMessage,
-  showSimpleWarnMessage,
   showSuccessMessage,
   showSuccessNotification,
   whetherNumber,
 } from 'easy-soft-utility';
 
-import {
-  downloadFileAndOpen,
-  navigateBack,
-  transformSize,
-} from 'taro-fast-common';
+import { navigateBack, transformSize } from 'taro-fast-common';
 import {
   Button,
   Card,
@@ -167,31 +162,6 @@ class Approve extends BaseFlowCaseDetail {
     this.note = v;
   };
 
-  startDownload = ({ attachment }) => {
-    const that = this;
-
-    if (checkStringIsNullOrWhiteSpace(attachment)) {
-      showSimpleWarnMessage('附件链接无效');
-
-      return;
-    }
-
-    that.notifyMessage({
-      message: '即将为您下载',
-      type: 'info',
-    });
-
-    downloadFileAndOpen({
-      url: attachment,
-      successCallback: () => {
-        that.notifyMessage({
-          message: '下载成功',
-          type: 'success',
-        });
-      },
-    });
-  };
-
   buildHeadNavigation = () => {
     return <HeadNavigationBox title="审批详情" />;
   };
@@ -227,7 +197,7 @@ class Approve extends BaseFlowCaseDetail {
             >
               <Button
                 text="返回"
-                fontSize={24}
+                fontSize={30}
                 backgroundColor="#fff"
                 block
                 size="middle"
@@ -285,6 +255,8 @@ class Approve extends BaseFlowCaseDetail {
                 border={false}
                 valueStyle={{
                   color: '#333',
+                  fontSize: transformSize(30),
+                  lineHeight: transformSize(46),
                 }}
                 placeholder="请输入审批意见"
                 afterChange={this.triggerNoteChanged}
@@ -309,7 +281,7 @@ class Approve extends BaseFlowCaseDetail {
                   text="驳回"
                   backgroundColor="#fc5e3d"
                   fontColor="#fff"
-                  fontSize={24}
+                  fontSize={30}
                   paddingTop={14}
                   paddingBottom={14}
                   paddingLeft={32}
@@ -332,7 +304,7 @@ class Approve extends BaseFlowCaseDetail {
                         fill="none"
                         text="返回"
                         fontColor="#4599ea"
-                        fontSize={24}
+                        fontSize={30}
                         paddingTop={14}
                         paddingBottom={14}
                         paddingLeft={20}
@@ -350,7 +322,7 @@ class Approve extends BaseFlowCaseDetail {
                           text="批准"
                           backgroundColor="#0075ff"
                           fontColor="#fff"
-                          fontSize={24}
+                          fontSize={30}
                           paddingTop={14}
                           paddingBottom={14}
                           paddingLeft={32}
@@ -364,7 +336,7 @@ class Approve extends BaseFlowCaseDetail {
                           text="提交审批"
                           backgroundColor="#2da44e"
                           fontColor="#fff"
-                          fontSize={24}
+                          fontSize={30}
                           paddingTop={14}
                           paddingBottom={14}
                           paddingLeft={32}
@@ -387,6 +359,8 @@ class Approve extends BaseFlowCaseDetail {
   renderInteractiveArea = () => {
     return (
       <>
+        {this.renderFilePreviewPopup()}
+
         <SubmitModal afterOk={this.submitApproval} />
       </>
     );

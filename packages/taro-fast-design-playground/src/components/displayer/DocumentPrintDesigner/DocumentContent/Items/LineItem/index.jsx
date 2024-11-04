@@ -98,7 +98,7 @@ function LineItem(properties) {
       leftStyle={{
         ...labelBoxStyle,
         position: 'relative',
-        padding: '0',
+        // padding: '0',
         ...(checkStringIsNullOrWhiteSpace(minHeightAdjust)
           ? {}
           : {
@@ -130,11 +130,11 @@ function LineItem(properties) {
                 paddingRight: transformSize(10),
                 ...labelContainerStyle,
                 height: '100%',
-                fontSize: transformSize(26),
+                fontSize: transformSize(30),
               }}
             >
               <CenterBox>
-                <MultiLineText fontSize={26} lineHeight={36} text={title} />
+                <MultiLineText fontSize={30} lineHeight={42} text={title} />
               </CenterBox>
             </View>
           </View>

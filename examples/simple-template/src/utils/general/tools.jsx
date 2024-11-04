@@ -85,6 +85,8 @@ function buildItem(o) {
         key={key}
         style={{
           textIndent: transformSize(2),
+          fontSize: transformSize(32),
+          lineHeight: transformSize(54),
           marginTop: transformSize(5),
           marginBottom: transformSize(5),
         }}

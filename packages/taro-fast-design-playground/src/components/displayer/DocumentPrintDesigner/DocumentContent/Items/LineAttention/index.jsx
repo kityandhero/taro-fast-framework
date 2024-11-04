@@ -24,7 +24,6 @@ function LineAttention(properties) {
   const {
     general,
     data,
-
     lineStyle,
     labelBoxStyle,
     valueBoxStyle,
@@ -99,10 +98,10 @@ function LineAttention(properties) {
                   paddingLeft: transformSize(10),
                   paddingRight: transformSize(10),
                   ...labelContainerStyle,
-                  fontSize: transformSize(26),
+                  fontSize: transformSize(30),
                 }}
               >
-                <MultiLineText fontSize={26} lineHeight={36} text={title} />
+                <MultiLineText fontSize={30} lineHeight={42} text={title} />
               </View>
             </CenterBox>
           </View>
@@ -179,7 +178,7 @@ function LineAttention(properties) {
                               >
                                 <View
                                   style={{
-                                    width: transformSize(40),
+                                    width: transformSize(160),
                                     top: '0',
                                     ...signetStyle,
                                     right: '0',
@@ -200,7 +199,7 @@ function LineAttention(properties) {
                             right={
                               <View
                                 style={{
-                                  fontSize: transformSize(24),
+                                  fontSize: transformSize(26),
                                   paddingTop: transformSize(16),
                                   paddingBottom: transformSize(6),
                                   height: transformSize(40),

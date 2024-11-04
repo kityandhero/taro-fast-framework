@@ -44,17 +44,17 @@ const latestApproveItemBoxStyle = {
 
 const titleStyle = {
   color: '#181818',
-  fontSize: transformSize(28),
-  lineHeight: transformSize(38),
+  fontSize: transformSize(32),
+  lineHeight: transformSize(46),
   fontWeight: 'bold',
-  paddingTop: transformSize(10),
-  paddingBottom: transformSize(10),
+  paddingTop: transformSize(12),
+  paddingBottom: transformSize(12),
 };
 
 const descriptionStyle = {
   color: '#7e7e7e',
-  fontSize: transformSize(26),
-  lineHeight: transformSize(34),
+  fontSize: transformSize(30),
+  lineHeight: transformSize(42),
   paddingBottom: transformSize(10),
 };
 
@@ -133,7 +133,7 @@ export function buildCreateApproveItem({ key, data, onClick }) {
               <View>
                 <ColorText
                   color="#7d7d7d"
-                  fontSize={26}
+                  fontSize={30}
                   textPrefixStyle={{
                     fontWeight: 'bold',
                   }}
@@ -142,7 +142,6 @@ export function buildCreateApproveItem({ key, data, onClick }) {
                   separatorStyle={{
                     marginRight: transformSize(14),
                   }}
-                  s
                   text={lastSubmitApprovalTime}
                 />
               </View>
@@ -226,7 +225,7 @@ export function buildLatestApproveItem({ key, data, onClick }) {
         leftStyle={{
           marginRight: transformSize(12),
         }}
-        left={<Avatar circle size={40} image={userAvatar || userGreyImage} />}
+        left={<Avatar circle size={42} image={userAvatar || userGreyImage} />}
         right={
           <FlexBox
             flexAuto="left"
@@ -234,7 +233,7 @@ export function buildLatestApproveItem({ key, data, onClick }) {
               <View>
                 <ColorText
                   color="#7d7d7d"
-                  fontSize={26}
+                  fontSize={30}
                   textPrefixStyle={{
                     fontWeight: 'bold',
                   }}
@@ -243,7 +242,6 @@ export function buildLatestApproveItem({ key, data, onClick }) {
                   separatorStyle={{
                     marginRight: transformSize(14),
                   }}
-                  s
                   text={lastSubmitApprovalTime}
                 />
               </View>
@@ -331,12 +329,12 @@ export function buildWaitApproveItem({ key, data, onClick }) {
                       <View
                         style={{
                           height: transformSize(34),
-                          paddingTop: transformSize(2),
+                          paddingBottom: transformSize(2),
                         }}
                       >
                         <ColorText
                           color="#181818"
-                          fontSize={26}
+                          fontSize={30}
                           style={{
                             fontWeight: 'bold',
                           }}
@@ -347,7 +345,7 @@ export function buildWaitApproveItem({ key, data, onClick }) {
                     bottom={
                       <ColorText
                         color="#666"
-                        fontSize={24}
+                        fontSize={28}
                         text={lastSubmitApprovalTime}
                       />
                     }
@@ -394,7 +392,7 @@ export function buildWaitApproveItem({ key, data, onClick }) {
         text="去处理"
         fontColor="#fff"
         backgroundColor="#0075ff"
-        fontSize={32}
+        fontSize={34}
         block
         circle
         size="middle"

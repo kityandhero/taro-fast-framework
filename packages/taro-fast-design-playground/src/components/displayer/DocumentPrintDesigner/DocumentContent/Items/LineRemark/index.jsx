@@ -87,10 +87,10 @@ function LineRemark(properties) {
                   paddingLeft: transformSize(10),
                   paddingRight: transformSize(10),
                   ...labelContainerStyle,
-                  fontSize: transformSize(26),
+                  fontSize: transformSize(30),
                 }}
               >
-                <MultiLineText fontSize={26} lineHeight={36} text={title} />
+                <MultiLineText fontSize={30} lineHeight={42} text={title} />
               </View>
             </CenterBox>
           </View>
@@ -127,7 +127,7 @@ function LineRemark(properties) {
               }}
             >
               <VerticalBox>
-                <View>{value}</View>
+                <MultiLineText fontSize={30} lineHeight={42} text={value} />
               </VerticalBox>
             </View>
           </View>

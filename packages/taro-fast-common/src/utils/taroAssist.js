@@ -3,6 +3,7 @@ import {
   createAnimation as createAnimationCore,
   createSelectorQuery as createSelectorQueryCore,
   downloadFile,
+  getFileSystemManager as getFileSystemManagerCore,
   getSetting as getSettingCore,
   getSystemInfoSync,
   hideNavigationBarLoading as hideNavigationBarLoadingCore,
@@ -23,10 +24,11 @@ import {
 import {
   checkInCollection,
   isFunction,
+  isNull,
   logDebug,
   logException,
   logExecute,
-  showWarnMessage,
+  showSimpleWarnMessage,
 } from 'easy-soft-utility';
 
 import { fileTypeCanPreviewList, imageTypePreviewList } from './constants';
@@ -193,14 +195,10 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
     url,
     success: (response) => {
       if (response.statusCode === 200) {
-        if (isFunction(successCallback)) {
-          successCallback();
-        }
-
         const filePath = response.tempFilePath;
 
         if (filePath.lastIndexOf('.') < 0) {
-          showWarnMessage('无法文件解析扩展名，预览失败');
+          showSimpleWarnMessage('无法文件解析扩展名，预览失败');
 
           return;
         }
@@ -215,6 +213,17 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
             showMenu: true,
           });
 
+          if (isFunction(successCallback)) {
+            successCallback({
+              directlyOpen: true,
+              filePath,
+              extensionName,
+              other: {
+                hasContent: false,
+              },
+            });
+          }
+
           return;
         }
 
@@ -222,12 +231,54 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
           previewImage({
             urls: [filePath],
             showMenu: true,
+            successCallback,
+          });
+
+          if (isFunction(successCallback)) {
+            successCallback({
+              directlyOpen: true,
+              filePath,
+              extensionName,
+              other: {
+                hasContent: false,
+              },
+            });
+          }
+
+          return;
+        }
+
+        if (checkInCollection(['txt'], extensionName)) {
+          readFile({
+            filePath,
+            success: ({ errMsg, data }) => {
+              const decoder = new TextDecoder('utf8');
+
+              const text = decoder.decode(data);
+
+              if (isFunction(successCallback)) {
+                successCallback({
+                  directlyOpen: false,
+                  filePath,
+                  extensionName,
+                  other: {
+                    hasContent: true,
+                    message: errMsg,
+                    content: text,
+                    source: data,
+                  },
+                });
+              }
+            },
+            fail: (error) => {
+              logException(error);
+            },
           });
 
           return;
         }
 
-        showWarnMessage('不支持的文件类型，无法预览');
+        showSimpleWarnMessage(`不支持的文件类型(${extensionName})，无法预览`);
       }
     },
   });
@@ -439,6 +490,52 @@ export function scanCode({
   scanCodeCore({
     onlyFromCamera,
     scanType: scanTypeCollection,
+    success: successCallback,
+    fail: failCallback,
+    complete: completeCallback,
+  });
+}
+
+export function getFileSystemManager() {
+  return getFileSystemManagerCore();
+}
+
+export function readFile({
+  filePath,
+  encoding = null,
+  position = null,
+  length = null,
+  // eslint-disable-next-line no-unused-vars
+  success: successCallback = (data) => {},
+  // eslint-disable-next-line no-unused-vars
+  fail: failCallback = (response) => {},
+  // eslint-disable-next-line no-unused-vars
+  complete: completeCallback = (response) => {},
+}) {
+  getFileSystemManager().readFile({
+    filePath,
+    ...(isNull(encoding) ? {} : { encoding }),
+    ...(isNull(position) ? {} : { position }),
+    ...(isNull(length) ? {} : { length }),
+    success: successCallback,
+    fail: failCallback,
+    complete: completeCallback,
+  });
+}
+
+export function openFile({
+  filePath,
+  flag = 'r',
+  // eslint-disable-next-line no-unused-vars
+  success: successCallback = (data) => {},
+  // eslint-disable-next-line no-unused-vars
+  fail: failCallback = (response) => {},
+  // eslint-disable-next-line no-unused-vars
+  complete: completeCallback = (response) => {},
+}) {
+  getFileSystemManager().open({
+    filePath,
+    flag,
     success: successCallback,
     fail: failCallback,
     complete: completeCallback,

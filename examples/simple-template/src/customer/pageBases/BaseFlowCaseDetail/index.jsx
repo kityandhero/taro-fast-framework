@@ -53,6 +53,7 @@ import {
   viewStyle,
 } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
+import { FilePreviewPopup } from '../../customComponents';
 import { buildListApprove, buildListHistory } from '../../utils';
 
 const stripTopValue = 24;
@@ -75,8 +76,8 @@ const bodyStyle = {
 
 const descriptionStyle = {
   color: '#7e7e7e',
-  fontSize: transformSize(24),
-  lineHeight: transformSize(34),
+  fontSize: transformSize(30),
+  lineHeight: transformSize(42),
   paddingBottom: transformSize(10),
 };
 
@@ -91,12 +92,12 @@ const formValueStyle = {
 };
 
 const approveTitleStyle = {
-  fontSize: transformSize(28),
+  fontSize: transformSize(32),
   fontWeight: 'bold',
 };
 
 const approveNoteStyle = {
-  fontSize: transformSize(28),
+  fontSize: transformSize(30),
 };
 
 const approveSignetStyle = {
@@ -178,6 +179,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       existAttachment: whetherNumber.no,
       approveComplete: whetherNumber.no,
       useDocumentView: whetherNumber.no,
+      previewContent: '',
     };
   }
 
@@ -230,17 +232,12 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       convert: convertCollection.number,
     });
 
-    let approverMobileApproveViewMode =
-      flowApproveMobileViewModeCollection.form;
-
-    if (canApprove === whetherNumber.yes) {
-      approverMobileApproveViewMode = getValueByKey({
-        data: metaData,
-        key: fieldDataWorkflowCase.approverMobileApproveViewMode.name,
-        defaultValue: flowApproveMobileViewModeCollection.form,
-        convert: convertCollection.number,
-      });
-    }
+    const approverMobileApproveViewMode = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.approverMobileApproveViewMode.name,
+      defaultValue: flowApproveMobileViewModeCollection.form,
+      convert: convertCollection.number,
+    });
 
     const status = getValueByKey({
       data: metaData,
@@ -567,12 +564,38 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
 
     downloadFileAndOpen({
       url: attachment,
-      successCallback: () => {
+      successCallback: ({
+        directlyOpen,
+        // eslint-disable-next-line no-unused-vars
+        filePath,
+        // eslint-disable-next-line no-unused-vars
+        extensionName,
+        // eslint-disable-next-line no-unused-vars
+        other,
+      }) => {
         that.notifyMessage({
           message: '下载成功',
           type: 'success',
         });
+
+        if (!directlyOpen) {
+          const { hasContent = false, content = '' } = {
+            hasContent: false,
+            content: '',
+            ...other,
+          };
+
+          if (hasContent && !checkStringIsNullOrWhiteSpace(content)) {
+            that.showFilePreviewPopup(content);
+          }
+        }
       },
+    });
+  };
+
+  showFilePreviewPopup = (o) => {
+    this.setState({ previewContent: o }, () => {
+      FilePreviewPopup.open();
     });
   };
 
@@ -648,9 +671,9 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
           style={{ width: '100%' }}
           flexAuto="right"
           leftStyle={{
-            marginRight: transformSize(12),
+            marginRight: transformSize(14),
           }}
-          left={<Avatar circle size={34} image={userAvatar || userGreyImage} />}
+          left={<Avatar circle size={36} image={userAvatar || userGreyImage} />}
           right={
             <FlexBox
               flexAuto="left"
@@ -658,7 +681,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
                 <View>
                   <ColorText
                     color="#7d7d7d"
-                    fontSize={26}
+                    fontSize={30}
                     textPrefixStyle={{
                       fontWeight: 'bold',
                     }}
@@ -770,14 +793,14 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
             approveList={isArray(listApprove) ? listApprove : []}
             allApproveProcessList={listChainApprove}
             signetStyle={{
-              top: transformSize(-2),
+              top: transformSize(-4),
             }}
             remarkTitle="备注"
             remarkName="remark"
             remarkList={remarkSchemaList}
             showQRCode
             qRCodeImage={qRCodeImage}
-            qRCodeHeight={60}
+            qRCodeHeight={64}
             showSerialNumber
             serialNumberTitle="审批流水号: "
             serialNumberContent={workflowCaseId}
@@ -867,7 +890,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
                             <View style={approveTimeStyle}>
                               <ColorText
                                 color="#7d7d7d"
-                                fontSize={26}
+                                fontSize={30}
                                 text={time}
                               />
                             </View>
@@ -926,39 +949,50 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
                 };
 
                 return (
-                  <View
-                    key={`attachment_${index}`}
-                    style={attachmentBoxStyle}
-                    onClick={() => {
-                      if (existPdf === whetherNumber.yes) {
-                        this.startDownload({ attachment: urlPdf });
-                      } else {
-                        this.startDownload({ attachment: url });
-                      }
-                    }}
-                  >
+                  <View key={`attachment_${index}`} style={attachmentBoxStyle}>
                     <FlexBox
-                      flexAuto="right"
-                      leftStyle={{
-                        marginRight: transformSize(10),
-                      }}
+                      flexAuto="left"
                       left={
-                        <VerticalBox>
-                          <View style={attachmentIconStyle}>
-                            <ImageBox src={fileTextBlueImage} />
-                          </View>
-                        </VerticalBox>
+                        <FlexBox
+                          flexAuto="right"
+                          leftStyle={{
+                            marginRight: transformSize(10),
+                          }}
+                          left={
+                            <VerticalBox>
+                              <View style={attachmentIconStyle}>
+                                <ImageBox src={fileTextBlueImage} />
+                              </View>
+                            </VerticalBox>
+                          }
+                          right={
+                            <View style={attachmentTitleStyle}>
+                              <MultiLineText
+                                style={{
+                                  color: '#333',
+                                }}
+                                fontSize={30}
+                                lineHeight={36}
+                                text={alias}
+                              />
+                            </View>
+                          }
+                        />
                       }
                       right={
-                        <View style={attachmentTitleStyle}>
-                          <MultiLineText
-                            style={{
-                              color: '#8290a1',
-                            }}
-                            fontSize={26}
-                            lineHeight={36}
-                            text={alias}
-                          />
+                        <View
+                          style={{
+                            marginLeft: transformSize(10),
+                          }}
+                          onClick={() => {
+                            if (existPdf === whetherNumber.yes) {
+                              this.startDownload({ attachment: urlPdf });
+                            } else {
+                              this.startDownload({ attachment: url });
+                            }
+                          }}
+                        >
+                          查看
                         </View>
                       }
                     />
@@ -978,7 +1012,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
                   color: '#a5a5a5',
                   marginRight: transformSize(14),
                 }}
-                text="点击进行预览，文件较大时，需要耗费时间下载."
+                text="点查看进行预览，若文件较大，需要耗费时间下载."
                 textStyle={{
                   color: '#a5a5a5',
                 }}
@@ -1199,6 +1233,32 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
           }}
         /> */}
       </Card>
+    );
+  };
+
+  renderFilePreviewPopup = () => {
+    const { previewContent } = this.state;
+
+    return (
+      <>
+        <FilePreviewPopup
+          header="文件预览"
+          mode="through"
+          position="bottom"
+          showClose
+          closeWhenOverlayClick
+          arcTop
+        >
+          <View
+            style={{
+              height: transformSize(640),
+              overflowY: 'auto',
+            }}
+          >
+            {previewContent}
+          </View>
+        </FilePreviewPopup>
+      </>
     );
   };
 
