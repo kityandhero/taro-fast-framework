@@ -1,35 +1,12 @@
 import { connect } from 'easy-soft-dva';
 
-import { Line, Space } from 'taro-fast-component';
+import { Line } from 'taro-fast-component';
 
-import {
-  ContentPageBase,
-  PropertyBox,
-  SimpleBox,
-} from '../../../customComponents';
+import { ContentPageWrapper } from '../../../customComponents';
 
-const config1 = {
-  width: 400,
-};
+import { buildInteractiveConfigList } from './tools';
 
-const config2 = {
-  height: 12,
-};
-
-const config3 = {
-  color: '#45672e',
-};
-
-const config4 = {
-  color: ['#45672e', '#01e456', '#de1245'],
-  height: 12,
-};
-
-const config5 = {
-  direction: 'vertical',
-  width: 4,
-  height: 40,
-};
+const configCore = {};
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -39,51 +16,25 @@ definePageConfig({
 @connect(({ schedulingControl }) => ({
   schedulingControl,
 }))
-export default class Index extends ContentPageBase {
+export default class Index extends ContentPageWrapper {
   headerData = {
     id: 'Line',
     name: '线条',
     description: '线条组件',
   };
 
+  targetComponentName = 'Line';
+
   constructor(properties) {
-    super(properties);
+    super(properties, configCore);
 
     this.state = {
       ...this.state,
-
-      header: '水平线',
-      currentConfig: {},
     };
   }
 
-  establishControlList = () => {
-    return [
-      {
-        header: '水平线',
-        config: {},
-      },
-      {
-        header: '设置宽度',
-        config: config1,
-      },
-      {
-        header: '设置高度',
-        config: config2,
-      },
-      {
-        header: '设置颜色',
-        config: config3,
-      },
-      {
-        header: '颜色渐变',
-        config: config4,
-      },
-      {
-        header: '垂直线',
-        config: config5,
-      },
-    ];
+  buildInteractiveConfig = () => {
+    return buildInteractiveConfigList();
   };
 
   buildSimpleItem = ({ key, config, inner }) => {
@@ -91,30 +42,6 @@ export default class Index extends ContentPageBase {
       <Line key={key} {...config}>
         {this.buildSimpleItemInner(inner)}
       </Line>
-    );
-  };
-
-  renderContent = () => {
-    const { header, description, currentConfig, inner } = this.state;
-
-    return (
-      <Space direction="vertical" fillWidth>
-        <SimpleBox
-          header={header}
-          description={description}
-          config={currentConfig}
-          componentName="Line"
-          mockChildren={!!inner}
-          useInnerBox
-          innerBoxCenterMode
-          innerBoxPadding
-          controlBox={this.buildControlBox(this.establishControlList())}
-        >
-          {this.buildSimpleList()}
-        </SimpleBox>
-
-        <PropertyBox config={Line.defaultProps} labelWidth={260} />
-      </Space>
     );
   };
 }

@@ -1,7 +1,7 @@
 import {
+  canToNumber,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
-  isNumber,
   toNumber,
   toString,
 } from 'easy-soft-utility';
@@ -43,7 +43,7 @@ export function handleInlayColor(color, suffix = '') {
  * @returns
  */
 export function transformSize(size) {
-  if (isNumber(size)) {
+  if (canToNumber(size)) {
     const s = toNumber(size);
 
     if (s >= -2000 && s <= 2000) {

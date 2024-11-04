@@ -15,13 +15,14 @@ import { CenterBox, ColorText, FadeInBox, Line } from 'taro-fast-component';
 import { PageWrapper } from '../../../../customComponents';
 import { fieldDataNotice, viewStyle } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
-import { ContentStructureBox } from '../../../../utils';
+import { ContentStructureBox, HeadNavigationBox } from '../../../../utils';
 
 // const { IconChevronRight } = Icon;
 
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '通知详情',
+  navigationStyle: 'custom',
 });
 
 @connect(({ notice, share, session, entrance, global, schedulingControl }) => ({
@@ -60,6 +61,10 @@ class NoticeDetail extends PageWrapper {
     };
 
     return { ...o, noticeId };
+  };
+
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="通告详情" />;
   };
 
   buildViewArea = () => {

@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
 import {
+  canToNumber,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   isArray,
-  isNumber,
   isString,
   toNumber,
 } from 'easy-soft-utility';
@@ -18,14 +18,17 @@ import './index.less';
 
 const classPrefix = `tfc-line`;
 
-const directionCollection = ['horizontal', 'vertical'];
+const lineDirectionCollection = {
+  horizontal: 'horizontal',
+  vertical: 'vertical',
+};
 
 const defaultProps = {
   direction: 'horizontal',
   margin: '',
   color: '',
-  width: 0,
-  height: 0,
+  width: '',
+  height: '',
   transparent: false,
   borderRadius: 0,
 };
@@ -34,7 +37,10 @@ class Line extends BaseComponent {
   getDirection = () => {
     const { direction: directionSource } = this.props;
 
-    const direction = checkInCollection(directionCollection, directionSource)
+    const direction = checkInCollection(
+      [lineDirectionCollection.horizontal, lineDirectionCollection.vertical],
+      directionSource,
+    )
       ? directionSource
       : 'horizontal';
 
@@ -89,10 +95,10 @@ class Line extends BaseComponent {
     switch (direction) {
       case 'horizontal': {
         sizeStyle = {
-          ...(isNumber(width) && toNumber(width) > 0
+          ...(canToNumber(width) && toNumber(width) > 0
             ? { '--width': transformSize(width) }
             : { '--width': '100%' }),
-          ...(isNumber(height) && toNumber(height) > 0
+          ...(canToNumber(height) && toNumber(height) > 0
             ? { '--height': transformSize(height) }
             : { '--height': transformSize(1) }),
         };
@@ -101,10 +107,10 @@ class Line extends BaseComponent {
 
       default: {
         sizeStyle = {
-          ...(isNumber(width) && toNumber(width) > 0
+          ...(canToNumber(width) && toNumber(width) > 0
             ? { '--width': transformSize(width) }
             : { '--width': transformSize(1) }),
-          ...(isNumber(height) && toNumber(height) > 0
+          ...(canToNumber(height) && toNumber(height) > 0
             ? { '--height': transformSize(height) }
             : { '--height': '100%' }),
         };
@@ -114,13 +120,13 @@ class Line extends BaseComponent {
 
     if (!checkStringIsNullOrWhiteSpace(margin)) {
       marginStyle = {
-        '--margin': isNumber(margin) ? transformSize(margin) : margin,
+        '--margin': canToNumber(margin) ? transformSize(margin) : margin,
       };
     }
 
     return {
       ...sizeStyle,
-      ...(borderRadius > 0
+      ...(canToNumber(borderRadius) && toNumber(borderRadius) > 0
         ? { '--border-radius': transformSize(borderRadius) }
         : {}),
       ...marginStyle,
@@ -149,4 +155,4 @@ Line.defaultProps = {
   ...defaultProps,
 };
 
-export { Line };
+export { Line, lineDirectionCollection };

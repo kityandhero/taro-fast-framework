@@ -87,8 +87,8 @@ export function NotificationItem({ data, onClick = null }) {
               <View
                 style={{
                   color: titleColor || '#333',
-                  fontSize: transformSize(28),
-                  lineHeight: transformSize(38),
+                  fontSize: transformSize(30),
+                  lineHeight: transformSize(46),
                   fontWeight: 'bold',
                   paddingTop: transformSize(10),
                   paddingBottom: transformSize(10),
@@ -125,16 +125,16 @@ export function NotificationItem({ data, onClick = null }) {
 
       <Line color="#f8f8f8" height={2} />
 
-      <Line transparent height={20} />
+      <Line transparent height={10} />
 
       {checkStringIsNullOrWhiteSpace(description) ? null : (
         <>
           <View
             style={{
               color: '#818181',
-              fontSize: transformSize(26),
-              lineHeight: transformSize(34),
-              paddingBottom: transformSize(10),
+              fontSize: transformSize(28),
+              lineHeight: transformSize(44),
+              paddingBottom: transformSize(6),
             }}
           >
             {description}
