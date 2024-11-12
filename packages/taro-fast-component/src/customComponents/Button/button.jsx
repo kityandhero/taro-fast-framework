@@ -33,7 +33,6 @@ const openTypeCollection = [
 ];
 
 const defaultProps = {
-  hidden: false,
   ripple: false,
   style: {},
   icon: null,

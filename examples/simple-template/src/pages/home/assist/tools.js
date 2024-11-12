@@ -49,7 +49,7 @@ const gridBoxStyle = {
 };
 
 const gridImageStyle = {
-  width: transformSize(70),
+  width: transformSize(66),
 };
 
 const gridNameStyle = {
@@ -220,7 +220,7 @@ export function NoticeBox({ data = '', onClick = null }) {
           <FlexBox
             flexAuto="left"
             left={
-              <View style={{ width: transformSize(60) }}>
+              <View style={{ width: transformSize(86) }}>
                 <ImageBox src={newMessageImage} />
               </View>
             }

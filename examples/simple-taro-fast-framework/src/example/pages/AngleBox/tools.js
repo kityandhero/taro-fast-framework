@@ -15,6 +15,10 @@ export function buildInteractiveConfigList() {
       defaultValue: AngleBox.defaultProps.style,
       optionalValues: [
         {
+          title: '空样式',
+          value: {},
+        },
+        {
           title: 'bg-#e4f3a5',
           value: { backgroundColor: '#e4f3a5' },
         },

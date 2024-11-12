@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import {
   checkStringIsNullOrWhiteSpace,
@@ -129,14 +129,14 @@ class Link extends BaseComponent {
     const style = this.getStyle();
 
     return (
-      <Text
+      <View
         className={classNames(classPrefix)}
         style={style}
         userSelect
         onClick={this.triggerClick}
       >
         {text}
-      </Text>
+      </View>
     );
   }
 }

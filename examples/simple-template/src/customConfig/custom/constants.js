@@ -31,12 +31,12 @@ export const lockRedImage = `${filePrefix}1840418088168853504.png`;
 export const listCheckBlueImage = `${filePrefix}1840418424774332416.png`;
 export const warnOrangeImage = `${filePrefix}1840418592189976576.png`;
 export const addGreenImage = `${filePrefix}1840418855730679808.png`;
-export const hexagonBlueImage = `${filePrefix}1840419175542165504.png`;
+export const hexagonBlueImage = `${filePrefix}1853649054442065920.png`;
 export const boardOrangeImage = `${filePrefix}1840419392656117760.png`;
 export const noDataImage = `${filePrefix}1840537324228841472.png`;
-export const newMessageImage = `${filePrefix}1843823776698077184.png`;
+export const newMessageImage = `${filePrefix}1853608007590612992.png`;
 export const telImage = `${filePrefix}1848283203459223552.png`;
-export const scanCodeBlueImage = `${filePrefix}1850719477482786816.png`;
+export const scanCodeBlueImage = `${filePrefix}1853631697535504384.png`;
 
 export const shareTransfer = {
   home: '0',
