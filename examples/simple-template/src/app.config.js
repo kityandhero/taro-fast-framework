@@ -64,13 +64,14 @@ export default defineAppConfig({
   //   },
   // },
   // requiredPrivateInfos: [
-  //   'getLocation',
+  //   'getFuzzyLocation',
   //   'onLocationChange',
   //   'chooseAddress',
   //   'choosePoi',
   //   'chooseLocation',
   //   'startLocationUpdate',
   // ],
+  requiredPrivateInfos: [],
   serviceProviderTicket: '',
   tabBar: {
     color: '#353535',

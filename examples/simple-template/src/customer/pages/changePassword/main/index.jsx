@@ -139,6 +139,7 @@ class ChangePassword extends PageNeedSignInWrapper {
               }}
               right={
                 <InputItem
+                  fontSize={34}
                   placeholder="请输入您的原密码"
                   password
                   border={false}
@@ -166,6 +167,7 @@ class ChangePassword extends PageNeedSignInWrapper {
               }}
               right={
                 <InputItem
+                  fontSize={34}
                   placeholder="请输入您的新密码"
                   password
                   border={false}
@@ -193,6 +195,7 @@ class ChangePassword extends PageNeedSignInWrapper {
               }}
               right={
                 <InputItem
+                  fontSize={34}
                   placeholder="请再次输入您的新密码"
                   password
                   border={false}
@@ -209,7 +212,7 @@ class ChangePassword extends PageNeedSignInWrapper {
         <View
           style={{
             color: '#ccc',
-            fontSize: transformSize(26),
+            fontSize: transformSize(28),
             paddingLeft: transformSize(54),
           }}
         >
@@ -273,7 +276,7 @@ class ChangePassword extends PageNeedSignInWrapper {
         <Line transparent height={40} />
 
         <CenterBox>
-          <View style={{ fontSize: transformSize(38), fontWeight: 'bold' }}>
+          <View style={{ fontSize: transformSize(42), fontWeight: 'bold' }}>
             密码修改
           </View>
         </CenterBox>

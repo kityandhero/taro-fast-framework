@@ -3,6 +3,7 @@ import { Input, Text, Textarea, View } from '@tarojs/components';
 
 import {
   buildStringStyle,
+  canToNumber,
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   isFunction,
@@ -28,57 +29,59 @@ import { VerticalBox } from '../VerticalBox';
 const layoutCollection = ['horizontal', 'vertical'];
 const typeCollection = ['number', 'text', 'idcard', 'digit'];
 const confirmTypeCollection = ['send', 'search', 'next', 'go', 'done'];
+const fontSizeDefault = 28;
 
 const defaultProps = {
-  style: {},
-  description: null,
-  descriptionStyle: {},
-  contentStyle: {},
-  icon: null,
-  border: true,
+  adjustPosition: true,
+  afterChange: null,
   align: 'left',
-  required: false,
-  hidden: false,
-  clearable: false,
-  clearSize: 36,
-  clearColor: '#ccc',
-  label: '',
-  labelAlign: 'left',
-  extra: null,
-  labelStyle: {},
-  labelWidth: 0,
-  inputStyle: {},
-  valueStyle: {},
-  labelContainerStyle: {},
-  inputContainerStyle: {},
-  extraContainerStyle: {},
-  value: '',
-  type: 'text',
-  password: false,
-  placeholder: '请输入',
-  placeholderStyle: { color: '#ccc' },
-  placeholderClass: 'input-placeholder',
+  areaAutoHeight: false,
+  areaHeight: 100,
+  areaMode: false,
+  border: true,
   borderColor: 'var(--tfc-border-color)',
   borderTopDistance: 0,
-  disabled: false,
-  readonly: false,
-  maxlength: 140,
-  cursorSpacing: 0,
-  confirmType: 'done',
+  clearColor: '#ccc',
+  clearSize: 36,
+  clearable: false,
   confirmHold: false,
+  confirmType: 'done',
+  contentStyle: {},
   cursor: 0,
-  selectionStart: -1,
-  selectionEnd: -1,
-  adjustPosition: true,
-  areaMode: false,
-  areaHeight: 100,
-  areaAutoHeight: false,
+  cursorSpacing: 0,
+  description: null,
+  descriptionStyle: {},
+  disabled: false,
+  extra: null,
+  extraContainerStyle: {},
+  fontSize: fontSizeDefault,
+  hidden: false,
   holdKeyboard: false,
-  afterChange: null,
-  onFocus: null,
+  icon: null,
+  inputContainerStyle: {},
+  inputStyle: {},
+  label: '',
+  labelAlign: 'left',
+  labelContainerStyle: {},
+  labelStyle: {},
+  labelWidth: 0,
+  maxlength: 140,
   onBlur: null,
   onConfirm: null,
+  onFocus: null,
   onKeyboardHeightChange: null,
+  password: false,
+  placeholder: '请输入',
+  placeholderClass: 'input-placeholder',
+  placeholderStyle: { color: '#ccc' },
+  readonly: false,
+  required: false,
+  selectionEnd: -1,
+  selectionStart: -1,
+  style: {},
+  type: 'text',
+  value: '',
+  valueStyle: {},
 };
 
 class InputItem extends BaseComponent {
@@ -201,47 +204,48 @@ class InputItem extends BaseComponent {
 
   renderFurther() {
     const {
-      style,
-      icon,
-      description,
-      descriptionStyle,
-      contentStyle,
-      border,
+      adjustPosition,
       align,
-      required,
-      clearSize,
-      clearColor,
-      label,
-      labelAlign,
-      labelWidth,
-      extra,
-      labelStyle,
-      inputStyle,
-      valueStyle,
+      areaAutoHeight,
+      areaHeight,
+      areaMode,
+      border,
       borderColor,
       borderTopDistance,
-      inputContainerStyle,
+      clearColor,
+      clearSize,
+      clearable,
+      confirmHold,
+      confirmType: confirmTypeSource,
+      contentStyle,
+      cursor,
+      cursorSpacing,
+      description,
+      descriptionStyle,
+      disabled,
+      extra,
       extraContainerStyle,
-      type: typeSource,
+      fontSize,
+      holdKeyboard,
+      icon,
+      inputContainerStyle,
+      inputStyle,
+      label,
+      labelAlign,
+      labelStyle,
+      labelWidth,
+      maxlength,
       password,
       placeholder,
-      placeholderStyle,
       placeholderClass,
-      disabled,
+      placeholderStyle,
       readonly,
-      maxlength,
-      cursorSpacing,
-      confirmType: confirmTypeSource,
-      confirmHold,
-      cursor,
-      selectionStart,
+      required,
       selectionEnd,
-      adjustPosition,
-      holdKeyboard,
-      areaMode,
-      areaHeight,
-      areaAutoHeight,
-      clearable,
+      selectionStart,
+      style,
+      type: typeSource,
+      valueStyle,
     } = this.props;
 
     const { focus } = this.state;
@@ -258,6 +262,10 @@ class InputItem extends BaseComponent {
       : 'done';
 
     const showDescription = !!description;
+
+    const fontSizeAdjust = canToNumber(fontSize)
+      ? toNumber(fontSize)
+      : fontSizeDefault;
 
     const labelComponent =
       isObject(label) ||
@@ -292,7 +300,7 @@ class InputItem extends BaseComponent {
             >
               <View
                 style={{
-                  fontSize: transformSize(28),
+                  fontSize: transformSize(fontSizeAdjust),
                   marginRight: transformSize(20),
                   ...labelStyle,
                 }}
@@ -329,7 +337,7 @@ class InputItem extends BaseComponent {
               !disabled && readonly ? (
                 <View
                   style={{
-                    fontSize: transformSize(28),
+                    fontSize: transformSize(fontSizeAdjust),
                     borderColor: borderColor,
                     margin:
                       layout === 'horizontal'
@@ -368,7 +376,7 @@ class InputItem extends BaseComponent {
                     ref={this.inputRef}
                     defaultValue={this.currentValue}
                     style={{
-                      fontSize: transformSize(28),
+                      fontSize: transformSize(fontSizeAdjust),
                       borderColor: borderColor,
                       ...valueStyle,
                       width: '100%',
@@ -411,7 +419,7 @@ class InputItem extends BaseComponent {
                   type={type}
                   focus={focus}
                   style={{
-                    fontSize: transformSize(28),
+                    fontSize: transformSize(fontSizeAdjust),
                     borderColor: borderColor,
                     margin:
                       layout === 'horizontal'
@@ -479,7 +487,7 @@ class InputItem extends BaseComponent {
         rightStyle={
           extra
             ? {
-                fontSize: transformSize(28),
+                fontSize: transformSize(fontSizeAdjust),
                 ...extraContainerStyle,
               }
             : null

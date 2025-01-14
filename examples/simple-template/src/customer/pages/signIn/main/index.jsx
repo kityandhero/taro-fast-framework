@@ -137,6 +137,7 @@ class SignIn extends PageWrapper {
               }}
               right={
                 <InputItem
+                  fontSize={34}
                   placeholder="请输入您的手机号"
                   border={false}
                   clearable
@@ -170,6 +171,7 @@ class SignIn extends PageWrapper {
               }}
               right={
                 <InputItem
+                  fontSize={34}
                   placeholder="请输入密码"
                   password
                   border={false}
