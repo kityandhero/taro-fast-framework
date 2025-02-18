@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-config",
-  "version": "1.1.107",
+  "version": "1.1.108",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -71,7 +71,7 @@
     "cross-env": "^7.0.3",
     "cz-git": "^1.11.0",
     "docdash": "^2.0.2",
-    "easy-soft-develop": "^2.1.254",
+    "easy-soft-develop": "^2.1.256",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",

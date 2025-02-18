@@ -1,6 +1,6 @@
 {
   "name": "taro-fast-common",
-  "version": "3.1.10",
+  "version": "3.1.11",
   "private": false,
   "description": "taro-fast-common",
   "keywords": [
@@ -78,7 +78,7 @@
     "@tarojs/taro-h5": "^4.0.9",
     "@tarojs/taro-loader": "^4.0.9",
     "dayjs": "^1.11.13",
-    "easy-soft-utility": "^2.8.80",
+    "easy-soft-utility": "^2.8.81",
     "lodash": "^4.17.21",
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",
@@ -140,7 +140,7 @@
     "cz-git": "^1.11.0",
     "docdash": "^2.0.2",
     "documentation": "^14.0.3",
-    "easy-soft-develop": "^2.1.254",
+    "easy-soft-develop": "^2.1.256",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
