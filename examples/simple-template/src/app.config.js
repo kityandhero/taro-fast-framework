@@ -43,6 +43,7 @@ export default defineAppConfig({
         'pages/pageListLatestApprove/main/index',
         'pages/pageListWaitApprove/main/index',
         'pages/resetPassword/main/index',
+        'pages/security/main/index',
         'pages/setAddress/main/index',
         'pages/setAvatar/main/index',
         'pages/setBirthday/main/index',
@@ -110,5 +111,5 @@ export default defineAppConfig({
       },
     ],
   },
-  lazyCodeLoading: 'requiredComponents',
+  // lazyCodeLoading: 'requiredComponents',
 });

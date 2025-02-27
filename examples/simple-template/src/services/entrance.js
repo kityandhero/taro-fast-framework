@@ -88,3 +88,12 @@ export async function retrievePasswordData(parameters) {
     params: parameters,
   });
 }
+
+export const signOutApiAddress = '/wechatApplication/entrance/signOut';
+
+export async function signOut(parameters) {
+  return request({
+    api: signOutApiAddress,
+    params: parameters,
+  });
+}

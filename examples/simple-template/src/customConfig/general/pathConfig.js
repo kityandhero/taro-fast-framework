@@ -22,6 +22,9 @@ export const customerPathGeneralCollection = {
   resetPassword: {
     path: '/customer/pages/resetPassword/main/index',
   },
+  security: {
+    path: '/customer/pages/security/main/index',
+  },
   setAddress: {
     path: '/customer/pages/setAddress/main/index',
   },

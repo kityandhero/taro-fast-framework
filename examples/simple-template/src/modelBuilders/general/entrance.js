@@ -16,6 +16,7 @@ import {
   signInSilentData,
   signInWithEmailData,
   signInWithPhoneData,
+  signOut,
 } from '../../services/entrance';
 
 export const entranceTypeCollection = {
@@ -28,6 +29,7 @@ export const entranceTypeCollection = {
   refreshCaptcha: 'entrance/refreshCaptcha',
   sendRetrievePasswordMessage: 'entrance/sendRetrievePasswordMessage',
   retrievePassword: 'entrance/retrievePassword',
+  signOut: 'entrance/signOut',
 };
 
 export function buildModel() {
@@ -257,6 +259,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(retrievePasswordData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *signOut(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(signOut, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

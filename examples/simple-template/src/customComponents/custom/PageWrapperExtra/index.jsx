@@ -26,6 +26,10 @@ class PageWrapperExtra extends PageWrapperCore {
     navigateTo(pathCollection.customer.editInformation.path);
   };
 
+  goToSecurity = () => {
+    navigateTo(pathCollection.customer.security.path);
+  };
+
   goToFlowCase = () => {
     navigateTo(pathCollection.root.flowCase.path);
   };

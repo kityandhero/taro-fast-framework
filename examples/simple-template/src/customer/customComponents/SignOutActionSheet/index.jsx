@@ -4,9 +4,9 @@ import {
 } from 'taro-fast-framework';
 
 // 显隐控制标记, 必须设置, 标记需要全局唯一
-const visibleFlag = 'a68e161086fe4950b5e279d1cf14497a';
+const visibleFlag = '97f69ca22a6c44179c32af8e55168565';
 
-class GenderActionSheet extends ActionSheetWrapperBase {
+class SignOutActionSheet extends ActionSheetWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }
@@ -23,7 +23,7 @@ class GenderActionSheet extends ActionSheetWrapperBase {
     };
   }
 
-  buildTitle = () => '退出登录';
+  buildTitle = () => '即将推出登陆';
 }
 
-export { GenderActionSheet };
+export { SignOutActionSheet };

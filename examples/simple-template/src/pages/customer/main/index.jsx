@@ -371,7 +371,7 @@ class customer extends PageWrapper {
               title: '安全中心',
               icon: lockRedImage,
               onClick: () => {
-                this.goToChangePassword();
+                this.goToSecurity();
               },
             })}
 

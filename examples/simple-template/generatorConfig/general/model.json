@@ -85,6 +85,13 @@
           "effect": "retrievePassword",
           "service": "retrievePasswordData",
           "type": "singleData"
+        },
+        {
+          "title": "注销登录",
+          "api": "/wechatApplication/entrance/signOut",
+          "effect": "signOut",
+          "service": "signOut",
+          "type": "singleData"
         }
       ],
       "cover": true,
