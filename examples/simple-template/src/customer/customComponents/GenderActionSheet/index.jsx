@@ -23,7 +23,7 @@ class GenderActionSheet extends ActionSheetWrapperBase {
     };
   }
 
-  buildTitle = () => '退出登录';
+  buildTitle = () => '选择性别';
 }
 
 export { GenderActionSheet };

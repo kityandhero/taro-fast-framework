@@ -23,7 +23,7 @@ class SignOutActionSheet extends ActionSheetWrapperBase {
     };
   }
 
-  buildTitle = () => '即将推出登陆';
+  buildTitle = () => '即将退出登陆';
 }
 
 export { SignOutActionSheet };

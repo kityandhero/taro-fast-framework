@@ -140,7 +140,7 @@ class EditInformation extends PageNeedSignInWrapper {
           }}
         >
           <Button
-            text="推出登陆"
+            text="退出登陆"
             backgroundColor="#fff"
             fontColor="#666"
             fontSize={32}
