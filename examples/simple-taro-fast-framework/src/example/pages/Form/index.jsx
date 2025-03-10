@@ -27,6 +27,11 @@ const list = [
     path: pathCollection.example.radio.path,
   },
   {
+    id: 'RadioPopup',
+    name: '自定义弹出式单选',
+    path: pathCollection.example.radioPopup.path,
+  },
+  {
     id: 'RadioSelector',
     name: '弹出式单选',
     path: pathCollection.example.radioSelector.path,
@@ -35,6 +40,11 @@ const list = [
     id: 'CheckBox',
     name: '复选',
     path: pathCollection.example.checkBox.path,
+  },
+  {
+    id: 'CheckBoxPopup',
+    name: '自定义弹出式复选',
+    path: pathCollection.example.checkBoxPopup.path,
   },
   {
     id: 'CheckBoxSelector',

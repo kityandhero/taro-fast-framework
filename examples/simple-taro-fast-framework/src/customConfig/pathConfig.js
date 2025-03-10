@@ -161,11 +161,17 @@ const examplePathCollection = {
   radio: {
     path: '/example/pages/radio/index',
   },
+  radioPopup: {
+    path: '/example/pages/radioPopup/index',
+  },
   radioSelector: {
     path: '/example/pages/radioSelector/index',
   },
   checkBox: {
     path: '/example/pages/checkBox/index',
+  },
+  checkBoxPopup: {
+    path: '/example/pages/checkBoxPopup/index',
   },
   checkBoxSelector: {
     path: '/example/pages/checkBoxSelector/index',
