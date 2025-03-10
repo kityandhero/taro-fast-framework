@@ -64,20 +64,20 @@ const radioOptions3 = [
 const config1 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
 };
 
 const config2 = {
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
 };
 
 const config3 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
   valueFormat: (v) => {
     return <Tag color="success">{v}</Tag>;
@@ -87,7 +87,7 @@ const config3 = {
 const config4 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
   afterChange: (v) => {
     console.log(v);
@@ -97,7 +97,7 @@ const config4 = {
 const config5 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   arc: true,
   options: radioOptions1,
 };
@@ -105,7 +105,7 @@ const config5 = {
 const config6 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   border: false,
   options: radioOptions1,
 };
@@ -113,7 +113,7 @@ const config6 = {
 const config7 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   border: false,
   options: radioOptions1,
   position: 'center',
@@ -122,7 +122,7 @@ const config7 = {
 const config8 = {
   label: '类别',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   showClose: false,
   options: radioOptions1,
 };
@@ -130,7 +130,7 @@ const config8 = {
 const config9 = {
   label: '复杂选项',
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   showClose: false,
   options: radioOptions3,
 };

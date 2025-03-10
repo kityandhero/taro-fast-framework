@@ -69,26 +69,29 @@ const configCore = {
 
     return <View>视图部分-已选值- {o || '未选择'}</View>;
   },
+  afterChange: (v, o) => {
+    console.log({ v, o });
+  },
 };
 
 const config1 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
 };
 
 const config2 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
 };
 
 const config3 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
   valueFormat: (v) => {
     return <Tag color="success">{v}</Tag>;
@@ -98,17 +101,14 @@ const config3 = {
 const config4 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   options: radioOptions1,
-  afterChange: (v) => {
-    console.log(v);
-  },
 };
 
 const config5 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   arc: true,
   options: radioOptions1,
 };
@@ -116,7 +116,7 @@ const config5 = {
 const config6 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   border: false,
   options: radioOptions1,
 };
@@ -124,7 +124,7 @@ const config6 = {
 const config7 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   border: false,
   options: radioOptions1,
   position: 'center',
@@ -133,7 +133,7 @@ const config7 = {
 const config8 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   showClose: false,
   options: radioOptions1,
 };
@@ -141,7 +141,7 @@ const config8 = {
 const config9 = {
   ...configCore,
   placeholder: '请选择类别',
-  value: [],
+  value: '',
   showClose: false,
   options: radioOptions3,
 };
