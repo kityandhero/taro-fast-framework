@@ -47,7 +47,7 @@ const defaultProps = {
   confirmHold: false,
   confirmType: 'done',
   contentStyle: {},
-  cursor: 0,
+  cursor: -1,
   cursorSpacing: 0,
   description: null,
   descriptionStyle: {},

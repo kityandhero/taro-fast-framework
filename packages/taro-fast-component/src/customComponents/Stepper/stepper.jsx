@@ -25,6 +25,7 @@ const defaultProps = {
   defaultValue: 0,
   step: 1,
   min: 0,
+  cursor: -1,
   digits: 0,
   max: 100_000,
   disabled: false,
@@ -49,6 +50,7 @@ export const Stepper = (p) => {
     step,
     max,
     min,
+    cursor,
     inputReadOnly,
     useBackground,
     backgroundColor,
@@ -193,6 +195,7 @@ export const Stepper = (p) => {
             ...colorStyle,
             ...(circle ? { '--input-background-color': 'transparent' } : {}),
           }}
+          cursor={cursor}
           onFocus={(error) => {
             setHasFocus(true);
 
