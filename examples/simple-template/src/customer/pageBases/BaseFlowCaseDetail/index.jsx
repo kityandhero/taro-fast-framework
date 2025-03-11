@@ -23,6 +23,7 @@ import {
 } from 'taro-fast-common';
 import {
   Avatar,
+  Button,
   Card,
   ColorText,
   Empty,
@@ -1282,6 +1283,28 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
                 marginTop: transformSize(60),
               },
             })}
+
+            <Line transparent height={220} />
+
+            <View
+              style={{
+                marginLeft: transformSize(60),
+                marginRight: transformSize(60),
+              }}
+            >
+              <Button
+                text="返回工作台"
+                backgroundColor="#0075ff"
+                fontColor="#fff"
+                fontSize={32}
+                block
+                circle
+                size="middle"
+                onClick={() => {
+                  this.goToHomeTab();
+                }}
+              />
+            </View>
           </View>
         ) : (
           <>

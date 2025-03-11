@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-undef
 export default defineAppConfig({
+  entryPagePath: 'pages/entry/main/index',
   pages: [
     'pages/customer/main/index',
     'pages/entry/main/index',

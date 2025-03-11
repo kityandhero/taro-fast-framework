@@ -197,19 +197,27 @@ class NoticeDetail extends PageWrapper {
 
           <Line transparent height={20} />
 
-          <CenterBox>
-            <ColorText
-              style={{
-                fontWeight: 'bold',
-                fontSize: transformSize(30),
-              }}
-              text="点击返回"
-              color="#f5060e"
-              onClick={() => {
-                navigateBack();
-              }}
-            />
-          </CenterBox>
+          <View
+            style={{
+              paddingTop: transformSize(20),
+              paddingBottom: transformSize(20),
+              backgroundColor: '#0075ff',
+            }}
+          >
+            <CenterBox>
+              <ColorText
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: transformSize(44),
+                }}
+                text="点击返回"
+                color="#fff"
+                onClick={() => {
+                  navigateBack();
+                }}
+              />
+            </CenterBox>
+          </View>
 
           <Line transparent height={20} />
         </View>
