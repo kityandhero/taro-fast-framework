@@ -239,14 +239,21 @@ export function NoticeBox({ data = '', onClick = null }) {
           <FlexBox
             flexAuto="left"
             left={
-              <VerticalBox>
-                <MultiLineText
-                  style={{ color: '#7e7e7e' }}
-                  fontSize={32}
-                  lineHeight={36}
-                  text={messageAdjust}
-                />
-              </VerticalBox>
+              <View
+                style={{
+                  height: transformSize(72),
+                  overflow: 'hidden',
+                }}
+              >
+                <VerticalBox>
+                  <MultiLineText
+                    style={{ color: '#7e7e7e' }}
+                    fontSize={32}
+                    lineHeight={36}
+                    text={messageAdjust}
+                  />
+                </VerticalBox>
+              </View>
             }
             right={
               <VerticalBox>
@@ -507,7 +514,7 @@ function WaitApproveFlowCaseItem({ data, onClick = null }) {
           <View>
             <ColorText
               color="#7d7d7d"
-              fontSize={28}
+              fontSize={30}
               textPrefixStyle={
                 {
                   // fontWeight: 'bold',

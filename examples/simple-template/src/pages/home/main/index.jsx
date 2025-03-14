@@ -148,6 +148,26 @@ class Home extends PageNeedSignInWrapper {
     }
   };
 
+  onNoticeClick = (item) => {
+    const { type, id } = {
+      type: 'none',
+      id: '',
+      ...item,
+    };
+
+    if (type === 'none') {
+      return;
+    }
+
+    if (type === 'notification' && !checkStringIsNullOrWhiteSpace(id)) {
+      this.goToNoticeDetail(id);
+    }
+
+    if (type === 'approve' && !checkStringIsNullOrWhiteSpace(id)) {
+      this.goToApprove(id);
+    }
+  };
+
   buildHeadNavigation = () => {
     const { currentCustomer } = this.state;
 
@@ -184,7 +204,7 @@ class Home extends PageNeedSignInWrapper {
 
         <Line transparent height={spiteHeight} />
 
-        <NoticeBox data={latestMessage} />
+        <NoticeBox data={latestMessage} onClick={this.onNoticeClick} />
 
         <Line transparent height={spiteHeight} />
 
