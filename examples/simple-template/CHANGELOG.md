@@ -1,5 +1,13 @@
 # taro-fast-framework-template
 
+## 1.0.18
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-design-playground@3.0.10
+
 ## 1.0.17
 
 ### Patch Changes

@@ -5,6 +5,7 @@ import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
   endsWith,
+  filter,
   formatMoneyToChinese,
   getValueByKey,
   isArray,
@@ -272,7 +273,7 @@ export function adjustValueCollection(values, otherData = []) {
 }
 
 export function buildDisplayValue(data, values) {
-  const { name, type, fullLine, currencyDisplay } = { ...data };
+  const { name, type, fullLine, currencyDisplay, enumList } = { ...data };
 
   let v = '';
   let vList = [];
@@ -307,49 +308,24 @@ export function buildDisplayValue(data, values) {
     });
   }
 
+  let vText = '';
+
+  if (isArray(enumList) && !isEmptyArray(enumList)) {
+    const selectList = filter(enumList, (one) => {
+      const { value } = one;
+
+      return toString(v) === toString(value);
+    });
+
+    vText = isEmptyArray(selectList) ? '无' : selectList[0].label;
+  } else {
+    vText = v;
+  }
+
   return currencyDisplay === whetherString.yes &&
     fullLine === whetherString.yes &&
     checkInCollection(['number', 'string'], toLower(type)) &&
     isNumber(toNumber(v)) ? (
-    // <FlexBox
-    //   flexAuto="left"
-    //   style={{
-    //     width: '100%',
-    //     height: '100%',
-    //   }}
-    //   left={
-    //     <VerticalBox>
-    //       <View
-    //         style={{
-    //           ...valueFrontStyle,
-    //           fontSize: transformSize(24),
-    //           ...fontFamilyStyle,
-    //           ...colorStyle,
-    //         }}
-    //       >
-    //         人民币（大写）
-    //         <View style={currencyDisplayStyle}>
-    //           {formatMoneyToChinese({ target: toNumber(v) })}
-    //         </View>
-    //       </View>
-    //     </VerticalBox>
-    //   }
-    //   right={
-    //     <VerticalBox>
-    //       <View
-    //         style={{
-    //           ...valueFrontStyle,
-    //           fontSize: transformSize(24),
-    //           ...fontFamilyStyle,
-    //           ...colorStyle,
-    //         }}
-    //       >
-    //         小写￥<span style={currencyDisplayStyle}>{v}</span>
-    //       </View>
-    //     </VerticalBox>
-    //   }
-    // />
-
     <View
       style={{
         paddingTop: transformSize(8),
@@ -394,14 +370,7 @@ export function buildDisplayValue(data, values) {
     </View>
   ) : (
     <VerticalBox>
-      {/* <View>{v}</View> */}
-
-      <MultiLineText
-        // style={formValueStyle}
-        fontSize={30}
-        lineHeight={42}
-        text={v}
-      />
+      <MultiLineText fontSize={30} lineHeight={42} text={vText || v} />
     </VerticalBox>
   );
 }
