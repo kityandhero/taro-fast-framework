@@ -162,7 +162,9 @@ export function LetterItem({ data, onClick = null }) {
                       return;
                     }
 
-                    makePhoneCall(phone);
+                    makePhoneCall({
+                      phoneNumber: phone,
+                    });
                   }}
                 >
                   <ImageBox src={telImage} lazyLoad />
