@@ -25,6 +25,7 @@ import { PageWrapper } from '../../../customComponents';
 import {
   addGreenImage,
   boardOrangeImage,
+  customWorkflowImage,
   editGreyImage,
   hexagonBlueImage,
   listCheckBlueImage,
@@ -314,29 +315,45 @@ class customer extends PageWrapper {
   renderFurther() {
     return (
       <>
+        <View>
+          {this.buildTopInfoBox()}
+
+          <Line height={2} />
+
+          <View
+            style={{
+              paddingTop: transformSize(30),
+              paddingBottom: transformSize(30),
+              paddingLeft: transformSize(28),
+            }}
+          >
+            <ColorText
+              fontSize={34}
+              color="#828282"
+              text="美好一天从现在开始!"
+            />
+          </View>
+        </View>
+
         <Space
           direction="vertical"
           fillWidth
           size={0}
           split={<Line height={2} />}
         >
-          {this.buildTopInfoBox()}
+          <View>
+            {this.buildMenuItem({
+              title: '流程列表',
+              icon: customWorkflowImage,
+              onClick: () => {
+                this.goToPageListWorkflow();
+              },
+            })}
+
+            <Line transparent height={20} />
+          </View>
 
           <View>
-            <View
-              style={{
-                paddingTop: transformSize(30),
-                paddingBottom: transformSize(30),
-                paddingLeft: transformSize(28),
-              }}
-            >
-              <ColorText
-                fontSize={34}
-                color="#828282"
-                text="美好一天从现在开始!"
-              />
-            </View>
-
             {this.buildMenuItem({
               title: '我发起的',
               icon: addGreenImage,

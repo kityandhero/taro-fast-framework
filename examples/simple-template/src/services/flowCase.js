@@ -39,6 +39,16 @@ export async function getData(parameters) {
   });
 }
 
+export const createFlowCaseDataApiAddress =
+  '/wechatApplication/workflowCase/createFlowCase';
+
+export async function createFlowCaseData(parameters) {
+  return request({
+    api: createFlowCaseDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const submitApprovalDataApiAddress =
   '/wechatApplication/workflowCase/submitApproval';
 

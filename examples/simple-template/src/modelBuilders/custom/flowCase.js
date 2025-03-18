@@ -8,6 +8,7 @@ import {
 } from 'easy-soft-utility';
 
 import {
+  createFlowCaseData,
   getData,
   pageListData,
   pageListLatestApproveData,
@@ -22,6 +23,7 @@ export const flowCaseTypeCollection = {
   pageListWaitApprove: 'flowCase/pageListWaitApprove',
   pageListLatestApprove: 'flowCase/pageListLatestApprove',
   get: 'flowCase/get',
+  createFlowCase: 'flowCase/createFlowCase',
   submitApproval: 'flowCase/submitApproval',
   pass: 'flowCase/pass',
   refuse: 'flowCase/refuse',
@@ -124,6 +126,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(getData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *createFlowCase(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(createFlowCaseData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

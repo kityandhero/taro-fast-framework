@@ -24,11 +24,11 @@ const webPagePathCollection = {
 
 const informationPathCollection = {
   ...informationPathGeneralCollection,
-  pageListNotice: {
-    path: '/information/pages/pageListNotice/main/index',
-  },
   noticeDetail: {
     path: '/information/pages/noticeDetail/main/index',
+  },
+  pageListNotice: {
+    path: '/information/pages/pageListNotice/main/index',
   },
 };
 
@@ -41,6 +41,15 @@ const communicationPathCollection = {
 
 const customerPathCollection = {
   ...customerPathGeneralCollection,
+  approve: {
+    path: '/customer/pages/approve/main/index',
+  },
+  detailFlowCase: {
+    path: '/customer/pages/detailFlowCase/main/index',
+  },
+  flowCaseForm: {
+    path: '/customer/pages/flowCaseForm/main/index',
+  },
   pageListCreateApprove: {
     path: '/customer/pages/pageListCreateApprove/main/index',
   },
@@ -50,11 +59,8 @@ const customerPathCollection = {
   pageListWaitApprove: {
     path: '/customer/pages/pageListWaitApprove/main/index',
   },
-  approve: {
-    path: '/customer/pages/approve/main/index',
-  },
-  detailFlowCase: {
-    path: '/customer/pages/detailFlowCase/main/index',
+  pageListWorkflow: {
+    path: '/customer/pages/pageListWorkflow/main/index',
   },
   setting: {
     path: '/customer/pages/setting/main/index',
@@ -62,9 +68,9 @@ const customerPathCollection = {
 };
 
 export const pathCustomCollection = {
-  root: rootPathCollection,
-  webpage: webPagePathCollection,
+  communication: communicationPathCollection,
   customer: customerPathCollection,
   information: informationPathCollection,
-  communication: communicationPathCollection,
+  root: rootPathCollection,
+  webpage: webPagePathCollection,
 };

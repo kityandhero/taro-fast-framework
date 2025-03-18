@@ -11,9 +11,14 @@ import {
   buildModel as buildWorkbenchModel,
   workbenchTypeCollection,
 } from './workbench';
+import {
+  buildModel as buildWorkflowModel,
+  workflowTypeCollection,
+} from './workflow';
 
 export const modelTypeCollection = {
   workbenchTypeCollection,
+  workflowTypeCollection,
   flowCaseTypeCollection,
   noticeTypeCollection,
   addressBookTypeCollection,
@@ -24,6 +29,7 @@ export function listModelBuilder() {
 
   list.push(
     buildWorkbenchModel,
+    buildWorkflowModel,
     buildFlowCaseModel,
     buildNoticeModel,
     buildAddressBookModel,

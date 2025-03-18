@@ -4,6 +4,7 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
+  isFunction,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
@@ -202,7 +203,17 @@ export function buildLatestApproveItem({ key, data, onClick }) {
   });
 
   return (
-    <View key={key} style={latestApproveItemBoxStyle} onClick={onClick}>
+    <View
+      key={key}
+      style={latestApproveItemBoxStyle}
+      onClick={(event) => {
+        if (!isFunction(onClick)) {
+          return;
+        }
+
+        onClick(event);
+      }}
+    >
       <View style={titleStyle}>{title}</View>
 
       <Line transparent height={10} />
@@ -396,7 +407,13 @@ export function buildWaitApproveItem({ key, data, onClick }) {
         block
         circle
         size="middle"
-        onClick={onClick}
+        onClick={(event) => {
+          if (!isFunction(onClick)) {
+            return;
+          }
+
+          onClick(event);
+        }}
       />
 
       <Line transparent height={10} />

@@ -3,7 +3,7 @@ import { ModalWrapperBase, switchControlAssist } from 'taro-fast-framework';
 // 显隐控制标记, 必须设置, 标记需要全局唯一
 const visibleFlag = '3235affd41f84a118e552f32ef746350';
 
-class SubmitModal extends ModalWrapperBase {
+class SubmitFlowCaseModal extends ModalWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }
@@ -27,4 +27,4 @@ class SubmitModal extends ModalWrapperBase {
   };
 }
 
-export { SubmitModal };
+export { SubmitFlowCaseModal };

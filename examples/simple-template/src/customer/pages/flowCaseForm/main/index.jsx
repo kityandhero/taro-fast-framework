@@ -2,11 +2,8 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 import {
-  checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
-  showSimpleErrorMessage,
-  showSuccessMessage,
   showSuccessNotification,
   whetherNumber,
 } from 'easy-soft-utility';
@@ -25,11 +22,7 @@ import { fieldDataWorkflowCase } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
 import { SubmitFlowCaseModal } from '../../../customComponents';
 import { BaseFlowCaseDetail } from '../../../pageBases';
-import {
-  passAction,
-  refuseAction,
-  submitApprovalAction,
-} from '../assist/action';
+import { submitApprovalAction } from '../../approve/assist/action';
 
 const stripTopValue = 24;
 const stripHeightValue = 32;
@@ -51,7 +44,7 @@ const bodyStyle = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '事项审批',
+  navigationBarTitleText: '审批表单',
   navigationStyle: 'custom',
 });
 
@@ -62,7 +55,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class Approve extends BaseFlowCaseDetail {
+class FlowCaseForm extends BaseFlowCaseDetail {
   constructor(properties) {
     super(properties);
 
@@ -98,78 +91,22 @@ class Approve extends BaseFlowCaseDetail {
     SubmitFlowCaseModal.open();
   };
 
-  pass = () => {
-    const { metaData } = this.state;
+  pass = () => {};
 
-    if (checkStringIsNullOrWhiteSpace(this.note)) {
-      showSimpleErrorMessage('请输入审批意见');
-
-      return;
-    }
-
-    const workflowCaseId = getValueByKey({
-      data: metaData,
-      key: fieldDataWorkflowCase.workflowCaseId.name,
-      defaultValue: '',
-      convert: convertCollection.string,
-    });
-
-    passAction({
-      target: this,
-      handleData: {
-        workflowCaseId,
-        note: this.note,
-      },
-      successCallback: ({ target }) => {
-        showSuccessMessage('审批完成');
-
-        target.reloadData({});
-      },
-    });
-  };
-
-  refuse = () => {
-    const { metaData } = this.state;
-
-    if (checkStringIsNullOrWhiteSpace(this.note)) {
-      showSimpleErrorMessage('请输入审批意见');
-
-      return;
-    }
-
-    const workflowCaseId = getValueByKey({
-      data: metaData,
-      key: fieldDataWorkflowCase.workflowCaseId.name,
-      defaultValue: '',
-      convert: convertCollection.string,
-    });
-
-    refuseAction({
-      target: this,
-      handleData: {
-        workflowCaseId,
-        note: this.note,
-      },
-      successCallback: ({ target }) => {
-        showSuccessMessage('审批完成');
-
-        target.reloadData({});
-      },
-    });
-  };
+  refuse = () => {};
 
   triggerNoteChanged = (v) => {
     this.note = v;
   };
 
   buildHeadNavigation = () => {
-    return <HeadNavigationBox title="审批详情" />;
+    return <HeadNavigationBox title="审批表单" />;
   };
 
   buildActionPlaceholderBox = () => {
-    const { canEdit, canApprove } = this.state;
+    const { canEdit, canFlowCaseForm } = this.state;
 
-    if (canEdit === whetherNumber.no && canApprove === whetherNumber.no) {
+    if (canEdit === whetherNumber.no && canFlowCaseForm === whetherNumber.no) {
       return null;
     }
 
@@ -177,9 +114,9 @@ class Approve extends BaseFlowCaseDetail {
   };
 
   buildActionBox = () => {
-    const { canEdit, canApprove } = this.state;
+    const { canEdit, canFlowCaseForm } = this.state;
 
-    if (canEdit === whetherNumber.no && canApprove === whetherNumber.no) {
+    if (canEdit === whetherNumber.no && canFlowCaseForm === whetherNumber.no) {
       return (
         <>
           <Line transparent height={18} />
@@ -287,7 +224,7 @@ class Approve extends BaseFlowCaseDetail {
                   paddingLeft={32}
                   paddingRight={32}
                   size="middle"
-                  hidden={!canApprove}
+                  hidden={!canFlowCaseForm}
                   onClick={this.refuse}
                 />
               }
@@ -316,7 +253,7 @@ class Approve extends BaseFlowCaseDetail {
                       />
                     }
                     right={
-                      canApprove ? (
+                      canFlowCaseForm ? (
                         <Button
                           weappButton
                           text="批准"
@@ -367,4 +304,4 @@ class Approve extends BaseFlowCaseDetail {
   };
 }
 
-export default Approve;
+export default FlowCaseForm;

@@ -17,6 +17,20 @@
     {
       "apis": [
         {
+          "title": "可用工作流分页列表",
+          "api": "/wechatApplication/workflow/pageListUsable",
+          "effect": "pageListUsable",
+          "service": "pageListUsableData",
+          "type": "pageList"
+        }
+      ],
+      "cover": true,
+      "title": "工作流相关",
+      "name": "workflow"
+    },
+    {
+      "apis": [
+        {
           "title": "已创建流程实例分页列表",
           "api": "/wechatApplication/workflowCase/pageList",
           "effect": "pageList",
@@ -42,6 +56,13 @@
           "api": "/wechatApplication/workflowCase/get",
           "effect": "get",
           "service": "getData",
+          "type": "singleData"
+        },
+        {
+          "title": "创建审批",
+          "api": "/wechatApplication/workflowCase/createFlowCase",
+          "effect": "createFlowCase",
+          "service": "createFlowCaseData",
           "type": "singleData"
         },
         {

@@ -34,6 +34,16 @@ class PageWrapperExtra extends PageWrapperCore {
     navigateTo(pathCollection.root.flowCase.path);
   };
 
+  goToFlowCaseForm = (id) => {
+    navigateTo(`${pathCollection.customer.flowCaseForm.path}?id=${id}`);
+  };
+
+  goToPageListWorkflow = () => {
+    navigateTo({
+      url: pathCollection.customer.pageListWorkflow.path,
+    });
+  };
+
   goToPageListCreateApprove = () => {
     navigateTo({
       url: pathCollection.customer.pageListCreateApprove.path,

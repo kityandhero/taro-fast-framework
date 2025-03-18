@@ -69,6 +69,12 @@
           "scene": null
         },
         {
+          "name": "customer/pageListWorkflow",
+          "pathName": "customer/pages/pageListWorkflow/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "customer/approve",
           "pathName": "customer/pages/approve/main/index",
           "query": "id=1831345295095631872",
