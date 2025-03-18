@@ -10,6 +10,7 @@ import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { fieldDataWorkflowCase, viewStyle } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { buildWorkflowItem, HeadNavigationBox } from '../../../../utils';
+import { ConfirmCreateFlowCaseModal } from '../../../customComponents';
 import { createFlowCaseAction } from '../assist/action';
 
 // eslint-disable-next-line no-undef
@@ -29,6 +30,8 @@ class PageListWorkflow extends PageNeedSignInWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;
+
+  currentWorkflowId = '';
 
   viewStyle = {
     ...viewStyle,
@@ -54,10 +57,12 @@ class PageListWorkflow extends PageNeedSignInWrapper {
     });
   };
 
-  createFlowCase = (v) => {
+  createFlowCase = () => {
+    const that = this;
+
     createFlowCaseAction({
-      target: this,
-      handleData: { workflowId: v },
+      target: that,
+      handleData: { workflowId: that.currentWorkflowId ?? '' },
       successCallback: ({ target, remoteData }) => {
         const workflowCaseId = getValueByKey({
           data: remoteData,
@@ -68,6 +73,12 @@ class PageListWorkflow extends PageNeedSignInWrapper {
         target.goToFlowCaseForm(workflowCaseId);
       },
     });
+  };
+
+  confirmCreate = (v) => {
+    this.currentWorkflowId = v;
+
+    ConfirmCreateFlowCaseModal.open();
   };
 
   buildHeadNavigation = () => {
@@ -97,7 +108,7 @@ class PageListWorkflow extends PageNeedSignInWrapper {
                 key: `workflow_${workflowId}`,
                 data: item,
                 onClick: () => {
-                  this.createFlowCase(workflowId);
+                  this.confirmCreate(workflowId);
                 },
               });
             })}
@@ -134,6 +145,14 @@ class PageListWorkflow extends PageNeedSignInWrapper {
       </View>
     );
   }
+
+  renderInteractiveArea = () => {
+    return (
+      <>
+        <ConfirmCreateFlowCaseModal afterOk={this.createFlowCase} />
+      </>
+    );
+  };
 }
 
 export default PageListWorkflow;
