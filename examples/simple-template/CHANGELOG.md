@@ -1,5 +1,19 @@
 # taro-fast-framework-template
 
+## 1.0.21
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-common@3.1.18
+  - taro-fast-component@3.0.26
+  - taro-fast-component-extra@3.0.26
+  - taro-fast-component-prism@3.0.27
+  - taro-fast-config@1.1.115
+  - taro-fast-design-playground@3.0.13
+  - taro-fast-framework@3.1.20
+
 ## 1.0.20
 
 ### Patch Changes
