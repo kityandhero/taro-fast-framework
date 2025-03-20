@@ -1,3 +1,3 @@
 // this is entry.
 
-export * from './components/displayer';
+export * from './components';

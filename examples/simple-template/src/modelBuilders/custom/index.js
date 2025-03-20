@@ -6,6 +6,10 @@ import {
   buildModel as buildFlowCaseModel,
   flowCaseTypeCollection,
 } from './flowCase';
+import {
+  buildModel as buildFlowCaseFormAttachmentModel,
+  flowCaseFormAttachmentTypeCollection,
+} from './flowCaseFormAttachment';
 import { buildModel as buildNoticeModel, noticeTypeCollection } from './notice';
 import {
   buildModel as buildWorkbenchModel,
@@ -20,6 +24,7 @@ export const modelTypeCollection = {
   workbenchTypeCollection,
   workflowTypeCollection,
   flowCaseTypeCollection,
+  flowCaseFormAttachmentTypeCollection,
   noticeTypeCollection,
   addressBookTypeCollection,
 };
@@ -31,6 +36,7 @@ export function listModelBuilder() {
     buildWorkbenchModel,
     buildWorkflowModel,
     buildFlowCaseModel,
+    buildFlowCaseFormAttachmentModel,
     buildNoticeModel,
     buildAddressBookModel,
   );

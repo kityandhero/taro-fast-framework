@@ -1,3 +1,4 @@
+export * from './ActionSheetConfirmWrapperBase';
 export * from './ActionSheetWrapperBase';
 export * from './InteractiveBase';
 export * from './InteractiveCancelableBase';

@@ -1,9 +1,12 @@
-import { ModalWrapperBase, switchControlAssist } from 'taro-fast-framework';
+import {
+  ActionSheetConfirmWrapperBase,
+  switchControlAssist,
+} from 'taro-fast-framework';
 
 // 显隐控制标记, 必须设置, 标记需要全局唯一
 const visibleFlag = '04dc9e358e3e4c76a8c39335d820d4cb';
 
-class ConfirmCreateFlowCaseModal extends ModalWrapperBase {
+class ConfirmCreateFlowCaseActionSheet extends ActionSheetConfirmWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }
@@ -20,11 +23,7 @@ class ConfirmCreateFlowCaseModal extends ModalWrapperBase {
     };
   }
 
-  buildTitle = () => '创建审批';
-
-  buildContent = () => {
-    return '即将创建审批，确定吗？';
-  };
+  buildTitle = () => '即将创建审批，确定吗？';
 }
 
-export { ConfirmCreateFlowCaseModal };
+export { ConfirmCreateFlowCaseActionSheet };

@@ -1,6 +1,7 @@
 import { CustomWrapper, View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { convertCollection, getValueByKey } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import {
@@ -9,7 +10,11 @@ import {
 } from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
-import { viewStyle } from '../../../../customConfig';
+import {
+  fieldDataWorkflowCase,
+  flowCaseStatusCollection,
+  viewStyle,
+} from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { buildCreateApproveItem, HeadNavigationBox } from '../../../../utils';
 
@@ -76,13 +81,27 @@ class PageListCreateApprove extends PageNeedSignInWrapper {
         >
           <Space direction="vertical" fillWidth size={10}>
             {metaListData.map((item) => {
-              const { workflowCaseId } = item;
+              const workflowCaseId = getValueByKey({
+                data: item,
+                key: fieldDataWorkflowCase.workflowCaseId.name,
+                convert: convertCollection.string,
+              });
+
+              const status = getValueByKey({
+                data: item,
+                key: fieldDataWorkflowCase.status.name,
+                convert: convertCollection.number,
+              });
 
               return buildCreateApproveItem({
                 key: `waitApprove_${workflowCaseId}`,
                 data: item,
                 onClick: () => {
-                  this.goToApprove(workflowCaseId);
+                  if (status === flowCaseStatusCollection.created) {
+                    this.goToFlowCaseForm(workflowCaseId);
+                  } else {
+                    this.goToApprove(workflowCaseId);
+                  }
                 },
               });
             })}

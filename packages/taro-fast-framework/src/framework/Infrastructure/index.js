@@ -11,6 +11,7 @@ import {
   getToken,
   getUrlGlobalPrefix,
   isArray,
+  isEmptyArray,
   isFunction,
   logConfig,
   logData,
@@ -33,6 +34,8 @@ import {
 import {
   AbstractComponent,
   checkWeAppEnvironment,
+  chooseFile,
+  chooseImage,
   corsTarget,
   emptyImage,
   emptyLogic,
@@ -2960,12 +2963,352 @@ class Infrastructure extends AbstractComponent {
     });
   };
 
+  selectSingleFileAndUpload = ({
+    uploadUrl,
+    name = 'file',
+    header = {},
+    successCallback = null,
+  }) => {
+    this.logFunctionCallTrack(
+      {
+        uploadUrl,
+        name,
+        header,
+      },
+      primaryCallName,
+      'selectSingleFileAndUpload',
+    );
+
+    const that = this;
+
+    chooseFile({
+      count: 1,
+      success: (o) => {
+        const { tempFiles } = o;
+
+        if (isArray(tempFiles) && !isEmptyArray(tempFiles)) {
+          const firstFile = tempFiles[0];
+
+          that.logFunctionCallTrace(
+            {
+              file: firstFile,
+            },
+            primaryCallName,
+            'selectSingleFileAndUpload',
+            'chooseFile',
+            'success',
+          );
+
+          const { path, name: alias } = firstFile;
+
+          that.logFunctionCallTrace(
+            {
+              uploadUrl,
+              filePath: path,
+              name,
+              formData: {
+                alias,
+              },
+              header,
+            },
+            primaryCallName,
+            'selectSingleFileAndUpload',
+            'chooseFile',
+            'success',
+            'trigger',
+            'uploadSingleImage',
+          );
+
+          that.uploadSingleFile({
+            uploadUrl: uploadUrl,
+            filePath: path,
+            name,
+            formData: {
+              alias,
+            },
+            header,
+            successCallback,
+          });
+        }
+      },
+    });
+  };
+
+  uploadSingleFile = ({
+    autoAppendCorsUrl = true,
+    uploadUrl,
+    filePath,
+    name = 'file',
+    formData = {},
+    header = {},
+    successCallback = null,
+  }) => {
+    this.logFunctionCallTrack(
+      {
+        autoAppendCorsUrl,
+        uploadUrl,
+        filePath,
+        name,
+        formData,
+        header,
+      },
+      primaryCallName,
+      'uploadSingleFile',
+    );
+
+    const that = this;
+
+    Tips.loading(`文件上传中`);
+
+    uploadFile({
+      url: autoAppendCorsUrl
+        ? adjustUrl(uploadUrl, `${corsTarget()}/${getUrlGlobalPrefix()}`)
+        : uploadUrl,
+      filePath: filePath,
+      name: name,
+      formData: formData || {},
+      header: {
+        token: getToken(),
+        openId: getOpenId(),
+        ...header,
+      },
+      success: (response) => {
+        Tips.loaded();
+
+        const { data: jsonString } = response;
+
+        const responseData = JSON.parse(jsonString);
+
+        that.logFunctionCallTrace(
+          responseData,
+          primaryCallName,
+          'uploadSingleFile',
+          'checkUploadSingleFileSuccess',
+        );
+
+        if (that.checkUploadSingleFileSuccess(responseData)) {
+          that.logFunctionCallTrace(
+            responseData,
+            primaryCallName,
+            'uploadSingleFile',
+            'analysisUploadSingleFileSuccessData',
+          );
+
+          const {
+            fileUrl,
+            name: fileName,
+            data,
+          } = that.analysisUploadSingleFileSuccessData(responseData);
+
+          that.notifyMessage({
+            message: '文件上传成功',
+            type: 'success',
+          });
+
+          if (isFunction(successCallback)) {
+            that.logFunctionCallTrace(
+              {
+                parameter: {
+                  fileUrl,
+                  name: fileName,
+                  data,
+                },
+              },
+              primaryCallName,
+              'uploadSingleFile',
+              'success',
+              'trigger',
+              'successCallback',
+            );
+
+            successCallback({
+              fileUrl,
+              name: fileName,
+              data,
+            });
+          } else {
+            that.logFunctionCallTrace(
+              {
+                parameter: {
+                  fileUrl,
+                  name: fileName,
+                  data,
+                },
+              },
+              primaryCallName,
+              'uploadSingleFile',
+              'success',
+              'trigger',
+              'successCallback',
+              emptyLogic,
+            );
+          }
+
+          that.logFunctionCallTrace(
+            {
+              fileUrl,
+              name: fileName,
+              data,
+            },
+            primaryCallName,
+            'uploadSingleFile',
+            'doAfterUploadSingleFileSuccess',
+          );
+
+          that.doAfterUploadSingleFileSuccess({
+            fileUrl,
+            name: fileName,
+            data,
+          });
+        } else {
+          that.logFunctionCallTrace(
+            responseData,
+            primaryCallName,
+            'uploadSingleFile',
+            'getUploadSingleFileMessage',
+          );
+
+          const { message } = that.getUploadSingleFileMessage(responseData);
+
+          Tips.info(message || '服务器错误');
+
+          return;
+        }
+      },
+      fail: () => {
+        Tips.loaded();
+
+        Tips.info(`文件上传失败`);
+      },
+    });
+  };
+
+  checkUploadSingleFileSuccess = (data) => {
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'checkUploadSingleFileSuccess',
+    );
+
+    const { success } = {
+      success: false,
+      ...data,
+    };
+
+    return !!success;
+  };
+
+  getUploadSingleFileMessage = (data) => {
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'getUploadSingleFileMessage',
+    );
+
+    const { message } = {
+      message: '',
+      ...data,
+    };
+
+    return message || '';
+  };
+
+  analysisUploadSingleFileSuccessData = (o) => {
+    this.logFunctionCallTrack(
+      o,
+      primaryCallName,
+      'analysisUploadSingleFileSuccessData',
+    );
+
+    const { data } = o;
+
+    const { fileUrl, name } = data;
+
+    return { fileUrl, name, data };
+  };
+
+  doAfterUploadSingleFileSuccess = (data) => {
+    this.logEmptyCallTrack(
+      data,
+      primaryCallName,
+      'doAfterUploadSingleFileSuccess',
+      emptyLogic,
+    );
+  };
+
+  selectSingleImageAndUpload = ({
+    uploadUrl,
+    name = 'file',
+    header = {},
+    successCallback = null,
+  }) => {
+    this.logFunctionCallTrack(
+      {
+        uploadUrl,
+        name,
+        header,
+      },
+      primaryCallName,
+      'selectSingleImageAndUpload',
+    );
+
+    const that = this;
+
+    chooseImage({
+      count: 1,
+      success: (o) => {
+        const { tempFiles } = o;
+
+        console.log(o);
+
+        if (isArray(tempFiles) && !isEmptyArray(tempFiles)) {
+          const firstFile = tempFiles[0];
+
+          that.logFunctionCallTrace(
+            {
+              file: firstFile,
+            },
+            primaryCallName,
+            'selectSingleImageAndUpload',
+            'chooseFile',
+            'success',
+          );
+
+          const { path } = firstFile;
+
+          that.logFunctionCallTrace(
+            {
+              uploadUrl,
+              name,
+              header,
+            },
+            primaryCallName,
+            'selectSingleImageAndUpload',
+            'chooseImage',
+            'success',
+            'trigger',
+            'uploadSingleImage',
+          );
+
+          that.uploadSingleImage({
+            uploadUrl: uploadUrl,
+            filePath: path,
+            name,
+            header,
+            successCallback,
+          });
+        }
+      },
+    });
+  };
+
   uploadSingleImage = ({
     autoAppendCorsUrl = true,
     uploadUrl,
     filePath,
     name = 'file',
     header = {},
+    successCallback = null,
   }) => {
     this.logFunctionCallTrack(
       {
@@ -3021,6 +3364,50 @@ class Infrastructure extends AbstractComponent {
             name: fileName,
             data,
           } = this.analysisUploadSingleImageSuccessData(responseData);
+
+          that.notifyMessage({
+            message: '图片上传成功',
+            type: 'success',
+          });
+
+          if (isFunction(successCallback)) {
+            that.logFunctionCallTrace(
+              {
+                parameter: {
+                  imageUrl,
+                  name: fileName,
+                  data,
+                },
+              },
+              primaryCallName,
+              'uploadSingleImage',
+              'success',
+              'trigger',
+              'successCallback',
+            );
+
+            successCallback({
+              imageUrl,
+              name: fileName,
+              data,
+            });
+          } else {
+            that.logFunctionCallTrace(
+              {
+                parameter: {
+                  imageUrl,
+                  name: fileName,
+                  data,
+                },
+              },
+              primaryCallName,
+              'uploadSingleImage',
+              'success',
+              'trigger',
+              'successCallback',
+              emptyLogic,
+            );
+          }
 
           this.logFunctionCallTrace(
             {

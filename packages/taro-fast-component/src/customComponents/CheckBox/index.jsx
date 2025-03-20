@@ -323,6 +323,8 @@ class CheckBox extends BaseComponent {
         stripColor={stripColor}
         extra={extra}
         space={false}
+        border={!!header || !!extra}
+        bodyBorder={!!header || !!extra}
       >
         {(isArray(options) ? options : []).map((o, index) => {
           const {

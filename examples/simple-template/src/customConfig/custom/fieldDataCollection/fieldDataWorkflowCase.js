@@ -1,4 +1,4 @@
-import { fieldDataFlowCase } from '../../general/fieldDataCollection';
+import { fieldDataFlowCase } from '../../general';
 
 export const fieldDataWorkflowCase = {
   ...fieldDataFlowCase,

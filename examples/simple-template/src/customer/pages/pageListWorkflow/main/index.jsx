@@ -10,7 +10,7 @@ import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { fieldDataWorkflowCase, viewStyle } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { buildWorkflowItem, HeadNavigationBox } from '../../../../utils';
-import { ConfirmCreateFlowCaseModal } from '../../../customComponents';
+import { ConfirmCreateFlowCaseActionSheet } from '../../../customComponents';
 import { createFlowCaseAction } from '../assist/action';
 
 // eslint-disable-next-line no-undef
@@ -78,7 +78,7 @@ class PageListWorkflow extends PageNeedSignInWrapper {
   confirmCreate = (v) => {
     this.currentWorkflowId = v;
 
-    ConfirmCreateFlowCaseModal.open();
+    ConfirmCreateFlowCaseActionSheet.open();
   };
 
   buildHeadNavigation = () => {
@@ -149,7 +149,13 @@ class PageListWorkflow extends PageNeedSignInWrapper {
   renderInteractiveArea = () => {
     return (
       <>
-        <ConfirmCreateFlowCaseModal afterOk={this.createFlowCase} />
+        <ConfirmCreateFlowCaseActionSheet
+          headerStyle={{
+            color: '#999',
+            fontWeight: 'bold',
+          }}
+          afterOk={this.createFlowCase}
+        />
       </>
     );
   };

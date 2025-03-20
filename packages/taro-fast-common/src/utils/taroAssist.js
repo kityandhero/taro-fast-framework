@@ -1,5 +1,6 @@
 import {
   chooseImage as chooseImageCore,
+  chooseMessageFile as chooseMessageFileCore,
   createAnimation as createAnimationCore,
   createSelectorQuery as createSelectorQueryCore,
   downloadFile,
@@ -434,6 +435,22 @@ export function chooseImage({
     count,
     sizeType,
     sourceType,
+    success: successCallback,
+    fail: failCallback,
+    complete: completeCallback,
+  });
+}
+
+export function chooseFile({
+  count = 9,
+  type = 'all',
+  success: successCallback,
+  fail: failCallback,
+  complete: completeCallback,
+}) {
+  chooseMessageFileCore({
+    count,
+    type,
     success: successCallback,
     fail: failCallback,
     complete: completeCallback,

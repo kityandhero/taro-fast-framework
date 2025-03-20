@@ -95,7 +95,7 @@ class ImagePicker extends Component {
     return imagePickerModeCollection.aspectFill;
   };
 
-  chooseFile = () => {
+  chooseImage = () => {
     const { files = [], multiple, count, sizeType, sourceType } = this.props;
     const filePathName =
       ENV === Taro.ENV_TYPE.ALIPAY ? 'apFilePaths' : 'tempFiles';
@@ -222,7 +222,7 @@ class ImagePicker extends Component {
                   key={`empty_${index * length}${index_}`}
                 >
                   {item.type === 'btn' && (
-                    <View onClick={this.chooseFile}>
+                    <View onClick={this.chooseImage}>
                       {this.props.children || (
                         <View
                           className={`${classPrefix}__item ${classPrefix}__choose-btn`}

@@ -75,6 +75,12 @@
           "scene": null
         },
         {
+          "name": "customer/flowCaseForm",
+          "pathName": "customer/pages/flowCaseForm/main/index",
+          "query": "id=1901999728871215104",
+          "scene": null
+        },
+        {
           "name": "customer/approve",
           "pathName": "customer/pages/approve/main/index",
           "query": "id=1831345295095631872",

@@ -43,7 +43,6 @@ const checkStatusIcon = (
   <View
     style={{
       ...iconContainerStyle,
-
       borderColor: '#1677ff',
       backgroundColor: '#1677ff',
       display: 'flex',
@@ -306,6 +305,8 @@ class Radio extends BaseComponent {
         stripColor={stripColor}
         extra={extra}
         space={false}
+        border={!!header || !!extra}
+        bodyBorder={!!header || !!extra}
       >
         {(isArray(options) ? options : []).map((o, index) => {
           const {

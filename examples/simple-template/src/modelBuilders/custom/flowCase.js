@@ -16,6 +16,7 @@ import {
   passData,
   refuseData,
   submitApprovalData,
+  submitFormData,
 } from '../../services/flowCase';
 
 export const flowCaseTypeCollection = {
@@ -24,6 +25,7 @@ export const flowCaseTypeCollection = {
   pageListLatestApprove: 'flowCase/pageListLatestApprove',
   get: 'flowCase/get',
   createFlowCase: 'flowCase/createFlowCase',
+  submitForm: 'flowCase/submitForm',
   submitApproval: 'flowCase/submitApproval',
   pass: 'flowCase/pass',
   refuse: 'flowCase/refuse',
@@ -152,6 +154,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(createFlowCaseData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *submitForm(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(submitFormData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

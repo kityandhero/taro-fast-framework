@@ -66,6 +66,13 @@
           "type": "singleData"
         },
         {
+          "title": "提交表单",
+          "api": "/wechatApplication/workflowCase/submitForm",
+          "effect": "submitForm",
+          "service": "submitFormData",
+          "type": "singleData"
+        },
+        {
           "title": "提交审批",
           "api": "/wechatApplication/workflowCase/submitApproval",
           "effect": "submitApproval",
@@ -88,8 +95,36 @@
         }
       ],
       "cover": true,
-      "title": "审批相关",
+      "title": "审批实例相关",
       "name": "flowCase"
+    },
+    {
+      "apis": [
+        {
+          "title": "新增附件",
+          "api": "/wechatApplication/workflowCaseFormAttachment/add",
+          "effect": "add",
+          "service": "addData",
+          "type": "singleList"
+        },
+        {
+          "title": "移除附件",
+          "api": "/wechatApplication/workflowCaseFormAttachment/remove",
+          "effect": "remove",
+          "service": "removeData",
+          "type": "singleList"
+        },
+        {
+          "title": "上传文件",
+          "api": "/wechatApplication/workflowCaseFormAttachment/uploadFile",
+          "effect": "uploadFile",
+          "service": "uploadFileData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "审批实例表单附件相关",
+      "name": "flowCaseFormAttachment"
     },
     {
       "apis": [
