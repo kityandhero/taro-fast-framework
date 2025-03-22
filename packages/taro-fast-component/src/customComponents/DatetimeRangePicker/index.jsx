@@ -82,19 +82,17 @@ class DatetimeRangePicker extends BaseComponent {
         {
           defaultValueAdjust = [...defaultValueSource];
         }
-
-        if (isEmptyArray(defaultValueSource)) {
-          defaultValueAdjust = ['', ''];
-        } else {
-          logException(
-            {
-              defaultValue: defaultValueSource,
-              message:
-                'defaultValue must be an array like ["2020-01-01 08:33:45","2020-02-01 08:33:45"]',
-            },
-            `property defaultValue data error in in ${primaryCallName}`,
-          );
-        }
+      } else if (isEmptyArray(defaultValueSource)) {
+        defaultValueAdjust = ['', ''];
+      } else {
+        logException(
+          {
+            defaultValue: defaultValueSource,
+            message:
+              'defaultValue must be an array like ["2020-01-01 08:33:45","2020-02-01 08:33:45"]',
+          },
+          `property defaultValue data error in in ${primaryCallName}`,
+        );
       }
     } else {
       logException(
