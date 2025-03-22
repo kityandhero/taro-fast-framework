@@ -201,7 +201,7 @@ class Tabs extends BaseComponent {
             return rect;
           })
           .catch((error) => {
-            logException(error);
+            logException(error, `error on adjustSize in Tabs`);
           });
       }, 200);
     }
@@ -221,7 +221,7 @@ class Tabs extends BaseComponent {
             return rect;
           })
           .catch((error) => {
-            logException(error);
+            logException(error, `error on adjustSize in Tabs`);
           });
       }, 200);
     }

@@ -39,6 +39,11 @@ import {
 } from './environmentAssist';
 import { transformSize } from './styleAssist';
 
+/**
+ * Module Name.
+ */
+const moduleName = 'taroAssist';
+
 let globalSystemInfo = null;
 
 export function getSystemInfo() {
@@ -167,7 +172,10 @@ export function getGeographicalLocation({
           failCallback(response);
         }
       } catch (error) {
-        logException(error.message);
+        logException(
+          error,
+          `error on getGeographicalLocation in ${moduleName}`,
+        );
       } finally {
         stopGeographicalLocationUpdate({});
       }
@@ -272,7 +280,10 @@ export function downloadFileAndOpen({ url, successCallback = null }) {
               }
             },
             fail: (error) => {
-              logException(error);
+              logException(
+                error,
+                `error on downloadFileAndOpen in ${moduleName}`,
+              );
             },
           });
 

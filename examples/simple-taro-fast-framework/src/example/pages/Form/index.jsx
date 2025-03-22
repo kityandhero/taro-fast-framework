@@ -81,6 +81,21 @@ const list = [
     name: '文本域编辑项',
     path: pathCollection.example.textAreaItem.path,
   },
+  {
+    id: 'DatetimePicker',
+    name: '日期时间选择器',
+    path: pathCollection.example.datetimePicker.path,
+  },
+  {
+    id: 'DatetimeItem',
+    name: '日期时间项',
+    path: pathCollection.example.datetimeItem.path,
+  },
+  {
+    id: 'DatetimeRangePicker',
+    name: '日期时间范围选择器',
+    path: pathCollection.example.datetimeRangePicker.path,
+  },
 ];
 
 const o = {

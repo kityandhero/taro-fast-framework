@@ -109,7 +109,11 @@ class Button extends BaseComponent {
   };
 
   triggerClick = (event) => {
-    const { ripple, onClick } = this.props;
+    const { disabled, ripple, onClick } = this.props;
+
+    if (disabled) {
+      return;
+    }
 
     if (ripple) {
       const that = this;

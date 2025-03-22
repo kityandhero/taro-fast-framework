@@ -5,56 +5,23 @@ const rootPathCollection = {
 };
 
 const examplePathCollection = {
-  basic: {
-    path: '/example/pages/basic/index',
-  },
-  element: {
-    path: '/example/pages/element/index',
-  },
-  form: {
-    path: '/example/pages/form/index',
-  },
-  layout: {
-    path: '/example/pages/layout/index',
-  },
   action: {
     path: '/example/pages/action/index',
   },
-  extraComponent: {
-    path: '/example/pages/extraComponent/index',
+  actionSheet: {
+    path: '/example/pages/actionSheet/index',
   },
-  interact: {
-    path: '/example/pages/interact/index',
+  activityIndicator: {
+    path: '/example/pages/activityIndicator/index',
   },
-  webPage: {
-    path: '/example/pages/webPage/index',
-  },
-  flex: {
-    path: '/example/pages/flex/index',
-  },
-  navigation: {
-    path: '/example/pages/navigation/index',
-  },
-  ellipsis: {
-    path: '/example/pages/ellipsis/index',
-  },
-  more: {
-    path: '/example/pages/more/index',
-  },
-  price: {
-    path: '/example/pages/price/index',
-  },
-  colorText: {
-    path: '/example/pages/colorText/index',
-  },
-  countdown: {
-    path: '/example/pages/countdown/index',
-  },
-  imageBox: {
-    path: '/example/pages/imageBox/index',
+  angleBox: {
+    path: '/example/pages/angleBox/index',
   },
   avatar: {
     path: '/example/pages/avatar/index',
+  },
+  backboardBox: {
+    path: '/example/pages/backboardBox/index',
   },
   backTop: {
     path: '/example/pages/backTop/index',
@@ -62,110 +29,20 @@ const examplePathCollection = {
   badge: {
     path: '/example/pages/badge/index',
   },
-  noticeBar: {
-    path: '/example/pages/noticeBar/index',
-  },
-  steps: {
-    path: '/example/pages/steps/index',
-  },
-  headNavigation: {
-    path: '/example/pages/headNavigation/index',
-  },
-  divider: {
-    path: '/example/pages/divider/index',
-  },
-  popover: {
-    path: '/example/pages/popover/index',
-  },
-  tag: {
-    path: '/example/pages/tag/index',
-  },
-  inputItem: {
-    path: '/example/pages/inputItem/index',
-  },
-  stepper: {
-    path: '/example/pages/stepper/index',
-  },
-  stepperItem: {
-    path: '/example/pages/stepperItem/index',
-  },
-  multiLineText: {
-    path: '/example/pages/multiLineText/index',
+  basic: {
+    path: '/example/pages/basic/index',
   },
   button: {
     path: '/example/pages/button/index',
   },
-  switch: {
-    path: '/example/pages/switch/index',
-  },
-  switchItem: {
-    path: '/example/pages/switchItem/index',
-  },
-  progress: {
-    path: '/example/pages/progress/index',
-  },
-  progressBox: {
-    path: '/example/pages/progressBox/index',
-  },
-  progressItem: {
-    path: '/example/pages/progressItem/index',
-  },
-  message: {
-    path: '/example/pages/message/index',
-  },
-  notification: {
-    path: '/example/pages/notification/index',
-  },
-  imagePicker: {
-    path: '/example/pages/imagePicker/index',
-  },
-  grid: {
-    path: '/example/pages/grid/index',
-  },
-  selector: {
-    path: '/example/pages/selector/index',
-  },
-  tabs: {
-    path: '/example/pages/tabs/index',
-  },
-  transition: {
-    path: '/example/pages/transition/index',
-  },
   card: {
     path: '/example/pages/card/index',
   },
-  item: {
-    path: '/example/pages/item/index',
+  cascader: {
+    path: '/example/pages/cascader/index',
   },
-  overlay: {
-    path: '/example/pages/overlay/index',
-  },
-  popup: {
-    path: '/example/pages/popup/index',
-  },
-  circle: {
-    path: '/example/pages/circle/index',
-  },
-  swiper: {
-    path: '/example/pages/swiper/index',
-  },
-  scrollBox: {
-    path: '/example/pages/scrollBox/index',
-  },
-  titleBox: {
-    path: '/example/pages/titleBox/index',
-  },
-  angleBox: {
-    path: '/example/pages/angleBox/index',
-  },
-  radio: {
-    path: '/example/pages/radio/index',
-  },
-  radioPopup: {
-    path: '/example/pages/radioPopup/index',
-  },
-  radioSelector: {
-    path: '/example/pages/radioSelector/index',
+  centerBox: {
+    path: '/example/pages/centerBox/index',
   },
   checkBox: {
     path: '/example/pages/checkBox/index',
@@ -176,29 +53,50 @@ const examplePathCollection = {
   checkBoxSelector: {
     path: '/example/pages/checkBoxSelector/index',
   },
-  helpBox: {
-    path: '/example/pages/helpBox/index',
+  circle: {
+    path: '/example/pages/circle/index',
   },
-  htmlBox: {
-    path: '/example/pages/htmlBox/index',
+  collapse: {
+    path: '/example/pages/collapse/index',
   },
-  footer: {
-    path: '/example/pages/footer/index',
+  color: {
+    path: '/example/pages/color/index',
   },
-  floatAction: {
-    path: '/example/pages/floatAction/index',
+  colorText: {
+    path: '/example/pages/colorText/index',
   },
-  verticalBox: {
-    path: '/example/pages/verticalBox/index',
+  countdown: {
+    path: '/example/pages/countdown/index',
   },
-  horizontalCenterBox: {
-    path: '/example/pages/horizontalCenterBox/index',
+  cssVariable: {
+    path: '/example/pages/cssVariable/index',
   },
-  flexBox: {
-    path: '/example/pages/flexBox/index',
+  dataGrid: {
+    path: '/example/pages/dataGrid/index',
+  },
+  datetimeItem: {
+    path: '/example/pages/datetimeItem/index',
+  },
+  datetimePicker: {
+    path: '/example/pages/datetimePicker/index',
+  },
+  datetimeRangePicker: {
+    path: '/example/pages/datetimeRangePicker/index',
+  },
+  divider: {
+    path: '/example/pages/divider/index',
+  },
+  element: {
+    path: '/example/pages/element/index',
+  },
+  ellipsis: {
+    path: '/example/pages/ellipsis/index',
   },
   extraBox: {
     path: '/example/pages/extraBox/index',
+  },
+  extraComponent: {
+    path: '/example/pages/extraComponent/index',
   },
   fadeInBox: {
     path: '/example/pages/fadeInBox/index',
@@ -206,53 +104,56 @@ const examplePathCollection = {
   fixedBox: {
     path: '/example/pages/fixedBox/index',
   },
-  centerBox: {
-    path: '/example/pages/centerBox/index',
+  flex: {
+    path: '/example/pages/flex/index',
   },
-  translucentBox: {
-    path: '/example/pages/translucentBox/index',
+  flexBox: {
+    path: '/example/pages/flexBox/index',
   },
-  thumbnailBox: {
-    path: '/example/pages/thumbnailBox/index',
+  floatAction: {
+    path: '/example/pages/floatAction/index',
   },
-  scaleBox: {
-    path: '/example/pages/scaleBox/index',
+  footer: {
+    path: '/example/pages/footer/index',
   },
-  backboardBox: {
-    path: '/example/pages/backboardBox/index',
+  form: {
+    path: '/example/pages/form/index',
   },
-  dataGrid: {
-    path: '/example/pages/dataGrid/index',
+  grid: {
+    path: '/example/pages/grid/index',
   },
-  searchBar: {
-    path: '/example/pages/searchBar/index',
+  headNavigation: {
+    path: '/example/pages/headNavigation/index',
   },
-  textAreaItem: {
-    path: '/example/pages/textAreaItem/index',
+  helpBox: {
+    path: '/example/pages/helpBox/index',
   },
-  actionSheet: {
-    path: '/example/pages/actionSheet/index',
+  horizontalCenterBox: {
+    path: '/example/pages/horizontalCenterBox/index',
   },
-  modal: {
-    path: '/example/pages/modal/index',
+  htmlBox: {
+    path: '/example/pages/htmlBox/index',
   },
-  cascader: {
-    path: '/example/pages/cascader/index',
+  icon: {
+    path: '/example/pages/icon/index',
   },
-  space: {
-    path: '/example/pages/space/index',
+  imageBox: {
+    path: '/example/pages/imageBox/index',
   },
-  loading: {
-    path: '/example/pages/loading/index',
+  imagePicker: {
+    path: '/example/pages/imagePicker/index',
   },
-  activityIndicator: {
-    path: '/example/pages/activityIndicator/index',
+  inputItem: {
+    path: '/example/pages/inputItem/index',
   },
-  collapse: {
-    path: '/example/pages/collapse/index',
+  interact: {
+    path: '/example/pages/interact/index',
   },
-  tabbar: {
-    path: '/example/pages/tabbar/index',
+  item: {
+    path: '/example/pages/item/index',
+  },
+  layout: {
+    path: '/example/pages/layout/index',
   },
   line: {
     path: '/example/pages/line/index',
@@ -260,17 +161,125 @@ const examplePathCollection = {
   link: {
     path: '/example/pages/link/index',
   },
-  icon: {
-    path: '/example/pages/icon/index',
+  loading: {
+    path: '/example/pages/loading/index',
   },
-  color: {
-    path: '/example/pages/color/index',
+  message: {
+    path: '/example/pages/message/index',
   },
-  cssVariable: {
-    path: '/example/pages/cssVariable/index',
+  modal: {
+    path: '/example/pages/modal/index',
+  },
+  more: {
+    path: '/example/pages/more/index',
+  },
+  multiLineText: {
+    path: '/example/pages/multiLineText/index',
+  },
+  navigation: {
+    path: '/example/pages/navigation/index',
+  },
+  noticeBar: {
+    path: '/example/pages/noticeBar/index',
+  },
+  notification: {
+    path: '/example/pages/notification/index',
+  },
+  overlay: {
+    path: '/example/pages/overlay/index',
+  },
+  popover: {
+    path: '/example/pages/popover/index',
+  },
+  popup: {
+    path: '/example/pages/popup/index',
+  },
+  price: {
+    path: '/example/pages/price/index',
+  },
+  progress: {
+    path: '/example/pages/progress/index',
+  },
+  progressBox: {
+    path: '/example/pages/progressBox/index',
+  },
+  progressItem: {
+    path: '/example/pages/progressItem/index',
+  },
+  radio: {
+    path: '/example/pages/radio/index',
+  },
+  radioPopup: {
+    path: '/example/pages/radioPopup/index',
+  },
+  radioSelector: {
+    path: '/example/pages/radioSelector/index',
+  },
+  scaleBox: {
+    path: '/example/pages/scaleBox/index',
+  },
+  scrollBox: {
+    path: '/example/pages/scrollBox/index',
+  },
+  searchBar: {
+    path: '/example/pages/searchBar/index',
+  },
+  selector: {
+    path: '/example/pages/selector/index',
+  },
+  space: {
+    path: '/example/pages/space/index',
+  },
+  stepper: {
+    path: '/example/pages/stepper/index',
+  },
+  stepperItem: {
+    path: '/example/pages/stepperItem/index',
+  },
+  steps: {
+    path: '/example/pages/steps/index',
+  },
+  swiper: {
+    path: '/example/pages/swiper/index',
+  },
+  switch: {
+    path: '/example/pages/switch/index',
+  },
+  switchItem: {
+    path: '/example/pages/switchItem/index',
+  },
+  tabbar: {
+    path: '/example/pages/tabbar/index',
+  },
+  tabs: {
+    path: '/example/pages/tabs/index',
+  },
+  tag: {
+    path: '/example/pages/tag/index',
+  },
+  textAreaItem: {
+    path: '/example/pages/textAreaItem/index',
+  },
+  thumbnailBox: {
+    path: '/example/pages/thumbnailBox/index',
+  },
+  titleBox: {
+    path: '/example/pages/titleBox/index',
+  },
+  transition: {
+    path: '/example/pages/transition/index',
+  },
+  translucentBox: {
+    path: '/example/pages/translucentBox/index',
   },
   utils: {
     path: '/example/pages/utils/index',
+  },
+  verticalBox: {
+    path: '/example/pages/verticalBox/index',
+  },
+  webPage: {
+    path: '/example/pages/webPage/index',
   },
 };
 

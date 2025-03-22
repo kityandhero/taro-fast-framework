@@ -239,7 +239,7 @@ class FloatAction extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        logException(error);
+        logException(error, `error on getRect in FloatAction`);
       });
   };
 

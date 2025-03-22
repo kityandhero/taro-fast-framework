@@ -30,6 +30,11 @@ import { getLocationMode } from './locationAssist';
 import { getOpenId } from './openIdAssist';
 import { getSession } from './sessionAssist';
 
+/**
+ * Module Name.
+ */
+const moduleName = 'request';
+
 const Request = {
   /**
    *
@@ -45,7 +50,7 @@ const Request = {
           text: '请求失败, 请检查网络',
         });
 
-        logException(error);
+        logException(error, `error on request in module::${moduleName}`);
       },
     });
 

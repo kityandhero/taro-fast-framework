@@ -19,7 +19,13 @@ import { Overlay } from '../Overlay';
 
 import './index.less';
 
-const positionCollection = ['bottom', 'top', 'left', 'right', 'center'];
+const popupPositionCollection = {
+  bottom: 'bottom',
+  top: 'top',
+  left: 'left',
+  right: 'right',
+  center: 'center',
+};
 
 const defaultProps = {
   /**
@@ -174,7 +180,16 @@ class Popup extends BaseComponent {
   getPosition = () => {
     const { position } = this.props;
 
-    return checkInCollection(positionCollection, position)
+    return checkInCollection(
+      [
+        popupPositionCollection.bottom,
+        popupPositionCollection.top,
+        popupPositionCollection.left,
+        popupPositionCollection.right,
+        popupPositionCollection.center,
+      ],
+      position,
+    )
       ? position
       : defaultProps.position;
   };
@@ -471,4 +486,4 @@ Popup.defaultProps = {
   ...defaultProps,
 };
 
-export { Popup };
+export { Popup, popupPositionCollection };

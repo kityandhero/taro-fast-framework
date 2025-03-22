@@ -177,7 +177,6 @@ export default class Index extends ContentPageBase {
 
     this.state = {
       ...this.state,
-
       header: '默认展示',
       currentConfig: config1,
     };

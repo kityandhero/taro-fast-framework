@@ -162,7 +162,7 @@ export async function actionCore({
             .catch((error) => {
               logDebug({ api, error }, 'actionCore error');
 
-              logException(error);
+              logException(error, `error on actionCore in ${moduleName}`);
 
               if (showProcessing) {
                 setTimeout(() => {
@@ -195,13 +195,16 @@ export async function actionCore({
             error,
           )}, please confirm dispatch type exists first.`;
 
-          logException({
-            message: text,
-            dispatchInfo: {
-              type: api,
-              payload: params,
+          logException(
+            {
+              message: text,
+              dispatchInfo: {
+                type: api,
+                payload: params,
+              },
             },
-          });
+            `error on actionCore in ${moduleName}`,
+          );
 
           failureCallback({
             target,
@@ -288,7 +291,10 @@ export async function actionSheetCore({
       }
     },
   }).catch((error_) => {
-    logException(`actionSheetCore: catch -> ${error_.message}`);
+    logException(
+      `actionSheetCore: catch -> ${error_.message}`,
+      `error on actionSheetCore in ${moduleName}`,
+    );
   });
 }
 
@@ -391,6 +397,9 @@ export async function actionModalCore({
       }
     },
   }).catch((error_) => {
-    logException(`actionSheetCore: catch -> ${error_.message}`);
+    logException(
+      `actionSheetCore: catch -> ${error_.message}`,
+      `error on actionModalCore in ${moduleName}`,
+    );
   });
 }

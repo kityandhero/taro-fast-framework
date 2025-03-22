@@ -455,7 +455,10 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
     try {
       listDataSchema = JSON.parse(dataSchema);
     } catch (error) {
-      logException(error);
+      logException(
+        error,
+        'error on analysisDocumentConfig in BaseFlowCaseDetail',
+      );
     }
 
     let items = [];

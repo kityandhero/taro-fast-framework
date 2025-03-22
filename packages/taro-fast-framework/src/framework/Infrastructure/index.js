@@ -2098,7 +2098,10 @@ class Infrastructure extends AbstractComponent {
         return null;
       })
       .catch((error) => {
-        logException(error);
+        logException(
+          error,
+          `error on setTicketValidityProcessDetection in ${this.componentName}(${primaryCallName})`,
+        );
       });
   };
 
@@ -2186,7 +2189,10 @@ class Infrastructure extends AbstractComponent {
           'error',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on setSignInProcessDetection in ${this.componentName}(${primaryCallName})`,
+        );
       });
   };
 
@@ -2299,7 +2305,10 @@ class Infrastructure extends AbstractComponent {
           'catch',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on setSignInResult in ${this.componentName}(${primaryCallName})`,
+        );
       });
   };
 
@@ -2690,7 +2699,10 @@ class Infrastructure extends AbstractComponent {
           'error',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on setLocationResult in ${this.componentName}(${primaryCallName})`,
+        );
       });
   }
 
@@ -2889,7 +2901,10 @@ class Infrastructure extends AbstractComponent {
           'error',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on getWeather in ${this.componentName}(${primaryCallName})`,
+        );
       });
   };
 

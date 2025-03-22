@@ -781,7 +781,10 @@ class SupplementCore extends Common {
                 'error',
               );
 
-              logException(error);
+              logException(
+                error,
+                `error on obtainLocation in ${this.componentName}(${primaryCallName})`,
+              );
 
               if (mapData == null) {
                 const mapDataLast = getLastLocation();
@@ -1965,7 +1968,10 @@ class SupplementCore extends Common {
           'error',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on checkTicketValidityCore in ${this.componentName}(${primaryCallName})`,
+        );
       });
   }
 
@@ -3495,7 +3501,10 @@ class SupplementCore extends Common {
           'catch',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on signInCore in ${this.componentName}(${primaryCallName})`,
+        );
       });
   }
 
@@ -4057,7 +4066,10 @@ class SupplementCore extends Common {
           'catch',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on signInSilentCore in ${this.componentName}(${primaryCallName})`,
+        );
       });
   }
 
@@ -4109,7 +4121,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logException(
         remoteData,
-        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInApiData',
+        `params remoteData not exist key sessionEffective on parseSessionEffectiveFromSignInApiData in ${this.componentName}(${primaryCallName})`,
       );
 
       return false;
@@ -4137,7 +4149,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'sessionEffective')) {
       logException(
         remoteData,
-        'params remoteData not exist key sessionEffective in parseSessionEffectiveFromSignInSilentApiData',
+        `params remoteData not exist key sessionEffective on parseSessionEffectiveFromSignInSilentApiData in ${this.componentName}(${primaryCallName})`,
       );
 
       return false;
@@ -4201,7 +4213,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
       logException(
         remoteData,
-        'params remoteData not exist key signInResult in parseSignInResultFromSignInApiData',
+        `params remoteData not exist key signInResult on parseSignInResultFromSignInApiData in ${this.componentName}(${primaryCallName})`,
       );
     }
 
@@ -4229,7 +4241,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'signInResult')) {
       logException(
         remoteData,
-        'params remoteData not exist key signInResult in parseSignInResultFromSignInSilentApiData',
+        `params remoteData not exist key signInResult on parseSignInResultFromSignInSilentApiData in ${this.componentName}(${primaryCallName})`,
       );
     }
 
@@ -4342,7 +4354,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
       logException(
         remoteData,
-        'params remoteData not exist key token in parseTokenFromSignInApiData',
+        `params remoteData not exist key token on parseTokenFromSignInApiData in ${this.componentName}(${primaryCallName})`,
       );
     }
 
@@ -4368,7 +4380,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'token')) {
       logException(
         remoteData,
-        'params remoteData not exist key token in parseTokenFromSignInSilentApiData',
+        `params remoteData not exist key token on parseTokenFromSignInSilentApiData in ${this.componentName}(${primaryCallName})`,
       );
     }
 
@@ -4440,7 +4452,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
       logException(
         remoteData,
-        'params remoteData not exist key openId in parseOpenIdFromSignInApiData',
+        `params remoteData not exist key openId on parseOpenIdFromSignInApiData in ${this.componentName}(${primaryCallName})`,
       );
     }
 
@@ -4466,7 +4478,7 @@ class SupplementCore extends Common {
     if (!checkInCollection(Object.keys(remoteData || {}), 'openId')) {
       logException(
         remoteData,
-        'params remoteData not exist key openId in parseOpenIdFromSignInSilentApiData',
+        `params remoteData not exist key openId on parseOpenIdFromSignInSilentApiData in ${this.componentName}(${primaryCallName})`,
       );
     }
 
@@ -4870,7 +4882,10 @@ class SupplementCore extends Common {
             'info getCustomer error,doAfterRegisterWithWeChat and callback will do not execute',
           );
 
-          logException(error);
+          logException(
+            error,
+            `error on getCustomer in ${this.componentName}(${primaryCallName})`,
+          );
 
           if (isFunction(failCallback)) {
             that.logFunctionCallTrace(
@@ -5024,7 +5039,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key sessionEffective on parseSessionEffectiveFromExchangePhoneApiData in ${this.componentName}(${primaryCallName})`,
+      );
 
       throw new Error(info);
     }
@@ -5213,7 +5231,10 @@ class SupplementCore extends Common {
             'catch',
           );
 
-          logException(error);
+          logException(
+            error,
+            `error on exchangePhone in ${this.componentName}(${primaryCallName})`,
+          );
         });
     });
   };
@@ -5257,7 +5278,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key sessionEffective on parseSessionEffectiveFromRegisterWithWeChatApiData in ${this.componentName}(${primaryCallName})`,
+      );
 
       throw new Error(info);
     }
@@ -5650,7 +5674,10 @@ class SupplementCore extends Common {
           'catch',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on registerWithWeChat in ${this.componentName}(${primaryCallName})`,
+        );
 
         if (isFunction(failCallback)) {
           that.logFunctionCallTrace(
@@ -5734,7 +5761,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key sessionEffective on parseSessionEffectiveFromRegisterApiData in ${this.componentName}(${primaryCallName})`,
+      );
 
       throw new Error(info);
     }
@@ -6128,7 +6158,10 @@ class SupplementCore extends Common {
           'catch',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on register in ${this.componentName}(${primaryCallName})`,
+        );
 
         if (isFunction(failCallback)) {
           that.logFunctionCallTrace(
@@ -6236,7 +6269,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key signInResult on parseSignInResultFromRegisterApiData in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     const { signInResult } = {
@@ -6271,7 +6307,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key signInResult on parseSignInResultFromRegisterWithWeChatApiData in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     const { signInResult } = {
@@ -6392,7 +6431,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key token on parseTokenFromRegisterApiData in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     const { token } = {
@@ -6425,7 +6467,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key token on parseTokenFromRegisterWithWeChatApiData in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     const { token } = {
@@ -6500,7 +6545,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key openId on parseOpenIdFromRegisterApiData in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     const { openId } = {
@@ -6533,7 +6581,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(remoteData, info);
+      logException(
+        remoteData,
+        `params remoteData not exist key openId on parseOpenIdFromRegisterWithWeChatApiData in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     const { openId } = {
@@ -6561,7 +6612,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(info);
+      logException(
+        info,
+        `error on setOpenIdOnRegister in ${this.componentName}(${primaryCallName})`,
+      );
 
       throw new Error(info);
     }
@@ -6586,7 +6640,10 @@ class SupplementCore extends Common {
         'error',
       );
 
-      logException(info);
+      logException(
+        info,
+        `error on setOpenIdOnRegisterWithWeChat in ${this.componentName}(${primaryCallName})`,
+      );
 
       throw new Error(info);
     }
@@ -6789,7 +6846,10 @@ class SupplementCore extends Common {
             'catch',
           );
 
-          logException(error);
+          logException(
+            error,
+            `error on initMetaData in ${this.componentName}(${primaryCallName})`,
+          );
         });
     } else {
       logDebug('check meta data from local cache success');
@@ -7013,7 +7073,10 @@ class SupplementCore extends Common {
             'catch',
           );
 
-          logException(error);
+          logException(
+            error,
+            `error on initFullAdministrativeDivisionData in ${this.componentName}(${primaryCallName})`,
+          );
         });
     } else {
       logInfo(

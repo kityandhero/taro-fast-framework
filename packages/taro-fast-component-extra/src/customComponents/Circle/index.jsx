@@ -258,7 +258,7 @@ class Circle extends AbstractComponent {
         return n;
       })
       .catch((error) => {
-        logException(error);
+        logException(error, `error on draw in Circle`);
       });
   };
 

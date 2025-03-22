@@ -124,7 +124,7 @@ export default class Index extends BasePageWrapper {
         return urlParametersChanged;
       })
       .catch((error) => {
-        logException(error);
+        logException(error, 'error on remoteRequest in exchangeShareData');
       });
   };
 

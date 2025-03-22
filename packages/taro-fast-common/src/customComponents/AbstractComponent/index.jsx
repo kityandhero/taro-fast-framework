@@ -881,7 +881,10 @@ class AbstractComponent extends Component {
         'error',
       );
 
-      logException(info);
+      logException(
+        info,
+        `error on getGlobalWrapper in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     return global;
@@ -901,7 +904,10 @@ class AbstractComponent extends Component {
       'error',
     );
 
-    logException(info);
+    logException(
+      info,
+      `error on getDispatch in ${this.componentName}(${primaryCallName})`,
+    );
 
     throw new Error(info);
   };
@@ -923,7 +929,10 @@ class AbstractComponent extends Component {
         'error',
       );
 
-      logException(info);
+      logException(
+        info,
+        `error on getDispatchWrapper in ${this.componentName}(${primaryCallName})`,
+      );
     }
 
     return dispatch;
@@ -967,7 +976,10 @@ class AbstractComponent extends Component {
             'error',
           );
 
-          logException(info);
+          logException(
+            info,
+            `error on dispatchApi in ${this.componentName}(${primaryCallName})`,
+          );
         }
       }
     }

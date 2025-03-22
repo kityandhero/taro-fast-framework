@@ -637,7 +637,10 @@ class Base extends Infrastructure {
                   'error',
                 );
 
-                logException(error.message);
+                logException(
+                  error,
+                  `error on loadFromApi in ${this.componentName}(${primaryCallName})`,
+                );
 
                 const text = `${toString(error)},place view in the console`;
 
@@ -799,7 +802,10 @@ class Base extends Infrastructure {
               'error',
             );
 
-            logException(error);
+            logException(
+              error,
+              `error on loadFromApi in ${this.componentName}(${primaryCallName})`,
+            );
 
             logDebug('state dispatchComplete will set to true');
 
@@ -1016,7 +1022,10 @@ class Base extends Infrastructure {
           'error',
         );
 
-        logException(error);
+        logException(
+          error,
+          `error on remoteRequest in ${this.componentName}(${primaryCallName})`,
+        );
       });
   };
 

@@ -23,7 +23,7 @@ import {
 
 import { fieldDataWorkflowCase } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
-import { SubmitFlowCaseModal } from '../../../customComponents';
+import { ConfirmSubmitFlowCaseActionSheet } from '../../../customComponents';
 import { BaseFlowCaseDetail } from '../../../pageBases';
 import {
   passAction,
@@ -95,7 +95,7 @@ class Approve extends BaseFlowCaseDetail {
   };
 
   confirmSubmit = () => {
-    SubmitFlowCaseModal.open();
+    ConfirmSubmitFlowCaseActionSheet.open();
   };
 
   pass = () => {
@@ -361,7 +361,13 @@ class Approve extends BaseFlowCaseDetail {
       <>
         {this.renderFilePreviewPopup()}
 
-        <SubmitFlowCaseModal afterOk={this.submitApproval} />
+        <ConfirmSubmitFlowCaseActionSheet
+          headerStyle={{
+            color: '#999',
+            fontWeight: 'bold',
+          }}
+          afterOk={this.submitApproval}
+        />
       </>
     );
   };

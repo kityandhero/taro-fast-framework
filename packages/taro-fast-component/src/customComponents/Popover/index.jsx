@@ -95,7 +95,7 @@ class Popover extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on adjustLayout in Popover`);
         });
     }, 200);
   };

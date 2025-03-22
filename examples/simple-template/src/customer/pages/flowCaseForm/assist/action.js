@@ -8,6 +8,22 @@ import {
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 
+export async function submitFormAction({
+  target,
+  handleData,
+  successCallback,
+}) {
+  actionCore({
+    api: modelTypeCollection.flowCaseTypeCollection.submitForm,
+    params: {
+      ...handleData,
+    },
+    target,
+    handleData,
+    successCallback,
+  });
+}
+
 export async function addAttachmentAction({
   target,
   handleData,

@@ -105,7 +105,7 @@ class Item extends BaseComponent {
           return rect;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on updateBodyHeight in Item`);
         });
     }
   };

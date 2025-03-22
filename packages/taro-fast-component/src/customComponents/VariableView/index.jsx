@@ -383,7 +383,7 @@ class VariableView extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        logException(error);
+        logException(error, `error on adjustView in VariableView`);
       });
   };
 

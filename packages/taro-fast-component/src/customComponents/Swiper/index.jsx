@@ -281,7 +281,7 @@ class Swiper extends BaseComponent {
         return rect;
       })
       .catch((error) => {
-        logException(error);
+        logException(error, `error on adjustView in Swiper`);
       });
 
     if (isFunction(onChange)) {

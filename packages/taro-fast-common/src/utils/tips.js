@@ -3,6 +3,11 @@ import Taro from '@tarojs/taro';
 import { isFunction, logException } from 'easy-soft-utility';
 
 /**
+ * Module Name.
+ */
+const moduleName = 'tips';
+
+/**
  * 提示与加载工具类
  */
 const Tips = {
@@ -29,7 +34,7 @@ const Tips = {
           return response;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on toast in ${moduleName}`);
         });
     }, 500);
   },
@@ -95,7 +100,7 @@ const Tips = {
           return response;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on success in ${moduleName}`);
         });
     }, 500);
   },
@@ -119,7 +124,7 @@ const Tips = {
           return response;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on error in ${moduleName}`);
         });
     }, 500);
   },
@@ -143,7 +148,7 @@ const Tips = {
           return response;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on warning in ${moduleName}`);
         });
     }, 500);
   },
@@ -167,7 +172,7 @@ const Tips = {
           return response;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on warn in ${moduleName}`);
         });
     }, 500);
   },
@@ -191,7 +196,7 @@ const Tips = {
           return response;
         })
         .catch((error) => {
-          logException(error);
+          logException(error, `error on info in ${moduleName}`);
         });
     }, 500);
   },

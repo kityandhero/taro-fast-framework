@@ -5,8 +5,10 @@ import Taro from '@tarojs/taro';
 import {
   canToNumber,
   checkStringIsNullOrWhiteSpace,
+  filter,
   isArray,
   isFunction,
+  logException,
   showSimpleWarnMessage,
   toNumber,
   whetherNumber,
@@ -22,6 +24,9 @@ import {
   Card,
   CheckBox,
   ColorText,
+  DatetimePicker,
+  datetimePickerTypeCollection,
+  DatetimeRangePicker,
   Empty,
   FlexBox,
   HelpBox,
@@ -78,22 +83,26 @@ const attachmentTitleStyle = {
 };
 
 const defaultProperties = {
-  fontSize: 40,
-  valueList: [],
-  schemaList: [],
   attachmentList: [],
-  remarkList: [],
-  labelStyle: {},
-  borderColor: '#ccc',
   backgroundColor: '#fff',
+  borderColor: '#ccc',
+  endYear: 2030,
+  fontSize: 40,
+  initialValueList: [],
+  labelStyle: {},
   onChange: null,
   onRemoveAttachment: null,
+  remarkList: [],
+  schemaList: [],
+  startYear: 2023,
 };
 
 class FormBuilder extends PureComponent {
   // componentRef = null;
 
   // imageTargetRef = React.createRef();
+
+  values = {};
 
   constructor(properties) {
     super(properties);
@@ -111,60 +120,129 @@ class FormBuilder extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { initialValueList, schemaList } = this.getProperties();
+
+    if (isArray(schemaList)) {
+      for (const schema of schemaList) {
+        const { name, type } = {
+          name: '',
+          type: '',
+          ...schema,
+        };
+
+        let initialValue = null;
+
+        if (!checkStringIsNullOrWhiteSpace(name)) {
+          const listFilter = filter(initialValueList, (item) => {
+            const { name: nameItem } = {
+              name: '',
+              ...item,
+            };
+
+            return nameItem === name;
+          });
+
+          if (listFilter.length > 0) {
+            initialValue = listFilter[0];
+          }
+        }
+
+        if (type === 'string') {
+          const { value } = { name: '', value: '', ...initialValue };
+
+          this.values[name] = value;
+        }
+
+        if (type === 'number') {
+          const { value } = { name: '', value: '', ...initialValue };
+
+          this.values[name] = value;
+        }
+
+        if (type === 'multiString') {
+          const { value } = { name: '', value: '', ...initialValue };
+
+          this.values[name] = value;
+        }
+
+        if (type === 'datetime') {
+          const { value } = { name: '', value: '', ...initialValue };
+
+          this.values[name] = value;
+        }
+
+        if (type === 'time') {
+          const { value } = { name: '', value: '', ...initialValue };
+
+          this.values[name] = value;
+        }
+
+        if (type === 'datetimeRange' || type === 'timeRange') {
+          const { value } = {
+            value: [],
+            ...initialValue,
+          };
+
+          let valueAdjust = [];
+
+          try {
+            valueAdjust = checkStringIsNullOrWhiteSpace(value)
+              ? []
+              : isArray(value)
+                ? [...value]
+                : JSON.parse(value);
+          } catch (error) {
+            logException(
+              error,
+              `parse data error on componentDidMount in FormBuilder`,
+            );
+
+            valueAdjust = [];
+          }
+
+          this.values[name] = valueAdjust;
+        }
+
+        if (type === 'singleSelect') {
+          const { value } = { name: '', value: '', ...initialValue };
+
+          this.values[name] = value;
+        }
+
+        if (type === 'multiSelect') {
+          const { value } = {
+            value: [],
+            ...initialValue,
+          };
+
+          let valueAdjust = [];
+
+          try {
+            valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+          } catch (error) {
+            logException(
+              error,
+              `parse data error on componentDidMount in FormBuilder`,
+            );
+
+            valueAdjust = [];
+          }
+
+          this.values[name] = valueAdjust;
+        }
+      }
+    }
+
+    this.triggerValuesChange();
+  }
+
   getProperties = () => {
     return {
       ...defaultProperties,
       ...this.props,
     };
   };
-
-  // eslint-disable-next-line no-unused-vars
-  // static getDerivedStateFromProps(nextProperties, previousState) {
-  //   const { schema } = nextProperties;
-  //   const { schemaTag } = previousState;
-
-  //   if (toMd5(JSON.stringify(schema || {})) != schemaTag) {
-  //     const { general, items } = adjustSchemaData(schema);
-
-  //     return {
-  //       schemaTag: toMd5(JSON.stringify(schema || [])),
-  //       general,
-  //       items: [...items],
-  //       generalOriginal: general,
-  //       itemsOriginal: [...items],
-  //     };
-  //   }
-
-  //   return null;
-  // }
-
-  // setComponentRef = (reference) => {
-  //   this.componentRef = reference;
-  // };
-
-  // initializeDesign = () => {
-  //   const { itemsOriginal } = this.state;
-
-  //   if (isArray(itemsOriginal)) {
-  //     const itemsAdjust = itemsOriginal.map((o) => {
-  //       return {
-  //         ...getInitializeItem(),
-  //         ...o,
-  //       };
-  //     });
-
-  //     this.setState({
-  //       general: getInitializeGeneral(),
-  //       items: [...itemsAdjust],
-  //     });
-  //   } else {
-  //     this.setState({ general: getInitializeGeneral(), items: [] });
-  //   }
-  // };
-
-  // renderPrintContent = () => {
-  //   return this.componentRef;
-  // };
 
   startDownload = ({ attachment }) => {
     const that = this;
@@ -233,22 +311,135 @@ class FormBuilder extends PureComponent {
     });
   };
 
+  triggerValuesChange = () => {
+    const { afterFormChange } = this.getProperties();
+
+    if (!isFunction(afterFormChange)) {
+      return;
+    }
+
+    afterFormChange(this.values);
+  };
+
+  triggerInputChange = (event, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    const {
+      detail: { value },
+    } = event;
+
+    this.values[name] = value;
+
+    this.triggerValuesChange();
+  };
+
+  triggerTimeChange = (o, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    const { integrityValue } = { integrityValue: '', ...o };
+
+    this.values[name] = integrityValue;
+
+    this.triggerValuesChange();
+  };
+
+  triggerTimeRangeChange = (o, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    const { range } = { range: [], ...o };
+
+    this.values[name] = range;
+
+    this.triggerValuesChange();
+  };
+
+  triggerDatetimeChange = (o, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    const { integrityValue } = { integrityValue: '', ...o };
+
+    this.values[name] = integrityValue;
+
+    this.triggerValuesChange();
+  };
+
+  triggerDatetimeRangeChange = (o, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    const { range } = { range: [], ...o };
+
+    this.values[name] = range;
+
+    this.triggerValuesChange();
+  };
+
+  triggerRadioChange = (value, option, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    this.values[name] = value;
+
+    this.triggerValuesChange();
+  };
+
+  triggerCheckBoxChange = (value, option, name) => {
+    if (checkStringIsNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    this.values[name] = value;
+
+    this.triggerValuesChange();
+  };
+
   renderFormItem = (o, index) => {
     const {
-      fontSize,
-      labelStyle,
-      borderColor,
       backgroundColor,
+      borderColor,
+      endYear,
+      fontSize,
+      initialValueList,
+      labelStyle,
       placeholderStyle,
+      startYear,
     } = this.getProperties();
 
-    const { required, title, type, enumList } = {
+    const { required, title, name, type, enumList } = {
       title: '',
+      name: '',
       type: '',
       required: false,
       enumList: [],
       ...o,
     };
+
+    let initialValue = null;
+
+    if (!checkStringIsNullOrWhiteSpace(name)) {
+      const listFilter = filter(initialValueList, (item) => {
+        const { name: nameItem } = {
+          name: '',
+          ...item,
+        };
+
+        return nameItem === name;
+      });
+
+      if (listFilter.length > 0) {
+        initialValue = listFilter[0];
+      }
+    }
 
     const fontSizeAdjust = canToNumber(fontSize)
       ? toNumber(fontSize)
@@ -337,6 +528,11 @@ class FormBuilder extends PureComponent {
     };
 
     if (type === 'string') {
+      const { value } = {
+        value: '',
+        ...initialValue,
+      };
+
       return (
         <View key={key} style={itemBoxStyle}>
           {label}
@@ -344,6 +540,7 @@ class FormBuilder extends PureComponent {
           <View style={commonValueStyleAdjust}>
             <Input
               type="text"
+              defaultValue={value}
               style={{
                 fontSize: transformSize(fontSizeAdjust),
               }}
@@ -353,7 +550,9 @@ class FormBuilder extends PureComponent {
                 fontSize: transformSize(fontSizeAdjust),
               }}
               cursor={-1}
-              // onInput={throttle(this.onInput, 400)}
+              onInput={(event) => {
+                this.triggerInputChange(event, name);
+              }}
             />
           </View>
         </View>
@@ -361,6 +560,11 @@ class FormBuilder extends PureComponent {
     }
 
     if (type === 'number') {
+      const { value } = {
+        value: '',
+        ...initialValue,
+      };
+
       return (
         <View key={key} style={itemBoxStyle}>
           {label}
@@ -368,6 +572,7 @@ class FormBuilder extends PureComponent {
           <View style={commonValueStyleAdjust}>
             <Input
               type="digit"
+              defaultValue={value}
               style={{
                 fontSize: transformSize(fontSizeAdjust),
               }}
@@ -377,7 +582,9 @@ class FormBuilder extends PureComponent {
                 fontSize: transformSize(fontSizeAdjust),
               }}
               cursor={-1}
-              // onInput={throttle(this.onInput, 400)}
+              onInput={(event) => {
+                this.triggerInputChange(event, name);
+              }}
             />
           </View>
         </View>
@@ -385,12 +592,18 @@ class FormBuilder extends PureComponent {
     }
 
     if (type === 'multiString') {
+      const { value } = {
+        value: '',
+        ...initialValue,
+      };
+
       return (
         <View key={key} style={itemBoxStyle}>
           {label}
 
           <View style={commonValueStyleAdjust}>
             <Textarea
+              defaultValue={value}
               style={{
                 fontSize: transformSize(fontSizeAdjust),
                 lineHeight: transformSize(fontSizeAdjust + 16),
@@ -402,7 +615,149 @@ class FormBuilder extends PureComponent {
               }}
               autoHeight
               cursor={-1}
-              // onInput={throttle(this.onInput, 400)}
+              onInput={(event) => {
+                this.triggerInputChange(event, name);
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    if (type === 'time') {
+      const { value } = {
+        value: '',
+        ...initialValue,
+      };
+
+      return (
+        <View key={key} style={itemBoxStyle}>
+          {label}
+
+          <View style={commonValueStyleAdjust}>
+            <DatetimePicker
+              defaultValue={value}
+              startYear={startYear}
+              endYear={endYear}
+              type={datetimePickerTypeCollection.hourMinuteSecond}
+              viewBuilder={(v) => {
+                const { integrityValue } = v;
+
+                return <View>{integrityValue || '请点击进行选择'}</View>;
+              }}
+              afterChange={(data) => {
+                this.triggerTimeChange(data, name);
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    if (type === 'datetime') {
+      const { value } = {
+        value: '',
+        ...initialValue,
+      };
+
+      return (
+        <View key={key} style={itemBoxStyle}>
+          {label}
+
+          <View style={commonValueStyleAdjust}>
+            <DatetimePicker
+              defaultValue={value}
+              startYear={startYear}
+              endYear={endYear}
+              type={datetimePickerTypeCollection.yearMonthDayHourMinuteSecond}
+              viewBuilder={(v) => {
+                const { integrityValue } = v;
+
+                return <View>{integrityValue || '请点击进行选择'}</View>;
+              }}
+              afterChange={(data) => {
+                this.triggerDatetimeChange(data, name);
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    if (type === 'timeRange') {
+      const { value } = {
+        value: [],
+        ...initialValue,
+      };
+
+      let valueAdjust = [];
+
+      try {
+        valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+      } catch (error) {
+        logException(
+          error,
+          `parse data error on renderFormItem in FormBuilder`,
+        );
+
+        valueAdjust = [];
+      }
+
+      return (
+        <View key={key} style={itemBoxStyle}>
+          {label}
+
+          <View style={commonValueStyleAdjust}>
+            <DatetimeRangePicker
+              defaultValue={valueAdjust}
+              startYear={startYear}
+              endYear={endYear}
+              type={datetimePickerTypeCollection.hourMinuteSecond}
+              startLabel="起始时间"
+              endLabel="结束时间"
+              afterChange={(data) => {
+                this.triggerTimeRangeChange(data, name);
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    if (type === 'datetimeRange') {
+      const { value } = {
+        value: [],
+        ...initialValue,
+      };
+
+      let valueAdjust = [];
+
+      try {
+        valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+      } catch (error) {
+        logException(
+          error,
+          `parse data error on renderFormItem in FormBuilder`,
+        );
+
+        valueAdjust = [];
+      }
+
+      return (
+        <View key={key} style={itemBoxStyle}>
+          {label}
+
+          <View style={commonValueStyleAdjust}>
+            <DatetimeRangePicker
+              defaultValue={valueAdjust}
+              startYear={startYear}
+              endYear={endYear}
+              type={datetimePickerTypeCollection.yearMonthDayHourMinuteSecond}
+              startLabel="起始日期"
+              endLabel="结束日期"
+              afterChange={(data) => {
+                this.triggerDatetimeRangeChange(data, name);
+              }}
             />
           </View>
         </View>
@@ -410,24 +765,59 @@ class FormBuilder extends PureComponent {
     }
 
     if (type === 'singleSelect') {
+      const { value } = {
+        value: '',
+        ...initialValue,
+      };
+
       return (
         <View key={key} style={itemBoxStyle}>
           {label}
 
           <View style={commonValueStyleAdjust}>
-            <Radio options={enumList} value="" />
+            <Radio
+              value={value}
+              options={enumList}
+              afterChange={(v, option) => {
+                this.triggerRadioChange(v, option, name);
+              }}
+            />
           </View>
         </View>
       );
     }
 
     if (type === 'multiSelect') {
+      const { value } = {
+        value: [],
+        ...initialValue,
+      };
+
+      let valueAdjust = [];
+
+      try {
+        valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+      } catch (error) {
+        logException(
+          error,
+          `parse data error on renderFormItem in FormBuilder`,
+        );
+
+        valueAdjust = [];
+      }
+
       return (
         <View key={key} style={itemBoxStyle}>
           {label}
 
           <View style={commonValueStyleAdjust}>
-            <CheckBox options={enumList} value="" />
+            <CheckBox
+              value={valueAdjust}
+              options={enumList}
+              afterChange={(v, option) => {
+                this.triggerCheckBoxChange(v, option, name);
+              }}
+            />
           </View>
         </View>
       );
@@ -437,7 +827,7 @@ class FormBuilder extends PureComponent {
   };
 
   buildAttachmentBox = () => {
-    const { attachmentList, onRemoveAttachment } = this.props;
+    const { attachmentList, onRemoveAttachment } = this.getProperties();
 
     const existAttachment = isArray(attachmentList)
       ? attachmentList.length > 0
@@ -541,38 +931,6 @@ class FormBuilder extends PureComponent {
                             }}
                           />
                         </Space>
-
-                        // <View
-                        //   style={{
-                        //     marginLeft: transformSize(10),
-                        //   }}
-                        // >
-                        //   <View
-                        //     onClick={() => {
-                        //       if (existPdf === whetherNumber.yes) {
-                        //         this.startDownload({ attachment: urlPdf });
-                        //       } else {
-                        //         this.startDownload({ attachment: url });
-                        //       }
-                        //     }}
-                        //   >
-                        //     查看
-                        //   </View>
-
-                        //   <Line direction="vertical" width={16} height="30" />
-
-                        //   <View
-                        //     onClick={() => {
-                        //       if (existPdf === whetherNumber.yes) {
-                        //         this.startDownload({ attachment: urlPdf });
-                        //       } else {
-                        //         this.startDownload({ attachment: url });
-                        //       }
-                        //     }}
-                        //   >
-                        //     查看
-                        //   </View>
-                        // </View>
                       }
                     />
                   </View>
@@ -611,7 +969,7 @@ class FormBuilder extends PureComponent {
   };
 
   renderInteractiveArea = () => {
-    const { onRemoveAttachment } = this.props;
+    const { onRemoveAttachment } = this.getProperties();
     const {
       removeAttachmentActionSheetVisible,
       filePreviewPopupVisible,
@@ -679,19 +1037,12 @@ class FormBuilder extends PureComponent {
   };
 
   render() {
-    const { schemaList, remarkList } = {
-      ...defaultProperties,
-      ...this.props,
-    };
+    const { schemaList, remarkList } = this.getProperties();
 
     return (
       <>
         <View>
           <View>
-            {/* <View ref={this.imageTargetRef}>
-              <DocumentContent ref={this.setComponentRef} {...p} />
-            </View> */}
-
             <Space
               direction="vertical"
               fillWidth

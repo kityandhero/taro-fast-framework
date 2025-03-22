@@ -24,9 +24,13 @@ import {
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { uploadFileDataApiAddress } from '../../../../services/flowCaseFormAttachment';
 import { HeadNavigationBox } from '../../../../utils';
-import { SubmitFlowCaseModal } from '../../../customComponents';
+import { ConfirmSubmitFlowCaseActionSheet } from '../../../customComponents';
 import { submitApprovalAction } from '../../approve/assist/action';
-import { addAttachmentAction, removeAttachmentAction } from '../assist/action';
+import {
+  addAttachmentAction,
+  removeAttachmentAction,
+  submitFormAction,
+} from '../assist/action';
 
 function analyzeSchema(o) {
   let schemaData = {};
@@ -88,7 +92,22 @@ function analyzeSchema(o) {
       }
 
       case 'DatePicker.RangePicker': {
-        type = 'rangeDate';
+        type = 'datetimeRange';
+        break;
+      }
+
+      case 'DatePicker': {
+        type = 'datetime';
+        break;
+      }
+
+      case 'TimePicker.RangePicker': {
+        type = 'timeRange';
+        break;
+      }
+
+      case 'TimePicker': {
+        type = 'time';
         break;
       }
 
@@ -175,12 +194,20 @@ class FlowCaseForm extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  currentFormData = {};
+
   constructor(properties) {
     super(properties);
 
     this.state = {
       ...this.state,
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
+      workflowId: '',
+      workflowCaseId: '',
+      schemaList: [],
+      initialValueList: [],
+      attachmentList: [],
+      remarkList: [],
     };
   }
 
@@ -219,8 +246,33 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       convert: convertCollection.string,
     });
 
+    const canEdit = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.canEdit.name,
+      defaultValue: whetherNumber.no,
+      convert: convertCollection.number,
+    });
+
+    const listFormStorage = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.listFormStorage.name,
+      convert: convertCollection.array,
+      defaultValue: [],
+    });
+
+    const initialValueList = listFormStorage.map((o) => {
+      const { name, value, displayValue } = o;
+
+      return {
+        name,
+        value,
+        displayValue,
+      };
+    });
+
     const listAttachment = getValueByKey({
       data: metaData,
+
       key: fieldDataWorkflowCase.listAttachment.name,
       convert: convertCollection.array,
       defaultValue: [],
@@ -240,7 +292,9 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     this.setState({
       workflowId,
       workflowCaseId,
+      canEdit,
       schemaList: analyzeSchema(designSchema),
+      initialValueList: initialValueList,
       attachmentList: listAttachment,
       remarkList: [
         ...remarkSchemaList,
@@ -291,6 +345,28 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     });
   };
 
+  submitForm = () => {
+    const { metaData } = this.state;
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    submitFormAction({
+      target: this,
+      handleData: {
+        workflowCaseId,
+        ...this.currentFormData,
+      },
+      successCallback: () => {
+        showSuccessNotification('保存表单成功');
+      },
+    });
+  };
+
   submitApproval = () => {
     const { metaData } = this.state;
 
@@ -336,46 +412,20 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     });
   };
 
+  onFormChange = (o) => {
+    this.currentFormData = o;
+  };
+
+  confirmSubmit = () => {
+    ConfirmSubmitFlowCaseActionSheet.open();
+  };
+
   buildHeadNavigation = () => {
     return <HeadNavigationBox title="编辑表单" />;
   };
 
   buildActionBox = () => {
     const { canEdit } = this.state;
-
-    if (canEdit === whetherNumber.no) {
-      return (
-        <>
-          <Line transparent height={18} />
-
-          <View
-            style={{
-              width: '100%',
-            }}
-          >
-            <View
-              style={{
-                paddingLeft: transformSize(18),
-                paddingRight: transformSize(18),
-              }}
-            >
-              <Button
-                text="返回"
-                fontSize={30}
-                backgroundColor="#fff"
-                block
-                size="middle"
-                onClick={() => {
-                  navigateBack();
-                }}
-              />
-            </View>
-
-            <Line transparent height={60} />
-          </View>
-        </>
-      );
-    }
 
     return (
       <View
@@ -432,6 +482,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                         paddingLeft={24}
                         paddingRight={24}
                         size="middle"
+                        disabled={canEdit !== whetherNumber.yes}
                         onClick={this.uploadFile}
                       />
                     }
@@ -447,6 +498,8 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                           paddingLeft={24}
                           paddingRight={24}
                           size="middle"
+                          disabled={canEdit !== whetherNumber.yes}
+                          onClick={this.submitForm}
                         />
 
                         <Line
@@ -466,6 +519,8 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                           paddingLeft={24}
                           paddingRight={24}
                           size="middle"
+                          disabled={canEdit !== whetherNumber.yes}
+                          onClick={this.confirmSubmit}
                         />
                       </>
                     }
@@ -480,7 +535,13 @@ class FlowCaseForm extends PageNeedSignInWrapper {
   };
 
   renderFurther() {
-    const { metaData, schemaList, remarkList, attachmentList } = this.state;
+    const {
+      metaData,
+      initialValueList,
+      schemaList,
+      remarkList,
+      attachmentList,
+    } = this.state;
 
     return (
       <View>
@@ -525,31 +586,17 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         ) : (
           <>
             <FormBuilder
+              initialValueList={initialValueList}
               schemaList={schemaList}
               attachmentList={attachmentList}
               remarkList={remarkList}
               onRemoveAttachment={this.removeAttachment}
+              afterFormChange={(o) => {
+                this.onFormChange(o);
+              }}
             />
 
             <Line transparent height={120} />
-
-            {/* <View style={{ overflowX: 'hidden' }}>
-              <Space direction="vertical" fillWidth size={18}>
-                {this.buildTitleBox()}
-
-                {this.buildFormBox()}
-
-                {this.buildAttachmentBox()}
-
-                {useDocumentView === whetherNumber.no
-                  ? this.buildProcessBox()
-                  : null}
-
-                {this.buildHistoryBox()}
-
-                {this.buildActionPlaceholderBox()}
-              </Space>
-            </View> */}
 
             {this.buildActionBox()}
           </>
@@ -561,9 +608,13 @@ class FlowCaseForm extends PageNeedSignInWrapper {
   renderInteractiveArea = () => {
     return (
       <>
-        {/* {this.renderFilePreviewPopup()} */}
-
-        <SubmitFlowCaseModal afterOk={this.submitApproval} />
+        <ConfirmSubmitFlowCaseActionSheet
+          headerStyle={{
+            color: '#999',
+            fontWeight: 'bold',
+          }}
+          afterOk={this.submitApproval}
+        />
       </>
     );
   };
