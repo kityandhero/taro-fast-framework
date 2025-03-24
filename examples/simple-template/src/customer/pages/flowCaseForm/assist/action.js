@@ -21,6 +21,7 @@ export async function submitFormAction({
     target,
     handleData,
     successCallback,
+    textProcessing: '保存中，请稍后',
   });
 }
 

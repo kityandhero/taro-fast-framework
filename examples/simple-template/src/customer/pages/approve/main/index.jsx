@@ -363,8 +363,9 @@ class Approve extends BaseFlowCaseDetail {
 
         <ConfirmSubmitFlowCaseActionSheet
           headerStyle={{
-            color: '#999',
-            fontWeight: 'bold',
+            color: '#000',
+            // fontWeight: 'bold',
+            fontSize: transformSize(32),
           }}
           afterOk={this.submitApproval}
         />

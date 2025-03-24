@@ -26,6 +26,7 @@ export async function submitApprovalAction({
     target,
     handleData,
     successCallback,
+    textProcessing: '提交中，请稍后',
   });
 }
 
