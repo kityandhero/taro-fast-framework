@@ -151,8 +151,9 @@ class PageListWorkflow extends PageNeedSignInWrapper {
       <>
         <ConfirmCreateFlowCaseActionSheet
           headerStyle={{
-            color: '#999',
+            color: '#000',
             fontWeight: 'bold',
+            fontSize: transformSize(34),
           }}
           afterOk={this.createFlowCase}
         />
