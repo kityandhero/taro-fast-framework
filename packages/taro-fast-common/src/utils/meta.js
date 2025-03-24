@@ -1,10 +1,15 @@
 import { ENV_TYPE, getApp, getEnv as getEnvironment } from '@tarojs/taro';
 
 import {
+  canToNumber,
   checkStringIsNullOrWhiteSpace,
   getApplicationMergeConfig,
+  isNumber,
   isObject,
+  isString,
   isUndefined,
+  logException,
+  toNumber,
 } from 'easy-soft-utility';
 
 export function getDefaultTaroGlobalData() {
@@ -128,4 +133,37 @@ export function buildBase64Image(v) {
   }
 
   return `data:image/png;base64,${v}`;
+}
+
+/**
+ * judge year whether leap year
+ * @param {number|string} year
+ * @returns
+ */
+export function judgeLeapYear(year) {
+  if (!isString(year) && !isNumber(year)) {
+    logException(
+      {
+        year,
+      },
+      'param year must be string or number',
+    );
+
+    return false;
+  }
+
+  if (isString(year) && !canToNumber(year)) {
+    logException(
+      {
+        year,
+      },
+      'param year must can convert to number',
+    );
+  }
+
+  const yearAdjust = isNumber(year) ? year : toNumber(year);
+
+  return (
+    (yearAdjust % 4 == 0 && yearAdjust % 100 != 0) || yearAdjust % 400 == 0
+  );
 }

@@ -60,7 +60,7 @@ export function buildInteractiveConfigList() {
     {
       ...interactiveConfigEmpty,
       name: 'defaultValue',
-      description: '初始值',
+      description: '初始值, 未赋值则使用当前时间',
       valueType: [interactiveConfigCollection.string],
       defaultValue: DatetimePicker.defaultProps.defaultValue,
       optionalValues: [

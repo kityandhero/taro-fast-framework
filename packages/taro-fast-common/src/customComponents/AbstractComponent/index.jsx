@@ -176,13 +176,6 @@ class AbstractComponent extends Component {
     this.adjustShowRenderCountInConsole(nextProperties, nextState);
 
     this.logFunctionCallTrace(
-      {},
-      primaryCallName,
-      'shouldComponentUpdate',
-      'doOtherCheckComponentUpdate',
-    );
-
-    this.logFunctionCallTrace(
       {
         nextProperties,
         nextState,

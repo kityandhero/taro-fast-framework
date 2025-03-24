@@ -3,6 +3,8 @@ import { PickerView, PickerViewColumn, View } from '@tarojs/components';
 import {
   canToNumber,
   checkInCollection,
+  isArray,
+  isEmptyArray,
   isFunction,
   isString,
   toMd5,
@@ -61,7 +63,17 @@ function generateArray(start, end) {
   return result;
 }
 
+function generateDayArray(year, month) {
+  let totalDays = new Date(year, month, 0).getDate();
+
+  return generateArray(1, totalDays);
+}
+
 function getIndex(array, value) {
+  if (!isArray(array) || isEmptyArray(array)) {
+    return 0;
+  }
+
   let index = array.indexOf(value);
 
   return ~index ? index : 0;
@@ -186,7 +198,7 @@ function adjustStartAndEndYear(startYear, endYear) {
 }
 
 function buildDatetimePickerFinallyValue({
-  type,
+  type: typeSource,
   year: yearSource,
   month: monthSource,
   day: daySource,
@@ -194,6 +206,8 @@ function buildDatetimePickerFinallyValue({
   minute: minuteSource,
   second: secondSource,
 }) {
+  const type = adjustDatetimePickerType(typeSource);
+
   let result = {};
 
   const yearSelect = yearSource;
@@ -340,6 +354,146 @@ function buildDatetimePickerFinallyValue({
   return resultAdjust;
 }
 
+function buildInitialData({
+  type: typeSource,
+  defaultValue: defaultValueText,
+  startYear,
+  endYear,
+}) {
+  const type = adjustDatetimePickerType(typeSource);
+
+  const years = generateArray(startYear, endYear);
+  const months = generateArray(1, 12);
+  const hours = generateArray(0, 23);
+  const minutes = generateArray(0, 59);
+  const seconds = generateArray(0, 59);
+
+  let year = 0;
+  let month = 0;
+  let day = 0;
+  let hour = 0;
+  let minute = 0;
+  let second = 0;
+
+  const {
+    year: yearAdjust,
+    month: monthAdjust,
+    day: dayAdjust,
+    hour: hourAdjust,
+    minute: minuteAdjust,
+    second: secondAdjust,
+    finallyValue,
+  } = adjustDatetimePickerDefaultValue({
+    type,
+    defaultValue: defaultValueText,
+  });
+
+  year = yearAdjust;
+  month = monthAdjust;
+  day = dayAdjust;
+  hour = hourAdjust;
+  minute = minuteAdjust;
+  second = secondAdjust;
+
+  const days = generateDayArray(year, month);
+
+  const yearIndex = getIndex(years, year);
+  const monthIndex = getIndex(months, month);
+  const dayIndex = getIndex(days, day);
+  const hourIndex = getIndex(hours, hour);
+  const minuteIndex = getIndex(minutes, minute);
+  const secondIndex = getIndex(seconds, second);
+
+  let defaultValue = [];
+
+  switch (type) {
+    case datetimePickerTypeCollection.yearMonthDayHourMinute: {
+      defaultValue = [yearIndex, monthIndex, dayIndex, hourIndex, minuteIndex];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.yearMonthDay: {
+      defaultValue = [yearIndex, monthIndex, dayIndex];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.yearMonth: {
+      defaultValue = [yearIndex, monthIndex];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.hourMinute: {
+      defaultValue = [hourIndex, minuteIndex];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.hourMinuteSecond: {
+      defaultValue = [hourIndex, minuteIndex, secondIndex];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.minuteSecond: {
+      defaultValue = [minuteIndex, secondIndex];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.yearMonthDayHourMinuteSecond: {
+      defaultValue = [
+        yearIndex,
+        monthIndex,
+        dayIndex,
+        hourIndex,
+        minuteIndex,
+        secondIndex,
+      ];
+
+      break;
+    }
+
+    case datetimePickerTypeCollection.yearMonthDayHour: {
+      defaultValue = [yearIndex, monthIndex, dayIndex, hourIndex];
+
+      break;
+    }
+
+    default: {
+      defaultValue = [];
+
+      break;
+    }
+  }
+
+  return {
+    day: days[dayIndex],
+    dayIndex,
+    days,
+    defaultValue: defaultValue,
+    finallyValue,
+    hour: hours[hourIndex],
+    hourIndex,
+    hours,
+    minute: minutes[minuteIndex],
+    minuteIndex,
+    minutes,
+    month: months[monthIndex],
+    monthIndex,
+    months,
+    second: seconds[secondIndex],
+    secondIndex,
+    seconds,
+    type,
+    year: years[yearIndex],
+    yearIndex,
+    years,
+  };
+}
+
 const defaultProperties = {
   afterChange: null,
   arc: false,
@@ -356,6 +510,7 @@ const defaultProperties = {
   unitBar: false,
   valueFormat: null,
   viewBuilder: null,
+  unitPlaceholder: '●●',
 };
 
 class DatetimePicker extends BaseComponent {
@@ -363,30 +518,111 @@ class DatetimePicker extends BaseComponent {
 
   // showCallTrace = true;
 
+  valueStage = [];
+
+  years = [];
+
+  months = [];
+
+  days = [];
+
+  hours = [];
+
+  minutes = [];
+
+  seconds = [];
+
+  year = 0;
+
+  month = 0;
+
+  day = 0;
+
+  hour = 0;
+
+  minute = 0;
+
+  second = 0;
+
+  yearIndex = 0;
+
+  monthIndex = 0;
+
+  dayIndex = 0;
+
+  hourIndex = 0;
+
+  minuteIndex = 0;
+
+  secondIndex = 0;
+
   constructor(properties) {
     super(properties);
 
+    const { type: typeSource, defaultValue, startYear, endYear } = properties;
+
+    const type = adjustDatetimePickerType(typeSource);
+
+    const {
+      day,
+      dayIndex,
+      days,
+      defaultValue: valueStage,
+      finallyValue,
+      hour,
+      hourIndex,
+      hours,
+      minute,
+      minuteIndex,
+      minutes,
+      month,
+      monthIndex,
+      months,
+      second,
+      secondIndex,
+      seconds,
+      year,
+      yearIndex,
+      years,
+    } = buildInitialData({
+      defaultValue,
+      type,
+      startYear,
+      endYear,
+    });
+
+    this.years = years;
+    this.months = months;
+    this.days = days;
+    this.hours = hours;
+    this.minutes = minutes;
+    this.seconds = seconds;
+
+    this.yearIndex = yearIndex;
+    this.monthIndex = monthIndex;
+    this.dayIndex = dayIndex;
+    this.hourIndex = hourIndex;
+    this.minuteIndex = minuteIndex;
+    this.secondIndex = secondIndex;
+
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.hour = hour;
+    this.minute = minute;
+    this.second = second;
+
+    this.valueStage = valueStage;
+
     this.state = {
       ...this.state,
-      popupVisible: false,
       defaultValueFlag: '',
-      startYearFlag: '',
       endYearFlag: '',
-      years: [],
-      months: [],
-      days: [],
-      hours: [],
-      minutes: [],
-      seconds: [],
-      year: 0,
-      month: 0,
-      day: 0,
-      hour: 0,
-      minute: 0,
-      second: 0,
-      value: [0, 0, 0, 0, 0, 0],
+      finallyValue,
+      popupVisible: false,
       reset: false,
-      finallyValue: {},
+      startYearFlag: '',
+      typeFlag: '',
     };
   }
 
@@ -397,7 +633,7 @@ class DatetimePicker extends BaseComponent {
       endYear: endYearSource,
       type: typeSource,
     } = nextProperties;
-    const { defaultValueFlag, startYearFlag, endYearFlag, year } =
+    const { typeFlag, defaultValueFlag, startYearFlag, endYearFlag } =
       previousState;
 
     const { startYear, endYear } = adjustStartAndEndYear(
@@ -405,21 +641,31 @@ class DatetimePicker extends BaseComponent {
       endYearSource,
     );
 
+    let typeData = {};
+    let typeChanged = false;
+
+    const type = adjustDatetimePickerType(typeSource);
+    const typeFlagNext = toMd5(toString(type));
+
+    if (typeFlagNext !== typeFlag) {
+      typeData = {
+        typeFlag: typeFlagNext,
+      };
+
+      typeChanged = true;
+    }
+
     let defaultValueData = {};
+    let defaultValueChanged = false;
+
     const defaultValueFlagNext = toMd5(toString(defaultValueSource));
 
     if (defaultValueFlagNext !== defaultValueFlag) {
-      const type = adjustDatetimePickerType(typeSource);
-
-      const { finallyValue } = adjustDatetimePickerDefaultValue({
-        defaultValue: defaultValueSource,
-        type,
-      });
-
       defaultValueData = {
         defaultValueFlag: defaultValueFlagNext,
-        finallyValue,
       };
+
+      defaultValueChanged = true;
     }
 
     let startYearData = {};
@@ -448,30 +694,94 @@ class DatetimePicker extends BaseComponent {
       endYearChanged = true;
     }
 
-    let yearsData = {};
+    let stageData = {};
 
-    if (startYearChanged || endYearChanged) {
-      const valueTarget = 'value[0]';
-      const years = generateArray(startYear, endYear);
+    if (
+      typeChanged ||
+      defaultValueChanged ||
+      startYearChanged ||
+      endYearChanged
+    ) {
+      const { finallyValue } = buildInitialData({
+        defaultValue: defaultValueSource,
+        type,
+        startYear,
+        endYear,
+      });
 
-      yearsData = {
-        years: years,
-        [valueTarget]: getIndex(years, year),
+      stageData = {
+        finallyValue,
       };
     }
 
-    return {
+    const resultData = {
+      ...typeData,
       ...defaultValueData,
       ...startYearData,
       ...endYearData,
-      ...yearsData,
+      ...stageData,
     };
+
+    return resultData;
   }
+
+  doWorkBeforeUpdate = (nextProperties, nextState) => {
+    this.logFunctionCallTrack(
+      {
+        nextProperties,
+        nextState,
+      },
+      primaryCallName,
+      'doWorkBeforeUpdate',
+    );
+
+    const { type: typeSource, defaultValue } = this.getProperties();
+
+    const { startYear, endYear } = this.getStartAndEndYear();
+
+    const type = adjustDatetimePickerType(typeSource);
+
+    const { years } = buildInitialData({
+      defaultValue,
+      type,
+      startYear,
+      endYear,
+    });
+
+    this.years = years;
+  };
 
   doWorkAfterDidMount = () => {
     this.logFunctionCallTrack({}, primaryCallName, 'doWorkAfterDidMount');
 
-    this.initData();
+    const {
+      defaultValue: defaultValueSource,
+      startYear,
+      endYear,
+    } = this.getProperties();
+
+    const type = this.getType();
+
+    const {
+      dayIndex,
+      hourIndex,
+      minuteIndex,
+      monthIndex,
+      secondIndex,
+      yearIndex,
+    } = buildInitialData({
+      defaultValue: defaultValueSource,
+      type,
+      startYear,
+      endYear,
+    });
+
+    this.yearIndex = yearIndex;
+    this.monthIndex = monthIndex;
+    this.dayIndex = dayIndex;
+    this.hourIndex = hourIndex;
+    this.minuteIndex = minuteIndex;
+    this.secondIndex = secondIndex;
   };
 
   getProperties = () => {
@@ -485,6 +795,12 @@ class DatetimePicker extends BaseComponent {
     const { type } = this.getProperties();
 
     return adjustDatetimePickerType(type);
+  };
+
+  getStartAndEndYear = () => {
+    const { startYear, endYear } = this.getProperties();
+
+    return adjustStartAndEndYear(startYear, endYear);
   };
 
   getHeight = () => {
@@ -507,509 +823,227 @@ class DatetimePicker extends BaseComponent {
     return heightAdjust;
   };
 
-  initSelectValue = () => {
-    const { defaultValue } = this.getProperties();
-
-    const type = this.getType();
-
-    const { year, month, day, hour, minute, second, finallyValue } =
-      adjustDatetimePickerDefaultValue({
-        defaultValue,
-        type,
-      });
-
-    this.setState({
-      year,
-      month,
-      day,
-      hour,
-      minute,
-      second,
-      finallyValue,
-    });
-  };
-
-  initData = () => {
-    this.initSelectValue();
-
-    this.setState({
-      reset: false,
-    });
-
-    const type = this.getType();
-
-    switch (type) {
-      case datetimePickerTypeCollection.yearMonthDayHourMinute: {
-        this.setState(
-          {
-            value: [0, 0, 0, 0, 0],
-          },
-          () => {
-            this.setYears();
-            this.setMonths();
-            this.setDays();
-            this.setHours();
-            this.setMinutes();
-          },
-        );
-
-        break;
-      }
-
-      case datetimePickerTypeCollection.yearMonthDay: {
-        this.setState(
-          {
-            value: [0, 0, 0],
-          },
-          () => {
-            this.setYears();
-            this.setMonths();
-            this.setDays();
-          },
-        );
-        break;
-      }
-
-      case datetimePickerTypeCollection.yearMonth: {
-        this.setState(
-          {
-            value: [0, 0],
-          },
-          () => {
-            this.setYears();
-            this.setMonths();
-          },
-        );
-        break;
-      }
-
-      case datetimePickerTypeCollection.hourMinute: {
-        this.setState(
-          {
-            value: [0, 0],
-          },
-          () => {
-            this.setHours();
-            this.setMinutes();
-          },
-        );
-        break;
-      }
-
-      case datetimePickerTypeCollection.hourMinuteSecond: {
-        this.setState(
-          {
-            value: [0, 0, 0],
-          },
-          () => {
-            this.setHours();
-            this.setMinutes();
-            this.setSeconds();
-          },
-        );
-        break;
-      }
-
-      case datetimePickerTypeCollection.minuteSecond: {
-        this.setState(
-          {
-            value: [0, 0],
-          },
-          () => {
-            this.setMinutes();
-            this.setSeconds();
-          },
-        );
-        break;
-      }
-
-      case datetimePickerTypeCollection.yearMonthDayHourMinuteSecond: {
-        this.setState(
-          {
-            value: [0, 0, 0, 0, 0, 0],
-          },
-          () => {
-            this.setYears();
-            this.setMonths();
-            this.setDays();
-            this.setHours();
-            this.setMinutes();
-            this.setSeconds();
-          },
-        );
-        break;
-      }
-
-      case datetimePickerTypeCollection.yearMonthDayHour: {
-        this.setState(
-          {
-            value: [0, 0, 0, 0],
-          },
-          () => {
-            this.setYears();
-            this.setMonths();
-            this.setDays();
-            this.setHours();
-          },
-        );
-        break;
-      }
-
-      default: {
-        break;
-      }
-    }
-  };
-
-  setYears = () => {
-    const { startYear: startYearSource, endYear: endYearSource } =
-      this.getProperties();
-
-    const { startYear, endYear } = adjustStartAndEndYear(
-      startYearSource,
-      endYearSource,
-    );
-
-    const that = this;
-
-    that.setState(
-      {
-        years: generateArray(startYear, endYear),
-      },
-      () => {
-        setTimeout(() => {
-          const value = 'value[0]';
-
-          const { years, year } = that.state;
-
-          that.setState({
-            [value]: getIndex(years, year),
-          });
-        }, 8);
-      },
-    );
-  };
-
-  setMonths = () => {
-    const that = this;
-
-    that.setState(
-      {
-        months: generateArray(1, 12),
-      },
-      () => {
-        setTimeout(() => {
-          const value = 'value[1]';
-
-          const { months, month } = that.state;
-
-          that.setState({
-            [value]: getIndex(months, month),
-          });
-        }, 8);
-      },
-    );
-  };
-
-  setDays = () => {
-    const type = this.getType();
-
-    if (
-      type == datetimePickerTypeCollection.yearMonth ||
-      type == datetimePickerTypeCollection.hourMinute
-    ) {
-      return;
-    }
-
-    const { year, month } = this.state;
-
-    let totalDays = new Date(year, month, 0).getDate();
-
-    const that = this;
-
-    that.setState(
-      {
-        days: generateArray(1, totalDays),
-      },
-      () => {
-        setTimeout(() => {
-          let value = 'value[2]';
-
-          const { days, day } = that.state;
-
-          that.setState({
-            [value]: getIndex(days, day),
-          });
-        }, 8);
-      },
-    );
-  };
-
-  setHours = () => {
-    const type = this.getType();
-
-    const that = this;
-
-    that.setState(
-      {
-        hours: generateArray(0, 23),
-      },
-      () => {
-        setTimeout(() => {
-          const { value: v } = that.state;
-
-          let length = v.length;
-
-          let index =
-            type == datetimePickerTypeCollection.hourMinuteSecond ||
-            type == datetimePickerTypeCollection.yearMonthDay
-              ? length - 3
-              : length - 2;
-
-          let value = `value[${index}]`;
-
-          const { hours, hour } = that.state;
-
-          that.setState({
-            [value]: getIndex(hours, hour),
-          });
-        }, 8);
-      },
-    );
-  };
-
-  setMinutes = () => {
-    const type = this.getType();
-
-    const that = this;
-
-    that.setState(
-      {
-        minutes: generateArray(0, 59),
-      },
-      () => {
-        setTimeout(() => {
-          const { value: v } = that.state;
-
-          const length = v.length;
-          const index = type > 4 ? length - 2 : length - 1;
-          const value = `value[${index}]`;
-
-          const { minutes, minute } = that.state;
-
-          that.setState({
-            [value]: getIndex(minutes, minute),
-          });
-        }, 8);
-      },
-    );
-  };
-
-  setSeconds = () => {
-    this.setState(
-      {
-        seconds: generateArray(0, 59),
-      },
-      () => {
-        setTimeout(() => {
-          const { value: v } = this.state;
-
-          const value = `value[${v.length - 1}]`;
-
-          const { seconds, second } = this.state;
-
-          this.setState({
-            [value]: getIndex(seconds, second),
-          });
-        }, 8);
-      },
-    );
-  };
-
   triggerChange = (event) => {
     const {
       detail: { value },
     } = event;
 
-    const type = this.getType();
+    this.valueStage = value;
 
-    const { years, months, days, hours, minutes, seconds, year, month } =
-      this.state;
+    const yearPrevious = this.year;
+    const monthPrevious = this.month;
+
+    const type = this.getType();
 
     let yearChanged = false;
     let monthChanged = false;
 
-    const that = this;
-
     switch (type) {
       case datetimePickerTypeCollection.yearMonthDayHourMinute: {
-        if (year != years[value[0]]) {
+        const yearIndex = value[0];
+        const monthIndex = value[1];
+        const dayIndex = value[2];
+        const hourIndex = value[3];
+        const minuteIndex = value[4];
+
+        if (yearIndex != this.yearIndex) {
           yearChanged = true;
         }
 
-        if (month != months[value[1]]) {
+        if (monthIndex != this.monthIndex) {
           monthChanged = true;
         }
 
-        that.setState(
-          {
-            value: value,
-            year: years[value[0]],
-            month: months[value[1]],
-            day: days[value[2]],
-            hour: hours[value[3]],
-            minute: minutes[value[4]],
-          },
-          () => {
-            if (yearChanged || monthChanged) {
-              this.setDays();
-            }
-          },
-        );
+        this.yearIndex = yearIndex;
+        this.monthIndex = monthIndex;
+        this.dayIndex = dayIndex;
+        this.hourIndex = hourIndex;
+        this.minuteIndex = minuteIndex;
+
+        this.year = this.years[yearIndex];
+        this.month = this.months[monthIndex];
+        this.day = this.days[dayIndex];
+        this.hour = this.hours[hourIndex];
+        this.minute = this.minutes[minuteIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.yearMonthDay: {
-        if (year != years[value[0]]) {
+        const yearIndex = value[0];
+        const monthIndex = value[1];
+        const dayIndex = value[2];
+
+        if (yearIndex != this.yearIndex) {
           yearChanged = true;
         }
 
-        if (month != months[value[1]]) {
+        if (monthIndex != this.monthIndex) {
           monthChanged = true;
         }
 
-        that.setState(
-          {
-            value: value,
-            year: years[value[0]],
-            month: months[value[1]],
-            day: days[value[2]],
-          },
-          () => {
-            if (yearChanged || monthChanged) {
-              this.setDays();
-            }
-          },
-        );
+        this.yearIndex = yearIndex;
+        this.monthIndex = monthIndex;
+        this.dayIndex = dayIndex;
+
+        this.year = this.years[yearIndex];
+        this.month = this.months[monthIndex];
+        this.day = this.days[dayIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.yearMonth: {
-        if (year != years[value[0]]) {
+        const yearIndex = value[0];
+        const monthIndex = value[1];
+
+        if (yearIndex != this.yearIndex) {
           yearChanged = true;
         }
 
-        if (month != months[value[1]]) {
+        if (monthIndex != this.monthIndex) {
           monthChanged = true;
         }
 
-        that.setState(
-          {
-            value: value,
-            year: years[value[0]],
-            month: months[value[1]],
-          },
-          () => {
-            if (yearChanged || monthChanged) {
-              this.setDays();
-            }
-          },
-        );
+        this.yearIndex = yearIndex;
+        this.monthIndex = monthIndex;
+
+        this.year = this.years[yearIndex];
+        this.month = this.months[monthIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.hourMinute: {
-        that.setState({
-          value: value,
-          hour: hours[value[0]],
-          minute: minutes[value[1]],
-        });
+        const hourIndex = value[0];
+        const minuteIndex = value[1];
+
+        this.hourIndex = hourIndex;
+        this.minuteIndex = minuteIndex;
+
+        this.hour = this.hours[hourIndex];
+        this.minute = this.minutes[minuteIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.hourMinuteSecond: {
-        that.setState({
-          value: value,
-          hour: hours[value[0]],
-          minute: minutes[value[1]],
-          second: seconds[value[2]],
-        });
+        const hourIndex = value[0];
+        const minuteIndex = value[1];
+        const secondIndex = value[2];
+
+        this.hourIndex = hourIndex;
+        this.minuteIndex = minuteIndex;
+        this.secondIndex = secondIndex;
+
+        this.hour = this.hours[hourIndex];
+        this.minute = this.minutes[minuteIndex];
+        this.second = this.seconds[secondIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.minuteSecond: {
-        that.setState({
-          value: value,
-          minute: minutes[value[0]],
-          second: seconds[value[2]],
-        });
+        const minuteIndex = value[0];
+        const secondIndex = value[1];
+
+        this.minuteIndex = minuteIndex;
+        this.secondIndex = secondIndex;
+
+        this.minute = this.minutes[minuteIndex];
+        this.second = this.seconds[secondIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.yearMonthDayHourMinuteSecond: {
-        if (year != years[value[0]]) {
+        const yearIndex = value[0];
+        const monthIndex = value[1];
+        const dayIndex = value[2];
+        const hourIndex = value[3];
+        const minuteIndex = value[4];
+        const secondIndex = value[5];
+
+        if (yearIndex != this.yearIndex) {
           yearChanged = true;
         }
 
-        if (month != months[value[1]]) {
+        if (monthIndex != this.monthIndex) {
           monthChanged = true;
         }
 
-        that.setState(
-          {
-            value: value,
-            year: years[value[0]],
-            month: months[value[1]],
-            day: days[value[2]],
-            hour: hours[value[3]],
-            minute: minutes[value[4]],
-            second: seconds[value[5]],
-          },
-          () => {
-            if (yearChanged || monthChanged) {
-              this.setDays();
-            }
-          },
-        );
+        this.yearIndex = yearIndex;
+        this.monthIndex = monthIndex;
+        this.dayIndex = dayIndex;
+        this.hourIndex = hourIndex;
+        this.minuteIndex = minuteIndex;
+        this.secondIndex = secondIndex;
+
+        this.year = this.years[yearIndex];
+        this.month = this.months[monthIndex];
+        this.day = this.days[dayIndex];
+        this.hour = this.hours[hourIndex];
+        this.minute = this.minutes[minuteIndex];
+        this.second = this.seconds[secondIndex];
 
         break;
       }
 
       case datetimePickerTypeCollection.yearMonthDayHour: {
-        if (year != years[value[0]]) {
+        const yearIndex = value[0];
+        const monthIndex = value[1];
+        const dayIndex = value[2];
+        const hourIndex = value[3];
+
+        if (yearIndex != this.yearIndex) {
           yearChanged = true;
         }
 
-        if (month != months[value[1]]) {
+        if (monthIndex != this.monthIndex) {
           monthChanged = true;
         }
 
-        that.setState(
-          {
-            value: value,
-            year: years[value[0]],
-            month: months[value[1]],
-            day: days[value[2]],
-            hour: hours[value[3]],
-          },
-          () => {
-            if (yearChanged || monthChanged) {
-              this.setDays();
-            }
-          },
-        );
+        this.yearIndex = yearIndex;
+        this.monthIndex = monthIndex;
+        this.dayIndex = dayIndex;
+        this.hourIndex = hourIndex;
+
+        this.year = this.years[yearIndex];
+        this.month = this.months[monthIndex];
+        this.day = this.days[dayIndex];
+        this.hour = this.hours[hourIndex];
 
         break;
       }
 
       default: {
         break;
+      }
+    }
+
+    if (yearChanged || monthChanged) {
+      let changeDays = false;
+
+      if (yearChanged && this.month === 2) {
+        changeDays = true;
+      }
+
+      if (!yearChanged && monthChanged) {
+        changeDays = true;
+      }
+
+      if (changeDays) {
+        const daysPrevious = generateDayArray(yearPrevious, monthPrevious);
+
+        const days = generateDayArray(this.year, this.month);
+
+        if (daysPrevious.length !== days.length) {
+          this.days = days;
+
+          const that = this;
+
+          that.forceUpdate();
+        }
       }
     }
   };
@@ -1019,17 +1053,15 @@ class DatetimePicker extends BaseComponent {
 
     const type = this.getType();
 
-    const { year, month, day, hour, minute, second } = this.state;
-
     setTimeout(() => {
       const finallyValue = buildDatetimePickerFinallyValue({
         type,
-        year,
-        month,
-        day,
-        hour,
-        minute,
-        second,
+        year: this.year,
+        month: this.month,
+        day: this.day,
+        hour: this.hour,
+        minute: this.minute,
+        second: this.second,
       });
 
       if (isFunction(afterChange)) {
@@ -1074,18 +1106,7 @@ class DatetimePicker extends BaseComponent {
       viewBuilder,
     } = this.getProperties();
 
-    const {
-      days,
-      finallyValue,
-      hours,
-      minutes,
-      months,
-      popupVisible,
-      reset,
-      seconds,
-      value,
-      years,
-    } = this.state;
+    const { finallyValue, popupVisible, reset } = this.state;
 
     if (hidden) {
       return null;
@@ -1158,7 +1179,6 @@ class DatetimePicker extends BaseComponent {
 
           {unitBar ? (
             <view
-              // style="background-color:{{unitBackground}}"
               style={{
                 width: '100%',
                 height: transformSize(60),
@@ -1222,7 +1242,7 @@ class DatetimePicker extends BaseComponent {
               height: transformSize(height),
               boxSizing: 'border-box',
             }}
-            value={value}
+            value={this.valueStage}
             onChange={this.triggerChange}
           >
             {!reset &&
@@ -1231,7 +1251,7 @@ class DatetimePicker extends BaseComponent {
                 datetimePickerTypeCollection.yearMonthDayHourMinuteSecond ||
               type == datetimePickerTypeCollection.yearMonthDayHour) ? (
               <PickerViewColumn>
-                {years.map((item) => {
+                {this.years.map((item) => {
                   return (
                     <View key={`year_${item}`} style={columnStyleAdjust}>
                       {item}
@@ -1248,7 +1268,7 @@ class DatetimePicker extends BaseComponent {
                 datetimePickerTypeCollection.yearMonthDayHourMinuteSecond ||
               type == datetimePickerTypeCollection.yearMonthDayHour) ? (
               <PickerViewColumn>
-                {months.map((item) => {
+                {this.months.map((item) => {
                   return (
                     <View key={`month_${item}`} style={columnStyleAdjust}>
                       {formatColumnValue(item)}
@@ -1266,7 +1286,7 @@ class DatetimePicker extends BaseComponent {
                 datetimePickerTypeCollection.yearMonthDayHourMinuteSecond ||
               type == datetimePickerTypeCollection.yearMonthDayHour) ? (
               <PickerViewColumn>
-                {days.map((item) => {
+                {this.days.map((item) => {
                   return (
                     <View key={`day_${item}`} style={columnStyleAdjust}>
                       {formatColumnValue(item)}
@@ -1285,7 +1305,7 @@ class DatetimePicker extends BaseComponent {
                 datetimePickerTypeCollection.yearMonthDayHourMinuteSecond ||
               type == datetimePickerTypeCollection.yearMonthDayHour) ? (
               <PickerViewColumn>
-                {hours.map((item) => {
+                {this.hours.map((item) => {
                   return (
                     <View key={`hour_${item}`} style={columnStyleAdjust}>
                       {formatColumnValue(item)}
@@ -1301,7 +1321,7 @@ class DatetimePicker extends BaseComponent {
               type > datetimePickerTypeCollection.yearMonth) &&
             type != datetimePickerTypeCollection.yearMonthDayHour ? (
               <PickerViewColumn>
-                {minutes.map((item) => {
+                {this.minutes.map((item) => {
                   return (
                     <View key={`hour_${item}`} style={columnStyleAdjust}>
                       {formatColumnValue(item)}
@@ -1316,7 +1336,7 @@ class DatetimePicker extends BaseComponent {
             type > datetimePickerTypeCollection.hourMinute &&
             type != datetimePickerTypeCollection.yearMonthDayHour ? (
               <PickerViewColumn>
-                {seconds.map((item) => {
+                {this.seconds.map((item) => {
                   return (
                     <View key={`hour_${item}`} style={columnStyleAdjust}>
                       {formatColumnValue(item)}
