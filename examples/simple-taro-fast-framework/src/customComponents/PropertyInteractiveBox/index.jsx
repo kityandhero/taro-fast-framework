@@ -113,7 +113,7 @@ class PropertyInteractiveBox extends Component {
   };
 
   render() {
-    const { header, list, onOptionalValueClick } = this.props;
+    const { header, list, current, onOptionalValueClick } = this.props;
 
     return (
       <Card
@@ -153,6 +153,8 @@ class PropertyInteractiveBox extends Component {
                 optionalValues: [],
                 ...o,
               };
+
+              const currentValue = isObject(current) ? current[name] : '';
 
               const showOptionalValues =
                 isArray(optionalValues) && !isEmptyArray(optionalValues);
@@ -226,7 +228,13 @@ class PropertyInteractiveBox extends Component {
                     >
                       <Space wrap style={{ width: '100%' }}>
                         {optionalValues.map((one, index_) => {
-                          const { title, value: ov, otherState = {} } = one;
+                          const {
+                            title,
+                            value: ov,
+                            otherState = {},
+                          } = {
+                            ...one,
+                          };
 
                           return (
                             <View
@@ -243,6 +251,12 @@ class PropertyInteractiveBox extends Component {
                                 borderColor: '#ccc',
                                 borderStyle: 'solid',
                                 overflow: 'hidden',
+                                ...(currentValue === ov
+                                  ? {
+                                      backgroundColor: '#5677fc',
+                                      color: '#fff',
+                                    }
+                                  : {}),
                               }}
                               onClick={() => {
                                 if (!isFunction(onOptionalValueClick)) {
@@ -253,7 +267,21 @@ class PropertyInteractiveBox extends Component {
 
                                 data[name] = ov;
 
-                                onOptionalValueClick(data, otherState || {});
+                                let currentAdjust = {};
+
+                                if (isObject(current)) {
+                                  currentAdjust = { ...current };
+
+                                  currentAdjust[name] = ov;
+                                } else {
+                                  currentAdjust[name] = ov;
+                                }
+
+                                onOptionalValueClick(
+                                  data,
+                                  currentAdjust,
+                                  otherState || {},
+                                );
                               }}
                             >
                               {title}

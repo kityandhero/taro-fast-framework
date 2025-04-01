@@ -510,7 +510,6 @@ const defaultProperties = {
   unitBar: false,
   valueFormat: null,
   viewBuilder: null,
-  unitPlaceholder: '●●',
 };
 
 class DatetimePicker extends BaseComponent {
@@ -1097,7 +1096,6 @@ class DatetimePicker extends BaseComponent {
     const {
       arc,
       cancelColor,
-      hidden,
       okColor,
       position,
       style,
@@ -1107,10 +1105,6 @@ class DatetimePicker extends BaseComponent {
     } = this.getProperties();
 
     const { finallyValue, popupVisible, reset } = this.state;
-
-    if (hidden) {
-      return null;
-    }
 
     if (!isFunction(viewBuilder)) {
       return null;

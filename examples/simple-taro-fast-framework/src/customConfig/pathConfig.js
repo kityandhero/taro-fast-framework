@@ -35,6 +35,9 @@ const examplePathCollection = {
   button: {
     path: '/example/pages/button/index',
   },
+  calendar: {
+    path: '/example/pages/calendar/index',
+  },
   card: {
     path: '/example/pages/card/index',
   },

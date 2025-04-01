@@ -21,6 +21,7 @@ export default {
         'pages/badge/index',
         'pages/basic/index',
         'pages/button/index',
+        'pages/calendar/index',
         'pages/card/index',
         'pages/cascader/index',
         'pages/centerBox/index',

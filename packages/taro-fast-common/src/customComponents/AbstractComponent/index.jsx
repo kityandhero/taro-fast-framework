@@ -131,6 +131,7 @@ class AbstractComponent extends Component {
       error: null,
       errorInfo: null,
       counter: 0,
+      forceUpdateFlag: getGuid(),
     };
 
     this.keyPrefix = getGuid();
@@ -367,6 +368,17 @@ class AbstractComponent extends Component {
     );
 
     this.doWorkWhenComponentHide();
+  }
+
+  /**
+   * 扩展的强制更新
+   */
+  forceUpdateAdditional() {
+    this.logFunctionCallTrack({}, primaryCallName, 'forceUpdateAdditional');
+
+    this.setState({
+      forceUpdateFlag: getGuid(),
+    });
   }
 
   increaseCounter(callback) {

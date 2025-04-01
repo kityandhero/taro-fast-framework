@@ -247,7 +247,10 @@ export function NoticeBox({ data = '', onClick = null }) {
               >
                 <VerticalBox>
                   <MultiLineText
-                    style={{ color: '#7e7e7e' }}
+                    style={{
+                      color: '#7e7e7e',
+                      height: '100%',
+                    }}
                     fontSize={32}
                     lineHeight={36}
                     text={messageAdjust}

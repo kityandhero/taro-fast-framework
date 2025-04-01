@@ -16,6 +16,11 @@ const list = [
     name: '高级选择',
     path: pathCollection.example.selector.path,
   },
+  {
+    id: 'Calendar',
+    name: '日历',
+    path: pathCollection.example.calendar.path,
+  },
 ];
 
 const o = {

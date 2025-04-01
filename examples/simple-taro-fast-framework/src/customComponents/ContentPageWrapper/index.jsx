@@ -21,12 +21,17 @@ class ContentPageWrapper extends ContentPageBase {
 
   targetComponentName = 'ComponentName';
 
-  constructor(properties, initialConfig) {
+  constructor(properties, initialConfig, currentData) {
     super(properties);
 
     this.state = {
       ...this.state,
       currentConfig: initialConfig,
+      current: {
+        ...currentData,
+        showRenderCount: false,
+        hidden: false,
+      },
     };
 
     this.configCore = initialConfig;
@@ -36,7 +41,7 @@ class ContentPageWrapper extends ContentPageBase {
     return [];
   };
 
-  onOptionalValueClick = (o, otherState) => {
+  onOptionalValueClick = (o, currentAdjust, otherState) => {
     const { currentConfig: currentConfigPrevious } = this.state;
 
     const { style: styleCore } = this.configCore;
@@ -58,10 +63,16 @@ class ContentPageWrapper extends ContentPageBase {
       style,
     };
 
-    this.setState({ ...otherState, currentConfig: valueAdjust });
+    this.setState({
+      ...otherState,
+      current: currentAdjust,
+      currentConfig: valueAdjust,
+    });
   };
 
   buildControlBox = () => {
+    const { current } = this.state;
+
     const list = this.buildInteractiveConfig();
 
     if (!isArray(list)) {
@@ -95,7 +106,7 @@ class ContentPageWrapper extends ContentPageBase {
         ...interactiveConfigEmpty,
         name: 'hidden',
         description: '是否隐藏，隐藏即不渲染',
-        valueType: [interactiveConfigCollection.string],
+        valueType: [interactiveConfigCollection.boolean],
         defaultValue: AbstractComponent.defaultProps.hidden,
         optionalValues: [
           {
@@ -112,9 +123,10 @@ class ContentPageWrapper extends ContentPageBase {
 
     return (
       <PropertyInteractiveBox
+        current={current}
         list={listAdjust}
-        onOptionalValueClick={(o, otherState) => {
-          this.onOptionalValueClick(o, otherState);
+        onOptionalValueClick={(o, currentAdjust, otherState) => {
+          this.onOptionalValueClick(o, currentAdjust, otherState);
         }}
       />
     );
