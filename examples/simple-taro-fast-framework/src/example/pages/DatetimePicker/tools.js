@@ -9,6 +9,10 @@ import {
   interactiveConfigEmpty,
 } from '../../../customConfig';
 
+export function buildInitialCurrentData() {
+  return DatetimePicker.defaultProps;
+}
+
 export function buildInteractiveConfigList() {
   return [
     {
@@ -17,12 +21,7 @@ export function buildInteractiveConfigList() {
       description: '类型',
       valueType: [interactiveConfigCollection.number],
       defaultValue: DatetimePicker.defaultProps.type,
-      simpleValue: '#91d3a8',
       optionalValues: [
-        {
-          title: '默认',
-          value: DatetimePicker.defaultProps.type,
-        },
         {
           title: '年月日时分',
           value: datetimePickerTypeCollection.yearMonthDayHourMinute,

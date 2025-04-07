@@ -58,6 +58,12 @@
                     "scene": null
                 },
                 {
+                    "name": "form/checkBox",
+                    "pathName": "example/pages/checkBox/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
                     "name": "form/checkBoxPopup",
                     "pathName": "example/pages/checkBoxPopup/index",
                     "query": "",

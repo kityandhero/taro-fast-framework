@@ -1,15 +1,46 @@
 import { View } from '@tarojs/components';
 
-import { isFunction } from 'easy-soft-utility';
+import {
+  filter,
+  isArray,
+  isEmptyArray,
+  isFunction,
+  toString,
+} from 'easy-soft-utility';
 
 import { BaseComponent } from '../BaseComponent';
 import { IconCloseCircle } from '../Icon';
 import { Popup } from '../Popup';
 import { Radio } from '../Radio';
 
+function AdjustValue(value, options) {
+  if (!isArray(options) || isEmptyArray(options)) {
+    return {
+      value: '',
+      option: null,
+    };
+  }
+
+  const selectList = filter(options, (one) => {
+    const { value: v } = one;
+
+    return toString(v) === toString(value);
+  });
+
+  return selectList.length > 0
+    ? {
+        value: selectList[0].value,
+        option: selectList[0],
+      }
+    : {
+        value: '',
+        option: null,
+      };
+}
+
 const defaultProps = {
   style: {},
-  value: '',
+  defaultValue: '',
   valueFormat: null,
   placeholder: '请选择',
   border: true,
@@ -30,30 +61,25 @@ const defaultProps = {
 };
 
 class RadioPopup extends BaseComponent {
+  currentValue = [];
+
+  currentOption = [];
+
   constructor(properties) {
     super(properties);
 
-    const { value } = properties;
+    const { defaultValue, options } = properties;
+
+    const { value: valueAdjust, option } = AdjustValue(defaultValue, options);
 
     this.state = {
-      valueFlag: value,
-      valueStage: value,
+      ...this.state,
       popupVisible: false,
     };
-  }
 
-  static getDerivedStateFromProps(nextProperties, previousState) {
-    const { value: valueNext } = nextProperties;
-    const { valueFlag: valuePrevious } = previousState;
+    this.currentValue = valueAdjust;
 
-    if (valueNext !== valuePrevious) {
-      return {
-        valueFlag: valueNext,
-        valueStage: valueNext,
-      };
-    }
-
-    return {};
+    this.currentOption = option;
   }
 
   showPopup = () => {
@@ -71,9 +97,11 @@ class RadioPopup extends BaseComponent {
   triggerChange = (value, option) => {
     const { afterChange } = this.props;
 
-    this.setState({
-      valueStage: value,
-    });
+    this.currentValue = value;
+
+    this.currentOption = option;
+
+    this.forceUpdateAdditional();
 
     if (isFunction(afterChange)) {
       afterChange(value, option);
@@ -98,8 +126,9 @@ class RadioPopup extends BaseComponent {
       radioIconUncheck,
       radioIconCheck,
       viewBuilder,
+      defaultValue,
     } = this.props;
-    const { popupVisible, valueStage } = this.state;
+    const { popupVisible } = this.state;
 
     if (hidden) {
       return null;
@@ -110,7 +139,10 @@ class RadioPopup extends BaseComponent {
     }
 
     const inner = viewBuilder(
-      isFunction(valueFormat) ? valueFormat(valueStage) : valueStage,
+      isFunction(valueFormat)
+        ? valueFormat(this.currentValue, this.currentOption)
+        : this.currentValue,
+      this.currentOption,
     );
 
     return (
@@ -134,7 +166,7 @@ class RadioPopup extends BaseComponent {
           onClose={this.hidePopup}
         >
           <Radio
-            value={valueStage}
+            defaultValue={defaultValue}
             style={{
               ...radioStyle,
               borderTop: '0',

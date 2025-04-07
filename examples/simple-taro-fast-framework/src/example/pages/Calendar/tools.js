@@ -11,23 +11,7 @@ import {
 } from '../../../customConfig';
 
 export function buildInitialCurrentData() {
-  return {
-    activeBackgroundColor: Calendar.defaultProps.activeBackgroundColor,
-    activeColor: Calendar.defaultProps.activeColor,
-    color: Calendar.defaultProps.color,
-    descriptionColor: Calendar.defaultProps.descriptionColor,
-    maxSelectableDate: Calendar.defaultProps.maxSelectableDate,
-    maxYear: Calendar.defaultProps.maxYear,
-    minSelectableDate: Calendar.defaultProps.minSelectableDate,
-    minYear: Calendar.defaultProps.minYear,
-    monthArrowColor: Calendar.defaultProps.monthArrowColor,
-    rangeBackgroundColor: Calendar.defaultProps.rangeBackgroundColor,
-    rangeColor: Calendar.defaultProps.rangeColor,
-    selectMode: Calendar.defaultProps.selectMode,
-    showDescription: Calendar.defaultProps.showDescription,
-    showLunar: Calendar.defaultProps.showLunar,
-    yearArrowColor: Calendar.defaultProps.yearArrowColor,
-  };
+  return Calendar.defaultProps;
 }
 
 export function buildInteractiveConfigList() {

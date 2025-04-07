@@ -7,7 +7,7 @@ import { DatetimePicker } from 'taro-fast-component';
 
 import { ContentPageWrapper } from '../../../customComponents';
 
-import { buildInteractiveConfigList } from './tools';
+import { buildInitialCurrentData, buildInteractiveConfigList } from './tools';
 
 const configCore = {
   viewBuilder: (o) => {
@@ -38,7 +38,7 @@ export default class Index extends ContentPageWrapper {
   targetComponentName = 'DatetimePicker';
 
   constructor(properties) {
-    super(properties, configCore);
+    super(properties, configCore, buildInitialCurrentData());
 
     this.state = {
       ...this.state,

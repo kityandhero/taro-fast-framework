@@ -1,15 +1,53 @@
 import { View } from '@tarojs/components';
 
-import { isFunction } from 'easy-soft-utility';
+import {
+  filter,
+  isArray,
+  isEmptyArray,
+  isFunction,
+  toString,
+} from 'easy-soft-utility';
 
 import { BaseComponent } from '../BaseComponent';
 import { CheckBox } from '../CheckBox';
 import { IconCloseCircle } from '../Icon';
 import { Popup } from '../Popup';
 
+function AdjustValue(value, options) {
+  if (!isArray(options) || isEmptyArray(options)) {
+    return {
+      value: [],
+      option: [],
+    };
+  }
+
+  const selectList = filter(options, (one) => {
+    const { value: v } = one;
+
+    return toString(v) === toString(value);
+  });
+
+  return selectList.length > 0
+    ? {
+        value: selectList.map((o) => {
+          const { value: v } = {
+            value: '',
+            ...o,
+          };
+
+          return v;
+        }),
+        option: selectList,
+      }
+    : {
+        value: [],
+        option: [],
+      };
+}
+
 const defaultProps = {
   style: {},
-  value: [],
+  defaultValue: [],
   valueFormat: null,
   placeholder: '请选择',
   border: true,
@@ -30,31 +68,25 @@ const defaultProps = {
 };
 
 class CheckBoxPopup extends BaseComponent {
+  currentValue = [];
+
+  currentOption = [];
+
   constructor(properties) {
     super(properties);
 
-    const { value } = properties;
+    const { defaultValue, options } = properties;
+
+    const { value: valueAdjust, option } = AdjustValue(defaultValue, options);
 
     this.state = {
       ...this.state,
-      valueFlag: value,
-      valueStage: value,
       popupVisible: false,
     };
-  }
 
-  static getDerivedStateFromProps(nextProperties, previousState) {
-    const { value: valueNext } = nextProperties;
-    const { valueFlag: valuePrevious } = previousState;
+    this.currentValue = valueAdjust;
 
-    if (valueNext !== valuePrevious) {
-      return {
-        valueFlag: valueNext,
-        valueStage: valueNext,
-      };
-    }
-
-    return {};
+    this.currentOption = option;
   }
 
   showPopup = () => {
@@ -72,9 +104,11 @@ class CheckBoxPopup extends BaseComponent {
   triggerChange = (value, option) => {
     const { afterChange } = this.props;
 
-    this.setState({
-      valueStage: value,
-    });
+    this.currentValue = value;
+
+    this.currentOption = option;
+
+    this.forceUpdateAdditional();
 
     if (isFunction(afterChange)) {
       afterChange(value, option);
@@ -99,8 +133,9 @@ class CheckBoxPopup extends BaseComponent {
       checkBoxIconUncheck,
       checkBoxIconCheck,
       viewBuilder,
+      defaultValue,
     } = this.props;
-    const { popupVisible, valueStage } = this.state;
+    const { popupVisible } = this.state;
 
     if (hidden) {
       return null;
@@ -111,7 +146,10 @@ class CheckBoxPopup extends BaseComponent {
     }
 
     const inner = viewBuilder(
-      isFunction(valueFormat) ? valueFormat(valueStage) : valueStage,
+      isFunction(valueFormat)
+        ? valueFormat(this.currentValue, this.currentOption)
+        : this.currentValue,
+      this.currentOption,
     );
 
     return (
@@ -135,10 +173,9 @@ class CheckBoxPopup extends BaseComponent {
           onClose={this.hidePopup}
         >
           <CheckBox
-            value={valueStage}
+            defaultValue={defaultValue}
             style={{
               ...checkBoxStyle,
-
               borderTop: '0',
             }}
             layout={checkBoxLayout}

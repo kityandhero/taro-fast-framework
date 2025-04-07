@@ -3,10 +3,14 @@ import { View } from '@tarojs/components';
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
+  filter,
   isArray,
+  isEmptyArray,
   isFunction,
   isString,
   toLower,
+  toMd5,
+  toString,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
@@ -57,6 +61,38 @@ const checkStatusIconForListView = <IconCheck size={38} color="#1677ff" />;
 
 const uncheckStatusIconForListView = <IconCheck size={38} color="#ddd" />;
 
+function AdjustValue(value, options) {
+  if (!isArray(options) || isEmptyArray(options)) {
+    return {
+      value: [],
+      option: [],
+    };
+  }
+
+  const selectList = filter(options, (one) => {
+    const { value: v } = one;
+
+    return toString(v) === toString(value);
+  });
+
+  return selectList.length > 0
+    ? {
+        value: selectList.map((o) => {
+          const { value: v } = {
+            value: '',
+            ...o,
+          };
+
+          return v;
+        }),
+        option: selectList,
+      }
+    : {
+        value: [],
+        option: [],
+      };
+}
+
 const defaultProps = {
   style: {},
   layout: 'list',
@@ -71,7 +107,7 @@ const defaultProps = {
   extra: null,
   extraContainerStyle: {},
   bodyStyle: {},
-  value: [],
+  defaultValue: [],
   options: [],
   border: true,
   iconUncheck: null,
@@ -86,22 +122,48 @@ class CheckBox extends BaseComponent {
   constructor(properties) {
     super(properties);
 
-    const { value } = properties;
+    const { defaultValue, options } = properties;
+
+    const { value: valueAdjust, option } = AdjustValue(defaultValue, options);
 
     this.state = {
-      valueFlag: value,
-      valueStage: value,
+      valueFlag: toMd5(
+        JSON.stringify(isArray(defaultValue) ? defaultValue : []),
+      ),
+      optionFlag: toMd5(JSON.stringify(isArray(options) ? options : [])),
+      valueStage: valueAdjust,
+      optionStage: option,
     };
   }
 
   static getDerivedStateFromProps(nextProperties, previousState) {
-    const { value: valueNext } = nextProperties;
-    const { valueFlag: valuePrevious } = previousState;
+    const { defaultValue: defaultValueNext, options: optionsNext } =
+      nextProperties;
+    const { valueFlag: valueFlagPrevious, optionFlag: optionFlagPrevious } =
+      previousState;
 
-    if (valueNext !== valuePrevious) {
+    const valueFlagNext = toMd5(
+      JSON.stringify(isArray(defaultValueNext) ? defaultValueNext : []),
+    );
+
+    const optionFlagNext = toMd5(
+      JSON.stringify(isArray(optionsNext) ? optionsNext : []),
+    );
+
+    if (
+      valueFlagPrevious !== valueFlagNext ||
+      optionFlagPrevious !== optionFlagNext
+    ) {
+      const { value: valueAdjust, option } = AdjustValue(
+        defaultValueNext,
+        optionsNext,
+      );
+
       return {
-        valueFlag: valueNext,
-        valueStage: valueNext,
+        valueFlag: valueFlagNext,
+        optionFlag: optionFlagNext,
+        valueStage: valueAdjust,
+        optionStage: option,
       };
     }
 
@@ -123,7 +185,7 @@ class CheckBox extends BaseComponent {
       return;
     }
 
-    const { afterChange } = this.props;
+    const { options, afterChange } = this.props;
     const { valueStage } = this.state;
     const { value } = option;
 
@@ -149,12 +211,19 @@ class CheckBox extends BaseComponent {
       }
     }
 
+    const selectOptions = filter(options, (one) => {
+      const { value: v } = one;
+
+      return checkInCollection(result, v);
+    });
+
     this.setState({
       valueStage: [...result],
+      optionStage: selectOptions,
     });
 
     if (isFunction(afterChange)) {
-      afterChange(result, option);
+      afterChange(result, selectOptions);
     }
   };
 

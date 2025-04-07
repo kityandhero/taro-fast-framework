@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import {
   ColorText,
@@ -64,10 +65,21 @@ const radioOptions3 = [
 ];
 
 const configCore = {
-  viewBuilder: (o) => {
-    console.log(o);
+  viewBuilder: (o, option) => {
+    logConsole(
+      {
+        value: o,
+        option,
+      },
+      'viewBuilder',
+    );
 
-    return <View>视图部分-已选值- {o || '未选择'}</View>;
+    const { label } = {
+      label: '',
+      ...option,
+    };
+
+    return <View>视图部分-已选值- {label || '未选择'}</View>;
   },
   afterChange: (v, o) => {
     console.log({ v, o });

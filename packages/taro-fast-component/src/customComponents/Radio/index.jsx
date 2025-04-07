@@ -3,10 +3,14 @@ import { View } from '@tarojs/components';
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
+  filter,
   isArray,
+  isEmptyArray,
   isFunction,
   isString,
   toLower,
+  toMd5,
+  toString,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
@@ -55,6 +59,31 @@ const checkStatusIcon = (
 
 const checkStatusIconForListView = <IconCheck size={38} color="#1677ff" />;
 
+function AdjustValue(value, options) {
+  if (!isArray(options) || isEmptyArray(options)) {
+    return {
+      value: '',
+      option: null,
+    };
+  }
+
+  const selectList = filter(options, (one) => {
+    const { value: v } = one;
+
+    return toString(v) === toString(value);
+  });
+
+  return selectList.length > 0
+    ? {
+        value: selectList[0].value,
+        option: selectList[0],
+      }
+    : {
+        value: '',
+        option: null,
+      };
+}
+
 const defaultProps = {
   style: {},
   layout: 'list',
@@ -69,7 +98,7 @@ const defaultProps = {
   extra: null,
   extraContainerStyle: {},
   bodyStyle: {},
-  value: '',
+  defaultValue: '',
   options: [],
   border: true,
   iconUncheck: null,
@@ -84,22 +113,44 @@ class Radio extends BaseComponent {
   constructor(properties) {
     super(properties);
 
-    const { value } = properties;
+    const { defaultValue, options } = properties;
+
+    const { value: valueAdjust, option } = AdjustValue(defaultValue, options);
 
     this.state = {
-      valueFlag: value,
-      valueStage: value,
+      valueFlag: toMd5(toString(defaultValue || '')),
+      optionFlag: toMd5(JSON.stringify(isArray(options) ? options : [])),
+      valueStage: valueAdjust,
+      optionStage: option,
     };
   }
 
   static getDerivedStateFromProps(nextProperties, previousState) {
-    const { value: valueNext } = nextProperties;
-    const { valueFlag: valuePrevious } = previousState;
+    const { defaultValue: defaultValueNext, options: optionsNext } =
+      nextProperties;
+    const { valueFlag: valueFlagPrevious, optionFlag: optionFlagPrevious } =
+      previousState;
 
-    if (valueNext !== valuePrevious) {
+    const valueFlagNext = toMd5(toString(defaultValueNext || ''));
+
+    const optionFlagNext = toMd5(
+      JSON.stringify(isArray(optionsNext) ? optionsNext : []),
+    );
+
+    if (
+      valueFlagPrevious !== valueFlagNext ||
+      optionFlagPrevious !== optionFlagNext
+    ) {
+      const { value: valueAdjust, option } = AdjustValue(
+        defaultValueNext,
+        optionsNext,
+      );
+
       return {
-        valueFlag: valueNext,
-        valueStage: valueNext,
+        valueFlag: valueFlagNext,
+        optionFlag: optionFlagNext,
+        valueStage: valueAdjust,
+        optionStage: option,
       };
     }
 

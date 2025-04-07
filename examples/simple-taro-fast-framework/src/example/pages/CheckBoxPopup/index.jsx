@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { isEmptyArray } from 'easy-soft-utility';
+import { isEmptyArray, logConsole } from 'easy-soft-utility';
 
 import {
   CheckBoxPopup,
@@ -65,9 +65,28 @@ const checkBoxOptions3 = [
 ];
 
 const configCore = {
-  viewBuilder: (o) => {
+  viewBuilder: (value, option) => {
+    logConsole(
+      {
+        value,
+        option,
+      },
+      'viewBuilder',
+    );
+
+    // const o = option.map((one) => {
+    //   const { label } = {
+    //     label: '',
+    //     ...one,
+    //   };
+
+    //   return label;
+    // });
+
     return (
-      <View>视图部分-已选值- {isEmptyArray(o) ? '未选择' : o.join(',')}</View>
+      <View>
+        视图部分-已选值- {isEmptyArray(value) ? '未选择' : value.join(',')}
+      </View>
     );
   },
 };
