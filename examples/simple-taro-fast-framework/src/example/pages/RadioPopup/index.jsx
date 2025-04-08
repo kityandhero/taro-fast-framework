@@ -158,6 +158,30 @@ const config9 = {
   options: radioOptions3,
 };
 
+const config10 = {
+  ...configCore,
+  placeholder: '请选择类别',
+  value: '',
+  disabled: true,
+  disabledStyle: {
+    backgroundColor: '#456721',
+    color: '#fff',
+  },
+  options: radioOptions3,
+};
+
+const config11 = {
+  ...configCore,
+  placeholder: '请选择类别',
+  value: '',
+  readOnly: true,
+  readOnlyStyle: {
+    backgroundColor: '#1f17f1',
+    color: '#fff',
+  },
+  options: radioOptions3,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '自定义弹出式单选',
@@ -218,6 +242,14 @@ export default class Index extends ContentPageBase {
       {
         header: '隐藏关闭按钮',
         config: config8,
+      },
+      {
+        header: '禁用模式',
+        config: config10,
+      },
+      {
+        header: '只读模式',
+        config: config11,
       },
       {
         header: '复杂选项',

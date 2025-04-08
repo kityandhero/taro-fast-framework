@@ -46,24 +46,28 @@ function AdjustValue(value, options) {
 }
 
 const defaultProps = {
-  style: {},
-  defaultValue: [],
-  valueFormat: null,
-  placeholder: '请选择',
-  border: true,
-  hidden: false,
-  options: [],
-  position: 'bottom',
-  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
+  afterChange: null,
   arc: false,
-  showClose: true,
-  checkBoxStyle: {},
-  checkBoxLayout: 'list',
+  border: true,
   checkBoxBodyStyle: {},
   checkBoxBorder: true,
-  checkBoxIconUncheck: null,
   checkBoxIconCheck: null,
-  afterChange: null,
+  checkBoxIconUncheck: null,
+  checkBoxLayout: 'list',
+  checkBoxStyle: {},
+  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
+  defaultValue: [],
+  disabled: false,
+  disabledStyle: null,
+  hidden: false,
+  options: [],
+  placeholder: '请选择',
+  position: 'bottom',
+  readOnly: false,
+  readOnlyStyle: null,
+  showClose: true,
+  style: {},
+  valueFormat: null,
   viewBuilder: null,
 };
 
@@ -90,6 +94,12 @@ class CheckBoxPopup extends BaseComponent {
   }
 
   showPopup = () => {
+    const { disabled, readOnly } = this.props;
+
+    if (readOnly || disabled) {
+      return;
+    }
+
     this.setState({
       popupVisible: true,
     });
@@ -117,23 +127,27 @@ class CheckBoxPopup extends BaseComponent {
 
   renderFurther() {
     const {
-      style,
-      valueFormat,
-      placeholder,
-      options,
-      position,
-      closeIcon,
-      hidden,
       arc,
-      showClose,
-      checkBoxStyle,
-      checkBoxLayout,
       checkBoxBodyStyle,
       checkBoxBorder,
-      checkBoxIconUncheck,
       checkBoxIconCheck,
-      viewBuilder,
+      checkBoxIconUncheck,
+      checkBoxLayout,
+      checkBoxStyle,
+      closeIcon,
       defaultValue,
+      disabled,
+      disabledStyle,
+      hidden,
+      options,
+      placeholder,
+      position,
+      readOnly,
+      readOnlyStyle,
+      showClose,
+      style,
+      valueFormat,
+      viewBuilder,
     } = this.props;
     const { popupVisible } = this.state;
 
@@ -154,39 +168,48 @@ class CheckBoxPopup extends BaseComponent {
 
     return (
       <>
-        <View style={style} onClick={this.showPopup}>
+        <View
+          style={{
+            ...style,
+            ...(readOnly ? readOnlyStyle : {}),
+            ...(disabled ? disabledStyle : {}),
+          }}
+          onClick={this.showPopup}
+        >
           {inner || '视图构建器未返回构建结果'}
         </View>
 
-        <Popup
-          visible={popupVisible}
-          header={placeholder}
-          position={position}
-          space={false}
-          border={false}
-          bodyBorder={false}
-          footerBorder={false}
-          closeWhenOverlayClick
-          closeIcon={closeIcon}
-          arcTop={arc}
-          showClose={showClose}
-          onClose={this.hidePopup}
-        >
-          <CheckBox
-            defaultValue={defaultValue}
-            style={{
-              ...checkBoxStyle,
-              borderTop: '0',
-            }}
-            layout={checkBoxLayout}
-            bodyStyle={checkBoxBodyStyle}
-            border={checkBoxBorder}
-            iconUncheck={checkBoxIconUncheck}
-            iconCheck={checkBoxIconCheck}
-            options={options}
-            afterChange={this.triggerChange}
-          />
-        </Popup>
+        {readOnly || disabled ? null : (
+          <Popup
+            arcTop={arc}
+            bodyBorder={false}
+            border={false}
+            closeIcon={closeIcon}
+            closeWhenOverlayClick
+            footerBorder={false}
+            header={placeholder}
+            onClose={this.hidePopup}
+            position={position}
+            showClose={showClose}
+            space={false}
+            visible={popupVisible}
+          >
+            <CheckBox
+              defaultValue={defaultValue}
+              style={{
+                ...checkBoxStyle,
+                borderTop: '0',
+              }}
+              layout={checkBoxLayout}
+              bodyStyle={checkBoxBodyStyle}
+              border={checkBoxBorder}
+              iconUncheck={checkBoxIconUncheck}
+              iconCheck={checkBoxIconCheck}
+              options={options}
+              afterChange={this.triggerChange}
+            />
+          </Popup>
+        )}
       </>
     );
   }

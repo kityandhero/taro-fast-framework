@@ -175,6 +175,29 @@ const config9 = {
   showClose: false,
   options: checkBoxOptions3,
 };
+const config10 = {
+  ...configCore,
+  placeholder: '请选择类别',
+  value: [],
+  disabled: true,
+  disabledStyle: {
+    backgroundColor: '#456721',
+    color: '#fff',
+  },
+  options: checkBoxOptions1,
+};
+
+const config11 = {
+  ...configCore,
+  placeholder: '请选择类别',
+  value: [],
+  readOnly: true,
+  readOnlyStyle: {
+    backgroundColor: '#1f17f1',
+    color: '#fff',
+  },
+  options: checkBoxOptions1,
+};
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -235,6 +258,14 @@ export default class Index extends ContentPageBase {
       {
         header: '隐藏关闭按钮',
         config: config8,
+      },
+      {
+        header: '禁用模式',
+        config: config10,
+      },
+      {
+        header: '只读模式',
+        config: config11,
       },
       {
         header: '复杂选项',

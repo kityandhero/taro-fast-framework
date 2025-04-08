@@ -39,24 +39,28 @@ function AdjustValue(value, options) {
 }
 
 const defaultProps = {
-  style: {},
-  defaultValue: '',
-  valueFormat: null,
-  placeholder: '请选择',
+  afterChange: null,
+  arc: false,
   border: true,
+  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
+  defaultValue: '',
+  disabled: false,
+  disabledStyle: null,
   hidden: false,
   options: [],
+  placeholder: '请选择',
   position: 'bottom',
-  closeIcon: <IconCloseCircle size={36} color="#ccc" />,
-  arc: false,
-  showClose: true,
-  radioStyle: {},
-  radioLayout: 'list',
   radioBodyStyle: {},
   radioBorder: true,
-  radioIconUncheck: null,
   radioIconCheck: null,
-  afterChange: null,
+  radioIconUncheck: null,
+  radioLayout: 'list',
+  radioStyle: {},
+  readOnly: false,
+  readOnlyStyle: null,
+  showClose: true,
+  style: {},
+  valueFormat: null,
   viewBuilder: null,
 };
 
@@ -83,6 +87,12 @@ class RadioPopup extends BaseComponent {
   }
 
   showPopup = () => {
+    const { disabled, readOnly } = this.props;
+
+    if (readOnly || disabled) {
+      return;
+    }
+
     this.setState({
       popupVisible: true,
     });
@@ -110,23 +120,27 @@ class RadioPopup extends BaseComponent {
 
   renderFurther() {
     const {
-      style,
-      valueFormat,
-      placeholder,
-      options,
-      position,
-      closeIcon,
-      hidden,
       arc,
-      showClose,
-      radioStyle,
-      radioLayout,
+      closeIcon,
+      defaultValue,
+      disabled,
+      disabledStyle,
+      hidden,
+      options,
+      placeholder,
+      position,
       radioBodyStyle,
       radioBorder,
-      radioIconUncheck,
       radioIconCheck,
+      radioIconUncheck,
+      radioLayout,
+      radioStyle,
+      readOnly,
+      readOnlyStyle,
+      showClose,
+      style,
+      valueFormat,
       viewBuilder,
-      defaultValue,
     } = this.props;
     const { popupVisible } = this.state;
 
@@ -147,39 +161,48 @@ class RadioPopup extends BaseComponent {
 
     return (
       <>
-        <View style={style} onClick={this.showPopup}>
+        <View
+          style={{
+            ...style,
+            ...(readOnly ? readOnlyStyle : {}),
+            ...(disabled ? disabledStyle : {}),
+          }}
+          onClick={this.showPopup}
+        >
           {inner || '视图构建器未返回构建结果'}
         </View>
 
-        <Popup
-          visible={popupVisible}
-          header={placeholder}
-          position={position}
-          space={false}
-          border={false}
-          bodyBorder={false}
-          footerBorder={false}
-          closeWhenOverlayClick
-          closeIcon={closeIcon}
-          arcTop={arc}
-          showClose={showClose}
-          onClose={this.hidePopup}
-        >
-          <Radio
-            defaultValue={defaultValue}
-            style={{
-              ...radioStyle,
-              borderTop: '0',
-            }}
-            layout={radioLayout}
-            bodyStyle={radioBodyStyle}
-            border={radioBorder}
-            iconUncheck={radioIconUncheck}
-            iconCheck={radioIconCheck}
-            options={options}
-            afterChange={this.triggerChange}
-          />
-        </Popup>
+        {readOnly || disabled ? null : (
+          <Popup
+            arcTop={arc}
+            bodyBorder={false}
+            border={false}
+            closeIcon={closeIcon}
+            closeWhenOverlayClick
+            footerBorder={false}
+            header={placeholder}
+            onClose={this.hidePopup}
+            position={position}
+            showClose={showClose}
+            space={false}
+            visible={popupVisible}
+          >
+            <Radio
+              defaultValue={defaultValue}
+              style={{
+                ...radioStyle,
+                borderTop: '0',
+              }}
+              layout={radioLayout}
+              bodyStyle={radioBodyStyle}
+              border={radioBorder}
+              iconUncheck={radioIconUncheck}
+              iconCheck={radioIconCheck}
+              options={options}
+              afterChange={this.triggerChange}
+            />
+          </Popup>
+        )}
       </>
     );
   }
