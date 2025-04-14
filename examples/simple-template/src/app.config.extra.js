@@ -17,7 +17,7 @@ export const config = {
   authenticationFailCode: 2001,
   // 是否在静默登录失败后跳转登录界面，需要强制登录的应用建议开启
   navigationToSignInWhenSignInSilentFail: true,
-  signInPath: '/customer/pages/signIn/main/index',
+  signInPath: '/user/pages/signIn/main/index',
   apiVersion: 'beta',
   footerImage: LogoImage,
   footerText: '',

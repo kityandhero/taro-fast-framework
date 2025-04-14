@@ -4,5 +4,84 @@
   "setting": {
     "compileHotReLoad": true
   },
-  "libVersion": "3.7.11"
+  "libVersion": "3.8.0",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "模拟扫描投诉建议二维码",
+          "pathName": "pages/entry/main/index",
+          "query": "mode=complain",
+          "launchMode": "default",
+          "scene": 1011
+        },
+        {
+          "name": "pages/entry",
+          "pathName": "pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home",
+          "pathName": "pages/home/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/flowCase",
+          "pathName": "pages/flowCase/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/user",
+          "pathName": "pages/user/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/pageListWorkflow",
+          "pathName": "user/pages/pageListWorkflow/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/flowCaseForm",
+          "pathName": "user/pages/flowCaseForm/main/index",
+          "query": "id=1903422649737023488",
+          "scene": null
+        },
+        {
+          "name": "user/approve",
+          "pathName": "user/pages/approve/main/index",
+          "query": "id=1831345295095631872",
+          "scene": null
+        },
+        {
+          "name": "user/approve - noData",
+          "pathName": "user/pages/approve/main/index",
+          "query": "id=1831345295095631873",
+          "scene": null
+        },
+        {
+          "name": "user/signIn",
+          "pathName": "user/pages/signIn/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/signInWithWeChat",
+          "pathName": "user/pages/signInWithWeChat/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/resetPassword",
+          "pathName": "user/pages/resetPassword/main/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

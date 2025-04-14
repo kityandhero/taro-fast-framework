@@ -58,19 +58,19 @@ class PageNeedSignInWrapper extends PageWrapper {
 
   goToSetAvatar = () => {
     navigateTo({
-      url: pathCollection.customer.setAvatar.path,
+      url: pathCollection.user.setAvatar.path,
     });
   };
 
   goToSetBirthday = () => {
     navigateTo({
-      url: pathCollection.customer.setBirthday.path,
+      url: pathCollection.user.setBirthday.path,
     });
   };
 
   goToSetAddress = () => {
     navigateTo({
-      url: pathCollection.customer.setAddress.path,
+      url: pathCollection.user.setAddress.path,
     });
   };
 }

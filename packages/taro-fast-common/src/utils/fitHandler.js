@@ -1,7 +1,6 @@
 import {
   checkStringIsNullOrWhiteSpace,
   checkWhetherDevelopmentEnvironment,
-  getApplicationMergeConfig,
   logError,
   logExecute,
   logTrace,
@@ -19,16 +18,7 @@ import { setLocalStorageHandler } from './localStorageAssist';
 import { setMessageDisplayMonitor } from './messageAssist';
 import { getTaroGlobalData } from './meta';
 import { setNavigationHandler } from './navigationAssist';
-import { getSignInPath } from './settingsAssist';
-
-function getShowLogInConsole() {
-  const { showLogInConsole } = {
-    showLogInConsole: false,
-    ...getApplicationMergeConfig(),
-  };
-
-  return showLogInConsole || false;
-}
+import { getShowLogInConsole, getSignInPath } from './settingsAssist';
 
 function handleAuthenticationFail() {
   logExecute({}, buildPromptModuleInfoText('handleAuthenticationFail'));

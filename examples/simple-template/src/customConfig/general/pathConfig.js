@@ -12,32 +12,32 @@ export const webPagePathGeneralCollection = {
 
 export const informationPathGeneralCollection = {};
 
-export const customerPathGeneralCollection = {
+export const userPathGeneralCollection = {
   changePassword: {
-    path: '/customer/pages/changePassword/main/index',
+    path: '/user/pages/changePassword/main/index',
   },
   editInformation: {
-    path: '/customer/pages/editInformation/main/index',
+    path: '/user/pages/editInformation/main/index',
   },
   resetPassword: {
-    path: '/customer/pages/resetPassword/main/index',
+    path: '/user/pages/resetPassword/main/index',
   },
   security: {
-    path: '/customer/pages/security/main/index',
+    path: '/user/pages/security/main/index',
   },
   setAddress: {
-    path: '/customer/pages/setAddress/main/index',
+    path: '/user/pages/setAddress/main/index',
   },
   setAvatar: {
-    path: '/customer/pages/setAvatar/main/index',
+    path: '/user/pages/setAvatar/main/index',
   },
   setBirthday: {
-    path: '/customer/pages/setBirthday/main/index',
+    path: '/user/pages/setBirthday/main/index',
   },
   signIn: {
-    path: '/customer/pages/signIn/main/index',
+    path: '/user/pages/signIn/main/index',
   },
   signInWithWeChat: {
-    path: '/customer/pages/signInWithWeChat/main/index',
+    path: '/user/pages/signInWithWeChat/main/index',
   },
 };

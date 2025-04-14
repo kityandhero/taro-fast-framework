@@ -1,9 +1,20 @@
 import { isFunction, navigateTo } from 'easy-soft-utility';
 
 import { pathCollection } from '../../../customConfig';
+import { modelTypeCollection } from '../../../modelBuilders';
+import { judgeComplain } from '../../../utils';
 import { PageWrapperCore } from '../../general/PageWrapperCore';
 
 class PageWrapperExtra extends PageWrapperCore {
+  getGetCustomerApiEffect = (data = {}) => {
+    judgeComplain();
+
+    return {
+      type: modelTypeCollection.userTypeCollection.getCurrentInfo,
+      payload: data,
+    };
+  };
+
   goToFlowCaseTab(callback = null) {
     this.switchTab({
       url: `/${pathCollection.root.flowCase.path}`,
@@ -15,19 +26,19 @@ class PageWrapperExtra extends PageWrapperCore {
     });
   }
   goToResetPassword = () => {
-    navigateTo(pathCollection.customer.resetPassword.path);
+    navigateTo(pathCollection.user.resetPassword.path);
   };
 
   goToChangePassword = () => {
-    navigateTo(pathCollection.customer.changePassword.path);
+    navigateTo(pathCollection.user.changePassword.path);
   };
 
   goToEditInformation = () => {
-    navigateTo(pathCollection.customer.editInformation.path);
+    navigateTo(pathCollection.user.editInformation.path);
   };
 
   goToSecurity = () => {
-    navigateTo(pathCollection.customer.security.path);
+    navigateTo(pathCollection.user.security.path);
   };
 
   goToFlowCase = () => {
@@ -35,39 +46,39 @@ class PageWrapperExtra extends PageWrapperCore {
   };
 
   goToFlowCaseForm = (id) => {
-    navigateTo(`${pathCollection.customer.flowCaseForm.path}?id=${id}`);
+    navigateTo(`${pathCollection.user.flowCaseForm.path}?id=${id}`);
   };
 
   goToPageListWorkflow = () => {
     navigateTo({
-      url: pathCollection.customer.pageListWorkflow.path,
+      url: pathCollection.user.pageListWorkflow.path,
     });
   };
 
   goToPageListCreateApprove = () => {
     navigateTo({
-      url: pathCollection.customer.pageListCreateApprove.path,
+      url: pathCollection.user.pageListCreateApprove.path,
     });
   };
 
   goToPageListLatestApprove = () => {
     navigateTo({
-      url: pathCollection.customer.pageListLatestApprove.path,
+      url: pathCollection.user.pageListLatestApprove.path,
     });
   };
 
   goToPageListWaitApprove = () => {
     navigateTo({
-      url: pathCollection.customer.pageListWaitApprove.path,
+      url: pathCollection.user.pageListWaitApprove.path,
     });
   };
 
   goToApprove = (id) => {
-    navigateTo(`${pathCollection.customer.approve.path}?id=${id}`);
+    navigateTo(`${pathCollection.user.approve.path}?id=${id}`);
   };
 
   goToDetailFlowCase = (id) => {
-    navigateTo(`${pathCollection.customer.detailFlowCase.path}?id=${id}`);
+    navigateTo(`${pathCollection.user.detailFlowCase.path}?id=${id}`);
   };
 
   goToPageListNotice = () => {
@@ -83,7 +94,7 @@ class PageWrapperExtra extends PageWrapperCore {
   };
 
   goToSetting = () => {
-    navigateTo(pathCollection.customer.setting.path);
+    navigateTo(pathCollection.user.setting.path);
   };
 }
 

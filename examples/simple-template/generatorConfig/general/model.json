@@ -193,13 +193,13 @@
         }
       ],
       "cover": true,
-      "title": "登陆人相关",
-      "name": "customer"
+      "title": "user相关",
+      "name": "user"
     },
     {
       "apis": [
         {
-          "title": "获取当前登录用户信息",
+          "title": "获取地址级联信息",
           "api": "/wechatApplication/administrativeDivision/singleListTreeThreeLevel",
           "effect": "singleListTreeThreeLevel",
           "service": "singleListTreeThreeLevelData",

@@ -3,10 +3,13 @@ import {
   setApplicationInitialOption,
 } from 'easy-soft-dva';
 import {
+  appendApplicationExternalConfig,
   buildPromptModuleInfo,
   getApplicationExternalConfigList,
   getApplicationInitialConfig,
   getApplicationMergeConfig,
+  isEmptyObject,
+  isObject,
   logConfig,
   logDebug,
   logDevelop,
@@ -57,17 +60,33 @@ export function configEnvironment(externalConfigs) {
   logConfig(getApplicationInitialConfig(), 'initialConfig');
 
   logConfig(
-    { externalConfigs: getApplicationExternalConfigList() },
+    {
+      externalConfigs: getApplicationExternalConfigList(),
+    },
     'externalConfigs',
   );
 
-  logConfig(getApplicationMergeConfig(), 'combinedConfig');
+  const applicationMergeConfig = getApplicationMergeConfig();
+
+  logConfig(applicationMergeConfig, 'combinedConfig');
 
   logDevelop('--------------------------------------------');
 
-  setApplicationInitialOption();
+  setApplicationInitialOption(applicationMergeConfig);
 
   initializeApplication();
 
   logDevelop('--------------------------------------------');
+}
+
+export function appendConfigure(config) {
+  if (!isObject(config) || isEmptyObject(config)) {
+    return;
+  }
+
+  appendApplicationExternalConfig(config);
+
+  const applicationMergeConfig = getApplicationMergeConfig();
+
+  logConfig(applicationMergeConfig, 'combinedConfig after append');
 }

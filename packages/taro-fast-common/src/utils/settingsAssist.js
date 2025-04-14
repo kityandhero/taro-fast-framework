@@ -521,3 +521,12 @@ export function getGetCustomerAliasName() {
 
   return getCustomerAliasName || 'getCustomerApiData';
 }
+
+export function getShowLogInConsole() {
+  const { showLogInConsole } = {
+    showLogInConsole: false,
+    ...getApplicationMergeConfig(),
+  };
+
+  return showLogInConsole || false;
+}

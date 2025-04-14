@@ -20,16 +20,14 @@ definePageConfig({
   navigationBarTitleText: '预加载',
 });
 
-@connect(
-  ({ customer, entrance, share, session, global, schedulingControl }) => ({
-    customer,
-    entrance,
-    share,
-    session,
-    global,
-    schedulingControl,
-  }),
-)
+@connect(({ user, entrance, share, session, global, schedulingControl }) => ({
+  user,
+  entrance,
+  share,
+  session,
+  global,
+  schedulingControl,
+}))
 class PageMain extends PageWrapper {
   useFadeSpinWrapper = false;
 
@@ -44,7 +42,6 @@ class PageMain extends PageWrapper {
 
     this.state = {
       ...this.state,
-
       navigationNoticeVisible: false,
     };
   }
@@ -161,10 +158,10 @@ class PageMain extends PageWrapper {
         break;
       }
 
-      case shareTransfer.customer: {
+      case shareTransfer.user: {
         this.showNavigationNotice();
 
-        redirectTo(pathCollection.root.customer.path);
+        redirectTo(pathCollection.root.user.path);
 
         break;
       }

@@ -1,14 +1,14 @@
 import {
-  customerPathGeneralCollection,
   informationPathGeneralCollection,
   rootPathGeneralCollection,
+  userPathGeneralCollection,
   webPagePathGeneralCollection,
 } from '../general';
 
 const rootPathCollection = {
   ...rootPathGeneralCollection,
-  customer: {
-    path: '/pages/customer/main/index',
+  user: {
+    path: '/pages/user/main/index',
   },
   flowCase: {
     path: '/pages/flowCase/main/index',
@@ -39,37 +39,37 @@ const communicationPathCollection = {
   },
 };
 
-const customerPathCollection = {
-  ...customerPathGeneralCollection,
+const userPathCollection = {
+  ...userPathGeneralCollection,
   approve: {
-    path: '/customer/pages/approve/main/index',
+    path: '/user/pages/approve/main/index',
   },
   detailFlowCase: {
-    path: '/customer/pages/detailFlowCase/main/index',
+    path: '/user/pages/detailFlowCase/main/index',
   },
   flowCaseForm: {
-    path: '/customer/pages/flowCaseForm/main/index',
+    path: '/user/pages/flowCaseForm/main/index',
   },
   pageListCreateApprove: {
-    path: '/customer/pages/pageListCreateApprove/main/index',
+    path: '/user/pages/pageListCreateApprove/main/index',
   },
   pageListLatestApprove: {
-    path: '/customer/pages/pageListLatestApprove/main/index',
+    path: '/user/pages/pageListLatestApprove/main/index',
   },
   pageListWaitApprove: {
-    path: '/customer/pages/pageListWaitApprove/main/index',
+    path: '/user/pages/pageListWaitApprove/main/index',
   },
   pageListWorkflow: {
-    path: '/customer/pages/pageListWorkflow/main/index',
+    path: '/user/pages/pageListWorkflow/main/index',
   },
   setting: {
-    path: '/customer/pages/setting/main/index',
+    path: '/user/pages/setting/main/index',
   },
 };
 
 export const pathCustomCollection = {
   communication: communicationPathCollection,
-  customer: customerPathCollection,
+  user: userPathCollection,
   information: informationPathCollection,
   root: rootPathCollection,
   webpage: webPagePathCollection,

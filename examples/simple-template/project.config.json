@@ -63,50 +63,50 @@
           "scene": null
         },
         {
-          "name": "pages/customer",
-          "pathName": "pages/customer/main/index",
+          "name": "pages/user",
+          "pathName": "pages/user/main/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "customer/pageListWorkflow",
-          "pathName": "customer/pages/pageListWorkflow/main/index",
+          "name": "user/pageListWorkflow",
+          "pathName": "user/pages/pageListWorkflow/main/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "customer/flowCaseForm",
-          "pathName": "customer/pages/flowCaseForm/main/index",
+          "name": "user/flowCaseForm",
+          "pathName": "user/pages/flowCaseForm/main/index",
           "query": "id=1903422649737023488",
           "scene": null
         },
         {
-          "name": "customer/approve",
-          "pathName": "customer/pages/approve/main/index",
+          "name": "user/approve",
+          "pathName": "user/pages/approve/main/index",
           "query": "id=1831345295095631872",
           "scene": null
         },
         {
-          "name": "customer/approve - noData",
-          "pathName": "customer/pages/approve/main/index",
+          "name": "user/approve - noData",
+          "pathName": "user/pages/approve/main/index",
           "query": "id=1831345295095631873",
           "scene": null
         },
         {
-          "name": "customer/signIn",
-          "pathName": "customer/pages/signIn/main/index",
+          "name": "user/signIn",
+          "pathName": "user/pages/signIn/main/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "customer/signInWithWeChat",
-          "pathName": "customer/pages/signInWithWeChat/main/index",
+          "name": "user/signInWithWeChat",
+          "pathName": "user/pages/signInWithWeChat/main/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "customer/resetPassword",
-          "pathName": "customer/pages/resetPassword/main/index",
+          "name": "user/resetPassword",
+          "pathName": "user/pages/resetPassword/main/index",
           "query": "",
           "scene": null
         }
@@ -121,5 +121,6 @@
   "packOptions": {
     "ignore": [],
     "include": []
-  }
+  },
+  "appid": "wx30cfdf773244d243"
 }

@@ -2,7 +2,7 @@
 export default defineAppConfig({
   entryPagePath: 'pages/entry/main/index',
   pages: [
-    'pages/customer/main/index',
+    'pages/user/main/index',
     'pages/entry/main/index',
     'pages/flowCase/main/index',
     'pages/home/main/index',
@@ -33,8 +33,8 @@ export default defineAppConfig({
       pages: ['pages/general/main/index'],
     },
     {
-      root: 'customer',
-      name: '用户',
+      root: 'user',
+      name: 'User',
       pages: [
         'pages/approve/main/index',
         'pages/changePassword/main/index',
@@ -59,7 +59,7 @@ export default defineAppConfig({
   preloadRule: {
     'pages/entry/main/index': {
       network: 'all',
-      packages: ['information', 'communication'],
+      packages: ['information', 'communication', 'user'],
     },
   },
   // permission: {
@@ -107,7 +107,7 @@ export default defineAppConfig({
       //   text: '通讯录',
       // },
       {
-        pagePath: 'pages/customer/main/index',
+        pagePath: 'pages/user/main/index',
         iconPath: './assets/tab-bar/user.png',
         selectedIconPath: './assets/tab-bar/user-active.png',
         text: '我的',

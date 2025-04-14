@@ -19,7 +19,7 @@ class PageWrapper extends PageWrapperExtra {
 
   goToSignIn = () => {
     navigateTo({
-      url: pathCollection.customer.signIn.path,
+      url: pathCollection.user.signIn.path,
     });
   };
 }

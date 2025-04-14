@@ -139,13 +139,6 @@ class PageWrapperCore extends AuthorizationWrapper {
     };
   };
 
-  getGetCustomerApiEffect = (data = {}) => {
-    return {
-      type: modelTypeCollection.customerTypeCollection.getCurrentInfo,
-      payload: data,
-    };
-  };
-
   reloadRemoteMetaData = () => {
     const { dispatch } = this.props;
 
