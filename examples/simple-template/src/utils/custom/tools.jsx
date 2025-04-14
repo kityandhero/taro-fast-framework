@@ -1,6 +1,4 @@
-import { getCache, logConsole, setCache } from 'easy-soft-utility';
-
-import { getLaunchOption } from 'taro-fast-framework';
+import { getCache, setCache } from 'easy-soft-utility';
 
 const subsidiaryIdCacheKey = 'entrySubsidiaryId';
 
@@ -19,8 +17,13 @@ export function getSubsidiaryIdCache() {
   return o;
 }
 
-export function judgeComplain() {
-  const o = getLaunchOption();
+export function judgeComplain(o) {
+  const { query } = o;
 
-  logConsole(o, 'judgeComplain');
+  const { mode } = {
+    mode: '',
+    ...query,
+  };
+
+  return mode === 'complain';
 }

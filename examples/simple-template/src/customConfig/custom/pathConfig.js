@@ -67,10 +67,65 @@ const userPathCollection = {
   },
 };
 
+const suggestionPathCollection = {
+  home: {
+    path: '/suggestion/pages/home/main/index',
+  },
+  customer: {
+    path: '/suggestion/pages/customer/main/index',
+  },
+  editInformation: {
+    path: '/suggestion/pages/editInformation/main/index',
+  },
+  illustrate: {
+    path: '/suggestion/pages/illustrate/main/index',
+  },
+  resetPassword: {
+    path: '/suggestion/pages/resetPassword/main/index',
+  },
+  setAvatar: {
+    path: '/suggestion/pages/setAvatar/main/index',
+  },
+  signIn: {
+    path: '/suggestion/pages/signIn/main/index',
+  },
+  signInWithWeChat: {
+    path: '/suggestion/pages/signInWithWeChat/main/index',
+  },
+  detailComplaint: {
+    path: '/suggestion/pages/detailComplaint/main/index',
+  },
+  detailFeedback: {
+    path: '/suggestion/pages/detailFeedback/main/index',
+  },
+  detailReport: {
+    path: '/suggestion/pages/detailReport/main/index',
+  },
+  pageListComplaint: {
+    path: '/suggestion/pages/pageListComplaint/main/index',
+  },
+  pageListFeedback: {
+    path: '/suggestion/pages/pageListFeedback/main/index',
+  },
+  pageListReport: {
+    path: '/suggestion/pages/pageListReport/main/index',
+  },
+  submitComplaint: {
+    path: '/suggestion/pages/submitComplaint/main/index',
+  },
+  submitFeedback: {
+    path: '/suggestion/pages/submitFeedback/main/index',
+  },
+  submitReport: {
+    path: '/suggestion/pages/submitReport/main/index',
+  },
+};
+
 export const pathCustomCollection = {
   communication: communicationPathCollection,
   user: userPathCollection,
   information: informationPathCollection,
   root: rootPathCollection,
   webpage: webPagePathCollection,
+  suggestion: suggestionPathCollection,
 };

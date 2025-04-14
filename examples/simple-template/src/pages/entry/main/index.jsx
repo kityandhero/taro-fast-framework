@@ -3,17 +3,21 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
+  isEmptyObject,
   isFunction,
+  isObject,
   redirectTo,
   showSimpleErrorMessage,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { ActivityIndicator } from 'taro-fast-component';
+import { getLaunchOption } from 'taro-fast-framework';
 
 import { exchangeShareDataAction } from '../../../commonAssist';
 import { PageWrapper } from '../../../customComponents';
 import { pathCollection, shareTransfer } from '../../../customConfig';
+import { judgeComplain, setSubsidiaryIdCache } from '../../../utils';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -67,6 +71,10 @@ class PageMain extends PageWrapper {
     };
 
     const that = this;
+
+    if (isObject(urlParameters) && !isEmptyObject(urlParameters)) {
+      that.pretreatmentUrlParameters(urlParameters);
+    }
 
     if (checkStringIsNullOrWhiteSpace(scene)) {
       that.handleParams(urlParameters);
@@ -133,7 +141,26 @@ class PageMain extends PageWrapper {
     }
   };
 
+  pretreatmentUrlParameters(urlParameters) {
+    if (judgeComplain(getLaunchOption())) {
+      const { subsidiaryId } = {
+        subsidiaryId: '',
+        ...urlParameters,
+      };
+
+      if (!checkStringIsNullOrWhiteSpace(subsidiaryId)) {
+        setSubsidiaryIdCache(subsidiaryId);
+      }
+    }
+  }
+
   handleParams(urlParameters) {
+    if (judgeComplain(getLaunchOption())) {
+      this.redirectToSuggestionHome();
+
+      return;
+    }
+
     this.handleRedirect(urlParameters);
   }
 

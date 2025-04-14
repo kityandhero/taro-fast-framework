@@ -1,7 +1,7 @@
 import { request } from 'easy-soft-utility';
 
 export const getCurrentInfoDataApiAddress =
-  '/wechatApplication/user/getCurrentInfo';
+  '/wechatApplication/customer/getCurrentInfo';
 
 export async function getCurrentInfoData(parameters) {
   return request({
@@ -10,7 +10,7 @@ export async function getCurrentInfoData(parameters) {
   });
 }
 
-export const setAvatarDataApiAddress = '/wechatApplication/user/setAvatar';
+export const setAvatarDataApiAddress = '/wechatApplication/customer/setAvatar';
 
 export async function setAvatarData(parameters) {
   return request({
@@ -19,7 +19,7 @@ export async function setAvatarData(parameters) {
   });
 }
 
-export const setGenderDataApiAddress = '/wechatApplication/user/setGender';
+export const setGenderDataApiAddress = '/wechatApplication/customer/setGender';
 
 export async function setGenderData(parameters) {
   return request({
@@ -28,45 +28,8 @@ export async function setGenderData(parameters) {
   });
 }
 
-export const setBirthdayDataApiAddress = '/wechatApplication/user/setBirthday';
-
-export async function setBirthdayData(parameters) {
-  return request({
-    api: setBirthdayDataApiAddress,
-    params: parameters,
-  });
-}
-
-export const setAddressDataApiAddress = '/wechatApplication/user/setAddress';
-
-export async function setAddressData(parameters) {
-  return request({
-    api: setAddressDataApiAddress,
-    params: parameters,
-  });
-}
-
-export const setMobileApproveViewModeDataApiAddress =
-  '/wechatApplication/user/setMobileApproveViewMode';
-
-export async function setMobileApproveViewModeData(parameters) {
-  return request({
-    api: setMobileApproveViewModeDataApiAddress,
-    params: parameters,
-  });
-}
-
-export const changePasswordDataApiAddress =
-  '/wechatApplication/user/changePassword';
-
-export async function changePasswordData(parameters) {
-  return request({
-    api: changePasswordDataApiAddress,
-    params: parameters,
-  });
-}
-
-export const uploadImageDataApiAddress = '/wechatApplication/user/uploadImage';
+export const uploadImageDataApiAddress =
+  '/wechatApplication/customer/uploadImage';
 
 export async function uploadImageData(parameters) {
   return request({

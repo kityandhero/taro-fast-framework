@@ -3,6 +3,7 @@ import { AppBase, appendConfigure } from 'taro-fast-framework';
 import { config } from './app.config.extra';
 import { configComplain } from './app.config.extra.complain';
 import { prepareModel } from './modelBuilders';
+import { judgeComplain } from './utils';
 
 import './app.less';
 
@@ -14,14 +15,7 @@ class App extends AppBase {
   }
 
   doWhenBootstrap = (options) => {
-    const { query } = options;
-
-    const { mode } = {
-      mode: '',
-      ...query,
-    };
-
-    if (mode === 'complain') {
+    if (judgeComplain(options)) {
       appendConfigure(configComplain);
     }
   };
