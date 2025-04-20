@@ -17,7 +17,11 @@ import { getLaunchOption } from 'taro-fast-framework';
 import { exchangeShareDataAction } from '../../../commonAssist';
 import { PageWrapper } from '../../../customComponents';
 import { pathCollection, shareTransfer } from '../../../customConfig';
-import { judgeComplain, setSubsidiaryIdCache } from '../../../utils';
+import {
+  analysisScene,
+  judgeComplain,
+  setSubsidiaryIdCache,
+} from '../../../utils';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -33,6 +37,10 @@ definePageConfig({
   schedulingControl,
 }))
 class PageMain extends PageWrapper {
+  showCallTrack = true;
+
+  showCallTrace = true;
+
   useFadeSpinWrapper = false;
 
   initMetaDataForce = true;
@@ -65,50 +73,60 @@ class PageMain extends PageWrapper {
   handleLogic = () => {
     const urlParameters = this.externalParameter;
 
+    // logConsole(urlParameters, 'handleLogic');
+
     const { scene } = {
       scene: '',
       ...urlParameters,
     };
 
+    const sceneData = analysisScene(scene);
+
     const that = this;
 
+    let needPretreatmentUrlParameters = false;
+
     if (isObject(urlParameters) && !isEmptyObject(urlParameters)) {
-      that.pretreatmentUrlParameters(urlParameters);
+      needPretreatmentUrlParameters = true;
     }
 
-    if (checkStringIsNullOrWhiteSpace(scene)) {
-      that.handleParams(urlParameters);
-    } else {
+    if (isObject(sceneData) && !isEmptyObject(sceneData)) {
+      needPretreatmentUrlParameters = true;
+    }
+
+    if (needPretreatmentUrlParameters) {
+      that.pretreatmentUrlParameters(urlParameters, sceneData);
+    }
+
+    const { shareId } = {
+      shareId: '',
+      ...sceneData,
+    };
+
+    if (!checkStringIsNullOrWhiteSpace(shareId)) {
       that.exchangeShareData({
-        scene,
+        shareId,
         urlParams: urlParameters,
         callback: (p) => {
           that.handleParams(p);
         },
       });
+
+      return;
     }
+
+    if (isObject(urlParameters) && !isEmptyObject(urlParameters)) {
+      that.handleParams(urlParameters);
+
+      return;
+    }
+
+    this.showNavigationNotice();
+
+    this.goToHomeTab();
   };
 
-  exchangeShareData = ({ scene, urlParams, callback }) => {
-    if (checkStringIsNullOrWhiteSpace(scene)) {
-      this.showNavigationNotice();
-
-      this.goToHomeTab();
-    }
-
-    const json = `{${decodeURIComponent(scene)
-      .split('&')
-      .map((o) => {
-        const item = `"${o}"`.replace('=', '":"');
-
-        return item;
-      })
-      .join(',')}}`;
-
-    const shareData = JSON.parse(json);
-
-    const { shareId } = shareData;
-
+  exchangeShareData = ({ shareId, urlParams, callback }) => {
     if (checkStringIsNullOrWhiteSpace(shareId)) {
       const text = '无效的分享标识';
 
@@ -141,11 +159,11 @@ class PageMain extends PageWrapper {
     }
   };
 
-  pretreatmentUrlParameters(urlParameters) {
+  pretreatmentUrlParameters(urlParameters, sceneData) {
     if (judgeComplain(getLaunchOption())) {
-      const { subsidiaryId } = {
-        subsidiaryId: '',
-        ...urlParameters,
+      const { s: subsidiaryId } = {
+        s: '',
+        ...sceneData,
       };
 
       if (!checkStringIsNullOrWhiteSpace(subsidiaryId)) {
