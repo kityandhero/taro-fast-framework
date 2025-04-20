@@ -1,11 +1,14 @@
 import { CustomWrapper, View } from '@tarojs/components';
 
+import { checkStringIsNullOrWhiteSpace } from 'easy-soft-utility';
+
 import { navigateBack, transformSize } from 'taro-fast-common';
 import { Button, Space } from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../customComponents';
-import { HeadNavigationBox } from '../../../utils';
+import { getSubsidiaryIdCache, HeadNavigationBox } from '../../../utils';
 import { viewStyle } from '../../customConfig';
+import { fieldDataBaseSubsidiaryMessage } from '../../fieldDataCollection';
 import { buildMessageListItem } from '../../utils';
 
 class BasePageListMessage extends PageNeedSignInWrapper {
@@ -32,6 +35,18 @@ class BasePageListMessage extends PageNeedSignInWrapper {
       ...this.state,
     };
   }
+
+  supplementLoadRequestParams = (o) => {
+    const subsidiaryId = getSubsidiaryIdCache();
+
+    if (checkStringIsNullOrWhiteSpace(subsidiaryId)) {
+      return { ...o };
+    }
+
+    o[fieldDataBaseSubsidiaryMessage.subsidiaryId.name] = subsidiaryId;
+
+    return { ...o };
+  };
 
   doWorkWhenRepeatedShow = () => {
     this.reloadData({
