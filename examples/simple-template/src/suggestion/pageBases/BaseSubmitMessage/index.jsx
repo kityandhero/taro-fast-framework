@@ -3,12 +3,19 @@ import { View } from '@tarojs/components';
 import {
   checkStringIsNullOrWhiteSpace,
   getValueByKey,
+  logConsole,
   showSimpleWarningMessage,
   showSimpleWarnMessage,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
-import { Button, InputItem, Line, RadioPopup } from 'taro-fast-component';
+import {
+  Button,
+  ImagePicker,
+  InputItem,
+  Line,
+  RadioPopup,
+} from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../customComponents';
 import { getSubsidiaryIdCache, HeadNavigationBox } from '../../../utils';
@@ -279,6 +286,14 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     this.subsidiaryComplaintCategoryId = value;
   };
 
+  triggerImagePickerChanged = (files, operationType, index) => {
+    logConsole({
+      files,
+      operationType,
+      index,
+    });
+  };
+
   buildHeadNavigation = () => {
     return (
       <HeadNavigationBox title={this.messagePageTitle || '缺少页面标题'} />
@@ -491,6 +506,26 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
             areaMode
             areaHeight={460}
             afterChange={this.triggerDescriptionChanged}
+          />
+
+          <Line transparent height={20} />
+
+          <Line color="#ccc" height={2} />
+
+          <Line transparent height={20} />
+
+          <ImagePicker
+            multiple
+            count={10}
+            files={[]}
+            // eslint-disable-next-line no-unused-vars
+            onChange={(files, operationType, index) => {
+              this.triggerImagePickerChanged(files, operationType, index);
+            }}
+            // eslint-disable-next-line no-unused-vars
+            onFail={(message) => {
+              // this.selectFileFail(message);
+            }}
           />
         </View>
 

@@ -3,7 +3,17 @@ import React, { Component } from 'react';
 import { Image, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { checkInCollection, getGuid, isFunction } from 'easy-soft-utility';
+import {
+  checkInCollection,
+  getGuid,
+  isArray,
+  isFunction,
+  toMd5,
+} from 'easy-soft-utility';
+
+import { transformSize } from 'taro-fast-common';
+
+import { ActionSheet } from '../ActionSheet';
 
 import './index.less';
 
@@ -42,14 +52,15 @@ const imagePickerModeList = [
 ];
 
 const defaultProps = {
+  afterChange: () => {},
   className: '',
+  confirmRemove: true,
   customStyle: '',
   files: [],
-  mode: imagePickerModeCollection.aspectFill,
-  showAddBtn: true,
-  multiple: false,
   length: 4,
-  onChange: () => {},
+  mode: imagePickerModeCollection.aspectFill,
+  multiple: false,
+  showAddBtn: true,
 };
 
 // 生成 jsx 二维矩阵
@@ -85,6 +96,44 @@ const generateMatrix = (files, col, showAddButton) => {
 const ENV = Taro.getEnv();
 
 class ImagePicker extends Component {
+  itemWillRemove = null;
+
+  itemIndexWillRemove = -1;
+
+  constructor(properties) {
+    super(properties);
+
+    const { files } = properties;
+
+    this.state = {
+      filesFlag: toMd5(JSON.stringify(isArray(files) ? files : [])),
+      filesStage: files,
+      confirmVisible: false,
+    };
+  }
+
+  static getDerivedStateFromProps(nextProperties, previousState) {
+    const { files: filesNext } = nextProperties;
+    const { filesFlag: filesFlagPrevious } = previousState;
+
+    const filesFlagNext = toMd5(
+      JSON.stringify(isArray(filesNext) ? filesNext : []),
+    );
+
+    let filesData = {};
+
+    if (filesFlagPrevious !== filesFlagNext) {
+      filesData = {
+        filesFlag: filesFlagNext,
+        filesStage: filesNext,
+      };
+    }
+
+    return {
+      ...filesData,
+    };
+  }
+
   getMode = () => {
     const { mode } = this.props;
 
@@ -96,7 +145,8 @@ class ImagePicker extends Component {
   };
 
   chooseImage = () => {
-    const { files = [], multiple, count, sizeType, sourceType } = this.props;
+    const { multiple, count, sizeType, sourceType } = this.props;
+    const { filesStage: files } = this.state;
     const filePathName =
       ENV === Taro.ENV_TYPE.ALIPAY ? 'apFilePaths' : 'tempFiles';
     // const count = multiple ? 99 : 1
@@ -118,7 +168,9 @@ class ImagePicker extends Component {
       parameters.sourceType = sourceType;
     }
 
-    const { onChange, onFail } = this.props;
+    const { afterChange, onFail } = this.props;
+
+    const that = this;
 
     Taro.chooseImage(parameters)
       .then((o) => {
@@ -129,9 +181,20 @@ class ImagePicker extends Component {
 
         const newFiles = [...files, ...targetFiles];
 
-        if (isFunction(onChange)) {
-          onChange(newFiles, 'add');
-        }
+        that.setState(
+          {
+            filesStage: newFiles,
+          },
+          () => {
+            if (isFunction(afterChange)) {
+              afterChange({
+                fileList: newFiles,
+                fileChangedList: targetFiles,
+                type: 'add',
+              });
+            }
+          },
+        );
 
         return;
       })
@@ -144,41 +207,73 @@ class ImagePicker extends Component {
       });
   };
 
-  handleImageClick = (index) => {
+  handleImageClick = (item, index) => {
     const { onImageClick } = this.props;
+    const { filesStage: files } = this.state;
 
     if (!isFunction(onImageClick)) {
       return;
     }
 
-    onImageClick(index, this.props.files[index]);
+    onImageClick(index, files[index]);
   };
 
-  handleRemoveImg = (index, event) => {
-    const { files = [], onChange } = this.props;
+  confirmImageRemove = () => {
+    this.setState({
+      confirmVisible: true,
+    });
+  };
 
-    event.stopPropagation();
-    event.preventDefault();
+  closeConfirm = () => {
+    this.setState({
+      confirmVisible: false,
+    });
+  };
+
+  handleImageRemove = () => {
+    const { afterChange } = this.props;
+    const { filesStage: files } = this.state;
 
     if (ENV === Taro.ENV_TYPE.WEB) {
-      window.URL.revokeObjectURL(files[index].url);
+      window.URL.revokeObjectURL(files[this.itemIndexWillRemove].url);
     }
 
-    const newFiles = files.filter((_, index_) => index_ !== index);
+    const newFiles = [];
+    const fileChangedList = [];
 
-    if (isFunction(onChange)) {
-      onChange(newFiles, 'remove', index);
+    for (const [index, one] of files.entries()) {
+      if (index === this.itemIndexWillRemove) {
+        fileChangedList.push(one);
+      } else {
+        newFiles.push(one);
+      }
     }
+
+    this.setState(
+      {
+        filesStage: newFiles,
+      },
+      () => {
+        if (isFunction(afterChange)) {
+          afterChange({
+            fileList: newFiles,
+            fileChangedList: fileChangedList,
+            type: 'remove',
+          });
+        }
+      },
+    );
   };
 
   render() {
     const {
       className,
       customStyle,
-      files,
       length = 4,
       showAddBtn: showAddButton = true,
+      confirmRemove,
     } = this.props;
+    const { confirmVisible, filesStage: files } = this.state;
 
     const rowLength = length <= 0 ? 1 : length;
     // 行数
@@ -187,58 +282,91 @@ class ImagePicker extends Component {
 
     const mode = this.getMode();
 
+    const that = this;
+
     return (
-      <View className={rootClass} style={customStyle}>
-        {matrix.map((row, index) => (
-          <View className={`${classPrefix}__flex-box`} key={index + 1}>
-            {row.map((item, index_) =>
-              item.url ? (
-                <View
-                  className={`${classPrefix}__flex-item`}
-                  key={index * length + index_}
-                >
-                  <View className={`${classPrefix}__item`}>
-                    <View
-                      className={`${classPrefix}__remove-btn`}
-                      onClick={this.handleRemoveImg.bind(
-                        this,
-                        index * length + index_,
-                      )}
-                    ></View>
-                    <Image
-                      className={`${classPrefix}__preview-img`}
-                      mode={mode}
-                      src={item.url}
-                      onClick={this.handleImageClick.bind(
-                        this,
-                        index * length + index_,
-                      )}
-                    />
-                  </View>
-                </View>
-              ) : (
-                <View
-                  className={`${classPrefix}__flex-item`}
-                  key={`empty_${index * length}${index_}`}
-                >
-                  {item.type === 'btn' && (
-                    <View onClick={this.chooseImage}>
-                      {this.props.children || (
-                        <View
-                          className={`${classPrefix}__item ${classPrefix}__choose-btn`}
-                        >
-                          <View className="add-bar"></View>
-                          <View className="add-bar"></View>
-                        </View>
-                      )}
+      <>
+        <View className={rootClass} style={customStyle}>
+          {matrix.map((row, index) => (
+            <View className={`${classPrefix}__flex-box`} key={index + 1}>
+              {row.map((item, index_) =>
+                item.url ? (
+                  <View
+                    className={`${classPrefix}__flex-item`}
+                    key={index * length + index_}
+                  >
+                    <View className={`${classPrefix}__item`}>
+                      <View
+                        className={`${classPrefix}__remove-btn`}
+                        onClick={(event) => {
+                          that.itemWillRemove = item;
+                          that.itemIndexWillRemove = index * length + index_;
+
+                          event.stopPropagation();
+                          event.preventDefault();
+
+                          if (confirmRemove) {
+                            that.confirmImageRemove();
+                          } else {
+                            that.handleImageRemove();
+                          }
+                        }}
+                      ></View>
+
+                      <Image
+                        className={`${classPrefix}__preview-img`}
+                        mode={mode}
+                        src={item.url}
+                        onClick={() => {
+                          that.handleImageClick(item, index * length + index_);
+                        }}
+                      />
                     </View>
-                  )}
-                </View>
-              ),
-            )}
-          </View>
-        ))}
-      </View>
+                  </View>
+                ) : (
+                  <View
+                    className={`${classPrefix}__flex-item`}
+                    key={`empty_${index * length}${index_}`}
+                  >
+                    {item.type === 'btn' && (
+                      <View onClick={this.chooseImage}>
+                        {this.props.children || (
+                          <View
+                            className={`${classPrefix}__item ${classPrefix}__choose-btn`}
+                          >
+                            <View className="add-bar"></View>
+                            <View className="add-bar"></View>
+                          </View>
+                        )}
+                      </View>
+                    )}
+                  </View>
+                ),
+              )}
+            </View>
+          ))}
+        </View>
+
+        <ActionSheet
+          cancelText="取消"
+          visible={confirmVisible}
+          title="即将移除图片，确定吗?"
+          headerStyle={{
+            color: '#000',
+            fontSize: transformSize(32),
+          }}
+          options={[
+            {
+              value: 'ok',
+              content: '确定',
+            },
+          ]}
+          onOptionClick={this.handleImageRemove}
+          onClose={() => {
+            this.closeConfirm();
+          }}
+        />
+      </>
     );
   }
 }

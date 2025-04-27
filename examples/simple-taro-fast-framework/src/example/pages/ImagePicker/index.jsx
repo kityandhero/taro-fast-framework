@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
+import { logConsole } from 'easy-soft-utility';
 
 import { Card, ImagePicker, Space } from 'taro-fast-component';
 
@@ -43,8 +44,12 @@ export default class Index extends ContentPageBase {
               multiple
               count={10}
               files={[]}
-              // eslint-disable-next-line no-unused-vars
-              onChange={(files, operationType, index) => {
+              afterChange={({ fileList, fileChangedList, type }) => {
+                logConsole({
+                  fileList,
+                  fileChangedList,
+                  type,
+                });
                 // this.selectFileChanged(files, operationType, index);
               }}
               // eslint-disable-next-line no-unused-vars

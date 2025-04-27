@@ -148,6 +148,12 @@
           "scene": null
         },
         {
+          "name": "example/action/imagePicker",
+          "pathName": "example/pages/imagePicker/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "templateRemote/entry",
           "pathName": "templateRemote/pages/entry/main/index",
           "query": "",
