@@ -6,6 +6,7 @@ import {
   whetherNumber,
 } from 'easy-soft-utility';
 
+import { uploadImageDataApiAddress } from '../../../../services/subsidiaryReportMessage';
 import { fieldDataSubsidiary } from '../../../fieldDataCollection';
 import { BaseSubmitMessage } from '../../../pageBases';
 import { submitReportMessageAction } from '../assist/action';
@@ -44,6 +45,8 @@ class SubmitReport extends BaseSubmitMessage {
 
   descriptionPlaceholder =
     '为利于意见和建议得到及时处理，请明确填写相关问的时间，地点，事件过程。';
+
+  uploadImageApiAddress = uploadImageDataApiAddress;
 
   constructor(properties) {
     super(properties);

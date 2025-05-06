@@ -29,3 +29,13 @@ export async function addData(parameters) {
     params: parameters,
   });
 }
+
+export const uploadImageDataApiAddress =
+  '/wechatApplication/subsidiaryComplaintMessage/uploadImage';
+
+export async function uploadImageData(parameters) {
+  return request({
+    api: uploadImageDataApiAddress,
+    params: parameters,
+  });
+}

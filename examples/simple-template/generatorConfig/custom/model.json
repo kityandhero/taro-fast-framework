@@ -225,6 +225,13 @@
           "effect": "add",
           "service": "addData",
           "type": "singleData"
+        },
+        {
+          "title": "上传图片",
+          "api": "/wechatApplication/subsidiaryComplaintMessage/uploadImage",
+          "effect": "uploadImage",
+          "service": "uploadImageData",
+          "type": "singleData"
         }
       ],
       "cover": true,
@@ -253,6 +260,13 @@
           "effect": "add",
           "service": "addData",
           "type": "singleData"
+        },
+        {
+          "title": "上传图片",
+          "api": "/wechatApplication/subsidiaryReportMessage/uploadImage",
+          "effect": "uploadImage",
+          "service": "uploadImageData",
+          "type": "singleData"
         }
       ],
       "cover": true,
@@ -280,6 +294,13 @@
           "api": "/wechatApplication/subsidiaryFeedbackMessage/add",
           "effect": "add",
           "service": "addData",
+          "type": "singleData"
+        },
+        {
+          "title": "上传图片",
+          "api": "/wechatApplication/subsidiaryFeedbackMessage/uploadImage",
+          "effect": "uploadImage",
+          "service": "uploadImageData",
           "type": "singleData"
         }
       ],

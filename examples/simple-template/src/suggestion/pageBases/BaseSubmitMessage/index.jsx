@@ -3,6 +3,8 @@ import { View } from '@tarojs/components';
 import {
   checkStringIsNullOrWhiteSpace,
   getValueByKey,
+  isArray,
+  isEmptyArray,
   logConsole,
   showSimpleWarningMessage,
   showSimpleWarnMessage,
@@ -112,6 +114,12 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
 
   description = '';
 
+  uploadImageApiAddress = '';
+
+  fileList = [];
+
+  attachmentCollection = '';
+
   constructor(properties) {
     super(properties);
 
@@ -219,10 +227,13 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   };
 
   buildMessageData = () => {
+    this.uploadMessageAttachment();
+
     const result = {
       subsidiaryId: this.subsidiaryId,
       title: this.title,
       description: this.description,
+      attachmentCollection: this.attachmentCollection,
       ...(this.selectComplaintCategorySwitch
         ? {
             subsidiaryComplaintCategoryId: this.subsidiaryComplaintCategoryId,
@@ -233,11 +244,57 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     return result;
   };
 
+  uploadMessageAttachment = () => {
+    if (checkStringIsNullOrWhiteSpace(this.uploadImageApiAddress)) {
+      throw new Error('uploadImageApiAddress need set');
+    }
+
+    logConsole({ uploadImageApiAddress: this.uploadImageApiAddress });
+
+    if (!isArray(this.fileList) || isEmptyArray(this.fileList)) {
+      return;
+    }
+
+    const that = this;
+
+    for (const item of that.fileList) {
+      const { file } = item;
+
+      const { path = '' } = {
+        path: '',
+        ...file,
+      };
+
+      if (checkStringIsNullOrWhiteSpace(path)) {
+        continue;
+      }
+
+      that.uploadSingleImage({
+        uploadUrl: that.uploadImageApiAddress,
+        filePath: path,
+        name: 'file',
+        successCallback: ({ data }) => {
+          const { uploadHistoryId } = {
+            uploadHistoryId: '',
+            ...data,
+          };
+
+          that.attachmentCollection = [
+            ...that.attachmentCollection,
+            uploadHistoryId,
+          ];
+        },
+      });
+    }
+  };
+
   submitMessage = () => {
     throw new Error('submitMessage need overrode to implement');
   };
 
   confirmSubmit = () => {
+    logConsole({ files: this.fileList });
+
     if (checkStringIsNullOrWhiteSpace(this.subsidiaryId)) {
       showSimpleWarnMessage(this.selectSubsidiaryPlaceholder);
 
@@ -286,12 +343,14 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     this.subsidiaryComplaintCategoryId = value;
   };
 
-  triggerImagePickerChanged = (files, operationType, index) => {
+  triggerImagePickerChanged = ({ fileList, fileChangedList, type }) => {
     logConsole({
-      files,
-      operationType,
-      index,
+      fileList,
+      fileChangedList,
+      type,
     });
+
+    this.fileList = [...fileList];
   };
 
   buildHeadNavigation = () => {
@@ -519,8 +578,12 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
             count={10}
             files={[]}
             // eslint-disable-next-line no-unused-vars
-            onChange={(files, operationType, index) => {
-              this.triggerImagePickerChanged(files, operationType, index);
+            afterChange={({ fileList, fileChangedList, type }) => {
+              this.triggerImagePickerChanged({
+                fileList,
+                fileChangedList,
+                type,
+              });
             }}
             // eslint-disable-next-line no-unused-vars
             onFail={(message) => {
