@@ -5,7 +5,6 @@ import {
   getValueByKey,
   isArray,
   isEmptyArray,
-  logConsole,
   showSimpleWarningMessage,
   showSimpleWarnMessage,
 } from 'easy-soft-utility';
@@ -249,8 +248,6 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
       throw new Error('uploadImageApiAddress need set');
     }
 
-    logConsole({ uploadImageApiAddress: this.uploadImageApiAddress });
-
     if (!isArray(this.fileList) || isEmptyArray(this.fileList)) {
       return;
     }
@@ -293,8 +290,6 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   };
 
   confirmSubmit = () => {
-    logConsole({ files: this.fileList });
-
     if (checkStringIsNullOrWhiteSpace(this.subsidiaryId)) {
       showSimpleWarnMessage(this.selectSubsidiaryPlaceholder);
 
@@ -343,13 +338,8 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     this.subsidiaryComplaintCategoryId = value;
   };
 
+  // eslint-disable-next-line no-unused-vars
   triggerImagePickerChanged = ({ fileList, fileChangedList, type }) => {
-    logConsole({
-      fileList,
-      fileChangedList,
-      type,
-    });
-
     this.fileList = [...fileList];
   };
 

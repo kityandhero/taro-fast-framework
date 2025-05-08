@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.16.48
+
+### Patch Changes
+
+- 调整ImagePicker组件
+
 ## 1.16.47
 
 ### Patch Changes

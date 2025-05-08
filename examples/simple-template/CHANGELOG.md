@@ -1,5 +1,11 @@
 # taro-fast-framework-template
 
+## 1.0.33
+
+### Patch Changes
+
+- 调整ImagePicker组件
+
 ## 1.0.32
 
 ### Patch Changes

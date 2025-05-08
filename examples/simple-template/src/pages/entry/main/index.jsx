@@ -73,8 +73,6 @@ class PageMain extends PageWrapper {
   handleLogic = () => {
     const urlParameters = this.externalParameter;
 
-    // logConsole(urlParameters, 'handleLogic');
-
     const { scene } = {
       scene: '',
       ...urlParameters,
