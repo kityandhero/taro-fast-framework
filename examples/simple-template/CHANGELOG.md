@@ -1,10 +1,22 @@
 # taro-fast-framework-template
 
+## 1.0.35
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-design-playground@3.0.26
+  - taro-fast-component-extra@3.0.39
+  - taro-fast-component-prism@3.0.40
+  - taro-fast-component@3.0.39
+  - taro-fast-framework@3.1.33
+
 ## 1.0.33
 
 ### Patch Changes
 
-- 调整ImagePicker组件
+- ����ImagePicker���
 
 ## 1.0.32
 

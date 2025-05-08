@@ -1,5 +1,23 @@
 # Change Log
 
+## 3.0.39
+
+### Patch Changes
+
+- update
+
+## 3.0.38
+
+### Patch Changes
+
+- 调整 ImagePicker 组件
+
+## 3.0.37
+
+### Patch Changes
+
+- update
+
 ## 3.0.36
 
 ### Patch Changes

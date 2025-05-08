@@ -53,20 +53,22 @@ const imagePickerModeList = [
 
 const defaultProps = {
   afterChange: () => {},
+  canAdd: true,
   className: '',
+  canRemove: true,
   confirmRemove: true,
   customStyle: '',
   files: [],
   length: 4,
   mode: imagePickerModeCollection.aspectFill,
   multiple: false,
-  showAddBtn: true,
+  onImageClick: null,
 };
 
 // 生成 jsx 二维矩阵
-const generateMatrix = (files, col, showAddButton) => {
+const generateMatrix = (files, col, canAdd) => {
   const matrix = [];
-  const length = showAddButton ? files.length + 1 : files.length;
+  const length = canAdd ? files.length + 1 : files.length;
   const row = Math.ceil(length / col);
 
   for (let index = 0; index < row; index++) {
@@ -75,7 +77,7 @@ const generateMatrix = (files, col, showAddButton) => {
       const lastArray = files.slice(index * col);
 
       if (lastArray.length < col) {
-        if (showAddButton) {
+        if (canAdd) {
           lastArray.push({ type: 'btn', uuid: getGuid() });
         }
 
@@ -90,6 +92,7 @@ const generateMatrix = (files, col, showAddButton) => {
       matrix.push(files.slice(index * col, (index + 1) * col));
     }
   }
+
   return matrix;
 };
 
@@ -215,7 +218,7 @@ class ImagePicker extends Component {
       return;
     }
 
-    onImageClick(index, files[index]);
+    onImageClick(item, index, files);
   };
 
   confirmImageRemove = () => {
@@ -267,17 +270,18 @@ class ImagePicker extends Component {
 
   render() {
     const {
+      canAdd = true,
+      canRemove,
       className,
+      confirmRemove,
       customStyle,
       length = 4,
-      showAddBtn: showAddButton = true,
-      confirmRemove,
     } = this.props;
     const { confirmVisible, filesStage: files } = this.state;
 
     const rowLength = length <= 0 ? 1 : length;
     // 行数
-    const matrix = generateMatrix(files, rowLength, showAddButton);
+    const matrix = generateMatrix(files, rowLength, canAdd);
     const rootClass = classNames(classPrefix, className);
 
     const mode = this.getMode();
@@ -296,22 +300,24 @@ class ImagePicker extends Component {
                     key={index * length + index_}
                   >
                     <View className={`${classPrefix}__item`}>
-                      <View
-                        className={`${classPrefix}__remove-btn`}
-                        onClick={(event) => {
-                          that.itemWillRemove = item;
-                          that.itemIndexWillRemove = index * length + index_;
+                      {canRemove ? (
+                        <View
+                          className={`${classPrefix}__remove-btn`}
+                          onClick={(event) => {
+                            that.itemWillRemove = item;
+                            that.itemIndexWillRemove = index * length + index_;
 
-                          event.stopPropagation();
-                          event.preventDefault();
+                            event.stopPropagation();
+                            event.preventDefault();
 
-                          if (confirmRemove) {
-                            that.confirmImageRemove();
-                          } else {
-                            that.handleImageRemove();
-                          }
-                        }}
-                      ></View>
+                            if (confirmRemove) {
+                              that.confirmImageRemove();
+                            } else {
+                              that.handleImageRemove();
+                            }
+                          }}
+                        ></View>
+                      ) : null}
 
                       <Image
                         className={`${classPrefix}__preview-img`}

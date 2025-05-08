@@ -1,5 +1,28 @@
 # Change Log
 
+## 3.0.26
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-component@3.0.39
+
+## 3.0.25
+
+### Patch Changes
+
+- 调整 ImagePicker 组件
+- Updated dependencies
+  - taro-fast-component@3.0.38
+
+## 3.0.24
+
+### Patch Changes
+
+- Updated dependencies
+  - taro-fast-component@3.0.37
+
 ## 3.0.23
 
 ### Patch Changes

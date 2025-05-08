@@ -1,6 +1,12 @@
 import { formNameCollection } from '../../customConfig';
 
-const fieldExtraData = {};
+const fieldExtraData = {
+  listAttachment: {
+    label: '附件列表',
+    name: 'listAttachment',
+    helper: '',
+  },
+};
 
 export const fieldDataBaseSubsidiaryMessage = {
   ...formNameCollection,

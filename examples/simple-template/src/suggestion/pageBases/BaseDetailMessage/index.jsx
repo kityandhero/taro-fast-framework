@@ -3,18 +3,26 @@ import { View } from '@tarojs/components';
 import {
   buildLinearGradient,
   checkStringIsNullOrWhiteSpace,
+  convertCollection,
   getValueByKey,
   logException,
   toNumber,
   whetherNumber,
 } from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common';
-import { CenterBox, ColorText, FlexBox, Line } from 'taro-fast-component';
+import { previewImage, transformSize } from 'taro-fast-common';
+import {
+  CenterBox,
+  ColorText,
+  FlexBox,
+  ImagePicker,
+  Line,
+} from 'taro-fast-component';
 
 import { PageNeedSignInWrapper } from '../../../customComponents';
 import { HeadNavigationBox } from '../../../utils';
 import { viewStyle } from '../../customConfig';
+import { fieldDataBaseSubsidiaryMessage } from '../../fieldDataCollection';
 
 const titleBoxStyle = {
   fontSize: transformSize(40),
@@ -68,6 +76,7 @@ class BaseDetailMessage extends PageNeedSignInWrapper {
 
     this.state = {
       ...this.state,
+      listAttachment: [],
     };
   }
 
@@ -95,9 +104,66 @@ class BaseDetailMessage extends PageNeedSignInWrapper {
     throw new Error('getRequestParamsName need overrode to implement');
   };
 
+  doOtherAfterLoadSuccess = ({
+    // eslint-disable-next-line no-unused-vars
+    metaData = null,
+    // eslint-disable-next-line no-unused-vars
+    metaListData = [],
+    // eslint-disable-next-line no-unused-vars
+    metaExtra = null,
+    // eslint-disable-next-line no-unused-vars
+    metaOriginalData = null,
+  }) => {
+    const listAttachment = getValueByKey({
+      data: metaData,
+      key: fieldDataBaseSubsidiaryMessage.listAttachment.name,
+      convert: convertCollection.array,
+    });
+
+    this.setState({
+      existAttachment: listAttachment.length > 0,
+      listAttachment: [...listAttachment],
+    });
+  };
+
   buildHeadNavigation = () => {
     return (
       <HeadNavigationBox title={this.messagePageTitle || '缺少页面标题'} />
+    );
+  };
+
+  renderAttachmentArea = () => {
+    const { existAttachment, listAttachment } = this.state;
+
+    if (!existAttachment) {
+      return null;
+    }
+
+    return (
+      <>
+        <Line transparent height={20} />
+
+        <Line color="#ccc" height={2} />
+
+        <Line transparent height={20} />
+
+        <ImagePicker
+          canAdd={false}
+          canRemove={false}
+          multiple
+          count={10}
+          files={listAttachment}
+          // eslint-disable-next-line no-unused-vars
+          onImageClick={(item, index, files) => {
+            const { url } = {
+              url: '',
+              ...item,
+            };
+
+            previewImage({ urls: [url] });
+          }}
+        />
+      </>
     );
   };
 
@@ -133,7 +199,11 @@ class BaseDetailMessage extends PageNeedSignInWrapper {
 
         <Line transparent height={36} />
 
-        <View style={descriptionBoxStyle}>{description || '缺少简介'}</View>
+        <View style={descriptionBoxStyle}>
+          {description || '缺少简介'}
+
+          {this.renderAttachmentArea()}
+        </View>
       </>
     );
   };

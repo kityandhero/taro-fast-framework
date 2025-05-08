@@ -5,6 +5,8 @@ import {
   getValueByKey,
   isArray,
   isEmptyArray,
+  isNull,
+  logConsole,
   showSimpleWarningMessage,
   showSimpleWarnMessage,
 } from 'easy-soft-utility';
@@ -68,6 +70,8 @@ const buttonBoxStyle = {
 const placeholderColor = '#979797';
 
 const lineHeight = 52;
+
+let fileWaitUploadCollection = [];
 
 class BaseSubmitMessage extends PageNeedSignInWrapper {
   // showCallTrack = true;
@@ -226,13 +230,11 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   };
 
   buildMessageData = () => {
-    this.uploadMessageAttachment();
-
     const result = {
       subsidiaryId: this.subsidiaryId,
       title: this.title,
       description: this.description,
-      attachmentCollection: this.attachmentCollection,
+      attachmentCollection: this.attachmentCollection.join(','),
       ...(this.selectComplaintCategorySwitch
         ? {
             subsidiaryComplaintCategoryId: this.subsidiaryComplaintCategoryId,
@@ -240,56 +242,87 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
         : {}),
     };
 
+    logConsole(result);
+
     return result;
   };
 
-  uploadMessageAttachment = () => {
+  uploadMessageAttachment = ({ successCallback }) => {
     if (checkStringIsNullOrWhiteSpace(this.uploadImageApiAddress)) {
       throw new Error('uploadImageApiAddress need set');
     }
 
-    if (!isArray(this.fileList) || isEmptyArray(this.fileList)) {
+    if (
+      !isArray(fileWaitUploadCollection) ||
+      isEmptyArray(fileWaitUploadCollection)
+    ) {
+      successCallback();
+
       return;
     }
 
     const that = this;
 
-    for (const item of that.fileList) {
-      const { file } = item;
+    const fileData = fileWaitUploadCollection.shift();
 
-      const { path = '' } = {
-        path: '',
-        ...file,
-      };
+    if (isNull(fileData)) {
+      that.uploadMessageAttachment({ successCallback });
 
-      if (checkStringIsNullOrWhiteSpace(path)) {
-        continue;
-      }
-
-      that.uploadSingleImage({
-        uploadUrl: that.uploadImageApiAddress,
-        filePath: path,
-        name: 'file',
-        successCallback: ({ data }) => {
-          const { uploadHistoryId } = {
-            uploadHistoryId: '',
-            ...data,
-          };
-
-          that.attachmentCollection = [
-            ...that.attachmentCollection,
-            uploadHistoryId,
-          ];
-        },
-      });
+      return;
     }
+
+    const { file } = fileData;
+
+    const { path = '' } = {
+      path: '',
+      ...file,
+    };
+
+    if (checkStringIsNullOrWhiteSpace(path)) {
+      that.uploadMessageAttachment({ successCallback });
+
+      return;
+    }
+
+    that.uploadSingleImage({
+      uploadUrl: that.uploadImageApiAddress,
+      filePath: path,
+      name: 'file',
+      successCallback: ({ data }) => {
+        const { uploadHistoryId } = {
+          uploadHistoryId: '',
+          ...data,
+        };
+
+        that.attachmentCollection = [
+          ...that.attachmentCollection,
+          uploadHistoryId,
+        ];
+
+        that.uploadMessageAttachment({ successCallback });
+      },
+    });
   };
 
   submitMessage = () => {
     throw new Error('submitMessage need overrode to implement');
   };
 
+  submit = () => {
+    fileWaitUploadCollection = this.fileList;
+
+    const that = this;
+
+    that.uploadMessageAttachment({
+      successCallback: () => {
+        that.submitMessage();
+      },
+    });
+  };
+
   confirmSubmit = () => {
+    logConsole({ files: this.fileList });
+
     if (checkStringIsNullOrWhiteSpace(this.subsidiaryId)) {
       showSimpleWarnMessage(this.selectSubsidiaryPlaceholder);
 
@@ -338,8 +371,13 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     this.subsidiaryComplaintCategoryId = value;
   };
 
-  // eslint-disable-next-line no-unused-vars
   triggerImagePickerChanged = ({ fileList, fileChangedList, type }) => {
+    logConsole({
+      fileList,
+      fileChangedList,
+      type,
+    });
+
     this.fileList = [...fileList];
   };
 
@@ -611,7 +649,7 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
             color: '#000',
             fontSize: transformSize(32),
           }}
-          afterOk={this.submitMessage}
+          afterOk={this.submit}
         />
       </>
     );
