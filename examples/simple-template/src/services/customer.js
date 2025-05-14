@@ -28,6 +28,36 @@ export async function setGenderData(parameters) {
   });
 }
 
+export const refreshVerifyPhoneCaptchaDataApiAddress =
+  '/wechatApplication/customer/refreshVerifyPhoneCaptcha';
+
+export async function refreshVerifyPhoneCaptchaData(parameters) {
+  return request({
+    api: refreshVerifyPhoneCaptchaDataApiAddress,
+    params: parameters,
+  });
+}
+
+export const sendVerifyPhoneMessageDataApiAddress =
+  '/wechatApplication/customer/sendVerifyPhoneMessage';
+
+export async function sendVerifyPhoneMessageData(parameters) {
+  return request({
+    api: sendVerifyPhoneMessageDataApiAddress,
+    params: parameters,
+  });
+}
+
+export const verifyPhoneDataApiAddress =
+  '/wechatApplication/customer/verifyPhone';
+
+export async function verifyPhoneData(parameters) {
+  return request({
+    api: verifyPhoneDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const uploadImageDataApiAddress =
   '/wechatApplication/customer/uploadImage';
 

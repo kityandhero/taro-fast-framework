@@ -16,6 +16,9 @@ export const resetPasswordShieldBlue = `${filePrefix}1834035653227188224.png`;
 export const resetPasswordShieldGrey = `${filePrefix}1834145367885746176.png`;
 export const resetPasswordKeyBlue = `${filePrefix}1834146507838853120.png`;
 
+export const verifyPhoneImage = `${filePrefix}1834035561451622400.png`;
+export const verifyPhoneShieldBlue = `${filePrefix}1834035653227188224.png`;
+
 export const ellipsisVerticalImage = `${filePrefix}1834582979146551296.png`;
 export const clockGreyImage = `${filePrefix}1835127965797715968.png`;
 export const userGreyImage = `${filePrefix}1835127918024593408.png`;

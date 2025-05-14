@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { showSuccessNotification } from 'easy-soft-utility';
+import { showSuccessNotification, whetherNumber } from 'easy-soft-utility';
 
 import { emptyAvatar, transformSize } from 'taro-fast-common';
 import {
@@ -122,12 +122,13 @@ class EditInformation extends PageNeedSignInWrapper {
   renderFurther() {
     const { currentCustomer } = this.state;
 
-    const { name, avatar, phone, genderNote } = {
+    const { name, avatar, phone, genderNote, whetherPhoneVerify } = {
       nickname: '',
       userId: '',
       avatar: emptyAvatar,
       phone: '',
       genderNote: '未设置',
+      whetherPhoneVerify: whetherNumber.no,
       ...currentCustomer,
     };
 
@@ -202,6 +203,13 @@ class EditInformation extends PageNeedSignInWrapper {
                   text={phone || '尚未设置'}
                 />
               }
+              onClick={() => {
+                if (whetherPhoneVerify === whetherNumber.yes) {
+                  return;
+                }
+
+                this.goToSuggestionVerifyPhone();
+              }}
             />
           </Space>
         </View>

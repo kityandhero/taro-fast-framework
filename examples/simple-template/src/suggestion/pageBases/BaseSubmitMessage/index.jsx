@@ -6,9 +6,9 @@ import {
   isArray,
   isEmptyArray,
   isNull,
-  logConsole,
   showSimpleWarningMessage,
   showSimpleWarnMessage,
+  whetherNumber,
 } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
@@ -17,6 +17,7 @@ import {
   ImagePicker,
   InputItem,
   Line,
+  Modal,
   RadioPopup,
 } from 'taro-fast-component';
 
@@ -128,6 +129,8 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
 
     this.state = {
       ...this.state,
+      customer: null,
+      verifyPhoneModalVisible: false,
       subsidiaryList: [],
       complaintCategoryList: [],
       canSubmit: true,
@@ -135,6 +138,20 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
       subsidiaryShortNameFromCache: '',
     };
   }
+
+  doWorkAdjustDidMount = () => {
+    this.buildCustomerData();
+  };
+
+  doWorkWhenRepeatedShow = () => {
+    this.buildCustomerData();
+  };
+
+  doAfterGetCustomerOnSignInSilent = (data) => {
+    this.setState({
+      currentCustomer: data,
+    });
+  };
 
   doOtherRemoteRequest = () => {
     this.loadSubsidiaryList();
@@ -164,6 +181,41 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
         });
       },
     });
+  };
+
+  buildCustomerData = () => {
+    const { currentCustomer } = this.state;
+
+    const that = this;
+
+    if ((currentCustomer || null) == null) {
+      const signInSuccess = this.checkSignInSuccess();
+
+      if (signInSuccess) {
+        that.getCustomer({
+          successCallback: (data) => {
+            const { whetherPhoneVerify } = {
+              whetherPhoneVerify: whetherNumber.no,
+              ...data,
+            };
+
+            that.setState({
+              currentCustomer: data,
+              verifyPhoneModalVisible: whetherPhoneVerify === whetherNumber.no,
+            });
+          },
+        });
+      }
+    } else {
+      const { whetherPhoneVerify } = {
+        whetherPhoneVerify: whetherNumber.no,
+        ...currentCustomer,
+      };
+
+      that.setState({
+        verifyPhoneModalVisible: whetherPhoneVerify === whetherNumber.no,
+      });
+    }
   };
 
   checkSubsidiary = () => {
@@ -242,8 +294,6 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
         : {}),
     };
 
-    logConsole(result);
-
     return result;
   };
 
@@ -321,8 +371,6 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   };
 
   confirmSubmit = () => {
-    logConsole({ files: this.fileList });
-
     if (checkStringIsNullOrWhiteSpace(this.subsidiaryId)) {
       showSimpleWarnMessage(this.selectSubsidiaryPlaceholder);
 
@@ -371,13 +419,8 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     this.subsidiaryComplaintCategoryId = value;
   };
 
+  // eslint-disable-next-line no-unused-vars
   triggerImagePickerChanged = ({ fileList, fileChangedList, type }) => {
-    logConsole({
-      fileList,
-      fileChangedList,
-      type,
-    });
-
     this.fileList = [...fileList];
   };
 
@@ -642,6 +685,8 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   }
 
   renderInteractiveArea = () => {
+    const { verifyPhoneModalVisible } = this.state;
+
     return (
       <>
         <SubmitConfirm
@@ -651,6 +696,29 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
           }}
           afterOk={this.submit}
         />
+
+        <Modal
+          visible={verifyPhoneModalVisible}
+          footer={
+            <View
+              style={{
+                backgroundColor: '#3b74b3',
+                borderRadius: 'var(--tfc-14)',
+                height: 'var(--tfc-60)',
+                lineHeight: 'var(--tfc-60)',
+                color: '#fff',
+                textAlign: 'center',
+                fontSize: 'var(--tfc-28)',
+                margin: 'var(--tfc-14) var(--tfc-12)',
+              }}
+              onClick={this.redirectToSuggestionVerifyPhone}
+            >
+              立即校验
+            </View>
+          }
+        >
+          你还未进行手机号验证，无法提交
+        </Modal>
       </>
     );
   };

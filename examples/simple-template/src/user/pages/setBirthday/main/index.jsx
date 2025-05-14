@@ -139,13 +139,10 @@ class SetBirthday extends PageNeedSignInWrapper {
         <Line transparent height={80} />
 
         <Button
-          weappButton
           text="保存头像"
           backgroundColor="#0075ff"
           fontColor="#fff"
           fontSize={32}
-          // loading={ false}
-          openType="getPhoneNumber"
           block
           circle
           size="middle"

@@ -332,6 +332,27 @@
           "type": "singleData"
         },
         {
+          "title": "刷新校验手机号有效性码验证码",
+          "api": "/wechatApplication/customer/refreshVerifyPhoneCaptcha",
+          "effect": "refreshVerifyPhoneCaptcha",
+          "service": "refreshVerifyPhoneCaptchaData",
+          "type": "singleData"
+        },
+        {
+          "title": "发送校验手机号有效性码短信",
+          "api": "/wechatApplication/customer/sendVerifyPhoneMessage",
+          "effect": "sendVerifyPhoneMessage",
+          "service": "sendVerifyPhoneMessageData",
+          "type": "singleData"
+        },
+        {
+          "title": "验证手机号码",
+          "api": "/wechatApplication/customer/verifyPhone",
+          "effect": "verifyPhone",
+          "service": "verifyPhoneData",
+          "type": "singleData"
+        },
+        {
           "title": "上传图片",
           "api": "/wechatApplication/customer/uploadImage",
           "effect": "uploadImage",

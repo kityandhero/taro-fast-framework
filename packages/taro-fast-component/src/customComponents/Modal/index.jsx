@@ -167,7 +167,7 @@ class Modal extends BaseComponent {
         color={color}
         alpha={alpha}
         zIndex={zIndex}
-        mode="fullParent"
+        mode="fullScreen"
         lockScroll
         duration={300}
         animal="ease-in"

@@ -162,8 +162,6 @@ class SetAvatar extends PageNeedSignInWrapper {
           backgroundColor="#0075ff"
           fontColor="#fff"
           fontSize={32}
-          // loading={ false}
-          // openType="getPhoneNumber"
           block
           circle
           size="middle"

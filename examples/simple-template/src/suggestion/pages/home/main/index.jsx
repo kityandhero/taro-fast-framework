@@ -55,6 +55,15 @@ class PageMain extends PageWrapper {
     paddingRight: transformSize(18),
   };
 
+  constructor(properties) {
+    super(properties);
+
+    this.state = {
+      ...this.state,
+      customer: null,
+    };
+  }
+
   changeTab = (o) => {
     const { name } = o;
 

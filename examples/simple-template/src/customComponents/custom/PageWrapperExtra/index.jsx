@@ -37,27 +37,39 @@ class PageWrapperExtra extends PageWrapperCore {
     });
   }
   goToResetPassword = () => {
-    navigateTo(pathCollection.user.resetPassword.path);
+    navigateTo({
+      url: pathCollection.user.resetPassword.path,
+    });
   };
 
   goToChangePassword = () => {
-    navigateTo(pathCollection.user.changePassword.path);
+    navigateTo({
+      url: pathCollection.user.changePassword.path,
+    });
   };
 
   goToEditInformation = () => {
-    navigateTo(pathCollection.user.editInformation.path);
+    navigateTo({
+      url: pathCollection.user.editInformation.path,
+    });
   };
 
   goToSecurity = () => {
-    navigateTo(pathCollection.user.security.path);
+    navigateTo({
+      url: pathCollection.user.security.path,
+    });
   };
 
   goToFlowCase = () => {
-    navigateTo(pathCollection.root.flowCase.path);
+    navigateTo({
+      url: pathCollection.root.flowCase.path,
+    });
   };
 
   goToFlowCaseForm = (id) => {
-    navigateTo(`${pathCollection.user.flowCaseForm.path}?id=${id}`);
+    navigateTo({
+      url: `${pathCollection.user.flowCaseForm.path}?id=${id}`,
+    });
   };
 
   goToPageListWorkflow = () => {
@@ -85,11 +97,15 @@ class PageWrapperExtra extends PageWrapperCore {
   };
 
   goToApprove = (id) => {
-    navigateTo(`${pathCollection.user.approve.path}?id=${id}`);
+    navigateTo({
+      url: `${pathCollection.user.approve.path}?id=${id}`,
+    });
   };
 
   goToDetailFlowCase = (id) => {
-    navigateTo(`${pathCollection.user.detailFlowCase.path}?id=${id}`);
+    navigateTo({
+      url: `${pathCollection.user.detailFlowCase.path}?id=${id}`,
+    });
   };
 
   goToPageListNotice = () => {
@@ -99,13 +115,15 @@ class PageWrapperExtra extends PageWrapperCore {
   };
 
   goToNoticeDetail = (id) => {
-    navigateTo(
-      `${pathCollection.information.noticeDetail.path}?noticeId=${id}`,
-    );
+    navigateTo({
+      url: `${pathCollection.information.noticeDetail.path}?noticeId=${id}`,
+    });
   };
 
   goToSetting = () => {
-    navigateTo(pathCollection.user.setting.path);
+    navigateTo({
+      url: pathCollection.user.setting.path,
+    });
   };
 
   redirectToSuggestionHome = () => {
@@ -165,19 +183,19 @@ class PageWrapperExtra extends PageWrapperCore {
   };
 
   redirectToSuggestionPageListFeedback = () => {
-    navigateTo({
+    redirectTo({
       url: pathCollection.suggestion.pageListFeedback.path,
     });
   };
 
   redirectToSuggestionPageListReport = () => {
-    navigateTo({
+    redirectTo({
       url: pathCollection.suggestion.pageListReport.path,
     });
   };
 
   redirectToSuggestionPageListComplaint = () => {
-    navigateTo({
+    redirectTo({
       url: pathCollection.suggestion.pageListComplaint.path,
     });
   };
@@ -201,7 +219,9 @@ class PageWrapperExtra extends PageWrapperCore {
       return;
     }
 
-    navigateTo(`${pathCollection.suggestion.detailComplaint.path}?id=${id}`);
+    navigateTo({
+      url: `${pathCollection.suggestion.detailComplaint.path}?id=${id}`,
+    });
   };
 
   goToSuggestionDetailFeedback = (id) => {
@@ -211,7 +231,9 @@ class PageWrapperExtra extends PageWrapperCore {
       return;
     }
 
-    navigateTo(`${pathCollection.suggestion.detailFeedback.path}?id=${id}`);
+    navigateTo({
+      url: `${pathCollection.suggestion.detailFeedback.path}?id=${id}`,
+    });
   };
 
   goToSuggestionDetailReport = (id) => {
@@ -221,7 +243,21 @@ class PageWrapperExtra extends PageWrapperCore {
       return;
     }
 
-    navigateTo(`${pathCollection.suggestion.detailReport.path}?id=${id}`);
+    navigateTo({
+      url: `${pathCollection.suggestion.detailReport.path}?id=${id}`,
+    });
+  };
+
+  goToSuggestionVerifyPhone = () => {
+    navigateTo({
+      url: pathCollection.suggestion.verifyPhone.path,
+    });
+  };
+
+  redirectToSuggestionVerifyPhone = () => {
+    redirectTo({
+      url: pathCollection.suggestion.verifyPhone.path,
+    });
   };
 }
 

@@ -119,6 +119,9 @@ const suggestionPathCollection = {
   submitReport: {
     path: '/suggestion/pages/submitReport/main/index',
   },
+  verifyPhone: {
+    path: '/suggestion/pages/verifyPhone/main/index',
+  },
 };
 
 export const pathCustomCollection = {

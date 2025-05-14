@@ -76,6 +76,7 @@ export default defineAppConfig({
         'pages/submitComplaint/main/index',
         'pages/submitFeedback/main/index',
         'pages/submitReport/main/index',
+        'pages/verifyPhone/main/index',
       ],
     },
   ],

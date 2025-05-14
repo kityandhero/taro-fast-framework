@@ -11,7 +11,11 @@ import {
   showSimpleSuccessMessage,
 } from 'easy-soft-utility';
 
-import { buildBase64Image, transformSize } from 'taro-fast-common';
+import {
+  buildBase64Image,
+  navigateBack,
+  transformSize,
+} from 'taro-fast-common';
 import {
   Button,
   CenterBox,
@@ -26,14 +30,15 @@ import {
 
 import { PageWrapper } from '../../../../customComponents';
 import {
-  resetPasswordKeyBlue,
-  resetPasswordPhone,
-  resetPasswordShieldBlue,
+  verifyPhoneImage,
+  verifyPhoneShieldBlue,
 } from '../../../../customConfig';
+import { HeadNavigationBox } from '../../../../utils';
+import { viewStyle } from '../../../customConfig';
 import {
-  refreshCaptchaAction,
-  retrievePasswordAction,
-  sendRetrievePasswordMessageAction,
+  refreshVerifyPhoneCaptchaAction,
+  sendVerifyPhoneMessageAction,
+  verifyPhoneAction,
 } from '../assist/action';
 
 // import { signInAction, signInWithPhoneAction } from '../assist/action';
@@ -48,8 +53,8 @@ const inputBoxStyle = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '用户登录',
-  // navigationStyle: 'custom',
+  navigationBarTitleText: '校验手机号吗',
+  navigationStyle: 'custom',
 });
 
 @connect(({ user, entrance, session, global, schedulingControl }) => ({
@@ -59,13 +64,15 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class ResetPassword extends PageWrapper {
+class VerifyPhone extends PageWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;
 
   viewStyle = {
-    backgroundColor: '#fff',
+    ...viewStyle,
+    paddingLeft: transformSize(0),
+    paddingRight: transformSize(0),
   };
 
   phone = '';
@@ -73,10 +80,6 @@ class ResetPassword extends PageWrapper {
   captchaCode = '';
 
   smsCode = '';
-
-  password = '';
-
-  passwordVerify = '';
 
   constructor(properties) {
     super(properties);
@@ -87,16 +90,15 @@ class ResetPassword extends PageWrapper {
       captchaImage: '',
       canSendSms: true,
       smsEndTime: null,
-      step: 1,
     };
   }
 
   doOtherRemoteRequest = () => {
-    this.refreshCaptcha();
+    this.refreshVerifyPhoneCaptcha();
   };
 
-  refreshCaptcha = () => {
-    refreshCaptchaAction({
+  refreshVerifyPhoneCaptcha = () => {
+    refreshVerifyPhoneCaptchaAction({
       target: this,
       handleData: {},
       successCallback: ({ target, remoteData }) => {
@@ -122,7 +124,7 @@ class ResetPassword extends PageWrapper {
     });
   };
 
-  sendRetrievePasswordMessage = () => {
+  sendVerifyPhoneMessage = () => {
     const { captchaKey } = this.state;
 
     const phone = this.phone;
@@ -140,7 +142,7 @@ class ResetPassword extends PageWrapper {
       return;
     }
 
-    sendRetrievePasswordMessageAction({
+    sendVerifyPhoneMessageAction({
       target: this,
       handleData: {
         phone,
@@ -156,11 +158,9 @@ class ResetPassword extends PageWrapper {
     });
   };
 
-  retrievePassword = () => {
+  verifyPhone = () => {
     const phone = this.phone;
     const smsCode = this.smsCode;
-    const password = this.password;
-    const passwordVerify = this.passwordVerify;
 
     if (checkStringIsNullOrWhiteSpace(phone)) {
       showSimpleErrorMessage('手机号码不能为空');
@@ -174,38 +174,23 @@ class ResetPassword extends PageWrapper {
       return;
     }
 
-    if (checkStringIsNullOrWhiteSpace(password)) {
-      showSimpleErrorMessage('请输入密码');
+    const that = this;
 
-      return;
-    }
-
-    if (checkStringIsNullOrWhiteSpace(passwordVerify)) {
-      showSimpleErrorMessage('请输入确认密码');
-
-      return;
-    }
-
-    if (password !== passwordVerify) {
-      showSimpleErrorMessage('密码与确认密码不一致');
-
-      return;
-    }
-
-    retrievePasswordAction({
-      target: this,
+    verifyPhoneAction({
+      target: that,
       handleData: {
         phone,
         smsCode,
-        password,
-        passwordVerify,
       },
-      successCallback: ({ target }) => {
-        showSimpleSuccessMessage('重置密码成功');
+      successCallback: () => {
+        showSimpleSuccessMessage('校验成功');
 
-        setTimeout(() => {
-          target.goToSignIn();
-        }, 800);
+        that.getCustomer({
+          force: true,
+          successCallback: () => {
+            navigateBack();
+          },
+        });
       },
     });
   };
@@ -222,35 +207,17 @@ class ResetPassword extends PageWrapper {
     this.smsCode = v;
   };
 
-  triggerPasswordChanged = (v) => {
-    this.password = v;
-  };
-
-  triggerPasswordVerifyChanged = (v) => {
-    this.passwordVerify = v;
-  };
-
   onCountdownEnd = () => {
     this.setState({
       canSendSms: true,
     });
   };
 
-  showFirstStep = () => {
-    this.setState({ step: 1 });
+  buildHeadNavigation = () => {
+    return <HeadNavigationBox title="校验手机号吗" />;
   };
 
-  showSecondStep = () => {
-    if (checkStringIsNullOrWhiteSpace(this.smsCode)) {
-      showSimpleErrorMessage('请输入短信验证码');
-
-      return;
-    }
-
-    this.setState({ step: 2 });
-  };
-
-  buildFirstStep = () => {
+  buildVerifyView = () => {
     const { captchaImage, canSendSms, smsEndTime } = this.state;
 
     return (
@@ -264,7 +231,7 @@ class ResetPassword extends PageWrapper {
                   width: transformSize(40),
                 }}
               >
-                <ImageBox src={resetPasswordPhone} />
+                <ImageBox src={verifyPhoneImage} />
               </View>
             }
             leftStyle={{
@@ -292,7 +259,7 @@ class ResetPassword extends PageWrapper {
                   width: transformSize(40),
                 }}
               >
-                <ImageBox src={resetPasswordShieldBlue} />
+                <ImageBox src={verifyPhoneShieldBlue} />
               </View>
             }
             leftStyle={{
@@ -301,11 +268,10 @@ class ResetPassword extends PageWrapper {
             right={
               <InputItem
                 placeholder="请输入图形验证码"
-                password
                 border={false}
                 clearable={false}
                 extra={
-                  <View onClick={this.refreshCaptcha}>
+                  <View onClick={this.refreshVerifyPhoneCaptcha}>
                     <CenterBox>
                       <ImageBox
                         imageBoxStyle={{
@@ -335,7 +301,7 @@ class ResetPassword extends PageWrapper {
                   width: transformSize(40),
                 }}
               >
-                <ImageBox src={resetPasswordShieldBlue} />
+                <ImageBox src={verifyPhoneShieldBlue} />
               </View>
             }
             leftStyle={{
@@ -344,14 +310,13 @@ class ResetPassword extends PageWrapper {
             right={
               <InputItem
                 placeholder=""
-                password
                 border={false}
                 clearable={false}
                 extra={
                   canSendSms ? (
                     <View
                       style={{ color: '#555' }}
-                      onClick={this.sendRetrievePasswordMessage}
+                      onClick={this.sendVerifyPhoneMessage}
                     >
                       获取验证码
                     </View>
@@ -376,110 +341,22 @@ class ResetPassword extends PageWrapper {
         <Line transparent height={80} />
 
         <Button
-          text="下一步"
-          backgroundColor="#0075ff"
+          weappButton
+          text="立即校验"
+          backgroundColor="#397bb5"
           fontColor="#fff"
           fontSize={32}
           block
           circle
           size="middle"
           shape="rounded"
-          onClick={this.showSecondStep}
-        />
-      </>
-    );
-  };
-
-  buildSecondStep = () => {
-    return (
-      <>
-        <View style={inputBoxStyle}>
-          <FlexBox
-            flexAuto="right"
-            left={
-              <View
-                style={{
-                  width: transformSize(40),
-                }}
-              >
-                <ImageBox src={resetPasswordKeyBlue} />
-              </View>
-            }
-            leftStyle={{
-              marginRight: transformSize(16),
-            }}
-            right={
-              <InputItem
-                placeholder="请输入您的新密码"
-                border={false}
-                clearable={false}
-                afterChange={this.triggerPasswordChanged}
-              />
-            }
-          />
-        </View>
-
-        <Line transparent height={70} />
-
-        <View style={inputBoxStyle}>
-          <FlexBox
-            flexAuto="right"
-            left={
-              <View
-                style={{
-                  width: transformSize(40),
-                }}
-              >
-                <ImageBox src={resetPasswordKeyBlue} />
-              </View>
-            }
-            leftStyle={{
-              marginRight: transformSize(16),
-            }}
-            right={
-              <InputItem
-                placeholder="请再次输入您的新密码"
-                password
-                border={false}
-                clearable={false}
-                afterChange={this.triggerPasswordVerifyChanged}
-              />
-            }
-          />
-        </View>
-
-        <Line transparent height={12} />
-
-        <View
-          style={{
-            color: '#ccc',
-            fontSize: transformSize(24),
-            paddingLeft: transformSize(54),
-          }}
-        >
-          密码包含大写、小写字母、数字
-        </View>
-
-        <Line transparent height={80} />
-
-        <Button
-          text="立即重置"
-          backgroundColor="#0075ff"
-          fontColor="#fff"
-          fontSize={32}
-          block
-          circle
-          size="middle"
-          shape="rounded"
-          onClick={this.retrievePassword}
+          onClick={this.verifyPhone}
         />
       </>
     );
   };
 
   renderFurther() {
-    const { step } = this.state;
-
     return (
       <View>
         <Line transparent height={70} />
@@ -490,7 +367,7 @@ class ResetPassword extends PageWrapper {
               width: transformSize(90),
               height: transformSize(90),
               borderRadius: '50%',
-              backgroundColor: '#0e72ff',
+              backgroundColor: '#397bb5',
             }}
           ></View>
         </CenterBox>
@@ -499,7 +376,7 @@ class ResetPassword extends PageWrapper {
 
         <CenterBox>
           <View style={{ fontSize: transformSize(38), fontWeight: 'bold' }}>
-            密码重置
+            校验手机号码
           </View>
         </CenterBox>
 
@@ -507,13 +384,11 @@ class ResetPassword extends PageWrapper {
 
         <CenterBox>
           <View style={{ fontSize: transformSize(28), color: '#333' }}>
-            欢迎来到产投OA系统
+            为了便于联系，需要校验您的手机号码
           </View>
         </CenterBox>
 
         <Line transparent height={180} />
-
-        {step === 1 ? <></> : null}
 
         <View
           style={{
@@ -521,9 +396,7 @@ class ResetPassword extends PageWrapper {
             paddingRight: transformSize(60),
           }}
         >
-          {step === 1 ? this.buildFirstStep() : null}
-
-          {step === 2 ? this.buildSecondStep() : null}
+          {this.buildVerifyView()}
 
           <Line transparent height={40} />
         </View>
@@ -532,4 +405,4 @@ class ResetPassword extends PageWrapper {
   }
 }
 
-export default ResetPassword;
+export default VerifyPhone;
