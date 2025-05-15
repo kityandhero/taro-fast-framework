@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.16.51
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-common@3.1.26
+  - taro-fast-component@3.0.40
+  - taro-fast-component-extra@3.0.40
+  - taro-fast-component-prism@3.0.41
+  - taro-fast-framework@3.1.34
+
 ## 1.16.50
 
 ### Patch Changes
