@@ -305,6 +305,11 @@ export const fieldDataFlowCase = {
     name: 'workflowName',
     helper: '',
   },
+  workflowTitle: {
+    label: '表单标题',
+    name: 'workflowTitle',
+    helper: '',
+  },
   userId: {
     label: '发起人',
     name: 'userId',

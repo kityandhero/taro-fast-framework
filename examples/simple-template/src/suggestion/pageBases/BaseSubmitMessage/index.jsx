@@ -286,7 +286,11 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
       subsidiaryId: this.subsidiaryId,
       title: this.title,
       description: this.description,
-      attachmentCollection: this.attachmentCollection.join(','),
+      attachmentCollection:
+        isArray(this.attachmentCollection) &&
+        !isEmptyArray(this.attachmentCollection)
+          ? this.attachmentCollection.join(',')
+          : '',
       ...(this.selectComplaintCategorySwitch
         ? {
             subsidiaryComplaintCategoryId: this.subsidiaryComplaintCategoryId,

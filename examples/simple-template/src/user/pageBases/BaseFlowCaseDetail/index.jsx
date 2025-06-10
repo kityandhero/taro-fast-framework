@@ -782,7 +782,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
           <DocumentPrintDesigner
             title={getValueByKey({
               data: metaData,
-              key: fieldDataWorkflowCase.workflowName.name,
+              key: fieldDataWorkflowCase.workflowTitle.name,
             })}
             schema={{
               general,
