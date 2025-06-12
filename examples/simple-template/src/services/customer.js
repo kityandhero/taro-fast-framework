@@ -19,6 +19,16 @@ export async function setAvatarData(parameters) {
   });
 }
 
+export const setNicknameDataApiAddress =
+  '/wechatApplication/customer/setNickname';
+
+export async function setNicknameData(parameters) {
+  return request({
+    api: setNicknameDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const setGenderDataApiAddress = '/wechatApplication/customer/setGender';
 
 export async function setGenderData(parameters) {

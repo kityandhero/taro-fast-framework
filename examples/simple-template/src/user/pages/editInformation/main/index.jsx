@@ -16,7 +16,10 @@ import {
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { viewStyle } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
-import { GenderActionSheet } from '../../../customComponents';
+import {
+  EditNicknamePopup,
+  GenderActionSheet,
+} from '../../../customComponents';
 import { setGenderAction } from '../assist/action';
 
 export const classPrefix = `root-user`;
@@ -100,6 +103,24 @@ class EditInformation extends PageNeedSignInWrapper {
   renderInteractiveArea = () => {
     return (
       <>
+        <EditNicknamePopup
+          header="文件预览"
+          mode="through"
+          position="bottom"
+          showClose
+          closeWhenOverlayClick
+          arcTop
+        >
+          <View
+            style={{
+              height: transformSize(640),
+              overflowY: 'auto',
+            }}
+          >
+            11
+          </View>
+        </EditNicknamePopup>
+
         <GenderActionSheet
           options={[
             {
@@ -156,6 +177,9 @@ class EditInformation extends PageNeedSignInWrapper {
                   text={name}
                 />
               }
+              // onClick={() => {
+              //   this.showEditNicknamePopup();
+              // }}
             />
 
             <Item

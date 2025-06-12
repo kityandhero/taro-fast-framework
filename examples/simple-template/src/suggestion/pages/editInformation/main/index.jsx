@@ -5,8 +5,10 @@ import { showSuccessNotification, whetherNumber } from 'easy-soft-utility';
 
 import { emptyAvatar, transformSize } from 'taro-fast-common';
 import {
+  Button,
   ColorText,
   ImageBox,
+  InputItem,
   Item,
   Line,
   Space,
@@ -15,9 +17,12 @@ import {
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import { HeadNavigationBox } from '../../../../utils';
-import { GenderActionSheet } from '../../../customComponents';
+import {
+  EditNicknamePopup,
+  GenderActionSheet,
+} from '../../../customComponents';
 import { viewStyle } from '../../../customConfig';
-import { setGenderAction } from '../assist/action';
+import { setGenderAction, setNicknameAction } from '../assist/action';
 
 export const classPrefix = `root-customer`;
 
@@ -57,6 +62,8 @@ class EditInformation extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  currentNickname = '';
+
   viewStyle = {
     ...viewStyle,
     paddingLeft: transformSize(0),
@@ -76,8 +83,35 @@ class EditInformation extends PageNeedSignInWrapper {
     this.refreshCustomerData(false);
   };
 
+  showEditNicknamePopup = () => {
+    const { currentCustomer } = this.state;
+
+    const { nickname } = {
+      nickname: '',
+      ...currentCustomer,
+    };
+
+    this.currentNickname = nickname;
+
+    EditNicknamePopup.open();
+  };
+
   showGenderActionSheet = () => {
     GenderActionSheet.open();
+  };
+
+  setNickname = () => {
+    EditNicknamePopup.close();
+
+    setNicknameAction({
+      target: this,
+      handleData: { nickname: this.currentNickname ?? '' },
+      successCallback: ({ target }) => {
+        showSuccessNotification('昵称设置成功');
+
+        target.refreshCustomerData(true);
+      },
+    });
   };
 
   setGender = (v) => {
@@ -92,6 +126,10 @@ class EditInformation extends PageNeedSignInWrapper {
     });
   };
 
+  triggerNicknameChanged = (v) => {
+    this.currentNickname = v;
+  };
+
   buildHeadNavigation = () => {
     return <HeadNavigationBox title="我的信息" />;
   };
@@ -99,6 +137,52 @@ class EditInformation extends PageNeedSignInWrapper {
   renderInteractiveArea = () => {
     return (
       <>
+        <EditNicknamePopup
+          header="设置昵称"
+          mode="through"
+          position="bottom"
+          showClose
+          closeWhenOverlayClick
+          arcTop
+        >
+          <View
+            style={{
+              height: transformSize(340),
+              overflowY: 'auto',
+            }}
+          >
+            <View style={{ paddingBottom: transformSize(26) }}>
+              <Line transparent height={26} />
+
+              <InputItem
+                label="昵称："
+                placeholder="请输入昵称"
+                description="填写您像是用的昵称, 例如 生如夏花"
+                labelWidth={116}
+                labelAlign="right"
+                border={false}
+                clearable={false}
+                afterChange={this.triggerNicknameChanged}
+              />
+
+              <Line transparent height={26} />
+
+              <Button
+                weappButton
+                text="保存"
+                backgroundColor="#397bb5"
+                fontColor="#fff"
+                fontSize={32}
+                block
+                circle
+                size="middle"
+                shape="rounded"
+                onClick={this.setNickname}
+              />
+            </View>
+          </View>
+        </EditNicknamePopup>
+
         <GenderActionSheet
           options={[
             {
@@ -187,6 +271,9 @@ class EditInformation extends PageNeedSignInWrapper {
                   text={name || '尚未设置'}
                 />
               }
+              onClick={() => {
+                this.showEditNicknamePopup();
+              }}
             />
 
             <Item

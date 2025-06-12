@@ -12,6 +12,7 @@ import {
   sendVerifyPhoneMessageData,
   setAvatarData,
   setGenderData,
+  setNicknameData,
   uploadImageData,
   verifyPhoneData,
 } from '../../services/customer';
@@ -19,6 +20,7 @@ import {
 export const customerTypeCollection = {
   getCurrentInfo: 'customer/getCurrentInfo',
   setAvatar: 'customer/setAvatar',
+  setNickname: 'customer/setNickname',
   setGender: 'customer/setGender',
   refreshVerifyPhoneCaptcha: 'customer/refreshVerifyPhoneCaptcha',
   sendVerifyPhoneMessage: 'customer/sendVerifyPhoneMessage',
@@ -71,6 +73,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(setAvatarData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *setNickname(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(setNicknameData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,

@@ -325,6 +325,13 @@
           "type": "singleData"
         },
         {
+          "title": "设置昵称",
+          "api": "/wechatApplication/customer/setNickname",
+          "effect": "setNickname",
+          "service": "setNicknameData",
+          "type": "singleData"
+        },
+        {
           "title": "设置性别",
           "api": "/wechatApplication/customer/setGender",
           "effect": "setGender",

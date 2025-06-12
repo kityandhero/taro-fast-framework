@@ -59,7 +59,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class VerifyPhone extends PageWrapper {
+class VerifyPhoneWithWeChat extends PageWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;
@@ -400,4 +400,4 @@ class VerifyPhone extends PageWrapper {
   }
 }
 
-export default VerifyPhone;
+export default VerifyPhoneWithWeChat;

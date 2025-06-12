@@ -1,12 +1,9 @@
-import {
-  ActionSheetWrapperBase,
-  switchControlAssist,
-} from 'taro-fast-framework';
+import { PopupWrapperBase, switchControlAssist } from 'taro-fast-framework';
 
 // 显隐控制标记, 必须设置, 标记需要全局唯一
-const visibleFlag = 'a68e161086fe4950b5e279d1cf14497a';
+const visibleFlag = 'be8673c0290844d3b42ed5903cd34268';
 
-class GenderActionSheet extends ActionSheetWrapperBase {
+class EditNicknamePopup extends PopupWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
   }
@@ -26,8 +23,6 @@ class GenderActionSheet extends ActionSheetWrapperBase {
       ...this.state,
     };
   }
-
-  buildTitle = () => '选择性别';
 }
 
-export { GenderActionSheet };
+export { EditNicknamePopup };
