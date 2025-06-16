@@ -3,40 +3,18 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
-  convertCollection,
-  getValueByKey,
   showErrorMessage,
   showSimpleErrorMessage,
   showSimpleSuccessMessage,
 } from 'easy-soft-utility';
 
-import {
-  buildBase64Image,
-  navigateBack,
-  transformSize,
-} from 'taro-fast-common';
-import {
-  Button,
-  CenterBox,
-  FlexBox,
-  ImageBox,
-  InputItem,
-  Line,
-} from 'taro-fast-component';
+import { navigateBack, transformSize } from 'taro-fast-common';
+import { Button, CenterBox, Line } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../../customComponents';
-import { verifyPhoneImage } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
 import { viewStyle } from '../../../customConfig';
-import {
-  refreshVerifyPhoneCaptchaAction,
-  verifyPhoneAction,
-} from '../assist/action';
-
-const inputBoxStyle = {
-  paddingBottom: transformSize(16),
-  borderBottom: `${transformSize(2)} solid #eee`,
-};
+import { verifyPhoneWithWeChatAction } from '../assist/action';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -69,59 +47,22 @@ class VerifyPhoneWithWeChat extends PageWrapper {
 
     this.state = {
       ...this.state,
-      captchaKey: '',
-      captchaImage: '',
-      canSendSms: true,
-      smsEndTime: null,
     };
   }
 
-  doOtherRemoteRequest = () => {
-    this.refreshVerifyPhoneCaptcha();
-  };
-
-  refreshVerifyPhoneCaptcha = () => {
-    refreshVerifyPhoneCaptchaAction({
-      target: this,
-      handleData: {},
-      successCallback: ({ target, remoteData }) => {
-        const captchaKey = getValueByKey({
-          data: remoteData,
-          key: 'captchaKey',
-          convert: convertCollection.string,
-          defaultValue: '',
-        });
-
-        const image = getValueByKey({
-          data: remoteData,
-          key: 'image',
-          convert: convertCollection.string,
-          defaultValue: '',
-        });
-
-        target.setState({
-          captchaKey,
-          captchaImage: buildBase64Image(image),
-        });
-      },
-    });
-  };
-
-  verifyPhone = () => {
-    const phone = this.phone;
-
-    if (checkStringIsNullOrWhiteSpace(phone)) {
-      showSimpleErrorMessage('手机号码不能为空');
+  verifyPhone = ({ key }) => {
+    if (checkStringIsNullOrWhiteSpace(key)) {
+      showSimpleErrorMessage('手机号码存储值不能为空');
 
       return;
     }
 
     const that = this;
 
-    verifyPhoneAction({
+    verifyPhoneWithWeChatAction({
       target: that,
       handleData: {
-        phone,
+        key,
       },
       successCallback: () => {
         showSimpleSuccessMessage('校验成功');
@@ -162,9 +103,7 @@ class VerifyPhoneWithWeChat extends PageWrapper {
       callback: (o) => {
         const { key } = o;
 
-        that.setState({
-          keyPhone: key,
-        });
+        that.verifyPhone({ key });
       },
     });
   };
@@ -176,38 +115,12 @@ class VerifyPhoneWithWeChat extends PageWrapper {
   buildVerifyView = () => {
     return (
       <>
-        <View style={inputBoxStyle}>
-          <FlexBox
-            flexAuto="right"
-            left={
-              <View
-                style={{
-                  width: transformSize(40),
-                }}
-              >
-                <ImageBox src={verifyPhoneImage} />
-              </View>
-            }
-            leftStyle={{
-              marginRight: transformSize(16),
-            }}
-            right={
-              <InputItem
-                placeholder="请输入您的手机号"
-                border={false}
-                clearable={false}
-                afterChange={this.triggerPhoneChanged}
-              />
-            }
-          />
-        </View>
-
         <Line transparent height={80} />
 
         <Button
           weappButton
           openType="getPhoneNumber"
-          text="点击获取本机号码"
+          text="校验本机号码"
           backgroundColor="#397bb5"
           fontColor="#fff"
           fontSize={32}

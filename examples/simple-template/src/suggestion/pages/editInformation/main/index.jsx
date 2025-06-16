@@ -2,8 +2,9 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 import {
-  logConsole,
+  showSimpleErrorMessage,
   showSuccessNotification,
+  toString,
   whetherNumber,
 } from 'easy-soft-utility';
 
@@ -146,10 +147,6 @@ class EditInformation extends PageNeedSignInWrapper {
   renderInteractiveArea = () => {
     const { currentNickName } = this.state;
 
-    logConsole({
-      currentNickName,
-    });
-
     return (
       <>
         <EditNicknamePopup
@@ -228,6 +225,7 @@ class EditInformation extends PageNeedSignInWrapper {
       phone,
       genderNote,
       whetherPhoneVerify,
+      phoneVerifyMode,
     } = {
       nickname: '',
       friendlyName: '',
@@ -318,7 +316,19 @@ class EditInformation extends PageNeedSignInWrapper {
                   return;
                 }
 
-                this.goToSuggestionVerifyPhone();
+                if (toString(phoneVerifyMode) === '0') {
+                  this.redirectToSuggestionVerifyPhone();
+
+                  return;
+                }
+
+                if (toString(phoneVerifyMode) === '100') {
+                  this.redirectToSuggestionVerifyPhoneWithWeChat();
+
+                  return;
+                } else {
+                  showSimpleErrorMessage('未配置手机号验证方式');
+                }
               }}
             />
           </Space>

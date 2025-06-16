@@ -77,3 +77,24 @@ export async function verifyPhoneAction({
     successCallback,
   });
 }
+
+export async function verifyPhoneWithWeChatAction({
+  target,
+  handleData,
+  successCallback,
+}) {
+  actionCore({
+    api: modelTypeCollection.customerTypeCollection.verifyPhoneWithWeChat,
+    params: {
+      key: getValueByKey({
+        data: handleData,
+        key: 'key',
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+    },
+    target,
+    handleData,
+    successCallback,
+  });
+}

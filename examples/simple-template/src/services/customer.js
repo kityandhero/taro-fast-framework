@@ -68,6 +68,16 @@ export async function verifyPhoneData(parameters) {
   });
 }
 
+export const verifyPhoneWithWeChatDataApiAddress =
+  '/wechatApplication/customer/verifyPhoneWithWeChat';
+
+export async function verifyPhoneWithWeChatData(parameters) {
+  return request({
+    api: verifyPhoneWithWeChatDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const uploadImageDataApiAddress =
   '/wechatApplication/customer/uploadImage';
 

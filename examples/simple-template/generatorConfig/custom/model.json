@@ -360,6 +360,13 @@
           "type": "singleData"
         },
         {
+          "title": "通过微信验证手机号码",
+          "api": "/wechatApplication/customer/verifyPhoneWithWeChat",
+          "effect": "verifyPhoneWithWeChat",
+          "service": "verifyPhoneWithWeChatData",
+          "type": "singleData"
+        },
+        {
           "title": "上传图片",
           "api": "/wechatApplication/customer/uploadImage",
           "effect": "uploadImage",

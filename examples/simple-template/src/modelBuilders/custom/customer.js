@@ -15,6 +15,7 @@ import {
   setNicknameData,
   uploadImageData,
   verifyPhoneData,
+  verifyPhoneWithWeChatData,
 } from '../../services/customer';
 
 export const customerTypeCollection = {
@@ -25,6 +26,7 @@ export const customerTypeCollection = {
   refreshVerifyPhoneCaptcha: 'customer/refreshVerifyPhoneCaptcha',
   sendVerifyPhoneMessage: 'customer/sendVerifyPhoneMessage',
   verifyPhone: 'customer/verifyPhone',
+  verifyPhoneWithWeChat: 'customer/verifyPhoneWithWeChat',
   uploadImage: 'customer/uploadImage',
 };
 
@@ -203,6 +205,32 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(verifyPhoneData, payload);
+
+        const dataAdjust = pretreatmentRemoteSingleData({
+          source: response,
+          successCallback: pretreatmentSuccessCallback || null,
+          failCallback: pretreatmentFailCallback || null,
+        });
+
+        yield put({
+          type: reducerNameCollection.reducerRemoteData,
+          payload: dataAdjust,
+          alias,
+          ...reducerDefaultParameters,
+        });
+
+        return dataAdjust;
+      },
+      *verifyPhoneWithWeChat(
+        {
+          payload,
+          alias,
+          pretreatmentSuccessCallback,
+          pretreatmentFailCallback,
+        },
+        { call, put },
+      ) {
+        const response = yield call(verifyPhoneWithWeChatData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,
