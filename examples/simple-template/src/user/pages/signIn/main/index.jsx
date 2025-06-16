@@ -42,9 +42,9 @@ definePageConfig({
   schedulingControl,
 }))
 class SignIn extends PageWrapper {
-  showCallTrack = true;
+  // showCallTrack = true;
 
-  showCallTrace = true;
+  // showCallTrace = true;
 
   viewStyle = {
     backgroundColor: '#fff',
