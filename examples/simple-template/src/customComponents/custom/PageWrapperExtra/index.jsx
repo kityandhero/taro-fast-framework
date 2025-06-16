@@ -259,6 +259,12 @@ class PageWrapperExtra extends PageWrapperCore {
       url: pathCollection.suggestion.verifyPhone.path,
     });
   };
+
+  redirectToSuggestionVerifyPhoneWithWeChat = () => {
+    redirectTo({
+      url: pathCollection.suggestion.verifyPhoneWithWeChat.path,
+    });
+  };
 }
 
 export { PageWrapperExtra };

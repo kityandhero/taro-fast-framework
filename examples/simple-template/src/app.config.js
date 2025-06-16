@@ -77,6 +77,7 @@ export default defineAppConfig({
         'pages/submitFeedback/main/index',
         'pages/submitReport/main/index',
         'pages/verifyPhone/main/index',
+        'pages/verifyPhoneWithWeChat/main/index',
       ],
     },
   ],

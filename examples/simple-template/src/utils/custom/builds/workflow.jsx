@@ -78,7 +78,6 @@ export function buildWorkflowItem({ key, data, onClick }) {
       )}
 
       <Button
-        weappButton
         text="发起审批"
         fontColor="#fff"
         backgroundColor="#0075ff"

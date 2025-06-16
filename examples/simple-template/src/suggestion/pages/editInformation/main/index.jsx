@@ -1,7 +1,11 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { showSuccessNotification, whetherNumber } from 'easy-soft-utility';
+import {
+  logConsole,
+  showSuccessNotification,
+  whetherNumber,
+} from 'easy-soft-utility';
 
 import { emptyAvatar, transformSize } from 'taro-fast-common';
 import {
@@ -62,7 +66,7 @@ class EditInformation extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
-  currentNickname = '';
+  currentNicknameTemporaryStorage = '';
 
   viewStyle = {
     ...viewStyle,
@@ -76,6 +80,7 @@ class EditInformation extends PageNeedSignInWrapper {
     this.state = {
       ...this.state,
       loadApiPath: '',
+      currentNickName: '',
     };
   }
 
@@ -83,16 +88,20 @@ class EditInformation extends PageNeedSignInWrapper {
     this.refreshCustomerData(false);
   };
 
-  showEditNicknamePopup = () => {
-    const { currentCustomer } = this.state;
-
+  buildExtraStateDataWhenCustomerUpdate = (o) => {
     const { nickname } = {
       nickname: '',
-      ...currentCustomer,
+      ...o,
     };
 
-    this.currentNickname = nickname;
+    this.currentNicknameTemporaryStorage = nickname;
 
+    return {
+      currentNickName: nickname,
+    };
+  };
+
+  showEditNicknamePopup = () => {
     EditNicknamePopup.open();
   };
 
@@ -105,7 +114,7 @@ class EditInformation extends PageNeedSignInWrapper {
 
     setNicknameAction({
       target: this,
-      handleData: { nickname: this.currentNickname ?? '' },
+      handleData: { nickname: this.currentNicknameTemporaryStorage ?? '' },
       successCallback: ({ target }) => {
         showSuccessNotification('昵称设置成功');
 
@@ -127,7 +136,7 @@ class EditInformation extends PageNeedSignInWrapper {
   };
 
   triggerNicknameChanged = (v) => {
-    this.currentNickname = v;
+    this.currentNicknameTemporaryStorage = v;
   };
 
   buildHeadNavigation = () => {
@@ -135,6 +144,12 @@ class EditInformation extends PageNeedSignInWrapper {
   };
 
   renderInteractiveArea = () => {
+    const { currentNickName } = this.state;
+
+    logConsole({
+      currentNickName,
+    });
+
     return (
       <>
         <EditNicknamePopup
@@ -157,6 +172,7 @@ class EditInformation extends PageNeedSignInWrapper {
               <InputItem
                 label="昵称："
                 placeholder="请输入昵称"
+                value={currentNickName}
                 description="填写您像是用的昵称, 例如 生如夏花"
                 labelWidth={116}
                 labelAlign="right"
@@ -168,7 +184,6 @@ class EditInformation extends PageNeedSignInWrapper {
               <Line transparent height={26} />
 
               <Button
-                weappButton
                 text="保存"
                 backgroundColor="#397bb5"
                 fontColor="#fff"
@@ -206,8 +221,16 @@ class EditInformation extends PageNeedSignInWrapper {
   renderFurther() {
     const { currentCustomer } = this.state;
 
-    const { name, avatar, phone, genderNote, whetherPhoneVerify } = {
+    const {
+      nickname,
+      friendlyName,
+      avatar,
+      phone,
+      genderNote,
+      whetherPhoneVerify,
+    } = {
       nickname: '',
+      friendlyName: '',
       userId: '',
       avatar: emptyAvatar,
       phone: '',
@@ -268,7 +291,7 @@ class EditInformation extends PageNeedSignInWrapper {
               extra={
                 <ColorText
                   textStyle={{ fontSize: transformSize(32) }}
-                  text={name || '尚未设置'}
+                  text={nickname || friendlyName || '尚未设置'}
                 />
               }
               onClick={() => {

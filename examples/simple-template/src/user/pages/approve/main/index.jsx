@@ -277,7 +277,6 @@ class Approve extends BaseFlowCaseDetail {
               flexAuto="left"
               left={
                 <Button
-                  weappButton
                   text="驳回"
                   backgroundColor="#fc5e3d"
                   fontColor="#fff"
@@ -300,7 +299,6 @@ class Approve extends BaseFlowCaseDetail {
                     }}
                     left={
                       <Button
-                        weappButton
                         fill="none"
                         text="返回"
                         fontColor="#4599ea"
@@ -318,7 +316,6 @@ class Approve extends BaseFlowCaseDetail {
                     right={
                       canApprove ? (
                         <Button
-                          weappButton
                           text="批准"
                           backgroundColor="#0075ff"
                           fontColor="#fff"
@@ -332,7 +329,6 @@ class Approve extends BaseFlowCaseDetail {
                         />
                       ) : (
                         <Button
-                          weappButton
                           text="提交审批"
                           backgroundColor="#2da44e"
                           fontColor="#fff"

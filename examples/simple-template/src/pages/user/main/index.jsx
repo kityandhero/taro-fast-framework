@@ -124,8 +124,14 @@ class user extends PageWrapper {
 
     const signInSuccess = this.checkSignInSuccess();
 
-    const { name, avatar, subsidiaryName, departmentName, positionName } = {
-      nickname: '',
+    const {
+      friendlyName,
+      avatar,
+      subsidiaryName,
+      departmentName,
+      positionName,
+    } = {
+      friendlyName: '',
       userId: '',
       avatar: emptyAvatar,
       subsidiaryName: '',
@@ -207,7 +213,7 @@ class user extends PageWrapper {
                           style={{
                             fontWeight: 'bold',
                           }}
-                          text={signInSuccess ? name : `点击登录`}
+                          text={signInSuccess ? friendlyName : `点击登录`}
                         />
                       </Col>
 

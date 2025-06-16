@@ -1,7 +1,11 @@
 import { navigateTo } from 'easy-soft-utility';
 
+import { emptyLogic } from 'taro-fast-common';
+
 import { pathCollection } from '../../../customConfig';
 import { PageWrapper } from '../PageWrapper';
+
+const primaryCallName = 'customComponents::general::PageNeedSignInWrapper';
 
 class PageNeedSignInWrapper extends PageWrapper {
   needSignIn = true;
@@ -19,6 +23,16 @@ class PageNeedSignInWrapper extends PageWrapper {
     this.buildCustomerData();
   };
 
+  // eslint-disable-next-line no-unused-vars
+  buildExtraStateDataWhenCustomerUpdate = (o) => {
+    this.logEmptyCallTrack(
+      o,
+      primaryCallName,
+      'buildExtraStateDataWhenCustomerUpdate',
+      emptyLogic,
+    );
+  };
+
   buildCustomerData = () => {
     const { currentCustomer } = this.state;
 
@@ -30,7 +44,18 @@ class PageNeedSignInWrapper extends PageWrapper {
 
         that.getCustomer({
           successCallback: (data) => {
+            that.logFunctionCallTrace(
+              data,
+              primaryCallName,
+              'buildCustomerData',
+              'successCallback',
+              'buildExtraStateDataWhenCustomerUpdate',
+            );
+
+            const o = that.buildExtraStateDataWhenCustomerUpdate(data);
+
             that.setState({
+              ...o,
               currentCustomer: data,
             });
           },

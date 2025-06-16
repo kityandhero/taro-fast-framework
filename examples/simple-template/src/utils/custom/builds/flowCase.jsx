@@ -399,7 +399,6 @@ export function buildWaitApproveItem({ key, data, onClick }) {
       <Line transparent height={10} />
 
       <Button
-        weappButton
         text="去处理"
         fontColor="#fff"
         backgroundColor="#0075ff"

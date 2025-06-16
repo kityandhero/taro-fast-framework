@@ -2,11 +2,10 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 import {
-  addMinute,
   checkStringIsNullOrWhiteSpace,
   convertCollection,
-  getNow,
   getValueByKey,
+  showErrorMessage,
   showSimpleErrorMessage,
   showSimpleSuccessMessage,
 } from 'easy-soft-utility';
@@ -19,7 +18,6 @@ import {
 import {
   Button,
   CenterBox,
-  Countdown,
   FlexBox,
   ImageBox,
   InputItem,
@@ -27,19 +25,13 @@ import {
 } from 'taro-fast-component';
 
 import { PageWrapper } from '../../../../customComponents';
-import {
-  verifyPhoneImage,
-  verifyPhoneShieldBlue,
-} from '../../../../customConfig';
+import { verifyPhoneImage } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
 import { viewStyle } from '../../../customConfig';
 import {
   refreshVerifyPhoneCaptchaAction,
-  sendVerifyPhoneMessageAction,
   verifyPhoneAction,
 } from '../assist/action';
-
-export const classPrefix = `user-sign-in`;
 
 const inputBoxStyle = {
   paddingBottom: transformSize(16),
@@ -48,12 +40,12 @@ const inputBoxStyle = {
 
 // eslint-disable-next-line no-undef
 definePageConfig({
-  navigationBarTitleText: '校验手机号吗',
+  navigationBarTitleText: '校验本机手机号吗',
   navigationStyle: 'custom',
 });
 
-@connect(({ user, entrance, session, global, schedulingControl }) => ({
-  user,
+@connect(({ customer, entrance, session, global, schedulingControl }) => ({
+  customer,
   entrance,
   session,
   global,
@@ -71,10 +63,6 @@ class VerifyPhoneWithWeChat extends PageWrapper {
   };
 
   phone = '';
-
-  captchaCode = '';
-
-  smsCode = '';
 
   constructor(properties) {
     super(properties);
@@ -119,52 +107,11 @@ class VerifyPhoneWithWeChat extends PageWrapper {
     });
   };
 
-  sendVerifyPhoneMessage = () => {
-    const { captchaKey } = this.state;
-
-    const phone = this.phone;
-    const captchaCode = this.captchaCode;
-
-    if (checkStringIsNullOrWhiteSpace(phone)) {
-      showSimpleErrorMessage('请输入手机号码');
-
-      return;
-    }
-
-    if (checkStringIsNullOrWhiteSpace(captchaCode)) {
-      showSimpleErrorMessage('请输入图形验证码');
-
-      return;
-    }
-
-    sendVerifyPhoneMessageAction({
-      target: this,
-      handleData: {
-        phone,
-        captchaKey,
-        captchaCode,
-      },
-      successCallback: ({ target }) => {
-        target.setState({
-          canSendSms: false,
-          smsEndTime: addMinute(getNow(), 1),
-        });
-      },
-    });
-  };
-
   verifyPhone = () => {
     const phone = this.phone;
-    const smsCode = this.smsCode;
 
     if (checkStringIsNullOrWhiteSpace(phone)) {
       showSimpleErrorMessage('手机号码不能为空');
-
-      return;
-    }
-
-    if (checkStringIsNullOrWhiteSpace(smsCode)) {
-      showSimpleErrorMessage('短信证码不能为空');
 
       return;
     }
@@ -175,7 +122,6 @@ class VerifyPhoneWithWeChat extends PageWrapper {
       target: that,
       handleData: {
         phone,
-        smsCode,
       },
       successCallback: () => {
         showSimpleSuccessMessage('校验成功');
@@ -190,21 +136,36 @@ class VerifyPhoneWithWeChat extends PageWrapper {
     });
   };
 
-  triggerPhoneChanged = (v) => {
-    this.phone = v;
-  };
+  triggerPhoneNumber = (event) => {
+    const {
+      detail: { encryptedData, iv, errMsg },
+    } = event;
 
-  triggerCaptchaCodeChanged = (v) => {
-    this.captchaCode = v;
-  };
+    const that = this;
 
-  triggerSmsCodeChanged = (v) => {
-    this.smsCode = v;
-  };
+    if (
+      checkStringIsNullOrWhiteSpace(encryptedData) ||
+      checkStringIsNullOrWhiteSpace(iv)
+    ) {
+      showErrorMessage({
+        text: errMsg,
+      });
 
-  onCountdownEnd = () => {
-    this.setState({
-      canSendSms: true,
+      return;
+    }
+
+    that.exchangePhone({
+      data: {
+        encryptedData,
+        iv,
+      },
+      callback: (o) => {
+        const { key } = o;
+
+        that.setState({
+          keyPhone: key,
+        });
+      },
     });
   };
 
@@ -213,8 +174,6 @@ class VerifyPhoneWithWeChat extends PageWrapper {
   };
 
   buildVerifyView = () => {
-    const { captchaImage, canSendSms, smsEndTime } = this.state;
-
     return (
       <>
         <View style={inputBoxStyle}>
@@ -243,101 +202,12 @@ class VerifyPhoneWithWeChat extends PageWrapper {
           />
         </View>
 
-        <Line transparent height={40} />
-
-        <View style={inputBoxStyle}>
-          <FlexBox
-            flexAuto="right"
-            left={
-              <View
-                style={{
-                  width: transformSize(40),
-                }}
-              >
-                <ImageBox src={verifyPhoneShieldBlue} />
-              </View>
-            }
-            leftStyle={{
-              marginRight: transformSize(16),
-            }}
-            right={
-              <InputItem
-                placeholder="请输入图形验证码"
-                border={false}
-                clearable={false}
-                extra={
-                  <View onClick={this.refreshVerifyPhoneCaptcha}>
-                    <CenterBox>
-                      <ImageBox
-                        imageBoxStyle={{
-                          width: transformSize(110),
-                          height: transformSize(55),
-                        }}
-                        src={captchaImage}
-                        aspectRatio={0.5}
-                      />
-                    </CenterBox>
-                  </View>
-                }
-                afterChange={this.triggerCaptchaCodeChanged}
-              />
-            }
-          />
-        </View>
-
-        <Line transparent height={80} />
-
-        <View style={inputBoxStyle}>
-          <FlexBox
-            flexAuto="right"
-            left={
-              <View
-                style={{
-                  width: transformSize(40),
-                }}
-              >
-                <ImageBox src={verifyPhoneShieldBlue} />
-              </View>
-            }
-            leftStyle={{
-              marginRight: transformSize(16),
-            }}
-            right={
-              <InputItem
-                placeholder=""
-                border={false}
-                clearable={false}
-                extra={
-                  canSendSms ? (
-                    <View
-                      style={{ color: '#555' }}
-                      onClick={this.sendVerifyPhoneMessage}
-                    >
-                      获取验证码
-                    </View>
-                  ) : (
-                    <Countdown
-                      showHour={false}
-                      showMinute={false}
-                      // format={{ minutes: ':', seconds: '' }}
-                      endTime={smsEndTime}
-                      afterEnd={this.onCountdownEnd}
-                    />
-                  )
-                }
-                afterChange={this.triggerSmsCodeChanged}
-              />
-            }
-          />
-        </View>
-
-        <Line transparent height={20} />
-
         <Line transparent height={80} />
 
         <Button
           weappButton
-          text="立即校验"
+          openType="getPhoneNumber"
+          text="点击获取本机号码"
           backgroundColor="#397bb5"
           fontColor="#fff"
           fontSize={32}
@@ -345,7 +215,7 @@ class VerifyPhoneWithWeChat extends PageWrapper {
           circle
           size="middle"
           shape="rounded"
-          onClick={this.verifyPhone}
+          onGetPhoneNumber={this.triggerPhoneNumber}
         />
       </>
     );

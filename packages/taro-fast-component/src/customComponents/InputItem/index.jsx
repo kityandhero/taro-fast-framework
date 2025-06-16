@@ -523,6 +523,11 @@ class InputItem extends BaseComponent {
           borderColor={borderColor}
           borderTopDistance={borderTopDistance}
           bodyContentStyle={{
+            ...(showDescription
+              ? {
+                  fontSize: transformSize(24),
+                }
+              : {}),
             ...descriptionStyle,
             ...(showDescription
               ? {
@@ -608,12 +613,9 @@ class InputItem extends BaseComponent {
                   {showDescription ? (
                     <View
                       style={{
+                        fontSize: transformSize(24),
                         ...descriptionStyle,
-                        ...(showDescription
-                          ? {
-                              paddingTop: transformSize(11),
-                            }
-                          : {}),
+                        paddingTop: transformSize(11),
                       }}
                     >
                       {description}

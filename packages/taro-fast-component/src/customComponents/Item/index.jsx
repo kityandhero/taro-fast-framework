@@ -184,7 +184,7 @@ class Item extends BaseComponent {
             ...bodyStyle,
             ...(showBody
               ? this.bodyHeight > 0
-                ? { maxHeight: transformSize(this.bodyHeight) }
+                ? { maxHeight: `${this.bodyHeight}px` }
                 : { maxHeight: transformSize(200) }
               : { maxHeight: 0 }),
           }}

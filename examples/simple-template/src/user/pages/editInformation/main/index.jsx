@@ -144,8 +144,8 @@ class EditInformation extends PageNeedSignInWrapper {
   renderFurther() {
     const { currentCustomer } = this.state;
 
-    const { name, avatar, genderNote } = {
-      nickname: '',
+    const { friendlyName, avatar, genderNote } = {
+      friendlyName: '',
       userId: '',
       avatar: emptyAvatar,
       genderNote: '未设置',
@@ -174,7 +174,7 @@ class EditInformation extends PageNeedSignInWrapper {
               extra={
                 <ColorText
                   textStyle={{ fontSize: transformSize(32) }}
-                  text={name}
+                  text={friendlyName}
                 />
               }
               // onClick={() => {

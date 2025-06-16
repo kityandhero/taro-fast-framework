@@ -6,8 +6,10 @@ import {
   isArray,
   isEmptyArray,
   isNull,
+  showSimpleErrorMessage,
   showSimpleWarningMessage,
   showSimpleWarnMessage,
+  toString,
   whetherNumber,
 } from 'easy-soft-utility';
 
@@ -194,14 +196,16 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
       if (signInSuccess) {
         that.getCustomer({
           successCallback: (data) => {
-            const { whetherPhoneVerify } = {
+            const { whetherPhoneVerify, phoneVerifyMode } = {
               whetherPhoneVerify: whetherNumber.no,
+              phoneVerifyMode: '',
               ...data,
             };
 
             that.setState({
               currentCustomer: data,
               verifyPhoneModalVisible: whetherPhoneVerify === whetherNumber.no,
+              phoneVerifyMode,
             });
           },
         });
@@ -689,7 +693,7 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   }
 
   renderInteractiveArea = () => {
-    const { verifyPhoneModalVisible } = this.state;
+    const { verifyPhoneModalVisible, phoneVerifyMode } = this.state;
 
     return (
       <>
@@ -715,7 +719,21 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
                 fontSize: 'var(--tfc-28)',
                 margin: 'var(--tfc-14) var(--tfc-12)',
               }}
-              onClick={this.redirectToSuggestionVerifyPhone}
+              onClick={() => {
+                if (toString(phoneVerifyMode) === '0') {
+                  this.redirectToSuggestionVerifyPhone();
+
+                  return;
+                }
+
+                if (toString(phoneVerifyMode) === '100') {
+                  this.redirectToSuggestionVerifyPhoneWithWeChat();
+
+                  return;
+                } else {
+                  showSimpleErrorMessage('未配置手机号验证方式');
+                }
+              }}
             >
               立即校验
             </View>

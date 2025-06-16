@@ -336,7 +336,6 @@ class VerifyPhone extends PageWrapper {
         <Line transparent height={80} />
 
         <Button
-          weappButton
           text="立即校验"
           backgroundColor="#397bb5"
           fontColor="#fff"

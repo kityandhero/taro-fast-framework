@@ -122,6 +122,9 @@ const suggestionPathCollection = {
   verifyPhone: {
     path: '/suggestion/pages/verifyPhone/main/index',
   },
+  verifyPhoneWithWeChat: {
+    path: '/suggestion/pages/verifyPhoneWithWeChat/main/index',
+  },
 };
 
 export const pathCustomCollection = {
