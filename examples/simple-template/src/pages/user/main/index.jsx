@@ -409,6 +409,9 @@ class user extends PageWrapper {
             {this.buildMenuItem({
               title: '问题反馈',
               icon: boardOrangeImage,
+              onClick: () => {
+                this.goToPageListApplicationUserFeedback();
+              },
             })}
           </View>
         </Space>

@@ -40,4 +40,13 @@ export const userPathGeneralCollection = {
   signInWithWeChat: {
     path: '/user/pages/signInWithWeChat/main/index',
   },
+  pageListApplicationUserFeedback: {
+    path: '/user/pages/pageListApplicationUserFeedback/main/index',
+  },
+  detailApplicationUserFeedback: {
+    path: '/user/pages/detailApplicationUserFeedback/main/index',
+  },
+  submitApplicationUserFeedback: {
+    path: '/user/pages/submitApplicationUserFeedback/main/index',
+  },
 };

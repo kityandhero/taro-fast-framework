@@ -209,6 +209,34 @@
       "cover": true,
       "title": "地理数据",
       "name": "administrativeDivision"
+    },
+    {
+      "apis": [
+        {
+          "title": "反馈建议分页列表",
+          "api": "/wechatApplication/applicationUserFeedback/pageList",
+          "effect": "pageList",
+          "service": "pageListData",
+          "type": "pageList"
+        },
+        {
+          "title": "反馈建议详情",
+          "api": "/wechatApplication/applicationUserFeedback/get",
+          "effect": "get",
+          "service": "getData",
+          "type": "singleData"
+        },
+        {
+          "title": "新增反馈建议",
+          "api": "/wechatApplication/applicationUserFeedback/add",
+          "effect": "add",
+          "service": "addData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "反馈建议",
+      "name": "applicationUserFeedback"
     }
   ]
 }
