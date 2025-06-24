@@ -160,9 +160,8 @@ class DetailFeedback extends PageNeedSignInWrapper {
   renderMessageRepay = () => {
     const { metaData } = this.state;
 
-    const { replyContent, subsidiaryShortName, whetherReply } = {
+    const { replyContent, whetherReply } = {
       replyContent: '',
-      subsidiaryShortName: '',
       whetherReply: whetherNumber.no,
       ...metaData,
     };
@@ -198,26 +197,6 @@ class DetailFeedback extends PageNeedSignInWrapper {
         <Line transparent height={36} />
 
         <View style={descriptionBoxStyle}>{replyContent || '暂无回复'}</View>
-
-        <Line transparent height={36} />
-
-        <FlexBox
-          flexAuto="left"
-          left={<View />}
-          rightStyle={{
-            paddingRight: transformSize(10),
-          }}
-          right={
-            <CenterBox>
-              <ColorText
-                color="#688f6b"
-                fontSize={30}
-                separator=""
-                text={`【${subsidiaryShortName}】`}
-              />
-            </CenterBox>
-          }
-        />
       </>
     );
   };
