@@ -83,3 +83,4 @@ export * from './Transition';
 export * from './TranslucentBox';
 export * from './VariableView';
 export * from './VerticalBox';
+export * from './Watermark';

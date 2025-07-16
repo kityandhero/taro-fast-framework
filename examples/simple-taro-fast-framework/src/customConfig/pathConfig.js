@@ -281,6 +281,9 @@ const examplePathCollection = {
   verticalBox: {
     path: '/example/pages/verticalBox/index',
   },
+  watermark: {
+    path: '/example/pages/watermark/index',
+  },
   webPage: {
     path: '/example/pages/webPage/index',
   },

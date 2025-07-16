@@ -3274,8 +3274,6 @@ class Infrastructure extends AbstractComponent {
       success: (o) => {
         const { tempFiles } = o;
 
-        console.log(o);
-
         if (isArray(tempFiles) && !isEmptyArray(tempFiles)) {
           const firstFile = tempFiles[0];
 

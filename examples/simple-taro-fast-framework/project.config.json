@@ -76,6 +76,12 @@
           "scene": null
         },
         {
+          "name": "watermark",
+          "pathName": "example/pages/watermark/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "imageBox",
           "pathName": "example/pages/imageBox/index",
           "query": "",

@@ -304,12 +304,51 @@ export function previewImage(parameters) {
   return previewImageCore(parameters);
 }
 
-export function getFields(selector, context = null) {
+export function findCustomWrapperParent(nodeReference) {
+  let node = nodeReference.current?.parentNode;
+
+  while (node) {
+    if (node.tagName === 'CUSTOM-WRAPPER') {
+      return node;
+    }
+
+    node = node.parentNode;
+  }
+
+  return null;
+}
+
+export function getNode(selector, context = null) {
   return new Promise((resolve) => {
     let query = createSelectorQuery();
 
     if (context) {
       query = query.in(context);
+    }
+
+    query
+      .select(selector)
+      .node((o) => {
+        return resolve(o);
+      })
+      .exec();
+  });
+}
+
+export function getFields(selector, context = null, reference = null) {
+  return new Promise((resolve) => {
+    let query = createSelectorQuery();
+
+    if (context) {
+      query = query.in(context);
+    }
+
+    if (reference) {
+      const customWrapper = findCustomWrapperParent(reference);
+
+      if (customWrapper) {
+        query = query.in(customWrapper.ctx);
+      }
     }
 
     query
@@ -320,7 +359,7 @@ export function getFields(selector, context = null) {
         properties: ['scrollX', 'scrollY'],
       })
       .exec((rect = []) => {
-        return resolve(rect[0]);
+        return resolve(rect[0], rect);
       });
   });
 }

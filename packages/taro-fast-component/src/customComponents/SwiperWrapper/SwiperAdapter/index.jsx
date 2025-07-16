@@ -58,10 +58,10 @@ class SwiperAdapter extends BaseComponent {
 
     swiperConfigAdjust.style = { width: '100%', height: '100%' };
     swiperConfigAdjust.duration = duration;
-    (swiperConfigAdjust.indicatorDots = customIndicator
+    ((swiperConfigAdjust.indicatorDots = customIndicator
       ? false
       : swiperConfigAdjust.indicatorDots || false),
-      (swiperConfigAdjust.onChange = this.triggerChange);
+      (swiperConfigAdjust.onChange = this.triggerChange));
     swiperConfigAdjust.onTransition = onTransition;
     swiperConfigAdjust.onAnimationFinish = onAnimationFinish;
 

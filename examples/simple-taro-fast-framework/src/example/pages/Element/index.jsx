@@ -42,6 +42,11 @@ const list = [
     path: pathCollection.example.activityIndicator.path,
   },
   {
+    id: 'Watermark',
+    name: '水印背景',
+    path: pathCollection.example.watermark.path,
+  },
+  {
     id: 'Tag',
     name: '标签',
     path: pathCollection.example.tag.path,

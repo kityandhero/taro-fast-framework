@@ -102,6 +102,7 @@ export default {
         'pages/translucentBox/index',
         'pages/utils/index',
         'pages/verticalBox/index',
+        'pages/watermark/index',
         'pages/webPage/index',
       ],
     },

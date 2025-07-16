@@ -37,6 +37,7 @@ import {
   Steps,
   Tag,
   VerticalBox,
+  Watermark,
 } from 'taro-fast-component';
 import { DocumentPrintDesigner } from 'taro-fast-design-playground';
 
@@ -779,36 +780,38 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
             })}
           </Space>
         ) : (
-          <DocumentPrintDesigner
-            title={getValueByKey({
-              data: metaData,
-              key: fieldDataWorkflowCase.workflowTitle.name,
-            })}
-            schema={{
-              general,
-              items,
-            }}
-            borderColor="#999"
-            values={listFormStorage}
-            showApply={showApply}
-            applyList={listApply}
-            showAttention={showAttention}
-            attentionList={listAttention}
-            approveList={isArray(listApprove) ? listApprove : []}
-            allApproveProcessList={listChainApprove}
-            signetStyle={{
-              top: transformSize(-4),
-            }}
-            remarkTitle="备注"
-            remarkName="remark"
-            remarkList={remarkSchemaList}
-            showQRCode
-            qRCodeImage={qRCodeImage}
-            qRCodeHeight={64}
-            showSerialNumber
-            serialNumberTitle="审批流水号: "
-            serialNumberContent={workflowCaseId}
-          />
+          <Watermark content="驻矿托OA">
+            <DocumentPrintDesigner
+              title={getValueByKey({
+                data: metaData,
+                key: fieldDataWorkflowCase.workflowTitle.name,
+              })}
+              schema={{
+                general,
+                items,
+              }}
+              borderColor="#999"
+              values={listFormStorage}
+              showApply={showApply}
+              applyList={listApply}
+              showAttention={showAttention}
+              attentionList={listAttention}
+              approveList={isArray(listApprove) ? listApprove : []}
+              allApproveProcessList={listChainApprove}
+              signetStyle={{
+                top: transformSize(-4),
+              }}
+              remarkTitle="备注"
+              remarkName="remark"
+              remarkList={remarkSchemaList}
+              showQRCode
+              qRCodeImage={qRCodeImage}
+              qRCodeHeight={64}
+              showSerialNumber
+              serialNumberTitle="审批流水号: "
+              serialNumberContent={workflowCaseId}
+            />
+          </Watermark>
         )}
       </Card>
     );
