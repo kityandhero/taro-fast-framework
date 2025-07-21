@@ -5,9 +5,11 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
+  isArray,
+  isEmptyArray,
   showSimpleErrorMessage,
-  showSuccessMessage,
-  showSuccessNotification,
+  showSimpleSuccessMessage,
+  showSimpleSuccessNotification,
   whetherNumber,
 } from 'easy-soft-utility';
 
@@ -21,13 +23,19 @@ import {
   Line,
 } from 'taro-fast-component';
 
-import { fieldDataWorkflowCase } from '../../../../customConfig';
+import { fieldDataUser, fieldDataWorkflowCase } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
-import { ConfirmSubmitFlowCaseActionSheet } from '../../../customComponents';
+import {
+  ConfirmPassFlowCaseActionSheet,
+  ConfirmRefuseFlowCaseActionSheet,
+  ConfirmSubmitFlowCaseActionSheet,
+  SelectNextNodeApproverPopup,
+} from '../../../customComponents';
 import { BaseFlowCaseDetail } from '../../../pageBases';
 import {
   passAction,
   refuseAction,
+  singleListNextNodeApproverAction,
   submitApprovalAction,
 } from '../assist/action';
 
@@ -49,6 +57,11 @@ const bodyStyle = {
   paddingBottom: transformSize(20),
 };
 
+const targetActionSheetCollection = {
+  submitApproval: 100,
+  pass: 200,
+};
+
 // eslint-disable-next-line no-undef
 definePageConfig({
   navigationBarTitleText: '事项审批',
@@ -68,8 +81,60 @@ class Approve extends BaseFlowCaseDetail {
 
     this.state = {
       ...this.state,
+      nextNodeApproverUserList: [],
     };
   }
+
+  doOtherRemoteRequest = () => {
+    this.loadNextNodeApprover();
+  };
+
+  loadNextNodeApprover = () => {
+    const id = getValueByKey({
+      data: this.externalParameter,
+      key: 'id',
+      defaultValue: '',
+    });
+
+    const d = {};
+
+    d[fieldDataWorkflowCase.workflowCaseId.name] = id;
+
+    singleListNextNodeApproverAction({
+      target: this,
+      handleData: {
+        ...d,
+      },
+      successCallback: ({ target, remoteListData }) => {
+        if (
+          isArray(remoteListData) &&
+          !isEmptyArray(remoteListData) &&
+          remoteListData.length === 1
+        ) {
+          const firstData = remoteListData[0];
+
+          const userId = getValueByKey({
+            data: firstData,
+            key: fieldDataUser.userId.name,
+            convert: convertCollection.string,
+          });
+
+          const friendlyName = getValueByKey({
+            data: firstData,
+            key: fieldDataUser.friendlyName.name,
+            convert: convertCollection.string,
+          });
+
+          target.nextWorkflowNodeApproverUserId = userId;
+          target.nextWorkflowNodeApproverUserRealName = friendlyName;
+        }
+
+        target.setState({
+          nextNodeApproverUserList: [...remoteListData],
+        });
+      },
+    });
+  };
 
   submitApproval = () => {
     const { metaData } = this.state;
@@ -87,15 +152,11 @@ class Approve extends BaseFlowCaseDetail {
         workflowCaseId,
       },
       successCallback: ({ target }) => {
-        showSuccessNotification('提交审批成功');
+        showSimpleSuccessNotification('提交审批成功');
 
         target.reloadData({});
       },
     });
-  };
-
-  confirmSubmit = () => {
-    ConfirmSubmitFlowCaseActionSheet.open();
   };
 
   pass = () => {
@@ -114,14 +175,21 @@ class Approve extends BaseFlowCaseDetail {
       convert: convertCollection.string,
     });
 
+    const nextWorkflowNodeApproverUserIdCollection =
+      checkStringIsNullOrWhiteSpace(this.nextWorkflowNodeApproverUserId ?? '')
+        ? []
+        : [this.nextWorkflowNodeApproverUserId];
+
     passAction({
       target: this,
       handleData: {
         workflowCaseId,
         note: this.note,
+        nextWorkflowNodeApproverUserIdCollection:
+          nextWorkflowNodeApproverUserIdCollection.join(','),
       },
       successCallback: ({ target }) => {
-        showSuccessMessage('审批完成');
+        showSimpleSuccessMessage('审批完成');
 
         target.reloadData({});
       },
@@ -151,7 +219,7 @@ class Approve extends BaseFlowCaseDetail {
         note: this.note,
       },
       successCallback: ({ target }) => {
-        showSuccessMessage('审批完成');
+        showSimpleSuccessMessage('审批完成');
 
         target.reloadData({});
       },
@@ -160,6 +228,73 @@ class Approve extends BaseFlowCaseDetail {
 
   triggerNoteChanged = (v) => {
     this.note = v;
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  triggerNextNodeApproverChange = (v, option) => {
+    this.nextWorkflowNodeApproverUserId = v;
+  };
+
+  showSelectNextNodeApproverPopup = () => {
+    SelectNextNodeApproverPopup.open();
+  };
+
+  afterSelectNextNodeApproverPopupOk = () => {
+    const { metaData } = this.state;
+
+    const status = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.status.name,
+      convert: convertCollection.number,
+    });
+
+    if (status == targetActionSheetCollection.submitApproval) {
+      this.showConfirmSubmitFlowCaseActionSheet();
+    }
+
+    if (status == targetActionSheetCollection.pass) {
+      this.showConfirmPassFlowCaseActionSheet();
+    }
+  };
+
+  showConfirmSubmitFlowCaseActionSheet = () => {
+    ConfirmSubmitFlowCaseActionSheet.open();
+  };
+
+  showConfirmPassFlowCaseActionSheet = () => {
+    ConfirmPassFlowCaseActionSheet.open();
+  };
+
+  showConfirmRefuseFlowCaseActionSheet = () => {
+    ConfirmRefuseFlowCaseActionSheet.open();
+  };
+
+  prepareSubmitApproval = () => {
+    this.targetActionSheet = targetActionSheetCollection.submitApproval;
+
+    this.showSelectNextNodeApproverPopup();
+  };
+
+  preparePass = () => {
+    if (checkStringIsNullOrWhiteSpace(this.note)) {
+      showSimpleErrorMessage('请输入审批意见');
+
+      return;
+    }
+
+    this.targetActionSheet = targetActionSheetCollection.pass;
+
+    this.showSelectNextNodeApproverPopup();
+  };
+
+  prepareRefuse = () => {
+    if (checkStringIsNullOrWhiteSpace(this.note)) {
+      showSimpleErrorMessage('请输入审批意见');
+
+      return;
+    }
+
+    this.showConfirmRefuseFlowCaseActionSheet();
   };
 
   buildHeadNavigation = () => {
@@ -287,7 +422,7 @@ class Approve extends BaseFlowCaseDetail {
                   paddingRight={32}
                   size="middle"
                   hidden={!canApprove}
-                  onClick={this.refuse}
+                  onClick={this.prepareRefuse}
                 />
               }
               right={
@@ -325,7 +460,7 @@ class Approve extends BaseFlowCaseDetail {
                           paddingLeft={32}
                           paddingRight={32}
                           size="middle"
-                          onClick={this.pass}
+                          onClick={this.preparePass}
                         />
                       ) : (
                         <Button
@@ -338,7 +473,7 @@ class Approve extends BaseFlowCaseDetail {
                           paddingLeft={32}
                           paddingRight={32}
                           size="middle"
-                          onClick={this.confirmSubmit}
+                          onClick={this.prepareSubmitApproval}
                         />
                       )
                     }
@@ -353,9 +488,18 @@ class Approve extends BaseFlowCaseDetail {
   };
 
   renderInteractiveArea = () => {
+    const { nextNodeApproverUserList } = this.state;
+
     return (
       <>
         {this.renderFilePreviewPopup()}
+
+        <SelectNextNodeApproverPopup
+          header="选择下一审批人"
+          nextNodeApproverUserList={nextNodeApproverUserList}
+          afterNextNodeApproverChange={this.triggerNextNodeApproverChange}
+          afterOk={this.afterSelectNextNodeApproverPopupOk}
+        />
 
         <ConfirmSubmitFlowCaseActionSheet
           headerStyle={{
@@ -364,6 +508,24 @@ class Approve extends BaseFlowCaseDetail {
             fontSize: transformSize(32),
           }}
           afterOk={this.submitApproval}
+        />
+
+        <ConfirmPassFlowCaseActionSheet
+          headerStyle={{
+            color: '#000',
+            // fontWeight: 'bold',
+            fontSize: transformSize(32),
+          }}
+          afterOk={this.pass}
+        />
+
+        <ConfirmRefuseFlowCaseActionSheet
+          headerStyle={{
+            color: '#000',
+            // fontWeight: 'bold',
+            fontSize: transformSize(32),
+          }}
+          afterOk={this.refuse}
         />
       </>
     );

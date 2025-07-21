@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { showSuccessNotification } from 'easy-soft-utility';
+import { showSimpleSuccessNotification } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Line, Space, SwitchItem } from 'taro-fast-component';
@@ -85,7 +85,7 @@ class Setting extends PageNeedSignInWrapper {
           : flowApproveMobileViewModeCollection.form,
       },
       successCallback: ({ target }) => {
-        showSuccessNotification('性别设置成功');
+        showSimpleSuccessNotification('性别设置成功');
 
         target.refreshCustomerData(true);
       },

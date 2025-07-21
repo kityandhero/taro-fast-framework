@@ -30,6 +30,16 @@ export async function pageListLatestApproveData(parameters) {
   });
 }
 
+export const singleListNextNodeApproverDataApiAddress =
+  '/wechatApplication/workflowCase/singleListNextNodeApprover';
+
+export async function singleListNextNodeApproverData(parameters) {
+  return request({
+    api: singleListNextNodeApproverDataApiAddress,
+    params: parameters,
+  });
+}
+
 export const getDataApiAddress = '/wechatApplication/workflowCase/get';
 
 export async function getData(parameters) {

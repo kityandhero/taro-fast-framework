@@ -8,6 +8,28 @@ import {
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 
+export async function singleListNextNodeApproverAction({
+  target,
+  handleData,
+  successCallback,
+}) {
+  actionCore({
+    api: modelTypeCollection.flowCaseTypeCollection.singleListNextNodeApprover,
+    params: {
+      workflowCaseId: getValueByKey({
+        data: handleData,
+        key: fieldDataWorkflowCase.workflowCaseId.name,
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+    },
+    target,
+    handleData,
+    successCallback,
+    showProcessing: false,
+  });
+}
+
 export async function submitApprovalAction({
   target,
   handleData,
@@ -19,6 +41,12 @@ export async function submitApprovalAction({
       workflowCaseId: getValueByKey({
         data: handleData,
         key: fieldDataWorkflowCase.workflowCaseId.name,
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+      nextWorkflowNodeApproverUserIdCollection: getValueByKey({
+        data: handleData,
+        key: 'nextWorkflowNodeApproverUserIdCollection',
         convert: convertCollection.string,
         defaultValue: '',
       }),
@@ -43,6 +71,12 @@ export async function passAction({ target, handleData, successCallback }) {
       note: getValueByKey({
         data: handleData,
         key: fieldDataFlowCaseProcessHistory.note.name,
+        convert: convertCollection.string,
+        defaultValue: '',
+      }),
+      nextWorkflowNodeApproverUserIdCollection: getValueByKey({
+        data: handleData,
+        key: 'nextWorkflowNodeApproverUserIdCollection',
         convert: convertCollection.string,
         defaultValue: '',
       }),

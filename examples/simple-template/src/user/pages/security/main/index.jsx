@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { showSuccessMessage } from 'easy-soft-utility';
+import { showSimpleSuccessMessage } from 'easy-soft-utility';
 
 import { transformSize } from 'taro-fast-common';
 import { Button, Item, Line, Space } from 'taro-fast-component';
@@ -71,7 +71,7 @@ class EditInformation extends PageNeedSignInWrapper {
       target: this,
       handleData: {},
       successCallback: () => {
-        showSuccessMessage('退出成功');
+        showSimpleSuccessMessage('退出成功');
 
         this.goToSignIn();
       },

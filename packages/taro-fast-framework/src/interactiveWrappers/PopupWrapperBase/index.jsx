@@ -4,6 +4,11 @@ import { InteractiveCloseableBase } from '../InteractiveCloseableBase';
 
 const primaryCallName = buildPrimaryCallName('PopupWrapperBase');
 
+const defaultProperties = {
+  upperBuilder: null,
+  footerBuilder: null,
+};
+
 class PopupWrapperBase extends InteractiveCloseableBase {
   /**
    * 构造函数
@@ -17,10 +22,17 @@ class PopupWrapperBase extends InteractiveCloseableBase {
     };
   }
 
+  buildUpperView = () => null;
+
+  buildFooterView = () => null;
+
   renderFurther() {
     this.logRenderCallTrack({}, primaryCallName, 'renderFurther');
 
-    const { children, ...rest } = this.props;
+    const { upperBuilder, footerBuilder, children, ...rest } = this.props;
+
+    const upper = this.buildUpperView() ?? null;
+    const footer = this.buildFooterView() ?? null;
 
     return (
       <PopupExtra
@@ -28,10 +40,19 @@ class PopupWrapperBase extends InteractiveCloseableBase {
         flag={this.getVisibleFlag()}
         onClose={this.handleClose}
       >
+        {upper}
+
         {children}
+
+        {footer}
       </PopupExtra>
     );
   }
 }
+
+PopupWrapperBase.defaultProps = {
+  ...InteractiveCloseableBase.defaultProps,
+  ...defaultProperties,
+};
 
 export { PopupWrapperBase };

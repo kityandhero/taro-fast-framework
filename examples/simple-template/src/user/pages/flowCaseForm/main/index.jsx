@@ -1,36 +1,65 @@
+/* eslint-disable no-unused-vars */
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 import {
+  checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
   isArray,
   isEmptyArray,
   isObject,
   isString,
-  showSuccessNotification,
+  showSimpleSuccessMessage,
+  showSimpleSuccessNotification,
   whetherNumber,
 } from 'easy-soft-utility';
 
 import { navigateBack, transformSize } from 'taro-fast-common';
-import { Button, FixedBox, FlexBox, Line } from 'taro-fast-component';
+import { Button, FixedBox, FlexBox, Line, Radio } from 'taro-fast-component';
 import { FormBuilder } from 'taro-fast-design-playground';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import {
+  fieldDataUser,
   fieldDataWorkflowCase,
   fieldDataWorkflowCaseFormAttachment,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { uploadFileDataApiAddress } from '../../../../services/flowCaseFormAttachment';
 import { HeadNavigationBox } from '../../../../utils';
-import { ConfirmSubmitFlowCaseActionSheet } from '../../../customComponents';
-import { submitApprovalAction } from '../../approve/assist/action';
+import {
+  ConfirmSubmitFlowCaseActionSheet,
+  SelectNextNodeApproverPopup,
+} from '../../../customComponents';
+import {
+  singleListNextNodeApproverAction,
+  submitApprovalAction,
+} from '../../approve/assist/action';
 import {
   addAttachmentAction,
   removeAttachmentAction,
   submitFormAction,
 } from '../assist/action';
+
+function transferRadioOptionCollection(list) {
+  if (!isArray(list)) {
+    return [];
+  }
+
+  return list.map((item) => {
+    const { friendlyName, userId } = {
+      friendlyName: '',
+      userId: '',
+      ...item,
+    };
+
+    return {
+      label: friendlyName ?? '',
+      value: userId,
+    };
+  });
+}
 
 function analyzeSchema(o) {
   let schemaData = {};
@@ -208,6 +237,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       initialValueList: [],
       attachmentList: [],
       remarkList: [],
+      nextNodeApproverUserList: [],
     };
   }
 
@@ -221,6 +251,57 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     o[fieldDataWorkflowCase.workflowCaseId.name] = id;
 
     return { ...o };
+  };
+
+  doOtherRemoteRequest = () => {
+    this.loadNextNodeApprover();
+  };
+
+  loadNextNodeApprover = () => {
+    const id = getValueByKey({
+      data: this.externalParameter,
+      key: 'id',
+      defaultValue: '',
+    });
+
+    const d = {};
+
+    d[fieldDataWorkflowCase.workflowCaseId.name] = id;
+
+    singleListNextNodeApproverAction({
+      target: this,
+      handleData: {
+        ...d,
+      },
+      successCallback: ({ target, remoteListData }) => {
+        if (
+          isArray(remoteListData) &&
+          !isEmptyArray(remoteListData) &&
+          remoteListData.length === 1
+        ) {
+          const firstData = remoteListData[0];
+
+          const userId = getValueByKey({
+            data: firstData,
+            key: fieldDataUser.userId.name,
+            convert: convertCollection.string,
+          });
+
+          const friendlyName = getValueByKey({
+            data: firstData,
+            key: fieldDataUser.friendlyName.name,
+            convert: convertCollection.string,
+          });
+
+          target.nextWorkflowNodeApproverUserId = userId;
+          target.nextWorkflowNodeApproverUserRealName = friendlyName;
+        }
+
+        target.setState({
+          nextNodeApproverUserList: [...remoteListData],
+        });
+      },
+    });
   };
 
   doOtherAfterLoadSuccess = ({
@@ -312,7 +393,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         uploadHistoryId,
       },
       successCallback: ({ target, remoteListData }) => {
-        showSuccessNotification('新增附件成功');
+        showSimpleSuccessNotification('新增附件成功');
 
         target.setState({
           attachmentList: [...remoteListData],
@@ -336,7 +417,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         workflowCaseFormAttachmentId,
       },
       successCallback: ({ target, remoteListData }) => {
-        showSuccessNotification('移除附件成功');
+        showSimpleSuccessNotification('移除附件成功');
 
         target.setState({
           attachmentList: [...remoteListData],
@@ -362,7 +443,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         ...this.currentFormData,
       },
       successCallback: () => {
-        showSuccessNotification('保存表单成功');
+        showSimpleSuccessMessage('保存表单成功');
       },
     });
   };
@@ -377,15 +458,22 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       convert: convertCollection.string,
     });
 
+    const nextWorkflowNodeApproverUserIdCollection =
+      checkStringIsNullOrWhiteSpace(this.nextWorkflowNodeApproverUserId ?? '')
+        ? []
+        : [this.nextWorkflowNodeApproverUserId];
+
     submitApprovalAction({
       target: this,
       handleData: {
         workflowCaseId,
+        nextWorkflowNodeApproverUserIdCollection:
+          nextWorkflowNodeApproverUserIdCollection.join(','),
       },
       successCallback: ({ target }) => {
-        showSuccessNotification('提交审批成功');
+        showSimpleSuccessMessage('提交审批成功');
 
-        target.reloadData({});
+        this.redirectToApprove(workflowCaseId);
       },
     });
   };
@@ -412,11 +500,19 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     });
   };
 
+  triggerNextNodeApproverChange = (v, option) => {
+    this.nextWorkflowNodeApproverUserId = v;
+  };
+
   onFormChange = (o) => {
     this.currentFormData = o;
   };
 
-  confirmSubmit = () => {
+  showSelectNextNodeApproverPopup = () => {
+    SelectNextNodeApproverPopup.open();
+  };
+
+  showConfirmSubmitFlowCaseActionSheet = () => {
     ConfirmSubmitFlowCaseActionSheet.open();
   };
 
@@ -520,7 +616,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                           paddingRight={24}
                           size="middle"
                           disabled={canEdit !== whetherNumber.yes}
-                          onClick={this.confirmSubmit}
+                          onClick={this.showSelectNextNodeApproverPopup}
                         />
                       </>
                     }
@@ -606,8 +702,17 @@ class FlowCaseForm extends PageNeedSignInWrapper {
   }
 
   renderInteractiveArea = () => {
+    const { nextNodeApproverUserList } = this.state;
+
     return (
       <>
+        <SelectNextNodeApproverPopup
+          header="选择下一审批人"
+          nextNodeApproverUserList={nextNodeApproverUserList}
+          afterNextNodeApproverChange={this.triggerNextNodeApproverChange}
+          afterOk={this.showConfirmSubmitFlowCaseActionSheet}
+        />
+
         <ConfirmSubmitFlowCaseActionSheet
           headerStyle={{
             color: '#000',

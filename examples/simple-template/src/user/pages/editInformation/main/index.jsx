@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { showSuccessNotification } from 'easy-soft-utility';
+import { showSimpleSuccessNotification } from 'easy-soft-utility';
 
 import { emptyAvatar, transformSize } from 'taro-fast-common';
 import {
@@ -89,7 +89,7 @@ class EditInformation extends PageNeedSignInWrapper {
       target: this,
       handleData: { gender: v },
       successCallback: ({ target }) => {
-        showSuccessNotification('性别设置成功');
+        showSimpleSuccessNotification('性别设置成功');
 
         target.refreshCustomerData(true);
       },

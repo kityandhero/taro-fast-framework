@@ -102,6 +102,12 @@ class PageWrapperExtra extends PageWrapperCore {
     });
   };
 
+  redirectToApprove = (id) => {
+    redirectTo({
+      url: `${pathCollection.user.approve.path}?id=${id}`,
+    });
+  };
+
   goToDetailFlowCase = (id) => {
     navigateTo({
       url: `${pathCollection.user.detailFlowCase.path}?id=${id}`,

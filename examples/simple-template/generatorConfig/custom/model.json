@@ -52,6 +52,13 @@
           "type": "pageList"
         },
         {
+          "title": "当前即将审批节点的下一节点审批人列表",
+          "api": "/wechatApplication/workflowCase/singleListNextNodeApprover",
+          "effect": "singleListNextNodeApprover",
+          "service": "singleListNextNodeApproverData",
+          "type": "singleList"
+        },
+        {
           "title": "获取详情",
           "api": "/wechatApplication/workflowCase/get",
           "effect": "get",

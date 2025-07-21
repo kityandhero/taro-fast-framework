@@ -18,6 +18,7 @@ import { setLocalStorageHandler } from './localStorageAssist';
 import { setMessageDisplayMonitor } from './messageAssist';
 import { getTaroGlobalData } from './meta';
 import { setNavigationHandler } from './navigationAssist';
+import { setNotificationDisplayMonitor } from './notificationAssist';
 import { getShowLogInConsole, getSignInPath } from './settingsAssist';
 
 function handleAuthenticationFail() {
@@ -65,6 +66,8 @@ export function setEasySoftUtilityHandler(...externalConfigs) {
   setLoggerDisplaySwitch(getShowLogInConsole());
 
   setMessageDisplayMonitor();
+
+  setNotificationDisplayMonitor();
 
   setAuthenticationFailHandler(handleAuthenticationFail);
 }

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from 'easy-soft-dva';
 import {
   showSimpleErrorMessage,
-  showSuccessNotification,
+  showSimpleSuccessNotification,
   toString,
   whetherNumber,
 } from 'easy-soft-utility';
@@ -117,7 +117,7 @@ class EditInformation extends PageNeedSignInWrapper {
       target: this,
       handleData: { nickname: this.currentNicknameTemporaryStorage ?? '' },
       successCallback: ({ target }) => {
-        showSuccessNotification('昵称设置成功');
+        showSimpleSuccessNotification('昵称设置成功');
 
         target.refreshCustomerData(true);
       },
@@ -129,7 +129,7 @@ class EditInformation extends PageNeedSignInWrapper {
       target: this,
       handleData: { gender: v },
       successCallback: ({ target }) => {
-        showSuccessNotification('性别设置成功');
+        showSimpleSuccessNotification('性别设置成功');
 
         target.refreshCustomerData(true);
       },

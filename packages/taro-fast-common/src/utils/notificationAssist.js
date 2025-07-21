@@ -127,6 +127,10 @@ function showSuccessNotification({
   duration = 3000,
   onClose = () => {},
 }) {
+  console.log({
+    description,
+  });
+
   notify({
     type: notificationTypeCollection.success,
     title,

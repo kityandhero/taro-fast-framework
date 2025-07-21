@@ -12,7 +12,6 @@ import { transformSize } from 'taro-fast-common';
 import { BaseComponent } from '../BaseComponent';
 
 const defaultProperties = {
-  style: {},
   zIndex: 10,
   image: '',
   backgroundSize: 240,
