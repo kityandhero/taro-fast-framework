@@ -122,16 +122,16 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
     });
   };
 
-  onNextNodeApproverChange = (v, option) => {
-    const { afterNextNodeApproverChange } = this.props;
+  onChange = (v, option) => {
+    const { afterChange } = this.props;
 
     this.setState(
       {
         nextNodeApproverUserSelectedList: [v],
       },
       () => {
-        if (isFunction(afterNextNodeApproverChange)) {
-          afterNextNodeApproverChange(v, option);
+        if (isFunction(afterChange)) {
+          afterChange(v, option);
         }
       },
     );
@@ -156,7 +156,7 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
         <Radio
           options={transferRadioOptionCollection(nextNodeApproverUserList)}
           afterChange={(v, option) => {
-            this.onNextNodeApproverChange(v, option);
+            this.onChange(v, option);
           }}
         />
 

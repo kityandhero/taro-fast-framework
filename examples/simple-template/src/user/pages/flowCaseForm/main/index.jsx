@@ -998,7 +998,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         <SelectNextNodeApproverPopup
           header="选择下一审批人"
           externalData={{ workflowCaseId }}
-          afterNextNodeApproverChange={this.triggerNextNodeApproverChange}
+          afterChange={this.triggerNextNodeApproverChange}
           afterOk={this.showConfirmSubmitFlowCaseActionSheet}
         />
 

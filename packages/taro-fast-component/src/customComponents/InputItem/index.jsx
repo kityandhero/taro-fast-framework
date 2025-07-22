@@ -191,15 +191,19 @@ class InputItem extends BaseComponent {
     }
   };
 
-  clearValue = () => {
-    this.currentValue = '';
-    this.inputRef.current.value = '';
+  setValue = (v) => {
+    this.currentValue = v;
+    this.inputRef.current.value = v;
 
     this.setState({
       focus: true,
     });
 
     this.triggerChange(this.currentValue);
+  };
+
+  clearValue = () => {
+    this.setValue('');
   };
 
   renderFurther() {

@@ -5,5 +5,6 @@ export * from './ConfirmSubmitFlowCaseActionSheet';
 export * from './EditNicknamePopup';
 export * from './FilePreviewPopup';
 export * from './GenderActionSheet';
+export * from './SelectGeneralDiscoursePopup';
 export * from './SelectNextNodeApproverPopup';
 export * from './SignOutActionSheet';

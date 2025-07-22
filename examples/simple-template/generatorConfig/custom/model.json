@@ -178,6 +178,20 @@
     {
       "apis": [
         {
+          "title": "单页列表",
+          "api": "/wechatApplication/generalDiscourse/singleList",
+          "effect": "singleList",
+          "service": "singleListData",
+          "type": "singleList"
+        }
+      ],
+      "cover": true,
+      "title": "快捷常用语",
+      "name": "generalDiscourse"
+    },
+    {
+      "apis": [
+        {
           "title": "企业单页列表",
           "api": "/wechatApplication/subsidiary/singleList",
           "effect": "singleList",

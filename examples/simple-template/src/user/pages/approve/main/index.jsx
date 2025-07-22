@@ -1,3 +1,4 @@
+import React from 'react';
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
@@ -27,6 +28,7 @@ import {
   ConfirmPassFlowCaseActionSheet,
   ConfirmRefuseFlowCaseActionSheet,
   ConfirmSubmitFlowCaseActionSheet,
+  SelectGeneralDiscoursePopup,
   SelectNextNodeApproverPopup,
 } from '../../../customComponents';
 import { BaseFlowCaseDetail } from '../../../pageBases';
@@ -76,11 +78,14 @@ definePageConfig({
 class Approve extends BaseFlowCaseDetail {
   targetActionSheet = targetActionSheetCollection.unknown;
 
+  inputGeneralDiscourseRef = React.createRef();
+
   constructor(properties) {
     super(properties);
 
     this.state = {
       ...this.state,
+      defaultGeneralDiscourse: '',
     };
   }
 
@@ -183,6 +188,14 @@ class Approve extends BaseFlowCaseDetail {
     this.nextWorkflowNodeApproverUserId = v;
   };
 
+  showSelectGeneralDiscoursePopup = () => {
+    SelectGeneralDiscoursePopup.open();
+  };
+
+  afterSelectGeneralDiscoursePopupOk = (v) => {
+    this.inputGeneralDiscourseRef.current.setValue(v);
+  };
+
   showSelectNextNodeApproverPopup = () => {
     SelectNextNodeApproverPopup.open();
   };
@@ -258,7 +271,7 @@ class Approve extends BaseFlowCaseDetail {
   };
 
   buildActionBox = () => {
-    const { canEdit, canApprove } = this.state;
+    const { canEdit, canApprove, defaultGeneralDiscourse } = this.state;
 
     if (canEdit === whetherNumber.no && canApprove === whetherNumber.no) {
       return (
@@ -320,6 +333,17 @@ class Approve extends BaseFlowCaseDetail {
             stripHeight={stripHeightValue}
             strip
             stripColor="#0075fe"
+            extra={
+              <View
+                style={{
+                  fontSize: transformSize(30),
+                  color: '#71bcea',
+                }}
+                onClick={this.showSelectGeneralDiscoursePopup}
+              >
+                快捷常用语
+              </View>
+            }
           >
             <View
               style={{
@@ -329,6 +353,7 @@ class Approve extends BaseFlowCaseDetail {
               }}
             >
               <InputItem
+                ref={this.inputGeneralDiscourseRef}
                 required
                 layout="vertical"
                 areaMode
@@ -340,6 +365,7 @@ class Approve extends BaseFlowCaseDetail {
                   lineHeight: transformSize(46),
                 }}
                 placeholder="请输入审批意见"
+                value={defaultGeneralDiscourse}
                 afterChange={this.triggerNoteChanged}
               />
             </View>
@@ -450,8 +476,13 @@ class Approve extends BaseFlowCaseDetail {
         <SelectNextNodeApproverPopup
           header="选择下一审批人"
           externalData={{ workflowCaseId }}
-          afterNextNodeApproverChange={this.triggerNextNodeApproverChange}
+          afterChange={this.triggerNextNodeApproverChange}
           afterOk={this.afterSelectNextNodeApproverPopupOk}
+        />
+
+        <SelectGeneralDiscoursePopup
+          header="选择常用语"
+          afterOk={this.afterSelectGeneralDiscoursePopupOk}
         />
 
         <ConfirmSubmitFlowCaseActionSheet

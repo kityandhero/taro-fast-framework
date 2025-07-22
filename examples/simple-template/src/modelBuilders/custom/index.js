@@ -14,6 +14,10 @@ import {
   buildModel as buildFlowCaseFormAttachmentModel,
   flowCaseFormAttachmentTypeCollection,
 } from './flowCaseFormAttachment';
+import {
+  buildModel as buildGeneralDiscourseModel,
+  generalDiscourseTypeCollection,
+} from './generalDiscourse';
 import { buildModel as buildNoticeModel, noticeTypeCollection } from './notice';
 import {
   buildModel as buildSubsidiaryModel,
@@ -51,6 +55,7 @@ export const modelTypeCollection = {
   flowCaseFormAttachmentTypeCollection,
   noticeTypeCollection,
   addressBookTypeCollection,
+  generalDiscourseTypeCollection,
   subsidiaryTypeCollection,
   subsidiaryComplaintCategoryTypeCollection,
   subsidiaryComplaintMessageTypeCollection,
@@ -69,6 +74,7 @@ export function listModelBuilder() {
     buildFlowCaseFormAttachmentModel,
     buildNoticeModel,
     buildAddressBookModel,
+    buildGeneralDiscourseModel,
     buildSubsidiaryModel,
     buildSubsidiaryComplaintCategoryModel,
     buildSubsidiaryComplaintMessageModel,
