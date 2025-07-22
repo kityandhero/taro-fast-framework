@@ -111,6 +111,8 @@ const defaultProps = {
    * 滚动到底部/右边，会触发 onScrollToLower 事件
    */
   onScrollToLower: null,
+
+  afterVisibleChange: null,
 };
 
 class Popup extends BaseComponent {
@@ -138,6 +140,22 @@ class Popup extends BaseComponent {
 
     return {};
   }
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
+    const { visibleStage: visibleStagePrevious } = preState;
+    const { visibleStage: visibleStageNext } = this.state;
+    const { afterVisibleChange } = this.props;
+
+    if (
+      visibleStagePrevious != visibleStageNext &&
+      isFunction(afterVisibleChange)
+    ) {
+      setTimeout(() => {
+        afterVisibleChange(visibleStageNext);
+      }, 500);
+    }
+  };
 
   getMinHeight = () => {
     const { minHeight } = this.props;

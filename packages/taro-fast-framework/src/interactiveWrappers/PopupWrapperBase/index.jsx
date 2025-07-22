@@ -39,6 +39,7 @@ class PopupWrapperBase extends InteractiveCloseableBase {
         {...rest}
         flag={this.getVisibleFlag()}
         onClose={this.handleClose}
+        afterVisibleChange={this.doOtherWhenChangeVisible}
       >
         {upper}
 

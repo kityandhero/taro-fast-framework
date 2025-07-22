@@ -63,6 +63,7 @@ class ActionSheetWrapperBase extends InteractiveCancelableBase {
         flag={this.getVisibleFlag()}
         onOptionClick={this.handleOption}
         onCancel={this.handleCancel}
+        afterVisibleChange={this.doOtherWhenChangeVisible}
       />
     );
   }

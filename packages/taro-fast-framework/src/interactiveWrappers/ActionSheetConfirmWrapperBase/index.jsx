@@ -71,6 +71,7 @@ class ActionSheetConfirmWrapperBase extends InteractiveCancelableBase {
         ]}
         onOptionClick={this.handleOk}
         onCancel={this.handleCancel}
+        afterVisibleChange={this.doOtherWhenChangeVisible}
       />
     );
   }

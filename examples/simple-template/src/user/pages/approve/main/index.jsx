@@ -5,8 +5,6 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
-  isArray,
-  isEmptyArray,
   showSimpleErrorMessage,
   showSimpleSuccessMessage,
   showSimpleSuccessNotification,
@@ -23,7 +21,7 @@ import {
   Line,
 } from 'taro-fast-component';
 
-import { fieldDataUser, fieldDataWorkflowCase } from '../../../../customConfig';
+import { fieldDataWorkflowCase } from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
 import {
   ConfirmPassFlowCaseActionSheet,
@@ -35,7 +33,6 @@ import { BaseFlowCaseDetail } from '../../../pageBases';
 import {
   passAction,
   refuseAction,
-  singleListNextNodeApproverAction,
   submitApprovalAction,
 } from '../assist/action';
 
@@ -58,6 +55,7 @@ const bodyStyle = {
 };
 
 const targetActionSheetCollection = {
+  unknown: 0,
   submitApproval: 100,
   pass: 200,
 };
@@ -76,65 +74,15 @@ definePageConfig({
   schedulingControl,
 }))
 class Approve extends BaseFlowCaseDetail {
+  targetActionSheet = targetActionSheetCollection.unknown;
+
   constructor(properties) {
     super(properties);
 
     this.state = {
       ...this.state,
-      nextNodeApproverUserList: [],
     };
   }
-
-  doOtherRemoteRequest = () => {
-    this.loadNextNodeApprover();
-  };
-
-  loadNextNodeApprover = () => {
-    const id = getValueByKey({
-      data: this.externalParameter,
-      key: 'id',
-      defaultValue: '',
-    });
-
-    const d = {};
-
-    d[fieldDataWorkflowCase.workflowCaseId.name] = id;
-
-    singleListNextNodeApproverAction({
-      target: this,
-      handleData: {
-        ...d,
-      },
-      successCallback: ({ target, remoteListData }) => {
-        if (
-          isArray(remoteListData) &&
-          !isEmptyArray(remoteListData) &&
-          remoteListData.length === 1
-        ) {
-          const firstData = remoteListData[0];
-
-          const userId = getValueByKey({
-            data: firstData,
-            key: fieldDataUser.userId.name,
-            convert: convertCollection.string,
-          });
-
-          const friendlyName = getValueByKey({
-            data: firstData,
-            key: fieldDataUser.friendlyName.name,
-            convert: convertCollection.string,
-          });
-
-          target.nextWorkflowNodeApproverUserId = userId;
-          target.nextWorkflowNodeApproverUserRealName = friendlyName;
-        }
-
-        target.setState({
-          nextNodeApproverUserList: [...remoteListData],
-        });
-      },
-    });
-  };
 
   submitApproval = () => {
     const { metaData } = this.state;
@@ -191,7 +139,7 @@ class Approve extends BaseFlowCaseDetail {
       successCallback: ({ target }) => {
         showSimpleSuccessMessage('审批完成');
 
-        target.reloadData({});
+        target.goToUserTab();
       },
     });
   };
@@ -221,7 +169,7 @@ class Approve extends BaseFlowCaseDetail {
       successCallback: ({ target }) => {
         showSimpleSuccessMessage('审批完成');
 
-        target.reloadData({});
+        target.goToUserTab();
       },
     });
   };
@@ -240,21 +188,19 @@ class Approve extends BaseFlowCaseDetail {
   };
 
   afterSelectNextNodeApproverPopupOk = () => {
-    const { metaData } = this.state;
-
-    const status = getValueByKey({
-      data: metaData,
-      key: fieldDataWorkflowCase.status.name,
-      convert: convertCollection.number,
-    });
-
-    if (status == targetActionSheetCollection.submitApproval) {
+    if (this.targetActionSheet == targetActionSheetCollection.submitApproval) {
       this.showConfirmSubmitFlowCaseActionSheet();
+
+      return;
     }
 
-    if (status == targetActionSheetCollection.pass) {
+    if (this.targetActionSheet == targetActionSheetCollection.pass) {
       this.showConfirmPassFlowCaseActionSheet();
+
+      return;
     }
+
+    showSimpleErrorMessage('未知的交互逻辑');
   };
 
   showConfirmSubmitFlowCaseActionSheet = () => {
@@ -488,7 +434,14 @@ class Approve extends BaseFlowCaseDetail {
   };
 
   renderInteractiveArea = () => {
-    const { nextNodeApproverUserList } = this.state;
+    const { metaData } = this.state;
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
 
     return (
       <>
@@ -496,7 +449,7 @@ class Approve extends BaseFlowCaseDetail {
 
         <SelectNextNodeApproverPopup
           header="选择下一审批人"
-          nextNodeApproverUserList={nextNodeApproverUserList}
+          externalData={{ workflowCaseId }}
           afterNextNodeApproverChange={this.triggerNextNodeApproverChange}
           afterOk={this.afterSelectNextNodeApproverPopupOk}
         />

@@ -42,6 +42,7 @@ const defaultProps = {
   headerStyle: {},
   bodyStyle: {},
   footerStyle: {},
+  afterVisibleChange: null,
 };
 
 class ActionSheet extends BaseComponent {
@@ -67,6 +68,22 @@ class ActionSheet extends BaseComponent {
 
     return {};
   }
+
+  // eslint-disable-next-line no-unused-vars
+  doWorkWhenDidUpdate = (preProperties, preState, snapshot) => {
+    const { visibleStage: visibleStagePrevious } = preState;
+    const { visibleStage: visibleStageNext } = this.state;
+    const { afterVisibleChange } = this.props;
+
+    if (
+      visibleStagePrevious != visibleStageNext &&
+      isFunction(afterVisibleChange)
+    ) {
+      setTimeout(() => {
+        afterVisibleChange(visibleStageNext);
+      }, 500);
+    }
+  };
 
   handleClose = () => {
     const { onClose } = this.props;

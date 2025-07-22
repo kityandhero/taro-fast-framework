@@ -1,10 +1,20 @@
 import { View } from '@tarojs/components';
 
-import { isArray, isFunction } from 'easy-soft-utility';
+import { connect } from 'easy-soft-dva';
+import {
+  convertCollection,
+  getValueByKey,
+  isArray,
+  isEmptyArray,
+  isFunction,
+} from 'easy-soft-utility';
 
-import { transformSize } from 'taro-fast-common';
+import { Tips, transformSize } from 'taro-fast-common';
 import { Button, Line, Radio } from 'taro-fast-component';
 import { PopupWrapperBase, switchControlAssist } from 'taro-fast-framework';
+
+import { fieldDataUser, fieldDataWorkflowCase } from '../../../customConfig';
+import { singleListNextNodeApproverAction } from '../../pages/approve/assist/action';
 
 function transferRadioOptionCollection(list) {
   if (!isArray(list)) {
@@ -28,6 +38,13 @@ function transferRadioOptionCollection(list) {
 // 显隐控制标记, 必须设置, 标记需要全局唯一
 const visibleFlag = '3f96df0053b1442ea23ce2078deb1c32';
 
+@connect(({ flowCase, session, entrance, global, schedulingControl }) => ({
+  flowCase,
+  session,
+  entrance,
+  global,
+  schedulingControl,
+}))
 class SelectNextNodeApproverPopup extends PopupWrapperBase {
   static open() {
     switchControlAssist.open(visibleFlag);
@@ -42,9 +59,68 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
 
     this.state = {
       ...this.state,
+      nextNodeApproverUserList: [],
       nextNodeApproverUserSelectedList: [],
     };
   }
+
+  doOtherWhenChangeVisibleToShow = () => {
+    Tips.loading(`预检审批人`);
+
+    this.loadNextNodeApprover();
+  };
+
+  loadNextNodeApprover = () => {
+    const { externalData } = this.props;
+
+    const workflowCaseId = getValueByKey({
+      data: externalData,
+      key: fieldDataWorkflowCase.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const d = {};
+
+    d[fieldDataWorkflowCase.workflowCaseId.name] = workflowCaseId;
+
+    singleListNextNodeApproverAction({
+      target: this,
+      handleData: {
+        ...d,
+      },
+      successCallback: ({ target, remoteListData }) => {
+        if (
+          isArray(remoteListData) &&
+          !isEmptyArray(remoteListData) &&
+          remoteListData.length === 1
+        ) {
+          const firstData = remoteListData[0];
+
+          const userId = getValueByKey({
+            data: firstData,
+            key: fieldDataUser.userId.name,
+            convert: convertCollection.string,
+          });
+
+          const friendlyName = getValueByKey({
+            data: firstData,
+            key: fieldDataUser.friendlyName.name,
+            convert: convertCollection.string,
+          });
+
+          target.nextWorkflowNodeApproverUserId = userId;
+          target.nextWorkflowNodeApproverUserRealName = friendlyName;
+        }
+
+        target.setState({
+          nextNodeApproverUserList: [...remoteListData],
+        });
+
+        Tips.loaded();
+      },
+    });
+  };
 
   onNextNodeApproverChange = (v, option) => {
     const { afterNextNodeApproverChange } = this.props;
@@ -72,8 +148,8 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
   };
 
   buildUpperView = () => {
-    const { nextNodeApproverUserList } = this.props;
-    const { nextNodeApproverUserSelectedList } = this.state;
+    const { nextNodeApproverUserList, nextNodeApproverUserSelectedList } =
+      this.state;
 
     return (
       <View style={{ minHeight: transformSize(240) }}>

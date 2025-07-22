@@ -110,6 +110,16 @@ export const fieldDataFlow = {
     name: 'scopeNote',
     helper: '应用范围',
   },
+  availableOnMobileSwitch: {
+    label: '移动端可用开关',
+    name: 'availableOnMobileSwitch',
+    helper: '',
+  },
+  availableOnMobileSwitchNote: {
+    label: '移动端可用开关',
+    name: 'availableOnMobileSwitchNote',
+    helper: '',
+  },
   businessMode: {
     label: '适用业务',
     name: 'businessMode',

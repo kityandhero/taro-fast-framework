@@ -5,25 +5,43 @@ import { connect } from 'easy-soft-dva';
 import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
+  datetimeFormat,
+  formatDatetime,
   getValueByKey,
   isArray,
   isEmptyArray,
+  isFunction,
   isObject,
   isString,
   showSimpleSuccessMessage,
   showSimpleSuccessNotification,
+  toDatetime,
   whetherNumber,
 } from 'easy-soft-utility';
 
 import { navigateBack, transformSize } from 'taro-fast-common';
-import { Button, FixedBox, FlexBox, Line, Radio } from 'taro-fast-component';
-import { FormBuilder } from 'taro-fast-design-playground';
+import {
+  Avatar,
+  Button,
+  Card,
+  ColorText,
+  FixedBox,
+  FlexBox,
+  Line,
+  Tag,
+  Watermark,
+} from 'taro-fast-component';
+import {
+  DocumentPrintDesigner,
+  FormBuilder,
+} from 'taro-fast-design-playground';
 
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import {
-  fieldDataUser,
+  fieldDataFlow,
   fieldDataWorkflowCase,
   fieldDataWorkflowCaseFormAttachment,
+  userGreyImage,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
 import { uploadFileDataApiAddress } from '../../../../services/flowCaseFormAttachment';
@@ -32,34 +50,38 @@ import {
   ConfirmSubmitFlowCaseActionSheet,
   SelectNextNodeApproverPopup,
 } from '../../../customComponents';
-import {
-  singleListNextNodeApproverAction,
-  submitApprovalAction,
-} from '../../approve/assist/action';
+import { analysisDocumentConfig, buildListApprove } from '../../../utils';
+import { submitApprovalAction } from '../../approve/assist/action';
 import {
   addAttachmentAction,
   removeAttachmentAction,
   submitFormAction,
 } from '../assist/action';
 
-function transferRadioOptionCollection(list) {
-  if (!isArray(list)) {
-    return [];
-  }
+const stripTopValue = 24;
+const stripHeightValue = 32;
 
-  return list.map((item) => {
-    const { friendlyName, userId } = {
-      friendlyName: '',
-      userId: '',
-      ...item,
-    };
+const headerStyle = {
+  color: '#181818',
+  fontSize: transformSize(32),
+  lineHeight: transformSize(46),
+  fontWeight: 'bold',
+  paddingLeft: transformSize(26),
+  paddingRight: transformSize(26),
+};
 
-    return {
-      label: friendlyName ?? '',
-      value: userId,
-    };
-  });
-}
+const bodyStyle = {
+  paddingLeft: transformSize(26),
+  paddingRight: transformSize(26),
+  paddingBottom: transformSize(20),
+};
+
+const descriptionStyle = {
+  color: '#7e7e7e',
+  fontSize: transformSize(30),
+  lineHeight: transformSize(42),
+  paddingBottom: transformSize(10),
+};
 
 function analyzeSchema(o) {
   let schemaData = {};
@@ -233,11 +255,14 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       loadApiPath: modelTypeCollection.flowCaseTypeCollection.get,
       workflowId: '',
       workflowCaseId: '',
+      listFormStorageForDocument: [],
       schemaList: [],
       initialValueList: [],
       attachmentList: [],
       remarkList: [],
-      nextNodeApproverUserList: [],
+      workflowAvailableOnMobileSwitch: whetherNumber.no,
+      listChainApprove: [],
+      listApprove: [],
     };
   }
 
@@ -251,57 +276,6 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     o[fieldDataWorkflowCase.workflowCaseId.name] = id;
 
     return { ...o };
-  };
-
-  doOtherRemoteRequest = () => {
-    this.loadNextNodeApprover();
-  };
-
-  loadNextNodeApprover = () => {
-    const id = getValueByKey({
-      data: this.externalParameter,
-      key: 'id',
-      defaultValue: '',
-    });
-
-    const d = {};
-
-    d[fieldDataWorkflowCase.workflowCaseId.name] = id;
-
-    singleListNextNodeApproverAction({
-      target: this,
-      handleData: {
-        ...d,
-      },
-      successCallback: ({ target, remoteListData }) => {
-        if (
-          isArray(remoteListData) &&
-          !isEmptyArray(remoteListData) &&
-          remoteListData.length === 1
-        ) {
-          const firstData = remoteListData[0];
-
-          const userId = getValueByKey({
-            data: firstData,
-            key: fieldDataUser.userId.name,
-            convert: convertCollection.string,
-          });
-
-          const friendlyName = getValueByKey({
-            data: firstData,
-            key: fieldDataUser.friendlyName.name,
-            convert: convertCollection.string,
-          });
-
-          target.nextWorkflowNodeApproverUserId = userId;
-          target.nextWorkflowNodeApproverUserRealName = friendlyName;
-        }
-
-        target.setState({
-          nextNodeApproverUserList: [...remoteListData],
-        });
-      },
-    });
   };
 
   doOtherAfterLoadSuccess = ({
@@ -327,6 +301,19 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       convert: convertCollection.string,
     });
 
+    const workflow = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.workflow.name,
+      defaultValue: {},
+    });
+
+    const workflowAvailableOnMobileSwitch = getValueByKey({
+      data: workflow,
+      key: fieldDataFlow.availableOnMobileSwitch.name,
+      defaultValue: whetherNumber.no,
+      convert: convertCollection.number,
+    });
+
     const canEdit = getValueByKey({
       data: metaData,
       key: fieldDataWorkflowCase.canEdit.name,
@@ -339,6 +326,44 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       key: fieldDataWorkflowCase.listFormStorage.name,
       convert: convertCollection.array,
       defaultValue: [],
+    });
+
+    const listFormStorageForDocument = listFormStorage.map((o) => {
+      const { nameNote: title, name, value, displayValue, valueType } = o;
+
+      let displayValueAdjust = displayValue;
+
+      if (valueType === 500) {
+        try {
+          const vList = JSON.parse(displayValue);
+
+          if (isArray(vList) && vList.length === 2) {
+            const vListAdjust = vList.map((one) => {
+              try {
+                return formatDatetime({
+                  data: toDatetime(one),
+                  format: datetimeFormat.yearMonthDayHourMinute,
+                });
+              } catch {
+                return one;
+              }
+            });
+
+            displayValueAdjust = vListAdjust.join(' ~ ');
+          } else {
+            displayValueAdjust = displayValue;
+          }
+        } catch {
+          displayValueAdjust = displayValue;
+        }
+      }
+
+      return {
+        title,
+        name,
+        value,
+        displayValue: displayValueAdjust,
+      };
     });
 
     const initialValueList = listFormStorage.map((o) => {
@@ -370,10 +395,46 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       ...workflowFormDesign,
     };
 
+    const nextApproveWorkflowNode = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.nextApproveWorkflowNode.name,
+      defaultValue: {},
+    });
+
+    const approveBatchNumber = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.approveBatchNumber.name,
+      defaultValue: '',
+      convert: convertCollection.number,
+    });
+
+    const listChainApprove = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.listChainApprove.name,
+      convert: convertCollection.array,
+      defaultValue: [],
+    });
+
+    const listApprove = buildListApprove({
+      approveBatchNumber,
+      listChainApprove,
+      listProcessHistory,
+      nextApproveWorkflowNode,
+    });
+
+    const listProcessHistory = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.listProcessHistory.name,
+      convert: convertCollection.array,
+      defaultValue: [],
+    });
+
     this.setState({
+      workflowFormDesign,
       workflowId,
       workflowCaseId,
       canEdit,
+      listFormStorageForDocument,
       schemaList: analyzeSchema(designSchema),
       initialValueList: initialValueList,
       attachmentList: listAttachment,
@@ -381,6 +442,9 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         ...remarkSchemaList,
         '保存表单仅仅保存数据, 如需进行审批, 请在保存表单后点击提交审批。',
       ],
+      workflowAvailableOnMobileSwitch,
+      listChainApprove: [...listChainApprove],
+      listApprove: [...listApprove],
     });
   };
 
@@ -426,7 +490,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     });
   };
 
-  submitForm = () => {
+  submitForm = ({ successCallback }) => {
     const { metaData } = this.state;
 
     const workflowCaseId = getValueByKey({
@@ -444,6 +508,10 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       },
       successCallback: () => {
         showSimpleSuccessMessage('保存表单成功');
+
+        if (isFunction(successCallback)) {
+          successCallback();
+        }
       },
     });
   };
@@ -516,12 +584,135 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     ConfirmSubmitFlowCaseActionSheet.open();
   };
 
+  prepareSubmitApproval = () => {
+    const { workflowAvailableOnMobileSwitch } = this.state;
+
+    const that = this;
+
+    if (workflowAvailableOnMobileSwitch === whetherNumber.yes) {
+      that.submitForm({
+        successCallback: () => {
+          that.showSelectNextNodeApproverPopup();
+        },
+      });
+    } else {
+      that.showSelectNextNodeApproverPopup();
+    }
+  };
+
   buildHeadNavigation = () => {
     return <HeadNavigationBox title="编辑表单" />;
   };
 
+  buildTitleBox = () => {
+    const { metaData } = this.state;
+
+    const title = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.title.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const description = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.description.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const userAvatar = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.userAvatar.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const userRealName = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.userRealName.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const statusNote = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.statusNote.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const lastSubmitApprovalTime = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.lastSubmitApprovalTime.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    return (
+      <Card
+        header={title}
+        headerStyle={headerStyle}
+        bodyStyle={{ ...bodyStyle }}
+        space={false}
+        border={false}
+        bodyBorder={false}
+        headerEllipsis={false}
+        stripCenter={false}
+        stripTop={stripTopValue}
+        stripHeight={stripHeightValue}
+        strip
+        stripColor="#0075fe"
+      >
+        {checkStringIsNullOrWhiteSpace(description) ? null : (
+          <>
+            <View style={descriptionStyle}>详情: {description}</View>
+
+            <Line transparent height={10} />
+          </>
+        )}
+
+        <FlexBox
+          style={{ width: '100%' }}
+          flexAuto="right"
+          leftStyle={{
+            marginRight: transformSize(14),
+          }}
+          left={<Avatar circle size={36} image={userAvatar || userGreyImage} />}
+          right={
+            <FlexBox
+              flexAuto="left"
+              left={
+                <View>
+                  <ColorText
+                    color="#7d7d7d"
+                    fontSize={30}
+                    textPrefixStyle={{
+                      fontWeight: 'bold',
+                    }}
+                    textPrefix={userRealName}
+                    separator=""
+                    separatorStyle={{
+                      marginRight: transformSize(14),
+                    }}
+                    text={lastSubmitApprovalTime}
+                  />
+                </View>
+              }
+              right={
+                <Tag color="#71bcea" fill="outline">
+                  {statusNote}
+                </Tag>
+              }
+            />
+          }
+        />
+      </Card>
+    );
+  };
+
   buildActionBox = () => {
-    const { canEdit } = this.state;
+    const { workflowAvailableOnMobileSwitch, canEdit } = this.state;
 
     return (
       <View
@@ -568,26 +759,11 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                       marginRight: transformSize(30),
                     }}
                     left={
-                      <Button
-                        text="上传附件"
-                        // backgroundColor="#fc5e3d"
-                        // fontColor="#fff"
-                        fontSize={30}
-                        paddingTop={14}
-                        paddingBottom={14}
-                        paddingLeft={24}
-                        paddingRight={24}
-                        size="middle"
-                        disabled={canEdit !== whetherNumber.yes}
-                        onClick={this.uploadFile}
-                      />
-                    }
-                    right={
-                      <>
+                      workflowAvailableOnMobileSwitch === whetherNumber.yes ? (
                         <Button
-                          text="保存表单"
-                          backgroundColor="#0075ff"
-                          fontColor="#fff"
+                          text="上传附件"
+                          // backgroundColor="#fc5e3d"
+                          // fontColor="#fff"
                           fontSize={30}
                           paddingTop={14}
                           paddingBottom={14}
@@ -595,15 +771,42 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                           paddingRight={24}
                           size="middle"
                           disabled={canEdit !== whetherNumber.yes}
-                          onClick={this.submitForm}
+                          onClick={this.uploadFile}
                         />
+                      ) : null
+                    }
+                    right={
+                      <>
+                        {workflowAvailableOnMobileSwitch ===
+                        whetherNumber.yes ? (
+                          <Button
+                            text="保存表单"
+                            backgroundColor="#0075ff"
+                            fontColor="#fff"
+                            fontSize={30}
+                            paddingTop={14}
+                            paddingBottom={14}
+                            paddingLeft={24}
+                            paddingRight={24}
+                            size="middle"
+                            disabled={
+                              canEdit !== whetherNumber.yes ||
+                              workflowAvailableOnMobileSwitch !==
+                                whetherNumber.yes
+                            }
+                            onClick={this.submitForm}
+                          />
+                        ) : null}
 
-                        <Line
-                          direction="vertical"
-                          width={30}
-                          height="30"
-                          transparent
-                        />
+                        {workflowAvailableOnMobileSwitch ===
+                        whetherNumber.yes ? (
+                          <Line
+                            direction="vertical"
+                            width={30}
+                            height="30"
+                            transparent
+                          />
+                        ) : null}
 
                         <Button
                           text="提交审批"
@@ -616,7 +819,7 @@ class FlowCaseForm extends PageNeedSignInWrapper {
                           paddingRight={24}
                           size="middle"
                           disabled={canEdit !== whetherNumber.yes}
-                          onClick={this.showSelectNextNodeApproverPopup}
+                          onClick={this.prepareSubmitApproval}
                         />
                       </>
                     }
@@ -632,12 +835,44 @@ class FlowCaseForm extends PageNeedSignInWrapper {
 
   renderFurther() {
     const {
+      workflowAvailableOnMobileSwitch,
+      canEdit,
       metaData,
+      workflowFormDesign,
+      listFormStorageForDocument,
       initialValueList,
       schemaList,
       remarkList,
       attachmentList,
+      listApprove,
+      listChainApprove,
     } = this.state;
+
+    const {
+      general,
+      items,
+      showApply,
+      listApply,
+      showAttention,
+      listAttention,
+      remarkSchemaList,
+    } = analysisDocumentConfig({
+      flowCase: metaData,
+      workflowFormDesign,
+    });
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
+
+    const qRCodeImage = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.qRCodeImage.name,
+      convert: convertCollection.string,
+    });
 
     return (
       <View>
@@ -681,16 +916,63 @@ class FlowCaseForm extends PageNeedSignInWrapper {
           </View>
         ) : (
           <>
-            <FormBuilder
-              initialValueList={initialValueList}
-              schemaList={schemaList}
-              attachmentList={attachmentList}
-              remarkList={remarkList}
-              onRemoveAttachment={this.removeAttachment}
-              afterFormChange={(o) => {
-                this.onFormChange(o);
-              }}
-            />
+            {this.buildTitleBox()}
+
+            <Line color="#eeeeee" height={20} />
+
+            {canEdit !== whetherNumber.yes ||
+            workflowAvailableOnMobileSwitch !== whetherNumber.yes ? (
+              <View
+                style={{
+                  marginLeft: transformSize(14),
+                  marginRight: transformSize(14),
+                }}
+              >
+                <Watermark content="驻矿托OA">
+                  <DocumentPrintDesigner
+                    title={getValueByKey({
+                      data: metaData,
+                      key: fieldDataWorkflowCase.workflowTitle.name,
+                    })}
+                    schema={{
+                      general,
+                      items,
+                    }}
+                    borderColor="#999"
+                    values={listFormStorageForDocument}
+                    showApply={showApply}
+                    applyList={listApply}
+                    showAttention={showAttention}
+                    attentionList={listAttention}
+                    approveList={isArray(listApprove) ? listApprove : []}
+                    allApproveProcessList={listChainApprove}
+                    signetStyle={{
+                      top: transformSize(-4),
+                    }}
+                    remarkTitle="备注"
+                    remarkName="remark"
+                    remarkList={remarkSchemaList}
+                    showQRCode
+                    qRCodeImage={qRCodeImage}
+                    qRCodeHeight={64}
+                    showSerialNumber
+                    serialNumberTitle="审批流水号: "
+                    serialNumberContent={workflowCaseId}
+                  />
+                </Watermark>
+              </View>
+            ) : (
+              <FormBuilder
+                initialValueList={initialValueList}
+                schemaList={schemaList}
+                attachmentList={attachmentList}
+                remarkList={remarkList}
+                onRemoveAttachment={this.removeAttachment}
+                afterFormChange={(o) => {
+                  this.onFormChange(o);
+                }}
+              />
+            )}
 
             <Line transparent height={120} />
 
@@ -702,13 +984,20 @@ class FlowCaseForm extends PageNeedSignInWrapper {
   }
 
   renderInteractiveArea = () => {
-    const { nextNodeApproverUserList } = this.state;
+    const { metaData } = this.state;
+
+    const workflowCaseId = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.workflowCaseId.name,
+      defaultValue: '',
+      convert: convertCollection.string,
+    });
 
     return (
       <>
         <SelectNextNodeApproverPopup
           header="选择下一审批人"
-          nextNodeApproverUserList={nextNodeApproverUserList}
+          externalData={{ workflowCaseId }}
           afterNextNodeApproverChange={this.triggerNextNodeApproverChange}
           afterOk={this.showConfirmSubmitFlowCaseActionSheet}
         />

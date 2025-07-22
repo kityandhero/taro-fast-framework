@@ -23,6 +23,17 @@ class PageWrapper extends PageWrapperExtra {
     });
   }
 
+  goToUserTab(callback = null) {
+    switchTab({
+      url: `${pathCollection.root.user.path}`,
+      success: () => {
+        if (isFunction(callback)) {
+          callback();
+        }
+      },
+    });
+  }
+
   goToSignIn = () => {
     navigateTo({
       url: pathCollection.user.signIn.path,

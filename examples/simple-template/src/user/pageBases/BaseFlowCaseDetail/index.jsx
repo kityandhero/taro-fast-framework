@@ -56,7 +56,11 @@ import {
 } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
 import { FilePreviewPopup } from '../../customComponents';
-import { buildListApprove, buildListHistory } from '../../utils';
+import {
+  analysisDocumentConfig,
+  buildListApprove,
+  buildListHistory,
+} from '../../utils';
 
 const stripTopValue = 24;
 const stripHeightValue = 32;
@@ -173,6 +177,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       workflowFormDesign: {},
       listFormStorage: [],
       formItemList: [],
+      listChainApprove: [],
       listApprove: [],
       listHistory: [],
       listAttachment: [],
@@ -362,6 +367,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       workflowFormDesign: workflowFormDesign || {},
       listFormStorage: [...listFormStorage],
       formItemList: [...formItemList],
+      listChainApprove: [...listChainApprove],
       listApprove: [...listApprove],
       listHistory: [...listHistory],
       listAttachment: [...listAttachment],
@@ -715,6 +721,7 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
     const {
       useDocumentView,
       metaData,
+      workflowFormDesign,
       listFormStorage,
       formItemList,
       listApprove,
@@ -741,7 +748,10 @@ class BaseFlowCaseDetail extends PageNeedSignInWrapper {
       showAttention,
       listAttention,
       remarkSchemaList,
-    } = this.analysisDocumentConfig();
+    } = analysisDocumentConfig({
+      flowCase: metaData,
+      workflowFormDesign,
+    });
 
     return (
       <Card bodyStyle={bodyStyle} border={false} bodyBorder={false}>
