@@ -13,7 +13,7 @@ import {
   checkTicketValidityData,
   exchangePhoneData,
   getAdministrativeDivisionFullData,
-  getCustomerData,
+  getCurrentOperatorData,
   getMetaDataData,
   getWeatherData,
   refreshSessionData,
@@ -112,8 +112,8 @@ export function buildModel() {
 
         return dataAdjust;
       },
-      *getCustomer({ payload, alias }, { call, put }) {
-        const response = yield call(getCustomerData, payload);
+      *getCurrentOperator({ payload, alias }, { call, put }) {
+        const response = yield call(getCurrentOperatorData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({ source: response });
 

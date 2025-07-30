@@ -73,7 +73,7 @@ class SetAvatar extends PageNeedSignInWrapper {
       successCallback: () => {
         showSimpleSuccessMessage('设置头像成功');
 
-        that.getCustomer({ force: true });
+        that.getCurrentOperator({ force: true });
       },
     });
   };

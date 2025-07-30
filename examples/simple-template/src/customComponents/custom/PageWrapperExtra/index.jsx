@@ -14,7 +14,7 @@ import { judgeComplain } from '../../../utils';
 import { PageWrapperCore } from '../../general/PageWrapperCore';
 
 class PageWrapperExtra extends PageWrapperCore {
-  getGetCustomerApiEffect = (data = {}) => {
+  getGetCurrentOperatorApiEffect = (data = {}) => {
     const o = getLaunchOption();
     const result = judgeComplain(o);
 

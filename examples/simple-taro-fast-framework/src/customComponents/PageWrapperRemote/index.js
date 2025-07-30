@@ -75,7 +75,7 @@ class PageWrapperRemote extends PageWrapperCore {
     };
   };
 
-  getGetCustomerApiEffect = (data = {}) => {
+  getGetCurrentOperatorApiEffect = (data = {}) => {
     return {
       type: 'customer/getCustomer',
       payload: data,

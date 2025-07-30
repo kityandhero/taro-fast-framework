@@ -52,9 +52,9 @@ export default class Index extends BasePageWrapper {
 
               return token || '';
             }`,
-            dispatchGetCustomer: `(data = {}) => {
+            dispatchGetCurrentOperator: `(data = {}) => {
               return this.dispatchApi({
-                type: 'customer/getCustomer',
+                type: 'customer/getCurrentOperator',
                 payload: data,
               });
             }`,

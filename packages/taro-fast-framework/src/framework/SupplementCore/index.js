@@ -41,7 +41,7 @@ import {
   getDefaultMetaData,
   getExchangePhoneAliasName,
   getGeographicalLocation,
-  getGetCustomerAliasName,
+  getGetCurrentOperatorAliasName,
   getGetFullAdministrativeDivisionDataAliasName,
   getMetaDataAliasName,
   getNavigationToSignInWhenSignInSilentFail,
@@ -3347,10 +3347,10 @@ class SupplementCore extends Common {
               'then',
               'setSignInProcessDetection',
               'parseSignInResultFromSignInApiDataWrapper',
-              'getCustomer',
+              'getCurrentOperator',
             );
 
-            that.getCustomer({
+            that.getCurrentOperator({
               successCallback: () => {
                 if (isFunction(successCallback)) {
                   that.logFunctionCallTrace(
@@ -3361,7 +3361,7 @@ class SupplementCore extends Common {
                     'then',
                     'setSignInProcessDetection',
                     'parseSignInResultFromSignInApiDataWrapper',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                   );
 
@@ -3375,7 +3375,7 @@ class SupplementCore extends Common {
                     'then',
                     'setSignInProcessDetection',
                     'parseSignInResultFromSignInApiDataWrapper',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                     emptyLogic,
                   );
@@ -3389,12 +3389,12 @@ class SupplementCore extends Common {
                   'then',
                   'setSignInProcessDetection',
                   'parseSignInResultFromSignInApiDataWrapper',
-                  'getCustomer',
+                  'getCurrentOperator',
                   'successCallback',
-                  'doAfterGetCustomerOnSignIn',
+                  'doAfterGetCurrentOperatorOnSignIn',
                 );
 
-                that.doAfterGetCustomerOnSignIn(metaData);
+                that.doAfterGetCurrentOperatorOnSignIn(metaData);
 
                 that.logFunctionCallTrace(
                   metaData,
@@ -3404,7 +3404,7 @@ class SupplementCore extends Common {
                   'then',
                   'setSignInProcessDetection',
                   'parseSignInResultFromSignInApiDataWrapper',
-                  'getCustomer',
+                  'getCurrentOperator',
                   'successCallback',
                   'doAfterSignInSuccess',
                 );
@@ -3917,10 +3917,10 @@ class SupplementCore extends Common {
               'signInSilentCore',
               'dispatchSignInSilent',
               'then',
-              'getCustomer',
+              'getCurrentOperator',
             );
 
-            that.getCustomer({
+            that.getCurrentOperator({
               successCallback: (customerData) => {
                 if (isFunction(successCallback)) {
                   that.logFunctionCallTrace(
@@ -3929,7 +3929,7 @@ class SupplementCore extends Common {
                     'signInSilentCore',
                     'dispatchSignInSilent',
                     'then',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                   );
 
@@ -3941,7 +3941,7 @@ class SupplementCore extends Common {
                     'signInSilentCore',
                     'dispatchSignInSilent',
                     'then',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                     emptyLogic,
                   );
@@ -3953,12 +3953,12 @@ class SupplementCore extends Common {
                   'signInSilentCore',
                   'dispatchSignInSilent',
                   'then',
-                  'getCustomer',
+                  'getCurrentOperator',
                   'successCallback',
-                  'doAfterGetCustomerOnSignInSilent',
+                  'doAfterGetCurrentOperatorOnSignInSilent',
                 );
 
-                that.doAfterGetCustomerOnSignInSilent(customerData);
+                that.doAfterGetCurrentOperatorOnSignInSilent(customerData);
 
                 that.logFunctionCallTrace(
                   { metaData },
@@ -3966,7 +3966,7 @@ class SupplementCore extends Common {
                   'signInSilentCore',
                   'dispatchSignInSilent',
                   'then',
-                  'getCustomer',
+                  'getCurrentOperator',
                   'successCallback',
                   'doAfterSignInSilentSuccess',
                 );
@@ -4641,42 +4641,46 @@ class SupplementCore extends Common {
     );
   };
 
-  dispatchGetCustomerWrapper = (data = {}) => {
+  dispatchGetCurrentOperatorWrapper = (data = {}) => {
     this.logFunctionCallTrack(
       data,
       primaryCallName,
-      'dispatchGetCustomerWrapper',
+      'dispatchGetCurrentOperatorWrapper',
     );
 
     this.logFunctionCallTrace(
       data,
       primaryCallName,
-      'dispatchGetCustomerWrapper',
-      'dispatchGetCustomer',
+      'dispatchGetCurrentOperatorWrapper',
+      'dispatchGetCurrentOperator',
     );
 
-    return this.dispatchGetCustomer(data);
+    return this.dispatchGetCurrentOperator(data);
   };
 
-  dispatchGetCustomer = (data = {}) => {
-    this.logFunctionCallTrack({ data }, primaryCallName, 'dispatchGetCustomer');
+  dispatchGetCurrentOperator = (data = {}) => {
+    this.logFunctionCallTrack(
+      { data },
+      primaryCallName,
+      'dispatchGetCurrentOperator',
+    );
 
     this.logFunctionCallTrace(
       {},
       primaryCallName,
-      'dispatchGetCustomer',
-      'getGetCustomerApiEffect',
+      'dispatchGetCurrentOperator',
+      'getGetCurrentOperatorApiEffect',
     );
 
     const { type, payload, alias } = {
       type: '',
       payload: null,
-      ...this.getGetCustomerApiEffect(data),
-      alias: getGetCustomerAliasName(),
+      ...this.getGetCurrentOperatorApiEffect(data),
+      alias: getGetCurrentOperatorAliasName(),
     };
 
     if (checkStringIsNullOrWhiteSpace(type)) {
-      const info = 'getGetCustomerApiEffect return type disallow empty';
+      const info = 'getGetCurrentOperatorApiEffect return type disallow empty';
 
       this.logFunctionCallTrace(
         {
@@ -4686,7 +4690,7 @@ class SupplementCore extends Common {
           alias,
         },
         primaryCallName,
-        'dispatchGetCustomer',
+        'dispatchGetCurrentOperator',
         'error',
       );
 
@@ -4698,34 +4702,42 @@ class SupplementCore extends Common {
     this.logFunctionCallTrace(
       o,
       primaryCallName,
-      'dispatchGetCustomer',
+      'dispatchGetCurrentOperator',
       'dispatchApi',
     );
 
     return this.dispatchApi(o);
   };
 
-  getGetCustomerApiEffect = (data) => {
-    this.logFunctionCallTrack(data, primaryCallName, 'getGetCustomerApiEffect');
+  getGetCurrentOperatorApiEffect = (data) => {
+    this.logFunctionCallTrack(
+      data,
+      primaryCallName,
+      'getGetCurrentOperatorApiEffect',
+    );
 
     logConfig(
-      'getGetCustomerApiEffect need override if need custom, getGetCustomerApiEffect must return a object like {type,payload}',
+      'getGetCurrentOperatorApiEffect need override if need custom, getGetCurrentOperatorApiEffect must return a object like {type,payload}',
     );
 
     return {
-      type: 'schedulingControl/getCustomer',
+      type: 'schedulingControl/getCurrentOperator',
       payload: data,
     };
   };
 
-  getCustomer = ({
+  getCurrentOperator = ({
     data = {},
     force: forceValue = false,
     successCallback = null,
     failCallback = null,
     completeCallback = null,
   }) => {
-    this.logFunctionCallTrack({ data, force }, primaryCallName, 'getCustomer');
+    this.logFunctionCallTrack(
+      { data, force },
+      primaryCallName,
+      'getCurrentOperator',
+    );
 
     let force = forceValue;
     let existCurrentCustomer = false;
@@ -4749,23 +4761,23 @@ class SupplementCore extends Common {
     if (force) {
       if (existCurrentCustomer) {
         logDebug(
-          'getCustomer with force api request, shift to get from api dispatch',
+          'getCurrentOperator with force api request, shift to get from api dispatch',
         );
       } else {
         logDebug(
-          'getCustomer from local cache fail, shift to get from api dispatch',
+          'getCurrentOperator from local cache fail, shift to get from api dispatch',
         );
       }
 
       that.logFunctionCallTrace(
         data,
         primaryCallName,
-        'getCustomer',
-        'dispatchGetCustomerWrapper',
+        'getCurrentOperator',
+        'dispatchGetCurrentOperatorWrapper',
       );
 
       that
-        .dispatchGetCustomerWrapper(data || {})
+        .dispatchGetCurrentOperatorWrapper(data || {})
         .then((remoteData) => {
           const { dataSuccess, data: metaData } = remoteData;
           logDebug(`dataSuccess is ${dataSuccess}`);
@@ -4777,8 +4789,8 @@ class SupplementCore extends Common {
               that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'successCallback',
               );
@@ -4788,8 +4800,8 @@ class SupplementCore extends Common {
               that.logEmptyCallTrace(
                 {},
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'successCallback',
                 emptyLogic,
@@ -4800,8 +4812,8 @@ class SupplementCore extends Common {
               that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'completeCallback',
               );
@@ -4811,8 +4823,8 @@ class SupplementCore extends Common {
               that.logEmptyCallTrace(
                 {},
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'completeCallback',
                 emptyLogic,
@@ -4823,8 +4835,8 @@ class SupplementCore extends Common {
               that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'failCallback',
               );
@@ -4834,8 +4846,8 @@ class SupplementCore extends Common {
               that.logEmptyCallTrace(
                 {},
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'failCallback',
                 emptyLogic,
@@ -4846,8 +4858,8 @@ class SupplementCore extends Common {
               that.logFunctionCallTrace(
                 metaData,
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'completeCallback',
               );
@@ -4857,8 +4869,8 @@ class SupplementCore extends Common {
               that.logEmptyCallTrace(
                 {},
                 primaryCallName,
-                'getCustomer',
-                'dispatchGetCustomerWrapper',
+                'getCurrentOperator',
+                'dispatchGetCurrentOperatorWrapper',
                 'then',
                 'completeCallback',
                 emptyLogic,
@@ -4872,27 +4884,27 @@ class SupplementCore extends Common {
           that.logFunctionCallTrace(
             { error },
             primaryCallName,
-            'getCustomer',
-            'dispatchGetCustomerWrapper',
+            'getCurrentOperator',
+            'dispatchGetCurrentOperatorWrapper',
             'catch',
           );
 
           logInfo(
             error,
-            'info getCustomer error,doAfterRegisterWithWeChat and callback will do not execute',
+            'info getCurrentOperator error,doAfterRegisterWithWeChat and callback will do not execute',
           );
 
           logException(
             error,
-            `error on getCustomer in ${this.componentName}(${primaryCallName})`,
+            `error on getCurrentOperator in ${this.componentName}(${primaryCallName})`,
           );
 
           if (isFunction(failCallback)) {
             that.logFunctionCallTrace(
               {},
               primaryCallName,
-              'getCustomer',
-              'dispatchGetCustomerWrapper',
+              'getCurrentOperator',
+              'dispatchGetCurrentOperatorWrapper',
               'catch',
               'failCallback',
             );
@@ -4902,8 +4914,8 @@ class SupplementCore extends Common {
             that.logEmptyCallTrace(
               {},
               primaryCallName,
-              'getCustomer',
-              'dispatchGetCustomerWrapper',
+              'getCurrentOperator',
+              'dispatchGetCurrentOperatorWrapper',
               'catch',
               'failCallback',
               emptyLogic,
@@ -4914,8 +4926,8 @@ class SupplementCore extends Common {
             that.logFunctionCallTrace(
               {},
               primaryCallName,
-              'getCustomer',
-              'dispatchGetCustomerWrapper',
+              'getCurrentOperator',
+              'dispatchGetCurrentOperatorWrapper',
               'catch',
               'completeCallback',
             );
@@ -4925,8 +4937,8 @@ class SupplementCore extends Common {
             that.logEmptyCallTrace(
               {},
               primaryCallName,
-              'getCustomer',
-              'dispatchGetCustomerWrapper',
+              'getCurrentOperator',
+              'dispatchGetCurrentOperatorWrapper',
               'catch',
               'completeCallback',
               emptyLogic,
@@ -4934,13 +4946,13 @@ class SupplementCore extends Common {
           }
         });
     } else {
-      logDebug(currentCustomer, 'getCustomer from local cache success');
+      logDebug(currentCustomer, 'getCurrentOperator from local cache success');
 
       if (isFunction(successCallback)) {
         that.logFunctionCallTrace(
           currentCustomer,
           primaryCallName,
-          'getCustomer',
+          'getCurrentOperator',
           'successCallback',
         );
 
@@ -4949,7 +4961,7 @@ class SupplementCore extends Common {
         that.logEmptyCallTrace(
           {},
           primaryCallName,
-          'getCustomer',
+          'getCurrentOperator',
           'successCallback',
           emptyLogic,
         );
@@ -4959,7 +4971,7 @@ class SupplementCore extends Common {
         that.logFunctionCallTrace(
           currentCustomer,
           primaryCallName,
-          'getCustomer',
+          'getCurrentOperator',
           'completeCallback',
         );
 
@@ -4968,7 +4980,7 @@ class SupplementCore extends Common {
         that.logEmptyCallTrace(
           {},
           primaryCallName,
-          'getCustomer',
+          'getCurrentOperator',
           'completeCallback',
           emptyLogic,
         );
@@ -4976,27 +4988,27 @@ class SupplementCore extends Common {
     }
   };
 
-  doAfterGetCustomerOnSignInSilent = (data) => {
+  doAfterGetCurrentOperatorOnSignInSilent = (data) => {
     this.logFunctionCallTrack(
       data,
       primaryCallName,
-      'doAfterGetCustomerOnSignInSilent',
+      'doAfterGetCurrentOperatorOnSignInSilent',
     );
 
     logConfig(
-      'doAfterGetCustomerOnSignInSilent do nothing,if you need,you can override it: doAfterGetCustomerOnSignInSilent = (data) => {}',
+      'doAfterGetCurrentOperatorOnSignInSilent do nothing,if you need,you can override it: doAfterGetCurrentOperatorOnSignInSilent = (data) => {}',
     );
   };
 
-  doAfterGetCustomerOnSignIn = (data) => {
+  doAfterGetCurrentOperatorOnSignIn = (data) => {
     this.logFunctionCallTrack(
       data,
       primaryCallName,
-      'doAfterGetCustomerOnSignIn',
+      'doAfterGetCurrentOperatorOnSignIn',
     );
 
     logConfig(
-      'doAfterGetCustomerOnSignIn do nothing,if you need,you can override it: doAfterGetCustomerOnSignIn = (data) => {}',
+      'doAfterGetCurrentOperatorOnSignIn do nothing,if you need,you can override it: doAfterGetCurrentOperatorOnSignIn = (data) => {}',
     );
   };
 
@@ -5520,10 +5532,10 @@ class SupplementCore extends Common {
               'registerWithWeChat',
               'dispatchRegisterWithWeChat',
               'then',
-              'getCustomer',
+              'getCurrentOperator',
             );
 
-            that.getCustomer({
+            that.getCurrentOperator({
               successCallback: () => {
                 if (isFunction(successCallback)) {
                   that.logFunctionCallTrace(
@@ -5532,7 +5544,7 @@ class SupplementCore extends Common {
                     'registerWithWeChat',
                     'dispatchRegisterWithWeChat',
                     'then',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                   );
 
@@ -5544,7 +5556,7 @@ class SupplementCore extends Common {
                     'registerWithWeChat',
                     'dispatchRegisterWithWeChat',
                     'then',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                     emptyLogic,
                   );
@@ -5556,7 +5568,7 @@ class SupplementCore extends Common {
                   'registerWithWeChat',
                   'dispatchRegisterWithWeChat',
                   'then',
-                  'getCustomer',
+                  'getCurrentOperator',
                   'successCallback',
                   'doAfterRegisterWithWeChat',
                 );
@@ -5996,10 +6008,10 @@ class SupplementCore extends Common {
               'register',
               'dispatchRegister',
               'then',
-              'getCustomer',
+              'getCurrentOperator',
             );
 
-            that.getCustomer({
+            that.getCurrentOperator({
               successCallback: () => {
                 if (isFunction(successCallback)) {
                   that.logFunctionCallTrace(
@@ -6008,7 +6020,7 @@ class SupplementCore extends Common {
                     'register',
                     'dispatchRegister',
                     'then',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                     'successCallback',
                   );
@@ -6021,7 +6033,7 @@ class SupplementCore extends Common {
                     'register',
                     'dispatchRegister',
                     'then',
-                    'getCustomer',
+                    'getCurrentOperator',
                     'successCallback',
                     'successCallback',
                     emptyLogic,
@@ -6034,7 +6046,7 @@ class SupplementCore extends Common {
                   'register',
                   'dispatchRegister',
                   'then',
-                  'getCustomer',
+                  'getCurrentOperator',
                   'successCallback',
                   'doAfterRegister',
                 );
@@ -6052,7 +6064,7 @@ class SupplementCore extends Common {
                 'register',
                 'dispatchRegister',
                 'then',
-                'getCustomer',
+                'getCurrentOperator',
                 'successCallback',
                 'failCallback',
               );
@@ -6065,7 +6077,7 @@ class SupplementCore extends Common {
                 'register',
                 'dispatchRegister',
                 'then',
-                'getCustomer',
+                'getCurrentOperator',
                 'successCallback',
                 'failCallback',
                 emptyLogic,
@@ -6079,7 +6091,7 @@ class SupplementCore extends Common {
                 'register',
                 'dispatchRegister',
                 'then',
-                'getCustomer',
+                'getCurrentOperator',
                 'successCallback',
                 'completeCallback',
               );
@@ -6092,7 +6104,7 @@ class SupplementCore extends Common {
                 'register',
                 'dispatchRegister',
                 'then',
-                'getCustomer',
+                'getCurrentOperator',
                 'successCallback',
                 'completeCallback',
                 emptyLogic,

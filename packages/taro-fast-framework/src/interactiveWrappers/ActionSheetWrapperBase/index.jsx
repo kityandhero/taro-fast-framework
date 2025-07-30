@@ -58,6 +58,12 @@ class ActionSheetWrapperBase extends InteractiveCancelableBase {
 
     return (
       <ActionSheetExtra
+        headerStyle={{
+          color: '#000',
+        }}
+        footerStyle={{
+          color: '#828282',
+        }}
         {...rest}
         title={this.buildTitle() || ''}
         flag={this.getVisibleFlag()}

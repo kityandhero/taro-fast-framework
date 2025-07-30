@@ -180,7 +180,7 @@ class VerifyPhone extends PageWrapper {
       successCallback: () => {
         showSimpleSuccessMessage('校验成功');
 
-        that.getCustomer({
+        that.getCurrentOperator({
           force: true,
           successCallback: () => {
             navigateBack();

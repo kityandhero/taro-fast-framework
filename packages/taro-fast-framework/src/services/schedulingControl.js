@@ -216,17 +216,17 @@ export async function getMetaDataData(parameters) {
   });
 }
 
-export async function getCustomerData(parameters) {
+export async function getCurrentOperatorData(parameters) {
   const simulation = {};
 
   logDebug(
-    `getCustomerData simulation customer silent data: ${JSON.stringify(
+    `getCurrentOperatorData simulation customer silent data: ${JSON.stringify(
       simulation,
     )}`,
   );
 
   return request({
-    api: `/schedulingControl/getCustomer`,
+    api: `/schedulingControl/getCurrentOperator`,
     params: parameters,
     mode: requestMode.simulation,
     simulativeAuthorize: false,

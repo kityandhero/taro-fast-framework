@@ -82,36 +82,36 @@ class user extends PageWrapper {
   }
 
   doWorkAdjustDidMount = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
   doWorkWhenRepeatedShow = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
-  doAfterGetCustomerOnSignInSilent = (data) => {
+  doAfterGetCurrentOperatorOnSignInSilent = (data) => {
     this.setState({
       currentCustomer: data,
     });
   };
 
-  buildCustomerData = () => {
-    const { currentCustomer } = this.state;
+  buildCurrentOperatorData = () => {
+    const that = this;
 
-    if ((currentCustomer || null) == null) {
-      const signInSuccess = this.checkSignInSuccess();
+    const signInSuccess = this.checkSignInSuccess();
 
-      if (signInSuccess) {
-        const that = this;
-
-        that.getCustomer({
-          successCallback: (data) => {
-            that.setState({
-              currentCustomer: data,
-            });
-          },
-        });
-      }
+    if (signInSuccess) {
+      that.getCurrentOperator({
+        successCallback: (data) => {
+          that.setState({
+            currentCustomer: data,
+          });
+        },
+      });
+    } else {
+      that.setState({
+        currentCustomer: null,
+      });
     }
   };
 

@@ -40,13 +40,13 @@ export default class Index extends BasePageWrapper {
   }
 
   doWorkAdjustDidMount = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
-  buildCustomerData = () => {
+  buildCurrentOperatorData = () => {
     const that = this;
 
-    that.getCustomer({
+    that.getCurrentOperator({
       successCallback: (o) => {
         const { nickname } = {
           nickname: '',
@@ -88,7 +88,7 @@ export default class Index extends BasePageWrapper {
           </View>
 
           <Button
-            onClick={this.buildCustomerData}
+            onClick={this.buildCurrentOperatorData}
             block
             size="small"
             text="刷新"

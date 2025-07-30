@@ -144,7 +144,7 @@ class Approve extends BaseFlowCaseDetail {
       successCallback: ({ target }) => {
         showSimpleSuccessMessage('审批完成');
 
-        target.goToUserTab();
+        target.goToHomeTab();
       },
     });
   };
@@ -241,9 +241,23 @@ class Approve extends BaseFlowCaseDetail {
       return;
     }
 
+    const { metaData } = this.state;
+
     this.targetActionSheet = targetActionSheetCollection.pass;
 
-    this.showSelectNextNodeApproverPopup();
+    const nextApproveWorkflowNodeWhetherFinalApprovalNode = getValueByKey({
+      data: metaData,
+      key: fieldDataWorkflowCase.nextApproveWorkflowNodeWhetherFinalApprovalNode
+        .name,
+      defaultValue: whetherNumber.no,
+      convert: convertCollection.number,
+    });
+
+    if (nextApproveWorkflowNodeWhetherFinalApprovalNode === whetherNumber.yes) {
+      this.showConfirmPassFlowCaseActionSheet();
+    } else {
+      this.showSelectNextNodeApproverPopup();
+    }
   };
 
   prepareRefuse = () => {

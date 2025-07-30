@@ -20,7 +20,7 @@ class PageNeedSignInWrapper extends PageWrapper {
   }
 
   doWorkAdjustDidMount = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -33,7 +33,7 @@ class PageNeedSignInWrapper extends PageWrapper {
     );
   };
 
-  buildCustomerData = () => {
+  buildCurrentOperatorData = () => {
     const { currentCustomer } = this.state;
 
     if ((currentCustomer || null) == null) {
@@ -42,12 +42,12 @@ class PageNeedSignInWrapper extends PageWrapper {
       if (signInSuccess) {
         const that = this;
 
-        that.getCustomer({
+        that.getCurrentOperator({
           successCallback: (data) => {
             that.logFunctionCallTrace(
               data,
               primaryCallName,
-              'buildCustomerData',
+              'buildCurrentOperatorData',
               'successCallback',
               'buildExtraStateDataWhenCustomerUpdate',
             );
@@ -70,7 +70,7 @@ class PageNeedSignInWrapper extends PageWrapper {
     if (signInSuccess) {
       const that = this;
 
-      that.getCustomer({
+      that.getCurrentOperator({
         force,
         successCallback: (data) => {
           that.setState({

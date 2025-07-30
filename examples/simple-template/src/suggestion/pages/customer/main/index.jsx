@@ -77,20 +77,20 @@ class PageMain extends PageWrapper {
   }
 
   doWorkAdjustDidMount = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
   doWorkWhenRepeatedShow = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
-  doAfterGetCustomerOnSignInSilent = (data) => {
+  doAfterGetCurrentOperatorOnSignInSilent = (data) => {
     this.setState({
       currentCustomer: data,
     });
   };
 
-  buildCustomerData = () => {
+  buildCurrentOperatorData = () => {
     const { currentCustomer } = this.state;
 
     if ((currentCustomer || null) == null) {
@@ -99,7 +99,7 @@ class PageMain extends PageWrapper {
       if (signInSuccess) {
         const that = this;
 
-        that.getCustomer({
+        that.getCurrentOperator({
           successCallback: (data) => {
             that.setState({
               currentCustomer: data,

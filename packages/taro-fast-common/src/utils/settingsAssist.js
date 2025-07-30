@@ -513,13 +513,13 @@ export function getMetaDataAliasName() {
   return metaDataAliasName || 'metaDataApiData';
 }
 
-export function getGetCustomerAliasName() {
-  const { getCustomerAliasName } = {
-    getCustomerAliasName: 'getCustomerApiData',
+export function getGetCurrentOperatorAliasName() {
+  const { getCurrentOperatorAliasName } = {
+    getCurrentOperatorAliasName: 'getCurrentOperatorApiData',
     ...getApplicationMergeConfig(),
   };
 
-  return getCustomerAliasName || 'getCustomerApiData';
+  return getCurrentOperatorAliasName || 'getCurrentOperatorApiData';
 }
 
 export function getShowLogInConsole() {

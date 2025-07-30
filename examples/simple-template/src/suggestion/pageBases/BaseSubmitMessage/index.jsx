@@ -142,14 +142,14 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
   }
 
   doWorkAdjustDidMount = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
   doWorkWhenRepeatedShow = () => {
-    this.buildCustomerData();
+    this.buildCurrentOperatorData();
   };
 
-  doAfterGetCustomerOnSignInSilent = (data) => {
+  doAfterGetCurrentOperatorOnSignInSilent = (data) => {
     this.setState({
       currentCustomer: data,
     });
@@ -185,7 +185,7 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
     });
   };
 
-  buildCustomerData = () => {
+  buildCurrentOperatorData = () => {
     const { currentCustomer } = this.state;
 
     const that = this;
@@ -194,7 +194,7 @@ class BaseSubmitMessage extends PageNeedSignInWrapper {
       const signInSuccess = this.checkSignInSuccess();
 
       if (signInSuccess) {
-        that.getCustomer({
+        that.getCurrentOperator({
           successCallback: (data) => {
             const { whetherPhoneVerify, phoneVerifyMode } = {
               whetherPhoneVerify: whetherNumber.no,

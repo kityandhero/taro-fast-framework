@@ -1,6 +1,5 @@
 import {
   getJsonFromLocalStorage,
-  getToken,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from 'easy-soft-utility';
@@ -69,58 +68,5 @@ export function setMetaDataCache(o) {
 export function removeMetaDataCache() {
   const key = storageKeyCollection.metaData;
 
-  removeLocalStorage(key);
-}
-
-/**
- * 获取缓存
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function getCurrentOperatorCache() {
-  const key = storageKeyCollection.currentOperator;
-
-  const d = getJsonFromLocalStorage(key);
-
-  if ((d || null) == null) {
-    return null;
-  }
-
-  if (d.flag === '' || d.flag !== getToken()) {
-    return null;
-  }
-
-  return d.data || null;
-}
-
-/**
- * 设置metaData缓存
- *
- * @export
- * @param {o} metaData数据
- * @returns
- */
-export function setCurrentOperatorCache(o) {
-  const key = storageKeyCollection.currentOperator;
-
-  const d = {
-    data: o || null,
-    flag: getToken() || '',
-  };
-
-  return saveJsonToLocalStorage(key, d);
-}
-
-/**
- * 移除经纬度信息
- *
- * @export
- * @param {*} fn
- * @returns
- */
-export function removeCurrentOperatorCache() {
-  const key = storageKeyCollection.currentOperator;
   removeLocalStorage(key);
 }

@@ -146,6 +146,11 @@ const fieldExtraData = {
     name: 'nextApproveWorkflowNodeName',
     helper: '',
   },
+  nextApproveWorkflowNodeWhetherFinalApprovalNode: {
+    label: '下一审批节点是否是最终审批节点',
+    name: 'nextApproveWorkflowNodeWhetherFinalApprovalNode',
+    helper: '',
+  },
   waitApproveUserId: {
     label: '待审批用户标识',
     name: 'waitApproveUserId',
