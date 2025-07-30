@@ -13,6 +13,7 @@ import {
 
 import { emptyImage, scanCode, transformSize } from 'taro-fast-common';
 import {
+  buildEmptyPlaceholder,
   CenterBox,
   ColorText,
   Ellipsis,
@@ -544,6 +545,14 @@ function WaitApproveFlowCaseItem({ data, onClick = null }) {
 }
 
 export function WaitApproveBox({ list = [], onItemClick = null }) {
+  const hasData = isArray(list) ? (isEmptyArray(list) ? false : true) : false;
+
+  if (!hasData) {
+    return buildEmptyPlaceholder({
+      description: '暂无待审批项',
+    });
+  }
+
   return (
     <CustomWrapper>
       <View>
@@ -712,6 +721,14 @@ export function NotificationItem({ data, onClick = null }) {
 }
 
 export function NotificationBox({ list = [], onItemClick = null }) {
+  const hasData = isArray(list) ? (isEmptyArray(list) ? false : true) : false;
+
+  if (!hasData) {
+    return buildEmptyPlaceholder({
+      description: '暂无通知公告',
+    });
+  }
+
   return (
     <CustomWrapper>
       <View>

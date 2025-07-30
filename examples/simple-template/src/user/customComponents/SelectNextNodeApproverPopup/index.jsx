@@ -10,7 +10,15 @@ import {
 } from 'easy-soft-utility';
 
 import { Tips, transformSize } from 'taro-fast-common';
-import { Button, Line, Radio } from 'taro-fast-component';
+import {
+  ActivityIndicator,
+  buildEmptyPlaceholder,
+  Button,
+  CenterBox,
+  IconCheckCircle,
+  Line,
+  Radio,
+} from 'taro-fast-component';
 import { PopupWrapperBase, switchControlAssist } from 'taro-fast-framework';
 
 import { fieldDataUser, fieldDataWorkflowCase } from '../../../customConfig';
@@ -59,6 +67,7 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
 
     this.state = {
       ...this.state,
+      nextNodeApproverUserLoading: true,
       nextNodeApproverUserList: [],
       nextNodeApproverUserSelectedList: [],
     };
@@ -68,6 +77,14 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
     Tips.loading(`预检审批人`);
 
     this.loadNextNodeApprover();
+  };
+
+  doOtherWhenChangeVisibleToHide = () => {
+    this.setState({
+      nextNodeApproverUserLoading: true,
+      nextNodeApproverUserList: [],
+      nextNodeApproverUserSelectedList: [],
+    });
   };
 
   loadNextNodeApprover = () => {
@@ -114,6 +131,7 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
         }
 
         target.setState({
+          nextNodeApproverUserLoading: false,
           nextNodeApproverUserList: [...remoteListData],
         });
 
@@ -148,17 +166,51 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
   };
 
   buildUpperView = () => {
-    const { nextNodeApproverUserList, nextNodeApproverUserSelectedList } =
-      this.state;
+    const {
+      nextNodeApproverUserLoading,
+      nextNodeApproverUserList,
+      nextNodeApproverUserSelectedList,
+    } = this.state;
+
+    const hasData = isArray(nextNodeApproverUserList)
+      ? isEmptyArray(nextNodeApproverUserList)
+        ? false
+        : true
+      : false;
 
     return (
       <View style={{ minHeight: transformSize(240) }}>
-        <Radio
-          options={transferRadioOptionCollection(nextNodeApproverUserList)}
-          afterChange={(v, option) => {
-            this.onChange(v, option);
-          }}
-        />
+        {nextNodeApproverUserLoading ? (
+          <View
+            style={{
+              height: transformSize(88),
+            }}
+          >
+            <CenterBox>
+              <ActivityIndicator
+                type="ring"
+                style={{}}
+                content="审批人加载中"
+                visible
+                borderWidth={1}
+                color="#11d3f8"
+              />
+            </CenterBox>
+          </View>
+        ) : hasData ? (
+          <Radio
+            options={transferRadioOptionCollection(nextNodeApproverUserList)}
+            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+            iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
+            afterChange={(v, option) => {
+              this.onChange(v, option);
+            }}
+          />
+        ) : (
+          buildEmptyPlaceholder({
+            description: '暂无下一审批人',
+          })
+        )}
 
         <Line transparent height={40} />
 

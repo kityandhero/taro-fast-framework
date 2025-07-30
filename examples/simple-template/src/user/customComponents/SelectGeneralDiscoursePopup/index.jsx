@@ -1,10 +1,18 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import { isArray, isFunction } from 'easy-soft-utility';
+import { isArray, isEmptyArray, isFunction } from 'easy-soft-utility';
 
 import { Tips, transformSize } from 'taro-fast-common';
-import { Button, Empty, Line, Radio } from 'taro-fast-component';
+import {
+  ActivityIndicator,
+  buildEmptyPlaceholder,
+  Button,
+  CenterBox,
+  IconCheckCircle,
+  Line,
+  Radio,
+} from 'taro-fast-component';
 import { PopupWrapperBase, switchControlAssist } from 'taro-fast-framework';
 
 import { singleListAction } from '../../assists/generalDiscourseAction';
@@ -56,6 +64,7 @@ class SelectGeneralDiscoursePopup extends PopupWrapperBase {
 
     this.state = {
       ...this.state,
+      generalDiscourseLoading: true,
       generalDiscourseList: [],
       generalDiscourseSelectedList: [],
     };
@@ -67,12 +76,21 @@ class SelectGeneralDiscoursePopup extends PopupWrapperBase {
     this.loadGeneralDiscourse();
   };
 
+  doOtherWhenChangeVisibleToHide = () => {
+    this.setState({
+      generalDiscourseLoading: true,
+      generalDiscourseList: [],
+      generalDiscourseSelectedList: [],
+    });
+  };
+
   loadGeneralDiscourse = () => {
     singleListAction({
       target: this,
       handleData: {},
       successCallback: ({ target, remoteListData }) => {
         target.setState({
+          generalDiscourseLoading: false,
           generalDiscourseList: [...remoteListData],
         });
 
@@ -102,21 +120,50 @@ class SelectGeneralDiscoursePopup extends PopupWrapperBase {
   };
 
   buildUpperView = () => {
-    const { generalDiscourseList, generalDiscourseSelectedList } = this.state;
+    const {
+      generalDiscourseLoading,
+      generalDiscourseList,
+      generalDiscourseSelectedList,
+    } = this.state;
 
-    const hasGeneralDiscourse = generalDiscourseList.length > 0;
+    const hasData = isArray(generalDiscourseList)
+      ? isEmptyArray(generalDiscourseList)
+        ? false
+        : true
+      : false;
 
     return (
       <View style={{ minHeight: transformSize(240) }}>
-        {hasGeneralDiscourse ? (
+        {generalDiscourseLoading ? (
+          <View
+            style={{
+              height: transformSize(88),
+            }}
+          >
+            <CenterBox>
+              <ActivityIndicator
+                type="ring"
+                style={{}}
+                content="常用语加载中"
+                visible
+                borderWidth={1}
+                color="#11d3f8"
+              />
+            </CenterBox>
+          </View>
+        ) : hasData ? (
           <Radio
             options={transferRadioOptionCollection(generalDiscourseList)}
+            iconCheck={<IconCheckCircle size={44} color="#1677ff" />}
+            iconUncheck={<IconCheckCircle size={44} color="#ccc" />}
             afterChange={(v, option) => {
               this.onChange(v, option);
             }}
           />
         ) : (
-          <Empty description="暂无常用语" />
+          buildEmptyPlaceholder({
+            description: '暂无常用语',
+          })
         )}
 
         <Line transparent height={40} />
