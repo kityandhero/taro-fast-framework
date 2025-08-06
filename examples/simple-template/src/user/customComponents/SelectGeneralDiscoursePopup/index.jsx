@@ -23,15 +23,15 @@ function transferRadioOptionCollection(list) {
   }
 
   return list.map((item) => {
-    const { content, generalDiscourseId } = {
+    const { content, key } = {
       content: '',
-      generalDiscourseId: '',
+      key: '',
       ...item,
     };
 
     return {
       label: content ?? '',
-      value: generalDiscourseId,
+      value: key,
     };
   });
 }
