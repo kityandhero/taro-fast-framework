@@ -12,7 +12,9 @@ export const config = {
   // showUseVirtualRequestMessage: true,
   apiPrefix: {
     // corsTargetDomain: 'https://app.api.oa.32306.net',
-    corsTargetDomain: 'http://app.api.oa.local.com',
+    corsTargetDomain: checkWhetherDevelopmentEnvironment()
+      ? 'http://app.api.oa.local.com'
+      : 'https://app.api.oa.32306.net',
   },
   apiSuccessCode: 200,
   authenticationFailCode: 2001,

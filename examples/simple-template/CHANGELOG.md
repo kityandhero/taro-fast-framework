@@ -1,5 +1,11 @@
 # taro-fast-framework-template
 
+## 1.0.48
+
+### Patch Changes
+
+- update
+
 ## 1.0.47
 
 ### Patch Changes
