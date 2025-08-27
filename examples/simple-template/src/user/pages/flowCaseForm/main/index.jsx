@@ -39,8 +39,11 @@ import {
 import { PageNeedSignInWrapper } from '../../../../customComponents';
 import {
   fieldDataFlow,
+  fieldDataFlowCase,
+  fieldDataFlowNode,
   fieldDataWorkflowCase,
   fieldDataWorkflowCaseFormAttachment,
+  flowNodeApproveModeCollection,
   userGreyImage,
 } from '../../../../customConfig';
 import { modelTypeCollection } from '../../../../modelBuilders';
@@ -585,18 +588,67 @@ class FlowCaseForm extends PageNeedSignInWrapper {
   };
 
   prepareSubmitApproval = () => {
-    const { workflowAvailableOnMobileSwitch } = this.state;
+    const { metaData, workflowAvailableOnMobileSwitch } = this.state;
 
     const that = this;
 
-    if (workflowAvailableOnMobileSwitch === whetherNumber.yes) {
-      that.submitForm({
-        successCallback: () => {
-          that.showSelectNextNodeApproverPopup();
-        },
+    const firstApproveWorkflowNode = getValueByKey({
+      data: metaData,
+      key: fieldDataFlowCase.firstApproveWorkflowNode.name,
+    });
+
+    const firstApproveWorkflowNodeApproveMode = getValueByKey({
+      data: firstApproveWorkflowNode,
+      key: fieldDataFlowNode.approveMode.name,
+      convert: convertCollection.number,
+    });
+
+    const firstApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover =
+      getValueByKey({
+        data: firstApproveWorkflowNode,
+        key: fieldDataFlowNode.whetherOneSignatureDesignateNextApprover.name,
+        convert: convertCollection.number,
       });
+
+    const firstApproveWorkflowNodeWhetherFinalApprovalNode = getValueByKey({
+      data: metaData,
+      key: fieldDataFlowCase.firstApproveWorkflowNodeWhetherFinalApprovalNode
+        .name,
+      convert: convertCollection.number,
+    });
+
+    let needSelectNextNodeApprover = false;
+
+    if (
+      firstApproveWorkflowNodeApproveMode ===
+        flowNodeApproveModeCollection.oneSignature &&
+      firstApproveWorkflowNodeWhetherFinalApprovalNode === whetherNumber.no &&
+      firstApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover ===
+        whetherNumber.yes
+    ) {
+      needSelectNextNodeApprover = true;
+    }
+
+    if (needSelectNextNodeApprover) {
+      if (workflowAvailableOnMobileSwitch === whetherNumber.yes) {
+        that.submitForm({
+          successCallback: () => {
+            that.showSelectNextNodeApproverPopup();
+          },
+        });
+      } else {
+        that.showSelectNextNodeApproverPopup();
+      }
     } else {
-      that.showSelectNextNodeApproverPopup();
+      if (workflowAvailableOnMobileSwitch === whetherNumber.yes) {
+        that.submitForm({
+          successCallback: () => {
+            that.showConfirmSubmitFlowCaseActionSheet();
+          },
+        });
+      } else {
+        that.showConfirmSubmitFlowCaseActionSheet();
+      }
     }
   };
 
@@ -993,11 +1045,24 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       convert: convertCollection.string,
     });
 
+    const firstApproveWorkflowNode = getValueByKey({
+      data: metaData,
+      key: fieldDataFlowCase.firstApproveWorkflowNode.name,
+    });
+
+    const workflowNodeName = getValueByKey({
+      data: firstApproveWorkflowNode,
+      key: fieldDataFlowNode.name.name,
+      convert: convertCollection.string,
+      defaultValue: '',
+    });
+
     return (
       <>
         <SelectNextNodeApproverPopup
           header="选择下一审批人"
           externalData={{ workflowCaseId }}
+          nodeName={workflowNodeName}
           afterChange={this.triggerNextNodeApproverChange}
           afterOk={this.showConfirmSubmitFlowCaseActionSheet}
         />

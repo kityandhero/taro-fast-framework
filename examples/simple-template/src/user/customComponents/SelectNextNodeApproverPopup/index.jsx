@@ -2,6 +2,7 @@ import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
 import {
+  checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
   isArray,
@@ -15,6 +16,7 @@ import {
   buildEmptyPlaceholder,
   Button,
   CenterBox,
+  ColorText,
   IconCheckCircle,
   Line,
   Radio,
@@ -172,6 +174,8 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
       nextNodeApproverUserSelectedList,
     } = this.state;
 
+    const { nodeName } = this.props;
+
     const hasData = isArray(nextNodeApproverUserList)
       ? isEmptyArray(nextNodeApproverUserList)
         ? false
@@ -180,6 +184,29 @@ class SelectNextNodeApproverPopup extends PopupWrapperBase {
 
     return (
       <View style={{ minHeight: transformSize(240) }}>
+        {checkStringIsNullOrWhiteSpace(nodeName) ? null : (
+          <View
+            style={{
+              paddingLeft: transformSize(24),
+              paddingRight: transformSize(24),
+              paddingTop: transformSize(12),
+              paddingBottom: transformSize(12),
+            }}
+          >
+            <CenterBox>
+              <ColorText
+                style={{
+                  paddingBottom: transformSize(4),
+                  borderBottom: `${transformSize(2)} solid #ccc`,
+                }}
+                color="#81929c"
+                fontSize={30}
+                text={nodeName}
+              />
+            </CenterBox>
+          </View>
+        )}
+
         {nextNodeApproverUserLoading ? (
           <View
             style={{

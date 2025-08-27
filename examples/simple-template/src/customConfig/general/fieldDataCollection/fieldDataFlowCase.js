@@ -131,6 +131,26 @@ const fieldExtraData = {
     name: 'latestApproveUserNickname',
     helper: '',
   },
+  firstApproveWorkflowNode: {
+    label: '首个审批节点',
+    name: 'firstApproveWorkflowNode',
+    helper: '',
+  },
+  firstApproveWorkflowNodeId: {
+    label: '首个审批节点标识',
+    name: 'firstApproveWorkflowNodeId',
+    helper: '',
+  },
+  firstApproveWorkflowNodeName: {
+    label: '首个审批节点',
+    name: 'firstApproveWorkflowNodeName',
+    helper: '',
+  },
+  firstApproveWorkflowNodeWhetherFinalApprovalNode: {
+    label: '首个审批节点是否为终点',
+    name: 'firstApproveWorkflowNodeWhetherFinalApprovalNode',
+    helper: '',
+  },
   nextApproveWorkflowNode: {
     label: '下一审批节点',
     name: 'nextApproveWorkflowNode',
@@ -147,8 +167,13 @@ const fieldExtraData = {
     helper: '',
   },
   nextApproveWorkflowNodeWhetherFinalApprovalNode: {
-    label: '下一审批节点是否是最终审批节点',
+    label: '下一审批节点是否为终点',
     name: 'nextApproveWorkflowNodeWhetherFinalApprovalNode',
+    helper: '',
+  },
+  nextNextApproveWorkflowNode: {
+    label: '下下一审批节点',
+    name: 'nextNextApproveWorkflowNode',
     helper: '',
   },
   waitApproveUserId: {

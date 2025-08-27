@@ -6,6 +6,7 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
+  logConsole,
   showSimpleErrorMessage,
   showSimpleSuccessMessage,
   showSimpleSuccessNotification,
@@ -22,7 +23,12 @@ import {
   Line,
 } from 'taro-fast-component';
 
-import { fieldDataWorkflowCase } from '../../../../customConfig';
+import {
+  fieldDataFlowCase,
+  fieldDataFlowNode,
+  fieldDataWorkflowCase,
+  flowNodeApproveModeCollection,
+} from '../../../../customConfig';
 import { HeadNavigationBox } from '../../../../utils';
 import {
   ConfirmPassFlowCaseActionSheet,
@@ -243,7 +249,25 @@ class Approve extends BaseFlowCaseDetail {
 
     const { metaData } = this.state;
 
-    this.targetActionSheet = targetActionSheetCollection.pass;
+    let needSelectNextNodeApprover = false;
+
+    const nextNextApproveWorkflowNode = getValueByKey({
+      data: metaData,
+      key: fieldDataFlowCase.nextNextApproveWorkflowNode.name,
+    });
+
+    const nextNextApproveWorkflowNodeApproveMode = getValueByKey({
+      data: nextNextApproveWorkflowNode,
+      key: fieldDataFlowNode.approveMode.name,
+      convert: convertCollection.number,
+    });
+
+    const nextNextApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover =
+      getValueByKey({
+        data: nextNextApproveWorkflowNode,
+        key: fieldDataFlowNode.whetherOneSignatureDesignateNextApprover.name,
+        convert: convertCollection.number,
+      });
 
     const nextApproveWorkflowNodeWhetherFinalApprovalNode = getValueByKey({
       data: metaData,
@@ -253,10 +277,29 @@ class Approve extends BaseFlowCaseDetail {
       convert: convertCollection.number,
     });
 
-    if (nextApproveWorkflowNodeWhetherFinalApprovalNode === whetherNumber.yes) {
-      this.showConfirmPassFlowCaseActionSheet();
-    } else {
+    if (
+      nextNextApproveWorkflowNodeApproveMode ===
+        flowNodeApproveModeCollection.oneSignature &&
+      nextApproveWorkflowNodeWhetherFinalApprovalNode === whetherNumber.no &&
+      nextNextApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover ===
+        whetherNumber.yes
+    ) {
+      needSelectNextNodeApprover = true;
+    }
+
+    logConsole({
+      nextNextApproveWorkflowNodeApproveMode,
+      nextApproveWorkflowNodeWhetherFinalApprovalNode,
+      nextNextApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover,
+      needSelectNextNodeApprover,
+    });
+
+    this.targetActionSheet = targetActionSheetCollection.pass;
+
+    if (needSelectNextNodeApprover) {
       this.showSelectNextNodeApproverPopup();
+    } else {
+      this.showConfirmPassFlowCaseActionSheet();
     }
   };
 
@@ -483,13 +526,28 @@ class Approve extends BaseFlowCaseDetail {
       convert: convertCollection.string,
     });
 
+    const nextNextApproveWorkflowNode = getValueByKey({
+      data: metaData,
+      key: fieldDataFlowCase.nextNextApproveWorkflowNode.name,
+    });
+
+    const workflowNodeName = getValueByKey({
+      data: nextNextApproveWorkflowNode,
+      key: fieldDataFlowNode.name.name,
+      convert: convertCollection.string,
+      defaultValue: '',
+    });
+
     return (
       <>
         {this.renderFilePreviewPopup()}
 
         <SelectNextNodeApproverPopup
           header="选择下一审批人"
-          externalData={{ workflowCaseId }}
+          externalData={{
+            workflowCaseId,
+          }}
+          nodeName={workflowNodeName}
           afterChange={this.triggerNextNodeApproverChange}
           afterOk={this.afterSelectNextNodeApproverPopupOk}
         />
