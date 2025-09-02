@@ -13,6 +13,7 @@ import {
   isFunction,
   isObject,
   isString,
+  logConsole,
   showSimpleSuccessMessage,
   showSimpleSuccessNotification,
   toDatetime,
@@ -503,18 +504,22 @@ class FlowCaseForm extends PageNeedSignInWrapper {
       convert: convertCollection.string,
     });
 
+    const that = this;
+
     submitFormAction({
-      target: this,
+      target: that,
       handleData: {
         workflowCaseId,
-        ...this.currentFormData,
+        ...that.currentFormData,
       },
-      successCallback: () => {
+      successCallback: ({ target, remoteData }) => {
         showSimpleSuccessMessage('保存表单成功');
 
-        if (isFunction(successCallback)) {
-          successCallback();
-        }
+        that.setState({ metaData: remoteData }, () => {
+          if (isFunction(successCallback)) {
+            successCallback();
+          }
+        });
       },
     });
   };
@@ -610,24 +615,21 @@ class FlowCaseForm extends PageNeedSignInWrapper {
         convert: convertCollection.number,
       });
 
-    const firstApproveWorkflowNodeWhetherFinalApprovalNode = getValueByKey({
-      data: metaData,
-      key: fieldDataFlowCase.firstApproveWorkflowNodeWhetherFinalApprovalNode
-        .name,
-      convert: convertCollection.number,
-    });
-
     let needSelectNextNodeApprover = false;
 
     if (
       firstApproveWorkflowNodeApproveMode ===
         flowNodeApproveModeCollection.oneSignature &&
-      firstApproveWorkflowNodeWhetherFinalApprovalNode === whetherNumber.no &&
       firstApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover ===
         whetherNumber.yes
     ) {
       needSelectNextNodeApprover = true;
     }
+
+    logConsole({
+      firstApproveWorkflowNodeApproveMode,
+      needSelectNextNodeApprover,
+    });
 
     if (needSelectNextNodeApprover) {
       if (workflowAvailableOnMobileSwitch === whetherNumber.yes) {

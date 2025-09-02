@@ -693,7 +693,11 @@ class FormBuilder extends PureComponent {
       let valueAdjust = [];
 
       try {
-        valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+        valueAdjust = checkStringIsNullOrWhiteSpace(value)
+          ? []
+          : isArray(value)
+            ? [...value]
+            : JSON.parse(value);
       } catch (error) {
         logException(
           error,
@@ -733,7 +737,11 @@ class FormBuilder extends PureComponent {
       let valueAdjust = [];
 
       try {
-        valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+        valueAdjust = checkStringIsNullOrWhiteSpace(value)
+          ? []
+          : isArray(value)
+            ? [...value]
+            : JSON.parse(value);
       } catch (error) {
         logException(
           error,
@@ -796,7 +804,11 @@ class FormBuilder extends PureComponent {
       let valueAdjust = [];
 
       try {
-        valueAdjust = isArray(value) ? [...value] : JSON.parse(value);
+        valueAdjust = checkStringIsNullOrWhiteSpace(value)
+          ? []
+          : isArray(value)
+            ? [...value]
+            : JSON.parse(value);
       } catch (error) {
         logException(
           error,
