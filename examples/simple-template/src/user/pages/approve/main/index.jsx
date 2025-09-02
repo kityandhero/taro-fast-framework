@@ -6,7 +6,6 @@ import {
   checkStringIsNullOrWhiteSpace,
   convertCollection,
   getValueByKey,
-  logConsole,
   showSimpleErrorMessage,
   showSimpleSuccessMessage,
   showSimpleSuccessNotification,
@@ -286,13 +285,6 @@ class Approve extends BaseFlowCaseDetail {
     ) {
       needSelectNextNodeApprover = true;
     }
-
-    logConsole({
-      nextNextApproveWorkflowNodeApproveMode,
-      nextApproveWorkflowNodeWhetherFinalApprovalNode,
-      nextNextApproveWorkflowNodeWhetherOneSignatureDesignateNextApprover,
-      needSelectNextNodeApprover,
-    });
 
     this.targetActionSheet = targetActionSheetCollection.pass;
 

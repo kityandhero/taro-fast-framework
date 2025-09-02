@@ -13,7 +13,6 @@ import {
   isFunction,
   isObject,
   isString,
-  logConsole,
   showSimpleSuccessMessage,
   showSimpleSuccessNotification,
   toDatetime,
@@ -625,11 +624,6 @@ class FlowCaseForm extends PageNeedSignInWrapper {
     ) {
       needSelectNextNodeApprover = true;
     }
-
-    logConsole({
-      firstApproveWorkflowNodeApproveMode,
-      needSelectNextNodeApprover,
-    });
 
     if (needSelectNextNodeApprover) {
       if (workflowAvailableOnMobileSwitch === whetherNumber.yes) {
