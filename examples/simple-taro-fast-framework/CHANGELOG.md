@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.16.62
+
+### Patch Changes
+
+- Updated dependencies
+  - taro-fast-framework@3.1.45
+
 ## 1.16.61
 
 ### Patch Changes

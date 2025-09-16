@@ -3171,7 +3171,7 @@ class SupplementCore extends Common {
       .then((remoteData) => {
         Tips.loaded();
 
-        const { dataSuccess, data: metaData } = remoteData;
+        const { dataSuccess, data: metaData, message = '' } = remoteData;
 
         that.logFunctionCallTrace(
           { data: false },
@@ -3429,7 +3429,7 @@ class SupplementCore extends Common {
           removeSession();
 
           showInfoMessage({
-            text: '登录失败',
+            text: message || '登录失败',
           });
 
           that.logFunctionCallTrace(

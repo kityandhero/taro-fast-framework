@@ -214,6 +214,18 @@ class SignIn extends PageWrapper {
             onClick={this.signInWithPhone}
           />
 
+          <Line transparent height={20} />
+
+          <View>
+            <CenterBox>
+              <ColorText
+                fontSize={28}
+                color="#999"
+                text="当前小程序仅限矿业公司内部办公使用"
+              />
+            </CenterBox>
+          </View>
+
           <Line transparent height={40} />
 
           {/* <CenterBox>

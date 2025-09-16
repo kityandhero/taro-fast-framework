@@ -1,5 +1,13 @@
 # taro-fast-framework-template
 
+## 1.0.51
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - taro-fast-framework@3.1.45
+
 ## 1.0.50
 
 ### Patch Changes
