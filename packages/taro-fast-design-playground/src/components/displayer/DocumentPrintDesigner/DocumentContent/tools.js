@@ -24,6 +24,7 @@ import {
   ColorText,
   Line,
   MultiLineText,
+  Space,
   VerticalBox,
 } from 'taro-fast-component';
 
@@ -129,6 +130,7 @@ export function adjustSchemaData(schema) {
       width,
       minHeight,
       valueDisplayMode,
+      extraData: value,
     });
   }
 
@@ -170,6 +172,7 @@ export function adjustItemCollection(items, other = []) {
       width,
       minHeight,
       valueDisplayMode,
+      extraData,
     } = adjustItem(value);
 
     if (
@@ -202,6 +205,7 @@ export function adjustItemCollection(items, other = []) {
         width,
         minHeight,
         valueDisplayMode,
+        extraData,
       });
     } else {
       if (firstPosition === whetherString.yes && listTemplate.length > 0) {
@@ -222,6 +226,7 @@ export function adjustItemCollection(items, other = []) {
         width,
         minHeight,
         valueDisplayMode,
+        extraData,
       });
     }
   }
@@ -273,7 +278,14 @@ export function adjustValueCollection(values, otherData = []) {
 }
 
 export function buildDisplayValue(data, values) {
-  const { name, type, fullLine, currencyDisplay, enumList } = { ...data };
+  const {
+    name,
+    type,
+    fullLine,
+    currencyDisplay,
+    enumList,
+    extraData: { items },
+  } = { ...data };
 
   let v = '';
   let vList = [];
@@ -320,6 +332,92 @@ export function buildDisplayValue(data, values) {
     vText = isEmptyArray(selectList) ? '无' : selectList[0].label;
   } else {
     vText = v;
+  }
+
+  if (toLower(type) === 'array' && isArray(items) && !isEmptyArray(items)) {
+    const list = [];
+    let listData = [];
+
+    try {
+      const listDataSource = JSON.parse(vText || v);
+
+      listData = isArray(listDataSource) ? listDataSource : [];
+    } catch {
+      // ignored
+    }
+
+    if (isEmptyArray(items)) {
+      return (
+        <VerticalBox>
+          <MultiLineText fontSize={30} lineHeight={42} text="" />
+        </VerticalBox>
+      );
+    }
+
+    if (isEmptyArray(listData)) {
+      return (
+        <VerticalBox>
+          <MultiLineText fontSize={30} lineHeight={42} text="" />
+        </VerticalBox>
+      );
+    }
+
+    for (const one of listData) {
+      const temporary = [];
+
+      for (const item of items) {
+        const { name: itemName, title: itemTitle } = item;
+
+        if (checkStringIsNullOrWhiteSpace(itemName)) {
+          continue;
+        }
+
+        temporary.push({
+          title: itemTitle,
+          value: one[itemName],
+        });
+      }
+
+      if (isEmptyArray(temporary)) {
+        continue;
+      }
+
+      list.push(temporary);
+    }
+
+    return (
+      <VerticalBox fillWidth>
+        <Space
+          direction="vertical"
+          fillWidth
+          size={18}
+          split={<Line height={2} />}
+        >
+          {list.map((o, index) => {
+            return (
+              <View key={`line_${index}`}>
+                {o.map((one, index_1) => {
+                  const { title, value } = one;
+
+                  return (
+                    <MultiLineText
+                      key={`line_${index}_${index_1}`}
+                      fontSize={30}
+                      lineHeight={42}
+                      prefix={`${title} : `}
+                      prefixStyle={{
+                        marginRight: transformSize(14),
+                      }}
+                      text={value}
+                    />
+                  );
+                })}
+              </View>
+            );
+          })}
+        </Space>
+      </VerticalBox>
+    );
   }
 
   return currencyDisplay === whetherString.yes &&

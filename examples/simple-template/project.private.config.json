@@ -5,7 +5,7 @@
     "compileHotReLoad": true,
     "urlCheck": false
   },
-  "libVersion": "3.8.12",
+  "libVersion": "3.10.0",
   "condition": {
     "miniprogram": {
       "list": [
@@ -68,7 +68,7 @@
         {
           "name": "user/approve",
           "pathName": "user/pages/approve/main/index",
-          "query": "id=1831345295095631872",
+          "query": "id=1970099285026541568",
           "scene": null
         },
         {
