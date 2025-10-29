@@ -27,9 +27,13 @@ definePageConfig({
   schedulingControl,
 }))
 class PageListLatestApprove extends PageNeedSignInWrapper {
-  // showCallTrack = true;
+  showCallTrack = true;
 
-  // showCallTrace = true;
+  showCallTrace = true;
+
+  enableLowerLoad = true;
+
+  pagingLoadMode = true;
 
   viewStyle = {
     ...viewStyle,

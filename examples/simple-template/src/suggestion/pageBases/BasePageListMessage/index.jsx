@@ -16,6 +16,10 @@ class BasePageListMessage extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  enableLowerLoad = true;
+
+  pagingLoadMode = true;
+
   messagePageTitle = '';
 
   viewStyle = {

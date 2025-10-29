@@ -53,6 +53,10 @@ class PageListApplicationUserFeedback extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  enableLowerLoad = true;
+
+  pagingLoadMode = true;
+
   enableBackTop = true;
 
   messagePageTitle = currentPageTitle;

@@ -36,6 +36,10 @@ class PageListCreateApprove extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  enableLowerLoad = true;
+
+  pagingLoadMode = true;
+
   viewStyle = {
     ...viewStyle,
     backgroundColor: '#f6f6f6',

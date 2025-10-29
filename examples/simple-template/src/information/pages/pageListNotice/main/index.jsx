@@ -29,6 +29,10 @@ class PageListNotice extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  enableLowerLoad = true;
+
+  pagingLoadMode = true;
+
   viewStyle = {
     ...viewStyle,
     paddingBottom: transformSize(20),

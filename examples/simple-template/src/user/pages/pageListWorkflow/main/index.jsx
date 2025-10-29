@@ -31,6 +31,10 @@ class PageListWorkflow extends PageNeedSignInWrapper {
 
   // showCallTrace = true;
 
+  enableLowerLoad = true;
+
+  pagingLoadMode = true;
+
   currentWorkflowId = '';
 
   viewStyle = {
