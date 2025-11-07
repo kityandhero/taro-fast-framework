@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.36
+
+### Patch Changes
+
+- update
+
 ## 3.1.35
 
 ### Patch Changes
