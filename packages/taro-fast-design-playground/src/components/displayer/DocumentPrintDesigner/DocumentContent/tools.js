@@ -326,10 +326,22 @@ export function buildDisplayValue(data, values) {
     const selectList = filter(enumList, (one) => {
       const { value } = one;
 
+      if (isArray(vList) && !isEmptyArray(vList)) {
+        return checkInCollection(vList, toString(value));
+      }
+
       return toString(v) === toString(value);
     });
 
-    vText = isEmptyArray(selectList) ? '无' : selectList[0].label;
+    vText = isEmptyArray(selectList)
+      ? '无'
+      : selectList
+          .map((o) => {
+            const { label: selectItemLabel } = o;
+
+            return selectItemLabel;
+          })
+          .join(' ');
   } else {
     vText = v;
   }
