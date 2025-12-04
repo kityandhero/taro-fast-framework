@@ -341,7 +341,7 @@ export function buildDisplayValue(data, values) {
 
             return selectItemLabel;
           })
-          .join(' ');
+          .join('、');
   } else {
     vText = v;
   }
