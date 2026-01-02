@@ -3,10 +3,6 @@ import {
   buildModel as buildAdministrativeDivisionModel,
 } from './administrativeDivision';
 import {
-  applicationUserFeedbackTypeCollection,
-  buildModel as buildApplicationUserFeedbackModel,
-} from './applicationUserFeedback';
-import {
   buildModel as buildEntranceModel,
   entranceTypeCollection,
 } from './entrance';
@@ -25,7 +21,6 @@ export const modelTypeCollection = {
   shareTypeCollection,
   userTypeCollection,
   administrativeDivisionTypeCollection,
-  applicationUserFeedbackTypeCollection,
 };
 
 export function listModelBuilder() {
@@ -38,7 +33,6 @@ export function listModelBuilder() {
     buildShareModel,
     buildUserModel,
     buildAdministrativeDivisionModel,
-    buildApplicationUserFeedbackModel,
   );
 
   return list;

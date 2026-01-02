@@ -1,3 +1,4 @@
+
 import {
   getTacitlyState,
   pretreatmentRemoteSingleData,
@@ -12,9 +13,9 @@ import {
 } from '../../services/share';
 
 export const shareTypeCollection = {
-  createShareUrlParameters: 'share/createShareUrlParameters',
-  exchangeShare: 'share/exchangeShare',
-};
+  createShareUrlParameters: "share/createShareUrlParameters",
+  exchangeShare: "share/exchangeShare",
+}
 
 export function buildModel() {
   return {

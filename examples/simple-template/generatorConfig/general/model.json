@@ -171,13 +171,6 @@
           "type": "singleData"
         },
         {
-          "title": "设置移动审批视图模式",
-          "api": "/wechatApplication/user/setMobileApproveViewMode",
-          "effect": "setMobileApproveViewMode",
-          "service": "setMobileApproveViewModeData",
-          "type": "singleData"
-        },
-        {
           "title": "变更密码",
           "api": "/wechatApplication/user/changePassword",
           "effect": "changePassword",
@@ -209,34 +202,6 @@
       "cover": true,
       "title": "地理数据",
       "name": "administrativeDivision"
-    },
-    {
-      "apis": [
-        {
-          "title": "反馈建议分页列表",
-          "api": "/wechatApplication/applicationUserFeedback/pageList",
-          "effect": "pageList",
-          "service": "pageListData",
-          "type": "pageList"
-        },
-        {
-          "title": "反馈建议详情",
-          "api": "/wechatApplication/applicationUserFeedback/get",
-          "effect": "get",
-          "service": "getData",
-          "type": "singleData"
-        },
-        {
-          "title": "新增反馈建议",
-          "api": "/wechatApplication/applicationUserFeedback/add",
-          "effect": "add",
-          "service": "addData",
-          "type": "singleData"
-        }
-      ],
-      "cover": true,
-      "title": "反馈建议",
-      "name": "applicationUserFeedback"
     }
   ]
 }

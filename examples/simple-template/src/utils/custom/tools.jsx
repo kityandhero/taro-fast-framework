@@ -23,24 +23,6 @@ export function getSubsidiaryIdCache() {
   return o;
 }
 
-export function judgeComplain(o) {
-  const { query } = o;
-
-  const { scene } = {
-    query: '',
-    ...query,
-  };
-
-  const sceneData = analysisScene(scene);
-
-  const { m } = {
-    m: '',
-    ...sceneData,
-  };
-
-  return m === 'complain';
-}
-
 export function analysisScene(scene) {
   if (checkStringIsNullOrWhiteSpace(scene)) {
     return {};

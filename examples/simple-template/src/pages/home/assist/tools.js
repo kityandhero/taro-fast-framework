@@ -2,8 +2,6 @@ import { CustomWrapper, View } from '@tarojs/components';
 
 import {
   checkStringIsNullOrWhiteSpace,
-  convertCollection,
-  getValueByKey,
   isArray,
   isEmptyArray,
   isFunction,
@@ -31,7 +29,6 @@ import {
 
 import {
   arrowRightGreyImage,
-  fieldDataWorkflowCase,
   newMessageImage,
   noDataImage,
   scanCodeBlueImage,
@@ -417,166 +414,6 @@ export function TitleBox({ title = '', onClick = null }) {
         />
       </View>
     </View>
-  );
-}
-
-function WaitApproveFlowCaseItem({ data, onClick = null }) {
-  const title = getValueByKey({
-    data: data,
-    key: fieldDataWorkflowCase.title.name,
-    defaultValue: '',
-    convert: convertCollection.string,
-  });
-
-  const description = getValueByKey({
-    data: data,
-    key: fieldDataWorkflowCase.description.name,
-    defaultValue: '',
-    convert: convertCollection.string,
-  });
-
-  const userRealName = getValueByKey({
-    data: data,
-    key: fieldDataWorkflowCase.userRealName.name,
-    defaultValue: '',
-    convert: convertCollection.string,
-  });
-
-  const statusNote = getValueByKey({
-    data: data,
-    key: fieldDataWorkflowCase.statusNote.name,
-    defaultValue: '',
-    convert: convertCollection.string,
-  });
-
-  const lastSubmitApprovalTime = getValueByKey({
-    data: data,
-    key: fieldDataWorkflowCase.lastSubmitApprovalTime.name,
-    defaultValue: '',
-    convert: convertCollection.string,
-  });
-
-  return (
-    <View
-      style={{
-        backgroundColor: '#fff',
-        borderWidth: transformSize(1),
-        borderRadius: transformSize(16),
-        overflow: 'hidden',
-        paddingTop: transformSize(12),
-        paddingLeft: transformSize(16),
-        paddingRight: transformSize(16),
-        paddingBottom: transformSize(18),
-      }}
-      onClick={() => {
-        if (!isFunction(onClick)) {
-          return;
-        }
-
-        onClick();
-      }}
-    >
-      <View
-        style={{
-          color: '#181818',
-          fontSize: transformSize(30),
-          lineHeight: transformSize(38),
-          fontWeight: 'bold',
-          paddingTop: transformSize(10),
-          paddingBottom: transformSize(10),
-        }}
-      >
-        {title}
-      </View>
-
-      <Line transparent height={10} />
-
-      <Line color="#f8f8f8" height={2} />
-
-      <Line transparent height={20} />
-
-      {checkStringIsNullOrWhiteSpace(description) ? null : (
-        <>
-          <View
-            style={{
-              color: '#818181',
-              fontSize: transformSize(28),
-              lineHeight: transformSize(34),
-              paddingBottom: transformSize(10),
-            }}
-          >
-            {description}
-          </View>
-
-          <Line transparent height={10} />
-        </>
-      )}
-
-      <FlexBox
-        flexAuto="left"
-        left={
-          <View>
-            <ColorText
-              color="#7d7d7d"
-              fontSize={30}
-              textPrefixStyle={
-                {
-                  // fontWeight: 'bold',
-                }
-              }
-              textPrefix={userRealName}
-              separator=""
-              separatorStyle={{
-                marginRight: transformSize(14),
-              }}
-              s
-              text={lastSubmitApprovalTime}
-            />
-          </View>
-        }
-        right={
-          <Tag color="#71bcea" fill="outline">
-            {statusNote}
-          </Tag>
-        }
-      />
-    </View>
-  );
-}
-
-export function WaitApproveBox({ list = [], onItemClick = null }) {
-  const hasData = isArray(list) ? (isEmptyArray(list) ? false : true) : false;
-
-  if (!hasData) {
-    return buildEmptyPlaceholder({
-      description: '暂无待审批项',
-    });
-  }
-
-  return (
-    <CustomWrapper>
-      <View>
-        <Space direction="vertical" fillWidth size={spiteHeight}>
-          {list.map((item) => {
-            const { workflowCaseId } = item;
-
-            return (
-              <WaitApproveFlowCaseItem
-                key={`waitApprove_${workflowCaseId}`}
-                data={item}
-                onClick={() => {
-                  if (!isFunction(onItemClick)) {
-                    return;
-                  }
-
-                  onItemClick(workflowCaseId);
-                }}
-              />
-            );
-          })}
-        </Space>
-      </View>
-    </CustomWrapper>
   );
 }
 

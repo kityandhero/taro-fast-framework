@@ -13,7 +13,6 @@ import {
   setAvatarData,
   setBirthdayData,
   setGenderData,
-  setMobileApproveViewModeData,
   uploadImageData,
 } from '../../services/user';
 
@@ -23,7 +22,6 @@ export const userTypeCollection = {
   setGender: 'user/setGender',
   setBirthday: 'user/setBirthday',
   setAddress: 'user/setAddress',
-  setMobileApproveViewMode: 'user/setMobileApproveViewMode',
   changePassword: 'user/changePassword',
   uploadImage: 'user/uploadImage',
 };
@@ -151,32 +149,6 @@ export function buildModel() {
         { call, put },
       ) {
         const response = yield call(setAddressData, payload);
-
-        const dataAdjust = pretreatmentRemoteSingleData({
-          source: response,
-          successCallback: pretreatmentSuccessCallback || null,
-          failCallback: pretreatmentFailCallback || null,
-        });
-
-        yield put({
-          type: reducerNameCollection.reducerRemoteData,
-          payload: dataAdjust,
-          alias,
-          ...reducerDefaultParameters,
-        });
-
-        return dataAdjust;
-      },
-      *setMobileApproveViewMode(
-        {
-          payload,
-          alias,
-          pretreatmentSuccessCallback,
-          pretreatmentFailCallback,
-        },
-        { call, put },
-      ) {
-        const response = yield call(setMobileApproveViewModeData, payload);
 
         const dataAdjust = pretreatmentRemoteSingleData({
           source: response,
