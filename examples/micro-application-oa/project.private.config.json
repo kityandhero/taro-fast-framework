@@ -1,0 +1,113 @@
+{
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "projectname": "simple-template",
+  "setting": {
+    "compileHotReLoad": true,
+    "urlCheck": false
+  },
+  "libVersion": "3.9.3",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "解析二维码",
+          "pathName": "pages/entry/main/index",
+          "query": "scene=m~complain_s~1701146211534376960",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "模拟扫描投诉建议二维码",
+          "pathName": "pages/entry/main/index",
+          "query": "mode=complain",
+          "launchMode": "default",
+          "scene": 1011
+        },
+        {
+          "name": "pages/entry",
+          "pathName": "pages/entry/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home",
+          "pathName": "pages/home/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/flowCase",
+          "pathName": "pages/flowCase/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/user",
+          "pathName": "pages/user/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/pageListWorkflow",
+          "pathName": "user/pages/pageListWorkflow/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/pageListCreateApprove",
+          "pathName": "user/pages/pageListCreateApprove/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/flowCaseForm",
+          "pathName": "user/pages/flowCaseForm/main/index",
+          "query": "id=1903422649737023488",
+          "scene": null
+        },
+        {
+          "name": "user/approve",
+          "pathName": "user/pages/approve/main/index",
+          "query": "id=1970099285026541568",
+          "scene": null
+        },
+        {
+          "name": "user/approve - noData",
+          "pathName": "user/pages/approve/main/index",
+          "query": "id=1831345295095631873",
+          "scene": null
+        },
+        {
+          "name": "user/signIn",
+          "pathName": "user/pages/signIn/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/signInWithWeChat",
+          "pathName": "user/pages/signInWithWeChat/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/resetPassword",
+          "pathName": "user/pages/resetPassword/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/pageListApplicationUserFeedback",
+          "pathName": "user/pages/pageListApplicationUserFeedback/main/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "user/submitApplicationUserFeedback",
+          "pathName": "user/pages/submitApplicationUserFeedback/main/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

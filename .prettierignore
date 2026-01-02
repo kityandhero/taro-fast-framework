@@ -45,6 +45,7 @@
 .czrc
 .ga
 rollup.config-*.cjs
+qqmap-wx-jssdk.min.js
 pnpm-lock.yaml
 CNAME
 LICENSE

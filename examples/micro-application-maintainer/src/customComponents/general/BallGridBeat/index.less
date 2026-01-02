@@ -1,0 +1,78 @@
+@class-prefix-template-loading-ball-grid-beat: ~'template-loading-ball-grid-beat';
+
+.@{class-prefix-template-loading-ball-grid-beat} {
+  --size: var(--tfc-57);
+  --margin: var(--tfc-2);
+  --color: #fff;
+
+  width: var(--size);
+  height: var(--size);
+
+  &__item {
+    background-color: var(--color);
+    width: calc(var(--size) / 3 - var(--margin) * 2);
+    height: calc(var(--size) / 3 - var(--margin) * 2);
+    border-radius: 100%;
+    margin: var(--margin);
+    animation-fill-mode: both;
+    float: left;
+    animation-name: template-loading-keyframes-ball-grid-beat;
+    animation-iteration-count: infinite;
+    animation-delay: 0;
+  }
+
+  &__item:nth-child(1) {
+    animation-delay: 0.22s;
+    animation-duration: 0.9s;
+  }
+
+  &__item:nth-child(2) {
+    animation-delay: 0.64s;
+    animation-duration: 1s;
+  }
+
+  &__item:nth-child(3) {
+    animation-delay: -0.15s;
+    animation-duration: 0.63s;
+  }
+
+  &__item:nth-child(4) {
+    animation-delay: -0.03s;
+    animation-duration: 1.24s;
+  }
+
+  &__item:nth-child(5) {
+    animation-delay: 0.08s;
+    animation-duration: 1.37s;
+  }
+
+  &__item:nth-child(6) {
+    animation-delay: 0.43s;
+    animation-duration: 1.55s;
+  }
+
+  &__item:nth-child(7) {
+    animation-delay: 0.05s;
+    animation-duration: 0.7s;
+  }
+
+  &__item:nth-child(8) {
+    animation-delay: 0.05s;
+    animation-duration: 0.97s;
+  }
+
+  &__item:nth-child(9) {
+    animation-delay: 0.3s;
+    animation-duration: 0.63s;
+  }
+}
+
+@keyframes template-loading-keyframes-ball-grid-beat {
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "list": [
+    {
+      "apis": [
+        {
+          "title": "刷新会话",
+          "api": "/wechatApplication/session/refreshSession",
+          "effect": "refreshSession",
+          "service": "refreshSessionData",
+          "type": "singleData"
+        },
+        {
+          "title": "交换手机号",
+          "api": "/wechatApplication/session/exchangePhone",
+          "effect": "exchangePhone",
+          "service": "exchangePhoneData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "会话相关",
+      "name": "session"
+    },
+    {
+      "apis": [
+        {
+          "title": "账户登录",
+          "api": "/wechatApplication/entrance/signIn",
+          "effect": "signIn",
+          "service": "signInData",
+          "type": "singleData"
+        },
+        {
+          "title": "手机登录",
+          "api": "/wechatApplication/entrance/signInWithPhone",
+          "effect": "signInWithPhone",
+          "service": "signInWithPhoneData",
+          "type": "singleData"
+        },
+        {
+          "title": "邮箱登录",
+          "api": "/wechatApplication/entrance/signInWithEmail",
+          "effect": "signInWithEmail",
+          "service": "signInWithEmailData",
+          "type": "singleData"
+        },
+        {
+          "title": "静默登录",
+          "api": "/wechatApplication/entrance/signInSilent",
+          "effect": "signInSilent",
+          "service": "signInSilentData",
+          "type": "singleData"
+        },
+        {
+          "title": "静默登录",
+          "api": "/wechatApplication/entrance/resetPassword",
+          "effect": "resetPassword",
+          "service": "resetPasswordData",
+          "type": "singleData"
+        },
+        {
+          "title": "凭证校验",
+          "api": "/wechatApplication/entrance/checkTicketValidity",
+          "effect": "checkTicketValidity",
+          "service": "checkTicketValidityData",
+          "type": "singleData"
+        },
+        {
+          "title": "刷新验证码",
+          "api": "/wechatApplication/entrance/refreshCaptcha",
+          "effect": "refreshCaptcha",
+          "service": "refreshCaptchaData",
+          "type": "singleData"
+        },
+        {
+          "title": "发送重置密码短信验证码",
+          "api": "/wechatApplication/entrance/sendRetrievePasswordMessage",
+          "effect": "sendRetrievePasswordMessage",
+          "service": "sendRetrievePasswordMessageData",
+          "type": "singleData"
+        },
+        {
+          "title": "重置密码",
+          "api": "/wechatApplication/entrance/retrievePassword",
+          "effect": "retrievePassword",
+          "service": "retrievePasswordData",
+          "type": "singleData"
+        },
+        {
+          "title": "注销登录",
+          "api": "/wechatApplication/entrance/signOut",
+          "effect": "signOut",
+          "service": "signOut",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "登录注册相关",
+      "name": "entrance"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取元数据",
+          "api": "/wechatApplication/metaData/get",
+          "effect": "getMetaData",
+          "service": "getMetaDataData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "一般数据相关",
+      "name": "global"
+    },
+    {
+      "apis": [
+        {
+          "title": "存储分享参数",
+          "api": "/wechatApplication/share/createShareUrlParams",
+          "effect": "createShareUrlParameters",
+          "service": "createShareUrlParametersData",
+          "type": "singleData"
+        },
+        {
+          "title": "兑换分享数据",
+          "api": "/wechatApplication/share/exchangeShare",
+          "effect": "exchangeShare",
+          "service": "exchangeShareData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "分享相关",
+      "name": "share"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取当前登录用户信息",
+          "api": "/wechatApplication/user/getCurrentInfo",
+          "effect": "getCurrentInfo",
+          "service": "getCurrentInfoData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置头像",
+          "api": "/wechatApplication/user/setAvatar",
+          "effect": "setAvatar",
+          "service": "setAvatarData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置性别",
+          "api": "/wechatApplication/user/setGender",
+          "effect": "setGender",
+          "service": "setGenderData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置生日",
+          "api": "/wechatApplication/user/setBirthday",
+          "effect": "setBirthday",
+          "service": "setBirthdayData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置地址",
+          "api": "/wechatApplication/user/setAddress",
+          "effect": "setAddress",
+          "service": "setAddressData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置移动审批视图模式",
+          "api": "/wechatApplication/user/setMobileApproveViewMode",
+          "effect": "setMobileApproveViewMode",
+          "service": "setMobileApproveViewModeData",
+          "type": "singleData"
+        },
+        {
+          "title": "变更密码",
+          "api": "/wechatApplication/user/changePassword",
+          "effect": "changePassword",
+          "service": "changePasswordData",
+          "type": "singleData"
+        },
+        {
+          "title": "上传图片",
+          "api": "/wechatApplication/user/uploadImage",
+          "effect": "uploadImage",
+          "service": "uploadImageData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "user相关",
+      "name": "user"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取地址级联信息",
+          "api": "/wechatApplication/administrativeDivision/singleListTreeThreeLevel",
+          "effect": "singleListTreeThreeLevel",
+          "service": "singleListTreeThreeLevelData",
+          "type": "singleListData"
+        }
+      ],
+      "cover": true,
+      "title": "地理数据",
+      "name": "administrativeDivision"
+    },
+    {
+      "apis": [
+        {
+          "title": "反馈建议分页列表",
+          "api": "/wechatApplication/applicationUserFeedback/pageList",
+          "effect": "pageList",
+          "service": "pageListData",
+          "type": "pageList"
+        },
+        {
+          "title": "反馈建议详情",
+          "api": "/wechatApplication/applicationUserFeedback/get",
+          "effect": "get",
+          "service": "getData",
+          "type": "singleData"
+        },
+        {
+          "title": "新增反馈建议",
+          "api": "/wechatApplication/applicationUserFeedback/add",
+          "effect": "add",
+          "service": "addData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "反馈建议",
+      "name": "applicationUserFeedback"
+    }
+  ]
+}
