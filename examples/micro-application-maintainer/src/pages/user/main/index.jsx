@@ -23,15 +23,10 @@ import {
 
 import { PageWrapper } from '../../../customComponents';
 import {
-  addGreenImage,
   boardOrangeImage,
-  customWorkflowImage,
   editGreyImage,
-  hexagonBlueImage,
-  listCheckBlueImage,
   lockRedImage,
   viewStyle,
-  warnOrangeImage,
 } from '../../../customConfig';
 import { HeadNavigationBox } from '../../../utils';
 
@@ -348,46 +343,6 @@ class user extends PageWrapper {
           split={<Line height={2} />}
         >
           <View>
-            {this.buildMenuItem({
-              title: '流程列表',
-              icon: customWorkflowImage,
-              onClick: () => {
-                this.goToPageListWorkflow();
-              },
-            })}
-
-            <Line transparent height={20} />
-          </View>
-
-          <View>
-            {this.buildMenuItem({
-              title: '我发起的',
-              icon: addGreenImage,
-              onClick: () => {
-                this.goToPageListCreateApprove();
-              },
-            })}
-
-            {this.buildMenuItem({
-              title: '待审批',
-              icon: warnOrangeImage,
-              onClick: () => {
-                this.goToPageListWaitApprove();
-              },
-            })}
-
-            {this.buildMenuItem({
-              title: '已结束',
-              icon: listCheckBlueImage,
-              onClick: () => {
-                this.goToPageListLatestApprove();
-              },
-            })}
-
-            <Line transparent height={20} />
-          </View>
-
-          <View>
             <Line transparent height={20} />
 
             {this.buildMenuItem({
@@ -395,14 +350,6 @@ class user extends PageWrapper {
               icon: lockRedImage,
               onClick: () => {
                 this.goToSecurity();
-              },
-            })}
-
-            {this.buildMenuItem({
-              title: '设置与隐私',
-              icon: hexagonBlueImage,
-              onClick: () => {
-                this.goToSetting();
               },
             })}
 
