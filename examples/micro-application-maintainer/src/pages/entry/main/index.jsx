@@ -23,14 +23,16 @@ definePageConfig({
   navigationBarTitleText: '预加载',
 });
 
-@connect(({ user, entrance, share, session, global, schedulingControl }) => ({
-  user,
-  entrance,
-  share,
-  session,
-  global,
-  schedulingControl,
-}))
+@connect(
+  ({ maintainer, entrance, share, session, global, schedulingControl }) => ({
+    maintainer,
+    entrance,
+    share,
+    session,
+    global,
+    schedulingControl,
+  }),
+)
 class PageMain extends PageWrapper {
   showCallTrack = true;
 
@@ -180,10 +182,10 @@ class PageMain extends PageWrapper {
         break;
       }
 
-      case shareTransfer.user: {
+      case shareTransfer.maintainer: {
         this.showNavigationNotice();
 
-        redirectTo(pathCollection.root.user.path);
+        redirectTo(pathCollection.root.maintainer.path);
 
         break;
       }

@@ -1,3 +1,74 @@
 {
-  "list": []
+  "list": [
+    {
+      "apis": [
+        {
+          "title": "获取整合数据",
+          "api": "/wechatApplication/summary/getIntegration",
+          "effect": "getIntegration",
+          "service": "getIntegrationData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "汇总",
+      "name": "summary"
+    },
+    {
+      "apis": [
+        {
+          "title": "获取当前登录用户信息",
+          "api": "/wechatApplication/maintainer/getCurrentInfo",
+          "effect": "getCurrentInfo",
+          "service": "getCurrentInfoData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置头像",
+          "api": "/wechatApplication/maintainer/setAvatar",
+          "effect": "setAvatar",
+          "service": "setAvatarData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置性别",
+          "api": "/wechatApplication/maintainer/setGender",
+          "effect": "setGender",
+          "service": "setGenderData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置生日",
+          "api": "/wechatApplication/maintainer/setBirthday",
+          "effect": "setBirthday",
+          "service": "setBirthdayData",
+          "type": "singleData"
+        },
+        {
+          "title": "设置地址",
+          "api": "/wechatApplication/maintainer/setAddress",
+          "effect": "setAddress",
+          "service": "setAddressData",
+          "type": "singleData"
+        },
+        {
+          "title": "变更密码",
+          "api": "/wechatApplication/maintainer/changePassword",
+          "effect": "changePassword",
+          "service": "changePasswordData",
+          "type": "singleData"
+        },
+        {
+          "title": "上传图片",
+          "api": "/wechatApplication/maintainer/uploadImage",
+          "effect": "uploadImage",
+          "service": "uploadImageData",
+          "type": "singleData"
+        }
+      ],
+      "cover": true,
+      "title": "维护员",
+      "name": "maintainer"
+    }
+  ]
 }

@@ -21,7 +21,7 @@ export const verifyPhoneShieldBlue = `${filePrefix}1834035653227188224.png`;
 
 export const ellipsisVerticalImage = `${filePrefix}1834582979146551296.png`;
 export const clockGreyImage = `${filePrefix}1835127965797715968.png`;
-export const userGreyImage = `${filePrefix}1835127918024593408.png`;
+export const maintainerGreyImage = `${filePrefix}1835127918024593408.png`;
 export const arrowRightGreyImage = `${filePrefix}1838386682953601024.png`;
 export const arrowDownGreyImage = `${filePrefix}1838387011803811840.png`;
 export const fileTextBlueImage = `${filePrefix}1838387395452604416.png`;
@@ -49,6 +49,7 @@ export const shareTransfer = {
   // section: '10',
   // article: '20',
   webPage: '100',
+  maintainer: '200',
 };
 
 export const viewStyle = {

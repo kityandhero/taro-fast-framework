@@ -2,7 +2,7 @@
 export default defineAppConfig({
   entryPagePath: 'pages/entry/main/index',
   pages: [
-    'pages/user/main/index',
+    'pages/maintainer/main/index',
     'pages/entry/main/index',
     'pages/home/main/index',
   ],
@@ -19,8 +19,8 @@ export default defineAppConfig({
       pages: ['pages/general/main/index'],
     },
     {
-      root: 'user',
-      name: 'User',
+      root: 'maintainer',
+      name: 'Maintainer',
       pages: [
         'pages/changePassword/main/index',
         'pages/detailApplicationUserFeedback/main/index',
@@ -40,22 +40,9 @@ export default defineAppConfig({
   preloadRule: {
     'pages/entry/main/index': {
       network: 'all',
-      packages: ['user'],
+      packages: ['maintainer'],
     },
   },
-  // permission: {
-  //   'scope.userLocation': {
-  //     desc: '你的位置信息将用于显示当地天气等信息。',
-  //   },
-  // },
-  // requiredPrivateInfos: [
-  //   'getFuzzyLocation',
-  //   'onLocationChange',
-  //   'chooseAddress',
-  //   'choosePoi',
-  //   'chooseLocation',
-  //   'startLocationUpdate',
-  // ],
   requiredPrivateInfos: [],
   serviceProviderTicket: '',
   tabBar: {
@@ -82,7 +69,7 @@ export default defineAppConfig({
       //   text: '通讯录',
       // },
       {
-        pagePath: 'pages/user/main/index',
+        pagePath: 'pages/maintainer/main/index',
         iconPath: './assets/tab-bar/user.png',
         selectedIconPath: './assets/tab-bar/user-active.png',
         text: '我的',

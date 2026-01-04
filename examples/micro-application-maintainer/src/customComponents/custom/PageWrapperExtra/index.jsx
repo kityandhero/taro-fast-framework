@@ -7,32 +7,32 @@ import { PageWrapperCore } from '../../general/PageWrapperCore';
 class PageWrapperExtra extends PageWrapperCore {
   getGetCurrentOperatorApiEffect = (data = {}) => {
     return {
-      type: modelTypeCollection.userTypeCollection.getCurrentInfo,
+      type: modelTypeCollection.maintainerTypeCollection.getCurrentInfo,
       payload: data,
     };
   };
 
   goToResetPassword = () => {
     navigateTo({
-      url: pathCollection.user.resetPassword.path,
+      url: pathCollection.maintainer.resetPassword.path,
     });
   };
 
   goToChangePassword = () => {
     navigateTo({
-      url: pathCollection.user.changePassword.path,
+      url: pathCollection.maintainer.changePassword.path,
     });
   };
 
   goToEditInformation = () => {
     navigateTo({
-      url: pathCollection.user.editInformation.path,
+      url: pathCollection.maintainer.editInformation.path,
     });
   };
 
   goToSecurity = () => {
     navigateTo({
-      url: pathCollection.user.security.path,
+      url: pathCollection.maintainer.security.path,
     });
   };
 }

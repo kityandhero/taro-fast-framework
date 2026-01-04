@@ -136,69 +136,6 @@
     {
       "apis": [
         {
-          "title": "获取当前登录用户信息",
-          "api": "/wechatApplication/user/getCurrentInfo",
-          "effect": "getCurrentInfo",
-          "service": "getCurrentInfoData",
-          "type": "singleData"
-        },
-        {
-          "title": "设置头像",
-          "api": "/wechatApplication/user/setAvatar",
-          "effect": "setAvatar",
-          "service": "setAvatarData",
-          "type": "singleData"
-        },
-        {
-          "title": "设置性别",
-          "api": "/wechatApplication/user/setGender",
-          "effect": "setGender",
-          "service": "setGenderData",
-          "type": "singleData"
-        },
-        {
-          "title": "设置生日",
-          "api": "/wechatApplication/user/setBirthday",
-          "effect": "setBirthday",
-          "service": "setBirthdayData",
-          "type": "singleData"
-        },
-        {
-          "title": "设置地址",
-          "api": "/wechatApplication/user/setAddress",
-          "effect": "setAddress",
-          "service": "setAddressData",
-          "type": "singleData"
-        },
-        {
-          "title": "设置移动审批视图模式",
-          "api": "/wechatApplication/user/setMobileApproveViewMode",
-          "effect": "setMobileApproveViewMode",
-          "service": "setMobileApproveViewModeData",
-          "type": "singleData"
-        },
-        {
-          "title": "变更密码",
-          "api": "/wechatApplication/user/changePassword",
-          "effect": "changePassword",
-          "service": "changePasswordData",
-          "type": "singleData"
-        },
-        {
-          "title": "上传图片",
-          "api": "/wechatApplication/user/uploadImage",
-          "effect": "uploadImage",
-          "service": "uploadImageData",
-          "type": "singleData"
-        }
-      ],
-      "cover": true,
-      "title": "user相关",
-      "name": "user"
-    },
-    {
-      "apis": [
-        {
           "title": "获取地址级联信息",
           "api": "/wechatApplication/administrativeDivision/singleListTreeThreeLevel",
           "effect": "singleListTreeThreeLevel",

@@ -5,19 +5,19 @@ import { filePrefix } from './customConfig';
 const LogoImage = `${filePrefix}746868813.jpeg`;
 
 export const config = {
-  appId: 'pddwo4uuzpdekg',
+  appId: 'pdf948bjt11af4',
   showLogInConsole: checkWhetherDevelopmentEnvironment(),
   // showLogInConsole: true,
   // showRequestInfo: checkWhetherDevelopmentEnvironment(),
   // showUseVirtualRequestMessage: true,
   apiPrefix: {
-    corsTargetDomain: 'https://maintainer.api.property.local.com',
+    corsTargetDomain: 'http://maintainer.api.property.local.com',
   },
   apiSuccessCode: 200,
   authenticationFailCode: 2001,
   // 是否在静默登录失败后跳转登录界面，需要强制登录的应用建议开启
   navigationToSignInWhenSignInSilentFail: true,
-  signInPath: '/user/pages/signIn/main/index',
+  signInPath: '/maintainer/pages/signIn/main/index',
   apiVersion: 'beta',
   footerImage: LogoImage,
   footerText: '',

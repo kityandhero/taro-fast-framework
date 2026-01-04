@@ -16,14 +16,12 @@ import {
   sessionTypeCollection,
 } from './session';
 import { buildModel as buildShareModel, shareTypeCollection } from './share';
-import { buildModel as buildUserModel, userTypeCollection } from './user';
 
 export const modelTypeCollection = {
   sessionTypeCollection,
   entranceTypeCollection,
   globalTypeCollection,
   shareTypeCollection,
-  userTypeCollection,
   administrativeDivisionTypeCollection,
   applicationUserFeedbackTypeCollection,
 };
@@ -36,7 +34,6 @@ export function listModelBuilder() {
     buildEntranceModel,
     buildGlobalModel,
     buildShareModel,
-    buildUserModel,
     buildAdministrativeDivisionModel,
     buildApplicationUserFeedbackModel,
   );

@@ -25,7 +25,7 @@ class PageWrapper extends PageWrapperExtra {
 
   goToUserTab(callback = null) {
     switchTab({
-      url: `${pathCollection.root.user.path}`,
+      url: `${pathCollection.root.maintainer.path}`,
       success: () => {
         if (isFunction(callback)) {
           callback();
@@ -36,19 +36,19 @@ class PageWrapper extends PageWrapperExtra {
 
   goToSignIn = () => {
     navigateTo({
-      url: pathCollection.user.signIn.path,
+      url: pathCollection.maintainer.signIn.path,
     });
   };
 
   goToPageListApplicationUserFeedback = () => {
     navigateTo({
-      url: pathCollection.user.pageListApplicationUserFeedback.path,
+      url: pathCollection.maintainer.pageListApplicationUserFeedback.path,
     });
   };
 
   redirectToPageListApplicationUserFeedback = () => {
     redirectTo({
-      url: pathCollection.user.pageListApplicationUserFeedback.path,
+      url: pathCollection.maintainer.pageListApplicationUserFeedback.path,
     });
   };
 
@@ -60,13 +60,13 @@ class PageWrapper extends PageWrapperExtra {
     }
 
     navigateTo({
-      url: `${pathCollection.user.detailApplicationUserFeedback.path}?id=${id}`,
+      url: `${pathCollection.maintainer.detailApplicationUserFeedback.path}?id=${id}`,
     });
   };
 
   goToSubmitApplicationUserFeedback = () => {
     navigateTo({
-      url: pathCollection.user.submitApplicationUserFeedback.path,
+      url: pathCollection.maintainer.submitApplicationUserFeedback.path,
     });
   };
 }
