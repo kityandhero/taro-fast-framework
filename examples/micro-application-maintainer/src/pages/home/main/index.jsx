@@ -41,7 +41,7 @@ class Home extends PageNeedSignInWrapper {
 
     this.state = {
       ...this.state,
-      loadApiPath: modelTypeCollection.workbenchTypeCollection.getIntegration,
+      loadApiPath: modelTypeCollection.summaryTypeCollection.getIntegration,
     };
   }
 
