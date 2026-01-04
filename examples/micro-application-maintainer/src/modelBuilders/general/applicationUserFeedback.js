@@ -1,3 +1,4 @@
+
 import {
   getTacitlyState,
   pretreatmentRemotePageListData,
@@ -14,10 +15,10 @@ import {
 } from '../../services/applicationUserFeedback';
 
 export const applicationUserFeedbackTypeCollection = {
-  pageList: 'applicationUserFeedback/pageList',
-  get: 'applicationUserFeedback/get',
-  add: 'applicationUserFeedback/add',
-};
+  pageList: "applicationUserFeedback/pageList",
+  get: "applicationUserFeedback/get",
+  add: "applicationUserFeedback/add",
+}
 
 export function buildModel() {
   return {

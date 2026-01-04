@@ -1,3 +1,4 @@
+
 import {
   getTacitlyState,
   pretreatmentRemoteSingleData,
@@ -18,15 +19,15 @@ import {
 } from '../../services/user';
 
 export const userTypeCollection = {
-  getCurrentInfo: 'user/getCurrentInfo',
-  setAvatar: 'user/setAvatar',
-  setGender: 'user/setGender',
-  setBirthday: 'user/setBirthday',
-  setAddress: 'user/setAddress',
-  setMobileApproveViewMode: 'user/setMobileApproveViewMode',
-  changePassword: 'user/changePassword',
-  uploadImage: 'user/uploadImage',
-};
+  getCurrentInfo: "user/getCurrentInfo",
+  setAvatar: "user/setAvatar",
+  setGender: "user/setGender",
+  setBirthday: "user/setBirthday",
+  setAddress: "user/setAddress",
+  setMobileApproveViewMode: "user/setMobileApproveViewMode",
+  changePassword: "user/changePassword",
+  uploadImage: "user/uploadImage",
+}
 
 export function buildModel() {
   return {

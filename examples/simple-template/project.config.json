@@ -38,7 +38,11 @@
     "ignoreDevUnusedFiles": false,
     "ignoreUploadUnusedFiles": false,
     "useStaticServer": true,
-    "condition": false
+    "condition": false,
+    "compileWorklet": false,
+    "localPlugins": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "condition": {
@@ -55,5 +59,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx30cfdf773244d243"
+  "appid": "wx80649e287ad28842",
+  "libVersion": "3.9.3",
+  "simulatorPluginLibVersion": {}
 }

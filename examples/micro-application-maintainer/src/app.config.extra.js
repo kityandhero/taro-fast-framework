@@ -11,10 +11,7 @@ export const config = {
   // showRequestInfo: checkWhetherDevelopmentEnvironment(),
   // showUseVirtualRequestMessage: true,
   apiPrefix: {
-    // corsTargetDomain: 'https://app.api.oa.32306.net',
-    corsTargetDomain: checkWhetherDevelopmentEnvironment()
-      ? 'http://app.api.oa.local.com'
-      : 'https://app.api.oa.32306.net',
+    corsTargetDomain: 'https://maintainer.api.property.local.com',
   },
   apiSuccessCode: 200,
   authenticationFailCode: 2001,

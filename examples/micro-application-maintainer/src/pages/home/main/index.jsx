@@ -1,12 +1,7 @@
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
-import {
-  checkStringIsNullOrWhiteSpace,
-  isArray,
-  isEmptyArray,
-  navigateTo,
-} from 'easy-soft-utility';
+import { checkStringIsNullOrWhiteSpace, navigateTo } from 'easy-soft-utility';
 
 import { navigateToMiniProgram, transformSize } from 'taro-fast-common';
 import { Line } from 'taro-fast-component';
@@ -15,16 +10,7 @@ import { PageNeedSignInWrapper } from '../../../customComponents/general';
 import { pathCollection, viewStyle } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
 import { HeadNavigationBox } from '../../../utils';
-import {
-  GridBox,
-  NoticeBox,
-  NotificationBox,
-  SearchBox,
-  spiteHeight,
-  SwiperBox,
-  TitleBox,
-  WaitApproveBox,
-} from '../assist';
+import { spiteHeight } from '../assist';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -32,8 +18,7 @@ definePageConfig({
   navigationStyle: 'custom',
 });
 
-@connect(({ workbench, entrance, session, global, schedulingControl }) => ({
-  workbench,
+@connect(({ entrance, session, global, schedulingControl }) => ({
   entrance,
   session,
   global,
@@ -57,59 +42,8 @@ class Home extends PageNeedSignInWrapper {
     this.state = {
       ...this.state,
       loadApiPath: modelTypeCollection.workbenchTypeCollection.getIntegration,
-      carouselList: [],
-      navigationList: [],
-      waitApproveFlowCaseList: [],
-      notificationList: [],
     };
   }
-
-  doOtherAfterLoadSuccess = ({
-    // eslint-disable-next-line no-unused-vars
-    metaData = null,
-    // eslint-disable-next-line no-unused-vars
-    metaListData = [],
-    // eslint-disable-next-line no-unused-vars
-    metaExtra = null,
-    // eslint-disable-next-line no-unused-vars
-    metaOriginalData = null,
-  }) => {
-    const {
-      navigationList,
-      carouselList,
-      waitApproveFlowCaseList,
-      notificationList,
-      latestMessageList,
-    } = {
-      navigationList: [],
-      carouselList: [],
-      waitApproveFlowCaseList: [],
-      notificationList: [],
-      latestMessageList: [],
-      ...metaData,
-    };
-
-    let latestMessage = null;
-
-    latestMessage = isEmptyArray(latestMessageList)
-      ? {
-          message: '暂无最新消息',
-          type: 'none',
-          id: '',
-          key: '',
-        }
-      : latestMessageList[0];
-
-    this.setState({
-      navigationList: isArray(navigationList) ? navigationList : [],
-      carouselList: isArray(carouselList) ? carouselList : [],
-      waitApproveFlowCaseList: isArray(waitApproveFlowCaseList)
-        ? waitApproveFlowCaseList
-        : [],
-      notificationList: isArray(notificationList) ? notificationList : [],
-      latestMessage: latestMessage,
-    });
-  };
 
   doWorkWhenRepeatedShow = () => {
     this.reloadData({});
@@ -148,26 +82,6 @@ class Home extends PageNeedSignInWrapper {
     }
   };
 
-  onNoticeClick = (item) => {
-    const { type, id } = {
-      type: 'none',
-      id: '',
-      ...item,
-    };
-
-    if (type === 'none') {
-      return;
-    }
-
-    if (type === 'notification' && !checkStringIsNullOrWhiteSpace(id)) {
-      this.goToNoticeDetail(id);
-    }
-
-    if (type === 'approve' && !checkStringIsNullOrWhiteSpace(id)) {
-      this.goToApprove(id);
-    }
-  };
-
   buildHeadNavigation = () => {
     const { currentCustomer } = this.state;
 
@@ -180,59 +94,9 @@ class Home extends PageNeedSignInWrapper {
   };
 
   renderFurther() {
-    const {
-      navigationList,
-      carouselList,
-      waitApproveFlowCaseList,
-      notificationList,
-      latestMessage,
-    } = this.state;
-
     return (
       <View className="page page-index">
         <Line transparent height={spiteHeight} />
-
-        <SearchBox
-          afterScanCode={(o) => {
-            this.goToDetailFlowCase(o);
-          }}
-        />
-
-        <Line transparent height={spiteHeight} />
-
-        <GridBox list={navigationList} onItemClick={this.onGridItemClick} />
-
-        <Line transparent height={spiteHeight} />
-
-        <NoticeBox data={latestMessage} onClick={this.onNoticeClick} />
-
-        <Line transparent height={spiteHeight} />
-
-        <SwiperBox list={carouselList} />
-
-        <TitleBox
-          title="最近待审批事项"
-          onClick={() => {
-            this.goToPageListWaitApprove();
-          }}
-        />
-
-        <WaitApproveBox
-          list={waitApproveFlowCaseList}
-          onItemClick={this.goToApprove}
-        />
-
-        <TitleBox
-          title="通知公告"
-          onClick={() => {
-            this.goToPageListNotice();
-          }}
-        />
-
-        <NotificationBox
-          list={notificationList}
-          onItemClick={this.goToNoticeDetail}
-        />
       </View>
     );
   }

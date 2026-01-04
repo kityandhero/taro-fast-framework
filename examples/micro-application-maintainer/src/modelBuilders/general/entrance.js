@@ -1,3 +1,4 @@
+
 import {
   getTacitlyState,
   pretreatmentRemoteSingleData,
@@ -20,17 +21,17 @@ import {
 } from '../../services/entrance';
 
 export const entranceTypeCollection = {
-  signIn: 'entrance/signIn',
-  signInWithPhone: 'entrance/signInWithPhone',
-  signInWithEmail: 'entrance/signInWithEmail',
-  signInSilent: 'entrance/signInSilent',
-  resetPassword: 'entrance/resetPassword',
-  checkTicketValidity: 'entrance/checkTicketValidity',
-  refreshCaptcha: 'entrance/refreshCaptcha',
-  sendRetrievePasswordMessage: 'entrance/sendRetrievePasswordMessage',
-  retrievePassword: 'entrance/retrievePassword',
-  signOut: 'entrance/signOut',
-};
+  signIn: "entrance/signIn",
+  signInWithPhone: "entrance/signInWithPhone",
+  signInWithEmail: "entrance/signInWithEmail",
+  signInSilent: "entrance/signInSilent",
+  resetPassword: "entrance/resetPassword",
+  checkTicketValidity: "entrance/checkTicketValidity",
+  refreshCaptcha: "entrance/refreshCaptcha",
+  sendRetrievePasswordMessage: "entrance/sendRetrievePasswordMessage",
+  retrievePassword: "entrance/retrievePassword",
+  signOut: "entrance/signOut",
+}
 
 export function buildModel() {
   return {

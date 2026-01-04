@@ -10,8 +10,6 @@ export const webPagePathGeneralCollection = {
   },
 };
 
-export const informationPathGeneralCollection = {};
-
 export const userPathGeneralCollection = {
   changePassword: {
     path: '/user/pages/changePassword/main/index',

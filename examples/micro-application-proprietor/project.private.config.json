@@ -36,45 +36,9 @@
           "scene": null
         },
         {
-          "name": "pages/flowCase",
-          "pathName": "pages/flowCase/main/index",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/user",
           "pathName": "pages/user/main/index",
           "query": "",
-          "scene": null
-        },
-        {
-          "name": "user/pageListWorkflow",
-          "pathName": "user/pages/pageListWorkflow/main/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "user/pageListCreateApprove",
-          "pathName": "user/pages/pageListCreateApprove/main/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "user/flowCaseForm",
-          "pathName": "user/pages/flowCaseForm/main/index",
-          "query": "id=1903422649737023488",
-          "scene": null
-        },
-        {
-          "name": "user/approve",
-          "pathName": "user/pages/approve/main/index",
-          "query": "id=1970099285026541568",
-          "scene": null
-        },
-        {
-          "name": "user/approve - noData",
-          "pathName": "user/pages/approve/main/index",
-          "query": "id=1831345295095631873",
           "scene": null
         },
         {
