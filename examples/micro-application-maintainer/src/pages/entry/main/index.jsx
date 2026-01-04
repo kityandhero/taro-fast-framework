@@ -12,16 +12,11 @@ import {
 
 import { transformSize } from 'taro-fast-common';
 import { ActivityIndicator } from 'taro-fast-component';
-import { getLaunchOption } from 'taro-fast-framework';
 
 import { exchangeShareDataAction } from '../../../commonAssist';
 import { PageWrapper } from '../../../customComponents';
 import { pathCollection, shareTransfer } from '../../../customConfig';
-import {
-  analysisScene,
-  judgeComplain,
-  setSubsidiaryIdCache,
-} from '../../../utils';
+import { analysisScene } from '../../../utils';
 
 // eslint-disable-next-line no-undef
 definePageConfig({
@@ -157,26 +152,10 @@ class PageMain extends PageWrapper {
     }
   };
 
-  pretreatmentUrlParameters(urlParameters, sceneData) {
-    if (judgeComplain(getLaunchOption())) {
-      const { s: subsidiaryId } = {
-        s: '',
-        ...sceneData,
-      };
-
-      if (!checkStringIsNullOrWhiteSpace(subsidiaryId)) {
-        setSubsidiaryIdCache(subsidiaryId);
-      }
-    }
-  }
+  // eslint-disable-next-line no-unused-vars
+  pretreatmentUrlParameters(urlParameters, sceneData) {}
 
   handleParams(urlParameters) {
-    if (judgeComplain(getLaunchOption())) {
-      this.redirectToSuggestionHome();
-
-      return;
-    }
-
     this.handleRedirect(urlParameters);
   }
 

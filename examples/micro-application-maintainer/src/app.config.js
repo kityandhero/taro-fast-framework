@@ -22,7 +22,6 @@ export default defineAppConfig({
       root: 'user',
       name: 'User',
       pages: [
-        'pages/approve/main/index',
         'pages/changePassword/main/index',
         'pages/detailApplicationUserFeedback/main/index',
         'pages/editInformation/main/index',

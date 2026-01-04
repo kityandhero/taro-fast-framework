@@ -1,21 +1,13 @@
 import { navigateTo } from 'easy-soft-utility';
 
-import { getLaunchOption } from 'taro-fast-framework';
-
 import { pathCollection } from '../../../customConfig';
 import { modelTypeCollection } from '../../../modelBuilders';
-import { judgeComplain } from '../../../utils';
 import { PageWrapperCore } from '../../general/PageWrapperCore';
 
 class PageWrapperExtra extends PageWrapperCore {
   getGetCurrentOperatorApiEffect = (data = {}) => {
-    const o = getLaunchOption();
-    const result = judgeComplain(o);
-
     return {
-      type: result
-        ? modelTypeCollection.customerTypeCollection.getCurrentInfo
-        : modelTypeCollection.userTypeCollection.getCurrentInfo,
+      type: modelTypeCollection.userTypeCollection.getCurrentInfo,
       payload: data,
     };
   };
