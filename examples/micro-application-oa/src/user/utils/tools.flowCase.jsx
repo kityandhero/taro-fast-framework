@@ -282,9 +282,9 @@ export function analysisDocumentConfig({ flowCase, workflowFormDesign }) {
       let config = {};
 
       for (const one of itemsSource) {
-        const { name: nameOne } = { name: '', ...one };
+        const { key } = { key: '', ...one };
 
-        if (nameOne === name) {
+        if (key === name) {
           config = one;
 
           break;

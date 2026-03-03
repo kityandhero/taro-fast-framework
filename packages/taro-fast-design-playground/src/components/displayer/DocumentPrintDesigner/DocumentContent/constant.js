@@ -59,5 +59,6 @@ export const defaultConfig = {
 
 export const valueDisplayModeCollection = {
   text: 'text',
+  money: 'money',
   enum: 'enum',
 };

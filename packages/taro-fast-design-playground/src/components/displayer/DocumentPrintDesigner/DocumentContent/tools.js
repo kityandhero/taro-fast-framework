@@ -68,13 +68,18 @@ export function adjustItem(o) {
     firstPosition: defaultConfig.firstPosition,
     width: defaultConfig.width,
     minHeight: defaultConfig.minHeight,
+    valueDisplayMode: valueDisplayModeCollection.text,
     ...o,
   };
 
-  const { fullLine } = data;
+  const { fullLine, valueDisplayMode } = data;
 
   if (fullLine == whetherString.yes) {
     data.firstPosition = whetherString.no;
+
+    if (valueDisplayMode === valueDisplayModeCollection.money) {
+      data.currencyDisplay = whetherString.yes;
+    }
   }
 
   if (fullLine == whetherString.no) {
@@ -109,7 +114,8 @@ export function adjustSchemaData(schema) {
 
     if (
       valueDisplayMode !== valueDisplayModeCollection.enum &&
-      valueDisplayMode !== valueDisplayModeCollection.text
+      valueDisplayMode !== valueDisplayModeCollection.text &&
+      valueDisplayMode !== valueDisplayModeCollection.money
     ) {
       valueDisplayMode = valueDisplayModeCollection.text;
 
@@ -177,7 +183,8 @@ export function adjustItemCollection(items, other = []) {
 
     if (
       valueDisplayMode !== valueDisplayModeCollection.enum &&
-      valueDisplayMode !== valueDisplayModeCollection.text
+      valueDisplayMode !== valueDisplayModeCollection.text &&
+      valueDisplayMode !== valueDisplayModeCollection.money
     ) {
       valueDisplayMode = valueDisplayModeCollection.text;
 
@@ -452,9 +459,9 @@ export function buildDisplayValue(data, values) {
       >
         <ColorText
           style={currencyDisplayStyle}
-          textPrefix="小写￥"
+          textPrefix="小写：￥"
           separator=""
-          text={v}
+          text={(Math.floor(toNumber(v) * 100) / 100).toFixed(2)}
           fontSize={30}
           textPrefixStyle={{
             lineHeight: transformSize(42),
@@ -470,7 +477,7 @@ export function buildDisplayValue(data, values) {
         <Line transparent height={10} />
 
         <MultiLineText
-          prefix="人民币（大写）"
+          prefix="人民币（大写）："
           style={currencyDisplayStyle}
           fontSize={30}
           lineHeight={42}
@@ -489,6 +496,10 @@ export function getValueDisplayModeText(valueDisplayMode) {
   switch (valueDisplayMode) {
     case valueDisplayModeCollection.text: {
       return '文本';
+    }
+
+    case valueDisplayModeCollection.money: {
+      return '金额';
     }
 
     case valueDisplayModeCollection.enum: {

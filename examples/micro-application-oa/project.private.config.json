@@ -20,5 +20,17 @@
     "useIsolateContext": false
   },
   "libVersion": "3.9.3",
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "审批详情页",
+          "pathName": "user/pages/approve/main/index",
+          "query": "id=2028745157930782720",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  }
 }
