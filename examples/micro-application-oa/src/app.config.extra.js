@@ -6,7 +6,7 @@ const LogoImage = `${filePrefix}746868813.jpeg`;
 
 export const config = {
   appId: 'pddwo4uuzpdekg',
-  showLogInConsole: checkWhetherDevelopmentEnvironment(),
+  // showLogInConsole: checkWhetherDevelopmentEnvironment(),
   // showLogInConsole: true,
   // showRequestInfo: checkWhetherDevelopmentEnvironment(),
   // showUseVirtualRequestMessage: true,

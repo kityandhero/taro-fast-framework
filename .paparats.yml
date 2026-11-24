@@ -1,0 +1,56 @@
+# ============================================================
+# paparats 项目配置（放在要索引的项目根目录，跟 .git 同级）
+# 项目：mono-taro-fast-framework（微信小程序界面交互框架，7 个包）
+#
+# 分工：
+#   projects.yml（索引器级）  → 有哪些项目、各自挂在 /projects 下的哪个目录
+#   本文件（项目级）          → 分组、语言、索引范围、文档分类等全部细节
+# ============================================================
+
+# 项目分组：决定 Qdrant collection 名（paparats_<group> / paparats_<group>_docs）
+# 不同 group = 不同 collection = 数据完全隔离
+group: frontend_framework
+
+# ---------- Embedding 模型 ----------
+# 本机 llama-server 跑 bge-m3（1024 维, CPU, 8765 端口）
+# 必须与 llama-server 实际输出维度一致，否则 Qdrant 写入失败
+embeddings:
+  provider: llama
+  model: bge-m3
+  dimensions: 1024
+
+# ---------- 代码层语言 ----------
+# typescript 档位 = **/*.ts, **/*.tsx, **/*.js, **/*.jsx
+language: typescript
+
+# ---------- 索引范围控制 ----------
+indexing:
+  # 白名单：只索引这些子目录（相对项目根）
+  # 注意：paths 只对「代码层」生效；文档层(.md)不看 paths，只看 exclude/exclude_extra
+  paths:
+    - packages
+
+  # 追加排除（用 exclude 会整体替换语言内置排除表，所以这里一律用 exclude_extra）
+  # templates 是脚手架模板（生成物），会与框架实现抢召回，排除。
+  exclude_extra:
+    - 'examples/**'
+    - '**/templates/**'
+    - '**/dist/**'
+    - '**/es/**'
+    - '**/lib/**'
+    - 'CHANGELOG.md'
+
+  # 分块大小（字符）。llama-server 的 embed 批处理会截断超长块（实测约 770 字符），
+  # 480 + overlap 100 可保证整块入向量（沿用 perfumery 的实测值）
+  chunkSize: 480
+  overlap: 100
+  # CPU embedding，并发不宜高
+  concurrency: 2
+  batchSize: 8
+
+# ---------- Markdown 文档层 ----------
+# 需要索引器环境变量 INDEX_DOCS=true 才生效
+docs:
+  # code = 与源码同仓的文档（README、API 说明，通常带代码块）
+  kind: code
+  audience: internal

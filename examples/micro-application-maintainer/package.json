@@ -172,7 +172,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-order": "^7.0.0",
     "taro-fast-config": "workspace:*",
-    "webpack": "^5.103.0"
+    "webpack": "5.103.0"
   },
   "optionalDependencies": {
     "taro-fast-cli": "^1.11.4",

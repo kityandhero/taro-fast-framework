@@ -64,6 +64,8 @@ class user extends PageWrapper {
 
   // showCallTrace = true;
 
+  // repeatDoWorkWhenShow = true;
+
   viewStyle = {
     ...viewStyle,
     backgroundColor: '#fff',

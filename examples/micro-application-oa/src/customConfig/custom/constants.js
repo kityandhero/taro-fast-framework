@@ -41,6 +41,9 @@ export const newMessageImage = `${filePrefix}1853608007590612992.png`;
 export const telImage = `${filePrefix}1848283203459223552.png`;
 export const scanCodeBlueImage = `${filePrefix}1853631697535504384.png`;
 
+export const homeArrowBlueImage = `${filePrefix}2125174210316865536.png`;
+export const homeClockOrangeImage = `${filePrefix}2125174174195519488.png`;
+
 export const customWorkflowImage = `${filePrefix}1852262176832753664.png`;
 
 export const customerApplicationFeedbackListItemTitlePrefix = `${filePrefix}1909549662474473472.png`;

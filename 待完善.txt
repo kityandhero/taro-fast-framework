@@ -1,1 +1,3 @@
 级联选择，点击弹出选择
+
+componentDidShow 貌似没有执行
