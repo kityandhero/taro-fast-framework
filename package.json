@@ -77,6 +77,7 @@
     "start:maintainer:weapp:build": "cd examples/micro-application-maintainer && npm run o:start:build",
     "start:oa": "npm run start:oa:weapp",
     "start:oa:build": "npm run start:oa:weapp:build",
+    "start:oa:h5": "cd examples/micro-application-oa && npm run o:start:h5",
     "start:oa:weapp": "cd examples/micro-application-oa && npm run o:start",
     "start:oa:weapp:build": "cd examples/micro-application-oa && npm run o:start:build",
     "start:proprietor": "npm run start:proprietor:weapp",

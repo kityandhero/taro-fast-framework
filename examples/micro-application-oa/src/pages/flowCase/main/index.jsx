@@ -1,3 +1,4 @@
+import { Component, createRef } from 'react';
 import { CustomWrapper, View } from '@tarojs/components';
 import * as Taro from '@tarojs/taro';
 
@@ -64,13 +65,18 @@ definePageConfig({
   navigationStyle: 'custom',
 });
 
-@connect(({ flowCase, session, entrance, global, schedulingControl }) => ({
-  flowCase,
-  session,
-  entrance,
-  global,
-  schedulingControl,
-}))
+@connect(
+  ({ flowCase, session, entrance, global, schedulingControl }) => ({
+    flowCase,
+    session,
+    entrance,
+    global,
+    schedulingControl,
+  }),
+  null,
+  null,
+  { forwardRef: true },
+)
 class FlowCase extends PageWrapper {
   // showCallTrack = true;
 
@@ -270,4 +276,19 @@ class FlowCase extends PageWrapper {
   }
 }
 
-export default FlowCase;
+class FlowCaseWrapper extends Component {
+  innerRef = createRef();
+
+  componentDidShow() {
+    // 将生命周期转发给内部业务组件
+    if (this.innerRef.current && this.innerRef.current.doShowTask) {
+      this.innerRef.current.doShowTask();
+    }
+  }
+
+  render() {
+    return <FlowCase ref={this.innerRef} />;
+  }
+}
+
+export default FlowCaseWrapper;

@@ -20,6 +20,6 @@
     "useIsolateContext": false,
     "useGlassEaselForWxml": false
   },
-  "libVersion": "3.17.6",
+  "libVersion": "3.18.0",
   "condition": {}
 }

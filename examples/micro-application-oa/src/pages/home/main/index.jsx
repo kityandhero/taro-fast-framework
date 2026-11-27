@@ -1,3 +1,4 @@
+import { Component, createRef } from 'react';
 import { View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
@@ -47,13 +48,18 @@ definePageConfig({
   navigationStyle: 'custom',
 });
 
-@connect(({ workbench, entrance, session, global, schedulingControl }) => ({
-  workbench,
-  entrance,
-  session,
-  global,
-  schedulingControl,
-}))
+@connect(
+  ({ workbench, entrance, session, global, schedulingControl }) => ({
+    workbench,
+    entrance,
+    session,
+    global,
+    schedulingControl,
+  }),
+  null,
+  null,
+  { forwardRef: true },
+)
 class Home extends PageNeedSignInWrapper {
   // showCallTrack = true;
 
@@ -414,4 +420,19 @@ class Home extends PageNeedSignInWrapper {
   }
 }
 
-export default Home;
+class HomeWrapper extends Component {
+  innerRef = createRef();
+
+  componentDidShow() {
+    // 将生命周期转发给内部业务组件
+    if (this.innerRef.current && this.innerRef.current.doShowTask) {
+      this.innerRef.current.doShowTask();
+    }
+  }
+
+  render() {
+    return <Home ref={this.innerRef} />;
+  }
+}
+
+export default HomeWrapper;

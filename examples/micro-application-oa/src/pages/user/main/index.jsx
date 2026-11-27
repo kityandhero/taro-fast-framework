@@ -1,3 +1,4 @@
+import { Component, createRef } from 'react';
 import { CustomWrapper, View } from '@tarojs/components';
 
 import { connect } from 'easy-soft-dva';
@@ -59,7 +60,7 @@ definePageConfig({
   global,
   schedulingControl,
 }))
-class user extends PageWrapper {
+class User extends PageWrapper {
   // showCallTrack = true;
 
   // showCallTrace = true;
@@ -422,4 +423,19 @@ class user extends PageWrapper {
   }
 }
 
-export default user;
+class UserWrapper extends Component {
+  innerRef = createRef();
+
+  componentDidShow() {
+    // 将生命周期转发给内部业务组件
+    if (this.innerRef.current && this.innerRef.current.doShowTask) {
+      this.innerRef.current.doShowTask();
+    }
+  }
+
+  render() {
+    return <User ref={this.innerRef} />;
+  }
+}
+
+export default UserWrapper;

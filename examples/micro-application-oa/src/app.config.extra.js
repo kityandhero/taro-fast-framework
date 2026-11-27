@@ -12,8 +12,11 @@ export const config = {
   // showUseVirtualRequestMessage: true,
   apiPrefix: {
     // corsTargetDomain: 'https://app.api.oa.32306.net',
+    // corsTargetDomain: checkWhetherDevelopmentEnvironment()
+    //   ? 'http://app.api.oa.local.com'
+    //   : 'https://app.api.oa.32306.net',
     corsTargetDomain: checkWhetherDevelopmentEnvironment()
-      ? 'http://app.api.oa.local.com'
+      ? 'https://app.api.oa.32306.net'
       : 'https://app.api.oa.32306.net',
   },
   apiSuccessCode: 200,
