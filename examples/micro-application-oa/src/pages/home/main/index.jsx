@@ -372,7 +372,7 @@ class Home extends PageNeedSignInWrapper {
                         <View>
                           <ColorText
                             textStyle={{ fontSize: transformSize(26) }}
-                            text="总代办量"
+                            text="总待办量"
                           />
                         </View>
                       }
